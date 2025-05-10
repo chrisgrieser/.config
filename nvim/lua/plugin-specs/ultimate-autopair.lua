@@ -40,9 +40,7 @@ return {
 			multiline = false,
 		},
 		cr = { autoclose = true },
-		tabout = { enable = false, map = "<A-tab>" },
-		space = { enable = false }, -- conflicts with setting undopoint via space
-		space2 = { enable = false },
+		tabout = { enable = false, map = "<Nop>" },
 
 		extensions = { -- disable in these filetypes
 			filetype = { nft = { "TelescopePrompt", "snacks_picker_input" } },

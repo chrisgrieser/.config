@@ -209,13 +209,12 @@ Search the Mac App Store for apps via the keyword `mas`.
 If you use homebrew, you might also be interested in [this workflow to search
 homebrew packages](https://alfred.app/workflows/chrisgrieser/homebrew-search/).
 
-&gt; [!TIP]
-&gt; You can set both of them to the same keyword to simultaneously search homebrew
-&gt; and the Mac App Store.
+💡 You can set both of them to the same keyword to simultaneously search homebrew
+and the Mac App Store.
 
 ---
 
-Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
+#### Created by [Chris Grieser](https://chris-grieser.de/)   |   ⭐️ [Star on GitHub](https://github.com/chrisgrieser/alfred-mac-app-store-search)</string>
 	<key>uidata</key>
 	<dict>
 		<key>06CBB88B-60DC-48E1-97D8-9A63B099DDA2</key>
@@ -314,7 +313,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>0.10.2</string>
+	<string>0.10.3</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>

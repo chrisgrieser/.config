@@ -203,7 +203,7 @@
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>keyword</key>
-				<string>bi</string>
+				<string>{var:install_keyword}</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -322,7 +322,7 @@
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>keyword</key>
-				<string>br</string>
+				<string>{var:reinstall_keyword}</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -411,7 +411,7 @@
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>keyword</key>
-				<string>bu</string>
+				<string>{var:uninstall_keyword}</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -585,9 +585,16 @@
 	+ Optionally use the `--zap` option for a clean uninstallation.
 	+ &lt;kbd&gt;⇧&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Show package information (`brew info`) in Text View.
 
+## Mac App Store apps
+You might also be interested in [this workflow to search the Mac App
+Store](https://github.com/chrisgrieser/alfred-mac-app-store-search).
+
+💡 You can set both of them to the same keyword to simultaneously search homebrew
+and the Mac App Store.
+
 ---
 
-Created by [Chris Grieser](https://chris-grieser.de/)</string>
+#### Created by [Chris Grieser](https://chris-grieser.de/)   |   ⭐️ [Star on GitHub](https://github.com/chrisgrieser/alfred-homebrew)</string>
 	<key>uidata</key>
 	<dict>
 		<key>0BAF56E8-B65A-478A-B848-F09FFE73A12B</key>
@@ -733,6 +740,69 @@ Created by [Chris Grieser](https://chris-grieser.de/)</string>
 			<key>config</key>
 			<dict>
 				<key>default</key>
+				<string>bi</string>
+				<key>placeholder</key>
+				<string>bu</string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>installation</string>
+			<key>label</key>
+			<string>Keywords</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>install_keyword</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>bu</string>
+				<key>placeholder</key>
+				<string>bu</string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>uninstallation</string>
+			<key>label</key>
+			<string></string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>uninstall_keyword</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>br</string>
+				<key>placeholder</key>
+				<string>br</string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>re-installation</string>
+			<key>label</key>
+			<string></string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>reinstall_keyword</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
 				<false/>
 				<key>required</key>
 				<false/>
@@ -740,7 +810,7 @@ Created by [Chris Grieser](https://chris-grieser.de/)</string>
 				<string>include</string>
 			</dict>
 			<key>description</key>
-			<string>When using the uninstallation command, also list apps from the Mac App Store. They will be opened with AppCleaner.app for clean uninstallation.</string>
+			<string>When using the uninstallation command, also list apps from the Mac App Store. They will be opened with `AppCleaner.app` for clean uninstallation.</string>
 			<key>label</key>
 			<string>Mac App Store</string>
 			<key>type</key>
@@ -769,7 +839,7 @@ Created by [Chris Grieser](https://chris-grieser.de/)</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.4.3</string>
+	<string>1.5.0</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>

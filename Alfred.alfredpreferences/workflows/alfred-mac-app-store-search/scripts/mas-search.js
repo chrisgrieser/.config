@@ -138,11 +138,11 @@ function run(argv) {
 			.filter(Boolean)
 			.join("  ·  ");
 
-		const emoji = installedApps.includes(app.trackName) ? "✅ " : "";
+		const emoji = installedApps.includes(app.trackName) ? " ✅" : "";
 
 		/** @type {AlfredItem} */
 		const alfredItem = {
-			title: emoji + app.trackName,
+			title: app.trackName + emoji,
 			subtitle: subtitle,
 			arg: app.trackViewUrl,
 			icon: { path: imagePath || "" },
