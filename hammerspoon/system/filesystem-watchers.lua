@@ -38,19 +38,29 @@ M.pathw_desktop = pathw(home .. "/Desktop/", function(paths, _)
 				os.remove(path)
 			end
 
-		-- BACKUP BROWSER SETTINGS
+		-- VARIOUS BACKUP
 		elseif name == "ublacklist-settings.json" then
 			success, errmsg = os.rename(path, browserConfigs .. name)
+			if success then u.notify("✅ ublacklist settings backed up.") end
 		elseif name == "Redirector.json" then
 			success, errmsg = os.rename(path, browserConfigs .. name)
+			if success then u.notify("✅ Redirector settings backed up.") end
 		elseif name:find("vimium_c.*%.json") then
 			success, errmsg = os.rename(path, browserConfigs .. "vimium-c-settings.json")
+			if success then u.notify("✅ Vimium-c settings backed up.") end
 		elseif name:find("Inoreader Feeds .*%.xml") then
 			local backupPath = home
 				.. "/Library/Mobile Documents/com~apple~CloudDocs/Backups/Inoreader Feeds.opml"
 			success, errmsg = os.rename(path, backupPath)
+			if success then u.notify("✅ Inoreader feeds backed up.") end
 		elseif name == "obsidian-web-clipper-settings.json" then
 			success, errmsg = os.rename(path, browserConfigs .. name)
+			if success then u.notify("✅ Obsidian web clipper settings backed up.") end
+		elseif ext == "icbu" then
+			-- private, thus not in dotfiles repo
+			local backupPath = home .. "/Library/Mobile Documents/com~apple~CloudDocs/Backups/Calendar/"
+			success, errmsg = os.rename(path, backupPath .. name)
+			if success then u.notify("✅ Calendar data backed up.") end
 
 		-- BANKING
 		elseif
@@ -67,11 +77,6 @@ M.pathw_desktop = pathw(home .. "/Desktop/", function(paths, _)
 			success, errmsg = hs.fs.mkdir(bankPath)
 			u.defer(1, function() os.rename(path, bankPath .. "/" .. name) end) -- delay ensures folder is created
 			u.openUrlInBg(bankPath)
-
-		-- CALENDAR BACKUPS
-		elseif ext == "icbu" then
-			local folder = home .. "/Library/Mobile Documents/com~apple~CloudDocs/Backups/Calendar/"
-			success, errmsg = os.rename(path, folder .. name)
 
 		-- STEAM GAME SHORTCUTS
 		elseif name:find("%.app$") and not isDownloaded then
