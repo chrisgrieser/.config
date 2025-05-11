@@ -2,11 +2,11 @@
 
 # CONFIG
 github_username="chrisgrieser"
-set -e
+# set -e
 
-# ! # repo_names="alfred|shimmering-obsidian|gitfred"
+repo_names="alfred|shimmering-obsidian|gitfred"
 # repo_names="nvim"
-repo_names="obsidian-quadro|pseudometa-obsidian-plugin-template|grappling-hook|obsidian-proofreader"
+# repo_names="obsidian-quadro|pseudometa-obsidian-plugin-template|grappling-hook|obsidian-proofreader"
 # ALL
 # repo_names="finder-vim-mode|zsh-magic-dashboard|nvim|alfred|shimmering-obsidian|gitfred|obsidian-quadro|pseudometa-obsidian-plugin-template|grappling-hook"
 
