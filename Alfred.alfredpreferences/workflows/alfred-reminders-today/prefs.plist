@@ -4,6 +4,8 @@
 <dict>
 	<key>include_no_duedate</key>
 	<true/>
+	<key>quickadd_in2days_keyword</key>
+	<string>,,,</string>
 	<key>quickadd_today_keyword</key>
 	<string>,</string>
 	<key>quickadd_tomorrow_keyword</key>

@@ -73,6 +73,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>3F39C9B0-C119-4ABC-B784-1B3B4D911B7B</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>C9E60250-2AC8-4F64-B961-D3F0C8DA1C06</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>45E222F3-9910-4038-AA60-1ABC01E95D81</key>
 		<array>
 			<dict>
@@ -288,6 +301,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>5B4E3523-E2C7-4E39-87C0-D157AC551A91</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>C9E60250-2AC8-4F64-B961-D3F0C8DA1C06</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>0F93036F-D158-49BB-97AF-DE600B8A3300</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -874,6 +900,8 @@
 				<true/>
 				<key>variables</key>
 				<dict>
+					<key>day_offset</key>
+					<string>0</string>
 					<key>when_to_add</key>
 					<string>today</string>
 				</dict>
@@ -1034,6 +1062,8 @@
 				<true/>
 				<key>variables</key>
 				<dict>
+					<key>day_offset</key>
+					<string>1</string>
 					<key>when_to_add</key>
 					<string>tomorrow</string>
 				</dict>
@@ -1042,6 +1072,49 @@
 			<string>alfred.workflow.utility.argument</string>
 			<key>uid</key>
 			<string>D39A1AFE-3A07-40A3-BCD6-FE4A721D8959</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>{var:quickadd_in2days_keyword}</string>
+				<key>subtext</key>
+				<string>in 2 days</string>
+				<key>text</key>
+				<string>2️⃣ Add to {var:reminder_list}: {query}</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>3F39C9B0-C119-4ABC-B784-1B3B4D911B7B</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string>{query}</string>
+				<key>passthroughargument</key>
+				<true/>
+				<key>variables</key>
+				<dict>
+					<key>day_offset</key>
+					<string>2</string>
+					<key>when_to_add</key>
+					<string>in 2 days</string>
+				</dict>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>C9E60250-2AC8-4F64-B961-D3F0C8DA1C06</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1083,8 +1156,8 @@ brew untap keith/formulae
 	+ &lt;kbd&gt;⌘Y&lt;/kbd&gt;: Quick Look the URL, if there is one.
 	+ &lt;kbd&gt;⏎&lt;/kbd&gt; *(on an event)*: If the location is a URL, open the URL.
 	  Otherwise, open Google Maps with the location.
-- Quickly add a new reminder due today or tomorrow with the keywords `qq` and
-  `qqq`, respectively.
+- Quickly add a new reminder due today or tomorrow with the keywords `qq`, `q1`,
+  and `q2`, respectively.
 	+ The command supports simple parsing of a due time with the format `hh:mm`.
 	  For instance, `19:00 buy milk` or `buy milk 19:00` will set the due time
 	  to `19:00` and the reminder title to `buy milk`. (Only times in the
@@ -1092,8 +1165,9 @@ brew untap keith/formulae
 	+ A priority can be specified by adding the respective number of `!`. For
 	  example, `buy milk!` or `!buy milk` will result in a reminder title `buy
 	  milk` with a medium priority (`!` = low, `!!` = medium, `!!!` = high).
-	+ Note that `!` and due time are only parsed when at the start or the
-	  end on the input.
+	+ Note that `!` and due time are only parsed when at the start or the end on
+	  the input.
+
 
 ---
 
@@ -1160,6 +1234,17 @@ brew untap keith/formulae
 			<key>ypos</key>
 			<real>85</real>
 		</dict>
+		<key>3F39C9B0-C119-4ABC-B784-1B3B4D911B7B</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>note</key>
+			<string>in 2 days</string>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>880</real>
+		</dict>
 		<key>45E222F3-9910-4038-AA60-1ABC01E95D81</key>
 		<dict>
 			<key>colorindex</key>
@@ -1198,7 +1283,7 @@ brew untap keith/formulae
 			<key>xpos</key>
 			<real>180</real>
 			<key>ypos</key>
-			<real>630</real>
+			<real>650</real>
 		</dict>
 		<key>5BFAE6DA-5C37-4CC8-BC28-9EEE8194E757</key>
 		<dict>
@@ -1298,11 +1383,20 @@ to set a hotkey to show reminders due today</string>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>note</key>
-			<string>quick add today</string>
+			<string>add today</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>600</real>
+			<real>620</real>
+		</dict>
+		<key>C9E60250-2AC8-4F64-B961-D3F0C8DA1C06</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>xpos</key>
+			<real>180</real>
+			<key>ypos</key>
+			<real>910</real>
 		</dict>
 		<key>D39A1AFE-3A07-40A3-BCD6-FE4A721D8959</key>
 		<dict>
@@ -1360,7 +1454,7 @@ to set a hotkey to show reminders due today</string>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>note</key>
-			<string>quick add tomorrow</string>
+			<string>tomorrow</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
@@ -1537,22 +1631,43 @@ to set a hotkey to show reminders due today</string>
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<string>qqq</string>
+				<string>q1</string>
 				<key>placeholder</key>
-				<string>qqq</string>
+				<string>q1</string>
 				<key>required</key>
 				<false/>
 				<key>trim</key>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>quick add new reminder due tomorrow</string>
+			<string>quick add: tomorrow</string>
 			<key>label</key>
 			<string></string>
 			<key>type</key>
 			<string>textfield</string>
 			<key>variable</key>
 			<string>quickadd_tomorrow_keyword</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>q2</string>
+				<key>placeholder</key>
+				<string>q2</string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>quick add: in 2 days</string>
+			<key>label</key>
+			<string></string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>quickadd_in2days_keyword</string>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1577,7 +1692,7 @@ to set a hotkey to show reminders due today</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>3.4.4</string>
+	<string>3.5.0</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>

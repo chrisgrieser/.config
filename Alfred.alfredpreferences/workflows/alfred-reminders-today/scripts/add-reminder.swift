@@ -8,7 +8,7 @@ let semaphore = DispatchSemaphore(value: 0)
 
 let input = CommandLine.arguments[1]
 let reminderList = ProcessInfo.processInfo.environment["reminder_list"]!
-let when = ProcessInfo.processInfo.environment["when_to_add"]!
+let dayOffset = Int(ProcessInfo.processInfo.environment["day_offset"]!)!
 
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -102,17 +102,7 @@ eventStore.requestFullAccessToReminders { granted, error in
 	// determine day when to add
 	let calendar = Calendar.current
 	let today = Date()
-	var dayToUse: Date
-	if when == "today" {
-		dayToUse = today
-	} else if when == "tomorrow" {
-		let tomorrow = calendar.date(byAdding: .day, value: 1, to: today)!
-		dayToUse = tomorrow
-	} else {
-		print("❌ Invalid value for 'when_to_add' environment variable.")
-		semaphore.signal()
-		return
-	}
+	let dayToUse = calendar.date(byAdding: .day, value: dayOffset, to: today)!
 
 	// Set due date
 	var dateComponents = calendar.dateComponents([.year, .month, .day], from: dayToUse)
