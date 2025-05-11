@@ -8,17 +8,14 @@ www.netflix.com##.mobile-games-row
 www.netflix.com##div[data-list-context="configbased_cloudpersonalizedgames"]
 www.netflix.com##div[data-list-context="configbased_mobilepersonalizedgames"]
 www.netflix.com##div[data-list-context="popularGames"]
-
 amazon.de###nav-logo-sprites
 amazon.de###spc-container
 
 ! development
 stackoverflow.com###announcement-banner
-
 github.com##.AppHeader-CopilotChat
 github.com##button[data-testid="copilot-ask-menu"]
 github.com##.react-code-size-details-in-header:last-child
-
 chatgpt.com##nav[aria-label="Chat history"] > div:last-child
 chatgpt.com###thread-bottom-container > div:last-child
 
