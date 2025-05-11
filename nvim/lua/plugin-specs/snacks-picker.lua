@@ -192,17 +192,21 @@ return {
 							local args = { -- https://stackoverflow.com/a/66618356/22114136
 								"git",
 								"apply",
-								"--cached", -- = only affect staging area, not working tree
-								"--verbose", -- so the error messages are more informative
+								"--cached", -- affect staging area, not working tree
+								"--verbose", -- more helpful error messages
 								"-", -- read patch from stdin
 							}
-							local patch = item.diff
+							local patch = item.diff .. "\n"
 							local out = vim.system(args, { stdin = patch }):wait()
-							if out.code >= 0 then
+							if out.code ~= 0 then
 								vim.notify(out.stderr, vim.log.levels.ERROR)
 								return
 							end
-							picker:find() -- refresh
+							if #picker:items() == 1 then
+								picker:close()
+							else
+								picker:find() -- refresh
+							end
 						end,
 					},
 				}
