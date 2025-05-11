@@ -1,4 +1,3 @@
-
 # LONG ALIASES
 alias sizes_in_cwd="du -sh . ./* | sort -rh | sed 's|\./||'"
 
@@ -8,7 +7,7 @@ alias export_mason_path='export PATH="$HOME/.local/share/nvim/mason/bin":$PATH'
 #───────────────────────────────────────────────────────────────────────────────
 
 function delete_empty_folders {
-	find . -type d -not -path "**/.git/**" -empty 
+	find . -type d -not -path "**/.git/**" -empty
 	find . -type d -not -path "**/.git/**" -empty -delete
 }
 
@@ -27,7 +26,6 @@ function tree {
 
 # utility scripts only made available, but not loaded directly (= lazy-loading)
 export PATH="$ZDOTDIR/utilities/":$PATH
-
 
 function p {
 	qlmanage -p "$1" &> /dev/null
@@ -224,4 +222,26 @@ function ..d() {
 
 	# INFO `cd .` to trigger cd-hook *after* deletion
 	cd -q .. && trash "$OLDPWD" && cd .
+}
+
+# interactive `jq`
+function ij {
+	# Read stdin into a temp file if data is provided via stdin
+	if ! [[ -t 0 ]]; then
+		file="$(mktemp)"
+		trap 'rm -f "$file"' EXIT
+		cat > "$file"
+	else
+		file="$1"
+	fi
+
+	final_query=$(
+		jq --color-output ". |keys" "$file" | fzf \
+			--query="." --prompt="jq > " --ansi --inline-info --disabled \
+			--bind="change:reload(jq --color-output '{r1} | keys' '$file')" \
+			--bind="enter:print-query"
+	)
+	[[ -z "$final_query" ]] && return 0
+	echo -n "$final_query" | pbcopy
+	print "\e[1;32mQuery copied:\e[0m $final_query"
 }
