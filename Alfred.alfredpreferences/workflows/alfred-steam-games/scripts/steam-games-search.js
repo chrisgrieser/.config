@@ -99,14 +99,16 @@ function run(argv) {
 	const list = JSON.parse(response).applist.apps;
 	const games = list
 		.reduce((/** @type {AlfredItem[]} */ acc, /** @type {SteamGame} */ game) => {
-			const matchesQuery = game.name.toLowerCase().includes(query);
-			if (matchesQuery) {
-				const emoji = installedAppids.includes(game.appid) ? " ✅" : "";
-				acc.push({
-					title: game.name + emoji,
-					arg: game.appid,
-				});
-			}
+			const name = game.name.toLowerCase();
+			if (name.includes("soundtrack")) return acc;
+			const matchesWordFromBoundary = name.match(new RegExp("\\b" + query));
+			if (!matchesWordFromBoundary) return acc;
+
+			const emoji = installedAppids.includes(game.appid) ? " ✅" : "";
+			acc.push({
+				title: game.name + emoji,
+				arg: game.appid,
+			});
 			return acc;
 		}, [])
 		.sort( // sort by name length

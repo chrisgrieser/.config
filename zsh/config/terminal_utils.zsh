@@ -68,7 +68,8 @@ _esc_on_empty_buffer() {
 			eza --stdin --color=always --icons=always --sort=oldest |
 			fzf --ansi --info=inline --height="50%" \
 				--header="^H: --hidden" --scheme=path --tiebreak=length,end \
-				--bind="ctrl-h:reload($rg_cmd --hidden --no-ignore --no-ignore-files \
+				--bind="ctrl-h:change-header(including hidden files)+reload($rg_cmd \
+					--hidden --no-ignore --no-ignore-files \
 					--glob='!/.git/' --glob='!node_modules' --glob='!__pycache__' --glob='!.DS_Store' |
 					eza --stdin --color=always --icons=always --sort=oldest)"
 	)
@@ -238,11 +239,10 @@ function ij {
 	final_query=$(
 		jq --raw-output ". |keys[]" "$file" | fzf \
 			--query="." --prompt="jq > " --no-info --disabled \
-			--bind="change:reload(jq --raw-output {q}'|keys[]' '$file')" \
 			--bind="enter:transform-query(echo {q}.{+} | sed -Ee 's/\.([[:digit:]])$/[\1]/' -e 's/\.\././g' )" \
+			--bind="change:reload(jq --raw-output {q}'|keys[]' '$file')" \
 			--bind="esc:cancel" \
-			--height="100%" \
-			--preview-window="60%" \
+			--height="100%" --preview-window="60%" \
 			--preview="jq --color-output {q} '$file'"
 	)
 	[[ -z "$final_query" ]] && return 0
