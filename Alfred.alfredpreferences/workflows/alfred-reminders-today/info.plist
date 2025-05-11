@@ -1028,13 +1028,13 @@
 				<array>
 					<dict>
 						<key>inputstring</key>
-						<string>{var:when_to_add}</string>
+						<string>{var:day_offset}</string>
 						<key>matchcasesensitive</key>
 						<false/>
 						<key>matchmode</key>
-						<integer>1</integer>
+						<integer>2</integer>
 						<key>matchstring</key>
-						<string>tomorrow</string>
+						<string>0</string>
 						<key>outputlabel</key>
 						<string>today</string>
 						<key>uid</key>
@@ -1042,7 +1042,7 @@
 					</dict>
 				</array>
 				<key>elselabel</key>
-				<string>tomorrow</string>
+				<string>future</string>
 				<key>hideelse</key>
 				<false/>
 			</dict>
@@ -1425,7 +1425,7 @@ to set a hotkey to show reminders due today</string>
 			<key>note</key>
 			<string>added when?</string>
 			<key>xpos</key>
-			<real>845</real>
+			<real>849</real>
 			<key>ypos</key>
 			<real>770</real>
 		</dict>
