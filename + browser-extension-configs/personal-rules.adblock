@@ -1,25 +1,36 @@
-! brave://settings/shields/filters
-!───────────────────────────────────────────────────────────────────────────────
-chatgpt.com##nav[aria-label="Chat history"] > div:last-child
-chatgpt.com###thread-bottom-container > div:last-child
-amazon.de###nav-logo-sprites
-amazon.de###spc-container
-flaticon.com###layer_coupon
-flaticon.com###open_panel
-journals.sagepub.com###bookshelf-opener
+! social media
 messenger.com##[aria-label="Inbox switcher"]
 messenger.com##[aria-label="Thread list"] > div > div:last-child
-nyaa.si##a[href$=".torrent"]
-rewe.de##.qa-feefs-visual-popup
-stackoverflow.com###announcement-banner
+www.reddit.com###right-sidebar-container
+
+! online services
 www.netflix.com##.mobile-games-row
 www.netflix.com##div[data-list-context="configbased_cloudpersonalizedgames"]
 www.netflix.com##div[data-list-context="configbased_mobilepersonalizedgames"]
 www.netflix.com##div[data-list-context="popularGames"]
-www.reddit.com###right-sidebar-container
+
+amazon.de###nav-logo-sprites
+amazon.de###spc-container
+
+! development
+stackoverflow.com###announcement-banner
+
 github.com##.AppHeader-CopilotChat
+github.com##button[data-testid="copilot-ask-menu"]
 github.com##.react-code-size-details-in-header:last-child
+
+chatgpt.com##nav[aria-label="Chat history"] > div:last-child
+chatgpt.com###thread-bottom-container > div:last-child
+
+! search
 duckduckgo.com##[data-testid="feedback-prompt"]
 duckduckgo.com##.footer > div
 google.com###grepper_add_answer_button
 google.com###search > a.grepper_ad_holder:nth-child(2)
+
+! misc
+journals.sagepub.com###bookshelf-opener
+nyaa.si##a[href$=".torrent"]
+rewe.de##.qa-feefs-visual-popup
+flaticon.com###layer_coupon
+flaticon.com###open_panel
