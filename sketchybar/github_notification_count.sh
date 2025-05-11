@@ -43,7 +43,7 @@ if [[ -z "$response" ]]; then
 	return 1
 fi
 error=$(echo "$response" | jq --raw-output ".message")
-if [[ -n "$error" ]] ; then
+if [[ -n "$error" ]]; then
 	sketchybar --set "$NAME" label="$error" drawing=true
 	return 1
 fi
