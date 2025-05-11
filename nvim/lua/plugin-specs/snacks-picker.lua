@@ -182,6 +182,29 @@ return {
 						vim.cmd(("edit +%d %s"):format(lnum, path))
 						vim.cmd.normal { "zv", bang = true } -- open folds
 					end,
+					win = {
+						input = {
+							keys = { ["<Space>"] = { "stage", mode = "i" } },
+						},
+					},
+					actions = {
+						["stage"] = function(picker, item)
+							local args = { -- https://stackoverflow.com/a/66618356/22114136
+								"git",
+								"apply",
+								"--cached", -- = only affect staging area, not working tree
+								"--verbose", -- so the error messages are more informative
+								"-", -- read patch from stdin
+							}
+							local patch = item.diff
+							local out = vim.system(args, { stdin = patch }):wait()
+							if out.code >= 0 then
+								vim.notify(out.stderr, vim.log.levels.ERROR)
+								return
+							end
+							picker:find() -- refresh
+						end,
+					},
 				}
 			end,
 			desc = "󰐖 View hunks",
