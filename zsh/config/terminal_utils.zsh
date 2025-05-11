@@ -236,10 +236,14 @@ function ij {
 	fi
 
 	final_query=$(
-		jq --color-output ". |keys" "$file" | fzf \
-			--query="." --prompt="jq > " --ansi --inline-info --disabled \
-			--bind="change:reload(jq --color-output '{r1} | keys' '$file')" \
-			--bind="enter:print-query"
+		jq --raw-output ". |keys[]" "$file" | fzf \
+			--query="." --prompt="jq > " --no-info --disabled \
+			--bind="change:reload(jq --raw-output {q}'|keys[]' '$file')" \
+			--bind="enter:transform-query(echo {q}.{+} | sed -Ee 's/\.([[:digit:]])$/[\1]/' -e 's/\.\././g' )" \
+			--bind="esc:cancel" \
+			--height="100%" \
+			--preview-window="60%" \
+			--preview="jq --color-output {q} '$file'"
 	)
 	[[ -z "$final_query" ]] && return 0
 	echo -n "$final_query" | pbcopy
