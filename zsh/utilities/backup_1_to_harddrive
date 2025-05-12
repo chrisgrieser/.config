@@ -17,7 +17,14 @@ function do_backup {
 }
 
 #───────────────────────────────────────────────────────────────────────────────
-# HELPER FUNCTION
+# HELPER FUNCTIONS
+
+function _pretty_header() {
+	[[ "$2" != "no-line-break" ]] && echo
+	defaults read -g AppleInterfaceStyle &> /dev/null && fg="\e[1;30m" || fg="\e[1;37m"
+	bg="\e[1;44m"
+	print "$fg$bg $1 \e[0m"
+}
 
 errors=""
 function backup() {
@@ -30,15 +37,13 @@ function backup() {
 		return 1
 	fi
 	echo
-	print "\e[1;34mBacking up: $bkp_from\e[0m"
+	_pretty_header "Backup: ${bkp_from/#$HOME/~}"
 	mkdir -p "$bkp_to"
 
 	rsync --archive --delete --recursive --progress --human-readable \
 		--exclude="*.Trash" --exclude="*/nvim-data" --exclude=".DS_Store" \
 		"$bkp_from" "$bkp_to" ||
 		errors="$errors\nProblems occurred for: $bkp_from"
-
-	print "\e[1;38;5;247m─────────────────────────────────────────────────────────────────────────────"
 }
 
 #───────────────────────────────────────────────────────────────────────────────
@@ -64,7 +69,7 @@ if [[ -z "$volume_name" ]]; then
 	print "\e[1;33mTimeout, no volume found.\e[0m"
 	return 1
 else
-	print "\e[1;34mBackup volume: $volume_name\e[0m"
+	_pretty_header "Backup volume: $volume_name" "no-line-break"
 	print "\e[1;38;5;247m─────────────────────────────────────────────────────────────────────────────"
 fi
 
@@ -76,15 +81,36 @@ backup_dest="$volume_name/Backup_$device_name"
 mkdir -p "$backup_dest"
 cd "$backup_dest" || return 1
 echo -n "Backup: $(date '+%Y-%m-%d %H:%M'), $volume_name -- " >> "$logpath_on_mac"
-do_backup
+# do_backup
 
+#───────────────────────────────────────────────────────────────────────────────
+# ARCHIVE OLDER BACKUPS
 older_backups="$volume_name/older backups"
 mkdir -p "$older_backups"
+cd "$older_backups" || return 1
+
+# Find oldest backup by parsing directory names
+oldest_backup_date=$(command ls | tail -n1 | cut -d_ -f3)
+
+oldest_timestamp=0 # No backups yet
+[[ -n "$oldest_backup_date" ]] && oldest_timestamp=$(date -j -f "%Y-%m-%d" "$oldest_backup_date" "+%s")
+
+# Decide if backup is needed
+three_months_ago=$(date -v -3m "+%s")
+_pretty_header "Archive of backups"
+if [[ "$oldest_timestamp" -le "$three_months_ago" ]]; then
+	echo "Oldest backup in archive more than 3 months old. Archiving current backup."
+	iso_today="$(date "+%Y-%m-%d")"
+	archive_path="$older_backups/Backup_${device_name}_$iso_today"
+	rsync --archive --progress --copy-dest="$backup_dest" "$backup_dest/" "$archive_path/"
+else
+	echo "Oldest backup in archive still recent."
+fi
 
 #───────────────────────────────────────────────────────────────────────────────
 # LOG & NOTIFY
 
-echo
+_pretty_header "Report"
 if [[ -z "$errors" ]]; then
 	print "\e[1;32mBackup on $volume_name completed.\033[0m"
 	"$ZDOTDIR/notificator" --title "Backup" --message "✅ completed." --sound "Blow"
