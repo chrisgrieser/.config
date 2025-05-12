@@ -288,13 +288,13 @@ keymap({ "n", "x" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "󱐋 Code 
 -- stylua: ignore
 keymap({ "n", "x" }, "<D-s>", function() require("personal-plugins.misc").formatWithFallback() end, { desc = "󱉯 Save & Format" })
 
-do
 	-- stylua: ignore
 	keymap({ "n", "i", "v" }, "<D-g>", function() vim.lsp.buf.signature_help { max_width = 70 } end, { desc = "󰏪 LSP signature" })
 
 	-- stylua: ignore
 	keymap({ "n", "x" }, "<leader>h", function() vim.lsp.buf.hover { max_width = 70 } end, { desc = "󰋽 LSP hover" })
 
+do
 	local function scrollLspWin(lines)
 		local winid = vim.b.lsp_floating_preview --> stores id of last `vim.lsp`-generated win
 		if not winid or not vim.api.nvim_win_is_valid(winid) then
