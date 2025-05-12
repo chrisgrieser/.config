@@ -248,6 +248,7 @@ function run() {
 
 		// Format events for Alfred
 		events = eventsJson
+			.filter((event) => +new Date(event.endTime) > Date.now()) // exclude past events
 			.map((event) => {
 				// time
 				let timeDisplay = "";
