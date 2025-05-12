@@ -82,7 +82,8 @@ local function getMostChangedFile()
 	local gitResponse = vim.system({ "git", "diff", "--numstat", "." }):wait()
 	if gitResponse.code ~= 0 or not gitResponse.stdout then return nil, "Not in git repo." end
 	local changedFiles = vim.split(gitResponse.stdout, "\n", { trimempty = true })
-	local gitroot = vim.trim(vim.system({ "git", "rev-parse", "--show-toplevel" }):wait().stdout or "")
+	local gitroot =
+		vim.trim(vim.system({ "git", "rev-parse", "--show-toplevel" }):wait().stdout or "")
 	if #changedFiles == 0 then return nil, "No files with changes found." end
 
 	-- identify file with most changes

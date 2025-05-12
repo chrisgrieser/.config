@@ -1,19 +1,9 @@
 local bkeymap = require("config.utils").bufKeymap
 --------------------------------------------------------------------------------
 
-bkeymap(
-	"n",
-	"<leader>rp",
-	"<cmd>%! jq .<CR>",
-	{ desc = " Prettify Buffer" }
-)
+bkeymap("n", "<leader>rp", "<cmd>%! jq .<CR>", { desc = " Prettify Buffer" })
 
-bkeymap(
-	"n",
-	"<leader>rm",
-	"<cmd>%! jq --compact-output .<CR>",
-	{ desc = " Minify Buffer" }
-)
+bkeymap("n", "<leader>rm", "<cmd>%! jq --compact-output .<CR>", { desc = " Minify Buffer" })
 
 bkeymap("n", "o", function()
 	local line = vim.api.nvim_get_current_line()

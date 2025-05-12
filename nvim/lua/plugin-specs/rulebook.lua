@@ -21,7 +21,7 @@ return {
 	},
 	opts = {
 		ruleDocs = {
-			fallback = "https://chatgpt.com/?q=Explain%20the%20following%20diagnostic%20error%3A%20%s"
+			fallback = "https://chatgpt.com/?q=Explain%20the%20following%20diagnostic%20error%3A%20%s",
 		},
 		suppressFormatter = {
 			-- use `biome` instead of `prettier`

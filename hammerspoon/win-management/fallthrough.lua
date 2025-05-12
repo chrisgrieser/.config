@@ -1,6 +1,5 @@
 -- prevent keeping focus when closing a window
 --------------------------------------------------------------------------------
-
 local M = {}
 
 local u = require("meta.utils")
@@ -10,24 +9,32 @@ local aw = hs.application.watcher
 --------------------------------------------------------------------------------
 
 -- CONFIG
-local fallthroughApps = { "Finder", "Brave Browser", "Obsidian" }
+local fallthroughWhenNoWin = { "Finder", "Brave Browser", "Obsidian" }
+local alwaysFallthrough = { "Ivory", "Transmission" }
+
+--------------------------------------------------------------------------------
+
+local function focusNext()
+	local nextWin = hs.fnutils.find(
+		hs.window:orderedWindows(), -- all visible windows in order
+		function(win)
+			if not win:application() or not win:isStandard() then return false end
+			local appName = win:application():name()
+			local fromFallThroughApp = hs.fnutils.contains(alwaysFallthrough, appName)
+			return not fromFallThroughApp
+		end
+	)
+	if nextWin then nextWin:focus() end
+end
+
+--------------------------------------------------------------------------------
 
 local function fallthroughOnNoWin()
 	u.defer(0.1, function() -- deferring to ensure windows are already switched/created
 		local frontApp = hs.application.frontmostApplication()
-		local isFront = hs.fnutils.contains(fallthroughApps, frontApp:name())
+		local fallthroughIsFront = hs.fnutils.contains(fallthroughWhenNoWin, frontApp:name())
 		local noWins = #(frontApp:allWindows()) == 0
-		if not (isFront and noWins) then return end
-
-		local nextWin = hs.fnutils.find(
-			hs.window:orderedWindows(), -- all visible windows in order
-			function(win)
-				local fromFallThroughApp =
-					hs.fnutils.contains(fallthroughApps, win:application():name()) ---@diagnostic disable-line: undefined-field
-				return win:isStandard() and not fromFallThroughApp
-			end
-		)
-		if nextWin then nextWin:focus() end -- hiding fallthrough-app does not work, must focus next win
+		if fallthroughIsFront and noWins then focusNext() end
 	end)
 end
 
@@ -38,7 +45,7 @@ M.wf_fallthroughNoWin = wf
 
 M.aw_fallthroughNoWin = aw.new(function(name, event, _app)
 	-- activation of a fallthrough app
-	if event == aw.activated and hs.fnutils.contains(fallthroughApps, name) then
+	if event == aw.activated and hs.fnutils.contains(fallthroughWhenNoWin, name) then
 		fallthroughOnNoWin()
 	end
 end):start()
@@ -46,23 +53,22 @@ end):start()
 --------------------------------------------------------------------------------
 
 -- prevent unintended focusing after closing a window / quitting app
-local function fallthroughMastodon()
+local function fallthroughAlways()
 	u.defer(0.1, function()
-		local nonMastoWin = hs.fnutils.find(
-			hs.window:orderedWindows(),
-			function(win) return win:application() and win:application():name() ~= "Ivory" end
-		)
-		if nonMastoWin and u.isFront("Ivory") then nonMastoWin:focus() end
+		local frontApp = hs.application.frontmostApplication()
+		local fallthroughIsFront = hs.fnutils.contains(alwaysFallthrough, frontApp:name())
+		if fallthroughIsFront then focusNext() end
 	end)
 end
 
-M.wf_fallthroughMasto = wf
+M.wf_fallthroughAlways = wf
 	.new(true) -- `true` -> all windows
 	:setOverrideFilter({ allowRoles = "AXStandardWindow", rejectTitles = { "^Login$", "^$" } })
-	:subscribe(wf.windowDestroyed, fallthroughMastodon)
+	:subscribe(wf.windowDestroyed, fallthroughAlways)
 
-M.aw_fallthroughMasto = aw.new(function(appName, event, _)
-	if event == aw.terminated and appName ~= "Ivory" then fallthroughMastodon() end
+M.aw_fallthroughAlways = aw.new(function(appName, event, _)
+	if hs.fnutils.contains(alwaysFallthrough, appName) then return end
+	if event == aw.terminated then fallthroughAlways() end
 end):start()
 
 --------------------------------------------------------------------------------

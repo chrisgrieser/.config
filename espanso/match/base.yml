@@ -32,7 +32,7 @@ matches:
     vars:
       - name: today
         type: date
-        params: { format: "%d. %b. %Y" }
+        params: { format: "%d. %b %Y" }
   #─────────────────────────────────────────────────────────────────────────────
   - trigger: "!version"
     replace: "macOS {{version}} ({{architecture}})"

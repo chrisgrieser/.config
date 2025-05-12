@@ -43,7 +43,7 @@ local function autoTile(appName)
 
 	local pos = {} ---@cast pos hs.geometry[]
 	if #wins == 1 then
-		pos = { config.oneWindowSize(appName) }  
+		pos = { config.oneWindowSize(appName) }
 	elseif #wins == 2 then
 		pos = { hs.layout.left50, hs.layout.right50 }
 	elseif #wins == 3 then
@@ -67,9 +67,7 @@ local function autoTile(appName)
 			{ h = 0.5, w = 0.34, x = 0.33, y = 0.5 },
 			{ h = 0.5, w = 0.33, x = 0.67, y = 0 },
 		}
-		if #wins == 6 then
-			table.insert(pos, { h = 0.5, w = 0.33, x = 0.67, y = 0.5 })
-		end
+		if #wins == 6 then table.insert(pos, { h = 0.5, w = 0.33, x = 0.67, y = 0.5 }) end
 	end
 
 	for i = 1, #pos do
