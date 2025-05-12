@@ -13,8 +13,7 @@ local aw = hs.application.watcher
 local neverHide = { "Alfred", "CleanShot X", "IINA", "pinentry-mac", "Catch", "Hammerspoon" }
 
 M.aw_maxWindows = aw.new(function(appName, event, app)
-	-- never hide these apps when they deactivate, never hide these other apps
-	-- when these apps become activated.
+	-- never hide these apps when they deactivate or when they are front
 	if hs.fnutils.contains(neverHide, appName) or u.isFront(neverHide) then return end
 	if env.isProjector() then return end
 

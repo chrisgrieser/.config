@@ -116,7 +116,8 @@ return {
 						label_description = { width = { max = 15 } },
 						kind_icon = {
 							text = function(ctx)
-								local source, client = ctx.item.source_id, vim.lsp.get_client_by_id(ctx.item.client_id)
+								local source, client =
+									ctx.item.source_id, vim.lsp.get_client_by_id(ctx.item.client_id)
 								local clientName = client and client.name
 
 								if source == "cmdline" then return "" end

@@ -43,7 +43,7 @@ return {
 		tabout = { enable = false, map = "<Nop>" },
 
 		extensions = { -- disable in these filetypes
-			filetype = { nft = { "TelescopePrompt", "snacks_picker_input" } },
+			filetype = { nft = { "TelescopePrompt", "snacks_picker_input", "rip-substitute" } },
 		},
 
 		config_internal_pairs = {

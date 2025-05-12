@@ -58,7 +58,8 @@ M.pathw_desktop = pathw(home .. "/Desktop/", function(paths, _)
 			if success then u.notify("✅ Obsidian web clipper settings backed up.") end
 		elseif ext == "icbu" then
 			-- private, thus not in dotfiles repo
-			local backupPath = home .. "/Library/Mobile Documents/com~apple~CloudDocs/Backups/Calendar/"
+			local backupPath = home
+				.. "/Library/Mobile Documents/com~apple~CloudDocs/Backups/Calendar/"
 			success, errmsg = os.rename(path, backupPath .. name)
 			if success then u.notify("✅ Calendar data backed up.") end
 
