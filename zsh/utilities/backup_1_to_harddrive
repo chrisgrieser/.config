@@ -3,6 +3,44 @@
 # CONFIG
 logpath_on_mac="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Backups/backups-to-external-drives.log"
 
+function do_backup {
+	backup "$HOME/Library/Mobile Documents/com~apple~CloudDocs/" ./iCloud-Folder
+	backup "$HOME/RomComs/" ./Homefolder/RomComs
+	backup "$HOME/Documents/" ./Homefolder/Documents # iCloud only has symlinks
+
+	# perma-repos
+	while read -r line; do
+		repo_path=$(echo "$line" | cut -d, -f1 | sed "s|^~|$HOME|")
+		basename="$(basename "$repo_path")"
+		backup "$repo_path/" "./perma-repos/$basename"
+	done < "$HOME/.config/perma-repos.csv"
+}
+
+#───────────────────────────────────────────────────────────────────────────────
+# HELPER FUNCTION
+
+errors=""
+function backup() {
+	local bkp_from="$1"
+	local bkp_to="$2"
+	bkp_from=$(echo "$bkp_from" | sed -E 's|/?$|/|')
+
+	if [[ ! -d "$bkp_from" ]]; then
+		errors="$errors\n$bkp_from does not exist."
+		return 1
+	fi
+	echo
+	print "\e[1;34mBacking up: $bkp_from\e[0m"
+	mkdir -p "$bkp_to"
+
+	rsync --archive --delete --recursive --progress --human-readable \
+		--exclude="*.Trash" --exclude="*/nvim-data" --exclude=".DS_Store" \
+		"$bkp_from" "$bkp_to" ||
+		errors="$errors\nProblems occurred for: $bkp_from"
+
+	print "\e[1;38;5;247m─────────────────────────────────────────────────────────────────────────────"
+}
+
 #───────────────────────────────────────────────────────────────────────────────
 # DETERMINE VOLUME
 
@@ -31,51 +69,17 @@ else
 fi
 
 #───────────────────────────────────────────────────────────────────────────────
-# DETERMINE BACKUP DESTINATION
+# DO BACKUP
 
 device_name="$(scutil --get ComputerName)"
 backup_dest="$volume_name/Backup_$device_name"
 mkdir -p "$backup_dest"
 cd "$backup_dest" || return 1
 echo -n "Backup: $(date '+%Y-%m-%d %H:%M'), $volume_name -- " >> "$logpath_on_mac"
+do_backup
 
-#───────────────────────────────────────────────────────────────────────────────
-# HELPER FUNCTION
-
-errors=""
-function backup() {
-	local bkp_from="$1"
-	local bkp_to="$2"
-	bkp_from=$(echo "$bkp_from" | sed -E 's|/?$|/|')
-
-	if [[ ! -d "$bkp_from" ]]; then
-		errors="$errors\n$bkp_from does not exist."
-		return 1
-	fi
-	echo
-	print "\e[1;34mBacking up: $bkp_from\e[0m"
-	mkdir -p "$bkp_to"
-
-	rsync --archive --delete-during --recursive --progress --human-readable \
-		--exclude="*.Trash/*" --exclude="*/nvim-data/*" "$bkp_from" "$bkp_to" ||
-		errors="$errors\nProblems occurred for $bkp_from backup."
-
-	print "\e[1;38;5;247m─────────────────────────────────────────────────────────────────────────────"
-}
-
-#───────────────────────────────────────────────────────────────────────────────
-# CONFIG CONTENT TO BACKUP
-
-backup "$HOME/Library/Mobile Documents/com~apple~CloudDocs/" ./iCloud-Folder
-backup "$HOME/RomComs/" ./Homefolder/RomComs
-backup "$HOME/Documents/" ./Homefolder/Documents # backed up from home as iCloud only has symlinks
-
-# also backup all PERMA-REPOS
-while read -r line; do
-	repo_path=$(echo "$line" | cut -d, -f1 | sed "s|^~|$HOME|")
-	basename="$(basename "$repo_path")"
-	backup "$repo_path/" "./perma-repos/$basename"
-done < "$HOME/.config/perma-repos.csv"
+older_backups="$volume_name/older backups"
+mkdir -p "$older_backups"
 
 #───────────────────────────────────────────────────────────────────────────────
 # LOG & NOTIFY
