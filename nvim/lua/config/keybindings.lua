@@ -44,11 +44,6 @@ keymap("n", "gm", "%", { desc = "󰅪 Goto match", remap = true })
 keymap("n", "ge", "]d", { desc = "󰋼 Next diagnostic", remap = true })
 keymap("n", "gE", "[d", { desc = "󰋼 Previous diagnostic", remap = true })
 
--- stylua: ignore
-keymap("n", "gj", function() require("personal-plugins.misc").goIndent("down") end, { desc = "󰛀 indent down" })
--- stylua: ignore
-keymap("n", "gk", function() require("personal-plugins.misc").goIndent("up") end, { desc = "󰛃 indent up" })
-
 --------------------------------------------------------------------------------
 -- MARKS
 do
@@ -382,15 +377,8 @@ keymap("n", "<C-Right>", "<C-w>" .. delta .. ">")
 --------------------------------------------------------------------------------
 -- BUFFERS & FILES
 
-do
-	-- stylua: ignore
-	keymap({ "n", "x" }, "<CR>", function() require("personal-plugins.alt-alt").gotoAltFile() end, { desc = "󰬈 Goto alt-file" })
-	vim.api.nvim_create_autocmd("FileType", {
-		desc = "User: keep default behavior of `<CR>` for quickfix buffers.",
-		pattern = "qf",
-		callback = function(ctx) vim.keymap.set("n", "<CR>", "<CR>", { buffer = ctx.buf }) end,
-	})
-end
+-- stylua: ignore
+keymap({ "n", "x" }, "<CR>", function() require("personal-plugins.alt-alt").gotoAltFile() end, { desc = "󰬈 Goto alt-file" })
 
 -- close window or buffer
 keymap({ "n", "x", "i" }, "<D-w>", function()
