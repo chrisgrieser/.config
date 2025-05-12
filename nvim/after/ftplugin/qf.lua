@@ -1,4 +1,5 @@
 local bkeymap = require("config.utils").bufKeymap
+--------------------------------------------------------------------------------
 
 bkeymap("n", "q", vim.cmd.close, { desc = " Close" })
 bkeymap("n", "dd", function()
@@ -11,3 +12,6 @@ bkeymap("n", "dd", function()
 
 	vim.api.nvim_win_set_cursor(0, { lnum, 0 })
 end, { desc = " Remove quickfix entry" })
+
+-- keep <CR> behavior of going to entry, even if <CR> is mapped to something else otherwise
+bkeymap("n", "<CR>", "<CR>")

@@ -173,8 +173,8 @@ return {
 			function()
 				Snacks.picker.git_diff {
 					layout = "big_preview",
-					-- FIX snacks' `confirm` not working when cwd != git root
 					confirm = function(picker, item)
+						-- FIX snacks' `confirm` not working when cwd != git root
 						picker:close()
 						local gitDir = Snacks.git.get_root()
 						local path = (gitDir .. "/" .. item.file):gsub("/", "\\/") -- escape slashes for `:edit`
@@ -202,11 +202,7 @@ return {
 								vim.notify(out.stderr, vim.log.levels.ERROR)
 								return
 							end
-							if #picker:items() == 1 then
-								picker:close()
-							else
-								picker:find() -- refresh
-							end
+							picker:find() -- refresh
 						end,
 					},
 				}
