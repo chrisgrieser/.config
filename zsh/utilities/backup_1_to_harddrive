@@ -26,7 +26,7 @@ function _pretty_header() {
 	echo
 	defaults read -g AppleInterfaceStyle &> /dev/null && fg="\e[1;30m" || fg="\e[1;37m"
 	bg="\e[1;44m"
-	[[ "$2" == "first" ]] && bg="\e[1;45m"
+	[[ "$2" == "special" ]] && bg="\e[1;45m"
 	print "$fg$bg $1 \e[0m"
 }
 
@@ -34,18 +34,17 @@ errors=""
 function backup() {
 	local bkp_from="$1"
 	local bkp_to="$2"
-	local short_name=${bkp_from/#$HOME/~}
-	bkp_from=$(echo "$bkp_from" | sed -E 's|/?$|/|')
+	bkp_from=$(echo "$bkp_from" | sed -E 's|/?$|/|') # ensure slash at end to sync dirs
+	local short_name=${bkp_from/#$HOME/"~"}
 
 	if [[ ! -d "$bkp_from" ]]; then
-		errors="$errors\n$bkp_from does not exist."
+		errors="$errors\n$short_name does not exist."
 		return 1
 	fi
-	echo
 	_pretty_header "Backup: $short_name"
 	mkdir -p "$bkp_to"
 
-	rsync --archive --delete --delete-excluded --recursive --progress --human-readable \
+	rsync --archive --delete --recursive --progress --human-readable \
 		--exclude="*.Trash/" --exclude="*/nvim-data/" --exclude=".DS_Store" \
 		"$bkp_from" "$bkp_to" || errors="$errors\nProblems occurred for: $short_name"
 }
@@ -72,7 +71,7 @@ if [[ -z "$volume_name" ]]; then
 	print "\e[1;33mTimeout, no volume found.\e[0m"
 	return 1
 else
-	_pretty_header "Backup volume: $volume_name" "first"
+	_pretty_header "Backup volume: $volume_name" "special"
 fi
 
 #───────────────────────────────────────────────────────────────────────────────
@@ -88,46 +87,52 @@ do_backup
 #───────────────────────────────────────────────────────────────────────────────
 # ARCHIVE OLDER BACKUPS
 
-# _pretty_header "Archive of backups"
-#
-# archive="$volume_name/older backups"
-# mkdir -p "$archive"
-# cd "$archive" || return 1
-# oldest_backup_date=$(command ls | tail -n1 | cut -d_ -f3)
-#
-# oldest_timestamp=0 # no backups yet
-# [[ -n "$oldest_backup_date" ]] && oldest_timestamp=$(date -j -f "%Y-%m-%d" "$oldest_backup_date" "+%s")
-#
-# max_age_oldest_archive=$(date -v -${archive_every_x_months}m "+%s")
-# if [[ -n "$errors" ]] ; then
-# 	echo "Skipped, since the current backup has errors."
-# elif [[ "$oldest_timestamp" -ge "$max_age_oldest_archive" ]]; then
-# 	echo "Oldest backup in archive is still recent (less than $archive_every_x_months months old.)"
-# else
-# 	echo "Oldest backup in archive more than $archive_every_x_months months old."
-# 	echo "Archiving current backup via macOS Finder."
-# 	iso_today="$(date "+%Y-%m-%d")"
-# 	archive_name="Backup_${device_name}_$iso_today" # exactly 2 underscores needed
-#
-# 	# copy via macOS Finder to leverage speed of APFS cloning
-# 	osascript <<- EOD &> /dev/null
-# 		set currentBackup to (POSIX file "$backup_dest" as alias)
-# 		set archive to (POSIX file "$archive" as alias)
-#
-# 		tell application "Finder"
-# 			duplicate currentBackup to folder archive
-# 			set name of result to "$archive_name"
-# 		end tell
-# 	EOD
-#
-# 	# restrict number of backups
-# 	command ls -r | tail +$((max_number_of_archives + 1)) | tr '' '\0' | xargs -0 rm -rf
-# fi
+_pretty_header "Archive of backups"
+
+archive="$volume_name/older backups"
+mkdir -p "$archive"
+cd "$archive" || return 1
+oldest_backup_date=$(command ls | tail -n1 | cut -d_ -f3) # assumes iso8691 & 2 `_`
+
+oldest_timestamp=0 # no backups yet
+[[ -n "$oldest_backup_date" ]] && oldest_timestamp=$(date -j -f "%Y-%m-%d" "$oldest_backup_date" "+%s")
+
+max_age_oldest_archive=$(date -v -${archive_every_x_months}m "+%s")
+if [[ -n "$errors" ]]; then
+	echo "⚠️ Skipped, since the current backup has errors."
+elif [[ "$oldest_timestamp" -ge "$max_age_oldest_archive" ]]; then
+	echo "Oldest backup in archive is still recent (less than $archive_every_x_months months old)."
+else
+	echo "Oldest backup in archive more than $archive_every_x_months months old."
+	print "\e[1;32mArchiving current backup via macOS Finder.\e[0m"
+	iso_today="$(date "+%Y-%m-%d")"
+	archive_name="Backup_${device_name}_$iso_today" # exactly 2 underscores needed
+
+	# copy via macOS Finder to leverage speed of APFS cloning
+	osascript <<- EOD &> /dev/null
+		set currentBackup to (POSIX file "$backup_dest" as alias)
+		set archive to (POSIX file "$archive" as alias)
+
+		tell application "Finder"
+			duplicate currentBackup to folder archive
+			set name of result to "$archive_name"
+		end tell
+	EOD
+
+	if [[ -d "$archive_name" ]]; then
+		# restrict number of backups
+		command ls -r | tail +$((max_number_of_archives + 1)) | tr '' '\0' | xargs -0 rm -rf
+	else
+		errors="$errors\nArchive not created."
+		open "$archive"
+	fi
+
+fi
 
 #───────────────────────────────────────────────────────────────────────────────
 # LOG & NOTIFY
 
-_pretty_header "Report"
+_pretty_header "Report" "special"
 if [[ -z "$errors" ]]; then
 	print "\e[1;32mBackup completed: $volume_name.\e[0m"
 	"$ZDOTDIR/notificator" --title "Backup" --message "✅ completed." --sound "Blow"
