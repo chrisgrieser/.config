@@ -17,4 +17,4 @@ cp -f "$browser_setting/Default/Bookmarks" "$backup_file"
 cd "$bkp_destination" || return 1
 actual_number=$((max_number_of_bkps + 1))
 # shellcheck disable=2012
-ls -t | tail -n +$actual_number | tr '\n' '\0' | xargs -0 rm
+command ls -t | tail -n +$actual_number | tr '\n' '\0' | xargs -0 rm
