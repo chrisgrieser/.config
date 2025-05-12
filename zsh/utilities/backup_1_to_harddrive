@@ -2,6 +2,8 @@
 
 # CONFIG
 logpath_on_mac="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Backups/backups-to-external-drives.log"
+max_number_of_archives=4
+archive_every_x_months=3
 
 function do_backup {
 	backup "$HOME/Library/Mobile Documents/com~apple~CloudDocs/" ./iCloud-Folder
@@ -20,9 +22,10 @@ function do_backup {
 # HELPER FUNCTIONS
 
 function _pretty_header() {
-	[[ "$2" != "no-line-break" ]] && echo
+	[[ "$2" != "first" ]] && echo
 	defaults read -g AppleInterfaceStyle &> /dev/null && fg="\e[1;30m" || fg="\e[1;37m"
 	bg="\e[1;44m"
+	[[ "$2" == "first" ]] && bg="\e[1;45m"
 	print "$fg$bg $1 \e[0m"
 }
 
@@ -64,13 +67,11 @@ for i in {1..200}; do
 	sleep 0.2
 done
 
-echo
 if [[ -z "$volume_name" ]]; then
 	print "\e[1;33mTimeout, no volume found.\e[0m"
 	return 1
 else
-	_pretty_header "Backup volume: $volume_name" "no-line-break"
-	print "\e[1;38;5;247m─────────────────────────────────────────────────────────────────────────────"
+	_pretty_header "Backup volume: $volume_name" "first"
 fi
 
 #───────────────────────────────────────────────────────────────────────────────
@@ -85,26 +86,40 @@ echo -n "Backup: $(date '+%Y-%m-%d %H:%M'), $volume_name -- " >> "$logpath_on_ma
 
 #───────────────────────────────────────────────────────────────────────────────
 # ARCHIVE OLDER BACKUPS
-older_backups="$volume_name/older backups"
-mkdir -p "$older_backups"
-cd "$older_backups" || return 1
+_pretty_header "Archive of backups"
 
-# Find oldest backup by parsing directory names
+archive="$volume_name/older backups"
+mkdir -p "$archive"
+cd "$archive" || return 1
 oldest_backup_date=$(command ls | tail -n1 | cut -d_ -f3)
 
-oldest_timestamp=0 # No backups yet
+oldest_timestamp=0 # no backups yet
 [[ -n "$oldest_backup_date" ]] && oldest_timestamp=$(date -j -f "%Y-%m-%d" "$oldest_backup_date" "+%s")
 
-# Decide if backup is needed
-three_months_ago=$(date -v -3m "+%s")
-_pretty_header "Archive of backups"
-if [[ "$oldest_timestamp" -le "$three_months_ago" ]]; then
-	echo "Oldest backup in archive more than 3 months old. Archiving current backup."
+max_age_oldest_archive=$(date -v -${archive_every_x_months}m "+%s")
+if [[ "$oldest_timestamp" -le "$max_age_oldest_archive" ]]; then
+	echo "Oldest backup in archive more than $archive_every_x_months months old."
+	echo "Archiving current backup."
 	iso_today="$(date "+%Y-%m-%d")"
-	archive_path="$older_backups/Backup_${device_name}_$iso_today"
-	rsync --archive --progress --copy-dest="$backup_dest" "$backup_dest/" "$archive_path/"
+	archive_name="Backup_${device_name}_$iso_today" # exactly 2 underscores needed
+
+	# copy via macOS Finder to leverage speed of APFS cloning
+	osascript <<- EOD
+		set currentBackup to (POSIX file "$backup_dest" as alias)
+		set archive to (POSIX file "$archive" as alias)
+
+		tell application "Finder"
+			duplicate currentBackup to folder archive
+			set name of result to "$archive_name"
+		end tell
+	EOD
+
+	# restrict number of backups
+	sleep 1
+	# shellcheck disable=2012
+	ls | tail +$((max_number_of_archives + 1)) | tr '\n' '\0' | xargs -0 rm
 else
-	echo "Oldest backup in archive still recent."
+	echo "Oldest backup in archive is still recent (less than $archive_every_x_months months old.)"
 fi
 
 #───────────────────────────────────────────────────────────────────────────────
@@ -112,13 +127,13 @@ fi
 
 _pretty_header "Report"
 if [[ -z "$errors" ]]; then
-	print "\e[1;32mBackup on $volume_name completed.\033[0m"
+	print "\e[1;32mBackup completed: $volume_name.\e[0m"
 	"$ZDOTDIR/notificator" --title "Backup" --message "✅ completed." --sound "Blow"
 
 	echo "completed: $(date '+%H:%M')" >> "$logpath_on_mac"
 	echo "Backup: $(date '+%Y-%m-%d %H:%M')" >> "$backup_dest/last_backup.log"
 else
-	print "\e[1;31m$errors\033[0m"
+	print "\e[1;31m$errors\e[0m"
 	"$ZDOTDIR/notificator" --title "Backup" --message "⚠️ Errors occurred." --sound "Basso"
 
 	echo "had errors: $(date '+%H:%M')" >> "$logpath_on_mac"
