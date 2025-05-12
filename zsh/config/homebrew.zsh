@@ -5,7 +5,7 @@ export HOMEBREW_BUNDLE_FILE="$HOME/.config/Brewfile"
 export HOMEBREW_UPGRADE_GREEDY_CASKS="obsidian" # to also update installer version
 export HOMEBREW_NO_ANALYTICS=1
 export HOMEBREW_NO_ENV_HINTS=1
-export HOMEBREW_EDITOR="open" # open in default macOS text editor
+export HOMEBREW_EDITOR="open"           # open in default macOS text editor
 export HOMEBREW_DISPLAY_INSTALL_TIMES=1 # also serves as summary what was installed
 
 alias bi='brew install'
@@ -29,10 +29,12 @@ function update() {
 	brew update # update homebrew itself
 
 	_pretty_header "brew bundle install"
-	if ! brew bundle check ; then
+	if ! brew bundle check --no-upgrade &> /dev/null; then
 		export HOMEBREW_COLOR=1                      # force color when piping output
 		brew bundle install --verbose --no-upgrade | # `--verbose` shows progress
 			grep --invert-match --extended-regexp "^Using |^Skipping install of "
+	else
+		echo "✅ Brewfile satisfied."
 	fi
 
 	_pretty_header "brew bundle cleanup"
@@ -57,6 +59,12 @@ function update() {
 		mas upgrade
 	else
 		echo "✅ Already up-to-date."
+	fi
+
+	# 10% of the time, run `brew doctor`, just to check if everything is fine
+	if ((RANDOM % 100 < 10)); then
+		_pretty_header "brew doctor"
+		brew doctor
 	fi
 
 	"$ZDOTDIR/notificator" --title "🍺 Homebrew" --message "Update finished." --sound "Blow"
