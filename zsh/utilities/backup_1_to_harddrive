@@ -57,7 +57,7 @@ function backup() {
 	mkdir -p "$bkp_to"
 
 	rsync --archive --delete-during --recursive --progress --human-readable \
-		--exclude="*.Trash/*" --exclude="*/vim-data/*" "$bkp_from" "$bkp_to" ||
+		--exclude="*.Trash/*" --exclude="*/nvim-data/*" "$bkp_from" "$bkp_to" ||
 		errors="$errors\nProblems occurred for $bkp_from backup."
 
 	print "\e[1;38;5;247m─────────────────────────────────────────────────────────────────────────────"
