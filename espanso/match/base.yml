@@ -3,13 +3,12 @@
 matches:
   # EMOJI & SYMBOLS
   - { trigger: "->", replace: →, word: true } # unicode arrow
-  - { trigger: " mm", replace: " 🙈", label: 🙈 monkey }
-  - { trigger: "<3", replace: "🩶" } # do not use red heart by default
+  - { trigger: " mm", replace: " 🙈" }
+  - { trigger: "<3", replace: "🩶" } # use grey haeart instead of red one
   #─────────────────────────────────────────────────────────────────────────────
   # PROFILES
   - { trigger: "!web", replace: https://chris-grieser.de/ }
   - { trigger: "!masto", replace: https://pkm.social/@pseudometa }
-  - { triggers: ["!blog" , "!vim"], replace: https://nanotipsforvim.prose.sh }
   - { trigger: "!name", replace: Christopher Grieser }
   - { trigger: "!paypal", replace: https://www.paypal.com/paypalme/ChrisGrieser }
   #───────────────────────────────────────────────────────────────────────────
