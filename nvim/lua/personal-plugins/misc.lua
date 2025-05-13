@@ -179,7 +179,7 @@ function M.bufferInfo()
 		:fold(0, function(acc, client) return math.max(acc, #client.name) end)
 	local lsps = vim.tbl_map(function(client)
 		local pad = (" "):rep(math.min(longestName - #client.name) --[[@as integer]]) .. " "
-		local root = client.root_dir and client.root_dir:gsub("/Users/%w+", pseudoTilde)
+		local root = client.root_dir and client.root_dir:gsub(vim.env.HOME, pseudoTilde)
 			or "*Single file mode*"
 		return ("[%s]%s%s"):format(client.name, pad, root)
 	end, clients)
@@ -189,18 +189,17 @@ function M.bufferInfo()
 	local foldexpr = vim.wo.foldexpr:find("lsp") and "LSP" or "TS"
 
 	local out = {
-		"[node at pos] " .. (vim.treesitter.get_node() and vim.treesitter.get_node():type() or "n/a"),
 		"[bufnr]       " .. vim.api.nvim_get_current_buf(),
 		"[winid]       " .. vim.api.nvim_get_current_win(),
 		"[filetype]    " .. (vim.bo.filetype == "" and '""' or vim.bo.filetype),
 		"[buftype]     " .. (vim.bo.buftype == "" and '""' or vim.bo.buftype),
 		"[indent]      " .. ("%s (%d)"):format(indentType, indentAmount),
 		"[folds]       " .. ("%s (%d)"):format(foldexpr, vim.wo.foldlevel),
-		"[cwd]         " .. (vim.uv.cwd() or "nil"):gsub("/Users/%w+", pseudoTilde),
+		"[cwd]         " .. (vim.uv.cwd() or "nil"):gsub(vim.env.HOME, pseudoTilde),
 		"",
 	}
 	if #lsps > 0 then
-		vim.list_extend(out, { "**Attached LSPs with root**", unpack(lsps) })
+		vim.list_extend(out, { "**Attached LSPs**", unpack(lsps) })
 	else
 		vim.list_extend(out, { "*No LSPs attached.*" })
 	end
@@ -231,7 +230,7 @@ function M.formatWithFallback()
 		vim.cmd([[% substitute _\(\n\n\)\n\+_\1_e]]) -- remove duplicate blank lines
 		vim.cmd([[silent! /^\%(\n*.\)\@!/,$ delete]]) -- remove blanks at end of file
 
-		vim.notify("Formatting with fallback.", nil, notifyOpts)
+		vim.notify_once("Formatting with fallback.", nil, notifyOpts)
 	end
 end
 

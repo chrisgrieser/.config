@@ -18,14 +18,6 @@ function deleteLastChar() {
 	editor.setCursor(cursor);
 }
 
-function switchQuotes() {
-	const cursor = editor.getCursor();
-	const line = editor.getLine(cursor.line);
-	const updatedText = line.replace(/["']/g, (q) => (q === '"' ? "'" : '"'));
-	editor.setLine(cursor.line, updatedText);
-	editor.setCursor(cursor);
-}
-
 async function updatePlugins() {
 	const app = view.app;
 	new Notice("Checking for updates…");
@@ -48,7 +40,7 @@ function freezeInterface() {
 	electronWindow.openDevTools(); // devtools need to be open for debugger to work
 
 	// biome-ignore format: ugly
-	setTimeout(() => { debugger }, delaySecs * 1000 + 200)
+	setTimeout(() => { debugger }, delaySecs * 1000)
 }
 
 function cycleColorscheme() {
@@ -73,9 +65,8 @@ function openAppearanceSettings() {
 }
 
 function openCommunityPluginsSettings() {
-	const setting = view.app.setting;
-	setting.open();
-	setting.openTabById("community-plugins");
+	
+	view.app.setting.openTabById("community-plugins");
 }
 
 function openDynamicHighlightsSettings() {
