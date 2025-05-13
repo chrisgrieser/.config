@@ -154,7 +154,7 @@ noremap <CR> :altBuffer<CR>
 nnoremap - /
 
 " <Esc> clears highlights & notices
-exmap clearNotices jsfile Meta/vimrc-jsfile.js { clearNotices() }
+exmap clearNotices jscommand { for (const el of activeDocument.body.getElementsByClassName("notice")) el.hide() }
 nnoremap <Esc> :clearNotices<CR>:nohl<CR>
 
 " Another Quick Switcher ripgrep-search (somewhat close to Telescope's livegrep)
@@ -309,8 +309,8 @@ exmap openAppearanceSettings jsfile Meta/vimrc-jsfile.js { openAppearanceSetting
 nnoremap ,pa :openAppearanceSettings<CR>
 
 " open community plugin settings
-exmap openCommunityPluginsSettings jsfile Meta/vimrc-jsfile.js { openCommunityPluginsSettings() }
-nnoremap ,pl :openCommunityPluginsSettings<CR>
+exmap openCommunityPlugins jscommand {	view.app.setting.open(); view.app.setting.openTabById("community-plugins") }
+nnoremap ,pl :openCommunityPlugins<CR>
 
 " [i] install [p]lugins
 exmap installPlugins jscommand { view.app.workspace.protocolHandlers.get("show-plugin")({ id: ' ' }); }
@@ -499,7 +499,7 @@ exmap spellcheck obcommand editor:toggle-spellcheck
 nnoremap ,os :spellcheck<CR>
 
 " [o]ption: [n]umbers
-exmap toggleLineNumbers jsfile Meta/vimrc-jsfile.js { toggleLineNumbers() }
+exmap toggleLineNumbers jscommand {	view.app.vault.setConfig("showLineNumber", !view.app.vault.getConfig("showLineNumber")) }
 nnoremap ,on :toggleLineNumbers<CR>
 
 " [o]ption: [c]onceal
