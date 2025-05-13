@@ -219,6 +219,10 @@ exmap headingDecrement jsfile Meta/vimrc-jsfile.js { headingIncrementor(-1) }
 nnoremap <M-S-h> :headingDecrement<CR>
 inoremap <M-S-h> <Esc>:headingDecrement<CR>a
 
+" <M-u> = cmd+u
+exmap cycleListTypes jsfile Meta/vimrc-jsfile.js { cycleListTypes() }
+nnoremap <M-u> :cycleListTypes<CR>
+
 " spelling suggestions (emulates `z=`)
 exmap contextMenu obcommand editor:context-menu
 noremap zl :contextMenu<CR>
@@ -236,10 +240,6 @@ nnoremap ,ur 1000<C-r>
 " toggle lowercase/Capitalize
 exmap toggleLowercaseTitleCase jsfile Meta/vimrc-jsfile.js { toggleLowercaseTitleCase() }
 nnoremap < :toggleLowercaseTitleCase<CR>
-
-" hiragana-fy cword
-exmap hiraganafyCword jsfile Meta/vimrc-jsfile.js { hiraganafyCword() }
-nnoremap > :hiraganafyCword<CR>
 
 " do not move to the right on toggling case
 nnoremap ~ v~
