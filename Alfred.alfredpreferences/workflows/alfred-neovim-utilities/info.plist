@@ -336,7 +336,7 @@
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
-				<string>Vim Old Files</string>
+				<string>Vim :oldfiles</string>
 				<key>type</key>
 				<integer>8</integer>
 				<key>withspace</key>
