@@ -24,7 +24,11 @@
     "prefix": "insert ISO datestamp (today)"
   },
   "vim modeline (filetype)": {
-    "body": "$LINE_COMMENT vim: ft=${1:filetype}",
+    "body": "$LINE_COMMENT vim: filetype=${1:filetype}",
     "prefix": "vim modeline (filetype)"
+  },
+  "vim modeline (foldlevel)": {
+    "body": "$LINE_COMMENT vim: foldlevel=${1:2}",
+    "prefix": "vim modeline (foldlevel)"
   }
 }
