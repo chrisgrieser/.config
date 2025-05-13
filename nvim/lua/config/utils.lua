@@ -8,7 +8,6 @@ M.extraTextobjMaps = {
 	wikilink = "R",
 }
 
----ensures unique keymaps https://www.reddit.com/r/neovim/comments/16h2lla/can_you_make_neovim_warn_you_if_your_config_maps/
 ---@param mode string|string[]
 ---@param lhs string
 ---@param rhs string|function
