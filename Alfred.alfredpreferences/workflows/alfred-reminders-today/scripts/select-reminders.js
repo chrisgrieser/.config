@@ -119,8 +119,6 @@ function run() {
 	// REMINDERS
 	const startOfToday = new Date();
 	startOfToday.setHours(0, 0, 0, 0);
-	const endOfToday = new Date();
-	endOfToday.setHours(23, 59, 59, 0); // to include reminders later that day
 
 	const swiftReminderOutput = app.doShellScript("./scripts/get-reminders.swift");
 	let /** @type {ReminderObj[]} */ remindersJson;
@@ -153,7 +151,7 @@ function run() {
 			body.replace(/\n+/g, " "),
 		]
 			.filter(Boolean)
-			.join("  ·  ");
+			.join("    ");
 
 		const emoji = rem.isCompleted ? "☑️ " : "";
 
