@@ -68,6 +68,23 @@ bkeymap("n", "<D-5>", function() headingsIncremantor(1) end, { desc = " Incre
 bkeymap("n", "<D-H>", function() headingsIncremantor(-1) end, { desc = " Decrement heading" })
 
 --------------------------------------------------------------------------------
+
+-- cycle list types
+bkeymap("n", "<D-u>", function ()
+	local lnum, col = unpack(vim.api.nvim_win_get_cursor(0))
+	local curLine = vim.api.nvim_get_current_line()
+
+	local updated = curLine:gsub("^(%s*)([%p%d]* )", function(indent, list)
+		if list:find("%d") then return indent .. "- " end -- ordered -> list
+		return ""
+	end)
+
+	vim.api.nvim_set_current_line(updated)
+	local diff = #updated - #curLine
+	vim.api.nvim_win_set_cursor(0, { lnum, col + diff })
+end, { desc = "󰍔 Cycle list types" })
+
+--------------------------------------------------------------------------------
 -- MARKDOWN-SPECIFIC KEYMAPS
 
 -- Tasks
@@ -75,9 +92,6 @@ bkeymap("n", "<leader>x", "mzI- [ ] <Esc>`z", { desc = " Add task/checkbox" }
 
 -- Format Table
 bkeymap("n", "<leader>rt", "vip:!pandoc --to=gfm<CR>", { desc = " Format table under cursor" })
-
--- cmd+u: markdown bullet
-bkeymap("n", "<D-u>", "mzI- <Esc>`z", { desc = "• Bullet list" })
 
 -- cmd+k: markdown link
 bkeymap("n", "<D-k>", "bi[<Esc>ea]()<Esc>hp", { desc = " Link" })
