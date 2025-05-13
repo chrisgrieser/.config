@@ -175,6 +175,19 @@ function headingIncrementor(dir) {
 	editor.setCursor(lnum, col + diff); // keep cursor in same place
 }
 
+function cycleListTypes() {
+	const { line: lnum, ch: col } = editor.getCursor();
+	const curLine = editor.getLine(lnum);
+
+	const listChar = curLine.match(/^\s*- \[[x ]\] /) || // task
+
+	const updatedLine = curLine.match(/^\s*- /)
+
+	const diff = updatedLine.length - curLine.length;
+	editor.setLine(lnum, updatedLine);
+	editor.setCursor(lnum, col + diff); // keep cursor in same place
+}
+
 /** @param {"above"|"below"} where */
 function smartOpenLine(where) {
 	const lnum = editor.getCursor().line;

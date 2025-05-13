@@ -10,5 +10,10 @@ return {
 		keymaps = {
 			runFirstRecipe = "j", -- <leader>jj = run first recipe
 		},
+		recipes = {
+			terminal = {
+				name = { "release" },
+			},
+		},
 	},
 }

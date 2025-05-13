@@ -75,15 +75,24 @@ vnoremap K 6k
 onoremap J 2j
 
 " Jumps
-nnoremap <C-h> <C-o>
-nnoremap <C-l> <C-i>
+" Jumps from the cursor history work across files, like in nvim
+exmap jumpBack obcommand cursor-position-history:previous-cursor-position
+nnoremap <C-h> :jumpBack<CR>
+exmap jumpForward obcommand cursor-position-history:cursor-position-forward
+nnoremap <C-l> :jumpForward<CR>
+" nnoremap <C-h> <C-o>
+" nnoremap <C-l> <C-i>
 
 " emulate nvim-origami
-" CAVEAT slightly breaks `h` and `l` in tables
 exmap origamiH jsfile Meta/vimrc-jsfile.js { origamiH() }
 nnoremap h :origamiH<CR>
 exmap origamiL jsfile Meta/vimrc-jsfile.js { origamiL() }
 nnoremap l :origamiL<CR>
+
+" marks
+" emulate my mark mappings
+nnoremap ,ma mA
+nnoremap ,mm `A
 
 "───────────────────────────────────────────────────────────────────────────────
 " GOTO LOCATIONS

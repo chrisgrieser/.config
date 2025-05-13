@@ -18,6 +18,6 @@
       "exmap ${3:cmd-name} obcommand ${1:command-id}",
       "nnoremap ${2:keymap} :${3:cmd-name}<CR>"
     ],
-    "prefix": "obcommand"
+    "prefix": "obcommand (exmap)"
   }
 }
