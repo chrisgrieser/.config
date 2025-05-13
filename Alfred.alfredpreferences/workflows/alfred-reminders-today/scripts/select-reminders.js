@@ -28,33 +28,24 @@ app.includeStandardAdditions = true;
  * @property {boolean} hasRecurrenceRules
  */
 
-/**
- * @param {Date} absDate
- * @return {string} relative date
- */
+/** @param {Date} absDate @return {string} relative date */
 function relativeDate(absDate) {
-	const deltaMins = (Date.now() - +absDate) / 1000 / 60;
-	/** @type {"year"|"month"|"week"|"day"|"hour"|"minute"} */
+	const deltaDays = (Date.now() - +absDate) / 1000 / 60 / 60 / 24;
+	/** @type {"year"|"month"|"week"|"day"} */
 	let unit;
 	let delta;
-	if (deltaMins < 60) {
-		unit = "minute";
-		delta = Math.floor(deltaMins);
-	} else if (deltaMins < 60 * 24) {
-		unit = "hour";
-		delta = Math.floor(deltaMins / 60);
-	} else if (deltaMins < 60 * 24 * 7) {
+	if (deltaDays < 7) {
 		unit = "day";
-		delta = Math.floor(deltaMins / 60 / 24);
-	} else if (deltaMins < 60 * 24 * 7 * 4) {
+		delta = deltaDays;
+	} else if (deltaDays < 7 * 4) {
 		unit = "week";
-		delta = Math.floor(deltaMins / 60 / 24 / 7);
-	} else if (deltaMins < 60 * 24 * 7 * 4 * 12) {
+		delta = Math.floor(deltaDays / 7);
+	} else if (deltaDays < 7 * 4 * 12) {
 		unit = "month";
-		delta = Math.floor(deltaMins / 60 / 24 / 7 / 4);
+		delta = Math.floor(deltaDays / 7 / 4);
 	} else {
 		unit = "year";
-		delta = Math.floor(deltaMins / 60 / 24 / 7 / 4 / 12);
+		delta = Math.floor(deltaDays / 7 / 4 / 12);
 	}
 	const formatter = new Intl.RelativeTimeFormat("en", { style: "long", numeric: "auto" });
 	return formatter.format(-delta, unit);
