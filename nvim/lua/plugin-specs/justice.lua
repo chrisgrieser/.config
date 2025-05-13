@@ -12,6 +12,7 @@ return {
 		},
 		recipes = {
 			terminal = {
+				-- my release scripts usually require version numbers as input
 				name = { "release" },
 			},
 		},
