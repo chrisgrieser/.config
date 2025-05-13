@@ -21,11 +21,12 @@ local ensureInstalled = {
 		"ts_query_ls", -- Treesitter query files
 		"typos-lsp", -- spellchecker for code
 		"yaml-language-server",
+		"gh-actions-language-server" -- github actions
 	},
 
 	linters = {
-		"markdownlint", -- efm
-		"shellcheck", -- used by bashls/efm for diagnostics, PENDING https://github.com/bash-lsp/bash-language-server/issues/663
+		"markdownlint", -- via efm
+		"shellcheck", -- via efm PENDING https://github.com/bash-lsp/bash-language-server/issues/663
 	},
 
 	formatters = {

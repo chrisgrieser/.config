@@ -78,15 +78,20 @@ bkeymap("n", "<D-u>", function()
 		if l:find("[*+-] ") and not l:find("%- %[") then return ind .. "1. " end -- list -> ordered
 		if l:find("%d") then return ind .. "- [ ] " end -- ordered -> open task
 		if vim.startswith(l, "- [") then return ind .. "> " end -- task -> blockquote
-		if l:find(">") and ind ~= "" then return ind .. "- " end -- indented: blockquote -> list
+		if l:find(">") and ind ~= "" then
+			local indentLevel = ind:gsub((" "):rep(vim.bo.shiftwidth), "\t"):len()
+			local listChars = { "-", "*", "+" }
+			local char = listChars[indentLevel % #listChars + 1]
+			return ind .. char .. " "
+		end -- indented: blockquote -> list
 		if l:find(">") and ind == "" then return "" end -- unindented: blockquote -> none
-		return "error"
+		return "" -- no list type
 	end)
 	if updated == curLine then updated = "- " .. curLine end -- none -> list
 
 	vim.api.nvim_set_current_line(updated)
 	local diff = #updated - #curLine
-	vim.api.nvim_win_set_cursor(0, { lnum, col + diff })
+	vim.api.nvim_win_set_cursor(0, { lnum, math.max(1, col + diff) })
 end, { desc = "󰍔 Cycle list types" })
 
 --------------------------------------------------------------------------------

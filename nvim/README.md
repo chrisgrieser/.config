@@ -21,11 +21,6 @@
 └── templates
 ```
 
-
-## Test
-- one
-	1. one
-
 ## All installed plugins
 - [altermo/ultimate-autopair.nvim](https://github.com/altermo/ultimate-autopair.nvim)
 - [chrisgrieser/nvim-chainsaw](https://github.com/chrisgrieser/nvim-chainsaw)
