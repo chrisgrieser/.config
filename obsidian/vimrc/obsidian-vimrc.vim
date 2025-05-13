@@ -41,7 +41,7 @@ noremap <M-k> :pasteinto<CR>
 
 "───────────────────────────────────────────────────────────────────────────────
 
-" Copy Path segments
+" Copy path segments
 exmap copyAbsolutePath jsfile Meta/vimrc-jsfile.js { copyPathSegment("absolute") }
 exmap copyRelativePath jsfile Meta/vimrc-jsfile.js { copyPathSegment("relative") }
 exmap copyFilename jsfile Meta/vimrc-jsfile.js { copyPathSegment("filename") }
@@ -74,14 +74,12 @@ vnoremap K 6k
 " dj = delete 2 lines, dJ = delete 3 lines
 onoremap J 2j
 
-" Jumps
-" Jumps from the cursor history work across files, like in nvim
+" JUMPS
+" (jumps from the cursor history work across files, like in nvim)
 exmap jumpBack obcommand cursor-position-history:previous-cursor-position
 nnoremap <C-h> :jumpBack<CR>
 exmap jumpForward obcommand cursor-position-history:cursor-position-forward
 nnoremap <C-l> :jumpForward<CR>
-" nnoremap <C-h> <C-o>
-" nnoremap <C-l> <C-i>
 
 " emulate nvim-origami
 exmap origamiH jsfile Meta/vimrc-jsfile.js { origamiH() }
@@ -89,8 +87,7 @@ nnoremap h :origamiH<CR>
 exmap origamiL jsfile Meta/vimrc-jsfile.js { origamiL() }
 nnoremap l :origamiL<CR>
 
-" marks
-" emulate my mark mappings
+" marks (emulate my mark mappings)
 nnoremap ,ma mA
 nnoremap ,mm `A
 
@@ -119,29 +116,8 @@ nnoremap gx :openNextLink<CR>
 exmap openNextLinkInNewTab jsfile Meta/vimrc-jsfile.js { openNextLink("new-tab") }
 nnoremap gX :openNextLinkInNewTab<CR>
 
-" [f]ootnotes (requires Footnotes Shortcut Plugin)
-exmap gotoFootnote obcommand obsidian-footnotes:insert-autonumbered-footnote
-nnoremap gf :gotoFootnote<CR>
-
 " last change (HACK, only works once to jump to the last location)
 nnoremap g; u<C-r>
-
-" last link in file
-exmap gotoLastLinkInFile jsfile Meta/vimrc-jsfile.js { gotoLastLinkInFile() }
-nnoremap g. :gotoLastLinkInFile<CR>
-
-" next/prev paragraph with link
-" (`zt<C-y><C-y>` so long lines are fully visible in the editor)
-exmap gotoNextLinkInFile jsfile Meta/vimrc-jsfile.js { gotoLineWithPattern("next", /\[\[/, "wrap") }
-nnoremap gj :gotoNextLinkInFile<CR>zt<C-y><C-y>
-exmap gotoPrevLinkInFile jsfile Meta/vimrc-jsfile.js { gotoLineWithPattern("prev", /\[\[/, "wrap") }
-nnoremap gk :gotoPrevLinkInFile<CR>zt<C-y><C-y>
-
-" Tasks
-exmap gotoNextTask jsfile Meta/vimrc-jsfile.js { gotoLineWithPattern("next", /- \[[x ]\]|TODO/, "wrap") }
-nnoremap gt :gotoNextTask<CR>
-exmap gotoPrevTask jsfile Meta/vimrc-jsfile.js { gotoLineWithPattern("prev", /- \[[x ]\]|TODO/, "wrap") }
-nnoremap gT :gotoPrevTask<CR>
 
 "───────────────────────────────────────────────────────────────────────────────
 " FILE-, TAB- AND WINDOW-NAVIGATION
@@ -160,19 +136,14 @@ exmap goForward obcommand app:go-forward
 noremap <BS> :goBack<CR>
 noremap <S-BS> :goForward<CR>
 
-" Close
-exmap closeWindow obcommand workspace:close-window
-nnoremap ZZ :closeWindow<CR>
-
 " Splits
 exmap splitVertical obcommand workspace:split-vertical
-noremap <C-w>v :splitVertical<CR>
 noremap <C-v> :splitVertical<CR>
 
 exmap closeOthers obcommand workspace:close-others
 nnoremap <C-w>o :closeOthers<CR>
 
-" Alt Buffer (emulates `:buffer #`)
+" Alt buffer (emulates `:buffer #`)
 exmap altBuffer obcommand grappling-hook:alternate-note
 noremap <CR> :altBuffer<CR>
 
@@ -190,8 +161,7 @@ nnoremap <Esc> :clearNotices<CR>:nohl<CR>
 exmap liveGrep obcommand obsidian-another-quick-switcher:grep
 noremap gl :liveGrep<CR>
 
-" same mappings as search-and-replace or variable renaming in nvim
-nnoremap ,v :%s///g
+" same mappings as search-and-replace nvim
 nnoremap ,rs :%s///g
 
 "───────────────────────────────────────────────────────────────────────────────
@@ -240,6 +210,8 @@ nnoremap ,ur 1000<C-r>
 " toggle lowercase/Capitalize
 exmap toggleLowercaseTitleCase jsfile Meta/vimrc-jsfile.js { toggleLowercaseTitleCase() }
 nnoremap < :toggleLowercaseTitleCase<CR>
+" uppercase word
+nnoremap > gUiw
 
 " do not move to the right on toggling case
 nnoremap ~ v~
@@ -270,20 +242,13 @@ nnoremap _ mzo<Esc>`z
 nnoremap + <C-a>
 nnoremap ü <C-x>
 
-" Markdown tasks
-exmap checkList obcommand editor:toggle-checklist-status
-nnoremap ,x :checkList<CR>
-
 " uncheck all Markdown tasks
 nnoremap ,X :%s/-<Space>\[x\]<Space>/-<Space>[<Space>]<Space>/<CR>
 
-" blockquote
-exmap toggleBlockquote obcommand editor:toggle-blockquote
-nnoremap ,< :toggleBlockquote<CR>
-
-" append dot/comma
+" append dot/comma/question mark
 nnoremap ,, mzA,<Esc>`z
 nnoremap ,. mzA.<Esc>`z
+nnoremap ,? mzA?<Esc>`z
 
 " hr
 exmap insertHr jscommand { editor.replaceSelection("\n---\n"); }
@@ -298,41 +263,27 @@ nunmap q
 exmap toggleComment jsfile Meta/vimrc-jsfile.js { toggleComment() }
 nnoremap qq :toggleComment<CR>
 
-" Proofreader accept/reject
-exmap acceptProofreadInText obcommand proofreader:accept-suggestions-in-text
-noremap ga :acceptProofreadInText<CR>
-exmap rejectNextProofread obcommand proofreader:reject-next-suggestion
-noremap gb :rejectNextProofread<CR>
-
 "───────────────────────────────────────────────────────────────────────────────
 " LEADER MAPPINGS
 
-" Enhance URL with title (same hotkey as [c]ode action in nvim)
+" enhance URL with title (same hotkey as [c]ode [a]ction in nvim)
 exmap enhanceUrlWithTitle obcommand obsidian-auto-link-title:enhance-url-with-title
-nnoremap ,cc :enhanceUrlWithTitle<CR>
+nnoremap ,ca :enhanceUrlWithTitle<CR>
 
-" Freeze interface
+" freeze interface
 exmap freezeInterface jsfile Meta/vimrc-jsfile.js { freezeInterface() }
 nnoremap ,if :freezeInterface<CR>
-
-" set "[r]ead: true" property
-exmap markAsRead obcommand quadro:mark-datafile-as-read
-nnoremap ,rr :markAsRead<CR>
-
-" set "[r]ead: true" property
-exmap switchQuotes jsfile Meta/vimrc-jsfile.js { switchQuotes() }
-nnoremap ,rq :switchQuotes<CR>
 
 " [i]nspect chrome [v]ersion
 exmap inspectChromeVersion jscommand { new Notice ('Chrome version: ' + process.versions.chrome.split('.')[0], 4000) }
 nnoremap ,iv :inspectChromeVersion<CR>
 
-" [i]nspect unresolved links & orphans
+" [i]nspect [u]nresolved links & orphans
 exmap inspectUnresolvedLinks jsfile Meta/vimrc-jsfile.js { inspectUnresolvedLinks() }
 nnoremap ,iu :inspectUnresolvedLinks<CR>
 
 "───────────────────────────────────────────────────────────────────────────────
-" META: PLUGIN- AND SETTING-RELATED BINDINGS
+" PLUGIN- AND SETTING-RELATED BINDINGS
 
 exmap updatePlugins jsfile Meta/vimrc-jsfile.js { updatePlugins() }
 nnoremap ,pp :updatePlugins<CR>
@@ -547,17 +498,9 @@ nnoremap zr :unfoldall<CR>
 exmap spellcheck obcommand editor:toggle-spellcheck
 nnoremap ,os :spellcheck<CR>
 
-" language syntax highlighting
-exmap toggleLanguageSyntaxHl obcommand nl-syntax-highlighting:toggle-enabled
-nnoremap ,ol :toggleLanguageSyntaxHl<CR>
-
 " [o]ption: [n]umbers
 exmap toggleLineNumbers jsfile Meta/vimrc-jsfile.js { toggleLineNumbers() }
 nnoremap ,on :toggleLineNumbers<CR>
-
-" [o]ption: [a]i-completion
-exmap toggleAiCompletion obcommand copilot-auto-completion:toggle
-nnoremap ,oa :toggleAiCompletion<CR>
 
 " [o]ption: [c]onceal
 exmap sourceModeLivePreview obcommand editor:toggle-source
@@ -572,11 +515,42 @@ exmap maxImageSize obcommand obsidian-style-settings:style-settings-class-toggle
 nnoremap ,oi :maxImageSize<CR>
 
 "───────────────────────────────────────────────────────────────────────────────
+" WRITING VAULT
 
-" <M-s> = cmd+s
-" normal mode: format
-exmap lint obcommand obsidian-linter:lint-file-unless-ignored
-nnoremap <M-s> :lint<CR>
+" Proofreader accept/reject
+exmap acceptProofreadInText obcommand proofreader:accept-suggestions-in-text
+noremap ga :acceptProofreadInText<CR>
+exmap rejectNextProofread obcommand proofreader:reject-next-suggestion
+noremap gb :rejectNextProofread<CR>
 
-" cmd+shift+s is mapped to accepting copilot
-" PENDING https://github.com/j0rd1smit/obsidian-copilot-auto-completion/issues/45
+" toggle natural language syntax highlighting
+exmap toggleLanguageSyntaxHl obcommand nl-syntax-highlighting:toggle-enabled
+nnoremap ,ol :toggleLanguageSyntaxHl<CR>
+
+" Goto Tasks
+exmap gotoNextTask jsfile Meta/vimrc-jsfile.js { gotoLineWithPattern("next", /- \[[x ]\]|TODO/, "wrap") }
+nnoremap gt :gotoNextTask<CR>
+exmap gotoPrevTask jsfile Meta/vimrc-jsfile.js { gotoLineWithPattern("prev", /- \[[x ]\]|TODO/, "wrap") }
+nnoremap gT :gotoPrevTask<CR>
+
+" [f]ootnotes (requires Footnotes Shortcut Plugin)
+exmap gotoFootnote obcommand obsidian-footnotes:insert-autonumbered-footnote
+nnoremap gf :gotoFootnote<CR>
+
+"───────────────────────────────────────────────────────────────────────────────
+" PHD VAULT
+
+" set "[r]ead: true" property
+exmap markAsRead obcommand quadro:mark-datafile-as-read
+nnoremap ,rr :markAsRead<CR>
+
+" goto last link in file
+exmap gotoLastLinkInFile jsfile Meta/vimrc-jsfile.js { gotoLastLinkInFile() }
+nnoremap g. :gotoLastLinkInFile<CR>
+
+" goto next/prev paragraph with link
+" (`zt<C-y><C-y>` so long lines are fully visible in the editor)
+exmap gotoNextLinkInFile jsfile Meta/vimrc-jsfile.js { gotoLineWithPattern("next", /\[\[/, "wrap") }
+nnoremap gj :gotoNextLinkInFile<CR>zt<C-y><C-y>
+exmap gotoPrevLinkInFile jsfile Meta/vimrc-jsfile.js { gotoLineWithPattern("prev", /\[\[/, "wrap") }
+nnoremap gk :gotoPrevLinkInFile<CR>zt<C-y><C-y>
