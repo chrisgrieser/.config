@@ -179,15 +179,15 @@ function cycleListTypes() {
 	const { line: lnum, ch: col } = editor.getCursor();
 	const curLine = editor.getLine(lnum);
 
-	const updatedLine = curLine.replace(/^(\s*)((?:>+|- \[[x ]\]|[-*+]|\d+[.)]) )?/, (_, indent, list) => {
-		if (!list) return indent + "- " // none -> list
-		if (list.match(/\d/)) return indent + "- "; // ordered -> list
-		if (list.match(/^[-*+](?! \[)/)) return indent + "- [ ] "; // list -> open task
-		if (list.startsWith("- [")) return indent +  "> "; // task -> blockquote
+	let updatedLine = curLine.replace(/^(\s*)([-*+>#.)[\]\d x]+) /, (_, indent, list) => {
+		if (list.match(/^[-*+](?! \[)/)) return indent + "1. "; // list -> ordered
+		if (list.match(/\d/)) return indent + "- [ ] "; // ordered -> open task
+		if (list.startsWith("- [")) return indent + "> "; // task -> blockquote
 		if (list.startsWith(">") && indent !== "") return indent + "- "; // indented: blockquote -> list
 		if (list.startsWith(">") && indent === "") return ""; // unindented: blockquote -> none
-		return "error";
+		return ""; // other like headings: remove
 	});
+	if (updatedLine === curLine) updatedLine = "- " + curLine; // none -> list
 
 	const diff = updatedLine.length - curLine.length;
 	editor.setLine(lnum, updatedLine);
