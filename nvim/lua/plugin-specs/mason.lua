@@ -7,7 +7,7 @@ local ensureInstalled = {
 		"css-lsp",
 		"efm", -- integration of external linter/formatter
 		"emmet-language-server", -- css/html snippets
-		-- "emmylua_ls", -- improved lua LSP, BUG disabled since LSP still has bugs
+		-- "emmylua_ls", -- improved lua LSP, disabled since LSP still has bugs
 		"harper-ls", -- natural language linter
 		"html-lsp",
 		"json-lsp",
@@ -143,7 +143,7 @@ return {
 		vim.env.npm_config_cache = vim.env.HOME .. "/.cache/npm" -- don't crowd $HOME with `/.npm`
 		require("mason").setup(opts)
 		enableLsps()
-		vim.defer_fn(syncPackages, 3000)
+		vim.defer_fn(syncPackages, 4000)
 	end,
 	opts = {
 		registries = {
