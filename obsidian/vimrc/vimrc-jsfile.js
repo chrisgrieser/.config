@@ -179,9 +179,14 @@ function cycleListTypes() {
 	const { line: lnum, ch: col } = editor.getCursor();
 	const curLine = editor.getLine(lnum);
 
-	const listChar = curLine.match(/^\s*- \[[x ]\] /) || // task
-
-	const updatedLine = curLine.match(/^\s*- /)
+	let updatedLine = curLine.replace(/^\s*((?:>+|- \[[x ]\]|[-*+]|\d+[.)]) )/, (_, list) => {
+		if (list.match(/\d/)) return "- "; // ordered -> list
+		if (list.match(/^[-*+](?! \[)/)) return "- [ ] "; // list -> open task
+		if (list.startsWith("- [")) return "> "; // task -> blockquote
+		if (list.startsWith(">")) return ""; // blockquote -> none
+		return "";
+	});
+	if (updatedLine === curLine) updatedLine = "- " + curLine; // none -> list
 
 	const diff = updatedLine.length - curLine.length;
 	editor.setLine(lnum, updatedLine);
@@ -192,22 +197,18 @@ function cycleListTypes() {
 function smartOpenLine(where) {
 	const lnum = editor.getCursor().line;
 	const curLine = editor.getLine(lnum);
-	let [indentAndText] = curLine.match(/^\s*>+ /) || // blockquote
-		curLine.match(/^\s*- \[[x ]\] /) || // task
-		curLine.match(/^\s*[-*+] /) || // unordered list
-		curLine.match(/^\s*\d+[.)] /) || // ordered list
-		curLine.match(/^\s*/) || [""]; // just indent
 
-	indentAndText = indentAndText
+	const [indentAndText] = curLine.match(/^\s*(>+|- \[[x ]\]|[-*+]|\d+[.)]) /) || [""];
+	const newPrefix = indentAndText
 		.replace(/\d+/, (n) => (Number.parseInt(n) + 1).toString()) // increment ordered list
 		.replace(/\[x\]/, "[ ]"); // new tasks should be open
 
 	const targetLine = where === "above" ? lnum : lnum + 1;
 	const atEndOfFile = editor.lastLine() === lnum && where === "below";
 	const extra = atEndOfFile ? "\n" : "";
-	editor.replaceRange(extra + indentAndText + "\n", { line: targetLine, ch: 0 });
+	editor.replaceRange(extra + newPrefix + "\n", { line: targetLine, ch: 0 });
 
-	editor.setCursor(targetLine, indentAndText.length);
+	editor.setCursor(targetLine, newPrefix.length);
 	activeWindow.CodeMirrorAdapter.Vim.enterInsertMode(editor.cm.cm); // = vim's `a`
 }
 
@@ -366,65 +367,6 @@ async function workspace(action, workspaceName) {
 
 //──────────────────────────────────────────────────────────────────────────────
 
-// biome-ignore format: keep hiragana table order
-/** @type {Record<string, string>} */
-const romajiToHiraganaMap = {
-	a  : "あ", i  : "い", u  : "う", e : "え", o : "お",
-	ka : "か", ki : "き", ku : "く", ke: "け", ko: "こ",
-	sa : "さ", shi: "し", su : "す", se: "せ", so: "そ",
-	ta : "た", chi: "ち", tsu: "つ", te: "て", to: "と",
-	na : "な", ni : "に", nu : "ぬ", ne: "ね", no: "の",
-	ha : "は", hi : "ひ", fu : "ふ", he: "へ", ho: "ほ",
-	ma : "ま", mi : "み", mu : "む", me: "め", mo: "も",
-	ya : "や",            yu : "ゆ",           yo: "よ",
-	ra : "ら", ri : "り", ru : "る", re: "れ", ro: "ろ",
-	wa : "わ",                                 wo: "を",
-	n  : "ん",
-	ga : "が", gi : "ぎ", gu : "ぐ", ge: "げ", go: "ご",
-	za : "ざ", ji : "じ", zu : "ず", ze: "ぜ", zo: "ぞ",
-	da : "だ",                       de: "で", do: "ど",
-	ba : "ば", bi : "び", bu : "ぶ", be: "べ", bo: "ぼ",
-	pa : "ぱ", pi : "ぴ", pu : "ぷ", pe: "ぺ", po: "ぽ",
-	kya: "きゃ", kyu: "きゅ", kyo: "きょ",
-	sha: "しゃ", shu: "しゅ", sho: "しょ",
-	cha: "ちゃ", chu: "ちゅ", cho: "ちょ",
-	nya: "にゃ", nyu: "にゅ", nyo: "にょ",
-	hya: "ひゃ", hyu: "ひゅ", hyo: "ひょ",
-	mya: "みゃ", myu: "みゅ", myo: "みょ",
-	rya: "りゃ", ryu: "りゅ", ryo: "りょ",
-	gya: "ぎゃ", gyu: "ぎゅ", gyo: "ぎょ",
-	ja : "じゃ", ju : "じゅ", jo : "じょ",
-	bya: "びゃ", byu: "びゅ", byo: "びょ",
-	pya: "ぴゃ", pyu: "ぴゅ", pyo: "ぴょ",
-};
-
-function hiraganafyCword() {
-	const cursor = editor.getCursor();
-	const { from, to } = editor.wordAt(cursor);
-	if (!from || !to) return;
-	const cword = editor.getRange(from, to);
-	if (!cword.match(/^\w+$/)) {
-		new Notice("Word under cursor must be in Romaji.");
-		return;
-	}
-
-	// CONVERSION
-	let hiragana = cword.toLowerCase();
-	hiragana = hiragana.replace(/([kstnhmyrwgzdbp])\1/, "っ$1"); // small tsu
-	// sort by length, to replace the longer romaji first
-	const romajiByLength = Object.keys(romajiToHiraganaMap).sort((a, b) => b.length - a.length);
-	for (const romaji of romajiByLength) {
-		hiragana = hiragana.replaceAll(romaji, romajiToHiraganaMap[romaji]);
-	}
-	editor.replaceRange(hiragana, from, to);
-
-	// move cursor to end of word
-	cursor.ch = to.ch - (cword.length - hiragana.length) - 1;
-	editor.setCursor(cursor);
-}
-
-//──────────────────────────────────────────────────────────────────────────────
-
 // CAVEAT slightly breaks `h` and `l` in tables
 function origamiH() {
 	const isAtBoL = editor.getCursor().ch === 0;
@@ -539,7 +481,7 @@ function toggleComment() {
 		updatedLine = isCommented
 			? line.slice(commentStr[0].length, -commentStr[1].length).trim()
 			: `${commentStr[0]} ${line} ${commentStr[1]}`;
-		columnShift = (commentStr[0].length + 1) * (isCommented ? -1 : 1)
+		columnShift = (commentStr[0].length + 1) * (isCommented ? -1 : 1);
 	}
 	editor.setLine(lnum, updatedLine);
 
