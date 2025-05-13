@@ -70,14 +70,19 @@ bkeymap("n", "<D-H>", function() headingsIncremantor(-1) end, { desc = " Decr
 --------------------------------------------------------------------------------
 
 -- cycle list types
-bkeymap("n", "<D-u>", function ()
+bkeymap("n", "<D-u>", function()
 	local lnum, col = unpack(vim.api.nvim_win_get_cursor(0))
 	local curLine = vim.api.nvim_get_current_line()
 
-	local updated = curLine:gsub("^(%s*)([%p%d]* )", function(indent, list)
-		if list:find("%d") then return indent .. "- " end -- ordered -> list
-		return ""
+	local updated = curLine:gsub("^(%s*)([%p%d x]* )", function(ind, l)
+		if l:find("[*+-] ") and not l:find("%- %[") then return ind .. "1. " end -- list -> ordered
+		if l:find("%d") then return ind .. "- [ ] " end -- ordered -> open task
+		if vim.startswith(l, "- [") then return ind .. "> " end -- task -> blockquote
+		if l:find(">") and ind ~= "" then return ind .. "- " end -- indented: blockquote -> list
+		if l:find(">") and ind == "" then return "" end -- unindented: blockquote -> none
+		return "error"
 	end)
+	if updated == curLine then updated = "- " .. curLine end -- none -> list
 
 	vim.api.nvim_set_current_line(updated)
 	local diff = #updated - #curLine
