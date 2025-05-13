@@ -1,15 +1,4 @@
 // DOCS https://github.com/esm7/obsidian-vimrc-support/blob/master/JsSnippets.md
-//──────────────────────────────────────────────────────────────────────────────
-
-function toggleLineNumbers() {
-	const vault = view.app.vault;
-	vault.setConfig("showLineNumber", !vault.getConfig("showLineNumber"));
-}
-
-function clearNotices() {
-	const allNotices = activeDocument.body.getElementsByClassName("notice");
-	for (const el of allNotices) el.hide();
-}
 
 function deleteLastChar() {
 	const cursor = editor.getCursor();
@@ -62,11 +51,6 @@ function openAppearanceSettings() {
 	// scroll fully down to access snippets more quickly
 	const container = setting.activeTab.containerEl;
 	container.scrollTop = container.scrollHeight;
-}
-
-function openCommunityPluginsSettings() {
-	
-	view.app.setting.openTabById("community-plugins");
 }
 
 function openDynamicHighlightsSettings() {
@@ -341,7 +325,7 @@ async function fixWordUnderCursor() {
 	}
 }
 
-/** Save/Load a workspace using the Workspaces Core Plugin.
+/** Save/load a workspace using the Workspaces Core Plugin.
  * Enables the plugin before, and disables it afterward.
  * @param {"load"|"save"} action
  * @param {string} workspaceName
@@ -420,7 +404,6 @@ function inspectUnresolvedLinks() {
 
 // biome-ignore lint/complexity/noExcessiveCognitiveComplexity: okay here
 function toggleComment() {
-	// CONFIG
 	/** @type {Record<string, string|string[]>} */
 	const commentChars = {
 		md: ["<!--", "-->"],
