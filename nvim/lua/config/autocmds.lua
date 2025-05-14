@@ -513,3 +513,54 @@ do
 		end,
 	})
 end
+
+--------------------------------------------------------------------------------
+
+function _G.quickfixText(info)
+	local list = info.quickfix == 1 -- qf or loclist
+			and vim.fn.getqflist { id = info.id, items = 1, qfbufnr = 1 }
+		or vim.fn.getloclist(info.winid, { id = info.id, items = 1, qfbufnr = 1 })
+
+	local lines = {}
+	local highlights = {}
+	for i, item in ipairs(list.items) do
+		if item.bufnr == 0 then
+			local line = "  " .. item.text
+			table.insert(highlights, { group = "qfText", line = i - 1, col = 0, end_col = #line })
+			table.insert(lines, line)
+		else
+			local prefix = " "
+			local type = "  "
+			if #item.type > 0 then type = item.type .. " " end
+			local lnum = "" .. item.lnum .. ": "
+			local text = item.text:match("^%s*(.-)%s*$") -- trim item.text
+			local col = 0
+			table.insert(
+				highlights,
+				{ group = "qfText", line = i - 1, col = col, end_col = col + #prefix }
+			)
+			col = col + #prefix
+			local typeHl = "qfText"
+			table.insert(
+				highlights,
+				{ group = typeHl, line = i - 1, col = col, end_col = col + #type }
+			)
+			col = col + #type
+			table.insert(
+				highlights,
+				{ group = "qfLineNr", line = i - 1, col = col, end_col = col + #lnum }
+			)
+			col = col + #lnum
+			table.insert(
+				highlights,
+				{ group = "qfText", line = i - 1, col = col, end_col = col + #text }
+			)
+			table.insert(lines, prefix .. type .. lnum .. text)
+		end
+	end
+
+	-- vim.schedule(function() apply_highlights(list.qfbufnr, highlights) end)
+	return lines
+end
+
+-- vim.opt.quickfixtextfunc = "v:lua.require'v:lua.quickfixText()'."
