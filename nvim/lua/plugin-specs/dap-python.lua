@@ -7,15 +7,8 @@ return {
 		{ "7", function() require("dap").continue() end, ft = "python", desc = " Continue (py)" },
 	},
 	config = function()
-		-- 1. use the `debugypy` installation by mason
-		-- 2. deactivate auto-opening the console by redirecting to internal console
-
-		-- TODO change to share dir, PENDING https://github.com/mason-org/mason-registry/issues/9981
-		local debugpyPythonPath = vim.env.MASON .. "/packages/debugpy/venv/bin/python3"
-		if not vim.uv.fs_stat(debugpyPythonPath) then
-			vim.notify("`debugpy` is not installed", vim.log.levels.WARN)
-			return
-		end
-		require("dap-python").setup(debugpyPythonPath, { console = "internalConsole" })
+		require("dap-python").setup("debugpy-adapter", {
+			console = "internalConsole", -- deactivate auto-opening the console by redirecting to internal console
+		})
 	end,
 }
