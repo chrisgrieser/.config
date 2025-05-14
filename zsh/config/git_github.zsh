@@ -73,9 +73,7 @@ function _stageAllIfNoStagedChanges {
 		print "\e[1;34mStaged all changes.\e[0m"
 }
 
-# - if there are no staged changes, stage all changes (`git add -A`) and then commit
-# - if the is clean after committing, pull-push
-function gg {
+function _smartCommit {
 	_stageAllIfNoStagedChanges
 
 	# without arg, just open in editor
@@ -85,6 +83,16 @@ function gg {
 	else
 		git commit --message "$@" || return 1
 	fi
+}
+
+function gc {
+	_smartCommit "$@"
+}
+
+# - if there are no staged changes, stage all changes (`git add -A`) and then commit
+# - if the is clean after committing, pull-push
+function gg {
+	_smartCommit "$@"
 
 	# GUARD do not pull/push if still dirty
 	if [[ -n "$(git status --porcelain)" ]]; then
@@ -103,18 +111,6 @@ function gg {
 	fi
 	# PUSH
 	printf "\e[1;34mPush:\e[0m " && git push --no-progress
-}
-
-function gc {
-	_stageAllIfNoStagedChanges
-
-	# without arg, just open in editor
-	printf "\e[1;34mCommit: \e[0m"
-	if [[ -z "$1" ]]; then
-		git commit || return 1
-	else
-		git commit --message "$@" || return 1
-	fi
 }
 
 #───────────────────────────────────────────────────────────────────────────────
@@ -219,7 +215,7 @@ function my_commits_today {
 	print "\e[1;38;5;245m───── \e[1;32mTotal: $count commits\e[1;38;5;245m ─────\e[0m"
 }
 
-#─────────────────────────────────────��─────────────────────────────────────────
+#───────────────────────────────────────────────────────────────────────────────
 # GIT LOG
 
 # uses `_gitlog` from `magic-dashboard.zsh`
@@ -338,10 +334,6 @@ function gdf {
 
 	local deleted_path deletion_commit last_commit
 	deleted_path=$(git log --diff-filter=D --name-only --format="" | grep --ignore-case "$search")
-
-	# FIX for whatever reason, without this, a lot of `zsh` processes all taking
-	# lots of CPU are accumulating
-	sleep 1
 
 	# TEST check for accumulating zsh processes bug
 	trap 'echo ; ps cAo "%cpu,command" | grep --color=never "zsh\|%CPU"' EXIT
