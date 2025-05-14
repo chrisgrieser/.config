@@ -516,51 +516,26 @@ end
 
 --------------------------------------------------------------------------------
 
-function _G.quickfixText(info)
-	local list = info.quickfix == 1 -- qf or loclist
-			and vim.fn.getqflist { id = info.id, items = 1, qfbufnr = 1 }
-		or vim.fn.getloclist(info.winid, { id = info.id, items = 1, qfbufnr = 1 })
+function _G.myQuickfixText(info)
+	if info.quickfix == 0 then return {} end -- for loclist, use default
 
-	local lines = {}
-	local highlights = {}
-	for i, item in ipairs(list.items) do
-		if item.bufnr == 0 then
-			local line = "  " .. item.text
-			table.insert(highlights, { group = "qfText", line = i - 1, col = 0, end_col = #line })
-			table.insert(lines, line)
-		else
-			local prefix = " "
-			local type = "  "
-			if #item.type > 0 then type = item.type .. " " end
-			local lnum = "" .. item.lnum .. ": "
-			local text = item.text:match("^%s*(.-)%s*$") -- trim item.text
-			local col = 0
-			table.insert(
-				highlights,
-				{ group = "qfText", line = i - 1, col = col, end_col = col + #prefix }
-			)
-			col = col + #prefix
-			local typeHl = "qfText"
-			table.insert(
-				highlights,
-				{ group = typeHl, line = i - 1, col = col, end_col = col + #type }
-			)
-			col = col + #type
-			table.insert(
-				highlights,
-				{ group = "qfLineNr", line = i - 1, col = col, end_col = col + #lnum }
-			)
-			col = col + #lnum
-			table.insert(
-				highlights,
-				{ group = "qfText", line = i - 1, col = col, end_col = col + #text }
-			)
-			table.insert(lines, prefix .. type .. lnum .. text)
-		end
+	local list = vim.fn.getqflist { id = info.id, items = true, qfbufnr = true }
+	local ns = vim.api.nvim_create_namespace("qflist")
+	local function highlight(ln, startCol, endCol, hlGroup)
+		vim.hl.range(list.qfbufnr, ns, hlGroup, { ln, startCol }, { ln, endCol })
 	end
 
-	-- vim.schedule(function() apply_highlights(list.qfbufnr, highlights) end)
+	local lines = {}
+	for ln, item in ipairs(list.items) do
+		local prefix = item.lnum .. ": "
+		table.insert(lines, prefix .. vim.trim(item.text))
+
+		vim.schedule(function()
+			highlight(ln - 1, 0, #prefix, "qfLineNr")
+			highlight(ln - 1, #prefix, -1, "qfText")
+		end)
+	end
+
 	return lines
 end
-
--- vim.opt.quickfixtextfunc = "v:lua.require'v:lua.quickfixText()'."
+vim.opt.quickfixtextfunc = "v:lua.myQuickfixText"
