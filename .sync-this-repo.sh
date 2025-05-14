@@ -20,7 +20,6 @@ fi
 # changed, the push will fail
 
 i=0
-sleep 1.5 # prevent "Cannot rebase on multiple branches"
 while true; do
 	git pull --no-progress && git push --no-progress && return 0
 	sleep 1
