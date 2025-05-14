@@ -1,4 +1,4 @@
--- DOCS https://github.com/nvim-lualine/lualine.nvim#default-configuration-----------------------------------------------------------------------------
+-- DOCS https://github.com/nvim-lualine/lualine.nvim#default-configuration
 
 ---Adds a component lualine was already set up. This enables lazy-loading
 ---plugins that add statusline components.
@@ -22,7 +22,7 @@ end
 ---brackets the number of references in the workspace (if that number is
 ---different from the references in the current file).
 local function countLspRefs()
-	local icon = "󰈿" -- CONFIG
+	local icon = "󰈿"
 
 	local client = vim.lsp.get_clients({ method = "textDocument/references", bufnr = 0 })[1]
 	if not client then return "" end
@@ -94,7 +94,7 @@ return {
 				{
 					"branch",
 					icon = "",
-					cond = function() -- only if not on main or master
+					cond = function() -- only if not on `main` or `master`
 						local curBranch = require("lualine.components.branch.git_branch").get_branch()
 						return curBranch ~= "main" and curBranch ~= "master"
 					end,
@@ -149,9 +149,8 @@ return {
 					-- only show component if LSP is active
 					cond = function()
 						if vim.g.lualine_lsp_active ~= nil then return vim.g.lualine_lsp_active end
-						vim.g.lualine_lsp_active = false
-						-- ^ so autocmd is only created once
 
+						vim.g.lualine_lsp_active = false -- so autocmd below is only created once
 						vim.api.nvim_create_autocmd("LspProgress", {
 							desc = "User: Hide LSP progress component after 2s",
 							callback = function()

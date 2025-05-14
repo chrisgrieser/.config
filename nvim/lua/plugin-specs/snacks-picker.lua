@@ -229,7 +229,7 @@ return {
 		{ "<leader>pc", function() Snacks.picker.colorschemes() end, desc = " Colorschemes" },
 		{ "<leader>ms", function() Snacks.picker.marks() end, desc = "󰃁 Select mark" },
 		{ "<leader>ut", function() Snacks.picker.undo() end, desc = "󰋚 Undo tree" },
-		{ "<leader>ql", function() Snacks.picker.qflist() end, desc = " Search qflist" },
+		{ "<leader>qq", function() Snacks.picker.qflist() end, desc = " Search qf-list" },
 		-- stylua: ignore
 		{ "<C-.>", function() Snacks.picker.icons() end, mode = { "n", "i" }, desc = "󱗿 Icon picker" },
 		{ "g.", function() Snacks.picker.resume() end, desc = "󰗲 Resume" },
@@ -429,7 +429,7 @@ return {
 				},
 			},
 			formatters = {
-				file = { filename_first = true, truncate = 70 },
+				file = { filename_first = true, truncate = 60 },
 				selected = { unselected = false }, -- don't show unselected
 			},
 			previewers = {

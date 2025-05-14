@@ -137,11 +137,6 @@ keymap("n", "gq", "<cmd>silent cnext<CR>zv", { desc = "󰴩 Next quickfix" })
 keymap("n", "gQ", "<cmd>silent cprev<CR>zv", { desc = "󰴩 Prev quickfix" })
 keymap("n", "<leader>qd", function() vim.cmd.cexpr("[]") end, { desc = "󰚃 Delete qf-list" })
 
-keymap("n", "<leader>qq", function()
-	local quickfixWinOpen = vim.fn.getqflist({ winid = true }).winid ~= 0
-	vim.cmd[quickfixWinOpen and "cclose" or "copen"]()
-end, { desc = " Toggle quickfix window" })
-
 --------------------------------------------------------------------------------
 -- FOLDING
 keymap("n", "zz", "<cmd>%foldclose<CR>", { desc = " Close toplevel folds" })
