@@ -47,6 +47,7 @@
 - [kylechui/nvim-surround](https://github.com/kylechui/nvim-surround)
 - [lewis6991/gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim)
 - [lewis6991/satellite.nvim](https://github.com/lewis6991/satellite.nvim)
+- [mason-org/mason.nvim](https://github.com/mason-org/mason.nvim)
 - [MeanderingProgrammer/render-markdown.nvim](https://github.com/MeanderingProgrammer/render-markdown.nvim)
 - [mfussenegger/nvim-dap](https://github.com/mfussenegger/nvim-dap)
 - [mfussenegger/nvim-dap-python](https://github.com/mfussenegger/nvim-dap-python)
@@ -64,4 +65,3 @@
 - [ThePrimeagen/refactoring.nvim](https://github.com/ThePrimeagen/refactoring.nvim)
 - [uga-rosa/ccc.nvim](https://github.com/uga-rosa/ccc.nvim)
 - [Wansmer/treesj](https://github.com/Wansmer/treesj)
-- [williamboman/mason.nvim](https://github.com/williamboman/mason.nvim)
