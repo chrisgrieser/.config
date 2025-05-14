@@ -22,7 +22,7 @@ end, { desc = " Remove quickfix entry" })
 --------------------------------------------------------------------------------
 
 function _G.myQuickfixText(info)
-	if info.quickfix == 0 then return {} end -- for loclist, use default
+	if info.quickfix == 0 then return {} end -- don't use loclist, so falling back to default there
 
 	local qf = vim.fn.getqflist { items = true, qfbufnr = true }
 	local ns = vim.api.nvim_create_namespace("qflist")

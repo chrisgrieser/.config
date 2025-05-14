@@ -589,7 +589,7 @@
 
 ## Mac App Store apps
 You might also be interested in [this workflow to search the Mac App
-Store](https://github.com/chrisgrieser/alfred-mac-app-store-search).
+Store](https://alfred.app/workflows/chrisgrieser/mac-app-store-search/).
 
 💡 You can set both of them to the same keyword to simultaneously search homebrew
 and the Mac App Store.
@@ -841,7 +841,7 @@ and the Mac App Store.
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.5.1</string>
+	<string>1.5.2</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
