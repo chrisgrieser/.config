@@ -515,27 +515,3 @@ do
 end
 
 --------------------------------------------------------------------------------
-
-function _G.myQuickfixText(info)
-	if info.quickfix == 0 then return {} end -- for loclist, use default
-
-	local list = vim.fn.getqflist { id = info.id, items = true, qfbufnr = true }
-	local ns = vim.api.nvim_create_namespace("qflist")
-	local function highlight(ln, startCol, endCol, hlGroup)
-		vim.hl.range(list.qfbufnr, ns, hlGroup, { ln, startCol }, { ln, endCol })
-	end
-
-	local lines = {}
-	for ln, item in ipairs(list.items) do
-		local prefix = item.lnum .. ": "
-		table.insert(lines, prefix .. vim.trim(item.text))
-
-		vim.schedule(function()
-			highlight(ln - 1, 0, #prefix, "qfLineNr")
-			highlight(ln - 1, #prefix, -1, "qfText")
-		end)
-	end
-
-	return lines
-end
-vim.opt.quickfixtextfunc = "v:lua.myQuickfixText"
