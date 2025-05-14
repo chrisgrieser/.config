@@ -57,7 +57,6 @@ local function betterFileOpen()
 
 	local currentFile = vim.api.nvim_buf_get_name(0)
 	Snacks.picker.files {
-
 		title = " " .. vim.fs.basename(vim.uv.cwd()),
 		-- exclude the current file
 		transform = function(item, _ctx)
@@ -430,7 +429,7 @@ return {
 			},
 			formatters = {
 				file = { filename_first = true, truncate = 60 },
-				selected = { unselected = false }, -- don't show unselected
+				selected = { unselected = false }, -- hide selection column when no selected items
 			},
 			previewers = {
 				diff = { builtin = false }, -- use `delta` automatically
