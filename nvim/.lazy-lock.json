@@ -1,5 +1,4 @@
 {
-  "alternative.nvim": { "branch": "main", "commit": "571e945c92f9e359af3264f66cb94a3a36f4c4a1" },
   "blink-cmp-git": { "branch": "master", "commit": "2c9fc84fcc440a7f8c89317b3583463cc4815a6a" },
   "blink.cmp": { "branch": "main", "commit": "022521a8910a5543b0251b21c9e1a1e989745796" },
   "ccc.nvim": { "branch": "main", "commit": "9d1a256e006decc574789dfc7d628ca11644d4c2" },
