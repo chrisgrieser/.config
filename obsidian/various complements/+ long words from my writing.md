@@ -247,7 +247,6 @@ heterogeneous
 historians
 historically
 hub-spoke-constellation
-hub-spoke-interdependence
 hub-spoke-shaped
 hypertrophy
 hypothesis
@@ -310,7 +309,6 @@ interchangeably
 interconnected
 interdependence
 interdependence-relationships
-interdependency
 interdependent
 interested
 interfaces
