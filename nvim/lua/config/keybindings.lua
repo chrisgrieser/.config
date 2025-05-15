@@ -89,20 +89,10 @@ keymap("n", "~", "v~", { desc = "󰬴 Toggle char case (w/o moving)" })
 keymap("n", "<", function() require("personal-plugins.misc").toggleTitleCase() end, { desc = "󰬴 Toggle lower/Title case" })
 keymap("n", ">", "gUiw", { desc = "󰬴 Uppercase cword" })
 
-local flag = true
-if flag then
-	print("hi")
-else
-	print("no")
-end
-
-local f
-if flag then
-  f = "one"
-else
-  f = "two"
-end
-
+-- Increment/decrement, or toggle true/false
+-- stylua: ignore
+keymap({ "n", "x" }, "+", function() require("personal-plugins.misc").toggleOrIncrement() end, { desc = "󰐖 Increment/toggle" })
+keymap({ "n", "x" }, "ü", "<C-x>", { desc = "󰍵 Decrement" })
 -- Delete trailing character
 keymap("n", "X", function()
 	local updatedLine = vim.api.nvim_get_current_line():gsub("%S%s*$", "")
