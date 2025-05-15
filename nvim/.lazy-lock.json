@@ -1,6 +1,6 @@
 {
   "blink-cmp-git": { "branch": "master", "commit": "2c9fc84fcc440a7f8c89317b3583463cc4815a6a" },
-  "blink.cmp": { "branch": "main", "commit": "54cbaac2064fe6198ec55b636b53cc8c9791ead3" },
+  "blink.cmp": { "branch": "main", "commit": "022521a8910a5543b0251b21c9e1a1e989745796" },
   "ccc.nvim": { "branch": "main", "commit": "9d1a256e006decc574789dfc7d628ca11644d4c2" },
   "codecompanion.nvim": { "branch": "main", "commit": "d19670a44c35e9ba0674cc7a25ff3b8f22bbf062" },
   "eyeliner.nvim": { "branch": "main", "commit": "8f197eb30cecdf4c2cc9988a5eecc6bc34c0c7d6" },
@@ -11,7 +11,7 @@
   "mason.nvim": { "branch": "main", "commit": "7c7318e8bae7e3536ef6b9e86b9e38e74f2e125e" },
   "mini.icons": { "branch": "main", "commit": "397ed3807e96b59709ef3292f0a3e253d5c1dc0a" },
   "mini.operators": { "branch": "main", "commit": "2df4df029be367adfc781a8a1b5e8067d2d979df" },
-  "neocodeium": { "branch": "main", "commit": "faed0a5d0478ca293e316a07d6179aa4c430669d" },
+  "neocodeium": { "branch": "main", "commit": "09267a754f4133b1e06e83da5d58ba455fac3b93" },
   "nightfox.nvim": { "branch": "main", "commit": "ba47d4b4c5ec308718641ba7402c143836f35aa9" },
   "nvim-chainsaw": { "branch": "main", "commit": "a854413cb5e4bd9d97e413e744eeeabc8635aae5" },
   "nvim-dap": { "branch": "master", "commit": "8df427aeba0a06c6577dc3ab82de3076964e3b8d" },
