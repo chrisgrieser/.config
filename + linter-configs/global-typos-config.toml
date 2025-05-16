@@ -1,0 +1,5 @@
+# PENDING https://github.com/crate-ci/typos/issues/316#issuecomment-2886204780
+
+# Custom ignore regex patterns: https://github.com/crate-ci/typos/blob/master/docs/reference.md#example-configurations
+[default]
+extend-ignore-re = ["typos:ignore-next-line[^\\n]*\\n[^\\n]*"]
