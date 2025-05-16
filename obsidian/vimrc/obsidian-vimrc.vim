@@ -537,6 +537,10 @@ nnoremap gT :gotoPrevTask<CR>
 exmap gotoFootnote obcommand obsidian-footnotes:insert-autonumbered-footnote
 nnoremap gf :gotoFootnote<CR>
 
+" [o]ption: [d]iagnostics
+exmap toggleHarper obcommand harper:harper-toggle-auto-lint
+nnoremap ,od :toggleHarper<CR>
+
 "───────────────────────────────────────────────────────────────────────────────
 " PHD VAULT
 
