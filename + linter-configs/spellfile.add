@@ -41,6 +41,7 @@ dropdown
 efm
 fixup
 fixups
+frontmatter
 hlgroup
 iA
 iCloud
@@ -50,6 +51,7 @@ javascript
 keymap
 lsp
 lua
+minimalistic
 nano
 nerdfont
 nvim
