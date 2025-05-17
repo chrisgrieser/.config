@@ -22,6 +22,7 @@ chatgpt.com###thread-bottom-container > div:last-child
 ! search
 duckduckgo.com##[data-testid="feedback-prompt"]
 duckduckgo.com##.footer > div
+duckduckgo.com##.header--aside__item--hidden-lg
 google.com###grepper_add_answer_button
 google.com###search > a.grepper_ad_holder:nth-child(2)
 
