@@ -26,6 +26,10 @@ alias j="just"
 alias ji='just init'
 alias jr='just release'
 
+#───────────────────────────────────────────────────────────────────────────────
+
+alias dsd='find "." -name ".DS_Store" -delete'
+
 function which { # colorized & showing all
 	builtin which -a "$@" | bat --language=sh --wrap=character
 }
@@ -47,7 +51,7 @@ alias -g C='| pbcopy ; echo "Copied."'
 alias P='pbpaste'
 
 # highlights for them
-ZSH_HIGHLIGHT_REGEXP+=(' G($| )' 'fg=magenta,bold')
+ZSH_HIGHLIGHT_REGEXP+=(' G$' 'fg=magenta,bold')
 ZSH_HIGHLIGHT_REGEXP+=(' C$' 'fg=magenta,bold')
 ZSH_HIGHLIGHT_REGEXP+=(' B$' 'fg=magenta,bold')
 ZSH_HIGHLIGHT_REGEXP+=(' N$' 'fg=magenta,bold')

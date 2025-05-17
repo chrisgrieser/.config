@@ -2,6 +2,7 @@
 title: App-specific bindings
 rules:
   #─────────────────────────────────────────────────────────────────────────────
+  # replaces "hide cursor" chrome extension https://chromewebstore.google.com/detail/hide-mouse-pointer/lbbedlldjinglbnfghakndfbagkolfdf
   - description: "j (Browser): also hides cursor for vimium plugin"
     manipulators:
       - type: basic
