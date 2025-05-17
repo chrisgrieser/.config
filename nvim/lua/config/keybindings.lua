@@ -239,7 +239,7 @@ for _, value in pairs(textobjRemaps) do
 	keymap({ "o", "x" }, "a" .. remap, "a" .. original, { desc = icon .. " outer " .. label })
 end
 
-keymap("o", "J", "2j") -- dd = 1 line, dj = 2 lines, `dJ` = 3 lines
+keymap("o", "J", "2j") -- `dd` = 1 line, `dj` = 2 lines, `dJ` = 3 lines
 keymap("n", "<Space>", '"_ciw', { desc = "󰬞 Change word" })
 keymap("x", "<Space>", '"_c', { desc = "󰒅 Change selection" })
 keymap("n", "<S-Space>", '"_daw', { desc = "󰬞 Delete word" })
