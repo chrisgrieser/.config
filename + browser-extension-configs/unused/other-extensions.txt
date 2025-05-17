@@ -6,3 +6,6 @@ https://chromewebstore.google.com/detail/stylus/clngdbkpkpeebahjckkjfobafhncgmne
 
 wasavi
 https://chromewebstore.google.com/detail/wasavi/dgogifpkoilgiofhhhodbodcfgomelhe
+
+hide mouse pointer
+https://chromewebstore.google.com/detail/hide-mouse-pointer/lbbedlldjinglbnfghakndfbagkolfdf
