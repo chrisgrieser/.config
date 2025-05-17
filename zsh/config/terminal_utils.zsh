@@ -7,8 +7,13 @@ alias export_mason_path='export PATH="$HOME/.local/share/nvim/mason/bin":$PATH'
 #───────────────────────────────────────────────────────────────────────────────
 
 function delete_empty_folders {
-	find . -type d -not -path "**/.git/**" -empty
-	find . -type d -not -path "**/.git/**" -empty -delete
+	find "." -type d -not -path "**/.git/**" -empty
+	find "." -type d -not -path "**/.git/**" -empty -delete
+}
+
+function delete_DS_Store {
+	find "." -name ".DS_Store"
+	find "." -name ".DS_Store" -delete
 }
 
 function cake {

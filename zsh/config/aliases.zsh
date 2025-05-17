@@ -28,8 +28,6 @@ alias jr='just release'
 
 #───────────────────────────────────────────────────────────────────────────────
 
-alias dsd='find "." -name ".DS_Store" -delete'
-
 function which { # colorized & showing all
 	builtin which -a "$@" | bat --language=sh --wrap=character
 }
