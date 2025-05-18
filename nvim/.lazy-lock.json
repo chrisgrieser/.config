@@ -11,7 +11,7 @@
   "mason.nvim": { "branch": "main", "commit": "888d6ee499d8089a3a4be4309d239d6be1c1e6c0" },
   "mini.icons": { "branch": "main", "commit": "397ed3807e96b59709ef3292f0a3e253d5c1dc0a" },
   "mini.operators": { "branch": "main", "commit": "2df4df029be367adfc781a8a1b5e8067d2d979df" },
-  "neocodeium": { "branch": "main", "commit": "21180c8937bec578ae19b42de88b072bc7d5729e" },
+  "neocodeium": { "branch": "main", "commit": "0cdda23a9186d80ad179f425cb891080a4c35c45" },
   "nightfox.nvim": { "branch": "main", "commit": "ba47d4b4c5ec308718641ba7402c143836f35aa9" },
   "nvim-chainsaw": { "branch": "main", "commit": "a854413cb5e4bd9d97e413e744eeeabc8635aae5" },
   "nvim-dap": { "branch": "master", "commit": "8df427aeba0a06c6577dc3ab82de3076964e3b8d" },
