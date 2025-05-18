@@ -16,10 +16,7 @@ function httpRequest(url) {
 	return $.NSString.alloc.initWithDataEncoding(requestData, $.NSUTF8StringEncoding).js;
 }
 
-/**
- * @param {string} isoDateStr string to be converted to a date
- * @return {string} relative date
- */
+/** @param {string} isoDateStr */
 function humanRelativeDate(isoDateStr) {
 	const deltaMins = (Date.now() - +new Date(isoDateStr)) / 1000 / 60;
 	/** @type {"year"|"month"|"week"|"day"|"hour"|"minute"} */
@@ -47,6 +44,13 @@ function humanRelativeDate(isoDateStr) {
 	const formatter = new Intl.RelativeTimeFormat("en", { style: "narrow", numeric: "auto" });
 	const str = formatter.format(-delta, unit);
 	return str.replace(/m(?= ago$)/, "min"); // "m" -> "min" (more distinguishable from "month")
+}
+
+/** @param {number} starcount */
+function shortNumber(starcount) {
+	const starStr = starcount.toString();
+	if (starcount < 2000) return starStr;
+	return starStr.slice(0, -3) + "k";
 }
 
 //──────────────────────────────────────────────────────────────────────────────
@@ -87,7 +91,7 @@ function run(argv) {
 
 			const subtitle = [
 				repo.owner.login,
-				"★ " + repo.stargazers_count,
+				"★ " + shortNumber(repo.stargazers_count),
 				lastUpdated,
 				repo.description,
 			]

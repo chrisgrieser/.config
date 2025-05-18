@@ -19,10 +19,7 @@ function httpRequestWithHeaders(url, header) {
 	return app.doShellScript(curlRequest);
 }
 
-/**
- * @param {string} isoDateStr string to be converted to a date
- * @return {string} relative date
- */
+/** @param {string} isoDateStr */
 function humanRelativeDate(isoDateStr) {
 	const deltaMins = (Date.now() - +new Date(isoDateStr)) / 1000 / 60;
 	/** @type {"year"|"month"|"week"|"day"|"hour"|"minute"} */

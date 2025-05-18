@@ -26,6 +26,13 @@ function httpRequestWithHeaders(url, header) {
 	return app.doShellScript(curlRequest);
 }
 
+/** @param {number} starcount */
+function shortNumber(starcount) {
+	const starStr = starcount.toString();
+	if (starcount < 2000) return starStr;
+	return starStr.slice(0, -3) + "k";
+}
+
 //──────────────────────────────────────────────────────────────────────────────
 
 /** @type {AlfredRun} */
@@ -81,7 +88,7 @@ function run() {
 			items: [{ title: "No response from GitHub.", subtitle: "Try again later.", valid: false }],
 		});
 	}
-	const parsedRepos = JSON.parse(response)
+	const parsedRepos = JSON.parse(response);
 	console.log("Repo count:", parsedRepos.length);
 
 	const repos = parsedRepos
@@ -124,7 +131,7 @@ function run() {
 			if (repo.is_template) matcher += "template ";
 			if (repo.private) type += "🔒 ";
 			if (repo.private) matcher += "private ";
-			if (repo.stargazers_count > 0) subtitle += `⭐ ${repo.stargazers_count}  `;
+			if (repo.stargazers_count > 0) subtitle += `⭐ ${shortNumber(repo.stargazers_count)}  `;
 			if (repo.open_issues > 0) subtitle += `🟢 ${repo.open_issues}  `;
 			if (repo.forks_count > 0) subtitle += `🍴 ${repo.forks_count}  `;
 			if (memberRepo) subtitle += `👤 ${repo.owner.login}  `;
