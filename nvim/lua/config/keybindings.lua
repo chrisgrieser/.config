@@ -37,7 +37,7 @@ keymap("n", "<C-l>", "<C-i>", { desc = "󱋿 Jump forward", unique = false })
 keymap("n", "-", "/")
 keymap("x", "-", "<Esc>/\\%V", { desc = " Search IN selection" })
 
--- Goto matching parenthesis (`remap` needed to use builtin `MatchIt` plugin)
+-- [g]oto [m]atching parenthesis (`remap` needed to use builtin `MatchIt` plugin)
 keymap("n", "gm", "%", { desc = "󰅪 Goto match", remap = true })
 
 -- Diagnostics
