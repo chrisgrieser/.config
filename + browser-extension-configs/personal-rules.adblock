@@ -1,6 +1,7 @@
 ! social media
 messenger.com##[aria-label="Inbox switcher"]
 messenger.com##[aria-label="Thread list"] > div > div:last-child
+whatsapp.com###side > div[role="button"] > div
 www.reddit.com###right-sidebar-container
 
 ! online services
