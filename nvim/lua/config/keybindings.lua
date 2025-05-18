@@ -380,8 +380,6 @@ keymap({ "n", "x", "i" }, "<D-w>", function()
 	local bufCount = #vim.fn.getbufinfo { buflisted = 1 }
 	if bufCount == 1 then
 		vim.notify("Only one buffer open.", vim.log.levels.TRACE)
-	elseif bufCount == 2 then
-		vim.cmd.bwipeout() -- prevents alt-buffer pointing to deleted buffer
 	else
 		vim.cmd.bdelete()
 	end
