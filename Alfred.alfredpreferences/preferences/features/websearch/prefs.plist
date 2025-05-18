@@ -114,6 +114,17 @@
 			<key>url</key>
 			<string>https://www.linguee.com/english-german/search?query={query}</string>
 		</dict>
+		<key>8EE37181-DD3F-4F34-A086-859FED6FB0C0</key>
+		<dict>
+			<key>enabled</key>
+			<true/>
+			<key>keyword</key>
+			<string>tv</string>
+			<key>text</key>
+			<string>tvtime: '{query}'</string>
+			<key>url</key>
+			<string>https://www.tvtime.com/discover/search?q={query}</string>
+		</dict>
 		<key>97974E2F-27A2-48E4-88F3-339C26BEDA6B</key>
 		<dict>
 			<key>enabled</key>
