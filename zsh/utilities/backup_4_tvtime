@@ -21,6 +21,7 @@ if [[ ! -x "$(command -v bun)" ]]; then
 	bun install
 	bun cli
 	brew uninstall oven-sh/bun/bun
+	brew untap oven-sh/bun
 else
 	bun install
 	bun cli
@@ -28,10 +29,10 @@ fi
 
 
 # move export
-mkdir -p "$bkp_destination"
 datestamp=$(date +"%Y-%m-%d")
 bkp_folder="$bkp_destination/tvtime_$datestamp"
 output_folder="$(find ".export" -type d -mindepth 1 | head -n1)"
-cp -r "$output_folder" "$bkp_folder"
+mkdir -p "$bkp_folder"
+mv -f "$output_folder"/* "$bkp_folder"
 open "$bkp_folder"
-# rm -rf "$repo_dir"
+rm -rf "$repo_dir"
