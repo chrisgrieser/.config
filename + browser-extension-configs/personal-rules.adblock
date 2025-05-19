@@ -14,9 +14,6 @@ amazon.de###spc-container
 
 ! development
 stackoverflow.com###announcement-banner
-github.com##.AppHeader-CopilotChat
-github.com##button[data-testid="copilot-ask-menu"]
-github.com##.react-code-size-details-in-header:last-child
 chatgpt.com##nav[aria-label="Chat history"] > div:last-child
 chatgpt.com###thread-bottom-container > div:last-child
 
