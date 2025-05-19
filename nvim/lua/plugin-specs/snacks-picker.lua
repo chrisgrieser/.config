@@ -127,12 +127,20 @@ return {
 						if type == "directory" then table.insert(acc, item) end
 						return acc
 					end)
-
-				vim.ui.select(projects, { prompt = " Select project: " }, function(project)
-					if not project then return end
+				local function browse(project)
 					local path = vim.fs.joinpath(vim.g.localRepos, project)
 					Snacks.picker.files { title = " " .. project, cwd = path }
-				end)
+				end
+
+				if #projects == 0 then
+					vim.notify("No projects found.", vim.log.levels.WARN)
+				elseif #projects == 1 then
+					browse(projects[1])
+				else
+					vim.ui.select(projects, { prompt = " Select project" }, function(project)
+						if project then browse(project) end
+					end)
+				end
 			end,
 			desc = " Project",
 		},
