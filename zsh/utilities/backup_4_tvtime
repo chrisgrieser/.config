@@ -1,0 +1,20 @@
+#!/usr/bin/env zsh
+
+# CONFIG
+envfile_with_login="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/private dotfiles/tvtime-liberator.env"
+bkp_destination="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Backups/watchlist/"
+
+#───────────────────────────────────────────────────────────────────────────────
+repo="https://github.com/Hobo-Ware/tv-time-liberator"
+
+brew install oven-sh/bun/bun
+
+cd /tmp/ || return 1
+git clone --no-progress --depth=2 "$repo"
+exporter_dir="$(basename "$1" .git)"
+cd "tv-time-liberator" || return 1
+ln -s "$envfile_with_login" ".env"
+
+#───────────────────────────────────────────────────────────────────────────────
+
+brew uninstall oven-sh/bun/bun
