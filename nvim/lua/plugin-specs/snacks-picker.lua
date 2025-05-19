@@ -73,6 +73,29 @@ local function betterFileOpen()
 	}
 end
 
+local function browseProject()
+	local projectsFolder = vim.g.localRepos -- CONFIG
+
+	local function browse(project)
+		local path = vim.fs.joinpath(projectsFolder, project)
+		Snacks.picker.files { title = " " .. project, cwd = path }
+	end
+	local projects = vim.iter(vim.fs.dir(projectsFolder)):fold({}, function(acc, item, type)
+		if type == "directory" then table.insert(acc, item) end
+		return acc
+	end)
+
+	if #projects == 0 then
+		vim.notify("No projects found.", vim.log.levels.WARN)
+	elseif #projects == 1 then
+		browse(projects[1])
+	else
+		vim.ui.select(projects, { prompt = " Select project" }, function(project)
+			if project then browse(project) end
+		end)
+	end
+end
+
 --------------------------------------------------------------------------------
 
 return {
@@ -80,6 +103,7 @@ return {
 	keys = {
 		-- FILES
 		{ "go", betterFileOpen, desc = " Open files" },
+		{ "gP", browseProject, desc = " Project" },
 		{ "gt", function() Snacks.picker.explorer() end, desc = "󰙅 File tree" },
 		{
 			"gr",
@@ -118,31 +142,6 @@ return {
 				}
 			end,
 			desc = "󰈮 Local plugins",
-		},
-		{
-			"gP",
-			function()
-				local projects = vim.iter(vim.fs.dir(vim.g.localRepos))
-					:fold({}, function(acc, item, type)
-						if type == "directory" then table.insert(acc, item) end
-						return acc
-					end)
-				local function browse(project)
-					local path = vim.fs.joinpath(vim.g.localRepos, project)
-					Snacks.picker.files { title = " " .. project, cwd = path }
-				end
-
-				if #projects == 0 then
-					vim.notify("No projects found.", vim.log.levels.WARN)
-				elseif #projects == 1 then
-					browse(projects[1])
-				else
-					vim.ui.select(projects, { prompt = " Select project" }, function(project)
-						if project then browse(project) end
-					end)
-				end
-			end,
-			desc = " Project",
 		},
 
 		--------------------------------------------------------------------------

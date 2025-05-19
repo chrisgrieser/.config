@@ -22,6 +22,7 @@ return {
 					-- (no loss of diagnostic, `unused-local` still informs about these functions)
 					"unused-function",
 				},
+				globals = { "vim" } -- when working on nvim plugins that lack a `.luarc.json`
 			},
 			hint = { -- inlay hints
 				enable = not emmyluaInUse,
@@ -32,8 +33,6 @@ return {
 			format = {
 				enable = false, -- using `stylua` instead
 			},
-			-- FIX https://github.com/sumneko/lua-language-server/issues/679#issuecomment-925524834
-			-- workspace = { checkThirdParty = "Disable" },
 		},
 	},
 	on_attach = function(client)
