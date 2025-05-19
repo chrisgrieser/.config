@@ -4,6 +4,9 @@ return {
 		vim.g.whichkeyAddSpec { "<leader>f", group = "󰈔 File" }
 		vim.g.whichkeyAddSpec { "<leader>y", group = "󰅍 Yank" }
 	end,
+	opts = {
+		navigation = { onlySameExtAsCurrentFile = true },
+	},
 	keys = {
 		-- stylua: ignore start
 		{"<leader>ya", function() require("genghis").copyFilepathWithTilde() end, desc = "󰝰 Absolute path" },
