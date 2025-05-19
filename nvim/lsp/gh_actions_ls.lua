@@ -1,3 +1,6 @@
+-- PENDING https://github.com/neovim/nvim-lspconfig/pull/3857
+--------------------------------------------------------------------------------
+
 return {
 	cmd = { "gh-actions-language-server", "--stdio" },
 	filetypes = { "yaml" },
