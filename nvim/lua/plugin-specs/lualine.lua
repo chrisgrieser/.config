@@ -46,7 +46,7 @@ local function countLspRefs()
 			local refsInFile = vim.iter(refs)
 				:filter(function(r) return thisFile == r.uri end)
 				:totable()
-			local inFile, inWorkspace = #refsInFile - 1, #refs - 1 -- -1 for current occurrence
+			local inFile, inWorkspace = #refsInFile, #refs
 			local text = inFile == inWorkspace and inFile or (inFile .. "(" .. inWorkspace .. ")")
 
 			vim.b.lspReference_count = inWorkspace > 0 and vim.trim(icon .. " " .. text) or nil
