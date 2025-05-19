@@ -148,7 +148,6 @@ vim.opt.fillchars:append {
 -- FOLDING
 vim.opt.foldlevel = 99 -- do not auto-fold
 vim.opt.foldlevelstart = 99
-vim.opt.foldtext = "" -- empty string keeps text (overwritten by nvim-origami)
 
 -- fold with LSP/Treesitter
 do
