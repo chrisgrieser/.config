@@ -8,7 +8,7 @@ return {
 	cmd = "NeoCodeium",
 	opts = {
 		silent = true,
-		show_label = false, -- signcolumn label for number of suggestions
+		show_label = true, -- signcolumn label for number of suggestions
 		filetypes = {
 			bib = false,
 			text = false, -- `pass` passwords editing ft (extra safeguard)
@@ -28,10 +28,8 @@ return {
 	config = function(_, opts)
 		require("neocodeium").setup(opts)
 
-		-- lualine indicator
 		vim.g.lualineAdd("sections", "lualine_x", function()
-			-- don't need info that it's disabled during a recording
-			if vim.fn.reg_recording() ~= "" then return "" end
+			if vim.fn.reg_recording() ~= "" then return "" end -- not needed since disabled when recording
 
 			-- number meanings: https://github.com/monkoose/neocodeium#-statusline
 			local status, server = require("neocodeium").get_status()
@@ -45,12 +43,27 @@ return {
 		end, "before")
 	end,
 	keys = {
-		-- stylua: ignore start
-		{ "<D-s>", function() require("neocodeium").accept() end, mode = "i", desc = "󰚩 Accept full suggestion" },
-		-- since accepting autocomplete in Obsidian is done via cmd-shift-s
-		{ "<D-S>", function() require("neocodeium").accept() end, mode = "i", desc = "󰚩 Accept full suggestion" },
-		{ "<D-d>", function() require("neocodeium").cycle_or_complete(1) end, mode = "i", desc = "󰚩 Show/next suggestion" },
-		-- stylua: ignore end
+		{
+			"<D-s>",
+			function() require("neocodeium").accept() end,
+			mode = "i",
+			desc = "󰚩 Accept full suggestion",
+		},
+		{
+			"<D-d>",
+			function() require("neocodeium").cycle_or_complete(1) end,
+			mode = "i",
+			desc = "󰚩 Show/next suggestion",
+		},
 		{ "<leader>oa", function() vim.cmd.NeoCodeium("toggle") end, desc = "󰚩 NeoCodeium" },
+		{ "<leader>ac", function() vim.cmd.NeoCodeium("chat") end, desc = "󰚩 Windsurf chat" },
+		{
+			"<leader>ar",
+			function()
+				vim.notify("Restarting NeoCodium…")
+				vim.cmd.NeoCodeium("restart")
+			end,
+			desc = "󰚩 Restart NeoCodeium",
+		},
 	},
 }
