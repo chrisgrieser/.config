@@ -35,14 +35,7 @@ rules:
           - shell_command: |
               export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
               spotify_player playback play-pause && exit 0
-
-              if scutil --get ComputerName | grep -q "Office"; then
-                if ! pgrep -qx spotifyd; then spotifyd; sleep 0.5; fi
-                device="spotifyd"
-              else
-                device="Wohnzimmer Echo"
-              fi
-              spotify_player connect --name "$device"
+              spotify_player connect --name "Wohnzimmer Echo"
               spotify_player playback play
 
       - type: basic
