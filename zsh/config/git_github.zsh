@@ -156,6 +156,7 @@ function gM {
 
 function pr {
 	git push
+	sleep 1 # needed for GitHub to register the new commit
 	local url
 	url=$(git remote --verbose | head -n1 | cut -f2 | cut -d' ' -f1 |
 		sed -Ee 's|git@github.com:|https://github.com/|' -Ee 's|\.git$||')
