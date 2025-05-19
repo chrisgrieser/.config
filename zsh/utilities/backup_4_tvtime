@@ -5,16 +5,33 @@ envfile_with_login="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder
 bkp_destination="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Backups/watchlist/"
 
 #───────────────────────────────────────────────────────────────────────────────
+set -e
+
+# clone
 repo="https://github.com/Hobo-Ware/tv-time-liberator"
-
-brew install oven-sh/bun/bun
-
-cd /tmp/ || return 1
-git clone --no-progress --depth=2 "$repo"
-exporter_dir="$(basename "$1" .git)"
-cd "tv-time-liberator" || return 1
+repo_dir="/tmp/$(basename "$repo" .git)"
+rm -rf "$repo_dir"
+git clone --no-progress --depth=2 "$repo" "$repo_dir"
+cd "$repo_dir"
 ln -s "$envfile_with_login" ".env"
 
-#───────────────────────────────────────────────────────────────────────────────
+# bun
+if [[ ! -x "$(command -v bun)" ]]; then
+	brew install oven-sh/bun/bun
+	bun install
+	bun cli
+	brew uninstall oven-sh/bun/bun
+else
+	bun install
+	bun cli
+fi
 
-brew uninstall oven-sh/bun/bun
+
+# move export
+mkdir -p "$bkp_destination"
+datestamp=$(date +"%Y-%m-%d")
+bkp_folder="$bkp_destination/tvtime_$datestamp"
+output_folder="$(find ".export" -type d -mindepth 1 | head -n1)"
+cp -r "$output_folder" "$bkp_folder"
+open "$bkp_folder"
+# rm -rf "$repo_dir"
