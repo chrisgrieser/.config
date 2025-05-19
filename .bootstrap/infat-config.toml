@@ -19,6 +19,7 @@ magnet = "Transmission"
 
 [extensions]
 txt = "TextEdit"
+env = "TextEdit"
 svg = "neovide"
 jsonc = "neovide"
 adblock = "neovide"

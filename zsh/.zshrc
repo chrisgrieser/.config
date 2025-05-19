@@ -22,3 +22,6 @@ for filename in "${CONFIG_FILES[@]}"; do
 	# shellcheck disable=1090
 	source "$ZDOTDIR/config/$filename.zsh"
 done
+
+# bun completions
+[ -s "/Users/chrisgrieser/.bun/_bun" ] && source "/Users/chrisgrieser/.bun/_bun"

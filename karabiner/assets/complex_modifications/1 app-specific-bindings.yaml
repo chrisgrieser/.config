@@ -60,6 +60,7 @@ rules:
                 end tell'
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [com.microsoft.Word] }]
   #─────────────────────────────────────────────────────────────────────────────
+  # alternative to https://www.alfredforum.com/topic/23110-file-please-go-to-file/
   - description: "cmd+l: Reveal in Finder"
     manipulators:
       - type: basic
