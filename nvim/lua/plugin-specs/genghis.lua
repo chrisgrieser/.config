@@ -5,7 +5,10 @@ return {
 		vim.g.whichkeyAddSpec { "<leader>y", group = "󰅍 Yank" }
 	end,
 	opts = {
-		navigation = { onlySameExtAsCurrentFile = true },
+		navigation = {
+			onlySameExtAsCurrentFile = true,
+			ignoreDotfiles = true,
+		},
 	},
 	keys = {
 		-- stylua: ignore start
