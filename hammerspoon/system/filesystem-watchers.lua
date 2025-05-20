@@ -88,14 +88,9 @@ M.pathw_desktop = pathw(home .. "/Desktop/", function(paths, _)
 				hs.open(gameFolder)
 				hs.open(home .. "/Library/Application Support/Steam/steamapps/common")
 			end
-		end
-
-		if success == false then
-			u.notify(("⚠️ Failed to move: %q; %s"):format(name, errmsg or ""))
-		end
 
 		-- AUTO-INSTALL OBSIDIAN ALPHA
-		if name:find("%.asar%.gz$") and isDownloaded then
+		elseif name:find("%.asar%.gz$") and isDownloaded then
 			hs.execute(([[
 				cd %q || exit 1
 				mv obsidian-*.*.*.asar.gz "$HOME/Library/Application Support/obsidian/"
@@ -107,6 +102,12 @@ M.pathw_desktop = pathw(home .. "/Desktop/", function(paths, _)
 				open -a "Obsidian"
 			]]):format(home .. "/Desktop/"))
 			u.closeBrowserTabsWith("https://cdn.discordapp.com/attachments")
+		end
+
+		--------------------------------------------------------------------------
+		-- NOTIFY
+		if success == false then
+			u.notify(("⚠️ Failed to move: %q; %s"):format(name, errmsg or ""))
 		end
 	end
 end):start()
