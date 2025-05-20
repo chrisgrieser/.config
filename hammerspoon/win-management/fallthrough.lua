@@ -30,7 +30,7 @@ end
 --------------------------------------------------------------------------------
 
 local function fallthroughOnNoWin()
-	u.defer(0.1, function() -- deferring to ensure windows are already switched/created
+	u.defer({ 0.1, 0.5 }, function() -- deferring to ensure windows are already switched/created
 		local frontApp = hs.application.frontmostApplication()
 		local fallthroughIsFront = hs.fnutils.contains(fallthroughWhenNoWin, frontApp:name())
 		local noWins = #(frontApp:allWindows()) == 0
