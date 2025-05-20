@@ -1,6 +1,6 @@
 {
     "createdBy": "Redirector v3.5.3",
-    "createdAt": "2025-04-02T10:06:37.159Z",
+    "createdAt": "2025-05-20T10:15:00.699Z",
     "redirects": [
         {
             "description": "Netflix redirect from \"Home\" to \"TV Shows\"",
@@ -45,6 +45,23 @@
             "excludePattern": "",
             "patternDesc": "",
             "redirectUrl": "https://xcancel.com/$1",
+            "patternType": "R",
+            "processMatches": "noProcessing",
+            "disabled": false,
+            "grouped": false,
+            "appliesTo": [
+                "main_frame"
+            ]
+        },
+        {
+            "description": "Google Lucky Redirect",
+            "exampleUrl": "https://www.google.com/url?q=https://www.tvtime.com/",
+            "exampleResult": "https://www.tvtime.com/",
+            "error": null,
+            "includePattern": "https:\\/\\/www.google.com\\/url\\?q=(.*)",
+            "excludePattern": "",
+            "patternDesc": "",
+            "redirectUrl": "$1",
             "patternType": "R",
             "processMatches": "noProcessing",
             "disabled": false,

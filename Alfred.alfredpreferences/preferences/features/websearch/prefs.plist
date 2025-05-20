@@ -59,17 +59,6 @@
 			<key>url</key>
 			<string>https://tenor.com/search/{query}-gifs</string>
 		</dict>
-		<key>4837815E-67BB-42EA-AEAB-4D0FAB8C20C1</key>
-		<dict>
-			<key>enabled</key>
-			<true/>
-			<key>keyword</key>
-			<string>ducky</string>
-			<key>text</key>
-			<string>🍀 Lucky</string>
-			<key>url</key>
-			<string>https://duckduckgo.com/?q={query}+!ducky</string>
-		</dict>
 		<key>4B503F11-129C-4B20-9C7A-1EA272592316</key>
 		<dict>
 			<key>enabled</key>
@@ -236,7 +225,5 @@
 			<string>https://duckduckgo.com/?q={query}&amp;iar=images</string>
 		</dict>
 	</dict>
-	<key>onlyShowEnabledInPrefs</key>
-	<true/>
 </dict>
 </plist>
