@@ -68,7 +68,7 @@
 			<key>text</key>
 			<string>🍀 Lucky</string>
 			<key>url</key>
-			<string>https://duckduckgo.com/?q={query}+!ducky&amp;kl=$region</string>
+			<string>https://duckduckgo.com/?q={query}+!ducky</string>
 		</dict>
 		<key>4B503F11-129C-4B20-9C7A-1EA272592316</key>
 		<dict>
