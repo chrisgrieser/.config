@@ -540,7 +540,7 @@
 			<key>config</key>
 			<dict>
 				<key>text</key>
-				<string>DuckDuckGo: "{query}"</string>
+				<string>DuckDuckGo: '{query}'</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.trigger.fallback</string>
