@@ -58,17 +58,18 @@ async function run() {
 		.filter((/** @type {{ path: string; }} */ item) => item.path.match(/en\/.*\.md/))
 		.map((/** @type {{ path: string; }} */ item) => item.path);
 
-	for (const path of officialDocs) {
+	for (let path of officialDocs) {
+		const docUrl = rawGitHubUrlRoot + encodeURI(path);
+		path = path.replace(/^en\/|\.md$/g, "");
+
 		const parts = path.split("/");
-		const title = parts.pop().slice(0, -3);
+		const title = parts.pop();
 		const area = parts.join("/");
 		console.info("Indexing: ", title);
 
-		const docUrl = rawGitHubUrlRoot + encodeURI(path);
 		const rawText = await getGithubFileRaw(docUrl);
-		const permalink =
-			rawText.match(/^permalink: (.*)/m)?.[1] || path.slice(3, -3).replaceAll(" ", "+");
-		const url = officialDocsURL + permalink;
+		const permalink = rawText.match(/^permalink: (.*)/m)?.[1] || path.replaceAll(" ", "+");
+		const siteUrl = officialDocsURL + permalink;
 
 		docsPages.push({
 			title: title,
@@ -77,9 +78,9 @@ async function run() {
 			mods: {
 				cmd: { arg: title }, // copy entry
 			},
-			uid: url,
-			arg: url,
-			quicklookurl: url,
+			uid: siteUrl,
+			arg: siteUrl,
+			quicklookurl: siteUrl,
 		});
 
 		// HEADINGS
@@ -87,19 +88,19 @@ async function run() {
 
 		for (const headingLine of docTextLines) {
 			const headerName = headingLine.replace(/^#+ /, "");
-			const area = path.slice(3, -3);
+			const headingUrl = siteUrl + "#" + headerName.replaceAll(" ", "+");
+			const displayHeader = headerName.replaceAll("`", ""); // inline code in headings
 
-			const url = officialDocsURL + (path.slice(3) + "#" + headerName).replaceAll(" ", "+");
 			docsPages.push({
-				title: headerName,
-				subtitle: area,
-				uid: url,
+				title: displayHeader,
+				subtitle: path,
+				uid: headingUrl,
 				match: alfredMatcher(headerName) + alfredMatcher(title) + alfredMatcher(area),
 				mods: {
 					cmd: { arg: headerName }, // copy entry
 				},
-				arg: url,
-				quicklookurl: url,
+				arg: headingUrl,
+				quicklookurl: headingUrl,
 			});
 		}
 	}
