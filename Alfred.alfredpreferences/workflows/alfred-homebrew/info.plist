@@ -122,7 +122,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>CFA88D9F-D566-43E2-A3B6-377B032BC133</string>
+				<string>EDA21286-4E28-4304-A9DB-0BA74AB2C370</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -136,7 +136,7 @@
 				<key>modifiers</key>
 				<integer>1048576</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Open website</string>
+				<string>⌘: Open package's homepage</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -157,19 +157,6 @@
 				<integer>131072</integer>
 				<key>modifiersubtext</key>
 				<string>⇧: brew info</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>CFA88D9F-D566-43E2-A3B6-377B032BC133</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>EDA21286-4E28-4304-A9DB-0BA74AB2C370</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -242,29 +229,12 @@
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>script</key>
-				<string>{query}</string>
+				<string>brew install {query}</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.terminalcommand</string>
 			<key>uid</key>
 			<string>EDA21286-4E28-4304-A9DB-0BA74AB2C370</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argument</key>
-				<string>brew install {query}</string>
-				<key>passthroughargument</key>
-				<false/>
-				<key>variables</key>
-				<dict/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>CFA88D9F-D566-43E2-A3B6-377B032BC133</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -675,15 +645,6 @@ and the Mac App Store.
 			<real>425</real>
 			<key>ypos</key>
 			<real>510</real>
-		</dict>
-		<key>CFA88D9F-D566-43E2-A3B6-377B032BC133</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>xpos</key>
-			<real>330</real>
-			<key>ypos</key>
-			<real>45</real>
 		</dict>
 		<key>EDA21286-4E28-4304-A9DB-0BA74AB2C370</key>
 		<dict>
