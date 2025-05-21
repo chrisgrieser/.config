@@ -59,7 +59,7 @@ function httpRequest(url) {
  * @property {string} desc
  * @property {string} homepage
  * @property {boolean} deprecated
- * @property {boolean} installed
+ * @property {{installed_as_dependency: boolean, installed_on_request: boolean}[]} installed
  * @property {string[]} dependencies
  */
 
@@ -68,7 +68,7 @@ function httpRequest(url) {
  * @property {string} desc
  * @property {string} homepage
  * @property {boolean} deprecated
- * @property {boolean} installed
+ * @property {{installed_as_dependency: boolean, installed_on_request: boolean}[]} installed
  */
 
 //──────────────────────────────────────────────────────────────────────────────
@@ -151,8 +151,14 @@ function run() {
 	/** @type{AlfredItem&{downloads:number}[]} */
 	const formulas = formulaData.map((/** @type {Formula} */ formula) => {
 		const name = formula.name;
+		if (name === "bat") {
+			console.log("🪚 formula:", JSON.stringify(formula, null, 2))
+		}
 		let icons = "";
-		if (formula.installed) icons += " " + installedIcon;
+		const installed = formula.installed.some(
+			(f) => f.installed_on_request || f.installed_as_dependency,
+		);
+		if (installed) icons += " " + installedIcon;
 		if (formula.deprecated) icons += `   ${deprecatedIcon}deprecated`;
 
 		const downloads = formulaDownloads[name] ? `${formulaDownloads[name][0].count}↓` : "";
