@@ -1,14 +1,12 @@
 // SOURCE https://forum.obsidian.md/t/make-obsidian-a-default-app-for-markdown-files-on-macos/22260
+//──────────────────────────────────────────────────────────────────────────────
+
+// CONFIG default markdown app, if markdown file is not located in a Vault
+const markdownApp = "Neovide";
 
 //──────────────────────────────────────────────────────────────────────────────
 
-
-// CONFIG: default markdown app, if markdown file is not located in a Vault
-const markdownApp = "Neovide";
-
-
 /** @param {PathObj[]} argv input for automator is an array of macOS path objects. */
-// biome-ignore lint/correctness/noUnusedVariables: <explanation>
 function run(argv) {
 	const app = Application.currentApplication();
 	app.includeStandardAdditions = true;
@@ -35,7 +33,7 @@ function run(argv) {
 	const obsidianIsFrontmost = Application("Obsidian").frontmost();
 	const isInHiddenFolder = firstFile.includes("/.");
 
-	// Hidden Folder means '.obsidian' or '.trash', which cannot be opened in Obsidian
+	// Hidden folder means '.obsidian' or '.trash', which cannot be opened in Obsidian
 	// When Obsidian is frontmost, it means the "Open in default app" command was
 	// used, for which we also do not open right in Obsidian again
 	const openInObsidian = isFileInObsidianVault && !isInHiddenFolder && !obsidianIsFrontmost;
