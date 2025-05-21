@@ -8,11 +8,9 @@ const alfredMatcher = (/** @type {string} */ str) => str.replaceAll("-", " ") + 
 
 //──────────────────────────────────────────────────────────────────────────────
 
-/** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
-function run(argv) {
-	const isBrewReinstall = Boolean(argv[0]);
-	const includeMacAppStoreSetting = $.getenv("list_mac_app_store") === "1" && !isBrewReinstall;
+function run() {
+	const includeMacAppStoreSetting = $.getenv("list_mac_app_store") === "1";
 	const useZap = $.getenv("use_zap") === "1";
 
 	/** @type{AlfredItem[]} */
@@ -49,8 +47,7 @@ function run(argv) {
 
 	const allApps = [...formulas, ...casks];
 
-	if (!isBrewReinstall && includeMacAppStoreSetting) {
-		/** @type{AlfredItem[]} */
+	if (includeMacAppStoreSetting) {
 		const appStoreApps = app
 			.doShellScript("mdfind kMDItemAppStoreHasReceipt=1") // `mdfind` avoids dependency on `mas`
 			.split("\r")
@@ -63,6 +60,16 @@ function run(argv) {
 					match: alfredMatcher(nameNoExt),
 					subtitle: "Mac App Store",
 					arg: appPath,
+					mods: {
+						ctrl: {
+							valid: false,
+							subtitle: "⛔ reinstall is only supported for homebrew packages",
+						},
+						shift: {
+							valid: false,
+							subtitle: "⛔ info is only supported for homebrew packages",
+						},
+					},
 				};
 			});
 
@@ -72,8 +79,7 @@ function run(argv) {
 	return JSON.stringify({
 		items: allApps,
 		cache: {
-			// INFO low value, since leftover apps after uninstallation would be irritating to the user
-			seconds: 120,
+			seconds: 120, // quick since leftover apps after uninstallation would be confusing
 			loosereload: true,
 		},
 	});

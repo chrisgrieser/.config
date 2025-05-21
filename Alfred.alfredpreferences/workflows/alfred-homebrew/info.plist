@@ -30,6 +30,16 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>6C6C9760-3FA9-453E-AD2E-E9074AB3E64A</string>
+				<key>modifiers</key>
+				<integer>262144</integer>
+				<key>modifiersubtext</key>
+				<string>⌃: reinstall</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
 		</array>
 		<key>0D984FC5-A902-42FB-80F8-A9D0310C86BB</key>
 		<array>
@@ -57,11 +67,24 @@
 				<false/>
 			</dict>
 		</array>
-		<key>5C042B83-60B9-41CA-85D5-FA8294534C5B</key>
+		<key>6C6C9760-3FA9-453E-AD2E-E9074AB3E64A</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>EDA21286-4E28-4304-A9DB-0BA74AB2C370</string>
+				<string>0F3F996A-3FC8-4FBD-990C-9D54C43DD642</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>709C3FA7-A332-4B07-A934-6BC8C7E9DB32</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>0F3F996A-3FC8-4FBD-990C-9D54C43DD642</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -86,7 +109,7 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>0F3F996A-3FC8-4FBD-990C-9D54C43DD642</string>
+				<string>709C3FA7-A332-4B07-A934-6BC8C7E9DB32</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -113,7 +136,7 @@
 				<key>modifiers</key>
 				<integer>1048576</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: brew home</string>
+				<string>⌘: Open website</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -124,29 +147,6 @@
 				<integer>524288</integer>
 				<key>modifiersubtext</key>
 				<string>⌥: Copy URL</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>3F95A285-6177-405E-B2B0-518A7C0276F2</string>
-				<key>modifiers</key>
-				<integer>131072</integer>
-				<key>modifiersubtext</key>
-				<string>⇧: brew info</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>CE590292-EEA5-4025-A89B-42AE38188503</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>5C042B83-60B9-41CA-85D5-FA8294534C5B</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -271,23 +271,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argument</key>
-				<string>brew reinstall {query}</string>
-				<key>passthroughargument</key>
-				<false/>
-				<key>variables</key>
-				<dict/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>5C042B83-60B9-41CA-85D5-FA8294534C5B</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>browser</key>
 				<string></string>
 				<key>skipqueryencode</key>
@@ -305,55 +288,6 @@
 			<string>2468D124-88C6-438D-B2C6-627ADEEEC31D</string>
 			<key>version</key>
 			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alfredfiltersresults</key>
-				<true/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>2</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<true/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>{var:reinstall_keyword}</string>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<true/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>1</integer>
-				<key>runningsubtext</key>
-				<string>loading...</string>
-				<key>script</key>
-				<string>osascript -l JavaScript ./scripts/brew-uninstall.js "is-reinstall"</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>subtext</key>
-				<string></string>
-				<key>title</key>
-				<string>&gt; brew reinstall '{query}'</string>
-				<key>type</key>
-				<integer>11</integer>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>CE590292-EEA5-4025-A89B-42AE38188503</string>
-			<key>version</key>
-			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -394,55 +328,6 @@
 			<string>F01BF271-72C7-44BA-9382-E133D8529E6D</string>
 			<key>version</key>
 			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alfredfiltersresults</key>
-				<true/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>2</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<true/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>{var:uninstall_keyword}</string>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<true/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>1</integer>
-				<key>runningsubtext</key>
-				<string>loading...</string>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/brew-uninstall.js</string>
-				<key>subtext</key>
-				<string></string>
-				<key>title</key>
-				<string>&gt; brew uninstall '{query}'</string>
-				<key>type</key>
-				<integer>8</integer>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>0BAF56E8-B65A-478A-B848-F09FFE73A12B</string>
-			<key>version</key>
-			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -518,6 +403,55 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>2</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>{var:uninstall_keyword}</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>loading...</string>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/brew-uninstall.js</string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>&gt; brew uninstall '{query}'</string>
+				<key>type</key>
+				<integer>8</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>0BAF56E8-B65A-478A-B848-F09FFE73A12B</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>conditions</key>
 				<array>
 					<dict>
@@ -553,12 +487,46 @@
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>script</key>
-				<string>brew uninstall {query}</string>
+				<string>{query}</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.terminalcommand</string>
 			<key>uid</key>
 			<string>0F3F996A-3FC8-4FBD-990C-9D54C43DD642</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string>brew uninstall {query}</string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>709C3FA7-A332-4B07-A934-6BC8C7E9DB32</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string>brew reinstall {query}</string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>6C6C9760-3FA9-453E-AD2E-E9074AB3E64A</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -580,12 +548,10 @@
 	+ &lt;kbd&gt;⇧⏎&lt;/kbd&gt;: Show package information (`brew info`) in Text View.
 	+ &lt;kbd&gt;⌘Y&lt;/kbd&gt; Quick Look a screenshot of the app, if available.
 	+ The download counts refer to the number of downloads per 90 days.
-- Reinstall a package already installed on your system via the `br` keyword
-  (`brew reinstall`).
-	+ &lt;kbd&gt;⇧⏎&lt;/kbd&gt;: Show package information (`brew info`) in Text View.
 - Uninstall a package via the `bu` keyword (`brew uninstall`).
 	+ Optionally use the `--zap` option for a clean uninstallation.
 	+ &lt;kbd&gt;⇧⏎&lt;/kbd&gt;: Show package information (`brew info`) in Text View.
+	+ &lt;kbd&gt;⌃⏎&lt;/kbd&gt;: Reinstall the package (`brew reinstall`).
 
 ## Mac App Store apps
 You might also be interested in [this workflow to search the Mac App
@@ -608,7 +574,7 @@ and the Mac App Store.
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>300</real>
+			<real>525</real>
 		</dict>
 		<key>0D984FC5-A902-42FB-80F8-A9D0310C86BB</key>
 		<dict>
@@ -628,7 +594,7 @@ and the Mac App Store.
 			<key>xpos</key>
 			<real>425</real>
 			<key>ypos</key>
-			<real>625</real>
+			<real>645</real>
 		</dict>
 		<key>2468D124-88C6-438D-B2C6-627ADEEEC31D</key>
 		<dict>
@@ -650,15 +616,6 @@ and the Mac App Store.
 			<key>ypos</key>
 			<real>365</real>
 		</dict>
-		<key>5C042B83-60B9-41CA-85D5-FA8294534C5B</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>8</integer>
-			<key>xpos</key>
-			<real>330</real>
-			<key>ypos</key>
-			<real>100</real>
-		</dict>
 		<key>5C596F48-0F0D-4709-8097-75C0875E686B</key>
 		<dict>
 			<key>colorindex</key>
@@ -668,14 +625,36 @@ and the Mac App Store.
 			<key>ypos</key>
 			<real>365</real>
 		</dict>
+		<key>6C6C9760-3FA9-453E-AD2E-E9074AB3E64A</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>1</integer>
+			<key>note</key>
+			<string>add `brew reinstall`</string>
+			<key>xpos</key>
+			<real>340</real>
+			<key>ypos</key>
+			<real>715</real>
+		</dict>
+		<key>709C3FA7-A332-4B07-A934-6BC8C7E9DB32</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>1</integer>
+			<key>note</key>
+			<string>add `brew uninstall`</string>
+			<key>xpos</key>
+			<real>340</real>
+			<key>ypos</key>
+			<real>645</real>
+		</dict>
 		<key>72B78E7D-69B1-4E83-AB9B-26507DE2C33E</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>1</integer>
 			<key>xpos</key>
-			<real>240</real>
+			<real>245</real>
 			<key>ypos</key>
-			<real>580</real>
+			<real>545</real>
 		</dict>
 		<key>72D18DBC-72FF-40AA-B367-D4C148AEC3A6</key>
 		<dict>
@@ -695,18 +674,7 @@ and the Mac App Store.
 			<key>xpos</key>
 			<real>425</real>
 			<key>ypos</key>
-			<real>505</real>
-		</dict>
-		<key>CE590292-EEA5-4025-A89B-42AE38188503</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>8</integer>
-			<key>note</key>
-			<string>brew reinstall</string>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>160</real>
+			<real>510</real>
 		</dict>
 		<key>CFA88D9F-D566-43E2-A3B6-377B032BC133</key>
 		<dict>
@@ -784,27 +752,6 @@ and the Mac App Store.
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<string>br</string>
-				<key>placeholder</key>
-				<string>br</string>
-				<key>required</key>
-				<true/>
-				<key>trim</key>
-				<true/>
-			</dict>
-			<key>description</key>
-			<string>re-installation</string>
-			<key>label</key>
-			<string></string>
-			<key>type</key>
-			<string>textfield</string>
-			<key>variable</key>
-			<string>reinstall_keyword</string>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>default</key>
 				<false/>
 				<key>required</key>
 				<false/>
@@ -841,7 +788,7 @@ and the Mac App Store.
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.5.2</string>
+	<string>2.0.0</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
