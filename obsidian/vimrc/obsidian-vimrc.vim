@@ -192,6 +192,7 @@ inoremap <M-S-h> <Esc>:headingDecrement<CR>a
 " <M-u> = cmd+u
 exmap cycleListTypes jsfile Meta/vimrc-jsfile.js { cycleListTypes() }
 nnoremap <M-u> :cycleListTypes<CR>
+inoremap <M-u> <Esc>:cycleListTypes<CR>a
 
 " spelling suggestions (emulates `z=`)
 exmap contextMenu obcommand editor:context-menu
