@@ -16,6 +16,7 @@ amazon.de###spc-container
 stackoverflow.com###announcement-banner
 chatgpt.com##nav[aria-label="Chat history"] > div:last-child
 chatgpt.com###thread-bottom-container > div:last-child
+help.obsidian.md##.site-body-left-column
 
 ! search
 duckduckgo.com##[data-testid="feedback-prompt"]
