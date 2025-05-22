@@ -134,7 +134,7 @@ fi
 
 _pretty_header "Report" "special"
 if [[ -z "$errors" ]]; then
-	print "\e[1;32mBackup completed: $volume_name.\e[0m"
+	print "Backup completed: $volume_name."
 	"$ZDOTDIR/notificator" --title "Backup" --message "✅ completed." --sound "Blow"
 
 	echo "completed: $(date '+%H:%M')" >> "$logpath_on_mac"

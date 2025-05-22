@@ -3,6 +3,7 @@ Automagical
 BibDesk
 BibTeX
 DOI
+Dotfiles
 Goto
 Grieser
 Howto
@@ -45,6 +46,7 @@ fixup
 fixups
 frontmatter
 hlgroup
+hsl
 iA
 iCloud
 improv
@@ -83,4 +85,3 @@ unminify
 unstaged
 vimscript
 zsh
-Dotfiles
