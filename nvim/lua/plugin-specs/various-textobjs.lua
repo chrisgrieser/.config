@@ -45,7 +45,7 @@ return {
 		{ "ge", "<cmd>lua require('various-textobjs').diagnostic()<CR>", mode = {"x","o"}, desc = " diagnostic" },
 		{ "L", "<cmd>lua require('various-textobjs').url()<CR>", mode = "o", desc = " URL" },
 		{ "C", "<cmd>lua require('various-textobjs').column()<CR>", mode = {"x","o"}, desc = "ﴳ column" },
-		{ "#", "<cmd>lua require('various-textobjs').cssColor('outer')<CR>", mode = {"x","o"}, desc = " outer color" },
+		{ "#", "<cmd>lua require('various-textobjs').color('outer')<CR>", mode = {"x","o"}, desc = " outer color" },
 
 		{ "in", "<cmd>lua require('various-textobjs').number('inner')<CR>", mode = {"x","o"}, desc = " inner number" },
 		{ "an", "<cmd>lua require('various-textobjs').number('outer')<CR>", mode = {"x","o"}, desc = " outer number" },
