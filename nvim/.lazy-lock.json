@@ -32,7 +32,7 @@
   "nvim-tinygit": { "branch": "main", "commit": "5988da3f64665798a67596e25eb93b9fc102a5e1" },
   "nvim-treesitter": { "branch": "master", "commit": "066fd6505377e3fd4aa219e61ce94c2b8bdb0b79" },
   "nvim-treesitter-textobjects": { "branch": "master", "commit": "15f945eabde2a293ccf48eb28c214a69b643d6e1" },
-  "nvim-various-textobjs": { "branch": "main", "commit": "74dc9d615837704856d367ac7bc797884220cde2" },
+  "nvim-various-textobjs": { "branch": "main", "commit": "e60113244e43c8aefc118626056b310261211175" },
   "one-small-step-for-vimkind": { "branch": "main", "commit": "69c0dc61f2298862b3a38bdf3c4158c181cf15be" },
   "plenary.nvim": { "branch": "master", "commit": "857c5ac632080dba10aae49dba902ce3abf91b35" },
   "refactoring.nvim": { "branch": "master", "commit": "64dbe67bf7c28c864488262d267c799f80cae9ba" },
