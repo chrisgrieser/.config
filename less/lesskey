@@ -42,43 +42,10 @@ K back-scroll
 # (`lesskey` does not accepts quotes, and unescaped leading spaces are ignored)
 
 # initialize variable
-LESS=
+# LESS="--RAW-CONTROL-CHARS --line-num-width=4 --ignore-case --incsearch --tilde --long-prompt --status-line --quit-if-one-screen --chop-long-lines --search-options=W --shift=.2"
+# LESS=--RAW-CONTROL-CHARS --line-num-width=4 --ignore-case --incsearch --tilde --long-prompt --status-line --quit-if-one-screen --chop-long-lines --search-options=W --shift=.2
+# LESS=--RAW-CONTROL-CHARS\ --line-num-width=4\ --ignore-case\ --incsearch\ --tilde\ --long-prompt\ --status-line\ --quit-if-one-screen\ --chop-long-lines\ --search-options=W\ --shift=.2
 
-# process colors correctly
-LESS+=\ --RAW-CONTROL-CHARS
-
-# line number column width
-LESS+=\ --line-num-width=4
-
-# ignore-case is actually like smart-case in other tools
-LESS+=\ --ignore-case
-LESS+=\ --incsearch
-
-# no tilde at start of line at the end of file
-LESS+=\ --tilde
-
-# shows how far we are into the file in pages and total pages (if known)
-LESS+=\ --long-prompt
-LESS+=\ --prompt=mpage %dm?B/%D.?Pm (%Pm\\%).$
-
-# if using short prompt, make it completely invisible
-LESS+=\ --prompt=s$
-
-# highlight lines with a mark
-LESS+=\ --status-line
-
-# quicker leaving & do not clear the screen when doing so
-LESS+=\ --quit-if-one-screen
-LESS+=\ --no-init
-
-# wrap lines
-LESS+=\ --chop-long-lines
-
-# amount of side-scrolling (percentage of screen width)
-LESS+=\ --shift=.2
-
-# wrap searches
-LESS+=\ --search-options=W
 
 # (cannot disable it, since it's needed for delta's `navigate` feature)
 # LESSHISTFILE=/tmp/lesshst
