@@ -19,6 +19,6 @@ return {
 		editingBehavior = {
 			autoCaptureGroups = true,
 		},
-		debug = vim.uv.fs_stat(vim.g.localRepos .. "/nvim-rip-substitute"),
+		debug = false,
 	},
 }

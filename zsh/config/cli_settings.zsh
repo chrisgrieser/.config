@@ -9,20 +9,7 @@ export RIPGREP_CONFIG_PATH="$HOME/.config/ripgrep/config"
 # Thus we need to use the version of less provided by homebrew.
 export PAGER="$HOMEBREW_PREFIX/bin/less"
 export LESSKEYIN="$HOME/.config/less/lesskey"
-source "/.config/less/config"
-
-# export LESS="\
-# --RAW-CONTROL-CHARS \
-# --line-num-width=4 \
-# --ignore-case \
-# --incsearch \
-# --tilde \
-# --long-prompt \
-# --status-line \
-# --quit-if-one-screen \
-# --chop-long-lines \
-# --search-options=W \
-# --shift=.2"
+source "$HOME/.config/less/config" # HACK source `$LESS` since `#env` in `lesskey` not working anymore?
 
 #───────────────────────────────────────────────────────────────────────────────
 
