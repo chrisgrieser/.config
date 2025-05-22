@@ -8,7 +8,7 @@ export RIPGREP_CONFIG_PATH="$HOME/.config/ripgrep/config"
 # files. https://man7.org/linux/man-pages/man1/lesskey.1.html#SCOPE 
 # Thus we need to use the version of less provided by homebrew.
 export PAGER="$HOMEBREW_PREFIX/bin/less"
-export LESSKEYIN="$HOME/.config/less/lesskey"
+# export LESSKEYIN="$HOME/.config/less/lesskey"
 
 #───────────────────────────────────────────────────────────────────────────────
 

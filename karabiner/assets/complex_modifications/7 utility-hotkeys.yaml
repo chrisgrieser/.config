@@ -10,7 +10,7 @@ rules:
         to:
           - { key_code: f3, modifiers: [command] }
 
-      # alt-jk: page up/down
+      # alt-j/k: page up/down
       - type: basic
         from: { key_code: j, modifiers: { mandatory: [option] } }
         to:

@@ -44,7 +44,7 @@ function backup() {
 	_pretty_header "Backup: $short_name"
 	mkdir -p "$bkp_to"
 
-	rsync --archive --delete --recursive --progress --human-readable \
+	rsync --archive --delete --delete-excluded --recursive --progress --human-readable \
 		--exclude="*.Trash/" --exclude="*/nvim-data/" --exclude=".DS_Store" \
 		"$bkp_from" "$bkp_to" || errors="$errors\nProblems occurred for: $short_name"
 }
@@ -87,7 +87,7 @@ do_backup
 #───────────────────────────────────────────────────────────────────────────────
 # ARCHIVE OLDER BACKUPS
 
-_pretty_header "Archive of backups"
+_pretty_header "Archive of backups" "special"
 
 archive="$volume_name/older backups"
 mkdir -p "$archive"
@@ -134,7 +134,7 @@ fi
 
 _pretty_header "Report" "special"
 if [[ -z "$errors" ]]; then
-	print "Backup completed: $volume_name."
+	print "✅ Backup completed: $volume_name."
 	"$ZDOTDIR/notificator" --title "Backup" --message "✅ completed." --sound "Blow"
 
 	echo "completed: $(date '+%H:%M')" >> "$logpath_on_mac"
