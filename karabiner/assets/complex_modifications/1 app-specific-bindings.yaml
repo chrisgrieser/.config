@@ -394,7 +394,7 @@ rules:
           # HACK only apply to installation in office, since the hotkey is
           # somehow only active here?!
           - type: device_if
-            identifiers: [{ location_id: 17825792 }]
+            identifiers: [{ location_id: 17825792 }, { location_id: 336592896 }]
       - type: basic
         from: { key_code: "9", modifiers: { mandatory: [command] } }
         to:
