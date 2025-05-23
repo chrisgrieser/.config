@@ -18,7 +18,7 @@ done
 # Default File Openers
 [[ -x "$(command -v infat)" ]] || brew install infat
 echo
-infat --config="$HOME/.config/.bootstrap/infat-config.toml"
+infat --robust --config="$HOME/.config/.bootstrap/infat-config.toml"
 
 #───────────────────────────────────────────────────────────────────────────────
 
