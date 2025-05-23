@@ -25,5 +25,5 @@ function vvv {
 
 function run-infat {
 	[[ -x "$(command -v infat)" ]] || brew install infat
-	infat --config="$HOME/.config/.bootstrap/infat-config.toml"
+	infat --robust --config="$HOME/.config/.bootstrap/infat-config.toml"
 }
