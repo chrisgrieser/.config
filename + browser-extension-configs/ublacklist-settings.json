@@ -11,6 +11,58 @@
     "#ddeeff"
   ],
   "linkColor": "default",
+  "serpInfoSettings": {
+    "user": {
+      "content": "name: My SERPINFO\npages: []\n"
+    },
+    "remote": [
+      {
+        "url": "https://raw.githubusercontent.com/ublacklist/builtin/refs/heads/dist/serpinfo/google.yml",
+        "custom": false,
+        "enabled": true
+      },
+      {
+        "url": "https://raw.githubusercontent.com/ublacklist/builtin/refs/heads/dist/serpinfo/bing.yml",
+        "custom": false,
+        "enabled": false
+      },
+      {
+        "url": "https://raw.githubusercontent.com/ublacklist/builtin/refs/heads/dist/serpinfo/brave.yml",
+        "custom": false,
+        "enabled": false
+      },
+      {
+        "url": "https://raw.githubusercontent.com/ublacklist/builtin/refs/heads/dist/serpinfo/duckduckgo.yml",
+        "custom": false,
+        "enabled": false
+      },
+      {
+        "url": "https://raw.githubusercontent.com/ublacklist/builtin/refs/heads/dist/serpinfo/ecosia.yml",
+        "custom": false,
+        "enabled": false
+      },
+      {
+        "url": "https://raw.githubusercontent.com/ublacklist/builtin/refs/heads/dist/serpinfo/searxng.yml",
+        "custom": false,
+        "enabled": false
+      },
+      {
+        "url": "https://raw.githubusercontent.com/ublacklist/builtin/refs/heads/dist/serpinfo/startpage.yml",
+        "custom": false,
+        "enabled": false
+      },
+      {
+        "url": "https://raw.githubusercontent.com/ublacklist/builtin/refs/heads/dist/serpinfo/yahoo-japan.yml",
+        "custom": false,
+        "enabled": false
+      },
+      {
+        "url": "https://raw.githubusercontent.com/ublacklist/builtin/refs/heads/dist/serpinfo/yandex.yml",
+        "custom": false,
+        "enabled": false
+      }
+    ]
+  },
   "skipBlockDialog": false,
   "subscriptions": [
     {
@@ -43,7 +95,8 @@
   "syncBlocklist": true,
   "syncGeneral": true,
   "syncInterval": 120,
+  "syncSerpInfo": true,
   "syncSubscriptions": true,
-  "updateInterval": 720,
-  "version": "8.10.2"
+  "updateInterval": 120,
+  "version": "8.12.0"
 }
