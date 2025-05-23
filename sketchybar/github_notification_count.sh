@@ -10,7 +10,7 @@ fi
 # GUARD dependencies or API key missing
 if [[ -z "$GITHUB_TOKEN" ]]; then
 	# $GITHUB_TOKEN is saved in .zshenv and therefore available here
-	sketchybar --set "$NAME" label="TOKEN?" drawing=true
+	sketchybar --set "$NAME" label="NO TOKEN" drawing=true
 	return 1
 fi
 
