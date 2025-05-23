@@ -3,7 +3,6 @@
 
 return {
 	"monkoose/neocodeium",
-
 	event = "InsertEnter",
 	cmd = "NeoCodeium",
 	opts = {
@@ -35,11 +34,11 @@ return {
 			local status, server = require("neocodeium").get_status()
 			if status == 0 and server == 0 then return "" end -- working correctly = no component
 			if server == 1 then return "󱙺 connecting…" end
-			if server == 2 then return "󱚧 server" end
-
+			if server == 2 then return "󱚟 server" end
 			if status == 1 then return "󱚧 global" end
 			if status == 2 or status == 3 or status == 4 then return "󱚧 buffer" end
-			if status == 5 or status == 6 then return "󱚧 buftype" end
+			if status == 6 then return "󱚧 buftype" end
+			if status == 5 then return "󱚧 encoding" end
 			return "󱚟 Unknown error"
 		end, "before")
 	end,
