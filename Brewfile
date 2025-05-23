@@ -4,6 +4,7 @@
 # CLI
 brew "bat"
 brew "eza"
+brew "felixkratz/formulae/sketchybar"
 brew "fzf"
 brew "gh"
 brew "git-delta"
@@ -23,10 +24,6 @@ brew "zsh-autopair"
 brew "zsh-autosuggestions"
 brew "zsh-history-substring-search"
 brew "zsh-syntax-highlighting"
-
-# restart needed for new permissions 
-# (not `restart_service = true`, since it triggers even on `brew bundle check`)
-brew "felixkratz/formulae/sketchybar", postinstall: "brew services restart sketchybar"
 
 # APPS
 cask "alfred"
