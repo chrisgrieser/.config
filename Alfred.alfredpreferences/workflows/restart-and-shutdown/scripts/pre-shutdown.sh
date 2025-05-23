@@ -12,7 +12,7 @@ fi
 function notify() {
 	name=$1
 	icon=$2
-	"$alfred_dir/notificator" --title "Pre-Shutdown Sync…" --message "$name $icon"
+	"$alfred_dir/notificator" --title "Pre-shutdown sync…" --message "$icon $name"
 }
 
 while read -r line; do
