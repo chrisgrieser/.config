@@ -38,12 +38,12 @@ response=$(curl -sL \
 	"https://api.github.com/notifications")
 
 if [[ -z "$response" ]]; then
-	sketchybar --set "$NAME" label="?" drawing=true
+	sketchybar --set "$NAME" label="󰣼" drawing=true
 	return 1
 fi
 error=$(echo "$response" | jq --raw-output ".message")
 if [[ -n "$error" ]]; then
-	sketchybar --set "$NAME" label="$error" drawing=true
+	sketchybar --set "$NAME" label=" $error" drawing=true
 	return 1
 fi
 
