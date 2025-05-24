@@ -1,6 +1,6 @@
 {
     "createdBy": "Redirector v3.5.3",
-    "createdAt": "2025-05-20T10:15:00.699Z",
+    "createdAt": "2025-05-24T17:07:52.270Z",
     "redirects": [
         {
             "description": "Netflix redirect from \"Home\" to \"TV Shows\"",
@@ -55,13 +55,30 @@
         },
         {
             "description": "Google Lucky Redirect",
-            "exampleUrl": "https://www.google.com/url?q=https://www.tvtime.com/",
-            "exampleResult": "https://www.tvtime.com/",
+            "exampleUrl": "https://www.google.com/url?q=https://www.joyn.de/",
+            "exampleResult": "https://www.joyn.de/",
             "error": null,
             "includePattern": "https:\\/\\/www.google.com\\/url\\?q=(.*)",
             "excludePattern": "",
             "patternDesc": "",
             "redirectUrl": "$1",
+            "patternType": "R",
+            "processMatches": "noProcessing",
+            "disabled": false,
+            "grouped": false,
+            "appliesTo": [
+                "main_frame"
+            ]
+        },
+        {
+            "description": "Hackernews Frontend",
+            "exampleUrl": "https://news.ycombinator.com/item?id=44080803",
+            "exampleResult": "https://hackerweb.app/#/item/44080803",
+            "error": null,
+            "includePattern": "https:\\/\\/news.ycombinator.com\\/item\\?id=(.*)",
+            "excludePattern": "",
+            "patternDesc": "",
+            "redirectUrl": "https://hackerweb.app/#/item/$1",
             "patternType": "R",
             "processMatches": "noProcessing",
             "disabled": false,
