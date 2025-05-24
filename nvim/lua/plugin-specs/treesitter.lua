@@ -4,9 +4,48 @@ return {
 	build = ":TSUpdate",
 	main = "nvim-treesitter.configs",
 	opts = {
-		-- easier than keeping track of new "special parsers", which are not
-		-- auto-installed on entering a buffer (e.g., regex, luadocs, comments)
-		ensure_installed = "all",
+		ensure_installed = {
+			-- programming languages
+			"lua",
+			"bash", -- also used for zsh
+			"javascript",
+			"typescript",
+			"python",
+			"vim",
+			"ruby", -- brewfile
+			"swift",
+
+			-- data formats
+			"json",
+			"jsonc",
+			"yaml",
+			"toml",
+
+			-- content
+			"markdown",
+			"markdown_inline",
+			"css",
+			"html",
+
+			-- special filetypes
+			"query", -- treesitter query files
+			"just",
+			"editorconfig",
+			"diff",
+			"git_config",
+			"git_rebase",
+			"gitcommit",
+			"gitignore",
+
+			-- embedded languages
+			"regex",
+			"luap", -- lua patterns
+			"luadoc",
+			"comment",
+			"requirements", -- pip requirements
+			"jsdoc",
+			"graphql",
+		},
 
 		highlight = { enable = true },
 		indent = {
@@ -57,39 +96,4 @@ return {
 			desc = "󰅍 Code context",
 		},
 	},
-	-- context as statusline component
-	config = function(spec)
-		require(spec.main).setup(spec.opts)
-
-		local function codeContext()
-			local maxLen = vim.o.columns * 0.75
-			local text = require("nvim-treesitter").statusline {
-				indicator_size = math.huge, -- shortening ourselves later
-				separator = "  ",
-				type_patterns = { "class", "function", "method", "field", "pair" }, -- `pair` for yaml/json
-				transform_fn = function(line)
-					return line
-						:gsub("^async ", "") -- js/ts
-						:gsub("^local ", "") -- lua: vars
-						:gsub("^class", "󰜁")
-						:gsub("^%(.*%) =>", "") -- js/ts: anonymous arrow function
-						:gsub(" ?[{}] ?$", "")
-						:gsub(" ?[=:(].-$", "") -- remove values/parameters
-						:gsub(" extends .-$", "") -- js/ts: classes
-						:gsub("(%w)%(%)$", "%1") -- remove empty `()`
-						:gsub("^function", "")
-						:gsub("^func", "") -- swift
-						:gsub("^def", "") -- python
-				end,
-			}
-			if not text then return "" end
-			if vim.str_utfindex(text, "utf-8") > maxLen then
-				return text:sub(1, maxLen - 1) .. "…"
-			end
-			return text
-		end
-
-		-- to prevent triggering early load of lualine
-		vim.g.lualineAdd("tabline", "lualine_b", codeContext)
-	end,
 }
