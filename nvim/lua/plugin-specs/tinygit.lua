@@ -67,7 +67,7 @@ return {
 		statusline = {
 			blame = {
 				hideAuthorNames = { "Chris Grieser", "chrisgrieser" },
-				-- ignoreAuthors = { "🤖 automated" },
+				ignoreAuthors = { "🤖 automated" },
 				maxMsgLen = 72,
 			},
 		},
