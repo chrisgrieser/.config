@@ -1,8 +1,9 @@
 #!/usr/bin/env zsh
 
-backup_path="$HOME/.config/.bootstrap/.plist/"
+backup_path="$HOME/.config/.bootstrap/plist/"
 
 plists=(
+	# macOS
 	com.apple.Preferences
 	com.apple.screensaver
 	com.apple.dock
@@ -13,12 +14,14 @@ plists=(
 	com.apple.remindd                                   # Reminders.app
 	com.apple.symbolichotkeys                           # system shortcuts
 
+	# printer
 	Printer.RICOH-Printer
-	com.Replacicon.Replacicon
 	com.apple.print.custompresets.forprinter.RICOH_SP_150
 	com.apple.print.custompresets
 	org.cups.PrintingPrefs
 
+	# apps
+	com.Replacicon.Replacicon
 	com.colliderli.iina
 	com.lwouis.alt-tab-macos
 	com.runningwithcrayons.Alfred-Preferences
