@@ -4,6 +4,8 @@
 <dict>
 	<key>custom_subreddit_icons</key>
 	<string>~/.config/Alfred.alfredpreferences/subreddit_icons</string>
+	<key>hackernews_frontend_url</key>
+	<string>https://hackerweb.app/#/item/</string>
 	<key>hide_stickied</key>
 	<true/>
 	<key>min_upvotes</key>
