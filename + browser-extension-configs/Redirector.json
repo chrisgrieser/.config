@@ -1,6 +1,6 @@
 {
     "createdBy": "Redirector v3.5.3",
-    "createdAt": "2025-05-24T17:07:52.270Z",
+    "createdAt": "2025-05-24T17:08:37.284Z",
     "redirects": [
         {
             "description": "Netflix redirect from \"Home\" to \"TV Shows\"",
@@ -37,7 +37,7 @@
             ]
         },
         {
-            "description": "Redirect x to readable frontend",
+            "description": "Redirect Twitter to readable frontend",
             "exampleUrl": "https://x.com/tweet/status/1465053672593784834",
             "exampleResult": "https://xcancel.com/tweet/status/1465053672593784834",
             "error": null,
