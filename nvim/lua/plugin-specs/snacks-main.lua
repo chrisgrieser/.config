@@ -13,18 +13,23 @@ return {
 		require("snacks").setup(opts)
 
 		-- modify certain notifications
-		vim.notify = function(msg, lvl, notifOpts) ---@diagnostic disable-line: duplicate-set-field intentional overwrite
+		vim.notify = function(msg, lvl, nOpts) ---@diagnostic disable-line: duplicate-set-field intentional overwrite
+			nOpts = nOpts or {}
+
 			local ignore = (msg == "No code actions available" and vim.bo.ft == "typescript")
 				or msg:find("^Client marksman quit with exit code 1 and signal 0.")
 			if ignore then return end
 
 			if msg:find("Hunk %d+ of %d+") then -- gitsigns.nvim
-				notifOpts = notifOpts or {}
-				notifOpts.style = "minimal"
+				nOpts.style = "minimal"
 				msg = msg .. "  "
-				notifOpts.icon = "󰊢 "
+				nOpts.icon = "󰊢 "
+				nOpts.id = "gitsigns"
+			elseif msg:find("^%[nvim%-treesitter%]") then -- treesitter parser update
+				nOpts.id = "treesitter-parser-update"
+				nOpts.ft = "text"
 			end
-			Snacks.notifier(msg, lvl, notifOpts)
+			Snacks.notifier(msg, lvl, nOpts)
 		end
 
 		-- disable default keymaps to make the `?` help overview less cluttered
