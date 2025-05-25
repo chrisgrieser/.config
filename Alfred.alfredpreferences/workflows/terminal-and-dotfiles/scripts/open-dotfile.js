@@ -26,7 +26,7 @@ function run() {
 		.split("\r");
 	const rgOutput = app
 		.doShellScript(
-			// `--follow` errors on broken symlinks, so we need to end with `true`
+			// `--follow` errors on broken symlinks, so we need to end with `|| true`
 			`PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH ; \
 			rg --no-config --files --hidden --follow --sortr=modified \
 			--ignore-file=${dotfileFolder}/ripgrep/ignore "${dotfileFolder}" 2>&1 || true`,
