@@ -12,8 +12,8 @@ end, 1)
 --------------------------------------------------------------------------------
 
 ---Try to require the module, but do not throw error when one of them cannot be
----loaded. This prevents the entire remaining config from not being loaded if
----just one module has an error.
+---loaded. Without this, any error in one config file will result in the
+---remaining config not being loaded.
 ---@param module string
 local function safeRequire(module)
 	local success, errmsg = pcall(require, module)
@@ -25,7 +25,7 @@ end
 
 safeRequire("config.options") -- early, so available for plugins configs
 
-if not vim.env.NO_PLUGINS then -- for security, e.g. when editing a password with `pass`
+if not vim.env.NO_PLUGINS then -- for security, such as when editing a password with `pass`
 	safeRequire("config.lazy")
 	if vim.g.setColorscheme then vim.g.setColorscheme("init") end
 end
