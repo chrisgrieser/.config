@@ -1,6 +1,3 @@
-local textObj = require("config.utils").extraTextobjMaps
---------------------------------------------------------------------------------
-
 return {
 	"chrisgrieser/nvim-various-textobjs",
 	opts = { debug = false },
@@ -58,8 +55,8 @@ return {
 
 		{ "i.", "<cmd>lua require('various-textobjs').chainMember('inner')<CR>", mode = {"x","o"}, desc = "󰌷 inner chainMember" },
 		{ "a.", "<cmd>lua require('various-textobjs').chainMember('outer')<CR>", mode = {"x","o"}, desc = "󰌷 outer chainMember" },
-		{ "i" .. textObj.wikilink, "<cmd>lua require('various-textobjs').doubleSquareBrackets('inner')<CR>", mode = {"x","o"}, desc = "󰖬 inner wikilink" },
-		{ "a" .. textObj.wikilink, "<cmd>lua require('various-textobjs').doubleSquareBrackets('outer')<CR>", mode = {"x","o"}, desc = "󰖬 outer wikilink" },
+		{ "iR", "<cmd>lua require('various-textobjs').doubleSquareBrackets('inner')<CR>", mode = {"x","o"}, desc = "󰖬 inner wikilink" },
+		{ "aR", "<cmd>lua require('various-textobjs').doubleSquareBrackets('outer')<CR>", mode = {"x","o"}, desc = "󰖬 outer wikilink" },
 
 		-- markdown
 		{ "iE", "<cmd>lua require('various-textobjs').mdFencedCodeBlock('inner')<CR>", mode = {"x","o"}, ft = "markdown", desc = " inner CodeBlock" },

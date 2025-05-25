@@ -21,14 +21,14 @@ local function plusPlusMinusMinus(sign)
 		vim.api.nvim_feedkeys(sign, "n", true) -- pass through the trigger char
 	else
 		local line = vim.api.nvim_get_current_line()
-		local updated = line:gsub("(%w+)%" .. sign, "%1 = %1 " .. sign .. " 1")
+		local updated = line:gsub("([%w_]+)%" .. sign, "%1 = %1 " .. sign .. " 1")
 		vim.api.nvim_set_current_line(updated)
 		local diff = #updated - #line
 		vim.api.nvim_win_set_cursor(0, { row, col + diff })
 	end
 end
-bkeymap("i", "+", function() plusPlusMinusMinus("+") end, { desc = "i++  i = i+1" })
-bkeymap("i", "-", function() plusPlusMinusMinus("-") end, { desc = "i--  i = i-1" })
+bkeymap("i", "+", function() plusPlusMinusMinus("+") end, { desc = "i++  i = i + 1" })
+bkeymap("i", "-", function() plusPlusMinusMinus("-") end, { desc = "i--  i = i - 1" })
 
 --------------------------------------------------------------------------------
 -- YANK MODULE NAME
