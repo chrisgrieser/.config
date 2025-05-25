@@ -1,10 +1,15 @@
+-- DOCS https://github.com/nvim-treesitter/nvim-treesitter/tree/main
+--------------------------------------------------------------------------------
+
 return {
 	"nvim-treesitter/nvim-treesitter",
-	event = "BufReadPost",
+	lazy = false,
 	build = ":TSUpdate",
-	main = "nvim-treesitter.configs",
+	branch = "main", -- new versions follow main
+
 	opts = {
 		ensure_installed = {
+			-- https://github.com/nvim-treesitter/nvim-treesitter/blob/main/SUPPORTED_LANGUAGES.md
 			-- programming languages
 			"lua",
 			"bash", -- also used for zsh
@@ -17,9 +22,11 @@ return {
 
 			-- data formats
 			"json",
+			"json5",
 			"jsonc",
 			"yaml",
 			"toml",
+			"xml", -- mac `.plist` are also xml
 
 			-- content
 			"markdown",
