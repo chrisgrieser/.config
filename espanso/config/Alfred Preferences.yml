@@ -5,5 +5,5 @@
 filter_class: com.runningwithcrayons.Alfred-Preferences
 
 extra_includes:
-  - "../match/_alfred.yml"
-  - "../match/_applescript.yml"
+  - ../match/_alfred.yml
+  - ../match/_applescript.yml

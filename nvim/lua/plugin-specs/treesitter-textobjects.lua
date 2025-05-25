@@ -1,8 +1,6 @@
 -- DOCS https://github.com/nvim-treesitter/nvim-treesitter-textobjects/tree/main#nvim-treesitter-textobjectshttps://github.com/nvim-treesitter/nvim-treesitter-textobjects/tree/main#nvim-treesitter-textobjects
 --------------------------------------------------------------------------------
 
-local map = require("config.utils").extraTextobjMaps
-
 local function select(textobj)
 	return function()
 		require("nvim-treesitter-textobjects.select").select_textobject(textobj, "textobjects")
@@ -64,25 +62,31 @@ return { -- treesitter-based textobjs
 		{ "ia", select("@parameter.inner"), mode = { "x", "o" }, desc = "󰏪 inner arg" },
 		{ "iu", select("@loop.inner"), mode = { "x", "o" }, desc = "󰛤 inner loop" },
 		{ "au", select("@loop.outer"), mode = { "x", "o" }, desc = "󰛤 outer loop" },
-		{ "a" .. map.call, select("@call.outer"), mode = { "x", "o" }, desc = "󰡱 outer call" },
-		{ "i" .. map.call, select("@call.inner"), mode = { "x", "o" }, desc = "󰡱 inner call" },
-		-- stylua: ignore start
-		{ "a" .. map.func, select("@function.outer"), mode = { "x", "o" }, desc = " outer function" },
-		{ "i" .. map.func, select("@function.inner"), mode = { "x", "o" }, desc = " inner function" },
-		{ "a" .. map.condition, select("@conditional.outer"), mode = { "x", "o" }, desc = "󱕆 outer condition" },
-		{ "i" .. map.condition, select("@conditional.inner"), mode = { "x", "o" }, desc = "󱕆 inner condition" },
-		-- stylua: ignore end
+		{ "al", select("@call.outer"), mode = { "x", "o" }, desc = "󰡱 outer call" },
+		{ "il", select("@call.inner"), mode = { "x", "o" }, desc = "󰡱 inner call" },
+		{ "af", select("@function.outer"), mode = { "x", "o" }, desc = " outer function" },
+		{ "if", select("@function.inner"), mode = { "x", "o" }, desc = " inner function" },
+		{ "ao", select("@conditional.outer"), mode = { "x", "o" }, desc = "󱕆 outer condition" },
+		{ "io", select("@conditional.inner"), mode = { "x", "o" }, desc = "󱕆 inner condition" },
 
 		-- CUSTOM TEXTOBJECTS (defined in my .scm files)
-		-- stylua: ignore start
-		{ "ad", select("@docstring.outer"), mode = { "x", "o" }, desc = "󰌠 outer docstring", ft = "python" },
-		{ "id", select("@docstring.inner"), mode = { "x", "o" }, desc = "󰌠 inner docstring", ft = "python" },
-		-- stylua: ignore end
-
-		{ "r" .. map.call, select("@call.justCaller"), mode = "o", desc = "󰡱 rest of caller" },
-
+		{ "rl", select("@call.justCaller"), mode = "o", desc = "󰡱 rest of caller" },
+		{
+			"ad",
+			select("@docstring.outer"),
+			mode = { "x", "o" },
+			desc = "󰌠 outer docstring",
+			ft = "python",
+		},
+		{
+			"id",
+			select("@docstring.inner"),
+			mode = { "x", "o" },
+			desc = "󰌠 inner docstring",
+			ft = "python",
+		},
 		{ -- override default inner conditional for some languages
-			"i" .. map.condition,
+			"io",
 			select("@conditional.conditionOnly"),
 			mode = { "x", "o" },
 			desc = "󱕆 inner conditional",

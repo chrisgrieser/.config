@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/espanso/espanso/dev/schemas/match.schema.json
 #───────────────────────────────────────────────────────────────────────────────
 matches:
-  - regex: "\\bvvv"
+  - regex: "vvv"
     replace: |-
       $|$
 
@@ -29,4 +29,3 @@ matches:
 
       Viele Grüße
       Chris Grieser
-    label: Viele Grüße (voller Name)

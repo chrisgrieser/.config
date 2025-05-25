@@ -1,6 +1,3 @@
-local textObjMaps = require("config.utils").extraTextobjMaps
---------------------------------------------------------------------------------
-
 return {
 	"kylechui/nvim-surround",
 	keys = {
@@ -22,24 +19,6 @@ return {
 		},
 		surrounds = {
 			invalid_key_behavior = { add = false, find = false, delete = false, change = false },
-			[textObjMaps.call] = {
-				find = "[%w.:_]+%b()", -- includes `:` for lua-methods/css-pseudoclasses
-				delete = "([%w.:_]+%()().*(%))()",
-			},
-			[textObjMaps.func] = { -- only one-line lua functions
-				find = "function ?[%w_]* ?%b().- end",
-				delete = "(function ?[%w_]* ?%b() ?)().-( end)()",
-			},
-			[textObjMaps.condition] = { -- only one-line lua conditionals
-				find = "if .- then .- end",
-				delete = "(if .- then )().-( end)()",
-			},
-			[textObjMaps.wikilink] = {
-				find = "%[%[.-%]%]",
-				add = { "[[", "]]" },
-				delete = "(%[%[)().-(%]%])()",
-				change = { target = "(%[%[)().-(%]%])()" },
-			},
 		},
 	},
 }

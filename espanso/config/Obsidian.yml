@@ -7,4 +7,4 @@
 filter_class: md.obsidian
 
 extra_excludes:
-  - "../match/capitalization-autofix.yml"
+  - ../match/capitalization-autofix.yml

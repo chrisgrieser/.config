@@ -7,4 +7,4 @@
 filter_class: com.apple.ScriptEditor2
 
 extra_includes:
-  - "../match/_applescript.yml"
+  - ../match/_applescript.yml

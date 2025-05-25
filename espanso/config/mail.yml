@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/espanso/espanso/dev/schemas/config.schema.json
 #───────────────────────────────────────────────────────────────────────────────
 
-filter_class: com.mimestream.Mimestream|com.brave.Browser|com.apple.TextEdit|com.microsoft.Word
+filter_class: com.mimestream.Mimestream
 
 extra_includes:
-  - "../match/_email.yml"
+  - ../match/_mail.yml
