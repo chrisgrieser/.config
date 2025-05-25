@@ -13,20 +13,6 @@ return { -- treesitter-based textobjs
 		"TSTextobjectPeekDefinitionCode",
 	},
 
-	-- SIC configured via treesitter, not this plugin.
-	-- Running config twice is also not a problem.
-	main = "nvim-treesitter.configs",
-
-	opts = {
-		textobjects = {
-			select = {
-				lookahead = true,
-				-- `true` would even remove line breaks from charwise objects,
-				-- thus staying with `false`
-				include_surrounding_whitespace = false,
-			},
-		},
-	},
 	keys = {
 		-- stylua: ignore start
 

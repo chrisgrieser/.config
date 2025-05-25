@@ -1,8 +1,8 @@
--- DOCS https://github.com/nvim-treesitter/nvim-treesitter/tree/main
+-- TODO https://github.com/nvim-treesitter/nvim-treesitter/tree/main
+-- https://github.com/nvim-treesitter/nvim-treesitter/blob/main/SUPPORTED_LANGUAGES.md
 --------------------------------------------------------------------------------
 
 local ensureInstalled = {
-	-- https://github.com/nvim-treesitter/nvim-treesitter/blob/main/SUPPORTED_LANGUAGES.md
 	programmingLangs = {
 		"lua",
 		"bash", -- also used for zsh
@@ -57,7 +57,18 @@ return {
 	opts = {
 		install_dir = vim.fn.stdpath("data") .. "/treesitter-parsers",
 	},
-	config = function(_, opts)
+	config = function(spec, opts)
+		-- BUG https://github.com/nvim-treesitter/nvim-treesitter/issues/7881
+		if spec.branch ~= "main" then
+			require("nvim-treesitter.configs").setup {
+				ensure_installed = vim.iter(vim.tbl_values(ensureInstalled)):flatten():totable(),
+				highlight = { enable = true },
+			}
+			return
+		end
+
+		--------------------------------------------------------------------------
+
 		require("nvim-treesitter").setup(opts)
 
 		-- auto-install parsers
@@ -75,10 +86,12 @@ return {
 		vim.api.nvim_create_autocmd("FileType", {
 			desc = "User: enable treesitter highlighting",
 			callback = function(ctx)
-				vim.treesitter.start()
+				-- highlights
+				local hasStarted = pcall(vim.treesitter.start) -- errors for filetypes with no parser
 
+				-- indent
 				local noIndent = { "markdown", "javascript", "typescript" }
-				if not vim.list_contains(noIndent, ctx.match) then
+				if hasStarted and not vim.list_contains(noIndent, ctx.match) then
 					vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
 				end
 			end,
