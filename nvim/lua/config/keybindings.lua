@@ -168,7 +168,6 @@ end, { desc = "󰩫 Exit snippet", expr = true })
 do
 	keymap({ "n", "x" }, "y", function()
 		vim.b.cursorPreYank = vim.api.nvim_win_get_cursor(0)
-		Chainsaw(vim) -- 🪚
 		return "y"
 	end, { expr = true })
 	keymap("n", "Y", function()
@@ -462,3 +461,9 @@ keymap("n", "<leader>ol", function()
 	vim.lsp.stop_client(clients)
 	vim.defer_fn(vim.cmd.edit, 1000) -- wait for shutdown -> reload via `:edit` -> re-attaches LSPs
 end, { desc = "󰑓 LSPs restart" })
+
+-- typos:ignore-next-line
+keymap("n", "<leader>ot", function()
+	vim.treesitter.start()
+	vim.notify("Treesitter restarted", vim.log.levels.TRACE, { icon = "󰑓" })
+end, { desc = "󰑓 Treesitter restart" })

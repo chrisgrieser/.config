@@ -19,7 +19,11 @@ function M.uniqueKeymap(mode, lhs, rhs, opts)
 	if opts.unique == nil then opts.unique = true end
 
 	-- violating `unique=true` throws error; using `pcall` to still load other mappings
-	pcall(vim.keymap.set, mode, lhs, rhs, opts)
+	local success, _ = pcall(vim.keymap.set, mode, lhs, rhs, opts)
+	if not success then
+		local msg = ("[[%s]] %s"):format(mode, lhs)
+		vim.notify(msg, vim.log.levels.WARN, { title = "Duplicate keymap", timeout = false })
+	end
 end
 
 ---sets `buffer`, `silent` and `nowait` to true
