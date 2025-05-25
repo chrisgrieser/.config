@@ -1,6 +1,53 @@
 -- DOCS https://github.com/nvim-treesitter/nvim-treesitter/tree/main
 --------------------------------------------------------------------------------
 
+local ensureInstalled = {
+	-- https://github.com/nvim-treesitter/nvim-treesitter/blob/main/SUPPORTED_LANGUAGES.md
+	programmingLangs = {
+		"lua",
+		"bash", -- also used for zsh
+		"javascript",
+		"typescript",
+		"python",
+		"vim",
+		"ruby", -- brewfile
+		"swift",
+	},
+	dataFormats = {
+		"json",
+		"json5",
+		"jsonc",
+		"yaml",
+		"toml",
+		"xml", -- mac `.plist` are also xml
+	},
+	content = {
+		"markdown",
+		"markdown_inline",
+		"css",
+		"html",
+	},
+	specialFiletypes = {
+		"query", -- treesitter query files
+		"just",
+		"editorconfig",
+		"diff",
+		"git_config",
+		"git_rebase",
+		"gitcommit",
+		"gitignore",
+	},
+	embeddedLangs = {
+		"regex",
+		"luap", -- lua patterns
+		"luadoc",
+		"comment",
+		"requirements", -- pip requirements
+		"jsdoc",
+		"graphql",
+	},
+}
+
 return {
 	"nvim-treesitter/nvim-treesitter",
 	lazy = false,
@@ -8,67 +55,36 @@ return {
 	branch = "main", -- new versions follow main
 
 	opts = {
-		ensure_installed = {
-			-- https://github.com/nvim-treesitter/nvim-treesitter/blob/main/SUPPORTED_LANGUAGES.md
-			-- programming languages
-			"lua",
-			"bash", -- also used for zsh
-			"javascript",
-			"typescript",
-			"python",
-			"vim",
-			"ruby", -- brewfile
-			"swift",
-
-			-- data formats
-			"json",
-			"json5",
-			"jsonc",
-			"yaml",
-			"toml",
-			"xml", -- mac `.plist` are also xml
-
-			-- content
-			"markdown",
-			"markdown_inline",
-			"css",
-			"html",
-
-			-- special filetypes
-			"query", -- treesitter query files
-			"just",
-			"editorconfig",
-			"diff",
-			"git_config",
-			"git_rebase",
-			"gitcommit",
-			"gitignore",
-
-			-- embedded languages
-			"regex",
-			"luap", -- lua patterns
-			"luadoc",
-			"comment",
-			"requirements", -- pip requirements
-			"jsdoc",
-			"graphql",
-		},
-
-		highlight = { enable = true },
-		indent = {
-			enable = true,
-			disable = {
-				"typescript", -- sometimes indentation wrong
-				"javascript", -- ^
-				"markdown", -- indentation at bullet points is worse
-			},
-		},
+		install_dir = vim.fn.stdpath("data") .. "/treesitter-parsers",
 	},
-	init = function()
+	config = function(_, opts)
+		require("nvim-treesitter").setup(opts)
+
+		-- auto-install parsers
+		local alreadyInstalled = require("nvim-treesitter.config").installed_parsers()
+		local parsersToInstall = vim.iter(vim.tbl_values(ensureInstalled))
+			:flatten()
+			:filter(function(parser) return not vim.tbl_contains(alreadyInstalled, parser) end)
+			:totable()
+		vim.defer_fn(function() require("nvim-treesitter").install(parsersToInstall) end, 1000)
+
 		-- use bash parser for zsh files
 		vim.treesitter.language.register("bash", "zsh")
 
-		-- fixes/improvements for the comments parser
+		-- auto-start highlights & indentation
+		vim.api.nvim_create_autocmd("FileType", {
+			desc = "User: enable treesitter highlighting",
+			callback = function(ctx)
+				vim.treesitter.start()
+
+				local noIndent = { "markdown", "javascript", "typescript" }
+				if not vim.list_contains(noIndent, ctx.match) then
+					vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+				end
+			end,
+		})
+
+		-- COMMENTS parser: fixes/improvements
 		vim.api.nvim_create_autocmd({ "ColorScheme", "VimEnter" }, {
 			desc = "User: Highlights for the Treesitter `comments` parser",
 			callback = function()
@@ -82,25 +98,4 @@ return {
 			end,
 		})
 	end,
-
-	keys = {
-		{ -- copy code context
-			"<leader>yb",
-			function()
-				local codeContext = require("nvim-treesitter").statusline {
-					indicator_size = math.huge, -- disable shortening
-					type_patterns = { "class", "function", "method", "field", "pair" }, -- `pair` for yaml/json
-					separator = ".",
-				}
-				if codeContext and codeContext ~= "" then
-					codeContext = codeContext:gsub(" ?[:=][^:=]-$", ""):gsub(" ?= ?", "")
-					vim.fn.setreg("+", codeContext)
-					vim.notify(codeContext, nil, { title = "Copied", icon = "󰅍", ft = vim.bo.ft })
-				else
-					vim.notify("No code context.", vim.log.levels.WARN)
-				end
-			end,
-			desc = "󰅍 Code context",
-		},
-	},
 }
