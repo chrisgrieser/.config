@@ -1,4 +1,4 @@
 ; extends
 
-; PENDING https://github.com/nvim-treesitter/nvim-treesitter-textobjects/pull/757
+; PENDING https://github.com/nvim-treesitter/nvim-treesitter-textobjects/issues/769
 (comment) @comment.outer
