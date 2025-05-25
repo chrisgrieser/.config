@@ -55,8 +55,7 @@ return {
 	branch = "main", -- new versions follow `main`
 
 	opts = {
-		-- PENDING https://github.com/nvim-treesitter/nvim-treesitter/issues/7881
-		-- install_dir = vim.fn.stdpath("data") .. "/treesitter-parsers",
+		install_dir = vim.fn.stdpath("data") .. "/treesitter-parsers",
 	},
 	config = function(_, opts)
 		require("nvim-treesitter").setup(opts)

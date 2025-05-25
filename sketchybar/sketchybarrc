@@ -72,7 +72,7 @@ sketchybar \
 	script="./ram.sh" \
 	\
 	--add graph cpu_graph $row_2 60 \
-	--set cpu_graph update_freq="3" drawing=true \
+	--set cpu_graph update_freq="2" drawing=true \
 	background.height=18 \
 	background.color=$bg graph.color=$fg graph.fill_color=$graph_fill \
 	script="./cpu.sh" \

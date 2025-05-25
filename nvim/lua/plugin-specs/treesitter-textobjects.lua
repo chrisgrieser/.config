@@ -1,8 +1,11 @@
-local textobj = require("config.utils").extraTextobjMaps
+-- DOCS https://github.com/nvim-treesitter/nvim-treesitter-textobjects/tree/main#nvim-treesitter-textobjectshttps://github.com/nvim-treesitter/nvim-treesitter-textobjects/tree/main#nvim-treesitter-textobjects
+--------------------------------------------------------------------------------
 
-local function select(obj)
+local map = require("config.utils").extraTextobjMaps
+
+local function select(textobj)
 	return function()
-		require("nvim-treesitter-textobjects.select").select_textobject(obj, "textobjects")
+		require("nvim-treesitter-textobjects.select").select_textobject(textobj, "textobjects")
 	end
 end
 --------------------------------------------------------------------------------
@@ -61,39 +64,26 @@ return { -- treesitter-based textobjs
 		{ "ia", select("@parameter.inner"), mode = { "x", "o" }, desc = "󰏪 inner arg" },
 		{ "iu", select("@loop.inner"), mode = { "x", "o" }, desc = "󰛤 inner loop" },
 		{ "au", select("@loop.outer"), mode = { "x", "o" }, desc = "󰛤 outer loop" },
-		{ "a" .. textobj.call, select("@call.outer"), mode = { "x", "o" }, desc = "󰡱 outer call" },
-		{ "i" .. textobj.call, select("@call.inner"), mode = { "x", "o" }, desc = "󰡱 inner call" },
+		{ "a" .. map.call, select("@call.outer"), mode = { "x", "o" }, desc = "󰡱 outer call" },
+		{ "i" .. map.call, select("@call.inner"), mode = { "x", "o" }, desc = "󰡱 inner call" },
 		-- stylua: ignore start
-		{ "a" .. textobj.func, select("@function.outer"), mode = { "x", "o" }, desc = " outer function" },
-		{ "i" .. textobj.func, select("@function.inner"), mode = { "x", "o" }, desc = " inner function" },
-		{ "a" .. textobj.condition, select("@conditional.outer"), mode = { "x", "o" }, desc = "󱕆 outer condition" },
-		{ "i" .. textobj.condition, select("@conditional.inner"), mode = { "x", "o" }, desc = "󱕆 inner condition" },
+		{ "a" .. map.func, select("@function.outer"), mode = { "x", "o" }, desc = " outer function" },
+		{ "i" .. map.func, select("@function.inner"), mode = { "x", "o" }, desc = " inner function" },
+		{ "a" .. map.condition, select("@conditional.outer"), mode = { "x", "o" }, desc = "󱕆 outer condition" },
+		{ "i" .. map.condition, select("@conditional.inner"), mode = { "x", "o" }, desc = "󱕆 inner condition" },
 		-- stylua: ignore end
 
-		-- CUSTOM TEXTOBJECTS (defined via .scm files)
-		{
-			"r" .. textobj.call,
-			"<cmd>TSTextobjectSelect @call.justCaller<CR>",
-			mode = "o",
-			desc = "󰡱 rest of caller",
-		},
-		{
-			"ad",
-			"<cmd>TSTextobjectSelect @docstring.outer<CR>",
-			mode = { "x", "o" },
-			desc = "󰌠 outer docstring",
-			ft = "python",
-		},
-		{
-			"id",
-			"<cmd>TSTextobjectSelect @docstring.inner<CR>",
-			mode = { "x", "o" },
-			desc = "󰌠 inner docstring",
-			ft = "python",
-		},
+		-- CUSTOM TEXTOBJECTS (defined in my .scm files)
+		-- stylua: ignore start
+		{ "ad", select("@docstring.outer"), mode = { "x", "o" }, desc = "󰌠 outer docstring", ft = "python" },
+		{ "id", select("@docstring.inner"), mode = { "x", "o" }, desc = "󰌠 inner docstring", ft = "python" },
+		-- stylua: ignore end
+
+		{ "r" .. map.call, select("@call.justCaller"), mode = "o", desc = "󰡱 rest of caller" },
+
 		{ -- override default inner conditional for some languages
-			"i" .. textobj.condition,
-			"<cmd>TSTextobjectSelect @conditional.conditionOnly<CR>",
+			"i" .. map.condition,
+			select("@conditional.conditionOnly"),
 			mode = { "x", "o" },
 			desc = "󱕆 inner conditional",
 			ft = { "javascript", "typescript", "lua", "swift", "python", "bash", "zsh" },
@@ -101,18 +91,14 @@ return { -- treesitter-based textobjs
 
 		-- COMMENTS
 		-- only operator-pending to not conflict with selection-commenting
-		{
-			"q",
-			"<cmd>TSTextobjectSelect @comment.outer<CR>",
-			mode = "o",
-			desc = "󰆈 single comment",
-		},
+		{ "q", select("@comment.outer"), mode = "o", desc = "󰆈 single comment" },
 
 		{
 			"cq",
 			function()
-				-- not using `@comment.inner`, since not yet supported for many languages
-				vim.cmd.TSTextobjectSelect("@comment.outer")
+				-- not using `@comment.inner`, since not supported for many languages
+				local selectObj = require("nvim-treesitter-textobjects.select").select_textobject
+				selectObj("@comment.outer", "textobjects")
 				local comStr = vim.bo.commentstring:format("")
 				vim.cmd.normal { "c" .. comStr, bang = true }
 				vim.cmd.startinsert { bang = true }
@@ -126,7 +112,8 @@ return { -- treesitter-based textobjs
 				-- as opposed to regular usage of the textobj, also trims the line
 				-- and preserves the cursor position
 				local cursorBefore = vim.api.nvim_win_get_cursor(0)
-				vim.cmd.TSTextobjectSelect("@comment.outer")
+				local selectObj = require("nvim-treesitter-textobjects.select").select_textobject
+				selectObj("@comment.outer", "textobjects")
 				vim.cmd.normal { "d", bang = true }
 				local trimmedLine = vim.api.nvim_get_current_line():gsub("%s+$", "")
 				vim.api.nvim_set_current_line(trimmedLine)
