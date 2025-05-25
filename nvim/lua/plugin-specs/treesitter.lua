@@ -52,23 +52,13 @@ return {
 	"nvim-treesitter/nvim-treesitter",
 	lazy = false,
 	build = ":TSUpdate",
-	branch = "main", -- new versions follow main
+	branch = "main", -- new versions follow `main`
 
 	opts = {
-		install_dir = vim.fn.stdpath("data") .. "/treesitter-parsers",
+		-- PENDING https://github.com/nvim-treesitter/nvim-treesitter/issues/7881
+		-- install_dir = vim.fn.stdpath("data") .. "/treesitter-parsers",
 	},
-	config = function(spec, opts)
-		-- BUG https://github.com/nvim-treesitter/nvim-treesitter/issues/7881
-		if spec.branch ~= "main" then
-			require("nvim-treesitter.configs").setup {
-				ensure_installed = vim.iter(vim.tbl_values(ensureInstalled)):flatten():totable(),
-				highlight = { enable = true },
-			}
-			return
-		end
-
-		--------------------------------------------------------------------------
-
+	config = function(_, opts)
 		require("nvim-treesitter").setup(opts)
 
 		-- auto-install parsers
