@@ -204,11 +204,11 @@ return {
 							}
 							local patch = item.diff .. "\n"
 							local out = vim.system(args, { stdin = patch }):wait()
-							if out.code ~= 0 then
+							if out.code == 0 then
+								picker:find() -- refresh
+							else
 								vim.notify(out.stderr, vim.log.levels.ERROR)
-								return
 							end
-							picker:find() -- refresh
 						end,
 					},
 				}

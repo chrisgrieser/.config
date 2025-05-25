@@ -168,6 +168,7 @@ end, { desc = "󰩫 Exit snippet", expr = true })
 do
 	keymap({ "n", "x" }, "y", function()
 		vim.b.cursorPreYank = vim.api.nvim_win_get_cursor(0)
+		Chainsaw(vim) -- 🪚
 		return "y"
 	end, { expr = true })
 	keymap("n", "Y", function()

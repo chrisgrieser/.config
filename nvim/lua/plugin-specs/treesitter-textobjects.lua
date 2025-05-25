@@ -6,7 +6,6 @@ local function select(textobj)
 		require("nvim-treesitter-textobjects.select").select_textobject(textobj, "textobjects")
 	end
 end
---------------------------------------------------------------------------------
 
 return { -- treesitter-based textobjs
 	"nvim-treesitter/nvim-treesitter-textobjects",
@@ -123,7 +122,7 @@ return { -- treesitter-based textobjs
 				vim.api.nvim_set_current_line(trimmedLine)
 				vim.api.nvim_win_set_cursor(0, cursorBefore)
 			end,
-			desc = "󰆈 Delete single comment",
+			desc = "󰆈 Sticky delete single comment",
 		},
 	},
 }
