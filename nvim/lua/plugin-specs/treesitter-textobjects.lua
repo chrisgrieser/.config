@@ -1,49 +1,73 @@
 local textobj = require("config.utils").extraTextobjMaps
+
+local function select(obj)
+	return function()
+		require("nvim-treesitter-textobjects.select").select_textobject(obj, "textobjects")
+	end
+end
 --------------------------------------------------------------------------------
 
 return { -- treesitter-based textobjs
 	"nvim-treesitter/nvim-treesitter-textobjects",
 	dependencies = "nvim-treesitter/nvim-treesitter",
-	cmd = {
-		"TSTextobjectSelect",
-		"TSTextobjectSwapNext",
-		"TSTextobjectSwapPrevious",
-		"TSTextobjectGotoNextStart",
-		"TSTextobjectGotoPreviousStart",
-		"TSTextobjectPeekDefinitionCode",
+	branch = "main", -- needed for nvim-treesitter's `main` branch
+
+	opts = {
+		select = {
+			lookahead = true,
+			-- `true` would even remove line breaks from charwise objects,
+			-- thus staying with `false`
+			include_surrounding_whitespace = false,
+		},
 	},
-
 	keys = {
-		-- stylua: ignore start
-
-		-- PEEK HOVER
-		-- (useful e.g. for typescript types/interfaces, where regular hover does
-		-- not show the fields.)
-		{ "<leader>H", "<cmd>TSTextobjectPeekDefinitionCode @class.outer<CR>", desc = " LSP Peek" },
 
 		-- MOVE
-		{ "<C-j>", "<cmd>TSTextobjectGotoNextStart @function.outer<CR>", desc = " Goto next function" },
-		{ "<C-k>", "<cmd>TSTextobjectGotoPreviousStart @function.outer<CR>", desc = " Goto prev function" },
+		{
+			"<C-j>",
+			function()
+				local move = require("nvim-treesitter-textobjects.move")
+				move.goto_next_start("@function.outer", "textobjects")
+			end,
+			desc = " Goto next function",
+		},
+		{
+			"<C-k>",
+			function()
+				local move = require("nvim-treesitter-textobjects.move")
+				move.goto_previous_start("@function.outer", "textobjects")
+			end,
+			desc = " Goto prev function",
+		},
 
 		-- SWAP
-		{ "ä", "<cmd>TSTextobjectSwapNext @parameter.inner<CR>", desc = " Swap next arg" },
-		{ "Ä", "<cmd>TSTextobjectSwapPrevious @parameter.inner<CR>", desc = " Swap prev arg" },
+		{
+			"ä",
+			function() require("nvim-treesitter-textobjects.swap").swap_next("@parameter.inner") end,
+			desc = " Swap next arg",
+		},
+		{
+			"Ä",
+			function() require("nvim-treesitter-textobjects.swap").swap_previous("@parameter.inner") end,
+			desc = " Swap prev arg",
+		},
 
 		-- TEXT OBJECTS
-		{ "a<CR>", "<cmd>TSTextobjectSelect @return.outer<CR>", mode = {"x","o"}, desc = "↩ outer return" },
-		{ "i<CR>", "<cmd>TSTextobjectSelect @return.inner<CR>", mode = {"x","o"}, desc = "↩ inner return" },
-		{ "a/", "<cmd>TSTextobjectSelect @regex.outer<CR>", mode = {"x","o"}, desc = " outer regex" },
-		{ "i/", "<cmd>TSTextobjectSelect @regex.inner<CR>", mode = {"x","o"}, desc = " inner regex" },
-		{ "aa", "<cmd>TSTextobjectSelect @parameter.outer<CR>", mode = {"x","o"}, desc = "󰏪 outer arg" },
-		{ "ia", "<cmd>TSTextobjectSelect @parameter.inner<CR>", mode = {"x","o"}, desc = "󰏪 inner arg" },
-		{ "iu", "<cmd>TSTextobjectSelect @loop.inner<CR>", mode = {"x","o"}, desc = "󰛤 inner loop" },
-		{ "au", "<cmd>TSTextobjectSelect @loop.outer<CR>", mode = {"x","o"}, desc = "󰛤 outer loop" },
-		{ "a" .. textobj.func, "<cmd>TSTextobjectSelect @function.outer<CR>", mode = {"x","o"},desc = " outer function" },
-		{ "i" .. textobj.func, "<cmd>TSTextobjectSelect @function.inner<CR>", mode = {"x","o"},desc = " inner function" },
-		{ "a" .. textobj.condition, "<cmd>TSTextobjectSelect @conditional.outer<CR>", mode = {"x","o"},desc = "󱕆 outer condition" },
-		{ "i" .. textobj.condition, "<cmd>TSTextobjectSelect @conditional.inner<CR>", mode = {"x","o"},desc = "󱕆 inner condition" },
-		{ "a" .. textobj.call, "<cmd>TSTextobjectSelect @call.outer<CR>", mode = {"x","o"},desc = "󰡱 outer call" },
-		{ "i" .. textobj.call, "<cmd>TSTextobjectSelect @call.inner<CR>", mode = {"x","o"},desc = "󰡱 inner call" },
+		{ "a<CR>", select("@return.outer"), mode = { "x", "o" }, desc = "↩ outer return" },
+		{ "i<CR>", select("@return.inner"), mode = { "x", "o" }, desc = "↩ inner return" },
+		{ "a/", select("@regex.outer"), mode = { "x", "o" }, desc = " outer regex" },
+		{ "i/", select("@regex.inner"), mode = { "x", "o" }, desc = " inner regex" },
+		{ "aa", select("@parameter.outer"), mode = { "x", "o" }, desc = "󰏪 outer arg" },
+		{ "ia", select("@parameter.inner"), mode = { "x", "o" }, desc = "󰏪 inner arg" },
+		{ "iu", select("@loop.inner"), mode = { "x", "o" }, desc = "󰛤 inner loop" },
+		{ "au", select("@loop.outer"), mode = { "x", "o" }, desc = "󰛤 outer loop" },
+		{ "a" .. textobj.call, select("@call.outer"), mode = { "x", "o" }, desc = "󰡱 outer call" },
+		{ "i" .. textobj.call, select("@call.inner"), mode = { "x", "o" }, desc = "󰡱 inner call" },
+		-- stylua: ignore start
+		{ "a" .. textobj.func, select("@function.outer"), mode = { "x", "o" }, desc = " outer function" },
+		{ "i" .. textobj.func, select("@function.inner"), mode = { "x", "o" }, desc = " inner function" },
+		{ "a" .. textobj.condition, select("@conditional.outer"), mode = { "x", "o" }, desc = "󱕆 outer condition" },
+		{ "i" .. textobj.condition, select("@conditional.inner"), mode = { "x", "o" }, desc = "󱕆 inner condition" },
 		-- stylua: ignore end
 
 		-- CUSTOM TEXTOBJECTS (defined via .scm files)
