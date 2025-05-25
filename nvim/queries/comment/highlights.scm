@@ -16,12 +16,7 @@
 ("text" @comment.warning
   (#any-of? @comment.warning "SIC" "CAVEAT" "DEPRECATION"))
 
-; `inline_code` in comments is highlgihted
-; caveat: not working with spaces or special characters inside ``, see https://github.com/stsewd/tree-sitter-comment/issues/34
-("text" @markup.raw.markdown_inline
-  (#match? @markup.raw.markdown_inline "`.+`"))
-
 ; MAKE UPPERCASE COMMENTS BOLD
-; (requires setting the hlgroup `@comments.bold`)
+; (requires defining a hlgroup `@comments.bold` in the user config)
 ("text" @comment.bold
   (#lua-match? @comment.bold "^[%u%d%p][%u%d%p]+$"))

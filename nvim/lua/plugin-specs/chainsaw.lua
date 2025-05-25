@@ -1,6 +1,5 @@
 return {
 	"chrisgrieser/nvim-chainsaw",
-	lazy = false,
 	opts = {
 		visuals = { icon = "󰹈" },
 		preCommitHook = {
