@@ -149,7 +149,6 @@ return {
 	opts = {
 		registries = {
 			-- local one must come first to take priority
-			-- add my own local registry: https://github.com/mason-org/mason-registry/pull/3671#issuecomment-1851976705
 			-- also requires `yq` being available in the system
 			-- ("file:%s/personal-mason-registry"):format(vim.fn.stdpath("config")),
 			"github:mason-org/mason-registry",
@@ -158,7 +157,10 @@ return {
 			height = 0.85,
 			width = 0.8,
 			backdrop = 60,
-			icons = { package_installed = "✓", package_pending = "󰔟" },
+			icons = {
+				package_installed = "✓",
+				package_pending = "󰔟",
+			},
 			keymaps = { -- consistent with keymaps for lazy.nvim
 				uninstall_package = "x",
 				toggle_help = "?",
