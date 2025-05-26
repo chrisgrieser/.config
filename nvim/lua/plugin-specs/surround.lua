@@ -19,6 +19,18 @@ return {
 		},
 		surrounds = {
 			invalid_key_behavior = { add = false, find = false, delete = false, change = false },
+			l = {
+				find = "[%w.:_]+%b()", -- includes `:` for lua-methods/css-pseudoclasses
+				delete = "([%w.:_]+%()().*(%))()",
+			},
+			f = { -- only one-line lua functions
+				find = "function ?[%w_]* ?%b().- end",
+				delete = "(function ?[%w_]* ?%b() ?)().-( end)()",
+			},
+			o = { -- only one-line lua conditionals
+				find = "if .- then .- end",
+				delete = "(if .- then )().-( end)()",
+			},
 		},
 	},
 }

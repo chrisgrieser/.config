@@ -53,9 +53,10 @@ vim.api.nvim_create_autocmd("FocusLost", {
 	desc = "User: Auto-cleanup. Once a week, on first `FocusLost`, delete older files.",
 	once = true,
 	callback = function()
-		if os.date("%a") ~= "Mon" or jit.os == "windows" then return end
-		vim.system { "find", vim.o.undodir, "-mtime", "+15d", "-delete" }
-		vim.system { "find", vim.lsp.log.get_filename(), "-size", "+50M", "-delete" }
+		if os.date("%a") == "Mon" or jit.os == "OSX" then
+			vim.system { "find", vim.o.undodir, "-mtime", "+15d", "-delete" }
+			vim.system { "find", vim.lsp.log.get_filename(), "-size", "+50M", "-delete" }
+		end
 	end,
 })
 
@@ -231,7 +232,6 @@ local globToTemplateMap = {
 	["**/Alfred.alfredpreferences/workflows/**/*.js"] = "jxa.js",
 
 	["**/Justfile"] = "justfile.just",
-	["**/*typos.toml"] = "typos.toml",
 	["**/.github/workflows/**/*.y*ml"] = "github-action.yaml",
 }
 
@@ -403,10 +403,10 @@ local function luckyIndent(bufnr)
 	if spaces and not vim.bo.expandtab then
 		vim.bo[bufnr].expandtab = true
 		vim.bo[bufnr].shiftwidth = #spaces
-		vim.notify_once(("Set to %d spaces."):format(#spaces), nil, opts)
+		vim.notify_once(("Set indentation to %d spaces."):format(#spaces), nil, opts)
 	elseif not spaces and vim.bo.expandtab then
 		vim.bo[bufnr].expandtab = false
-		vim.notify_once("Set to tabs.", nil, opts)
+		vim.notify_once("Set indentation to tabs.", nil, opts)
 	end
 end
 
@@ -490,9 +490,10 @@ end
 -- RECORDING
 do
 	local function play(soundFile)
+		if jit.os ~= "OSX" then return end
 		local soundDir =
 			"/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/"
-		if jit.os == "OSX" then vim.system { "afplay", soundDir .. soundFile } end
+		vim.system { "afplay", soundDir .. soundFile }
 	end
 	local cursorlineBg
 
@@ -501,14 +502,16 @@ do
 		callback = function()
 			cursorlineBg = vim.api.nvim_get_hl(0, { name = "CursorLine" }).bg
 			vim.api.nvim_set_hl(0, "CursorLine", { link = "DiffDelete" })
+			-- typos: ignore-next-line
 			play("begin_record.caf")
 		end,
 	})
 
 	vim.api.nvim_create_autocmd("RecordingLeave", {
-		desc = "User: Macro recording utilities",
+		desc = "User: Macro recording utilities (2)",
 		callback = function()
 			vim.api.nvim_set_hl(0, "CursorLine", { bg = cursorlineBg })
+			-- typos: ignore-next-line
 			play("end_record.caf")
 		end,
 	})

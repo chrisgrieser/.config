@@ -2,4 +2,4 @@
 
 # Custom ignore regex patterns: https://github.com/crate-ci/typos/blob/master/docs/reference.md#example-configurations
 [default]
-extend-ignore-re = ["typos:ignore-next-line[^\\n]*\\n[^\\n]*"]
+extend-ignore-re = ["typos: ignore-next-line[^\\n]*\\n[^\\n]*"]
