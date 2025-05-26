@@ -21,7 +21,6 @@ return { -- treesitter-based textobjs
 		},
 	},
 	keys = {
-
 		-- MOVE
 		{
 			"<C-j>",
