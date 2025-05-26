@@ -14,27 +14,24 @@ local ensureInstalled = {
 		"just-lsp",
 		"ltex-ls-plus", -- LanguageTool: natural language linter (ltex fork)
 		"lua-language-server",
-		"marksman", -- Markdown lsp
+		"marksman", -- markdown lsp
 		"ruff", -- python linter & formatter
 		"taplo", -- toml lsp
 		"typescript-language-server",
-		"ts_query_ls", -- Treesitter query files
+		"ts_query_ls", -- treesitter query files
 		"typos-lsp", -- spellchecker for code
 		"yaml-language-server",
 		"gh-actions-language-server" -- github actions
 	},
-
 	linters = {
 		"markdownlint", -- via efm
 		"shellcheck", -- via efm PENDING https://github.com/bash-lsp/bash-language-server/issues/663
 	},
-
 	formatters = {
 		"markdown-toc", -- automatic table-of-contents (via efm)
 		"shfmt", -- shell formatter (via bashls)
 		"stylua", -- lua formatter (via efm)
 	},
-
 	debuggers = {
 		"debugpy", -- python debugger (via nvim-dap-python)
 	},
@@ -54,7 +51,7 @@ local nonMasonLsps = {
 local function notify(msg, level, opts)
 	if not opts then opts = {} end
 	opts.title = "Mason"
-	if not opts.icon then opts.icon = "" end
+	opts.icon = ""
 	vim.notify(msg, vim.log.levels[level:upper()], opts)
 end
 
@@ -82,8 +79,8 @@ local function installOrUpdate(pack, version)
 	pack:install({ version = version }, function(success, result)
 		if success then
 			local mode = version and "updated" or "installed"
-			local postMsg = ("[%s] %s."):format(pack.name, mode)
-			notify(postMsg, "info", { id = "mason.install", icon = "" })
+			local postMsg = ("[%s] %s "):format(pack.name, mode)
+			notify(postMsg, "info", { id = "mason.install" })
 		else
 			local mode = version and "update" or "install"
 			local postMsg = ("[%s] failed to %s: %s"):format(pack.name, mode, result)
@@ -147,9 +144,8 @@ return {
 		vim.defer_fn(syncPackages, 4000)
 	end,
 	opts = {
+		-- local one must come first to take priority, also requires `yq`
 		registries = {
-			-- local one must come first to take priority
-			-- also requires `yq` being available in the system
 			-- ("file:%s/personal-mason-registry"):format(vim.fn.stdpath("config")),
 			"github:mason-org/mason-registry",
 		},
