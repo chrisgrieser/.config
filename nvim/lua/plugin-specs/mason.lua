@@ -3,11 +3,11 @@ local ensureInstalled = {
 		"basedpyright", -- python lsp (pyright fork)
 		"bash-language-server", -- also used for zsh
 		"biome", -- ts/js/json/css linter/formatter
-		"css-variables-language-server", -- support css variables across multiple files
 		"css-lsp",
+		"css-variables-language-server", -- support css variables across multiple files
 		"efm", -- integration of external linter/formatter
 		"emmet-language-server", -- css/html snippets
-		-- "emmylua_ls", -- improved lua LSP, disabled since LSP still has bugs
+		"gh-actions-language-server", -- github actions
 		"harper-ls", -- natural language linter
 		"html-lsp",
 		"json-lsp",
@@ -17,11 +17,11 @@ local ensureInstalled = {
 		"marksman", -- markdown lsp
 		"ruff", -- python linter & formatter
 		"taplo", -- toml lsp
-		"typescript-language-server",
 		"ts_query_ls", -- treesitter query files
+		"typescript-language-server",
 		"typos-lsp", -- spellchecker for code
 		"yaml-language-server",
-		"gh-actions-language-server" -- github actions
+		-- "emmylua_ls", -- improved lua LSP, disabled since it still has bugs
 	},
 	linters = {
 		"markdownlint", -- via efm
@@ -38,8 +38,8 @@ local ensureInstalled = {
 }
 
 local nonMasonLsps = {
-	-- Not installed via `mason`, but included in Xcode Command Line Tools (which
-	-- are installed on macOS-dev devices as they are needed for `homebrew`)
+	-- Not installed via `mason`, but included in Xcode Command Line Tools 
+	-- (which are usually installed as pre-requisite for `homebrew`)
 	jit.os == "OSX" and "sourcekit" or nil,
 }
 
@@ -62,7 +62,7 @@ local function enableLsps()
 		:map(function(pack)
 			local lspConfigName = pack.spec.neovim and pack.spec.neovim.lspconfig
 			if lspConfigName then return lspConfigName end
-			notify(pack.name .. " has no `neovim` entry", "warn")
+			notify(pack.name .. " has no `neovim` entry.", "warn")
 		end)
 		:totable()
 	vim.lsp.enable(lspConfigNames)

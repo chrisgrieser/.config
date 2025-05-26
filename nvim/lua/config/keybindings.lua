@@ -462,7 +462,7 @@ keymap("n", "<leader>ol", function()
 	vim.defer_fn(vim.cmd.edit, 1000) -- wait for shutdown -> reload via `:edit` -> re-attaches LSPs
 end, { desc = "󰑓 LSPs restart" })
 
--- typos:ignore-next-line
+-- typos: ignore-next-line
 keymap("n", "<leader>ot", function()
 	vim.treesitter.start()
 	vim.notify("Treesitter restarted", vim.log.levels.TRACE, { icon = "󰑓" })
