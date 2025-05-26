@@ -40,7 +40,7 @@ local ensureInstalled = {
 	embeddedLangs = {
 		"regex",
 		"luap", -- lua patterns
-		"luadoc",
+		-- "luadoc",
 		"comment",
 		"requirements", -- pip requirements
 		"jsdoc",
@@ -64,10 +64,9 @@ return {
 		local alreadyInstalled = require("nvim-treesitter.config").installed_parsers()
 		local parsersToInstall = vim.iter(vim.tbl_values(ensureInstalled))
 			:flatten()
-			-- :filter(function(parser) return not vim.tbl_contains(alreadyInstalled, parser) end)
+			:filter(function(parser) return not vim.tbl_contains(alreadyInstalled, parser) end)
 			:totable()
-		require("nvim-treesitter").install(parsersToInstall)
-		-- vim.defer_fn(function() require("nvim-treesitter").install(parsersToInstall) end, 1000)
+		vim.defer_fn(function() require("nvim-treesitter").install(parsersToInstall) end, 1000)
 
 		-- use bash parser for zsh files
 		vim.treesitter.language.register("bash", "zsh")

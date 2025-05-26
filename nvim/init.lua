@@ -1,12 +1,14 @@
 -- re-open last file, if nvim was opened without arguments
 vim.defer_fn(function()
-	if vim.fn.argc() > 0 then return end
+	if vim.fn.argc(-1) > 0 then return end
 	local lastFile = vim.iter(vim.v.oldfiles):find(function(file)
 		local notGitCommit = vim.fs.basename(file) ~= "COMMIT_EDITMSG"
 		local exists = vim.uv.fs_stat(file)
 		return exists and notGitCommit
 	end)
-	if lastFile then vim.cmd.edit(lastFile) end
+	if not lastFile then return end
+	local initialWinId = 1000
+	vim.api.nvim_win_call(initialWinId, function() vim.cmd.edit(lastFile) end)
 end, 1)
 
 --------------------------------------------------------------------------------

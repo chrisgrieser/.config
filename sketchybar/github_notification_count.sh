@@ -25,7 +25,7 @@ if [[ "$SENDER" = "front_app_switched" ]]; then
 	[[ "$activated_app" == "Brave Browser" || "$deactivated_app" == "Brave Browser" ]] || return 0
 
 	# when triggered due to opening in browser, wait so notification opened is marked as read
-	[[ "$activated_app" == "Brave Browser" ]] && sleep 9
+	[[ "$activated_app" == "Brave Browser" ]] && sleep 5
 fi
 
 #───────────────────────────────────────────────────────────────────────────────
