@@ -232,7 +232,8 @@ local globToTemplateMap = {
 	["**/Alfred.alfredpreferences/workflows/**/*.js"] = "jxa.js",
 
 	["**/Justfile"] = "justfile.just",
-	["**/.github/workflows/**/*.y*ml"] = "github-action.yaml",
+	["**/.github/workflows/*.yml"] = "github-action.yaml",
+	["**/.github/workflows/*.yaml"] = "github-action.yaml",
 }
 
 vim.api.nvim_create_autocmd({ "BufNewFile", "BufReadPost" }, {
@@ -362,15 +363,14 @@ local function addFavicons(bufnr)
 		end)
 	end)
 end
--- deferred so treesitter is ready
+
 vim.api.nvim_create_autocmd({ "FocusGained", "BufReadPost", "TextChanged", "InsertLeave" }, {
 	desc = "User: Add favicons to URLs",
 	callback = function(ctx)
-		local delay = ctx.event == "BufReadPost" and 200 or 0
+		local delay = ctx.event == "BufReadPost" and 200 or 0 -- wait for treesitter
 		vim.defer_fn(function() addFavicons(ctx.buf) end, delay)
 	end,
 })
-vim.defer_fn(addFavicons, 200)
 
 --------------------------------------------------------------------------------
 
@@ -498,7 +498,7 @@ do
 	local cursorlineBg
 
 	vim.api.nvim_create_autocmd("RecordingEnter", {
-		desc = "User: Macro recording utilities (1)",
+		desc = "User: Macro recording utilities (1/2)",
 		callback = function()
 			cursorlineBg = vim.api.nvim_get_hl(0, { name = "CursorLine" }).bg
 			vim.api.nvim_set_hl(0, "CursorLine", { link = "DiffDelete" })
@@ -508,7 +508,7 @@ do
 	})
 
 	vim.api.nvim_create_autocmd("RecordingLeave", {
-		desc = "User: Macro recording utilities (2)",
+		desc = "User: Macro recording utilities (2/2)",
 		callback = function()
 			vim.api.nvim_set_hl(0, "CursorLine", { bg = cursorlineBg })
 			-- typos: ignore-next-line
