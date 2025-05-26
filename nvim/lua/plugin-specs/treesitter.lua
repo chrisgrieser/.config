@@ -1,4 +1,4 @@
--- TODO https://github.com/nvim-treesitter/nvim-treesitter/tree/main
+-- https://github.com/nvim-treesitter/nvim-treesitter/tree/main
 -- https://github.com/nvim-treesitter/nvim-treesitter/blob/main/SUPPORTED_LANGUAGES.md
 --------------------------------------------------------------------------------
 
@@ -9,9 +9,11 @@ local ensureInstalled = {
 		"javascript",
 		"typescript",
 		"python",
-		"vim",
-		"ruby", -- brewfile
+		"svelte",
 		"swift",
+		"vim",
+		"ruby", -- used by brewfile
+		"rust",
 	},
 	dataFormats = {
 		"json",
@@ -29,6 +31,7 @@ local ensureInstalled = {
 	},
 	specialFiletypes = {
 		"query", -- treesitter query files
+		"make",
 		"just",
 		"editorconfig",
 		"diff",
@@ -36,13 +39,13 @@ local ensureInstalled = {
 		"git_rebase",
 		"gitcommit",
 		"gitignore",
+		"requirements", -- pip requirements file
 	},
 	embeddedLangs = {
 		"regex",
 		"luap", -- lua patterns
-		-- "luadoc",
+		"luadoc",
 		"comment",
-		"requirements", -- pip requirements
 		"jsdoc",
 		"graphql",
 	},
@@ -86,7 +89,7 @@ return {
 			end,
 		})
 
-		-- COMMENTS parser: fixes/improvements
+		-- COMMENTS parser
 		vim.api.nvim_create_autocmd({ "ColorScheme", "VimEnter" }, {
 			desc = "User: Highlights for the Treesitter `comments` parser",
 			callback = function()
