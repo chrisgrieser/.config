@@ -21,8 +21,8 @@ keymap("n", "<leader>ps", function() vim.ui.open(vim.g.icloudSync) end, { desc =
 keymap({ "n", "x" }, "j", "gj")
 keymap({ "n", "x" }, "k", "gk")
 
--- HJKL behaves like hjkl, but bigger distance
--- (not mapping in op-pending, since using custom textobjects for those)
+-- make HJKL behave like hjkl but bigger with distance
+-- (not mapping in op-pending, since using custom textobjects for those keys)
 keymap({ "n", "x" }, "H", "0^", { desc = "󰲠 char" }) -- scroll fully to the left
 keymap("o", "H", "^", { desc = "󰲠 char" })
 keymap({ "n", "x" }, "L", "$", { desc = "󰬓 char" })
