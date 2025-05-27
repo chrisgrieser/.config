@@ -22,7 +22,7 @@ return {
 					-- (no loss of diagnostic, `unused-local` still informs about these functions)
 					"unused-function",
 				},
-				globals = { "vim" } -- when working on nvim plugins that lack a `.luarc.json`
+				globals = { "vim" }, -- when working on nvim plugins that lack a `.luarc.json`
 			},
 			hint = { -- inlay hints
 				enable = not emmyluaInUse,

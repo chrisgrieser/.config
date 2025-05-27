@@ -5,6 +5,6 @@ return {
 	on_attach = require("config.utils").detachIfObsidianOrIcloud,
 	init_options = {
 		diagnosticSeverity = "Hint",
-		config = "~/.config/+ linter-configs/global-typos-config.toml"
+		config = "~/.config/+ linter-configs/global-typos-config.toml",
 	},
 }
