@@ -1,18 +1,28 @@
 vim.api.nvim_create_autocmd("VimEnter", { -- triggers only after `Lazy` startup installs
-	desc = "User: Reopen last file if neovim has no args",
+	desc = "User: Reopen last file",
 	callback = function()
-		if vim.fn.argc(-1) > 0 then return end
-		vim.defer_fn(function() -- `vim.schedule` ensures not breaking file loading
-			local lastFile = vim.iter(vim.v.oldfiles):find(function(file)
-				local notGitCommitMsg = vim.fs.basename(file) ~= "COMMIT_EDITMSG"
-				local exists = vim.uv.fs_stat(file) ~= nil
-				return exists and notGitCommitMsg
-			end)
-			if not lastFile then return end
-			vim.notify("🪚 🟩")
-			local initialWinId = 1000 -- ensures not triggering on `Lazy` startup installs
-			vim.api.nvim_win_call(initialWinId, function() vim.cmd.edit(lastFile) end)
-		end, 1)
+		vim.schedule(function() -- `vim.schedule` ensures not breaking file loading
+			local toOpen
+
+			-- reopen last file if neovim was opened without arguments
+			if vim.fn.argc(-1) == 0 then
+				toOpen = vim.iter(vim.v.oldfiles):find(function(file)
+					local notGitCommitMsg = vim.fs.basename(file) ~= "COMMIT_EDITMSG"
+					local exists = vim.uv.fs_stat(file) ~= nil
+					return exists and notGitCommitMsg
+				end)
+			end
+
+			-- fix neovide not opening the file when `Lazy` does installs on startup
+			if vim.fn.argc(-1) > 0 and vim.g.neovide and vim.bo.ft == "lazy" then
+				local arg = vim.fn.argv(0) --[[@as string]]
+				toOpen = vim.startswith(arg, "/") and arg or vim.env.HOME .. "/" .. arg
+			end
+
+			if not toOpen then return end
+			local initialWinId = 1000 -- ensures not triggering on `Lazy` startup win
+			vim.api.nvim_win_call(initialWinId, function() vim.cmd.edit(toOpen) end)
+		end)
 	end,
 })
 
