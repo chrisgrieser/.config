@@ -8,6 +8,19 @@
 	<string>❇️</string>
 	<key>connections</key>
 	<dict>
+		<key>01434C3A-64A7-41B0-922B-2B4326ED375C</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>2BA2E52E-6876-4A61-A185-652BA211060B</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>03BC9713-12DC-4573-82A2-D3E72094B209</key>
 		<array>
 			<dict>
@@ -1154,6 +1167,27 @@ open -g "hammerspoon://sync-repos"</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>acceptsfiles</key>
+				<false/>
+				<key>acceptsmulti</key>
+				<integer>0</integer>
+				<key>acceptstext</key>
+				<true/>
+				<key>acceptsurls</key>
+				<false/>
+				<key>name</key>
+				<string>Add event</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.universalaction</string>
+			<key>uid</key>
+			<string>01434C3A-64A7-41B0-922B-2B4326ED375C</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
@@ -1333,6 +1367,27 @@ open -g "hammerspoon://sync-repos"</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>matchmode</key>
+				<integer>1</integer>
+				<key>matchstring</key>
+				<string>\n$</string>
+				<key>regexcaseinsensitive</key>
+				<false/>
+				<key>regexmultiline</key>
+				<false/>
+				<key>replacestring</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.replace</string>
+			<key>uid</key>
+			<string>A51066A2-90E9-43BC-A689-373B76D3219F</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
@@ -1394,27 +1449,6 @@ open -g "hammerspoon://sync-repos"</string>
 			<string>34D80934-1F03-4771-953A-359FACF82441</string>
 			<key>version</key>
 			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>matchmode</key>
-				<integer>1</integer>
-				<key>matchstring</key>
-				<string>\n$</string>
-				<key>regexcaseinsensitive</key>
-				<false/>
-				<key>regexmultiline</key>
-				<false/>
-				<key>replacestring</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.replace</string>
-			<key>uid</key>
-			<string>A51066A2-90E9-43BC-A689-373B76D3219F</string>
-			<key>version</key>
-			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1629,6 +1663,15 @@ open -g "hammerspoon://sync-repos"</string>
 	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
+		<key>01434C3A-64A7-41B0-922B-2B4326ED375C</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>6</integer>
+			<key>xpos</key>
+			<real>550</real>
+			<key>ypos</key>
+			<real>700</real>
+		</dict>
 		<key>03BC9713-12DC-4573-82A2-D3E72094B209</key>
 		<dict>
 			<key>colorindex</key>
@@ -1693,8 +1736,6 @@ open -g "hammerspoon://sync-repos"</string>
 		<dict>
 			<key>colorindex</key>
 			<integer>6</integer>
-			<key>note</key>
-			<string>create new event</string>
 			<key>xpos</key>
 			<real>550</real>
 			<key>ypos</key>
@@ -1725,7 +1766,7 @@ open -g "hammerspoon://sync-repos"</string>
 			<key>xpos</key>
 			<real>720</real>
 			<key>ypos</key>
-			<real>900</real>
+			<real>995</real>
 		</dict>
 		<key>24102BFB-F7BC-4FA4-8E66-11134380E9A5</key>
 		<dict>
@@ -1770,7 +1811,7 @@ open -g "hammerspoon://sync-repos"</string>
 			<key>xpos</key>
 			<real>550</real>
 			<key>ypos</key>
-			<real>900</real>
+			<real>995</real>
 		</dict>
 		<key>3512A462-2B85-41D9-84EB-A78922ED365E</key>
 		<dict>
@@ -1882,7 +1923,7 @@ open -g "hammerspoon://sync-repos"</string>
 			<key>xpos</key>
 			<real>890</real>
 			<key>ypos</key>
-			<real>900</real>
+			<real>995</real>
 		</dict>
 		<key>8D0538B5-46D7-4A6B-B800-3C208CB8971B</key>
 		<dict>
@@ -1998,7 +2039,7 @@ open -g "hammerspoon://sync-repos"</string>
 			<key>xpos</key>
 			<real>720</real>
 			<key>ypos</key>
-			<real>725</real>
+			<real>820</real>
 		</dict>
 		<key>C0681313-3D90-4930-937F-0894FCCAF748</key>
 		<dict>
@@ -2095,7 +2136,7 @@ open -g "hammerspoon://sync-repos"</string>
 			<key>xpos</key>
 			<real>550</real>
 			<key>ypos</key>
-			<real>725</real>
+			<real>820</real>
 		</dict>
 		<key>F7331471-4575-4686-BB12-FD49331C261C</key>
 		<dict>
