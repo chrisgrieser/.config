@@ -1,15 +1,24 @@
--- re-open last file, if nvim was opened without arguments
-vim.defer_fn(function()
+local autocmd
+
+local function reopenLastFileIfNeovimHasNoArgs()
+	vim.api.nvim_del_autocmd(autocmd)
+	vim.notify("🪚 🔵")
 	if vim.fn.argc(-1) > 0 then return end
 	local lastFile = vim.iter(vim.v.oldfiles):find(function(file)
 		local notGitCommit = vim.fs.basename(file) ~= "COMMIT_EDITMSG"
 		local exists = vim.uv.fs_stat(file)
 		return exists and notGitCommit
 	end)
-	if not lastFile then return end
-	local initialWinId = 1000
-	vim.api.nvim_win_call(initialWinId, function() vim.cmd.edit(lastFile) end)
-end, 1)
+	if lastFile then vim.cmd.edit(lastFile) end
+end
+vim.schedule(reopenLastFileIfNeovimHasNoArgs) -- after options, so shadafile is set
+
+autocmd = vim.api.nvim_create_autocmd("BufEnter", {
+	desc = "User: ",
+	callback = function(ctx)
+		Chainsaw(ctx) -- 🪚
+	end,
+})
 
 --------------------------------------------------------------------------------
 
@@ -24,6 +33,8 @@ local function safeRequire(module)
 		vim.defer_fn(function() vim.notify(msg, vim.log.levels.ERROR) end, 500)
 	end
 end
+
+--------------------------------------------------------------------------------
 
 safeRequire("config.options") -- early, so available for plugins configs
 
