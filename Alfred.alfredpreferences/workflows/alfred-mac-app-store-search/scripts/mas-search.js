@@ -33,33 +33,28 @@ function httpRequest(url) {
  * @property {number} trackId - id also used by `mas` cli
  */
 
-/**
- * @param {Date} absDate
- * @return {string} relative date
- */
-function relativeDate(absDate) {
-	const deltaMins = (Date.now() - +absDate) / 1000 / 60;
-	/** @type {"year"|"month"|"week"|"day"|"hour"|"minute"} */
+/** @param {string|Date} date @return {string} relative date */
+function relativeDate(date) {
+	const absDate = typeof date === "string" ? new Date(date) : date;
+	const deltaHours = (Date.now() - +absDate) / 1000 / 60 / 60;
+	/** @type {"year"|"month"|"week"|"day"|"hour"} */
 	let unit;
 	let delta;
-	if (deltaMins < 60) {
-		unit = "minute";
-		delta = Math.floor(deltaMins);
-	} else if (deltaMins < 60 * 24) {
+	if (deltaHours < 24) {
 		unit = "hour";
-		delta = Math.floor(deltaMins / 60);
-	} else if (deltaMins < 60 * 24 * 7) {
+		delta = deltaHours;
+	} else if (deltaHours < 24 * 7) {
 		unit = "day";
-		delta = Math.floor(deltaMins / 60 / 24);
-	} else if (deltaMins < 60 * 24 * 7 * 4) {
+		delta = Math.floor(deltaHours / 24);
+	} else if (deltaHours < 24 * 7 * 4) {
 		unit = "week";
-		delta = Math.floor(deltaMins / 60 / 24 / 7);
-	} else if (deltaMins < 60 * 24 * 7 * 4 * 12) {
+		delta = Math.floor(deltaHours / 24 / 7);
+	} else if (deltaHours < 24 * 7 * 4 * 12) {
 		unit = "month";
-		delta = Math.floor(deltaMins / 60 / 24 / 7 / 4);
+		delta = Math.floor(deltaHours / 24 / 7 / 4);
 	} else {
 		unit = "year";
-		delta = Math.floor(deltaMins / 60 / 24 / 7 / 4 / 12);
+		delta = Math.floor(deltaHours / 24 / 7 / 4 / 12);
 	}
 	const formatter = new Intl.RelativeTimeFormat("en", { style: "short", numeric: "auto" });
 	return formatter.format(-delta, unit);
@@ -100,8 +95,8 @@ function downloadImageOrGetCached(theApp) {
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run(argv) {
-	const useAppLogos = $.getenv("use_app_logos") === "1"
-	const limit = $.getenv("result_number");
+	const useAppLogos = $.getenv("use_app_logos") === "1";
+	const limit = Number.parseInt($.getenv("result_number"));
 
 	const query = argv[0] || "";
 	if (query === "") {
@@ -111,21 +106,22 @@ function run(argv) {
 	}
 
 	// CAVEAT this assumes that the device locale is also the app store locale.
-	// This is not always the case, but 99% of the time, so the best we can do.
+	// (This is almost always the case.)
 	const regionCode = ObjC.unwrap($.NSLocale.currentLocale.objectForKey($.NSLocaleCountryCode));
 	console.log("Region Code:", regionCode); // e.g., "DE", "US"
 
-	// DOCS https://itunes.apple.com/search?term=notion&entity=macSoftware
-	const apiURL = `https://itunes.apple.com/search?entity=macSoftware&country=${regionCode}&limit=${limit}&term=${encodeURIComponent(query)}`;
+	const apiURL =
+		"https://itunes.apple.com/search?entity=macSoftware" +
+		`&country=${regionCode}&limit=${limit}&term=${encodeURIComponent(query)}`;
 	const result = JSON.parse(httpRequest(apiURL))?.results;
 	if (!result) return JSON.stringify({ items: [{ title: "Error: No results", valid: false }] });
-	ensureCacheFolderExists();
 
 	const installedApps = standardApp
 		.doShellScript("mdfind 'kMDItemAppStoreHasReceipt == 1 && kMDItemKind == Application'")
 		.split("\r")
 		.map((line) => line.replace(/.*\/(.*)\.app$/, "$1"));
 
+	ensureCacheFolderExists();
 	/** @type {AlfredItem[]} */
 	const apps = result.map((/** @type {MacAppStoreResult} */ app) => {
 		const imagePath = useAppLogos ? downloadImageOrGetCached(app) : "./icon.png";
@@ -133,7 +129,7 @@ function run(argv) {
 		const subtitle = [
 			app.price > 0 ? app.formattedPrice : "",
 			app.averageUserRating ? `★ ${app.averageUserRating.toFixed(1)}` : null,
-			relativeDate(new Date(app.currentVersionReleaseDate)),
+			relativeDate(app.currentVersionReleaseDate),
 			`${(app.fileSizeBytes / 1024 / 1024).toFixed(1)}Mb`,
 			app.description,
 		]

@@ -303,7 +303,7 @@ and the Mac App Store.
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>Note that with a higher number, it takes longer before the results are displayed.</string>
+			<string>The higher the number of results, the longer it takes before the results are displayed.</string>
 			<key>label</key>
 			<string>Number of results</string>
 			<key>type</key>
@@ -319,12 +319,12 @@ and the Mac App Store.
 				<key>required</key>
 				<false/>
 				<key>text</key>
-				<string></string>
+				<string>show</string>
 			</dict>
 			<key>description</key>
 			<string>Disabling this speeds up the search.</string>
 			<key>label</key>
-			<string>Show app logos</string>
+			<string>App logos</string>
 			<key>type</key>
 			<string>checkbox</string>
 			<key>variable</key>

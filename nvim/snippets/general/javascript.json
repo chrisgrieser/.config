@@ -159,8 +159,9 @@
   },
   "relative date": {
     "body": [
-      "/** @param {Date} absDate */",
-      "function relativeDate(absDate) {",
+      "/** @param {string|Date} date @return {string} relative date */",
+      "function relativeDate(date) {",
+      "\tconst absDate = typeof date === \"string\" ? new Date(date) : date;",
       "\tconst deltaMins = (Date.now() - +absDate) / 1000 / 60;",
       "\t/** @type {\"year\"|\"month\"|\"week\"|\"day\"|\"hour\"|\"minute\"} */",
       "\tlet unit;",
