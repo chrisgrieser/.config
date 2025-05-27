@@ -1,12 +1,16 @@
-vim.api.nvim_create_autocmd("VimEnter", { -- `VimEnter` triggers only after `Lazy` startup installs
+vim.api.nvim_create_autocmd("VimEnter", { -- triggers only after `Lazy` startup installs
 	desc = "User: Reopen last file if neovim has no args",
 	callback = function()
 		if vim.fn.argc(-1) > 0 then return end
 		vim.schedule(function() -- `vim.schedule` ensures not breaking file loading
-			local lastExistingFile = vim.iter(vim.v.oldfiles):find(vim.uv.fs_stat)
-			if not lastExistingFile then return end
+			local lastFile = vim.iter(vim.v.oldfiles):find(function(file)
+				local notGitCommitMsg = vim.fs.basename(file) ~= "COMMIT_EDITMSG"
+				local exists = vim.uv.fs_stat(file) ~= nil
+				return exists and notGitCommitMsg
+			end)
+			if not lastFile then return end
 			local initialWinId = 1000 -- ensures not triggering on `Lazy` startup installs
-			vim.api.nvim_win_call(initialWinId, function() vim.cmd.edit(lastExistingFile) end)
+			vim.api.nvim_win_call(initialWinId, function() vim.cmd.edit(lastFile) end)
 		end)
 	end,
 })
@@ -19,10 +23,9 @@ vim.api.nvim_create_autocmd("VimEnter", { -- `VimEnter` triggers only after `Laz
 ---@param module string
 local function safeRequire(module)
 	local success, errmsg = pcall(require, module)
-	if not success then
-		local msg = ("Error loading `%s`: %s"):format(module, errmsg)
-		vim.defer_fn(function() vim.notify(msg, vim.log.levels.ERROR) end, 500)
-	end
+	if success then return end
+	local msg = ("Error loading `%s`: %s"):format(module, errmsg)
+	vim.schedule(function() vim.notify(msg, vim.log.levels.ERROR) end)
 end
 
 safeRequire("config.options") -- first so available for plugins configs
@@ -40,13 +43,3 @@ safeRequire("config.keybindings")
 safeRequire("personal-plugins.git-conflict")
 safeRequire("config.backdrop-underline-fix")
 safeRequire("config.spellfixes")
-
-vim.api.nvim_create_autocmd("InsertEnter", {
-	desc = "User(once): Lazyload spellfixes",
-	once = true,
-	callback = function()
-		local timelogStart1 = os.clock() -- 🪚
-		safeRequire("config.spellfixes")
-		vim.notify(("#1 🪚: %.3fs"):format(os.clock() - timelogStart1))
-	end,
-})

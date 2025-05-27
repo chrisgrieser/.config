@@ -352,11 +352,9 @@ return {
 				},
 				recent = {
 					layout = "small_no_preview",
-					filter = {
-						paths = {
-							[vim.g.icloudSync] = false, -- e.g., scratch buffers
-							["/private/var/folders"] = false, -- temp locations for `pass`
-						},
+					filter = { ---@type snacks.picker.filter.Config
+						paths = { [vim.g.icloudSync] = false }, -- e.g., scratch buffers
+						filter = function(item) return vim.fs.basename(item.file) ~= "COMMIT_EDITMSG" end,
 					},
 				},
 				grep = {
