@@ -13,6 +13,25 @@ if not vim.uv.fs_stat(lazypath) then
 	end
 end
 vim.opt.runtimepath:prepend(lazypath)
+
+--------------------------------------------------------------------------------
+-- FIXES
+vim.api.nvim_create_autocmd("FileType", {
+	desc = "User: winfixbuf for lazy window",
+	pattern = "lazy",
+	callback = function() vim.wo.winfixbuf = true end,
+})
+
+-- FIX Backdrop PENDING https://github.com/folke/lazy.nvim/issues/1951
+vim.api.nvim_create_autocmd("FileType", {
+	desc = "User: fix backdrop for lazy window",
+	pattern = "lazy_backdrop",
+	callback = function(ctx)
+		local win = vim.fn.win_findbuf(ctx.buf)[1]
+		vim.api.nvim_win_set_config(win, { border = "none" })
+	end,
+})
+
 --------------------------------------------------------------------------------
 
 require("lazy").setup {
@@ -77,29 +96,6 @@ require("lazy").setup {
 		},
 	},
 }
-
---------------------------------------------------------------------------------
--- FIXES
-local group = vim.api.nvim_create_augroup("lazynvim-fixes", { clear = true })
-
-vim.api.nvim_create_autocmd("FileType", {
-	desc = "User: winfixbuf for lazy window",
-	group = group,
-	pattern = "lazy",
-	callback = function() vim.wo.winfixbuf = true end,
-})
-
--- FIX Backdrop
--- PENDING https://github.com/folke/lazy.nvim/issues/1951
-vim.api.nvim_create_autocmd("FileType", {
-	desc = "User: fix backdrop for lazy window",
-	pattern = "lazy_backdrop",
-	group = group,
-	callback = function(ctx)
-		local win = vim.fn.win_findbuf(ctx.buf)[1]
-		vim.api.nvim_win_set_config(win, { border = "none" })
-	end,
-})
 
 --------------------------------------------------------------------------------
 
