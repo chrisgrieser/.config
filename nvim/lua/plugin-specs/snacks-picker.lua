@@ -26,7 +26,8 @@ local function importLuaModule()
 		end,
 		format = function(item, _picker) -- only display the grepped line
 			local out = {}
-			Snacks.picker.highlight.format(item, item.line, out)
+			local line = item.line:gsub("^local ", "")
+			Snacks.picker.highlight.format(item, line, out)
 			return out
 		end,
 		confirm = function(picker, item) -- insert the grepped line below the current one
