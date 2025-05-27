@@ -32,16 +32,13 @@ vim.opt.splitbelow = true -- split down instead of up
 
 vim.opt.iskeyword:append("-") -- treat `-` as word character, same as `_`
 
--- treat all numbers as positive, ignoring dashes
--- this also makes `<C-x>` stop at `0`
+-- treat all numbers as positive (ignoring dashes), also makes `<C-x>` stop at `0`
 vim.opt.nrformats = { "unsigned" }
 
 vim.opt.autowriteall = true
 
 vim.opt.jumpoptions:append("stack") -- https://www.reddit.com/r/neovim/comments/16nead7/comment/k1e1nj5/?context=3
 vim.opt.startofline = true -- motions like "G" also move to the first char
-
-vim.opt.timeoutlen = 666
 
 -- Formatting `vim.opt.formatoptions:remove("o")` would not work, since it's
 -- overwritten by ftplugins having the `o` option (which many do). Therefore
@@ -79,30 +76,27 @@ vim.opt.pumheight = 12
 -- different values for `textwidth` and `max_line_length`, so vim behavior like
 -- `gww` or auto-breaking comment still follows `textwidth`, while using a
 -- larger line length setting for formatters.
--- Setting those values independently is not possible normally, so we disable
+-- Setting those values independently is normally not possible, so we disable
 -- the respective function in the `editorconfig` module instead as a workaround.
 require("editorconfig").properties.max_line_length = nil
 vim.opt.textwidth = 80
 
--- mostly set by `editorconfig`, therefore only fallback
-vim.opt.expandtab = false
-vim.opt.tabstop = 3 -- yes, I like my indentation 3 spaces wide
-vim.opt.shiftwidth = 3
-
+vim.opt.expandtab = false -- mostly set by `editorconfig`, therefore only fallback
+vim.opt.tabstop = 3
 vim.opt.shiftround = true
 vim.opt.smartindent = true
 
 --------------------------------------------------------------------------------
 -- AUTOMATION
 
--- read: access cwd via window title
-vim.opt.title = true
-vim.opt.titlelen = 0 -- 0 = do not shorten title
-vim.opt.titlestring = "%{getcwd()}"
-
--- write: issue commands via nvim server
 if vim.g.neovide then
-	pcall(os.remove, "/tmp/nvim_server.pipe") -- b/c after a crash, the server is still there
+	-- read: access cwd via window title
+	vim.opt.title = true
+	vim.opt.titlelen = 0 -- 0 = do not shorten title
+	vim.opt.titlestring = "%{getcwd()}"
+
+	-- write: issue commands via nvim server
+	pcall(os.remove, "/tmp/nvim_server.pipe") -- since after a crash, the server is still there
 	vim.fn.serverstart("/tmp/nvim_server.pipe")
 end
 
@@ -132,7 +126,6 @@ vim.opt.fillchars:append {
 	eob = " ",
 	msgsep = "═",
 	lastline = "↓",
-	fold = " ", -- overwritten by nvim-origami
 
 	-- thick window separators
 	horiz = "▄",
