@@ -15,5 +15,7 @@ on run argv
 		click menu item "New Event or Reminder" of menu "File" of menu bar 1
 		delay 0.1
 		keystroke "v" using {command down}
+		delay 0.1
+		key code 36 -- enter
 	end tell
 end run
