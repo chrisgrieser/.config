@@ -15,12 +15,6 @@ end
 vim.opt.runtimepath:prepend(lazypath)
 
 --------------------------------------------------------------------------------
--- FIXES
-vim.api.nvim_create_autocmd("FileType", {
-	desc = "User: winfixbuf for lazy window",
-	pattern = "lazy",
-	callback = function() vim.wo.winfixbuf = true end,
-})
 
 -- FIX Backdrop PENDING https://github.com/folke/lazy.nvim/issues/1951
 vim.api.nvim_create_autocmd("FileType", {
