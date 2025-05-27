@@ -4,6 +4,8 @@
 <dict>
 	<key>bundleid</key>
 	<string>de.chris-grieser.writing-assistant</string>
+	<key>category</key>
+	<string>⭐️</string>
 	<key>connections</key>
 	<dict>
 		<key>16C4AEFA-0A32-4B8B-8C80-7DC517AFCA22</key>
@@ -17,6 +19,19 @@
 				<string></string>
 				<key>vitoclose</key>
 				<false/>
+			</dict>
+		</array>
+		<key>24D48E69-F669-4493-949A-59AD5BF3953C</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>932AEE6C-291D-43C3-87CC-D2E54FA12721</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<true/>
 			</dict>
 		</array>
 		<key>322E5C7E-0088-48C7-8510-ABB6F13FAF6B</key>
@@ -108,6 +123,19 @@
 				<string></string>
 				<key>vitoclose</key>
 				<false/>
+			</dict>
+		</array>
+		<key>8381EC56-AD14-4D7B-91BF-C21F7828F3EB</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>C1BED2FD-BC8A-49F4-9F65-1C12FCF12F3D</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<true/>
 			</dict>
 		</array>
 		<key>875F6925-275F-4987-8E44-E0D75F60EF4F</key>
@@ -283,6 +311,12 @@
 				<false/>
 				<key>focusedappvariablename</key>
 				<string></string>
+				<key>hotkey</key>
+				<integer>47</integer>
+				<key>hotmod</key>
+				<integer>1048576</integer>
+				<key>hotstring</key>
+				<string>.</string>
 				<key>leftcursor</key>
 				<false/>
 				<key>modsmode</key>
@@ -352,6 +386,12 @@
 				<false/>
 				<key>focusedappvariablename</key>
 				<string></string>
+				<key>hotkey</key>
+				<integer>33</integer>
+				<key>hotmod</key>
+				<integer>1048576</integer>
+				<key>hotstring</key>
+				<string>Ü</string>
 				<key>leftcursor</key>
 				<false/>
 				<key>modsmode</key>
@@ -485,6 +525,10 @@
 				<false/>
 				<key>focusedappvariablename</key>
 				<string></string>
+				<key>hotkey</key>
+				<integer>0</integer>
+				<key>hotmod</key>
+				<integer>0</integer>
 				<key>leftcursor</key>
 				<false/>
 				<key>modsmode</key>
@@ -578,6 +622,27 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>acceptsfiles</key>
+				<false/>
+				<key>acceptsmulti</key>
+				<integer>0</integer>
+				<key>acceptstext</key>
+				<true/>
+				<key>acceptsurls</key>
+				<false/>
+				<key>name</key>
+				<string>Rephrase with OpenAI</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.universalaction</string>
+			<key>uid</key>
+			<string>24D48E69-F669-4493-949A-59AD5BF3953C</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
@@ -628,6 +693,10 @@
 				<false/>
 				<key>focusedappvariablename</key>
 				<string></string>
+				<key>hotkey</key>
+				<integer>0</integer>
+				<key>hotmod</key>
+				<integer>0</integer>
 				<key>leftcursor</key>
 				<false/>
 				<key>modsmode</key>
@@ -743,6 +812,27 @@
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>acceptsfiles</key>
+				<true/>
+				<key>acceptsmulti</key>
+				<integer>0</integer>
+				<key>acceptstext</key>
+				<true/>
+				<key>acceptsurls</key>
+				<true/>
+				<key>name</key>
+				<string>Apple Intelligence: Writing Tools</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.universalaction</string>
+			<key>uid</key>
+			<string>8381EC56-AD14-4D7B-91BF-C21F7828F3EB</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>## Usage
@@ -751,7 +841,7 @@ The workflow offers four [hotkeys](https://www.alfredapp.com/help/workflows/trig
 1. Autocorrect the word under the cursor.
 2. Suggest synonyms for the word under the cursor.
 3. Rephrase the selected text via ChatGPT, improving its language
-	+ Requires OpenAI API key.
+	+ Requires an OpenAI API key.
 	+ There are 3 formatting options: Overwrite selection, changes as
 	  Markdown ==highlights== and ~~strikethroughs~~, and [Critic
 	  Markup](https://github.com/CriticMarkup/CriticMarkup-toolkit).
@@ -774,7 +864,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>270</real>
 			<key>ypos</key>
-			<real>560</real>
+			<real>630</real>
 		</dict>
 		<key>16C4AEFA-0A32-4B8B-8C80-7DC517AFCA22</key>
 		<dict>
@@ -783,7 +873,16 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>520</real>
 			<key>ypos</key>
-			<real>680</real>
+			<real>750</real>
+		</dict>
+		<key>24D48E69-F669-4493-949A-59AD5BF3953C</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>8</integer>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>535</real>
 		</dict>
 		<key>322E5C7E-0088-48C7-8510-ABB6F13FAF6B</key>
 		<dict>
@@ -806,7 +905,7 @@ DOUBLE CLICK TO EDIT</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>630</real>
+			<real>700</real>
 		</dict>
 		<key>3D656B72-508C-472A-89A5-17C81D76BE04</key>
 		<dict>
@@ -862,6 +961,15 @@ DOUBLE CLICK TO EDIT</string>
 			<real>180</real>
 			<key>ypos</key>
 			<real>30</real>
+		</dict>
+		<key>8381EC56-AD14-4D7B-91BF-C21F7828F3EB</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>10</integer>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>875</real>
 		</dict>
 		<key>875F6925-275F-4987-8E44-E0D75F60EF4F</key>
 		<dict>
@@ -925,18 +1033,18 @@ DOUBLE CLICK TO EDIT</string>
 			<key>xpos</key>
 			<real>680</real>
 			<key>ypos</key>
-			<real>560</real>
+			<real>630</real>
 		</dict>
 		<key>C1BED2FD-BC8A-49F4-9F65-1C12FCF12F3D</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>10</integer>
 			<key>note</key>
-			<string>don't pass arg</string>
+			<string>don't pass an argument, since we do not need the selection</string>
 			<key>xpos</key>
-			<real>280</real>
+			<real>285</real>
 			<key>ypos</key>
-			<real>710</real>
+			<real>780</real>
 		</dict>
 		<key>CCE767C4-80B8-4E6D-B5B9-B733E7305B91</key>
 		<dict>
@@ -963,7 +1071,7 @@ DOUBLE CLICK TO EDIT</string>
 			<key>xpos</key>
 			<real>365</real>
 			<key>ypos</key>
-			<real>680</real>
+			<real>750</real>
 		</dict>
 		<key>FB9BFB29-2E49-4D2A-B6A7-3B98B6C2CBC7</key>
 		<dict>
@@ -972,7 +1080,7 @@ DOUBLE CLICK TO EDIT</string>
 			<key>xpos</key>
 			<real>180</real>
 			<key>ypos</key>
-			<real>650</real>
+			<real>720</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
@@ -1057,33 +1165,21 @@ DOUBLE CLICK TO EDIT</string>
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<string>gpt-4o-mini</string>
+				<string>gpt-4.1-nano</string>
 				<key>pairs</key>
 				<array>
 					<array>
-						<string>o1</string>
-						<string>o1</string>
+						<string>GPT 4.1 nano</string>
+						<string>gpt-4.1-nano</string>
 					</array>
 					<array>
-						<string>GPT-4o</string>
-						<string>gpt-4o</string>
-					</array>
-					<array>
-						<string>o1 mini</string>
-						<string>o1-mini</string>
-					</array>
-					<array>
-						<string>GPT-4o mini</string>
-						<string>gpt-4o-mini</string>
-					</array>
-					<array>
-						<string>GPT-3.5 Turbo (deprecated)</string>
-						<string>gpt-3.5-turbo</string>
+						<string>GPT 4.1 mini</string>
+						<string>gpt-4.1-mini</string>
 					</array>
 				</array>
 			</dict>
 			<key>description</key>
-			<string>OpenAI model. The list is roughly sorted by price/capability, meaning the most expensive but also most capable model is at the top. For prices and more information, see https://platform.openai.com/docs/models</string>
+			<string>OpenAI model. The mini model is higher quality, but more expensive. The nano model is cheaper and quicker. For more information, see https://platform.openai.com/docs/models</string>
 			<key>label</key>
 			<string></string>
 			<key>type</key>
@@ -1164,7 +1260,7 @@ DOUBLE CLICK TO EDIT</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.7.3</string>
+	<string>1.8.0</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
