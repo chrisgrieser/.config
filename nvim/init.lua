@@ -1,22 +1,13 @@
-local autocmd
-
-local function reopenLastFileIfNeovimHasNoArgs()
-	vim.api.nvim_del_autocmd(autocmd)
-	vim.notify("🪚 🔵")
-	if vim.fn.argc(-1) > 0 then return end
-	local lastFile = vim.iter(vim.v.oldfiles):find(function(file)
-		local notGitCommit = vim.fs.basename(file) ~= "COMMIT_EDITMSG"
-		local exists = vim.uv.fs_stat(file)
-		return exists and notGitCommit
-	end)
-	if lastFile then vim.cmd.edit(lastFile) end
-end
-vim.schedule(reopenLastFileIfNeovimHasNoArgs) -- after options, so shadafile is set
-
-autocmd = vim.api.nvim_create_autocmd("BufEnter", {
-	desc = "User: ",
-	callback = function(ctx)
-		Chainsaw(ctx) -- 🪚
+vim.api.nvim_create_autocmd("VimEnter", { -- `VimEnter` triggers only after `Lazy` startup installs
+	desc = "User: Reopen last file if neovim has no args",
+	callback = function()
+		if vim.fn.argc(-1) > 0 then return end
+		vim.schedule(function() -- `vim.schedule` ensures not breaking file loading
+			local lastExistingFile = vim.iter(vim.v.oldfiles):find(vim.uv.fs_stat)
+			if not lastExistingFile then return end
+			local initialWinId = 1000 -- ensures not triggering on `Lazy` startup installs
+			vim.api.nvim_win_call(initialWinId, function() vim.cmd.edit(lastExistingFile) end)
+		end)
 	end,
 })
 
@@ -34,9 +25,7 @@ local function safeRequire(module)
 	end
 end
 
---------------------------------------------------------------------------------
-
-safeRequire("config.options") -- early, so available for plugins configs
+safeRequire("config.options") -- first so available for plugins configs
 
 if not vim.env.NO_PLUGINS then -- for security, such as when editing a password with `pass`
 	safeRequire("config.lazy")
@@ -48,13 +37,16 @@ safeRequire("config.neovide-gui-settings")
 safeRequire("config.autocmds")
 safeRequire("config.keybindings")
 
---------------------------------------------------------------------------------
-
 safeRequire("personal-plugins.git-conflict")
 safeRequire("config.backdrop-underline-fix")
+safeRequire("config.spellfixes")
 
 vim.api.nvim_create_autocmd("InsertEnter", {
 	desc = "User(once): Lazyload spellfixes",
 	once = true,
-	callback = function() safeRequire("config.spellfixes") end,
+	callback = function()
+		local timelogStart1 = os.clock() -- 🪚
+		safeRequire("config.spellfixes")
+		vim.notify(("#1 🪚: %.3fs"):format(os.clock() - timelogStart1))
+	end,
 })
