@@ -4,50 +4,51 @@
 
 local ensureInstalled = {
 	programmingLangs = {
-		"lua",
 		"bash", -- also used for zsh
 		"javascript",
-		"typescript",
+		"lua",
 		"python",
-		"svelte",
-		"swift",
-		"vim",
 		"ruby", -- used by Brewfile
 		"rust",
+		"svelte",
+		"swift",
+		"typescript",
+		"vim",
 	},
 	dataFormats = {
 		"json",
 		"json5",
 		"jsonc",
-		"yaml",
 		"toml",
 		"xml", -- mac `.plist` are also xml
+		"yaml",
 	},
 	content = {
-		"markdown",
-		"markdown_inline",
 		"css",
 		"html",
+		"markdown",
+		"markdown_inline",
 	},
 	specialFiletypes = {
-		"query", -- treesitter query files
-		"make",
-		"just",
-		"editorconfig",
 		"diff",
+		"editorconfig",
 		"git_config",
 		"git_rebase",
 		"gitcommit",
 		"gitignore",
+		"just",
+		"make",
+		"query", -- treesitter query files
 		"requirements", -- pip requirements file
 	},
 	embeddedLangs = {
-		"regex",
-		"luap", -- lua patterns
-		"luadoc",
 		"comment",
-		"jsdoc",
 		"graphql",
+		"jsdoc",
+		"luadoc",
+		"luap", -- lua patterns
+		"regex",
+		"rst", -- python reST
 	},
 }
 
