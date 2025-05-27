@@ -12,7 +12,7 @@ local ensureInstalled = {
 		"svelte",
 		"swift",
 		"vim",
-		"ruby", -- used by brewfile
+		"ruby", -- used by Brewfile
 		"rust",
 	},
 	dataFormats = {

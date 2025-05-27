@@ -2,16 +2,17 @@ vim.api.nvim_create_autocmd("VimEnter", { -- triggers only after `Lazy` startup 
 	desc = "User: Reopen last file if neovim has no args",
 	callback = function()
 		if vim.fn.argc(-1) > 0 then return end
-		vim.schedule(function() -- `vim.schedule` ensures not breaking file loading
+		vim.defer_fn(function() -- `vim.schedule` ensures not breaking file loading
 			local lastFile = vim.iter(vim.v.oldfiles):find(function(file)
 				local notGitCommitMsg = vim.fs.basename(file) ~= "COMMIT_EDITMSG"
 				local exists = vim.uv.fs_stat(file) ~= nil
 				return exists and notGitCommitMsg
 			end)
 			if not lastFile then return end
+			vim.notify("🪚 🟩")
 			local initialWinId = 1000 -- ensures not triggering on `Lazy` startup installs
 			vim.api.nvim_win_call(initialWinId, function() vim.cmd.edit(lastFile) end)
-		end)
+		end, 1)
 	end,
 })
 
