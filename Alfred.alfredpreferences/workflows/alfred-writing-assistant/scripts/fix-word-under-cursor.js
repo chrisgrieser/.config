@@ -14,6 +14,7 @@ function httpRequest(url) {
 
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
+	const delaySecs = Number.parseInt($.getenv("delay_ms")) / 1000;
 	const se = Application("System Events");
 	se.includeStandardAdditions = true;
 
@@ -22,7 +23,7 @@ function run() {
 	se.keyCode(124, { using: ["option down"] }); // word right
 	se.keyCode(123, { using: ["option down", "shift down"] }); // select word to left
 	se.keystroke("c", { using: ["command down"] }); // copy
-	delay(0.1);
+	delay(delaySecs);
 	const wordUnderCursor = se.theClipboard();
 
 	// API call via Google
