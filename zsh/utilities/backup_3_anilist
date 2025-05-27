@@ -2,7 +2,7 @@
 
 # CONFIG
 username="pseudometa"
-bkp_destination="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Backups/watchlist/"
+bkp_destination="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Backups/watchlists/"
 
 #───────────────────────────────────────────────────────────────────────────────
 
@@ -28,7 +28,7 @@ clone_and_venv "$exporter_mal_xml"
 # sending empty line to stdin to skip "press enter to exit" prompt at the end
 echo | python3 anipy.py -user="$username"
 
-cp -f ./output/anime*.json "$bkp_destination"
+cp -f ./output/anime*.json "$bkp_destination/anilist_$(date +%Y-%m-%d).json"
 rm -rf /tmp/"$(basename "$exporter_mal_xml")"
 
 open "$bkp_destination"

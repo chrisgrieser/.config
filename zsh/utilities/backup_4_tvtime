@@ -2,7 +2,7 @@
 
 # CONFIG
 envfile_with_login="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/private dotfiles/tvtime-liberator.env"
-bkp_destination="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Backups/watchlist/"
+bkp_destination="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Backups/watchlists/"
 
 #───────────────────────────────────────────────────────────────────────────────
 set -e
