@@ -6,8 +6,7 @@ ObjC.import("stdlib");
 function httpRequest(url) {
 	const queryURL = $.NSURL.URLWithString(url);
 	const data = $.NSData.dataWithContentsOfURL(queryURL);
-	const requestStr = $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding).js;
-	return requestStr;
+	return $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding).js;
 }
 
 //──────────────────────────────────────────────────────────────────────────────
@@ -33,10 +32,12 @@ function run() {
 
 	// using first word, since sometimes google suggests multiple words, but we
 	// only want the first as the spellfix
-	let fixedWord = firstSuggestion.match(/^\S+/)[0];
+	let firstWord = firstSuggestion.match(/^\S+/)[0];
+
+	// preserve capitalization
 	if (wordUnderCursor.charAt(0) === wordUnderCursor.charAt(0).toUpperCase()) {
-		fixedWord = fixedWord.charAt(0).toUpperCase() + fixedWord.slice(1);
+		firstWord = firstWord.charAt(0).toUpperCase() + firstWord.slice(1);
 	}
 
-	return fixedWord; // paste via Alfred
+	return firstWord; // paste via Alfred
 }
