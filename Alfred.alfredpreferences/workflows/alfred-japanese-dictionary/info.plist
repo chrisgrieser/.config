@@ -326,7 +326,7 @@
 				<key>acceptsurls</key>
 				<false/>
 				<key>name</key>
-				<string>Jisho</string>
+				<string>Jisho Lookup</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.trigger.universalaction</string>
@@ -1067,7 +1067,7 @@ to set hotkey for selection lookup</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.3.2</string>
+	<string>1.3.3</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
