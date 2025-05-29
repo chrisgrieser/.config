@@ -244,10 +244,15 @@ function reflog {
 # INTERACTIVE GIT LOG
 # uses `_gitlog` from `magic-dashboard.zsh`
 function gli {
+	if ! typeset -f _gitlog > /dev/null; then
+	    echo "requires \`_gitlog.zsh\` from zsh magic-dashboard"
+		 return 1
+	fi
+
 	local hash key_pressed selected repo
 
 	local preview_format="%C(yellow)%h %C(red)%D %n%C(blue)%an %C(green)(%ch)%C(reset) %n%n%C(bold)%C(magenta)%s %C(cyan)%n%b%C(reset)"
-	local preview_cmd="git show {1} --stat=,\$FZF_PREVIEW_COLUMNS,\$FZF_PREVIEW_COLUMNS --color=always --format='$preview_format' \
+	local preview_cmd="git show {1} --stat=\$FZF_PREVIEW_COLUMNS --color=always --format='$preview_format' \
 		| sed '\$d' ; git --no-pager diff {1}^!"
 
 	if [[ -x "$(command -v delta)" ]]; then
