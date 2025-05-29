@@ -19,7 +19,6 @@ function run(argv) {
 	const apiKey =
 		$.NSProcessInfo.processInfo.environment.objectForKey("alfred_apikey").js ||
 		app.doShellScript('source "$HOME/.zshenv"; echo "$OPENAI_API_KEY"').trim();
-	const prompt = $.getenv("static_prompt") + " " + selection;
 	// Needs division by 10, since Alfred workflow config does not allow setting
 	// decimal values in its number sliders.
 	const temperature = Number.parseInt($.getenv("temperature")) / 10;
@@ -27,7 +26,10 @@ function run(argv) {
 
 	const data = {
 		model: $.getenv("openai_model"),
-		messages: [{ role: "user", content: prompt }],
+		messages: [
+			{ role: "system", content: $.getenv("static_prompt") },
+			{ role: "user", content: selection },
+		],
 		temperature: temperature,
 		// biome-ignore lint/style/useNamingConvention: not defined by me
 		frequency_penalty: frequencyPenalty,
@@ -39,7 +41,7 @@ function run(argv) {
 
 	// DOCS https://platform.openai.com/docs/api-reference/chat
 	const response = app.doShellScript(
-		`curl --max-time 15 https://api.openai.com/v1/chat/completions \
+		`curl --silent --max-time 15 https://api.openai.com/v1/chat/completions \
 		-H 'Content-Type: application/json' \
 		-H 'Authorization: Bearer ${apiKey}' \
 		--data-binary @'${dataCache}' `,
