@@ -15,10 +15,11 @@ local ensureInstalled = {
 		"ltex-ls-plus", -- LanguageTool: natural language linter (ltex fork)
 		"lua-language-server",
 		"marksman", -- markdown lsp
+		"pyrefly", -- python type checker
 		"ruff", -- python linter & formatter
 		"taplo", -- toml lsp
 		"ts_query_ls", -- treesitter query files
-		"ty",
+		"ty", -- python type checker
 		"typescript-language-server",
 		"typos-lsp", -- spellchecker for code
 		"yaml-language-server",
