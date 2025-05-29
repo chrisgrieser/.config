@@ -83,7 +83,7 @@ return {
 				local hasStarted = pcall(vim.treesitter.start) -- errors for filetypes with no parser
 
 				-- indent
-				local noIndent = { "markdown", "javascript", "typescript" }
+				local noIndent = { "bash", "zsh" }
 				if hasStarted and not vim.list_contains(noIndent, ctx.match) then
 					vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
 				end

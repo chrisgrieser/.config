@@ -244,17 +244,23 @@ function reflog {
 # INTERACTIVE GIT LOG
 # uses `_gitlog` from `magic-dashboard.zsh`
 function gli {
-	if [[ ! -x "$(command -v delta)" ]]; then print "\e[1;33mdelta not installed (\`brew install git-delta\`)\e[0m" && return 1; fi
-
 	local hash key_pressed selected repo
+
 	local preview_format="%C(yellow)%h %C(red)%D %n%C(blue)%an %C(green)(%ch)%C(reset) %n%n%C(bold)%C(magenta)%s %C(cyan)%n%b%C(reset)"
+	local preview_cmd="git show {1} --stat=,\$FZF_PREVIEW_COLUMNS,\$FZF_PREVIEW_COLUMNS --color=always --format='$preview_format' \
+		| sed '\$d' ; git --no-pager diff {1}^!"
+
+	if [[ -x "$(command -v delta)" ]]; then
+		theme="$(defaults read -g AppleInterfaceStyle &> /dev/null && echo "dark" || echo "light")"
+		preview_cmd="$preview_cmd | delta --$theme"
+	fi
 
 	selected=$(
 		_gitlog --no-graph --color=always |
 			fzf --ansi --no-sort --track \
 				--header-first --header="↵ Checkout   ^H Hash   ^G GitHub   ^D Diff" \
-				--expect="ctrl-h,ctrl-g,ctrl-d" --with-nth=2.. --preview-window=55% \
-				--preview="git show {1} --stat=,30,30 --color=always --format='$preview_format' | sed '\$d' ; git diff {1}^! | delta" \
+				--expect="ctrl-h,ctrl-g,ctrl-d" --with-nth=2.. --preview-window="55%" \
+				--preview="$preview_cmd" \
 				--height="100%" #required for wezterm's pane:is_alt_screen_active()
 	)
 	[[ -z "$selected" ]] && return 0 # aborted
