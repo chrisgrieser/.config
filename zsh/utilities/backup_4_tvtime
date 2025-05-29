@@ -24,6 +24,7 @@ if [[ ! -x "$(command -v bun)" ]]; then
 	print "\n---"
 	brew uninstall oven-sh/bun/bun
 	brew untap oven-sh/bun
+	rm -rf "$HOME/.bun" # cache stuff
 else
 	bun install
 	bun cli
