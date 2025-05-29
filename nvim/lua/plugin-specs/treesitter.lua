@@ -65,12 +65,14 @@ return {
 		require("nvim-treesitter").setup(opts)
 
 		-- auto-install parsers
-		local alreadyInstalled = require("nvim-treesitter.config").installed_parsers()
-		local parsersToInstall = vim.iter(vim.tbl_values(ensureInstalled))
-			:flatten()
-			:filter(function(parser) return not vim.tbl_contains(alreadyInstalled, parser) end)
-			:totable()
-		vim.defer_fn(function() require("nvim-treesitter").install(parsersToInstall) end, 1000)
+		vim.defer_fn(function ()
+			local alreadyInstalled = require("nvim-treesitter.config").get_installed()
+			local parsersToInstall = vim.iter(vim.tbl_values(ensureInstalled))
+				:flatten()
+				:filter(function(parser) return not vim.tbl_contains(alreadyInstalled, parser) end)
+				:totable()
+			require("nvim-treesitter").install(parsersToInstall)
+		end, 1)
 
 		-- use bash parser for zsh files
 		vim.treesitter.language.register("bash", "zsh")
