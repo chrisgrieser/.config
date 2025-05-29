@@ -1,8 +1,8 @@
 #!/usr/bin/env zsh
-
 # SOURCE based on https://github.com/day50-dev/Zummoner/blob/main/zummoner.zsh
+#───────────────────────────────────────────────────────────────────────────────
 
-zummoner() {
+ai() {
 	# CONFIG
 	local model='gpt-4.1-mini'
 
@@ -24,15 +24,16 @@ zummoner() {
 	"
 	#────────────────────────────────────────────────────────────────────────────
 
-	local question="$BUFFER"
-	BUFFER="(🤖 Asking AI…)"
+	local task="$*"
+	print "\e[1;34mAsking AI…\e[0m"
 
+	# OpenAI request
 	local response
 	response=$(jq -n \
-		--arg model "$model" --arg system_prompt "$system_prompt" --arg question "$question" \
+		--arg model "$model" --arg system_prompt "$system_prompt" --arg task "$task" \
 		'{ model: $model, messages: [
-				{role: "system", content: $system_prompt},
-				{role: "user", content: $question}
+			{role: "system", content: $system_prompt},
+			{role: "user", content: $task}
 		] }' |
 		curl --silent --max-time 15 "https://api.openai.com/v1/chat/completions" \
 			-H "Content-Type: application/json" \
@@ -52,11 +53,8 @@ zummoner() {
 	fi
 
 	# set zsh buffer
-	BUFFER="$(echo "$response" | jq -r '.choices[0].message.content')"
-	# zle reset-prompt
-	# shellcheck disable=2034
-	CURSOR=${#BUFFER}
+	local cmd
+	cmd="$(echo "$response" | jq -r '.choices[0].message.content')"
+	echo -n "$cmd" | pbcopy
+	print "\e[1;35mCopied: \e[0m$cmd"
 }
-
-zle -N zummoner
-bindkey '^G' zummoner # [G]enerate ai command
