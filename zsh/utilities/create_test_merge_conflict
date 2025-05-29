@@ -11,21 +11,21 @@ git init .
 #───────────────────────────────────────────────────────────────────────────────
 
 # create commit A on `main`
-echo "this is some content to mess with" > foobar.txt
+echo "this is some content to mess with" > "foobar.md"
 git add --all
-git commit --message="initial content for foobar.txt"
+git commit --message="initial content for foobar.md"
 
 # create commit B on `alt_branch`
 git checkout -b alt_branch
-echo "totally different content to merge later" > foobar.txt
+echo "totally different content to merge later" > "foobar.md"
 git add --all
-git commit --message="edited the content of foobar.txt to cause a conflict"
+git commit --message="edited the content of foobar.md to cause a conflict"
 
 # create commit B on `main`
 git checkout main
-echo "content to append" >> foobar.txt
+echo "content to append" >> "foobar.md"
 git add --all
-git commit --message="appended content to foobar.txt"
+git commit --message="appended content to foobar.md"
 
 # merge `alt_branch` into `main`, creating a conflict
 git merge alt_branch
