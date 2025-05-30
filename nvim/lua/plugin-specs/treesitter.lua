@@ -52,6 +52,8 @@ local ensureInstalled = {
 	},
 }
 
+--------------------------------------------------------------------------------
+
 return {
 	"nvim-treesitter/nvim-treesitter",
 	branch = "main", -- new versions follow `main`
@@ -61,9 +63,7 @@ return {
 	opts = {
 		install_dir = vim.fn.stdpath("data") .. "/treesitter-parsers",
 	},
-	config = function(_, opts)
-		require("nvim-treesitter").setup(opts)
-
+	init = function()
 		-- auto-install parsers
 		local parsersToInstall = vim.iter(vim.tbl_values(ensureInstalled)):flatten():totable()
 		vim.defer_fn(function() require("nvim-treesitter").install(parsersToInstall) end, 1000)
