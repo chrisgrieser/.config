@@ -13,15 +13,20 @@ vim.api.nvim_create_autocmd("VimEnter", { -- triggers only after `Lazy` startup 
 				end)
 			end
 
-			-- fix neovide not opening the file when `Lazy` does installs on startup
+			-- neovide: fix for not opening the file when lazy.nvim does installs on startup
 			if vim.fn.argc(-1) > 0 and vim.g.neovide and vim.bo.ft == "lazy" then
 				local arg = vim.fn.argv(0) --[[@as string]]
 				toOpen = vim.startswith(arg, "/") and arg or vim.env.HOME .. "/" .. arg
 			end
 
+			-- lazy.nvim: ensures not triggering on startup win
 			if not toOpen then return end
-			local initialWinId = 1000 -- ensures not triggering on `Lazy` startup win
-			vim.api.nvim_win_call(initialWinId, function() vim.cmd.edit(toOpen) end)
+			if vim.bo.ft == "lazy" then
+				local initialWinId = 1000
+				vim.api.nvim_win_call(initialWinId, function() vim.cmd.edit(toOpen) end)
+			else
+				vim.cmd.edit(toOpen)
+			end
 		end)
 	end,
 })
@@ -34,9 +39,10 @@ vim.api.nvim_create_autocmd("VimEnter", { -- triggers only after `Lazy` startup 
 ---@param module string
 local function safeRequire(module)
 	local success, errmsg = pcall(require, module)
-	if success then return end
-	local msg = ("Error loading `%s`: %s"):format(module, errmsg)
-	vim.schedule(function() vim.notify(msg, vim.log.levels.ERROR) end)
+	if not success then
+		local msg = ("Error loading `%s`: %s"):format(module, errmsg)
+		vim.schedule(function() vim.notify(msg, vim.log.levels.ERROR) end)
+	end
 end
 
 safeRequire("config.options") -- first so available for plugins configs
