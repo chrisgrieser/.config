@@ -21,23 +21,10 @@ elseif isAtOffice then
 else
 	vim.g.neovide_scale_factor = 1
 	vim.g.neovide_refresh_rate = 45
-	vim.g.neovide_padding_top = 15
-	-- vim.g.neovide_padding_left = 7
+	vim.g.neovide_padding_top = 25
+	vim.g.neovide_padding_left = 4
 end
 vim.opt.linespace = -2 -- less line height
-
---------------------------------------------------------------------------------
-
--- cmd+ / cmd- to change zoom
-local function changeScaleFactor(delta)
-	vim.g.neovide_scale_factor = vim.g.neovide_scale_factor + delta
-	local icon = delta > 0 and "" or ""
-	local opts = { id = "scale_factor", icon = icon, title = "Scale factor" }
-	vim.notify(tostring(vim.g.neovide_scale_factor), nil, opts)
-end
-local keymap = require("config.utils").uniqueKeymap
-keymap({ "n", "x", "i" }, "<D-+>", function() changeScaleFactor(0.01) end, { desc = " Zoom" })
-keymap({ "n", "x", "i" }, "<D-->", function() changeScaleFactor(-0.01) end, { desc = " Zoom" })
 
 --------------------------------------------------------------------------------
 
