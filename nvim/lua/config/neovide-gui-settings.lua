@@ -21,8 +21,8 @@ elseif isAtOffice then
 else
 	vim.g.neovide_scale_factor = 1
 	vim.g.neovide_refresh_rate = 45
-	vim.g.neovide_padding_top = 25
-	vim.g.neovide_padding_left = 4
+	vim.g.neovide_padding_top = 18
+	vim.g.neovide_padding_left = 8
 end
 vim.opt.linespace = -2 -- less line height
 

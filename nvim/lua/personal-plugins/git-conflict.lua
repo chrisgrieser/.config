@@ -32,10 +32,12 @@ local config = {
 
 ---@param msg string
 ---@param level? "info"|"trace"|"debug"|"warn"|"error"
-local function notify(msg, level)
-	if not level then level = "info" end
-	local icon = config.icons.main
-	vim.notify(msg, vim.log.levels[level:upper()], { title = "Merge conflict", icon = icon })
+---@param opts? table
+local function notify(msg, level, opts)
+	local defaultOpts = { title = "Merge conflict", icon = config.icons.main }
+	opts = vim.tbl_deep_extend("force", defaultOpts, opts or {})
+	level = level or "info"
+	vim.notify(msg, vim.log.levels[level:upper()], opts)
 end
 
 ---@param bufnr number
@@ -158,7 +160,7 @@ local function setupConflictMarkers(out, bufnr)
 	local conflicts = #conflictLnums / 4
 	local header = ("**%d conflict%s found.**\n"):format(conflicts, conflicts > 1 and "s" or "")
 	table.insert(info, 1, header)
-	notify(table.concat(info, "\n"))
+	notify(table.concat(info, "\n"), "info", { timeout = false })
 end
 
 --------------------------------------------------------------------------------
