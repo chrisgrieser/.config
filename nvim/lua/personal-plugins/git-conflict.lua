@@ -1,7 +1,4 @@
 -- GIT CONFLICT MARKERS
--- if there are conflicts, jump to first conflict, highlight conflict markers,
--- and disable diagnostics (simplified version of `git-conflict.nvim`)
---------------------------------------------------------------------------------
 
 local config = {
 	whenConflict = {
