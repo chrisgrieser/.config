@@ -8,7 +8,7 @@ mouse-cursor-icon = "i-beam"
 
 [font]
 normal = ["JetBrainsMonoNL NF", "Monaco"]
-size = 23.5
+size = 24.5
 
 [box-drawing]
 mode = "font-glyph"
