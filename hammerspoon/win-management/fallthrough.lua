@@ -10,14 +10,11 @@ local config = {
 		whenNoWin = { "Finder", "Brave Browser", "Obsidian" },
 		always = { "Ivory", "Transmission" },
 	},
-	disableFallthroughWhenRunning = { "Steam" },
 }
 
 --------------------------------------------------------------------------------
 
 local function fallthrough()
-	if u.appRunning(config.disableFallthroughWhenRunning) then return end
-
 	u.defer(0.1, function() -- deferring to ensure windows are already switched/created
 		local frontApp = hs.application.frontmostApplication()
 		local fallthroughWhenNoWin = hs.fnutils.contains(
