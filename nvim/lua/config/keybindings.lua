@@ -48,10 +48,10 @@ keymap("n", "gE", "[d", { desc = "󰋼 Previous diagnostic", remap = true })
 -- MARKS
 do
 	require("personal-plugins.marks").setup {
-		marks = { "A", "B", "C", "D" },
+		marks = { "A", "B", "C" },
 		signs = {
 			hlgroup = "StandingOut",
-			icons = { A = "󰬈", B = "󰬉", C = "󰬊", D = "󰬋" },
+			icons = { A = "󰬈", B = "󰬉", C = "󰬊" },
 		},
 	}
 	local leader = "<leader>m"
