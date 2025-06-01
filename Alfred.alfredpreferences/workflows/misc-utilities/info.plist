@@ -177,11 +177,37 @@
 				<false/>
 			</dict>
 		</array>
+		<key>6732D9D7-0908-40B4-90D9-B411E61EA024</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>9EF626C0-CAD3-42E1-94ED-9C3DACDD9033</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>93776F8A-CF4E-4A33-A222-621DFF193536</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
 				<string>E6C4554F-2198-42E7-9B8F-FCD645DD3FCC</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>9EF626C0-CAD3-42E1-94ED-9C3DACDD9033</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>1572E2A1-9DC5-4655-8BBB-43A8877CC8D1</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -357,27 +383,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>sync</string>
-				<key>subtext</key>
-				<string>all perma-repos</string>
-				<key>text</key>
-				<string>🔁 Sync Repos</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>E9FF31BC-709C-4387-975A-0B1410418161</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
@@ -393,6 +398,27 @@
 			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
 			<string>0AF9FB4C-7ED1-4B99-9B0D-550B9FD73B2E</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>sync</string>
+				<key>subtext</key>
+				<string>all perma-repos</string>
+				<key>text</key>
+				<string>🔁 Sync Repos</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>E9FF31BC-709C-4387-975A-0B1410418161</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1200,6 +1226,71 @@ open -g "hammerspoon://sync-repos"</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>Σ Sum</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>1572E2A1-9DC5-4655-8BBB-43A8877CC8D1</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>acceptsfiles</key>
+				<false/>
+				<key>acceptsmulti</key>
+				<integer>0</integer>
+				<key>acceptstext</key>
+				<true/>
+				<key>acceptsurls</key>
+				<false/>
+				<key>name</key>
+				<string>Sum of all numbers</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.universalaction</string>
+			<key>uid</key>
+			<string>6732D9D7-0908-40B4-90D9-B411E61EA024</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/sum-of-all-numbers.js</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>9EF626C0-CAD3-42E1-94ED-9C3DACDD9033</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
@@ -1262,6 +1353,15 @@ open -g "hammerspoon://sync-repos"</string>
 			<real>190</real>
 			<key>ypos</key>
 			<real>550</real>
+		</dict>
+		<key>1572E2A1-9DC5-4655-8BBB-43A8877CC8D1</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>10</integer>
+			<key>xpos</key>
+			<real>370</real>
+			<key>ypos</key>
+			<real>995</real>
 		</dict>
 		<key>1969A0A1-3F99-42C4-9DC9-4E7873B6FDAC</key>
 		<dict>
@@ -1355,6 +1455,15 @@ open -g "hammerspoon://sync-repos"</string>
 			<key>ypos</key>
 			<real>305</real>
 		</dict>
+		<key>6732D9D7-0908-40B4-90D9-B411E61EA024</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>10</integer>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>995</real>
+		</dict>
 		<key>717241EC-A124-45BC-8591-0B9EB754327E</key>
 		<dict>
 			<key>colorindex</key>
@@ -1408,6 +1517,15 @@ open -g "hammerspoon://sync-repos"</string>
 			<real>330</real>
 			<key>ypos</key>
 			<real>550</real>
+		</dict>
+		<key>9EF626C0-CAD3-42E1-94ED-9C3DACDD9033</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>10</integer>
+			<key>xpos</key>
+			<real>200</real>
+			<key>ypos</key>
+			<real>995</real>
 		</dict>
 		<key>A0A81E9B-5271-49A6-8A0C-4DE3F26CEDA9</key>
 		<dict>
