@@ -24,7 +24,6 @@ brew "zsh-autopair"
 brew "zsh-autosuggestions"
 brew "zsh-history-substring-search"
 brew "zsh-syntax-highlighting"
-brew "mgmeyers/pdfannots2json/pdfannots2json"
 
 # APPS
 cask "alfred"
@@ -66,8 +65,10 @@ if computerName.include?("Home")
 	cask "iina"
 	cask "steam"
 	cask "transmission"
+	brew "mgmeyers/pdfannots2json/pdfannots2json"
 elsif computerName.include?("Office")
 	cask "cleanshot" # only license for 2 devices
+	brew "mgmeyers/pdfannots2json/pdfannots2json"
 elsif computerName.include?("Mother")
 	cask "iina"
 	cask "steam"
