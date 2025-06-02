@@ -24,6 +24,7 @@ brew "zsh-autopair"
 brew "zsh-autosuggestions"
 brew "zsh-history-substring-search"
 brew "zsh-syntax-highlighting"
+brew "mgmeyers/pdfannots2json/pdfannots2json"
 
 # APPS
 cask "alfred"
