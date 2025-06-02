@@ -23,7 +23,6 @@ return {
 							github = {
 								pull_request = { enable = false },
 								mention = { enable = false },
-								-- https://github.com/Kaiser-Yang/blink-cmp-git/issues/58
 								issue = { get_documentation = function() return "" end },
 							},
 						},
