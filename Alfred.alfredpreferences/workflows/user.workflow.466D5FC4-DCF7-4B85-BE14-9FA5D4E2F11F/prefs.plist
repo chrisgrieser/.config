@@ -4,5 +4,9 @@
 <dict>
 	<key>bibtex_library_path</key>
 	<string>~/.config/pandoc/main-bibliography.bib</string>
+	<key>output_path</key>
+	<string>~/Vaults/main-vault/Literature Notes</string>
+	<key>pdf_folder</key>
+	<string>~/Library/Mobile Documents/com~apple~CloudDocs/Academia/PDFs</string>
 </dict>
 </plist>

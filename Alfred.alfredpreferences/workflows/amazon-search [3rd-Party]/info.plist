@@ -48,6 +48,19 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>text</key>
+				<string>Search Amazon with Suggestions for '{query}'</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.fallback</string>
+			<key>uid</key>
+			<string>42C41A4F-88AF-4C08-96EB-36A308971BF3</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>alfredfiltersresults</key>
 				<false/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -129,6 +142,7 @@ function makeItems(itemNames) {
       "uid": name,
       "title": name,
       "subtitle": "Search “" + name + "” on Amazon",
+      "autocomplete": name,
       "arg": name
     }
   })
@@ -184,19 +198,6 @@ function run(argv) {
 			<string>221025C2-26B2-4105-B171-A62E18219FBD</string>
 			<key>version</key>
 			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>text</key>
-				<string>Search Amazon with Suggestions for '{query}'</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.fallback</string>
-			<key>uid</key>
-			<string>42C41A4F-88AF-4C08-96EB-36A308971BF3</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -385,7 +386,7 @@ Set a specific Amazon store to search in the [Workflow’s Configuration](https:
 		</dict>
 	</array>
 	<key>version</key>
-	<string>2024.2</string>
+	<string>2025.1</string>
 	<key>webaddress</key>
 	<string>https://github.com/alfredapp/amazon-suggest-workflow/</string>
 </dict>
