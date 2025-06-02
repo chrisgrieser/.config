@@ -426,6 +426,18 @@ keymap("n", "<leader>rq", function()
 	vim.api.nvim_set_current_line(updatedLine)
 end, { desc = " Switch quotes in line" })
 
+do
+	local function retabber(use) ---@param use "spaces"|"tabs"
+		vim.bo.expandtab = use == "spaces"
+		vim.bo.shiftwidth = 2
+		vim.bo.tabstop = 3
+		vim.cmd.retab { bang = true }
+		vim.notify("Now using " .. use, nil, { title = ":retab", icon = "󰌒" })
+	end
+	keymap("n", "<leader>r<Tab>", function() retabber("tabs") end, { desc = "󰌒 Use tabs" })
+	keymap("n", "<leader>r<Space>", function() retabber("spaces") end, { desc = "󱁐 Use spaces" })
+end
+
 --------------------------------------------------------------------------------
 
 -- TEMPLATE STRINGS
