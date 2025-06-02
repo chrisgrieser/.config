@@ -19,6 +19,9 @@ anchors:
         type: variable_unless
         name: FINDER_MENU_ACTIVE
         value: true
+      - &is-German-keyboard
+        type: input_source_if
+        input_sources: [language: ^de$]
   - to:
       - &leave-insert-mode
         set_variable: { name: FINDER_INSERT_MODE, value: false }
@@ -84,3 +87,13 @@ rules:
               done
               afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/begin_record.caf" &
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
+
+      # Z (German): Open in Betterzip
+      - type: basic
+        from: { key_code: y, modifiers: { mandatory: [shift] } }
+        to:
+          - shell_command: |
+              selection=$(osascript -e 'tell application "Finder" to return POSIX path of (item 1 of (get selection) as text)')
+              open -a "Betterzip" "$selection"
+        conditions:
+          [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open, *is-German-keyboard]
