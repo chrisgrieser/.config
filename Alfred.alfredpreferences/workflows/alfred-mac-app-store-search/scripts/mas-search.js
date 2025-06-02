@@ -42,7 +42,7 @@ function relativeDate(date) {
 	let delta;
 	if (deltaHours < 24) {
 		unit = "hour";
-		delta = deltaHours;
+		delta = Math.floor(deltaHours);
 	} else if (deltaHours < 24 * 7) {
 		unit = "day";
 		delta = Math.floor(deltaHours / 24);
