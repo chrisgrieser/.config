@@ -99,7 +99,7 @@ function run() {
 	const formulaData = JSON.parse(JSON.parse(readFile(formulaJson)).payload);
 
 	// 2. LOCAL INSTALLATION DATA (determined live every run)
-	// PERF `ls` quicker than `brew list` 
+	// PERF `ls` quicker than `brew list`
 	// (and the json files miss actual installation info)
 	const installedFormulas = app.doShellScript('ls -1 "$(brew --prefix)/Cellar"').split("\r");
 	const installedCasks = app.doShellScript('ls -1 "$(brew --prefix)/Caskroom"').split("\r");
@@ -110,16 +110,14 @@ function run() {
 	// packages should be determined more frequently
 	const cask90d = $.getenv("alfred_workflow_cache") + "/caskDownloads90d.json";
 	const formula90d = $.getenv("alfred_workflow_cache") + "/formulaDownloads90d.json";
+	let caskDlRaw;
+	let formulaDlRaw;
 	if (cacheIsOutdated(cask90d)) {
 		console.log("Updating download count cache.");
-		const caskDownloads = httpRequest(
-			"https://formulae.brew.sh/api/analytics/cask-install/homebrew-cask/90d.json",
-		);
-		const formulaDownloads = httpRequest(
-			"https://formulae.brew.sh/api/analytics/install-on-request/homebrew-core/90d.json",
-		);
-		writeToFile(cask90d, caskDownloads);
-		writeToFile(formula90d, formulaDownloads);
+		caskDlRaw = httpRequest("https://formulae.brew.sh/api/analytics/cask-install/homebrew-cask/90d.json");
+		formulaDlRaw = httpRequest("https://formulae.brew.sh/api/analytics/install-on-request/homebrew-core/90d.json");
+		writeToFile(cask90d, caskDlRaw);
+		writeToFile(formula90d, formulaDlRaw);
 	}
 	const caskDownloads = JSON.parse(readFile(cask90d)).formulae;
 	const formulaDownloads = JSON.parse(readFile(formula90d)).formulae; // SIC not `.casks`
@@ -140,6 +138,7 @@ function run() {
 			match: alfredMatcher(name) + desc,
 			subtitle: [caskIcon, downloads, " ", desc].join(" "),
 			arg: `--cask ${name}`,
+			variables: { brewfileLine: `cask "${name}"` },
 			quicklookurl: cask.homepage,
 			downloads: Number.parseInt(downloads.replace(/,/g, "")), // only for sorting
 			mods: {
@@ -172,6 +171,7 @@ function run() {
 			match: alfredMatcher(name) + desc,
 			subtitle: [formulaIcon, downloads, " ", desc].join(" "),
 			arg: `--formula ${name}`,
+			variables: { brewfileLine: `brew "${name}"` },
 			quicklookurl: formula.homepage,
 			downloads: Number.parseInt(downloads.replaceAll(",", "")), // only for sorting
 			mods: {
