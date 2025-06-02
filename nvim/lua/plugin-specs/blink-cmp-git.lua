@@ -2,7 +2,10 @@
 --------------------------------------------------------------------------------
 
 return {
-	"saghen/blink.cmp", -- lazy.nvim will merge this config with the `blink.cmp` config
+	-- `blink-cmp-git` is configured in the blink.cmp provider config. To keep
+	-- plugin configs nonetheless modular, we define another set of `blink.cmp`
+	-- config (lazy.nvim merges multiple configs).
+	"saghen/blink.cmp",
 	dependencies = "Kaiser-Yang/blink-cmp-git",
 
 	opts = {
@@ -23,7 +26,7 @@ return {
 							github = {
 								pull_request = { enable = false },
 								mention = { enable = false },
-								issue = { get_documentation = function() return "" end },
+								issue = { get_documentation = function() return "" end }, -- disable doc window
 							},
 						},
 					},
