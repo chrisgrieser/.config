@@ -1,3 +1,12 @@
+-- FIX opening file with neovide somehow overwriting lazy window
+if vim.g.neovide then
+	vim.api.nvim_create_autocmd("FileType", {
+		desc = "User: winfixbuf for lazy window",
+		pattern = "lazy",
+		callback = function() vim.wo.winfixbuf = true end,
+	})
+end
+
 vim.api.nvim_create_autocmd("VimEnter", { -- triggers only after `Lazy` startup installs
 	desc = "User: Reopen last file",
 	callback = function()

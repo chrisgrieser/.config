@@ -25,12 +25,13 @@ local ns = vim.api.nvim_create_namespace("ui-hack")
 local function attach()
 	---@diagnostic disable-next-line: redundant-parameter incomplete annotation from nvim core
 	vim.ui_attach(ns, { ext_messages = true }, function(event, ...)
-		-- only affect `msg_show` events
 		if event == "msg_history_show" then
-			-- local msg = "`:messages` is not supported, but it is also not needed anymore. "
-			-- 	.. "Just use the history command of your notification plugin to see past messages."
-			-- vim.notify(msg, vim.log.levels.WARN)
-			vim.notify()
+			local msgs = ...
+			local out = vim.iter(msgs):fold("", function(acc, entry)
+				local msg = vim.iter(entry[2]):fold("", function(acc2, msg) return acc2 .. msg[2] end)
+				return acc .. msg .. "\n\n"
+			end)
+			vim.notify(out, nil, { title = ":messages", icon = config.notification.icon })
 		end
 		if event ~= "msg_show" then return end
 
