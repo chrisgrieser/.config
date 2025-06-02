@@ -4,7 +4,6 @@
 # CLI
 brew "bat"
 brew "eza"
-brew "felixkratz/formulae/sketchybar"
 brew "fzf"
 brew "gh"
 brew "git-delta"
@@ -26,6 +25,7 @@ brew "zsh-history-substring-search"
 brew "zsh-syntax-highlighting"
 
 # APPS
+brew "felixkratz/formulae/sketchybar"
 cask "alfred"
 cask "alt-tab"
 cask "appcleaner"
@@ -48,7 +48,6 @@ mas "Ivory", id: 6444602274
 
 # QUICK LOOK
 cask "syntax-highlight" # `Peek` not available anymore https://apps.apple.com/us/app/peek-a-quick-look-extension/id1554235898?mt=12
-# cask "qlmarkdown"
 mas "Markdown Preview", id: 6739955340
 
 #───────────────────────────────────────────────────────────────────────────────
