@@ -42,13 +42,13 @@ cask "replacicon"
 cask "slack"
 cask "wezterm"
 cask "zoom"
+cask "betterzip"
 mas "Highlights", id: 1498912833
 mas "Ivory", id: 6444602274
 
 # QUICK LOOK
 cask "syntax-highlight" # `Peek` not available anymore https://apps.apple.com/us/app/peek-a-quick-look-extension/id1554235898?mt=12
 cask "qlmarkdown"
-mas "Folder Preview", id: 6698876601
 
 #───────────────────────────────────────────────────────────────────────────────
 
