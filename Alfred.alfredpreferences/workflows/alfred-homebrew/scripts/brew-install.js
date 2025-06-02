@@ -114,15 +114,19 @@ function run() {
 	let formulaDlRaw;
 	if (cacheIsOutdated(cask90d)) {
 		console.log("Updating download count cache.");
-		caskDlRaw = httpRequest("https://formulae.brew.sh/api/analytics/cask-install/homebrew-cask/90d.json");
-		formulaDlRaw = httpRequest("https://formulae.brew.sh/api/analytics/install-on-request/homebrew-core/90d.json");
+		caskDlRaw = httpRequest(
+			"https://formulae.brew.sh/api/analytics/cask-install/homebrew-cask/90d.json",
+		);
+		formulaDlRaw = httpRequest(
+			"https://formulae.brew.sh/api/analytics/install-on-request/homebrew-core/90d.json",
+		);
 		writeToFile(cask90d, caskDlRaw);
 		writeToFile(formula90d, formulaDlRaw);
 	}
-	const caskDownloads = JSON.parse(readFile(cask90d)).formulae;
-	const formulaDownloads = JSON.parse(readFile(formula90d)).formulae; // SIC not `.casks`
+	const caskDownloads = JSON.parse(caskDlRaw || readFile(cask90d)).formulae;
+	const formulaDownloads = JSON.parse(formulaDlRaw || readFile(formula90d)).formulae; // SIC not `.casks`
 
-	// 4. CREATE ALFRED ITEMS
+	// 4. CREATE ALFRED ITEMS (will be cached for an hour by Alfred)
 	/** @type{AlfredItem&{downloads:number}[]} */
 	const casks = casksData.map((/** @type {Cask} */ cask) => {
 		const name = cask.token;

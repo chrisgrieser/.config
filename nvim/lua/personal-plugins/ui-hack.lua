@@ -27,9 +27,10 @@ local function attach()
 	vim.ui_attach(ns, { ext_messages = true }, function(event, ...)
 		-- only affect `msg_show` events
 		if event == "msg_history_show" then
-			local msg = "`:messages` is not supported, but it is also not needed anymore. "
-				.. "Just use the history command of your notification plugin to see past messages."
-			vim.notify(msg, vim.log.levels.WARN)
+			-- local msg = "`:messages` is not supported, but it is also not needed anymore. "
+			-- 	.. "Just use the history command of your notification plugin to see past messages."
+			-- vim.notify(msg, vim.log.levels.WARN)
+			vim.notify()
 		end
 		if event ~= "msg_show" then return end
 
