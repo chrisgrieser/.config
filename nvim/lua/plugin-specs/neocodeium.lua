@@ -57,13 +57,5 @@ return {
 		},
 		{ "<leader>oa", function() vim.cmd.NeoCodeium("toggle") end, desc = "󰚩 NeoCodeium" },
 		{ "<leader>ac", function() vim.cmd.NeoCodeium("chat") end, desc = "󰚩 Windsurf chat" },
-		{
-			"<leader>ar",
-			function()
-				vim.notify("Restarting NeoCodium…")
-				vim.cmd.NeoCodeium("restart")
-			end,
-			desc = "󰚩 Restart NeoCodeium",
-		},
 	},
 }
