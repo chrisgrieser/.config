@@ -34,18 +34,21 @@
 				<false/>
 			</dict>
 		</array>
-		<key>A8B4F6B2-C13E-44E1-879C-6C87BC33DF9D</key>
+		<key>4A32D4C6-F346-441A-B06F-C35E7ABD7A23</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>4765DAC1-3059-4B3F-9EE9-9A53AE02B4BC</string>
+				<string>06CBB88B-60DC-48E1-97D8-9A63B099DDA2</string>
 				<key>modifiers</key>
-				<integer>1048576</integer>
+				<integer>0</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Open developer website</string>
+				<string></string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
+		</array>
+		<key>A8B4F6B2-C13E-44E1-879C-6C87BC33DF9D</key>
+		<array>
 			<dict>
 				<key>destinationuid</key>
 				<string>0B80BB59-9309-4CA7-A9F7-54C10F560BC7</string>
@@ -58,11 +61,31 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
+				<string>4765DAC1-3059-4B3F-9EE9-9A53AE02B4BC</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>⌘: Open developer website</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
 				<string>06CBB88B-60DC-48E1-97D8-9A63B099DDA2</string>
 				<key>modifiers</key>
 				<integer>524288</integer>
 				<key>modifiersubtext</key>
 				<string>⌥: App Store URL</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>4A32D4C6-F346-441A-B06F-C35E7ABD7A23</string>
+				<key>modifiers</key>
+				<integer>262144</integer>
+				<key>modifiersubtext</key>
+				<string>⌃: Copy Bundle ID</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -78,6 +101,27 @@
 	<string>Mac App Store Search</string>
 	<key>objects</key>
 	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>0B80BB59-9309-4CA7-A9F7-54C10F560BC7</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 		<dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.junction</string>
@@ -138,27 +182,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>0B80BB59-9309-4CA7-A9F7-54C10F560BC7</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
@@ -196,6 +219,14 @@
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
+		<dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.junction</string>
+			<key>uid</key>
+			<string>4A32D4C6-F346-441A-B06F-C35E7ABD7A23</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>## Usage
@@ -222,45 +253,54 @@ and the Mac App Store.
 			<key>colorindex</key>
 			<integer>9</integer>
 			<key>xpos</key>
-			<real>230</real>
+			<real>385</real>
 			<key>ypos</key>
-			<real>235</real>
+			<real>180</real>
 		</dict>
 		<key>0B80BB59-9309-4CA7-A9F7-54C10F560BC7</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>9</integer>
 			<key>xpos</key>
-			<real>375</real>
+			<real>385</real>
 			<key>ypos</key>
-			<real>115</real>
+			<real>65</real>
 		</dict>
 		<key>4765DAC1-3059-4B3F-9EE9-9A53AE02B4BC</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>9</integer>
 			<key>xpos</key>
-			<real>250</real>
+			<real>205</real>
 			<key>ypos</key>
 			<real>95</real>
+		</dict>
+		<key>4A32D4C6-F346-441A-B06F-C35E7ABD7A23</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>9</integer>
+			<key>xpos</key>
+			<real>205</real>
+			<key>ypos</key>
+			<real>210</real>
 		</dict>
 		<key>4C0A319F-FC03-4A32-B2B8-9C9242048318</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>9</integer>
 			<key>xpos</key>
-			<real>375</real>
+			<real>535</real>
 			<key>ypos</key>
-			<real>235</real>
+			<real>180</real>
 		</dict>
 		<key>A8B4F6B2-C13E-44E1-879C-6C87BC33DF9D</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>9</integer>
 			<key>xpos</key>
-			<real>40</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>115</real>
+			<real>120</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

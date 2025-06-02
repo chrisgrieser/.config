@@ -151,6 +151,10 @@ function run(argv) {
 					valid: Boolean(app.sellerUrl),
 					subtitle: app.sellerUrl ? "⌘: Open " + app.sellerUrl : "⛔ No website found.",
 				},
+				ctrl: {
+					arg: app.bundleId,
+					subtitle: `⌃: Copy Bundle ID "${app.bundleId}"`,
+				},
 			},
 		};
 		return alfredItem;
