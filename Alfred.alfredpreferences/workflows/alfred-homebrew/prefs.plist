@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>copy_brewfile_line_on_install</key>
+	<true/>
 	<key>list_mac_app_store</key>
 	<true/>
 	<key>use_zap</key>

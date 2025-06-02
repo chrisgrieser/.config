@@ -54,11 +54,59 @@
 				<false/>
 			</dict>
 		</array>
+		<key>3C20F055-7280-4028-891B-A35ACB3DE213</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>EDA21286-4E28-4304-A9DB-0BA74AB2C370</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>29197F0C-557D-41F6-848C-DB541D29D2A2</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>EDA21286-4E28-4304-A9DB-0BA74AB2C370</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>4818B3ED-E0D3-4F66-88AF-FD15AF8A9AF4</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>3F95A285-6177-405E-B2B0-518A7C0276F2</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
 				<string>5C596F48-0F0D-4709-8097-75C0875E686B</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>4818B3ED-E0D3-4F66-88AF-FD15AF8A9AF4</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>0D984FC5-A902-42FB-80F8-A9D0310C86BB</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -122,21 +170,11 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>EDA21286-4E28-4304-A9DB-0BA74AB2C370</string>
+				<string>3C20F055-7280-4028-891B-A35ACB3DE213</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
 				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>2468D124-88C6-438D-B2C6-627ADEEEC31D</string>
-				<key>modifiers</key>
-				<integer>1048576</integer>
-				<key>modifiersubtext</key>
-				<string>⌘: Open package's homepage</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -147,6 +185,16 @@
 				<integer>524288</integer>
 				<key>modifiersubtext</key>
 				<string>⌥: Copy URL</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>2468D124-88C6-438D-B2C6-627ADEEEC31D</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>⌘: Open package's homepage</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -241,21 +289,49 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string>{var:copy_brewfile_line_on_install}</string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string>0</string>
+						<key>outputlabel</key>
+						<string>false</string>
+						<key>uid</key>
+						<string>29197F0C-557D-41F6-848C-DB541D29D2A2</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>true</string>
+				<key>hideelse</key>
 				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string></string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
+			<string>alfred.workflow.utility.conditional</string>
 			<key>uid</key>
-			<string>2468D124-88C6-438D-B2C6-627ADEEEC31D</string>
+			<string>3C20F055-7280-4028-891B-A35ACB3DE213</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string>{var:brewfileLine}</string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>4818B3ED-E0D3-4F66-88AF-FD15AF8A9AF4</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -296,6 +372,27 @@
 			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
 			<string>F01BF271-72C7-44BA-9382-E133D8529E6D</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>2468D124-88C6-438D-B2C6-627ADEEEC31D</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -509,17 +606,16 @@
   previews of package homepages.
 
 ## Usage
-- Search for a Homebrew package via the `bi` keyword.
+- Search for a Homebrew package via the `bi` keyword. (+ The download counts
+refer to the number of downloads per 90 days.)
 	+ &lt;kbd&gt;⏎&lt;/kbd&gt;: Install the package (`brew install`) in the Terminal. (Uses
-	  the terminal app you have configured [in your Alfred
-	  settings](https://www.alfredapp.com/help/features/terminal/).)
+	the terminal app you have configured [in your Alfred
+	settings](https://www.alfredapp.com/help/features/terminal/).)
 	+ &lt;kbd&gt;⌘⏎&lt;/kbd&gt;: Open the package's homepage (`brew home`).
 	+ &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy the package's homepage to the clipboard.
 	+ &lt;kbd&gt;⇧⏎&lt;/kbd&gt;: Show package information (`brew info`) in Text View.
 	+ &lt;kbd&gt;⌘Y&lt;/kbd&gt; Quick Look a screenshot of the app, if available.
-	+ The download counts refer to the number of downloads per 90 days.
 - Uninstall a package via the `bu` keyword (`brew uninstall`).
-	+ Optionally use the `--zap` option for a clean uninstallation.
 	+ &lt;kbd&gt;⇧⏎&lt;/kbd&gt;: Show package information (`brew info`) in Text View.
 	+ &lt;kbd&gt;⌃⏎&lt;/kbd&gt;: Reinstall the package (`brew reinstall`).
 
@@ -544,16 +640,16 @@ and the Mac App Store.
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>525</real>
+			<real>515</real>
 		</dict>
 		<key>0D984FC5-A902-42FB-80F8-A9D0310C86BB</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>425</real>
+			<real>475</real>
 			<key>ypos</key>
-			<real>250</real>
+			<real>130</real>
 		</dict>
 		<key>0F3F996A-3FC8-4FBD-990C-9D54C43DD642</key>
 		<dict>
@@ -562,18 +658,29 @@ and the Mac App Store.
 			<key>note</key>
 			<string>brew uninstall</string>
 			<key>xpos</key>
-			<real>425</real>
+			<real>470</real>
 			<key>ypos</key>
-			<real>645</real>
+			<real>620</real>
 		</dict>
 		<key>2468D124-88C6-438D-B2C6-627ADEEEC31D</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>425</real>
+			<real>470</real>
 			<key>ypos</key>
-			<real>130</real>
+			<real>245</real>
+		</dict>
+		<key>3C20F055-7280-4028-891B-A35ACB3DE213</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>note</key>
+			<string>copy Brewfile line</string>
+			<key>xpos</key>
+			<real>318</real>
+			<key>ypos</key>
+			<real>35</real>
 		</dict>
 		<key>3F95A285-6177-405E-B2B0-518A7C0276F2</key>
 		<dict>
@@ -582,16 +689,25 @@ and the Mac App Store.
 			<key>note</key>
 			<string>brew info</string>
 			<key>xpos</key>
-			<real>425</real>
+			<real>470</real>
 			<key>ypos</key>
 			<real>365</real>
+		</dict>
+		<key>4818B3ED-E0D3-4F66-88AF-FD15AF8A9AF4</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>xpos</key>
+			<real>395</real>
+			<key>ypos</key>
+			<real>115</real>
 		</dict>
 		<key>5C596F48-0F0D-4709-8097-75C0875E686B</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>570</real>
+			<real>615</real>
 			<key>ypos</key>
 			<real>365</real>
 		</dict>
@@ -604,7 +720,7 @@ and the Mac App Store.
 			<key>xpos</key>
 			<real>340</real>
 			<key>ypos</key>
-			<real>715</real>
+			<real>690</real>
 		</dict>
 		<key>709C3FA7-A332-4B07-A934-6BC8C7E9DB32</key>
 		<dict>
@@ -615,7 +731,7 @@ and the Mac App Store.
 			<key>xpos</key>
 			<real>340</real>
 			<key>ypos</key>
-			<real>645</real>
+			<real>620</real>
 		</dict>
 		<key>72B78E7D-69B1-4E83-AB9B-26507DE2C33E</key>
 		<dict>
@@ -624,7 +740,7 @@ and the Mac App Store.
 			<key>xpos</key>
 			<real>245</real>
 			<key>ypos</key>
-			<real>545</real>
+			<real>535</real>
 		</dict>
 		<key>72D18DBC-72FF-40AA-B367-D4C148AEC3A6</key>
 		<dict>
@@ -642,16 +758,16 @@ and the Mac App Store.
 			<key>colorindex</key>
 			<integer>1</integer>
 			<key>xpos</key>
-			<real>425</real>
+			<real>470</real>
 			<key>ypos</key>
-			<real>510</real>
+			<real>500</real>
 		</dict>
 		<key>EDA21286-4E28-4304-A9DB-0BA74AB2C370</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>425</real>
+			<real>475</real>
 			<key>ypos</key>
 			<real>15</real>
 		</dict>
@@ -660,9 +776,9 @@ and the Mac App Store.
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>570</real>
+			<real>620</real>
 			<key>ypos</key>
-			<real>250</real>
+			<real>130</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
@@ -717,12 +833,31 @@ and the Mac App Store.
 				<key>required</key>
 				<false/>
 				<key>text</key>
-				<string>include</string>
+				<string>copy line for Brewfile</string>
+			</dict>
+			<key>description</key>
+			<string>When installing a package, also copy the line that needs to be added to a Brewfile.</string>
+			<key>label</key>
+			<string>install</string>
+			<key>type</key>
+			<string>checkbox</string>
+			<key>variable</key>
+			<string>copy_brewfile_line_on_install</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<false/>
+				<key>required</key>
+				<false/>
+				<key>text</key>
+				<string>include Mac App Store apps</string>
 			</dict>
 			<key>description</key>
 			<string>When using the uninstallation command, also list apps from the Mac App Store. They will be opened with `AppCleaner.app` for clean uninstallation.</string>
 			<key>label</key>
-			<string>Mac App Store</string>
+			<string>uninstall</string>
 			<key>type</key>
 			<string>checkbox</string>
 			<key>variable</key>
@@ -736,12 +871,12 @@ and the Mac App Store.
 				<key>required</key>
 				<false/>
 				<key>text</key>
-				<string>--zap</string>
+				<string>cleanup</string>
 			</dict>
 			<key>description</key>
 			<string>When using the uninstallation command on a cask, use `--zap`. This results in homebrew also cleaning up data and cache files from the app.</string>
 			<key>label</key>
-			<string>shell options</string>
+			<string></string>
 			<key>type</key>
 			<string>checkbox</string>
 			<key>variable</key>

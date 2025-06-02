@@ -234,6 +234,7 @@ Search the Mac App Store for apps via the keyword `mas`.
 - &lt;kbd&gt;⏎&lt;/kbd&gt; Open the result in `App Store.app`.
 - &lt;kbd&gt;⌘⏎&lt;/kbd&gt; Open the developer's website, if available.
 - &lt;kbd&gt;⌥⏎&lt;/kbd&gt; Copy the App Store URL to your clipboard.
+- &lt;kbd&gt;⌃⏎&lt;/kbd&gt; Copy app's bundle ID to your clipboard.
 - &lt;kbd&gt;⌘Y&lt;/kbd&gt; Quick Look a screenshot of the app, if available.
 
 ## Homebrew packages
@@ -372,7 +373,7 @@ and the Mac App Store.
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.0.0</string>
+	<string>1.1.0</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
