@@ -11,7 +11,9 @@ bibliography: ${USERDATA}/main-bibliography.bib
 citeproc: true
 
 metadata-file: academic-metadata.yaml # overwritten by document's yaml (`metadata:` would not)
-filters: [autoset-today-as-date-if-no-date-metadata.lua]
+filters:
+  - autoset-today-as-date-if-no-date-metadata.lua
+  - remove-markdown-tasks.lua
 
 #───────────────────────────────────────────────────────────────────────────────
 
