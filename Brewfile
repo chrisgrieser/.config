@@ -48,7 +48,7 @@ mas "Ivory", id: 6444602274
 
 # QUICK LOOK
 cask "syntax-highlight" # `Peek` not available anymore https://apps.apple.com/us/app/peek-a-quick-look-extension/id1554235898?mt=12
-mas "Markdown Preview", id: 6739955340
+cask "qlmarkdown"
 
 #───────────────────────────────────────────────────────────────────────────────
 

@@ -25,4 +25,7 @@ reader: "markdown\
   +lists_without_preceding_blankline\
   +mark\
   +wikilinks_title_after_pipe"
-resource-path: [./attachments, .] # where to look for images with relative paths
+
+resource-path: # where to look for images with relative paths
+  - .
+  - ./attachments
