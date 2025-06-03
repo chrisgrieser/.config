@@ -98,7 +98,7 @@
 				<key>modifiers</key>
 				<integer>262144</integer>
 				<key>modifiersubtext</key>
-				<string>⌃: Delete Password</string>
+				<string>⌃: Delete password</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -128,7 +128,7 @@
 				<key>modifiers</key>
 				<integer>1048576</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Edit Entry in Terminal</string>
+				<string>⌘: Edit entry in Terminal</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
