@@ -83,6 +83,7 @@ vim.opt.textwidth = 80
 
 vim.opt.expandtab = false -- mostly set by `editorconfig`, therefore only fallback
 vim.opt.tabstop = 3
+vim.opt.shiftwidth = 3
 vim.opt.shiftround = true
 vim.opt.smartindent = true
 

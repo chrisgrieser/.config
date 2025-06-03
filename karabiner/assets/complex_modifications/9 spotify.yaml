@@ -35,8 +35,8 @@ rules:
           - shell_command: |
               export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
               spotify_player playback play-pause && exit 0
-              spotify_player connect --name "Wohnzimmer Echo"
-              spotify_player playback play
+              # if unresponsive, trigger via virtual trigger instead to force playing
+              "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/alexa-virtual-trigger" "spotify-play"
 
       - type: basic
         from: { key_code: f9 }

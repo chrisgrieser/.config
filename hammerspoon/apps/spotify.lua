@@ -16,11 +16,13 @@ M.aw_spotify = aw.new(function(appName, eventType)
 	then
 		return
 	end
-
 	if M.spotify_task and M.spotify_task:isRunning() then M.spotify_task:terminate() end
+
 	local action = eventType == aw.launched and "pause" or "play"
-	local binary = (env.isAtMother and "/usr/local" or "/opt/homebrew") .. "/bin/spotify_player"
-	M.spotify_task = hs.task.new(binary, nil, { "playback", action }):start()
+	local alexaTrigger = os.getenv("HOME")
+		.. "/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/alexa-virtual-trigger"
+
+	M.spotify_task = hs.task.new(alexaTrigger, nil, { "spotify-" .. action }):start()
 end):start() --[[@as hs.application.watcher]]
 
 --------------------------------------------------------------------------------
