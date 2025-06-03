@@ -1,5 +1,9 @@
 -- DOCS https://pandoc.org/lua-filters.html#type-bulletlist
 
+-- DEBUG pandoc test.md --write=markdown --lua-filter=remove-markdown-tasks.lua
+-- DEBUG pandoc test.md -t native
+--------------------------------------------------------------------------------
+
 function BulletList(items)
 	local notTasks = {}
 	for _, item in ipairs(items.content) do
