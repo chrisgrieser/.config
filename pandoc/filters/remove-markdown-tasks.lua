@@ -13,7 +13,7 @@ function BulletList(items)
 			local isTask = content:find("☒") or content:find("☐")
 			if not isTask then table.insert(notTasks, first) end
 		else
-			table.insert(notTasks, first)
+			table.insert(notTasks, first) -- just in case, though I haven't seen those yet
 		end
 	end
 	return pandoc.BulletList(notTasks)
