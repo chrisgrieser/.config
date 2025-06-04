@@ -364,7 +364,7 @@ function run() {
 				{
 					title: "Open subreddit in the browser",
 					subtitle: "r/" + subredditName,
-					arg: `https://reddit.com/r/${subredditName}`,
+					arg: `https://www.reddit.com/r/${subredditName}`,
 				},
 			],
 		});
