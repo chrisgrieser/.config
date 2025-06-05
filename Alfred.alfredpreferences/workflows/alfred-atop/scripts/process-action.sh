@@ -34,9 +34,13 @@ elif [[ "$mode" == "force killall" ]]; then
 	msg="Force killed all processes with name"
 elif [[ "$mode" == "copy process path" ]]; then
 	process_path=$(lsof -p "$pid" | awk '$4=="txt" {print $9}' | head -n1)
-	echo -n "$process_path" | pbcopy
-	echo -n "$process_path"
-	msg="✅ Copied process path "
+	if [[ -z "$process_path" ]]; then
+		msg="⚠️ Could not find process path."
+	else
+		echo -n "$process_path" | pbcopy
+		msg="✅ Copied process path \"$process_path\""
+	fi
+	echo -n "$msg" # Alfred notification
 	return 0
 fi
 # shellcheck disable=2181
