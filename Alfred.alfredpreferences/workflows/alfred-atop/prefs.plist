@@ -10,6 +10,8 @@
 	<string>nnn</string>
 	<key>process_keyword</key>
 	<string>ppp||kill</string>
+	<key>show_pid</key>
+	<true/>
 	<key>sort_key</key>
 	<string>CPU</string>
 	<key>volume_keyword</key>
