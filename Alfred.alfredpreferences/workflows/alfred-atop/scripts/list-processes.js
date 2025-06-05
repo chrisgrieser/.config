@@ -26,7 +26,6 @@ function run() {
 	const rerunSecs = Number.parseFloat($.getenv("rerun_s_processes"));
 	const cpuThresholdPercent = Number.parseFloat($.getenv("cpu_threshold_percent")) || 0.5;
 	const memoryThresholdMb = Number.parseFloat($.getenv("memory_threshold_mb")) || 10;
-	const sort = $.getenv("sort_key") === "Memory" ? "m" : "r";
 	const showPid = $.getenv("show_pid") === "1";
 
 	/** @type {Record<string, { name: string; childrenCount: number }> } */
@@ -44,7 +43,8 @@ function run() {
 	// INFO command should come last, so it is not truncated and also fully
 	// identifiable by space delimitation even with spaces in the process name
 	// (command name can contain spaces, therefore last)
-	const shellCmd = `ps ${sort}cAo 'pid=,ppid=,%cpu=,rss=,ruser=,command='`;
+	const sort = $.getenv("sort_key") === "Memory" ? "m" : "r";
+	const shellCmd = `ps -${sort}cAo 'pid=,ppid=,%cpu=,rss=,ruser=,command='`;
 
 	/** @type {AlfredItem[]} */
 	const processes = app
@@ -84,12 +84,9 @@ function run() {
 					? `${processName} [${appName}]`
 					: processName;
 
-			const subtitle = [
-				parentName,
-				memory,
-				cpu,
-				showPid ? `[${pid}]` : "",
-			].filter(Boolean).join("    ");
+			const subtitle = [parentName, memory, cpu, showPid ? `[${pid}]` : ""]
+				.filter(Boolean)
+				.join("    ");
 
 			const isApp = installedApps.includes(`${appName}.app`) || appFilePaths[appName];
 			let icon = {};
@@ -112,8 +109,8 @@ function run() {
 					cmd: { variables: { mode: "force kill" } },
 					"cmd+ctrl": { variables: { mode: "force killall" } },
 					alt: {
-						subtitle: `⌥: Copy PID   ${pid}`,
-						variables: { mode: "copy pid" },
+						subtitle: "⌥: Copy process path",
+						variables: { mode: "copy process path" },
 					},
 					shift: {
 						valid: Boolean(isApp),
