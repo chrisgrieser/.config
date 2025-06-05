@@ -546,7 +546,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>scripts/kill-action.sh</string>
+				<string>scripts/process-action.sh</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
@@ -1551,7 +1551,7 @@ Display mounted volumes directly via `vol`.
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>note</key>
-			<string>copy pid</string>
+			<string>copy process path</string>
 			<key>xpos</key>
 			<real>635</real>
 			<key>ypos</key>
@@ -1925,7 +1925,7 @@ Display mounted volumes directly via `vol`.
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.4.6</string>
+	<string>1.5.0</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>

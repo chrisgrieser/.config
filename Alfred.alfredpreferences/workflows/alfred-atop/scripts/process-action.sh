@@ -21,16 +21,23 @@ if [[ "$mode" == "restart app" ]]; then
 fi
 
 if [[ "$mode" == "kill" ]]; then
-	kill -- "$pid" && msg="Killed"
+	kill -- "$pid" 
+	msg="Killed"
 elif [[ "$mode" == "force kill" ]]; then
-	kill -9 -- "$pid" && msg="Force killed"
+	kill -9 -- "$pid" 
+	msg="Force killed"
 elif [[ "$mode" == "killall" ]]; then
-	killall -- "$name" && msg="Killed all processes with name"
+	killall -- "$name" 
+	msg="Killed all processes with name"
 elif [[ "$mode" == "force killall" ]]; then
-	killall -9 -- "$name" && msg="Force killed all processes with name"
-elif [[ "$mode" == "copy pid" ]]; then
-	echo -n "$pid" | pbcopy
-	msg="✅ Copied PID for "
+	killall -9 -- "$name" 
+	msg="Force killed all processes with name"
+elif [[ "$mode" == "copy process path" ]]; then
+	process_path=$(lsof -p "$pid" | awk '$4=="txt" {print $9}' | head -n1)
+	echo -n "$process_path" | pbcopy
+	echo -n "$process_path"
+	msg="✅ Copied process path "
+	return 0
 fi
 # shellcheck disable=2181
 [[ $? -ne 0 ]] && msg="Could not $mode"
