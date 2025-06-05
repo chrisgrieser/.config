@@ -27,6 +27,7 @@ function run() {
 	const cpuThresholdPercent = Number.parseFloat($.getenv("cpu_threshold_percent")) || 0.5;
 	const memoryThresholdMb = Number.parseFloat($.getenv("memory_threshold_mb")) || 10;
 	const sort = $.getenv("sort_key") === "Memory" ? "m" : "r";
+	const showPid = $.getenv("show_pid") === "1";
 
 	/** @type {Record<string, { name: string; childrenCount: number }> } */
 	const parentProcs = {};
@@ -82,7 +83,14 @@ function run() {
 				appName !== processName && !processName.includes("Helper")
 					? `${processName} [${appName}]`
 					: processName;
-			const subtitle = [memory, cpu, parentName].filter((t) => t !== "").join("    ");
+
+			const subtitle = [
+				parentName,
+				memory,
+				cpu,
+				showPid ? `[${pid}]` : "",
+			].filter(Boolean).join("    ");
+
 			const isApp = installedApps.includes(`${appName}.app`) || appFilePaths[appName];
 			let icon = {};
 			if (isApp) {
@@ -98,6 +106,7 @@ function run() {
 				arg: pid,
 				uid: pid, // during rerun remembers selection, but does not affect sorting
 				match: camelCaseMatch(processName + parentName + appName),
+				text: { copy: pid },
 				mods: {
 					ctrl: { variables: { mode: "killall" } },
 					cmd: { variables: { mode: "force kill" } },

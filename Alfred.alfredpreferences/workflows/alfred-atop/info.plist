@@ -1329,13 +1329,14 @@ List all available tools via `atop` and select one. Alternatively, you can also 
 Display processes directly via `top`. Append "parent" to the query to display
 only processes that have child processes.
 - &lt;kbd&gt;⏎&lt;/kbd&gt;: Kill the process.
-- &lt;kbd&gt;⌘&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Force-kill the process.
-- &lt;kbd&gt;⌃&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Kill all processes with the same name.
-- &lt;kbd&gt;⌘&lt;/kbd&gt;&lt;kbd&gt;⌃&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Force-kill all processes with the same
+- &lt;kbd&gt;⌘⏎&lt;/kbd&gt;: Force-kill the process.
+- &lt;kbd&gt;⌃⏎&lt;/kbd&gt;: Kill all processes with the same name.
+- &lt;kbd&gt;⌘⌃⏎&lt;/kbd&gt;: Force-kill all processes with the same
   name.
-- &lt;kbd&gt;⇧&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: If the process belongs to a regular app, restart the
+- &lt;kbd&gt;⇧⏎&lt;/kbd&gt;: If the process belongs to a regular app, restart the
   app.
-- &lt;kbd&gt;⌥&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Copy the Process Identifier (PID).
+- &lt;kbd&gt;⌘C&lt;/kbd&gt;: Copy the process identifier (PID).
+- &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy the process path.
 
 **Meaning of the icons**
 - `⭕`: process is owned by root.
@@ -1768,6 +1769,25 @@ Display mounted volumes directly via `vol`.
 			<string>textfield</string>
 			<key>variable</key>
 			<string>memory_threshold_mb</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<false/>
+				<key>required</key>
+				<false/>
+				<key>text</key>
+				<string>show PID</string>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string></string>
+			<key>type</key>
+			<string>checkbox</string>
+			<key>variable</key>
+			<string>show_pid</string>
 		</dict>
 		<dict>
 			<key>config</key>
