@@ -155,11 +155,9 @@ function cycleListTypes() {
 	const curLine = editor.getLine(lnum);
 
 	let updatedLine = curLine.replace(/^(\s*)([-*+>#.)[\]\d x]+) /, (_, indent, list) => {
-		if (list.match(/^[-*+](?! \[)/)) return indent + "1. "; // list -> ordered
-		if (list.match(/\d/)) return indent + "- [ ] "; // ordered -> open task
-		if (list.startsWith("- [")) return indent + "> "; // task -> blockquote
-		if (list.startsWith(">") && indent !== "") return indent + "- "; // indented: blockquote -> list
-		if (list.startsWith(">") && indent === "") return ""; // unindented: blockquote -> none
+		if (list.match(/^[-*+](?! \[)/)) return indent + "- [ ] "; // list -> open task
+		if (list.startsWith("- [")) return indent + "1. "; // open task -> ordered
+		if (list.match(/\d/)) return indent + ""; // ordered -> none
 		return ""; // other like headings: remove
 	});
 	if (updatedLine === curLine) updatedLine = "- " + curLine; // none -> list
