@@ -33,7 +33,7 @@ elif [[ "$mode" == "force killall" ]]; then
 	killall -9 -- "$name" 
 	msg="Force killed all processes with name"
 elif [[ "$mode" == "copy process path" ]]; then
-	process_path=$(lsof -p "$pid" | awk '$4=="txt" {print $9}' | head -n1)
+	process_path=$(ps -p "$pid" -o comm=)
 	if [[ -z "$process_path" ]]; then
 		msg="⚠️ Could not find process path."
 	else
