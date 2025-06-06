@@ -27,7 +27,7 @@ local function autoBullet(key)
 	local comBefore = optl.comments:get()
 	-- stylua: ignore
 	optl.comments = {
-		"b:- [ ]", "b:- [x]", "b:\t* [ ]", "b:\t* [x]", -- tasks
+		"b:- [ ]", "b:- [x]", -- tasks
 		"b:*", "b:-", "b:+", "b:\t*", "b:\t-", "b:\t+", -- unordered list
 		"b:1.", "b:\t1.", -- ordered list
 		"n:>", -- blockquotes
@@ -75,16 +75,9 @@ bkeymap("n", "<D-u>", function()
 	local curLine = vim.api.nvim_get_current_line()
 
 	local updated = curLine:gsub("^(%s*)([%p%d x]* )", function(ind, l)
-		if l:find("[*+-] ") and not l:find("%- %[") then return ind .. "1. " end -- list -> ordered
-		if l:find("%d") then return ind .. "- [ ] " end -- ordered -> open task
-		if vim.startswith(l, "- [") then return ind .. "> " end -- task -> blockquote
-		if l:find(">") and ind ~= "" then
-			local indentLevel = ind:gsub((" "):rep(vim.bo.shiftwidth), "\t"):len()
-			local listChars = { "-", "*", "+" }
-			local char = listChars[indentLevel % #listChars + 1]
-			return ind .. char .. " "
-		end -- indented: blockquote -> list
-		if l:find(">") and ind == "" then return "" end -- unindented: blockquote -> none
+		if l:find("[*+-] ") and not l:find("%- %[") then return ind .. "- [ ] " end -- list -> task
+		if vim.startswith(l, "- [") then return ind .. "1. " end -- task -> ordered
+		if l:find("%d") then return ind .. "" end -- ordered -> none
 		return "" -- no list type
 	end)
 	if updated == curLine then updated = "- " .. curLine end -- none -> list
