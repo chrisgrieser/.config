@@ -10,9 +10,20 @@ local aw = hs.application.watcher
 --------------------------------------------------------------------------------
 
 -- CONFIG
-local neverHide = { "Alfred", "CleanShot X", "IINA", "pinentry-mac", "Catch", "Hammerspoon" }
+local neverHide = {
+	"Alfred",
+	"CleanShot X",
+	"IINA",
+	"pinentry-mac",
+	"Catch",
+	"Hammerspoon",
+	"Steam",
+}
 
 M.aw_maxWindows = aw.new(function(appName, event, app)
+	-- FIX Steam window somehow not working correctly, causing endless flipping
+	if u.appRunning("Steam") then return end
+
 	-- never hide these apps when they deactivate or when they are front
 	if hs.fnutils.contains(neverHide, appName) or u.isFront(neverHide) then return end
 	if env.isProjector() then return end
