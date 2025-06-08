@@ -1,1 +1,5 @@
-**/*\[3rd-Party]/** linguist-vendored
+# third-party workflows
+workflows/*\[3rd-Party]/** linguist-vendored
+
+# data from Alfred workflows
+**/info.plist linguist-generated
