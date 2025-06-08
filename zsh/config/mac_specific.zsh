@@ -1,12 +1,12 @@
 function eject {
 	volumes=$(df -ih | grep -io "\s/Volumes/.*" | grep -v "/Volumes/Recovery" | cut -c2-)
 	if [[ -z "$volumes" ]]; then
-		print "\e[1;33mNo volume mounted.\e[0m"
+		print "\e[1;33mNo mounted volume found.\e[0m"
 		return 1
 	fi
-	# if one volume, will auto-eject due to `--select-1`
-	selected=$(echo "$volumes" | fzf --exit-0 --select-1 --no-info --height=10%)
-	[[ -z "$selected" ]] && return 0 # fzf aborted
+	# if one volume, auto-eject due to `--select-1`
+	selected=$(echo "$volumes" | fzf --select-1 --no-info --height=10%)
+	[[ -z "$selected" ]] && return 0 # user aborted fzf
 
 	diskutil eject "$selected" ||
 		diskutil unmount "$selected" || # if unejectable, `unmount` says which process is blocking
@@ -25,5 +25,6 @@ function vvv {
 
 function run-infat {
 	[[ -x "$(command -v infat)" ]] || brew install infat
-	infat --robust --config="$HOME/.config/.bootstrap/infat-config.toml"
+	# not using `--robust` due to https://github.com/philocalyst/infat/issues/26
+	infat --config="$HOME/.config/.bootstrap/infat-config.toml"
 }
