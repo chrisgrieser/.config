@@ -1,10 +1,13 @@
+-- loads highlights either when enabled via `#`, or when `CccPick` is called manually
 return {
 	"uga-rosa/ccc.nvim",
 	cmd = { "CccPick", "CccConvert" },
+	ft = { "css", "zsh" },
 	keys = {
-		{ -- enable color highlights, then override to activate picker
+		{
 			"#",
 			function()
+				-- enable color highlights, then override to activate picker
 				vim.cmd.CccHighlighterEnable()
 				vim.notify("Highlights enabled.", nil, { title = "ccc.nvim", icon = "" })
 				vim.keymap.set("n", "#", vim.cmd.CccPick, { desc = " Color picker" })
