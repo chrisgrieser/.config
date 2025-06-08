@@ -20,7 +20,7 @@ local ensureInstalled = {
 		"json5",
 		"jsonc",
 		"toml",
-		"xml", -- mac `.plist` are also xml
+		"xml", -- macOS `.plist` are also xml
 		"yaml",
 	},
 	content = {
@@ -35,6 +35,7 @@ local ensureInstalled = {
 		"git_config",
 		"git_rebase",
 		"gitcommit",
+		"gitattributes",
 		"gitignore",
 		"just",
 		"make",
@@ -61,7 +62,7 @@ return {
 	build = ":TSUpdate",
 
 	opts = {
-		install_dir = vim.fn.stdpath("data") .. "/treesitter-parsers",
+		install_dir = vim.fn.stdpath("data") .. "/treesitter",
 	},
 	init = function()
 		-- auto-install parsers
