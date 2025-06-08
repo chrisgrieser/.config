@@ -2,7 +2,7 @@
 
 # CONFIG
 github_username="chrisgrieser"
-# set -e
+set -e
 
 repo_names="alfred|shimmering-obsidian|gitfred"
 # repo_names="nvim"
@@ -11,10 +11,10 @@ repo_names="alfred|shimmering-obsidian|gitfred"
 # repo_names="finder-vim-mode|zsh-magic-dashboard|nvim|alfred|shimmering-obsidian|gitfred|obsidian-quadro|pseudometa-obsidian-plugin-template|grappling-hook"
 
 function actions_in_repo {
-	cp -f "$HOME/Desktop/.gitattributes" ./.gitattributes
+	cp -f "$HOME/Desktop/.rsync-exclude" ./.rsync-exclude
 }
 
-commit_msg="chore: mark \`info.plist\` as generated file for git diffs"
+commit_msg="chore: ignore \`.gitattributes\` for rsync"
 
 #───────────────────────────────────────────────────────────────────────────────
 #───────────────────────────────────────────────────────────────────────────────

@@ -1,0 +1,3 @@
+# exclude these files from git diffs and stats
+after/**/*.vim linguist-vendored
+nvim/after/ftplugin/github-markdown.css linguist-vendored
