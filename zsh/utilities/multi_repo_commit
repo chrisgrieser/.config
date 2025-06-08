@@ -11,10 +11,10 @@ repo_names="alfred|shimmering-obsidian|gitfred"
 # repo_names="finder-vim-mode|zsh-magic-dashboard|nvim|alfred|shimmering-obsidian|gitfred|obsidian-quadro|pseudometa-obsidian-plugin-template|grappling-hook"
 
 function actions_in_repo {
-	cp -f "$HOME/Desktop/alfred-workflow-release.yml" ./.github/workflows/alfred-workflow-release.yml
+	cp -f "$HOME/Desktop/.gitattributes" ./.gitattributes
 }
 
-commit_msg="ci: improve automatic release notes"
+commit_msg="chore: mark \`info.plist\` as generated file for git diffs"
 
 #───────────────────────────────────────────────────────────────────────────────
 #───────────────────────────────────────────────────────────────────────────────
