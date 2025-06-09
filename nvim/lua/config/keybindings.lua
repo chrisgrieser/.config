@@ -115,12 +115,12 @@ keymap("n", "zl", function() require("personal-plugins.misc").spellSuggest() end
 
 -- Merging
 keymap("n", "m", "J", { desc = "󰽜 Merge line up" })
-keymap("n", "M", "<cmd>. move +1<CR>kJ", { desc = "󰽜 Merge line down" }) -- using `:move` preserves marks
+keymap("n", "M", "<cmd>. move +1<CR>kJ", { desc = "󰽜 Merge line down" }) -- `:move` preserves marks
 
 --------------------------------------------------------------------------------
 
 -- WHITESPACE & INDENTATION
-keymap("n", "=", "[<Space>", { desc = " Blank above", remap = true }) -- remap, since using nvim default
+keymap("n", "=", "[<Space>", { desc = " Blank above", remap = true }) -- remap, since nvim default
 keymap("n", "_", "]<Space>", { desc = " Blank below", remap = true })
 
 keymap("n", "<Tab>", ">>", { desc = "󰉶 indent" })
@@ -471,6 +471,6 @@ keymap("n", "<leader>ol", function()
 	local names = vim.iter(clients):map(function(client) return "- " .. client.name end):join("\n")
 	vim.notify(names, vim.log.levels.TRACE, { title = "Restarting LSPs", icon = "󰑓" })
 	vim.lsp.stop_client(clients, true)
-	vim.cmd.update()
+	vim.cmd("silent! update")
 	vim.defer_fn(vim.cmd.edit, 1000) -- wait for shutdown -> reload via `:edit` -> re-attaches LSPs
 end, { desc = "󰑓 LSPs restart" })
