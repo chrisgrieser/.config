@@ -176,7 +176,7 @@
 			<key>keyword</key>
 			<string>st</string>
 			<key>text</key>
-			<string>Steam: {query}</string>
+			<string>Steam Store: {query}</string>
 			<key>url</key>
 			<string>https://store.steampowered.com/search/?term={query}</string>
 		</dict>
