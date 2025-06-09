@@ -246,6 +246,10 @@ nnoremap ü <C-x>
 " uncheck all Markdown tasks
 nnoremap ,X :%s/-<Space>\[x\]<Space>/-<Space>[<Space>]<Space>/<CR>
 
+" blockquote
+exmap toggleBlockquote obcommand editor:toggle-blockquote
+nnoremap ,< :toggleBlockquote<CR>
+
 " append dot/comma/question mark
 nnoremap ,, mzA,<Esc>`z
 nnoremap ,. mzA.<Esc>`z
