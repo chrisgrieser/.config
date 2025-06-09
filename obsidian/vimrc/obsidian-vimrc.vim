@@ -275,7 +275,7 @@ nnoremap qq :toggleComment<CR>
 exmap enhanceUrlWithTitle obcommand obsidian-auto-link-title:enhance-url-with-title
 nnoremap ,ca :enhanceUrlWithTitle<CR>
 
-" freeze interface
+" [i]nterface [f]reeze
 exmap freezeInterface jsfile Meta/vimrc-jsfile.js { freezeInterface() }
 nnoremap ,if :freezeInterface<CR>
 
@@ -357,10 +357,10 @@ nnoremap ,t :openTrash<CR>
 "───────────────────────────────────────────────────────────────────────────────
 " VISUAL MODE
 
-" so repeated "V" selects more lines
+" so repeated `V` selects more lines
 vnoremap V gj
 
-" so 2x v goes to visual block mode
+" so 2x `v` goes to visual block mode
 vnoremap v <C-v>
 
 "───────────────────────────────────────────────────────────────────────────────
@@ -519,6 +519,9 @@ nnoremap ,ow :lineLength<CR>
 exmap maxImageSize obcommand obsidian-style-settings:style-settings-class-toggle-shimmering-focus-max-image-size-toggle
 nnoremap ,oi :maxImageSize<CR>
 
+"───────────────────────────────────────────────────────────────────────────────
+"───────────────────────────────────────────────────────────────────────────────
+"───────────────────────────────────────────────────────────────────────────────
 "───────────────────────────────────────────────────────────────────────────────
 " WRITING VAULT
 
