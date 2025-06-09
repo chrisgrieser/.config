@@ -1,13 +1,6 @@
 local M = {}
 --------------------------------------------------------------------------------
 
-M.extraTextobjMaps = {
-	func = "f",
-	call = "l",
-	condition = "o",
-	wikilink = "R",
-}
-
 ---@param mode string|string[]
 ---@param lhs string
 ---@param rhs string|function
@@ -40,7 +33,7 @@ end
 ---@param replace string
 function M.bufAbbrev(text, replace) vim.keymap.set("ia", text, replace, { buffer = true }) end
 
----Helper function, as ltex etc lack ignore files
+---Helper function, as some LSPs like `ltex` do not support ignore files
 ---@param client vim.lsp.Client
 ---@param bufnr integer
 function M.detachIfObsidianOrIcloud(client, bufnr)
