@@ -13,6 +13,7 @@ function readFile(path) {
 	return ObjC.unwrap(str);
 }
 
+/** @param {string} filepath @param {string} text */
 function writeToFile(filepath, text) {
 	const str = $.NSString.alloc.initWithUTF8String(text);
 	str.writeToFileAtomicallyEncodingError(filepath, true, $.NSUTF8StringEncoding, null);
