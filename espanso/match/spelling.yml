@@ -132,3 +132,4 @@ matches:
   - { trigger: htokey, replace: hotkey, propagate_case: true, word: true }
   - { trigger: tehm, replace: them, propagate_case: true, word: true }
   - { trigger: ohter, replace: other, propagate_case: true, word: true }
+  - { trigger: toehr, replace: other, propagate_case: true, word: true }
