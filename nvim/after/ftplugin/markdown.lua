@@ -78,7 +78,7 @@ bkeymap("n", "<D-u>", function()
 		if l:find("[*+-] ") and not l:find("%- %[") then return ind .. "- [ ] " end -- list -> task
 		if vim.startswith(l, "- [") then return ind .. "1. " end -- task -> ordered
 		if l:find("%d") then return ind .. "" end -- ordered -> none
-		return "" -- no list type
+		return "" -- other -> none
 	end)
 	if updated == curLine then updated = "- " .. curLine end -- none -> list
 
