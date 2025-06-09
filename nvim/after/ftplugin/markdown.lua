@@ -6,7 +6,7 @@ optl.expandtab = false
 optl.tabstop = 4 -- less nesting in md, so we can afford larger tabstop
 vim.bo.commentstring = "<!-- %s -->" -- add spaces
 
--- so two trailing spaces highlighted, but not a single trailing space
+-- so two trailing spaces are highlighted, but not a single trailing space
 optl.listchars:remove("trail")
 optl.listchars:append { multispace = "·" }
 
@@ -17,14 +17,14 @@ if vim.bo.buftype == "" then optl.signcolumn = "yes:4" end
 --------------------------------------------------------------------------------
 -- AUTO BULLETS
 -- (simplified implementation of `bullets.vim`)
+do
+	-- INFO cannot set opt.comments permanently, since it disturbs the
+	-- correctly indented continuation of bullet lists when hitting `opt.textwidth`
+	optl.formatoptions:append("r") -- `<CR>` in insert mode
+	optl.formatoptions:append("o") -- `o` in normal mode
 
--- INFO cannot set opt.comments permanently, since it disturbs the
--- correctly indented continuation of bullet lists when hitting `opt.textwidth`
-optl.formatoptions:append("r") -- `<CR>` in insert mode
-optl.formatoptions:append("o") -- `o` in normal mode
-
-local function autoBullet(key)
-	local comBefore = optl.comments:get()
+	local function autoBullet(key)
+		local comBefore = optl.comments:get()
 	-- stylua: ignore
 	optl.comments = {
 		"b:- [ ]", "b:- [x]", -- tasks
@@ -32,12 +32,13 @@ local function autoBullet(key)
 		"b:1.", "b:\t1.", -- ordered list
 		"n:>", -- blockquotes
 	}
-	vim.defer_fn(function() optl.comments = comBefore end, 1) -- deferred to restore only after return
-	return key
-end
+		vim.defer_fn(function() optl.comments = comBefore end, 1) -- deferred to restore only after return
+		return key
+	end
 
-bkeymap("n", "o", function() return autoBullet("o") end, { expr = true })
-bkeymap("i", "<CR>", function() return autoBullet("<CR>") end, { expr = true })
+	bkeymap("n", "o", function() return autoBullet("o") end, { expr = true })
+	bkeymap("i", "<CR>", function() return autoBullet("<CR>") end, { expr = true })
+end
 
 --------------------------------------------------------------------------------
 -- HEADINGS
@@ -118,8 +119,9 @@ bkeymap("n", "<leader>ep", function()
 	-- SOURCE https://github.com/sindresorhus/github-markdown-css
 	-- (replace `.markdown-body` with `body` and copypaste the first block)
 	local css = vim.fn.stdpath("config") .. "/after/ftplugin/github-markdown.css"
+
 	local outputPath = "/tmp/markdown-preview.html"
-	vim.cmd("silent update")
+	vim.cmd("silent! update")
 
 	-- create github-html via pandoc
 	-- (alternative: github API https://docs.github.com/en/rest/markdown/markdown)
