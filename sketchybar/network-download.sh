@@ -24,8 +24,7 @@ if [[ $download -gt 1024 ]]; then
 	unit="G"
 fi
 if [[ $download -gt 1024 ]]; then
-	download=$((download / 1024))
-	unit="T"
+	download="+++"
 fi
 
 sketchybar --set "$NAME" label="${download}${unit}" drawing=true
