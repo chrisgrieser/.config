@@ -8,6 +8,12 @@ threshold_kb=100
 download=$(netstat -w1 | awk '/[0-9]/ {print int($3/1024) ; exit }')
 unit="k"
 
+# GUARD eduroam bug showing briefly very high amount
+if [[ ${#download} -gt 10 ]]; then
+	sketchybar --set "$NAME" drawing=false
+	return 1
+fi
+
 # only show when more than threshold
 if [[ $download -lt $threshold_kb ]]; then
 	sketchybar --set "$NAME" drawing=false
@@ -22,9 +28,6 @@ fi
 if [[ $download -gt 1024 ]]; then
 	download=$((download / 1024))
 	unit="G"
-fi
-if [[ $download -gt 1024 ]]; then
-	download="+++"
 fi
 
 sketchybar --set "$NAME" label="${download}${unit}" drawing=true
