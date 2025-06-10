@@ -4,13 +4,13 @@
 threshold_kb=50
 #───────────────────────────────────────────────────────────────────────────────
 
-# HACK `netstat` only outputs as stream, so using `awk`'s `exit` to return the 1st value
+# `netstat` only outputs as stream, so using `awk`'s `exit` to return the 1st value
 upload=$(netstat -w1 | awk '/[0-9]/ {print int($6/1024) ; exit }')
 unit="k"
 
-# guard eduroam bug showing briefly very high amount
-if [[ ${#upload} -gt 10 ]]; then
-	sketchybar --set "$NAME" drawing=false
+# GUARD eduroam bug briefly showing very high amount
+if [[ ${#upload} -gt 8 ]]; then
+	sketchybar --set "$NAME" label="+++" drawing=true
 	return 1
 fi
 
