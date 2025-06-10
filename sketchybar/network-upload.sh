@@ -8,6 +8,12 @@ threshold_kb=50
 upload=$(netstat -w1 | awk '/[0-9]/ {print int($6/1024) ; exit }')
 unit="k"
 
+# guard eduroam bug showing briefly very high amount
+if [[ ${#upload} -gt 10 ]]; then
+	sketchybar --set "$NAME" drawing=false
+	return 1
+fi
+
 # only show when more than threshold
 if [[ $upload -lt $threshold_kb ]]; then
 	sketchybar --set "$NAME" drawing=false
@@ -15,16 +21,13 @@ if [[ $upload -lt $threshold_kb ]]; then
 fi
 
 # switch to Mb when more than 1024kb, Gb when more than 1024kb, etc.
-if [[ $download -gt 1024 ]]; then
-	download=$((download / 1024))
+if [[ $upload -gt 1024 ]]; then
+	upload=$((upload / 1024))
 	unit="M"
 fi
-if [[ $download -gt 1024 ]]; then
-	download=$((download / 1024))
+if [[ $upload -gt 1024 ]]; then
+	upload=$((upload / 1024))
 	unit="G"
-fi
-if [[ $download -gt 1024 ]]; then
-	download="+++"
 fi
 
 sketchybar --set "$NAME" label="${upload}${unit}" drawing=true
