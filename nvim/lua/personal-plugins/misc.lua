@@ -68,7 +68,7 @@ function M.toggleOrIncrement()
 		[">="] = "<=",
 	}
 	if vim.bo.ft == "javascript" or vim.bo.ft == "typescript" then
-		toggles["if"] = "else if" -- only one-way
+		toggles["if"] = "else if" -- only one-way, due to the space in there
 		toggles["const"] = "let"
 		toggles["==="] = "!=="
 	elseif vim.bo.ft == "python" then
@@ -131,7 +131,7 @@ function M.smartDuplicate()
 	-- INSERT DUPLICATED LINE
 	vim.api.nvim_buf_set_lines(0, row, row, false, { line })
 
-	-- MOVE CURSOR DOWN, AND TO VALUE/FIELD (IF EXISTS)
+	-- MOVE CURSOR DOWN, AND TO VALUE/FIELD (IF THERE IS ANY)
 	local _, luadocFieldPos = line:find("%-%-%-@%w+ ")
 	local _, valuePos = line:find("[:=] ")
 	local targetCol = luadocFieldPos or valuePos or col
@@ -169,7 +169,7 @@ end
 --------------------------------------------------------------------------------
 
 function M.bufferInfo()
-	local pseudoTilde = "∼" -- HACK `U+223C` instead of real `~` to prevent md-strikethrough
+	local pseudoTilde = "∼" -- HACK `U+223C` instead of real `~` to prevent markdown-strikethrough
 
 	local clients = vim.lsp.get_clients { bufnr = 0 }
 	local longestName = vim.iter(clients)
