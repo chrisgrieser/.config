@@ -42,7 +42,7 @@
 			<key>enabled</key>
 			<true/>
 			<key>keyword</key>
-			<string>sci|anna</string>
+			<string>sci||anna</string>
 			<key>text</key>
 			<string>Anna's Archive: "{query}"</string>
 			<key>url</key>
