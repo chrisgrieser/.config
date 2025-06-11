@@ -355,6 +355,16 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>ECF587F4-3E75-4AE7-84CB-BC53F357AC33</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>⌘: Open in Contacts.app</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
 		</array>
 		<key>FB019AF9-329B-44E0-924B-5F968806155C</key>
 		<array>
@@ -1080,7 +1090,7 @@ open -g "hammerspoon://sync-repos"</string>
 			<key>config</key>
 			<dict>
 				<key>openwith</key>
-				<string></string>
+				<string>/System/Volumes/Data/Applications/Alfred 5.app</string>
 				<key>sourcefile</key>
 				<string></string>
 			</dict>
@@ -1225,6 +1235,21 @@ open -g "hammerspoon://sync-repos"</string>
 			<string>8BCA1757-79A5-464D-85EE-B3FE7077A1B4</string>
 			<key>version</key>
 			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>openwith</key>
+				<string>/System/Applications/Contacts.app</string>
+				<key>sourcefile</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openfile</string>
+			<key>uid</key>
+			<string>ECF587F4-3E75-4AE7-84CB-BC53F357AC33</string>
+			<key>version</key>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1592,7 +1617,7 @@ open -g "hammerspoon://sync-repos"</string>
 			<key>colorindex</key>
 			<integer>6</integer>
 			<key>xpos</key>
-			<real>720</real>
+			<real>725</real>
 			<key>ypos</key>
 			<real>820</real>
 		</dict>
@@ -1651,6 +1676,15 @@ open -g "hammerspoon://sync-repos"</string>
 			<real>30</real>
 			<key>ypos</key>
 			<real>15</real>
+		</dict>
+		<key>ECF587F4-3E75-4AE7-84CB-BC53F357AC33</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>6</integer>
+			<key>xpos</key>
+			<real>725</real>
+			<key>ypos</key>
+			<real>945</real>
 		</dict>
 		<key>F277ADA2-F5BF-4051-BAF5-9E72355A3E70</key>
 		<dict>
