@@ -75,11 +75,15 @@ vnoremap K 6k
 onoremap J 2j
 
 " JUMPS
-" (jumps from the cursor history work across files, like in nvim)
-exmap jumpBack obcommand cursor-position-history:previous-cursor-position
-nnoremap <C-h> :jumpBack<CR>
-exmap jumpForward obcommand cursor-position-history:cursor-position-forward
-nnoremap <C-l> :jumpForward<CR>
+nnoremap <C-h> <C-o>
+nnoremap <C-l> <C-i>
+
+" Cursor history plugin jumps even across files, but the jumping seems buggy
+" when undoing changes
+" exmap jumpBack obcommand cursor-position-history:previous-cursor-position
+" nnoremap <C-h> :jumpBack<CR>
+" exmap jumpForward obcommand cursor-position-history:cursor-position-forward
+" nnoremap <C-l> :jumpForward<CR>
 
 " emulate nvim-origami
 exmap origamiH jsfile Meta/vimrc-jsfile.js { origamiH() }

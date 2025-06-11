@@ -72,7 +72,7 @@ function run() {
 
 			// Memory, CPU & root
 			let memory = (Number.parseInt(memoryStr) / 1024).toFixed(0).toString(); // real memory
-			memory = Number.parseInt(memory) > memoryThresholdMb ? memory + "Mb" : "";
+			memory = Number.parseInt(memory) > memoryThresholdMb ? memory + " MB" : "";
 			const cpu = Number.parseFloat(cpuStr) > cpuThresholdPercent ? cpuStr + "%" : "";
 			const isRootUser = isRoot === "root" ? " ⭕" : "";
 

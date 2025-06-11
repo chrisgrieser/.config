@@ -1741,7 +1741,7 @@ Display mounted volumes directly via `vol`.
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>CPU threshold, percentage below which CPU is not displayed</string>
+			<string>minimum CPU threshold in % for displaying usage</string>
 			<key>label</key>
 			<string></string>
 			<key>type</key>
@@ -1762,7 +1762,7 @@ Display mounted volumes directly via `vol`.
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>memory threshold, Mb below which memory usage is not displayed</string>
+			<string>minimum memory threshold in MB for displaying usage</string>
 			<key>label</key>
 			<string></string>
 			<key>type</key>
@@ -1925,7 +1925,7 @@ Display mounted volumes directly via `vol`.
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.5.2</string>
+	<string>1.5.3</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
