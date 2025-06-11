@@ -47,31 +47,35 @@ end
 bkeymap("n", "<C-j>", [[/^##\+ .*<CR>]], { desc = " Next heading" })
 bkeymap("n", "<C-k>", [[?^##\+ .*<CR>]], { desc = " Prev heading" })
 
----@param dir 1|-1
-local function headingsIncremantor(dir)
-	local lnum, col = unpack(vim.api.nvim_win_get_cursor(0))
-	local curLine = vim.api.nvim_get_current_line()
+do
+	---@param dir 1|-1
+	local function headingsIncremantor(dir)
+		local lnum, col = unpack(vim.api.nvim_win_get_cursor(0))
+		local curLine = vim.api.nvim_get_current_line()
 
-	local updated = curLine:gsub("^#* ", function(match)
-		if dir == -1 and match ~= "# " then return match:sub(2) end
-		if dir == 1 and match ~= "###### " then return "#" .. match end
-		return ""
-	end)
-	if updated == curLine then updated = (dir == 1 and "## " or "###### ") .. curLine end
+		local updated = curLine:gsub("^#* ", function(match)
+			if dir == -1 and match ~= "# " then return match:sub(2) end
+			if dir == 1 and match ~= "###### " then return "#" .. match end
+			return ""
+		end)
+		if updated == curLine then updated = (dir == 1 and "## " or "###### ") .. curLine end
 
-	vim.api.nvim_set_current_line(updated)
-	local diff = #updated - #curLine
-	vim.api.nvim_win_set_cursor(0, { lnum, col + diff })
+		vim.api.nvim_set_current_line(updated)
+		local diff = #updated - #curLine
+		vim.api.nvim_win_set_cursor(0, { lnum, col + diff })
+	end
+
+	-- <D-h> remapped to <D-5>, since used by macOS PENDING https://github.com/neovide/neovide/issues/3099
+	-- stylua: ignore
+	bkeymap({ "n", "i" }, "<D-5>", function() headingsIncremantor(1) end, { desc = " Increment heading" })
+	-- stylua: ignore
+	bkeymap({ "n", "i" }, "<D-H>", function() headingsIncremantor(-1) end, { desc = " Decrement heading" })
 end
-
--- <D-h> remapped to <D-5>, since used by macOS PENDING https://github.com/neovide/neovide/issues/3099
-bkeymap("n", "<D-5>", function() headingsIncremantor(1) end, { desc = " Increment heading" })
-bkeymap("n", "<D-H>", function() headingsIncremantor(-1) end, { desc = " Decrement heading" })
 
 --------------------------------------------------------------------------------
 
 -- cycle list types
-bkeymap("n", "<D-u>", function()
+bkeymap({ "n", "i" }, "<D-u>", function()
 	local lnum, col = unpack(vim.api.nvim_win_get_cursor(0))
 	local curLine = vim.api.nvim_get_current_line()
 
