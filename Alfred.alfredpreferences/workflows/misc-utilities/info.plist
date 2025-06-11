@@ -1090,7 +1090,7 @@ open -g "hammerspoon://sync-repos"</string>
 			<key>config</key>
 			<dict>
 				<key>openwith</key>
-				<string>/System/Volumes/Data/Applications/Alfred 5.app</string>
+				<string></string>
 				<key>sourcefile</key>
 				<string></string>
 			</dict>
@@ -1616,6 +1616,8 @@ open -g "hammerspoon://sync-repos"</string>
 		<dict>
 			<key>colorindex</key>
 			<integer>6</integer>
+			<key>note</key>
+			<string>Open in Alfred</string>
 			<key>xpos</key>
 			<real>725</real>
 			<key>ypos</key>
