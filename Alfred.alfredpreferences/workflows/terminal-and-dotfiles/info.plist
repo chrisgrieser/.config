@@ -126,7 +126,7 @@
 			<key>config</key>
 			<dict>
 				<key>openwith</key>
-				<string></string>
+				<string>/System/Volumes/Data/Applications/Neovide.app</string>
 				<key>sourcefile</key>
 				<string></string>
 			</dict>
