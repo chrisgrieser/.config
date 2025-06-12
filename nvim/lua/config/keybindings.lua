@@ -95,7 +95,7 @@ keymap({ "n", "x" }, "+", function() require("personal-plugins.misc").toggleOrIn
 keymap({ "n", "x" }, "ü", "<C-x>", { desc = "󰍵 Decrement" })
 -- Delete trailing character
 keymap("n", "X", function()
-	local updatedLine = vim.api.nvim_get_current_line():gsub("%S%s*$", "")
+	local updatedLine = vim.api.nvim_get_current_line():gsub(".$", "")
 	vim.api.nvim_set_current_line(updatedLine)
 end, { desc = "󱎘 Delete char at EoL" })
 
