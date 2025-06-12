@@ -224,7 +224,7 @@ function M.formatWithFallback()
 		vim.lsp.buf.format()
 
 		-- FIX some LSPs trigger folding after formatting?
-		vim.defer_fn(function() vim.cmd.normal { "zv", bang = true } end, 1)
+		vim.schedule(function() vim.cmd.normal { "zv", bang = true } end)
 	else
 		vim.cmd([[% substitute_\s\+$__e]]) -- remove trailing spaces
 		vim.cmd([[% substitute _\(\n\n\)\n\+_\1_e]]) -- remove duplicate blank lines
