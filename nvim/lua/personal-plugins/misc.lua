@@ -60,33 +60,16 @@ function M.toggleTitleCase()
 end
 
 -- Increment or toggle if cursorword is true/false (Simplified version of dial.nvim)
-function M.toggleOrIncrement()
+local function toggle()
 	local toggles = {
 		["true"] = "false",
-		["=="] = "!=",
-		[">"] = "<",
-		[">="] = "<=",
+		["always"] = "never",
+		["yes"] = "no",
+		-- ...
 	}
-	if vim.bo.ft == "javascript" or vim.bo.ft == "typescript" then
-		toggles["if"] = "else if" -- only one-way, due to the space in there
-		toggles["const"] = "let"
-		toggles["==="] = "!=="
-	elseif vim.bo.ft == "python" then
-		toggles["True"] = "False"
-		toggles["true"] = nil
-	elseif vim.bo.ft == "swift" then
-		toggles["var"] = "let"
-	elseif vim.bo.ft == "zsh" or vim.bo.ft == "bash" or vim.bo.ft == "sh" then
-		toggles["if"] = "elif"
-		toggles["echo"] = "print"
-	elseif vim.bo.ft == "lua" then
-		toggles["if"] = "elseif"
-		toggles["=="] = "~="
-	end
 
 	-- cword does not include punctuation-only words, so checking `cWORD` for that
-	local cword = vim.fn.expand("<cWORD>"):find("^%p+$") and vim.fn.expand("<cWORD>")
-		or vim.fn.expand("<cword>")
+	local cword = vim.fn.expand("<cword>")
 	local newWord
 	for word, opposite in pairs(toggles) do
 		if cword == word then newWord = opposite end
@@ -94,12 +77,8 @@ function M.toggleOrIncrement()
 	end
 	if newWord then
 		local prevCursor = vim.api.nvim_win_get_cursor(0)
-		-- `iw` textobj does also work on punctuation only
 		vim.cmd.normal { '"_ciw' .. newWord, bang = true }
 		vim.api.nvim_win_set_cursor(0, prevCursor)
-	else
-		-- needs `:execute` to escape `<C-a>`
-		vim.cmd.execute('"normal! ' .. vim.v.count1 .. '\\<C-a>"')
 	end
 end
 
