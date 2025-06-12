@@ -1467,6 +1467,21 @@
   a GitHub repo from the current browser tab. ([Note that Firefox is not
   supported.](https://www.alfredforum.com/topic/16748-how-to-do-x-in-firefox-from-alfred/))
 
+## GitHub Token
+1. Add the `GITHUB_TOKEN` in the Alfred workflow configuration.
+2. Or: export the token in your `.zshenv`.
+
+```zsh
+# add this to your `$HOME/.zshenv`
+# ($alfred_workflow_name is only populated by shell processes that called by Alfred)
+if [[ "$alfred_workflow_name" == "GitFred" ]] ; then
+	export GITHUB_TOKEN="..."
+	# if using a password manager, you can do something like this 
+	# (`op` being the CLI for 1Password)
+	export GITHUB_TOKEN=$(op plugin run -- gh auth token)
+fi
+```
+
 ---
 
 #### Created by [Chris Grieser](https://chris-grieser.de/)   |   ⭐️ [Star on GitHub](https://github.com/chrisgrieser/gitfred)</string>
