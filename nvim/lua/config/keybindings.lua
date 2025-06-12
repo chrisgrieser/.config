@@ -110,8 +110,14 @@ end
 
 -- Spelling
 keymap("n", "z.", "1z=", { desc = "󰓆 Fix spelling" }) -- works even with `spell=false`
--- stylua: ignore
-keymap("n", "zl", function() require("personal-plugins.misc").spellSuggest() end, { desc = "󰓆 Spell suggestions" })
+keymap("n", "zl", function()
+	local suggestions = vim.fn.spellsuggest(vim.fn.expand("<cword>"))
+	suggestions = vim.list_slice(suggestions, 1, 9)
+	vim.ui.select(suggestions, { prompt = "󰓆 Spelling suggestions" }, function(selection)
+		if not selection then return end
+		vim.cmd.normal { '"_ciw' .. selection, bang = true }
+	end)
+end, { desc = "󰓆 Spell suggestions" })
 
 -- Merging
 keymap("n", "m", "J", { desc = "󰽜 Merge line up" })
@@ -145,12 +151,6 @@ keymap("n", "zr", "zR", { desc = "󰘖 Open all folds" })
 keymap("n", "zo", "zO", { desc = "󰘖 Open fold recursively" })
 -- stylua: ignore
 keymap("n", "zf", function() vim.opt.foldlevel = vim.v.count1 end, { desc = " Set fold level to {count}" })
-
-keymap("n", "zs", function()
-	local modeline = vim.bo.commentstring:format("vim foldlevel=" .. vim.o.foldlevel)
-	vim.api.nvim_buf_set_lines(0, 0, 0, false, { modeline })
-	vim.api.nvim_win_set_cursor(0, { 1, #modeline })
-end, { desc = "󰆓 Save foldlevel in modeline" })
 
 --------------------------------------------------------------------------------
 -- SNIPPETS
@@ -251,7 +251,7 @@ keymap({ "n", "x" }, "q", "gc", { desc = "󰆈 Comment operator", remap = true }
 keymap("n", "qq", "gcc", { desc = "󰆈 Comment line", remap = true })
 do
 	keymap("o", "u", "gc", { desc = "󰆈 Multiline comment", remap = true })
-	keymap("n", "guu", "guu") -- prevent mapping above from overwriting `guu`
+	keymap("n", "guu", "guu") -- prevent previous mapping from overwriting `guu`
 end
 
 -- stylua: ignore start
