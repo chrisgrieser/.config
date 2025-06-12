@@ -73,7 +73,6 @@ function M.toggleOrIncrement()
 		toggles["==="] = "!=="
 	elseif vim.bo.ft == "python" then
 		toggles["True"] = "False"
-		toggles["true"] = nil
 	elseif vim.bo.ft == "swift" then
 		toggles["var"] = "let"
 	elseif vim.bo.ft == "zsh" or vim.bo.ft == "bash" or vim.bo.ft == "sh" then
@@ -136,18 +135,6 @@ function M.smartDuplicate()
 	local _, valuePos = line:find("[:=] ")
 	local targetCol = luadocFieldPos or valuePos or col
 	vim.api.nvim_win_set_cursor(0, { row + 1, targetCol })
-end
-
---------------------------------------------------------------------------------
-
-function M.spellSuggest()
-	local suggestions = vim.fn.spellsuggest(vim.fn.expand("<cword>"))
-	suggestions = vim.list_slice(suggestions, 1, 9)
-
-	vim.ui.select(suggestions, { prompt = "󰓆 Spelling suggestions" }, function(selection)
-		if not selection then return end
-		vim.cmd.normal { '"_ciw' .. selection, bang = true }
-	end)
 end
 
 --------------------------------------------------------------------------------
