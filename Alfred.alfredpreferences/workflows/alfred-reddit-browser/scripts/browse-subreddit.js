@@ -202,7 +202,8 @@ function getRedditPosts(subredditName, oldItems) {
 	// SIC try `curl` with and without user agent, since sometimes one is
 	// blocked, sometimes the other?
 	const apiUrl = `https://www.reddit.com/r/${subredditName}/${opts.sortType}.json?limit=${opts.pagesToRequest}`;
-	let curlCommand = `curl -sL -H "User-Agent: Chrome/117.0.0.0" "${apiUrl}"`;
+	const userAgent = "Chrome/136.0.0.0";
+	let curlCommand = `curl -sL -H "User-Agent: ${userAgent}" "${apiUrl}"`;
 	let response;
 	try {
 		response = JSON.parse(app.doShellScript(curlCommand));
