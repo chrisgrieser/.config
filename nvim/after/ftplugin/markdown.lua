@@ -48,8 +48,7 @@ bkeymap("n", "<C-j>", [[/^##\+ .*<CR>]], { desc = " Next heading" })
 bkeymap("n", "<C-k>", [[?^##\+ .*<CR>]], { desc = " Prev heading" })
 
 do
-	---@param dir 1|-1
-	local function headingsIncremantor(dir)
+	local function headingsIncremantor(dir) ---@param dir 1|-1
 		local lnum, col = unpack(vim.api.nvim_win_get_cursor(0))
 		local curLine = vim.api.nvim_get_current_line()
 
