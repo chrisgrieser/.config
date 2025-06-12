@@ -10,6 +10,7 @@ www.netflix.com##div[data-list-context="configbased_mobilepersonalizedgames"]
 www.netflix.com##div[data-list-context="popularGames"]
 amazon.de###nav-logo-sprites
 amazon.de###spc-container
+www.linguee.com##.l_deepl_ad_container
 
 ! development
 stackoverflow.com###announcement-banner
