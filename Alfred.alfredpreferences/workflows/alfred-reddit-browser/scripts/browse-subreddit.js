@@ -198,35 +198,24 @@ function getHackernewsPosts(oldItems) {
 function getRedditPosts(subredditName, oldItems) {
 	const opts = getSettings();
 
+	// user agent is required to avoid network security error by reddit
+	const userAgent =
+		"Alfred " + $.getenv("alfred_workflow_name") + "/" + $.getenv("alfred_workflow_version");
+
 	// DOCS https://www.reddit.com/dev/api#GET_new
-	// SIC try `curl` with and without user agent, since sometimes one is
-	// blocked, sometimes the other?
 	const apiUrl = `https://www.reddit.com/r/${subredditName}/${opts.sortType}.json?limit=${opts.pagesToRequest}`;
-	const userAgent = "Chrome/136.0.0.0";
-	let curlCommand = `curl -sL -H "User-Agent: ${userAgent}" "${apiUrl}"`;
+	const curlCommand = `curl --silent --user-agent "${userAgent}" "${apiUrl}"`;
 	let response;
 	try {
 		response = JSON.parse(app.doShellScript(curlCommand));
 		if (response.error) {
-			curlCommand = `curl -sL "${apiUrl}"`;
-			response = JSON.parse(app.doShellScript(curlCommand));
-			if (response.error) {
-				const errorMsg = `Error ${response.error}: ${response.message}`;
-				return errorMsg;
-			}
-		}
-	} catch (_error) {
-		console.log("Failed curl command: " + curlCommand);
-		const apiResponse = app.doShellScript(curlCommand);
-		try {
-			curlCommand = `curl -sL "${apiUrl}"`;
-			response = JSON.parse(apiResponse);
-		} catch (_error) {
-			console.log("Failed curl command: " + curlCommand);
-			const errorMsg = `Error parsing JSON. curl response was: ${apiResponse}`;
+			const errorMsg = `Error ${response.error}: ${response.message}`;
 			console.log(errorMsg);
 			return errorMsg;
 		}
+	} catch (_error) {
+		console.log("Failed curl command: " + curlCommand);
+		return "Unknown error.";
 	}
 
 	const oldUrls = oldItems.map((item) => item.arg);
