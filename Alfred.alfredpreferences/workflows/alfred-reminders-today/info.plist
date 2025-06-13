@@ -1120,20 +1120,8 @@
 		</dict>
 	</array>
 	<key>readme</key>
-	<string>## Info when upgrading from version 1.x to version 2.x
-Due to the underlying tool (`reminder-cli`) being abandoned, I rewrote this
-workflow to work fully standalone. Note that this workflow now **requires at
-least macOS 14**.
-
-If you used the workflow before version 2.0, it now does not require
-`reminders-cli` anymore, so you can uninstall it:
-
-```bash
-brew uninstall keith/formulae/reminders-cli
-brew untap keith/formulae
-```
-
----
+	<string>## Requriements
+This workflow requires at least macOS 15.
 
 ## Usage
 - Display reminders due today (or overdue) via the keyword `rem`. Configure the
