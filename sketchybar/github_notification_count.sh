@@ -1,4 +1,8 @@
 #!/usr/bin/env zsh
+
+# CONFIG
+GITHUB_TOKEN="$(cat "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/private dotfiles/github-token.txt")"
+
 #───────────────────────────────────────────────────────────────────────────────
 
 # GUARD not when on projector
@@ -9,7 +13,6 @@ fi
 
 # GUARD dependencies or API key missing
 if [[ -z "$GITHUB_TOKEN" ]]; then
-	# $GITHUB_TOKEN is saved in .zshenv and therefore available here
 	sketchybar --set "$NAME" label="NO TOKEN" drawing=true
 	return 1
 fi
