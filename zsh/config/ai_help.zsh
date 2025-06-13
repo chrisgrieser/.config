@@ -4,6 +4,11 @@
 
 ai() {
 	# CONFIG
+
+	# https://platform.openai.com/api-keys
+	private_dots="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/private dotfiles"
+	OPENAI_API_KEY="$(cat "$private_dots/openai-api-key.txt")"
+
 	local model='gpt-4.1-mini'
 
 	local system_prompt="
@@ -22,7 +27,10 @@ ai() {
 
 		Create a command to accomplish the following task:
 	"
+
 	#────────────────────────────────────────────────────────────────────────────
+	#────────────────────────────────────────────────────────────────────────────
+
 
 	local task="$*"
 	print "\e[1;34mAsking AI…\e[0m"
