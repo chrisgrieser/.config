@@ -11,10 +11,13 @@ repo_names="alfred|shimmering-obsidian|gitfred"
 # repo_names="finder-vim-mode|zsh-magic-dashboard|nvim|alfred|shimmering-obsidian|gitfred|obsidian-quadro|pseudometa-obsidian-plugin-template|grappling-hook"
 
 function actions_in_repo {
-	cp -f "$HOME/Desktop/.rsync-exclude" ./.rsync-exclude
+	cp -f "$HOME/Desktop/alfred-workflow-release.yml" ./.github/workflows/alfred-workflow-release.yml
 }
 
-commit_msg="chore: ignore \`.gitattributes\` for rsync"
+commit_msg="ci: do not categorize \`chore\` commits as fixes"
+
+GITHUB_TOKEN="$(cat "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/private dotfiles/github-token.txt")"
+export GITHUB_TOKEN
 
 #───────────────────────────────────────────────────────────────────────────────
 #───────────────────────────────────────────────────────────────────────────────

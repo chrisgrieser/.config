@@ -8,6 +8,12 @@ return {
 	"saghen/blink.cmp",
 	dependencies = "Kaiser-Yang/blink-cmp-git",
 
+	init = function ()
+		local tokenPath =
+			vim.fs.normalize("~/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/private dotfiles/github-token.txt")
+		vim.env.GITHUB_TOKEN = vim.system({ "cat", tokenPath }):wait().stdout
+	end,
+
 	opts = {
 		sources = {
 			default = { "lsp", "path", "snippets", "buffer", "git" }, -- add `git` to the list
