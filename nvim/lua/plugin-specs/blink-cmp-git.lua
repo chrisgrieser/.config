@@ -1,6 +1,15 @@
 -- DOCS https://github.com/Kaiser-Yang/blink-cmp-git
 --------------------------------------------------------------------------------
 
+local function getToken(path)
+	local file = io.open(path, "r")
+	if file then
+		local token = file:read("*l") -- read first line
+		file:close()
+		return token
+	end
+end
+
 return {
 	-- `blink-cmp-git` is configured in the blink.cmp provider config. To keep
 	-- plugin configs nonetheless modular, we define another set of `blink.cmp`
@@ -8,10 +17,12 @@ return {
 	"saghen/blink.cmp",
 	dependencies = "Kaiser-Yang/blink-cmp-git",
 
-	init = function ()
-		local tokenPath =
-			vim.fs.normalize("~/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/private dotfiles/github-token.txt")
-		vim.env.GITHUB_TOKEN = vim.system({ "cat", tokenPath }):wait().stdout
+	config = function(_, opts)
+		local tokenPath = os.getenv("HOME")
+			.. "/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/private dotfiles/github-token.txt"
+		vim.env.GITHUB_TOKEN = getToken(tokenPath)
+
+		require("blink.cmp").setup(opts)
 	end,
 
 	opts = {
