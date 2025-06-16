@@ -71,6 +71,7 @@ function M.toggleOrIncrement()
 		toggles["if"] = "else if" -- only one-way, due to the space in there
 		toggles["const"] = "let"
 		toggles["==="] = "!=="
+		toggles["||"] = "&&"
 	elseif vim.bo.ft == "python" then
 		toggles["True"] = "False"
 	elseif vim.bo.ft == "swift" then
@@ -78,6 +79,7 @@ function M.toggleOrIncrement()
 	elseif vim.bo.ft == "zsh" or vim.bo.ft == "bash" or vim.bo.ft == "sh" then
 		toggles["if"] = "elif"
 		toggles["echo"] = "print"
+		toggles["||"] = "&&"
 	elseif vim.bo.ft == "lua" then
 		toggles["if"] = "elseif"
 		toggles["=="] = "~="
