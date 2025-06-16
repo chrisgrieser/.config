@@ -172,8 +172,8 @@ themes = vim.iter(themes)
 	:filter(function(theme) return theme.enabled ~= false end)
 	:map(function(theme)
 		theme.priority = 1000 -- see https://lazy.folke.io/spec/lazy_loading#-colorschemes
-		-- `colorscheme` is not part of the lazy.nvim spec, but
-		-- only helpers for the light-dark-mode toggling below
+		-- `colorscheme` is not part of the lazy.nvim spec, but only a helper for
+		-- the light-dark-mode toggling below
 		if not theme.colorscheme then
 			theme.colorscheme = vim.fs.basename(theme[1]):gsub("%.?nvim%-?", "")
 		end
