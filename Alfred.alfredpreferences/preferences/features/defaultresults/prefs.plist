@@ -4,9 +4,8 @@
 <dict>
 	<key>fallbacks</key>
 	<array>
-		<string>duck-utils.598523D6-79B7-427B-8F31-6EB86246AFF8</string>
+		<string>features.websearch.duckduckgo.fallback</string>
 		<string>features.websearch.lucky.fallback</string>
-		<string>features.websearch.custom.DB17ABEC-DD58-4433-9513-C2D4D6C59B4B.fallback</string>
 	</array>
 	<key>showContacts</key>
 	<false/>
