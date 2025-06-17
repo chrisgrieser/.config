@@ -1,4 +1,3 @@
-#!/usr/bin/env osascript -l JavaScript
 ObjC.import("stdlib");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
@@ -104,7 +103,6 @@ function getHackernewsPosts(oldItems) {
 
 	/** @type{AlfredItem[]} */
 	const hits = response.hits.reduce(
-		// biome-ignore lint/complexity/noExcessiveCognitiveComplexity: okay here
 		(/** @type {AlfredItem[]} */ acc, /** @type {hackerNewsItem} */ item) => {
 			if (item.points < opts.minUpvotes) return acc;
 
@@ -226,7 +224,6 @@ function getRedditPosts(subredditName, oldItems) {
 
 	/** @type{AlfredItem[]} */
 	const redditPosts = response.data.children.reduce(
-		// biome-ignore lint/complexity/noExcessiveCognitiveComplexity: okay here
 		(/** @type {AlfredItem[]} */ acc, /** @type {redditPost} */ data) => {
 			const item = data.data;
 			if (item.score < opts.minUpvotes) return acc;

@@ -124,8 +124,8 @@
     "body": [
       "/** @param {string} url @return {string} */",
       "function httpRequest(url) {",
-      "\tconst queryURL = \\$.NSURL.URLWithString(url);",
-      "\tconst data = \\$.NSData.dataWithContentsOfURL(queryURL);",
+      "\tconst queryUrl = \\$.NSURL.URLWithString(url);",
+      "\tconst data = \\$.NSData.dataWithContentsOfURL(queryUrl);",
       "\treturn \\$.NSString.alloc.initWithDataEncoding(data, \\$.NSUTF8StringEncoding).js;",
       "}"
     ],
