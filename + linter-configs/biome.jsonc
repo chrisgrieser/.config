@@ -16,12 +16,6 @@
 			}
 		}
 	},
-	"javascript": {
-		"globals": ["ObjC", "Application", "delay", "Path", "$"] // JXA variables
-	},
-	"css": {
-		"formatter": { "enabled": true }
-	},
 	"formatter": {
 		"useEditorconfig": true,
 		"lineWidth": 100, // FIX set explicitly, since editorconfig is not respected
