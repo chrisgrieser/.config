@@ -218,7 +218,6 @@ function json2bibtex(entryJson, citekey) {
 //──────────────────────────────────────────────────────────────────────────────
 
 /** @type {AlfredRun} */
-// biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run(argv) {
 	const libraryPath = $.getenv("bibtex_library_path");
 	const input = argv[0].trim();
