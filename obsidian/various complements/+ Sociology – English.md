@@ -27,3 +27,5 @@ constellations of technological interdependence
 constellation of technological interdependence
 technological interdependence
 interdependent technologies
+
+technologization||
