@@ -58,7 +58,6 @@
 - [nvim-neotest/nvim-nio](https://github.com/nvim-neotest/nvim-nio)
 - [nvim-treesitter/nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)
 - [nvim-treesitter/nvim-treesitter-textobjects](https://github.com/nvim-treesitter/nvim-treesitter-textobjects)
-- [olimorris/codecompanion.nvim](https://github.com/olimorris/codecompanion.nvim)
 - [rcarriga/nvim-dap-ui](https://github.com/rcarriga/nvim-dap-ui)
 - [saghen/blink.cmp](https://github.com/saghen/blink.cmp)
 - [theHamsta/nvim-dap-virtual-text](https://github.com/theHamsta/nvim-dap-virtual-text)
