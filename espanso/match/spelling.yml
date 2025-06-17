@@ -2,8 +2,8 @@
 #───────────────────────────────────────────────────────────────────────────────
 matches:
   - { trigger: n#t, replace: n't }
-  # "…ign" -> "…ing" (but not for words like "sign" or "ignore", or "foreign", where it is actually correct)
-  - { regex: "(?P<letter>[a-df-ru-z])ign ", replace: "{{letter}}ing " }
+  # "…ign" -> "…ing" (but not for words like "sign", "ignore", "align", or "foreign", where it is actually correct)
+  - { regex: "(?P<letter>[a-df-km-ru-z])ign ", replace: "{{letter}}ing " }
   - { trigger: " ot ", replace: " to " }
   - { trigger: "#d ", replace: "'d " }
   - { trigger: "doe snot", replace: "does not" }
