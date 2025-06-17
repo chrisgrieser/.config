@@ -29,6 +29,7 @@ function freezeInterface() {
 	electronWindow.openDevTools(); // devtools need to be open for debugger to work
 
 	// biome-ignore format: ugly
+	// biome-ignore lint/suspicious/noDebugger: intentional use here
 	setTimeout(() => { debugger }, delaySecs * 1000)
 }
 
@@ -400,7 +401,6 @@ function inspectUnresolvedLinks() {
 	new Notice(msg2, 0);
 }
 
-// biome-ignore lint/complexity/noExcessiveCognitiveComplexity: okay here
 function toggleComment() {
 	/** @type {Record<string, string|string[]>} */
 	const commentChars = {

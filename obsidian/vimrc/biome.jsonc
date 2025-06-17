@@ -5,33 +5,10 @@
 {
 	"extends": ["../../biome.jsonc"],
 
-	"javascript": {
-		"globals": [
-			// vimrc jsfile
-			"view",
-			"editor",
-			"selection",
-			// Obsidian
-			"Notice",
-			// Election
-			"electronWindow",
-			"window",
-			"activeWindow",
-			"activeDocument",
-			"request"
-		]
-	},
-
 	"linter": {
 		"rules": {
-			"correctness": { "noUnusedVariables": "off" }, // unused functions in vimrc jsfile
-			"suspicious": { "noDebugger": "off" } // intentional for freeze command
+			"correctness": { "noUnusedVariables": "off" } // unused functions in vimrc jsfile
 		}
-	},
-
-	"formatter": {
-		"useEditorconfig": true,
-		"formatWithErrors": true
 	},
 
 	// use the schema from the local biome package installed via Mason
