@@ -5,45 +5,28 @@
 //──────────────────────────────────────────────────────────────────────────────
 {
 	"linter": {
+		"domains": {
+			"project": "all",
+			"test": "all"
+		},
 		"rules": {
-			"all": true,
-			"nursery": {
-				"all": true,
-				"noSecrets": "off" // buggy
-			},
-			"suspicious": {
-				// JXA only allows `console.log`, and logging in general is fine
-				// intentional and fine my dotfiles or in Alfred workflows
-				"noConsole": "off",
-				"noConsoleLog": "off"
-			},
-			"performance": {
-				"useTopLevelRegex": "off" // often not useful
-			},
-			"complexity": {
-				"noExcessiveCognitiveComplexity": {
-					"level": "info",
-					"options": { "maxAllowedComplexity": 20 }
-				},
-				"useSimplifiedLogicExpression": "off" // complains about negated and-conditions
-			},
 			"style": {
-				"useBlockStatements": "off", // do not require braces for one-line-if statements
-				"useTemplate": "off", // too strict, simple concatenations are fine
-				"noParameterAssign": "off", // often useful to do so
-				"useNamingConvention": { "level": "info", "options": { "strictCase": false } }
+				"useNamingConvention": "on"
 			}
 		}
 	},
 	"javascript": {
 		"globals": ["ObjC", "Application", "delay", "Path", "$"] // JXA variables
 	},
+	"css": {
+		"formatter": { "enabled": true }
+	},
 	"formatter": {
 		"useEditorconfig": true,
 		"formatWithErrors": true
 	},
 	"files": {
-		"ignore": [".obsidian/plugins/**/*"] // plugins in Obsidian vaults
+		"includes": ["**", "!.obsidian/plugins/**/*"] // all files except Obsidian plugins
 	},
 	"vcs": {
 		"enabled": true,
