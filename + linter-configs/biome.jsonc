@@ -11,7 +11,8 @@
 		},
 		"rules": {
 			"style": {
-				"useNamingConvention": "on"
+				"useNamingConvention": "on",
+				"useTemplate": "off" // not useful
 			}
 		}
 	},
@@ -23,16 +24,12 @@
 	},
 	"formatter": {
 		"useEditorconfig": true,
+		"lineWidth": 100, // FIX set explicitly, since editorconfig is not respected
 		"formatWithErrors": true
 	},
 	"files": {
 		"includes": ["**", "!.obsidian/plugins/**/*"] // all files except Obsidian plugins
 	},
-	"vcs": {
-		"enabled": true,
-		"clientKind": "git",
-		"useIgnoreFile": true
-	},
-	// use the schema from the local biome package installed via Mason
+	// use the schema from the local biome package installed via `mason`
 	"$schema": "/Users/chrisgrieser/.local/share/nvim/mason/packages/biome/node_modules/@biomejs/biome/configuration_schema.json"
 }

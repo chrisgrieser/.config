@@ -66,7 +66,6 @@ function generateCitekey(authors, year, origyear) {
 	const authorStr = (lastNameArr.length < 3 ? lastNameArr.join("") : lastNameArr[0] + "EtAl")
 		// strip diacritics https://stackoverflow.com/a/37511463
 		.normalize("NFD")
-		// biome-ignore lint/suspicious/noMisleadingCharacterClass: unclear
 		.replace(/[\u0300-\u036f]/g, "")
 		.replaceAll("-", ""); // no hyphens
 
@@ -80,26 +79,25 @@ function generateCitekey(authors, year, origyear) {
  * @param {string} input
  * @return {Record<string, any>|string} entryJson or error message
  */
-// biome-ignore lint/complexity/noExcessiveCognitiveComplexity: okay here
 function inputToEntryJson(input) {
 	const entry = {};
 
 	const doiRegex = /\b10.\d{4,9}\/[-._;()/:A-Z0-9]+(?=$|[?/ ])/i; // https://www.crossref.org/blog/dois-and-matching-regular-expressions/
 	const isbnRegex = /^[\d-]{9,40}$/;
-	const isDOI = doiRegex.test(input);
-	const isISBN = isbnRegex.test(input);
+	const isDoi = doiRegex.test(input);
+	const isIsbn = isbnRegex.test(input);
 
-	if (!isDOI && !isISBN) return "input invalid";
+	if (!isDoi && !isIsbn) return "input invalid";
 
 	// DOI
 	// https://citation.crosscite.org/docs.html
-	if (isDOI) {
+	if (isDoi) {
 		const doi = input.match(doiRegex);
 		if (!doi) return "DOI invalid";
-		const doiURL = "https://doi.org/" + doi[0];
+		const doiUrl = "https://doi.org/" + doi[0];
 
 		const response = app.doShellScript(
-			`curl -sL -H "Accept: application/vnd.citationstyles.csl+json" "${doiURL}"`,
+			`curl -sL -H "Accept: application/vnd.citationstyles.csl+json" "${doiUrl}"`,
 		);
 		if (!response) return "No response by doi.org";
 		const invalid =
@@ -119,7 +117,7 @@ function inputToEntryJson(input) {
 			data["published-print"] || data["published-online"] || data.published || null;
 		entry.year = published ? published["date-parts"][0][0] : "NY";
 		entry.doi = doi[0];
-		entry.url = data.URL || doiURL;
+		entry.url = data.URL || doiUrl;
 		entry.type = data.type.replace(/-?journal-?/, ""); // "journal-article" -> "article"
 		if (entry.type === "book-chapter") entry.type = "incollection";
 		entry.title = data.title;
@@ -133,7 +131,7 @@ function inputToEntryJson(input) {
 
 	// ISBN: Google Books & OpenLibrary
 	// https://www.vinzius.com/post/free-and-paid-api-isbn/
-	else if (isISBN) {
+	else if (isIsbn) {
 		const isbn = input;
 		// first tries OpenLibrary API, then Google Books API
 
@@ -218,6 +216,7 @@ function json2bibtex(entryJson, citekey) {
 //──────────────────────────────────────────────────────────────────────────────
 
 /** @type {AlfredRun} */
+// biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run(argv) {
 	const libraryPath = $.getenv("bibtex_library_path");
 	const input = argv[0].trim();
@@ -229,9 +228,12 @@ function run(argv) {
 	if (!entry) return "Invalid input";
 
 	// cleanup
-	if (entry.publisher)
+	if (entry.publisher) {
 		entry.publisher = entry.publisher.replace(/gmbh|ltd|publications?|llc/i, "").trim();
-	if (entry.pages) entry.pages = entry.pages.replace(/(\d+)[^\d]+?(\d+)/, "$1--$2"); // double-dash
+	}
+	if (entry.pages) {
+		entry.pages = entry.pages.replace(/(\d+)[^\d]+?(\d+)/, "$1--$2"); // double-dash
+	}
 
 	// citekey
 	let citekey = generateCitekey(entry.author, entry.year, entry.origyear);
