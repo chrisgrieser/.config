@@ -1,3 +1,6 @@
+local bkeymap = require("config.utils").bufKeymap
+--------------------------------------------------------------------------------
+
 -- inherit all javascript settings
 vim.cmd.source(vim.fn.stdpath("config") .. "/after/ftplugin/javascript.lua")
 
@@ -7,12 +10,11 @@ vim.cmd.compiler("tsc")
 --------------------------------------------------------------------------------
 
 -- custom formatting function to run code actions before running `biome`
-local bkeymap = require("config.utils").bufKeymap
 bkeymap("n", "<D-s>", function()
 	local actions = {
 		"source.addMissingImports.ts",
 		"source.removeUnusedImports.ts",
-		"source.organizeImports.biome",
+		"source.fixAll.biome",
 	}
 	for i = 1, #actions do
 		vim.defer_fn(function()
