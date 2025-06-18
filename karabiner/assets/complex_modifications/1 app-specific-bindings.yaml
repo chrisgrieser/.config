@@ -25,11 +25,26 @@ rules:
               osascript -e '
                 tell application "System Events" to tell process "Microsoft Word"
                   click menu item "Save As..." of menu "File" of menu bar 1
-                  click pop up button 2 of sheet 1 of window 1
-                  click menu item "PDF" of menu 1 of pop up button 2 of sheet 1 of window 1
+                  set formatSelection to (pop up button 2 of sheet 1 of window 1)
+                  click formatSelection
+                  click menu item "PDF" of menu 1 of (formatSelection)
                 end tell'
         conditions:
           - { type: frontmost_application_if, bundle_identifiers: [com.microsoft.Word] }
+      - type: basic
+        from: { key_code: e, modifiers: { mandatory: [command, shift] } }
+        to:
+          - shell_command: |
+              osascript -e '
+                tell application "System Events" to tell process "Microsoft Excel"
+                  click menu item "Save As..." of menu "File" of menu bar 1
+                  set formatSelection to (pop up button 2 of sheet 1 of window 1)
+                  click formatSelection
+                  click menu item "PDF" of menu 1 of (formatSelection)
+                end tell'
+        conditions:
+          - { type: frontmost_application_if, bundle_identifiers: [com.microsoft.Excel] }
+
       - type: basic
         from: { key_code: k, modifiers: { mandatory: [command] } }
         to:
