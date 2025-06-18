@@ -26,9 +26,27 @@ return {
 		},
 		suppressFormatter = {
 			-- use `biome` instead of `prettier`
-			javascript = { ignoreBlock = "// biome-ignore format: expl" },
-			typescript = { ignoreBlock = "// biome-ignore format: expl" },
-			css = { ignoreBlock = "/* biome-ignore format: expl */" },
+			javascript = {
+				ignoreBlock = "// biome-ignore format: expl",
+				ignoreRange = {
+					"// biome-ignore-start format: expl",
+					"// biome-ignore-end format: -",
+				},
+			},
+			typescript = {
+				ignoreBlock = "// biome-ignore format: expl",
+				ignoreRange = {
+					"// biome-ignore-start format: expl",
+					"// biome-ignore-end format: -",
+				},
+			},
+			css = {
+				ignoreBlock = "/* biome-ignore format: expl */",
+				ignoreRange = {
+					"/* biome-ignore-start format: expl */",
+					"/* biome-ignore-end format: - */",
+				},
+			},
 		},
 	},
 }
