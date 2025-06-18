@@ -177,7 +177,7 @@ declare const Application: {
 	(
 		name: "com.runningwithcrayons.Alfred",
 	): MacAppObj & {
-		// biome-ignore lint/complexity/noBannedTypes: <explanation>
+		// biome-ignore lint/complexity/noBannedTypes: todo
 		setConfiguration(envVar: string, options: Object): void;
 		// workflowId: workflow uid (name of workflow folder) || workflow bundle id
 		revealWorkflow(workflowId: string): void;
