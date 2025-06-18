@@ -1,3 +1,4 @@
+#!/usr/bin/env osascript -l JavaScript
 ObjC.import("stdlib");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
@@ -196,7 +197,7 @@ function getHackernewsPosts(oldItems) {
 function getRedditPosts(subredditName, oldItems) {
 	const opts = getSettings();
 
-	// user agent is required to avoid network security error by reddit
+	// INFO user agent is required to avoid network security error by reddit
 	const userAgent =
 		"Alfred " + $.getenv("alfred_workflow_name") + "/" + $.getenv("alfred_workflow_version");
 
@@ -346,7 +347,11 @@ function run() {
 					title: errorMsg,
 					subtitle: info,
 					valid: false,
-					mods: { cmd: { valid: true } },
+					mods: {
+						// in case of error, still allow to switch to next subreddit
+						cmd: { arg: "next", valid: true },
+						"cmd+shift": { arg: "prev", valid: true },
+					},
 				},
 				{
 					title: "Open subreddit in the browser",
