@@ -18,9 +18,11 @@ async function updatePlugins() {
 	setTimeout(() => {
 		const updateCount = Object.keys(app.plugins.updates).length;
 		if (updateCount > 0) {
+			// biome-ignore-start format: expl
 			app.setting.open();
 			app.setting.openTabById("community-plugins");
 			app.setting.activeTab.containerEl.findAll(".mod-cta").last().click();
+			// biome-ignore-end format: -
 		}
 	}, 1500); // timeout to avoid race condition still happening somehow
 }

@@ -231,6 +231,6 @@ declare const $: {
 	NSData: any;
 	NSLocale: any;
 	NSLocaleCountryCode: any;
-	// biome-ignore-end lint/style/useNamingConvention: not set by me
-	// biome-ignore-end lint/suspicious/noExplicitAny: not set by me
+	// biome-ignore-end lint/style/useNamingConvention: -
+	// biome-ignore-end lint/suspicious/noExplicitAny: -
 };
