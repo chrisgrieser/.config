@@ -213,33 +213,24 @@ declare const ObjC: {
 declare function delay(seconds: number): void;
 
 declare const $: {
-	// biome-ignore lint: not set by me
+	// biome-ignore-start lint/suspicious/noExplicitAny: not set by me
+	// biome-ignore-start lint/style/useNamingConvention: not set by me
 	NSWorkspace: any; // REQUIRED `ObjC.import("Foundaton")`
-	// biome-ignore lint: not set by me
 	NSPasteboard: any; // REQUIRED `ObjC.import("AppKit")`
-	// biome-ignore lint: not set by me
 	NSFilenamesPboardType: any;
-	// biome-ignore lint: not set by me
 	(paths: string[]): any;
 
 	// REQUIRES `ObjC.import("stdlib")`
 	getenv: (envVar: string) => string;
-	// biome-ignore lint: not set by me
 	NSFileManager: any;
-	// biome-ignore lint: not set by me
 	NSUTF8StringEncoding: any;
-	// biome-ignore lint: not set by me
 	NSFileModificationDate: any;
-	// biome-ignore lint: not set by me
 	NSProcessInfo: any;
-	// biome-ignore lint: not set by me
 	NSURL: any;
-	// biome-ignore lint: not set by me
 	NSString: any;
-	// biome-ignore lint: not set by me
 	NSData: any;
-	// biome-ignore lint: not set by me
 	NSLocale: any;
-	// biome-ignore lint: not set by me
 	NSLocaleCountryCode: any;
+	// biome-ignore-end lint/style/useNamingConvention: not set by me
+	// biome-ignore-end lint/suspicious/noExplicitAny: not set by me
 };
