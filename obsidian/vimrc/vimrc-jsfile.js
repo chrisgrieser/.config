@@ -1,4 +1,6 @@
 // DOCS https://github.com/esm7/obsidian-vimrc-support/blob/master/JsSnippets.md
+// biome-ignore-all lint/correctness/noUnusedVariables: used in vimrc file
+//──────────────────────────────────────────────────────────────────────────────
 
 function deleteLastChar() {
 	const cursor = editor.getCursor();
