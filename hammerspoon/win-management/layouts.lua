@@ -5,7 +5,6 @@ local env = require("meta.environment")
 local holeCover = require("appearance.hole-cover")
 local u = require("meta.utils")
 local wu = require("win-management.window-utils")
-local c = hs.caffeinate.watcher
 
 --------------------------------------------------------------------------------
 -- HELPERS
@@ -32,8 +31,10 @@ local function autoSetBrightness()
 		target = 0.7
 	elseif ambient > 5 then
 		target = 0.6
-	else
+	elseif ambient > 1.5 then
 		target = 0.5
+	else
+		target = 0.4
 	end
 	wu.iMacDisplay:setBrightness(target)
 end
@@ -41,7 +42,11 @@ end
 local function darkenDisplay() wu.iMacDisplay:setBrightness(0) end
 
 --------------------------------------------------------------------------------
--- menu item: move windows to projector screen
+
+-- MENU BAR BUTTON
+-- 1. move windows to projector screen
+-- 2. set dark mode
+-- 3. darken display
 if not env.isAtOffice then
 	M.menubarItem = hs
 		.menubar
@@ -49,11 +54,11 @@ if not env.isAtOffice then
 		:setTitle("Ⱅ ") ---@diagnostic disable-line: undefined-field
 		:setClickCallback(function()
 			if #hs.screen.allScreens() < 2 then
-				hs.alert.show("This function is only intended for multi-monitor setups.")
+				hs.alert.show("This button is only for multi-monitor setups.")
 				return
 			end
 
-			wu.iMacDisplay:setBrightness(0)
+			darkenDisplay()
 			darkmode.setDarkMode("dark")
 			local projectorScreen = hs.screen.primaryScreen()
 			for _, win in pairs(hs.window:orderedWindows()) do
@@ -66,8 +71,7 @@ end
 -- LAYOUTS
 
 local function workLayout()
-	local displayFunc = u.betweenTime(22, 5) and darkenDisplay or autoSetBrightness
-	displayFunc()
+	autoSetBrightness()
 	holeCover.update()
 	dockSwitcher("work")
 	darkmode.autoSwitch()
@@ -153,15 +157,15 @@ hs.hotkey.bind(u.hyper, "home", autoSetLayout)
 if u.isSystemStart() then autoSetLayout() end
 
 -- 4. Waking
-M.caff_unlock = c.new(function(event)
-	if
-		(event == c.screensDidUnlock or event == c.systemDidWake)
-		and not env.isAtOffice
-		and not env.isProjector()
-	then
-		u.defer(0.5, autoSetLayout)
-	end
-end):start()
+M.caff_unlock = hs.caffeinate.watcher
+	.new(function(event)
+		local wokeUp = event == hs.caffeinate.watcher.screensDidUnlock
+			or event == hs.caffeinate.watcher.systemDidWake
+		if wokeUp and not env.isAtOffice and not env.isProjector() then
+			u.defer(0.5, autoSetLayout)
+		end
+	end)
+	:start()
 
 --------------------------------------------------------------------------------
 return M
