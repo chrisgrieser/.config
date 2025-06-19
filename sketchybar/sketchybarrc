@@ -9,7 +9,6 @@ if defaults read -g AppleInterfaceStyle | grep -q "Dark"; then
 	bg="0xff333333"
 	fg="0xffffffff"
 	graph_fill="0xffcccccc"
-	##
 else
 	bg="0xffcdcdcd"
 	fg="0xff000000"
@@ -32,7 +31,7 @@ sketchybar \
 	padding_left="0" margin="-5" color="$bg" \
 	\
 	--default \
-	drawing=false background.padding_right="10" label.padding_right="5" \
+	drawing="false" background.padding_right="10" label.padding_right="5" \
 	icon.font="$nerd_font" icon.color="$fg" icon.padding_right="3" \
 	label.font="$system_font" label.color="$fg" \
 	\
@@ -43,24 +42,24 @@ sketchybar \
 	\
 	--add item clock $row_1 \
 	--set clock update_freq="1" drawing="true" padding_left="10" \
-	script="./clock.sh" \
+	script="./components/clock.sh" \
 	\
 	--add item weather $row_1 \
 	--set weather update_freq="1200" icon.y_offset="-1" \
-	script="./weather.sh" \
+	script="./components/weather.sh" \
 	\
 	--add item input_source $row_1 \
 	--set input_source update_freq="2" \
-	script="./input_source_icon.sh" \
+	script="./components/input_source_icon.sh" \
 	\
 	--add item github_notif $row_1 \
 	--set github_notif update_freq="300" icon="" \
-	script="./github_notification_count.sh" \
+	script="./components/github_notification_count.sh" \
 	--subscribe github_notif front_app_switched system_woke \
 	\
 	--add item reminders_count $row_1 \
 	--set reminders_count update_freq="1" icon="" \
-	script="./reminders-count.sh" \
+	script="./components/reminders_count.sh" \
 	--add event update_reminder_count \
 	--subscribe reminders_count update_reminder_count system_woke front_app_switched \
 	\
@@ -69,29 +68,29 @@ sketchybar \
 	--add item ram $row_2 \
 	--set ram padding_left="16" update_freq="5" \
 	icon.font="${nerd_font/[0-9]*/20.5}" label.padding_right="0" icon.padding_right="0" \
-	script="./ram.sh" \
+	script="./components/ram.sh" \
 	\
 	--add graph cpu_graph $row_2 60 \
 	--set cpu_graph update_freq="2" drawing="true" \
 	background.height="18" \
 	background.color="$bg" graph.color="$fg" graph.fill_color="$graph_fill" \
-	script="./cpu.sh" \
+	script="./components/cpu.sh" \
 	\
 	--add item network-download $row_2 \
 	--set network-download icon="" update_freq="3" \
-	script="./network-download.sh" \
+	script="./components/network_download.sh" \
 	\
 	--add item network-upload $row_2 \
-	--set network-upload icon="" update_freq="4" \
-	script="./network-upload.sh" \
+	--set network-upload icon="" update_freq="3" \
+	script="./components/network_upload.sh" \
 	\
 	--add item package-updates $row_2 \
-	--set package-updates icon="󱄖" update_freq=86400 \
-	script="./homebrew-update-tracker.sh" \
+	--set package-updates icon="󱄖" update_freq="86400" \
+	script="./components/homebrew_update_tracker.sh" \
 	\
 	--add item sync-indicator $row_2 \
-	--set sync-indicator icon="󰓦" update_freq=180 \
-	script="./git-sync-bar-icon.sh" \
+	--set sync-indicator icon="󰓦" update_freq="180" \
+	script="./components/git_sync_bar_icon.sh" \
 	--add event repo-files-update \
 	--subscribe sync-indicator system_woke repo-files-update \
 	\
