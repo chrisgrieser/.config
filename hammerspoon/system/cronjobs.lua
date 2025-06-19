@@ -99,20 +99,18 @@ M.timer_emmyluaUpdater = hs.timer
 -- all video apps.
 local config = {
 	checkIntervalMins = 10,
-	idleMins = 45,
-	timeToReactSecs = 60,
+	idleMins = 40,
+	timeToReactSecs = 90,
 }
 
 M.timer_sleepAutoVideoOff = hs.timer
 	.doEvery(config.checkIntervalMins * 60, function()
-		-- GUARD
 		local isIdle = (hs.host.idleTime() / 60) > config.idleMins
-		if not (env.isProjector() and isIdle and u.screenIsUnlocked()) then return end
+		if not env.isProjector() or not isIdle or not u.screenIsUnlocked() then return end
 
 		local alertMsg = ("💤 Will sleep in %ds if idle."):format(config.timeToReactSecs)
 		hs.alert(alertMsg, 4)
 		u.defer(config.timeToReactSecs, function()
-			-- GUARD
 			local userDidSth = hs.host.idleTime() < config.timeToReactSecs
 			if userDidSth then return end
 
