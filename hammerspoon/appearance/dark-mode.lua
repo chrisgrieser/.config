@@ -7,9 +7,12 @@ local u = require("meta.utils")
 --------------------------------------------------------------------------------
 
 ---@param msg string
-local function logBrightness(msg)
-	local ambient = hs.brightness.ambient()
-	print(("💡 %s (ambient %.1f)"):format(msg, ambient)) -- `%.1f` = round to 1 decimal
+---@param threshold? number
+local function logBrightness(msg, threshold)
+	local ambientText = ("ambient: %.1f"):format(hs.brightness.ambient()) -- `%.1f` = round to 1 decimal
+	local info = threshold and ("(threshold: %d, %s)"):format(threshold, ambientText)
+		or ("(%s)"):format(ambientText)
+	print(("💡 %s %s"):format(msg, info))
 end
 
 --------------------------------------------------------------------------------
@@ -72,10 +75,10 @@ function M.autoSwitch()
 	end
 
 	if targetMode == "light" and u.isDarkMode() then
-		logBrightness("Auto-switch to light mode. Threshold: " .. tostring(lightThreshold))
+		logBrightness("Auto-switch to light mode.", lightThreshold)
 		M.setDarkMode("light")
 	elseif targetMode == "dark" and not (u.isDarkMode()) then
-		logBrightness("Auto-switch to dark mode. Threshold: " .. tostring(lightThreshold))
+		logBrightness("Auto-switch to dark mode.", lightThreshold)
 		M.setDarkMode("dark")
 	end
 end

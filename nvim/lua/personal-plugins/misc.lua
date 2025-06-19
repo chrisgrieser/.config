@@ -63,6 +63,10 @@ end
 function M.toggleOrIncrement()
 	local toggles = {
 		["true"] = "false",
+		["light"] = "dark",
+		["right"] = "left",
+		["on"] = "off",
+		["and"] = "or",
 		["=="] = "!=",
 		[">"] = "<",
 		[">="] = "<=",
