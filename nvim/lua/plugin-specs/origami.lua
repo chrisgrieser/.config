@@ -13,8 +13,8 @@ return {
 		},
 	},
 	opts = {
-		foldtextWithLineCount = {
-			template = "  󰘖 %s",
+		foldtext = {
+			lineCount = { template = "  󰘖 %d" },
 		},
 		autoFold = {
 			enabled = true,
