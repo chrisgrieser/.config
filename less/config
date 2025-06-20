@@ -1,6 +1,6 @@
 # vim: filetype=bash
 
-LESS=
+LESS=""
 # process colors correctly
 LESS+=" --RAW-CONTROL-CHARS"
 
