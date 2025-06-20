@@ -9,7 +9,7 @@ export RIPGREP_CONFIG_PATH="$HOME/.config/ripgrep/config"
 # Thus we need to use the version of less provided by homebrew.
 export PAGER="$HOMEBREW_PREFIX/bin/less"
 export LESSKEYIN="$HOME/.config/less/lesskey"
-source "$HOME/.config/less/config" # HACK source `$LESS` since `#env` in `lesskey` not working anymore?
+source "$HOME/.config/less/config" # workaround since `#env` in `lesskey` not working anymore?
 
 #───────────────────────────────────────────────────────────────────────────────
 
@@ -62,10 +62,5 @@ export npm_config_update_notifier=false    # no need for updating prompts, since
 
 # do not crowd `$HOME`
 export npm_config_cache="$HOME/.cache/npm"
-
-# INFO in case of indefinite spinner on npm commands:
-# brew uninstall --ignore-dependencies openssl@3 ca-certificates
-# rm -rf "/usr/local/etc/openssl@3"
-# brew install openssl@3 ca-certificates
 
 #───────────────────────────────────────────────────────────────────────────────
