@@ -8,8 +8,6 @@
 	<string>❇️</string>
 	<key>connections</key>
 	<dict>
-		<key>6481CF6B-7D93-4373-AE49-E7247AA9E094</key>
-		<array/>
 		<key>6952AF82-81C6-4EA3-850D-BAC02934B45E</key>
 		<array>
 			<dict>
@@ -118,19 +116,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>E61BAA5C-B8EC-4B90-BE73-0E4711326107</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>6481CF6B-7D93-4373-AE49-E7247AA9E094</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>FD04A914-81DF-43CD-97F2-872228411EED</key>
 		<array>
 			<dict>
@@ -216,26 +201,6 @@
 			<key>config</key>
 			<dict>
 				<key>acceptsmulti</key>
-				<integer>0</integer>
-				<key>filetypes</key>
-				<array>
-					<string>public.jpeg</string>
-					<string>public.png</string>
-				</array>
-				<key>name</key>
-				<string>Annotate in Cleanshot</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.action</string>
-			<key>uid</key>
-			<string>FD04A914-81DF-43CD-97F2-872228411EED</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>acceptsmulti</key>
 				<integer>1</integer>
 				<key>filetypes</key>
 				<array>
@@ -248,27 +213,6 @@
 			<string>alfred.workflow.trigger.action</string>
 			<key>uid</key>
 			<string>95CF671F-9E2F-4CE9-92A0-BACEF07C97C8</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>cleanshot://open-annotate?filepath={query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>BE518E10-A76F-4A39-BF2F-9A54BFA63DF7</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -311,48 +255,6 @@
 			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
 			<string>A069BE51-DA62-4835-8048-AF3A608C97D0</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>keyword</key>
-				<string>ocr</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>OCR Screenshot</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>E61BAA5C-B8EC-4B90-BE73-0E4711326107</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>cleanshot://capture-text</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>6481CF6B-7D93-4373-AE49-E7247AA9E094</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -490,6 +392,47 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>acceptsmulti</key>
+				<integer>0</integer>
+				<key>filetypes</key>
+				<array>
+					<string>public.jpeg</string>
+					<string>public.png</string>
+				</array>
+				<key>name</key>
+				<string>Annotate in Cleanshot</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.action</string>
+			<key>uid</key>
+			<string>FD04A914-81DF-43CD-97F2-872228411EED</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>cleanshot://open-annotate?filepath={query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>BE518E10-A76F-4A39-BF2F-9A54BFA63DF7</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>autopaste</key>
 				<true/>
 				<key>clipboardtext</key>
@@ -610,16 +553,7 @@
 			<key>xpos</key>
 			<real>435</real>
 			<key>ypos</key>
-			<real>525</real>
-		</dict>
-		<key>6481CF6B-7D93-4373-AE49-E7247AA9E094</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>8</integer>
-			<key>xpos</key>
-			<real>935</real>
-			<key>ypos</key>
-			<real>135</real>
+			<real>635</real>
 		</dict>
 		<key>68F706E8-BDA8-44E3-8973-752C6B0FC50D</key>
 		<dict>
@@ -637,7 +571,7 @@
 			<key>xpos</key>
 			<real>190</real>
 			<key>ypos</key>
-			<real>525</real>
+			<real>635</real>
 		</dict>
 		<key>7CF8B97A-6865-489C-8B65-3C892683D59E</key>
 		<dict>
@@ -655,7 +589,7 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>525</real>
+			<real>635</real>
 		</dict>
 		<key>95CF671F-9E2F-4CE9-92A0-BACEF07C97C8</key>
 		<dict>
@@ -702,9 +636,9 @@
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<real>935</real>
+			<real>580</real>
 			<key>ypos</key>
-			<real>15</real>
+			<real>460</real>
 		</dict>
 		<key>E07E04C5-C1AE-4930-BC19-FDC37F166624</key>
 		<dict>
@@ -715,20 +649,7 @@
 			<key>xpos</key>
 			<real>345</real>
 			<key>ypos</key>
-			<real>555</real>
-		</dict>
-		<key>E61BAA5C-B8EC-4B90-BE73-0E4711326107</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>8</integer>
-			<key>note</key>
-			<string>OCR Screenshot
-
-alternative: https://github.com/zeitlings/alfred-workflows#161-alfred-ocr-light</string>
-			<key>xpos</key>
-			<real>740</real>
-			<key>ypos</key>
-			<real>135</real>
+			<real>665</real>
 		</dict>
 		<key>F0335C72-7DC6-4793-ADCD-3909E4CDE001</key>
 		<dict>
@@ -753,9 +674,9 @@ alternative: https://github.com/zeitlings/alfred-workflows#161-alfred-ocr-light<
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<real>740</real>
+			<real>410</real>
 			<key>ypos</key>
-			<real>15</real>
+			<real>460</real>
 		</dict>
 		<key>FF1B8F7A-4E33-4A50-A895-F3B34197EB14</key>
 		<dict>
