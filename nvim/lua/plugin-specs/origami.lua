@@ -7,7 +7,8 @@ return {
 	end,
 	opts = {
 		foldtext = {
-			lineCount = { template = "  󰘖 %d" },
+			padding = 2,
+			lineCount = { template = "󰘖 %d" },
 		},
 		autoFold = {
 			kinds = { "comment", "imports" }, ---@type lsp.FoldingRangeKind[]
