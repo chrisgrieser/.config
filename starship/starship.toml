@@ -9,31 +9,29 @@ $sudo $status\
 ](bg:black)\
 $character\
 """
-
 right_format = """\
 $jobs\
 $cmd_duration\
 ${custom.alfred}$python\
 """
-
 add_newline = false
 
-#───────────────────────────────────────────────────────────────────────────────
+# ──────────────────────────────────────────────────────────────────────────────
 # LEFT SIDE
 
-[character] # ▓▒░    nerdfont ids start with `nf-ple-`
+[character]  # ▓▒░    nerdfont ids start with `nf-ple-`
 success_symbol = "[ ](fg:black)"
 error_symbol = "[ ](fg:red)"
 vimcmd_symbol = "[ ](fg:cyan)"
 
-[status] # exit code
+[status]  # exit code
 disabled = false
 format = "[ $status ]($style)"
-style = "fg:bold 255 bg:red"   # 255 as ansi enforces white regardless of terminal theme
+style = "fg:bold 255 bg:red"  # 255 as ansi enforces white regardless of terminal theme
 
 [sudo]
 disabled = false
-style = 'fg:#f1800e bg:black'
+style = "fg:#f1800e bg:black"
 symbol = " "
 format = "[ $symbol]($style)"
 
@@ -50,7 +48,6 @@ format = "[$path]($style) [$read_only]($read_only_style)"
 "Library/Mobile Documents/com~apple~CloudDocs" = "󰀸 "
 "~/Desktop" = "/󰇄 "
 "~" = "/ "
-
 # my perma-repos
 ".config" = " "
 "main-vault" = "󱉽 "
@@ -62,67 +59,67 @@ format = "[$path]($style) [$read_only]($read_only_style)"
 when = "true"
 description = "Number of files (and folders) in the current working directory"
 command = "find . -mindepth 1 -maxdepth 1 -not -name '.git' -not -name '.DS_Store' -not -name '.localized' -not -name 'Icon?' | wc -l"
-format = '[󰝰 $output ]($style)'
+format = "[󰝰 $output ]($style)"
 style = "fg:yellow bg:black"
 
 # Indicate if in a subfolder of my local repo folder. Helps differentiating
 # between my local Alfred workflows and their respective repos.
 [custom.location_indicator]
-format = '[ 󱁤 ]($style)'
-when = '[[ $PWD == $HOME/Developer/* ]]'
+format = "[ 󱁤 ]($style)"
+when = "[[ $PWD == $HOME/Developer/* ]]"
 style = "fg:cyan bold bg:black"
 
 [custom.venv_on]
-format = '[ 󱥒 ]($style)'
+format = "[ 󱥒 ]($style)"
 when = '[[ -n "$VIRTUAL_ENV" ]]'
 style = "fg:yellow bold bg:black"
 
 [custom.venv_off]
-format = '[ 󱥓 ]($style)'
+format = "[ 󱥓 ]($style)"
 when = '[[ -z "$VIRTUAL_ENV" ]] && [[ -d ".venv" ]]'
 style = "fg:red bold bg:black"
 
-#───────────────────────────────────────────────────────────────────────────────
+# ───────────────────────────────────────────────────────────────────────────────
 # GIT
 
-[git_state] # conflicts or rebasing
-style = 'fg:yellow bold bg:black'
+# since "ignore_branches" fully hides the git_branch component, still showing the symbol
+[custom.main_branch]
+when = "[[ $(git branch --show-current) == 'main' ]]"
+format = " [ ](fg:purple bg:black bold)"
+
+[git_state]  # conflicts or rebasing
+style = "fg:yellow bold bg:black"
 format = ' \([$state( $progress_current/$progress_total)]($style)\)'
 
-[git_commit] # checkout
+[git_commit]  # checkout
 style = "fg:purple bg:black bold"
 only_detached = true
 format = " [ $hash]($style)"
 
-[git_branch] # branch
+[git_branch]  # branch
 only_attached = true
 style = "fg:purple bg:black bold"
 format = " [ $branch]($style)"
 ignore_branches = ["main"]
 
-# since "ignore_branches" fully hides the git_branch component, still showing the symbol
-[custom.main_branch]
-when = "[[ $(git branch --show-current) == 'main' ]]"
-format = ' [ ](fg:purple bg:black bold)'
-
-[git_status] # files
-stashed = '[ 󰜦 $count](fg:cyan bg:black)'
-untracked = '[ +$count](fg:green bg:black)'
+[git_status]  # files
+stashed = "[ 󰜦 $count](fg:cyan bg:black)"
+untracked = "[ +$count](fg:green bg:black)"
 # `deleted` -> unstaged as well as staged deletion
-deleted = '[ -$count](fg:red bg:black)'
-modified = '[ ~$count](fg:#fa881e bg:black)'
-renamed = '[ 󰑕 $count](fg:blue bg:black)'
-staged = '[ 󰐖 $count](fg:green bg:black)'
-conflicted = '[  $count](fg:red bg:black)'
-diverged = '[ 󰞇 $count](fg:red bg:black)'
-ahead = '[ 󰶣$count](fg:cyan bg:black)'
-behind = '[ 󰶡$count](fg:yellow bg:black)'
-style = 'bg:black'
-format = '[($ahead_behind$conflicted$stashed$staged$untracked$renamed$modified$deleted )]($style)'
+deleted = "[ -$count](fg:red bg:black)"
+modified = "[ ~$count](fg:#fa881e bg:black)"
+renamed = "[ 󰑕 $count](fg:blue bg:black)"
+staged = "[ 󰐖 $count](fg:green bg:black)"
+conflicted = "[  $count](fg:red bg:black)"
+diverged = "[ 󰞇 $count](fg:red bg:black)"
+ahead = "[ 󰶣$count](fg:cyan bg:black)"
+behind = "[ 󰶡$count](fg:yellow bg:black)"
+style = "bg:black"
+format = "[($ahead_behind$conflicted$stashed$staged$untracked$renamed$modified$deleted )]($style)"
 
 # INFO putting a variable into round bracket ensures that the bracket content is
 # only shown when the variable is set. `bright-black` is effectively gray.
-[git_metrics] # changed lines
+[git_metrics]  # changed lines
 disabled = false
 format = """\
 ([\\(](fg:bright-black bg:black)\
@@ -132,7 +129,7 @@ format = """\
 [\\)](fg:bright-black bg:black))\
 """
 
-#───────────────────────────────────────────────────────────────────────────────
+# ───────────────────────────────────────────────────────────────────────────────
 # RIGHT SIDE
 
 [cmd_duration]
@@ -140,7 +137,7 @@ min_time = 3000
 format = "[󰔟 $duration](bold cyan)"
 
 [python]
-format = ' [${symbol}${pyenv_prefix}($version)]($style)'
+format = " [${symbol}${pyenv_prefix}($version)]($style)"
 version_format = "$major.$minor"
 symbol = " "
 style = "bold yellow"

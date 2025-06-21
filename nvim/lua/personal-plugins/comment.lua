@@ -1,3 +1,8 @@
+-- CONFIG
+local formatterWantPadding = { "python", "css", "scss", "swift", "toml" }
+
+--------------------------------------------------------------------------------
+
 local M = {}
 
 ---@return string?
@@ -9,8 +14,6 @@ local function getCommentstr()
 	end
 	return comStr
 end
-
-local formatterWantPadding = { "python", "css", "scss", "swift" }
 
 --------------------------------------------------------------------------------
 
