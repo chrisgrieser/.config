@@ -1,5 +1,4 @@
--- INFO
--- A simple wrapper around vim's builtin mark functionality.
+-- INFO A simple wrapper around vim's builtin mark functionality.
 -- * marks in the signcolumn
 -- * cycles through marks
 -- * set/unset with the same command

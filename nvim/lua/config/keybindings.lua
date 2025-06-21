@@ -4,7 +4,7 @@ local keymap = require("config.utils").uniqueKeymap
 
 keymap("n", "<D-,>", function()
 	local pathOfThisFile = debug.getinfo(1, "S").source:sub(2)
-	.cmd.edit(pathOfThisFile)
+	vim.cmd.edit(pathOfThisFile)
 end, { desc = "󰌌 Edit keybindings" })
 
 -- save before quitting (non-unique, since also set by Neovide)
