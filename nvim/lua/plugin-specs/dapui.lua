@@ -1,3 +1,8 @@
+-- TODO check out 
+-- https://github.com/miroshQa/debugmaster.nvim
+-- https://github.com/igorlfs/nvim-dap-view
+--------------------------------------------------------------------------------
+
 return {
 	"rcarriga/nvim-dap-ui",
 	dependencies = { "nvim-neotest/nvim-nio", "mfussenegger/nvim-dap" },
