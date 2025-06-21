@@ -15,15 +15,15 @@ local ensureInstalled = {
 		"ltex-ls-plus", -- LanguageTool: natural language linter (ltex fork)
 		"lua-language-server",
 		"marksman", -- markdown lsp
-		"pyrefly", -- python type checker
 		"ruff", -- python linter & formatter
-		"taplo", -- toml lsp
+		"tombi", -- toml lsp
 		"ts_query_ls", -- treesitter query files
-		"ty", -- python type checker
 		"typescript-language-server",
 		"typos-lsp", -- spellchecker for code
 		"yaml-language-server",
 		-- "emmylua_ls", -- improved lua LSP, disabled since it still has bugs
+		-- "pyrefly", -- python type checker, still alpha
+		-- "ty", -- python type checker, still alpha
 	},
 	linters = {
 		"markdownlint", -- via efm

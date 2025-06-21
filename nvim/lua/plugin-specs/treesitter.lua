@@ -96,6 +96,7 @@ return {
 				-- https://github.com/LuaLS/lua-language-server/issues/1809
 				vim.api.nvim_set_hl(0, "@lsp.type.comment.lua", {})
 				vim.api.nvim_set_hl(0, "@lsp.type.comment.swift", {})
+				vim.api.nvim_set_hl(0, "@lsp.type.comment.toml", {})
 
 				-- Define `@comment.bold` for `queries/comment/highlights.scm`
 				vim.api.nvim_set_hl(0, "@comment.bold", { bold = true })
