@@ -1,4 +1,8 @@
--- TODO check out https://github.com/miroshQa/debugmaster.nvim
+-- TODO check out 
+-- https://github.com/miroshQa/debugmaster.nvim
+-- https://github.com/igorlfs/nvim-dap-view
+--------------------------------------------------------------------------------
+
 
 return {
 	"mfussenegger/nvim-dap",
