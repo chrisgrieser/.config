@@ -31,9 +31,9 @@ sketchybar \
 	padding_left="0" margin="-5" color="$bg" \
 	\
 	--default \
-	drawing="false" background.padding_right="10" label.padding_right="5" \
-	icon.font="$nerd_font" icon.color="$fg" icon.padding_right="3" \
-	label.font="$system_font" label.color="$fg" \
+	icon.padding_right="3" label.padding_right="5" \
+	drawing="false" background.padding_right="10" \
+	icon.font="$nerd_font" icon.color="$fg" label.font="$system_font" label.color="$fg" \
 	\
 	popup.drawing="true" popup.horizontal="true" popup.topmost="false" \
 	popup.y_offset="-35" y_offset="18" \
