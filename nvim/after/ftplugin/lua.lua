@@ -17,7 +17,7 @@ abbr("fi", "end")
 local function plusPlusMinusMinus(sign)
 	local row, col = unpack(vim.api.nvim_win_get_cursor(0))
 	local textBeforeCursor = vim.api.nvim_get_current_line():sub(col - 1, col)
-	if not textBeforeCursor:find("%a%" .. sign) then
+	if not textBeforeCursor:find("[%w_]%" .. sign) then
 		vim.api.nvim_feedkeys(sign, "n", true) -- pass through the trigger char
 	else
 		local line = vim.api.nvim_get_current_line()
