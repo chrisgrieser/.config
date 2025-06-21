@@ -65,8 +65,7 @@ vim.opt.scrolloff = 12
 
 vim.opt.winborder = "single"
 
--- max height of completion menu (even with completion plugin still relevant for native cmdline-popup)
-vim.opt.pumheight = 12
+vim.opt.pumheight = 12 -- max height of completion menu
 
 --------------------------------------------------------------------------------
 -- EDITORCONFIG
@@ -142,6 +141,7 @@ vim.opt.fillchars:append {
 -- DIAGNOSTICS
 
 vim.diagnostic.config {
+	severity_sort = true,
 	jump = {
 		float = true,
 	},
