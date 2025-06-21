@@ -146,7 +146,8 @@ vim.diagnostic.config {
 		float = true,
 	},
 	signs = {
-		text = { "", "▲", "●", "" }, -- Error, Warn, Info, Hint
+		text = { "󰅚 ", " ", "󰋽 ", "󰌶 " }, -- Error, Warn, Info, Hint
+		-- text = { "", "▲", "●", "" },
 	},
 	virtual_text = {
 		spacing = 2,
