@@ -73,6 +73,32 @@
 				<false/>
 			</dict>
 		</array>
+		<key>6E4FD4B7-ACA8-4BA1-AD21-D6C4E3793243</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>ADE4F7D7-FBD4-4C72-8807-6DDF689BCABB</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>ADE4F7D7-FBD4-4C72-8807-6DDF689BCABB</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>F4274EA4-7E8C-48D3-80D8-7F0D116076CC</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>BC1490BF-6C58-406A-847F-DB89AF6AEB8E</key>
 		<array>
 			<dict>
@@ -140,27 +166,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<true/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>obsidian://open?path={query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>3D729F95-B08C-4A6D-9292-9C18E13C54C1</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>alfredfiltersresults</key>
 				<true/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -206,6 +211,27 @@
 			<string>440205E9-6FAD-4C11-AA0A-F2785E994E8C</string>
 			<key>version</key>
 			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<true/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>obsidian://open?path={query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>3D729F95-B08C-4A6D-9292-9C18E13C54C1</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -288,6 +314,25 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>0FA387AA-D669-473B-B888-38D59F48BDE9</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
@@ -307,25 +352,6 @@
 			<integer>1</integer>
 		</dict>
 		<dict>
-			<key>config</key>
-			<dict>
-				<key>autopaste</key>
-				<false/>
-				<key>clipboardtext</key>
-				<string>{query}</string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>transient</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.clipboard</string>
-			<key>uid</key>
-			<string>0FA387AA-D669-473B-B888-38D59F48BDE9</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.junction</string>
 			<key>uid</key>
@@ -338,6 +364,71 @@
 			<string>alfred.workflow.utility.junction</string>
 			<key>uid</key>
 			<string>3426DFFC-C411-4D60-8043-A3ABDF8B6748</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/toggle-obsidian-alpha.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>ADE4F7D7-FBD4-4C72-8807-6DDF689BCABB</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>{query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>F4274EA4-7E8C-48D3-80D8-7F0D116076CC</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>alpha</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>Toggle Obsidian Alpha</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>6E4FD4B7-ACA8-4BA1-AD21-D6C4E3793243</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -435,6 +526,20 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>315</real>
 		</dict>
+		<key>6E4FD4B7-ACA8-4BA1-AD21-D6C4E3793243</key>
+		<dict>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>465</real>
+		</dict>
+		<key>ADE4F7D7-FBD4-4C72-8807-6DDF689BCABB</key>
+		<dict>
+			<key>xpos</key>
+			<real>200</real>
+			<key>ypos</key>
+			<real>465</real>
+		</dict>
 		<key>BC1490BF-6C58-406A-847F-DB89AF6AEB8E</key>
 		<dict>
 			<key>colorindex</key>
@@ -445,6 +550,13 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>30</real>
 			<key>ypos</key>
 			<real>225</real>
+		</dict>
+		<key>F4274EA4-7E8C-48D3-80D8-7F0D116076CC</key>
+		<dict>
+			<key>xpos</key>
+			<real>370</real>
+			<key>ypos</key>
+			<real>465</real>
 		</dict>
 		<key>F926E3B6-82B9-4B36-847D-6757DB67469A</key>
 		<dict>
