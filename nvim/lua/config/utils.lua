@@ -1,24 +1,6 @@
 local M = {}
 --------------------------------------------------------------------------------
 
----@param mode string|string[]
----@param lhs string
----@param rhs string|function
----@param opts? {desc?: string, unique?: boolean, buffer?: number|boolean, remap?: boolean, silent?:boolean, nowait?: boolean}
-function M.uniqueKeymap(mode, lhs, rhs, opts)
-	if not opts then opts = {} end
-
-	-- allow to disable with `unique=false` to overwrites nvim defaults: https://neovim.io/doc/user/vim_diff.html#default-mappings
-	if opts.unique == nil then opts.unique = true end
-
-	-- violating `unique=true` throws error; using `pcall` to still load other mappings
-	local success, _ = pcall(vim.keymap.set, mode, lhs, rhs, opts)
-	if not success then
-		local msg = ("[[%s]] %s"):format(mode, lhs)
-		vim.notify(msg, vim.log.levels.WARN, { title = "Duplicate keymap", timeout = false })
-	end
-end
-
 ---sets `buffer`, `silent` and `nowait` to true
 ---@param mode string|string[]
 ---@param lhs string
