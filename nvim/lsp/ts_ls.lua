@@ -4,7 +4,7 @@
 local config = {
 	settings = {
 		-- "Cannot re-declare block-scoped variable" -> not useful for single-file-JXA
-		-- (biome works only on single-file and so already check for unintended re-declarations.)
+		-- (biome works only on single-file and so already checks for unintended re-declarations.)
 		diagnostics = { ignoredCodes = { 2451 } },
 
 		typescript = {
@@ -26,7 +26,7 @@ local config = {
 		implicitProjectConfiguration = { checkJs = true, target = "ES2022" },
 	},
 	on_attach = function(client)
-		-- disable formatting in favor of biome
+		-- disable formatting in favor of `biome`
 		client.server_capabilities.documentFormattingProvider = false
 		client.server_capabilities.documentRangeFormattingProvider = false
 	end,

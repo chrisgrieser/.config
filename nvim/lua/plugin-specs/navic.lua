@@ -3,7 +3,10 @@ return {
 	event = "LspAttach",
 	opts = {
 		lazy_update_context = false,
-		lsp = { auto_attach = true },
+		lsp = {
+			auto_attach = true,
+			preference = { "tombi" },
+		},
 		icons = { Object = " " },
 		separator = " ",
 		depth_limit = 9,
