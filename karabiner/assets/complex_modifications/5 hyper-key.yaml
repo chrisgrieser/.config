@@ -17,15 +17,9 @@ rules:
           - { key_code: escape, lazy: true }
         to:
           - { key_code: right_command, modifiers: [control, option], lazy: true }
-      # INFO Map freed-up `Esc` to clipboard (Alfred) / screenshot history
-      # (CleanShot) (mapping done in `finder-vim-alfred-addon.yaml` to consider
-      # Finder vim mode properly)
-  #─────────────────────────────────────────────────────────────────────────────
-      # show notifications
-      - type: basic
-        from: { key_code: "0", modifiers: *hyper }
-        to:
-          - { key_code: n, modifiers: [fn] }
+        # INFO freed-up `Esc` to is mapped to  clipboard (Alfred) / screenshot
+        # history (CleanShot) (done in `finder-vim-alfred-addon.yaml` to consider
+        # Finder vim mode properly)
   #─────────────────────────────────────────────────────────────────────────────
   - description: "⇪ Insert Mode Vim"
     manipulators:
