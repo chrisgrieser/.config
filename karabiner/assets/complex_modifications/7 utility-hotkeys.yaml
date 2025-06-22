@@ -1,14 +1,27 @@
 # yaml-language-server: $schema=./schema/karabiner-mod-schema.json
 #───────────────────────────────────────────────────────────────────────────────
 title: 🔘 Utility Shortcuts
+anchors:
+  - from:
+      modifiers: &hyper
+        mandatory: [command, control, option]
+#───────────────────────────────────────────────────────────────────────────────
 rules:
   - description: 🔘 Utility Shortcuts
     manipulators:
+
+      # show notifications
+      - type: basic
+        from: { key_code: "0", modifiers: *hyper }
+        to:
+          - { key_code: n, modifiers: [fn] }
+
       # show desktop
       - type: basic
-        from: { key_code: "9", modifiers: { mandatory: [command, control, option] } }
+        from: { key_code: "9", modifiers: *hyper }
         to:
           - { key_code: f3, modifiers: [command] }
+      #─────────────────────────────────────────────────────────────────────────
 
       # alt-j/k: page up/down
       - type: basic

@@ -8,18 +8,14 @@ matches:
       	set frontmost to true
       	click menu item "" of menu "File" of menu bar 1
       end tell
-    label: 🍏 Click Menubar Item
   - trigger: "!submenu"
     replace: |
       tell application "System Events" to tell process "$|$"
       	set frontmost to true
       	click menu item "" of menu of menu item "Share" of menu "Edit" of menu bar 1
       end tell
-    label: 🍏 Click Submenu Item of Menubar
   - trigger: "!key"
     replace: tell application "System Events" to keystroke "$|$" using {command down}
-    label: 🍏 Keystroke
-  # DOCS https://developer.apple.com/library/archive/documentation/LanguagesUtilities/Conceptual/MacAutomationScriptingGuide/DisplayNotifications.html
-  - trigger: "!display"
+  - triggers: ["!display", "!notify", "!notification"]
+    # DOCS https://developer.apple.com/library/archive/documentation/LanguagesUtilities/Conceptual/MacAutomationScriptingGuide/DisplayNotifications.html
     replace: display notification "" with title "$|$" subtitle ""
-    label: 🍏 Display Notification
