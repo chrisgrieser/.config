@@ -47,6 +47,7 @@ keymap("n", "gE", "[d", { desc = "󰋼 Previous diagnostic", remap = true })
 --------------------------------------------------------------------------------
 -- MARKS
 do
+	local fff
 	require("personal-plugins.marks").setup {
 		marks = { "A", "B", "C" },
 		signs = {
@@ -338,6 +339,10 @@ end, { expr = true, desc = "<BS> does not leave cmdline" })
 keymap("n", "<leader>ii", vim.cmd.Inspect, { desc = "󱈄 :Inspect" })
 keymap("n", "<leader>it", vim.cmd.InspectTree, { desc = " :InspectTree" })
 keymap("n", "<leader>iq", vim.cmd.EditQuery, { desc = " :EditQuery" })
+keymap("n", "<leader>id", function()
+	local diag = vim.diagnostic.get_next()
+	vim.notify(vim.inspect(diag), nil, { ft = "lua" })
+end, { desc = "󰋽 Next diagnostic" })
 
 -- stylua: ignore
 keymap("n", "<leader>il", function() require("personal-plugins.misc").lspCapabilities() end, { desc = "󱈄 LSP capabilities" })
