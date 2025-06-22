@@ -16,8 +16,11 @@ alias pass="env NO_PLUGINS=true pass"           # disable plugins in `nvim` when
 # GITHUB_TOKEN
 # https://github.com/settings/tokens
 # For security reasons, only export token for the processes that actually need it.
-# shellcheck disable=2154
-if [[ "$alfred_workflow_name" == "GitFred" ]]; then
+
+function export_github_token {
 	GITHUB_TOKEN="$(cat "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/private dotfiles/github-token.txt")"
 	export GITHUB_TOKEN
-fi
+}
+
+# shellcheck disable=2154
+if [[ "$alfred_workflow_name" == "GitFred" ]]; then export_github_token; fi
