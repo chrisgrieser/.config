@@ -8,32 +8,6 @@
 	<string>❇️</string>
 	<key>connections</key>
 	<dict>
-		<key>0AD1A926-80B8-4274-9DFF-10183BF36867</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>10797BFB-ECCC-404B-9A55-B91951068BC9</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>10797BFB-ECCC-404B-9A55-B91951068BC9</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>E6BFAD6E-029F-480F-AD49-21705DD25C3D</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>2D90CF5E-78C3-4E3C-8038-E0F3B730BCF9</key>
 		<array>
 			<dict>
@@ -49,19 +23,6 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>72B66895-6978-456A-9556-C77F4EBC15BA</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>76AAB3AC-6FFB-4BD3-8A66-7FF66A8F7C77</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>0AD1A926-80B8-4274-9DFF-10183BF36867</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -101,100 +62,6 @@
 			<string>D272D1A3-9CA0-40B1-BB24-FDC428E10728</string>
 			<key>version</key>
 			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>"{query}"</string>
-				<key>title</key>
-				<string>⏳ Searching…</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>0AD1A926-80B8-4274-9DFF-10183BF36867</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>autopaste</key>
-				<true/>
-				<key>clipboardtext</key>
-				<string>{query}</string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>transient</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.clipboard</string>
-			<key>uid</key>
-			<string>E6BFAD6E-029F-480F-AD49-21705DD25C3D</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/searchlink.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>10797BFB-ECCC-404B-9A55-B91951068BC9</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>1</integer>
-				<key>focusedappvariable</key>
-				<false/>
-				<key>focusedappvariablename</key>
-				<string></string>
-				<key>hotkey</key>
-				<integer>40</integer>
-				<key>hotmod</key>
-				<integer>1179648</integer>
-				<key>hotstring</key>
-				<string>K</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>2</integer>
-				<key>relatedAppsMode</key>
-				<integer>0</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
-			<key>uid</key>
-			<string>76AAB3AC-6FFB-4BD3-8A66-7FF66A8F7C77</string>
-			<key>version</key>
-			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -251,24 +118,6 @@
 Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
-		<key>0AD1A926-80B8-4274-9DFF-10183BF36867</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>8</integer>
-			<key>xpos</key>
-			<real>185</real>
-			<key>ypos</key>
-			<real>55</real>
-		</dict>
-		<key>10797BFB-ECCC-404B-9A55-B91951068BC9</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>8</integer>
-			<key>xpos</key>
-			<real>330</real>
-			<key>ypos</key>
-			<real>55</real>
-		</dict>
 		<key>2D90CF5E-78C3-4E3C-8038-E0F3B730BCF9</key>
 		<dict>
 			<key>colorindex</key>
@@ -276,9 +125,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>tech news search</string>
 			<key>xpos</key>
-			<real>760</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>85</real>
+			<real>105</real>
 		</dict>
 		<key>72B66895-6978-456A-9556-C77F4EBC15BA</key>
 		<dict>
@@ -287,40 +136,18 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>log the search</string>
 			<key>xpos</key>
-			<real>945</real>
+			<real>215</real>
 			<key>ypos</key>
-			<real>150</real>
-		</dict>
-		<key>76AAB3AC-6FFB-4BD3-8A66-7FF66A8F7C77</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>8</integer>
-			<key>note</key>
-			<string>Add link to selection</string>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>55</real>
+			<real>170</real>
 		</dict>
 		<key>D272D1A3-9CA0-40B1-BB24-FDC428E10728</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>6</integer>
 			<key>xpos</key>
-			<real>945</real>
+			<real>215</real>
 			<key>ypos</key>
-			<real>30</real>
-		</dict>
-		<key>E6BFAD6E-029F-480F-AD49-21705DD25C3D</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>8</integer>
-			<key>note</key>
-			<string>paste</string>
-			<key>xpos</key>
-			<real>475</real>
-			<key>ypos</key>
-			<real>55</real>
+			<real>50</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
@@ -345,27 +172,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<string>filepicker</string>
 			<key>variable</key>
 			<string>technews_search_logfile</string>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>default</key>
-				<string></string>
-				<key>filtermode</key>
-				<integer>1</integer>
-				<key>placeholder</key>
-				<string>logfolder</string>
-				<key>required</key>
-				<true/>
-			</dict>
-			<key>description</key>
-			<string></string>
-			<key>label</key>
-			<string>Search log folder</string>
-			<key>type</key>
-			<string>filepicker</string>
-			<key>variable</key>
-			<string>search_log_folder</string>
 		</dict>
 	</array>
 	<key>version</key>
