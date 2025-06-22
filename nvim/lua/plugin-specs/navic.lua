@@ -10,9 +10,7 @@ return {
 		depth_limit_indicator = "…",
 	},
 	config = function(_, opts)
-		vim.g.navic_silence = false
 		require("nvim-navic").setup(opts)
-
 		vim.g.lualineAdd("tabline", "lualine_b", { "navic" })
 	end,
 	keys = {
