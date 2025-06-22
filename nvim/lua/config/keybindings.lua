@@ -47,7 +47,6 @@ keymap("n", "gE", "[d", { desc = "󰋼 Previous diagnostic", remap = true })
 --------------------------------------------------------------------------------
 -- MARKS
 do
-	local fff
 	require("personal-plugins.marks").setup {
 		marks = { "A", "B", "C" },
 		signs = {
