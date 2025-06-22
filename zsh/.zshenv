@@ -13,9 +13,11 @@ export PASSWORD_STORE_GENERATED_LENGTH=30       # some services break with longe
 export PASSWORD_STORE_CHARACTER_SET="[:alnum:]" # many services break with special chars m(
 alias pass="env NO_PLUGINS=true pass"           # disable plugins in `nvim` when using `pass`
 
-# GITHUB_TOKEN
-# https://github.com/settings/tokens
-# For security reasons, only export token for the processes that actually need it.
+#───────────────────────────────────────────────────────────────────────────────
+
+# GITHUB_TOKEN https://github.com/settings/tokens
+# For security reasons, only export token for the processes that actually need
+# it, and using a token with a scope as limited as possible.
 
 function export_github_token {
 	GITHUB_TOKEN="$(cat "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/private dotfiles/github-token.txt")"
