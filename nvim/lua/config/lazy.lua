@@ -100,11 +100,10 @@ require("lazy.view.config").keys.details = "<Tab>"
 
 --------------------------------------------------------------------------------
 -- KEYMAPS FOR NVIM TRIGGERING LAZY
-local keymap = require("config.utils").uniqueKeymap
-
-keymap("n", "<leader>pp", require("lazy").sync, { desc = "󰒲 Lazy sync" })
-keymap("n", "<leader>pl", require("lazy").home, { desc = "󰒲 Lazy home" })
-keymap("n", "<leader>pi", require("lazy").install, { desc = "󰒲 Lazy install" })
+local keymap = vim.keymap.set
+keymap("n", "<leader>pp", require("lazy").sync, { desc = "󰒲 Lazy sync", unique = true })
+keymap("n", "<leader>pl", require("lazy").home, { desc = "󰒲 Lazy home", unique = true })
+keymap("n", "<leader>pi", require("lazy").install, { desc = "󰒲 Lazy install", unique = true })
 
 --------------------------------------------------------------------------------
 -- TEST FOR DUPLICATE KEYS on every startup
