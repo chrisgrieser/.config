@@ -1,5 +1,6 @@
 // @ts-nocheck // using pure javascript without the whole toolchain here
 //──────────────────────────────────────────────────────────────────────────────
+// biome-ignore lint: unneeded since available in Obsidian 
 const obsidian = require("obsidian");
 //──────────────────────────────────────────────────────────────────────────────
 
@@ -71,7 +72,7 @@ async function updateTaskStatusbarAndFrontmatter(plugin) {
 		return;
 	}
 
-	const listItems = app.metadataCache.getFileCache(activeFile).listItems;
+	const listItems = app.metadataCache.getFileCache(activeFile).listItems || [];
 	const openTasks = listItems.filter((item) => item.task === " ").length;
 
 	app.fileManager.processFrontMatter(activeFile, (fm) => {
