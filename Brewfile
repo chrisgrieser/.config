@@ -15,6 +15,7 @@ brew "node"
 brew "pandoc"
 brew "pass"
 brew "pinentry-mac"
+brew "python@3.13"
 brew "ripgrep"
 brew "starship"
 brew "yq"
@@ -29,6 +30,7 @@ brew "felixkratz/formulae/sketchybar"
 cask "alfred"
 cask "alt-tab"
 cask "appcleaner"
+cask "betterzip"
 cask "brave-browser"
 cask "espanso"
 cask "font-jetbrains-mono-nerd-font"
@@ -38,17 +40,14 @@ cask "microsoft-word", greedy: true # greedy since we uninstall the auto-updater
 cask "mimestream"
 cask "neovide-app"
 cask "obsidian", greedy: true # greedy for installer version
+cask "qlmarkdown"
 cask "replacicon"
 cask "slack"
+cask "syntax-highlight" # `Peek` not available anymore https://apps.apple.com/us/app/peek-a-quick-look-extension/id1554235898?mt=12
 cask "wezterm"
 cask "zoom"
-cask "betterzip"
 mas "Highlights", id: 1498912833
 mas "Ivory", id: 6444602274
-
-# QUICK LOOK
-cask "syntax-highlight" # `Peek` not available anymore https://apps.apple.com/us/app/peek-a-quick-look-extension/id1554235898?mt=12
-cask "qlmarkdown"
 
 #───────────────────────────────────────────────────────────────────────────────
 
