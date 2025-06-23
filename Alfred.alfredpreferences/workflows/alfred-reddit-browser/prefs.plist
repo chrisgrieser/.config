@@ -9,7 +9,7 @@
 	<key>hide_stickied</key>
 	<true/>
 	<key>min_upvotes</key>
-	<integer>5</integer>
+	<integer>2</integer>
 	<key>pages_to_request</key>
 	<integer>50</integer>
 	<key>save_scroll_position</key>
