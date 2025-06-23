@@ -159,7 +159,6 @@ keymap("n", "zz", "<cmd>%foldclose<CR>", { desc = " Close toplevel folds" })
 keymap("n", "zm", "zM", { desc = " Close all folds" })
 keymap("n", "zv", "zv", { desc = "󰘖 Open until cursor visible" }) -- just for which-key
 keymap("n", "zr", "zR", { desc = "󰘖 Open all folds" })
-keymap("n", "zo", "zO", { desc = "󰘖 Open fold recursively" })
 -- stylua: ignore
 keymap("n", "zf", function() vim.opt.foldlevel = vim.v.count1 end, { desc = " Set fold level to {count}" })
 
