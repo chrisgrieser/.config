@@ -36,7 +36,7 @@ cask "hammerspoon", postinstall: "defaults write org.hammerspoon.Hammerspoon MJC
 cask "karabiner-elements"
 cask "microsoft-word", greedy: true # greedy since we uninstall the auto-updater
 cask "mimestream"
-cask "neovide"
+cask "neovide-app"
 cask "obsidian", greedy: true # greedy for installer version
 cask "replacicon"
 cask "slack"
