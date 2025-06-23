@@ -28,4 +28,6 @@ reader: "markdown\
 
 resource-path: # where to look for images with relative paths
   - .
+  - ..
+  - ../attachments
   - ./attachments
