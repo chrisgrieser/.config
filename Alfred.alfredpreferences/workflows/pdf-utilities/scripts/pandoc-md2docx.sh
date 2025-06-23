@@ -5,7 +5,7 @@ md_file="$*"
 
 # CONFIG
 output_location="$HOME/Desktop/"
-word_file="$output_location/${md_file%\.md}_$(date +%Y-%m-%d)_CG.docx"
+word_file="$output_location/$(basename "$md_file" ".md")_$(date +%Y-%m-%d)_CG.docx"
 
 #───────────────────────────────────────────────────────────────────────────────
 # PREPARE
@@ -22,7 +22,7 @@ fi
 #───────────────────────────────────────────────────────────────────────────────
 # PANDOC
 
-cd "$(dirname "$md_file")" # so `--resource-path` works correctly is set
+cd "$(dirname "$md_file")" # so `--resource-path` is correctly set
 
 # INFO pandoc's --data-dir for the `defaults` file defined in .zshenv
 pandoc "$md_file" --output="$word_file" --defaults="md2docx" 2>&1

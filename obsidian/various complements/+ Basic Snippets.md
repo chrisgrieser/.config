@@ -11,12 +11,9 @@ Pandoc table caption>>>::: {custom-style="Table Caption"}\nTable 1: $0\n:::
 Pandoc figure caption>>>::: {custom-style="Figure Caption"}\nFigure 1: $0\n:::||caption|image
 
 %% References %%
-Pandoc references>>>::: {#refs}\n:::
+Pandoc references>>>## References {-}\n::: {#refs}\n:::
 
-%% dataview %%
-moc-assistant>>>```dataviewjs\nawait dv.view("Meta/dataview/moc-assistant")\n```
-
-%%[GitHub Callouts](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax#alerts) %%
+%% [GitHub Callouts](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax#alerts) %%
 note (callout)>>>> [!NOTE]\n> ||note|callout|info
 warning (callout)>>>> [!WARNING]\n> ||warning|callout
 important (callout)>>>> [!IMPORTANT]\n> ||important|callout
