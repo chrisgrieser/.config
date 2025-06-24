@@ -1,6 +1,6 @@
 ---Try to require the module, but do not throw error when one of them cannot be
----loaded. Without this, any error in one config file will result in the
----remaining config not being loaded.
+---loaded. Without this, any error in one config file would result in the
+---remaining config files not being loaded.
 ---@param module string
 local function safeRequire(module)
 	local success, errmsg = pcall(require, module)
