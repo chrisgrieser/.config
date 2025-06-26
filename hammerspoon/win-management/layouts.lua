@@ -70,8 +70,9 @@ end
 -------------------------------------------------------------------------------
 -- LAYOUTS
 
-local function workLayout()
-	autoSetBrightness()
+---@param displayAlreadyDarkened boolean
+local function workLayout(displayAlreadyDarkened)
+	if not displayAlreadyDarkened then 	autoSetBrightness() end
 	holeCover.update()
 	dockSwitcher("work")
 	darkmode.autoSwitch()
@@ -128,14 +129,18 @@ end
 --------------------------------------------------------------------------------
 -- WHEN TO SET LAYOUT
 
--- Select layout depending on number of screens, and prevent concurrent runs
-local isLayouting = false
-local function autoSetLayout()
-	if isLayouting then return end
-	isLayouting = true
-	local layoutFunc = env.isProjector() and movieLayout or workLayout
-	layoutFunc()
-	u.defer(4, function() isLayouting = false end)
+---Select layout depending on number of screens, and prevent concurrent runs
+---@param reason string?
+local function autoSetLayout(reason)
+	if M.isLayouting then return end
+	M.isLayouting = true
+	if env.isProjector() then
+		movieLayout()
+	else
+		local shouldDarkenDisplay = u.betweenTime(22, 6) and reason == "display-count-change"
+		workLayout(shouldDarkenDisplay)
+	end
+	u.defer(4, function() M.isLayouting = false end)
 end
 
 -- 1. Change of screen numbers

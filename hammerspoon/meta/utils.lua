@@ -55,11 +55,11 @@ end
 ---@param startHour integer time between 0 and 24. Also accepts floats like 13.5 for 13:30
 ---@param endHour integer time between 0 and 24
 ---@nodiscard
----@return boolean|nil isInBetween nil for invalid time ranges (e.g., 2 to 66)
+---@return boolean isInBetween
 function M.betweenTime(startHour, endHour)
 	if startHour >= 24 or endHour >= 24 or startHour < 0 or endHour < 0 then
-		print("⚠️ BetweenTime: Invalid time range")
-		return nil
+		error("⚠️ BetweenTime: Invalid time range")
+		return false
 	end
 	local currentHour = hs.timer.localTime() / 60 / 60
 	local goesBeyondMightnight = startHour > endHour
