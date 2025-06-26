@@ -24,23 +24,6 @@ M.videoAndAudioApps = {
 
 --------------------------------------------------------------------------------
 
----binds a hotkey for a specific application only
----@param appName string
----@param modifier string[]
----@param key string
----@param action function
-function M.appHotkey(appName, modifier, key, action)
-	hs.hotkey.bind(modifier, key, function()
-		local frontApp = hs.application.frontmostApplication()
-		if frontApp:name() == appName then
-			action()
-		else
-			-- passthrough
-			hs.eventtap.keyStroke(modifier, key, 1, frontApp)
-		end
-	end)
-end
-
 ---Differentiate code to be run on reload and code to be run on startup.
 ---REQUIRED dependent on the setup in `reload.lua`.
 ---@return boolean
