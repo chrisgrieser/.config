@@ -138,6 +138,7 @@ local function autoSetLayout(reason)
 		movieLayout()
 	else
 		local shouldDarkenDisplay = u.betweenTime(22, 6) and reason == "display-count-change"
+		if shouldDarkenDisplay then darkenDisplay() end
 		workLayout(shouldDarkenDisplay)
 	end
 	u.defer(4, function() M.isLayouting = false end)
@@ -149,7 +150,7 @@ M.displayCountWatcher = hs.screen.watcher
 	.new(function()
 		local currentScreenCount = #hs.screen.allScreens()
 		if prevScreenCount ~= currentScreenCount then -- Dock changes also trigger the screenwatcher
-			autoSetLayout()
+			autoSetLayout("display-count-change")
 			prevScreenCount = currentScreenCount
 		end
 	end)
