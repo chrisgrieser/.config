@@ -5,7 +5,8 @@ local cons = hs.console
 local wf = hs.window.filter
 local aw = hs.application.watcher
 
-_G.i = hs.inspect -- `i` for easiert inspect in the console
+--------------------------------------------------------------------------------
+_G.i = hs.inspect -- `i()` to easier inspect in the console
 --------------------------------------------------------------------------------
 
 -- CONFIG
@@ -110,8 +111,22 @@ end):start()
 --------------------------------------------------------------------------------
 
 -- app-hotkeys
-u.appHotkey("Hammerspoon", { "cmd" }, "q", hs.closeConsole) -- prevent accidental quitting
-u.appHotkey("Hammerspoon", { "cmd" }, "k", hs.console.clearConsole)
+
+---@type fun(modifier: string[], key: string, action: function)
+local function hammerspoonHotkey(modifier, key, action)
+	hs.hotkey.bind(modifier, key, function()
+		local frontApp = hs.application.frontmostApplication()
+		if frontApp:name() == "Hammerspoon" then
+			action()
+		else
+			-- passthrough
+			hs.eventtap.keyStroke(modifier, key, 1, frontApp)
+		end
+	end)
+end
+
+hammerspoonHotkey({ "cmd" }, "q", hs.closeConsole) -- prevent accidental quitting
+hammerspoonHotkey({ "cmd" }, "k", hs.console.clearConsole)
 
 --------------------------------------------------------------------------------
 -- Insert a separator the logs every day at midnight
