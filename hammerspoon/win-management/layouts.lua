@@ -129,19 +129,23 @@ end
 --------------------------------------------------------------------------------
 -- WHEN TO SET LAYOUT
 
+local isLayouting = false
 ---Select layout depending on number of screens, and prevent concurrent runs
 ---@param reason string?
 local function autoSetLayout(reason)
-	if M.isLayouting then return end
-	M.isLayouting = true
+	if isLayouting then return end
+	isLayouting = true
 	if env.isProjector() then
 		movieLayout()
 	else
+		-- when turning projector off at night, then the display should be dark so
+		-- not to get up to just turn down brightness
 		local shouldDarkenDisplay = u.betweenTime(22, 6) and reason == "display-count-change"
 		if shouldDarkenDisplay then darkenDisplay() end
+
 		workLayout(shouldDarkenDisplay)
 	end
-	u.defer(4, function() M.isLayouting = false end)
+	u.defer(4, function() isLayouting = false end)
 end
 
 -- 1. Change of screen numbers
