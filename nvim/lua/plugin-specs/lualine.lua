@@ -27,33 +27,28 @@ local function countLspRefs()
 	local client = vim.lsp.get_clients({ method = "textDocument/references", bufnr = 0 })[1]
 	if not client then return "" end
 
-	-- prevent multiple requests on still cursor without the need of autocmds
+	-- prevent multiple requests when cursor does not move (without the need for autocmds)
 	local row, col = unpack(vim.api.nvim_win_get_cursor(0))
 	local sameCursorPos = row == vim.b.lspReference_lastRow and col == vim.b.lspReference_lastCol
+	if sameCursorPos then return vim.b.lspReference_count end
 
-	if not sameCursorPos then
-		vim.b.lspReference_lastRow, vim.b.lspReference_lastCol = row, col
-
-		local params = vim.lsp.util.make_position_params(0, client.offset_encoding)
-		params.context = { includeDeclaration = true } ---@diagnostic disable-line: inject-field
-		local thisFile = params.textDocument.uri
-
-		client:request("textDocument/references", params, function(error, refs)
-			if error or not refs then -- not on a valid symbol, etc.
-				vim.b.lspReference_count = nil
-				return
-			end
-			local refsInFile = vim.iter(refs)
-				:filter(function(r) return thisFile == r.uri end)
-				:totable()
-			local inFile, inWorkspace = #refsInFile, #refs
-			local text = inFile == inWorkspace and inFile or (inFile .. "(" .. inWorkspace .. ")")
-
-			vim.b.lspReference_count = inWorkspace > 0 and vim.trim(icon .. " " .. text) or nil
-		end)
-	end
-
-	return vim.b.lspReference_count or "" -- returns empty string at first and later the count
+	vim.b.lspReference_lastRow, vim.b.lspReference_lastCol = row, col
+	local params = vim.lsp.util.make_position_params(0, client.offset_encoding)
+	params.context = { includeDeclaration = true } ---@diagnostic disable-line: inject-field
+	local thisFileUri = params.textDocument.uri
+	client:request("textDocument/references", params, function(error, refs)
+		if error or not refs then -- not on a valid symbol, etc.
+			vim.b.lspReference_count = nil
+			return
+		end
+		local refsInFile = vim.iter(refs)
+			:filter(function(r) return thisFileUri == r.uri end)
+			:totable()
+		local inFile, inWorkspace = #refsInFile, #refs
+		local text = inFile == inWorkspace and inFile or (inFile .. "(" .. inWorkspace .. ")")
+		vim.b.lspReference_count = vim.trim(icon .. " " .. text)
+	end)
+	return "" -- set to empty string while waiting for request
 end
 
 --------------------------------------------------------------------------------
