@@ -347,6 +347,10 @@ function gdf {
 	local deleted_path deletion_commit last_commit
 	deleted_path=$(git log --diff-filter=D --name-only --format="" | grep --ignore-case "$search")
 
+	# FIX for whatever reason, without this, a lot of `zsh` processes all taking
+	# lots of CPU are accumulating
+	sleep 1
+
 	# TEST check for accumulating zsh processes bug
 	trap 'echo ; ps cAo "%cpu,command" | grep --color=never "zsh\|%CPU"' EXIT
 

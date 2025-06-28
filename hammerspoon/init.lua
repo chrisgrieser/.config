@@ -21,6 +21,8 @@ local function safeRequire(module)
 	end
 end
 
+--------------------------------------------------------------------------------
+
 safeRequire("appearance.console")
 safeRequire("appearance.hole-cover")
 safeRequire("appearance.dark-mode")
@@ -37,6 +39,7 @@ safeRequire("system.filesystem-watchers")
 safeRequire("system.repo-auto-sync")
 safeRequire("system.hardware-periphery")
 safeRequire("system.japanese")
+safeRequire("system.weather-reminder")
 
 safeRequire("apps.auto-quitter")
 safeRequire("apps.app-specific-behavior")
