@@ -1,12 +1,12 @@
----Ensure keymaps are unique, that is, warn when there are conflicting keymaps
+---Ensure keymaps are unique: warn when there are conflicting keymaps
 ---@param mode string|string[]
 ---@param lhs string
 ---@param rhs string|function
----@param opts? {desc?: string, unique?: boolean, buffer?: number|boolean, remap?: boolean, silent?:boolean, nowait?: boolean}
+---@param opts? { desc?: string, unique?: boolean, remap?: boolean, silent?:boolean }
 local function keymap(mode, lhs, rhs, opts)
 	if not opts then opts = {} end
 
-	-- allow to disable with `unique=false` to overwrites nvim defaults: https://neovim.io/doc/user/vim_diff.html#default-mappings
+	-- allow to disable with `unique=false` to overwrite nvim defaults: https://neovim.io/doc/user/vim_diff.html#default-mappings
 	if opts.unique == nil then opts.unique = true end
 
 	-- violating `unique=true` throws error; using `pcall` to still load other mappings
@@ -111,7 +111,7 @@ keymap("n", ">", "gUiw", { desc = "󰬴 Uppercase cword" })
 -- stylua: ignore
 keymap({ "n", "x" }, "+", function() require("personal-plugins.misc").toggleOrIncrement() end, { desc = "󰐖 Increment/toggle" })
 keymap({ "n", "x" }, "ü", "<C-x>", { desc = "󰍵 Decrement" })
--- Delete trailing character
+
 keymap("n", "X", function()
 	local updatedLine = vim.api.nvim_get_current_line():gsub(".$", "")
 	vim.api.nvim_set_current_line(updatedLine)
