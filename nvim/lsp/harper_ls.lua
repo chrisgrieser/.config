@@ -17,9 +17,9 @@ return {
 				CommaFixes = false, -- https://github.com/Automattic/harper/issues/1097
 
 				-- enable extra rules?
+				UseGenitive = true,
 				BoringWords = false,
 				LinkingVerbs = false,
-				UseGenitive = true,
 				SpelledNumbers = false,
 			},
 			isolateEnglish = true, -- experimental; in mixed-language doc only check English

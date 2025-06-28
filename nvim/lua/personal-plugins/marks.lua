@@ -1,7 +1,8 @@
--- INFO A simple wrapper around vim's builtin mark functionality.
--- * marks in the signcolumn
--- * cycles through marks
--- * set/unset with the same command
+-- INFO Simple wrapper around vim's builtin mark functionality with some extras.
+-- * shows marks in the signcolumn
+-- * command to cycle through marks
+-- * command to set marks or unset if cursor is at the mark line
+-- * command to delete all marks
 --------------------------------------------------------------------------------
 
 local M = {}
