@@ -38,7 +38,7 @@ local function countLspRefs()
 	local thisFileUri = params.textDocument.uri
 	client:request("textDocument/references", params, function(error, refs)
 		if error or not refs then -- not on a valid symbol, etc.
-			vim.b.lspReference_count = nil
+			vim.b.lspReference_count = ""
 			return
 		end
 		local refsInFile = vim.iter(refs)
