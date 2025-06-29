@@ -1,4 +1,6 @@
 {
+  "BTTPresetCreatorNotes" : "",
+  "BTTPresetInfoURL" : "",
   "BTTPresetName" : "Base",
   "BTTPresetColor" : "0.000000, 83.772828, 146.595663, 255.000000",
   "BTTGeneralSettings" : {
@@ -187,7 +189,7 @@
     },
     "BSTSnapAreaDefaultPictoDistanceFromBottom" : 0.10000000149011612
   },
-  "BTTPresetUUID" : "F008D458-681F-41DC-9BD4-A47836A4C8EE",
+  "BTTPresetUUID" : "106DC6FC-AAF2-4C32-BDC1-3A9FB0F1E78C",
   "BTTPresetContent" : [
     {
       "BTTAppBundleIdentifier" : "com.brave.Browser.app.agimnkijcaahngcdmfeangaknmldooml",
@@ -934,7 +936,34 @@
       "BTTAppName" : "Finder",
       "BTTAppAutoInvertIcon" : 1,
       "BTTTriggers" : [
-
+        {
+          "BTTActionCategory" : 0,
+          "BTTLastUpdatedAt" : 1751235496.0102119,
+          "BTTTriggerType" : 108,
+          "BTTTriggerTypeDescriptionReadOnly" : "4 Finger Swipe Up",
+          "BTTTriggerClass" : "BTTTriggerTypeTouchpadAll",
+          "BTTUUID" : "FEE9DB9D-6D89-4B31-B664-B6A36516A09E",
+          "BTTPredefinedActionType" : 366,
+          "BTTPredefinedActionName" : "Empty Placeholder",
+          "BTTEnabled" : 1,
+          "BTTEnabled2" : 1,
+          "BTTOrder" : 0,
+          "BTTAdditionalActions" : [
+            {
+              "BTTActionCategory" : 0,
+              "BTTLastUpdatedAt" : 1751235509.2524881,
+              "BTTTriggerParentUUID" : "FEE9DB9D-6D89-4B31-B664-B6A36516A09E",
+              "BTTIsPureAction" : true,
+              "BTTTriggerClass" : "BTTTriggerTypeTouchpadAll",
+              "BTTUUID" : "72466A7E-D1C8-4C9A-90A4-DF8C2BE854E9",
+              "BTTLayoutIndependentActionChar" : "UP",
+              "BTTShortcutToSend" : "55,126",
+              "BTTEnabled" : 1,
+              "BTTEnabled2" : 1,
+              "BTTOrder" : 44
+            }
+          ]
+        }
       ]
     },
     {
