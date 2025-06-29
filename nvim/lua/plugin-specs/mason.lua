@@ -12,7 +12,7 @@ local ensureInstalled = {
 		"html-lsp",
 		"json-lsp",
 		"just-lsp",
-		"ltex-ls-plus", -- LanguageTool: natural language linter (ltex fork)
+		"ltex-ls-plus", -- natural language linter (LanguageTool, ltex fork)
 		"lua-language-server",
 		"marksman", -- markdown lsp
 		"ruff", -- python linter & formatter
@@ -64,8 +64,8 @@ local function enableLsps()
 		:filter(function(pack) return vim.list_contains(pack.spec.categories, "LSP") end)
 		:map(function(pack)
 			local lspConfigName = pack.spec.neovim and pack.spec.neovim.lspconfig
-			if lspConfigName then return lspConfigName end
-			notify(pack.name .. " has no `neovim` entry.", "warn")
+			if not lspConfigName then notify(pack.name .. " has no `neovim` entry.", "warn") end
+			return lspConfigName
 		end)
 		:totable()
 	vim.lsp.enable(lspConfigNames)
