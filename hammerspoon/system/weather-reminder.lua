@@ -1,4 +1,5 @@
--- INFO Checks when the outside temperature passes the inside temperature or vice versa.
+-- INFO This module will notify when the outside temperature passes the inside
+-- temperature or vice versa.
 --------------------------------------------------------------------------------
 
 local config = {
@@ -14,22 +15,33 @@ local config = {
 
 --------------------------------------------------------------------------------
 
-local M = {} -- persist from garbage collector
-
-local env = require("meta.environment")
-local u = require("meta.utils")
--- GUARD only run in the summer & at home
+-- GUARD
 local curMonth = tostring(os.date("%b"))
-if not hs.fnutils.contains(config.activeInMonths, curMonth) or not env.isAtHome then return end
+local enabledForThisMonth = hs.fnutils.contains(config.activeInMonths, curMonth)
+local isAtHome = require("meta.environment").isAtHome
+if not enabledForThisMonth or not isAtHome then return end
+
+--------------------------------------------------------------------------------
+
+local M = {} -- persist from garbage collector
+local u = require("meta.utils")
+
+local function soundNotify(msg)
+	msg = "🌡" .. msg
+	hs.alert(msg)
+	print(msg)
+	hs.sound.getByName("Funk"):volume(0.5):play() ---@diagnostic disable-line: undefined-field
+end
+
+--------------------------------------------------------------------------------
 
 -- DOCS https://brightsky.dev/docs/#get-/current_weather
-local callUrl = ("https://api.brightsky.dev/current_weather?lat=%s&lon=%s"):format(
+local callUrl = ("https://api.brightsky.dev/current_weather?lat=%d&lon=%d"):format(
 	config.latitude,
 	config.longitude
 )
 
 local function getOutsideTemp()
-	if not (u.betweenTime(18, 1) or u.betweenTime(8, 13)) then return end
 	M.task_getWeather = hs.http.asyncGet(callUrl, nil, function(status, body, _)
 		if status ~= 200 then
 			print("⚠️🌡️ Could not get weather data: " .. status)
@@ -53,11 +65,9 @@ local function getOutsideTemp()
 		M.prevOutTemp = outTemp
 
 		if outsideNowCoolerThanInside then
-			hs.alert("🌡️🔵 Outside now cooler than inside.")
-			hs.sound.getByName("Funk"):play() ---@diagnostic disable-line: undefined-field
+			soundNotify("🔵 Outside now cooler than inside.")
 		elseif outsideNowHotterThanInside then
-			hs.alert("🌡️🔴 Outside now hotter than inside.")
-			hs.sound.getByName("Funk"):play() ---@diagnostic disable-line: undefined-field
+			soundNotify("🔴 Outside now hotter than inside.")
 		end
 	end)
 end
