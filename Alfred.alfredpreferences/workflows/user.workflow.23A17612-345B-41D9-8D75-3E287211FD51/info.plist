@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string>de.chris-grieser.wikipedia</string>
+	<key>category</key>
+	<string>⭐️</string>
+	<key>connections</key>
+	<dict>
+		<key>BCC9ED2C-0A1A-47F0-83A2-492285CD9D56</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>320A285D-5E2A-4D80-9B99-CFDED47BA207</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>87E8FA48-EDC8-4C70-B2E5-30E8BD99B2AA</string>
+				<key>modifiers</key>
+				<integer>524288</integer>
+				<key>modifiersubtext</key>
+				<string>⌥: Copy URL</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+	</dict>
+	<key>createdby</key>
+	<string>Chris Grieser</string>
+	<key>description</key>
+	<string>Suggest &amp; Search Wikipedia articles</string>
+	<key>disabled</key>
+	<false/>
+	<key>name</key>
+	<string>Wikipedia Suggest</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>320A285D-5E2A-4D80-9B99-CFDED47BA207</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>2</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>{var:wikipedia_search_keyword}</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>2</integer>
+				<key>runningsubtext</key>
+				<string>loading…</string>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>wikipdia-search.js</string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>{const:alfred_workflow_name}</string>
+				<key>type</key>
+				<integer>8</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>BCC9ED2C-0A1A-47F0-83A2-492285CD9D56</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>87E8FA48-EDC8-4C70-B2E5-30E8BD99B2AA</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string>## Usage
+Get in-line suggestions from Wikipedia via the `wiki` keyword.
+- Press &lt;kbd&gt;⏎&lt;/kbd&gt; to open the page in the browser.
+- Press &lt;kbd&gt;⌥⏎&lt;/kbd&gt; to copy the page URL to the clipboard.
+
+Set the language variant of Wikipedia you want to use in the [Workflow
+Configuration](https://www.alfredapp.com/help/workflows/user-configuration/).
+
+---
+
+Created by [Chris Grieser](https://chris-grieser.de/).</string>
+	<key>uidata</key>
+	<dict>
+		<key>320A285D-5E2A-4D80-9B99-CFDED47BA207</key>
+		<dict>
+			<key>xpos</key>
+			<real>320</real>
+			<key>ypos</key>
+			<real>85</real>
+		</dict>
+		<key>87E8FA48-EDC8-4C70-B2E5-30E8BD99B2AA</key>
+		<dict>
+			<key>xpos</key>
+			<real>320</real>
+			<key>ypos</key>
+			<real>200</real>
+		</dict>
+		<key>BCC9ED2C-0A1A-47F0-83A2-492285CD9D56</key>
+		<dict>
+			<key>xpos</key>
+			<real>75</real>
+			<key>ypos</key>
+			<real>145</real>
+		</dict>
+	</dict>
+	<key>userconfigurationconfig</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>wiki</string>
+				<key>placeholder</key>
+				<string>wiki</string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>The Alfred keyword to trigger searching wikipedia.</string>
+			<key>label</key>
+			<string>Keyword</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>wikipedia_search_keyword</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>en</string>
+				<key>placeholder</key>
+				<string>en, de</string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>The language you want to search Wikipedia in. Use the token from the Wikipedia URL, e.g., "en" for the English Wikipedia or "de" for the German one. Set multiple languages by separating them with a comma, for instance "en, de". Note that the more languages you select, the slower the search becomes.</string>
+			<key>label</key>
+			<string>Language Code</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>language_code</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>defaultvalue</key>
+				<integer>9</integer>
+				<key>markercount</key>
+				<integer>15</integer>
+				<key>maxvalue</key>
+				<integer>15</integer>
+				<key>minvalue</key>
+				<integer>1</integer>
+				<key>onlystoponmarkers</key>
+				<true/>
+				<key>showmarkers</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>per language</string>
+			<key>label</key>
+			<string>Number of result</string>
+			<key>type</key>
+			<string>slider</string>
+			<key>variable</key>
+			<string>results_per_language</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<false/>
+				<key>required</key>
+				<false/>
+				<key>text</key>
+				<string>Yes</string>
+			</dict>
+			<key>description</key>
+			<string>Directly redirect to Wikiwand, an alternative Wikipedia Skin.</string>
+			<key>label</key>
+			<string>Use Wikiwand</string>
+			<key>type</key>
+			<string>checkbox</string>
+			<key>variable</key>
+			<string>use_wikiwand</string>
+		</dict>
+	</array>
+	<key>version</key>
+	<string>1.1.1</string>
+	<key>webaddress</key>
+	<string>https://chris-grieser.de/</string>
+</dict>
+</plist>
