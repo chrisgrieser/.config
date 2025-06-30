@@ -1,4 +1,4 @@
----Ensure keymaps are unique: warn when there are conflicting keymaps
+---Ensure keymaps are unique by warning when there are conflicting keymaps
 ---@param mode string|string[]
 ---@param lhs string
 ---@param rhs string|function
