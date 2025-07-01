@@ -2,7 +2,7 @@
 
 # CONFIG
 github_username="chrisgrieser"
-set -e
+# set -e
 
 repo_names="alfred|shimmering-obsidian|gitfred"
 # repo_names="nvim"
@@ -12,9 +12,10 @@ repo_names="alfred|shimmering-obsidian|gitfred"
 
 function actions_in_repo {
 	cp -f "$HOME/Desktop/alfred-workflow-release.yml" ./.github/workflows/alfred-workflow-release.yml
+	cp -f "$HOME/Desktop/.build-and-release.sh" ./.build-and-release.sh
 }
 
-commit_msg="ci: do not categorize \`chore\` commits as fixes"
+commit_msg="ci: update for Alfred Gallery update submission changes"
 
 GITHUB_TOKEN="$(cat "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/private dotfiles/github-token.txt")"
 export GITHUB_TOKEN
