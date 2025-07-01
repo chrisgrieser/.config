@@ -36,7 +36,7 @@ function relativeDate(absDate) {
 	let delta;
 	if (deltaDays < 7) {
 		unit = "day";
-		delta = deltaDays;
+		delta = Math.floor(deltaDays);
 	} else if (deltaDays < 7 * 4) {
 		unit = "week";
 		delta = Math.floor(deltaDays / 7);
@@ -122,7 +122,6 @@ function run() {
 	}
 
 	/** @type {AlfredItem[]} */
-	// biome-ignore lint/complexity/noExcessiveCognitiveComplexity: okay here
 	const reminders = remindersJson.map((rem) => {
 		const body = rem.notes || "";
 		const content = (rem.title + "\n" + body).trim();
