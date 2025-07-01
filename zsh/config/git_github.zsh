@@ -189,8 +189,8 @@ function remote_info {
 
 # Github Url: open & copy url
 function gu {
-	url=$(git remote --verbose | head -n1 | cut -f2 | cut -d' ' -f1 |
-		sed -Ee 's|git@github.com:|https://github.com/|' -Ee 's|\.git$||')
+	repo=$(git remote --verbose | head -n1 | sed -E 's/.*github.com:([^[:space:]]*).*/\1/')
+	url="https://github.com/$repo"
 	echo "$url" | pbcopy
 	open "$url"
 }
