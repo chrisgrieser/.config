@@ -125,6 +125,29 @@
 				<false/>
 			</dict>
 		</array>
+		<key>3AE605B0-7AF2-4E35-855D-90F9C0941C8C</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>B7C92074-83A2-4839-8432-03A59A607415</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>ECF587F4-3E75-4AE7-84CB-BC53F357AC33</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>⌘: Open in Contacts.app</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>43E23DEE-9CD4-4887-A9EE-796131D55BBA</key>
 		<array>
 			<dict>
@@ -388,29 +411,6 @@
 				<integer>0</integer>
 				<key>modifiersubtext</key>
 				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>F277ADA2-F5BF-4051-BAF5-9E72355A3E70</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>B7C92074-83A2-4839-8432-03A59A607415</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>ECF587F4-3E75-4AE7-84CB-BC53F357AC33</string>
-				<key>modifiers</key>
-				<integer>1048576</integer>
-				<key>modifiersubtext</key>
-				<string>⌘: Open in Contacts.app</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -1212,76 +1212,6 @@ open -g "hammerspoon://sync-repos"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>anchorfields</key>
-				<true/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>0</integer>
-				<key>daterange</key>
-				<integer>0</integer>
-				<key>fields</key>
-				<array>
-					<dict>
-						<key>field</key>
-						<string>*</string>
-						<key>not</key>
-						<false/>
-						<key>split</key>
-						<true/>
-						<key>value</key>
-						<string>{query}</string>
-						<key>words</key>
-						<true/>
-					</dict>
-					<dict>
-						<key>field</key>
-						<string>kMDItemTextContent</string>
-						<key>not</key>
-						<false/>
-						<key>split</key>
-						<true/>
-						<key>value</key>
-						<string>{query}</string>
-						<key>words</key>
-						<true/>
-					</dict>
-				</array>
-				<key>includesystem</key>
-				<false/>
-				<key>keyword</key>
-				<string>@</string>
-				<key>limit</key>
-				<integer>0</integer>
-				<key>runningsubtext</key>
-				<string></string>
-				<key>scopes</key>
-				<array>
-					<string>~/Library/Application Support/AddressBook</string>
-				</array>
-				<key>sortmode</key>
-				<integer>0</integer>
-				<key>subtext</key>
-				<string>waiting for query…</string>
-				<key>title</key>
-				<string>Contacts</string>
-				<key>types</key>
-				<array>
-					<string>com.apple.addressbook.person</string>
-				</array>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.filefilter</string>
-			<key>uid</key>
-			<string>F277ADA2-F5BF-4051-BAF5-9E72355A3E70</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
@@ -1353,6 +1283,76 @@ open -g "hammerspoon://sync-repos"</string>
 			<string>9C423BD7-E972-413B-8783-5B9CDCDD5647</string>
 			<key>version</key>
 			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>anchorfields</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>daterange</key>
+				<integer>0</integer>
+				<key>fields</key>
+				<array>
+					<dict>
+						<key>field</key>
+						<string>*</string>
+						<key>not</key>
+						<false/>
+						<key>split</key>
+						<true/>
+						<key>value</key>
+						<string>{query}</string>
+						<key>words</key>
+						<true/>
+					</dict>
+					<dict>
+						<key>field</key>
+						<string>kMDItemTextContent</string>
+						<key>not</key>
+						<false/>
+						<key>split</key>
+						<true/>
+						<key>value</key>
+						<string>{query}</string>
+						<key>words</key>
+						<true/>
+					</dict>
+				</array>
+				<key>includesystem</key>
+				<false/>
+				<key>keyword</key>
+				<string>@</string>
+				<key>limit</key>
+				<integer>0</integer>
+				<key>runningsubtext</key>
+				<string></string>
+				<key>scopes</key>
+				<array>
+					<string>~/Library/Application Support/AddressBook</string>
+				</array>
+				<key>sortmode</key>
+				<integer>0</integer>
+				<key>subtext</key>
+				<string>waiting for query…</string>
+				<key>title</key>
+				<string>Contacts</string>
+				<key>types</key>
+				<array>
+					<string>com.apple.addressbook.person</string>
+				</array>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.filefilter</string>
+			<key>uid</key>
+			<string>3AE605B0-7AF2-4E35-855D-90F9C0941C8C</string>
+			<key>version</key>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1668,6 +1668,18 @@ open -g "hammerspoon://sync-repos"</string>
 			<key>ypos</key>
 			<real>705</real>
 		</dict>
+		<key>3AE605B0-7AF2-4E35-855D-90F9C0941C8C</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>6</integer>
+			<key>note</key>
+			<string>contacts
+(adapted from "Deep Contacts" workflow)</string>
+			<key>xpos</key>
+			<real>550</real>
+			<key>ypos</key>
+			<real>870</real>
+		</dict>
 		<key>43E23DEE-9CD4-4887-A9EE-796131D55BBA</key>
 		<dict>
 			<key>colorindex</key>
@@ -1950,18 +1962,6 @@ open -g "hammerspoon://sync-repos"</string>
 			<real>1070</real>
 			<key>ypos</key>
 			<real>780</real>
-		</dict>
-		<key>F277ADA2-F5BF-4051-BAF5-9E72355A3E70</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>6</integer>
-			<key>note</key>
-			<string>contacts
-(adapted from "Deep Contacts" workflow)</string>
-			<key>xpos</key>
-			<real>550</real>
-			<key>ypos</key>
-			<real>820</real>
 		</dict>
 		<key>F7331471-4575-4686-BB12-FD49331C261C</key>
 		<dict>
