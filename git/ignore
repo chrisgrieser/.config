@@ -4,8 +4,6 @@
 # https://stackoverflow.com/a/33974028/22114136
 Icon[]
 
-#───────────────────────────────────────────────────────────────────────────────
-
 # production stuff / builds
 *.log
 node_modules
@@ -27,6 +25,7 @@ __pycache__
 *.pfx
 *.key
 .*_history
+*.env
 .env
 
 # prevent accidental inclusion of big files or partial downloads
