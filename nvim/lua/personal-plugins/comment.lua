@@ -70,7 +70,12 @@ end
 -- simplified implementation of neogen.nvim
 -- (reason: lsp usually provides better prefills for docstrings)
 function M.docstring()
-	vim.cmd.TSTextobjectGotoPreviousStart("@function.outer")
+	local ok, tsMove = pcall(require, "nvim-treesitter-textobjects.move")
+	if not (ok and tsMove) then
+		vim.notify("`nvim-treesitter-textobjects` not installed.", vim.log.levels.WARN)
+		return
+	end
+	tsMove.goto_previous_start("@function.outer", "textobjects")
 
 	local ft = vim.bo.filetype
 	local indent = vim.api.nvim_get_current_line():match("^%s*")
