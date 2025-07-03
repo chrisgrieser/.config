@@ -24,6 +24,7 @@ export GITHUB_TOKEN
 #───────────────────────────────────────────────────────────────────────────────
 
 # GUARD
+if [[ -z "$GITHUB_TOKEN" ]]; then print "\e[1;31mNo GitHub token found\e[0m"; return 1; fi
 if [[ ! -x "$(command -v gh)" ]]; then print "\e[1;33mgh not installed.\e[0m" && return 1; fi
 
 # only non-forked, non-archived repos
