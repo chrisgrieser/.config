@@ -12,7 +12,7 @@
     "prefix": "DOCS (+url)"
   },
   "GUARD": {
-    "body": "-- GUARD",
+    "body": "$LINE_COMMENT GUARD",
     "prefix": "GUARD"
   },
   "PENDING (+url)": {

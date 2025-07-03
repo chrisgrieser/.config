@@ -323,7 +323,14 @@ return {
 						"--sortr=modified", -- sort by recency, slight performance impact
 						("--ignore-file=" .. vim.fs.normalize("~/.config/ripgrep/ignore")),
 					},
-					exclude = { ".DS_Store", "*.docx", "*.zip", "*.pptx", "*.svg" },
+					exclude = { -- keep this ignored even if toggling to show hidden/ignored
+						"node_modules",
+						".DS_Store",
+						"*.docx",
+						"*.zip",
+						"*.pptx",
+						"*.svg",
+					},
 					layout = "small_no_preview",
 					matcher = { frecency = true }, -- slight performance impact
 					win = {
