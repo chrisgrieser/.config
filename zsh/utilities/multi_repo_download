@@ -11,10 +11,14 @@ repo_names="nvim"
 # ALL
 # repo_names="finder-vim-mode|zsh-magic-dashboard|nvim|alfred|shimmering-obsidian|gitfred|obsidian-quadro|pseudometa-obsidian-plugin-template|grappling-hook"
 
+GITHUB_TOKEN="$(cat "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/private dotfiles/github-token.txt")"
+export GITHUB_TOKEN
+
 #───────────────────────────────────────────────────────────────────────────────
 #───────────────────────────────────────────────────────────────────────────────
 
 # GUARD
+if [[ -z "$GITHUB_TOKEN" ]]; then print "\e[1;31mNo GitHub token found\e[0m"; return 1; fi
 if [[ ! -x "$(command -v gh)" ]]; then print "\e[1;33mgh not installed.\e[0m" && return 1; fi
 
 # only non-forked, non-archived repos
