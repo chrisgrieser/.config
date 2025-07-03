@@ -43,6 +43,7 @@ deprecations
 devdocs
 dropdown
 efm
+embeddings
 fixup
 fixups
 frontmatter
@@ -84,3 +85,4 @@ unminify
 unstaged
 vimscript
 zsh
+embeddings
