@@ -39,9 +39,7 @@ function M.camelSnakeLspRename()
 		local camelCased = cword:gsub(snakePattern, function(c1) return c1:upper() end)
 		vim.lsp.buf.rename(camelCased)
 	elseif cword:find(camelPattern) then
-		local snake_cased = cword
-			:gsub(camelPattern, function(c1, c2) return c1 .. "_" .. c2 end)
-			:lower()
+		local snake_cased = cword:gsub(camelPattern, "%1_%2"):lower()
 		vim.lsp.buf.rename(snake_cased)
 	else
 		local msg = "Neither snake_case nor camelCase: " .. cword
