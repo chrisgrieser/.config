@@ -35,26 +35,14 @@ K back-scroll
 ? help
 
 #───────────────────────────────────────────────────────────────────────────────
-
 #env
-
-# options
-# (`lesskey` does not accepts quotes, and unescaped leading spaces are ignored)
-
-# initialize variable
-# LESS="--RAW-CONTROL-CHARS --line-num-width=4 --ignore-case --incsearch --tilde --long-prompt --status-line --quit-if-one-screen --chop-long-lines --search-options=W --shift=.2"
-# LESS=--RAW-CONTROL-CHARS --line-num-width=4 --ignore-case --incsearch --tilde --long-prompt --status-line --quit-if-one-screen --chop-long-lines --search-options=W --shift=.2
-# LESS=--RAW-CONTROL-CHARS\ --line-num-width=4\ --ignore-case\ --incsearch\ --tilde\ --long-prompt\ --status-line\ --quit-if-one-screen\ --chop-long-lines\ --search-options=W\ --shift=.2
-
-
-# (cannot disable it, since it's needed for delta's `navigate` feature)
-# LESSHISTFILE=/tmp/lesshst
 
 # colorize man pages
 LESS_TERMCAP_mb=\e[1;31m
 LESS_TERMCAP_md=\e[1;33m
 LESS_TERMCAP_me=\e[0m
 LESS_TERMCAP_us=\e[1;36m
+# typos: ignore-next-line
 LESS_TERMCAP_ue=\e[0m
 
 # FIX nerdfont display https://github.com/ryanoasis/nerd-fonts/issues/1337

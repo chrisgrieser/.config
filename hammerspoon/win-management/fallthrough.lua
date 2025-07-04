@@ -15,7 +15,7 @@ local config = {
 --------------------------------------------------------------------------------
 
 local function fallthrough()
-	u.defer(0.1, function() -- deferring to ensure windows are already switched/created
+	u.defer({ 0.1, 0.3 }, function() -- deferring to ensure windows are already switched/created
 		local frontApp = hs.application.frontmostApplication()
 		local fallthroughWhenNoWin = hs.fnutils.contains(
 			config.fallthrough.whenNoWin,
