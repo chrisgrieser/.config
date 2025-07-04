@@ -22,7 +22,8 @@ return {
 	},
 	opts = {
 		display = {
-			diff = { enabled = false }, -- not helpful anyway, just using gitsigns word-diff afterwards instead
+			-- not helpful anyway, just using gitsigns word-diff afterwards instead
+			diff = { enabled = false },
 		},
 		strategies = {
 			inline = { adapter = "openai" },
@@ -32,8 +33,14 @@ return {
 			openai = function()
 				local model = "gpt-4.1-mini" -- https://platform.openai.com/docs/models
 
+				local apiKeyFile =
+					"$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/private dotfiles/openai-api-key.txt"
+
 				return require("codecompanion.adapters").extend("openai", {
 					schema = { model = { default = model } },
+					env = {
+						api_key = ("cmd:cat %q"):format(apiKeyFile),
+					},
 				})
 			end,
 		},
