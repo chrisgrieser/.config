@@ -33,16 +33,19 @@ ai() {
 
 
 	local task="$*"
-	print "\e[1;34mAsking AI…\e[0m"
+	print "\e[1;34mAsking AI…\e[0m "
 
 	# OpenAI request
 	local response
 	response=$(jq -n \
 		--arg model "$model" --arg system_prompt "$system_prompt" --arg task "$task" \
-		'{ model: $model, messages: [
-			{role: "system", content: $system_prompt},
-			{role: "user", content: $task}
-		] }' |
+		'{ 
+			model: $model, 
+			messages: [
+				{ role: "system", content: $system_prompt },
+				{ role: "user", content: $task }
+			]
+		}' |
 		curl --silent --max-time 15 "https://api.openai.com/v1/chat/completions" \
 			-H "Content-Type: application/json" \
 			-H "Authorization: Bearer $OPENAI_API_KEY" \
@@ -64,5 +67,6 @@ ai() {
 	local cmd
 	cmd="$(echo "$response" | jq -r '.choices[0].message.content')"
 	echo -n "$cmd" | pbcopy
-	print "\e[1;35mCopied: \e[0m$cmd"
+	echo "$cmd" | bat --language=sh --wrap=character
+	print "\e[1;35m(Copied)\e[0m"
 }
