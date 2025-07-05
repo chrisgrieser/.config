@@ -1,16 +1,16 @@
 {
     "createdBy": "Redirector v3.5.3",
-    "createdAt": "2025-05-24T17:08:37.284Z",
+    "createdAt": "2025-07-05T19:38:09.989Z",
     "redirects": [
         {
-            "description": "Netflix redirect from \"Home\" to \"TV Shows\"",
+            "description": "Netflix redirect from \"Home\" to \"TV Shows → Animes\"",
             "exampleUrl": "https://www.netflix.com/browse",
-            "exampleResult": "https://www.netflix.com/browse/genre/83",
+            "exampleResult": "https://www.netflix.com/browse/genre/6721?bc=83",
             "error": null,
             "includePattern": "https://www.netflix.com/browse",
             "excludePattern": "",
             "patternDesc": "",
-            "redirectUrl": "https://www.netflix.com/browse/genre/83",
+            "redirectUrl": "https://www.netflix.com/browse/genre/6721?bc=83",
             "patternType": "W",
             "processMatches": "noProcessing",
             "disabled": false,
