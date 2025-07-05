@@ -6,28 +6,11 @@ local spec = {
 		"saghen/blink.cmp",
 		version = "*",
 		dependencies = "Kaiser-Yang/blink-cmp-git",
-
-		config = function(_, opts)
-			-- read GITHUB_TOKEN from file
-			local tokenPath = os.getenv("HOME")
-				.. "/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/private dotfiles/github-token.txt"
-			local file = io.open(tokenPath, "r")
-			if file then
-				vim.env.GITHUB_TOKEN = file:read("*l") -- read first line
-				file:close()
-			end
-
-			require("blink.cmp").setup(opts)
-		end,
-
 		opts = {
 			sources = {
 				default = { "lsp", "path", "snippets", "buffer", "git" },
 				providers = {
-					git = {
-						module = "blink-cmp-git",
-						name = "Git",
-					},
+					git = { module = "blink-cmp-git", name = "Git" },
 				},
 			},
 		},

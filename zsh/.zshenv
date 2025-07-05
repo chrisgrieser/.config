@@ -11,7 +11,7 @@ alias pandoc='pandoc --data-dir="$HOME/.config/pandoc"'
 export PASSWORD_STORE_CLIP_TIME=60
 export PASSWORD_STORE_GENERATED_LENGTH=30       # some services break with longer passwords m(
 export PASSWORD_STORE_CHARACTER_SET="[:alnum:]" # many services break with special chars m(
-alias pass="env NO_PLUGINS=true pass"           # disable plugins in `nvim` when using `pass`
+export PASSWORD_STORE_DIR="$HOME/.password-store"
 
 #───────────────────────────────────────────────────────────────────────────────
 

@@ -32,7 +32,17 @@ return {
 				git = {
 					module = "blink-cmp-git",
 					name = "Git",
-					opts = {},
+					opts = {
+						before_reload_cache = function() end, -- silence cache-reload notification
+						commit = { enable = false },
+						git_centers = {
+							github = {
+								pull_request = { enable = false },
+								mention = { enable = false },
+								issue = { get_documentation = function() return "" end }, -- disable doc window
+							},
+						},
+					},
 				},
 			},
 		},
