@@ -34,6 +34,7 @@ vim.opt.iskeyword:append("-") -- treat `-` as word character, same as `_`
 
 -- treat all numbers as positive (ignoring dashes), also makes `<C-x>` stop at `0`
 vim.opt.nrformats = { "unsigned" }
+vim.opt.virtualedit = { "block" } -- in visual block mode, cursor can move beyond end of line
 
 vim.opt.autowriteall = true
 
@@ -147,7 +148,6 @@ vim.diagnostic.config {
 	},
 	signs = {
 		text = { "󰅚 ", " ", "󰋽 ", "󰌶 " }, -- Error, Warn, Info, Hint
-		-- text = { "", "▲", "●", "" },
 	},
 	virtual_text = {
 		spacing = 2,
@@ -155,7 +155,7 @@ vim.diagnostic.config {
 			min = vim.diagnostic.severity.WARN, -- leave out Info & Hint
 		},
 		format = function(diag)
-			local msg = diag.message:gsub("%.$", "")
+			local msg = diag.message:gsub("%.$", "") -- lua_ls adds trailing `.`
 			return msg
 		end,
 		suffix = function(diag)
