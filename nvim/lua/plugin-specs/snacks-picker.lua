@@ -245,23 +245,6 @@ return {
 		---@type snacks.picker.Config
 		picker = {
 			sources = {
-				qflist = {
-					win = {
-						input = {
-							keys = { ["<D-d>"] = { "delete_qf_entry", mode = "i" } },
-						},
-					},
-					actions = {
-						delete_qf_entry = function(picker)
-							local idx = picker:current().idx
-							local qf = vim.fn.getqflist { title = true, items = true }
-							table.remove(qf.items, idx)
-							vim.fn.setqflist(qf.items, "r") -- "r" = replace = overwrite
-							vim.fn.setqflist({}, "a", { title = qf.title }) -- preserve title of qflist
-							picker:find() -- reload
-						end,
-					},
-				},
 				undo = {
 					win = {
 						input = {
