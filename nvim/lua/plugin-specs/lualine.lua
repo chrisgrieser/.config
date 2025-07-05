@@ -81,12 +81,10 @@ return {
 					cond = function() return vim.o.columns > 120 end, -- only if window is maximized
 				},
 			},
-			lualine_b = {},
-			lualine_c = {
+			lualine_x = {
 				-- HACK dummy, so tabline is never empty (in which case vim adds its ugly tabline)
 				{ function() return " " end },
 			},
-			lualine_y = {},
 		},
 		sections = {
 			lualine_a = {
