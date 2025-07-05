@@ -1,4 +1,5 @@
 -- DOCS https://github.com/nvim-lualine/lualine.nvim#default-configuration
+--------------------------------------------------------------------------------
 
 ---Adds a component lualine was already set up. This enables lazy-loading
 ---plugins that add statusline components.
