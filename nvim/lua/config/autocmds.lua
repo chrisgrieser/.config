@@ -1,18 +1,13 @@
--- HIGHLIGHTED YANK
 vim.api.nvim_create_autocmd("TextYankPost", {
 	desc = "User: Highlighted Yank",
 	callback = function() vim.hl.on_yank { timeout = 1500 } end,
 })
 
---------------------------------------------------------------------------------
--- WINDOW SPLITS
 vim.api.nvim_create_autocmd("VimResized", {
 	desc = "User: keep splits equally sized on window resize",
 	command = "wincmd =",
 })
 
---------------------------------------------------------------------------------
--- RESTORE CURSOR
 vim.api.nvim_create_autocmd("FileType", {
 	desc = "User: Restore cursor position",
 	callback = function(ctx)
@@ -315,7 +310,7 @@ vim.api.nvim_create_autocmd({ "BufReadPost", "BufNew" }, {
 -- FAVICON PREFIXES FOR URLS
 -- inspired by the Obsidian favicon plugin: https://github.com/joethei/obsidian-link-favicon
 
--- REQUIRED
+-- REQUIREMENTS
 -- 1. nvim 0.10+
 -- 2. `comment` Tresitter parser (`:TSInstall comment`) & active parser for the
 -- current buffer (e.g., in a lua buffer, the lua parser is required)
@@ -332,12 +327,11 @@ local favicons = {
 }
 
 local function addFavicons(bufnr)
-	-- GUARD
 	if not bufnr then bufnr = 0 end
 	if not vim.api.nvim_buf_is_valid(bufnr) or vim.bo[bufnr].buftype ~= "" then return end
-	local hasParser, urlQuery =
+	local hasCommentParser, urlQuery =
 		pcall(vim.treesitter.query.parse, "comment", "(uri) @string.special.url")
-	if not hasParser then return end
+	if not hasCommentParser then return end
 	local hasParserForFt, _ = pcall(vim.treesitter.get_parser, bufnr)
 	if not hasParserForFt then return end
 
@@ -487,7 +481,8 @@ vim.lsp.handlers["textDocument/rename"] = function(err, result, ctx, config)
 end
 --------------------------------------------------------------------------------
 
--- RECORDING
+-- MACROS 
+-- add sound & change cursorline color while recording
 do
 	local function play(soundFile)
 		if jit.os ~= "OSX" then return end
@@ -495,6 +490,7 @@ do
 			"/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/"
 		vim.system { "afplay", soundDir .. soundFile }
 	end
+
 	local cursorlineBg
 
 	vim.api.nvim_create_autocmd("RecordingEnter", {

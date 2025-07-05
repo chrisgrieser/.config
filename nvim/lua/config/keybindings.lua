@@ -12,7 +12,8 @@ local function keymap(mode, lhs, rhs, opts)
 	-- violating `unique=true` throws error; using `pcall` to still load other mappings
 	local success, _ = pcall(vim.keymap.set, mode, lhs, rhs, opts)
 	if not success then
-		local msg = ("[[%s]] %s"):format(mode, lhs)
+		local modes = type(mode) == "table" and table.concat(mode, ",") or mode
+		local msg = ("[[%s]] %s"):format(modes, lhs)
 		vim.notify(msg, vim.log.levels.WARN, { title = "Duplicate keymap", timeout = false })
 	end
 end
@@ -372,7 +373,7 @@ keymap("n", "<leader>il", function() require("personal-plugins.misc").lspCapabil
 keymap("n", "<leader>ib", function() require("personal-plugins.misc").bufferInfo() end, { desc = "󰽙 Buffer info" })
 
 --------------------------------------------------------------------------------
--- WINDOWS
+-- WINDOWS & SPLITS
 
 -- stylua: ignore
 keymap({ "n", "v", "i" }, "<C-CR>", "<C-w>w", { desc = " Cycle windows" })

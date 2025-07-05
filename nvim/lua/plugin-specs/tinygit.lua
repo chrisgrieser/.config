@@ -3,10 +3,6 @@ return {
 	event = "VeryLazy", -- load for status line component
 	keys = {
 		-- stylua: ignore start
-
-		-- TEMP using until `interactiveStaging` is implemented for `snacks`
-		-- { "<leader>ga", function() require("tinygit").interactiveStaging() end, desc = "󰐖 Interactive staging" },
-
 		{ "<leader>gg", function() require("tinygit").smartCommit { pushIfClean = true } end, desc = "󰊢 Smart-commit & push", nowait = true },
 		{ "<leader>gc", function() require("tinygit").smartCommit { pushIfClean = false } end, desc = "󰊢 Smart-commit" },
 		{ "<leader>gp", function() require("tinygit").push { pullBefore = true } end, desc = "󰊢 Pull & push" },
@@ -47,11 +43,6 @@ return {
 					return subject
 				end,
 				enforceType = true,
-				-- stylua: ignore
-				types = { -- add `improv`
-					"fix", "feat", "chore", "docs", "refactor", "build", "test",
-					"perf", "style", "revert", "ci", "break", "improv"
-				},
 			},
 		},
 		push = {
