@@ -1,10 +1,6 @@
 # SHORTHANDS
 alias q=' exit'     # leading space to ignore it in history due to `HIST_IGNORE_SPACE`
 alias r=' exec zsh' # do not reload with `source ~/.zshrc`, https://github.com/ohmyzsh/ohmyzsh/wiki/FAQ#how-do-i-reload-the-zshrc-file
-alias cmd='command'
-alias spotify="spotify_player playback"
-alias pw="pass"
-alias pwcd='cd "${PASSWORD_STORE_DIR:-$HOME/.password-store}"'
 
 # DEFAULTS
 alias mv='mv -vi'
@@ -39,6 +35,20 @@ function bat { # dark-mode aware
 }
 
 #───────────────────────────────────────────────────────────────────────────────
+
+# PASS
+# 1. use `pw` as alias
+# 2. define `pw cd` as pseudo-subcommand to go to the password store directory
+function pw {
+	if [[ "$1" == "cd" ]]; then
+		cd "${PASSWORD_STORE_DIR:-$HOME/.password-store}" || return 1
+	else
+		command pass "$@"
+	fi
+}
+compdef _pass pw # to inherit the completions of `pass`
+
+#───────────────────────────────────────────────────────────────────────────────
 # GLOBAL ALIAS (to be used at the end of the buffer, mostly)
 alias -g G='| rg'
 alias -g B='| bat'
@@ -56,5 +66,3 @@ ZSH_HIGHLIGHT_REGEXP+=(' N$' 'fg=magenta,bold')
 ZSH_HIGHLIGHT_REGEXP+=(' L$' 'fg=magenta,bold')
 ZSH_HIGHLIGHT_REGEXP+=(' J$' 'fg=magenta,bold')
 ZSH_HIGHLIGHT_REGEXP+=('^P ' 'fg=magenta,bold') # only start of line
-
-#───────────────────────────────────────────────────────────────────────────────

@@ -16,6 +16,11 @@ local function dockSwitcher(dockToUse)
 	u.openUrlInBg(alfredUri)
 end
 
+local function isWeekend()
+	local weekday = tostring(os.date("%a"))
+	return weekday == "Sat" or weekday == "Sun"
+end
+
 local function autoSetBrightness()
 	local ambient = hs.brightness.ambient()
 	local noBrightnessSensor = ambient == -1
@@ -72,14 +77,15 @@ end
 
 ---@param displayAlreadyDarkened boolean
 local function workLayout(displayAlreadyDarkened)
-	if not displayAlreadyDarkened then 	autoSetBrightness() end
+	if not displayAlreadyDarkened then autoSetBrightness() end
 	holeCover.update()
 	dockSwitcher("work")
 	darkmode.autoSwitch()
 
 	u.closeAllTheThings()
 
-	u.openApps { "Slack", "Ivory", "Mimestream", "AlfredExtraPane" }
+	u.openApps { "Ivory", "Mimestream", "AlfredExtraPane" }
+	if not isWeekend() then u.openApps("Slack") end
 	u.whenAppWinAvailable(
 		"Mimestream",
 		function()
@@ -110,7 +116,8 @@ local function movieLayout()
 	-- turn off showing hidden files
 	hs.execute("defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder")
 
-	u.openApps { "YouTube", env.isAtHome and "BetterTouchTool" or nil }
+	u.openApps("YouTube")
+	if env.isAtHome then u.openApps("BetterTouchTool") end
 	u.quitApps {
 		"Slack",
 		"Calendar",
