@@ -19,6 +19,7 @@ M.wf_pseudoMax = wf.new({
 	"zoom.us",
 	"Preview",
 	"Highlights",
+	"Signal",
 	"Karabiner-Elements",
 })
 	:setOverrideFilter({ fullscreen = false, rejectTitles = { "^Save$", "^Open$" } })

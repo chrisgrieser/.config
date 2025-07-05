@@ -119,6 +119,7 @@ local function movieLayout()
 	u.openApps("YouTube")
 	if env.isAtHome then u.openApps("BetterTouchTool") end
 	u.quitApps {
+		"Signal",
 		"Slack",
 		"Calendar",
 		"Alfred Preferences",

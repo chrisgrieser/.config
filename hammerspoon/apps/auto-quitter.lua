@@ -19,6 +19,7 @@ local config = {
 		Reminders = 3,
 		Mimestream = 5,
 		Slack = 30,
+		Signal = 30,
 		Highlights = 90,
 		Obsidian = 180,
 		["WezTerm"] = 120,
