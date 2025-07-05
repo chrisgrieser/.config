@@ -36,20 +36,19 @@ function bat { # dark-mode aware
 
 #───────────────────────────────────────────────────────────────────────────────
 
-# PASS
-# 1. use `pw` as alias
-# 2. define `pw cd` as pseudo-subcommand to go to the password store directory
-function pw {
+# 1. Define `pass cd` as pseudo-subcommand to go to the password store directory.
+# 2. Set `USING_PASS`, so nvim can detect `pass` and disable plugins.
+function pass {
 	if [[ "$1" == "cd" ]]; then
 		cd "$PASSWORD_STORE_DIR" || return 1
 	else
-		pass "$@"
+		env "USING_PASS=true" command pass "$@"
 	fi
 }
-compdef _pass pw # to inherit the completions of `pass`
+alias pw="pass"
 
 #───────────────────────────────────────────────────────────────────────────────
-# GLOBAL ALIAS (to be used at the end of the buffer, mostly)
+# GLOBAL ALIASES
 alias -g G='| rg'
 alias -g B='| bat'
 alias -g N='| wc -l | tr -d " "' # count lines
