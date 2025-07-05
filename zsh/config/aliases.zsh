@@ -41,9 +41,9 @@ function bat { # dark-mode aware
 # 2. define `pw cd` as pseudo-subcommand to go to the password store directory
 function pw {
 	if [[ "$1" == "cd" ]]; then
-		cd "${PASSWORD_STORE_DIR:-$HOME/.password-store}" || return 1
+		cd "$PASSWORD_STORE_DIR" || return 1
 	else
-		command pass "$@"
+		pass "$@"
 	fi
 }
 compdef _pass pw # to inherit the completions of `pass`

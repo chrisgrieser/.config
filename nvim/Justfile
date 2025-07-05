@@ -1,6 +1,6 @@
 set quiet := true
 
-debugFile := "./debug/test.ts"
+debugFile := "./debug/test.lua"
 debugConfig := "./debug/repro.lua"
 masonPath := "$HOME/.local/share/nvim/mason/bin/"
 
