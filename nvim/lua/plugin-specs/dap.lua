@@ -4,7 +4,8 @@
 local function setupAdapters()
 	-- JS-ADAPTER
 	-- DOCS https://codeberg.org/mfussenegger/nvim-dap/wiki/Debug-Adapter-installation#vscode-js-debug
-	local jsDebugAdapterPath = vim.env.MASON .. "/packages/js-debug-adapter/js-debug/src/dapDebugServer.js"
+	local jsDebugAdapterPath = vim.env.MASON
+		.. "/packages/js-debug-adapter/js-debug/src/dapDebugServer.js"
 	require("dap").adapters["pwa-node"] = {
 		type = "server",
 		host = "localhost",
@@ -85,6 +86,16 @@ return {
 	keys = {
 		{ "7", function() require("dap").continue() end, desc = " Continue" },
 		{ "8", function() require("dap").toggle_breakpoint() end, desc = " Toggle breakpoint" },
+		{
+			"<leader>dd",
+			function()
+				vim.ui.input({ prompt = " Breakpoint condition" }, function(input)
+					if not input then return end
+					require("dap").set_breakpoint(input)
+				end)
+			end,
+			desc = " Conditional breakpoint",
+		},
 
 		{ "<leader>di", function() require("dap").step_in() end, desc = "󰆹 Step in" },
 		{ "<leader>dI", function() require("dap").step_out() end, desc = "󰆸 Step out" },
@@ -103,7 +114,7 @@ return {
 			desc = " Breakpoints to qf",
 		},
 		-- stylua: ignore
-		{ "<leader>dd", function() require("dap").clear_breakpoints() end, desc = "󰅗 Delete breakpoints" },
+		{ "<leader>d<BS>", function() require("dap").clear_breakpoints() end, desc = "󰅗 Delete breakpoints" },
 
 		-- stylua: ignore
 		{ "<leader>dh", function() require("dap.ui.widgets").hover() end, desc = "󰫧 Hover variable" },

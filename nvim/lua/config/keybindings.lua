@@ -152,7 +152,7 @@ keymap("i", "<S-Tab>", "<C-d>", { desc = "󰉵 outdent", unique = false })
 -- QUICKFIX
 keymap("n", "gq", "<cmd>silent cnext<CR>zv", { desc = "󰴩 Next quickfix" })
 keymap("n", "gQ", "<cmd>silent cprev<CR>zv", { desc = "󰴩 Prev quickfix" })
-keymap("n", "<leader>qd", function() vim.cmd.cexpr("[]") end, { desc = "󰚃 Delete qf-list" })
+keymap("n", "<leader>q<BS>", function() vim.cmd.cexpr("[]") end, { desc = "󰚃 Delete qf-list" })
 
 --------------------------------------------------------------------------------
 -- FOLDING
@@ -162,12 +162,6 @@ keymap("n", "zv", "zv", { desc = "󰘖 Open until cursor visible" }) -- just for
 keymap("n", "zr", "zR", { desc = "󰘖 Open all folds" })
 -- stylua: ignore
 keymap("n", "zf", function() vim.opt.foldlevel = vim.v.count1 end, { desc = " Set fold level to {count}" })
-
-keymap("n", "zs", function()
-	local modeline = vim.bo.commentstring:format("vim: foldlevel=" .. vim.o.foldlevel)
-	vim.api.nvim_buf_set_lines(0, 0, 0, false, { modeline })
-	vim.api.nvim_win_set_cursor(0, { 1, #modeline })
-end, { desc = "󰆓 Save foldlevel in modeline" })
 
 --------------------------------------------------------------------------------
 -- SNIPPETS
