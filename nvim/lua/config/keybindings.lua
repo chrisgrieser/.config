@@ -417,6 +417,7 @@ keymap({ "n", "x", "i" }, "<D-L>", function() require("personal-plugins.misc").o
 do
 	local reg = "r"
 	local toggleKey = "0"
+	vim.fn.setreg(reg, "") -- clear on startup to avoid accidents
 	keymap(
 		"n",
 		toggleKey,
