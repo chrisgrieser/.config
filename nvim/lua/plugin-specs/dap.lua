@@ -1,5 +1,6 @@
-local function setupNodeAdapter()
-	-- https://codeberg.org/mfussenegger/nvim-dap/wiki/Debug-Adapter-installation#vscode-js-debug
+local function setupAdapters()
+	-- JS-ADAPTER
+	-- DOCS https://codeberg.org/mfussenegger/nvim-dap/wiki/Debug-Adapter-installation#vscode-js-debug
 	require("dap").adapters["pwa-node"] = {
 		type = "server",
 		host = "localhost",
@@ -12,37 +13,94 @@ local function setupNodeAdapter()
 			},
 		},
 	}
-	-- INFO for typescript, requires some extra setup with sourcemaps
-	local config = require("dap").configurations
-	for _, jsLang in pairs({ "javascript", "typescript" }) do
-		
+	-- INFO for typescript may require extra setup with source-maps
+	for _, jsLang in pairs { "javascript", "typescript" } do
+		require("dap").configurations[jsLang] = {
+			{
+				type = "pwa-node", -- matches `dap.adapters.pwa-node`
+				request = "launch",
+				name = "Launch file",
+				program = "${file}",
+				cwd = "${workspaceFolder}",
+			},
+		}
 	end
-	require("dap").configurations[] = {
+
+	-----------------------------------------------------------------------------
+	-- DEBUGPY
+	-- DOCS https://codeberg.org/mfussenegger/nvim-dap/wiki/Debug-Adapter-installation#python
+	-- also look at: https://github.com/mfussenegger/nvim-dap-python/blob/master/lua/dap-python.lua
+	local debugpyPython = vim.env.MASON .. "/packages/debugpy/venv/bin/python"
+
+	require("dap").adapters.python = function(cb, config)
+		if config.request == "attach" then
+			local port = (config.connect or config).port
+			local host = (config.connect or config).host or "127.0.0.1"
+			cb {
+				type = "server",
+				port = assert(port, "`connect.port` is required for a python `attach` configuration"),
+				host = host,
+				options = { source_filetype = "python" },
+			}
+		else
+			cb {
+				type = "executable",
+				command = debugpyPython,
+				args = { "-m", "debugpy.adapter" },
+				options = { source_filetype = "python" },
+			}
+		end
+	end
+
+	require("dap").configurations.python = {
 		{
-			type = "pwa-node",
+			type = "python", -- match with `dap.adapters.python`
 			request = "launch",
 			name = "Launch file",
+
+			-- debugpy options https://github.com/microsoft/debugpy/wiki/Debug-configuration-settings
 			program = "${file}",
-			cwd = "${workspaceFolder}",
+			pythonPath = function()
+				-- debugpy supports launching an application with a different
+				-- interpreter then the one used to launch debugpy itself.
+				local cwd = vim.fn.getcwd()
+				if vim.fn.executable(cwd .. "/venv/bin/python") == 1 then
+					return cwd .. "/venv/bin/python"
+				elseif vim.fn.executable(cwd .. "/.venv/bin/python") == 1 then
+					return cwd .. "/.venv/bin/python"
+				else
+					return debugpyPython
+				end
+			end,
 		},
 	}
-	config.typescript = config.javascript
 end
+
+--------------------------------------------------------------------------------
 
 return {
 	"mfussenegger/nvim-dap",
 	init = function() vim.g.whichkeyAddSpec { "<leader>d", group = "󰃤 Debugger" } end,
 	keys = {
-		{ "6", function() require("dap").step_over() end, desc = " Step over" },
 		{ "7", function() require("dap").continue() end, desc = " Continue" },
 		{ "8", function() require("dap").toggle_breakpoint() end, desc = " Toggle breakpoint" },
 
-		{ "<leader>do", function() require("dap").step_out() end, desc = "󰆸 Step out" },
 		{ "<leader>di", function() require("dap").step_in() end, desc = "󰆹 Step in" },
+		{ "<leader>dI", function() require("dap").step_out() end, desc = "󰆸 Step out" },
+		{ "<leader>do", function() require("dap").step_over() end, desc = " Step over" },
 		{ "<leader>dc", function() require("dap").run_to_cursor() end, desc = "󰆿 Run to cursor" },
+
 		{ "<leader>dR", function() require("dap").restart() end, desc = " Restart" },
 		{ "<leader>dq", function() require("dap").terminate() end, desc = " Quit" },
-		{ "<leader>db", function() require("dap").list_breakpoints() end, desc = " Breakpoints to qf" },
+
+		{
+			"<leader>db",
+			function()
+				require("dap").list_breakpoints()
+				vim.cmd.cfirst()
+			end,
+			desc = " Breakpoints to qf",
+		},
 		-- stylua: ignore
 		{ "<leader>dd", function() require("dap").clear_breakpoints() end, desc = "󰅗 Delete breakpoints" },
 
@@ -80,7 +138,7 @@ return {
 		})
 
 		-- ADAPTERS
-		setupNodeAdapter()
+		setupAdapters()
 
 		-- DAP-VIRTUAL-TEXT autostart
 		pcall(require, "nvim-dap-virtual-text")
@@ -96,6 +154,7 @@ return {
 			vim.opt.number = false
 			vim.diagnostic.enable(true)
 			if vim.g.dap_sidebar then vim.g.dap_sidebar.close() end
+			require("dap").repl.close()
 		end
 		listeners.event_exited["dap"] = listeners.event_terminated["dap"]
 
