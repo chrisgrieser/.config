@@ -35,6 +35,7 @@ end
 
 return {
 	"mfussenegger/nvim-dap",
+	init = function() vim.g.whichkeyAddSpec { "<leader>d", group = "󰃤 Debugger" } end,
 	keys = {
 		{ "6", function() require("dap").step_over() end, desc = " Step over" },
 		{ "7", function() require("dap").continue() end, desc = " Continue" },
@@ -58,12 +59,11 @@ return {
 			"<leader>ds",
 			function()
 				local widgets = require("dap.ui.widgets")
-				widgets.sidebar(widgets.scopes).open()
+				widgets.sidebar(widgets.scopes).toggle()
 			end,
-			desc = "Scopes",
+			desc = " Scopes",
 		},
 	},
-	init = function() vim.g.whichkeyAddSpec { "<leader>d", group = "󰃤 Debugger" } end,
 	config = function()
 		-- ICONS & HIGHLIGHTS
 		vim.fn.sign_define("DapBreakpoint", { text = "", texthl = "DiagnosticInfo" })
@@ -77,21 +77,20 @@ return {
 			numhl = "DiagnosticVirtualTextHint",
 		})
 
+		-- DAP-VIRTUAL-TEXT autostart
+		pcall(require, "nvim-dap-virtual-text")
+
 		-- LISTENERS
-		local listeners = require("dap").listeners.after
-		-- start nvim-dap-virtual-text
-		listeners.attach["dapVirtText"] = function()
-			local installed, dapVirtText = pcall(require, "nvim-dap-virtual-text")
-			if installed then dapVirtText.enable() end
-		end
-		-- enable/disable diagnostics & line numbers
-		listeners.attach["dapItself"] = function()
+		-- auto-toggle widgets, and line numbers, and diagnostics
+		require("dap").listeners.after.initialize["dap"] = function()
 			vim.opt.number = true
 			vim.diagnostic.enable(false)
 		end
-		listeners.disconnect["dapItself"] = function()
+		require("dap").listeners.after.terminate["dap"] = function()
 			vim.opt.number = false
 			vim.diagnostic.enable(true)
+			local widgets = require("dap.ui.widgets")
+			widgets.sidebar(widgets.scopes).close()
 		end
 
 		-- LUALINE COMPONENTS
@@ -113,10 +112,6 @@ return {
 		}, "before")
 
 		-- status
-		vim.g.lualineAdd("tabline", "lualine_z", function()
-			local status = require("dap").status()
-			if status == "" then return "" end
-			return "󰃤 " .. status
-		end)
+		vim.g.lualineAdd("tabline", "lualine_z", { require("dap").status, icon = "󰃤" })
 	end,
 }

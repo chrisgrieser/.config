@@ -395,7 +395,7 @@ keymap({ "n", "x", "i" }, "<D-w>", function()
 	if bufCount == 1 then
 		vim.notify("Only one buffer open.", vim.log.levels.TRACE)
 	else
-		vim.cmd.bdelete()
+		vim.cmd.bwipeout()
 	end
 end, { desc = "󰽙 Close window/buffer" })
 
