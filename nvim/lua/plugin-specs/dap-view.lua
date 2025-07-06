@@ -16,8 +16,9 @@ return {
 		auto_toggle = false,
 		winbar = {
 			-- stylua: ignore
-			sections = { "scopes", "breakpoints", "watches", "exceptions", "threads", "repl" },
+			sections = { "scopes", "breakpoints", "watches", "exceptions", "threads", "repl", "console" },
 			default_section = "scopes",
+			controls = { enabled = true },
 		},
 		windows = { height = 12, position = "below" },
 	},
