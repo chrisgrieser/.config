@@ -47,7 +47,7 @@ return {
 		{ "<leader>do", function() require("dap").step_out() end, desc = "󰆸 Step out" },
 		{ "<leader>di", function() require("dap").step_in() end, desc = "󰆹 Step in" },
 		{ "<leader>dc", function() require("dap").run_to_cursor() end, desc = "󰆿 Run to cursor" },
-		{ "<leader>dr", function() require("dap").restart() end, desc = " Restart" },
+		{ "<leader>dR", function() require("dap").restart() end, desc = " Restart" },
 		{ "<leader>dq", function() require("dap").terminate() end, desc = " Quit" },
 		-- stylua: ignore
 		{ "<leader>dd", function() require("dap").clear_breakpoints() end, desc = "󰅗 Delete breakpoints" },
@@ -61,8 +61,9 @@ return {
 				local widgets = require("dap.ui.widgets")
 				widgets.sidebar(widgets.scopes).toggle()
 			end,
-			desc = " Scopes",
+			desc = " Scopes",
 		},
+		{ "<leader>dr", function() require("dap").repl.toggle() end, desc = " Repl" },
 	},
 	config = function()
 		-- ICONS & HIGHLIGHTS
