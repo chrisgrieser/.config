@@ -80,7 +80,7 @@ do
 	-- stylua: ignore
 	keymap("n", leader .. "m", function() require("personal-plugins.marks").cycleMarks() end, { desc = "󰃀 Cycle marks" })
 	-- stylua: ignore
-	keymap("n", leader .. "<BS>", function() require("personal-plugins.marks").deleteAllMarks() end, { desc = "󰃆 Delete marks" })
+	keymap("n", leader .. "r", function() require("personal-plugins.marks").deleteAllMarks() end, { desc = "󰃆 Delete marks" })
 
 	for _, mark in pairs(require("personal-plugins.marks").config.marks) do
 		-- stylua: ignore
@@ -152,7 +152,7 @@ keymap("i", "<S-Tab>", "<C-d>", { desc = "󰉵 outdent", unique = false })
 -- QUICKFIX
 keymap("n", "gq", "<cmd>silent cnext<CR>zv", { desc = "󰴩 Next quickfix" })
 keymap("n", "gQ", "<cmd>silent cprev<CR>zv", { desc = "󰴩 Prev quickfix" })
-keymap("n", "<leader>q<BS>", function() vim.cmd.cexpr("[]") end, { desc = "󰚃 Delete qf-list" })
+keymap("n", "<leader>qr", function() vim.cmd.cexpr("[]") end, { desc = "󰚃 Delete qf-list" })
 
 --------------------------------------------------------------------------------
 -- FOLDING
