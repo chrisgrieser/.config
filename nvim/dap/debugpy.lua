@@ -1,8 +1,11 @@
--- DOCS https://codeberg.org/mfussenegger/nvim-dap/wiki/Debug-Adapter-installation#python
--- also look at: https://github.com/mfussenegger/nvim-dap-python/blob/master/lua/dap-python.lua
+-- DOCS 
+-- https://codeberg.org/mfussenegger/nvim-dap/wiki/Debug-Adapter-installation#python
+-- https://github.com/mfussenegger/nvim-dap-python/blob/master/lua/dap-python.lua
 -----------------------------------------------------------------------------
 
 local debugpyPython = vim.env.MASON .. "/packages/debugpy/venv/bin/python"
+
+--------------------------------------------------------------------------------
 
 require("dap").adapters.python = function(cb, config)
 	if config.request == "attach" then
@@ -36,8 +39,7 @@ require("dap").configurations.python = {
 			-- debugpy supports launching an application with a different
 			-- interpreter then the one used to launch debugpy itself.
 			local venvPython = vim.fn.getcwd() .. "/.venv/bin/python"
-			return (vim.fn.executable(venvPython) == 1 and venvPython or debugpyPython)
+			return vim.fn.executable(venvPython) == 1 and venvPython or debugpyPython
 		end,
 	},
 }
-

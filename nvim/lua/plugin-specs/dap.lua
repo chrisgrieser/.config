@@ -1,11 +1,8 @@
--- vim: foldlevel=2
---------------------------------------------------------------------------------
-
 ---@param dir "next"|"prev"
 local function gotoBreakpoint(dir)
 	local breakpoints = require("dap.breakpoints").get()
 	if #breakpoints == 0 then
-		vim.notify("No breakpoints set", vim.log.levels.WARN)
+		vim.notify("No breakpoints set", vim.log.levels.WARN, { icon = "󰃤", "dap" })
 		return
 	end
 	local points = {}
@@ -66,7 +63,7 @@ return {
 		{ "<leader>dq", function() require("dap").terminate() end, desc = " Quit" },
 
 		-- stylua: ignore
-		{ "<leader>dr", function() require("dap").clear_breakpoints() end, desc = "󰅗 Delete breakpoints" },
+		{ "<leader>dr", function() require("dap").clear_breakpoints() end, desc = "󰅗 Remove all breakpoints" },
 
 		-- stylua: ignore
 		{ "<leader>dh", function() require("dap.ui.widgets").hover() end, desc = "󰫧 Hover variable" },
@@ -89,7 +86,7 @@ return {
 		{ "<leader>dt", function() require("dap").repl.toggle() end, desc = " Terminal" },
 	},
 	config = function()
-		-- ICONS & HIGHLIGHTS
+		-- SIGNS & HIGHLIGHTS
 		vim.fn.sign_define("DapBreakpoint", { text = "", texthl = "DiagnosticInfo" })
 		vim.fn.sign_define("DapBreakpointCondition", { text = "", texthl = "DiagnosticInfo" })
 		vim.fn.sign_define("DapBreakpointRejected", { text = "", texthl = "DiagnosticInfo" })
@@ -97,25 +94,18 @@ return {
 		-- stylua: ignore
 		vim.fn.sign_define("DapStopped", { text = "", texthl = "DiagnosticHint", linehl = "DiagnosticVirtualTextHint" })
 
-		-- ADAPTERS
+		-- ADAPTERS – load from `dap` directory
 		local adaptersDir = vim.fn.stdpath("config") .. "/dap"
 		for name, _ in vim.fs.dir(adaptersDir) do
 			if name:sub(-4) == ".lua" then dofile(adaptersDir .. "/" .. name) end
 		end
 
-		-- DAP-VIRTUAL-TEXT autostart
+		-- DAP-VIRTUAL-TEXT – autostart
 		pcall(require, "nvim-dap-virtual-text")
 
-		-- LISTENERS
-		-- auto-toggle widgets, and line numbers, and diagnostics
+		-- LISTENERS – autoclose widgets
 		local listeners = require("dap").listeners.after
-		listeners.event_initialized["dap"] = function()
-			vim.opt.number = true
-			vim.diagnostic.enable(false)
-		end
 		listeners.event_terminated["dap"] = function()
-			vim.opt.number = false
-			vim.diagnostic.enable(true)
 			if vim.g.dap_sidebar then vim.g.dap_sidebar.close() end
 			require("dap").repl.close()
 		end
