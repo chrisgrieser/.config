@@ -15,7 +15,7 @@ function writeToFile(filepath, text) {
 
 const fileExists = (/** @type {string} */ filePath) => Application("Finder").exists(Path(filePath));
 
-// `Application("Finder").open` does sometimes have permission issues
+// Using `open`, since `Application("Finder").open` does sometimes have permission issues
 const openFile = (/** @type {string} */ path) => app.doShellScript(`open "${path}"`);
 
 //──────────────────────────────────────────────────────────────────────────────
@@ -47,10 +47,10 @@ function run(argv) {
 		return isDoc && !isChangelog && !otherCruff;
 	});
 	if (!docFile) return "No :help found for this repo.";
-	const docURL = `https://raw.githubusercontent.com/${repo}/${branch}/${docFile.path}`;
+	const docUrl = `https://raw.githubusercontent.com/${repo}/${branch}/${docFile.path}`;
 
 	// download vimdoc & convert to html
-	writeToFile(vimdocPath, httpRequest(docURL));
+	writeToFile(vimdocPath, httpRequest(docUrl));
 	app.doShellScript(`python3 vimdoc2html/vimdoc2html.py "${vimdocPath}"`);
 	openFile(htmlPath);
 }

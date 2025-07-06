@@ -33,6 +33,5 @@ require("dap").configurations.lua = {
 			lua = luaVersion,
 			file = "${file}",
 		},
-		args = {},
 	},
 }

@@ -442,7 +442,7 @@ keymap("n", "<leader>rq", function()
 end, { desc = " Switch quotes in line" })
 
 do
-	local function retabber(use) ---@param use "spaces"|"tabs"
+	local function retabber(use)
 		vim.bo.expandtab = use == "spaces"
 		vim.bo.shiftwidth = 2
 		vim.bo.tabstop = 3
