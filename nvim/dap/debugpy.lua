@@ -3,7 +3,6 @@
 -----------------------------------------------------------------------------
 
 local debugpyPython = vim.env.MASON .. "/packages/debugpy/venv/bin/python"
-vim.notify("🪚 ⭐")
 
 require("dap").adapters.python = function(cb, config)
 	if config.request == "attach" then
