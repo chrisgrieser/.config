@@ -1,16 +1,17 @@
+-- vim: foldlevel=1
+--------------------------------------------------------------------------------
+
 local function setupAdapters()
 	-- JS-ADAPTER
 	-- DOCS https://codeberg.org/mfussenegger/nvim-dap/wiki/Debug-Adapter-installation#vscode-js-debug
+	local jsDebugAdapterPath = vim.env.MASON .. "/packages/js-debug-adapter/js-debug/src/dapDebugServer.js"
 	require("dap").adapters["pwa-node"] = {
 		type = "server",
 		host = "localhost",
 		port = "${port}",
 		executable = {
 			command = "node",
-			args = {
-				vim.env.MASON .. "/packages/js-debug-adapter/js-debug/src/dapDebugServer.js",
-				"${port}",
-			},
+			args = { jsDebugAdapterPath, "${port}" },
 		},
 	}
 	-- INFO for typescript may require extra setup with source-maps
