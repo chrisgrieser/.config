@@ -63,7 +63,7 @@ return {
 		{ "<leader>lc", function() require("chainsaw").clearLog() end, desc = "󰃢 clear console" },
 
 		-- stylua: ignore start
-		{ "<leader>l<BS>", function() require("chainsaw").removeLogs() end, mode = {"n","x"}, desc = "󰅗 remove logs" },
+		{ "<leader>lr", function() require("chainsaw").removeLogs() end, mode = {"n","x"}, desc = "󰅗 remove logs" },
 		{
 			"<leader>lg",
 			function()

@@ -65,14 +65,8 @@ local function setupAdapters()
 			pythonPath = function()
 				-- debugpy supports launching an application with a different
 				-- interpreter then the one used to launch debugpy itself.
-				local cwd = vim.fn.getcwd()
-				if vim.fn.executable(cwd .. "/venv/bin/python") == 1 then
-					return cwd .. "/venv/bin/python"
-				elseif vim.fn.executable(cwd .. "/.venv/bin/python") == 1 then
-					return cwd .. "/.venv/bin/python"
-				else
-					return debugpyPython
-				end
+				local venvPython = vim.fn.getcwd() .. "/.venv/bin/python"
+				return (vim.fn.executable(venvPython) == 1 and venvPython or debugpyPython)
 			end,
 		},
 	}
@@ -87,20 +81,19 @@ return {
 		{ "7", function() require("dap").continue() end, desc = " Continue" },
 		{ "8", function() require("dap").toggle_breakpoint() end, desc = " Toggle breakpoint" },
 		{
-			"<leader>dd",
+			"<leader>dc",
 			function()
 				vim.ui.input({ prompt = " Breakpoint condition" }, function(input)
-					if not input then return end
-					require("dap").set_breakpoint(input)
+					if input then require("dap").set_breakpoint(input) end
 				end)
 			end,
 			desc = " Conditional breakpoint",
 		},
+		{ "<leader>dd", function() require("dap").run_to_cursor() end, desc = "󰆿 Run to cursor" },
 
 		{ "<leader>di", function() require("dap").step_in() end, desc = "󰆹 Step in" },
 		{ "<leader>dI", function() require("dap").step_out() end, desc = "󰆸 Step out" },
 		{ "<leader>do", function() require("dap").step_over() end, desc = " Step over" },
-		{ "<leader>dc", function() require("dap").run_to_cursor() end, desc = "󰆿 Run to cursor" },
 
 		{ "<leader>dR", function() require("dap").restart() end, desc = " Restart" },
 		{ "<leader>dq", function() require("dap").terminate() end, desc = " Quit" },
@@ -114,7 +107,7 @@ return {
 			desc = " Breakpoints to qf",
 		},
 		-- stylua: ignore
-		{ "<leader>d<BS>", function() require("dap").clear_breakpoints() end, desc = "󰅗 Delete breakpoints" },
+		{ "<leader>dr", function() require("dap").clear_breakpoints() end, desc = "󰅗 Delete breakpoints" },
 
 		-- stylua: ignore
 		{ "<leader>dh", function() require("dap.ui.widgets").hover() end, desc = "󰫧 Hover variable" },
@@ -134,7 +127,7 @@ return {
 			end,
 			desc = " Scopes sidebar",
 		},
-		{ "<leader>dr", function() require("dap").repl.toggle() end, desc = " Repl" },
+		{ "<leader>dt", function() require("dap").repl.toggle() end, desc = " Terminal" },
 	},
 	config = function()
 		-- ICONS & HIGHLIGHTS
