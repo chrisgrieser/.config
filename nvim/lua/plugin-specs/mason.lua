@@ -37,6 +37,7 @@ local ensureInstalled = {
 	},
 	debuggers = {
 		"debugpy", -- python debugger (via nvim-dap-python)
+		"js-debug-adapter",
 	},
 }
 

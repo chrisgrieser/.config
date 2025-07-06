@@ -15,7 +15,8 @@ function writeToFile(filepath, text) {
 
 const fileExists = (/** @type {string} */ filePath) => Application("Finder").exists(Path(filePath));
 
-const openFile = (/** @type {string} */ path) => Application("Finder").open(Path(path));
+// `Application("Finder").open` does sometimes have permission issues
+const openFile = (/** @type {string} */ path) => app.doShellScript(`open "${path}"`);
 
 //──────────────────────────────────────────────────────────────────────────────
 
