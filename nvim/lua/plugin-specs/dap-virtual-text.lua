@@ -11,6 +11,6 @@ return {
 		dapVirtText.setup(opts)
 
 		-- auto-enable
-		require("dap").listeners.after.initialize["dapVirtText"] = dapVirtText.enable
+		require("dap").listeners.after.initialize["nvim-dap-virtual-text"] = dapVirtText.enable
 	end,
 }
