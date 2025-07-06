@@ -13,5 +13,6 @@ return {
 		-- auto-enable and auto-disable
 		require("dap").listeners.after.initialize["dapVirtText"] = dapVirtText.enable
 		require("dap").listeners.after.terminate["dapVirtText"] = dapVirtText.disable
+		require("dap").listeners.after.disconnect["dapVirtText"] = dapVirtText.disable
 	end,
 }
