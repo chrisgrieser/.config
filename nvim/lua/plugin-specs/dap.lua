@@ -33,6 +33,31 @@ local function gotoBreakpoint(dir)
 	vim.cmd(("buffer +%d %d"):format(nextPoint.line, nextPoint.bufnr))
 end
 
+local function setupAdapters()
+	require("dap").adapters["pwa-node"] = {
+		type = "server",
+		host = "localhost",
+		port = "${port}",
+		executable = {
+			command = "node",
+			args = {
+				vim.env.MASON .. "/packages/js-debug-adapter/js-debug/src/dapDebugServer.js",
+				"${port}",
+			},
+		},
+	}
+	require("dap").configurations.javascript = {
+		{
+			type = "pwa-node",
+			request = "launch",
+			name = "Launch file",
+			program = "${file}",
+			cwd = "${workspaceFolder}",
+		},
+	}
+	require("dap").configurations.typescript = require("dap").configurations.javascript
+end
+
 return {
 	"mfussenegger/nvim-dap",
 	init = function() vim.g.whichkeyAddSpec { "<leader>d", group = "󰃤 Debugger" } end,
@@ -58,8 +83,13 @@ return {
 		{
 			"<leader>ds",
 			function()
-				local widgets = require("dap.ui.widgets")
-				widgets.sidebar(widgets.scopes).toggle()
+				if not vim.g.dap_sidebar then
+					local widgets = require("dap.ui.widgets")
+					vim.g.dap_sidebar = widgets.sidebar(widgets.scopes, { width = 20 })
+				else
+					vim.g.dap_sidebar.close()
+					vim.g.dap_sidebar = nil
+				end
 			end,
 			desc = " Scopes",
 		},
@@ -69,14 +99,17 @@ return {
 		-- ICONS & HIGHLIGHTS
 		vim.fn.sign_define("DapBreakpoint", { text = "", texthl = "DiagnosticInfo" })
 		vim.fn.sign_define("DapBreakpointCondition", { text = "󰇽", texthl = "DiagnosticInfo" })
+		vim.fn.sign_define("DapBreakpointRejected", { text = "", texthl = "DiagnosticInfo" })
 		vim.fn.sign_define("DapLogPoint", { text = "󰍩", texthl = "DiagnosticInfo" })
-		vim.fn.sign_define("DapLogRejected", { text = "", texthl = "DiagnosticInfo" })
 		vim.fn.sign_define("DapStopped", {
 			text = "󰳟",
 			texthl = "DiagnosticHint",
 			linehl = "DiagnosticVirtualTextHint",
 			numhl = "DiagnosticVirtualTextHint",
 		})
+
+		-- ADAPTERS
+		setupAdapters()
 
 		-- DAP-VIRTUAL-TEXT autostart
 		pcall(require, "nvim-dap-virtual-text")
@@ -88,13 +121,12 @@ return {
 			vim.opt.number = true
 			vim.diagnostic.enable(false)
 		end
-		listeners.terminate["dap"] = function ()
+		listeners.event_terminated["dap"] = function()
 			vim.opt.number = false
 			vim.diagnostic.enable(true)
 			local widgets = require("dap.ui.widgets")
 			widgets.sidebar(widgets.scopes).close()
 		end
-		listeners.disconnect["dap"] = listeners.terminate["dap"]
 
 		-- LUALINE COMPONENTS
 		-- breakpoint count
