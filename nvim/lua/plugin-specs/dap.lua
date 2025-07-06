@@ -1,9 +1,3 @@
--- TODO check out 
--- https://github.com/miroshQa/debugmaster.nvim
--- https://github.com/igorlfs/nvim-dap-view
---------------------------------------------------------------------------------
-
-
 return {
 	"mfussenegger/nvim-dap",
 	keys = {
@@ -18,6 +12,8 @@ return {
 		{ "<leader>dt", function() require("dap").terminate() end, desc = " Terminate" },
 		-- stylua: ignore
 		{ "<leader>dd", function() require("dap").clear_breakpoints() end, desc = "󰅗 Delete breakpoints" },
+		-- stylua: ignore
+		{ "<leader>dh", function() require("dap.ui.widgets").hover() end, desc = "󰫧 Hover variable" },
 	},
 	init = function() vim.g.whichkeyAddSpec { "<leader>d", group = "󰃤 Debugger" } end,
 	config = function()
@@ -36,12 +32,12 @@ return {
 		-- LISTENERS
 		local listeners = require("dap").listeners.after
 		-- start nvim-dap-virtual-text
-		listeners.attach.dapVirtText = function()
+		listeners.attach["dapVirtText"] = function()
 			local installed, dapVirtText = pcall(require, "nvim-dap-virtual-text")
 			if installed then dapVirtText.enable() end
 		end
 		-- enable/disable diagnostics & line numbers
-		listeners.attach.dapItself = function()
+		listeners.attach."dapItself" = function()
 			vim.opt.number = true
 			vim.diagnostic.enable(false)
 		end

@@ -202,7 +202,8 @@ function M.quitApps(appNames)
 	end
 end
 
----close all tabs which contain urlPart
+---close all tabs instead of closing all windows to avoid confirmation prompt
+---"do you really want to x tabs?"
 ---@param urlPart string
 function M.closeBrowserTabsWith(urlPart)
 	local browser = "Brave Browser"
@@ -237,8 +238,6 @@ function M.closeAllTheThings()
 		if win:isFullScreen() then win:setFullScreen(false) end
 	end
 
-	-- close all tabs instead of closing all windows to avoid confirmation prompt
-	-- "do you really want to x tabs?"
 	M.closeBrowserTabsWith(".")
 	require("win-management.auto-tile").resetWinCount("Brave Browser")
 

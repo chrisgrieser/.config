@@ -16,9 +16,9 @@ local function dockSwitcher(dockToUse)
 	u.openUrlInBg(alfredUri)
 end
 
-local function isWeekend()
+local function isWorkWeek()
 	local weekday = tostring(os.date("%a"))
-	return weekday == "Sat" or weekday == "Sun"
+	return weekday ~= "Sat" and weekday ~= "Sun"
 end
 
 local function autoSetBrightness()
@@ -84,23 +84,17 @@ local function workLayout(displayAlreadyDarkened)
 
 	u.closeAllTheThings()
 
-	u.openApps { "Ivory", "Mimestream", "AlfredExtraPane" }
-	if not isWeekend() then u.openApps("Slack") end
-	u.whenAppWinAvailable(
-		"Mimestream",
-		function()
-			hs.layout.apply {
-				{ "Slack", nil, wu.iMacDisplay, wu.pseudoMax },
-				{ "Mimestream", nil, wu.iMacDisplay, wu.pseudoMax },
-				{ "Brave Browser", nil, wu.iMacDisplay, wu.pseudoMax },
-			}
-		end
-	)
-	u.whenAppWinAvailable("Ivory", function()
-		u.defer(1, function()
-			local mastoWin = u.app("Ivory"):mainWindow()
-			mastoWin:setFrame(wu.toTheSide)
-		end)
+	u.openApps { "Ivory", "Mimestream", "AlfredExtraPane", isWorkWeek() and "Slack" or nil }
+	u.defer(1, function()
+		local mastoWin = u.app("Ivory"):mainWindow()
+		mastoWin:setFrame(wu.toTheSide)
+
+		local layout = {
+			{ "Mimestream", nil, wu.iMacDisplay, wu.pseudoMax },
+			{ "Brave Browser", nil, wu.iMacDisplay, wu.pseudoMax },
+			isWorkWeek() and { "Slack", nil, wu.iMacDisplay, wu.pseudoMax } or nil,
+		}
+		hs.layout.apply(layout)
 	end)
 
 	print("🔲 Loaded work layout")
@@ -116,8 +110,7 @@ local function movieLayout()
 	-- turn off showing hidden files
 	hs.execute("defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder")
 
-	u.openApps("YouTube")
-	if env.isAtHome then u.openApps("BetterTouchTool") end
+	u.openApps { "YouTube", env.isAtHome and "BetterTouchTool" or nil }
 	u.quitApps {
 		"Signal",
 		"Slack",
