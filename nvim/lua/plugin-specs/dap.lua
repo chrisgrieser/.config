@@ -1,75 +1,39 @@
--- vim: foldlevel=1
+-- vim: foldlevel=2
 --------------------------------------------------------------------------------
 
-local function setupAdapters()
-	-- JS-ADAPTER
-	-- DOCS https://codeberg.org/mfussenegger/nvim-dap/wiki/Debug-Adapter-installation#vscode-js-debug
-	local jsDebugAdapterPath = vim.env.MASON
-		.. "/packages/js-debug-adapter/js-debug/src/dapDebugServer.js"
-	require("dap").adapters["pwa-node"] = {
-		type = "server",
-		host = "localhost",
-		port = "${port}",
-		executable = {
-			command = "node",
-			args = { jsDebugAdapterPath, "${port}" },
-		},
-	}
-	-- INFO for typescript may require extra setup with source-maps
-	for _, jsLang in pairs { "javascript", "typescript" } do
-		require("dap").configurations[jsLang] = {
-			{
-				type = "pwa-node", -- matches `dap.adapters.pwa-node`
-				request = "launch",
-				name = "Launch file",
-				program = "${file}",
-				cwd = "${workspaceFolder}",
-			},
-		}
+---@param dir "next"|"prev"
+local function gotoBreakpoint(dir)
+	local breakpoints = require("dap.breakpoints").get()
+	if #breakpoints == 0 then
+		vim.notify("No breakpoints set", vim.log.levels.WARN)
+		return
 	end
-
-	-----------------------------------------------------------------------------
-	-- DEBUGPY
-	-- DOCS https://codeberg.org/mfussenegger/nvim-dap/wiki/Debug-Adapter-installation#python
-	-- also look at: https://github.com/mfussenegger/nvim-dap-python/blob/master/lua/dap-python.lua
-	local debugpyPython = vim.env.MASON .. "/packages/debugpy/venv/bin/python"
-
-	require("dap").adapters.python = function(cb, config)
-		if config.request == "attach" then
-			local port = (config.connect or config).port
-			local host = (config.connect or config).host or "127.0.0.1"
-			cb {
-				type = "server",
-				port = assert(port, "`connect.port` is required for a python `attach` configuration"),
-				host = host,
-				options = { source_filetype = "python" },
-			}
-		else
-			cb {
-				type = "executable",
-				command = debugpyPython,
-				args = { "-m", "debugpy.adapter" },
-				options = { source_filetype = "python" },
-			}
+	local points = {}
+	for bufnr, buffer in pairs(breakpoints) do
+		for _, point in ipairs(buffer) do
+			table.insert(points, { bufnr = bufnr, line = point.line })
 		end
 	end
 
-	require("dap").configurations.python = {
-		{
-			type = "python", -- match with `dap.adapters.python`
-			request = "launch",
-			name = "Launch file",
-
-			-- debugpy options https://github.com/microsoft/debugpy/wiki/Debug-configuration-settings
-			program = "${file}",
-			pythonPath = function()
-				-- debugpy supports launching an application with a different
-				-- interpreter then the one used to launch debugpy itself.
-				local venvPython = vim.fn.getcwd() .. "/.venv/bin/python"
-				return (vim.fn.executable(venvPython) == 1 and venvPython or debugpyPython)
-			end,
-		},
+	local current = {
+		bufnr = vim.api.nvim_get_current_buf(),
+		line = vim.api.nvim_win_get_cursor(0)[1],
 	}
+
+	local nextPoint
+	for i = 1, #points do
+		local isAtBreakpointI = points[i].bufnr == current.bufnr and points[i].line == current.line
+		if isAtBreakpointI then
+			local nextIdx = dir == "next" and i + 1 or i - 1
+			if nextIdx > #points then nextIdx = 1 end
+			if nextIdx == 0 then nextIdx = #points end
+			nextPoint = points[nextIdx]
+			break
+		end
+	end
+	if not nextPoint then nextPoint = points[1] end
+
+	vim.cmd(("buffer +%d %d"):format(nextPoint.line, nextPoint.bufnr))
 end
 
 --------------------------------------------------------------------------------
@@ -91,6 +55,9 @@ return {
 		},
 		{ "<leader>dd", function() require("dap").run_to_cursor() end, desc = "󰆿 Run to cursor" },
 
+		{ "gb", function() gotoBreakpoint("next") end, desc = " Goto next breakpoint" },
+		{ "gB", function() gotoBreakpoint("prev") end, desc = " Goto previous breakpoint" },
+
 		{ "<leader>di", function() require("dap").step_in() end, desc = "󰆹 Step in" },
 		{ "<leader>dI", function() require("dap").step_out() end, desc = "󰆸 Step out" },
 		{ "<leader>do", function() require("dap").step_over() end, desc = " Step over" },
@@ -98,14 +65,6 @@ return {
 		{ "<leader>dR", function() require("dap").restart() end, desc = " Restart" },
 		{ "<leader>dq", function() require("dap").terminate() end, desc = " Quit" },
 
-		{
-			"<leader>db",
-			function()
-				require("dap").list_breakpoints()
-				vim.cmd.cfirst()
-			end,
-			desc = " Breakpoints to qf",
-		},
 		-- stylua: ignore
 		{ "<leader>dr", function() require("dap").clear_breakpoints() end, desc = "󰅗 Delete breakpoints" },
 
@@ -143,7 +102,10 @@ return {
 		})
 
 		-- ADAPTERS
-		setupAdapters()
+		local adaptersDir = vim.fn.stdpath("config") .. "/dap"
+		for name, _ in vim.fs.dir(adaptersDir) do
+			if name:sub(-4) == ".lua" then dofile(adaptersDir .. "/" .. name) end
+		end
 
 		-- DAP-VIRTUAL-TEXT autostart
 		pcall(require, "nvim-dap-virtual-text")

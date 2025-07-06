@@ -36,8 +36,9 @@ local ensureInstalled = {
 		"stylua", -- lua formatter (via efm)
 	},
 	debuggers = {
-		"debugpy", -- python debugger (via nvim-dap-python)
-		"js-debug-adapter",
+		"debugpy", -- python
+		"js-debug-adapter", -- js/ts
+		"local-lua-debugger-vscode", -- lua
 	},
 }
 
