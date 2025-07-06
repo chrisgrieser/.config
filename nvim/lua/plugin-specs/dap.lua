@@ -83,16 +83,18 @@ return {
 
 		-- LISTENERS
 		-- auto-toggle widgets, and line numbers, and diagnostics
-		require("dap").listeners.after.initialize["dap"] = function()
+		local listeners = require("dap").listeners.after
+		listeners.initialize["dap"] = function()
 			vim.opt.number = true
 			vim.diagnostic.enable(false)
 		end
-		require("dap").listeners.after.terminate["dap"] = function()
+		listeners.terminate["dap"] = function ()
 			vim.opt.number = false
 			vim.diagnostic.enable(true)
 			local widgets = require("dap.ui.widgets")
 			widgets.sidebar(widgets.scopes).close()
 		end
+		listeners.disconnect["dap"] = listeners.terminate["dap"]
 
 		-- LUALINE COMPONENTS
 		-- breakpoint count
