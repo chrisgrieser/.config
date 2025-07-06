@@ -1,39 +1,5 @@
----@param dir "next"|"prev"
-local function gotoBreakpoint(dir)
-	local breakpoints = require("dap.breakpoints").get()
-	if #breakpoints == 0 then
-		vim.notify("No breakpoints set", vim.log.levels.WARN)
-		return
-	end
-	local points = {}
-	for bufnr, buffer in pairs(breakpoints) do
-		for _, point in ipairs(buffer) do
-			table.insert(points, { bufnr = bufnr, line = point.line })
-		end
-	end
-
-	local current = {
-		bufnr = vim.api.nvim_get_current_buf(),
-		line = vim.api.nvim_win_get_cursor(0)[1],
-	}
-
-	local nextPoint
-	for i = 1, #points do
-		local isAtBreakpointI = points[i].bufnr == current.bufnr and points[i].line == current.line
-		if isAtBreakpointI then
-			local nextIdx = dir == "next" and i + 1 or i - 1
-			if nextIdx > #points then nextIdx = 1 end
-			if nextIdx == 0 then nextIdx = #points end
-			nextPoint = points[nextIdx]
-			break
-		end
-	end
-	if not nextPoint then nextPoint = points[1] end
-
-	vim.cmd(("buffer +%d %d"):format(nextPoint.line, nextPoint.bufnr))
-end
-
-local function setupAdapters()
+local function setupNodeAdapter()
+	-- https://codeberg.org/mfussenegger/nvim-dap/wiki/Debug-Adapter-installation#vscode-js-debug
 	require("dap").adapters["pwa-node"] = {
 		type = "server",
 		host = "localhost",
@@ -46,7 +12,12 @@ local function setupAdapters()
 			},
 		},
 	}
-	require("dap").configurations.javascript = {
+	-- INFO for typescript, requires some extra setup with sourcemaps
+	local config = require("dap").configurations
+	for _, jsLang in pairs({ "javascript", "typescript" }) do
+		
+	end
+	require("dap").configurations[] = {
 		{
 			type = "pwa-node",
 			request = "launch",
@@ -55,7 +26,7 @@ local function setupAdapters()
 			cwd = "${workspaceFolder}",
 		},
 	}
-	require("dap").configurations.typescript = require("dap").configurations.javascript
+	config.typescript = config.javascript
 end
 
 return {
@@ -66,14 +37,12 @@ return {
 		{ "7", function() require("dap").continue() end, desc = " Continue" },
 		{ "8", function() require("dap").toggle_breakpoint() end, desc = " Toggle breakpoint" },
 
-		{ "gb", function() gotoBreakpoint("next") end, desc = " Goto next breakpoint" },
-		{ "gB", function() gotoBreakpoint("prev") end, desc = " Goto previous breakpoint" },
-
 		{ "<leader>do", function() require("dap").step_out() end, desc = "󰆸 Step out" },
 		{ "<leader>di", function() require("dap").step_in() end, desc = "󰆹 Step in" },
 		{ "<leader>dc", function() require("dap").run_to_cursor() end, desc = "󰆿 Run to cursor" },
 		{ "<leader>dR", function() require("dap").restart() end, desc = " Restart" },
 		{ "<leader>dq", function() require("dap").terminate() end, desc = " Quit" },
+		{ "<leader>db", function() require("dap").list_breakpoints() end, desc = " Breakpoints to qf" },
 		-- stylua: ignore
 		{ "<leader>dd", function() require("dap").clear_breakpoints() end, desc = "󰅗 Delete breakpoints" },
 
@@ -83,15 +52,17 @@ return {
 		{
 			"<leader>ds",
 			function()
+				local width = math.floor(vim.o.columns * 0.4)
 				if not vim.g.dap_sidebar then
 					local widgets = require("dap.ui.widgets")
-					vim.g.dap_sidebar = widgets.sidebar(widgets.scopes, { width = 20 })
+					vim.g.dap_sidebar = widgets.sidebar(widgets.scopes, { width = width })
+					vim.g.dap_sidebar.open()
 				else
 					vim.g.dap_sidebar.close()
 					vim.g.dap_sidebar = nil
 				end
 			end,
-			desc = " Scopes",
+			desc = " Scopes sidebar",
 		},
 		{ "<leader>dr", function() require("dap").repl.toggle() end, desc = " Repl" },
 	},
@@ -109,7 +80,7 @@ return {
 		})
 
 		-- ADAPTERS
-		setupAdapters()
+		setupNodeAdapter()
 
 		-- DAP-VIRTUAL-TEXT autostart
 		pcall(require, "nvim-dap-virtual-text")
@@ -117,16 +88,16 @@ return {
 		-- LISTENERS
 		-- auto-toggle widgets, and line numbers, and diagnostics
 		local listeners = require("dap").listeners.after
-		listeners.initialize["dap"] = function()
+		listeners.event_initialized["dap"] = function()
 			vim.opt.number = true
 			vim.diagnostic.enable(false)
 		end
 		listeners.event_terminated["dap"] = function()
 			vim.opt.number = false
 			vim.diagnostic.enable(true)
-			local widgets = require("dap.ui.widgets")
-			widgets.sidebar(widgets.scopes).close()
+			if vim.g.dap_sidebar then vim.g.dap_sidebar.close() end
 		end
+		listeners.event_exited["dap"] = listeners.event_terminated["dap"]
 
 		-- LUALINE COMPONENTS
 		-- breakpoint count

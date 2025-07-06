@@ -10,5 +10,7 @@ return {
 		require("dap-python").setup("debugpy-adapter", {
 			console = "internalConsole", -- deactivate auto-opening the console by redirecting to internal console
 		})
+		-- just use the first configuration, so the selection is skipped
+		require("dap").configurations.python = { require("dap").configurations.python[1] }
 	end,
 }
