@@ -47,11 +47,11 @@ return {
 		{
 			"<leader>dc",
 			function()
-				vim.ui.input({ prompt = " Breakpoint condition" }, function(input)
+				vim.ui.input({ prompt = " Breakpoint condition" }, function(input)
 					if input then require("dap").set_breakpoint(input) end
 				end)
 			end,
-			desc = " Conditional breakpoint",
+			desc = " Conditional breakpoint",
 		},
 		{ "<leader>dd", function() require("dap").run_to_cursor() end, desc = "󰆿 Run to cursor" },
 
@@ -91,15 +91,11 @@ return {
 	config = function()
 		-- ICONS & HIGHLIGHTS
 		vim.fn.sign_define("DapBreakpoint", { text = "", texthl = "DiagnosticInfo" })
-		vim.fn.sign_define("DapBreakpointCondition", { text = "󰇽", texthl = "DiagnosticInfo" })
-		vim.fn.sign_define("DapBreakpointRejected", { text = "", texthl = "DiagnosticInfo" })
-		vim.fn.sign_define("DapLogPoint", { text = "󰍩", texthl = "DiagnosticInfo" })
-		vim.fn.sign_define("DapStopped", {
-			text = "󰳟",
-			texthl = "DiagnosticHint",
-			linehl = "DiagnosticVirtualTextHint",
-			numhl = "DiagnosticVirtualTextHint",
-		})
+		vim.fn.sign_define("DapBreakpointCondition", { text = "", texthl = "DiagnosticInfo" })
+		vim.fn.sign_define("DapBreakpointRejected", { text = "", texthl = "DiagnosticInfo" })
+		vim.fn.sign_define("DapLogPoint", { text = "", texthl = "DiagnosticInfo" })
+		-- stylua: ignore
+		vim.fn.sign_define("DapStopped", { text = "", texthl = "DiagnosticHint", linehl = "DiagnosticVirtualTextHint" })
 
 		-- ADAPTERS
 		local adaptersDir = vim.fn.stdpath("config") .. "/dap"
