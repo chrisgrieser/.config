@@ -28,7 +28,7 @@ require("dap").configurations.python = {
 	{
 		type = "python", -- match with `dap.adapters.python`
 		request = "launch",
-		name = "Launch file",
+		name = "debugpy: Launch file",
 
 		-- debugpy options https://github.com/microsoft/debugpy/wiki/Debug-configuration-settings
 		program = "${file}",

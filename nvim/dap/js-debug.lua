@@ -3,6 +3,8 @@
 
 local adapterPath = vim.env.MASON
 	.. "/packages/js-debug-adapter/js-debug/src/dapDebugServer.js"
+local jsLangs = { "javascript", "typescript" }
+--------------------------------------------------------------------------------
 
 require("dap").adapters["pwa-node"] = {
 	type = "server",
@@ -15,12 +17,12 @@ require("dap").adapters["pwa-node"] = {
 }
 
 -- INFO for typescript may require extra setup with source-maps
-for _, jsLang in pairs { "javascript", "typescript" } do
+for _, jsLang in pairs(jsLangs) do
 	require("dap").configurations[jsLang] = {
 		{
 			type = "pwa-node", -- matches `dap.adapters.pwa-node`
 			request = "launch",
-			name = "Launch file",
+			name = "js-debug: Launch file",
 			program = "${file}",
 			cwd = "${workspaceFolder}",
 		},
