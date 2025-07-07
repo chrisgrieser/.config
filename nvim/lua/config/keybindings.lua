@@ -1,4 +1,4 @@
----Ensure keymaps are unique by warning when there are conflicting keymaps
+---Warn when there are conflicting keymaps
 ---@param mode string|string[]
 ---@param lhs string
 ---@param rhs string|function
@@ -12,7 +12,7 @@ local function keymap(mode, lhs, rhs, opts)
 	-- violating `unique=true` throws error; using `pcall` to still load other mappings
 	local success, _ = pcall(vim.keymap.set, mode, lhs, rhs, opts)
 	if not success then
-		local modes = type(mode) == "table" and table.concat(mode, ",") or mode
+		local modes = type(mode) == "table" and table.concat(mode, ", ") or mode
 		local msg = ("[[%s]] %s"):format(modes, lhs)
 		vim.notify(msg, vim.log.levels.WARN, { title = "Duplicate keymap", timeout = false })
 	end
@@ -152,7 +152,7 @@ keymap("i", "<S-Tab>", "<C-d>", { desc = "󰉵 outdent", unique = false })
 -- QUICKFIX
 keymap("n", "gq", "<cmd>silent cnext<CR>zv", { desc = "󰴩 Next quickfix" })
 keymap("n", "gQ", "<cmd>silent cprev<CR>zv", { desc = "󰴩 Prev quickfix" })
-keymap("n", "<leader>qr", function() vim.cmd.cexpr("[]") end, { desc = "󰚃 Delete qf-list" })
+keymap("n", "<leader>qr", function() vim.cmd.cexpr("[]") end, { desc = "󰚃 Remove qf items" })
 
 --------------------------------------------------------------------------------
 -- FOLDING
