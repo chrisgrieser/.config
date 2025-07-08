@@ -1,7 +1,8 @@
 ---@param dir "next"|"prev"
 local function gotoBreakpoint(dir)
 	local breakpoints = require("dap.breakpoints").get()
-	if #breakpoints == 0 then
+	local noBreakpoints = #vim.iter(breakpoints):totable() == 0 -- vim.iter needed for sparse array
+	if noBreakpoints == 0 then
 		vim.notify("No breakpoints set", vim.log.levels.WARN, { icon = "󰃤", "dap" })
 		return
 	end
@@ -35,13 +36,14 @@ end
 
 ---@param type? "scopes"|"frames"|"threads"|"expression"|"sessions"
 local function toggleDapSidebar(type)
-	local width = math.floor(vim.o.columns * 0.4)
+	local relWidth = 0.4
 
 	local function toggle(widget)
 		if not widget then return end
 		if not (vim.g.dap_sidebar and vim.g.dap_sidebar_type == widget) then
 			if vim.g.dap_sidebar then vim.g.dap_sidebar.close() end
 			local widgets = require("dap.ui.widgets")
+			local width = math.floor(vim.o.columns * relWidth)
 			vim.g.dap_sidebar = widgets.sidebar(widgets[widget], { width = width })
 			vim.g.dap_sidebar.open()
 			vim.g.dap_sidebar_type = widget
@@ -117,13 +119,12 @@ return {
 		-- DAP-VIRTUAL-TEXT – autostart
 		pcall(require, "nvim-dap-virtual-text")
 
-		-- LISTENERS – autoclose widgets
+		-- LISTENERS – auto-close widgets
 		local listeners = require("dap").listeners.after
-		listeners.event_terminated["dap"] = function()
-			if vim.g.dap_sidebar then vim.g.dap_sidebar.close() end
-			require("dap").repl.close()
-		end
+		listeners.event_terminated["dap"] = function() vim.notify("Debugger stopped.") end
 		listeners.event_exited["dap"] = listeners.event_terminated["dap"]
+		listeners.disconnect["dap"] = listeners.event_terminated["dap"]
+		listeners.terminate["dap"] = listeners.event_terminated["dap"]
 
 		-- LUALINE COMPONENTS
 		-- breakpoint count
@@ -131,7 +132,8 @@ return {
 			color = vim.fn.sign_getdefined("DapBreakpoint")[1].texthl,
 			function()
 				local breakpoints = require("dap.breakpoints").get()
-				if #breakpoints == 0 then return "" end
+				local noBreakpoints = #vim.iter(breakpoints):totable() == 0 -- vim.iter needed for sparse array
+				if noBreakpoints == 0 then return "" end
 				local allBufs = 0
 				for _, bp in pairs(breakpoints) do
 					allBufs = allBufs + #bp
