@@ -3,8 +3,7 @@
 
 return {
 	"jbyuki/one-small-step-for-vimkind",
-	commit = "9895b68",
-
+	commit = "84689d9", -- PENDING https://github.com/jbyuki/one-small-step-for-vimkind/issues/81
 
 	config = function()
 		require("dap").adapters.nlua = function(callback, config)
@@ -20,15 +19,13 @@ return {
 			"7",
 			function()
 				if require("dap").status() == "" then
-					-- this debugger the only one that needs manual starting, other
-					-- debuggers start with `continue` by themselves
-					require("osv").run_this()
+					require("osv").run_this() -- `run_this` needs manual starting
 				else
 					require("dap").continue()
 				end
 			end,
 			ft = "lua",
-			desc = " Continue (lua version)",
+			desc = " Continue / Run file",
 		},
 	},
 }

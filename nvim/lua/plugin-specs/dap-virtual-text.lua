@@ -12,10 +12,5 @@ return {
 
 		-- auto enable/disable
 		require("dap").listeners.after.event_initialized["dapVirtText"] = dapVirtText.enable
-
-		-- local stopEvents = { "event_terminated", "event_exited", "terminate", "disconnect" }
-		-- for event, _ in pairs(stopEvents) do
-		-- 	require("dap").listeners.after[event]["dapVirtText"] = dapVirtText.disable
-		-- end
 	end,
 }
