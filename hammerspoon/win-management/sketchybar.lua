@@ -28,9 +28,13 @@ M.aw_maxWindows = aw.new(function(appName, event, app)
 	if hs.fnutils.contains(neverHide, appName) or u.isFront(neverHide) then return end
 
 	if not env.isProjector() and event == aw.deactivated then
+		local screen = hs.mouse.getCurrentScreen():fullFrame() ---@diagnostic disable-line: undefined-field
+		if not screen then return end
 		for _, win in pairs(app:allWindows()) do
-			local coversLeftTopCorner = win:frame().x == 0 and win:frame().y == 0
-			if coversLeftTopCorner then app:hide() end
+			local isMaximized = win:frame().w == screen.w and win:frame().h == screen.h
+			if isMaximized then app:hide() end
+			-- not checking for windows covering the left half, since that can be
+			-- intentional to work with a left and right half of a window
 		end
 	end
 end):start()

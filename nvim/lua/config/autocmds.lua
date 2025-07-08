@@ -378,14 +378,13 @@ local function luckyIndent(bufnr)
 
 	-- guess indent from first indented line
 	local indent
-	local lnum = 1
-	local maxToCheck = math.min(100, vim.api.nvim_buf_line_count(bufnr))
-	repeat
-		local line = vim.api.nvim_buf_get_lines(bufnr, lnum - 1, lnum, false)[1]
-		indent = line:match("^%s*")
-		lnum = lnum + 1
-		if lnum > maxToCheck then return end
-	until #indent > 0
+	local maxToCheck = math.min(50, vim.api.nvim_buf_line_count(bufnr))
+	local lines = vim.api.nvim_buf_get_lines(bufnr, 0, maxToCheck, false)
+	for lnum = 1, #lines do
+		indent = lines[lnum]:match("^%s*")
+		if #indent > 0 then break end
+	end
+	if not indent then return end -- file has no indented line
 	local spaces = indent:match(" +")
 
 	-- in markdown, 2 space indents can come from hardwrap and indented second
