@@ -121,10 +121,12 @@ return {
 
 		-- LISTENERS – auto-close widgets
 		local listeners = require("dap").listeners.after
-		listeners.event_terminated["dap"] = function() vim.notify("Debugger stopped.") end
-		listeners.event_exited["dap"] = listeners.event_terminated["dap"]
-		listeners.disconnect["dap"] = listeners.event_terminated["dap"]
-		listeners.terminate["dap"] = listeners.event_terminated["dap"]
+		vim.g.dap_dismount = function() -- as `vim.g` to be for `one-small-step-for-vimkind`
+			if vim.g.dap_sidebar then vim.g.dap_sidebar.close() end
+			require("dap").repl.close()
+		end
+		listeners.event_terminated["dap"] = vim.g.dap_dismount
+		listeners.event_exited["dap"] = vim.g.dap_dismount
 
 		-- LUALINE COMPONENTS
 		-- breakpoint count
