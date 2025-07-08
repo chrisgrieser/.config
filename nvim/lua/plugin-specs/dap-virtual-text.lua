@@ -10,8 +10,10 @@ return {
 		local dapVirtText = require("nvim-dap-virtual-text")
 		dapVirtText.setup(opts)
 
-		-- auto-enable
-		require("dap").listeners.after.initialize["nvim-dap-virtual-text"] = dapVirtText.enable
+		-- auto enable/disable
+		require("dap").listeners.after.event_initialized["dapVirtText"] = dapVirtText.enable
+		require("dap").listeners.after.event_terminated["dapVirtText"] = dapVirtText.disable
+		require("dap").listeners.after.event_exited["dapVirtText"] = dapVirtText.disable
 	end,
 	init = function ()
 		-- highlights

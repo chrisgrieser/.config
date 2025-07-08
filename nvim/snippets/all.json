@@ -19,6 +19,10 @@
     "body": "$LINE_COMMENT PENDING $0$CLIPBOARD",
     "prefix": "PENDING (+url)"
   },
+  "REQUIREMENTS": {
+    "body": "$LINE_COMMENT REQUIREMENTS",
+    "prefix": "REQUIREMENTS"
+  },
   "insert ISO datestamp (today)": {
     "body": "${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}",
     "prefix": "insert ISO datestamp (today)"
