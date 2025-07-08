@@ -38,7 +38,6 @@ local ensureInstalled = {
 	debuggers = {
 		"debugpy", -- python
 		"js-debug-adapter", -- js/ts
-		"local-lua-debugger-vscode", -- lua
 	},
 }
 

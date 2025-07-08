@@ -33,6 +33,19 @@ local function gotoBreakpoint(dir)
 	vim.cmd(("buffer +%d %d"):format(nextPoint.line, nextPoint.bufnr))
 end
 
+---@param widget "scopes"|"frames"|"threads"|"expression"|"sessions"
+local function toggleDapSidebar(widget)
+	local width = math.floor(vim.o.columns * 0.4)
+	if not vim.g.dap_sidebar then
+		local widgets = require("dap.ui.widgets")
+		vim.g.dap_sidebar = widgets.sidebar(widgets[widget], { width = width })
+		vim.g.dap_sidebar.open()
+	else
+		vim.g.dap_sidebar.close()
+		vim.g.dap_sidebar = nil
+	end
+end
+
 --------------------------------------------------------------------------------
 
 return {
@@ -68,22 +81,9 @@ return {
 		-- stylua: ignore
 		{ "<leader>dh", function() require("dap.ui.widgets").hover() end, desc = "󰫧 Hover variable" },
 		{ "q", vim.cmd.close, ft = "dap-float", nowait = true },
-		{
-			"<leader>ds",
-			function()
-				local width = math.floor(vim.o.columns * 0.4)
-				if not vim.g.dap_sidebar then
-					local widgets = require("dap.ui.widgets")
-					vim.g.dap_sidebar = widgets.sidebar(widgets.scopes, { width = width })
-					vim.g.dap_sidebar.open()
-				else
-					vim.g.dap_sidebar.close()
-					vim.g.dap_sidebar = nil
-				end
-			end,
-			desc = " Scopes sidebar",
-		},
-		{ "<leader>dt", function() require("dap").repl.toggle() end, desc = " Terminal" },
+		{ "<leader>ds", function() toggleDapSidebar("scopes") end, desc = " Scopes sidebar" },
+		{ "<leader>df", function() toggleDapSidebar("frames") end, desc = " Frames sidebar" },
+		{ "<leader>dt", function() require("dap").repl.toggle() end, desc = " Terminal" },
 	},
 	config = function()
 		-- SIGNS & HIGHLIGHTS
