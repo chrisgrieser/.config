@@ -27,5 +27,14 @@ return {
 			ft = "lua",
 			desc = " Continue / Run file",
 		},
+		{
+			"<leader>dq",
+			function()
+				require("dap").terminate()
+				vim.g.dap_dismount() -- FIX for https://github.com/jbyuki/one-small-step-for-vimkind/issues/82
+			end,
+			ft = "lua",
+			desc = " Quit",
+		},
 	},
 }
