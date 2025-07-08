@@ -33,16 +33,30 @@ local function gotoBreakpoint(dir)
 	vim.cmd(("buffer +%d %d"):format(nextPoint.line, nextPoint.bufnr))
 end
 
----@param widget "scopes"|"frames"|"threads"|"expression"|"sessions"
-local function toggleDapSidebar(widget)
+---@param type? "scopes"|"frames"|"threads"|"expression"|"sessions"
+local function toggleDapSidebar(type)
 	local width = math.floor(vim.o.columns * 0.4)
-	if not vim.g.dap_sidebar then
-		local widgets = require("dap.ui.widgets")
-		vim.g.dap_sidebar = widgets.sidebar(widgets[widget], { width = width })
-		vim.g.dap_sidebar.open()
+
+	local function toggle(widget)
+		if not widget then return end
+		if not (vim.g.dap_sidebar and vim.g.dap_sidebar_type == widget) then
+			if vim.g.dap_sidebar then vim.g.dap_sidebar.close() end
+			local widgets = require("dap.ui.widgets")
+			vim.g.dap_sidebar = widgets.sidebar(widgets[widget], { width = width })
+			vim.g.dap_sidebar.open()
+			vim.g.dap_sidebar_type = widget
+		else
+			vim.g.dap_sidebar.close()
+			vim.g.dap_sidebar = nil
+			vim.g.dap_sidebar_type = nil
+		end
+	end
+
+	if type then
+		toggle(type)
 	else
-		vim.g.dap_sidebar.close()
-		vim.g.dap_sidebar = nil
+		local widgets = { "scopes", "frames", "threads", "expression", "sessions" }
+		vim.ui.select(widgets, { prompt = " Select widget: " }, toggle)
 	end
 end
 
@@ -82,7 +96,7 @@ return {
 		{ "<leader>dh", function() require("dap.ui.widgets").hover() end, desc = "󰫧 Hover variable" },
 		{ "q", vim.cmd.close, ft = "dap-float", nowait = true },
 		{ "<leader>ds", function() toggleDapSidebar("scopes") end, desc = " Scopes sidebar" },
-		{ "<leader>df", function() toggleDapSidebar("frames") end, desc = " Frames sidebar" },
+		{ "<leader>dS", toggleDapSidebar, desc = " Select sidebar widget" },
 		{ "<leader>dt", function() require("dap").repl.toggle() end, desc = " Terminal" },
 	},
 	config = function()
