@@ -18,7 +18,7 @@ local ensureInstalled = {
 		"ruff", -- python linter & formatter
 		"tombi", -- toml lsp (more modern)
 		"taplo", -- toml lsp (more established)
-		-- "ts_query_ls", -- treesitter query files
+		"ts_query_ls", -- treesitter query files
 		"typescript-language-server",
 		"typos-lsp", -- spellchecker for code
 		"yaml-language-server",
