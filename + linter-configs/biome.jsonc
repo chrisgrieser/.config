@@ -6,10 +6,7 @@
 //──────────────────────────────────────────────────────────────────────────────
 {
 	"linter": {
-		"domains": {
-			"project": "all",
-			"test": "all"
-		},
+		"domains": { "project": "all", "test": "all" },
 		"rules": {
 			"nursery": {
 				"noMagicNumbers": "on",
@@ -22,6 +19,8 @@
 				"noUselessBackrefInRegex": "on",
 				"noUnassignedVariables": "on",
 				"noTsIgnore": "on",
+				"noShadow": "on",
+				"noProcessGlobal": "on",
 				"noMisusedPromises": "on"
 			},
 			"performance": {
@@ -41,8 +40,7 @@
 				"noSubstr": "on",
 				"noProcessEnv": "on",
 				"noNestedTernary": "on",
-				// typos: ignore-next-line
-				"noInferrableTypes": "on",
+				"noInferrableTypes": "on", // typos: ignore-line
 				"useTemplate": "off" // not useful
 			},
 			"suspicious": {
