@@ -129,7 +129,14 @@ end
 
 -- Spelling
 keymap("n", "z.", "1z=", { desc = "󰓆 Fix spelling" }) -- works even with `spell=false`
-keymap("n", "zl", "z=", { desc = "󰓆 Spell suggestions" })
+keymap("n", "zl", function()
+	local suggestions = vim.fn.spellsuggest(vim.fn.expand("<cword>"))
+	suggestions = vim.list_slice(suggestions, 1, 9)
+	vim.ui.select(suggestions, { prompt = "󰓆 Spelling suggestions" }, function(selection)
+		if not selection then return end
+		vim.cmd.normal { '"_ciw' .. selection, bang = true }
+	end)
+end, { desc = "󰓆 Spell suggestions" })
 
 -- Merging
 keymap("n", "m", "J", { desc = "󰽜 Merge line up" })

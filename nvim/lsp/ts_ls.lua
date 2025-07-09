@@ -2,6 +2,11 @@
 --------------------------------------------------------------------------------
 
 local config = {
+	init_options = {
+		preferences = {
+			importModuleSpecifierPreference = "non-relative",
+		},
+	},
 	settings = {
 		-- "Cannot re-declare block-scoped variable" -> not useful for single-file-JXA
 		-- (biome works only on single-file and so already checks for unintended re-declarations.)
