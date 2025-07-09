@@ -46,17 +46,12 @@
 				"useTemplate": "off" // not useful
 			},
 			"suspicious": {
-				// "noConsole": {
-				// 	"level": "warn",
-				// 	"options": { "allow": ["assert", "error", "info", "warn"] }
-				// }
 				"useErrorMessage": "on",
 				"useAwait": "on",
 				"noVar": "on",
 				"noEmptyBlockStatements": "on"
 			},
 			"complexity": {
-				"useSimplifiedLogicExpression": "on",
 				"useWhile": "on",
 				"noUselessStringConcat": "on"
 			},
