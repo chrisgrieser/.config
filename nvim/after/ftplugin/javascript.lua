@@ -34,11 +34,14 @@ bkeymap("n", "g/", function()
 	-- get regex via temp register `z`
 	vim.cmd.normal { '"zy', bang = true }
 	local regex, flags = vim.fn.getreg("z"):match("/(.*)/(%l*)")
+	local line = vim.api.nvim_get_current_line()
+	local substitution = line:match("%.replace ?%(/.*/.*, ?'(.-)'")
+		or line:match('%.replace ?%(/.*/.*, ?"(.-)"')
 
 	local data = {
 		regex = regex,
 		flags = flags,
-		substitution = vim.api.nvim_get_current_line():match('%.replace ?%(/.*/.*, ?"(.-)"'),
+		substitution = substitution,
 		delimiter = "/",
 		flavor = "javascript",
 		testString = "",
