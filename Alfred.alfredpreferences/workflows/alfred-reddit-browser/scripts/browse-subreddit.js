@@ -38,7 +38,8 @@ function cacheIsOutdated(path) {
 	const cacheAgeThresholdMins = Number.parseInt($.getenv("cache_age_threshold"));
 	const cacheObj = Application("System Events").aliases[path];
 	if (!cacheObj.exists()) return true;
-	const cacheAgeMins = (Date.now() - +cacheObj.creationDate()) / 1000 / 60;
+	// biome-ignore lint/nursery/noMagicNumbers: clear here
+	const cacheAgeMins = (Date.now() - cacheObj.creationDate().getTime()) / 1000 / 60;
 	return cacheAgeMins > cacheAgeThresholdMins;
 }
 
@@ -53,7 +54,7 @@ function olderThan(firstPath, secondPath) {
 	const secondItem = Application("System Events").aliases[secondPath];
 	if (!secondItem.exists()) return false;
 	const firstPathOlderThanSecond =
-		+firstItem.modificationDate() - +secondItem.modificationDate() < 0;
+		firstItem.modificationDate().getTime() - secondItem.modificationDate().getTime() < 0;
 	return firstPathOlderThanSecond;
 }
 

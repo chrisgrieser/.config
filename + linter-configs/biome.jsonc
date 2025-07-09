@@ -7,6 +7,8 @@
 {
 	"linter": {
 		"domains": { "project": "all", "test": "all" },
+
+		// rule update: 2025-07-09
 		"rules": {
 			"nursery": {
 				"noMagicNumbers": "on",
@@ -44,14 +46,14 @@
 				"useTemplate": "off" // not useful
 			},
 			"suspicious": {
+				// "noConsole": {
+				// 	"level": "warn",
+				// 	"options": { "allow": ["assert", "error", "info", "warn"] }
+				// }
 				"useErrorMessage": "on",
 				"useAwait": "on",
 				"noVar": "on",
-				"noEmptyBlockStatements": "on",
-				"noConsole": {
-					"level": "warn",
-					"options": { "allow": ["assert", "error", "info", "warn"] }
-				}
+				"noEmptyBlockStatements": "on"
 			},
 			"complexity": {
 				"useSimplifiedLogicExpression": "on",
@@ -62,6 +64,9 @@
 				"noUndeclaredVariables": "on"
 			}
 		}
+	},
+	"javascript": {
+		"globals": ["$", "Application", "ObjC", "Path"] // JXA globals
 	},
 	"formatter": {
 		"useEditorconfig": true,

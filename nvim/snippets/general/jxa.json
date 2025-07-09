@@ -43,11 +43,10 @@
     "body": [
       "/** @param {string} path */",
       "function cacheIsOutdated(path) {",
-      "\tconst cacheAgeThresholdMins = ${1:60};",
-      "\tensureCacheFolderExists();",
+      "\tconst cacheAgeThresholdMins = Number.parseInt(\\$.getenv(\"cache_age_threshold\"));",
       "\tconst cacheObj = Application(\"System Events\").aliases[path];",
       "\tif (!cacheObj.exists()) return true;",
-      "\tconst cacheAgeMins = (Date.now() - +cacheObj.creationDate()) / 1000 / 60;",
+      "\tconst cacheAgeMins = (Date.now() - cacheObj.creationDate().getTime()) / 1000 / 60;",
       "\treturn cacheAgeMins > cacheAgeThresholdMins;",
       "}"
     ],
