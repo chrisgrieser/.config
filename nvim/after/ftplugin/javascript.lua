@@ -18,15 +18,23 @@ abbr("()", "() =>")
 
 -- open the next regex at https://regex101.com/
 bkeymap("n", "g/", function()
-	vim.cmd.TSTextobjectSelect("@regex.outer")
-	local notFound = vim.fn.mode():find("v")
+	-- GUARD
+	local ok, tsSelect = pcall(require, "nvim-treesitter-textobjects.select")
+	if not (ok and tsSelect) then
+		vim.notify("`nvim-treesitter-textobjects` not installed.", vim.log.levels.WARN)
+		return
+	end
+	tsSelect.select_textobject("@regex.outer", "textobjects")
+	local notFound = vim.fn.mode():find("v") -- if a textobj is found, switches to visual mode
 	if not notFound then
 		vim.notify("No regex found", nil, { title = "Regex101" })
 		return
 	end
-	vim.cmd.normal { '"zy', bang = true }
 
+	-- get regex via temp register `z`
+	vim.cmd.normal { '"zy', bang = true }
 	local regex, flags = vim.fn.getreg("z"):match("/(.*)/(%l*)")
+
 	local data = {
 		regex = regex,
 		flags = flags,
@@ -36,6 +44,6 @@ bkeymap("n", "g/", function()
 		testString = "",
 	}
 
-	vim.cmd.TSTextobjectSelect("@regex.inner") -- reselect for easier pasting
+	tsSelect.select_textobject("@regex.inner", "textobjects") -- reselect for easier pasting
 	require("rip-substitute.open-at-regex101").open(data)
 end, { desc = " Open in regex101" })
