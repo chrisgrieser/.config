@@ -20,7 +20,7 @@ local ensureInstalled = {
 		"json5",
 		"jsonc",
 		"toml",
-		"xml", -- macOS `.plist` are also xml
+		"xml", -- macOS `.plist` are also `.xml`
 		"yaml",
 	},
 	content = {
@@ -58,7 +58,7 @@ local ensureInstalled = {
 return {
 	"nvim-treesitter/nvim-treesitter",
 	branch = "main", -- new versions follow `main`
-	-- commit = "0d32ec3", -- before error im vimscript injections
+	commit = "0d32ec3", -- https://github.com/nvim-treesitter/nvim-treesitter/issues/7995
 
 	lazy = false,
 	build = ":TSUpdate",

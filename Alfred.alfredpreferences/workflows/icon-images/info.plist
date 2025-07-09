@@ -455,22 +455,15 @@
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
-				<integer>68</integer>
+				<integer>0</integer>
 				<key>script</key>
-				<string>function run(argv) {
-	const mdImageLink = argv[0];
-	const htmlImg = mdImageLink
-		.replace(/!\[(.*?)\]\((.*?)\)/g, '&lt;img alt="$1" width=70% src="$2"&gt;')
-		.replace(/alt="Pasted image .*?" /g, 'alt="Showcase" ');
-	// return '&lt;p align="center"&gt;' + htmlImg + "&lt;/p&gt;";
-	return htmlImg;
-}</string>
+				<string></string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string></string>
+				<string>./scripts/md-image-links.js</string>
 				<key>type</key>
-				<integer>7</integer>
+				<integer>8</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
