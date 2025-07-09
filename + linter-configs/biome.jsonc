@@ -2,6 +2,7 @@
 // for Alfred workflows.
 //──────────────────────────────────────────────────────────────────────────────
 // https://biomejs.dev/reference/configuration/
+// https://biomejs.dev/linter/javascript/rules/
 //──────────────────────────────────────────────────────────────────────────────
 {
 	"linter": {
@@ -10,9 +11,57 @@
 			"test": "all"
 		},
 		"rules": {
+			"nursery": {
+				"noMagicNumbers": "on",
+				"noBitwiseOperators": "on",
+				"noConstantBinaryExpression": "on",
+				"noFloatingPromises": "on",
+				"noImplicitCoercion": "on",
+				"useNumericSeparators": "on",
+				"noUselessEscapeInString": "on",
+				"noUselessBackrefInRegex": "on",
+				"noUnassignedVariables": "on",
+				"noTsIgnore": "on",
+				"noMisusedPromises": "on"
+			},
+			"performance": {
+				"noBarrelFile": "on"
+			},
 			"style": {
 				"useNamingConvention": "on",
+				"useShorthandAssign": "on",
+				"useForOf": "on",
+				"useFilenamingConvention": "on",
+				"useDefaultSwitchClause": "on",
+				"useConsistentArrayType": "on",
+				"useAtIndex": "on",
+				"noYodaExpression": "on",
+				"noUselessElse": "on",
+				"noUnusedTemplateLiteral": "on",
+				"noSubstr": "on",
+				"noProcessEnv": "on",
+				"noNestedTernary": "on",
+				// typos: ignore-next-line
+				"noInferrableTypes": "on",
 				"useTemplate": "off" // not useful
+			},
+			"suspicious": {
+				"useErrorMessage": "on",
+				"useAwait": "on",
+				"noVar": "on",
+				"noEmptyBlockStatements": "on",
+				"noConsole": {
+					"level": "warn",
+					"options": { "allow": ["assert", "error", "info", "warn"] }
+				}
+			},
+			"complexity": {
+				"useSimplifiedLogicExpression": "on",
+				"useWhile": "on",
+				"noUselessStringConcat": "on"
+			},
+			"correctness": {
+				"noUndeclaredVariables": "on"
 			}
 		}
 	},
