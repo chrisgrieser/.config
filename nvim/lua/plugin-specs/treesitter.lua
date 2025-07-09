@@ -58,6 +58,8 @@ local ensureInstalled = {
 return {
 	"nvim-treesitter/nvim-treesitter",
 	branch = "main", -- new versions follow `main`
+	-- commit = "0d32ec3", -- before error im vimscript injections
+
 	lazy = false,
 	build = ":TSUpdate",
 

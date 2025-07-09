@@ -497,8 +497,7 @@ do
 		callback = function()
 			cursorlineBg = vim.api.nvim_get_hl(0, { name = "CursorLine" }).bg
 			vim.api.nvim_set_hl(0, "CursorLine", { link = "DiffDelete" })
-			-- typos: ignore-next-line
-			play("begin_record.caf")
+			play("begin_record.caf") -- typos: ignore-line
 		end,
 	})
 
@@ -507,7 +506,7 @@ do
 		callback = function()
 			vim.api.nvim_set_hl(0, "CursorLine", { bg = cursorlineBg })
 			-- typos: ignore-next-line
-			play("end_record.caf")
+			play("end_record.caf") -- typos: ignore-line
 		end,
 	})
 end
