@@ -6,8 +6,8 @@ standardApp.includeStandardAdditions = true;
 
 /** @param {string} url @return {string} */
 function httpRequest(url) {
-	const queryURL = $.NSURL.URLWithString(url);
-	const data = $.NSData.dataWithContentsOfURL(queryURL);
+	const queryUrl = $.NSURL.URLWithString(url);
+	const data = $.NSData.dataWithContentsOfURL(queryUrl);
 	return $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding).js;
 }
 
@@ -36,7 +36,7 @@ function httpRequest(url) {
 /** @param {string|Date} date @return {string} relative date */
 function relativeDate(date) {
 	const absDate = typeof date === "string" ? new Date(date) : date;
-	const deltaHours = (Date.now() - +absDate) / 1000 / 60 / 60;
+	const deltaHours = (Date.now() - absDate.getTime()) / 1000 / 60 / 60;
 	/** @type {"year"|"month"|"week"|"day"|"hour"} */
 	let unit;
 	let delta;
@@ -110,10 +110,10 @@ function run(argv) {
 	const regionCode = ObjC.unwrap($.NSLocale.currentLocale.objectForKey($.NSLocaleCountryCode));
 	console.log("Region Code:", regionCode); // e.g., "DE", "US"
 
-	const apiURL =
+	const apiUrl =
 		"https://itunes.apple.com/search?entity=macSoftware" +
 		`&country=${regionCode}&limit=${limit}&term=${encodeURIComponent(query)}`;
-	const result = JSON.parse(httpRequest(apiURL))?.results;
+	const result = JSON.parse(httpRequest(apiUrl))?.results;
 	if (!result) return JSON.stringify({ items: [{ title: "Error: No results", valid: false }] });
 
 	const installedApps = standardApp
