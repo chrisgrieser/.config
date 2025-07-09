@@ -7,9 +7,8 @@ vim.opt_local.listchars:append { multispace = " " }
 vim.opt_local.formatoptions:append("r") -- `<CR>` in insert mode
 
 --------------------------------------------------------------------------------
--- VIRTUAL ENVIRONMENT
 
--- set virtual environment for other plugins to use, if it exists
+-- VIRTUAL_ENV – auto-set
 vim.defer_fn(function()
 	local venv = (vim.uv.cwd() or "") .. "/.venv"
 	if vim.uv.fs_stat(venv) then vim.env.VIRTUAL_ENV = venv end
@@ -55,7 +54,7 @@ bkeymap("n", "<D-s>", function()
 		apply = true,
 	}
 	vim.defer_fn(vim.lsp.buf.format, 50)
-end, { desc = " Fixall & Format" })
+end, { desc = " Fixall & format" })
 
 bkeymap("n", "<leader>ci", function()
 	vim.lsp.buf.code_action {
