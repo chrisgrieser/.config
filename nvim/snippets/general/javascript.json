@@ -143,6 +143,15 @@
       "nocheck (TypeScript)"
     ]
   },
+  "localized ISO date": {
+    "body": [
+      "const isoDateLocal = new Date(Date.now() - new Date().getTimezoneOffset() * 60_000)",
+      "\t.toISOString()",
+      "\t.slice(0, 19)",
+      "\t.replace(\"T\", \" \");"
+    ],
+    "prefix": "ISO date (localized)"
+  },
   "map ( () => {} )": {
     "body": [
       "map((${1:item}) => {",
@@ -242,10 +251,6 @@
       "timeout",
       "delay"
     ]
-  },
-  "today as ISO 8601 string": {
-    "body": "new Date().toISOString().slice(0, 10);",
-    "prefix": "ISO date"
   },
   "today's date": {
     "body": "const today = new Date();",
