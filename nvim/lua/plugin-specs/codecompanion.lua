@@ -18,7 +18,8 @@ return {
 	end,
 	keys = {
 		-- `:` so context gets passed via `<>` marks
-		{ "<leader>aa", ":CodeCompanion<CR>", mode = { "n", "x" }, desc = " Inline assistant" },
+		{ "<leader>aa", ":CodeCompanion<CR>", mode = "x", desc = " Inline assistant" },
+		{ "<leader>as", ":CodeCompanion simplify<CR>", mode = "x", desc = " Simplify" },
 	},
 	opts = {
 		display = {
