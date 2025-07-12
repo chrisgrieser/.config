@@ -35,11 +35,7 @@ echo "$download_location"
 echo
 print "\e[1;34mProceed? (y/n)\e[0m"
 read -r pressed
-if [[ "$pressed" != "y" ]]; then
-	echo
-	echo "Aborted."
-	return 1
-fi
+[[ "$pressed" != "y" ]] && return 1
 echo
 echo "────────────────────────"
 echo

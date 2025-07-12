@@ -23,31 +23,35 @@ const fileExists = (/** @type {string} */ filePath) => Application("Finder").exi
 /** @param {string|Date} date @return {string} relative date */
 function relativeDate(date) {
 	const absDate = typeof date === "string" ? new Date(date) : date;
-	const deltaMins = (Date.now() - absDate.getTime()) / 1000 / 60;
-	/** @type {"year"|"month"|"week"|"day"|"hour"|"minute"} */
+	const deltaHours = (Date.now() - absDate.getTime()) / 1000 / 60 / 60;
+	/** @type {"year"|"month"|"week"|"day"|"hour"} */
 	let unit;
 	let delta;
-	if (deltaMins < 60) {
-		unit = "minute";
-		delta = Math.floor(deltaMins);
-	} else if (deltaMins < 60 * 24) {
+	if (deltaHours < 24) {
 		unit = "hour";
-		delta = Math.floor(deltaMins / 60);
-	} else if (deltaMins < 60 * 24 * 7) {
+		delta = Math.floor(deltaHours);
+	} else if (deltaHours < 24 * 7) {
 		unit = "day";
-		delta = Math.floor(deltaMins / 60 / 24);
-	} else if (deltaMins < 60 * 24 * 7 * 4) {
+		delta = Math.floor(deltaHours / 24);
+	} else if (deltaHours < 24 * 7 * 4) {
 		unit = "week";
-		delta = Math.floor(deltaMins / 60 / 24 / 7);
-	} else if (deltaMins < 60 * 24 * 7 * 4 * 12) {
+		delta = Math.floor(deltaHours / 24 / 7);
+	} else if (deltaHours < 24 * 7 * 4 * 12) {
 		unit = "month";
-		delta = Math.floor(deltaMins / 60 / 24 / 7 / 4);
+		delta = Math.floor(deltaHours / 24 / 7 / 4);
 	} else {
 		unit = "year";
-		delta = Math.floor(deltaMins / 60 / 24 / 7 / 4 / 12);
+		delta = Math.floor(deltaHours / 24 / 7 / 4 / 12);
 	}
 	const formatter = new Intl.RelativeTimeFormat("en", { style: "narrow", numeric: "auto" });
 	return formatter.format(-delta, unit);
+}
+
+/** @param {number} starcount */
+function shortNumber(starcount) {
+	const starStr = starcount.toString();
+	if (starcount < 2000) return starStr;
+	return starStr.slice(0, -3) + "k";
 }
 
 //──────────────────────────────────────────────────────────────────────────────
@@ -89,13 +93,18 @@ function run() {
 			});
 	}
 
-	const pluginsArr = JSON.parse(httpRequest(storeNvimList)).repositories.map(
-		(/** @type {StoreNvimRepo} */ repo) => {
+	const pluginsArr = JSON.parse(httpRequest(storeNvimList))
+		.repositories.sort(
+			(/** @type {StoreNvimRepo} */ a, /** @type {StoreNvimRepo} */ b) =>
+				new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime(),
+		)
+		.map((/** @type {StoreNvimRepo} */ repo) => {
 			const { full_name, description, html_url, stargazers_count, updated_at } = repo;
 			const [author, name] = full_name.split("/");
 			const installedIcon = installedPlugins.includes(full_name) ? " ✅" : "";
 			const updated = relativeDate(updated_at);
-			const subtitle = ["⭐ " + stargazers_count, author, updated, description].join("  ·  ");
+			const stars = shortNumber(stargazers_count);
+			const subtitle = ["⭐ " + stars, author, updated, description].join("  ·  ");
 
 			return {
 				title: name + installedIcon,
@@ -108,8 +117,7 @@ function run() {
 				quicklookurl: html_url,
 				uid: repo,
 			};
-		},
-	);
+		});
 
 	console.log("plugin count:", pluginsArr.length);
 	return JSON.stringify({

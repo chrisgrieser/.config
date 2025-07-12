@@ -11,11 +11,10 @@ repo_names="alfred|shimmering-obsidian|gitfred"
 # repo_names="finder-vim-mode|zsh-magic-dashboard|nvim|alfred|shimmering-obsidian|gitfred|obsidian-quadro|pseudometa-obsidian-plugin-template|grappling-hook"
 
 function actions_in_repo {
-	cp -f "$HOME/Desktop/alfred-workflow-release.yml" ./.github/workflows/alfred-workflow-release.yml
 	cp -f "$HOME/Desktop/.build-and-release.sh" ./.build-and-release.sh
 }
 
-commit_msg="ci: update for Alfred Gallery update submission changes"
+commit_msg="build: url-encode changelog for Gallery issue submission"
 
 GITHUB_TOKEN="$(cat "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/private dotfiles/github-token.txt")"
 export GITHUB_TOKEN
@@ -46,11 +45,7 @@ declare -f actions_in_repo | sed '1d;$d;s/^\t//' | bat --language=sh --no-pager
 echo
 print "\e[1;34mProceed? (y/n)\e[0m"
 read -r pressed
-if [[ "$pressed" != "y" ]]; then
-	echo
-	echo "Aborted."
-	return 1
-fi
+[[ "$pressed" != "y" ]] && return 1
 echo
 echo "────────────────────────"
 echo
