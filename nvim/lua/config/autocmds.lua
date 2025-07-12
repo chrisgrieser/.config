@@ -372,24 +372,25 @@ vim.api.nvim_create_autocmd({ "FocusGained", "BufReadPost", "TextChanged", "Inse
 -- Auto-set indent based on first indented line. Ignores files when an
 -- `.editorconfig` is in effect. Simplified version of `guess-indent.nvim`.
 local function luckyIndent(bufnr)
+	local linesToCheck = 50
 	if not vim.api.nvim_buf_is_valid(bufnr) or vim.bo[bufnr].buftype ~= "" then return end
 	local ec = vim.b[bufnr].editorconfig
 	if ec and (ec.indent_style or ec.indent_size or ec.tab_width) then return end
 
 	-- guess indent from first indented line
 	local indent
-	local maxToCheck = math.min(50, vim.api.nvim_buf_line_count(bufnr))
+	local maxToCheck = math.min(linesToCheck, vim.api.nvim_buf_line_count(bufnr))
 	local lines = vim.api.nvim_buf_get_lines(bufnr, 0, maxToCheck, false)
 	for lnum = 1, #lines do
 		indent = lines[lnum]:match("^%s*")
 		if #indent > 0 then break end
 	end
-	if not indent then return end -- file has no indented line
 	local spaces = indent:match(" +")
-
-	-- in markdown, 2 space indents can come from hardwrap and indented second
-	-- lines of lists, those are not real indentations though.
-	if vim.bo[bufnr].ft == "markdown" and #spaces == 2 then return end
+	if vim.bo[bufnr].ft == "markdown" then
+		if not spaces then return end -- no indented line
+		if #spaces == 2 then return end -- 2 space indents from hardwrap, not real indent
+		return
+	end
 
 	-- apply if needed
 	local opts = { title = "Lucky indent", icon = "󰉶" }
@@ -480,7 +481,7 @@ vim.lsp.handlers["textDocument/rename"] = function(err, result, ctx, config)
 end
 --------------------------------------------------------------------------------
 
--- MACROS 
+-- MACROS
 -- add sound & change cursorline color while recording
 do
 	local function play(soundFile)
