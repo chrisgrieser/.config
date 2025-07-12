@@ -54,9 +54,16 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
+
+--------------------------------------------------------------------------------
+-- WRAP
+vim.opt.wrap = false -- off by default
+vim.opt.showbreak = "↳ " -- indicator for wrapped lines, since `number` is off
+vim.opt.breakindent = true -- wrapped lines inherit indent from previous line
+vim.opt.cursorlineopt = "screenline" -- highlight visual line, not logical line
+
 --------------------------------------------------------------------------------
 -- APPEARANCE
-vim.opt.wrap = false
 vim.opt.cursorline = true
 vim.opt.colorcolumn = "+1" -- = one more than textwidth
 vim.opt.signcolumn = "yes:1"

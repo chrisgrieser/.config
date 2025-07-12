@@ -35,10 +35,7 @@ return {
 			"gitcommit",
 			"gitrebase",
 			"bib",
-
-			-- INFO `pass` passwords editing filetype is plaintext, also this is
-			-- the filetype of critical files (e.g. zsh files with API keys)
-			"text",
+			"text", -- `pass` passwords editing ft (extra safeguard)
 		},
 		-- BUG once false, permanently shuts down supermaven https://github.com/supermaven-inc/supermaven-nvim/pull/130
 		-- condition = function()
