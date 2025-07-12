@@ -20,7 +20,7 @@
       "\tend,",
       "})"
     ],
-    "prefix": "autocmd (Filetype)"
+    "prefix": "Filetype autocmd"
   },
   "cast (LuaDoc)": {
     "body": "--[[@as ${1:string}]]",

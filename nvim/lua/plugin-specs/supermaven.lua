@@ -1,9 +1,8 @@
 return {
 	"supermaven-inc/supermaven-nvim",
-	enabled = false,
-
-	build = ":SupermavenUseFree", -- needs to be run once to set the API key
+	build = ":SupermavenUseFree", -- needs to be run once to login
 	event = "InsertEnter",
+
 	keys = {
 		{ "<D-s>", mode = "i", desc = "󰚩 Accept suggestion" },
 		{ "<D-S>", mode = "i", desc = "󰚩 Accept word" },
@@ -15,7 +14,7 @@ return {
 		vim.api.nvim_create_autocmd("RecordingEnter", { command = "SupermavenStop" })
 		vim.api.nvim_create_autocmd("RecordingLeave", { command = "SupermavenStart" })
 
-		-- FIX https://github.com/supermaven-inc/supermaven-nvim/issues/49
+		-- using instead of `opts.color`: https://github.com/supermaven-inc/supermaven-nvim/issues/49
 		require("supermaven-nvim.completion_preview").suggestion_group = "NonText"
 
 		vim.g.lualineAdd(
