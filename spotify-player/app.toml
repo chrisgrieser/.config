@@ -15,5 +15,5 @@ enable_media_control = false
 
 # client-id needs to be saved with `echo -n` to avoid trailing new line https://github.com/aome510/spotify-player/issues/537#issuecomment-2571601930
 [client_id_command]
-command = "cat"
+command = "cat"  # does not support `$HOME`
 args = ["/Users/chrisgrieser/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/private dotfiles/spotify_client_id.txt"]

@@ -1,5 +1,6 @@
 return {
 	"supermaven-inc/supermaven-nvim",
+	enabled = false,
 
 	build = ":SupermavenUseFree", -- needs to be run once to set the API key
 	event = "InsertEnter",
