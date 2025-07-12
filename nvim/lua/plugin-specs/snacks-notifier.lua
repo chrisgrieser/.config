@@ -74,7 +74,6 @@ local function openNotif(idx)
 			modifiable = false,
 		},
 		keys = {
-			["<D-9>"] = "close", -- same key that was used to open it
 			["<Tab>"] = function()
 				if idx == #history then return end
 				vim.cmd.close()

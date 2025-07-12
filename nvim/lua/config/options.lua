@@ -54,13 +54,18 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
-
 --------------------------------------------------------------------------------
 -- WRAP
 vim.opt.wrap = false -- off by default
-vim.opt.showbreak = "↳ " -- indicator for wrapped lines, since `number` is off
 vim.opt.breakindent = true -- wrapped lines inherit indent from previous line
 vim.opt.cursorlineopt = "screenline" -- highlight visual line, not logical line
+
+vim.api.nvim_create_autocmd("Filetype", {
+	desc = "User: set `showbreak` in regular buffers only",
+	callback = function(ctx)
+		if vim.bo[ctx.buf].buftype == "" then vim.opt_local.showbreak = "↳ " end
+	end,
+})
 
 --------------------------------------------------------------------------------
 -- APPEARANCE
