@@ -1,7 +1,9 @@
--- lua alternative to the official codeium.vim plugin https://github.com/Exafunction/codeium.vim
+-- lua alternative to the official codeium.vim plugin https://github.com/Exafunction/windsurf.vim
 --------------------------------------------------------------------------------
 
 return {
+	enabled = false,
+
 	"monkoose/neocodeium",
 	event = "InsertEnter",
 	cmd = "NeoCodeium",
