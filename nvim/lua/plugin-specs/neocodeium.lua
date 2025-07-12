@@ -2,7 +2,7 @@
 --------------------------------------------------------------------------------
 
 return {
-	enabled = false,
+	enabled = false, -- using supermaven instead
 
 	"monkoose/neocodeium",
 	event = "InsertEnter",
