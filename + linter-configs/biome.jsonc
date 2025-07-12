@@ -11,7 +11,6 @@
 		// rule update: 2025-07-09
 		"rules": {
 			"nursery": {
-				"noMagicNumbers": "on",
 				"noBitwiseOperators": "on",
 				"noConstantBinaryExpression": "on",
 				"noFloatingPromises": "on",
