@@ -613,7 +613,7 @@
 	</array>
 	<key>readme</key>
 	<string>## Commands
-- `:h`: Searches the Neovim [online :help](https://neovim.io/doc/). 
+- `:h`: Searches the Neovim [online :help](https://neovim.io/doc/).
 	+ Groups synonyms together, for example, `:w` and `:write` both get one
 	  item.
 	+ &lt;kbd&gt;⏎&lt;/kbd&gt;: Open the respective help.
@@ -621,16 +621,20 @@
 - `vp`: Searches [awesome-neovim](https://github.com/rockerBOO/awesome-neovim)
   for Neovim plugins. Mnemonic: `[v]im [p]lugins`.
 	+ &lt;kbd&gt;⏎&lt;/kbd&gt;: Open the GitHub repo.
-	+ &lt;kbd&gt;⌘⏎&lt;/kbd&gt;: Open the `:help` in the browser (vimdoc converted to HTML).
+	+ &lt;kbd&gt;⌘⏎&lt;/kbd&gt;: Open the `:help` in the browser (`vimdoc` converted to
+	  HTML).
 	+ &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy the GitHub URL to the clipboard.
 - `ip`: Search for plugins (and Mason tools) installed locally on your device.
-  Mnemonic: `[i]installed [p]lugins`. 
-	+ The modifiers (&lt;kbd&gt;⌘⌥⌃⇧&lt;/kbd&gt;) from the plugin-search also apply for this command.
-	+ In addition, &lt;kbd&gt;fn⏎&lt;/kbd&gt;: Open the local directory of the plugin in Finder.
-- `mason`: Search for tools available via [mason.nvim](https://github.com/williamboman/mason.nvim).
+  Mnemonic: `[i]installed [p]lugins`.
+	+ The modifiers (&lt;kbd&gt;⌘⌥⌃⇧&lt;/kbd&gt;) from the plugin-search also apply for this
+	  command.
+	+ In addition, &lt;kbd&gt;fn⏎&lt;/kbd&gt;: Open the local directory of the plugin in
+	  Finder.
+- `mason`: Search for tools available via
+  [mason.nvim](https://github.com/williamboman/mason.nvim).
 - `:old`: Displays and searches your `:oldfiles`. Opens them in the system's
   default editor for the respective filetype. (To open them directly in Neovim,
-  you need a Neovim GUI with `Open With…` capability, such as
+  you need a Neovim GUI with `Open with…` capability, such as
   [Neovide](http://neovide.dev).)
 
 ## Preview Pane
@@ -640,11 +644,17 @@ For the preview pane, install [mr-pennyworth/alfred-extra-pane](https://github.c
 ➡️ [GitHub Repo](https://github.com/chrisgrieser/alfred-neovim-utilities/)
 
 ## Credits
-- Plugin database [awesome-neovim](https://github.com/rockerBOO/awesome-neovim).
-- Logo by [@thomascannon](https://github.com/neovim/neovim/issues/43#issuecomment-35811450).
-- Vimdoc to HTML conversion by [@xaizek](https://github.com/xaizek/vimdoc2html).
+- &lt;!-- harper: ignore --&gt;Plugin database provided by
+  [awesome-neovim](https://github.com/rockerBOO/awesome-neovim), additional
+  crawling by [@alex-popov-tech's
+  store.nvim](https://github.com/alex-popov-tech/store.nvim)
+- `vimdoc` to HTML conversion by
+  [@xaizek's vimdoc2html](https://github.com/xaizek/vimdoc2html).
 - Preview pane by
-  [@mr-pennyworth](https://github.com/mr-pennyworth/alfred-extra-pane).
+  [@mr-pennyworth's
+  alfred-extra-pane](https://github.com/mr-pennyworth/alfred-extra-pane).
+- Logo by
+  [@thomascannon](https://github.com/neovim/neovim/issues/43#issuecomment-35811450).
 
 ---
 
