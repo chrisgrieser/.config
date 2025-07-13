@@ -34,7 +34,7 @@ return {
 			openai = function()
 				local model = "gpt-4.1-mini" -- https://platform.openai.com/docs/models
 				local apiKeyFile =
-					"$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/private dotfiles/openai-api-key_code-companion.txt"
+					"$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/private dotfiles/openai-api-key.txt"
 
 				return require("codecompanion.adapters").extend("openai", {
 					schema = { model = { default = model } },
