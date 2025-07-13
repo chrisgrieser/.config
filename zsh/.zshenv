@@ -1,7 +1,5 @@
 export ZDOTDIR="$HOME/.config/zsh" # location of this zsh configuration
-export EDITOR='nvim'
-
-export PATH="$PATH:/Users/chrisgrieser/neovim/"
+export EDITOR="nvim"
 
 #───────────────────────────────────────────────────────────────────────────────
 
