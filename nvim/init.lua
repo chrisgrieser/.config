@@ -14,7 +14,7 @@ end
 safeRequire("config.reopen-last-file")
 safeRequire("config.options") -- first so available for plugins configs
 
--- For extra security, do not load plugins when using `pass`. 
+-- For extra security, do not load plugins when using `pass`.
 --(requires starting `pass` via `env="USING_PASS=true" pass`)
 if vim.env.USING_PASS then
 	vim.keymap.set("n", "ss", "VP", { desc = "Substitute line", buffer = true })
@@ -24,7 +24,7 @@ else
 	if vim.g.setColorscheme then vim.g.setColorscheme("init") end
 end
 
-safeRequire("personal-plugins.ui-hack") -- requires notification plugin to be already loaded
+-- safeRequire("personal-plugins.ui-hack") -- requires notification plugin to be already loaded
 safeRequire("config.neovide-gui-settings")
 safeRequire("config.autocmds")
 safeRequire("config.keybindings")
