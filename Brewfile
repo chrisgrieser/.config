@@ -64,10 +64,8 @@ if computerName.include?("Home")
 	cask "iina"
 	cask "steam"
 	cask "transmission"
-	brew "mgmeyers/pdfannots2json/pdfannots2json"
 elsif computerName.include?("Office")
 	cask "cleanshot" # only license for 2 devices
-	brew "mgmeyers/pdfannots2json/pdfannots2json"
 elsif computerName.include?("Mother")
 	cask "iina"
 	cask "steam"
