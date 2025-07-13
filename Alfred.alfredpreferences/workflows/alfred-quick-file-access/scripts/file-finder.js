@@ -90,7 +90,7 @@ const searchConfig = {
 			pathExport +
 			`cd "%s" && rg --no-config --files --binary --sortr=modified --ignore-file="${rgIgnoreFile}"`,
 		directory: app.pathTo("home folder"),
-		maxFiles: Number.parseInt($.getenv("max_recent_files")),
+		maxFiles: Math.min(Number.parseInt($.getenv("max_recent_files")), 10),
 	},
 	[$.getenv("custom_folder_keyword")]: {
 		shellCmd: `ls -t "%s"`,
