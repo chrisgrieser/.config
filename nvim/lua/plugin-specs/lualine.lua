@@ -9,7 +9,6 @@
 ---@param component function|table the component forming the lualine
 ---@param where "after"|"before"? defaults to "after"
 vim.g.lualineAdd = function(whichBar, whichSection, component, where)
-	return
 	vim.defer_fn(function() -- deferred so other plugins do not load lualine too early
 		local componentObj = type(component) == "table" and component or { component }
 		local sectionConfig = require("lualine").get_config()[whichBar][whichSection] or {}
@@ -57,12 +56,11 @@ end
 
 return {
 	"nvim-lualine/lualine.nvim",
-	lazy = false,
-	enabled = false,
+	event = "VeryLazy",
 	dependencies = "echasnovski/mini.icons",
 	init = function() -- so the ugly tabline and statusline are initially hidden
-		-- vim.opt.showtabline = 0
-		-- vim.opt.laststatus = 0
+		vim.opt.showtabline = 0
+		vim.opt.laststatus = 0
 	end,
 	opts = {
 		options = {
