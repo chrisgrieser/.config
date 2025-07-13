@@ -4,6 +4,7 @@
 # CLI
 brew "bat"
 brew "eza"
+brew "felixkratz/formulae/sketchybar"
 brew "fzf"
 brew "gh"
 brew "git-delta"
@@ -17,6 +18,7 @@ brew "pass"
 brew "pinentry-mac"
 brew "python@3.13"
 brew "ripgrep"
+brew "sst/tap/opencode"
 brew "starship"
 brew "yq"
 brew "zsh-autocomplete"
@@ -26,7 +28,6 @@ brew "zsh-history-substring-search"
 brew "zsh-syntax-highlighting"
 
 # APPS
-brew "felixkratz/formulae/sketchybar"
 cask "alfred"
 cask "alt-tab"
 cask "signal"

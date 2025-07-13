@@ -1569,18 +1569,18 @@ to modify the respective hotkey</string>
 				<key>defaultvalue</key>
 				<integer>1000</integer>
 				<key>markercount</key>
-				<integer>9</integer>
+				<integer>21</integer>
 				<key>maxvalue</key>
 				<integer>2000</integer>
 				<key>minvalue</key>
-				<integer>1</integer>
+				<integer>0</integer>
 				<key>onlystoponmarkers</key>
 				<true/>
 				<key>showmarkers</key>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>Maximum for the recent file search. High value impacts performance.</string>
+			<string>Maximum for the recent file search. A high value impacts performance.</string>
 			<key>label</key>
 			<string>Max recent files</string>
 			<key>type</key>
