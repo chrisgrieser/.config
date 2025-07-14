@@ -23,17 +23,25 @@ local config = {
 				includeInlayVariableTypeHints = true,
 				includeInlayVariableTypeHintsWhenTypeMatchesName = true,
 			},
-			-- even with formatting disabled still relevant for `organizeImports` code-action
+			-- without formatting still relevant for `organizeImports` code-action
 			format = { convertTabsToSpaces = false },
 		},
 
 		-- enable checking javascript without a `jsconfig.json` https://www.typescriptlang.org/tsconfig
 		implicitProjectConfiguration = { checkJs = true, target = "ES2022" },
 	},
-	on_attach = function(client)
+	on_attach = function(client, bufnr)
 		-- disable formatting in favor of `biome`
 		client.server_capabilities.documentFormattingProvider = false
 		client.server_capabilities.documentRangeFormattingProvider = false
+
+		-- quick access to code action
+		vim.keymap.set("n", "<leader>rt", function()
+			vim.lsp.buf.code_action {
+				filter = function(act) return act.title == "Convert to template string" end,
+				apply = true,
+			}
+		end, { desc = " Template string code action", buffer = bufnr })
 	end,
 }
 

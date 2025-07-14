@@ -31,7 +31,12 @@ keymap("n", "<D-q>", "ZZ", { desc = " Save & quit", unique = false })
 
 -- stylua: ignore
 keymap("n", "<leader>pd", function() vim.ui.open(vim.fn.stdpath("data") --[[@as string]]) end, { desc = "󰝰 Data dir (local)" })
-keymap("n", "<leader>pD", function() vim.ui.open(vim.g.icloudSync) end, { desc = "󰝰 Data dir (cloud)" })
+keymap(
+	"n",
+	"<leader>pD",
+	function() vim.ui.open(vim.g.icloudSync) end,
+	{ desc = "󰝰 Data dir (cloud)" }
+)
 
 --------------------------------------------------------------------------------
 -- NAVIGATION
@@ -296,7 +301,11 @@ keymap("x", "<left>", [["zxhh"zpgvhoho]], { desc = "⬅ Move selection left" })
 --------------------------------------------------------------------------------
 
 -- LSP
-keymap({ "n", "x" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "󱐋 Code action" })
+keymap({ "n", "x" }, "<leader>ca", function()
+	vim.lsp.buf.code_action {
+		filter = function(act) return vim.bo.ft ~= "typescript" or act.kind ~= "refactor.move" end,
+	}
+end, { desc = "󱐋 Code action" })
 -- stylua: ignore start
 keymap({ "n", "x" }, "<D-s>", function() require("personal-plugins.misc").formatWithFallback() end, { desc = "󱉯 Save & Format" })
 keymap({ "n", "i", "v" }, "<D-g>", function() vim.lsp.buf.signature_help { max_width = 70 } end, { desc = "󰏪 LSP signature" })
