@@ -19,7 +19,7 @@ bkeymap("n", "<D-s>", function()
 	for i = 1, #actions do
 		vim.defer_fn(function()
 			vim.lsp.buf.code_action {
-				context = { only = { actions[i] } }, ---@diagnostic disable-line: assign-type-mismatch,missing-fields
+				context = { only = { actions[i] } },
 				apply = true,
 			}
 		end, i * 60)
