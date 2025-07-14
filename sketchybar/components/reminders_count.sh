@@ -25,7 +25,6 @@ fi
 #───────────────────────────────────────────────────────────────────────────────
 
 # include open reminders yesterday for reminders carrying over
-list_name="Tasks" # CONFIG
 reminder_count=$(swift ./components/count-reminders.swift "$list_name")
 if [[ $reminder_count -eq 0 ]]; then
 	sketchybar --set "$NAME" drawing=false

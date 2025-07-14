@@ -7,14 +7,12 @@ let semaphore = DispatchSemaphore(value: 0)
 // ─────────────────────────────────────────────────────────────────────────────
 
 let args = CommandLine.arguments
-guard args.count > 1 else {
-	print("❗ Please provide both the list name as argument.\n")
+guard args.count != 1 else {
+	print("❗ Please provide the list name as argument, and nothing else.\n")
 	exit(1)
 }
 
-private(set) var foo: Bool = false
-
-let listName = args[1]  // First argument is the name of the list (calendar)
+let listName = args[1]
 
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -49,22 +47,12 @@ eventStore.requestFullAccessToReminders { granted, error in
 			return
 		}
 
-		// Filter reminders: Not completed, due today or past
-		let calendar = Calendar.current
-		let today = calendar.startOfDay(for: Date())
-
-		let filteredReminders = reminders.filter { reminder in
-			guard !reminder.isCompleted else { return false }
-
-			if let dueDate = reminder.dueDateComponents?.date {
-				// Compare only the date part (ignoring time)
-				let dueDateStartOfDay = calendar.startOfDay(for: dueDate)
-				return dueDateStartOfDay <= today
-			}
-			return false
+		let remindersDueNow = reminders.filter { rem in
+			if rem.isCompleted { return false }
+			return (rem.dueDateComponents?.date ?? Date.distantFuture) <= Date.now
 		}
 
-		print(filteredReminders.count)
+		print(remindersDueNow.count)
 		semaphore.signal()
 	}
 }
