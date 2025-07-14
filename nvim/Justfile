@@ -22,6 +22,19 @@ count-lines:
         cut -c5- |
         sed 's|\./||'
 
+# for neovide, needs to add `"$HOME/.local/neovim-downgrade` to `.zprofile`
+downgrade-nvim:
+    #!/usr/bin/env zsh
+    target_version="v0.11.2"
+    rm -rf "$HOME/.local/neovim-downgrade"
+    cd -q "$HOME/.local" || return 1
+    curl --location --output "neovim-downgrade.tar.gz" \
+        "https://github.com/neovim/neovim/releases/download/$target_version/nvim-macos-arm64.tar.gz"
+    xattr -c "neovim-downgrade.tar.gz"
+    tar xzvf "neovim-downgrade.tar.gz"
+    rm "neovim-downgrade.tar.gz"
+    mv "nvim-macos-arm64" "neovim-downgrade"
+
 # runs minimal config with neovide
 debug-instance:
     neovide --no-tabs {{ debugFile }} -- -u {{ debugConfig }} &>/dev/null

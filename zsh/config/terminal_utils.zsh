@@ -58,7 +58,7 @@ function fd {
 # On empty buffer, `esc` starts file opener
 # - cannot trigger this on `space`, since it messes with `zsh-syntax-highlighting`
 # - uses `rg` to sort files by recency
-_esc_on_empty_buffer() {
+_escape_on_empty_buffer() {
 	if [[ -n "$BUFFER" || "$CONTEXT" != "start" ]]; then
 		zle vi-cmd-mode # exit insert mode
 		return
@@ -83,8 +83,8 @@ _esc_on_empty_buffer() {
 
 	echo "$selected" | cut -c3- | xargs open # `cut` to remove the nerdfont icons
 }
-zle -N _esc_on_empty_buffer
-bindkey '\e' _esc_on_empty_buffer
+zle -N _escape_on_empty_buffer
+bindkey '\e' _escape_on_empty_buffer
 
 #───────────────────────────────────────────────────────────────────────────────
 
