@@ -104,18 +104,18 @@ vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained" }, {
 	-- also trigger on `FocusGained` to account for deletions of file outside nvim
 	desc = "User: Auto-cd to project root",
 	callback = function(ctx)
-		-- GUARD `pass` cli buffers
-		if vim.startswith(ctx.file, "/private/var/") then return end
+		vim.schedule(function()
+			if vim.startswith(ctx.file, "/private/var/") then return end -- GUARD `pass` cli buffers
+			if not vim.uv.cwd() then vim.uv.chdir("/") end -- prevent error when no cwd
 
-		if not vim.uv.cwd() then vim.uv.chdir("/") end -- prevent error when no cwd
-
-		local root = vim.fs.root(ctx.buf, function(name, path)
-			local parentName = vim.fs.basename(vim.fs.dirname(path))
-			local dirHasParentMarker = vim.tbl_contains(autoCdConfig.parentOfRoot, parentName)
-			local dirHasChildMarker = vim.tbl_contains(autoCdConfig.childOfRoot, name)
-			return dirHasChildMarker or dirHasParentMarker
+			local root = vim.fs.root(ctx.buf, function(name, path)
+				local parentName = vim.fs.basename(vim.fs.dirname(path))
+				local dirHasParentMarker = vim.tbl_contains(autoCdConfig.parentOfRoot, parentName)
+				local dirHasChildMarker = vim.tbl_contains(autoCdConfig.childOfRoot, name)
+				return dirHasChildMarker or dirHasParentMarker
+			end)
+			if root and root ~= "" then vim.uv.chdir(root) end
 		end)
-		if root and root ~= "" then vim.uv.chdir(root) end
 	end,
 })
 

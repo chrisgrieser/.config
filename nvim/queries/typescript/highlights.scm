@@ -6,5 +6,6 @@
   "break"
   "continue"
   "return"
+  "throw"
 ] @keyword.return
   (#set! priority 130))
