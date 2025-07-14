@@ -1,6 +1,6 @@
 {
   "blink-cmp-git": { "branch": "master", "commit": "31dad5db284641c94537de29865bb46495c53071" },
-  "blink.cmp": { "branch": "main", "commit": "9bcb14b43852a6f2bfd5ac9ef29cb5cf09b1b39b" },
+  "blink.cmp": { "branch": "main", "commit": "3536ce464e82843b00c76718d9bfe1994647d686" },
   "ccc.nvim": { "branch": "main", "commit": "9d1a256e006decc574789dfc7d628ca11644d4c2" },
   "codecompanion.nvim": { "branch": "main", "commit": "28eab4386b04dc222de6c27349ea5ae0d1a92866" },
   "eyeliner.nvim": { "branch": "main", "commit": "8f197eb30cecdf4c2cc9988a5eecc6bc34c0c7d6" },
@@ -19,7 +19,7 @@
   "nvim-genghis": { "branch": "main", "commit": "1353bf05372d62a22c37db74dc6cbfa4eb80fc60" },
   "nvim-justice": { "branch": "main", "commit": "0eff6869c80e64b74c3d140bef3fe66b7ce4695a" },
   "nvim-lsp-endhints": { "branch": "main", "commit": "7917c7af1ec345ca9b33e8dbcd3723fc15d023c0" },
-  "nvim-lspconfig": { "branch": "master", "commit": "dbdb80d3bd311989d21029c63918d67a786d5013" },
+  "nvim-lspconfig": { "branch": "master", "commit": "d005da998edad401524504d03c7a88a56d125224" },
   "nvim-navic": { "branch": "master", "commit": "f887d794a0f4594882814d7780980a949200a238" },
   "nvim-origami": { "branch": "main", "commit": "9dc6ab34e7835695989772eb2c6ea91541a86c5d" },
   "nvim-rip-substitute": { "branch": "main", "commit": "9718e040e3593608eb0654cf643be4982d68bb46" },

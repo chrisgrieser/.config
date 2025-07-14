@@ -4,6 +4,7 @@ format = """[\
 ${custom.location_indicator}$directory${custom.folder_number}\
 ${custom.main_branch}$git_branch\
 ${custom.venv_on}${custom.venv_off}\
+${custom.npm_installed}\
 $git_status$git_metrics$git_commit$git_state\
 $sudo $status\
 ](bg:black)\
@@ -62,28 +63,36 @@ command = "find . -mindepth 1 -maxdepth 1 -not -name '.git' -not -name '.DS_Stor
 format = "[󰝰 $output ]($style)"
 style = "fg:yellow bg:black"
 
-# Indicate if in a subfolder of my local repo folder. Helps differentiating
-# between my local Alfred workflows and their respective repos.
 [custom.location_indicator]
+description = """Indicate if in a subfolder of my local repo folder. Helps 
+differentiating between my local Alfred workflows and their respective repos."""
 format = "[ 󱁤 ]($style)"
 when = "[[ $PWD == $HOME/Developer/* ]]"
 style = "fg:cyan bold bg:black"
 
 [custom.venv_on]
+description = "venv is not active"
 format = "[ 󱥒 ]($style)"
 when = '[[ -n "$VIRTUAL_ENV" ]]'
 style = "fg:yellow bold bg:black"
 
 [custom.venv_off]
+description = "venv is not active"
 format = "[ 󱥓 ]($style)"
 when = '[[ -z "$VIRTUAL_ENV" ]] && [[ -d ".venv" ]]'
+style = "fg:red bold bg:black"
+
+[custom.npm_installed]
+description = "Indicate if `npm install` has not been run yet."
+format = "[ 󱎘  ]($style)"
+when = '[[ -f "package.json" ]] && [[ ! -d "node_modules" ]]'
 style = "fg:red bold bg:black"
 
 # ───────────────────────────────────────────────────────────────────────────────
 # GIT
 
-# since "ignore_branches" fully hides the git_branch component, still showing the symbol
 [custom.main_branch]
+description = 'since "ignore_branches" fully hides git_branch component, still showing the symbol'
 when = "[[ $(git branch --show-current) == 'main' ]]"
 format = " [ ](fg:purple bg:black bold)"
 
