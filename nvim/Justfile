@@ -8,11 +8,14 @@ masonPath := "$HOME/.local/share/nvim/mason/bin/"
 
 count-lines-in-subdirs:
     #!/usr/bin/env zsh
+    total=0
     find . -mindepth 2 -maxdepth 2 -type d | while read -r dir; do
         line_count=$(find "$dir" -name "*.lua" -type f -exec cat {} + | wc -l | tr -d ' ')
         dir=$(echo "$dir" | sed 's|\./||' | rs)
         [[ "$line_count" -eq 0 ]] || echo "$dir: $line_count"
+        total=$((total + line_count))
     done
+    echo "Total: $total"
 
 count-lines:
     #!/usr/bin/env zsh
@@ -22,7 +25,7 @@ count-lines:
         cut -c5- |
         sed 's|\./||'
 
-# for neovide, needs to add `"$HOME/.local/neovim-downgrade` to `.zprofile`
+# for neovide, needs to add `"$HOME/.local/neovim-downgrade` to `PATH` in `.zprofile`
 downgrade-nvim:
     #!/usr/bin/env zsh
     target_version="v0.11.2"

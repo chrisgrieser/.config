@@ -31,12 +31,8 @@ keymap("n", "<D-q>", "ZZ", { desc = " Save & quit", unique = false })
 
 -- stylua: ignore
 keymap("n", "<leader>pd", function() vim.ui.open(vim.fn.stdpath("data") --[[@as string]]) end, { desc = "󰝰 Data dir (local)" })
-keymap(
-	"n",
-	"<leader>pD",
-	function() vim.ui.open(vim.g.icloudSync) end,
-	{ desc = "󰝰 Data dir (cloud)" }
-)
+-- stylua: ignore
+keymap("n", "<leader>pD", function() vim.ui.open(vim.g.icloudSync) end, { desc = "󰝰 Data dir (cloud)" })
 
 --------------------------------------------------------------------------------
 -- NAVIGATION
