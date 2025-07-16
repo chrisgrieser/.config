@@ -19,6 +19,8 @@ function run(argv) {
 	const apiKey =
 		$.NSProcessInfo.processInfo.environment.objectForKey("alfred_apikey").js ||
 		app.doShellScript('source "$HOME/.zshenv"; echo "$OPENAI_API_KEY"').trim();
+	if (!apiKey) return "ERROR: No OpenAI API key found in either Alfred workflow settings or in .zshenv.";
+
 	// Needs division by 10, since Alfred workflow config does not allow setting
 	// decimal values in its number sliders.
 	const temperature = Number.parseInt($.getenv("temperature")) / 10;
