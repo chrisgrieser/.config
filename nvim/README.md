@@ -59,6 +59,7 @@
 - [olimorris/codecompanion.nvim](https://github.com/olimorris/codecompanion.nvim)
 - [saghen/blink.cmp](https://github.com/saghen/blink.cmp)
 - [SmiteshP/nvim-navic](https://github.com/SmiteshP/nvim-navic)
+- [supermaven-inc/supermaven-nvim](https://github.com/supermaven-inc/supermaven-nvim)
 - [theHamsta/nvim-dap-virtual-text](https://github.com/theHamsta/nvim-dap-virtual-text)
 - [ThePrimeagen/refactoring.nvim](https://github.com/ThePrimeagen/refactoring.nvim)
 - [uga-rosa/ccc.nvim](https://github.com/uga-rosa/ccc.nvim)
