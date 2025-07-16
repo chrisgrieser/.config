@@ -15,8 +15,7 @@ vim.opt.clipboard = "unnamedplus"
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
-vim.opt.undofile = true -- enables persistent undo history
-vim.opt.undolevels = 1337 -- too high results in increased buffer loading time
+vim.opt.undofile = true -- enables session-persistent undo history
 vim.opt.undodir = vim.g.icloudSync .. "/undo"
 
 vim.opt.shadafile = vim.g.icloudSync .. "/main.shada"
@@ -74,7 +73,7 @@ vim.opt.colorcolumn = "+1" -- = one more than textwidth
 vim.opt.signcolumn = "yes:1"
 
 vim.opt.sidescrolloff = 15
-vim.opt.scrolloff = 12
+vim.opt.scrolloff = 13
 
 vim.opt.winborder = "single"
 
@@ -109,7 +108,7 @@ if vim.g.neovide then
 	vim.opt.titlestring = "%{getcwd()}"
 
 	-- write: issue commands via nvim server
-	pcall(os.remove, "/tmp/nvim_server.pipe") -- since after a crash, the server is still there
+	pcall(os.remove, "/tmp/nvim_server.pipe") -- after a crash, server is still there and needs to be removed
 	vim.fn.serverstart("/tmp/nvim_server.pipe")
 end
 

@@ -6,7 +6,6 @@ plists=(
 	# macOS
 	com.apple.Preferences
 	com.apple.screensaver
-	com.apple.dock
 	com.apple.finder
 	com.apple.iCal                                      # Calendar.app
 	com.apple.notificationcenterui                      # notification center & widgets
