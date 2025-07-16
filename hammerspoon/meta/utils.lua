@@ -249,5 +249,16 @@ function M.closeAllTheThings()
 	M.defer(3, function() M.closeAllWindows("Finder") end)
 end
 
+---@param title string
+function M.createReminder(title)
+	hs.osascript.javascript(([[
+		const rem = Application("Reminders");
+		const today = new Date();
+		const newReminder = rem.Reminder({ name: %q, alldayDueDate: today });
+		rem.defaultList().reminders.push(newReminder);
+		rem.quit();
+	]]):format(title))
+end
+
 --------------------------------------------------------------------------------
 return M

@@ -57,16 +57,7 @@ M.timer_dailyBatteryCheck = hs.timer
 			if d.BatteryPercent < warnBelowPercent then
 				local msg = ("🔋 %s Battery low (%s)"):format(d.Product, d.BatteryPercent)
 				u.notify(msg)
-
-				-- create reminder
-				hs.osascript.javascript(([[
-					const rem = Application("Reminders");
-					const today = new Date();
-					const newReminder = rem.Reminder({ name: %q, alldayDueDate: today });
-					rem.defaultList().reminders.push(newReminder);
-					rem.quit();
-				]]):format(msg))
-				hs.execute(u.exportPath .. "sketchybar --trigger update_reminder_count")
+				u.createReminder(msg)
 			end
 		end
 	end, true)
