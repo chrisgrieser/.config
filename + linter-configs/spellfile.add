@@ -22,6 +22,7 @@ PR
 PRs
 QuickLook
 REPLs
+UTF
 UTI
 VSCode
 Xcode
@@ -29,6 +30,7 @@ Zotero
 automagically
 backlinks
 biome
+blockwise
 characterwise
 cheatsheet
 citekey
@@ -47,17 +49,20 @@ embeddings
 fixup
 fixups
 frontmatter
+habitualize
 hlgroup
 hsl
 iA
 iCloud
 improv
 independent
+interpretability
 javascript
 keymap
 lookaheads
 lsp
 lua
+metadata
 minimalistic
 nano
 nerdfont
@@ -71,10 +76,13 @@ reddit
 renamings
 rgb
 runtime
+s
 signcolumn
 stdin
 strikethroughs
 stylua
+subword
+subwords
 swiftlint
 tabstops
 textobjects
@@ -85,6 +93,3 @@ unminify
 unstaged
 vimscript
 zsh
-embeddings
-metadata
-interpretability
