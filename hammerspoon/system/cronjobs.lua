@@ -92,6 +92,20 @@ M.timer_emmyluaUpdater = hs.timer
 	:start()
 
 --------------------------------------------------------------------------------
+
+-- UPTIME CHECK
+local maxUptimeDays = 50
+M.timer_uptime = hs.timer
+	.doAt("01:30", "01d", function()
+		local stdout = hs.execute("uptime") or ""
+		local uptimeDays = tonumber(stdout:match("up (%d+) days,") or 0)
+		if uptimeDays > maxUptimeDays then
+			u.createReminder("🖥️ Uptime is over " .. maxUptimeDays .. " days")
+		end
+	end)
+	:start()
+
+--------------------------------------------------------------------------------
 -- SLEEP TIMER
 
 -- When projector is connected, check every x min if device has been idle for y
