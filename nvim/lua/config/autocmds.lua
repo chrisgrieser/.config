@@ -105,6 +105,7 @@ vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained" }, {
 	desc = "User: Auto-cd to project root",
 	callback = function(ctx)
 		vim.schedule(function()
+			if not vim.api.nvim_buf_is_valid(ctx.buf) then return end
 			if vim.startswith(ctx.file, "/private/var/") then return end -- GUARD `pass` cli buffers
 			if not vim.uv.cwd() then vim.uv.chdir("/") end -- cwd unset of dir was deleted
 
@@ -145,7 +146,7 @@ vim.api.nvim_create_autocmd("FocusGained", {
 		end
 
 		-- If ending up in empty buffer, re-open the first oldfile that exists
-		vim.defer_fn(function()
+		vim.schedule(function()
 			if vim.api.nvim_buf_get_name(0) ~= "" then return end
 			for _, file in ipairs(vim.v.oldfiles) do
 				if vim.uv.fs_stat(file) and vim.fs.basename(file) ~= "COMMIT_EDITMSG" then
@@ -153,7 +154,7 @@ vim.api.nvim_create_autocmd("FocusGained", {
 					return
 				end
 			end
-		end, 1)
+		end)
 	end,
 })
 

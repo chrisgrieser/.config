@@ -43,11 +43,12 @@ local config = {
 			}
 		end, { desc = " Template string code action", buffer = bufnr })
 
-		vim.keymap.set("n", "<leader>rc", function()
-		vim.lsp.buf.code_action {
-		filter = function(act) return vim.bo.ft ~= "typescript" or act.kind ~= "refactor.move" end,
-	}
-		end)
+		-- skip the "Move to file" code action
+		vim.keymap.set("n", "<leader>ca", function()
+			vim.lsp.buf.code_action {
+				filter = function(act) return act.kind ~= "refactor.move" end,
+			}
+		end, { desc = " Code action", buffer = bufnr })
 	end,
 }
 

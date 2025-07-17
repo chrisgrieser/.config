@@ -1,4 +1,5 @@
 -- DOCS https://codecompanion.olimorris.dev/
+-- alternative: https://github.com/dlants/magenta.nvim
 --------------------------------------------------------------------------------
 
 return {
