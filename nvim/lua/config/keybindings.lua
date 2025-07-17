@@ -297,11 +297,7 @@ keymap("x", "<left>", [["zxhh"zpgvhoho]], { desc = "⬅ Move selection left" })
 --------------------------------------------------------------------------------
 
 -- LSP
-keymap({ "n", "x" }, "<leader>ca", function()
-	vim.lsp.buf.code_action {
-		filter = function(act) return vim.bo.ft ~= "typescript" or act.kind ~= "refactor.move" end,
-	}
-end, { desc = "󱐋 Code action" })
+keymap({ "n", "x" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "󱐋 Code action" })
 
 -- stylua: ignore start
 keymap({ "n", "x" }, "<D-s>", function() require("personal-plugins.misc").formatWithFallback() end, { desc = "󱉯 Save & Format" })
