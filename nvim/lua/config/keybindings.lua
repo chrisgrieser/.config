@@ -321,11 +321,6 @@ do
 	keymap("n", "<PageUp>", function() scrollLspWin(-5) end, { desc = "↑ Scroll LSP win" })
 end
 
-keymap("n", "<leader>H", function()
-	local peek = require("personal-plugins.misc")
-	peek.peek_definition_code("@function.outer", "textobjects")
-end, { desc = " Peek function" })
-
 --------------------------------------------------------------------------------
 
 -- Open first URL in file
