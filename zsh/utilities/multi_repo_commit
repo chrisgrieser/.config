@@ -14,7 +14,7 @@ function actions_in_repo {
 	cp -f "$HOME/Desktop/.build-and-release.sh" ./.build-and-release.sh
 }
 
-commit_msg="build: url-encode changelog for Gallery issue submission"
+commit_msg="build: do not add markdown markup anymore for Gallery changelog"
 
 GITHUB_TOKEN="$(cat "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/private dotfiles/github-token.txt")"
 export GITHUB_TOKEN
