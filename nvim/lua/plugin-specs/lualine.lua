@@ -49,7 +49,8 @@ local function countLspRefs()
 		local text = inFile == inWorkspace and inFile or (inFile .. "(" .. inWorkspace .. ")")
 		vim.b.lspReference_count = vim.trim(icon .. " " .. text)
 	end)
-	return "" -- set to empty string while waiting for request
+	vim.b.lspReference_count = "" -- set to empty string while waiting for request
+	return vim.b.lspReference_count
 end
 
 --------------------------------------------------------------------------------

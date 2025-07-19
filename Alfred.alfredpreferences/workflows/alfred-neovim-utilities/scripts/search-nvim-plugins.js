@@ -20,58 +20,23 @@ function httpRequest(url) {
 
 const fileExists = (/** @type {string} */ filePath) => Application("Finder").exists(Path(filePath));
 
-/** @param {string|Date} date @return {string} relative date */
-function relativeDate(date) {
-	const absDate = typeof date === "string" ? new Date(date) : date;
-	const deltaHours = (Date.now() - absDate.getTime()) / 1000 / 60 / 60;
-	/** @type {"year"|"month"|"week"|"day"|"hour"} */
-	let unit;
-	let delta;
-	if (deltaHours < 24) {
-		unit = "hour";
-		delta = Math.floor(deltaHours);
-	} else if (deltaHours < 24 * 7) {
-		unit = "day";
-		delta = Math.floor(deltaHours / 24);
-	} else if (deltaHours < 24 * 7 * 4) {
-		unit = "week";
-		delta = Math.floor(deltaHours / 24 / 7);
-	} else if (deltaHours < 24 * 7 * 4 * 12) {
-		unit = "month";
-		delta = Math.floor(deltaHours / 24 / 7 / 4);
-	} else {
-		unit = "year";
-		delta = Math.floor(deltaHours / 24 / 7 / 4 / 12);
-	}
-	const formatter = new Intl.RelativeTimeFormat("en", { style: "narrow", numeric: "auto" });
-	return formatter.format(-delta, unit);
-}
-
-/** @param {number} starcount */
-function shortNumber(starcount) {
-	const starStr = starcount.toString();
-	if (starcount < 2000) return starStr;
-	return starStr.slice(0, -3) + "k";
-}
-
 //──────────────────────────────────────────────────────────────────────────────
 
 // INFO Using the crawler result of `store.nvim`, since it is it includes more
 // plugins that awesome-neovim, and neovimcraft and dotfyle only include plugins
 // that are in the awesome-neovim
 const storeNvimList =
-	"https://gist.githubusercontent.com/alex-popov-tech/93dcd3ce38cbc7a0b3245b9b59b56c9b/raw/a4859fe73ddda67e4fb86a5cd7bc30e9889cb787/store.nvim-repos.json";
+	"https://gist.githubusercontent.com/alex-popov-tech/dfb6adf1ee0506461d7dc029a28f851d/raw/store.nvim_db_1.1.0.json";
 
 /** @typedef {Object} StoreNvimRepo
  * @property {string} full_name
  * @property {string} description
  * @property {string} homepage
  * @property {string} html_url
- * @property {number} stargazers_count
- * @property {number} watchers_count
- * @property {number} fork_count
- * @property {string} updated_at - ISO‑8601 timestamp
- * @property {string[]} topics
+ * @property {string} pushed_at Date string
+ * @property {string} pretty_pushed_at humean readable date
+ * @property {string} pretty_stargazers_count
+ * @property {string[]} tags
  */
 
 //──────────────────────────────────────────────────────────────────────────────
@@ -94,17 +59,21 @@ function run() {
 	}
 
 	const pluginsArr = JSON.parse(httpRequest(storeNvimList))
-		.repositories.sort(
+		.items.sort(
 			(/** @type {StoreNvimRepo} */ a, /** @type {StoreNvimRepo} */ b) =>
-				new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime(),
+				new Date(b.pushed_at).getTime() - new Date(a.pushed_at).getTime(),
 		)
 		.map((/** @type {StoreNvimRepo} */ repo) => {
-			const { full_name, description, html_url, stargazers_count, updated_at } = repo;
+			const { full_name, description, html_url, pretty_stargazers_count, pretty_pushed_at } =
+				repo;
 			const [author, name] = full_name.split("/");
 			const installedIcon = installedPlugins.includes(full_name) ? " ✅" : "";
-			const updated = relativeDate(updated_at);
-			const stars = shortNumber(stargazers_count);
-			const subtitle = ["⭐ " + stars, author, updated, description].join("  ·  ");
+			const subtitle = [
+				"⭐ " + pretty_stargazers_count,
+				author,
+				pretty_pushed_at,
+				description,
+			].join("  ·  ");
 
 			return {
 				title: name + installedIcon,
