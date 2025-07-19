@@ -25,6 +25,7 @@ const fileExists = (/** @type {string} */ filePath) => Application("Finder").exi
 // INFO Using the crawler result of `store.nvim`, since it is it includes more
 // plugins that awesome-neovim, and neovimcraft and dotfyle only include plugins
 // that are in the awesome-neovim
+// TEMP https://github.com/alex-popov-tech/store.nvim/issues/9
 const storeNvimList =
 	"https://gist.githubusercontent.com/alex-popov-tech/dfb6adf1ee0506461d7dc029a28f851d/raw/store.nvim_db_1.1.0.json";
 
