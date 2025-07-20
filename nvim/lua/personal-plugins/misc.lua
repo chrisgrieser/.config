@@ -174,7 +174,9 @@ function M.bufferInfo()
 
 	local indentType = vim.bo.expandtab and "spaces" or "tabs"
 	local indentAmount = vim.bo.expandtab and vim.bo.shiftwidth or vim.bo.tabstop
-	local foldexpr = vim.wo.foldexpr:find("lsp") and "LSP" or "Treesitter"
+	local foldprovider = vim.wo.foldmethod ---@type string
+	if vim.wo.foldexpr:find("lsp") then foldprovider = "LSP" end
+	if vim.wo.foldexpr:find("treesitter") then foldprovider = "Treesitter" end
 	local indentExpr = (vim.bo.indentexpr and vim.bo.indentexpr:find("treesitter")) and "Treesitter"
 		or "Vim"
 
@@ -184,7 +186,7 @@ function M.bufferInfo()
 		"[filetype]    " .. (vim.bo.filetype == "" and '""' or vim.bo.filetype),
 		"[buftype]     " .. (vim.bo.buftype == "" and '""' or vim.bo.buftype),
 		"[indent]      " .. ("%s (%d)"):format(indentType, indentAmount),
-		"[folds]       " .. ("%s (level %d)"):format(foldexpr, vim.wo.foldlevel),
+		"[folds]       " .. ("%s (level %d)"):format(foldprovider, vim.wo.foldlevel),
 		"[indentexpr]  " .. indentExpr,
 		"[cwd]         " .. (vim.uv.cwd() or "nil"):gsub(vim.env.HOME, pseudoTilde),
 		"",
