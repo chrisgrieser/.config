@@ -13,16 +13,5 @@ return {
 			mode = { "n", "x" }, -- not `o`, since mapped as textobj
 			desc = "󰯊 beginning of subword",
 		},
-		-- bla$ bla $ff$
-		-- function $a = b$ formula
-		{
-			"E",
-			function()
-				require("spider").motion(
-					"w",
-					{ customPatterns = { patterns = { "%$" }, overrideDefault = false } }
-				)
-			end,
-		},
 	},
 }
