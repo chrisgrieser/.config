@@ -4,6 +4,3 @@ if [[ $(uname -p) == "arm" ]]; then
 else
 	eval "$(/usr/local/bin/brew shellenv)" # Intel mac
 fi
-
-# FIX https://github.com/neovide/neovide/issues/3166
-export PATH="$HOME/.local/neovim-downgrade/bin:$PATH"
