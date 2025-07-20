@@ -83,7 +83,7 @@ return {
 				-- indent
 				local dontUseTreesitterIndent = { "bash", "zsh", "markdown" }
 				if hasStarted and not vim.list_contains(dontUseTreesitterIndent, ctx.match) then
-					vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+					vim.bo[ctx.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
 				end
 			end,
 		})
