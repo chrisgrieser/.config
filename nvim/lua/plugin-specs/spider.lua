@@ -14,7 +14,7 @@ return {
 			desc = "󰯊 beginning of subword",
 		},
 		-- bla$ bla $ff$
-		-- function $a = bb$ formula
+		-- function $a = b$ formula
 		{
 			"E",
 			function()
