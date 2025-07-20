@@ -59,19 +59,16 @@ local function openNotif(idx)
 		footer = footer and " " .. footer .. " " or nil,
 		footer_pos = footer and "right" or nil,
 		border = vim.o.winborder --[[@as "rounded"|"single"|"double"]],
-		ft = notif.ft or "markdown",
+			ft = notif.ft or "markdown", -- needed for treesitter folding to work
 		wo = {
 			winhighlight = table.concat(highlights, ","),
 			wrap = notif.ft ~= "lua",
 			statuscolumn = " ", -- adds padding
 			cursorline = true,
-			colorcolumn = "",
 			winfixbuf = true,
 			fillchars = "fold: ,eob: ",
-
-			-- enable folding
+			foldmethod = "expr", -- enable folding
 			foldexpr = "v:lua.vim.treesitter.foldexpr()",
-			foldmethod = "expr",
 		},
 		bo = {
 			modifiable = false,
