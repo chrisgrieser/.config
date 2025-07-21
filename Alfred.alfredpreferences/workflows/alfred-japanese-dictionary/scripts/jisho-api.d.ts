@@ -23,21 +23,19 @@ declare type Japanese = {
 	reading?: string; // Kana, (in some rare cases, even the kana is missing)
 };
 
+// biome-ignore-start lint/style/useNamingConvention: not set by me
+// biome-ignore-start lint/suspicious/noExplicitAny: unclear
 declare type Sense = {
-	// biome-ignore lint/style/useNamingConvention: not set by me
 	english_definitions: string[];
-	// biome-ignore lint/style/useNamingConvention: not set by me
 	parts_of_speech: string[];
 	links: { text: string; url: string }[];
 	tags: string[];
-	// biome-ignore lint/suspicious/noExplicitAny: unclear
 	restrictions: any[];
-	// biome-ignore lint/style/useNamingConvention: not set by me
 	see_also: string[];
 	antonyms: string[];
-	// biome-ignore lint/suspicious/noExplicitAny: unclear
 	source: any[];
 	info: string[];
-	// biome-ignore lint/suspicious/noExplicitAny: unclear
 	sentences?: any[];
 };
+// biome-ignore-end lint/style/useNamingConvention: not set by me
+// biome-ignore-end lint/suspicious/noExplicitAny: unclear
