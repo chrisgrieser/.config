@@ -15,7 +15,7 @@ return {
 		{ "<leader>gh", function() require("tinygit").fileHistory() end, mode = { "n", "x" }, desc = "󰋚 File history" },
 		{ "<leader>gu", function() require("tinygit").githubUrl("file") end, mode = { "n", "x" }, desc = " GitHub line URL" },
 		{ "<leader>gU", function() require("tinygit").githubUrl("repo") end, mode = { "n", "x" }, desc = " GitHub repo URL" },
-		{ "<leader>g!", function() require("tinygit").githubUrl("blame") end, mode = { "n", "x" }, desc = "󰆽 GitHub blame" },
+		{ "<leader>g!", function() require("tinygit").githubUrl("blame") end, mode = { "n", "x" }, desc = " GitHub blame" },
 		{ "<leader>gt", function() require("tinygit").stashPush() end, desc = "󰜦 Stash" },
 		{ "<leader>gT", function() require("tinygit").stashPop() end, desc = "󰜦 Stash pop" },
 
