@@ -6,8 +6,8 @@ app.includeStandardAdditions = true;
 
 /** @param {string} url @return {string} */
 function httpRequest(url) {
-	const queryURL = $.NSURL.URLWithString(url);
-	const data = $.NSData.dataWithContentsOfURL(queryURL);
+	const queryUrl = $.NSURL.URLWithString(url);
+	const data = $.NSData.dataWithContentsOfURL(queryUrl);
 	return $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding).js;
 }
 
@@ -30,10 +30,10 @@ function run(argv) {
 	// DOCS the API is undocumented, but some info is delivered in this thread:
 	// https://jisho.org/forum/54fefc1f6e73340b1f160000-is-there-any-kind-of-search-api
 	// ALTERNATIVES (not as many suggestions though): https://jotoba.de/docs.html#post-/api/search/words
-	const apiURL = "https://jisho.org/api/v1/search/words?keyword=" + encodeURIComponent(query);
+	const apiUrl = "https://jisho.org/api/v1/search/words?keyword=" + encodeURIComponent(query);
 
 	/** @type {JishoResponse} */
-	const response = JSON.parse(httpRequest(apiURL));
+	const response = JSON.parse(httpRequest(apiUrl));
 
 	/** @type {AlfredItem[]} */
 	const items = response.data
@@ -66,7 +66,11 @@ function run(argv) {
 			const propertiesDisplay = properties.join(" ").toUpperCase();
 
 			// subtitle
-			const subtitle = [engWord, `[${wordType}]`, readMoreLink ? "  " + readmoreIcon : ""]
+			const subtitle = [
+				engWord,
+				wordType ? `[${wordType}]` : null,
+				readMoreLink ? "  " + readmoreIcon : "",
+			]
 				.filter(Boolean)
 				.join("    ");
 
