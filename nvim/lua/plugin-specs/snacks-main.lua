@@ -4,10 +4,7 @@
 
 return {
 	"folke/snacks.nvim",
-
-	-- for quickfile and bigfile
-	priority = 1000,
-	lazy = false,
+	event = "VeryLazy",
 
 	config = function(_, opts)
 		require("snacks").setup(opts)
@@ -89,14 +86,6 @@ return {
 				width = 50,
 				row = math.ceil(vim.o.lines / 2) - 3,
 			},
-		},
-		bigfile = {
-			notify = false,
-			size = 1024 * 1024, -- 1.0MB
-			line_length = math.huge, -- disable, since buggy with Alfred's `info.plist`
-		},
-		quickfile = {
-			enabled = true,
 		},
 		words = {
 			notify_jump = true,

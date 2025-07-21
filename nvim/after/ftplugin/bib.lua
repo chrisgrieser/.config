@@ -1,5 +1,9 @@
--- Go to tail
-vim.defer_fn(function() vim.cmd.normal { "G", bang = true } end, 1)
+-- scroll down on reading a file
+vim.schedule(function()
+	if vim.b.bib_did_scroll then return end
+	vim.cmd.normal { "G", bang = true }
+	vim.b.bib_did_scroll = true
+end)
 
 -- `%` not actually a comment character, just convention of some programs
 -- https://tex.stackexchange.com/questions/261261/are-comments-discouraged-in-a-bibtex-file
@@ -10,7 +14,7 @@ vim.opt_local.formatoptions:append { r = true }
 
 -- since treesitter has not symbol support for bibtex, we just use a small
 -- function to search the buffer for citekeys
-vim.defer_fn(function()
+vim.schedule(function()
 	vim.keymap.set("n", "gs", function()
 		local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
 		local citekeys = vim.iter(lines)
@@ -26,7 +30,7 @@ vim.defer_fn(function()
 			vim.fn.search(citekey .. ",")
 		end)
 	end, { buffer = true })
-end, 1)
+end)
 
 --------------------------------------------------------------------------------
 
@@ -47,7 +51,7 @@ local function checkForDuplicateCitekeys()
 		end
 	end
 	if duplCitekeys ~= "" then
-		vim.notify(duplCitekeys, vim.log.levels.WARN, { title = "Duplicate Citekeys" })
+		vim.notify(vim.trim(duplCitekeys), vim.log.levels.WARN, { title = "Duplicate Citekeys" })
 	end
 end
 checkForDuplicateCitekeys()
