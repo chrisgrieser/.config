@@ -2,8 +2,6 @@
 --------------------------------------------------------------------------------
 
 return {
-	enabled = false, -- using supermaven instead
-
 	"monkoose/neocodeium",
 	event = "InsertEnter",
 	cmd = "NeoCodeium",
