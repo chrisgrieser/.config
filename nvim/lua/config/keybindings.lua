@@ -111,8 +111,8 @@ keymap("n", ">", "gUiw", { desc = "󰬴 Uppercase cword" })
 
 -- Increment/decrement, or toggle true/false
 -- stylua: ignore
-keymap({ "n", "x" }, "+", function() require("personal-plugins.misc").toggleOrIncrement() end, { desc = "󰐖 Increment/toggle" })
-keymap({ "n", "x" }, "ü", "<C-x>", { desc = "󰍵 Decrement" })
+keymap("n", "+", function() require("personal-plugins.misc").toggleOrIncrement() end, { desc = "󰐖 Increment/toggle" })
+keymap("n", "ü", "<C-x>", { desc = "󰍵 Decrement" })
 
 keymap("n", "X", function()
 	local updatedLine = vim.api.nvim_get_current_line():gsub(".$", "")
