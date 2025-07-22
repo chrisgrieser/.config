@@ -4,7 +4,7 @@
 
 return {
 	"folke/snacks.nvim",
-	event = "VeryLazy",
+	event = "UIEnter",
 
 	config = function(_, opts)
 		require("snacks").setup(opts)
