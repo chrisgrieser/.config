@@ -5,7 +5,7 @@
 
 # DELETE CLUTTER
 cd "$TR_TORRENT_DIR" || return 1 # `$TR_TORRENT_DIR` is where the downloads are placed
-find -E . -iregex ".*\.(nfo|md|jpe?g|png|exe|txt)$" -delete
+find . -E -iregex ".*\.(nfo|md|jpe?g|png|exe|txt)$" -delete
 find . -type directory -empty -delete                  # e.g. now empty `Image` folders
 find . -type directory -name "Sample" -exec rm -r {} + # Folders with content do not accept `-delete`
 sleep 1
@@ -18,7 +18,7 @@ find . -mindepth 1 -type directory | while read -r folder; do
 done
 
 # QUIT TRANSMISSION, IF NO OTHER ACTIVE TORRENTS
-sleep 7 # time for new torrents to be initialized
+sleep 15 # time for new torrents to be initialized
 incomplete_dir=$(defaults read org.m0k.transmission IncompleteDownloadFolder)
 # exclude `TV`, cause it's a re-appearing special folder in the `Movies` folder
 active_torrents=$(find "$incomplete_dir" -mindepth 1 -not -path "**/TV**" -not -name ".DS_Store" -not -name ".localized")
