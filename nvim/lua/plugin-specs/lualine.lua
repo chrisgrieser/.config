@@ -161,7 +161,8 @@ return {
 			},
 			lualine_y = {
 				{ -- line count
-					function() return vim.api.nvim_buf_line_count(0) .. " " end,
+					function() return vim.api.nvim_buf_line_count(0) end,
+					icon = "",
 					cond = function() return vim.bo.buftype == "" end,
 				},
 			},
