@@ -1,7 +1,9 @@
 return {
 	"chrisgrieser/nvim-chainsaw",
 	opts = {
-		visuals = { icon = "󰹈" },
+		visuals = {
+			icon = "󰹈",
+		},
 		preCommitHook = {
 			enabled = true,
 			dontInstallInDirs = { "**/nvim-chainsaw" }, -- plugin dir itself, when developing it

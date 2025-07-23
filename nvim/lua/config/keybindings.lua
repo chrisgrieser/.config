@@ -487,6 +487,11 @@ keymap("n", "<leader>od", function()
 	vim.diagnostic.enable(not isEnabled, { bufnr = 0 })
 end, { desc = "󰋽 Diagnostics" })
 
+keymap("n", "<leader>oH", function()
+	local isEnabled = vim.lsp.inlay_hint.is_enabled { bufnr = 0 }
+	vim.lsp.inlay_hint.enable(not isEnabled, { bufnr = 0 })
+end, { desc = "󰋽 Inlay hints" })
+
 -- stylua: ignore
 keymap("n", "<leader>oc", function() vim.wo.conceallevel = vim.wo.conceallevel == 0 and 2 or 0 end, { desc = "󰈉 Conceal" })
 

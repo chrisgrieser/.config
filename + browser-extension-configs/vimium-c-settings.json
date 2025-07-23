@@ -1,11 +1,11 @@
 {
 	"name": "Vimium C",
-	"@time": "5/3/2025, 12:33:46 PM",
-	"time": 1746268426579,
+	"@time": "7/23/2025, 7:46:33 PM",
+	"time": 1753292793416,
 	"environment": {
 		"extension": "2.12.2",
 		"platform": "mac",
-		"chromium": 135
+		"chromium": 138
 	},
 	"allBrowserUrls": true,
 	"exclusionListenHash": false,
@@ -166,8 +166,11 @@
 		"# goto issues I authored ",
 		"# https://github.com/gdh1995/vimium-c/wiki/Substitute-URLs-and-text-during-commands",
 		"# https://github.com/gdh1995/vimium-c/discussions/996#discussioncomment-6752943",
-		"# `sed` parameter uses `,` as delimiter (allow are: `/@#,`)",
+		"# `sed` parameter uses `,` as delimiter (allowed are: `/@#,`)",
 		"map ga openUrl url=\"$S\" url_mask sed=\"s,(https://github.com/.+?/.[^/?]+).*,$1/issues?q=involves:@me,\"",
+		"",
+		"# show git history",
+		"map gh openUrl url=\"$S\" url_mask sed=\"s/github.com/github.githistory.xyz/\"",
 		"",
 		"# COPY URLS",
 		"map yy copyCurrentUrl",

@@ -4,3 +4,6 @@ if [[ $(uname -p) == "arm" ]]; then
 else
 	eval "$(/usr/local/bin/brew shellenv)" # Intel mac
 fi
+
+# downgrade nvim
+export PATH="$HOME/.local/neovim-downgrade/bin:$PATH"
