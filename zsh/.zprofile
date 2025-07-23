@@ -6,4 +6,4 @@ else
 fi
 
 # downgrade nvim
-export PATH="$HOME/.local/neovim-downgrade/bin:$PATH"
+# export PATH="$HOME/.local/neovim-downgrade/bin:$PATH"
