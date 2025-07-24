@@ -15,9 +15,10 @@ safeRequire("config.reopen-last-file")
 safeRequire("config.options") -- first so available for plugins configs
 
 -- For extra security, do not load plugins when using `pass`.
---(requires starting `pass` via `env="USING_PASS=true" pass`)
+--(requires starting it via `env="USING_PASS=true" pass`)
 if vim.env.USING_PASS then
 	vim.keymap.set("n", "ss", "VP", { desc = "Substitute line", buffer = true })
+	vim.keymap.set("n", "S", "v$P", { desc = "Substitute to EoL", buffer = true })
 	vim.keymap.set("n", "<CR>", "ZZ", { desc = "Save and exit", buffer = true })
 else
 	safeRequire("config.lazy")
