@@ -60,7 +60,7 @@
 		}
 	},
 	"javascript": {
-		"globals": ["$", "Application", "ObjC", "Path"] // JXA globals
+		"globals": ["$", "Application", "ObjC", "Path", "delay"] // JXA globals
 	},
 	"formatter": {
 		"useEditorconfig": true,
