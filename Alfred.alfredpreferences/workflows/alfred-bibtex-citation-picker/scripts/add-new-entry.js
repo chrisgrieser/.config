@@ -162,14 +162,14 @@ function inputToEntryJson(input) {
 
 		// GOOGLE BOOKS -- https://developers.google.com/books/docs/v1/using
 		else {
-			const response = app.doShellScript(
+			const resp = app.doShellScript(
 				`curl -sL "https://www.googleapis.com/books/v1/volumes?q=isbn:${isbn}"`,
 			);
-			if (!response) return "No response by Google Books API";
-			const fullData = JSON.parse(response);
-			if (fullData.totalItems === 0) return "ISBN not found";
+			if (!resp) return "No response by Google Books API";
+			const allData = JSON.parse(resp);
+			if (allData.totalItems === 0) return "ISBN not found";
 
-			const data = fullData.items[0].volumeInfo;
+			const data = allData.items[0].volumeInfo;
 			entry.type = "book";
 			entry.year = Number.parseInt(data.publishedDate.split("-")[0]);
 			entry.author = (data.authors || data.author || []).join(" and ");
@@ -177,7 +177,7 @@ function inputToEntryJson(input) {
 			entry.publisher = data.publisher;
 			entry.title = data.title;
 			if (data.subtitle) entry.title += ". " + data.subtitle;
-			const bookAccessible = fullData.items[0].accessInfo.viewability !== "NO_PAGES";
+			const bookAccessible = allData.items[0].accessInfo.viewability !== "NO_PAGES";
 			if (bookAccessible) entry.url = data.previewLink;
 		}
 	}
@@ -202,9 +202,11 @@ function json2bibtex(entryJson, citekey) {
 		if (typeof value === "string" && !value.match(/^\d+$/)) {
 			// double-escape bibtex values to preserve capitalization, but not
 			// author key, since it results in the author key being interpreted as
-			// literal author name
+			// literal author name, and not doi, since it behaves weirdly with some
+			// citation styles like Chicago
 			const hasCapitalLetter = value.match(/[A-Z]/);
-			value = hasCapitalLetter && key !== "author" ? `{{${value}}}` : `{${value}}`;
+			const ignoreDueToKey = ["author", "doi"].includes(key);
+			value = hasCapitalLetter && ignoreDueToKey ? `{{${value}}}` : `{${value}}`;
 		}
 		propertyLines.push(`\t${key} = ${value},`);
 	}
