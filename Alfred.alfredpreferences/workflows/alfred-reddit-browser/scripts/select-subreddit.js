@@ -35,51 +35,69 @@ function ensureCacheFolderExists() {
 
 //──────────────────────────────────────────────────────────────────────────────
 
+/**
+ * @param {string} subredditName
+ * @return {any?} subredditInfo
+ */
+function getSubredditInfo(subredditName) {
+	// INFO user agent is required to avoid network security error by reddit
+	const userAgent =
+		"Alfred " + $.getenv("alfred_workflow_name") + "/" + $.getenv("alfred_workflow_version");
+
+	const apiUrl = `https://www.reddit.com/r/${subredditName}/about.json`;
+	const curlCommand = `curl --silent --location --user-agent "${userAgent}" "${apiUrl}"`;
+	const response = app.doShellScript(curlCommand);
+	let subredditInfo;
+	try {
+		subredditInfo = JSON.parse(response);
+	} catch (_error) {
+		console.log("reddit did not respond with JSON.");
+		return;
+	}
+	if (subredditInfo.error) {
+		console.log(`${subredditInfo.error}: ${subredditInfo.message}`);
+		return;
+	}
+
+	return subredditInfo;
+}
+
 /** gets subreddit icon
  * @param {string} iconPath
  * @param {string} subredditName
  */
-function cacheAndReturnSubIcon(iconPath, subredditName) {
-	// HACK reddit API does not like curl (lol)
-	const redditApiCall = `curl -sL -H "User-Agent: Chrome/115.0.0.0" "https://www.reddit.com/r/${subredditName}/about.json"`;
-	const subredditInfo = JSON.parse(app.doShellScript(redditApiCall));
-	if (subredditInfo.error) {
-		console.log(`${subredditInfo.error}: ${subredditInfo.message}`);
-		return false;
-	}
+function cacheSubredditIcon(iconPath, subredditName) {
+	const subredditInfo = getSubredditInfo(subredditName);
+	if (!subredditInfo) return;
 
 	// for some subreddits saved as icon_img, for others as community_icon
 	let onlineIcon = subredditInfo.data.icon_img || subredditInfo.data.community_icon;
-	if (!onlineIcon) return true; // has no icon
+	if (!onlineIcon) return;
 	onlineIcon = onlineIcon.replace(/\?.*$/, ""); // clean url for curl
 
 	// cache icon
-	app.doShellScript(`curl -sL "${onlineIcon}" --create-dirs --output "${iconPath}"`);
-	return true;
+	app.doShellScript(
+		`curl --silent --location "${onlineIcon}" --create-dirs --output "${iconPath}"`,
+	);
 }
 
-/** @param {string} subredditName */
+/**
+ * @param {string} subredditName
+ * @return {false|number} subscriber count
+ */
 function cacheAndReturnSubCount(subredditName) {
-	const redditApiCall = `curl -sL -H "User-Agent: Chrome/115.0.0.0" "https://www.reddit.com/r/${subredditName}/about.json"`;
-	const subredditInfo = JSON.parse(app.doShellScript(redditApiCall));
-	if (subredditInfo.error) {
-		console.log(`${subredditInfo.error}: ${subredditInfo.message}`);
-		return undefined;
-	}
+	const subredditInfo = getSubredditInfo(subredditName);
+	if (!subredditInfo) return false;
 
 	ensureCacheFolderExists();
+	const cachePath = $.getenv("alfred_workflow_cache") + "/subscriberCount.json";
 	const subscriberCount = subredditInfo.data.subscribers
 		.toString()
 		.replace(/\B(?=(\d{3})+(?!\d))/g, " ");
-	const subscriberData = JSON.parse(
-		readFile($.getenv("alfred_workflow_cache") + "/subscriberCount.json") || "{}",
-	);
+	const subscriberData = JSON.parse(readFile(cachePath) || "{}");
 	subscriberData[subredditName] = subscriberCount;
-	writeToFile(
-		`${$.getenv("alfred_workflow_cache")}/subscriberCount.json`,
-		JSON.stringify(subscriberData),
-	);
-	return subscriberCount; // = no error
+	writeToFile(cachePath, JSON.stringify(subscriberData));
+	return subscriberCount;
 }
 
 //──────────────────────────────────────────────────────────────────────────────
@@ -98,20 +116,18 @@ function run() {
 		// cache subreddit image
 		let iconPath = `${iconFolder}/${subredditName}.png`;
 		if (!fileExists(iconPath)) {
-			const success = cacheAndReturnSubIcon(iconPath, subredditName);
-			if (!fileExists(iconPath)) iconPath = "icon.png"; // if icon cannot be cached, use default
-			if (!success) subtitle += "⚠️ subreddit icon error ";
+			cacheSubredditIcon(iconPath, subredditName);
+			if (!fileExists(iconPath)) iconPath = "icon.png"; // fallback to this workflow's icon
 		}
 
 		// subscriber count
-		const subscriberData = JSON.parse(
-			readFile($.getenv("alfred_workflow_cache") + "/subscriberCount.json") || "{}",
-		);
-		const subscriberCount = subscriberData[subredditName] || cacheAndReturnSubCount(subredditName);
-		if (!subscriberCount) subtitle += "⚠️ subscriber count error ";
-		subtitle += `👥 ${subscriberCount}`;
+		const cachePath = $.getenv("alfred_workflow_cache") + "/subscriberCount.json";
+		const subscriberData = JSON.parse(readFile(cachePath) || "{}");
+		const subscriberCount =
+			subscriberData[subredditName] || cacheAndReturnSubCount(subredditName);
+		subtitle += subscriberCount ? `👥 ${subscriberCount}` : "⚠️ subscriber count error ";
 
-		/** @type AlfredItem */
+		/** @type {AlfredItem} */
 		const alfredItem = {
 			title: `r/${subredditName}`,
 			subtitle: subtitle,
