@@ -2,11 +2,13 @@
 	name = Chris Grieser
 	email = 73286100+chrisgrieser@users.noreply.github.com
 
-;───────────────────────────────────────────────────────────────────────────────
+[url "git@github.com:"]
+	insteadOf = "https://github.com/" ; automatically use SSH instead of HTTPS for remotes
+	insteadOf = "gh:" ; use `gh:owner/name` as shorthand
+
 ; INFO
 ; 1. needs to come AFTER the config they intend to overwrite
 ; 2. test via `git config --get --show-origin user.name`
-
 [includeIf "gitdir:PLACEHOLDER"]
 	path = "./alternative-config"
 
@@ -23,6 +25,8 @@
 	; dotfile-repo, it does not work to enforce hooks on other people's clones
 	hooksPath = .git-hooks
 
+[init]
+	defaultBranch = main
 [status]
 	showUntrackedFiles = all
 	short = true
@@ -30,13 +34,6 @@
 	relativePaths = false ; false = show path relative to git root, not relative to cwd
 [stash]
 	showIncludeUntracked = true
-
-[init]
-	defaultBranch = main
-[url "git@github.com:"]
-	insteadOf = "https://github.com/" ; automatically use SSH instead of HTTPS for remotes
-	insteadOf = "gh:" ; use `gh:owner/name` as shorthand
-
 [pull]
 	rebase = true ; always `pull --rebase` instead of merging https://blog.sffc.xyz/post/185195398930/why-you-should-use-git-pull-ff-only
 [fetch]
@@ -47,7 +44,9 @@
 [branch]
 	sort = -committerdate ; sort by recency, not by name
 [tag]
-	sort = -committerdate
+	sort = -version:refname
+[column]
+    ui = auto
 
 [log]
 	abbrevCommit = true ; don't show 40 characters, but rather 7-9
@@ -55,10 +54,16 @@
 [format]
 	pretty = %C(yellow)%h%C(red)%d%C(reset) %s %C(green)(%cr) %C(bold blue)%an%C(reset)
 
+;───────────────────────────────────────────────────────────────────────────────
+
 [advice]
 	detachedHead = false
 [help]
 	autoCorrect = prompt ; prompt whether to run auto-correction
+[column]
+    ui = auto
+
+;───────────────────────────────────────────────────────────────────────────────
 
 [rebase]
 	autoSquash = true
@@ -66,8 +71,8 @@
 	missingCommitsCheck = error ; commits must be removed with `drop`, not by deleting a line
 	stat = true
 [diff]
+algorithm = histogram ; https://luppeng.wordpress.com/2020/10/10/when-to-use-each-of-the-git-diff-algorithms/
 	colorMoved = true ; moved lines colored different than added/removed
-	algorithm = histogram ; https://luppeng.wordpress.com/2020/10/10/when-to-use-each-of-the-git-diff-algorithms/
 [merge]
 	conflictStyle = zdiff3 ; shows original version in middle ; https://www.ductile.systems/zdiff3/
 [rerere]
