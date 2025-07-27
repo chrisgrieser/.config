@@ -17,6 +17,7 @@
 [core]
 	editor = nvim
 	quotePath = false
+	compression = 9
 
 	; 1. Motivation: version control & sync of hooks across devices
 	; 2. By setting them in the global git config, there is no more need to run
@@ -24,6 +25,14 @@
 	; 3. This trick only works on repos solely managed by the user of this
 	; dotfile-repo, it does not work to enforce hooks on other people's clones
 	hooksPath = .git-hooks
+[advice]
+	detachedHead = false
+[help]
+	autoCorrect = prompt ; prompt whether to run auto-correction
+[column]
+    ui = auto
+
+;───────────────────────────────────────────────────────────────────────────────
 
 [init]
 	defaultBranch = main
@@ -34,10 +43,10 @@
 	relativePaths = false ; false = show path relative to git root, not relative to cwd
 [stash]
 	showIncludeUntracked = true
-[pull]
-	rebase = true ; always `pull --rebase` instead of merging https://blog.sffc.xyz/post/185195398930/why-you-should-use-git-pull-ff-only
 [fetch]
 	prune = true ; automatically delete remote tracking branches that have been deleted
+[pull]
+	rebase = true ; always `pull --rebase` instead of merging https://blog.sffc.xyz/post/185195398930/why-you-should-use-git-pull-ff-only
 [push]
 	autoSetupRemote = true ; create remote branch if it doesn't exist yet
 
@@ -55,23 +64,13 @@
 	pretty = %C(yellow)%h%C(red)%d%C(reset) %s %C(green)(%cr) %C(bold blue)%an%C(reset)
 
 ;───────────────────────────────────────────────────────────────────────────────
-
-[advice]
-	detachedHead = false
-[help]
-	autoCorrect = prompt ; prompt whether to run auto-correction
-[column]
-    ui = auto
-
-;───────────────────────────────────────────────────────────────────────────────
-
 [rebase]
 	autoSquash = true
 	autoStash = true
 	missingCommitsCheck = error ; commits must be removed with `drop`, not by deleting a line
 	stat = true
 [diff]
-algorithm = histogram ; https://luppeng.wordpress.com/2020/10/10/when-to-use-each-of-the-git-diff-algorithms/
+	algorithm = histogram ; https://luppeng.wordpress.com/2020/10/10/when-to-use-each-of-the-git-diff-algorithms/
 	colorMoved = true ; moved lines colored different than added/removed
 [merge]
 	conflictStyle = zdiff3 ; shows original version in middle ; https://www.ductile.systems/zdiff3/
