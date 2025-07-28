@@ -10,7 +10,14 @@ find . -type directory -empty -delete                  # e.g. now empty `Image` 
 find . -type directory -name "Sample" -exec rm -r {} + # Folders with content do not accept `-delete`
 sleep 1
 
-# RENAME SINGLE FILES
+# UNNEST IF SINGLE FILE
+find . -mindepth 1 -type directory | while read -r folder; do
+	files_in_folder=$(find "$folder" -depth 1 | wc -l | tr -d " ")
+	[[ $files_in_folder -eq 1 ]] && mv "$folder"/* "$TR_TORRENT_DIR"
+	rmdir "$folder" # only deletes empty folders
+done
+
+# RENAME TOP-LEVEL FILES
 rename_log="./.rename.log" # CONFIG
 find "." -maxdepth 1 -name "*.mkv" | while read -r old_name; do
 	old_name_no_ext=${old_name%.*}
@@ -19,7 +26,7 @@ find "." -maxdepth 1 -name "*.mkv" | while read -r old_name; do
 			cut -c3- | # remove `./`
 			tr "._" " " |
 			sed -e 's/ *\[[a-zA-Z0-9_]*\] *//g' | # tags for the subbing group
-			sed -Ee 's/\(?(1080p).*/\1/' -Ee 's/\(?(720p).*/\1/'
+			sed -Ee 's/\(?(1080p).*/\1/' -Ee 's/\(?(720p).*/\1/' # video file info
 	)
 	new_name="./$new_name.mkv"
 	if [[ ! -f "$new_name" ]]; then
@@ -27,13 +34,6 @@ find "." -maxdepth 1 -name "*.mkv" | while read -r old_name; do
 		echo "$date $old_name -> $new_name" | tee -a "$rename_log"
 		command mv "$old_name" "$new_name"
 	fi
-done
-
-# UNNEST IF SINGLE FILE
-find . -mindepth 1 -type directory | while read -r folder; do
-	files_in_folder=$(find "$folder" -depth 1 | wc -l | tr -d " ")
-	[[ $files_in_folder -eq 1 ]] && mv "$folder"/* "$TR_TORRENT_DIR"
-	rmdir "$folder" # only deletes empty folders
 done
 
 # QUIT TRANSMISSION, IF NO OTHER ACTIVE TORRENTS
