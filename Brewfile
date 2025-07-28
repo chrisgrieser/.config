@@ -47,11 +47,10 @@ cask "zoom"
 mas "Highlights", id: 1498912833
 mas "Ivory", id: 6444602274
 
-# Quicklook plugins
+# QUICKLOOK
 cask "betterzip"
 cask "qlmarkdown"
 cask "syntax-highlight" # `Peek` not available anymore https://apps.apple.com/us/app/peek-a-quick-look-extension/id1554235898?mt=12
-cask "qlvideo"
 
 #───────────────────────────────────────────────────────────────────────────────
 
@@ -67,10 +66,12 @@ if computerName.include?("Home")
 	cask "iina"
 	cask "steam"
 	cask "transmission"
+	cask "qlvideo" # provides preview icons for `mkv`
 elsif computerName.include?("Office")
 	cask "cleanshot" # only license for 2 devices
 elsif computerName.include?("Mother")
 	cask "iina"
 	cask "steam"
 	cask "transmission"
+	cask "qlvideo" # provides preview icons for `mkv`
 end
