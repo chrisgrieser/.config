@@ -2,10 +2,6 @@
 	name = Chris Grieser
 	email = 73286100+chrisgrieser@users.noreply.github.com
 
-[url "git@github.com:"]
-	insteadOf = "https://github.com/" ; automatically use SSH instead of HTTPS for remotes
-	insteadOf = "gh:" ; use `gh:owner/name` as shorthand
-
 ; INFO
 ; 1. needs to come AFTER the config they intend to overwrite
 ; 2. test via `git config --get --show-origin user.name`
@@ -29,8 +25,6 @@
 	detachedHead = false
 [help]
 	autoCorrect = prompt ; prompt whether to run auto-correction
-[column]
-    ui = auto
 
 ;───────────────────────────────────────────────────────────────────────────────
 
@@ -54,14 +48,17 @@
 	sort = -committerdate ; sort by recency, not by name
 [tag]
 	sort = -version:refname
-[column]
-    ui = auto
 
 [log]
 	abbrevCommit = true ; don't show 40 characters, but rather 7-9
 	follow = true
 [format]
 	pretty = %C(yellow)%h%C(red)%d%C(reset) %s %C(green)(%cr) %C(bold blue)%an%C(reset)
+
+; when cloning
+[url "git@github.com:"]
+	insteadOf = "https://github.com/" ; automatically use SSH instead of HTTPS for remotes
+	insteadOf = "gh:" ; use `gh:owner/name` as shorthand
 
 ;───────────────────────────────────────────────────────────────────────────────
 [rebase]

@@ -14,7 +14,7 @@ function _separator {
 	for ((i = 0; i < COLUMNS; i++)); do
 		sep="$sep$sep_char"
 	done
-	print "\033[1;30m$sep\033[0m"
+	print "\e[1;30m$sep\e[0m"
 }
 
 function _gitlog {
@@ -46,19 +46,19 @@ function _gitlog {
 			-e 's/tag: / /g' \
 			-e 's/ -> /   /g' \
 			-e 's/\* /· /' \
-			-Ee $'s/ ([a-z]+)(\\(.+\\))?(!?):/ \033[1;35m\\1\033[1;36m\\2\033[7;31m\\3\033[0;38;5;245m:\033[0m/' \
-			-Ee $'s/`[^`]*`/\033[0;36m&\033[0m/g' \
-			-Ee $'s/#[0-9]+/\033[0;31m&\033[0m/g' \
+			-Ee $'s/ ([a-z]+)(\\(.+\\))?(!?):/ \e[1;35m\\1\e[1;36m\\2\e[7;31m\\3\e[0;38;5;245m:\e[0m/' \
+			-Ee $'s/`[^`]*`/\e[0;36m&\e[0m/g' \
+			-Ee $'s/#[0-9]+/\e[0;31m&\e[0m/g' \
 			-Ee "s_([a-f0-9]{7,40})_\x1b]8;;https://github.com/${repo}/commit/\1\x1b\\\\\1\x1b]8;;\x1b\\\\_"
 		# INFO last replacements adds hyperlinks to hashes
 }
 
 function _list_files_here {
-	if [[ ! -x "$(command -v eza)" ]]; then print "\033[0;33mMagic Dashboard: \`eza\` not installed.\033[0m" && return 1; fi
+	if [[ ! -x "$(command -v eza)" ]]; then print "\e[0;33mMagic Dashboard: \`eza\` not installed.\e[0m" && return 1; fi
 
 	local eza_output
 	eza_output=$(
-		eza --width="$COLUMNS" --all --grid --color=always --icons \
+		eza "." --width="$COLUMNS" --all --grid --color=always --icons \
 			--git-ignore --ignore-glob=".DS_Store" \
 			--sort=oldest --group-directories-first --no-quotes \
 			--git --long --no-user --no-permissions --no-filesize --no-time
@@ -68,7 +68,7 @@ function _list_files_here {
 	if [[ $(echo "$eza_output" | wc -l) -gt $max_files_lines ]]; then
 		local shortened
 		shortened="$(echo "$eza_output" | head -n"$max_files_lines")"
-		printf "%s   \033[1;30m...\033[0m" "$shortened"
+		printf "%s   \e[1;30m...\e[0m" "$shortened"
 	elif [[ -n "$eza_output" ]]; then
 		echo -n "$eza_output"
 	fi
@@ -93,14 +93,14 @@ function _gitstatus {
 		fi
 		print "$diffs" | head -n"$max_gitstatus_lines" |
 			sed -e 's/ => /   /' \
-				-e $'s/\\(gone\\)/\033[0;31mD     \033[0m/' \
-				-e $'s/\\(new\\)/\033[0;32mN    \033[0m/' \
-				-e $'s/(\\(new .*\\))/\033[0;34m\\1\033[0m/' \
+				-e $'s/\\(gone\\)/\e[0;31mD     \e[0m/' \
+				-e $'s/\\(new\\)/\e[0;32mN    \e[0m/' \
+				-e $'s/(\\(new .*\\))/\e[0;34m\\1\e[0m/' \
 				-e 's/ Bin /    /' \
-				-e $'s/ \\| Unmerged /  \033[1;31m  \033[0m /' \
-				-Ee $'s|([^/+]*)(/)|\033[0;36m\\1\033[0;33m\\2\033[0m|g' \
-				-e $'s/^\\+/\033[1;35m 󰐖\033[0m /' \
-				-e $'s/ \\|/ \033[1;30m│\033[0m/'
+				-e $'s/ \\| Unmerged /  \e[1;31m  \e[0m /' \
+				-Ee $'s|([^/+]*)(/)|\e[0;36m\\1\e[0;33m\\2\e[0m|g' \
+				-e $'s/^\\+/\e[1;35m 󰐖\e[0m /' \
+				-e $'s/ \\|/ \e[1;30m│\033[0m/'
 		_separator
 	fi
 }
@@ -111,9 +111,9 @@ function _gitstatus {
 function _magic_dashboard {
 	# check if pwd still exists
 	if [[ ! -d "$PWD" ]]; then
-		printf '\033[0;33m"%s" has been moved or deleted.\033[0m\n' "$(basename "$PWD")"
+		printf '\e[0;33m"%s" has been moved or deleted.\e[0m\n' "$(basename "$PWD")"
 		if [[ -d "$OLDPWD" ]]; then
-			print '\033[0;33mMoving to last directory.\033[0m\n'
+			print '\e[0;33mMoving to last directory.\e[0m\n'
 			# shellcheck disable=2164
 			cd "$OLDPWD"
 		fi
@@ -143,7 +143,7 @@ function _magic_enter {
 	[[ $LINES -gt $disabled_below_height ]] || return 0
 
 	# shellcheck disable=2012
-	[[ "$(eza --git-ignore | wc -l)" -gt 0 ]] && echo
+	[[ "$(eza --git-ignore "." | wc -l)" -gt 0 ]] && echo
 	_magic_dashboard
 }
 

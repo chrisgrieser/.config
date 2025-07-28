@@ -25,7 +25,7 @@ declare class AlfredIcon {
 
 declare class AlfredItem {
 	title: string;
-	// biome-ignore lint/complexity/noBannedTypes: <explanation>
+	// biome-ignore lint/complexity/noBannedTypes: not set by me
 	action?: string | string[] | Object;
 	subtitle?: string;
 	arg?: string | string[] | number;
@@ -59,6 +59,6 @@ declare class AlfredModifierKey {
 	subtitle?: string | undefined;
 	arg?: string | string[] | number | undefined;
 	valid?: boolean | undefined;
-	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+	// biome-ignore lint/suspicious/noExplicitAny: not set by me
 	variables?: Record<string, any> | undefined;
 }
