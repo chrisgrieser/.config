@@ -11,11 +11,20 @@ find . -type directory -name "Sample" -exec rm -r {} + # Folders with content do
 sleep 1
 
 # RENAME FILES
-rename_log=""
-find . -mindepth 1 -name "*.mkv" | while read -r old_name; do
-	echo $old_name
-	new_name=$(echo "$old_name" | tr " " "_" | tr -d "[:punct:]")
-	mv -n "$old_name" "$new_name" # `-n` prevents overwriting
+rename_log="./rename.log" # CONFIG
+date=$(date "+%Y-%m-%d %H:%M")
+find . -mindepth 1 -name "*.mkv" -mmin -1000 | while read -r old_name; do
+	new_name=$(
+		basename "$old_name" ".mkv" |
+			sed -e 's/\[[a-zA-Z0-9_]*\]//g' | # tags for the subbing group
+			tr "._" " " |
+			sed -Ee 's/(1080p).*/\1/I' -Ee 's/(720p).*/\1/I'
+	)
+	new_name="$new_name.mkv"
+	if [[ ! -f "$new_name" ]]; then
+		echo "$date: $old_name -> $new_name" | tee -a "$rename_log"
+		# command mv "$old_name" "$new_name"
+	fi
 done
 
 # UNNEST IF SINGLE FILE
