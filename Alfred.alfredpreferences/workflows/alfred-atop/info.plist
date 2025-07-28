@@ -579,7 +579,7 @@
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
-				<false/>
+				<true/>
 				<key>removeextension</key>
 				<false/>
 				<key>text</key>
@@ -671,7 +671,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>scripts/bluetooth-connect.sh</string>
+				<string>scripts/bluetooth-connect.js</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
