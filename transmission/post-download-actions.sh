@@ -3,6 +3,10 @@
 # TEST torrents: https://webtorrent.io/free-torrents
 #───────────────────────────────────────────────────────────────────────────────
 
+action_log="./.post-download-actions.log"
+
+#───────────────────────────────────────────────────────────────────────────────
+
 # DELETE CLUTTER
 cd "$TR_TORRENT_DIR" || return 1 # `$TR_TORRENT_DIR` is where the downloads are placed
 find . -E -iregex ".*\.(nfo|md|jpe?g|png|exe|txt)$" -delete
@@ -13,12 +17,14 @@ sleep 1
 # UNNEST IF SINGLE FILE
 find . -mindepth 1 -type directory | while read -r folder; do
 	files_in_folder=$(find "$folder" -depth 1 | wc -l | tr -d " ")
-	[[ $files_in_folder -eq 1 ]] && mv "$folder"/* "$TR_TORRENT_DIR"
-	rmdir "$folder" # only deletes empty folders
+	if [[ $files_in_folder -eq 1 ]] ; then
+		mv -n "$folder"/* "$TR_TORRENT_DIR" # `-n` prevents overwriting
+		rmdir "$folder" # only deletes empty folders
+		echo "$(date "+%Y-%m-%d %H:%M") Unnested $folder" | tee -a "$action_log"
+	fi
 done
 
 # RENAME TOP-LEVEL FILES
-rename_log="./.rename.log" # CONFIG
 find "." -maxdepth 1 -name "*.mkv" | while read -r old_name; do
 	old_name_no_ext=${old_name%.*}
 	new_name=$(
@@ -30,8 +36,7 @@ find "." -maxdepth 1 -name "*.mkv" | while read -r old_name; do
 	)
 	new_name="./$new_name.mkv"
 	if [[ ! -f "$new_name" ]]; then
-		date=$(date "+%Y-%m-%d %H:%M")
-		echo "$date $old_name -> $new_name" | tee -a "$rename_log"
+		echo "$(date "+%Y-%m-%d %H:%M") $old_name -> $new_name" | tee -a "$action_log"
 		command mv "$old_name" "$new_name"
 	fi
 done
