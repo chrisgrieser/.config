@@ -14,7 +14,7 @@ function run() {
 	const rerunSecs = Number.parseFloat($.getenv("rerun_s_bluetooth"));
 	const excludedDevices = $.getenv("excluded_devices").split(/ *, */);
 
-	// https://developer.apple.com/documentation/iobluetooth/iobluetoothdevice
+	// DOCS https://developer.apple.com/documentation/iobluetooth/iobluetoothdevice
 	const devicesRaw = ObjC.unwrap($.IOBluetoothDevice.pairedDevices);
 	const allDevices = Array.from(devicesRaw, (device) => {
 		return {
