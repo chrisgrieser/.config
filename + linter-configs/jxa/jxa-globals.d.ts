@@ -207,7 +207,8 @@ declare const Application: {
 
 declare const ObjC: {
 	import: (package: "stdlib" | "Foundation" | "AppKit" | "IOBluetooth") => void;
-	unwrap: (string: string) => string;
+	// biome-ignore lint/suspicious/noExplicitAny: not set by me
+	unwrap: (string: string) => string|any;
 };
 
 declare function delay(seconds: number): void;
