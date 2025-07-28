@@ -52,6 +52,12 @@ function run() {
 			arg: ["94.140.14.14", "94.140.15.15"],
 			variables: { server_name: "AdGuard" },
 		},
+		{
+			title: "Other",
+			subtitle: "Use router's DNS (automatic)",
+			arg: ["", ""],
+			variables: { server_name: "Other" },
+		},
 	];
 
 	// get current DNS
@@ -69,6 +75,7 @@ function run() {
 	else if (currentDns === "193.110.81.0") selectableDns[4].title = "✅ DNS0";
 	else if (currentDns === "9.9.9.9") selectableDns[5].title = "✅ quad9";
 	else if (currentDns === "94.140.14.14") selectableDns[6].title = "✅ AdGuard";
+	else selectableDns[7].title = "✅ Other"
 
 	return JSON.stringify({ items: selectableDns });
 }

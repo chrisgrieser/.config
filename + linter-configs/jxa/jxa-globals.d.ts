@@ -206,7 +206,7 @@ declare const Application: {
 //──────────────────────────────────────────────────────────────────────────────
 
 declare const ObjC: {
-	import: (package: "stdlib" | "Foundation" | "AppKit") => void;
+	import: (package: "stdlib" | "Foundation" | "AppKit" | "IOBluetooth") => void;
 	unwrap: (string: string) => string;
 };
 
@@ -215,10 +215,11 @@ declare function delay(seconds: number): void;
 declare const $: {
 	// biome-ignore-start lint/suspicious/noExplicitAny: not set by me
 	// biome-ignore-start lint/style/useNamingConvention: not set by me
-	NSWorkspace: any; // REQUIRED `ObjC.import("Foundaton")`
-	NSPasteboard: any; // REQUIRED `ObjC.import("AppKit")`
+	NSWorkspace: any; // REQUIRES `ObjC.import("Foundation")`
+	NSPasteboard: any; // REQUIRES `ObjC.import("AppKit")`
 	NSFilenamesPboardType: any;
 	(paths: string[]): any;
+	IOBluetoothDevice: any; // REQUIRES `ObjC.import("IOBluetooth")`
 
 	// REQUIRES `ObjC.import("stdlib")`
 	getenv: (envVar: string) => string;
