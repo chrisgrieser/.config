@@ -49,8 +49,7 @@ function cacheIsOutdated(path) {
 function httpRequest(url) {
 	const queryURL = $.NSURL.URLWithString(url);
 	const data = $.NSData.dataWithContentsOfURL(queryURL);
-	const requestStr = $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding).js;
-	return requestStr;
+	return $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding).js;
 }
 
 // WARN do not use the `installed` field, since the data there is empty, despite
@@ -132,7 +131,7 @@ function run() {
 		const name = cask.token;
 		let icons = "";
 		if (installedCasks.includes(name)) icons += " " + installedIcon;
-		if (cask.deprecated) icons += `   ${deprecatedIcon}[deprecated]`;
+		if (cask.deprecated) icons += `   [${deprecatedIcon} deprecated]`;
 
 		const downloads = caskDownloads[name] ? `${caskDownloads[name][0].count}↓` : "";
 		const desc = cask.desc || "";
@@ -165,7 +164,7 @@ function run() {
 		const name = formula.name;
 		let icons = "";
 		if (installedFormulas.includes(name)) icons += " " + installedIcon;
-		if (formula.deprecated) icons += `   ${deprecatedIcon}deprecated`;
+		if (formula.deprecated) icons += `   [${deprecatedIcon} deprecated]`;
 
 		const downloads = formulaDownloads[name] ? `${formulaDownloads[name][0].count}↓` : "";
 		const desc = formula.desc || "";

@@ -1,5 +1,6 @@
 #!/usr/bin/env osascript -l JavaScript
 ObjC.import("stdlib");
+ObjC.import("IOBluetooth");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
 //──────────────────────────────────────────────────────────────────────────────
@@ -14,6 +15,18 @@ function run() {
 	const excludedDevices = $.getenv("excluded_devices").split(/ *, */);
 
 	let deviceArr = [];
+
+	const devices = ObjC.unwrap($.IOBluetoothDevice.pairedDevices);
+	const d = Array.from(devices, (device) => {
+		return {
+			name: ObjC.unwrap(device.nameOrAddress),
+			connected: ObjC.unwrap(device.isConnected),
+			address: ObjC.unwrap(device.addressString),
+			instance: device,
+		};
+	});
+
+	d;
 	const allDevices = JSON.parse(app.doShellScript("system_profiler -json SPBluetoothDataType"))
 		.SPBluetoothDataType[0];
 	if (allDevices.device_connected) {
