@@ -10,6 +10,14 @@ find . -type directory -empty -delete                  # e.g. now empty `Image` 
 find . -type directory -name "Sample" -exec rm -r {} + # Folders with content do not accept `-delete`
 sleep 1
 
+# RENAME FILES
+rename_log=""
+find . -mindepth 1 -name "*.mkv" | while read -r old_name; do
+	echo $old_name
+	new_name=$(echo "$old_name" | tr " " "_" | tr -d "[:punct:]")
+	mv -n "$old_name" "$new_name" # `-n` prevents overwriting
+done
+
 # UNNEST IF SINGLE FILE
 find . -mindepth 1 -type directory | while read -r folder; do
 	files_in_folder=$(find "$folder" -depth 1 | wc -l | tr -d " ")
