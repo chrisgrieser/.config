@@ -77,7 +77,7 @@
     "prefix": "filename"
   },
   "filename w/o ext": {
-    "body": "${1:file_name}=${${1:file_name}%.*}",
+    "body": "${1:file_name}=\\${${1:file_name}%.*}",
     "prefix": "filename w/o ext"
   },
   "find & xargs": {
