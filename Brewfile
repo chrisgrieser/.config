@@ -31,7 +31,6 @@ cask "alfred"
 cask "alt-tab"
 cask "signal"
 cask "appcleaner"
-cask "betterzip"
 cask "brave-browser"
 cask "espanso"
 cask "font-jetbrains-mono-nerd-font"
@@ -41,14 +40,18 @@ cask "microsoft-word", greedy: true # greedy since we uninstall the auto-updater
 cask "mimestream"
 cask "neovide-app"
 cask "obsidian", greedy: true # greedy for installer version
-cask "qlmarkdown"
 cask "replacicon"
 cask "slack"
-cask "syntax-highlight" # `Peek` not available anymore https://apps.apple.com/us/app/peek-a-quick-look-extension/id1554235898?mt=12
 cask "wezterm"
 cask "zoom"
 mas "Highlights", id: 1498912833
 mas "Ivory", id: 6444602274
+
+# Quicklook plugins
+cask "betterzip"
+cask "qlmarkdown"
+cask "syntax-highlight" # `Peek` not available anymore https://apps.apple.com/us/app/peek-a-quick-look-extension/id1554235898?mt=12
+cask "qlvideo"
 
 #───────────────────────────────────────────────────────────────────────────────
 

@@ -56,6 +56,7 @@ function _gitlog {
 function _list_files_here {
 	if [[ ! -x "$(command -v eza)" ]]; then print "\e[0;33mMagic Dashboard: \`eza\` not installed.\e[0m" && return 1; fi
 
+	# INFO eza needs to be called with directory: https://github.com/eza-community/eza/issues/1568#issuecomment-3116798039
 	local eza_output
 	eza_output=$(
 		eza "." --width="$COLUMNS" --all --grid --color=always --icons \
