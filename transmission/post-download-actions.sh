@@ -10,20 +10,22 @@ find . -type directory -empty -delete                  # e.g. now empty `Image` 
 find . -type directory -name "Sample" -exec rm -r {} + # Folders with content do not accept `-delete`
 sleep 1
 
-# RENAME FILES
-rename_log="./rename.log" # CONFIG
-date=$(date "+%Y-%m-%d %H:%M")
-find . -mindepth 1 -name "*.mkv" -mmin -1000 | while read -r old_name; do
+# RENAME SINGLE FILES
+rename_log="./.rename.log" # CONFIG
+find "." -maxdepth 1 -name "*.mkv" | while read -r old_name; do
+	old_name_no_ext=${old_name%.*}
 	new_name=$(
-		basename "$old_name" ".mkv" |
-			sed -e 's/\[[a-zA-Z0-9_]*\]//g' | # tags for the subbing group
+		echo "$old_name_no_ext" |
+			cut -c3- | # remove `./`
 			tr "._" " " |
-			sed -Ee 's/(1080p).*/\1/I' -Ee 's/(720p).*/\1/I'
+			sed -e 's/ *\[[a-zA-Z0-9_]*\] *//g' | # tags for the subbing group
+			sed -Ee 's/\(?(1080p).*/\1/' -Ee 's/\(?(720p).*/\1/'
 	)
-	new_name="$new_name.mkv"
+	new_name="./$new_name.mkv"
 	if [[ ! -f "$new_name" ]]; then
-		echo "$date: $old_name -> $new_name" | tee -a "$rename_log"
-		# command mv "$old_name" "$new_name"
+		date=$(date "+%Y-%m-%d %H:%M")
+		echo "$date $old_name -> $new_name" | tee -a "$rename_log"
+		command mv "$old_name" "$new_name"
 	fi
 done
 
