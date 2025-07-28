@@ -1256,11 +1256,11 @@ JSON.stringify({ 'items': volume_array });
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
-				<true/>
+				<false/>
 				<key>removeextension</key>
 				<false/>
 				<key>text</key>
-				<string>{query}</string>
+				<string>{var:serverName}</string>
 				<key>title</key>
 				<string>✅ DNS server changed</string>
 			</dict>
