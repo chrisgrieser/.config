@@ -261,6 +261,7 @@ function M.createReminder(title)
 end
 
 ---Also notifies if the path is not executable
+---(needed, as `hs.task.new` fails if the path is not executable)
 ---@param path string
 function M.isExecutable(path)
 	local permissions = hs.fs.attributes(path, "permissions") or ""
