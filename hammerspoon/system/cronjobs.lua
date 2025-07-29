@@ -9,7 +9,7 @@ local c = hs.caffeinate.watcher
 -- force reminders sync on startup
 if u.isSystemStart() then
 	print("📅 Syncing Reminders")
-	hs.execute("open -g -a Reminders")
+	hs.execute("open -g -a Reminders") -- `-g` to open in background
 	u.defer(10, function()
 		u.quitApps("Reminders")
 		hs.execute(u.exportPath .. "sketchybar --trigger update_reminder_count")
@@ -18,7 +18,7 @@ end
 
 --------------------------------------------------------------------------------
 
--- turn off display
+-- turn off display if
 M.caff_projectorScreensaver = c.new(function(event)
 	if env.isAtOffice then return end
 
@@ -52,6 +52,17 @@ M.timer_clock = hs.timer
 	end)
 	:start()
 
+-- Reminder to go to Finesse Bistro
+M.timer_finesseBistro = hs.timer
+	.doAt("12:00", "01d", function()
+		local dayOfWeek = tostring(os.date("%a"))
+		local isWeekday = hs.fnutils.contains({ "Mon", "Tue", "Wed", "Thu" }, dayOfWeek)
+		if isWeekday and env.isAtHome and u.screenIsUnlocked() then
+			u.notify("🍴 Go to Finesse Bistro")
+		end
+	end)
+	:start()
+
 --------------------------------------------------------------------------------
 -- NIGHTLY CRONJOBS
 
@@ -60,14 +71,13 @@ local cronjobDir = "./system/cronjobs"
 
 M.timer_nightlyCronjobs = hs.timer
 	.doAt("01:00", "01d", function()
-		-- only every other day
-		local isSunTueThuSat = os.date("%w") % 2 == 0
-		if isSunTueThuSat then return end
+		if os.date("%w") % 2 == 0 then return end -- only every other day
 
 		for file in hs.fs.dir(cronjobDir) do
-			if file:find("%.sh$") then
+			local jobfile = cronjobDir .. "/" .. file
+			if file:find("%.sh$") and u.isExecutable(jobfile) then
 				M["cronjob_" .. file] = hs.task
-					.new(cronjobDir .. "/" .. file, function(code)
+					.new(jobfile, function(code)
 						if code == 0 then
 							print("✅ Cronjob: " .. file)
 						else

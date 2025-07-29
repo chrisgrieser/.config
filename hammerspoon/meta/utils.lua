@@ -260,5 +260,14 @@ function M.createReminder(title)
 	]]):format(title))
 end
 
+---Also notifies if the path is not executable
+---@param path string
+function M.isExecutable(path)
+	local permissions = hs.fs.attributes(path, "permissions") or ""
+	local executable = permissions:find("x") == nil
+	if not executable then M.notify(("❌ %q is not executable"):format(path)) end
+	return executable
+end
+
 --------------------------------------------------------------------------------
 return M
