@@ -40,15 +40,15 @@ function cacheIsOutdated(path) {
 	ensureCacheFolderExists();
 	const cacheObj = Application("System Events").aliases[path];
 	if (!cacheObj.exists()) return true;
-	const cacheAgeDays = (Date.now() - +cacheObj.creationDate()) / 1000 / 60 / 60 / 24;
+	const cacheAgeDays = (Date.now() - cacheObj.creationDate().getTime()) / 1000 / 60 / 60 / 24;
 	const cacheAgeThresholdDays = 7;
 	return cacheAgeDays > cacheAgeThresholdDays;
 }
 
 /** @param {string} url @return {string} */
 function httpRequest(url) {
-	const queryURL = $.NSURL.URLWithString(url);
-	const data = $.NSData.dataWithContentsOfURL(queryURL);
+	const queryUrl = $.NSURL.URLWithString(url);
+	const data = $.NSData.dataWithContentsOfURL(queryUrl);
 	return $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding).js;
 }
 
