@@ -33,7 +33,7 @@ M.task_sync = {} ---@type table<string, hs.task>
 ---@async
 ---@param repo Repo
 local function syncOneRepo(repo)
-	local syncScriptPath = repo.location .. "/.sync-this-repo.sh"
+	local syncScriptPath = repo.location:gsub("~", os.getenv("HOME") or "") .. "/.sync-this-repo.sh"
 	if not u.isExecutable(syncScriptPath) then return end
 
 	M.task_sync[repo.location] = hs.task

@@ -64,18 +64,12 @@ M.pathw_desktop = pathw(home .. "/Desktop/", function(paths, _)
 			if success then u.notify("✅ Calendar data backed up.") end
 
 		-- BANKING
-		elseif
-			name:find("[%d-]_Kontoauszug_.*%.pdf$")
-			or name:find("[%d-]_Kosteninformation_.*%.pdf$")
-			or name:find("[%d-]_Abrechnung_.*%.pdf$")
-			or name:find("[%d-]_Ertragsabrechnung_.*%.pdf$")
-			or name:find("[%d-]_Depotauszug_.*%.pdf$")
-			or name:find("[%d-]_Kapi?talmaßnahme_.*%.pdf$") -- SIC sometimes missing `i` typo from DKB
-		then
-			local folder = name:find("Kontoauszug") and "DKB Girokonto" or "DKB Depot"
-			local year = name:match("^%d%d%d%d")
-			local bankPath = ("%s/Documents/Finanzen/%s/%s"):format(home, folder, year)
-			success, errmsg = hs.fs.mkdir(bankPath)
+		elseif name:find("[%d-]_Kontoauszug_%d.*%.pdf$") or name:find(".*_zu_Depot_%d.*%.pdf$") then
+			local folder = name:find("Kontoauszug") and "DKB Geldkonten" or "DKB Depot"
+			local year = name:match("^%d%d%d%d") -- first year-digits in filename
+			if not year then return end -- file lacks year
+			local bankPath = ("%s/Documents/Finanzen/DKB/%s/%s"):format(home, folder, year)
+			success, errmsg = hs.fs.mkdir(bankPath) -- create directory in case of new year
 			u.defer(1, function() os.rename(path, bankPath .. "/" .. name) end) -- delay ensures folder is created
 			u.openUrlInBg(bankPath)
 

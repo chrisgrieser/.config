@@ -265,7 +265,7 @@ end
 ---@param path string
 function M.isExecutable(path)
 	local permissions = hs.fs.attributes(path, "permissions") or ""
-	local executable = permissions:find("x") == nil
+	local executable = permissions:find("x")
 	if not executable then M.notify(("❌ %q is not executable"):format(path)) end
 	return executable
 end
