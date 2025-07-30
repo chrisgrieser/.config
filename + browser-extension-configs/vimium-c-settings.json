@@ -1,7 +1,7 @@
 {
 	"name": "Vimium C",
-	"@time": "7/23/2025, 7:46:33 PM",
-	"time": 1753292793416,
+	"@time": "7/30/2025, 10:29:03 AM",
+	"time": 1753864143456,
 	"environment": {
 		"extension": "2.12.2",
 		"platform": "mac",
@@ -37,10 +37,6 @@
 		{
 			"passKeys": "",
 			"pattern": ":https://mail.google.com/"
-		},
-		{
-			"passKeys": "1 ? a g ",
-			"pattern": ":https://www.inoreader.com/"
 		},
 		{
 			"passKeys": "s ",
