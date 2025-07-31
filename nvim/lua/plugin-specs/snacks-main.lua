@@ -15,7 +15,7 @@ return {
 
 			local ignore = (msg == "No code actions available" and vim.bo.ft == "typescript")
 				or msg:find("^Client marksman quit with exit code 1 and signal 0.") -- https://github.com/artempyanykh/marksman/issues/348
-				-- or msg:find("^Error executing vim.schedule.*/_folding_range.lua:311") -- https://github.com/chrisgrieser/nvim-rulebook
+				or msg:find("^Error executing vim.schedule.*/_folding_range.lua:311")
 			if ignore then return end
 
 			if msg:find("Hunk %d+ of %d+") then -- gitsigns.nvim
