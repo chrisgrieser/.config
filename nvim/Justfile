@@ -1,4 +1,4 @@
-set quiet := true
+set quiet
 
 debugFile := "./debug/test.lua"
 debugConfig := "./debug/repro.lua"
