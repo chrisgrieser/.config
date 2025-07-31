@@ -24,11 +24,10 @@ else
 	safeRequire("config.lazy")
 	if vim.g.setColorscheme then vim.g.setColorscheme("init") end
 end
-
-safeRequire("personal-plugins.ui-hack") -- requires notification plugin to be already loaded
 safeRequire("config.neovide-gui-settings")
 safeRequire("config.autocmds")
 safeRequire("config.keybindings")
 
 safeRequire("personal-plugins.git-conflict")
 safeRequire("config.spellfixes")
+vim.schedule(function () safeRequire("personal-plugins.ui-hack") end) -- wair for loading notification plugin
