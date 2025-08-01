@@ -1,5 +1,5 @@
 -- CONFIG
-local formatterWantPadding = { "python", "css", "scss", "swift", "toml" }
+local formatterWantPadding = { "python", "swift", "toml" }
 
 --------------------------------------------------------------------------------
 
