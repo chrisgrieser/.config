@@ -100,6 +100,7 @@ local autoCdConfig = {
 		"Cellar", -- homebrew
 	},
 }
+
 vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained" }, {
 	-- also trigger on `FocusGained` to account for deletions of file outside nvim
 	desc = "User: Auto-cd to project root",
