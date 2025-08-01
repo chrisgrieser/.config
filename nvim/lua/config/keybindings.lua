@@ -506,4 +506,3 @@ end, { desc = "󰑓 LSPs restart" })
 
 --------------------------------------------------------------------------------
 
-vim.keymap.set({ 'o', 'x' }, 'av', '<cmd>lua require("various-textobjs").subword("outer")<CR>')
