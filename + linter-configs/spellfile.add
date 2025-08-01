@@ -88,9 +88,10 @@ tabstops
 textobjects
 toml
 treesitter
+unescaped
 uninstallation
+unix
 unminify
 unstaged
 vimscript
 zsh
-unescaped
