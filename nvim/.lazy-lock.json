@@ -4,7 +4,7 @@
   "ccc.nvim": { "branch": "main", "commit": "9d1a256e006decc574789dfc7d628ca11644d4c2" },
   "codecompanion.nvim": { "branch": "main", "commit": "dce8859ee004b9bacce7c8742a98c25e2ac96826" },
   "eyeliner.nvim": { "branch": "main", "commit": "8f197eb30cecdf4c2cc9988a5eecc6bc34c0c7d6" },
-  "gitsigns.nvim": { "branch": "main", "commit": "cc2e664c7e3cd8a31af34df040d16a75cfcadced" },
+  "gitsigns.nvim": { "branch": "main", "commit": "8270378ab83540b03d09c0194ba3e208f9d0cb72" },
   "lazy.nvim": { "branch": "main", "commit": "6c3bda4aca61a13a9c63f1c1d1b16b9d3be90d7a" },
   "lazydev.nvim": { "branch": "main", "commit": "2367a6c0a01eb9edb0464731cc0fb61ed9ab9d2c" },
   "lualine.nvim": { "branch": "master", "commit": "a94fc68960665e54408fe37dcf573193c4ce82c9" },
