@@ -1,0 +1,16 @@
+{
+	"TODO": "replace even lazydev.nvim? https://www.reddit.com/r/neovim/comments/1mdtr4g/emmylua_ls_is_supersnappy/",
+
+	"runtime.version": "LuaJIT",
+	"diagnostics": {
+		"globals": ["vim", "Snacks", "Chainsaw"],
+		"unusedLocalExclude": ["_*"]
+	},
+	"workspace": {
+		"ignoreDir": ["debug", "templates"],
+		"library": [
+			"$HOME/.local/share/nvim/mason/packages/lua-language-server/libexec/meta/3rd/luv/"
+		]
+	},
+	"$schema": "https://raw.githubusercontent.com/EmmyLuaLs/emmylua-analyzer-rust/refs/heads/main/crates/emmylua_code_analysis/resources/schema.json"
+}
