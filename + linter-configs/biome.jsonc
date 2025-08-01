@@ -68,7 +68,8 @@
 		"formatWithErrors": true
 	},
 	"files": {
-		"includes": ["**", "!.obsidian/plugins/**/*"] // all files except Obsidian plugins
+		"includes": ["**", "!.obsidian/plugins/**/*"], // all files except Obsidian plugins
+		"ignoreUnknown": true
 	},
 	// use the schema from the local biome package installed via `mason`
 	"$schema": "/Users/chrisgrieser/.local/share/nvim/mason/packages/biome/node_modules/@biomejs/biome/configuration_schema.json"
