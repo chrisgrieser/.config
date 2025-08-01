@@ -12,12 +12,3 @@ bkeymap("n", "!", function()
 	end
 	vim.api.nvim_set_current_line(line)
 end, { desc = " Toggle !important" })
-
--- custom formatting function to run fix all actions before
-bkeymap("n", "<D-s>", function()
-	vim.lsp.buf.code_action {
-		context = { only = { "source.action.useSortedProperties.biome" } }, ---@diagnostic disable-line: assign-type-mismatch,missing-fields
-		apply = true,
-	}
-	vim.defer_fn(vim.lsp.buf.format, 50)
-end, { desc = " Fixall & Format" })
