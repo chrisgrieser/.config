@@ -4,6 +4,9 @@ alias sizes_in_cwd="du -sh . ./* | sort -rh | sed 's|\./||'"
 # mason things only made available, but not loaded directly
 alias export_mason_path='export PATH="$HOME/.local/share/nvim/mason/bin":$PATH'
 
+# utility scripts only made available, but not loaded directly (= lazy-loading)
+export PATH="$ZDOTDIR/utilities/":$PATH
+
 #───────────────────────────────────────────────────────────────────────────────
 
 function delete_empty_folders {
@@ -29,9 +32,6 @@ function tree {
 	eza --tree --level="$level" --no-quotes --color=always | less
 }
 
-# utility scripts only made available, but not loaded directly (= lazy-loading)
-export PATH="$ZDOTDIR/utilities/":$PATH
-
 function p {
 	qlmanage -p "$1" &> /dev/null
 }
@@ -44,13 +44,6 @@ function line_count() {
 		-not -path "**/__pycache__/**" -not -path "./.venv/**" -not -name ".DS_Store" \
 		-not -name "LICENSE" -not -iregex ".*\.(webp|png|svg|jpe?g|json|ya?ml|md|toml|editorconfig)$" \
 		-print0 | xargs -0 wc -l
-}
-
-# file finder
-# `fd` replacement using just `rg`
-function fd {
-	rg --no-config --files --binary --ignore-file="$HOME/.config/ripgrep/ignore" |
-		rg --color=always "$1"
 }
 
 #───────────────────────────────────────────────────────────────────────────────
@@ -158,7 +151,7 @@ function hs() {
 
 #───────────────────────────────────────────────────────────────────────────────
 
-# copy Last Command
+# copy [l]ast [c]ommand # typos: ignore-line
 function lc() {
 	local to_copy cmd
 	if [[ $# -gt 0 ]]; then
@@ -230,6 +223,8 @@ function ..d() {
 	cd -q .. && trash "$OLDPWD" && cd .
 }
 
+#───────────────────────────────────────────────────────────────────────────────
+
 # interactive `jq`
 function ij {
 	# Read stdin into a temp file if data is provided via stdin
@@ -253,4 +248,20 @@ function ij {
 	[[ -z "$final_query" ]] && return 0
 	echo -n "$final_query" | pbcopy
 	print "\e[1;32mQuery copied:\e[0m $final_query"
+}
+
+#───────────────────────────────────────────────────────────────────────────────
+
+# check website online status
+function watch_website {
+	local url=$1
+	local http_status
+	http_status=$(curl --silent --location --output /dev/null --write-out "%{http_code}" "$url")
+	if [[ "$http_status" -eq 200 ]]; then
+		echo "🌐 $url is online again"
+		"$ZDOTDIR/notificator" --title "🌐 $url" --message "online again" --sound "Blow"
+	else
+		echo "HTTP code: $http_status"
+		return 1
+	fi
 }

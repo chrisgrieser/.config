@@ -139,6 +139,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>48CA2D11-2E45-46DD-AAB9-B820447BEF09</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>D844F4A3-1A38-40C9-8B4E-A3728D512355</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>49BE57F4-670B-4713-B036-981025E334C9</key>
 		<array>
 			<dict>
@@ -327,6 +340,31 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>0F93036F-D158-49BB-97AF-DE600B8A3300</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>D844F4A3-1A38-40C9-8B4E-A3728D512355</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>D173603E-3F64-4AFF-9898-2AEF5D33CF82</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>8C5F5044-1742-485C-A640-57FEC115FD9B</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>5B4E3523-E2C7-4E39-87C0-D157AC551A91</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -604,6 +642,58 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>1</integer>
+				<key>focusedappvariable</key>
+				<true/>
+				<key>focusedappvariablename</key>
+				<string>focusedapp</string>
+				<key>hotkey</key>
+				<integer>1</integer>
+				<key>hotmod</key>
+				<integer>1835008</integer>
+				<key>hotstring</key>
+				<string>S</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>48CA2D11-2E45-46DD-AAB9-B820447BEF09</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>⚠️ No selection</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>D173603E-3F64-4AFF-9898-2AEF5D33CF82</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>browser</key>
 				<string></string>
 				<key>skipqueryencode</key>
@@ -619,6 +709,38 @@
 			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
 			<string>23ED3685-8AA0-4314-A16F-F7D8A0D01A70</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string></string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string></string>
+						<key>outputlabel</key>
+						<string>empty</string>
+						<key>uid</key>
+						<string>8C5F5044-1742-485C-A640-57FEC115FD9B</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>✅ </string>
+				<key>hideelse</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.conditional</string>
+			<key>uid</key>
+			<string>D844F4A3-1A38-40C9-8B4E-A3728D512355</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1167,7 +1289,7 @@ This workflow requires at least macOS 15.
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>430</real>
+			<real>485</real>
 			<key>ypos</key>
 			<real>445</real>
 		</dict>
@@ -1187,7 +1309,7 @@ This workflow requires at least macOS 15.
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>545</real>
+			<real>600</real>
 			<key>ypos</key>
 			<real>320</real>
 		</dict>
@@ -1198,7 +1320,7 @@ This workflow requires at least macOS 15.
 			<key>note</key>
 			<string>Toggle completed status</string>
 			<key>xpos</key>
-			<real>850</real>
+			<real>905</real>
 			<key>ypos</key>
 			<real>270</real>
 		</dict>
@@ -1207,7 +1329,7 @@ This workflow requires at least macOS 15.
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>545</real>
+			<real>600</real>
 			<key>ypos</key>
 			<real>210</real>
 		</dict>
@@ -1218,7 +1340,7 @@ This workflow requires at least macOS 15.
 			<key>note</key>
 			<string>open event</string>
 			<key>xpos</key>
-			<real>690</real>
+			<real>745</real>
 			<key>ypos</key>
 			<real>85</real>
 		</dict>
@@ -1240,16 +1362,29 @@ This workflow requires at least macOS 15.
 			<key>note</key>
 			<string>select reminder</string>
 			<key>xpos</key>
-			<real>220</real>
+			<real>240</real>
 			<key>ypos</key>
 			<real>15</real>
+		</dict>
+		<key>48CA2D11-2E45-46DD-AAB9-B820447BEF09</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>9</integer>
+			<key>note</key>
+			<string>DOUBLE CLICK THIS
+
+to set a hotkey for creating a reminder due today from the current selection</string>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>195</real>
 		</dict>
 		<key>49BE57F4-670B-4713-B036-981025E334C9</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>770</real>
+			<real>825</real>
 			<key>ypos</key>
 			<real>445</real>
 		</dict>
@@ -1260,7 +1395,7 @@ This workflow requires at least macOS 15.
 			<key>note</key>
 			<string>only if task is not completed already</string>
 			<key>xpos</key>
-			<real>730</real>
+			<real>785</real>
 			<key>ypos</key>
 			<real>300</real>
 		</dict>
@@ -1309,7 +1444,7 @@ This workflow requires at least macOS 15.
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>995</real>
+			<real>1050</real>
 			<key>ypos</key>
 			<real>270</real>
 		</dict>
@@ -1318,7 +1453,7 @@ This workflow requires at least macOS 15.
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>430</real>
+			<real>485</real>
 			<key>ypos</key>
 			<real>275</real>
 		</dict>
@@ -1340,7 +1475,7 @@ to set a hotkey to show reminders due today</string>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>770</real>
+			<real>825</real>
 			<key>ypos</key>
 			<real>580</real>
 		</dict>
@@ -1362,7 +1497,7 @@ to set a hotkey to show reminders due today</string>
 			<key>note</key>
 			<string>edit title &amp; notes</string>
 			<key>xpos</key>
-			<real>610</real>
+			<real>665</real>
 			<key>ypos</key>
 			<real>445</real>
 		</dict>
@@ -1386,6 +1521,15 @@ to set a hotkey to show reminders due today</string>
 			<key>ypos</key>
 			<real>910</real>
 		</dict>
+		<key>D173603E-3F64-4AFF-9898-2AEF5D33CF82</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>xpos</key>
+			<real>265</real>
+			<key>ypos</key>
+			<real>195</real>
+		</dict>
 		<key>D39A1AFE-3A07-40A3-BCD6-FE4A721D8959</key>
 		<dict>
 			<key>colorindex</key>
@@ -1394,6 +1538,15 @@ to set a hotkey to show reminders due today</string>
 			<real>180</real>
 			<key>ypos</key>
 			<real>780</real>
+		</dict>
+		<key>D844F4A3-1A38-40C9-8B4E-A3728D512355</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>xpos</key>
+			<real>180</real>
+			<key>ypos</key>
+			<real>215</real>
 		</dict>
 		<key>DA53DB8C-C97B-4594-A26E-0875AB96D262</key>
 		<dict>
@@ -1422,7 +1575,7 @@ to set a hotkey to show reminders due today</string>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>440</real>
+			<real>495</real>
 			<key>ypos</key>
 			<real>120</real>
 		</dict>
@@ -1433,7 +1586,7 @@ to set a hotkey to show reminders due today</string>
 			<key>note</key>
 			<string>Snooze</string>
 			<key>xpos</key>
-			<real>430</real>
+			<real>485</real>
 			<key>ypos</key>
 			<real>580</real>
 		</dict>
