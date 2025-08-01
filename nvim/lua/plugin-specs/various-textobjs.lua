@@ -15,6 +15,7 @@ return {
 
 		-- stylua: ignore start
 		{ ".", "<cmd>lua require('various-textobjs').emoji()<CR>", mode = {"x","o"}, desc = " emoji" },
+
 		{ "a-", "<cmd>lua require('various-textobjs').filepath('outer')<CR>", mode = {"x","o"}, desc = " outer filepath" },
 		{ "i-", "<cmd>lua require('various-textobjs').filepath('inner')<CR>", mode = {"x","o"}, desc = " inner filepath" },
 
@@ -112,7 +113,7 @@ return {
 			desc = " Delete surrounding indent",
 		},
 		{ -- yank surrounding inner indentation
-			"ysii", -- `ysi` would conflict with `ysib` and other textobs
+			"ysii", -- `ysi` would conflict with `ysib` and other textobjs, thus 2nd `i`
 			function()
 				-- identify start- and end-border
 				local startPos = vim.api.nvim_win_get_cursor(0)
