@@ -34,7 +34,7 @@
     "prefix": "cast (@cast)"
   },
   "count occurrences in string": {
-    "body": "local _, count = ${1:str}:gsub(\"${2:find}\", \"\")",
+    "body": "local count = select(2, ${1:str}:gsub(\"${2:find}\", \"\"))",
     "prefix": "count occurrences in string"
   },
   "export module": {
