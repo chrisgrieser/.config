@@ -90,6 +90,14 @@
     "filetype": "lua",
     "prefix": "if .. then .. else"
   },
+  "lf (local function)": {
+    "body": [
+      "local function $1()",
+      "\t$0",
+      "end"
+    ],
+    "prefix": "lf (local function)"
+  },
   "nodiscard": {
     "body": "---@nodiscard",
     "description": "Luadoc Annotation that a function's return value should not be discarded. https://github.com/LuaLS/lua-language-server/wiki/Annotations#nodiscard",
