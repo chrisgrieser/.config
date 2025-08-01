@@ -86,40 +86,43 @@ vim.api.nvim_create_autocmd({ "InsertLeave", "TextChanged", "BufLeave", "FocusLo
 --------------------------------------------------------------------------------
 -- AUTO-CD TO PROJECT ROOT
 -- (simplified version of project.nvim)
-local autoCdConfig = {
-	childOfRoot = {
-		".git",
-		"Justfile",
-		"info.plist", -- Alfred workflows
-		"biome.jsonc",
-	},
-	parentOfRoot = {
-		".config", -- my dotfiles
-		"com~apple~CloudDocs", -- macOS iCloud
-		vim.fs.basename(vim.env.HOME), -- $HOME
-		"Cellar", -- homebrew
-	},
-}
 
-vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained" }, {
-	-- also trigger on `FocusGained` to account for deletions of file outside nvim
-	desc = "User: Auto-cd to project root",
-	callback = function(ctx)
-		vim.schedule(function()
-			if not vim.api.nvim_buf_is_valid(ctx.buf) then return end
-			if vim.startswith(ctx.file, "/private/var/") then return end -- GUARD `pass` cli buffers
-			if not vim.uv.cwd() then vim.uv.chdir("/") end -- cwd unset of dir was deleted
+do
+	local autoCdConfig = {
+		childOfRoot = {
+			".git",
+			"Justfile",
+			"info.plist", -- Alfred workflows
+			"biome.jsonc",
+		},
+		parentOfRoot = {
+			".config", -- my dotfiles
+			"com~apple~CloudDocs", -- macOS iCloud
+			vim.fs.basename(vim.env.HOME), -- $HOME
+			"Cellar", -- homebrew
+		},
+	}
 
-			local root = vim.fs.root(ctx.buf, function(name, path)
-				local parentName = vim.fs.basename(vim.fs.dirname(path))
-				local dirHasParentMarker = vim.tbl_contains(autoCdConfig.parentOfRoot, parentName)
-				local dirHasChildMarker = vim.tbl_contains(autoCdConfig.childOfRoot, name)
-				return dirHasChildMarker or dirHasParentMarker
+	vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained" }, {
+		-- also trigger on `FocusGained` to account for deletions of file outside nvim
+		desc = "User: Auto-cd to project root",
+		callback = function(ctx)
+			vim.schedule(function()
+				if not vim.api.nvim_buf_is_valid(ctx.buf) then return end
+				if vim.startswith(ctx.file, "/private/var/") then return end -- GUARD `pass` cli buffers
+				if not vim.uv.cwd() then vim.uv.chdir("/") end -- cwd unset of dir was deleted
+
+				local root = vim.fs.root(ctx.buf, function(name, path)
+					local parentName = vim.fs.basename(vim.fs.dirname(path))
+					local dirHasParentMarker = vim.tbl_contains(autoCdConfig.parentOfRoot, parentName)
+					local dirHasChildMarker = vim.tbl_contains(autoCdConfig.childOfRoot, name)
+					return dirHasChildMarker or dirHasParentMarker
+				end)
+				if root and root ~= "" then vim.uv.chdir(root) end
 			end)
-			if root and root ~= "" then vim.uv.chdir(root) end
-		end)
-	end,
-})
+		end,
+	})
+end
 
 --------------------------------------------------------------------------------
 
