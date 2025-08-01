@@ -1277,7 +1277,9 @@ This workflow requires at least macOS 15.
 	  milk` with a medium priority (`!` = low, `!!` = medium, `!!!` = high).
 	+ Note that `!` and due time are only parsed when at the start or the end on
 	  the input.
-
+	+ Configure the
+	  [hotkey](https://www.alfredapp.com/help/workflows/triggers/hotkey/) to
+	  create a reminder due today from the current selection.
 
 ---
 
@@ -1833,7 +1835,7 @@ to set a hotkey to show reminders due today</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>3.5.3</string>
+	<string>3.6.0</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>

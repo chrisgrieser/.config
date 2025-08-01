@@ -85,7 +85,7 @@ style = "fg:red bold bg:black"
 [custom.npm_installed]
 description = "Indicate if `npm install` has not been run yet."
 format = "[ 󱎘  ]($style)"
-when = '[[ -f "package.json" ]] && [[ ! -d "node_modules" ]]'
+when = '[[ -f "package.json" ]] && jq ".main // error(\"\")" package.json && [[ ! -d "node_modules" ]]'
 style = "fg:red bold bg:black"
 
 # ───────────────────────────────────────────────────────────────────────────────
