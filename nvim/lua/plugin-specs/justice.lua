@@ -9,12 +9,11 @@ return {
 		},
 		keymaps = {
 			runFirstRecipe = "j", -- <leader>jj = run first recipe
+			dontUseForQuickKey = { "-", "_" },
 		},
 		recipes = {
 			terminal = {
-				-- my release scripts usually require version numbers as input
-				name = { "release" },
-				comment = { "terminal" },
+				name = { "release" }, -- my release scripts usually require version numbers as input
 			},
 		},
 	},
