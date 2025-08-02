@@ -14,11 +14,10 @@ return {
 	---@module "render-markdown"
 	---@type render.md.UserConfig
 	opts = {
-		file_types = { "markdown", "codecompanion" },
+		sign = { enabled = false, },
+		latex = { enabled = false, },
+		file_types = { "markdown" },
 		render_modes = { "n", "c", "i", "v", "V" },
-		sign = {
-			enabled = false,
-		},
 		html = {
 			comment = { text = "󰆈" },
 		},
@@ -47,19 +46,13 @@ return {
 		win_options = {
 			conceallevel = { default = 0, rendered = 2 },
 		},
+		-- LSP hovers: hide code block lines, and hide markup even in cursorline
 		overrides = {
 			buftype = {
-				-- LSP hovers: hide code block lines, and hide markup even in cursorline
 				nofile = {
-					code = {
-						border = "hide",
-						style = "normal",
-					},
+					code = { border = "hide", style = "normal" },
 					win_options = {
-						concealcursor = {
-							default = vim.o.concealcursor,
-							rendered = "nvic",
-						},
+						concealcursor = { default = vim.o.concealcursor, rendered = "nvic" },
 					},
 				},
 			},
