@@ -7,6 +7,7 @@ front_app=$(osascript -e 'tell application "System Events" to return name of fir
 if [[ "$front_app" == "neovide" ]]; then
 	# kill
 	nvim --server "/tmp/nvim_server.pipe" --remote-send "<cmd>wqall!<CR>"
+	killall "emmylua_ls"
 
 	# wait
 	while pgrep -xq "nvim" || pgrep -xq "neovide"; do

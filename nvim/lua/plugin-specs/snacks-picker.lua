@@ -33,6 +33,7 @@ local function importLuaModule()
 		confirm = function(picker, item) -- insert the grepped line below the current one
 			picker:close()
 			local lnum = vim.api.nvim_win_get_cursor(0)[1]
+			assert(lnum)
 			vim.api.nvim_buf_set_lines(0, lnum, lnum, false, { import(item.text) })
 			vim.cmd.normal { "j==", bang = true }
 		end,

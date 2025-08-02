@@ -11,6 +11,10 @@ local function safeRequire(module)
 end
 --------------------------------------------------------------------------------
 
+vim.g.use_emmylua = false
+
+--------------------------------------------------------------------------------
+
 safeRequire("config.reopen-last-file")
 safeRequire("config.options") -- first so available for plugins configs
 
