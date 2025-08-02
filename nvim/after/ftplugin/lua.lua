@@ -31,20 +31,19 @@ bkeymap("i", "+", function() plusPlusMinusMinus("+") end, { desc = "i++  i = 
 bkeymap("i", "-", function() plusPlusMinusMinus("-") end, { desc = "i--  i = i - 1" })
 
 --------------------------------------------------------------------------------
--- STYLUA CHECK 
+-- STYLUA CHECK
 bkeymap("n", "<D-S>", function()
+	vim.cmd("silent! update")
 	local styluaPath = vim.env.MASON .. "/bin/stylua"
 	local out = vim.system({ styluaPath, "--check", "--output-format=summary", "." }):wait()
-	if out.code == 0 then
-		vim.notify(out.stdout or "Already formatted.", nil, { icon = "󰢱", title = "Stylua" })
-	else
+	local msg = assert(out.stdout):gsub("^.-\n", "") -- remove first line ("! Checking formatting")
+	if out.code ~= 0 then
 		out = vim.system({ styluaPath, "." }):wait()
-		vim.notify(out.stdout or "?", nil, { icon = "󰢱", title = "Stylua" })
+		vim.schedule(vim.cmd.checktime) -- reload changes in buffer
+		msg = msg .. "Files formatted."
 	end
+	vim.notify(vim.trim(msg), nil, { icon = "󰢱", title = "Stylua" })
 end)
--- {{ masonPath }}/stylua --check --output-format=summary . && return 0
-  --   {{ masonPath }}/stylua .
-    -- echo "\nFiles formatted."
 
 --------------------------------------------------------------------------------
 -- YANK MODULE NAME
