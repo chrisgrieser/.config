@@ -8,8 +8,8 @@ return {
 		client.server_capabilities.documentRangeFormattingProvider = false
 	end,
 	settings = {
-		Lua = {}
 		-- WARN setting any settings makes emmylua break half the time
+		-- https://github.com/EmmyLuaLs/emmylua-analyzer-rust/issues/678
 		-- Lua = {
 		-- 	hint = {
 		-- 		enable = false,
