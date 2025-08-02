@@ -56,6 +56,8 @@ if not env.isAtOffice then
 	M.menubarItem = hs
 		.menubar
 		.new(true, "moveAllWinsToProjectorScreen")
+
+	M.menubarItem
 		:setTitle("Ⱅ ") ---@diagnostic disable-line: undefined-field
 		:setClickCallback(function()
 			if #hs.screen.allScreens() < 2 then
@@ -86,8 +88,8 @@ local function workLayout(displayAlreadyDarkened)
 
 	u.openApps { "Ivory", "Mimestream", "AlfredExtraPane", isWorkWeek() and "Slack" or nil }
 	u.defer(1, function()
-		local mastoWin = u.app("Ivory"):mainWindow()
-		mastoWin:setFrame(wu.toTheSide)
+		local masto = u.app("Ivory")
+		if masto then masto:mainWindow():setFrame(wu.toTheSide) end
 
 		local layout = {
 			{ "Mimestream", nil, wu.iMacDisplay, wu.pseudoMax },

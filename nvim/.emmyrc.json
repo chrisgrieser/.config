@@ -1,5 +1,6 @@
 {
 	"INFO": "https://www.reddit.com/r/neovim/comments/1mdtr4g/emmylua_ls_is_supersnappy/",
+	"---------------------------------------------------------------------------": "",
 
 	"diagnostics": {
 		"unusedLocalExclude": ["_*"]
@@ -11,7 +12,7 @@
 	"workspace": {
 		"library": [
 			"$VIMRUNTIME",
-			"$HOME/.local/share/nvim/mason/packages/lua-language-server/libexec/meta/3rd/luv",
+			"$HOME/.local/share/nvim/lazy/luvit-meta/library/uv.lua",
 			"$HOME/.local/share/nvim/lazy"
 		],
 		"ignoreGlobs": ["**/*_spec.lua"],
