@@ -6,10 +6,6 @@ return {
 		-- disable formatting in favor of `stylua`
 		client.server_capabilities.documentFormattingProvider = false
 		client.server_capabilities.documentRangeFormattingProvider = false
-
-		-- disable in favor of `lua_ls`, since `emmylua` folds too much for comments
-		client.server_capabilities.foldingRangeProvider = false
-		client.server_capabilities.documentHighlightProvider = false
 	end,
 	-- WARN setting any settings makes emmylua break half the time
 	-- https://github.com/EmmyLuaLs/emmylua-analyzer-rust/issues/678
@@ -33,7 +29,8 @@ return {
 }
 
 --------------------------------------------------------------------------------
--- reproduction for https://github.com/EmmyLuaLs/emmylua-analyzer-rust/issues/678
+
+-- -- reproduction for https://github.com/EmmyLuaLs/emmylua-analyzer-rust/issues/678
 -- return {
 -- 	cmd = { "emmylua_ls" },
 -- 	filetypes = { "lua" },
@@ -44,10 +41,4 @@ return {
 -- 		".git",
 -- 	},
 -- 	workspace_required = false,
---
--- 	settings = {
--- 		Lua = {
--- 			completion = { postfix = "." },
--- 		},
--- 	},
 -- }

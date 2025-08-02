@@ -139,7 +139,7 @@ M.systemw_mastodon = c.new(function(event)
 	)
 	if not cond then return end
 	local masto = u.app("Ivory")
-	local mastoWin = masto and u.app("Ivory"):mainWindow()
+	local mastoWin = masto and masto:mainWindow()
 	if not mastoWin then return end
 
 	u.defer(1, function() mastoWin:setFrame(wu.toTheSide) end) -- needs setFrame to hide part to the side
