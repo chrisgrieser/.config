@@ -2,28 +2,55 @@
 --------------------------------------------------------------------------------
 
 return {
-	-- on_attach = function(client)
-	-- 	-- disable formatting in favor of `stylua`
-	-- 	client.server_capabilities.documentFormattingProvider = false
-	-- 	client.server_capabilities.documentRangeFormattingProvider = false
-	-- end,
+	on_attach = function(client)
+		-- disable formatting in favor of `stylua`
+		client.server_capabilities.documentFormattingProvider = false
+		client.server_capabilities.documentRangeFormattingProvider = false
+
+		-- disable in favor of `lua_ls`, since `emmylua` folds too much for comments
+		client.server_capabilities.foldingRangeProvider = false
+	end,
 	-- WARN setting any settings makes emmylua break half the time
-	-- settings = {
 	-- https://github.com/EmmyLuaLs/emmylua-analyzer-rust/issues/678
-	-- Lua = {
-	-- 	hint = {
-	-- 		enable = false,
-	-- 	},
-	-- 	completion = {
-	-- 		callSnippet = true,
-	-- 		postfix = ".",
-	-- 	},
-	-- 	signature = {
-	-- 		detailSignatureHelper = true,
-	-- 	},
-	-- 	strict = {
-	-- 		requirePath = true,
-	-- 		typeCall = true,
+	-- settings = {
+	-- 	Lua = {
+	-- 		diagnostics = {
+	-- 			disable = { "unnecessary-if" }, -- buggy rule
+	-- 		},
+	-- 		hint = {
+	-- 			enable = false,
+	-- 		},
+	-- 		completion = {
+	-- 			callSnippet = true,
+	-- 			postfix = ".",
+	-- 		},
+	-- 		signature = {
+	-- 			detailSignatureHelper = true,
+	-- 		},
+	-- 		strict = {
+	-- 			requirePath = true,
+	-- 			typeCall = true,
+	-- 		},
 	-- 	},
 	-- },
 }
+
+--------------------------------------------------------------------------------
+-- reproduction for https://github.com/EmmyLuaLs/emmylua-analyzer-rust/issues/678
+-- return {
+-- 	cmd = { "emmylua_ls" },
+-- 	filetypes = { "lua" },
+-- 	root_markers = {
+-- 		".luarc.json",
+-- 		".emmyrc.json",
+-- 		".luacheckrc",
+-- 		".git",
+-- 	},
+-- 	workspace_required = false,
+--
+-- 	settings = {
+-- 		Lua = {
+-- 			completion = { postfix = "." },
+-- 		},
+-- 	},
+-- }

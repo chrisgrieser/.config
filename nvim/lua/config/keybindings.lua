@@ -9,7 +9,7 @@ local function keymap(mode, lhs, rhs, opts)
 	-- allow to disable with `unique=false` to overwrite nvim defaults: https://neovim.io/doc/user/vim_diff.html#default-mappings
 	if opts.unique == nil then opts.unique = true end
 
-	-- violating `unique=true` throws error; using `pcall` to still load other mappings
+	-- violating `unique=true` throws an error; using `pcall` to still load other mappings
 	local success, _ = pcall(vim.keymap.set, mode, lhs, rhs, opts)
 	if not success then
 		local modes = type(mode) == "table" and table.concat(mode, ", ") or mode

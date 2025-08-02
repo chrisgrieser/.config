@@ -8,6 +8,8 @@ vim.g.localRepos = vim.fs.normalize("~/Developer")
 vim.g.icloudSync =
 	vim.fs.normalize("~/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/nvim-data")
 
+vim.g.use_emmylua = true
+
 --------------------------------------------------------------------------------
 -- GENERAL
 vim.opt.clipboard = "unnamedplus"

@@ -8,6 +8,4 @@ return {
 			codeAction = { disableRuleComment = { enable = false } }, -- using nvim-rulebook instead
 		},
 	},
-	-- disable in favor of `basedpyright`'s hover info
-	on_attach = function(ruff) ruff.server_capabilities.hoverProvider = false end,
 }
