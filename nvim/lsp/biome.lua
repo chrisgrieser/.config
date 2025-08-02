@@ -3,5 +3,9 @@
 -- function by nvim-lspconfig using `cwd`, which is running before auto-rooting
 -- automcmds become active. Simply using the root markers fixes that.
 return {
-	root_markers = { "biome.json", "biome.jsonc" },
+	root_markers = {
+		"biome.json",
+		"biome.jsonc",
+		".git", -- make the json formatter available in none-js projects as well
+	},
 }

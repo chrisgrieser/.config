@@ -4,17 +4,19 @@
 github_username="chrisgrieser"
 # set -e
 
-repo_names="alfred|shimmering-obsidian|gitfred"
-# repo_names="nvim"
+# repo_names="alfred|shimmering-obsidian|gitfred"
+repo_names="nvim"
 # repo_names="obsidian-quadro|pseudometa-obsidian-plugin-template|grappling-hook|obsidian-proofreader"
 # ALL
 # repo_names="finder-vim-mode|zsh-magic-dashboard|nvim|alfred|shimmering-obsidian|gitfred|obsidian-quadro|pseudometa-obsidian-plugin-template|grappling-hook"
 
 function actions_in_repo {
-	cp -f "$HOME/Desktop/.build-and-release.sh" ./.build-and-release.sh
+	cp -f "$HOME/Desktop/.emmyrc.json" ./.emmyrc.json
+	rm -f "./.luarc.json"
+	rm -f "./Justfile"
 }
 
-commit_msg="build: ignore \`style\` commits in changelog"
+commit_msg="chore: switch to \`emmylua_ls\`"
 
 _export_github_token # defined in .zshenv
 

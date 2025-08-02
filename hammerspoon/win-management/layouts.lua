@@ -55,9 +55,7 @@ local function darkenDisplay() wu.iMacDisplay:setBrightness(0) end
 if not env.isAtOffice then
 	M.menubarItem = hs
 		.menubar
-		.new(true, "moveAllWinsToProjectorScreen")
-
-	M.menubarItem
+		.new(true, "moveAllWinsToProjectorScreen") ---@diagnostic disable-line: need-check-nil
 		:setTitle("Ⱅ ") ---@diagnostic disable-line: undefined-field
 		:setClickCallback(function()
 			if #hs.screen.allScreens() < 2 then

@@ -1,15 +1,11 @@
 {
-	"INFO": "https://www.reddit.com/r/neovim/comments/1mdtr4g/emmylua_ls_is_supersnappy/",
-	"---------------------------------------------------------------------------": "",
-
-	"diagnostics": {
-		"unusedLocalExclude": ["_*"]
-	},
 	"runtime": {
 		"version": "LuaJIT",
+		"INFO": "`?/lua/` is needed to pick up nvim plugins that are not in `./lua` relative to this emmyrc.json",
 		"requirePattern": ["lua/?.lua", "lua/?/init.lua", "?/lua/?.lua", "?/lua/?/init.lua"]
 	},
 	"workspace": {
+		"INFO": "https://www.reddit.com/r/neovim/comments/1mdtr4g/emmylua_ls_is_supersnappy/",
 		"library": [
 			"$VIMRUNTIME",
 			"$HOME/.local/share/nvim/lazy/luvit-meta/library/uv.lua",

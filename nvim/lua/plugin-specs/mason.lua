@@ -1,8 +1,5 @@
 local ensureInstalled = {
 	lsps = {
-		"emmylua_ls", -- improved lua LSP, disabled since it still has bugs
-		-- "lua-language-server", -- using emmylua_ls instead
-
 		"basedpyright", -- python lsp (pyright fork)
 		"bash-language-server", -- also used for zsh
 		"biome", -- ts/js/json/css linter/formatter
@@ -10,6 +7,7 @@ local ensureInstalled = {
 		"css-variables-language-server", -- support css variables across multiple files
 		"efm", -- integration of external linter/formatter
 		"emmet-language-server", -- css/html snippets
+		"emmylua_ls", -- improved lua LSP, disabled since it still has bugs
 		"gh-actions-language-server", -- github actions
 		"harper-ls", -- natural language linter
 		"html-lsp",
@@ -18,8 +16,8 @@ local ensureInstalled = {
 		"ltex-ls-plus", -- natural language linter (LanguageTool, ltex fork)
 		"marksman", -- markdown lsp
 		"ruff", -- python linter & formatter
-		"tombi", -- toml lsp (more modern)
 		"taplo", -- toml lsp (more established)
+		"tombi", -- toml lsp (more modern)
 		"ts_query_ls", -- treesitter query files
 		"typescript-language-server",
 		"typos-lsp", -- spellchecker for code
