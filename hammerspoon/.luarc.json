@@ -1,0 +1,13 @@
+{
+	"INFO": "Hammerspoon uses Lua 5.4 https://github.com/Hammerspoon/hammerspoon/issues/2217",
+	"---------------------------------------------------------------------------": "",
+	"runtime": {
+		"version": "Lua 5.4"
+	},
+
+	"diagnostics": {
+		"unusedLocalExclude": ["_*"]
+	},
+
+	"$schema": "https://raw.githubusercontent.com/LuaLS/vscode-lua/master/setting/schema.json"
+}
