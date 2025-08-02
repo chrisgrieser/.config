@@ -34,4 +34,4 @@ safeRequire("config.keybindings")
 
 safeRequire("personal-plugins.git-conflict")
 safeRequire("config.spellfixes")
-vim.schedule(function () safeRequire("personal-plugins.ui-hack") end) -- wair for loading notification plugin
+vim.schedule(function() safeRequire("personal-plugins.ui-hack") end) -- wair for loading notification plugin

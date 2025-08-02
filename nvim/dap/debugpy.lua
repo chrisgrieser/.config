@@ -1,4 +1,4 @@
--- DOCS 
+-- DOCS
 -- https://codeberg.org/mfussenegger/nvim-dap/wiki/Debug-Adapter-installation#python
 -- https://github.com/mfussenegger/nvim-dap-python/blob/master/lua/dap-python.lua
 -----------------------------------------------------------------------------

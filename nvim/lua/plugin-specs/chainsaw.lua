@@ -51,10 +51,30 @@ return {
 		vim.g.whichkeyAddSpec { "<leader>l", group = icon .. " Log" }
 	end,
 	keys = {
-		{ "<leader>ll", function() require("chainsaw").variableLog() end, mode = {"n","x"}, desc = "󰀫 variable" },
-		{ "<leader>lo", function() require("chainsaw").objectLog() end, mode = {"n","x"}, desc = "⬟ object" },
-		{ "<leader>la", function() require("chainsaw").assertLog() end, mode = {"n","x"}, desc = "󱈸 assert" },
-		{ "<leader>lt", function() require("chainsaw").typeLog() end, mode = {"n","x"}, desc = "󰜀 type" },
+		{
+			"<leader>ll",
+			function() require("chainsaw").variableLog() end,
+			mode = { "n", "x" },
+			desc = "󰀫 variable",
+		},
+		{
+			"<leader>lo",
+			function() require("chainsaw").objectLog() end,
+			mode = { "n", "x" },
+			desc = "⬟ object",
+		},
+		{
+			"<leader>la",
+			function() require("chainsaw").assertLog() end,
+			mode = { "n", "x" },
+			desc = "󱈸 assert",
+		},
+		{
+			"<leader>lt",
+			function() require("chainsaw").typeLog() end,
+			mode = { "n", "x" },
+			desc = "󰜀 type",
+		},
 		-- stylua: ignore end
 		{ "<leader>lm", function() require("chainsaw").messageLog() end, desc = "󰍩 message" },
 		{ "<leader>le", function() require("chainsaw").emojiLog() end, desc = " emoji" },

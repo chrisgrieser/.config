@@ -14,8 +14,8 @@ return {
 	---@module "render-markdown"
 	---@type render.md.UserConfig
 	opts = {
-		sign = { enabled = false, },
-		latex = { enabled = false, },
+		sign = { enabled = false },
+		latex = { enabled = false },
 		file_types = { "markdown" },
 		render_modes = { "n", "c", "i", "v", "V" },
 		html = {
