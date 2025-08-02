@@ -1,5 +1,8 @@
 local ensureInstalled = {
 	lsps = {
+		"emmylua_ls", -- improved lua LSP, disabled since it still has bugs
+		-- "lua-language-server", -- using emmylua_ls instead
+
 		"basedpyright", -- python lsp (pyright fork)
 		"bash-language-server", -- also used for zsh
 		"biome", -- ts/js/json/css linter/formatter
@@ -13,7 +16,6 @@ local ensureInstalled = {
 		"json-lsp",
 		"just-lsp",
 		"ltex-ls-plus", -- natural language linter (LanguageTool, ltex fork)
-		"lua-language-server",
 		"marksman", -- markdown lsp
 		"ruff", -- python linter & formatter
 		"tombi", -- toml lsp (more modern)
@@ -22,7 +24,6 @@ local ensureInstalled = {
 		"typescript-language-server",
 		"typos-lsp", -- spellchecker for code
 		"yaml-language-server",
-		-- "emmylua_ls", -- improved lua LSP, disabled since it still has bugs
 		-- "pyrefly", -- python type checker, still alpha
 		-- "ty", -- python type checker, still alpha
 	},

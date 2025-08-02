@@ -17,7 +17,7 @@ local function importLuaModule()
 		search = [[local (\w+) ?= ?require\(["'](.*?)["']\)(\.[\w.]*)?]],
 		ft = "lua",
 
-		layout = { preset = "small_no_preview", layout = { width = 0.75 } },
+		layout = { preset = "small_no_preview", layout = { width = 0.75 } }, ---@diagnostic disable-line: missing-fields
 		transform = function(item, ctx) -- ensure items are unique
 			ctx.meta.done = ctx.meta.done or {} ---@type table<string, boolean>
 			local imp = import(item.text)
@@ -208,7 +208,7 @@ return {
 							if out.code == 0 then
 								picker:find() -- refresh
 							else
-								vim.notify(out.stderr, vim.log.levels.ERROR)
+								vim.notify(out.stderr or "Error", vim.log.levels.ERROR)
 							end
 						end,
 					},
@@ -343,7 +343,8 @@ return {
 				},
 				recent = {
 					layout = "small_no_preview",
-					filter = { ---@type snacks.picker.filter.Config
+					---@type snacks.picker.filter.Config
+					filter = {
 						paths = { [vim.g.icloudSync] = false }, -- e.g., scratch buffers
 						filter = function(item) return vim.fs.basename(item.file) ~= "COMMIT_EDITMSG" end,
 					},
