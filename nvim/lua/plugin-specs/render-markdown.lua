@@ -51,9 +51,15 @@ return {
 			buftype = {
 				-- LSP hovers: hide code block lines, and hide markup even in cursorline
 				nofile = {
-					code = { border = "hide", style = "normal" },
+					code = {
+						border = "hide",
+						style = "normal",
+					},
 					win_options = {
-						concealcursor = { rendered = "nvic" },
+						concealcursor = {
+							default = vim.o.concealcursor,
+							rendered = "nvic",
+						},
 					},
 				},
 			},

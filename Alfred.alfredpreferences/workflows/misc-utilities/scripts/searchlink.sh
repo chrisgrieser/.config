@@ -4,18 +4,14 @@
 
 query="$1"
 query_enc=$(osascript -l JavaScript -e "encodeURIComponent('$query')")
-ddgr_html_url="https://html.duckduckgo.com/html?kl=us-en&q=$query_enc"
-echo "🪚 ddgr_html_url: $ddgr_html_url" >&2
+# SOURCE of the api call: https://github.com/ttscoff/searchlink/blob/e4e36d3173bc35fb5458908e3a64408350cb3583/lib/searchlink/searches/duckduckgo.rb#L97C98-L97C127
+ddgr_api_url="https://api.duckduckgo.com?kl=us-en&format=json&no_redirect=1&no_html=1&skip_disambig=1"
 
-first_result=$(
-	curl --user-agent="searchlink" --silent "$ddgr_html_url" |
-		grep --after-context=1 --max-count=1 "result__url" |
-		tail -n1 |
-		sed -E 's/^ *| *$//g'
-)
+first_result=$(curl --silent "$ddgr_api_url&q=$query_enc" |
+	jq --raw-output ".Results[0].FirstURL")
 
 if [[ -z "$first_result" ]]; then
 	echo -n "No response from DuckDuckGo."
 else
-	echo -n "[$query](http://$first_result)" # paste via Alfred
+	echo -n "[$query]($first_result)" # paste via Alfred
 fi
