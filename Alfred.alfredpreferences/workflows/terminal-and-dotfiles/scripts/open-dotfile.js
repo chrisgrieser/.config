@@ -68,8 +68,9 @@ function run() {
 
 		/** @type {{type: "" | "fileicon"; path: string}} */
 		const iconObj = { type: "", path: "" };
-		const isImageFile = ["png", "icns", "webp"].includes(type);
+		const isImageFile = ["png", "icns", "webp", "tiff", "gif", "jpg", "jpeg"].includes(type);
 		iconObj.path = isImageFile ? absPath : `./custom-filetype-icons/${type}.png`;
+		const filetype = isImageFile ? "binary" : "text";
 
 		/** @type {AlfredItem} */
 		const item = {
@@ -79,6 +80,7 @@ function run() {
 			icon: iconObj,
 			type: "file:skipcheck",
 			arg: absPath,
+			variables: { filetype: filetype },
 		};
 		return item;
 	});
@@ -106,6 +108,7 @@ function run() {
 				icon: { type: "fileicon", path: absPath },
 				type: "file:skipcheck",
 				arg: absPath,
+				variables: { filetype: "folder" },
 			};
 		});
 

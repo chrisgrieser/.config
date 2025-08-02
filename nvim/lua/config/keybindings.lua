@@ -223,10 +223,9 @@ keymap("n", "P", function()
 end, { desc = " Sticky paste at EoL" })
 
 keymap("i", "<D-v>", function()
-	local reg = vim.trim(vim.fn.getreg("+"))
-	vim.fn.setreg("+", reg, "v") -- force charwise
+	vim.fn.setreg("+", vim.trim(vim.fn.getreg("+"))) -- trim
 	return "<C-g>u<C-r><C-o>+" -- `<C-g>u` adds undopoint before the paste
-end, { desc = " Paste charwise", expr = true })
+end, { desc = " Paste", expr = true })
 
 -- for compatibility with macOS clipboard managers
 keymap("n", "<D-v>", "p", { desc = " Paste" })

@@ -13,8 +13,8 @@ function aMatcher(str) {
 
 /** @param {string} url @return {string} */
 function httpRequest(url) {
-	const queryURL = $.NSURL.URLWithString(url);
-	const data = $.NSData.dataWithContentsOfURL(queryURL);
+	const queryUrl = $.NSURL.URLWithString(url);
+	const data = $.NSData.dataWithContentsOfURL(queryUrl);
 	return $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding).js;
 }
 
@@ -40,9 +40,6 @@ function run() {
 
 				const githubUrl = "https://github.com/" + repo;
 				const obsidianPluginUri = `obsidian://show-plugin?vault=${vaultName}&id=${id}`;
-				// enclosing link in `<>` remove to the Discord preview
-				const discordUrl = `> [${name}](<https://obsidian.md/plugins?id=${id}>): ${description}`;
-
 				const matcher = aMatcher(name) + aMatcher(author) + aMatcher(description);
 
 				// download numbers
@@ -65,7 +62,6 @@ function run() {
 						cmd: { arg: obsidianPluginUri },
 						ctrl: { arg: id, subtitle: `⌃: Copy Plugin ID: "${id}"` },
 						alt: { arg: githubUrl, subtitle: "⌥: Copy Link " },
-						"cmd+alt": { arg: discordUrl, subtitle: "⌘⌥: Copy Link (discord ready)" },
 					},
 					downloadCount: downloadCount, // only for sorting below
 				};

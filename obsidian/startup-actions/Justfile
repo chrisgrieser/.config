@@ -1,4 +1,4 @@
-set quiet := true
+set quiet
 
 [macos]
 reload:

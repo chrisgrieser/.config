@@ -1,6 +1,6 @@
-set quiet := true
+set quiet
 
-format:
+format-main-bibliography:
     #!/usr/bin/env zsh
     npx bibtex-tidy ./main-bibliography.bib --modify \
         --tab --curly --no-align --no-wrap --drop-all-caps --enclosing-braces \

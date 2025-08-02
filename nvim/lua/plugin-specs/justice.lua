@@ -10,8 +10,8 @@ return {
 			},
 		},
 		window = {
-			highlights = {
-				quickSelect = "StandingOut",
+			highlightGroups = {
+				quickKey = "StandingOut",
 			},
 			keymaps = {
 				runFirstRecipe = "j", -- <leader>jj = run first recipe

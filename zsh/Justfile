@@ -1,4 +1,4 @@
-set quiet := true
+set quiet
 
 count-lines:
     #!/usr/bin/env zsh

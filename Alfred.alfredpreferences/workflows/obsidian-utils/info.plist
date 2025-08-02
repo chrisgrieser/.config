@@ -60,19 +60,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>65A45FED-A031-4FCB-8FA4-B4B3E46C41D0</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>0FA387AA-D669-473B-B888-38D59F48BDE9</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>6E4FD4B7-ACA8-4BA1-AD21-D6C4E3793243</key>
 		<array>
 			<dict>
@@ -128,16 +115,6 @@
 				<integer>524288</integer>
 				<key>modifiersubtext</key>
 				<string>⌥: Copy Link</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>65A45FED-A031-4FCB-8FA4-B4B3E46C41D0</string>
-				<key>modifiers</key>
-				<integer>1572864</integer>
-				<key>modifiersubtext</key>
-				<string>⌘⌥: Copy Link (discord ready)</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -355,14 +332,6 @@
 			<key>type</key>
 			<string>alfred.workflow.utility.junction</string>
 			<key>uid</key>
-			<string>65A45FED-A031-4FCB-8FA4-B4B3E46C41D0</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.junction</string>
-			<key>uid</key>
 			<string>3426DFFC-C411-4D60-8043-A3ABDF8B6748</string>
 			<key>version</key>
 			<integer>1</integer>
@@ -475,7 +444,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>250</real>
 			<key>ypos</key>
-			<real>370</real>
+			<real>330</real>
 		</dict>
 		<key>35581195-D1B3-426B-82F8-14C072E52243</key>
 		<dict>
@@ -516,15 +485,6 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>30</real>
 			<key>ypos</key>
 			<real>15</real>
-		</dict>
-		<key>65A45FED-A031-4FCB-8FA4-B4B3E46C41D0</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>xpos</key>
-			<real>250</real>
-			<key>ypos</key>
-			<real>315</real>
 		</dict>
 		<key>6E4FD4B7-ACA8-4BA1-AD21-D6C4E3793243</key>
 		<dict>
