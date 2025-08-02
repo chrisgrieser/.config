@@ -7,21 +7,24 @@ return {
 		client.server_capabilities.documentFormattingProvider = false
 		client.server_capabilities.documentRangeFormattingProvider = false
 	end,
-	init_options = {
-		Lua = {
-			hint = {
-				enable = false,
-			},
-			completion = {
-				callSnippet = true,
-			},
-			signature = {
-				detailSignatureHelper = true,
-			},
-			strict = {
-				requirePath = true,
-				typeCall = true,
-			},
-		},
+	settings = {
+		Lua = {}
+		-- WARN setting any settings makes emmylua break half the time
+		-- Lua = {
+		-- 	hint = {
+		-- 		enable = false,
+		-- 	},
+		-- 	completion = {
+		-- 		callSnippet = true,
+		-- 		postfix = ".",
+		-- 	},
+		-- 	signature = {
+		-- 		detailSignatureHelper = true,
+		-- 	},
+		-- 	strict = {
+		-- 		requirePath = true,
+		-- 		typeCall = true,
+		-- 	},
+		-- },
 	},
 }
