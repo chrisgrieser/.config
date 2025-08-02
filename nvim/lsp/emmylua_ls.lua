@@ -7,10 +7,10 @@ return {
 		client.server_capabilities.documentFormattingProvider = false
 		client.server_capabilities.documentRangeFormattingProvider = false
 	end,
-	settings = {
+	init_options = {
 		Lua = {
 			hint = {
-				enable = false, -- TEMP
+				enable = false,
 			},
 			completion = {
 				callSnippet = true,
