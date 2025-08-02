@@ -1,0 +1,8 @@
+{
+	"runtime": {
+		"INFO": "Hammerspoon uses Lua 5.4 https://github.com/Hammerspoon/hammerspoon/issues/2217",
+		"version": "Lua5.4"
+	},
+
+	"$schema": "https://raw.githubusercontent.com/EmmyLuaLs/emmylua-analyzer-rust/refs/heads/main/crates/emmylua_code_analysis/resources/schema.json"
+}
