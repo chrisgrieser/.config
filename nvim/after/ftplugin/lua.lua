@@ -15,8 +15,8 @@ abbr("fi", "end")
 
 ---@param sign "+"|"-"
 local function plusPlusMinusMinus(sign)
-	local row, col = unpack(vim.api.nvim_win_get_cursor(0))
-	local textBeforeCursor = vim.api.nvim_get_current_line():sub(col - 1, col)
+	local row, col = vim.api.nvim_win_get_cursor(0)[1], vim.api.nvim_win_get_cursor(0)[2] or 0
+	local textBeforeCursor = vim.api.nvim_get_current_line():sub(col or 0 - 1, col)
 	if not textBeforeCursor:find("[%w_]%" .. sign) then
 		vim.api.nvim_feedkeys(sign, "n", true) -- pass through the trigger char
 	else
@@ -29,6 +29,22 @@ local function plusPlusMinusMinus(sign)
 end
 bkeymap("i", "+", function() plusPlusMinusMinus("+") end, { desc = "i++  i = i + 1" })
 bkeymap("i", "-", function() plusPlusMinusMinus("-") end, { desc = "i--  i = i - 1" })
+
+--------------------------------------------------------------------------------
+-- STYLUA CHECK 
+bkeymap("n", "<D-S>", function()
+	local styluaPath = vim.env.MASON .. "/bin/stylua"
+	local out = vim.system({ styluaPath, "--check", "--output-format=summary", "." }):wait()
+	if out.code == 0 then
+		vim.notify(out.stdout or "Already formatted.", nil, { icon = "󰢱", title = "Stylua" })
+	else
+		out = vim.system({ styluaPath, "." }):wait()
+		vim.notify(out.stdout or "?", nil, { icon = "󰢱", title = "Stylua" })
+	end
+end)
+-- {{ masonPath }}/stylua --check --output-format=summary . && return 0
+  --   {{ masonPath }}/stylua .
+    -- echo "\nFiles formatted."
 
 --------------------------------------------------------------------------------
 -- YANK MODULE NAME
