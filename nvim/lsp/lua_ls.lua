@@ -2,6 +2,11 @@
 --------------------------------------------------------------------------------
 
 return {
+	on_attach = function(client)
+		-- disable formatting in favor of `stylua`
+		client.server_capabilities.documentFormattingProvider = false
+		client.server_capabilities.documentRangeFormattingProvider = false
+	end,
 	settings = {
 		Lua = {
 			completion = {
@@ -27,9 +32,6 @@ return {
 				setType = true,
 				arrayIndex = "Disable", -- too noisy
 				semicolon = "Disable", -- mostly wrong on invalid code
-			},
-			format = {
-				enable = false, -- using `stylua` instead
 			},
 		},
 	},
