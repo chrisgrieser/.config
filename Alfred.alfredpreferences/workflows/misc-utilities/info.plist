@@ -676,25 +676,6 @@ open -g "hammerspoon://sync-repos"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>acceptsmulti</key>
-				<integer>0</integer>
-				<key>filetypes</key>
-				<array>
-					<string>com.apple.application-bundle</string>
-				</array>
-				<key>name</key>
-				<string>Remove Quarantine</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.action</string>
-			<key>uid</key>
-			<string>61B6049A-0E52-4E28-A813-05177E38D595</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -714,6 +695,25 @@ open -g "hammerspoon://sync-repos"</string>
 			<string>73A0349D-2BA7-40C6-8738-997089E11428</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>acceptsmulti</key>
+				<integer>0</integer>
+				<key>filetypes</key>
+				<array>
+					<string>com.apple.application-bundle</string>
+				</array>
+				<key>name</key>
+				<string>Remove Quarantine</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.action</string>
+			<key>uid</key>
+			<string>61B6049A-0E52-4E28-A813-05177E38D595</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
