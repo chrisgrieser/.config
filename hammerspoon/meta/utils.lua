@@ -93,7 +93,6 @@ function M.isDarkMode() return hs.execute("defaults read -g AppleInterfaceStyle"
 ---collection. To avoid accumulating too many, only a certain number are kept.
 ---@param delaySecs number|number[]
 ---@param callbackFn function
----@async
 function M.defer(delaySecs, callbackFn)
 	if type(delaySecs) == "number" then delaySecs = { delaySecs } end
 	for _, delay in pairs(delaySecs) do

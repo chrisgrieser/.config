@@ -110,6 +110,7 @@ function M.cycleMarks()
 			break
 		end
 	end
+	assert(nextMark ~= nil)
 
 	-- goto next mark
 	local markInUnopenedFile = nextMark.bufnr == 0
@@ -131,7 +132,7 @@ function M.setUnsetMark(name)
 		M.deleteMark(name)
 	else
 		M.deleteMark(name, "silent") -- silent, since this func itself notifies
-		local row, col = unpack(vim.api.nvim_win_get_cursor(0))
+		local row, col = unpack(assert(vim.api.nvim_win_get_cursor(0) ~= nil))
 		vim.api.nvim_buf_set_mark(0, name, row, col, {})
 		setSignForMark(name)
 		notify(("Mark [%s] set."):format(name))
