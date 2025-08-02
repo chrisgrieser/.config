@@ -9,6 +9,9 @@ return {
 	end,
 	settings = {
 		Lua = {
+			hint = {
+				enable = false, -- TEMP
+			},
 			completion = {
 				callSnippet = true,
 			},

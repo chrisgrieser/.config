@@ -12,11 +12,10 @@ repo_names="nvim"
 
 function actions_in_repo {
 	cp -f "$HOME/Desktop/.emmyrc.json" ./.emmyrc.json
-	rm -f "./.luarc.json"
 	rm -f "./Justfile"
 }
 
-commit_msg="chore: switch to \`emmylua_ls\`"
+commit_msg="chore: add \`emmylua_ls\` config"
 
 _export_github_token # defined in .zshenv
 
