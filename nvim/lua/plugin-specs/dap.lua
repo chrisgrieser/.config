@@ -113,7 +113,7 @@ return {
 		-- ADAPTERS – load from `dap` directory
 		local adaptersDir = vim.fn.stdpath("config") .. "/dap"
 		for name, _ in vim.fs.dir(adaptersDir) do
-			-- `dofile` allows loading lua files based on an absolute path 
+			-- `dofile` allows loading lua files based on an absolute path
 			-- (but without a return value, which we do not need here anyway.)
 			if name:sub(-4) == ".lua" then dofile(adaptersDir .. "/" .. name) end
 		end
