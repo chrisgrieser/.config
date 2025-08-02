@@ -4,7 +4,7 @@ return {
 		{ "<leader>j", function() require("justice").select() end, desc = "󰖷 Just" },
 	},
 	opts = {
-		recipes = {
+		recipeModes = {
 			terminal = {
 				name = { "release" }, -- my release scripts usually require version numbers as input
 			},

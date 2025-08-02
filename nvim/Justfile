@@ -2,7 +2,6 @@ set quiet
 
 debugFile := "./debug/test.lua"
 debugConfig := "./debug/repro.lua"
-styluaPath := "$HOME/.local/share/nvim/mason/bin/"
 
 #───────────────────────────────────────────────────────────────────────────────
 
@@ -26,9 +25,9 @@ count-lines:
         sed 's|\./||'
 
 # for neovide, needs to add `$HOME/.local/neovim-downgrade` to `PATH` in `.zprofile`
-downgrade-nvim:
+downgrade-nvim target_version:
     #!/usr/bin/env zsh
-    target_version="v0.11.2"
+    target_version=$(echo {{ target_version }} | sed 's/v//')
     rm -rf "$HOME/.local/neovim-downgrade"
     cd -q "$HOME/.local" || return 1
     curl --silent --location --output "neovim-downgrade.tar.gz" \
@@ -42,9 +41,3 @@ downgrade-nvim:
 # runs minimal config with neovide
 debug-instance:
     neovide --no-tabs {{ debugFile }} -- -u {{ debugConfig }} &>/dev/null
-
-stylua-on-all:
-    #!/usr/bin/env zsh
-    {{ styluaPath }}/stylua --check --output-format=summary . && return 0
-    {{ styluaPath }}/stylua .
-    print "\nFiles formatted."
