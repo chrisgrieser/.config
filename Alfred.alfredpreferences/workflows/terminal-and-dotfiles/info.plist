@@ -12,7 +12,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>9AD22EA9-7218-4E8E-B508-601B4250BA47</string>
+				<string>C7351F33-87E4-4C7B-980E-D7598E971D29</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -98,6 +98,31 @@
 				<false/>
 			</dict>
 		</array>
+		<key>C7351F33-87E4-4C7B-980E-D7598E971D29</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>9ED0F6E3-4A6C-496B-B9C7-E239A89CDF82</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>55384F4E-9ACA-4307-98F0-67229C511F3E</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>9AD22EA9-7218-4E8E-B508-601B4250BA47</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>DEC20578-C2C9-42E4-A921-6C4B3CEAB995</key>
 		<array>
 			<dict>
@@ -126,14 +151,14 @@
 			<key>config</key>
 			<dict>
 				<key>openwith</key>
-				<string></string>
+				<string>/System/Volumes/Data/Applications/Neovide.app</string>
 				<key>sourcefile</key>
 				<string></string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.openfile</string>
 			<key>uid</key>
-			<string>9AD22EA9-7218-4E8E-B508-601B4250BA47</string>
+			<string>9ED0F6E3-4A6C-496B-B9C7-E239A89CDF82</string>
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
@@ -183,6 +208,53 @@
 			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
 			<string>4694D7EB-2482-44FA-881E-2597A9A90F9C</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string>{var:filetype}</string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string>text</string>
+						<key>outputlabel</key>
+						<string>text</string>
+						<key>uid</key>
+						<string>55384F4E-9ACA-4307-98F0-67229C511F3E</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>other</string>
+				<key>hideelse</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.conditional</string>
+			<key>uid</key>
+			<string>C7351F33-87E4-4C7B-980E-D7598E971D29</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>openwith</key>
+				<string></string>
+				<key>sourcefile</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openfile</string>
+			<key>uid</key>
+			<string>9AD22EA9-7218-4E8E-B508-601B4250BA47</string>
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
@@ -430,7 +502,7 @@
 			<key>xpos</key>
 			<real>190</real>
 			<key>ypos</key>
-			<real>455</real>
+			<real>525</real>
 		</dict>
 		<key>4694D7EB-2482-44FA-881E-2597A9A90F9C</key>
 		<dict>
@@ -439,7 +511,7 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>25</real>
+			<real>65</real>
 		</dict>
 		<key>60F3C199-F637-4C1B-9D15-7B8E16957561</key>
 		<dict>
@@ -450,7 +522,7 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>175</real>
+			<real>260</real>
 		</dict>
 		<key>7E61C1B7-0FA8-4D1C-A56F-A7D3405ABEEC</key>
 		<dict>
@@ -459,7 +531,7 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>345</real>
+			<real>415</real>
 		</dict>
 		<key>8239AB55-5756-4F08-AF47-3E6EEE64514E</key>
 		<dict>
@@ -468,7 +540,7 @@
 			<key>xpos</key>
 			<real>190</real>
 			<key>ypos</key>
-			<real>175</real>
+			<real>260</real>
 		</dict>
 		<key>9408BC99-C7F9-4B6D-A010-CF2178F4FC65</key>
 		<dict>
@@ -477,14 +549,21 @@
 			<key>xpos</key>
 			<real>355</real>
 			<key>ypos</key>
-			<real>195</real>
+			<real>280</real>
 		</dict>
 		<key>9AD22EA9-7218-4E8E-B508-601B4250BA47</key>
 		<dict>
 			<key>xpos</key>
-			<real>190</real>
+			<real>275</real>
 			<key>ypos</key>
-			<real>25</real>
+			<real>130</real>
+		</dict>
+		<key>9ED0F6E3-4A6C-496B-B9C7-E239A89CDF82</key>
+		<dict>
+			<key>xpos</key>
+			<real>275</real>
+			<key>ypos</key>
+			<real>15</real>
 		</dict>
 		<key>B63AE3AB-D363-4FD4-A1B0-C70C8D9ECF2E</key>
 		<dict>
@@ -493,7 +572,7 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>625</real>
+			<real>675</real>
 		</dict>
 		<key>C69FCE38-9396-4B8E-955C-DCEBFCA8D585</key>
 		<dict>
@@ -502,7 +581,14 @@
 			<key>xpos</key>
 			<real>465</real>
 			<key>ypos</key>
-			<real>240</real>
+			<real>325</real>
+		</dict>
+		<key>C7351F33-87E4-4C7B-980E-D7598E971D29</key>
+		<dict>
+			<key>xpos</key>
+			<real>190</real>
+			<key>ypos</key>
+			<real>85</real>
 		</dict>
 		<key>DEC20578-C2C9-42E4-A921-6C4B3CEAB995</key>
 		<dict>
@@ -511,7 +597,7 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>455</real>
+			<real>525</real>
 		</dict>
 		<key>E118FF31-5A15-4BE3-AF18-16A037503F55</key>
 		<dict>
@@ -520,7 +606,7 @@
 			<key>xpos</key>
 			<real>465</real>
 			<key>ypos</key>
-			<real>120</real>
+			<real>205</real>
 		</dict>
 		<key>E6384D1F-F4A7-49AA-AB84-8A910B1DDB3F</key>
 		<dict>
@@ -531,7 +617,7 @@
 			<key>xpos</key>
 			<real>190</real>
 			<key>ypos</key>
-			<real>625</real>
+			<real>675</real>
 		</dict>
 		<key>EC8EA4E1-1FE9-4EC2-BDAE-0CB164238CA9</key>
 		<dict>
@@ -540,7 +626,7 @@
 			<key>xpos</key>
 			<real>190</real>
 			<key>ypos</key>
-			<real>345</real>
+			<real>415</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

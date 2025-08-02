@@ -1,4 +1,4 @@
-set quiet := true
+set quiet
 
 reload-adblock-rules:
     #!/usr/bin/env zsh

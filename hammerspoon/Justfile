@@ -1,6 +1,4 @@
-set quiet := true
-
-masonPath := "$HOME/.local/share/nvim/mason/bin/"
+set quiet
 
 #───────────────────────────────────────────────────────────────────────────────
 
@@ -16,9 +14,3 @@ count-lines:
         sort --reverse |
         cut -c5- |
         sed 's|\./||'
-
-stylua-on-all:
-    #!/usr/bin/env zsh
-    {{ masonPath }}/stylua --check --output-format=summary . && return 0
-    {{ masonPath }}/stylua .
-    echo "\nFiles formatted."

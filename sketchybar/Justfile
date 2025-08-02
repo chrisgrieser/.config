@@ -1,4 +1,4 @@
-set quiet := true
+set quiet
 
 reload:
     # alternatively, use `sketchybar --hotload` for constant reloading when developing
