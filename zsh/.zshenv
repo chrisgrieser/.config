@@ -19,10 +19,10 @@ export PASSWORD_STORE_CHARACTER_SET="[:alnum:]" # many services break with speci
 # For security reasons, only export token for the processes that actually need
 # it, and using a token with a scope as limited as possible.
 
-function export_github_token {
+function _export_github_token {
 	GITHUB_TOKEN="$(cat "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/private dotfiles/github-token.txt")"
 	export GITHUB_TOKEN
 }
 
 # shellcheck disable=2154
-if [[ "$alfred_workflow_name" == "GitFred" ]]; then export_github_token; fi
+if [[ "$alfred_workflow_name" == "GitFred" ]]; then _export_github_token; fi
