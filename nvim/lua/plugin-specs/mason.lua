@@ -1,7 +1,5 @@
 local ensureInstalled = {
 	lsps = {
-		vim.g.use_emmylua and "emmylua_ls" or "lua-language-server",
-
 		"basedpyright", -- python lsp (pyright fork)
 		"bash-language-server", -- also used for zsh
 		"biome", -- ts/js/json/css linter/formatter
@@ -25,6 +23,9 @@ local ensureInstalled = {
 		"yaml-language-server",
 		-- "pyrefly", -- python type checker, still alpha
 		-- "ty", -- python type checker, still alpha
+
+		"lua-language-server", -- lua LSP (old, but more mature)
+		vim.g.use_emmylua and "emmylua_ls" or nil, -- lua LSP, new but still beta
 	},
 	linters = {
 		"markdownlint", -- via efm
@@ -43,7 +44,7 @@ local ensureInstalled = {
 
 local nonMasonLsps = {
 	-- Not installed via `mason`, but included in Xcode Command Line Tools
-	-- (which are usually installed as pre-requisite for `homebrew`)
+	-- (which are usually installed as pre-requisite for `homebrew` on macOS)
 	jit.os == "OSX" and "sourcekit" or nil,
 }
 

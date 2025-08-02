@@ -1,6 +1,6 @@
 {
     "createdBy": "Redirector v3.5.3",
-    "createdAt": "2025-08-02T01:36:24.168Z",
+    "createdAt": "2025-08-02T16:10:52.805Z",
     "redirects": [
         {
             "description": "Netflix redirect from \"Home\" to \"TV Shows → Animes\"",
@@ -92,10 +92,10 @@
             "exampleUrl": "https://www.reddit.com/r/anime/comments/1mf3hzz/steinsgate_15th_anniversary_rewatch_episode_5/",
             "exampleResult": "https://old.reddit.com/r/anime/comments/1mf3hzz/steinsgate_15th_anniversary_rewatch_episode_5/",
             "error": null,
-            "includePattern": "https://www.reddit.com/r/anime/comments/(.*)",
+            "includePattern": "https://www.reddit.com/r/anime/(.*)",
             "excludePattern": "",
             "patternDesc": "",
-            "redirectUrl": "https://old.reddit.com/r/anime/comments/$1",
+            "redirectUrl": "https://old.reddit.com/r/anime/$1",
             "patternType": "R",
             "processMatches": "noProcessing",
             "disabled": false,

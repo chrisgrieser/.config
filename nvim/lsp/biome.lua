@@ -1,11 +1,10 @@
--- FIX
--- `biome` does not attach on the first buffer of startup, due to the `root_dir`
--- function by nvim-lspconfig using `cwd`, which is running before auto-rooting
--- automcmds become active. Simply using the root markers fixes that.
 return {
+	-- FIX `biome` does not attach on the 1st buffer of startup, due to the
+-- `root_dir` function by nvim-lspconfig using `cwd`, which is running before
+-- auto-rooting automcmds. Simply using the root markers fixes that.
 	root_markers = {
 		"biome.json",
 		"biome.jsonc",
-		".git", -- make the json formatter available in none-js projects as well
+		".git", -- make biome's json formatter available in none-js projects as well
 	},
 }

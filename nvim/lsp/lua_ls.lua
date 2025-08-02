@@ -10,6 +10,7 @@ return {
 				showWord = "Disable", -- already done by completion plugin
 				workspaceWord = false, -- already done by completion plugin
 				postfix = ".", -- useful for `table.insert` and the like
+				enable = not vim.g.use_emmylua,
 			},
 			diagnostics = {
 				disable = {
@@ -22,7 +23,7 @@ return {
 				globals = { "vim" }, -- when working on nvim plugins that lack a `.luarc.json`
 			},
 			hint = { -- inlay hints
-				enable = true,
+				enable = not vim.g.use_emmylua,
 				setType = true,
 				arrayIndex = "Disable", -- too noisy
 				semicolon = "Disable", -- mostly wrong on invalid code
