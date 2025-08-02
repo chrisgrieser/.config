@@ -580,13 +580,13 @@ rules:
           - shell_command: |
               export LC_CTYPE="en_US.UTF-8" # fixes encoding issue when copying
               selection=$(osascript -e 'tell application "Finder" to return POSIX path of (selection as text)')
-              if file "$selection" | grep --quiet "text"; then
-                cat "$selection" | pbcopy
-                msg="✅ File content copied"
+              if file "$selection" | grep --quiet "binary"; then
+                msg="⚠️ File is not text"
               elif file "$selection" | grep --quiet "empty"; then
                 msg="⚠️ File is empty"
               else
-                msg="⚠️ File is not text"
+                cat "$selection" | pbcopy
+                msg="✅ File content copied"
               fi
               "$HOME/.config/karabiner/assets/finder-vim-mode/notificator" \
                 --title "Finder Vim Mode" --message "$msg"
@@ -644,11 +644,11 @@ rules:
           - shell_command: |
               export LC_CTYPE="en_US.UTF-8" # fixes encoding issue when pasting
               selection=$(osascript -e 'tell application "Finder" to return POSIX path of (selection as text)')
-              if file "$selection" | grep --extended-regexp --quiet "text|empty"; then
+              if file "$selection" | grep --quiet "binary"; then
+                msg="⚠️ File is not text"
+              else
                 pbpaste >> "$selection"
                 msg="✅ Text appended to file"
-              else
-                msg="⚠️ File is not text"
               fi
               "$HOME/.config/karabiner/assets/finder-vim-mode/notificator" \
                 --title "Finder Vim Mode" --message "$msg"
