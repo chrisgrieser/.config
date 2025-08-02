@@ -26,6 +26,15 @@ function sync_repo { "$(git rev-parse --show-toplevel)/.sync-this-repo.sh"; }
 
 #───────────────────────────────────────────────────────────────────────────────
 
+# lazy-export the GITHUB_TOKEN
+function gh {
+	export_github_token # defined in .zshenv
+	command gh "$@"
+	unfunction gh
+}
+
+#───────────────────────────────────────────────────────────────────────────────
+
 # issues numbers
 ZSH_HIGHLIGHT_REGEXP+=('#[0-9]+' 'fg=blue,bold')
 

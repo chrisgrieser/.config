@@ -16,8 +16,7 @@ function actions_in_repo {
 
 commit_msg="build: ignore \`style\` commits in changelog"
 
-GITHUB_TOKEN="$(cat "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/private dotfiles/github-token.txt")"
-export GITHUB_TOKEN
+export_github_token # defined in .zshenv
 
 #───────────────────────────────────────────────────────────────────────────────
 #───────────────────────────────────────────────────────────────────────────────

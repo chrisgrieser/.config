@@ -10,8 +10,7 @@ ignore_repos=$(cut -d, -f1 "$HOME/.config/perma-repos.csv" |
 	tr "\n" "|" |
 	sed -e "s/.$//") # construct regex pattern for `grep`
 
-GITHUB_TOKEN="$(cat "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/private dotfiles/github-token.txt")"
-export GITHUB_TOKEN
+export_github_token # defined in .zshenv
 
 #───────────────────────────────────────────────────────────────────────────────
 
