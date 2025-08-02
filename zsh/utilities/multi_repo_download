@@ -11,7 +11,7 @@ repo_names="alfred|shimmering-obsidian|gitfred"
 # ALL
 # repo_names="finder-vim-mode|zsh-magic-dashboard|nvim|alfred|shimmering-obsidian|gitfred|obsidian-quadro|pseudometa-obsidian-plugin-template|grappling-hook"
 
-export_github_token # defined in .zshenv
+_export_github_token # defined in .zshenv
 
 #───────────────────────────────────────────────────────────────────────────────
 #───────────────────────────────────────────────────────────────────────────────

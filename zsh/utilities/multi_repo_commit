@@ -16,7 +16,7 @@ function actions_in_repo {
 
 commit_msg="build: ignore \`style\` commits in changelog"
 
-export_github_token # defined in .zshenv
+_export_github_token # defined in .zshenv
 
 #───────────────────────────────────────────────────────────────────────────────
 #───────────────────────────────────────────────────────────────────────────────

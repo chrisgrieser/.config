@@ -10,7 +10,7 @@ ignore_repos=$(cut -d, -f1 "$HOME/.config/perma-repos.csv" |
 	tr "\n" "|" |
 	sed -e "s/.$//") # construct regex pattern for `grep`
 
-export_github_token # defined in .zshenv
+_export_github_token # defined in .zshenv
 
 #───────────────────────────────────────────────────────────────────────────────
 
