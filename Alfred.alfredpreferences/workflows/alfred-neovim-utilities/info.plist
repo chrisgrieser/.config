@@ -12,11 +12,11 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>6BBC3DF6-1094-4623-B790-2B5EF7C16EEE</string>
+				<string>C9BF5A96-9AC2-4AA6-A169-11DA39DAA306</string>
 				<key>modifiers</key>
-				<integer>0</integer>
+				<integer>262144</integer>
 				<key>modifiersubtext</key>
-				<string></string>
+				<string>⌃: Copy install for lazy.nvim</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -27,6 +27,16 @@
 				<integer>524288</integer>
 				<key>modifiersubtext</key>
 				<string>⌥: Copy GitHub URL</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>6BBC3DF6-1094-4623-B790-2B5EF7C16EEE</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -111,21 +121,21 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>6BBC3DF6-1094-4623-B790-2B5EF7C16EEE</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
 				<string>D6E5E105-38E3-4BC1-90E3-52BEE556349D</string>
 				<key>modifiers</key>
 				<integer>524288</integer>
 				<key>modifiersubtext</key>
 				<string>⌥: Copy URL</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>6BBC3DF6-1094-4623-B790-2B5EF7C16EEE</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -154,6 +164,16 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
+				<string>D6E5E105-38E3-4BC1-90E3-52BEE556349D</string>
+				<key>modifiers</key>
+				<integer>524288</integer>
+				<key>modifiersubtext</key>
+				<string>⌥: Copy URL</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
 				<string>6BBC3DF6-1094-4623-B790-2B5EF7C16EEE</string>
 				<key>modifiers</key>
 				<integer>0</integer>
@@ -162,13 +182,29 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
+		</array>
+		<key>C9BF5A96-9AC2-4AA6-A169-11DA39DAA306</key>
+		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>D6E5E105-38E3-4BC1-90E3-52BEE556349D</string>
+				<string>ACDBE56D-DF34-4CC2-B97C-B13DD486D083</string>
 				<key>modifiers</key>
-				<integer>524288</integer>
+				<integer>0</integer>
 				<key>modifiersubtext</key>
-				<string>⌥: Copy URL</string>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>D6E5E105-38E3-4BC1-90E3-52BEE556349D</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>ACDBE56D-DF34-4CC2-B97C-B13DD486D083</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -367,21 +403,40 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
+				<key>autopaste</key>
 				<false/>
-				<key>skipvarencode</key>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
 				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string></string>
+				<key>transient</key>
+				<false/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
+			<string>alfred.workflow.output.clipboard</string>
 			<key>uid</key>
-			<string>6BBC3DF6-1094-4623-B790-2B5EF7C16EEE</string>
+			<string>C9BF5A96-9AC2-4AA6-A169-11DA39DAA306</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>📋 Copied</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>ACDBE56D-DF34-4CC2-B97C-B13DD486D083</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -437,6 +492,46 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>D6E5E105-38E3-4BC1-90E3-52BEE556349D</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>6BBC3DF6-1094-4623-B790-2B5EF7C16EEE</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>alfredfiltersresults</key>
 				<true/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -486,21 +581,23 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>autopaste</key>
+				<key>lastpathcomponent</key>
 				<false/>
-				<key>clipboardtext</key>
-				<string>{query}</string>
-				<key>ignoredynamicplaceholders</key>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
 				<false/>
-				<key>transient</key>
-				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>⚠️ {query}</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.output.clipboard</string>
+			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
-			<string>D6E5E105-38E3-4BC1-90E3-52BEE556349D</string>
+			<string>F5BC25CE-C34C-4EF9-B428-71EDB9170948</string>
 			<key>version</key>
-			<integer>3</integer>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -577,27 +674,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string></string>
-				<key>title</key>
-				<string>⚠️ {query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>F5BC25CE-C34C-4EF9-B428-71EDB9170948</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>openwith</key>
 				<string></string>
 				<key>sourcefile</key>
@@ -618,14 +694,15 @@
 	  item.
 	+ &lt;kbd&gt;⏎&lt;/kbd&gt;: Open the respective help.
 	+ &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy the help URL to the clipboard.
-- `vp`: Searches [awesome-neovim](https://github.com/rockerBOO/awesome-neovim)
-  for Neovim plugins. Mnemonic: `[v]im [p]lugins`.
+- `np`: Searches [store.nvim](https://github.com/alex-popov-tech/store.nvim)
+  for Neovim plugins (mnemonic: `[n]vim [p]lugins`).
 	+ &lt;kbd&gt;⏎&lt;/kbd&gt;: Open the GitHub repo.
 	+ &lt;kbd&gt;⌘⏎&lt;/kbd&gt;: Open the `:help` in the browser (`vimdoc` converted to
 	  HTML).
 	+ &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy the GitHub URL to the clipboard.
-- `ip`: Search for plugins (and Mason tools) installed locally on your device.
-  Mnemonic: `[i]installed [p]lugins`.
+	+ &lt;kbd&gt;⌃⏎&lt;/kbd&gt;: Copy installation snippet for lazy.nvim, if available.
+- `ip`: Search for plugins (and Mason tools) installed locally on your device
+  (mnemonic: `[i]installed [p]lugins`).
 	+ The modifiers (&lt;kbd&gt;⌘⌥⌃⇧&lt;/kbd&gt;) from the plugin-search also apply for this
 	  command.
 	+ In addition, &lt;kbd&gt;fn⏎&lt;/kbd&gt;: Open the local directory of the plugin in
@@ -634,8 +711,7 @@
   [mason.nvim](https://github.com/williamboman/mason.nvim).
 - `:old`: Displays and searches your `:oldfiles`. Opens them in the system's
   default editor for the respective filetype. (To open them directly in Neovim,
-  you need a Neovim GUI with `Open with…` capability, such as
-  [Neovide](http://neovide.dev).)
+  you need a Neovim GUI, such as [Neovide](http://neovide.dev).)
 
 ## Preview Pane
 For the preview pane, install [mr-pennyworth/alfred-extra-pane](https://github.com/mr-pennyworth/alfred-extra-pane).
@@ -668,7 +744,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>35</real>
 			<key>ypos</key>
-			<real>400</real>
+			<real>410</real>
 		</dict>
 		<key>14ECFC26-C670-4D39-9A5C-C24B452554F2</key>
 		<dict>
@@ -699,7 +775,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>310</real>
 			<key>ypos</key>
-			<real>705</real>
+			<real>695</real>
 		</dict>
 		<key>38E62E4E-8B37-483B-BBE3-257C2DD7EA30</key>
 		<dict>
@@ -717,7 +793,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>455</real>
 			<key>ypos</key>
-			<real>400</real>
+			<real>545</real>
 		</dict>
 		<key>6EBCF2CC-4936-48C4-BCD8-42A7B39BDEDC</key>
 		<dict>
@@ -739,7 +815,16 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>35</real>
 			<key>ypos</key>
-			<real>705</real>
+			<real>695</real>
+		</dict>
+		<key>ACDBE56D-DF34-4CC2-B97C-B13DD486D083</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>xpos</key>
+			<real>635</real>
+			<key>ypos</key>
+			<real>340</real>
 		</dict>
 		<key>C906BF1E-7CF4-4407-9B97-53532876DCC0</key>
 		<dict>
@@ -752,6 +837,17 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>545</real>
 		</dict>
+		<key>C9BF5A96-9AC2-4AA6-A169-11DA39DAA306</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>note</key>
+			<string>copy</string>
+			<key>xpos</key>
+			<real>455</real>
+			<key>ypos</key>
+			<real>275</real>
+		</dict>
 		<key>D6E5E105-38E3-4BC1-90E3-52BEE556349D</key>
 		<dict>
 			<key>colorindex</key>
@@ -761,7 +857,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>455</real>
 			<key>ypos</key>
-			<real>545</real>
+			<real>410</real>
 		</dict>
 		<key>D818D50E-55A9-45FB-AC92-10FCF4BC8B60</key>
 		<dict>
@@ -772,7 +868,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>310</real>
 			<key>ypos</key>
-			<real>855</real>
+			<real>840</real>
 		</dict>
 		<key>F178F3ED-E855-4DC9-A178-D839E9C2C48D</key>
 		<dict>
@@ -792,7 +888,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>455</real>
 			<key>ypos</key>
-			<real>705</real>
+			<real>695</real>
 		</dict>
 		<key>FB617FEA-F94F-4A13-8327-5EC723FD66AB</key>
 		<dict>
@@ -831,7 +927,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<string>vp</string>
+				<string>np</string>
 				<key>placeholder</key>
 				<string></string>
 				<key>required</key>
@@ -840,9 +936,9 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>using Awesome Neovim</string>
+			<string></string>
 			<key>label</key>
-			<string>Keyword – Plugin Search</string>
+			<string>Keyword – neovim plugin search</string>
 			<key>type</key>
 			<string>textfield</string>
 			<key>variable</key>

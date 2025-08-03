@@ -20,6 +20,42 @@ function httpRequest(url) {
 
 const fileExists = (/** @type {string} */ filePath) => Application("Finder").exists(Path(filePath));
 
+function ensureCacheFolderExists() {
+	const finder = Application("Finder");
+	const cacheDir = $.getenv("alfred_workflow_cache");
+	if (finder.exists(Path(cacheDir))) return;
+	console.log("Cache directory does not exist and is created.");
+	const cacheDirBasename = $.getenv("alfred_workflow_bundleid");
+	const cacheDirParent = cacheDir.slice(0, -cacheDirBasename.length);
+	finder.make({
+		new: "folder",
+		at: Path(cacheDirParent),
+		withProperties: { name: cacheDirBasename },
+	});
+}
+
+/** @param {string} path */
+function cacheIsOutdated(path) {
+	const cacheAgeThresholdHours = 12; // CONFIG
+	const cacheObj = Application("System Events").aliases[path];
+	if (!cacheObj.exists()) return true;
+	const cacheAgeHours = (Date.now() - cacheObj.creationDate().getTime()) / 1000 / 60 / 60;
+	return cacheAgeHours > cacheAgeThresholdHours;
+}
+
+/** @param {string} filepath @param {string} text */
+function writeToFile(filepath, text) {
+	const str = $.NSString.alloc.initWithUTF8String(text);
+	str.writeToFileAtomicallyEncodingError(filepath, true, $.NSUTF8StringEncoding, null);
+}
+
+/** @param {string} path */
+function readFile(path) {
+	const data = $.NSFileManager.defaultManager.contentsAtPath(path);
+	const str = $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding);
+	return ObjC.unwrap(str);
+}
+
 //──────────────────────────────────────────────────────────────────────────────
 
 // INFO Using the crawler result of `store.nvim`, since it is it includes more
@@ -42,6 +78,11 @@ const storeNvimList =
  * @property {{initial: string, lazyConfig: string}} install
  */
 
+/** @typedef {Object} StoreNvimData
+ * @property {StoreNvimRepo[]} items
+ * @property {{total_count: number, crawled_at: string}} meta
+ */
+
 //──────────────────────────────────────────────────────────────────────────────
 
 /** @type {AlfredRun} */
@@ -61,26 +102,39 @@ function run() {
 			});
 	}
 
-	// get data & log it
-	let nvimStoreData = [];
-	try {
-		nvimStoreData = JSON.parse(httpRequest(storeNvimList));
-	} catch (_error) {
-		const item = { title: "Cannot retrieve data", valid: false };
-		return JSON.stringify({ items: [item] });
+	// get data & cache it
+	// PERF not using Alfred's caching, so install icons can be updated
+	ensureCacheFolderExists();
+	const cachePath = $.getenv("alfred_workflow_cache") + "/nvimStoreData.json";
+	let /** @type {StoreNvimData} */ nvimStoreData;
+	if (cacheIsOutdated(cachePath)) {
+		try {
+			nvimStoreData = JSON.parse(httpRequest(storeNvimList));
+		} catch (_error) {
+			const errItem = { title: "Cannot retrieve data", valid: false };
+			return JSON.stringify({ items: [errItem] });
+		}
+	} else {
+		nvimStoreData = JSON.parse(readFile(cachePath));
 	}
 	console.log("Last crawl:", new Date(nvimStoreData.meta.crawled_at).toLocaleString());
 	console.log("Total plugins:", nvimStoreData.meta.total_count);
 
 	// construct Alfred items
-	const pluginsArr = JSON.parse(httpRequest(storeNvimList))
-		.items.sort(
+	const pluginsArr = nvimStoreData.items
+		.sort(
 			(/** @type {StoreNvimRepo} */ a, /** @type {StoreNvimRepo} */ b) =>
 				new Date(b.pushed_at).getTime() - new Date(a.pushed_at).getTime(),
 		)
 		.map((/** @type {StoreNvimRepo} */ repo) => {
-			const { full_name, description, html_url, pretty_stargazers_count, pretty_pushed_at } =
-				repo;
+			const {
+				full_name,
+				description,
+				html_url,
+				pretty_stargazers_count,
+				pretty_pushed_at,
+				install,
+			} = repo;
 			const [author, name] = full_name.split("/");
 			const installedIcon = installedPlugins.includes(full_name) ? " ✅" : "";
 			const subtitle = [
@@ -89,6 +143,7 @@ function run() {
 				pretty_pushed_at,
 				description,
 			].join("  ·  ");
+			const lazyNvimInstall = install?.lazyConfig;
 
 			return {
 				title: name + installedIcon,
@@ -96,15 +151,19 @@ function run() {
 				subtitle: subtitle,
 				arg: html_url,
 				mods: {
-					cmd: { arg: repo },
+					cmd: { arg: repo }, // open help page
+					ctrl: {
+						arg: lazyNvimInstall,
+						valid: Boolean(lazyNvimInstall),
+						subtitle: lazyNvimInstall
+							? "⌃: Install with lazy.nvim"
+							: "⌃: ⛔ No install snippet available, please install manually",
+					},
 				},
 				quicklookurl: html_url,
 				uid: repo,
 			};
 		});
 
-	return JSON.stringify({
-		items: pluginsArr,
-		cache: { seconds: 300, loosereload: true }, // faster, to update install icons
-	});
+	return JSON.stringify({ items: pluginsArr });
 }
