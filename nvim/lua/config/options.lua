@@ -132,7 +132,7 @@ vim.opt.listchars = {
 	extends = "…",
 	multispace = "·",
 	trail = " ",
-	tab = "  ", -- will be overwritten by indent-guide plugin
+	tab = "  ", -- mostly set by indent-guide plugin, therefore only fallback
 	lead = " ",
 	space = " ",
 }
