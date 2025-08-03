@@ -222,6 +222,14 @@ keymap("n", "P", function()
 	vim.api.nvim_set_current_line(curLine .. " " .. reg)
 end, { desc = " Sticky paste at EoL" })
 
+
+-- 9
+
+-- same as regular `p`, but when undoing the paste and then using `.`, will
+-- paste `2p`, since `.` increases the numbered register. Thus, `pu.u.u.u.`
+-- allows us to cycle through the recent deletions
+-- keymap("n", "p", "1p", { desc = " Cyclic Paste", remap = false })
+
 keymap("i", "<D-v>", function()
 	vim.fn.setreg("+", vim.trim(vim.fn.getreg("+"))) -- trim
 	return "<C-g>u<C-r><C-o>+" -- `<C-g>u` adds undopoint before the paste

@@ -581,23 +581,25 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
+				<key>concurrently</key>
 				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
 				<string></string>
-				<key>title</key>
-				<string>⚠️ {query}</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>scripts/open-help.js</string>
+				<key>type</key>
+				<integer>8</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
+			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>F5BC25CE-C34C-4EF9-B428-71EDB9170948</string>
+			<string>26EB4BCF-56A8-43E4-AED6-0C121B00D55E</string>
 			<key>version</key>
-			<integer>1</integer>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -651,25 +653,23 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
+				<key>lastpathcomponent</key>
 				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
 				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>scripts/open-help.js</string>
-				<key>type</key>
-				<integer>8</integer>
+				<key>title</key>
+				<string>⚠️ {query}</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.script</string>
+			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
-			<string>26EB4BCF-56A8-43E4-AED6-0C121B00D55E</string>
+			<string>F5BC25CE-C34C-4EF9-B428-71EDB9170948</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -689,19 +689,17 @@
 	</array>
 	<key>readme</key>
 	<string>## Commands
-- `:h`: Searches the Neovim [online :help](https://neovim.io/doc/).
-	+ Groups synonyms together, for example, `:w` and `:write` both get one
-	  item.
+- `:h`: Search the Neovim [online :help](https://neovim.io/doc/).
 	+ &lt;kbd&gt;⏎&lt;/kbd&gt;: Open the respective help.
 	+ &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy the help URL to the clipboard.
-- `np`: Searches [store.nvim](https://github.com/alex-popov-tech/store.nvim)
+- `np`: Search [store.nvim](https://github.com/alex-popov-tech/store.nvim)
   for Neovim plugins (mnemonic: `[n]vim [p]lugins`).
 	+ &lt;kbd&gt;⏎&lt;/kbd&gt;: Open the GitHub repo.
-	+ &lt;kbd&gt;⌘⏎&lt;/kbd&gt;: Open the `:help` in the browser (`vimdoc` converted to
+	+ &lt;kbd&gt;⌘⏎&lt;/kbd&gt;: Open the `:help` page in the browser (`vimdoc` converted to
 	  HTML).
-	+ &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy the GitHub URL to the clipboard.
-	+ &lt;kbd&gt;⌃⏎&lt;/kbd&gt;: Copy installation snippet for lazy.nvim, if available.
-- `ip`: Search for plugins (and Mason tools) installed locally on your device
+	+ &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy the GitHub URL.
+	+ &lt;kbd&gt;⌃⏎&lt;/kbd&gt;: Copy installation snippet for `lazy.nvim`, if available.
+- `ip`: Search for locally installed plugins and `mason.nvim` packages
   (mnemonic: `[i]installed [p]lugins`).
 	+ The modifiers (&lt;kbd&gt;⌘⌥⌃⇧&lt;/kbd&gt;) from the plugin-search also apply for this
 	  command.
@@ -711,7 +709,8 @@
   [mason.nvim](https://github.com/williamboman/mason.nvim).
 - `:old`: Displays and searches your `:oldfiles`. Opens them in the system's
   default editor for the respective filetype. (To open them directly in Neovim,
-  you need a Neovim GUI, such as [Neovide](http://neovide.dev).)
+  you need a Neovim GUI with the `Open With` capability, such as
+  [Neovide](http://neovide.dev).)
 
 ## Preview Pane
 For the preview pane, install [mr-pennyworth/alfred-extra-pane](https://github.com/mr-pennyworth/alfred-extra-pane).
@@ -1051,7 +1050,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>2.5.1</string>
+	<string>2.6.0</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
