@@ -1,7 +1,8 @@
 -- vim: foldlevel=1
----@diagnostic disable: unused-local -- unused colorschemes
 --------------------------------------------------------------------------------
+---@diagnostic disable: unused-local -- unused colorschemes
 
+-- COLORSCHEME DEFINITIONS
 local dawnfox = {
 	-- config: https://github.com/EdenEast/nightfox.nvim/blob/main/usage.md
 	-- palette: https://github.com/EdenEast/nightfox.nvim/blob/main/usage.md#palette
@@ -242,6 +243,7 @@ local gruvboxMaterial = { --- GRUVBOX-MATERIAL
 	end,
 }
 
+---@diagnostic enable: unused-local -- unused colorschemes
 --------------------------------------------------------------------------------
 
 -- CONFIG
