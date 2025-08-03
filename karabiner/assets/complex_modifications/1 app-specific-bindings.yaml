@@ -2,18 +2,6 @@
 title: App-specific bindings
 rules:
   #─────────────────────────────────────────────────────────────────────────────
-  # FIX emmylua not quitting properly
-  - description: "cmd+q (Neovide): quit & kill emmylu"
-    manipulators:
-      - type: basic
-        from: { key_code: q, modifiers: { mandatory: [command] } }
-        conditions:
-          - { type: frontmost_application_if, bundle_identifiers: [com.neovide.neovide] }
-        to:
-          - shell_command: |
-              nvim --server "/tmp/nvim_server.pipe" --remote-send "<cmd>wqall!<CR>"
-              killall "emmylua_ls"
-  #─────────────────────────────────────────────────────────────────────────────
   # replaces "hide cursor" chrome extension https://chromewebstore.google.com/detail/hide-mouse-pointer/lbbedlldjinglbnfghakndfbagkolfdf
   - description: "j (Browser): also hides cursor for vimium plugin"
     manipulators:

@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 
 # CONFIG
-GITHUB_TOKEN="$(cat "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/private dotfiles/github-token.txt")"
+_export_github_token
 
 #───────────────────────────────────────────────────────────────────────────────
 
@@ -28,7 +28,7 @@ if [[ "$SENDER" = "front_app_switched" ]]; then
 	[[ "$activated_app" == "Brave Browser" || "$deactivated_app" == "Brave Browser" ]] || return 0
 
 	# when triggered due to opening in browser, wait so notification opened is marked as read
-	[[ "$activated_app" == "Brave Browser" ]] && sleep 5
+	[[ "$activated_app" == "Brave Browser" ]] && sleep 10
 fi
 
 #───────────────────────────────────────────────────────────────────────────────
