@@ -1,8 +1,11 @@
 #!/usr/bin/env zsh
 
 if [[ ! -x "$(command -v cwebp)" ]]; then
-	print "\`cwebp\` not installed.\e[0m" && return 1
+	print "\`cwebp\` not installed. (Install via \`brew install webp\`)"
+	return 1
 fi
+
+#───────────────────────────────────────────────────────────────────────────────
 
 
 input_images=("$@")
