@@ -26,9 +26,8 @@ const fileExists = (/** @type {string} */ filePath) => Application("Finder").exi
 // plugins that awesome-neovim, and neovimcraft and dotfyle only include plugins
 // that are in the awesome-neovim
 // SOURCE https://github.com/alex-popov-tech/store.nvim/blob/main/lua/store/config.lua
-// url is permanent, even though it ends with `1.1.0` https://github.com/alex-popov-tech/store.nvim/issues/9
 const storeNvimList =
-	"https://gist.githubusercontent.com/alex-popov-tech/dfb6adf1ee0506461d7dc029a28f851d/raw/store.nvim_db_1.1.0.json";
+	"https://gist.githubusercontent.com/alex-popov-tech/dfb6adf1ee0506461d7dc029a28f851d/raw/ad13fe0448bb3af2afeccd7615136b7a7c5ce4d7/db_minified.json";
 
 /** @typedef {Object} StoreNvimRepo
  * @property {string} full_name
@@ -39,6 +38,8 @@ const storeNvimList =
  * @property {string} pretty_pushed_at humean readable date
  * @property {string} pretty_stargazers_count
  * @property {string[]} tags
+ * @property {string[]} topics
+ * @property {{initial: string, lazyConfig: string}} install
  */
 
 //──────────────────────────────────────────────────────────────────────────────
@@ -60,6 +61,18 @@ function run() {
 			});
 	}
 
+	// get data & log it
+	let nvimStoreData = [];
+	try {
+		nvimStoreData = JSON.parse(httpRequest(storeNvimList));
+	} catch (_error) {
+		const item = { title: "Cannot retrieve data", valid: false };
+		return JSON.stringify({ items: [item] });
+	}
+	console.log("Last crawl:", new Date(nvimStoreData.meta.crawled_at).toLocaleString());
+	console.log("Total plugins:", nvimStoreData.meta.total_count);
+
+	// construct Alfred items
 	const pluginsArr = JSON.parse(httpRequest(storeNvimList))
 		.items.sort(
 			(/** @type {StoreNvimRepo} */ a, /** @type {StoreNvimRepo} */ b) =>
@@ -90,7 +103,6 @@ function run() {
 			};
 		});
 
-	console.log("plugin count:", pluginsArr.length);
 	return JSON.stringify({
 		items: pluginsArr,
 		cache: { seconds: 300, loosereload: true }, // faster, to update install icons

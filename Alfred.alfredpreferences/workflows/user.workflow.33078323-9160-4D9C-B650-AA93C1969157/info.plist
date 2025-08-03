@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string>com.vitorgalvao.alfred.removequarantine</string>
+	<key>connections</key>
+	<dict>
+		<key>8A0A36B3-0A1C-4F9B-B056-1CAC58E3266F</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>57E5FCE3-A396-4994-B57D-D2645AFE5445</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>B7C223E0-57D2-4067-AF52-F5160C420029</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>57E5FCE3-A396-4994-B57D-D2645AFE5445</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+	</dict>
+	<key>createdby</key>
+	<string>Vítor Galvão</string>
+	<key>description</key>
+	<string>Delete the quarantine attribute from app bundles and files</string>
+	<key>disabled</key>
+	<false/>
+	<key>name</key>
+	<string>Remove Quarantine</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>/usr/bin/xattr -d com.apple.quarantine "${@}"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>11</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>57E5FCE3-A396-4994-B57D-D2645AFE5445</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<false/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>keyword</key>
+				<string>{var:search_apps_keyword}</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>Finding quaratined apps…</string>
+				<key>script</key>
+				<string># Helpers
+function app_as_json {
+  /usr/bin/osascript -l JavaScript -e 'function run(argv) { return JSON.stringify({
+    title: $(argv[0]).stringByDeletingPathExtension.lastPathComponent.js,
+    subtitle: argv[0],
+    type: "file",
+    icon: { type: "fileicon", path: argv[0] },
+    arg: argv[0]
+  })}' "${1}"
+}
+
+# Grab all apps as reported by Spotlight
+[[ "${only_root_applications}" -eq 1 ]] &amp;&amp; readonly filter=(-onlyin '/Applications')
+readonly all_apps=("${(@f)$(/usr/bin/mdfind "${filter[@]}" "kMDItemContentTypeTree == 'com.apple.application-bundle'")}")
+
+# Separate quarantined apps
+for app in "${all_apps[@]}"
+do
+  # Skip unquarantined apps
+  /usr/bin/xattr -p 'com.apple.quarantine' "${app}" &amp;&gt; /dev/null || continue
+  # Skip signed and notarised apps, if option is enabled
+  [[ "${ignore_signed}" -eq 1 ]] &amp;&amp; /usr/sbin/spctl --assess --type install "${app}" &amp;&amp; continue
+  # Add JSON item
+  json_items+=("$(app_as_json "${app}")")
+done
+
+# Exit early if nothing to do
+if [[ "${#json_items[@]}" -eq 0 ]]
+then
+  printf '{ "items": [{
+    "title": "No quarantined applications found",
+    "subtitle": "Use this workflow’s File Action if you need more granularity"
+  }]}'
+
+  exit 0
+fi
+
+# List quarantined apps
+printf '{ "items": ['
+printf '%s,' "${json_items[@]}" | sed 's/,$//'
+printf ']}'</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>skipuniversalaction</key>
+				<true/>
+				<key>subtext</key>
+				<string>Remove the quarantine attribute from your apps</string>
+				<key>title</key>
+				<string>{const:alfred_workflow_name}</string>
+				<key>type</key>
+				<integer>11</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>8A0A36B3-0A1C-4F9B-B056-1CAC58E3266F</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>acceptsmulti</key>
+				<integer>1</integer>
+				<key>filetypes</key>
+				<array/>
+				<key>name</key>
+				<string>Remove quarantine</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.action</string>
+			<key>uid</key>
+			<string>B7C223E0-57D2-4067-AF52-F5160C420029</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string>## Usage
+
+Unquarantine files or folders via the [Universal Action](https://www.alfredapp.com/help/features/universal-actions/).
+
+![Removing quarantine from Inkscape](images/about/ua.png)
+
+Alternatively, search for quarantined apps via the `rq` keyword. &lt;kbd&gt;↩&lt;/kbd&gt; to remove the quarantine.
+
+![Listing quarantined apps](images/about/rq.png)</string>
+	<key>uidata</key>
+	<dict>
+		<key>57E5FCE3-A396-4994-B57D-D2645AFE5445</key>
+		<dict>
+			<key>xpos</key>
+			<real>300</real>
+			<key>ypos</key>
+			<real>40</real>
+		</dict>
+		<key>8A0A36B3-0A1C-4F9B-B056-1CAC58E3266F</key>
+		<dict>
+			<key>xpos</key>
+			<real>60</real>
+			<key>ypos</key>
+			<real>40</real>
+		</dict>
+		<key>B7C223E0-57D2-4067-AF52-F5160C420029</key>
+		<dict>
+			<key>xpos</key>
+			<real>60</real>
+			<key>ypos</key>
+			<real>170</real>
+		</dict>
+	</dict>
+	<key>userconfigurationconfig</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>rq</string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>Search Keyword</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>search_apps_keyword</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<false/>
+				<key>required</key>
+				<false/>
+				<key>text</key>
+				<string>Only show apps in /Applications</string>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>Filters</string>
+			<key>type</key>
+			<string>checkbox</string>
+			<key>variable</key>
+			<string>only_root_applications</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<false/>
+				<key>required</key>
+				<false/>
+				<key>text</key>
+				<string>Ignore signed and notarised apps</string>
+			</dict>
+			<key>description</key>
+			<string>Ignoring apps gives more relevant results but makes search slower.</string>
+			<key>label</key>
+			<string></string>
+			<key>type</key>
+			<string>checkbox</string>
+			<key>variable</key>
+			<string>ignore_signed</string>
+		</dict>
+	</array>
+	<key>variablesdontexport</key>
+	<array/>
+	<key>version</key>
+	<string>2024.2</string>
+	<key>webaddress</key>
+	<string>https://github.com/vitorgalvao/remove-quarantine-workflow/</string>
+</dict>
+</plist>
