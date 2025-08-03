@@ -8,6 +8,19 @@
 	<string>❇️</string>
 	<key>connections</key>
 	<dict>
+		<key>00C473A5-2045-4409-841A-1BE884B037BE</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>E762EDDE-643D-48E5-B773-C89606259F8B</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>6952AF82-81C6-4EA3-850D-BAC02934B45E</key>
 		<array>
 			<dict>
@@ -103,6 +116,8 @@
 				<false/>
 			</dict>
 		</array>
+		<key>BE518E10-A76F-4A39-BF2F-9A54BFA63DF7</key>
+		<array/>
 		<key>E07E04C5-C1AE-4930-BC19-FDC37F166624</key>
 		<array>
 			<dict>
@@ -367,6 +382,27 @@
 			<string>00C473A5-2045-4409-841A-1BE884B037BE</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>{query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>E762EDDE-643D-48E5-B773-C89606259F8B</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -643,6 +679,15 @@
 			<real>345</real>
 			<key>ypos</key>
 			<real>665</real>
+		</dict>
+		<key>E762EDDE-643D-48E5-B773-C89606259F8B</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>xpos</key>
+			<real>745</real>
+			<key>ypos</key>
+			<real>320</real>
 		</dict>
 		<key>F0335C72-7DC6-4793-ADCD-3909E4CDE001</key>
 		<dict>
