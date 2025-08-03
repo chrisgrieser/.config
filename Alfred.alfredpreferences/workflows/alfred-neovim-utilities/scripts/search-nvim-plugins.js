@@ -62,6 +62,7 @@ function readFile(path) {
 // plugins that awesome-neovim, and neovimcraft and dotfyle only include plugins
 // that are in the awesome-neovim
 // SOURCE https://github.com/alex-popov-tech/store.nvim/blob/main/lua/store/config.lua
+// SOURCE https://github.com/alex-popov-tech/store.nvim.crawler/issues/1#issuecomment-3146734037
 const storeNvimList =
 	"https://gist.githubusercontent.com/alex-popov-tech/dfb6adf1ee0506461d7dc029a28f851d/raw/ad13fe0448bb3af2afeccd7615136b7a7c5ce4d7/db_minified.json";
 
