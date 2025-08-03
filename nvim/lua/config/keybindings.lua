@@ -227,6 +227,9 @@ keymap("i", "<D-v>", function()
 	return "<C-g>u<C-r><C-o>+" -- `<C-g>u` adds undopoint before the paste
 end, { desc = " Paste", expr = true })
 
+keymap("n", "<D-v>", "p", { desc = " Paste" }) -- compatibility w/ macOS clipboard managers
+
+-- CYCLING PASTE
 do
 	-- same as regular `p`, but when undoing the paste and then using `.`, will
 	-- paste `""2p`, so `p......` pasts all recent deletions and `pu.u.u.u.`
@@ -256,8 +259,6 @@ do
 	end
 end
 
--- for compatibility with macOS clipboard managers
-keymap("n", "<D-v>", "p", { desc = " Paste" })
 
 --------------------------------------------------------------------------------
 -- SURROUND
