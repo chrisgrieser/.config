@@ -1,4 +1,5 @@
 -- vim: foldlevel=1
+---@diagnostic disable: unused-local -- unused colorschemes
 --------------------------------------------------------------------------------
 
 local dawnfox = {
@@ -200,7 +201,8 @@ local gruvboxMaterial = { --- GRUVBOX-MATERIAL
 				setHl("TSParameter", { fg = "#679bbf" })
 				setHl("TSConstant", { fg = "#948ecb" })
 				setHl("@string.documentation.python", { link = "Comment" })
-				setHl("@keyword.return", { bold = true, fg = "#f6843a" })
+				setHl("StandingOut", { bold = true, fg = "#fb2895" })
+				setHl("@keyword.return", { link = "StandingOut" })
 				setHl("TSPunctBracket", { fg = "#af7e5d" })
 				vim.defer_fn(function() setHl("@constructor.lua", { fg = "#9b97a8" }) end, 1)
 
