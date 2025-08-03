@@ -10,13 +10,15 @@ return {
 				-- enable color highlights, then override to activate picker
 				vim.cmd.CccHighlighterEnable()
 				vim.notify("Highlights enabled.", nil, { title = "ccc.nvim", icon = "" })
-				vim.keymap.set("n", "#", vim.cmd.CccPick, { desc = " Color picker" })
 			end,
-			desc = " Color highlights/picker",
+			desc = " Enable color highlights",
 		},
 		{ "<leader>r#", vim.cmd.CccConvert, desc = " Convert to hsl" },
 	},
 	config = function()
+		-- override key
+		-- vim.keymap.set("n", "#", vim.cmd.CccPick, { desc = " Color picker" })
+		-- high_color="0xffc95050" # red #c95050
 		local ccc = require("ccc")
 		ccc.setup {
 			point_char = "󰣏",

@@ -8,11 +8,9 @@ system_font="Lucida Grande:Regular:16.5"
 if defaults read -g AppleInterfaceStyle | grep -q "Dark"; then
 	bg="0xff333333"
 	fg="0xffffffff"
-	graph_fill="0xffcccccc"
 else
 	bg="0xffcdcdcd"
 	fg="0xff000000"
-	graph_fill="0xff444444"
 fi
 
 # HACK using `popup` to create a 2nd row. `popup.{item}` only refers to `{item}`
@@ -72,8 +70,7 @@ sketchybar \
 	\
 	--add graph cpu_graph $row_2 60 \
 	--set cpu_graph update_freq="2" drawing="true" \
-	background.height="18" \
-	background.color="$bg" graph.color="$fg" graph.fill_color="$graph_fill" \
+	background.height="18" background.color="$bg" graph.color="0x00000000" \
 	script="./components/cpu.sh" \
 	\
 	--add item network-download $row_2 \
