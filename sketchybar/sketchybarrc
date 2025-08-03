@@ -6,7 +6,7 @@ system_font="Lucida Grande:Regular:16.5"
 
 # switch colors depending on dark mode
 if defaults read -g AppleInterfaceStyle | grep -q "Dark"; then
-	bg="0xff333333"
+	bg="0xff333333" # `0x` for hex, `ff` for alpha (= no transparency), `333333` for RGB
 	fg="0xffffffff"
 else
 	bg="0xffcdcdcd"
@@ -36,7 +36,7 @@ sketchybar \
 	popup.drawing="true" popup.horizontal="true" popup.topmost="false" \
 	popup.y_offset="-35" y_offset="18" \
 	\
-	`#─── ROW #1 ──────────────────────────────────────────────────────────────` \
+	`#─── 1st MENUBAR ROW ─────────────────────────────────────────────────────` \
 	\
 	--add item clock $row_1 \
 	--set clock update_freq="1" drawing="true" padding_left="10" \
@@ -61,7 +61,7 @@ sketchybar \
 	--add event update_reminder_count \
 	--subscribe reminders_count update_reminder_count system_woke front_app_switched \
 	\
-	`#─── ROW #2 ──────────────────────────────────────────────────────────────` \
+	`#─── 2nd MENUBAR ROW ─────────────────────────────────────────────────────` \
 	\
 	--add item ram $row_2 \
 	--set ram padding_left="16" update_freq="5" \

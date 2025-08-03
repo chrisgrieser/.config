@@ -15,8 +15,7 @@ return {
 		{ "<leader>r#", vim.cmd.CccConvert, desc = " Convert to hsl" },
 	},
 	config = function()
-		vim.schedule(function()
-			-- override keymap
+		vim.schedule(function() -- override keymap
 			vim.keymap.set("n", "#", vim.cmd.CccPick, { desc = " Color picker" })
 		end)
 
