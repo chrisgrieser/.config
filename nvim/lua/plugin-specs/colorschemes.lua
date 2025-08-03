@@ -102,7 +102,6 @@ local tokyonight = {
 	-- config: https://github.com/folke/tokyonight.nvim#%EF%B8%8F-configuration
 	-- palette: https://github.com/folke/tokyonight.nvim/blob/main/extras/lua/tokyonight_moon.lua
 	"folke/tokyonight.nvim",
-	colorscheme = "tokyonight",
 	opts = {
 		style = "moon",
 		styles = {
@@ -169,7 +168,6 @@ local tokyonight = {
 local gruvboxMaterial = { --- GRUVBOX-MATERIAL
 	-- https://github.com/sainnhe/gruvbox-material/blob/master/doc/gruvbox-material.txt#L144
 	"sainnhe/gruvbox-material",
-	colorscheme = "gruvbox-material",
 	init = function(spec)
 		vim.g.gruvbox_material_background = "medium" -- soft|medium|hard
 		vim.g.gruvbox_material_foreground = "material" -- material|mix|original
@@ -269,6 +267,15 @@ end
 
 --------------------------------------------------------------------------------
 
-lightTheme.priority = 1000 -- see https://lazy.folke.io/spec/lazy_loading#-colorschemes
-darkTheme.priority = 1000
+-- ADD SPECS FOR LAZY.NVIM
+for _, theme in pairs ({ lightTheme, darkTheme }) do
+	theme.lazy = false
+		theme.priority = 1000 -- see https://lazy.folke.io/spec/lazy_loading#-colorschemes
+		-- `colorscheme` is not part of the lazy.nvim spec, but only a helper for
+		-- the light-dark-mode toggling below
+		if not theme.colorscheme then
+			theme.colorscheme = vim.fs.basename(theme[1]):gsub("%.?nvim%-?", "")
+		end
+end
+
 return { lightTheme, darkTheme }
