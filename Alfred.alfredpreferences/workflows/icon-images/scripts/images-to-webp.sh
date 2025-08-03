@@ -1,10 +1,15 @@
 #!/usr/bin/env zsh
 
+if [[ ! -x "$(command -v cwebp)" ]]; then
+	print "\`cwebp\` not installed.\e[0m" && return 1
+fi
+
+
 input_images=("$@")
 
 output_dir=$(dirname "$1")
 cd "$output_dir" || return 1
 
 for image in "${input_images[@]}"; do
-	cwebp -quiet "$image" -o "${image:r}.webp"
+	cwebp "$image" -o "${image:r}.webp"
 done
