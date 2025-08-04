@@ -5,7 +5,7 @@ ${custom.location_indicator}$directory${custom.folder_number}\
 ${custom.main_branch}$git_branch\
 ${custom.venv_on}${custom.venv_off}\
 ${custom.npm_installed}\
-$git_status$git_metrics$git_commit$git_state\
+$git_status${custom.untracked_git_files}$git_metrics$git_commit$git_state\
 $sudo $status\
 ](bg:black)\
 $character\
@@ -113,7 +113,8 @@ ignore_branches = ["main"]
 
 [git_status]  # files
 stashed = "[ 󰜦 $count](fg:cyan bg:black)"
-untracked = "[ ?$count](fg:green bg:black)"
+# untracked = "[ ?$count](fg:green bg:black)"
+untracked = ""  # BUG hide untracked files due to https://github.com/starship/starship/issues/6881
 deleted = "[ -$count](fg:red bg:black)"  # `deleted` -> unstaged as well as staged deletion
 modified = "[ ~$count](fg:#fa881e bg:black)"
 renamed = "[ 󰑕 $count](fg:blue bg:black)"
@@ -124,6 +125,13 @@ ahead = "[ 󰶣$count](fg:cyan bg:black)"
 behind = "[ 󰶡$count](fg:yellow bg:black)"
 style = "bg:black"
 format = "[($ahead_behind$conflicted$stashed$staged$untracked$renamed$modified$deleted )]($style)"
+
+[custom.untracked_git_files]
+when = "git rev-parse --is-inside-work-tree"
+description = "Fix for the bug https://github.com/starship/starship/issues/6881"
+command = "git status --show-untracked-files=all | grep '??' | wc -l"
+format = "[ ?$output ](fg:green bg:black)"
+
 
 # INFO putting a variable into round bracket ensures that the bracket content is
 # only shown when the variable is set. `bright-black` is effectively gray.
