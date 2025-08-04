@@ -27,7 +27,7 @@ end
 --------------------------------------------------------------------------------
 -- SYNC IMPLEMENTATION
 
-M.syncedRepos = {} ---@type Repo[]
+M.finishedSyncing = {} ---@type Repo[]
 M.task_sync = {} ---@type table<string, hs.task>
 
 ---@async
@@ -39,7 +39,7 @@ local function syncOneRepo(repo)
 	M.task_sync[repo.location] = hs.task
 		.new(syncScriptPath, function(exitCode, stdout, stderr)
 			if exitCode == 0 then
-				table.insert(M.syncedRepos, repo)
+				table.insert(M.finishedSyncing, repo)
 			else
 				local output = (stdout .. "\n" .. stderr):gsub("^%s+", ""):gsub("%s+$", "")
 				local msg = ("⚠️️ %s %s Sync: %s"):format(repo.icon, repo.location, output)
@@ -62,7 +62,6 @@ local function repoSyncsInProgress()
 	return stillSyncingIcons
 end
 
----@async
 ---@param notifyOnSuccess boolean set to false for regularly occurring syncs
 local function syncAllGitRepos(notifyOnSuccess)
 	if repoSyncsInProgress() ~= "" then
@@ -76,13 +75,11 @@ local function syncAllGitRepos(notifyOnSuccess)
 
 	M.timer_AllSyncs = hs.timer
 		.waitUntil(function() return repoSyncsInProgress() == "" end, function()
-			if #M.syncedRepos > 0 then
-				local syncedIcons = hs.fnutils.map(M.syncedRepos, function(r) return r.icon end) or {}
-				local msg = "🔁 Sync done: " .. table.concat(syncedIcons)
-				print(msg)
-				if notifyOnSuccess then notify(msg) end
-			end
-			M.syncedRepos = {} -- reset
+			local syncedIcons = hs.fnutils.map(M.finishedSyncing, function(r) return r.icon end) or {}
+			local msg = "🔁 Sync done: " .. table.concat(syncedIcons)
+			print(msg)
+			if notifyOnSuccess then notify(msg) end
+			M.finishedSyncing = {} -- reset
 		end)
 		:start()
 end
