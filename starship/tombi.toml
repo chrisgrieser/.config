@@ -1,0 +1,5 @@
+# DOCS https://deepwiki.com/tombi-toml/tombi/10-configuration
+
+[lint]
+[lint.rules]
+tables-out-of-order = "off"
