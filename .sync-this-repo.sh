@@ -13,20 +13,6 @@ if [[ $files_changed -gt 0 ]]; then
 		return 1
 fi
 
-common=""
-git status --porcelain | cut -c4- | sed 's|[^/]*$||' | while read -r path; do
-	if [[ -z "$common" ]]; then
-		common="$path"
-	else
-		while [[ "${path#"$common"}" == "$path" ]]; do
-			prev="$common"
-			common="$(dirname "$common")"
-			[[ "$common" == "$prev" ]] && common="" && break
-		done
-	fi
-	echo "$common"
-done | tail -n1 | sed 's|/*$||'
-
 # PULL & PUSH
 git pull --no-progress && git push --no-progress && return 0
 return 1
