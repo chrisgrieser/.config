@@ -58,7 +58,9 @@ M.timer_finesseBistro = hs.timer
 		local dayOfWeek = tostring(os.date("%a"))
 		local isWeekday = hs.fnutils.contains({ "Mon", "Tue", "Wed", "Thu" }, dayOfWeek)
 		if isWeekday and env.isAtHome and u.screenIsUnlocked() then
-			u.notify("🍴 Go to Finesse Bistro")
+			local msg = "🍴 Go to Finesse Bistro"
+			hs.alert(msg, 4)
+			print(msg)
 		end
 	end)
 	:start()

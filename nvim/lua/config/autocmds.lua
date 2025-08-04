@@ -20,7 +20,7 @@ vim.api.nvim_create_autocmd("FileType", {
 
 -- SYNC TERMINAL BACKGROUND
 -- https://github.com/neovim/neovim/issues/16572#issuecomment-1954420136
--- https://new.reddit.com/r/neovim/comments/1ehidxy/you_can_remove_padding_around_neovim_instance/
+-- https://www.reddit.com/r/neovim/comments/1ehidxy/you_can_remove_padding_around_neovim_instance/
 if vim.fn.has("gui_running") == 0 then
 	local termBgModified = false
 	vim.api.nvim_create_autocmd({ "UIEnter", "ColorScheme" }, {
@@ -107,6 +107,9 @@ do
 		-- also trigger on `FocusGained` to account for deletions of file outside nvim
 		desc = "User: Auto-cd to project root",
 		callback = function(ctx)
+			-- don't mess with cwd when writing commit messages or rebasing
+			if vim.fn.has("gui_running") == 0 then return end
+
 			vim.schedule(function()
 				if not vim.api.nvim_buf_is_valid(ctx.buf) then return end
 				if vim.startswith(ctx.file, "/private/var/") then return end -- GUARD `pass` cli buffers

@@ -102,7 +102,7 @@
       "\techo \"\\$line\"$0",
       "done < \"\\$${1:input_file}\""
     ],
-    "prefix": "for each line (read)"
+    "prefix": "for each line (from a file)"
   },
   "for each line (variable)": {
     "body": [
