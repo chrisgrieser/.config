@@ -126,7 +126,7 @@ rules:
   #─────────────────────────────────────────────────────────────────────────────
   - description: (Apps) Finder
     manipulators:
-      # cmd+1 -> right left sidebar
+      # cmd+1 -> toggle left sidebar
       - type: basic
         from: { key_code: "1", modifiers: { mandatory: [command] } }
         to:
@@ -372,9 +372,9 @@ rules:
         conditions:
           [{ type: frontmost_application_if, bundle_identifiers: [com.apple.ScriptEditor] }]
   #─────────────────────────────────────────────────────────────────────────────
-  - description: "(Apps) Calendar"
+  - description: "(Apps) Toggle sidebars"
     manipulators:
-      # Toggle sidebar
+      # Calendar
       - type: basic
         from: { key_code: "1", modifiers: { mandatory: [command] } }
         to:
@@ -386,15 +386,14 @@ rules:
                   click radio button 1 of radio group 1 of group 1 of toolbar 1 of window 1
                 end tell'
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [com.apple.iCal] }]
-  #─────────────────────────────────────────────────────────────────────────────
-  - description: "(Apps) Reminder"
-    manipulators:
-      # Toggle sidebar
+      # Reminders & Maps
       - type: basic
         from: { key_code: "1", modifiers: { mandatory: [command] } }
         to:
           - { key_code: s, modifiers: [command, option] }
-        conditions: [{ type: frontmost_application_if, bundle_identifiers: [com.apple.reminders] }]
+        conditions:
+          - type: frontmost_application_if
+            bundle_identifiers: [com.apple.reminders, com.apple.Maps]
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) Mimestream"
     manipulators:
