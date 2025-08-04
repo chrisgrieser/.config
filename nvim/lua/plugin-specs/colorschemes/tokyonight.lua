@@ -2,6 +2,8 @@
 -- palette: https://github.com/folke/tokyonight.nvim/blob/main/extras/lua/tokyonight_moon.lua
 --------------------------------------------------------------------------------
 
+-- more test
+
 return {
 	"folke/tokyonight.nvim",
 	opts = {

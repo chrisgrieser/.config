@@ -131,7 +131,7 @@ hammerspoonHotkey({ "cmd" }, "k", hs.console.clearConsole)
 --------------------------------------------------------------------------------
 -- Insert a separator the logs every day at midnight
 M.timer_dailyConsoleSeparator = hs.timer
-	.doAt("00:00", "01d", function()
+	.doAt("00:01", "01d", function() -- `00:01` to ensure date switched to the next day
 		local date = os.date("%a, %d. %b")
 		-- stylua: ignore
 		print(("\n----------------------------- %s ---------------------------------\n"):format(date))

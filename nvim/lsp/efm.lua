@@ -52,7 +52,6 @@ return {
 	filetypes = vim.tbl_keys(efmConfig),
 	settings = { languages = efmConfig },
 
-	workspace_required = false,
 	root_markers = vim.iter(vim.tbl_values(efmConfig))
 		:flatten()
 		:map(function(tool) return tool.rootMarkers end)

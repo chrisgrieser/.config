@@ -22,6 +22,7 @@ vim.g.setColorscheme = function(init)
 	local nextTheme = (vim.o.background == "light" and lightColorscheme or darkColorscheme)
 	vim.cmd.colorscheme(nextTheme)
 end
+-- test
 
 --------------------------------------------------------------------------------
 
