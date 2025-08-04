@@ -2,13 +2,13 @@
 
 # cannot use JXA to get browser URL, since sometimes a PWA is frontmost
 # shellcheck disable=2154 # $browser_app set in Alfred settings
-url=$(osascript -e "tell application \"$browser_app\" to return URL of active tab of front window")
+api_url=$(osascript -e "tell application \"$browser_app\" to return URL of active tab of front window")
 
 # GUARD
-if [[ -z "$url" ]]; then
+if [[ -z "$api_url" ]]; then
 	echo -n "❌ Tab could not be retrieved."
 	return 1
-elif [[ ! "$url" =~ "youtu" ]]; then # to match youtu.be and youtube.com
+elif [[ ! "$api_url" =~ "youtu" ]]; then # to match youtu.be and youtube.com
 	echo -n "❌ Not a YouTube URL."
 	return 1
 elif [[ ! -d "$youtube_link_folder" ]]; then
@@ -19,16 +19,16 @@ fi
 #───────────────────────────────────────────────────────────────────────────────
 
 # CREATE ICON FILE
-youtube_id=$(echo "$url" | cut -d"=" -f2)
+youtube_id=$(echo "$api_url" | cut -d"=" -f2)
 title=$(
-	curl --silent "$url" |
+	curl --silent "$api_url" |
 		grep --only-matching "<title>[^<]*" | cut -d'>' -f2- | # get title key
 		tr "/:" "--" |                                         # remove unsafe chars
 		sed -e 's/ - YouTube//' -e 's/amp;//g'                 # cleanup
 )
 
 destination="$youtube_link_folder/$title.url"
-print "[InternetShortcut]\nURL=$url\nIconIndex=0" >"$destination"
+print "[InternetShortcut]\nURL=$api_url\nIconIndex=0" >"$destination"
 
 #───────────────────────────────────────────────────────────────────────────────
 
