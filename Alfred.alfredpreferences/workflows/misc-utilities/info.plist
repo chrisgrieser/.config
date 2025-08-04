@@ -99,11 +99,26 @@
 				<false/>
 			</dict>
 		</array>
+		<key>1ED4AA3A-8918-44D4-94C9-14DF95FD6FE1</key>
+		<array/>
 		<key>1F393412-6A91-43CA-8572-616896667E87</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
 				<string>A51066A2-90E9-43BC-A689-373B76D3219F</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>22F0FB90-3D4E-4671-B7F6-E4164F749C61</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>06224ECC-9341-4E8F-B2A2-42DB4C645A3C</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -179,6 +194,41 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>73A0349D-2BA7-40C6-8738-997089E11428</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>62DCC1DF-1B2C-4ABC-AEFC-BE38FDB972E6</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>1ED4AA3A-8918-44D4-94C9-14DF95FD6FE1</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>EE46B460-825D-4ACF-9BD0-902876371CCA</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>9A900E48-E8F5-47BE-B456-7A5E542DD443</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>22F0FB90-3D4E-4671-B7F6-E4164F749C61</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -406,7 +456,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>1ED4AA3A-8918-44D4-94C9-14DF95FD6FE1</string>
+				<string>62DCC1DF-1B2C-4ABC-AEFC-BE38FDB972E6</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -1484,6 +1534,25 @@ open -g "hammerspoon://sync-repos"</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>autopaste</key>
+				<true/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>1ED4AA3A-8918-44D4-94C9-14DF95FD6FE1</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -1538,25 +1607,6 @@ open -g "hammerspoon://sync-repos"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>autopaste</key>
-				<true/>
-				<key>clipboardtext</key>
-				<string>{query}</string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>transient</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.clipboard</string>
-			<key>uid</key>
-			<string>1ED4AA3A-8918-44D4-94C9-14DF95FD6FE1</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
@@ -1574,6 +1624,57 @@ open -g "hammerspoon://sync-repos"</string>
 			<string>A68573C3-D348-44C3-8DF8-9052FD9DA10C</string>
 			<key>version</key>
 			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string>{query}</string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>4</integer>
+						<key>matchstring</key>
+						<string>http</string>
+						<key>outputlabel</key>
+						<string>mdlink</string>
+						<key>uid</key>
+						<string>EE46B460-825D-4ACF-9BD0-902876371CCA</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>just query</string>
+				<key>hideelse</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.conditional</string>
+			<key>uid</key>
+			<string>62DCC1DF-1B2C-4ABC-AEFC-BE38FDB972E6</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<true/>
+				<key>clipboardtext</key>
+				<string>[{query}]({cursor})</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>9A900E48-E8F5-47BE-B456-7A5E542DD443</string>
+			<key>version</key>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1625,6 +1726,40 @@ open -g "hammerspoon://sync-repos"</string>
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>https://duckduckgo.com/?q={query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>06224ECC-9341-4E8F-B2A2-42DB4C645A3C</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>seconds</key>
+				<string>0.1</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.delay</string>
+			<key>uid</key>
+			<string>22F0FB90-3D4E-4671-B7F6-E4164F749C61</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
@@ -1649,6 +1784,17 @@ open -g "hammerspoon://sync-repos"</string>
 			<real>550</real>
 			<key>ypos</key>
 			<real>160</real>
+		</dict>
+		<key>06224ECC-9341-4E8F-B2A2-42DB4C645A3C</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>note</key>
+			<string>search at DDG for link</string>
+			<key>xpos</key>
+			<real>755</real>
+			<key>ypos</key>
+			<real>1475</real>
 		</dict>
 		<key>0AC03754-13D8-4231-A82E-CCA1581406FA</key>
 		<dict>
@@ -1684,7 +1830,7 @@ open -g "hammerspoon://sync-repos"</string>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>190</real>
+			<real>180</real>
 			<key>ypos</key>
 			<real>995</real>
 		</dict>
@@ -1693,7 +1839,7 @@ open -g "hammerspoon://sync-repos"</string>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>370</real>
+			<real>330</real>
 			<key>ypos</key>
 			<real>740</real>
 		</dict>
@@ -1724,9 +1870,9 @@ open -g "hammerspoon://sync-repos"</string>
 			<key>note</key>
 			<string>paste</string>
 			<key>xpos</key>
-			<real>475</real>
+			<real>620</real>
 			<key>ypos</key>
-			<real>1305</real>
+			<real>1235</real>
 		</dict>
 		<key>1F393412-6A91-43CA-8572-616896667E87</key>
 		<dict>
@@ -1736,6 +1882,17 @@ open -g "hammerspoon://sync-repos"</string>
 			<real>180</real>
 			<key>ypos</key>
 			<real>860</real>
+		</dict>
+		<key>22F0FB90-3D4E-4671-B7F6-E4164F749C61</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>note</key>
+			<string>wait for paste</string>
+			<key>xpos</key>
+			<real>635</real>
+			<key>ypos</key>
+			<real>1505</real>
 		</dict>
 		<key>2A4ABC16-94E3-4528-87EF-55BFB462E0B7</key>
 		<dict>
@@ -1825,6 +1982,15 @@ open -g "hammerspoon://sync-repos"</string>
 			<key>ypos</key>
 			<real>270</real>
 		</dict>
+		<key>62DCC1DF-1B2C-4ABC-AEFC-BE38FDB972E6</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>xpos</key>
+			<real>475</real>
+			<key>ypos</key>
+			<real>1325</real>
+		</dict>
 		<key>6732D9D7-0908-40B4-90D9-B411E61EA024</key>
 		<dict>
 			<key>colorindex</key>
@@ -1892,6 +2058,17 @@ open -g "hammerspoon://sync-repos"</string>
 			<key>ypos</key>
 			<real>15</real>
 		</dict>
+		<key>9A900E48-E8F5-47BE-B456-7A5E542DD443</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>note</key>
+			<string>enclose &amp; paste</string>
+			<key>xpos</key>
+			<real>620</real>
+			<key>ypos</key>
+			<real>1370</real>
+		</dict>
 		<key>9C423BD7-E972-413B-8783-5B9CDCDD5647</key>
 		<dict>
 			<key>colorindex</key>
@@ -1906,7 +2083,7 @@ open -g "hammerspoon://sync-repos"</string>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>200</real>
+			<real>180</real>
 			<key>ypos</key>
 			<real>740</real>
 		</dict>
@@ -1946,7 +2123,7 @@ open -g "hammerspoon://sync-repos"</string>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>185</real>
+			<real>180</real>
 			<key>ypos</key>
 			<real>1305</real>
 		</dict>
@@ -1957,7 +2134,7 @@ open -g "hammerspoon://sync-repos"</string>
 			<key>note</key>
 			<string>paste</string>
 			<key>xpos</key>
-			<real>185</real>
+			<real>180</real>
 			<key>ypos</key>
 			<real>1455</real>
 		</dict>

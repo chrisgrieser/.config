@@ -12,8 +12,9 @@ echo "searchlink URL: $api_url" >&2
 first_url=$(curl --silent "$api_url" |
 	jq --raw-output ".Results[0].FirstURL // .OfficialWebsite // .AbstractURL")
 
+# what to send to Alfred
 if [[ -z "$first_url" || "$first_url" == "null" ]]; then
-	echo -n "[$query]({cursor})" # paste via Alfred, Alfred will move to `{cursor}`
+	echo -n "$query" # will search for query, and then paste empty mdlink
 else
-	echo -n "[$query]($first_url)"
+	echo -n "[$query]($first_url)" # will paste
 fi
