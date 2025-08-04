@@ -13,7 +13,6 @@ local efmConfig = {
 		{ -- HACK use `cat` due to https://github.com/mattn/efm-langserver/issues/258
 			formatCommand = "markdown-toc --indent=$'\t' -i '${INPUT}' && cat '${INPUT}'",
 			formatStdin = false,
-			rootMarkers = { ".git" },
 		},
 		{ -- HACK use `cat` due to https://github.com/mattn/efm-langserver/issues/258
 			formatCommand = "markdownlint --fix '${INPUT}' && cat '${INPUT}'",
@@ -36,7 +35,6 @@ local efmConfig = {
 		-- PENDING https://github.com/bash-lsp/bash-language-server/issues/1064
 		{
 			lintSource = "shellcheck",
-			rootMarkers = { ".git" },
 			lintCommand = "shellcheck --format=gcc --external-sources --shell=bash -",
 			lintStdin = true,
 			lintFormats = {
@@ -49,12 +47,12 @@ local efmConfig = {
 }
 
 return {
-	workspace_required = true,
 	init_options = { documentFormatting = true },
 
 	filetypes = vim.tbl_keys(efmConfig),
 	settings = { languages = efmConfig },
 
+	workspace_required = false,
 	root_markers = vim.iter(vim.tbl_values(efmConfig))
 		:flatten()
 		:map(function(tool) return tool.rootMarkers end)
