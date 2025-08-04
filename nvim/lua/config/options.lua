@@ -11,6 +11,37 @@ vim.g.icloudSync =
 vim.g.use_emmylua = false
 
 --------------------------------------------------------------------------------
+
+-- COLORSCHEMES
+-- 1. names need to match files in `lua/colorschemes/{name}.lua`
+-- 2. name of the file is used for the `vim.cmd.colorscheme` command
+vim.g.lightColor = "dawnfox"
+vim.g.darkColor = "gruvbox-material"
+
+-- Toggle light/dark colorscheme
+-- 1. Triggered on startup in `init.lua`
+-- 2. and via Hammerspoon on manual mode change (`OptionSet` autocmd doesn't work reliably)
+vim.g.setColorscheme = function()
+	vim.cmd.highlight("clear") -- reset so next theme isn't affected by previous one
+	local nextTheme = (vim.o.background == "light" and vim.g.lightColor or vim.g.darkColor)
+	vim.cmd.colorscheme(nextTheme)
+end
+
+
+-- set colorscheme once lazy.nvim has loaded them
+vim.api.nvim_create_autocmd("User", {
+	pattern = "LazyDone", -- https://lazy.folke.io/usage#-user-events
+	once = true,
+	callback = vim.schedule_wrap(function ()
+		-- needs to be set manually, since `Neovide` does not set correctly
+		-- https://github.com/neovide/neovide/issues/3066
+		local macOSMode = vim.system({ "defaults", "read", "-g", "AppleInterfaceStyle" }):wait()
+		vim.o.background = (macOSMode.stdout or ""):find("Dark") and "dark" or "light"
+		vim.g.setColorscheme()
+	end)
+})
+
+--------------------------------------------------------------------------------
 -- GENERAL
 vim.opt.clipboard = "unnamedplus"
 

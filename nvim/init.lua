@@ -22,8 +22,8 @@ if vim.env.USING_PASS then
 	vim.keymap.set("n", "<CR>", "ZZ", { desc = "Save and exit", buffer = true })
 else
 	safeRequire("config.lazy")
-	if vim.g.setColorscheme then vim.g.setColorscheme("init") end
 end
+
 safeRequire("config.neovide-gui-settings")
 safeRequire("config.autocmds")
 safeRequire("config.keybindings")
