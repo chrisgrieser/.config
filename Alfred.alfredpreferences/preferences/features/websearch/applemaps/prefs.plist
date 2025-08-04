@@ -4,5 +4,7 @@
 <dict>
 	<key>disabled</key>
 	<true/>
+	<key>keyword</key>
+	<string>map</string>
 </dict>
 </plist>

@@ -30,6 +30,8 @@
 	<string>plt</string>
 	<key>keyword_16</key>
 	<string>pd</string>
+	<key>keyword_17</key>
+	<string>np</string>
 	<key>keyword_19</key>
 	<string>git</string>
 	<key>keyword_20</key>
@@ -38,8 +40,6 @@
 	<string>hs</string>
 	<key>keyword_23</key>
 	<string>jq</string>
-	<key>keyword_24</key>
-	<string>man</string>
 	<key>use_source_page_if_available</key>
 	<true/>
 </dict>
