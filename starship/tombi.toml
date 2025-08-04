@@ -1,4 +1,4 @@
-# DOCS https://deepwiki.com/tombi-toml/tombi/10-configuration
+# DOCS https://tombi-toml.github.io/tombi/docs/configuration
 
 [lint]
 [lint.rules]
