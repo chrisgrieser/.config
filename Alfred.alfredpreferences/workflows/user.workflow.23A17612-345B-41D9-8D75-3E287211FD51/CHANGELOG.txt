@@ -1,4 +1,0 @@
-### Changelog
-- **style**: formatting
-- **docs**: remove obsolete info & add up-to-date features
-- **ci**: add pull request template
