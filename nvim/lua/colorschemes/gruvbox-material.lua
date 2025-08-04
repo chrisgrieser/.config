@@ -3,6 +3,7 @@
 
 return {
 	"sainnhe/gruvbox-material",
+	priority = 1000,
 	init = function(spec)
 		vim.g.gruvbox_material_background = "medium" -- soft|medium|hard
 		vim.g.gruvbox_material_foreground = "material" -- material|mix|original

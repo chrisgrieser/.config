@@ -4,11 +4,7 @@
 
 return {
 	"EdenEast/nightfox.nvim",
-
-	-- `colorscheme` is not part of the lazy.nvim spec, but only a helper for
-		-- the light-dark-mode toggling below
-	colorscheme = "dawnfox",
-
+	priority = 1000,
 	opts = {
 		specs = {
 			dawnfox = {
