@@ -12,7 +12,7 @@ end
 --------------------------------------------------------------------------------
 
 safeRequire("config.reopen-last-file")
-safeRequire("config.options") -- first so available for plugins configs
+safeRequire("config.options") -- before plugins, so options are available for plugins configs
 
 -- For extra security, do not load plugins when using `pass`.
 --(requires starting it via `env="USING_PASS=true" pass`)
@@ -22,6 +22,13 @@ if vim.env.USING_PASS then
 	vim.keymap.set("n", "<CR>", "ZZ", { desc = "Save and exit", buffer = true })
 else
 	safeRequire("config.lazy")
+
+	-- FIX set opt.background manually, since `Neovide` does not set correctly
+	-- https://github.com/neovide/neovide/issues/3066
+	local macOSMode = vim.system({ "defaults", "read", "-g", "AppleInterfaceStyle" }):wait()
+	vim.o.background = (macOSMode.stdout or ""):find("Dark") and "dark" or "light"
+
+	vim.g.setColorscheme()
 end
 
 safeRequire("config.neovide-gui-settings")
@@ -30,4 +37,4 @@ safeRequire("config.keybindings")
 
 safeRequire("personal-plugins.git-conflict")
 safeRequire("config.spellfixes")
-vim.schedule(function() safeRequire("personal-plugins.ui-hack") end) -- wair for loading notification plugin
+vim.schedule(function() safeRequire("personal-plugins.ui-hack") end) -- wait for loading notification plugin

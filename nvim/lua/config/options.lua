@@ -1,20 +1,17 @@
---------------------------------------------------------------------------------
 -- GLOBALS
-
 vim.g.mapleader = ","
 vim.g.maplocalleader = "<Nop>"
 
-vim.g.localRepos = vim.fs.normalize("~/Developer")
-vim.g.icloudSync =
-	vim.fs.normalize("~/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/nvim-data")
+vim.g.localRepos = vim.env.HOME .. "/Developer"
+vim.g.icloudSync = vim.env.HOME
+	.. "/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/nvim-data"
 
 vim.g.use_emmylua = false
 
 --------------------------------------------------------------------------------
-
 -- COLORSCHEMES
--- 1. names need to match files in `lua/colorschemes/{name}.lua`
--- 2. name of the file is used for the `vim.cmd.colorscheme` command
+
+-- need to match `lua/colorschemes/{name}.lua` & name for `vim.cmd.colorscheme()`
 vim.g.lightColor = "dawnfox"
 vim.g.darkColor = "gruvbox-material"
 
@@ -27,22 +24,8 @@ vim.g.setColorscheme = function()
 	vim.cmd.colorscheme(nextTheme)
 end
 
-
--- set colorscheme once lazy.nvim has loaded them
-vim.api.nvim_create_autocmd("User", {
-	pattern = "LazyDone", -- https://lazy.folke.io/usage#-user-events
-	once = true,
-	callback = vim.schedule_wrap(function ()
-		-- needs to be set manually, since `Neovide` does not set correctly
-		-- https://github.com/neovide/neovide/issues/3066
-		local macOSMode = vim.system({ "defaults", "read", "-g", "AppleInterfaceStyle" }):wait()
-		vim.o.background = (macOSMode.stdout or ""):find("Dark") and "dark" or "light"
-		vim.g.setColorscheme()
-	end)
-})
-
 --------------------------------------------------------------------------------
--- GENERAL
+-- GENERAL OPTIONS
 vim.opt.clipboard = "unnamedplus"
 
 vim.opt.ignorecase = true
@@ -74,8 +57,8 @@ vim.opt.jumpoptions:append("stack") -- https://www.reddit.com/r/neovim/comments/
 vim.opt.startofline = true -- motions like "G" also move to the first char
 
 -- Formatting `vim.opt.formatoptions:remove("o")` would not work, since it's
--- overwritten by ftplugins having the `o` option (which many do). Therefore
--- needs to be set via autocommand.
+-- overwritten by ftplugins having the `o` option (which many do). 
+-- Therefore needs to be set via autocommand.
 vim.api.nvim_create_autocmd("FileType", {
 	desc = "User: Remove `o` from `formatoptions`",
 	callback = function(ctx)
@@ -224,3 +207,4 @@ vim.diagnostic.config {
 		end,
 	},
 }
+--------------------------------------------------------------------------------
