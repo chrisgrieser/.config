@@ -5,6 +5,7 @@ ${custom.location_indicator}$directory${custom.folder_number}\
 ${custom.main_branch}$git_branch\
 ${custom.venv_on}${custom.venv_off}\
 ${custom.npm_installed}\
+${custom.untracked_git_files}\
 $git_status$git_metrics$git_commit$git_state\
 $sudo $status\
 ](bg:black)\
@@ -93,9 +94,19 @@ description = 'since "ignore_branches" fully hides git_branch component, still s
 when = "[[ $(git branch --show-current) == 'main' ]]"
 format = " [ ](fg:purple bg:black bold)"
 
+# ──────────────────────────────────────────────────────────────────────────────
+
+# BUG non-existing untracked files being shown https://github.com/starship/starship/issues/6881
+# HACK for the bug: show untracked files in our own module
+[custom.untracked_git_files]
+when = "[[ -n $(git ls-files --others --exclude-standard) ]]"
+command = "git ls-files --others --exclude-standard | wc -l"
+format = "[ ?$output](fg:green bg:black)"
+
 [git_status]  # files
-untracked = "[ X$count](fg:green bg:black)"
-# untracked = "" # BUG non-existing untracked files being shown https://github.com/starship/starship/issues/6881
+# untracked = "[ X$count](fg:green bg:black)"
+untracked = ""
+
 stashed = "[ 󰜦 $count](fg:cyan bg:black)"
 deleted = "[ -$count](fg:red bg:black)"  # `deleted` -> unstaged as well as staged deletion
 modified = "[ ~$count](fg:#fa881e bg:black)"
@@ -107,6 +118,8 @@ ahead = "[ 󰶣$count](fg:cyan bg:black)"
 behind = "[ 󰶡$count](fg:yellow bg:black)"
 style = "bg:black"
 format = "[($ahead_behind$conflicted$stashed$staged$untracked$renamed$modified$deleted )]($style)"
+
+# ──────────────────────────────────────────────────────────────────────────────
 
 [git_state]  # conflicts or rebasing
 style = "fg:yellow bold bg:black"
