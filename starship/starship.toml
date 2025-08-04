@@ -113,9 +113,8 @@ ignore_branches = ["main"]
 
 [git_status]  # files
 stashed = "[ 󰜦 $count](fg:cyan bg:black)"
-untracked = "[ +$count](fg:green bg:black)"
-# `deleted` -> unstaged as well as staged deletion
-deleted = "[ -$count](fg:red bg:black)"
+untracked = "[ ?$count](fg:green bg:black)"
+deleted = "[ -$count](fg:red bg:black)"  # `deleted` -> unstaged as well as staged deletion
 modified = "[ ~$count](fg:#fa881e bg:black)"
 renamed = "[ 󰑕 $count](fg:blue bg:black)"
 staged = "[ 󰐖 $count](fg:green bg:black)"

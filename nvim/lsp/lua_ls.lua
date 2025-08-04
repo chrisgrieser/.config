@@ -18,6 +18,7 @@ return {
 				enable = not vim.g.use_emmylua,
 			},
 			diagnostics = {
+				unusedLocalExclude = { "_*" },
 				disable = {
 					-- formatter already handles that
 					"trailing-space",
