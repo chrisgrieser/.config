@@ -32,7 +32,7 @@
 	defaultBranch = main
 [status]
 	showUntrackedFiles = all
-	short = true
+	short = false
 	showStash = true
 	relativePaths = false ; false = show path relative to git root, not relative to cwd
 [stash]
