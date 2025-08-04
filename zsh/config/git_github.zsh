@@ -199,9 +199,9 @@ function remote_info {
 # Github Url: open & copy url
 function gu {
 	repo=$(git remote --verbose | head -n1 | sed -E 's/.*github.com:([^[:space:]]*).*/\1/')
-	url="https://github.com/$repo"
-	echo "$url" | pbcopy
-	open "$url"
+	api_url="https://github.com/$repo"
+	echo "$api_url" | pbcopy
+	open "$api_url"
 }
 
 function my_commits_today {
