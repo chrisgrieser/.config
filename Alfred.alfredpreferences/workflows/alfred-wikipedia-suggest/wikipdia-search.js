@@ -4,9 +4,34 @@ ObjC.import("stdlib");
 
 /** @param {string} url @return {string} */
 function httpRequest(url) {
-	const queryURL = $.NSURL.URLWithString(url);
-	const data = $.NSData.dataWithContentsOfURL(queryURL);
+	const queryUrl = $.NSURL.URLWithString(url);
+	const data = $.NSData.dataWithContentsOfURL(queryUrl);
 	return $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding).js;
+}
+
+/** @param {string} langCode */
+function langCodeToFlagEmoji(langCode) {
+	// biome-ignore format: too long
+	const /** @type {Record<string, string>} */ langToCountry = {
+		en: "US", fr: "FR", de: "DE", es: "ES", it: "IT", pt: "PT", ru: "RU",
+		ja: "JP", zh: "CN", ko: "KR", nl: "NL", sv: "SE", no: "NO", da: "DK",
+		fi: "FI", pl: "PL", cs: "CZ", ar: "SA", he: "IL", tr: "TR", vi: "VN",
+		th: "TH", uk: "UA", hi: "IN", id: "ID", ro: "RO", hu: "HU", bg: "BG",
+		sr: "RS", hr: "HR", sk: "SK", el: "GR", lt: "LT", lv: "LV", et: "EE",
+		fa: "IR",
+	};
+
+	const countryCode = langToCountry[langCode];
+	if (!countryCode) return "🏳️"; // Unknown / neutral flag
+
+	return (
+		countryCode
+			.toUpperCase()
+			.split("")
+			// biome-ignore lint/nursery/useNumericSeparators: faulty, does not apply to codepoint
+			.map((c) => String.fromCodePoint(0x1f1e6 + c.charCodeAt(0) - 65))
+			.join("")
+	);
 }
 
 //──────────────────────────────────────────────────────────────────────────────
@@ -37,15 +62,15 @@ function run(argv) {
 			const desc = wikiItems[2][i]; // often empty
 			let url = wikiItems[3][i];
 
-			if (useWikiwand) url = url.replace(/.*\/wiki\/(.+)/, `https://www.wikiwand.com/${lang}/$1`);
+			if (useWikiwand)
+				url = url.replace(/.*\/wiki\/(.+)/, `https://www.wikiwand.com/${lang}/$1`);
 
 			// only show languages if actually more than one
-			const langDisplay = desc ? `[${lang}]` : lang;
-			const subtitle = langCodes.length > 1 ? `${langDisplay}  ${desc}` : desc;
+			const langFlag = langCodes.length > 1 ? langCodeToFlagEmoji(lang) : "";
 
 			wikiEntries.push({
 				title: suggestion,
-				subtitle: subtitle,
+				subtitle: langFlag + " " + desc,
 				quicklookurl: url, // used by AlfredExtraPane
 				arg: url,
 			});
