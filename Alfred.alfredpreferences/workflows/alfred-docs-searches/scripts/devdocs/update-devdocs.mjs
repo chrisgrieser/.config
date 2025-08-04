@@ -38,6 +38,9 @@ async function run() {
 	const noneItem = "<array> <string>-----</string> <string></string> </array>";
 	const infoPlistPopup = [noneItem];
 	for (const lang of json) {
+		// using a better man page search of our own
+		if (lang.name === "Linux man pages") continue;
+
 		const id = lang.slug.replace(/~.*/, ""); // remove version suffix
 		const keyword = customAliases[id] || lang.alias || id; // custom -> devdocs -> id
 
