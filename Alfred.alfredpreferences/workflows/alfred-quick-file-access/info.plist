@@ -1175,10 +1175,10 @@ fi</string>
   with the keyword `rec`. ([Searching for recent files was always a weak
   point on
   macOS.](https://new.reddit.com/r/macapps/comments/1eiy0pa/recents_folder_on_mac_is_driving_me_crazy/))
-- Access files in your Downloads-folder via `dl`.
+- Access files in your `Downloads` folder via `dl`.
 - Search for files in the front Finder window via `win`.
-- Access files you have assigned a Finder tag of your choice via `tag`.
 - Look for files in your Trash with `trash`.
+- Access files you have assigned a Finder tag of your choice via `tag`.
 
 For all fives cases, you can change the keyword in the workflow configuration or
 set a [hotkey](https://www.alfredapp.com/help/workflows/triggers/hotkey/).
@@ -1189,7 +1189,11 @@ The following actions are available for all searches:
 - &lt;kbd&gt;⌥&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Reveal the file in Finder.
 - &lt;kbd&gt;⌃&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Copy the file to the clipboard.
 - &lt;kbd&gt;⌘&lt;/kbd&gt;&lt;kbd&gt;Y&lt;/kbd&gt;: Quick Look the file.
-- &lt;kbd&gt;⇧&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: *(only tag search)* Remove the tag from the file.
+
+For the tag search:
+- &lt;kbd&gt;⇧&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Remove the tag from the file.
+- Using the hotkey automatically opens the tagged file or folder, skipping the
+  selection window.
 
 ## Requirements
 
@@ -1695,7 +1699,7 @@ to modify the respective hotkey</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.1.1</string>
+	<string>1.2.0</string>
 	<key>webaddress</key>
 	<string>chris-grieser.de</string>
 </dict>

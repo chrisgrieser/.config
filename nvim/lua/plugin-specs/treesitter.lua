@@ -58,13 +58,10 @@ local ensureInstalled = {
 return {
 	"nvim-treesitter/nvim-treesitter",
 	branch = "main", -- new versions follow `main`
-
 	lazy = false,
 	build = ":TSUpdate",
 
-	opts = {
-		install_dir = vim.fn.stdpath("data") .. "/treesitter",
-	},
+	opts = { install_dir = vim.fn.stdpath("data") .. "/treesitter" },
 	init = function()
 		-- auto-install parsers
 		local parsersToInstall = vim.iter(vim.tbl_values(ensureInstalled)):flatten():totable()
@@ -78,6 +75,7 @@ return {
 			desc = "User: enable treesitter highlighting",
 			callback = function(ctx)
 				-- highlights
+				vim.treesitter.stop() -- https://github.com/MeanderingProgrammer/render-markdown.nvim/issues/488#issuecomment-3154937211
 				local hasStarted = pcall(vim.treesitter.start) -- errors for filetypes with no parser
 
 				-- indent
@@ -90,7 +88,7 @@ return {
 
 		-- COMMENTS parser
 		vim.api.nvim_create_autocmd({ "ColorScheme", "VimEnter" }, {
-			desc = "User: Highlights for the Treesitter `comments` parser",
+			desc = "User: highlights for the Treesitter `comments` parser",
 			callback = function()
 				-- FIX todo-comments in languages where LSP overwrites their highlight
 				-- https://github.com/stsewd/tree-sitter-comment/issues/22
