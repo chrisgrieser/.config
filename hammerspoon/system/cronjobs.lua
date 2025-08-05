@@ -125,7 +125,7 @@ M.timer_uptime = hs.timer
 -- all video apps.
 local config = {
 	checkIntervalMins = 10,
-	idleMins = 40,
+	idleMins = 45,
 	timeToReactSecs = 90,
 }
 

@@ -65,12 +65,12 @@ function run() {
 		if (name.includes(".")) type = name.split(".").pop() || "";
 		else if (name === "Justfile" || name === "Brewfile") type = name;
 		else type = "blank"; // if no extension
+		if (name.endsWith("-bkp")) type = "backup-file"; // backup-files from `Finder Vim Mode`
 
 		/** @type {{type: "" | "fileicon"; path: string}} */
 		const iconObj = { type: "", path: "" };
 		const isImageFile = ["png", "icns", "webp", "tiff", "gif", "jpg", "jpeg"].includes(type);
 		iconObj.path = isImageFile ? absPath : `./custom-filetype-icons/${type}.png`;
-		const filetype = isImageFile ? "binary" : "text";
 
 		/** @type {AlfredItem} */
 		const item = {
@@ -80,7 +80,10 @@ function run() {
 			icon: iconObj,
 			type: "file:skipcheck",
 			arg: absPath,
-			variables: { filetype: filetype },
+			variables: {
+				// for Alfred to open with the correct app
+				filetype: isImageFile ? "binary" : "text",
+			},
 		};
 		return item;
 	});
