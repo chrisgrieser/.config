@@ -14,7 +14,7 @@ on run(argv)
 	tell application "System Events"
 		delay 0.1
 		keystroke "k" using {command down} -- open search
-		delay 0.2
+		delay 0.3
 		keystroke "v" using {command down} -- paste
 	end tell
 end

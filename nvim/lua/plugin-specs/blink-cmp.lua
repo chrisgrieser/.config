@@ -74,10 +74,12 @@ return {
 			["<PageUp>"] = { "scroll_documentation_up", "fallback" },
 			["<D-g>"] = { "hide_signature", "fallback" }, -- fallback shows full signature
 		},
+		-- BUG https://github.com/Saghen/blink.cmp/issues/1670
+		-- signature disabled and using `lsp-signature` in the meantime
 		signature = {
-			enabled = true,
+			enabled = false,
 			trigger = {
-				show_on_insert = true, -- BUG https://github.com/Saghen/blink.cmp/issues/1670
+				show_on_insert = true,
 				show_on_insert_on_trigger_character = true,
 				show_on_accept = true,
 				show_on_accept_on_trigger_character = true,
