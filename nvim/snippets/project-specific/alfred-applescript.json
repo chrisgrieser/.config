@@ -3,15 +3,11 @@
     "body": "set ${1:envvar} to (system attribute \"${1:envvar}\")",
     "prefix": "Get Alfred Env"
   },
-  "argv": {
-    "body": "set input to argv as string",
-    "prefix": "argv"
-  },
   "run (Alfred)": {
     "body": [
       "on run argv",
-      "  set query to item 1 of argv",
-      "",
+      "\tset query to item 1 of argv",
+      "\t$0",
       "end run"
     ],
     "prefix": "run (Alfred)"
