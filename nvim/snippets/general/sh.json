@@ -318,13 +318,17 @@
     "body": "${1:text}=$(echo -n \"$${1:text}\" | sed -e 's/^ *//' -e 's/ *$//')",
     "prefix": "trim whitespace"
   },
+  "url encode (curl)": {
+    "body": "curl --get --url \"${1:api_url}\" --data-urlencode \"q=${2:query}\"",
+    "prefix": "url-encode (curl)"
+  },
   "url-encode": {
     "body": "| jq --raw-input --slurp --null-input --raw-output 'input | @uri'",
-    "prefix": "url-encode"
+    "prefix": "url-encode (jq pipe)"
   },
   "urlEncode": {
     "body": "osascript -l JavaScript -e \"encodeURIComponent('${1:text}')\"",
-    "prefix": "urlEncode"
+    "prefix": "url-encode (osascript)"
   },
   "wait until app running": {
     "body": "while ! pgrep -xq \"${1:app_name}\"; do sleep 0.1; done",
