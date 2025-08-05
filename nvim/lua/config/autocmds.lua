@@ -107,6 +107,7 @@ do
 		-- also trigger on `FocusGained` to account for deletions of file outside nvim
 		desc = "User: Auto-cd to project root",
 		callback = function(ctx)
+			-- GUARD
 			local filename = vim.fs.basename(ctx.file)
 			if filename == "COMMIT_EDITMSG" or filename == "git-rebase-todo" then return end
 
