@@ -22,7 +22,6 @@ local config = {
 	ignore = { -- literal match in whole string
 		oldfiles = {
 			"/COMMIT_EDITMSG",
-			require("plugin-specs.snacks-scratch").opts.scratch.root, ---@diagnostic disable-line: undefined-field
 		},
 		mostChangedFiles = {
 			"/info.plist", -- Alfred
@@ -31,6 +30,8 @@ local config = {
 		},
 	},
 }
+local ok, snacksScratch = pcall(require,"plugin-specs.snacks-scratch")
+if ok then table.insert(config.ignore.oldfiles, snacksScratch.opts.scratch.root) end
 
 --------------------------------------------------------------------------------
 local M = {}

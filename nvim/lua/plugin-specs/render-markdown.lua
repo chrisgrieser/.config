@@ -1,7 +1,7 @@
 -- PENDING https://github.com/MeanderingProgrammer/render-markdown.nvim/issues/488
-local query = vim.treesitter.query.get('markdown', 'highlights').query
-query:disable_pattern(17)
-query:disable_pattern(18)
+-- local query = vim.treesitter.query.get('markdown', 'highlights').query
+-- query:disable_pattern(17)
+-- query:disable_pattern(18)
 
 --------------------------------------------------------------------------------
 
