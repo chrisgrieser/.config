@@ -241,15 +241,17 @@ function run() {
 			.filter((event) => new Date(event.endTime).getTime() > Date.now()) // exclude past events
 			.map((event) => {
 				// time
+				const endOfToday = new Date().setHours(23, 59, 59);
+				const endTime = new Date(event.endTime);
+				const endsAfterToday = endTime.getTime() > endOfToday;
 				let timeDisplay = "";
 				if (!event.isAllDay) {
-					const start = event.startTime
-						? new Date(event.startTime).toLocaleTimeString([], timeFmt)
-						: "";
-					const end = event.endTime
-						? new Date(event.endTime).toLocaleTimeString([], timeFmt)
-						: "";
+					const start = new Date(event.startTime).toLocaleTimeString([], timeFmt);
+					const end = endTime.toLocaleTimeString([], timeFmt);
 					timeDisplay = start + " – " + end;
+				} else if (event.isAllDay && endsAfterToday) {
+					const daysUntilEnd = Math.ceil((endTime.getTime() - endOfToday) / 86_400_000);
+					timeDisplay = daysUntilEnd === 1 ? "ends tomorrow" : `ends in ${daysUntilEnd} days`;
 				}
 
 				// location
@@ -260,9 +262,10 @@ function run() {
 				if (locationDisplay.length > maxLen)
 					locationDisplay = locationDisplay.slice(0, maxLen) + "…";
 				locationDisplay = event.location ? `${icon} ${locationDisplay}` : "";
-				let openUrl = url;
+				let openUrl = url || "";
 				if (!url && event.location) openUrl = mapProvider + encodeURIComponent(event.location);
 
+				// subtitle
 				const subtitle = [
 					event.hasRecurrenceRules ? "🔁" : "",
 					timeDisplay,
@@ -273,8 +276,7 @@ function run() {
 					.join("    ");
 
 				const invalid = { valid: false, subtitle: "⛔ Not available for events." };
-				/** @type {AlfredItem} */
-				const item = {
+				return {
 					title: event.title,
 					subtitle: subtitle,
 					icon: { path: "./calendar.png" },
@@ -284,7 +286,6 @@ function run() {
 					arg: openUrl,
 					variables: { mode: "open-event" },
 				};
-				return item;
 			});
 	}
 	console.log("Events:", showEvents ? events.length : "not shown");

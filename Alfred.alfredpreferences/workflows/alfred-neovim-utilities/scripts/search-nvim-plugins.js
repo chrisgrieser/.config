@@ -75,7 +75,6 @@ const storeNvimList =
  * @property {string} pretty_pushed_at humean readable date
  * @property {string} pretty_stargazers_count
  * @property {string[]} tags
- * @property {string[]} topics
  * @property {{initial: string, lazyConfig: string}} install
  */
 
@@ -142,7 +141,7 @@ function run() {
 		.sort((a, b) => new Date(b.pushed_at).getTime() - new Date(a.pushed_at).getTime())
 		.map((repo) => {
 			// biome-ignore format: does not need to be read so often
-			const { full_name, description, html_url, pretty_stargazers_count, pretty_pushed_at, install } = repo;
+			const { full_name, description, html_url, pretty_stargazers_count, pretty_pushed_at, install, tags } = repo;
 			const [author, name] = full_name.split("/");
 
 			const subtitle = [
@@ -153,10 +152,11 @@ function run() {
 			].join("  ·  ");
 			const lazyNvimInstall = install?.lazyConfig;
 
-			const /** @type {(AlfredItem & {fullRepo: string})} */ item = {
+			/** @type {(AlfredItem & {fullRepo: string})} */
+			const item = {
 				title: name,
 				fullRepo: full_name, // just for adding of the install icon adding
-				match: alfredMatcher(full_name),
+				match: alfredMatcher([name, author, ...tags].join(" ")),
 				subtitle: subtitle,
 				arg: html_url,
 				mods: {
