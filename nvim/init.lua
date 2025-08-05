@@ -12,7 +12,7 @@ end
 --------------------------------------------------------------------------------
 
 safeRequire("config.reopen-last-file")
-safeRequire("config.options") -- before plugins, so options are available for plugins configs
+safeRequire("config.options") -- before plugins, so they are available for them
 
 -- For extra security, do not load plugins when using `pass`.
 --(requires starting it via `env="USING_PASS=true" pass`)
@@ -21,14 +21,8 @@ if vim.env.USING_PASS then
 	vim.keymap.set("n", "S", "v$P", { desc = "Substitute to EoL", buffer = true })
 	vim.keymap.set("n", "<CR>", "ZZ", { desc = "Save and exit", buffer = true })
 else
-	safeRequire("config.lazy")
-
-	-- FIX set opt.background manually, since `Neovide` does not set correctly
-	-- https://github.com/neovide/neovide/issues/3066
-	local macOSMode = vim.system({ "defaults", "read", "-g", "AppleInterfaceStyle" }):wait()
-	vim.o.background = (macOSMode.stdout or ""):find("Dark") and "dark" or "light"
-
-	vim.g.setColorscheme()
+	safeRequire("config.lazy") -- loads plugins
+	vim.cmd.colorscheme(vim.o.background == "light" and vim.g.lightColor or vim.g.darkColor)
 end
 
 safeRequire("config.neovide-gui-settings")

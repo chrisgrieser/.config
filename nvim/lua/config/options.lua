@@ -3,10 +3,10 @@ vim.g.mapleader = ","
 vim.g.maplocalleader = "<Nop>"
 
 vim.g.localRepos = vim.env.HOME .. "/Developer"
-vim.g.icloudSync = vim.env.HOME
+vim.g.iCloudSync = vim.env.HOME
 	.. "/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/nvim-data"
 
-vim.g.use_emmylua = false
+vim.g.useEmmylua = false
 
 --------------------------------------------------------------------------------
 -- COLORSCHEMES
@@ -15,13 +15,29 @@ vim.g.use_emmylua = false
 vim.g.lightColor = "dawnfox"
 vim.g.darkColor = "gruvbox-material"
 
--- Toggle light/dark colorscheme
--- 1. Triggered on startup in `init.lua`
--- 2. and via Hammerspoon on manual mode change (`OptionSet` autocmd doesn't work reliably)
+-- set manually, since terminal and nvim-GUI both set it too late/slow
+local macOSMode = vim.system({ "defaults", "read", "-g", "AppleInterfaceStyle" }):wait()
+vim.o.background = (macOSMode.stdout or ""):find("Dark") and "dark" or "light"
+
+-- Called by via Hammerspoon on mode change when `/tmp/nvim_server.pipe` is open
+-- (`OptionSet` autocmd doesn't work reliably)
 vim.g.setColorscheme = function()
 	vim.cmd.highlight("clear") -- reset so next theme isn't affected by previous one
-	local nextTheme = (vim.o.background == "light" and vim.g.lightColor or vim.g.darkColor)
-	vim.cmd.colorscheme(nextTheme)
+	vim.cmd.colorscheme(vim.o.background == "light" and vim.g.lightColor or vim.g.darkColor)
+end
+
+--------------------------------------------------------------------------------
+-- AUTOMATION
+
+if vim.g.neovide then
+	-- read: access cwd via window title
+	vim.opt.title = true
+	vim.opt.titlelen = 0 -- 0 = do not shorten title
+	vim.opt.titlestring = "%{getcwd()}"
+
+	-- write: issue commands via nvim server
+	pcall(os.remove, "/tmp/nvim_server.pipe") -- after a crash, server is still there and needs to be removed
+	vim.fn.serverstart("/tmp/nvim_server.pipe")
 end
 
 --------------------------------------------------------------------------------
@@ -32,9 +48,9 @@ vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
 vim.opt.undofile = true -- enables session-persistent undo history
-vim.opt.undodir = vim.g.icloudSync .. "/undo"
+vim.opt.undodir = vim.g.iCloudSync .. "/undo"
 
-vim.opt.shadafile = vim.g.icloudSync .. "/main.shada"
+vim.opt.shadafile = vim.g.iCloudSync .. "/main.shada"
 vim.opt.swapfile = false -- doesn't help and only creates useless files and notifications
 
 vim.opt.spell = false
@@ -113,20 +129,6 @@ vim.opt.tabstop = 3
 vim.opt.shiftwidth = 3
 vim.opt.shiftround = true
 vim.opt.smartindent = true
-
---------------------------------------------------------------------------------
--- AUTOMATION
-
-if vim.g.neovide then
-	-- read: access cwd via window title
-	vim.opt.title = true
-	vim.opt.titlelen = 0 -- 0 = do not shorten title
-	vim.opt.titlestring = "%{getcwd()}"
-
-	-- write: issue commands via nvim server
-	pcall(os.remove, "/tmp/nvim_server.pipe") -- after a crash, server is still there and needs to be removed
-	vim.fn.serverstart("/tmp/nvim_server.pipe")
-end
 
 --------------------------------------------------------------------------------
 -- MESSAGES & CMDLINE
