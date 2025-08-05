@@ -229,37 +229,6 @@ end, { desc = " Paste", expr = true })
 
 keymap("n", "<D-v>", "p", { desc = " Paste" }) -- compatibility w/ macOS clipboard managers
 
--- CYCLING PASTE
-do
-	-- same as regular `p`, but when undoing the paste and then using `.`, will
-	-- paste `""2p`, so `p......` pasts all recent deletions and `pu.u.u.u.`
-	-- cycles through the them
-	keymap("n", "p", '"1p', { desc = " Cyclic paste" })
-
-	vim.api.nvim_create_autocmd("TextYankPost", {
-		desc = "User: Make cyclic paste compatible with yanking",
-		callback = function()
-			-- store yanks in register 1, since by default it's stored in 0
-			if vim.v.event.operator == "y" and vim.v.event.regname == "" then
-				vim.fn.setreg("1", vim.fn.getreg("0"))
-			end
-		end,
-	})
-
-	if vim.o.clipboard == "unnamedplus" then
-		vim.api.nvim_create_autocmd("FocusGained", {
-			desc = "User: Make cyclic paste compatible with unnamedplus clipboard",
-			callback = function()
-				vim.defer_fn(function()
-					local plusReg = vim.fn.getreg("+")
-					if plusReg ~= "" then vim.fn.setreg("1", plusReg) end
-				end, 1)
-			end,
-		})
-	end
-end
-
-
 --------------------------------------------------------------------------------
 -- SURROUND
 
