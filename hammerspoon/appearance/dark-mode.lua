@@ -80,6 +80,8 @@ function M.autoSwitch()
 	elseif targetMode == "dark" and not (u.isDarkMode()) then
 		logBrightness("Auto-switch to dark mode.", lightThreshold)
 		M.setDarkMode("dark")
+	else
+		logBrightness("Auto-switch skipped.", lightThreshold)
 	end
 end
 
