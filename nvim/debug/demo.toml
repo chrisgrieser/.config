@@ -2,8 +2,8 @@
 [foo.bar]
 one = 1
 
-[foo.baz]
+[hello]
 two = 2
 
-[hello]
+[foo.baz]
 two = 2
