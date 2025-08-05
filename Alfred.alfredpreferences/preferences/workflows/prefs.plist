@@ -9,13 +9,18 @@
 		<string>⬇️</string>
 	</array>
 	<key>defaultBundleId</key>
-	<string>de.chris-grieser.</string>
+	<string>de.chris-grieser.PLACEHOLDER</string>
 	<key>defaultCreatedBy</key>
 	<string>Chris Grieser</string>
 	<key>defaultReadme</key>
-	<string>---
+	<string>## Usage
+Get PLACEHOLDER the `KEYWORD` keyword.
+- &lt;kbd&gt;⏎&lt;/kbd&gt; open the page in the browser.
+- &lt;kbd&gt;⌥⏎&lt;/kbd&gt; copy the page URL.
 
-#### Created by [Chris Grieser](https://chris-grieser.de/)</string>
+---
+
+#### Workflow created by [Chris Grieser](https://chris-grieser.de/)</string>
 	<key>defaultWebsite</key>
 	<string>https://chris-grieser.de/</string>
 	<key>rememberSelectedCategory</key>

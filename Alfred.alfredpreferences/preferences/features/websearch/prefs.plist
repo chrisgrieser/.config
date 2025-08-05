@@ -103,17 +103,6 @@
 			<key>url</key>
 			<string>https://www.linguee.com/english-german/search?query={query}</string>
 		</dict>
-		<key>88FC8EE1-E308-4566-97C8-C9C5C325CC3E</key>
-		<dict>
-			<key>enabled</key>
-			<true/>
-			<key>keyword</key>
-			<string>map</string>
-			<key>text</key>
-			<string>Apple Maps: "{query}"</string>
-			<key>url</key>
-			<string>https://maps.apple.com/place?q={query}</string>
-		</dict>
 		<key>8EE37181-DD3F-4F34-A086-859FED6FB0C0</key>
 		<dict>
 			<key>enabled</key>
@@ -124,17 +113,6 @@
 			<string>tvtime: '{query}'</string>
 			<key>url</key>
 			<string>https://www.tvtime.com/discover/search?q={query}</string>
-		</dict>
-		<key>944FA28F-5A69-48C9-BEF5-B330995B60EF</key>
-		<dict>
-			<key>enabled</key>
-			<true/>
-			<key>keyword</key>
-			<string>map</string>
-			<key>text</key>
-			<string>Google Maps: "{query}"</string>
-			<key>url</key>
-			<string>https://www.google.com/maps?q={query}</string>
 		</dict>
 		<key>97974E2F-27A2-48E4-88F3-339C26BEDA6B</key>
 		<dict>

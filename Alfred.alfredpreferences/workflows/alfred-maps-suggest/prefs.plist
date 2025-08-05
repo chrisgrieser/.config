@@ -3,6 +3,8 @@
 <plist version="1.0">
 <dict>
 	<key>keyword</key>
-	<string>mm</string>
+	<string>map</string>
+	<key>open_map_at</key>
+	<string>apple_maps</string>
 </dict>
 </plist>

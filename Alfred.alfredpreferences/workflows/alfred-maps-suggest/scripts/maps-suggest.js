@@ -21,9 +21,11 @@ app.includeStandardAdditions = true;
  * @property {string} name - Name of the feature.
  * @property {string} country - Country name.
  * @property {string} city - City name.
+ * @property {string} state
  * @property {string} district - District name.
  * @property {string} locality - Local area.
  * @property {string} street - Street name.
+ * @property {string} housenumber
  * @property {number[]} extent - Bounding box as [minLon, maxLat, maxLon, minLat].
  */
 
@@ -42,7 +44,7 @@ function httpRequest(url) {
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run(argv) {
 	const query = (argv[0] || "").trim();
-	const openAtUrl = $.getenv("open_map_at");
+	const openAt = $.getenv("open_map_at");
 	if (!query) return JSON.stringify({ items: [{ title: "Waiting for query…", valid: false }] });
 
 	// DOCS
@@ -57,13 +59,36 @@ function run(argv) {
 	const items = locations.map((loc) => {
 		// SIC osm coordinates are long/lat, thus need to be reversed
 		const coordinates = loc.geometry.coordinates.reverse().join(",");
-		const icon = loc.properties.type === "house" ? "📍" : "🛣️";
-		const subtitle = [coordinates].join("");
+
+		const { name, country, state, city, district, locality, postcode, street, housenumber } =
+			loc.properties;
+		const title = name || street + " " + housenumber;
+		const address = [
+			name,
+			country,
+			state,
+			city,
+			district,
+			locality,
+			postcode,
+			((street || "") + " " + (housenumber || "")).trim(),
+		]
+			.filter(Boolean)
+			.join(", ");
+
+		const openUrl =
+			openAt === "google_maps"
+				? "http://google.com/maps?q=" + encodeURIComponent(address)
+				: "maps://maps.apple.com?q=" + encodeURIComponent(address);
 
 		return {
-			title: icon + " " + loc.properties.name,
-			subtitle: subtitle,
-			arg: openAtUrl + coordinates,
+			title: title,
+			subtitle: address,
+			mods: {
+				ctrl: { arg: coordinates }, // copy
+				cmd: { arg: address }, // copy
+			},
+			arg: openUrl + encodeURIComponent(address),
 		};
 	});
 
