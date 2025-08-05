@@ -18,6 +18,7 @@ www.linguee.com##.l_deepl_ad_container
 ! development
 stackoverflow.com###announcement-banner
 chatgpt.com###thread-bottom-container > div:last-child
+chatgpt.com###page-header > div:first-child > button
 help.obsidian.md##.site-body-left-column
 
 ! search
