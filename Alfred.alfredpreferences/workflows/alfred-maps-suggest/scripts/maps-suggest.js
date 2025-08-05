@@ -76,7 +76,8 @@ function run(argv) {
 		const addressDisplay = address.slice(1).join(", "); // skip name from display
 		const url = openAtUrl + encodeURIComponent(addressStr);
 
-		// SIC osm coordinates are long/lat, thus need to be reversed
+		// SIC osm coordinates are long/lat, even though mapping apps expect
+		// lat/long, thus needs to be reversed
 		const coordinates = loc.geometry.coordinates.reverse().join(",");
 
 		return {
