@@ -1,3 +1,13 @@
+-- PENDING https://github.com/MeanderingProgrammer/render-markdown.nvim/issues/488
+vim.api.nvim_create_autocmd("FileType", {
+	desc = "User: FIX for render-markdown bug",
+	pattern = "markdown",
+	once = true,
+	callback = vim.schedule_wrap(function() vim.cmd.edit() end),
+})
+
+--------------------------------------------------------------------------------
+
 return {
 	"MeanderingProgrammer/render-markdown.nvim",
 	dependencies = "echasnovski/mini.icons",

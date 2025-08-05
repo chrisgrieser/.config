@@ -147,7 +147,7 @@ function run() {
 			const subtitle = [
 				"⭐ " + pretty_stargazers_count,
 				author,
-				pretty_pushed_at,
+				pretty_pushed_at, // PENDING https://github.com/alex-popov-tech/store.nvim.crawler/issues/3
 				description,
 			].join("  ·  ");
 			const lazyNvimInstall = install?.lazyConfig;
