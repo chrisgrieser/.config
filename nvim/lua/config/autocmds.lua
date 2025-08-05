@@ -371,7 +371,7 @@ end
 vim.api.nvim_create_autocmd({ "FocusGained", "BufReadPost", "TextChanged", "InsertLeave" }, {
 	desc = "User: Add favicons to URLs",
 	callback = function(ctx)
-		local delay = ctx.event == "BufReadPost" and 200 or 0 -- wait for treesitter
+		local delay = ctx.event == "BufReadPost" and 300 or 0 -- wait for treesitter, for some reason
 		vim.defer_fn(function() addFavicons(ctx.buf) end, delay)
 	end,
 })
