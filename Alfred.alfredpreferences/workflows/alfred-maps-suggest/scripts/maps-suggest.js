@@ -26,6 +26,7 @@ app.includeStandardAdditions = true;
  * @property {string} street - Street name.
  * @property {number[]} extent - Bounding box as [minLon, maxLat, maxLon, minLat].
  */
+
 //───────────────────────────────────────────────────────────────────────────
 
 /** @param {string} url @return {string} */
@@ -40,10 +41,12 @@ function httpRequest(url) {
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run(argv) {
-	const query = argv[0];
+	const query = (argv[0] || "").trim();
+	const openAtUrl = $.getenv("open_map_at");
+	if (!query) return JSON.stringify({ items: [{ title: "Waiting for query…", valid: false }] });
 
 	// DOCS
-	const apiUrl = "url…" + encodeURIComponent(query);
+	const apiUrl = "https://photon.komoot.io/api?q=" + encodeURIComponent(query);
 	const response = httpRequest(apiUrl);
 	if (!response) return JSON.stringify({ items: [{ title: "Error: No results", valid: false }] });
 
@@ -52,13 +55,15 @@ function run(argv) {
 
 	/** @type {AlfredItem[]} */
 	const items = locations.map((loc) => {
-		const coordinates = loc.geometry.coordinates.join(",");
-		const subtitle = coordinates;
+		// SIC osm coordinates are long/lat, thus need to be reversed
+		const coordinates = loc.geometry.coordinates.reverse().join(",");
+		const icon = loc.properties.type === "house" ? "📍" : "🛣️";
+		const subtitle = [coordinates].join("");
 
 		return {
-			title: loc.properties.name,
+			title: icon + " " + loc.properties.name,
 			subtitle: subtitle,
-			arg: coordinates
+			arg: openAtUrl + coordinates,
 		};
 	});
 
