@@ -17,9 +17,9 @@ www.linguee.com##.l_deepl_ad_container
 
 ! development
 stackoverflow.com###announcement-banner
+help.obsidian.md##.site-body-left-column
 chatgpt.com###thread-bottom-container > div:last-child
 chatgpt.com###page-header > .absolute
-help.obsidian.md##.site-body-left-column
 
 ! search
 duckduckgo.com##[data-testid="feedback-prompt"]
