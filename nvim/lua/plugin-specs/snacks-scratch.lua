@@ -60,7 +60,7 @@ return {
 				if vim.bo.buftype ~= "" or vim.bo.ft == "" then return "markdown" end
 				return vim.bo.ft
 			end,
-			root = vim.g.icloudSync .. "/snacks_scratch",
+			root = vim.g.iCloudSync .. "/snacks_scratch",
 			filekey = { count = false, cwd = false, branch = false }, -- just use one scratch
 			win = {
 				relative = "editor",

@@ -219,7 +219,9 @@ function M.formatWithFallback()
 		-- FIX some LSPs trigger folding after formatting?
 		vim.schedule(function() vim.cmd.normal { "zv", bang = true } end)
 	elseif #formattingLsps > 1 then
-		local clients = vim.iter(formattingLsps):map(function(client) return client.name end):join(", ")
+		local clients = vim.iter(formattingLsps)
+			:map(function(client) return client.name end)
+			:join(", ")
 		vim.notify("Multiple formatting LSPs found:\n " .. clients, vim.log.levels.WARN, notifyOpts)
 	elseif #formattingLsps == 0 then
 		vim.cmd([[% substitute_\s\+$__e]]) -- remove trailing spaces

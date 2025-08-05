@@ -346,7 +346,7 @@ return {
 					layout = "small_no_preview",
 					---@type snacks.picker.filter.Config
 					filter = {
-						paths = { [vim.g.icloudSync] = false }, -- e.g., scratch buffers
+						paths = { [vim.g.iCloudSync] = false }, -- e.g., scratch buffers
 						filter = function(item) return vim.fs.basename(item.file) ~= "COMMIT_EDITMSG" end,
 					},
 				},

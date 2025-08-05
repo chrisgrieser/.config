@@ -30,9 +30,9 @@ end, { desc = "󰌌 Edit keybindings" })
 keymap("n", "<D-q>", "ZZ", { desc = " Save & quit", unique = false })
 
 -- stylua: ignore
-keymap("n", "<leader>pd", function() vim.ui.open(vim.fn.stdpath("data") --[[@as string]]) end, { desc = "󰝰 Data dir (local)" })
+keymap("n", "<leader>pd", function() vim.ui.open(vim.fn.stdpath("data") --[[@as string]]) end, { desc = "󰝰 Local data dir" })
 -- stylua: ignore
-keymap("n", "<leader>pD", function() vim.ui.open(vim.g.icloudSync) end, { desc = "󰝰 Data dir (cloud)" })
+keymap("n", "<leader>pD", function() vim.ui.open(vim.g.iCloudSync) end, { desc = " Cloud data dir" })
 
 --------------------------------------------------------------------------------
 -- NAVIGATION
@@ -370,6 +370,8 @@ end, { desc = "󰋽 Next diagnostic" })
 
 -- stylua: ignore
 keymap("n", "<leader>il", function() require("personal-plugins.misc").lspCapabilities() end, { desc = "󱈄 LSP capabilities" })
+vim.lsp.log_levels
+keymap("n", "<leader>iL", function() vim.cmd.edit(vim.lsp.get_log_path()) end, { desc = "󱂅 LSP log" })
 -- stylua: ignore
 keymap("n", "<leader>ib", function() require("personal-plugins.misc").bufferInspect() end, { desc = "󰽙 Buffer info" })
 
