@@ -27,6 +27,11 @@ vim.g.setColorscheme = function()
 end
 
 --------------------------------------------------------------------------------
+-- LSP
+vim.env.NO_COLOR = 1 -- disable colors for the logging of some LSPs
+vim.lsp.set_log_level("WARN")
+
+--------------------------------------------------------------------------------
 -- AUTOMATION
 
 if vim.g.neovide then
