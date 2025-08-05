@@ -2,39 +2,40 @@
 #───────────────────────────────────────────────────────────────────────────────
 matches:
   - { regex: "\\Bsich ", replace: "isch " }
-  - { trigger: Cafe, replace: Café, propagate_case: true }
-  - { trigger: Diesntag, replace: Dienstag, propagate_case: true, word: true }
-  - { trigger: Leibe, replace: Liebe, propagate_case: true, word: true }
-  - { trigger: ahbe, replace: habe, propagate_case: true, word: true }
-  - { trigger: ahst, replace: hast, propagate_case: true, word: true }
-  - { trigger: aj, replace: ja, word: true, propagate_case: true }
-  - { trigger: amchen, replace: machen, propagate_case: true, word: true }
-  - { trigger: auhc, replace: auch, propagate_case: true, word: true }
-  - { trigger: cih, replace: ich, word: true, propagate_case: true }
-  - { trigger: dei, replace: die, word: true, propagate_case: true }
-  - { trigger: doer, replace: oder, propagate_case: true, word: true }
-  - { trigger: eien, replace: eine, word: true, propagate_case: true }
-  - { trigger: einfahc, replace: einfach, propagate_case: true, word: true }
-  - { trigger: ejtzt, replace: jetzt, propagate_case: true, word: true }
-  - { trigger: forshcung, replace: forschung, propagate_case: true }
-  - { trigger: gnaz, replace: ganz }
-  - { trigger: iwr, replace: wir, propagate_case: true, word: true }
-  - { trigger: lcih, replace: lich }
-  - { trigger: leiber, replace: lieber, propagate_case: true, word: true }
-  - { trigger: mcih, replace: mich }
-  - { trigger: mri, replace: mir, word: true }
-  - { trigger: mrogen, replace: morgen, propagate_case: true }
-  - { trigger: mti, replace: mit, word: true }
-  - { trigger: nciht, replace: nicht }
-  - { trigger: ncoh, replace: noch }
-  - { trigger: nru, replace: nur, word: true, propagate_case: true }
-  - { trigger: serh, replace: sehr, word: true, propagate_case: true }
-  - { trigger: shcon, replace: schon }
-  - { trigger: sidn, replace: sind, propagate_case: true, word: true }
-  - { trigger: sosnt, replace: sonst, propagate_case: true }
-  - { trigger: sowei, replace: sowie, propagate_case: true, word: true }
-  - { trigger: technsich, replace: technisch, propagate_case: true }
-  - { trigger: theorei, replace: theorie, propagate_case: true }
-  - { trigger: udn, replace: und, word: true }
-  - { trigger: weider, replace: wieder }
-  - { triggers: [aht, hta], replace: hat, propagate_case: true, word: true }
+
+  - { replace: Café, trigger: Cafe, propagate_case: true }
+  - { replace: Dienstag, trigger: Diesntag, propagate_case: true, word: true }
+  - { replace: Liebe, trigger: Leibe, propagate_case: true, word: true }
+  - { replace: auch, trigger: auhc, propagate_case: true, word: true }
+  - { replace: die, trigger: dei, word: true, propagate_case: true }
+  - { replace: eine, trigger: eien, word: true, propagate_case: true }
+  - { replace: einfach, trigger: einfahc, propagate_case: true, word: true }
+  - { replace: forschung, trigger: forshcung, propagate_case: true }
+  - { replace: ganz, trigger: gnaz }
+  - { replace: habe, trigger: ahbe, propagate_case: true, word: true }
+  - { replace: hast, trigger: ahst, propagate_case: true, word: true }
+  - { replace: hat, triggers: [aht, hta], propagate_case: true, word: true }
+  - { replace: ich, trigger: cih, word: true, propagate_case: true }
+  - { replace: ja, trigger: aj, word: true, propagate_case: true }
+  - { replace: jetzt, trigger: ejtzt, propagate_case: true, word: true }
+  - { replace: lich, trigger: lcih }
+  - { replace: lieber, trigger: leiber, propagate_case: true, word: true }
+  - { replace: machen, trigger: amchen, propagate_case: true, word: true }
+  - { replace: mich, trigger: mcih }
+  - { replace: mir, trigger: mri, word: true }
+  - { replace: mit, trigger: mti, word: true }
+  - { replace: morgen, trigger: mrogen, propagate_case: true }
+  - { replace: nicht, trigger: nciht }
+  - { replace: noch, trigger: ncoh }
+  - { replace: nur, trigger: nru, word: true, propagate_case: true }
+  - { replace: oder, trigger: doer, propagate_case: true, word: true }
+  - { replace: schon, trigger: shcon }
+  - { replace: sehr, trigger: serh, word: true, propagate_case: true }
+  - { replace: sind, trigger: sidn, propagate_case: true, word: true }
+  - { replace: sonst, trigger: sosnt, propagate_case: true }
+  - { replace: sowie, trigger: sowei, propagate_case: true, word: true }
+  - { replace: technisch, trigger: technsich, propagate_case: true }
+  - { replace: theorie, trigger: theorei, propagate_case: true }
+  - { replace: und, trigger: udn, word: true }
+  - { replace: wieder, trigger: weider }
+  - { replace: wir, trigger: iwr, propagate_case: true, word: true }

@@ -159,7 +159,7 @@ end
 
 --------------------------------------------------------------------------------
 
-function M.bufferInfo()
+function M.bufferInspect()
 	local pseudoTilde = "∼" -- HACK `U+223C` instead of real `~` to prevent markdown-strikethrough
 
 	local clients = vim.lsp.get_clients { bufnr = 0 }

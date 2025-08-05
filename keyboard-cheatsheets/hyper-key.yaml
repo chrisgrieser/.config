@@ -1,0 +1,41 @@
+top_row: 
+  q: Search in Alfred
+  w: WIP tagged files
+  e: 
+  r: Restart front app
+  t: Terminal in current cwd
+  z:
+  u: Start of line
+  i: Previous word
+  o: Next word
+  p: End of line
+  ü:
+  +:
+home_row: 
+  a: Action in Alfred
+  s: Save selection as reminder
+  d:
+  f: Finder (Desktop)
+  g: File selection -> goto Finder window location
+  h: ⬅️
+  j: ⬇️
+  k: ⬆️
+  l: ➡️
+  ö:
+  ä:
+  "#":
+bottom_row: 
+  "y": 
+  x:
+  c: Clone current github directory from current browser tab
+  v: Vertical split (Hammerspoon)
+  b:
+  n:
+  m: Move window to next display
+  ",":
+  ".":
+  "-":
+special:
+  spacebar: delete word under cursor
+  left: resize window to left half
+  right: resize window to right half
