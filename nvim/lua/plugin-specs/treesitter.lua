@@ -75,12 +75,12 @@ return {
 		vim.api.nvim_create_autocmd("FileType", {
 			desc = "User: enable treesitter highlighting",
 			callback = function(ctx)
-				-- ensure idempotency: https://github.com/MeanderingProgrammer/render-markdown.nvim/issues/488#issuecomment-3154937211
-				if vim.b[ctx.buf].treesitter_started then return end
-				vim.b[ctx.buf].treesitter_started = true
+				-- FIX https://github.com/MeanderingProgrammer/render-markdown.nvim/issues/488#issuecomment-3154937211
+				-- (in non-regular buffers, messes with highlighting)
+				if vim.bo[ctx.buf].buftype == "" then vim.treesitter.stop(ctx.buf) end
 
 				-- highlights
-				local hasStarted = pcall(vim.treesitter.start) -- errors for filetypes with no parser
+				local hasStarted = pcall(vim.treesitter.start, ctx.buf) -- errors for filetypes with no parser
 
 				-- indent
 				local dontUseTreesitterIndent = { "bash", "zsh", "markdown" }

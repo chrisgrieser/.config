@@ -256,20 +256,22 @@ function run() {
 
 				// location
 				const maxLen = 40;
-				const url = event.location?.match(urlRegex)?.[0];
-				const icon = url ? "🌐" : "📍";
+				const eventUrl = event.location?.match(urlRegex)?.[0];
+				const icon = eventUrl ? "🌐" : "📍";
 				let locationDisplay = event.location?.replaceAll("\n", " ") || "";
-				if (locationDisplay.length > maxLen)
+				if (locationDisplay.length > maxLen) {
 					locationDisplay = locationDisplay.slice(0, maxLen) + "…";
-				locationDisplay = event.location ? `${icon} ${locationDisplay}` : "";
-				let openUrl = url || "";
-				if (!url && event.location) openUrl = mapProvider + encodeURIComponent(event.location);
+				}
+				let openUrl = eventUrl || "";
+				if (!eventUrl && event.location) {
+					openUrl = mapProvider + encodeURIComponent(event.location);
+				}
 
 				// subtitle
 				const subtitle = [
 					event.hasRecurrenceRules ? "🔁" : "",
 					timeDisplay,
-					locationDisplay,
+					event.location ? `${icon} ${locationDisplay}` : "",
 					event.calendarColor + " " + event.calendar,
 				]
 					.filter(Boolean)
