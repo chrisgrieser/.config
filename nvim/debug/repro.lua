@@ -3,17 +3,32 @@
 --------------------------------------------------------------------------------
 local spec = {
 	{
-		"saghen/blink.cmp",
-		version = "*",
-		dependencies = "Kaiser-Yang/blink-cmp-git",
+		"MeanderingProgrammer/render-markdown.nvim",
+		ft = { "markdown" },
+		lazy = false,
 		opts = {
-			sources = {
-				default = { "lsp", "path", "snippets", "buffer", "git" },
-				providers = {
-					git = { module = "blink-cmp-git", name = "Git" },
-				},
+			file_types = { "markdown" },
+			code = {
+				border = "thick",
+				position = "left",
 			},
 		},
+	},
+	{
+		"nvim-treesitter/nvim-treesitter",
+		branch = "main", -- new versions follow `main`
+		lazy = false,
+		build = ":TSUpdate",
+		init = function()
+			local parsersToInstall = { "markdown", "markdown_inline" }
+			vim.defer_fn(function() require("nvim-treesitter").install(parsersToInstall) end, 1000)
+
+			vim.api.nvim_create_autocmd("FileType", {
+				desc = "User: enable treesitter highlighting",
+				pattern = "markdown",
+				callback = function() vim.treesitter.start() end,
+			})
+		end,
 	},
 }
 

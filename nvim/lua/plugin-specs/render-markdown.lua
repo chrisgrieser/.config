@@ -1,10 +1,7 @@
 -- PENDING https://github.com/MeanderingProgrammer/render-markdown.nvim/issues/488
-vim.api.nvim_create_autocmd("FileType", {
-	desc = "User: FIX for render-markdown bug",
-	pattern = "markdown",
-	once = true,
-	callback = vim.schedule_wrap(function() vim.cmd.edit() end),
-})
+local query = vim.treesitter.query.get('markdown', 'highlights').query
+query:disable_pattern(17)
+query:disable_pattern(18)
 
 --------------------------------------------------------------------------------
 
