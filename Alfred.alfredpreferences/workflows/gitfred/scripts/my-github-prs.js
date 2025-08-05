@@ -28,7 +28,7 @@ function httpRequestWithHeaders(url, header) {
 
 /** @param {string} isoDateStr */
 function humanRelativeDate(isoDateStr) {
-	const deltaMins = (Date.now() - +new Date(isoDateStr)) / 1000 / 60;
+	const deltaMins = (Date.now() - new Date(isoDateStr).getTime()) / 1000 / 60;
 	/** @type {"year"|"month"|"week"|"day"|"hour"|"minute"} */
 	let unit;
 	let delta;
