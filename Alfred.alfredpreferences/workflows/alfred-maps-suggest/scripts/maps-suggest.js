@@ -33,9 +33,11 @@ app.includeStandardAdditions = true;
 
 /** @param {string} url @return {string} */
 function httpRequest(url) {
-	const queryUrl = $.NSURL.URLWithString(url);
-	const data = $.NSData.dataWithContentsOfURL(queryUrl);
-	return $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding).js;
+	// unique user-agent to make blocking less likely
+	const workflowName = $.getenv("alfred_workflow_name");
+	const version = $.getenv("alfred_workflow_version");
+	const userAgent = `Alfred ${workflowName}/${version}`;
+	return app.doShellScript(`curl --silent --user-agent "${userAgent}" "${url}"`);
 }
 
 //──────────────────────────────────────────────────────────────────────────────
@@ -44,22 +46,18 @@ function httpRequest(url) {
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run(argv) {
 	const query = (argv[0] || "").trim();
-	const openAt = $.getenv("open_map_at");
+	const openAtUrl = $.getenv("open_map_at");
 	if (!query) return JSON.stringify({ items: [{ title: "Waiting for query…", valid: false }] });
 
-	// DOCS
+	// DOCS https://photon.komoot.io/
 	const apiUrl = "https://photon.komoot.io/api?q=" + encodeURIComponent(query);
+	console.log("api url:", apiUrl);
 	const response = httpRequest(apiUrl);
 	if (!response) return JSON.stringify({ items: [{ title: "Error: No results", valid: false }] });
-
-	/** @type {GeoLocation[]} */
-	const locations = JSON.parse(response).features;
+	const /** @type {GeoLocation[]} */ locations = JSON.parse(response).features;
 
 	/** @type {AlfredItem[]} */
 	const items = locations.map((loc) => {
-		// SIC osm coordinates are long/lat, thus need to be reversed
-		const coordinates = loc.geometry.coordinates.reverse().join(",");
-
 		const { name, country, state, city, district, locality, postcode, street, housenumber } =
 			loc.properties;
 		const title = name || street + " " + housenumber;
@@ -72,23 +70,24 @@ function run(argv) {
 			locality,
 			postcode,
 			((street || "") + " " + (housenumber || "")).trim(),
-		]
-			.filter(Boolean)
-			.join(", ");
+		].filter(Boolean);
 
-		const openUrl =
-			openAt === "google_maps"
-				? "http://google.com/maps?q=" + encodeURIComponent(address)
-				: "maps://maps.apple.com?q=" + encodeURIComponent(address);
+		const addressStr = address.join(", ");
+		const addressDisplay = address.slice(1).join(", "); // skip name from display
+		const url = openAtUrl + encodeURIComponent(addressStr);
+
+		// SIC osm coordinates are long/lat, thus need to be reversed
+		const coordinates = loc.geometry.coordinates.reverse().join(",");
 
 		return {
 			title: title,
-			subtitle: address,
+			subtitle: addressDisplay,
 			mods: {
+				cmd: { arg: addressStr }, // copy
 				ctrl: { arg: coordinates }, // copy
-				cmd: { arg: address }, // copy
 			},
-			arg: openUrl + encodeURIComponent(address),
+			arg: url,
+			variables: { address: addressStr, url: url, coordinates: coordinates }, // for debugging
 		};
 	});
 

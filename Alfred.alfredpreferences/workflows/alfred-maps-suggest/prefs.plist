@@ -3,8 +3,8 @@
 <plist version="1.0">
 <dict>
 	<key>keyword</key>
-	<string>map</string>
+	<string>map||maps</string>
 	<key>open_map_at</key>
-	<string>apple_maps</string>
+	<string>maps://maps.apple.com?q=</string>
 </dict>
 </plist>
