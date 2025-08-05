@@ -1,6 +1,6 @@
-set quiet
+set quiet := true
 
-debugFile := "./debug/test.lua"
+debugFile := "./debug/test.md"
 debugConfig := "./debug/repro.lua"
 
 #───────────────────────────────────────────────────────────────────────────────
@@ -24,6 +24,12 @@ count-lines:
         cut -c5- |
         sed 's|\./||'
 
+# runs minimal config with neovide
+debug-instance:
+    neovide --no-tabs {{ debugFile }} -- -u {{ debugConfig }} &>/dev/null
+
+#───────────────────────────────────────────────────────────────────────────────
+
 # for neovide, needs to add `$HOME/.local/neovim-downgrade` to `PATH` in `.zprofile`
 downgrade-nvim target_version:
     #!/usr/bin/env zsh
@@ -37,7 +43,3 @@ downgrade-nvim target_version:
     rm "neovim-downgrade.tar.gz"
     mv "nvim-macos-arm64" "neovim-downgrade"
     echo "Done downgrading to $target_version"
-
-# runs minimal config with neovide
-debug-instance:
-    neovide --no-tabs {{ debugFile }} -- -u {{ debugConfig }} &>/dev/null
