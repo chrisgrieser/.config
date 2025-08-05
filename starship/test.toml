@@ -1,0 +1,9 @@
+# demo.toml
+[foo.bar]
+one = 1
+
+[foo.baz]
+two = 2
+
+[hello]
+two = 2
