@@ -12,6 +12,10 @@
     "description": "continues applescript on the next line",
     "prefix": "contituation"
   },
+  "copy to clipboard": {
+    "body": "set the clipboard to input",
+    "prefix": "copy to clipboard"
+  },
   "function": {
     "body": [
       "on ${1:func} (${2:argv})",
@@ -82,6 +86,10 @@
       "notify",
       "notification"
     ]
+  },
+  "open url": {
+    "body": "open location \"${1:url}\"",
+    "prefix": "open url"
   },
   "pwd": {
     "body": "set pwd to POSIX path of ((path to me as text) & \"::\")",

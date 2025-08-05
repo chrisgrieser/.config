@@ -101,6 +101,7 @@ function run() {
 		$.NSProcessInfo.processInfo.environment.objectForKey("showCompleted").js === "true";
 	const includeAllLists = $.getenv("include_all_lists") === "1";
 	const showEvents = $.getenv("show_events") === "1";
+	const mapProvider = $.getenv("map_provider");
 	const hour12 = $.getenv("hour_12_format") === "1";
 	/** @type {Intl.DateTimeFormatOptions} */
 	const timeFmt = { hour: "numeric", minute: "numeric", hour12: hour12 };
@@ -253,13 +254,14 @@ function run() {
 
 				// location
 				const maxLen = 40;
-				const url = event.location?.match(urlRegex);
+				const url = event.location?.match(urlRegex)?.[0];
 				const icon = url ? "🌐" : "📍";
 				let locationDisplay = event.location?.replaceAll("\n", " ") || "";
 				if (locationDisplay.length > maxLen)
 					locationDisplay = locationDisplay.slice(0, maxLen) + "…";
 				locationDisplay = event.location ? `${icon} ${locationDisplay}` : "";
-				const openUrl = url || "https://www.google.com/maps/search/" + event.location;
+				let openUrl = url;
+				if (!url && event.location) openUrl = mapProvider + encodeURIComponent(event.location);
 
 				const subtitle = [
 					event.hasRecurrenceRules ? "🔁" : "",
@@ -277,7 +279,7 @@ function run() {
 					icon: { path: "./calendar.png" },
 					mods: { cmd: invalid, shift: invalid, alt: invalid, fn: invalid, ctrl: invalid },
 
-					valid: Boolean(event.location), // only actionable if there is a location
+					valid: Boolean(openUrl), // only actionable if there is a location
 					arg: openUrl,
 					variables: { mode: "open-event" },
 				};
