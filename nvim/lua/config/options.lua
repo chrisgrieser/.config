@@ -57,7 +57,7 @@ vim.opt.jumpoptions:append("stack") -- https://www.reddit.com/r/neovim/comments/
 vim.opt.startofline = true -- motions like "G" also move to the first char
 
 -- Formatting `vim.opt.formatoptions:remove("o")` would not work, since it's
--- overwritten by ftplugins having the `o` option (which many do). 
+-- overwritten by ftplugins having the `o` option (which many do).
 -- Therefore needs to be set via autocommand.
 vim.api.nvim_create_autocmd("FileType", {
 	desc = "User: Remove `o` from `formatoptions`",
@@ -154,7 +154,6 @@ vim.opt.fillchars:append {
 	eob = " ",
 	msgsep = "═",
 	lastline = "↓",
-
 	-- thick window separators
 	horiz = "▄",
 	vert = "█",

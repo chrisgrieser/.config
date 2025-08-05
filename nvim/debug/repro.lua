@@ -4,8 +4,8 @@
 local spec = {
 	{
 		"MeanderingProgrammer/render-markdown.nvim",
+		dependencies = { "echasnovski/mini.icons", opts = {} },
 		ft = { "markdown" },
-		lazy = false,
 		opts = {
 			file_types = { "markdown" },
 			code = {
@@ -31,6 +31,10 @@ local spec = {
 		end,
 	},
 }
+
+--------------------------------------------------------------------------------
+-- this causes the issue
+vim.opt.conceallevel = 2
 
 --------------------------------------------------------------------------------
 vim.env.LAZY_STDPATH = "/tmp/nvim-repro"
