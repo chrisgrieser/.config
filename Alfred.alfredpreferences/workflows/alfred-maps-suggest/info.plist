@@ -8,6 +8,32 @@
 	<string>⭐️</string>
 	<key>connections</key>
 	<dict>
+		<key>246AE6D9-BC40-4334-925D-91CDEB7F3B65</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>89E63483-8332-4632-9EBE-836D86AEEAF4</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>3F4115AE-E3F9-4A7E-9E33-02EC623325CE</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>89E63483-8332-4632-9EBE-836D86AEEAF4</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>89E63483-8332-4632-9EBE-836D86AEEAF4</key>
 		<array>
 			<dict>
@@ -40,6 +66,26 @@
 				<integer>524288</integer>
 				<key>modifiersubtext</key>
 				<string>⌥: Copy URL</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>3F4115AE-E3F9-4A7E-9E33-02EC623325CE</string>
+				<key>modifiers</key>
+				<integer>262144</integer>
+				<key>modifiersubtext</key>
+				<string>⌃: Copy coordinates</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>246AE6D9-BC40-4334-925D-91CDEB7F3B65</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>⌘: Copy address</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -165,30 +211,71 @@
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
+		<dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.junction</string>
+			<key>uid</key>
+			<string>3F4115AE-E3F9-4A7E-9E33-02EC623325CE</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.junction</string>
+			<key>uid</key>
+			<string>246AE6D9-BC40-4334-925D-91CDEB7F3B65</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
-	<string>---
+	<string>## Usage
+Show locations with the `map` keyword.
+- &lt;kbd&gt;⏎&lt;/kbd&gt; open the location at the map provider.
+- &lt;kbd&gt;⌘⏎&lt;/kbd&gt; copy the address.
+- &lt;kbd&gt;⌥⏎&lt;/kbd&gt; copy the URL.
+- &lt;kbd&gt;⌃⏎&lt;/kbd&gt; copy the coordinates.
+
+---
 
 #### Created by [Chris Grieser](https://chris-grieser.de/)</string>
 	<key>uidata</key>
 	<dict>
+		<key>246AE6D9-BC40-4334-925D-91CDEB7F3B65</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>xpos</key>
+			<real>275</real>
+			<key>ypos</key>
+			<real>385</real>
+		</dict>
 		<key>2C357E73-8FA7-47FB-8A71-A149EAA38DBA</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>310</real>
+			<real>370</real>
 			<key>ypos</key>
 			<real>130</real>
+		</dict>
+		<key>3F4115AE-E3F9-4A7E-9E33-02EC623325CE</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>xpos</key>
+			<real>280</real>
+			<key>ypos</key>
+			<real>315</real>
 		</dict>
 		<key>89E63483-8332-4632-9EBE-836D86AEEAF4</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>310</real>
+			<real>375</real>
 			<key>ypos</key>
-			<real>245</real>
+			<real>285</real>
 		</dict>
 		<key>B633ADB9-73C2-4236-AB4E-55042EE486D0</key>
 		<dict>
@@ -197,16 +284,16 @@
 			<key>xpos</key>
 			<real>75</real>
 			<key>ypos</key>
-			<real>190</real>
+			<real>130</real>
 		</dict>
 		<key>E4CEBC18-69B5-4955-8AE2-D4FC12D7537D</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>460</real>
+			<real>520</real>
 			<key>ypos</key>
-			<real>245</real>
+			<real>285</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
@@ -236,16 +323,16 @@
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<string>https://www.google.com/maps?q=</string>
+				<string>google_maps</string>
 				<key>pairs</key>
 				<array>
 					<array>
 						<string>Google Maps</string>
-						<string>https://www.google.com/maps?q=</string>
+						<string>google_maps</string>
 					</array>
 					<array>
 						<string>Apple Maps</string>
-						<string>maps://maps.apple.com/?ll=</string>
+						<string>apple_maps</string>
 					</array>
 				</array>
 			</dict>
