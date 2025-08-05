@@ -150,6 +150,21 @@
 				<false/>
 			</dict>
 		</array>
+		<key>2A0B9061-4A83-40FF-85E6-B39231AAAE4D</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>444EBB59-C177-4CC5-9A5C-232A6D9F7A9E</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>005D1120-AB6D-4B43-8160-32948A570F30</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>2F78B362-3AF3-4AD0-BEBF-22FECBEEBB77</key>
 		<array>
 			<dict>
@@ -193,7 +208,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>444EBB59-C177-4CC5-9A5C-232A6D9F7A9E</string>
+				<string>B7BA0E1D-701C-4AE0-BD87-8B1AD5CC18C5</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -309,6 +324,19 @@
 				<integer>262144</integer>
 				<key>modifiersubtext</key>
 				<string>⌃: Copy to Clipboard</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>B7BA0E1D-701C-4AE0-BD87-8B1AD5CC18C5</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>2A0B9061-4A83-40FF-85E6-B39231AAAE4D</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -802,6 +830,129 @@
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>keyword</key>
+				<string>{var:trash_keyword}</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>loading…</string>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/file-finder.js</string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>Files in Trash…</string>
+				<key>type</key>
+				<integer>8</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>F51A014F-1ABC-49D4-ADA8-0B83A691533F</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/copy-file.js</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>89AAC152-1A79-4CBF-9BDD-DBBAF712F72C</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>0</integer>
+				<key>hotmod</key>
+				<integer>0</integer>
+				<key>hotstring</key>
+				<string></string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>D158A013-04D6-4B89-BAAC-9144298030DB</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string>{query}</string>
+				<key>passthroughargument</key>
+				<true/>
+				<key>variables</key>
+				<dict>
+					<key>keyword_from_hotkey</key>
+					<string>{var:trash_keyword}</string>
+				</dict>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>7B044726-677B-4792-A3E3-29ACE7900F6F</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>2</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>keyword</key>
 				<string>{var:tag_keyword}</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
@@ -883,85 +1034,16 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>./scripts/copy-file.js</string>
+				<string>./scripts/open-if-one-tagged-file.sh</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>89AAC152-1A79-4CBF-9BDD-DBBAF712F72C</string>
+			<string>B7BA0E1D-701C-4AE0-BD87-8B1AD5CC18C5</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argument</key>
-				<string>{query}</string>
-				<key>passthroughargument</key>
-				<true/>
-				<key>variables</key>
-				<dict>
-					<key>keyword_from_hotkey</key>
-					<string>{var:tag_keyword}</string>
-				</dict>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>444EBB59-C177-4CC5-9A5C-232A6D9F7A9E</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alfredfiltersresults</key>
-				<true/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>2</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<true/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>{var:trash_keyword}</string>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<true/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>1</integer>
-				<key>runningsubtext</key>
-				<string>loading…</string>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/file-finder.js</string>
-				<key>subtext</key>
-				<string></string>
-				<key>title</key>
-				<string>Files in Trash…</string>
-				<key>type</key>
-				<integer>8</integer>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>F51A014F-1ABC-49D4-ADA8-0B83A691533F</string>
-			<key>version</key>
-			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -996,51 +1078,52 @@ fi</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>0</integer>
-				<key>focusedappvariable</key>
-				<false/>
-				<key>focusedappvariablename</key>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string></string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>2</integer>
+						<key>matchstring</key>
+						<string>1</string>
+						<key>outputlabel</key>
+						<string>&gt; 1 file</string>
+						<key>uid</key>
+						<string>005D1120-AB6D-4B43-8160-32948A570F30</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
 				<string></string>
-				<key>hotkey</key>
-				<integer>0</integer>
-				<key>hotmod</key>
-				<integer>0</integer>
-				<key>hotstring</key>
-				<string></string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>0</integer>
-				<key>relatedAppsMode</key>
-				<integer>0</integer>
+				<key>hideelse</key>
+				<true/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
+			<string>alfred.workflow.utility.conditional</string>
 			<key>uid</key>
-			<string>D158A013-04D6-4B89-BAAC-9144298030DB</string>
+			<string>2A0B9061-4A83-40FF-85E6-B39231AAAE4D</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
 				<key>argument</key>
-				<string>{query}</string>
+				<string></string>
 				<key>passthroughargument</key>
-				<true/>
+				<false/>
 				<key>variables</key>
 				<dict>
 					<key>keyword_from_hotkey</key>
-					<string>{var:trash_keyword}</string>
+					<string>{var:tag_keyword}</string>
 				</dict>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.argument</string>
 			<key>uid</key>
-			<string>7B044726-677B-4792-A3E3-29ACE7900F6F</string>
+			<string>444EBB59-C177-4CC5-9A5C-232A6D9F7A9E</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1135,9 +1218,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>tagged</string>
 			<key>xpos</key>
-			<real>265</real>
+			<real>470</real>
 			<key>ypos</key>
-			<real>460</real>
+			<real>560</real>
 		</dict>
 		<key>046A7EDC-4CFB-42C9-B7FD-7ECB4FD32442</key>
 		<dict>
@@ -1155,9 +1238,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>9</integer>
 			<key>xpos</key>
-			<real>890</real>
+			<real>955</real>
 			<key>ypos</key>
-			<real>760</real>
+			<real>715</real>
 		</dict>
 		<key>0AF282F1-E1F5-47C6-B70B-F25E00EA5015</key>
 		<dict>
@@ -1168,16 +1251,16 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>265</real>
 			<key>ypos</key>
-			<real>315</real>
+			<real>300</real>
 		</dict>
 		<key>0C3BFAB7-ABFF-4D30-91C6-47855B12F496</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>12</integer>
 			<key>xpos</key>
-			<real>735</real>
+			<real>800</real>
 			<key>ypos</key>
-			<real>175</real>
+			<real>170</real>
 		</dict>
 		<key>22597717-6399-48C7-8B78-551AAD86DC01</key>
 		<dict>
@@ -1188,6 +1271,17 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>45</real>
 		</dict>
+		<key>2A0B9061-4A83-40FF-85E6-B39231AAAE4D</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>note</key>
+			<string>&gt; 1 file</string>
+			<key>xpos</key>
+			<real>335</real>
+			<key>ypos</key>
+			<real>590</real>
+		</dict>
 		<key>2F78B362-3AF3-4AD0-BEBF-22FECBEEBB77</key>
 		<dict>
 			<key>colorindex</key>
@@ -1195,16 +1289,16 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>185</real>
 			<key>ypos</key>
-			<real>345</real>
+			<real>330</real>
 		</dict>
 		<key>444EBB59-C177-4CC5-9A5C-232A6D9F7A9E</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>185</real>
+			<real>410</real>
 			<key>ypos</key>
-			<real>490</real>
+			<real>590</real>
 		</dict>
 		<key>510F2976-FA05-4025-B2F1-BE4C2CA9783C</key>
 		<dict>
@@ -1213,7 +1307,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>175</real>
+			<real>170</real>
 		</dict>
 		<key>682E57FD-7381-4EB8-AB57-3FF7DFD1773F</key>
 		<dict>
@@ -1222,7 +1316,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>460</real>
+			<real>560</real>
 		</dict>
 		<key>6DCEA464-F1BD-49D5-9251-E455ADD73073</key>
 		<dict>
@@ -1231,7 +1325,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>185</real>
 			<key>ypos</key>
-			<real>205</real>
+			<real>200</real>
 		</dict>
 		<key>72F3D736-ED6D-455D-9192-18799BE0E0E9</key>
 		<dict>
@@ -1240,7 +1334,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>315</real>
+			<real>300</real>
 		</dict>
 		<key>7B044726-677B-4792-A3E3-29ACE7900F6F</key>
 		<dict>
@@ -1249,16 +1343,16 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>185</real>
 			<key>ypos</key>
-			<real>630</real>
+			<real>460</real>
 		</dict>
 		<key>85BA17FF-F81C-4558-A3DD-A06ED76BB023</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>9</integer>
 			<key>xpos</key>
-			<real>735</real>
+			<real>800</real>
 			<key>ypos</key>
-			<real>760</real>
+			<real>715</real>
 		</dict>
 		<key>89AAC152-1A79-4CBF-9BDD-DBBAF712F72C</key>
 		<dict>
@@ -1267,9 +1361,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>copy file to clipboard</string>
 			<key>xpos</key>
-			<real>735</real>
+			<real>800</real>
 			<key>ypos</key>
-			<real>460</real>
+			<real>430</real>
 		</dict>
 		<key>9E6F8450-F918-43B2-B94C-531BB5805A92</key>
 		<dict>
@@ -1292,16 +1386,27 @@ to modify the respective hotkey</string>
 			<key>xpos</key>
 			<real>265</real>
 			<key>ypos</key>
+			<real>170</real>
+		</dict>
+		<key>B7BA0E1D-701C-4AE0-BD87-8B1AD5CC18C5</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>note</key>
+			<string>open if just one file</string>
+			<key>xpos</key>
 			<real>175</real>
+			<key>ypos</key>
+			<real>560</real>
 		</dict>
 		<key>BAE121DB-A4DB-45C3-9C13-DBB7886D8933</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>12</integer>
 			<key>xpos</key>
-			<real>890</real>
+			<real>955</real>
 			<key>ypos</key>
-			<real>315</real>
+			<real>300</real>
 		</dict>
 		<key>C141CBD8-4088-42FD-9ED0-F388C8B8A0A7</key>
 		<dict>
@@ -1310,9 +1415,9 @@ to modify the respective hotkey</string>
 			<key>note</key>
 			<string>move to front window</string>
 			<key>xpos</key>
-			<real>735</real>
+			<real>800</real>
 			<key>ypos</key>
-			<real>315</real>
+			<real>300</real>
 		</dict>
 		<key>D158A013-04D6-4B89-BAAC-9144298030DB</key>
 		<dict>
@@ -1321,7 +1426,7 @@ to modify the respective hotkey</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>600</real>
+			<real>430</real>
 		</dict>
 		<key>D2B2FCCA-99A2-437E-94C0-AA67800FAAE0</key>
 		<dict>
@@ -1330,16 +1435,16 @@ to modify the respective hotkey</string>
 			<key>note</key>
 			<string>open if folder, reveal if file</string>
 			<key>xpos</key>
-			<real>735</real>
+			<real>800</real>
 			<key>ypos</key>
-			<real>600</real>
+			<real>565</real>
 		</dict>
 		<key>DC23B294-25E4-4CEA-841A-71546D15BD89</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>12</integer>
 			<key>xpos</key>
-			<real>735</real>
+			<real>800</real>
 			<key>ypos</key>
 			<real>15</real>
 		</dict>
@@ -1352,16 +1457,16 @@ to modify the respective hotkey</string>
 			<key>xpos</key>
 			<real>265</real>
 			<key>ypos</key>
-			<real>600</real>
+			<real>430</real>
 		</dict>
 		<key>FBA872DF-C511-43B9-8018-C366115A078C</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>12</integer>
 			<key>xpos</key>
-			<real>890</real>
+			<real>955</real>
 			<key>ypos</key>
-			<real>460</real>
+			<real>430</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
