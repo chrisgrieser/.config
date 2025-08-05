@@ -16,7 +16,7 @@ return {
 	opts = {
 		sign = { enabled = false },
 		latex = { enabled = false },
-		file_types = { "markdown" },
+		file_types = { "markdown", "codecompanion" },
 		render_modes = { "n", "c", "i", "v", "V" },
 		html = {
 			comment = { text = "󰆈" },
