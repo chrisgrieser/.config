@@ -232,6 +232,32 @@
 			<key>variable</key>
 			<string>keyword</string>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>https://www.google.com/maps?q=</string>
+				<key>pairs</key>
+				<array>
+					<array>
+						<string>Google Maps</string>
+						<string>https://www.google.com/maps?q=</string>
+					</array>
+					<array>
+						<string>Apple Maps</string>
+						<string>maps://maps.apple.com/?ll=</string>
+					</array>
+				</array>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>open at</string>
+			<key>type</key>
+			<string>popupbutton</string>
+			<key>variable</key>
+			<string>open_map_at</string>
+		</dict>
 	</array>
 	<key>version</key>
 	<string></string>

@@ -49,7 +49,7 @@
       "\tconst query = argv[0];",
       "",
       "\t// DOCS ",
-      "\tconst apiUrl = \"url…\" + encodeURIComponent(query);",
+      "\tconst apiUrl = \"THE_URL\" + encodeURIComponent(query);",
       "\tconst response = httpRequest(apiUrl);",
       "\tif (!response) return JSON.stringify({ items: [{ title: \"Error: No results\", valid: false }] });",
       "",

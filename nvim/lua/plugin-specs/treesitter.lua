@@ -75,10 +75,6 @@ return {
 		vim.api.nvim_create_autocmd("FileType", {
 			desc = "User: enable treesitter highlighting",
 			callback = function(ctx)
-				-- FIX https://github.com/MeanderingProgrammer/render-markdown.nvim/issues/488#issuecomment-3154937211
-				-- (in non-regular buffers, messes with highlighting)
-				if vim.bo[ctx.buf].buftype == "" then vim.treesitter.stop(ctx.buf) end
-
 				-- highlights
 				local hasStarted = pcall(vim.treesitter.start, ctx.buf) -- errors for filetypes with no parser
 

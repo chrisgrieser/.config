@@ -1,7 +1,14 @@
--- PENDING https://github.com/MeanderingProgrammer/render-markdown.nvim/issues/488
--- local query = vim.treesitter.query.get('markdown', 'highlights').query
--- query:disable_pattern(17)
--- query:disable_pattern(18)
+-- FIX https://github.com/MeanderingProgrammer/render-markdown.nvim/issues/488#issuecomment-3154937211
+vim.api.nvim_create_autocmd("User", {
+	pattern = "LazyLoad",
+	group = vim.api.nvim_create_augroup("render-markdown", { clear = true }),
+	callback = function(ctx)
+		if ctx.data ~= "render-markdown" then return end
+		vim.treesitter.stop()
+		pcall(vim.treesitter.start)
+		return true -- delete this autocmd
+	end,
+})
 
 --------------------------------------------------------------------------------
 
