@@ -1,0 +1,43 @@
+top_row:
+  q: Script Editor
+  w: Whatsapp
+  e: M[e]ssenger
+  r: Reddit (Alfred)
+  t: Signal
+  z: Zoom
+  u: Obsidian (writing vault)
+  i: Rem[i]nder
+  o: Obsidian (main vault)
+  p: PDF Reader (Highlights)
+  ü:
+  +:
+home_row:
+  a: Alfred Preferences
+  s: Slack
+  d: Discord (Website)
+  f: Finder
+  g: GitHub notifications (Alfred)
+  h: Hammerspoon Console
+  j: Obsidian (phd-data vault)
+  k: "Karabiner Event Viewer"
+  l: Termina[l]
+  ö: "Ivory (shift: Mastodon Website)"
+  ä:
+  "#":
+bottom_row:
+  "y": YouTube
+  x:
+  c: Calendar
+  v:
+  b: "Browser (shift: re-open last tab)"
+  n: Neovide
+  m: Mimestream
+  ",": System Preferences
+  ".":
+  "-":
+special:
+  spacebar: ChatGPT
+  left:
+  right:
+  backspace: Trash
+  escape: Activity Monitor

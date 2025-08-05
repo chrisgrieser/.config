@@ -371,7 +371,7 @@ end, { desc = "󰋽 Next diagnostic" })
 -- stylua: ignore
 keymap("n", "<leader>il", function() require("personal-plugins.misc").lspCapabilities() end, { desc = "󱈄 LSP capabilities" })
 -- stylua: ignore
-keymap("n", "<leader>ib", function() require("personal-plugins.misc").bufferInfo() end, { desc = "󰽙 Buffer info" })
+keymap("n", "<leader>ib", function() require("personal-plugins.misc").bufferInspect() end, { desc = "󰽙 Buffer info" })
 
 --------------------------------------------------------------------------------
 -- WINDOWS & SPLITS

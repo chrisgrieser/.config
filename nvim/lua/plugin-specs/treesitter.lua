@@ -75,8 +75,11 @@ return {
 		vim.api.nvim_create_autocmd("FileType", {
 			desc = "User: enable treesitter highlighting",
 			callback = function(ctx)
+				-- ensure idempotency: https://github.com/MeanderingProgrammer/render-markdown.nvim/issues/488#issuecomment-3154937211
+				if vim.b[ctx.buf].treesitter_started then return end
+				vim.b[ctx.buf].treesitter_started = true
+
 				-- highlights
-				vim.treesitter.stop() -- https://github.com/MeanderingProgrammer/render-markdown.nvim/issues/488#issuecomment-3154937211
 				local hasStarted = pcall(vim.treesitter.start) -- errors for filetypes with no parser
 
 				-- indent
