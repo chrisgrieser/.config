@@ -17,7 +17,6 @@ www.linguee.com##.l_deepl_ad_container
 
 ! development
 stackoverflow.com###announcement-banner
-chatgpt.com##nav[aria-label="Chat history"] > div:last-child
 chatgpt.com###thread-bottom-container > div:last-child
 help.obsidian.md##.site-body-left-column
 
