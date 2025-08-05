@@ -21,6 +21,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>2C357E73-8FA7-47FB-8A71-A149EAA38DBA</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>90C7EBAC-FC6C-4C5C-B654-DCC61050BA6D</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>3F4115AE-E3F9-4A7E-9E33-02EC623325CE</key>
 		<array>
 			<dict>
@@ -90,38 +103,30 @@
 				<false/>
 			</dict>
 		</array>
+		<key>E4CEBC18-69B5-4955-8AE2-D4FC12D7537D</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>90C7EBAC-FC6C-4C5C-B654-DCC61050BA6D</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 	</dict>
 	<key>createdby</key>
 	<string>Chris Grieser</string>
 	<key>description</key>
-	<string></string>
+	<string>Suggest locations to open at Google Maps or Apple Maps</string>
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
 	<string>Maps Suggest</string>
 	<key>objects</key>
 	<array>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>2C357E73-8FA7-47FB-8A71-A149EAA38DBA</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
@@ -174,21 +179,38 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
 				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
+				<key>skipvarencode</key>
 				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>📋 Copied</string>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string></string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
+			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
-			<string>E4CEBC18-69B5-4955-8AE2-D4FC12D7537D</string>
+			<string>2C357E73-8FA7-47FB-8A71-A149EAA38DBA</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string>{variables}</string>
+				<key>cleardebuggertext</key>
+				<false/>
+				<key>processoutputs</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.debug</string>
+			<key>uid</key>
+			<string>90C7EBAC-FC6C-4C5C-B654-DCC61050BA6D</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -210,6 +232,27 @@
 			<string>89E63483-8332-4632-9EBE-836D86AEEAF4</string>
 			<key>version</key>
 			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>📋 Copied</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>E4CEBC18-69B5-4955-8AE2-D4FC12D7537D</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>type</key>
@@ -238,6 +281,8 @@ Show locations with the `map` keyword.
 
 ---
 
+#### Data by [OpenStreetMap](https://www.openstreetmap.org/) via [photon API](https://photon.komoot.io/)
+
 #### Created by [Chris Grieser](https://chris-grieser.de/)</string>
 	<key>uidata</key>
 	<dict>
@@ -248,7 +293,7 @@ Show locations with the `map` keyword.
 			<key>xpos</key>
 			<real>275</real>
 			<key>ypos</key>
-			<real>385</real>
+			<real>365</real>
 		</dict>
 		<key>2C357E73-8FA7-47FB-8A71-A149EAA38DBA</key>
 		<dict>
@@ -264,7 +309,7 @@ Show locations with the `map` keyword.
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>280</real>
+			<real>275</real>
 			<key>ypos</key>
 			<real>315</real>
 		</dict>
@@ -276,6 +321,15 @@ Show locations with the `map` keyword.
 			<real>375</real>
 			<key>ypos</key>
 			<real>285</real>
+		</dict>
+		<key>90C7EBAC-FC6C-4C5C-B654-DCC61050BA6D</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>xpos</key>
+			<real>715</real>
+			<key>ypos</key>
+			<real>160</real>
 		</dict>
 		<key>B633ADB9-73C2-4236-AB4E-55042EE486D0</key>
 		<dict>
@@ -323,16 +377,16 @@ Show locations with the `map` keyword.
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<string>google_maps</string>
+				<string>http://google.com/maps?q=</string>
 				<key>pairs</key>
 				<array>
 					<array>
 						<string>Google Maps</string>
-						<string>google_maps</string>
+						<string>http://google.com/maps?q=</string>
 					</array>
 					<array>
 						<string>Apple Maps</string>
-						<string>apple_maps</string>
+						<string>maps://maps.apple.com?q=</string>
 					</array>
 				</array>
 			</dict>
@@ -347,7 +401,7 @@ Show locations with the `map` keyword.
 		</dict>
 	</array>
 	<key>version</key>
-	<string></string>
+	<string>0.9</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>

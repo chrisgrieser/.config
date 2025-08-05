@@ -6,8 +6,6 @@
 api_url="https://api.duckduckgo.com?kl=us-en&format=json&no_redirect=1&no_html=1&skip_disambig=1"
 query="$1"
 
-curl --get --url "$api_url" --data-urlencode "q=$query"
-
 first_url=$(curl --get --url "$api_url" --data-urlencode "q=$query" |
 	# INFO `//` is like js' `||`, falling back to the next expression when `null`
 	jq --raw-output ".Results[0].FirstURL // .OfficialWebsite // .AbstractURL")
