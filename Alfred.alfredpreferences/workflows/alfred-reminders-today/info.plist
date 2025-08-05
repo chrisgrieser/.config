@@ -1640,7 +1640,7 @@ to set a hotkey to show reminders due today</string>
 			<key>description</key>
 			<string>If enabled, the main list is only used for adding new reminders.</string>
 			<key>label</key>
-			<string></string>
+			<string>Reminders</string>
 			<key>type</key>
 			<string>checkbox</string>
 			<key>variable</key>
@@ -1673,10 +1673,113 @@ to set a hotkey to show reminders due today</string>
 				<key>required</key>
 				<false/>
 				<key>text</key>
+				<string>use 12 hour time</string>
+			</dict>
+			<key>description</key>
+			<string>displays "8:00 PM" instead of "20:00"</string>
+			<key>label</key>
+			<string></string>
+			<key>type</key>
+			<string>checkbox</string>
+			<key>variable</key>
+			<string>hour_12_format</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>rem</string>
+				<key>placeholder</key>
+				<string>rem</string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>keyword to show reminders due today</string>
+			<key>label</key>
+			<string></string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>select_reminder_keyword</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>qq</string>
+				<key>placeholder</key>
+				<string>qq</string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>keyword to quick-add new reminder due today</string>
+			<key>label</key>
+			<string></string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>quickadd_today_keyword</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>q1</string>
+				<key>placeholder</key>
+				<string>q1</string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>keyword to quick-add: tomorrow</string>
+			<key>label</key>
+			<string></string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>quickadd_tomorrow_keyword</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>q2</string>
+				<key>placeholder</key>
+				<string>q2</string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>keyword to quick-add in 2 days</string>
+			<key>label</key>
+			<string></string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>quickadd_in2days_keyword</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<false/>
+				<key>required</key>
+				<false/>
+				<key>text</key>
 				<string>include calendar events today</string>
 			</dict>
 			<key>description</key>
-			<string>Note that including events will make the `rem` command slightly slower.</string>
+			<string>Including events will make showing reminders today slightly slower.</string>
 			<key>label</key>
 			<string>Events</string>
 			<key>type</key>
@@ -1713,104 +1816,27 @@ to set a hotkey to show reminders due today</string>
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<false/>
-				<key>required</key>
-				<false/>
-				<key>text</key>
-				<string>use 12 hour time</string>
+				<string>https://www.google.com/maps?q=</string>
+				<key>pairs</key>
+				<array>
+					<array>
+						<string>Google Maps</string>
+						<string>https://www.google.com/maps?q=</string>
+					</array>
+					<array>
+						<string>Apple Maps</string>
+						<string>https://maps.apple.com/place?q=</string>
+					</array>
+				</array>
 			</dict>
 			<key>description</key>
-			<string>displays "8:00 PM" instead of "20:00"</string>
-			<key>label</key>
-			<string>Time format</string>
-			<key>type</key>
-			<string>checkbox</string>
-			<key>variable</key>
-			<string>hour_12_format</string>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>default</key>
-				<string>rem</string>
-				<key>placeholder</key>
-				<string>rem</string>
-				<key>required</key>
-				<true/>
-				<key>trim</key>
-				<true/>
-			</dict>
-			<key>description</key>
-			<string>show reminders due today</string>
-			<key>label</key>
-			<string>Keywords</string>
-			<key>type</key>
-			<string>textfield</string>
-			<key>variable</key>
-			<string>select_reminder_keyword</string>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>default</key>
-				<string>qq</string>
-				<key>placeholder</key>
-				<string>qq</string>
-				<key>required</key>
-				<false/>
-				<key>trim</key>
-				<true/>
-			</dict>
-			<key>description</key>
-			<string>quick add new reminder due today</string>
+			<string>Where to open locations</string>
 			<key>label</key>
 			<string></string>
 			<key>type</key>
-			<string>textfield</string>
+			<string>popupbutton</string>
 			<key>variable</key>
-			<string>quickadd_today_keyword</string>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>default</key>
-				<string>q1</string>
-				<key>placeholder</key>
-				<string>q1</string>
-				<key>required</key>
-				<false/>
-				<key>trim</key>
-				<true/>
-			</dict>
-			<key>description</key>
-			<string>quick add: tomorrow</string>
-			<key>label</key>
-			<string></string>
-			<key>type</key>
-			<string>textfield</string>
-			<key>variable</key>
-			<string>quickadd_tomorrow_keyword</string>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>default</key>
-				<string>q2</string>
-				<key>placeholder</key>
-				<string>q2</string>
-				<key>required</key>
-				<false/>
-				<key>trim</key>
-				<true/>
-			</dict>
-			<key>description</key>
-			<string>quick add: in 2 days</string>
-			<key>label</key>
-			<string></string>
-			<key>type</key>
-			<string>textfield</string>
-			<key>variable</key>
-			<string>quickadd_in2days_keyword</string>
+			<string>map_provider</string>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1835,7 +1861,7 @@ to set a hotkey to show reminders due today</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>3.6.0</string>
+	<string>3.6.1</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
