@@ -10,17 +10,18 @@ return {
 
 		vim.api.nvim_create_autocmd("User", {
 			desc = "User: add notifications for codecompanion",
-			pattern = "CodeCompanionRequest*InlineStarted",
-			callback = function(ctx)
-				local type = ctx.match:match("CodeCompanionRequest(%a+)InlineStarted"):lower()
-				vim.notify("Request " .. type .. ".", nil, { title = "CodeCompanion", icon = "" })
+			pattern = "CodeCompanionRequestStarted",
+			callback = function()
+				vim.notify("Request started.", nil, { title = "CodeCompanion", icon = "" })
 			end,
 		})
 	end,
 	keys = {
-		-- `:` so context gets passed via `<>` marks
+		-- `:` for the visual mode commands, so context gets passed via `<>` marks
 		{ "<leader>aa", ":CodeCompanion<CR>", mode = "x", desc = " Inline assistant" },
 		{ "<leader>as", ":CodeCompanion simplify<CR>", mode = "x", desc = " Simplify" },
+		{ "<leader>ae", ":CodeCompanion explain this<CR>", mode = "x", desc = " Explain" },
+		{ "<leader>ac", "<cmd>CodeCompanionChat toggle<CR>", desc = " Simplify" },
 	},
 	opts = {
 		display = {

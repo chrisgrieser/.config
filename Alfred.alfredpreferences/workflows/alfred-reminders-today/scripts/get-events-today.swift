@@ -82,6 +82,7 @@ eventStore.requestFullAccessToEvents { granted, error in
 
 	let formatter = ISO8601DateFormatter()
 
+	// DOCS https://developer.apple.com/documentation/eventkit/ekevent/
 	let outputEvents =
 		eventStore.events(matching: predicate)
 		.filter { $0.endDate >= now }  // only ongoing or future events

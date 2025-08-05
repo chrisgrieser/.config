@@ -273,7 +273,8 @@ function run() {
 					.join("    ");
 
 				const invalid = { valid: false, subtitle: "⛔ Not available for events." };
-				return {
+				/** @type {AlfredItem} */
+				const item = {
 					title: event.title,
 					subtitle: subtitle,
 					icon: { path: "./calendar.png" },
@@ -283,6 +284,7 @@ function run() {
 					arg: openUrl,
 					variables: { mode: "open-event" },
 				};
+				return item;
 			});
 	}
 	console.log("Events:", showEvents ? events.length : "not shown");
