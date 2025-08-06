@@ -1420,6 +1420,27 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>⚠️ URL not found</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>7B955092-9044-4895-864C-3532731DEDBE</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -1439,27 +1460,6 @@
 			<string>153EE0A1-A05A-4F8A-9E43-3F69E5193C75</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>⚠️ URL not found</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>7B955092-9044-4895-864C-3532731DEDBE</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 	</array>
 	<key>readme</key>
@@ -1534,9 +1534,9 @@ fi
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>925</real>
+			<real>860</real>
 			<key>ypos</key>
-			<real>1005</real>
+			<real>1010</real>
 		</dict>
 		<key>08B7842B-16DA-4BFC-8F35-AE680AF1E07B</key>
 		<dict>
@@ -1545,9 +1545,9 @@ fi
 			<key>note</key>
 			<string>notifications left</string>
 			<key>xpos</key>
-			<real>791</real>
+			<real>726</real>
 			<key>ypos</key>
-			<real>885</real>
+			<real>890</real>
 		</dict>
 		<key>0C28AAE6-A080-48A7-A6F0-0BB05070161D</key>
 		<dict>
@@ -1563,7 +1563,7 @@ fi
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>1010</real>
+			<real>940</real>
 			<key>ypos</key>
 			<real>940</real>
 		</dict>
@@ -1583,9 +1583,9 @@ fi
 			<key>note</key>
 			<string>update sketchybar reminders count</string>
 			<key>xpos</key>
-			<real>500</real>
+			<real>495</real>
 			<key>ypos</key>
-			<real>1090</real>
+			<real>1095</real>
 		</dict>
 		<key>1B2789C4-ACE9-46F2-A786-B83B045166B2</key>
 		<dict>
@@ -1712,7 +1712,7 @@ fi
 			<key>colorindex</key>
 			<integer>1</integer>
 			<key>xpos</key>
-			<real>755</real>
+			<real>690</real>
 			<key>ypos</key>
 			<real>1095</real>
 		</dict>
@@ -1730,7 +1730,7 @@ fi
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>1010</real>
+			<real>940</real>
 			<key>ypos</key>
 			<real>820</real>
 		</dict>
@@ -1850,9 +1850,9 @@ to set a hotkey to clone the repo in the frontmost browser tab</string>
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>755</real>
+			<real>690</real>
 			<key>ypos</key>
-			<real>975</real>
+			<real>980</real>
 		</dict>
 		<key>FA2DA973-F996-4FDC-8058-22F7CCAE04A6</key>
 		<dict>
@@ -2131,16 +2131,16 @@ to set a hotkey to clone the repo in the frontmost browser tab</string>
 				<key>default</key>
 				<string></string>
 				<key>placeholder</key>
-				<string></string>
+				<string>update_notification_counter</string>
 				<key>required</key>
 				<false/>
 				<key>trim</key>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>Sketchybar users: Name of the trigger to update a menubar component. Leave empty to disable.</string>
+			<string>Sketchybar users: Trigger to be executed after actioning a notification. Leave empty to disable.</string>
 			<key>label</key>
-			<string>Sketchybar trigger</string>
+			<string>Sketchybar trigger name</string>
 			<key>type</key>
 			<string>textfield</string>
 			<key>variable</key>
@@ -2148,7 +2148,7 @@ to set a hotkey to clone the repo in the frontmost browser tab</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.10.4</string>
+	<string>1.10.5</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
