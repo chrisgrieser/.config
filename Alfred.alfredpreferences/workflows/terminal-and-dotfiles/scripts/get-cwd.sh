@@ -12,8 +12,9 @@ elif [[ "$focusedapp" == "md.obsidian" ]]; then
 	dir_to_open="$vault_location/$vault_name"
 
 elif [[ "$focusedapp" == "com.neovide.neovide" ]]; then
-	# # REQUIRED `vim.opt.titlestring = "%{getcwd()}"` im nvim config
-	dir_to_open=$(osascript -e 'tell application "System Events" to tell process "neovide" to return name of front window')
+	# # REQUIRED `vim.opt.titlestring = "%{expand('%')}"` im nvim config
+	current_file=$(osascript -e 'tell application "System Events" to tell process "neovide" to return name of front window')
+	dir_to_open=$(dirname "$current_file")
 
 fi
 

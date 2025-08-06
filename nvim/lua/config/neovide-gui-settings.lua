@@ -27,7 +27,11 @@ vim.opt.linespace = -2 -- less line height
 
 --------------------------------------------------------------------------------
 
--- cmd+ / cmd- to change zoom
+
+
+--------------------------------------------------------------------------------
+
+-- CHANGE ZOOM via cmd+ / cmd-
 local function changeScaleFactor(delta)
 	vim.g.neovide_scale_factor = vim.g.neovide_scale_factor + delta
 	local icon = delta > 0 and "" or ""
@@ -47,7 +51,6 @@ vim.g.neovide_input_macos_option_key_is_meta = "none" -- disable, so `{@~` etc. 
 
 -- Appearance
 vim.g.neovide_opacity = 1
-vim.g.neovide_theme = "auto" -- needs to be set, as the setting in `config.toml` is ignored
 vim.g.neovide_underline_stroke_scale = 2.5 -- fix underline thickness
 vim.g.neovide_show_border = true
 
