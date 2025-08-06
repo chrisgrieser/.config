@@ -197,7 +197,9 @@ rules:
           - shell_command: |
               open -a "Neovide"
               # slightly fix some issues with AltTab: https://github.com/neovide/neovide/issues/3182
-              sleep 0.5
+              sleep 1
+              open -a "Neovide"
+              sleep 1
               open -a "Neovide"
           - *deactivate-leader
           - *remove-notice

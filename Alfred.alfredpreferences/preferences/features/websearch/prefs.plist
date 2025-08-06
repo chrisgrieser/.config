@@ -158,17 +158,6 @@
 			<key>url</key>
 			<string>https://chatgpt.com/?q={query}</string>
 		</dict>
-		<key>DB17ABEC-DD58-4433-9513-C2D4D6C59B4B</key>
-		<dict>
-			<key>enabled</key>
-			<true/>
-			<key>keyword</key>
-			<string>ai</string>
-			<key>text</key>
-			<string>Perplexity</string>
-			<key>url</key>
-			<string>https://www.perplexity.ai/?q={query}</string>
-		</dict>
 		<key>E190C7B2-5B59-40A7-8B1C-722C7FD239F2</key>
 		<dict>
 			<key>enabled</key>
@@ -234,6 +223,17 @@
 			<string>DuckDuckGo images: "{query}"</string>
 			<key>url</key>
 			<string>https://duckduckgo.com/?q={query}&amp;iar=images</string>
+		</dict>
+		<key>F499DAD7-F576-4F42-85DA-77787B094FBB</key>
+		<dict>
+			<key>enabled</key>
+			<true/>
+			<key>keyword</key>
+			<string>ai</string>
+			<key>text</key>
+			<string>Mistral: "{query}"</string>
+			<key>url</key>
+			<string>https://chat.mistral.ai/chat?q={query}</string>
 		</dict>
 	</dict>
 </dict>
