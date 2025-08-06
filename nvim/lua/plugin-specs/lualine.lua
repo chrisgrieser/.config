@@ -8,7 +8,7 @@
 ---@param whichSection "lualine_a"|"lualine_b"|"lualine_c"|"lualine_x"|"lualine_y"|"lualine_z"
 ---@param component function|table the component forming the lualine
 ---@param where "after"|"before"? defaults to "after"
-vim.g.lualineAdd = function(whichBar, whichSection, component, where)
+vim.g.lualineAdd = function(whichBar, whichSection, component, where) ---@diagnostic disable-line: duplicate-set-field for the empty functions in `lazy.nvim` setup
 	vim.defer_fn(function() -- deferred so other plugins do not load lualine too early
 		local componentObj = type(component) == "table" and component or { component }
 		local sectionConfig = require("lualine").get_config()[whichBar][whichSection] or {}
@@ -58,7 +58,7 @@ end
 
 --------------------------------------------------------------------------------
 
----@module "lazy.core.specs"
+---@module "lazy.types"
 ---@type LazyPluginSpec
 return {
 	"nvim-lualine/lualine.nvim",
@@ -91,6 +91,13 @@ return {
 			lualine_x = {
 				-- HACK dummy, so tabline is never empty (in which case vim adds its ugly tabline)
 				{ function() return " " end },
+			},
+			lualine_z = {
+				{
+					function() return "Recording…" end,
+					icon = "󰃽",
+					cond = function() return vim.fn.reg_recording() ~= "" end,
+				},
 			},
 		},
 		sections = {

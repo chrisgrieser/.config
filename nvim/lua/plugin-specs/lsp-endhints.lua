@@ -1,4 +1,4 @@
----@module "lazy.core.specs"
+---@module "lazy.types"
 ---@type LazyPluginSpec
 return {
 	"chrisgrieser/nvim-lsp-endhints",

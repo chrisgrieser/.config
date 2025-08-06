@@ -1,7 +1,7 @@
 # ignore all Alfred configs except the workflows
 /*
 !/workflows/
-!alfred-workflow-download-count.yaml
+!alfred-gallery-downloads.yaml
 !AlfredExtraPane.json
 
 # images

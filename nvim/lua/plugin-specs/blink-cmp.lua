@@ -2,7 +2,7 @@
 -- DOCS https://cmp.saghen.dev/configuration/reference
 --------------------------------------------------------------------------------
 
----@module "lazy.core.specs"
+---@module "lazy.types"
 ---@type LazyPluginSpec
 return {
 	"saghen/blink.cmp",

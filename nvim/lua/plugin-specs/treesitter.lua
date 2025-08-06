@@ -56,7 +56,7 @@ local ensureInstalled = {
 
 --------------------------------------------------------------------------------
 
----@module "lazy.core.specs"
+---@module "lazy.types"
 ---@type LazyPluginSpec
 return {
 	"nvim-treesitter/nvim-treesitter",

@@ -27,6 +27,16 @@ function M.startOrStopRecording(toggleKey, reg)
 	end
 end
 
+---@param reg string vim register (single letter)
+function M.playRecording(reg)
+	local hasRecording = vim.fn.getreg(reg) ~= ""
+	if hasRecording then
+		vim.cmd.normal { "@" .. reg, bang = true }
+	else
+		vim.notify("Nothing recorded.", vim.log.levels.WARN, { title = "Recording", icon = "󰃾" })
+	end
+end
+
 --------------------------------------------------------------------------------
 
 -- Simplified implementation of `coerce.nvim`
@@ -63,6 +73,10 @@ function M.toggleOrIncrement()
 		["true"] = "false",
 		["light"] = "dark",
 		["right"] = "left",
+		["top"] = "bottom",
+		["enable"] = "disable",
+		["enabled"] = "disabled",
+		["yes"] = "no",
 		["on"] = "off",
 		["and"] = "or",
 		["=="] = "!=",
