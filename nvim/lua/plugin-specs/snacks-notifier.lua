@@ -38,15 +38,6 @@ local function openNotif(idx)
 	local indexStr = ("(%d/%d)"):format(idx, #history)
 	local footer = vim.trim(indexStr .. "   " .. moreLines)
 
-	local levelCapitalized = notif.level:sub(1, 1):upper() .. notif.level:sub(2)
-	local highlights = {
-		"Normal:SnacksNormal",
-		"NormalNC:SnacksNormalNC",
-		"FloatBorder:SnacksNotifierBorder" .. levelCapitalized,
-		"FloatTitle:SnacksNotifierTitle" .. levelCapitalized,
-		"FloatFooter:SnacksNotifierFooter" .. levelCapitalized,
-	}
-
 	-- create win with snacks API
 	Snacks.win {
 		relative = "editor",
@@ -60,7 +51,6 @@ local function openNotif(idx)
 		border = vim.o.winborder --[[@as "rounded"|"single"|"double"]],
 		ft = notif.ft or "markdown", -- needed for treesitter folding to work
 		wo = {
-			winhighlight = table.concat(highlights, ","),
 			wrap = notif.ft ~= "lua",
 			statuscolumn = " ", -- adds padding
 			cursorline = true,
@@ -69,9 +59,7 @@ local function openNotif(idx)
 			foldmethod = "expr", -- enable folding
 			foldexpr = "v:lua.vim.treesitter.foldexpr()",
 		},
-		bo = {
-			modifiable = false,
-		},
+		bo = { modifiable = true },
 		keys = {
 			["<Tab>"] = function()
 				if idx == #history then return end
@@ -125,7 +113,7 @@ return {
 			notification = {
 				border = vim.o.winborder,
 				focusable = false,
-				wo = { winblend = 0, wrap = true },
+				wo = { winblend = 10, wrap = true },
 			},
 		},
 	},

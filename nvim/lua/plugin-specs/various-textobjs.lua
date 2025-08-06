@@ -32,10 +32,12 @@ return {
 		{ "gg", "<cmd>lua require('various-textobjs').entireBuffer()<CR>", mode = {"x","o"}, desc = " entire buffer" },
 
 		{ "n", "<cmd>lua require('various-textobjs').nearEoL()<CR>", mode = "o", desc = "󰑀 near EoL" },
-		{ "m", "<cmd>lua require('various-textobjs').toNextQuotationMark()<CR>", mode = "o", desc = " to next quote" },
-		{ "b", "<cmd>lua require('various-textobjs').toNextClosingBracket()<CR>", mode = "o", desc = "⦈ to closing bracket" },
+		{ "w", "<cmd>lua require('various-textobjs').toNextQuotationMark()<CR>", mode = "o", desc = " to next quote" },
+		{ "m", "<cmd>lua require('various-textobjs').toNextClosingBracket()<CR>", mode = "o", desc = "⦈ to closing bracket" },
 		{ "k", "<cmd>lua require('various-textobjs').anyQuote('inner')<CR>", mode = "o", desc = " inner-quote (any)" },
 		{ "K", "<cmd>lua require('various-textobjs').anyQuote('outer')<CR>", mode = "o", desc = " outer-quote (any)" },
+		{ "b", "<cmd>lua require('various-textobjs').anyBracket('inner')<CR>", mode = "o", desc = "⦈ inner-bracket (any)" },
+		{ "B", "<cmd>lua require('various-textobjs').anyBracket('outer')<CR>", mode = "o", desc = "⦈ outer-bracket (any)" },
 
 		-- not setting these in visual mode, to keep visual block mode replace
 		{ "rp", "<cmd>lua require('various-textobjs').restOfParagraph()<CR>", mode = "o", desc = "¶ rest of paragraph" },
