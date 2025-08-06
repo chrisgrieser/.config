@@ -1,3 +1,5 @@
+---@module "lazy.core.specs"
+---@type LazyPluginSpec
 return {
 	"lewis6991/satellite.nvim",
 	event = "VeryLazy",

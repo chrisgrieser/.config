@@ -1,6 +1,7 @@
 -- DOCS https://docs.astral.sh/ruff/editors/settings/
 --------------------------------------------------------------------------------
 
+---@type vim.lsp.Config
 return {
 	init_options = {
 		settings = {

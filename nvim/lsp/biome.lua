@@ -1,3 +1,4 @@
+---@type vim.lsp.Config
 return {
 	-- FIX `biome` does not attach on the 1st buffer of startup, due to the
 	-- `root_dir` function by nvim-lspconfig using `cwd`, which is running before

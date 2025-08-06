@@ -1,4 +1,5 @@
--- loads highlights either when enabled via `#`, or when `CccPick` is called manually
+---@module "lazy.core.specs"
+---@type LazyPluginSpec
 return {
 	"uga-rosa/ccc.nvim",
 	cmd = { "CccPick", "CccConvert" },
@@ -6,7 +7,7 @@ return {
 	keys = {
 		{
 			"#",
-			function()
+			function() -- loads the plugin
 				vim.cmd.CccHighlighterEnable()
 				vim.notify("Highlights enabled.", nil, { title = "ccc.nvim", icon = "" })
 			end,

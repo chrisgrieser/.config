@@ -1,3 +1,5 @@
+---@module "lazy.core.specs"
+---@type LazyPluginSpec
 return {
 	"kylechui/nvim-surround",
 	keys = {

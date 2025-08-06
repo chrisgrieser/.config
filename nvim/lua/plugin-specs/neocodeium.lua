@@ -1,6 +1,8 @@
 -- lua alternative to the official codeium.vim plugin https://github.com/Exafunction/windsurf.vim
 --------------------------------------------------------------------------------
 
+---@module "lazy.core.specs"
+---@type LazyPluginSpec
 return {
 	"monkoose/neocodeium",
 	event = "InsertEnter",

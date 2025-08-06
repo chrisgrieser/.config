@@ -1,3 +1,5 @@
+---@module "lazy.core.specs"
+---@type LazyPluginSpec
 return {
 	"jinh0/eyeliner.nvim",
 	keys = { "f", "F", "t", "T" },

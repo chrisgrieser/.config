@@ -4,6 +4,7 @@
 -- https://writewithharper.com/docs/rules
 --------------------------------------------------------------------------------
 
+---@type vim.lsp.Config
 return {
 	filetypes = { "markdown" }, -- too many false positives elsewhere
 	settings = {

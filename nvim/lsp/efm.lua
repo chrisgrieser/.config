@@ -1,6 +1,7 @@
 -- DOCS https://github.com/mattn/efm-langserver#configuration-for-neovim-builtin-lsp-with-nvim-lspconfig
 --------------------------------------------------------------------------------
 
+---@type vim.lsp.Config
 local efmConfig = {
 	lua = {
 		{

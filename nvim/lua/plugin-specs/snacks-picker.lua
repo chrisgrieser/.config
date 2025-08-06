@@ -1,6 +1,5 @@
 -- vim: foldlevel=3
 -- DOCS https://github.com/folke/snacks.nvim/blob/main/docs/picker.md
---------------------------------------------------------------------------------
 ---@module "snacks"
 --------------------------------------------------------------------------------
 
@@ -100,6 +99,8 @@ end
 
 --------------------------------------------------------------------------------
 
+---@module "lazy.core.specs"
+---@type LazyPluginSpec
 return {
 	"folke/snacks.nvim",
 	keys = {

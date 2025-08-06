@@ -1,5 +1,4 @@
 -- DOCS https://github.com/folke/snacks.nvim/blob/main/docs/notifier.md#%EF%B8%8F-config
---------------------------------------------------------------------------------
 ---@module "snacks"
 --------------------------------------------------------------------------------
 
@@ -90,6 +89,8 @@ end
 
 --------------------------------------------------------------------------------
 
+---@module "lazy.core.specs"
+---@type LazyPluginSpec
 return {
 	"folke/snacks.nvim",
 	keys = {

@@ -7,7 +7,9 @@ local function select(textobj)
 	end
 end
 
-return { -- treesitter-based textobjs
+---@module "lazy.core.specs"
+---@type LazyPluginSpec
+return {
 	"nvim-treesitter/nvim-treesitter-textobjects",
 	dependencies = "nvim-treesitter/nvim-treesitter",
 	branch = "main", -- needed for nvim-treesitter's `main` branch

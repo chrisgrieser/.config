@@ -50,7 +50,7 @@ vim.api.nvim_create_autocmd("FocusLost", {
 	callback = function()
 		if os.date("%a") == "Mon" or jit.os == "OSX" then
 			vim.system { "find", vim.o.undodir, "-mtime", "+15d", "-delete" }
-			vim.system { "find", vim.lsp.log.get_filename(), "-size", "+50M", "-delete" }
+			vim.system { "find", vim.lsp.log.get_filename(), "-size", "+20M", "-delete" }
 		end
 	end,
 })
@@ -225,7 +225,7 @@ local globToTemplateMap = {
 	[vim.fn.stdpath("config") .. "/lua/personal-plugins/*.lua"] = "module.lua",
 	["**/hammerspoon/modules/*.lua"] = "module.lua",
 	[vim.fn.stdpath("config") .. "/lua/plugin-specs/*.lua"] = "plugin-spec.lua",
-	[vim.fn.stdpath("config") .. "/lsp/*.lua"] = "lsp.lua",
+	[vim.fn.stdpath("config") .. "/lsp-server-config/*.lua"] = "lsp.lua",
 
 	["**/*.py"] = "template.py",
 	["**/*.swift"] = "template.swift",

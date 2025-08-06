@@ -1,6 +1,8 @@
 -- DOCS https://github.com/altermo/ultimate-autopair.nvim/blob/v0.6/doc/ultimate-autopair.txt
 --------------------------------------------------------------------------------
 
+---@module "lazy.core.specs"
+---@type LazyPluginSpec
 return {
 	"altermo/ultimate-autopair.nvim",
 	branch = "v0.6", -- recommended as each new version will have breaking changes
