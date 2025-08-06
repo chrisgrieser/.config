@@ -19,7 +19,6 @@ end
 
 -- INFO done manually to include app-specific toggling for:
 -- * System
--- * Neovim
 -- * Sketchybar
 -- * Highlights PDF appearance
 -- * Hammerspoon Console
@@ -32,11 +31,6 @@ function M.setDarkMode(toMode)
 
 	-- sketchybar
 	hs.execute(u.exportPath .. "sketchybar --reload")
-
-	-- neovim
-	local nvimLuaCmd = "<cmd>lua vim.g.setColorscheme()<CR>"
-	local shellCmd = ("nvim --server '/tmp/nvim_server.pipe' --remote-send %q"):format(nvimLuaCmd)
-	hs.execute(u.exportPath .. shellCmd)
 
 	-- Highlights PDF background
 	if u.appRunning("Highlights") then
