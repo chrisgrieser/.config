@@ -14,7 +14,7 @@ count-lines-in-subdirs:
         [[ "$line_count" -eq 0 ]] || echo "$dir: $line_count"
         total=$((total + line_count))
     done
-    echo "Total: $total"
+    echo "[Total: $total]"
 
 count-lines:
     #!/usr/bin/env zsh

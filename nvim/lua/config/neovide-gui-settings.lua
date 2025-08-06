@@ -27,10 +27,6 @@ vim.opt.linespace = -2 -- less line height
 
 --------------------------------------------------------------------------------
 
-
-
---------------------------------------------------------------------------------
-
 -- CHANGE ZOOM via cmd+ / cmd-
 local function changeScaleFactor(delta)
 	vim.g.neovide_scale_factor = vim.g.neovide_scale_factor + delta

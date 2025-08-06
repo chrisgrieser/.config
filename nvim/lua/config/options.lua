@@ -9,14 +9,17 @@ vim.g.iCloudSync = vim.env.HOME
 vim.g.useEmmylua = false
 
 --------------------------------------------------------------------------------
--- COLORSCHEMES
+-- COLORSCHEMES DEPENDING ON SYSTEM MODE
 
--- need to match `lua/colorschemes/{name}.lua` & name for `vim.cmd.colorscheme()`
+-- names need to match `lua/colorschemes/{name}.lua` & name for `colorscheme:`
 vim.g.lightColor = "dawnfox"
-vim.g.darkColor = "gruvbox-material"
+vim.g.darkColor = "tokyonight"
 
-vim.g.neovide_theme = "auto" -- tell neovide to set `background` based on system
+-- 1. tell neovide to sync `background` with system dark mode 
+-- (terminal already does so by default)
+vim.g.neovide_theme = "auto"
 
+-- 2. tell nvim to sync colorscheme with `background`
 vim.api.nvim_create_autocmd("OptionSet", {
 	desc = "User: Sync colorscheme with `background`",
 	pattern = "background",
