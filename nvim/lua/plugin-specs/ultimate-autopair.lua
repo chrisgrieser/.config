@@ -1,7 +1,7 @@
 -- DOCS https://github.com/altermo/ultimate-autopair.nvim/blob/v0.6/doc/ultimate-autopair.txt
 --------------------------------------------------------------------------------
 
----@module "lazy.core.specs"
+---@module "lazy.types"
 ---@type LazyPluginSpec
 return {
 	"altermo/ultimate-autopair.nvim",

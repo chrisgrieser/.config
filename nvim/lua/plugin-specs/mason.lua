@@ -136,7 +136,7 @@ end
 
 --------------------------------------------------------------------------------
 
----@module "lazy.core.specs"
+---@module "lazy.types"
 ---@type LazyPluginSpec
 return {
 	"mason-org/mason.nvim",

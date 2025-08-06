@@ -77,11 +77,12 @@ end
 
 ---@param displayAlreadyDarkened boolean
 local function workLayout(displayAlreadyDarkened)
-	if not displayAlreadyDarkened then autoSetBrightness() end
+	-- defer setting brightness to adjust to dark/light mode switch
+	darkmode.autoSwitch()
+	if not displayAlreadyDarkened then u.defer(1, autoSetBrightness) end
+
 	holeCover.update()
 	dockSwitcher("work")
-	darkmode.autoSwitch()
-
 	u.closeAllTheThings()
 
 	u.openApps { "Ivory", "Mimestream", "AlfredExtraPane", isWorkWeek() and "Slack" or nil }

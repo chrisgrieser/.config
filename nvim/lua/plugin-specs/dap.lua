@@ -64,7 +64,7 @@ end
 
 --------------------------------------------------------------------------------
 
----@module "lazy.core.specs"
+---@module "lazy.types"
 ---@type LazyPluginSpec
 return {
 	"mfussenegger/nvim-dap",

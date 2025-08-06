@@ -1,18 +1,18 @@
 -- FIX https://github.com/MeanderingProgrammer/render-markdown.nvim/issues/488#issuecomment-3154937211
-vim.api.nvim_create_autocmd("User", {
-	pattern = "LazyLoad",
-	group = vim.api.nvim_create_augroup("render-markdown", { clear = true }),
-	callback = function(ctx)
-		if ctx.data ~= "render-markdown" then return end
+vim.api.nvim_create_autocmd("Filetype", {
+	pattern = { "markdown", "codecompanion" },
+	group = vim.api.nvim_create_augroup("render-markdown-fix", { clear = true }),
+	once = true,
+	callback = function()
+		vim.notify("🪚 🟩")
 		vim.treesitter.stop()
 		pcall(vim.treesitter.start)
-		return true -- delete this autocmd
 	end,
 })
 
 --------------------------------------------------------------------------------
 
----@module "lazy.core.specs"
+---@module "lazy.types"
 ---@type LazyPluginSpec
 return {
 	"MeanderingProgrammer/render-markdown.nvim",

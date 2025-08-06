@@ -1,7 +1,7 @@
 -- DOCS https://github.com/jbyuki/one-small-step-for-vimkind/
 --------------------------------------------------------------------------------
 
----@module "lazy.core.specs"
+---@module "lazy.types"
 ---@type LazyPluginSpec
 return {
 	"jbyuki/one-small-step-for-vimkind",

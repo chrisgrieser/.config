@@ -2,7 +2,7 @@
 ---@module "snacks"
 --------------------------------------------------------------------------------
 
----@module "lazy.core.specs"
+---@module "lazy.types"
 ---@type LazyPluginSpec
 return {
 	"folke/snacks.nvim",

@@ -205,6 +205,24 @@ do
 	})
 end
 
+-- CYCLIC PASTE
+do
+	-- same as regular `p`, but when undoing the paste and then using `.`, will
+	-- paste `""2p`, so `p......` pasts all recent deletions and `pu.u.u.u.`
+	-- cycles through the them
+	keymap("n", "<C-p>", '"1p', { desc = " Cyclic paste" })
+
+	vim.api.nvim_create_autocmd("TextYankPost", {
+		desc = "User: Make cyclic paste compatible with yanking",
+		callback = function()
+			-- store yanks in register 1, since by default it's stored in 0
+			if vim.v.event.operator == "y" and vim.v.event.regname == "" then
+				vim.fn.setreg("1", vim.fn.getreg("0"))
+			end
+		end,
+	})
+end
+
 -- keep the register clean
 keymap({ "n", "x" }, "x", '"_x')
 keymap({ "n", "x" }, "c", '"_c')
@@ -433,7 +451,8 @@ do
 		function() require("personal-plugins.misc").startOrStopRecording(toggleKey, reg) end,
 		{ desc = "󰃽 Start/stop recording" }
 	)
-	keymap("n", "9", "@" .. reg, { desc = "󰃽 Play recording" })
+	-- stylua: ignore
+	keymap("n", "9", function() require("personal-plugins.misc").playRecording(reg) end, { desc = "󰃽 Play recording" })
 end
 
 --------------------------------------------------------------------------------
