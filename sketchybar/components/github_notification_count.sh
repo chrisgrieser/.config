@@ -17,20 +17,6 @@ if [[ -z "$GITHUB_TOKEN" ]]; then
 	return 1
 fi
 
-# GUARD only trigger on deactivation or activation of browser
-if [[ "$SENDER" = "front_app_switched" ]]; then
-	mkdir -p "$HOME/.cache/sketchybar"
-	data="$HOME/.cache/sketchybar/front_app2"
-	[[ -f "$data" ]] && deactivated_app=$(< "$data")
-	activated_app="$INFO"
-	echo -n "$activated_app" > "$data"
-
-	[[ "$activated_app" == "Brave Browser" || "$deactivated_app" == "Brave Browser" ]] || return 0
-
-	# when triggered due to opening in browser, wait so notification opened is marked as read
-	[[ "$activated_app" == "Brave Browser" ]] && sleep 10
-fi
-
 #───────────────────────────────────────────────────────────────────────────────
 
 # DOCS https://docs.github.com/en/rest/activity/notifications?apiVersion=2022-11-28
