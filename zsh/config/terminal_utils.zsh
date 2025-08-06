@@ -82,28 +82,6 @@ bindkey '\e' _escape_on_empty_buffer
 
 #───────────────────────────────────────────────────────────────────────────────
 
-# search pwd via `rg`, open selection in the editor at the line
-function s {
-	local selected file line
-	selected=$(
-		rg "$*" --color=always --no-messages --line-number --trim --no-config \
-			--hidden --smart-case --sortr=modified --ignore-file="$HOME/.config/ripgrep/ignore" |
-			fzf --ansi --select-1 --delimiter=":" \
-				--preview="bat {1} --no-config --color=always --highlight-line={2} --line-range={2}: " \
-				--preview-window="60%,top,border-down" \
-				--height="100%" # required for for wezterm's `pane:is_alt_screen_active()`
-	)
-	[[ -z "$selected" ]] && return 0
-	file=$(echo "$selected" | cut -d: -f1)
-	line=$(echo "$selected" | cut -d: -f2)
-
-	# not opening via `neovide` cli, PENDING https://github.com/neovide/neovide/issues/1586
-	open "$file"
-	nvim --server "/tmp/nvim_server.pipe" --remote-send "<cmd>$((line + 1))<CR>"
-}
-
-#───────────────────────────────────────────────────────────────────────────────
-
 # SEARCH AND REPLACE VIA `rg`
 # usage: sr "search" "replace" file1 file2 file3
 function sr {

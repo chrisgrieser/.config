@@ -15,50 +15,37 @@ vim.g.useEmmylua = false
 vim.g.lightColor = "dawnfox"
 vim.g.darkColor = "gruvbox-material"
 
--- set manually, since terminal and nvim-GUI both set it too late/slow
-local macOSMode = vim.system({ "defaults", "read", "-g", "AppleInterfaceStyle" }):wait()
-vim.o.background = (macOSMode.stdout or ""):find("Dark") and "dark" or "light"
+vim.api.nvim_create_autocmd("OptionSet", {
+	desc = "User: Sync colorscheme with system background",
+	pattern = "background",
+	callback = function()
+		-- prevent recursion, since setting colorschemes often also sets background
+		-- (not using `vim.v.option_old` due to race with multiple triggerings)
+		if vim.v.option_new == vim.g.prevBg then return end
+		vim.g.prevBg = vim.v.option_new
 
--- Called by via Hammerspoon on mode change when `/tmp/nvim_server.pipe` is open
--- (`OptionSet` autocmd seemms buggy, set continuously by neovide in light mode)
-vim.g.setColorscheme = function()
-	vim.cmd.highlight("clear") -- reset so next theme isn't affected by previous one
-	vim.cmd.colorscheme(vim.o.background == "light" and vim.g.lightColor or vim.g.darkColor)
+		vim.cmd.highlight("clear") -- reset so next theme isn't affected by previous one
+		local newColor = vim.v.option_new == "light" and vim.g.lightColor or vim.g.darkColor
+		vim.schedule(function() vim.cmd.colorscheme(newColor) end)
+	end,
+})
+
+if vim.fn.has("gui_running") == 0 then
+	vim.notify("🪚 ⭕")
+	-- vim.api.nvim_exec_autocmds("OptionSet", { pattern = "background" })
 end
 
--- vim.api.nvim_create_autocmd("OptionSet", {
--- 	callback = function(ctx)
--- 		if vim.g.themeJustSet or ctx.match ~= "background" then return end
--- 		vim.g.themeJustSet = true
--- 		vim.cmd.highlight("clear") -- reset so next theme isn't affected by previous one
--- 		local newColor = vim.o.background == "light" and vim.g.lightColor or vim.g.darkColor
--- 		vim.cmd.colorscheme(newColor)
--- 		vim.defer_fn(function ()
--- 			vim.g.themeJustSet = false
--- 			Chainsaw(vim.g.themeJustSet)
--- 			Chainsaw(vim.o.background)
--- 		end, 1000)
--- 	end,
--- })
+-- set manually, since terminal and nvim-GUI both set it very late
+if jit.os == "OSX" then
+	local macOSMode = vim.system({ "defaults", "read", "-g", "AppleInterfaceStyle" }):wait()
+	vim.o.background = (macOSMode.stdout or ""):find("Dark") and "dark" or "light"
+end
 
 --------------------------------------------------------------------------------
 -- LSP
+
 vim.env.NO_COLOR = 1 -- disable colors for the logging of some LSPs
 vim.lsp.set_log_level("WARN")
-
---------------------------------------------------------------------------------
--- AUTOMATION
-
-if vim.g.neovide then
-	-- read: access cwd via window title
-	vim.opt.title = true
-	vim.opt.titlelen = 0 -- 0 = do not shorten title
-	vim.opt.titlestring = "%{getcwd()}"
-
-	-- write: issue commands via nvim server
-	pcall(os.remove, "/tmp/nvim_server.pipe") -- after a crash, server is still there and needs to be removed
-	vim.fn.serverstart("/tmp/nvim_server.pipe")
-end
 
 --------------------------------------------------------------------------------
 -- GENERAL OPTIONS
@@ -104,6 +91,11 @@ vim.api.nvim_create_autocmd("FileType", {
 		end
 	end,
 })
+
+-- access cwd via window title
+vim.opt.title = true
+vim.opt.titlelen = 0 -- 0 = do not shorten title
+vim.opt.titlestring = "%{expand('%')}" -- parent of current file
 
 --------------------------------------------------------------------------------
 -- WRAP
