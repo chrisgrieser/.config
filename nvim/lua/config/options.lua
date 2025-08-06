@@ -15,8 +15,10 @@ vim.g.useEmmylua = false
 vim.g.lightColor = "dawnfox"
 vim.g.darkColor = "gruvbox-material"
 
+vim.g.neovide_theme = "auto" -- tell neovide to set `background` based on system
+
 vim.api.nvim_create_autocmd("OptionSet", {
-	desc = "User: Sync colorscheme with system background",
+	desc = "User: Sync colorscheme with `background`",
 	pattern = "background",
 	callback = function()
 		-- prevent recursion, since setting colorschemes often also sets background
@@ -24,22 +26,11 @@ vim.api.nvim_create_autocmd("OptionSet", {
 		if vim.v.option_new == vim.g.prevBg then return end
 		vim.g.prevBg = vim.v.option_new
 
-		vim.cmd.highlight("clear") -- reset so next theme isn't affected by previous one
+		vim.cmd.highlight("clear") -- so next theme isn't affected by previous one
 		local newColor = vim.v.option_new == "light" and vim.g.lightColor or vim.g.darkColor
 		vim.schedule(function() vim.cmd.colorscheme(newColor) end)
 	end,
 })
-
-if vim.fn.has("gui_running") == 0 then
-	vim.notify("🪚 ⭕")
-	-- vim.api.nvim_exec_autocmds("OptionSet", { pattern = "background" })
-end
-
--- set manually, since terminal and nvim-GUI both set it very late
-if jit.os == "OSX" then
-	local macOSMode = vim.system({ "defaults", "read", "-g", "AppleInterfaceStyle" }):wait()
-	vim.o.background = (macOSMode.stdout or ""):find("Dark") and "dark" or "light"
-end
 
 --------------------------------------------------------------------------------
 -- LSP
@@ -92,10 +83,13 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
--- access cwd via window title
+--------------------------------------------------------------------------------
+
+-- ACCESS CWD VIA WINDOW TITLE
+-- (simpler then using `fn.serverstart()` with `nvim --server --remote-expr` )
 vim.opt.title = true
-vim.opt.titlelen = 0 -- 0 = do not shorten title
-vim.opt.titlestring = "%{expand('%')}" -- parent of current file
+vim.opt.titlelen = 0 -- = do not shorten title
+vim.opt.titlestring = "%{expand('%')}" -- = of current file
 
 --------------------------------------------------------------------------------
 -- WRAP
