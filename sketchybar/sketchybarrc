@@ -53,6 +53,7 @@ sketchybar \
 	--add item github_notif $row_1 \
 	--set github_notif update_freq="300" icon="" \
 	script="./components/github_notification_count.sh" \
+	--add event update_github_notif \
 	--subscribe github_notif front_app_switched system_woke \
 	\
 	--add item reminders_count $row_1 \

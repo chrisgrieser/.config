@@ -20,11 +20,26 @@ local macOSMode = vim.system({ "defaults", "read", "-g", "AppleInterfaceStyle" }
 vim.o.background = (macOSMode.stdout or ""):find("Dark") and "dark" or "light"
 
 -- Called by via Hammerspoon on mode change when `/tmp/nvim_server.pipe` is open
--- (`OptionSet` autocmd doesn't work reliably)
+-- (`OptionSet` autocmd seemms buggy, set continuously by neovide in light mode)
 vim.g.setColorscheme = function()
 	vim.cmd.highlight("clear") -- reset so next theme isn't affected by previous one
 	vim.cmd.colorscheme(vim.o.background == "light" and vim.g.lightColor or vim.g.darkColor)
 end
+
+-- vim.api.nvim_create_autocmd("OptionSet", {
+-- 	callback = function(ctx)
+-- 		if vim.g.themeJustSet or ctx.match ~= "background" then return end
+-- 		vim.g.themeJustSet = true
+-- 		vim.cmd.highlight("clear") -- reset so next theme isn't affected by previous one
+-- 		local newColor = vim.o.background == "light" and vim.g.lightColor or vim.g.darkColor
+-- 		vim.cmd.colorscheme(newColor)
+-- 		vim.defer_fn(function ()
+-- 			vim.g.themeJustSet = false
+-- 			Chainsaw(vim.g.themeJustSet)
+-- 			Chainsaw(vim.o.background)
+-- 		end, 1000)
+-- 	end,
+-- })
 
 --------------------------------------------------------------------------------
 -- LSP
