@@ -227,6 +227,7 @@ return {
 					win = {
 						input = {
 							keys = {
+								-- <CR>: restores the selected undo point
 								["<D-c>"] = { "yank_add", mode = "i" },
 								["<D-d>"] = { "yank_del", mode = "i" },
 							},
