@@ -23,10 +23,8 @@ while read -r filepath; do # don't call it `path`, messes with `$PATH`
 	done
 done < <(echo "$changed_files")
 common_parent=$(echo "$common_parent" | cut -c3-) # remove leading `./`
-
-max_file_length=60
-while [[ ${#common_parent} -ge $max_file_length ]]; do
-	common_parent=${common_parent%/*}
+while [[ ${#common_parent} -gt 60 ]]; do
+	common_parent=${common_parent#*/} # remove first directory
 done
 
 device_name=$(scutil --get ComputerName | cut -d" " -f3-)
@@ -35,7 +33,6 @@ if [[ -z "$common_parent" ]]; then
 else
 	commit_msg="$device_name ($common_parent)"
 fi
-echo "$commit_msg"
 
 #───────────────────────────────────────────────────────────────────────────────
 
