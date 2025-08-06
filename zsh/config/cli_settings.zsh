@@ -38,7 +38,7 @@ export JUST_COMMAND_COLOR="blue"
 
 # INFO multi-select `alt-enter` mapping consistent with the one for telescope
 export FZF_DEFAULT_OPTS='
-	--pointer="" --prompt=" " --scrollbar="▐" --ellipsis="…" --marker=" +"
+	--pointer="" --prompt=" " --scrollbar="▐" --ellipsis="…" --marker=" "
 	--color=hl:208,hl+:208,pointer:206,marker:206
 	--scroll-off=5 --cycle --layout=reverse --height=90% --preview-window=border-left
 	--bind=tab:down,shift-tab:up

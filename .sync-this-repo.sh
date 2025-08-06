@@ -3,11 +3,11 @@ export GIT_OPTIONAL_LOCKS=0      # prevent unnecessary lock files
 cd "$(dirname "$0")" || return 1 # go to location of this script, i.e., the git root
 #───────────────────────────────────────────────────────────────────────────────
 
+# if no changes, just pull & push
 change_count=$(git status --porcelain | wc -l | tr -d " ")
 
-# if no changes, just pull
 if [[ $change_count -eq 0 ]]; then
-	git pull --no-progress
+	git pull --no-progress && git push --no-progress
 	return $?
 fi
 
@@ -24,12 +24,20 @@ while read -r filepath; do # don't call it `path`, messes with `$PATH`
 done < <(echo "$changed_files")
 common_parent=$(echo "$common_parent" | cut -c3-) # remove leading `./`
 
-device_name=$(scutil --get ComputerName | cut -d" " -f2-)
+max_file_length=60
+while [[ ${#common_parent} -ge $max_file_length ]]; do
+	common_parent=${common_parent%/*}
+done
+
+device_name=$(scutil --get ComputerName | cut -d" " -f3-)
 if [[ -z "$common_parent" ]]; then
 	commit_msg="$device_name ($change_count files)"
 else
 	commit_msg="$device_name ($common_parent)"
 fi
+echo "$commit_msg"
+
+#───────────────────────────────────────────────────────────────────────────────
 
 # add-commit-pull-push
 git add --all

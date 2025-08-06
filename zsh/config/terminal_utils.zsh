@@ -64,7 +64,8 @@ _escape_on_empty_buffer() {
 	selected=$(
 		zsh -c "$rg_cmd" |
 			eza --stdin --color=always --icons=always --sort=oldest |
-			fzf --ansi --info=inline --height="50%" \
+			fzf --ansi --multi \
+				--info=inline --height="50%" \
 				--header="^H: --hidden" --scheme=path --tiebreak=length,end \
 				--bind="ctrl-h:change-header(including hidden files)+reload($rg_cmd \
 					--hidden --no-ignore --no-ignore-files \
