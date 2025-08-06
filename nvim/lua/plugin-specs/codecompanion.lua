@@ -2,6 +2,8 @@
 -- alternative: https://github.com/dlants/magenta.nvim
 --------------------------------------------------------------------------------
 
+---@module "lazy.core.specs"
+---@type LazyPluginSpec
 return {
 	"olimorris/codecompanion.nvim",
 	cmd = "CodeCompanion",

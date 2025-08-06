@@ -1,6 +1,7 @@
 -- DOCS https://luals.github.io/wiki/settings/
 --------------------------------------------------------------------------------
 
+---@type vim.lsp.Config
 return {
 	on_attach = function(client)
 		-- disable formatting in favor of `stylua`

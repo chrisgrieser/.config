@@ -1,6 +1,7 @@
 -- DOCS https://ltex-plus.github.io/ltex-plus/settings.html
 --------------------------------------------------------------------------------
 
+---@type vim.lsp.Config
 return {
 	filetypes = { "markdown" },
 	settings = {

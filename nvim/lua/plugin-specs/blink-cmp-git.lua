@@ -1,6 +1,8 @@
 -- DOCS https://github.com/Kaiser-Yang/blink-cmp-git
 --------------------------------------------------------------------------------
 
+---@module "lazy.core.specs"
+---@type LazyPluginSpec
 return {
 	-- `blink-cmp-git` is configured in the blink.cmp provider config. To keep
 	-- plugin configs nonetheless modular, we define another set of `blink.cmp`

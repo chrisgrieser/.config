@@ -1,3 +1,5 @@
+---@module "lazy.core.specs"
+---@type LazyPluginSpec
 return {
 	"theHamsta/nvim-dap-virtual-text",
 	opts = {

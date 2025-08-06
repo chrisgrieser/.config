@@ -1,6 +1,7 @@
 -- DOCS https://github.com/typescript-language-server/typescript-language-server/blob/master/docs/configuration.md
 --------------------------------------------------------------------------------
 
+---@type vim.lsp.Config
 local config = {
 	init_options = {
 		preferences = {

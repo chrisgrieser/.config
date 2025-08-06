@@ -136,6 +136,8 @@ end
 
 --------------------------------------------------------------------------------
 
+---@module "lazy.core.specs"
+---@type LazyPluginSpec
 return {
 	"mason-org/mason.nvim",
 	event = "BufReadPre",

@@ -1,3 +1,5 @@
+---@module "lazy.core.specs"
+---@type LazyPluginSpec
 return {
 	"ray-x/lsp_signature.nvim",
 	event = "InsertEnter",

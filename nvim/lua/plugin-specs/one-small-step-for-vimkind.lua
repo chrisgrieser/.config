@@ -1,6 +1,8 @@
 -- DOCS https://github.com/jbyuki/one-small-step-for-vimkind/
 --------------------------------------------------------------------------------
 
+---@module "lazy.core.specs"
+---@type LazyPluginSpec
 return {
 	"jbyuki/one-small-step-for-vimkind",
 	commit = "84689d9", -- PENDING https://github.com/jbyuki/one-small-step-for-vimkind/issues/81

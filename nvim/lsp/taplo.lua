@@ -1,3 +1,4 @@
+---@type vim.lsp.Config
 return {
 	on_attach = function(client)
 		-- disable formatting in favor of `tombi`

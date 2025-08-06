@@ -58,6 +58,8 @@ end
 
 --------------------------------------------------------------------------------
 
+---@module "lazy.core.specs"
+---@type LazyPluginSpec
 return {
 	"nvim-lualine/lualine.nvim",
 	event = "VeryLazy",

@@ -47,6 +47,8 @@ end
 
 --------------------------------------------------------------------------------
 
+---@module "lazy.core.specs"
+---@type LazyPluginSpec
 return {
 	"folke/snacks.nvim",
 	keys = {

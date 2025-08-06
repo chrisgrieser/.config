@@ -1,3 +1,5 @@
+---@module "lazy.core.specs"
+---@type LazyPluginSpec
 return {
 	"chrisgrieser/nvim-justice",
 	keys = {
