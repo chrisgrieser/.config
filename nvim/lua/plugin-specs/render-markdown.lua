@@ -3,11 +3,10 @@ vim.api.nvim_create_autocmd("Filetype", {
 	pattern = { "markdown", "codecompanion" },
 	group = vim.api.nvim_create_augroup("render-markdown-fix", { clear = true }),
 	once = true,
-	callback = function()
-		vim.notify("🪚 🟩")
+	callback = vim.schedule_wrap(function()
 		vim.treesitter.stop()
 		pcall(vim.treesitter.start)
-	end,
+	end),
 })
 
 --------------------------------------------------------------------------------
