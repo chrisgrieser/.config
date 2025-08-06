@@ -1,4 +1,5 @@
 -- DOCS https://github.com/altermo/ultimate-autopair.nvim/blob/v0.6/doc/ultimate-autopair.txt
+-- alternative: https://github.com/Saghen/blink.pairs
 --------------------------------------------------------------------------------
 
 ---@module "lazy.types"
@@ -11,15 +12,6 @@ return {
 		-- Open new scope (`remap` to trigger auto-pairing)
 		{ "<D-o>", "a{<CR>", desc = " Open new scope", remap = true },
 		{ "<D-o>", "{<CR>", mode = "i", desc = " Open new scope", remap = true },
-		{
-			"<leader>o2",
-			function()
-				require("ultimate-autopair").toggle()
-				local mode = require("ultimate-autopair").isenabled() and "enabled" or "disabled"
-				vim.notify(mode, nil, { title = "Auto-pairing", icon = "" })
-			end,
-			desc = " autopairing",
-		},
 	},
 	init = function()
 		vim.api.nvim_create_autocmd("RecordingEnter", {
