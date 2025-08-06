@@ -1,4 +1,4 @@
-set quiet
+set quiet := true
 
 reload-adblock-rules:
     #!/usr/bin/env zsh
@@ -6,3 +6,6 @@ reload-adblock-rules:
         git commit --no-verify --message "chore: update adblock rules" &&
         git push &&
         open "brave://settings/shields/filters" # filters need to be updated manually
+
+open-shields-filters:
+    open "brave://settings/shields/filters"

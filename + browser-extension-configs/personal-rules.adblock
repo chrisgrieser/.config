@@ -18,8 +18,13 @@ www.linguee.com##.l_deepl_ad_container
 ! development
 stackoverflow.com###announcement-banner
 help.obsidian.md##.site-body-left-column
+
+! ai
 chatgpt.com###thread-bottom-container > div:last-child
 chatgpt.com###page-header > .absolute
+mistral.ai##form + div.text-muted
+mistral.ai##div[data-sidebar="footer"]
+mistral.ai##div:has(> a[href="/upgrade/plans"])
 
 ! search
 duckduckgo.com##[data-testid="feedback-prompt"]
