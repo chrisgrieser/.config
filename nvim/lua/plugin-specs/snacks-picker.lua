@@ -74,29 +74,6 @@ local function betterFileOpen()
 	}
 end
 
-local function browseProject()
-	local projectsFolder = vim.g.localRepos -- CONFIG
-
-	local function browse(project)
-		local path = vim.fs.joinpath(projectsFolder, project)
-		Snacks.picker.files { title = " " .. project, cwd = path }
-	end
-	local projects = vim.iter(vim.fs.dir(projectsFolder)):fold({}, function(acc, item, type)
-		if type == "directory" then table.insert(acc, item) end
-		return acc
-	end)
-
-	if #projects == 0 then
-		vim.notify("No projects found.", vim.log.levels.WARN)
-	elseif #projects == 1 then
-		browse(projects[1])
-	else
-		vim.ui.select(projects, { prompt = " Select project" }, function(project)
-			if project then browse(project) end
-		end)
-	end
-end
-
 --------------------------------------------------------------------------------
 
 ---@module "lazy.types"
@@ -106,7 +83,6 @@ return {
 	keys = {
 		-- FILES
 		{ "go", betterFileOpen, desc = " Open files" },
-		{ "gP", browseProject, desc = " Project" },
 		{ "gt", function() Snacks.picker.explorer() end, desc = "󰙅 File tree" },
 		{
 			"gr",
@@ -251,8 +227,8 @@ return {
 					win = {
 						input = {
 							keys = {
-								["<CR>"] = { "yank_add", mode = "i" },
-								["<D-c>"] = { "yank_del", mode = "i" },
+								["<D-c>"] = { "yank_add", mode = "i" },
+								["<D-d>"] = { "yank_del", mode = "i" },
 							},
 						},
 					},
