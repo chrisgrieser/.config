@@ -8,6 +8,11 @@ local M = {}
 -- * (recommended) `TSInstall markdown markdown_inline` for better highlighting
 -- * (recommended) `render-markdown.nvim` or `markview.nvim` for better highlighting
 
+-- USAGE
+-- Call `require("pretty-ts-error").select()` while on a line with a typescript
+-- diagnostic. If there is more than one typescript diagnostic, select one.
+-- (Replace `"pretty-ts-error"` with the location where this file is saved)
+
 --------------------------------------------------------------------------------
 
 ---@param diag vim.Diagnostic
@@ -82,8 +87,7 @@ function M.select()
 		prompt = " Select diagnostic: ",
 		format_item = function(d) return d.message:sub(0, 30) end,
 	}, function(selection)
-		if not selection then return end
-		show(selection)
+		if selection then show(selection) end
 	end)
 end
 

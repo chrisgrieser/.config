@@ -15,6 +15,6 @@ return {
 	{
 		"Bilal2453/luvit-meta",
 		lazy = false, -- only needed for emmyrc.json to point to `vim.uv` typing
-		enabled = vim.g.useEmmylua,
+		enabled = vim.g.useEmmyluaLsp,
 	},
 }

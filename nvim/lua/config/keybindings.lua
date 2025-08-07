@@ -22,7 +22,7 @@ end
 -- META
 
 keymap("n", "<D-,>", function()
-	local pathOfThisFile = debug.getinfo(1, "S").source:sub(2)
+	local pathOfThisFile = debug.getinfo(1, "S").short_src
 	vim.cmd.edit(pathOfThisFile)
 end, { desc = "󰌌 Edit keybindings" })
 
@@ -525,3 +525,9 @@ keymap("n", "<leader>ol", function()
 end, { desc = "󰑓 LSPs restart" })
 
 --------------------------------------------------------------------------------
+
+-- TEMP
+keymap("n", "<leader>x", function()
+	local foobar = "Hello World"
+	Chainsaw(foobar)
+end)
