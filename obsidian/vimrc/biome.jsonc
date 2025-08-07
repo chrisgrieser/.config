@@ -1,0 +1,14 @@
+// Add globals for the Obsidian-vimrc plugin's jsfile
+// DOCS https://github.com/esm7/obsidian-vimrc-support/blob/master/JsSnippets.md
+//──────────────────────────────────────────────────────────────────────────────
+
+{
+	"extends": ["../../biome.jsonc"],
+
+	"javascript": {
+		"globals": ["$", "Application", "ObjC", "Path", "delay"]
+	},
+
+	// use the schema from the local biome package installed via Mason
+	"$schema": "/Users/chrisgrieser/.local/share/nvim/mason/packages/biome/node_modules/@biomejs/biome/configuration_schema.json"
+}

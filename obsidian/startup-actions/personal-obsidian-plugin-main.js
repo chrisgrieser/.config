@@ -64,7 +64,7 @@ class NewFileInFolder extends obsidian.FuzzySuggestModal {
 	}
 }
 
-async function updateTaskStatusbarAndFrontmatter(plugin) {
+function updateTaskStatusbarAndFrontmatter(plugin) {
 	const { app, taskStatusbar } = plugin;
 	const activeFile = app.workspace.getActiveFile();
 	if (!activeFile) {

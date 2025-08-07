@@ -1,5 +1,5 @@
 {
-  "blacklist": "*://www.instagram.com/*",
+  "blacklist": "*://www.instagram.com/*\n*://www.libhunt.com/*",
   "blockColor": "default",
   "blockWholeSite": true,
   "dialogTheme": "default",
@@ -34,10 +34,15 @@
       {
         "url": "https://raw.githubusercontent.com/ublacklist/builtin/refs/heads/dist/serpinfo/duckduckgo.yml",
         "custom": false,
-        "enabled": false
+        "enabled": true
       },
       {
         "url": "https://raw.githubusercontent.com/ublacklist/builtin/refs/heads/dist/serpinfo/ecosia.yml",
+        "custom": false,
+        "enabled": false
+      },
+      {
+        "url": "https://raw.githubusercontent.com/ublacklist/builtin/refs/heads/dist/serpinfo/kagi.yml",
         "custom": false,
         "enabled": false
       },
@@ -97,6 +102,6 @@
   "syncInterval": 120,
   "syncSerpInfo": true,
   "syncSubscriptions": true,
-  "updateInterval": 120,
-  "version": "8.12.0"
+  "updateInterval": 720,
+  "version": "9.1.0"
 }

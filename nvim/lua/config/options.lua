@@ -215,6 +215,11 @@ vim.diagnostic.config {
 			local msg = diag.message:gsub("%.$", "")
 			return msg
 		end,
+		-- 1. add `BufLeave` to fix window persisting when switching buffer
+		-- 2. leave out "TextChangedI" to continue showing diagnostics while typing
+		close_events = { "CursorMoved", "TextChangedI", "BufLeave" },
 	},
 }
+
+
 --------------------------------------------------------------------------------
