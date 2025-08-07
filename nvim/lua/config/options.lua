@@ -214,7 +214,6 @@ vim.diagnostic.config {
 		format = function(diag)
 			local msg = diag.message
 			if diag.source == "lua_ls" then msg = msg:gsub("%.$", "") end
-			if diag.source == "typescript" then msg = msg:gsub("'", "`") end -- ts_ls
 			return msg
 		end,
 		focusable = true, -- allow entering float
@@ -226,16 +225,5 @@ vim.diagnostic.config {
 		},
 	},
 }
-
-vim.api.nvim_create_autocmd("WinNew", {
-	desc = "User: ",
-	callback = function(ctx)
-		vim.defer_fn(function ()
-			local floatWinId = vim.b.lsp_floating_preview
-			Chainsaw(floatWinId) -- 🪚
-		end, 1)
-	end,
-})
-fsfs
 
 --------------------------------------------------------------------------------
