@@ -3,7 +3,7 @@
     "body": [
       "vim.api.nvim_create_autocmd(\"${1:event}\", {",
       "\tdesc = \"User: $0\",",
-      "\tcallback = function(_ctx)",
+      "\tcallback = function(ctx)",
       "",
       "\tend,",
       "})"
