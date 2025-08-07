@@ -9,14 +9,6 @@
 		]
 	},
 
-	"linter": {
-		"rules": {
-			// not needed for Obsidian plugin
-			"correctness": { "noUndeclaredDependencies": "off" },
-			"nursery": { "noCommonJs": "off" }
-		}
-	},
-
 	// use the schema from the local biome package installed via Mason
 	"$schema": "/Users/chrisgrieser/.local/share/nvim/mason/packages/biome/node_modules/@biomejs/biome/configuration_schema.json"
 }

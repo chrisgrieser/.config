@@ -6,7 +6,14 @@
 	"extends": ["../../biome.jsonc"],
 
 	"javascript": {
-		"globals": ["$", "Application", "ObjC", "Path", "delay"]
+		"globals": [
+			"Notice", // Obsidian
+			"request", // Obsidian
+			"editor", // vimrc plugin
+			"view", // vimrc plugin
+			"electronWindow", // Electron
+			"activeWindow" // Electron
+		]
 	},
 
 	// use the schema from the local biome package installed via Mason
