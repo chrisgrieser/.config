@@ -1,7 +1,7 @@
 {
   "autocmd": {
     "body": [
-      "vim.api.nvim_create_autocmd(\"${1:event}\", {",
+      "vim.api.nvim_create_autocmd(\"${1|BufLeave,BufNew,BufReadPost,CursorMoved,CursorMovedI,Filetype,OptionSet,TextChanged,TextChangedI,TextYankPost,UIEnter,User,VimEnter,VimResized,WinLeave,WinNew|}\", {",
       "\tdesc = \"User: $0\",",
       "\tcallback = function(ctx)",
       "",

@@ -1,4 +1,3 @@
-patching file '/Users/chrisgrieser/.config/sketchybar/components/github_notification_count.sh'
 #!/usr/bin/env zsh
 
 # CONFIG
@@ -17,8 +16,6 @@ if [[ -z "$GITHUB_TOKEN" ]]; then
 	sketchybar --set "$NAME" label="NO TOKEN" drawing=true
 	return 1
 fi
-
-echo "$PWD"
 
 #───────────────────────────────────────────────────────────────────────────────
 
