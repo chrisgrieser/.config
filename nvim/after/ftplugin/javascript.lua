@@ -16,6 +16,14 @@ abbr("()", "() =>")
 
 --------------------------------------------------------------------------------
 
+-- pretty ts error
+bkeymap(
+	"n",
+	"<leader>D",
+	function() require("personal-plugins.pretty-ts-error").prettyTsError() end,
+	{ desc = " Pretty ts_ls diagnostic" }
+)
+
 -- open the next regex at https://regex101.com/
 bkeymap("n", "g/", function()
 	-- GUARD
@@ -53,48 +61,3 @@ end, { desc = " Open in regex101" })
 
 --------------------------------------------------------------------------------
 
-bkeymap("n", "<leader>D", function()
-	local config = {
-		formatterArgs = { "biome", "format", "--stdin-file-path=stdin.ts" },
-	}
-
-	local notifyOpts = { icon = "", title = "ts_ls" }
-	local diag = vim.diagnostic.get_next()
-	if not diag or diag.source ~= "typescript" then
-		vim.notify("No diagnostic found.", vim.log.levels.WARN, notifyOpts)
-		return
-	end
-
-	-- EXAMPLE
-	-- Type '{ title: number; subtitle: string; mods: { cmd: { arg: string; }; ctrl: { arg: string; }; }; arg: string; variables: { address: string; url: string; coordinates: string; }; }[]' is not assignable to type 'AlfredItem[]'.
-	local msg = diag
-		.message
-		:gsub("'{", "\n```js\n{") -- codeblock start
-		:gsub("(}%[?]?)'", "%1\n```\n") -- codeblock end
-		:gsub("'", "`") -- single word
-		:gsub("\n +", "\n") -- remove indents
-		:gsub("\nType", "\n- Type") -- add bullets
-		:gsub("^Type", "\n- Type") -- add bullets
-
-	local lines = vim.iter(vim.split(msg, "\n")):fold({}, function(acc, line)
-		local isCodeBlock = line:find("^{.+[]}]$") ~= nil
-		if isCodeBlock then
-			line = "type dummy = " .. line
-			local out = vim.system(config.formatterArgs, { stdin = line }):wait()
-			assert(out.stdout and out.code == 0, "Formatter failed. " .. out.stderr)
-			local formatted = vim.trim(out.stdout:gsub("^type dummy = ", ""))
-			vim.list_extend(acc, vim.split(formatted, "\n"))
-		else
-			table.insert(acc, line)
-		end
-		return acc
-	end)
-
-	local _bufnr, winid = vim.lsp.util.open_floating_preview(lines, "markdown", {
-		close_events = { "CursorMoved", "BufHidden", "LspDetach" },
-	})
-	vim.api.nvim_win_set_config(winid, {
-		title = (" %s %s "):format(diag.source, diag.code),
-		title_pos = "center",
-	})
-end, { desc = " Pretty ts_ls diagnostic" })
