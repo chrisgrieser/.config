@@ -1,25 +1,18 @@
--- GLOBALS
-vim.g.mapleader = ","
-vim.g.maplocalleader = "<Nop>"
-
+-- MY VARIABLES
 vim.g.localRepos = vim.env.HOME .. "/Developer"
 vim.g.iCloudSync = vim.env.HOME
 	.. "/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/nvim-data"
 
-vim.g.useEmmylua = false
+vim.g.useEmmyluaLsp = false
 
 -- names need to match `lua/colorschemes/{name}.lua` & name for `colorscheme:`
 vim.g.lightColor = "dawnfox"
 vim.g.darkColor = "tokyonight"
 
 --------------------------------------------------------------------------------
--- LSP
-
-vim.env.NO_COLOR = 1 -- disable colors for the logging of some LSPs
-vim.lsp.set_log_level("WARN")
-
---------------------------------------------------------------------------------
 -- GENERAL OPTIONS
+vim.g.mapleader = ","
+vim.g.maplocalleader = "<Nop>"
 vim.opt.clipboard = "unnamedplus"
 
 vim.opt.ignorecase = true
@@ -122,6 +115,10 @@ vim.opt.smartindent = true
 vim.opt.report = 9001 -- disable most "x more/fewer lines" messages
 vim.opt.shortmess:append("ISs") -- no intro message, disable search count
 vim.opt.cmdheight = 0
+
+-- LSP log
+vim.env.NO_COLOR = 1 -- disable colors for the logging of some LSPs
+vim.lsp.set_log_level("WARN")
 
 --------------------------------------------------------------------------------
 -- INVISIBLE CHARS

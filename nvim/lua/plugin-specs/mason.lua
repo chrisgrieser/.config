@@ -25,7 +25,7 @@ local ensureInstalled = {
 		-- "ty", -- python type checker, still alpha
 
 		"lua-language-server", -- lua LSP (old, but more mature)
-		vim.g.useEmmylua and "emmylua_ls" or nil, -- lua LSP, new but still beta
+		vim.g.useEmmyluaLsp and "emmylua_ls" or nil, -- lua LSP, new but still beta
 	},
 	linters = {
 		"markdownlint", -- via efm

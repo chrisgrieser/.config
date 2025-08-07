@@ -8,9 +8,11 @@ local bg = (macOSMode.stdout or ""):find("Dark") and "dark" or "light"
 if bg == "dark" then
 	lightScheme.config = nil
 	lightScheme.priority = nil
+	lightScheme.lazy = true
 else
 	darkScheme.init = nil
 	darkScheme.priority = nil
+	darkScheme.lazy = true
 end
 
 --------------------------------------------------------------------------------
