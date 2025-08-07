@@ -82,7 +82,7 @@ function run(argv) {
 
 
 		return {
-			title: title,
+			title: 2,
 			subtitle: addressDisplay,
 			mods: {
 				cmd: { arg: addressStr }, // copy
