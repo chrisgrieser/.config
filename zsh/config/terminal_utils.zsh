@@ -46,6 +46,13 @@ function line_count() {
 		-print0 | xargs -0 wc -l
 }
 
+# file finder
+# `fd` replacement using just `rg`
+function fd {
+	rg --no-config --files --binary --ignore-file="$HOME/.config/ripgrep/ignore" |
+		rg --color=always "$1"
+}
+
 #───────────────────────────────────────────────────────────────────────────────
 
 # On empty buffer, `esc` starts file opener

@@ -119,8 +119,13 @@ function M.cycleMarks()
 	else
 		vim.api.nvim_set_current_buf(nextMark.bufnr)
 	end
-	vim.api.nvim_win_set_cursor(0, { nextMark.row, nextMark.col })
-	vim.cmd.normal { "zv", bang = true } -- open folds at cursor
+	local success = pcall(vim.api.nvim_win_set_cursor,0, { nextMark.row, nextMark.col })
+	if success then
+		vim.cmd.normal { "zv", bang = true } -- open folds at cursor
+	else
+		notify(("Mark %s not valid anymore."):format(nextMark.name), "warn")
+		M.deleteMark(nextMark.name)
+	end
 end
 
 ---@param name string
