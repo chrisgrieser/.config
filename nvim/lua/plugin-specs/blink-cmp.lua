@@ -66,12 +66,31 @@ return {
 			},
 		},
 		keymap = {
+			-- https://cmp.saghen.dev/configuration/keymap.html
 			preset = "none",
+			["<Tab>"] = {
+				function(_cmp)
+					if vim.fn.pumvisible() == 0 then return end
+					vim.cmd.execute([["normal! \<C-n>"]]) -- next
+					return true -- do not attempts the next command
+				end,
+				"snippet_forward",
+				"select_next",
+				"fallback",
+			},
+			["<S-Tab>"] = {
+				function(_cmp)
+					if vim.fn.pumvisible() == 0 then return end
+					vim.cmd.execute([["normal! \<C-p>"]]) -- previous
+					return true
+				end,
+				"snippet_backward",
+				"select_prev",
+				"fallback",
+			},
 			["<CR>"] = { "select_and_accept", "fallback" },
 			["<S-CR>"] = { "hide" },
 			["<D-c>"] = { "show" },
-			["<Tab>"] = { "snippet_forward", "select_next", "fallback" },
-			["<S-Tab>"] = { "snippet_backward", "select_prev", "fallback" },
 			["<PageDown>"] = { "scroll_documentation_down", "fallback" },
 			["<PageUp>"] = { "scroll_documentation_up", "fallback" },
 			["<D-g>"] = { "hide_signature", "fallback" }, -- fallback shows full signature
