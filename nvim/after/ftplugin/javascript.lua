@@ -54,6 +54,10 @@ end, { desc = " Open in regex101" })
 --------------------------------------------------------------------------------
 
 bkeymap("n", "<leader>D", function()
+	local config = {
+		formatterArgs = { "biome", "format", "--stdin-file-name", "stdin.ts" },
+	}
+
 	local notifyOpts = { icon = "", title = "ts_ls" }
 	local diag = vim.diagnostic.get_next()
 	if not diag or diag.source ~= "typescript" then
@@ -63,7 +67,6 @@ bkeymap("n", "<leader>D", function()
 
 	-- EXAMPLE
 	-- Type '{ title: number; subtitle: string; mods: { cmd: { arg: string; }; ctrl: { arg: string; }; }; arg: string; variables: { address: string; url: string; coordinates: string; }; }[]' is not assignable to type 'AlfredItem[]'.
-
 	local msg = diag
 		.message
 		:gsub("'{", "\n```js\n{") -- codeblock start
@@ -73,26 +76,24 @@ bkeymap("n", "<leader>D", function()
 		:gsub("\nType", "\n- Type") -- add bullets
 		:gsub("^Type", "\n- Type") -- add bullets
 
-	local lines = vim.iter(vim.split(msg, "\n"))
-		:fold({}, function(acc, line)
-			local isCodeBlock = line:find("^{.+[]}]$") ~= nil
-			if isCodeBlock then
-				-- local formattedLines = vim.
-			else
-				table.insert(acc, line)
-			end
-			return acc
-		end)
-		:totable()
-
-	vim.tbl_map(function(line)
-		local isCodeBlock = line:find("^{.+[}%]$") ~= nil
+	local lines = vim.iter(vim.split(msg, "\n")):fold({}, function(acc, line)
+		local isCodeBlock = line:find("^{.+[]}]$") ~= nil
 		if isCodeBlock then
+			line = "type dummy = " .. line
+			local stdout = vim.system(config.formatterArgs, { stdin = line }):wait().stdout
+			assert(stdout, config.formatterArgs[1] .. " failed.")
+			local formatted = vim.trim(stdout:gsub("^type dummy = ", ""))
+			Chainsaw(formatted) -- 🪚
+			vim.list_extend(acc, vim.split(formatted, "\n"))
+		else
+			table.insert(acc, line)
 		end
-		return line
-	end, vim.split(msg, "\n"))
+		return acc
+	end)
 
-	local _bufnr, winid = vim.lsp.util.open_floating_preview(lines, "markdown")
+	local _bufnr, winid = vim.lsp.util.open_floating_preview(lines, "markdown", {
+		close_events = { "CursorMoved", "BufHidden", "LspDetach" },
+	})
 	vim.api.nvim_win_set_config(winid, {
 		title = (" %s %s "):format(diag.source, diag.code),
 		title_pos = "center",
