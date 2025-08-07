@@ -47,6 +47,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>6987CCB5-57AD-4EB1-BA55-99F9CD7C6EED</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>2C357E73-8FA7-47FB-8A71-A149EAA38DBA</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>89E63483-8332-4632-9EBE-836D86AEEAF4</key>
 		<array>
 			<dict>
@@ -62,6 +75,16 @@
 		</array>
 		<key>B633ADB9-73C2-4236-AB4E-55042EE486D0</key>
 		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>6987CCB5-57AD-4EB1-BA55-99F9CD7C6EED</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>⌘: Open at {var:map_provider_2}</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
 			<dict>
 				<key>destinationuid</key>
 				<string>2C357E73-8FA7-47FB-8A71-A149EAA38DBA</string>
@@ -86,7 +109,7 @@
 				<key>destinationuid</key>
 				<string>3F4115AE-E3F9-4A7E-9E33-02EC623325CE</string>
 				<key>modifiers</key>
-				<integer>262144</integer>
+				<integer>131072</integer>
 				<key>modifiersubtext</key>
 				<string>⌃: Copy coordinates</string>
 				<key>vitoclose</key>
@@ -96,7 +119,7 @@
 				<key>destinationuid</key>
 				<string>246AE6D9-BC40-4334-925D-91CDEB7F3B65</string>
 				<key>modifiers</key>
-				<integer>1048576</integer>
+				<integer>262144</integer>
 				<key>modifiersubtext</key>
 				<string>⌘: Copy address</string>
 				<key>vitoclose</key>
@@ -127,6 +150,14 @@
 	<string>Maps Suggest</string>
 	<key>objects</key>
 	<array>
+		<dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.junction</string>
+			<key>uid</key>
+			<string>6987CCB5-57AD-4EB1-BA55-99F9CD7C6EED</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
@@ -274,10 +305,11 @@
 	<key>readme</key>
 	<string>## Usage
 Show locations with the `map` keyword.
-- &lt;kbd&gt;⏎&lt;/kbd&gt; open the location at the map provider.
-- &lt;kbd&gt;⌘⏎&lt;/kbd&gt; copy the address.
-- &lt;kbd&gt;⌥⏎&lt;/kbd&gt; copy the URL.
-- &lt;kbd&gt;⌃⏎&lt;/kbd&gt; copy the coordinates.
+- &lt;kbd&gt;⏎&lt;/kbd&gt; open the location at the primary map provider.
+- &lt;kbd&gt;⌘⏎&lt;/kbd&gt; open the location at the secondary map provider.
+- &lt;kbd&gt;⌥⏎&lt;/kbd&gt; copy the URL of the primary map provider.
+- &lt;kbd&gt;⌃⏎&lt;/kbd&gt; copy the address.
+- &lt;kbd&gt;⇧⏎&lt;/kbd&gt; copy the coordinates.
 
 ---
 
@@ -312,6 +344,15 @@ Show locations with the `map` keyword.
 			<real>275</real>
 			<key>ypos</key>
 			<real>315</real>
+		</dict>
+		<key>6987CCB5-57AD-4EB1-BA55-99F9CD7C6EED</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>xpos</key>
+			<real>265</real>
+			<key>ypos</key>
+			<real>115</real>
 		</dict>
 		<key>89E63483-8332-4632-9EBE-836D86AEEAF4</key>
 		<dict>
@@ -356,7 +397,7 @@ Show locations with the `map` keyword.
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<string>maps</string>
+				<string>map</string>
 				<key>placeholder</key>
 				<string></string>
 				<key>required</key>
@@ -377,27 +418,53 @@ Show locations with the `map` keyword.
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<string>google_maps</string>
+				<string>Google Maps</string>
 				<key>pairs</key>
 				<array>
 					<array>
 						<string>Google Maps</string>
-						<string>google_maps</string>
+						<string>Google Maps</string>
 					</array>
 					<array>
 						<string>Apple Maps</string>
-						<string>apple_maps</string>
+						<string>Apple Maps</string>
 					</array>
 				</array>
 			</dict>
 			<key>description</key>
-			<string></string>
+			<string>primary, open with `⏎`</string>
 			<key>label</key>
 			<string>open at</string>
 			<key>type</key>
 			<string>popupbutton</string>
 			<key>variable</key>
-			<string>open_map_at</string>
+			<string>map_provider_1</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>Apple Maps</string>
+				<key>pairs</key>
+				<array>
+					<array>
+						<string>Google Maps</string>
+						<string>Google Maps</string>
+					</array>
+					<array>
+						<string>Apple Maps</string>
+						<string>Apple Maps</string>
+					</array>
+				</array>
+			</dict>
+			<key>description</key>
+			<string>secondary, open with `⌘⏎`</string>
+			<key>label</key>
+			<string></string>
+			<key>type</key>
+			<string>popupbutton</string>
+			<key>variable</key>
+			<string>map_provider_2</string>
 		</dict>
 	</array>
 	<key>version</key>

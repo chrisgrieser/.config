@@ -42,14 +42,11 @@ function httpRequest(url) {
 
 //──────────────────────────────────────────────────────────────────────────────
 
-
+/** @type {Record<string, string>} */
 const mapProvider = {
-	// biome-ignore-start lint/style/useNamingConvention: Alfred standard
-	"google_maps": "http://google.com/maps?q=",
-	"apple_maps": "maps://maps.apple.com?q=",
-	// biome-ignore-end lint/style/useNamingConvention: Alfred standard
-}
-
+	"Google Maps": "http://google.com/maps?q=",
+	"Apple Maps": "maps://maps.apple.com?q=",
+};
 
 //──────────────────────────────────────────────────────────────────────────────
 
@@ -57,7 +54,8 @@ const mapProvider = {
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run(argv) {
 	const query = (argv[0] || "").trim();
-	const openAt = $.getenv("open_map_at");
+	const mapProvider1 = $.getenv("map_provider_1");
+	const mapProvider2 = $.getenv("map_provider_2");
 	if (!query) return JSON.stringify({ items: [{ title: "Waiting for query…", valid: false }] });
 
 	// DOCS https://photon.komoot.io/
@@ -85,7 +83,8 @@ function run(argv) {
 
 		const addressStr = address.join(", ");
 		const addressDisplay = address.slice(1).join(", "); // skip name from display
-		const url = openAt + encodeURIComponent(addressStr);
+		const url2 = mapProvider[mapProvider2] + encodeURIComponent(addressStr);
+		const url1 = mapProvider[mapProvider1] + encodeURIComponent(addressStr);
 
 		// SIC osm coordinates are long/lat, even though mapping apps expect
 		// lat/long, thus needs to be reversed
@@ -94,13 +93,15 @@ function run(argv) {
 		return {
 			title: title,
 			subtitle: addressDisplay,
+			arg: url1, // open at primary map provider
 			mods: {
-				cmd: { arg: otherUrl },
+				cmd: { arg: url2 }, // open at secondary map provider
 				ctrl: { arg: addressStr }, // copy
 				shift: { arg: coordinates }, // copy
 			},
-			arg: url,
-			variables: { address: addressStr, url: url, coordinates: coordinates }, // for debugging
+
+			// only for debugging
+			variables: { address: addressStr, url1: url1, url2: url2, coordinates: coordinates },
 		};
 	});
 
