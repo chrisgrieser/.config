@@ -2,6 +2,29 @@
 -- DOCS https://cmp.saghen.dev/configuration/reference
 --------------------------------------------------------------------------------
 
+---Choice snippets[^1] work with blink, but leave you with a completion via
+---vim's popupmenu, for which blink does not provide mappings, thus requiring
+---this function
+---[^1]: https://code.visualstudio.com/docs/editing/userdefinedsnippets#_choice
+---@param action "next"|"prev"|"select"
+---@return boolean success (popupmenu was open)
+local function vimPopupmenu(action)
+	if vim.fn.pumvisible() == 0 then return false end
+
+	-- https://neovim.io/doc/user/insert.html#_insert-completion-popup-menu
+	local key
+	if action == "next" then key = "<C-n>" end
+	if action == "prev" then key = "<C-p>" end
+	if action == "confirm" then key = "<C-y>" end
+	-- `feedkey` needed to send keys from insert mode
+	local feedkey = vim.api.nvim_replace_termcodes(key, true, false, true)
+	vim.api.nvim_feedkeys(feedkey, "n", false)
+
+	return true -- `true` -> do not attempts the next command in blink.cmp
+end
+
+--------------------------------------------------------------------------------
+
 ---@module "lazy.types"
 ---@type LazyPluginSpec
 return {
@@ -68,27 +91,23 @@ return {
 		keymap = {
 			-- https://cmp.saghen.dev/configuration/keymap.html
 			preset = "none",
+			["<CR>"] = {
+				function() return vimPopupmenu("select") end,
+				"select_and_accept",
+				"fallback",
+			},
 			["<Tab>"] = {
-				function(_cmp)
-					if vim.fn.pumvisible() == 0 then return end
-					vim.cmd.execute([["normal! \<C-n>"]]) -- next
-					return true -- do not attempts the next command
-				end,
+				function() return vimPopupmenu("next") end,
 				"snippet_forward",
 				"select_next",
 				"fallback",
 			},
 			["<S-Tab>"] = {
-				function(_cmp)
-					if vim.fn.pumvisible() == 0 then return end
-					vim.cmd.execute([["normal! \<C-p>"]]) -- previous
-					return true
-				end,
+				function() return vimPopupmenu("prev") end,
 				"snippet_backward",
 				"select_prev",
 				"fallback",
 			},
-			["<CR>"] = { "select_and_accept", "fallback" },
 			["<S-CR>"] = { "hide" },
 			["<D-c>"] = { "show" },
 			["<PageDown>"] = { "scroll_documentation_down", "fallback" },
