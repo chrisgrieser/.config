@@ -20,7 +20,7 @@ abbr("()", "() =>")
 bkeymap(
 	"n",
 	"<leader>D",
-	function() require("personal-plugins.pretty-ts-error").prettyTsError() end,
+	function() require("personal-plugins.pretty-ts-error").select() end,
 	{ desc = " Pretty ts_ls diagnostic" }
 )
 

@@ -57,7 +57,7 @@ function run(argv) {
 	const /** @type {GeoLocation[]} */ locations = JSON.parse(response).features;
 
 	/** @type {AlfredItem[]} */
-	const items = locations.map((loc) => {
+	const items = locations.map((loc) => { fff
 		const { name, country, state, city, district, locality, postcode, street, housenumber } =
 			loc.properties;
 		const title = name || street + " " + housenumber;
