@@ -377,16 +377,16 @@ Show locations with the `map` keyword.
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<string>http://google.com/maps?q=</string>
+				<string>google_maps</string>
 				<key>pairs</key>
 				<array>
 					<array>
 						<string>Google Maps</string>
-						<string>http://google.com/maps?q=</string>
+						<string>google_maps</string>
 					</array>
 					<array>
 						<string>Apple Maps</string>
-						<string>maps://maps.apple.com?q=</string>
+						<string>apple_maps</string>
 					</array>
 				</array>
 			</dict>
