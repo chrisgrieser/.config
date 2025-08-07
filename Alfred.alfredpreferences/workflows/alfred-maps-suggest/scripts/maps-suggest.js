@@ -42,11 +42,22 @@ function httpRequest(url) {
 
 //──────────────────────────────────────────────────────────────────────────────
 
+
+const mapProvider = {
+	// biome-ignore-start lint/style/useNamingConvention: Alfred standard
+	"google_maps": "http://google.com/maps?q=",
+	"apple_maps": "maps://maps.apple.com?q=",
+	// biome-ignore-end lint/style/useNamingConvention: Alfred standard
+}
+
+
+//──────────────────────────────────────────────────────────────────────────────
+
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run(argv) {
 	const query = (argv[0] || "").trim();
-	const openAtUrl = $.getenv("open_map_at");
+	const openAt = $.getenv("open_map_at");
 	if (!query) return JSON.stringify({ items: [{ title: "Waiting for query…", valid: false }] });
 
 	// DOCS https://photon.komoot.io/
@@ -57,7 +68,7 @@ function run(argv) {
 	const /** @type {GeoLocation[]} */ locations = JSON.parse(response).features;
 
 	/** @type {AlfredItem[]} */
-	const items = locations.map((loc) => { fff
+	const items = locations.map((loc) => {
 		const { name, country, state, city, district, locality, postcode, street, housenumber } =
 			loc.properties;
 		const title = name || street + " " + housenumber;
@@ -74,18 +85,19 @@ function run(argv) {
 
 		const addressStr = address.join(", ");
 		const addressDisplay = address.slice(1).join(", "); // skip name from display
-		const url = openAtUrl + encodeURIComponent(addressStr);
+		const url = openAt + encodeURIComponent(addressStr);
 
 		// SIC osm coordinates are long/lat, even though mapping apps expect
 		// lat/long, thus needs to be reversed
 		const coordinates = loc.geometry.coordinates.reverse().join(",");
 
 		return {
-			title: 5,
+			title: title,
 			subtitle: addressDisplay,
 			mods: {
-				cmd: { arg: addressStr }, // copy
-				ctrl: { arg: coordinates }, // copy
+				cmd: { arg: otherUrl },
+				ctrl: { arg: addressStr }, // copy
+				shift: { arg: coordinates }, // copy
 			},
 			arg: url,
 			variables: { address: addressStr, url: url, coordinates: coordinates }, // for debugging

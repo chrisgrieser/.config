@@ -21,8 +21,7 @@ if vim.env.USING_PASS then
 	vim.keymap.set("n", "S", "v$P", { desc = "Substitute to EoL", buffer = true })
 	vim.keymap.set("n", "<CR>", "ZZ", { desc = "Save and exit", buffer = true })
 else
-	safeRequire("config.lazy") -- loads plugins
-	vim.cmd.colorscheme(vim.o.background == "light" and vim.g.lightColor or vim.g.darkColor)
+	safeRequire("config.lazy") -- load plugins
 end
 
 safeRequire("config.neovide-gui-settings")

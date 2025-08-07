@@ -35,6 +35,12 @@ vim.api.nvim_create_autocmd("OptionSet", {
 	end,
 })
 
+-- 3. set manually, since neovide sets it too slow, resulting in flickering
+if jit.os == "OSX" and vim.g.neovide then
+	local macOSMode = vim.system({ "defaults", "read", "-g", "AppleInterfaceStyle" }):wait()
+	vim.o.background = (macOSMode.stdout or ""):find("Dark") and "dark" or "light"
+end
+
 --------------------------------------------------------------------------------
 -- LSP
 
