@@ -96,3 +96,6 @@ unstaged
 vimscript
 zsh
 idempotency
+vim
+spellfile
+false

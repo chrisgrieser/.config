@@ -1,1 +1,24 @@
-/Users/chrisgrieser/.config/+ linter-configs/jxa/jsconfig.json
+{
+	"compilerOptions": {
+		"checkJs": true, // enable typescript support in JXA files
+		"target": "es2022", // JXA is compliant with most of ECMAScript: https://github.com/JXA-Cookbook/JXA-Cookbook/wiki/ES6-Features-in-JXA
+		"module": "es2022",
+
+		// SOURCE strictest tsconfig 2.0.0 https://github.com/tsconfig/bases/blob/main/bases/strictest.json
+		"strict": true,
+		"allowUnusedLabels": false,
+		"allowUnreachableCode": false,
+		"exactOptionalPropertyTypes": true,
+		"noFallthroughCasesInSwitch": true,
+		"noImplicitOverride": true,
+		"noImplicitReturns": true,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+
+		// disabled
+		"noUncheckedIndexedAccess": false, // *too* strict since it complains about every [0]
+		"noPropertyAccessFromIndexSignature": false // not useful https://stackoverflow.com/a/70748402/22114136
+	},
+
+	"$schema": "https://json.schemastore.org/jsconfig"
+}

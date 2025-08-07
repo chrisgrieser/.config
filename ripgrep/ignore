@@ -4,9 +4,6 @@
 # useless stuff inside pseudo-apps
 **/*.app/*
 
-# Pixalmator container files
-**/*.pxd/*
-
 # Apple builtin databases in home folder
 *.{photos,music,tv}library
 

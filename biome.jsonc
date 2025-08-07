@@ -1,1 +1,76 @@
-+ linter-configs/biome.jsonc
+// INFO This biome config is mostly used for JXA-Javascript in my dotfiles, and
+// for Alfred workflows.
+//──────────────────────────────────────────────────────────────────────────────
+// https://biomejs.dev/reference/configuration/
+// https://biomejs.dev/linter/javascript/rules/
+//──────────────────────────────────────────────────────────────────────────────
+{
+	"linter": {
+		"domains": { "project": "all", "test": "all" },
+
+		// rule update: 2025-07-09
+		"rules": {
+			"nursery": {
+				"noBitwiseOperators": "on",
+				"noConstantBinaryExpression": "on",
+				"noFloatingPromises": "on",
+				"noImplicitCoercion": "on",
+				"useNumericSeparators": "on",
+				"noUselessEscapeInString": "on",
+				"noUselessBackrefInRegex": "on",
+				"noUnassignedVariables": "on",
+				"noTsIgnore": "on",
+				"noShadow": "on",
+				"noProcessGlobal": "on",
+				"noMisusedPromises": "on"
+			},
+			"performance": {
+				"noBarrelFile": "on"
+			},
+			"style": {
+				"useNamingConvention": "on",
+				"useShorthandAssign": "on",
+				"useForOf": "on",
+				"useFilenamingConvention": "on",
+				"useDefaultSwitchClause": "on",
+				"useConsistentArrayType": "on",
+				"useAtIndex": "on",
+				"noYodaExpression": "on",
+				"noUselessElse": "on",
+				"noUnusedTemplateLiteral": "on",
+				"noSubstr": "on",
+				"noProcessEnv": "on",
+				"noNestedTernary": "on",
+				"noInferrableTypes": "on", // typos: ignore-line
+				"useTemplate": "off" // not useful
+			},
+			"suspicious": {
+				"useErrorMessage": "on",
+				"useAwait": "on",
+				"noVar": "on",
+				"noEmptyBlockStatements": "on"
+			},
+			"complexity": {
+				"useWhile": "on",
+				"noUselessStringConcat": "on"
+			},
+			"correctness": {
+				"noUndeclaredVariables": "on"
+			}
+		}
+	},
+	"javascript": {
+		"globals": ["$", "Application", "ObjC", "Path", "delay"] // JXA globals
+	},
+	"formatter": {
+		"useEditorconfig": true,
+		"lineWidth": 100, // needs to be set despite editorconfig https://github.com/biomejs/biome/issues/6475#issuecomment-2994126794
+		"formatWithErrors": true
+	},
+	"files": {
+		"includes": ["**", "!.obsidian/plugins/**/*"], // all files except Obsidian plugins
+		"ignoreUnknown": true
+	},
+	// use the schema from the local biome package installed via `mason`
+	"$schema": "/Users/chrisgrieser/.local/share/nvim/mason/packages/biome/node_modules/@biomejs/biome/configuration_schema.json"
+}

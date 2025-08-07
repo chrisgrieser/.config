@@ -6,6 +6,6 @@ return {
 	on_attach = require("config.utils").detachIfObsidianOrIcloud,
 	init_options = {
 		diagnosticSeverity = "Hint",
-		config = "~/.config/+ linter-configs/global-typos-config.toml",
+		config = vim.fn.stdpath("config") .. "/lsp/typos_lsp_global_config.toml",
 	},
 }

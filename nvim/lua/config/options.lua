@@ -55,7 +55,7 @@ vim.opt.shadafile = vim.g.iCloudSync .. "/main.shada"
 vim.opt.swapfile = false -- doesn't help and only creates useless files and notifications
 
 vim.opt.spell = false
-vim.opt.spellfile = vim.fs.normalize("~/.config/+ linter-configs/spellfile.add") -- needs `.add`
+vim.opt.spellfile = vim.fn.stdpath("config") .. "/spellfile.add" -- needs `.add`
 vim.opt.spelllang = "en_us" -- even with spellcheck disabled, still relevant for `z=`
 vim.opt.spelloptions = "camel"
 
