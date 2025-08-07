@@ -10,7 +10,8 @@
 # 3rd-party workflows, manually marked as such
 /workflows/*\[3rd-Party\]
 
-# these are symlinked multiple times, no need for them to crowd the results
-alfred.d.ts
-jsconfig.json
-jxa-globals.d.ts
+# these are symlinked multiple times, only need to keep the originals on this level
+!/alfred.d.ts
+/workflows/**/alfred.d.ts
+/workflows/**/jsconfig.json
+/workflows/**/jxa-globals.d.ts

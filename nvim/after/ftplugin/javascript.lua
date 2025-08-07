@@ -55,7 +55,7 @@ end, { desc = " Open in regex101" })
 
 bkeymap("n", "<leader>D", function()
 	local config = {
-		formatterArgs = { "biome", "format", "--stdin-file-name", "stdin.ts" },
+		formatterArgs = { "biome", "format", "--stdin-file-path=stdin.ts" },
 	}
 
 	local notifyOpts = { icon = "", title = "ts_ls" }
@@ -80,10 +80,9 @@ bkeymap("n", "<leader>D", function()
 		local isCodeBlock = line:find("^{.+[]}]$") ~= nil
 		if isCodeBlock then
 			line = "type dummy = " .. line
-			local stdout = vim.system(config.formatterArgs, { stdin = line }):wait().stdout
-			assert(stdout, config.formatterArgs[1] .. " failed.")
-			local formatted = vim.trim(stdout:gsub("^type dummy = ", ""))
-			Chainsaw(formatted) -- 🪚
+			local out = vim.system(config.formatterArgs, { stdin = line }):wait()
+			assert(out.stdout and out.code == 0, "Formatter failed. " .. out.stderr)
+			local formatted = vim.trim(out.stdout:gsub("^type dummy = ", ""))
 			vim.list_extend(acc, vim.split(formatted, "\n"))
 		else
 			table.insert(acc, line)
