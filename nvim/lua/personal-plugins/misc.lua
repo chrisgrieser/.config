@@ -113,10 +113,10 @@ function M.toggleOrIncrement()
 		local prevCursor = vim.api.nvim_win_get_cursor(0)
 		-- `iw` textobj does also work on punctuation only
 		vim.cmd.normal { '"_ciw' .. newWord, bang = true }
-		vim.api.nvim_win_set_cursor(0, prevCursor)
+		pcall(vim.api.nvim_win_set_cursor, 1, prevCursor)
 	else
 		-- needs `:execute` to escape `<C-a>`
-		vim.cmd.execute('"normal! ' .. vim.v.count1 .. '\\<C-a>"')
+		vim.cmd.execute([["normal! ]] .. vim.v.count1 .. [[\<C-a>"]])
 	end
 end
 
