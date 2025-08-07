@@ -62,18 +62,39 @@ bkeymap("n", "<leader>D", function()
 	end
 
 	-- EXAMPLE
-	-- Type '{ title: number; subtitle: string; mods: { cmd: { arg: string; };
-	-- ctrl: { arg: string; }; }; arg: string; variables: { address: string; url:
-	-- string; coordinates: string; }; }[]' is not assignable to type
-	-- 'AlfredItem[]'.
+	-- Type '{ title: number; subtitle: string; mods: { cmd: { arg: string; }; ctrl: { arg: string; }; }; arg: string; variables: { address: string; url: string; coordinates: string; }; }[]' is not assignable to type 'AlfredItem[]'.
 
 	local msg = diag
 		.message
 		:gsub("'{", "\n```js\n{") -- codeblock start
-		:gsub("(}%[?]?)'", "%1\n```\n\n") -- codeblock end
+		:gsub("(}%[?]?)'", "%1\n```\n") -- codeblock end
 		:gsub("'", "`") -- single word
-		:gsub("'", "`") -- single word
+		:gsub("\n +", "\n") -- remove indents
+		:gsub("\nType", "\n- Type") -- add bullets
+		:gsub("^Type", "\n- Type") -- add bullets
 
-	local lines = vim.split(msg, "\n")
-	vim.lsp.util.open_floating_preview(lines, "markdown", {})
-end, { desc = " Inspect ts_ls diagnostic" })
+	local lines = vim.iter(vim.split(msg, "\n"))
+		:fold({}, function(acc, line)
+			local isCodeBlock = line:find("^{.+[]}]$") ~= nil
+			if isCodeBlock then
+				-- local formattedLines = vim.
+			else
+				table.insert(acc, line)
+			end
+			return acc
+		end)
+		:totable()
+
+	vim.tbl_map(function(line)
+		local isCodeBlock = line:find("^{.+[}%]$") ~= nil
+		if isCodeBlock then
+		end
+		return line
+	end, vim.split(msg, "\n"))
+
+	local _bufnr, winid = vim.lsp.util.open_floating_preview(lines, "markdown")
+	vim.api.nvim_win_set_config(winid, {
+		title = (" %s %s "):format(diag.source, diag.code),
+		title_pos = "center",
+	})
+end, { desc = " Pretty ts_ls diagnostic" })
