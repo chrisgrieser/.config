@@ -1,6 +1,6 @@
 // @ts-nocheck // using pure javascript without the whole toolchain here
 //──────────────────────────────────────────────────────────────────────────────
-// biome-ignore lint: unneeded since available in Obsidian 
+// biome-ignore lint/correctness/noUndeclaredDependencies: okay, since only mini-plugin
 const obsidian = require("obsidian");
 //──────────────────────────────────────────────────────────────────────────────
 

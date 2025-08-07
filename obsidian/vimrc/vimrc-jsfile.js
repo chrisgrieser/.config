@@ -162,7 +162,7 @@ function cycleListTypes() {
 	let updatedLine = curLine.replace(/^(\s*)([-*+>#.)[\]\d x]+) /, (_, indent, list) => {
 		if (list.match(/^[-*+](?! \[)/)) return indent + "- [ ] "; // list -> open task
 		if (list.startsWith("- [")) return indent + "1. "; // open task -> ordered
-		if (list.match(/\d/)) return indent + ""; // ordered -> none
+		if (list.match(/\d/)) return indent; // ordered -> none
 		return ""; // other -> none
 	});
 	if (updatedLine === curLine) updatedLine = "- " + curLine; // none -> list

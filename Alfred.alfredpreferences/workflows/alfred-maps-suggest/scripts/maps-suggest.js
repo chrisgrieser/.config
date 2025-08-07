@@ -80,9 +80,8 @@ function run(argv) {
 		// lat/long, thus needs to be reversed
 		const coordinates = loc.geometry.coordinates.reverse().join(",");
 
-
 		return {
-			title: 2,
+			title: title,
 			subtitle: addressDisplay,
 			mods: {
 				cmd: { arg: addressStr }, // copy

@@ -15,7 +15,7 @@ vim.g.useEmmylua = false
 vim.g.lightColor = "dawnfox"
 vim.g.darkColor = "tokyonight"
 
--- 1. tell neovide to sync `background` with system dark mode 
+-- 1. tell neovide to sync `background` with system dark mode
 -- (terminal already does so by default)
 vim.g.neovide_theme = "auto"
 
@@ -215,11 +215,14 @@ vim.diagnostic.config {
 			local msg = diag.message:gsub("%.$", "")
 			return msg
 		end,
-		-- 1. add `BufLeave` to fix window persisting when switching buffer
-		-- 2. leave out "TextChangedI" to continue showing diagnostics while typing
-		close_events = { "CursorMoved", "TextChangedI", "BufLeave" },
+		focusable = true,
+		close_events = {
+			"CursorMoved",
+			"TextChanged", -- leave out "TextChangedI" to continue showing diagnostics while typing
+			"BufLeave", -- fix window persisting when switching buffer
+			"LspDetach", -- fix window persisting when restarting LSP
+		},
 	},
 }
-
 
 --------------------------------------------------------------------------------
