@@ -50,3 +50,22 @@ bkeymap("n", "g/", function()
 	tsSelect.select_textobject("@regex.inner", "textobjects") -- reselect for easier pasting
 	require("rip-substitute.open-at-regex101").open(data)
 end, { desc = " Open in regex101" })
+
+--------------------------------------------------------------------------------
+
+bkeymap("n", "<leader>D", function()
+	local notifyOpts = { icon = "", title = "ts_ls" }
+	local diag = vim.diagnostic.get_next()
+	if not diag or diag.source ~= "typescript" then
+		vim.notify("No diagnostic found.", vim.log.levels.WARN, notifyOpts)
+		return
+	end
+
+	-- EXAMPLE
+	-- Type '{ title: number; subtitle: string; mods: { cmd: { arg: string; };
+	-- ctrl: { arg: string; }; }; arg: string; variables: { address: string; url:
+	-- string; coordinates: string; }; }[]' is not assignable to type
+	-- 'AlfredItem[]'.
+
+	vim.notify(diag.message, nil, notifyOpts)
+end, { desc = " Inspect ts_ls diagnostic" })

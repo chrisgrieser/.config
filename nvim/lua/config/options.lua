@@ -180,9 +180,6 @@ vim.opt.fillchars:append {
 
 vim.diagnostic.config {
 	severity_sort = true,
-	jump = {
-		float = true,
-	},
 	signs = {
 		text = { "󰅚 ", " ", "󰋽 ", "󰌶 " }, -- Error, Warn, Info, Hint
 	},
@@ -202,6 +199,9 @@ vim.diagnostic.config {
 			return (" [%s]"):format(codeOrSource:gsub("%.$", ""))
 		end,
 	},
+	jump = {
+		float = true,
+	},
 	float = {
 		max_width = 70,
 		header = "",
@@ -212,17 +212,30 @@ vim.diagnostic.config {
 			return " " .. source .. code, "Comment"
 		end,
 		format = function(diag)
-			local msg = diag.message:gsub("%.$", "")
+			local msg = diag.message
+			if diag.source == "lua_ls" then msg = msg:gsub("%.$", "") end
+			if diag.source == "typescript" then msg = msg:gsub("'", "`") end -- ts_ls
 			return msg
 		end,
-		focusable = true,
+		focusable = true, -- allow entering float
 		close_events = {
 			"CursorMoved",
 			"TextChanged", -- leave out "TextChangedI" to continue showing diagnostics while typing
-			"BufLeave", -- fix window persisting when switching buffer
+			"BufHidden", -- fix window persisting on buffer switch (not `BufLeave` so float can be entered)
 			"LspDetach", -- fix window persisting when restarting LSP
 		},
 	},
 }
+
+vim.api.nvim_create_autocmd("WinNew", {
+	desc = "User: ",
+	callback = function(ctx)
+		vim.defer_fn(function ()
+			local floatWinId = vim.b.lsp_floating_preview
+			Chainsaw(floatWinId) -- 🪚
+		end, 1)
+	end,
+})
+fsfs
 
 --------------------------------------------------------------------------------

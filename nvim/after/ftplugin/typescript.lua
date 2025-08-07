@@ -1,13 +1,13 @@
-local bkeymap = require("config.utils").bufKeymap
---------------------------------------------------------------------------------
-
--- inherit all javascript settings
+-- SOURCE inherit all javascript settings
 vim.cmd.source(vim.fn.stdpath("config") .. "/after/ftplugin/javascript.lua")
+--------------------------------------------------------------------------------
 
 -- sets `errorformat` for quickfix-list
 vim.cmd.compiler("tsc")
 
 --------------------------------------------------------------------------------
+
+local bkeymap = require("config.utils").bufKeymap
 
 -- custom formatting function to run code actions before running `biome`
 bkeymap("n", "<D-s>", function()
@@ -20,6 +20,7 @@ bkeymap("n", "<D-s>", function()
 		vim.defer_fn(
 			function()
 				vim.lsp.buf.code_action {
+					---@diagnostic disable-next-line: missing-fields, assign-type-mismatch
 					context = { only = { actions[i] } },
 					apply = true,
 				}

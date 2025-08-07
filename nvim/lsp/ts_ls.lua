@@ -8,20 +8,13 @@ local config = {
 			importModuleSpecifierPreference = "non-relative",
 		},
 	},
-	handlers = {
-		["textDocument/publishDiagnostics"] = function(_, result, ctx, _config)
-			-- remove "File is a CommonJS module; it may be converted to an ES module."
-			result.diagnostics = vim.iter(result.diagnostics)
-				:filter(function(diag) return diag.code ~= 80001 end)
-				:totable()
-
-			vim.lsp.diagnostic.on_publish_diagnostics(_, result, ctx)
-		end,
-	},
 	settings = {
-		-- "Cannot re-declare block-scoped variable" -> not useful for single-file-JXA
-		-- (biome works only on single-file and so already checks for unintended re-declarations.)
-		diagnostics = { ignoredCodes = { 2451 } },
+		diagnostics = {
+			ignoredCodes = {
+				-- 2451, -- "Cannot re-declare block-scoped variable" -> not useful for single-file-JXA
+				80001, -- "File is a CommonJS module; it may be converted to an ES module."
+			},
+		},
 
 		typescript = {
 			inlayHints = {

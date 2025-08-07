@@ -1,6 +1,5 @@
 -- When opening a file with neovide and lazy.nvim opens the startup install
--- window, this is needed to prevent an error, not exactly sure why it works
--- though
+-- window, this is needed to prevent an error, not exactly sure why it works though
 if vim.g.neovide then
 	vim.api.nvim_create_autocmd("FileType", {
 		desc = "User: winfixbuf for lazy window",
