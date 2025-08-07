@@ -67,5 +67,13 @@ bkeymap("n", "<leader>D", function()
 	-- string; coordinates: string; }; }[]' is not assignable to type
 	-- 'AlfredItem[]'.
 
-	vim.notify(diag.message, nil, notifyOpts)
+	local msg = diag
+		.message
+		:gsub("'{", "\n```js\n{") -- codeblock start
+		:gsub("(}%[?]?)'", "%1\n```\n\n") -- codeblock end
+		:gsub("'", "`") -- single word
+		:gsub("'", "`") -- single word
+
+	local lines = vim.split(msg, "\n")
+	vim.lsp.util.open_floating_preview(lines, "markdown", {})
 end, { desc = " Inspect ts_ls diagnostic" })
