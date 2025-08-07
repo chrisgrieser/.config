@@ -525,9 +525,3 @@ keymap("n", "<leader>ol", function()
 end, { desc = "󰑓 LSPs restart" })
 
 --------------------------------------------------------------------------------
-
--- TEMP
-keymap("n", "<leader>x", function()
-	local foobar = "Hello World"
-	Chainsaw(foobar)
-end)

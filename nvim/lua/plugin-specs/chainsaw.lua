@@ -20,7 +20,7 @@ return {
 				lua = 'assert({{var}}, "{{insert}}")', -- no marker, since intended to be permanent
 			},
 			objectLog = { -- re-purposing `objectLog` for alternative log statements for these
-				-- typescript = "new Notice(`{{marker}} {{var}}: ${{var}}`, 0)", -- Obsidian Notice
+				typescript = "new Notice(`{{marker}} {{var}}: ${{var}}`, 0)", -- Obsidian Notice
 				zsh = 'osascript -e "display notification \\"{{marker}} ${{var}}\\" with title \\"{{var}}\\""',
 				nvim_lua = "print({{var}}) -- {{marker}}", -- print statement for snacks scratch buffer
 				lua = 'hs.alert.show("{{marker}} {{var}}: " .. hs.inspect({{var}}))', -- Hammerspoon alert
