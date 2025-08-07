@@ -525,10 +525,3 @@ keymap("n", "<leader>ol", function()
 end, { desc = "󰑓 LSPs restart" })
 
 --------------------------------------------------------------------------------
-
-vim.api.nvim_create_autocmd("BufLeave", {
-	desc = "User: ",
-	callback = function(ctx)
-
-	end,
-})
