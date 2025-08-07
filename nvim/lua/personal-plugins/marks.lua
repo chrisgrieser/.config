@@ -119,7 +119,7 @@ function M.cycleMarks()
 	else
 		vim.api.nvim_set_current_buf(nextMark.bufnr)
 	end
-	local success = pcall(vim.api.nvim_win_set_cursor,0, { nextMark.row, nextMark.col })
+	local success = pcall(vim.api.nvim_win_set_cursor, 0, { nextMark.row, nextMark.col })
 	if success then
 		vim.cmd.normal { "zv", bang = true } -- open folds at cursor
 	else

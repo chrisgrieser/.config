@@ -16,7 +16,7 @@ abbr("fi", "end")
 ---@param sign "+"|"-"
 local function plusPlusMinusMinus(sign)
 	local row, col = vim.api.nvim_win_get_cursor(0)[1], vim.api.nvim_win_get_cursor(0)[2] or 0
-	local textBeforeCursor = vim.api.nvim_get_current_line():sub(col or 0 - 1, col)
+	local textBeforeCursor = vim.api.nvim_get_current_line():sub(col - 1, col)
 	if not textBeforeCursor:find("[%w_]%" .. sign) then
 		vim.api.nvim_feedkeys(sign, "n", true) -- pass through the trigger char
 	else
@@ -35,11 +35,18 @@ bkeymap("i", "-", function() plusPlusMinusMinus("-") end, { desc = "i--  i = 
 bkeymap("n", "<D-S>", function()
 	vim.cmd("silent! update")
 	-- for the exit code and the summary only, does perform the formatting itself
-	local out = vim.system({ "stylua", "--check", "--output-format=summary", "." }):wait()
+	local out = vim.system({
+		"stylua",
+		"--search-parent-directories",
+		"--check",
+		"--output-format=summary",
+		".",
+	}):wait()
 
 	local msg = assert(out.stdout):gsub("^.-\n", "") -- remove first line ("! Checking formatting")
 	if out.code ~= 0 then
-		out = vim.system({ "stylua", "." }):wait() -- does the actual formatting
+		-- does the actual formatting
+		out = vim.system({ "stylua", "--search-parent-directories", "." }):wait()
 		vim.cmd.checktime() -- reload changes in buffer
 		msg = msg .. "Files formatted."
 	end

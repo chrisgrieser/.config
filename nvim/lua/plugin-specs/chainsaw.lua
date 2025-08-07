@@ -43,14 +43,13 @@ return {
 		})
 	end,
 	init = function(spec)
+		vim.g.whichkeyAddSpec { "<leader>l", group = spec.opts.visuals.icon .. " Log" }
+
 		-- lazyload `nvim-chainsaw` only when `Chainsaw` function is called
 		_G.Chainsaw = function(name) ---@diagnostic disable-line: duplicate-set-field
 			require("chainsaw") -- loading nvim-chainsaw will override `_G.Chainsaw`
 			Chainsaw(name) -- call original function
 		end
-
-		local icon = spec.opts.visuals.icon
-		vim.g.whichkeyAddSpec { "<leader>l", group = icon .. " Log" }
 	end,
 	keys = {
 		{
@@ -77,7 +76,6 @@ return {
 			mode = { "n", "x" },
 			desc = "󰜀 type",
 		},
-		-- stylua: ignore end
 		{ "<leader>lm", function() require("chainsaw").messageLog() end, desc = "󰍩 message" },
 		{ "<leader>le", function() require("chainsaw").emojiLog() end, desc = " emoji" },
 		{ "<leader>ls", function() require("chainsaw").sound() end, desc = "󱄠 sound" },
@@ -85,9 +83,7 @@ return {
 		{ "<leader>ld", function() require("chainsaw").debugLog() end, desc = "󰃤 debugger" },
 		{ "<leader>lS", function() require("chainsaw").stacktraceLog() end, desc = " stacktrace" },
 		{ "<leader>lc", function() require("chainsaw").clearLog() end, desc = "󰃢 clear console" },
-
-		-- stylua: ignore start
-		{ "<leader>lr", function() require("chainsaw").removeLogs() end, mode = {"n","x"}, desc = "󰅗 remove logs" },
+		{ "<leader>lr", function() require("chainsaw").removeLogs() end, desc = "󰅗 remove logs" },
 		{
 			"<leader>lg",
 			function()

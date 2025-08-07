@@ -6,7 +6,7 @@
 ---vim's popupmenu, for which blink does not provide mappings, thus requiring
 ---this function
 ---[^1]: https://code.visualstudio.com/docs/editing/userdefinedsnippets#_choice
----@param action "next"|"prev"|"select"
+---@param action "next"|"prev"|"select"|"select_and_snippet_forward"
 ---@return boolean success (popupmenu was open)
 local function vimPopupmenu(action)
 	if vim.fn.pumvisible() == 0 then return false end
@@ -15,10 +15,12 @@ local function vimPopupmenu(action)
 	local key
 	if action == "next" then key = "<C-n>" end
 	if action == "prev" then key = "<C-p>" end
-	if action == "confirm" then key = "<C-y>" end
+	if action:find("select") then key = "<C-y>" end
 	-- `feedkey` needed to send keys from insert mode
 	local feedkey = vim.api.nvim_replace_termcodes(key, true, false, true)
 	vim.api.nvim_feedkeys(feedkey, "n", false)
+
+	if action:find("snippet_forward") then vim.schedule(function() vim.snippet.jump(1) end) end
 
 	return true -- `true` -> do not attempts the next command in blink.cmp
 end
@@ -92,7 +94,7 @@ return {
 			-- https://cmp.saghen.dev/configuration/keymap.html
 			preset = "none",
 			["<CR>"] = {
-				function() return vimPopupmenu("select") end,
+				function() return vimPopupmenu("select_and_snippet_forward") end,
 				"select_and_accept",
 				"fallback",
 			},
