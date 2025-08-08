@@ -30,8 +30,9 @@ if [[ $success -eq 0 ]]; then
 	notify "✅ Download finished" "$url"
 else
 	# output via Alfred Markdown view
-	echo "## ❌ Download failed"
-	echo
-  # adds two spaces after each line for markdown linebreak
-  echo "${msg}  "
+	echo "### ❌ Download failed"
+	# shellcheck disable=2001 # not applicable here
+	echo "$msg" | 
+		sed 's/$/  /g' | # add two trailing spaces for markdown linebreak
+		sed -e 's/\[/**[/g' -e 's/\]/]**/g' -Ee "s/(ERROR|WARNING):/**&**/" # bold formatting
 fi
