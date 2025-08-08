@@ -8,6 +8,9 @@ local pathw = hs.pathwatcher.new
 
 -- CONFIG
 local browserConfigs = home .. "/.config/browser-extension-configs/"
+local backupFolder = home .. "/Library/Mobile Documents/com~apple~CloudDocs/Backups/"
+
+--------------------------------------------------------------------------------
 
 M.pathw_desktop = pathw(home .. "/Desktop/", function(paths, _)
 	if not u.screenIsUnlocked() then return end -- prevent iCloud sync triggering in standby
@@ -49,10 +52,12 @@ M.pathw_desktop = pathw(home .. "/Desktop/", function(paths, _)
 			success, errmsg = os.rename(path, browserConfigs .. "vimium-c-settings.json")
 			if success then u.notify("✅ Vimium-c settings backed up.") end
 		elseif name:find("Inoreader Feeds .*%.xml") then
-			local backupPath = home
-				.. "/Library/Mobile Documents/com~apple~CloudDocs/Backups/Inoreader Feeds.opml"
 			success, errmsg = os.rename(path, backupPath)
 			if success then u.notify("✅ Inoreader feeds backed up.") end
+		elseif name:find("Catch$.xml") then
+			local backupPath = home .. "/Library/Mobile Documents/com~apple~CloudDocs/Backups/"
+			success, errmsg = os.rename(path, backupPath)
+			if success then u.notify("✅ Catch feeds backed up.") end
 		elseif name == "obsidian-web-clipper-settings.json" then
 			success, errmsg = os.rename(path, browserConfigs .. name)
 			if success then u.notify("✅ Obsidian web clipper settings backed up.") end
