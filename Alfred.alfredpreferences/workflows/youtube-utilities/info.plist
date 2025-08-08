@@ -94,7 +94,7 @@
 				<key>keyword</key>
 				<string>wl</string>
 				<key>subtext</key>
-				<string></string>
+				<string>Current {var:browser_app} tab</string>
 				<key>text</key>
 				<string>🕔 Watch Later</string>
 				<key>withspace</key>
@@ -153,7 +153,7 @@
 				<key>keyword</key>
 				<string>ydl</string>
 				<key>subtext</key>
-				<string>Browser tab</string>
+				<string>Current {var:browser_app} tab</string>
 				<key>text</key>
 				<string>⬇️ Download with youtube-dl</string>
 				<key>withspace</key>
@@ -276,7 +276,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>errors only</string>
 			<key>xpos</key>
-			<real>375</real>
+			<real>380</real>
 			<key>ypos</key>
 			<real>325</real>
 		</dict>
@@ -336,13 +336,34 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>Where Watch Later Links will be stored</string>
+			<string>Where Watch-Later links are saved</string>
 			<key>label</key>
-			<string>Watch Later Folder</string>
+			<string>Watch-Later folder</string>
 			<key>type</key>
 			<string>filepicker</string>
 			<key>variable</key>
 			<string>youtube_link_folder</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>~/Downloads</string>
+				<key>filtermode</key>
+				<integer>1</integer>
+				<key>placeholder</key>
+				<string>~/Downloads</string>
+				<key>required</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>Takes priority over `--paths="home:…"` in the yt-dlp config.</string>
+			<key>label</key>
+			<string>Download folder</string>
+			<key>type</key>
+			<string>filepicker</string>
+			<key>variable</key>
+			<string>download_folder</string>
 		</dict>
 		<dict>
 			<key>config</key>
