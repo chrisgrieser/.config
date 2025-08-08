@@ -30,7 +30,6 @@ else
 	bun cli
 fi
 
-
 # move export
 datestamp=$(date +"%Y-%m-%d")
 bkp_folder="$bkp_destination/tvtime_$datestamp"

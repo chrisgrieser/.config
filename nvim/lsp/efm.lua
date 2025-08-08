@@ -46,10 +46,10 @@ local efmConfig = {
 		},
 		-- auto-fixing via shellcheck, replaces `shellharden`
 		-- https://github.com/koalaman/shellcheck/issues/1220#issuecomment-594811243
-		{
-			formatCommand = "shellcheck '${INPUT}' --shell=bash --format=diff - | patch -p1 '${INPUT}' && cat '${INPUT}'",
-			formatStdin = false,
-		},
+		-- {
+		-- 	formatCommand = "shellcheck '${INPUT}' --shell=bash --format=diff - | patch -p1 '${INPUT}' && cat '${INPUT}'",
+		-- 	formatStdin = false,
+		-- },
 	},
 }
 
