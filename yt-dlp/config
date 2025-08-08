@@ -7,7 +7,12 @@
 --retries=1
 
 # file system
+--paths="temp:~/Movies" # temporary `.part` files
+--paths="home:~/RomComs/-new" # finished files
+
+# file name
 --trim-filenames=60
---paths="temp:$HOME/Movies" # store temporary `.part` files
---paths="home:$HOME/Desktop" # finished files
+--replace-in-metadata "title" "FULL SCENE" "" # remove "HD" from title (regex supported)
 --output "%(title)s.%(ext)s" # https://github.com/yt-dlp/yt-dlp#output-template
+
+# --exec "~/.config/yt-dlp/post-processing.sh {}"
