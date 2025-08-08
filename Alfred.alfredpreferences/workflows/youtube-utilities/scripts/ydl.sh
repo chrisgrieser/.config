@@ -10,6 +10,7 @@ function notify {
 # cannot use JXA to get browser URL, since sometimes a PWA is frontmost
 # shellcheck disable=2154 # alfred var
 url=$(osascript -e "tell application \"$browser_app\" to return URL of active tab of front window")
+title=$(osascript -e "tell application \"$browser_app\" to return title of active tab of front window")
 
 if [[ -z "$url" ]]; then
 	notify "❌ Tab could not be retrieved."
@@ -21,18 +22,20 @@ fi
 
 #───────────────────────────────────────────────────────────────────────────────
 # DOWNLOAD
-notify "⏳ Downloading…" "$url"
+notify "⏳ Downloading…" "$title"
 
 # shellcheck disable=2154 # Alfred var
-msg=$(yt-dlp --no-progress --paths="home:$download_folder" "$url" 2>&1)
+iso_date=$(date +%Y-%m-%d)
+yt-dlp --quiet --progress --paths="home:$download_folder" "$url" \
+	1> "$alfred_workflow_cache/stdout" 2> "$alfred_workflow_cache/stderr"
 success=$?
+
 if [[ $success -eq 0 ]]; then
 	notify "✅ Download finished" "$url"
 else
 	# output via Alfred Markdown view
 	echo "### ❌ Download failed"
-	# shellcheck disable=2001 # not applicable here
-	echo "$msg" | 
-		sed 's/$/  /g' | # add two trailing spaces for markdown linebreak
-		sed -e 's/\[/**[/g' -e 's/\]/]**/g' -Ee "s/(ERROR|WARNING):/**&**/" # bold formatting
+	cat "$alfred_workflow_cache/stderr" |
+		# markdown formatting: bold & two trailing spaces for linebreak
+		sed -e 's/$/  /g' -e 's/\[/**[/g' -e 's/\]/]**/g' -Ee "s/(ERROR|WARNING):/**&**/"
 fi
