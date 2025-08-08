@@ -24,10 +24,14 @@ fi
 # DOWNLOAD
 notify "⏳ Downloading…" "$title"
 
+id=$(date +%Y-%m-%d_%H-%M-%S)
+
 # shellcheck disable=2154 # Alfred var
-iso_date=$(date +%Y-%m-%d)
-yt-dlp --quiet --progress --paths="home:$download_folder" "$url" \
-	1> "$alfred_workflow_cache/stdout" 2> "$alfred_workflow_cache/stderr"
+cache="$alfred_workflow_cache"
+# shellcheck disable=2154 # Alfred var
+yt-dlp --quiet --paths="home:$download_folder" "$url" \
+	--progress --no-color --newline --progress-template="" \
+	1> "$cache/$id.stdout" 2> "$cache/$id.stderr"
 success=$?
 
 if [[ $success -eq 0 ]]; then
@@ -35,7 +39,11 @@ if [[ $success -eq 0 ]]; then
 else
 	# output via Alfred Markdown view
 	echo "### ❌ Download failed"
-	cat "$alfred_workflow_cache/stderr" |
+	cat "$cache/$id.stderr" |
 		# markdown formatting: bold & two trailing spaces for linebreak
 		sed -e 's/$/  /g' -e 's/\[/**[/g' -e 's/\]/]**/g' -Ee "s/(ERROR|WARNING):/**&**/"
 fi
+
+# this way, each `.stdout` file represents one ongoing download
+rm -f "$cache/$id.stderr"
+rm -f "$cache/$id.stdout"
