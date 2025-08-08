@@ -35,18 +35,7 @@
 			</dict>
 		</array>
 		<key>77FF34ED-C1A2-4866-B205-06B792B3975B</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>C7716DBE-2C15-46FC-A1E7-1A722EA60267</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
+		<array/>
 		<key>7EC8C18F-E353-4A93-9F40-FDB4C9531D57</key>
 		<array>
 			<dict>
@@ -60,8 +49,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>C7716DBE-2C15-46FC-A1E7-1A722EA60267</key>
-		<array/>
 		<key>CCFB402E-C80D-4E73-B298-0A4D03E51617</key>
 		<array>
 			<dict>
@@ -79,7 +66,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>C7716DBE-2C15-46FC-A1E7-1A722EA60267</string>
+				<string>5716CA0D-01FB-4FD1-AF7F-7E87C3325C54</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -161,27 +148,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string></string>
-				<key>title</key>
-				<string>{query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>C7716DBE-2C15-46FC-A1E7-1A722EA60267</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>argumenttype</key>
 				<integer>1</integer>
 				<key>keyword</key>
@@ -222,6 +188,39 @@
 			<string>F30AA24D-259D-4D2C-80C9-06B5EA576F7C</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>behaviour</key>
+				<integer>2</integer>
+				<key>fontmode</key>
+				<integer>0</integer>
+				<key>fontsizing</key>
+				<integer>0</integer>
+				<key>footertext</key>
+				<string></string>
+				<key>inputfile</key>
+				<string></string>
+				<key>inputtype</key>
+				<integer>0</integer>
+				<key>loadingtext</key>
+				<string></string>
+				<key>outputmode</key>
+				<integer>0</integer>
+				<key>scriptinput</key>
+				<integer>0</integer>
+				<key>spellchecking</key>
+				<integer>0</integer>
+				<key>stackview</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.userinterface.text</string>
+			<key>uid</key>
+			<string>5716CA0D-01FB-4FD1-AF7F-7E87C3325C54</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -270,6 +269,17 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>25</real>
 		</dict>
+		<key>5716CA0D-01FB-4FD1-AF7F-7E87C3325C54</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>1</integer>
+			<key>note</key>
+			<string>errors only</string>
+			<key>xpos</key>
+			<real>375</real>
+			<key>ypos</key>
+			<real>325</real>
+		</dict>
 		<key>77FF34ED-C1A2-4866-B205-06B792B3975B</key>
 		<dict>
 			<key>colorindex</key>
@@ -289,15 +299,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>40</real>
 			<key>ypos</key>
 			<real>270</real>
-		</dict>
-		<key>C7716DBE-2C15-46FC-A1E7-1A722EA60267</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>xpos</key>
-			<real>395</real>
-			<key>ypos</key>
-			<real>215</real>
 		</dict>
 		<key>CCFB402E-C80D-4E73-B298-0A4D03E51617</key>
 		<dict>

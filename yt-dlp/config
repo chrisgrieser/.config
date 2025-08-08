@@ -2,6 +2,12 @@
 # DOCS https://www.mankier.com/1/yt-dlp#Configuration
 #──────────────────────────────────────────────────────────────────────────────#
 
---trim-filenames=60
+# download
 --limit-rate=3M
---paths="temp:$HOME/Movies/"
+--retries=1
+
+# file system
+--trim-filenames=60
+--paths="temp:$HOME/Movies" # store temporary `.part` files
+--paths="home:$HOME/Desktop" # finished files
+--output "%(title)s.%(ext)s" # https://github.com/yt-dlp/yt-dlp#output-template

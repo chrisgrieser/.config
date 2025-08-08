@@ -1,14 +1,14 @@
 #!/bin/zsh
-# shellcheck disable=2154 # alfred vars
 
 function notify {
-	./notificator --title "yt-dlp" --message "$1" --subtitle "$2"
+	./notificator --title "yt-dlp" --subtitle "$2" --message "$1"
 	[[ "$1" =~ "❌" ]] && afplay "/System/Library/Sounds/Basso.aiff" &
 }
 
 #───────────────────────────────────────────────────────────────────────────────
 
 # cannot use JXA to get browser URL, since sometimes a PWA is frontmost
+# shellcheck disable=2154 # alfred var
 url=$(osascript -e "tell application \"$browser_app\" to return URL of active tab of front window")
 
 if [[ -z "$url" ]]; then
@@ -23,18 +23,17 @@ fi
 # DOWNLOAD
 notify "⏳ Starting Download…" "$url"
 
-# GUARD in case the download folder has not been set by the user, save files in
-# `/tmp/` instead of the folder of this Alfred workflow.
+# GUARD in case the download folder has not been set in `.config/yt-dlp/config`,
+# save files in `/tmp/` instead of the folder of this Alfred workflow.
 cd "/tmp/" || return 1
 
 msg=$(yt-dlp --quiet "$url")
 success=$?
-
 if [[ $success -eq 0 ]]; then
 	notify "✅ Download finished."
-elif [[ ! "$(yt-dlp --update)" =~ "up to date" ]]; then
-	notify "ℹ️ yt-dlp not up to date."
-	echo -n "brew update && brew upgrade yt-dlp" | pbcopy
 else
-	notify "❌ $msg"
+	# output via Alfred Markdown view
+	echo "## ❌ Download failed"
+	echo "$url"
+	echo "$msg"
 fi
