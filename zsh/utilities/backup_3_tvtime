@@ -1,36 +1,37 @@
 #!/usr/bin/env zsh
 
 # CONFIG
+repo="https://github.com/Hobo-Ware/tv-time-liberator"
+
 envfile_with_login="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/private dotfiles/tvtime-liberator.txt"
-bkp_destination="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Backups/watchlists/"
+bkp_destination="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Backups/TV Time/"
 
 #───────────────────────────────────────────────────────────────────────────────
 set -e
 
 # clone
-repo="https://github.com/Hobo-Ware/tv-time-liberator"
 repo_dir="/tmp/$(basename "$repo" .git)"
 rm -rf "$repo_dir"
 git clone --no-progress --depth=2 "$repo" "$repo_dir"
 cd "$repo_dir"
 ln -s "$envfile_with_login" ".env"
 
-# bun
+# run (and install bun before if needed)
 if [[ ! -x "$(command -v bun)" ]]; then
 	brew install oven-sh/bun/bun
 	bun install
 	print "\n---"
-	bun cli
+	bun cli # = run command
 	print "\n---"
 	brew uninstall oven-sh/bun/bun
 	brew untap oven-sh/bun
 	rm -rf "$HOME/.bun" # cache stuff
 else
 	bun install
-	bun cli
+	bun cli # = run command
 fi
 
-# move export
+# move the export
 datestamp=$(date +"%Y-%m-%d")
 bkp_folder="$bkp_destination/tvtime_$datestamp"
 output_folder="$(find ".export" -type d -mindepth 1 | head -n1)"
