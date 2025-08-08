@@ -9,7 +9,7 @@
 
 # FILE SYSTEM
 --paths="temp:~/Movies" # temporary `.part` files
---paths="home:~/Desktop"
+--paths="home:~/Desktop" # default download location
 
 # FILE NAME
 --trim-filenames=60

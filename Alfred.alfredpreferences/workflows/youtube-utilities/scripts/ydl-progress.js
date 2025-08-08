@@ -4,31 +4,31 @@ const app = Application.currentApplication();
 app.includeStandardAdditions = true;
 //──────────────────────────────────────────────────────────────────────────────
 
-/** @param {string} path */
-function readFile(path) {
-	const data = $.NSFileManager.defaultManager.contentsAtPath(path);
-	const str = $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding);
-	return ObjC.unwrap(str);
-}
-
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
-	const progressFile = $.getenv("alfred_workflow_cache") + "/stdout"
-	const progressInfo = readFile(progressFile);
+	// each `.stdout` file represents one ongoing download
+	// getting the last line from each -> progress for each
+	const shellCmd = `tail --silent --lines=1 "$alfred_workflow_cache"/*.stdout`;
 
-	const items = app
+	/** @type {AlfredItem[]} */
+	const downloadsInProgress = app
 		.doShellScript(shellCmd)
 		.split("\r")
 		.map((item) => {
-			/** @type {AlfredItem} */
-			const alfredItem = {
+			return {
 				title: item,
-				subtitle: item,
-				arg: item,
+				subtitle: "",
+				valid: false, // since not actionable
 			};
-			return alfredItem;
 		});
+	
+	if (downloadsInProgress.length === 0) {
+		return JSON.stringify({ items: [] });
+	}
 
-	return JSON.stringify({ items: items });
+	return JSON.stringify({
+		items: downloadsInProgress,
+		rerun: 0.5, // update for new progress
+	});
 }
