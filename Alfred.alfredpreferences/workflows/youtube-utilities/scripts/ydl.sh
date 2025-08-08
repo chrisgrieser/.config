@@ -1,7 +1,7 @@
 #!/bin/zsh
 
 function notify {
-	./notificator --title "yt-dlp" --subtitle "$2" --message "$1"
+	./notificator --title "yt-dlp" --subtitle "$1" --message "$2"
 	[[ "$1" =~ "❌" ]] && afplay "/System/Library/Sounds/Basso.aiff" &
 }
 
@@ -21,19 +21,20 @@ fi
 
 #───────────────────────────────────────────────────────────────────────────────
 # DOWNLOAD
-notify "⏳ Starting Download…" "$url"
+notify "⏳ Downloading…" "$url"
 
 # GUARD in case the download folder has not been set in `.config/yt-dlp/config`,
 # save files in `/tmp/` instead of the folder of this Alfred workflow.
 cd "/tmp/" || return 1
 
-msg=$(yt-dlp --quiet "$url")
+msg=$(yt-dlp --quiet "$url" 2>&1)
 success=$?
 if [[ $success -eq 0 ]]; then
-	notify "✅ Download finished."
+	notify "✅ Download finished." "$url"
 else
 	# output via Alfred Markdown view
 	echo "## ❌ Download failed"
+	echo
 	echo "$url"
 	echo "$msg"
 fi

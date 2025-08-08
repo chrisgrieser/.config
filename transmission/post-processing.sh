@@ -3,7 +3,7 @@
 # TEST torrents: https://webtorrent.io/free-torrents
 #───────────────────────────────────────────────────────────────────────────────
 
-action_log="./.post-download-actions.log"
+action_log="./.post-processing.log"
 
 #───────────────────────────────────────────────────────────────────────────────
 
