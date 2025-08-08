@@ -6,6 +6,7 @@
 	<array>
 		<string>features.websearch.duckduckgo.fallback</string>
 		<string>features.websearch.lucky.fallback</string>
+		<string>features.websearch.custom.D7CDCB7A-4555-4539-AA20-55DD73693D69.fallback</string>
 	</array>
 	<key>showContacts</key>
 	<false/>

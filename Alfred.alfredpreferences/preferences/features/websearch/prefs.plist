@@ -224,17 +224,8 @@
 			<key>url</key>
 			<string>https://duckduckgo.com/?q={query}&amp;iar=images</string>
 		</dict>
-		<key>F499DAD7-F576-4F42-85DA-77787B094FBB</key>
-		<dict>
-			<key>enabled</key>
-			<true/>
-			<key>keyword</key>
-			<string>ai</string>
-			<key>text</key>
-			<string>Mistral: "{query}"</string>
-			<key>url</key>
-			<string>https://chat.mistral.ai/chat?q={query}</string>
-		</dict>
 	</dict>
+	<key>onlyShowEnabledInPrefs</key>
+	<true/>
 </dict>
 </plist>
