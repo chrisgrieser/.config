@@ -333,7 +333,7 @@
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
-				<string>{const:alfred_workflow_name} progress bars</string>
+				<string>{const:alfred_workflow_name} progress</string>
 				<key>type</key>
 				<integer>8</integer>
 				<key>withspace</key>

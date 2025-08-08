@@ -3,7 +3,10 @@
 
 function notify {
 	./notificator --title "[yt-dlp]" --subtitle "$1" --message "$2"
-	[[ "$1" =~ "❌" ]] && afplay "/System/Library/Sounds/Basso.aiff" &
+}
+
+function error_sound {
+	afplay "/System/Library/Sounds/Basso.aiff" &
 }
 
 #───────────────────────────────────────────────────────────────────────────────
@@ -15,9 +18,11 @@ title=$(osascript -e "tell application \"$browser_app\" to return title of activ
 
 if [[ -z "$url" ]]; then
 	notify "❌ Tab could not be retrieved."
+	error_sound
 	return 1
 elif [[ ! -x "$(command -v yt-dlp)" ]]; then
 	notify "❌ yt-dlp not installed."
+	error_sound
 	return 1
 fi
 
@@ -42,8 +47,9 @@ else
 	cat "$cache/$uid.stderr" |
 		# markdown formatting: bold & two trailing spaces for linebreak
 		sed -e 's/$/  /g' -e 's/\[/**[/g' -e 's/\]/]**/g' -Ee "s/(ERROR|WARNING):/**&**/"
+	error_sound
 fi
 
-# this way, each `.stdout` file represents one ongoing download
+# each `.stdout` file represents one ongoing download -> remove when done
 rm -f "$cache/$uid.stderr"
 rm -f "$cache/$uid.stdout"
