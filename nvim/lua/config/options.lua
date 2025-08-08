@@ -118,7 +118,7 @@ vim.opt.cmdheight = 0
 
 -- LSP log
 vim.env.NO_COLOR = 1 -- disable colors for the logging of some LSPs
-vim.lsp.set_log_level("TRACE")
+vim.lsp.set_log_level("ERROR")
 
 --------------------------------------------------------------------------------
 -- INVISIBLE CHARS
