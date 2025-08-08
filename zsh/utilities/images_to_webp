@@ -26,4 +26,3 @@ for filename in **/*.{png,jpeg,jpg,tiff}; do
 	cwebp -quiet "$filename" -o "${filename:r}.webp" && rm "$filename"
 done
 setopt nomatch
-

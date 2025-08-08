@@ -335,27 +335,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>Where Videos will be downloaded</string>
-			<key>label</key>
-			<string>Download Location</string>
-			<key>type</key>
-			<string>filepicker</string>
-			<key>variable</key>
-			<string>download_location</string>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>default</key>
-				<string>~/Downloads</string>
-				<key>filtermode</key>
-				<integer>1</integer>
-				<key>placeholder</key>
-				<string>~/Downloads</string>
-				<key>required</key>
-				<true/>
-			</dict>
-			<key>description</key>
 			<string>Where Watch Later Links will be stored</string>
 			<key>label</key>
 			<string>Watch Later Folder</string>
@@ -378,10 +357,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 					<array>
 						<string>Google Chrome</string>
 						<string>Google Chrome</string>
-					</array>
-					<array>
-						<string>Vivaldi</string>
-						<string>Vivaldi</string>
 					</array>
 				</array>
 			</dict>

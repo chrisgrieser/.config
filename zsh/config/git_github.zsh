@@ -254,8 +254,8 @@ function reflog {
 # uses `_gitlog` from `magic-dashboard.zsh`
 function gli {
 	if ! typeset -f _gitlog > /dev/null; then
-	    echo "requires \`_gitlog.zsh\` from zsh magic-dashboard"
-		 return 1
+		echo "requires \`_gitlog.zsh\` from zsh magic-dashboard"
+		return 1
 	fi
 
 	local hash key_pressed selected repo

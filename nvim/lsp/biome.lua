@@ -8,6 +8,6 @@ return {
 		"biome.jsonc",
 
 		-- add to make biome's json formatter available in none-js projects as well
-		".git",
+		".git", -- (last in list = lowest priority)
 	},
 }
