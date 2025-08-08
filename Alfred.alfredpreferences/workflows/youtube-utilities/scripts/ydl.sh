@@ -1,5 +1,8 @@
 #!/bin/zsh
 # shellcheck disable=2154 # Alfred var
+# INFO This script needs to run in a concurrent Alfred Script Item.
+#───────────────────────────────────────────────────────────────────────────────
+
 
 function notify {
 	./notificator --title "[yt-dlp]" --subtitle "$1" --message "$2"

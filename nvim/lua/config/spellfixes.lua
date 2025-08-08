@@ -1,4 +1,5 @@
 local spellfixes = {
+	ALfred = "Alfred",
 	Brwoser = "Browser",
 	Markdwon = "Markdown",
 	THe = "The",
