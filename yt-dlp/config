@@ -2,17 +2,19 @@
 # DOCS https://www.mankier.com/1/yt-dlp#Configuration
 #──────────────────────────────────────────────────────────────────────────────#
 
-# download
+# DOWNLOAD
 --limit-rate=3M
---retries=1
+--retries=5
+--no-playlist
+--min-filesize=5M # prevent accidental downloads of preview vids
+--max-filesize=10G # prevent accidental huge dwonload
 
-# file system
+# FILE SYSTEM
 --paths="temp:~/Movies" # temporary `.part` files
---paths="home:~/RomComs/-new" # finished files
+--paths="home:~/Desktop"
 
-# file name
+# FILE NAME
 --trim-filenames=60
---replace-in-metadata "title" "FULL SCENE" "" # remove "HD" from title (regex supported)
+--replace-in-metadata "title" "FULL SCENE" "" # remove from title (regex supported)
 --output "%(title)s.%(ext)s" # https://github.com/yt-dlp/yt-dlp#output-template
-
 # --exec "~/.config/yt-dlp/post-processing.sh {}"

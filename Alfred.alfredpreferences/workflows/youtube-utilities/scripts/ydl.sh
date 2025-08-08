@@ -27,7 +27,8 @@ notify "⏳ Downloading…" "$url"
 # save files in `/tmp/` instead of the folder of this Alfred workflow.
 cd "/tmp/" || return 1
 
-msg=$(yt-dlp --quiet "$url" 2>&1)
+# shellcheck disable=2154 # Alfred var
+msg=$(yt-dlp "$url" 2>&1)
 success=$?
 if [[ $success -eq 0 ]]; then
 	notify "✅ Download finished." "$url"
