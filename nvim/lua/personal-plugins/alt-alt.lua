@@ -30,7 +30,7 @@ local config = {
 		},
 	},
 }
-local installed, snacksScratch = pcall(require, "plugin-specs.snacks-scratch")
+local installed, snacksScratch = pcall(require, "plugin-specs.snacks.snacks-scratch")
 if installed then table.insert(config.ignore.oldfiles, snacksScratch.opts.scratch.root) end ---@diagnostic disable-line: undefined-field
 
 --------------------------------------------------------------------------------

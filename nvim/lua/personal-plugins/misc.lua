@@ -33,7 +33,7 @@ function M.playRecording(reg)
 	if hasRecording then
 		vim.cmd.normal { "@" .. reg, bang = true }
 	else
-		vim.notify("Nothing recorded.", vim.log.levels.WARN, { title = "Recording", icon = "󰃾" })
+		vim.notify("There is no recording.", vim.log.levels.WARN, { title = "Recording", icon = "󰃾" })
 	end
 end
 
