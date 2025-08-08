@@ -64,6 +64,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>B2CB30E5-7445-4C78-8201-44B8F16E40E4</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>DB98EEE6-2D54-4B40-A401-48E15892B59D</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>CCFB402E-C80D-4E73-B298-0A4D03E51617</key>
 		<array>
 			<dict>
@@ -333,6 +346,21 @@
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>availableviaurlhandler</key>
+				<true/>
+				<key>triggerid</key>
+				<string>show-progress-bars</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.external</string>
+			<key>uid</key>
+			<string>B2CB30E5-7445-4C78-8201-44B8F16E40E4</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>### Requirements
@@ -411,6 +439,15 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>355</real>
 		</dict>
+		<key>B2CB30E5-7445-4C78-8201-44B8F16E40E4</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>xpos</key>
+			<real>40</real>
+			<key>ypos</key>
+			<real>530</real>
+		</dict>
 		<key>CCFB402E-C80D-4E73-B298-0A4D03E51617</key>
 		<dict>
 			<key>colorindex</key>
@@ -422,12 +459,14 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 		<key>DB98EEE6-2D54-4B40-A401-48E15892B59D</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
 			<key>note</key>
 			<string>progressbar bars</string>
 			<key>xpos</key>
-			<real>40</real>
+			<real>210</real>
 			<key>ypos</key>
-			<real>515</real>
+			<real>530</real>
 		</dict>
 		<key>F30AA24D-259D-4D2C-80C9-06B5EA576F7C</key>
 		<dict>
