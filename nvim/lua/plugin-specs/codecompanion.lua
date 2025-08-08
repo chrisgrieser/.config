@@ -36,7 +36,8 @@ return {
 		},
 		adapters = {
 			openai = function()
-				local model = "gpt-4.1-mini" -- https://platform.openai.com/docs/models
+				-- https://platform.openai.com/docs/models
+				local model = "gpt-5-mini"
 				local apiKeyFile =
 					"$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/private dotfiles/openai-api-key.txt"
 

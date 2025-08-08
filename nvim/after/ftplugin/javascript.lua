@@ -19,9 +19,9 @@ abbr("()", "() =>")
 -- pretty ts error
 bkeymap(
 	"n",
-	"<leader>D",
+	"<leader>t",
 	function() require("personal-plugins.pretty-ts-error").select() end,
-	{ desc = " Pretty ts_ls diagnostic" }
+	{ desc = " Pretty `ts_ls` diagnostic" }
 )
 
 -- open the next regex at https://regex101.com/
