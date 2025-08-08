@@ -25,7 +25,7 @@ function run() {
 				valid: false, // since not actionable
 			};
 		});
-	if (downloads.length === 0) downloads.push({ title: "No downloads in progress.", valid: false });
+	if (downloads.length === 0) downloads.push({ title: "No downloads in progress", valid: false });
 
 	return JSON.stringify({
 		items: downloads,
