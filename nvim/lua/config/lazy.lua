@@ -43,7 +43,7 @@ local specImports = vim.iter(vim.fs.dir(specDir))
 		if vim.endswith(name, ".lua") then
 			vim.schedule(function()
 				local msg = "Only directories are allowed in " .. specDir
-				vim.notify(msg, vim.log.levels.WARN, { title = "lazy.nvim", icon = "󰒲" })
+				vim.notify(msg, vim.log.levels.WARN, { title = "lazy.nvim", timeout = false })
 			end)
 		end
 	end)
