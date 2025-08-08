@@ -60,6 +60,7 @@ computerName = `scutil --get ComputerName`
 if computerName.include?("Home")
 	brew "spotify_player"
 	brew "yt-dlp"
+	brew "ffmpeg" # recommended for `yt-dlp`
 	cask "bettertouchtool"
 	cask "catch"
 	cask "cleanshot"

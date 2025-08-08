@@ -1,0 +1,6 @@
+# vim: filetype=config
+# DOCS https://www.mankier.com/1/yt-dlp#Options-Filesystem_Options
+#──────────────────────────────────────────────────────────────────────────────#
+
+--trim-filenames=60
+--write-thumbnail
