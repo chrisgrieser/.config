@@ -7,7 +7,7 @@ local pathw = hs.pathwatcher.new
 --------------------------------------------------------------------------------
 
 -- CONFIG
-local browserConfigs = home .. "/.config/+ browser-extension-configs/"
+local browserConfigs = home .. "/.config/browser-extension-configs/"
 
 M.pathw_desktop = pathw(home .. "/Desktop/", function(paths, _)
 	if not u.screenIsUnlocked() then return end -- prevent iCloud sync triggering in standby
