@@ -34,8 +34,23 @@ vim.g.whichkeyAddSpec = function() end
 
 --------------------------------------------------------------------------------
 
+-- organize all specs in subfolders
+local specDir = vim.fn.stdpath("config") .. "/lua/plugin-specs"
+local base = vim.fs.basename(specDir)
+local specImports = vim.iter(vim.fs.dir(specDir))
+	:map(function(name, type)
+		if type == "directory" then return { import = base .. "." .. name } end
+		if vim.endswith(name, ".lua") then
+			vim.schedule(function()
+				local msg = "Only directories are allowed in " .. specDir
+				vim.notify(msg, vim.log.levels.WARN, { title = "lazy.nvim", icon = "󰒲" })
+			end)
+		end
+	end)
+	:totable()
+
 require("lazy").setup {
-	spec = { import = "plugin-specs" },
+	spec = specImports,
 	defaults = { lazy = true },
 	lockfile = vim.fn.stdpath("config") .. "/.lazy-lock.json", -- make lockfile hidden
 	dev = {
