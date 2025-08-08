@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 
 # CONFIG
-backup_file="$HOME/.config/+ browser-extension-configs/list-of-extensions.txt"
+backup_file="$HOME/.config/browser-extension-configs/list-of-extensions.txt"
 
 #───────────────────────────────────────────────────────────────────────────────
 

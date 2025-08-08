@@ -8,11 +8,89 @@
 	<string>⬇️</string>
 	<key>connections</key>
 	<dict>
+		<key>110BF933-5ADA-415B-BF50-6678C63E7516</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>26C19E9C-7171-4CBF-A199-3FB8EFA276EB</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>54B9C78F-B3F0-48A6-85EE-469FDE055BE6</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>40B2D9B9-88EC-4625-A13E-6B7FE9D93544</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>A720FC8C-1C96-4C82-84BC-BAF7503920D6</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>5561BC08-DCC3-4D17-A02B-DEF205CFC0D7</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>6753AF74-E200-429F-A942-9AD24713457E</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>1944B7E1-9267-43A6-BEC7-761A44CF1A9D</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
 				<string>CE0326DC-6B4D-4366-867C-CC3A09F9B44D</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>26C19E9C-7171-4CBF-A199-3FB8EFA276EB</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>B86A2A59-EC47-4F6C-A5E9-53568182A305</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>40B2D9B9-88EC-4625-A13E-6B7FE9D93544</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>B86A2A59-EC47-4F6C-A5E9-53568182A305</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>5561BC08-DCC3-4D17-A02B-DEF205CFC0D7</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>B86A2A59-EC47-4F6C-A5E9-53568182A305</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -65,6 +143,16 @@
 				<string>Narrow search to creator’s name</string>
 				<key>vitoclose</key>
 				<true/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>110BF933-5ADA-415B-BF50-6678C63E7516</string>
+				<key>modifiers</key>
+				<integer>131072</integer>
+				<key>modifiersubtext</key>
+				<string>Paste Link</string>
+				<key>vitoclose</key>
+				<false/>
 			</dict>
 		</array>
 	</dict>
@@ -243,6 +331,136 @@ show_data</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string>{query}</string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>26C19E9C-7171-4CBF-A199-3FB8EFA276EB</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<true/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>B86A2A59-EC47-4F6C-A5E9-53568182A305</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string>{var:link_format}</string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string>plain</string>
+						<key>outputlabel</key>
+						<string>Plain URL</string>
+						<key>uid</key>
+						<string>54B9C78F-B3F0-48A6-85EE-469FDE055BE6</string>
+					</dict>
+					<dict>
+						<key>inputstring</key>
+						<string>{var:link_format}</string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string>markdown</string>
+						<key>outputlabel</key>
+						<string>Markdown Link</string>
+						<key>uid</key>
+						<string>A720FC8C-1C96-4C82-84BC-BAF7503920D6</string>
+					</dict>
+					<dict>
+						<key>inputstring</key>
+						<string>{var:link_format}</string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string>bbcode</string>
+						<key>outputlabel</key>
+						<string>BBCode Link</string>
+						<key>uid</key>
+						<string>6753AF74-E200-429F-A942-9AD24713457E</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string></string>
+				<key>hideelse</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.conditional</string>
+			<key>uid</key>
+			<string>110BF933-5ADA-415B-BF50-6678C63E7516</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string>[{var:title}]({query})</string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>40B2D9B9-88EC-4625-A13E-6B7FE9D93544</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string>[url='{query}']{var:title}[/url]</string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>5561BC08-DCC3-4D17-A02B-DEF205CFC0D7</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>## Usage
@@ -251,19 +469,48 @@ Search workflows in the [Alfred Gallery](https://alfred.app/) via the `gallery` 
 
 ![Searching for alfredapp workflows](images/about/gallery.png)
 
-* &lt;kbd&gt;↩&lt;/kbd&gt; Open Gallery page in default browser.
+* &lt;kbd&gt;↩&lt;/kbd&gt; Open workflow’s Gallery page in default browser.
 * &lt;kbd&gt;⌃&lt;/kbd&gt; Show tags.
 * &lt;kbd&gt;⌘&lt;/kbd&gt;&lt;kbd&gt;↩&lt;/kbd&gt; Install workflow.
 * &lt;kbd&gt;⌥&lt;/kbd&gt;&lt;kbd&gt;↩&lt;/kbd&gt; Narrow search to creator’s name.
-* &lt;kbd&gt;⌘&lt;/kbd&gt;&lt;kbd&gt;Y&lt;/kbd&gt; (or tap &lt;kbd&gt;⇧&lt;/kbd&gt;) Quick Look workflow’s Gallery page.</string>
+* &lt;kbd&gt;⇧&lt;/kbd&gt;&lt;kbd&gt;↩&lt;/kbd&gt; Paste link to workflow’s Gallery page.
+* &lt;kbd&gt;⌘&lt;/kbd&gt;&lt;kbd&gt;Y&lt;/kbd&gt; [Quick Look](https://www.alfredapp.com/help/features/previews/) workflow’s Gallery page.</string>
 	<key>uidata</key>
 	<dict>
+		<key>110BF933-5ADA-415B-BF50-6678C63E7516</key>
+		<dict>
+			<key>xpos</key>
+			<real>120</real>
+			<key>ypos</key>
+			<real>380</real>
+		</dict>
 		<key>1944B7E1-9267-43A6-BEC7-761A44CF1A9D</key>
 		<dict>
 			<key>xpos</key>
 			<real>260</real>
 			<key>ypos</key>
 			<real>270</real>
+		</dict>
+		<key>26C19E9C-7171-4CBF-A199-3FB8EFA276EB</key>
+		<dict>
+			<key>xpos</key>
+			<real>260</real>
+			<key>ypos</key>
+			<real>345</real>
+		</dict>
+		<key>40B2D9B9-88EC-4625-A13E-6B7FE9D93544</key>
+		<dict>
+			<key>xpos</key>
+			<real>260</real>
+			<key>ypos</key>
+			<real>405</real>
+		</dict>
+		<key>5561BC08-DCC3-4D17-A02B-DEF205CFC0D7</key>
+		<dict>
+			<key>xpos</key>
+			<real>260</real>
+			<key>ypos</key>
+			<real>465</real>
 		</dict>
 		<key>7094BDA6-222F-4626-AC67-26A7B201F91C</key>
 		<dict>
@@ -278,6 +525,13 @@ Search workflows in the [Alfred Gallery](https://alfred.app/) via the `gallery` 
 			<real>380</real>
 			<key>ypos</key>
 			<real>105</real>
+		</dict>
+		<key>B86A2A59-EC47-4F6C-A5E9-53568182A305</key>
+		<dict>
+			<key>xpos</key>
+			<real>380</real>
+			<key>ypos</key>
+			<real>375</real>
 		</dict>
 		<key>C1132036-7887-4A07-931C-9B346E04D969</key>
 		<dict>
@@ -317,9 +571,41 @@ Search workflows in the [Alfred Gallery](https://alfred.app/) via the `gallery` 
 			<key>variable</key>
 			<string>gallery_search_keyword</string>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>plain</string>
+				<key>pairs</key>
+				<array>
+					<array>
+						<string>Plain URL</string>
+						<string>plain</string>
+					</array>
+					<array>
+						<string>Markdown</string>
+						<string>markdown</string>
+					</array>
+					<array>
+						<string>BBCode</string>
+						<string>bbcode</string>
+					</array>
+				</array>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>Workflow Link</string>
+			<key>type</key>
+			<string>popupbutton</string>
+			<key>variable</key>
+			<string>link_format</string>
+		</dict>
 	</array>
+	<key>variablesdontexport</key>
+	<array/>
 	<key>version</key>
-	<string>2025.2</string>
+	<string>25.1</string>
 	<key>webaddress</key>
 	<string>https://github.com/alfredapp/alfred-gallery-workflow/</string>
 </dict>
