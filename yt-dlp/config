@@ -6,8 +6,10 @@
 --limit-rate=3M
 --retries=5
 --no-playlist
---min-filesize=5M # prevent accidental downloads of preview vids
---max-filesize=10G # prevent accidental huge dwonload
+
+--max-downloads=1 # needed, so `--(max|min)-filesize` throw an error
+--min-filesize=1M # prevent accidental downloads of preview vids
+--max-filesize=10G # prevent accidental huge download
 
 # FILE SYSTEM
 --paths="temp:~/Movies" # temporary `.part` files

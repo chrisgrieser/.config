@@ -49,6 +49,21 @@
 				<false/>
 			</dict>
 		</array>
+		<key>A5EF7576-C0F8-4860-A10D-27678D48B51A</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>5716CA0D-01FB-4FD1-AF7F-7E87C3325C54</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>746B45DE-747C-42A1-80B8-EA0C0D295DF9</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>CCFB402E-C80D-4E73-B298-0A4D03E51617</key>
 		<array>
 			<dict>
@@ -66,7 +81,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>5716CA0D-01FB-4FD1-AF7F-7E87C3325C54</string>
+				<string>A5EF7576-C0F8-4860-A10D-27678D48B51A</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -155,7 +170,7 @@
 				<key>subtext</key>
 				<string>Current {var:browser_app} tab</string>
 				<key>text</key>
-				<string>⬇️ Download with youtube-dl</string>
+				<string>⬇️ Download with yt-dlp</string>
 				<key>withspace</key>
 				<true/>
 			</dict>
@@ -225,6 +240,38 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string></string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>1</integer>
+						<key>matchstring</key>
+						<string></string>
+						<key>outputlabel</key>
+						<string>not empty</string>
+						<key>uid</key>
+						<string>746B45DE-747C-42A1-80B8-EA0C0D295DF9</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>else</string>
+				<key>hideelse</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.conditional</string>
+			<key>uid</key>
+			<string>A5EF7576-C0F8-4860-A10D-27678D48B51A</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>availableviaurlhandler</key>
 				<true/>
 				<key>triggerid</key>
@@ -276,7 +323,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>errors only</string>
 			<key>xpos</key>
-			<real>380</real>
+			<real>460</real>
 			<key>ypos</key>
 			<real>325</real>
 		</dict>
@@ -299,6 +346,17 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>40</real>
 			<key>ypos</key>
 			<real>270</real>
+		</dict>
+		<key>A5EF7576-C0F8-4860-A10D-27678D48B51A</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>1</integer>
+			<key>note</key>
+			<string>if not empty</string>
+			<key>xpos</key>
+			<real>375</real>
+			<key>ypos</key>
+			<real>355</real>
 		</dict>
 		<key>CCFB402E-C80D-4E73-B298-0A4D03E51617</key>
 		<dict>
