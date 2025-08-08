@@ -9,26 +9,26 @@ app.includeStandardAdditions = true;
 function run() {
 	// each `.stdout` file represents one ongoing download
 	// getting the last line from each -> progress for each
-	const shellCmd = `tail --silent --lines=1 "$alfred_workflow_cache"/*.stdout`;
+	const shellCmd = `tail --silent --lines=1 "$alfred_workflow_cache"/*.stdout || true`;
 
 	/** @type {AlfredItem[]} */
-	const downloadsInProgress = app
+	const downloads = app
 		.doShellScript(shellCmd)
 		.split("\r")
+		.filter((item) => item !== "") // empty when no download in progress
 		.map((item) => {
+			const delimiter = ";"; // set in `--progress-template`
+			const [videoTitle, info] = item.split(delimiter);
 			return {
-				title: item,
-				subtitle: "",
+				title: info.trim(),
+				subtitle: videoTitle,
 				valid: false, // since not actionable
 			};
 		});
-	
-	if (downloadsInProgress.length === 0) {
-		return JSON.stringify({ items: [] });
-	}
+	if (downloads.length === 0) downloads.push({ title: "No downloads in progress.", valid: false });
 
 	return JSON.stringify({
-		items: downloadsInProgress,
+		items: downloads,
 		rerun: 0.5, // update for new progress
 	});
 }

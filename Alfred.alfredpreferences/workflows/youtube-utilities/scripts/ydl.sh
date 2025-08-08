@@ -1,4 +1,5 @@
 #!/bin/zsh
+# shellcheck disable=2154 # Alfred var
 
 function notify {
 	./notificator --title "[yt-dlp]" --subtitle "$1" --message "$2"
@@ -24,14 +25,13 @@ fi
 # DOWNLOAD
 notify "⏳ Downloading…" "$title"
 
-id=$(date +%Y-%m-%d_%H-%M-%S)
+uid=$(uuidgen)
 
-# shellcheck disable=2154 # Alfred var
 cache="$alfred_workflow_cache"
-# shellcheck disable=2154 # Alfred var
 yt-dlp --quiet --paths="home:$download_folder" "$url" \
-	--progress --no-color --newline --progress-template="" \
-	1> "$cache/$id.stdout" 2> "$cache/$id.stderr"
+	--progress --no-color --newline \
+	--progress-template="%(info.title)s;%(progress._default_template)s" \
+	1> "$cache/$uid.stdout" 2> "$cache/$uid.stderr"
 success=$?
 
 if [[ $success -eq 0 ]]; then
@@ -39,11 +39,11 @@ if [[ $success -eq 0 ]]; then
 else
 	# output via Alfred Markdown view
 	echo "### ❌ Download failed"
-	cat "$cache/$id.stderr" |
+	cat "$cache/$uid.stderr" |
 		# markdown formatting: bold & two trailing spaces for linebreak
 		sed -e 's/$/  /g' -e 's/\[/**[/g' -e 's/\]/]**/g' -Ee "s/(ERROR|WARNING):/**&**/"
 fi
 
 # this way, each `.stdout` file represents one ongoing download
-rm -f "$cache/$id.stderr"
-rm -f "$cache/$id.stdout"
+rm -f "$cache/$uid.stderr"
+rm -f "$cache/$uid.stdout"

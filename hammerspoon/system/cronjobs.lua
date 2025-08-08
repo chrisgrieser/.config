@@ -53,17 +53,17 @@ M.timer_clock = hs.timer
 	:start()
 
 -- Reminder to go to Finesse Bistro
-M.timer_finesseBistro = hs.timer
-	.doAt("12:00", "01d", function()
-		local dayOfWeek = tostring(os.date("%a"))
-		local isWeekday = hs.fnutils.contains({ "Mon", "Tue", "Wed", "Thu" }, dayOfWeek)
-		if isWeekday and env.isAtHome and u.screenIsUnlocked() then
-			local msg = "🍴 Go to Finesse Bistro"
-			hs.alert(msg, 4)
-			print(msg)
-		end
-	end)
-	:start()
+-- M.timer_finesseBistro = hs.timer
+-- 	.doAt("12:00", "01d", function()
+-- 		local dayOfWeek = tostring(os.date("%a"))
+-- 		local isWeekday = hs.fnutils.contains({ "Mon", "Tue", "Wed", "Thu" }, dayOfWeek)
+-- 		if isWeekday and env.isAtHome and u.screenIsUnlocked() then
+-- 			local msg = "🍴 Go to Finesse Bistro"
+-- 			hs.alert(msg, 4)
+-- 			print(msg)
+-- 		end
+-- 	end)
+-- 	:start()
 
 --------------------------------------------------------------------------------
 -- NIGHTLY CRONJOBS

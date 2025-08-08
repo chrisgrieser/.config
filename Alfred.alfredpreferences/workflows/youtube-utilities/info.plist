@@ -98,7 +98,7 @@
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
-	<string>YouTube Download</string>
+	<string>youtube-dl</string>
 	<key>objects</key>
 	<array>
 		<dict>
@@ -109,7 +109,7 @@
 				<key>keyword</key>
 				<string>wl</string>
 				<key>subtext</key>
-				<string>Current {var:browser_app} tab</string>
+				<string>Current {var:browser_app} tab (only YouTube)</string>
 				<key>text</key>
 				<string>🕔 Watch Later</string>
 				<key>withspace</key>
@@ -300,7 +300,7 @@
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>keyword</key>
-				<string>ydl</string>
+				<string>ydl||progress</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -320,7 +320,7 @@
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
-				<string>{const:alfred_workflow_name}</string>
+				<string>{const:alfred_workflow_name} progress bars</string>
 				<key>type</key>
 				<integer>8</integer>
 				<key>withspace</key>
@@ -354,12 +354,14 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>40</real>
 			<key>ypos</key>
-			<real>150</real>
+			<real>155</real>
 		</dict>
 		<key>548C7E00-D279-4BFE-B4CB-4F94C970637F</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>10</integer>
+			<key>note</key>
+			<string>watch later link</string>
 			<key>xpos</key>
 			<real>40</real>
 			<key>ypos</key>
@@ -391,6 +393,8 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		<dict>
 			<key>colorindex</key>
 			<integer>1</integer>
+			<key>note</key>
+			<string>download</string>
 			<key>xpos</key>
 			<real>40</real>
 			<key>ypos</key>
@@ -418,10 +422,12 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 		<key>DB98EEE6-2D54-4B40-A401-48E15892B59D</key>
 		<dict>
+			<key>note</key>
+			<string>progressbar bars</string>
 			<key>xpos</key>
-			<real>35</real>
+			<real>40</real>
 			<key>ypos</key>
-			<real>535</real>
+			<real>515</real>
 		</dict>
 		<key>F30AA24D-259D-4D2C-80C9-06B5EA576F7C</key>
 		<dict>
