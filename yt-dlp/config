@@ -3,16 +3,18 @@
 #──────────────────────────────────────────────────────────────────────────────#
 
 # DOWNLOAD
---limit-rate=3M
+--limit-rate=4M
 --retries=5
 --no-playlist
 
 # FILE SYSTEM
---paths="temp:~/Movies" # temporary `.part` files
+--paths="temp:~/Movies/yt-dlp_incomplete" # temporary `.part` files
 --paths="home:~/Desktop" # default download location
 
 # FILE NAME
 --trim-filenames=60
 --replace-in-metadata "title" "FULL SCENE" "" # remove from title (regex supported)
 --output "%(title)s.%(ext)s" # https://github.com/yt-dlp/yt-dlp#output-template
+
+# POST PROCESSING
 # --exec "~/.config/yt-dlp/post-processing.sh {}"
