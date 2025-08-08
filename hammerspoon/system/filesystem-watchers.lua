@@ -1,14 +1,19 @@
 local M = {}
-
-local u = require("meta.utils")
-
 local home = os.getenv("HOME")
-local pathw = hs.pathwatcher.new
 --------------------------------------------------------------------------------
 
 -- CONFIG
 local browserConfigs = home .. "/.config/browser-extension-configs/"
 local backupFolder = home .. "/Library/Mobile Documents/com~apple~CloudDocs/Backups/"
+
+
+--------------------------------------------------------------------------------
+
+local u = require("meta.utils")
+local pathw = hs.pathwatcher.new
+
+hs.fs.mkdir(browserConfigs)
+hs.fs.mkdir(backupFolder)
 
 --------------------------------------------------------------------------------
 
@@ -51,21 +56,17 @@ M.pathw_desktop = pathw(home .. "/Desktop/", function(paths, _)
 		elseif name:find("vimium_c.*%.json") then
 			success, errmsg = os.rename(path, browserConfigs .. "vimium-c-settings.json")
 			if success then u.notify("✅ Vimium-c settings backed up.") end
-		elseif name:find("Inoreader Feeds .*%.xml") then
-			success, errmsg = os.rename(path, backupPath)
+		elseif name:find("Inoreader Feeds.*%.xml") then
+			success, errmsg = os.rename(path, backupFolder .. "Inoreader Feeds.opml")
 			if success then u.notify("✅ Inoreader feeds backed up.") end
-		elseif name:find("Catch$.xml") then
-			local backupPath = home .. "/Library/Mobile Documents/com~apple~CloudDocs/Backups/"
-			success, errmsg = os.rename(path, backupPath)
+		elseif name == "Catch.xml" then
+			success, errmsg = os.rename(path, backupFolder .. "Catch Feeds.xml")
 			if success then u.notify("✅ Catch feeds backed up.") end
 		elseif name == "obsidian-web-clipper-settings.json" then
 			success, errmsg = os.rename(path, browserConfigs .. name)
 			if success then u.notify("✅ Obsidian web clipper settings backed up.") end
 		elseif ext == "icbu" then
-			-- private, thus not in dotfiles repo
-			local backupPath = home
-				.. "/Library/Mobile Documents/com~apple~CloudDocs/Backups/Calendar/"
-			success, errmsg = os.rename(path, backupPath .. name)
+			success, errmsg = os.rename(path, backupFolder .. "/Calendar/" .. name)
 			if success then u.notify("✅ Calendar data backed up.") end
 
 		-- BANKING
@@ -106,8 +107,7 @@ M.pathw_desktop = pathw(home .. "/Desktop/", function(paths, _)
 		--------------------------------------------------------------------------
 		-- NOTIFY
 		if success == false then
-			u.notify(("⚠️ Failed to move: %q; %s"):format(name, errmsg or ""))
-		end
+			u.notify(("⚠️ Failed to move: %q; %s"):format(name, errmsg or ""))		end
 	end
 end):start()
 
