@@ -26,7 +26,8 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
--- empty functions prevent errors when bisecting plugins
+-- empty functions to prevent errors when bisecting plugins, when lualine or
+-- whichkey are disabled
 ---@diagnostic disable: duplicate-set-field
 vim.g.lualineAdd = function() end
 vim.g.whichkeyAddSpec = function() end
@@ -160,4 +161,4 @@ local function checkForDuplicateKeys()
 	end)
 end
 
-vim.defer_fn(checkForDuplicateKeys, 5000)
+vim.defer_fn(checkForDuplicateKeys, 3000)
