@@ -15,7 +15,7 @@ matches:
 
       Kind Regards
       Chris Grieser
-  - triggers: ["!mail", "!dh", "!mfg"]
+  - triggers: ["!mail", "!formal"]
     replace: |
       Sehr geehrte Damen und Herren,
 
@@ -23,9 +23,11 @@ matches:
 
       Mit freundlichen Grüßen
       Christopher Grieser
-  - triggers: ["vvg", "!mail"]
-    replace: |-
+  - triggers: ["!mail", "!dh"]
+    replace: Sehr geehrte Damen und Herren,
+  - triggers: ["!mail", "!mfg"]
+    replace: |
       $|$
 
-      Viele Grüße
-      Chris Grieser
+      Mit freundlichen Grüßen
+      Christopher Grieser
