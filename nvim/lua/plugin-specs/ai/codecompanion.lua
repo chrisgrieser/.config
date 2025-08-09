@@ -2,20 +2,31 @@
 -- alternative: https://github.com/dlants/magenta.nvim
 --------------------------------------------------------------------------------
 
-local function spinnerNotificationWhileRequest()
-	local spinners = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" }
-	local updateIntervalMs = 1000
-	local timer = assert(vim.uv.new_timer())
+-- CONFIG
+-- https://platform.openai.com/usage
+-- https://platform.openai.com/docs/models
+local model = "gpt-5"
+local apiKeyFile =
+	"$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/private dotfiles/openai-api-key.txt"
 
+--------------------------------------------------------------------------------
+
+local function spinnerNotificationWhileRequest()
+	-- CONFIG
+	local spinners = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" }
+	local updateIntervalMs = 300
+
+	local timer = assert(vim.uv.new_timer())
 	vim.api.nvim_create_autocmd("User", {
 		desc = "User: CodeCompanion lualine spinner (start)",
 		pattern = "CodeCompanionRequestStarted",
 		callback = function(ctx)
+			if not package.loaded["snacks"] then return end
 			timer:start(
 				updateIntervalMs,
 				updateIntervalMs,
 				vim.schedule_wrap(function()
-					local spinner = spinners[math.floor(vim.uv.now() / 100) % #spinners + 1]
+					local spinner = spinners[math.floor(vim.uv.now() / 300) % #spinners + 1]
 					vim.notify("Request running " .. spinner, nil, {
 						title = "CodeCompanion",
 						icon = "",
@@ -30,13 +41,10 @@ local function spinnerNotificationWhileRequest()
 		desc = "User: CodeCompanion lualine spinner (stop)",
 		pattern = "CodeCompanionRequestFinished",
 		callback = function(ctx)
-			vim.notify("Request finished ✅", nil, {
-				title = "CodeCompanion",
-				icon = "",
-				timeout = 2000,
-				id = ctx.data.id,
-			})
+			if not package.loaded["snacks"] then return end
+			vim.notify("Request finished ✅", nil, { timeout = 2000, id = ctx.data.id })
 			timer:stop()
+			timer:close()
 		end,
 	})
 end
@@ -46,8 +54,9 @@ end
 return {
 	"olimorris/codecompanion.nvim",
 	cmd = { "CodeCompanion", "CodeCompanionChat", "CodeCompanionActions" },
-	init = function()
-		vim.g.whichkeyAddSpec { "<leader>a", group = " AI" }
+	init = function() vim.g.whichkeyAddSpec { "<leader>a", group = " AI" } end,
+	config = function(_, opts)
+		require("codecompanion").setup(opts)
 
 		spinnerNotificationWhileRequest()
 
@@ -55,9 +64,8 @@ return {
 			desc = "User: CodeCompanion format on success",
 			pattern = "CodeCompanionRequestFinished",
 			callback = function(ctx)
-				if ctx.data.status == "success" then
+				if ctx.data.status == "success" and vim.bo[ctx.buf].buftype == "" then
 					require("personal-plugins.misc").formatWithFallback()
-					vim.api.buffer
 				end
 			end,
 		})
@@ -88,11 +96,6 @@ return {
 		},
 		adapters = {
 			openai = function()
-				-- https://platform.openai.com/usage
-				local model = "gpt-5" -- https://platform.openai.com/docs/models
-				local apiKeyFile =
-					"$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/private dotfiles/openai-api-key.txt"
-
 				return require("codecompanion.adapters").extend("openai", {
 					schema = { model = { default = model } },
 					env = { api_key = ("cmd:cat %q"):format(apiKeyFile) },
