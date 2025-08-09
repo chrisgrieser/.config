@@ -1,7 +1,7 @@
 # SHORTHANDS
 alias q=' exit'     # leading space to ignore it in history due to `HIST_IGNORE_SPACE`
 alias r=' exec zsh' # do not reload with `source ~/.zshrc`, https://github.com/ohmyzsh/ohmyzsh/wiki/FAQ#how-do-i-reload-the-zshrc-file
-alias ydl="yt-dlp" # cause I can never remember the name
+alias ydl='yt-dlp' # cause I can never remember the name
 
 # DEFAULTS
 alias mv='mv -vi'
@@ -19,7 +19,7 @@ alias ls='eza --all --sort=newest --hyperlink --no-quotes --ignore-glob=".DS_Sto
 	--time-style=relative --no-user'
 
 # JUST
-alias j="just"
+alias j='just'
 alias ji='just init'
 alias jr='just release'
 

@@ -1,5 +1,5 @@
 # COLORIZED HELP
-alias -g H="--help | bat --language=help --style=plain --wrap=character"
+alias -g H="--help | bat --language=help --style=plain"
 ZSH_HIGHLIGHT_REGEXP+=(' H$' 'fg=magenta,bold')
 
 #───────────────────────────────────────────────────────────────────────────────
@@ -48,7 +48,7 @@ function man() {
 		fi
 	fi
 	# https://wezfurlong.org/wezterm/cli/cli/set-tab-title.html
-	wezterm cli set-window-title --pane-id="$pane_id" " $command"
+	wezterm cli set-tab-title --pane-id="$pane_id" " $command"
 }
 
 #───────────────────────────────────────────────────────────────────────────────

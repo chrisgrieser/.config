@@ -213,17 +213,6 @@
 			<key>url</key>
 			<string>https://github.com/search?type=code&amp;q={query}</string>
 		</dict>
-		<key>EF1A555F-1401-4E8C-BF90-3FD03CBC571E</key>
-		<dict>
-			<key>enabled</key>
-			<true/>
-			<key>keyword</key>
-			<string>code</string>
-			<key>text</key>
-			<string>GitHub Code Search (path)</string>
-			<key>url</key>
-			<string>https://github.com/search?type=code&amp;q=path:/{query}/</string>
-		</dict>
 		<key>F016A737-CBF2-42BF-BBB9-9F08D18FE8C7</key>
 		<dict>
 			<key>enabled</key>

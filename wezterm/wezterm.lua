@@ -71,12 +71,15 @@ end)
 
 -- https://wezfurlong.org/wezterm/config/lua/window-events/format-tab-title.html
 wt.on("format-tab-title", function(tab)
+	-- title set via `tab:set_title()` or `wezterm cli set-tab-title`
+	if tab.tab_title ~= "" then return " " .. tab.tab_title .. " " end
+
 	local winTitle = tab.active_pane.title -- set e.g. by `nvim` or `yt-dlp --console-title`
 	winTitle = winTitle:gsub("  +", " ") -- duplicate spaces, e.g. by `yt-dlp` progress
-	local cwd = tab.active_pane.current_working_dir
-	local cwdBase = cwd.file_path:gsub("^.*/(.*)/$", "%1")
+	local cwd = tab.active_pane.current_working_dir.file_path:gsub("^.*/(.*)/$", "%1")
+
 	local icon = winTitle == "zsh" and "" or ""
-	local label = winTitle == "zsh" and cwdBase or winTitle
+	local label = winTitle == "zsh" and cwd or winTitle
 	return (" %s %s "):format(icon, label)
 end)
 

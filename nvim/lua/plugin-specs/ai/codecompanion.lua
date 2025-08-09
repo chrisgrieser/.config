@@ -6,15 +6,19 @@
 ---@type LazyPluginSpec
 return {
 	"olimorris/codecompanion.nvim",
-	cmd = "CodeCompanion",
+	cmd = { "CodeCompanion", "CodeCompanionChat" },
 	init = function()
 		vim.g.whichkeyAddSpec { "<leader>a", group = " AI" }
 
 		vim.api.nvim_create_autocmd("User", {
 			desc = "User: add notifications for codecompanion",
-			pattern = "CodeCompanionRequestStarted",
-			callback = function()
-				vim.notify("Request started.", nil, { title = "CodeCompanion", icon = "" })
+			pattern = "CodeCompanionRequest*",
+			callback = function(ctx)
+				local type = ctx.match:gsub("^CodeCompanionRequest", ""):lower()
+				if type == "streaming" then return end
+				local strategy = ctx.data.strategy:sub(1, 1):upper() .. ctx.data.strategy:sub(2)
+				local msg = ("%s request %s."):format(strategy, type)
+				vim.notify(msg, nil, { title = "CodeCompanion", icon = "" })
 			end,
 		})
 	end,
