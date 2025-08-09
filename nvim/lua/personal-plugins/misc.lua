@@ -102,6 +102,7 @@ function M.toggleOrIncrement()
 		["top"] = "bottom",
 		["enable"] = "disable",
 		["enabled"] = "disabled",
+		["open"] = "close",
 		["yes"] = "no",
 		["on"] = "off",
 		["and"] = "or",

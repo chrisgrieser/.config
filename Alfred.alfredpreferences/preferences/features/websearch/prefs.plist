@@ -158,6 +158,17 @@
 			<key>url</key>
 			<string>https://chatgpt.com/?q={query}</string>
 		</dict>
+		<key>DAD3D033-2DF1-41A9-AA76-8310F6E2327A</key>
+		<dict>
+			<key>enabled</key>
+			<true/>
+			<key>keyword</key>
+			<string>code</string>
+			<key>text</key>
+			<string>GitHub Code Search: "{query}"</string>
+			<key>url</key>
+			<string>https://github.com/search?type=code&amp;q=path%3A%2F%5C%2F{query)%24%2F</string>
+		</dict>
 		<key>E190C7B2-5B59-40A7-8B1C-722C7FD239F2</key>
 		<dict>
 			<key>enabled</key>
