@@ -31,14 +31,14 @@
       "paddingHorizontal" : 7,
       "spacing" : 3,
       "text" : {
-        "size" : 44,
+        "size" : 39,
         "colorSelected" : "#000000FF",
         "font" : "Lucida Grande",
         "color" : "#FDFDFDFF"
       },
       "background" : "#0000007F",
       "roundness" : 9,
-      "paddingVertical" : 13
+      "paddingVertical" : 12
     },
     "window" : {
       "color" : "#454545FF",
