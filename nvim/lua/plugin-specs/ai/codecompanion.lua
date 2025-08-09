@@ -73,7 +73,7 @@ return {
 			desc = "User: CodeCompanion format on success",
 			pattern = "CodeCompanionInlineFinished",
 			callback = function(ctx)
-				vim.defer_fn(function() vim.lsp.buf.format { bufnr = ctx.buf } end, 1)
+				vim.defer_fn(function() vim.lsp.buf.format { bufnr = ctx.buf } end, 1000)
 			end,
 		})
 	end,

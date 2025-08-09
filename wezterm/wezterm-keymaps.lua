@@ -29,6 +29,9 @@ M.keys = {
 	-- REMAP from `terminal_keybindings.zsh` (cannot use `bindkey` for `<D-CR>`)
 	{ key = "Enter", mods = "CMD", action = act.SendKey { key = "o", mods = "CTRL" } },
 
+	-- undo (from `terminal_keybindings.zsh`)
+	{ key = "z", mods = "CMD", action = act.SendKey { key = "n", mods = "CTRL" } },
+
 	-- REMAP VI MODE (cannot use `bindkey` for `<S-Space>`)
 	{ key = "Space", mods = "SHIFT", action = act.SendString("daw") },
 

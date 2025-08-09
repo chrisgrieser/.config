@@ -26,6 +26,7 @@ bindkey "^[[1;3D" backward-word # `alt+arrow` to move between words (emulating m
 bindkey "^[[1;3C" forward-word  
 bindkey "^A" beginning-of-line  # also bound to `cmd+left` via wezterm
 bindkey "^E" end-of-line        # also bound to `cmd+right` via wezterm
+bindkey '^N' undo               # remapped to `cmd+z` via wezterm
 
 #───────────────────────────────────────────────────────────────────────────────
 # VI MODE
