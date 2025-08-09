@@ -1,15 +1,23 @@
 {
 	"name": "Vimium C",
-	"@time": "7/30/2025, 10:29:03 AM",
-	"time": 1753864143456,
+	"@time": "8/9/2025, 6:18:20 AM",
+	"time": 1754713100584,
 	"environment": {
 		"extension": "2.12.2",
 		"platform": "mac",
-		"chromium": 138
+		"chromium": 139
 	},
 	"allBrowserUrls": true,
 	"exclusionListenHash": false,
 	"exclusionRules": [
+		{
+			"passKeys": "j k ",
+			"pattern": "^https://github\\.com/\\.*/(issues|pulls)"
+		},
+		{
+			"passKeys": "g ",
+			"pattern": "^https://github\\.com/"
+		},
 		{
 			"passKeys": "/ ",
 			"pattern": "^https:\\/\\/www\\.google(.(?!udm=2))*$"
