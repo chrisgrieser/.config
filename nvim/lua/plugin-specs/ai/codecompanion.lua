@@ -14,11 +14,11 @@ local function spinnerNotificationWhileRequest()
 
 	-- CONFIG
 	local spinners = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" }
-	local updateIntervalMs = 400
+	local updateIntervalMs = 250
 
 	local timer
 	vim.api.nvim_create_autocmd("User", {
-		desc = "User: CodeCompanion lualine spinner (start)",
+		desc = "User: CodeCompanion spinner (start)",
 		pattern = "CodeCompanionRequestStarted",
 		callback = function(ctx)
 			timer = assert(vim.uv.new_timer())
@@ -27,7 +27,7 @@ local function spinnerNotificationWhileRequest()
 				updateIntervalMs,
 				vim.schedule_wrap(function()
 					local spinner = spinners[math.floor(vim.uv.now() / updateIntervalMs) % #spinners + 1]
-					vim.notify("Request running " .. spinner, nil, {
+					vim.notify("Request running " .. spinner, vim.log.levels.DEBUG, {
 						title = "CodeCompanion",
 						icon = "",
 						timeout = false,
@@ -38,7 +38,7 @@ local function spinnerNotificationWhileRequest()
 		end,
 	})
 	vim.api.nvim_create_autocmd("User", {
-		desc = "User: CodeCompanion lualine spinner (stop)",
+		desc = "User: CodeCompanion spinner (stop)",
 		pattern = "CodeCompanionRequestFinished",
 		callback = function(ctx)
 			timer:stop()
@@ -46,7 +46,7 @@ local function spinnerNotificationWhileRequest()
 			vim.notify("Request finished ✅", nil, {
 				title = "CodeCompanion",
 				icon = "",
-				timeout = 3000,
+				timeout = 2000,
 				id = ctx.data.id,
 			})
 			if jit.os == "OSX" then
@@ -80,7 +80,12 @@ return {
 		{ "<leader>aa", ":CodeCompanion<CR>", mode = "x", desc = " Inline assistant" },
 		{ "<leader>as", ":CodeCompanion simplify<CR>", mode = "x", desc = " Simplify" },
 		-- stylua: ignore
-		{ "<leader>ae", "<cmd>CodeCompanionChat explain this<CR>", mode = "x", desc = " Explain (chat)" },
+		{
+			"<leader>ae",
+			function() require("codecompanion").prompt("explain") end,
+			mode = "x",
+			desc = " Explain (chat)",
+		},
 		{ "<leader>ac", "<cmd>CodeCompanionChat toggle<CR>", desc = " Toggle chat" },
 	},
 	opts = {

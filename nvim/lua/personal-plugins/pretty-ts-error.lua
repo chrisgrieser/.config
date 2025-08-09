@@ -17,13 +17,11 @@ local M = {}
 
 ---@param diag vim.Diagnostic
 local function show(diag)
-	-- split diagnostic into codeblocks
-	-- example: `Type '{ title: number; subtitle: string; mods: { cmd: { arg: string; }; ctrl: { arg: string; }; }; arg: string; variables: { address: string; url: string; coordinates: string; }; }[]' is not assignable to type 'AlfredItem[]'.`
+	-- pretty-print the message in markdown
 	local msg = diag
 		.message
-		:gsub("'{", "\n```js\n{")
-		:gsub("(}%[?]?)'", "%1\n```\n")
-		:gsub("'", "`") -- single word
+		:gsub("'({.-}%[?]?)'", "\n```ts\n%1\n```\n") -- types to codeblocks
+		:gsub("'", "`") -- single term to inline code
 		:gsub("\n +", "\n") -- remove indents
 		:gsub("\nType", "\n\nType") -- padding
 	local lines = vim.split(msg, "\n")
