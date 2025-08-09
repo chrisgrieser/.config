@@ -16,14 +16,6 @@ abbr("()", "() =>")
 
 --------------------------------------------------------------------------------
 
--- pretty ts error
-bkeymap(
-	"n",
-	"<leader>t",
-	function() require("personal-plugins.pretty-ts-error").select() end,
-	{ desc = " Pretty `ts_ls` diagnostic" }
-)
-
 -- open the next regex at https://regex101.com/
 bkeymap("n", "g/", function()
 	-- GUARD
