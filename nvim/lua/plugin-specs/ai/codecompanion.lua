@@ -52,7 +52,7 @@ local function spinnerNotificationWhileRequest()
 			if jit.os == "OSX" then
 				local sound =
 					"/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/head_gestures_double_shake.caf"
-				vim.system { "afplay", "--volume=0.5", sound }
+				vim.system { "afplay", sound }
 			end
 		end,
 	})
@@ -72,10 +72,8 @@ return {
 		vim.api.nvim_create_autocmd("User", {
 			desc = "User: CodeCompanion format on success",
 			pattern = "CodeCompanionInlineFinished",
-			callback = function()
-				-- deferred for potential buffer switch
-				vim.defer_fn(vim.lsp.buf.format, 100)
-			end,
+			-- deferred for potential buffer switch
+			callback = function() vim.defer_fn(vim.lsp.buf.format, 100) end,
 		})
 	end,
 	keys = {
@@ -85,6 +83,22 @@ return {
 		-- stylua: ignore
 		{ "<leader>ae", "<cmd>CodeCompanionChat explain this<CR>", mode = "x", desc = " Explain (chat)" },
 		{ "<leader>ac", "<cmd>CodeCompanionChat toggle<CR>", desc = " Toggle chat" },
+	},
+	prompt_library = {
+		Explain = {
+			strategy = "chat",
+			description = "Explain",
+			opts = {
+				index = 4,
+				auto_submit = true,
+			},
+			prompts = {
+				{
+					role = "user",
+					content = "Explain what this code does:"
+				},
+			},
+		},
 	},
 	opts = {
 		display = {
@@ -97,6 +111,14 @@ return {
 				intro_message = "",
 				window = {
 					opts = { statuscolumn = " " }, -- padding
+				},
+			},
+			action_palette = {
+				width = 95,
+				height = 10,
+				opts = {
+					show_default_actions = false,
+					show_default_prompt_library = true,
 				},
 			},
 		},

@@ -21,8 +21,8 @@ local function show(diag)
 	-- example: `Type '{ title: number; subtitle: string; mods: { cmd: { arg: string; }; ctrl: { arg: string; }; }; arg: string; variables: { address: string; url: string; coordinates: string; }; }[]' is not assignable to type 'AlfredItem[]'.`
 	local msg = diag
 		.message
-		:gsub("'{", "\n```js\n{") -- codeblock start
-		:gsub("(}%[?]?)'", "%1\n```\n") -- codeblock end
+		:gsub("'{", "\n```js\n{")
+		:gsub("(}%[?]?)'", "%1\n```\n")
 		:gsub("'", "`") -- single word
 		:gsub("\n +", "\n") -- remove indents
 		:gsub("\nType", "\n\nType") -- padding

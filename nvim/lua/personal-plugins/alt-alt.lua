@@ -171,7 +171,7 @@ function M.gotoAltFile()
 	local altBuf, altOld = getAltBuffer(), getAltOldfile()
 
 	if altBuf then
-		vim.cmd.buffer("#")
+		vim.api.nvim_set_current_buf(vim.fn.bufnr("#"))
 	elseif altOld then
 		vim.cmd.edit(altOld)
 	else
