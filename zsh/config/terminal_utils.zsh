@@ -49,8 +49,8 @@ function line_count() {
 # file finder
 # `fd` replacement using just `rg`
 function fd {
-	rg --no-config --files --binary --ignore-file="$HOME/.config/ripgrep/ignore" |
-		rg --color=always "$1"
+	rg --hidden --no-config --files --binary --ignore-file="$HOME/.config/ripgrep/ignore" |
+		rg --color=always "$@"
 }
 
 #───────────────────────────────────────────────────────────────────────────────

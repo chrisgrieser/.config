@@ -271,12 +271,13 @@ function M.formatWithFallback()
 	local notifyOpts = { title = "Format", icon = "󱉯" }
 
 	if #formattingLsps == 1 then
-		-- save for efm-formatters that don't use stdin
-		if vim.bo.ft == "markdown" or vim.endswith(vim.bo.ft, "sh") then
-			-- saving with explicit name prevents issues when changing `cwd`
-			-- `:update!` suppresses "The file has been changed since reading it!!!"
-			local vimCmd = ("silent update! %q"):format(vim.api.nvim_buf_get_name(0))
-			vim.cmd(vimCmd)
+		-- write file for efm-formatters that don't use stdin
+		if vim.bo.ft == "markdown" then
+			-- -- saving with explicit name prevents issues when changing `cwd`
+			-- -- `:update!` suppresses "The file has been changed since reading it!!!"
+			-- local vimCmd = ("silent update! %q"):format(vim.api.nvim_buf_get_name(0))
+			-- vim.cmd(vimCmd)
+			vim.cmd("silent update!")
 		end
 		vim.lsp.buf.format()
 

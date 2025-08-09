@@ -13,5 +13,6 @@ local bkeymap = require("config.utils").bufKeymap
 
 bkeymap("n", "<D-s>", function()
 	vim.cmd([[% substitute_/Users/\w\+/_$HOME/_e]]) -- replace `/Users/…` with `$HOME/`
+	vim.cmd("silent update!")
 	vim.lsp.buf.format()
 end, { desc = " Format" })
