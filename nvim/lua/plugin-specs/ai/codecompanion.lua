@@ -5,7 +5,7 @@
 -- CONFIG
 -- https://platform.openai.com/usage
 -- https://platform.openai.com/docs/models
-local model = "gpt-4.1-mini" -- not switching to 5 yet, since it's slow
+local model = "gpt-4.1" -- not switching to 5 yet, since it's slow
 
 --------------------------------------------------------------------------------
 
@@ -14,7 +14,7 @@ local function spinnerNotificationWhileRequest()
 
 	-- CONFIG
 	local spinners = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" }
-	local updateIntervalMs = 300
+	local updateIntervalMs = 400
 
 	local timer
 	vim.api.nvim_create_autocmd("User", {
@@ -26,7 +26,7 @@ local function spinnerNotificationWhileRequest()
 				0,
 				updateIntervalMs,
 				vim.schedule_wrap(function()
-					local spinner = spinners[math.floor(vim.uv.now() / 300) % #spinners + 1]
+					local spinner = spinners[math.floor(vim.uv.now() / updateIntervalMs) % #spinners + 1]
 					vim.notify("Request running " .. spinner, nil, {
 						title = "CodeCompanion",
 						icon = "",
@@ -62,7 +62,7 @@ end
 ---@type LazyPluginSpec
 return {
 	"olimorris/codecompanion.nvim",
-	cmd = { "CodeCompanion", "CodeCompanionChat", "CodeCompanionActions" },
+	cmd = { "CodeCompanion", "CodeCompanionChat" },
 	init = function() vim.g.whichkeyAddSpec { "<leader>a", group = " AI" } end,
 	config = function(_, opts)
 		require("codecompanion").setup(opts)
@@ -72,7 +72,6 @@ return {
 		vim.api.nvim_create_autocmd("User", {
 			desc = "User: CodeCompanion format on success",
 			pattern = "CodeCompanionInlineFinished",
-			-- deferred for potential buffer switch
 			callback = function() vim.defer_fn(vim.lsp.buf.format, 100) end,
 		})
 	end,
@@ -83,22 +82,6 @@ return {
 		-- stylua: ignore
 		{ "<leader>ae", "<cmd>CodeCompanionChat explain this<CR>", mode = "x", desc = " Explain (chat)" },
 		{ "<leader>ac", "<cmd>CodeCompanionChat toggle<CR>", desc = " Toggle chat" },
-	},
-	prompt_library = {
-		Explain = {
-			strategy = "chat",
-			description = "Explain",
-			opts = {
-				index = 4,
-				auto_submit = true,
-			},
-			prompts = {
-				{
-					role = "user",
-					content = "Explain what this code does:"
-				},
-			},
-		},
 	},
 	opts = {
 		display = {
@@ -111,14 +94,6 @@ return {
 				intro_message = "",
 				window = {
 					opts = { statuscolumn = " " }, -- padding
-				},
-			},
-			action_palette = {
-				width = 95,
-				height = 10,
-				opts = {
-					show_default_actions = false,
-					show_default_prompt_library = true,
 				},
 			},
 		},

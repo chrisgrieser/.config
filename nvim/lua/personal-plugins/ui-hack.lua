@@ -58,6 +58,7 @@ local function attach()
 		if kind == "lua_print" then opts.ft = "lua" end
 		if vim.list_contains(config.msgKind.mini, kind) and package.loaded["snacks"] then
 			opts.style = "minimal"
+			opts.id = "ui-hack-mini-notify"
 			if opts.icon then opts.icon = " " .. opts.icon .. " " end
 		end
 
