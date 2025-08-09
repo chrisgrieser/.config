@@ -9,6 +9,7 @@ CONFIG_FILES=(
 	terminal_utils
 	aliases
 	docs_man
+	ai_help
 
 	git_github
 	homebrew
