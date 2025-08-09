@@ -5,13 +5,16 @@
 -- CONFIG
 -- https://platform.openai.com/usage
 -- https://platform.openai.com/docs/models
-local model = "gpt-5"
+local model = "gpt-5-mini"
+-- local model = "gpt-5"
 local apiKeyFile =
 	"$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/private dotfiles/openai-api-key.txt"
 
 --------------------------------------------------------------------------------
 
 local function spinnerNotificationWhileRequest()
+	if not package.loaded["snacks"] then return end
+
 	-- CONFIG
 	local spinners = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" }
 	local updateIntervalMs = 300
@@ -21,9 +24,8 @@ local function spinnerNotificationWhileRequest()
 		desc = "User: CodeCompanion lualine spinner (start)",
 		pattern = "CodeCompanionRequestStarted",
 		callback = function(ctx)
-			if not package.loaded["snacks"] then return end
 			timer:start(
-				updateIntervalMs,
+				0,
 				updateIntervalMs,
 				vim.schedule_wrap(function()
 					local spinner = spinners[math.floor(vim.uv.now() / 300) % #spinners + 1]
@@ -41,10 +43,14 @@ local function spinnerNotificationWhileRequest()
 		desc = "User: CodeCompanion lualine spinner (stop)",
 		pattern = "CodeCompanionRequestFinished",
 		callback = function(ctx)
-			if not package.loaded["snacks"] then return end
-			vim.notify("Request finished ✅", nil, { timeout = 2000, id = ctx.data.id })
 			timer:stop()
 			timer:close()
+			vim.notify("Request finished ✅", nil, { timeout = 2000, id = ctx.data.id })
+			if jit.os ~= "OSX" then
+				local sound =
+					"/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/head_gestures_double_shake.caf"
+				vim.system { "afplay", sound }
+			end
 		end,
 	})
 end
@@ -62,11 +68,9 @@ return {
 
 		vim.api.nvim_create_autocmd("User", {
 			desc = "User: CodeCompanion format on success",
-			pattern = "CodeCompanionRequestFinished",
+			pattern = "CodeCompanionInlineFinished",
 			callback = function(ctx)
-				if ctx.data.status == "success" and vim.bo[ctx.buf].buftype == "" then
-					require("personal-plugins.misc").formatWithFallback()
-				end
+				vim.defer_fn(function() vim.lsp.buf.format { bufnr = ctx.buf } end, 1)
 			end,
 		})
 	end,
@@ -96,6 +100,7 @@ return {
 		},
 		adapters = {
 			openai = function()
+				-- https://github.com/olimorris/codecompanion.nvim/blob/main/lua/codecompanion/adapters/openai.lua
 				return require("codecompanion.adapters").extend("openai", {
 					schema = { model = { default = model } },
 					env = { api_key = ("cmd:cat %q"):format(apiKeyFile) },

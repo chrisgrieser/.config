@@ -4,33 +4,31 @@
 
 ai() {
 	# CONFIG
+	local model='gpt-5-mini'
 
 	# https://platform.openai.com/api-keys
 	private_dots="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/private dotfiles"
 	OPENAI_API_KEY="$(cat "$private_dots/openai-api-key.txt")"
 
-	local model='gpt-4.1-mini'
-
 	local system_prompt="
-		You are an experienced software engineer with expertise in all UNIX 
+		You are an experienced software engineer with expertise in all UNIX
 		command line tools.
 
 		Given a task, generate a single command or a pipeline of commands that
 		accomplish the task efficiently. For complex tasks or those requiring
-		multiple steps, provide a pipeline of commands. 
+		multiple steps, provide a pipeline of commands.
 
 		This command is to be executed in zsh. The system is macOS. If a command
 		is not compatible with the system or shell, provide a suitable alternative.
 
 		Output only the command as a single line of plain text, with no quotes,
-		formatting, or additional commentary. 
+		formatting, or additional commentary.
 
 		Create a command to accomplish the following task:
 	"
 
 	#────────────────────────────────────────────────────────────────────────────
 	#────────────────────────────────────────────────────────────────────────────
-
 
 	local task="$*"
 	print "\e[1;34mAsking AI…\e[0m "
@@ -39,8 +37,8 @@ ai() {
 	local response
 	response=$(jq -n \
 		--arg model "$model" --arg system_prompt "$system_prompt" --arg task "$task" \
-		'{ 
-			model: $model, 
+		'{
+			model: $model,
 			messages: [
 				{ role: "system", content: $system_prompt },
 				{ role: "user", content: $task }

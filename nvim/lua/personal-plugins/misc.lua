@@ -254,7 +254,7 @@ function M.formatWithFallback()
 		end
 		vim.lsp.buf.format()
 
-		-- FIX some LSPs trigger folding after formatting?
+		-- some LSPs trigger folding after formatting
 		vim.schedule(function() vim.cmd.normal { "zv", bang = true } end)
 	elseif #formattingLsps > 1 then
 		local clients = vim.iter(formattingLsps)
