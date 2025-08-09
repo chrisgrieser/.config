@@ -6,26 +6,24 @@ local M = {}
 
 --- inspired by ultimate-autopair's fastWarp function
 function M.fastWarp()
-	if vim.fn.mode() ~= "i" then return vim.notify("Not in insert mode.", vim.log.levels.WARN) end
+	local warpChars = { ")", "]", "}", '"', "'", "`", "*" } -- CONFIG
 
-	local warpChars = { ")", "]", "}", '"', "'", "`" }
+	if vim.fn.mode() ~= "i" then return vim.notify("Not in insert mode.", vim.log.levels.WARN) end
 	local row, col = unpack(vim.api.nvim_win_get_cursor(0))
 	local line = vim.api.nvim_get_current_line()
-
 	local nextChar = line:sub(col + 1, col + 1)
-	Chainsaw(nextChar) -- 🪚
 	if not vim.tbl_contains(warpChars, nextChar) then return end
-	if col + 1 == #line then return end
 
 	local lineBefore = line:sub(1, col)
 	local lineAfter = line:sub(col + 2)
-	lineAfter = lineAfter:gsub("^")
-	local updatedLine = lineBefore .. lineAfter
-	
-	local shift = 0
+	local _, nextWord = lineAfter:find("%w+")
+	local _, nextPunctuation = lineAfter:find("%p+")
+	local shift = math.min(nextWord or math.huge, nextPunctuation or math.huge)
+	if shift == math.huge then return end -- none found
+	local newLineAfter = lineAfter:sub(1, shift) .. nextChar .. lineAfter:sub(shift + 1)
 
 	vim.api.nvim_win_set_cursor(0, { row, col + shift })
-	vim.api.nvim_set_current_line(updatedLine)
+	vim.api.nvim_set_current_line(lineBefore .. newLineAfter)
 end
 
 --------------------------------------------------------------------------------
