@@ -9,6 +9,7 @@ matches:
       ```{{lang}}
       {{dedentedCode}}
       ```
+    force_mode: clipboard # to avoid `enter` keystrokes when pasting into chats / AIs
     label: Markdown Codeblock
     vars:
       - name: dedentedCode
