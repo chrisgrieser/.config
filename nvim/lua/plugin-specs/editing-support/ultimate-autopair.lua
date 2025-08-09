@@ -7,32 +7,15 @@
 return {
 	"altermo/ultimate-autopair.nvim",
 	branch = "v0.6", -- recommended as each new version will have breaking changes
-	enabled = false,
 	event = { "InsertEnter", "CmdlineEnter" },
 	keys = {
-		-- Open new scope (`remap` to trigger auto-pairing)
+		-- `remap` to trigger auto-pairing
 		{ "<D-o>", "a{<CR>", desc = " Open new scope", remap = true },
-		{ "<D-o>", "{<CR>", mode = "i", desc = " Open new scope", remap = true },
 	},
-	init = function()
-		vim.api.nvim_create_autocmd("RecordingEnter", {
-			callback = function() require("ultimate-autopair").disable() end,
-		})
-		vim.api.nvim_create_autocmd("RecordingLeave", {
-			callback = function() require("ultimate-autopair").enable() end,
-		})
-	end,
 	opts = {
 		bs = {
 			space = "balance",
 			cmap = false, -- keep my `<BS>` mapping for the cmdline
-		},
-		fastwarp = {
-			-- map = "<D-f>",
-			rmap = "<D-F>", -- backwards
-			hopout = true,
-			nocursormove = false,
-			multiline = false,
 		},
 		cr = { autoclose = true },
 		tabout = { enable = false, map = "<Nop>" },
