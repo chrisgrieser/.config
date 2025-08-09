@@ -76,5 +76,5 @@ vim.api.nvim_create_autocmd({ "CmdlineLeave", "VimEnter" }, {
 })
 vim.api.nvim_create_autocmd("CmdlineEnter", {
 	group = group,
-	callback = vim.schedule_wrap(detach),
+	callback = detach,
 })
