@@ -9,7 +9,7 @@
 
 # FILE SYSTEM
 --paths="temp:~/Movies/yt-dlp_incomplete" # temporary `.part` files
---paths="home:~/Desktop" # default download location
+--paths="home:~/Desktop/%(extractor_key)s" # default download location
 
 # FILE NAME
 --trim-filenames=60
