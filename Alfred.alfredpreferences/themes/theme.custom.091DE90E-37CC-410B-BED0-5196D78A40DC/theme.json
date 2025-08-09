@@ -31,7 +31,7 @@
       "paddingHorizontal" : 14,
       "spacing" : 6,
       "text" : {
-        "size" : 45,
+        "size" : 39,
         "colorSelected" : "#FFFFFFFF",
         "font" : "Lucida Grande",
         "color" : "#FEFFFFFF"
