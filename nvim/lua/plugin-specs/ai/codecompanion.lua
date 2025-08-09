@@ -5,8 +5,8 @@
 -- CONFIG
 -- https://platform.openai.com/usage
 -- https://platform.openai.com/docs/models
-local model = "gpt-5-mini"
--- local model = "gpt-5"
+-- local model = "gpt-4.1-mini"
+local model = "gpt-5-nano"
 local apiKeyFile =
 	"$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/private dotfiles/openai-api-key.txt"
 
@@ -19,11 +19,12 @@ local function spinnerNotificationWhileRequest()
 	local spinners = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" }
 	local updateIntervalMs = 300
 
-	local timer = assert(vim.uv.new_timer())
+	local timer
 	vim.api.nvim_create_autocmd("User", {
 		desc = "User: CodeCompanion lualine spinner (start)",
 		pattern = "CodeCompanionRequestStarted",
 		callback = function(ctx)
+			timer = assert(vim.uv.new_timer())
 			timer:start(
 				0,
 				updateIntervalMs,
