@@ -517,11 +517,11 @@ end
 -- MACROS
 -- add sound & change cursorline color while recording
 do
-	local function play(soundFile)
+	local function playSound(file)
 		if jit.os ~= "OSX" then return end
 		local soundDir =
 			"/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/"
-		vim.system { "afplay", soundDir .. soundFile }
+		vim.system { "afplay", soundDir .. file }
 	end
 
 	local cursorlineBg
@@ -531,7 +531,7 @@ do
 		callback = function()
 			cursorlineBg = vim.api.nvim_get_hl(0, { name = "CursorLine" }).bg
 			vim.api.nvim_set_hl(0, "CursorLine", { link = "DiffDelete" })
-			play("begin_record.caf") -- typos: ignore-line
+			playSound("begin_record.caf") -- typos: ignore-line
 		end,
 	})
 
@@ -539,8 +539,7 @@ do
 		desc = "User: Macro recording utilities (2/2)",
 		callback = function()
 			vim.api.nvim_set_hl(0, "CursorLine", { bg = cursorlineBg })
-			-- typos: ignore-next-line
-			play("end_record.caf") -- typos: ignore-line
+			playSound("end_record.caf") -- typos: ignore-line
 		end,
 	})
 end

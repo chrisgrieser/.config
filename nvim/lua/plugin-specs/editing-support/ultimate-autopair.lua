@@ -27,7 +27,7 @@ return {
 			cmap = false, -- keep my `<BS>` mapping for the cmdline
 		},
 		fastwarp = {
-			map = "<D-f>",
+			-- map = "<D-f>",
 			rmap = "<D-F>", -- backwards
 			hopout = true,
 			nocursormove = false,
