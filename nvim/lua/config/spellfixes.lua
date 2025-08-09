@@ -23,6 +23,7 @@ local spellfixes = {
 	esle = "else",
 	fales = "false",
 	fasle = "false",
+	lwo = "low",
 	fiel = "file",
 	fiels = "files",
 	flase = "false",
