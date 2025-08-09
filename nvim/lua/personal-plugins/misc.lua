@@ -127,23 +127,21 @@ end
 --------------------------------------------------------------------------------
 
 function M.openUrlInBuffer()
-	local bufLines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
-	local bufText = table.concat(bufLines, "\n")
+	local text = table.concat(vim.api.nvim_buf_get_lines(0, 0, -1, false), "\n")
 	local urls = {}
+	for url in text:gmatch([[%l%l%l+://[^%s)%]}"'`>]+]]) do
+		urls[#urls + 1] = url
+	end
 
-	local urlPattern = [[%l%l%l+://[^%s)%]}"'`>]+]]
-	for url in bufText:gmatch(urlPattern) do
-		table.insert(urls, url)
-	end
 	if #urls == 0 then
-		vim.notify("No URL found in file.", vim.log.levels.WARN)
+		return vim.notify("No URL found in file.", vim.log.levels.WARN)
 	elseif #urls == 1 then
-		vim.ui.open(urls[1])
-	else
-		vim.ui.select(urls, { prompt = " Open URL:" }, function(url)
-			if url then vim.ui.open(url) end
-		end)
+		return vim.ui.open(urls[1])
 	end
+
+	vim.ui.select(urls, { prompt = " Open URL:" }, function(url)
+		if url then vim.ui.open(url) end
+	end)
 end
 
 --------------------------------------------------------------------------------
