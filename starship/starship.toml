@@ -14,7 +14,7 @@ $character\
 right_format = """\
 $jobs\
 $cmd_duration\
-${custom.alfred}$python\
+$python\
 """
 add_newline = false
 
@@ -65,7 +65,7 @@ format = "[󰝰 $output ]($style)"
 style = "fg:yellow bg:black"
 
 [custom.location_indicator]
-description = """Indicate if in a subfolder of my local repo folder. Helps 
+description = """Indicate if in a subfolder of my local repo folder. Helps
 differentiating between my local Alfred workflows and their respective repos."""
 format = "[ 󱁤 ]($style)"
 when = "[[ $PWD == $HOME/Developer/* ]]"
@@ -89,12 +89,8 @@ format = "[ 󱎘  ]($style)"
 when = '[[ -f "package.json" ]] && jq ".main // error(\"\")" package.json && [[ ! -d "node_modules" ]]'
 style = "fg:red bold bg:black"
 
-[custom.main_branch]
-description = 'since "ignore_branches" fully hides git_branch component, still showing the symbol'
-when = "[[ $(git branch --show-current) == 'main' ]]"
-format = " [ ](fg:purple bg:black bold)"
-
 # ──────────────────────────────────────────────────────────────────────────────
+# GIT COMPONENTS
 
 # BUG non-existing untracked files being shown https://github.com/starship/starship/issues/6881
 # HACK for the bug: show untracked files in our own module
@@ -135,6 +131,11 @@ only_attached = true
 style = "fg:purple bg:black bold"
 format = " [ $branch]($style)"
 ignore_branches = ["main"]
+
+[custom.main_branch]
+description = 'since "ignore_branches" fully hides git_branch component, still showing the symbol'
+when = "[[ $(git branch --show-current) == 'main' ]]"
+format = " [ ](fg:purple bg:black bold)"
 
 # INFO putting a variable into round bracket ensures that the bracket content is
 # only shown when the variable is set. `bright-black` is effectively gray.

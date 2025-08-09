@@ -15,9 +15,7 @@ return {
 		replace = { prefix = "s", reindent_linewise = true },
 		exchange = { prefix = "sx", reindent_linewise = true },
 		sort = { prefix = "sy" },
-		multiply = {
-			prefix = "", -- set our own in `make_mappings`
-		},
+		multiply = { prefix = "" }, -- disable -> set our own in `make_mappings`
 	},
 	config = function(_, opts)
 		require("mini.operators").setup(opts)

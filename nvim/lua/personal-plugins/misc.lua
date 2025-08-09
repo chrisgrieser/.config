@@ -4,6 +4,32 @@
 local M = {}
 --------------------------------------------------------------------------------
 
+--- inspired by ultimate-autopair's fastWarp function
+function M.fastWarp()
+	if vim.fn.mode() ~= "i" then return vim.notify("Not in insert mode.", vim.log.levels.WARN) end
+
+	local warpChars = { ")", "]", "}", '"', "'", "`" }
+	local row, col = unpack(vim.api.nvim_win_get_cursor(0))
+	local line = vim.api.nvim_get_current_line()
+
+	local nextChar = line:sub(col + 1, col + 1)
+	Chainsaw(nextChar) -- 🪚
+	if not vim.tbl_contains(warpChars, nextChar) then return end
+	if col + 1 == #line then return end
+
+	local lineBefore = line:sub(1, col)
+	local lineAfter = line:sub(col + 2)
+	lineAfter = lineAfter:gsub("^")
+	local updatedLine = lineBefore .. lineAfter
+	
+	local shift = 0
+
+	vim.api.nvim_win_set_cursor(0, { row, col + shift })
+	vim.api.nvim_set_current_line(updatedLine)
+end
+
+--------------------------------------------------------------------------------
+
 ---start/stop with just one keypress & add notifications
 ---@param toggleKey string key used to trigger this function
 ---@param reg string vim register (single letter)
@@ -33,11 +59,8 @@ function M.playRecording(reg)
 	if hasRecording then
 		vim.cmd.normal { "@" .. reg, bang = true }
 	else
-		vim.notify(
-			"There is no recording.",
-			vim.log.levels.WARN,
-			{ title = "Recording", icon = "󰃾" }
-		)
+		local msg = "There is no recording."
+		vim.notify(msg, vim.log.levels.WARN, { title = "Recording", icon = "󰃾" })
 	end
 end
 
@@ -133,11 +156,8 @@ function M.openUrlInBuffer()
 		urls[#urls + 1] = url
 	end
 
-	if #urls == 0 then
-		return vim.notify("No URL found in file.", vim.log.levels.WARN)
-	elseif #urls == 1 then
-		return vim.ui.open(urls[1])
-	end
+	if #urls == 0 then return vim.notify("No URL found in file.", vim.log.levels.WARN) end
+	if #urls == 1 then return vim.ui.open(urls[1]) end
 
 	vim.ui.select(urls, { prompt = " Open URL:" }, function(url)
 		if url then vim.ui.open(url) end
@@ -184,10 +204,8 @@ end
 function M.openWorkflowInAlfredPrefs()
 	local workflowUid =
 		vim.api.nvim_buf_get_name(0):match("Alfred%.alfredpreferences/workflows/(.-)/")
-	if not workflowUid then
-		vim.notify("Not in an Alfred directory.", vim.log.levels.WARN)
-		return
-	end
+	if not workflowUid then return vim.notify("Not in an Alfred directory.", vim.log.levels.WARN) end
+
 	-- https://www.alfredforum.com/topic/18390-get-currently-edited-workflow-uri/
 	local jxa = ('Application("com.runningwithcrayons.Alfred").revealWorkflow(%q)'):format(
 		workflowUid
@@ -284,9 +302,9 @@ function M.lspCapabilities()
 	}, function(client)
 		if not client then return end
 		local info = {
+			config = client.config,
 			capabilities = client.capabilities,
 			server_capabilities = client.server_capabilities,
-			config = client.config,
 		}
 		local opts = { icon = "󱈄", title = client.name .. " capabilities", ft = "lua" }
 		local header = "-- For a full view, open in notification history.\n"
