@@ -9,7 +9,6 @@ Alternative to vim's "alternative file" that improves its functionality.
   respective file in the statusbar. If there is no alt-file, the first oldfile
   is shown. If there is not changed file, nothing is shown.
 ]]
-
 --------------------------------------------------------------------------------
 
 local config = {
@@ -19,7 +18,7 @@ local config = {
 		altBuf = "󰐤", -- 󰯬
 		mostChangedFile = "󰓏",
 	},
-	ignore = { -- literal match in whole string
+	ignore = { -- literal match in whole path
 		oldfiles = {
 			"/COMMIT_EDITMSG",
 		},
@@ -30,11 +29,22 @@ local config = {
 		},
 	},
 }
-local installed, snacksScratch = pcall(require, "plugin-specs.snacks.snacks-scratch")
-if installed then table.insert(config.ignore.oldfiles, snacksScratch.opts.scratch.root) end ---@diagnostic disable-line: undefined-field
+
+vim.schedule(function()
+	local installed, snacks = pcall(require, "snacks")
+	if installed then table.insert(config.ignore.oldfiles, snacks.config.scratch.root) end
+end)
 
 --------------------------------------------------------------------------------
 local M = {}
+
+---@param path string
+---@param type "oldfiles"|"mostChangedFiles"
+local function isIgnored(path, type)
+	local ignored = vim.iter(config.ignore[type])
+		:any(function(p) return path:find(p, nil, true) ~= nil end)
+	return ignored
+end
 
 ---@param msg string
 ---@param level? "info"|"trace"|"debug"|"warn"|"error"
@@ -70,8 +80,7 @@ local function getAltOldfile()
 	for _, path in ipairs(vim.v.oldfiles) do
 		local exists = vim.uv.fs_stat(path) ~= nil
 		local sameFile = path == curPath
-		local ignored = vim.iter(config.ignore.oldfiles)
-			:any(function(p) return path:find(p, nil, true) ~= nil end)
+		local ignored = isIgnored(path, "oldfiles")
 		if exists and not ignored and not sameFile then return path end
 	end
 end
@@ -95,8 +104,7 @@ local function getMostChangedFile()
 		if not (added and deleted and relPath) then return end -- in case of changed binary files
 
 		local absPath = vim.fs.normalize(gitroot .. "/" .. relPath)
-		local ignored = vim.iter(config.ignore.mostChangedFiles)
-			:any(function(p) return absPath:find(p, nil, true) ~= nil end)
+		local ignored = isIgnored(absPath, "mostChangedFiles")
 		local nonExistent = vim.uv.fs_stat(absPath) == nil
 		if ignored or nonExistent then return end
 

@@ -6,19 +6,28 @@
 ---@type LazyPluginSpec
 return {
 	"olimorris/codecompanion.nvim",
-	cmd = { "CodeCompanion", "CodeCompanionChat" },
+	cmd = { "CodeCompanion", "CodeCompanionChat", "CodeCompanionActions" },
 	init = function()
 		vim.g.whichkeyAddSpec { "<leader>a", group = " AI" }
 
+		-- Start: notify
 		vim.api.nvim_create_autocmd("User", {
-			desc = "User: add notifications for codecompanion",
-			pattern = "CodeCompanionRequest*",
+			desc = "User: CodeCompanion started",
+			pattern = "CodeCompanionRequestStarted",
+			callback = function()
+				vim.notify("Request started.", nil, { title = "CodeCompanion", icon = "" })
+			end,
+		})
+		-- Finish: notify & format
+		vim.api.nvim_create_autocmd("User", {
+			desc = "User: CodeCompanion finished",
+			pattern = "CodeCompanionRequestFinished",
 			callback = function(ctx)
-				local type = ctx.match:gsub("^CodeCompanionRequest", ""):lower()
-				if type == "streaming" then return end
-				local strategy = ctx.data.strategy:sub(1, 1):upper() .. ctx.data.strategy:sub(2)
-				local msg = ("%s request %s."):format(strategy, type)
-				vim.notify(msg, nil, { title = "CodeCompanion", icon = "" })
+				local success = ctx.data.status == "success"
+				local msg = ("Request %s."):format(success and "finished" or "failed")
+				local lvl = success and "info" or "error"
+				vim.notify(msg, lvl, { title = "CodeCompanion", icon = "" })
+				if success then require("personal-plugins.misc").formatWithFallback() end
 			end,
 		})
 	end,
@@ -40,6 +49,7 @@ return {
 		},
 		adapters = {
 			openai = function()
+				-- https://platform.openai.com/usage
 				-- https://platform.openai.com/docs/models
 				local model = "gpt-5-mini"
 				local apiKeyFile =

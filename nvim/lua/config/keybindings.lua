@@ -465,8 +465,7 @@ keymap("n", "<leader>rc", function() require("personal-plugins.misc").camelSnake
 
 keymap("n", "<leader>rq", function()
 	local line = vim.api.nvim_get_current_line()
-	local updatedLine = line:gsub("[\"']", function(q) return (q == [["]] and [[']] or [["]]) end)
-	vim.api.nvim_set_current_line(updatedLine)
+	vim.api.nvim_set_current_line(line:gsub("[\"']", { ['"'] = "'", ["'"] = '"' }))
 end, { desc = " Switch quotes in line" })
 
 do
