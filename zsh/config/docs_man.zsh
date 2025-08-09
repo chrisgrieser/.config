@@ -48,7 +48,7 @@ function man() {
 		fi
 	fi
 	# https://wezfurlong.org/wezterm/cli/cli/set-tab-title.html
-	wezterm cli set-tab-title --pane-id="$pane_id" "docs: $command"
+	wezterm cli set-window-title --pane-id="$pane_id" " $command"
 }
 
 #───────────────────────────────────────────────────────────────────────────────
