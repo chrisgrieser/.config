@@ -14,28 +14,25 @@ fi
 #───────────────────────────────────────────────────────────────────────────────
 
 # determine commit message
-changed_files="$(git status --porcelain | cut -c4- | sed 's|^|./|')"
+changed_files="$(git status --porcelain | cut -c4- | sed -Ee 's/^"|"$//g' -e 's|^|./|')"
 common_parent=$(echo "$changed_files" | head -n1) # initialize
 
-if [[ "$(echo "$changed_files" | wc -l | tr -d " ")" -eq 1 ]]; then
-	commit_msg="$device_name ($changed_files)"
-else
-	while read -r filepath; do # don't call it `path`, messes with `$PATH`
-		while [[ ! "$filepath" =~ ^$common_parent ]]; do
-			common_parent=$(dirname "$common_parent")
-		done
-	done < <(echo "$changed_files")
-	common_parent=$(echo "$common_parent" | cut -c3-) # remove leading `./`
-	while [[ ${#common_parent} -gt 60 ]]; do
-		common_parent=${common_parent#*/} # remove first directory
+while read -r filepath; do # don't call it `path`, messes with `$PATH`
+	while [[ ! "$filepath" =~ ^$common_parent ]]; do
+		common_parent=$(dirname "$common_parent")
 	done
+done < <(echo "$changed_files")
+[[ -d "$common_parent" ]] && common_parent="$common_parent/" # distinguish from files with trailing `/`
+common_parent=$(echo "$common_parent" | cut -c3-)            # remove leading `./`
+while [[ ${#common_parent} -gt 60 ]]; do
+	common_parent=${common_parent#*/} # remove first directory
+done
 
-	device_name=$(scutil --get ComputerName | cut -d" " -f3-)
-	if [[ -z "$common_parent" ]]; then
-		commit_msg="$device_name ($change_count files)"
-	else
-		commit_msg="$device_name ($common_parent/)"
-	fi
+device_name=$(scutil --get ComputerName | cut -d" " -f3-)
+if [[ -z "$common_parent" ]]; then
+	commit_msg="$device_name ($change_count files)"
+else
+	commit_msg="$device_name ($common_parent)"
 fi
 
 #───────────────────────────────────────────────────────────────────────────────

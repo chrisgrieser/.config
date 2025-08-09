@@ -7,7 +7,7 @@
 # Apple builtin databases in home folder
 *.{photos,music,tv}library
 
-# git isn't ignored by default
+# keep git hidden, even if ignored files are shown via `--hidden`
 .git/
 
 # INFO files

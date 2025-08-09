@@ -1,5 +1,6 @@
 export ZDOTDIR="$HOME/.config/zsh" # location of this zsh configuration
 export EDITOR="nvim"
+export NEOVIDE_FORK="true" # spawn independent `neovide` instance
 
 #───────────────────────────────────────────────────────────────────────────────
 
