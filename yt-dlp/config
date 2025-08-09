@@ -4,12 +4,14 @@
 
 # DOWNLOAD
 --limit-rate=4M
+--concurrent-fragments=3
 --retries=5
 --no-playlist
+--console-title # display progress in the terminal window title
 
 # FILE SYSTEM
 --paths="temp:~/Movies/yt-dlp_incomplete" # temporary `.part` files
---paths="home:~/Desktop/%(extractor_key)s" # default download location
+--paths="home:~/Desktop" # default download location
 
 # FILE NAME
 --trim-filenames=60

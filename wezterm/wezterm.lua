@@ -71,22 +71,14 @@ end)
 
 -- https://wezfurlong.org/wezterm/config/lua/window-events/format-tab-title.html
 wt.on("format-tab-title", function(tab)
-	-- prefer title that was set via `tab:set_title()` or `wezterm cli set-tab-title`
-	local title = tab.tab_title ~= "" and tab.tab_title or tab.active_pane.title
+	local winTitle = tab.active_pane.title -- set e.g. by `nvim` or `yt-dlp`
 	local cwd = tab.active_pane.current_working_dir
-	local icon
-
-	if cwd and (title == "zsh" or title == "wezterm" or title:find("/")) then
-		local pwdBasefolder = cwd.file_path:gsub("^.*/(.*)/$", "%1")
-		title = pwdBasefolder
-		icon = "󰉋"
-	elseif title:find("^docs") then
-		icon = ""
+	if winTitle == "zsh" then
+		local cwdBase = cwd.file_path:gsub("^.*/(.*)/$", "%1")
+		return "󰉋  " .. cwdBase
 	else
-		icon = ""
+		return " " .. winTitle
 	end
-
-	return (" %s %s "):format(icon, title)
 end)
 
 --------------------------------------------------------------------------------
@@ -150,7 +142,7 @@ local config = {
 	-- Tabs
 	enable_tab_bar = true,
 	tab_max_width = 45, -- I have few tabs, therefore enough space for more width
-	use_fancy_tab_bar = false, -- `false` makes the tabs bigger and more in terminal style
+	use_fancy_tab_bar = true, -- `false` makes the tabs bigger and more in terminal style
 	show_new_tab_button_in_tab_bar = false,
 	hide_tab_bar_if_only_one_tab = true,
 
