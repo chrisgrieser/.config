@@ -6,22 +6,23 @@ local M = {}
 
 --- inspired by ultimate-autopair's fastWarp function
 function M.fastWarp()
-	local warpChars = { ")", "]", "}", '"', "'", "`", "*" } -- CONFIG
+	local config = {
+		warpChars = { ")", "]", "}", '"', "'", "`", "*" },
+	}
+	-----------------------------------------------------------------------------
 
-	if vim.fn.mode() ~= "i" then return vim.notify("Not in insert mode.", vim.log.levels.WARN) end
 	local row, col = unpack(vim.api.nvim_win_get_cursor(0))
 	local line = vim.api.nvim_get_current_line()
 	local nextChar = line:sub(col + 1, col + 1)
-	if not vim.tbl_contains(warpChars, nextChar) then return end
+	if not vim.tbl_contains(config.warpChars, nextChar) then return end
 
-	local lineBefore = line:sub(1, col)
-	local lineAfter = line:sub(col + 2)
-	local _, nextWord = lineAfter:find("%w+")
-	local _, nextPunctuation = lineAfter:find("%p+")
-	local shift = math.min(nextWord or math.huge, nextPunctuation or math.huge)
+	local lineBefore, lineAfter = line:sub(1, col), line:sub(col + 2)
+	local nextWord = select(2, lineAfter:find("%w+")) or math.huge
+	local nextPunctuation = select(2, lineAfter:find("%p+")) or math.huge
+	local shift = math.min(nextWord, nextPunctuation)
 	if shift == math.huge then return end -- none found
-	local newLineAfter = lineAfter:sub(1, shift) .. nextChar .. lineAfter:sub(shift + 1)
 
+	local newLineAfter = lineAfter:sub(1, shift) .. nextChar .. lineAfter:sub(shift + 1)
 	vim.api.nvim_win_set_cursor(0, { row, col + shift })
 	vim.api.nvim_set_current_line(lineBefore .. newLineAfter)
 end
@@ -125,10 +126,16 @@ function M.toggleOrIncrement()
 		toggles["if"] = "elseif"
 		toggles["=="] = "~="
 	end
+	-----------------------------------------------------------------------------
 
+	-- get cursor word
+	local iskeywordPrev = vim.opt.iskeyword:get()
+	vim.opt.iskeyword:remove { "_", "-" } -- so parts of words are picked up
 	-- cword does not include punctuation-only words, so checking `cWORD` for that
 	local cword = vim.fn.expand("<cWORD>"):find("^%p+$") and vim.fn.expand("<cWORD>")
 		or vim.fn.expand("<cword>")
+
+	-- insert new word OR increment
 	local newWord
 	for word, opposite in pairs(toggles) do
 		if cword == word then newWord = opposite end
@@ -143,6 +150,8 @@ function M.toggleOrIncrement()
 		-- needs `:execute` to escape `<C-a>`
 		vim.cmd.execute([["normal! ]] .. vim.v.count1 .. [[\<C-a>"]])
 	end
+
+	vim.opt.iskeyword = iskeywordPrev
 end
 
 --------------------------------------------------------------------------------
