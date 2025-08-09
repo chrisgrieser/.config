@@ -71,14 +71,13 @@ end)
 
 -- https://wezfurlong.org/wezterm/config/lua/window-events/format-tab-title.html
 wt.on("format-tab-title", function(tab)
-	local winTitle = tab.active_pane.title -- set e.g. by `nvim` or `yt-dlp`
+	local winTitle = tab.active_pane.title -- set e.g. by `nvim` or `yt-dlp --console-title`
+	winTitle = winTitle:gsub("  +", " ") -- duplicate spaces, e.g. by `yt-dlp` progress
 	local cwd = tab.active_pane.current_working_dir
-	if winTitle == "zsh" then
-		local cwdBase = cwd.file_path:gsub("^.*/(.*)/$", "%1")
-		return "󰉋  " .. cwdBase
-	else
-		return " " .. winTitle
-	end
+	local cwdBase = cwd.file_path:gsub("^.*/(.*)/$", "%1")
+	local icon = winTitle == "zsh" and "" or ""
+	local label = winTitle == "zsh" and cwdBase or winTitle
+	return (" %s %s "):format(icon, label)
 end)
 
 --------------------------------------------------------------------------------
@@ -141,10 +140,11 @@ local config = {
 
 	-- Tabs
 	enable_tab_bar = true,
-	tab_max_width = 45, -- I have few tabs, therefore enough space for more width
-	use_fancy_tab_bar = true, -- `false` makes the tabs bigger and more in terminal style
 	show_new_tab_button_in_tab_bar = false,
 	hide_tab_bar_if_only_one_tab = true,
+	tab_max_width = 80,
+	use_fancy_tab_bar = false, -- `false` = style using terminal cells
+	window_frame = { font_size = 23 }, -- font size if using `fancy_tab_bar`
 
 	-- Mouse Bindings
 	disable_default_mouse_bindings = false,
