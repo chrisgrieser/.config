@@ -50,7 +50,7 @@ function line_count() {
 # `fd` replacement using just `rg`
 function fd {
 	rg --hidden --no-config --files --binary --ignore-file="$HOME/.config/ripgrep/ignore" |
-		rg --color=always "$@"
+		rg "$@"
 }
 
 #───────────────────────────────────────────────────────────────────────────────
@@ -242,12 +242,13 @@ function ij {
 function watch_website {
 	local url=$1
 	local http_status
-	http_status=$(curl --silent --location --output /dev/null --write-out "%{http_code}" "$url")
-	if [[ "$http_status" -eq 200 ]]; then
-		echo "🌐 $url is online again"
-		"$ZDOTDIR/notificator" --title "🌐 $url" --message "online again" --sound "Blow"
-	else
+	while true; do
+		http_status=$(curl --silent --location --output /dev/null \
+			--write-out "%{http_code}: %{errormsg}" "$url")
+		[[ "$http_status" -eq 200 ]] && break
 		echo "HTTP code: $http_status"
-		return 1
-	fi
+		sleep 1
+	done
+	echo "🌐 $url is online again"
+	"$ZDOTDIR/notificator" --title "🌐 $url" --message "is online again" --sound "Blow"
 }

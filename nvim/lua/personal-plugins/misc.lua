@@ -8,6 +8,7 @@ local M = {}
 function M.fastWarp()
 	local config = {
 		warpChars = { ")", "]", "}", '"', "'", "`", "*" },
+		moveCursorAlong = false,
 	}
 	-----------------------------------------------------------------------------
 
@@ -23,8 +24,8 @@ function M.fastWarp()
 	if shift == math.huge then return end -- none found
 
 	local newLineAfter = lineAfter:sub(1, shift) .. nextChar .. lineAfter:sub(shift + 1)
-	vim.api.nvim_win_set_cursor(0, { row, col + shift })
 	vim.api.nvim_set_current_line(lineBefore .. newLineAfter)
+	if config.moveCursorAlong then vim.api.nvim_win_set_cursor(0, { row, col + shift }) end
 end
 
 --------------------------------------------------------------------------------
