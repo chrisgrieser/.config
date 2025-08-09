@@ -10,7 +10,7 @@
 --console-title # display progress in the terminal window title
 
 # FILE SYSTEM
---paths="temp:~/Movies/yt-dlp_incomplete" # temporary `.part` files
+--paths="temp:/tmp/yt-dlp_incomplete" # temporary `.part` files
 --paths="home:~/Desktop" # default download location
 
 # FILE NAME
