@@ -58,16 +58,17 @@ cask "syntax-highlight" # `Peek` not available anymore https://apps.apple.com/us
 computerName = `scutil --get ComputerName`
 
 if computerName.include?("Home")
-	brew "spotify_player"
 	brew "yt-dlp"
 	brew "ffmpeg" # recommended for `yt-dlp`
-	cask "bettertouchtool"
 	cask "catch"
-	cask "cleanshot"
 	cask "iina"
-	cask "steam"
 	cask "transmission"
 	cask "qlvideo" # provides preview icons for `mkv`
+	#───────
+	cask "bettertouchtool"
+	brew "spotify_player"
+	cask "cleanshot"
+	cask "steam"
 elsif computerName.include?("Office")
 	cask "cleanshot" # only license for 2 devices
 elsif computerName.include?("Mother")
