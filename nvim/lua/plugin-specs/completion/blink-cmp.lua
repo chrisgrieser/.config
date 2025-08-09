@@ -2,6 +2,7 @@
 -- DOCS https://cmp.saghen.dev/configuration/reference
 --------------------------------------------------------------------------------
 
+---PENDING https://github.com/Saghen/blink.cmp/issues/743
 ---Choice snippets[^1] work with blink, but leave you with a completion via
 ---vim's popupmenu, for which blink does not provide mappings, thus requiring
 ---this function
