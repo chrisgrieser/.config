@@ -5,10 +5,7 @@
 -- CONFIG
 -- https://platform.openai.com/usage
 -- https://platform.openai.com/docs/models
--- local model = "gpt-4.1-mini"
-local model = "gpt-5-nano"
-local apiKeyFile =
-	"$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/private dotfiles/openai-api-key.txt"
+local model = "gpt-4.1-mini" -- not switching to 5 yet, since it's slow
 
 --------------------------------------------------------------------------------
 
@@ -46,8 +43,13 @@ local function spinnerNotificationWhileRequest()
 		callback = function(ctx)
 			timer:stop()
 			timer:close()
-			vim.notify("Request finished ✅", nil, { timeout = 2000, id = ctx.data.id })
-			if jit.os ~= "OSX" then
+			vim.notify("Request finished ✅", nil, {
+				title = "CodeCompanion",
+				icon = "",
+				timeout = 3000,
+				id = ctx.data.id,
+			})
+			if jit.os == "OSX" then
 				local sound =
 					"/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/head_gestures_double_shake.caf"
 				vim.system { "afplay", sound }
@@ -87,8 +89,11 @@ return {
 		display = {
 			-- not helpful anyway, just using gitsigns word-diff afterwards instead
 			diff = { enabled = false },
-			chat = { -- https://codecompanion.olimorris.dev/configuration/chat-buffer.html
+
+			-- https://codecompanion.olimorris.dev/configuration/chat-buffer.html
+			chat = {
 				auto_scroll = false,
+				intro_message = "",
 				window = {
 					opts = { statuscolumn = " " }, -- padding
 				},
@@ -101,12 +106,17 @@ return {
 		},
 		adapters = {
 			openai = function()
+				local apiKeyFile =
+					"$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/private dotfiles/openai-api-key.txt"
+
 				-- https://github.com/olimorris/codecompanion.nvim/blob/main/lua/codecompanion/adapters/openai.lua
 				return require("codecompanion.adapters").extend("openai", {
 					schema = { model = { default = model } },
 					env = { api_key = ("cmd:cat %q"):format(apiKeyFile) },
-					-- GPT-5 models requires organizational verification if streaming
-					opts = { stream = false },
+					opts = {
+						-- GPT-5 models requires organizational verification if streaming
+						stream = model:find("gpt%-5"),
+					},
 				})
 			end,
 		},
