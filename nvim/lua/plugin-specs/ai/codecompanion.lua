@@ -18,15 +18,15 @@ return {
 				vim.notify("Request started.", nil, { title = "CodeCompanion", icon = "" })
 			end,
 		})
-		-- Finish: notify & format
+		-- Finish: notify & format on success
 		vim.api.nvim_create_autocmd("User", {
 			desc = "User: CodeCompanion finished",
 			pattern = "CodeCompanionRequestFinished",
 			callback = function(ctx)
 				local success = ctx.data.status == "success"
-				local msg = ("Request %s."):format(success and "finished" or "failed")
+				local result = success and "finished." or "failed: " .. ctx.data.status
 				local lvl = success and "info" or "error"
-				vim.notify(msg, lvl, { title = "CodeCompanion", icon = "" })
+				vim.notify("Request " .. result, lvl, { title = "CodeCompanion", icon = "" })
 				if success then require("personal-plugins.misc").formatWithFallback() end
 			end,
 		})
@@ -51,15 +51,13 @@ return {
 			openai = function()
 				-- https://platform.openai.com/usage
 				-- https://platform.openai.com/docs/models
-				local model = "gpt-5-mini"
+				local model = "gpt-5"
 				local apiKeyFile =
 					"$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/private dotfiles/openai-api-key.txt"
 
 				return require("codecompanion.adapters").extend("openai", {
 					schema = { model = { default = model } },
-					env = {
-						api_key = ("cmd:cat %q"):format(apiKeyFile),
-					},
+					env = { api_key = ("cmd:cat %q"):format(apiKeyFile) },
 				})
 			end,
 		},

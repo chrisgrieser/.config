@@ -64,6 +64,14 @@ keymap("n", "gm", "%", { desc = "󰅪 Goto match", remap = true })
 keymap("n", "ge", "]d", { desc = "󰋼 Next diagnostic", remap = true })
 keymap("n", "gE", "[d", { desc = "󰋼 Previous diagnostic", remap = true })
 
+-- Open URL in file
+keymap(
+	"n",
+	"<D-U>",
+	function() require("personal-plugins.misc").openUrlInBuffer() end,
+	{ desc = " Open URL in buffer" }
+)
+
 --------------------------------------------------------------------------------
 -- MARKS
 do
@@ -336,21 +344,6 @@ do
 	keymap("n", "<PageDown>", function() scrollLspWin(5) end, { desc = "↓ Scroll LSP win" })
 	keymap("n", "<PageUp>", function() scrollLspWin(-5) end, { desc = "↑ Scroll LSP win" })
 end
-
---------------------------------------------------------------------------------
-
--- Open first URL in file
-keymap("n", "<D-U>", function()
-	local bufLines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
-	for _, line in pairs(bufLines) do
-		local url = line:match([[%l%l%l+://[^%s)%]}"'`>]+]])
-		if url then
-			vim.ui.open(url)
-			return
-		end
-	end
-	vim.notify("No URL found in file.", vim.log.levels.WARN)
-end, { desc = " Open first URL in file" })
 
 --------------------------------------------------------------------------------
 

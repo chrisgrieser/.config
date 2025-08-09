@@ -33,7 +33,11 @@ function M.playRecording(reg)
 	if hasRecording then
 		vim.cmd.normal { "@" .. reg, bang = true }
 	else
-		vim.notify("There is no recording.", vim.log.levels.WARN, { title = "Recording", icon = "󰃾" })
+		vim.notify(
+			"There is no recording.",
+			vim.log.levels.WARN,
+			{ title = "Recording", icon = "󰃾" }
+		)
 	end
 end
 
@@ -117,6 +121,28 @@ function M.toggleOrIncrement()
 	else
 		-- needs `:execute` to escape `<C-a>`
 		vim.cmd.execute([["normal! ]] .. vim.v.count1 .. [[\<C-a>"]])
+	end
+end
+
+--------------------------------------------------------------------------------
+
+function M.openUrlInBuffer()
+	local bufLines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+	local bufText = table.concat(bufLines, "\n")
+	local urls = {}
+
+	local urlPattern = [[%l%l%l+://[^%s)%]}"'`>]+]]
+	for url in bufText:gmatch(urlPattern) do
+		table.insert(urls, url)
+	end
+	if #urls == 0 then
+		vim.notify("No URL found in file.", vim.log.levels.WARN)
+	elseif #urls == 1 then
+		vim.ui.open(urls[1])
+	else
+		vim.ui.select(urls, { prompt = " Open URL:" }, function(url)
+			if url then vim.ui.open(url) end
+		end)
 	end
 end
 
