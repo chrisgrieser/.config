@@ -1,5 +1,10 @@
 completions/*
 !completions/README.md
 
+# hide plugins except my own
 plugins/*
 !plugins/magic_dashboard.zsh
+
+# mave them visible by default
+!.zshrc
+!.zshenv
