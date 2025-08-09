@@ -165,9 +165,9 @@
 			<key>keyword</key>
 			<string>code</string>
 			<key>text</key>
-			<string>GitHub Code Search: "{query}"</string>
+			<string>📄 GitHub Code Search: "{query}"</string>
 			<key>url</key>
-			<string>https://github.com/search?type=code&amp;q=path%3A%2F%5C%2F{query)%24%2F</string>
+			<string>https://github.com/search?type=code&amp;q=path:/\/{query}$/</string>
 		</dict>
 		<key>E190C7B2-5B59-40A7-8B1C-722C7FD239F2</key>
 		<dict>
@@ -220,7 +220,7 @@
 			<key>keyword</key>
 			<string>code</string>
 			<key>text</key>
-			<string>GitHub Code Search: "{query}"</string>
+			<string>🔢 GitHub Code Search: "{query}"</string>
 			<key>url</key>
 			<string>https://github.com/search?type=code&amp;q={query}</string>
 		</dict>
