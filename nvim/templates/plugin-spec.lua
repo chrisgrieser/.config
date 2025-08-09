@@ -2,4 +2,5 @@
 ---@type LazyPluginSpec
 return {
 	"$0",
+	opts = {},
 }
