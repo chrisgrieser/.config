@@ -27,7 +27,9 @@ return {
 				local result = success and "finished." or "failed: " .. ctx.data.status
 				local lvl = success and "info" or "error"
 				vim.notify("Request " .. result, lvl, { title = "CodeCompanion", icon = "" })
-				if success then require("personal-plugins.misc").formatWithFallback() end
+				if success and vim.bo[ctx.buf].buftype == "" then
+					require("personal-plugins.misc").formatWithFallback()
+				end
 			end,
 		})
 	end,
@@ -35,17 +37,22 @@ return {
 		-- `:` for the visual mode commands, so context gets passed via `<>` marks
 		{ "<leader>aa", ":CodeCompanion<CR>", mode = "x", desc = " Inline assistant" },
 		{ "<leader>as", ":CodeCompanion simplify<CR>", mode = "x", desc = " Simplify" },
-		{ "<leader>ae", ":CodeCompanion explain this<CR>", mode = "x", desc = " Explain" },
-		{ "<leader>ac", "<cmd>CodeCompanionChat toggle<CR>", desc = " Simplify" },
+		-- stylua: ignore
+		{ "<leader>ae", "<cmd>CodeCompanionChat explain this<CR>", mode = "x", desc = " Explain (chat)" },
+		{ "<leader>ac", "<cmd>CodeCompanionChat toggle<CR>", desc = " Toggle chat" },
 	},
 	opts = {
 		display = {
 			-- not helpful anyway, just using gitsigns word-diff afterwards instead
 			diff = { enabled = false },
+			chat = {
+				
+			}
 		},
 		strategies = {
 			inline = { adapter = "openai" },
 			cmd = { adapter = "openai" },
+			chat = { adapter = "openai" },
 		},
 		adapters = {
 			openai = function()
@@ -58,6 +65,8 @@ return {
 				return require("codecompanion.adapters").extend("openai", {
 					schema = { model = { default = model } },
 					env = { api_key = ("cmd:cat %q"):format(apiKeyFile) },
+					-- GPT-5 models requires organizational verification if streaming
+					opts = { stream = false },
 				})
 			end,
 		},
