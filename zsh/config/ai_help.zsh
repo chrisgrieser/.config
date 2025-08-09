@@ -28,19 +28,18 @@ ai() {
 		Create a command to accomplish the following task:
 	"
 
-
 	#────────────────────────────────────────────────────────────────────────────
 	#────────────────────────────────────────────────────────────────────────────
 
 	local response cmd task
 
 	task="$*"
-	print "\e[1;34mAsking AI…\e[0m "
+	print "\e[1;34m󰚩 Asking AI…\e[0m"
 
 	# OpenAI request
 	# DOCS https://platform.openai.com/docs/api-reference/responses/get
-	response=$(jq -n \
-		--arg model "$model" --arg system_prompt "$system_prompt" --arg task "$task" --arg reasoning "$reasoning" \
+	response=$(jq -n --arg model "$model" --arg system_prompt "$system_prompt" \
+		--arg task "$task" --arg reasoning "$reasoning" \
 		'{
 			model: $model,
 			reasoning: { effort: $reasoning },
@@ -61,12 +60,13 @@ ai() {
 	fi
 	cmd="$(echo "$response" | jq --raw-output '.output[1].content[0].text')"
 	if [[ $? -ne 0 || -z "$cmd" || "$cmd" == "null" ]]; then
-		echo "❌ error: $response" >&2
+		print "\e[1;31merror: $response\e[0m" >&2
 		return 1
 	fi
 
 	# output
+	# (via clipboard, since we cannot use zle widgets outside the terminal buffer)
 	echo -n "$cmd" | pbcopy
-	echo "$cmd" | bat --language=sh
-	print "\e[1;35m(Copied)\e[0m"
+	sleep 0.1
+	osascript -e "tell application \"System Events\" to keystroke \"v\" using {command down}"
 }

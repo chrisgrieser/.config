@@ -169,6 +169,10 @@
     "description": "reads either from STDIN or $1. stdin may have unescaped newlines, which have to be removed, e.g. via `tr -d '\n'`.",
     "prefix": "input (stdin or $1)"
   },
+  "keystroke (via Applescript)": {
+    "body": "osascript -e \"tell application \\\"System Events\\\" to keystroke \\\"${1:key}\\\" using {command down}\"",
+    "prefix": "keystroke (via Applescript)"
+  },
   "notify (msg)": {
     "body": "osascript -e 'display notification \"\" with title \"${1:msg}\"'",
     "prefix": "notify (msg)"
