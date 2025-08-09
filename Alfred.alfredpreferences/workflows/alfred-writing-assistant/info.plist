@@ -193,36 +193,13 @@
 	<key>createdby</key>
 	<string>Chris Grieser</string>
 	<key>description</key>
-	<string>Autocorrection and synonym suggestions for the word under the cursor. Rephrasing of the selected text. All with one key press.</string>
+	<string>Autocorrection, synonym suggestions, and Apple Intelligence Writing Tools.</string>
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
 	<string>Writing Assistant</string>
 	<key>objects</key>
 	<array>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/fix-word-under-cursor.js</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>812123A0-13FF-4E57-A76C-6EB0EDF2A55D</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
@@ -251,6 +228,29 @@
 			<string>alfred.workflow.trigger.hotkey</string>
 			<key>uid</key>
 			<string>A79508C6-9D50-47FC-8E75-B8142611461C</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/fix-word-under-cursor.js</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>812123A0-13FF-4E57-A76C-6EB0EDF2A55D</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -301,6 +301,25 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>autopaste</key>
+				<true/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>B34DBBCE-C220-4020-BDB7-DFAB47719F7A</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
@@ -328,25 +347,6 @@
 			<string>527810E3-7675-48C8-ABF2-D21274E22579</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>autopaste</key>
-				<true/>
-				<key>clipboardtext</key>
-				<string>{query}</string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>transient</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.clipboard</string>
-			<key>uid</key>
-			<string>B34DBBCE-C220-4020-BDB7-DFAB47719F7A</string>
-			<key>version</key>
-			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -451,27 +451,6 @@
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>⚠️ Apple Intelligence</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>BF4EBC7E-B09A-4709-8132-D893A585F49C</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
 				<false/>
 				<key>removeextension</key>
 				<false/>
@@ -484,6 +463,27 @@
 			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
 			<string>03BE9390-3271-4FC7-9500-527674AE7239</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>⚠️ Apple Intelligence</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>BF4EBC7E-B09A-4709-8132-D893A585F49C</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -522,6 +522,29 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/trigger-apple-intelligence.applescript</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>16C4AEFA-0A32-4B8B-8C80-7DC517AFCA22</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>argumenttrimmode</key>
 				<integer>0</integer>
 				<key>argumenttype</key>
@@ -547,29 +570,6 @@
 			<string>D73C316D-320A-4D1C-8966-F446AE9B64F5</string>
 			<key>version</key>
 			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/trigger-apple-intelligence.applescript</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>16C4AEFA-0A32-4B8B-8C80-7DC517AFCA22</string>
-			<key>version</key>
-			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -611,17 +611,24 @@
 		</dict>
 	</array>
 	<key>readme</key>
-	<string>## Usage
+	<string>## Version 2.0: Removal of the ChatGPT Rephraser
+Since Apple Intelligence has become more available, and is—at least for
+proofreading tasks—as competent as ChatGPT, the Rephraser has become obsolete.
+
+If you want to continue using the `Rephraser`, you can download [the last
+version of the workflow that still supports
+it](https://github.com/chrisgrieser/alfred-writing-assistant/releases/tag/1.8.1).
+
+If you use Obsidian, you can also use the [Obsidian Proofreader
+Plugin](https://github.com/chrisgrieser/obsidian-proofreader) which does proper
+inline suggestions.
+
+## Usage
 The workflow offers three [hotkeys](https://www.alfredapp.com/help/workflows/triggers/hotkey/):
 
 1. Autocorrect the word under the cursor.
 2. Suggest synonyms for the word under the cursor.
-3. Apple Intelligence Writing Tools
-	+ A convenience hotkey to trigger the Writing Tools selection
-	  via keyboard, it works the same as if you click the item in `Edit` →
-	  `Writing Tools`.
-	+ Note that Apple Intelligence availability depends on your country, your
-	  macOS version, and the app.
+3. Invoke `Apple Intelligence Writing Tools`.
 
 ---
 
@@ -823,7 +830,7 @@ DOUBLE CLICK TO EDIT</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.8.1</string>
+	<string>2.0.0</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>

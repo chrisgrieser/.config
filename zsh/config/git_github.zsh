@@ -184,7 +184,7 @@ function unshallow {
 }
 
 function delete_git_tag {
-	git fetch --tags # fetch tags, in case clone is shallow
+	git fetch --no-progress --tags # fetch tags, in case clone is shallow
 	git tag --delete "$1" && git push origin --delete "$1"
 }
 
@@ -254,8 +254,8 @@ function reflog {
 # uses `_gitlog` from `magic-dashboard.zsh`
 function gli {
 	if ! typeset -f _gitlog > /dev/null; then
-		echo "requires \`_gitlog.zsh\` from zsh magic-dashboard"
-		return 1
+	    echo "requires \`_gitlog.zsh\` from zsh magic-dashboard"
+		 return 1
 	fi
 
 	local hash key_pressed selected repo
