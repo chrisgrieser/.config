@@ -2,6 +2,45 @@
 -- alternative: https://github.com/dlants/magenta.nvim
 --------------------------------------------------------------------------------
 
+local function spinnerNotificationWhileRequest()
+	local spinners = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" }
+	local updateIntervalMs = 1000
+	local timer = assert(vim.uv.new_timer())
+
+	vim.api.nvim_create_autocmd("User", {
+		desc = "User: CodeCompanion lualine spinner (start)",
+		pattern = "CodeCompanionRequestStarted",
+		callback = function(ctx)
+			timer:start(
+				updateIntervalMs,
+				updateIntervalMs,
+				vim.schedule_wrap(function()
+					local spinner = spinners[math.floor(vim.uv.now() / 100) % #spinners + 1]
+					vim.notify("Request running " .. spinner, nil, {
+						title = "CodeCompanion",
+						icon = "",
+						timeout = false,
+						id = ctx.data.id, -- replaces existing notification
+					})
+				end)
+			)
+		end,
+	})
+	vim.api.nvim_create_autocmd("User", {
+		desc = "User: CodeCompanion lualine spinner (stop)",
+		pattern = "CodeCompanionRequestFinished",
+		callback = function(ctx)
+			vim.notify("Request finished ✅", nil, {
+				title = "CodeCompanion",
+				icon = "",
+				timeout = 2000,
+				id = ctx.data.id,
+			})
+			timer:stop()
+		end,
+	})
+end
+
 ---@module "lazy.types"
 ---@type LazyPluginSpec
 return {
@@ -10,25 +49,15 @@ return {
 	init = function()
 		vim.g.whichkeyAddSpec { "<leader>a", group = " AI" }
 
-		-- Start: notify
+		spinnerNotificationWhileRequest()
+
 		vim.api.nvim_create_autocmd("User", {
-			desc = "User: CodeCompanion started",
-			pattern = "CodeCompanionRequestStarted",
-			callback = function()
-				vim.notify("Request started.", nil, { title = "CodeCompanion", icon = "" })
-			end,
-		})
-		-- Finish: notify & format on success
-		vim.api.nvim_create_autocmd("User", {
-			desc = "User: CodeCompanion finished",
+			desc = "User: CodeCompanion format on success",
 			pattern = "CodeCompanionRequestFinished",
 			callback = function(ctx)
-				local success = ctx.data.status == "success"
-				local result = success and "finished." or "failed: " .. ctx.data.status
-				local lvl = success and "info" or "error"
-				vim.notify("Request " .. result, lvl, { title = "CodeCompanion", icon = "" })
-				if success and vim.bo[ctx.buf].buftype == "" then
+				if ctx.data.status == "success" then
 					require("personal-plugins.misc").formatWithFallback()
+					vim.api.buffer
 				end
 			end,
 		})
@@ -45,9 +74,12 @@ return {
 		display = {
 			-- not helpful anyway, just using gitsigns word-diff afterwards instead
 			diff = { enabled = false },
-			chat = {
-				
-			}
+			chat = { -- https://codecompanion.olimorris.dev/configuration/chat-buffer.html
+				auto_scroll = false,
+				window = {
+					opts = { statuscolumn = " " }, -- padding
+				},
+			},
 		},
 		strategies = {
 			inline = { adapter = "openai" },
@@ -57,8 +89,7 @@ return {
 		adapters = {
 			openai = function()
 				-- https://platform.openai.com/usage
-				-- https://platform.openai.com/docs/models
-				local model = "gpt-5"
+				local model = "gpt-5" -- https://platform.openai.com/docs/models
 				local apiKeyFile =
 					"$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/private dotfiles/openai-api-key.txt"
 
