@@ -52,7 +52,7 @@ local function spinnerNotificationWhileRequest()
 			if jit.os == "OSX" then
 				local sound =
 					"/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/head_gestures_double_shake.caf"
-				vim.system { "afplay", sound }
+				vim.system { "afplay", "--volume=0.5", sound }
 			end
 		end,
 	})
@@ -72,8 +72,9 @@ return {
 		vim.api.nvim_create_autocmd("User", {
 			desc = "User: CodeCompanion format on success",
 			pattern = "CodeCompanionInlineFinished",
-			callback = function(ctx)
-				vim.defer_fn(function() vim.lsp.buf.format { bufnr = ctx.buf } end, 1000)
+			callback = function()
+				-- deferred for potential buffer switch
+				vim.defer_fn(vim.lsp.buf.format, 100)
 			end,
 		})
 	end,
