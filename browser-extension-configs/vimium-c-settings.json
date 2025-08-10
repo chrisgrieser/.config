@@ -1,7 +1,7 @@
 {
 	"name": "Vimium C",
-	"@time": "8/9/2025, 6:18:20 AM",
-	"time": 1754713100584,
+	"@time": "8/10/2025, 9:51:34 AM",
+	"time": 1754812294455,
 	"environment": {
 		"extension": "2.12.2",
 		"platform": "mac",
@@ -12,7 +12,7 @@
 	"exclusionRules": [
 		{
 			"passKeys": "j k ",
-			"pattern": "^https://github\\.com/\\.*/(issues|pulls)"
+			"pattern": "^https://github\\.com/\\.*/(issues|pulls)$"
 		},
 		{
 			"passKeys": "g ",
@@ -83,7 +83,6 @@
 		"# INFO",
 		"# - combine commands: https://github.com/gdh1995/vimium-c/wiki/Auto-run-a-tree-of-commands#open-vomnibar-after-creating-a-new-tab",
 		"# - Vimium-C mapping Syntax: https://github.com/gdh1995/vimium-c/issues/873",
-		"# - Google excludes `c` (cycle/copy) for Grepper https://www.grepper.com/documentation.php#using_keyboard_shortcuts",
 		"# - Google excludes regex disables it only at image search",
 		"#───────────────────────────────────────────────────────────────────────────────",
 		"",

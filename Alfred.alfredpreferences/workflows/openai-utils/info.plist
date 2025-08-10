@@ -7,34 +7,7 @@
 	<key>category</key>
 	<string>❇️</string>
 	<key>connections</key>
-	<dict>
-		<key>0A1BEF49-AC4F-4198-9C67-802222DF3EFD</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>A904F0DB-9F1B-4743-9101-3D4B71F8AFD4</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>A904F0DB-9F1B-4743-9101-3D4B71F8AFD4</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>EF3BB7AA-5FC8-4743-BF4A-606147C656CF</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-	</dict>
+	<dict/>
 	<key>createdby</key>
 	<string>Chris Grieser</string>
 	<key>description</key>
@@ -48,116 +21,96 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>2</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
 				<key>escaping</key>
 				<integer>0</integer>
+				<key>keyword</key>
+				<string>usage||openai||costs</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>loading…</string>
 				<key>script</key>
 				<string></string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
 				<string>./scripts/openai-costs.js</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>A904F0DB-9F1B-4743-9101-3D4B71F8AFD4</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>behaviour</key>
-				<integer>0</integer>
-				<key>fontmode</key>
-				<integer>0</integer>
-				<key>fontsizing</key>
-				<integer>0</integer>
-				<key>footertext</key>
-				<string></string>
-				<key>inputfile</key>
-				<string></string>
-				<key>inputtype</key>
-				<integer>0</integer>
-				<key>loadingtext</key>
-				<string></string>
-				<key>outputmode</key>
-				<integer>0</integer>
-				<key>scriptinput</key>
-				<integer>0</integer>
-				<key>spellchecking</key>
-				<integer>0</integer>
-				<key>stackview</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.userinterface.text</string>
-			<key>uid</key>
-			<string>EF3BB7AA-5FC8-4743-BF4A-606147C656CF</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>keyword</key>
-				<string>usage||openai</string>
 				<key>subtext</key>
 				<string></string>
-				<key>text</key>
-				<string>OpenAI Costs</string>
+				<key>title</key>
+				<string>OpenAI Usage Costs</string>
+				<key>type</key>
+				<integer>8</integer>
 				<key>withspace</key>
 				<true/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
+			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
-			<string>0A1BEF49-AC4F-4198-9C67-802222DF3EFD</string>
+			<string>7BB77036-8E3E-4E35-AF99-26CEA1AE0808</string>
 			<key>version</key>
-			<integer>1</integer>
+			<integer>3</integer>
 		</dict>
 	</array>
 	<key>readme</key>
-	<string>## Usage
-Get PLACEHOLDER the `KEYWORD` keyword.
-- &lt;kbd&gt;⏎&lt;/kbd&gt; open the page in the browser.
-- &lt;kbd&gt;⌥⏎&lt;/kbd&gt; copy the page URL.
+	<string>## Requirements
+- [OpenAI Admin Key](https://platform.openai.com/settings/organization/admin-keys) with `api.usage.read` permissions
 
 ---
 
 #### Workflow created by [Chris Grieser](https://chris-grieser.de/)</string>
 	<key>uidata</key>
 	<dict>
-		<key>0A1BEF49-AC4F-4198-9C67-802222DF3EFD</key>
+		<key>7BB77036-8E3E-4E35-AF99-26CEA1AE0808</key>
 		<dict>
 			<key>xpos</key>
-			<real>65</real>
+			<real>75</real>
 			<key>ypos</key>
-			<real>185</real>
-		</dict>
-		<key>A904F0DB-9F1B-4743-9101-3D4B71F8AFD4</key>
-		<dict>
-			<key>xpos</key>
-			<real>250</real>
-			<key>ypos</key>
-			<real>185</real>
-		</dict>
-		<key>EF3BB7AA-5FC8-4743-BF4A-606147C656CF</key>
-		<dict>
-			<key>xpos</key>
-			<real>455</real>
-			<key>ypos</key>
-			<real>185</real>
+			<real>275</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
-	<array/>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string></string>
+				<key>placeholder</key>
+				<string>cat "/path/to/secret-file.txt"</string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>Shell command to get OpenAI Admin Key</string>
+			<key>label</key>
+			<string>Admin Key command</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>openai_admin_key_cmd</string>
+		</dict>
+	</array>
+	<key>version</key>
+	<string>0.9</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
