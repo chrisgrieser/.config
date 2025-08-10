@@ -183,7 +183,7 @@
       "\telse if (typeof date === \"string\") timestamp = new Date(date).getTime();",
       "\telse timestamp = date;",
       "",
-      "\tconst deltaHours = (Date.now() - date) / 1000 / 60 / 60;",
+      "\tconst deltaHours = (Date.now() - timestamp) / 1000 / 60 / 60;",
       "\tlet /** @type {\"year\"|\"month\"|\"week\"|\"day\"|\"hour\"} */ unit;",
       "\tlet delta;",
       "\tif (deltaHours < 24) {",
