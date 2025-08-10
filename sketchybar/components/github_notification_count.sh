@@ -9,10 +9,7 @@ _export_github_token
 if [[ $(system_profiler SPDisplaysDataType | grep -c Resolution) -gt 1 ]]; then
 	sketchybar --set "$NAME" drawing=false
 	return 0
-fi
-
-# GUARD dependencies or API key missing
-if [[ -z "$GITHUB_TOKEN" ]]; then
+elif [[ -z "$GITHUB_TOKEN" ]]; then
 	sketchybar --set "$NAME" label="NO TOKEN" drawing=true
 	return 1
 fi
