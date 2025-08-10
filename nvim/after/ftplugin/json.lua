@@ -1,5 +1,8 @@
 vim.opt.foldlevel = 3
 
+vim.opt_local.tabstop = 2
+vim.opt_local.shiftwidth = 2
+vim.opt_local.expandtab = true
 --------------------------------------------------------------------------------
 
 local bkeymap = require("config.utils").bufKeymap

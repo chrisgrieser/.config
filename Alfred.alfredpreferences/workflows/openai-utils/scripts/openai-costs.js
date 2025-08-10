@@ -22,6 +22,7 @@ function run() {
 			"https://api.openai.com/v1/organization/costs" +
 			`?start_time=${startTimestamp}` +
 			`&limit=${dayOfMonth}` +
+			"&bucket_width=1d" + // currently only 1d supported, change when possible to avoid pagination
 			`&page=${nextPage}`;
 
 		const curlCmd = `curl --request GET --url "${url}" \
@@ -56,6 +57,8 @@ function run() {
 	const daysInMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0).getDate();
 	const daysRemainingThisMonth = daysInMonth - today.getDate() + 1; // +1 for today itself
 
-	// Output for Alfred
-	return `$${totalCost.toFixed(2)} / $${monthlyBudget.toFixed(2)}\n${nameOfMonth} budget, resets in ${daysRemainingThisMonth} days`;
+	const msgForAlfred =
+		`$${totalCost.toFixed(2)} / $${monthlyBudget.toFixed(2)}` +
+		`\n${nameOfMonth} budget, resets in ${daysRemainingThisMonth} days`;
+	return msgForAlfred;
 }
