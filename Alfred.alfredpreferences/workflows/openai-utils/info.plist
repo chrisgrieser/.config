@@ -7,7 +7,59 @@
 	<key>category</key>
 	<string>❇️</string>
 	<key>connections</key>
-	<dict/>
+	<dict>
+		<key>2BE9E16C-CD19-489B-97FC-4FB2B71A237E</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>6ED60925-2459-424C-A17D-24F317903D98</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>6ED60925-2459-424C-A17D-24F317903D98</key>
+		<array/>
+		<key>DCED6A03-CE9B-4D1D-8BC2-9A148FDA06EF</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>F28BB9DD-676B-4740-8C3B-BBC15BABB8EB</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>4CB433C8-9E5A-4126-B947-BDE864B99AC2</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>⌘: Open "https://platform.openai.com/usage"</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>F28BB9DD-676B-4740-8C3B-BBC15BABB8EB</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>2BE9E16C-CD19-489B-97FC-4FB2B71A237E</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+	</dict>
 	<key>createdby</key>
 	<string>Chris Grieser</string>
 	<key>description</key>
@@ -21,51 +73,107 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>alfredfiltersresults</key>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
 				<true/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>2</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<true/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>OpenAI Usage</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>2BE9E16C-CD19-489B-97FC-4FB2B71A237E</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>argumenttype</key>
 				<integer>1</integer>
-				<key>escaping</key>
-				<integer>0</integer>
 				<key>keyword</key>
 				<string>usage||openai||costs</string>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>OpenAI Usage Costs</string>
+				<key>withspace</key>
 				<true/>
-				<key>queuedelaymode</key>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>DCED6A03-CE9B-4D1D-8BC2-9A148FDA06EF</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>6ED60925-2459-424C-A17D-24F317903D98</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
 				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>1</integer>
-				<key>runningsubtext</key>
-				<string>loading…</string>
 				<key>script</key>
 				<string></string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
 				<string>./scripts/openai-costs.js</string>
-				<key>subtext</key>
-				<string></string>
-				<key>title</key>
-				<string>OpenAI Usage Costs</string>
 				<key>type</key>
 				<integer>8</integer>
-				<key>withspace</key>
-				<true/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
+			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>7BB77036-8E3E-4E35-AF99-26CEA1AE0808</string>
+			<string>F28BB9DD-676B-4740-8C3B-BBC15BABB8EB</string>
 			<key>version</key>
-			<integer>3</integer>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>https://platform.openai.com/usage</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>4CB433C8-9E5A-4126-B947-BDE864B99AC2</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 	</array>
 	<key>readme</key>
@@ -77,12 +185,42 @@
 #### Workflow created by [Chris Grieser](https://chris-grieser.de/)</string>
 	<key>uidata</key>
 	<dict>
-		<key>7BB77036-8E3E-4E35-AF99-26CEA1AE0808</key>
+		<key>2BE9E16C-CD19-489B-97FC-4FB2B71A237E</key>
 		<dict>
 			<key>xpos</key>
-			<real>75</real>
+			<real>400</real>
 			<key>ypos</key>
-			<real>275</real>
+			<real>30</real>
+		</dict>
+		<key>4CB433C8-9E5A-4126-B947-BDE864B99AC2</key>
+		<dict>
+			<key>note</key>
+			<string>open usage cost website</string>
+			<key>xpos</key>
+			<real>240</real>
+			<key>ypos</key>
+			<real>160</real>
+		</dict>
+		<key>6ED60925-2459-424C-A17D-24F317903D98</key>
+		<dict>
+			<key>xpos</key>
+			<real>560</real>
+			<key>ypos</key>
+			<real>30</real>
+		</dict>
+		<key>DCED6A03-CE9B-4D1D-8BC2-9A148FDA06EF</key>
+		<dict>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>30</real>
+		</dict>
+		<key>F28BB9DD-676B-4740-8C3B-BBC15BABB8EB</key>
+		<dict>
+			<key>xpos</key>
+			<real>240</real>
+			<key>ypos</key>
+			<real>30</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
@@ -107,6 +245,31 @@
 			<string>textfield</string>
 			<key>variable</key>
 			<string>openai_admin_key_cmd</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>defaultvalue</key>
+				<integer>10</integer>
+				<key>markercount</key>
+				<integer>21</integer>
+				<key>maxvalue</key>
+				<integer>100</integer>
+				<key>minvalue</key>
+				<integer>0</integer>
+				<key>onlystoponmarkers</key>
+				<false/>
+				<key>showmarkers</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>in $</string>
+			<key>label</key>
+			<string>Monthly budget</string>
+			<key>type</key>
+			<string>slider</string>
+			<key>variable</key>
+			<string>openai_monthly_budget</string>
 		</dict>
 	</array>
 	<key>version</key>
