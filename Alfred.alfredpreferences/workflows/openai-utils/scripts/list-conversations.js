@@ -58,27 +58,30 @@ function run() {
 	/** @type {AlfredItem[]} */
 	// @ts-expect-error -> quicker
 	const alfredItems = conversations.map((conv) => {
-		const messages = []
+		const messages = [];
 		for (const [_, item] of Object.entries(conv.mapping)) {
 			const isText = item.message?.content?.content_type === "text";
-			if (!isText) continue;
 			const content = item.message?.content?.parts?.join("\n");
-			if (isText && content) continue;
-			messages.push(item.message.content.parts.join("\n"));
+			if (isText && content) messages.push(content);
 		}
+		const content = messages.join("\n\n---\n\n");
 
-		const dateStr = relativeDate(conv.update_time * 1000); // openai saves stamps in seconds
-
-		const subtitle= [
-			dateStr,
+		const subtitle = [
+			relativeDate(conv.update_time * 1000), // openai saves stamps in seconds
 			conv.is_archived ? "🗄️" : "",
 			messages.length + " 💬",
-		].filter(Boolean).join("    ");
-		
+		]
+			.filter(Boolean)
+			.join("    ");
+
 		return {
 			title: conv.title,
 			subtitle: subtitle,
+			match: conv.title + " " + content,
 			arg: "https://chatgpt.com/c/" + conv.id,
+			mods: {
+				cmd: { arg: content },
+			}
 		};
 	});
 
