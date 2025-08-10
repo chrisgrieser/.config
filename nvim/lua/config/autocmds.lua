@@ -245,15 +245,14 @@ end, vim.api.nvim_create_namespace("autoNohlAndSearchCount"))
 local templateDir = vim.fn.stdpath("config") .. "/templates"
 local globToTemplateMap = {
 	[vim.g.localRepos .. "/**/*.lua"] = "module.lua",
-	[vim.fn.stdpath("config") .. "/lua/personal-plugins/*.lua"] = "module.lua",
 	["**/hammerspoon/modules/*.lua"] = "module.lua",
+	[vim.fn.stdpath("config") .. "/lua/personal-plugins/*.lua"] = "module.lua",
 	[vim.fn.stdpath("config") .. "/lua/plugin-specs/**/*.lua"] = "plugin-spec.lua",
-	[vim.fn.stdpath("config") .. "/lsp-server-config/*.lua"] = "lsp.lua",
+	[vim.fn.stdpath("config") .. "/lsp/*.lua"] = "lsp-server-config.lua",
 
 	["**/*.py"] = "template.py",
 	["**/*.swift"] = "template.swift",
-	["**/*.sh"] = "template.zsh",
-	["**/*.*sh"] = "template.zsh",
+	["**/*.{sh,zsh}"] = "template.zsh",
 	["**/*.applescript"] = "template.applescript",
 
 	["**/*.mjs"] = "node-module.mjs",
