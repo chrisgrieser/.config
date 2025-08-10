@@ -5,10 +5,10 @@ local M = {}
 --------------------------------------------------------------------------------
 
 --- inspired by ultimate-autopair's fastWarp function
-function M.fastWarp()
+---@param dir "forward"|"backward"
+function M.fastWarp(dir)
 	local config = {
 		warpChars = { ")", "]", "}", '"', "'", "`", "*" },
-		moveCursorAlong = false,
 	}
 	-----------------------------------------------------------------------------
 
@@ -18,14 +18,24 @@ function M.fastWarp()
 	if not vim.tbl_contains(config.warpChars, nextChar) then return end
 
 	local lineBefore, lineAfter = line:sub(1, col), line:sub(col + 2)
-	local nextWord = select(2, lineAfter:find("%w+")) or math.huge
-	local nextPunctuation = select(2, lineAfter:find("%p+")) or math.huge
-	local shift = math.min(nextWord, nextPunctuation)
-	if shift == math.huge then return end -- none found
+	local shift
+	if dir == "forward" then
+		local nextWord = select(2, lineAfter:find("%w+")) or math.huge
+		local nextPunctuation = select(2, lineAfter:find("%p+")) or math.huge
+		shift = math.min(nextWord, nextPunctuation)
+		if shift == math.huge then return end -- none found
+		lineAfter = lineAfter:sub(1, shift) .. nextChar .. lineAfter:sub(shift + 1)
+	elseif dir == "backward" then
+		local prevWord = select(2, lineBefore:reverse():find("%w+")) or math.huge
+		local prevPunctuation = select(2, lineBefore:reverse():find("%p+")) or math.huge
+		shift = math.min(prevWord, prevPunctuation)
+		if shift == math.huge then return end -- none found
+		lineBefore = (lineBefore:reverse():sub(1, shift) .. nextChar .. lineBefore:reverse():sub(shift + 1)):reverse()
+		shift = shift * -1
+	end
 
-	local newLineAfter = lineAfter:sub(1, shift) .. nextChar .. lineAfter:sub(shift + 1)
-	vim.api.nvim_set_current_line(lineBefore .. newLineAfter)
-	if config.moveCursorAlong then vim.api.nvim_win_set_cursor(0, { row, col + shift }) end
+	vim.api.nvim_set_current_line(lineBefore .. lineAfter)
+	vim.api.nvim_win_set_cursor(0, { row, col + shift })
 end
 
 --------------------------------------------------------------------------------
@@ -97,6 +107,8 @@ end
 -- Increment or toggle if cursorword is true/false (Simplified version of dial.nvim)
 function M.toggleOrIncrement()
 	local toggles = {
+		["start"] = "end",
+		["backward"] = "forward",
 		["true"] = "false",
 		["light"] = "dark",
 		["right"] = "left",

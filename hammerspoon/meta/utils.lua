@@ -13,13 +13,12 @@ M.videoAndAudioApps = {
 	"zoom.us",
 	"FaceTime",
 	"Netflix",
-	"Joyn",
 	"YouTube",
-	"Prime Video",
 	"Crunchyroll",
 	"TikTok",
 	"Twitch",
 	"Steam",
+	"Podcasts",
 }
 
 --------------------------------------------------------------------------------

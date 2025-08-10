@@ -1,0 +1,1 @@
+/Users/chrisgrieser/.config/Alfred.alfredpreferences/alfred.d.ts

@@ -6,7 +6,6 @@ local home = os.getenv("HOME")
 local browserConfigs = home .. "/.config/browser-extension-configs/"
 local backupFolder = home .. "/Library/Mobile Documents/com~apple~CloudDocs/Backups/"
 
-
 --------------------------------------------------------------------------------
 
 local u = require("meta.utils")
@@ -89,6 +88,13 @@ M.pathw_desktop = pathw(home .. "/Desktop/", function(paths, _)
 				hs.open(home .. "/Library/Application Support/Steam/steamapps/common")
 			end
 
+		-- CHATGPT CONVERSATIONS
+		elseif name == "conversations.json" then
+			local targetLocation = home
+				.. "/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/llm-conversations/chatgpt.json"
+			success, errmsg = os.rename(path, targetLocation)
+			if success then u.notify("✅ ChatGPT conversations moved.") end
+
 		-- AUTO-INSTALL OBSIDIAN ALPHA
 		elseif name:find("%.asar%.gz$") and isDownloaded then
 			hs.execute(([[
@@ -107,7 +113,8 @@ M.pathw_desktop = pathw(home .. "/Desktop/", function(paths, _)
 		--------------------------------------------------------------------------
 		-- NOTIFY
 		if success == false then
-			u.notify(("⚠️ Failed to move: %q; %s"):format(name, errmsg or ""))		end
+			u.notify(("⚠️ Failed to move: %q; %s"):format(name, errmsg or ""))
+		end
 	end
 end):start()
 

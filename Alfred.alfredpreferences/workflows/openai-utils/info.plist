@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string>de.chris-grieser.PLACEHOLDER</string>
+	<key>category</key>
+	<string>❇️</string>
+	<key>connections</key>
+	<dict>
+		<key>0A1BEF49-AC4F-4198-9C67-802222DF3EFD</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>A904F0DB-9F1B-4743-9101-3D4B71F8AFD4</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+	</dict>
+	<key>createdby</key>
+	<string>Chris Grieser</string>
+	<key>description</key>
+	<string></string>
+	<key>disabled</key>
+	<false/>
+	<key>name</key>
+	<string>OpenAI</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/openai-costs.js</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>A904F0DB-9F1B-4743-9101-3D4B71F8AFD4</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>keyword</key>
+				<string>usage||openai</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>OpenAI Costs</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>0A1BEF49-AC4F-4198-9C67-802222DF3EFD</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string>## Usage
+Get PLACEHOLDER the `KEYWORD` keyword.
+- &lt;kbd&gt;⏎&lt;/kbd&gt; open the page in the browser.
+- &lt;kbd&gt;⌥⏎&lt;/kbd&gt; copy the page URL.
+
+---
+
+#### Workflow created by [Chris Grieser](https://chris-grieser.de/)</string>
+	<key>uidata</key>
+	<dict>
+		<key>0A1BEF49-AC4F-4198-9C67-802222DF3EFD</key>
+		<dict>
+			<key>xpos</key>
+			<real>65</real>
+			<key>ypos</key>
+			<real>185</real>
+		</dict>
+		<key>A904F0DB-9F1B-4743-9101-3D4B71F8AFD4</key>
+		<dict>
+			<key>xpos</key>
+			<real>250</real>
+			<key>ypos</key>
+			<real>185</real>
+		</dict>
+	</dict>
+	<key>userconfigurationconfig</key>
+	<array/>
+	<key>webaddress</key>
+	<string>https://chris-grieser.de/</string>
+</dict>
+</plist>

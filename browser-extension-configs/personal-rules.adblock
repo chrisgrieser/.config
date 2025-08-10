@@ -3,17 +3,13 @@ messenger.com##[aria-label="Inbox switcher"]
 messenger.com##[aria-label="Thread list"] > div > div:last-child
 whatsapp.com###side > div[role="button"] > div
 
-! netflix
+! streaming services
 www.netflix.com##.mobile-games-row
 www.netflix.com##div[data-list-context="configbased_cloudpersonalizedgames"]
 www.netflix.com##div[data-list-context="configbased_mobilepersonalizedgames"]
 www.netflix.com##div[data-list-context="popularGames"]
 www.netflix.com##.watch-video--player-view > div[data-uia="pause-ad"]
-
-! online services
-amazon.de###nav-logo-sprites
-amazon.de###spc-container
-www.linguee.com##.l_deepl_ad_container
+www.crunyroll.com##erc-end-slate-recommendations-carousel
 
 ! development
 stackoverflow.com###announcement-banner
@@ -39,3 +35,6 @@ nyaa.si##a[href$=".torrent"]
 rewe.de##.qa-feefs-visual-popup
 flaticon.com###layer_coupon
 flaticon.com###open_panel
+amazon.de###nav-logo-sprites
+amazon.de###spc-container
+www.linguee.com##.l_deepl_ad_container
