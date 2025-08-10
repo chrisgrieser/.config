@@ -176,13 +176,8 @@
   },
   "relative date": {
     "body": [
-      "/** @param {number|string|Date} date @return {string} relative date */",
-      "function relativeDate(date) {",
-      "\tlet timestamp;",
-      "\tif (typeof date === \"object\") timestamp = date.getTime();",
-      "\telse if (typeof date === \"string\") timestamp = new Date(date).getTime();",
-      "\telse timestamp = date;",
-      "",
+      "/** @param {number} timestamp @return {string} relative date */",
+      "function relativeDate(timestamp) {",
       "\tconst deltaHours = (Date.now() - timestamp) / 1000 / 60 / 60;",
       "\tlet /** @type {\"year\"|\"month\"|\"week\"|\"day\"|\"hour\"} */ unit;",
       "\tlet delta;",
