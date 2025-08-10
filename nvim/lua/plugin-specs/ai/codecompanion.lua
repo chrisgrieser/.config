@@ -5,7 +5,10 @@
 -- CONFIG
 -- https://platform.openai.com/usage
 -- https://platform.openai.com/docs/models
-local model = "gpt-4.1" -- not switching to 5 yet, since it's slow
+local model = "gpt-4.1-mini" 
+-- not switching to 5 yet, since it's slow
+-- when not also reducing reasoning effort, 
+-- for which there release yet
 
 --------------------------------------------------------------------------------
 
