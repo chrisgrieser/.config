@@ -244,11 +244,9 @@ end, vim.api.nvim_create_namespace("autoNohlAndSearchCount"))
 -- CONFIG
 local templateDir = vim.fn.stdpath("config") .. "/templates"
 local globToTemplateMap = {
-	[vim.g.localRepos .. "/**/*.lua"] = "module.lua",
-	["**/hammerspoon/modules/*.lua"] = "module.lua",
-	[vim.fn.stdpath("config") .. "/lua/personal-plugins/*.lua"] = "module.lua",
 	[vim.fn.stdpath("config") .. "/lua/plugin-specs/**/*.lua"] = "plugin-spec.lua",
 	[vim.fn.stdpath("config") .. "/lsp/*.lua"] = "lsp-server-config.lua",
+	["**/*.lua"] = "module.lua",
 
 	["**/*.py"] = "template.py",
 	["**/*.swift"] = "template.swift",
@@ -259,8 +257,7 @@ local globToTemplateMap = {
 	["**/Alfred.alfredpreferences/workflows/**/*.js"] = "jxa.js",
 
 	["**/Justfile"] = "justfile.just",
-	["**/.github/workflows/*.yml"] = "github-action.yaml",
-	["**/.github/workflows/*.yaml"] = "github-action.yaml",
+	["**/.github/workflows/*.{yml,yaml}"] = "github-action.yaml",
 }
 
 vim.api.nvim_create_autocmd({ "BufNewFile", "BufReadPost" }, {
@@ -273,11 +270,10 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufReadPost" }, {
 			local filepath, bufnr = ctx.file, ctx.buf
 
 			-- determine template from glob
-			local matchedGlob = vim.iter(globToTemplateMap):find(function(glob)
-				local globMatchesFilename = vim.glob.to_lpeg(glob):match(filepath)
-				return globMatchesFilename
-			end)
-			if not matchedGlob then return end
+			local matchedGlob = vim.iter(globToTemplateMap)
+				:filter(function(glob) return vim.glob.to_lpeg(glob):match(filepath) end)
+				:fold("", function(longGlob, glob) return #longGlob < #glob and glob or longGlob end)
+			if matchedGlob == "" then return end
 			local templateFile = globToTemplateMap[matchedGlob]
 			local templatePath = vim.fs.normalize(templateDir .. "/" .. templateFile)
 			if not vim.uv.fs_stat(templatePath) then return end
