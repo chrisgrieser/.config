@@ -13,20 +13,9 @@ return {
 		editor_type = "floating", -- split|floating
 		floating_editor_style = { margin = 1, border = vim.o.winborder },
 		max_lines = 10, -- array length before collapsing
-		round_units = true,
-		round_connections = true,
-		disable_line_wrap = false,
 		side_scrolloff = math.floor(vim.o.columns / 3),
-
 		keymap_desc_deliminator = ": ",
-		space_char = "·",
-		keymap_priorities = {
-			expand = 4,
-			link_forward = 3,
-			link_backward = 3,
-			collapse = 2,
-			set_as_root = 1,
-		},
+		space_char = " ",
 		keymaps = {
 			expand = "<Space>",
 			collapse = "<Space>",

@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>chatgpt_conv_json</key>
+	<string>~/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/llm-conversations/chatgpt.json</string>
 	<key>openai_admin_key_cmd</key>
 	<string>cat "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/private dotfiles/openai-admin-key.txt"</string>
 </dict>

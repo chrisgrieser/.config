@@ -234,6 +234,55 @@
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>2</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>aih</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>loading…</string>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/list-conversations.js</string>
+				<key>subtext</key>
+				<string>from: {var:chatgpt_conv_json}</string>
+				<key>title</key>
+				<string>ChatGPT Conversation history</string>
+				<key>type</key>
+				<integer>8</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>C79D13CD-AAE6-49E7-9BD5-8C33E2422C5F</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>## Requirements
@@ -281,6 +330,13 @@
 			<key>ypos</key>
 			<real>20</real>
 		</dict>
+		<key>C79D13CD-AAE6-49E7-9BD5-8C33E2422C5F</key>
+		<dict>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>435</real>
+		</dict>
 		<key>DCED6A03-CE9B-4D1D-8BC2-9A148FDA06EF</key>
 		<dict>
 			<key>xpos</key>
@@ -308,7 +364,7 @@
 				<key>placeholder</key>
 				<string>cat "/path/to/secret-file.txt"</string>
 				<key>required</key>
-				<true/>
+				<false/>
 				<key>trim</key>
 				<true/>
 			</dict>
@@ -345,6 +401,27 @@
 			<string>slider</string>
 			<key>variable</key>
 			<string>openai_monthly_budget</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string></string>
+				<key>filtermode</key>
+				<integer>2</integer>
+				<key>placeholder</key>
+				<string>~/Desktop/conversation.json</string>
+				<key>required</key>
+				<false/>
+			</dict>
+			<key>description</key>
+			<string>Path to the `conversation.json` file that you get from ChatGPTs data export.</string>
+			<key>label</key>
+			<string>conversation.json path</string>
+			<key>type</key>
+			<string>filepicker</string>
+			<key>variable</key>
+			<string>chatgpt_conv_json</string>
 		</dict>
 	</array>
 	<key>version</key>
