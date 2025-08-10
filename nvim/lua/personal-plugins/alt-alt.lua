@@ -30,10 +30,8 @@ local config = {
 	},
 }
 
-vim.schedule(function()
-	local installed, snacks = pcall(require, "snacks")
-	if installed then table.insert(config.ignore.oldfiles, snacks.config.scratch.root) end
-end)
+local installed, snacksScratch = pcall(require, "plugin-specs.snacks.snacks-scratch")
+if installed then table.insert(config.ignore.oldfiles, snacksScratch.opts.scratch.root) end ---@diagnostic disable-line: undefined-field
 
 --------------------------------------------------------------------------------
 local M = {}
@@ -121,24 +119,6 @@ local function getMostChangedFile()
 	return targetFile, nil
 end
 
----@param default "oldFile"|"altBuf"|"mostChangedFile"
----@param filepath? string
----@param bufnr? number
----@return string? icon
-local function getIcon(default, filepath, bufnr)
-	-- if default icon, use it
-	if config.icons[default] then return config.icons[default] end
-	if not filepath then return end
-
-	local ok, miniIcons = pcall(require, "")
-	if not (ok and miniIcons) then return end
-
-	local icon, _, isDefault = miniIcons.get("file", filepath)
-	if isDefault and bufnr then icon = miniIcons.get("filetype", vim.bo[bufnr].ft) end
-
-	return icon
-end
-
 ---@param path string
 ---@return string
 local function nameForStatusbar(path)
@@ -214,7 +194,7 @@ function M.mostChangedFileStatusbar()
 	local altFile = getAltBuffer() or getAltOldfile()
 	if targetFile == currentFile or targetFile == altFile then return "" end
 
-	local icon = getIcon("mostChangedFile", targetFile)
+	local icon = config.icons.mostChangedFile
 	return vim.trim(icon .. " " .. nameForStatusbar(targetFile))
 end
 
@@ -222,11 +202,8 @@ end
 ---@nodiscard
 function M.altFileStatusbar()
 	local altBuf, altOld = getAltBuffer(), getAltOldfile()
-
 	local path = altBuf or altOld or "[unknown]"
-	local icon = altBuf and getIcon("altBuf", altBuf, vim.fn.bufnr("#"))
-		or getIcon("oldFile", altOld)
-
+	local icon = altBuf and config.icons.altBuf or config.icons.oldFile
 	return vim.trim(icon .. " " .. nameForStatusbar(path))
 end
 

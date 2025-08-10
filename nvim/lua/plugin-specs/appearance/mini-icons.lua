@@ -26,7 +26,6 @@ return {
 			["ccc-ui"] = { glyph = "" },
 			["scissors-snippet"] = { glyph = "󰩫" },
 			["rip-substitute"] = { glyph = "" },
-			["Videre"] = { glyph = "󱁉" },
 		},
 	},
 }
