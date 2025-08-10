@@ -19,25 +19,28 @@ vim.api.nvim_create_autocmd("FileType", {
 --------------------------------------------------------------------------------
 
 -- COLORSCHEMES DEPENDING ON SYSTEM MODE
--- 1. tell neovide to sync `background` with system dark mode
--- (terminal already does so by default)
-vim.g.neovide_theme = "auto"
+do
+	-- 1. tell neovide to sync `background` with system dark mode
+	-- (terminal already does so by default)
+	vim.g.neovide_theme = "auto"
+	local prevBg
 
--- 2. tell nvim to sync colorscheme with `background`
-vim.api.nvim_create_autocmd("OptionSet", {
-	desc = "User: Sync colorscheme with `background`",
-	pattern = "background",
-	callback = function()
-		-- prevent recursion, since setting colorschemes often also sets background
-		-- (not using `vim.v.option_old` due to race with multiple triggerings)
-		if vim.v.option_new == vim.g.prevBg then return end
-		vim.g.prevBg = vim.v.option_new
+	-- 2. tell nvim to sync colorscheme with `background`
+	vim.api.nvim_create_autocmd("OptionSet", {
+		desc = "User: Sync colorscheme with `background`",
+		pattern = "background",
+		callback = function()
+			-- prevent recursion, since setting colorschemes often also sets background
+			-- (not using `vim.v.option_old` due to race with multiple triggerings)
+			if vim.v.option_new == prevBg then return end
+			prevBg = vim.v.option_new
 
-		vim.cmd.highlight("clear") -- so next theme isn't affected by previous one
-		local newColor = vim.v.option_new == "light" and vim.g.lightColor or vim.g.darkColor
-		vim.schedule(function() vim.cmd.colorscheme(newColor) end)
-	end,
-})
+			vim.cmd.highlight("clear") -- so next theme isn't affected by previous one
+			local newColor = vim.v.option_new == "light" and vim.g.lightColor or vim.g.darkColor
+			vim.schedule(function() vim.cmd.colorscheme(newColor) end)
+		end,
+	})
+end
 
 --------------------------------------------------------------------------------
 
@@ -255,7 +258,6 @@ local globToTemplateMap = {
 
 	["**/*.mjs"] = "node-module.mjs",
 	["**/Alfred.alfredpreferences/workflows/**/*.js"] = "jxa.js",
-
 	["**/Justfile"] = "justfile.just",
 	["**/.github/workflows/*.{yml,yaml}"] = "github-action.yaml",
 }
@@ -270,11 +272,11 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufReadPost" }, {
 			local filepath, bufnr = ctx.file, ctx.buf
 
 			-- determine template from glob
-			local matchedGlob = vim.iter(globToTemplateMap)
+			local longestMatchingGlob = vim.iter(globToTemplateMap)
 				:filter(function(glob) return vim.glob.to_lpeg(glob):match(filepath) end)
 				:fold("", function(longGlob, glob) return #longGlob < #glob and glob or longGlob end)
-			if matchedGlob == "" then return end
-			local templateFile = globToTemplateMap[matchedGlob]
+			if longestMatchingGlob == "" then return end
+			local templateFile = globToTemplateMap[longestMatchingGlob]
 			local templatePath = vim.fs.normalize(templateDir .. "/" .. templateFile)
 			if not vim.uv.fs_stat(templatePath) then return end
 

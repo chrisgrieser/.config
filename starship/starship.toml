@@ -1,4 +1,5 @@
 # DOCS https://starship.rs/config/
+# ──────────────────────────────────────────────────────────────────────────────
 
 format = """[\
 ${custom.location_indicator}$directory${custom.folder_number}\
@@ -93,7 +94,7 @@ style = "fg:red bold bg:black"
 # GIT COMPONENTS
 
 [git_status]  # files
-use_git_executable = false  # https://github.com/starship/starship/issues/6881#issuecomment-3172692730
+use_git_executable = true  # FIX https://github.com/starship/starship/issues/6881#issuecomment-3172692730
 untracked = "[ X$count](fg:green bg:black)"
 stashed = "[ 󰜦 $count](fg:cyan bg:black)"
 deleted = "[ -$count](fg:red bg:black)"  # `deleted` -> unstaged as well as staged deletion
