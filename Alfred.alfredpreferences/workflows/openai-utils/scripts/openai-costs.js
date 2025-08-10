@@ -7,7 +7,7 @@ app.includeStandardAdditions = true;
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
 	const apiKey = app.doShellScript($.getenv("openai_admin_key_cmd")).trim();
-	if (!apiKey) return "No API key command set."
+	if (!apiKey) return "No API key command set.";
 
 	const firstDayCurMonth = new Date();
 	firstDayCurMonth.setDate(1);
@@ -60,6 +60,6 @@ function run() {
 
 	const msgForAlfred =
 		`$${totalCost.toFixed(2)} / $${monthlyBudget.toFixed(2)}` +
-		`\n${nameOfMonth} budget, resets in ${daysRemainingThisMonth} days`;
+		`\n${nameOfMonth} budget (resets in ${daysRemainingThisMonth} days)`;
 	return msgForAlfred;
 }
