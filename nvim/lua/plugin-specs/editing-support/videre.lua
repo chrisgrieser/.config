@@ -19,8 +19,8 @@ return {
 		keymaps = {
 			expand = "<Space>",
 			collapse = "<Space>",
-			link_forward = "o", -- Jump to linked unit
-			link_backward = "i", -- Jump back to unit parent
+			link_forward = "o", -- jump to linked unit
+			link_backward = "i", -- jump back to unit's parent
 			set_as_root = "r",
 		},
 	},
