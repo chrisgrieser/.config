@@ -27,8 +27,8 @@ function run() {
 			`&page=${nextPage}`;
 
 		const curlCmd = `curl --request GET --url "${url}" \
-		--header 'Content-Type: application/json' \
-		--header 'Authorization: Bearer ${apiKey}'`;
+			--header 'Content-Type: application/json' \
+			--header 'Authorization: Bearer ${apiKey}'`;
 		const response = app.doShellScript(curlCmd);
 		if (!response)
 			return JSON.stringify({ items: [{ title: "Error: No results", valid: false }] });
