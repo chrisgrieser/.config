@@ -31,10 +31,26 @@ function run() {
 	const conversations = JSON.parse(readFile(convoFile));
 
 	/** @type {AlfredItem[]} */
-	// @ts-expect-error
+	// @ts-expect-error -> quicker
 	const alfredItems = conversations.map((conv) => {
+		const messageCount = Object.keys(conv.mapping).length;
+
+		const date = new Date(conv.create_time * 1000); // openai saves stamps in seconds
+
+		/** @type {Intl.DateTimeFormatOptions} */
+		const dateFmt = { day: "numeric", month: "short", year: "numeric" };
+		const dateStr = date.toLocaleString("en-US", dateFmt);
+
+		const subtitle= [
+			dateStr,
+			conv.is_archived ? "🗄️" : "",
+			messageCount + " 💬",
+		].filter(Boolean).join("    ");
+		
 		return {
 			title: conv.title,
+			subtitle: subtitle,
+			arg: "https://chatgpt.com/c/" + conv.id,
 		};
 	});
 

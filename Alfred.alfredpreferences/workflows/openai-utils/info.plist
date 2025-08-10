@@ -25,6 +25,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>C79D13CD-AAE6-49E7-9BD5-8C33E2422C5F</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>E10230C4-C675-47BC-94C3-F2708E565938</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>DCED6A03-CE9B-4D1D-8BC2-9A148FDA06EF</key>
 		<array>
 			<dict>
@@ -283,10 +296,32 @@
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>E10230C4-C675-47BC-94C3-F2708E565938</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>## Requirements
-- [OpenAI Admin Key](https://platform.openai.com/settings/organization/admin-keys) with `api.usage.read` permissions
+- [OpenAI Admin Key](https://platform.openai.com/settings/organization/admin-keys) with `api.usage.read` permissions for checking monthly usage.
+- [ChatGPT Data Export](https://chatgpt.com/#settings/DataControls), specifically the `conversations.json` file, for searching past conversations.
 
 ---
 
@@ -343,6 +378,15 @@
 			<real>30</real>
 			<key>ypos</key>
 			<real>20</real>
+		</dict>
+		<key>E10230C4-C675-47BC-94C3-F2708E565938</key>
+		<dict>
+			<key>note</key>
+			<string>open conversation</string>
+			<key>xpos</key>
+			<real>265</real>
+			<key>ypos</key>
+			<real>435</real>
 		</dict>
 		<key>F28BB9DD-676B-4740-8C3B-BBC15BABB8EB</key>
 		<dict>
