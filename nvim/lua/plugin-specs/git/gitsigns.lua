@@ -1,3 +1,13 @@
+-- as `vim.g.`, so other plugins can access it as well
+vim.g.toggle_gitsigns_diff = function()
+	require("gitsigns").toggle_linehl()
+	require("gitsigns").toggle_word_diff()
+	local conf = require("gitsigns.config").config
+	conf.show_deleted = not conf.show_deleted
+end
+
+-----------------------------------------------------------------------
+
 ---@module "lazy.types"
 ---@type LazyPluginSpec
 return {
@@ -40,16 +50,7 @@ return {
 			function() require("gitsigns").toggle_current_line_blame() end,
 			desc = "󰆽 Line blame",
 		},
-		{
-			"<leader>ov",
-			function()
-				require("gitsigns").toggle_linehl()
-				require("gitsigns").toggle_word_diff()
-				local conf = require("gitsigns.config").config
-				conf.show_deleted = not conf.show_deleted
-			end,
-			desc = " Inline diff view",
-		},
+		{ "<leader>ov", vim.g.toggle_gitsigns_diff, desc = " Inline diff view" },
 		{
 			"<leader>op",
 			function()

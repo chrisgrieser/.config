@@ -486,7 +486,13 @@ keymap("i", "<D-t>", function() require("personal-plugins.auto-template-str").in
 keymap(
 	{ "n", "i" },
 	"<D-f>",
-	function() require("personal-plugins.misc").fastWarp() end,
+	function() require("personal-plugins.misc").fastWarp("forward") end,
+	{ desc = "󰑮 Fast warp" }
+)
+keymap(
+	{ "n", "i" },
+	"<D-F>",
+	function() require("personal-plugins.misc").fastWarp("backward") end,
 	{ desc = "󰑮 Fast warp" }
 )
 

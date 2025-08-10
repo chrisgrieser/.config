@@ -2,13 +2,12 @@
 -- alternative: https://github.com/dlants/magenta.nvim
 --------------------------------------------------------------------------------
 
--- CONFIG
 -- https://platform.openai.com/usage
 -- https://platform.openai.com/docs/models
-local model = "gpt-4.1-mini" 
--- not switching to 5 yet, since it's slow
--- when not also reducing reasoning effort, 
--- for which there release yet
+
+-- INFO not switching to 5 yet, since it's slow when not also reducing reasoning
+-- effort, for which there release yet
+local model = "gpt-4.1-mini"
 
 --------------------------------------------------------------------------------
 
@@ -52,11 +51,6 @@ local function spinnerNotificationWhileRequest()
 				timeout = 2000,
 				id = ctx.data.id,
 			})
-			if jit.os == "OSX" then
-				local sound =
-					"/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/head_gestures_double_shake.caf"
-				vim.system { "afplay", sound }
-			end
 		end,
 	})
 end
@@ -73,9 +67,17 @@ return {
 		spinnerNotificationWhileRequest()
 
 		vim.api.nvim_create_autocmd("User", {
-			desc = "User: CodeCompanion format on success",
+			desc = "User: CodeCompanion finished",
 			pattern = "CodeCompanionInlineFinished",
-			callback = function() vim.defer_fn(vim.lsp.buf.format, 100) end,
+			callback = function()
+				if jit.os == "OSX" then
+					local sound =
+						"/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/head_gestures_double_shake.caf"
+					vim.system { "afplay", sound }
+				end
+				if vim.g.toggle_gitsigns_diff then vim.g.toggle_gitsigns_diff() end
+				vim.defer_fn(vim.lsp.buf.format, 100)
+			end,
 		})
 	end,
 	keys = {
