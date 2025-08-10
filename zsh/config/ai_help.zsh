@@ -48,7 +48,7 @@ ai() {
 				{ role: "user", content: $task }
 			]
 		}' |
-		curl --silent --max-time 15 "https://api.openai.com/v1/responses" \
+		curl --silent --max-time 30 "https://api.openai.com/v1/responses" \
 			-H "Content-Type: application/json" \
 			-H "Authorization: Bearer $OPENAI_API_KEY" \
 			-d @-)
