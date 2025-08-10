@@ -7,18 +7,19 @@ return {
 	"Owen-Dechow/videre.nvim",
 	cmd = "Videre",
 	keys = {
-		{ "<leader>ij", vim.cmd.Videre, ft = "json", desc = " Explore JSON" },
+		{ "<leader>eg", vim.cmd.Videre, ft = "json", desc = " Explore Graph (Videre)" },
 	},
 	opts = {
 		editor_type = "floating", -- split|floating
-		floating_editor_style = { margin = 2, border = vim.o.winborder, zindex = 10 },
+		floating_editor_style = { margin = 1, border = vim.o.winborder },
 		max_lines = 10, -- array length before collapsing
 		round_units = true,
-		round_connections = false,
+		round_connections = true,
 		disable_line_wrap = false,
-		side_scrolloff = 20,
+		side_scrolloff = math.floor(vim.o.columns / 3),
 
-		keymap_desc_deliminator = "=",
+		keymap_desc_deliminator = ": ",
+		space_char = "·",
 		keymap_priorities = {
 			expand = 4,
 			link_forward = 3,
@@ -27,11 +28,11 @@ return {
 			set_as_root = 1,
 		},
 		keymaps = {
-			expand = "E",
-			collapse = "E",
-			link_forward = "L", -- Jump to linked unit
-			link_backward = "H", -- Jump back to unit parent
-			set_as_root = "R",
+			expand = "<Space>",
+			collapse = "<Space>",
+			link_forward = "o", -- Jump to linked unit
+			link_backward = "i", -- Jump back to unit parent
+			set_as_root = "r",
 		},
 	},
 }
