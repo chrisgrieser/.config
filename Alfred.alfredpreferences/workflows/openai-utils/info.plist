@@ -37,6 +37,16 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>6261E02D-805C-4920-BEA0-D4F39B6A8873</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>⌘: Show conversation</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
 		</array>
 		<key>DCED6A03-CE9B-4D1D-8BC2-9A148FDA06EF</key>
 		<array>
@@ -317,6 +327,39 @@
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>behaviour</key>
+				<integer>2</integer>
+				<key>fontmode</key>
+				<integer>0</integer>
+				<key>fontsizing</key>
+				<integer>0</integer>
+				<key>footertext</key>
+				<string></string>
+				<key>inputfile</key>
+				<string></string>
+				<key>inputtype</key>
+				<integer>0</integer>
+				<key>loadingtext</key>
+				<string></string>
+				<key>outputmode</key>
+				<integer>0</integer>
+				<key>scriptinput</key>
+				<integer>0</integer>
+				<key>spellchecking</key>
+				<integer>0</integer>
+				<key>stackview</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.userinterface.text</string>
+			<key>uid</key>
+			<string>6261E02D-805C-4920-BEA0-D4F39B6A8873</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>## Requirements
@@ -350,6 +393,13 @@
 			<real>530</real>
 			<key>ypos</key>
 			<real>245</real>
+		</dict>
+		<key>6261E02D-805C-4920-BEA0-D4F39B6A8873</key>
+		<dict>
+			<key>xpos</key>
+			<real>270</real>
+			<key>ypos</key>
+			<real>590</real>
 		</dict>
 		<key>6ED60925-2459-424C-A17D-24F317903D98</key>
 		<dict>
