@@ -81,7 +81,7 @@
       "\tconst shellCmd = \"ls\"",
       "",
       "\t/** @type {AlfredItem[]} */",
-      "\tconst items = app",
+      "\tconst alfredItems = app",
       "\t\t.doShellScript(shellCmd)",
       "\t\t.split(\"\\r\")",
       "\t\t.map((item) => {",
@@ -92,7 +92,7 @@
       "\t\t\t};",
       "\t\t});",
       "",
-      "\treturn JSON.stringify({ items: items });",
+      "\treturn JSON.stringify({ items: alfredItems });",
       "}"
     ],
     "prefix": "Script Filter (Alfred): doShellScript"
