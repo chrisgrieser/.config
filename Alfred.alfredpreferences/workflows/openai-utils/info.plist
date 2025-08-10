@@ -21,6 +21,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>A904F0DB-9F1B-4743-9101-3D4B71F8AFD4</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>EF3BB7AA-5FC8-4743-BF4A-606147C656CF</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 	</dict>
 	<key>createdby</key>
 	<string>Chris Grieser</string>
@@ -29,7 +42,7 @@
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
-	<string>OpenAI</string>
+	<string>OpenAI Utils</string>
 	<key>objects</key>
 	<array>
 		<dict>
@@ -54,6 +67,39 @@
 			<string>A904F0DB-9F1B-4743-9101-3D4B71F8AFD4</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>behaviour</key>
+				<integer>0</integer>
+				<key>fontmode</key>
+				<integer>0</integer>
+				<key>fontsizing</key>
+				<integer>0</integer>
+				<key>footertext</key>
+				<string></string>
+				<key>inputfile</key>
+				<string></string>
+				<key>inputtype</key>
+				<integer>0</integer>
+				<key>loadingtext</key>
+				<string></string>
+				<key>outputmode</key>
+				<integer>0</integer>
+				<key>scriptinput</key>
+				<integer>0</integer>
+				<key>spellchecking</key>
+				<integer>0</integer>
+				<key>stackview</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.userinterface.text</string>
+			<key>uid</key>
+			<string>EF3BB7AA-5FC8-4743-BF4A-606147C656CF</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -99,6 +145,13 @@ Get PLACEHOLDER the `KEYWORD` keyword.
 		<dict>
 			<key>xpos</key>
 			<real>250</real>
+			<key>ypos</key>
+			<real>185</real>
+		</dict>
+		<key>EF3BB7AA-5FC8-4743-BF4A-606147C656CF</key>
+		<dict>
+			<key>xpos</key>
+			<real>455</real>
 			<key>ypos</key>
 			<real>185</real>
 		</dict>

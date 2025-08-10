@@ -28,7 +28,7 @@ function _export_github_token {
 # shellcheck disable=2154
 if [[ "$alfred_workflow_name" == "GitFred" ]]; then _export_github_token; fi
 
-if [[ "$alfred_workflow_name" == "Writing Assistant" ]]; then
-	OPENAI_API_KEY="$(cat "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/private dotfiles/openai-api-key.txt")"
-	export OPENAI_API_KEY
+if [[ "$alfred_workflow_name" == "OpenAI Utils" ]]; then
+	OPENAI_ADMIN_KEY="$(cat "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/private dotfiles/openai-admin-key.txt")"
+	export OPENAI_ADMIN_KEY
 fi
