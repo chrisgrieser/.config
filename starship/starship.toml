@@ -92,17 +92,9 @@ style = "fg:red bold bg:black"
 # ──────────────────────────────────────────────────────────────────────────────
 # GIT COMPONENTS
 
-# BUG non-existing untracked files being shown https://github.com/starship/starship/issues/6881
-# HACK for the bug: show untracked files in our own module
-[custom.untracked_git_files]
-when = "[[ -n $(git ls-files --others --exclude-standard) ]]"
-command = "git ls-files --others --exclude-standard | wc -l"
-format = "[ ?$output](fg:green bg:black)"
-
 [git_status]  # files
-# untracked = "[ X$count](fg:green bg:black)"
-untracked = ""
-
+use_git_executable = false  # https://github.com/starship/starship/issues/6881#issuecomment-3172692730
+untracked = "[ X$count](fg:green bg:black)"
 stashed = "[ 󰜦 $count](fg:cyan bg:black)"
 deleted = "[ -$count](fg:red bg:black)"  # `deleted` -> unstaged as well as staged deletion
 modified = "[ ~$count](fg:#fa881e bg:black)"
@@ -114,8 +106,6 @@ ahead = "[ 󰶣$count](fg:cyan bg:black)"
 behind = "[ 󰶡$count](fg:yellow bg:black)"
 style = "bg:black"
 format = "[($ahead_behind$conflicted$stashed$staged$untracked$renamed$modified$deleted )]($style)"
-
-# ──────────────────────────────────────────────────────────────────────────────
 
 [git_state]  # conflicts or rebasing
 style = "fg:yellow bold bg:black"
@@ -139,7 +129,7 @@ format = " [ ](fg:purple bg:black bold)"
 
 # INFO putting a variable into round bracket ensures that the bracket content is
 # only shown when the variable is set. `bright-black` is effectively gray.
-[git_metrics]  # changed lines
+[git_metrics]  # lines
 disabled = false
 format = """\
 ([\\(](fg:bright-black bg:black)\
