@@ -13,6 +13,10 @@
       "argv (Alfred)"
     ]
   },
+  "Error item (Alfred)": {
+    "body": "if (!response) return JSON.stringify({ items: [{ title: \"Error: No results\", valid: false }] });",
+    "prefix": "Error item (Alfred)"
+  },
   "Get Alfred Env": {
     "body": "\\$.getenv(\"${1:envVar}\");",
     "prefix": "get Alfred env var"
