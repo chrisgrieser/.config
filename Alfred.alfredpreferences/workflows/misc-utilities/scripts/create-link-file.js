@@ -25,18 +25,28 @@ function run(argv) {
 		.slice(0, 50)
 		.trim();
 
-	let targetFolder = finder.pathTo("desktop");
+	let targetFolder
 	try {
-		// errors when there is no open finder window
 		targetFolder = decodeURIComponent(finder.insertionLocation().url()?.slice(7) || "");
-		// biome-ignore lint/suspicious/noEmptyBlockStatements: intentional
-	} catch (_error) {}
+	} catch (_error) {
+		// errors when there is no open finder window
+		targetFolder= finder.pathTo("desktop");
+	}
 
-	const linkFilePath = `${targetFolder}/${safeTitle}.url`;
+	const linkFilePath = `${targetFolder}/${safeTitle}.webloc`;
+	const weblocContent = `
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>URL</key>
+	<string>https://seb.se/var-kundservice</string>
+</dict>
+</plist>
+`
 	const urlFileContent = ["[InternetShortcut]", `URL=${url}`, "IconIndex=0"].join("\n");
 	writeToFile(linkFilePath, urlFileContent);
 
 	finder.activate();
 	finder.reveal(Path(linkFilePath));
-	return;
 }
