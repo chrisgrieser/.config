@@ -9,6 +9,11 @@ local M = {}
 function M.fastWarp(dir)
 	local config = {
 		warpChars = { ")", "]", "}", '"', "'", "`", "*" },
+		patterns = {
+			word = "[%w_]+",
+			punctuationButNotBackslash = "[^\\%w_%s]+",
+			escapedChar = "\\%w",
+		},
 	}
 	-----------------------------------------------------------------------------
 
@@ -17,20 +22,34 @@ function M.fastWarp(dir)
 	local nextChar = line:sub(col + 1, col + 1)
 	if not vim.tbl_contains(config.warpChars, nextChar) then return end
 
+	---@param text string
+	---@param patterns table<string, string> -- key is irrelevant, just for readability
+	---@return number|nil
+	local function findClosest(text, patterns)
+		local distances = {}
+		for _, pattern in pairs(patterns) do
+			local _, stop = text:find(pattern)
+			table.insert(distances, stop or math.huge)
+		end
+		local closest = math.min(unpack(distances))
+		return closest == math.huge and nil or closest
+	end
+
 	local lineBefore, lineAfter = line:sub(1, col), line:sub(col + 2)
 	local shift
 	if dir == "forward" then
-		local nextWord = select(2, lineAfter:find("%w+")) or math.huge
-		local nextPunctuation = select(2, lineAfter:find("%p+")) or math.huge
-		shift = math.min(nextWord, nextPunctuation)
-		if shift == math.huge then return end -- none found
+		shift = findClosest(lineAfter, config.patterns)
+		if not shift then return end
 		lineAfter = lineAfter:sub(1, shift) .. nextChar .. lineAfter:sub(shift + 1)
 	elseif dir == "backward" then
-		local prevWord = select(2, lineBefore:reverse():find("%w+")) or math.huge
-		local prevPunctuation = select(2, lineBefore:reverse():find("%p+")) or math.huge
-		shift = math.min(prevWord, prevPunctuation)
-		if shift == math.huge then return end -- none found
-		lineBefore = (lineBefore:reverse():sub(1, shift) .. nextChar .. lineBefore:reverse():sub(shift + 1)):reverse()
+		shift = findClosest(lineBefore:reverse(), config.patterns)
+		if not shift then return end
+		lineBefore = (
+			lineBefore:reverse():sub(1, shift)
+			.. nextChar
+			.. lineBefore:reverse():sub(shift + 1)
+		)
+		lineBefore = lineBefore:reverse()
 		shift = shift * -1
 	end
 
