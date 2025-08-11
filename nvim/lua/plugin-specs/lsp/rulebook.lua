@@ -29,7 +29,7 @@ return {
 			function() require("rulebook").prettifyError() end,
 			mode = { "n", "x" },
 			ft = { "javascript", "typescript" },
-			desc = "󰉿 Prettify error",
+			desc = " Prettify error",
 		},
 	},
 	opts = {
