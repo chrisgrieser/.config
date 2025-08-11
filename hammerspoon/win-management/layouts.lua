@@ -80,11 +80,14 @@ local function workLayout(displayAlreadyDarkened)
 	-- defer setting brightness to adjust to dark/light mode switch
 	darkmode.autoSwitch()
 	if not displayAlreadyDarkened then u.defer(1, autoSetBrightness) end
-
 	holeCover.update()
 	dockSwitcher("work")
-	u.closeAllTheThings()
 
+	-- close things
+	u.closeAllWindows("Finder")
+	u.quitFullscreenAndVideoApps()
+
+	-- open things
 	u.openApps { "Ivory", "Mimestream", "AlfredExtraPane", isWorkWeek() and "Slack" or nil }
 	u.defer(1, function()
 		local masto = u.app("Ivory")

@@ -24,7 +24,7 @@
 [advice]
 	detachedHead = false
 [help]
-	autoCorrect = prompt ; prompt whether to run auto-correction
+	autoCorrect = prompt ; prompt to run auto-correction
 
 ;───────────────────────────────────────────────────────────────────────────────
 

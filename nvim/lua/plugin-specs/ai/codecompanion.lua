@@ -83,15 +83,11 @@ return {
 	keys = {
 		-- `:` for the visual mode commands, so context gets passed via `<>` marks
 		{ "<leader>aa", ":CodeCompanion<CR>", mode = "x", desc = " Inline assistant" },
-		{ "<leader>as", ":CodeCompanion simplify<CR>", mode = "x", desc = " Simplify" },
-		-- stylua: ignore
-		{
-			"<leader>ae",
-			function() require("codecompanion").prompt("explain") end,
-			mode = "x",
-			desc = " Explain (chat)",
-		},
 		{ "<leader>ac", "<cmd>CodeCompanionChat toggle<CR>", desc = " Toggle chat" },
+		-- stylua: ignore
+		{ "<leader>ae", function() require("codecompanion").prompt("explain") end, mode = "x", desc = " Explain" },
+		-- stylua: ignore
+		{ "<leader>as", function() require("codecompanion").prompt("simplify") end, mode = "x", desc = " Simplify" },
 	},
 	opts = {
 		display = {
@@ -127,6 +123,38 @@ return {
 					},
 				})
 			end,
+		},
+		prompt_library = {
+			["Simplify"] = {
+				strategy = "inline",
+				description = "Simplify the selected code.",
+				opts = {
+					modes = { "v" },
+					short_name = "simplify",
+					auto_submit = true,
+					stop_context_insertion = true,
+					user_prompt = false,
+				},
+				prompts = {
+					{
+						role = "system",
+						content = function(ctx)
+							return ([[I want you to act as a senior %s developer. 
+							I will send you some code, and I want you to simplify the code, 
+							while keeping the code readable.]]):format(ctx.filetype)
+						end,
+					},
+					{
+						role = "user",
+						content = function(ctx)
+							-- stylua: ignore
+							local code = require("codecompanion.helpers.actions").get_code(ctx.start_line, ctx.end_line)
+							return code
+						end,
+						opts = { contains_code = true },
+					},
+				},
+			},
 		},
 	},
 }

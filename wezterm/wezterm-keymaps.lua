@@ -35,8 +35,9 @@ M.keys = {
 	-- REMAP VI MODE (cannot use `bindkey` for `<S-Space>`)
 	{ key = "Space", mods = "SHIFT", action = act.SendString("daw") },
 
-	-- REMAP accept & execute suggestion
-	{ key = "s", mods = "CMD", action = act.SendKey { key = "y", mods = "CTRL" } },
+	-----------------------------------------------------------------------------
+	-- vertical split 
+	{ key = "v", mods = "CTRL", action = act.SplitHorizontal }, -- SIC, called horizontal by wezterm
 
 	{ -- cycles panes, then tabs, then windows
 		key = "Enter",
