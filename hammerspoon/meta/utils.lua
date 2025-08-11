@@ -230,21 +230,16 @@ function M.closeAllWindows(appName)
 	require("win-management.auto-tile").resetWinCount(appName)
 end
 
-function M.closeAllTheThings()
+function M.quitFullscreenAndVideoApps()
 	-- close fullscreen wins
 	for _, win in pairs(hs.window.allWindows()) do
 		if win:isFullScreen() then win:setFullScreen(false) end
 	end
 
-	M.closeBrowserTabsWith(".")
-	require("win-management.auto-tile").resetWinCount("Brave Browser")
-
-	-- prevent the automatic quitting of audio-apps from triggering starting spotify
+	-- prevent the automatic quitting of audio-apps from triggering a spotify start
 	require("apps.spotify").aw_spotify:stop()
 	M.quitApps(M.videoAndAudioApps)
 	require("apps.spotify").aw_spotify:start()
-
-	M.defer(3, function() M.closeAllWindows("Finder") end)
 end
 
 ---@param title string

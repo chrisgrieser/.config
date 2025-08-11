@@ -23,6 +23,10 @@
     "body": "$LINE_COMMENT REQUIREMENTS",
     "prefix": "REQUIREMENTS"
   },
+  "SOURCE (+ url)": {
+    "body": "$LINE_COMMENT SOURCE $0$CLIPBOARD",
+    "prefix": "SOURCE (+url)"
+  },
   "insert ISO datestamp (today)": {
     "body": "${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}",
     "prefix": "insert ISO datestamp (today)"
