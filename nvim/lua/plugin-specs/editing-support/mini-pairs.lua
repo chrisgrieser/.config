@@ -1,11 +1,6 @@
 -- DOCS https://github.com/echasnovski/mini.pairs/blob/main/doc/mini-pairs.txt
 --------------------------------------------------------------------------------
 
--- INFO to disable in a buffer:
--- vim.b.minipairs_disable = true
-
---------------------------------------------------------------------------------
-
 ---@module "lazy.types"
 ---@type LazyPluginSpec
 return {
@@ -13,6 +8,17 @@ return {
 	event = { "InsertEnter", "CmdlineEnter" },
 	opts = {
 		modes = { command = true },
+		mappings = {
+			-- autopair `<>` in quotes or start of the line, useful for keybindings
+			["<"] = {
+				action = "open",
+				pair = "<>",
+				-- SIC `neigh_pattern` must match for pairing to work
+				neigh_pattern = "[\r\"'].", -- start of line or after quote
+				register = { cr = false },
+			},
+			[">"] = { action = "close", pair = "<>", register = { cr = false } },
+		},
 	},
 	keys = {
 		-- `remap` to trigger auto-pairing of this plugin
@@ -23,17 +29,7 @@ return {
 		local pairs = require("mini.pairs")
 		pairs.setup(opts)
 
-		pairs.map("i", "<", {
-			action = "open",
-			pair = "<>",
-			neigh_pattern = "[\r].",
-			register = { cr = false },
-		})
-		pairs.map("i", ">", {
-			action = "close",
-			pair = "<>",
-			register = { cr = false },
-		})
+		-- INFO to disable in a buffer: vim.b.minipairs_disable = true
 
 		vim.api.nvim_create_autocmd("FileType", {
 			desc = "User: mini.pairs for markdown",

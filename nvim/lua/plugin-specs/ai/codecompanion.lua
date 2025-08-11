@@ -82,21 +82,10 @@ return {
 	keys = {
 		{ "<leader>aa", ":CodeCompanion<CR>", mode = "x", desc = " Inline assistant" },
 		{ "<leader>ac", "<cmd>CodeCompanionChat toggle<CR>", desc = " Toggle chat" },
-		{
-			"<leader>ae",
-			function() require("codecompanion").prompt("explain") end,
-			mode = "x",
-			desc = " Explain",
-		},
-		{
-			"<leader>as",
-			function()
-				require("codecompanion").prompt("simplify")
-				vim.cmd.normal { vim.fn.mode(), bang = true } -- leave visual mode
-			end,
-			mode = "x",
-			desc = " Simplify",
-		},
+		-- stylua: ignore
+		{ "<leader>ae", function() require("codecompanion").prompt("explain") end, mode = "x", desc = " Explain" },
+		-- stylua: ignore
+		{ "<leader>as", function() require("codecompanion").prompt("simplify") end, mode = "x", desc = " Simplify" },
 	},
 	opts = {
 		display = {
@@ -148,17 +137,18 @@ return {
 					{
 						role = "system",
 						content = function(ctx)
-							return ([[I want you to act as a senior %s developer. 
-							I will send you some code, and I want you to simplify the code, 
-							while keeping the code readable.]]):format(ctx.filetype)
+							return ([[
+								I want you to act as a senior %s developer. 
+								I will send you some code, and I want you to simplify the code. 
+								Do not diminish readability of the code while doing so.
+							]]):format(ctx.filetype)
 						end,
 					},
 					{
 						role = "user",
 						content = function(ctx)
 							-- stylua: ignore
-							local code = require("codecompanion.helpers.actions").get_code(ctx.start_line, ctx.end_line)
-							return code
+							return require("codecompanion.helpers.actions").get_code(ctx.start_line, ctx.end_line)
 						end,
 						opts = { contains_code = true },
 					},
