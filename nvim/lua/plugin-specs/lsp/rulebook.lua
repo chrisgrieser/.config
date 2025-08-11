@@ -28,6 +28,7 @@ return {
 			"<leader>cp",
 			function() require("rulebook").prettifyError() end,
 			mode = { "n", "x" },
+			ft = { "javascript", "typescript" },
 			desc = "󰉿 Prettify error",
 		},
 	},
