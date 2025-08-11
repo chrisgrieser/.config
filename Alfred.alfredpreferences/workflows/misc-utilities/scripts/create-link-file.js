@@ -1,13 +1,7 @@
 #!/usr/bin/env osascript -l JavaScript
 ObjC.import("stdlib");
-//──────────────────────────────────────────────────────────────────────────────
-
-/** @param {string} filepath @param {string} text */
-function writeToFile(filepath, text) {
-	const str = $.NSString.alloc.initWithUTF8String(text);
-	str.writeToFileAtomicallyEncodingError(filepath, true, $.NSUTF8StringEncoding, null);
-}
-
+const app = Application.currentApplication();
+app.includeStandardAdditions = true;
 //──────────────────────────────────────────────────────────────────────────────
 
 /** @type {AlfredRun} */
@@ -25,12 +19,12 @@ function run(argv) {
 		.slice(0, 50)
 		.trim();
 
-	let targetFolder
+	let targetFolder;
 	try {
 		targetFolder = decodeURIComponent(finder.insertionLocation().url()?.slice(7) || "");
 	} catch (_error) {
 		// errors when there is no open finder window
-		targetFolder= finder.pathTo("desktop");
+		targetFolder = finder.pathTo("desktop");
 	}
 
 	const linkFilePath = `${targetFolder}/${safeTitle}.webloc`;
@@ -48,5 +42,5 @@ function run(argv) {
 	writeToFile(linkFilePath, urlFileContent);
 
 	finder.activate();
-	finder.reveal(Path(linkFilePath));
+	finder.reveal(Path(weblocFilePath));
 }

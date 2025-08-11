@@ -400,6 +400,8 @@
 				<false/>
 			</dict>
 		</array>
+		<key>B3D6F6A7-7A87-4747-BAD3-E56EA6466ACB</key>
+		<array/>
 		<key>B403FA59-A517-4002-9856-417D52F5C974</key>
 		<array>
 			<dict>
@@ -686,7 +688,7 @@ open -g "hammerspoon://sync-repos"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>./scripts/create-link-file.js</string>
+				<string>./scripts/create-link-file.sh</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
@@ -724,7 +726,7 @@ open -g "hammerspoon://sync-repos"</string>
 				<key>tasksettings</key>
 				<dict>
 					<key>out_format</key>
-					<string>json</string>
+					<string>title_tab_url</string>
 				</dict>
 				<key>taskuid</key>
 				<string>com.alfredapp.automation.extras/web-browsers/frontmost-browser/frontmost.tabs.current</string>
