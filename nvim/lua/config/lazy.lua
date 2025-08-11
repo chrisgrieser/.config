@@ -61,10 +61,10 @@ require("lazy").setup {
 	},
 	install = {
 		-- load one of these during installation at startup
-		colorscheme = { "tokyonight-moon", "nightfox", "gruvbox-material", "habamax" },
+		colorscheme = { vim.g.lightColor, vim.g.darkColor, "habamax" },
 	},
 	git = {
-		log = { "--since=4 days ago" }, -- `:Lazy log` shows commits since last x days
+		log = { "--since=5 days ago" }, -- `:Lazy log` shows commits since last x days
 	},
 	ui = {
 		title = " 󰒲 lazy.nvim ",

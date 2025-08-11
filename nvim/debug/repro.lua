@@ -2,39 +2,23 @@
 -- run via: `nvim -u minimal-config.lua`
 --------------------------------------------------------------------------------
 local spec = {
-	{
-		"MeanderingProgrammer/render-markdown.nvim",
-		dependencies = { "echasnovski/mini.icons", opts = {} },
-		ft = { "markdown" },
-		opts = {
-			file_types = { "markdown" },
-			code = {
-				border = "thick",
-				position = "left",
-			},
-		},
-	},
-	{
-		"nvim-treesitter/nvim-treesitter",
-		branch = "main", -- new versions follow `main`
-		lazy = false,
-		build = ":TSUpdate",
-		init = function()
-			local parsersToInstall = { "markdown", "markdown_inline" }
-			vim.defer_fn(function() require("nvim-treesitter").install(parsersToInstall) end, 1000)
+	"echasnovski/mini.pairs",
+	config = function(_, opts)
+		require("mini.pairs").setup(opts)
 
-			vim.api.nvim_create_autocmd("FileType", {
-				desc = "User: enable treesitter highlighting",
-				pattern = "markdown",
-				callback = function() vim.treesitter.start() end,
-			})
-		end,
-	},
+		require("mini.pairs").map("i", "<", {
+			action = "open",
+			pair = "<>",
+			neigh_pattern = "\r.",
+			register = { cr = false },
+		})
+		require("mini.pairs").map("i", ">", {
+			action = "close",
+			pair = "<>",
+			register = { cr = false },
+		})
+	end,
 }
-
---------------------------------------------------------------------------------
--- this causes the issue?
-vim.opt.conceallevel = 2
 
 --------------------------------------------------------------------------------
 vim.env.LAZY_STDPATH = "/tmp/nvim-repro"
