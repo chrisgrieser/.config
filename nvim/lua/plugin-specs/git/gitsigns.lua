@@ -1,13 +1,3 @@
--- as `vim.g.`, so other plugins can access it as well
-vim.g.toggle_gitsigns_diff = function()
-	require("gitsigns").toggle_linehl()
-	require("gitsigns").toggle_word_diff()
-	local conf = require("gitsigns.config").config
-	conf.show_deleted = not conf.show_deleted
-end
-
------------------------------------------------------------------------
-
 ---@module "lazy.types"
 ---@type LazyPluginSpec
 return {
@@ -35,8 +25,10 @@ return {
 		{ "ga", ":Gitsigns stage_hunk<CR>", mode = "x", silent = true, desc = "󰊢 (Un-)Stage selection" },
 		{ "<leader>gA", "<cmd>Gitsigns stage_buffer<CR>", desc = "󰊢 Stage file" },
 
+		---@diagnostic disable: param-type-mismatch -- faulty annotation
 		{ "gh", function() require("gitsigns").nav_hunk("next", { foldopen = true, navigation_message = true }) end, desc = "󰊢 Next hunk" },
 		{ "gH", function() require("gitsigns").nav_hunk("prev", { foldopen = true, navigation_message = true }) end, desc = "󰊢 Previous hunk" },
+		---@diagnostic enable: param-type-mismatch
 		{ "gh", "<cmd>Gitsigns select_hunk<CR>", mode = { "o", "x" }, desc = "󰊢 Hunk textobj" },
 
 		-- UNDO
@@ -50,7 +42,16 @@ return {
 			function() require("gitsigns").toggle_current_line_blame() end,
 			desc = "󰆽 Line blame",
 		},
-		{ "<leader>ov", vim.g.toggle_gitsigns_diff, desc = " Inline diff view" },
+		{
+			"<leader>ov",
+			function()
+				require("gitsigns").toggle_linehl()
+				require("gitsigns").toggle_word_diff()
+				local conf = require("gitsigns.config").config
+				conf.show_deleted = not conf.show_deleted
+			end,
+			desc = " Inline diff view",
+		},
 		{
 			"<leader>op",
 			function()
@@ -62,6 +63,7 @@ return {
 					local gitArgs = { "git", "log", "--max-count=1", "--format=%h", "--", filepath }
 					local out = vim.system(gitArgs):wait()
 					local lastCommitToFile = vim.trim(out.stdout) .. "^"
+					---@diagnostic disable-next-line: param-type-mismatch -- fauly
 					require("gitsigns").change_base(lastCommitToFile)
 					vim.b.gitsignsPrevChanges = true
 				end

@@ -23,9 +23,9 @@ let semaphore = DispatchSemaphore(value: 0)
 
 // Alfred environment variables
 let reminderList = ProcessInfo.processInfo.environment["reminder_list"]!
-let includeAllLists = ProcessInfo.processInfo.environment["include_all_lists"]! == "1"
+let includeAllListsEnabled = ProcessInfo.processInfo.environment["include_all_lists"]! == "1"
 let showCompleted = ProcessInfo.processInfo.environment["showCompleted"] == "true"  // no `!`, since not always set
-let includeNoDueDate = ProcessInfo.processInfo.environment["include_no_duedate"]! == "1"
+let includeNoDueDateEnabled = ProcessInfo.processInfo.environment["include_no_duedate"]! == "1"
 // ─────────────────────────────────────────────────────────────────────────────
 
 var colorMap: [String: String] = [:]
@@ -98,7 +98,7 @@ eventStore.requestFullAccessToReminders { granted, error in
 	// Get list specified or use all lists
 	let calendars = eventStore.calendars(for: .reminder)
 	let selectedCalendars: [EKCalendar]
-	if includeAllLists {
+	if includeAllListsEnabled {
 		selectedCalendars = calendars
 	} else if let target = calendars.first(where: { $0.title == reminderList }) {
 		selectedCalendars = [target]
@@ -138,21 +138,30 @@ eventStore.requestFullAccessToReminders { granted, error in
 			reminders
 			.filter { rem in
 				// 1. not completed & due before tomorrow 
-				// 2. completed & due today (filtered above via predicate)
-				// 3. no due date & not completed (if user enabled showing no due date reminders)
+				// or 2. completed & due today (filtered above via predicate)
+				// or 3. no due date & not completed (if user enabled showing no due date reminders)
 				let dueDate = rem.dueDateComponents?.date
-				if dueDate == nil { return includeNoDueDate && !rem.isCompleted }
+				if dueDate == nil { return includeNoDueDateEnabled && !rem.isCompleted }
 				if rem.isCompleted { return dueDate! >= today && dueDate! < tomorrow }
 				return dueDate! < tomorrow
 			}
 			.sorted { a, b in
-				// 1. by priority, 2. by due time, (3. by cdate, but that's default sorting)
+				// 1. completion time 2. by priority, 3. by due time,
+				// (4. by cdate, but that's default sorting)
+				if a.isCompleted != b.isCompleted { return a.isCompleted }
+				if a.completionDate != b.completionDate {
+					let aCompDate = a.completionDate ?? Date.distantFuture
+					let bCompDate = b.completionDate ?? Date.distantFuture
+					return aCompDate > bCompDate
+				}
+
 				let aPrio = normalizePriority(a)
 				let bPrio = normalizePriority(b)
-				if aPrio != bPrio { return aPrio > bPrio }
-				let lhsDate = a.dueDateComponents?.date ?? Date.distantFuture
-				let rhsDate = b.dueDateComponents?.date ?? Date.distantFuture
-				return lhsDate < rhsDate
+				if aPrio != bPrio { return aPrio < bPrio }
+
+				let aDueDate = a.dueDateComponents?.date ?? Date.distantFuture
+				let bDueDate = b.dueDateComponents?.date ?? Date.distantFuture
+				return aDueDate < bDueDate
 			}
 			.map { rem in
 				let components = rem.dueDateComponents
@@ -162,7 +171,7 @@ eventStore.requestFullAccessToReminders { granted, error in
 					title: rem.title,
 					notes: rem.notes,
 					list: rem.calendar.title,
-					listColor: includeAllLists ? mapCGColorToEmoji(rem.calendar.cgColor) : nil,
+					listColor: includeAllListsEnabled ? mapCGColorToEmoji(rem.calendar.cgColor) : nil,
 					dueDate: components?.date.flatMap { formatter.string(from: $0) },
 					isAllDay: components?.hour == nil && components?.minute == nil,
 					isCompleted: rem.isCompleted,
