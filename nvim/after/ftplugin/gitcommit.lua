@@ -17,20 +17,15 @@ bkeymap("n", "gE", "[s", { desc = "󰓆 Previous misspelling" })
 bkeymap("i", "<Tab>", "<End>", { desc = " Goto EoL" })
 bkeymap("n", "<Tab>", "A", { desc = " Goto EoL" })
 
-vim.api.nvim_create_autocmd("TextChangedI", {
-	desc = "User: improve auto-pairing for git commits",
-	group = vim.api.nvim_create_augroup("gitcommit", { clear = true }),
-	buffer = 0,
-	callback = function()
-		local line = vim.api.nvim_get_current_line()
-		local col = vim.api.nvim_win_get_cursor(0)[2]
-		local nextChar = line:sub(col + 1, col + 1)
-		Chainsaw(nextChar) -- 🪚
-		local prevChar = line:sub(col, col)
-		Chainsaw(prevChar) -- 🪚
-		local isFirstWord = line:find(" ") == nil
-	end,
-})
+bkeymap("i", "(", function ()
+	local line = vim.api.nvim_get_current_line()
+	local isFirstWord = line:find(" ") == nil
+	local toAdd = isFirstWord and "(): " or "()"
+	vim.api.nvim_set_current_line(line .. toAdd)
+	-- move cursor to the right
+	local row, col = unpack(vim.api.nvim_win_get_cursor(0))
+	vim.api.nvim_win_set_cursor(0, { row, col + 1 })
+end, { desc = "(): autopairing for gitcommit" })
 
 --------------------------------------------------------------------------------
 
