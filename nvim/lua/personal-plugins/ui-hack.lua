@@ -12,8 +12,8 @@ if not hasNotificationPlugin then return end
 
 local config = {
 	msgKind = { -- existing kinds: https://neovim.io/doc/user/ui.html#ui-messages
-		ignore = { "search_cmd", "return_prompt" },
-		mini = { "bufwrite", "undo" }, -- more minimal style when using `snacks.notifier`
+		ignore = { "return_prompt" },
+		mini = { "bufwrite", "undo", "search_cmd" }, -- more minimal style when using `snacks.notifier`
 	},
 	notification = { icon = "󰍩" },
 }
@@ -73,9 +73,9 @@ local function detach() vim.ui_detach(ns) end
 local group = vim.api.nvim_create_augroup("ui-hack", { clear = true })
 vim.api.nvim_create_autocmd({ "CmdlineLeave", "VimEnter" }, {
 	group = group,
-	callback = vim.schedule_wrap(attach),
+	callback = attach,
 })
 vim.api.nvim_create_autocmd("CmdlineEnter", {
 	group = group,
-	callback = vim.schedule_wrap(detach),
+	callback = detach,
 })

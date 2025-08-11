@@ -75,19 +75,28 @@ return {
 						"/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/head_gestures_double_shake.caf"
 					vim.system { "afplay", sound }
 				end
-				if vim.g.toggle_gitsigns_diff then vim.g.toggle_gitsigns_diff() end
-				vim.defer_fn(vim.lsp.buf.format, 100)
+				vim.defer_fn(vim.lsp.buf.format, 200)
 			end,
 		})
 	end,
 	keys = {
-		-- `:` for the visual mode commands, so context gets passed via `<>` marks
 		{ "<leader>aa", ":CodeCompanion<CR>", mode = "x", desc = " Inline assistant" },
 		{ "<leader>ac", "<cmd>CodeCompanionChat toggle<CR>", desc = " Toggle chat" },
-		-- stylua: ignore
-		{ "<leader>ae", function() require("codecompanion").prompt("explain") end, mode = "x", desc = " Explain" },
-		-- stylua: ignore
-		{ "<leader>as", function() require("codecompanion").prompt("simplify") end, mode = "x", desc = " Simplify" },
+		{
+			"<leader>ae",
+			function() require("codecompanion").prompt("explain") end,
+			mode = "x",
+			desc = " Explain",
+		},
+		{
+			"<leader>as",
+			function()
+				require("codecompanion").prompt("simplify")
+				vim.cmd.normal { vim.fn.mode(), bang = true } -- leave visual mode
+			end,
+			mode = "x",
+			desc = " Simplify",
+		},
 	},
 	opts = {
 		display = {

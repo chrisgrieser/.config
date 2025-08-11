@@ -128,6 +128,7 @@ function run() {
 		const content = (rem.title + "\n" + body).trim();
 		const [url] = content.match(urlRegex) || [];
 		const displayTitle = rem.title.replace(/\n+/g, " / "); // SIC titles can have newlines
+		const emoji = rem.isCompleted ? "☑️ " : "";
 
 		// SUBTITLE: display due time, past & missing due dates, list, and notes
 		const dueDateObj = new Date(rem.dueDate);
@@ -144,8 +145,6 @@ function run() {
 		]
 			.filter(Boolean)
 			.join("    ");
-
-		const emoji = rem.isCompleted ? "☑️ " : "";
 
 		// INFO the boolean are all stringified, so they are available as "true"
 		// and "false" after stringification, instead of the less clear "1" and "0"

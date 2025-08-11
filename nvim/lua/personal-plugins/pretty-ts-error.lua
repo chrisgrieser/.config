@@ -50,19 +50,17 @@ local function show(diag)
 	end
 
 	-- open LSP float
+	local height = math.min(#lines, vim.api.nvim_win_get_config(0).height - 2)
 	local title = ("  %s %s "):format(diag.source, diag.code)
 	local _bufnr, winid = vim.lsp.util.open_floating_preview(lines, "markdown", {
 		close_events = { "CursorMoved", "CursorMovedI", "BufHidden", "LspDetach" },
 		wrap = false,
 
 		title = title,
-		height = #lines,
+		height = height,
 	})
 	-- FIX value above being ignored
-	vim.api.nvim_win_set_config(winid, {
-		title = title,
-		height = #lines,
-	})
+	vim.api.nvim_win_set_config(winid, { title = title, height = height })
 end
 
 --------------------------------------------------------------------------------
