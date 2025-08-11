@@ -14,7 +14,7 @@ local function keymap(mode, lhs, rhs, opts)
 	if not success then
 		local modes = type(mode) == "table" and table.concat(mode, ", ") or mode
 		local msg = ("[[%s]] %s"):format(modes, lhs)
-		vim.defer_fn(function ()
+		vim.defer_fn(function()
 			-- defer for notification plugin
 			vim.notify(msg, vim.log.levels.WARN, { title = "Duplicate keymap", timeout = false })
 		end, 1000)
