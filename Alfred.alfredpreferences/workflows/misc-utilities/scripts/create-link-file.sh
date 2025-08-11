@@ -21,4 +21,4 @@ cat > "$filepath" << EOF
 </plist>
 EOF
 
-open -R "$filepath"
+open -R "$filepath" # reveal in Finder
