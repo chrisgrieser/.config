@@ -80,8 +80,8 @@ return {
 		})
 	end,
 	keys = {
-		{ "<leader>aa", ":CodeCompanion<CR>", mode = "x", desc = " Inline assistant" },
 		{ "<leader>ac", "<cmd>CodeCompanionChat toggle<CR>", desc = " Toggle chat" },
+		{ "<leader>aa", ":CodeCompanion<CR>", mode = "x", desc = " 󰘎 Prompt" },
 		-- stylua: ignore
 		{ "<leader>ae", function() require("codecompanion").prompt("explain") end, mode = "x", desc = " Explain" },
 		-- stylua: ignore
