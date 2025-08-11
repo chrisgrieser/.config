@@ -17,38 +17,6 @@ local M = {}
 
 ---@param diag vim.Diagnostic
 local function show(diag)
-	-- pretty-print the message in markdown
-	local msg = diag
-		.message
-		:gsub("'({.-}%[?]?)'", "\n```ts\n%1\n```\n") -- types to codeblocks
-		:gsub("'", "`") -- single term to inline code
-		:gsub("\n +", "\n") -- remove indents
-		:gsub("\nType", "\n\nType") -- padding
-	local lines = vim.split(msg, "\n")
-
-	-- format codeblocks
-	local fmtArgs
-	if vim.fn.executable("biome") == 1 then
-		fmtArgs = { "biome", "format", "--stdin-file-path=stdin.ts" }
-	elseif vim.fn.executable("prettier") == 1 then
-		fmtArgs = { "prettier", "--stdin-filepath=stdin.ts" }
-	end
-	if fmtArgs then
-		lines = vim.iter(lines):fold({}, function(acc, line)
-			local isCodeBlock = line:find("^{.+[]}]$") ~= nil
-			if isCodeBlock then
-				line = "type dummy = " .. line
-				local out = vim.system(fmtArgs, { stdin = line }):wait()
-				assert(out.stdout and out.code == 0, "Formatter failed. " .. out.stderr)
-				local formatted = vim.trim(out.stdout:gsub("^type dummy = ", ""))
-				vim.list_extend(acc, vim.split(formatted, "\n"))
-			else
-				table.insert(acc, line)
-			end
-			return acc
-		end)
-	end
-
 	-- open LSP float
 	local height = math.min(#lines, vim.api.nvim_win_get_config(0).height - 2)
 	local title = ("  %s %s "):format(diag.source, diag.code)
