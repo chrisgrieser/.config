@@ -91,7 +91,7 @@ function run(argv) {
 		const coordinates = loc.geometry.coordinates.reverse().join(",");
 
 		return {
-			title: title,
+			title: 5,
 			subtitle: addressDisplay,
 			arg: url1, // open at primary map provider
 			mods: {

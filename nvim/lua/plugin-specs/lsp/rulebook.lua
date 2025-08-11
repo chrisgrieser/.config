@@ -24,6 +24,12 @@ return {
 			mode = { "n", "x" },
 			desc = "󰉿 Formatter suppress",
 		},
+		{
+			"<leader>cp",
+			function() require("rulebook").prettifyError() end,
+			mode = { "n", "x" },
+			desc = "󰉿 Prettify error",
+		},
 	},
 	opts = {
 		ruleDocs = {

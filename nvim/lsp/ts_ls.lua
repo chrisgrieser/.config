@@ -38,31 +38,20 @@ local config = {
 		client.server_capabilities.documentFormattingProvider = false
 		client.server_capabilities.documentRangeFormattingProvider = false
 
-		local function nmap(lhs, rhs, desc)
-			vim.keymap.set("n", lhs, rhs, { desc = desc, buffer = bufnr })
-		end
-
 		-- quick access to code action
-		nmap("<leader>rt", function()
+		vim.keymap.set("n", "<leader>rt", function()
 			vim.lsp.buf.code_action {
 				filter = function(act) return act.title == "Convert to template string" end,
 				apply = true,
 			}
-		end, " Template string code action")
+		end, { desc = " Template string code action", buffer = bufnr })
 
 		-- skip the "Move to file" code action
-		nmap("<leader>ca", function()
+		vim.keymap.set("n", "<leader>ca", function()
 			vim.lsp.buf.code_action {
 				filter = function(act) return act.kind ~= "refactor.move" end,
 			}
-		end, " Template string code action")
-
-		-- pretty ts error
-		nmap(
-			"<leader>t",
-			function() require("personal-plugins.pretty-ts-error").select() end,
-			" Pretty `ts_ls` diagnostic"
-		)
+		end, { desc = " Template string code action", buffer = bufnr })
 	end,
 }
 
