@@ -2,6 +2,10 @@
 ---@type LazyPluginSpec
 return {
 	"chrisgrieser/nvim-rulebook",
+
+	-- TEMP
+	branch = "dev",
+
 	keys = {
 		{ "<leader>cl", function() require("rulebook").lookupRule() end, desc = " Lookup rule" },
 		{
@@ -24,30 +28,21 @@ return {
 	opts = {
 		ruleDocs = {
 			fallback = "https://chatgpt.com/?q=Explain%20the%20following%20diagnostic%20error%3A%20%s",
-			typescript = false, -- use fallback instead
 		},
 		suppressFormatter = {
 			-- use `biome` instead of `prettier`
 			javascript = {
 				ignoreBlock = "// biome-ignore format: expl",
-				ignoreRange = {
-					"// biome-ignore-start format: expl",
-					"// biome-ignore-end format: -",
-				},
+				ignoreRange = { "// biome-ignore-start format: expl", "// biome-ignore-end format: -" },
 			},
 			typescript = {
 				ignoreBlock = "// biome-ignore format: expl",
-				ignoreRange = {
-					"// biome-ignore-start format: expl",
-					"// biome-ignore-end format: -",
-				},
+				ignoreRange = { "// biome-ignore-start format: expl", "// biome-ignore-end format: -" },
 			},
 			css = {
 				ignoreBlock = "/* biome-ignore format: expl */",
-				ignoreRange = {
-					"/* biome-ignore-start format: expl */",
-					"/* biome-ignore-end format: - */",
-				},
+				-- stylua: ignore
+				ignoreRange = { "/* biome-ignore-start format: expl */", "/* biome-ignore-end format: - */" },
 			},
 		},
 	},
