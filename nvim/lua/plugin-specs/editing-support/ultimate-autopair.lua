@@ -44,13 +44,6 @@ return {
 		{ "**", "**", ft = { "markdown" } }, -- bold
 		{ [[\"]], [[\"]], ft = { "zsh", "json", "applescript" } }, -- escaped quote
 
-		{ -- commit scope (= only first word) for commit messages
-			"(",
-			"): ",
-			ft = { "gitcommit" },
-			cond = function(_fn) return not vim.api.nvim_get_current_line():find(" ") end,
-		},
-
 		-- for keymaps like `<C-a>`
 		{ "<", ">", ft = { "vim" } },
 		{
