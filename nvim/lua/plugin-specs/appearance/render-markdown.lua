@@ -2,7 +2,7 @@
 --------------------------------------------------------------------------------
 
 -- FIX https://github.com/MeanderingProgrammer/render-markdown.nvim/issues/488#issuecomment-3154937211
-local query = vim.treesitter.query.get('markdown', 'highlights').query
+local query = vim.treesitter.query.get("markdown", "highlights").query
 query:disable_pattern(17)
 query:disable_pattern(18)
 
@@ -14,7 +14,7 @@ return {
 	"MeanderingProgrammer/render-markdown.nvim",
 	dependencies = "echasnovski/mini.icons",
 
-	ft = { "markdown", "codecompanion" },
+	ft = "markdown",
 	keys = {
 		{
 			"<leader>oc",
@@ -28,7 +28,6 @@ return {
 	opts = {
 		sign = { enabled = false },
 		latex = { enabled = false },
-		file_types = { "markdown", "codecompanion" },
 		render_modes = { "n", "c", "i", "v", "V" },
 		html = {
 			comment = { text = "󰆈" },
@@ -48,7 +47,6 @@ return {
 		link = {
 			custom = {
 				myWebsite = { pattern = "https://chris%-grieser.de", icon = " " },
-				proseSh = { pattern = "prose%.sh", icon = " " },
 				mastodon = { pattern = "%.social/@", icon = " " },
 				linkedin = { pattern = "linkedin%.com", icon = "󰌻 " },
 				researchgate = { pattern = "researchgate%.net", icon = "󰙨 " },
@@ -58,13 +56,13 @@ return {
 		win_options = {
 			conceallevel = { default = 0, rendered = 2 },
 		},
-		-- LSP hovers: hide code block lines
-		overrides = {
-			buftype = {
-				nofile = {
-					code = { border = "hide", style = "normal" },
-				},
-			},
-		},
+		-- LSP hovers: hide code block lines (CAVEAT: also affects code-companion)
+		-- overrides = {
+		-- 	buftype = {
+		-- 		nofile = {
+		-- 			code = { border = "hide", style = "normal" },
+		-- 		},
+		-- 	},
+		-- },
 	},
 }

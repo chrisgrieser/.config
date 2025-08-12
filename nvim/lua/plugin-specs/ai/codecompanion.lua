@@ -57,7 +57,7 @@ end
 
 ---@module "lazy.types"
 ---@type LazyPluginSpec
-return {
+local ccSpec = {
 	"olimorris/codecompanion.nvim",
 	cmd = { "CodeCompanion", "CodeCompanionChat" },
 	init = function() vim.g.whichkeyAddSpec { "<leader>a", group = " AI" } end,
@@ -80,10 +80,10 @@ return {
 		})
 	end,
 	keys = {
-		{ "<leader>ac", "<cmd>CodeCompanionChat toggle<CR>", desc = " CodeCompanion chat" },
-		{ "<leader>aa", ":CodeCompanion<CR>", mode = "x", desc = " 󰘎 Prompt" },
-		{ "<leader>aA", "<cmd>CodeCompanionChat Add<CR>", mode = "x", desc = " 󰘎 Add selection to chat" },
 		-- stylua: ignore start
+		{ "<leader>ac", "<cmd>CodeCompanionChat toggle<CR>", desc = " CodeCompanion chat (toggle)" },
+		{ "<leader>an", "<cmd>CodeCompanionChat<CR>", desc = " CodeCompanion chat (new)" },
+		{ "<leader>aa", ":CodeCompanion<CR>", mode = "x", desc = " 󰘎 Prompt" },
 		-- builtin-prompts https://github.com/olimorris/codecompanion.nvim/blob/main/lua/codecompanion/config.lua
 		{ "<leader>ag", function() require("codecompanion").prompt("commit") end, desc = " Write git commit msg" },
 		{ "<leader>ae", function() require("codecompanion").prompt("explain") end, mode = "x", desc = " Explain" },
@@ -100,7 +100,7 @@ return {
 			-- https://codecompanion.olimorris.dev/configuration/chat-buffer.html
 			chat = {
 				auto_scroll = false,
-				-- intro_message = "",
+				intro_message = "",
 				window = {
 					opts = { statuscolumn = " " }, -- padding
 				},
@@ -108,8 +108,17 @@ return {
 		},
 		strategies = {
 			inline = { adapter = "openai" },
-			cmd = { adapter = "openai" },
-			chat = { adapter = "openai" },
+			chat = {
+				adapter = "openai",
+				keymaps = {
+					close = { modes = { n = "q" }, opts = { nowait = true } },
+					stop = { modes = { n = "<C-c>" } },
+					clear = { modes = { n = "<D-k>", i = "<D-k>" } },
+					next_header = { modes = { n = "<C-j>", i = "<C-j>" } },
+					previous_header = { modes = { n = "<C-k>", i = "<C-k>" } },
+					fold_code = { modes = { n = "zz" } },
+				},
+			},
 		},
 		adapters = {
 			openai = function()
@@ -159,6 +168,19 @@ return {
 					},
 				},
 			},
+		},
+	},
+}
+
+--------------------------------------------------------------------------------
+
+return {
+	ccSpec,
+	{ -- modifications to render-markdown config
+		"MeanderingProgrammer/render-markdown.nvim",
+		ft = { "markdown", "codecompanion" },
+		opts = {
+			file_types = { "markdown", "codecompanion" },
 		},
 	},
 }
