@@ -24,7 +24,7 @@ if [[ -z "$api_url" && "$mode" == "open" ]]; then
 else
 	# get token
 	token=$github_token_from_alfred_prefs
-	[[ -z "$token" ]] && token=$(zsh -c "$github_token_shell_cmd")
+	[[ -z "$token" && -n "$github_token_shell_cmd" ]] && token=$(zsh -c "$github_token_shell_cmd")
 	[[ -z "$token" ]] && token=$GITHUB_TOKEN
 
 	response=$(curl -sL -H "Accept: application/vnd.github+json" \

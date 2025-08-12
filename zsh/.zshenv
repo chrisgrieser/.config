@@ -24,3 +24,6 @@ function _export_github_token {
 	GITHUB_TOKEN="$(cat "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/private dotfiles/github-token.txt")"
 	export GITHUB_TOKEN
 }
+
+# shellcheck disable=2154
+if [[ "$alfred_workflow_name" == "GitFred" ]]; then _export_github_token; fi
