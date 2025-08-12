@@ -101,7 +101,7 @@ fi
 # FORKING
 
 # INFO Alfred stores checkbox settings as `"1"` or `"0"`, and variables in stringified form.
-if [[ "$ownerOfRepo" != "true" && "$fork_on_clone" == "1" ]]; then
+if [[ "$github_username" != "$owner" && "$fork_on_clone" == "1" ]]; then
 
 	if [[ -x "$(command -v gh)" ]]; then
 		gh repo fork --remote=false &> /dev/null

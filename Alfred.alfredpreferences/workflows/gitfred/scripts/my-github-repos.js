@@ -159,7 +159,7 @@ function run() {
 
 	return JSON.stringify({
 		items: repos,
-		variables: { ownerOfRepo: "true" },
-		cache: { seconds: 15, loosereload: true }, // short, since cloned repos should be available immediately
+		// short, since cloned repos should be available immediately
+		cache: { seconds: 15, loosereload: true },
 	});
 }

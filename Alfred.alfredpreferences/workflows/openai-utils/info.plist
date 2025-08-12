@@ -396,6 +396,8 @@
 		</dict>
 		<key>6261E02D-805C-4920-BEA0-D4F39B6A8873</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>8</integer>
 			<key>xpos</key>
 			<real>260</real>
 			<key>ypos</key>
@@ -417,6 +419,8 @@
 		</dict>
 		<key>C79D13CD-AAE6-49E7-9BD5-8C33E2422C5F</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>8</integer>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
@@ -431,6 +435,8 @@
 		</dict>
 		<key>E10230C4-C675-47BC-94C3-F2708E565938</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>8</integer>
 			<key>note</key>
 			<string>open conversation</string>
 			<key>xpos</key>
