@@ -1,13 +1,10 @@
+-- DOCS https://github.com/MeanderingProgrammer/render-markdown.nvim#setup
+--------------------------------------------------------------------------------
+
 -- FIX https://github.com/MeanderingProgrammer/render-markdown.nvim/issues/488#issuecomment-3154937211
-vim.api.nvim_create_autocmd("Filetype", {
-	pattern = { "markdown", "codecompanion" },
-	group = vim.api.nvim_create_augroup("render-markdown-fix", { clear = true }),
-	once = true,
-	callback = vim.schedule_wrap(function()
-		vim.treesitter.stop()
-		pcall(vim.treesitter.start)
-	end),
-})
+local query = vim.treesitter.query.get('markdown', 'highlights').query
+query:disable_pattern(17)
+query:disable_pattern(18)
 
 --------------------------------------------------------------------------------
 
@@ -61,14 +58,11 @@ return {
 		win_options = {
 			conceallevel = { default = 0, rendered = 2 },
 		},
-		-- LSP hovers: hide code block lines, and hide markup even in cursorline
+		-- LSP hovers: hide code block lines
 		overrides = {
 			buftype = {
 				nofile = {
 					code = { border = "hide", style = "normal" },
-					win_options = {
-						concealcursor = { default = vim.o.concealcursor, rendered = "nvic" },
-					},
 				},
 			},
 		},
