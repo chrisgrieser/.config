@@ -65,7 +65,7 @@ function run() {
 	const tokenFromZshenvCmd = "test -e $HOME/.zshenv && source $HOME/.zshenv ; echo $GITHUB_TOKEN";
 	let githubToken = $.getenv("github_token_from_alfred_prefs").trim();
 	if (!githubToken && tokenShellCmd) githubToken = app.doShellScript(tokenShellCmd).trim();
-	if (!githubToken) app.doShellScript(tokenFromZshenvCmd);
+	if (!githubToken) githubToken = app.doShellScript(tokenFromZshenvCmd);
 
 	const username = $.getenv("github_username");
 	const apiUrl = `https://api.github.com/search/issues?q=author:${username}+is:pr+is:open&per_page=100`;
