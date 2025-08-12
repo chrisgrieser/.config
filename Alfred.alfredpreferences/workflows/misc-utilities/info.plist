@@ -263,6 +263,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>87FB4C45-5B6B-4743-8982-003BAEF5BC8C</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>E7B50360-57CE-4EEB-A110-98FA10725DC6</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>93776F8A-CF4E-4A33-A222-621DFF193536</key>
 		<array>
 			<dict>
@@ -1490,6 +1503,50 @@ open -g "hammerspoon://sync-repos"</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>timer</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>Timer: {query} minutes</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>87FB4C45-5B6B-4743-8982-003BAEF5BC8C</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>scripts/set-timer.applescript</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>E7B50360-57CE-4EEB-A110-98FA10725DC6</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
@@ -2031,6 +2088,13 @@ open -g "hammerspoon://sync-repos"</string>
 			<key>ypos</key>
 			<real>270</real>
 		</dict>
+		<key>87FB4C45-5B6B-4743-8982-003BAEF5BC8C</key>
+		<dict>
+			<key>xpos</key>
+			<real>550</real>
+			<key>ypos</key>
+			<real>1065</real>
+		</dict>
 		<key>89B87E1B-141D-4F20-A450-01A53B8A1009</key>
 		<dict>
 			<key>colorindex</key>
@@ -2266,6 +2330,13 @@ open -g "hammerspoon://sync-repos"</string>
 			<real>700</real>
 			<key>ypos</key>
 			<real>45</real>
+		</dict>
+		<key>E7B50360-57CE-4EEB-A110-98FA10725DC6</key>
+		<dict>
+			<key>xpos</key>
+			<real>725</real>
+			<key>ypos</key>
+			<real>1065</real>
 		</dict>
 		<key>E9FF31BC-709C-4387-975A-0B1410418161</key>
 		<dict>
