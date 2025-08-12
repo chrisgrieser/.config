@@ -6,4 +6,3 @@ matches:
   - { trigger: "eee", replace: "+:" } # open selection
   - { trigger: "hhh", replace: "+:heart:\n" } # Slack does not support :grey_heart:
   - { trigger: "yyy", replace: "+:+1:\n" } # 👍
-  - { trigger: "lll", replace: "+:eyes:\n" } # 👀
