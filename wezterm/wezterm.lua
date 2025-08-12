@@ -1,20 +1,21 @@
 local wt = require("wezterm")
 --------------------------------------------------------------------------------
 
--- CONFIG the first theme in the list is used
+-- THEME
+-- the first theme in each list is used
 local darkThemes = {
-	"cyberpunk",
-	"Afterglow (Gogh)",
-	"Kanagawa (Gogh)",
 	"MaterialDesignColors",
+	"Afterglow (Gogh)",
+	"cyberpunk",
+	"Kanagawa (Gogh)",
 	"ChallengerDeep",
 }
 local lightThemes = {
-	"Nord Light (Gogh)",
-	"Ivory Light (terminal.sexy)",
 	"Railscasts (light) (terminal.sexy)",
-	"GoogleLight (Gogh)",
 	"BlulocoZshLight (Gogh)",
+	"Ivory Light (terminal.sexy)",
+	"Nord Light (Gogh)",
+	"GoogleLight (Gogh)",
 }
 
 local nordLight = wt.get_builtin_color_schemes()["Nord Light (Gogh)"]
@@ -109,8 +110,8 @@ local config = {
 	force_reverse_video_cursor = true, -- `true` = color is reverse, `false` = color by color scheme
 
 	-- FONT
-	font = wt.font { family = "JetBrainsMonoNL Nerd Font", weight = "Medium" },
-	harfbuzz_features = { "calt=0", "clig=0", "liga=0" }, -- disable ligatures
+	font = wt.font { family = "JetBrainsMono Nerd Font", weight = "Medium" },
+	-- harfbuzz_features = { "calt=0", "clig=0", "liga=0" }, -- disable ligatures
 	cell_width = 0.9, -- effectively like letter-spacing
 	font_size = deviceSpecific[device].fontSize,
 	command_palette_font_size = deviceSpecific[device].fontSize,
@@ -160,7 +161,7 @@ local config = {
 	},
 
 	-- Bell
-	-- audible_bell = "Disabled",
+	audible_bell = "Disabled",
 	visual_bell = { -- briefly flash cursor on visual bell
 		fade_in_duration_ms = 500,
 		fade_out_duration_ms = 500,
