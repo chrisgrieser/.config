@@ -147,6 +147,17 @@
 			<key>url</key>
 			<string>tel://{query}</string>
 		</dict>
+		<key>D711E5FA-D1E8-457F-B69E-8BC7A516CF29</key>
+		<dict>
+			<key>enabled</key>
+			<true/>
+			<key>keyword</key>
+			<string>archive</string>
+			<key>text</key>
+			<string>Archive.is</string>
+			<key>url</key>
+			<string>https://archive.is/submit/?url={query}</string>
+		</dict>
 		<key>D7CDCB7A-4555-4539-AA20-55DD73693D69</key>
 		<dict>
 			<key>enabled</key>
