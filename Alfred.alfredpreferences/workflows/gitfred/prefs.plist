@@ -8,6 +8,8 @@
 	<integer>15</integer>
 	<key>fork_on_clone</key>
 	<true/>
+	<key>github_token_shell_cmd</key>
+	<string>cat "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/private dotfiles/github-token.txt"</string>
 	<key>github_username</key>
 	<string>chrisgrieser</string>
 	<key>keyword_personal_repos</key>
