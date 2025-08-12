@@ -11,14 +11,14 @@ function alfredMatcher(str) {
 
 /** @param {string} url */
 function httpRequest(url) {
-	const queryURL = $.NSURL.URLWithString(url);
-	const requestData = $.NSData.dataWithContentsOfURL(queryURL);
+	const queryUrl = $.NSURL.URLWithString(url);
+	const requestData = $.NSData.dataWithContentsOfURL(queryUrl);
 	return $.NSString.alloc.initWithDataEncoding(requestData, $.NSUTF8StringEncoding).js;
 }
 
 /** @param {string} isoDateStr */
 function humanRelativeDate(isoDateStr) {
-	const deltaMins = (Date.now() - +new Date(isoDateStr)) / 1000 / 60;
+	const deltaMins = (Date.now() - new Date(isoDateStr).getTime()) / 1000 / 60;
 	/** @type {"year"|"month"|"week"|"day"|"hour"|"minute"} */
 	let unit;
 	let delta;
@@ -66,8 +66,8 @@ function run(argv) {
 	}
 
 	// DOCS https://docs.github.com/en/rest/search/search?apiVersion=2022-11-28#search-repositories
-	const apiURL = `https://api.github.com/search/repositories?q=${encodeURIComponent(query)}`;
-	const response = httpRequest(apiURL);
+	const apiUrl = `https://api.github.com/search/repositories?q=${encodeURIComponent(query)}`;
+	const response = httpRequest(apiUrl);
 	if (!response) {
 		return JSON.stringify({
 			items: [{ title: "No response from GitHub.", subtitle: "Try again later.", valid: false }],

@@ -38,14 +38,18 @@ function shortNumber(starcount) {
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
+	// get GITHUB_TOKEN
+	const tokenShellCmd = $.getenv("github_token_shell_cmd").trim();
+	const tokenFromZshenvCmd = "test -e $HOME/.zshenv && source $HOME/.zshenv ; echo $GITHUB_TOKEN";
+	let githubToken = $.getenv("github_token_from_alfred_prefs").trim();
+	if (!githubToken && tokenShellCmd) githubToken = app.doShellScript(tokenShellCmd).trim();
+	if (!githubToken) app.doShellScript(tokenFromZshenvCmd);
+
 	// CONFIG
 	const username = $.getenv("github_username");
 	const localRepoFolder = $.getenv("local_repo_folder");
 	const cloneDepth = Number.parseInt($.getenv("clone_depth"));
 	const shallowClone = cloneDepth > 0;
-	const tokenShellCmd = "test -e $HOME/.zshenv && source $HOME/.zshenv ; echo $GITHUB_TOKEN";
-	const githubToken =
-		$.getenv("github_token_from_alfred_prefs").trim() || app.doShellScript(tokenShellCmd).trim();
 	const useAlfredFrecency = $.getenv("use_alfred_frecency") === "1";
 
 	// determine local repos
@@ -74,15 +78,15 @@ function run() {
 	// FETCH REMOTE REPOS
 
 	// DOCS https://docs.github.com/en/rest/repos/repos?apiVersion=2022-11-28#list-repositories-for-a-user
-	let apiURL = `https://api.github.com/users/${username}/repos?type=all&per_page=100&sort=updated`;
+	let apiUrl = `https://api.github.com/users/${username}/repos?type=all&per_page=100&sort=updated`;
 	const headers = ["Accept: application/vnd.github.json", "X-GitHub-Api-Version: 2022-11-28"];
 	if (githubToken) {
 		// DOCS https://docs.github.com/en/rest/repos/repos?apiVersion=2022-11-28#list-repositories-for-the-authenticated-user--parameters
-		apiURL = "https://api.github.com/user/repos?per_page=100&sort=updated";
+		apiUrl = "https://api.github.com/user/repos?per_page=100&sort=updated";
 		headers.push(`Authorization: BEARER ${githubToken}`);
 	}
 
-	const response = httpRequestWithHeaders(apiURL, headers);
+	const response = httpRequestWithHeaders(apiUrl, headers);
 	if (!response) {
 		return JSON.stringify({
 			items: [{ title: "No response from GitHub.", subtitle: "Try again later.", valid: false }],
@@ -105,7 +109,6 @@ function run() {
 				return 0; // use sorting from GitHub (updated status)
 			},
 		)
-		// biome-ignore lint/complexity/noExcessiveCognitiveComplexity: fine here
 		.map((/** @type {GithubRepo&{local: {path: string}|undefined}} */ repo) => {
 			let matcher = alfredMatcher(repo.name);
 			let type = "";

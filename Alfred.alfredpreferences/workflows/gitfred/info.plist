@@ -1501,19 +1501,13 @@
   supported.](https://www.alfredforum.com/topic/16748-how-to-do-x-in-firefox-from-alfred/))
 
 ## GitHub Token
+Optional. Only required for showing notifications, private PRs, and private
+repos. The token requires accesses to private repos and to notifications. The
+workflow will check for the token in the following order:
 1. Add the `GITHUB_TOKEN` in the Alfred workflow configuration.
-2. Or: export the token in your `.zshenv`.
-
-```zsh
-# add this to your `$HOME/.zshenv`
-# ($alfred_workflow_name is only populated by shell processes that called by Alfred)
-if [[ "$alfred_workflow_name" == "GitFred" ]] ; then
-	export GITHUB_TOKEN="..."
-	# if using a password manager, you can do something like this 
-	# (`op` being the CLI for 1Password)
-	export GITHUB_TOKEN=$(op plugin run -- gh auth token)
-fi
-```
+2. Or: add a shell command that outputs your `GITHUB_TOKEN`, such as `cat
+   $HOME/my_token.txt`.
+3. Or: export the token in your `.zshenv`.
 
 ---
 
@@ -1900,13 +1894,34 @@ to set a hotkey to clone the repo in the frontmost browser tab</string>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>Optional. Only required for showing notifications, private PRs, and private repos. If empty, will fallback to `$GITHUB_TOKEN` exported in `.zshenv`. The token requires accesses to private repos and to notifications.</string>
+			<string>Enter the token directly. If empty, will fallback to the shell command that outputs the token. The token requires accesses to private repos and to notifications.</string>
 			<key>label</key>
-			<string>GitHub Token</string>
+			<string>GitHub token (optional)</string>
 			<key>type</key>
 			<string>textfield</string>
 			<key>variable</key>
 			<string>github_token_from_alfred_prefs</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string></string>
+				<key>placeholder</key>
+				<string>cat "$HOME/my-token.txt"</string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>Enter a shell command that will output the GitHub token. If empty, will fallback to `$GITHUB_TOKEN` exported in `.zshenv`.</string>
+			<key>label</key>
+			<string></string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>github_token_shell_cmd</string>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -2148,7 +2163,7 @@ to set a hotkey to clone the repo in the frontmost browser tab</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.10.5</string>
+	<string>1.11.0</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>

@@ -21,7 +21,7 @@ function httpRequestWithHeaders(url, header) {
 
 /** @param {string} isoDateStr */
 function humanRelativeDate(isoDateStr) {
-	const deltaMins = (Date.now() - +new Date(isoDateStr)) / 1000 / 60;
+	const deltaMins = (Date.now() - new Date(isoDateStr).getTime()) / 1000 / 60;
 	/** @type {"year"|"month"|"week"|"day"|"hour"|"minute"} */
 	let unit;
 	let delta;
@@ -54,23 +54,19 @@ function humanRelativeDate(isoDateStr) {
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
-	const tokenShellCmd = "test -e $HOME/.zshenv && source $HOME/.zshenv ; echo $GITHUB_TOKEN";
-	const githubToken =
-		$.getenv("github_token_from_alfred_prefs").trim() || app.doShellScript(tokenShellCmd).trim();
+	// get GITHUB_TOKEN
+	const tokenShellCmd = $.getenv("github_token_shell_cmd").trim();
+	const tokenFromZshenvCmd = "test -e $HOME/.zshenv && source $HOME/.zshenv ; echo $GITHUB_TOKEN";
+	let githubToken = $.getenv("github_token_from_alfred_prefs").trim();
+	if (!githubToken && tokenShellCmd) githubToken = app.doShellScript(tokenShellCmd).trim();
+	if (!githubToken) app.doShellScript(tokenFromZshenvCmd);
+
 	const showReadNotifs =
 		$.NSProcessInfo.processInfo.environment.objectForKey("mode").js === "show-read-notifications";
 
 	// GUARD
 	if (!githubToken) {
-		return JSON.stringify({
-			items: [
-				{
-					title: "⚠️ No $GITHUB_TOKEN found.",
-					subtitle: "Neither the Workflow Configuration nor the `.zshenv` have a token.",
-					valid: false,
-				},
-			],
-		});
+		return JSON.stringify({ items: [{ title: "⚠️ No $GITHUB_TOKEN found.", valid: false }] });
 	}
 
 	// CALL GITHUB API
@@ -151,7 +147,7 @@ function run() {
 
 	/** @type AlfredItem[] */
 	const notifications = responseObj.map((/** @type {GithubNotif} */ notif) => {
-		const apiUrl = notif.subject.latest_comment_url || notif.subject.url || "";
+		const notifApiUrl = notif.subject.latest_comment_url || notif.subject.url || "";
 		const typeIcon = typeMaps[notif.subject.type] || notif.subject.type;
 		const reasonIcon = reasonMaps[notif.reason] || notif.reason;
 		const updatedAt = humanRelativeDate(notif.updated_at);
@@ -161,7 +157,7 @@ function run() {
 		const alfredItem = {
 			title: notif.subject.title,
 			subtitle: subtitle,
-			arg: apiUrl,
+			arg: notifApiUrl,
 			variables: { mode: "open" },
 			mods: {
 				cmd: {
@@ -172,8 +168,8 @@ function run() {
 					variables: { mode: "mark-as-read", notificationsLeft: responseObj.length - 1 },
 				},
 				alt: {
-					subtitle: apiUrl ? "⌥: Copy URL" : "(🚫 No URL)",
-					valid: Boolean(apiUrl),
+					subtitle: notifApiUrl ? "⌥: Copy URL" : "(🚫 No URL)",
+					valid: Boolean(notifApiUrl),
 					variables: { mode: "copy" },
 				},
 			},
