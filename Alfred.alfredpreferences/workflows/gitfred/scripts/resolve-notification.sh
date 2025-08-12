@@ -22,8 +22,13 @@ if [[ -z "$api_url" && "$mode" == "open" ]]; then
 	# some notification types like ci-activity do not provide a thread
 	github_url="https://github.com/notifications"
 else
+	# get token
+	token=$github_token_from_alfred_prefs
+	[[ -z "$token" ]] && token=$(zsh -c "$github_token_shell_cmd")
+	[[ -z "$token" ]] && token=$GITHUB_TOKEN
+
 	response=$(curl -sL -H "Accept: application/vnd.github+json" \
-		-H "Authorization: Bearer $GITHUB_TOKEN" \
+		-H "Authorization: Bearer $token" \
 		-H "X-GitHub-Api-Version: 2022-11-28" \
 		"$api_url")
 	# using `grep` here avoids `jq` dependency
