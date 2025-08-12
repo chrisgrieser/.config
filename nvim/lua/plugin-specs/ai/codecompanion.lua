@@ -82,10 +82,15 @@ return {
 	keys = {
 		{ "<leader>ac", "<cmd>CodeCompanionChat toggle<CR>", desc = " CodeCompanion chat" },
 		{ "<leader>aa", ":CodeCompanion<CR>", mode = "x", desc = " 󰘎 Prompt" },
-		-- stylua: ignore
+		{ "<leader>aA", "<cmd>CodeCompanionChat Add<CR>", mode = "x", desc = " 󰘎 Add selection to chat" },
+		-- stylua: ignore start
+		-- builtin-prompts https://github.com/olimorris/codecompanion.nvim/blob/main/lua/codecompanion/config.lua
+		{ "<leader>ag", function() require("codecompanion").prompt("commit") end, desc = " Write git commit msg" },
 		{ "<leader>ae", function() require("codecompanion").prompt("explain") end, mode = "x", desc = " Explain" },
-		-- stylua: ignore
+		{ "<leader>af", function() require("codecompanion").prompt("fix") end, mode = "x", desc = " Fix" },
+		-- my own prompts
 		{ "<leader>as", function() require("codecompanion").prompt("simplify") end, mode = "x", desc = " Simplify" },
+		-- stylua: ignore end
 	},
 	opts = {
 		display = {
@@ -95,7 +100,7 @@ return {
 			-- https://codecompanion.olimorris.dev/configuration/chat-buffer.html
 			chat = {
 				auto_scroll = false,
-				intro_message = "",
+				-- intro_message = "",
 				window = {
 					opts = { statuscolumn = " " }, -- padding
 				},
