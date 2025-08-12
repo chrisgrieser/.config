@@ -1,0 +1,196 @@
+{
+  "bundleID" : "io.github.mshibanami.RedirectWebForSafari",
+  "formatVersion" : "2",
+  "kind" : "RedirectList",
+  "redirects" : [
+    {
+      "captureGroupProcesses" : [
+        {
+          "groupIndex" : 1,
+          "process" : {
+            "id" : "replaceOccurrences",
+            "matchingPattern" : {
+              "type" : "regularExpression",
+              "value" : "^ai\\+"
+            },
+            "replacement" : ""
+          }
+        }
+      ],
+      "comments" : "This rule works when Google is your default search engine. If you start an search-bar search with “gpt ”, Redirect Web skips Google and takes you straight to ChatGPT with whatever follows “gpt ”. To use a different trigger word, just replace “gpt ” in the rule with your own.\n\nYou can add these options:\n\n- `q={your text}`: your ChatGPT prompt\n- `hints=search`: turns on ChatGPT's search mode\n- `temporary-chat=true`: opens a one-time chat\n- `model={model name}`: picks which model to use (e.g. \"gpt-4o\", \"o3\")",
+      "destinationURLPattern" : "https:\/\/chatgpt.com\/?q=$1&hints=search&temporary-chat=true",
+      "exampleURLs" : [
+        "https:\/\/www.google.com\/search?client=safari&rls=en&q=hello+world&ie=UTF-8&oe=UTF-8",
+        "https:\/\/www.google.com\/search?q=gpt+What+kind+of+bear+is+best?",
+        "https:\/\/www.google.com\/search?client=safari&rls=en&q=gpt+hello+world&ie=UTF-8&oe=UTF-8"
+      ],
+      "excludeURLPatterns" : [
+
+      ],
+      "isEnabled" : true,
+      "kind" : "Redirect",
+      "sourceURLPattern" : {
+        "type" : "regularExpression",
+        "value" : "https?:\/\/(?:www\\.)?google\\.(?:com|com\\.[a-z]{2}|co\\.[a-z]{2}|[a-z]{2})\/search\\?(?:.*&)?q=(ai\\+[^&]*).*"
+      },
+      "title" : "Google Search “Ai ” Prefix → ChatGPT",
+      "type" : "originalRedirect"
+    },
+    {
+      "captureGroupProcesses" : [
+
+      ],
+      "comments" : "https:\/\/github.com\/SUWULLC\/Octal\/issues\/210#issuecomment-954694526",
+      "destinationURLPattern" : "octal:\/\/$1",
+      "exampleURLs" : [
+        "https:\/\/news.ycombinator.com\/item?id=44865560"
+      ],
+      "excludeURLPatterns" : [
+
+      ],
+      "isEnabled" : true,
+      "kind" : "Redirect",
+      "sourceURLPattern" : {
+        "type" : "regularExpression",
+        "value" : "https:\\\/\\\/news.ycombinator.com\\\/(item\\?id=.*)"
+      },
+      "title" : "Open Hacker News links in Octal",
+      "type" : "originalRedirect"
+    },
+    {
+      "captureGroupProcesses" : [
+
+      ],
+      "comments" : "This rule strips unnecessary parameters from Amazon product links, including affiliate and tracking codes.\n\nIt adds a `th=1` parameter to prevent an infinite loop caused by Amazon automatically appending it.",
+      "destinationURLPattern" : "$1$5?th=1$6",
+      "exampleURLs" : [
+        "https:\/\/www.amazon.co.jp\/dp\/B0B13WY4DL?th=1&linkCode=sl1&tag=redirectwebtest-22&linkId=0123456789abcdefghijklmnopqrstuvw&ref_=as_li_ss_tl",
+        "https:\/\/www.amazon.com.au\/Imabari-Factory-Certified-Approx-inches\/dp\/B09RWHGLVM\/ref=sr_1_3?hello=world",
+        "https:\/\/www.amazon.co.jp\/dp\/B0B13WY4DL?",
+        "https:\/\/www.amazon.it\/dp\/B09PG7M43W?tag=redirectwebtest-22",
+        "https:\/\/www.amazon.com.au\/dp\/B00YMSLT88",
+        "https:\/\/www.amazon.com.be\/dp\/1974752542?tag=redirectwebtest-22#immersive-view_1739779534435",
+        "https:\/\/www.amazon.com.be\/dp\/1974752542#immersive-view_1739779534435"
+      ],
+      "excludeURLPatterns" : [
+
+      ],
+      "isEnabled" : true,
+      "kind" : "Redirect",
+      "sourceURLPattern" : {
+        "type" : "regularExpression",
+        "value" : "(https:\/\/(www\\.)?amazon\\.(com\\.au|com\\.be|com\\.br|ca|cn|eg|fr|de|in|it|co\\.jp|com\\.mx|nl|pl|sa|sg|es|se|com\\.tr|ae|co\\.uk|com|co|com\\.cn|com\\.sg)\/)(.+\/)?(dp\/[^\/?#]+)[^#]*(#.*)?"
+      },
+      "title" : "Amazon: Strip Affiliate and Tracking Parameters",
+      "type" : "originalRedirect"
+    },
+    {
+      "captureGroupProcesses" : [
+
+      ],
+      "comments" : "This allows you to redirect from X (Twitter) to xcancel.com, which is powered by Nitter.\n\nNitter is a free and open-source alternative Twitter front-end focused on privacy and performance.\n\nxcancel.com is one of the most popular Nitter instances, but it's just one of many instances. You can find others here:\nhttps:\/\/status.d420.de\n",
+      "destinationURLPattern" : "https:\/\/xcancel.com\/$1",
+      "exampleURLs" : [
+        "https:\/\/x.com\/UN\/status\/1841123718212284495",
+        "https:\/\/twitter.com\/search?f=tweets&q=world"
+      ],
+      "excludeURLPatterns" : [
+
+      ],
+      "isEnabled" : true,
+      "kind" : "Redirect",
+      "sourceURLPattern" : {
+        "type" : "regularExpression",
+        "value" : "https:\/\/(?:x|twitter).com\/(.*)"
+      },
+      "title" : "X (Twitter) → Nitter (xcancel.com)",
+      "type" : "originalRedirect"
+    },
+    {
+      "captureGroupProcesses" : [
+        {
+          "groupIndex" : 1,
+          "process" : {
+            "id" : "replaceOccurrences",
+            "matchingPattern" : {
+              "type" : "regularExpression",
+              "value" : "(&source=[^&]*|\\?source=[^&]*&)"
+            },
+            "replacement" : ""
+          }
+        },
+        {
+          "groupIndex" : 1,
+          "process" : {
+            "id" : "replaceOccurrences",
+            "matchingPattern" : {
+              "type" : "regularExpression",
+              "value" : "ll=([^&]+)"
+            },
+            "replacement" : "near=$1"
+          }
+        }
+      ],
+      "comments" : "This redirects from Google Maps links that start with \/maps? to Apple Maps.",
+      "destinationURLPattern" : "https:\/\/maps.apple.com\/?$1",
+      "exampleURLs" : [
+        "https:\/\/www.google.com\/maps?hl=en&t=k&ll=41.04522730,-72.32289310&q=United+States",
+        "https:\/\/www.google.com\/maps?client=safari&sca_esv=01e0ca91490887a5&sca_upv=1&rls=en&output=search&q=Randwick,+Sydney&source=lnms&entry=mc&ved=1t:200715&ictx=111"
+      ],
+      "excludeURLPatterns" : [
+
+      ],
+      "isEnabled" : true,
+      "kind" : "Redirect",
+      "sourceURLPattern" : {
+        "type" : "regularExpression",
+        "value" : "https?:\/\/(?:www\\.)?google\\.(?:com|com\\.[a-z]{2}|co\\.[a-z]{2}|[a-z]{2})\/maps\\?(.*)"
+      },
+      "title" : "(1\/3) Open Google Maps Links in Apple Maps",
+      "type" : "originalRedirect"
+    },
+    {
+      "captureGroupProcesses" : [
+
+      ],
+      "comments" : "This redirects from Google Maps links that start with \/maps\/place\/ or \/maps\/search\/ to Apple Maps.",
+      "destinationURLPattern" : "https:\/\/maps.apple.com\/?q=$1&near=$2&z=$3",
+      "exampleURLs" : [
+        "https:\/\/www.google.com\/maps\/place\/Austin+Gilchrist+Park\/@-28.0008805,153.4239061,20.84z\/data=!4m6!3m5!1s0x6b9105125a600bc9:0x1260b5faa506feda!8m2!3d-28.00088!4d153.42402!16s%2Fg%2F11j1f8tt3n?authuser=1&entry=ttu",
+        "https:\/\/www.google.com\/maps\/search\/Cavill\/@-28.0018349,153.4258324,17z\/data=!3m1!4b1?authuser=1&entry=ttu"
+      ],
+      "excludeURLPatterns" : [
+
+      ],
+      "isEnabled" : true,
+      "kind" : "Redirect",
+      "sourceURLPattern" : {
+        "type" : "regularExpression",
+        "value" : "https?:\/\/(?:www\\.)?google\\.(?:com|com\\.[a-z]{2}|co\\.[a-z]{2}|[a-z]{2})\/maps\/(?:place|search)\/([^\/]*)\/@([-0-9.]*,[-0-9.]+)(?:,([-0-9.]+)z)?[\/?].*"
+      },
+      "title" : "(2\/3) Open Google Maps Links in Apple Maps",
+      "type" : "originalRedirect"
+    },
+    {
+      "captureGroupProcesses" : [
+
+      ],
+      "comments" : "This redirects from Google Maps links that start with \/maps\/@ to Apple Maps.",
+      "destinationURLPattern" : "https:\/\/maps.apple.com\/?ll=$1&z=$2",
+      "exampleURLs" : [
+        "https:\/\/www.google.com\/maps\/@35.4220246,136.1436907,17.24z?authuser=1&entry=ttu"
+      ],
+      "excludeURLPatterns" : [
+
+      ],
+      "isEnabled" : true,
+      "kind" : "Redirect",
+      "sourceURLPattern" : {
+        "type" : "regularExpression",
+        "value" : "https?:\/\/(?:www\\.)?google\\.(?:com|com\\.[a-z]{2}|co\\.[a-z]{2}|[a-z]{2})\/maps\/@([-0-9.]*,[-0-9.]+)(?:,([-0-9.]+)z)?[\/?].*"
+      },
+      "title" : "(3\/3) Open Google Maps Links in Apple Maps",
+      "type" : "originalRedirect"
+    }
+  ]
+}
