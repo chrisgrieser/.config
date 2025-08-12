@@ -386,14 +386,13 @@ rules:
                   click radio button 1 of radio group 1 of group 1 of toolbar 1 of window 1
                 end tell'
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [com.apple.iCal] }]
-      # Reminders & Maps
+      # Maps
       - type: basic
         from: { key_code: "1", modifiers: { mandatory: [command] } }
         to:
           - { key_code: s, modifiers: [command, option] }
         conditions:
-          - type: frontmost_application_if
-            bundle_identifiers: [com.apple.reminders, com.apple.Maps]
+          - { type: frontmost_application_if, bundle_identifiers: [com.apple.Maps] }
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) Mimestream"
     manipulators:
