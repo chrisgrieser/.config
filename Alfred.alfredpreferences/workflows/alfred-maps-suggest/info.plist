@@ -304,7 +304,7 @@
 	</array>
 	<key>readme</key>
 	<string>## Usage
-Show locations with the `map` keyword.
+Search for locations with the keyword `map`.
 - &lt;kbd&gt;⏎&lt;/kbd&gt; open the location at the primary map provider.
 - &lt;kbd&gt;⌘⏎&lt;/kbd&gt; open the location at the secondary map provider.
 - &lt;kbd&gt;⌥⏎&lt;/kbd&gt; copy the URL of the primary map provider.
@@ -313,9 +313,11 @@ Show locations with the `map` keyword.
 
 ---
 
-#### Data by [OpenStreetMap](https://www.openstreetmap.org/) via [photon API](https://photon.komoot.io/)
+## Credits
+Data by [OpenStreetMap](https://www.openstreetmap.org/) via 
+[photon API](https://photon.komoot.io/).
 
-#### Created by [Chris Grieser](https://chris-grieser.de/)</string>
+Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
 		<key>246AE6D9-BC40-4334-925D-91CDEB7F3B65</key>
@@ -468,7 +470,7 @@ Show locations with the `map` keyword.
 		</dict>
 	</array>
 	<key>version</key>
-	<string>0.9</string>
+	<string>1.0</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
