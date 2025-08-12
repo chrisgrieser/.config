@@ -143,7 +143,7 @@
 	<key>createdby</key>
 	<string>Chris Grieser</string>
 	<key>description</key>
-	<string>Suggest locations to open at Google Maps or Apple Maps</string>
+	<string>Suggest locations to open in Apple Maps or Google Maps.</string>
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
