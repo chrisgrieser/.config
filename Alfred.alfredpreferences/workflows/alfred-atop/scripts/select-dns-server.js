@@ -33,7 +33,7 @@ function run() {
 
 	//───────────────────────────────────────────────────────────────────────────
 
-	// indicate which DNS is currently used
+	// find first enabled service
 	const serviceName = app
 		.doShellScript("networksetup -listallnetworkservices")
 		.split("\r")
