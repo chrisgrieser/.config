@@ -90,6 +90,7 @@ end
 -- 1. on systemstart
 if u.isSystemStart() then syncAllGitRepos(true) end
 
+
 -- 2. every x minutes
 M.timer_repoSync = hs.timer
 	.doEvery(config.syncIntervalMins * 60, function()
