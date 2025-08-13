@@ -25,7 +25,6 @@ return {
 
 	opts = {
 		sources = {
-			default = { "lsp", "path", "snippets", "buffer", "git" }, -- add `git` to the list
 			per_filetype = {
 				gitcommit = { "git" },
 			},

@@ -86,6 +86,20 @@ require("lazy").setup {
 				end,
 				desc = " Open issue/commit",
 			},
+			["!"] = {
+				function(plugin)
+					vim.notify(vim.inspect(plugin), nil, {
+						title = "Inspect " .. plugin.name,
+						ft = "lua",
+						icon = "󱈄",
+					})
+				end,
+				desc = "󱈄 Inspect Plugin",
+			},
+			-- remove these from the keymap hints shown with `?`
+			["<localleader>i"] = false,
+			["<localleader>t"] = false,
+			["<localleader>l"] = false,
 		},
 	},
 	checker = {
