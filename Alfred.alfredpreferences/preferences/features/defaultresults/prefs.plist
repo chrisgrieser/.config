@@ -6,7 +6,7 @@
 	<array>
 		<string>features.websearch.duckduckgo.fallback</string>
 		<string>features.websearch.lucky.fallback</string>
-		<string>features.websearch.custom.D7CDCB7A-4555-4539-AA20-55DD73693D69.fallback</string>
+		<string>openai-utils.F4B26A4D-3A42-4628-8CF3-196137DA3932</string>
 	</array>
 	<key>showContacts</key>
 	<false/>
