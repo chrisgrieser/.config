@@ -2,7 +2,7 @@
 [[ -z "$sketchybar_trigger_name" ]] && return 0
 
 # wait for sync
-sleep 2
+sleep 10
 
 if [[ ! -x "$(command -v sketchybar)" ]]; then
 	echo "Could not update sketchybar, sketchybar not installed." >&2
