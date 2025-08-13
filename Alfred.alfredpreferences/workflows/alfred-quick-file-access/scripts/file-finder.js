@@ -93,7 +93,7 @@ const searchConfig = {
 		maxFiles: Math.min(Number.parseInt($.getenv("max_recent_files")), 10),
 	},
 	[$.getenv("custom_folder_keyword")]: {
-		shellCmd: `ls -t "%s"`,
+		shellCmd: `ls -t "%s"`, // `-t` to sort by modification date
 		directory: $.getenv("custom_folder"),
 		shallowOutput: true,
 	},
@@ -105,12 +105,15 @@ const searchConfig = {
 		shallowOutput: true,
 	},
 	[$.getenv("tag_keyword")]: {
-		shellCmd: `mdfind "kMDItemUserTags == ${$.getenv("tag_to_search")}"`,
+		// `stat`/`sort` to sort by modification date
+		shellCmd:
+			`mdfind "kMDItemUserTags == ${$.getenv("tag_to_search")}"` +
+			'| xargs -I {} stat -f "%m %N" "{}" | sort -nr | cut -d" " -f2-',
 		absPathOutput: true,
 		prefix: $.getenv("tag_prefix"),
 	},
 	[$.getenv("frontwin_keyword")]: {
-		shellCmd: `ls -t "%s"`,
+		shellCmd: `ls -t "%s"`, // `-t` to sort by modification date
 		directory: "%s", // inserted on runtime
 		shallowOutput: true,
 	},
@@ -179,11 +182,11 @@ function run() {
 			};
 			if (keyword === $.getenv("frontwin_keyword")) {
 				item.mods = {
-					cmd: { subtitle: "⛔ Already front window", valid: false }
-				}
+					cmd: { subtitle: "⛔ Already front window", valid: false },
+				};
 			}
 			return item;
-		})
+		});
 
 	// INFO do not use Alfred's caching mechanism, since it does not work with
 	// the `alfred_workflow_keyword` environment variable https://www.alfredforum.com/topic/21754-wrong-alfred-55-cache-used-when-using-alternate-keywords-like-foobar/#comment-113358
