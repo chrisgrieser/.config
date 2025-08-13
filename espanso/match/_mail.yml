@@ -9,7 +9,7 @@ matches:
       Chris
   - triggers: ["!sm", "!mail"]
     replace: |
-      Dear sir or madam,
+      Dear Sir or Madam,
 
       $|$
 
