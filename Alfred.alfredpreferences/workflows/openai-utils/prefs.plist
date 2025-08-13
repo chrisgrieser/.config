@@ -4,6 +4,8 @@
 <dict>
 	<key>chatgpt_conv_json</key>
 	<string>~/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/llm-conversations/chatgpt.json</string>
+	<key>keyword_usage_costs</key>
+	<string>costs||usage</string>
 	<key>openai_admin_key_cmd</key>
 	<string>cat "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/private dotfiles/openai-admin-key.txt"</string>
 </dict>

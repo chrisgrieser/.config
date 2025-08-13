@@ -3,13 +3,82 @@
 <plist version="1.0">
 <dict>
 	<key>bundleid</key>
-	<string>de.chris-grieser.PLACEHOLDER</string>
+	<string>de.chris-grieser.chatgpt</string>
 	<key>category</key>
-	<string>❇️</string>
+	<string>⭐️</string>
 	<key>connections</key>
 	<dict>
+		<key>25C1C508-6AFF-4506-8007-F15EB4686CD8</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>46C90569-FC18-4FB6-BEF7-CF13AD8B8C58</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>2BE9E16C-CD19-489B-97FC-4FB2B71A237E</key>
 		<array/>
+		<key>4109C114-1983-4BE0-BDD0-825D706B8021</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>46C90569-FC18-4FB6-BEF7-CF13AD8B8C58</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>51BDB3C2-A1DD-4E15-9294-95B0729A8B08</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>25C1C508-6AFF-4506-8007-F15EB4686CD8</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>4109C114-1983-4BE0-BDD0-825D706B8021</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>⌘: + search tool</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>BEBCE35B-07FA-4179-B3AC-EF372ED6DDAC</string>
+				<key>modifiers</key>
+				<integer>131072</integer>
+				<key>modifiersubtext</key>
+				<string>⇧: + image tool</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>F160631A-2850-4CCB-BB11-88AB501E7648</string>
+				<key>modifiers</key>
+				<integer>262144</integer>
+				<key>modifiersubtext</key>
+				<string>⌃: + canvas tool</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>6ED60925-2459-424C-A17D-24F317903D98</key>
 		<array/>
 		<key>B542153D-57DD-436E-AFB9-C0B4537C3EE2</key>
@@ -17,6 +86,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>F28BB9DD-676B-4740-8C3B-BBC15BABB8EB</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>BEBCE35B-07FA-4179-B3AC-EF372ED6DDAC</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>46C90569-FC18-4FB6-BEF7-CF13AD8B8C58</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -71,6 +153,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>F160631A-2850-4CCB-BB11-88AB501E7648</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>46C90569-FC18-4FB6-BEF7-CF13AD8B8C58</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>F28BB9DD-676B-4740-8C3B-BBC15BABB8EB</key>
 		<array>
 			<dict>
@@ -104,122 +199,88 @@
 				<false/>
 			</dict>
 		</array>
+		<key>F4B26A4D-3A42-4628-8CF3-196137DA3932</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>25C1C508-6AFF-4506-8007-F15EB4686CD8</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>4109C114-1983-4BE0-BDD0-825D706B8021</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>⌘: + search tool</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>BEBCE35B-07FA-4179-B3AC-EF372ED6DDAC</string>
+				<key>modifiers</key>
+				<integer>131072</integer>
+				<key>modifiersubtext</key>
+				<string>⇧: + image tool</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>F160631A-2850-4CCB-BB11-88AB501E7648</string>
+				<key>modifiers</key>
+				<integer>262144</integer>
+				<key>modifiersubtext</key>
+				<string>⌃: + canvas tool</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 	</dict>
 	<key>createdby</key>
 	<string>Chris Grieser</string>
 	<key>description</key>
-	<string></string>
+	<string>Various helpers for accessing ChatGPT</string>
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
-	<string>OpenAI Utils</string>
+	<string>ChatGPT Companion</string>
 	<key>objects</key>
 	<array>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/openai-costs.js</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>F28BB9DD-676B-4740-8C3B-BBC15BABB8EB</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>🤖 OpenAI Usage</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>2BE9E16C-CD19-489B-97FC-4FB2B71A237E</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string></string>
-				<key>title</key>
-				<string>⏳ Requesting OpenAI Usage</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>B542153D-57DD-436E-AFB9-C0B4537C3EE2</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>argumenttype</key>
-				<integer>1</integer>
+				<integer>0</integer>
 				<key>keyword</key>
-				<string>usage||openai||costs</string>
+				<string>{var:keyword_chatgpt_query}</string>
 				<key>subtext</key>
 				<string></string>
 				<key>text</key>
-				<string>OpenAI Usage Costs</string>
+				<string>ChatGPT: "{query}"</string>
 				<key>withspace</key>
 				<true/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
-			<string>DCED6A03-CE9B-4D1D-8BC2-9A148FDA06EF</string>
+			<string>51BDB3C2-A1DD-4E15-9294-95B0729A8B08</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
 		<dict>
-			<key>config</key>
-			<dict>
-				<key>autopaste</key>
-				<false/>
-				<key>clipboardtext</key>
-				<string>OpenAI Usage
-{query}</string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>transient</key>
-				<false/>
-			</dict>
 			<key>type</key>
-			<string>alfred.workflow.output.clipboard</string>
+			<string>alfred.workflow.utility.junction</string>
 			<key>uid</key>
-			<string>6ED60925-2459-424C-A17D-24F317903D98</string>
+			<string>25C1C508-6AFF-4506-8007-F15EB4686CD8</string>
 			<key>version</key>
-			<integer>3</integer>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -229,31 +290,89 @@
 				<key>skipqueryencode</key>
 				<false/>
 				<key>skipvarencode</key>
-				<false/>
+				<true/>
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
-				<string>https://platform.openai.com/usage</string>
+				<string>https://chatgpt.com?q={query}{var:param}</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
-			<string>4CB433C8-9E5A-4126-B947-BDE864B99AC2</string>
+			<string>46C90569-FC18-4FB6-BEF7-CF13AD8B8C58</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>soundname</key>
-				<string>Bottle</string>
-				<key>systemsound</key>
+				<key>argument</key>
+				<string></string>
+				<key>passthroughargument</key>
 				<true/>
+				<key>variables</key>
+				<dict>
+					<key>param</key>
+					<string>&amp;hints=search</string>
+				</dict>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.output.playsound</string>
+			<string>alfred.workflow.utility.argument</string>
 			<key>uid</key>
-			<string>5FB5EEDF-FF6D-41A7-9C56-4864E641E9D2</string>
+			<string>4109C114-1983-4BE0-BDD0-825D706B8021</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>text</key>
+				<string>ChatGPT: '{query}'</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.fallback</string>
+			<key>uid</key>
+			<string>F4B26A4D-3A42-4628-8CF3-196137DA3932</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string></string>
+				<key>passthroughargument</key>
+				<true/>
+				<key>variables</key>
+				<dict>
+					<key>param</key>
+					<string>&amp;hints=image</string>
+				</dict>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>BEBCE35B-07FA-4179-B3AC-EF372ED6DDAC</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string></string>
+				<key>passthroughargument</key>
+				<true/>
+				<key>variables</key>
+				<dict>
+					<key>param</key>
+					<string>&amp;hints=canvas</string>
+				</dict>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>F160631A-2850-4CCB-BB11-88AB501E7648</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -273,7 +392,7 @@
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>keyword</key>
-				<string>aih</string>
+				<string>{var:keyword_conversation_history}</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -360,6 +479,148 @@
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>⏳ Requesting OpenAI Usage</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>B542153D-57DD-436E-AFB9-C0B4537C3EE2</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/openai-costs.js</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>F28BB9DD-676B-4740-8C3B-BBC15BABB8EB</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>🤖 OpenAI Usage</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>2BE9E16C-CD19-489B-97FC-4FB2B71A237E</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>keyword</key>
+				<string>{var:keyword_usage_costs}</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>OpenAI API Usage Costs</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>DCED6A03-CE9B-4D1D-8BC2-9A148FDA06EF</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string>OpenAI Usage
+{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>6ED60925-2459-424C-A17D-24F317903D98</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>https://platform.openai.com/usage</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>4CB433C8-9E5A-4126-B947-BDE864B99AC2</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>soundname</key>
+				<string>Bottle</string>
+				<key>systemsound</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.playsound</string>
+			<key>uid</key>
+			<string>5FB5EEDF-FF6D-41A7-9C56-4864E641E9D2</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>## Requirements
@@ -371,91 +632,248 @@
 #### Workflow created by [Chris Grieser](https://chris-grieser.de/)</string>
 	<key>uidata</key>
 	<dict>
+		<key>25C1C508-6AFF-4506-8007-F15EB4686CD8</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>note</key>
+			<string>regular</string>
+			<key>xpos</key>
+			<real>270</real>
+			<key>ypos</key>
+			<real>45</real>
+		</dict>
 		<key>2BE9E16C-CD19-489B-97FC-4FB2B71A237E</key>
 		<dict>
 			<key>xpos</key>
-			<real>530</real>
+			<real>555</real>
 			<key>ypos</key>
-			<real>20</real>
+			<real>640</real>
+		</dict>
+		<key>4109C114-1983-4BE0-BDD0-825D706B8021</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>note</key>
+			<string>+ search</string>
+			<key>xpos</key>
+			<real>270</real>
+			<key>ypos</key>
+			<real>115</real>
+		</dict>
+		<key>46C90569-FC18-4FB6-BEF7-CF13AD8B8C58</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>xpos</key>
+			<real>460</real>
+			<key>ypos</key>
+			<real>95</real>
 		</dict>
 		<key>4CB433C8-9E5A-4126-B947-BDE864B99AC2</key>
 		<dict>
 			<key>note</key>
 			<string>open usage cost website</string>
 			<key>xpos</key>
-			<real>205</real>
+			<real>225</real>
 			<key>ypos</key>
-			<real>145</real>
+			<real>765</real>
+		</dict>
+		<key>51BDB3C2-A1DD-4E15-9294-95B0729A8B08</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>15</real>
 		</dict>
 		<key>5FB5EEDF-FF6D-41A7-9C56-4864E641E9D2</key>
 		<dict>
 			<key>xpos</key>
-			<real>530</real>
+			<real>555</real>
 			<key>ypos</key>
-			<real>245</real>
+			<real>865</real>
 		</dict>
 		<key>6261E02D-805C-4920-BEA0-D4F39B6A8873</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>8</integer>
+			<integer>2</integer>
+			<key>note</key>
+			<string>view covnersation</string>
 			<key>xpos</key>
-			<real>260</real>
+			<real>225</real>
 			<key>ypos</key>
-			<real>575</real>
+			<real>510</real>
 		</dict>
 		<key>6ED60925-2459-424C-A17D-24F317903D98</key>
 		<dict>
 			<key>xpos</key>
-			<real>530</real>
+			<real>555</real>
 			<key>ypos</key>
-			<real>130</real>
+			<real>750</real>
 		</dict>
 		<key>B542153D-57DD-436E-AFB9-C0B4537C3EE2</key>
 		<dict>
 			<key>xpos</key>
-			<real>205</real>
+			<real>225</real>
 			<key>ypos</key>
-			<real>20</real>
+			<real>640</real>
+		</dict>
+		<key>BEBCE35B-07FA-4179-B3AC-EF372ED6DDAC</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>note</key>
+			<string>+ image</string>
+			<key>xpos</key>
+			<real>270</real>
+			<key>ypos</key>
+			<real>190</real>
 		</dict>
 		<key>C79D13CD-AAE6-49E7-9BD5-8C33E2422C5F</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>8</integer>
+			<integer>2</integer>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>435</real>
+			<real>375</real>
 		</dict>
 		<key>DCED6A03-CE9B-4D1D-8BC2-9A148FDA06EF</key>
 		<dict>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>20</real>
+			<real>640</real>
 		</dict>
 		<key>E10230C4-C675-47BC-94C3-F2708E565938</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>8</integer>
+			<integer>2</integer>
 			<key>note</key>
 			<string>open conversation</string>
 			<key>xpos</key>
-			<real>265</real>
+			<real>225</real>
 			<key>ypos</key>
-			<real>435</real>
+			<real>375</real>
+		</dict>
+		<key>F160631A-2850-4CCB-BB11-88AB501E7648</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>note</key>
+			<string>+ canvas</string>
+			<key>xpos</key>
+			<real>270</real>
+			<key>ypos</key>
+			<real>260</real>
 		</dict>
 		<key>F28BB9DD-676B-4740-8C3B-BBC15BABB8EB</key>
 		<dict>
 			<key>note</key>
 			<string>get costs via API</string>
 			<key>xpos</key>
-			<real>340</real>
+			<real>365</real>
 			<key>ypos</key>
-			<real>20</real>
+			<real>640</real>
+		</dict>
+		<key>F4B26A4D-3A42-4628-8CF3-196137DA3932</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>xpos</key>
+			<real>35</real>
+			<key>ypos</key>
+			<real>165</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
 	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>ai</string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>ChatGPT query</string>
+			<key>label</key>
+			<string>Keywords</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>keyword_chatgpt_query</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>ch</string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>conversation history</string>
+			<key>label</key>
+			<string></string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>keyword_conversation_history</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>:openai_costs</string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>API Usage Costs</string>
+			<key>label</key>
+			<string></string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>keyword_usage_costs</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string></string>
+				<key>filtermode</key>
+				<integer>2</integer>
+				<key>placeholder</key>
+				<string>~/Desktop/conversation.json</string>
+				<key>required</key>
+				<false/>
+			</dict>
+			<key>description</key>
+			<string>Path to the `conversation.json` file that you get from ChatGPTs data export.</string>
+			<key>label</key>
+			<string>Conversation history</string>
+			<key>type</key>
+			<string>filepicker</string>
+			<key>variable</key>
+			<string>chatgpt_conv_json</string>
+		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
@@ -471,7 +889,7 @@
 			<key>description</key>
 			<string>Shell command to get OpenAI Admin Key</string>
 			<key>label</key>
-			<string>Admin Key command</string>
+			<string>API Usage costs</string>
 			<key>type</key>
 			<string>textfield</string>
 			<key>variable</key>
@@ -494,34 +912,13 @@
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>in $</string>
+			<string>Monthly budget for the API in $</string>
 			<key>label</key>
-			<string>Monthly budget</string>
+			<string></string>
 			<key>type</key>
 			<string>slider</string>
 			<key>variable</key>
 			<string>openai_monthly_budget</string>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>default</key>
-				<string></string>
-				<key>filtermode</key>
-				<integer>2</integer>
-				<key>placeholder</key>
-				<string>~/Desktop/conversation.json</string>
-				<key>required</key>
-				<false/>
-			</dict>
-			<key>description</key>
-			<string>Path to the `conversation.json` file that you get from ChatGPTs data export.</string>
-			<key>label</key>
-			<string>conversation.json path</string>
-			<key>type</key>
-			<string>filepicker</string>
-			<key>variable</key>
-			<string>chatgpt_conv_json</string>
 		</dict>
 	</array>
 	<key>version</key>
