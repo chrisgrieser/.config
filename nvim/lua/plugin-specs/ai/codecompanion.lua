@@ -1,3 +1,4 @@
+-- vim: foldlevel=2
 -- DOCS https://codecompanion.olimorris.dev/
 --------------------------------------------------------------------------------
 
@@ -79,15 +80,15 @@ local ccSpec = {
 	end,
 	keys = {
 		-- stylua: ignore start
-		{ "<leader>ac", "<cmd>CodeCompanionChat toggle<CR>", desc = " CodeCompanion chat (toggle)" },
-		{ "<leader>an", "<cmd>CodeCompanionChat<CR>", desc = " CodeCompanion chat (new)" },
+		{ "<leader>ac", "<cmd>CodeCompanionChat toggle<CR>", desc = " Chat (toggle)" },
+		{ "<leader>an", "<cmd>CodeCompanionChat<CR>", desc = " Chat (new)" },
 		{ "<leader>aa", ":CodeCompanion<CR>", mode = "x", desc = " 󰘎 Prompt" },
 		-- builtin-prompts https://github.com/olimorris/codecompanion.nvim/blob/main/lua/codecompanion/config.lua
-		{ "<leader>ag", function() require("codecompanion").prompt("commit") end, desc = " Write git commit msg" },
+		{ "<leader>ar", function() require("codecompanion").prompt("review_unstaged") end, desc = " Review unstaged changes" },
 		{ "<leader>ae", function() require("codecompanion").prompt("explain") end, mode = "x", desc = " Explain" },
 		{ "<leader>af", function() require("codecompanion").prompt("fix") end, mode = "x", desc = " Fix" },
 		-- my own prompts
-		{ "<leader>as", function() require("codecompanion").prompt("simplify") end, mode = "x", desc = " Simplify" },
+		{ "<leader>ai", function() require("codecompanion").prompt("improve") end, mode = "x", desc = " Improve" },
 		-- stylua: ignore end
 	},
 	opts = {
@@ -99,8 +100,15 @@ local ccSpec = {
 			chat = {
 				auto_scroll = false,
 				intro_message = "",
+				fold_context = true, -- BUG not working
+				icons = { chat_context = "󰔌" }, -- icon for the fold context
 				window = {
-					opts = { statuscolumn = " " }, -- padding
+					opts = {
+						foldlevel = 1,
+						foldmethod = "expr",
+						foldexpr = "v:lua.vim.treesitter.foldexpr()", -- allow folding codeblocks
+						statuscolumn = " ", -- padding
+					},
 				},
 			},
 		},
@@ -136,12 +144,12 @@ local ccSpec = {
 		},
 		prompt_library = {
 			-- https://codecompanion.olimorris.dev/extending/prompts.html
-			["Simplify"] = {
+			["Improve"] = {
 				strategy = "inline",
-				description = "Simplify the selected code.",
+				description = "Improve the selected code.",
 				opts = {
 					modes = { "v" },
-					short_name = "simplify",
+					short_name = "Improve",
 					auto_submit = true,
 					stop_context_insertion = true,
 					user_prompt = false,
@@ -151,8 +159,8 @@ local ccSpec = {
 						role = "system",
 						content = function(ctx)
 							return ([[
-								I want you to act as a senior %s developer. 
-								I will send you some code, and I want you to simplify the code. 
+								I want you to act as a senior %s developer.
+								I will send you some code, and I want you to improve the code.
 								Do not diminish readability of the code while doing so.
 							]]):format(ctx.filetype)
 						end,
@@ -167,9 +175,9 @@ local ccSpec = {
 					},
 				},
 			},
-			["Review changes"] = {
+			["Review unstaged changes"] = {
 				strategy = "chat",
-				description = "Review the currently unstaged changes",
+				description = "Review the currently unstaged changes, and suggest improvements",
 				opts = {
 					short_name = "review_unstaged",
 					auto_submit = true,
@@ -184,8 +192,8 @@ local ccSpec = {
 					{
 						role = "user",
 						content = function(_ctx)
-							local diff = vim.system({ "git", "diff", "--unified= }):wait().stdout
-							return 
+							local diff = vim.system({ "git", "diff" }):wait().stdout
+							return "```diff\n" .. diff .. "\n```"
 						end,
 						opts = { contains_code = true },
 					},
