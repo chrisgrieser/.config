@@ -88,10 +88,7 @@ end
 -- WHEN TO SYNC
 
 -- 1. on systemstart
-if u.isSystemStart() then
-	local delay = env.isAtOffice and 5 or 0 -- spotify internet at the office
-	u.defer(delay, function() syncAllGitRepos(true) end)
-end
+if u.isSystemStart() then syncAllGitRepos(true) end
 
 -- 2. every x minutes
 M.timer_repoSync = hs.timer
@@ -119,9 +116,12 @@ M.caff_SleepWatcherForRepoSync = c.new(function(event)
 		or event == c.screensaverWillStop
 		or event == c.systemDidWake
 	then
-		syncAllGitRepos(true)
-		M.recentlyTriggered = true
-		u.defer(4, function() M.recentlyTriggered = false end)
+		local delay = env.isAtOffice and 5 or 0 -- spotify internet at the office
+		u.defer(delay, function()
+			syncAllGitRepos(true)
+			M.recentlyTriggered = true
+			u.defer(4, function() M.recentlyTriggered = false end)
+		end)
 	end
 end):start()
 
