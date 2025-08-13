@@ -460,8 +460,8 @@ keymap("n", "<leader>rr", vim.lsp.buf.rename, { desc = "󰑕 LSP rename" })
 keymap("n", "<leader>rc", function() require("personal-plugins.misc").camelSnakeLspRename() end, { desc = "󰑕 LSP rename: camel/snake" })
 
 keymap("n", "<leader>rq", function()
-	local line = vim.api.nvim_get_current_line()
-	vim.api.nvim_set_current_line(line:gsub("[\"']", { ['"'] = "'", ["'"] = '"' }))
+	local updatedLine = vim.api.nvim_get_current_line():gsub("[\"']", { ['"'] = "'", ["'"] = '"' })
+	vim.api.nvim_set_current_line(updatedLine)
 end, { desc = " Switch quotes in line" })
 
 do

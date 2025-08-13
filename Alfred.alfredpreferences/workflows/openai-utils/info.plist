@@ -36,6 +36,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>4D7587C7-BB72-4058-9D6F-0035C68ED405</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>46C90569-FC18-4FB6-BEF7-CF13AD8B8C58</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>51BDB3C2-A1DD-4E15-9294-95B0729A8B08</key>
 		<array>
 			<dict>
@@ -75,6 +88,16 @@
 				<integer>262144</integer>
 				<key>modifiersubtext</key>
 				<string>⌃: + canvas tool</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>4D7587C7-BB72-4058-9D6F-0035C68ED405</string>
+				<key>modifiers</key>
+				<integer>524288</integer>
+				<key>modifiersubtext</key>
+				<string>⌥: + study tool</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -241,6 +264,16 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>4D7587C7-BB72-4058-9D6F-0035C68ED405</string>
+				<key>modifiers</key>
+				<integer>524288</integer>
+				<key>modifiersubtext</key>
+				<string>⌥: + study tool</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
 		</array>
 	</dict>
 	<key>createdby</key>
@@ -285,6 +318,26 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>argument</key>
+				<string></string>
+				<key>passthroughargument</key>
+				<true/>
+				<key>variables</key>
+				<dict>
+					<key>param</key>
+					<string>&amp;hints=search</string>
+				</dict>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>4109C114-1983-4BE0-BDD0-825D706B8021</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>browser</key>
 				<string></string>
 				<key>skipqueryencode</key>
@@ -300,26 +353,6 @@
 			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
 			<string>46C90569-FC18-4FB6-BEF7-CF13AD8B8C58</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argument</key>
-				<string></string>
-				<key>passthroughargument</key>
-				<true/>
-				<key>variables</key>
-				<dict>
-					<key>param</key>
-					<string>&amp;hints=search</string>
-				</dict>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>4109C114-1983-4BE0-BDD0-825D706B8021</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -373,6 +406,26 @@
 			<string>alfred.workflow.utility.argument</string>
 			<key>uid</key>
 			<string>F160631A-2850-4CCB-BB11-88AB501E7648</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string></string>
+				<key>passthroughargument</key>
+				<true/>
+				<key>variables</key>
+				<dict>
+					<key>param</key>
+					<string>&amp;hints=study</string>
+				</dict>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>4D7587C7-BB72-4058-9D6F-0035C68ED405</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -641,14 +694,14 @@
 			<key>xpos</key>
 			<real>270</real>
 			<key>ypos</key>
-			<real>45</real>
+			<real>20</real>
 		</dict>
 		<key>2BE9E16C-CD19-489B-97FC-4FB2B71A237E</key>
 		<dict>
 			<key>xpos</key>
 			<real>555</real>
 			<key>ypos</key>
-			<real>640</real>
+			<real>700</real>
 		</dict>
 		<key>4109C114-1983-4BE0-BDD0-825D706B8021</key>
 		<dict>
@@ -659,7 +712,7 @@
 			<key>xpos</key>
 			<real>270</real>
 			<key>ypos</key>
-			<real>115</real>
+			<real>90</real>
 		</dict>
 		<key>46C90569-FC18-4FB6-BEF7-CF13AD8B8C58</key>
 		<dict>
@@ -677,7 +730,18 @@
 			<key>xpos</key>
 			<real>225</real>
 			<key>ypos</key>
-			<real>765</real>
+			<real>825</real>
+		</dict>
+		<key>4D7587C7-BB72-4058-9D6F-0035C68ED405</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>note</key>
+			<string>+ study</string>
+			<key>xpos</key>
+			<real>270</real>
+			<key>ypos</key>
+			<real>315</real>
 		</dict>
 		<key>51BDB3C2-A1DD-4E15-9294-95B0729A8B08</key>
 		<dict>
@@ -693,7 +757,7 @@
 			<key>xpos</key>
 			<real>555</real>
 			<key>ypos</key>
-			<real>865</real>
+			<real>925</real>
 		</dict>
 		<key>6261E02D-805C-4920-BEA0-D4F39B6A8873</key>
 		<dict>
@@ -704,21 +768,21 @@
 			<key>xpos</key>
 			<real>225</real>
 			<key>ypos</key>
-			<real>510</real>
+			<real>570</real>
 		</dict>
 		<key>6ED60925-2459-424C-A17D-24F317903D98</key>
 		<dict>
 			<key>xpos</key>
 			<real>555</real>
 			<key>ypos</key>
-			<real>750</real>
+			<real>810</real>
 		</dict>
 		<key>B542153D-57DD-436E-AFB9-C0B4537C3EE2</key>
 		<dict>
 			<key>xpos</key>
 			<real>225</real>
 			<key>ypos</key>
-			<real>640</real>
+			<real>700</real>
 		</dict>
 		<key>BEBCE35B-07FA-4179-B3AC-EF372ED6DDAC</key>
 		<dict>
@@ -729,7 +793,7 @@
 			<key>xpos</key>
 			<real>270</real>
 			<key>ypos</key>
-			<real>190</real>
+			<real>165</real>
 		</dict>
 		<key>C79D13CD-AAE6-49E7-9BD5-8C33E2422C5F</key>
 		<dict>
@@ -738,14 +802,14 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>375</real>
+			<real>435</real>
 		</dict>
 		<key>DCED6A03-CE9B-4D1D-8BC2-9A148FDA06EF</key>
 		<dict>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>640</real>
+			<real>700</real>
 		</dict>
 		<key>E10230C4-C675-47BC-94C3-F2708E565938</key>
 		<dict>
@@ -756,7 +820,7 @@
 			<key>xpos</key>
 			<real>225</real>
 			<key>ypos</key>
-			<real>375</real>
+			<real>435</real>
 		</dict>
 		<key>F160631A-2850-4CCB-BB11-88AB501E7648</key>
 		<dict>
@@ -767,7 +831,7 @@
 			<key>xpos</key>
 			<real>270</real>
 			<key>ypos</key>
-			<real>260</real>
+			<real>235</real>
 		</dict>
 		<key>F28BB9DD-676B-4740-8C3B-BBC15BABB8EB</key>
 		<dict>
@@ -776,7 +840,7 @@
 			<key>xpos</key>
 			<real>365</real>
 			<key>ypos</key>
-			<real>640</real>
+			<real>700</real>
 		</dict>
 		<key>F4B26A4D-3A42-4628-8CF3-196137DA3932</key>
 		<dict>

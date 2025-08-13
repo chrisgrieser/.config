@@ -45,12 +45,29 @@ function relativeDate(date) {
 function run() {
 	const convoFile = $.NSProcessInfo.processInfo.environment.objectForKey("chatgpt_conv_json").js;
 	if (!convoFile) {
-		const errmsg = "conversation.json file not defined in workflow settings";
-		return JSON.stringify({ items: [{ title: errmsg, valid: false }] });
+		return JSON.stringify({
+			items: [
+				{
+					title: "1. Go to ChatGPT's data export",
+					subtitle: 'There, select "Export data"',
+					arg: "https://chatgpt.com/#settings/DataControls",
+				},
+				{
+					title: "2. Go to workflow settings to set a `conversation.json` file",
+					arg: "alfredpreferences://navigateto/workflows>workflow>openai-utils>userconfig>chatgpt_conv_json",
+				},
+			],
+		});
 	}
 	if (!fileExists(convoFile)) {
 		return JSON.stringify({
-			items: [{ title: "Error: File does not exist.", subtitle: convoFile, valid: false }],
+			items: [
+				{
+					title: "Error: `conversation.json` does not exist.",
+					subtitle: convoFile,
+					valid: false,
+				},
+			],
 		});
 	}
 	const conversations = JSON.parse(readFile(convoFile));
@@ -81,7 +98,7 @@ function run() {
 			arg: "https://chatgpt.com/c/" + conv.id,
 			mods: {
 				cmd: { arg: content },
-			}
+			},
 		};
 	});
 
