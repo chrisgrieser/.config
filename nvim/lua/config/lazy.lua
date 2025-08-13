@@ -28,10 +28,10 @@ vim.api.nvim_create_autocmd("FileType", {
 
 -- empty functions to prevent errors when bisecting plugins, when lualine or
 -- whichkey are disabled
----@diagnostic disable: duplicate-set-field
+---@diagnostic disable-next-line: duplicate-set-field
 vim.g.lualineAdd = function() end
+---@diagnostic disable-next-line: duplicate-set-field
 vim.g.whichkeyAddSpec = function() end
----@diagnostic enable: duplicate-set-field
 
 --------------------------------------------------------------------------------
 
@@ -61,7 +61,7 @@ require("lazy").setup {
 	},
 	install = {
 		-- load one of these during installation at startup
-		colorscheme = { vim.g.lightColor, vim.g.darkColor, "habamax" },
+		colorscheme = { vim.g.darkColor, vim.g.lightColor, "habamax" },
 	},
 	git = {
 		log = { "--since=5 days ago" }, -- `:Lazy log` shows commits since last x days
