@@ -1,5 +1,6 @@
 #!/usr/bin/env osascript -l JavaScript
 // biome-ignore-all lint/complexity/useLiteralKeys: clearer this way here
+// SOURCE https://www.alfredforum.com/topic/23327-edit-workflow-details-%E2%80%94-open-workflow-detail-window-with-a-hotkey/#comment-122193
 //──────────────────────────────────────────────────────────────────────────────
 
 /** @type {AlfredRun} */

@@ -1,10 +1,8 @@
 -- DOCS https://codecompanion.olimorris.dev/
--- alternative: https://github.com/dlants/magenta.nvim
 --------------------------------------------------------------------------------
 
 -- https://platform.openai.com/usage
 -- https://platform.openai.com/docs/models
-
 -- INFO not switching to 5 yet, since it's slow when not also reducing reasoning
 -- effort, for which there release yet
 local model = "gpt-4.1-mini"
@@ -137,6 +135,7 @@ local ccSpec = {
 			end,
 		},
 		prompt_library = {
+			-- https://codecompanion.olimorris.dev/extending/prompts.html
 			["Simplify"] = {
 				strategy = "inline",
 				description = "Simplify the selected code.",
@@ -163,6 +162,30 @@ local ccSpec = {
 						content = function(ctx)
 							-- stylua: ignore
 							return require("codecompanion.helpers.actions").get_code(ctx.start_line, ctx.end_line)
+						end,
+						opts = { contains_code = true },
+					},
+				},
+			},
+			["Review changes"] = {
+				strategy = "chat",
+				description = "Review the currently unstaged changes",
+				opts = {
+					short_name = "review_unstaged",
+					auto_submit = true,
+				},
+				prompts = {
+					{
+						role = "system",
+						content = function(_ctx)
+							return "The following diff is of a commit. Review the changes."
+						end,
+					},
+					{
+						role = "user",
+						content = function(_ctx)
+							local diff = vim.system({ "git", "diff", "--unified= }):wait().stdout
+							return 
 						end,
 						opts = { contains_code = true },
 					},

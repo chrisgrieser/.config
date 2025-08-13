@@ -39,6 +39,8 @@ return {
 	---@type blink.cmp.Config
 	opts = {
 		sources = {
+			-- add plugins to the list
+			default = { "lsp", "path", "snippets", "buffer", "git", "datword" },
 			providers = {
 				lsp = {
 					fallbacks = {}, -- do not use `buffer` as fallback

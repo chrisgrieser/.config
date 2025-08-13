@@ -11,11 +11,9 @@ local darkThemes = {
 	"ChallengerDeep",
 }
 local lightThemes = {
-	"Railscasts (light) (terminal.sexy)",
-	"BlulocoZshLight (Gogh)",
+	"GoogleLight (Gogh)",
 	"Ivory Light (terminal.sexy)",
 	"Nord Light (Gogh)",
-	"GoogleLight (Gogh)",
 }
 
 local nordLight = wt.get_builtin_color_schemes()["Nord Light (Gogh)"]

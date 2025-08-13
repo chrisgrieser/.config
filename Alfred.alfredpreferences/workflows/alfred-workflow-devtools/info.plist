@@ -1619,6 +1619,7 @@ disown</string>
   [hotkeys](https://www.alfredapp.com/help/workflows/triggers/hotkey/):
 	+ Go to the last workflow in the Alfred Preferences.
 	+ Edit the current workflow's details.
+	+ Enable/disable the current workflow.
 	+ Reload the current workflow, and flush all caches related to it.
 	+ Reveal the current workflow in macOS Finder.
 	+ Reveal the workflow corresponding to
@@ -1642,10 +1643,9 @@ disown</string>
 ---
 
 ## Credits
-Workflow created by [Chris Grieser](https://chris-grieser.de/).
-
-`Edit workflow details` snippet by
-[April-June-August](https://github.com/April-June-August/Alfred--Edit-Workflow-Details).</string>
+- Code for interacting with the workflow context menu by
+[April-June-August](https://github.com/April-June-August/Alfred--Edit-Workflow-Details).
+- Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
 		<key>1A3CFF67-D2A5-4443-B02D-CAAFC4BF67FF</key>
@@ -2131,7 +2131,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.6.0</string>
+	<string>1.7.0</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
