@@ -10,7 +10,6 @@ rules:
         to:
           - shell_command: open "https://open.spotify.com/"
       #─────────────────────────────────────────────────────────────────────────
-      # PENDING https://github.com/aome510/spotify-player/issues/520
       - type: basic
         from: { key_code: f4 }
         to:

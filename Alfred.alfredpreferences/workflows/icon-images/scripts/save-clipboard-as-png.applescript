@@ -1,35 +1,30 @@
 #!/usr/bin/env osascript
-set basePath to POSIX path of (path to desktop)
-set baseName to "output"
-set ext to ".png"
 
--- build initial filepath
-set n to 0
-repeat
-	set suffix to ""
-	if n > 0 then set suffix to "-" & n
-	set filepath to basePath & baseName & suffix & ext
-	try
-		-- check if file exists
-		alias filepath
-		set n to n + 1
-	on error
-		exit repeat
-	end try
-end repeat
+-- CONFIG
+set basePath to POSIX path of (path to desktop)
+--------------------------------------------------------------------------------
+
+-- build filepath
+set timeStamp to do shell script "date +%Y-%m-%d_%H-%M-%S"
+set filepath to basePath & "Clipboard_" & timeStamp & ".png"
 
 -- save clipboard PNG
+try
+	set theImage to the clipboard as «class PNGf» -- typos: ignore-line
+on error
+	return "not an image" -- notification via Alfred
+end try
 
-set theImage to the clipboard as «class PNGf»
-set thePath to POSIX file ((path to desktop folder as text) & "output.png") -- proper AppleScript path
-set outFile to open for access thePath with write permission
+set outFile to open for access (POSIX file filepath) with write permission
 try
     set eof outFile to 0
     write theImage to outFile
 end try
 close access outFile
-set theImage to the clipboard as «class PNGf» -- typos: ignore-line
-set outFile to open for access file filepath with write permission
-set eof outFile to 0
-write theImage to outFile
-close access outFile
+
+-- reveal in Finder
+tell application "Finder"
+	activate
+	reveal ((POSIX file filepath) as alias)
+end tell
+return "" # return must be explicitly set to empty, otherwise return last var
