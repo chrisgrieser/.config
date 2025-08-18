@@ -165,6 +165,15 @@ rules:
           - *deactivate-leader
           - *remove-notice
 
+      - description: "[t]: TI"
+        type: basic
+        from: { key_code: t }
+        conditions: [*leader-active]
+        to:
+          - shell_command: open -a 'Twilight Wars'
+          - *deactivate-leader
+          - *remove-notice
+
       - description: "[l] termina[l]"
         type: basic
         from: { key_code: l } # l is quicker to reach for the right hand than t
@@ -210,15 +219,6 @@ rules:
         conditions: [*leader-active]
         to:
           - shell_command: open -a 'Slack'
-          - *deactivate-leader
-          - *remove-notice
-
-      - description: "[q] Script Editor"
-        type: basic
-        from: { key_code: q }
-        conditions: [*leader-active]
-        to:
-          - shell_command: open -a 'Script Editor'
           - *deactivate-leader
           - *remove-notice
 
@@ -360,9 +360,9 @@ rules:
           - *deactivate-leader
           - *remove-notice
 
-      - description: "[t] signal"
+      - description: "[q] signal"
         type: basic
-        from: { key_code: t }
+        from: { key_code: q }
         conditions: [*leader-active]
         to:
           - shell_command: open -a "Signal"

@@ -59,6 +59,17 @@
 			<key>url</key>
 			<string>https://tenor.com/search/{query}-gifs</string>
 		</dict>
+		<key>3F21F6B7-36A1-41CE-B5E1-E9FC42C1440E</key>
+		<dict>
+			<key>enabled</key>
+			<true/>
+			<key>keyword</key>
+			<string>ti</string>
+			<key>text</key>
+			<string>TI Wiki</string>
+			<key>url</key>
+			<string>https://twilight-imperium.fandom.com/wiki/Special:Search?query={query}</string>
+		</dict>
 		<key>4B503F11-129C-4B20-9C7A-1EA272592316</key>
 		<dict>
 			<key>enabled</key>

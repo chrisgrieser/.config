@@ -11,42 +11,51 @@
 		// rule update: 2025-08-18
 		"rules": {
 			"performance": {
+				"noAwaitInLoops": "on",
 				"noBarrelFile": "on"
 			},
 			"style": {
-				"useNamingConvention": "on",
-				"useShorthandAssign": "on",
-				"useForOf": "on",
-				"useFilenamingConvention": "on",
-				"useDefaultSwitchClause": "on",
-				"useConsistentArrayType": "on",
-				"useAtIndex": "on",
-				"noYodaExpression": "on",
-				"noUselessElse": "on",
-				"noUnusedTemplateLiteral": "on",
-				"noSubstr": "on",
-				"noProcessEnv": "on",
-				"noNestedTernary": "on",
 				"noInferrableTypes": "on", // typos: ignore-line
+				"noNestedTernary": "on",
+				"noProcessEnv": "on",
+				"noSubstr": "on",
+				"noUnusedTemplateLiteral": "on",
+				"noUselessElse": "on",
+				"noYodaExpression": "on",
+				"useAtIndex": "on",
+				"useConsistentArrayType": "on",
+				"useConsistentObjectDefinitions": "on",
+				"useDefaultSwitchClause": "on",
+				"useExportsLast": "on",
+				"useFilenamingConvention": "on",
+				"useForOf": "on",
+				"useGroupedAccessorPairs": "on",
+				"useNamingConvention": "on",
 				"useNumericSeparators": "on",
+				"useObjectSpread": "on",
+				"useReadonlyClassProperties": "on",
+				"useShorthandAssign": "on",
 				"useTemplate": "off" // not useful
 			},
 			"suspicious": {
 				"noConstantBinaryExpressions": "on",
-				"useErrorMessage": "on",
-				"useAwait": "on",
-				"noVar": "on",
 				"noEmptyBlockStatements": "on",
-				"noUnassignedVariables": "on"
+				"noUnassignedVariables": "on",
+				"noVar": "on",
+				"useAwait": "on",
+				"useErrorMessage": "on",
+				"useStaticResponseMethods": "on"
 			},
 			"complexity": {
-				"useWhile": "on",
+				"noImplicitCoercions": "on",
 				"noUselessStringConcat": "on",
-				"noImplicitCoercions": "on"
+				"useWhile": "on"
 			},
 			"correctness": {
+				"noProcessGlobal": "on",
 				"noUndeclaredVariables": "on",
-				"noProcessGlobal": "on"
+				"useJsonImportAttributes": "on",
+				"useSingleJsDocAsterisk": "on"
 			}
 		}
 	},

@@ -63,7 +63,6 @@ matches:
   - { replace: instead, triggers: [isntead, instread], propagate_case: true, word: true }
   - { replace: interview, trigger: itnerview, propagate_case: true, word: true }
   - { replace: is, trigger: si, word: true, propagate_case: true }
-  - { replace: it, trigger: ti, propagate_case: true, word: true }
   - { replace: item, trigger: tiem, propagate_case: true, word: true }
   - { replace: its, trigger: tis, propagate_case: true, word: true }
   - { replace: json, trigger: sjon, propagate_case: true, word: true }
