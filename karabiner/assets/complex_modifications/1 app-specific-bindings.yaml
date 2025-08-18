@@ -432,20 +432,3 @@ rules:
         conditions:
           - type: frontmost_application_if
             bundle_identifiers: [org.giorgiocalderolla.Catch]
-  #─────────────────────────────────────────────────────────────────────────────
-  - description: "(Apps) CleanShot X"
-    manipulators:
-      # DOCS https://cleanshot.com/docs/api
-      # ⌘⇧4 (screenshot button): tap to screenshot, hold to record screen
-      - type: basic
-        from: { key_code: "4", modifiers: { mandatory: [shift, command] } }
-        to_if_alone:
-          - shell_command: |
-              # without CleanShot, fallback to macOS' builtin screenshot app
-              if mdfind "kMDItemKind == 'Application'" | grep -q "CleanShot X" ; then
-                open -g "cleanshot://capture-area"
-              else
-                screencapture -ic # capture area to clipboard
-              fi
-        to_if_held_down:
-          - shell_command: open -g "cleanshot://record-screen"
