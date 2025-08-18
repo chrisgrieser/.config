@@ -1,6 +1,5 @@
 #!/usr/bin/env zsh
 # shellcheck disable=2154
-
 #───────────────────────────────────────────────────────────────────────────────
 
 # GET TOKEN
@@ -10,11 +9,10 @@ token=$github_token_from_alfred_prefs
 
 #────────────────────────────────────────────────────────────────────────────
 
-# MARK AS READ
-if [[ "$mode" == "mark-as-read" ]]; then
-	$([[ "cond" ]] && echo "value1" || echo "value2")
-	local method
+# MARK AS READ/DONE
+if [[ "$mode" == "mark-as-read" || "$mode" == "mark-as-done" ]]; then
 	# DOCS https://docs.github.com/en/rest/activity/notifications?apiVersion=2022-11-28#mark-a-thread-as-read
+	method=$([[ "$mode" == "mark-as-read" ]] && echo "PATCH" || echo "DELETE")
 	thread_id="$1"
 	curl --silent --location \
 		--request "$method" \
@@ -27,8 +25,10 @@ fi
 
 #───────────────────────────────────────────────────────────────────────────────
 # OPEN/COPY URL
-api_url="$1"
+
+# get github url
 # DOCS https://docs.github.com/en/rest/activity/notifications?apiVersion=2022-11-28#get-a-thread
+api_url="$1"
 if [[ -z "$api_url" && "$mode" == "open" ]]; then
 	# some notification types like ci-activity do not provide a thread
 	github_url="https://github.com/notifications"
@@ -47,6 +47,7 @@ else
 	fi
 fi
 
+# action
 if [[ "$mode" == "open" ]]; then
 	open "$github_url"
 	if [[ "$github_url" == "https://github.com/notifications" ]]; then
