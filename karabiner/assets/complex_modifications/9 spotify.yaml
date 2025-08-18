@@ -10,16 +10,6 @@ rules:
         to:
           - shell_command: open "https://open.spotify.com/"
       #─────────────────────────────────────────────────────────────────────────
-      - type: basic
-        from: { key_code: f4 }
-        to:
-          - shell_command: |
-              info=$(spotify_player get key playback)
-              artist=$(echo "$info" | jq ".item.artists[0].name")
-              song=$(echo "$info" | jq ".item.name")
-              "$HOME/.config/karabiner/assets/notificators/spotify-notificator" \
-                --title "Spotify" --message "💚 $artist – $song"
-              spotify_player like
 
       # until spotify-play is fixed, use f7 to pause.
       # https://github.com/aome510/spotify-player/issues/804
@@ -27,25 +17,19 @@ rules:
         from: { key_code: f7 }
         to:
           - shell_command: |
-              export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
-              spotify_player playback previous && exit 0
-              # if unresponsive, trigger via virtual trigger to force playing
-              "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/alexa-virtual-trigger" "spotify-pause"
+              "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/alexa-virtual-trigger" \
+                "spotify-pause"
 
       - type: basic
         from: { key_code: f8 }
         to:
           - shell_command: |
-              export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
-              spotify_player playback play-pause && exit 0
-              # if unresponsive, trigger via virtual trigger to force playing
-              "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/alexa-virtual-trigger" "spotify-play"
+              "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/alexa-virtual-trigger" \
+                "spotify-play"
 
       - type: basic
         from: { key_code: f9 }
         to:
           - shell_command: |
-              export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
-              spotify_player playback next && exit 0
-              # if unresponsive, trigger via virtual trigger to force playing
-              "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/alexa-virtual-trigger" "spotify-next"
+              "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/alexa-virtual-trigger" \
+                "spotify-next"
