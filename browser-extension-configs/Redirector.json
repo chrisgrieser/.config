@@ -1,7 +1,24 @@
 {
     "createdBy": "Redirector v3.5.3",
-    "createdAt": "2025-08-02T16:10:52.805Z",
+    "createdAt": "2025-08-18T12:11:41.436Z",
     "redirects": [
+        {
+            "description": "Google Lucky Redirect",
+            "exampleUrl": "https://www.google.com/url?q=https://www.joyn.de/",
+            "exampleResult": "https://www.joyn.de/",
+            "error": null,
+            "includePattern": "https:\\/\\/www.google.com\\/url\\?q=(.*)",
+            "excludePattern": "",
+            "patternDesc": "",
+            "redirectUrl": "$1",
+            "patternType": "R",
+            "processMatches": "noProcessing",
+            "disabled": false,
+            "grouped": false,
+            "appliesTo": [
+                "main_frame"
+            ]
+        },
         {
             "description": "Netflix redirect from \"Home\" to \"TV Shows → Animes\"",
             "exampleUrl": "https://www.netflix.com/browse",
@@ -37,57 +54,6 @@
             ]
         },
         {
-            "description": "Redirect Twitter to readable frontend",
-            "exampleUrl": "https://x.com/tweet/status/1465053672593784834",
-            "exampleResult": "https://xcancel.com/tweet/status/1465053672593784834",
-            "error": null,
-            "includePattern": "https://x.com/(.*)",
-            "excludePattern": "",
-            "patternDesc": "",
-            "redirectUrl": "https://xcancel.com/$1",
-            "patternType": "R",
-            "processMatches": "noProcessing",
-            "disabled": false,
-            "grouped": false,
-            "appliesTo": [
-                "main_frame"
-            ]
-        },
-        {
-            "description": "Google Lucky Redirect",
-            "exampleUrl": "https://www.google.com/url?q=https://www.joyn.de/",
-            "exampleResult": "https://www.joyn.de/",
-            "error": null,
-            "includePattern": "https:\\/\\/www.google.com\\/url\\?q=(.*)",
-            "excludePattern": "",
-            "patternDesc": "",
-            "redirectUrl": "$1",
-            "patternType": "R",
-            "processMatches": "noProcessing",
-            "disabled": false,
-            "grouped": false,
-            "appliesTo": [
-                "main_frame"
-            ]
-        },
-        {
-            "description": "Hackernews Frontend",
-            "exampleUrl": "https://news.ycombinator.com/item?id=44080803",
-            "exampleResult": "https://hackerweb.app/#/item/44080803",
-            "error": null,
-            "includePattern": "https:\\/\\/news.ycombinator.com\\/item\\?id=(.*)",
-            "excludePattern": "",
-            "patternDesc": "",
-            "redirectUrl": "https://hackerweb.app/#/item/$1",
-            "patternType": "R",
-            "processMatches": "noProcessing",
-            "disabled": false,
-            "grouped": false,
-            "appliesTo": [
-                "main_frame"
-            ]
-        },
-        {
             "description": "r/anime: use old reddit (due to custom css of that subreddit)",
             "exampleUrl": "https://www.reddit.com/r/anime/comments/1mf3hzz/steinsgate_15th_anniversary_rewatch_episode_5/",
             "exampleResult": "https://old.reddit.com/r/anime/comments/1mf3hzz/steinsgate_15th_anniversary_rewatch_episode_5/",
@@ -96,6 +62,23 @@
             "excludePattern": "",
             "patternDesc": "",
             "redirectUrl": "https://old.reddit.com/r/anime/$1",
+            "patternType": "R",
+            "processMatches": "noProcessing",
+            "disabled": false,
+            "grouped": false,
+            "appliesTo": [
+                "main_frame"
+            ]
+        },
+        {
+            "description": "Redirect Twitter to readable frontend",
+            "exampleUrl": "https://x.com/tweet/status/1465053672593784834",
+            "exampleResult": "https://xcancel.com/tweet/status/1465053672593784834",
+            "error": null,
+            "includePattern": "https://x.com/(.*)",
+            "excludePattern": "",
+            "patternDesc": "",
+            "redirectUrl": "https://xcancel.com/$1",
             "patternType": "R",
             "processMatches": "noProcessing",
             "disabled": false,

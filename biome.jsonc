@@ -8,22 +8,8 @@
 	"linter": {
 		"domains": { "project": "all", "test": "all" },
 
-		// rule update: 2025-07-09
+		// rule update: 2025-08-18
 		"rules": {
-			"nursery": {
-				// "noBitwiseOperators": "on",
-				// "noConstantBinaryExpression": "on",
-				"noFloatingPromises": "on",
-				// "noImplicitCoercion": "on",
-				// "useNumericSeparators": "on",
-				// "noUselessEscapeInString": "on",
-				// "noUselessBackrefInRegex": "on",
-				// "noUnassignedVariables": "on",
-				// "noTsIgnore": "on",
-				"noShadow": "on",
-				// "noProcessGlobal": "on",
-				"noMisusedPromises": "on"
-			},
 			"performance": {
 				"noBarrelFile": "on"
 			},
@@ -42,20 +28,25 @@
 				"noProcessEnv": "on",
 				"noNestedTernary": "on",
 				"noInferrableTypes": "on", // typos: ignore-line
+				"useNumericSeparators": "on",
 				"useTemplate": "off" // not useful
 			},
 			"suspicious": {
+				"noConstantBinaryExpressions": "on",
 				"useErrorMessage": "on",
 				"useAwait": "on",
 				"noVar": "on",
-				"noEmptyBlockStatements": "on"
+				"noEmptyBlockStatements": "on",
+				"noUnassignedVariables": "on"
 			},
 			"complexity": {
 				"useWhile": "on",
-				"noUselessStringConcat": "on"
+				"noUselessStringConcat": "on",
+				"noImplicitCoercions": "on"
 			},
 			"correctness": {
-				"noUndeclaredVariables": "on"
+				"noUndeclaredVariables": "on",
+				"noProcessGlobal": "on"
 			}
 		}
 	},
