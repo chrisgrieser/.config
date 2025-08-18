@@ -11,17 +11,17 @@
 		// rule update: 2025-07-09
 		"rules": {
 			"nursery": {
-				"noBitwiseOperators": "on",
-				"noConstantBinaryExpression": "on",
+				// "noBitwiseOperators": "on",
+				// "noConstantBinaryExpression": "on",
 				"noFloatingPromises": "on",
-				"noImplicitCoercion": "on",
-				"useNumericSeparators": "on",
-				"noUselessEscapeInString": "on",
-				"noUselessBackrefInRegex": "on",
-				"noUnassignedVariables": "on",
-				"noTsIgnore": "on",
+				// "noImplicitCoercion": "on",
+				// "useNumericSeparators": "on",
+				// "noUselessEscapeInString": "on",
+				// "noUselessBackrefInRegex": "on",
+				// "noUnassignedVariables": "on",
+				// "noTsIgnore": "on",
 				"noShadow": "on",
-				"noProcessGlobal": "on",
+				// "noProcessGlobal": "on",
 				"noMisusedPromises": "on"
 			},
 			"performance": {

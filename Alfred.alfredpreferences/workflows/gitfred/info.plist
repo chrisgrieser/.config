@@ -379,9 +379,32 @@
 				<key>modifiers</key>
 				<integer>1048576</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Mark as Read</string>
+				<string>⌘: Mark as read</string>
 				<key>vitoclose</key>
 				<true/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>B82F00A2-AF4F-47B3-BE86-3D5E11461819</string>
+				<key>modifiers</key>
+				<integer>262144</integer>
+				<key>modifiersubtext</key>
+				<string>⌃: Mark as done</string>
+				<key>vitoclose</key>
+				<true/>
+			</dict>
+		</array>
+		<key>B82F00A2-AF4F-47B3-BE86-3D5E11461819</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>BFABA717-A81E-4D69-A8C2-4ED2042B4588</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
 			</dict>
 		</array>
 		<key>BFABA717-A81E-4D69-A8C2-4ED2042B4588</key>
@@ -1418,6 +1441,14 @@
 			<integer>1</integer>
 		</dict>
 		<dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.junction</string>
+			<key>uid</key>
+			<string>B82F00A2-AF4F-47B3-BE86-3D5E11461819</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
 			<key>config</key>
 			<dict>
 				<key>lastpathcomponent</key>
@@ -1767,6 +1798,15 @@ workflow will check for the token in the following order:
 			<real>30</real>
 			<key>ypos</key>
 			<real>900</real>
+		</dict>
+		<key>B82F00A2-AF4F-47B3-BE86-3D5E11461819</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>11</integer>
+			<key>xpos</key>
+			<real>210</real>
+			<key>ypos</key>
+			<real>1070</real>
 		</dict>
 		<key>BFABA717-A81E-4D69-A8C2-4ED2042B4588</key>
 		<dict>

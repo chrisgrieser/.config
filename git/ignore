@@ -14,24 +14,15 @@ __pycache__
 *.dmg
 
 # Microsoft Office temporary files
-~$*.docx
-~$*.xlsx
-~$*.pptx
+~$*.{docx,xlsx,pptx}
 
 # safety net to prevent sensitive data being accidentally added
-*.kdb
-*.kdbx
-*.gpg
-*.pfx
-*.key
-.*_history
+*.{kdb,kdbx,gpg,pfx,key}
+.{bash,zsh}_history
 *.env
 .env
 
 # prevent accidental inclusion of big files or partial downloads
-*.part
-*.crdownload
-*.mp4
-*.mkv
-*.tiff
-*.heic
+*.{part,crdownload}
+*.{mp4,mkv}
+*.{tiff,heic}
