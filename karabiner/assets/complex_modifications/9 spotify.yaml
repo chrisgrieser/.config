@@ -21,12 +21,16 @@ rules:
                 --title "Spotify" --message "💚 $artist – $song"
               spotify_player like
 
+      # until spotify-play is fixed, use f7 to pause.
+      # https://github.com/aome510/spotify-player/issues/804
       - type: basic
         from: { key_code: f7 }
         to:
           - shell_command: |
               export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
-              spotify_player playback previous
+              spotify_player playback previous && exit 0
+              # if unresponsive, trigger via virtual trigger to force playing
+              "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/alexa-virtual-trigger" "spotify-pause"
 
       - type: basic
         from: { key_code: f8 }
@@ -42,4 +46,6 @@ rules:
         to:
           - shell_command: |
               export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
-              spotify_player playback next
+              spotify_player playback next && exit 0
+              # if unresponsive, trigger via virtual trigger to force playing
+              "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/alexa-virtual-trigger" "spotify-next"
