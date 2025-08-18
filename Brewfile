@@ -60,17 +60,14 @@ computerName = `scutil --get ComputerName`
 if computerName.include?("Home")
 	brew "yt-dlp"
 	brew "ffmpeg" # recommended for `yt-dlp`
+	brew "spotify_player"
 	cask "catch"
+	cask "bettertouchtool"
+
 	cask "iina"
+	cask "steam"
 	cask "transmission"
 	cask "qlvideo" # provides preview icons for `mkv`
-	#───────
-	cask "bettertouchtool"
-	brew "spotify_player"
-	cask "cleanshot"
-	cask "steam"
-elsif computerName.include?("Office")
-	cask "cleanshot" # only license for 2 devices
 elsif computerName.include?("Mother")
 	cask "iina"
 	cask "steam"
