@@ -163,7 +163,7 @@ function run() {
 				ctrl: {
 					arg: notif.id,
 					subtitle: "⌃: Mark as done",
-					variables: { mode: "mark-as-read", notificationsLeft: responseObj.length - 1 },
+					variables: { mode: "mark-as-done", notificationsLeft: responseObj.length - 1 },
 				},
 				alt: {
 					subtitle: notifApiUrl ? "⌥: Copy URL" : "(🚫 No URL)",
