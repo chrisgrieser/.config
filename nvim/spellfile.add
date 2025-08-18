@@ -46,6 +46,7 @@ devdocs
 dropdown
 efm
 embeddings
+false
 fixup
 fixups
 frontmatter
@@ -54,6 +55,7 @@ hlgroup
 hsl
 iA
 iCloud
+idempotency
 improv
 independent
 interpretability
@@ -71,6 +73,7 @@ permalink
 popup
 prefill
 quickfix
+readme
 rebase
 reddit
 renamings
@@ -78,6 +81,7 @@ rgb
 runtime
 s
 signcolumn
+spellfile
 stdin
 strikethroughs
 stylua
@@ -88,15 +92,12 @@ tabstops
 textobjects
 toml
 treesitter
+un
 unescaped
 uninstallation
 unix
 unminify
 unstaged
+vim
 vimscript
 zsh
-idempotency
-vim
-spellfile
-false
-readme
