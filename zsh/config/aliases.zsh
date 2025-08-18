@@ -2,6 +2,7 @@
 alias q=' exit'     # leading space to ignore it in history due to `HIST_IGNORE_SPACE`
 alias r=' exec zsh' # do not reload with `source ~/.zshrc`, https://github.com/ohmyzsh/ohmyzsh/wiki/FAQ#how-do-i-reload-the-zshrc-file
 alias ydl='yt-dlp' # cause I can never remember the name
+alias i='which' # i for [i]nspect
 
 # DEFAULTS
 alias mv='mv -vi'
