@@ -177,7 +177,7 @@ local ccSpec = {
 			},
 			["Review unstaged changes"] = {
 				strategy = "chat",
-				description = "Review the currently unstaged changes, and suggest improvements",
+				description = "Review the currently unstaged changes, and suggest improvements.",
 				opts = {
 					short_name = "review_unstaged",
 					auto_submit = true,
