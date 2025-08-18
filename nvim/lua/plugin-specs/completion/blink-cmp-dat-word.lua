@@ -14,7 +14,7 @@ return {
 					},
 					max_items = 10,
 					score_offset = -10,
-					min_keyword_length = 8,
+					min_keyword_length = 7,
 				},
 			},
 		},
