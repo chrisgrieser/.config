@@ -31,8 +31,7 @@ anchors:
 rules:
   - description: "Finder Vim Addons for Alfred (assuming Alfred Compatibility Mode)"
     manipulators:
-      # FIX for <Esc> -> f18 binding
-      # Alfred Custom Clipboard Search & screenshot history (cleanshot)
+      # <Esc> -> f18 (Alfred Custom Clipboard Search)
       - type: basic
         from: { key_code: escape }
         to_if_alone:
@@ -40,8 +39,6 @@ rules:
           # on focus loss, renaming is aborted automatically
           - *leave-insert-mode
           - *remove-insert-notice
-        to_if_held_down:
-          - shell_command: open "cleanshot://open-history"
       # overwrite `-` search with my own Alfred-based search
       - type: basic
         from: { key_code: slash }

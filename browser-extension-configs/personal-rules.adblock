@@ -14,6 +14,10 @@ www.netflix.com##.watch-video--player-view > div[data-uia="pause-ad"]
 stackoverflow.com###announcement-banner
 help.obsidian.md##.site-body-left-column
 
+! fandom
+fandom.com##.page__right-rail
+fandom.com##.global-explore-navigation
+
 ! ai
 chatgpt.com###thread-bottom-container > div:last-child
 chatgpt.com###page-header > .absolute

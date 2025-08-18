@@ -59,17 +59,6 @@
 			<key>url</key>
 			<string>https://tenor.com/search/{query}-gifs</string>
 		</dict>
-		<key>3F21F6B7-36A1-41CE-B5E1-E9FC42C1440E</key>
-		<dict>
-			<key>enabled</key>
-			<true/>
-			<key>keyword</key>
-			<string>ti</string>
-			<key>text</key>
-			<string>TI Wiki</string>
-			<key>url</key>
-			<string>https://twilight-imperium.fandom.com/wiki/Special:Search?query={query}</string>
-		</dict>
 		<key>4B503F11-129C-4B20-9C7A-1EA272592316</key>
 		<dict>
 			<key>enabled</key>
@@ -113,6 +102,17 @@
 			<string>Linguee: "{query}"</string>
 			<key>url</key>
 			<string>https://www.linguee.com/english-german/search?query={query}</string>
+		</dict>
+		<key>84FAA35C-F0C7-4945-ABC5-193E2B09D1D8</key>
+		<dict>
+			<key>enabled</key>
+			<true/>
+			<key>keyword</key>
+			<string>ti</string>
+			<key>text</key>
+			<string>TI Wiki: {query}</string>
+			<key>url</key>
+			<string>https://twilight-imperium.fandom.com/wiki/Special:Search?query={query}</string>
 		</dict>
 		<key>8EE37181-DD3F-4F34-A086-859FED6FB0C0</key>
 		<dict>
