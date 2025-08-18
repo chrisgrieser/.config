@@ -93,8 +93,7 @@ local ccSpec = {
 	},
 	opts = {
 		display = {
-			-- not helpful anyway, just using gitsigns word-diff afterwards instead
-			diff = { enabled = false },
+			diff = { enabled = true }, -- https://codecompanion.olimorris.dev/configuration/chat-buffer.html#diff
 
 			-- https://codecompanion.olimorris.dev/configuration/chat-buffer.html
 			chat = {
@@ -160,8 +159,9 @@ local ccSpec = {
 						content = function(ctx)
 							return ([[
 								I want you to act as a senior %s developer.
-								I will send you some code, and I want you to improve the code.
-								Do not diminish readability of the code while doing so.
+								I will send you some code, and I want you to improve the code
+								by simplifying it, making it more readable, and generally turning it 
+								into better code.
 							]]):format(ctx.filetype)
 						end,
 					},
