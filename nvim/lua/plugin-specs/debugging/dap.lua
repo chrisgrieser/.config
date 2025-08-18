@@ -139,7 +139,7 @@ return {
 			function()
 				local breakpoints = require("dap.breakpoints").get()
 				local noBreakpoints = #vim.iter(breakpoints):totable() == 0 -- vim.iter needed for sparse array
-				if noBreakpoints == 0 then return "" end
+				if noBreakpoints then return "" end
 				local allBufs = 0
 				for _, bp in pairs(breakpoints) do
 					allBufs = allBufs + #bp

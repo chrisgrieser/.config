@@ -24,7 +24,7 @@ function M.fastWarp(dir)
 
 	---@param text string
 	---@param patterns table<string, string> -- key is irrelevant, just for readability
-	---@return number|nil
+	---@return number?
 	local function findClosest(text, patterns)
 		local distances = {}
 		for _, pattern in pairs(patterns) do
@@ -32,7 +32,8 @@ function M.fastWarp(dir)
 			table.insert(distances, stop or math.huge)
 		end
 		local closest = math.min(unpack(distances))
-		return closest == math.huge and nil or closest
+		if closest == math.huge then return end
+		return closest
 	end
 
 	local lineBefore, lineAfter = line:sub(1, col), line:sub(col + 2)
