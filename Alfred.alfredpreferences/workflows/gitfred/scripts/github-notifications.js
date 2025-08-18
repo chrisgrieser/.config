@@ -100,52 +100,43 @@ function run() {
 			ctrl: { valid: false, subtitle: "" },
 		};
 		return JSON.stringify({
-
-
-
-
-
-
-
-			items: [ { title: "Show read notifications", variables: { mode: "show-read-notifications" }, mods: deactivatedMods }, ],
+			items: [
+				{
+					title: "Show read notifications",
+					variables: { mode: "show-read-notifications" },
+					mods: deactivatedMods,
+				},
+			],
 		});
 	}
 
 	//───────────────────────────────────────────────────────────────────────────
 
 	/** @type {Record<string, string>} */
+	// biome-ignore-start lint/style/useNamingConvention: not by me
 	const typeMaps = {
-		// biome-ignore lint/style/useNamingConvention: not by me
 		PullRequest: "🟧",
-		// biome-ignore lint/style/useNamingConvention: not by me
 		Issue: "🔵",
-		// biome-ignore lint/style/useNamingConvention: not by me
 		Discussion: "🗣️",
-		// biome-ignore lint/style/useNamingConvention: not by me
 		CheckSuite: "🤖",
-		// biome-ignore lint/style/useNamingConvention: not by me
 		Release: "🎉",
 	};
 	/** @type {Record<string, string>} */
 	const reasonMaps = {
 		author: "👤",
 		mention: "⭕",
-		// biome-ignore lint/style/useNamingConvention: not by me
 		team_mention: "⭕",
 		subscribed: "🔔",
 		comment: "💬",
 		assign: "➡",
-		// biome-ignore lint/style/useNamingConvention: not by me
 		ci_activity: "⚙️",
 		invitation: "👥",
 		manual: "🫱",
-		// biome-ignore lint/style/useNamingConvention: not by me
 		review_requested: "➡",
-		// biome-ignore lint/style/useNamingConvention: not by me
 		security_alert: "❗",
-		// biome-ignore lint/style/useNamingConvention: not by me
 		state_change: "❇️",
 	};
+	// biome-ignore-end lint/style/useNamingConvention: not by me
 
 	/** @type AlfredItem[] */
 	const notifications = responseObj.map((/** @type {GithubNotif} */ notif) => {
@@ -164,9 +155,14 @@ function run() {
 			mods: {
 				cmd: {
 					arg: notif.id,
-					// CAVEAT mark-as-unread not support in GitHub Notification API
 					valid: !showReadNotifs,
 					subtitle: showReadNotifs ? "🚫 Is already marked as read." : "⌘: Mark as Read",
+					// CAVEAT mark-as-unread not support in GitHub Notification API
+					variables: { mode: "mark-as-read", notificationsLeft: responseObj.length - 1 },
+				},
+				ctrl: {
+					arg: notif.id,
+					subtitle: "⌃: Mark as done",
 					variables: { mode: "mark-as-read", notificationsLeft: responseObj.length - 1 },
 				},
 				alt: {

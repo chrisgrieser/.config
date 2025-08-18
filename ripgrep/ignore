@@ -20,11 +20,10 @@
 .github
 LICENSE
 .editorconfig
-.markdownlint.yaml
+.markdownlint.{yaml,yml,json}
 
 # academic software projects
-CITATION.cff
-CITATION.bib
+CITATION.{cff,bib}
 
 # js/ts
 node_modules
@@ -32,10 +31,8 @@ package.json
 package-lock.json
 versions.json
 manifest.json
-jsconfig.json
-tsconfig.json
-biome.jsonc
-biome.json
+{ts,js}config.json
+biome.{json,jsonc}
 
 # python
 __init__.py
@@ -45,8 +42,7 @@ pyrightconfig.json
 typings/**/*.pyi
 
 # Alfred workflows
-info.plist
-prefs.plist
+{info,prefs}.plist
 notificator
 
 # NVIM
