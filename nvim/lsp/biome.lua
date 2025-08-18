@@ -1,13 +1,15 @@
 ---@type vim.lsp.Config
 return {
-	-- FIX `biome` does not attach on the 1st buffer of startup, due to the
-	-- `root_dir` function by nvim-lspconfig using `cwd`, which is running before
-	-- auto-rooting automcmds. Simply using the root markers fixes that.
-	root_markers = {
-		"biome.json",
-		"biome.jsonc",
+	-- Do not require a `package.json` like in nvim-lspconfig default.
+	-- (needs `root_dir`, since lspconfig default uses it and it overrides `root_markers`)
+	root_dir = function(bufnr, on_dir)
+		local root_markers = {
+			"biome.json",
+			"biome.jsonc",
+		}
 
-		-- add to make biome's json formatter available in none-js projects as well
-		".git", -- (last in list = lowest priority)
-	},
+		local projectRoot = vim.fs.root(bufnr, root_markers)
+		if projectRoot then on_dir(projectRoot) end
+	end,
+	workspace_required = false, -- to use biome's json formatter outside js_projects
 }
