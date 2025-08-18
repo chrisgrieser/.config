@@ -116,13 +116,11 @@
 				<false/>
 			</dict>
 		</array>
-		<key>BE518E10-A76F-4A39-BF2F-9A54BFA63DF7</key>
-		<array/>
-		<key>E07E04C5-C1AE-4930-BC19-FDC37F166624</key>
+		<key>CDAFDC73-D442-46E5-8BA8-23DEC829153A</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>2BA8EB9F-E5C5-440C-AFB0-8AA181EC2871</string>
+				<string>2E49643A-6373-49CB-BC8B-EE44C520C061</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -131,11 +129,11 @@
 				<false/>
 			</dict>
 		</array>
-		<key>FD04A914-81DF-43CD-97F2-872228411EED</key>
+		<key>E07E04C5-C1AE-4930-BC19-FDC37F166624</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>BE518E10-A76F-4A39-BF2F-9A54BFA63DF7</string>
+				<string>2BA8EB9F-E5C5-440C-AFB0-8AA181EC2871</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -363,6 +361,27 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>{query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>E762EDDE-643D-48E5-B773-C89606259F8B</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -382,27 +401,6 @@
 			<string>00C473A5-2045-4409-841A-1BE884B037BE</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string></string>
-				<key>title</key>
-				<string>{query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>E762EDDE-643D-48E5-B773-C89606259F8B</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -428,43 +426,46 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>acceptsmulti</key>
-				<integer>0</integer>
-				<key>filetypes</key>
-				<array>
-					<string>public.jpeg</string>
-					<string>public.png</string>
-				</array>
-				<key>name</key>
-				<string>Annotate in Cleanshot</string>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>save</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>Save image from clipboard</string>
+				<key>withspace</key>
+				<false/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.trigger.action</string>
+			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
-			<string>FD04A914-81DF-43CD-97F2-872228411EED</string>
+			<string>CDAFDC73-D442-46E5-8BA8-23DEC829153A</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
+				<key>concurrently</key>
 				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
 				<string></string>
-				<key>url</key>
-				<string>cleanshot://open-annotate?filepath={query}</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/save-clipboard-as-png.applescript</string>
+				<key>type</key>
+				<integer>8</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
+			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>BE518E10-A76F-4A39-BF2F-9A54BFA63DF7</string>
+			<string>2E49643A-6373-49CB-BC8B-EE44C520C061</string>
 			<key>version</key>
-			<integer>1</integer>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -582,7 +583,14 @@
 			<key>xpos</key>
 			<real>435</real>
 			<key>ypos</key>
-			<real>635</real>
+			<real>720</real>
+		</dict>
+		<key>2E49643A-6373-49CB-BC8B-EE44C520C061</key>
+		<dict>
+			<key>xpos</key>
+			<real>190</real>
+			<key>ypos</key>
+			<real>500</real>
 		</dict>
 		<key>68F706E8-BDA8-44E3-8973-752C6B0FC50D</key>
 		<dict>
@@ -600,7 +608,7 @@
 			<key>xpos</key>
 			<real>190</real>
 			<key>ypos</key>
-			<real>635</real>
+			<real>720</real>
 		</dict>
 		<key>7CF8B97A-6865-489C-8B65-3C892683D59E</key>
 		<dict>
@@ -618,7 +626,7 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>635</real>
+			<real>720</real>
 		</dict>
 		<key>95CF671F-9E2F-4CE9-92A0-BACEF07C97C8</key>
 		<dict>
@@ -660,14 +668,12 @@
 			<key>ypos</key>
 			<real>125</real>
 		</dict>
-		<key>BE518E10-A76F-4A39-BF2F-9A54BFA63DF7</key>
+		<key>CDAFDC73-D442-46E5-8BA8-23DEC829153A</key>
 		<dict>
-			<key>colorindex</key>
-			<integer>8</integer>
 			<key>xpos</key>
-			<real>580</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>460</real>
+			<real>500</real>
 		</dict>
 		<key>E07E04C5-C1AE-4930-BC19-FDC37F166624</key>
 		<dict>
@@ -678,7 +684,7 @@
 			<key>xpos</key>
 			<real>345</real>
 			<key>ypos</key>
-			<real>665</real>
+			<real>750</real>
 		</dict>
 		<key>E762EDDE-643D-48E5-B773-C89606259F8B</key>
 		<dict>
@@ -706,15 +712,6 @@
 			<real>580</real>
 			<key>ypos</key>
 			<real>170</real>
-		</dict>
-		<key>FD04A914-81DF-43CD-97F2-872228411EED</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>8</integer>
-			<key>xpos</key>
-			<real>410</real>
-			<key>ypos</key>
-			<real>460</real>
 		</dict>
 		<key>FF1B8F7A-4E33-4A50-A895-F3B34197EB14</key>
 		<dict>
