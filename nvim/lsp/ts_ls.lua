@@ -3,6 +3,13 @@
 
 ---@type vim.lsp.Config
 local config = {
+	-- Do not require a `package.json` like in nvim-lspconfig default.
+	-- (needs `root_dir`, since lspconfig default uses it and it overrides `root_markers`)
+	root_dir = function(bufnr, on_dir)
+		local root_markers = { "tsconfig.json", "jsconfig.json", "package.json", ".git" }
+		local projectRoot = vim.fs.root(bufnr, root_markers)
+		if projectRoot then on_dir(projectRoot) end
+	end,
 	init_options = {
 		preferences = {
 			importModuleSpecifierPreference = "non-relative",

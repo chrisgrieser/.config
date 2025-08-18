@@ -382,12 +382,11 @@ keymap("n", "<leader>id", function()
 	vim.notify(vim.inspect(diag), nil, { ft = "lua" })
 end, { desc = "󰋽 Next diagnostic" })
 
--- stylua: ignore
+-- stylua: ignore start
 keymap("n", "<leader>il", function() require("personal-plugins.misc").lspCapabilities() end, { desc = "󱈄 LSP capabilities" })
--- stylua: ignore
-keymap("n", "<leader>iL", function() vim.cmd.edit(vim.lsp.get_log_path()) end, { desc = "󱂅 LSP log" })
--- stylua: ignore
+keymap("n", "<leader>iL", function() vim.cmd.edit(vim.lsp.log.get_filename()) end, { desc = "󱂅 LSP log" })
 keymap("n", "<leader>ib", function() require("personal-plugins.misc").inspectBuffer() end, { desc = "󰽙 Buffer info" })
+-- stylua: ignore end
 
 --------------------------------------------------------------------------------
 -- WINDOWS & SPLITS

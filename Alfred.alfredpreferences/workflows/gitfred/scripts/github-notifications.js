@@ -97,15 +97,17 @@ function run() {
 		const deactivatedMods = {
 			cmd: { valid: false, subtitle: "" },
 			alt: { valid: false, subtitle: "" },
+			ctrl: { valid: false, subtitle: "" },
 		};
 		return JSON.stringify({
-			items: [
-				{
-					title: "Show read notifications",
-					variables: { mode: "show-read-notifications" },
-					mods: deactivatedMods,
-				},
-			],
+
+
+
+
+
+
+
+			items: [ { title: "Show read notifications", variables: { mode: "show-read-notifications" }, mods: deactivatedMods }, ],
 		});
 	}
 

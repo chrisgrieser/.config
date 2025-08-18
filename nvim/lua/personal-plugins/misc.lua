@@ -301,31 +301,31 @@ end
 function M.formatWithFallback()
 	local formattingLsps = vim.lsp.get_clients { method = "textDocument/formatting", bufnr = 0 }
 	local notifyOpts = { title = "Format", icon = "󱉯" }
+	local lspNames = vim.iter(formattingLsps)
+			:map(function(client) return client.name end)
+			:join(", ")
 
 	if #formattingLsps == 1 then
 		-- write file for efm-formatters that don't use stdin
 		if vim.bo.ft == "markdown" then
-			-- -- saving with explicit name prevents issues when changing `cwd`
-			-- -- `:update!` suppresses "The file has been changed since reading it!!!"
-			-- local vimCmd = ("silent update! %q"):format(vim.api.nvim_buf_get_name(0))
-			-- vim.cmd(vimCmd)
-			vim.cmd("silent update!")
+			-- saving with explicit name prevents issues when changing `cwd`
+			local vimCmd = ("silent update %q"):format(vim.api.nvim_buf_get_name(0))
+			vim.cmd(vimCmd)
 		end
 		vim.lsp.buf.format()
 
 		-- some LSPs trigger folding after formatting
 		vim.schedule(function() vim.cmd.normal { "zv", bang = true } end)
+		vim.notify(("Formatting with %s"):format(lspNames) .. formattingLsps[1].name .. ".", nil, notifyOpts)
 	elseif #formattingLsps > 1 then
-		local clients = vim.iter(formattingLsps)
-			:map(function(client) return client.name end)
-			:join(", ")
-		vim.notify("Multiple formatting LSPs found:\n " .. clients, vim.log.levels.WARN, notifyOpts)
+		local msg = "Aborting. Multiple formatting LSPs found:\n " .. lspNames
+		vim.notify(msg, vim.log.levels.WARN, notifyOpts)
 	elseif #formattingLsps == 0 then
 		vim.cmd([[% substitute_\s\+$__e]]) -- remove trailing spaces
 		vim.cmd([[% substitute _\(\n\n\)\n\+_\1_e]]) -- remove duplicate blank lines
 		vim.cmd([[silent! /^\%(\n*.\)\@!/,$ delete]]) -- remove blanks at end of file
 
-		vim.notify_once("Formatting with fallback.", nil, notifyOpts)
+		vim.notify("Formatting with fallback.", nil, notifyOpts)
 	end
 end
 
