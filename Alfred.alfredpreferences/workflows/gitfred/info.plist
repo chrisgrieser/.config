@@ -110,6 +110,18 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
+				<string>08B7842B-16DA-4BFC-8F35-AE680AF1E07B</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>6B652DF9-88C2-49B2-849B-DE0431D629F2</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
 				<string>F99C6054-D3E9-4D1C-960A-8E9EC9FA5CB3</string>
 				<key>modifiers</key>
 				<integer>0</integer>
@@ -387,9 +399,9 @@
 				<key>destinationuid</key>
 				<string>B82F00A2-AF4F-47B3-BE86-3D5E11461819</string>
 				<key>modifiers</key>
-				<integer>262144</integer>
+				<integer>131072</integer>
 				<key>modifiersubtext</key>
-				<string>⌃: Mark as done</string>
+				<string>⇧: Mark as done</string>
 				<key>vitoclose</key>
 				<true/>
 			</dict>
@@ -1247,6 +1259,66 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string>{var:mode}</string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string>mark-as-read</string>
+						<key>outputlabel</key>
+						<string>mark-as-read</string>
+						<key>uid</key>
+						<string>256FC39B-A43F-4DB1-A4E2-01DAFE87554A</string>
+					</dict>
+					<dict>
+						<key>inputstring</key>
+						<string>{var:mode}</string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string>mark-as-done</string>
+						<key>outputlabel</key>
+						<string>mark-as-done</string>
+						<key>uid</key>
+						<string>6B652DF9-88C2-49B2-849B-DE0431D629F2</string>
+					</dict>
+					<dict>
+						<key>inputstring</key>
+						<string>{var:mode}</string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string>copy</string>
+						<key>outputlabel</key>
+						<string>copy</string>
+						<key>uid</key>
+						<string>D4409822-4D36-4A47-AE65-97902F001379</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>open</string>
+				<key>hideelse</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.conditional</string>
+			<key>uid</key>
+			<string>1B2789C4-ACE9-46F2-A786-B83B045166B2</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -1322,52 +1394,6 @@
 			<string>B35052FF-0027-40CC-BC59-EA7D442A57EA</string>
 			<key>version</key>
 			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>conditions</key>
-				<array>
-					<dict>
-						<key>inputstring</key>
-						<string>{var:mode}</string>
-						<key>matchcasesensitive</key>
-						<false/>
-						<key>matchmode</key>
-						<integer>0</integer>
-						<key>matchstring</key>
-						<string>mark-as-read</string>
-						<key>outputlabel</key>
-						<string>mark-as-read</string>
-						<key>uid</key>
-						<string>256FC39B-A43F-4DB1-A4E2-01DAFE87554A</string>
-					</dict>
-					<dict>
-						<key>inputstring</key>
-						<string>{var:mode}</string>
-						<key>matchcasesensitive</key>
-						<false/>
-						<key>matchmode</key>
-						<integer>0</integer>
-						<key>matchstring</key>
-						<string>copy</string>
-						<key>outputlabel</key>
-						<string>copy</string>
-						<key>uid</key>
-						<string>D4409822-4D36-4A47-AE65-97902F001379</string>
-					</dict>
-				</array>
-				<key>elselabel</key>
-				<string>open</string>
-				<key>hideelse</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.conditional</string>
-			<key>uid</key>
-			<string>1B2789C4-ACE9-46F2-A786-B83B045166B2</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1526,7 +1552,7 @@
 	  notification inbox instead.
 	+ &lt;kbd&gt;⌘⏎&lt;/kbd&gt;: Mark the notification as read.
 	+ &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy the URL of the notification target.
-	+ &lt;kbd&gt;⌃⏎&lt;/kbd&gt;: Mark the notification as done.
+	+ &lt;kbd&gt;⇧⏎&lt;/kbd&gt;: Mark the notification as done.
 - Additionally, you can press the
   [hotkey](https://www.alfredapp.com/help/workflows/triggers/hotkey/) to clone
   a GitHub repo from the current browser tab. ([Note that Firefox is not
@@ -1622,7 +1648,7 @@ workflow will check for the token in the following order:
 			<key>xpos</key>
 			<real>495</real>
 			<key>ypos</key>
-			<real>905</real>
+			<real>890</real>
 		</dict>
 		<key>32D387DE-B4F9-41E5-8F1C-A71E3C5644AA</key>
 		<dict>
@@ -2204,7 +2230,7 @@ to set a hotkey to clone the repo in the frontmost browser tab</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.12.0</string>
+	<string>1.12.1</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>

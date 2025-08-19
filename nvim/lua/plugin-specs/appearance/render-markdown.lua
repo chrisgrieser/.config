@@ -1,13 +1,6 @@
 -- DOCS https://github.com/MeanderingProgrammer/render-markdown.nvim#setup
 --------------------------------------------------------------------------------
 
--- FIX https://github.com/MeanderingProgrammer/render-markdown.nvim/issues/488#issuecomment-3154937211
-local query = vim.treesitter.query.get("markdown", "highlights").query
-query:disable_pattern(17)
-query:disable_pattern(18)
-
---------------------------------------------------------------------------------
-
 ---@module "lazy.types"
 ---@type LazyPluginSpec
 return {
@@ -26,6 +19,7 @@ return {
 	---@module "render-markdown"
 	---@type render.md.UserConfig
 	opts = {
+		restart_highlighter = true, -- nvim core bug fix https://github.com/MeanderingProgrammer/render-markdown.nvim/issues/488#issuecomment-3154937211
 		sign = { enabled = false },
 		latex = { enabled = false },
 		render_modes = { "n", "c", "i", "v", "V" },
