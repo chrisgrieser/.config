@@ -4,10 +4,6 @@
 
 -- https://platform.openai.com/usage
 -- https://platform.openai.com/docs/models
-
--- gpt5 too slow https://community.openai.com/t/gpt-5-is-very-slow-compared-to-4-1-responses-api/1337859
-
--- local model = "gpt-4.1-mini"
 local model = "gpt-5-nano"
 local reasoning_effort = "minimal" -- GPT5 models all reason, "medium" is too slow
 
@@ -69,8 +65,8 @@ local ccSpec = {
 		spinnerNotificationWhileRequest()
 
 		vim.api.nvim_create_autocmd("User", {
-			desc = "User: CodeCompanion finished",
-			pattern = "CodeCompanionInlineFinished",
+			desc = "User: Sound when CodeCompanion finished",
+			pattern = "CodeCompanionRequestFinished",
 			callback = function()
 				if jit.os ~= "OSX" then return end
 				local sound =
@@ -137,6 +133,7 @@ local ccSpec = {
 					schema = {
 						model = {
 							default = model,
+							-- PENDING https://github.com/olimorris/codecompanion.nvim/pull/1993
 							choices = {
 								["gpt-5-nano"] = { opts = { has_vision = true, can_reason = true } },
 								["gpt-5-mini"] = { opts = { has_vision = true, can_reason = true } },
