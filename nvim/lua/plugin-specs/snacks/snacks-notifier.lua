@@ -37,7 +37,7 @@ local function openNotif(idx)
 	local moreLines = overflow > 0 and ("↓ %d lines"):format(overflow) or ""
 	local indexStr = ("(%d/%d)"):format(idx, #history)
 	local footer = vim.trim(indexStr .. "   " .. moreLines)
-
+	
 	-- create win with snacks API
 	Snacks.win {
 		relative = "editor",
@@ -58,6 +58,7 @@ local function openNotif(idx)
 			fillchars = "fold: ,eob: ",
 			foldmethod = "expr", -- enable folding
 			foldexpr = "v:lua.vim.treesitter.foldexpr()",
+			winhighlight = "Normal:Normal", -- fix markdown highlighting priority issue
 		},
 		bo = { modifiable = true },
 		keys = {

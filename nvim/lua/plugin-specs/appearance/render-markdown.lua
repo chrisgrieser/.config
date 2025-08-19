@@ -20,6 +20,7 @@ return {
 	---@type render.md.UserConfig
 	opts = {
 		restart_highlighter = true, -- nvim core bug fix https://github.com/MeanderingProgrammer/render-markdown.nvim/issues/488#issuecomment-3154937211
+
 		sign = { enabled = false },
 		latex = { enabled = false },
 		render_modes = { "n", "c", "i", "v", "V" },

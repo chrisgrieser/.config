@@ -135,14 +135,12 @@ local ccSpec = {
 							default = model,
 							-- PENDING https://github.com/olimorris/codecompanion.nvim/pull/1993
 							choices = {
-								["gpt-5-nano"] = { opts = { has_vision = true, can_reason = true } },
-								["gpt-5-mini"] = { opts = { has_vision = true, can_reason = true } },
+								["gpt-5-nano"] = { opts = { has_vision = true, can_reason = true, stream = true } },
+								["gpt-5-mini"] = { opts = { has_vision = true, can_reason = true, stream = false } },
+								["gpt-5"] = { opts = { has_vision = true, can_reason = true, stream = false } },
 							},
 						},
 						reasoning_effort = { default = reasoning_effort },
-					},
-					opts = {
-						stream = model:find("gpt%-5"), -- GPT5-models require org. verification if streaming
 					},
 				})
 			end,
@@ -165,7 +163,7 @@ local ccSpec = {
 						content = function(ctx)
 							return ([[
 								I want you to act as a senior %s developer.
-								I will send you some code, and I want you to simplify 
+								I will send you some code, and I want you to simplify
 								the code while not diminishing its readability.
 							]]):format(ctx.filetype)
 						end,
