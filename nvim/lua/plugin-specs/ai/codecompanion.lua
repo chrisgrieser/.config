@@ -4,9 +4,9 @@
 
 -- https://platform.openai.com/usage
 -- https://platform.openai.com/docs/models
--- INFO not switching to 5 yet, since it's slow when not also reducing reasoning
--- effort, for which there release yet
-local model = "gpt-4.1-mini"
+-- local model = "gpt-4.1-mini"
+local model = "gpt-5-nano"
+local reasoning_effort = "minimal" -- GPT5 models all reason, "medium" is too slow
 
 --------------------------------------------------------------------------------
 
@@ -69,12 +69,10 @@ local ccSpec = {
 			desc = "User: CodeCompanion finished",
 			pattern = "CodeCompanionInlineFinished",
 			callback = function()
-				if jit.os == "OSX" then
-					local sound =
-						"/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/head_gestures_double_shake.caf"
-					vim.system { "afplay", sound }
-				end
-				vim.defer_fn(vim.lsp.buf.format, 200)
+				if jit.os ~= "OSX" then return end
+				local sound =
+					"/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/head_gestures_double_shake.caf"
+				vim.system { "afplay", sound }
 			end,
 		})
 	end,
@@ -84,11 +82,11 @@ local ccSpec = {
 		{ "<leader>an", "<cmd>CodeCompanionChat<CR>", desc = " Chat (new)" },
 		{ "<leader>aa", ":CodeCompanion<CR>", mode = "x", desc = " 󰘎 Prompt" },
 		-- builtin-prompts https://github.com/olimorris/codecompanion.nvim/blob/main/lua/codecompanion/config.lua
-		{ "<leader>ar", function() require("codecompanion").prompt("review_unstaged") end, desc = " Review unstaged changes" },
 		{ "<leader>ae", function() require("codecompanion").prompt("explain") end, mode = "x", desc = " Explain" },
 		{ "<leader>af", function() require("codecompanion").prompt("fix") end, mode = "x", desc = " Fix" },
 		-- my own prompts
-		{ "<leader>ai", function() require("codecompanion").prompt("improve") end, mode = "x", desc = " Improve" },
+		{ "<leader>as", function() require("codecompanion").prompt("simplify") end, mode = "x", desc = " Simplify" },
+		{ "<leader>ar", function() require("codecompanion").prompt("review_unstaged") end, desc = " Review unstaged changes" },
 		-- stylua: ignore end
 	},
 	opts = {
@@ -132,23 +130,25 @@ local ccSpec = {
 
 				-- https://github.com/olimorris/codecompanion.nvim/blob/main/lua/codecompanion/adapters/openai.lua
 				return require("codecompanion.adapters").extend("openai", {
-					schema = { model = { default = model } },
 					env = { api_key = ("cmd:cat %q"):format(apiKeyFile) },
+					schema = {
+						model = { default = model },
+						reasoning_effort = { default = reasoning_effort }
+					},
 					opts = {
-						-- GPT-5 models requires organizational verification if streaming
-						stream = model:find("gpt%-5"),
+						stream = model:find("gpt%-5"), -- GPT5-models require org. verification if streaming
 					},
 				})
 			end,
 		},
 		prompt_library = {
 			-- https://codecompanion.olimorris.dev/extending/prompts.html
-			["Improve"] = {
+			["Simplify"] = {
 				strategy = "inline",
-				description = "Improve the selected code.",
+				description = "Simplify the selected code.",
 				opts = {
 					modes = { "v" },
-					short_name = "Improve",
+					short_name = "simplify",
 					auto_submit = true,
 					stop_context_insertion = true,
 					user_prompt = false,
@@ -159,9 +159,8 @@ local ccSpec = {
 						content = function(ctx)
 							return ([[
 								I want you to act as a senior %s developer.
-								I will send you some code, and I want you to improve the code
-								by simplifying it, making it more readable, and generally turning it 
-								into better code.
+								I will send you some code, and I want you to simplify 
+								the code while not diminishing its readability.
 							]]):format(ctx.filetype)
 						end,
 					},

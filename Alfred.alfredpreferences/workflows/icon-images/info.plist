@@ -694,6 +694,8 @@
 		</dict>
 		<key>0A57AF60-AF83-4456-BA6B-C5074E68B218</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>8</integer>
 			<key>xpos</key>
 			<real>200</real>
 			<key>ypos</key>
@@ -701,6 +703,8 @@
 		</dict>
 		<key>137828DD-B0F7-49AE-B3AC-780BB2E512BE</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>8</integer>
 			<key>xpos</key>
 			<real>445</real>
 			<key>ypos</key>
@@ -708,6 +712,8 @@
 		</dict>
 		<key>1566EF2D-397E-471B-90D6-4B8BD78958B5</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>8</integer>
 			<key>note</key>
 			<string>remove \n</string>
 			<key>xpos</key>
@@ -731,12 +737,14 @@
 			<key>note</key>
 			<string>paste</string>
 			<key>xpos</key>
-			<real>435</real>
+			<real>445</real>
 			<key>ypos</key>
 			<real>775</real>
 		</dict>
 		<key>2E49643A-6373-49CB-BC8B-EE44C520C061</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>8</integer>
 			<key>xpos</key>
 			<real>200</real>
 			<key>ypos</key>
@@ -744,6 +752,8 @@
 		</dict>
 		<key>3A193819-CC2F-4AC7-8AB0-EC5571B7878B</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>8</integer>
 			<key>note</key>
 			<string>annotate image in clipboard</string>
 			<key>xpos</key>
@@ -765,7 +775,7 @@
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>190</real>
+			<real>200</real>
 			<key>ypos</key>
 			<real>775</real>
 		</dict>
@@ -829,6 +839,8 @@
 		</dict>
 		<key>CDAFDC73-D442-46E5-8BA8-23DEC829153A</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>8</integer>
 			<key>note</key>
 			<string>save clipboard as image</string>
 			<key>xpos</key>
@@ -843,7 +855,7 @@
 			<key>note</key>
 			<string>remove \n</string>
 			<key>xpos</key>
-			<real>345</real>
+			<real>355</real>
 			<key>ypos</key>
 			<real>805</real>
 		</dict>

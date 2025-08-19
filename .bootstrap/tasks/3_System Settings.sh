@@ -7,11 +7,6 @@
 
 sudo -v # ask for permissions upfront
 
-# use touch-id to authenticate in the terminal
-# https://sixcolors.com/post/2023/08/in-macos-sonoma-touch-id-for-sudo-can-survive-updates/
-# echo "auth       sufficient     pam_tid.so" | pbcopy
-# nvim /etc/pam.d/sudo_local
-
 #───────────────────────────────────────────────────────────────────────────────
 # SYSTEM PREFS
 
@@ -77,7 +72,7 @@ defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv" # List view 
 defaults write com.apple.finder FXDefaultSearchScope -string "SCcf"
 
 # Expand the following File Info panes:
-# “General”, “Open with”, and “Sharing & Permissions”
+# "General", "Open with", and "Sharing & Permissions"
 defaults write com.apple.finder FXInfoPanesExpanded -dict \
 	General -bool true \
 	OpenWith -bool true \
@@ -140,7 +135,7 @@ sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate on
 # Screensaver Settings
 defaults -currentHost write com.apple.screensaver showClock -int 0
 
-# screenshots
+# Screenshots
 defaults write com.apple.screencapture disable-shadow -bool false
 defaults write com.apple.screencapture location -string "$WD"
 defaults write com.apple.screencapture type -string "png"
@@ -148,11 +143,6 @@ killall SystemUIServer
 
 # Quicker Window Resizing
 defaults -currentHost write -g NSWindowResizeTime -float 0.05
-
-# App Store Update freq
-defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 2
-defaults write com.apple.SoftwareUpdate AutomaticCheckEnabled -bool true
-defaults write com.apple.SoftwareUpdate AutomaticDownload -int 1 # Download newly available updates in background
 
 defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true # Prevent Photos from opening automatically when devices are plugged in
 defaults write com.apple.CrashReporter DialogType -string "none"             # Disable the crash reporter
@@ -164,8 +154,11 @@ sudo pmset sleep 1         # will sleep when displays are off
 sudo pmset autorestart 0   # restart on power failure
 sudo pmset womp 1          # Wake for network access
 
-# do not save GPG key in the keychains
-defaults write org.gpgtools.common DisableKeychain -bool yes
+# enable "displays have separated spaces" (required for tiling apps)
+defaults write com.apple.spaces spans-displays -int 0
+
+# create "Untitled" file instead of open dialog
+defaults write -g NSShowAppCentricOpenPanelInsteadOfUntitledFile -bool false
 
 #───────────────────────────────────────────────────────────────────────────────
 # DOCK (Hot corners)
@@ -188,16 +181,17 @@ defaults write com.apple.Safari HomePage -string "about:blank"           # faste
 defaults write com.apple.Safari DownloadsPath -string "$HOME/Desktop"    # Download path
 
 #───────────────────────────────────────────────────────────────────────────────
-# enable "displays have separated spaces" (required for tiling apps)
-defaults write com.apple.spaces spans-displays -int 0
-
-#───────────────────────────────────────────────────────────────────────────────
 # APP STORE
 defaults write com.apple.appstore InAppReviewEnabled -bool false
 defaults write com.apple.commerce AutoUpdate -bool false
 
+# App Store Update freq
+defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 2
+defaults write com.apple.SoftwareUpdate AutomaticCheckEnabled -bool true
+defaults write com.apple.SoftwareUpdate AutomaticDownload -int 1 # Download newly available updates in background
+
 #───────────────────────────────────────────────────────────────────────────────
-# Archive Utility
+# ARCHIVE UTILITY
 # shellcheck disable=2088
 defaults write com.apple.archiveutility dearchive-move-after -string '~/.Trash'
 defaults write com.apple.archiveutility archive-reveal-after -int 1
