@@ -6,7 +6,6 @@ return {
 	settings = {
 		yaml = {
 			format = {
-				enable = true,
 				printWidth = 100,
 				proseWrap = "always",
 			},

@@ -98,21 +98,20 @@ end
 
 -- Simplified implementation of `coerce.nvim`
 function M.camelSnakeLspRename()
-  local cword = vim.fn.expand("<cword>")
-  -- If the word uses snake_case, convert to camelCase
-  local snakePattern = "_(%w)"
-  -- If the word uses camelCase, convert to snake_case
-  local camelPattern = "([%l%d])(%u)"
+	local cword = vim.fn.expand("<cword>")
+	local snakePattern = "_(%w)"
+	local camelPattern = "([%l%d])(%u)"
 
-  if cword:find(snakePattern) then
-    local camelCased = cword:gsub(snakePattern, function(c1) return c1:upper() end)
-    vim.lsp.buf.rename(camelCased)
-  elseif cword:find(camelPattern) then
-    local snake_cased = cword:gsub(camelPattern, "%1_%2"):lower()
-    vim.lsp.buf.rename(snake_cased)
-  else
-    vim.notify("Neither snake_case nor camelCase: " .. cword, vim.log.levels.WARN, { title = "LSP Rename" })
-  end
+	if cword:find(snakePattern) then
+		local camelCased = cword:gsub(snakePattern, function(c1) return c1:upper() end)
+		vim.lsp.buf.rename(camelCased)
+	elseif cword:find(camelPattern) then
+		local snake_cased = cword:gsub(camelPattern, "%1_%2"):lower()
+		vim.lsp.buf.rename(snake_cased)
+	else
+		local msg = "Neither snake_case nor camelCase: " .. cword
+		vim.notify(msg, vim.log.levels.WARN, { title = "LSP Rename" })
+	end
 end
 
 function M.toggleTitleCase()
@@ -316,7 +315,7 @@ function M.formatWithFallback()
 		-- some LSPs trigger folding after formatting
 		vim.schedule(function() vim.cmd.normal { "zv", bang = true } end)
 	elseif #formattingLsps > 1 then
-		local lspNames = vim.iter(formattingLsps):map(function(client) return client.name end):join(", ")
+		local lspNames = vim.iter(formattingLsps):map(function(cl) return cl.name end):join(", ")
 		local msg = "Aborting. Multiple formatting LSPs found:\n " .. lspNames
 		vim.notify(msg, vim.log.levels.WARN, notifyOpts)
 	elseif #formattingLsps == 0 then
@@ -341,14 +340,11 @@ function M.lspCapabilities()
 		format_item = function(client) return client.name end,
 	}, function(client)
 		if not client then return end
-		local info = {
-			config = client.config,
-			capabilities = client.capabilities,
-			server_capabilities = client.server_capabilities,
-		}
-		local opts = { icon = "󱈄", title = client.name .. " capabilities", ft = "lua" }
-		local header = "-- For a full view, open in notification history.\n"
-		vim.notify(header .. vim.inspect(info), vim.log.levels.DEBUG, opts)
+		vim.notify(
+			vim.inspect(vim.lsp.config[client.name]),
+			vim.log.levels.DEBUG,
+			{ icon = "󱈄", title = client.name .. " capabilities", ft = "lua" }
+		)
 	end)
 end
 
