@@ -70,16 +70,18 @@ end
 --------------------------------------------------------------------------------
 
 -- AUTO-CLEANUP
-vim.api.nvim_create_autocmd("FocusLost", {
-	desc = "User: Auto-cleanup. Once a week, on first `FocusLost`, delete older files.",
-	once = true,
-	callback = function()
-		if os.date("%a") == "Mon" or jit.os == "OSX" then
-			vim.system { "find", vim.o.undodir, "-mtime", "+15d", "-delete" }
-			vim.system { "find", vim.lsp.log.get_filename(), "-size", "+20M", "-delete" }
-		end
-	end,
-})
+if jit.os == "OSX" then
+	vim.api.nvim_create_autocmd("FocusLost", {
+		desc = "User: Auto-cleanup. Once a week, on first `FocusLost`, delete older files.",
+		once = true,
+		callback = function()
+			if os.date("%a") == "Mon" then
+				vim.system { "find", vim.o.undodir, "-mtime", "+15d", "-delete" }
+				vim.system { "find", vim.lsp.log.get_filename(), "-size", "+20M", "-delete" }
+			end
+		end,
+	})
+end
 
 --------------------------------------------------------------------------------
 -- AUTO-SAVE
@@ -344,16 +346,19 @@ vim.api.nvim_create_autocmd({ "BufReadPost", "BufNew" }, {
 -- 1. nvim 0.10+
 -- 2. `comment` Tresitter parser (`:TSInstall comment`) & active parser for the
 -- current buffer (e.g., in a lua buffer, the lua parser is required)
--- 3. Nerdfont icons
+-- 3. Font with Nerdfont glyphs
 
 local favicons = {
-	github = "",
-	neovim = "",
-	stackoverflow = "󰓌",
-	reddit = "",
 	apple = "",
+	github = "",
+	google = "",
 	microsoft = "",
+	neovim = "",
 	openai = "",
+	reddit = "",
+	stackoverflow = "󰓌",
+	ycombinator = "",
+	youtube = "",
 }
 
 local function addFavicons(bufnr)
@@ -419,7 +424,6 @@ local function luckyIndent(bufnr)
 	if vim.bo[bufnr].ft == "markdown" then
 		if not spaces then return end -- no indented line
 		if #spaces == 2 then return end -- 2 space indents from hardwrap, not real indent
-		return
 	end
 
 	-- apply if needed
@@ -512,32 +516,22 @@ end
 --------------------------------------------------------------------------------
 
 -- MACROS
--- add sound & change cursorline color while recording
-do
+-- add sound while recording
+if jit.os == "OSX" then
 	local function playSound(file)
-		if jit.os ~= "OSX" then return end
 		local soundDir =
 			"/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/"
 		vim.system { "afplay", soundDir .. file }
 	end
 
-	local cursorlineBg
-
 	vim.api.nvim_create_autocmd("RecordingEnter", {
 		desc = "User: Macro recording utilities (1/2)",
-		callback = function()
-			cursorlineBg = vim.api.nvim_get_hl(0, { name = "CursorLine" }).bg
-			vim.api.nvim_set_hl(0, "CursorLine", { link = "DiffDelete" })
-			playSound("begin_record.caf") -- typos: ignore-line
-		end,
+		callback = function() playSound("begin_record.caf") end, -- typos: ignore-line
 	})
 
 	vim.api.nvim_create_autocmd("RecordingLeave", {
 		desc = "User: Macro recording utilities (2/2)",
-		callback = function()
-			vim.api.nvim_set_hl(0, "CursorLine", { bg = cursorlineBg })
-			playSound("end_record.caf") -- typos: ignore-line
-		end,
+		callback = function() playSound("end_record.caf") end, -- typos: ignore-line
 	})
 end
 
