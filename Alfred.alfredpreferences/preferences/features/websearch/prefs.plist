@@ -26,6 +26,17 @@
 			<key>url</key>
 			<string>https://www.urbandictionary.com/define.php?term={query}</string>
 		</dict>
+		<key>26ACAC4A-35A8-452D-91BD-82EB22FF544B</key>
+		<dict>
+			<key>enabled</key>
+			<true/>
+			<key>keyword</key>
+			<string>ai</string>
+			<key>text</key>
+			<string>ChatGPT: {query}</string>
+			<key>url</key>
+			<string>https://chatgpt.com/?q={query}</string>
+		</dict>
 		<key>295774FE-716A-4B62-87C6-F36AB22838CC</key>
 		<dict>
 			<key>enabled</key>
@@ -125,17 +136,6 @@
 			<key>url</key>
 			<string>https://www.tvtime.com/discover/search?q={query}</string>
 		</dict>
-		<key>97974E2F-27A2-48E4-88F3-339C26BEDA6B</key>
-		<dict>
-			<key>enabled</key>
-			<true/>
-			<key>keyword</key>
-			<string>icon</string>
-			<key>text</key>
-			<string>DuckDuckGo images: "{query}"</string>
-			<key>url</key>
-			<string>https://duckduckgo.com/?q={query}%20icon&amp;iar=images</string>
-		</dict>
 		<key>B0E74EF5-D489-4FA0-9F57-0B056365432B</key>
 		<dict>
 			<key>enabled</key>
@@ -176,7 +176,7 @@
 			<key>keyword</key>
 			<string>code</string>
 			<key>text</key>
-			<string>📄 GitHub Code Search: "{query}"</string>
+			<string>📄 GitHub File Search: "{query}"</string>
 			<key>url</key>
 			<string>https://github.com/search?type=code&amp;q=path:/\/{query}$/</string>
 		</dict>

@@ -48,7 +48,7 @@ keymap({ "n", "x" }, "k", "gk")
 -- (not mapping in op-pending, since using custom textobjects for those keys)
 keymap({ "n", "x" }, "H", "0^", { desc = "󰲠 char" }) -- scroll fully to the left
 keymap("o", "H", "^", { desc = "󰲠 char" })
-keymap({ "n", "x" }, "L", "$", { desc = "󰬓 char" })
+keymap({ "n", "x" }, "L", "$", { desc = "󰬓 char", remap = true }) -- remap for `nvim-origami` overload of `$`
 keymap({ "n", "x" }, "J", "6gj", { desc = "6j" })
 keymap({ "n", "x" }, "K", "6gk", { desc = "6k" })
 
