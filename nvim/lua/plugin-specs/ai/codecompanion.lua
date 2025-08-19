@@ -5,7 +5,7 @@
 -- https://platform.openai.com/usage
 -- https://platform.openai.com/docs/models
 local model = "gpt-5-nano"
-local reasoning_effort = "minimal" -- GPT5 models all reason, "medium" is too slow
+local reasoning_effort = "minimal" -- all GPT-5 models reason, "medium" is too slow
 
 --------------------------------------------------------------------------------
 
@@ -85,7 +85,6 @@ local ccSpec = {
 		{ "<leader>af", function() require("codecompanion").prompt("fix") end, mode = "x", desc = " Fix" },
 		-- my own prompts
 		{ "<leader>as", function() require("codecompanion").prompt("simplify") end, mode = "x", desc = " Simplify" },
-		{ "<leader>ar", function() require("codecompanion").prompt("review_unstaged") end, desc = " Review unstaged changes" },
 		-- stylua: ignore end
 	},
 	opts = {
@@ -173,30 +172,6 @@ local ccSpec = {
 						content = function(ctx)
 							-- stylua: ignore
 							return require("codecompanion.helpers.actions").get_code(ctx.start_line, ctx.end_line)
-						end,
-						opts = { contains_code = true },
-					},
-				},
-			},
-			["Review unstaged changes"] = {
-				strategy = "chat",
-				description = "Review the currently unstaged changes, and suggest improvements.",
-				opts = {
-					short_name = "review_unstaged",
-					auto_submit = true,
-				},
-				prompts = {
-					{
-						role = "system",
-						content = function(_ctx)
-							return "The following diff is of a commit. Review the changes."
-						end,
-					},
-					{
-						role = "user",
-						content = function(_ctx)
-							local diff = vim.system({ "git", "diff" }):wait().stdout
-							return "```diff\n" .. diff .. "\n```"
 						end,
 						opts = { contains_code = true },
 					},
