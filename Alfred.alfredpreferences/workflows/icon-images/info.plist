@@ -112,16 +112,6 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>68F706E8-BDA8-44E3-8973-752C6B0FC50D</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
 				<string>1A28A029-A380-4B80-82C1-AB1863D8C0C6</string>
 				<key>modifiers</key>
 				<integer>0</integer>
@@ -329,12 +319,12 @@
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
-				<string>https://icons8.com/icons/set/{query}</string>
+				<string>https://www.flaticon.com/search?word={query}</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
-			<string>68F706E8-BDA8-44E3-8973-752C6B0FC50D</string>
+			<string>1A28A029-A380-4B80-82C1-AB1863D8C0C6</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -401,27 +391,6 @@
 			<string>alfred.workflow.trigger.action</string>
 			<key>uid</key>
 			<string>A127DB2B-430B-415F-9B6D-9A9EE315AD8E</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>https://www.flaticon.com/search?word={query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>1A28A029-A380-4B80-82C1-AB1863D8C0C6</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -567,7 +536,7 @@
 			<key>xpos</key>
 			<real>580</real>
 			<key>ypos</key>
-			<real>320</real>
+			<real>290</real>
 		</dict>
 		<key>0A57AF60-AF83-4456-BA6B-C5074E68B218</key>
 		<dict>
@@ -576,7 +545,7 @@
 			<key>xpos</key>
 			<real>200</real>
 			<key>ypos</key>
-			<real>635</real>
+			<real>575</real>
 		</dict>
 		<key>137828DD-B0F7-49AE-B3AC-780BB2E512BE</key>
 		<dict>
@@ -585,7 +554,7 @@
 			<key>xpos</key>
 			<real>445</real>
 			<key>ypos</key>
-			<real>500</real>
+			<real>440</real>
 		</dict>
 		<key>1566EF2D-397E-471B-90D6-4B8BD78958B5</key>
 		<dict>
@@ -596,7 +565,7 @@
 			<key>xpos</key>
 			<real>375</real>
 			<key>ypos</key>
-			<real>530</real>
+			<real>470</real>
 		</dict>
 		<key>1A28A029-A380-4B80-82C1-AB1863D8C0C6</key>
 		<dict>
@@ -605,7 +574,7 @@
 			<key>xpos</key>
 			<real>225</real>
 			<key>ypos</key>
-			<real>345</real>
+			<real>240</real>
 		</dict>
 		<key>2E49643A-6373-49CB-BC8B-EE44C520C061</key>
 		<dict>
@@ -614,7 +583,7 @@
 			<key>xpos</key>
 			<real>200</real>
 			<key>ypos</key>
-			<real>500</real>
+			<real>440</real>
 		</dict>
 		<key>3A193819-CC2F-4AC7-8AB0-EC5571B7878B</key>
 		<dict>
@@ -625,16 +594,7 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>635</real>
-		</dict>
-		<key>68F706E8-BDA8-44E3-8973-752C6B0FC50D</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>12</integer>
-			<key>xpos</key>
-			<real>225</real>
-			<key>ypos</key>
-			<real>235</real>
+			<real>575</real>
 		</dict>
 		<key>7CF8B97A-6865-489C-8B65-3C892683D59E</key>
 		<dict>
@@ -674,7 +634,7 @@
 			<key>xpos</key>
 			<real>410</real>
 			<key>ypos</key>
-			<real>320</real>
+			<real>290</real>
 		</dict>
 		<key>BCDE5A63-BF29-4CD2-B482-D2A56CD510A1</key>
 		<dict>
@@ -694,7 +654,7 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>500</real>
+			<real>440</real>
 		</dict>
 		<key>E762EDDE-643D-48E5-B773-C89606259F8B</key>
 		<dict>
@@ -703,7 +663,7 @@
 			<key>xpos</key>
 			<real>745</real>
 			<key>ypos</key>
-			<real>320</real>
+			<real>290</real>
 		</dict>
 		<key>F0335C72-7DC6-4793-ADCD-3909E4CDE001</key>
 		<dict>
@@ -721,7 +681,7 @@
 			<key>xpos</key>
 			<real>580</real>
 			<key>ypos</key>
-			<real>170</real>
+			<real>155</real>
 		</dict>
 		<key>FF1B8F7A-4E33-4A50-A895-F3B34197EB14</key>
 		<dict>
@@ -732,7 +692,7 @@
 			<key>xpos</key>
 			<real>410</real>
 			<key>ypos</key>
-			<real>170</real>
+			<real>155</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

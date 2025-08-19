@@ -211,6 +211,21 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>command</key>
+				<integer>8</integer>
+				<key>confirm</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.systemcommand</string>
+			<key>uid</key>
+			<string>96BEB152-706D-407E-882B-113E7E4821F5</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -228,21 +243,6 @@
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
 			<string>6594A058-1046-48E9-82E3-FE0574D679D5</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>command</key>
-				<integer>8</integer>
-				<key>confirm</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.systemcommand</string>
-			<key>uid</key>
-			<string>96BEB152-706D-407E-882B-113E7E4821F5</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
