@@ -64,20 +64,14 @@ return {
 			marks = false,
 			registers = false,
 			spelling = { enabled = false },
-			presets = {
-				motions = false,
-				g = false,
-				text_objects = false,
-				z = false,
-				nav = false,
-				operator = false,
-			},
+			-- stylua: ignore
+			presets = { motions = false, g = false, text_objects = false, z = false, nav = false, operator = false },
 		},
 		filter = function(map)
 			-- need to remove comment mapping shere, since they are nvim-builtins
 			-- that do still show up with disabled whichkey-preset
 			-- stylua: ignore
-			local nvimBultins = { "<C-W><C-D>", "<C-W>d", "gc", "gcc", "gra", "gri", "grn", "grr", "g~", "gO" }
+			local nvimBultins = { "<C-W><C-D>", "<C-W>d", "gc", "gcc", "gra", "gri", "grn", "grr", "grt", "g~", "gO" }
 			if vim.tbl_contains(nvimBultins, map.lhs) then return false end
 
 			return map.desc ~= nil -- only include mappings that have a description
@@ -102,4 +96,20 @@ return {
 		},
 		show_help = false,
 	},
+
+	config = function(_, opts)
+		-- add count to whichkey https://www.reddit.com/r/neovim/comments/1mudxnf/comment/n9lntjz/
+		local orig_view_item = require("which-key.view").item
+		require("which-key.view").item = function(node, view_opts) ---@diagnostic disable-line: duplicate-set-field
+			local count = node:count()
+			-- HACK set the description but if you navigate back and forth in whichkey,
+			-- it'll try to adding the count again so only do it if it doesn't end in )
+			if node.desc and count > 0 and node.desc:sub(-1) ~= ")" then
+				node.desc = node.desc .. " (" .. count .. ")"
+			end
+			return orig_view_item(node, view_opts)
+		end
+
+		require("which-key").setup(opts)
+	end,
 }

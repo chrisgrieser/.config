@@ -130,15 +130,7 @@ local ccSpec = {
 				return require("codecompanion.adapters").extend("openai", {
 					env = { api_key = ("cmd:cat %q"):format(apiKeyFile) },
 					schema = {
-						model = {
-							default = model,
-							-- PENDING https://github.com/olimorris/codecompanion.nvim/pull/1993
-							choices = {
-								["gpt-5-nano"] = { opts = { has_vision = true, can_reason = true, stream = true } },
-								["gpt-5-mini"] = { opts = { has_vision = true, can_reason = true, stream = false } },
-								["gpt-5"] = { opts = { has_vision = true, can_reason = true, stream = false } },
-							},
-						},
+						model = { default = model },
 						reasoning_effort = { default = reasoning_effort },
 					},
 				})
@@ -188,8 +180,6 @@ return {
 	{ -- modifications to render-markdown config
 		"MeanderingProgrammer/render-markdown.nvim",
 		ft = { "markdown", "codecompanion" },
-		opts = {
-			file_types = { "markdown", "codecompanion" },
-		},
+		opts = { file_types = { "markdown", "codecompanion" } },
 	},
 }
