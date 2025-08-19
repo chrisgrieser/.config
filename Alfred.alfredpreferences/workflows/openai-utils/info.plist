@@ -5,7 +5,7 @@
 	<key>bundleid</key>
 	<string>de.chris-grieser.chatgpt</string>
 	<key>category</key>
-	<string>⭐️</string>
+	<string>❇️</string>
 	<key>connections</key>
 	<dict>
 		<key>25C1C508-6AFF-4506-8007-F15EB4686CD8</key>
@@ -502,6 +502,27 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>🤖 OpenAI Usage</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>2BE9E16C-CD19-489B-97FC-4FB2B71A237E</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>behaviour</key>
 				<integer>2</integer>
 				<key>fontmode</key>
@@ -575,27 +596,6 @@
 			<string>F28BB9DD-676B-4740-8C3B-BBC15BABB8EB</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>🤖 OpenAI Usage</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>2BE9E16C-CD19-489B-97FC-4FB2B71A237E</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -699,9 +699,9 @@
 		<key>2BE9E16C-CD19-489B-97FC-4FB2B71A237E</key>
 		<dict>
 			<key>xpos</key>
-			<real>555</real>
+			<real>560</real>
 			<key>ypos</key>
-			<real>700</real>
+			<real>535</real>
 		</dict>
 		<key>4109C114-1983-4BE0-BDD0-825D706B8021</key>
 		<dict>
@@ -730,7 +730,7 @@
 			<key>xpos</key>
 			<real>225</real>
 			<key>ypos</key>
-			<real>825</real>
+			<real>790</real>
 		</dict>
 		<key>4D7587C7-BB72-4058-9D6F-0035C68ED405</key>
 		<dict>
@@ -755,9 +755,9 @@
 		<key>5FB5EEDF-FF6D-41A7-9C56-4864E641E9D2</key>
 		<dict>
 			<key>xpos</key>
-			<real>555</real>
+			<real>560</real>
 			<key>ypos</key>
-			<real>925</real>
+			<real>795</real>
 		</dict>
 		<key>6261E02D-805C-4920-BEA0-D4F39B6A8873</key>
 		<dict>
@@ -768,21 +768,21 @@
 			<key>xpos</key>
 			<real>225</real>
 			<key>ypos</key>
-			<real>570</real>
+			<real>535</real>
 		</dict>
 		<key>6ED60925-2459-424C-A17D-24F317903D98</key>
 		<dict>
 			<key>xpos</key>
-			<real>555</real>
+			<real>560</real>
 			<key>ypos</key>
-			<real>810</real>
+			<real>665</real>
 		</dict>
 		<key>B542153D-57DD-436E-AFB9-C0B4537C3EE2</key>
 		<dict>
 			<key>xpos</key>
 			<real>225</real>
 			<key>ypos</key>
-			<real>700</real>
+			<real>665</real>
 		</dict>
 		<key>BEBCE35B-07FA-4179-B3AC-EF372ED6DDAC</key>
 		<dict>
@@ -802,14 +802,14 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>435</real>
+			<real>400</real>
 		</dict>
 		<key>DCED6A03-CE9B-4D1D-8BC2-9A148FDA06EF</key>
 		<dict>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>700</real>
+			<real>665</real>
 		</dict>
 		<key>E10230C4-C675-47BC-94C3-F2708E565938</key>
 		<dict>
@@ -820,7 +820,7 @@
 			<key>xpos</key>
 			<real>225</real>
 			<key>ypos</key>
-			<real>435</real>
+			<real>400</real>
 		</dict>
 		<key>F160631A-2850-4CCB-BB11-88AB501E7648</key>
 		<dict>
@@ -840,7 +840,7 @@
 			<key>xpos</key>
 			<real>365</real>
 			<key>ypos</key>
-			<real>700</real>
+			<real>665</real>
 		</dict>
 		<key>F4B26A4D-3A42-4628-8CF3-196137DA3932</key>
 		<dict>
