@@ -302,7 +302,6 @@ end
 function M.formatWithFallback()
 	local formattingLsps = vim.lsp.get_clients { method = "textDocument/formatting", bufnr = 0 }
 	local notifyOpts = { title = "Format", icon = "󱉯" }
-	local lspNames = vim.iter(formattingLsps):map(function(client) return client.name end):join(", ")
 
 	if #formattingLsps == 1 then
 		-- write file for efm-formatters that don't use stdin
@@ -315,8 +314,8 @@ function M.formatWithFallback()
 
 		-- some LSPs trigger folding after formatting
 		vim.schedule(function() vim.cmd.normal { "zv", bang = true } end)
-		vim.notify(("with `%s`"):format(lspNames), nil, notifyOpts)
 	elseif #formattingLsps > 1 then
+		local lspNames = vim.iter(formattingLsps):map(function(client) return client.name end):join(", ")
 		local msg = "Aborting. Multiple formatting LSPs found:\n " .. lspNames
 		vim.notify(msg, vim.log.levels.WARN, notifyOpts)
 	elseif #formattingLsps == 0 then
@@ -324,7 +323,7 @@ function M.formatWithFallback()
 		vim.cmd([[% substitute _\(\n\n\)\n\+_\1_e]]) -- remove duplicate blank lines
 		vim.cmd([[silent! /^\%(\n*.\)\@!/,$ delete]]) -- remove blanks at end of file
 
-		vim.notify("with fallback", nil, notifyOpts)
+		vim.notify("Formatting with fallback", nil, notifyOpts)
 	end
 end
 

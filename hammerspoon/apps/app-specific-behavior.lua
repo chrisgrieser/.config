@@ -52,19 +52,10 @@ end):start()
 M.wf_scripteditor = wf
 	.new("Script Editor")
 	:subscribe(wf.windowCreated, function(newWin)
-		-- skip new file creation dialog
-		if newWin:title() == "Open" then
-			hs.osascript.applescript('tell application "Script Editor" to make new document')
-
-		-- resize window, paste, and format
-		elseif newWin:title() == "Untitled" then
-			wu.moveResize(newWin, wu.middleHalf)
+		-- paste, and format
+		if newWin:title() == "Untitled" then
 			hs.eventtap.keyStroke({ "cmd" }, "v")
 			hs.osascript.javascript('Application("Script Editor").documents()[0].checkSyntax()')
-
-		--if it's an AppleScript Dictionary, just resize window
-		elseif newWin:title():find("%.sdef$") then
-			wu.moveResize(newWin, wu.middleHalf)
 		end
 	end)
 	-- fix copypasting line breaks into other apps
@@ -134,22 +125,22 @@ M.systemw_mastodon = c.new(function(event)
 end):start()
 
 --------------------------------------------------------------------------------
--- BRAVE BROWSER
 
 -- BOOKMARKS SYNCED TO CHROME BOOKMARKS
 -- so Alfred can pick up the Bookmarks without extra keyword
+do
+	local chromeBookmarks = os.getenv("HOME")
+		.. "/Library/Application Support/Google/Chrome/Default/Bookmarks"
 
-local chromeBookmarks = os.getenv("HOME")
-	.. "/Library/Application Support/Google/Chrome/Default/Bookmarks"
+	-- The pathwatcher is triggered by changes of the *target*, while this function
+	-- touches the *symlink itself* due to `-h`. Thus, there is no need to affect
+	-- the symlink target here.
+	local function touchSymlink() hs.execute(("touch -h %q"):format(chromeBookmarks)) end
 
--- The pathwatcher is triggered by changes of the *target*, while this function
--- touches the *symlink itself* due to `-h`. Thus, there is no need to affect
--- the symlink target here.
-local function touchSymlink() hs.execute(("touch -h %q"):format(chromeBookmarks)) end
-
--- sync on system start & when bookmarks are changed
-if u.isSystemStart() then touchSymlink() end
-M.pathw_bookmarks = hs.pathwatcher.new(chromeBookmarks, touchSymlink):start()
+	-- sync on system start & when bookmarks are changed
+	if u.isSystemStart() then touchSymlink() end
+	M.pathw_bookmarks = hs.pathwatcher.new(chromeBookmarks, touchSymlink):start()
+end
 
 --------------------------------------------------------------------------------
 

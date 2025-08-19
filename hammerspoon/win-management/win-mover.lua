@@ -17,7 +17,6 @@ M.wf_pseudoMax = wf.new({
 	"Slack",
 	"Obsidian",
 	"zoom.us",
-	"Preview",
 	"Highlights",
 	"Signal",
 	"Karabiner-Elements",
@@ -27,6 +26,16 @@ M.wf_pseudoMax = wf.new({
 		local size = env.isProjector() and hs.layout.maximized or wu.pseudoMax
 		wu.moveResize(win, size)
 	end)
+
+M.wf_middle_half = wf.new({
+	"TextEdit",
+	"Preview",
+	"Script Editor",
+	"Reminders",
+	"System Settings",
+})
+	:setOverrideFilter({ fullscreen = false })
+	:subscribe(wf.windowCreated, function(win) wu.moveResize(win, wu.middleHalf) end)
 
 --------------------------------------------------------------------------------
 
