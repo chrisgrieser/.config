@@ -98,20 +98,21 @@ end
 
 -- Simplified implementation of `coerce.nvim`
 function M.camelSnakeLspRename()
-	local cword = vim.fn.expand("<cword>")
-	local snakePattern = "_(%w)"
-	local camelPattern = "([%l%d])(%u)"
+  local cword = vim.fn.expand("<cword>")
+  -- If the word uses snake_case, convert to camelCase
+  local snakePattern = "_(%w)"
+  -- If the word uses camelCase, convert to snake_case
+  local camelPattern = "([%l%d])(%u)"
 
-	if cword:find(snakePattern) then
-		local camelCased = cword:gsub(snakePattern, function(c1) return c1:upper() end)
-		vim.lsp.buf.rename(camelCased)
-	elseif cword:find(camelPattern) then
-		local snake_cased = cword:gsub(camelPattern, "%1_%2"):lower()
-		vim.lsp.buf.rename(snake_cased)
-	else
-		local msg = "Neither snake_case nor camelCase: " .. cword
-		vim.notify(msg, vim.log.levels.WARN, { title = "LSP Rename" })
-	end
+  if cword:find(snakePattern) then
+    local camelCased = cword:gsub(snakePattern, function(c1) return c1:upper() end)
+    vim.lsp.buf.rename(camelCased)
+  elseif cword:find(camelPattern) then
+    local snake_cased = cword:gsub(camelPattern, "%1_%2"):lower()
+    vim.lsp.buf.rename(snake_cased)
+  else
+    vim.notify("Neither snake_case nor camelCase: " .. cword, vim.log.levels.WARN, { title = "LSP Rename" })
+  end
 end
 
 function M.toggleTitleCase()

@@ -4,6 +4,9 @@
 
 -- https://platform.openai.com/usage
 -- https://platform.openai.com/docs/models
+
+-- gpt5 too slow https://community.openai.com/t/gpt-5-is-very-slow-compared-to-4-1-responses-api/1337859
+
 -- local model = "gpt-4.1-mini"
 local model = "gpt-5-nano"
 local reasoning_effort = "minimal" -- GPT5 models all reason, "medium" is too slow
@@ -132,8 +135,14 @@ local ccSpec = {
 				return require("codecompanion.adapters").extend("openai", {
 					env = { api_key = ("cmd:cat %q"):format(apiKeyFile) },
 					schema = {
-						model = { default = model },
-						reasoning_effort = { default = reasoning_effort }
+						model = {
+							default = model,
+							choices = {
+								["gpt-5-nano"] = { opts = { has_vision = true, can_reason = true } },
+								["gpt-5-mini"] = { opts = { has_vision = true, can_reason = true } },
+							},
+						},
+						reasoning_effort = { default = reasoning_effort },
 					},
 					opts = {
 						stream = model:find("gpt%-5"), -- GPT5-models require org. verification if streaming
