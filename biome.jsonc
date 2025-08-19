@@ -24,7 +24,6 @@
 				"noYodaExpression": "on",
 				"useAtIndex": "on",
 				"useConsistentArrayType": "on",
-				"useConsistentObjectDefinitions": "on",
 				"useDefaultSwitchClause": "on",
 				"useExportsLast": "on",
 				"useFilenamingConvention": "on",

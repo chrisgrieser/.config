@@ -76,19 +76,6 @@ M.wf_scripteditor = wf
 	end)
 
 --------------------------------------------------------------------------------
--- TEXTEDIT
-M.wf_textedit = wf.new("TextEdit"):subscribe(wf.windowCreated, function(newWin)
-	-- skip new file creation dialog
-	if newWin:title() == "Open" then
-		hs.osascript.applescript('tell application "TextEdit" to make new document')
-
-	-- resize window
-	else
-		wu.moveResize(newWin, wu.middleHalf)
-	end
-end)
-
---------------------------------------------------------------------------------
 -- MIMESTREAM
 
 -- 1st window = mail-list window => pseudo-maximized for more space
