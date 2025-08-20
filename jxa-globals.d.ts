@@ -91,7 +91,7 @@ declare type PathObj = { toString(): string };
 declare function Path(filepath: string): PathObj;
 
 declare type ReminderList = {
-	make(any);
+	make(options: unknown): Reminder;
 	reminders: {
 		push(newReminder: Reminder): void;
 		whose(options: {
@@ -101,7 +101,7 @@ declare type ReminderList = {
 				_greaterThan?: Date;
 			};
 			completed?: boolean;
-		});
+		}): Reminder[];
 		(): Reminder[];
 	};
 };
@@ -137,8 +137,8 @@ declare const Application: {
 		name: "System Events",
 	): MacAppObj & {
 		aliases: Record<string, FinderItem>; // hashmap of all paths, e.g. .aliases["/some/path/file.txt"]
-		keystroke(key: string, modifiers?: { using: string[] });
-		keyCode(keycode: number, modifiers?: { using: string[] });
+		keystroke(key: string, modifiers?: { using: string[] }): void;
+		keyCode(keycode: number, modifiers?: { using: string[] }): void;
 		// biome-ignore lint/suspicious/noExplicitAny: later
 		applicationProcesses: any;
 		// biome-ignore lint/suspicious/noExplicitAny: later
@@ -207,11 +207,34 @@ declare const Application: {
 
 declare const ObjC: {
 	import: (package: "stdlib" | "Foundation" | "AppKit" | "IOBluetooth") => void;
-	// biome-ignore lint/suspicious/noExplicitAny: not set by me
-	unwrap: (string: string) => string | any;
+	unwrap: (string: string) => string;
 };
 
 declare function delay(seconds: number): void;
 
 // biome-ignore lint/suspicious/noExplicitAny: not set by me
 declare const $: any;
+
+// // biome-ignore-start lint/suspicious/noExplicitAny: not set by me
+// // biome-ignore-start lint/style/useNamingConvention: not set by me
+// declare const $: {
+// 	NSWorkspace: any; // REQUIRES `ObjC.import("Foundation")`
+// 	NSPasteboard: any; // REQUIRES `ObjC.import("AppKit")`
+// 	NSFilenamesPboardType: any;
+// 	(paths: string[]): any;
+// 	IOBluetoothDevice: any; // REQUIRES `ObjC.import("IOBluetooth")`
+//
+// 	// REQUIRES `ObjC.import("stdlib")`
+// 	getenv: (envVar: string) => string;
+// 	NSFileManager: any;
+// 	NSUTF8StringEncoding: any;
+// 	NSFileModificationDate: any;
+// 	NSProcessInfo: any;
+// 	NSURL: any;
+// 	NSString: any;
+// 	NSData: any;
+// 	NSLocale: any;
+// 	NSLocaleCountryCode: any;
+// };
+// // biome-ignore-end lint/style/useNamingConvention: -
+// // biome-ignore-end lint/suspicious/noExplicitAny: -

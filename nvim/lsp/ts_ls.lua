@@ -55,7 +55,7 @@ local config = {
 			vim.lsp.buf.code_action {
 				filter = function(act) return act.kind ~= "refactor.move" end,
 			}
-		end, { desc = " Template string code action", buffer = bufnr })
+		end, { desc = " Code action", buffer = bufnr })
 	end,
 }
 
