@@ -77,9 +77,8 @@ end
 
 ---@param shouldDarkenDisplay boolean
 local function workLayout(shouldDarkenDisplay)
-	u.defer(0.5, darkmode.autoSwitch)
-	-- defer brightness to adjust to dark/light mode switch
-	if not shouldDarkenDisplay then u.defer(1, autoSetBrightness) end
+	u.defer(0.5, darkmode.autoSwitch) -- defer so ambient sensor is ready
+	if not shouldDarkenDisplay then u.defer(1, autoSetBrightness) end -- defer to adjust to mode switch
 	holeCover.update()
 	dockSwitcher("work")
 
