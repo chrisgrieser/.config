@@ -75,11 +75,11 @@ end
 -------------------------------------------------------------------------------
 -- LAYOUTS
 
----@param displayAlreadyDarkened boolean
-local function workLayout(displayAlreadyDarkened)
-	-- defer setting brightness to adjust to dark/light mode switch
-	darkmode.autoSwitch()
-	if not displayAlreadyDarkened then u.defer(1, autoSetBrightness) end
+---@param shouldDarkenDisplay boolean
+local function workLayout(shouldDarkenDisplay)
+	u.defer(0.5, darkmode.autoSwitch)
+	-- defer brightness to adjust to dark/light mode switch
+	if not shouldDarkenDisplay then u.defer(1, autoSetBrightness) end
 	holeCover.update()
 	dockSwitcher("work")
 
