@@ -492,7 +492,7 @@ keymap(
 	{ "n", "i" },
 	"<D-F>",
 	function() require("personal-plugins.misc").fastWarp("backward") end,
-	{ desc = "󰑮 Fast warp" }
+	{ desc = "󰑮 Fast warp (back)" }
 )
 
 -- MULTI-EDIT
