@@ -12,8 +12,8 @@ if not hasNotificationPlugin then return end
 
 local config = {
 	msgKind = { -- existing kinds: https://neovim.io/doc/user/ui.html#ui-messages
-		ignore = { "return_prompt" },
-		mini = { "bufwrite", "undo", "search_cmd" }, -- more minimal style when using `snacks.notifier`
+		ignore = { "return_prompt", "search_cmd", "undo" },
+		mini = { "bufwrite" }, -- more minimal style when using `snacks.notifier`
 	},
 	notification = { icon = "󰍩" },
 }

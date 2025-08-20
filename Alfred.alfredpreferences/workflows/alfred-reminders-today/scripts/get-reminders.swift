@@ -157,7 +157,7 @@ eventStore.requestFullAccessToReminders { granted, error in
 
 				let aPrio = normalizePriority(a)
 				let bPrio = normalizePriority(b)
-				if aPrio != bPrio { return aPrio < bPrio }
+				if aPrio != bPrio { return aPrio > bPrio }
 
 				let aDueDate = a.dueDateComponents?.date ?? Date.distantFuture
 				let bDueDate = b.dueDateComponents?.date ?? Date.distantFuture

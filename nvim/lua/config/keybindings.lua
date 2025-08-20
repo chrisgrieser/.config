@@ -30,7 +30,7 @@ keymap("n", "<D-,>", function()
 end, { desc = "󰌌 Edit keybindings" })
 
 -- save before quitting (non-unique, since also set by Neovide)
-keymap("n", "<D-q>", "ZZ", { desc = " Save & quit", unique = false })
+keymap("n", "<D-q>", vim.cmd.wqall, { desc = " Save & quit", unique = false })
 
 -- stylua: ignore
 keymap("n", "<leader>pd", function() vim.ui.open(vim.fn.stdpath("data") --[[@as string]]) end, { desc = "󰝰 Local data dir" })
@@ -120,7 +120,7 @@ keymap("n", "~", "v~", { desc = "󰬴 Toggle char case (w/o moving)" })
 keymap("n", "<", function() require("personal-plugins.misc").toggleTitleCase() end, { desc = "󰬴 Toggle lower/Title case" })
 keymap("n", ">", "gUiw", { desc = "󰬴 Uppercase cword" })
 
--- Increment/decrement, or toggle true/false
+-- toggle common words or increment/decrement numbers
 -- stylua: ignore
 keymap("n", "+", function() require("personal-plugins.misc").toggleOrIncrement() end, { desc = "󰐖 Increment/toggle" })
 keymap("n", "ü", "<C-x>", { desc = "󰍵 Decrement" })
