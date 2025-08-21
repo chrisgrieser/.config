@@ -295,6 +295,7 @@
 				<key>relatedApps</key>
 				<array>
 					<string>com.runningwithcrayons.Alfred-Preferences</string>
+					<string>com.neovide.neovide</string>
 				</array>
 				<key>relatedAppsMode</key>
 				<integer>2</integer>
