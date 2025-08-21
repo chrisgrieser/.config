@@ -336,7 +336,8 @@ do
 	local function scrollLspWin(lines)
 		local winid = vim.b.lsp_floating_preview --> stores id of last `vim.lsp`-generated win
 		if not winid or not vim.api.nvim_win_is_valid(winid) then
-			vim.notify("No LSP window found.", vim.log.levels.TRACE, { icon = "" })
+			local msg = "No LSP window found."
+			vim.notify(msg, vim.log.levels.TRACE, { icon = "", title = "Scroll" })
 			return
 		end
 		vim.api.nvim_win_call(winid, function()
