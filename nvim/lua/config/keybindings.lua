@@ -372,6 +372,22 @@ keymap("c", "<BS>", function()
 end, { expr = true, desc = "<BS> does not leave cmdline" })
 
 --------------------------------------------------------------------------------
+
+-- OPEN WEZTERM at cwd
+keymap(
+	{ "n", "x", "i" },
+	"<D-C-t>", -- hyper + t gets registered by neovide as ctrl+t
+	function()
+		if not jit.os == "OSX" then return end
+		vim.system({ "osascript", "-e", 'tell application "WezTerm" to activate' }, {}, function()
+			local stdin = ("cd -q %q && clear"):format(vim.uv.cwd() or "")
+			vim.system({ "wezterm", "cli", "send-text", "--no-paste" }, { stdin = stdin })
+		end)
+	end,
+	{ desc = " Open cwd in WezTerm" }
+)
+
+--------------------------------------------------------------------------------
 -- INSPECT & EVAL
 
 keymap("n", "<leader>ii", vim.cmd.Inspect, { desc = "󱈄 :Inspect" })
