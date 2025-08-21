@@ -69,7 +69,7 @@ end)
 -- TAB & WINDOW TITLE
 
 -- https://wezfurlong.org/wezterm/config/lua/window-events/format-tab-title.html
-wt.on("format-tab-title", function(tab)
+wt.on("format-tab-title", function(tab, _pane, _tabs, _panes, _config)
 	-- title set via `tab:set_title()` or `wezterm cli set-tab-title`
 	if tab.tab_title ~= "" then return " " .. tab.tab_title .. " " end
 
@@ -80,6 +80,13 @@ wt.on("format-tab-title", function(tab)
 	local icon = winTitle == "zsh" and "" or ""
 	local label = winTitle == "zsh" and cwd or winTitle
 	return (" %s %s "):format(icon, label)
+end)
+
+-- nicer window title
+wt.on("format-window-title", function(_tab, _pane, tabs, _panes, _config)
+	local title = "WezTerm"
+	if #tabs > 1 then title = title .. (" (%d tabs)"):format(#tabs) end
+	return title
 end)
 
 --------------------------------------------------------------------------------
