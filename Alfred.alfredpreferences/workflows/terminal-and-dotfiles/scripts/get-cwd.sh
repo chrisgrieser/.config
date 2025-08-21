@@ -11,11 +11,6 @@ elif [[ "$focusedapp" == "md.obsidian" ]]; then
 	vault_name=$(echo "$win_title" | sed -E 's|.* - (.*) - .*|\1|')
 	dir_to_open="$vault_location/$vault_name"
 
-elif [[ "$focusedapp" == "com.neovide.neovide" ]]; then
-	# # REQUIRED `vim.opt.titlestring = "%{expand('%')}"` im nvim config
-	current_file=$(osascript -e 'tell application "System Events" to tell process "neovide" to return name of front window')
-	dir_to_open=$(dirname "$current_file")
-
 fi
 
 # INFO "Alfred Preferences.app" already covered by Alfred workflow devtools

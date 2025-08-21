@@ -28,7 +28,7 @@ brew "zsh-syntax-highlighting"
 
 # APPS
 cask "alfred"
-cask "alt-tab"
+cask "tabtab" # alt-tab not working https://github.com/neovide/neovide/issues/3182
 cask "signal"
 cask "appcleaner"
 cask "brave-browser"

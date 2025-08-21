@@ -60,9 +60,9 @@ vim.api.nvim_create_autocmd("FileType", {
 
 -- ACCESS CWD VIA WINDOW TITLE
 -- (simpler then using `fn.serverstart()` with `nvim --server --remote-expr` )
-vim.opt.title = true
+vim.opt.title = false -- avoid ugly title due to using `TabTab`
 vim.opt.titlelen = 0 -- = do not shorten title
-vim.opt.titlestring = "%{expand('%')}" -- = of current file
+vim.opt.titlestring = "%{getcwd()}"
 
 --------------------------------------------------------------------------------
 -- WRAP
