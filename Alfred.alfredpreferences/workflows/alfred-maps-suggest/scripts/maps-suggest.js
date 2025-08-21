@@ -83,8 +83,8 @@ function run(argv) {
 
 		const addressStr = address.join(", ");
 		const addressDisplay = address.slice(1).join(", "); // skip name from display
-		const url2 = mapProvider[mapProvider2] + encodeURIComponent(addressStr);
 		const url1 = mapProvider[mapProvider1] + encodeURIComponent(addressStr);
+		const url2 = mapProvider[mapProvider2] + encodeURIComponent(addressStr);
 
 		// SIC osm coordinates are long/lat, even though mapping apps expect
 		// lat/long, thus needs to be reversed
@@ -104,6 +104,13 @@ function run(argv) {
 			variables: { address: addressStr, url1: url1, url2: url2, coordinates: coordinates },
 		};
 	});
+
+	// manual search fallback
+	items.push({
+		title: `Search for "${query}"`,
+		subtitle: mapProvider1,
+		arg: mapProvider[mapProvider1] + encodeURIComponent(query),
+	})
 
 	return JSON.stringify({ items: items });
 }
