@@ -1,8 +1,8 @@
 # SHORTHANDS
 alias q=' exit'     # leading space to ignore it in history due to `HIST_IGNORE_SPACE`
 alias r=' exec zsh' # do not reload with `source ~/.zshrc`, https://github.com/ohmyzsh/ohmyzsh/wiki/FAQ#how-do-i-reload-the-zshrc-file
-alias ydl='yt-dlp' # cause I can never remember the name
-alias i='which' # i for [i]nspect
+alias ydl='yt-dlp'  # cause I can never remember the name
+alias i='which'     # i for [i]nspect
 
 # DEFAULTS
 alias mv='mv -vi'
@@ -54,7 +54,6 @@ alias pw="pass"
 alias -g G='| rg'
 alias -g B='| bat'
 alias -g N='| wc -l | tr -d " "' # count lines
-alias -g L='| less'
 alias -g J='| jq --color-output | less'
 alias -g C='| pbcopy ; echo "Copied."'
 alias P='pbpaste'
@@ -64,6 +63,5 @@ ZSH_HIGHLIGHT_REGEXP+=(' G$' 'fg=magenta,bold')
 ZSH_HIGHLIGHT_REGEXP+=(' C$' 'fg=magenta,bold')
 ZSH_HIGHLIGHT_REGEXP+=(' B$' 'fg=magenta,bold')
 ZSH_HIGHLIGHT_REGEXP+=(' N$' 'fg=magenta,bold')
-ZSH_HIGHLIGHT_REGEXP+=(' L$' 'fg=magenta,bold')
 ZSH_HIGHLIGHT_REGEXP+=(' J$' 'fg=magenta,bold')
 ZSH_HIGHLIGHT_REGEXP+=('^P ' 'fg=magenta,bold') # only start of line
