@@ -55,10 +55,6 @@ rules:
         conditions:
           - type: frontmost_application_if
             bundle_identifiers: [com.mimestream.Mimestream]
-          # HACK only apply to installation in office, since the hotkey is
-          # somehow only active here?!
-          - type: device_if
-            identifiers: [{ location_id: 17825792 }, { location_id: 336592896 }]
   #─────────────────────────────────────────────────────────────────────────────
   - description: "⌘0: Toggle RIGHT sidebar"
     manipulators:
@@ -133,7 +129,7 @@ rules:
   #─────────────────────────────────────────────────────────────────────────────
   - description: "⌘L: Reveal in Finder"
     manipulators:
-      # TextEdit, Preview, Word
+      # TextEdit, Preview
       - type: basic
         from: { key_code: l, modifiers: { mandatory: [command] } }
         to:
@@ -143,10 +139,29 @@ rules:
               open -R "$file_path"
         conditions:
           - type: frontmost_application_if
-            bundle_identifiers:
-              - com.apple.TextEdit
-              - com.apple.Preview
-              - com.microsoft.Word
+            bundle_identifiers: [com.apple.TextEdit, com.apple.Preview]
+      # Word
+      - type: basic
+        from: { key_code: l, modifiers: { mandatory: [command] } }
+        to:
+          - shell_command: |
+              osascript -e '
+                      tell application "Microsoft Word" 
+	set docName to name of active document 
+	set folderPath to path of active document 
+	set fullHfsPath to (folderPath & ":" & docName) 
+end tell 
+ 
+tell application "Finder" 
+	reveal fullHfsPath 
+	activate 
+end tell
+              ''
+              front_app=$(osascript -e 'tell application "System Events" to get name of first process whose frontmost is true')
+              file_path=$(osascript -e "tell application \"$front_app\" to return POSIX path of (get path of document 1)")
+              open -R "$file_path"
+        conditions:
+          - { type: frontmost_application_if, bundle_identifiers: [com.microsoft.Word] }
       # Highlights
       - type: basic
         from: { key_code: l, modifiers: { mandatory: [command] } }
