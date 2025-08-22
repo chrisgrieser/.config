@@ -5,13 +5,36 @@
   "redirects" : [
     {
       "captureGroupProcesses" : [
+
+      ],
+      "comments" : "If you, like me, have no use for the comments section, related videos, or annoying popup messages on YouTube, this redirect rule will take you from YouTube \"watch\" links to \"embed\" links automatically—the latter fills the screen.",
+      "destinationURLPattern" : "https:\/\/www.youtube.com\/embed\/$2?autoplay=1",
+      "exampleURLs" : [
+        "https:\/\/www.youtube.com\/watch?v=jfKfPfyJRdk",
+        "https:\/\/m.youtube.com\/watch?v=jfKfPfyJRdk",
+        "https:\/\/www.youtube.com\/watch?v=jfKfPfyJRdk&foo=bar"
+      ],
+      "excludeURLPatterns" : [
+
+      ],
+      "isEnabled" : true,
+      "kind" : "Redirect",
+      "sourceURLPattern" : {
+        "type" : "regularExpression",
+        "value" : "https:\/\/(www.|m.)youtube.com\/watch\\?v=([^&]*).*"
+      },
+      "title" : "YouTube Watch → Embed",
+      "type" : "originalRedirect"
+    },
+    {
+      "captureGroupProcesses" : [
         {
           "groupIndex" : 1,
           "process" : {
             "id" : "replaceOccurrences",
             "matchingPattern" : {
               "type" : "regularExpression",
-              "value" : "^ai\\+"
+              "value" : "^gpt\\+"
             },
             "replacement" : ""
           }
@@ -31,9 +54,9 @@
       "kind" : "Redirect",
       "sourceURLPattern" : {
         "type" : "regularExpression",
-        "value" : "https?:\/\/(?:www\\.)?google\\.(?:com|com\\.[a-z]{2}|co\\.[a-z]{2}|[a-z]{2})\/search\\?(?:.*&)?q=(ai\\+[^&]*).*"
+        "value" : "https?:\/\/(?:www\\.)?google\\.(?:com|com\\.[a-z]{2}|co\\.[a-z]{2}|[a-z]{2})\/search\\?(?:.*&)?q=(gpt\\+[^&]*).*"
       },
-      "title" : "Google Search “Ai ” Prefix → ChatGPT",
+      "title" : "Google Search “gpt ” Prefix → ChatGPT",
       "type" : "originalRedirect"
     },
     {
