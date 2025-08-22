@@ -9,10 +9,10 @@ name=$(basename "$filepath")
 
 if [[ "$flags" == *"uchg"* ]]; then
 	chflags -h nouchg "$filepath"
-	alfred_msg="🔒 Unlocked $name"
+	alfred_msg="🔒 Unlocked \"$name\""
 else
 	chflags -h uchg "$filepath"
-	alfred_msg="🔓Locked $name"
+	alfred_msg="🔒 Locked \"$name\""
 fi
 
 echo "$alfred_msg"
