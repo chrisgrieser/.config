@@ -17,34 +17,6 @@ rules:
   #─────────────────────────────────────────────────────────────────────────────
   - description: (Apps) Microsoft Office
     manipulators:
-      # export as PDF
-      - type: basic
-        from: { key_code: e, modifiers: { mandatory: [command, shift] } }
-        to:
-          - shell_command: |
-              osascript -e '
-                tell application "System Events" to tell process "Microsoft Word"
-                  click menu item "Save As..." of menu "File" of menu bar 1
-                  set formatSelection to (pop up button 2 of sheet 1 of window 1)
-                  click formatSelection
-                  click menu item "PDF" of menu 1 of (formatSelection)
-                end tell'
-        conditions:
-          - { type: frontmost_application_if, bundle_identifiers: [com.microsoft.Word] }
-      - type: basic
-        from: { key_code: e, modifiers: { mandatory: [command, shift] } }
-        to:
-          - shell_command: |
-              osascript -e '
-                tell application "System Events" to tell process "Microsoft Excel"
-                  click menu item "Save As..." of menu "File" of menu bar 1
-                  set formatSelection to (pop up button 2 of sheet 1 of window 1)
-                  click formatSelection
-                  click menu item "PDF " of menu 1 of (formatSelection) # SIC trailing space typo from Excel
-                end tell'
-        conditions:
-          - { type: frontmost_application_if, bundle_identifiers: [com.microsoft.Excel] }
-
       - type: basic
         from: { key_code: k, modifiers: { mandatory: [command] } }
         to:
@@ -64,98 +36,14 @@ rules:
                     click menu item "Markup" of menu "View" of menu bar 1
                 end tell'
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [com.microsoft.Word] }]
-      # Toggle sidebar
-      - type: basic
-        from: { key_code: "1", modifiers: { mandatory: [command] } }
-        to:
-          - shell_command: |
-              osascript -e '
-                tell application "System Events" to tell process "Microsoft Word"
-                  click menu item "Thumbnail" of menu of menu item "Sidebar" of menu "View" of menu bar 1
-                end tell'
-        conditions: [{ type: frontmost_application_if, bundle_identifiers: [com.microsoft.Word] }]
-  #─────────────────────────────────────────────────────────────────────────────
-  - description: "cmd+l: Reveal in Finder"
-    manipulators:
-      - type: basic
-        from: { key_code: l, modifiers: { mandatory: [command] } }
-        to:
-          - shell_command: | # needs to use app name as hardcoded string, variable does not work
-              osascript -e '
-                tell application "TextEdit" to set thePath to path of document 1 
-                tell application "Finder" to reveal (POSIX file thePath as alias) 
-                tell application "Finder" to activate 
-              '
-        conditions: [{ type: frontmost_application_if, bundle_identifiers: [com.apple.TextEdit] }]
-      - type: basic
-        from: { key_code: l, modifiers: { mandatory: [command] } }
-        to:
-          - shell_command: | # needs to use app name as hardcoded string, variable does not work
-              osascript -e '
-                tell application "Preview" to set thePath to path of document 1 
-                tell application "Finder" to reveal (POSIX file thePath as alias) 
-                tell application "Finder" to activate 
-              '
-        conditions: [{ type: frontmost_application_if, bundle_identifiers: [com.apple.Preview] }]
-      - type: basic
-        from: { key_code: l, modifiers: { mandatory: [command] } }
-        to:
-          # only 60%, since usually in the middle
-          - software_function: { set_mouse_cursor_position: { x: 60%, y: 1%, screen: 0 } }
-          - pointing_button: button2
-          - key_code: down_arrow
-          - key_code: return_or_enter
-        conditions:
-          - { type: frontmost_application_if, bundle_identifiers: [net.highlightsapp.universal] }
-  #─────────────────────────────────────────────────────────────────────────────
-  - description: "(Apps) Preview: Export"
-    manipulators:
-      - type: basic
-        from: { key_code: e, modifiers: { mandatory: [command, shift] } }
-        to:
-          - shell_command: |
-              osascript -e '
-                tell application "System Events" to tell (first process where it is frontmost)
-                  click menu item "Export…" of menu "File" of menu bar 1
-                end tell'
-        conditions:
-          - type: frontmost_application_if
-            bundle_identifiers: [com.apple.Preview]
-  #─────────────────────────────────────────────────────────────────────────────
-  - description: (Apps) Zoom
-    manipulators:
-      # Toggle sidebar
-      - type: basic
-        from: { key_code: "0", modifiers: { mandatory: [command] } }
-        to:
-          - { key_code: h, modifiers: [command, shift] }
-        conditions: [{ type: frontmost_application_if, bundle_identifiers: [us.zoom.xos] }]
   #─────────────────────────────────────────────────────────────────────────────
   - description: (Apps) Finder
     manipulators:
-      # cmd+1 -> toggle left sidebar
-      - type: basic
-        from: { key_code: "1", modifiers: { mandatory: [command] } }
-        to:
-          - { key_code: s, modifiers: [control, command] }
-        conditions: [{ type: frontmost_application_if, bundle_identifiers: [com.apple.finder] }]
-      # cmd+0 -> toggle right sidebar
-      - type: basic
-        from: { key_code: "0", modifiers: { mandatory: [command] } }
-        to:
-          - { key_code: p, modifiers: [shift, command] }
-        conditions: [{ type: frontmost_application_if, bundle_identifiers: [com.apple.finder] }]
       # cmd+q -> close all windows
       - type: basic
         from: { key_code: q, modifiers: { mandatory: [command] } }
         to:
           - shell_command: osascript -e 'tell application "Finder" to close every window'
-        conditions: [{ type: frontmost_application_if, bundle_identifiers: [com.apple.finder] }]
-      # cmd+shift+d -> goto [D]ownloads
-      - type: basic
-        from: { key_code: d, modifiers: { mandatory: [command, shift] } }
-        to:
-          - { key_code: l, modifiers: [command, option] }
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [com.apple.finder] }]
       # cmd+enter -> goto Desktop/dotfiles
       - type: basic
@@ -191,13 +79,6 @@ rules:
   #─────────────────────────────────────────────────────────────────────────────
   - description: (Apps) Highlights
     manipulators:
-      # Right Sidebar
-      - type: basic
-        from: { key_code: "0", modifiers: { mandatory: [command] } }
-        to:
-          - { key_code: "2", modifiers: [command] }
-        conditions:
-          - { type: frontmost_application_if, bundle_identifiers: [net.highlightsapp.universal] }
       # Toolbar
       - type: basic
         from: { key_code: "9", modifiers: { mandatory: [command] } }
@@ -231,21 +112,6 @@ rules:
   #─────────────────────────────────────────────────────────────────────────────
   - description: (Apps) Brave
     manipulators:
-      # Toggle Vertical Tab Sidebar
-      # REQUIRED custom shortcuts set via brave://settings/system/shortcuts?search=vertical
-      - type: basic
-        from: { key_code: "1", modifiers: { mandatory: [command] } }
-        to:
-          - { key_code: "1", modifiers: [option] }
-        conditions:
-          - { type: frontmost_application_if, bundle_identifiers: [com.brave.Browser] }
-      # Toggle Right Sidebar (Leo)
-      - type: basic
-        from: { key_code: "0", modifiers: { mandatory: [command] } }
-        to:
-          - { key_code: "0", modifiers: [option] }
-        conditions:
-          - { type: frontmost_application_if, bundle_identifiers: [com.brave.Browser] }
       # Remove bookmark
       - type: basic
         from: { key_code: d, modifiers: { mandatory: [command, shift] } }
@@ -379,48 +245,8 @@ rules:
         conditions:
           [{ type: frontmost_application_if, bundle_identifiers: [com.apple.ScriptEditor] }]
   #─────────────────────────────────────────────────────────────────────────────
-  - description: "(Apps) Toggle sidebars"
-    manipulators:
-      # Calendar
-      - type: basic
-        from: { key_code: "1", modifiers: { mandatory: [command] } }
-        to:
-          # needs UI element, since name of the menu items changes
-          # howto inspect UI-elements https://www.sudoade.com/gui-scripting-with-applescript/
-          - shell_command: |
-              osascript -e '
-                tell application "System Events" to tell process "Calendar"
-                  click radio button 1 of radio group 1 of group 1 of toolbar 1 of window 1
-                end tell'
-        conditions: [{ type: frontmost_application_if, bundle_identifiers: [com.apple.iCal] }]
-      # Maps
-      - type: basic
-        from: { key_code: "1", modifiers: { mandatory: [command] } }
-        to:
-          - { key_code: s, modifiers: [command, option] }
-        conditions:
-          - { type: frontmost_application_if, bundle_identifiers: [com.apple.Maps] }
-  #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) Mimestream"
     manipulators:
-      # toggle side bar
-      - type: basic
-        from: { key_code: "1", modifiers: { mandatory: [command] } }
-        to:
-          - { key_code: s, modifiers: [command, control] }
-        conditions:
-          - type: frontmost_application_if
-            bundle_identifiers: [com.mimestream.Mimestream]
-          # HACK only apply to installation in office, since the hotkey is
-          # somehow only active here?!
-          - type: device_if
-            identifiers: [{ location_id: 17825792 }, { location_id: 336592896 }]
-      - type: basic
-        from: { key_code: "9", modifiers: { mandatory: [command] } }
-        to:
-          - { key_code: t, modifiers: [command, option] }
-        conditions:
-          [{ type: frontmost_application_if, bundle_identifiers: [com.mimestream.Mimestream] }]
       # Open in Gmail
       - type: basic
         from: { key_code: g, modifiers: { mandatory: [control] } }
@@ -428,14 +254,10 @@ rules:
           - { key_code: g, modifiers: [command, control] }
         conditions:
           [{ type: frontmost_application_if, bundle_identifiers: [com.mimestream.Mimestream] }]
-  #─────────────────────────────────────────────────────────────────────────────
-  - description: "(Apps) Catch"
-    manipulators:
-      # fix closing preferences window
+      # Toolbar
       - type: basic
-        from: { key_code: w, modifiers: { mandatory: [command] } }
+        from: { key_code: "9", modifiers: { mandatory: [command] } }
         to:
-          - { key_code: return_or_enter }
+          - { key_code: t, modifiers: [command, option] }
         conditions:
-          - type: frontmost_application_if
-            bundle_identifiers: [org.giorgiocalderolla.Catch]
+          [{ type: frontmost_application_if, bundle_identifiers: [com.mimestream.Mimestream] }]
