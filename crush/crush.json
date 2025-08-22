@@ -1,0 +1,21 @@
+{
+	"models": {
+		"large": { "model": "gpt-4.1-mini", "provider": "openai" },
+		"small": { "model": "gpt-4.1-nano", "provider": "openai" }
+	},
+	"options": {},
+
+	"providers": {
+		"openai": {
+			"api_key": "$(cat \"$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/private dotfiles/openai-api-key-for-crush-cli.txt\")"
+		}
+	},
+	"lsp": {
+		"typescript": {
+			"command": "typescript-language-server",
+			"args": ["--stdio"]
+		}
+	},
+
+	"$schema": "https://charm.land/crush.json"
+}

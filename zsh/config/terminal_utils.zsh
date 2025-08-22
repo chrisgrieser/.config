@@ -1,9 +1,6 @@
 # LONG ALIASES
 alias sizes_in_cwd="du -sh . ./* | sort -rh | sed 's|\./||'"
 
-# mason things only made available, but not loaded directly
-alias export_mason_path='export PATH="$HOME/.local/share/nvim/mason/bin":$PATH'
-
 # utility scripts only made available, but not loaded directly (= lazy-loading)
 export PATH="$ZDOTDIR/utilities/":$PATH
 
@@ -30,10 +27,6 @@ function topen {
 function tree {
 	local level=${1:-3}
 	eza --tree --level="$level" --no-quotes --color=always | less
-}
-
-function p {
-	qlmanage -p "$1" &> /dev/null
 }
 
 function line_count() {
