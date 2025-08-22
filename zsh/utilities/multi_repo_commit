@@ -11,11 +11,10 @@ repo_names="nvim"
 # repo_names="finder-vim-mode|zsh-magic-dashboard|nvim|alfred|shimmering-obsidian|gitfred|obsidian-quadro|pseudometa-obsidian-plugin-template|grappling-hook"
 
 function actions_in_repo {
-	cp -f "$HOME/Desktop/.emmyrc.json" ./.emmyrc.json
-	rm -f "./Justfile"
+	cp -f "$HOME/Desktop/pull_request_template.md" ./.github/pull_request_template.md
 }
 
-commit_msg="chore: add \`emmylua_ls\` config"
+commit_msg="chore: improve PR template & request AI usage disclosure"
 
 _export_github_token # defined in .zshenv
 

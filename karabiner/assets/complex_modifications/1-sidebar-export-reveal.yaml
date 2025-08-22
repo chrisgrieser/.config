@@ -146,20 +146,16 @@ rules:
         to:
           - shell_command: |
               osascript -e '
-                      tell application "Microsoft Word" 
-	set docName to name of active document 
-	set folderPath to path of active document 
-	set fullHfsPath to (folderPath & ":" & docName) 
-end tell 
- 
-tell application "Finder" 
-	reveal fullHfsPath 
-	activate 
-end tell
-              ''
-              front_app=$(osascript -e 'tell application "System Events" to get name of first process whose frontmost is true')
-              file_path=$(osascript -e "tell application \"$front_app\" to return POSIX path of (get path of document 1)")
-              open -R "$file_path"
+                tell application "Microsoft Word" 
+                  set docName to name of active document 
+                  set parentPath to path of active document 
+                  set absPath to (parentPath & ":" & docName) 
+                end tell 
+                tell application "Finder" 
+                  reveal reveal absPath
+                  activate 
+                end tell
+              '
         conditions:
           - { type: frontmost_application_if, bundle_identifiers: [com.microsoft.Word] }
       # Highlights
