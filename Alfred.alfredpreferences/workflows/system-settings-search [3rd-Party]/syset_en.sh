@@ -531,7 +531,7 @@ cat <<EOF
         "path": "./Images/Keyboard.png"
       }
     },
-        {
+	{
       "uid": "Lock Screen",
       "title": "Lock Screen",
       "subtitle": "Open the 'Lock Screen' pane",
