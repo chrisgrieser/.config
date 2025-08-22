@@ -1192,8 +1192,8 @@ The following actions are available for all searches:
 
 For the tag search:
 - &lt;kbd&gt;⇧&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Remove the tag from the file.
-- Using the hotkey automatically opens the tagged file or folder, skipping the
-  selection window.
+- If there is only one tagged file or folder, using the hotkey automatically
+  opens it, skipping the selection window.
 
 ## Requirements
 
@@ -1699,7 +1699,7 @@ to modify the respective hotkey</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.2.1</string>
+	<string>1.2.2</string>
 	<key>webaddress</key>
 	<string>chris-grieser.de</string>
 </dict>
