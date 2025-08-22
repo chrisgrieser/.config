@@ -199,7 +199,7 @@
 				<key>modifiersubtext</key>
 				<string></string>
 				<key>vitoclose</key>
-				<false/>
+				<true/>
 			</dict>
 		</array>
 		<key>62DCC1DF-1B2C-4ABC-AEFC-BE38FDB972E6</key>
@@ -255,6 +255,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>A729EAF3-B539-4A5D-9B3C-ECDC89F60085</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>73A0349D-2BA7-40C6-8738-997089E11428</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>0E3DAB5D-1AF8-4007-9E7F-648F6546E2F6</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -334,6 +347,19 @@
 				<integer>1048576</integer>
 				<key>modifiersubtext</key>
 				<string>⌘: Open file afterwards</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>A322D19D-0E7D-41BC-AB1A-905AD1B79DD3</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>9540D927-BA2E-432C-AAA0-85610916FA4D</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -451,7 +477,7 @@
 				<key>modifiersubtext</key>
 				<string></string>
 				<key>vitoclose</key>
-				<false/>
+				<true/>
 			</dict>
 		</array>
 		<key>D6CC91E7-0821-44EC-BAE8-E1C0567E4FAC</key>
@@ -807,6 +833,19 @@ open -g "hammerspoon://sync-repos"</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>unstackview</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.hidealfred</string>
+			<key>uid</key>
+			<string>0E3DAB5D-1AF8-4007-9E7F-648F6546E2F6</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>browser</key>
 				<string>com.apple.Safari</string>
 				<key>skipqueryencode</key>
@@ -922,6 +961,19 @@ open -g "hammerspoon://sync-repos"</string>
 			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
 			<string>A322D19D-0E7D-41BC-AB1A-905AD1B79DD3</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>unstackview</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.hidealfred</string>
+			<key>uid</key>
+			<string>9540D927-BA2E-432C-AAA0-85610916FA4D</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1914,6 +1966,15 @@ open -g "hammerspoon://sync-repos"</string>
 			<key>ypos</key>
 			<real>770</real>
 		</dict>
+		<key>0E3DAB5D-1AF8-4007-9E7F-648F6546E2F6</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>1</integer>
+			<key>xpos</key>
+			<real>365</real>
+			<key>ypos</key>
+			<real>300</real>
+		</dict>
 		<key>115FC277-2877-4ACA-8FF9-EAA1EE6DA705</key>
 		<dict>
 			<key>colorindex</key>
@@ -2156,6 +2217,15 @@ open -g "hammerspoon://sync-repos"</string>
 			<key>ypos</key>
 			<real>15</real>
 		</dict>
+		<key>9540D927-BA2E-432C-AAA0-85610916FA4D</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>1</integer>
+			<key>xpos</key>
+			<real>475</real>
+			<key>ypos</key>
+			<real>425</real>
+		</dict>
 		<key>9A900E48-E8F5-47BE-B456-7A5E542DD443</key>
 		<dict>
 			<key>colorindex</key>
@@ -2208,9 +2278,9 @@ open -g "hammerspoon://sync-repos"</string>
 		<key>A322D19D-0E7D-41BC-AB1A-905AD1B79DD3</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>2</integer>
+			<integer>1</integer>
 			<key>xpos</key>
-			<real>350</real>
+			<real>330</real>
 			<key>ypos</key>
 			<real>395</real>
 		</dict>

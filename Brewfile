@@ -25,6 +25,7 @@ brew "zsh-autopair"
 brew "zsh-autosuggestions"
 brew "zsh-history-substring-search"
 brew "zsh-syntax-highlighting"
+brew "charmbracelet/tap/crush"
 
 # APPS
 cask "alfred"
