@@ -17,15 +17,15 @@ bkeymap("n", "gE", "[s", { desc = "󰓆 Previous misspelling" })
 bkeymap("i", "<Tab>", "<End>", { desc = " Goto EoL" })
 bkeymap("n", "<Tab>", "A", { desc = " Goto EoL" })
 
-bkeymap("i", "(", function ()
+bkeymap("i", "(", function()
 	local line = vim.api.nvim_get_current_line()
+	local row, col = unpack(vim.api.nvim_win_get_cursor(0))
 	local isFirstWord = line:find(" ") == nil
 	local toAdd = isFirstWord and "(): " or "()"
-	vim.api.nvim_set_current_line(line .. toAdd)
-	-- move cursor to the right
-	local row, col = unpack(vim.api.nvim_win_get_cursor(0))
-	vim.api.nvim_win_set_cursor(0, { row, col + 1 })
-end, { desc = "(): autopairing for gitcommit" })
+	local newLine = line:sub(1, col) .. toAdd .. line:sub(col + 1)
+	vim.api.nvim_set_current_line(newLine)
+	vim.api.nvim_win_set_cursor(0, { row, col + 1 }) -- move cursor to the right
+end, { desc = "`():` autopairing for gitcommit" })
 
 --------------------------------------------------------------------------------
 
