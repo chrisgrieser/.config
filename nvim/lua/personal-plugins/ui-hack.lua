@@ -8,6 +8,7 @@ local hasNotificationPlugin = (
 	or package.loaded["mini.notify"]
 )
 if not hasNotificationPlugin then return end
+if vim.fn.has("gui_running") == 0 then return end -- somehow this only works in a GUI?
 --------------------------------------------------------------------------------
 
 local config = {
