@@ -11,20 +11,15 @@ export MANPAGER="nvim +Man!"
 # 2. search builtin commands, which do not have man pages
 function man() {
 	if ! [[ "$TERM_PROGRAM" == "WezTerm" ]]; then echo "Not using WezTerm." && return 1; fi
-	if ! command -v "$command" &> /dev/null; then echo "$command not installed." && return 1; fi
 
 	local command="$1"
 	local pane_id
-	pane_id=$(wezterm cli spawn -- command man "$command")
 
-	# INFO `test` is an exception, as it is a builtin command, but still has a
-	# man page and no builtin help
-	if [[ "$(type "$command")" =~ "builtin" ]] && [[ "$command" != "test" ]]; then
-		if [[ ! -f "/usr/share/zsh/*/help/$command" ]]; then
-			print "\e[1;33mNo builtin help found.\e[0m" 
-			return 1
-		fi
-		pane_id=$(wezterm cli spawn -- command man /usr/share/zsh/*/help/"$command")
+	# INFO `test` is a builtin command, but has a better man page
+	builtin_help=/usr/share/zsh/$ZSH_VERSION/help/$command
+	lookup=$([[ -f "$builtin_help" && "$command" != "test"  ]] && echo "value1" || echo "value2")
+	if [[ -f "$builtin_help" && "$command" != "test" ]]; then
+		pane_id=$(wezterm cli spawn -- command man "$builtin_help")
 	else
 		pane_id=$(wezterm cli spawn -- command man "$command")
 	fi
