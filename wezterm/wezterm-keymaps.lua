@@ -11,17 +11,18 @@ local theme = require("theme-utils")
 --------------------------------------------------------------------------------
 
 M.keys = {
-	{ key = "q", mods = "CMD", action = act.QuitApplication },
 	{ key = "t", mods = "CMD", action = act.SpawnTab("CurrentPaneDomain") },
 	{ key = "n", mods = "CMD", action = act.SpawnTab("CurrentPaneDomain") },
 	{ key = "c", mods = "CMD", action = act.CopyTo("ClipboardAndPrimarySelection") },
-	{ key = "h", mods = "CMD", action = act.HideApplication }, -- only macOS
+	{ key = "v", mods = "CMD", action = act.PasteFrom("Clipboard") },
 	{ key = "+", mods = "CMD", action = act.IncreaseFontSize },
 	{ key = "-", mods = "CMD", action = act.DecreaseFontSize },
 	{ key = "0", mods = "CMD", action = act.ResetFontSize },
 	{ key = "p", mods = "CMD", action = act.ActivateCommandPalette },
-	{ key = "v", mods = "CMD", action = act.PasteFrom("Clipboard") },
 	{ key = "w", mods = "CMD", action = act.CloseCurrentPane { confirm = false } },
+	{ key = "h", mods = "CMD", action = act.HideApplication }, -- only macOS
+	{ key = "q", mods = "CMD", action = act.QuitApplication },
+
 	-- using `ctrl-L` instead of wezterm's scrollback-clearing preserves the
 	-- ability to scroll back
 	{ key = "k", mods = "CMD", action = act.SendKey { key = "l", mods = "CTRL" } },
@@ -127,9 +128,9 @@ M.keys = {
 	-- cmd+y -> copy text
 	{ key = "y", mods = "CMD", action = act.QuickSelect },
 
-	{ -- cmd+u -> open URL (like f in vimium)
+	{ -- cmd+shift+u -> open URL (like `f` in vimium)
 		key = "u",
-		mods = "CMD",
+		mods = "CMD|SHIFT",
 		action = act.QuickSelectArgs {
 			patterns = { [[https?://[^\]",' ]+\w]] },
 			label = "Open URL",
@@ -137,14 +138,6 @@ M.keys = {
 				local url = window:get_selection_text_for_pane(pane)
 				wt.open_with(url)
 			end),
-		},
-	},
-	{ -- cmd+o -> copy [o]ption (e.g. from a man page)
-		key = "o",
-		mods = "CMD",
-		action = act.QuickSelectArgs {
-			patterns = { "--[\\w=-]+", "(?<= )-\\w" }, -- long option, short option
-			label = "Copy shell option",
 		},
 	},
 
@@ -157,9 +150,6 @@ M.keys = {
 	-- Console / REPL
 	{ key = "Escape", mods = "CTRL", action = wt.action.ShowDebugOverlay },
 
-	-- Jump to Copy Mode (= Caret Mode) -- https://wezfurlong.org/wezterm/copymode.html
-	{ key = "j", mods = "CMD", action = act.ActivateCopyMode },
-
 	-----------------------------------------------------------------------------
 
 	{ -- cmd+, -> open the config file
@@ -167,32 +157,7 @@ M.keys = {
 		mods = "CMD",
 		action = actFun(function() wt.open_with(wt.config_file) end),
 	},
-	{ -- cmd+shift+, -> open the keybindings file (this file)
-		key = ";",
-		mods = "CMD|SHIFT",
-		action = actFun(function()
-			local thisFile = wt.config_file:gsub("wezterm%.lua$", "wezterm-keymaps.lua")
-			wt.open_with(thisFile)
-		end),
-	},
 }
-
---------------------------------------------------------------------------------
--- COPYMODE
--- DOCS https://wezfurlong.org/wezterm/config/lua/wezterm.gui/default_key_tables.html
-M.copymodeKeys = wt.gui.default_key_tables().copy_mode
-
--- HJKL like hjkl, but bigger distance
-local myCopyModeKeys = {
-	{ key = "l", mods = "SHIFT", action = act.CopyMode("MoveToEndOfLineContent") },
-	{ key = "h", mods = "SHIFT", action = act.CopyMode("MoveToStartOfLineContent") },
-	{ key = "j", mods = "SHIFT", action = act.CopyMode { MoveByPage = 0.33 } },
-	{ key = "k", mods = "SHIFT", action = act.CopyMode { MoveByPage = -0.33 } },
-}
-
-for _, key in ipairs(myCopyModeKeys) do
-	table.insert(M.copymodeKeys, key)
-end
 
 --------------------------------------------------------------------------------
 return M

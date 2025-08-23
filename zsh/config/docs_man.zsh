@@ -1,4 +1,4 @@
-# COLORIZED HELP
+# COLORIZED `--help`
 alias -g H="--help | bat --language=help --style=plain"
 ZSH_HIGHLIGHT_REGEXP+=(' H$' 'fg=magenta,bold')
 
@@ -7,7 +7,8 @@ ZSH_HIGHLIGHT_REGEXP+=(' H$' 'fg=magenta,bold')
 # MAN PAGES
 export MANPAGER="nvim +Man!"
 
-# open in new wezterm tab
+# 1. open in new wezterm tab
+# 2. search builtin commands, which do not have man pages
 function man() {
 	if ! [[ "$TERM_PROGRAM" == "WezTerm" ]]; then echo "Not using WezTerm." && return 1; fi
 	if ! command -v "$command" &> /dev/null; then echo "$command not installed." && return 1; fi
