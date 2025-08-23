@@ -14,6 +14,12 @@ rules:
                   click menu item "Thumbnail" of menu of menu item "Sidebar" of menu "View" of menu bar 1
                 end tell'
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [com.microsoft.Word] }]
+      # Safari
+      - type: basic
+        from: { key_code: "1", modifiers: { mandatory: [command] } }
+        to:
+          - { key_code: l, modifiers: [shift, command] }
+        conditions: [{ type: frontmost_application_if, bundle_identifiers: [com.apple.Safari] }]
       # Finder
       - type: basic
         from: { key_code: "1", modifiers: { mandatory: [command] } }
