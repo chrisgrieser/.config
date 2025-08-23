@@ -12,8 +12,6 @@
 	<string>ppp||kill</string>
 	<key>rerun_s_processes</key>
 	<integer>3</integer>
-	<key>sort_key</key>
-	<string>CPU</string>
 	<key>volume_keyword</key>
 	<string>vvv||vol</string>
 </dict>

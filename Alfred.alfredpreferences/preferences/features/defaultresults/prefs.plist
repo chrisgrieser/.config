@@ -6,6 +6,7 @@
 	<array>
 		<string>features.websearch.duckduckgo.fallback</string>
 		<string>features.websearch.lucky.fallback</string>
+		<string>chatgpt [3rd-Party].DA9FB2AC-0A0A-463D-B07A-B25CD699C24C</string>
 		<string>features.websearch.custom.26ACAC4A-35A8-452D-91BD-82EB22FF544B.fallback</string>
 	</array>
 	<key>showContacts</key>
