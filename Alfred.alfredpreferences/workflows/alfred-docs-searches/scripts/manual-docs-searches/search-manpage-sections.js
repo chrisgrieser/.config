@@ -22,7 +22,7 @@ function alfredMatcher(str) {
 function htmlDecode(encoded) {
 	return encoded
 		.replace(/<strong>(.*?)<\/strong>/g, "$1")
-		.replace(/<em>(.*?)<\/em>/g, "<$1>")
+		.replace(/<em>(.*?)<\/em>/g, "{$1}")
 		.replace(/&lt;/g, "<")
 		.replace(/&gt;/g, ">")
 		.replace(/&amp;/g, "&")

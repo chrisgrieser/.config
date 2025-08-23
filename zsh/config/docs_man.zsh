@@ -4,13 +4,10 @@ ZSH_HIGHLIGHT_REGEXP+=(' H$' 'fg=magenta,bold')
 
 #───────────────────────────────────────────────────────────────────────────────
 
-# MAN PAGES 
+# MAN PAGES
 export MANPAGER="nvim +Man!"
 
 # open in new wezterm tab
-# - works for builtin commands as well
-# - opens in a new wezterm tab
-# - fallsback to --help page if no manpage found
 function man() {
 	if ! [[ "$TERM_PROGRAM" == "WezTerm" ]]; then echo "Not using WezTerm." && return 1; fi
 	if ! command -v "$command" &> /dev/null; then echo "$command not installed." && return 1; fi
@@ -18,6 +15,18 @@ function man() {
 	local command="$1"
 	local pane_id
 	pane_id=$(wezterm cli spawn -- command man "$command")
+
+	# INFO `test` is an exception, as it is a builtin command, but still has a
+	# man page and no builtin help
+	if [[ "$(type "$command")" =~ "builtin" ]] && [[ "$command" != "test" ]]; then
+		if [[ ! -f "/usr/share/zsh/*/help/$command" ]]; then
+			print "\e[1;33mNo builtin help found.\e[0m" 
+			return 1
+		fi
+		pane_id=$(wezterm cli spawn -- command man /usr/share/zsh/*/help/"$command")
+	else
+		pane_id=$(wezterm cli spawn -- command man "$command")
+	fi
 
 	# https://wezfurlong.org/wezterm/cli/cli/set-tab-title.html
 	wezterm cli set-tab-title --pane-id="$pane_id" " $command"
