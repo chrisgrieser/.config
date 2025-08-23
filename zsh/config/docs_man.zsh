@@ -1,4 +1,5 @@
-# COLORIZED `--help`
+# --HELP PAGE
+# colorized
 alias -g H="--help | bat --language=help --style=plain"
 ZSH_HIGHLIGHT_REGEXP+=(' H$' 'fg=magenta,bold')
 
@@ -13,17 +14,13 @@ function man() {
 	if ! [[ "$TERM_PROGRAM" == "WezTerm" ]]; then echo "Not using WezTerm." && return 1; fi
 
 	local command="$1"
-	local pane_id
+	local pane_id builtin_help lookup
 
 	# INFO `test` is a builtin command, but has a better man page
 	builtin_help=/usr/share/zsh/$ZSH_VERSION/help/$command
-	lookup=$([[ -f "$builtin_help" && "$command" != "test"  ]] && echo "value1" || echo "value2")
-	if [[ -f "$builtin_help" && "$command" != "test" ]]; then
-		pane_id=$(wezterm cli spawn -- command man "$builtin_help")
-	else
-		pane_id=$(wezterm cli spawn -- command man "$command")
-	fi
-
+	lookup=$([[ -f "$builtin_help" && "$command" != "test"  ]] && echo "$builtin_help" || echo "$command")
+	pane_id=$(wezterm cli spawn -- command man "$lookup")
+	
 	# https://wezfurlong.org/wezterm/cli/cli/set-tab-title.html
 	wezterm cli set-tab-title --pane-id="$pane_id" " $command"
 }
@@ -40,5 +37,3 @@ function cht() {
 	query=${*// /-} # dash as separator for subcommands, e.g. git-rebase
 	curl -s "https://cht.sh/$query?style=$style"
 }
-
-#───────────────────────────────────────────────────────────────────────────────
