@@ -1,3 +1,8 @@
+local cmdlineArgs = #vim.v.argv - 1 -- `nvim` itself should not be counted
+if vim.g.neovide then cmdlineArgs = cmdlineArgs - 1 end -- neovide adds `--embed`
+if cmdlineArgs > 0 then return end -- nvim was opened with args
+--------------------------------------------------------------------------------
+
 -- When opening a file with neovide and lazy.nvim opens the startup install
 -- window, this is needed to prevent an error, not exactly sure why it works though
 if vim.g.neovide then

@@ -9,7 +9,6 @@ brew "fzf"
 brew "gh"
 brew "git-delta"
 brew "just"
-brew "less" # higher version than builtin one -> enables use of `lesskey` file
 brew "mas"
 brew "neovim"
 brew "node"
