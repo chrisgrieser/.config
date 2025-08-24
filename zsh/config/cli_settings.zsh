@@ -27,6 +27,8 @@ export GREP_COLOR='01;35' # matches in bold & magenta (macOS' `grep` doesn't sup
 
 export JUST_COMMAND_COLOR="blue"
 
+export LESS='--RAW-CONTROL-CHARS' # enable color in less
+
 #───────────────────────────────────────────────────────────────────────────────
 
 # INFO multi-select `alt-enter` mapping consistent with the one for telescope

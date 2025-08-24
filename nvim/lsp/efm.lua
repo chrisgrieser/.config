@@ -3,23 +3,7 @@
 
 ---@type vim.lsp.Config
 local efmConfig = {
-	lua = {
-		{
-			formatCommand = "stylua --search-parent-directories --stdin-filepath='${INPUT}' --respect-ignores -",
-			formatStdin = true,
-			rootMarkers = { "stylua.toml", ".stylua.toml" },
-		},
-	},
 	markdown = {
-		{ -- HACK use `cat` due to https://github.com/mattn/efm-langserver/issues/258
-			formatCommand = "markdown-toc --indent=$'\t' -i '${INPUT}' && cat '${INPUT}'",
-			formatStdin = false,
-		},
-		{ -- HACK use `cat` due to https://github.com/mattn/efm-langserver/issues/258
-			formatCommand = "markdownlint --fix '${INPUT}' && cat '${INPUT}'",
-			formatStdin = false,
-			rootMarkers = { ".markdownlint.yaml" },
-		},
 		{
 			lintSource = "markdownlint",
 			lintCommand = "markdownlint --stdin",
