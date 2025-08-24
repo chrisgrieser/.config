@@ -17,9 +17,9 @@ sleep 1
 # UNNEST IF SINGLE FILE
 find . -mindepth 1 -type directory | while read -r folder; do
 	files_in_folder=$(find "$folder" -depth 1 | wc -l | tr -d " ")
-	if [[ $files_in_folder -eq 1 ]] ; then
+	if [[ $files_in_folder -eq 1 ]]; then
 		command mv -n "$folder"/* "$TR_TORRENT_DIR" # `-n` prevents overwriting
-		rmdir "$folder" # `rmdir` only deletes empty folders
+		rmdir "$folder"                             # `rmdir` only deletes empty folders
 		echo "$(date "+%Y-%m-%d %H:%M") Unnested $folder" | tee -a "$action_log"
 	fi
 done
@@ -32,8 +32,8 @@ find "." -maxdepth 1 -name "*.mkv" | while read -r old_name; do
 			cut -c3- | # remove `./`
 			tr "._" " " |
 			sed 's/ *\[[a-zA-Z0-9_]*\] *//g' | # tags for the subbing group
-			sed -E 's/(1080p|720p).*/(\1)/' | # video file info after the resolution info
-			tr -s " ()" # remove leftover spaces or double brackets
+			sed -E 's/(1080p|720p).*/(\1)/' |  # video file info after the resolution info
+			tr -s " ()"                        # remove leftover spaces or double brackets
 	)
 	new_name="./$new_name.mkv"
 	if [[ ! -f "$new_name" ]]; then
