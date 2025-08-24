@@ -38,7 +38,7 @@ jobs:
           # determine all installed plugins
           sed '1d;$d' "$lazy_lock" | cut -d'"' -f2 | # all plugin names
             xargs -I {} grep --only-matching --no-filename --max-count=1 \
-              --regexp "[A-Za-z0-9_-]\+/"{}'"' "$lazy_specs_path"/*.lua | # all plugin repos
+              --regexp "[A-Za-z0-9_-]\+/"{}'"' "$lazy_specs_path"/**/*.lua | # all plugin repos
             cut -d'"' -f1 |
             sort --ignore-case | uniq |
             sed -E 's|.*|- [&](https://github.com/&)|' \
