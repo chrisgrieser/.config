@@ -6,14 +6,6 @@ return {
 	cmd = "ConformInfo",
 	keys = {
 		{ "<D-s>", function() require("conform").format() end, desc = "󱉯 Format buffer" },
-		{
-			"<D-s>",
-			function()
-				require("conform").format({}, function() end)
-			end,
-			ft = "typescript",
-			desc = " Format buffer",
-		},
 	},
 	opts = {
 		default_format_opts = {
@@ -22,8 +14,9 @@ return {
 		formatters_by_ft = {
 			lua = { "stylua" },
 			markdown = { "markdownlint", "markdown-toc", "injected" },
-			python = { "ruff_format", "ruff_fix", "ruff_organize_imports" },
-			typescript = { "biome-organize-imports" },
+			python = { "ruff_fix" },
+			-- stylua: ignore
+			typescript = { "ts_remove_unused_imports", "ts_add_missing_imports", "biome-organize-imports" },
 			zsh = { "shell_home", "shellcheck" },
 
 			-- fallback, used when no formatters are defined and no LSP is available
@@ -36,13 +29,29 @@ return {
 					callback()
 				end,
 			},
-			shellcheck = { -- force to work with `zsh`
+			shellcheck = { -- add `--shell=bash` to force to work with `zsh`
 				args = "'$FILENAME' --format=diff --shell=bash | patch -p1 '$FILENAME'",
+			},
+			ts_add_missing_imports = {
+				format = function(_, _, _, callback)
+					vim.lsp.buf.code_action {
+						---@diagnostic disable-next-line: missing-fields, assign-type-mismatch
+						context = { only = { "source.addMissingImports.ts" } },
+						apply = true,
+					}
+					callback()
+				end,
+			},
+			ts_remove_unused_imports = {
+				format = function(_, _, _, callback)
+					vim.lsp.buf.code_action {
+						---@diagnostic disable-next-line: missing-fields, assign-type-mismatch
+						context = { only = { "source.removeUnusedImports.ts" } },
+						apply = true,
+					}
+					callback()
+				end,
 			},
 		},
 	},
-	config = function(_, opts)
-		require("conform").setup(opts)
-		require("conform.formatters.injected").options.ignore_errors = false
-	end,
 }

@@ -34,7 +34,7 @@ return {
 		-- the builtin `zg`, but has the advantage that `harper` is hot-reloaded.
 		vim.keymap.set("n", "zg", function()
 			vim.lsp.buf.code_action {
-				filter = function(a) return a.title:find("^Add .* to the global dictionary%.") ~= nil end,
+				filter = function(a) return a.title:find("^Add .* to the user dictionary%.") ~= nil end,
 				apply = true,
 			}
 		end, { desc = "󰓆 Add word to spellfile", buffer = bufnr })
