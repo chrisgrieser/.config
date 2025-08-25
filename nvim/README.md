@@ -5,10 +5,12 @@
 
 ```bash
 ├── lsp
+├── dap
 ├── lua
 │  ├── config
+│  ├── colorschemes
 │  ├── personal-plugins
-│  └── plugin-specs
+│  ├── plugin-specs
 ├── after
 │  ├── ftplugin
 │  ├── ftdetect
@@ -16,7 +18,7 @@
 │  └── syntax
 ├── queries
 ├── snippets
-│  ├── basic
+│  ├── general
 │  └── project-specific
 └── templates
 ```

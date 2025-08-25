@@ -1,11 +1,6 @@
 # shellcheck disable=SC1091
 #───────────────────────────────────────────────────────────────────────────────
 
-# point config paths to `.config`
-export RIPGREP_CONFIG_PATH="$HOME/.config/ripgrep/config"
-
-#───────────────────────────────────────────────────────────────────────────────
-
 # Affects filetype-coloring in eza, fd, and completion menus
 # DOCS https://github.com/eza-community/eza/blob/main/man/eza_colors.5.md
 # INFO does also accept specific files via glob, e.g. `README.md=4;33`,
@@ -22,14 +17,29 @@ export EZA_STRICT=1
 export EZA_ICONS_AUTO=1
 export EZA_ICON_SPACING=1
 
+#───────────────────────────────────────────────────────────────────────────────
+
 export GREP_OPTIONS="--color=auto"
 export GREP_COLOR='01;35' # matches in bold & magenta (macOS' `grep` doesn't support `GREP_COLORS`)
 
 export JUST_COMMAND_COLOR="blue"
 
-export LESS='--RAW-CONTROL-CHARS' # enable color in less
+#───────────────────────────────────────────────────────────────────────────────
+
+LESS+=" --RAW-CONTROL-CHARS" # process colors correctly
+LESS+=" --line-num-width=4" # line number column width
+LESS+=" --ignore-case --incsearch"
+LESS+=" --tilde" # no tilde at start of line at the end of file
+LESS+=" --long-prompt --prompt=mpage %dm?B/%D.?Pm (%Pm\\%).$" # progress in pages
+LESS+=" --status-line" # highlight lines with a mark
+LESS+=" --quit-if-one-screen --no-init" # quicker leaving & do not clear the screen when doing so
+LESS+=" --chop-long-lines" # wrap lines
+LESS+=" --shift=.2" # amount of side-scrolling (percentage of screen width)
+export LESS
 
 #───────────────────────────────────────────────────────────────────────────────
+
+export RIPGREP_CONFIG_PATH="$HOME/.config/ripgrep/config" # point config paths to `.config`
 
 # INFO multi-select `alt-enter` mapping consistent with the one for telescope
 export FZF_DEFAULT_OPTS='
