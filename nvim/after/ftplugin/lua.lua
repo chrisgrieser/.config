@@ -48,8 +48,7 @@ bkeymap("n", "<D-S>", function()
 		return
 	end
 
-	-- local msg = assert(out.stdout):gsub("^.-\n", "") -- remove first line ("! checking formatting")
-	local msg = assert(out.stdout):gsub(jit.os, "") -- remove first line ("! checking formatting")
+	local msg = assert(out.stdout):gsub("^.-\n", "") -- remove first line ("! checking formatting")
 	local formattingNeeded = out.code == 1
 	if formattingNeeded then
 		-- does the actual formatting
