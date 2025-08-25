@@ -77,7 +77,9 @@ wt.on("format-tab-title", function(tab, _pane, _tabs, _panes, _config)
 	winTitle = winTitle:gsub("  +", " ") -- duplicate spaces, e.g. by `yt-dlp` progress
 	local cwd = tab.active_pane.current_working_dir.file_path:gsub("^.*/(.*)/$", "%1")
 
-	local icon = winTitle == "zsh" and "" or ""
+	local icons = { zsh = "", crush = "󱥰" }
+	local icon = icons[winTitle] or ""
+
 	local label = winTitle == "zsh" and cwd or winTitle
 	return (" %s %s "):format(icon, label)
 end)
