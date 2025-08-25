@@ -201,4 +201,16 @@ vim.diagnostic.config {
 	},
 }
 
+vim.api.nvim_create_autocmd("WinNew", {
+	desc = "User: Diagnostic floats with markdown highlighting",
+	callback = function()
+		vim.defer_fn(function ()
+			if not vim.b.lsp_floating_preview then return end -- no lsp float
+			local bufnr = vim.api.nvim_win_get_buf(vim.b.lsp_floating_preview)
+			if vim.bo[bufnr].filetype ~= "" then return end -- other lsp float
+			vim.bo[bufnr].filetype = "markdown"
+		end, 1)
+	end,
+})
+
 --------------------------------------------------------------------------------
