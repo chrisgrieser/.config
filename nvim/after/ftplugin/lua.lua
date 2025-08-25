@@ -33,8 +33,9 @@ bkeymap("i", "-", function() plusPlusMinusMinus("-") end, { desc = "i--  i = 
 --------------------------------------------------------------------------------
 -- STYLUA
 bkeymap("n", "<D-S>", function()
+	local notifyOpts = { icon = "󰢱", title = "Stylua" }
 	vim.cmd("silent! update")
-	-- for the exit code and the summary only, does perform the formatting itself
+	-- for the exit code and the summary only, doesn't perform the formatting itself
 	local out = vim.system({
 		"stylua",
 		"--search-parent-directories",
@@ -42,15 +43,20 @@ bkeymap("n", "<D-S>", function()
 		"--output-format=summary",
 		".",
 	}):wait()
+	if out.stderr ~= "" then
+		vim.notify(vim.trim(out.stderr), vim.log.levels.WARN, notifyOpts)
+		return
+	end
 
-	local msg = assert(out.stdout):gsub("^.-\n", "") -- remove first line ("! Checking formatting")
-	if out.code ~= 0 then
+	local msg = assert(out.stdout):gsub("^.-\n", "") -- remove first line ("! checking formatting")
+	local formattingNeeded = out.code == 1
+	if formattingNeeded then
 		-- does the actual formatting
 		out = vim.system({ "stylua", "--search-parent-directories", "." }):wait()
 		vim.cmd.checktime() -- reload changes in buffer
-		msg = msg .. "Files formatted."
+		msg = msg:gsub("✕ Code style issues found in (%d+ files?) above.", "[✓ Formatted %1.]")
 	end
-	vim.notify(vim.trim(msg), nil, { icon = "󰢱", title = "Stylua" })
+	vim.notify(vim.trim(msg), nil, notifyOpts)
 end, { desc = "󰢱 Stylua on cwd" })
 
 --------------------------------------------------------------------------------
