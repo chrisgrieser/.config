@@ -106,10 +106,15 @@ function run(argv) {
 	});
 
 	// manual search fallback
+	
+	
 	items.push({
 		title: `Search for "${query}"`,
 		subtitle: mapProvider1,
 		arg: mapProvider[mapProvider1] + encodeURIComponent(query),
+		mods: {
+			cmd: { arg: mapProvider[mapProvider2] + encodeURIComponent(query) }, // open at secondary map provider
+		},
 	})
 
 	return JSON.stringify({ items: items });

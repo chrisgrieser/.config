@@ -158,12 +158,12 @@ function run() {
 					valid: !showReadNotifs,
 					subtitle: showReadNotifs ? "🚫 Is already marked as read." : "⌘: Mark as Read",
 					// CAVEAT mark-as-unread not support in GitHub Notification API
-					variables: { mode: "mark-as-read", notificationsLeft: responseObj.length - 1 },
+					variables: { mode: "read", notificationsLeft: responseObj.length - 1 },
 				},
 				shift: {
 					arg: notif.id,
 					subtitle: "⇧: Mark as done",
-					variables: { mode: "mark-as-done", notificationsLeft: responseObj.length - 1 },
+					variables: { mode: "done", notificationsLeft: responseObj.length - 1 },
 				},
 				alt: {
 					subtitle: notifApiUrl ? "⌥: Copy URL" : "(🚫 No URL)",
