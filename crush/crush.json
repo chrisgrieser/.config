@@ -11,10 +11,9 @@
 	"lsp": {
 		"typescript": { "command": "typescript-language-server", "args": ["--stdio"] },
 		"javascript": { "command": "typescript-language-server", "args": ["--stdio"] },
-		"swift": { "command": "sourcekit-lsp" },
 		"lua": { "command": "lua-language-server" },
-
-		"disabled_throwing_errors": { "command": "basedpyright-langserver", "args": ["--stdio"] }
+		"disabled_swift": { "command": "sourcekit-lsp" },
+		"disabled_python": { "command": "basedpyright-langserver", "args": ["--stdio"] }
 	},
 	"options": {
 		"disable_auto_summarize": false,
