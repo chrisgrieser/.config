@@ -1,4 +1,2 @@
 local one = "hello"
-local two = <
-
-
+fsfs

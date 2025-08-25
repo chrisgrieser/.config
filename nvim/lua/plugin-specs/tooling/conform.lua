@@ -22,9 +22,9 @@ return {
 			lua = { "stylua" },
 			markdown = { "markdownlint", "markdown-toc", "injected" },
 			python = { "ruff_fix", "ruff_organize_imports" },
-			typescript = { "ts_update_imports", "biome-organize-imports" },
-			zsh = { "shell_home", "shellcheck" },
-			json = { lsp_format = "prefer", "jq" }, -- prefer `biome`, then `jq`
+			typescript = { "tsAddMissingImports", "tsRemoveUnusedImports", "biome-organize-imports" },
+			zsh = { "shellHome", "shellcheck" },
+			json = { lsp_format = "prefer", "jq" }, -- use `biome` (via LSP), with `jq` as fallback
 
 			-- fallback, used when no formatters are defined and no LSP is available
 			_ = { "trim_whitespace", "trim_newlines", "squeeze_blanks" },
@@ -32,29 +32,32 @@ return {
 		formatters = {
 			injected = {
 				ignore_errors = true,
-				lang_to_formatters = {
-					json = { "jq" },
-				},
+				lang_to_formatters = { json = { "jq" } },
 			},
-			shell_home = {
+			shellcheck = { -- add `--shell=bash` to force to work with `zsh`
+				args = "'$FILENAME' --format=diff --shell=bash | patch -p1 '$FILENAME'",
+			},
+			-----------------------------------------------------------------------
+			-- my custom formatters
+			shellHome = {
 				format = function(_self, _ctx, _lines, callback)
 					vim.cmd([[% s_/Users/\w\+/_$HOME/_e]]) -- replace `/Users/…` with `$HOME/`
 					callback()
 				end,
 			},
-			shellcheck = { -- add `--shell=bash` to force to work with `zsh`
-				args = "'$FILENAME' --format=diff --shell=bash | patch -p1 '$FILENAME'",
-			},
-			ts_update_imports = {
+			tsAddMissingImports = {
 				format = function(_self, _ctx, _lines, callback)
 					vim.lsp.buf.code_action {
-						---@diagnostic disable-next-line: missing-fields, assign-type-mismatch
-						context = { only = { "source.addMissingImports.ts" } },
+						context = { only = { "source.addMissingImports.ts" } }, ---@diagnostic disable-line: missing-fields, assign-type-mismatch
 						apply = true,
 					}
+					callback()
+				end,
+			},
+			tsRemoveUnusedImports = {
+				format = function(_self, _ctx, _lines, callback)
 					vim.lsp.buf.code_action {
-						---@diagnostic disable-next-line: missing-fields, assign-type-mismatch
-						context = { only = { "source.removeUnusedImports.ts" } },
+						context = { only = { "source.removeUnusedImports.ts" } }, ---@diagnostic disable-line: missing-fields, assign-type-mismatch
 						apply = true,
 					}
 					callback()

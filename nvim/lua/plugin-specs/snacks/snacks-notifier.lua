@@ -37,7 +37,7 @@ local function openNotif(idx)
 	local moreLines = overflow > 0 and ("↓ %d lines"):format(overflow) or ""
 	local indexStr = ("(%d/%d)"):format(idx, #history)
 	local footer = vim.trim(indexStr .. "   " .. moreLines)
-	
+
 	-- create win with snacks API
 	Snacks.win {
 		relative = "editor",
