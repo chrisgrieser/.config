@@ -1269,7 +1269,7 @@
 						<key>matchmode</key>
 						<integer>0</integer>
 						<key>matchstring</key>
-						<string>mark-as-read</string>
+						<string>read</string>
 						<key>outputlabel</key>
 						<string>mark-as-read</string>
 						<key>uid</key>
@@ -1283,7 +1283,7 @@
 						<key>matchmode</key>
 						<integer>0</integer>
 						<key>matchstring</key>
-						<string>mark-as-done</string>
+						<string>done</string>
 						<key>outputlabel</key>
 						<string>mark-as-done</string>
 						<key>uid</key>
@@ -1407,7 +1407,7 @@
 				<key>text</key>
 				<string></string>
 				<key>title</key>
-				<string>☑️ Marked as read</string>
+				<string>☑️ Marked as {var:mode}</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.output.notification</string>
@@ -2230,7 +2230,7 @@ to set a hotkey to clone the repo in the frontmost browser tab</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.12.1</string>
+	<string>1.12.2</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>

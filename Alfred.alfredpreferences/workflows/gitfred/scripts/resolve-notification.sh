@@ -10,9 +10,9 @@ token=$github_token_from_alfred_prefs
 #────────────────────────────────────────────────────────────────────────────
 
 # MARK AS READ/DONE
-if [[ "$mode" == "mark-as-read" || "$mode" == "mark-as-done" ]]; then
+if [[ "$mode" == "read" || "$mode" == "done" ]]; then
 	# DOCS https://docs.github.com/en/rest/activity/notifications?apiVersion=2022-11-28#mark-a-thread-as-read
-	method=$([[ "$mode" == "mark-as-read" ]] && echo "PATCH" || echo "DELETE")
+	method=$([[ "$mode" == "read" ]] && echo "PATCH" || echo "DELETE")
 	thread_id="$1"
 	curl --silent --location \
 		--request "$method" \

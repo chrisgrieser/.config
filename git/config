@@ -25,6 +25,8 @@
 	detachedHead = false
 [help]
 	autoCorrect = prompt ; prompt to run auto-correction
+[column]
+	ui = auto
 
 ;───────────────────────────────────────────────────────────────────────────────
 
@@ -49,7 +51,7 @@
 	sort = -version:refname
 
 [log]
-	abbrevCommit = true ; don't show 40 characters, but rather 7-9
+	abbrevCommit = true ; show 7-9 chars instead of 40
 	follow = true
 [format]
 	pretty = %C(yellow)%h%C(red)%d%C(reset) %s %C(green)(%cr) %C(bold blue)%an%C(reset)
@@ -68,6 +70,7 @@
 [diff]
 	algorithm = histogram ; https://luppeng.wordpress.com/2020/10/10/when-to-use-each-of-the-git-diff-algorithms/
 	colorMoved = true ; moved lines colored different than added/removed
+	relative = true
 [merge]
 	conflictStyle = zdiff3 ; shows original version in middle ; https://www.ductile.systems/zdiff3/
 [rerere]
