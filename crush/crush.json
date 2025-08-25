@@ -13,11 +13,13 @@
 		"javascript": { "command": "typescript-language-server", "args": ["--stdio"] },
 		"swift": { "command": "sourcekit-lsp" },
 		"lua": { "command": "lua-language-server" },
-		"json": { "command": "vscode-json-language-server", "args": ["--stdio"] },
-		"markdown": { "command": "marksman", "args": ["server"] },
-		"python": { "command": "basedpyright-langserver", "args": ["--stdio"] }
+
+		"disabled_throwing_errors": { "command": "basedpyright-langserver", "args": ["--stdio"] }
 	},
-	"options": {},
+	"options": {
+		"disable_auto_summarize": false,
+		"context_paths": ["./AGENT.md"]
+	},
 
 	"$schema": "https://charm.land/crush.json"
 }

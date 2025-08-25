@@ -83,8 +83,8 @@ function run(argv) {
 
 		const addressStr = address.join(", ");
 		const addressDisplay = address.slice(1).join(", "); // skip name from display
-		const url1 = mapProvider[mapProvider1] + encodeURIComponent(addressStr);
-		const url2 = mapProvider[mapProvider2] + encodeURIComponent(addressStr);
+		const mapProvider1Url = mapProvider[mapProvider1] + encodeURIComponent(addressStr);
+		const mapProvider2Url = mapProvider[mapProvider2] + encodeURIComponent(addressStr);
 
 		// SIC osm coordinates are long/lat, even though mapping apps expect
 		// lat/long, thus needs to be reversed
@@ -93,29 +93,30 @@ function run(argv) {
 		return {
 			title: title,
 			subtitle: addressDisplay,
-			arg: url1, // open at primary map provider
+			arg: mapProvider1Url,
 			mods: {
-				cmd: { arg: url2 }, // open at secondary map provider
+				cmd: { arg: mapProvider2Url },
 				ctrl: { arg: addressStr }, // copy
 				shift: { arg: coordinates }, // copy
 			},
-
-			// only for debugging
-			variables: { address: addressStr, url1: url1, url2: url2, coordinates: coordinates },
+			variables: { // only for debugging
+				address: addressStr,
+				url1: mapProvider1Url,
+				url2: mapProvider2Url,
+				coordinates: coordinates,
+			},
 		};
 	});
 
 	// manual search fallback
-	
-	
 	items.push({
 		title: `Search for "${query}"`,
 		subtitle: mapProvider1,
 		arg: mapProvider[mapProvider1] + encodeURIComponent(query),
 		mods: {
-			cmd: { arg: mapProvider[mapProvider2] + encodeURIComponent(query) }, // open at secondary map provider
+			cmd: { arg: mapProvider[mapProvider2] + encodeURIComponent(query) },
 		},
-	})
+	});
 
 	return JSON.stringify({ items: items });
 }
