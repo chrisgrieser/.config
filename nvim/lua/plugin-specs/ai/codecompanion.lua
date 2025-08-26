@@ -4,7 +4,7 @@
 
 -- https://platform.openai.com/usage
 -- https://platform.openai.com/docs/models
-local model = "gpt-5-nano"
+local model = "gpt-5-mini"
 local reasoning_effort = "minimal" -- all GPT-5 models reason, "medium" is too slow
 
 --------------------------------------------------------------------------------
@@ -130,7 +130,14 @@ local ccSpec = {
 				return require("codecompanion.adapters").extend("openai", {
 					env = { api_key = ("cmd:cat %q"):format(apiKeyFile) },
 					schema = {
-						model = { default = model },
+						model = {
+							default = model,
+							choices = {
+								["gpt-5-nano"] = { opts = { has_vision = true, can_reason = true, stream = true } },
+								["gpt-5-mini"] = { opts = { has_vision = true, can_reason = true, stream = false } },
+								["gpt-5"] = { opts = { has_vision = true, can_reason = true, stream = false } },
+							},
+						},
 						reasoning_effort = { default = reasoning_effort },
 					},
 				})
