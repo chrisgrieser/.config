@@ -132,6 +132,17 @@ rules:
                 end tell'
         conditions:
           - { type: frontmost_application_if, bundle_identifiers: [com.apple.Preview] }
+      # Mimestream
+      - type: basic
+        from: { key_code: e, modifiers: { mandatory: [command, shift] } }
+        to:
+          - shell_command: |
+              osascript -e '
+                tell application "System Events" to tell (first process where it is frontmost)
+                  click menu item "Export as PDF…" of menu "File" of menu bar 1
+                end tell'
+        conditions:
+          - { type: frontmost_application_if, bundle_identifiers: [com.mimestream.Mimestream] }
   #─────────────────────────────────────────────────────────────────────────────
   - description: "⌘L: Reveal in Finder"
     manipulators:
