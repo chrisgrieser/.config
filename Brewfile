@@ -4,8 +4,7 @@
 # CLI
 brew "bat"
 brew "eza"
-tap "felixkratz/formulae"
-brew "felixkratz/formulae/sketchybar"
+tap "felixkratz/formulae"; brew "felixkratz/formulae/sketchybar"
 brew "fzf"
 brew "gh"
 brew "git-delta"
@@ -25,8 +24,7 @@ brew "zsh-autopair"
 brew "zsh-autosuggestions"
 brew "zsh-history-substring-search"
 brew "zsh-syntax-highlighting"
-tap "charmbracelet/tap"
-brew "charmbracelet/tap/crush"
+tap "charmbracelet/tap" ; brew "charmbracelet/tap/crush"
 
 # APPS
 cask "alfred"
@@ -60,18 +58,13 @@ cask "syntax-highlight" # `Peek` not available anymore https://apps.apple.com/us
 computerName = `scutil --get ComputerName`
 
 if computerName.include?("Home")
-	brew "yt-dlp"
-	brew "ffmpeg" # recommended for `yt-dlp`
+	brew "yt-dlp" ; brew "ffmpeg" # `ffmpeg` recommended for `yt-dlp`
 	cask "catch"
 	cask "bettertouchtool"
-
+end
+if !computerName.include?("Office")
 	cask "iina"
 	cask "steam"
 	cask "transmission"
-	cask "qlvideo" # provides preview icons for `mkv`
-elsif computerName.include?("Mother")
-	cask "iina"
-	cask "steam"
-	cask "transmission"
-	cask "qlvideo" # provides preview icons for `mkv`
+	cask "qlvideo" # provides preview icons for `.mkv`
 end
