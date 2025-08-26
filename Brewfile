@@ -4,6 +4,7 @@
 # CLI
 brew "bat"
 brew "eza"
+tap "felixkratz/formulae"
 brew "felixkratz/formulae/sketchybar"
 brew "fzf"
 brew "gh"
@@ -24,6 +25,7 @@ brew "zsh-autopair"
 brew "zsh-autosuggestions"
 brew "zsh-history-substring-search"
 brew "zsh-syntax-highlighting"
+tap "charmbracelet/tap"
 brew "charmbracelet/tap/crush"
 
 # APPS
