@@ -4,7 +4,7 @@
 
 -- https://platform.openai.com/usage
 -- https://platform.openai.com/docs/models
-local model = "gpt-5-mini"
+local model = "gpt-5-nano"
 local reasoning_effort = "minimal" -- all GPT-5 models reason, "medium" is too slow
 
 --------------------------------------------------------------------------------
@@ -132,11 +132,8 @@ local ccSpec = {
 					schema = {
 						model = {
 							default = model,
-							choices = {
-								["gpt-5-nano"] = { opts = { has_vision = true, can_reason = true, stream = true } },
-								["gpt-5-mini"] = { opts = { has_vision = true, can_reason = true, stream = false } },
-								["gpt-5"] = { opts = { has_vision = true, can_reason = true, stream = false } },
-							},
+							-- PENDING https://github.com/olimorris/codecompanion.nvim/pull/2017
+							choices = { ["gpt-5-nano"] = { opts = { stream = false } } },
 						},
 						reasoning_effort = { default = reasoning_effort },
 					},
