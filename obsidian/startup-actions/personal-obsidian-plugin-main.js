@@ -119,6 +119,7 @@ function ensureScrolloffset(editor) {
 	const distancePercent = 0.4; // CONFIG
 
 	if (!editor.hasFocus()) return;
+	if (editor.editorComponent.tableCell) return; // is editor in table cell
 	const cursor = editor.getCursor();
 	const cursorOffSet = editor.posToOffset(cursor);
 	const cursorCoord = editor.cm.coordsAtPos(cursorOffSet);
