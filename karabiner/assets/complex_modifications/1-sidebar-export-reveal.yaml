@@ -143,6 +143,13 @@ rules:
                 end tell'
         conditions:
           - { type: frontmost_application_if, bundle_identifiers: [com.mimestream.Mimestream] }
+      # Brave Browser
+      - type: basic
+        from: { key_code: e, modifiers: { mandatory: [command, shift] } }
+        to:
+          - { key_code: p, modifiers: [command] }
+        conditions:
+          - { type: frontmost_application_if, bundle_identifiers: [com.brave.Browser] }
   #─────────────────────────────────────────────────────────────────────────────
   - description: "⌘L: Reveal in Finder"
     manipulators:
