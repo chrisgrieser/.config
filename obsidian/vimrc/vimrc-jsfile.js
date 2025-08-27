@@ -170,6 +170,14 @@ function cycleListTypes() {
 	editor.setCursor(lnum, col + diff); // keep cursor in same place
 }
 
+function showAllTasks() {
+	const allTasks = editor.getValue()
+		.split("\n")
+		.filter((line) => line.match(/- \[[x ]\]/))
+	console.log("🪚 🟩");
+	new Notice(linesWithTasks.join("\n"), 0)
+}
+
 /** @param {"above"|"below"} where */
 function smartOpenLine(where) {
 	const lnum = editor.getCursor().line;
@@ -177,7 +185,7 @@ function smartOpenLine(where) {
 
 	const [indentAndText] = curLine.match(/^\s*(>+|- \[[x ]\]|[-*+]|\d+[.)]) /) || [""];
 	const newPrefix = indentAndText
-		.replace(/\d+/, (n) => (Number.parseInt(n) + 1).toString()) // increment ordered list
+		.replace(/\d+/, (n) => (Number.parseInt(n, 10) + 1).toString()) // increment ordered list
 		.replace(/\[x\]/, "[ ]"); // new tasks should be open
 
 	const targetLine = where === "above" ? lnum : lnum + 1;
