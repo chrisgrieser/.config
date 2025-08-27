@@ -7,6 +7,7 @@ app.includeStandardAdditions = true;
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
+	const dlFolder = $.getenv("download_folder");
 	// each `.stdout` file represents one ongoing download
 	// getting the last line from each -> progress for each
 	const shellCmd = `tail --silent --lines=1 "$alfred_workflow_cache"/*.stdout || true`;
@@ -22,10 +23,14 @@ function run() {
 			return {
 				title: info.trim(),
 				subtitle: videoTitle,
-				valid: false, // since not actionable
+				arg: dlFolder,
 			};
 		});
-	if (downloads.length === 0) downloads.push({ title: "No downloads in progress", valid: false });
+	if (downloads.length === 0) downloads.push({
+		title: "No downloads in progress",
+		subtitle: "⏎: Open download folder",
+		arg: dlFolder,
+	});
 
 	return JSON.stringify({
 		items: downloads,
