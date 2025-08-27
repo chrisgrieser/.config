@@ -67,16 +67,9 @@ keymap("n", "gm", "%", { desc = "󰅪 Goto match", remap = true })
 keymap("n", "ge", "]d", { desc = "󰋼 Next diagnostic", remap = true })
 keymap("n", "gE", "[d", { desc = "󰋼 Previous diagnostic", remap = true })
 
-
-
-
 -- Open URL in file
-keymap(
-	"n",
-	"<D-U>",
-	function() require("personal-plugins.misc").openUrlInBuffer() end,
-	{ desc = " Open URL in buffer" }
-)
+-- stylua: ignore
+keymap("n", "<D-U>", function() require("personal-plugins.misc").openUrlInBuffer() end, { desc = " Open URL in buffer" })
 
 --------------------------------------------------------------------------------
 -- MARKS
@@ -222,8 +215,8 @@ end
 -- CYCLIC PASTE
 do
 	-- same as regular `p`, but when undoing the paste and then using `.`, will
-	-- paste `""2p`, so `p......` pasts all recent deletions and `pu.u.u.u.`
-	-- cycles through the them
+	-- paste `"2p`, so `<C-p>......` pastes all recent deletions and `pu.u.u.u.`
+	-- cycles through them
 	keymap("n", "<C-p>", '"1p', { desc = " Cyclic paste" })
 
 	vim.api.nvim_create_autocmd("TextYankPost", {
