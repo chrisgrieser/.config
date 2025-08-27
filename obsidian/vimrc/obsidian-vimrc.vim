@@ -546,6 +546,9 @@ nnoremap gt :gotoNextTask<CR>
 exmap gotoPrevTask jsfile Meta/vimrc-jsfile.js { gotoLineWithPattern("prev", /- \[[x ]\]|TODO/, "wrap") }
 nnoremap gT :gotoPrevTask<CR>
 
+exmap showTasks jsfile Meta/vimrc-jsfile.js { showAllTasks() }
+nnoremap ,it :showTasks<CR>
+
 " [f]ootnotes (requires Footnotes Shortcut Plugin)
 exmap gotoFootnote obcommand obsidian-footnotes:insert-autonumbered-footnote
 nnoremap gf :gotoFootnote<CR>

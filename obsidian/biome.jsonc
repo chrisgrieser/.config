@@ -4,7 +4,8 @@
 
 {
 	"root": false,
-	"extends": ["../../biome.jsonc"],
+	// SIC one level higher than it actually is: https://github.com/biomejs/biome/issues/7343
+	"extends": "\/\/", // "//" = inherit from root (/ needs to be escaped, since this is jsonc)
 
 	"javascript": {
 		"globals": [
@@ -13,7 +14,8 @@
 			"editor", // vimrc plugin
 			"view", // vimrc plugin
 			"electronWindow", // Electron
-			"activeWindow" // Electron
+			"activeWindow", // Electron,
+			"activeDocument" // Electron
 		]
 	},
 
