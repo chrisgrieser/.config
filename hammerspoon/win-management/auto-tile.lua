@@ -22,7 +22,10 @@ local config = {
 ---@param appName string
 local function autoTile(appName)
 	local app = hs.application.find(appName, true, true)
-	if not app then return end
+	if not app then
+		M["winCount_" .. appName] = 0
+		return
+	end
 
 	-- need to manually filter windows, since window filter is sometimes buggy
 	-- and does include the correct number of windows
@@ -35,7 +38,7 @@ local function autoTile(appName)
 	end) --[[@as hs.window[] ]]
 
 	-- GUARD idempotent
-	if M["winCount_" .. appName] == #wins then return end
+	if M["winCount_" .. appName] == #wins and #wins > 1 then return end
 	M["winCount_" .. appName] = #wins
 
 	-- GUARD not with multiple windows
