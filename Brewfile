@@ -4,7 +4,6 @@
 # CLI
 brew "bat"
 brew "eza"
-tap "felixkratz/formulae"; brew "felixkratz/formulae/sketchybar"
 brew "fzf"
 brew "gh"
 brew "git-delta"
@@ -25,11 +24,10 @@ brew "zsh-autosuggestions"
 brew "zsh-history-substring-search"
 brew "zsh-syntax-highlighting"
 tap "charmbracelet/tap" ; brew "charmbracelet/tap/crush"
+tap "felixkratz/formulae"; brew "felixkratz/formulae/sketchybar"
 
 # APPS
 cask "alfred"
-cask "tabtab" # alt-tab not working https://github.com/neovide/neovide/issues/3182
-cask "signal"
 cask "appcleaner"
 cask "brave-browser"
 cask "espanso"
@@ -38,10 +36,13 @@ cask "hammerspoon", postinstall: "defaults write org.hammerspoon.Hammerspoon MJC
 cask "karabiner-elements"
 cask "microsoft-word", greedy: true # greedy since we uninstall the auto-updater
 cask "mimestream"
+cask "monodraw"
 cask "neovide-app"
 cask "obsidian", greedy: true # greedy for installer version
 cask "replacicon"
+cask "signal"
 cask "slack"
+cask "tabtab" # alt-tab not working https://github.com/neovide/neovide/issues/3182
 cask "wezterm"
 cask "zoom"
 mas "Highlights", id: 1498912833
