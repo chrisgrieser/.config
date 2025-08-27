@@ -52,7 +52,7 @@ class NewFileInFolder extends obsidian.FuzzySuggestModal {
 			const fileAlreadyExists = this.app.vault.getFileByPath(`${folder.path}/${name}.md`);
 			if (!fileAlreadyExists) break;
 			name = name.replace(/\d*$/, (num) => {
-				return num ? (Number.parseInt(num) + 1).toString() : " 1";
+				return num ? (Number.parseInt(num, 10) + 1).toString() : " 1";
 			});
 		}
 
