@@ -22,6 +22,7 @@ fail-if-warnings: true # true -> aborts if citekeys are missing
 
 writer: docx # add `+native_numbering` for automatic "Figure 1" etc.
 reader: "markdown\
+  -emoji\
   +lists_without_preceding_blankline\
   +mark\
   +wikilinks_title_after_pipe"
