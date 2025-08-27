@@ -3,6 +3,7 @@
 return {
 	"lewis6991/satellite.nvim",
 	event = "VeryLazy",
+	enabled = false,
 	opts = {
 		current_only = true,
 		winblend = 10, -- only little transparency, since otherwise hard to see in some themes

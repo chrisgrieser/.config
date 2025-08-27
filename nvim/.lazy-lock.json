@@ -12,6 +12,7 @@
   "lualine.nvim": { "branch": "master", "commit": "b8c23159c0161f4b89196f74ee3a6d02cdc3a955" },
   "mason.nvim": { "branch": "main", "commit": "7dc4facca9702f95353d5a1f87daf23d78e31c2a" },
   "mini.icons": { "branch": "main", "commit": "b8f6fa6f5a3fd0c56936252edcd691184e5aac0c" },
+  "mini.map": { "branch": "main", "commit": "94ce1694e7b7a3940fc507ab25f061deb9c8179c" },
   "mini.operators": { "branch": "main", "commit": "e72b5afec4c339aebd601a56e9ae3ef13d2f5d1a" },
   "neocodeium": { "branch": "main", "commit": "272aed226827d8dadb85b4d9e2c9bb6bd30b4033" },
   "nightfox.nvim": { "branch": "main", "commit": "ba47d4b4c5ec308718641ba7402c143836f35aa9" },
