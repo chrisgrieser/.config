@@ -90,6 +90,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>DB98EEE6-2D54-4B40-A401-48E15892B59D</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>9D890B86-53C6-4C63-A877-00E1CF1482B7</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>F30AA24D-259D-4D2C-80C9-06B5EA576F7C</key>
 		<array>
 			<dict>
@@ -300,6 +313,21 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>openwith</key>
+				<string></string>
+				<key>sourcefile</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openfile</string>
+			<key>uid</key>
+			<string>9D890B86-53C6-4C63-A877-00E1CF1482B7</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>alfredfiltersresults</key>
 				<false/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -427,6 +455,17 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>40</real>
 			<key>ypos</key>
 			<real>270</real>
+		</dict>
+		<key>9D890B86-53C6-4C63-A877-00E1CF1482B7</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>note</key>
+			<string>open dl folder</string>
+			<key>xpos</key>
+			<real>395</real>
+			<key>ypos</key>
+			<real>530</real>
 		</dict>
 		<key>A5EF7576-C0F8-4860-A10D-27678D48B51A</key>
 		<dict>

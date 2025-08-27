@@ -244,6 +244,10 @@
 				<false/>
 				<key>focusedappvariablename</key>
 				<string></string>
+				<key>hotkey</key>
+				<integer>0</integer>
+				<key>hotmod</key>
+				<integer>0</integer>
 				<key>leftcursor</key>
 				<false/>
 				<key>modsmode</key>
@@ -469,23 +473,21 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
+				<key>autopaste</key>
 				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
+				<key>clipboardtext</key>
 				<string>{query}</string>
-				<key>title</key>
-				<string>Copied to Clipboard</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
+			<string>alfred.workflow.output.clipboard</string>
 			<key>uid</key>
-			<string>A0B9DA67-52EF-4547-8043-4380EC2A3468</string>
+			<string>81814BDA-49C9-422A-9C6F-B09A214B6756</string>
 			<key>version</key>
-			<integer>1</integer>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -545,6 +547,27 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>Copied to Clipboard</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>A0B9DA67-52EF-4547-8043-4380EC2A3468</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>acceptsmulti</key>
 				<integer>1</integer>
 				<key>filetypes</key>
@@ -561,34 +584,15 @@
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>autopaste</key>
-				<false/>
-				<key>clipboardtext</key>
-				<string>{query}</string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>transient</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.clipboard</string>
-			<key>uid</key>
-			<string>81814BDA-49C9-422A-9C6F-B09A214B6756</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
 	</array>
 	<key>readme</key>
 	<string>## Usage
 
-Perform [Optical Charater Recognition](https://en.wikipedia.org/wiki/Optical_character_recognition) on a screen area via the `ocr` keyword or the [Hotkey](https://www.alfredapp.com/help/workflows/triggers/hotkey/).
+Perform [Optical Character Recognition](https://en.wikipedia.org/wiki/Optical_character_recognition) on a screen area via the `ocr` keyword or the [Hotkey](https://www.alfredapp.com/help/workflows/triggers/hotkey/).
 
 ![Preparing to run OCR from a screenshot](images/about/keyword.png)
 
-Perform Optical Charater recognition on images and PDFs via the [Universal Action](https://www.alfredapp.com/help/features/universal-actions/).
+Perform Optical Character recognition on images and PDFs via the [Universal Action](https://www.alfredapp.com/help/features/universal-actions/).
 
 ![Running OCR on image](images/about/uaimage.png)
 
@@ -758,10 +762,8 @@ Perform Optical Charater recognition on images and PDFs via the [Universal Actio
 			<string>screenshot_keyword</string>
 		</dict>
 	</array>
-	<key>variablesdontexport</key>
-	<array/>
 	<key>version</key>
-	<string>25.1</string>
+	<string>25.2</string>
 	<key>webaddress</key>
 	<string>https://github.com/alfredapp/multi-ocr-workflow/</string>
 </dict>

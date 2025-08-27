@@ -4,6 +4,16 @@ cat <<EOF
 { "items":
   [
     {
+      "uid": "About",
+      "title": "About",
+      "subtitle": "Open the 'About' pane",
+      "arg": "x-apple.systempreferences:com.apple.SystemProfiler.AboutExtension",
+      "autocomplete": "About",
+      "icon": {
+        "path": "./Images/About.png"
+      }
+    },
+    {
       "uid": "Accessibility General",
       "title": "Accessibility General",
       "subtitle": "Open the 'Accessibility General' pane",
@@ -16,19 +26,9 @@ cat <<EOF
     {
       "uid": "Accessibility → Audio",
       "title": "Accessibility → Audio",
-      "subtitle": "Open the 'Accessibility → Audio' pane",
-      "arg": "x-apple.systempreferences:com.apple.preference.universalaccess?Audio",
-      "autocomplete": "Accessibility → Audio",
-      "icon": {
-        "path": "./Images/Accessibility.png"
-      }
-    },    
-    {
-      "uid": "Accessibility → Hearing Devices",
-      "title": "Accessibility → Hearing Devices",
       "subtitle": "Open the 'Accessibility → Hearing Devices' pane",
       "arg": "x-apple.systempreferences:com.apple.preference.universalaccess?Hearing",
-      "autocomplete": "Accessibility → Hearing Devices",
+      "autocomplete": "Accessibility → Audio",
       "icon": {
         "path": "./Images/Accessibility.png"
       }
@@ -44,7 +44,7 @@ cat <<EOF
       }
     },
     {
-      "uid": "Accessibility → Audio Descriptions",
+      "uid": "Accessibility → Descriptions",
       "title": "Accessibility → Audio Descriptions",
       "subtitle": "Open the 'Accessibility → Audio Descriptions' pane",
       "arg": "x-apple.systempreferences:com.apple.preference.universalaccess?Media_Descriptions",
@@ -74,12 +74,11 @@ cat <<EOF
       }
     },
     {
-      "uid": "Accessibility → Pointer Control",
-      "title": "Accessibility → Pointer Control",
-      "match": "accessibility mouse trackpad pointer control",
-      "subtitle": "Open the 'Accessibility → Pointer Control' pane (if a mouse has been connected)",
-      "arg": "x-apple.systempreferences:com.apple.preference.universalaccess?PointerControl",
-      "autocomplete": "Accessibility → Pointer Control",
+      "uid": "Accessibility → Mouse & Trackpad",
+      "title": "Accessibility → Mouse & Trackpad",
+      "subtitle": "Open the 'Accessibility → Pointer Control' pane",
+      "arg": "x-apple.systempreferences:com.apple.preference.universalaccess?Mouse",
+      "autocomplete": "Accessibility → Mouse & Trackpad",
       "icon": {
         "path": "./Images/Accessibility.png"
       }
@@ -137,22 +136,11 @@ cat <<EOF
     {
       "uid": "Apple Account",
       "title": "Apple Account",
-      "match": "apple id account",      
       "subtitle": "Open the 'Apple Account' pane",
       "arg": "x-apple.systempreferences:com.apple.preferences.AppleIDPrefPane",
       "autocomplete": "Apple Account",
       "icon": {
         "path": "./Images/AppleID.png"
-      }
-    },
-    {
-      "uid": "Apple Intelligence & Siri",
-      "title": "Apple Intelligence & Siri",
-      "subtitle": "Open the 'Apple Intelligence & Siri' pane",
-      "arg": "x-apple.systempreferences:com.apple.Siri-Settings.extension*siri-sae",
-      "autocomplete": "Apple Intelligence & Siri",
-      "icon": {
-        "path": "./Images/AppleIntelligence.png"
       }
     },
     {
@@ -168,7 +156,6 @@ cat <<EOF
     {
       "uid": "Battery",
       "title": "Battery",
-      "match": "energy power battery",
       "subtitle": "Open the 'Battery' pane",
       "arg": "x-apple.systempreferences:com.apple.preference.battery",
       "autocomplete": "Battery",
@@ -197,15 +184,15 @@ cat <<EOF
       }
     },
     {
-      "uid": "Control Centre → Menu Bar",
-      "title": "Control Centre → Menu Bar",
-      "subtitle": "Open the 'Control Centre → Menu Bar' pane",
-      "arg": "x-apple.systempreferences:com.apple.ControlCenter-Settings.extension?MenuBar",
-      "autocomplete": "Control Centre → Menu Bar",
+      "uid": "Date & Time",
+      "title": "Date & Time",
+      "subtitle": "Open the 'Date & Time' pane",
+      "arg": "x-apple.systempreferences:com.apple.preference.datetime",
+      "autocomplete": "Date & Time",
       "icon": {
-        "path": "./Images/ControlCentre.png"
+        "path": "./Images/DateTime.png"
       }
-    },    
+    },
     {
       "uid": "Desktop & Dock",
       "title": "Desktop & Dock",
@@ -214,6 +201,16 @@ cat <<EOF
       "autocomplete": "Desktop & Dock",
       "icon": {
         "path": "./Images/DesktopDock.png"
+      }
+    },
+    {
+      "uid": "Device Management",
+      "title": "Device Management",
+      "subtitle": "Open the 'Device Management' pane",
+      "arg": "x-apple.systempreferences:com.apple.preferences.configurationprofiles",
+      "autocomplete": "Device Management",
+      "icon": {
+        "path": "./Images/Profiles.png"
       }
     },
     {
@@ -270,20 +267,10 @@ cat <<EOF
       "uid": "General",
       "title": "General",
       "subtitle": "Open the 'General' pane",
-      "arg": "x-apple.systempreferences:com.apple.systempreferences.General",
+      "arg": "x-apple.systempreferences:com.apple.systempreferences.Appearnce",
       "autocomplete": "General",
       "icon": {
         "path": "./Images/General.png"
-      }
-    },
-     {
-      "uid": "General → About",
-      "title": "General → About",
-      "subtitle": "Open the 'General → About' pane",
-      "arg": "x-apple.systempreferences:com.apple.SystemProfiler.AboutExtension",
-      "autocomplete": "General → About",
-      "icon": {
-        "path": "./Images/About.png"
       }
     },
     {
@@ -296,181 +283,6 @@ cat <<EOF
         "path": "./Images/Coverage.png"
       }
     },
-     {
-      "uid": "General → Date & Time",
-      "title": "General → Date & Time",
-      "subtitle": "Open the 'General → Date & Time' pane",
-      "arg": "x-apple.systempreferences:com.apple.preference.datetime",
-      "autocomplete": "General → Date & Time",
-      "icon": {
-        "path": "./Images/DateTime.png"
-      }
-    },
-    {
-      "uid": "General → Device Management",
-      "title": "General → Device Management",
-      "match": "general device managament profiles",
-      "subtitle": "Open the 'General → Device Management' pane",
-      "arg": "x-apple.systempreferences:com.apple.preferences.configurationprofiles",
-      "autocomplete": "General → Device Management",
-      "icon": {
-        "path": "./Images/Profiles.png"
-      }
-    },
-    {
-      "uid": "General → Languages & Region",
-      "title": "General → Languages & Region",
-      "subtitle": "Open the 'General → Languages & Region' pane",
-      "arg": "x-apple.systempreferences:com.apple.Localization-Settings.extension",
-      "autocomplete": "General → Languages & Region",
-      "icon": {
-        "path": "./Images/LanguagesRegion.png"
-      }
-    },
-     {
-      "uid": "General → Languages & Region → Translation Languages",
-      "title": "General → Languages & Region → Translation Languages",
-      "subtitle": "Open the 'General → Languages & Region → Translation Languages' pane",
-      "arg": "x-apple.systempreferences:com.apple.Localization-Settings.extension?translation",
-      "autocomplete": "General → Languages & Region → Translation Languages",
-      "icon": {
-        "path": "./Images/LanguagesRegion.png"
-      }
-    },
-    {
-      "uid": "General → Login Items & Extensions",
-      "title": "General → Login Items & Extensions",
-      "subtitle": "Open the 'General → Login Items & Extensions' pane",
-      "arg": "x-apple.systempreferences:com.apple.LoginItems-Settings.extension",
-      "autocomplete": "General → Login Items & Extensions",
-      "icon": {
-        "path": "./Images/LoginItems.png"
-      }
-    },
-    {
-      "uid": "General → Sharing",
-      "title": "General → Sharing",
-      "subtitle": "Open the 'General → Sharing' pane",
-      "arg": "x-apple.systempreferences:com.apple.preferences.sharing",
-      "autocomplete": "General → Sharing",
-      "icon": {
-        "path": "./Images/Sharing.png"
-      }
-    },
-    {
-      "uid": "General → Sharing → Internet Sharing",
-      "title": "General → Sharing → Internet Sharing",
-      "subtitle": "Open the 'General → Sharing → Internet Sharing' pane",
-      "arg": "x-apple.systempreferences:com.apple.preferences.sharing?Internet",
-      "autocomplete": "General → Sharing → Internet Sharing",
-      "icon": {
-        "path": "./Images/Sharing.png"
-      }
-    },
-    {
-      "uid": "General → Sharing → Printer Sharing",
-      "title": "General → Sharing → Printer Sharing",
-      "subtitle": "Open the 'General → Sharing → Printer Sharing' pane",
-      "arg": "x-apple.systempreferences:com.apple.preferences.sharing?Services_PrinterSharing",
-      "autocomplete": "General → Sharing → Printer Sharing",
-      "icon": {
-        "path": "./Images/Sharing.png"
-      }
-    },
-    {
-      "uid": "General → Sharing → Remote Application Scripting",
-      "title": "General → Sharing → Remote Application Scripting",
-      "subtitle": "Open the 'General → Sharing → Remote Application Scripting' pane",
-      "arg": "x-apple.systempreferences:com.apple.preferences.sharing?Services_RemoteAppleEvent",
-      "autocomplete": "General → Sharing → Remote Application Scripting",
-      "icon": {
-        "path": "./Images/Sharing.png"
-      }
-    },
-    {
-      "uid": "General → Sharing → Remote Management",
-      "title": "General → Sharing → Remote Management",
-      "match": "ard general sharing remote management",
-      "subtitle": "Open the 'General → Sharing → Remote Management' pane",
-      "arg": "x-apple.systempreferences:com.apple.preferences.sharing?Services_ARDService",
-      "autocomplete": "General → Sharing → Remote Management",
-      "icon": {
-        "path": "./Images/Sharing.png"
-      }
-    },
-    {
-      "uid": "General → Sharing → Remote Login",
-      "title": "General → Sharing → Remote Login",
-      "match": "general sharing remote login ssh",
-      "subtitle": "Open the 'General → Sharing → Remote Login' pane",
-      "arg": "x-apple.systempreferences:com.apple.preferences.sharing?Services_RemoteLogin",
-      "autocomplete": "General → Sharing → Remote Login",
-      "icon": {
-        "path": "./Images/Sharing.png"
-      }
-    },    
-	{
-      "uid": "General → Sharing → Screen Sharing",
-      "title": "General → Sharing → Screen Sharing",
-      "match": "vnc general sharing screen",
-      "subtitle": "Open the 'General → Sharing → Screen Sharing' pane",
-      "arg": "x-apple.systempreferences:com.apple.preferences.sharing?Services_ScreenSharing",
-      "autocomplete": "General → Sharing → Screen Sharing",
-      "icon": {
-        "path": "./Images/Sharing.png"
-      }
-    },    
-	{
-      "uid": "General → Software Update",
-      "title": "General → Software Update",
-      "subtitle": "Open the 'General → Software Update' panel",
-      "arg": "x-apple.systempreferences:com.apple.Software-Update-Settings.extension",
-      "autocomplete": "General → Software Update",
-      "icon": {
-        "path": "./Images/SoftwareUpdate.png"
-      }
-    },
-    {
-      "uid": "General → Startup Disk",
-      "title": "General → Startup Disk",
-      "subtitle": "Open the 'General → Startup Disk' pane",
-      "arg": "x-apple.systempreferences:com.apple.Startup-Disk-Settings.extension",
-      "autocomplete": "General → Startup Disk",
-      "icon": {
-        "path": "./Images/StartupDisk.png"
-      }
-    },
-    {
-      "uid": "General → Storage",
-      "title": "General → Storage",
-      "subtitle": "Open the 'General → Storage' pane",
-      "arg": "x-apple.systempreferences:com.apple.settings.Storage",
-      "autocomplete": "General → Storage",
-      "icon": {
-        "path": "./Images/Storage.png"
-      }
-    },
-    {
-      "uid": "General → Time Machine",
-      "title": "General → Time Machine",
-      "match": "backup general time machine",      
-      "subtitle": "Open the 'General → Time Machine' pane",
-      "arg": "x-apple.systempreferences:com.apple.Time-Machine-Settings.extension",
-      "autocomplete": "General → Time Machine",
-      "icon": {
-        "path": "./Images/TimeMachine.png"
-      }
-    },
-    {
-      "uid": "General → Transfer or Reset",
-      "title": "General → Transfer or Reset",
-      "subtitle": "Open the 'General → Transfer or Reset' pane",
-      "arg": "x-apple.systempreferences:com.apple.Transfer-Reset-Settings.extension",
-      "autocomplete": "General → Transfer or Reset",
-      "icon": {
-        "path": "./Images/TransferReset.png"
-      }
-    },    
     {
       "uid": "iCloud",
       "title": "iCloud",
@@ -502,21 +314,31 @@ cat <<EOF
       }
     },
     {
-      "uid": "Keyboard → Function Keys",
-      "title": "Keyboard → Function Keys",
+      "uid": "Keyboard → Shortcuts → Function Keys",
+      "title": "Keyboard → Shortcuts → Function Keys",
       "subtitle": "Open the 'Keyboard → Function Keys' pane",
       "arg": "x-apple.systempreferences:com.apple.Keyboard-Settings.extension?FunctionKeys",
-      "autocomplete": "Keyboard → Function Keys",
+      "autocomplete": "Keyboard → Shortcuts → Function Keys",
       "icon": {
         "path": "./Images/Keyboard.png"
       }
     },
     {
-      "uid": "Keyboard → Modifier Keys",
-      "title": "Keyboard → Modifier Keys",
+      "uid": "Keyboard → Shortcuts → Modifier Keys",
+      "title": "Keyboard → Shortcuts → Modifier Keys",
       "subtitle": "Open the 'Keyboard → Modifier Keys' pane",
       "arg": "x-apple.systempreferences:com.apple.preference.keyboard?Shortcuts",
-      "autocomplete": "Keyboard → Modifier Keys",
+      "autocomplete": "Keyboard → Shortcuts → Modifier Keys",
+      "icon": {
+        "path": "./Images/Keyboard.png"
+      }
+    },
+    {
+      "uid": "Keyboard → Input Sources",
+      "title": "Keyboard → Shortcuts → Input Sources",
+      "subtitle": "Open the 'Keyboard → Input Sources' pane",
+      "arg": "x-apple.systempreferences:com.apple.preference.keyboard?InputSources",
+      "autocomplete": "Keyboard → Input Sources",
       "icon": {
         "path": "./Images/Keyboard.png"
       }
@@ -531,7 +353,17 @@ cat <<EOF
         "path": "./Images/Keyboard.png"
       }
     },
-	{
+    {
+      "uid": "Languages & Region",
+      "title": "Languages & Region",
+      "subtitle": "Open the 'Languages & Region' pane",
+      "arg": "x-apple.systempreferences:com.apple.Localization-Settings.extension",
+      "autocomplete": "Languages & Region",
+      "icon": {
+        "path": "./Images/LanguagesRegion.png"
+      }
+    },
+    {
       "uid": "Lock Screen",
       "title": "Lock Screen",
       "subtitle": "Open the 'Lock Screen' pane",
@@ -539,6 +371,26 @@ cat <<EOF
       "autocomplete": "Lock Screen",
       "icon": {
         "path": "./Images/LockScreen.png"
+      }
+    },
+    {
+      "uid": "Login Items",
+      "title": "Login Items",
+      "subtitle": "Open the 'Login Items' pane",
+      "arg": "x-apple.systempreferences:com.apple.LoginItems-Settings.extension",
+      "autocomplete": "Login Items",
+      "icon": {
+        "path": "./Images/LoginItems.png"
+      }
+    },
+    {
+      "uid": "Menu Bar",
+      "title": "Menu Bar",
+      "subtitle": "Open the 'Control Centre' pane",
+      "arg": "x-apple.systempreferences:com.apple.ControlCenter-Settings.extension",
+      "autocomplete": "Menu Bar",
+      "icon": {
+        "path": "./Images/ControlCentre.png"
       }
     },
     {
@@ -550,7 +402,7 @@ cat <<EOF
       "icon": {
         "path": "./Images/Mouse.png"
       }
-    },    
+    },
     {
       "uid": "Network",
       "title": "Network",
@@ -607,16 +459,6 @@ cat <<EOF
       "subtitle": "Open the 'Privacy & Security → Advertising' pane",
       "arg": "x-apple.systempreferences:com.apple.preference.security?Privacy_Advertising",
       "autocomplete": "Privacy & Security → Advertising",
-      "icon": {
-        "path": "./Images/Privacy.png"
-      }
-    },
-     {
-      "uid": "Privacy & Security → App Management",
-      "title": "Privacy & Security → App Management",
-      "subtitle": "Open the 'Privacy & Security → App Management' pane",
-      "arg": "x-apple.systempreferences:com.apple.preference.security?Privacy_AppBundles",
-      "autocomplete": "Privacy & Security → App Management",
       "icon": {
         "path": "./Images/Privacy.png"
       }
@@ -711,16 +553,6 @@ cat <<EOF
         "path": "./Images/Privacy.png"
       }
     },
-     {
-      "uid": "Privacy & Security → Lockdown Mode",
-      "title": "Privacy & Security → Lockdown Mode",
-      "subtitle": "Open the 'Privacy & Security → Lockdown Mode' pane",
-      "arg": "x-apple.systempreferences:com.apple.preference.security?LockdownMode",
-      "autocomplete": "Privacy & Security → Lockdown Mode",
-      "icon": {
-        "path": "./Images/Privacy.png"
-      }
-    },
     {
       "uid": "Privacy & Security → Microphone",
       "title": "Privacy & Security → Microphone",
@@ -762,6 +594,16 @@ cat <<EOF
       }
     },
     {
+      "uid": "Profiles",
+      "title": "Profiles",
+      "subtitle": "Open the 'Profiles' pane",
+      "arg": "x-apple.systempreferences:com.apple.preferences.configurationprofiles",
+      "autocomplete": "Profiles",
+      "icon": {
+        "path": "./Images/Profiles.png"
+      }
+    },
+    {
       "uid": "Screen Saver",
       "title": "Screen Saver",
       "subtitle": "Open the 'Screen Saver' pane",
@@ -779,6 +621,97 @@ cat <<EOF
       "autocomplete": "Screen Time",
       "icon": {
         "path": "./Images/ScreenTime.png"
+      }
+    },
+    {
+      "uid": "Sharing General",
+      "title": "Sharing General",
+      "subtitle": "Open the 'Sharing General' pane",
+      "arg": "x-apple.systempreferences:com.apple.preferences.sharing",
+      "autocomplete": "Sharing General",
+      "icon": {
+        "path": "./Images/Sharing.png"
+      }
+    },
+    {
+      "uid": "Sharing → Internet Sharing",
+      "title": "Sharing → Internet Sharing",
+      "subtitle": "Open the 'Sharing → Internet Sharing' pane",
+      "arg": "x-apple.systempreferences:com.apple.preferences.sharing?Internet",
+      "autocomplete": "Sharing → Internet Sharing",
+      "icon": {
+        "path": "./Images/Sharing.png"
+      }
+    },
+    {
+      "uid": "Sharing → Printer Sharing",
+      "title": "Sharing → Printer Sharing",
+      "subtitle": "Open the 'Sharing → Printer Sharing' pane",
+      "arg": "x-apple.systempreferences:com.apple.preferences.sharing?Services_PrinterSharing",
+      "autocomplete": "Sharing → Printer Sharing",
+      "icon": {
+        "path": "./Images/Sharing.png"
+      }
+    },
+    {
+      "uid": "Sharing → Remote Application Scripting",
+      "title": "Sharing → Remote Application Scripting",
+      "subtitle": "Open the 'Sharing → Remote Application Scripting' pane",
+      "arg": "x-apple.systempreferences:com.apple.preferences.sharing?Services_RemoteAppleEvent",
+      "autocomplete": "Sharing → Remote Application Scripting",
+      "icon": {
+        "path": "./Images/Sharing.png"
+      }
+    },
+    {
+      "uid": "Sharing → Remote Management",
+      "title": "Sharing → Remote Management",
+      "subtitle": "Open the 'Sharing → Remote Management' pane",
+      "arg": "x-apple.systempreferences:com.apple.preferences.sharing?Services_ARDService",
+      "autocomplete": "Sharing → Remote Management",
+      "icon": {
+        "path": "./Images/Sharing.png"
+      }
+    },
+    {
+      "uid": "Sharing → Remote Login",
+      "title": "Sharing → Remote Login",
+      "match": "sharing remote login ssh",
+      "subtitle": "Open the 'Sharing → Remote Login' pane",
+      "arg": "x-apple.systempreferences:com.apple.preferences.sharing?Services_RemoteLogin",
+      "autocomplete": "Sharing → Remote Login",
+      "icon": {
+        "path": "./Images/Sharing.png"
+      }
+    },
+    {
+      "uid": "Sharing → Screen Sharing",
+      "title": "Sharing → Screen Sharing",
+      "subtitle": "Open the 'Sharing → Screen Sharing' pane",
+      "arg": "x-apple.systempreferences:com.apple.preferences.sharing?Services_ScreenSharing",
+      "autocomplete": "Sharing → Screen Sharing",
+      "icon": {
+        "path": "./Images/Sharing.png"
+      }
+    },
+    {
+      "uid": "Siri",
+      "title": "Siri",
+      "subtitle": "Open the 'Siri' pane",
+      "arg": "x-apple.systempreferences:com.apple.Siri-Settings.extension",
+      "autocomplete": "Siri",
+      "icon": {
+        "path": "./Images/SiriSpotlight.png"
+      }
+    },
+    {
+      "uid": "Software Update",
+      "title": "Software Update",
+      "subtitle": "Open the 'Software Update' panel",
+      "arg": "x-apple.systempreferences:com.apple.Software-Update-Settings.extension",
+      "autocomplete": "Software Update",
+      "icon": {
+        "path": "./Images/SoftwareUpdate.png"
       }
     },
     {
@@ -802,6 +735,36 @@ cat <<EOF
       }
     },
     {
+      "uid": "Startup Disk",
+      "title": "Startup Disk",
+      "subtitle": "Open the 'Startup Disk' pane",
+      "arg": "x-apple.systempreferences:com.apple.Startup-Disk-Settings.extension",
+      "autocomplete": "Startup Disk",
+      "icon": {
+        "path": "./Images/StartupDisk.png"
+      }
+    },
+    {
+      "uid": "Storage",
+      "title": "Storage",
+      "subtitle": "Open the 'Storage' pane",
+      "arg": "x-apple.systempreferences:com.apple.settings.Storage",
+      "autocomplete": "Storage",
+      "icon": {
+        "path": "./Images/Storage.png"
+      }
+    },
+    {
+      "uid": "Time Machine",
+      "title": "Time Machine",
+      "subtitle": "Open the 'Time Machine' pane",
+      "arg": "x-apple.systempreferences:com.apple.Time-Machine-Settings.extension",
+      "autocomplete": "Time Machine",
+      "icon": {
+        "path": "./Images/TimeMachine.png"
+      }
+    },
+    {
       "uid": "Touch ID & Password",
       "title": "Touch ID & Password",
       "subtitle": "Open the 'Touch ID & Password' pane",
@@ -822,6 +785,16 @@ cat <<EOF
       }
     },
     {
+      "uid": "Transfer or Reset",
+      "title": "Transfer or Reset",
+      "subtitle": "Open the 'Transfer or Reset' pane",
+      "arg": "x-apple.systempreferences:com.apple.Transfer-Reset-Settings.extension",
+      "autocomplete": "Transfer or Reset",
+      "icon": {
+        "path": "./Images/TransferReset.png"
+      }
+    },
+    {
       "uid": "Users & Groups",
       "title": "Users & Groups",
       "subtitle": "Open the 'Users & Groups' pane",
@@ -835,7 +808,7 @@ cat <<EOF
       "uid": "VPN",
       "title": "VPN",
       "subtitle": "Open the 'VPN' pane (if a VPN has been configured)",
-      "arg": "x-apple.systempreferences:com.apple.NetworkExtensionSettingsUI.NESettingsUIExtension",
+      "arg": "x-apple.systempreferences:com.apple.Users-Groups-Settings.extension",
       "autocomplete": "VPN",
       "icon": {
         "path": "./Images/VPN.png"
