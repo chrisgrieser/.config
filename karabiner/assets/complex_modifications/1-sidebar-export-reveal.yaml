@@ -147,7 +147,7 @@ rules:
                 end tell'
         conditions:
           - { type: frontmost_application_if, bundle_identifiers: [com.apple.Preview] }
-      # Mimestream
+      # Mimestream, TextEdit
       - type: basic
         from: { key_code: e, modifiers: { mandatory: [command, shift] } }
         to:
@@ -157,7 +157,10 @@ rules:
                   click menu item "Export as PDF…" of menu "File" of menu bar 1
                 end tell'
         conditions:
-          - { type: frontmost_application_if, bundle_identifiers: [com.mimestream.Mimestream] }
+          - type: frontmost_application_if
+            bundle_identifiers:
+              - com.mimestream.Mimestream
+              - com.apple.TextEdit
       # Brave Browser
       - type: basic
         from: { key_code: e, modifiers: { mandatory: [command, shift] } }
@@ -172,7 +175,8 @@ rules:
           - { key_code: a, modifiers: [command] }
           - { key_code: c, modifiers: [command] }
           - { key_code: escape }
-          - shell_command: osascript -e 'display notification "Exported to clipboard" with title "Monodraw"'
+          - shell_command:
+              osascript -e 'display notification "Exported to clipboard" with title "Monodraw"'
         conditions:
           - { type: frontmost_application_if, bundle_identifiers: [com.helftone.monodraw] }
   #─────────────────────────────────────────────────────────────────────────────
