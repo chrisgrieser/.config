@@ -171,11 +171,14 @@ function cycleListTypes() {
 }
 
 function showAllTasks() {
-	const allTasks = editor.getValue()
+	const maxLen = 30;
+	const allTasks = editor
+		.getValue()
 		.split("\n")
-		.filter((line) => line.match(/- \[[x ]\]/))
-	console.log("🪚 🟩");
-	new Notice(linesWithTasks.join("\n"), 0)
+		.filter((line) => line.match(/^\s*- \[[x ]\]/))
+		.map((line) => (line.length > maxLen ? `${line.slice(0, maxLen)}…` : line));
+	const header = allTasks.length > 1 ? `${allTasks.length} tasks:\n` : "";
+	new Notice(header + allTasks.join("\n"), 0);
 }
 
 /** @param {"above"|"below"} where */
