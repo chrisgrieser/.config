@@ -106,7 +106,7 @@ rules:
         conditions:
           - { type: frontmost_application_if, bundle_identifiers: [com.helftone.monodraw] }
   #─────────────────────────────────────────────────────────────────────────────
-  - description: "⌘⇧E: Export to PDF"
+  - description: "⌘⇧E: Export"
     manipulators:
       # Microsoft Word
       - type: basic
@@ -169,7 +169,10 @@ rules:
       - type: basic
         from: { key_code: e, modifiers: { mandatory: [command, shift] } }
         to:
-          - { key_code: e, modifiers: [command] }
+          - { key_code: a, modifiers: [command] }
+          - { key_code: c, modifiers: [command] }
+          - { key_code: escape }
+          - shell_command: osascript -e 'display notification "Exported to clipboard" with title "Monodraw"'
         conditions:
           - { type: frontmost_application_if, bundle_identifiers: [com.helftone.monodraw] }
   #─────────────────────────────────────────────────────────────────────────────
