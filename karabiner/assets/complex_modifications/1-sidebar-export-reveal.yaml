@@ -62,6 +62,13 @@ rules:
         conditions:
           - type: frontmost_application_if
             bundle_identifiers: [com.mimestream.Mimestream, com.openai.chat]
+      # Monodraw
+      - type: basic
+        from: { key_code: "1", modifiers: { mandatory: [command] } }
+        to:
+          - { key_code: semicolon, modifiers: [command, shift] }
+        conditions:
+          - { type: frontmost_application_if, bundle_identifiers: [com.helftone.monodraw] }
   #─────────────────────────────────────────────────────────────────────────────
   - description: "⌘0: Toggle RIGHT sidebar"
     manipulators:
@@ -91,6 +98,13 @@ rules:
         to:
           - { key_code: h, modifiers: [command, shift] }
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [us.zoom.xos] }]
+      # Monodraw
+      - type: basic
+        from: { key_code: "0", modifiers: { mandatory: [command] } }
+        to:
+          - { key_code: quote, modifiers: [command, shift] }
+        conditions:
+          - { type: frontmost_application_if, bundle_identifiers: [com.helftone.monodraw] }
   #─────────────────────────────────────────────────────────────────────────────
   - description: "⌘⇧E: Export to PDF"
     manipulators:
@@ -151,6 +165,13 @@ rules:
           - { key_code: p, modifiers: [command] }
         conditions:
           - { type: frontmost_application_if, bundle_identifiers: [com.brave.Browser] }
+      # Monodraw
+      - type: basic
+        from: { key_code: e, modifiers: { mandatory: [command, shift] } }
+        to:
+          - { key_code: e, modifiers: [command] }
+        conditions:
+          - { type: frontmost_application_if, bundle_identifiers: [com.helftone.monodraw] }
   #─────────────────────────────────────────────────────────────────────────────
   - description: "⌘L: Reveal in Finder"
     manipulators:

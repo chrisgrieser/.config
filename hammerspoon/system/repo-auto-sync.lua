@@ -117,7 +117,7 @@ M.caff_SleepWatcherForRepoSync = c.new(function(event)
 		or event == c.screensaverWillStop
 		or event == c.systemDidWake
 	then
-		local delay = env.isAtOffice and 5 or 0 -- spotify internet at the office
+		local delay = env.isAtOffice and 10 or 0 -- spotty internet at the office
 		u.defer(delay, function()
 			syncAllGitRepos(true)
 			M.recentlyTriggered = true
