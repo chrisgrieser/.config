@@ -16,6 +16,9 @@ fi
 
 #───────────────────────────────────────────────────────────────────────────────
 
+# wait for sync of reminders
+[[ "$SENDER" == "system_woke" ]] && sleep 10 # in office, spotty internet on wake
+
 # DOCS https://docs.github.com/en/rest/activity/notifications?apiVersion=2022-11-28
 response=$(curl --silent --location \
 	-H "Accept: application/vnd.github+json" \
