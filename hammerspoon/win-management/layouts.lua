@@ -83,7 +83,7 @@ local function workLayout(shouldDarkenDisplay)
 	dockSwitcher("work")
 
 	-- close things
-	u.closeAllWindows("Finder")
+	u.closeAllFinderWins()
 	u.quitFullscreenAndVideoApps()
 
 	-- open things
@@ -108,7 +108,7 @@ local function movieLayout()
 	darkenDisplay()
 	holeCover.update()
 	dockSwitcher(env.isAtMother and "mother-movie" or "movie")
-	u.closeAllWindows("Finder")
+	u.closeAllFinderWins()
 
 	-- turn off showing hidden files
 	hs.execute("defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder")

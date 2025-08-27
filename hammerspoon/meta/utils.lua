@@ -218,16 +218,15 @@ function M.closeBrowserTabsWith(urlPart)
 	require("win-management.auto-tile").resetWinCount(browser)
 end
 
----@param appName string
-function M.closeAllWindows(appName)
+function M.closeAllFinderWins()
 	M.defer({ 0, 3 }, function()
-		local app = M.app(appName)
-		if not app then return end
-		for _, win in ipairs(app:allWindows()) do
+		local finder = M.app("Finder")
+		if not finder then return end
+		for _, win in ipairs(finder:allWindows()) do
 			win:close()
 		end
 	end)
-	require("win-management.auto-tile").resetWinCount(appName)
+	require("win-management.auto-tile").resetWinCount("Finder")
 end
 
 function M.quitFullscreenAndVideoApps()
