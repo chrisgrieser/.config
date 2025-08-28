@@ -5,7 +5,6 @@
 # ──────────────────────────────────────────────────────────────────────────────
 
 [types]  # fallbacks
-
 text = "neovide"
 plain-text = "neovide"
 video = "IINA"
@@ -21,6 +20,7 @@ magnet = "Transmission"
 [extensions]
 txt = "TextEdit"  # privacy to not open in Editor
 env = "TextEdit"
+csv = "Easy CSV Editor"
 svg = "neovide"
 jsonc = "neovide"
 adblock = "neovide"

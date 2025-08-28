@@ -105,6 +105,13 @@ rules:
           - { key_code: quote, modifiers: [command, shift] }
         conditions:
           - { type: frontmost_application_if, bundle_identifiers: [com.helftone.monodraw] }
+      # Easy CSV Editor
+      - type: basic
+        from: { key_code: "0", modifiers: { mandatory: [command] } }
+        to:
+          - { key_code: i, modifiers: [command] }
+        conditions:
+          - { type: frontmost_application_if, bundle_identifiers: [com.vladbadea.csveditor] }
   #─────────────────────────────────────────────────────────────────────────────
   - description: "⌘⇧E: Export"
     manipulators:
@@ -161,6 +168,17 @@ rules:
             bundle_identifiers:
               - com.mimestream.Mimestream
               - com.apple.TextEdit
+      # Easy CSV Editor
+      - type: basic
+        from: { key_code: e, modifiers: { mandatory: [command, shift] } }
+        to:
+          - shell_command: |
+              osascript -e '
+                tell application "System Events" to tell (first process where it is frontmost)
+                  click menu item "Save As PDF..." of menu "File" of menu bar 1
+                end tell'
+        conditions:
+          - { type: frontmost_application_if, bundle_identifiers: [com.vladbadea.csveditor] }
       # Brave Browser
       - type: basic
         from: { key_code: e, modifiers: { mandatory: [command, shift] } }
@@ -222,3 +240,14 @@ rules:
           - key_code: return_or_enter
         conditions:
           - { type: frontmost_application_if, bundle_identifiers: [net.highlightsapp.universal] }
+      # Easy CSV Editor
+      - type: basic
+        from: { key_code: l, modifiers: { mandatory: [command] } }
+        to:
+          - shell_command: |
+              osascript -e '
+                tell application "System Events" to tell (first process where it is frontmost)
+                  click menu item "Show in Finder" of menu "File" of menu bar 1
+                end tell'
+        conditions:
+          - { type: frontmost_application_if, bundle_identifiers: [com.vladbadea.csveditor] }

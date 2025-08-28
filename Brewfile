@@ -31,7 +31,6 @@ cask "alfred"
 cask "appcleaner"
 cask "brave-browser"
 cask "espanso"
-cask "smoothcsv"
 cask "font-jetbrains-mono-nerd-font"
 cask "hammerspoon", postinstall: "defaults write org.hammerspoon.Hammerspoon MJConfigFile \"$HOME/.config/hammerspoon/init.lua\""
 cask "karabiner-elements"
@@ -48,6 +47,7 @@ cask "wezterm"
 cask "zoom"
 mas "Highlights", id: 1498912833
 mas "Ivory", id: 6444602274
+mas "Easy CSV Editor", id: 1171346381
 
 # QUICKLOOK
 cask "betterzip"
