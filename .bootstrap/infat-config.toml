@@ -19,7 +19,7 @@ web = "Brave Browser"
 magnet = "Transmission"
 
 [extensions]
-txt = "TextEdit"
+txt = "TextEdit"  # privacy to not open in Editor
 env = "TextEdit"
 svg = "neovide"
 jsonc = "neovide"
