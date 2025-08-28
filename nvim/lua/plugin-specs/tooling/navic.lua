@@ -9,7 +9,10 @@ return {
 			auto_attach = true,
 			preference = { "tombi" },
 		},
-		icons = { Object = " " },
+		icons = {
+			Object = " ",
+			Property = " ",
+		},
 		separator = " ",
 		depth_limit = 9,
 		depth_limit_indicator = "…",
