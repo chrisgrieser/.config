@@ -165,35 +165,35 @@ rules:
         to:
           - { key_code: down_arrow, modifiers: [option, shift] }
         conditions:
-          [{ type: frontmost_application_if, bundle_identifiers: [com.tinyspeck.slackmacgap] }]
+          - { type: frontmost_application_if, bundle_identifiers: [com.tinyspeck.slackmacgap] }
       # back in history
       - type: basic
         from: { key_code: h, modifiers: { mandatory: [control] } }
         to:
           - { key_code: semicolon, modifiers: [command] }
         conditions:
-          [{ type: frontmost_application_if, bundle_identifiers: [com.tinyspeck.slackmacgap] }]
+          - { type: frontmost_application_if, bundle_identifiers: [com.tinyspeck.slackmacgap] }
       # forward in history
       - type: basic
         from: { key_code: l, modifiers: { mandatory: [control] } }
         to:
           - { key_code: quote, modifiers: [command] }
         conditions:
-          [{ type: frontmost_application_if, bundle_identifiers: [com.tinyspeck.slackmacgap] }]
+          - { type: frontmost_application_if, bundle_identifiers: [com.tinyspeck.slackmacgap] }
       # next channel
       - type: basic
         from: { key_code: j, modifiers: { mandatory: [control] } }
         to:
           - { key_code: down_arrow, modifiers: [option] }
         conditions:
-          [{ type: frontmost_application_if, bundle_identifiers: [com.tinyspeck.slackmacgap] }]
+          - { type: frontmost_application_if, bundle_identifiers: [com.tinyspeck.slackmacgap] }
       # prev channel
       - type: basic
         from: { key_code: k, modifiers: { mandatory: [control] } }
         to:
           - { key_code: up_arrow, modifiers: [option] }
         conditions:
-          [{ type: frontmost_application_if, bundle_identifiers: [com.tinyspeck.slackmacgap] }]
+          - { type: frontmost_application_if, bundle_identifiers: [com.tinyspeck.slackmacgap] }
   #─────────────────────────────────────────────────────────────────────────────
   # REQUIRED compatibility mode to recognize Alfred as frontmost app
   - description: "(Apps) Alfred: Select with <Tab>"
@@ -243,7 +243,7 @@ rules:
                 currentDoc.checkSyntax();
               '
         conditions:
-          [{ type: frontmost_application_if, bundle_identifiers: [com.apple.ScriptEditor] }]
+          - { type: frontmost_application_if, bundle_identifiers: [com.apple.ScriptEditor] }
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) Mimestream"
     manipulators:
@@ -260,7 +260,7 @@ rules:
         to:
           - { key_code: t, modifiers: [command, option] }
         conditions:
-          [{ type: frontmost_application_if, bundle_identifiers: [com.mimestream.Mimestream] }]
+          - { type: frontmost_application_if, bundle_identifiers: [com.mimestream.Mimestream] }
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) Easy CSV Editor"
     manipulators:
@@ -273,9 +273,9 @@ rules:
                 tell application "System Events" to tell process "Easy CSV Editor"
                   click menu item "Resize Column to Fit Content" of menu "Table Extra" of menu bar 1
                   click menu item "Resize Row to Fit Content" of menu "Table Extra" of menu bar 1
-                  delay 0.2
+                  delay 0.1
                   click menu item "Save" of menu "File" of menu bar 1
                 end tell'
         conditions:
-          [{ type: frontmost_application_if, bundle_identifiers: [com.vladbadea.csveditor] }]
+          - { type: frontmost_application_if, bundle_identifiers: [com.vladbadea.csveditor] }
   #─────────────────────────────────────────────────────────────────────────────
