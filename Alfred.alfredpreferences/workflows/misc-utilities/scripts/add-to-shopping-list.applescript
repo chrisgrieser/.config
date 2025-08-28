@@ -1,7 +1,5 @@
 #!/usr/bin/env osascript
 on run argv
-	set openRemindersAfterwards to ((system attribute "openRemindersAfterwards") is "true")
-
 	set theList to "Shopping"
 	set toBuy to argv as string
 	tell application "Reminders"
