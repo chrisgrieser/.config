@@ -1,7 +1,7 @@
 ---@module "lazy.types"
 ---@type LazyPluginSpec
 return {
-	"echasnovski/mini.icons",
+	"nvim-mini/mini.icons",
 	opts = {
 		file = {
 			["init.lua"] = { glyph = "󰢱" }, -- disable nvim glyph: https://github.com/echasnovski/mini.nvim/issues/1384

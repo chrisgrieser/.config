@@ -21,7 +21,7 @@
   "nvim-genghis": { "branch": "main", "commit": "0fccd6f547d954607083b66d08043b8ed54dee7a" },
   "nvim-justice": { "branch": "main", "commit": "35a37581a71e59d2a299b804ecf11906d5aa65ee" },
   "nvim-lsp-endhints": { "branch": "main", "commit": "f977426055fc6b5c6449b416e08e2462f59b9317" },
-  "nvim-lspconfig": { "branch": "master", "commit": "3d97ec4174bcc750d70718ddedabf150536a5891" },
+  "nvim-lspconfig": { "branch": "master", "commit": "52364267cd7edbc0e9b25ab3bfb1c8f45dd58fde" },
   "nvim-navic": { "branch": "master", "commit": "f887d794a0f4594882814d7780980a949200a238" },
   "nvim-origami": { "branch": "main", "commit": "44290197c47801b91ea569f1f6d8de8ce8693adb" },
   "nvim-rip-substitute": { "branch": "main", "commit": "8da3f01652b73712dc624c72fcdc537fb1b327b9" },
@@ -41,6 +41,6 @@
   "snacks.nvim": { "branch": "main", "commit": "bc0630e43be5699bb94dadc302c0d21615421d93" },
   "tokyonight.nvim": { "branch": "main", "commit": "057ef5d260c1931f1dffd0f052c685dcd14100a3" },
   "treesj": { "branch": "main", "commit": "3b4a2bc42738a63de17e7485d4cc5e49970ddbcc" },
-  "ultimate-autopair.nvim": { "branch": "v0.6", "commit": "e65731d50c548c020f3961bb42071671f0fa923c" },
+  "ultimate-autopair.nvim": { "branch": "v0.6", "commit": "2479d645ab96b968dd1bf15930f74b3682448466" },
   "which-key.nvim": { "branch": "main", "commit": "370ec46f710e058c9c1646273e6b225acf47cbed" }
 }

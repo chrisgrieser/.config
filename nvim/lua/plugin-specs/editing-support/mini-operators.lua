@@ -1,7 +1,7 @@
 ---@module "lazy.types"
 ---@type LazyPluginSpec
 return {
-	"echasnovski/mini.operators",
+	"nvim-mini/mini.operators",
 	keys = {
 		{ "s", desc = "󰅪 Substitute Operator" }, -- in visual mode, `s` surrounds
 		{ "w", mode = { "n", "x" }, desc = "󰅪 Multiply Operator" },
