@@ -32,7 +32,7 @@ find "." -maxdepth 1 -name "*.mkv" | while read -r old_name; do
 			cut -c3- | # remove `./`
 			tr "._" " " |
 			sed 's/ *\[[a-zA-Z0-9_]*\] *//g' | # tags for the subbing group
-			sed -E 's/(1080p|720p).*/(\1)/' |  # video file info after the resolution info
+			sed -E 's/(1080p|720p).*/\1/' |    # video file info after the resolution info
 			tr -s " ()"                        # remove leftover spaces or double brackets
 	)
 	new_name="./$new_name.mkv"
@@ -43,7 +43,7 @@ find "." -maxdepth 1 -name "*.mkv" | while read -r old_name; do
 done
 
 # QUIT TRANSMISSION, IF NO OTHER ACTIVE TORRENTS
-sleep 15 # time for potential new torrents to be initialized
+sleep 5 # time for potential new torrents to be initialized
 incomplete_dir=$(defaults read org.m0k.transmission IncompleteDownloadFolder)
 active_torrents=$(find "$incomplete_dir" -mindepth 1 -not -name ".DS_Store" -not -name ".localized")
 [[ -z "$active_torrents" ]] && killall "Transmission"
