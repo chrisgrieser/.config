@@ -23,7 +23,7 @@ function getFrontWin() {
 /** Necessary, as this workflow requires unique keywords to determine which kind
  * of search to perform.
  * @return {boolean} whether there are duplicates
- * */
+ */
 function hasDuplicateKeywords() {
 	const keywords = [
 		$.getenv("custom_folder_keyword"),
@@ -71,12 +71,10 @@ const rgIgnoreFile =
 const pathExport = "export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; ";
 
 /** @typedef {Object} SearchConfig
- * @property {string} shellCmd `%s` is replaced with `dir`
+ * @property {string} shellCmd `%s` is replaced with `directory`
  * @property {boolean=} shallowOutput whether the `shellCmd` performs a search of depth 1
  * @property {boolean=} absPathOutput whether the `shellCmd` gives absolute paths as output
  * @property {string=} directory where to search
- * @property {number=} maxFiles if not set, all files are returned
- * @property {string=} prefix solely for display purposes
  */
 
 /** @type {Record<string, SearchConfig>} */
@@ -85,12 +83,11 @@ const searchConfig = {
 		// INFO `fd` does not allow to sort results by recency, thus using `rg` instead
 		// CAVEAT As opposed to `fd`, `rg` does not give us folders, which is
 		// acceptable since this searches for recent files, and modification dates
-		// for folders are unintuitive (only affected by files one level deep).
+		// for folders are unintuitive anyway (only affected by files one level deep).
 		shellCmd:
 			pathExport +
 			`cd "%s" && rg --no-config --files --binary --sortr=modified --ignore-file="${rgIgnoreFile}"`,
 		directory: app.pathTo("home folder"),
-		maxFiles: Math.min(Number.parseInt($.getenv("max_recent_files")), 10),
 	},
 	[$.getenv("custom_folder_keyword")]: {
 		shellCmd: `ls -t "%s"`, // `-t` to sort by modification date
@@ -99,18 +96,18 @@ const searchConfig = {
 	},
 	[$.getenv("trash_keyword")]: {
 		// - `-maxdepth 1 -mindepth 1` is faster than `-depth 1` PERF
-		// - not using `rg`, since it will not find folders
+		// - not using `rg`, since it does not find folders
 		shellCmd: `find "$HOME/.Trash" ${getTrashPathQuoted()} -maxdepth 1 -mindepth 1`,
 		absPathOutput: true,
 		shallowOutput: true,
 	},
 	[$.getenv("tag_keyword")]: {
-		// `stat`/`sort` to sort by modification date
+		// - `stat`/`sort` to sort by modification date
+		// - exclude trash, since due to some bug it's sometimes included
 		shellCmd:
-			`mdfind "kMDItemUserTags == ${$.getenv("tag_to_search")}"` +
-			'| xargs -I {} stat -f "%m %N" "{}" | sort -nr | cut -d" " -f2-',
+			`mdfind "kMDItemUserTags == ${$.getenv("tag_to_search")}" ` +
+			'| grep --invert-match "/.Trash/" | xargs -I {} stat -f "%m %N" "{}" | sort -nr | cut -d" " -f2-',
 		absPathOutput: true,
-		prefix: $.getenv("tag_prefix"),
 	},
 	[$.getenv("frontwin_keyword")]: {
 		shellCmd: `ls -t "%s"`, // `-t` to sort by modification date
@@ -132,16 +129,17 @@ function run() {
 	console.log("KEYWORD:", keyword);
 
 	// PARAMETERS
-	let { shellCmd, directory, absPathOutput, shallowOutput, maxFiles, prefix } =
-		searchConfig[keyword];
-	prefix = prefix ? prefix + " " : "";
-
-	// EXECUTE SEARCH
+	let { shellCmd, directory, absPathOutput, shallowOutput } = searchConfig[keyword];
+	const maxFiles = keyword === $.getenv("recent_keyword")
+		? Math.min(Number.parseInt($.getenv("max_recent_files"), 10), 9)
+		: undefined;
 	if (keyword === $.getenv("frontwin_keyword")) {
 		directory = getFrontWin();
 		if (directory === "") return errorItem("⚠️ No Finder window found.");
 	}
 	if (directory) shellCmd = shellCmd.replace("%s", directory);
+
+	// EXECUTE SEARCH
 	console.log("SHELL COMMAND\n" + shellCmd);
 	const stdout = app.doShellScript(shellCmd).trim();
 	console.log("\nSTDOUT (shortened)\n" + stdout.slice(0, 300));
@@ -172,7 +170,7 @@ function run() {
 
 			/** @type {AlfredItem} */
 			const item = {
-				title: prefix + name,
+				title: name,
 				subtitle: subtitle,
 				arg: absPath,
 				quicklookurl: absPath,
@@ -184,6 +182,8 @@ function run() {
 				item.mods = {
 					cmd: { subtitle: "⛔ Already front window", valid: false },
 				};
+			} else if (keyword === $.getenv("tag_keyword")) {
+				item.title = $.getenv("tag_prefix") + " " + item.title;
 			}
 			return item;
 		});
