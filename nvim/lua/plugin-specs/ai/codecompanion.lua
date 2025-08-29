@@ -130,11 +130,7 @@ local ccSpec = {
 				return require("codecompanion.adapters").extend("openai", {
 					env = { api_key = ("cmd:cat %q"):format(apiKeyFile) },
 					schema = {
-						model = {
-							default = model,
-							-- PENDING https://github.com/olimorris/codecompanion.nvim/pull/2017
-							choices = { ["gpt-5-nano"] = { opts = { stream = false } } },
-						},
+						model = { default = model },
 						reasoning_effort = { default = reasoning_effort },
 					},
 				})

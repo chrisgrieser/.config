@@ -32,6 +32,12 @@ function bat { # dark-mode aware
 	command bat --theme="$theme" "$@"
 }
 
+function gh { # lazy load GITHUB_TOKEN for extra security
+	_export_github_token # defined in .zshenv
+	unfunction gh
+	gh "$@"
+}
+
 #───────────────────────────────────────────────────────────────────────────────
 
 # 1. Define `pass cd` as pseudo-subcommand to go to the password store directory.
