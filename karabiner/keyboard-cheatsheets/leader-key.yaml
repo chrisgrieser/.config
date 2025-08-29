@@ -3,7 +3,7 @@ top_row:
   w: Whatsapp
   e: M[e]ssenger
   r: Reddit (Alfred)
-  t: Twilight Wars
+  t: "Twilight Imperium (⇧: Transmission)"
   z: Zoom
   u: Obsidian (writing vault)
   i: Rem[i]nder
@@ -21,7 +21,7 @@ home_row:
   j: Obsidian (phd-data vault)
   k: "Karabiner Event Viewer"
   l: Termina[l]
-  ö: "Ivory (shift: Mastodon Website)"
+  ö: "Ivory (⇧: Mastodon Website)"
   ä:
   "#":
 bottom_row:
@@ -29,7 +29,7 @@ bottom_row:
   x:
   c: Calendar
   v:
-  b: "Browser (shift: re-open last tab)"
+  b: "Browser (⇧: re-open last tab)"
   n: Neovide
   m: Mimestream
   ",": System Preferences

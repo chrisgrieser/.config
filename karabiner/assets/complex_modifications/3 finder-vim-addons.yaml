@@ -4,29 +4,14 @@
 #───────────────────────────────────────────────────────────────────────────────
 anchors:
   - conditions:
-      - &finder-app
-        type: frontmost_application_if
-        bundle_identifiers: [^com\.apple\.finder$]
-      - &not-insert-mode
-        type: variable_unless
-        name: FINDER_INSERT_MODE
-        value: true
-      - &not-find-mode
-        type: variable_unless
-        name: FINDER_FIND_MODE
-        value: true
-      - &no-menu-open
-        type: variable_unless
-        name: FINDER_MENU_ACTIVE
-        value: true
-      - &is-German-keyboard
-        type: input_source_if
-        input_sources: [language: ^de$]
+      - &finder-app { type: frontmost_application_if, bundle_identifiers: [^com\.apple\.finder$] }
+      - &not-insert-mode { type: variable_unless, name: FINDER_INSERT_MODE, value: true }
+      - &not-find-mode { type: variable_unless, name: FINDER_FIND_MODE, value: true }
+      - &no-menu-open { type: variable_unless, name: FINDER_MENU_ACTIVE, value: true }
+      - &is-German-keyboard { type: input_source_if, input_sources: [language: ^de$] }
   - to:
-      - &leave-insert-mode
-        set_variable: { name: FINDER_INSERT_MODE, value: false }
-      - &remove-insert-notice
-        set_notification_message: { id: insert-notice, text: "" }
+      - &leave-insert-mode { set_variable: { name: FINDER_INSERT_MODE, value: false } }
+      - &remove-insert-notice { set_notification_message: { id: insert-notice, text: "" } }
 #───────────────────────────────────────────────────────────────────────────────
 rules:
   - description: "Finder Vim Addons for Alfred (assuming Alfred Compatibility Mode)"

@@ -6,10 +6,10 @@ anchors:
       - &leader-active { type: variable_if, name: LEADER_ACTIVE, value: true }
       - &leader-inactive { type: variable_unless, name: LEADER_ACTIVE, value: true }
   - to:
-      - &deactivate-leader { set_variable: {name: LEADER_ACTIVE , value: false} }
+      - &deactivate-leader { set_variable: { name: LEADER_ACTIVE, value: false } }
       - &activate-leader { set_variable: { name: LEADER_ACTIVE, value: true } }
-      - &remove-notice { set_notification_message: {id: leader-notice , text: ""} }
-      - &set-notice { set_notification_message: {id: leader-notice , text: "🔺 Leader"} }
+      - &remove-notice { set_notification_message: { id: leader-notice, text: "" } }
+      - &set-notice { set_notification_message: { id: leader-notice, text: "🔺 Leader" } }
 #───────────────────────────────────────────────────────────────────────────────
 rules:
   - description: "🔺App Switcher Leader: 2x L-Ctrl or 2x R-Cmd"
@@ -19,17 +19,13 @@ rules:
         conditions: [*leader-inactive]
         to:
           - key_code: left_control
-        to_if_alone:
-          - *activate-leader
-          - *set-notice
+        to_if_alone: [*activate-leader, *set-notice]
       - type: basic
         from: { key_code: right_command }
         conditions: [*leader-inactive]
         to:
           - key_code: right_command
-        to_if_alone:
-          - *activate-leader
-          - *set-notice
+        to_if_alone: [*activate-leader, *set-notice]
 
       # 2x L-Ctrl: Pass through (for Alfred)
       - type: basic
@@ -44,9 +40,7 @@ rules:
       - type: basic
         from: { key_code: caps_lock }
         conditions: [*leader-active]
-        to_if_alone:
-          - *deactivate-leader
-          - *remove-notice
+        to_if_alone: [*deactivate-leader, *remove-notice]
 
   #─────────────────────────────────────────────────────────────────────────────
   - description: "🔺 App Switcher Actions"
@@ -72,10 +66,7 @@ rules:
       - description: "[ö] Mastodon (Ivory)"
         type: basic
         from: { key_code: semicolon } # ö on German keyboard
-        conditions:
-          - *leader-active
-          - type: input_source_if
-            input_sources: [{ language: ^de$ }]
+        conditions: [*leader-active]
         to:
           - shell_command: open -a "Ivory"
           - *deactivate-leader
@@ -84,10 +75,7 @@ rules:
       - description: "[Ö] Mastodon website"
         type: basic
         from: { key_code: semicolon, modifiers: { mandatory: [shift] } } # Ö on German keyboard
-        conditions:
-          - *leader-active
-          - type: input_source_if
-            input_sources: [{ language: ^de$ }]
+        conditions: [*leader-active]
         to:
           - shell_command: open 'https://pkm.social/notifications'
           - *deactivate-leader
@@ -147,7 +135,7 @@ rules:
           - *deactivate-leader
           - *remove-notice
 
-      - description: "[t]: TI"
+      - description: "[t]: Twilight Imperium"
         type: basic
         from: { key_code: t }
         conditions: [*leader-active]
@@ -156,7 +144,7 @@ rules:
           - *deactivate-leader
           - *remove-notice
 
-      - description: "[l] termina[l]"
+      - description: "[l] Termina[l]"
         type: basic
         from: { key_code: l } # l is quicker to reach for the right hand than t
         conditions: [*leader-active]
@@ -185,13 +173,7 @@ rules:
         from: { key_code: "n" }
         conditions: [*leader-active]
         to:
-          - shell_command: |
-              open -a "Neovide"
-              # slightly fix some issues with AltTab: https://github.com/neovide/neovide/issues/3182
-              sleep 1
-              open -a "Neovide"
-              sleep 1
-              open -a "Neovide"
+          - shell_command: open -a "Neovide"
           - *deactivate-leader
           - *remove-notice
 
@@ -261,11 +243,7 @@ rules:
                 tell application "Finder"
                   activate
                   open the trash
-                end tell
-                tell application "System Events" to tell process "Finder"
-                  set frontmost to true
-                end tell
-              '
+                end tell'
 
       - description: "[h]ammerspoon console"
         type: basic
@@ -276,8 +254,6 @@ rules:
           - *deactivate-leader
           - *remove-notice
 
-      # BUG opening the event-viewer from Karabiner disables the `cmd+q` for
-      # quitting, so we need to quit via `cmd+w`
       - description: "[k]arabiner-EventViewer"
         type: basic
         from: { key_code: k }
@@ -314,7 +290,7 @@ rules:
           - *deactivate-leader
           - *remove-notice
 
-      - description: "[g]ithub notifications"
+      - description: "Github notifications"
         type: basic
         from: { key_code: g }
         conditions: [*leader-active]
@@ -324,7 +300,7 @@ rules:
           - *deactivate-leader
           - *remove-notice
 
-      - description: "[⎋] Activity Monitor"
+      - description: "Activity Monitor"
         type: basic
         from: { key_code: escape }
         conditions: [*leader-active]
@@ -333,7 +309,7 @@ rules:
           - *deactivate-leader
           - *remove-notice
 
-      - description: "[w]hatsApp"
+      - description: "WhatsApp"
         type: basic
         from: { key_code: w }
         conditions: [*leader-active]
@@ -342,7 +318,7 @@ rules:
           - *deactivate-leader
           - *remove-notice
 
-      - description: "[q] signal"
+      - description: "[q] Signal"
         type: basic
         from: { key_code: q }
         conditions: [*leader-active]
@@ -351,7 +327,7 @@ rules:
           - *deactivate-leader
           - *remove-notice
 
-      - description: "[e] m[e]ssenger"
+      - description: "M[e]ssenger"
         type: basic
         from: { key_code: e }
         conditions: [*leader-active]
@@ -360,7 +336,7 @@ rules:
           - *deactivate-leader
           - *remove-notice
 
-      - description: "[r]eddit"
+      - description: "Reddit (Alfred)"
         type: basic
         from: { key_code: r }
         conditions: [*leader-active]
