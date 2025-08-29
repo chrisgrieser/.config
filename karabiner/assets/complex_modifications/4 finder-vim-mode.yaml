@@ -16,26 +16,31 @@ anchors:
       - &move-inactive { type: variable_unless, name: FINDER_MOVE_ACTIVE, value: true }
       - &menu-is-open { type: variable_if, name: FINDER_MENU_ACTIVE, value: true }
       - &no-menu-open { type: variable_unless, name: FINDER_MENU_ACTIVE, value: true }
-  #─────────────────────────────────────────────────────────────────────────────
   - to:
-      - &enter-insert-mode { set_variable: {name: FINDER_INSERT_MODE , value: true} }
+      - &enter-insert-mode { set_variable: { name: FINDER_INSERT_MODE, value: true } }
       - &leave-insert-mode { set_variable: { name: FINDER_INSERT_MODE, value: false } }
-      - &insert-notice { set_notification_message: {id: insert-notice , text: "Finder Vim Mode\n\n✏️  INSERT"} }
-      - &remove-insert-notice { set_notification_message: {id: insert-notice , text: ""} }
+      - &insert-notice
+        set_notification_message: { id: insert-notice, text: "Finder Vim Mode\n\n✏️ INSERT" }
+      - &remove-insert-notice { set_notification_message: { id: insert-notice, text: "" } }
       - &enter-find-mode { set_variable: { name: FINDER_FIND_MODE, value: true } }
       - &leave-find-mode { set_variable: { name: FINDER_FIND_MODE, value: false } }
-      - &find-notice { set_notification_message: { id: find-notice, text: "Finder Vim Mode\n\n🔎 FIND" } }
+      - &find-notice
+        set_notification_message: { id: find-notice, text: "Finder Vim Mode\n\n🔎 FIND" }
       - &remove-find-notice { set_notification_message: { id: find-notice, text: "" } }
       - &remove-move-notice { set_notification_message: { id: move-notice, text: "" } }
-      - &move-notice { set_notification_message: { id: move-notice, text: "Finder Vim Mode\n\n✂️ Move active" } }
+      - &move-notice
+        set_notification_message: { id: move-notice, text: "Finder Vim Mode\n\n✂️ Move active" }
       - &start-move { set_variable: { name: FINDER_MOVE_ACTIVE, value: true } }
       - &end-move { set_variable: { name: FINDER_MOVE_ACTIVE, value: false } }
       - &start-menu { set_variable: { name: FINDER_MENU_ACTIVE, value: true } }
       - &end-menu { set_variable: { name: FINDER_MENU_ACTIVE, value: false } }
       - &remove-menu-notice { set_notification_message: { id: menu-notice, text: "" } }
-      - &menu-notice { set_notification_message: { id: menu-notice, text: "Finder Vim Mode\n\n➡️ Menu Mode" } }
-#───────────────────────────────────────────────────────────────────────────────
-#───────────────────────────────────────────────────────────────────────────────
+      - &menu-notice
+        set_notification_message: { id: menu-notice, text: "Finder Vim Mode\n\n➡️ Menu Mode" }
+      - &sound-for-tagging
+        shell_command: |
+          afplay '/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/acknowledgment_sent.caf' &
+
 #───────────────────────────────────────────────────────────────────────────────
 
 rules:
@@ -113,14 +118,12 @@ rules:
       - type: basic
         from: { key_code: g }
         to:
-          - key_code: up_arrow
-            modifiers: [option]
+          - { key_code: up_arrow, modifiers: [option] }
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       - type: basic
         from: { key_code: g, modifiers: { mandatory: [shift] } }
         to_if_alone:
-          - key_code: down_arrow
-            modifiers: [option]
+          - { key_code: down_arrow, modifiers: [option] }
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       #─────────────────────────────────────────────────────────────────────────
       # :help
@@ -166,14 +169,14 @@ rules:
       - type: basic
         from: { key_code: f, modifiers: { mandatory: [command] } }
         to:
-          - {key_code: f, modifiers: [command] }
+          - { key_code: f, modifiers: [command] }
           - *insert-notice
           - *enter-insert-mode
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
       - type: basic
         from: { key_code: g, modifiers: { mandatory: [command, shift] } }
         to:
-          - {key_code: g, modifiers: [command, shift] }
+          - { key_code: g, modifiers: [command, shift] }
           - *insert-notice
           - *enter-insert-mode
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
@@ -696,11 +699,7 @@ rules:
           - *enter-insert-mode # enters insert mode since folder renaming is also triggered
           - *insert-notice
           - shell_command: |
-              # play sound at current volume
-              current_vol=$(osascript -e 'output volume of (get volume settings)')
-              [[ "$current_vol" == "missing value" ]] && current_vol=50
-              vol_percent=$(echo "scale=2 ; $current_vol / 100" | bc) # afplay play with 100% volume by default
-              afplay --volume "$vol_percent" "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/facetime/multiway_join.caf" & # codespell-ignore
+              afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/facetime/multiway_join.caf" &
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # M = Move selection to new folder
       - type: basic
@@ -770,7 +769,7 @@ rules:
                 fi
                 mv -n "$file" "$newName"
               done
-              afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/begin_record.caf" & # codespell-ignore
+              afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/begin_record.caf" &
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # s = Create Symlink
       - type: basic
@@ -795,7 +794,7 @@ rules:
               done
               first_symlink="$(echo "$selectedFiles" | head -n1)-symlink"
               open -R "$first_symlink"
-              afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/begin_record.caf" & # codespell-ignore
+              afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/begin_record.caf" &
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # S = follow symlink (or alias)
       - type: basic
@@ -927,9 +926,7 @@ rules:
       # Enter/Exit
       - type: basic
         from: { key_code: f }
-        to_if_alone:
-          - *enter-find-mode
-          - *find-notice
+        to_if_alone: [*enter-find-mode, *find-notice]
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # One-Char-Searches
       - type: basic
@@ -1086,8 +1083,7 @@ rules:
       - type: basic
         from: { key_code: m }
         to:
-          - key_code: c
-            modifiers: [command]
+          - { key_code: c, modifiers: [command] }
           - *start-move
           - *move-notice
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
@@ -1096,26 +1092,21 @@ rules:
         from: { key_code: p }
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *move-active]
         to:
-          - key_code: v
-            modifiers: [command, option]
+          - { key_code: v, modifiers: [command, option] }
           - *end-move
           - *remove-move-notice
       - type: basic
-        from:
-          key_code: v
-          modifiers: { mandatory: [command] }
+        from: { key_code: v, modifiers: { mandatory: [command] } }
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *move-active]
         to:
-          - key_code: v
-            modifiers: [command, option]
+          - { key_code: v, modifiers: [command, option] }
           - *end-move
           - *remove-move-notice
       # y / cmd+c = yank, which also aborts move
       - type: basic
         from: { key_code: "y" }
         to:
-          - key_code: c
-            modifiers: [command]
+          - { key_code: c, modifiers: [command] }
           - *end-move
           - *remove-move-notice
           - shell_command: |
@@ -1126,19 +1117,15 @@ rules:
       - type: basic
         from: { key_code: z } # y and z switched on German keyboard
         to:
-          - key_code: c
-            modifiers: [command]
+          - { key_code: c, modifiers: [command] }
           - *end-move
           - *remove-move-notice
         conditions:
           [*finder-app, *not-insert-mode, *not-find-mode, *move-active, *is-German-keyboard]
       - type: basic
-        from:
-          key_code: c
-          modifiers: { mandatory: [command] }
+        from: { key_code: c, modifiers: { mandatory: [command] } }
         to:
-          - key_code: c
-            modifiers: [command]
+          - { key_code: c, modifiers: [command] }
           - *end-move
           - *remove-move-notice
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *move-active]
@@ -1201,73 +1188,43 @@ rules:
       # https://support.apple.com/guide/mac-help/tag-files-and-folders-mchlp15236/mac
       - type: basic
         from: { key_code: "1" }
-        to:
-          - { key_code: "1", modifiers: [control] }
-          - shell_command: |
-              afplay '/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/acknowledgment_sent.caf' &
+        to: [{ key_code: "1", modifiers: [control] }, *sound-for-tagging]
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       - type: basic
         from: { key_code: "2" }
-        to:
-          - { key_code: "2", modifiers: [control] }
-          - shell_command: |
-              afplay '/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/acknowledgment_sent.caf' &
+        to: [{ key_code: "2", modifiers: [control] }, *sound-for-tagging]
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       - type: basic
         from: { key_code: "3" }
-        to:
-          - { key_code: "3", modifiers: [control] }
-          - shell_command: |
-              afplay '/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/acknowledgment_sent.caf' &
+        to: [{ key_code: "3", modifiers: [control] }, *sound-for-tagging]
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       - type: basic
         from: { key_code: "4" }
-        to:
-          - { key_code: "4", modifiers: [control] }
-          - shell_command: |
-              afplay '/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/acknowledgment_sent.caf' &
+        to: [{ key_code: "4", modifiers: [control] }, *sound-for-tagging]
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       - type: basic
         from: { key_code: "5" }
-        to:
-          - { key_code: "5", modifiers: [control] }
-          - shell_command: |
-              afplay '/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/acknowledgment_sent.caf' &
+        to: [{ key_code: "5", modifiers: [control] }, *sound-for-tagging]
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       - type: basic
         from: { key_code: "6" }
-        to:
-          - { key_code: "6", modifiers: [control] }
-          - shell_command: |
-              afplay '/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/acknowledgment_sent.caf' &
+        to: [{ key_code: "6", modifiers: [control] }, *sound-for-tagging]
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       - type: basic
         from: { key_code: "7" }
-        to:
-          - { key_code: "7", modifiers: [control] }
-          - shell_command: |
-              afplay '/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/acknowledgment_sent.caf' &
+        to: [{ key_code: "7", modifiers: [control] }, *sound-for-tagging]
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       - type: basic
         from: { key_code: "8" }
-        to:
-          - { key_code: "8", modifiers: [control] }
-          - shell_command: |
-              afplay '/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/acknowledgment_sent.caf' &
+        to: [{ key_code: "8", modifiers: [control] }, *sound-for-tagging]
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       - type: basic
         from: { key_code: "9" }
-        to:
-          - { key_code: "9", modifiers: [control] }
-          - shell_command: |
-              afplay '/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/acknowledgment_sent.caf' &
+        to: [{ key_code: "9", modifiers: [control] }, *sound-for-tagging]
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # remove all tags
       - type: basic
         from: { key_code: "0" }
-        to:
-          - { key_code: "0", modifiers: [control] }
-          - shell_command: |
-              afplay '/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/acknowledgment_sent.caf' &
+        to: [{ key_code: "0", modifiers: [control] }, *sound-for-tagging]
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       #─────────────────────────────────────────────────────────────────────────
