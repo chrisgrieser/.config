@@ -3,9 +3,6 @@
 return {
 	"chrisgrieser/nvim-rulebook",
 
-	-- TEMP
-	branch = "dev",
-
 	keys = {
 		{ "<leader>cl", function() require("rulebook").lookupRule() end, desc = " Lookup rule" },
 		{

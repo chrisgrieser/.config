@@ -72,9 +72,10 @@
 	colorMoved = true ; moved lines colored different than added/removed
 	relative = true
 [merge]
-	conflictStyle = zdiff3 ; shows original version in middle ; https://www.ductile.systems/zdiff3/
+	conflictStyle = zdiff3 ; shows original version in middle https://www.ductile.systems/zdiff3/
+	ff = only ; fast-forward only, i.e., no merge commits
 [rerere]
-	enabled = true # repeat merge resolutions
+	enabled = true ; repeat merge resolutions
 
 ;───────────────────────────────────────────────────────────────────────────────
 ; SETUP FOR DELTA
