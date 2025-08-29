@@ -1,7 +1,8 @@
 {
   "ansi": {
     "body": "\\e[0;38;5;${1:code}m",
-    "prefix": " ansi"
+    "prefix": " ansi",
+    "description": "https://i.sstatic.net/KTSQa.png"
   },
   "black": {
     "body": "\\e[0;30m",
