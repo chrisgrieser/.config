@@ -16,6 +16,7 @@ return {
 			["log"] = { glyph = "󱂅", hl = "MiniIconsGrey" },
 			["gitignore"] = { glyph = "" },
 			["adblock"] = { glyph = "", hl = "MiniIconsRed" },
+			["add"] = { glyph = "" },
 		},
 		filetype = {
 			["css"] = { glyph = "", hl = "MiniIconsRed" },

@@ -1,116 +1,39 @@
+# vim: foldlevel=5
 # yaml-language-server: $schema=./schema/karabiner-mod-schema.json
 title: "Finder Vim Controls"
 homepage: https://github.com/chrisgrieser/finder-vim-mode
 maintainers: [pseudometa (chrisgrieser)]
 anchors:
   - conditions:
-      - &finder-app
-        type: frontmost_application_if
-        bundle_identifiers: [^com\.apple\.finder$]
-      - &is-German-keyboard
-        type: input_source_if
-        input_sources: [language: ^de$]
-      - &not-German-keyboard
-        type: input_source_unless
-        input_sources: [language: ^de$]
-      - &is-insert-mode
-        type: variable_if
-        name: FINDER_INSERT_MODE
-        value: true
-      - &not-insert-mode
-        type: variable_unless
-        name: FINDER_INSERT_MODE
-        value: true
-      - &is-find-mode
-        type: variable_if
-        name: FINDER_FIND_MODE
-        value: true
-      - &not-find-mode
-        type: variable_unless
-        name: FINDER_FIND_MODE
-        value: true
-      - &move-active
-        type: variable_if
-        name: FINDER_MOVE_ACTIVE
-        value: true
-      - &move-inactive
-        type: variable_unless
-        name: FINDER_MOVE_ACTIVE
-        value: true
-      - &menu-is-open
-        type: variable_if
-        name: FINDER_MENU_ACTIVE
-        value: true
-      - &no-menu-open
-        type: variable_unless
-        name: FINDER_MENU_ACTIVE
-        value: true
+      - &finder-app { type: frontmost_application_if, bundle_identifiers: [^com\.apple\.finder$] }
+      - &is-German-keyboard { type: input_source_if, input_sources: [language: ^de$] }
+      - &not-German-keyboard { type: input_source_unless, input_sources: [language: ^de$] }
+      - &is-insert-mode { type: variable_if, name: FINDER_INSERT_MODE, value: true }
+      - &not-insert-mode { type: variable_unless, name: FINDER_INSERT_MODE, value: true }
+      - &is-find-mode { type: variable_if, name: FINDER_FIND_MODE, value: true }
+      - &not-find-mode { type: variable_unless, name: FINDER_FIND_MODE, value: true }
+      - &move-active { type: variable_if, name: FINDER_MOVE_ACTIVE, value: true }
+      - &move-inactive { type: variable_unless, name: FINDER_MOVE_ACTIVE, value: true }
+      - &menu-is-open { type: variable_if, name: FINDER_MENU_ACTIVE, value: true }
+      - &no-menu-open { type: variable_unless, name: FINDER_MENU_ACTIVE, value: true }
   #─────────────────────────────────────────────────────────────────────────────
   - to:
-      - &enter-insert-mode
-        set_variable:
-          name: FINDER_INSERT_MODE
-          value: true
-      - &leave-insert-mode
-        set_variable:
-          name: FINDER_INSERT_MODE
-          value: false
-      - &insert-notice
-        set_notification_message:
-          id: insert-notice
-          text: "Finder Vim Mode\n\n✏️  INSERT"
-      - &remove-insert-notice
-        set_notification_message:
-          id: insert-notice
-          text: ""
-      - &enter-find-mode
-        set_variable:
-          name: FINDER_FIND_MODE
-          value: true
-      - &leave-find-mode
-        set_variable:
-          name: FINDER_FIND_MODE
-          value: false
-      - &find-notice
-        set_notification_message:
-          id: find-notice
-          text: "Finder Vim Mode\n\n🔎 FIND"
-      - &remove-find-notice
-        set_notification_message:
-          id: find-notice
-          text: ""
-      - &remove-move-notice
-        set_notification_message:
-          id: move-notice
-          text: ""
-      - &move-notice
-        set_notification_message:
-          id: move-notice
-          text: "Finder Vim Mode\n\n✂️ Move active"
-      - &start-move
-        set_variable:
-          name: FINDER_MOVE_ACTIVE
-          value: true
-      - &end-move
-        set_variable:
-          name: FINDER_MOVE_ACTIVE
-          value: false
-      - &start-menu
-        set_variable:
-          name: FINDER_MENU_ACTIVE
-          value: true
-      - &end-menu
-        set_variable:
-          name: FINDER_MENU_ACTIVE
-          value: false
-      - &remove-menu-notice
-        set_notification_message:
-          id: menu-notice
-          text: ""
-      - &menu-notice
-        set_notification_message:
-          id: menu-notice
-          text: "Finder Vim Mode\n\n➡️ Menu Mode"
+      - &enter-insert-mode { set_variable: {name: FINDER_INSERT_MODE , value: true} }
+      - &leave-insert-mode { set_variable: { name: FINDER_INSERT_MODE, value: false } }
+      - &insert-notice { set_notification_message: {id: insert-notice , text: "Finder Vim Mode\n\n✏️  INSERT"} }
+      - &remove-insert-notice { set_notification_message: {id: insert-notice , text: ""} }
+      - &enter-find-mode { set_variable: { name: FINDER_FIND_MODE, value: true } }
+      - &leave-find-mode { set_variable: { name: FINDER_FIND_MODE, value: false } }
+      - &find-notice { set_notification_message: { id: find-notice, text: "Finder Vim Mode\n\n🔎 FIND" } }
+      - &remove-find-notice { set_notification_message: { id: find-notice, text: "" } }
+      - &remove-move-notice { set_notification_message: { id: move-notice, text: "" } }
+      - &move-notice { set_notification_message: { id: move-notice, text: "Finder Vim Mode\n\n✂️ Move active" } }
+      - &start-move { set_variable: { name: FINDER_MOVE_ACTIVE, value: true } }
+      - &end-move { set_variable: { name: FINDER_MOVE_ACTIVE, value: false } }
+      - &start-menu { set_variable: { name: FINDER_MENU_ACTIVE, value: true } }
+      - &end-menu { set_variable: { name: FINDER_MENU_ACTIVE, value: false } }
+      - &remove-menu-notice { set_notification_message: { id: menu-notice, text: "" } }
+      - &menu-notice { set_notification_message: { id: menu-notice, text: "Finder Vim Mode\n\n➡️ Menu Mode" } }
 #───────────────────────────────────────────────────────────────────────────────
 #───────────────────────────────────────────────────────────────────────────────
 #───────────────────────────────────────────────────────────────────────────────
@@ -121,12 +44,12 @@ rules:
       # hjkl
       - type: basic
         from: { key_code: j }
-        to: # no to_if_alone since it blocks repeat
+        to: # no `to_if_alone` since it blocks repeat
           - key_code: down_arrow
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       - type: basic
         from: { key_code: k }
-        to: # no to_if_alone since it blocks repeat
+        to: # no `to_if_alone` since it blocks repeat
           - key_code: up_arrow
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # h: goto parent
@@ -665,21 +588,21 @@ rules:
         to_if_alone:
           - shell_command: |
               error=$(osascript -e'
-                tell application "Finder" 
-                	activate 
-                	if (number of Finder windows is not 2) then 
-                		beep 
-                		return "⚠️ Not exactly two windows" 
-                	else if (the selection is {}) then 
-                		beep 
-                		return "⚠️ No selection" 
-                	end if 
-                end tell 
+                tell application "Finder"
+                	activate
+                	if (number of Finder windows is not 2) then
+                		beep
+                		return "⚠️ Not exactly two windows"
+                	else if (the selection is {}) then
+                		beep
+                		return "⚠️ No selection"
+                	end if
+                end tell
 
-                # AppleScript does not allow the "ask for confirmation" prompt, 
+                # AppleScript does not allow the "ask for confirmation" prompt,
                 # and has also problems if selected file is a folder or symlink.
                 # Thus we implement the cross-move via keystrokes instead of
-                # proper scripting.  
+                # proper scripting.
                 tell application "System Events"
                   keystroke "c" using {command down}
                   tell process "Finder" to click menu item "Cycle Through Windows" of menu "Window" of menu bar 1
@@ -698,21 +621,21 @@ rules:
         to_if_alone:
           - shell_command: |
               error=$(osascript -e'
-                tell application "Finder" 
-                	activate 
-                	if (number of Finder windows is not 2) then 
-                		beep 
-                		return "⚠️ Not exactly two windows" 
-                	else if (the selection is {}) then 
-                		beep 
-                		return "⚠️ No selection" 
-                	end if 
-                end tell 
+                tell application "Finder"
+                	activate
+                	if (number of Finder windows is not 2) then
+                		beep
+                		return "⚠️ Not exactly two windows"
+                	else if (the selection is {}) then
+                		beep
+                		return "⚠️ No selection"
+                	end if
+                end tell
 
-                # AppleScript does not allow the "ask for confirmation" prompt, 
+                # AppleScript does not allow the "ask for confirmation" prompt,
                 # and has also problems if selected file is a folder or symlink.
                 # Thus we implement the cross-move via keystrokes instead of
-                # proper scripting.  
+                # proper scripting.
                 tell application "System Events"
                   keystroke "c" using {command down}
                   tell process "Finder" to click menu item "Cycle Through Windows" of menu "Window" of menu bar 1
@@ -731,9 +654,9 @@ rules:
         to_if_alone:
           - shell_command: |
               first_volume=$(
-                df | 
-                grep " /Volumes/" | 
-                grep --invert-match --max-count=1 "/Volumes/Recovery" | 
+                df |
+                grep " /Volumes/" |
+                grep --invert-match --max-count=1 "/Volumes/Recovery" |
                 awk -F '   ' '{print $NF}'
               )
               [[ -z "$first_volume" ]] && "$HOME/.config/karabiner/assets/finder-vim-mode/notificator" \
@@ -793,12 +716,12 @@ rules:
         to_if_alone:
           - shell_command: |
               osascript -e '
-                tell application "Finder" 
-                  -- create new file 
-                  activate 
-                  set thisFolder to the target of the Finder window 1 as alias 
-                  set newFile to (make new file at thisFolder) 
-                  select newFile 
+                tell application "Finder"
+                  -- create new file
+                  activate
+                  set thisFolder to the target of the Finder window 1 as alias
+                  set newFile to (make new file at thisFolder)
+                  select newFile
                 end tell
                 delay 0.1 # ensure file is selected
                 tell application "System Events" to tell process "Finder"

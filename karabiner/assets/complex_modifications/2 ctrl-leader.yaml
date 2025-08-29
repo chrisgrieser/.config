@@ -3,31 +3,13 @@
 title: "🔺 App Leader"
 anchors:
   - conditions:
-      - &leader-active
-        type: variable_if
-        name: LEADER_ACTIVE
-        value: true
-      - &leader-inactive
-        type: variable_unless
-        name: LEADER_ACTIVE
-        value: true
+      - &leader-active { type: variable_if, name: LEADER_ACTIVE, value: true }
+      - &leader-inactive { type: variable_unless, name: LEADER_ACTIVE, value: true }
   - to:
-      - &deactivate-leader
-        set_variable:
-          name: LEADER_ACTIVE
-          value: false
-      - &activate-leader
-        set_variable:
-          name: LEADER_ACTIVE
-          value: true
-      - &remove-notice
-        set_notification_message:
-          id: leader-notice
-          text: ""
-      - &set-notice
-        set_notification_message:
-          id: leader-notice
-          text: "🔺 Leader"
+      - &deactivate-leader { set_variable: {name: LEADER_ACTIVE , value: false} }
+      - &activate-leader { set_variable: { name: LEADER_ACTIVE, value: true } }
+      - &remove-notice { set_notification_message: {id: leader-notice , text: ""} }
+      - &set-notice { set_notification_message: {id: leader-notice , text: "🔺 Leader"} }
 #───────────────────────────────────────────────────────────────────────────────
 rules:
   - description: "🔺App Switcher Leader: 2x L-Ctrl or 2x R-Cmd"
@@ -101,7 +83,7 @@ rules:
 
       - description: "[Ö] Mastodon website"
         type: basic
-        from: { key_code: semicolon, modifiers: { mandatory: [shift] } } # ö on German keyboard
+        from: { key_code: semicolon, modifiers: { mandatory: [shift] } } # Ö on German keyboard
         conditions:
           - *leader-active
           - type: input_source_if
