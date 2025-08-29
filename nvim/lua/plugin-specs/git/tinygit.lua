@@ -68,7 +68,7 @@ return {
 	config = function(_, opts)
 		require("tinygit").setup(opts)
 
-		vim.g.lualineAdd("tabline", "lualine_c", require("tinygit.statusline").blame)
+		vim.g.lualineAdd("tabline", "lualine_b", require("tinygit.statusline").blame)
 		vim.g.lualineAdd("sections", "lualine_y", require("tinygit.statusline").branchState, "before")
 	end,
 }
