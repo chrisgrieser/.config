@@ -26,12 +26,10 @@ export JUST_COMMAND_COLOR="blue"
 
 #───────────────────────────────────────────────────────────────────────────────
 
+LESS=""
 LESS+=" --RAW-CONTROL-CHARS" # process colors correctly
-LESS+=" --line-num-width=4" # line number column width
 LESS+=" --ignore-case --incsearch"
-LESS+=" --tilde" # no tilde at start of line at the end of file
 LESS+=" --long-prompt --prompt=mpage %dm?B/%D.?Pm (%Pm\\%).$" # progress in pages
-LESS+=" --status-line" # highlight lines with a mark
 LESS+=" --quit-if-one-screen --no-init" # quicker leaving & do not clear the screen when doing so
 LESS+=" --chop-long-lines" # wrap lines
 LESS+=" --shift=.2" # amount of side-scrolling (percentage of screen width)
