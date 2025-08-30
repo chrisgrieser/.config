@@ -48,7 +48,7 @@ function run() {
 	// CONFIG
 	const username = $.getenv("github_username");
 	const localRepoFolder = $.getenv("local_repo_folder");
-	const cloneDepth = Number.parseInt($.getenv("clone_depth"));
+	const cloneDepth = Number.parseInt($.getenv("clone_depth"), 10);
 	const shallowClone = cloneDepth > 0;
 	const useAlfredFrecency = $.getenv("use_alfred_frecency") === "1";
 
