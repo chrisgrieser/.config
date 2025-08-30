@@ -95,7 +95,8 @@ function run() {
 			-not -path "**/.git/*" \
 			-not -path "**/*.app/*" \
 			-not -path "**/Alfred.alfredpreferences/*" \
-			-not -path "**/hammerspoon/Spoons/*"
+			-not -path "**/hammerspoon/Spoons/*" \
+			-not -path "**/.crush"
 		`)
 		.split("\r")
 		.map((/** @type {string} */ absPath) => {
