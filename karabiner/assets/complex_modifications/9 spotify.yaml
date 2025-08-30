@@ -11,7 +11,7 @@ rules:
           - shell_command: open "https://open.spotify.com/"
       #─────────────────────────────────────────────────────────────────────────
 
-      # until spotify-play is fixed, use f7 to pause.
+      # until spotify-play is fixed, use `f7` to pause.
       # https://github.com/aome510/spotify-player/issues/804
       - type: basic
         from: { key_code: f7 }

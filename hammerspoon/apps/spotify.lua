@@ -23,6 +23,7 @@ M.aw_spotify = aw.new(function(appName, eventType)
 	local alexaTrigger = os.getenv("HOME")
 		.. "/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/alexa-virtual-trigger"
 	if not u.isExecutable(alexaTrigger) then return end
+	print("🎵 Spotify: " .. action)
 
 	M.spotify_task = hs.task.new(alexaTrigger, nil, { "spotify-" .. action }):start()
 end):start() --[[@as hs.application.watcher]]
