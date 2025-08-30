@@ -52,10 +52,7 @@ return {
 		},
 		history = {
 			autoUnshallowIfNeeded = true,
-			diffPopup = {
-				width = 0.9,
-				height = 0.9,
-			},
+			diffPopup = { width = 0.9, height = 0.9 },
 		},
 		statusline = {
 			blame = {
