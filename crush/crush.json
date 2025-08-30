@@ -12,8 +12,15 @@
 		"typescript": { "command": "typescript-language-server", "args": ["--stdio"] },
 		"javascript": { "command": "typescript-language-server", "args": ["--stdio"] },
 		"lua": { "command": "lua-language-server" },
-		"disabled_swift": { "command": "sourcekit-lsp" },
+		"swift": { "command": "sourcekit-lsp" },
 		"disabled_python": { "command": "basedpyright-langserver", "args": ["--stdio"] }
+	},
+	"mcp": {
+		"sosumi": {
+			"type": "stdio",
+			"command": "npx",
+			"args": ["-y", "mcp-remote", "https://sosumi.ai/mcp"]
+		}
 	},
 	"options": {
 		"disable_auto_summarize": false,
