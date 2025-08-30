@@ -89,7 +89,7 @@ return {
 				},
 			},
 			lualine_b = {
-				{ require("personal-plugins.breadcrumbs").getBreadcrumbs }
+				{ require("personal-plugins.breadcrumbs").statusline }
 			},
 			lualine_x = {
 				-- HACK dummy, so tabline is never empty (in which case vim adds its ugly tabline)
