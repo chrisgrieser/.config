@@ -379,7 +379,7 @@ keymap(
 	function()
 		if not jit.os == "OSX" then return end
 		vim.system({ "osascript", "-e", 'tell application "WezTerm" to activate' }, {}, function()
-			local stdin = ("cd -q %q && clear"):format(vim.uv.cwd() or "")
+			local stdin = ("cd -q %q && clear\n"):format(vim.uv.cwd() or "")
 			vim.system({ "wezterm", "cli", "send-text", "--no-paste" }, { stdin = stdin })
 		end)
 	end,
@@ -432,6 +432,8 @@ keymap({ "n", "x", "i" }, "<D-w>", function()
 	if bufCount == 1 then
 		vim.notify("Only one buffer open.", vim.log.levels.TRACE)
 	else
+		local bufPath = vim.api.nvim_buf_get_name(0)
+		table.insert(vim.v.oldfiles, 1, bufPath)
 		vim.cmd.bwipeout()
 	end
 end, { desc = "󰽙 Close window/buffer" })
