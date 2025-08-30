@@ -254,6 +254,9 @@ end, { desc = " Paste", expr = true })
 
 keymap("n", "<D-v>", "p", { desc = " Paste" }) -- compatibility w/ macOS clipboard managers
 
+-- stylua: ignore
+keymap("n", "<leader>yb", function() require("personal-plugins.breadcrumbs").copy() end, { desc = "󰳮 breadcrumbs" })
+
 --------------------------------------------------------------------------------
 -- SURROUND
 
