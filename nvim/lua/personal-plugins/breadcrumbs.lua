@@ -20,23 +20,29 @@ local config = {
 local function getBreadcrumbs()
 	local crumbs = {}
 	local node = vim.treesitter.get_node()
-	local prev
+	local prevNode
+
+	-- loop upwards through the parents of the node
 	while node do
 		if vim.tbl_contains(config.objectTypes, node:type()) then
 			local keyName = vim.treesitter.get_node_text(node, 0):match("[%w-_]+")
 			table.insert(crumbs, 1, keyName)
 		elseif vim.tbl_contains(config.arrayTypes, node:type()) then
-			local index = 0
-			for child, _ in node:iter_children() do
-				if child:id() == prev:id() then break end
-				index = index + 1
+			local indexOfChild
+			for i = 0, node:named_child_count() do
+				local child = assert(node:named_child(i))
+				if child:id() == prevNode:id() then
+					indexOfChild = i
+					break
+				end
 			end
-			local arrayPos = ("[%d]"):format(index)
+			local arrayPos = ("[%d]"):format(indexOfChild)
 			table.insert(crumbs, 1, arrayPos)
 		end
-		prev = node
+		prevNode = node
 		node = node:parent()
 	end
+
 	return crumbs
 end
 
@@ -47,14 +53,16 @@ function M.statusline()
 end
 
 function M.copy()
-	local text = table.concat(getBreadcrumbs(), ".")
-	local notifyOpts = { icon = config.icon, title = "Breadcrumbs" }
+	-- uses the format that is valid for tools like `jq`
+	local text = "." .. table.concat(getBreadcrumbs(), "."):gsub("%.%[", "%[")
+
 	if text == "" then
-		vim.notify("No breadcrumbs to copy.", vim.log.levels.WARN, notifyOpts)
-		return
+		local msg = "No breadcrumbs to copy."
+		vim.notify(msg, vim.log.levels.WARN, { icon = config.icon, title = "Breadcrumbs" })
+	else
+		vim.fn.setreg("+", text)
+		vim.notify(text, nil, { icon = config.icon, title = "Copied", ft = "text" })
 	end
-	vim.fn.setreg("+", text)
-	vim.notify("Copied\n" .. text, nil, notifyOpts)
 end
 
 --------------------------------------------------------------------------------
