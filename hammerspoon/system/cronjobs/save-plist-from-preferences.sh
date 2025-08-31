@@ -25,8 +25,6 @@ plists=(
 	com.runningwithcrayons.Alfred-Preferences
 	com.runningwithcrayons.Alfred
 	com.tinyspeck.slackmacgap
-	mr.pennyworth.AlfredExtraPane
-	net.ankiweb.dtop
 	net.freemacsoft.AppCleaner
 	org.giorgiocalderolla.Catch
 	org.m0k.transmission

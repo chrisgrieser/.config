@@ -45,11 +45,9 @@ function M.fastWarp(dir)
 	elseif dir == "backward" then
 		shift = findClosest(lineBefore:reverse(), config.patterns)
 		if not shift then return end
-		lineBefore = (
-			lineBefore:reverse():sub(1, shift)
+		lineBefore = lineBefore:reverse():sub(1, shift)
 			.. nextChar
 			.. lineBefore:reverse():sub(shift + 1)
-		)
 		lineBefore = lineBefore:reverse()
 		shift = shift * -1
 	end
@@ -171,9 +169,9 @@ function M.toggleOrIncrement()
 
 	-- insert new word OR increment
 	local newWord
-	for word, opposite in pairs(toggles) do
-		if cword == word then newWord = opposite end
-		if cword == opposite then newWord = word end
+	for left, right in pairs(toggles) do
+		if cword == left then newWord = right end
+		if cword == right then newWord = left end
 	end
 	if newWord then
 		local prevCursor = vim.api.nvim_win_get_cursor(0)
@@ -214,12 +212,7 @@ function M.smartDuplicate()
 
 	-- FILETYPE-SPECIFIC TWEAKS
 	if ft == "css" then
-		local newLine = line
-		if line:find("top:") then newLine = line:gsub("top:", "bottom:") end
-		if line:find("bottom:") then newLine = line:gsub("bottom:", "top:") end
-		if line:find("right:") then newLine = line:gsub("right:", "left:") end
-		if line:find("left:") then newLine = line:gsub("left:", "right:") end
-		line = newLine
+		line = line:gsub("(%a+):", { top = "bottom", bottom = "top", right = "left", left = "right" })
 	elseif ft == "javascript" or ft == "typescript" or ft == "swift" then
 		line = line:gsub("^(%s*)if(.+{)$", "%1} else if%2")
 	elseif ft == "lua" then
