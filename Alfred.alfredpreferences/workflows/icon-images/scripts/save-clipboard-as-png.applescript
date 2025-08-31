@@ -10,7 +10,7 @@ end try
 
 -- build filepath
 set timeStamp to do shell script "date +%Y-%m-%d_%H-%M-%S"
-set filepath to basePath & "Clipboard_" & timeStamp & ".png"
+set filepath to targetFolder & "Clipboard_" & timeStamp & ".png"
 
 -- save clipboard PNG
 try

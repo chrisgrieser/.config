@@ -7,7 +7,7 @@ local aw = hs.application.watcher
 
 local config = {
 	fallthrough = {
-		whenNoWin = { "Finder", "Brave Browser", "Obsidian" },
+		whenNoWin = { "Finder", "Brave Browser", "Obsidian", "Hammerspoon" },
 		always = { "Ivory", "Transmission" },
 	},
 }
@@ -44,7 +44,7 @@ end
 M.wf_windowDestroyed = wf
 	.new(true) -- `true` = any app
 	:setOverrideFilter({ allowRoles = "AXStandardWindow", rejectTitles = { "^Login$", "^$" } })
-	:subscribe(wf.windowDestroyed, fallthrough)
+	:subscribe(wf.windowDestroyed, function () fallthrough() end)
 
 -- HACK since `windowDestroyed` often does not fire, we also watch for manual
 -- window closing
@@ -52,7 +52,6 @@ hs.hotkey.bind({ "cmd" }, "w", function()
 	local frontApp = hs.application.frontmostApplication()
 	hs.eventtap.keyStroke({ "cmd" }, "w", 1, frontApp) -- passthrough
 	local fallthroughWhenNoWinApp = hs.fnutils.contains(config.fallthrough.whenNoWin, frontApp:name())
-	print("🪚 frontApp: " .. hs.inspect(frontApp:name()))
 	if fallthroughWhenNoWinApp then fallthrough() end
 end)
 
