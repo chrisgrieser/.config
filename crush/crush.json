@@ -1,0 +1,52 @@
+{
+	"models": {
+		"large": { "model": "gpt-4.1-mini", "provider": "openai" },
+		"small": { "model": "gpt-4.1-nano", "provider": "openai" }
+	},
+	"providers": {
+		"openai": {
+			"api_key": "$(cat \"$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/private dotfiles/openai-api-key-for-crush-cli.txt\")"
+		}
+	},
+	"lsp": {
+		"typescript": { "command": "typescript-language-server", "args": ["--stdio"] },
+		"javascript": { "command": "typescript-language-server", "args": ["--stdio"] },
+		"lua": { "command": "lua-language-server" },
+		"swift": { "command": "sourcekit-lsp" },
+		"bash": { "command": "bash-language-server", "args": ["start"] },
+		"python": { "command": "basedpyright-langserver", "args": ["--stdio"], "enabled": false }
+	},
+	"mcp": {
+		"sosumi": {
+			"type": "stdio",
+			"command": "npx",
+			"args": ["-y", "mcp-remote", "https://sosumi.ai/mcp"]
+		},
+		"sequential-thinking": {
+			"type": "stdio",
+			"command": "npx",
+			"args": ["-y", "@modelcontextprotocol/server-sequential-thinking"]
+		},
+		"github": {
+			"type": "http",
+			"url": "https://api.githubcopilot.com/mcp/",
+			"timeout": 30,
+			"headers": { "Authorization": "$(echo Bearer $GITHUB_TOKEN)" }
+		},
+		"context7": { "type": "stdio", "command": "npx", "args": ["-y", "@upstash/context7-mcp"] }
+	},
+	"permissions": {
+	  "allowed_tools": [
+	    "view",
+	    "ls",
+	    "grep",
+	    "edit"
+	  ]
+	},
+	"options": {
+		"disable_auto_summarize": false,
+		"context_paths": ["./AGENT.md"]
+	},
+
+	"$schema": "https://charm.land/crush.json"
+}
