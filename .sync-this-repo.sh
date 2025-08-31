@@ -14,7 +14,8 @@ fi
 #───────────────────────────────────────────────────────────────────────────────
 
 # determine commit message
-changed_files="$(git status --porcelain | cut -c4- | sed -Ee 's/^"|"$//g' -e 's|^|./|')"
+changed_files="$(git status --porcelain | cut -c4- |
+	sed -Ee 's/^"|"$//g' \ -e 's|^|./|' \ -Ee 's|/$||')"
 common_parent=$(echo "$changed_files" | head -n1) # initialize
 
 while read -r filepath; do # don't call it `path`, messes with `$PATH`
