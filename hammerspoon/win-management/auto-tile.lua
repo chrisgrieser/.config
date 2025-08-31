@@ -38,7 +38,7 @@ local function autoTile(appName)
 	end) --[[@as hs.window[] ]]
 
 	-- GUARD idempotent
-	if M["winCount_" .. appName] == #wins and #wins > 1 then return end
+	if M["winCount_" .. appName] == #wins then return end
 	M["winCount_" .. appName] = #wins
 
 	-- GUARD not with multiple windows

@@ -1,2 +1,0 @@
-local one = "hello"
-fsfs

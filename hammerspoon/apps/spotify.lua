@@ -12,7 +12,7 @@ M.aw_spotify = aw.new(function(appName, eventType)
 	if not u.screenIsUnlocked() then return end
 	local audioAppLaunchedOrQuit = (eventType == aw.launched or eventType == aw.terminated)
 		and (hs.fnutils.contains(u.videoAndAudioApps, appName))
-	if audioAppLaunchedOrQuit then return end
+	if not audioAppLaunchedOrQuit then return end
 
 	if M.spotify_task and M.spotify_task:isRunning() then M.spotify_task:terminate() end
 
@@ -24,7 +24,9 @@ M.aw_spotify = aw.new(function(appName, eventType)
 	print("🎵 Spotify: " .. action)
 
 	M.spotify_task = hs.task.new(alexaTrigger, nil, { "spotify-" .. action }):start()
-end):start() --[[@as hs.application.watcher]]
+end) --[[@as hs.application.watcher]]
+
+M.aw_spotify:start()
 
 --------------------------------------------------------------------------------
 return M
