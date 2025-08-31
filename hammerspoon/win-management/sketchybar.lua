@@ -12,7 +12,6 @@ local aw = hs.application.watcher
 -- CONFIG
 local neverHide = {
 	"Alfred",
-	"CleanShot X",
 	"IINA",
 	"pinentry-mac",
 	"Catch",
@@ -31,11 +30,14 @@ M.aw_maxWindows = aw.new(function(appName, event, app)
 		local screen = hs.mouse.getCurrentScreen() ---@diagnostic disable-line: undefined-field
 		if not screen then return end
 		local screenF = screen:fullFrame()
+		local onlyWindow = #app:allWindows() == 1
 		for _, win in pairs(app:allWindows()) do
+			local coversLeftTopCorner = win:frame().x == 0 and win:frame().y == 0
 			local isMaximized = win:frame().w == screenF.w and win:frame().h == screenF.h
-			if isMaximized then app:hide() end
-			-- not checking for windows covering the left half, since that can be
-			-- intentional to work with a left and right half of a window
+			-- left-half windows are only hidden when they are not the only window
+			-- (e.g. two tiled Finder windows). This prevents hiding windows we are
+			-- working on via left-half-right-half tiling.
+			if isMaximized or (coversLeftTopCorner and not onlyWindow) then app:hide() end
 		end
 	end
 end):start()

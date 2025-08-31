@@ -402,9 +402,9 @@
 				<key>keyword</key>
 				<string>ii</string>
 				<key>subtext</key>
-				<string>as file</string>
+				<string>at front Finder window (or Desktop)</string>
 				<key>text</key>
-				<string>Save image from clipboard</string>
+				<string>💾 Save clipboard image</string>
 				<key>withspace</key>
 				<true/>
 			</dict>
@@ -490,7 +490,7 @@
 				<key>subtext</key>
 				<string>Preview.app</string>
 				<key>text</key>
-				<string>Annotate image from clipboard</string>
+				<string>✏️ Annotate clipboard image</string>
 				<key>withspace</key>
 				<true/>
 			</dict>
@@ -563,7 +563,7 @@
 			<key>note</key>
 			<string>remove \n</string>
 			<key>xpos</key>
-			<real>375</real>
+			<real>365</real>
 			<key>ypos</key>
 			<real>470</real>
 		</dict>

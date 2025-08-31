@@ -51,7 +51,7 @@ hs.application.enableSpotlightForNameSearches(false)
 ---filter console entries, removing logging for enabling/disabling hotkeys,
 ---useless layout info or warnings, or info on extension loading.
 -- HACK to fix https://www.reddit.com/r/hammerspoon/comments/11ao9ui/how_to_suppress_logging_for_hshotkeyenable/
-local function cleanupConsole()
+function M.cleanupConsole()
 	local consoleOutput = tostring(cons.getConsole())
 	cons.clearConsole()
 	local lines = hs.fnutils.split(consoleOutput, "\n+")
@@ -102,16 +102,15 @@ end
 
 -- clean up console as soon as it is opened
 M.wf_hsConsole = wf.new("Hammerspoon")
-	:subscribe(wf.windowFocused, function() u.defer(0.2, cleanupConsole) end)
+	:subscribe(wf.windowFocused, function() u.defer(0.1, M.cleanupConsole) end)
 
 M.aw_hsConsole = aw.new(function(appName, eventType)
-	if eventType == aw.activated and appName == "Hammerspoon" then u.defer(0.2, cleanupConsole) end
+	if eventType == aw.activated and appName == "Hammerspoon" then u.defer(0.1, M.cleanupConsole) end
 end):start()
 
 --------------------------------------------------------------------------------
 
--- app-hotkeys
-
+-- APP-HOTKEYS
 ---@type fun(modifier: string[], key: string, action: function)
 local function hammerspoonHotkey(modifier, key, action)
 	hs.hotkey.bind(modifier, key, function()
@@ -129,12 +128,12 @@ hammerspoonHotkey({ "cmd" }, "q", hs.closeConsole) -- prevent accidental quittin
 hammerspoonHotkey({ "cmd" }, "k", hs.console.clearConsole)
 
 --------------------------------------------------------------------------------
--- Insert a separator the logs every day at midnight
+-- Insert a separator in the console log every day at midnight
 M.timer_dailyConsoleSeparator = hs.timer
 	.doAt("00:01", "01d", function() -- `00:01` to ensure date switched to the next day
 		local date = os.date("%a, %d. %b")
 		-- stylua: ignore
-		print(("\n----------------------------- %s ---------------------------------\n"):format(date))
+		print(("\n------------------------- %s -----------------------------\n"):format(date))
 	end, true)
 	:start()
 

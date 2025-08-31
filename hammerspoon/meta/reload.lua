@@ -15,6 +15,7 @@ if u.isSystemStart() then
 	hs.notify.show("Hammerspoon", "", "✅ Finished loading")
 else
 	-- is reloading
-	print("\n--------------------------- HAMMERSPOON RELOAD -------------------------------\n")
+	print("\n-------------------- 🔁 HAMMERSPOON RELOAD ----------------------\n")
 	os.remove(reloadIndicator)
+	u.defer(0.2, require("appearance.console").cleanupConsole)
 end
