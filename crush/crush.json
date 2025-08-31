@@ -17,11 +17,7 @@
 		"python": { "command": "basedpyright-langserver", "args": ["--stdio"], "enabled": false }
 	},
 	"mcp": {
-		"sosumi": {
-			"type": "stdio",
-			"command": "npx",
-			"args": ["-y", "mcp-remote", "https://sosumi.ai/mcp"]
-		},
+		"context7": { "type": "stdio", "command": "npx", "args": ["-y", "@upstash/context7-mcp"] },
 		"sequential-thinking": {
 			"type": "stdio",
 			"command": "npx",
@@ -31,21 +27,23 @@
 			"type": "http",
 			"url": "https://api.githubcopilot.com/mcp/",
 			"timeout": 30,
-			"headers": { "Authorization": "$(echo Bearer $GITHUB_TOKEN)" }
+			"headers": {
+				"Authorization": "Bearer $(cat \"$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/private dotfiles/github-token.txt\")"
+			}
 		},
-		"context7": { "type": "stdio", "command": "npx", "args": ["-y", "@upstash/context7-mcp"] }
+		"sosumi": {
+			"type": "stdio",
+			"command": "npx",
+			"args": ["-y", "mcp-remote", "https://sosumi.ai/mcp"]
+		}
 	},
 	"permissions": {
-	  "allowed_tools": [
-	    "view",
-	    "ls",
-	    "grep",
-	    "edit"
-	  ]
+		"allowed_tools": ["view", "ls", "grep", "edit", "mcp_context7_get-library-doc"]
 	},
 	"options": {
+		"tui": { "compact_mode": true },
 		"disable_auto_summarize": false,
-		"context_paths": ["./AGENT.md"]
+		"context_paths": ["AGENTS.md"]
 	},
 
 	"$schema": "https://charm.land/crush.json"

@@ -9,9 +9,31 @@
 	<key>connections</key>
 	<dict>
 		<key>2BE9E16C-CD19-489B-97FC-4FB2B71A237E</key>
-		<array/>
-		<key>6ED60925-2459-424C-A17D-24F317903D98</key>
-		<array/>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>5FB5EEDF-FF6D-41A7-9C56-4864E641E9D2</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>75BDA047-AFBC-4D88-A58C-084AEBD68C08</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>BC0FF123-F23C-435F-86F9-DC8CF2BE162C</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>B542153D-57DD-436E-AFB9-C0B4537C3EE2</key>
 		<array>
 			<dict>
@@ -83,26 +105,6 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>6ED60925-2459-424C-A17D-24F317903D98</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>5FB5EEDF-FF6D-41A7-9C56-4864E641E9D2</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
 		</array>
 	</dict>
 	<key>createdby</key>
@@ -112,7 +114,7 @@
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
-	<string>ChatGPT Companion</string>
+	<string>AI Companion</string>
 	<key>objects</key>
 	<array>
 		<dict>
@@ -224,18 +226,18 @@
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
-				<true/>
+				<false/>
 				<key>removeextension</key>
 				<false/>
 				<key>text</key>
-				<string>{query}</string>
+				<string></string>
 				<key>title</key>
-				<string>🤖 OpenAI Usage</string>
+				<string>⏳ Requesting OpenAI Usage</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
-			<string>2BE9E16C-CD19-489B-97FC-4FB2B71A237E</string>
+			<string>B542153D-57DD-436E-AFB9-C0B4537C3EE2</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -265,22 +267,23 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>autopaste</key>
+				<key>lastpathcomponent</key>
 				<false/>
-				<key>clipboardtext</key>
-				<string>OpenAI Usage
-{query}</string>
-				<key>ignoredynamicplaceholders</key>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
 				<false/>
-				<key>transient</key>
-				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>🤖 OpenAI Usage</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.output.clipboard</string>
+			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
-			<string>6ED60925-2459-424C-A17D-24F317903D98</string>
+			<string>2BE9E16C-CD19-489B-97FC-4FB2B71A237E</string>
 			<key>version</key>
-			<integer>3</integer>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -306,21 +309,15 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string></string>
-				<key>title</key>
-				<string>⏳ Requesting OpenAI Usage</string>
+				<key>soundname</key>
+				<string>Bottle</string>
+				<key>systemsound</key>
+				<true/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
+			<string>alfred.workflow.output.playsound</string>
 			<key>uid</key>
-			<string>B542153D-57DD-436E-AFB9-C0B4537C3EE2</string>
+			<string>5FB5EEDF-FF6D-41A7-9C56-4864E641E9D2</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -348,15 +345,42 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>soundname</key>
-				<string>Bottle</string>
-				<key>systemsound</key>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>keyword</key>
+				<string>mcp</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>MCP Registry</string>
+				<key>withspace</key>
 				<true/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.output.playsound</string>
+			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
-			<string>5FB5EEDF-FF6D-41A7-9C56-4864E641E9D2</string>
+			<string>75BDA047-AFBC-4D88-A58C-084AEBD68C08</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>https://ravitemer.github.io/mcp-registry/</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>BC0FF123-F23C-435F-86F9-DC8CF2BE162C</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -374,9 +398,9 @@
 		<key>2BE9E16C-CD19-489B-97FC-4FB2B71A237E</key>
 		<dict>
 			<key>xpos</key>
-			<real>560</real>
+			<real>515</real>
 			<key>ypos</key>
-			<real>150</real>
+			<real>280</real>
 		</dict>
 		<key>4CB433C8-9E5A-4126-B947-BDE864B99AC2</key>
 		<dict>
@@ -390,9 +414,9 @@
 		<key>5FB5EEDF-FF6D-41A7-9C56-4864E641E9D2</key>
 		<dict>
 			<key>xpos</key>
-			<real>560</real>
+			<real>660</real>
 			<key>ypos</key>
-			<real>410</real>
+			<real>280</real>
 		</dict>
 		<key>6261E02D-805C-4920-BEA0-D4F39B6A8873</key>
 		<dict>
@@ -405,12 +429,12 @@
 			<key>ypos</key>
 			<real>150</real>
 		</dict>
-		<key>6ED60925-2459-424C-A17D-24F317903D98</key>
+		<key>75BDA047-AFBC-4D88-A58C-084AEBD68C08</key>
 		<dict>
 			<key>xpos</key>
-			<real>560</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>280</real>
+			<real>570</real>
 		</dict>
 		<key>B542153D-57DD-436E-AFB9-C0B4537C3EE2</key>
 		<dict>
@@ -418,6 +442,13 @@
 			<real>225</real>
 			<key>ypos</key>
 			<real>280</real>
+		</dict>
+		<key>BC0FF123-F23C-435F-86F9-DC8CF2BE162C</key>
+		<dict>
+			<key>xpos</key>
+			<real>225</real>
+			<key>ypos</key>
+			<real>570</real>
 		</dict>
 		<key>C79D13CD-AAE6-49E7-9BD5-8C33E2422C5F</key>
 		<dict>
