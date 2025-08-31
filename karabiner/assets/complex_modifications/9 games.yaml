@@ -1,0 +1,12 @@
+# yaml-language-server: $schema=./schema/karabiner-mod-schema.json
+title: "Mouse Bindings"
+rules:
+  - description: "(Mouse) 4 (bottom)"
+    manipulators:
+      - type: basic
+        from: { pointing_button: button4 }
+        to:
+          - key_code: w
+        conditions:
+          - type: frontmost_application_if
+            bundle_identifiers: [unity.Amplitude studios.Endless space 2]
