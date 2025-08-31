@@ -77,13 +77,7 @@ local function tileLeft() wu.moveResize(hs.window.focusedWindow(), hs.layout.lef
 
 --------------------------------------------------------------------------------
 -- HOTKEYS
-hs.hotkey.bind({ "ctrl" }, "space", function()
-	if u.isFront("Ivory") then
-		hs.window.focusedWindow():setFrame(wu.toTheSide) -- needs setFrame to hide part to the side
-	else
-		toggleMaximized()
-	end
-end)
+hs.hotkey.bind({ "ctrl" }, "space", toggleMaximized)
 hs.hotkey.bind(u.hyper, "M", moveToNextDisplay)
 hs.hotkey.bind(u.hyper, "right", tileRight)
 hs.hotkey.bind(u.hyper, "left", tileLeft)
