@@ -98,7 +98,7 @@ M.aw_masto = aw.new(function(appName, event, masto)
 	if event == aw.deactivated then
 		-- close any media windows
 		local mediaWinName = "Ivory"
-		local isMediaWin = masto:mainWindow():title() == mediaWinName
+		local isMediaWin = masto:mainWindow() and masto:mainWindow():title() == mediaWinName
 		local frontNotAlfred = hs.application.frontmostApplication():name() ~= "Alfred"
 		if #masto:allWindows() > 1 and isMediaWin and frontNotAlfred then
 			hs.eventtap.keyStroke({ "cmd" }, "w", 1, masto) -- hotkey, since `:close()` doesn't work

@@ -15,7 +15,7 @@ local config = {
 --------------------------------------------------------------------------------
 
 local function fallthrough()
-	u.defer({ 0.1, 0.3 }, function() -- deferring to ensure windows are already switched/created
+	u.defer(0.2, function() -- deferring to ensure windows are already switched/created
 		local frontApp = hs.application.frontmostApplication()
 		local name = frontApp:name()
 		local noWin = #(frontApp:allWindows()) == 0
@@ -44,7 +44,10 @@ end
 M.wf_windowDestroyed = wf
 	.new(true) -- `true` = any app
 	:setOverrideFilter({ allowRoles = "AXStandardWindow", rejectTitles = { "^Login$", "^$" } })
-	:subscribe(wf.windowDestroyed, fallthrough)
+	:subscribe(wf.windowDestroyed, function()
+		print("🪚 window destroyed")
+		fallthrough()
+	end)
 
 M.aw_noWinActivated = aw.new(function(name, event, _app)
 	if event == aw.activated and hs.fnutils.contains(config.fallthrough.whenNoWin, name) then
