@@ -43,7 +43,7 @@ rules:
       - type: basic
         from: { key_code: q, modifiers: { mandatory: [command] } }
         to:
-          - shell_command: osascript -e 'tell application "Finder" to close every window'
+          - shell_command: killall Finder
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [com.apple.finder] }]
       # cmd+enter -> goto Desktop/dotfiles
       - type: basic

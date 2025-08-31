@@ -17,11 +17,10 @@ local config = {
 local function fallthrough()
 	u.defer({ 0.1, 0.3 }, function() -- deferring to ensure windows are already switched/created
 		local frontApp = hs.application.frontmostApplication()
-		local fallthroughWhenNoWin = hs.fnutils.contains(
-			config.fallthrough.whenNoWin,
-			frontApp:name()
-		) and #(frontApp:allWindows()) == 0
-		local fallThroughAlways = hs.fnutils.contains(config.fallthrough.always, frontApp:name())
+		local name = frontApp:name()
+		local noWin = #(frontApp:allWindows()) == 0
+		local fallthroughWhenNoWin = noWin and hs.fnutils.contains(config.fallthrough.whenNoWin, name)
+		local fallThroughAlways = hs.fnutils.contains(config.fallthrough.always, name)
 		if not fallthroughWhenNoWin and not fallThroughAlways then return end
 
 		local nextWin = hs.fnutils.find(
@@ -35,6 +34,7 @@ local function fallthrough()
 		)
 		if not nextWin then return end
 
+		print("⤵️ fallthrough to " .. nextWin:application():name())
 		nextWin:focus()
 	end)
 end
