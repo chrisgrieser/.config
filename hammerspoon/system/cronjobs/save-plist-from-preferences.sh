@@ -7,11 +7,11 @@ plists=(
 	com.apple.Preferences
 	com.apple.screensaver
 	com.apple.finder
-	com.apple.iCal                                      # Calendar.app
-	com.apple.notificationcenterui                      # notification center & widgets
-	com.apple.preference.gene com.apple.symbolichotkeys # system shortcuts
-	com.apple.remindd                                   # Reminders.app
-	com.apple.symbolichotkeys                           # system shortcuts
+	com.apple.iCal                 # Calendar.app
+	com.apple.notificationcenterui # notification center & widgets
+	com.apple.symbolichotkeys      # system shortcuts
+	com.apple.remindd              # Reminders.app
+	com.apple.symbolichotkeys      # system shortcuts
 
 	# printer
 	Printer.RICOH-Printer
@@ -22,7 +22,6 @@ plists=(
 	# apps
 	com.Replacicon.Replacicon
 	com.colliderli.iina
-	com.lwouis.alt-tab-macos
 	com.runningwithcrayons.Alfred-Preferences
 	com.runningwithcrayons.Alfred
 	com.tinyspeck.slackmacgap
