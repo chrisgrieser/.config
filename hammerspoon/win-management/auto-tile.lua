@@ -20,10 +20,11 @@ local config = {
 --------------------------------------------------------------------------------
 
 ---@param appName string
-local function autoTile(appName)
+---@param _trigger string
+local function autoTile(appName, _trigger)
 	local app = hs.application.find(appName, true, true)
 	if not app then
-		M["winCount_" .. appName] = 0
+		M["winCount_" .. appName] = nil
 		return
 	end
 
@@ -38,10 +39,11 @@ local function autoTile(appName)
 	end) --[[@as hs.window[] ]]
 
 	-- GUARD idempotent
+	-- print(("🪟 autoTile: %s %s (%d wins)"):format(appName, _trigger, #wins))
 	if M["winCount_" .. appName] == #wins then return end
 	M["winCount_" .. appName] = #wins
 
-	-- GUARD not with multiple windows
+	-- GUARD on projector, not with multiple windows
 	if #wins > 1 and env.isProjector() then return end
 
 	local pos = {} ---@cast pos hs.geometry[]
@@ -86,13 +88,16 @@ local aw = hs.application.watcher
 for appName, ignoredWins in pairs(config.appsToAutoTile) do
 	M["winFilter_" .. appName] = wf.new(appName)
 		:setOverrideFilter({ rejectTitles = ignoredWins, allowRoles = "AXStandardWindow" })
-		:subscribe(wf.windowCreated, function() autoTile(appName) end)
-		:subscribe(wf.windowDestroyed, function() autoTile(appName) end)
-		:subscribe(wf.windowFocused, function() autoTile(appName) end)
+		:subscribe(wf.windowCreated, function() autoTile(appName, "win created") end)
+		:subscribe(wf.windowDestroyed, function() autoTile(appName, "win destroyed") end)
+		:subscribe(wf.windowFocused, function() autoTile(appName, "win focused") end)
 
-	M["appWatcher_" .. appName] = aw.new(function(_name, event, autoTileApp)
-		if event == aw.activated then
+	M["appWatcher_" .. appName] = aw.new(function(name, event, autoTileApp)
+		if event == aw.activated and name == appName then
+			autoTile(appName, "app activated")
 			autoTileApp:selectMenuItem { "Window", "Bring All to Front" }
+		elseif event == aw.terminated and name == appName then
+			M.resetWinCount(appName)
 		end
 	end):start()
 end
