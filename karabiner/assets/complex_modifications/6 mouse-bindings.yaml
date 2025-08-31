@@ -105,34 +105,15 @@ rules:
   - description: "(Mouse) 6: Cmd+Tab"
     manipulators:
       - type: basic
-        from:
-          simultaneous: [{ pointing_button: button6 }]
+        from: { pointing_button: button6 }
         to:
           - { key_code: tab, modifiers: [command] }
   #─────────────────────────────────────────────────────────────────────────────
-  - description: "(Mouse) 1+2 (simultaneously): Dictionary Lookup"
+  - description: "(Mouse) 1+2 (simultaneously): Open selection"
     manipulators:
       - type: basic
         from:
-          simultaneous:
-            - pointing_button: button1
-            - pointing_button: button2
-        to:
-          - { key_code: d, modifiers: [control, command] }
-        parameters:
-          simultaneous_threshold_milliseconds: 500
-        conditions:
-          # conflicts for some reason with space+dragging in the Canvas plugin
-          - { type: frontmost_application_unless, bundle_identifiers: [md.obsidian] }
-  #─────────────────────────────────────────────────────────────────────────────
-  - description: "(Mouse) 1+5 (simultaneously): Google Selection"
-    manipulators:
-      - type: basic
-        from:
-          simultaneous:
-            - pointing_button: button1
-            - pointing_button: button5
-        parameters: { simultaneous_threshold_milliseconds: 500 }
+          simultaneous: [{ pointing_button: button1 }, { pointing_button: button2 }]
         to:
           - shell_command: |
               # INFO IF SELECTION IS…
@@ -161,7 +142,7 @@ rules:
               elif [[ -d "$sel" ]]; then # directory
                 open "$sel"
               elif echo "$sel" | grep -Eq "https?://"; then # url(s) in selection
-                echo "$sel" | grep -Eo "https?://[> ]*" | xargs open
+                echo "$sel" | grep -Eo "https?://[^ ]*" | xargs open
               elif [[ "$sel" =~ "@" ]]; then # mail
                 open "mailto:$sel"
               elif [[ -n "$sel" ]]; then
@@ -170,3 +151,7 @@ rules:
                 url="https://www.google.com/search?q=$url_encoded_sel"
                 open "$url"
               fi
+        parameters: { simultaneous_threshold_milliseconds: 500 }
+        # conflicts for some reason with space+dragging in the Canvas plugin
+        conditions: [{ type: frontmost_application_unless, bundle_identifiers: [md.obsidian] }]
+  #─────────────────────────────────────────────────────────────────────────────
