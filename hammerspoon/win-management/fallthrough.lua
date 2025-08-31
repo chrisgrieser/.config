@@ -44,10 +44,17 @@ end
 M.wf_windowDestroyed = wf
 	.new(true) -- `true` = any app
 	:setOverrideFilter({ allowRoles = "AXStandardWindow", rejectTitles = { "^Login$", "^$" } })
-	:subscribe(wf.windowDestroyed, function()
-		print("🪚 window destroyed")
-		fallthrough()
-	end)
+	:subscribe(wf.windowDestroyed, fallthrough)
+
+-- HACK since `windowDestroyed` often does not fire, we also watch for manual
+-- window closing
+hs.hotkey.bind({ "cmd" }, "w", function()
+	local frontApp = hs.application.frontmostApplication()
+	hs.eventtap.keyStroke({ "cmd" }, "w", 1, frontApp) -- passthrough
+	local fallthroughWhenNoWinApp = hs.fnutils.contains(config.fallthrough.whenNoWin, frontApp:name())
+	print("🪚 frontApp: " .. hs.inspect(frontApp:name()))
+	if fallthroughWhenNoWinApp then fallthrough() end
+end)
 
 M.aw_noWinActivated = aw.new(function(name, event, _app)
 	if event == aw.activated and hs.fnutils.contains(config.fallthrough.whenNoWin, name) then

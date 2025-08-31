@@ -254,25 +254,7 @@ rules:
       - type: basic
         from: { key_code: w, modifiers: { mandatory: [command] } }
         to:
-          - shell_command: |
-              current_win=$(osascript -e '
-                tell application "Finder"
-                	activate
-                	if (count windows) is 0 then return ""
-                	try
-                		set pathToBeClosed to (POSIX path of (insertion location as alias))
-                		close window 1
-                		return pathToBeClosed
-                	on error # special folders without insertion location, like Smart Folders
-                		close window 1
-                		return ""
-                	end try
-                end tell
-              ')
-              if [[ -n "$current_win" ]] ; then
-                mkdir -p "$HOME/.cache/finder-vim-mode"
-                echo "$current_win" >"$HOME/.cache/finder-vim-mode/last-closed-window"
-              fi
+          - { key_code: w, modifiers: [command] }
           # closing win should end insert, menu, and find mode, but not cancel move
           # since cmd+w can be called from various modes, it should thus also
           # end all those modes
@@ -287,51 +269,7 @@ rules:
       - type: basic
         from: { key_code: q }
         to:
-          - shell_command: |
-              current_win=$(osascript -e '
-                tell application "Finder"
-                	activate
-                	if (count windows) is 0 then return ""
-                	try
-                		set pathToBeClosed to (POSIX path of (insertion location as alias))
-                		close window 1
-                		return pathToBeClosed
-                	on error # special folders without insertion location, like Smart Folders
-                		close window 1
-                		return ""
-                	end try
-                end tell
-              ')
-              if [[ -n "$current_win" ]] ; then
-                mkdir -p "$HOME/.cache/finder-vim-mode"
-                echo "$current_win" >"$HOME/.cache/finder-vim-mode/last-closed-window"
-              fi
-        conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
-      # r = re-open window
-      - type: basic
-        from: { key_code: r }
-        to:
-          - shell_command: |
-              open "$(cat "$HOME/.cache/finder-vim-mode/last-closed-window")"
-        conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
-      # e = close all other windows (:only)
-      - type: basic
-        from: { key_code: e }
-        to:
-          - shell_command: |
-              current_win=$(osascript -e '
-                tell application "Finder"
-                  set winPath to ""
-                  repeat while Finder window 2 exists
-                    if ((count Finder windows) is 2) then
-                      set winPath to POSIX path of (target of window 2 as alias)
-                    end if
-                    close Finder window 2
-                  end repeat
-                  return winPath
-                end tell')
-              mkdir -p "$HOME/.cache/finder-vim-mode"
-              [[ -n "$current_win" ]] && echo "$current_win" >"$HOME/.cache/finder-vim-mode/last-closed-window"
+          - { key_code: w, modifiers: [command] }
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
       # <BS> = cycle windows (:bnext)
       - type: basic
@@ -347,20 +285,22 @@ rules:
           - *leave-find-mode
           - *remove-find-notice
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
-      # t = recent folders
+      # r = recent folders
       - type: basic
-        from: { key_code: t }
+        from: { key_code: r }
         to_if_alone:
           - shell_command: |
               osascript -e '
-                tell application "System Events" to tell process "Finder"
-                  set frontmost to true
-                	click menu item "Recent Folders" of menu "Go" of menu bar 1
-                  key code 125 using {option down} # opt+down
-                  key code 126 # up
-                  key code 126 # up
-                  key code 124 # right
-                end tell
+                tell application "System Events" to tell process "Finder" 
+                	set frontmost to true 
+                	click menu item "Recent Folders" of menu "Go" of menu bar 1 # actually only selects `Go` 
+                	delay 0.1 
+                	key code 125 # down, cycles to last item
+                	key code 126 # up 
+                	key code 126 # up 
+                	key code 126 # up 
+                	key code 124 # right 
+                end tell 
               '
           - *start-menu
           - *menu-notice

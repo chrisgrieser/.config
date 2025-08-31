@@ -1,7 +1,11 @@
 #!/usr/bin/env osascript
 
--- CONFIG
-set basePath to POSIX path of (path to desktop)
+-- target folder: frontwin or desktop
+try 
+	tell application "Finder" to set targetFolder to POSIX path of (insertion location as alias)
+on error
+	set targetFolder to POSIX path of (path to desktop)
+end try
 --------------------------------------------------------------------------------
 
 -- build filepath
