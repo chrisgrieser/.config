@@ -9,8 +9,12 @@ action_log="./.post-processing.log"
 
 # DELETE CLUTTER
 cd "$TR_TORRENT_DIR" || return 1 # `$TR_TORRENT_DIR` is where the downloads are placed
-find . -iregex ".*\.(nfo|md|jpe?g|png|exe|txt)$" -delete
-find . -type directory -empty -delete                  # e.g. now empty `Image` folders
+
+# my version of `find` does not support `-regex` with `|`, so we search for
+# each file type separately
+find . \( -name "*.txt" -or -name "*.nfo" -or -name "*.md" -or -name "*.exe" \
+	-or -name "*.png" -or -name "*.jp*g" \) -delete -print
+find . -type directory -empty -delete -print           # e.g. now empty `	find "." -type d -not -path "**/.git/**" -empty -delete -print` folders
 find . -type directory -name "Sample" -exec rm -r {} + # Folders with content do not accept `-delete`
 sleep 1
 
@@ -43,7 +47,7 @@ find "." -maxdepth 1 -name "*.mkv" | while read -r old_name; do
 done
 
 # QUIT TRANSMISSION, IF NO OTHER ACTIVE TORRENTS
-sleep 5 # time for potential new torrents to be initialized
+sleep 10 # time for potential new torrents to be initialized
 incomplete_dir=$(defaults read org.m0k.transmission IncompleteDownloadFolder)
 active_torrents=$(find "$incomplete_dir" -mindepth 1 -not -name ".DS_Store" -not -name ".localized")
 [[ -z "$active_torrents" ]] && killall "Transmission"
