@@ -7,13 +7,11 @@ export PATH="$ZDOTDIR/utilities/":$PATH
 #───────────────────────────────────────────────────────────────────────────────
 
 function delete_empty_folders {
-	find "." -type d -not -path "**/.git/**" -empty
-	find "." -type d -not -path "**/.git/**" -empty -delete
+	find "." -type d -not -path "**/.git/**" -empty -delete -print
 }
 
 function delete_DS_Store {
-	find "." -name ".DS_Store"
-	find "." -name ".DS_Store" -delete
+	find "." -name ".DS_Store" -delete -print
 }
 
 function cake {

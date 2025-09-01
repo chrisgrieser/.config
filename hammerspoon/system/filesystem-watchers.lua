@@ -78,16 +78,6 @@ M.pathw_desktop = pathw(home .. "/Desktop/", function(paths, _)
 			u.defer(1, function() os.rename(path, bankPath .. "/" .. name) end) -- delay ensures folder is created
 			u.openUrlInBg(bankPath)
 
-		-- STEAM GAME SHORTCUTS
-		elseif name:find("%.app$") and not isDownloaded then
-			local gameFolder = home .. "/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/Games/"
-			success, errmsg = os.rename(path, gameFolder .. name)
-			if success then
-				-- open folders to copy icon
-				hs.open(gameFolder)
-				hs.open(home .. "/Library/Application Support/Steam/steamapps/common")
-			end
-
 		-- CHATGPT CONVERSATIONS
 		elseif name == "conversations.json" then
 			local targetLocation = home
