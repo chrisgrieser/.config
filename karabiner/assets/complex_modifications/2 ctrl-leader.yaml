@@ -5,6 +5,9 @@ anchors:
   - conditions:
       - &leader-active { type: variable_if, name: LEADER_ACTIVE, value: true }
       - &leader-inactive { type: variable_unless, name: LEADER_ACTIVE, value: true }
+      - &not-steam-game 
+        type: frontmost_application_unless
+        file_paths: ["/Users/.*/Library/Application Support/Steam/steamapps/common/.*\\.app"]
   - to:
       - &deactivate-leader { set_variable: { name: LEADER_ACTIVE, value: false } }
       - &activate-leader { set_variable: { name: LEADER_ACTIVE, value: true } }
@@ -16,12 +19,12 @@ rules:
     manipulators:
       - type: basic
         from: { key_code: left_control }
-        conditions: [*leader-inactive]
+        conditions: [*leader-inactive, *not-steam-game]
         to: [{ key_code: left_control }]
         to_if_alone: [*activate-leader, *set-notice]
       - type: basic
         from: { key_code: right_command }
-        conditions: [*leader-inactive]
+        conditions: [*leader-inactive, *not-steam-game]
         to: [{ key_code: right_command }]
         to_if_alone: [*activate-leader, *set-notice]
 

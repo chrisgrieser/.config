@@ -15,14 +15,15 @@ rules:
           - type: frontmost_application_if
             bundle_identifiers: [com.brave.Browser, com.apple.Safari]
   #─────────────────────────────────────────────────────────────────────────────
-  - description: "(Mouse) 3: Quit app"
+  - description: "(Mouse) 3: Quit app (if not a Steam game)"
     manipulators:
       - type: basic
         from: { pointing_button: button3 }
         to:
-          - shell_command: |
-              if pgrep -x "Steam"; then return 1; fi
-              osascript -e 'tell application "System Events" to keystroke "q" using {command down}'
+          - { key_code: q, modifiers: [command] }
+        conditions:
+          - type: frontmost_application_unless
+            file_paths: ["/Users/.*/Library/Application Support/Steam/steamapps/common/.*\\.app"]
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Mouse) 4 (bottom)"
     manipulators:
