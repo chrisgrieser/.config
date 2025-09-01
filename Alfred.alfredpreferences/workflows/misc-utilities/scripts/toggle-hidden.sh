@@ -9,10 +9,10 @@ name=$(basename "$filepath")
 
 if [[ "$flags" == *"hidden"* ]]; then
 	chflags -h nohidden "$filepath"
-	alfred_msg="🔒 Unlocked \"$name\""
+	alfred_msg="👀 Unhide \"$name\""
 else
 	chflags -h hidden "$filepath"
-	alfred_msg="🔒 Locked \"$name\""
+	alfred_msg="👀 Hide \"$name\""
 fi
 
 echo "$alfred_msg"

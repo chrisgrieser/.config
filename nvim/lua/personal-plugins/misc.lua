@@ -126,6 +126,7 @@ end
 function M.toggleOrIncrement()
 	local toggles = {
 		["start"] = "end",
+		["up"] = "down",
 		["backward"] = "forward",
 		["true"] = "false",
 		["light"] = "dark",

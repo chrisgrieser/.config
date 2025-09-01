@@ -291,16 +291,16 @@ rules:
         to_if_alone:
           - shell_command: |
               osascript -e '
-                tell application "System Events" to tell process "Finder" 
-                	set frontmost to true 
-                	click menu item "Recent Folders" of menu "Go" of menu bar 1 # actually only selects `Go` 
-                	delay 0.1 
+                tell application "System Events" to tell process "Finder"
+                	set frontmost to true
+                	click menu item "Recent Folders" of menu "Go" of menu bar 1 # actually only selects `Go`
+                	delay 0.1
                 	key code 125 # down, cycles to last item
-                	key code 126 # up 
-                	key code 126 # up 
-                	key code 126 # up 
-                	key code 124 # right 
-                end tell 
+                	key code 126 # up
+                	key code 126 # up
+                	key code 126 # up
+                	key code 124 # right
+                end tell
               '
           - *start-menu
           - *menu-notice
@@ -656,10 +656,10 @@ rules:
           - shell_command: |
               osascript -e '
                 tell application "Finder"
-                  -- create new file
                   activate
                   set thisFolder to the target of the Finder window 1 as alias
                   set newFile to (make new file at thisFolder)
+                  delay 0.1 # wait for creation
                   select newFile
                 end tell
                 delay 0.1 # ensure file is selected
@@ -667,12 +667,7 @@ rules:
                   click menu item "Rename" of menu "File" of menu bar 1
                 end tell
               '
-
-              # play sound at current volume
-              current_vol=$(osascript -e 'output volume of (get volume settings)')
-              [[ "$current_vol" == "missing value" ]] && current_vol=50
-              vol_percent=$(echo "scale=2 ; $current_vol / 100" | bc) # afplay play with 100% volume by default
-              afplay --volume "$vol_percent" "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/begin_record.caf" &
+              afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/begin_record.caf" &
           - *enter-insert-mode # since renaming is triggered
           - *insert-notice
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
@@ -757,12 +752,7 @@ rules:
                 foldername=$(basename "$sel")
                 zip --recurse-paths --symlinks "../$foldername.zip" .
                 open -R "../$foldername.zip"
-
-                # play sound at current volume
-                current_vol=$(osascript -e 'output volume of (get volume settings)')
-                [[ "$current_vol" == "missing value" ]] && current_vol=50
-                vol_percent=$(echo "scale=2 ; $current_vol / 100" | bc) # afplay play with 100% volume by default
-                (afplay --volume "$vol_percent" "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/Volume Mount.aif" &)
+                afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/Volume Mount.aif" &
               else
                 osascript -e '
                   tell application "System Events" to tell process "Finder"
@@ -783,12 +773,7 @@ rules:
                 foldername=$(basename "$sel")
                 zip --recurse-paths --symlinks "../$foldername.zip" .
                 open -R "../$foldername.zip"
-
-                # play sound at current volume
-                current_vol=$(osascript -e 'output volume of (get volume settings)')
-                [[ "$current_vol" == "missing value" ]] && current_vol=50
-                vol_percent=$(echo "scale=2 ; $current_vol / 100" | bc) # afplay play with 100% volume by default
-                (afplay --volume "$vol_percent" "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/Volume Mount.aif" &)
+                afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/Volume Mount.aif" &
               else
                 osascript -e '
                   tell application "System Events" to tell process "Finder"

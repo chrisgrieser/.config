@@ -2,37 +2,20 @@
 title: Vim Mode for Highlights.app
 anchors:
   - conditions:
-      - &highlights-insert-mode
-        type: variable_if
-        name: HIGHLIGHTS_INSERT_MODE
-        value: true
-      - &highlights-normal-mode
-        type: variable_unless
-        name: HIGHLIGHTS_INSERT_MODE
-        value: true
-      - &highlights-app
-        type: frontmost_application_if
-        bundle_identifiers: [^net\.highlightsapp\.universal$]
-      - &german-keyboard
-        type: input_source_if
-        input_sources: [language: ^de$]
+      - &highlights-insert-mode { type: variable_if, name: HIGHLIGHTS_INSERT_MODE, value: true }
+      - &highlights-normal-mode { type: variable_unless, name: HIGHLIGHTS_INSERT_MODE, value: true }
+      - &highlights-app {
+          type: frontmost_application_if,
+          bundle_identifiers: [^net\.highlightsapp\.universal$],
+        }
+      - &german-keyboard { type: input_source_if, input_sources: [language: ^de$] }
   - to:
-      - &enter-normal-mode
-        set_variable:
-          name: HIGHLIGHTS_INSERT_MODE
-          value: false
-      - &enter-insert-mode
-        set_variable:
-          name: HIGHLIGHTS_INSERT_MODE
-          value: true
-      - &remove-notice
-        set_notification_message:
-          id: highlights-vim-notice
-          text: ""
-      - &set-notice
-        set_notification_message:
-          id: highlights-vim-notice
-          text: ✏️ Highlights Insert Mode
+      - &enter-normal-mode { set_variable: { name: HIGHLIGHTS_INSERT_MODE, value: false } }
+      - &enter-insert-mode { set_variable: { name: HIGHLIGHTS_INSERT_MODE, value: true } }
+      - &remove-notice { set_notification_message: { id: highlights-vim-notice, text: "" } }
+      - &set-notice {
+          set_notification_message: { id: highlights-vim-notice, text: ✏️ Highlights Insert Mode },
+        }
 #───────────────────────────────────────────────────────────────────────────────
 rules:
   - description: "✏️ Highlights Vim Mode: Triggers/Toggles"
@@ -40,12 +23,12 @@ rules:
       # Enter Normal Mode
       - type: basic
         from: { key_code: caps_lock }
-        to_if_alone:
-          - *remove-notice
-          - *enter-normal-mode
-          - key_code: escape
-        to:
-          - { key_code: right_command, modifiers: [control, option] }
+        to_if_alone: [{ key_code: escape }, *remove-notice, *enter-normal-mode]
+        to: [ {key_code: right_command , modifiers: [control , option]} ]
+        conditions: [*highlights-app, *highlights-insert-mode]
+      - type: basic
+        from: { key_code: escape }
+        to: [{ key_code: escape }, *remove-notice, *enter-normal-mode]
         conditions: [*highlights-app, *highlights-insert-mode]
       # leave insert mode when quitting
       - type: basic
