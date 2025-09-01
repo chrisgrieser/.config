@@ -9,7 +9,7 @@ action_log="./.post-processing.log"
 
 # DELETE CLUTTER
 cd "$TR_TORRENT_DIR" || return 1 # `$TR_TORRENT_DIR` is where the downloads are placed
-find . -E -iregex ".*\.(nfo|md|jpe?g|png|exe|txt)$" -delete
+find . -iregex ".*\.(nfo|md|jpe?g|png|exe|txt)$" -delete
 find . -type directory -empty -delete                  # e.g. now empty `Image` folders
 find . -type directory -name "Sample" -exec rm -r {} + # Folders with content do not accept `-delete`
 sleep 1
