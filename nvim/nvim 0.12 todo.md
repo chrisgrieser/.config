@@ -4,3 +4,4 @@
 	+ <https://www.reddit.com/r/neovim/comments/1moxwv9/hexadecimal_colors_in_v012_ootb/>
 - `:restart`
 - `vim._extui`
+- textDocument.onTypeFormatting
