@@ -20,7 +20,9 @@ rules:
       - type: basic
         from: { pointing_button: button3 }
         to:
-          - { key_code: q, modifiers: [command] }
+          - shell_command: |
+              if pgrep -x "Steam"; then return 1; fi
+              osascript -e 'tell application "System Events" to keystroke "q" using {command down}'
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Mouse) 4 (bottom)"
     manipulators:
