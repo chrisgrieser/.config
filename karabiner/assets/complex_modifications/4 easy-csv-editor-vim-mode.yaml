@@ -1,0 +1,152 @@
+# yaml-language-server: $schema=./schema/karabiner-mod-schema.json
+title: Vim Mode for 'Easy CSV Editor.app'
+anchors:
+  - conditions:
+      - &csv-editor-insert-mode { type: variable_if, name: CSV_EDITOR_INSERT_MODE, value: true }
+      - &csv-editor-normal-mode { type: variable_unless, name: CSV_EDITOR_INSERT_MODE, value: true }
+      - &csv-editor-app
+        type: frontmost_application_if
+        bundle_identifiers: [com.vladbadea.csveditor]
+      - &german-keyboard { type: input_source_if, input_sources: [language: ^de$] }
+  - to:
+      - &enter-normal-mode { set_variable: { name: CSV_EDITOR_INSERT_MODE, value: false } }
+      - &enter-insert-mode { set_variable: { name: CSV_EDITOR_INSERT_MODE, value: true } }
+      - &remove-notice { set_notification_message: { id: csv-editor-vim-notice, text: "" } }
+      - &set-notice {
+          set_notification_message: { id: csv-editor-vim-notice, text: ✏️ CSV Editor Insert Mode },
+        }
+#───────────────────────────────────────────────────────────────────────────────
+rules:
+  - description: "✏️ CSV Editor Vim Mode: Triggers/Toggles"
+    manipulators:
+      # Enter Normal Mode
+      - type: basic
+        from: { key_code: caps_lock }
+        to_if_alone: [*remove-notice, *enter-normal-mode, { key_code: escape }]
+        to: [{ key_code: right_command, modifiers: [control, option] }]
+        conditions: [*csv-editor-app, *csv-editor-insert-mode]
+      - type: basic
+        from: { key_code: escape }
+        to: [*remove-notice, *enter-normal-mode, { key_code: escape }]
+        conditions: [*csv-editor-app, *csv-editor-insert-mode]
+      # leave insert mode when quitting
+      - type: basic
+        from: { key_code: q, modifiers: { mandatory: [command] } }
+        to:
+          - { key_code: q, modifiers: [command] }
+          - *remove-notice
+          - *enter-normal-mode
+        conditions: [*csv-editor-app, *csv-editor-insert-mode]
+      - type: basic
+        from: { key_code: w, modifiers: { mandatory: [command] } }
+        to:
+          - { key_code: w, modifiers: [command] }
+          - *remove-notice
+          - *enter-normal-mode
+        conditions: [*csv-editor-app, *csv-editor-insert-mode]
+      # Enter/leave Insert Mode
+      - type: basic
+        from: { key_code: return_or_enter }
+        to: [*set-notice, *enter-insert-mode, { key_code: return_or_enter }]
+        conditions: [*csv-editor-app, *csv-editor-normal-mode]
+      - type: basic
+        from: { key_code: return_or_enter }
+        to: [*remove-notice, *enter-normal-mode, { key_code: return_or_enter }]
+        conditions: [*csv-editor-app, *csv-editor-insert-mode]
+  #─────────────────────────────────────────────────────────────────────────────
+  - description: "✏️ CSV Editor Vim Mode: Actions"
+    manipulators:
+      # j/k: cell up/down
+      - type: basic
+        from: { key_code: j }
+        to: [{ key_code: down_arrow }]
+        conditions: [*csv-editor-app, *csv-editor-normal-mode]
+      - type: basic
+        from: { key_code: k }
+        to: [{ key_code: up_arrow }]
+        conditions: [*csv-editor-app, *csv-editor-normal-mode]
+      - type: basic
+        from: { key_code: j, modifiers: { mandatory: [shift] } }
+        to: # 6x down
+          - key_code: down_arrow
+          - key_code: down_arrow
+          - key_code: down_arrow
+          - key_code: down_arrow
+          - key_code: down_arrow
+          - key_code: down_arrow
+        conditions: [*csv-editor-app, *csv-editor-normal-mode]
+      - type: basic
+        from: { key_code: k, modifiers: { mandatory: [shift] } }
+        to: # 6x up
+          - key_code: up_arrow
+          - key_code: up_arrow
+          - key_code: up_arrow
+          - key_code: up_arrow
+          - key_code: up_arrow
+          - key_code: up_arrow
+        conditions: [*csv-editor-app, *csv-editor-normal-mode]
+      # g/G fully down/up
+      - type: basic
+        from: { key_code: g }
+        to: [{ key_code: up_arrow, modifiers: [command] }]
+        conditions: [*csv-editor-app, *csv-editor-normal-mode]
+      - type: basic
+        from: { key_code: g, modifiers: { mandatory: [shift] } }
+        to: [{ key_code: down_arrow, modifiers: [command] }]
+        conditions: [*csv-editor-app, *csv-editor-normal-mode]
+      # h/l cell left/right
+      - type: basic
+        from: { key_code: h }
+        to: [{ key_code: left_arrow }]
+        conditions: [*csv-editor-app, *csv-editor-normal-mode]
+      - type: basic
+        from: { key_code: l }
+        to: [{ key_code: right_arrow }]
+        conditions: [*csv-editor-app, *csv-editor-normal-mode]
+      - type: basic
+        from: { key_code: h, modifiers: { mandatory: [shift] } }
+        to: [{ key_code: left_arrow, modifiers: [command] }]
+        conditions: [*csv-editor-app, *csv-editor-normal-mode]
+      - type: basic
+        from: { key_code: l, modifiers: { mandatory: [shift] } }
+        to: [{ key_code: right_arrow, modifiers: [command] }]
+        conditions: [*csv-editor-app, *csv-editor-normal-mode]
+      # o/O open row above/below
+      - type: basic
+        from: { key_code: o }
+        to:
+          - { key_code: down_arrow, modifiers: [option] }
+          - { key_code: return_or_enter }
+          - *enter-insert-mode
+          - *set-notice
+        conditions: [*csv-editor-app, *csv-editor-normal-mode]
+      - type: basic
+        from: { key_code: o, modifiers: { mandatory: [shift] } }
+        to:
+          - { key_code: up_arrow, modifiers: [option] }
+          - { key_code: return_or_enter }
+          - *enter-insert-mode
+          - *set-notice
+        conditions: [*csv-editor-app, *csv-editor-normal-mode]
+      # d/D delete row/column
+      - type: basic
+        from: { key_code: d }
+        to: [{ key_code: x, modifiers: [command, shift] }]
+        conditions: [*csv-editor-app, *csv-editor-normal-mode]
+      - type: basic
+        from: { key_code: d, modifiers: { mandatory: [shift] } }
+        to: [{ key_code: z, modifiers: [command, shift] }] # z and y switched on German keyboard
+        conditions: [*csv-editor-app, *csv-editor-normal-mode, *german-keyboard]
+      - type: basic
+        from: { key_code: d, modifiers: { mandatory: [shift] } }
+        to: [{ key_code: y, modifiers: [command, shift] }]
+        conditions: [*csv-editor-app, *csv-editor-normal-mode]
+      # u/U undo/redo
+      - type: basic
+        from: { key_code: u }
+        to: [{ key_code: "y", modifiers: [command] }] # z and y switched on German keyboard
+        conditions: [*csv-editor-app, *csv-editor-normal-mode, *german-keyboard]
+      - type: basic
+        from: { key_code: u, modifiers: { mandatory: [shift] } }
+        to: [{ key_code: "y", modifiers: [command, shift] }] # z and y switched on German keyboard
+        conditions: [*csv-editor-app, *csv-editor-normal-mode, *german-keyboard]
