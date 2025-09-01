@@ -19,7 +19,7 @@ anchors:
 rules:
   - description: "✏️ CSV Editor Vim Mode: Triggers/Toggles"
     manipulators:
-      # Enter Normal Mode
+      # ENTER NORMAL/INSERT MODE
       - type: basic
         from: { key_code: caps_lock }
         to_if_alone: [*remove-notice, *enter-normal-mode, { key_code: escape }]
@@ -46,7 +46,7 @@ rules:
           - *remove-notice
           - *enter-normal-mode
         conditions: [*is-csv-editor, *insert-mode]
-      # Enter/leave Insert Mode
+
       - type: basic
         from: { key_code: return_or_enter }
         to: [*set-notice, *enter-insert-mode, { key_code: return_or_enter }]
@@ -55,6 +55,19 @@ rules:
         from: { key_code: return_or_enter }
         to: [*remove-notice, *enter-normal-mode, { key_code: return_or_enter }]
         conditions: [*is-csv-editor, *insert-mode]
+      - type: basic
+        from: { key_code: tab }
+        to: [*remove-notice, *enter-normal-mode, { key_code: tab }]
+        conditions: [*is-csv-editor, *insert-mode]
+  #─────────────────────────────────────────────────────────────────────────────
+    # cmd+enter: enter table, when no cell is focussed
+      - type: basic
+        from: { key_code: return_or_enter, modifiers: { mandatory: [command] } }
+        to: 
+          # HACK select all, and move down = goes to first cell
+          - { key_code: a, modifiers: [command] }
+          - { key_code: down_arrow }
+        conditions: [*is-csv-editor]
   #─────────────────────────────────────────────────────────────────────────────
   - description: "✏️ CSV Editor Vim Mode: Actions"
     manipulators:

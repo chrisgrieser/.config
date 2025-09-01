@@ -17,14 +17,12 @@ rules:
       - type: basic
         from: { key_code: left_control }
         conditions: [*leader-inactive]
-        to:
-          - key_code: left_control
+        to: [{ key_code: left_control }]
         to_if_alone: [*activate-leader, *set-notice]
       - type: basic
         from: { key_code: right_command }
         conditions: [*leader-inactive]
-        to:
-          - key_code: right_command
+        to: [{ key_code: right_command }]
         to_if_alone: [*activate-leader, *set-notice]
 
       # 2x L-Ctrl: Pass through (for Alfred)
@@ -49,28 +47,25 @@ rules:
         type: basic
         from: { key_code: c }
         conditions: [*leader-active]
-        to:
-          - shell_command: open -a 'Calendar'
-          - *deactivate-leader
-          - *remove-notice
+        to: [{ shell_command: open -a 'Calendar' }, *deactivate-leader, *remove-notice]
+
+      - description: "cs[v] Editor"
+        type: basic
+        from: { key_code: v }
+        conditions: [*leader-active]
+        to: [{ shell_command: open -a 'Easy CSV Editor' }, *deactivate-leader, *remove-notice]
 
       - description: "[⎵] ChatGPT"
         type: basic
         from: { key_code: "spacebar" }
         conditions: [*leader-active]
-        to:
-          - shell_command: open 'https://chatgpt.com/'
-          - *deactivate-leader
-          - *remove-notice
+        to: [{ shell_command: open 'https://chatgpt.com/' }, *deactivate-leader, *remove-notice]
 
       - description: "[ö] Mastodon (Ivory)"
         type: basic
         from: { key_code: semicolon } # ö on German keyboard
         conditions: [*leader-active]
-        to:
-          - shell_command: open -a "Ivory"
-          - *deactivate-leader
-          - *remove-notice
+        to: [{ shell_command: open -a "Ivory" }, *deactivate-leader, *remove-notice]
 
       - description: "[Ö] Mastodon website"
         type: basic
@@ -85,10 +80,7 @@ rules:
         type: basic
         from: { key_code: comma }
         conditions: [*leader-active]
-        to:
-          - shell_command: open -a 'System Preferences'
-          - *deactivate-leader
-          - *remove-notice
+        to: [{ shell_command: open -a 'System Preferences' }, *deactivate-leader, *remove-notice]
 
       - description: "[o]bsidian (main vault)"
         type: basic
@@ -130,28 +122,19 @@ rules:
         type: basic
         from: { key_code: "y" } # switched y and z due to German Keyboard
         conditions: [*leader-active]
-        to:
-          - shell_command: open -a 'zoom.us'
-          - *deactivate-leader
-          - *remove-notice
+        to: [{ shell_command: open -a 'zoom.us' }, *deactivate-leader, *remove-notice]
 
       - description: "[t]: Twilight Imperium"
         type: basic
         from: { key_code: t }
         conditions: [*leader-active]
-        to:
-          - shell_command: open -a 'Twilight Wars'
-          - *deactivate-leader
-          - *remove-notice
+        to: [{ shell_command: open -a 'Twilight Wars' }, *deactivate-leader, *remove-notice]
 
       - description: "[l] Termina[l]"
         type: basic
         from: { key_code: l } # l is quicker to reach for the right hand than t
         conditions: [*leader-active]
-        to:
-          - shell_command: open -a 'WezTerm'
-          - *deactivate-leader
-          - *remove-notice
+        to: [{ shell_command: open -a 'WezTerm' }, *deactivate-leader, *remove-notice]
 
       - description: "[i] Rem[i]nder"
         type: basic
@@ -172,37 +155,25 @@ rules:
         type: basic
         from: { key_code: "n" }
         conditions: [*leader-active]
-        to:
-          - shell_command: open -a "Neovide"
-          - *deactivate-leader
-          - *remove-notice
+        to: [{ shell_command: open -a "Neovide" }, *deactivate-leader, *remove-notice]
 
       - description: "[s]lack"
         type: basic
         from: { key_code: s }
         conditions: [*leader-active]
-        to:
-          - shell_command: open -a 'Slack'
-          - *deactivate-leader
-          - *remove-notice
+        to: [{ shell_command: open -a 'Slack' }, *deactivate-leader, *remove-notice]
 
       - description: "[m]ail"
         type: basic
         from: { key_code: m }
         conditions: [*leader-active]
-        to:
-          - shell_command: open -a "Mimestream"
-          - *deactivate-leader
-          - *remove-notice
+        to: [{ shell_command: open -a "Mimestream" }, *deactivate-leader, *remove-notice]
 
       - description: "[b]rowser"
         type: basic
         from: { key_code: b }
         conditions: [*leader-active]
-        to:
-          - shell_command: open -a "Brave Browser"
-          - *deactivate-leader
-          - *remove-notice
+        to: [{ shell_command: open -a "Brave Browser" }, *deactivate-leader, *remove-notice]
 
       - description: "[B]rowser & re-open last tab"
         type: basic
@@ -224,10 +195,7 @@ rules:
         type: basic
         from: { key_code: f }
         conditions: [*leader-active]
-        to:
-          - *deactivate-leader
-          - *remove-notice
-          - shell_command: open -a "Finder"
+        to: [*deactivate-leader, *remove-notice, { shell_command: open -a "Finder" }]
 
       - description: "[⌫] open trash"
         type: basic
@@ -249,19 +217,13 @@ rules:
         type: basic
         from: { key_code: h }
         conditions: [*leader-active]
-        to:
-          - shell_command: open -a 'Hammerspoon'
-          - *deactivate-leader
-          - *remove-notice
+        to: [{ shell_command: open -a 'Hammerspoon' }, *deactivate-leader, *remove-notice]
 
       - description: "[k]arabiner-EventViewer"
         type: basic
         from: { key_code: k }
         conditions: [*leader-active]
-        to:
-          - shell_command: open -a 'Karabiner-EventViewer'
-          - *deactivate-leader
-          - *remove-notice
+        to: [{ shell_command: open -a 'Karabiner-EventViewer' }, *deactivate-leader, *remove-notice]
 
       - description: "[y]ouTube"
         type: basic
@@ -276,19 +238,13 @@ rules:
         type: basic
         from: { key_code: a }
         conditions: [*leader-active]
-        to:
-          - shell_command: open -a 'Alfred Preferences'
-          - *deactivate-leader
-          - *remove-notice
+        to: [{ shell_command: open -a 'Alfred Preferences' }, *deactivate-leader, *remove-notice]
 
       - description: "[p]df Reader (Highlights)"
         type: basic
         from: { key_code: p }
         conditions: [*leader-active]
-        to:
-          - shell_command: open -a 'Highlights'
-          - *deactivate-leader
-          - *remove-notice
+        to: [{ shell_command: open -a 'Highlights' }, *deactivate-leader, *remove-notice]
 
       - description: "Github notifications"
         type: basic
@@ -304,10 +260,7 @@ rules:
         type: basic
         from: { key_code: escape }
         conditions: [*leader-active]
-        to:
-          - shell_command: open -a 'Activity Monitor'
-          - *deactivate-leader
-          - *remove-notice
+        to: [{ shell_command: open -a 'Activity Monitor' }, *deactivate-leader, *remove-notice]
 
       - description: "WhatsApp"
         type: basic
@@ -322,10 +275,7 @@ rules:
         type: basic
         from: { key_code: q }
         conditions: [*leader-active]
-        to:
-          - shell_command: open -a "Signal"
-          - *deactivate-leader
-          - *remove-notice
+        to: [{ shell_command: open -a "Signal" }, *deactivate-leader, *remove-notice]
 
       - description: "M[e]ssenger"
         type: basic
@@ -350,7 +300,4 @@ rules:
         type: basic
         from: { key_code: t, modifiers: { mandatory: [shift] } }
         conditions: [*leader-active]
-        to:
-          - shell_command: open -a 'Transmission'
-          - *deactivate-leader
-          - *remove-notice
+        to: [{ shell_command: open -a 'Transmission' }, *deactivate-leader, *remove-notice]
