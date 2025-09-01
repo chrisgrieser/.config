@@ -26,6 +26,28 @@
 			<key>url</key>
 			<string>https://www.urbandictionary.com/define.php?term={query}</string>
 		</dict>
+		<key>14966442-8C2D-4B37-87AC-601732095648</key>
+		<dict>
+			<key>enabled</key>
+			<true/>
+			<key>keyword</key>
+			<string>to</string>
+			<key>text</key>
+			<string>Piratebay: {query}</string>
+			<key>url</key>
+			<string>https://thepiratebay.org/search.php?q={query}</string>
+		</dict>
+		<key>1CDB8700-6FF8-462F-A8A6-B6A3A4B1AECA</key>
+		<dict>
+			<key>enabled</key>
+			<true/>
+			<key>keyword</key>
+			<string>to</string>
+			<key>text</key>
+			<string>Kickass Torrent: {query}</string>
+			<key>url</key>
+			<string>https://kickasstorrents.cc/search?query={query}</string>
+		</dict>
 		<key>26ACAC4A-35A8-452D-91BD-82EB22FF544B</key>
 		<dict>
 			<key>enabled</key>
@@ -88,7 +110,7 @@
 			<key>keyword</key>
 			<string>to</string>
 			<key>text</key>
-			<string>nyaa: "{query}"</string>
+			<string>nyaa: {query}</string>
 			<key>url</key>
 			<string>https://nyaa.si/?f=1&amp;c=1_2&amp;q={query}</string>
 		</dict>

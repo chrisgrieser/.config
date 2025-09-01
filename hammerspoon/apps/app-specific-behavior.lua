@@ -21,9 +21,9 @@ end):start()
 M.wf_zoom = wf.new("zoom.us"):subscribe(wf.windowCreated, function(newWin)
 	u.closeBrowserTabsWith("zoom.us") -- remove leftover tabs
 
-	-- close 2nd zoom window when joining a meeting
-	if newWin:title() == "Zoom Meeting" then
-		u.defer(1, function()
+	local newMeetingWindow = newWin:title() == "Zoom Meeting" or newWin:title() == ""
+	if newMeetingWindow then
+		u.defer(2, function()
 			local zoom = newWin:application()
 			if not zoom or zoom:findWindow("Update") then return end
 			local mainWin = zoom:findWindow("Zoom Workplace") or zoom:findWindow("Login")
