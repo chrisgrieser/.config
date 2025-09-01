@@ -915,7 +915,7 @@ open -g "hammerspoon://sync-repos"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>scripts/toggle-lock.sh</string>
+				<string>scripts/toggle-hidden.sh</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
@@ -934,7 +934,7 @@ open -g "hammerspoon://sync-repos"</string>
 				<key>filetypes</key>
 				<array/>
 				<key>name</key>
-				<string>(Un)lock file</string>
+				<string>Toggle hidden</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.trigger.action</string>
