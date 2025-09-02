@@ -1,6 +1,6 @@
 {
     "createdBy": "Redirector v3.5.3",
-    "createdAt": "2025-08-18T12:11:41.436Z",
+    "createdAt": "2025-09-02T10:53:03.696Z",
     "redirects": [
         {
             "description": "Google Lucky Redirect",
@@ -45,23 +45,6 @@
             "excludePattern": "",
             "patternDesc": "",
             "redirectUrl": "https://github.com/$1$2",
-            "patternType": "R",
-            "processMatches": "noProcessing",
-            "disabled": false,
-            "grouped": false,
-            "appliesTo": [
-                "main_frame"
-            ]
-        },
-        {
-            "description": "r/anime: use old reddit (due to custom css of that subreddit)",
-            "exampleUrl": "https://www.reddit.com/r/anime/comments/1mf3hzz/steinsgate_15th_anniversary_rewatch_episode_5/",
-            "exampleResult": "https://old.reddit.com/r/anime/comments/1mf3hzz/steinsgate_15th_anniversary_rewatch_episode_5/",
-            "error": null,
-            "includePattern": "https://www.reddit.com/r/anime/(.*)",
-            "excludePattern": "",
-            "patternDesc": "",
-            "redirectUrl": "https://old.reddit.com/r/anime/$1",
             "patternType": "R",
             "processMatches": "noProcessing",
             "disabled": false,
