@@ -40,6 +40,6 @@
   "snacks.nvim": { "branch": "main", "commit": "bc0630e43be5699bb94dadc302c0d21615421d93" },
   "tokyonight.nvim": { "branch": "main", "commit": "057ef5d260c1931f1dffd0f052c685dcd14100a3" },
   "treesj": { "branch": "main", "commit": "925b506eadd9b465e6e577bb684d86e9863a2e21" },
-  "ultimate-autopair.nvim": { "branch": "v0.6", "commit": "5b5a82646d11bbfa472384fc2f23f9830d9f0cd4" },
+  "ultimate-autopair.nvim": { "branch": "v0.6", "commit": "2025a181c303cec0fabd4bbdc9d752574ceda2d9" },
   "which-key.nvim": { "branch": "main", "commit": "370ec46f710e058c9c1646273e6b225acf47cbed" }
 }
