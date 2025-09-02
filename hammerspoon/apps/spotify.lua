@@ -5,19 +5,19 @@ local u = require("meta.utils")
 local aw = hs.application.watcher
 --------------------------------------------------------------------------------
 
--- auto-pause/resume Spotify on launch/quit of apps with sound
-M.aw_spotify = aw.new(function(appName, eventType)
+-- auto-pause/resume Spotify on launch/quit of apps with sound or on Steam games
+M.aw_spotify = aw.new(function(appName, event, app)
 	-- GUARD
 	if not env.isAtHome or env.isProjector() then return end
 	if not u.screenIsUnlocked() then return end
-	local audioAppLaunchedOrQuit = (eventType == aw.launched or eventType == aw.terminated)
-		and (hs.fnutils.contains(u.videoAndAudioApps, appName))
-	if not audioAppLaunchedOrQuit then return end
+	if not (event == aw.launched or event == aw.terminated) then return end
+	if not hs.fnutils.contains(u.videoAndAudioApps, appName) then return end
+	if not (app:path() or ""):find("/Application Support/Steam/steamapps/common/") then return end
 
 	if M.spotify_task and M.spotify_task:isRunning() then M.spotify_task:terminate() end
 
 	-- using Alexa virtual trigger since it's more reliable than `spotify_player`
-	local action = eventType == aw.launched and "pause" or "play"
+	local action = event == aw.launched and "pause" or "play"
 	local alexaTrigger = os.getenv("HOME")
 		.. "/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/alexa-virtual-trigger"
 	if not u.isExecutable(alexaTrigger) then return end
