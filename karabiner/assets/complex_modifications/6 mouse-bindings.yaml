@@ -23,7 +23,7 @@ rules:
           - { key_code: q, modifiers: [command] }
         conditions:
           - type: frontmost_application_unless
-            file_paths: ["/Users/.*/Library/Application Support/Steam/steamapps/common/.*\\.app"]
+            file_paths: ["/Users/.*/Library/Application Support/Steam/steamapps/common/"]
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Mouse) 4 (bottom)"
     manipulators:
