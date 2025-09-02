@@ -80,11 +80,11 @@ M.timer_nightlyCronjobs = hs.timer
 			if file:find("%.sh$") and u.isExecutable(jobfile) then
 				M["cronjob_" .. file] = hs.task
 					.new(jobfile, function(code)
-						if code == 0 then
-							print("✅ Cronjob: " .. file)
-						else
+						if code ~= 0 then
 							u.notify("❌ Cronjob failed: " .. file)
+							return
 						end
+						print("✅ Cronjob: " .. file)
 					end)
 					:start()
 			end
