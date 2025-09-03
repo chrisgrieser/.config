@@ -25,7 +25,7 @@ end
 -- META
 
 keymap("n", "<D-,>", function()
-	local pathOfThisFile = debug.getinfo(1, "S").short_src
+	local pathOfThisFile = debug.getinfo(1, "S").source:gsub("^@", "")
 	vim.cmd.edit(pathOfThisFile)
 end, { desc = "󰌌 Edit keybindings" })
 
