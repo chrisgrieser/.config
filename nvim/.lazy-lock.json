@@ -18,6 +18,7 @@
   "nvim-chainsaw": { "branch": "main", "commit": "fb5bcee2f37755de81c76ebd118170d23fc41a2c" },
   "nvim-dap": { "branch": "master", "commit": "7891b01beedc37cef4eaf2e92563bd0a5b6e9c58" },
   "nvim-dap-virtual-text": { "branch": "master", "commit": "fbdb48c2ed45f4a8293d0d483f7730d24467ccb6" },
+  "nvim-genghis": { "branch": "main", "commit": "8b50f37848e83d52f1897133ce0e949c3b54a4aa" },
   "nvim-justice": { "branch": "main", "commit": "35a37581a71e59d2a299b804ecf11906d5aa65ee" },
   "nvim-lsp-endhints": { "branch": "main", "commit": "f977426055fc6b5c6449b416e08e2462f59b9317" },
   "nvim-lspconfig": { "branch": "master", "commit": "060f6b601b8d60d59fb2f6dfb2528c391bcd60a2" },

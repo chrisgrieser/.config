@@ -9,7 +9,6 @@ return {
 	opts = {
 		navigation = {
 			onlySameExtAsCurrentFile = true,
-			ignoreDotfiles = true,
 		},
 	},
 	keys = {
@@ -19,6 +18,9 @@ return {
 		{"<leader>yn", function() require("genghis").copyFilename() end, desc = "󰈔 Name of file" },
 		{"<leader>yp", function() require("genghis").copyDirectoryPath() end, desc = "󰝰 Parent path" },
 		{"<leader>yf", function() require("genghis").copyFileItself() end, desc = "󱉥 File (macOS)" },
+
+		{ "<M-CR>", function() require("genghis").navigateToFileInFolder("next") end, desc = "󰖽 Next file in folder" },
+		{ "<S-M-CR>", function() require("genghis").navigateToFileInFolder("prev") end, desc = "󰖿 Prev file in folder" },
 		-- stylua: ignore end
 
 		{ "<leader>fr", function() require("genghis").renameFile() end, desc = "󰑕 Rename" },
@@ -27,11 +29,6 @@ return {
 		{ "<leader>fm", function() require("genghis").moveToFolderInCwd() end, desc = "󱀱 Move" },
 		{ "<leader>fd", function() require("genghis").trashFile() end, desc = "󰩹 Delete" },
 		{ "<leader>fx", function() require("genghis").chmodx() end, desc = "󰒃 chmod +x" },
-
-		-- stylua: ignore
-		{ "<M-CR>", function() require("genghis").navigateToFileInFolder("next") end, desc = "󰖽 Next file in folder" },
-		-- stylua: ignore
-		{ "<S-M-CR>", function() require("genghis").navigateToFileInFolder("prev") end, desc = "󰖿 Prev file in folder" },
 
 		{
 			"<leader>rx",
