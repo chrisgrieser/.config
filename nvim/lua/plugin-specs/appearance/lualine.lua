@@ -23,10 +23,7 @@ end
 ---brackets the number of references in the workspace (if that number is
 ---different from the references in the current file).
 local function countLspRefs()
-	local config = {
-		icon = "󰈿",
-		includeDeclaration = false,
-	}
+	local icon = "󰈿"
 
 	local client = vim.lsp.get_clients({ method = "textDocument/references", bufnr = 0 })[1]
 	if not client then return "" end
@@ -38,7 +35,7 @@ local function countLspRefs()
 
 	vim.b.lspReference_lastRow, vim.b.lspReference_lastCol = row, col
 	local params = vim.lsp.util.make_position_params(0, client.offset_encoding)
-	params.context = { includeDeclaration = config.includeDeclaration } ---@diagnostic disable-line: inject-field
+	params.context = { includeDeclaration = false } ---@diagnostic disable-line: inject-field
 	local thisFileUri = params.textDocument.uri
 	client:request("textDocument/references", params, function(error, refs)
 		if error or not refs then -- not on a valid symbol, etc.
@@ -50,7 +47,7 @@ local function countLspRefs()
 			:totable()
 		local inFile, inWorkspace = #refsInFile, #refs
 		local text = inFile == inWorkspace and inFile or (inFile .. "(" .. inWorkspace .. ")")
-		vim.b.lspReference_count = vim.trim(config.icon .. " " .. text)
+		vim.b.lspReference_count = vim.trim(icon .. " " .. text)
 	end)
 	vim.b.lspReference_count = "" -- set to empty string while waiting for request
 	return vim.b.lspReference_count
