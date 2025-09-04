@@ -92,6 +92,17 @@
 			<key>url</key>
 			<string>https://tenor.com/search/{query}-gifs</string>
 		</dict>
+		<key>3F562F63-28A9-4CDF-AF02-6DB6218BC71C</key>
+		<dict>
+			<key>enabled</key>
+			<true/>
+			<key>keyword</key>
+			<string>hk</string>
+			<key>text</key>
+			<string>Humankind Wiki: {query}</string>
+			<key>url</key>
+			<string>https://humankind.fandom.com/wiki/Special:Search?query={query}</string>
+		</dict>
 		<key>4B503F11-129C-4B20-9C7A-1EA272592316</key>
 		<dict>
 			<key>enabled</key>
