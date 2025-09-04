@@ -1,8 +1,4 @@
 {
-  "middle dot": {
-    "body": "·",
-    "prefix": "middle dot"
-  },
   "backspace": {
     "body": "⌫",
     "prefix": "backspace"
@@ -26,13 +22,17 @@
     ]
   },
   "enter": {
-    "body": "⏎",
+    "body": "↩",
     "description": "The other return-like symbols either have an accessibility problem (VoiceOver reads them as arrow shape) or are displayed as emoji on GitHub.",
     "prefix": "enter"
   },
   "escape": {
     "body": "⎋",
     "prefix": "escape"
+  },
+  "middle dot": {
+    "body": "·",
+    "prefix": "middle dot"
   },
   "opt": {
     "body": "⌥",

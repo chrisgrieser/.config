@@ -73,7 +73,7 @@ local cronjobDir = "./system/cronjobs"
 
 M.timer_nightlyCronjobs = hs.timer
 	.doAt("01:00", "01d", function()
-		if os.date("%w") % 2 == 0 then return end -- only every other day
+		if os.date("%w") % 3 == 0 then return end -- only twice a week
 
 		for file in hs.fs.dir(cronjobDir) do
 			local jobfile = cronjobDir .. "/" .. file
