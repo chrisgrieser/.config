@@ -15,8 +15,8 @@ stackoverflow.com###announcement-banner
 help.obsidian.md##.site-body-left-column
 
 ! fandom
-fandom.com##.page__right-rail
-fandom.com##.global-explore-navigation
+humankind.fandom.com##.page__right-rail
+humankind.fandom.com##.global-explore-navigation
 
 ! ai
 chatgpt.com###thread-bottom-container > div:last-child
