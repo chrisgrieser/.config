@@ -29,8 +29,7 @@ mistral.ai##div:has(> a[href="/upgrade/plans"])
 duckduckgo.com##[data-testid="feedback-prompt"]
 duckduckgo.com##.footer > div
 duckduckgo.com##.header--aside__item--hidden-lg
-google.com###grepper_add_answer_button
-google.com###search > a.grepper_ad_holder:nth-child(2)
+duckduckgo.com##.text_promo
 
 ! misc
 journals.sagepub.com###bookshelf-opener
