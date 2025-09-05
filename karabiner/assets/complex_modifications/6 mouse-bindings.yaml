@@ -103,6 +103,9 @@ rules:
         from: { pointing_button: button5 }
         to_if_alone:
           - { key_code: w, modifiers: [command] }
+        conditions:
+          - type: frontmost_application_unless
+            file_paths: ["/Users/.*/Library/Application Support/Steam/steamapps/common/"]
   #─────────────────────────────────────────────────────────────────────────────
   # some MX Master Models have this builtin, others do not
   - description: "(Mouse) 6: Cmd+Tab"
@@ -117,6 +120,11 @@ rules:
       - type: basic
         from:
           simultaneous: [{ pointing_button: button1 }, { pointing_button: button2 }]
+        parameters:
+          simultaneous_threshold_milliseconds: 500
+        # conflicts for some reason with space+dragging in the Canvas plugin
+        conditions:
+          - { type: frontmost_application_unless, bundle_identifiers: [md.obsidian] }
         to:
           - shell_command: |
               # INFO IF SELECTION IS…
@@ -154,7 +162,4 @@ rules:
                 url="https://www.google.com/search?q=$url_encoded_sel"
                 open "$url"
               fi
-        parameters: { simultaneous_threshold_milliseconds: 500 }
-        # conflicts for some reason with space+dragging in the Canvas plugin
-        conditions: [{ type: frontmost_application_unless, bundle_identifiers: [md.obsidian] }]
   #─────────────────────────────────────────────────────────────────────────────
