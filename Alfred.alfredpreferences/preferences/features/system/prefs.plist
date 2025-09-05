@@ -31,10 +31,6 @@
 	<string>q</string>
 	<key>quitKeywordEnabled</key>
 	<false/>
-	<key>quitallConfirm</key>
-	<true/>
-	<key>quitallKeywordEnabled</key>
-	<false/>
 	<key>restartConfirm</key>
 	<true/>
 	<key>showtrashKeywordEnabled</key>
