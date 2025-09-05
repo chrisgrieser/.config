@@ -20,7 +20,7 @@ local config = {
 --------------------------------------------------------------------------------
 
 ---@param appName string
----@param _trigger string
+---@param _trigger string only for debugging purposes
 local function autoTile(appName, _trigger)
 	local app = hs.application.find(appName, true, true)
 	if not app then
@@ -39,11 +39,10 @@ local function autoTile(appName, _trigger)
 	end) --[[@as hs.window[] ]]
 
 	-- GUARD idempotent
-	-- print(("🪟 autoTile: %s %s (%d wins)"):format(appName, _trigger, #wins))
-	if M["winCount_" .. appName] == #wins then return end
+	if M["winCount_" .. appName] == #wins and #wins > 1 then return end
 	M["winCount_" .. appName] = #wins
 
-	-- GUARD on projector, not with multiple windows
+	-- GUARD
 	if #wins > 1 and env.isProjector() then return end
 
 	local pos = {} ---@cast pos hs.geometry[]
@@ -105,6 +104,15 @@ end
 ---helper function, so window-closing modules can reset the count here
 ---@param appName string
 function M.resetWinCount(appName) M["winCount_" .. appName] = nil end
+
+-- DEBUG use `autotile()` in the console to inspect win counts
+function _G.autotile()
+	local msg = {"🪟 autotile win count:"}
+	for appName in pairs(config.appsToAutoTile) do
+		table.insert(msg, ("- %s: %s"):format(appName, M["winCount_" .. appName]))
+	end
+	print(table.concat(msg, "\n"))
+end
 
 --------------------------------------------------------------------------------
 return M

@@ -52,6 +52,11 @@ local ensureInstalled = {
 		"regex",
 		"rst", -- python reST
 	},
+	dependencies = {
+		"html_tags",
+		"ecma",
+		"jsx",
+	},
 }
 
 --------------------------------------------------------------------------------
@@ -64,7 +69,9 @@ return {
 	lazy = false,
 	build = ":TSUpdate",
 
-	opts = { install_dir = vim.fn.stdpath("data") .. "/treesitter" },
+	opts = {
+		install_dir = vim.fn.stdpath("data") .. "/treesitter",
+	},
 	init = function()
 		-- auto-install parsers
 		local parsersToInstall = vim.iter(vim.tbl_values(ensureInstalled)):flatten():totable()
