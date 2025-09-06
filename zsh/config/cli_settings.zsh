@@ -30,10 +30,13 @@ LESS=""
 LESS+=" --RAW-CONTROL-CHARS" # process colors correctly
 LESS+=" --ignore-case --incsearch"
 LESS+=" --long-prompt --prompt=mpage %dm?B/%D.?Pm (%Pm\\%).$" # progress in pages
-LESS+=" --quit-if-one-screen --no-init" # quicker leaving & do not clear the screen when doing so
-LESS+=" --chop-long-lines" # wrap lines
-LESS+=" --shift=.2" # amount of side-scrolling (percentage of screen width)
+LESS+=" --quit-if-one-screen --no-init"                       # quicker leaving & do not clear the screen when doing so
+LESS+=" --chop-long-lines"                                    # wrap lines
+LESS+=" --shift=.2"                                           # amount of side-scrolling (percentage of screen width)
 export LESS
+
+# not disabling it, since `delta` requires it for `n` navigation
+export LESSHISTFILE="$HOME/.cache/less_history"
 
 #───────────────────────────────────────────────────────────────────────────────
 
@@ -60,8 +63,8 @@ export NODE_REPL_HISTORY=""
 
 # Instead of writing npm config to `.npmrc`, can also be set via shell
 # environment variables. Has to be lower-case then. https://docs.npmjs.com/cli/v10/using-npm/config#environment-variables
-export npm_config_fund=false               # disable funding nags
-export npm_config_update_notifier=false    # no need for updating prompts, since done via homebrew
+export npm_config_fund=false            # disable funding nags
+export npm_config_update_notifier=false # no need for updating prompts, since done via homebrew
 
 # do not crowd `$HOME`
 export npm_config_cache="$HOME/.cache/npm"
