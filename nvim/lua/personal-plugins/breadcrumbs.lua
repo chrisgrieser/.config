@@ -56,7 +56,7 @@ function M.copy()
 	-- uses the format that is valid for tools like `jq`
 	local text = "." .. table.concat(getBreadcrumbs(), "."):gsub("%.%[", "%[")
 
-	if text == "" then
+	if text == "." then
 		local msg = "No breadcrumbs to copy."
 		vim.notify(msg, vim.log.levels.WARN, { icon = config.icon, title = "Breadcrumbs" })
 	else
