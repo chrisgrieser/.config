@@ -7,9 +7,9 @@ action_log="./.post-processing.log"
 
 #───────────────────────────────────────────────────────────────────────────────
 
-# DELETE CLUTTER
 cd "$TR_TORRENT_DIR" || return 1 # `$TR_TORRENT_DIR` is where the downloads are placed
 
+# DELETE CLUTTER
 # my version of `find` does not support `-regex` with `|`, so we search for
 # each file type separately
 find . \( -name "*.txt" -or -name "*.nfo" -or -name "*.md" -or -name "*.exe" \
@@ -31,15 +31,17 @@ done
 # RENAME TOP-LEVEL FILES
 find "." -maxdepth 1 -name "*.mkv" | while read -r old_name; do
 	old_name_no_ext=${old_name%.*}
-	new_name=$(
+	clean_name=$(
 		echo "$old_name_no_ext" |
 			cut -c3- | # remove `./`
 			tr "._" " " |
-			sed 's/ *\[[a-zA-Z0-9_]*\] *//g' | # tags for the subbing group
+			sed 's/ *\[[a-zA-Z0-9_-]*\] *//g' | # tags for the subbing group
 			sed -E 's/(1080p|720p).*/\1/' |    # video file info after the resolution info
-			tr -s " ()"                        # remove leftover spaces or double brackets
+			tr -s " ()[]"                        # remove leftover spaces or double brackets
 	)
-	new_name="./$new_name.mkv"
+	# shellcheck disable=2296 # valid in zsh
+	capitalized="${(U)str[1]}${clean_name[2,-1]}"
+	new_name="./$capitalized.mkv"
 	if [[ ! -f "$new_name" ]]; then
 		echo "$(date "+%Y-%m-%d %H:%M") $old_name -> $new_name" | tee -a "$action_log"
 		command mv "$old_name" "$new_name"
