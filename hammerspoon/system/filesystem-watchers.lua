@@ -64,6 +64,9 @@ M.pathw_desktop = pathw(home .. "/Desktop/", function(paths, _)
 		elseif name == "obsidian-web-clipper-settings.json" then
 			success, errmsg = os.rename(path, browserConfigs .. name)
 			if success then u.notify("✅ Obsidian web clipper settings backed up.") end
+		elseif name == "mailFilters.xml" then
+			success, errmsg = os.rename(path, backupFolder .. "Gmail Filters.xml")
+			if success then u.notify("✅ Gmail filters backed up.") end
 		elseif ext == "icbu" then
 			success, errmsg = os.rename(path, backupFolder .. "/Calendar/" .. name)
 			if success then u.notify("✅ Calendar data backed up.") end
