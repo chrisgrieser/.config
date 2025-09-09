@@ -14,8 +14,7 @@ local function keymap(mode, lhs, rhs, opts)
 	if not success then
 		local modes = type(mode) == "table" and table.concat(mode, ", ") or mode
 		local msg = ("[[%s]] %s"):format(modes, lhs)
-		vim.defer_fn(function()
-			-- defer for notification plugin
+		vim.defer_fn(function() -- defer for notification plugin
 			vim.notify(msg, vim.log.levels.WARN, { title = "Duplicate keymap", timeout = false })
 		end, 1000)
 	end
@@ -215,7 +214,7 @@ end
 -- CYCLIC PASTE
 do
 	-- same as regular `p`, but when undoing the paste and then using `.`, will
-	-- paste `"2p`, so `<C-p>......` pastes all recent deletions and `pu.u.u.u.`
+	-- paste `"2p`, so `<C-p>..... pastes all recent deletions and `pu.u.u.u.`
 	-- cycles through them
 	keymap("n", "<C-p>", '"1p', { desc = " Cyclic paste" })
 
