@@ -51,7 +51,7 @@ mas "Easy CSV Editor", id: 1171346381
 
 # QUICKLOOK
 cask "betterzip"
-cask "qlmarkdown"
+mas "", id: 1519213509
 cask "syntax-highlight" # `Peek` not available anymore https://apps.apple.com/us/app/peek-a-quick-look-extension/id1554235898?mt=12
 
 #───────────────────────────────────────────────────────────────────────────────
