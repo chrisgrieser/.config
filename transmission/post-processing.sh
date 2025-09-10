@@ -40,7 +40,7 @@ find "." -maxdepth 1 -name "*.mkv" | while read -r old_name; do
 			tr -s " ()[]"                        # remove leftover spaces or double brackets
 	)
 	# shellcheck disable=2296 # valid in zsh
-	capitalized="${(U)str[1]}${clean_name[2,-1]}"
+	capitalized="${(U)clean_name[1]}${clean_name[2,-1]}"
 	new_name="./$capitalized.mkv"
 	if [[ ! -f "$new_name" ]]; then
 		echo "$(date "+%Y-%m-%d %H:%M") $old_name -> $new_name" | tee -a "$action_log"
