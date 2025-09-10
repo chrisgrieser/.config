@@ -62,6 +62,7 @@ matches:
   - { replace: install, trigger: isntall, propagate_case: true, word: true }
   - { replace: instead, triggers: [isntead, instread], propagate_case: true, word: true }
   - { replace: interview, trigger: itnerview, propagate_case: true, word: true }
+  - { replace: " it", trigger: " ti", propagate_case: true, word: true } # space to not trigger for Twilight Imperium abbreviation
   - { replace: is, trigger: si, word: true, propagate_case: true }
   - { replace: item, trigger: tiem, propagate_case: true, word: true }
   - { replace: its, trigger: tis, propagate_case: true, word: true }
