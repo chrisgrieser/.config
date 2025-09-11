@@ -122,19 +122,21 @@ local ccSpec = {
 			},
 		},
 		adapters = {
-			openai = function()
-				local apiKeyFile =
-					"$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/private dotfiles/openai-api-key.txt"
+			http = {
+				openai = function()
+					local apiKeyFile =
+						"$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/private dotfiles/openai-api-key.txt"
 
-				-- https://github.com/olimorris/codecompanion.nvim/blob/main/lua/codecompanion/adapters/openai.lua
-				return require("codecompanion.adapters").extend("openai", {
-					env = { api_key = ("cmd:cat %q"):format(apiKeyFile) },
-					schema = {
-						model = { default = model },
-						reasoning_effort = { default = reasoning_effort },
-					},
-				})
-			end,
+					-- https://github.com/olimorris/codecompanion.nvim/blob/main/lua/codecompanion/adapters/openai.lua
+					return require("codecompanion.adapters").extend("openai", {
+						env = { api_key = ("cmd:cat %q"):format(apiKeyFile) },
+						schema = {
+							model = { default = model },
+							reasoning_effort = { default = reasoning_effort },
+						},
+					})
+				end,
+			},
 		},
 		prompt_library = {
 			-- https://codecompanion.olimorris.dev/extending/prompts.html
