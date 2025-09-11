@@ -180,7 +180,7 @@ declare const Application: {
 		// biome-ignore lint/complexity/noBannedTypes: todo
 		setConfiguration(envVar: string, options: Object): void;
 		// workflowId: workflow uid (name of workflow folder) || workflow bundle id
-		revealWorkflow(workflowId: string): void;
+		revealWorkflow(workflowId: string, { details: boolean }?): void;
 		reloadWorkflow(workflowId: string): void;
 	};
 	(
