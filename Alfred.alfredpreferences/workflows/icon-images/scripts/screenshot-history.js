@@ -46,14 +46,13 @@ function run() {
 	const alfredItems = app
 		.doShellScript(shellCmd)
 		.split("\r")
-		// .slice(1) // remove header
 		.map((line) => {
 			const [filesize, name] = line.split(" ");
+			const prettyFilesize = filesize.replace(/(\d+)K/, "$1 Kb")
 			const absPath = `${screenshotTempDir}/${name}`;
 
 			const isoStr = name.replace(/Screenshot_([\d-]+)_(\d+)-(\d+)-(\d+).png/, "$1T$2:$3:$4");
 			const relDate = relativeDate(new Date(isoStr).getTime());
-			const prettyFilesize = filesize.replace(/(\d+)K/, "$1 Kb")
 
 			return {
 				title: relDate,
