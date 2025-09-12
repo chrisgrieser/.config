@@ -121,7 +121,7 @@ rules:
         from:
           simultaneous: [{ pointing_button: button1 }, { pointing_button: button2 }]
         parameters:
-          simultaneous_threshold_milliseconds: 500
+          simultaneous_threshold_milliseconds: 800
         # conflicts for some reason with space+dragging in the Canvas plugin
         conditions:
           - type: frontmost_application_unless
@@ -138,6 +138,8 @@ rules:
               # some other text: google it
               # empty: do nothing
               #───────────────────────────────────────────────────────────────────────────────
+              # search_engine="https://www.google.com/search?q="
+              search_engine="https://duckduckgo.com/?q="
               prev_clipboard=$(pbpaste)
               osascript -e 'tell application "System Events" to keystroke "c" using {command down}'
               sleep 0.1
@@ -162,7 +164,7 @@ rules:
               elif [[ -n "$sel" ]]; then
                 sel=${sel/./..}
                 url_encoded_sel=$(osascript -l JavaScript -e "encodeURIComponent('$sel')")
-                url="https://www.google.com/search?q=$url_encoded_sel"
+                url="$search_engine$url_encoded_sel"
                 open "$url"
               fi
   #─────────────────────────────────────────────────────────────────────────────

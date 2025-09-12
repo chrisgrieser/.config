@@ -2,6 +2,7 @@
 // biome-ignore-all lint/complexity/useLiteralKeys: clearer this way here
 // SOURCE https://www.alfredforum.com/topic/23327-edit-workflow-details-%E2%80%94-open-workflow-detail-window-with-a-hotkey/#comment-122193
 //──────────────────────────────────────────────────────────────────────────────
+ObjC.import("stdlib");
 
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
@@ -12,7 +13,6 @@ function run(argv) {
 
 	if (is5dot7 && menuItemName === "Edit Details") {
 		// https://www.alfredforum.com/topic/23327-edit-workflow-details-%E2%80%94-open-workflow-detail-window-with-a-hotkey/#comment-122526
-		ObjC.import("stdlib");
 		const bundleId = $.getenv("alfred_workflow_bundleid");
 		Application("com.runningwithcrayons.Alfred").revealWorkflow(bundleId, { details: true });
 	} else {
