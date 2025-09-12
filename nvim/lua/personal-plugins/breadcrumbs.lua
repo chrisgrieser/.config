@@ -11,8 +11,10 @@ local config = {
 		"array", -- json
 		"block_sequence", -- yaml
 	},
-	separator = " ",
-	icon = "󰳮",
+	statusline = {
+		separator = " ",
+		icon = "󰳮",
+	},
 }
 
 --------------------------------------------------------------------------------
@@ -24,10 +26,10 @@ local function getBreadcrumbs()
 
 	-- loop upwards through the parents of the node
 	while node do
-		if vim.tbl_contains(config.objectTypes, node:type()) then
+		if vim.list_contains(config.objectTypes, node:type()) then
 			local keyName = vim.treesitter.get_node_text(node, 0):match("[%w-_]+")
 			table.insert(crumbs, 1, keyName)
-		elseif vim.tbl_contains(config.arrayTypes, node:type()) then
+		elseif vim.list_contains(config.arrayTypes, node:type()) then
 			local indexOfChild
 			for i = 0, node:named_child_count() do
 				local child = assert(node:named_child(i))
@@ -36,8 +38,8 @@ local function getBreadcrumbs()
 					break
 				end
 			end
-			local arrayPos = ("[%d]"):format(indexOfChild)
-			table.insert(crumbs, 1, arrayPos)
+			assert(indexOfChild, "Could not find index of child")
+			table.insert(crumbs, 1, "[" .. indexOfChild .. "]")
 		end
 		prevNode = node
 		node = node:parent()
@@ -47,22 +49,25 @@ local function getBreadcrumbs()
 end
 
 function M.statusline()
-	local text = table.concat(getBreadcrumbs(), config.separator)
+	local text = table.concat(getBreadcrumbs(), config.statusline.separator)
 	if text == "" then return "" end
-	return vim.trim(config.icon .. " " .. text)
+	return vim.trim(config.statusline.icon .. " " .. text)
 end
 
 function M.copy()
-	-- uses the format that is valid for tools like `jq`
-	local text = "." .. table.concat(getBreadcrumbs(), "."):gsub("%.%[", "%[")
-
-	if text == "." then
+	local breadcrumbs = getBreadcrumbs()
+	if #breadcrumbs == 0 then
 		local msg = "No breadcrumbs to copy."
 		vim.notify(msg, vim.log.levels.WARN, { icon = config.icon, title = "Breadcrumbs" })
-	else
-		vim.fn.setreg("+", text)
-		vim.notify(text, nil, { icon = config.icon, title = "Copied", ft = "text" })
+		return
 	end
+
+	local text = table.concat(breadcrumbs, "."):gsub("%.%[", "%[")
+	-- add leading `.` for `jq` and `yq`
+	if vim.list_contains({ "json", "jsonc", "yaml" }, vim.bo.filetype) then text = "." .. text end
+
+	vim.fn.setreg("+", text)
+	vim.notify(text, nil, { icon = config.icon, title = "Copied", ft = "text" })
 end
 
 --------------------------------------------------------------------------------
