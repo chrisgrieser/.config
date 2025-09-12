@@ -81,12 +81,14 @@ return {
 					"datetime",
 					style = "%H:%M:%S",
 					-- make the `:` blink
-					fmt = function(time) return os.time() % 2 == 0 and time or time:gsub(":", " ") end,
+					fmt = function(time)
+						return time:gsub(":(%d%d):", os.time() % 2 == 0 and ":%1 " or " %1:")
+					end,
 					cond = function() return vim.o.columns > 120 end, -- only if window is maximized
 				},
 			},
 			lualine_b = {
-				{ require("personal-plugins.breadcrumbs").statusline }
+				{ require("personal-plugins.breadcrumbs").statusline },
 			},
 			lualine_x = {
 				-- HACK dummy, so tabline is never empty (in which case vim adds its ugly tabline)
