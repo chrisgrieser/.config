@@ -21,14 +21,14 @@ rules:
         from: { key_code: left_control }
         conditions: [*leader-inactive, *not-steam-game]
         to: [{ key_code: left_control }]
-        to_if_alone: [*activate-leader, *set-notice]
+        to_if_alone: [*activate-leader, *set-notice] # only if alone, so it can still be used as modifier
       - type: basic
         from: { key_code: right_command }
         conditions: [*leader-inactive, *not-steam-game]
         to: [{ key_code: right_command }]
-        to_if_alone: [*activate-leader, *set-notice]
+        to_if_alone: [*activate-leader, *set-notice] # only if alone, so it can still be used as modifier
 
-      # 2x L-Ctrl: Pass through (for Alfred)
+      # Pass through 2x L-Ctrl for Alfred
       - type: basic
         from: { key_code: left_control }
         conditions: [*leader-active]
@@ -127,11 +127,11 @@ rules:
         conditions: [*leader-active]
         to: [{ shell_command: open -a 'zoom.us' }, *deactivate-leader, *remove-notice]
 
-      - description: "[t]: Twilight Imperium"
-        type: basic
-        from: { key_code: t }
-        conditions: [*leader-active]
-        to: [{ shell_command: open -a 'Twilight Wars' }, *deactivate-leader, *remove-notice]
+      # - description: "[t]: Twilight Imperium"
+      #   type: basic
+      #   from: { key_code: t }
+      #   conditions: [*leader-active]
+      #   to: [{ shell_command: open -a 'Twilight Wars' }, *deactivate-leader, *remove-notice]
 
       - description: "[l] Termina[l]"
         type: basic
@@ -207,14 +207,11 @@ rules:
         to:
           - *deactivate-leader
           - *remove-notice
-          # to open the "unified" trash (iCloud trash + user trash), needs to use
-          # AppleScript and not `open "$HOME/.Trash"`
           - shell_command: |
-              osascript -e'
-                tell application "Finder"
-                  activate
-                  open the trash
-                end tell'
+              # to open the "unified" trash (iCloud trash + user trash), needs to use
+              # AppleScript and not `open "$HOME/.Trash"`
+              osascript -e' tell application "Finder" to open the trash'
+              open -a 'Finder' # needed to activate Finder
 
       - description: "[h]ammerspoon console"
         type: basic
