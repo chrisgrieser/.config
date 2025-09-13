@@ -9,12 +9,24 @@ anchors:
 rules:
   - description: 🔘 Utility Shortcuts
     manipulators:
-
       # show notifications
       - type: basic
         from: { key_code: "0", modifiers: *hyper }
         to:
           - { key_code: n, modifiers: [fn] }
+
+      # screenshot
+      - type: basic
+        from: { key_code: "4", modifiers: { mandatory: [command, shift] } }
+        to:
+          - shell_command: |
+              location="/tmp/screenshots"
+              mkdir -p "$location"
+              timestamp=$(date +%Y-%m-%d_%H-%M-%S)
+              file="$location/Screenshot_$timestamp.png"
+              screencapture -i "$file"
+              [[ -f "$file" ]] || exit 1 # screenshot aborted
+              osascript -e "tell application \"Finder\" to set the clipboard to (POSIX file \"$file\")"
 
       # show desktop
       - type: basic

@@ -41,6 +41,7 @@ function run() {
 	// `tail -n+2` to remove header
 	// `awk` to only print name & filesize
 	const shellCmd = `ls -lht "${screenshotTempDir}" | tail -n+2 | awk '{print $5, $9}'`;
+	console.log("🪚 shellCmd:", shellCmd);
 
 	/** @type {AlfredItem[]} */
 	const alfredItems = app
