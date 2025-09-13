@@ -33,9 +33,10 @@ LESS+=" --long-prompt --prompt=mpage %dm?B/%D.?Pm (%Pm\\%).$" # progress in page
 LESS+=" --quit-if-one-screen --no-init"                       # quicker leaving & do not clear the screen when doing so
 LESS+=" --chop-long-lines"                                    # wrap lines
 LESS+=" --shift=.2"                                           # amount of side-scrolling (percentage of screen width)
+LESS+=" --no-tilde"
 export LESS
 
-# not disabling it, since `delta` requires it for `n` navigation
+# don't clutter home dir (not disabling, as `delta` requires it for `n` navigation)
 export LESSHISTFILE="$HOME/.cache/less_history"
 
 #───────────────────────────────────────────────────────────────────────────────
@@ -58,7 +59,7 @@ export GH_NO_UPDATE_NOTIFIER=1 # updates managed via homebrew
 #───────────────────────────────────────────────────────────────────────────────
 # NPM & NODE
 
-# Don't clutter home directory with useless `.node_repl_history` https://nodejs.org/api/repl.html#repl_environment_variable_options
+# don't clutter home dir with useless `.node_repl_history` https://nodejs.org/api/repl.html#repl_environment_variable_options
 export NODE_REPL_HISTORY=""
 
 # Instead of writing npm config to `.npmrc`, can also be set via shell

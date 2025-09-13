@@ -545,7 +545,7 @@ return {
 				reveal_in_macOS_Finder = function(picker)
 					if jit.os ~= "OSX" then return end
 					local path = picker:current().file
-					if picker:current().cwd then path = picker:current().cwd + "/" + path end
+					if picker:current().cwd then path = picker:current().cwd .. "/" .. path end
 					vim.system { "open", "-R", path }
 					picker:close()
 				end,

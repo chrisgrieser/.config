@@ -1,20 +1,9 @@
 [user]
 	name = Chris Grieser
 	email = 73286100+chrisgrieser@users.noreply.github.com
-
-; INFO
-; 1. needs to come AFTER the config they intend to overwrite
-; 2. test via `git config --get --show-origin user.name`
-[includeIf "gitdir:PLACEHOLDER"]
-	path = "./alternative-config"
-
-;───────────────────────────────────────────────────────────────────────────────
-
 [core]
 	editor = nvim
 	quotePath = false
-	compression = 9
-
 	; 1. Motivation: version control & sync of hooks across devices
 	; 2. By setting them in the global git config, there is no more need to run
 	; `git config core.hooksPath .git-hooks` after every `git clone`
@@ -23,8 +12,6 @@
 	hooksPath = .git-hooks
 [advice]
 	detachedHead = false
-[help]
-	autoCorrect = prompt ; prompt to run auto-correction
 [column]
 	ui = auto
 
@@ -35,7 +22,7 @@
 [status]
 	short = true
 	showStash = true
-	relativePaths = false ; false = show path relative to git root, not relative to cwd
+	relativePaths = false ; false -> show path relative to git root, not relative to cwd
 [stash]
 	showIncludeUntracked = true
 [fetch]
@@ -95,3 +82,9 @@
 	hyperlinks = true
 	side-by-side = false
 ;────────────────────────────────────────────────────────────────────────────
+
+; ALTERNATE CONFIGURATION FOR SPECIFIC REPO
+; 1. needs to come AFTER the config they intend to overwrite
+; 2. test via `git config --get --show-origin user.name`
+[includeIf "gitdir:PLACEHOLDER"]
+	path = "./alternative-config"
