@@ -67,10 +67,6 @@
 	autoStash = true
 	missingCommitsCheck = error ; commits must be removed with `drop`, not by deleting a line
 	stat = true
-[diff]
-	algorithm = histogram ; https://luppeng.wordpress.com/2020/10/10/when-to-use-each-of-the-git-diff-algorithms/
-	colorMoved = true ; moved lines colored different than added/removed
-	relative = true
 [merge]
 	conflictStyle = zdiff3 ; shows original version in middle https://www.ductile.systems/zdiff3/
 	ff = only ; fast-forward only, i.e., no merge commits
@@ -78,8 +74,17 @@
 	enabled = true ; repeat merge resolutions
 
 ;───────────────────────────────────────────────────────────────────────────────
-; SETUP FOR DELTA
+; DIFF
+[diff]
+	algorithm = histogram ; https://luppeng.wordpress.com/2020/10/10/when-to-use-each-of-the-git-diff-algorithms/
+	colorMoved = true ; moved lines colored different than added/removed
+	relative = true
 
+; view docx diffs https://spiffyk.cz/blog/git-pandoc/
+[diff "pandoc"]
+	textconv = pandoc --sandbox --to=markdown
+
+; setup for `delta`
 [core]
 	pager = delta
 [interactive]
