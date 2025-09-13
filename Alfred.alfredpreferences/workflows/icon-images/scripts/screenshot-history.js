@@ -37,23 +37,17 @@ function relativeDate(timestamp) {
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
 	const screenshotTempDir = "/tmp/screenshots";
-	// -l: long format, -t: sort by time, -h: human readable sizes
-	// `tail -n+2` to remove header
-	// `awk` to only print name & filesize
-	const shellCmd = `ls -lht "${screenshotTempDir}" | tail -n+2 | awk '{print $5, $9}'`;
-	console.log("🪚 shellCmd:", shellCmd);
+	const shellCmd = `stat -f "%Sm %z %N" -t "%Y-%m-%dT%H:%M:%S" ${screenshotTempDir}/*.png`;
 
 	/** @type {AlfredItem[]} */
 	const alfredItems = app
 		.doShellScript(shellCmd)
 		.split("\r")
+		.reverse() // sort by mdate
 		.map((line) => {
-			const [filesize, name] = line.split(" ");
-			const prettyFilesize = filesize.replace(/(\d+)K/, "$1 Kb")
-			const absPath = `${screenshotTempDir}/${name}`;
-
-			const isoStr = name.replace(/Screenshot_([\d-]+)_(\d+)-(\d+)-(\d+).png/, "$1T$2:$3:$4");
-			const relDate = relativeDate(new Date(isoStr).getTime());
+			const [mdate, sizeInBytes, absPath] = line.split(" ");
+			const prettyFilesize = (Number.parseInt(sizeInBytes) / 1024).toFixed(0) + " Kb";
+			const relDate = relativeDate(new Date(mdate).getTime());
 
 			return {
 				title: relDate,
