@@ -1,0 +1,3 @@
+# https://spiffyk.cz/blog/git-pandoc/
+*.docx diff=pandoc
+*.odt diff=pandoc
