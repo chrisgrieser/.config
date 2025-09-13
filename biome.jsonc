@@ -54,7 +54,8 @@
 				"noProcessGlobal": "on",
 				"noUndeclaredVariables": "on",
 				"useJsonImportAttributes": "on",
-				"useSingleJsDocAsterisk": "on"
+				"useSingleJsDocAsterisk": "on",
+				"useParseIntRadix": "off"
 			}
 		}
 	},
