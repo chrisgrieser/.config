@@ -18,7 +18,7 @@ web = "Brave Browser"
 magnet = "Transmission"
 
 [extensions]
-txt = "TextEdit"  # privacy to not open in Editor
+txt = "TextEdit"  # do not open in editor for increased security
 env = "TextEdit"
 csv = "Easy CSV Editor"
 svg = "neovide"
