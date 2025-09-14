@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=./schema/karabiner-mod-schema.json
+#───────────────────────────────────────────────────────────────────────────────
+title: 🔘 Utility Shortcuts
+rules:
+  - description: 🔘 Games
+    manipulators:
+      # toggle strategic view
+      - type: basic
+        from: { key_code: tab }
+        to:
+          - { key_code: f10 }
+        conditions:
+          - { type: frontmost_application_unless, bundle_identifiers: [com.aspyr.civ5xp.steam] }
+      # mouse-top: next unit
+      - type: basic
+        from: { pointing_button: button5 }
+        to:
+          - { key_code: . }
+        conditions:
+          - { type: frontmost_application_unless, bundle_identifiers: [com.aspyr.civ5xp.steam] }
+      # mouse-bottom: previous unit
+      - type: basic
+        from: { pointing_button: button4 }
+        to:
+          - { key_code: "," }
+        conditions:
+          - { type: frontmost_application_unless, bundle_identifiers: [com.aspyr.civ5xp.steam] }
