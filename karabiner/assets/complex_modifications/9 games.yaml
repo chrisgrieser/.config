@@ -15,13 +15,13 @@ rules:
       - type: basic
         from: { pointing_button: button5 }
         to:
-          - { key_code: . }
+          - { key_code: period }
         conditions:
           - { type: frontmost_application_if, bundle_identifiers: [com.aspyr.civ5xp.steam] }
       # mouse-bottom: previous unit
       - type: basic
         from: { pointing_button: button4 }
         to:
-          - { key_code: "," }
+          - { key_code: comma }
         conditions:
           - { type: frontmost_application_if, bundle_identifiers: [com.aspyr.civ5xp.steam] }
