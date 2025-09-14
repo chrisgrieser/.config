@@ -1,0 +1,5 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/espanso/espanso/dev/schemas/config.schema.json
+#───────────────────────────────────────────────────────────────────────────────
+
+filter_exec: "/Users/.*/Library/Application Support/Steam/steamapps/common/.*"
+enable: false
