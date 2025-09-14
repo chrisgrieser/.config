@@ -132,6 +132,7 @@ function M.toggleOrIncrement()
 		["light"] = "dark",
 		["right"] = "left",
 		["top"] = "bottom",
+		["next"] = "previous",
 		["enable"] = "disable",
 		["enabled"] = "disabled",
 		["open"] = "close",
