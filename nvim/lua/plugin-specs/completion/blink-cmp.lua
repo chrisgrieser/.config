@@ -10,7 +10,7 @@
 ---@param action "next"|"prev"|"select"|"select_and_snippet_forward"
 ---@return boolean success (popupmenu was open)
 local function vimPopupmenu(action)
-	if vim.fn.pumvisible() == 0 then return false end
+	if vim.fn.pumvisible() == 0 then return false end -- `false` -> attempt next command in blink.cmp
 
 	-- https://neovim.io/doc/user/insert.html#_insert-completion-popup-menu
 	local key
@@ -23,7 +23,7 @@ local function vimPopupmenu(action)
 
 	if action:find("snippet_forward") then vim.schedule(function() vim.snippet.jump(1) end) end
 
-	return true -- `true` -> do not attempts the next command in blink.cmp
+	return true -- `true` -> do not attempt next command in blink.cmp
 end
 
 --------------------------------------------------------------------------------
@@ -60,6 +60,7 @@ return {
 					min_keyword_length = 1,
 					score_offset = 3,
 					opts = { clipboard_register = "+" }, -- register to use for `$CLIPBOARD`
+					use_label_description = true,
 				},
 				path = {
 					opts = { get_cwd = vim.uv.cwd },
