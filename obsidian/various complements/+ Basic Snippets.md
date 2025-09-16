@@ -8,7 +8,10 @@
 Pandoc table caption>>>::: {custom-style="Table Caption"}\nTable 1: $0\n:::
 
 %% Figure Caption %%
-Pandoc figure caption>>>::: {custom-style="Figure Caption"}\nFigure 1: $0\n::: ||caption|image
+Pandoc figure caption>>>::: {custom-style="Image Caption"}\nFigure 1: $0\n::: ||caption|image
+
+%% Ascii Chart %%
+Ascii Chart>>>```ascii-chart\n$0\n```\n\n::: {custom-style="Image Caption"}\nFigure 1: \n::: |
 
 %% References %%
 Pandoc references>>>## References {-}\n::: {#refs}\n:::
