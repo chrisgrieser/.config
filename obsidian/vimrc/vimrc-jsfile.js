@@ -4,7 +4,7 @@
 
 function deleteLastChar() {
 	const cursor = editor.getCursor();
-	const updatedText = editor.getLine(cursor.line).replace(/\S\s*$/, "");
+	const updatedText = editor.getLine(cursor.line).replace(/.$/, "");
 	editor.setLine(cursor.line, updatedText);
 	editor.setCursor(cursor);
 }
