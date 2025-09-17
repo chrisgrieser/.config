@@ -144,7 +144,7 @@ function run() {
 			body.replace(/\n+/g, " "),
 		]
 			.filter(Boolean)
-			.join("    ");
+			.join("   ");
 
 		// INFO the boolean are all stringified, so they are available as "true"
 		// and "false" after stringification, instead of the less clear "1" and "0"
