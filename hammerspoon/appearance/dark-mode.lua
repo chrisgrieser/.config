@@ -3,7 +3,6 @@ local M = {}
 local console = require("appearance.console")
 local holeCover = require("appearance.hole-cover")
 local u = require("meta.utils")
-
 --------------------------------------------------------------------------------
 
 ---@param msg string
@@ -57,7 +56,7 @@ end)
 -- If device has brightness sensor, uses a threshold to determine whether to
 -- change. Otherwise, changes based on the time of day.
 function M.autoSwitch()
-	local lightThreshold = 70 -- CONFIG
+	local lightThreshold = 65 -- CONFIG
 	local ambient = hs.brightness.ambient()
 	local hasBrightnessSensor = ambient > -1
 
