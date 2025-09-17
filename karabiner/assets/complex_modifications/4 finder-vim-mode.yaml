@@ -271,6 +271,18 @@ rules:
         to:
           - { key_code: w, modifiers: [command] }
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
+      # e: close all other windows (:only)
+      - type: basic
+        from: { key_code: e }
+        to:
+          - shell_command: |
+              osascript -e '
+                tell application "Finder"
+                  repeat while Finder window 2 exists
+                    close Finder window 2
+                  end repeat
+                end tell'
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
       # <BS> = cycle windows (:bnext)
       - type: basic
         from: { key_code: delete_or_backspace }
