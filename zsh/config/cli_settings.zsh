@@ -33,7 +33,7 @@ LESS+=" --long-prompt --prompt=mpage %dm?B/%D.?Pm (%Pm\\%).$" # progress in page
 LESS+=" --quit-if-one-screen --no-init"                       # quicker leaving & do not clear the screen when doing so
 LESS+=" --chop-long-lines"                                    # wrap lines
 LESS+=" --shift=.2"                                           # amount of side-scrolling (percentage of screen width)
-LESS+=" --no-tilde"
+LESS+=" --tilde"                                              # blank lines instead of tilde at end of file
 export LESS
 
 # don't clutter home dir (not disabling, as `delta` requires it for `n` navigation)
