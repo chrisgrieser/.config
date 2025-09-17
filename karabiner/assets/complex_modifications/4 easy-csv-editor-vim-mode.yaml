@@ -265,3 +265,45 @@ rules:
         from: { key_code: u, modifiers: { mandatory: [shift] } }
         to: [{ key_code: z, modifiers: [command, shift] }]
         conditions: [*is-csv-editor, *normal-mode, *not-german-keyboard]
+        #───────────────────────────────────────────────────────────────────────
+      # numbers: enter insert mode and press number
+      - type: basic
+        from: { key_code: "0" }
+        to: [{ key_code: "0" }, *enter-insert-mode, *set-notice]
+        conditions: [*is-csv-editor, *normal-mode]
+      - type: basic
+        from: { key_code: "1" }
+        to: [{ key_code: "1" }, *enter-insert-mode, *set-notice]
+        conditions: [*is-csv-editor, *normal-mode]
+      - type: basic
+        from: { key_code: "2" }
+        to: [{ key_code: "2" }, *enter-insert-mode, *set-notice]
+        conditions: [*is-csv-editor, *normal-mode]
+      - type: basic
+        from: { key_code: "3" }
+        to: [{ key_code: "3" }, *enter-insert-mode, *set-notice]
+        conditions: [*is-csv-editor, *normal-mode]
+      - type: basic
+        from: { key_code: "4" }
+        to: [{ key_code: "4" }, *enter-insert-mode, *set-notice]
+        conditions: [*is-csv-editor, *normal-mode]
+      - type: basic
+        from: { key_code: "5" }
+        to: [{ key_code: "5" }, *enter-insert-mode, *set-notice]
+        conditions: [*is-csv-editor, *normal-mode]
+      - type: basic
+        from: { key_code: "6" }
+        to: [{ key_code: "6" }, *enter-insert-mode, *set-notice]
+        conditions: [*is-csv-editor, *normal-mode]
+      - type: basic
+        from: { key_code: "7" }
+        to: [{ key_code: "7" }, *enter-insert-mode, *set-notice]
+        conditions: [*is-csv-editor, *normal-mode]
+      - type: basic
+        from: { key_code: "8" }
+        to: [{ key_code: "8" }, *enter-insert-mode, *set-notice]
+        conditions: [*is-csv-editor, *normal-mode]
+      - type: basic
+        from: { key_code: "9" }
+        to: [{ key_code: "9" }, *enter-insert-mode, *set-notice]
+        conditions: [*is-csv-editor, *normal-mode]
