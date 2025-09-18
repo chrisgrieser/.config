@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>bibtex_library_path</key>
-	<string>/Users/chrisgrieser/Desktop/test.bib</string>
+	<string>/Users/chrisgrieser/.config/pandoc/main-bibliography.bib</string>
 	<key>citation_picker_keyword</key>
 	<string>cc</string>
 	<key>csl_folder</key>
