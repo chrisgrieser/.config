@@ -59,10 +59,7 @@ return {
 					-- when manually showing completions to see available fields
 					min_keyword_length = 1,
 					score_offset = 3,
-					opts = {
-						clipboard_register = "+", -- register to use for `$CLIPBOARD`
-						use_label_description = true,
-					},
+					opts = { clipboard_register = "+" }, -- register to use for `$CLIPBOARD`
 				},
 				path = {
 					opts = { get_cwd = vim.uv.cwd },
