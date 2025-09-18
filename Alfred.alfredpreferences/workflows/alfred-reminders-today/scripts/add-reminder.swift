@@ -116,7 +116,7 @@ eventStore.requestFullAccessToReminders { granted, error in
 	// * Add an alarm to trigger a notification. Even though the reminder created
 	//   without an alarm looks the same as one with an alarm, an alarm is needed
 	//   to trigger the notification (see #2).
-	// * Whether all-day remidners do get a notification or not is determined by
+	// * Whether all-day reminders do get a notification or not is determined by
 	//   by the user's reminder settings; adding an alarm to all-day reminders
 	//   would enforce a notification, regardless of the setting, so we add the
 	//   alarm only if the reminder is not all-day.
