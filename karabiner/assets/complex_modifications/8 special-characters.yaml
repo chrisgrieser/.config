@@ -57,16 +57,17 @@ rules:
       # ß to [
       - type: basic
         from: { key_code: hyphen }
+        to:
+          - { key_code: "5", modifiers: [option] }
         conditions:
           - { type: input_source_if, input_sources: [language: ^de$] }
           - type: frontmost_application_unless
             bundle_identifiers:
-              - ^com\.tinyspeck\.slackmacgap$
-              - ^com\.microsoft\.Word$
-              - ^net\.highlightsapp\.universal$
-              - ^com\.mimestream\.Mimestream$
-        to:
-          - { key_code: "5", modifiers: [option] }
+              - com.tinyspeck.slackmacgap
+              - com.microsoft.Word
+              - net.highlightsapp.universal
+              - com.mimestream.Mimestream
+              - org.whispersystems.signal-desktop
       # replacement: ⌥ß → ß
       - type: basic
         from: { key_code: hyphen, modifiers: { mandatory: [option] } }
