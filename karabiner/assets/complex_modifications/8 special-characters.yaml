@@ -33,7 +33,7 @@ rules:
         to_after_key_up:
           - select_input_source: { input_source_id: com.apple.keylayout.German }
         conditions:
-          # `~` is the only dead key wezterm can manage on its own.
+          # `~` is the only dead key wezterm can manage on its own
           - { type: frontmost_application_unless, file_paths: [wezterm-gui$] }
   #─────────────────────────────────────────────────────────────────────────────
   # REMAPPING
