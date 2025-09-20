@@ -8,7 +8,6 @@ let semaphore = DispatchSemaphore(value: 0)
 
 let input = CommandLine.arguments[1]
 let reminderList = ProcessInfo.processInfo.environment["reminder_list"]!
-let dayOffset = Int(ProcessInfo.processInfo.environment["day_offset"]!)!
 
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -102,7 +101,31 @@ eventStore.requestFullAccessToReminders { granted, error in
 	// determine day when to add
 	let calendar = Calendar.current
 	let today = Date()
-	let dayToUse = calendar.date(byAdding: .day, value: dayOffset, to: today)!
+	let targetDay = ProcessInfo.processInfo.environment["target_day"]!
+	let dateOffset = Int(targetDay)
+	var dayToUse: Date
+
+	if dateOffset != nil {
+		dayToUse = calendar.date(byAdding: .day, value: dateOffset!, to: today)!
+	} else {
+		let weekdayName: String = targetDay
+		let weekdays: [String: Int] = [
+			"sunday": 1,
+			"monday": 2,
+			"tuesday": 3,
+			"wednesday": 4,
+			"thursday": 5,
+			"friday": 6,
+			"saturday": 7,
+		]
+		let weekday = weekdays[weekdayName.lowercased()]
+
+		dayToUse = calendar.nextDate(
+			after: today,
+			matching: DateComponents(weekday: weekday),
+			matchingPolicy: .nextTime  // `.nextTime` ensures it's the next Monday (not today, even if today is Monday)
+		)!
+	}
 
 	// Set due date
 	var dateComponents = calendar.dateComponents([.year, .month, .day], from: dayToUse)

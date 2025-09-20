@@ -21,6 +21,7 @@ local ensureInstalled = {
 		"typescript-language-server",
 		"typos-lsp", -- spellchecker for code
 		"yaml-language-server",
+		"stylua", -- lua formatter
 		-- "pyrefly", -- python type checker, still alpha
 		-- "ty", -- python type checker, still alpha
 
@@ -32,9 +33,8 @@ local ensureInstalled = {
 		"shellcheck", -- via efm PENDING https://github.com/bash-lsp/bash-language-server/issues/663
 	},
 	formatters = {
-		"markdown-toc", -- automatic table-of-contents (via efm)
+		"markdown-toc", -- automatic table-of-contents
 		"shfmt", -- shell formatter (via bashls)
-		"stylua", -- lua formatter (via efm)
 	},
 	debuggers = {
 		"debugpy", -- python
@@ -72,6 +72,7 @@ local function enableLsps()
 		:totable()
 	vim.lsp.enable(lspConfigNames)
 	vim.lsp.enable(nonMasonLsps)
+	vim.lsp.enable("stylua") -- https://github.com/mason-org/mason-registry/pull/11613
 end
 
 ---@param pack Package
