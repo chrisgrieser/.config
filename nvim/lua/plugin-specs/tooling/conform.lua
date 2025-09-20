@@ -19,7 +19,6 @@ return {
 			lsp_format = "first",
 		},
 		formatters_by_ft = {
-			lua = { "stylua" },
 			markdown = { "markdownlint", "markdown-toc", "injected" },
 			python = { "ruff_fix", "ruff_organize_imports" },
 			typescript = { "tsAddMissingImports", "tsRemoveUnusedImports", "biome-organize-imports" },
@@ -32,7 +31,9 @@ return {
 		formatters = {
 			injected = {
 				ignore_errors = true,
-				lang_to_formatters = { json = { "jq" } },
+				lang_to_formatters = {
+					json = { "jq" },
+				},
 			},
 			shellcheck = { -- add `--shell=bash` to force to work with `zsh`
 				args = "'$FILENAME' --format=diff --shell=bash | patch -p1 '$FILENAME'",
