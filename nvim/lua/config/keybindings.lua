@@ -189,7 +189,10 @@ end, { desc = "󰩫 Exit snippet", expr = true })
 --------------------------------------------------------------------------------
 -- CLIPBOARD
 
--- Sticky yank
+-- stylua: ignore
+keymap("n", "<leader>yb", function() require("personal-plugins.breadcrumbs").copy() end, { desc = "󰳮 breadcrumbs" })
+
+-- STICKY YANK
 do
 	keymap({ "n", "x" }, "y", function()
 		vim.b.cursorPreYank = vim.api.nvim_win_get_cursor(0)
@@ -252,9 +255,6 @@ keymap("i", "<D-v>", function()
 end, { desc = " Paste", expr = true })
 
 keymap("n", "<D-v>", "p", { desc = " Paste" }) -- compatibility w/ macOS clipboard managers
-
--- stylua: ignore
-keymap("n", "<leader>yb", function() require("personal-plugins.breadcrumbs").copy() end, { desc = "󰳮 breadcrumbs" })
 
 --------------------------------------------------------------------------------
 -- SURROUND
