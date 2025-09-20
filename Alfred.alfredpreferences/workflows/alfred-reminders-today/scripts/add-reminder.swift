@@ -110,12 +110,7 @@ eventStore.requestFullAccessToReminders { granted, error in
 	} else {
 		let weekdayName: String = targetDay
 		let weekdays: [String: Int] = [
-			"sunday": 1,
-			"monday": 2,
-			"tuesday": 3,
-			"wednesday": 4,
-			"thursday": 5,
-			"friday": 6,
+			"sunday": 1, "monday": 2, "tuesday": 3, "wednesday": 4, "thursday": 5, "friday": 6,
 			"saturday": 7,
 		]
 		let weekday = weekdays[weekdayName.lowercased()]
@@ -123,7 +118,7 @@ eventStore.requestFullAccessToReminders { granted, error in
 		dayToUse = calendar.nextDate(
 			after: today,
 			matching: DateComponents(weekday: weekday),
-			matchingPolicy: .nextTime  // `.nextTime` ensures it's the next Monday (not today, even if today is Monday)
+			matchingPolicy: .nextTime  // `.nextTime` ensures it's not today, if today is Monday
 		)!
 	}
 

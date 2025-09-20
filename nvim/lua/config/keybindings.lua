@@ -330,7 +330,7 @@ keymap({ "n", "x" }, "<leader>h", function() vim.lsp.buf.hover { max_width = 70 
 -- stylua: ignore end
 
 do
-	local function scrollLspWin(lines)
+	local function scrollLspWin(lines) ---@param lines integer
 	local winid = vim.b.lsp_floating_preview --> stores id of last `vim.lsp`-generated win
 		if not winid or not vim.api.nvim_win_is_valid(winid) then
 			local msg = "No LSP window found."
