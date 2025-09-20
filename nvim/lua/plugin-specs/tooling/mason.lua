@@ -5,7 +5,7 @@ local ensureInstalled = {
 		"biome", -- ts/js/json/css linter/formatter
 		"css-lsp",
 		"css-variables-language-server", -- support css variables across multiple files
-		"efm", -- integration of external linter/formatter
+		"efm", -- integration of external linters
 		"emmet-language-server", -- css/html snippets
 		"gh-actions-language-server", -- github actions
 		"harper-ls", -- natural language linter
@@ -72,7 +72,6 @@ local function enableLsps()
 		:totable()
 	vim.lsp.enable(lspConfigNames)
 	vim.lsp.enable(nonMasonLsps)
-	vim.lsp.enable("stylua") -- https://github.com/mason-org/mason-registry/pull/11613
 end
 
 ---@param pack Package
@@ -146,7 +145,7 @@ return {
 		{ "<leader>pm", vim.cmd.Mason, desc = " Mason home" },
 	},
 	config = function(_, opts)
-		vim.env.npm_config_cache = vim.env.HOME .. "/.cache/npm" -- don't crowd $HOME with `/.npm`
+		vim.env.npm_config_cache = vim.env.HOME .. "/.cache/npm" -- don't crowd $HOME with `.npm` folder
 		require("mason").setup(opts)
 		enableLsps()
 		vim.defer_fn(syncPackages, 4000)
@@ -154,7 +153,7 @@ return {
 	opts = {
 		-- local one must come first to take priority, also requires `yq`
 		registries = {
-			-- ("file:%s/personal-mason-registry"):format(vim.fn.stdpath("config")),
+			-- "file:" .. vim.fn.stdpath("config") .. "/personal-mason-registry",
 			"github:mason-org/mason-registry",
 		},
 		ui = {
