@@ -1048,7 +1048,7 @@
 				<true/>
 				<key>variables</key>
 				<dict>
-					<key>label</key>
+					<key>notification_label</key>
 					<string>today</string>
 					<key>target_day</key>
 					<string>0</string>
@@ -1093,7 +1093,7 @@
 				<key>text</key>
 				<string>{query}</string>
 				<key>title</key>
-				<string>✅ Added Reminder ({var:label})</string>
+				<string>✅ Added Reminder ({var:notification_label})</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.output.notification</string>
@@ -1210,7 +1210,7 @@
 				<true/>
 				<key>variables</key>
 				<dict>
-					<key>label</key>
+					<key>notification_label</key>
 					<string>tomorrow</string>
 					<key>target_day</key>
 					<string>1</string>
@@ -1253,7 +1253,7 @@
 				<true/>
 				<key>variables</key>
 				<dict>
-					<key>label</key>
+					<key>notification_label</key>
 					<string>in 2 days</string>
 					<key>target_day</key>
 					<string>2</string>
@@ -1276,7 +1276,7 @@
 				<key>subtext</key>
 				<string>next Monday</string>
 				<key>text</key>
-				<string>2️⃣ Add to {var:reminder_list}: {query}</string>
+				<string>Ⓜ️ Add to {var:reminder_list}: {query}</string>
 				<key>withspace</key>
 				<true/>
 			</dict>
@@ -1296,8 +1296,8 @@
 				<true/>
 				<key>variables</key>
 				<dict>
-					<key>label</key>
-					<string>next Monay</string>
+					<key>notification_label</key>
+					<string>next Monday</string>
 					<key>target_day</key>
 					<string>monday</string>
 				</dict>
@@ -1971,7 +1971,7 @@ to set a hotkey to show reminders due today</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>3.7.2</string>
+	<string>3.8.1</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
