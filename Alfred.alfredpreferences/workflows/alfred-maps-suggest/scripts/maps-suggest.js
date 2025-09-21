@@ -44,7 +44,7 @@ function httpRequest(url) {
 
 /** @type {Record<string, string>} */
 const mapProvider = {
-	"Google Maps": "http://google.com/maps?q=",
+	"Google Maps": "https://www.google.com/maps?q=",
 	"Apple Maps": "maps://maps.apple.com?q=",
 };
 
@@ -66,7 +66,7 @@ function run(argv) {
 	const /** @type {GeoLocation[]} */ locations = JSON.parse(response).features;
 
 	/** @type {Record<string, boolean>} */
-	const usedAddresses = {}
+	const usedAddresses = {};
 
 	/** @type {AlfredItem[]} */
 	const items = locations.reduce((/** @type {AlfredItem[]} */ acc, loc) => {
@@ -82,12 +82,13 @@ function run(argv) {
 			postcode,
 			((street || "") + " " + (housenumber || "")).trim(),
 		].filter(Boolean);
-		if (usedAddresses[address]) return acc
-		usedAddresses[address] = true
+		const addressStr = address.join(", ");
+
+		// prevent duplicate entries
+		if (usedAddresses[addressStr]) return acc;
+		usedAddresses[addressStr] = true;
 
 		const title = name || street + " " + housenumber;
-
-		const addressStr = address.join(", ");
 		const addressDisplay = address.slice(1).join(", "); // skip name from display
 		const mapProvider1Url = mapProvider[mapProvider1] + encodeURIComponent(addressStr);
 		const mapProvider2Url = mapProvider[mapProvider2] + encodeURIComponent(addressStr);
@@ -96,6 +97,7 @@ function run(argv) {
 		// lat/long, thus needs to be reversed
 		const coordinates = loc.geometry.coordinates.reverse().join(",");
 
+		/** @type {AlfredItem} */
 		const alfredItem = {
 			title: title,
 			subtitle: addressDisplay,
@@ -105,14 +107,15 @@ function run(argv) {
 				ctrl: { arg: addressStr }, // copy
 				shift: { arg: coordinates }, // copy
 			},
-			variables: { // only for debugging
+			variables: {
+				// only for debugging
 				address: addressStr,
 				url1: mapProvider1Url,
 				url2: mapProvider2Url,
 				coordinates: coordinates,
 			},
 		};
-		acc.push(alfredItem)
+		acc.push(alfredItem);
 		return acc;
 	}, []);
 
