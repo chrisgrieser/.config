@@ -235,7 +235,7 @@ function watch_website {
 	local http_status
 	while true; do
 		http_status=$(curl --silent --location --output /dev/null \
-			--write-out "%{http_code}: %{errormsg}" "$url")
+			--write-out "%{http_code}" "$url")
 		[[ "$http_status" -eq 200 ]] && break
 		echo "HTTP code: $http_status"
 		sleep 1
