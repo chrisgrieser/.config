@@ -65,11 +65,13 @@ function run(argv) {
 	if (!response) return JSON.stringify({ items: [{ title: "Error: No results", valid: false }] });
 	const /** @type {GeoLocation[]} */ locations = JSON.parse(response).features;
 
+	/** @type {Record<string, boolean>} */
+	const usedAddresses = {}
+
 	/** @type {AlfredItem[]} */
-	const items = locations.map((loc) => {
+	const items = locations.reduce((/** @type {AlfredItem[]} */ acc, loc) => {
 		const { name, country, state, city, district, locality, postcode, street, housenumber } =
 			loc.properties;
-		const title = name || street + " " + housenumber;
 		const address = [
 			name,
 			country,
@@ -80,6 +82,10 @@ function run(argv) {
 			postcode,
 			((street || "") + " " + (housenumber || "")).trim(),
 		].filter(Boolean);
+		if (usedAddresses[address]) return acc
+		usedAddresses[address] = true
+
+		const title = name || street + " " + housenumber;
 
 		const addressStr = address.join(", ");
 		const addressDisplay = address.slice(1).join(", "); // skip name from display
@@ -90,7 +96,7 @@ function run(argv) {
 		// lat/long, thus needs to be reversed
 		const coordinates = loc.geometry.coordinates.reverse().join(",");
 
-		return {
+		const alfredItem = {
 			title: title,
 			subtitle: addressDisplay,
 			arg: mapProvider1Url,
@@ -106,7 +112,9 @@ function run(argv) {
 				coordinates: coordinates,
 			},
 		};
-	});
+		acc.push(alfredItem)
+		return acc;
+	}, []);
 
 	// manual search fallback
 	items.push({
