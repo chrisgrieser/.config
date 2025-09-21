@@ -19,6 +19,9 @@ rules:
           - shell_command: |
               "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/alexa-virtual-trigger" \
                 "spotify-pause"
+              "$HOME/.config/karabiner/assets/notificators/spotify-notificator" \
+                --title "Spotify" --message "⏸️ Pause"
+
 
       - type: basic
         from: { key_code: f8 }
@@ -26,6 +29,8 @@ rules:
           - shell_command: |
               "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/alexa-virtual-trigger" \
                 "spotify-play"
+              "$HOME/.config/karabiner/assets/notificators/spotify-notificator" \
+                --title "Spotify" --message "▶️ Resume"
 
       - type: basic
         from: { key_code: f9 }
