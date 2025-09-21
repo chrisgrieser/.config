@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 
 title="$(echo "$1" | cut -d$'\t' -f1 | cut -c1-50 | tr "$€§*#?!:;.,'\"\{}" "-")"
-url="$(echo "$1" | cut -d$'\t' -f2 | sed 's/&/&amp;/g')" # `&` invalid in xml
+url="$(echo "$1" | cut -d$'\t' -f2 | sed 's/&/&amp;/g')" # `&` invalid in .webloc
 
 finder_path=$(osascript -l "JavaScript" -e 'decodeURIComponent(Application("Finder").insertionLocation().url()?.slice(7) || "")')
 default_path="$HOME/Desktop"
