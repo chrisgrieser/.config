@@ -76,7 +76,7 @@ if jit.os == "OSX" then
 		once = true,
 		callback = function()
 			if os.date("%a") == "Mon" then
-				vim.system { "find", vim.o.undodir, "-mtime", "+15d", "-delete" }
+				vim.system { "find", vim.o.undodir, "-mtime", "+30d", "-delete" }
 				vim.system { "find", vim.lsp.log.get_filename(), "-size", "+20M", "-delete" }
 			end
 		end,
@@ -162,16 +162,16 @@ end
 vim.api.nvim_create_autocmd("FocusGained", {
 	desc = "User: Close all non-existing buffers on `FocusGained`.",
 	callback = function()
-		local closedBuffers = {}
 		local allBufs = vim.fn.getbufinfo { buflisted = 1 }
-		vim.iter(allBufs):each(function(buf)
-			if not vim.api.nvim_buf_is_valid(buf.bufnr) then return end
+		local closedBuffers = vim.iter(allBufs):fold({}, function(acc, buf)
+			if not vim.api.nvim_buf_is_valid(buf.bufnr) then return acc end
 			local stillExists = vim.uv.fs_stat(buf.name) ~= nil
 			local specialBuffer = vim.bo[buf.bufnr].buftype ~= ""
 			local newBuffer = buf.name == ""
-			if stillExists or specialBuffer or newBuffer then return end
-			table.insert(closedBuffers, vim.fs.basename(buf.name))
+			if stillExists or specialBuffer or newBuffer then return acc end
+			table.insert(acc, vim.fs.basename(buf.name))
 			vim.api.nvim_buf_delete(buf.bufnr, { force = false })
+			return acc
 		end)
 		if #closedBuffers == 0 then return end
 
