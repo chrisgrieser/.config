@@ -30,7 +30,7 @@ do
 		desc = "User: Sync colorscheme with `background`",
 		pattern = "background",
 		callback = function()
-			-- prevent recursion, since setting colorschemes often also sets background
+			-- prevent recursion, since some colorschemes also set background
 			-- (not using `vim.v.option_old` due to race with multiple triggerings)
 			if vim.v.option_new == prevBg then return end
 			prevBg = vim.v.option_new
