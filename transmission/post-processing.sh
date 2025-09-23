@@ -10,11 +10,11 @@ action_log="./.post-processing.log"
 cd "$TR_TORRENT_DIR" || return 1 # `$TR_TORRENT_DIR` is where the downloads are placed
 
 # DELETE CLUTTER
-# my version of `find` does not support `-regex` with `|`, so we search for
-# each file type separately
+# the macOS version of `find` does not support `-regex` with `|`, so we search
+# for each file type separately
 find . \( -name "*.txt" -or -name "*.nfo" -or -name "*.md" -or -name "*.exe" \
 	-or -name "*.png" -or -name "*.jp*g" \) -delete -print
-find . -type directory -empty -delete -print           # e.g. now empty `	find "." -type d -not -path "**/.git/**" -empty -delete -print` folders
+find . -type directory -empty -delete -print           # now empty folders
 find . -type directory -name "Sample" -exec rm -r {} + # Folders with content do not accept `-delete`
 sleep 1
 
@@ -36,11 +36,11 @@ find "." -maxdepth 1 -name "*.mkv" | while read -r old_name; do
 			cut -c3- | # remove `./`
 			tr "._" " " |
 			sed 's/ *\[[a-zA-Z0-9_-]*\] *//g' | # tags for the subbing group
-			sed -E 's/(1080p|720p).*/\1/' |    # video file info after the resolution info
-			tr -s " ()[]"                        # remove leftover spaces or double brackets
+			sed -E 's/(1080p|720p).*/\1/' |     # video file info after the resolution info
+			tr -d "()[]" | tr -s " "            # remove leftover spaces or double brackets
 	)
-	# shellcheck disable=2296 # valid in zsh
-	capitalized="${(U)clean_name[1]}${clean_name[2,-1]}"
+
+	capitalized="$(echo "${clean_name[1]}" | tr "[:lower:]" "[:upper:]")${clean_name[2, -1]}"
 	new_name="./$capitalized.mkv"
 	if [[ ! -f "$new_name" ]]; then
 		echo "$(date "+%Y-%m-%d %H:%M") $old_name -> $new_name" | tee -a "$action_log"
