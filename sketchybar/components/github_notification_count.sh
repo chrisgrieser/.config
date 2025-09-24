@@ -14,9 +14,8 @@ elif [[ -z "$GITHUB_TOKEN" ]]; then
 	return 1
 fi
 
-# in office, spotty internet on wake
-[[ "$SENDER" == "system_woke"]] && sleep 10
-osascript -e "display notification \"🪚 $SENDER\" with title \"SENDER\""
+# in office, spotty internet on wake (forced = manual start)
+[[ "$SENDER" == "system_woke" || "$SENDER" == "forced" ]] && sleep 5
 
 #───────────────────────────────────────────────────────────────────────────────
 
