@@ -14,10 +14,12 @@ elif [[ -z "$GITHUB_TOKEN" ]]; then
 	return 1
 fi
 
+# in office, spotty internet on wake
+[[ "$SENDER" == "system_woke"]] && sleep 10
+osascript -e "display notification \"🪚 $SENDER\" with title \"SENDER\""
+
 #───────────────────────────────────────────────────────────────────────────────
 
-# wait for sync of reminders
-[[ "$SENDER" == "system_woke" ]] && sleep 10 # in office, spotty internet on wake
 
 # DOCS https://docs.github.com/en/rest/activity/notifications?apiVersion=2022-11-28
 response=$(curl --silent --location \
