@@ -20,7 +20,7 @@ if [[ "$SENDER" = "front_app_switched" ]]; then
 fi
 
 # wait for sync of reminders
-[[ "$SENDER" == "system_woke" ]] && sleep 5
+[[ "$SENDER" == "system_woke" || "$SENDER" == "forced" ]] && sleep 5
 
 #───────────────────────────────────────────────────────────────────────────────
 
