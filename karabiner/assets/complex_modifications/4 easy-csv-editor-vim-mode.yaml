@@ -63,7 +63,7 @@ rules:
     # cmd+enter: enter table, when no cell is focussed
       - type: basic
         from: { key_code: return_or_enter, modifiers: { mandatory: [command] } }
-        to: 
+        to:
           # HACK select all, and move down = goes to first cell
           - { key_code: a, modifiers: [command] }
           - { key_code: down_arrow }
@@ -173,6 +173,14 @@ rules:
         from: { key_code: d, modifiers: { mandatory: [shift] } }
         to: [{ key_code: y, modifiers: [command, shift] }]
         conditions: [*is-csv-editor, *normal-mode, *not-german-keyboard]
+      # -/: Search
+      - type: basic
+        from: { key_code: slash }
+        to:
+          - { key_code: f, modifiers: [command] }
+          - *enter-insert-mode
+          - *set-notice
+        conditions: [*is-csv-editor, *normal-mode]
       # w/W: duplicate row/column
       - type: basic
         from: { key_code: w }
