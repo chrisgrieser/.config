@@ -1,0 +1,9 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/espanso/espanso/dev/schemas/config.schema.json
+#───────────────────────────────────────────────────────────────────────────────
+
+# Disable in Alfred, since the repeated `,` is used as keyword for the
+# Reminders workflow.
+filter_class: com.runningwithcrayons.Alfred
+
+extra_excludes:
+  - ../match/markdown-codeblock.yml
