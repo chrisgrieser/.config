@@ -120,7 +120,7 @@ M.caff_SleepWatcherForRepoSync = c.new(function(event)
 		u.defer(delay, function()
 			syncAllGitRepos(true)
 			M.recentlyTriggered = true
-			u.defer(4, function() M.recentlyTriggered = false end)
+			u.defer(7, function() M.recentlyTriggered = false end)
 		end)
 	end
 end):start()
