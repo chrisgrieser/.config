@@ -114,6 +114,17 @@
 			<key>url</key>
 			<string>https://nyaa.si/?f=1&amp;c=1_2&amp;q={query}</string>
 		</dict>
+		<key>5C714277-3404-4E28-9DE2-F5FC7E40B190</key>
+		<dict>
+			<key>enabled</key>
+			<true/>
+			<key>keyword</key>
+			<string>//</string>
+			<key>text</key>
+			<string>Vibe Link</string>
+			<key>url</key>
+			<string>https://vb.lk/{query}</string>
+		</dict>
 		<key>61F594D9-D1EC-4E69-BCBB-5FE36128955E</key>
 		<dict>
 			<key>enabled</key>
