@@ -5,3 +5,9 @@ set quiet
 [macos]
 docs:
     open "https://espanso.org/docs/matches/basics/"
+
+restart:
+    espanso restart
+
+logs:
+    espanso log | tail -n20
