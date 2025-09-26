@@ -5,7 +5,7 @@
 search_trigger: OFF
 search_shortcut: ""
 
-show_icon: false
+show_icon: true
 show_notifications: true
 auto_restart: true
 
