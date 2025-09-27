@@ -11,11 +11,15 @@
 import fs from "node:fs";
 
 /** @type {Record<string, string>} */
-const customAliases = {
+const customAliases = { // these overwrite aliases provided by devdocs.io
 	hammerspoon: "hs",
 	// biome-ignore lint/style/useNamingConvention: not set by me
 	browser_support_tables: "cani",
-	matplotlib: "plt", // preferring the conventional `plt` over `mlp` https://docs.astral.sh/ruff/settings/#lint_flake8-import-conventions_aliases
+	matplotlib: "plt", // using the conventional `plt` over `mlp` https://docs.astral.sh/ruff/settings/#lint_flake8-import-conventions_aliases
+
+	// overwrite `löve` as keyword, since hard to non on many keyboard layouts, and
+	// since it breaks the JSON parsing in `search-devdocs.js` (see #19)
+	love: "love",
 };
 
 // IMPORTANT extra lines for pinned workflow versions and opening at original
@@ -45,7 +49,7 @@ async function run() {
 		const keyword = customAliases[id] || lang.alias || id; // custom -> devdocs -> id
 
 		// skip duplicates
-		// (assuming the JSON puts newer version on top, this skips older versions)
+		// (since the JSON puts newer version on top, this skips older versions)
 		if (allLangs[keyword]) continue;
 		allLangs[keyword] = lang.slug;
 
