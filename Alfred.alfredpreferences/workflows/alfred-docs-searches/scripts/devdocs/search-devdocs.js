@@ -19,8 +19,8 @@ app.includeStandardAdditions = true;
 
 /** @param {string} url @return {string} */
 function httpRequest(url) {
-	const queryURL = $.NSURL.URLWithString(url);
-	const data = $.NSData.dataWithContentsOfURL(queryURL);
+	const queryUrl = $.NSURL.URLWithString(url);
+	const data = $.NSData.dataWithContentsOfURL(queryUrl);
 	return $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding).js;
 }
 
@@ -38,7 +38,6 @@ function ensureCacheFolderExists() {
 	const finder = Application("Finder");
 	const cacheDir = $.getenv("alfred_workflow_cache");
 	if (!finder.exists(Path(cacheDir))) {
-		// biome-ignore lint/suspicious/noConsole: intentional
 		console.log("Cache Dir does not exist and is created.");
 		const cacheDirBasename = $.getenv("alfred_workflow_bundleid");
 		const cacheDirParent = cacheDir.slice(0, -cacheDirBasename.length);
@@ -55,7 +54,7 @@ function cacheIsOutdated(path) {
 	const cacheAgeThresholdDays = 7; // CONFIG
 	const cacheObj = Application("System Events").aliases[path];
 	if (!cacheObj.exists()) return true;
-	const cacheAgeDays = (Date.now() - +cacheObj.creationDate()) / 1000 / 60 / 60 / 24;
+	const cacheAgeDays = (Date.now() - cacheObj.creationDate().getTime()) / 1000 / 60 / 60 / 24;
 	return cacheAgeDays > cacheAgeThresholdDays;
 }
 
@@ -78,8 +77,6 @@ function readFile(path) {
 function run() {
 	const prefix = $.getenv("shared_devdocs_prefix");
 	const keyword = $.getenv("alfred_workflow_keyword").substring(prefix.length);
-
-	// biome-ignore lint/suspicious/noConsole: intentional
 	console.log("keyword:", keyword);
 
 	ensureCacheFolderExists();
@@ -98,19 +95,19 @@ function run() {
 
 	const keywordLanguageMap = JSON.parse(readFile(mapCache));
 	let languageSlug = keywordLanguageMap[keyword];
+	console.log("languageSlug:", languageSlug);
 
 	// PINNED VERSIONS
 	const pinnedVersions = $.getenv("select_versions")
 		.split("\n")
 		.filter((line) => line.trim() !== "")
 		.map((line) => {
-			const [usedVersion, pinnedVersion] = line.split(":");
-			return { used: usedVersion.trim(), pinned: pinnedVersion.trim() };
+			const [usedVer, pinnedVer] = line.split(":");
+			return { used: usedVer.trim(), pinned: pinnedVer.trim() };
 		});
 	const replacement = pinnedVersions.find((version) => version.used === keyword);
 	if (replacement) {
-		// biome-ignore lint/suspicious/noConsole: intentional
-		console.log("Pinned version found.");
+		console.log(`Pinned version found: ${replacement.pinned}`);
 		languageSlug = replacement.pinned;
 	}
 
@@ -125,7 +122,6 @@ function run() {
 		const iconExists = fileExists(iconpath);
 
 		const indexUrl = `https://documents.devdocs.io/${languageSlug}/index.json`;
-		// biome-ignore lint/suspicious/noConsole: intentional
 		console.log("indexUrl:", indexUrl);
 
 		/** @type {DevDocsIndex} */

@@ -45,7 +45,7 @@ async function run() {
 		const keyword = customAliases[id] || lang.alias || id; // custom -> devdocs -> id
 
 		// skip duplicates
-		// (assuming the JSON puts newer version on top, skips older versions)
+		// (assuming the JSON puts newer version on top, this skips older versions)
 		if (allLangs[keyword]) continue;
 		allLangs[keyword] = lang.slug;
 

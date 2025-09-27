@@ -212,29 +212,26 @@ declare const ObjC: {
 
 declare function delay(seconds: number): void;
 
-// biome-ignore lint/suspicious/noExplicitAny: not set by me
-declare const $: any;
+// biome-ignore-start lint/suspicious/noExplicitAny: not set by me
+// biome-ignore-start lint/style/useNamingConvention: not set by me
+declare const $: {
+	NSWorkspace: any; // REQUIRES `ObjC.import("Foundation")`
+	NSPasteboard: any; // REQUIRES `ObjC.import("AppKit")`
+	NSFilenamesPboardType: any;
+	(paths: string[]): any;
+	IOBluetoothDevice: any; // REQUIRES `ObjC.import("IOBluetooth")`
 
-// // biome-ignore-start lint/suspicious/noExplicitAny: not set by me
-// // biome-ignore-start lint/style/useNamingConvention: not set by me
-// declare const $: {
-// 	NSWorkspace: any; // REQUIRES `ObjC.import("Foundation")`
-// 	NSPasteboard: any; // REQUIRES `ObjC.import("AppKit")`
-// 	NSFilenamesPboardType: any;
-// 	(paths: string[]): any;
-// 	IOBluetoothDevice: any; // REQUIRES `ObjC.import("IOBluetooth")`
-//
-// 	// REQUIRES `ObjC.import("stdlib")`
-// 	getenv: (envVar: string) => string;
-// 	NSFileManager: any;
-// 	NSUTF8StringEncoding: any;
-// 	NSFileModificationDate: any;
-// 	NSProcessInfo: any;
-// 	NSURL: any;
-// 	NSString: any;
-// 	NSData: any;
-// 	NSLocale: any;
-// 	NSLocaleCountryCode: any;
-// };
-// // biome-ignore-end lint/style/useNamingConvention: -
-// // biome-ignore-end lint/suspicious/noExplicitAny: -
+	// REQUIRES `ObjC.import("stdlib")`
+	getenv: (envVar: string) => string;
+	NSFileManager: any;
+	NSUTF8StringEncoding: any;
+	NSFileModificationDate: any;
+	NSProcessInfo: any;
+	NSURL: any;
+	NSString: any;
+	NSData: any;
+	NSLocale: any;
+	NSLocaleCountryCode: any;
+};
+// biome-ignore-end lint/style/useNamingConvention: -
+// biome-ignore-end lint/suspicious/noExplicitAny: -
