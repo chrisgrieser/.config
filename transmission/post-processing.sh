@@ -35,7 +35,7 @@ find "." -maxdepth 1 -name "*.mkv" | while read -r old_name; do
 		echo "$old_name_no_ext" |
 			cut -c3- | # remove `./`
 			tr "._" " " |
-			sed 's/ *\[[a-zA-Z0-9_-+]*\] *//g' | # tags for the subbing group
+			sed 's/ *\[[^[:space:]]*\] *//g' | # tags for the subbing group
 			sed -E 's/(1080p|720p).*/\1/' |     # video file info after the resolution info
 			tr -d "()[]" | tr -s " "            # remove leftover spaces or double brackets
 	)
