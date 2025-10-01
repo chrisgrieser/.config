@@ -467,6 +467,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>C120F733-C46F-44AC-ADAA-504E11D52028</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>5993AFC8-E4D6-407A-A5B5-0CD2337E0524</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>D29A152C-35C4-4892-831E-76C22D401194</key>
 		<array>
 			<dict>
@@ -1208,6 +1221,27 @@ open -g "hammerspoon://sync-repos"</string>
 			<string>alfred.workflow.trigger.universalaction</string>
 			<key>uid</key>
 			<string>01434C3A-64A7-41B0-922B-2B4326ED375C</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>🔠 Spellfix added</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>5993AFC8-E4D6-407A-A5B5-0CD2337E0524</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -2126,6 +2160,15 @@ open -g "hammerspoon://sync-repos"</string>
 			<real>550</real>
 			<key>ypos</key>
 			<real>305</real>
+		</dict>
+		<key>5993AFC8-E4D6-407A-A5B5-0CD2337E0524</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
+			<key>xpos</key>
+			<real>405</real>
+			<key>ypos</key>
+			<real>700</real>
 		</dict>
 		<key>61B6049A-0E52-4E28-A813-05177E38D595</key>
 		<dict>
