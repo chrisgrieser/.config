@@ -130,3 +130,4 @@ matches:
   - { replace: workflow, trigger: workflwo, propagate_case: true }
   - { replace: would, triggers: [woudl, wuold], propagate_case: true, word: true }
   - { replace: you, triggers: [yuo, oyu], propagate_case: true }
+  - { replace: through, trigger: thruogh, propagate_case: true, word: true }
