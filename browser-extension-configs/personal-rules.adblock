@@ -14,10 +14,6 @@ www.crunchyroll.com##.avatar-badge
 stackoverflow.com###announcement-banner
 help.obsidian.md##.site-body-left-column
 
-! fandom
-humankind.fandom.com##.page__right-rail
-humankind.fandom.com##.global-explore-navigation
-
 ! ai
 chatgpt.com###thread-bottom-container > div:last-child
 chatgpt.com###page-header > .absolute
