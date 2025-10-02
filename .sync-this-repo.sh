@@ -28,6 +28,8 @@ common_parent=$(echo "$common_parent" | cut -c3-)            # remove leading `.
 while [[ ${#common_parent} -gt 60 ]]; do
 	common_parent=${common_parent#*/} # remove first directory
 done
+echo "$common_parent"
+
 
 device_name=$(scutil --get ComputerName | cut -d" " -f3-)
 if [[ -z "$common_parent" ]]; then
