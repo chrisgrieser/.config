@@ -173,9 +173,16 @@ rules:
         from: { key_code: d, modifiers: { mandatory: [shift] } }
         to: [{ key_code: y, modifiers: [command, shift] }]
         conditions: [*is-csv-editor, *normal-mode, *not-german-keyboard]
-      # -/: Search
+      # - / cmd+f: Search
       - type: basic
         from: { key_code: slash }
+        to:
+          - { key_code: f, modifiers: [command] }
+          - *enter-insert-mode
+          - *set-notice
+        conditions: [*is-csv-editor, *normal-mode]
+      - type: basic
+        from: { key_code: f, modifiers: { mandatory: [command] } }
         to:
           - { key_code: f, modifiers: [command] }
           - *enter-insert-mode
