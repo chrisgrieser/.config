@@ -46,32 +46,6 @@ end
 
 local function darkenDisplay() wu.iMacDisplay:setBrightness(0) end
 
---------------------------------------------------------------------------------
-
--- MENU BAR BUTTON
--- 1. move windows to projector screen
--- 2. set dark mode
--- 3. darken display
-if not env.isAtOffice then
-	M.menubarItem = hs
-		.menubar
-		.new(true, "moveAllWinsToProjectorScreen") ---@diagnostic disable-line: need-check-nil
-		:setTitle("Ⱅ ") ---@diagnostic disable-line: undefined-field
-		:setClickCallback(function()
-			if #hs.screen.allScreens() < 2 then
-				hs.alert.show("This button is only for multi-monitor setups.")
-				return
-			end
-
-			darkenDisplay()
-			darkmode.setDarkMode("dark")
-			local projectorScreen = hs.screen.primaryScreen()
-			for _, win in pairs(hs.window:orderedWindows()) do
-				win:moveToScreen(projectorScreen, true)
-			end
-		end)
-end
-
 -------------------------------------------------------------------------------
 -- LAYOUTS
 
@@ -180,6 +154,27 @@ M.caff_unlock = hs.caffeinate.watcher
 		end
 	end)
 	:start()
+
+-- 5. menu bar button
+-- set movie layout & move windows to projector screen
+if not env.isAtOffice then
+	M.menubarItem = hs
+		.menubar
+		.new(true, "moveAllWinsToProjectorScreen") ---@diagnostic disable-line: need-check-nil
+		:setTitle("Ⱅ ") ---@diagnostic disable-line: undefined-field
+		:setClickCallback(function()
+			if #hs.screen.allScreens() < 2 then
+				hs.alert.show("This button is only for multi-monitor setups.")
+				return
+			end
+
+			local projectorScreen = hs.screen.primaryScreen()
+			for _, win in pairs(hs.window:orderedWindows()) do
+				win:moveToScreen(projectorScreen, true)
+			end
+			movieLayout()
+		end)
+end
 
 --------------------------------------------------------------------------------
 return M
