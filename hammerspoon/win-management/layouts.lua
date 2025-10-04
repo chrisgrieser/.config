@@ -82,7 +82,6 @@ local function movieLayout()
 	darkenDisplay()
 	holeCover.update()
 	dockSwitcher(env.isAtMother and "mother-movie" or "movie")
-	u.closeAllFinderWins()
 
 	-- turn off showing hidden files
 	hs.execute("defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder")
@@ -164,15 +163,15 @@ if not env.isAtOffice then
 		:setTitle("Ⱅ ") ---@diagnostic disable-line: undefined-field
 		:setClickCallback(function()
 			if #hs.screen.allScreens() < 2 then
-				hs.alert.show("This button is only for multi-monitor setups.")
+				hs.alert.show("Only for multi-monitor setups.")
 				return
 			end
 
+			movieLayout()
 			local projectorScreen = hs.screen.primaryScreen()
 			for _, win in pairs(hs.window:orderedWindows()) do
 				win:moveToScreen(projectorScreen, true)
 			end
-			movieLayout()
 		end)
 end
 
