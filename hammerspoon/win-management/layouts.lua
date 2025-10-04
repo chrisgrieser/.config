@@ -163,7 +163,7 @@ if not env.isAtOffice then
 		:setTitle("Ⱅ ") ---@diagnostic disable-line: undefined-field
 		:setClickCallback(function()
 			if #hs.screen.allScreens() < 2 then
-				hs.alert.show("Only for multi-monitor setups.")
+				hs.alert("Only for multi-monitor setups.")
 				return
 			end
 
