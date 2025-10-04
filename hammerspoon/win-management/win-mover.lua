@@ -66,7 +66,10 @@ local function toggleMaximized()
 end
 
 local function moveToNextDisplay()
-	if #hs.screen.allScreens() < 2 then return end
+	if #hs.screen.allScreens() < 2 then
+		hs.alert("Cannot move, since there is only one screen.", 3)
+		return
+	end
 	local win = hs.window.focusedWindow()
 	if not win then return end
 	win:moveToScreen(win:screen():next(), true)

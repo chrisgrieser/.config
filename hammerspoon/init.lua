@@ -16,7 +16,7 @@ local function safeRequire(module)
 	local success, M = pcall(require, module)
 	G[module:sub(5)] = M
 	if not success then
-		hs.alert.show(M, 5)
+		hs.alert(M, 5)
 		print(M)
 	end
 end
