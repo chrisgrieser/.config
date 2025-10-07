@@ -64,23 +64,27 @@ function readFile(path) {
 // SOURCE https://github.com/alex-popov-tech/store.nvim/blob/main/lua/store/config.lua
 // SOURCE https://github.com/alex-popov-tech/store.nvim.crawler/issues/1#issuecomment-3146734037
 const storeNvimList =
-	"https://gist.githubusercontent.com/alex-popov-tech/dfb6adf1ee0506461d7dc029a28f851d/raw/ad13fe0448bb3af2afeccd7615136b7a7c5ce4d7/db_minified.json";
+	"https://gist.githubusercontent.com/alex-popov-tech/92d1366bfeb168d767153a24be1475b5/raw/db.json";
 
 /** @typedef {Object} StoreNvimRepo
+ * @property {string} source
  * @property {string} full_name
+ * @property {string} author
+ * @property {string} name
+ * @property {string} url
  * @property {string} description
- * @property {string} homepage
- * @property {string} html_url
- * @property {string} pushed_at Date string
- * @property {string} pretty_pushed_at humean readable date
- * @property {string} pretty_stargazers_count
  * @property {string[]} tags
- * @property {{initial: string, lazyConfig: string}} install
+ * @property {number} stars
+ * @property {number} issues
+ * @property {string} created_at ISO date string
+ * @property {string} updated_at ISO date string
+ * @property {{stars: string, issues: string, created_at: string, updated_at: string}} pretty
+ * @property {string} readme
  */
 
 /** @typedef {Object} StoreNvimData
  * @property {StoreNvimRepo[]} items
- * @property {{total_count: number, crawled_at: string}} meta
+ * @property {{created_at: number}} meta
  */
 //───────────────────────────────────────────────────────────────────────────
 
@@ -133,24 +137,22 @@ function run() {
 		return JSON.stringify({ items: [errItem] });
 	}
 	console.log("Fetched new data from store.nvim.");
-	console.log("Last crawl:", new Date(nvimStoreData.meta.crawled_at).toLocaleString());
-	console.log("Total plugins:", nvimStoreData.meta.total_count);
+	console.log("Last crawl:", new Date(nvimStoreData.meta.created_at).toLocaleString());
+	console.log("Total plugins:", nvimStoreData.items.length);
 
 	// construct Alfred items
 	const alfredItems = nvimStoreData.items
-		.sort((a, b) => new Date(b.pushed_at).getTime() - new Date(a.pushed_at).getTime())
+		.sort((a, b) => new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime())
 		.map((repo) => {
 			// biome-ignore format: does not need to be read so often
-			const { full_name, description, html_url, pretty_stargazers_count, pretty_pushed_at, install, tags } = repo;
-			const [author, name] = full_name.split("/");
+			const { full_name, description, url, pretty, tags, author, name } = repo;
 
 			const subtitle = [
-				"⭐ " + pretty_stargazers_count,
+				"⭐ " + pretty.stars,
 				author,
-				pretty_pushed_at, // PENDING https://github.com/alex-popov-tech/store.nvim.crawler/issues/3
+				pretty.updated_at,
 				description,
 			].join("  ·  ");
-			const lazyNvimInstall = install?.lazyConfig;
 
 			/** @type {(AlfredItem & {fullRepo: string})} */
 			const item = {
@@ -158,18 +160,11 @@ function run() {
 				fullRepo: full_name, // just for adding of the install icon adding
 				match: alfredMatcher([name, author, ...tags].join(" ")),
 				subtitle: subtitle,
-				arg: html_url,
+				arg: url,
 				mods: {
 					cmd: { arg: full_name }, // open help page
-					ctrl: {
-						arg: lazyNvimInstall,
-						valid: Boolean(lazyNvimInstall),
-						subtitle: lazyNvimInstall
-							? "⌃: Install with lazy.nvim"
-							: "⌃: ⛔ No install snippet available, please install manually",
-					},
 				},
-				quicklookurl: html_url,
+				quicklookurl: url,
 			};
 			return item;
 		});
