@@ -59,10 +59,11 @@ function _list_files_here {
 	# INFO eza needs to be called with directory: https://github.com/eza-community/eza/issues/1568#issuecomment-3116798039
 	local eza_output
 	eza_output=$(
-		eza "." --width="$COLUMNS" --all --grid --color=always --icons \
+		eza --width="$COLUMNS" --all --grid --color=always --icons \
 			--git-ignore --ignore-glob=".DS_Store" \
 			--sort=oldest --group-directories-first --no-quotes \
-			--git --long --no-user --no-permissions --no-filesize --no-time
+			--git --long --no-user --no-permissions --no-filesize --no-time \
+      "$PWD"
 	)
 	# not using --hyperlink PENDING https://github.com/eza-community/eza/issues/693
 
@@ -101,7 +102,7 @@ function _gitstatus {
 				-e $'s/ \\| Unmerged /  \e[1;31m  \e[0m /' \
 				-Ee $'s|([^/+]*)(/)|\e[0;36m\\1\e[0;33m\\2\e[0m|g' \
 				-e $'s/^\\+/\e[1;35m 󰐖\e[0m /' \
-				-e $'s/ \\|/ \e[1;30m│\033[0m/'
+				-e $'s/ \\|/ \e[1;30m│\e[0m/'
 		_separator
 	fi
 }
@@ -144,7 +145,7 @@ function _magic_enter {
 	[[ $LINES -gt $disabled_below_height ]] || return 0
 
 	# shellcheck disable=2012
-	[[ "$(eza --git-ignore "." | wc -l)" -gt 0 ]] && echo
+	[[ "$(eza --git-ignore "$PWD" | wc -l)" -gt 0 ]] && echo
 	_magic_dashboard
 }
 
