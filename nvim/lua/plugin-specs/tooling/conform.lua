@@ -19,6 +19,7 @@ return {
 			lsp_format = "first",
 		},
 		formatters_by_ft = {
+			lua = { lsp_format = "never", "stylua" }, -- FIX stylua-lsp still being a bit buggy
 			markdown = { "markdownlint", "markdown-toc", "injected" },
 			python = { "ruff_fix", "ruff_organize_imports" },
 			typescript = { "tsAddMissingImports", "tsRemoveUnusedImports", "biome-organize-imports" },
