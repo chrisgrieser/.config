@@ -22,7 +22,6 @@ local config = {
 		Slack = 30,
 		Signal = 30,
 		Highlights = 90,
-		Obsidian = 180,
 		["Alfred Preferences"] = 30,
 		["System Settings"] = 10,
 	},
