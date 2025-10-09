@@ -408,6 +408,8 @@ vim.api.nvim_create_autocmd({ "FocusGained", "BufReadPost", "TextChanged", "Inse
 local function luckyIndent(bufnr)
 	local linesToCheck = 50
 	if not vim.api.nvim_buf_is_valid(bufnr) or vim.bo[bufnr].buftype ~= "" then return end
+
+	-- don't apply if .editorconfig is in effect
 	local ec = vim.b[bufnr].editorconfig
 	if ec and (ec.indent_style or ec.indent_size or ec.tab_width) then return end
 
