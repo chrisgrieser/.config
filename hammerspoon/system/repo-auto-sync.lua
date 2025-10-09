@@ -64,7 +64,11 @@ end
 
 ---@param notifyOnSuccess boolean set to false for regularly occurring syncs
 local function syncAllGitRepos(notifyOnSuccess)
-	if repoSyncsInProgress() ~= "" then
+	local hasInternetAccess = hs.network.reachability.internet():statusString():find("R") ---@diagnostic disable-line: undefined-field
+	if not hasInternetAccess then
+		u.notify("🛜⛔ No internet connection.")
+		return
+	elseif repoSyncsInProgress() ~= "" then
 		u.notify("🔁 Sync still in progress: " .. repoSyncsInProgress())
 		return
 	end
@@ -116,8 +120,7 @@ M.caff_SleepWatcherForRepoSync = c.new(function(event)
 		or event == c.screensaverWillStop
 		or event == c.systemDidWake
 	then
-		local delay = env.isAtOffice and 10 or 0 -- spotty internet at the office
-		u.defer(delay, function()
+		u.defer(2, function()
 			syncAllGitRepos(true)
 			M.recentlyTriggered = true
 			u.defer(7, function() M.recentlyTriggered = false end)
