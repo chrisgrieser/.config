@@ -6,8 +6,8 @@ app.includeStandardAdditions = true;
 
 /** @param {string} url @return {string} */
 function httpRequest(url) {
-	const queryURL = $.NSURL.URLWithString(url);
-	const data = $.NSData.dataWithContentsOfURL(queryURL);
+	const queryUrl = $.NSURL.URLWithString(url);
+	const data = $.NSData.dataWithContentsOfURL(queryUrl);
 	return $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding).js;
 }
 
@@ -59,15 +59,15 @@ function run() {
 	const weekNum = seasons[season];
 
 	// get weekly seasonal ranking
-	const baseURL =
+	const baseUrl =
 		"https://raw.githubusercontent.com/abysswatcherbel/abysswatcherbel.github.io/refs/heads/main/docs/static/data/";
-	const weeklyURL = `${baseURL}${year}/${season}/week_${weekNum}.json`;
-	console.log("Weekly seasonal ranking URL:", weeklyURL);
+	const weeklyUrl = `${baseUrl}${year}/${season}/week_${weekNum}.json`;
+	console.log("Weekly seasonal ranking URL:", weeklyUrl);
 
 	// construct alfred items
 	let totalKarma = 0;
 
-	const response = JSON.parse(httpRequest(weeklyURL));
+	const response = JSON.parse(httpRequest(weeklyUrl));
 	/** @type {AlfredItem[]} */
 	const items = response.map((/** @type {rAnimeRanking} */ show) => {
 		totalKarma += show.karma; // NOTE side effect, but simpler this way
