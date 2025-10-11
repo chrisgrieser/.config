@@ -12,14 +12,8 @@ alias v="toggle_venv"
 #───────────────────────────────────────────────────────────────────────────────
 
 function new_venv {
-	local python="python3" # CONFIG
-
-	if [[ ! -x "$(command -v $python)" ]]; then
-		print "\e[0;33m\`$python\` not installed.\e[0m" 
-		return 1
-	fi
 	[[ -d ./.venv ]] && rm -rf ./.venv
-	"$python" -m venv ./.venv
+	python3 -m venv ./.venv
 	source ./.venv/bin/activate
 	inspect_venv
 }
@@ -27,6 +21,7 @@ function new_venv {
 function inspect_venv {
 	py_path="$(command which python3 | sed "s|^$HOME/|~/|")"
 	print "Now using: \e[1;36m$py_path\e[0m"
+	print "Python version: \e[1;36m$(python3 --version)\e[0m"
 }
 
 function _search_venv_path {

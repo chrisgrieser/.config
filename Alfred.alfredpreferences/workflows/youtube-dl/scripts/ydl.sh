@@ -5,7 +5,7 @@
 
 
 function notify {
-	./notificator --title "[yt-dlp]" --subtitle "$1" --message "$2"
+	./notificator --title "YT-DLP" --subtitle "$1" --message "$2"
 }
 
 function error_sound {
