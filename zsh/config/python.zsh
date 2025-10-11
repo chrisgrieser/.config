@@ -12,7 +12,7 @@ alias v="toggle_venv"
 #───────────────────────────────────────────────────────────────────────────────
 
 function new_venv {
-	local python="python3.13" # CONFIG
+	local python="python3" # CONFIG
 
 	if [[ ! -x "$(command -v $python)" ]]; then
 		print "\e[0;33m\`$python\` not installed.\e[0m" 
