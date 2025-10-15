@@ -57,7 +57,7 @@ M.timer_dailyBatteryCheck = hs.timer
 			if d.BatteryPercent < warnBelowPercent then
 				local msg = ("🔋 %s Battery low (%s)"):format(d.Product, d.BatteryPercent)
 				u.notify(msg)
-				u.createReminder(msg)
+				u.createReminderToday(msg)
 			end
 		end
 	end, true)

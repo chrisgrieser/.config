@@ -17,7 +17,7 @@ M.aw_spotify = aw.new(function(appName, event, app)
 
 	if M.spotify_task and M.spotify_task:isRunning() then M.spotify_task:terminate() end
 
-	-- using Alexa virtual trigger since it's more reliable than `spotify_player`
+	-- using Alexa virtual trigger since its more reliable than `spotify_player`
 	local action = event == aw.launched and "pause" or "play"
 	local alexaTrigger = os.getenv("HOME")
 		.. "/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/alexa-virtual-trigger"

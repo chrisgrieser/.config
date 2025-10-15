@@ -39,7 +39,6 @@ end
 function M.betweenTime(startHour, endHour)
 	if startHour >= 24 or endHour >= 24 or startHour < 0 or endHour < 0 then
 		error("⚠️ BetweenTime: Invalid time range")
-		return false
 	end
 	local currentHour = hs.timer.localTime() / 60 / 60
 	local goesBeyondMightnight = startHour > endHour
@@ -93,9 +92,9 @@ function M.isDarkMode() return hs.execute("defaults read -g AppleInterfaceStyle"
 function M.defer(delaySecs, callbackFn)
 	if type(delaySecs) == "number" then delaySecs = { delaySecs } end
 	for _, delay in pairs(delaySecs) do
-		M.delayIdx = (M.delayIdx or 0) + 1
-		M[M.delayIdx] = hs.timer.doAfter(delay, callbackFn):start()
-		if M.delayIdx > 30 then M.delayIdx = 1 end
+		M.defer_timer_idx = (M.defer_timer_idx or 0) + 1
+		M[M.defer_timer_idx] = hs.timer.doAfter(delay, callbackFn):start()
+		if M.defer_timer_idx > 30 then M.defer_timer_idx = 0 end
 	end
 end
 
@@ -236,11 +235,11 @@ function M.quitFullscreenAndVideoApps()
 	-- prevent the automatic quitting of audio-apps from triggering a spotify start
 	require("apps.spotify").aw_spotify:stop()
 	M.quitApps(M.videoAndAudioApps)
-	require("apps.spotify").aw_spotify:start()
+	M.defer(1, function() require("apps.spotify").aw_spotify:start() end)
 end
 
 ---@param title string
-function M.createReminder(title)
+function M.createReminderToday(title)
 	hs.osascript.javascript(([[
 		const rem = Application("Reminders");
 		const today = new Date();
