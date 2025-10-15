@@ -1540,6 +1540,8 @@
 - Open recent GitHub issues you are involved in with `ghi`.
 	+ &lt;kbd&gt;⏎&lt;/kbd&gt;: Open the issue in the browser.
 	+ &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy the issue URL.
+	+ To include issues in private repos, requires [GitHub
+	  Token](https://github.com/settings/tokens).
 - Access PRs you have opened with the keyword `gpr`.
 	+ &lt;kbd&gt;⏎&lt;/kbd&gt;: Open the PR in the browser.
 	+ &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy the link to the PR.
@@ -2230,7 +2232,7 @@ to set a hotkey to clone the repo in the frontmost browser tab</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.12.2</string>
+	<string>1.13.0</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>

@@ -112,7 +112,7 @@ M.timer_uptime = hs.timer
 		local stdout = hs.execute("uptime") or ""
 		local uptimeDays = tonumber(stdout:match("up (%d+) days,") or 0)
 		if uptimeDays > maxUptimeDays then
-			u.createReminder("🖥️ Uptime is over " .. maxUptimeDays .. " days")
+			u.createReminderToday("🖥️ Uptime is over " .. maxUptimeDays .. " days")
 		end
 	end)
 	:start()

@@ -11,22 +11,40 @@ function alfredMatcher(str) {
 	return [clean, camelCaseSeparated, str].join(" ");
 }
 
-/** @param {string} url @return {string} */
-function httpRequest(url) {
-	const queryUrl = $.NSURL.URLWithString(url);
-	const data = $.NSData.dataWithContentsOfURL(queryUrl);
-	return $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding).js;
+/**
+ * @param {string} url
+ * @param {string[]} header
+ * @return {string} response
+ */
+function httpRequestWithHeaders(url, header) {
+	let allHeaders = "";
+	for (const line of header) {
+		allHeaders += ` -H "${line}"`;
+	}
+	const curlRequest = `curl --silent --location ${allHeaders} "${url}" || true`;
+	console.log("curl command:", curlRequest);
+	return app.doShellScript(curlRequest);
 }
 
 //──────────────────────────────────────────────────────────────────────────────
 
 // biome-ignore lint/correctness/noUnusedVariables: alfred_run
 function run() {
+	// get GITHUB_TOKEN
+	const tokenShellCmd = $.getenv("github_token_shell_cmd").trim();
+	const tokenFromZshenvCmd = "test -e $HOME/.zshenv && source $HOME/.zshenv ; echo $GITHUB_TOKEN";
+	let githubToken = $.getenv("github_token_from_alfred_prefs").trim();
+	if (!githubToken && tokenShellCmd) githubToken = app.doShellScript(tokenShellCmd).trim();
+	if (!githubToken) githubToken = app.doShellScript(tokenFromZshenvCmd);
+
 	const username = $.getenv("github_username");
 
 	// DOCS https://docs.github.com/en/rest/issues/issues?apiVersion=2022-11-28#list-issues-assigned-to-the-authenticated-user--parameters
 	const apiUrl = `https://api.github.com/search/issues?q=involves:${username}&sort=updated&per_page=100`;
-	const response = httpRequest(apiUrl);
+	const headers = ["Accept: application/vnd.github.json", "X-GitHub-Api-Version: 2022-11-28"];
+	if (githubToken) headers.push(`Authorization: BEARER ${githubToken}`);
+
+	const response = httpRequestWithHeaders(apiUrl, headers);
 	if (!response) {
 		return JSON.stringify({
 			items: [{ title: "No response from GitHub.", subtitle: "Try again later.", valid: false }],
