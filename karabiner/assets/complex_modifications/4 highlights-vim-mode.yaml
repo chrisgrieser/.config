@@ -66,22 +66,32 @@ rules:
         conditions: [*highlights-app, *highlights-normal-mode]
       - type: basic
         from: { key_code: k }
-        to:
-          - mouse_key: { vertical_wheel: -50 }
+        to: # 12x up
+          - key_code: up_arrow
+          - key_code: up_arrow
+          - key_code: up_arrow
+          - key_code: up_arrow
+          - key_code: up_arrow
+          - key_code: up_arrow
+          - key_code: up_arrow
+          - key_code: up_arrow
+          - key_code: up_arrow
+          - key_code: up_arrow
+          - key_code: up_arrow
+          - key_code: up_arrow
         conditions: [*highlights-app, *highlights-normal-mode]
-        parameters:
-          to_if_held_down_threshold_milliseconds: 0
-          basic.to_if_held_down_threshold_milliseconds: 0
       # h/l: left/right scroll
       - type: basic
         from: { key_code: h }
         to:
-          - mouse_key: { horizontal_wheel: 30 }
+          # disadvantage of `mouse_key.horizontal_wheel` is that it requires
+          # holding down the key briefly to
+          - mouse_key: { horizontal_wheel: 40 }
         conditions: [*highlights-app, *highlights-normal-mode]
       - type: basic
         from: { key_code: l }
         to:
-          - mouse_key: { horizontal_wheel: -30 }
+          - mouse_key: { horizontal_wheel: -40 }
         conditions: [*highlights-app, *highlights-normal-mode]
       # J/K: up/down full page
       - type: basic
@@ -158,16 +168,8 @@ rules:
         to: [{ key_code: f }, *set-notice, *enter-insert-mode]
         conditions: [*highlights-app, *highlights-normal-mode]
       - type: basic
-        from: { key_code: h }
-        to: [{ key_code: h }, *set-notice, *enter-insert-mode]
-        conditions: [*highlights-app, *highlights-normal-mode]
-      - type: basic
         from: { key_code: i }
         to: [{ key_code: i }, *set-notice, *enter-insert-mode]
-        conditions: [*highlights-app, *highlights-normal-mode]
-      - type: basic
-        from: { key_code: l }
-        to: [{ key_code: l }, *set-notice, *enter-insert-mode]
         conditions: [*highlights-app, *highlights-normal-mode]
       - type: basic
         from: { key_code: m }
