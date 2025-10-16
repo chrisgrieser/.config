@@ -12,7 +12,7 @@
 # CONFIG
 readonly bundle_id="de.chris-grieser.highlights-notificator"
 readonly name="Highlights"
-readonly icon="/Applications/Highlights.app/Contents/Resources/AppIcon.icns"
+readonly icon="$HOME/.config/karabiner/assets/notificators/Highlights.icns"
 readonly app_location="$HOME/.cache/notificators"
 
 #───────────────────────────────────────────────────────────────────────────────
