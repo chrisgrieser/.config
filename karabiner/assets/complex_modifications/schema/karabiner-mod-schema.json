@@ -276,6 +276,16 @@
 				},
 				"software_function": {
 					"$ref": "#/definitions/SoftwareFunction"
+				},
+				"mouse_key": {
+					"type": "object",
+					"additionalProperties": false,
+					"properties": {
+						"x": { "type": "integer" },
+						"y": { "type": "integer" },
+						"horizontal_wheel": { "type": "integer" },
+						"vertical_wheel": { "type": "integer" }
+					}
 				}
 			},
 			"required": [],
