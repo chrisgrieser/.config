@@ -120,8 +120,6 @@ rules:
       - type: basic
         from:
           simultaneous: [{ pointing_button: button1 }, { pointing_button: button2 }]
-        parameters:
-          basic.simultaneous_threshold_milliseconds: 800
         # conflicts for some reason with space+dragging in the Canvas plugin
         conditions:
           - type: frontmost_application_unless
