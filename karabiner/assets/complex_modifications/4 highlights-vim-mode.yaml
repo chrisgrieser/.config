@@ -47,7 +47,7 @@ rules:
   #─────────────────────────────────────────────────────────────────────────────
   - description: "✏️ Highlights Vim Mode: Actions"
     manipulators:
-      # up/down
+      # j/k: up/down scroll
       - type: basic
         from: { key_code: j }
         to: # 12x down
@@ -66,21 +66,24 @@ rules:
         conditions: [*highlights-app, *highlights-normal-mode]
       - type: basic
         from: { key_code: k }
-        to: # 12x up
-          - key_code: up_arrow
-          - key_code: up_arrow
-          - key_code: up_arrow
-          - key_code: up_arrow
-          - key_code: up_arrow
-          - key_code: up_arrow
-          - key_code: up_arrow
-          - key_code: up_arrow
-          - key_code: up_arrow
-          - key_code: up_arrow
-          - key_code: up_arrow
-          - key_code: up_arrow
+        to:
+          - mouse_key: { vertical_wheel: -50 }
         conditions: [*highlights-app, *highlights-normal-mode]
-      # J/K: page up/down
+        parameters:
+          to_if_held_down_threshold_milliseconds: 0
+          basic.to_if_held_down_threshold_milliseconds: 0
+      # h/l: left/right scroll
+      - type: basic
+        from: { key_code: h }
+        to:
+          - mouse_key: { horizontal_wheel: 30 }
+        conditions: [*highlights-app, *highlights-normal-mode]
+      - type: basic
+        from: { key_code: l }
+        to:
+          - mouse_key: { horizontal_wheel: -30 }
+        conditions: [*highlights-app, *highlights-normal-mode]
+      # J/K: up/down full page
       - type: basic
         from: { key_code: j, modifiers: { mandatory: [shift] } }
         to:
