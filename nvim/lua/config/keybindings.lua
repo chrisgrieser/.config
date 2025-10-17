@@ -140,7 +140,7 @@ keymap("n", "zl", function()
 	local suggestions = vim.fn.spellsuggest(vim.fn.expand("<cword>"))
 	suggestions = vim.list_slice(suggestions, 1, 9)
 	vim.ui.select(suggestions, { prompt = "󰓆 Spelling suggestions" }, function(selection)
-		if selection then return end
+		if not selection then return end
 		vim.cmd.normal { '"_ciw' .. selection, bang = true }
 	end)
 end, { desc = "󰓆 Spell suggestions" })
@@ -537,7 +537,7 @@ keymap("n", "<leader>ol", function()
 	vim.notify(names, vim.log.levels.TRACE, { title = "Restarting LSPs", icon = "󰑓" })
 	vim.lsp.stop_client(clients, true)
 	vim.cmd("silent! update")
-	vim.defer_fn(vim.cmd.edit, 1000) -- wait for shutdown -> reload via `:edit` -> re-attaches LSPs
+	vim.defer_fn(vim.cmd.edit, 1000) -- wait for shutdown -> reload via `:edit` -> re-attach LSPs
 end, { desc = "󰑓 LSPs restart" })
 
 --------------------------------------------------------------------------------
