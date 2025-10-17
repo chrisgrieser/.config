@@ -25,7 +25,7 @@ vim.opt.shadafile = vim.g.iCloudSync .. "/main.shada"
 vim.opt.swapfile = false -- doesn't help and only creates useless files and notifications
 
 vim.opt.spell = false
-vim.opt.spellfile = vim.fn.stdpath("config") .. "/spellfile.add" -- needs `.add`
+vim.opt.spellfile = vim.fn.stdpath("config") .. "/spellfile.add" -- needs `.add` extension
 vim.opt.spelllang = "en_us" -- even with spellcheck disabled, still relevant for `z=`
 vim.opt.spelloptions = "camel"
 
@@ -116,7 +116,7 @@ vim.opt.report = 9001 -- disable most "x more/fewer lines" messages
 vim.opt.shortmess:append("ISs") -- no intro message, disable search count
 vim.opt.cmdheight = 0
 
--- LSP log
+-- LSP logs
 vim.env.NO_COLOR = 1 -- disable colors for the logging of some LSPs
 vim.lsp.set_log_level("ERROR")
 
@@ -202,7 +202,7 @@ vim.diagnostic.config {
 }
 
 vim.api.nvim_create_autocmd("WinNew", {
-	desc = "User: Diagnostic floats with markdown highlighting",
+	desc = "User: Use markdown highlighting in diagnostic floats",
 	callback = function()
 		vim.defer_fn(function()
 			if not vim.b.lsp_floating_preview then return end -- no lsp float
