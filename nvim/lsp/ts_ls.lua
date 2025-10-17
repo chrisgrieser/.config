@@ -3,11 +3,11 @@
 
 ---@type vim.lsp.Config
 local config = {
-	-- Do not require a `package.json` like in nvim-lspconfig default.
+	-- do not require a `package.json` like in nvim-lspconfig default.
 	root_dir = false, ---@diagnostic disable-line: assign-type-mismatch
 	root_markers = { "tsconfig.json", "jsconfig.json", "package.json", ".git" },
 
-	init_options = {
+	init_options = { -- https://github.com/typescript-language-server/typescript-language-server#initializationoptions
 		preferences = {
 			importModuleSpecifierPreference = "non-relative",
 		},
