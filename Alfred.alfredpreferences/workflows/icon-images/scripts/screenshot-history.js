@@ -36,12 +36,15 @@ function relativeDate(timestamp) {
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
-	const screenshotTempDir = "/tmp/screenshots";
-	const shellCmd = `stat -f "%Sm %z %N" -t "%Y-%m-%dT%H:%M:%S" ${screenshotTempDir}/*.png`;
+	const screenshotFolder = $.getenv("screenshot_folder");
+	const shellCmd = `stat -f "%Sm %z %N" -t "%Y-%m-%dT%H:%M:%S" ${screenshotFolder}/*.png || true`;
+	const results = app.doShellScript(shellCmd);
+	if (!results) {
+		return JSON.stringify({ items: [{ title: "No screenshots found.", valid: false }] });
+	}
 
 	/** @type {AlfredItem[]} */
-	const alfredItems = app
-		.doShellScript(shellCmd)
+	const alfredItems = results
 		.split("\r")
 		.reverse() // sort by mdate
 		.map((line) => {
