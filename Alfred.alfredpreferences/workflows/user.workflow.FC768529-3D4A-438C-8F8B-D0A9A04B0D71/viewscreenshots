@@ -1,0 +1,3 @@
+#!/bin/zsh --no-rcs
+
+[[ -n "${ocr}" ]] && ./ocr "${1}" || echo "${1}"

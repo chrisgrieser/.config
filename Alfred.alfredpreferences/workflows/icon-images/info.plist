@@ -22,7 +22,18 @@
 			</dict>
 		</array>
 		<key>0A57AF60-AF83-4456-BA6B-C5074E68B218</key>
-		<array/>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>DB04958D-077C-46BC-B90E-838C686616B0</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>365B08C4-71FA-44B3-BD68-AC921D879145</key>
 		<array>
 			<dict>
@@ -482,9 +493,9 @@
 				<key>keyword</key>
 				<string>ii</string>
 				<key>subtext</key>
-				<string>Preview.app</string>
+				<string></string>
 				<key>text</key>
-				<string>✏️ Annotate clipboard image</string>
+				<string>✏️ Annotate last screenshot</string>
 				<key>withspace</key>
 				<true/>
 			</dict>
@@ -507,7 +518,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>./scripts/annotate-image-in-clipboard.applescript</string>
+				<string>./scripts/annotate-last-screenshot.sh</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
@@ -517,6 +528,27 @@
 			<string>0A57AF60-AF83-4456-BA6B-C5074E68B218</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>{query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>DB04958D-077C-46BC-B90E-838C686616B0</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 	</array>
 	<key>readme</key>
@@ -539,7 +571,7 @@
 			<key>xpos</key>
 			<real>200</real>
 			<key>ypos</key>
-			<real>665</real>
+			<real>650</real>
 		</dict>
 		<key>1A28A029-A380-4B80-82C1-AB1863D8C0C6</key>
 		<dict>
@@ -559,18 +591,18 @@
 			<key>xpos</key>
 			<real>200</real>
 			<key>ypos</key>
-			<real>515</real>
+			<real>500</real>
 		</dict>
 		<key>3A193819-CC2F-4AC7-8AB0-EC5571B7878B</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>note</key>
-			<string>annotate image in clipboard</string>
+			<string>annotate last screenshot</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>665</real>
+			<real>650</real>
 		</dict>
 		<key>59214D8E-53BE-4690-AF5F-36B2963D544A</key>
 		<dict>
@@ -581,7 +613,7 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>515</real>
+			<real>500</real>
 		</dict>
 		<key>7CF8B97A-6865-489C-8B65-3C892683D59E</key>
 		<dict>
@@ -599,7 +631,7 @@
 			<key>xpos</key>
 			<real>360</real>
 			<key>ypos</key>
-			<real>515</real>
+			<real>500</real>
 		</dict>
 		<key>95CF671F-9E2F-4CE9-92A0-BACEF07C97C8</key>
 		<dict>
@@ -641,6 +673,17 @@
 			<key>ypos</key>
 			<real>125</real>
 		</dict>
+		<key>DB04958D-077C-46BC-B90E-838C686616B0</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>note</key>
+			<string>error</string>
+			<key>xpos</key>
+			<real>360</real>
+			<key>ypos</key>
+			<real>650</real>
+		</dict>
 		<key>E762EDDE-643D-48E5-B773-C89606259F8B</key>
 		<dict>
 			<key>colorindex</key>
@@ -681,7 +724,29 @@
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
-	<array/>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>/tmp/screenshots</string>
+				<key>filtermode</key>
+				<integer>1</integer>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>Screenshot folder</string>
+			<key>type</key>
+			<string>filepicker</string>
+			<key>variable</key>
+			<string>screenshot_folder</string>
+		</dict>
+	</array>
 	<key>version</key>
 	<string></string>
 	<key>webaddress</key>
