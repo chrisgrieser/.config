@@ -30,4 +30,5 @@ safeRequire("config.keybindings")
 
 safeRequire("personal-plugins.git-conflict")
 safeRequire("config.spellfixes")
+safeRequire("personal-plugins.treesitter-diagnostics")
 vim.schedule(function() safeRequire("personal-plugins.ui-hack") end) -- wait for loading notification plugin
