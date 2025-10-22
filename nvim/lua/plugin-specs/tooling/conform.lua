@@ -19,8 +19,8 @@ return {
 			lsp_format = "first",
 		},
 		formatters_by_ft = {
-			-- FIX stylua-lsp still being a bit buggy
-			-- lua = { lsp_format = "never", "stylua" },
+			-- FIX stylua-lsp offset bug: https://github.com/JohnnyMorganz/StyLua/issues/1045
+			lua = { lsp_format = "never", "stylua" },
 
 			markdown = { "markdownlint", "markdown-toc", "injected" },
 			python = { "ruff_fix", "ruff_organize_imports" },
