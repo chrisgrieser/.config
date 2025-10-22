@@ -2,9 +2,9 @@
 -- https://www.reddit.com/r/neovim/comments/1ocpmpu/re_treesitter_diagnostics/
 --------------------------------------------------------------------------------
 
-local config = {
-	-- many false positives in these embedded languages
-	ignoreParsers = { "comment", "luadoc" }
+local ignore = {
+	parsers = { "comment", "luadoc" }, -- many false positives in these embedded languages
+	filetypes = { "markdown" }, -- injected languages often false positives
 }
 
 --------------------------------------------------------------------------------
@@ -15,9 +15,11 @@ local ns = vim.api.nvim_create_namespace("treesitter.diagnostics")
 
 --- @param args vim.api.keyset.create_autocmd.callback_args
 local function diagnose(args)
+	-- GUARD
 	if not vim.api.nvim_buf_is_valid(args.buf) then return end
 	if not vim.diagnostic.is_enabled { bufnr = args.buf } then return end
 	if vim.bo[args.buf].buftype ~= "" then return end
+	if vim.list_contains(ignore.filetypes, vim.bo[args.buf].filetype) then return end
 
 	local diagnostics = {}
 	local parser = vim.treesitter.get_parser(args.buf, nil, { error = false })
@@ -27,7 +29,7 @@ local function diagnose(args)
 		if not trees then return end
 		parser:for_each_tree(function(tree, ltree)
 			local lang = ltree:lang()
-			if vim.list_contains(config.ignoreParsers, lang) then return end
+			if vim.list_contains(ignore.parsers, lang) then return end
 			-- only process trees containing errors
 			if tree:root():has_error() then
 				for _, node in error_query:iter_captures(tree:root(), args.buf) do
