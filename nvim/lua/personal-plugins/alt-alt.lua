@@ -50,6 +50,8 @@ end
 local function notify(msg, level, icon)
 	if not level then level = "info" end
 	local lvl = vim.log.levels[level:upper()]
+
+
 	vim.notify(msg, lvl, { title = "Alt-alt", icon = icon })
 end
 
