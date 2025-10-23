@@ -579,7 +579,7 @@ return {
 				end,
 			},
 			prompt = "  ", -- 
-			icons = { ---@diagnostic disable-line: missing-fields faulty annotation
+			icons = {
 				ui = { selected = "󰒆 " },
 				undo = { saved = "" }, -- useless, since I have auto-saving
 				git = {
