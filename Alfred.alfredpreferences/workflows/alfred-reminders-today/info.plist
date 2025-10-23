@@ -1313,8 +1313,9 @@
 	<key>readme</key>
 	<string>## Requirements
 - macOS 15 (Sequoia) or higher
-- Xcode command line tools (run `xcode-select --install` in the Terminal to
-  install them)
+- Xcode command line tools. (Alfred [automatically prompts you to install
+  them](https://www.alfredapp.com/help/kb/dependencies/), if they are not
+  available on your device.)
 
 ## Usage
 - Display reminders due today (or overdue) via the keyword `rem`. Configure the
