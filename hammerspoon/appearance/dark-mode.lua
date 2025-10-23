@@ -11,10 +11,28 @@ local function logBrightness(msg, threshold)
 	local ambientText = ("ambient: %.1f"):format(hs.brightness.ambient()) -- `%.1f` = round to 1 decimal
 	local info = threshold and ("(threshold: %d, %s)"):format(threshold, ambientText)
 		or ("(%s)"):format(ambientText)
-	print(("💡 %s %s"):format(msg, info))
+	print(("🌗 %s %s"):format(msg, info))
 end
 
 --------------------------------------------------------------------------------
+
+function M.autoSetBrightness()
+	local ambient = hs.brightness.ambient()
+	local noBrightnessSensor = ambient == -1
+	if noBrightnessSensor then return end
+
+	local target = ambient > 90 and 1
+		or ambient > 80 and 0.9
+		or ambient > 50 and 0.8
+		or ambient > 30 and 0.7
+		or ambient > 15 and 0.6
+		or ambient > 1 and 0.5
+		or 0.4
+
+	print(("💡 ambient brightness: %d -> target: %d"):format(ambient, target))
+	local iMacDisplay = require("win-management.window-utils").iMacDisplay
+	iMacDisplay:setBrightness(target)
+end
 
 -- INFO done manually to include app-specific toggling for:
 -- * System
