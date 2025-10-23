@@ -1311,8 +1311,10 @@
 		</dict>
 	</array>
 	<key>readme</key>
-	<string>## Requriements
-This workflow requires at least macOS 15.
+	<string>## Requirements
+- macOS 15 (Sequoia) or higher
+- Xcode command line tools (run `xcode-select --install` in the Terminal to
+  install them)
 
 ## Usage
 - Display reminders due today (or overdue) via the keyword `rem`. Configure the

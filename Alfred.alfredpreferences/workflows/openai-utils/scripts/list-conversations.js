@@ -49,7 +49,7 @@ function run() {
 			items: [
 				{
 					title: "1. Go to ChatGPT's data export",
-					subtitle: 'There, select "Export data"',
+					subtitle: 'select "Export data" there',
 					arg: "https://chatgpt.com/#settings/DataControls",
 				},
 				{
@@ -100,6 +100,13 @@ function run() {
 				cmd: { arg: content },
 			},
 		};
+	});
+
+	// first item: export ChatGPT history
+	alfredItems.unshift({
+		title: "🔼 Export ChatGPT history",
+		subtitle: 'select "Export data" there',
+		arg: "https://chatgpt.com/#settings/DataControls",
 	});
 
 	return JSON.stringify({ items: alfredItems });
