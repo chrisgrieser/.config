@@ -3,7 +3,7 @@
 --------------------------------------------------------------------------------
 
 local ignore = {
-	parsers = { "comment", "luadoc" }, -- many false positives in these embedded languages
+	parsers = { "comment", "luadoc", "jsdoc" }, -- many false positives in these embedded languages
 	filetypes = { "markdown" }, -- injected languages often false positives
 }
 

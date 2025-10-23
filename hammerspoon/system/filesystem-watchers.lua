@@ -91,7 +91,11 @@ M.pathw_desktop = pathw(home .. "/Desktop/", function(paths, _)
 			local targetLocation = home
 				.. "/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/llm-conversations/chatgpt.json"
 			success, errmsg = os.rename(path, targetLocation)
-			if success then u.notify("✅ ChatGPT conversations moved.") end
+			if success then
+				u.notify("✅ ChatGPT conversations moved.")
+				local parent = path:match("^.*/")
+				errmsg, success = hs.execute(("rm -rf %q"):format(parent))
+			end
 
 		-- AUTO-INSTALL OBSIDIAN ALPHA
 		elseif name:find("%.asar%.gz$") and isDownloaded then

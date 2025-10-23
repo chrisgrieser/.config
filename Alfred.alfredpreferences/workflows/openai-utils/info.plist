@@ -345,7 +345,7 @@
 			<key>xpos</key>
 			<real>515</real>
 			<key>ypos</key>
-			<real>280</real>
+			<real>310</real>
 		</dict>
 		<key>4CB433C8-9E5A-4126-B947-BDE864B99AC2</key>
 		<dict>
@@ -354,14 +354,14 @@
 			<key>xpos</key>
 			<real>225</real>
 			<key>ypos</key>
-			<real>405</real>
+			<real>435</real>
 		</dict>
 		<key>5FB5EEDF-FF6D-41A7-9C56-4864E641E9D2</key>
 		<dict>
 			<key>xpos</key>
 			<real>660</real>
 			<key>ypos</key>
-			<real>280</real>
+			<real>310</real>
 		</dict>
 		<key>6261E02D-805C-4920-BEA0-D4F39B6A8873</key>
 		<dict>
@@ -379,7 +379,7 @@
 			<key>xpos</key>
 			<real>225</real>
 			<key>ypos</key>
-			<real>280</real>
+			<real>310</real>
 		</dict>
 		<key>C79D13CD-AAE6-49E7-9BD5-8C33E2422C5F</key>
 		<dict>
@@ -395,7 +395,7 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>280</real>
+			<real>310</real>
 		</dict>
 		<key>E10230C4-C675-47BC-94C3-F2708E565938</key>
 		<dict>
@@ -415,7 +415,7 @@
 			<key>xpos</key>
 			<real>365</real>
 			<key>ypos</key>
-			<real>280</real>
+			<real>310</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
