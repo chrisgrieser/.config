@@ -100,9 +100,7 @@ end
 --------------------------------------------------------------------------------
 
 require("snacks.picker.format").cleanFile = function(item, picker)
-	item.line = nil
-	item.end_pos = nil
-	item.pos = nil
+	item.line, item.pos, item.end_pos = nil, nil, nil
 	return require("snacks.picker.format").file(item, picker)
 end
 
@@ -361,6 +359,9 @@ return {
 						filter = function(item) return vim.fs.basename(item.file) ~= "COMMIT_EDITMSG" end,
 					},
 				},
+				lsp_definitions = {
+					format = "cleanFile",
+				},
 				grep = {
 					regex = false, -- use fixed strings by default
 					cmd = "rg",
@@ -441,7 +442,7 @@ return {
 				file = {
 					filename_first = true,
 					truncate = "left",
-					min_width = 40,
+					git_status_hl = false,
 				},
 				selected = { unselected = false }, -- hide selection column when no selected items
 			},
