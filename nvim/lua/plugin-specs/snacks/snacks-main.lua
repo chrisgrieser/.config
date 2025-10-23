@@ -83,7 +83,6 @@ return {
 			win = {
 				relative = "editor",
 				backdrop = 60,
-				border = vim.o.winborder --[[@as "rounded"|"single"|"double"|"solid"]],
 				title_pos = "left",
 				width = 50,
 				row = math.ceil(vim.o.lines / 2) - 3,

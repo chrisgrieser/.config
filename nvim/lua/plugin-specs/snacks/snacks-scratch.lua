@@ -71,7 +71,6 @@ return {
 				height = 0.8,
 				wo = { signcolumn = "yes:1" },
 				zindex = 50, -- put above nvim-satellite
-				border = vim.o.winborder --[[@as "rounded"|"single"|"double"|"solid"]],
 				footer_pos = "right",
 				keys = { q = false }, -- so `q` is available as my comment operator
 				on_win = function(win)
