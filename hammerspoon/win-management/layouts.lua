@@ -21,28 +21,6 @@ local function isWorkWeek()
 	return weekday ~= "Sat" and weekday ~= "Sun"
 end
 
-local function autoSetBrightness()
-	local ambient = hs.brightness.ambient()
-	local noBrightnessSensor = ambient == -1
-	if noBrightnessSensor then return end
-	local target
-	if ambient > 100 then
-		target = 1
-	elseif ambient > 90 then
-		target = 0.9
-	elseif ambient > 30 then
-		target = 0.8
-	elseif ambient > 15 then
-		target = 0.7
-	elseif ambient > 5 then
-		target = 0.6
-	elseif ambient > 1.5 then
-		target = 0.5
-	else
-		target = 0.4
-	end
-	wu.iMacDisplay:setBrightness(target)
-end
 
 local function darkenDisplay() wu.iMacDisplay:setBrightness(0) end
 
