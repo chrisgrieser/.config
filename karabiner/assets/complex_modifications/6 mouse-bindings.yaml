@@ -23,7 +23,9 @@ rules:
           - { key_code: q, modifiers: [command] }
         conditions:
           - type: frontmost_application_unless
-            file_paths: ["/Users/.*/Library/Application Support/Steam/steamapps/common/"]
+            file_paths:
+              - "/Users/.*/Library/Application Support/Steam/steamapps/common/"
+              - "/Applications/StarCraft II/.*"
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Mouse) 4 (bottom)"
     manipulators:
@@ -105,7 +107,9 @@ rules:
           - { key_code: w, modifiers: [command] }
         conditions:
           - type: frontmost_application_unless
-            file_paths: ["/Users/.*/Library/Application Support/Steam/steamapps/common/"]
+            file_paths:
+              - "/Users/.*/Library/Application Support/Steam/steamapps/common/"
+              - "/Applications/StarCraft II/.*"
   #─────────────────────────────────────────────────────────────────────────────
   # some MX Master Models have this builtin, others do not
   - description: "(Mouse) 6: Cmd+Tab"
@@ -125,7 +129,9 @@ rules:
           - type: frontmost_application_unless
             bundle_identifiers: [md.obsidian]
           - type: frontmost_application_unless
-            file_paths: ["/Users/.*/Library/Application Support/Steam/steamapps/common/"]
+            file_paths:
+              - "/Users/.*/Library/Application Support/Steam/steamapps/common/"
+              - "/Applications/StarCraft II/.*"
         to:
           - shell_command: |
               # INFO IF SELECTION IS…

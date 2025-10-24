@@ -5,9 +5,11 @@ anchors:
   - conditions:
       - &leader-active { type: variable_if, name: LEADER_ACTIVE, value: true }
       - &leader-inactive { type: variable_unless, name: LEADER_ACTIVE, value: true }
-      - &not-steam-game 
+      - &not-game 
         type: frontmost_application_unless
-        file_paths: ["/Users/.*/Library/Application Support/Steam/steamapps/common/.*\\.app"]
+        file_paths:
+          - "/Users/.*/Library/Application Support/Steam/steamapps/common/.*\\.app"
+          - "/Applications/StarCraft II/.*"
   - to:
       - &deactivate-leader { set_variable: { name: LEADER_ACTIVE, value: false } }
       - &activate-leader { set_variable: { name: LEADER_ACTIVE, value: true } }
@@ -19,12 +21,12 @@ rules:
     manipulators:
       - type: basic
         from: { key_code: left_control }
-        conditions: [*leader-inactive, *not-steam-game]
+        conditions: [*leader-inactive, *not-game]
         to: [{ key_code: left_control }]
         to_if_alone: [*activate-leader, *set-notice] # only if alone, so it can still be used as modifier
       - type: basic
         from: { key_code: right_command }
-        conditions: [*leader-inactive, *not-steam-game]
+        conditions: [*leader-inactive, *not-game]
         to: [{ key_code: right_command }]
         to_if_alone: [*activate-leader, *set-notice] # only if alone, so it can still be used as modifier
 
