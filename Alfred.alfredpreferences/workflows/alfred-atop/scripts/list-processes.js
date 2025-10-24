@@ -23,6 +23,9 @@ function camelCaseMatch(str) {
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
+	const invertSort =
+		$.NSProcessInfo.processInfo.environment.objectForKey("invertSorting").js === "true";
+	const sortBy = $.getenv("sort_key");
 	const rerunSecs = Number.parseFloat($.getenv("rerun_s_processes"));
 	const cpuThresholdPercent = Number.parseFloat($.getenv("cpu_threshold_percent")) || 0.5;
 	const memoryThresholdMb = Number.parseFloat($.getenv("memory_threshold_mb")) || 10;
@@ -40,11 +43,11 @@ function run() {
 		.split("\r")
 		.filter((line) => line.endsWith(".app"));
 
-	// INFO command should come last, so it is not truncated and also fully
+	const sortByMemory = (sortBy === "Memory" && !invertSort) || (sortBy === "CPU" && invertSort);
+	const sortArg = sortByMemory ? "m" : "r";
+	// INFO `command=` should come last, so it is not truncated and also fully
 	// identifiable by space delimitation even with spaces in the process name
-	// (command name can contain spaces, therefore last)
-	const sort = $.getenv("sort_key") === "Memory" ? "m" : "r";
-	const shellCmd = `ps -${sort}cAo 'pid=,ppid=,%cpu=,rss=,ruser=,command='`;
+	const shellCmd = `ps -${sortArg}cAo 'pid=,ppid=,%cpu=,rss=,ruser=,command='`;
 
 	/** @type {AlfredItem[]} */
 	const processes = app
@@ -116,6 +119,10 @@ function run() {
 						valid: Boolean(isApp),
 						subtitle: isApp ? "⇧: Restart App" : "⇧: ⛔ Not an app",
 						variables: { mode: "restart app" },
+					},
+					fn: {
+						variables: { invertSorting: (!invertSort).toString() },
+						subtitle: "fn: Sort processes by " + (sortByMemory ? "CPU" : "Memory"),
 					},
 				},
 			};

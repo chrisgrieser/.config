@@ -11,8 +11,9 @@ function M.fastWarp(dir)
 		warpChars = { ")", "]", "}", '"', "'", "`", "*" },
 		patterns = {
 			word = "[%w_]+",
-			punctuationButNotBackslashOrSemi = "[^\\;%w_%s]+",
+			mostPunctuation = "[^\\;\"'`%w_%s]+",
 			semicolon = ";",
+			quote = "[\"'`]",
 			escapedChar = "\\%w",
 		},
 	}
