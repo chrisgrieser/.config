@@ -1,5 +1,3 @@
-test again
-
 ## Configurations of interest
 People tell me they find the following configurations most useful:
 - [neovim config](./nvim) (~7500 LoC)

@@ -99,13 +99,6 @@ end
 
 --------------------------------------------------------------------------------
 
-require("snacks.picker.format").cleanFile = function(item, picker)
-	item.line, item.pos, item.end_pos = nil, nil, nil
-	return require("snacks.picker.format").file(item, picker)
-end
-
---------------------------------------------------------------------------------
-
 ---@module "lazy.types"
 ---@type LazyPluginSpec
 return {
@@ -359,9 +352,6 @@ return {
 						filter = function(item) return vim.fs.basename(item.file) ~= "COMMIT_EDITMSG" end,
 					},
 				},
-				lsp_definitions = {
-					format = "cleanFile",
-				},
 				grep = {
 					regex = false, -- use fixed strings by default
 					cmd = "rg",
@@ -370,7 +360,6 @@ return {
 						("--ignore-file=" .. vim.fs.normalize("~/.config/ripgrep/ignore")),
 					},
 					layout = "big_preview",
-					format = "cleanFile",
 					win = {
 						input = {
 							keys = {

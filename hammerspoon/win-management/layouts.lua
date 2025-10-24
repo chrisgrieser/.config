@@ -30,7 +30,7 @@ local function darkenDisplay() wu.iMacDisplay:setBrightness(0) end
 ---@param shouldDarkenDisplay boolean
 local function workLayout(shouldDarkenDisplay)
 	u.defer(0.5, darkmode.autoSwitch) -- defer so ambient sensor is ready
-	if not shouldDarkenDisplay then u.defer(1, autoSetBrightness) end -- defer to adjust to mode switch
+	if not shouldDarkenDisplay then u.defer(1, darkmode.autoSetBrightness) end -- defer to adjust to mode switch
 	holeCover.update()
 	dockSwitcher("work")
 
