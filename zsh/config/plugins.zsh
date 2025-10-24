@@ -40,7 +40,7 @@ export ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=("${ZSH_AUTOSUGGEST_ACCEPT_WIDGETS[@]/vi-a
 # ZSH-HISTORY-SUBSTRING-SEARCH
 # (must be loaded *after* zsh-syntax-highlighting)
 source "$HOMEBREW_PREFIX/share/zsh-history-substring-search/zsh-history-substring-search.zsh"
-bindkey '^[[A' history-substring-search-up # arrow up
+bindkey '^[[A' history-substring-search-up   # arrow up
 bindkey '^[[B' history-substring-search-down # arrow down
 
 #───────────────────────────────────────────────────────────────────────────────
