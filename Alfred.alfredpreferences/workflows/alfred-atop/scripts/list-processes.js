@@ -107,6 +107,7 @@ function run() {
 				uid: pid, // during rerun remembers selection, but does not affect sorting
 				match: camelCaseMatch(processName + parentName + appName),
 				text: { copy: pid },
+				variables: { mode: "kill" }, // when just using `enter`
 				mods: {
 					ctrl: { variables: { mode: "killall" } },
 					cmd: { variables: { mode: "force kill" } },
@@ -142,7 +143,6 @@ function run() {
 		});
 
 	return JSON.stringify({
-		variables: { mode: "kill" },
 		skipknowledge: true, // during rerun remembers selection, but does not affect sorting
 		rerun: rerunSecs,
 		items: processes,
