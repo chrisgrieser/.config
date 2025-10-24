@@ -322,7 +322,7 @@ return {
 					win = {
 						input = {
 							keys = {
-								["<C-h>"] = { "toggle_hidden_and_ignored", mode = "i" }, -- consistent with `fzf`
+								["<C-i>"] = { "toggle_hidden_and_ignored", mode = "i" }, -- consistent with `fzf`
 								[":"] = { "complete_and_add_colon", mode = "i" },
 							},
 						},
@@ -363,7 +363,7 @@ return {
 					win = {
 						input = {
 							keys = {
-								["<C-h>"] = { "toggle_hidden_and_ignored", mode = "i" }, -- consistent with `fzf`
+								["<C-i>"] = { "toggle_hidden_and_ignored", mode = "i" }, -- consistent with `fzf`
 								["<C-r>"] = { "toggle_regex", mode = "i" },
 							},
 						},

@@ -62,10 +62,12 @@ _escape_on_empty_buffer() {
 	selected=$(
 		zsh -c "$rg_cmd" |
 			eza --stdin --color=always --icons=always --sort=oldest |
-			fzf --ansi --multi \
-				--info=inline --height="50%" \
-				--header="^H: --hidden" --scheme=path --tiebreak=length,end \
-				--bind="ctrl-j:change-header(including hidden files)+reload($rg_cmd --hidden --no-ignore --no-ignore-files --glob='!/.git/' --glob='!node_modules' --glob='!__pycache__' --glob='!.DS_Store' | eza --stdin --color=always --icons=always --sort=oldest)"
+			fzf --ansi --multi --scheme=path --tiebreak=length,end \
+				--info=inline --height="50%" --header="^I: toggle ignored" \
+				--bind="ctrl-i:change-header(including ignored files)+reload($rg_cmd \
+					--hidden --no-ignore --no-ignore-files \
+					--glob='!/.git/' --glob='!node_modules' --glob='!__pycache__' --glob='!.DS_Store' |
+					eza --stdin --color=always --icons=always --sort=oldest)"
 	)
 	zle reset-prompt
 	[[ -z "$selected" ]] && return 0
@@ -80,6 +82,11 @@ bindkey '\e' _escape_on_empty_buffer
 # SEARCH AND REPLACE VIA `rg`
 # usage: sr "search" "replace" file1 file2 file3
 function sr {
+	if [[ $# -lt 3 ]] ; then
+		echo "usage: sr 'search' 'replace' file1 file2 file3"
+		return 1
+	fi
+
 	local search="$1"
 	local replace
 	# HACK deal with annoying named capture groups (see `man rg` on `--replace`)
