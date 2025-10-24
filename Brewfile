@@ -52,19 +52,18 @@ mas "Easy CSV Editor", id: 1171346381
 # QUICKLOOK
 cask "betterzip"
 mas "iPreview", id: 1519213509
-cask "syntax-highlight" # `Peek` not available anymore https://apps.apple.com/us/app/peek-a-quick-look-extension/id1554235898?mt=12
 
 #───────────────────────────────────────────────────────────────────────────────
 
 # DEVICE-SPECIFIC INSTALLS
-computerName = `scutil --get ComputerName`
+device = `scutil --get ComputerName`
 
-if computerName.include?("Home")
+if device.include?("Home")
 	brew "yt-dlp" ; brew "ffmpeg" # `ffmpeg` recommended for `yt-dlp`
 	cask "catch"
 	cask "bettertouchtool"
 end
-if !computerName.include?("Office")
+if device.include?("Home") or device.include?("Mother")
 	cask "iina"
 	cask "steam"
 	cask "transmission"

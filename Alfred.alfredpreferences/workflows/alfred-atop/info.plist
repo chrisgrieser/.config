@@ -808,7 +808,7 @@
 				<key>fixedorder</key>
 				<false/>
 				<key>items</key>
-				<string>[{"imagefile":"78ce0450fe203f6d692a5d576d1da6cc1fe8cdcf.png","title":"Processes","arg":"processes","subtitle":"CPU, Memory, Parent Processes  –  kill processes &amp; restart apps"},{"imagefile":"56f60ed4890c3aadf8b17042498f550f2f86f1b1.png","title":"Network","arg":"network","subtitle":"download, upload"},{"imagefile":"5f6447eb3c6eb47e26123ff2a4f4ee74c71fc9b6.png","title":"Bluetooth","arg":"bluetooth","subtitle":"Battery, RSSI, Connection Status – connect &amp; disconnect"},{"imagefile":"9509d3e0105844ea2f6358086d0f275bf0e8555a.png","title":"Removable Volumes","arg":"volumes","subtitle":"Disk Space Usage – eject &amp; browse"},{"imagefile":"f08290a14dddd7ae985e18ea4f069829fbec0622.png","title":"Uptime","arg":"uptime","subtitle":"uptime, last 10 reboots"},{"imagefile":"9e5889c6e9214cf16318b4870dac435013f6f2bc.png","title":"Speedtest","arg":"speedtest","subtitle":"Speed of Internet Connection"},{"imagefile":"19492839cda7d8f0453b3aecf147594fa806a0f1.png","title":"DNS","arg":"dns","subtitle":"See &amp; Change DNS Server"}]</string>
+				<string>[{"imagefile":"78ce0450fe203f6d692a5d576d1da6cc1fe8cdcf.png","title":"Processes","arg":"processes","subtitle":"CPU, Memory, Parent Processes     ⬥     kill processes, restart apps"},{"imagefile":"56f60ed4890c3aadf8b17042498f550f2f86f1b1.png","title":"Network","arg":"network","subtitle":"download, upload"},{"imagefile":"5f6447eb3c6eb47e26123ff2a4f4ee74c71fc9b6.png","title":"Bluetooth","arg":"bluetooth","subtitle":"Battery, Connection Status     ⬥     connect, disconnect"},{"imagefile":"9509d3e0105844ea2f6358086d0f275bf0e8555a.png","title":"Removable Volumes","arg":"volumes","subtitle":"Disk Space Usage     ⬥     eject, browse"},{"imagefile":"f08290a14dddd7ae985e18ea4f069829fbec0622.png","title":"Uptime","arg":"uptime","subtitle":"uptime, last 10 reboots"},{"imagefile":"9e5889c6e9214cf16318b4870dac435013f6f2bc.png","title":"Speedtest","arg":"speedtest","subtitle":"Speed of Internet Connection"},{"imagefile":"19492839cda7d8f0453b3aecf147594fa806a0f1.png","title":"DNS","arg":"dns","subtitle":"Change DNS Server"}]</string>
 				<key>keyword</key>
 				<string>atop</string>
 				<key>matchmode</key>
@@ -1357,7 +1357,7 @@ Display mounted volumes directly via `vol`.
 
 ---
 
-`atop` has been created by [Chris Grieser](https://chris-grieser.de/).</string>
+#### Created by [Chris Grieser](https://chris-grieser.de/)   |   ⭐️ [Star on GitHub](https://github.com/chrisgrieser/alfred-atop)</string>
 	<key>uidata</key>
 	<dict>
 		<key>00B3FDB4-C94D-435D-A255-F5D1B2A6F0AD</key>

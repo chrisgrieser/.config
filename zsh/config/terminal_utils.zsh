@@ -65,10 +65,7 @@ _escape_on_empty_buffer() {
 			fzf --ansi --multi \
 				--info=inline --height="50%" \
 				--header="^H: --hidden" --scheme=path --tiebreak=length,end \
-				--bind="ctrl-h:change-header(including hidden files)+reload($rg_cmd \
-					--hidden --no-ignore --no-ignore-files \
-					--glob='!/.git/' --glob='!node_modules' --glob='!__pycache__' --glob='!.DS_Store' |
-					eza --stdin --color=always --icons=always --sort=oldest)"
+				--bind="ctrl-j:change-header(including hidden files)+reload($rg_cmd --hidden --no-ignore --no-ignore-files --glob='!/.git/' --glob='!node_modules' --glob='!__pycache__' --glob='!.DS_Store' | eza --stdin --color=always --icons=always --sort=oldest)"
 	)
 	zle reset-prompt
 	[[ -z "$selected" ]] && return 0
