@@ -275,11 +275,17 @@ nnoremap qq :toggleComment<CR>
 
 "───────────────────────────────────────────────────────────────────────────────
 "GIT
-exmap ga obsidian-git:stage-hunk
-exmap ,uh obsidian-git:reset-hunk
-exmap ,gu obsidian-git:view-file-on-github
-exmap ,gs obsidian-git:list-changed-files
-exmap ,gh obsidian-git:view-history-on-github
+exmap resetHunk obcommand obsidian-git:reset-hunk
+nnoremap ,uh :resetHunk<CR>
+
+exmap openFileOnGithub obcommand obsidian-git:view-file-on-github
+nnoremap ,gu :openFileOnGithub <CR>
+
+exmap listChangedFiles obcommand obsidian-git:list-changed-files
+nnoremap ,gs :listChangedFiles <CR>
+
+exmap viewHistoryOnGithub obcommand obsidian-git:view-history-on-github
+nnoremap ,gh :viewHistoryOnGithub <CR>
 
 "───────────────────────────────────────────────────────────────────────────────
 " LEADER MAPPINGS
@@ -338,7 +344,7 @@ nnoremap ,pi :installPlugins<CR>
 exmap openDynamicHighlightsSettings jsfile Meta/vimrc-jsfile.js { openDynamicHighlightsSettings() }
 nnoremap ,ph :openDynamicHighlightsSettings<CR>
 
-" Cycle Colorscheme
+" Cycle Colorscheme (theme)
 exmap cycleColorscheme jsfile Meta/vimrc-jsfile.js { cycleColorscheme() }
 nnoremap ,pc :cycleColorscheme<CR>
 
