@@ -1,7 +1,14 @@
 # yaml-language-server: $schema=./schema/karabiner-mod-schema.json
 title: "Mouse Bindings"
+anchors:
+  - conditions:
+      - &not-game 
+        type: frontmost_application_unless
+        file_paths:
+          - "/Users/.*/Library/Application Support/Steam/steamapps/common/"
+          - "/Applications/StarCraft II/"
+#───────────────────────────────────────────────────────────────────────────────
 rules:
-  #─────────────────────────────────────────────────────────────────────────────
   # Emulates the "Right-Click Open Link in new Background tab" Chrome extension
   - description: "(Mouse) 2 (briefly): Open link in new background tab"
     manipulators:
@@ -15,17 +22,13 @@ rules:
           - type: frontmost_application_if
             bundle_identifiers: [com.brave.Browser, com.apple.Safari]
   #─────────────────────────────────────────────────────────────────────────────
-  - description: "(Mouse) 3: Quit app (if not a Steam game)"
+  - description: "(Mouse) 3: Quit app"
     manipulators:
       - type: basic
         from: { pointing_button: button3 }
         to:
           - { key_code: q, modifiers: [command] }
-        conditions:
-          - type: frontmost_application_unless
-            file_paths:
-              - "/Users/.*/Library/Application Support/Steam/steamapps/common/"
-              - "/Applications/StarCraft II/.*"
+        conditions: [*not-game]
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Mouse) 4 (bottom)"
     manipulators:
@@ -105,11 +108,7 @@ rules:
         from: { pointing_button: button5 }
         to_if_alone:
           - { key_code: w, modifiers: [command] }
-        conditions:
-          - type: frontmost_application_unless
-            file_paths:
-              - "/Users/.*/Library/Application Support/Steam/steamapps/common/"
-              - "/Applications/StarCraft II/.*"
+        conditions: [*not-game]
   #─────────────────────────────────────────────────────────────────────────────
   # some MX Master Models have this builtin, others do not
   - description: "(Mouse) 6: Cmd+Tab"
@@ -126,12 +125,8 @@ rules:
           simultaneous: [{ pointing_button: button1 }, { pointing_button: button2 }]
         # conflicts for some reason with space+dragging in the Canvas plugin
         conditions:
-          - type: frontmost_application_unless
-            bundle_identifiers: [md.obsidian]
-          - type: frontmost_application_unless
-            file_paths:
-              - "/Users/.*/Library/Application Support/Steam/steamapps/common/"
-              - "/Applications/StarCraft II/.*"
+          - *not-game
+          - { type: frontmost_application_unless, bundle_identifiers: [md.obsidian] }
         to:
           - shell_command: |
               # INFO IF SELECTION IS…

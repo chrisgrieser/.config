@@ -80,18 +80,18 @@ do
 			icons = { A = "󰬈", B = "󰬉", C = "󰬊" },
 		},
 	}
-	local leader = "<leader>m"
+	local subLeader = "<leader>m"
 
-	if vim.g.whichkeyAddSpec then vim.g.whichkeyAddSpec { leader, group = "󰃃 Marks" } end
+	if vim.g.whichkeyAddSpec then vim.g.whichkeyAddSpec { subLeader, group = "󰃃 Marks" } end
 
 	-- stylua: ignore
-	keymap("n", leader .. "m", function() require("personal-plugins.marks").cycleMarks() end, { desc = "󰃀 Cycle marks" })
+	keymap("n", subLeader .. "m", function() require("personal-plugins.marks").cycleMarks() end, { desc = "󰃀 Cycle marks" })
 	-- stylua: ignore
-	keymap("n", leader .. "r", function() require("personal-plugins.marks").deleteAllMarks() end, { desc = "󰃆 Delete marks" })
+	keymap("n", subLeader .. "r", function() require("personal-plugins.marks").deleteAllMarks() end, { desc = "󰃆 Delete marks" })
 
 	for _, mark in pairs(require("personal-plugins.marks").config.marks) do
 		-- stylua: ignore
-		keymap("n", leader .. mark:lower(), function() require("personal-plugins.marks").setUnsetMark(mark) end, { desc = "󰃃 Set " .. mark })
+		keymap("n", subLeader .. mark:lower(), function() require("personal-plugins.marks").setUnsetMark(mark) end, { desc = "󰃃 Set " .. mark })
 	end
 end
 

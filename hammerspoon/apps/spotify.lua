@@ -11,9 +11,11 @@ M.aw_spotify = aw.new(function(appName, event, app)
 	if not env.isAtHome or env.isProjector() then return end
 	if not u.screenIsUnlocked() then return end
 	if not (event == aw.launched or event == aw.terminated) then return end
+
 	local audioApp = hs.fnutils.contains(u.videoAndAudioApps, appName)
 	local steamGames = (app:path() or ""):find("/Application Support/Steam/steamapps/common/") 
-	if not (audioApp or steamGames) then return end
+	local otherGames = (app:path() or ""):find("/Applications/StarCraft II/")
+	if not (audioApp or steamGames or otherGames) then return end
 
 	if M.spotify_task and M.spotify_task:isRunning() then M.spotify_task:terminate() end
 

@@ -8,8 +8,8 @@ anchors:
       - &not-game 
         type: frontmost_application_unless
         file_paths:
-          - "/Users/.*/Library/Application Support/Steam/steamapps/common/.*\\.app"
-          - "/Applications/StarCraft II/.*"
+          - "/Users/.*/Library/Application Support/Steam/steamapps/common/"
+          - "/Applications/StarCraft II/"
   - to:
       - &deactivate-leader { set_variable: { name: LEADER_ACTIVE, value: false } }
       - &activate-leader { set_variable: { name: LEADER_ACTIVE, value: true } }
