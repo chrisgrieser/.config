@@ -2,6 +2,14 @@
 #───────────────────────────────────────────────────────────────────────────────
 
 title: Spotify Control
+anchors:
+  - conditions:
+      - &not-game 
+        type: frontmost_application_unless
+        file_paths:
+          - "/Users/.*/Library/Application Support/Steam/steamapps/common/"
+          - "/Applications/StarCraft II/"
+#───────────────────────────────────────────────────────────────────────────────
 rules:
   - description: Spotify Media Controls
     manipulators:
@@ -9,6 +17,7 @@ rules:
         from: { key_code: f3 }
         to:
           - shell_command: open "https://open.spotify.com/"
+        conditions: [*not-game]
       #─────────────────────────────────────────────────────────────────────────
 
       # until spotify-play is fixed, use `f7` to pause.
@@ -21,6 +30,7 @@ rules:
                 "spotify-pause"
               "$HOME/.config/karabiner/assets/notificators/spotify-notificator" \
                 --title "Spotify" --message "⏸️ Pause"
+        conditions: [*not-game]
 
 
       - type: basic
@@ -31,6 +41,7 @@ rules:
                 "spotify-play"
               "$HOME/.config/karabiner/assets/notificators/spotify-notificator" \
                 --title "Spotify" --message "▶️ Resume"
+        conditions: [*not-game]
 
       - type: basic
         from: { key_code: f9 }
@@ -38,3 +49,4 @@ rules:
           - shell_command: |
               "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/alexa-virtual-trigger" \
                 "spotify-next"
+        conditions: [*not-game]
