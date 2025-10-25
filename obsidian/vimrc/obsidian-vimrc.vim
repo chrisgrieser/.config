@@ -274,6 +274,12 @@ exmap toggleComment jsfile Meta/vimrc-jsfile.js { toggleComment() }
 nnoremap qq :toggleComment<CR>
 
 "───────────────────────────────────────────────────────────────────────────────
+"GIT
+exmap ga obsidian-git:stage-hunk
+exmap ,uh obsidian-git:reset-hunk
+exmap ,gu obsidian-git:view-file-on-github
+
+"───────────────────────────────────────────────────────────────────────────────
 " LEADER MAPPINGS
 
 " enhance URL with title (same hotkey as [c]ode [a]ction in nvim)
