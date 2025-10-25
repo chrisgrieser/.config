@@ -278,6 +278,8 @@ nnoremap qq :toggleComment<CR>
 exmap ga obsidian-git:stage-hunk
 exmap ,uh obsidian-git:reset-hunk
 exmap ,gu obsidian-git:view-file-on-github
+exmap ,gs obsidian-git:list-changed-files
+exmap ,gh obsidian-git:view-history-on-github
 
 "───────────────────────────────────────────────────────────────────────────────
 " LEADER MAPPINGS
