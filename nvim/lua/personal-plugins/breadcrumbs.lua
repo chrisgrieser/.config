@@ -25,34 +25,32 @@ local config = {
 --------------------------------------------------------------------------------
 
 local function getBreadcrumbs()
-	local crumbs = {}
 	local node = vim.treesitter.get_node()
 	local prevNode
-
-	-- get nodes for the current filetype
 	local ftNodes = config.nodes[vim.bo.ft]
-	if not ftNodes then return {} end
+	if not ftNodes or not node then return {} end
 
 	-- loop upwards through the parents of the node
-	while node do
-		if node:type():match(ftNodes.object) then
+	local crumbs = {}
+	repeat
+		local isObject = node:type():match(ftNodes.object)
+		local isArray = node:type():match(ftNodes.array)
+
+		if isObject then
 			local keyName = vim.treesitter.get_node_text(node, 0):match("[%w-_]+")
 			table.insert(crumbs, 1, keyName)
-		elseif node:type():match(ftNodes.array) then
-			local indexOfChild
-			for i = 0, node:named_child_count() do
-				local child = assert(node:named_child(i))
-				if child:id() == prevNode:id() then
-					indexOfChild = i
-					break
-				end
+		elseif isArray then
+			local indexOfChild = 0
+			for _, child in ipairs(node:named_children()) do
+				if child:id() == prevNode:id() then break end
+				indexOfChild = indexOfChild + 1
 			end
-			assert(indexOfChild, "Could not find index of child")
 			table.insert(crumbs, 1, "[" .. indexOfChild .. "]")
 		end
+
 		prevNode = node
 		node = node:parent()
-	end
+	until node == nil
 
 	return crumbs
 end
