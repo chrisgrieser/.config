@@ -26,32 +26,14 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
--- empty functions to prevent errors when bisecting plugins, when lualine or
--- whichkey are disabled
----@diagnostic disable-next-line: duplicate-set-field
-vim.g.lualineAdd = function() end
----@diagnostic disable-next-line: duplicate-set-field
-vim.g.whichkeyAddSpec = function() end
+-- empty funcs to prevent errors when bisecting plugins (-> lualine / whichkey are disabled)
+vim.g.lualineAdd = function() end ---@diagnostic disable-line: duplicate-set-field
+vim.g.whichkeyAddSpec = function() end ---@diagnostic disable-line: duplicate-set-field
 
 --------------------------------------------------------------------------------
 
--- organize all specs in subfolders
-local specDir = vim.fn.stdpath("config") .. "/lua/plugin-specs"
-local base = vim.fs.basename(specDir)
-local specImports = vim.iter(vim.fs.dir(specDir))
-	:map(function(name, type)
-		if type == "directory" then return { import = base .. "." .. name } end
-		if vim.endswith(name, ".lua") then
-			vim.schedule(function()
-				local msg = "Only directories are allowed in " .. specDir
-				vim.notify(msg, vim.log.levels.WARN, { title = "lazy.nvim", timeout = false })
-			end)
-		end
-	end)
-	:totable()
-
 require("lazy").setup {
-	spec = specImports,
+	spec = "plugin-specs",
 	defaults = { lazy = true },
 	lockfile = vim.fn.stdpath("config") .. "/.lazy-lock.json", -- make lockfile hidden
 	dev = {

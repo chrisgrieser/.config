@@ -1,6 +1,8 @@
 local a = {
 	fff = 1,
-	eee = 1,
+	eee = {
+		ddd = 1,
+	},
 	ggg = 1,
 }
 

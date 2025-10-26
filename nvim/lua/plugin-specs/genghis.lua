@@ -1,5 +1,3 @@
----@module "lazy.types"
----@type LazyPluginSpec
 return {
 	"chrisgrieser/nvim-genghis",
 	init = function()

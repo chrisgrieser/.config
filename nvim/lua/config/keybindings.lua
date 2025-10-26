@@ -192,6 +192,16 @@ end, { desc = "󰩫 Exit snippet", expr = true })
 -- stylua: ignore
 keymap("n", "<leader>yb", function() require("personal-plugins.breadcrumbs").copy() end, { desc = "󰳮 breadcrumbs" })
 
+keymap("n", "<leader>y:", function()
+	local lastExcmd = vim.fn.getreg(":"):gsub("^= ?", ""):gsub("^lua ", "")
+	if lastExcmd == "" then
+		vim.notify("No last ex-cmd", vim.log.levels.WARN, { icon = "󰅍" })
+	else
+		vim.fn.setreg("+", lastExcmd)
+		vim.notify(lastExcmd, nil, { title = "Copied", icon = "󰅍" })
+	end
+end, { desc = "󰘳 Last ex-cmd" })
+
 -- STICKY YANK
 do
 	keymap({ "n", "x" }, "y", function()
