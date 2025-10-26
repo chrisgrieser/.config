@@ -1,5 +1,4 @@
 -- DOCS https://github.com/folke/snacks.nvim/blob/main/docs/notifier.md#%EF%B8%8F-config
----@module "snacks"
 --------------------------------------------------------------------------------
 
 ---@param idx number|"last"
@@ -10,7 +9,7 @@ local function openNotif(idx)
 
 	-- get notification
 	if idx == "last" then idx = 1 end
-	local history = Snacks.notifier.get_history {
+	local history = require("snacks").notifier.get_history {
 		filter = function(notif) return notif.level ~= "trace" end,
 		reverse = true,
 	}
@@ -20,7 +19,7 @@ local function openNotif(idx)
 		return
 	end
 	local notif = assert(history[idx], "Notification not found.")
-	Snacks.notifier.hide(notif.id)
+	require("snacks").notifier.hide(notif.id)
 
 	-- win properties
 	local bufnr = vim.api.nvim_create_buf(false, true)
@@ -39,7 +38,7 @@ local function openNotif(idx)
 	local footer = vim.trim(indexStr .. "   " .. moreLines)
 
 	-- create win with snacks API
-	Snacks.win {
+	require("snacks").win {
 		relative = "editor",
 		position = "float",
 		buf = bufnr,
@@ -81,10 +80,14 @@ end
 return {
 	"folke/snacks.nvim",
 	keys = {
-		{ "<Esc>", function() Snacks.notifier.hide() end, desc = "󰎟 Dismiss notification" },
+		{
+			"<Esc>",
+			function() require("snacks").notifier.hide() end,
+			desc = "󰎟 Dismiss notification",
+		},
 		{ "<leader>in", function() openNotif("last") end, desc = "󰎟 Last notification" },
 		-- stylua: ignore
-		{ "<leader>iN", function() Snacks.picker.notifications() end, desc = "󰎟 Notification history" },
+		{ "<leader>iN", function() require("snacks").picker.notifications() end, desc = "󰎟 Notification history" },
 	},
 	opts = {
 		picker = {

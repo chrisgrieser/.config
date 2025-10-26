@@ -7,7 +7,7 @@
 local function importLuaModule()
 	local function import(text) return vim.trim(text:gsub(".-:", "")) end
 
-	Snacks.picker.grep_word {
+	require("snacks").picker.grep_word {
 		title = "󰢱 Import module",
 		cmd = "rg",
 		args = { "--only-matching" },
@@ -26,7 +26,7 @@ local function importLuaModule()
 		format = function(item, _picker) -- only display the grepped line
 			local out = {}
 			local line = item.line:gsub("^local ", "")
-			Snacks.picker.highlight.format(item, line, out)
+			require("snacks").picker.highlight.format(item, line, out)
 			return out
 		end,
 		confirm = function(picker, item) -- insert the grepped line below the current one
@@ -41,7 +41,7 @@ end
 
 local function betterFileOpen()
 	local changedFiles = {}
-	local gitDir = Snacks.git.get_root()
+	local gitDir = require("snacks").git.get_root()
 	if gitDir then
 		local args = { "git", "status", "--porcelain", "--ignored", "." }
 		local gitStatus = vim.system(args):wait().stdout
@@ -57,20 +57,20 @@ local function betterFileOpen()
 	end
 
 	local currentFile = vim.api.nvim_buf_get_name(0)
-	Snacks.picker.files {
+	require("snacks").picker.files {
 		title = " " .. vim.fs.basename(vim.uv.cwd()),
 		-- exclude the current file
-		-- transform = function(item, _ctx)
-		-- 	local itemPath = Snacks.picker.util.path(item)
-		-- 	if itemPath == currentFile then return false end
-		-- end,
-		-- -- add git status and hidden status as highlights
-		-- format = function(item, picker)
-		-- 	local itemPath = Snacks.picker.util.path(item)
-		-- 	item.status = changedFiles[itemPath]
-		-- 	if vim.startswith(item.file, ".") then item.status = "!!" end -- hidden files
-		-- 	return require("snacks.picker.format").file(item, picker)
-		-- end,
+		transform = function(item, _ctx)
+			local itemPath = require("snacks").picker.util.path(item)
+			if itemPath == currentFile then return false end
+		end,
+		-- add git status and hidden status as highlights
+		format = function(item, picker)
+			local itemPath = require("snacks").picker.util.path(item)
+			item.status = changedFiles[itemPath]
+			if vim.startswith(item.file, ".") then item.status = "!!" end -- hidden files
+			return require("snacks.picker.format").file(item, picker)
+		end,
 	}
 end
 
@@ -79,7 +79,7 @@ local function browseProject()
 
 	local function browse(project)
 		local path = vim.fs.joinpath(projectsFolder, project)
-		Snacks.picker.files { title = " " .. project, cwd = path }
+		require("snacks").picker.files { title = " " .. project, cwd = path }
 	end
 	local projects = vim.iter(vim.fs.dir(projectsFolder)):fold({}, function(acc, item, type)
 		if type == "directory" then table.insert(acc, item) end
@@ -104,22 +104,30 @@ return {
 	keys = {
 		-- FILES
 		{ "go", betterFileOpen, desc = " Open files" },
-		{ "gt", function() Snacks.picker.explorer() end, desc = "󰙅 File tree" },
+		{ "gt", function() require("snacks").picker.explorer() end, desc = "󰙅 File tree" },
 		{ "gP", browseProject, desc = " Project" },
 
 		-- `nowait` due to nvim default mappings starting with `gr`
-		{ "gr", function() Snacks.picker.recent() end, desc = "󰋚 Recent files", nowait = true },
+		{
+			"gr",
+			function() require("snacks").picker.recent() end,
+			desc = "󰋚 Recent files",
+			nowait = true,
+		},
 		{
 			"g,",
 			function()
-				Snacks.picker.files { cwd = vim.fn.stdpath("config"), title = " nvim config" }
+				require("snacks").picker.files {
+					cwd = vim.fn.stdpath("config"),
+					title = " nvim config",
+				}
 			end,
 			desc = " nvim config",
 		},
 		{
 			"gp",
 			function()
-				Snacks.picker.files {
+				require("snacks").picker.files {
 					title = "󰈮 Local plugins",
 					cwd = vim.fn.stdpath("data") .. "/lazy",
 					exclude = { "*/tests/*", "*.toml", "*.tmux", "*.txt" },
@@ -133,42 +141,67 @@ return {
 		--------------------------------------------------------------------------
 		-- GREP
 
-		{ "gl", function() Snacks.picker.grep() end, desc = "󰛢 Grep" },
+		{ "gl", function() require("snacks").picker.grep() end, desc = "󰛢 Grep" },
 		{ "<leader>ci", importLuaModule, ft = "lua", desc = "󰢱 Import module" },
 
 		--------------------------------------------------------------------------
 		-- LSP
 
-		{ "gf", function() Snacks.picker.lsp_references() end, desc = "󰈿 References" },
-		{ "gd", function() Snacks.picker.lsp_definitions() end, desc = "󰈿 Definitions" },
-		{ "gD", function() Snacks.picker.lsp_type_definitions() end, desc = "󰜁 Type definitions" },
+		{ "gf", function() require("snacks").picker.lsp_references() end, desc = "󰈿 References" },
+		{
+			"gd",
+			function() require("snacks").picker.lsp_definitions() end,
+			desc = "󰈿 Definitions",
+		},
+		{
+			"gD",
+			function() require("snacks").picker.lsp_type_definitions() end,
+			desc = "󰜁 Type definitions",
+		},
 
 		-- `lsp_symbols` tends to too much clutter like anonymous function
-		{ "gs", function() Snacks.picker.treesitter() end, desc = "󰐅 Treesitter symbols" },
+		{
+			"gs",
+			function() require("snacks").picker.treesitter() end,
+			desc = "󰐅 Treesitter symbols",
+		},
 		-- treesitter does not work for markdown, so using LSP symbols here
-		{ "gs", function() Snacks.picker.lsp_symbols() end, ft = "markdown", desc = "󰽛 Headings" },
+		{
+			"gs",
+			function() require("snacks").picker.lsp_symbols() end,
+			ft = "markdown",
+			desc = "󰽛 Headings",
+		},
 
 		-- stylua: ignore
-		{ "gw", function() Snacks.picker.lsp_workspace_symbols() end, desc = "󰒕 Workspace symbols" },
-		{ "g!", function() Snacks.picker.diagnostics() end, desc = "󰋼 Workspace diagnostics" },
+		{ "gw", function() require("snacks").picker.lsp_workspace_symbols() end, desc = "󰒕 Workspace symbols" },
+		{
+			"g!",
+			function() require("snacks").picker.diagnostics() end,
+			desc = "󰋼 Workspace diagnostics",
+		},
 
 		--------------------------------------------------------------------------
 		-- GIT
 
-		{ "<leader>gb", function() Snacks.picker.git_branches() end, desc = "󰗲 Branches" },
-		{ "<leader>gs", function() Snacks.picker.git_status() end, desc = "󰗲 Status" },
-		{ "<leader>gl", function() Snacks.picker.git_log() end, desc = "󰗲 Log" },
+		{
+			"<leader>gb",
+			function() require("snacks").picker.git_branches() end,
+			desc = "󰗲 Branches",
+		},
+		{ "<leader>gs", function() require("snacks").picker.git_status() end, desc = "󰗲 Status" },
+		{ "<leader>gl", function() require("snacks").picker.git_log() end, desc = "󰗲 Log" },
 
 		-- TEMP replacement for tinygit's `interactiveStaging`
 		{
 			"<leader>ga",
 			function()
-				Snacks.picker.git_diff {
+				require("snacks").picker.git_diff {
 					layout = "big_preview",
 					confirm = function(picker, item)
 						-- FIX snacks' `confirm` not working when cwd != git root
 						picker:close()
-						local gitDir = Snacks.git.get_root()
+						local gitDir = require("snacks").git.get_root()
 						local path = (gitDir .. "/" .. item.file):gsub("/", "\\/") -- escape slashes for `:edit`
 						local lnum = item.pos[1] + 3 -- +3 since pos is start of diff, not hunk
 						vim.cmd(("edit +%d %s"):format(lnum, path))
@@ -205,29 +238,50 @@ return {
 		--------------------------------------------------------------------------
 		-- INSPECT
 
-		{ "<leader>ih", function() Snacks.picker.highlights() end, desc = " Highlights" },
-		{ "<leader>iv", function() Snacks.picker.help() end, desc = "󰋖 Vim help" },
-		{ "<leader>is", function() Snacks.picker.pickers() end, desc = "󰗲 Snacks pickers" },
-		{ "<leader>ik", function() Snacks.picker.keymaps() end, desc = "󰌌 Keymaps (global)" },
+		{ "<leader>iv", function() require("snacks").picker.help() end, desc = "󰋖 Vim help" },
+		{
+			"<leader>ih",
+			function() require("snacks").picker.highlights() end,
+			desc = " Highlights",
+		},
+		{
+			"<leader>is",
+			function() require("snacks").picker.pickers() end,
+			desc = "󰗲 Snacks pickers",
+		},
+		{
+			"<leader>ik",
+			function() require("snacks").picker.keymaps() end,
+			desc = "󰌌 Keymaps (global)",
+		},
 		{
 			"<leader>iK",
-			function() Snacks.picker.keymaps { global = false, title = "󰌌 Keymaps (buffer)" } end,
+			function()
+				require("snacks").picker.keymaps { global = false, title = "󰌌 Keymaps (buffer)" }
+			end,
 			desc = "󰌌 Keymaps (buffer)",
 		},
 
 		--------------------------------------------------------------------------
 		-- MISC
 
-		{ "<leader>pc", function() Snacks.picker.colorschemes() end, desc = " Colorschemes" },
-		{ "<leader>ms", function() Snacks.picker.marks() end, desc = "󰃁 Select mark" },
-		{ "<leader>ut", function() Snacks.picker.undo() end, desc = "󰋚 Undo tree" },
-		{ "<leader>qq", function() Snacks.picker.qflist() end, desc = " Search qf-list" },
+		{
+			"<leader>pc",
+			function() require("snacks").picker.colorschemes() end,
+			desc = " Colorschemes",
+		},
+		{ "<leader>ms", function() require("snacks").picker.marks() end, desc = "󰃁 Select mark" },
+		{ "<leader>ut", function() require("snacks").picker.undo() end, desc = "󰋚 Undo tree" },
+		{
+			"<leader>qq",
+			function() require("snacks").picker.qflist() end,
+			desc = " Search qf-list",
+		},
 		-- stylua: ignore
-		{ "<C-.>", function() Snacks.picker.icons() end, mode = { "n", "i" }, desc = "󱗿 Icon picker" },
-		{ "g.", function() Snacks.picker.resume() end, desc = "󰗲 Resume" },
+		{ "<C-.>", function() require("snacks").picker.icons() end, mode = { "n", "i" }, desc = "󱗿 Icon picker" },
+		{ "g.", function() require("snacks").picker.resume() end, desc = "󰗲 Resume" },
 	},
 	opts = {
-		---@type snacks.picker.Config
 		picker = {
 			sources = {
 				undo = {
@@ -329,7 +383,6 @@ return {
 				},
 				recent = {
 					layout = "small_no_preview",
-					---@type snacks.picker.filter.Config
 					filter = {
 						paths = { [vim.g.iCloudSync] = false }, -- e.g., scratch buffers
 						filter = function(item) return vim.fs.basename(item.file) ~= "COMMIT_EDITMSG" end,

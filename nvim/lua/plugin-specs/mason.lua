@@ -73,7 +73,7 @@ local function enableLsps()
 	vim.lsp.enable(nonMasonLsps)
 end
 
----@param pack Package
+---@param pack { name: string, install: function }
 ---@param version? string if provided, updates to that version
 local function installOrUpdate(pack, version)
 	local preMsg = version and ("[%s] updating to %s…"):format(pack.name, version)
