@@ -15,7 +15,7 @@
   "mini.operators": { "branch": "main", "commit": "1d0d1e1570e5bd22e6df3bcb068d0a2ac0d30710" },
   "neocodeium": { "branch": "main", "commit": "bfe790d78e66adaa95cb50a8c75c64a752336e9c" },
   "nightfox.nvim": { "branch": "main", "commit": "ba47d4b4c5ec308718641ba7402c143836f35aa9" },
-  "nvim-chainsaw": { "branch": "main", "commit": "88f6f44bc6beb418f8697407adfad1c8ecd439d6" },
+  "nvim-chainsaw": { "branch": "main", "commit": "33c46b6c70c611696ed5e4287f9e878605ebac18" },
   "nvim-dap": { "branch": "master", "commit": "6782b097af2417a4c3e33849b0a26ae2188bd7ea" },
   "nvim-dap-virtual-text": { "branch": "master", "commit": "fbdb48c2ed45f4a8293d0d483f7730d24467ccb6" },
   "nvim-genghis": { "branch": "main", "commit": "b9487d6c4ccdecf3c7cd4e3e7107b42c65e20106" },

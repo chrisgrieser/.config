@@ -35,14 +35,20 @@ local function getBreadcrumbs()
 	repeat
 		local isObject = node:type():match(ftNodes.object)
 		local isArray = node:type():match(ftNodes.array)
-		-- exception, since lua objects and arrays are both named "field"
+
+		-- exception, since lua objects & arrays are both named tables
 		if vim.bo.ft == "lua" and #node:field("name") == 0 then isObject = false end
 
 		if isObject then
 			local keyName = vim.treesitter.get_node_text(node, 0):match("[%w-_]+")
 			table.insert(crumbs, 1, keyName)
 		elseif isArray then
-			local indexOfChild = 0
+			local indexOfChild = vim.bo.ft == "lua" and 1 or 0
+			if vim.bo.ft == "lua" then
+				prevNode = node
+				node = node:parent()
+				if not node then break end
+			end
 			local prevId = prevNode and prevNode:id() or -1
 			for _, child in ipairs(node:named_children()) do
 				if child:id() == prevId then break end

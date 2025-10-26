@@ -1,6 +1,5 @@
 -- vim: foldlevel=3
 -- DOCS https://github.com/folke/snacks.nvim/blob/main/docs/picker.md
----@module "snacks"
 --------------------------------------------------------------------------------
 
 -- lightweight version of `telescope-import.nvim`
@@ -359,7 +358,7 @@ return {
 					win = {
 						input = {
 							keys = {
-								["<C-i>"] = { "toggle_hidden_and_ignored", mode = "i" }, -- consistent with `fzf`
+								["<C-a>"] = { "toggle_hidden_and_ignored", mode = "i" }, -- consistent with `fzf`
 								[":"] = { "complete_and_add_colon", mode = "i" },
 							},
 						},
