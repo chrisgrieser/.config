@@ -2,8 +2,6 @@
 -- palette: https://github.com/EdenEast/nightfox.nvim/blob/main/usage.md#palette
 --------------------------------------------------------------------------------
 
----@module "lazy.types"
----@type LazyPluginSpec
 return {
 	"EdenEast/nightfox.nvim",
 	priority = 1000,

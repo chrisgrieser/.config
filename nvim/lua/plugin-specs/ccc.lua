@@ -1,5 +1,3 @@
----@module "lazy.types"
----@type LazyPluginSpec
 return {
 	"uga-rosa/ccc.nvim",
 	cmd = { "CccPick", "CccConvert" },

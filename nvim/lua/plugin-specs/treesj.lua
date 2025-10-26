@@ -1,8 +1,6 @@
 -- DOCS https://github.com/Wansmer/treesj?tab=readme-ov-file#basic-node
 --------------------------------------------------------------------------------
 
----@module "lazy.types"
----@type LazyPluginSpec
 return {
 	"Wansmer/treesj",
 	keys = {

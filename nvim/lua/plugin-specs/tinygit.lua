@@ -1,5 +1,3 @@
----@module "lazy.types"
----@type LazyPluginSpec
 return {
 	"chrisgrieser/nvim-tinygit",
 	event = "VeryLazy", -- load for status line component

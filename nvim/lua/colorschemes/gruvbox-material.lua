@@ -1,8 +1,6 @@
 -- DOCS https://github.com/sainnhe/gruvbox-material/blob/master/doc/gruvbox-material.txt#L144
 --------------------------------------------------------------------------------
 
----@module "lazy.types"
----@type LazyPluginSpec
 return {
 	"sainnhe/gruvbox-material",
 	priority = 1000,

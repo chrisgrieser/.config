@@ -7,8 +7,6 @@ local function select(textobj)
 	end
 end
 
----@module "lazy.types"
----@type LazyPluginSpec
 return {
 	"nvim-treesitter/nvim-treesitter-textobjects",
 	dependencies = "nvim-treesitter/nvim-treesitter",

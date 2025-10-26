@@ -53,8 +53,6 @@ local function spinnerNotificationWhileRequest()
 	})
 end
 
----@module "lazy.types"
----@type LazyPluginSpec
 local ccSpec = {
 	"olimorris/codecompanion.nvim",
 	cmd = { "CodeCompanion", "CodeCompanionChat" },

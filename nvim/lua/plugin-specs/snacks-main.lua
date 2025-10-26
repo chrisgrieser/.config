@@ -2,8 +2,6 @@
 ---@module "snacks"
 --------------------------------------------------------------------------------
 
----@module "lazy.types"
----@type LazyPluginSpec
 return {
 	"folke/snacks.nvim",
 	event = "UIEnter",

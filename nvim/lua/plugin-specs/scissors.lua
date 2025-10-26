@@ -1,5 +1,3 @@
----@module "lazy.types"
----@type LazyPluginSpec
 return {
 	"chrisgrieser/nvim-scissors",
 	init = function() vim.g.whichkeyAddSpec { "<leader>n", group = "󰩫 Snippets" } end,

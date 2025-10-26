@@ -47,8 +47,6 @@ end
 
 --------------------------------------------------------------------------------
 
----@module "lazy.types"
----@type LazyPluginSpec
 return {
 	"folke/snacks.nvim",
 	keys = {
