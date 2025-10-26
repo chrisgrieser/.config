@@ -2,6 +2,10 @@ local M = {}
 --------------------------------------------------------------------------------
 
 local config = {
+	filetypes = {
+		"json",
+		"yaml",
+	},
 	objectTypes = {
 		"pair", -- json
 		"block_mapping_pair", -- yaml
