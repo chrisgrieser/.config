@@ -60,17 +60,17 @@ local function betterFileOpen()
 	Snacks.picker.files {
 		title = " " .. vim.fs.basename(vim.uv.cwd()),
 		-- exclude the current file
-		transform = function(item, _ctx)
-			local itemPath = Snacks.picker.util.path(item)
-			if itemPath == currentFile then return false end
-		end,
-		-- add git status and hidden status as highlights
-		format = function(item, picker)
-			local itemPath = Snacks.picker.util.path(item)
-			item.status = changedFiles[itemPath]
-			if vim.startswith(item.file, ".") then item.status = "!!" end -- hidden files
-			return require("snacks.picker.format").file(item, picker)
-		end,
+		-- transform = function(item, _ctx)
+		-- 	local itemPath = Snacks.picker.util.path(item)
+		-- 	if itemPath == currentFile then return false end
+		-- end,
+		-- -- add git status and hidden status as highlights
+		-- format = function(item, picker)
+		-- 	local itemPath = Snacks.picker.util.path(item)
+		-- 	item.status = changedFiles[itemPath]
+		-- 	if vim.startswith(item.file, ".") then item.status = "!!" end -- hidden files
+		-- 	return require("snacks.picker.format").file(item, picker)
+		-- end,
 	}
 end
 
@@ -106,18 +106,9 @@ return {
 		{ "go", betterFileOpen, desc = " Open files" },
 		{ "gt", function() Snacks.picker.explorer() end, desc = "󰙅 File tree" },
 		{ "gP", browseProject, desc = " Project" },
-		{
-			"gr",
-			function()
-				-- HACK since `.stdpath("data")` cannot be overridden with nil, we
-				-- need to remove it from the default settings itself
-				require("snacks.picker.config.sources").recent.filter.paths[vim.fn.stdpath("data")] =
-					nil
-				Snacks.picker.recent()
-			end,
-			desc = "󰋚 Recent files",
-			nowait = true, -- nvim default mappings starting with `gr`
-		},
+
+		-- `nowait` due to nvim default mappings starting with `gr`
+		{ "gr", function() Snacks.picker.recent() end, desc = "󰋚 Recent files", nowait = true },
 		{
 			"g,",
 			function()
@@ -422,7 +413,7 @@ return {
 			formatters = {
 				file = {
 					filename_first = true,
-					truncate = "left",
+					-- truncate = "left",
 					git_status_hl = true,
 				},
 				selected = { unselected = false }, -- hide selection column when no selected items

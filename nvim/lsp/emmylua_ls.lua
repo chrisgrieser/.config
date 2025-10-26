@@ -12,7 +12,7 @@ return {
 		Lua = {
 			diagnostics = {
 				disable = {
-					-- "unnecessary-if", -- buggy rule
+					"unnecessary-if", -- buggy rule
 				},
 			},
 			completion = {

@@ -3,7 +3,7 @@ vim.g.localRepos = vim.env.HOME .. "/Developer"
 vim.g.iCloudSync = vim.env.HOME
 	.. "/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/nvim-data"
 
-vim.g.useEmmyluaLsp = true
+vim.g.useEmmyluaLsp = false
 
 -- names need to match `lua/colorschemes/{name}.lua` & name for `colorscheme:`
 vim.g.lightColor = "dawnfox"
@@ -152,7 +152,7 @@ vim.opt.fillchars:append {
 --------------------------------------------------------------------------------
 -- DIAGNOSTICS
 
-vim.diagnostic.config {
+vim.diagnostic.config({
 	severity_sort = true,
 	signs = {
 		text = { "󰅚 ", " ", "󰋽 ", "󰌶 " }, -- Error, Warn, Info, Hint
@@ -199,7 +199,7 @@ vim.diagnostic.config {
 			"LspDetach", -- fix window persisting when restarting LSP
 		},
 	},
-}
+})
 
 vim.api.nvim_create_autocmd("WinNew", {
 	desc = "User: Use markdown highlighting in diagnostic floats",

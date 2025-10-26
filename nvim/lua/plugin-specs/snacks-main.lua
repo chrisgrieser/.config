@@ -6,6 +6,9 @@ return {
 	"folke/snacks.nvim",
 	event = "UIEnter",
 
+	-- TEMP
+	commit = "8af2c531a3a3997d9e8a1afd79d917d4e10ae47b",
+
 	config = function(_, opts)
 		require("snacks").setup(opts)
 
