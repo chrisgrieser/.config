@@ -1,11 +1,11 @@
 # DOCS https://docs.brew.sh/Manpage#environment
 #───────────────────────────────────────────────────────────────────────────────
 export HOMEBREW_BUNDLE_FILE="$HOME/.config/Brewfile"
-export HOMEBREW_EDITOR="open"           # open in default macOS text editor
+export HOMEBREW_EDITOR="open" # open in default macOS text editor
 
 export HOMEBREW_CASK_OPTS="--no-quarantine"
 export HOMEBREW_UPGRADE_GREEDY_CASKS="obsidian" # to also update installer version
-export HOMEBREW_DISPLAY_INSTALL_TIMES=1 # also serves as summary what was installed
+export HOMEBREW_DISPLAY_INSTALL_TIMES=1         # also serves as summary what was installed
 export HOMEBREW_DOWNLOAD_CONCURRENCY="auto"
 export HOMEBREW_NO_ANALYTICS=1
 export HOMEBREW_NO_ENV_HINTS=1
@@ -27,12 +27,12 @@ function _pretty_header() {
 }
 
 function update() {
+	export HOMEBREW_COLOR=1
 	_pretty_header "brew update" "no-line-break"
 	brew update # update homebrew itself
 
 	_pretty_header "brew bundle install"
 	if ! brew bundle check --no-upgrade &> /dev/null; then
-		export HOMEBREW_COLOR=1                      # force color when piping output
 		brew bundle install --verbose --no-upgrade | # `--verbose` shows progress
 			grep --invert-match --extended-regexp "^Using |^Skipping install of "
 	else
