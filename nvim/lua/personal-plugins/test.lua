@@ -1,9 +1,12 @@
 local a = {
 	fff = 1,
-	eee = {
-		ddd = 1,
+	ggg = {
+		1,
+		2,
+		aaaa = {
+			"sss"
+		}
 	},
-	ggg = 1,
 }
 
 local b = {
