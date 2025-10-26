@@ -6,9 +6,6 @@ return {
 			library = {
 				-- luvit types when `vim.uv` is found
 				{ path = "${3rd}/luv/library", words = { "vim%.uv" } },
-
-				-- global debugging function `Chainsaw`
-				{ path = "nvim-chainsaw/lua/chainsaw/nvim-debug.lua", words = { "Chainsaw" } },
 			},
 		},
 	},

@@ -1,7 +1,5 @@
 -- DOCS https://github.com/folke/snacks.nvim/blob/main/docs/scratch.md
 --------------------------------------------------------------------------------
----@module "snacks"
---------------------------------------------------------------------------------
 
 ---@param self { buf: number } passed by snacks
 ---@param cli string|string[]
@@ -25,7 +23,6 @@ end
 
 ---@param cli1 string|string[]
 ---@param cli2 string|string[]|nil
----@return snacks.win.Keys keymap
 local function createRunKeymap(cli1, cli2)
 	local config = { keys = {} }
 	local name1 = type(cli1) == "string" and cli1 or cli1[1]
@@ -50,11 +47,14 @@ end
 return {
 	"folke/snacks.nvim",
 	keys = {
-		{ "<leader>es", function() Snacks.scratch() end, desc = " Scratch buffer" },
-		{ "<leader>el", function() Snacks.scratch.select() end, desc = " List scratches" },
+		{ "<leader>es", function() require("snacks").scratch() end, desc = " Scratch buffer" },
+		{
+			"<leader>el",
+			function() require("snacks").scratch.select() end,
+			desc = " List scratches",
+		},
 	},
 	opts = {
-		---@type snacks.scratch.Config
 		scratch = {
 			ft = function()
 				if vim.bo.buftype ~= "" or vim.bo.ft == "" then return "markdown" end
@@ -73,7 +73,7 @@ return {
 				keys = { q = false }, -- so `q` is available as my comment operator
 				on_win = function(win)
 					-- FIX display of scratchpad title (partially hardcoded when setting icon, etc.)
-					local icon = Snacks.util.icon(vim.bo[win.buf].ft, "filetype")
+					local icon = require("snacks").util.icon(vim.bo[win.buf].ft, "filetype")
 					local title = (" %s Scratch "):format(icon)
 					vim.api.nvim_win_set_config(win.win, { title = title })
 				end,

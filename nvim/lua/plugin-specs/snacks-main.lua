@@ -1,13 +1,9 @@
 -- DOCS https://github.com/folke/snacks.nvim#-features
----@module "snacks"
 --------------------------------------------------------------------------------
 
 return {
 	"folke/snacks.nvim",
 	event = "UIEnter",
-
-	-- TEMP
-	commit = "8af2c531a3a3997d9e8a1afd79d917d4e10ae47b",
 
 	config = function(_, opts)
 		require("snacks").setup(opts)
@@ -29,7 +25,7 @@ return {
 			elseif msg:find("^%[nvim%-treesitter") then -- treesitter parser update
 				nOpts.id = "treesitter-parser-update"
 			end
-			Snacks.notifier(msg, lvl, nOpts)
+			require("snacks").notifier(msg, lvl, nOpts)
 		end
 
 		-- disable default keymaps to make the `?` help overview less cluttered
@@ -39,9 +35,9 @@ return {
 	end,
 
 	keys = {
-		{ "ö", function() Snacks.words.jump(1, true) end, desc = "󰗲 Next reference" },
-		{ "Ö", function() Snacks.words.jump(-1, true) end, desc = "󰗲 Prev reference" },
-		{ "<leader>g?", function() Snacks.git.blame_line() end, desc = "󰆽 Blame line" },
+		{ "ö", function() require("snacks").words.jump(1, true) end, desc = "󰗲 Next reference" },
+		{ "Ö", function() require("snacks").words.jump(-1, true) end, desc = "󰗲 Prev reference" },
+		{ "<leader>g?", function() require("snacks").git.blame_line() end, desc = "󰆽 Blame line" },
 		{
 			"<leader>ee",
 			function()
@@ -60,7 +56,7 @@ return {
 		{
 			"<leader>oi",
 			function()
-				if Snacks.indent.enabled then
+				if require("snacks").indent.enabled then
 					vim.g.prev_listchars = vim.opt_local.listchars:get()
 					vim.opt_local.listchars:append {
 						tab = " ",
@@ -68,10 +64,10 @@ return {
 						trail = "·",
 						lead = "·",
 					}
-					Snacks.indent.disable()
+					require("snacks").indent.disable()
 				else
 					vim.opt_local.listchars = vim.g.prev_listchars
-					Snacks.indent.enable()
+					require("snacks").indent.enable()
 				end
 			end,
 			desc = " Invisible chars",

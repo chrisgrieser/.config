@@ -82,25 +82,25 @@ return {
 		{ "<leader>lS", function() require("chainsaw").stacktraceLog() end, desc = " stacktrace" },
 		{ "<leader>lc", function() require("chainsaw").clearLog() end, desc = "󰃢 clear console" },
 		{ "<leader>lr", function() require("chainsaw").removeLogs() end, desc = "󰅗 remove logs" },
-		{
-			"<leader>lg",
-			function()
-				local marker = require("chainsaw.config.config").config.marker
-				require("snacks").picker.grep_word {
-					title = marker .. " log statements",
-					cmd = "rg",
-					args = { "--trim" },
-					search = marker,
-					regex = false,
-					live = false,
-					format = function(item, _picker) -- only display the grepped line
-						local out = {}
-						Snacks.picker.highlight.format(item, item.line, out)
-						return out
-					end,
-				}
-			end,
-			desc = "󰉹 grep log statements",
-		},
+		-- {
+		-- 	"<leader>lg",
+		-- 	function()
+		-- 		local marker = require("chainsaw.config.config").config.marker
+		-- 		require("snacks").picker.grep_word {
+		-- 			title = marker .. " log statements",
+		-- 			cmd = "rg",
+		-- 			args = { "--trim" },
+		-- 			search = marker,
+		-- 			regex = false,
+		-- 			live = false,
+		-- 			format = function(item, _picker) -- only display the grepped line
+		-- 				local out = {}
+		-- 				Snacks.picker.highlight.format(item, item.line, out)
+		-- 				return out
+		-- 			end,
+		-- 		}
+		-- 	end,
+		-- 	desc = "󰉹 grep log statements",
+		-- },
 	},
 }
