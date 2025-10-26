@@ -75,7 +75,8 @@ zstyle ':completion:*' completer \
 zstyle ':completion:*' ignored-patterns \
 	".git" ".DS_Store" ".localized" "node_modules" "__pycache__"
 
-zstyle ':autocomplete:*' ignored-input '..d' # zsh-autocomplete
+# do not trigger completions for zsh-autocomplete
+zstyle ':autocomplete:*' ignored-input '..d'
 
 #───────────────────────────────────────────────────────────────────────────────
 # OTHER

@@ -8,8 +8,8 @@ local config = {
 			array = "array",
 		},
 		yaml = {
-			object = ".*_pair",
-			array = "block_sequence",
+			object = ".*_pair", -- `flow_pair` or `block_mapping_pair`
+			array = "block_sequence$", -- not: `block_sequence_item`
 		},
 		lua = {
 			object = "field",

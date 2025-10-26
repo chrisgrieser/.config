@@ -1,5 +1,3 @@
----@module "lazy.types"
----@type LazyPluginSpec
 return {
 	"ThePrimeagen/refactoring.nvim",
 	dependencies = "nvim-lua/plenary.nvim",

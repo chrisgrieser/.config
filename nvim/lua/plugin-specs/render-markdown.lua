@@ -1,8 +1,6 @@
 -- DOCS https://github.com/MeanderingProgrammer/render-markdown.nvim#setup
 --------------------------------------------------------------------------------
 
----@module "lazy.types"
----@type LazyPluginSpec
 return {
 	"MeanderingProgrammer/render-markdown.nvim",
 	dependencies = "echasnovski/mini.icons",

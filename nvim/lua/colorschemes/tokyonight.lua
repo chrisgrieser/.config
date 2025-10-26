@@ -2,8 +2,6 @@
 -- palette: https://github.com/folke/tokyonight.nvim/blob/main/extras/lua/tokyonight_moon.lua
 --------------------------------------------------------------------------------
 
----@module "lazy.types"
----@type LazyPluginSpec
 return {
 	"folke/tokyonight.nvim",
 	priority = 1000,

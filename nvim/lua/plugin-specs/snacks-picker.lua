@@ -99,8 +99,6 @@ end
 
 --------------------------------------------------------------------------------
 
----@module "lazy.types"
----@type LazyPluginSpec
 return {
 	"folke/snacks.nvim",
 	keys = {
@@ -425,7 +423,7 @@ return {
 				file = {
 					filename_first = true,
 					truncate = "left",
-					git_status_hl = false,
+					git_status_hl = true,
 				},
 				selected = { unselected = false }, -- hide selection column when no selected items
 			},
