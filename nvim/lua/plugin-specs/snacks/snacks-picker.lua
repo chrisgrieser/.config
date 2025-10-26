@@ -115,12 +115,6 @@ return {
 				-- need to remove it from the default settings itself
 				require("snacks.picker.config.sources").recent.filter.paths[vim.fn.stdpath("data")] =
 					nil
-
-				-- HACK add open buffers to oldfiles
-				local openBufs = vim.iter(vim.fn.getbufinfo { buflisted = 1 })
-					:map(function(buf) return buf.name end)
-					:totable()
-				vim.list_extend(vim.v.oldfiles, openBufs)
 				Snacks.picker.recent()
 			end,
 			desc = "󰋚 Recent files",
