@@ -14,9 +14,9 @@ local config = {
 		lua = {
 			object = "field",
 			array = "table_constructor",
-			arrayNodeOneUp = true,
 		},
 	},
+	oneBasedIndexing = { "lua", "r", "julia" },
 	icons = {
 		main = "󰳮",
 		statuslineSeparator = " ",
@@ -37,17 +37,17 @@ local function getBreadcrumbs()
 		local isObject = node:type():match(ftNodes.object)
 		local isArray = node:type():match(ftNodes.array)
 
-		-- exception, since lua objects & arrays are both named tables
+		-- exception, since lua objects & arrays are both tables
 		if vim.bo.ft == "lua" then
 			if #node:field("name") == 0 then isObject = false end
-			if prevNode and #prevNode:field("name") == 0 then isArray = false end
+			if prevNode and #prevNode:field("name") > 0 then isArray = false end
 		end
 
 		if isObject then
 			local keyName = vim.treesitter.get_node_text(node, 0):match("[%w-_]+")
 			table.insert(crumbs, 1, keyName)
 		elseif isArray then
-			local indexOfChild = vim.bo.ft == "lua" and 1 or 0
+			local indexOfChild = vim.list_contains(config.oneBasedIndexing, vim.bo.ft) and 1 or 0
 			local prevId = prevNode and prevNode:id() or -1
 			for _, child in ipairs(node:named_children()) do
 				if child:id() == prevId then
