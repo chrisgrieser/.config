@@ -1,3 +1,8 @@
+--------------------------------------------------------------------------------
+-- INFO – TO PIN VERSIONS
+-- copy mason registry spec with desired version to `personal-mason-registry`
+--------------------------------------------------------------------------------
+
 local ensureInstalled = {
 	lsps = {
 		"basedpyright", -- python lsp (pyright fork)
@@ -62,12 +67,8 @@ end
 local function enableLsps()
 	local installedPacks = require("mason-registry").get_installed_packages()
 	local lspConfigNames = vim.iter(installedPacks)
-		:filter(function(pack) return vim.list_contains(pack.spec.categories, "LSP") end)
-		:map(function(pack)
-			local lspConfigName = pack.spec.neovim and pack.spec.neovim.lspconfig
-			if not lspConfigName then notify(pack.name .. " has no `neovim` entry.", "warn") end
-			return lspConfigName
-		end)
+		:filter(function(p) return vim.list_contains(p.spec.categories, "LSP") and p.spec.neovim end)
+		:map(function(pack) return pack.spec.neovim.lspconfig end)
 		:totable()
 	vim.lsp.enable(lspConfigNames)
 	vim.lsp.enable(nonMasonLsps)
@@ -143,16 +144,25 @@ return {
 	},
 	config = function(_, opts)
 		vim.env.npm_config_cache = vim.env.HOME .. "/.cache/npm" -- don't crowd $HOME with `.npm` folder
+
+		local personalRegistry = vim.fn.stdpath("config") .. "/personal-mason-registry"
+		local hasCustomPackages = #vim.fs.find("package.yaml", { path = personalRegistry }) > 0
+		if hasCustomPackages and vim.fn.executable("yq") == 0 then
+			if vim.fn.executable("yq") == 0 then
+				notify("`yq` is required when using a custom registry.", "error")
+			else
+				opts.registries = {
+					"file:" .. personalRegistry,
+					"github:mason-org/mason-registry",
+				}
+			end
+		end
+
 		require("mason").setup(opts)
 		enableLsps()
 		vim.defer_fn(syncPackages, 4000)
 	end,
 	opts = {
-		-- local one must come first to take priority, also requires `yq`
-		registries = {
-			-- "file:" .. vim.fn.stdpath("config") .. "/personal-mason-registry",
-			"github:mason-org/mason-registry",
-		},
 		ui = {
 			height = 0.85,
 			width = 0.8,

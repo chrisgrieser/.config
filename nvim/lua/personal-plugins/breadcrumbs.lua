@@ -14,6 +14,7 @@ local config = {
 		lua = {
 			object = "field",
 			array = "field",
+			arrayNodeOneUp = true,
 		},
 	},
 	icons = {
@@ -44,7 +45,7 @@ local function getBreadcrumbs()
 			table.insert(crumbs, 1, keyName)
 		elseif isArray then
 			local indexOfChild = vim.bo.ft == "lua" and 1 or 0
-			if vim.bo.ft == "lua" then
+			if ftNodes.arrayNodeOneUp then
 				prevNode = node
 				node = node:parent()
 				if not node then break end
