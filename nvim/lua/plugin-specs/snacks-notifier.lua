@@ -48,6 +48,7 @@ local function openNotif(idx)
 		title = vim.trim(title) ~= "" and " " .. title .. " " or nil,
 		footer = footer and " " .. footer .. " " or nil,
 		footer_pos = footer and "right" or nil,
+		border = vim.o.winborder --[[@as "rounded"|"single"|"double"]],
 		ft = notif.ft or "markdown", -- needed for treesitter folding to work
 		wo = {
 			wrap = notif.ft ~= "lua",

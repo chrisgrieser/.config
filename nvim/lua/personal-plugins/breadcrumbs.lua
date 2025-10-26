@@ -26,23 +26,26 @@ local config = {
 
 local function getBreadcrumbs()
 	local node = vim.treesitter.get_node()
-	local prevNode
 	local ftNodes = config.nodes[vim.bo.ft]
 	if not ftNodes or not node then return {} end
 
 	-- loop upwards through the parents of the node
 	local crumbs = {}
+	local prevNode
 	repeat
 		local isObject = node:type():match(ftNodes.object)
 		local isArray = node:type():match(ftNodes.array)
+		-- exception, since lua objects and arrays are both named "field"
+		if vim.bo.ft == "lua" and #node:field("name") == 0 then isObject = false end
 
 		if isObject then
 			local keyName = vim.treesitter.get_node_text(node, 0):match("[%w-_]+")
 			table.insert(crumbs, 1, keyName)
 		elseif isArray then
 			local indexOfChild = 0
+			local prevId = prevNode and prevNode:id() or -1
 			for _, child in ipairs(node:named_children()) do
-				if child:id() == prevNode:id() then break end
+				if child:id() == prevId then break end
 				indexOfChild = indexOfChild + 1
 			end
 			table.insert(crumbs, 1, "[" .. indexOfChild .. "]")
@@ -69,9 +72,7 @@ function M.copy()
 		return
 	end
 
-	local text = table.concat(breadcrumbs, "."):gsub("%.%[", "%[")
-	-- add leading `.` for `jq` and `yq`
-	if vim.list_contains({ "json", "jsonc", "yaml" }, vim.bo.filetype) then text = "." .. text end
+	local text = "." .. table.concat(breadcrumbs, "."):gsub("%.%[", "%[")
 
 	vim.fn.setreg("+", text)
 	vim.notify(text, nil, { icon = config.icons.main, title = "Copied", ft = "text" })

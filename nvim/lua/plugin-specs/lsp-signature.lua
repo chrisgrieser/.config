@@ -1,5 +1,3 @@
----@module "lazy.types"
----@type LazyPluginSpec
 return {
 	"ray-x/lsp_signature.nvim",
 	event = "InsertEnter",
