@@ -99,7 +99,6 @@ return {
 				},
 			},
 		},
-		---@class snacks.notifier.Config
 		notifier = {
 			timeout = 7500,
 			sort = { "added" }, -- sort only by time

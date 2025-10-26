@@ -3,7 +3,7 @@ vim.g.localRepos = vim.env.HOME .. "/Developer"
 vim.g.iCloudSync = vim.env.HOME
 	.. "/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/nvim-data"
 
-vim.g.useEmmyluaLsp = false
+vim.g.useEmmyluaLsp = true
 
 -- names need to match `lua/colorschemes/{name}.lua` & name for `colorscheme:`
 vim.g.lightColor = "dawnfox"

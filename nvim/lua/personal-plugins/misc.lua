@@ -20,13 +20,14 @@ function M.fastWarp(dir)
 	-----------------------------------------------------------------------------
 
 	local row, col = unpack(vim.api.nvim_win_get_cursor(0))
+	assert(col, "no cursor")
 	local line = vim.api.nvim_get_current_line()
 	local nextChar = line:sub(col + 1, col + 1)
 	if not vim.tbl_contains(config.warpChars, nextChar) then return end
 
 	---@param text string
 	---@param patterns table<string, string> -- key is irrelevant, just for readability
-	---@return number?
+	---@return integer
 	local function findClosest(text, patterns)
 		local distances = {}
 		for _, pattern in pairs(patterns) do
@@ -44,7 +45,7 @@ function M.fastWarp(dir)
 		shift = findClosest(lineAfter, config.patterns)
 		if not shift then return end
 		lineAfter = lineAfter:sub(1, shift) .. nextChar .. lineAfter:sub(shift + 1)
-	elseif dir == "backward" then
+	else
 		shift = findClosest(lineBefore:reverse(), config.patterns)
 		if not shift then return end
 		lineBefore = lineBefore:reverse():sub(1, shift)
