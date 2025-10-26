@@ -12,8 +12,6 @@ return {
 			desc = "󱉯 Format buffer",
 		},
 	},
-	---@module "conform.types"
-	---@type conform.setupOpts
 	opts = {
 		default_format_opts = {
 			lsp_format = "first",

@@ -1,8 +1,6 @@
 return {
 	{
 		"folke/lazydev.nvim",
-		commit = "e28ce52",
-		enabled = false,
 		ft = "lua",
 		opts = {
 			library = {
