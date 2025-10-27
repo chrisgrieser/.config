@@ -41,28 +41,35 @@ return {
 			},
 			-----------------------------------------------------------------------
 			-- my custom formatters
-			shellHome = {
-				format = function(_self, _ctx, _lines, callback)
-					vim.cmd([[% s_/Users/\w\+/_$HOME/_e]]) -- replace `/Users/…` with `$HOME/`
-					callback()
+			shellHome = { -- replace `/Users/…` with `$HOME/`
+				format = function(_self, _ctx, lines, callback)
+					local outLines = vim.tbl_map(
+						function(line) return line:gsub("/Users/%a+", "$HOME") end,
+						lines
+					)
+					callback(nil, outLines)
 				end,
 			},
 			tsAddMissingImports = {
-				format = function(_self, _ctx, _lines, callback)
+				format = function(_self, ctx, _lines, callback)
 					vim.lsp.buf.code_action {
 						context = { only = { "source.addMissingImports.ts" } }, ---@diagnostic disable-line: missing-fields, assign-type-mismatch
 						apply = true,
 					}
-					callback()
+					local outLines = vim.api.nvim_buf_get_lines(ctx.buf, 0, -1, true)
+					-- vim.cmd.undo()
+					callback(nil, outLines)
 				end,
 			},
 			tsRemoveUnusedImports = {
-				format = function(_self, _ctx, _lines, callback)
+				format = function(_self, ctx, _lines, callback)
 					vim.lsp.buf.code_action {
 						context = { only = { "source.removeUnusedImports.ts" } }, ---@diagnostic disable-line: missing-fields, assign-type-mismatch
 						apply = true,
 					}
-					callback()
+					local outLines = vim.api.nvim_buf_get_lines(ctx.buf, 0, -1, true)
+					vim.cmd.undo()
+					callback(nil, outLines)
 				end,
 			},
 		},

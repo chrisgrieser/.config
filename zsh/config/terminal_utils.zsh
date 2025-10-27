@@ -82,7 +82,7 @@ bindkey '\e' _escape_on_empty_buffer
 # SEARCH AND REPLACE VIA `rg`
 # usage: sr "search" "replace" file1 file2 file3
 function sr {
-	if [[ $# -lt 3 ]] ; then
+	if [[ $# -lt 3 ]]; then
 		echo "usage: sr 'search' 'replace' file1 file2 file3"
 		return 1
 	fi
@@ -205,6 +205,8 @@ function ..d() {
 }
 
 #───────────────────────────────────────────────────────────────────────────────
+
+b="/Users/chrisgrieser/Library/Developer/Xcode/DerivedData"
 
 # interactive `jq`
 function ij {
