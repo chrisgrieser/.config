@@ -9,26 +9,6 @@ vim.cmd.compiler("tsc")
 
 local bkeymap = require("config.utils").bufKeymap
 
--- custom formatting function to run code actions before running `biome`
-bkeymap("n", "<D-s>", function()
-	local actions = {
-		"source.addMissingImports.ts",
-		"source.removeUnusedImports.ts",
-		"source.fixAll.biome",
-	}
-	for i = 1, #actions do
-		vim.defer_fn(function()
-			vim.lsp.buf.code_action {
-				---@diagnostic disable-next-line: missing-fields, assign-type-mismatch
-				context = { only = { actions[i] } },
-				apply = true,
-			}
-		end, i * 60)
-	end
-
-	vim.defer_fn(vim.lsp.buf.format, (#actions + 1) * 60)
-end, { desc = "󰛦 Organize Imports & Format" })
-
 -- When typing `await`, automatically add `async` to the function declaration
 bkeymap("i", "t", function()
 	vim.api.nvim_feedkeys("t", "n", true) -- pass through the trigger char

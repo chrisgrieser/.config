@@ -56,9 +56,8 @@ func parseTimeAndPriorityAndMessage(from input: String) -> ParsedResult? {
 		{
 			amPm = String(!amPm1.isEmpty ? amPm1 : amPm2).lowercased()
 			hour = hourVal
-			if (amPm == "pm" && hour != 12) || (amPm == "am" && hour == 12) {
-				hour = (hour! + 12) % 24
-			}
+			if amPm == "pm" && hour != 12 { hour! += 12 }
+			if amPm == "am" && hour == 12 { hour = 0 }
 			minute = minuteVal
 			msg.removeSubrange(match.range)
 		} else {
