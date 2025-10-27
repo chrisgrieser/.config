@@ -16,7 +16,7 @@ struct ParsedResult {
 	let minute: Int?
 	let message: String
 	let bangs: String  // string with the number of exclamation marks
-	let amPm: String?
+	let amPm: String
 }
 
 func parseTimeAndPriorityAndMessage(from input: String) -> ParsedResult? {
@@ -31,13 +31,12 @@ func parseTimeAndPriorityAndMessage(from input: String) -> ParsedResult? {
 		msg.removeSubrange(match.range)
 	}
 
-	// parse HH:MM for due time, if at start or end of input
+	// parse HH:MM(am|pm) for due time, if at start or end of input
 	var hour: Int?
 	var minute: Int?
-	var amPm: String?
-	let timeAtStart = #"^(\d{1,2}):(\d{2})( ?[ap]m)? "#
-	let timeAtEnd = #" (\d{1,2}):(\d{2})( ?[ap]m)?$"#
-	let timeRegex = try! Regex(timeAtStart + "|" + timeAtEnd)
+	var amPm = ""
+	let timePattern = #"(\d{1,2}):(\d{2})(?: ?(am|pm))?"#
+	let timeRegex = try! Regex("^\(timePattern) | \(timePattern)$")
 
 	if let match = try? timeRegex.firstMatch(in: msg) {
 		let h1 = match.output[1].substring ?? ""
@@ -55,10 +54,12 @@ func parseTimeAndPriorityAndMessage(from input: String) -> ParsedResult? {
 			(0..<60).contains(minuteVal),
 			(!hasAmPm && (0..<24).contains(hourVal)) || (hasAmPm && (1..<13).contains(hourVal))
 		{
-			hour = hourVal
-			minute = minuteVal
 			amPm = String(!amPm1.isEmpty ? amPm1 : amPm2)
-			if amPm == "pm" { hour = (hourVal + 12) % 24 }
+			hour = hourVal
+			if (amPm == "pm" && hour != 12) || (amPm == "am" && hour == 12) {
+				hour = (hour! + 12) % 24
+			}
+			minute = minuteVal
 			msg.removeSubrange(match.range)
 		} else {
 			return nil
@@ -89,7 +90,9 @@ eventStore.requestFullAccessToReminders { granted, error in
 		semaphore.signal()
 		return
 	}
-	let (title, hh, mm, bangs, amPm) = (parsed!.message, parsed!.hour, parsed!.minute, parsed!.bangs, parsed!.amPm)
+	let (title, hh, mm, bangs, amPm) = (
+		parsed!.message, parsed!.hour, parsed!.minute, parsed!.bangs, parsed!.amPm
+	)
 	let isAllDayReminder = (hh == nil && hh == nil)
 	let reminder = EKReminder(eventStore: eventStore)
 	reminder.title = title
@@ -171,8 +174,8 @@ eventStore.requestFullAccessToReminders { granted, error in
 		}
 		if !isAllDayReminder {
 			let minutesPadded = String(format: "%02d", mm!)
-			var timeStr = "\(hh!):\(minutesPadded)"
-			if amPm != nil { timeStr += amPm! }
+			let hourDisplay = String((amPm.isEmpty || hh! == 12) ? hh! : hh! % 12)
+			let timeStr = String(hourDisplay) + ":" + minutesPadded + amPm
 			msgComponents.append(timeStr)
 		}
 		msgComponents.append("\"\(title)\"")
