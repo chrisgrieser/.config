@@ -37,28 +37,34 @@ func parseTimeAndPriorityAndMessage(from input: String) -> ParsedResult? {
 	// parse HH:MM for due time, if at start or end of input
 	var hour: Int? = nil
 	var minute: Int? = nil
-	let timePattern = #"^(\d{1,2}):(\d{2})(?!\d)|(?<!\d)(\d{1,2}):(\d{2})$"#
-	let timeRegex = try! NSRegularExpression(pattern: timePattern)
+	let timeRegex = try! Regex(#"^(\d{1,2}):(\d{2})(?!\d)|(?<!\d)(\d{1,2}):(\d{2})$"#)
 
-	if let match = timeRegex.firstMatch(in: msg, range: NSRange(msg.startIndex..., in: msg)) {
-		// Extract the first or second pair of captured groups
-		let hrRange = Range(match.range(at: 1), in: msg) ?? Range(match.range(at: 3), in: msg)
-		let minRange = Range(match.range(at: 2), in: msg) ?? Range(match.range(at: 4), in: msg)
+	if let match = try? timeRegex.firstMatch(in: msg) {
+    // Extract as Substring
+    let h1 = match.output[1].substring ?? ""
+    let m1 = match.output[2].substring ?? ""
+    let h2 = match.output[3].substring ?? ""
+    let m2 = match.output[4].substring ?? ""
 
-		if let hrRange = hrRange, let minRange = minRange,
-			let parsedHour = Int(msg[hrRange]),
-			let parsedMinute = Int(msg[minRange]),
-			(0..<24).contains(parsedHour),
-			(0..<60).contains(parsedMinute)
+    let hourStr = !h1.isEmpty ? h1 : h2
+    let minuteStr = !m1.isEmpty ? m1 : m2
+
+		if !hourStr.isEmpty && !minuteStr.isEmpty,
+			let hourVal = Int(hourStr),
+			let minuteVal = Int(minuteStr),
+			(0..<24).contains(hourVal),
+			(0..<60).contains(minuteVal)
 		{
-			hour = parsedHour
-			minute = parsedMinute
-			if let timeRange = Range(match.range, in: msg) { msg.removeSubrange(timeRange) }
+			hour = hourVal
+			minute = minuteVal
+
+			if let range = match.range {
+				msg.removeSubrange(range)
+			}
 		} else {
-			return nil  // invalid time
+			return nil
 		}
 	}
-
 	msg = msg.trimmingCharacters(in: .whitespacesAndNewlines)
 	return ParsedResult(hour: hour, minute: minute, message: msg, bangs: bangs)
 }
