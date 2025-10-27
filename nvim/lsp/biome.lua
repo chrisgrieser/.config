@@ -1,6 +1,10 @@
 ---@type vim.lsp.Config
 return {
-	-- Do not require a `package.json` like in nvim-lspconfig default.
-	root_markers = { "biome.json", "biome.jsonc" },
+	root_markers = {
+		-- Do not require a `package.json` like in nvim-lspconfig default.
+		"biome.json",
+		"biome.jsonc",
+		".obsidian", -- for Obsidian snippet folders
+	},
 	root_dir = false, ---@diagnostic disable-line: assign-type-mismatch
 }
