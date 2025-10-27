@@ -24,43 +24,38 @@ func parseTimeAndPriorityAndMessage(from input: String) -> ParsedResult? {
 
 	// parse leading/trailing bangs for priority
 	var bangs = ""  // default: no priority
-	let bangPattern = #"^!+|!+$"#
-	let bangRegex = try! NSRegularExpression(pattern: bangPattern)
-
-	if let match = bangRegex.firstMatch(in: msg, range: NSRange(msg.startIndex..., in: msg)),
-		let matchRange = Range(match.range, in: msg)
-	{
-		bangs = String(msg[matchRange])
-		msg.removeSubrange(matchRange)
+	let bangRegex = try! Regex(#"^!+|!+$"#)
+	if let match = try? bangRegex.firstMatch(in: msg) {
+		bangs = String(msg[match.range])
+		msg.removeSubrange(match.range)
 	}
 
 	// parse HH:MM for due time, if at start or end of input
-	var hour: Int? = nil
-	var minute: Int? = nil
-	let timeRegex = try! Regex(#"^(\d{1,2}):(\d{2})(?!\d)|(?<!\d)(\d{1,2}):(\d{2})$"#)
+	var hour: Int?
+	var minute: Int?
+	let timeAtStart = #"^(\d{1,2}):(\d{2})(am|pm)?(?!\d)"#
+	let timeAtEnd = #"[^\d](\d{1,2}):(\d{2})(am|pm)?$"#
+	let timeRegex = try! Regex(timeAtStart + "|" + timeAtEnd)
 
 	if let match = try? timeRegex.firstMatch(in: msg) {
-    // Extract as Substring
-    let h1 = match.output[1].substring ?? ""
-    let m1 = match.output[2].substring ?? ""
-    let h2 = match.output[3].substring ?? ""
-    let m2 = match.output[4].substring ?? ""
+		let h1 = match.output[1].substring ?? ""
+		let m1 = match.output[2].substring ?? ""
+		let amPm1 = match.output[3].substring ?? ""
+		let h2 = match.output[4].substring ?? ""
+		let m2 = match.output[5].substring ?? ""
+		let amPm2 = match.output[6].substring ?? ""
+		let hourStr = !h1.isEmpty ? h1 : h2
+		let minuteStr = !m1.isEmpty ? m1 : m2
+		let amPm = !amPm1.isEmpty ? amPm1 : amPm2
 
-    let hourStr = !h1.isEmpty ? h1 : h2
-    let minuteStr = !m1.isEmpty ? m1 : m2
-
-		if !hourStr.isEmpty && !minuteStr.isEmpty,
-			let hourVal = Int(hourStr),
+		if let hourVal = Int(hourStr),
 			let minuteVal = Int(minuteStr),
-			(0..<24).contains(hourVal),
-			(0..<60).contains(minuteVal)
+			(0..<60).contains(minuteVal),
+			(amPm.isEmpty && (0..<24).contains(hourVal)) || (amPm.isEmpty && (0..<13).contains(hourVal))
 		{
-			hour = hourVal
-			minute = minuteVal
-
-			if let range = match.range {
-				msg.removeSubrange(range)
-			}
+			hour = Int(hourStr)
+			minute = Int(minuteStr)
+			msg.removeSubrange(match.range)
 		} else {
 			return nil
 		}
