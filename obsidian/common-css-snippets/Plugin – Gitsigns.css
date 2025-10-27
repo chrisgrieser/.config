@@ -1,0 +1,21 @@
+/* fix alignment, PENDING https://github.com/Vinzent03/obsidian-git/pull/983#issuecomment-3446689959 */
+.cm-gutters.cm-gutters-before:not(:has(> .cm-lineNumbers)) {
+	margin-inline-end: 0;
+	.signs-gutter-container {
+		margin-inline-start: -1rem;
+	}
+}
+
+/* thicker signs */
+body .git-gutter-marker.git-gutter-marker {
+	--sign-thickness: 0.2rem;
+	font-weight: 700;
+	font-size: 1rem;
+
+	&:not(.git-delete, .git-changedelete) {
+		width: var(--sign-thickness);
+	}
+	&.git-delete {
+		height: var(--sign-thickness);
+	}
+}
