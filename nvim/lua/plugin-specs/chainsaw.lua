@@ -12,7 +12,7 @@ return {
 			variableLog = {
 				nvim_lua = "Chainsaw({{var}}) -- {{marker}}", -- nvim lua debug
 				lua = 'print("{{marker}} {{var}}: " .. hs.inspect({{var}}))', -- Hammerspoon
-				swift = 'fputs("{{marker}} {{var}}: \\({{var}})", stderr)', -- to STDERR, requires `import Foundation`
+				swift = 'fputs("{{marker}} {{var}}: \\({{var}} ?? "nil")", stderr)', -- to STDERR, requires `import Foundation`
 			},
 			assertLog = {
 				lua = 'assert({{var}}, "{{insert}}")', -- no marker, since intended to be permanent

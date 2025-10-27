@@ -40,28 +40,27 @@ func parseTimeAndPriorityAndMessage(from input: String) -> ParsedResult? {
 	let hhmmRegex = try! Regex("^\(hhmmPattern) | \(hhmmPattern)$")
 	let hhmmMatch = try? hhmmRegex.firstMatch(in: msg)
 
-	let hhPattern = #"(\d{1,2}) ?(am|pm|AM|PM)?"#
+	let hhPattern = #"(\d{1,2}) ?()(am|pm|AM|PM)"#
 	let hhRegex = try! Regex("^\(hhPattern) | \(hhPattern)$")
 	let hhMatch = try? hhRegex.firstMatch(in: msg)
-	let hasMinutes = hhmmMatch != nil
 
 	if let match = hhmmMatch ?? hhMatch {
-		let h1 = match.output[1].substring ?? ""
-		let h2 = match.output[(hasMinutes ? 3 : 4)].substring ?? ""
-		let m1 = hasMinutes ? match.output[2].substring ?? "" : "00"
-		let m2 = hasMinutes ? match.output[5].substring ?? "" : "00"
-		let amPm1 = match.output[(hasMinutes ? 3 : 2)].substring ?? ""
-		let amPm2 = match.output[(hasMinutes ? 4 : 6)].substring ?? ""
-		let hourStr = !h1.isEmpty ? h1 : h2
-		let minuteStr = !m1.isEmpty ? m1 : m2
-		let hasAmPm = !amPm1.isEmpty || !amPm2.isEmpty
+		let h1 = match.output[1].substring
+		let h2 = match.output[4].substring
+		let m1 = match.output[2].substring
+		let m2 = match.output[5].substring
+		let amPm1 = match.output[3].substring
+		let amPm2 = match.output[6].substring
+		let hourStr = h1 ?? h2 ?? ""
+		let minuteStr =  m1 ?? m2 ?? ""
+		let hasAmPm = amPm1 != nil || amPm2 != nil
 
 		if let hourVal = Int(hourStr),
 			let minuteVal = Int(minuteStr),
 			(0..<60).contains(minuteVal),
 			(!hasAmPm && (0..<24).contains(hourVal)) || (hasAmPm && (1..<13).contains(hourVal))
 		{
-			amPm = String(!amPm1.isEmpty ? amPm1 : amPm2).lowercased()
+			amPm = String(amPm1 ?? amPm2 ?? "").lowercased()
 			hour = hourVal
 			if amPm == "pm" && hour != 12 { hour! += 12 }
 			if amPm == "am" && hour == 12 { hour = 0 }
