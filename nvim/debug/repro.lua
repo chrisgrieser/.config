@@ -7,6 +7,7 @@ local spec = {
 }
 
 --------------------------------------------------------------------------------
+vim.env.PATH = vim.fn.stdpath("data") .. "/mason/bin:" .. vim.env.PATH -- make LSPs available
 vim.env.LAZY_STDPATH = "/tmp/nvim-repro"
 load(vim.fn.system("curl -s https://raw.githubusercontent.com/folke/lazy.nvim/main/bootstrap.lua"))()
 require("lazy.minit").repro { spec = spec }

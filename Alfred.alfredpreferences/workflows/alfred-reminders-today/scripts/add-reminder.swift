@@ -35,7 +35,7 @@ func parseTimeAndPriorityAndMessage(from input: String) -> ParsedResult? {
 	var hour: Int?
 	var minute: Int?
 	var amPm = ""
-	let timePattern = #"(\d{1,2}):(\d{2})(?: ?(am|pm))?"#
+	let timePattern = #"(\d{1,2}):(\d{2})(?: ?(am|pm|AM|PM))?"#
 	let timeRegex = try! Regex("^\(timePattern) | \(timePattern)$")
 
 	if let match = try? timeRegex.firstMatch(in: msg) {
@@ -54,7 +54,7 @@ func parseTimeAndPriorityAndMessage(from input: String) -> ParsedResult? {
 			(0..<60).contains(minuteVal),
 			(!hasAmPm && (0..<24).contains(hourVal)) || (hasAmPm && (1..<13).contains(hourVal))
 		{
-			amPm = String(!amPm1.isEmpty ? amPm1 : amPm2)
+			amPm = String(!amPm1.isEmpty ? amPm1 : amPm2).lowercased()
 			hour = hourVal
 			if (amPm == "pm" && hour != 12) || (amPm == "am" && hour == 12) {
 				hour = (hour! + 12) % 24

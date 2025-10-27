@@ -1348,7 +1348,7 @@
 	+ A priority can be specified by adding the respective number of `!`. For
 	  example, `buy milk!!` or `!!buy milk` will result in a reminder title `buy
 	  milk` with a medium priority (`!` = low, `!!` = medium, `!!!` = high).
-	+ Note that priority and due time are *only* parsed when at the start or the
+	+ Note that priority and due time are only parsed when at the start or the
 	  end on the input.
 	+ Use `q1` create the reminder tomorrow, `q2` for the day after tomorrow,
 	  and `qm` for next Monday. All keywords are configurable.
@@ -1771,7 +1771,7 @@ to set a hotkey to show reminders due today</string>
 				<string>use 12 hour time</string>
 			</dict>
 			<key>description</key>
-			<string>displays "8:00 PM" instead of "20:00"</string>
+			<string>displays "8:00 PM" instead of "20:00" (adding new reminders parses both)</string>
 			<key>label</key>
 			<string></string>
 			<key>type</key>
@@ -1977,7 +1977,7 @@ to set a hotkey to show reminders due today</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>3.8.1</string>
+	<string>3.9.0</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
