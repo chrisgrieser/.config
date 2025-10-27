@@ -144,12 +144,12 @@ function M.toggleOrIncrement()
 		["=="] = "!=",
 		[">"] = "<",
 		[">="] = "<=",
+		["||"] = "&&"
 	}
 	if vim.bo.ft == "javascript" or vim.bo.ft == "typescript" then
 		toggles["if"] = "else if" -- only one-way, due to the space in there
 		toggles["const"] = "let"
 		toggles["==="] = "!=="
-		toggles["||"] = "&&"
 	elseif vim.bo.ft == "python" then
 		toggles["True"] = "False"
 	elseif vim.bo.ft == "swift" then
