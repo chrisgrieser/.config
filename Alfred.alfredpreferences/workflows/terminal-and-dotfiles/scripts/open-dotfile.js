@@ -80,10 +80,6 @@ function run() {
 			icon: iconObj,
 			type: "file:skipcheck",
 			arg: absPath,
-			variables: {
-				// for Alfred to open with the correct app
-				filetype: isImageFile ? "binary" : "text",
-			},
 		};
 		return item;
 	});

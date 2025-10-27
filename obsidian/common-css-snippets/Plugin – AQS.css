@@ -1,0 +1,13 @@
+/* hide redundant first 3 hints */
+.another-quick-switcher__modal-prompt {
+	& > .prompt-instructions > .prompt-instruction:nth-child(-n + 3) {
+		display: none;
+	}
+
+	/* also hide 4th for grep search */
+	&.another-quick-switcher__floating-prompt
+		> .prompt-instructions
+		> .prompt-instruction:nth-child(4) {
+		display: none;
+	}
+}
