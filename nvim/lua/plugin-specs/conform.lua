@@ -52,13 +52,15 @@ return {
 			},
 			tsAddMissingImports = {
 				format = function(_self, ctx, _lines, callback)
+					-- PENDING https://github.com/stevearc/conform.nvim/issues/795
 					vim.lsp.buf.code_action {
 						context = { only = { "source.addMissingImports.ts" } }, ---@diagnostic disable-line: missing-fields, assign-type-mismatch
 						apply = true,
 					}
-					local outLines = vim.api.nvim_buf_get_lines(ctx.buf, 0, -1, true)
-					-- vim.cmd.undo()
-					callback(nil, outLines)
+					vim.defer_fn(function() -- deferred for code action to update buffer
+						local outLines = vim.api.nvim_buf_get_lines(ctx.buf, 0, -1, true)
+						callback(nil, outLines)
+					end, 60)
 				end,
 			},
 			tsRemoveUnusedImports = {
@@ -67,9 +69,10 @@ return {
 						context = { only = { "source.removeUnusedImports.ts" } }, ---@diagnostic disable-line: missing-fields, assign-type-mismatch
 						apply = true,
 					}
-					local outLines = vim.api.nvim_buf_get_lines(ctx.buf, 0, -1, true)
-					vim.cmd.undo()
-					callback(nil, outLines)
+					vim.defer_fn(function()
+						local outLines = vim.api.nvim_buf_get_lines(ctx.buf, 0, -1, true)
+						callback(nil, outLines)
+					end, 60)
 				end,
 			},
 		},
