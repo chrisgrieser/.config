@@ -191,48 +191,8 @@ return {
 		{ "<leader>gs", function() require("snacks").picker.git_status() end, desc = "󰗲 Status" },
 		{ "<leader>gl", function() require("snacks").picker.git_log() end, desc = "󰗲 Log" },
 
-		-- TEMP replacement for tinygit's `interactiveStaging`
-		{
-			"<leader>ga",
-			function()
-				require("snacks").picker.git_diff {
-					layout = "big_preview",
-					confirm = function(picker, item)
-						-- FIX snacks' `confirm` not working when cwd != git root
-						picker:close()
-						local gitDir = require("snacks").git.get_root()
-						local path = (gitDir .. "/" .. item.file):gsub("/", "\\/") -- escape slashes for `:edit`
-						local lnum = item.pos[1] + 3 -- +3 since pos is start of diff, not hunk
-						vim.cmd(("edit +%d %s"):format(lnum, path))
-						vim.cmd.normal { "zv", bang = true } -- open folds
-					end,
-					win = {
-						input = {
-							keys = { ["<Space>"] = { "stage", mode = "i" } },
-						},
-					},
-					actions = {
-						["stage"] = function(picker, item)
-							local args = { -- https://stackoverflow.com/a/66618356/22114136
-								"git",
-								"apply",
-								"--cached", -- affect staging area, not working tree
-								"--verbose", -- more helpful error messages
-								"-", -- read patch from stdin
-							}
-							local patch = item.diff .. "\n"
-							local out = vim.system(args, { stdin = patch }):wait()
-							if out.code == 0 then
-								picker:find() -- refresh
-							else
-								vim.notify(out.stderr or "Error", vim.log.levels.ERROR)
-							end
-						end,
-					},
-				}
-			end,
-			desc = "󰐖 View hunks",
-		},
+		-- similar to tinygit's `interactiveStaging`
+		{ "<leader>ga", function() require("snacks").picker.git_diff() end, desc = "󰐖 View hunks" },
 
 		--------------------------------------------------------------------------
 		-- INSPECT
@@ -430,12 +390,6 @@ return {
 						layout = { width = 0.7 },
 					},
 					matcher = { frecency = true }, -- slight performance impact
-					confirm = function(picker, item)
-						-- as opposed to snacks's default `nvim_put`, `nvim_paste`
-						-- inserts at correct pos in insert mode & is also dot-repeatable
-						picker:close()
-						vim.api.nvim_paste(item.icon, false, -1)
-					end,
 				},
 				highlights = {
 					confirm = function(picker, item)
@@ -461,6 +415,32 @@ return {
 				git_log = {
 					layout = "toggled_preview",
 				},
+				git_diff = {
+					layout = "big_preview",
+					win = {
+						input = {
+							keys = { ["<Space>"] = { "stage", mode = "i" } },
+						},
+					},
+					actions = {
+						["stage"] = function(picker, item)
+							local args = { -- https://stackoverflow.com/a/66618356/22114136
+								"git",
+								"apply",
+								"--cached", -- affect staging area, not working tree
+								"--verbose", -- more helpful error messages
+								"-", -- read patch from stdin
+							}
+							local patch = item.diff .. "\n"
+							local out = vim.system(args, { stdin = patch }):wait()
+							if out.code == 0 then
+								picker:find() -- refresh
+							else
+								vim.notify(out.stderr or "Error", vim.log.levels.ERROR)
+							end
+						end,
+					},
+				}
 			},
 			formatters = {
 				file = {
@@ -622,7 +602,7 @@ return {
 				ui = { selected = "󰒆 " },
 				undo = { saved = "" }, -- useless, since I have auto-saving
 				git = {
-					commit = "", -- save some space
+					commit = "c", -- save some space
 					staged = "󰐖", -- consistent with tinygit
 					added = "󰎔",
 					modified = "󰄯",
