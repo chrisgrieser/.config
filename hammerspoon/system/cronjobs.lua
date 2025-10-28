@@ -141,6 +141,7 @@ M.timer_sleepAutoVideoOff = hs.timer
 			if userDidSth then return end
 
 			u.notify("💤 SleepTimer triggered")
+			u.closeAllFinderWins()
 			u.quitFullscreenAndVideoApps()
 		end)
 	end)
