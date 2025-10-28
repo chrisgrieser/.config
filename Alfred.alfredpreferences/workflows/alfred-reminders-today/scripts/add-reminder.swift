@@ -6,7 +6,7 @@ import WidgetKit
 let eventStore = EKEventStore()
 let semaphore = DispatchSemaphore(value: 0)
 
-let input = CommandLine.arguments[1]
+let input = CommandLine.arguments[1].trimmingCharacters(in: .whitespacesAndNewlines)
 let reminderList = ProcessInfo.processInfo.environment["reminder_list"]!
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -20,10 +20,9 @@ struct ParsedResult {
 }
 
 func parseTimeAndPriorityAndMessage(from input: String) -> ParsedResult? {
-	var msg = input.trimmingCharacters(in: .whitespacesAndNewlines)
-	guard !msg.isEmpty else { return nil }
+	var msg = input
 
-	// parse leading/trailing bangs for priority
+	// parse bangs for priority
 	var bangs = ""  // default: no priority
 	let bangRegex = try! Regex(#"^!{1,3}|!{1,3}$"#)
 	if let match = try? bangRegex.firstMatch(in: msg) {
@@ -31,15 +30,15 @@ func parseTimeAndPriorityAndMessage(from input: String) -> ParsedResult? {
 		msg.removeSubrange(match.range)
 	}
 
-	// parse due time, if at start or end of input
 	var hour: Int?
 	var minute: Int?
 	var amPm = ""
 
+	// parse due time
 	let hhmmPattern = #"(\d{1,2}):(\d{2}) ?(am|pm|AM|PM)?"#
-	let hhPattern = #"(\d{1,2}) ?()(am|pm|AM|PM)"# // empty capture group, so later code is the same
+	let hhPattern = #"(\d{1,2}) ?()(am|pm|AM|PM)"#  // empty capture group, so later code is the same
 	let patterns = [
-		try! Regex("^\(hhmmPattern) "),
+		try! Regex("^\(hhmmPattern) "),  // only if at start/end of input
 		try! Regex("^\(hhPattern) "),
 		try! Regex(" \(hhmmPattern)$"),
 		try! Regex(" \(hhPattern)$"),
@@ -68,6 +67,7 @@ func parseTimeAndPriorityAndMessage(from input: String) -> ParsedResult? {
 			return nil  // invalid time
 		}
 	}
+
 	msg = msg.trimmingCharacters(in: .whitespacesAndNewlines)
 	return ParsedResult(hour: hour, minute: minute, message: msg, bangs: bangs, amPm: amPm)
 }
@@ -78,15 +78,19 @@ eventStore.requestFullAccessToReminders { granted, error in
 	guard error == nil && granted else {
 		let msg =
 			error != nil
-			? "Error requesting access: \(error!.localizedDescription)"
-			: "Access to Calendar events not granted."
+			? "Error requesting access: " + error!.localizedDescription
+			: "Access to Reminder.app not granted."
 		print("❌ " + msg)
 		semaphore.signal()
 		return
 	}
-	// ──────────────────────────────────────────────────────────────────────────
+	guard !input.isEmpty else {
+		print("❌ Input is empty.")
+		semaphore.signal()
+		return
+	}
 
-	// Create a new reminder
+	// PARSE INPUT
 	let parsed = parseTimeAndPriorityAndMessage(from: input)
 	guard parsed != nil else {
 		print("❌ Invalid time: \"\(input)\"")
@@ -96,12 +100,14 @@ eventStore.requestFullAccessToReminders { granted, error in
 	let (title, hh, mm, bangs, amPm) = (
 		parsed!.message, parsed!.hour, parsed!.minute, parsed!.bangs, parsed!.amPm
 	)
+
+	// CREATE REMINDER
 	let isAllDayReminder = (hh == nil && hh == nil)
 	let reminder = EKReminder(eventStore: eventStore)
 	reminder.title = title
 	reminder.isCompleted = false
 
-	// priority
+	// PRIORITY
 	switch bangs.count {  // values based on RFC 5545, which Apple uses https://www.rfc-editor.org/rfc/rfc5545.html#section-3.8.1.9
 	case 1: reminder.priority = 9
 	case 2: reminder.priority = 5
@@ -109,7 +115,7 @@ eventStore.requestFullAccessToReminders { granted, error in
 	default: reminder.priority = 0
 	}
 
-	// determine day when to add
+	// DETERMINE DAY WHEN TO ADD
 	let calendar = Calendar.current
 	let today = Date()
 	let targetDay = ProcessInfo.processInfo.environment["target_day"]!
@@ -133,7 +139,7 @@ eventStore.requestFullAccessToReminders { granted, error in
 		)!
 	}
 
-	// Set due date
+	// SET DUE DATE
 	var dateComponents = calendar.dateComponents([.year, .month, .day], from: dayToUse)
 	if !isAllDayReminder {
 		dateComponents.hour = hh
@@ -142,6 +148,7 @@ eventStore.requestFullAccessToReminders { granted, error in
 	reminder.dueDateComponents = dateComponents
 	reminder.startDateComponents = nil  // reminders created regularly have no start date, we mimic that
 
+	// ADD ALARM
 	// * Add an alarm to trigger a notification. Even though the reminder created
 	//   without an alarm looks the same as one with an alarm, an alarm is needed
 	//   to trigger the notification (see #2).
@@ -155,7 +162,7 @@ eventStore.requestFullAccessToReminders { granted, error in
 		reminder.addAlarm(EKAlarm(absoluteDate: dueDate))
 	}
 
-	// Find the calendar (list) by name
+	// SET LIST (= CALENDAR)
 	let listToUse = eventStore.calendars(for: .reminder).first(where: { $0.title == reminderList })
 	if listToUse != nil {
 		reminder.calendar = listToUse
@@ -165,30 +172,31 @@ eventStore.requestFullAccessToReminders { granted, error in
 		return
 	}
 
-	// Save
+	// SAVE
 	do {
 		try eventStore.save(reminder, commit: true)
-
-		// notification for Alfred
-		var msg: [String] = []
-		if !bangs.isEmpty {
-			msg.append(bangs)
-		}
-		if !isAllDayReminder {
-			let minutesPadded = String(format: "%02d", mm!)
-			var hourDisplay = hh!
-			if amPm == "am" && hh! == 0 { hourDisplay = 12 }
-			if amPm == "pm" && hh! != 12 { hourDisplay = hh! - 12 }
-			let timeStr = String(hourDisplay) + ":" + minutesPadded + amPm
-			msg.append(timeStr)
-		}
-		msg.append("\"\(title)\"")
-
-		let alfredNotif = msg.joined(separator: "     ")
-		print(alfredNotif)
 	} catch {
 		print("❌ Failed to create reminder: \(error.localizedDescription)")
+		semaphore.signal()
+		return
 	}
+
+	// NOTIFICATION FOR ALFRED
+	var msg: [String] = []
+	if !bangs.isEmpty {
+		msg.append(bangs)
+	}
+	if !isAllDayReminder {
+		let minutesPadded = String(format: "%02d", mm!)
+		var hourDisplay = hh!
+		if amPm == "am" && hh! == 0 { hourDisplay = 12 }
+		if amPm == "pm" && hh! != 12 { hourDisplay = hh! - 12 }
+		let timeStr = String(hourDisplay) + ":" + minutesPadded + amPm
+		msg.append(timeStr)
+	}
+	msg.append("\"\(title)\"")
+	let alfredNotif = msg.joined(separator: "     ")
+	print(alfredNotif)
 
 	semaphore.signal()
 }
