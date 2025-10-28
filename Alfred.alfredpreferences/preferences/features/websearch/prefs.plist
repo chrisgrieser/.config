@@ -202,6 +202,17 @@
 			<key>url</key>
 			<string>https://github.com/search?type=code&amp;q=path:/\/{query}$/</string>
 		</dict>
+		<key>DF52F758-C5E1-422D-8463-E169E335B6FF</key>
+		<dict>
+			<key>enabled</key>
+			<true/>
+			<key>keyword</key>
+			<string>timer</string>
+			<key>text</key>
+			<string>Timer: in {query} min</string>
+			<key>url</key>
+			<string>https://duckduckgo.com/?q=timer+{query}%3A00</string>
+		</dict>
 		<key>E190C7B2-5B59-40A7-8B1C-722C7FD239F2</key>
 		<dict>
 			<key>enabled</key>
@@ -269,5 +280,7 @@
 			<string>https://duckduckgo.com/?q={query}&amp;iar=images</string>
 		</dict>
 	</dict>
+	<key>onlyShowEnabledInPrefs</key>
+	<true/>
 </dict>
 </plist>
