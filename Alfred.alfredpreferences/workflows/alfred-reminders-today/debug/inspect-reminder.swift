@@ -1,22 +1,22 @@
 #!/usr/bin/env swift
-
 import EventKit
 import Foundation
 
 let titleToFind = CommandLine.arguments.dropFirst().joined(separator: " ")
 guard !titleToFind.isEmpty else {
-	print("Usage: FindReminder.swift \"Reminder Title\"")
+	print("Usage: inspect-reminder.swift \"Reminder Title\"")
 	exit(1)
 }
 
 let eventStore = EKEventStore()
 let semaphore = DispatchSemaphore(value: 0)
-
 // ─────────────────────────────────────────────────────────────────────────────
 
 eventStore.requestFullAccessToEvents { granted, error in
 	guard granted else {
-		print("Access to reminders not granted: \(error?.localizedDescription ?? "Unknown error")")
+		print(
+			"Access to reminders/calendar not granted: \(error?.localizedDescription ?? "Unknown error")"
+		)
 		semaphore.signal()
 		return
 	}
@@ -27,11 +27,13 @@ eventStore.requestFullAccessToEvents { granted, error in
 
 		guard let reminders = reminders else {
 			print("No reminders found or error occurred")
+			semaphore.signal()
 			return
 		}
 
 		guard let reminder = reminders.first(where: { $0.title == titleToFind }) else {
 			print("Reminder with title \"\(titleToFind)\" not found.")
+			semaphore.signal()
 			return
 		}
 
@@ -40,7 +42,7 @@ eventStore.requestFullAccessToEvents { granted, error in
 }
 
 func prettyPrintReminder(_ reminder: EKReminder) {
-	print("=== Reminder Details ===")
+	print("==== Reminder Details ====")
 	print("Title: \(reminder.title ?? "nil")")
 	print("Notes: \(reminder.notes ?? "nil")")
 	print("List: \(reminder.calendar.title)")
@@ -61,7 +63,8 @@ func prettyPrintReminder(_ reminder: EKReminder) {
 			}
 		}
 	}
-	print("========================")
+	print("==========================")
+	semaphore.signal()
 }
 
 _ = semaphore.wait(timeout: .distantFuture)

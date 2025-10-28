@@ -602,7 +602,6 @@ return {
 				ui = { selected = "󰒆 " },
 				undo = { saved = "" }, -- useless, since I have auto-saving
 				git = {
-					commit = "c", -- save some space
 					staged = "󰐖", -- consistent with tinygit
 					added = "󰎔",
 					modified = "󰄯",

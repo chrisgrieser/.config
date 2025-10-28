@@ -61,7 +61,7 @@ eventStore.requestFullAccessToReminders { granted, error in
 		let msg =
 			error != nil
 			? "Error requesting access: \(error!.localizedDescription)"
-			: "Access to Calendar events not granted."
+			: "Access to Reminder.app not granted."
 		print("❌ " + msg)
 		semaphore.signal()
 		return
