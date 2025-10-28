@@ -14,7 +14,7 @@ brew "node"
 brew "pandoc"
 brew "pass"
 brew "pinentry-mac"
-brew "python3" # macOS system python is only 3.9
+brew "python" # installs most recent python version (macOS system python is only 3.9)
 brew "ripgrep"
 brew "starship"
 brew "yq"
