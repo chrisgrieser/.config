@@ -192,7 +192,7 @@ return {
 		{ "<leader>gl", function() require("snacks").picker.git_log() end, desc = "󰗲 Log" },
 
 		-- similar to tinygit's `interactiveStaging`
-		{ "<leader>ga", function() require("snacks").picker.git_diff() end, desc = "󰐖 View hunks" },
+		{ "<leader>ga", function() require("snacks").picker.git_diff() end, desc = "󰐖 Hunks" },
 
 		--------------------------------------------------------------------------
 		-- INSPECT
@@ -424,9 +424,14 @@ return {
 						},
 					},
 					base = "HEAD", -- shows both staged and unstaged
+					format = function(item, picker)
+						local out = require("snacks.picker.format").file(item, picker)
+						return out
+					end,
 					actions = {
 						-- PENDING https://github.com/folke/snacks.nvim/issues/2382
 						["git_stage_hunk"] = function(picker, item)
+							Chainsaw(item) -- 🪚
 							local args = { -- https://stackoverflow.com/a/66618356/22114136
 								"git",
 								"apply",
@@ -444,12 +449,11 @@ return {
 							end
 						end,
 					},
-				}
+				},
 			},
 			formatters = {
 				file = {
 					filename_first = true,
-					-- truncate = "left",
 					git_status_hl = true,
 				},
 				selected = { unselected = false }, -- hide selection column when no selected items
