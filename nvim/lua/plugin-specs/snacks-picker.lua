@@ -238,6 +238,7 @@ return {
 		},
 		-- stylua: ignore
 		{ "<C-.>", function() require("snacks").picker.icons() end, mode = { "n", "i" }, desc = "󱗿 Icon picker" },
+		-- test
 		{ "g.", function() require("snacks").picker.resume() end, desc = "󰗲 Resume" },
 	},
 	opts = {
@@ -419,12 +420,13 @@ return {
 					layout = "big_preview",
 					win = {
 						input = {
-							keys = { ["<Space>"] = { "stage", mode = "i" } },
+							keys = { ["<Space>"] = { "git_stage_hunk", mode = "i" } },
 						},
 					},
+					base = "HEAD", -- shows both staged and unstaged
 					actions = {
 						-- PENDING https://github.com/folke/snacks.nvim/issues/2382
-						["stage"] = function(picker, item)
+						["git_stage_hunk"] = function(picker, item)
 							local args = { -- https://stackoverflow.com/a/66618356/22114136
 								"git",
 								"apply",
@@ -436,6 +438,7 @@ return {
 							local out = vim.system(args, { stdin = patch }):wait()
 							if out.code == 0 then
 								picker:find() -- refresh
+								vim.notify("Hunk staged", nil, { icon = "✓" })
 							else
 								vim.notify(out.stderr or "Error", vim.log.levels.ERROR)
 							end
