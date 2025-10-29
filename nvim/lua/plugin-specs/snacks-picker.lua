@@ -419,7 +419,7 @@ return {
 					layout = "big_preview",
 					win = {
 						input = {
-							keys = { ["<Space>"] = { "stage", mode = "i" } },
+							keys = { ["<Space>"] = { "git_stage", mode = "i" } },
 						},
 					},
 					actions = {
