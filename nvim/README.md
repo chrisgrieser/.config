@@ -25,6 +25,7 @@
 
 ## All installed plugins
 - [altermo/ultimate-autopair.nvim](https://github.com/altermo/ultimate-autopair.nvim)
+- [Bilal2453/luvit-meta](https://github.com/Bilal2453/luvit-meta)
 - [chrisgrieser/nvim-chainsaw](https://github.com/chrisgrieser/nvim-chainsaw)
 - [chrisgrieser/nvim-genghis](https://github.com/chrisgrieser/nvim-genghis)
 - [chrisgrieser/nvim-justice](https://github.com/chrisgrieser/nvim-justice)
