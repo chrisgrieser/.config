@@ -419,10 +419,11 @@ return {
 					layout = "big_preview",
 					win = {
 						input = {
-							keys = { ["<Space>"] = { "git_stage", mode = "i" } },
+							keys = { ["<Space>"] = { "stage", mode = "i" } },
 						},
 					},
 					actions = {
+						-- PENDING https://github.com/folke/snacks.nvim/issues/2382
 						["stage"] = function(picker, item)
 							local args = { -- https://stackoverflow.com/a/66618356/22114136
 								"git",

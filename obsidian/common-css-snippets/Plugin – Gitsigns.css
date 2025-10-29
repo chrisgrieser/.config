@@ -1,8 +1,5 @@
+/* https://github.com/Vinzent03/obsidian-git/pull/983#issuecomment-3461380293 */
 .git-gutter-marker.git-changedelete {
 	font-weight: var(--font-bold);
 	font-size: 1rem;
-}
-
-.status-bar-item.git-changes-status-bar-colored {
-	text-shadow: 0.4px 0.4px 0 var(--text-muted);
 }
