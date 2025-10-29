@@ -275,6 +275,12 @@ nnoremap qq :toggleComment<CR>
 
 "───────────────────────────────────────────────────────────────────────────────
 "GIT
+exmap nextHunk obcommand obsidian-git:next-hunk
+nnoremap gh :nextHunk<CR>
+
+exmap prevHunk obcommand obsidian-git:prev-hunk
+nnoremap gH :prevHunk<CR>
+
 exmap resetHunk obcommand obsidian-git:reset-hunk
 nnoremap ,uh :resetHunk<CR>
 
