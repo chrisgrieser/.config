@@ -423,15 +423,9 @@ return {
 							keys = { ["<Space>"] = { "git_stage_hunk", mode = "i" } },
 						},
 					},
-					base = "HEAD", -- shows both staged and unstaged
-					format = function(item, picker)
-						local out = require("snacks.picker.format").file(item, picker)
-						return out
-					end,
+					-- PENDING https://github.com/folke/snacks.nvim/issues/2382
 					actions = {
-						-- PENDING https://github.com/folke/snacks.nvim/issues/2382
 						["git_stage_hunk"] = function(picker, item)
-							Chainsaw(item) -- 🪚
 							local args = { -- https://stackoverflow.com/a/66618356/22114136
 								"git",
 								"apply",
@@ -452,10 +446,7 @@ return {
 				},
 			},
 			formatters = {
-				file = {
-					filename_first = true,
-					git_status_hl = true,
-				},
+				file = { filename_first = true, },
 				selected = { unselected = false }, -- hide selection column when no selected items
 			},
 			previewers = {
