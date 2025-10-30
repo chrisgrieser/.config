@@ -402,7 +402,11 @@ return {
 				git_branches = {
 					all = true, -- = include remotes
 				},
+				git_log = {
+					layout = "toggled_preview",
+				},
 				git_status = {
+					layout = "big_preview",
 					win = {
 						input = {
 							keys = {
@@ -413,35 +417,16 @@ return {
 						},
 					},
 				},
-				git_log = {
-					layout = "toggled_preview",
-				},
 				git_diff = {
 					layout = "big_preview",
 					win = {
 						input = {
-							keys = { ["<Space>"] = { "git_stage_hunk", mode = "i" } },
+							keys = {
+								["<Tab>"] = { "list_down_wrapping", mode = "i" },
+								["<Space>"] = { "git_stage", mode = "i" },
+								-- <CR> opens the file as usual
+							},
 						},
-					},
-					-- PENDING https://github.com/folke/snacks.nvim/issues/2382
-					actions = {
-						["git_stage_hunk"] = function(picker, item)
-							local args = { -- https://stackoverflow.com/a/66618356/22114136
-								"git",
-								"apply",
-								"--cached", -- affect staging area, not working tree
-								"--verbose", -- more helpful error messages
-								"-", -- read patch from stdin
-							}
-							local patch = item.diff .. "\n"
-							local out = vim.system(args, { stdin = patch }):wait()
-							if out.code == 0 then
-								picker:find() -- refresh
-								vim.notify("Hunk staged", nil, { icon = "✓" })
-							else
-								vim.notify(out.stderr or "Error", vim.log.levels.ERROR)
-							end
-						end,
 					},
 				},
 			},

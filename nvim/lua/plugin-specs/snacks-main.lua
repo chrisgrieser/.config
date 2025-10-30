@@ -4,7 +4,6 @@
 return {
 	"folke/snacks.nvim",
 	event = "UIEnter",
-	version = "*", -- snacks often releases, so prefer the latest stable venison
 
 	config = function(_, opts)
 		require("snacks").setup(opts)
