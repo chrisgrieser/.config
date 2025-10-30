@@ -33,19 +33,21 @@ function shortNumber(starcount) {
 	return starStr.slice(0, -3) + "k";
 }
 
-//──────────────────────────────────────────────────────────────────────────────
-
-/** @type {AlfredRun} */
-// biome-ignore lint/correctness/noUnusedVariables: Alfred run
-function run() {
-	// get GITHUB_TOKEN
+function getGithubToken() {
 	const tokenShellCmd = $.getenv("github_token_shell_cmd").trim();
 	const tokenFromZshenvCmd = "test -e $HOME/.zshenv && source $HOME/.zshenv ; echo $GITHUB_TOKEN";
 	let githubToken = $.getenv("github_token_from_alfred_prefs").trim();
 	if (!githubToken && tokenShellCmd) githubToken = app.doShellScript(tokenShellCmd).trim();
 	if (!githubToken) githubToken = app.doShellScript(tokenFromZshenvCmd);
+	return githubToken;
+}
 
-	// CONFIG
+//──────────────────────────────────────────────────────────────────────────────
+
+/** @type {AlfredRun} */
+// biome-ignore lint/correctness/noUnusedVariables: Alfred run
+function run() {
+	const githubToken = getGithubToken();
 	const username = $.getenv("github_username");
 	const localRepoFolder = $.getenv("local_repo_folder");
 	const cloneDepth = Number.parseInt($.getenv("clone_depth"));

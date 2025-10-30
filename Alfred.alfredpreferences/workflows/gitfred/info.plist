@@ -1522,52 +1522,56 @@
 	<key>readme</key>
 	<string>## Usage
 - Search all public GitHub repositories via the keyword `gh`.
-	+ &lt;kbd&gt;⏎&lt;/kbd&gt;: Open the repo's GitHub page.
-	+ &lt;kbd&gt;⌘⏎&lt;/kbd&gt;: Open the repo's homepage. If it has none, opens the
+	* Uses the [GitHub search query
+	  syntax](https://docs.github.com/en/search-github/searching-on-github/searching-for-repositories),
+	  for example `alfred user:chrisgrieser` to search for repositories with the
+	  name `alfred` by the user `chrisgrieser`.
+	* &lt;kbd&gt;⏎&lt;/kbd&gt;: Open the repo's GitHub page.
+	* &lt;kbd&gt;⌘⏎&lt;/kbd&gt;: Open the repo's homepage. If it has none, opens the
 	  releases page instead.
-	+ &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy the repo URL.
-	+ &lt;kbd&gt;⌃⏎&lt;/kbd&gt;: Clone the repo to a local folder and open in the Terminal.
+	* &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy the repo URL.
+	* &lt;kbd&gt;⌃⏎&lt;/kbd&gt;: Clone the repo to a local folder and open in the Terminal.
 - Access your repositories via `gmy`. (Limited to the 100 repos last updated.)
-	+ &lt;kbd&gt;⏎&lt;/kbd&gt;: If the repo is available locally on your device, open it in
+	* &lt;kbd&gt;⏎&lt;/kbd&gt;: If the repo is available locally on your device, open it in
 	  the terminal. Otherwise, open the repo's GitHub page.
-	+ &lt;kbd&gt;⌘⏎&lt;/kbd&gt;: Open the repo's GitHub page.
-	+ &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy the repo URL.
-	+ &lt;kbd&gt;⌃⏎&lt;/kbd&gt;: Clone the repo to a local folder and open in the Terminal.
+	* &lt;kbd&gt;⌘⏎&lt;/kbd&gt;: Open the repo's GitHub page.
+	* &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy the repo URL.
+	* &lt;kbd&gt;⇧⏎&lt;/kbd&gt;: Clone the repo to a local folder and open in the Terminal.
 	  If the repo is already locally available on your device, just open the
 	  repository in the Terminal.
-	+ To include private repos, requires [GitHub
+	* To include private repos, requires [GitHub
 	  Token](https://github.com/settings/tokens).
 - Open recent GitHub issues you are involved in with `ghi`.
-	+ &lt;kbd&gt;⏎&lt;/kbd&gt;: Open the issue in the browser.
-	+ &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy the issue URL.
-	+ To include issues in private repos, requires [GitHub
+	* &lt;kbd&gt;⏎&lt;/kbd&gt;: Open the issue in the browser.
+	* &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy the issue URL.
+	* To include issues in private repos, requires [GitHub
 	  Token](https://github.com/settings/tokens).
 - Access PRs you have opened with the keyword `gpr`.
-	+ &lt;kbd&gt;⏎&lt;/kbd&gt;: Open the PR in the browser.
-	+ &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy the link to the PR.
-	+ To include private PRs, requires [GitHub
+	* &lt;kbd&gt;⏎&lt;/kbd&gt;: Open the PR in the browser.
+	* &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy the link to the PR.
+	* To include private PRs, requires [GitHub
 	  Token](https://github.com/settings/tokens).
 - Directly open your GitHub notification via `ghn`.
-	+ Requires [GitHub Token](https://github.com/settings/tokens).
-	+ &lt;kbd&gt;⏎&lt;/kbd&gt;: Open the notification in the browser. In cases where no URL
+	* Requires [GitHub Token](https://github.com/settings/tokens).
+	* &lt;kbd&gt;⏎&lt;/kbd&gt;: Open the notification in the browser. In cases where no URL
 	  is available, such as deleted comments or CI activity, opens the GitHub
 	  notification inbox instead.
-	+ &lt;kbd&gt;⌘⏎&lt;/kbd&gt;: Mark the notification as read.
-	+ &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy the URL of the notification target.
-	+ &lt;kbd&gt;⇧⏎&lt;/kbd&gt;: Mark the notification as done.
+	* &lt;kbd&gt;⌘⏎&lt;/kbd&gt;: Mark the notification as read.
+	* &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy the URL of the notification target.
+	* &lt;kbd&gt;⌃⏎&lt;/kbd&gt;: Mark the notification as done.
 - Additionally, you can press the
-  [hotkey](https://www.alfredapp.com/help/workflows/triggers/hotkey/) to clone
-  a GitHub repo from the current browser tab. ([Note that Firefox is not
+  [hotkey](https://www.alfredapp.com/help/workflows/triggers/hotkey/) to clone a
+  GitHub repo from the current browser tab. ([Note that Firefox is not
   supported.](https://www.alfredforum.com/topic/16748-how-to-do-x-in-firefox-from-alfred/))
 
 ## GitHub Token
 Optional. Only required for showing notifications, private PRs, and private
 repos. The token requires accesses to private repos and to notifications. The
 workflow will check for the token in the following order:
-1. Add the `GITHUB_TOKEN` in the Alfred workflow configuration.
-2. Or: add a shell command that outputs your `GITHUB_TOKEN`, such as `cat
-   $HOME/my_token.txt`.
-3. Or: export the token in your `.zshenv`.
+1. The `GITHUB_TOKEN` in the Alfred workflow configuration.
+2. A shell command that outputs your `GITHUB_TOKEN`, such as `cat
+   $HOME/my_token.txt`, defined in your workflow settings.
+3. A token exported in your `.zshenv`, such as `export GITHUB_TOKEN=…`.
 
 ---
 
@@ -2232,7 +2236,7 @@ to set a hotkey to clone the repo in the frontmost browser tab</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.13.0</string>
+	<string>1.14.0</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
