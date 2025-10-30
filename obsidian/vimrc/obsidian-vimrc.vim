@@ -410,8 +410,8 @@ vnoremap am aW
 vnoremap im iW
 vnoremap aq a"
 vnoremap iq i"
-vnoremap ay a'
-vnoremap iy i'
+vnoremap az a'
+vnoremap iz i'
 vnoremap ae a`
 vnoremap ie i`
 vnoremap ir i[
@@ -447,10 +447,10 @@ nnoremap sj VjP
 nnoremap sJ VjjP
 nnoremap sim viWP
 nnoremap sam vaWP
-nnoremap siw viwP
+nnoremap siw viwP "typos: ignore-line
 nnoremap saw vawP
 nnoremap sis visP
-nnoremap sas vasP
+nnoremap sas vasP "typos: ignore-line
 nnoremap sip VipP
 nnoremap sap VapP
 nnoremap sib vi)P
@@ -458,9 +458,9 @@ nnoremap saq va"P
 nnoremap siq vi"P
 nnoremap sk vi"P
 nnoremap saz va'P
-nnoremap siz vi'P
+nnoremap siz vi'P "typos: ignore-line
 nnoremap sae va`P
-nnoremap sie vi`P
+nnoremap sie vi`P "typos: ignore-line
 nnoremap sab va)P
 nnoremap sir vi]P
 nnoremap sar va]P
