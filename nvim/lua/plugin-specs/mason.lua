@@ -66,10 +66,10 @@ end
 
 local function enableLsps()
 	local installedPacks = require("mason-registry").get_installed_packages()
-	local lspConfigNames = vim.iter(installedPacks)
-		:filter(function(p) return vim.list_contains(p.spec.categories, "LSP") and p.spec.neovim end)
-		:map(function(pack) return pack.spec.neovim.lspconfig end)
-		:totable()
+	local lspConfigNames = vim.iter(installedPacks):fold({}, function(acc, pack)
+		table.insert(acc, pack.spec.neovim and pack.spec.neovim.lspconfig)
+		return acc
+	end)
 	vim.lsp.enable(lspConfigNames)
 	vim.lsp.enable(nonMasonLsps)
 end
@@ -77,19 +77,19 @@ end
 ---@param pack { name: string, install: function }
 ---@param version? string if provided, updates to that version
 local function installOrUpdate(pack, version)
-	local preMsg = version and ("[%s] updating to %s…"):format(pack.name, version)
-		or ("[%s] installing…"):format(pack.name)
-	notify(preMsg, "info", { id = "mason.install" })
+	local mode = version and ("updating to %s"):format(version) or "installing"
+	local msg = ("[%s] %s…"):format(pack.name, mode)
+	notify(msg, "info", { id = "mason.install" })
 
 	pack:install({ version = version }, function(success, result)
 		if success then
-			local mode = version and "updated" or "installed"
-			local postMsg = ("[%s] %s "):format(pack.name, mode)
-			notify(postMsg, "info", { id = "mason.install" })
+			mode = version and ("updated to %s"):format(version) or "installed"
+			msg = ("[%s] %s "):format(pack.name, mode)
+			notify(msg, "info", { id = "mason.install" })
 		else
-			local mode = version and "update" or "install"
-			local postMsg = ("[%s] failed to %s: %s"):format(pack.name, mode, result)
-			notify(postMsg, "error", { id = "mason.install" })
+			mode = version and "update" or "install"
+			msg = ("[%s] failed to %s: %s"):format(pack.name, mode, result)
+			notify(msg, "error", { id = "mason.install" })
 		end
 	end)
 end
