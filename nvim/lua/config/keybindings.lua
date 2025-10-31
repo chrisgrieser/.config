@@ -52,6 +52,7 @@ keymap({ "n", "x" }, "J", "6gj", { desc = "6j" })
 keymap({ "n", "x" }, "K", "6gk", { desc = "6k" })
 
 -- Jump history
+keymap("n", "<C-g>", "<C-t>", { desc = "󱋿 Jump back in tagstack" }) -- useful for goto-definitions
 keymap("n", "<C-h>", "<C-o>", { desc = "󱋿 Jump back" })
 keymap("n", "<C-l>", "<C-i>", { desc = "󱋿 Jump forward", unique = false })
 
