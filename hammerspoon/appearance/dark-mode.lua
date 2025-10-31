@@ -22,12 +22,11 @@ function M.autoSetBrightness()
 	if noBrightnessSensor then return end
 
 	local target = ambient > 90 and 1
-		or ambient > 80 and 0.9
-		or ambient > 50 and 0.8
-		or ambient > 30 and 0.7
-		or ambient > 15 and 0.6
-		or ambient > 1 and 0.5
-		or 0.4
+		or ambient > 50 and 0.9
+		or ambient > 30 and 0.8
+		or ambient > 15 and 0.7
+		or ambient > 1 and 0.6
+		or 0.5
 
 	print(("💡 ambient brightness: %s -> target: %s"):format(ambient, target))
 	local iMacDisplay = require("win-management.window-utils").iMacDisplay

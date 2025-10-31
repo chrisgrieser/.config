@@ -1,6 +1,7 @@
 --------------------------------------------------------------------------------
 -- INFO – TO PIN VERSIONS
--- copy mason registry spec with desired version to `personal-mason-registry`
+-- 1. uncomment personal registry in mason's `opts`
+-- 2. copy mason registry spec with desired version to `personal-mason-registry`
 --------------------------------------------------------------------------------
 
 local ensureInstalled = {
@@ -34,7 +35,7 @@ local ensureInstalled = {
 	},
 	linters = {
 		"markdownlint", -- via efm
-		"shellcheck", -- via efm PENDING https://github.com/bash-lsp/bash-language-server/issues/663
+		"shellcheck", -- shell linter via efm PENDING https://github.com/bash-lsp/bash-language-server/issues/663
 	},
 	formatters = {
 		"markdown-toc", -- automatic table-of-contents
@@ -144,25 +145,16 @@ return {
 	},
 	config = function(_, opts)
 		vim.env.npm_config_cache = vim.env.HOME .. "/.cache/npm" -- don't crowd $HOME with `.npm` folder
-
-		local personalRegistry = vim.fn.stdpath("config") .. "/personal-mason-registry"
-		local hasCustomPackages = #vim.fs.find("package.yaml", { path = personalRegistry }) > 0
-		if hasCustomPackages and vim.fn.executable("yq") == 0 then
-			if vim.fn.executable("yq") == 0 then
-				notify("`yq` is required when using a custom registry.", "error")
-			else
-				opts.registries = {
-					"file:" .. personalRegistry,
-					"github:mason-org/mason-registry",
-				}
-			end
-		end
-
 		require("mason").setup(opts)
 		enableLsps()
 		vim.defer_fn(syncPackages, 4000)
 	end,
 	opts = {
+		registries = {
+			-- personal registry must come first to have priority
+			-- "file:" .. vim.fn.stdpath("config") .. "/personal-mason-registry",
+			"github:mason-org/mason-registry",
+		},
 		ui = {
 			height = 0.85,
 			width = 0.8,
