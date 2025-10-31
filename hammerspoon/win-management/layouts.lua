@@ -21,7 +21,6 @@ local function isWorkWeek()
 	return weekday ~= "Sat" and weekday ~= "Sun"
 end
 
-
 local function darkenDisplay() wu.iMacDisplay:setBrightness(0) end
 
 -------------------------------------------------------------------------------
@@ -44,15 +43,14 @@ local function workLayout(shouldDarkenDisplay)
 		local masto = u.app("Ivory")
 		if masto then masto:mainWindow():setFrame(wu.toTheSide) end
 
-		local layout = {
-			{ "Mimestream", nil, wu.iMacDisplay, wu.pseudoMax },
-			{ "Brave Browser", nil, wu.iMacDisplay, wu.pseudoMax },
-			isWorkWeek() and { "Slack", nil, wu.iMacDisplay, wu.pseudoMax } or nil,
-		}
-		hs.layout.apply(layout)
+		local appsToLayout = { "Mimestream", "Brave Browser", isWorkWeek() and "Slack" or nil }
+		for _, appName in pairs(appsToLayout) do
+			local win = u.app(appName):mainWindow()
+			if win then wu.moveResize(win, wu.pseudoMax) end
+		end
 	end)
 
-	print("🔲 Loaded work layout")
+	print("🔲 Layout: work")
 end
 
 local function movieLayout()
@@ -78,7 +76,7 @@ local function movieLayout()
 		"Ivory",
 		"Reminders",
 	}
-	print("🔲 Loaded movie layout")
+	print("🔲 Layout: movie")
 end
 
 --------------------------------------------------------------------------------
