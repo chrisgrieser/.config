@@ -17,16 +17,13 @@ return {
 			lsp_format = "first",
 		},
 		formatters_by_ft = {
-			-- FIX stylua-lsp offset bug: https://github.com/JohnnyMorganz/StyLua/issues/1045
-			lua = { lsp_format = "never", "stylua" },
-
 			markdown = { "markdownlint", "markdown-toc", "injected" },
 			python = { "ruff_fix", "ruff_organize_imports" },
 			typescript = { "tsAddMissingImports", "tsRemoveUnusedImports", "biome-organize-imports" },
 			zsh = { "shellHome", "shellcheck" },
 			json = { lsp_format = "prefer", "jq" }, -- use `biome` (via LSP), with `jq` as fallback
 
-			-- fallback, used when no formatters are defined and no LSP is available
+			-- _ = fallback, used when no formatters defined and no LSP available
 			_ = { "trim_whitespace", "trim_newlines", "squeeze_blanks" },
 		},
 		formatters = {
