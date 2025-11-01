@@ -183,16 +183,17 @@ return {
 		--------------------------------------------------------------------------
 		-- GIT
 
-		{
-			"<leader>gb",
-			function() require("snacks").picker.git_branches() end,
-			desc = "󰗲 Branches",
-		},
 		{ "<leader>gs", function() require("snacks").picker.git_status() end, desc = "󰗲 Status" },
 		{ "<leader>gl", function() require("snacks").picker.git_log() end, desc = "󰗲 Log" },
-
-		-- similar to tinygit's `interactiveStaging`
 		{ "<leader>ga", function() require("snacks").picker.git_diff() end, desc = "󰐖 Hunks" },
+
+		-- stylua: ignore start
+		{ "<leader>gb", function() require("snacks").picker.git_branches() end, desc = "󰗲 Branches" },
+		{ "<leader>gi", function() require("snacks").picker.gh_issue() end, desc = " GitHub Issues (open)" },
+		{ "<leader>gI", function() require("snacks").picker.gh_issue { state = "all" } end, desc = " GitHub Issues (all)" },
+		{ "<leader>gp", function() require("snacks").picker.gh_pr() end, desc = " GitHub PRs (open)" },
+		{ "<leader>gP", function() require("snacks").picker.gh_pr { state = "all" } end, desc = " GitHub PRs (all)" },
+		-- stylua: ignore end
 
 		--------------------------------------------------------------------------
 		-- INSPECT
@@ -244,6 +245,8 @@ return {
 
 	init = require("config.utils").loadGhToken,
 	opts = {
+		gh = { -- https://github.com/folke/snacks.nvim/blob/main/docs/gh.md#%EF%B8%8F-config
+		},
 		picker = {
 			sources = {
 				undo = {
@@ -434,9 +437,15 @@ return {
 						},
 					},
 				},
+				gh_issue = {
+					layout = "big_preview",
+				},
+				gh_pr = {
+					layout = "big_preview",
+				},
 			},
 			formatters = {
-				file = { filename_first = true, },
+				file = { filename_first = true },
 				selected = { unselected = false }, -- hide selection column when no selected items
 			},
 			previewers = {

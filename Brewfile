@@ -42,12 +42,14 @@ cask "obsidian", greedy: true # greedy for installer version
 cask "replacicon"
 cask "signal"
 cask "slack"
-cask "tabtab" # alt-tab not working https://github.com/neovide/neovide/issues/3182
 cask "wezterm"
 cask "zoom"
 mas "Highlights", id: 1498912833
 mas "Ivory", id: 6444602274
 mas "Easy CSV Editor", id: 1171346381
+
+cask "alt-tab"
+# cask "tabtab" # alt-tab not working https://github.com/neovide/neovide/issues/3182
 
 # QUICKLOOK
 cask "betterzip"
