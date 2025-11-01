@@ -241,6 +241,8 @@ return {
 		-- test
 		{ "g.", function() require("snacks").picker.resume() end, desc = "󰗲 Resume" },
 	},
+
+	init = require("config.utils").loadGhToken,
 	opts = {
 		picker = {
 			sources = {

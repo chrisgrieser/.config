@@ -28,5 +28,16 @@ function M.detachIfObsidianOrIcloud(client, bufnr)
 	end
 end
 
+function M.loadGhToken()
+	if vim.env.GITHUB_TOKEN then return end
+	local tokenPath = os.getenv("HOME")
+		.. "/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/private dotfiles/github-token.txt"
+	local file = io.open(tokenPath, "r")
+	if file then
+		vim.env.GITHUB_TOKEN = file:read("*l") -- read first line
+		file:close()
+	end
+end
+
 --------------------------------------------------------------------------------
 return M
