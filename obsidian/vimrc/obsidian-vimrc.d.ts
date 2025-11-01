@@ -5,19 +5,6 @@ declare const selection: EditorSelection;
 declare const editor: Editor;
 declare const view: View;
 
-declare class Notice {
-	constructor(msg: string, duration?: number);
-	setMessage(msg: string): void;
-}
-
-// ELECTRON GLOBALS
-declare const process: { versions: Record<string, string> };
-declare const electronWindow: { openDevTools(): void };
-// biome-ignore lint/suspicious/noExplicitAny: Electron DOM
-declare const activeDocument: any;
-// biome-ignore lint/suspicious/noExplicitAny: Electron window
-declare const activeWindow: any;
-
 //──────────────────────────────────────────────────────────────────────────────
 
 // INFO importing `obsidian.d.ts` somehow breaks the typings, thus manually
@@ -33,8 +20,6 @@ declare type TFile = {
 	parent: TFile;
 	extension: string;
 };
-
-declare const request: (url: string) => Promise<string>; // https://docs.obsidian.md/Reference/TypeScript+API/request
 
 declare type Editor = {
 	exec(action: string): void;

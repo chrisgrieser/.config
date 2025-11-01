@@ -344,7 +344,10 @@ return {
 				recent = {
 					layout = "small_no_preview",
 					filter = {
-						paths = { [vim.g.iCloudSync] = false }, -- e.g., scratch buffers
+						paths = {
+							[vim.fs.normalize("~/.config/hammerspoon/Spoons/EmmyLua.spoon")] = false,
+							[vim.g.iCloudSync] = false, -- e.g., scratch buffers
+						},
 						filter = function(item) return vim.fs.basename(item.file) ~= "COMMIT_EDITMSG" end,
 					},
 				},
@@ -447,7 +450,7 @@ return {
 				small_no_preview = {
 					layout = {
 						box = "horizontal",
-						width = 0.6,
+						width = 0.65,
 						height = 0.6,
 						border = "none",
 						{

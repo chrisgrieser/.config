@@ -68,7 +68,6 @@
 		"formatWithErrors": true
 	},
 	"files": {
-		"includes": ["**", "!.obsidian/plugins/**/*"], // all files except Obsidian plugins
 		"ignoreUnknown": true
 	},
 	// use the schema from the local biome package installed via `mason`
