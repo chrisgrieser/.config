@@ -21,6 +21,7 @@ plists=(
 
 	# apps
 	com.Replacicon.Replacicon
+	com.helftone.monodraw.plist
 	com.colliderli.iina
 	com.runningwithcrayons.Alfred-Preferences
 	com.runningwithcrayons.Alfred
@@ -30,6 +31,8 @@ plists=(
 	org.m0k.transmission
 	us.zoom.xos
 	org.sbarex.SourceCodeSyntaxHighlight.plist
+	com.macitbetter.betterzip.plist
+	com.lwouis.alt-tab-macos.plist
 )
 
 #───────────────────────────────────────────────────────────────────────────────
