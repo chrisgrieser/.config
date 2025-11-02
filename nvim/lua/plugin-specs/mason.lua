@@ -121,7 +121,6 @@ local function syncPackages()
 		end)
 
 		-- auto-clean unused packages
-		-- prevent accidentally uninstallung everything
 		assert(#ensurePacks > 10, "< 10 mason packages, aborting uninstalls.")
 		local installedPackages = masonReg.get_installed_package_names()
 		vim.iter(installedPackages):each(function(packName)
