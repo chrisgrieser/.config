@@ -100,9 +100,8 @@ end
 -- 3. uninstall unused packages
 local function syncPackages()
 	local ensurePacks = vim.iter(vim.tbl_values(ensureInstalled)):flatten():totable()
-	assert(#ensurePacks > 10, "< 10 mason packages, aborting uninstalls.") -- safety net
-
 	local masonReg = require("mason-registry")
+
 	masonReg.refresh(function(ok, _)
 		if not ok then
 			notify("Could not update mason registry.", "error")
@@ -122,6 +121,8 @@ local function syncPackages()
 		end)
 
 		-- auto-clean unused packages
+		-- prevent accidentally uninstallung everything
+		assert(#ensurePacks > 10, "< 10 mason packages, aborting uninstalls.")
 		local installedPackages = masonReg.get_installed_package_names()
 		vim.iter(installedPackages):each(function(packName)
 			if vim.tbl_contains(ensurePacks, packName) then return end
