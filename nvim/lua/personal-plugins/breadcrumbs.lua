@@ -54,7 +54,8 @@ local function getBreadcrumbs()
 					table.insert(crumbs, 1, "[" .. indexOfChild .. "]")
 					break
 				end
-				indexOfChild = indexOfChild + 1
+				-- ensure that non = non-elements like comments are not counted
+				if child:type() == prevNode:type() then indexOfChild = indexOfChild + 1 end
 			end
 		end
 
