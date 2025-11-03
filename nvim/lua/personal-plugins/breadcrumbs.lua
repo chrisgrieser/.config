@@ -9,7 +9,7 @@ local config = {
 		},
 		yaml = {
 			object = ".*_pair", -- `flow_pair` or `block_mapping_pair`
-			array = "block_sequence$", -- not: `block_sequence_item`
+			array = ".*_sequence$", -- `block_sequence` or `flow_sequence`, but not: `block_sequence_item`
 		},
 		lua = {
 			object = "field",
@@ -35,7 +35,9 @@ local function getBreadcrumbs()
 	local prevNode
 	repeat
 		local isObject = node:type():match(ftNodes.object)
+			and not (prevNode and prevNode:type() == "comment")
 		local isArray = node:type():match(ftNodes.array)
+			and not (prevNode and prevNode:type() == "comment")
 
 		-- exception, since lua objects & arrays are both tables
 		if vim.bo.ft == "lua" then
@@ -54,7 +56,7 @@ local function getBreadcrumbs()
 					table.insert(crumbs, 1, "[" .. indexOfChild .. "]")
 					break
 				end
-				-- ensure that non = non-elements like comments are not counted
+				-- ensure that non-elements like comments are not counted
 				if child:type() == prevNode:type() then indexOfChild = indexOfChild + 1 end
 			end
 		end
