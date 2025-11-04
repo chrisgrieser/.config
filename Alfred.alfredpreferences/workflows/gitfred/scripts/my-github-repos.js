@@ -139,7 +139,9 @@ function run() {
 			if (repo.stargazers_count > 0) subtitle += `⭐ ${shortNumber(repo.stargazers_count)}  `;
 			if (repo.open_issues > 0) subtitle += `🟢 ${repo.open_issues}  `;
 			if (repo.forks_count > 0) subtitle += `🍴 ${repo.forks_count}  `;
-			if (memberRepo) subtitle += `👤 ${repo.owner.login}  `;
+			if (memberRepo) {
+				subtitle += `👤 ${repo.owner.login}  `;
+			}
 			if (memberRepo) matcher += "member ";
 
 			/** @type {AlfredItem} */
