@@ -23,18 +23,40 @@ end
 --------------------------------------------------------------------------------
 -- META
 
-keymap("n", "<D-,>", function()
-	local pathOfThisFile = debug.getinfo(1, "S").source:gsub("^@", "")
-	vim.cmd.edit(pathOfThisFile)
-end, { desc = "󰌌 Edit keybindings" })
-
 -- save before quitting (non-unique, since also set by Neovide)
 keymap("n", "<D-q>", vim.cmd.wqall, { desc = " Save & quit", unique = false })
+
+keymap(
+	{ "n", "x", "i" },
+	"<D-C-r>", -- hyper gets registered by neovide as cmd+ctrl
+	function()
+		if not jit.os == "OSX" then return end -- requires macOS' `open -a`
+		local script = [[#!/usr/bin/env zsh
+			for ((i = 0; i <= 40; i++)); do
+				sleep 0.05
+				if ! pgrep -xq "nvim"; then break; fi
+			done
+			if ! pgrep -xq "nvim"; then open -a "neovide"; fi
+		]]
+		local tempFile = assert(io.open("/tmp/restart-nvim.sh", "w"))
+		tempFile:write(script)
+		tempFile:close()
+
+		vim.system({ "zsh", "/tmp/restart-nvim.sh" }, { detach = true }) -- detach to run without nvim
+		vim.schedule(vim.cmd.wqall)
+	end,
+	{ desc = " Save & Restart nvim" }
+)
 
 -- stylua: ignore
 keymap("n", "<leader>pd", function() vim.ui.open(vim.fn.stdpath("data") --[[@as string]]) end, { desc = "󰝰 Local data dir" })
 -- stylua: ignore
 keymap("n", "<leader>pD", function() vim.ui.open(vim.g.iCloudSync) end, { desc = " Cloud data dir" })
+
+keymap("n", "<D-,>", function()
+	local pathOfThisFile = debug.getinfo(1, "S").source:gsub("^@", "")
+	vim.cmd.edit(pathOfThisFile)
+end, { desc = "󰌌 Edit keybindings" })
 
 --------------------------------------------------------------------------------
 -- NAVIGATION
@@ -395,28 +417,6 @@ keymap(
 		end)
 	end,
 	{ desc = " Open cwd in WezTerm" }
-)
-
-keymap(
-	{ "n", "x", "i" },
-	"<D-C-r>", -- hyper gets registered by neovide as cmd+ctrl
-	function()
-		if not jit.os == "OSX" then return end -- requires macOS' `open -a`
-		local script = [[#!/usr/bin/env zsh
-			for ((i = 0; i <= 40; i++)); do
-				sleep 0.05
-				if ! pgrep -xq "nvim"; then break; fi
-			done
-			if ! pgrep -xq "nvim"; then open -a "neovide"; fi
-		]]
-		local tempFile = assert(io.open("/tmp/restart-nvim.sh", "w"))
-		tempFile:write(script)
-		tempFile:close()
-
-		vim.system({ "zsh", "/tmp/restart-nvim.sh" }, { detach = true }) -- detach to run without nvim
-		vim.schedule(vim.cmd.wqall)
-	end,
-	{ desc = " Save & Restart nvim" }
 )
 
 --------------------------------------------------------------------------------
