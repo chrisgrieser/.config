@@ -386,7 +386,7 @@ end, { expr = true, desc = "<BS> does not leave cmdline" })
 -- OPEN WEZTERM at cwd
 keymap(
 	{ "n", "x", "i" },
-	"<D-C-t>", -- hyper + t gets registered by neovide as ctrl+t
+	"<D-C-t>", -- hyper gets registered by neovide as cmd+ctrl
 	function()
 		if not jit.os == "OSX" then return end
 		vim.system({ "osascript", "-e", 'tell application "WezTerm" to activate' }, {}, function()
@@ -395,6 +395,32 @@ keymap(
 		end)
 	end,
 	{ desc = " Open cwd in WezTerm" }
+)
+
+keymap(
+	{ "n", "x", "i" },
+	"<D-C-r>", -- hyper gets registered by neovide as cmd+ctrl
+	function()
+		local script = [[
+			for ((i = 0; i <= 20; i++)); do
+				if ! pgrep -xq "nvim"; then break; fi
+				sleep 0.1
+			done
+			if pgrep -xq "nvim"; then
+				osascript -e 'display notification "Could not quit nvim" with title "Error"'
+				return 1
+			fi
+			open -a "neovide"
+		]]
+		local file = io.open("/tmp/restart-nvim.sh", "w")
+		if file then
+			file:write(script)
+			file:close()
+		end
+		vim.system({ "zsh", "/tmp/restart-nvim.sh" }, { detach = true }) -- detach to run without nvim
+		vim.cmd.wqall()
+	end,
+	{ desc = " Save & Restart nvim" }
 )
 
 --------------------------------------------------------------------------------
