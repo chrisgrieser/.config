@@ -1414,7 +1414,7 @@ Display mounted volumes directly via `vol`.
 			<key>xpos</key>
 			<real>395</real>
 			<key>ypos</key>
-			<real>605</real>
+			<real>620</real>
 		</dict>
 		<key>24F3B28F-0642-43F2-AEA3-202F2E62F3B4</key>
 		<dict>
@@ -1425,7 +1425,7 @@ Display mounted volumes directly via `vol`.
 			<key>xpos</key>
 			<real>595</real>
 			<key>ypos</key>
-			<real>605</real>
+			<real>620</real>
 		</dict>
 		<key>2759BEDD-4BDD-45E5-8864-D2705A801FC5</key>
 		<dict>
@@ -1443,7 +1443,7 @@ Display mounted volumes directly via `vol`.
 			<key>xpos</key>
 			<real>595</real>
 			<key>ypos</key>
-			<real>1610</real>
+			<real>1625</real>
 		</dict>
 		<key>388BC499-DDF4-4188-B4F3-48EA712AAC8D</key>
 		<dict>
@@ -1452,7 +1452,7 @@ Display mounted volumes directly via `vol`.
 			<key>xpos</key>
 			<real>930</real>
 			<key>ypos</key>
-			<real>945</real>
+			<real>960</real>
 		</dict>
 		<key>40C6D3F7-B5AB-4C45-A3ED-7926B186E25F</key>
 		<dict>
@@ -1463,7 +1463,7 @@ Display mounted volumes directly via `vol`.
 			<key>xpos</key>
 			<real>390</real>
 			<key>ypos</key>
-			<real>1240</real>
+			<real>1255</real>
 		</dict>
 		<key>54580785-C343-4A69-8525-5BF78553961A</key>
 		<dict>
@@ -1472,7 +1472,7 @@ Display mounted volumes directly via `vol`.
 			<key>xpos</key>
 			<real>595</real>
 			<key>ypos</key>
-			<real>1475</real>
+			<real>1490</real>
 		</dict>
 		<key>57B5FE5A-E05E-4ACB-8E19-F11900D15215</key>
 		<dict>
@@ -1481,7 +1481,7 @@ Display mounted volumes directly via `vol`.
 			<key>xpos</key>
 			<real>390</real>
 			<key>ypos</key>
-			<real>1610</real>
+			<real>1625</real>
 		</dict>
 		<key>63C34A52-70A0-4CA0-AC29-0B8B16E654C8</key>
 		<dict>
@@ -1501,7 +1501,7 @@ Display mounted volumes directly via `vol`.
 			<key>xpos</key>
 			<real>495</real>
 			<key>ypos</key>
-			<real>1065</real>
+			<real>1080</real>
 		</dict>
 		<key>681490F8-D3BB-4024-AFE0-DCEE69201856</key>
 		<dict>
@@ -1510,7 +1510,7 @@ Display mounted volumes directly via `vol`.
 			<key>xpos</key>
 			<real>595</real>
 			<key>ypos</key>
-			<real>1220</real>
+			<real>1235</real>
 		</dict>
 		<key>80995D89-9285-4E5C-8728-25576BF43113</key>
 		<dict>
@@ -1521,7 +1521,7 @@ Display mounted volumes directly via `vol`.
 			<key>xpos</key>
 			<real>595</real>
 			<key>ypos</key>
-			<real>1340</real>
+			<real>1355</real>
 		</dict>
 		<key>8AA89898-0B1C-4A03-A7E8-3AD49B02F7A8</key>
 		<dict>
@@ -1532,7 +1532,7 @@ Display mounted volumes directly via `vol`.
 			<key>xpos</key>
 			<real>600</real>
 			<key>ypos</key>
-			<real>450</real>
+			<real>465</real>
 		</dict>
 		<key>8C2E586B-5404-426B-A71C-D71AC8BF3A14</key>
 		<dict>
@@ -1541,7 +1541,7 @@ Display mounted volumes directly via `vol`.
 			<key>xpos</key>
 			<real>760</real>
 			<key>ypos</key>
-			<real>1610</real>
+			<real>1625</real>
 		</dict>
 		<key>91CC8BC3-40C4-4D4B-8B44-919B6865C4A0</key>
 		<dict>
@@ -1577,7 +1577,7 @@ Display mounted volumes directly via `vol`.
 			<key>xpos</key>
 			<real>595</real>
 			<key>ypos</key>
-			<real>985</real>
+			<real>1000</real>
 		</dict>
 		<key>B758EFA5-2C8C-4C45-8A3E-B44E09A18464</key>
 		<dict>
@@ -1608,7 +1608,7 @@ Display mounted volumes directly via `vol`.
 			<key>xpos</key>
 			<real>770</real>
 			<key>ypos</key>
-			<real>740</real>
+			<real>755</real>
 		</dict>
 		<key>BF21A407-7022-4593-A143-0BBA5B02294A</key>
 		<dict>
@@ -1617,7 +1617,7 @@ Display mounted volumes directly via `vol`.
 			<key>xpos</key>
 			<real>755</real>
 			<key>ypos</key>
-			<real>1340</real>
+			<real>1355</real>
 		</dict>
 		<key>C533F8F1-AF72-46AD-9250-9C20FF7E7F6C</key>
 		<dict>
@@ -1646,7 +1646,7 @@ Display mounted volumes directly via `vol`.
 			<key>xpos</key>
 			<real>770</real>
 			<key>ypos</key>
-			<real>945</real>
+			<real>960</real>
 		</dict>
 		<key>E01978CB-6F00-4781-8079-075BE323C5FB</key>
 		<dict>
@@ -1655,7 +1655,7 @@ Display mounted volumes directly via `vol`.
 			<key>xpos</key>
 			<real>595</real>
 			<key>ypos</key>
-			<real>1100</real>
+			<real>1115</real>
 		</dict>
 		<key>F1539426-E456-4953-8215-D809DF4B120B</key>
 		<dict>
@@ -1675,7 +1675,7 @@ Display mounted volumes directly via `vol`.
 			<key>xpos</key>
 			<real>595</real>
 			<key>ypos</key>
-			<real>870</real>
+			<real>885</real>
 		</dict>
 		<key>F91AA471-17A8-42F7-ADC3-FEDAFA645CCF</key>
 		<dict>
@@ -1684,7 +1684,7 @@ Display mounted volumes directly via `vol`.
 			<key>xpos</key>
 			<real>595</real>
 			<key>ypos</key>
-			<real>740</real>
+			<real>755</real>
 		</dict>
 		<key>FA333A60-CF01-4178-857C-9EE58B2C2E42</key>
 		<dict>
@@ -1695,7 +1695,7 @@ Display mounted volumes directly via `vol`.
 			<key>xpos</key>
 			<real>390</real>
 			<key>ypos</key>
-			<real>1435</real>
+			<real>1450</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

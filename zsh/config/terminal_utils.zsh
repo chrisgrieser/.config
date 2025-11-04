@@ -63,8 +63,8 @@ _escape_on_empty_buffer() {
 		zsh -c "$rg_cmd" |
 			eza --stdin --color=always --icons=always --sort=oldest |
 			fzf --ansi --multi --scheme=path --tiebreak=length,end \
-				--info=inline --height="50%" --header="^a: show all" \
-				--bind="ctrl-a:change-header(including ignored files)+reload($rg_cmd \
+				--info=inline --height="50%" --header="^h: include hidden" \
+				--bind="ctrl-h:change-header(including hidden files)+reload($rg_cmd \
 					--hidden --no-ignore --no-ignore-files \
 					--glob='!/.git/' --glob='!node_modules' --glob='!__pycache__' --glob='!.DS_Store' |
 					eza --stdin --color=always --icons=always --sort=oldest)"
@@ -75,7 +75,7 @@ _escape_on_empty_buffer() {
 	echo "$selected" | cut -c3- | xargs open # `cut` to remove the nerdfont icons
 }
 zle -N _escape_on_empty_buffer
-bindkey '\e' _escape_on_empty_buffer
+bindkey '\e' _escape_on_empty_buffer # `esc`
 
 #───────────────────────────────────────────────────────────────────────────────
 
@@ -206,8 +206,6 @@ function ..d() {
 
 #───────────────────────────────────────────────────────────────────────────────
 
-b="/Users/chrisgrieser/Library/Developer/Xcode/DerivedData"
-
 # interactive `jq`
 function ij {
 	# Read stdin into a temp file if data is provided via stdin
@@ -222,9 +220,10 @@ function ij {
 	final_query=$(
 		jq --raw-output ". |keys[]" "$file" | fzf \
 			--query="." --prompt="jq > " --no-info --disabled \
-			--bind="enter:transform-query(echo {q}.{+} | sed -Ee 's/\.([[:digit:]])$/[\1]/' -e 's/\.\././g' )" \
+			--bind="enter:transform-query(echo {q}.{+} | sed -Ee 's/\.([[:digit:]])$/[\1]/' -e 's/\.\././g' -e 's/\.$//' )" \
 			--bind="change:reload(jq --raw-output {q}'|keys[]' '$file')" \
 			--bind="esc:cancel" \
+			--bind="bs:backward-kill-word" \
 			--height="100%" --preview-window="60%" \
 			--preview="jq --color-output {q} '$file'"
 	)

@@ -324,7 +324,7 @@ return {
 					win = {
 						input = {
 							keys = {
-								["<C-a>"] = { "toggle_hidden_and_ignored", mode = "i" }, -- consistent with `fzf`
+								["<C-h>"] = { "toggle_hidden_and_ignored", mode = "i" }, -- consistent with `fzf`
 								[":"] = { "complete_and_add_colon", mode = "i" },
 							},
 						},
