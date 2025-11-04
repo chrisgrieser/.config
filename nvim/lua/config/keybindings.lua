@@ -388,7 +388,7 @@ keymap(
 	{ "n", "x", "i" },
 	"<D-C-t>", -- hyper gets registered by neovide as cmd+ctrl
 	function()
-		if not jit.os == "OSX" then return end
+		if not jit.os == "OSX" then return end -- requires macOS' `osascript`
 		vim.system({ "osascript", "-e", 'tell application "WezTerm" to activate' }, {}, function()
 			local stdin = ("cd -q %q && clear\n"):format(vim.uv.cwd() or "")
 			vim.system({ "wezterm", "cli", "send-text", "--no-paste" }, { stdin = stdin })
@@ -401,24 +401,20 @@ keymap(
 	{ "n", "x", "i" },
 	"<D-C-r>", -- hyper gets registered by neovide as cmd+ctrl
 	function()
-		local script = [[
-			for ((i = 0; i <= 20; i++)); do
+		if not jit.os == "OSX" then return end -- requires macOS' `open -a`
+		local script = [[#!/usr/bin/env zsh
+			for ((i = 0; i <= 40; i++)); do
+				sleep 0.05
 				if ! pgrep -xq "nvim"; then break; fi
-				sleep 0.1
 			done
-			if pgrep -xq "nvim"; then
-				osascript -e 'display notification "Could not quit nvim" with title "Error"'
-				return 1
-			fi
-			open -a "neovide"
+			if ! pgrep -xq "nvim"; then open -a "neovide"; fi
 		]]
-		local file = io.open("/tmp/restart-nvim.sh", "w")
-		if file then
-			file:write(script)
-			file:close()
-		end
+		local tempFile = assert(io.open("/tmp/restart-nvim.sh", "w"))
+		tempFile:write(script)
+		tempFile:close()
+
 		vim.system({ "zsh", "/tmp/restart-nvim.sh" }, { detach = true }) -- detach to run without nvim
-		vim.cmd.wqall()
+		vim.schedule(vim.cmd.wqall)
 	end,
 	{ desc = " Save & Restart nvim" }
 )
