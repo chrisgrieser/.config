@@ -3,12 +3,7 @@
 front_app=$(osascript -e 'tell application "System Events" to return name of first process whose frontmost is true')
 
 # kill
-if [[ "$front_app" == "neovide" ]]; then
-	# since `cmd+q` is bound to `:wqall` in nvim, this ensures the file is saved
-	osascript -e 'tell application "System Events" to keystroke "q" using {command down}'
-else
-	killall "$front_app"
-fi
+killall "$front_app"
 
 # wait
 i=0

@@ -19,7 +19,11 @@ return {
 		formatters_by_ft = {
 			markdown = { "markdownlint", "markdown-toc", "injected" },
 			python = { "ruff_fix", "ruff_organize_imports" },
-			typescript = { "tsAddMissingImports", "tsRemoveUnusedImports", "biome-organize-imports" },
+			typescript = {
+				"tsAddMissingImports",
+				-- "tsRemoveUnusedImports",
+				-- "biome-organize-imports",
+			},
 			zsh = { "shellHome", "shellcheck" },
 			json = { lsp_format = "prefer", "jq" }, -- use `biome` (via LSP), with `jq` as fallback
 
@@ -47,17 +51,28 @@ return {
 					callback(nil, outLines)
 				end,
 			},
+			-- PENDING https://github.com/stevearc/conform.nvim/issues/795
 			tsAddMissingImports = {
 				format = function(_self, ctx, _lines, callback)
-					-- PENDING https://github.com/stevearc/conform.nvim/issues/795
-					vim.lsp.buf.code_action {
-						context = { only = { "source.addMissingImports.ts" } }, ---@diagnostic disable-line: missing-fields, assign-type-mismatch
-						apply = true,
+					local ts_ls = vim.lsp.get_clients({ name = "ts_ls", bufnr = ctx.buf })[1]
+					if not ts_ls then return end
+
+					local params = vim.lsp.util.make_range_params(nil, ts_ls.offset_encoding)
+					params.context = { ---@diagnostic disable-line: inject-field
+						only = { "source.addMissingImports.ts" },
+						diagnostics = {},
 					}
-					vim.defer_fn(function() -- deferred for code action to update buffer
-						local outLines = vim.api.nvim_buf_get_lines(ctx.buf, 0, -1, true)
-						callback(nil, outLines)
-					end, 60)
+					local results =
+						vim.lsp.buf_request_sync(ctx.buf, "textDocument/codeAction", params, 2000)
+					Chainsaw(results) -- 🪚
+
+					if not results then return end
+					for _, result in pairs(results) do
+						vim.lsp.util.apply_workspace_edit(result.result, ts_ls.offset_encoding)
+					end
+
+					local outLines = vim.api.nvim_buf_get_lines(ctx.buf, 0, -1, true)
+					callback(nil, outLines)
 				end,
 			},
 			tsRemoveUnusedImports = {
