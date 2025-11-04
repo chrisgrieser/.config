@@ -84,7 +84,8 @@ bkeymap({ "n", "i" }, "<D-u>", function()
 		if l:find("%d") then return ind .. "" end -- ordered -> none
 		return "" -- other -> none
 	end)
-	if updated == curLine then updated = "- " .. curLine end -- none -> list
+	-- none -> list
+	if updated == curLine then updated = curLine:gsub("^(%s*)(.*)", "%1- %2") end
 
 	vim.api.nvim_set_current_line(updated)
 	local diff = #updated - #curLine

@@ -163,7 +163,8 @@ function cycleListTypes() {
 		if (list.match(/\d/)) return indent; // ordered -> none
 		return ""; // other -> none
 	});
-	if (updatedLine === curLine) updatedLine = "- " + curLine; // none -> list
+	// none -> list
+	if (updatedLine === curLine) updatedLine = curLine.replace(/^(\s*)(.*)/, "$1- $2");
 
 	const diff = updatedLine.length - curLine.length;
 	editor.setLine(lnum, updatedLine);
