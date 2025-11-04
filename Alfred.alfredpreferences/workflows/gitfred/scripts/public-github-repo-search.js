@@ -87,7 +87,7 @@ function run(argv) {
 		// CAVEAT pushed_at apparently also includes pushes via PR :(
 		const lastUpdated = repo.pushed_at ? humanRelativeDate(repo.pushed_at) : "";
 
-		let matcher = alfredMatcher(repo.name);
+		let matcher = repo.name + " " + repo.owner.login + " ";
 		let type = "";
 		if (repo.fork) type += "🍴 ";
 		if (repo.fork) matcher += "fork ";
@@ -111,7 +111,7 @@ function run(argv) {
 		return {
 			title: type + repo.name,
 			subtitle: subtitle,
-			match: matcher,
+			match: alfredMatcher(matcher),
 			arg: repo.html_url,
 			quicklookurl: repo.html_url,
 			mods: {

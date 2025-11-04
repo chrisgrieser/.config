@@ -112,7 +112,7 @@ function run() {
 			},
 		)
 		.map((/** @type {GithubRepo&{local: {path: string}|undefined}} */ repo) => {
-			let matcher = alfredMatcher(repo.name);
+			let matcher = repo.name;
 			let type = "";
 			let subtitle = "";
 			repo.local = localRepos[repo.name];
@@ -139,16 +139,14 @@ function run() {
 			if (repo.stargazers_count > 0) subtitle += `⭐ ${shortNumber(repo.stargazers_count)}  `;
 			if (repo.open_issues > 0) subtitle += `🟢 ${repo.open_issues}  `;
 			if (repo.forks_count > 0) subtitle += `🍴 ${repo.forks_count}  `;
-			if (memberRepo) {
-				subtitle += `👤 ${repo.owner.login}  `;
-			}
-			if (memberRepo) matcher += "member ";
+			if (memberRepo) subtitle += `👤 ${repo.owner.login}  `;
+			if (memberRepo) matcher += "member " + repo.owner.login + " ";
 
 			/** @type {AlfredItem} */
 			const alfredItem = {
 				title: `${type}${repo.name}`,
 				subtitle: subtitle,
-				match: matcher,
+				match: alfredMatcher(matcher),
 				arg: mainArg,
 				quicklookurl: repo.private ? undefined : mainArg,
 				uid: useAlfredFrecency ? repo.full_name : undefined,
