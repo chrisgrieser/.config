@@ -35,17 +35,21 @@ func parseTimeAndPriorityAndMessage(from input: String) -> ParsedResult? {
 	var amPm = ""
 
 	// parse due time
-	let hhmmPattern = #"(\d{1,2}):(\d{2}) ?(am|pm|AM|PM)?"#
+	let hhmmPattern = #"(\d{1,2})[:.](\d{2}) ?(am|pm|AM|PM)?"#
 	let hhPattern = #"(\d{1,2}) ?()(am|pm|AM|PM)"#  // empty capture group, so later code is the same
+	let relativePattern = #"in (\d+) (minutes?|hours?|m|h)"#
 	let patterns = [
 		try! Regex("^\(hhmmPattern) "),  // only if at start/end of input
 		try! Regex("^\(hhPattern) "),
+		try! Regex("^\(relativePattern) "),
 		try! Regex(" \(hhmmPattern)$"),
 		try! Regex(" \(hhPattern)$"),
+		try! Regex(" \(relativePattern)$"),
 	]
 	let match = patterns.compactMap { try? $0.firstMatch(in: msg) }.first
 
 	if match != nil {
+		let isRelativeTime = match!.output[0].substring!.starts(with: "in ")
 		let hourStr = match!.output[1].substring!
 		var minuteStr = match!.output[2].substring!
 		if minuteStr.isEmpty { minuteStr = "00" }  // empty capture group in `hhPattern`
