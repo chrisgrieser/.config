@@ -30,7 +30,7 @@
   "setLastSaveToLastCommit": false,
   "submoduleRecurseCheckout": false,
   "gitDir": "",
-  "showFileMenu": true,
+  "showFileMenu": false,
   "authorInHistoryView": "hide",
   "dateInHistoryView": false,
   "diffStyle": "git_unified",
