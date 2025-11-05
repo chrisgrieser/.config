@@ -37,11 +37,9 @@ if installed then table.insert(config.ignore.oldfiles, snacksScratch.opts.scratc
 local M = {}
 
 ---@param path string
----@param type "oldfiles"|"mostChangedFiles"
-local function isIgnored(path, type)
-	local ignored = vim.iter(config.ignore[type])
-		:any(function(p) return path:find(p, nil, true) ~= nil end)
-	return ignored
+---@param oneOff string[]
+local function matchesOneOf(path, oneOff)
+	return vim.iter(oneOff):any(function(p) return path:find(p, nil, true) ~= nil end)
 end
 
 ---@param msg string
@@ -79,8 +77,8 @@ local function getAltOldfile()
 	for _, path in ipairs(vim.v.oldfiles) do
 		local exists = vim.uv.fs_stat(path) ~= nil
 		local sameFile = path == curPath
-		local ignored = isIgnored(path, "oldfiles")
-		if exists and not ignored and not sameFile then return path end
+		local ignoredInConfig = matchesOneOf(path, config.ignore.oldfiles)
+		if exists and not ignoredInConfig and not sameFile then return path end
 	end
 end
 
@@ -97,21 +95,30 @@ local function getMostChangedFile()
 	local targetFile
 	local mostChanges = 0
 	vim.iter(changedFiles):each(function(line)
-		local added, deleted, relPath = line:match("(%d+)%s+(%d+)%s+(.+)")
-		if not (added and deleted and relPath) then return end -- in case of changed binary files
-
+		local linesAdded, linesDeleted, relPath = line:match("(%d+)%s+(%d+)%s+(.+)")
 		local absPath = vim.fs.normalize(vim.uv.cwd() .. "/" .. relPath)
-		local ignored = isIgnored(absPath, "mostChangedFiles")
-		local fileDeleted = vim.uv.fs_stat(absPath) == nil
-		if ignored or fileDeleted then return end
 
-		local changes = tonumber(added) + tonumber(deleted)
-		if changes > mostChanges then
-			mostChanges = changes
+		local isBinary = not (linesAdded and linesDeleted)
+		local ignoredInConfig = matchesOneOf(absPath, config.ignore.mostChangedFiles)
+		local deletedOrOutsidePwd = vim.uv.fs_stat(absPath) == nil
+		if ignoredInConfig or deletedOrOutsidePwd or isBinary then return end
+
+		local linesChanged = tonumber(linesAdded) + tonumber(linesDeleted)
+		if linesChanged > mostChanges then
+			mostChanges = linesChanged
 			targetFile = absPath
 		end
 	end)
-	if targetFile then return nil, "All changed files are binaries, ignored, or deleted." end
+	if not targetFile then
+		local msg = {
+			"All changed files are one of:",
+			"- ignored",
+			"- deleted",
+			"- binaries",
+			"- outside the pwd",
+		}
+		return nil, table.concat(msg, "\n")
+	end
 
 	return targetFile, nil
 end
