@@ -25,7 +25,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>5FF59D05-FE74-43DD-9589-1CFF471C8A6A</string>
+				<string>7D99EE52-032D-4805-BCFB-3C094F19F727</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -275,6 +275,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>45E222F3-9910-4038-AA60-1ABC01E95D81</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>7D99EE52-032D-4805-BCFB-3C094F19F727</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>5FF59D05-FE74-43DD-9589-1CFF471C8A6A</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -1013,9 +1026,9 @@
 				<key>removeextension</key>
 				<false/>
 				<key>text</key>
-				<string>{query}</string>
+				<string>{var:split2}</string>
 				<key>title</key>
-				<string>✅ Added Reminder ({var:notification_label})</string>
+				<string>{var:split1} Added Reminder ({var:notification_label})</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.output.notification</string>
@@ -1142,6 +1155,27 @@
 			<string>alfred.workflow.utility.argument</string>
 			<key>uid</key>
 			<string>D39A1AFE-3A07-40A3-BCD6-FE4A721D8959</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>delimiter</key>
+				<string>;</string>
+				<key>discardemptyarguments</key>
+				<false/>
+				<key>outputas</key>
+				<integer>0</integer>
+				<key>trimarguments</key>
+				<true/>
+				<key>variableprefix</key>
+				<string>split</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.split</string>
+			<key>uid</key>
+			<string>7D99EE52-032D-4805-BCFB-3C094F19F727</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1446,7 +1480,7 @@ to set a hotkey for creating a reminder due today from the current selection</st
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>485</real>
+			<real>595</real>
 			<key>ypos</key>
 			<real>750</real>
 		</dict>
@@ -1480,6 +1514,17 @@ to set a hotkey to show reminders due today</string>
 			<real>30</real>
 			<key>ypos</key>
 			<real>15</real>
+		</dict>
+		<key>7D99EE52-032D-4805-BCFB-3C094F19F727</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>note</key>
+			<string>split emoji from msg</string>
+			<key>xpos</key>
+			<real>480</real>
+			<key>ypos</key>
+			<real>780</real>
 		</dict>
 		<key>A6117B6C-7738-4FC1-8297-B72F0FEEB9CC</key>
 		<dict>
@@ -1882,7 +1927,7 @@ to set a hotkey to show reminders due today</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>3.11.0</string>
+	<string>3.11.1</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>

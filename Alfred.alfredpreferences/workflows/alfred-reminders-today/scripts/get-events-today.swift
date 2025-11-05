@@ -1,7 +1,10 @@
 #!/usr/bin/env swift
-
 import EventKit
-import Foundation
+
+let eventStore = EKEventStore()
+let semaphore = DispatchSemaphore(value: 0)
+
+// ─────────────────────────────────────────────────────────────────────────────
 
 struct EventOutput: Codable {
 	let title: String
@@ -14,19 +17,14 @@ struct EventOutput: Codable {
 	let hasRecurrenceRules: Bool
 }
 
-let eventStore = EKEventStore()
-let semaphore = DispatchSemaphore(value: 0)
-
-// ─────────────────────────────────────────────────────────────────────────────
-
-var colorMap: [String: String] = [:]
+var colorMapCache: [String: String] = [:]
 func mapCGColorToEmoji(_ cgColor: CGColor) -> String {
 	let components = cgColor.components!
 	let (r, g, b) = (components[0], components[1], components[2])
 
 	// cache results to avoid recalculating the same colors
 	let rgbString = String(format: "rgb(%.2f, %.2f, %.2f)", r, g, b)
-	if let emoji = colorMap[rgbString] { return emoji }
+	if let emoji = colorMapCache[rgbString] { return emoji }
 
 	// Simple thresholds for mapping RGB to base colors
 	let redDiff = abs(r - 1.0) + g + b
@@ -55,20 +53,24 @@ func mapCGColorToEmoji(_ cgColor: CGColor) -> String {
 
 	let closest = diffs.min { $0.0 < $1.0 }
 	let emoji = closest?.1 ?? "?"
-	colorMap[rgbString] = emoji
+	colorMapCache[rgbString] = emoji
 	return emoji
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
 
 eventStore.requestFullAccessToEvents { granted, error in
-	guard error == nil && granted else {
-		let msg =
-			error != nil
-			? "Error requesting access: \(error!.localizedDescription)"
-			: "Access to Calendar events not granted."
+	func fail(_ msg: String) {
 		print("❌ " + msg)
 		semaphore.signal()
+	}
+
+	guard error == nil else {
+		fail("Error requesting access: " + error!.localizedDescription)
+		return
+	}
+	guard granted else {
+		fail("Access to Reminder.app not granted.")
 		return
 	}
 	// ──────────────────────────────────────────────────────────────────────────
@@ -106,7 +108,7 @@ eventStore.requestFullAccessToEvents { granted, error in
 			print(jsonString)
 		}
 	} catch {
-		print("❌ Failed to encode JSON: \(error.localizedDescription)")
+		fail("Failed to encode JSON: " + error.localizedDescription)
 	}
 
 	semaphore.signal()

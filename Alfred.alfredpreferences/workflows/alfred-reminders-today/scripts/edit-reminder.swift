@@ -1,12 +1,13 @@
-#!/usr/bin/swift
+#!/usr/bin/env swift
 import EventKit
-import Foundation
 
 let eventStore = EKEventStore()
 let semaphore = DispatchSemaphore(value: 0)
 
+// Alfred environment variables
 let reminderId = ProcessInfo.processInfo.environment["id"]!
 let mode = ProcessInfo.processInfo.environment["mode"]!
+
 // ─────────────────────────────────────────────────────────────────────────────
 
 func snoozeToTomorrow(reminder: EKReminder) {
