@@ -2,13 +2,6 @@
 ObjC.import("stdlib");
 //──────────────────────────────────────────────────────────────────────────────
 
-/** @param {string} str */
-function alfredMatcher(str) {
-	const clean = str.replace(/[-_.]/g, " ");
-	const camelCaseSeparated = str.replace(/([A-Z])/g, " $1");
-	return [clean, camelCaseSeparated, str].join(" ") + " ";
-}
-
 /** @param {string} url */
 function httpRequest(url) {
 	const queryUrl = $.NSURL.URLWithString(url);
@@ -87,12 +80,9 @@ function run(argv) {
 		// CAVEAT pushed_at apparently also includes pushes via PR :(
 		const lastUpdated = repo.pushed_at ? humanRelativeDate(repo.pushed_at) : "";
 
-		let matcher = repo.name + " " + repo.owner.login + " ";
 		let type = "";
 		if (repo.fork) type += "🍴 ";
-		if (repo.fork) matcher += "fork ";
 		if (repo.archived) type += "🗄️ ";
-		if (repo.archived) matcher += "archived ";
 
 		const subtitle = [
 			repo.owner.login,
@@ -111,8 +101,8 @@ function run(argv) {
 		return {
 			title: type + repo.name,
 			subtitle: subtitle,
-			match: alfredMatcher(matcher),
 			arg: repo.html_url,
+			// no `match:`, since not using Alfred for filtering results
 			quicklookurl: repo.html_url,
 			mods: {
 				cmd: {
