@@ -37,7 +37,7 @@ func parseTimeAndPriorityAndMessage(from input: String) -> ParsedResult? {
 	// parse due time
 	let hhmmPattern = #"(\d{1,2})[:.](\d{2}) ?(am|pm|AM|PM)?"#
 	let hhPattern = #"(\d{1,2}) ?()(am|pm|AM|PM)"#  // empty capture group, so later code is the same
-	let relativePattern = #"in (\d+) (minutes?|hours?|m|h)"#
+	let relativePattern = #"in (\d+) ?(minutes?|hours?|m|h)"#
 	let patterns = [
 		try! Regex("^\(hhmmPattern) "),  // only if at start/end of input
 		try! Regex("^\(hhPattern) "),
@@ -49,27 +49,35 @@ func parseTimeAndPriorityAndMessage(from input: String) -> ParsedResult? {
 	let match = patterns.compactMap { try? $0.firstMatch(in: msg) }.first
 
 	if match != nil {
-		let isRelativeTime = match!.output[0].substring!.starts(with: "in ")
-		let hourStr = match!.output[1].substring!
-		var minuteStr = match!.output[2].substring!
-		if minuteStr.isEmpty { minuteStr = "00" }  // empty capture group in `hhPattern`
-		let amPmStr = match!.output[3].substring
-		let hasAmPm = amPmStr != nil
+		let c = match!.output.map { $0.substring }
+		let isRelativeTime = c[0]!.starts(with: "in ")
 
-		if let hourVal = Int(hourStr),
-			let minuteVal = Int(minuteStr),
-			(0..<60).contains(minuteVal),
-			(!hasAmPm && (0..<24).contains(hourVal)) || (hasAmPm && (1..<13).contains(hourVal))
-		{
-			hour = hourVal
-			amPm = (amPmStr ?? "").lowercased()
-			if amPm == "pm" && hour != 12 { hour! += 12 }
-			if amPm == "am" && hour == 12 { hour = 0 }
-			minute = minuteVal
-			msg.removeSubrange(match!.range)
+		if isRelativeTime {
+			let now = Date()
+			var inXmins = Int(c[1]!)!
+			let unit = c[2]!.starts(with: "m") ? "minutes" : "hours"
+			if unit == "hours" { inXmins *= 60 }
+			let future = Calendar.current.date(byAdding: .minute, value: inXmins, to: now)!
+			let comps = Calendar.current.dateComponents([.hour, .minute], from: future)
+			hour = comps.hour
+			minute = comps.minute
+			amPm = ""
 		} else {
+			hour = Int(c[1]!)
+			minute = c[2]!.isEmpty ? 0 : Int(c[2]!)  // empty capture group in `hhPattern`
+			amPm = (c[3] ?? "").lowercased()
+		}
+		let hasAmPm = !amPm.isEmpty
+
+		guard
+			hour != nil || minute != nil || (0..<60).contains(minute!)
+				|| (!hasAmPm && (0..<24).contains(hour!)) || (hasAmPm && (1..<13).contains(hour!))
+		else {
 			return nil  // invalid time
 		}
+		if amPm == "pm" && hour != 12 { hour! += 12 }
+		if amPm == "am" && hour == 12 { hour = 0 }
+		msg.removeSubrange(match!.range)
 	}
 
 	msg = msg.trimmingCharacters(in: .whitespacesAndNewlines)
