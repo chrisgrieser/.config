@@ -13,9 +13,9 @@ Alternative to vim's "alternative file" that improves its functionality.
 
 local config = {
 	statusbarMaxLength = 30,
-	icons = { -- set to nil to use `mini.icons` filetype icon, set to "" to disable
+	icons = {
 		oldFile = "󰋚",
-		altBuf = "󰐤", -- 󰯬
+		altBuf = "󰐤",
 		mostChangedFile = "󰓏",
 	},
 	ignore = { -- literal match in whole path
@@ -52,8 +52,8 @@ local function notify(msg, level, icon)
 	vim.notify(msg, lvl, { title = "Alt-alt", icon = icon })
 end
 
----@nodiscard
 ---@return string|nil altBufferName, nil if no alt buffer
+---@nodiscard
 local function getAltBuffer()
 	local altBufnr = vim.fn.bufnr("#")
 	if altBufnr < 0 then return end
@@ -64,14 +64,13 @@ local function getAltBuffer()
 	local altBufExists = vim.uv.fs_stat(vim.api.nvim_buf_get_name(altBufnr)) ~= nil
 
 	if valid and nonSpecial and moreThanOneBuffer and currentBufNotAlt and altBufExists then
-		local altBufferName = vim.api.nvim_buf_get_name(vim.fn.bufnr("#"))
-		return altBufferName
+		return vim.api.nvim_buf_get_name(altBufnr)
 	end
 end
 
 ---get the alternate oldfile, accounting for non-existing files
----@nodiscard
 ---@return string|nil oldfile; nil if none exists in all oldfiles
+---@nodiscard
 local function getAltOldfile()
 	local curPath = vim.api.nvim_buf_get_name(0)
 	for _, path in ipairs(vim.v.oldfiles) do
@@ -110,14 +109,7 @@ local function getMostChangedFile()
 		end
 	end)
 	if not targetFile then
-		local msg = {
-			"All changed files are one of:",
-			"- ignored",
-			"- deleted",
-			"- binaries",
-			"- outside the pwd",
-		}
-		return nil, table.concat(msg, "\n")
+		return nil, "All changed files are either ignored, deleted, binaries, or outside the pwd."
 	end
 
 	return targetFile, nil
@@ -183,7 +175,7 @@ end
 
 local mostChangedFile
 vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained" }, {
-	desc = "Alt-alt: update most changed file statusbar",
+	desc = "Alt-alt: cache most changed file for statusbar",
 	group = vim.api.nvim_create_augroup("AltAltStatusbar", { clear = true }),
 	callback = vim.schedule_wrap(function() mostChangedFile = getMostChangedFile() end),
 })
