@@ -58,15 +58,21 @@ func editReminderFromStdin(reminder: EKReminder) -> Bool {
 // ─────────────────────────────────────────────────────────────────────────────
 
 eventStore.requestFullAccessToReminders { granted, error in
-	guard error == nil && granted else {
-		let msg =
-			error != nil
-			? "Error requesting access: \(error!.localizedDescription)"
-			: "Access to Reminder.app not granted."
+	func fail(_ msg: String) {
 		print("❌ " + msg)
 		semaphore.signal()
+	}
+
+	guard error == nil else {
+		fail("Error requesting access: " + error!.localizedDescription)
 		return
 	}
+	guard granted else {
+		fail("Access to Reminder.app not granted.")
+		return
+	}
+	// ──────────────────────────────────────────────────────────────────────────
+
 
 	if let reminder = eventStore.calendarItem(withIdentifier: reminderId) as? EKReminder {
 
@@ -79,7 +85,7 @@ eventStore.requestFullAccessToReminders { granted, error in
 			let success = editReminderFromStdin(reminder: reminder)
 			if !success { return }
 		} else {
-			print("❌ Unknown mode: ", mode)
+			fail("Unknown mode: " + mode)
 			return
 		}
 
@@ -87,10 +93,10 @@ eventStore.requestFullAccessToReminders { granted, error in
 		do {
 			try eventStore.save(reminder, commit: true)
 		} catch {
-			print("❌ Failed to save updated reminder: \(error.localizedDescription)")
+			fail("Failed to save updated reminder: " + error.localizedDescription)
 		}
 	} else {
-		print("⚠️ No reminder found with ID: \(reminderId)\n")
+		fail("No reminder found with ID: \(reminderId)")
 	}
 	semaphore.signal()
 }

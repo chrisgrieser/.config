@@ -4,7 +4,7 @@
 
 -- https://platform.openai.com/usage
 -- https://platform.openai.com/docs/models
-local model = "gpt-5-nano"
+local model = "gpt-5-mini"
 local reasoning_effort = "minimal" -- all GPT-5 models reason, "medium" is too slow
 
 --------------------------------------------------------------------------------
@@ -12,7 +12,6 @@ local reasoning_effort = "minimal" -- all GPT-5 models reason, "medium" is too s
 local function spinnerNotificationWhileRequest()
 	if not package.loaded["snacks"] then return end
 
-	-- CONFIG
 	local spinners = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" }
 	local updateIntervalMs = 250
 
@@ -154,8 +153,11 @@ local ccSpec = {
 						content = function(ctx)
 							return ([[
 								I want you to act as a senior %s developer.
+
 								I will send you some code, and I want you to simplify
 								the code while not diminishing its readability.
+
+								Keep the indentation level the same.
 							]]):format(ctx.filetype)
 						end,
 					},
