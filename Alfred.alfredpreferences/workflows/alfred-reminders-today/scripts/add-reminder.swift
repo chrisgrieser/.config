@@ -1,24 +1,22 @@
 #!/usr/bin/env swift
 import EventKit
-import Foundation
-import WidgetKit
 
 let eventStore = EKEventStore()
 let semaphore = DispatchSemaphore(value: 0)
 
+// Alfred environment variables
 let input = CommandLine.arguments[1].trimmingCharacters(in: .whitespacesAndNewlines)
 let reminderList = ProcessInfo.processInfo.environment["reminder_list"]!
 let targetDay = ProcessInfo.processInfo.environment["target_day"]!
-
 // ─────────────────────────────────────────────────────────────────────────────
 
 struct ParsedResult {
-	let hour: Int?
+	let hour: Int?  // nil if no time (= all-day reminder)
 	let minute: Int?
 	let msg: String
 	let bangs: String  // string with the number of exclamation marks
 	let amPm: String
-	let errorMsg: String?
+	let errorMsg: String?  // non-nil if error
 }
 
 func parseTimeAndPriorityAndMessage(input: String, remForToday: Bool) -> ParsedResult {
@@ -39,7 +37,7 @@ func parseTimeAndPriorityAndMessage(input: String, remForToday: Bool) -> ParsedR
 
 	// parse due time
 	let hhmmPattern = #"(\d{1,2})[:.](\d{2}) ?(am|pm|AM|PM)?"#
-	let hhPattern = #"(\d{1,2}) ?()(am|pm|AM|PM)"#  // empty capture group, index are consistent
+	let hhPattern = #"(\d{1,2}) ?()(am|pm|AM|PM)"#  // empty capture group so index is consistent
 	let relativePattern = #"in (\d+) ?(minutes?|hours?|min|m|h)"#
 	let patterns = [  // only if at start/end of input
 		try! Regex("^\(hhmmPattern) "),
@@ -52,8 +50,8 @@ func parseTimeAndPriorityAndMessage(input: String, remForToday: Bool) -> ParsedR
 	let match = patterns.compactMap { try? $0.firstMatch(in: msg) }.first
 
 	if match != nil {
-		let c = match!.output.map { $0.substring }
-		let timeString = c[0]!.trimmingCharacters(in: .whitespacesAndNewlines)
+		let capture = match!.output.map { $0.substring }
+		let timeString = capture[0]!.trimmingCharacters(in: .whitespacesAndNewlines)
 		let isRelativeTime = timeString.starts(with: "in ")
 
 		if isRelativeTime && !remForToday {
@@ -61,8 +59,8 @@ func parseTimeAndPriorityAndMessage(input: String, remForToday: Bool) -> ParsedR
 		}
 
 		if isRelativeTime {
-			var inXmins = Int(c[1]!)!
-			let unit = c[2]!.starts(with: "m") ? "minutes" : "hours"
+			var inXmins = Int(capture[1]!)!
+			let unit = capture[2]!.starts(with: "m") ? "minutes" : "hours"
 			if unit == "hours" { inXmins *= 60 }
 
 			let now = Date()
@@ -76,23 +74,24 @@ func parseTimeAndPriorityAndMessage(input: String, remForToday: Bool) -> ParsedR
 			minute = target.minute
 			amPm = ""
 		} else {
-			hour = Int(c[1]!)
-			minute = c[2]!.isEmpty ? 0 : Int(c[2]!)  // empty capture group in `hhPattern`
-			amPm = (c[3] ?? "").lowercased()
+			hour = Int(capture[1]!)
+			minute = capture[2]!.isEmpty ? 0 : Int(capture[2]!)  // empty capture group in `hhPattern`
+			amPm = (capture[3] ?? "").lowercased()
 		}
-		let hasAmPm = !amPm.isEmpty
 
-		if hour == nil || minute == nil || !(0..<60).contains(minute!)
+		let hasAmPm = !amPm.isEmpty
+		if !(0..<60).contains(minute!)
 			|| (!hasAmPm && !(0..<24).contains(hour!)) || (hasAmPm && !(1..<13).contains(hour!))
 		{
 			errorMsg = "Invalid time: \"\(timeString)\""
 		}
 		if amPm == "pm" && hour != 12 { hour! += 12 }
 		if amPm == "am" && hour == 12 { hour = 0 }
+
 		msg.removeSubrange(match!.range)
+		msg = msg.trimmingCharacters(in: .whitespacesAndNewlines)
 	}
 
-	msg = msg.trimmingCharacters(in: .whitespacesAndNewlines)
 	return ParsedResult(
 		hour: hour, minute: minute, msg: msg, bangs: bangs, amPm: amPm, errorMsg: errorMsg)
 }
@@ -101,7 +100,7 @@ func parseTimeAndPriorityAndMessage(input: String, remForToday: Bool) -> ParsedR
 
 eventStore.requestFullAccessToReminders { granted, error in
 	func fail(_ msg: String) {
-		print("❌ " + msg)
+		print("❌;" + msg) // `;` used as separator in Alfred
 		semaphore.signal()
 	}
 
@@ -117,6 +116,8 @@ eventStore.requestFullAccessToReminders { granted, error in
 		fail("Input is empty.")
 		return
 	}
+	// ──────────────────────────────────────────────────────────────────────────
+
 
 	// PARSE INPUT
 	let remForToday = targetDay == "0"
@@ -219,7 +220,7 @@ eventStore.requestFullAccessToReminders { granted, error in
 	}
 	notif.append("\"\(title)\"")
 	let alfredNotif = notif.joined(separator: "    ")
-	print(alfredNotif)
+	print("✅;" + alfredNotif)  // `;` used as separator in Alfred
 
 	semaphore.signal()
 }
