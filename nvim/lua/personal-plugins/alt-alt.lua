@@ -92,6 +92,7 @@ local function getMostChangedFile()
 	local gitResponse = vim.system({ "git", "diff", "--numstat", "." }):wait()
 	if gitResponse.code ~= 0 or not gitResponse.stdout then return nil, "Not in git repo." end
 	local changedFiles = vim.split(gitResponse.stdout, "\n", { trimempty = true })
+	Chainsaw(changedFiles) -- 🪚
 	local gitroot =
 		vim.trim(vim.system({ "git", "rev-parse", "--show-toplevel" }):wait().stdout or "")
 	if #changedFiles == 0 then return nil, "No files with changes found." end
@@ -105,7 +106,9 @@ local function getMostChangedFile()
 
 		local absPath = vim.fs.normalize(gitroot .. "/" .. relPath)
 		local ignored = isIgnored(absPath, "mostChangedFiles")
+		Chainsaw(ignored) -- 🪚
 		local nonExistent = vim.uv.fs_stat(absPath) == nil
+		Chainsaw(nonExistent) -- 🪚
 		if ignored or nonExistent then return end
 
 		local changes = assert(tonumber(added)) + assert(tonumber(deleted))
