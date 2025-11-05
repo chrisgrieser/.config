@@ -51,7 +51,6 @@ local function notify(msg, level, icon)
 	if not level then level = "info" end
 	local lvl = vim.log.levels[level:upper()]
 
-
 	vim.notify(msg, lvl, { title = "Alt-alt", icon = icon })
 end
 
@@ -92,9 +91,6 @@ local function getMostChangedFile()
 	local gitResponse = vim.system({ "git", "diff", "--numstat", "." }):wait()
 	if gitResponse.code ~= 0 or not gitResponse.stdout then return nil, "Not in git repo." end
 	local changedFiles = vim.split(gitResponse.stdout, "\n", { trimempty = true })
-	Chainsaw(changedFiles) -- 🪚
-	local gitroot =
-		vim.trim(vim.system({ "git", "rev-parse", "--show-toplevel" }):wait().stdout or "")
 	if #changedFiles == 0 then return nil, "No files with changes found." end
 
 	-- identify file with most changes
@@ -104,22 +100,18 @@ local function getMostChangedFile()
 		local added, deleted, relPath = line:match("(%d+)%s+(%d+)%s+(.+)")
 		if not (added and deleted and relPath) then return end -- in case of changed binary files
 
-		local absPath = vim.fs.normalize(gitroot .. "/" .. relPath)
+		local absPath = vim.fs.normalize(vim.uv.cwd() .. "/" .. relPath)
 		local ignored = isIgnored(absPath, "mostChangedFiles")
-		Chainsaw(ignored) -- 🪚
-		local nonExistent = vim.uv.fs_stat(absPath) == nil
-		Chainsaw(nonExistent) -- 🪚
-		if ignored or nonExistent then return end
+		local fileDeleted = vim.uv.fs_stat(absPath) == nil
+		if ignored or fileDeleted then return end
 
-		local changes = assert(tonumber(added)) + assert(tonumber(deleted))
+		local changes = tonumber(added) + tonumber(deleted)
 		if changes > mostChanges then
 			mostChanges = changes
 			targetFile = absPath
 		end
 	end)
-
-	-- e.g., when all changed files are binaries, ignored, or non-existent
-	if not targetFile then return nil, "No valid changed files found." end
+	if targetFile then return nil, "All changed files are binaries, ignored, or deleted." end
 
 	return targetFile, nil
 end
@@ -186,11 +178,11 @@ local mostChangedFile
 vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained" }, {
 	desc = "Alt-alt: update most changed file statusbar",
 	group = vim.api.nvim_create_augroup("AltAltStatusbar", { clear = true }),
-	callback = function()
-		vim.defer_fn(function() mostChangedFile = getMostChangedFile() end, 1)
-	end,
+	callback = vim.schedule_wrap(function() mostChangedFile = getMostChangedFile() end),
 })
 
+---@return string
+---@nodiscard
 function M.mostChangedFileStatusbar()
 	local targetFile = mostChangedFile
 	if not targetFile then return "" end

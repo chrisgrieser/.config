@@ -104,7 +104,7 @@ do
 	}
 	local subLeader = "<leader>m"
 
-	vim.g.whichkeyAddSpec { subLeader, group = "󰃃 Marks" }
+	if vim.g.whichkeyAddSpec then vim.g.whichkeyAddSpec { subLeader, group = "󰃃 Marks" } end
 
 	-- stylua: ignore
 	keymap("n", subLeader .. "m", function() require("personal-plugins.marks").cycleMarks() end, { desc = "󰃀 Cycle marks" })
