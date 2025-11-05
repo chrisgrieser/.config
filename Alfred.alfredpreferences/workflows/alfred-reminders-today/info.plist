@@ -842,7 +842,7 @@
 				<key>fontsizing</key>
 				<integer>0</integer>
 				<key>footertext</key>
-				<string>First line: title, remaining lines: notes     ·     ⌥⏎: Save     ·     ⎋: Cancel</string>
+				<string>1st line: title, remaining lines: notes     ·     ⌥⏎: Save     ·     ⎋: Cancel</string>
 				<key>inputfile</key>
 				<string></string>
 				<key>inputtype</key>
@@ -1927,7 +1927,7 @@ to set a hotkey to show reminders due today</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>3.11.1</string>
+	<string>3.11.2</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
