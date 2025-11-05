@@ -39,10 +39,10 @@ func parseTimeAndPriorityAndMessage(input: String, remForToday: Bool) -> ParsedR
 
 	// parse due time
 	let hhmmPattern = #"(\d{1,2})[:.](\d{2}) ?(am|pm|AM|PM)?"#
-	let hhPattern = #"(\d{1,2}) ?()(am|pm|AM|PM)"#  // empty capture group, so later code is the same
+	let hhPattern = #"(\d{1,2}) ?()(am|pm|AM|PM)"#  // empty capture group, index are consistent
 	let relativePattern = #"in (\d+) ?(minutes?|hours?|min|m|h)"#
-	let patterns = [
-		try! Regex("^\(hhmmPattern) "),  // only if at start/end of input
+	let patterns = [  // only if at start/end of input
+		try! Regex("^\(hhmmPattern) "),
 		try! Regex("^\(hhPattern) "),
 		try! Regex("^\(relativePattern) "),
 		try! Regex(" \(hhmmPattern)$"),
@@ -53,7 +53,8 @@ func parseTimeAndPriorityAndMessage(input: String, remForToday: Bool) -> ParsedR
 
 	if match != nil {
 		let c = match!.output.map { $0.substring }
-		let isRelativeTime = c[0]!.starts(with: try! Regex(" ?in "))
+		let timeString = c[0]!.trimmingCharacters(in: .whitespacesAndNewlines)
+		let isRelativeTime = timeString.starts(with: "in ")
 
 		if isRelativeTime && !remForToday {
 			errorMsg = "Relative times are only supported for reminders for today."
@@ -69,7 +70,7 @@ func parseTimeAndPriorityAndMessage(input: String, remForToday: Bool) -> ParsedR
 			let target = Calendar.current.dateComponents([.day, .hour, .minute], from: future)
 			let today = Calendar.current.dateComponents([.day], from: now).day
 			if target.day != today {
-				errorMsg = "Can't set a time that goes beyond today."
+				errorMsg = "Can't set a relative time that goes beyond today."
 			}
 			hour = target.hour
 			minute = target.minute
@@ -84,7 +85,7 @@ func parseTimeAndPriorityAndMessage(input: String, remForToday: Bool) -> ParsedR
 		if hour == nil || minute == nil || !(0..<60).contains(minute!)
 			|| (!hasAmPm && !(0..<24).contains(hour!)) || (hasAmPm && !(1..<13).contains(hour!))
 		{
-			errorMsg = "Invalid time: " + msg
+			errorMsg = "Invalid time: \"\(timeString)\""
 		}
 		if amPm == "pm" && hour != 12 { hour! += 12 }
 		if amPm == "am" && hour == 12 { hour = 0 }
@@ -99,27 +100,29 @@ func parseTimeAndPriorityAndMessage(input: String, remForToday: Bool) -> ParsedR
 // ─────────────────────────────────────────────────────────────────────────────
 
 eventStore.requestFullAccessToReminders { granted, error in
-	guard error == nil && granted else {
-		let msg =
-			error != nil
-			? "Error requesting access: " + error!.localizedDescription
-			: "Access to Reminder.app not granted."
+	func fail(_ msg: String) {
 		print("❌ " + msg)
 		semaphore.signal()
+	}
+
+	guard error == nil else {
+		fail("Error requesting access: " + error!.localizedDescription)
+		return
+	}
+	guard granted else {
+		fail("Access to Reminder.app not granted.")
 		return
 	}
 	guard !input.isEmpty else {
-		print("❌ Input is empty.")
-		semaphore.signal()
+		fail("Input is empty.")
 		return
 	}
 
 	// PARSE INPUT
 	let remForToday = targetDay == "0"
 	let parsed = parseTimeAndPriorityAndMessage(input: input, remForToday: remForToday)
-	if let error = parsed.errorMsg {
-		print("❌ " + error)
-		semaphore.signal()
+	guard parsed.errorMsg == nil else {
+		fail(parsed.errorMsg!)
 		return
 	}
 	let (title, hh, mm, bangs, amPm) = (
@@ -187,27 +190,24 @@ eventStore.requestFullAccessToReminders { granted, error in
 
 	// SET LIST (= CALENDAR)
 	let listToUse = eventStore.calendars(for: .reminder).first(where: { $0.title == reminderList })
-	if listToUse != nil {
-		reminder.calendar = listToUse
-	} else {
-		print("❌ No calendar found with the name \"\(reminderList)\".")
-		semaphore.signal()
+	guard listToUse != nil else {
+		fail("No reminder list found with the name \"\(reminderList)\".")
 		return
 	}
+	reminder.calendar = listToUse
 
 	// SAVE
 	do {
 		try eventStore.save(reminder, commit: true)
 	} catch {
-		print("❌ Failed to create reminder: \(error.localizedDescription)")
-		semaphore.signal()
+		fail("Failed to create reminder: " + error.localizedDescription)
 		return
 	}
 
 	// NOTIFICATION FOR ALFRED
-	var msg: [String] = []
+	var notif: [String] = []
 	if !bangs.isEmpty {
-		msg.append(bangs)
+		notif.append(bangs)
 	}
 	if !isAllDayReminder {
 		let minutesPadded = String(format: "%02d", mm!)
@@ -215,10 +215,10 @@ eventStore.requestFullAccessToReminders { granted, error in
 		if amPm == "am" && hh! == 0 { hourDisplay = 12 }
 		if amPm == "pm" && hh! != 12 { hourDisplay = hh! - 12 }
 		let timeStr = String(hourDisplay) + ":" + minutesPadded + amPm
-		msg.append(timeStr)
+		notif.append(timeStr)
 	}
-	msg.append("\"\(title)\"")
-	let alfredNotif = msg.joined(separator: "     ")
+	notif.append("\"\(title)\"")
+	let alfredNotif = notif.joined(separator: "    ")
 	print(alfredNotif)
 
 	semaphore.signal()
