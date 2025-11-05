@@ -41,7 +41,7 @@ return {
 		--------------------------------------------------------------------------
 		-- INFO custom pairs need to be "appended" to the opts as a list
 		{ "**", "**", ft = { "markdown" } }, -- bold
-		{ [[\"]], [[\"]], ft = { "zsh", "json", "applescript" } }, -- escaped quote
+		{ [[\"]], [[\"]], ft = { "zsh", "json", "applescript", "swift" } }, -- escaped quote
 
 		-- for keymaps like `<C-a>`
 		{ "<", ">", ft = { "vim" } },
@@ -50,7 +50,7 @@ return {
 			">",
 			ft = { "lua" },
 			cond = function(fn)
-				-- FIX https://github.com/altermo/ultimate-autopair.nvim/issues/88
+				-- PENDING https://github.com/altermo/ultimate-autopair.nvim/issues/88
 				local inLuaLua = vim.endswith(vim.api.nvim_buf_get_name(0), "/ftplugin/lua.lua")
 				return not inLuaLua and fn.in_string()
 			end,

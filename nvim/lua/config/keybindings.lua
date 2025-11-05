@@ -31,17 +31,16 @@ keymap(
 	"<D-C-r>", -- hyper gets registered by neovide as cmd+ctrl
 	function()
 		if jit.os ~= "OSX" or not vim.g.neovide then return end -- needs macOS' `open -a` & neovide
-		local script = [[#!/usr/bin/env zsh
-			for ((i = 0; i <= 40; i++)); do
-				if ! pgrep -xq "neovide"; then open -a "neovide"; fi
+		local script = [[for ((i = 0; i <= 40; i++)); do
 				sleep 0.05
+				if ! pgrep -xq "neovide"; then
+					open -a "neovide"
+					return
+				fi
 			done
 		]]
-		local tempFile = assert(io.open("/tmp/restart-nvim.sh", "w"))
-		tempFile:write(script)
-		tempFile:close()
 
-		vim.system({ "zsh", "/tmp/restart-nvim.sh" }, { detach = true }) -- detach to run without nvim
+		vim.system({ "zsh", "-c", script }, { detach = true }) -- detach to run after nvim quit
 		vim.schedule(vim.cmd.wqall)
 	end,
 	{ desc = " Save & Restart nvim" }
