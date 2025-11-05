@@ -12,8 +12,6 @@
 	<string>nnn</string>
 	<key>process_keyword</key>
 	<string>ppp||kill</string>
-	<key>rerun_s_processes</key>
-	<integer>3</integer>
 	<key>volume_keyword</key>
 	<string>vvv||vol</string>
 </dict>
