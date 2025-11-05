@@ -30,13 +30,12 @@ keymap(
 	{ "n", "x", "i" },
 	"<D-C-r>", -- hyper gets registered by neovide as cmd+ctrl
 	function()
-		if not jit.os == "OSX" then return end -- requires macOS' `open -a`
+		if jit.os ~= "OSX" or not vim.g.neovide then return end -- needs macOS' `open -a` & neovide
 		local script = [[#!/usr/bin/env zsh
 			for ((i = 0; i <= 40; i++)); do
+				if ! pgrep -xq "neovide"; then open -a "neovide"; fi
 				sleep 0.05
-				if ! pgrep -xq "nvim"; then break; fi
 			done
-			if ! pgrep -xq "nvim"; then open -a "neovide"; fi
 		]]
 		local tempFile = assert(io.open("/tmp/restart-nvim.sh", "w"))
 		tempFile:write(script)
