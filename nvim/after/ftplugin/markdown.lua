@@ -78,13 +78,12 @@ bkeymap({ "n", "i" }, "<D-u>", function()
 	local lnum, col = unpack(vim.api.nvim_win_get_cursor(0))
 	local curLine = vim.api.nvim_get_current_line()
 
-	local updated = curLine:gsub("^(%s*)([%p%d x]* )", function(ind, l)
-		if l:find("[*+-] ") and not l:find("%- %[") then return ind .. "- [ ] " end -- list -> task
-		if vim.startswith(l, "- [") then return ind .. "1. " end -- task -> ordered
-		if l:find("%d") then return ind .. "" end -- ordered -> none
-		return "" -- other -> none
+	local updated = curLine:gsub("^(%s*)([%p%d x]* )", function(indent, list)
+		if list:find("[*+-] ") and not list:find("%- %[") then return indent .. "- [ ] " end -- bullet -> task
+		if vim.startswith(list, "- [") then return indent .. "1. " end -- task -> number
+		return indent .. "- " -- number/other -> bullet
 	end)
-	-- none -> list
+	-- none -> bullet
 	if updated == curLine then updated = curLine:gsub("^(%s*)(.*)", "%1- %2") end
 
 	vim.api.nvim_set_current_line(updated)
