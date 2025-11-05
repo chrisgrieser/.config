@@ -46,6 +46,18 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>4BE96382-7EA0-462F-AC7C-5C7B6FB665F7</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>897E815E-4FC7-4BCA-91A2-D675C7070842</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
 		</array>
 		<key>1944B7E1-9267-43A6-BEC7-761A44CF1A9D</key>
 		<array>
@@ -78,6 +90,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>B86A2A59-EC47-4F6C-A5E9-53568182A305</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>4BE96382-7EA0-462F-AC7C-5C7B6FB665F7</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>7DB13E9D-A3F7-4C81-A531-65213697473C</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -190,27 +215,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<true/>
-				<key>skipvarencode</key>
-				<true/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>A05B9991-1BE1-4677-B68E-BFDB1DBB6055</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>alfredfiltersresults</key>
 				<true/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -290,6 +294,27 @@ show_data</string>
 			<string>C1132036-7887-4A07-931C-9B346E04D969</string>
 			<key>version</key>
 			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<true/>
+				<key>skipvarencode</key>
+				<true/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>A05B9991-1BE1-4677-B68E-BFDB1DBB6055</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -414,6 +439,20 @@ show_data</string>
 						<key>uid</key>
 						<string>6753AF74-E200-429F-A942-9AD24713457E</string>
 					</dict>
+					<dict>
+						<key>inputstring</key>
+						<string>{var:link_format}</string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string>html</string>
+						<key>outputlabel</key>
+						<string>HTML</string>
+						<key>uid</key>
+						<string>897E815E-4FC7-4BCA-91A2-D675C7070842</string>
+					</dict>
 				</array>
 				<key>elselabel</key>
 				<string></string>
@@ -461,6 +500,68 @@ show_data</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>count</key>
+				<integer>1</integer>
+				<key>keychar</key>
+				<string>v</string>
+				<key>keycode</key>
+				<integer>-1</integer>
+				<key>keymod</key>
+				<integer>1048576</integer>
+				<key>overridewithargument</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.dispatchkeycombo</string>
+			<key>uid</key>
+			<string>7DB13E9D-A3F7-4C81-A531-65213697473C</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>ObjC.import("AppKit")
+
+function envVar(varName) {
+  return $.NSProcessInfo
+    .processInfo
+    .environment
+    .objectForKey(varName).js
+}
+
+function run(argv) {
+  const url = argv[0]
+  const html = `&lt;a href="${url}"&gt;${envVar("title")}&lt;/a&gt;`
+  const pboard = $.NSPasteboard.generalPasteboard
+
+  pboard.clearContents
+  // Setting both will allow apps to use what’s appropriate for them
+  pboard.setStringForType(html, "public.html")
+  pboard.setStringForType(url, "public.utf8-plain-text")
+}</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>7</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>4BE96382-7EA0-462F-AC7C-5C7B6FB665F7</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>## Usage
@@ -505,6 +606,13 @@ Search workflows in the [Alfred Gallery](https://alfred.app/) via the `gallery` 
 			<key>ypos</key>
 			<real>405</real>
 		</dict>
+		<key>4BE96382-7EA0-462F-AC7C-5C7B6FB665F7</key>
+		<dict>
+			<key>xpos</key>
+			<real>220</real>
+			<key>ypos</key>
+			<real>535</real>
+		</dict>
 		<key>5561BC08-DCC3-4D17-A02B-DEF205CFC0D7</key>
 		<dict>
 			<key>xpos</key>
@@ -518,6 +626,15 @@ Search workflows in the [Alfred Gallery](https://alfred.app/) via the `gallery` 
 			<real>260</real>
 			<key>ypos</key>
 			<real>40</real>
+		</dict>
+		<key>7DB13E9D-A3F7-4C81-A531-65213697473C</key>
+		<dict>
+			<key>note</key>
+			<string>Fake the key combo to maintain the pasteboard type.</string>
+			<key>xpos</key>
+			<real>380</real>
+			<key>ypos</key>
+			<real>535</real>
 		</dict>
 		<key>A05B9991-1BE1-4677-B68E-BFDB1DBB6055</key>
 		<dict>
@@ -587,6 +704,10 @@ Search workflows in the [Alfred Gallery](https://alfred.app/) via the `gallery` 
 						<string>markdown</string>
 					</array>
 					<array>
+						<string>HTML</string>
+						<string>html</string>
+					</array>
+					<array>
 						<string>BBCode</string>
 						<string>bbcode</string>
 					</array>
@@ -602,10 +723,8 @@ Search workflows in the [Alfred Gallery](https://alfred.app/) via the `gallery` 
 			<string>link_format</string>
 		</dict>
 	</array>
-	<key>variablesdontexport</key>
-	<array/>
 	<key>version</key>
-	<string>25.1</string>
+	<string>25.2</string>
 	<key>webaddress</key>
 	<string>https://github.com/alfredapp/alfred-gallery-workflow/</string>
 </dict>

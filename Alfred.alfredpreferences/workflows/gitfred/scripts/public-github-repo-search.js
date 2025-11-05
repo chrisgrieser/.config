@@ -75,9 +75,8 @@ function run(argv) {
 
 	/** @type {AlfredItem[]} */
 	const repos = JSON.parse(response).items.map((/** @type {GithubRepo} */ repo) => {
-		// calculate relative date
-		// INFO pushed_at refers to commits only https://github.com/orgs/community/discussions/24442
-		// CAVEAT pushed_at apparently also includes pushes via PR :(
+		// INFO `pushed_at` refers to commits only https://github.com/orgs/community/discussions/24442
+		// CAVEAT `pushed_at` apparently also includes pushes via PR :(
 		const lastUpdated = repo.pushed_at ? humanRelativeDate(repo.pushed_at) : "";
 
 		let type = "";
