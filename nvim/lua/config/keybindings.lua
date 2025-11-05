@@ -32,16 +32,15 @@ keymap(
 	function()
 		if jit.os ~= "OSX" or not vim.g.neovide then return end -- needs macOS' `open -a` & neovide
 		local script = [[for ((i = 0; i <= 40; i++)); do
-				sleep 0.05
-				if ! pgrep -xq "neovide"; then
-					open -a "neovide"
-					return
-				fi
-			done
-		]]
+			sleep 0.05
+			if ! pgrep -xq "neovide"; then
+				open -a "neovide"
+				return
+			fi
+		done]]
 
 		vim.system({ "zsh", "-c", script }, { detach = true }) -- detach to run after nvim quit
-		vim.schedule(vim.cmd.wqall)
+		vim.cmd.wqall()
 	end,
 	{ desc = " Save & Restart nvim" }
 )
