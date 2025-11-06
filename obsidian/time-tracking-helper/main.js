@@ -61,6 +61,7 @@ function monthlyReport(app) {
 
 	const totalThisMonth = dailyNotesForThisMonth.reduce((acc, dailyNote) => {
 		const frontmatter = app.metadataCache.getFileCache(dailyNote).frontmatter;
+		if (!frontmatter) return acc;
 		for (const [key, hours] of Object.entries(frontmatter)) {
 			if (typeof hours !== "number") continue; // other frontmatter things
 			acc[key] = (acc[key] ?? 0) + hours;
@@ -73,11 +74,21 @@ function monthlyReport(app) {
 		new Notice("No activities found for this month.");
 		return;
 	}
-	let report = `RERORT FOR ${currentMonth}.${currentYear}:\n`;
+	const lines = [];
 	for (const [type, hours] of Object.entries(totalThisMonth)) {
-		report += `${type}: ${hours}h\n`;
+		if (type === "Total") continue;
+		lines.push(`${type}: ${hours}h`);
 	}
-	new Notice(report, 10_000);
+	lines.sort();
+	lines.push(`Total: ${totalThisMonth.Total}h`);
+
+	const report = lines.join("\n");
+	const prettyReport =
+		`RERORT FOR ${currentMonth}.${currentYear}\n\n` +
+		report +
+		"\n\n This was also copied to the clipboard.";
+	new Notice(prettyReport, 10_000);
+	navigator.clipboard.writeText(report);
 }
 
 //──────────────────────────────────────────────────────────────────────────────
