@@ -17,8 +17,11 @@ function lineToReport(plugin, editor) {
 			const [endH, endM] = end.split(/[.:]/).map(Number);
 			if (startH > endH) startH -= 24; // time beyond midnight
 
-			const durationHours = (endH * 60 + endM - (startH * 60 + startM)) / 60;
-			acc[type] = (acc[type] ?? 0) + durationHours;
+			const hours = (endH * 60 + endM - (startH * 60 + startM)) / 60;
+			const roundedHours = // round, but keep as float
+				String(hours).length > 3 ? Number.parseFloat(hours.toFixed(2)) : hours;
+			acc[type] = (acc[type] ?? 0) + roundedHours;
+			acc.total = (acc.total ?? 0) + roundedHours;
 			return acc;
 		}, {}) ?? false;
 	if (!activities) {
@@ -30,8 +33,10 @@ function lineToReport(plugin, editor) {
 	const activeFile = app.workspace.getActiveFile();
 	app.fileManager.processFrontMatter(activeFile, (fm) => {
 		for (const [type, hours] of Object.entries(activities)) {
+			if (type === "total") continue;
 			fm[type] = hours;
 		}
+		fm.Total = activities.total; // ensure "Total" is last
 	});
 
 	// praise notification 💪

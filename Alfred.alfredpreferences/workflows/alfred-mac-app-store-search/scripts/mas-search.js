@@ -107,7 +107,9 @@ function run(argv) {
 
 	// CAVEAT this assumes that the device locale is also the app store locale.
 	// (This is almost always the case.)
-	const regionCode = ObjC.unwrap($.NSLocale.currentLocale.objectForKey($.NSLocaleCountryCode));
+	const regionCode = ObjC.unwrap(
+		$.NSLocale.currentLocale.objectForKey($.NSLocaleCountryCode),
+	).toLowerCase();
 	console.log("Region Code:", regionCode); // e.g., "DE", "US"
 
 	const apiUrl =
