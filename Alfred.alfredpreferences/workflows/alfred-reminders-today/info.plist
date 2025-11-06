@@ -1664,7 +1664,7 @@ to set a hotkey to show reminders due today</string>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>List name in Reminders.app. The workflow only displays reminders from this list, and new reminders are added to this list.</string>
+			<string>List name in Reminders.app. Only reminders from this list are displayed, and new reminders are added to it.</string>
 			<key>label</key>
 			<string>Main list</string>
 			<key>type</key>
@@ -1857,11 +1857,11 @@ to set a hotkey to show reminders due today</string>
 			<key>config</key>
 			<dict>
 				<key>defaultvalue</key>
-				<integer>3</integer>
+				<integer>8</integer>
 				<key>markercount</key>
-				<integer>13</integer>
+				<integer>25</integer>
 				<key>maxvalue</key>
-				<integer>12</integer>
+				<integer>24</integer>
 				<key>minvalue</key>
 				<integer>0</integer>
 				<key>onlystoponmarkers</key>

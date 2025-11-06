@@ -9,6 +9,7 @@ let reminderList = ProcessInfo.processInfo.environment["reminder_list"]!
 let includeAllListsEnabled = ProcessInfo.processInfo.environment["include_all_lists"]! == "1"
 let showCompleted = ProcessInfo.processInfo.environment["showCompleted"] == "true"  // no `!`, since not always set
 let includeNoDueDateEnabled = ProcessInfo.processInfo.environment["include_no_duedate"]! == "1"
+
 // ─────────────────────────────────────────────────────────────────────────────
 
 struct ReminderOutput: Codable {

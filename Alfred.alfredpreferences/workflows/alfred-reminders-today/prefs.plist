@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>event_cache_duration_hours</key>
+	<integer>20</integer>
 	<key>include_no_duedate</key>
 	<true/>
 	<key>map_provider</key>
