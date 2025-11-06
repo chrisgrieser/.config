@@ -27,7 +27,6 @@ function _pretty_header() {
 }
 
 function update() {
-	export HOMEBREW_COLOR=1
 	_pretty_header "brew update" "no-line-break"
 	brew update # update homebrew itself
 
