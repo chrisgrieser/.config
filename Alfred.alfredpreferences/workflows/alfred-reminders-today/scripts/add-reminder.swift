@@ -8,6 +8,7 @@ let semaphore = DispatchSemaphore(value: 0)
 let input = CommandLine.arguments[1].trimmingCharacters(in: .whitespacesAndNewlines)
 let reminderList = ProcessInfo.processInfo.environment["reminder_list"]!
 let targetDay = ProcessInfo.processInfo.environment["target_day"]!
+
 // ─────────────────────────────────────────────────────────────────────────────
 
 struct ParsedResult {

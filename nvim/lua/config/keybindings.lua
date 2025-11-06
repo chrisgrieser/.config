@@ -28,16 +28,18 @@ keymap("n", "<D-q>", vim.cmd.wqall, { desc = " Save & quit", unique = false }
 
 keymap(
 	{ "n", "x", "i" },
-	"<D-C-r>", -- hyper gets registered by neovide as cmd+ctrl
+	"<D-C-r>", -- `hyper` gets registered by neovide as `cmd+ctrl`
 	function()
 		if jit.os ~= "OSX" or not vim.g.neovide then return end -- needs macOS' `open -a` & neovide
-		local script = [[for ((i = 0; i <= 40; i++)); do
-			sleep 0.05
-			if ! pgrep -xq "neovide"; then
-				open -a "neovide"
-				return
-			fi
-		done]]
+		local script = [[
+			for ((i = 0; i <= 40; i++)); do
+				sleep 0.05
+				if ! pgrep -xq "neovide"; then
+					open -a "neovide"
+					return
+				fi
+			done
+		]]
 
 		vim.system({ "zsh", "-c", script }, { detach = true }) -- detach to run after nvim quit
 		vim.cmd.wqall()
