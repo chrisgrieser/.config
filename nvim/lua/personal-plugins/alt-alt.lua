@@ -95,6 +95,7 @@ local function getMostChangedFile()
 	local mostChanges = 0
 	vim.iter(changedFiles):each(function(line)
 		local linesAdded, linesDeleted, relPath = line:match("(%d+)%s+(%d+)%s+(.+)")
+		if not relPath then return end
 		local absPath = vim.fs.normalize(vim.uv.cwd() .. "/" .. relPath)
 
 		local isBinary = not (linesAdded and linesDeleted)
