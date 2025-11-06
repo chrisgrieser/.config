@@ -14,6 +14,6 @@ zip:
     rm "$name.zip"
     mkdir "$name"
     cp ./* "./$name/"
-    zip -r "$name.zip" "./$name" >/dev/null
+    zip -r "/tmp/$name.zip" "./$name" >/dev/null
     rm -rf "./$name"
-    open -R "$name.zip"
+    open -R "/tmp/$name.zip"

@@ -277,7 +277,7 @@ keymap("n", "P", function()
 	local curLine = vim.api.nvim_get_current_line():gsub("%s*$", "")
 	local reg = vim.trim(vim.fn.getreg("+"))
 	vim.api.nvim_set_current_line(curLine .. " " .. reg)
-end, { desc = " Sticky paste at EoL" })
+end, { desc = " Paste at EoL" })
 
 keymap("i", "<D-v>", function()
 	vim.fn.setreg("+", vim.trim(vim.fn.getreg("+"))) -- trim

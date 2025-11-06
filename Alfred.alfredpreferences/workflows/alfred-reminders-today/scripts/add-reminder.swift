@@ -64,14 +64,14 @@ func parseTimeAndPriorityAndMessage(input: String, remForToday: Bool) -> ParsedR
 			if unit == "hours" { inXmins *= 60 }
 
 			let now = Date()
-			let future = Calendar.current.date(byAdding: .minute, value: inXmins, to: now)!
-			let target = Calendar.current.dateComponents([.day, .hour, .minute], from: future)
+			let dueTime = Calendar.current.date(byAdding: .minute, value: inXmins, to: now)!
+			let dueTimeComps = Calendar.current.dateComponents([.day, .hour, .minute], from: dueTime)
 			let today = Calendar.current.dateComponents([.day], from: now).day
-			if target.day != today {
+			if dueTimeComps.day != today {
 				errorMsg = "Can't set a relative time that goes beyond today."
 			}
-			hour = target.hour
-			minute = target.minute
+			hour = dueTimeComps.hour
+			minute = dueTimeComps.minute
 			amPm = ""
 		} else {
 			hour = Int(capture[1]!)
