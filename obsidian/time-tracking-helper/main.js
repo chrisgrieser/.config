@@ -1,8 +1,7 @@
 // @ts-nocheck // using pure javascript without the whole toolchain here
 //──────────────────────────────────────────────────────────────────────────────
 
-function lineToReport(plugin, editor) {
-	const app = plugin.app;
+function lineToReport(app, editor) {
 	const cursor = editor.getCursor("from");
 	const currentLine = editor.getLine(cursor.line);
 
@@ -18,8 +17,7 @@ function lineToReport(plugin, editor) {
 			if (startH > endH) startH -= 24; // time beyond midnight
 
 			const hours = (endH * 60 + endM - (startH * 60 + startM)) / 60;
-			const roundedHours = // round, but keep as float
-				String(hours).length > 3 ? Number.parseFloat(hours.toFixed(2)) : hours;
+			const roundedHours = Number(hours.toFixed(2));
 			acc[type] = (acc[type] ?? 0) + roundedHours;
 			acc.total = (acc.total ?? 0) + roundedHours;
 			return acc;
@@ -48,6 +46,40 @@ function lineToReport(plugin, editor) {
 	}
 }
 
+function monthlyReport(app) {
+	const dailyNoteNamePattern = /(\d{2}).(\d{2}).(\d{4})/; // dd.mm.yyyy
+
+	const currentMonth = new Date().getMonth() + 1;
+	const currentYear = new Date().getFullYear();
+
+	const dailyNotesForThisMonth = app.vault.getMarkdownFiles().filter((file) => {
+		const [_, _day, month, year] = file.basename.match(dailyNoteNamePattern) || [];
+		const isThisYear = year === currentYear.toString();
+		const isThisMonth = (month ?? "-1").padStart(2, "0") === currentMonth.toString();
+		return isThisYear && isThisMonth;
+	});
+
+	const totalThisMonth = dailyNotesForThisMonth.reduce((acc, dailyNote) => {
+		const frontmatter = app.metadataCache.getFileCache(dailyNote).frontmatter;
+		for (const [key, hours] of Object.entries(frontmatter)) {
+			if (typeof hours !== "number") continue; // other frontmatter things
+			acc[key] = (acc[key] ?? 0) + hours;
+		}
+		return acc;
+	}, {});
+
+	// report
+	if (Object.keys(totalThisMonth).length === 0) {
+		new Notice("No activities found for this month.");
+		return;
+	}
+	let report = `RERORT FOR ${currentMonth}.${currentYear}:\n`;
+	for (const [type, hours] of Object.entries(totalThisMonth)) {
+		report += `${type}: ${hours}h\n`;
+	}
+	new Notice(report, 10_000);
+}
+
 //──────────────────────────────────────────────────────────────────────────────
 
 // biome-ignore lint/correctness/noUndeclaredDependencies: okay, since only mini-plugin
@@ -59,7 +91,13 @@ class TimeTrackingHelperPlugin extends require("obsidian").Plugin {
 			id: "line-to-properties",
 			name: "Convert line to properties",
 			icon: "clipboard-clock", // for mobile
-			editorCallback: (editor) => lineToReport(this, editor),
+			editorCallback: (editor) => lineToReport(this.app, editor),
+		});
+		this.addCommand({
+			id: "monthly-report",
+			name: "Report for the month",
+			icon: "calendar-days", // for mobile
+			callback: () => monthlyReport(this.app),
 		});
 	}
 }
