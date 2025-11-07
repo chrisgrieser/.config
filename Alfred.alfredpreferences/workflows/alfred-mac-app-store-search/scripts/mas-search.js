@@ -107,9 +107,7 @@ function run(argv) {
 
 	// CAVEAT this assumes that the device locale is also the app store locale.
 	// (This is almost always the case.)
-	const regionCode = ObjC.unwrap(
-		$.NSLocale.currentLocale.objectForKey($.NSLocaleCountryCode),
-	).toLowerCase();
+	const regionCode = ObjC.unwrap($.NSLocale.currentLocale.objectForKey($.NSLocaleCountryCode));
 	console.log("Region Code:", regionCode); // e.g., "DE", "US"
 
 	const apiUrl =
@@ -154,16 +152,22 @@ function run(argv) {
 			mods: {
 				cmd: {
 					variables: { openIn: "browser" },
+					subtitle: "⌘: Open in browser",
 				},
 				shift: {
 					arg: app.sellerUrl || "",
 					valid: Boolean(app.sellerUrl),
-					subtitle: app.sellerUrl ? "⌘: Open " + app.sellerUrl : "⛔ No website found.",
+					subtitle: app.sellerUrl
+						? "⇧: Open developer website  –  " + app.sellerUrl
+						: "⛔ No website found.",
 					variables: { openIn: "browser" }, // seller url must be opened in browser
 				},
 				ctrl: {
 					arg: app.bundleId,
-					subtitle: `⌃: Copy Bundle ID "${app.bundleId}"`,
+					subtitle: "⌃: Copy Bundle ID  –  " + app.bundleId,
+				},
+				alt: {
+					subtitle: "⌥: Copy URL",
 				},
 			},
 		};
