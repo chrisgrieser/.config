@@ -1520,7 +1520,12 @@
 		</dict>
 	</array>
 	<key>readme</key>
-	<string>## Usage
+	<string>## Version 2.0 Breaking Change
+Including private repos/PRs/issues now also requires explicitly enabling them in the workflow settings to the right. (In addition to having set a GITHUB_TOKEN.) This is due to performance reasons, since including private results slows down the respective searches.
+
+---
+
+## Usage
 - Search all public GitHub repositories via the keyword `gh`.
 	* Uses the [GitHub search query
 	  syntax](https://docs.github.com/en/search-github/searching-on-github/searching-for-repositories),
@@ -1539,19 +1544,12 @@
 	* &lt;kbd&gt;⇧⏎&lt;/kbd&gt;: Clone the repo to a local folder and open in the Terminal.
 	  If the repo is already locally available on your device, just open the
 	  repository in the Terminal.
-	* To include private repos, requires [GitHub
-	  Token](https://github.com/settings/tokens).
 - Open recent GitHub issues you are involved in with `ghi`.
 	* &lt;kbd&gt;⏎&lt;/kbd&gt;: Open the issue in the browser.
 	* &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy the issue URL.
-	* To include issues in private repos, requires [GitHub
-	  Token](https://github.com/settings/tokens) and enabling the respective
-	  workflow setting (searching for private issues is slow).
 - Access PRs you have opened with the keyword `gpr`.
 	* &lt;kbd&gt;⏎&lt;/kbd&gt;: Open the PR in the browser.
 	* &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy the link to the PR.
-	* To include private PRs, requires [GitHub
-	  Token](https://github.com/settings/tokens).
 - Directly open your GitHub notification via `ghn`.
 	* Requires [GitHub Token](https://github.com/settings/tokens).
 	* &lt;kbd&gt;⏎&lt;/kbd&gt;: Open the notification in the browser. In cases where no URL
@@ -1561,14 +1559,21 @@
 	* &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy the URL of the notification target.
 	* &lt;kbd&gt;⌃⏎&lt;/kbd&gt;: Mark the notification as done.
 - Additionally, you can press the
-  [hotkey](https://www.alfredapp.com/help/workflows/triggers/hotkey/) to clone a
-  GitHub repo from the current browser tab. ([Note that Firefox is not
+  [hotkey](https://www.alfredapp.com/help/workflows/triggers/hotkey/) to clone
+  a GitHub repo from the current browser tab. ([Note that Firefox is not
   supported.](https://www.alfredforum.com/topic/16748-how-to-do-x-in-firefox-from-alfred/))
 
 ## GitHub Token
-Optional. Only required for showing notifications, private PRs, and private
-repos. The token requires accesses to private repos and to notifications. The
-workflow will check for the token in the following order:
+The `GITHUB_TOKEN` is optional and only required for showing notifications,
+private repos, PRs, and issues repos. The token requires the respective access
+rights.
+
+Note that other than for notifications, the workflow does not use the token by
+default, since including private noticeably slows down the search. To search
+private repos, PRs, and issues, you also need to enable the respective workflow
+setting.
+
+The workflow will check for the token in the following order:
 1. The `GITHUB_TOKEN` in the Alfred workflow configuration.
 2. A shell command that outputs your `GITHUB_TOKEN`, such as `cat
    $HOME/my_token.txt`, defined in your workflow settings.
@@ -2001,6 +2006,63 @@ to set a hotkey to clone the repo in the frontmost browser tab</string>
 			<key>config</key>
 			<dict>
 				<key>default</key>
+				<false/>
+				<key>required</key>
+				<false/>
+				<key>text</key>
+				<string>repos</string>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>Include private</string>
+			<key>type</key>
+			<string>checkbox</string>
+			<key>variable</key>
+			<string>include_private_repos</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<false/>
+				<key>required</key>
+				<false/>
+				<key>text</key>
+				<string>PRs</string>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string></string>
+			<key>type</key>
+			<string>checkbox</string>
+			<key>variable</key>
+			<string>include_private_prs</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<false/>
+				<key>required</key>
+				<false/>
+				<key>text</key>
+				<string>issues</string>
+			</dict>
+			<key>description</key>
+			<string>Note that including private repos/issues/PRs also requires a GITHUB_TOKEN and is slower.</string>
+			<key>label</key>
+			<string></string>
+			<key>type</key>
+			<string>checkbox</string>
+			<key>variable</key>
+			<string>include_private_issues</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
 				<string>gh</string>
 				<key>placeholder</key>
 				<string>gh</string>
@@ -2213,25 +2275,6 @@ to set a hotkey to clone the repo in the frontmost browser tab</string>
 			<string>textfield</string>
 			<key>variable</key>
 			<string>on_fork_branch</string>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>default</key>
-				<false/>
-				<key>required</key>
-				<false/>
-				<key>text</key>
-				<string>include private issues</string>
-			</dict>
-			<key>description</key>
-			<string>This is opt-in, since including for private issues is much slow. (Note that including them also requires a GITHUB_TOKEN.)</string>
-			<key>label</key>
-			<string>Issue search</string>
-			<key>type</key>
-			<string>checkbox</string>
-			<key>variable</key>
-			<string>include_private_issues</string>
 		</dict>
 		<dict>
 			<key>config</key>

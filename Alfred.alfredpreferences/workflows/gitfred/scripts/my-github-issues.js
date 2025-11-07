@@ -44,7 +44,8 @@ function run() {
 	const username = $.getenv("github_username");
 
 	// DOCS https://docs.github.com/en/rest/issues/issues?apiVersion=2022-11-28#list-issues-assigned-to-the-authenticated-user--parameters
-	const apiUrl = `https://api.github.com/search/issues?q=involves:${username}&sort=updated&per_page=100`;
+	const issuesToSearch = 50; // up to 100, for performance set lower
+	const apiUrl = `https://api.github.com/search/issues?q=involves:${username}&sort=updated&per_page=${issuesToSearch}`;
 	const headers = ["Accept: application/vnd.github.json", "X-GitHub-Api-Version: 2022-11-28"];
 	if (githubToken && includePrivate) headers.push(`Authorization: BEARER ${githubToken}`);
 
