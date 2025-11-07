@@ -2051,7 +2051,7 @@ to set a hotkey to clone the repo in the frontmost browser tab</string>
 				<string>issues</string>
 			</dict>
 			<key>description</key>
-			<string>Note that including private repos/issues/PRs also requires a GITHUB_TOKEN and is slower.</string>
+			<string>Including private repos/issues/PRs slows down the search and also requires a GITHUB_TOKEN.</string>
 			<key>label</key>
 			<string></string>
 			<key>type</key>
@@ -2209,7 +2209,7 @@ to set a hotkey to clone the repo in the frontmost browser tab</string>
 				</array>
 			</dict>
 			<key>description</key>
-			<string>Restores the modification time of files that git erases when cloning. "full" restores the mtime for every file, but is very slow on large repos. "partial" is magnitudes quicker, but restores the mtime only for files touched in the last x commits. When using cloning shallowly (clone depth &gt; 0), will always use "partial".</string>
+			<string>Restores the modification time of files that git erases when cloning. "full" restores the mtime for every file, but is very slow on large repos. "partial" is magnitudes quicker, but restores the mtime only for files touched in the last x commits. When shallow-cloning (clone depth &gt; 0), this workflow will always use "partial".</string>
 			<key>label</key>
 			<string>restore mtime</string>
 			<key>type</key>
@@ -2228,7 +2228,7 @@ to set a hotkey to clone the repo in the frontmost browser tab</string>
 				<string>fork when cloning</string>
 			</dict>
 			<key>description</key>
-			<string>Forking requires the `gh` cli.</string>
+			<string>Forking also requires the `gh` cli.</string>
 			<key>label</key>
 			<string>Forking</string>
 			<key>type</key>
@@ -2299,7 +2299,7 @@ to set a hotkey to clone the repo in the frontmost browser tab</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.14.3</string>
+	<string>2.0.0</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
