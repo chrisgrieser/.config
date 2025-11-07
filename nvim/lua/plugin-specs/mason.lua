@@ -9,6 +9,7 @@ local ensureInstalled = {
 		"basedpyright", -- python lsp (pyright fork)
 		"bash-language-server", -- also used for zsh
 		"biome", -- ts/js/json/css linter/formatter
+		"eslint-lsp", -- ts/js linter (only Obsidian plugins, otherwise using `biome`)
 		"css-lsp",
 		"css-variables-language-server", -- support css variables across multiple files
 		"efm", -- integration of external linters
