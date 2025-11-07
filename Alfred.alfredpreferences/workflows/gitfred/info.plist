@@ -1545,7 +1545,8 @@
 	* &lt;kbd&gt;⏎&lt;/kbd&gt;: Open the issue in the browser.
 	* &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy the issue URL.
 	* To include issues in private repos, requires [GitHub
-	  Token](https://github.com/settings/tokens).
+	  Token](https://github.com/settings/tokens) and enabling the respective
+	  workflow setting (searching for private issues is slow).
 - Access PRs you have opened with the keyword `gpr`.
 	* &lt;kbd&gt;⏎&lt;/kbd&gt;: Open the PR in the browser.
 	* &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy the link to the PR.
@@ -2212,6 +2213,25 @@ to set a hotkey to clone the repo in the frontmost browser tab</string>
 			<string>textfield</string>
 			<key>variable</key>
 			<string>on_fork_branch</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<false/>
+				<key>required</key>
+				<false/>
+				<key>text</key>
+				<string>include private issues</string>
+			</dict>
+			<key>description</key>
+			<string>This is opt-in, since including for private issues is much slow. (Note that including them also requires a GITHUB_TOKEN.)</string>
+			<key>label</key>
+			<string>Issue search</string>
+			<key>type</key>
+			<string>checkbox</string>
+			<key>variable</key>
+			<string>include_private_issues</string>
 		</dict>
 		<dict>
 			<key>config</key>

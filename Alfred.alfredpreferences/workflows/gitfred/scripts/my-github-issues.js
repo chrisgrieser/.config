@@ -40,12 +40,13 @@ function getGithubToken() {
 // biome-ignore lint/correctness/noUnusedVariables: alfred_run
 function run() {
 	const githubToken = getGithubToken();
+	const includePrivate = $.getenv("include_private_issues") === "1";
 	const username = $.getenv("github_username");
 
 	// DOCS https://docs.github.com/en/rest/issues/issues?apiVersion=2022-11-28#list-issues-assigned-to-the-authenticated-user--parameters
 	const apiUrl = `https://api.github.com/search/issues?q=involves:${username}&sort=updated&per_page=100`;
 	const headers = ["Accept: application/vnd.github.json", "X-GitHub-Api-Version: 2022-11-28"];
-	if (githubToken) headers.push(`Authorization: BEARER ${githubToken}`);
+	if (githubToken && includePrivate) headers.push(`Authorization: BEARER ${githubToken}`);
 
 	const response = httpRequestWithHeaders(apiUrl, headers);
 	if (!response) {
