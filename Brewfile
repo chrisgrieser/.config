@@ -23,7 +23,7 @@ brew "zsh-autopair"
 brew "zsh-autosuggestions"
 brew "zsh-history-substring-search"
 brew "zsh-syntax-highlighting"
-tap "charmbracelet/tap" ; brew "charmbracelet/tap/crush"
+# tap "charmbracelet/tap" ; brew "charmbracelet/tap/crush"
 tap "felixkratz/formulae"; brew "felixkratz/formulae/sketchybar"
 
 # APPS
@@ -32,7 +32,7 @@ cask "appcleaner"
 cask "brave-browser"
 cask "espanso"
 cask "font-jetbrains-mono-nerd-font"
-cask "hammerspoon", postinstall: "defaults write org.hammerspoon.Hammerspoon MJConfigFile \"$HOME/.config/hammerspoon/init.lua\""
+cask "hammerspoon", postinstall: 'defaults write org.hammerspoon.Hammerspoon MJConfigFile "$HOME/.config/hammerspoon/init.lua"'
 cask "karabiner-elements"
 cask "microsoft-word", greedy: true # greedy since we uninstall the auto-updater
 cask "mimestream"

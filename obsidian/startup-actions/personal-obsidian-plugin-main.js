@@ -68,7 +68,7 @@ function updateTaskStatusbarAndFrontmatter(plugin) {
 	const { app, taskStatusbar } = plugin;
 	const activeFile = app.workspace.getActiveFile();
 	if (!activeFile) {
-		taskStatusbar.set.cssProps({ display: "none" });
+		taskStatusbar.style.setProperty("display", "none");
 		return;
 	}
 
@@ -79,26 +79,22 @@ function updateTaskStatusbarAndFrontmatter(plugin) {
 		fm["open-tasks"] = openTasks > 0 ? openTasks : undefined;
 	});
 	if (openTasks > 0) {
-		taskStatusbar.set.cssProps({
-			display: "block",
-			order: -1, // move to the left
-		});
+		taskStatusbar.style.setProperty("display", "block");
+		taskStatusbar.style.setProperty("order", -1); // move to the left
 		taskStatusbar.setText(`${openTasks} t`);
 	} else {
-		taskStatusbar.set.cssProps({ display: "none" });
+		taskStatusbar.style.setProperty("display", "none");
 	}
 }
 
 function updateSpellStatusbar(plugin) {
 	const { app, spellStatusbar } = plugin;
 	if (app.vault.getConfig("spellcheck")) {
-		spellStatusbar.set.cssProps({
-			display: "block",
-			order: -2, // move to *very* the left
-		});
+		spellStatusbar.style.setProperty("display", "block");
+		spellStatusbar.style.setProperty("order", -2); // move to the *very* left
 		spellStatusbar.setText("✓"); // utf checkmarks
 	} else {
-		spellStatusbar.set.cssProps({ display: "none" });
+		spellStatusbar.style.setProperty("display", "none");
 	}
 }
 

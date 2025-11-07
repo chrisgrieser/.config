@@ -48,6 +48,7 @@ function getGithubToken() {
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
 	const githubToken = getGithubToken();
+	const includePrivate = $.getenv("include_private_repos") === "1";
 	const username = $.getenv("github_username");
 	const localRepoFolder = $.getenv("local_repo_folder");
 	const cloneDepth = Number.parseInt($.getenv("clone_depth"));
@@ -82,7 +83,7 @@ function run() {
 	// DOCS https://docs.github.com/en/rest/repos/repos?apiVersion=2022-11-28#list-repositories-for-a-user
 	let apiUrl = `https://api.github.com/users/${username}/repos?type=all&per_page=100&sort=updated`;
 	const headers = ["Accept: application/vnd.github.json", "X-GitHub-Api-Version: 2022-11-28"];
-	if (githubToken) {
+	if (githubToken && includePrivate) {
 		// DOCS https://docs.github.com/en/rest/repos/repos?apiVersion=2022-11-28#list-repositories-for-the-authenticated-user--parameters
 		apiUrl = "https://api.github.com/user/repos?per_page=100&sort=updated";
 		headers.push(`Authorization: BEARER ${githubToken}`);
