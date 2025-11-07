@@ -173,6 +173,16 @@
     "body": "osascript -e \"tell application \\\"System Events\\\" to keystroke \\\"${1:key}\\\" using {command down}\"",
     "prefix": "keystroke (via Applescript)"
   },
+  "multiline string": {
+    "body": [
+      "${1:var}=\\$(",
+      "\tcat << EOF",
+      "${2:string}",
+      "EOF",
+      ")"
+    ],
+    "prefix": "multiline string"
+  },
   "notify (msg)": {
     "body": "osascript -e 'display notification \"\" with title \"${1:msg}\"'",
     "prefix": "notify (msg)"
