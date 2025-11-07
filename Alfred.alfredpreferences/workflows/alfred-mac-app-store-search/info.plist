@@ -53,9 +53,19 @@
 				<key>destinationuid</key>
 				<string>9A53CA1F-DF08-4165-9D02-6637D820428E</string>
 				<key>modifiers</key>
-				<integer>0</integer>
+				<integer>1048576</integer>
 				<key>modifiersubtext</key>
-				<string></string>
+				<string>⌘: Open in browser</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>AB4F2C40-54A2-443D-8608-92F8345A9C09</string>
+				<key>modifiers</key>
+				<integer>131072</integer>
+				<key>modifiersubtext</key>
+				<string>⇧: Open developer website</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -63,9 +73,9 @@
 				<key>destinationuid</key>
 				<string>4765DAC1-3059-4B3F-9EE9-9A53AE02B4BC</string>
 				<key>modifiers</key>
-				<integer>1048576</integer>
+				<integer>0</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Open developer website</string>
+				<string></string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -86,6 +96,19 @@
 				<integer>262144</integer>
 				<key>modifiersubtext</key>
 				<string>⌃: Copy Bundle ID</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>AB4F2C40-54A2-443D-8608-92F8345A9C09</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>9A53CA1F-DF08-4165-9D02-6637D820428E</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -128,7 +151,7 @@
 			<key>type</key>
 			<string>alfred.workflow.utility.junction</string>
 			<key>uid</key>
-			<string>4765DAC1-3059-4B3F-9EE9-9A53AE02B4BC</string>
+			<string>AB4F2C40-54A2-443D-8608-92F8345A9C09</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -180,6 +203,14 @@
 			<string>A8B4F6B2-C13E-44E1-879C-6C87BC33DF9D</string>
 			<key>version</key>
 			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.junction</string>
+			<key>uid</key>
+			<string>4765DAC1-3059-4B3F-9EE9-9A53AE02B4BC</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -234,7 +265,8 @@
 	<string>## Usage
 Search the Mac App Store for apps via the keyword `mas`.
 - &lt;kbd&gt;⏎&lt;/kbd&gt; Open the result in `App Store.app`.
-- &lt;kbd&gt;⌘⏎&lt;/kbd&gt; Open the developer's website, if available.
+- &lt;kbd&gt;⌘⏎&lt;/kbd&gt; Open the result in the browser.
+- &lt;kbd&gt;⇧⏎&lt;/kbd&gt; Open the developer's website, if available.
 - &lt;kbd&gt;⌥⏎&lt;/kbd&gt; Copy the App Store URL to your clipboard.
 - &lt;kbd&gt;⌃⏎&lt;/kbd&gt; Copy app's bundle ID to your clipboard.
 - &lt;kbd&gt;⌘Y&lt;/kbd&gt; Quick Look a screenshot of the app, if available.
@@ -256,36 +288,36 @@ and the Mac App Store.
 			<key>colorindex</key>
 			<integer>9</integer>
 			<key>xpos</key>
-			<real>390</real>
+			<real>440</real>
 			<key>ypos</key>
-			<real>280</real>
+			<real>310</real>
 		</dict>
 		<key>4765DAC1-3059-4B3F-9EE9-9A53AE02B4BC</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>9</integer>
 			<key>xpos</key>
-			<real>210</real>
+			<real>260</real>
 			<key>ypos</key>
-			<real>170</real>
+			<real>245</real>
 		</dict>
 		<key>4A32D4C6-F346-441A-B06F-C35E7ABD7A23</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>9</integer>
 			<key>xpos</key>
-			<real>210</real>
+			<real>260</real>
 			<key>ypos</key>
-			<real>310</real>
+			<real>340</real>
 		</dict>
 		<key>4C0A319F-FC03-4A32-B2B8-9C9242048318</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>9</integer>
 			<key>xpos</key>
-			<real>540</real>
+			<real>590</real>
 			<key>ypos</key>
-			<real>280</real>
+			<real>310</real>
 		</dict>
 		<key>9A53CA1F-DF08-4165-9D02-6637D820428E</key>
 		<dict>
@@ -294,9 +326,9 @@ and the Mac App Store.
 			<key>note</key>
 			<string>open URL</string>
 			<key>xpos</key>
-			<real>390</real>
+			<real>435</real>
 			<key>ypos</key>
-			<real>140</real>
+			<real>105</real>
 		</dict>
 		<key>A8B4F6B2-C13E-44E1-879C-6C87BC33DF9D</key>
 		<dict>
@@ -306,6 +338,15 @@ and the Mac App Store.
 			<real>35</real>
 			<key>ypos</key>
 			<real>215</real>
+		</dict>
+		<key>AB4F2C40-54A2-443D-8608-92F8345A9C09</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>9</integer>
+			<key>xpos</key>
+			<real>260</real>
+			<key>ypos</key>
+			<real>135</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
@@ -374,32 +415,6 @@ and the Mac App Store.
 			<string>checkbox</string>
 			<key>variable</key>
 			<string>use_app_logos</string>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>default</key>
-				<string>app</string>
-				<key>pairs</key>
-				<array>
-					<array>
-						<string>App Store.app</string>
-						<string>app</string>
-					</array>
-					<array>
-						<string>Browser</string>
-						<string>browser</string>
-					</array>
-				</array>
-			</dict>
-			<key>description</key>
-			<string></string>
-			<key>label</key>
-			<string>Open in</string>
-			<key>type</key>
-			<string>popupbutton</string>
-			<key>variable</key>
-			<string>open_in</string>
 		</dict>
 	</array>
 	<key>version</key>

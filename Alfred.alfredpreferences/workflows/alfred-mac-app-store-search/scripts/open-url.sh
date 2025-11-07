@@ -1,10 +1,10 @@
 #!/usr/bin/env zsh
 
+url="$*"
+
 # shellcheck disable=2154 # Alfred variable
-if [[ "$open_in" == "browser" ]]; then
-	# gives ios page by default, even if previously searched for Mac, thus need to set mac manually
-	url= "$*&platform=mac"
+if [[ "$openIn" == "browser" ]]; then
 	open "$url"
-elif [[ "$open_in" == "app" ]]; then
-	open -a "App Store" "$*"
+else
+	open -a "App Store" "$url"
 fi
