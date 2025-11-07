@@ -140,18 +140,26 @@ function run(argv) {
 
 		const emoji = installedApps.includes(app.trackName) ? " ✅" : "";
 
+		// gives ios page by default, even if previously searched for Mac, thus
+		// need to set mac manually
+		const url = app.trackViewUrl + "&platform=mac";
+
 		/** @type {AlfredItem} */
 		const alfredItem = {
 			title: app.trackName + emoji,
 			subtitle: subtitle,
-			arg: app.trackViewUrl,
+			arg: url,
 			icon: { path: imagePath || "" },
 			quicklookurl: app.screenshotUrls[0] || "",
 			mods: {
 				cmd: {
+					variables: { openIn: "browser" },
+				},
+				shift: {
 					arg: app.sellerUrl || "",
 					valid: Boolean(app.sellerUrl),
 					subtitle: app.sellerUrl ? "⌘: Open " + app.sellerUrl : "⛔ No website found.",
+					variables: { openIn: "browser" }, // seller url must be opened in browser
 				},
 				ctrl: {
 					arg: app.bundleId,
