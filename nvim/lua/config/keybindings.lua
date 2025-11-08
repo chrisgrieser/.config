@@ -33,11 +33,12 @@ keymap(
 		if jit.os ~= "OSX" or not vim.g.neovide then return end -- needs macOS' `open -a` & neovide
 		local script = [=[
 			i=0
-			until ! pgrep -xq "neovide"; do
+			while pgrep -xq "neovide"; do
 				sleep 0.05
 				i=$((i+1))
 				[[ $i -gt 40 ]] && return 1
 			done
+			sleep 0.05
 			open -a "neovide"
 		]=]
 
