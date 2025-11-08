@@ -14,8 +14,6 @@ Alternative to vim's "alternative file" that improves its functionality.
 local config = {
 	statusbar = {
 		maxLength = 30,
-		-- show most changed file even if it is the same as the current file or the alt file
-		showMostChangedIfRedundant = false,
 	},
 	icons = {
 		oldFile = "󰋚",
@@ -191,11 +189,10 @@ function M.mostChangedFileStatusbar()
 	local targetFile = vim.b.altalt_mostChangedFile
 	if not targetFile then return "" end
 
-	if config.statusbar.showMostChangedIfRedundant then
-		local currentFile = vim.api.nvim_buf_get_name(0)
-		local altFile = getAltBuffer() or getAltOldfile()
-		if targetFile == currentFile or targetFile == altFile then return "" end
-	end
+	-- do not show if most changed file is same as current or alt file
+	local currentFile = vim.api.nvim_buf_get_name(0)
+	local altFile = getAltBuffer() or getAltOldfile()
+	if targetFile == currentFile or targetFile == altFile then return "" end
 
 	local icon = config.icons.mostChangedFile
 	return vim.trim(icon .. " " .. nameForStatusbar(targetFile))
