@@ -5,10 +5,13 @@ alias gt='git stash push && git stash show 0'
 alias gT='git stash pop'
 alias gi='gh issue list --state=open'
 alias gI='gh issue list --state=closed'
+alias gb='git switch'
 alias grh='git clean --force -d && git reset --hard' # remove untracked files & undo all changes
 
 alias irb='git rebase --interactive --committer-date-is-author-date' # [i]nteractive [r]e[b]ase
 alias crb='git add --all ; git rebase --continue'                    # [c]ontinue [r]e[b]ase
+alias arb='git rebase --abort'                                       # [a]bort [r]e[b]ase
+alias conflict_file='open "$(git diff --name-only --diff-filter=U --relative | head -n1)"'
 
 alias cherry='git cherry-pick'
 alias push='git push'
@@ -17,7 +20,6 @@ alias reset='git reset'
 
 alias gundo='git reset --mixed HEAD@{1}'
 alias unlock='rm -v "$(git rev-parse --git-dir)/index.lock"'
-alias conflict_file='open "$(git diff --name-only --diff-filter=U --relative | head -n1)"'
 
 alias mark_commit="git tag 'mark' && echo $'Added tag \'mark\' to current commit.'"
 alias unmark_commit="git tag --delete 'mark'"

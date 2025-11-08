@@ -15,7 +15,7 @@ local function importLuaModule()
 		search = [[local (\w+) ?= ?require\(["'](.*?)["']\)(\.[\w.]*)?]],
 		ft = "lua",
 
-		layout = { preset = "small_no_preview", layout = { width = 0.75 } }, ---@diagnostic disable-line: missing-fields
+		layout = { preset = "small_no_preview", layout = { width = 0.75 } },
 		transform = function(item, ctx) -- ensure items are unique
 			ctx.meta.done = ctx.meta.done or {} ---@type table<string, boolean>
 			local imp = import(item.text)
@@ -174,17 +174,13 @@ return {
 
 		-- stylua: ignore
 		{ "gw", function() require("snacks").picker.lsp_workspace_symbols() end, desc = "󰒕 Workspace symbols" },
-		{
-			"g!",
-			function() require("snacks").picker.diagnostics() end,
-			desc = "󰋼 Workspace diagnostics",
-		},
 
 		--------------------------------------------------------------------------
 		-- GIT
 
 		{ "<leader>gs", function() require("snacks").picker.git_status() end, desc = "󰗲 Status" },
 		{ "<leader>gl", function() require("snacks").picker.git_log() end, desc = "󰗲 Log" },
+		{ "<leader>gH", function() require("snacks").picker.git_log_file() end, desc = "󰗲 File History" },
 		{ "<leader>ga", function() require("snacks").picker.git_diff() end, desc = "󰐖 Hunks" },
 
 		-- stylua: ignore start
@@ -413,6 +409,9 @@ return {
 				git_log = {
 					layout = "toggled_preview",
 				},
+				git_log_file = {
+					layout = "toggled_preview",
+				},
 				git_status = {
 					layout = "big_preview",
 					win = {
@@ -490,9 +489,9 @@ return {
 						},
 					},
 				},
-				toggled_preview = { ---@diagnostic disable-line: missing-fields
-					preset = "wide_with_preview",
-					preview = false, ---@diagnostic disable-line: assign-type-mismatch wrong annotation
+				toggled_preview = {
+					preset = "big_preview",
+					preview = false,
 				},
 				big_preview = {
 					preset = "wide_with_preview",
