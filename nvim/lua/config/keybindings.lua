@@ -23,39 +23,18 @@ end
 --------------------------------------------------------------------------------
 -- META
 
+keymap("n", "<D-,>", function()
+	local pathOfThisFile = debug.getinfo(1, "S").source:gsub("^@", "")
+	vim.cmd.edit(pathOfThisFile)
+end, { desc = "󰌌 Edit keybindings" })
+
 -- save before quitting (non-unique, since also set by Neovide)
 keymap("n", "<D-q>", vim.cmd.wqall, { desc = " Save & quit", unique = false })
-
-keymap(
-	{ "n", "x", "i" },
-	"<D-C-r>", -- `hyper` gets registered by neovide as `cmd+ctrl`
-	function()
-		if jit.os ~= "OSX" or not vim.g.neovide then return end -- needs macOS' `open -a` & neovide
-		local script = [[
-			for ((i = 0; i <= 40; i++)); do
-				sleep 0.05
-				if ! pgrep -xq "neovide"; then
-					open -a "neovide"
-					return
-				fi
-			done
-		]]
-
-		vim.system({ "zsh", "-c", script }, { detach = true }) -- detach to run after nvim quit
-		vim.cmd.wqall()
-	end,
-	{ desc = " Save & Restart nvim" }
-)
 
 -- stylua: ignore
 keymap("n", "<leader>pd", function() vim.ui.open(vim.fn.stdpath("data") --[[@as string]]) end, { desc = "󰝰 Local data dir" })
 -- stylua: ignore
 keymap("n", "<leader>pD", function() vim.ui.open(vim.g.iCloudSync) end, { desc = " Cloud data dir" })
-
-keymap("n", "<D-,>", function()
-	local pathOfThisFile = debug.getinfo(1, "S").source:gsub("^@", "")
-	vim.cmd.edit(pathOfThisFile)
-end, { desc = "󰌌 Edit keybindings" })
 
 --------------------------------------------------------------------------------
 -- NAVIGATION
@@ -73,7 +52,6 @@ keymap({ "n", "x" }, "J", "6gj", { desc = "6j" })
 keymap({ "n", "x" }, "K", "6gk", { desc = "6k" })
 
 -- Jump history
-keymap("n", "<C-g>", "<C-t>", { desc = "󱋿 Jump back in tagstack" }) -- useful for goto-definitions
 keymap("n", "<C-h>", "<C-o>", { desc = "󱋿 Jump back" })
 keymap("n", "<C-l>", "<C-i>", { desc = "󱋿 Jump forward", unique = false })
 
@@ -279,7 +257,7 @@ keymap("n", "P", function()
 	local curLine = vim.api.nvim_get_current_line():gsub("%s*$", "")
 	local reg = vim.trim(vim.fn.getreg("+"))
 	vim.api.nvim_set_current_line(curLine .. " " .. reg)
-end, { desc = " Paste at EoL" })
+end, { desc = " Sticky paste at EoL" })
 
 keymap("i", "<D-v>", function()
 	vim.fn.setreg("+", vim.trim(vim.fn.getreg("+"))) -- trim
@@ -407,9 +385,9 @@ end, { expr = true, desc = "<BS> does not leave cmdline" })
 -- OPEN WEZTERM at cwd
 keymap(
 	{ "n", "x", "i" },
-	"<D-C-t>", -- hyper gets registered by neovide as cmd+ctrl
+	"<D-C-t>", -- hyper + t gets registered by neovide as ctrl+t
 	function()
-		if not jit.os == "OSX" then return end -- requires macOS' `osascript`
+		if not jit.os == "OSX" then return end
 		vim.system({ "osascript", "-e", 'tell application "WezTerm" to activate' }, {}, function()
 			local stdin = ("cd -q %q && clear\n"):format(vim.uv.cwd() or "")
 			vim.system({ "wezterm", "cli", "send-text", "--no-paste" }, { stdin = stdin })
@@ -516,7 +494,7 @@ do
 	local function retabber(use)
 		vim.bo.expandtab = use == "spaces"
 		vim.bo.shiftwidth = 2
-		vim.bo.tabstop = 2
+		vim.bo.tabstop = 3
 		vim.cmd.retab { bang = true }
 		vim.notify("Now using " .. use, nil, { title = ":retab", icon = "󰌒" })
 	end
