@@ -32,11 +32,9 @@ keymap(
 	function()
 		if jit.os ~= "OSX" or not vim.g.neovide then return end -- needs macOS' `open -a` & neovide
 		local script = [=[
-			i=0
-			while pgrep -xq "neovide"; do
+			while pgrep -xq "neovide" || pgrep -xq "nvim"; do
 				sleep 0.05
-				i=$((i+1))
-				[[ $i -gt 40 ]] && return 1
+				i=$((i+1)) ; [[ $i -gt 50 ]] && return # timeout
 			done
 			sleep 0.05
 			open -a "neovide"
@@ -257,7 +255,7 @@ do
 	vim.api.nvim_create_autocmd("TextYankPost", {
 		desc = "User: Make cyclic paste compatible with yanking",
 		callback = function()
-			-- store yanks in register 1, since by default it's stored in 0
+			-- store yanks in register 1 (by default it's stored in 0)
 			if vim.v.event.operator == "y" and vim.v.event.regname == "" then
 				vim.fn.setreg("1", vim.fn.getreg("0"))
 			end
