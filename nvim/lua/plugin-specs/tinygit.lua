@@ -56,12 +56,14 @@ return {
 				ignoreAuthors = { "🤖 automated" },
 				maxMsgLen = 72,
 			},
+			fileState = { icon = "" },
 		},
 	},
 	config = function(_, opts)
 		require("tinygit").setup(opts)
 
 		vim.g.lualineAdd("tabline", "lualine_x", require("tinygit.statusline").blame)
+		vim.g.lualineAdd("sections", "lualine_y", require("tinygit.statusline").fileState, "before")
 		vim.g.lualineAdd("sections", "lualine_y", require("tinygit.statusline").branchState, "before")
 	end,
 }

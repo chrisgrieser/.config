@@ -11,11 +11,14 @@ return {
 		["harper-ls"] = {
 			diagnosticSeverity = "hint",
 			userDictPath = vim.o.spellfile,
-			markdown = { IgnoreLinkTitle = true },
+			markdown = {
+				IgnoreLinkTitle = true,
+			},
 			linters = {
 				-- disable buggy rules
 				SentenceCapitalization = false, -- https://github.com/Automattic/harper/issues/1056
-				CommaFixes = false, -- https://github.com/Automattic/harper/issues/1097
+				UnclosedQuotes = false, -- https://github.com/Automattic/harper/issues/1573
+				-- CommaFixes = false, -- https://github.com/Automattic/harper/issues/1097
 
 				-- enable extra rules?
 				UseGenitive = true,
