@@ -188,6 +188,7 @@ keymap("i", "<S-Tab>", "<C-d>", { desc = "󰉵 outdent", unique = false })
 keymap("n", "gq", "<cmd>silent cnext<CR>zv", { desc = "󰴩 Next quickfix" })
 keymap("n", "gQ", "<cmd>silent cprev<CR>zv", { desc = "󰴩 Prev quickfix" })
 keymap("n", "<leader>qr", function() vim.cmd.cexpr("[]") end, { desc = "󰚃 Remove qf items" })
+keymap("n", "<leader>q1", "<cmd>silent cfirst<CR>zv", { desc = "󰴩 Goto 1st quickfix" })
 
 --------------------------------------------------------------------------------
 -- FOLDING
@@ -451,7 +452,7 @@ keymap("n", "<C-Right>", "<C-w>5>")
 -- BUFFERS & FILES
 
 -- stylua: ignore
-keymap({ "n", "x" }, "<CR>", function() require("personal-plugins.alt-alt").gotoAltFile() end, { desc = "󰬈 Goto alt-file" })
+keymap({ "n", "x" }, "<CR>", function() require("personal-plugins.magnet").gotoAltFile() end, { desc = "󰬈 Goto alt-file" })
 
 -- close window or buffer
 keymap({ "n", "x", "i" }, "<D-w>", function()
@@ -476,7 +477,7 @@ end, { desc = "󰽙 Prev buffer" })
 keymap("n", "<S-BS>", vim.cmd.bnext, { desc = "󰽙 Next buffer" })
 
 -- stylua: ignore
-keymap({ "n", "x" }, "<D-CR>", function() require("personal-plugins.alt-alt").gotoMostChangedFile() end, { desc = "󰊢 Goto most changed file" })
+keymap({ "n", "x" }, "<D-CR>", function() require("personal-plugins.magnet").gotoMostChangedFile() end, { desc = "󰊢 Goto most changed file" })
 
 -- stylua: ignore
 keymap({ "n", "x", "i" }, "<D-L>", function() require("personal-plugins.misc").openWorkflowInAlfredPrefs() end, { desc = "󰮤 Reveal in Alfred" })

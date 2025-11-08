@@ -496,7 +496,7 @@ return {
 				big_preview = {
 					preset = "wide_with_preview",
 					layout = {
-						height = 0.7,
+						height = 0.85,
 						[2] = { width = 0.6 }, -- second win is the preview
 					},
 				},

@@ -34,7 +34,7 @@ return {
 					-- remove trailing dot https://commitlint.js.org/reference/rules.html#body-full-stop
 					subject = subject:gsub("%.$", "")
 
-					-- sentence case of title after the type
+					-- ensure title is lowercased
 					subject = subject
 						:gsub("^(%w+: )(.)", function(c1, c2) return c1 .. c2:lower() end) -- no scope
 						:gsub("^(%w+%b(): )(.)", function(c1, c2) return c1 .. c2:lower() end) -- with scope

@@ -129,10 +129,10 @@ return {
 				},
 			},
 			lualine_b = {
-				{ require("personal-plugins.alt-alt").altFileStatusbar },
+				{ require("personal-plugins.magnet").altFileStatusbar },
 			},
 			lualine_c = {
-				{ require("personal-plugins.alt-alt").mostChangedFileStatusbar },
+				{ require("personal-plugins.magnet").mostChangedFileStatusbar },
 				{ countLspRefs },
 			},
 			lualine_x = {
