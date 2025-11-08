@@ -6,8 +6,8 @@ app.includeStandardAdditions = true;
 
 /** @param {string} url @return {string} */
 function httpRequest(url) {
-	const queryURL = $.NSURL.URLWithString(url);
-	const data = $.NSData.dataWithContentsOfURL(queryURL);
+	const queryUrl = $.NSURL.URLWithString(url);
+	const data = $.NSData.dataWithContentsOfURL(queryUrl);
 	return $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding).js;
 }
 
@@ -16,11 +16,11 @@ function httpRequest(url) {
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run(argv) {
-	// DOCS https://www.datamuse.com/api/
-	const baseURL = "https://api.datamuse.com/words?rel_syn=";
-	const query = argv[0]?.trim() || "";
+	const query = encodeURIComponent(argv[0]);
 
-	const response = httpRequest(baseURL + encodeURI(query));
+	// DOCS https://www.datamuse.com/api/
+	const response = httpRequest("https://api.datamuse.com/words?rel_syn=" + query);
+
 	const synonyms = JSON.parse(response).map(
 		(/** @type {{ word: string; score: number; }} */ item) => {
 			return {

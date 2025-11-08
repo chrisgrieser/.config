@@ -12,7 +12,11 @@ Alternative to vim's "alternative file" that improves its functionality.
 --------------------------------------------------------------------------------
 
 local config = {
-	statusbarMaxLength = 30,
+	statusbar = {
+		maxLength = 30,
+		-- show most changed file even if it is the same as the current file or the alt file
+		showMostChangedIfRedundant = false,
+	},
 	icons = {
 		oldFile = "󰋚",
 		altBuf = "󰐤",
@@ -84,9 +88,12 @@ end
 ---@return string? filepath
 ---@return string? errmsg
 local function getMostChangedFile()
+	local gitRoot = vim.system({ "git", "rev-parse", "--show-toplevel" }):wait()
+	if gitRoot.code ~= 0 or not gitRoot.stdout then return nil, "Not in git repo." end
+	local gitRootPath = vim.trim(gitRoot.stdout)
+
 	-- get list of changed files
-	local gitResponse = vim.system({ "git", "diff", "--numstat", "." }):wait()
-	if gitResponse.code ~= 0 or not gitResponse.stdout then return nil, "Not in git repo." end
+	local gitResponse = vim.system({ "git", "-C", gitRootPath, "diff", "--numstat" }):wait()
 	local changedFiles = vim.split(gitResponse.stdout, "\n", { trimempty = true })
 	if #changedFiles == 0 then return nil, "No files with changes found." end
 
@@ -95,13 +102,13 @@ local function getMostChangedFile()
 	local mostChanges = 0
 	vim.iter(changedFiles):each(function(line)
 		local linesAdded, linesDeleted, relPath = line:match("(%d+)%s+(%d+)%s+(.+)")
-		if not relPath then return end
-		local absPath = vim.fs.normalize(vim.uv.cwd() .. "/" .. relPath)
+		local isBinary = not (linesAdded and linesDeleted and relPath)
+		if isBinary then return end
 
-		local isBinary = not (linesAdded and linesDeleted)
+		local absPath = vim.fs.normalize(gitRootPath .. "/" .. relPath)
 		local ignoredInConfig = matchesOneOf(absPath, config.ignore.mostChangedFiles)
-		local deletedOrOutsidePwd = vim.uv.fs_stat(absPath) == nil
-		if ignoredInConfig or deletedOrOutsidePwd or isBinary then return end
+		local deleted = vim.uv.fs_stat(absPath) == nil
+		if ignoredInConfig or deleted then return end
 
 		local linesChanged = tonumber(linesAdded) + tonumber(linesDeleted)
 		if linesChanged > mostChanges then
@@ -109,9 +116,7 @@ local function getMostChangedFile()
 			targetFile = absPath
 		end
 	end)
-	if not targetFile then
-		return nil, "All changed files are either ignored, deleted, binaries, or outside the pwd."
-	end
+	if not targetFile then return nil, "All changed files either ignored, deleted, or binaries." end
 
 	return targetFile, nil
 end
@@ -129,7 +134,7 @@ local function nameForStatusbar(path)
 	end
 
 	-- truncate
-	local maxLength = config.statusbarMaxLength
+	local maxLength = config.statusbar.maxLength
 	if #displayName > maxLength then
 		displayName = displayName:sub(1, maxLength)
 		displayName = vim.trim(displayName) .. "…"
@@ -174,22 +179,23 @@ end
 --------------------------------------------------------------------------------
 -- STATUSBAR
 
-local mostChangedFile
 vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained" }, {
 	desc = "Alt-alt: cache most changed file for statusbar",
 	group = vim.api.nvim_create_augroup("AltAltStatusbar", { clear = true }),
-	callback = vim.schedule_wrap(function() mostChangedFile = getMostChangedFile() end),
+	callback = vim.schedule_wrap(function() vim.b.altalt_mostChangedFile = getMostChangedFile() end),
 })
 
 ---@return string
 ---@nodiscard
 function M.mostChangedFileStatusbar()
-	local targetFile = mostChangedFile
+	local targetFile = vim.b.altalt_mostChangedFile
 	if not targetFile then return "" end
 
-	local currentFile = vim.api.nvim_buf_get_name(0)
-	local altFile = getAltBuffer() or getAltOldfile()
-	if targetFile == currentFile or targetFile == altFile then return "" end
+	if config.statusbar.showMostChangedIfRedundant then
+		local currentFile = vim.api.nvim_buf_get_name(0)
+		local altFile = getAltBuffer() or getAltOldfile()
+		if targetFile == currentFile or targetFile == altFile then return "" end
+	end
 
 	local icon = config.icons.mostChangedFile
 	return vim.trim(icon .. " " .. nameForStatusbar(targetFile))

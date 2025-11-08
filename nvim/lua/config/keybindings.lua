@@ -35,8 +35,10 @@ keymap(
 			i=0
 			while pgrep -xq "neovide"; do
 				sleep 0.05
-				i=$((i+1)); [[ $i -gt 40 ]] && return 1
+				i=$((i+1))
+				[[ $i -gt 40 ]] && return 1
 			done
+			sleep 0.05
 			open -a "neovide"
 		]=]
 
