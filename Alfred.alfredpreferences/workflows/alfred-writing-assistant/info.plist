@@ -356,13 +356,15 @@
 				<key>alfredfiltersresultsmatchmode</key>
 				<integer>2</integer>
 				<key>argumenttreatemptyqueryasnil</key>
-				<true/>
+				<false/>
 				<key>argumenttrimmode</key>
 				<integer>0</integer>
 				<key>argumenttype</key>
 				<integer>1</integer>
 				<key>escaping</key>
 				<integer>0</integer>
+				<key>keyword</key>
+				<string>{var:synonym_keyword}</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -611,24 +613,14 @@
 		</dict>
 	</array>
 	<key>readme</key>
-	<string>## Version 2.0: Removal of the ChatGPT Rephraser
-Since Apple Intelligence has become more available, and is—at least for
-proofreading tasks—as competent as ChatGPT, the Rephraser has become obsolete.
-
-If you want to continue using the `Rephraser`, you can download [the last
-version of the workflow that still supports
-it](https://github.com/chrisgrieser/alfred-writing-assistant/releases/tag/1.8.1).
-
-If you use Obsidian, you can also use the [Obsidian Proofreader
-Plugin](https://github.com/chrisgrieser/obsidian-proofreader) which does proper
-inline suggestions.
-
-## Usage
+	<string>## Usage
 The workflow offers three [hotkeys](https://www.alfredapp.com/help/workflows/triggers/hotkey/):
 
 1. Autocorrect the word under the cursor.
 2. Suggest synonyms for the word under the cursor.
 3. Invoke `Apple Intelligence Writing Tools`.
+
+You can also trigger the synonym suggestion with the keyword `syn`.
 
 ---
 
@@ -820,17 +812,38 @@ DOUBLE CLICK TO EDIT</string>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>Delay in ms. Adjust if results are not replaced correctly.</string>
+			<string>Delay in ms. Increase if results are not replaced correctly.</string>
 			<key>label</key>
-			<string>Autocorrection &amp; Synonyms</string>
+			<string>Hotkeys</string>
 			<key>type</key>
 			<string>slider</string>
 			<key>variable</key>
 			<string>delay_ms</string>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>syn</string>
+				<key>placeholder</key>
+				<string>syn</string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>keyword</string>
+			<key>label</key>
+			<string>Synonym search</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>synonym_keyword</string>
+		</dict>
 	</array>
 	<key>version</key>
-	<string>2.0.2</string>
+	<string>2.1.0</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
