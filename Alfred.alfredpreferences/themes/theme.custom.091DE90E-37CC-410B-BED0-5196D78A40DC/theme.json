@@ -46,7 +46,7 @@
       "width" : 1009,
       "borderPadding" : 3,
       "borderColor" : "#5E5E5E78",
-      "blur" : 10,
+      "blur" : 0,
       "roundness" : 17,
       "paddingVertical" : 10
     },

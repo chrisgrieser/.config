@@ -41,6 +41,7 @@ local M = {}
 
 ---@param path string
 ---@param oneOff string[]
+---@return boolean
 local function matchesOneOf(path, oneOff)
 	return vim.iter(oneOff):any(function(p) return path:find(p, nil, true) ~= nil end)
 end
@@ -104,10 +105,10 @@ local function getMostChangedFile()
 	-- identify file with most changes
 	local mostChangedFile = vim.iter(changedFiles):fold({}, function(mostChanges, line)
 		local linesAdded, linesDeleted, relPath = line:match("(%d+)%s+(%d+)%s+(.+)")
-		relPath = relPath:gsub("{.+ => (.+)}", "%1") -- handle renames
 		local isBinary = not (linesAdded and linesDeleted and relPath)
 		if isBinary then return mostChanges end
 
+		relPath = relPath:gsub("{.+ => (.+)}", "%1") -- handle renames
 		local absPath = vim.fs.joinpath(gitRootPath, relPath)
 		local ignoredInConfig = matchesOneOf(absPath, config.ignore.mostChangedFiles)
 		local fileDeleted = vim.uv.fs_stat(absPath) == nil
