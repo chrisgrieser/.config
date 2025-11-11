@@ -99,7 +99,7 @@ rules:
           - { type: frontmost_application_if, bundle_identifiers: [net.highlightsapp.universal] }
       # Gmail: Delete
       - type: basic
-        from: { pointing_button: button4 }
+        from: { pointing_button: button5 }
         to:
           - key_code: e
         conditions:
