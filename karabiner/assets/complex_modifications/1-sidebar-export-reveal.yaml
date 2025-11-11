@@ -54,14 +54,6 @@ rules:
           - { key_code: s, modifiers: [command, option] }
         conditions:
           - { type: frontmost_application_if, bundle_identifiers: [com.apple.Maps] }
-      # Mimestream & ChatGPT
-      - type: basic
-        from: { key_code: "1", modifiers: { mandatory: [command] } }
-        to:
-          - { key_code: s, modifiers: [command, control] }
-        conditions:
-          - type: frontmost_application_if
-            bundle_identifiers: [com.mimestream.Mimestream, com.openai.chat]
       # Monodraw
       - type: basic
         from: { key_code: "1", modifiers: { mandatory: [command] } }
@@ -154,7 +146,7 @@ rules:
                 end tell'
         conditions:
           - { type: frontmost_application_if, bundle_identifiers: [com.apple.Preview] }
-      # Mimestream, TextEdit
+      # TextEdit
       - type: basic
         from: { key_code: e, modifiers: { mandatory: [command, shift] } }
         to:
@@ -165,9 +157,7 @@ rules:
                 end tell'
         conditions:
           - type: frontmost_application_if
-            bundle_identifiers:
-              - com.mimestream.Mimestream
-              - com.apple.TextEdit
+            bundle_identifiers: [ com.apple.TextEdit ]
       # Easy CSV Editor
       - type: basic
         from: { key_code: e, modifiers: { mandatory: [command, shift] } }

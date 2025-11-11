@@ -35,7 +35,6 @@ cask "font-jetbrains-mono-nerd-font"
 cask "hammerspoon", postinstall: 'defaults write org.hammerspoon.Hammerspoon MJConfigFile "$HOME/.config/hammerspoon/init.lua"'
 cask "karabiner-elements"
 cask "microsoft-word", greedy: true # greedy since we uninstall the auto-updater
-cask "mimestream"
 cask "monodraw"
 cask "neovide-app"
 cask "obsidian", greedy: true # greedy for installer version

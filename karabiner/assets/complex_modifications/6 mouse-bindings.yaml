@@ -32,20 +32,14 @@ rules:
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Mouse) 4 (bottom)"
     manipulators:
-      # Mimestream: Delete
+      # Gmail: Delete
       - type: basic
         from: { pointing_button: button4 }
         to:
           - key_code: non_us_pound # the "#" key
         conditions:
-          - { type: frontmost_application_if, bundle_identifiers: [com.mimestream.Mimestream] }
-      # Mail.app
-      - type: basic
-        from: { pointing_button: button4 }
-        to:
-          - { key_code: backspace, modifiers: [command] }
-        conditions:
-          - { type: frontmost_application_if, bundle_identifiers: [com.apple.mail] }
+          - type: frontmost_application_if
+            file_paths: ["/Gmail.app/Contents/MacOS/app_mode_loader"] # no bundle-id, since PWA
       # Highlights: Free Comment
       - type: basic
         from: { pointing_button: button4 }
@@ -103,20 +97,14 @@ rules:
                   --title "Highlights" --message "Underline 🖍️"
         conditions:
           - { type: frontmost_application_if, bundle_identifiers: [net.highlightsapp.universal] }
-      # Mimestream: Archive
-      - type: basic
-        from: { pointing_button: button5 }
-        to_if_alone:
-          - key_code: e
-        conditions:
-          - { type: frontmost_application_if, bundle_identifiers: [com.mimestream.Mimestream] }
-      # Mail.app
+      # Gmail: Delete
       - type: basic
         from: { pointing_button: button4 }
         to:
-          - { key_code: a, modifiers: [command] }
+          - key_code: e
         conditions:
-          - { type: frontmost_application_if, bundle_identifiers: [com.apple.mail] }
+          - type: frontmost_application_if
+            file_paths: ["/Gmail.app/Contents/MacOS/app_mode_loader"] # no bundle-id, since PWA
       # Fallback behavior: Close window
       - type: basic
         from: { pointing_button: button5 }

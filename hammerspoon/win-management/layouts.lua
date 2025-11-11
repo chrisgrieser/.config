@@ -38,12 +38,12 @@ local function workLayout(shouldDarkenDisplay)
 	u.quitFullscreenAndVideoApps()
 
 	-- open things
-	u.openApps { "Ivory", "Mimestream", "AlfredExtraPane", isWorkWeek() and "Slack" or nil }
+	u.openApps { "Ivory", "Gmail", "AlfredExtraPane", isWorkWeek() and "Slack" or nil }
 	u.defer(1, function()
 		local masto = u.app("Ivory")
 		if masto then masto:mainWindow():setFrame(wu.toTheSide) end
 
-		local appsToLayout = { "Mimestream", "Brave Browser", isWorkWeek() and "Slack" or nil }
+		local appsToLayout = { "Gmail", "Brave Browser", isWorkWeek() and "Slack" or nil }
 		for _, appName in pairs(appsToLayout) do
 			local win = u.app(appName):mainWindow()
 			if win then wu.moveResize(win, wu.pseudoMax) end
@@ -71,7 +71,7 @@ local function movieLayout()
 		"Highlights",
 		"Obsidian",
 		"WezTerm",
-		"Mimestream",
+		"Gmail",
 		"Neovide",
 		"Ivory",
 		"Reminders",

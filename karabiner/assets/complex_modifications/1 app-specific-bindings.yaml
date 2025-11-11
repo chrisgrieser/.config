@@ -245,23 +245,6 @@ rules:
         conditions:
           - { type: frontmost_application_if, bundle_identifiers: [com.apple.ScriptEditor] }
   #─────────────────────────────────────────────────────────────────────────────
-  - description: "(Apps) Mimestream"
-    manipulators:
-      # Open in Gmail
-      - type: basic
-        from: { key_code: g, modifiers: { mandatory: [control] } }
-        to:
-          - { key_code: g, modifiers: [command, control] }
-        conditions:
-          [{ type: frontmost_application_if, bundle_identifiers: [com.mimestream.Mimestream] }]
-      # Toolbar
-      - type: basic
-        from: { key_code: "9", modifiers: { mandatory: [command] } }
-        to:
-          - { key_code: t, modifiers: [command, option] }
-        conditions:
-          - { type: frontmost_application_if, bundle_identifiers: [com.mimestream.Mimestream] }
-  #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) Easy CSV Editor"
     manipulators:
       # Save & Format
