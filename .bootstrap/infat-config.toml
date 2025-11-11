@@ -13,7 +13,7 @@ mp4-movie = "IINA"
 archive = "/System/Library/CoreServices/Applications/Archive Utility.app"
 
 [schemes]
-mailto = "Mimestream"
+mailto = "Brave Browser"  # enable Gmail brave://settings/handlers?search=protocol+handler
 web = "Brave Browser"
 magnet = "Transmission"
 

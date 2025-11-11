@@ -67,23 +67,6 @@ M.wf_scripteditor = wf
 	end)
 
 --------------------------------------------------------------------------------
--- MIMESTREAM
-
--- 1st window = mail-list window => pseudo-maximized for more space
--- 2nd window = message-composing window => centered for narrower line length
-M.wf_mimestream = wf.new("Mimestream")
-	:setOverrideFilter({ rejectTitles = { "^Software Update$" } })
-	:subscribe(wf.windowCreated, function(newWin)
-		local mimestream = u.app("Mimestream")
-		if not mimestream then return end
-		local winCount = #mimestream:allWindows()
-		local narrow = { x = 0.184, y = 0, w = 0.45, h = 1 } -- for shorter line width
-		local basesize = env.isProjector() and hs.layout.maximized or wu.pseudoMax
-		local newSize = winCount > 1 and narrow or basesize
-		wu.moveResize(newWin, newSize)
-	end)
-
---------------------------------------------------------------------------------
 -- MASTODON (IVORY)
 local function scrollUp()
 	local masto = u.app("Ivory")

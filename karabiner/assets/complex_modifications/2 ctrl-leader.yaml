@@ -52,23 +52,17 @@ rules:
         type: basic
         from: { key_code: c }
         conditions: [*leader-active]
-        to: [{ shell_command: open -a 'Calendar' }, *deactivate-leader, *remove-notice]
-
-      - description: "cs[v] Editor"
-        type: basic
-        from: { key_code: v }
-        conditions: [*leader-active]
-        to: [{ shell_command: open -a 'Easy CSV Editor' }, *deactivate-leader, *remove-notice]
+        to: [{ shell_command: open -a "Calendar" }, *deactivate-leader, *remove-notice]
 
       - description: "[⎵] ChatGPT"
         type: basic
         from: { key_code: "spacebar" }
         conditions: [*leader-active]
-        to: [{ shell_command: open 'https://chatgpt.com/' }, *deactivate-leader, *remove-notice]
+        to: [{ shell_command: open "https://chatgpt.com/" }, *deactivate-leader, *remove-notice]
 
       - description: "[ö] Mastodon (Ivory)"
         type: basic
-        from: { key_code: semicolon } # ö on German keyboard
+        from: { key_code: semicolon }
         conditions: [*leader-active]
         to: [{ shell_command: open -a "Ivory" }, *deactivate-leader, *remove-notice]
 
@@ -77,7 +71,7 @@ rules:
         from: { key_code: semicolon, modifiers: { mandatory: [shift] } } # Ö on German keyboard
         conditions: [*leader-active]
         to:
-          - shell_command: open 'https://pkm.social/notifications'
+          - shell_command: open "https://pkm.social/notifications"
           - *deactivate-leader
           - *remove-notice
 
@@ -85,7 +79,7 @@ rules:
         type: basic
         from: { key_code: comma }
         conditions: [*leader-active]
-        to: [{ shell_command: open -a 'System Preferences' }, *deactivate-leader, *remove-notice]
+        to: [{ shell_command: open -a "System Preferences" }, *deactivate-leader, *remove-notice]
 
       - description: "[o]bsidian (main vault)"
         type: basic
@@ -127,19 +121,13 @@ rules:
         type: basic
         from: { key_code: "y" } # switched y and z due to German Keyboard
         conditions: [*leader-active]
-        to: [{ shell_command: open -a 'zoom.us' }, *deactivate-leader, *remove-notice]
-
-      # - description: "[t]: Twilight Imperium"
-      #   type: basic
-      #   from: { key_code: t }
-      #   conditions: [*leader-active]
-      #   to: [{ shell_command: open -a 'Twilight Wars' }, *deactivate-leader, *remove-notice]
+        to: [{ shell_command: open -a "zoom.us" }, *deactivate-leader, *remove-notice]
 
       - description: "[l] Termina[l]"
         type: basic
         from: { key_code: l } # l is quicker to reach for the right hand than t
         conditions: [*leader-active]
-        to: [{ shell_command: open -a 'WezTerm' }, *deactivate-leader, *remove-notice]
+        to: [{ shell_command: open -a "WezTerm" }, *deactivate-leader, *remove-notice]
 
       - description: "[i] Rem[i]nder"
         type: basic
@@ -166,13 +154,16 @@ rules:
         type: basic
         from: { key_code: s }
         conditions: [*leader-active]
-        to: [{ shell_command: open -a 'Slack' }, *deactivate-leader, *remove-notice]
+        to: [{ shell_command: open -a "Slack" }, *deactivate-leader, *remove-notice]
 
       - description: "[m]ail"
         type: basic
         from: { key_code: m }
         conditions: [*leader-active]
-        to: [{ shell_command: open -a "Mimestream" }, *deactivate-leader, *remove-notice]
+        to:
+          - shell_command: open -a "Gmail" || open "https://www.youtube.com/"
+          - *deactivate-leader
+          - *remove-notice
 
       - description: "[b]rowser"
         type: basic
@@ -232,7 +223,7 @@ rules:
         from: { key_code: z } # switched y and z due to German Keyboard
         conditions: [*leader-active]
         to:
-          - shell_command: open -a 'YouTube' || open 'https://www.youtube.com/'
+          - shell_command: open -a "YouTube" || open "https://www.youtube.com/"
           - *deactivate-leader
           - *remove-notice
 
@@ -240,13 +231,13 @@ rules:
         type: basic
         from: { key_code: a }
         conditions: [*leader-active]
-        to: [{ shell_command: open -a 'Alfred Preferences' }, *deactivate-leader, *remove-notice]
+        to: [{ shell_command: open -a "Alfred Preferences" }, *deactivate-leader, *remove-notice]
 
       - description: "[p]df Reader (Highlights)"
         type: basic
         from: { key_code: p }
         conditions: [*leader-active]
-        to: [{ shell_command: open -a 'Highlights' }, *deactivate-leader, *remove-notice]
+        to: [{ shell_command: open -a "Highlights" }, *deactivate-leader, *remove-notice]
 
       - description: "Github notifications"
         type: basic
@@ -262,14 +253,14 @@ rules:
         type: basic
         from: { key_code: escape }
         conditions: [*leader-active]
-        to: [{ shell_command: open -a 'Activity Monitor' }, *deactivate-leader, *remove-notice]
+        to: [{ shell_command: open -a "Activity Monitor" }, *deactivate-leader, *remove-notice]
 
       - description: "WhatsApp"
         type: basic
         from: { key_code: w }
         conditions: [*leader-active]
         to:
-          - shell_command: open 'https://web.whatsapp.com/'
+          - shell_command: open "https://web.whatsapp.com/"
           - *deactivate-leader
           - *remove-notice
 
@@ -284,7 +275,7 @@ rules:
         from: { key_code: e }
         conditions: [*leader-active]
         to:
-          - shell_command: open 'https://www.messenger.com/'
+          - shell_command: open "https://www.messenger.com/"
           - *deactivate-leader
           - *remove-notice
 
@@ -302,4 +293,4 @@ rules:
         type: basic
         from: { key_code: t, modifiers: { mandatory: [shift] } }
         conditions: [*leader-active]
-        to: [{ shell_command: open -a 'Transmission' }, *deactivate-leader, *remove-notice]
+        to: [{ shell_command: open -a "Transmission" }, *deactivate-leader, *remove-notice]
