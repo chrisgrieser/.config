@@ -4,6 +4,7 @@ mail.google.com##div[role="navigation"] > span:last-child
 mail.google.com##header[role="banner"] > div:nth-child(2) > div:nth-child(2) > div:nth-child(3) > div:is(:nth-child(1), :nth-child(4))
 mail.google.com##a[aria-label="Google apps"]
 mail.google.com##div[aria-label="Show side panel"]
+mail.google.com##header[role="banner"] > div:nth-child(2) > [data-ogsr-up]
 
 ! social media
 messenger.com##[aria-label="Inbox switcher"]
