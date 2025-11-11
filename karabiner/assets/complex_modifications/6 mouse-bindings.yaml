@@ -2,7 +2,7 @@
 title: "Mouse Bindings"
 anchors:
   - conditions:
-      - &not-game 
+      - &not-game
         type: frontmost_application_unless
         file_paths:
           - "/Users/.*/Library/Application Support/Steam/steamapps/common/"
@@ -39,6 +39,13 @@ rules:
           - key_code: non_us_pound # the "#" key
         conditions:
           - { type: frontmost_application_if, bundle_identifiers: [com.mimestream.Mimestream] }
+      # Mail.app
+      - type: basic
+        from: { pointing_button: button4 }
+        to:
+          - { key_code: backspace, modifiers: [command] }
+        conditions:
+          - { type: frontmost_application_if, bundle_identifiers: [com.apple.mail] }
       # Highlights: Free Comment
       - type: basic
         from: { pointing_button: button4 }
@@ -103,6 +110,13 @@ rules:
           - key_code: e
         conditions:
           - { type: frontmost_application_if, bundle_identifiers: [com.mimestream.Mimestream] }
+      # Mail.app
+      - type: basic
+        from: { pointing_button: button4 }
+        to:
+          - { key_code: a, modifiers: [command] }
+        conditions:
+          - { type: frontmost_application_if, bundle_identifiers: [com.apple.mail] }
       # Fallback behavior: Close window
       - type: basic
         from: { pointing_button: button5 }
