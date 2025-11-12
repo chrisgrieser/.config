@@ -4,7 +4,7 @@ mail.google.com##header[role="banner"] > div:nth-child(2) > div:nth-child(2) > d
 mail.google.com##a[aria-label="Google apps"]
 mail.google.com##div[aria-label="Show side panel"]
 mail.google.com##header[role="banner"] > div:nth-child(2) > [data-ogsr-up]
-mail.google.com##div:has( > div > div > div > a[href="https://www.google.com/intl/en/policies/terms/"])
+mail.google.com##div:has(> div > div > div > div > a[href="https://www.google.com/intl/en/policies/terms/"])
 mail.google.com##div:has( > a[href^="https://one.google.com/cancel"])
 
 ! social media
