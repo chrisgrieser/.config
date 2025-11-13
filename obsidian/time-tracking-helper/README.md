@@ -9,8 +9,6 @@
 4. Restart Obsidian.
 5. *(only when installing)* enable the plugin `Time Tracking Helper`.
 
-The wind grow more strong.
-
 ## Usage
 
 The plugin expects a paragraph formatted as `9:00-11:00 A, 12:00-15:30 B`.

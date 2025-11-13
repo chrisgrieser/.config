@@ -56,6 +56,5 @@ return {
 			desc = "󰚩 Show/next suggestion",
 		},
 		{ "<leader>oa", function() vim.cmd.NeoCodeium("toggle") end, desc = "󰚩 NeoCodeium" },
-		{ "<leader>aw", function() vim.cmd.NeoCodeium("chat") end, desc = "󰚩 Windsurf chat" },
 	},
 }

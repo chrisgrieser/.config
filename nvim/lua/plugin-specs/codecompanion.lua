@@ -82,6 +82,7 @@ local ccSpec = {
 		{ "<leader>af", function() require("codecompanion").prompt("fix") end, mode = "x", desc = " Fix" },
 		-- my own prompts
 		{ "<leader>as", function() require("codecompanion").prompt("simplify") end, mode = "x", desc = " Simplify" },
+		{ "<leader>ap", function() require("codecompanion").prompt("proofread") end, mode = "x", desc = " Proofread" },
 		-- stylua: ignore end
 	},
 	opts = {
@@ -121,11 +122,13 @@ local ccSpec = {
 		adapters = {
 			http = {
 				openai = function()
-					require("config.utils").loadOpenAiKey()
-					-- DOCS https://github.com/olimorris/codecompanion.nvim/blob/main/lua/codecompanion/adapters/http/openai.lua
+					local apiKeyFile =
+						"$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/private dotfiles/openai-api-key.txt"
+
+					-- https://github.com/olimorris/codecompanion.nvim/blob/main/lua/codecompanion/adapters/http/openai.lua
 					return require("codecompanion.adapters").extend("openai", {
 						env = {
-							api_key = vim.env.OPENAI_API_KEY,
+							api_key = ("cmd:cat %q"):format(apiKeyFile),
 						},
 						schema = {
 							model = { default = model },
@@ -139,7 +142,6 @@ local ccSpec = {
 			-- https://codecompanion.olimorris.dev/extending/prompts.html
 			["Simplify"] = {
 				strategy = "inline",
-				description = "Simplify the selected code.",
 				opts = {
 					modes = { "v" },
 					short_name = "simplify",
@@ -157,7 +159,8 @@ local ccSpec = {
 								I will send you some code, and I want you to simplify
 								the code while not diminishing its readability.
 
-								Keep the indentation level the same.
+								Keep the indentation level the same, and do not change 
+								for formatting style.
 							]]):format(ctx.filetype)
 						end,
 					},
@@ -171,6 +174,35 @@ local ccSpec = {
 					},
 				},
 			},
+			["Proofread"] = {
+				strategy = "inline",
+				opts = {
+					modes = { "v" },
+					short_name = "proofread",
+					auto_submit = true,
+					stop_context_insertion = true,
+					user_prompt = false,
+				},
+				prompts = {
+					{
+						role = "system",
+						content = function(_ctx)
+							return [[
+								You are an editor for the English language.
+								I will send you some text, and I want you to improve the 
+								language, without changing the meaning.
+							]]
+						end,
+					},
+					{
+						role = "user",
+						content = function(ctx)
+							-- stylua: ignore
+							return require("codecompanion.helpers.actions").get_code(ctx.start_line, ctx.end_line)
+						end,
+					},
+				},
+			}
 		},
 	},
 }
