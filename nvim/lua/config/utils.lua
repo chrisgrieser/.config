@@ -33,17 +33,23 @@ function M.loadGhToken()
 	local tokenPath = os.getenv("HOME")
 		.. "/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/private dotfiles/github-token.txt"
 	local file = io.open(tokenPath, "r")
-	if not file then return end
+	if not file then
+		vim.notify("Could not find file for `GITHUB_TOKEN`.", vim.log.levels.ERROR)
+		return
+	end
 	vim.env.GITHUB_TOKEN = file:read("*l") -- read first line
 	file:close()
 end
 
 function M.loadOpenAiKey()
 	if vim.env.OPENAI_API_KEY then return end
-	local tokenPath =
-		"$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/private dotfiles/openai-api-key.txt"
+	local tokenPath = os.getenv("HOME")
+		.. "/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/private dotfiles/openai-api-key.txt"
 	local file = io.open(tokenPath, "r")
-	if not file then return end
+	if not file then
+		vim.notify("Could not find file for `OPEENAI_API_KEY`.", vim.log.levels.ERROR)
+		return
+	end
 	vim.env.OPENAI_API_KEY = file:read("*l") -- read first line
 	file:close()
 end
