@@ -34,7 +34,6 @@ local function fallthrough()
 		)
 		if not nextWin then return end
 
-		print("⤵️ fallthrough to " .. nextWin:application():name())
 		nextWin:focus()
 	end)
 end
