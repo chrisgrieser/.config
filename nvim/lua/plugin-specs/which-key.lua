@@ -87,10 +87,7 @@ return {
 			mappings = false, -- disable icons for keymaps.
 			-- NOTE we cannot get icons from the keymap descriptions, so we just
 			-- use the icons from there and disable whickey's icon features
-		},
-		keys = {
-			scroll_down = "<PageDown>",
-			scroll_up = "<PageUp>",
+			keys = { PageDown = "󰇚", PageUp = "󰸇" }
 		},
 		show_help = false,
 	},
@@ -101,7 +98,7 @@ return {
 		require("which-key.view").item = function(node, view_opts) ---@diagnostic disable-line: duplicate-set-field
 			local count = node:count()
 			-- HACK set the description but if you navigate back and forth in whichkey,
-			-- it'll try to adding the count again so only do it if it doesn't end in )
+			-- it'll try to adding the count again so only do it if it doesn't end in `)`
 			if node.desc and count > 0 and node.desc:sub(-1) ~= ")" then
 				node.desc = node.desc .. " (" .. count .. ")"
 			end
