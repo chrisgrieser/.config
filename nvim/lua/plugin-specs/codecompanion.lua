@@ -121,12 +121,12 @@ local ccSpec = {
 		adapters = {
 			http = {
 				openai = function()
-					local apiKeyFile =
-						"$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/private dotfiles/openai-api-key.txt"
-
-					-- https://github.com/olimorris/codecompanion.nvim/blob/main/lua/codecompanion/adapters/openai.lua
+					require("config.utils").loadOpenAiKey()
+					-- DOCS https://github.com/olimorris/codecompanion.nvim/blob/main/lua/codecompanion/adapters/http/openai.lua
 					return require("codecompanion.adapters").extend("openai", {
-						env = { api_key = ("cmd:cat %q"):format(apiKeyFile) },
+						env = {
+							api_key = vim.env.OPENAI_API_KEY,
+						},
 						schema = {
 							model = { default = model },
 							reasoning_effort = { default = reasoning_effort },
