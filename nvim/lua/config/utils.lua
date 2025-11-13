@@ -41,18 +41,5 @@ function M.loadGhToken()
 	file:close()
 end
 
-function M.loadOpenAiKey()
-	if vim.env.OPENAI_API_KEY then return end
-	local tokenPath = os.getenv("HOME")
-		.. "/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/private dotfiles/openai-api-key.txt"
-	local file = io.open(tokenPath, "r")
-	if not file then
-		vim.notify("Could not find file for `OPEENAI_API_KEY`.", vim.log.levels.ERROR)
-		return
-	end
-	vim.env.OPENAI_API_KEY = file:read("*l") -- read first line
-	file:close()
-end
-
 --------------------------------------------------------------------------------
 return M
