@@ -6,7 +6,6 @@ export HOMEBREW_EDITOR="open" # open in default macOS text editor
 export HOMEBREW_CASK_OPTS="--no-quarantine"
 export HOMEBREW_UPGRADE_GREEDY_CASKS="obsidian" # to also update installer version
 export HOMEBREW_DISPLAY_INSTALL_TIMES=1         # also serves as summary what was installed
-export HOMEBREW_DOWNLOAD_CONCURRENCY="auto"
 export HOMEBREW_NO_ANALYTICS=1
 export HOMEBREW_NO_ENV_HINTS=1
 

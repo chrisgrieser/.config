@@ -1,14 +1,19 @@
-set quiet
+set quiet := true
+
+#───────────────────────────────────────────────────────────────────────────────
 
 reload:
-    # alternatively, use `sketchybar --hotload` for constant reloading when developing
     sketchybar --reload
 
 docs:
     open "https://felixkratz.github.io/SketchyBar/config/bar"
 
-inspect:
-    open "https://felixkratz.github.io/SketchyBar/config/querying"
-
 restart:
     brew services restart sketchybar
+
+inspect-macos-menubar:
+    sketchybar --query default_menu_items | jq --raw-output ".[]"
+
+how-to-inspect-items:
+    open "https://felixkratz.github.io/SketchyBar/config/querying"
+
