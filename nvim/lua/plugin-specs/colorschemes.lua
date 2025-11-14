@@ -2,7 +2,7 @@ local darkScheme = require("colorschemes." .. vim.g.darkColor)
 local lightScheme = require("colorschemes." .. vim.g.lightColor)
 --------------------------------------------------------------------------------
 
--- disable the auto-activation of the colorscheme that is not needed on startup
+-- don't auto-activate the unneeded colorscheme on startup
 local bg
 if vim.g.neovide and jit.os == "OSX" then -- neovide too slow in setting `background`
 	local macOSMode = vim.system({ "defaults", "read", "-g", "AppleInterfaceStyle" }):wait()

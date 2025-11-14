@@ -24,17 +24,18 @@ local config = {
 	ignore = { -- literal match in whole path
 		oldfiles = {
 			"/COMMIT_EDITMSG",
+			(function() -- avoid error if snacks is disabled
+				local installed, snacksScratch = pcall(require, "plugin-specs.snacks-scratch")
+				if installed then return snacksScratch.opts.scratch.root end
+			end)(),
 		},
 		mostChangedFiles = {
 			"/info.plist", -- Alfred
 			"/prefs.plist", -- Alfred
-			require("lazy.core.config").options.lockfile,
+			"lazy-lock.json", -- lazy.nvim
 		},
 	},
 }
-
-local installed, snacksScratch = pcall(require, "plugin-specs.snacks-scratch")
-if installed then table.insert(config.ignore.oldfiles, snacksScratch.opts.scratch.root) end ---@diagnostic disable-line: undefined-field
 
 --------------------------------------------------------------------------------
 local M = {}
@@ -42,7 +43,7 @@ local M = {}
 ---@param path string
 ---@param oneOff string[]
 ---@return boolean
-local function matchesOneOf(path, oneOff)
+local function literalMatchesOneOff(path, oneOff)
 	return vim.iter(oneOff):any(function(p) return path:find(p, nil, true) ~= nil end)
 end
 
@@ -78,7 +79,7 @@ local function getAltOldfile()
 	for _, path in ipairs(vim.v.oldfiles) do
 		local exists = vim.uv.fs_stat(path) ~= nil
 		local sameFile = path == curPath
-		local ignoredInConfig = matchesOneOf(path, config.ignore.oldfiles)
+		local ignoredInConfig = literalMatchesOneOff(path, config.ignore.oldfiles)
 		if exists and not ignoredInConfig and not sameFile then return path end
 	end
 end
@@ -110,7 +111,7 @@ local function getMostChangedFile()
 
 		relPath = relPath:gsub("{.+ => (.+)}", "%1") -- handle renames
 		local absPath = vim.fs.joinpath(gitRootPath, relPath)
-		local ignoredInConfig = matchesOneOf(absPath, config.ignore.mostChangedFiles)
+		local ignoredInConfig = literalMatchesOneOff(absPath, config.ignore.mostChangedFiles)
 		local fileDeleted = vim.uv.fs_stat(absPath) == nil
 		if ignoredInConfig or fileDeleted then return mostChanges end
 
