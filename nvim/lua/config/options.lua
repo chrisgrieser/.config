@@ -57,18 +57,9 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 --------------------------------------------------------------------------------
-
--- ACCESS CWD VIA WINDOW TITLE
--- (simpler then using `fn.serverstart()` with `nvim --server --remote-expr` )
-vim.opt.title = false -- avoid ugly title due to using `TabTab`
-vim.opt.titlelen = 0 -- = do not shorten title
-vim.opt.titlestring = "%{getcwd()}"
-
---------------------------------------------------------------------------------
 -- WRAP
-vim.opt.wrap = false -- off by default
+vim.opt.wrap = false
 vim.opt.breakindent = true -- wrapped lines inherit indent from previous line
-vim.opt.cursorlineopt = "screenline" -- highlight visual line, not logical line
 
 vim.api.nvim_create_autocmd("Filetype", {
 	desc = "User: set `showbreak` in regular buffers only",
@@ -80,6 +71,7 @@ vim.api.nvim_create_autocmd("Filetype", {
 --------------------------------------------------------------------------------
 -- APPEARANCE
 vim.opt.cursorline = true
+vim.opt.cursorlineopt = "screenline" -- highlight visual line, not logical line
 vim.opt.colorcolumn = "+1" -- = one more than textwidth
 vim.opt.signcolumn = "yes:1"
 
@@ -116,15 +108,13 @@ vim.opt.report = 9001 -- disable most "x more/fewer lines" messages
 vim.opt.shortmess:append("ISs") -- no intro message, disable search count
 vim.opt.cmdheight = 0
 
--- LSP logs
-vim.env.NO_COLOR = 1 -- disable colors for the logging of some LSPs
 vim.lsp.set_log_level("ERROR")
 
 --------------------------------------------------------------------------------
 -- INVISIBLE CHARS
 
 vim.opt.list = true
-vim.opt.conceallevel = 2
+vim.opt.conceallevel = 2 -- hide some chars in markdown and json
 vim.opt.listchars = {
 	nbsp = "󰚌",
 	precedes = "…",
@@ -152,7 +142,7 @@ vim.opt.fillchars:append {
 --------------------------------------------------------------------------------
 -- DIAGNOSTICS
 
-vim.diagnostic.config({
+vim.diagnostic.config {
 	severity_sort = true,
 	signs = {
 		text = { "󰅚 ", " ", "󰋽 ", "󰌶 " }, -- Error, Warn, Info, Hint
@@ -186,10 +176,7 @@ vim.diagnostic.config({
 			return " " .. source .. code, "Comment"
 		end,
 		format = function(diag)
-			local msg = diag.message
-			if diag.source == "lua_ls" then msg = msg:gsub("%.$", "") end
-			-- if diag.source == "typescript" then msg = msg:gsub("'", "`") end
-			return msg
+			return diag.source == "lua_ls" and diag.message:gsub("%.$", "") or diag.message
 		end,
 		focusable = true, -- allow entering float
 		close_events = {
@@ -199,7 +186,7 @@ vim.diagnostic.config({
 			"LspDetach", -- fix window persisting when restarting LSP
 		},
 	},
-})
+}
 
 vim.api.nvim_create_autocmd("WinNew", {
 	desc = "User: Use markdown highlighting in diagnostic floats",

@@ -21,6 +21,7 @@ local efmConfig = {
 		{
 			lintSource = "shellcheck",
 			lintCommand = "shellcheck --format=gcc --external-sources --shell=bash -",
+			lintIgnoreExitCode = true,
 			lintStdin = true,
 			lintFormats = {
 				"-:%l:%c: %trror: %m [SC%n]",
