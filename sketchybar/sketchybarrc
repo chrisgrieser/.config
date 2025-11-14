@@ -66,7 +66,7 @@ sketchybar \
 	\
 	`#aliases trigger recording dot, but happens anyway here` \
 	--add alias "Control Center,AudioVideoModule" "$row_2" \
-	--set "Control Center,AudioVideoModule" padding_left=3 padding_right=-18 drawing=true \
+	--set "Control Center,AudioVideoModule" alias.scale=0.9 padding_left=5 padding_right=-15 drawing=true \
 	\
 	--add item ram $row_2 \
 	--set ram padding_left="16" update_freq="5" \
