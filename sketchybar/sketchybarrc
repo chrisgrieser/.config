@@ -6,7 +6,7 @@ system_font="Lucida Grande:Regular:16.5"
 
 # switch colors depending on dark mode
 if defaults read -g AppleInterfaceStyle | grep -q "Dark"; then
-	bg="0xff333333" # `0x` for hex, `ff` for alpha (= no transparency), `333333` for RGB
+	bg="0xff333333" # `0x` for hex, `ff` for alpha (= no transparency), `333333` as RGB
 	fg="0xffffffff"
 else
 	bg="0xffcdcdcd"
@@ -14,7 +14,7 @@ else
 fi
 
 # HACK using `popup` to create a 2nd row. `popup.{item}` only refers to `{item}`
-# to use it as anchor – it should simply be the leftmost item of the 1st row.
+# to use it as anchor, which simply should be the leftmost item of the 1st row.
 row_1="left"
 row_2="popup.clock"
 
@@ -63,10 +63,6 @@ sketchybar \
 	--subscribe reminders_count system_woke front_app_switched \
 	\
 	`#─── 2nd MENUBAR ROW ─────────────────────────────────────────────────────` \
-	\
-	`#aliases trigger recording dot, but happens anyway here` \
-	--add alias "Control Center,AudioVideoModule" "$row_2" \
-	--set "Control Center,AudioVideoModule" alias.scale=0.9 padding_left=5 padding_right=-15 drawing=true \
 	\
 	--add item ram $row_2 \
 	--set ram padding_left="16" update_freq="5" \
