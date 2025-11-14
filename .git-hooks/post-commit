@@ -2,4 +2,4 @@
 # INFO using post-commit, as there is no post-push hook
 
 export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
-sketchybar --trigger repo-files-update
+sketchybar --trigger repo_files_update
