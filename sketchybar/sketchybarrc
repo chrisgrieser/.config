@@ -82,9 +82,9 @@ sketchybar \
 	--set network-download icon="" update_freq="3" \
 	script="./components/network_download.sh" \
 	\
-	--add item network-upload $row_2 \
-	--set network-upload icon="" update_freq="3" \
-	script="./components/network_upload.sh" \
+	--add item no-internet $row_2 \
+	--set no-internet icon="󰖪" update_freq="3" \
+	script="./components/no_internet.sh" \
 	\
 	--add item package-updates $row_2 \
 	--set package-updates icon="󱄖" update_freq="86400" \
