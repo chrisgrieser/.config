@@ -1,9 +1,11 @@
--- CONFIG
-local formatterWantPadding = { "python", "swift", "toml" }
-
+local M = {}
 --------------------------------------------------------------------------------
 
-local M = {}
+local config = {
+	formatterWantsPadding = { "python", "swift", "toml" },
+}
+
+--------------------------------------------------------------------------------
 
 ---@return string?
 local function getCommentstr()
@@ -45,7 +47,7 @@ function M.commentHr()
 	local hrWithComment = comStr:format(hr)
 
 	-- filetype-specific considerations
-	if not vim.list_contains(formatterWantPadding, vim.bo.ft) then
+	if not vim.list_contains(config.formatterWantsPadding, vim.bo.ft) then
 		hrWithComment = hrWithComment:gsub(" ", hrChar)
 	end
 	local fullLine = indent .. hrWithComment
@@ -103,15 +105,15 @@ function M.docstring()
 		vim.api.nvim_win_set_cursor(0, { ln, #indent + 4 })
 		vim.cmd.startinsert()
 	elseif ft == "lua" then
-		local params = vim.api.nvim_get_current_line():match("function.*%((.*)%)$")
-		if not params then return end
-		local luadoc = vim.tbl_map(
-			function(param) return ("%s---@param %s any"):format(indent, param) end,
-			vim.split(params, ", ?")
-		)
-		vim.api.nvim_buf_set_lines(0, ln - 1, ln - 1, false, luadoc)
+		local paramLine = vim.api.nvim_get_current_line():match("function.*%((.*)%)$")
+		if not paramLine then return end
+		local params = vim.split(paramLine, ", ?")
+		local luadocLines = vim.iter(params)
+			:map(function(param) return ("%s---@param %s any"):format(indent, param) end)
+			:totable()
+		vim.api.nvim_buf_set_lines(0, ln - 1, ln - 1, false, luadocLines)
 		-- goto 1st param type & edit it
-		vim.api.nvim_win_set_cursor(0, { ln, #luadoc[1] })
+		vim.api.nvim_win_set_cursor(0, { ln, #luadocLines[1] })
 		vim.cmd.normal { '"_ciw', bang = true }
 		vim.cmd.startinsert { bang = true }
 	else
@@ -121,19 +123,10 @@ end
 
 --------------------------------------------------------------------------------
 
----@param where "eol"|"above"|"below"
-function M.addComment(where)
+function M.addCommentAtEol()
 	local comStr = getCommentstr()
 	if not comStr then return end
 	local lnum = vim.api.nvim_win_get_cursor(0)[1]
-
-	-- above/below: add empty line and move to it
-	if where == "above" or where == "below" then
-		if where == "above" then lnum = lnum - 1 end
-		vim.api.nvim_buf_set_lines(0, lnum, lnum, true, { "" })
-		lnum = lnum + 1
-		vim.api.nvim_win_set_cursor(0, { lnum, 0 })
-	end
 
 	-- determine comment behavior
 	local placeHolderAtEnd = comStr:find("%%s$") ~= nil
@@ -150,7 +143,7 @@ function M.addComment(where)
 		end
 		indent = vim.fn.getline(i):match("^%s*")
 	end
-	local spacing = vim.list_contains(formatterWantPadding, vim.bo.ft) and "  " or " "
+	local spacing = vim.list_contains(config.formatterWantsPadding, vim.bo.ft) and "  " or " "
 	local newLine = emptyLine and indent or line .. spacing
 
 	-- write line
