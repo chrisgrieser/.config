@@ -34,7 +34,7 @@ keymap(
 		local script = [=[
 			while pgrep -xq "neovide" || pgrep -xq "nvim"; do
 				sleep 0.05
-				i=$((i+1)) ; [[ $i -gt 50 ]] && return # timeout
+				i=$((i+1)) ; [[ $i -gt 40 ]] && return # timeout
 			done
 			sleep 0.05
 			open -a "neovide"
@@ -324,9 +324,7 @@ end
 keymap("n", "qw", function() require("personal-plugins.comment").commentHr() end, { desc = "󰆈 Horizontal divider" })
 keymap("n", "wq", function() require("personal-plugins.comment").duplicateLineAsComment() end, { desc = "󰆈 Duplicate line as comment" })
 keymap("n", "qf", function() require("personal-plugins.comment").docstring() end, { desc = "󰆈 Function docstring" })
-keymap("n", "Q", function() require("personal-plugins.comment").addComment("eol") end, { desc = "󰆈 Append comment" })
-keymap("n", "qo", function() require("personal-plugins.comment").addComment("below") end, { desc = "󰆈 Comment below" })
-keymap("n", "qO", function() require("personal-plugins.comment").addComment("above") end, { desc = "󰆈 Comment above" })
+keymap("n", "Q", function() require("personal-plugins.comment").addCommentAtEol() end, { desc = "󰆈 Add comment at EoL" })
 -- stylua: ignore end
 
 --------------------------------------------------------------------------------
