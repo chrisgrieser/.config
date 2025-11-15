@@ -214,16 +214,6 @@ end, { desc = "󰩫 Exit snippet", expr = true })
 -- stylua: ignore
 keymap("n", "<leader>yb", function() require("personal-plugins.breadcrumbs").copy() end, { desc = "󰳮 breadcrumbs" })
 
-keymap("n", "<leader>y:", function()
-	local lastExcmd = vim.fn.getreg(":"):gsub("^= ?", ""):gsub("^lua ", "")
-	if lastExcmd == "" then
-		vim.notify("No last ex-cmd", vim.log.levels.WARN, { icon = "󰅍" })
-	else
-		vim.fn.setreg("+", lastExcmd)
-		vim.notify(lastExcmd, nil, { title = "Copied", icon = "󰅍" })
-	end
-end, { desc = "󰘳 Last ex-cmd" })
-
 -- STICKY YANK
 do
 	keymap({ "n", "x" }, "y", function()
@@ -342,8 +332,8 @@ keymap("n", "qO", function() require("personal-plugins.comment").addComment("abo
 --------------------------------------------------------------------------------
 -- LINE & CHARACTER MOVEMENT
 
-keymap("n", "<Down>", [[<cmd>. move +1<CR>==]], { desc = "󰜮 Move line down" })
-keymap("n", "<Up>", [[<cmd>. move -2<CR>==]], { desc = "󰜷 Move line up" })
+keymap("n", "<Down>", "<cmd>. move +1<CR>==", { desc = "󰜮 Move line down" })
+keymap("n", "<Up>", "<cmd>. move -2<CR>==", { desc = "󰜷 Move line up" })
 keymap("n", "<Right>", [["zx"zp]], { desc = "➡️ Move char right" })
 keymap("n", "<Left>", [["zdh"zph]], { desc = "⬅ Move char left" })
 keymap("x", "<Down>", [[:move '>+1<CR>gv=gv]], { desc = "󰜮 Move selection down", silent = true })
@@ -396,8 +386,15 @@ keymap("t", "<C-CR>", [[<C-\><C-n><C-w>w]], { desc = " Goto next window" })
 keymap("t", "<Esc>", [[<C-\><C-n>]], { desc = " Esc" })
 keymap("t", "<D-v>", [[<C-\><C-n>pi]], { desc = " Paste" })
 
--- COMMAND MODE
+-- CMDLINE MODE
 keymap("c", "<D-v>", "<C-r>+", { desc = " Paste" })
+keymap("c", "<D-c>", function()
+	local cmdline = vim.fn.getcmdline()
+	if cmdline == "" then return vim.notify("Nothing to copy", vim.log.levels.WARN) end
+	vim.fn.setreg("+", cmdline)
+	vim.notify(cmdline, nil, { title = "Copied", icon = "󰅍" })
+end, { desc = "󰅍 Yank Cmdline" })
+
 keymap("c", "<BS>", function()
 	if vim.fn.getcmdline() ~= "" then return "<BS>" end
 end, { expr = true, desc = "<BS> does not leave cmdline" })
@@ -423,7 +420,6 @@ keymap(
 
 keymap("n", "<leader>ii", vim.cmd.Inspect, { desc = "󱈄 :Inspect" })
 keymap("n", "<leader>it", vim.cmd.InspectTree, { desc = " :InspectTree" })
-keymap("n", "<leader>iq", vim.cmd.EditQuery, { desc = " :EditQuery" })
 keymap("n", "<leader>id", function()
 	local diag = vim.diagnostic.get_next()
 	vim.notify(vim.inspect(diag), nil, { ft = "lua" })
@@ -434,6 +430,14 @@ keymap("n", "<leader>il", function() require("personal-plugins.misc").lspCapabil
 keymap("n", "<leader>iL", function() vim.cmd.edit(vim.lsp.log.get_filename()) end, { desc = "󱂅 LSP log" })
 keymap("n", "<leader>ib", function() require("personal-plugins.misc").inspectBuffer() end, { desc = "󰽙 Buffer info" })
 -- stylua: ignore end
+
+keymap("n", "<leader>ee", ":lua = ", { desc = "󰢱 Eval lua expr" })
+keymap("n", "<leader>ey", function()
+	local lastExcmd = vim.fn.getreg(":"):gsub("^lua ", ""):gsub("^= ?", "")
+	if lastExcmd == "" then return vim.notify("Nothing to copy", vim.log.levels.WARN) end
+	vim.fn.setreg("+", lastExcmd)
+	vim.notify(lastExcmd, nil, { title = "Copied", icon = "󰅍" })
+end, { desc = "󰘳 Yank last ex-cmd" })
 
 --------------------------------------------------------------------------------
 -- WINDOWS & SPLITS

@@ -39,21 +39,6 @@ return {
 		{ "Ö", function() require("snacks").words.jump(-1, true) end, desc = "󰗲 Prev reference" },
 		{ "<leader>g?", function() require("snacks").git.blame_line() end, desc = "󰆽 Blame line" },
 		{
-			"<leader>ee",
-			function()
-				vim.ui.input({
-					prompt = "󰢱 Eval",
-					win = { ft = "lua" }, --> this part is snacks-specific
-				}, function(expr)
-					if not expr then return end
-					local result = vim.inspect(vim.fn.luaeval(expr))
-					local opts = { title = "Eval", icon = "󰢱", ft = "lua" }
-					vim.notify(result, vim.log.levels.DEBUG, opts)
-				end)
-			end,
-			desc = "󰢱 Eval lua expr",
-		},
-		{
 			"<leader>oi",
 			function()
 				if require("snacks").indent.enabled then
