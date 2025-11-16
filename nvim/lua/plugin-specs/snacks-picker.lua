@@ -239,7 +239,7 @@ return {
 		},
 		-- stylua: ignore
 		{ "<C-.>", function() require("snacks").picker.icons() end, mode = { "n", "i" }, desc = "󱗿 Icon picker" },
-		-- test
+
 		{ "g.", function() require("snacks").picker.resume() end, desc = "󰗲 Resume" },
 	},
 

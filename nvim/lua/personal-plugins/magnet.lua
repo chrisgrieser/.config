@@ -1,19 +1,18 @@
---[[ INFO NVIM_MAGNET
-Alternative to vim's "alternative file" that improves its functionality.
-
+--[[ INFO NVIM-MAGNET
 1.`.gotoAltFile()` as an improved version of `:buffer #` that avoids special
   buffers, deleted buffers, non-existent files etc. and falls back
   to the first oldfile, if there is currently only one buffer.
-2.`.gotoMostChangedFile` to go to the file in the cwd with the most git changes
+2.`.gotoMostChangedFile` to go to the file in the cwd with the most git changes.
 3.`.altFileStatusbar()` and `.mostChangedFileStatusbar()` to display the
   respective file in the statusbar. If there is no alt-file, the first oldfile
-  is shown. If there is not changed file, nothing is shown.
+  is shown. If there is no changed file, nothing is shown.
 ]]
 --------------------------------------------------------------------------------
 
 local config = {
 	statusbar = {
 		maxLength = 30,
+		hideMostChangedIfSameAsAltFile = true,
 	},
 	icons = {
 		notification = "",
@@ -43,7 +42,7 @@ local M = {}
 ---@param path string
 ---@param oneOff string[]
 ---@return boolean
-local function literalMatchesOneOff(path, oneOff)
+local function literalMatchesOneOf(path, oneOff)
 	return vim.iter(oneOff):any(function(p) return path:find(p, nil, true) ~= nil end)
 end
 
@@ -53,6 +52,28 @@ local function notify(msg, level)
 	if not level then level = "info" end
 	local lvl = vim.log.levels[level:upper()]
 	vim.notify(msg, lvl, { title = "Magnet", icon = config.icons.notification })
+end
+
+---@param path string
+---@return string
+local function fmtPathForStatusbar(path)
+	local displayName = vim.fs.basename(path)
+
+	-- add parent if displayname is same as basename of current file
+	local currentBasename = vim.fs.basename(vim.api.nvim_buf_get_name(0))
+	if currentBasename == displayName then
+		local parent = vim.fs.basename(vim.fs.dirname(path))
+		displayName = parent .. "/" .. displayName
+	end
+
+	-- truncate
+	local maxLength = config.statusbar.maxLength
+	if #displayName > maxLength then
+		displayName = displayName:sub(1, maxLength)
+		displayName = vim.trim(displayName) .. "…"
+	end
+
+	return displayName
 end
 
 ---@return string|nil altBufferName, nil if no alt buffer
@@ -79,7 +100,7 @@ local function getAltOldfile()
 	for _, path in ipairs(vim.v.oldfiles) do
 		local exists = vim.uv.fs_stat(path) ~= nil
 		local sameFile = path == curPath
-		local ignoredInConfig = literalMatchesOneOff(path, config.ignore.oldfiles)
+		local ignoredInConfig = literalMatchesOneOf(path, config.ignore.oldfiles)
 		if exists and not ignoredInConfig and not sameFile then return path end
 	end
 end
@@ -111,7 +132,7 @@ local function getMostChangedFile()
 
 		relPath = relPath:gsub("{.+ => (.+)}", "%1") -- handle renames
 		local absPath = vim.fs.joinpath(gitRootPath, relPath)
-		local ignoredInConfig = literalMatchesOneOff(absPath, config.ignore.mostChangedFiles)
+		local ignoredInConfig = literalMatchesOneOf(absPath, config.ignore.mostChangedFiles)
 		local fileDeleted = vim.uv.fs_stat(absPath) == nil
 		if ignoredInConfig or fileDeleted then return mostChanges end
 
@@ -128,28 +149,6 @@ local function getMostChangedFile()
 	else
 		return nil, "All changed files either ignored, deleted, or binaries."
 	end
-end
-
----@param path string
----@return string
-local function nameForStatusbar(path)
-	local displayName = vim.fs.basename(path)
-
-	-- add parent if displayname is same as basename of current file
-	local currentBasename = vim.fs.basename(vim.api.nvim_buf_get_name(0))
-	if currentBasename == displayName then
-		local parent = vim.fs.basename(vim.fs.dirname(path))
-		displayName = parent .. "/" .. displayName
-	end
-
-	-- truncate
-	local maxLength = config.statusbar.maxLength
-	if #displayName > maxLength then
-		displayName = displayName:sub(1, maxLength)
-		displayName = vim.trim(displayName) .. "…"
-	end
-
-	return displayName
 end
 
 --------------------------------------------------------------------------------
@@ -193,7 +192,7 @@ vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained" }, {
 	group = vim.api.nvim_create_augroup("MagnetStatusbar", { clear = true }),
 	callback = function()
 		-- defer to prevent race conditions with auto-rooting plugins
-		vim.defer_fn(function() vim.b.magnet_mostChangedFile = getMostChangedFile() end, 1)
+		vim.defer_fn(function() vim.b.magnet_mostChangedFile = getMostChangedFile() end, 10)
 	end,
 })
 
@@ -205,23 +204,27 @@ function M.mostChangedFileStatusbar()
 
 	-- do not show if most changed file is same as current file or alt file
 	local currentFile = vim.api.nvim_buf_get_name(0)
+	if targetFile == currentFile then return "" end
 	local altFile = getAltBuffer() or getAltOldfile()
-	if targetFile == currentFile or targetFile == altFile then return "" end
+	if targetFile == altFile and config.statusbar.hideMostChangedIfSameAsAltFile then return "" end
 
 	local icon = config.icons.mostChangedFile
-	return vim.trim(icon .. " " .. nameForStatusbar(targetFile))
+	return vim.trim(icon .. " " .. fmtPathForStatusbar(targetFile))
 end
 
 ---@return string
 ---@nodiscard
 function M.altFileStatusbar()
-	local altBuf, altOld = getAltBuffer(), getAltOldfile()
-	local altFile = altBuf or altOld or "[unknown]"
+	local altBuf = getAltBuffer()
+	local altFile = altBuf or getAltOldfile()
+	if not altFile then return "" end -- e.g., when shada was deleted
+
+	-- add most changed file icon if it's the same file
 	local icon = altBuf and config.icons.altBuf or config.icons.oldFile
 	if altFile == vim.b.magnet_mostChangedFile then
 		icon = config.icons.mostChangedFile .. " " .. icon
 	end
-	return vim.trim(icon .. " " .. nameForStatusbar(altFile))
+	return vim.trim(icon .. " " .. fmtPathForStatusbar(altFile))
 end
 
 --------------------------------------------------------------------------------
