@@ -549,7 +549,7 @@ keymap("x", "<D-j>", function()
 end, { desc = "󰆿 Multi-edit selection", expr = true })
 
 --------------------------------------------------------------------------------
--- 🌆OPTION 🌆TOGGLING🌆
+-- OPTION TOGGLING
 
 keymap("n", "<leader>on", "<cmd>set number!<CR>", { desc = " Line numbers" })
 keymap("n", "<leader>ow", "<cmd>set wrap!<CR>", { desc = "󰖶 Wrap" })
