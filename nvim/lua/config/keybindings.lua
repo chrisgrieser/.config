@@ -36,7 +36,7 @@ keymap(
 				sleep 0.05
 				i=$((i+1)) ; [[ $i -gt 40 ]] && return # timeout
 			done
-			sleep 0.05
+			sleep 0.1
 			open -a "neovide"
 		]=]
 
