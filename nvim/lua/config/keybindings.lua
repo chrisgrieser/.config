@@ -28,7 +28,7 @@ keymap("n", "<D-q>", vim.cmd.wqall, { desc = " Save & quit", unique = false }
 
 keymap(
 	{ "n", "x", "i" },
-	"<D-C-r>", -- `hyper` gets registered by neovide as `cmd+ctrl`
+	"<D-C-r>", -- `hyper` gets registered by neovide as `cmd+ctrl` (`D-C`)
 	function()
 		assert(jit.os == "OSX" and vim.g.neovide, "requires macOS' `open -a` & neovide")
 		local script = [=[

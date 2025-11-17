@@ -31,7 +31,6 @@ local function importLuaModule()
 		confirm = function(picker, item) -- insert the grepped line below the current one
 			picker:close()
 			local lnum = vim.api.nvim_win_get_cursor(0)[1]
-			assert(lnum)
 			vim.api.nvim_buf_set_lines(0, lnum, lnum, false, { import(item.text) })
 			vim.cmd.normal { "j==", bang = true }
 		end,
@@ -39,8 +38,7 @@ local function importLuaModule()
 end
 
 ---@param dir string? defaults to cwd
----@param icon string?
-local function betterFileOpen(dir, icon)
+local function betterFileOpen(dir)
 	local changedFiles = {}
 	local gitDir = require("snacks").git.get_root(dir)
 	if gitDir then
@@ -60,14 +58,12 @@ local function betterFileOpen(dir, icon)
 	local currentFile = vim.api.nvim_buf_get_name(0)
 	require("snacks").picker.files {
 		cwd = dir,
-		title = (icon or "") .. " " .. vim.fs.basename(dir or vim.uv.cwd()),
-		-- exclude the current file
-		transform = function(item, _ctx)
+		title = " " .. vim.fs.basename(dir or vim.uv.cwd()),
+		transform = function(item, _ctx) -- exclude the current file
 			local itemPath = require("snacks").picker.util.path(item)
 			if itemPath == currentFile then return false end
 		end,
-		-- add git status highlights
-		format = function(item, picker)
+		format = function(item, picker) -- add git status highlights
 			local itemPath = require("snacks").picker.util.path(item)
 			item.status = changedFiles[itemPath]
 			if vim.startswith(item.file, ".") then item.status = "!!" end -- hidden files
@@ -108,24 +104,15 @@ return {
 		{ "go", betterFileOpen, desc = " Open files" },
 		{ "gt", function() require("snacks").picker.explorer() end, desc = "󰙅 File tree" },
 		{ "gP", browseProject, desc = " Project" },
-
-		-- `nowait` due to nvim default mappings starting with `gr`
 		{
 			"gr",
 			function() require("snacks").picker.recent() end,
 			desc = "󰋚 Recent files",
-			nowait = true,
+			nowait = true, -- due to nvim default mappings starting with `gr`
 		},
-		{
-			"g,",
-			function() betterFileOpen(vim.fn.stdpath("config"), "") end,
-			desc = " nvim config",
-		},
-		{
-			"g<CR>",
-			function() betterFileOpen(os.getenv("HOME") .. "/.config", "") end,
-			desc = " dotfiles",
-		},
+		{ "g,", function() betterFileOpen(vim.fn.stdpath("config")) end, desc = " nvim config" },
+		-- stylua: ignore
+		{ "g<CR>", function() betterFileOpen(os.getenv("HOME") .. "/.config") end, desc = " dotfiles" },
 		{
 			"gp",
 			function()
@@ -150,23 +137,14 @@ return {
 		-- LSP
 
 		{ "gf", function() require("snacks").picker.lsp_references() end, desc = "󰈿 References" },
-		{
-			"gd",
-			function() require("snacks").picker.lsp_definitions() end,
-			desc = "󰈿 Definitions",
-		},
-		{
-			"gD",
-			function() require("snacks").picker.lsp_type_definitions() end,
-			desc = "󰜁 Type definitions",
-		},
+		-- stylua: ignore start
+		{ "gd", function() require("snacks").picker.lsp_definitions() end, desc = "󰈿 Definitions" },
+		{ "gD", function() require("snacks").picker.lsp_type_definitions() end, desc = "󰜁 Type definitions" },
+		{ "gw", function() require("snacks").picker.lsp_workspace_symbols() end, desc = "󰒕 Workspace symbols" },
 
 		-- `lsp_symbols` tends to too much clutter like anonymous function
-		{
-			"gs",
-			function() require("snacks").picker.treesitter() end,
-			desc = "󰐅 Treesitter symbols",
-		},
+		{ "gs", function() require("snacks").picker.treesitter() end, desc = "󰐅 Treesitter symbols" },
+		-- stylua: ignore end
 		-- treesitter does not work for markdown, so using LSP symbols here
 		{
 			"gs",
@@ -175,19 +153,13 @@ return {
 			desc = "󰽛 Headings",
 		},
 
-		-- stylua: ignore
-		{ "gw", function() require("snacks").picker.lsp_workspace_symbols() end, desc = "󰒕 Workspace symbols" },
-
 		--------------------------------------------------------------------------
 		-- GIT
 
 		{ "<leader>gs", function() require("snacks").picker.git_status() end, desc = "󰗲 Status" },
 		{ "<leader>gl", function() require("snacks").picker.git_log() end, desc = "󰗲 Log" },
-		{
-			"<leader>gH",
-			function() require("snacks").picker.git_log_file() end,
-			desc = "󰗲 File History",
-		},
+		-- stylua: ignore
+		{ "<leader>gH", function() require("snacks").picker.git_log_file() end, desc = "󰗲 File History" },
 		{ "<leader>ga", function() require("snacks").picker.git_diff() end, desc = "󰐖 Hunks" },
 
 		-- stylua: ignore start
@@ -202,21 +174,11 @@ return {
 		-- INSPECT
 
 		{ "<leader>iv", function() require("snacks").picker.help() end, desc = "󰋖 Vim help" },
-		{
-			"<leader>ih",
-			function() require("snacks").picker.highlights() end,
-			desc = " Highlights",
-		},
-		{
-			"<leader>is",
-			function() require("snacks").picker.pickers() end,
-			desc = "󰗲 Snacks pickers",
-		},
-		{
-			"<leader>ik",
-			function() require("snacks").picker.keymaps() end,
-			desc = "󰌌 Keymaps (global)",
-		},
+		-- stylua: ignore start
+		{ "<leader>ih", function() require("snacks").picker.highlights() end, desc = " Highlights" },
+		{ "<leader>is", function() require("snacks").picker.pickers() end, desc = "󰗲 Snacks pickers" },
+		{ "<leader>ik", function() require("snacks").picker.keymaps() end, desc = "󰌌 Keymaps (global)" },
+		-- stylua: ignore end
 		{
 			"<leader>iK",
 			function()
@@ -228,18 +190,10 @@ return {
 		--------------------------------------------------------------------------
 		-- MISC
 
-		{
-			"<leader>pc",
-			function() require("snacks").picker.colorschemes() end,
-			desc = " Colorschemes",
-		},
+		-- stylua: ignore
+		{ "<leader>pc", function() require("snacks").picker.colorschemes() end, desc = " Colorschemes" },
 		{ "<leader>ms", function() require("snacks").picker.marks() end, desc = "󰃁 Select mark" },
 		{ "<leader>ut", function() require("snacks").picker.undo() end, desc = "󰋚 Undo tree" },
-		{
-			"<leader>qq",
-			function() require("snacks").picker.qflist() end,
-			desc = " Search qf-list",
-		},
 		-- stylua: ignore
 		{ "<C-.>", function() require("snacks").picker.icons() end, mode = { "n", "i" }, desc = "󱗿 Icon picker" },
 

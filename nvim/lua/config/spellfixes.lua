@@ -30,7 +30,6 @@ local spellfixes = {
 	fo = "of",
 	fodler = "folder",
 	fro = "for",
-	gerne = "genre",
 	hihglight = "highlight",
 	htokey = "hotkey",
 	htokeys = "hotkeys",
@@ -80,7 +79,6 @@ local spellfixes = {
 	toher = "other",
 	treu = "true",
 	ture = "true",
-	turee = "true",
 	varialbe = "variable",
 	varialbes = "variables",
 	verison = "version",
@@ -91,5 +89,6 @@ local spellfixes = {
 }
 
 for wrong, correct in pairs(spellfixes) do
+	-- `ia` = insert mode abbreviations
 	vim.keymap.set("ia", wrong, correct)
 end
