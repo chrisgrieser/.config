@@ -83,14 +83,14 @@ local function installOrUpdate(pack, version)
 	local msg = ("[%s] %s…"):format(pack.name, mode)
 	notify(msg, "info", { id = "mason.install" })
 
-	pack:install({ version = version }, function(success, result)
+	pack:install({ version = version }, function(success, error)
 		if success then
 			mode = version and ("updated to %s"):format(version) or "installed"
 			msg = ("[%s] %s "):format(pack.name, mode)
 			notify(msg, "info", { id = "mason.install" })
 		else
 			mode = version and "update" or "install"
-			msg = ("[%s] failed to %s: %s"):format(pack.name, mode, result)
+			msg = ("[%s] failed to %s: %s"):format(pack.name, mode, error)
 			notify(msg, "error", { id = "mason.install" })
 		end
 	end)
@@ -126,10 +126,10 @@ local function syncPackages()
 		local installedPackages = masonReg.get_installed_package_names()
 		vim.iter(installedPackages):each(function(packName)
 			if vim.tbl_contains(ensurePacks, packName) then return end
-			masonReg.get_package(packName):uninstall({}, function(success, result)
+			masonReg.get_package(packName):uninstall({}, function(success, error)
 				local lvl = success and "info" or "error"
 				local msg = success and ("[%s] uninstalled."):format(packName)
-					or ("[%s] failed to uninstall: %s"):format(packName, result)
+					or ("[%s] failed to uninstall: %s"):format(packName, error)
 				notify(msg, lvl)
 			end)
 		end)
