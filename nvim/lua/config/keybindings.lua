@@ -30,7 +30,7 @@ keymap(
 	{ "n", "x", "i" },
 	"<D-C-r>", -- `hyper` gets registered by neovide as `cmd+ctrl`
 	function()
-		if jit.os ~= "OSX" or not vim.g.neovide then return end -- needs macOS' `open -a` & neovide
+		assert(jit.os == "OSX" and vim.g.neovide, "requires macOS' `open -a` & neovide")
 		local script = [=[
 			while pgrep -xq "neovide" || pgrep -xq "nvim"; do
 				sleep 0.05
@@ -404,7 +404,7 @@ keymap(
 	{ "n", "x", "i" },
 	"<D-C-t>", -- `hyper` gets registered by neovide as cmd+ctrl
 	function()
-		if not jit.os == "OSX" then return end -- requires macOS' `osascript`
+		assert(jit.os == "OSX", "requires macOS' `osascript`")
 		vim.system({ "osascript", "-e", 'tell application "WezTerm" to activate' }, {}, function()
 			local stdin = ("cd -q %q && clear\n"):format(vim.uv.cwd() or "")
 			vim.system({ "wezterm", "cli", "send-text", "--no-paste" }, { stdin = stdin })
