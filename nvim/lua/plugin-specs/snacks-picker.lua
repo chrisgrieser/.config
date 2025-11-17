@@ -63,7 +63,6 @@ local function betterFileOpen(dir, icon)
 		title = (icon or "") .. " " .. vim.fs.basename(dir or vim.uv.cwd()),
 		-- exclude the current file
 		transform = function(item, _ctx)
-			vim.print(item) -- 🪚
 			local itemPath = require("snacks").picker.util.path(item)
 			if itemPath == currentFile then return false end
 		end,

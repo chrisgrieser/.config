@@ -35,7 +35,7 @@ local ensureInstalled = {
 		vim.g.useEmmyluaLsp and "emmylua_ls" or "lua-language-server", -- lua LSP
 	},
 	linters = {
-		"markdownlint", -- via efm
+		"markdownlint-cli2", -- via efm
 		"shellcheck", -- shell linter via efm PENDING https://github.com/bash-lsp/bash-language-server/issues/663
 	},
 	formatters = {
