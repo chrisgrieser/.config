@@ -38,32 +38,36 @@ local function importLuaModule()
 	}
 end
 
-local function betterFileOpen()
+---@param dir string? defaults to cwd
+---@param icon string?
+local function betterFileOpen(dir, icon)
 	local changedFiles = {}
-	local gitDir = require("snacks").git.get_root()
+	local gitDir = require("snacks").git.get_root(dir)
 	if gitDir then
-		local args = { "git", "status", "--porcelain", "--ignored", "." }
-		local gitStatus = vim.system(args):wait().stdout
-		local changes = vim.split(gitStatus or "", "\n", { trimempty = true })
-		vim.iter(changes):each(function(line)
-			local relPath = line:sub(4)
+		local args = { "git", "-C", gitDir, "status", "--porcelain", "--ignored" }
+		local gitStatus = vim.system(args):wait().stdout or ""
+		local changes = vim.split(gitStatus, "\n", { trimempty = true })
+		changedFiles = vim.iter(changes):fold({}, function(acc, line)
+			local relPath = line:sub(4):gsub("^.+ -> ", "") -- gsub for renames
+			local absPath = gitDir .. "/" .. relPath
 			local change = line:sub(1, 2)
 			if change == "??" then change = " A" end -- just nicer highlights for untracked
-			if change:find("R") then relPath = relPath:gsub(".+ -> ", "") end -- renamed
-			local absPath = gitDir .. "/" .. relPath
-			changedFiles[absPath] = change
+			acc[absPath] = change
+			return acc
 		end)
 	end
 
 	local currentFile = vim.api.nvim_buf_get_name(0)
 	require("snacks").picker.files {
-		title = " " .. vim.fs.basename(vim.uv.cwd()),
+		cwd = dir,
+		title = (icon or "") .. " " .. vim.fs.basename(dir or vim.uv.cwd()),
 		-- exclude the current file
 		transform = function(item, _ctx)
+			vim.print(item) -- 🪚
 			local itemPath = require("snacks").picker.util.path(item)
 			if itemPath == currentFile then return false end
 		end,
-		-- add git status and hidden status as highlights
+		-- add git status highlights
 		format = function(item, picker)
 			local itemPath = require("snacks").picker.util.path(item)
 			item.status = changedFiles[itemPath]
@@ -115,19 +119,13 @@ return {
 		},
 		{
 			"g,",
-			function()
-				local path = vim.fn.stdpath("config")
-				require("snacks").picker.files { cwd = path, title = " nvim config" }
-			end,
+			function() betterFileOpen(vim.fn.stdpath("config"), "") end,
 			desc = " nvim config",
 		},
 		{
 			"g<CR>",
-			function()
-				local path = os.getenv("HOME") .. "/.config"
-				require("snacks").picker.files { cwd = path, title = " dotfiles" }
-			end,
-			desc = " dotfiles",
+			function() betterFileOpen(os.getenv("HOME") .. "/.config", "") end,
+			desc = " dotfiles",
 		},
 		{
 			"gp",
