@@ -64,6 +64,7 @@ end
 ---@param toggleKey string key used to trigger this function
 ---@param reg string vim register (single letter)
 function M.startOrStopRecording(toggleKey, reg)
+	assert(#toggleKey == 1, "toggleKey must be a single character")
 	local notRecording = vim.fn.reg_recording() == ""
 	if notRecording then
 		vim.cmd.normal { "q" .. reg, bang = true } -- start recording to register
@@ -216,7 +217,14 @@ function M.smartDuplicate()
 
 	-- FILETYPE-SPECIFIC TWEAKS
 	if ft == "css" then
-		line = line:gsub("(%a+):", { top = "bottom", bottom = "top", right = "left", left = "right" })
+		line = line:gsub("(%a+):", {
+			top = "bottom",
+			bottom = "top",
+			right = "left",
+			left = "right",
+			light = "dark",
+			dark = "light",
+		})
 	elseif ft == "javascript" or ft == "typescript" or ft == "swift" then
 		line = line:gsub("^(%s*)if(.+{)$", "%1} else if%2")
 	elseif ft == "lua" then
@@ -230,7 +238,7 @@ function M.smartDuplicate()
 	-- INSERT DUPLICATED LINE
 	vim.api.nvim_buf_set_lines(0, row, row, false, { line })
 
-	-- MOVE CURSOR DOWN, AND TO VALUE/FIELD (IF THERE IS ANY)
+	-- MOVE CURSOR DOWN, AND TO VALUE/FIELD (IF ANY)
 	local _, luadocFieldPos = line:find("%-%-%-@%w+ ")
 	local _, valuePos = line:find("[:=] ")
 	local targetCol = luadocFieldPos or valuePos or col

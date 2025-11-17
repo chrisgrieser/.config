@@ -70,18 +70,17 @@ end
 --------------------------------------------------------------------------------
 
 -- AUTO-CLEANUP
-if jit.os == "OSX" then
-	vim.api.nvim_create_autocmd("FocusLost", {
-		desc = "User: Auto-cleanup. Once a week, on first `FocusLost`, delete older files.",
-		once = true,
-		callback = function()
-			if os.date("%a") == "Mon" then
-				vim.system { "find", vim.o.undodir, "-mtime", "+30d", "-delete" }
-				vim.system { "find", vim.lsp.log.get_filename(), "-size", "+20M", "-delete" }
-			end
-		end,
-	})
-end
+vim.api.nvim_create_autocmd("FocusLost", {
+	desc = "User: Auto-cleanup. Once a week, on first `FocusLost`, delete older files.",
+	once = true,
+	callback = function()
+		if jit.os ~= "OSX" then return end -- using macOS commands
+		if os.date("%a") == "Mon" then
+			vim.system { "find", vim.o.undodir, "-mtime", "+30d", "-delete" }
+			vim.system { "find", vim.lsp.log.get_filename(), "-size", "+20M", "-delete" }
+		end
+	end,
+})
 
 --------------------------------------------------------------------------------
 -- AUTO-SAVE
@@ -518,7 +517,7 @@ end
 
 -- MACROS
 -- add sound while recording
-if jit.os == "OSX" then
+if jit.os == "OSX" then -- uses macOS system sounds
 	local function playSound(file)
 		local soundDir =
 			"/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/"

@@ -588,7 +588,7 @@ return {
 					picker:action(action)
 				end,
 				reveal_in_macOS_Finder = function(picker)
-					if jit.os ~= "OSX" then return end
+					assert(jit.os == "OSX", "requires macOS")
 					local path = picker:current().file
 					if picker:current().cwd then path = picker:current().cwd .. "/" .. path end
 					vim.system { "open", "-R", path }
