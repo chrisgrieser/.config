@@ -6,7 +6,7 @@ local efmConfig = {
 	markdown = {
 		{
 			lintSource = "markdownlint",
-			lintCommand = "markdownlint-cli2 -",
+			lintCommand = "markdownlint --stdin",
 			lintStdin = true, -- caveat: linting from stdin does not support `.markdownlintignore`
 			lintIgnoreExitCode = true,
 			lintSeverity = vim.diagnostic.severity.INFO,
