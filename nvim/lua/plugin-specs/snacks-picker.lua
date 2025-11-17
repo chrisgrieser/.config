@@ -116,12 +116,18 @@ return {
 		{
 			"g,",
 			function()
-				require("snacks").picker.files {
-					cwd = vim.fn.stdpath("config"),
-					title = " nvim config",
-				}
+				local path = vim.fn.stdpath("config")
+				require("snacks").picker.files { cwd = path, title = " nvim config" }
 			end,
 			desc = " nvim config",
+		},
+		{
+			"g<CR>",
+			function()
+				local path = os.getenv("HOME") .. "/.config"
+				require("snacks").picker.files { cwd = path, title = " dotfiles" }
+			end,
+			desc = " dotfiles",
 		},
 		{
 			"gp",
