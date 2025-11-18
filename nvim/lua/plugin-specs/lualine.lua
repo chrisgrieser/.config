@@ -18,41 +18,6 @@ vim.g.lualineAdd = function(whichBar, whichSection, component, where) ---@diagno
 	end, 1000)
 end
 
----Asynchronously count LSP references, returns empty string until async is
----done. When done, returns the number of references in the current file, and in
----brackets the number of references in the workspace (if that number is
----different from the references in the current file).
-local function countLspRefs()
-	local icon = "󰈿"
-
-	local client = vim.lsp.get_clients({ method = "textDocument/references", bufnr = 0 })[1]
-	if not client then return "" end
-
-	-- prevent multiple requests when cursor does not move (without the need for autocmds)
-	local row, col = unpack(vim.api.nvim_win_get_cursor(0))
-	local sameCursorPos = row == vim.b.lspReference_lastRow and col == vim.b.lspReference_lastCol
-	if sameCursorPos then return vim.b.lspReference_count end
-
-	vim.b.lspReference_lastRow, vim.b.lspReference_lastCol = row, col
-	local params = vim.lsp.util.make_position_params(0, client.offset_encoding)
-	params.context = { includeDeclaration = false } ---@diagnostic disable-line: inject-field
-	local thisFileUri = params.textDocument.uri
-	client:request("textDocument/references", params, function(error, refs)
-		if error or not refs then -- not on a valid symbol, etc.
-			vim.b.lspReference_count = ""
-			return
-		end
-		local refsInFile = vim.iter(refs)
-			:filter(function(r) return thisFileUri == r.uri end)
-			:totable()
-		local inFile, inWorkspace = #refsInFile, #refs
-		local text = inFile == inWorkspace and inFile or (inFile .. "(" .. inWorkspace .. ")")
-		vim.b.lspReference_count = vim.trim(icon .. " " .. text)
-	end)
-	vim.b.lspReference_count = "" -- set to empty string while waiting for request
-	return vim.b.lspReference_count
-end
-
 --------------------------------------------------------------------------------
 
 return {
@@ -133,7 +98,6 @@ return {
 			},
 			lualine_c = {
 				{ require("personal-plugins.magnet").mostChangedFileStatusbar },
-				{ countLspRefs },
 			},
 			lualine_x = {
 				{ -- Quickfix counter
@@ -156,8 +120,7 @@ return {
 					"lsp_status",
 					icon = "󰒕",
 					ignore_lsp = { "typos_lsp", "efm" },
-					-- only show component if LSP is active
-					cond = function()
+					cond = function() -- only show component if LSP is active
 						if vim.g.lualine_lsp_active == nil then -- create autocmd once
 							vim.g.lualine_lsp_active = false
 							vim.api.nvim_create_autocmd("LspProgress", {
@@ -171,8 +134,6 @@ return {
 						return vim.g.lualine_lsp_active
 					end,
 				},
-			},
-			lualine_y = {
 			},
 			lualine_z = {
 				{ "selectioncount", icon = "󰒆" },
