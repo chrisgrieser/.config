@@ -58,7 +58,7 @@ local function betterFileOpen(dir)
 	local currentFile = vim.api.nvim_buf_get_name(0)
 	require("snacks").picker.files {
 		cwd = dir,
-		title = " " .. vim.fs.basename(dir or vim.uv.cwd()),
+		title = "󰝰 " .. vim.fs.basename(dir or vim.uv.cwd()),
 		transform = function(item, _ctx) -- exclude the current file
 			local itemPath = require("snacks").picker.util.path(item)
 			if itemPath == currentFile then return false end
