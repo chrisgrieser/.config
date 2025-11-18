@@ -151,7 +151,7 @@ while (true) {
 				<key>leftcursor</key>
 				<false/>
 				<key>modsmode</key>
-				<integer>0</integer>
+				<integer>2</integer>
 				<key>relatedAppsMode</key>
 				<integer>0</integer>
 			</dict>
@@ -220,7 +220,7 @@ Configure the [Hotkey](https://www.alfredapp.com/help/workflows/triggers/hotkey/
 		</dict>
 	</array>
 	<key>version</key>
-	<string>2025.1</string>
+	<string>25.1</string>
 	<key>webaddress</key>
 	<string>https://github.com/alfredapp/banner-be-gone-workflow/</string>
 </dict>
