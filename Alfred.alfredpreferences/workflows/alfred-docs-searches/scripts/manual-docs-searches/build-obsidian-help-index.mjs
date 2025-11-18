@@ -1,6 +1,7 @@
 #!/usr/bin/env node
-// biome-ignore lint/correctness/noNodejsModules: needed here
 import fs from "node:fs";
+import process from "node:process";
+
 //──────────────────────────────────────────────────────────────────────────────
 
 /** @param {string} url */
@@ -10,7 +11,6 @@ async function getGithubJson(url) {
 		headers: {
 			// without `GITHUB_TOKEN`, will hit rate limit when running on Github Actions
 			// `GITHUB_TOKEN` set via GitHub Actions secrets
-			// biome-ignore lint/nursery/noProcessEnv: okay here
 			authorization: "Bearer " + process.env.GITHUB_TOKEN,
 			"Content-Type": "application/json",
 		},
@@ -37,24 +37,24 @@ function alfredMatcher(str) {
 
 async function run() {
 	const docsPages = [];
-	const officialDocsURL = "https://help.obsidian.md/";
+	const officialDocsUrl = "https://help.obsidian.md/";
 	const rawGitHubUrlRoot = "https://raw.githubusercontent.com/obsidianmd/obsidian-docs/master/";
 	const officialDocsTree =
 		"https://api.github.com/repositories/285425357/git/trees/master?recursive=1";
 
 	// GUARD
-	const officialDocsJSON = await getGithubJson(officialDocsTree);
-	if (!officialDocsJSON) {
+	const officialDocsJson = await getGithubJson(officialDocsTree);
+	if (!officialDocsJson) {
 		console.error("Could not fetch json from: ", officialDocsTree);
 		process.exit(1);
 	}
-	if (!officialDocsJSON.tree) {
-		console.error("Error: ", JSON.stringify(officialDocsJSON));
+	if (!officialDocsJson.tree) {
+		console.error("Error: ", JSON.stringify(officialDocsJson));
 		process.exit(1);
 	}
 
 	// HELP SITES THEMSELVES
-	const officialDocs = officialDocsJSON.tree
+	const officialDocs = officialDocsJson.tree
 		.filter((/** @type {{ path: string; }} */ item) => item.path.match(/en\/.*\.md/))
 		.map((/** @type {{ path: string; }} */ item) => item.path);
 
@@ -69,7 +69,7 @@ async function run() {
 
 		const rawText = await getGithubFileRaw(docUrl);
 		const permalink = rawText.match(/^permalink: (.*)/m)?.[1] || path.replaceAll(" ", "+");
-		const siteUrl = officialDocsURL + permalink;
+		const siteUrl = officialDocsUrl + permalink;
 
 		docsPages.push({
 			title: title,
@@ -113,6 +113,7 @@ async function run() {
 	if (!fs.existsSync("./.github/caches/")) fs.mkdirSync("./.github/caches/", { recursive: true });
 	const beautifiedForBetterDiff = JSON.stringify(docsJson, null, 2);
 	fs.writeFileSync("./.github/caches/obsidian-help-index.json", beautifiedForBetterDiff);
+	console.info("Done.");
 }
 
 await run();

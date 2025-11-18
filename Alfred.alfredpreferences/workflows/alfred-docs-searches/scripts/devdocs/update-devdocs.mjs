@@ -9,9 +9,11 @@
 //   field for using specific devdocs versions.
 //──────────────────────────────────────────────────────────────────────────────
 import fs from "node:fs";
+import process from "node:process";
 
 /** @type {Record<string, string>} */
-const customAliases = { // these overwrite aliases provided by devdocs.io
+const customAliases = {
+	// these overwrite aliases provided by devdocs.io
 	hammerspoon: "hs",
 	// biome-ignore lint/style/useNamingConvention: not set by me
 	browser_support_tables: "cani",
@@ -34,8 +36,15 @@ const extraWorkflowConfig = [
 
 async function run() {
 	// alternative: https://documents.devdocs.io/docs.json
-	const response = await fetch("https://devdocs.io/docs.json");
-	const json = await response.json();
+	let json;
+	try {
+		const response = await fetch("https://devdocs.io/docs.json");
+		if (!response.ok) throw new Error(`Error: ${response.status} ${response.statusText}`);
+		json = await response.json();
+	} catch (_error) {
+		console.error("Failed to fetch JSON data.");
+		process.exit(1);
+	}
 
 	/** @type {Record<string, string>} */
 	const allLangs = {};

@@ -125,7 +125,19 @@ function run() {
 		console.log("indexUrl:", indexUrl);
 
 		/** @type {DevDocsIndex} */
-		const response = JSON.parse(httpRequest(indexUrl));
+		let response;
+		try {
+			response = JSON.parse(httpRequest(indexUrl));
+		} catch (_error) {
+			return JSON.stringify({
+				items: [{ title: "Error: No response from devdocs", valid: false }],
+			});
+		}
+		if (!response.entries) {
+			return JSON.stringify({
+				items: [{ title: "Error: Invalid devdocs response", valid: false }],
+			});
+		}
 
 		const entries = response.entries.map((entry) => {
 			const url = `https://devdocs.io/${languageSlug}/${entry.path}`;
