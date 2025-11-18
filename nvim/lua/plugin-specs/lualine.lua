@@ -154,32 +154,33 @@ return {
 				},
 				{
 					"lsp_status",
-					icon = "",
+					icon = "󰒕",
 					ignore_lsp = { "typos_lsp", "efm" },
 					-- only show component if LSP is active
 					cond = function()
-						if vim.g.lualine_lsp_active ~= nil then return vim.g.lualine_lsp_active end
-
-						vim.g.lualine_lsp_active = false -- so autocmd below is only created once
-						vim.api.nvim_create_autocmd("LspProgress", {
-							desc = "User: Hide LSP progress component after 2s",
-							callback = function()
-								vim.g.lualine_lsp_active = true
-								vim.defer_fn(function() vim.g.lualine_lsp_active = false end, 2000)
-							end,
-						})
+						if vim.g.lualine_lsp_active == nil then -- create autocmd once
+							vim.g.lualine_lsp_active = false
+							vim.api.nvim_create_autocmd("LspProgress", {
+								desc = "User: Hide LSP progress component after 2s",
+								callback = function()
+									vim.g.lualine_lsp_active = true
+									vim.defer_fn(function() vim.g.lualine_lsp_active = false end, 2000)
+								end,
+							})
+						end
+						return vim.g.lualine_lsp_active
 					end,
 				},
 			},
 			lualine_y = {
+			},
+			lualine_z = {
+				{ "selectioncount", icon = "󰒆" },
 				{ -- line count
 					function() return vim.api.nvim_buf_line_count(0) end,
 					icon = "",
 					cond = function() return vim.bo.buftype == "" end,
 				},
-			},
-			lualine_z = {
-				{ "selectioncount", icon = "󰒆" },
 				{ "location" },
 			},
 		},

@@ -27,14 +27,6 @@ rules:
         to:
           - { key_code: s, modifiers: [control, command] }
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [com.apple.finder] }]
-      # Brave
-      # needs custom shortcuts set via brave://settings/system/shortcuts?search=vertical
-      - type: basic
-        from: { key_code: "1", modifiers: { mandatory: [command] } }
-        to:
-          - { key_code: "1", modifiers: [option] }
-        conditions:
-          - { type: frontmost_application_if, bundle_identifiers: [com.brave.Browser] }
       # Calendar
       - type: basic
         from: { key_code: "1", modifiers: { mandatory: [command] } }
