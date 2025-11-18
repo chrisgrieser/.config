@@ -4,8 +4,6 @@
 
 -- lightweight version of `telescope-import.nvim`
 local function importLuaModule()
-	local function import(text) return vim.trim(text:gsub(".-:", "")) end
-
 	require("snacks").picker.grep_word {
 		title = "󰢱 Import module",
 		cmd = "rg",
@@ -17,10 +15,10 @@ local function importLuaModule()
 
 		layout = { preset = "small_no_preview", layout = { width = 0.75 } },
 		transform = function(item, ctx) -- ensure items are unique
-			ctx.meta.done = ctx.meta.done or {} ---@type table<string, boolean>
-			local imp = import(item.text)
-			if ctx.meta.done[imp] then return false end
-			ctx.meta.done[imp] = true
+			ctx.meta.done = ctx.meta.done or {}
+			local import = item.text:gsub(".-:", "") -- different occurrences of same import
+			if ctx.meta.done[import] then return false end
+			ctx.meta.done[import] = true
 		end,
 		format = function(item, _picker) -- only display the grepped line
 			local out = {}
@@ -30,9 +28,9 @@ local function importLuaModule()
 		end,
 		confirm = function(picker, item) -- insert the grepped line below the current one
 			picker:close()
-			local lnum = vim.api.nvim_win_get_cursor(0)[1]
-			vim.api.nvim_buf_set_lines(0, lnum, lnum, false, { import(item.text) })
-			vim.cmd.normal { "j==", bang = true }
+			vim.cmd.normal { "o", bang = true }
+			vim.api.nvim_set_current_line(item.line)
+			vim.cmd.normal { "==l", bang = true }
 		end,
 	}
 end
@@ -75,10 +73,6 @@ end
 local function browseProject()
 	local projectsFolder = vim.g.localRepos -- CONFIG
 
-	local function browse(project)
-		local path = vim.fs.joinpath(projectsFolder, project)
-		require("snacks").picker.files { title = " " .. project, cwd = path }
-	end
 	local projects = vim.iter(vim.fs.dir(projectsFolder)):fold({}, function(acc, item, type)
 		if type == "directory" then table.insert(acc, item) end
 		return acc
@@ -87,10 +81,10 @@ local function browseProject()
 	if #projects == 0 then
 		vim.notify("No projects found.", vim.log.levels.WARN)
 	elseif #projects == 1 then
-		browse(projects[1])
+		betterFileOpen(projectsFolder .. "/" .. projects[1])
 	else
 		vim.ui.select(projects, { prompt = " Select project" }, function(project)
-			if project then browse(project) end
+			if project then betterFileOpen(projectsFolder .. "/" .. project) end
 		end)
 	end
 end
