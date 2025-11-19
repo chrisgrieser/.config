@@ -69,8 +69,8 @@ sketchybar \
 	icon.font="${nerd_font/[0-9]*/20.5}" label.padding_right="0" icon.padding_right="0" \
 	script="./components/ram.sh" \
 	\
-	--add graph cpu_graph $row_2 60 \
-	--set cpu_graph update_freq="2" drawing="true" \
+	--add graph cpu_graph $row_2 30 \
+	--set cpu_graph update_freq="3" drawing="true" \
 	background.height="18" background.color="$bg" graph.color="0x00000000" \
 	script="./components/cpu.sh" \
 	\
@@ -94,7 +94,7 @@ sketchybar \
 	\
 	--add item japanese_word $row_2 \
 	--set japanese_word update_freq="900" drawing="true" \
-	script="./components/japanese_word.sh" \
+	script="./components/japanese_word/japanese_word.sh" \
 	\
 	`#─── END ─────────────────────────────────────────────────────────────────` \
 	--update # needs to run at the end of config and should not be run in an item script

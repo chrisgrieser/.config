@@ -60,8 +60,8 @@
     "prefix": "default value"
   },
   "directory of script": {
-    "body": "\"$(dirname \"$(readlink -f \"\\$0\")\")\"",
-    "prefix": "directory of this script"
+    "body": "\"\\$(dirname \"$0\")\"",
+    "prefix": "path of this file (relative)"
   },
   "elseif": {
     "body": "elif [[ ${1:condition} ]]; then\n\t${0}",
