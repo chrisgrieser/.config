@@ -17,6 +17,7 @@ fi
 # to use it as anchor, which simply should be the leftmost item of the 1st row.
 row_1="left"
 row_2="popup.clock"
+row_3="popup.clock"
 
 #───────────────────────────────────────────────────────────────────────────────
 # SKETCHYBAR CALL
@@ -91,6 +92,13 @@ sketchybar \
 	script="./components/git_sync_bar_icon.sh" \
 	--add event repo_files_update \
 	--subscribe sync_indicator system_woke repo-files-update \
+	\
+	\
+	`#─── 3rd MENUBAR ROW ─────────────────────────────────────────────────────` \
+	--add item japanese_word $row_3 \
+	--set japanese_word icon="🎎" update_freq="86400" \
+	popup.y_offset="-50"
+	script="./components/japanese_word.sh" \
 	\
 	`#─── END ─────────────────────────────────────────────────────────────────` \
 	--update # needs to run at the end of config and should not be run in an item script
