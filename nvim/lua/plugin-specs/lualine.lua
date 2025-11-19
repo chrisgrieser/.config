@@ -120,7 +120,8 @@ return {
 					"lsp_status",
 					icon = "󰒕",
 					ignore_lsp = { "typos_lsp", "efm" },
-					cond = function() -- only show component if LSP is active
+					-- only show component if LSP is active
+					cond = function()
 						if vim.g.lualine_lsp_active == nil then -- create autocmd once
 							vim.g.lualine_lsp_active = false
 							vim.api.nvim_create_autocmd("LspProgress", {
@@ -135,6 +136,7 @@ return {
 					end,
 				},
 			},
+			lualine_y = {}, -- needed to remove %-progress in file
 			lualine_z = {
 				{ "selectioncount", icon = "󰒆" },
 				{ -- line count
