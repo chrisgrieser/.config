@@ -23,6 +23,7 @@ const originalSites = {
 	moment: "https://momentjs.com/docs/#/",
 	npm: "https://docs.npmjs.com/",
 	esbuild: "https://esbuild.github.io/",
+	jq: "https://jqlang.org/manual/#",
 };
 
 //──────────────────────────────────────────────────────────────────────────────
@@ -31,7 +32,9 @@ const originalSites = {
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run(argv) {
 	const url = argv[0];
+	console.log("url:", url);
 	let [_, topic, version, site] = url.match(/.*devdocs\.io\/([^/~]*)(?:~(.*?))?\/(.+)/) || [];
+	console.log("site:", site);
 	let sourcePage = originalSites[topic];
 	const useSourcePageIfAvailable = $.getenv("use_source_page_if_available") === "1";
 
@@ -41,14 +44,16 @@ function run(argv) {
 		return;
 	}
 
-	// OPEN AT ORIIGNAL
+	// OPEN AT ORIGINAL
 	if (version) sourcePage = sourcePage.replace("{{version}}", version);
 
 	// a bunch of annoying special cases…
 	if (topic === "lua") site = site.replace("index", "");
+	if (topic === "jq") site = site.replace("index#", "");
 	if (topic === "node") site = site.replace("#", ".html#");
 	if (topic === "moment") site = site.replace("index#/", "");
 
 	const sourceUrl = sourcePage + site;
+	console.log("sourceUrl:", sourceUrl);
 	app.openLocation(sourceUrl);
 }
