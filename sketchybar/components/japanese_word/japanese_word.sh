@@ -8,7 +8,8 @@ vocab_source="$location_of_this_file/n5.json"
 
 # get random word
 length=$(jq ". | length" "$vocab_source")
-random_num=$(shuf --input-range=1-600 --head-count=1)
+n=$(od -An -N2 -tu2 < /dev/urandom) # RANDOM isn't good enough
+random_num=$(( n % length + 1 ))
 word=$(jq ".[$random_num]" "$vocab_source")
 
 # from word, take the furigana (fallback to word if empty) and meaning

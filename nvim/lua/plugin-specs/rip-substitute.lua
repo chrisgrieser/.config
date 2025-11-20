@@ -13,9 +13,6 @@ return {
 			hideSearchReplaceLabels = true,
 			hideKeymapHints = true,
 		},
-		incrementalPreview = {
-			rangeBackdropBrightness = 100,
-		},
 		keymaps = {
 			insertModeConfirm = "<CR>",
 		},
