@@ -353,9 +353,7 @@ do
 	local function scrollLspWin(lines)
 		local winid = vim.b.lsp_floating_preview --> stores id of last `vim.lsp`-generated win
 		if not winid or not vim.api.nvim_win_is_valid(winid) then
-			local msg = "No LSP window found."
-			vim.notify(msg, vim.log.levels.TRACE, { icon = "", title = "Scroll" })
-			return
+			return vim.notify("No LSP window found.", vim.log.levels.TRACE, { icon = "" })
 		end
 		vim.api.nvim_win_call(winid, function()
 			local topline = vim.fn.winsaveview().topline
@@ -390,7 +388,7 @@ keymap("c", "<D-c>", function()
 	if cmdline == "" then return vim.notify("Nothing to copy", vim.log.levels.WARN) end
 	vim.fn.setreg("+", cmdline)
 	vim.notify(cmdline, nil, { title = "Copied", icon = "󰅍" })
-end, { desc = "󰅍 Yank Cmdline" })
+end, { desc = "󰅍 Yank cmdline" })
 
 keymap("c", "<BS>", function()
 	if vim.fn.getcmdline() ~= "" then return "<BS>" end
