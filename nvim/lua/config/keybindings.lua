@@ -72,7 +72,6 @@ keymap({ "n", "x" }, "J", "6gj", { desc = "6j" })
 keymap({ "n", "x" }, "K", "6gk", { desc = "6k" })
 
 -- Jump history
-keymap("n", "<C-g>", "<C-t>", { desc = "󱋿 Jump back in tagstack" }) -- useful for goto-definitions
 keymap("n", "<C-h>", "<C-o>", { desc = "󱋿 Jump back" })
 keymap("n", "<C-l>", "<C-i>", { desc = "󱋿 Jump forward", unique = false })
 
@@ -456,6 +455,9 @@ keymap("n", "<C-Right>", "<C-w>5>")
 -- stylua: ignore
 keymap({ "n", "x" }, "<CR>", function() require("personal-plugins.magnet").gotoAltFile() end, { desc = "󰬈 Goto alt-file" })
 
+-- stylua: ignore
+keymap({ "n", "x" }, "<D-CR>", function() require("personal-plugins.magnet").gotoMostChangedFile() end, { desc = "󰊢 Goto most changed file" })
+
 -- close window or buffer
 keymap({ "n", "x", "i" }, "<D-w>", function()
 	vim.cmd("silent! update")
@@ -468,7 +470,7 @@ keymap({ "n", "x", "i" }, "<D-w>", function()
 	else
 		local bufPath = vim.api.nvim_buf_get_name(0)
 		table.insert(vim.v.oldfiles, 1, bufPath)
-		vim.cmd.bwipeout()
+		vim.cmd.bwipeout() -- as opposed to `:bdelete`, does not leave the buffer in oldfiles
 	end
 end, { desc = "󰽙 Close window/buffer" })
 
@@ -477,9 +479,6 @@ keymap("n", "<BS>", function()
 	vim.cmd.bprevious()
 end, { desc = "󰽙 Prev buffer" })
 keymap("n", "<S-BS>", vim.cmd.bnext, { desc = "󰽙 Next buffer" })
-
--- stylua: ignore
-keymap({ "n", "x" }, "<D-CR>", function() require("personal-plugins.magnet").gotoMostChangedFile() end, { desc = "󰊢 Goto most changed file" })
 
 -- stylua: ignore
 keymap({ "n", "x", "i" }, "<D-L>", function() require("personal-plugins.misc").openWorkflowInAlfredPrefs() end, { desc = "󰮤 Reveal in Alfred" })
@@ -492,12 +491,8 @@ do
 	local toggleKey = "0"
 
 	vim.fn.setreg(reg, "") -- clear on startup to avoid accidents
-	keymap(
-		"n",
-		toggleKey,
-		function() require("personal-plugins.misc").startOrStopRecording(toggleKey, reg) end,
-		{ desc = "󰃽 Start/stop recording" }
-	)
+	-- stylua: ignore
+	keymap("n", toggleKey, function() require("personal-plugins.misc").startOrStopRecording(toggleKey, reg) end, { desc = "󰃽 Start/stop recording" })
 	-- stylua: ignore
 	keymap("n", "9", function() require("personal-plugins.misc").playRecording(reg) end, { desc = "󰃽 Play recording" })
 end
