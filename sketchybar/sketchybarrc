@@ -98,7 +98,7 @@ sketchybar \
 	--subscribe sync_indicator system_woke repo-files-update \
 	\
 	--add item japanese_word $row_2 \
-	--set japanese_word update_freq="900" drawing="true" \
+	--set japanese_word update_freq="600" drawing="true" \
 	script="./components/japanese_word/japanese_word.sh" \
 	click_script="./components/japanese_word/japanese_word.sh" \
 	\
