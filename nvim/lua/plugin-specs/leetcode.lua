@@ -1,18 +1,21 @@
 return {
 	"kawre/leetcode.nvim",
-	cmd = "Leet",
-	lazy = false,
+	lazy = vim.fn.argv(0, -1) ~= "leetcode.nvim", -- start via `nvim "leetcode.nvim"`
+
 	dependencies = { "nvim-lua/plenary.nvim", "MunifTanjim/nui.nvim" },
-	init = function() vim.g.whichkeyAddSpec { "<leader>x", group = "󰹂 Leetcode" } end,
+	config = function(_, opts)
+		vim.g.whichkeyAddSpec { "<leader>x", group = "󰹂 Leetcode" }
+		require("leetcode").setup(opts)
+	end,
 	keys = {
 		-- https://github.com/kawre/leetcode.nvim#-commands
-		{ "<leader>x<CR>", "<cmd>Leet run<CR>", desc = " Run" },
+		{ "<leader>xx", "<cmd>Leet run<CR>", desc = " Run" },
+		{ "<leader>xd", "<cmd>Leet desc<CR>", desc = " Toggle problem desc" },
 		{ "<leader>xs", "<cmd>Leet submit<CR>", desc = " Submit" },
 		{ "<leader>xo", "<cmd>Leet open<CR>", desc = "󰖟 Open in browser" },
-		{ "<leader>xy", "<cmd>Leet yank<CR>", desc = "󰅍 Yank code section" },
 		{ "<leader>xp", "<cmd>Leet list difficulty=easy<CR>", desc = " Problem list" },
-		{ "<leader>xh", "<cmd>Leet info<CR>", desc = " Hints & similar" },
-		{ "<leader>xx", "<cmd>Leet desc<CR>", desc = " Toggle sidebar" },
+		{ "<leader>xh", "<cmd>Leet info<CR>", desc = " Hints & similar problems" },
+		{ "<leader>xm", "<cmd>Leet menu<CR>", desc = "󰹯 Leetcode menu" },
 	},
 	opts = {
 		lang = "javascript", -- https://github.com/kawre/leetcode.nvim#lang
@@ -21,8 +24,7 @@ return {
 		},
 		description = {
 			position = "left",
-			width = "40%",
-			show_stats = true,
+			width = "50%",
 		},
 	},
 }
