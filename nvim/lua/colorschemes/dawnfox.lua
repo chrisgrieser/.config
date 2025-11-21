@@ -34,7 +34,8 @@ return {
 				["@markup.strong"] = { fg = "palette.magenta", style = "bold" },
 				["Added"] = { link = "diffAdded" },
 				["Removed"] = { link = "diffRemoved" },
-				["Whitespace"] = { fg = "#dfccd4" }, -- bit darker
+				["Whitespace"] = { fg = "#dfccd4" }, -- a bit darker
+				Conceal = { link = "Comment" }, -- leetcode.nvim, also more readability
 
 				-- 1. `inline` code in comments
 				-- 2. italic removed only in markdown, (still inherited from comments elsewhere)
@@ -98,9 +99,6 @@ return {
 				SnacksIndent = { fg = "#e0cfbd" }, -- less contrast
 				SnacksPicker = { link = "Normal" },
 				SnacksPickerMatch = { fg = "palette.orange" }, -- make matches stand out more
-
-				-- leetcode.nvim, also more readability
-				Conceal = { link = "Comment" },
 			},
 		},
 	},
