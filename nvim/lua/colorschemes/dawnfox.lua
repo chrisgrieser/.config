@@ -98,6 +98,9 @@ return {
 				SnacksIndent = { fg = "#e0cfbd" }, -- less contrast
 				SnacksPicker = { link = "Normal" },
 				SnacksPickerMatch = { fg = "palette.orange" }, -- make matches stand out more
+
+				-- leetcode.nvim, also more readability
+				Conceal = { link = "Comment" },
 			},
 		},
 	},
