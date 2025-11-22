@@ -28,11 +28,14 @@ return {
 				},
 				globals = { "vim" }, -- when working on nvim plugins that lack a `.luarc.json`
 			},
+			codeLens = {
+				enable = true,
+			},
 			hint = { -- inlay hints
 				enable = true,
 				setType = true,
 				arrayIndex = "Disable", -- too noisy
-				semicolon = "Disable", -- mostly wrong on invalid code
+				semicolon = "Disable",
 			},
 		},
 	},
