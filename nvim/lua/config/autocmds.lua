@@ -20,14 +20,19 @@ vim.api.nvim_create_autocmd("FileType", {
 
 -- LSP CODELENS
 do
+	local function enableCodeLens(ctx)
+		local ft = vim.bo[ctx.buf].filetype
+		if ft == "markdown" then return end -- useless info that heading is referenced in ToC
+		vim.lsp.codelens.refresh { bufnr = ctx.buf }
+	end
 	vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained" }, {
 		desc = "User: enable LSP codelenses",
-		callback = function(ctx) vim.lsp.codelens.refresh { bufnr = ctx.buf } end,
+		callback = enableCodeLens,
 	})
 	vim.api.nvim_create_autocmd("LspProgress", {
 		desc = "User: initialize codelense on first buffer",
 		once = true,
-		callback = function(ctx) vim.lsp.codelens.refresh { bufnr = ctx.buf } end,
+		callback = enableCodeLens,
 	})
 
 	-- format with padding & icon
