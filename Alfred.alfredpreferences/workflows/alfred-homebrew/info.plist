@@ -601,12 +601,9 @@
 	<key>readme</key>
 	<string>## Requirements
 - [Homebrew](https://brew.sh/)
-- Optional:
-  [AlfredExtraPane](https://github.com/mr-pennyworth/alfred-extra-pane) for
-  previews of package homepages.
 
 ## Usage
-- Search for a Homebrew package via the `bi` keyword. (+ The download counts
+- Search for a Homebrew package via the `bi` keyword. (The download counts
 refer to the number of downloads per 90 days.)
 	+ &lt;kbd&gt;⏎&lt;/kbd&gt;: Install the package (`brew install`) in the Terminal. (Uses
 	the terminal app you have configured [in your Alfred
@@ -615,7 +612,8 @@ refer to the number of downloads per 90 days.)
 	+ &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy the package's homepage to the clipboard.
 	+ &lt;kbd&gt;⇧⏎&lt;/kbd&gt;: Show package information (`brew info`) in Text View.
 	+ &lt;kbd&gt;⌘Y&lt;/kbd&gt; Quick Look a screenshot of the app, if available.
-- Uninstall a package via the `bu` keyword (`brew uninstall`).
+- List packages to uninstall via the `bu` keyword.
+	+ &lt;kbd&gt;⏎&lt;/kbd&gt;: Uninstall the package (`brew uninstall`) in the Terminal.
 	+ &lt;kbd&gt;⇧⏎&lt;/kbd&gt;: Show package information (`brew info`) in Text View.
 	+ &lt;kbd&gt;⌃⏎&lt;/kbd&gt;: Reinstall the package (`brew reinstall`).
 
@@ -815,7 +813,7 @@ and the Mac App Store.
 				<string>copy line for Brewfile</string>
 			</dict>
 			<key>description</key>
-			<string>When installing a package, also copy the line that needs to be added to a Brewfile.</string>
+			<string>Also copy the line that needs to be added to a Brewfile.</string>
 			<key>label</key>
 			<string></string>
 			<key>type</key>
@@ -855,7 +853,7 @@ and the Mac App Store.
 				<string>include Mac App Store apps</string>
 			</dict>
 			<key>description</key>
-			<string>When using the uninstallation command, also list apps from the Mac App Store. They will be opened with `AppCleaner.app` for clean uninstallation.</string>
+			<string>Also list apps from the Mac App Store. They will be uninstalled with `AppCleaner.app`. (Apps installed via homebrew are still uninstalled via homebrew.)</string>
 			<key>label</key>
 			<string></string>
 			<key>type</key>
@@ -874,7 +872,7 @@ and the Mac App Store.
 				<string>cleanup</string>
 			</dict>
 			<key>description</key>
-			<string>When using the uninstallation command on a cask, use `--zap`. This results in homebrew also cleaning up data and cache files from the app.</string>
+			<string>Use `--zap` when installing; this makes homebrew also clean up data and cache files from the package.</string>
 			<key>label</key>
 			<string></string>
 			<key>type</key>
@@ -884,7 +882,7 @@ and the Mac App Store.
 		</dict>
 	</array>
 	<key>version</key>
-	<string>2.1.0</string>
+	<string>2.1.1</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>

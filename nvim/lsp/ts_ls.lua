@@ -15,6 +15,7 @@ local config = {
 	settings = {
 		diagnostics = {
 			ignoredCodes = {
+				2451, -- "Cannot re-declare block-scoped variable" -> not useful for single-file-JXA
 				80001, -- "File is a CommonJS module; it may be converted to an ES module."
 			},
 		},
