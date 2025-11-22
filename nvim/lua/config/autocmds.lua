@@ -36,9 +36,9 @@ do
 		for _, lens in ipairs(lenses or {}) do
 			local title = lens.command and lens.command.title
 			if title then
-				local count = title:match("%d+")
-				local desc = vim.trim(title:gsub("%d+", ""))
-				lens.command.title = " " .. lens.command.title:gsub(" references$", "  ") .. " "
+				local count = title:match("%d+") or "?"
+				local type = title:gsub("%d+", ""):gsub("references?:?", "  ")
+				lens.command.title = " " .. vim.trim(type) .. " " .. count .. " "
 			end
 		end
 		originalDisplay(lenses, buffer, client_id)
