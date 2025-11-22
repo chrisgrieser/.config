@@ -25,7 +25,7 @@ local ensureInstalled = {
 		"tombi", -- toml lsp (more modern)
 		"taplo", -- toml lsp (more established)
 		"ts_query_ls", -- treesitter query files
-		"typescript-language-server",
+		"typescript-language-server", -- used via `typescript-tools.nvim`
 		"typos-lsp", -- spellchecker for code
 		"yaml-language-server",
 		"stylua", -- lua formatter
@@ -70,6 +70,7 @@ local function enableLsps()
 	local installedPacks = require("mason-registry").get_installed_packages()
 	local lspConfigNames = vim.iter(installedPacks):fold({}, function(acc, pack)
 		table.insert(acc, pack.spec.neovim and pack.spec.neovim.lspconfig)
+		if package.loaded["typescript-tools.nvim"] then
 		return acc
 	end)
 	vim.lsp.enable(lspConfigNames)

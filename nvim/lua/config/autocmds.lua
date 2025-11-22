@@ -16,17 +16,23 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
+--------------------------------------------------------------------------------
+
+-- LSP CODELENS
 vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained" }, {
 	desc = "User: enable LSP codelenses",
-	callback = function(ctx)
-		vim.lsp.codelens.refresh { bufnr = ctx.buf }
-	end,
+	callback = function(ctx) vim.lsp.codelens.refresh { bufnr = ctx.buf } end,
 })
 
-local onLens = vim.lsp.codelens.on_codelens
-vim.lsp.codelens.on_codelens = function (err, result, ctx) ---@diagnostic disable-line: duplicate-set-field
-	Chainsaw(result) -- 🪚
-	onLens(err, result, ctx)
+-- format with padding & icon
+local originalDisplay = vim.lsp.codelens.display
+vim.lsp.codelens.display = function(lenses, buffer, client_id) ---@diagnostic disable-line: duplicate-set-field
+	for _, lens in pairs(lenses or {}) do
+		if lens.command and lens.command.title then
+			lens.command.title = " " .. lens.command.title:gsub(" references$", "  ") .. " "
+		end
+	end
+	originalDisplay(lenses, buffer, client_id)
 end
 
 --------------------------------------------------------------------------------
