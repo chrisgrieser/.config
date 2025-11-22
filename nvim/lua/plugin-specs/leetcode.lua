@@ -38,7 +38,7 @@ return {
 		{ "<leader>xm", "<cmd>Leet menu<CR>", desc = "󰹯 Leetcode menu" },
 	},
 	opts = {
-		lang = "javascript", -- https://github.com/kawre/leetcode.nvim#lang
+		lang = "typescript", -- https://github.com/kawre/leetcode.nvim#lang
 		storage = {
 			home = vim.g.iCloudSync .. "/leetcode",
 		},
