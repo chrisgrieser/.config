@@ -346,23 +346,10 @@ keymap({ "n", "x" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "󱐋 Code 
 -- stylua: ignore start
 keymap({ "n", "i", "v" }, "<D-g>", function() vim.lsp.buf.signature_help { max_width = 70 } end, { desc = "󰏪 LSP signature" })
 keymap({ "n", "x" }, "<leader>h", function() vim.lsp.buf.hover { max_width = 70 } end, { desc = "󰋽 LSP hover" })
--- stylua: ignore end
 
-do
-	---@param lines integer
-	local function scrollLspWin(lines)
-		local winid = vim.b.lsp_floating_preview --> stores id of last `vim.lsp`-generated win
-		if not winid or not vim.api.nvim_win_is_valid(winid) then
-			return vim.notify("No LSP window found.", vim.log.levels.TRACE, { icon = "" })
-		end
-		vim.api.nvim_win_call(winid, function()
-			local topline = vim.fn.winsaveview().topline
-			vim.fn.winrestview { topline = topline + lines }
-		end)
-	end
-	keymap("n", "<PageDown>", function() scrollLspWin(5) end, { desc = "↓ Scroll LSP win" })
-	keymap("n", "<PageUp>", function() scrollLspWin(-5) end, { desc = "↑ Scroll LSP win" })
-end
+keymap("n", "<PageDown>", function() require("personal-plugins.misc").scrollLspOrOtherWin(5) end, { desc = "↓ Scroll other win" })
+keymap("n", "<PageUp>", function() require("personal-plugins.misc").scrollLspOrOtherWin(-5) end, { desc = "↑ Scroll other win" })
+-- stylua: ignore end
 
 --------------------------------------------------------------------------------
 

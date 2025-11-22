@@ -417,7 +417,8 @@ local function luckyIndent(bufnr)
 	local maxToCheck = math.min(linesToCheck, vim.api.nvim_buf_line_count(bufnr))
 	local lines = vim.api.nvim_buf_get_lines(bufnr, 0, maxToCheck, false)
 	for lnum = 1, #lines do
-		indent = lines[lnum]:match("^%s*")
+		-- require at least two spaces to avoid jsdoc setting indent to 1, etc.
+		indent = lines[lnum]:match("^  +") or lines[lnum]:match("^\t*")
 		if #indent > 0 then break end
 	end
 	local spaces = indent:match(" +")

@@ -1,6 +1,7 @@
 return {
 	"kawre/leetcode.nvim",
 	lazy = vim.fn.argv(0, -1) ~= "leetcode.nvim", -- start via `nvim "leetcode.nvim"`
+	cmd = "Leet",
 
 	dependencies = { "nvim-lua/plenary.nvim", "MunifTanjim/nui.nvim" },
 	config = function(_, opts)
@@ -24,7 +25,7 @@ return {
 		},
 		description = {
 			position = "left",
-			width = "50%",
+			width = "40%",
 		},
 	},
 }

@@ -13,13 +13,13 @@ return {
 			text = false, -- `pass` passwords editing ft (extra safeguard)
 		},
 		filter = function(bufnr)
-			-- not when recording
-			if vim.fn.reg_recording() ~= "" then return false end
+			if vim.fn.reg_recording() ~= "" then return false end -- not when recording
 
 			local parent = vim.fs.dirname(vim.api.nvim_buf_get_name(bufnr))
 			local name = vim.fs.basename(vim.api.nvim_buf_get_name(bufnr))
 			local ignoreBuffer = parent:find("private dotfiles")
-				or name:lower():find("recovery")
+				or parent:find("leetcode") -- leetcode.nvim without help
+				or name:lower():find("recovery") -- e.g. password recovery
 				or name == ".env"
 			return not ignoreBuffer -- `false` -> disable in that buffer
 		end,
