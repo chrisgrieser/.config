@@ -51,7 +51,7 @@ local config = {
 			}
 		end, { desc = " Template string code action", buffer = bufnr })
 
-		-- skip the "Move to file" code action
+		-- filter the "Move to file" code action
 		vim.keymap.set("n", "<leader>ca", function()
 			vim.lsp.buf.code_action {
 				filter = function(act) return act.kind ~= "refactor.move" end,
