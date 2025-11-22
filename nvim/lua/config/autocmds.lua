@@ -16,6 +16,19 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
+vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained" }, {
+	desc = "User: enable LSP codelenses",
+	callback = function(ctx)
+		vim.lsp.codelens.refresh { bufnr = ctx.buf }
+	end,
+})
+
+local onLens = vim.lsp.codelens.on_codelens
+vim.lsp.codelens.on_codelens = function (err, result, ctx) ---@diagnostic disable-line: duplicate-set-field
+	Chainsaw(result) -- 🪚
+	onLens(err, result, ctx)
+end
+
 --------------------------------------------------------------------------------
 
 -- COLORSCHEMES DEPENDING ON SYSTEM MODE

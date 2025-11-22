@@ -35,6 +35,7 @@ return {
 			hl.Removed = { fg = colors.red }
 			hl.Bold = { bold = true } -- FIX missing color in lazy.nvim window
 			hl.Italic = { italic = true } -- FIX missing color in lazy.nvim window
+			hl.LspCodeLens = { link = "LspInlayHint" }
 
 			-- Snacks
 			hl.SnacksPickerMatch = { fg = colors.yellow } -- make matches stand out more

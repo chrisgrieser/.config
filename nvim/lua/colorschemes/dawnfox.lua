@@ -36,6 +36,7 @@ return {
 				["Removed"] = { link = "diffRemoved" },
 				["Whitespace"] = { fg = "#dfccd4" }, -- a bit darker
 				Conceal = { link = "Comment" }, -- leetcode.nvim, also more readability
+				LspCodeLens = { link = "LspInlayHint" },
 
 				-- 1. `inline` code in comments
 				-- 2. italic removed only in markdown, (still inherited from comments elsewhere)
