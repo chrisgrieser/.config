@@ -145,7 +145,7 @@ function M.toggleOrIncrement()
 		["=="] = "!=",
 		[">"] = "<",
 		[">="] = "<=",
-		["||"] = "&&"
+		["||"] = "&&",
 	}
 	if vim.bo.ft == "javascript" or vim.bo.ft == "typescript" then
 		toggles["if"] = "else if" -- only one-way, due to the space in there
@@ -303,6 +303,25 @@ function M.inspectBuffer()
 end
 
 --------------------------------------------------------------------------------
+
+---@param lines integer
+function M.scrollLspOrOtherWin(lines)
+	-- 1. prio: LSP win 
+	local winid = vim.b.lsp_floating_preview --> stores id of last `vim.lsp`-generated win
+	assert (vim.api.nvim_win_is_valid(winid), winid .. " is not a valid winid")
+
+	-- 2. prio: other win
+	if not winid then
+		local wins = vim.api.nvim_tabpage_list_wins(0)
+	end
+
+	vim.api.nvim_win_call(winid, function()
+		local topline = vim.fn.winsaveview().topline
+		vim.fn.winrestview { topline = topline + lines }
+	end)
+end
+
+-----------------------------------------------------------------------------
 
 function M.lspCapabilities()
 	local clients = vim.lsp.get_clients { bufnr = 0 }
