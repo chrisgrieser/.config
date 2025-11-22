@@ -415,10 +415,12 @@ keymap("n", "<leader>ib", function() require("personal-plugins.misc").inspectBuf
 
 keymap("n", "<leader>ee", ":lua = ", { desc = "󰢱 Eval lua expr" })
 keymap("n", "<leader>ey", function()
-	local lastExcmd = vim.fn.getreg(":"):gsub("^lua ", ""):gsub("^= ?", "")
+	local cmd = vim.fn.getreg(":")
+	local syntax = vim.startswith(cmd, "lua") and "lua" or "vim"
+	local lastExcmd = cmd:gsub("^lua ", ""):gsub("^= ?", "")
 	if lastExcmd == "" then return vim.notify("Nothing to copy", vim.log.levels.WARN) end
 	vim.fn.setreg("+", lastExcmd)
-	vim.notify(lastExcmd, nil, { title = "Copied", icon = "󰅍" })
+	vim.notify(lastExcmd, nil, { title = "Copied", icon = "󰅍", ft = syntax })
 end, { desc = "󰘳 Yank last ex-cmd" })
 
 --------------------------------------------------------------------------------

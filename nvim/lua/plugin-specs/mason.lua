@@ -70,7 +70,6 @@ local function enableLsps()
 	local installedPacks = require("mason-registry").get_installed_packages()
 	local lspConfigNames = vim.iter(installedPacks):fold({}, function(acc, pack)
 		table.insert(acc, pack.spec.neovim and pack.spec.neovim.lspconfig)
-		if package.loaded["typescript-tools.nvim"] then
 		return acc
 	end)
 	vim.lsp.enable(lspConfigNames)
