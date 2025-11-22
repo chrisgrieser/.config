@@ -796,34 +796,13 @@ and the Mac App Store.
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>installation</string>
+			<string>keyword</string>
 			<key>label</key>
-			<string>Keywords</string>
+			<string>install</string>
 			<key>type</key>
 			<string>textfield</string>
 			<key>variable</key>
 			<string>install_keyword</string>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>default</key>
-				<string>bu</string>
-				<key>placeholder</key>
-				<string>bu</string>
-				<key>required</key>
-				<true/>
-				<key>trim</key>
-				<true/>
-			</dict>
-			<key>description</key>
-			<string>uninstallation</string>
-			<key>label</key>
-			<string></string>
-			<key>type</key>
-			<string>textfield</string>
-			<key>variable</key>
-			<string>uninstall_keyword</string>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -838,11 +817,32 @@ and the Mac App Store.
 			<key>description</key>
 			<string>When installing a package, also copy the line that needs to be added to a Brewfile.</string>
 			<key>label</key>
-			<string>install</string>
+			<string></string>
 			<key>type</key>
 			<string>checkbox</string>
 			<key>variable</key>
 			<string>copy_brewfile_line_on_install</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>bu</string>
+				<key>placeholder</key>
+				<string>bu</string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>keyword</string>
+			<key>label</key>
+			<string>uninstall</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>uninstall_keyword</string>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -857,7 +857,7 @@ and the Mac App Store.
 			<key>description</key>
 			<string>When using the uninstallation command, also list apps from the Mac App Store. They will be opened with `AppCleaner.app` for clean uninstallation.</string>
 			<key>label</key>
-			<string>uninstall</string>
+			<string></string>
 			<key>type</key>
 			<string>checkbox</string>
 			<key>variable</key>
