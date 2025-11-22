@@ -19,20 +19,30 @@ vim.api.nvim_create_autocmd("FileType", {
 --------------------------------------------------------------------------------
 
 -- LSP CODELENS
-vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained" }, {
-	desc = "User: enable LSP codelenses",
-	callback = function(ctx) vim.lsp.codelens.refresh { bufnr = ctx.buf } end,
-})
+do
+	vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained" }, {
+		desc = "User: enable LSP codelenses",
+		callback = function(ctx) vim.lsp.codelens.refresh { bufnr = ctx.buf } end,
+	})
+	vim.api.nvim_create_autocmd("LspProgress", {
+		desc = "User: initialize codelense on first buffer",
+		once = true,
+		callback = function(ctx) vim.lsp.codelens.refresh { bufnr = ctx.buf } end,
+	})
 
--- format with padding & icon
-local originalDisplay = vim.lsp.codelens.display
-vim.lsp.codelens.display = function(lenses, buffer, client_id) ---@diagnostic disable-line: duplicate-set-field
-	for _, lens in pairs(lenses or {}) do
-		if lens.command and lens.command.title then
-			lens.command.title = " " .. lens.command.title:gsub(" references$", "  ") .. " "
+	-- format with padding & icon
+	local originalDisplay = vim.lsp.codelens.display
+	vim.lsp.codelens.display = function(lenses, buffer, client_id) ---@diagnostic disable-line: duplicate-set-field
+		for _, lens in ipairs(lenses or {}) do
+			local title = lens.command and lens.command.title
+			if title then
+				local count = title:match("%d+")
+				local desc = vim.trim(title:gsub("%d+", ""))
+				lens.command.title = " " .. lens.command.title:gsub(" references$", "  ") .. " "
+			end
 		end
+		originalDisplay(lenses, buffer, client_id)
 	end
-	originalDisplay(lenses, buffer, client_id)
 end
 
 --------------------------------------------------------------------------------
