@@ -306,15 +306,20 @@ end
 
 ---@param lines integer
 function M.scrollLspOrOtherWin(lines)
-	-- 1. prio: LSP win 
+	-- 1. prio: LSP win
 	local winid = vim.b.lsp_floating_preview --> stores id of last `vim.lsp`-generated win
-	assert (vim.api.nvim_win_is_valid(winid), winid .. " is not a valid winid")
 
 	-- 2. prio: other win
 	if not winid then
-		local wins = vim.api.nvim_tabpage_list_wins(0)
+		local otherWin = vim.iter(vim.api.nvim_tabpage_list_wins(0)):find(function(win)
+			local notFloating = vim.api.nvim_win_get_config(win).relative == ""
+			local notThisWin = vim.api.nvim_get_current_win() ~= win
+			return notFloating and notThisWin
+		end)
+		winid = otherWin
 	end
 
+	if not winid then return vim.notify("No other window found.", vim.log.levels.WARN) end
 	vim.api.nvim_win_call(winid, function()
 		local topline = vim.fn.winsaveview().topline
 		vim.fn.winrestview { topline = topline + lines }

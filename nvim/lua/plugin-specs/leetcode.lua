@@ -7,6 +7,12 @@ return {
 	config = function(_, opts)
 		vim.g.whichkeyAddSpec { "<leader>x", group = "󰹂 Leetcode" }
 		require("leetcode").setup(opts)
+
+		local oldNotify = vim.notify
+		vim.notify = function(msg, level, opts)
+			if msg:find("leetcode.nvim") then return end
+			oldNotify(msg, level, opts)
+		end
 	end,
 	keys = {
 		-- https://github.com/kawre/leetcode.nvim#-commands
@@ -17,6 +23,7 @@ return {
 		{ "<leader>xp", "<cmd>Leet list difficulty=easy<CR>", desc = " Problem list" },
 		{ "<leader>xh", "<cmd>Leet info<CR>", desc = " Hints & similar problems" },
 		{ "<leader>xm", "<cmd>Leet menu<CR>", desc = "󰹯 Leetcode menu" },
+		{ "q", "q", ft = "leetcode.nvim", remap = true, nowait = true }, -- fix missing `nowait`
 	},
 	opts = {
 		lang = "javascript", -- https://github.com/kawre/leetcode.nvim#lang
