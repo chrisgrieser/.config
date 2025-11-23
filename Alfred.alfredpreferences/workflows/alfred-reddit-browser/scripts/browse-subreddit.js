@@ -38,7 +38,6 @@ function cacheIsOutdated(path) {
 	const cacheAgeThresholdMins = Number.parseInt($.getenv("cache_age_threshold"));
 	const cacheObj = Application("System Events").aliases[path];
 	if (!cacheObj.exists()) return true;
-	// biome-ignore lint/nursery/noMagicNumbers: clear here
 	const cacheAgeMins = (Date.now() - cacheObj.creationDate().getTime()) / 1000 / 60;
 	return cacheAgeMins > cacheAgeThresholdMins;
 }
@@ -205,16 +204,21 @@ function getRedditPosts(subredditName, oldItems) {
 	// DOCS https://www.reddit.com/dev/api#GET_new
 	const apiUrl = `https://www.reddit.com/r/${subredditName}/${opts.sortType}.json?limit=${opts.pagesToRequest}`;
 	const curlCommand = `curl --silent --user-agent "${userAgent}" "${apiUrl}"`;
-	let response;
+	const response = app.doShellScript(curlCommand);
+	let jsonData
 	try {
-		response = JSON.parse(app.doShellScript(curlCommand));
-		if (response.error) {
-			const errorMsg = `Error ${response.error}: ${response.message}`;
+		jsonData = JSON.parse(app.doShellScript(curlCommand));
+		if (jsonData.error) {
+			const errorMsg = `Error ${jsonData.error}: ${jsonData.message}`;
 			console.log(errorMsg);
 			return errorMsg;
 		}
 	} catch (_error) {
 		console.log("Failed curl command: " + curlCommand);
+		if (response.includes("You've been blocked by network security.")) {
+			console.log("network security complains.");
+			return "Reddit network security complains. Try again later.";
+		}
 		return "Unknown error.";
 	}
 
@@ -225,7 +229,7 @@ function getRedditPosts(subredditName, oldItems) {
 	if (!fileExists(iconPath)) iconPath = "icon.png"; // not cached
 
 	/** @type{AlfredItem[]} */
-	const redditPosts = response.data.children.reduce(
+	const redditPosts = jsonData.data.children.reduce(
 		(/** @type {AlfredItem[]} */ acc, /** @type {redditPost} */ data) => {
 			const item = data.data;
 			if (item.score < opts.minUpvotes) return acc;
