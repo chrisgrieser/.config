@@ -5,7 +5,8 @@
 
 local ensureInstalled = {
 	programmingLangs = {
-		"bash", -- also used for zsh
+		"bash", -- used for zsh
+		-- "zsh", -- PENDING https://github.com/georgeharker/tree-sitter-zsh/issues/13
 		"javascript",
 		"lua",
 		"python",
@@ -63,9 +64,11 @@ local ensureInstalled = {
 
 return {
 	"nvim-treesitter/nvim-treesitter",
-	branch = "main", -- new versions follow `main`
 	lazy = false,
 	build = ":TSUpdate",
+
+	-- branch = "main", -- new versions follow `main`
+	commit = "c682a239a9404ce5f90a2d0da34790eff1ed2932",
 
 	opts = {
 		install_dir = vim.fn.stdpath("data") .. "/treesitter",
