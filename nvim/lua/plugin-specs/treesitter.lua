@@ -6,7 +6,7 @@
 local ensureInstalled = {
 	programmingLangs = {
 		"bash", -- used for zsh
-		-- "zsh", -- PENDING https://github.com/georgeharker/tree-sitter-zsh/issues/13
+		"zsh",
 		"javascript",
 		"lua",
 		"python",
@@ -53,11 +53,6 @@ local ensureInstalled = {
 		"regex",
 		"rst", -- python reST
 	},
-	dependencies = {
-		"html_tags",
-		"ecma",
-		"jsx",
-	},
 }
 
 --------------------------------------------------------------------------------
@@ -66,20 +61,20 @@ return {
 	"nvim-treesitter/nvim-treesitter",
 	lazy = false,
 	build = ":TSUpdate",
-
-	-- branch = "main", -- new versions follow `main`
-	commit = "c682a239a9404ce5f90a2d0da34790eff1ed2932",
+	branch = "main", -- new versions follow `main`
 
 	opts = {
 		install_dir = vim.fn.stdpath("data") .. "/treesitter",
 	},
 	init = function()
 		-- auto-install parsers
-		local parsersToInstall = vim.iter(vim.tbl_values(ensureInstalled)):flatten():totable()
-		vim.defer_fn(function() require("nvim-treesitter").install(parsersToInstall) end, 1000)
-
-		-- use bash parser for zsh files
-		vim.treesitter.language.register("bash", "zsh")
+		if vim.fn.executable("tree-sitter") == 1 then
+			local parsersToInstall = vim.iter(vim.tbl_values(ensureInstalled)):flatten():totable()
+			vim.defer_fn(function() require("nvim-treesitter").install(parsersToInstall) end, 1000)
+		else
+			local msg = "`tree-sitter-cli` not found. Skipping auto-install of parsers."
+			vim.notify(msg, vim.log.levels.WARN, { title = "Treesitter" })
+		end
 
 		-- auto-start highlights & indentation
 		vim.api.nvim_create_autocmd("FileType", {

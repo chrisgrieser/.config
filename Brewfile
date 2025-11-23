@@ -9,7 +9,7 @@ brew "gh"
 brew "git-delta"
 brew "just"
 brew "mas"
-brew "neovim"
+brew "neovim" ; brew "tree-sitter-cli" # `nvim-treesitter` requires the cli
 brew "node"
 brew "pandoc"
 brew "pass"
@@ -23,12 +23,14 @@ brew "zsh-autopair"
 brew "zsh-autosuggestions"
 brew "zsh-history-substring-search"
 brew "zsh-syntax-highlighting"
-# tap "charmbracelet/tap" ; brew "charmbracelet/tap/crush"
 tap "felixkratz/formulae"; brew "felixkratz/formulae/sketchybar"
+# tap "charmbracelet/tap" ; brew "charmbracelet/tap/crush"
 
 # APPS
 cask "alfred"
+cask "alt-tab"
 cask "appcleaner"
+cask "betterzip"
 cask "brave-browser"
 cask "espanso"
 cask "font-jetbrains-mono-nerd-font"
@@ -47,12 +49,7 @@ mas "Highlights", id: 1498912833
 mas "Ivory", id: 6444602274
 mas "Easy CSV Editor", id: 1171346381
 
-cask "alt-tab"
-# cask "tabtab" # alt-tab not working https://github.com/neovide/neovide/issues/3182
-
-# QUICKLOOK
-cask "betterzip"
-mas "iPreview", id: 1519213509
+mas "iPreview", id: 1519213509 # quicklook
 
 #───────────────────────────────────────────────────────────────────────────────
 
