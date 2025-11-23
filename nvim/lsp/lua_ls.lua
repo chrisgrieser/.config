@@ -11,7 +11,7 @@ return {
 	settings = {
 		Lua = {
 			completion = {
-				callSnippet = "Disable", -- signature help more useful here
+				callSnippet = "Both",
 				keywordSnippet = "Replace",
 				showWord = "Disable", -- already done by completion plugin
 				workspaceWord = false, -- already done by completion plugin
@@ -29,7 +29,7 @@ return {
 				globals = { "vim" }, -- when working on nvim plugins that lack a `.luarc.json`
 			},
 			codeLens = {
-				enable = true,
+				enable = true, -- requires `vim.lsp.codelens.refresh` autocmd
 			},
 			hint = { -- inlay hints
 				enable = true,

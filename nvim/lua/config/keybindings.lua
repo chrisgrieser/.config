@@ -372,7 +372,7 @@ keymap("t", "<D-v>", [[<C-\><C-n>pi]], { desc = " Paste" })
 keymap("c", "<D-v>", "<C-r>+", { desc = " Paste" })
 keymap("c", "<D-c>", function()
 	local cmdline = vim.fn.getcmdline()
-	if cmdline == "" then return vim.notify("Nothing to copy", vim.log.levels.WARN) end
+	if cmdline == "" then return vim.notify("Nothing to copy.", vim.log.levels.WARN) end
 	vim.fn.setreg("+", cmdline)
 	vim.notify(cmdline, nil, { title = "Copied", icon = "󰅍" })
 end, { desc = "󰅍 Yank cmdline" })
@@ -400,8 +400,9 @@ keymap(
 --------------------------------------------------------------------------------
 -- INSPECT & EVAL
 
-keymap("n", "<leader>ii", vim.cmd.Inspect, { desc = "󱈄 :Inspect" })
+keymap("n", "<leader>ii", vim.cmd.Inspect, { desc = "󱈄 Highlights under cursor" })
 keymap("n", "<leader>it", vim.cmd.InspectTree, { desc = " :InspectTree" })
+keymap("n", "<leader>ip", "<cmd>checkhealth nvim-treesitter<CR>", { desc = " TS Parsers" })
 keymap("n", "<leader>id", function()
 	local diag = vim.diagnostic.get_next()
 	vim.notify(vim.inspect(diag), nil, { ft = "lua" })
