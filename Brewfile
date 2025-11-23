@@ -45,10 +45,9 @@ cask "signal"
 cask "slack"
 cask "wezterm"
 cask "zoom"
+mas "Easy CSV Editor", id: 1171346381
 mas "Highlights", id: 1498912833
 mas "Ivory", id: 6444602274
-mas "Easy CSV Editor", id: 1171346381
-
 mas "iPreview", id: 1519213509 # quicklook
 
 #───────────────────────────────────────────────────────────────────────────────

@@ -34,6 +34,7 @@ vim.g.whichkeyAddSpec = function() end ---@diagnostic disable-line: duplicate-se
 
 require("lazy").setup {
 	spec = "plugin-specs",
+	rocks = { enabled = false }, -- no need
 	defaults = { lazy = true },
 	lockfile = vim.fn.stdpath("config") .. "/.lazy-lock.json", -- make lockfile hidden
 	dev = {
