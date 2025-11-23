@@ -6,32 +6,37 @@
 
 local ensureInstalled = {
 	lsps = {
-		"basedpyright", -- python lsp (pyright fork)
 		"bash-language-server", -- also used for zsh
-		"biome", -- ts/js/json/css linter/formatter
-		"eslint-lsp", -- ts/js linter (only Obsidian plugins, otherwise using `biome`)
-		"css-lsp",
-		"css-variables-language-server", -- support css variables across multiple files
 		"efm", -- integration of external linters
-		"emmet-language-server", -- css/html snippets
 		"gh-actions-language-server", -- github actions
-		"harper-ls", -- natural language linter
 		"html-lsp",
 		"json-lsp",
 		"just-lsp",
-		"ltex-ls-plus", -- natural language linter (LanguageTool, ltex fork)
-		"marksman", -- markdown lsp
-		"ruff", -- python linter & formatter
 		"tombi", -- toml lsp (more modern)
 		"taplo", -- toml lsp (more established)
 		"ts_query_ls", -- treesitter query files
-		"typescript-language-server", -- used via `typescript-tools.nvim`
-		"typos-lsp", -- spellchecker for code
 		"yaml-language-server",
-		"stylua", -- lua formatter
+
+		"harper-ls", -- natural language linter
+		"typos-lsp", -- spellchecker for code
+		"ltex-ls-plus", -- natural language linter (LanguageTool, ltex fork)
+		"marksman", -- markdown lsp
+
+		"basedpyright", -- python lsp (pyright fork)
+		"ruff", -- python linter & formatter
 		-- "pyrefly", -- python type checker, still alpha
 		-- "ty", -- python type checker, still alpha
 
+		"biome", -- ts/js/json/css linter/formatter
+		"eslint-lsp", -- ts/js linter (only Obsidian plugins, otherwise using `biome`)
+		"typescript-language-server", -- used via `typescript-tools.nvim`
+		-- "tsgo", -- experimental typescript lsp
+
+		"css-lsp",
+		"css-variables-language-server", -- support css variables across multiple files
+		"emmet-language-server", -- css/html snippets
+
+		"stylua", -- lua formatter
 		vim.g.useEmmyluaLsp and "emmylua_ls" or "lua-language-server", -- lua LSP
 	},
 	linters = {

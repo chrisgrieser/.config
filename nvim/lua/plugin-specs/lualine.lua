@@ -75,23 +75,26 @@ return {
 						return curBranch ~= "main" and curBranch ~= "master"
 					end,
 				},
-				{ -- file name & icon
-					function()
-						local maxLength = 30
-						local name = vim.fs.basename(vim.api.nvim_buf_get_name(0))
-						if name == "" then name = vim.bo.ft end
-						if name == "" then name = "---" end
-						local displayName = #name < maxLength and name
-							or vim.trim(name:sub(1, maxLength)) .. "…"
 
-						local ok, icons = pcall(require, "mini.icons")
-						if not ok then return displayName end
-						local icon, _, isDefault = icons.get("file", name)
-						if isDefault then icon = icons.get("filetype", vim.bo.ft) end
-
-						return icon .. " " .. displayName
-					end,
-				},
+				{ "filetype", icon_only = true, colored = false },
+				{ "filename", file_status = true },
+				-- { -- file name & icon
+				-- 	function()
+				-- 		local maxLength = 30
+				-- 		local name = vim.fs.basename(vim.api.nvim_buf_get_name(0))
+				-- 		if name == "" then name = vim.bo.ft end
+				-- 		if name == "" then name = "---" end
+				-- 		local displayName = #name < maxLength and name
+				-- 			or vim.trim(name:sub(1, maxLength)) .. "…"
+				--
+				-- 		local ok, icons = pcall(require, "mini.icons")
+				-- 		if not ok then return displayName end
+				-- 		local icon, _, isDefault = icons.get("file", name)
+				-- 		if isDefault then icon = icons.get("filetype", vim.bo.ft) end
+				--
+				-- 		return icon .. " " .. displayName
+				-- 	end,
+				-- },
 			},
 			lualine_b = {
 				{ require("personal-plugins.magnet").altFileStatusbar },
