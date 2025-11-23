@@ -4,7 +4,22 @@ return {
 
 	dependencies = { "nvim-lua/plenary.nvim", "MunifTanjim/nui.nvim" },
 	config = function(_, opts)
+		-- add keymaps only when loading the plugin
+		-- https://github.com/kawre/leetcode.nvim#-commands
 		vim.g.whichkeyAddSpec { "<leader>x", group = "󰹂 Leetcode" }
+		local function map(...) vim.keymap.set("n", ...) end
+		map("<leader>xx", "<cmd>Leet run<CR>", { desc = " Run" })
+		map("<leader>xx", "<cmd>Leet run<CR>", { desc = " Run" })
+		map("<leader>xd", "<cmd>Leet desc<CR>", { desc = " Toggle problem desc" })
+		map("<leader>xs", "<cmd>Leet submit<CR>", { desc = " Submit" })
+		map("<leader>xo", "<cmd>Leet open<CR>", { desc = "󰖟 Open in browser" })
+		map("<leader>xh", "<cmd>Leet info<CR>", { desc = " Hints" })
+		map("<leader>xm", "<cmd>Leet menu<CR>", { desc = "󰹯 Leetcode menu" })
+		map("<leader>xp", "<cmd>Leet list difficulty=easy<CR>", { desc = " Problem list (easy)" })
+		-- stylua: ignore
+		map("<leader>xr", "<cmd>Leet random difficulty=easy<CR>", { desc = " Random problem (easy)" })
+		map("<leader>xa", "<cmd>Leet list status=ac<CR>", { desc = " Accepted problem" })
+
 		require("leetcode").setup(opts)
 
 		-- FIX snacks notifications not being replacing
@@ -17,7 +32,7 @@ return {
 			end
 		end, 1000) -- defer for notification plugin
 
-		-- FIX missing `nowait`
+		-- FIX missing `nowait` for `q`
 		vim.api.nvim_create_autocmd("FileType", {
 			pattern = "leetcode.nvim",
 			callback = function(ctx)
@@ -28,17 +43,6 @@ return {
 			end,
 		})
 	end,
-	keys = {
-		-- https://github.com/kawre/leetcode.nvim#-commands
-		{ "<leader>xx", "<cmd>Leet run<CR>", desc = " Run" },
-		{ "<leader>xd", "<cmd>Leet desc<CR>", desc = " Toggle problem desc" },
-		{ "<leader>xs", "<cmd>Leet submit<CR>", desc = " Submit" },
-		{ "<leader>xo", "<cmd>Leet open<CR>", desc = "󰖟 Open in browser" },
-		{ "<leader>xp", "<cmd>Leet list difficulty=easy<CR>", desc = " Problem list (easy)" },
-		{ "<leader>xr", "<cmd>Leet random difficulty=easy<CR>", desc = " Random problem (easy)" },
-		{ "<leader>xh", "<cmd>Leet info<CR>", desc = " Hints & similar problems" },
-		{ "<leader>xm", "<cmd>Leet menu<CR>", desc = "󰹯 Leetcode menu" },
-	},
 	opts = {
 		lang = "typescript", -- https://github.com/kawre/leetcode.nvim#lang
 		storage = {
