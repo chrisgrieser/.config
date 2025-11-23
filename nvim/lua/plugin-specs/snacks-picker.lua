@@ -26,7 +26,7 @@ local function importLuaModule()
 			require("snacks").picker.highlight.format(item, line, out)
 			return out
 		end,
-		confirm = function(picker, item) -- insert the grepped line below the current one
+		confirm = function(picker, item) -- insert the line below the current one
 			picker:close()
 			vim.cmd.normal { "o", bang = true }
 			vim.api.nvim_set_current_line(item.line)
