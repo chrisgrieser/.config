@@ -75,26 +75,23 @@ return {
 						return curBranch ~= "main" and curBranch ~= "master"
 					end,
 				},
+				{ -- file name & icon
+					function()
+						local maxLength = 30
+						local name = vim.fs.basename(vim.api.nvim_buf_get_name(0))
+						if name == "" then name = vim.bo.ft end
+						if name == "" then name = "---" end
+						local displayName = #name < maxLength and name
+							or vim.trim(name:sub(1, maxLength)) .. "…"
 
-				{ "filetype", icon_only = true, colored = false },
-				{ "filename", file_status = true },
-				-- { -- file name & icon
-				-- 	function()
-				-- 		local maxLength = 30
-				-- 		local name = vim.fs.basename(vim.api.nvim_buf_get_name(0))
-				-- 		if name == "" then name = vim.bo.ft end
-				-- 		if name == "" then name = "---" end
-				-- 		local displayName = #name < maxLength and name
-				-- 			or vim.trim(name:sub(1, maxLength)) .. "…"
-				--
-				-- 		local ok, icons = pcall(require, "mini.icons")
-				-- 		if not ok then return displayName end
-				-- 		local icon, _, isDefault = icons.get("file", name)
-				-- 		if isDefault then icon = icons.get("filetype", vim.bo.ft) end
-				--
-				-- 		return icon .. " " .. displayName
-				-- 	end,
-				-- },
+						local ok, icons = pcall(require, "mini.icons")
+						if not ok then return displayName end
+						local icon, _, isDefault = icons.get("file", name)
+						if isDefault then icon = icons.get("filetype", vim.bo.ft) end
+
+						return icon .. " " .. displayName
+					end,
+				},
 			},
 			lualine_b = {
 				{ require("personal-plugins.magnet").altFileStatusbar },
@@ -123,9 +120,8 @@ return {
 					"lsp_status",
 					icon = "󰒕",
 					ignore_lsp = { "typos_lsp", "efm" },
-					-- only show component if LSP is active
-					cond = function()
-						if vim.g.lualine_lsp_active == nil then -- create autocmd once
+					cond = function() -- only show component if LSP is active
+						if vim.g.lualine_lsp_active == nil then -- create autocmd only once
 							vim.g.lualine_lsp_active = false
 							vim.api.nvim_create_autocmd("LspProgress", {
 								desc = "User: Hide LSP progress component after 2s",
