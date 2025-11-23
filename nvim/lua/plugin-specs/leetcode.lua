@@ -46,7 +46,7 @@ return {
 		},
 		description = {
 			position = "left",
-			width = "60%",
+			width = "40%",
 		},
 	},
 }
