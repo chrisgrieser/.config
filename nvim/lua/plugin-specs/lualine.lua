@@ -78,7 +78,8 @@ return {
 				{ -- file name & icon
 					function()
 						local maxLength = 30
-						local name = vim.fs.basename(vim.api.nvim_buf_get_name(0))
+						local absPath = vim.api.nvim_buf_get_name(0)
+						local name = vim.fs.basename(absPath)
 						if name == "" then name = vim.bo.ft end
 						if name == "" then name = "---" end
 						local displayName = #name < maxLength and name
@@ -88,6 +89,7 @@ return {
 						if not ok then return displayName end
 						local icon, _, isDefault = icons.get("file", name)
 						if isDefault then icon = icons.get("filetype", vim.bo.ft) end
+						if vim.startswith(absPath, vim.g.notesDir) then icon = "" end
 
 						return icon .. " " .. displayName
 					end,

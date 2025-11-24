@@ -129,34 +129,28 @@ return {
 		--------------------------------------------------------------------------
 		-- LSP
 
-		{ "gf", function() require("snacks").picker.lsp_references() end, desc = "󰈿 References" },
 		-- stylua: ignore start
+		{ "gf", function() require("snacks").picker.lsp_references() end, desc = "󰈿 References" },
 		{ "gd", function() require("snacks").picker.lsp_definitions() end, desc = "󰈿 Definitions" },
 		{ "gD", function() require("snacks").picker.lsp_type_definitions() end, desc = "󰜁 Type definitions" },
 		{ "gw", function() require("snacks").picker.lsp_workspace_symbols() end, desc = "󰒕 Workspace symbols" },
 
 		-- `lsp_symbols` tends to too much clutter like anonymous function
 		{ "gs", function() require("snacks").picker.treesitter() end, desc = "󰐅 Treesitter symbols" },
-		-- stylua: ignore end
 		-- treesitter does not work for markdown, so using LSP symbols here
-		{
-			"gs",
-			function() require("snacks").picker.lsp_symbols() end,
-			ft = "markdown",
-			desc = "󰽛 Headings",
-		},
+		{ "gs", function() require("snacks").picker.lsp_symbols() end, ft = "markdown", desc = "󰽛 Headings" },
+		-- stylua: ignore end
 
 		--------------------------------------------------------------------------
 		-- GIT
 
 		{ "<leader>gs", function() require("snacks").picker.git_status() end, desc = "󰗲 Status" },
 		{ "<leader>gl", function() require("snacks").picker.git_log() end, desc = "󰗲 Log" },
-		-- stylua: ignore
-		{ "<leader>gH", function() require("snacks").picker.git_log_file() end, desc = "󰗲 File History" },
 		{ "<leader>ga", function() require("snacks").picker.git_diff() end, desc = "󰐖 Hunks" },
+		-- stylua: ignore
+		{ "<leader>gb", function() require("snacks").picker.git_branches() end, desc = "󰗲 Branches" },
 
 		-- stylua: ignore start
-		{ "<leader>gb", function() require("snacks").picker.git_branches() end, desc = "󰗲 Branches" },
 		{ "<leader>gi", function() require("snacks").picker.gh_issue() end, desc = " GitHub Issues (open)" },
 		{ "<leader>gI", function() require("snacks").picker.gh_issue { state = "all" } end, desc = " GitHub Issues (all)" },
 		{ "<leader>gp", function() require("snacks").picker.gh_pr() end, desc = " GitHub PRs (open)" },
@@ -193,10 +187,8 @@ return {
 		{ "g.", function() require("snacks").picker.resume() end, desc = "󰗲 Resume" },
 	},
 
-	init = require("config.utils").loadGhToken,
+	init = require("config.utils").loadGhToken, -- for issue & PR search
 	opts = {
-		gh = { -- https://github.com/folke/snacks.nvim/blob/main/docs/gh.md#%EF%B8%8F-config
-		},
 		picker = {
 			sources = {
 				undo = {
@@ -309,10 +301,6 @@ return {
 				recent = {
 					layout = "small_no_preview",
 					filter = {
-						paths = {
-							[vim.g.iCloudSync] = false,
-							-- [vim.g.notesDir .. "/.Archive"] = false,
-						},
 						filter = function(item) return vim.fs.basename(item.file) ~= "COMMIT_EDITMSG" end,
 					},
 				},
