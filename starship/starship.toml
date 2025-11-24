@@ -55,7 +55,7 @@ format = "[$path]($style) [$read_only]($read_only_style)"
 ".config" = " "
 "notes" = " "
 ".password-store" = " "
-"phd-data-analysis" = " "
+"phd-data-analysis" = "󰄨 "
 "writing-vault" = " "
 
 [custom.folder_number]
