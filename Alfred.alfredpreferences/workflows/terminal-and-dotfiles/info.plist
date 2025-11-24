@@ -197,7 +197,7 @@
 				<key>scriptfile</key>
 				<string>./scripts/open-dotfile.js</string>
 				<key>subtext</key>
-				<string></string>
+				<string>{var:dotfiles_folder}</string>
 				<key>title</key>
 				<string>Open a dotfile</string>
 				<key>type</key>
@@ -228,7 +228,7 @@
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>keyword</key>
-				<string>o</string>
+				<string>nn</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -246,9 +246,9 @@
 				<key>scriptfile</key>
 				<string>./scripts/notes-search.js</string>
 				<key>subtext</key>
-				<string></string>
+				<string>{var:notes_folder}</string>
 				<key>title</key>
-				<string>Files in Obsidian Vault</string>
+				<string>Files in Notes folder</string>
 				<key>type</key>
 				<integer>8</integer>
 				<key>withspace</key>

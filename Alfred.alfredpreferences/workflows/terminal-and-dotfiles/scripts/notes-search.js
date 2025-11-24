@@ -20,7 +20,7 @@ function run() {
 	const notes = app.doShellScript(
 		`PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH ; \
 			rg --no-config --files --hidden --sortr=modified \
-			--glob='!.Archive' --ignore-file="$HOME/.config/ripgrep/ignore" \
+			--glob='!.Archive' --glob='*.{md,pdf}' --ignore-file="$HOME/.config/ripgrep/ignore" \
 			"${notesFolder}"
 		`,
 	);
