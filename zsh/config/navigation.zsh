@@ -6,7 +6,7 @@
 # OPTIONS
 
 # make all directories in these folders available as `cd` targets from anywhere
-export CDPATH="$HOME/Desktop/:$HOME/Developer/:$HOME/Vaults"
+export CDPATH="$HOME/Desktop/:$HOME/Developer/:$ZDOTDIR/cd-bookmarks"
 
 setopt CD_SILENT   # don't echo the directory after `cd`
 setopt CHASE_LINKS # follow symlinks when they are `cd` target
