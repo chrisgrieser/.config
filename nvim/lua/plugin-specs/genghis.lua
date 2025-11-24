@@ -22,7 +22,9 @@ return {
 		-- stylua: ignore end
 
 		{ "<leader>fr", function() require("genghis").renameFile() end, desc = "󰑕 Rename" },
-		{ "<leader>fn", function() require("genghis").createNewFile() end, desc = "󰝒 New" },
+		-- stylua: ignore
+		{ "<leader>fn", function() require("genghis").createNewFileInFolder() end, desc = "󰝒 New in folder" },
+		{ "<leader>fN", function() require("genghis").createNewFile() end, desc = "󰝒 New" },
 		{ "<leader>fw", function() require("genghis").duplicateFile() end, desc = " Duplicate" },
 		{ "<leader>fm", function() require("genghis").moveToFolderInCwd() end, desc = "󱀱 Move" },
 		{ "<leader>fd", function() require("genghis").trashFile() end, desc = "󰩹 Delete" },

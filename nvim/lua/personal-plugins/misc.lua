@@ -94,11 +94,11 @@ function M.mdWrap(wrap)
 	end
 
 	-- cursor movement
-	local offset = wrap == "mdlink" and 1 or #wrap
-	vim.api.nvim_win_set_cursor(0, { row, col + offset })
 	if wrap == "mdlink" then
-	if	clipboardUrl == "" and text ~= "" then
-		vim.cmd.normal { "f)", bang = true } -- to insert a URL
+		vim.api.nvim_win_set_cursor(0, { row, col + 1 })
+		if clipboardUrl == "" and text ~= "" then vim.cmd.normal { "f)", bang = true } end
+	else
+		vim.api.nvim_win_set_cursor(0, { row, col + #wrap })
 	end
 	if text == "" or clipboardUrl == "" then vim.cmd.startinsert() end
 end
