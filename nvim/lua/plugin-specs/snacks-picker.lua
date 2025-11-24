@@ -96,7 +96,7 @@ return {
 	keys = {
 		-- FILES
 		{ "go", betterFileOpen, desc = " Open files" },
-		{ "gO", function() betterFileOpen(vim.g.notesDir) end, desc = " notes" },
+		{ "gn", function() betterFileOpen(vim.g.notesDir) end, desc = " Notes" },
 		{ "gt", function() require("snacks").picker.explorer() end, desc = "󰙅 File tree" },
 		{ "gP", browseProject, desc = " Project" },
 		{
@@ -311,7 +311,7 @@ return {
 					filter = {
 						paths = {
 							[vim.g.iCloudSync] = false,
-							[vim.g.notesDir .. "/.Archive"] = false,
+							-- [vim.g.notesDir .. "/.Archive"] = false,
 						},
 						filter = function(item) return vim.fs.basename(item.file) ~= "COMMIT_EDITMSG" end,
 					},
