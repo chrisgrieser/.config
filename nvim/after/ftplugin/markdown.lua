@@ -15,6 +15,63 @@ optl.listchars:append { multispace = "·" }
 if vim.bo.buftype == "" then optl.signcolumn = "yes:4" end
 
 --------------------------------------------------------------------------------
+-- AUTO BULLETS
+-- (simplified implementation of `bullets.vim`)
+do
+	optl.formatoptions:append("r") -- `<CR>` in insert mode
+	optl.formatoptions:append("o") -- `o` in normal mode
+
+	local function autoBullet(key)
+		-- cannot set opt.comments permanently, since it disturbs the correctly
+		-- indented continuation of bullet lists when hitting `opt.textwidth`
+		local comBefore = optl.comments:get()
+		-- stylua: ignore
+		optl.comments = {
+			"b:- [ ]", "b:- [x]", -- tasks
+			"b:*", "b:-", "b:+", "b:\t*", "b:\t-", "b:\t+", -- unordered list
+			"b:1.", "b:\t1.", -- ordered list
+			"n:>", -- blockquotes
+		}
+		vim.defer_fn(function() optl.comments = comBefore end, 1) -- deferred to restore only after key
+		return key
+	end
+
+	bkeymap("n", "o", function() return autoBullet("o") end, { expr = true })
+	bkeymap("i", "<CR>", function() return autoBullet("<CR>") end, { expr = true })
+end
+
+--------------------------------------------------------------------------------
+-- HEADINGS
+
+-- Jump to next/prev heading (`##` to skip level 1 and comments in code-blocks)
+bkeymap("n", "<C-j>", [[/^##\+ .*<CR>]], { desc = " Next heading" })
+bkeymap("n", "<C-k>", [[?^##\+ .*<CR>]], { desc = " Prev heading" })
+
+do
+	local function headingsIncremantor(dir) ---@param dir 1|-1
+		local lnum, col = unpack(vim.api.nvim_win_get_cursor(0))
+		local curLine = vim.api.nvim_get_current_line()
+
+		local updated = curLine:gsub("^#* ", function(match)
+			if dir == -1 and match ~= "# " then return match:sub(2) end
+			if dir == 1 and match ~= "###### " then return "#" .. match end
+			return ""
+		end)
+		if updated == curLine then updated = (dir == 1 and "## " or "###### ") .. curLine end
+
+		vim.api.nvim_set_current_line(updated)
+		local diff = #updated - #curLine
+		vim.api.nvim_win_set_cursor(0, { lnum, col + diff })
+	end
+
+	-- <D-h> remapped to <D-5>, since used by macOS PENDING https://github.com/neovide/neovide/issues/3099
+	-- stylua: ignore
+	bkeymap({ "n", "i" }, "<D-5>", function() headingsIncremantor(1) end, { desc = " Increment heading" })
+	-- stylua: ignore
+	bkeymap({ "n", "i" }, "<D-H>", function() headingsIncremantor(-1) end, { desc = " Decrement heading" })
+end
+
+--------------------------------------------------------------------------------
 
 -- CYCLE LIST TYPES
 bkeymap({ "n", "i" }, "<D-u>", function()
@@ -35,34 +92,57 @@ bkeymap({ "n", "i" }, "<D-u>", function()
 end, { desc = "󰍔 Cycle list types" })
 
 --------------------------------------------------------------------------------
--- MARKDOWN-SPECIFIC KEYMAPS
 
--- Tasks
-bkeymap("n", "<leader>x", "mzI- [ ] <Esc>`z", { desc = " Add task/checkbox" })
-
--- Format Table
-bkeymap("n", "<leader>rt", "vip:!pandoc --to=gfm<CR>", { desc = " Format table under cursor" })
-
--- cmd+k: markdown link
+-- MARKDOWN LINK
 bkeymap({ "n", "x", "i" }, "<D-k>", function()
 	local mode = vim.fn.mode()
+	if mode == "V" then return vim.notify("Visual line mode not supported", vim.log.levels.WARN) end
+
+	-- determine text
 	local title = mode == "n" and vim.fn.expand("<cword>") or ""
-	local curLine = vim.api.nvim_get_current_line()
+	if mode == "v" then
+		vim.cmd.normal { '"zy', bang = true }
+		title = vim.fn.getreg("z")
+	end
 	local row, col = unpack(vim.api.nvim_win_get_cursor(0))
 	local clipboardUrl = vim.fn.getreg("+"):match([[%l%l%l+://[^%s)%]}"'`>]+]]) or ""
 	local insert = ("[%s](%s)"):format(title, clipboardUrl)
 
+	-- insert
 	if mode == "n" then
 		vim.cmd.normal { '"_ciw' .. insert, bang = true }
-		vim.api.nvim_win_set_cursor(0, { row, col })
-	elseif mode:find("[Vv]") then
-		vim.cmd.normal { '"zy', bang = true }
+	elseif mode == "v" then
+		vim.cmd.normal { "gv", bang = true } -- re-select, since yank put us in normal mode
+		vim.cmd.normal { '"_c' .. insert, bang = true }
 	elseif mode == "i" then
+		local curLine = vim.api.nvim_get_current_line()
 		local newLine = curLine:sub(1, col) .. insert .. curLine:sub(col + 1)
 		vim.api.nvim_set_current_line(newLine)
-		vim.api.nvim_win_set_cursor(0, { row, col + 1 })
 	end
+
+	-- cursor movement
+	local offset = (clipboardUrl == "" and title ~= "") and #insert - 1 or 1
+	vim.api.nvim_win_set_cursor(0, { row, col + offset })
+	if title == "" or clipboardUrl == "" then vim.cmd.startinsert() end
 end, { desc = " Link" })
+
+--------------------------------------------------------------------------------
+
+-- MISC
+-- Format Table
+bkeymap("n", "<leader>rt", "vip:!pandoc --to=gfm<CR>", { desc = " Format table under cursor" })
+
+-- simplified version of `markdown-plus.nvim`
+
+-- cmd+b: bold
+bkeymap("n", "<D-b>", "bi**<Esc>ea**<Esc>", { desc = " Bold" })
+bkeymap("i", "<D-b>", "****<Left><Left>", { desc = " Bold" })
+bkeymap("x", "<D-b>", "<Esc>`<i**<Esc>`>lla**<Esc>", { desc = " Bold" })
+
+-- cmd+i: italics
+bkeymap("n", "<D-i>", "bi*<Esc>ea*<Esc>", { desc = " Italics" })
+bkeymap("i", "<D-i>", "**<Left>", { desc = " Italics" })
+bkeymap("x", "<D-i>", "<Esc>`<i*<Esc>`>la*<Esc>", { desc = " Italics" })
 
 --------------------------------------------------------------------------------
 

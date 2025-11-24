@@ -29,18 +29,15 @@ function run() {
 
 	/** @type {AlfredItem[]} */
 	const filesInVault = notes.split("\r").map((absPath) => {
-		const parts = absPath.split("/");
-		const displayName = (parts.pop() || "").replace(/\.md$/, "");
-		const parent = parts.join("/").slice(notesFolder.length + 1);
+		const name = absPath.replace(/.*\//, "");
+		const parent = absPath.slice(notesFolder.length + 1, -(name.length + 1)) || "/";
 
-		// matcher
 		return {
-			title: displayName,
+			title: name.replace(/\.md$/, ""),
 			subtitle: "▸ " + parent,
 			arg: absPath,
-			uid: absPath,
 			type: "file:skipcheck",
-			match: aMatcher(displayName) + aMatcher(parent),
+			match: aMatcher(absPath),
 		};
 	});
 
