@@ -377,7 +377,7 @@
 				<key>text</key>
 				<string></string>
 				<key>title</key>
-				<string>No cwd found</string>
+				<string>⚠️ No cwd found</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.output.notification</string>
