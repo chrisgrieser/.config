@@ -20,15 +20,15 @@ function alfredMatcher(str) {
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: alfred run
 function run() {
-	const dotfileFolder = $.getenv("dotfile_folder");
+	const dotfilesFolder = $.getenv("dotfiles_folder");
 	const modifiedFiles = app
-		.doShellScript(`git -C "${dotfileFolder}" diff --name-only`)
+		.doShellScript(`git -C "${dotfilesFolder}" diff --name-only`)
 		.split("\r");
 	const rgOutput = app
 		.doShellScript(
 			`PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH ; \
 			rg --no-config --files --hidden --sortr=modified \
-			--ignore-file=${dotfileFolder}/ripgrep/ignore "${dotfileFolder}"`,
+			--ignore-file=${dotfilesFolder}/ripgrep/ignore "${dotfilesFolder}"`,
 		)
 		.split("\r");
 
@@ -36,7 +36,7 @@ function run() {
 	const fileArray = rgOutput.map((absPath) => {
 		// params
 		const name = absPath.split("/").pop() || "ERROR";
-		const relPath = absPath.slice(dotfileFolder.length + 1);
+		const relPath = absPath.slice(dotfilesFolder.length + 1);
 		const relativeParentFolder = relPath.slice(0, -name.length - 1) || "/";
 		const matcher = alfredMatcher(`${name} ${relativeParentFolder}`);
 
@@ -73,7 +73,7 @@ function run() {
 	/** @type{AlfredItem|{}[]} */
 	const folderArray = app
 		.doShellScript(`
-			find "${dotfileFolder}" -type d \
+			find "${dotfilesFolder}" -type d \
 			-not -path "**/.git/*" \
 			-not -path "**/*.app/*" \
 			-not -path "**/Alfred.alfredpreferences/*" \
@@ -83,7 +83,7 @@ function run() {
 		.map((/** @type {string} */ absPath) => {
 			const name = absPath.split("/").pop();
 			if (!name) return {};
-			const relPath = absPath.slice(dotfileFolder.length);
+			const relPath = absPath.slice(dotfilesFolder.length);
 			const relativeParentFolder = relPath.slice(1, -name.length - 1) || "/";
 
 			return {
