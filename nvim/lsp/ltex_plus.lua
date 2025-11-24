@@ -29,5 +29,9 @@ return {
 			},
 		},
 	},
-	on_attach = require("config.utils").detachIfObsidianOrIcloud,
+	root_dir = function(bufnr, on_dir)
+		if require("config.utils").isObsidianOrNotesOrIcloud(bufnr) then return end
+		local rootMarkers = { ".git" }
+		on_dir(vim.fs.root(bufnr, rootMarkers))
+	end,
 }

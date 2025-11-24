@@ -32,7 +32,7 @@ keymap(
 	function()
 		assert(jit.os == "OSX" and vim.g.neovide, "requires macOS' `open -a` & neovide")
 		local script = [=[
-			while pgrep -xq "neovide" || pgrep -xq "nvim"; do
+			while pgrep -xq "neovide" ; do
 				sleep 0.05
 				i=$((i+1)) ; [[ $i -gt 40 ]] && return # timeout
 			done

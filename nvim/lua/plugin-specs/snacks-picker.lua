@@ -310,8 +310,8 @@ return {
 					layout = "small_no_preview",
 					filter = {
 						paths = {
-							[vim.fs.normalize("~/.config/hammerspoon/Spoons/EmmyLua.spoon")] = false,
-							[vim.g.iCloudSync] = false, -- e.g., scratch buffers
+							[vim.g.iCloudSync] = false,
+							[vim.g.notesDir .. "/.Archive"] = false,
 						},
 						filter = function(item) return vim.fs.basename(item.file) ~= "COMMIT_EDITMSG" end,
 					},
