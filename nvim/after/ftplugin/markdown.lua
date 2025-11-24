@@ -73,6 +73,11 @@ end
 
 --------------------------------------------------------------------------------
 
+-- Format Table
+bkeymap("n", "<leader>rt", "vip:!pandoc --to=gfm<CR>", { desc = " Format table under cursor" })
+
+--------------------------------------------------------------------------------
+
 -- CYCLE LIST TYPES
 bkeymap({ "n", "i" }, "<D-u>", function()
 	local lnum, col = unpack(vim.api.nvim_win_get_cursor(0))
@@ -90,35 +95,6 @@ bkeymap({ "n", "i" }, "<D-u>", function()
 	local diff = #updated - #curLine
 	vim.api.nvim_win_set_cursor(0, { lnum, math.max(1, col + diff) })
 end, { desc = "󰍔 Cycle list types" })
-
---------------------------------------------------------------------------------
-
--- MARKDOWN SYNTAX
-bkeymap(
-	{ "n", "x", "i" },
-	"<D-k>",
-	function() require("personal-plugins.misc").mdWrap("mdlink") end,
-	{ desc = " Link" }
-)
-bkeymap(
-	{ "n", "x", "i" },
-	"<D-b>",
-	function() require("personal-plugins.misc").mdWrap("**") end,
-	{ desc = " Bold" }
-)
-bkeymap(
-	{ "n", "x", "i" },
-	"<D-i>",
-	function() require("personal-plugins.misc").mdWrap("*") end,
-	{ desc = " Italic" }
-)
-
---------------------------------------------------------------------------------
-
--- MISC
--- Format Table
-bkeymap("n", "<leader>rt", "vip:!pandoc --to=gfm<CR>", { desc = " Format table under cursor" })
-
 
 --------------------------------------------------------------------------------
 

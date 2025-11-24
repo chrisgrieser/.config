@@ -169,6 +169,14 @@ end, { desc = "󰓆 Spell suggestions" })
 keymap("n", "m", "J", { desc = "󰽜 Merge line up" })
 keymap("n", "M", "<cmd>. move +1<CR>kJ", { desc = "󰽜 Merge line down" }) -- `:move` preserves marks
 
+-- Markdown syntax (for comments useful to have in all filetypes)
+-- stylua: ignore start
+keymap({ "n", "x", "i" }, "<D-e>", function() require("personal-plugins.misc").mdWrap("`") end, { desc = " Inline code" })
+keymap({ "n", "x", "i" }, "<D-k>", function() require("personal-plugins.misc").mdWrap("mdlink") end, { desc = " Link" })
+keymap({ "n", "x", "i" }, "<D-b>", function() require("personal-plugins.misc").mdWrap("**") end, { desc = " Bold" })
+keymap({ "n", "x", "i" }, "<D-i>", function() require("personal-plugins.misc").mdWrap("*") end, { desc = " Italic" })
+-- stylua: ignore end
+
 --------------------------------------------------------------------------------
 
 -- WHITESPACE & INDENTATION
@@ -276,16 +284,6 @@ keymap("i", "<D-v>", function()
 end, { desc = " Paste", expr = true })
 
 keymap("n", "<D-v>", "p", { desc = " Paste" }) -- compatibility w/ macOS clipboard managers
-
---------------------------------------------------------------------------------
--- SURROUND
-
-keymap("n", '"', 'bi"<Esc>ea"<Esc>', { desc = " Surround cword" })
-keymap("n", "(", "bi(<Esc>ea)<Esc>", { desc = "󰅲 Surround cword" })
-keymap("n", ")", "bi(<Esc>ea)<Esc>", { desc = "󰅲 Surround cword" })
-keymap("n", "<D-e>", "bi`<Esc>ea`<Esc>", { desc = " Inline code cword" })
-keymap("x", "<D-e>", "<Esc>`<i`<Esc>`>la`<Esc>", { desc = " Inline code selection" })
-keymap("i", "<D-e>", "``<Left>", { desc = " Inline code" })
 
 --------------------------------------------------------------------------------
 -- TEXTOBJECTS
