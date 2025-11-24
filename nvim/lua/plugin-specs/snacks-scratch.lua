@@ -4,13 +4,12 @@
 ---@param cmd string
 local function createRunKeymap(cmd)
 	local function runner(self) ---@param self { buf: number } passed by snacks
-		vim.cmd("silent! update") -- ensure changes are saved
+		vim.cmd("silent! update") -- save before running
 		local filepath = vim.api.nvim_buf_get_name(self.buf)
 		local result = vim.system({ cmd, filepath }):wait()
-		local out = vim.trim((result.stdout or "") .. "\n" .. (result.stderr or ""))
 
-		local installed, icons = pcall(require, "mini.icons")
-		local icon = installed and icons.get("filetype", vim.bo[self.buf].ft) or "󰜎"
+		local out = vim.trim((result.stdout or "") .. "\n" .. (result.stderr or ""))
+		local icon = require("snacks").util.icon(vim.bo[self.buf].ft, "filetype")
 		local level = vim.log.levels[result.code == 0 and "INFO" or "WARN"]
 
 		vim.notify(out, level, { title = cmd, icon = icon, ft = "text" })
@@ -34,14 +33,10 @@ return {
 	},
 	opts = {
 		scratch = {
-			filekey = { count = false, cwd = false, branch = false }, -- just use one scratch
+			filekey = { count = false, cwd = false, branch = false }, -- just one scratch per ft
 			win = {
-				relative = "editor",
-				position = "float", -- "right" also makes sense
-				width = 0.8,
-				height = 0.8,
-				wo = { signcolumn = "yes:1" },
-				zindex = 50, -- put above nvim-satellite
+				width = 0.75,
+				height = 0.75,
 				footer_pos = "right",
 				keys = { q = false, ["<D-w>"] = "close" }, -- so `q` is available as my comment operator
 				on_win = function(win)
