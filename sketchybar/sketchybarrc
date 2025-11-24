@@ -19,7 +19,6 @@ row_1="left"
 row_2="popup.clock"
 
 #───────────────────────────────────────────────────────────────────────────────
-# SKETCHYBAR CALL
 
 # PERF one call to speed up loading https://felixkratz.github.io/SketchyBar/config/tricks#batching-of-configuration-commands
 sketchybar \
