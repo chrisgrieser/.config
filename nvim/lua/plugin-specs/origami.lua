@@ -10,12 +10,5 @@ return {
 			padding = 2,
 			lineCount = { template = "󰘖 %d" },
 		},
-		autoFold = {
-			kinds = { "comment", "imports" }, ---@type lsp.FoldingRangeKind[]
-		},
-	},
-	keys = {
-		-- stylua: ignore
-		{ "<leader>if", function() require("origami").inspectLspFolds("special") end, desc = " LSP special folds" },
 	},
 }

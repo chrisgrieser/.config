@@ -177,8 +177,6 @@ return {
 		--------------------------------------------------------------------------
 		-- MISC
 
-		-- stylua: ignore
-		{ "<leader>pc", function() require("snacks").picker.colorschemes() end, desc = " Colorschemes" },
 		{ "<leader>ms", function() require("snacks").picker.marks() end, desc = "󰃁 Select mark" },
 		{ "<leader>ut", function() require("snacks").picker.undo() end, desc = "󰋚 Undo tree" },
 		-- stylua: ignore
