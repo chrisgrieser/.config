@@ -11,6 +11,7 @@
   "lsp_signature.nvim": { "branch": "master", "commit": "7d3bb0a641f516f1c7fd2e47852580dadbd7a430" },
   "lualine.nvim": { "branch": "master", "commit": "47f91c416daef12db467145e16bed5bbfe00add8" },
   "luvit-meta": { "branch": "main", "commit": "0ea4ff636c5bb559ffa78108561d0976f4de9682" },
+  "markdown-plus.nvim": { "branch": "main", "commit": "8d97fc89af60f6a4e6f4b40a3c5d61f3c50831e1" },
   "mason.nvim": { "branch": "main", "commit": "57e5a8addb8c71fb063ee4acda466c7cf6ad2800" },
   "mini.icons": { "branch": "main", "commit": "ff2e4f1d29f659cc2bad0f9256f2f6195c6b2428" },
   "mini.operators": { "branch": "main", "commit": "59f5fdbaaed7cce160076e70926cb16faadea78c" },
