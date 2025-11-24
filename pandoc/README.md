@@ -1,13 +1,3 @@
----
-aliases: 
-mdate: 2024-08-15T15:24
-related:
-  - "[[Bibliography Tools]]"
-tags:
-  - pandoc
-  - citation
-  - coding
----
 
 > [!INFO]  
 > This note is a symlink to `pandoc/README.md` in [my dotfile directory](https://github.com/chrisgrieser/dotfiles)
@@ -157,8 +147,8 @@ geometry: "margin=2cm"
 ## Filters
 - [raghur/mermaid-filter: Pandoc filter for creating diagrams in mermaid syntax blocks in markdown docs](https://github.com/raghur/mermaid-filter)
 - Tools for Automatic References
-	- [url2cite](https://github.com/phiresky/pandoc-url2cite/) ([usage with normal citekeys](https://github.com/phiresky/pandoc-url2cite/issues/10#issuecomment-899101361))
-	- [manubot](https://github.com/manubot)
+	+ [url2cite](https://github.com/phiresky/pandoc-url2cite/) ([usage with normal citekeys](https://github.com/phiresky/pandoc-url2cite/issues/10#issuecomment-899101361))
+	+ [manubot](https://github.com/manubot)
 - filters can be written in [[Lua]]
 
 > [!INFO] Priority of Filters  

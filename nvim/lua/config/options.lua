@@ -1,5 +1,6 @@
 -- MY VARIABLES
 vim.g.localRepos = vim.env.HOME .. "/Developer"
+vim.g.notesDir = vim.env.HOME .. "/notes"
 vim.g.iCloudSync = vim.env.HOME
 	.. "/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/nvim-data"
 
