@@ -93,38 +93,25 @@ end, { desc = "󰍔 Cycle list types" })
 
 --------------------------------------------------------------------------------
 
--- MARKDOWN LINK
-bkeymap({ "n", "x", "i" }, "<D-k>", function()
-	local mode = vim.fn.mode()
-	if mode == "V" then return vim.notify("Visual line mode not supported", vim.log.levels.WARN) end
-
-	-- determine text
-	local title = mode == "n" and vim.fn.expand("<cword>") or ""
-	if mode == "v" then
-		vim.cmd.normal { '"zy', bang = true }
-		title = vim.fn.getreg("z")
-	end
-	local row, col = unpack(vim.api.nvim_win_get_cursor(0))
-	local clipboardUrl = vim.fn.getreg("+"):match([[%l%l%l+://[^%s)%]}"'`>]+]]) or ""
-	local insert = ("[%s](%s)"):format(title, clipboardUrl)
-
-	-- insert
-	if mode == "n" then
-		vim.cmd.normal { '"_ciw' .. insert, bang = true }
-	elseif mode == "v" then
-		vim.cmd.normal { "gv", bang = true } -- re-select, since yank put us in normal mode
-		vim.cmd.normal { '"_c' .. insert, bang = true }
-	elseif mode == "i" then
-		local curLine = vim.api.nvim_get_current_line()
-		local newLine = curLine:sub(1, col) .. insert .. curLine:sub(col + 1)
-		vim.api.nvim_set_current_line(newLine)
-	end
-
-	-- cursor movement
-	local offset = (clipboardUrl == "" and title ~= "") and #insert - 1 or 1
-	vim.api.nvim_win_set_cursor(0, { row, col + offset })
-	if title == "" or clipboardUrl == "" then vim.cmd.startinsert() end
-end, { desc = " Link" })
+-- MARKDOWN SYNTAX
+bkeymap(
+	{ "n", "x", "i" },
+	"<D-k>",
+	function() require("personal-plugins.misc").mdWrap("mdlink") end,
+	{ desc = " Link" }
+)
+bkeymap(
+	{ "n", "x", "i" },
+	"<D-b>",
+	function() require("personal-plugins.misc").mdWrap("**") end,
+	{ desc = " Bold" }
+)
+bkeymap(
+	{ "n", "x", "i" },
+	"<D-i>",
+	function() require("personal-plugins.misc").mdWrap("*") end,
+	{ desc = " Italic" }
+)
 
 --------------------------------------------------------------------------------
 
@@ -132,17 +119,6 @@ end, { desc = " Link" })
 -- Format Table
 bkeymap("n", "<leader>rt", "vip:!pandoc --to=gfm<CR>", { desc = " Format table under cursor" })
 
--- simplified version of `markdown-plus.nvim`
-
--- cmd+b: bold
-bkeymap("n", "<D-b>", "bi**<Esc>ea**<Esc>", { desc = " Bold" })
-bkeymap("i", "<D-b>", "****<Left><Left>", { desc = " Bold" })
-bkeymap("x", "<D-b>", "<Esc>`<i**<Esc>`>lla**<Esc>", { desc = " Bold" })
-
--- cmd+i: italics
-bkeymap("n", "<D-i>", "bi*<Esc>ea*<Esc>", { desc = " Italics" })
-bkeymap("i", "<D-i>", "**<Left>", { desc = " Italics" })
-bkeymap("x", "<D-i>", "<Esc>`<i*<Esc>`>la*<Esc>", { desc = " Italics" })
 
 --------------------------------------------------------------------------------
 

@@ -58,6 +58,51 @@ function M.fastWarp(dir)
 	vim.api.nvim_win_set_cursor(0, { row, col + shift })
 end
 
+---Wraps text with markdown links, automatically inserting the URL if in a
+---Markdown link if the `+` register has a URL
+---@param wrap string|"mdlink"
+function M.mdWrap(wrap)
+	local mode = vim.fn.mode()
+	if mode == "V" then
+		return vim.notify("Visual line mode is not supported", vim.log.levels.WARN)
+	end
+	local row, col = unpack(vim.api.nvim_win_get_cursor(0))
+
+	-- determine text
+	local text = mode == "n" and vim.fn.expand("<cword>") or ""
+	if mode == "v" then
+		vim.cmd.normal { '"zy', bang = true }
+		text = vim.fn.getreg("z")
+	end
+	local insert = wrap .. text .. wrap
+	local clipboardUrl
+	if wrap == "mdlink" then
+		clipboardUrl = vim.fn.getreg("+"):match([[%l%l%l+://[^%s)%]}"'`>]+]]) or ""
+		insert = ("[%s](%s)"):format(text, clipboardUrl)
+	end
+
+	-- insert
+	if mode == "n" then
+		vim.cmd.normal { '"_ciw' .. insert, bang = true }
+	elseif mode == "v" then
+		vim.cmd.normal { "gv", bang = true } -- re-select, since yank put us in normal mode
+		vim.cmd.normal { '"_c' .. insert, bang = true }
+	elseif mode == "i" then
+		local curLine = vim.api.nvim_get_current_line()
+		local newLine = curLine:sub(1, col) .. insert .. curLine:sub(col + 1)
+		vim.api.nvim_set_current_line(newLine)
+	end
+
+	-- cursor movement
+	local offset = wrap == "mdlink" and 1 or #wrap
+	vim.api.nvim_win_set_cursor(0, { row, col + offset })
+	if wrap == "mdlink" then
+	if	clipboardUrl == "" and text ~= "" then
+		vim.cmd.normal { "f)", bang = true } -- to insert a URL
+	end
+	if text == "" or clipboardUrl == "" then vim.cmd.startinsert() end
+end
+
 --------------------------------------------------------------------------------
 
 ---start/stop with just one keypress & add notifications
