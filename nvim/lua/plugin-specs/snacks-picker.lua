@@ -264,9 +264,7 @@ return {
 					exclude = { -- keep this ignored even if toggling to show hidden/ignored
 						"node_modules",
 						".DS_Store",
-						"*.docx",
 						"*.zip",
-						"*.svg",
 					},
 					layout = "small_no_preview",
 					matcher = { frecency = true }, -- slight performance impact
@@ -278,15 +276,17 @@ return {
 							},
 						},
 					},
-					confirm = function (picker, item, action)
-						local itemPath = require("snacks").picker.util.path(item)
-						local binaryExt = { "pdf", "png" }
-						local ext = itempath:match("^.+%.([^.]+)$") or ""
+					-- if binary, open in system application instead
+					confirm = function(picker, item, action)
+						local absPath = require("snacks").picker.util.path(item) or ""
+						local binaryExt = { "pdf", "png", "webp" }
+						local ext = absPath:match(".+%.([^.]+)$") or ""
 						if vim.tbl_contains(binaryExt, ext) then
-							require("snacks.picker.actions").expl
-						else
-							require("snacks.picker.actions").confirm(picker, item, action)
+							vim.ui.open(absPath)
+							picker:close()
+							return
 						end
+						-- regular file open
 						require("snacks.picker.actions").confirm(picker, item, action)
 					end,
 					actions = {
