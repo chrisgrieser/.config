@@ -53,7 +53,7 @@ format = "[$path]($style) [$read_only]($read_only_style)"
 "~" = "/ "
 # my perma-repos
 ".config" = " "
-"Notes" = " "
+"notes" = " "
 ".password-store" = " "
 "phd-data-analysis" = " "
 "writing-vault" = " "
