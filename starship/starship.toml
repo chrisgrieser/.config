@@ -2,7 +2,7 @@
 # ──────────────────────────────────────────────────────────────────────────────
 
 format = """[\
-${custom.location_indicator}$directory${custom.folder_number}\
+${custom.dev_folder_indicator}$directory${custom.folder_number}\
 ${custom.main_branch}$git_branch\
 ${custom.venv_on}${custom.venv_off}\
 ${custom.npm_installed}\
@@ -50,6 +50,7 @@ format = "[$path]($style) [$read_only]($read_only_style)"
 # General
 "Library/Mobile Documents/com~apple~CloudDocs" = "󰀸 "
 "~/Desktop" = "/󰇄 "
+"~/Developer" = "/󱁤 "
 "~" = "/ "
 # my perma-repos
 ".config" = " "
@@ -65,7 +66,7 @@ command = "find . -mindepth 1 -maxdepth 1 -not -name '.git' -not -name '.DS_Stor
 format = "[󰝰 $output ]($style)"
 style = "fg:yellow bg:black"
 
-[custom.location_indicator]
+[custom.dev_folder_indicator]
 description = """Indicate if in a subfolder of my local repo folder. Helps
 differentiating between my local Alfred workflows and their respective repos."""
 format = "[ 󱁤 ]($style)"

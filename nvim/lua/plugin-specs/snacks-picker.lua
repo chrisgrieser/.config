@@ -153,8 +153,6 @@ return {
 		-- stylua: ignore start
 		{ "<leader>gi", function() require("snacks").picker.gh_issue() end, desc = " GitHub Issues (open)" },
 		{ "<leader>gI", function() require("snacks").picker.gh_issue { state = "all" } end, desc = " GitHub Issues (all)" },
-		{ "<leader>gp", function() require("snacks").picker.gh_pr() end, desc = " GitHub PRs (open)" },
-		{ "<leader>gP", function() require("snacks").picker.gh_pr { state = "all" } end, desc = " GitHub PRs (all)" },
 		-- stylua: ignore end
 
 		--------------------------------------------------------------------------

@@ -29,7 +29,7 @@ keymap("n", "<D-q>", vim.cmd.wqall, { desc = " Save & quit", unique = false }
 keymap(
 	{ "n", "x", "i" },
 	"<D-C-r>", -- `hyper` gets registered by neovide as `cmd+ctrl` (`D-C`)
-	function() require("personal-plugins.misc").restartNvim() end,
+	function() require("personal-plugins.misc").restartNeovide() end,
 	{ desc = " Save & Restart nvim" }
 )
 
@@ -479,7 +479,8 @@ end
 
 keymap("n", "<leader>rr", vim.lsp.buf.rename, { desc = "󰑕 LSP rename" })
 
-keymap("n", "<leader>rc", misc("camelSnakeLspRename"), { desc = "󰑕 LSP rename: camel/snake" })
+-- stylua: ignore
+keymap("n", "<leader>rc", function() require("personal-plugins.misc").renameCamelSnake() end, { desc = "󰑕 LSP rename: camel/snake" })
 
 keymap("n", "<leader>rq", function()
 	local updatedLine = vim.api.nvim_get_current_line():gsub("[\"']", { ['"'] = "'", ["'"] = '"' })

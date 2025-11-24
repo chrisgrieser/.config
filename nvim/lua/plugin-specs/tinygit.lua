@@ -5,7 +5,7 @@ return {
 		-- stylua: ignore start
 		{ "<leader>gg", function() require("tinygit").smartCommit { pushIfClean = true } end, desc = "󰊢 Smart-commit & push", nowait = true },
 		{ "<leader>gc", function() require("tinygit").smartCommit { pushIfClean = false } end, desc = "󰊢 Smart-commit" },
-		{ "<leader>g<Up>", function() require("tinygit").push { pullBefore = true } end, desc = "󰊢 Pull & push" },
+		{ "<leader>gp", function() require("tinygit").push { pullBefore = true } end, desc = "󰊢 Pull & push" },
 		{ "<leader>gf", function() require("tinygit").fixupCommit { autoRebase = true } end, desc = "󰊢 Fixup-commit & rebase" },
 		{ "<leader>gm", function() require("tinygit").amendNoEdit { forcePushIfDiverged = true } end, desc = "󰊢 Amend-commit & f-push" },
 		{ "<leader>gM", function() require("tinygit").amendOnlyMsg { forcePushIfDiverged = true } end, desc = "󰊢 Amend message & f-push" },
@@ -21,9 +21,6 @@ return {
 		-- stylua: ignore end
 	},
 	opts = {
-		stage = {
-			moveToNextHunkOnStagingToggle = true,
-		},
 		commit = {
 			keepAbortedMsgSecs = 60 * 10, -- 10 mins
 			spellcheck = true,
