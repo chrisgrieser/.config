@@ -53,10 +53,10 @@ format = "[$path]($style) [$read_only]($read_only_style)"
 "~" = "/ "
 # my perma-repos
 ".config" = " "
-"main-vault" = "󱉽 "
+"Notes" = " "
+".password-store" = " "
 "phd-data-analysis" = " "
 "writing-vault" = " "
-".password-store" = " "
 
 [custom.folder_number]
 description = "Number of files (and folders) in the current working directory"

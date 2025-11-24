@@ -81,15 +81,6 @@ rules:
         conditions: [*leader-active]
         to: [{ shell_command: open -a "System Preferences" }, *deactivate-leader, *remove-notice]
 
-      - description: "[o]bsidian (main vault)"
-        type: basic
-        from: { key_code: o }
-        conditions: [*leader-active]
-        to:
-          - shell_command: open "obsidian://open?vault=main-vault"
-          - *deactivate-leader
-          - *remove-notice
-
       - description: "[u] Obsidian (writing vault)"
         type: basic
         from: { key_code: u }

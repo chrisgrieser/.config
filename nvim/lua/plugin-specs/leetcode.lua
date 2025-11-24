@@ -1,3 +1,9 @@
+-- SETUP
+-- 1. Get cookie: https://github.com/kawre/leetcode.nvim#sign-in
+-- 2. Copy the `csrftoken` and `LEETCODE_SESSION` cookies, join them with `;`,
+-- and ensure no trailing line break
+--------------------------------------------------------------------------------
+
 return {
 	"kawre/leetcode.nvim",
 	lazy = vim.fn.argv(0, -1) ~= "leetcode.nvim", -- start via `nvim "leetcode.nvim"`
