@@ -1,45 +1,26 @@
 -- DOCS https://github.com/folke/snacks.nvim/blob/main/docs/scratch.md
 --------------------------------------------------------------------------------
 
----@param self { buf: number } passed by snacks
----@param cli string|string[]
----@param name string
-local function runner(self, cli, name)
-	local args = type(cli) == "table" and cli or { cli }
-	local file = vim.api.nvim_buf_get_name(self.buf)
-	vim.list_extend(args, { file })
+---@param cmd string
+local function createRunKeymap(cmd)
+	local function runner(self) ---@param self { buf: number } passed by snacks
+		vim.cmd("silent! update") -- ensure changes are saved
+		local filepath = vim.api.nvim_buf_get_name(self.buf)
+		local result = vim.system({ cmd, filepath }):wait()
+		local out = vim.trim((result.stdout or "") .. "\n" .. (result.stderr or ""))
 
-	vim.cmd("silent! update") -- ensure changes are saved
-	local result = vim.system(args):wait()
-	local out = vim.trim((result.stdout or "") .. "\n" .. (result.stderr or ""))
+		local installed, icons = pcall(require, "mini.icons")
+		local icon = installed and icons.get("filetype", vim.bo[self.buf].ft) or "󰜎"
+		local level = vim.log.levels[result.code == 0 and "INFO" or "WARN"]
 
-	local ok, icons = pcall(require, "mini.icons")
-	local icon = ok and icons.get("filetype", vim.bo[self.buf].ft) or "󰜎"
-	icon = icons.get("filetype", vim.bo[self.buf].ft)
-	local level = vim.log.levels[result.code == 0 and "INFO" or "WARN"]
+		vim.notify(out, level, { title = cmd, icon = icon, ft = "text" })
+	end
 
-	vim.notify(out, level, { title = name, icon = icon, ft = "text" })
-end
-
----@param cli1 string|string[]
----@param cli2 string|string[]|nil
-local function createRunKeymap(cli1, cli2)
-	local config = { keys = {} }
-	local name1 = type(cli1) == "string" and cli1 or cli1[1]
-	config.keys[name1] = {
-		"<CR>",
-		function(self) runner(self, cli1, name1) end,
-		desc = ("Run (%s)"):format(name1),
+	return {
+		keys = {
+			[cmd] = { "<CR>", runner, desc = ("Run (%s)"):format(cmd) },
+		},
 	}
-	if not cli2 then return config end
-
-	local name2 = type(cli2) == "string" and cli2 or cli2[1]
-	config.keys[name2] = {
-		"<S-CR>",
-		function(self) runner(self, cli2, name2) end,
-		desc = ("Run (%s)"):format(name2),
-	}
-	return config
 end
 
 --------------------------------------------------------------------------------
@@ -48,19 +29,11 @@ return {
 	"folke/snacks.nvim",
 	keys = {
 		{ "<leader>es", function() require("snacks").scratch() end, desc = " Scratch buffer" },
-		{
-			"<leader>el",
-			function() require("snacks").scratch.select() end,
-			desc = " List scratches",
-		},
+		-- stylua: ignore
+		{ "<leader>el", function() require("snacks").scratch.select() end, desc = " List scratches" },
 	},
 	opts = {
 		scratch = {
-			ft = function()
-				if vim.bo.buftype ~= "" or vim.bo.ft == "" then return "markdown" end
-				return vim.bo.ft
-			end,
-			root = vim.g.iCloudSync .. "/snacks_scratch",
 			filekey = { count = false, cwd = false, branch = false }, -- just use one scratch
 			win = {
 				relative = "editor",
@@ -70,7 +43,7 @@ return {
 				wo = { signcolumn = "yes:1" },
 				zindex = 50, -- put above nvim-satellite
 				footer_pos = "right",
-				keys = { q = false }, -- so `q` is available as my comment operator
+				keys = { q = false, ["<D-w>"] = "close" }, -- so `q` is available as my comment operator
 				on_win = function(win)
 					-- FIX display of scratchpad title (partially hardcoded when setting icon, etc.)
 					local icon = require("snacks").util.icon(vim.bo[win.buf].ft, "filetype")
@@ -79,12 +52,12 @@ return {
 				end,
 			},
 			win_by_ft = {
-				javascript = createRunKeymap("node", { "osascript", "-l", "JavaScript" }),
+				javascript = createRunKeymap("node"),
 				typescript = createRunKeymap("node"),
 				python = createRunKeymap("python3"),
 				applescript = createRunKeymap("osascript"),
 				swift = createRunKeymap("swift"),
-				zsh = createRunKeymap("zsh", "bash"),
+				zsh = createRunKeymap("zsh"),
 			},
 		},
 	},
