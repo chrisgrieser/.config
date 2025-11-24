@@ -1,10 +1,6 @@
 alias gs='git status'
 alias co='git checkout'
 alias gd='git diff'
-alias gt='git stash push && git stash show 0'
-alias gT='git stash pop'
-alias gi='gh issue list --state=open'
-alias gI='gh issue list --state=closed'
 alias gb='git switch'
 alias grh='git clean --force -d && git reset --hard' # remove untracked files & undo all changes
 
@@ -28,11 +24,10 @@ function sync_repo { "$(git rev-parse --show-toplevel)/.sync-this-repo.sh"; }
 
 #───────────────────────────────────────────────────────────────────────────────
 
-# lazy-export the GITHUB_TOKEN
+# do not expose GITHUB_TOKEN
 function gh {
 	_export_github_token # defined in .zshenv
 	command gh "$@"
-	unfunction gh
 }
 
 #───────────────────────────────────────────────────────────────────────────────
