@@ -183,6 +183,7 @@ return {
 		{ "<C-.>", function() require("snacks").picker.icons() end, mode = { "n", "i" }, desc = "󱗿 Icon picker" },
 
 		{ "g.", function() require("snacks").picker.resume() end, desc = "󰗲 Resume" },
+		{ "g!", function() require("snacks").picker.diagnostics() end, desc = " Diagnostics" },
 	},
 
 	init = require("config.utils").loadGhToken, -- for issue & PR search
