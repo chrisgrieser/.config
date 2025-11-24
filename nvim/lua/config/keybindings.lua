@@ -30,7 +30,7 @@ keymap(
 	{ "n", "x", "i" },
 	"<D-C-r>", -- `hyper` gets registered by neovide as `cmd+ctrl` (`D-C`)
 	function() require("personal-plugins.misc").restartNeovide() end,
-	{ desc = " Save & Restart nvim" }
+	{ desc = " Save & restart neovide" }
 )
 
 -- stylua: ignore
