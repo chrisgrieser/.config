@@ -26,28 +26,14 @@ function run() {
 		.split("\r");
 	const rgOutput = app
 		.doShellScript(
-			// `--follow` errors on broken symlinks, so we need to end with `|| true`
 			`PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH ; \
-			rg --no-config --files --hidden --follow --sortr=modified \
-			--ignore-file=${dotfileFolder}/ripgrep/ignore "${dotfileFolder}" 2>&1 || true`,
+			rg --no-config --files --hidden --sortr=modified \
+			--ignore-file=${dotfileFolder}/ripgrep/ignore "${dotfileFolder}"`,
 		)
 		.split("\r");
 
 	/** @type{AlfredItem|{}[]} */
 	const fileArray = rgOutput.map((absPath) => {
-		// GUARD check for broken symlinks
-		if (absPath.startsWith("rg: ")) {
-			const [_, brokenLink] = absPath.match(/rg: (.+?): /) || [];
-			const relPath = brokenLink.slice(dotfileFolder.length + 1);
-			const alfredItem = {
-				title: relPath,
-				subtitle: "⚠️ Broken symlink",
-				type: "file:skipcheck", // so `alt+return` reveals it in Finder
-				arg: brokenLink,
-			};
-			return alfredItem;
-		}
-
 		// params
 		const name = absPath.split("/").pop() || "ERROR";
 		const relPath = absPath.slice(dotfileFolder.length + 1);

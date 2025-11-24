@@ -96,6 +96,7 @@ return {
 	keys = {
 		-- FILES
 		{ "go", betterFileOpen, desc = " Open files" },
+		{ "gO", function() betterFileOpen(vim.g.notesDir) end, desc = " notes" },
 		{ "gt", function() require("snacks").picker.explorer() end, desc = "󰙅 File tree" },
 		{ "gP", browseProject, desc = " Project" },
 		{
@@ -105,8 +106,6 @@ return {
 			nowait = true, -- due to nvim default mappings starting with `gr`
 		},
 		{ "g,", function() betterFileOpen(vim.fn.stdpath("config")) end, desc = " nvim config" },
-		-- stylua: ignore
-		{ "g<CR>", function() betterFileOpen(os.getenv("HOME") .. "/.config") end, desc = " dotfiles" },
 		{
 			"gp",
 			function()
@@ -267,7 +266,6 @@ return {
 						".DS_Store",
 						"*.docx",
 						"*.zip",
-						"*.pptx",
 						"*.svg",
 					},
 					layout = "small_no_preview",
@@ -280,6 +278,17 @@ return {
 							},
 						},
 					},
+					confirm = function (picker, item, action)
+						local itemPath = require("snacks").picker.util.path(item)
+						local binaryExt = { "pdf", "png" }
+						local ext = itempath:match("^.+%.([^.]+)$") or ""
+						if vim.tbl_contains(binaryExt, ext) then
+							require("snacks.picker.actions").expl
+						else
+							require("snacks.picker.actions").confirm(picker, item, action)
+						end
+						require("snacks.picker.actions").confirm(picker, item, action)
+					end,
 					actions = {
 						complete_and_add_colon = function(picker)
 							-- snacks allows opening files with `file:lnum`, but it
