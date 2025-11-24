@@ -58,6 +58,21 @@ function M.fastWarp(dir)
 	vim.api.nvim_win_set_cursor(0, { row, col + shift })
 end
 
+function M.restartNeovide()
+	assert(jit.os == "OSX" and vim.g.neovide, "requires macOS' `open -a` & neovide")
+	local script = [=[
+		while pgrep -xq "neovide" ; do
+			sleep 0.05
+			i=$((i+1)) ; [[ $i -gt 40 ]] && return # timeout
+		done
+		sleep 0.1
+		open -a "neovide"
+	]=]
+
+	vim.system({ "zsh", "-c", script }, { detach = true }) -- detach to run after nvim quit
+	vim.cmd.wqall()
+end
+
 ---Wraps text with markdown links, automatically inserting the URL if in a
 ---Markdown link if the `+` register has a URL
 ---@param wrap string|"mdlink"

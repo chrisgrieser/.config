@@ -29,20 +29,7 @@ keymap("n", "<D-q>", vim.cmd.wqall, { desc = " Save & quit", unique = false }
 keymap(
 	{ "n", "x", "i" },
 	"<D-C-r>", -- `hyper` gets registered by neovide as `cmd+ctrl` (`D-C`)
-	function()
-		assert(jit.os == "OSX" and vim.g.neovide, "requires macOS' `open -a` & neovide")
-		local script = [=[
-			while pgrep -xq "neovide" ; do
-				sleep 0.05
-				i=$((i+1)) ; [[ $i -gt 40 ]] && return # timeout
-			done
-			sleep 0.1
-			open -a "neovide"
-		]=]
-
-		vim.system({ "zsh", "-c", script }, { detach = true }) -- detach to run after nvim quit
-		vim.cmd.wqall()
-	end,
+	function() require("personal-plugins.misc").restartNvim() end,
 	{ desc = " Save & Restart nvim" }
 )
 
@@ -93,7 +80,9 @@ keymap("n", "<D-U>", function() require("personal-plugins.misc").openUrlInBuffer
 --------------------------------------------------------------------------------
 -- MARKS
 do
-	require("personal-plugins.marks").setup {
+	local marks = require("personal-plugins.marks")
+
+	marks.setup {
 		marks = { "A", "B", "C" },
 		signs = {
 			hlgroup = "StandingOut",
@@ -104,14 +93,16 @@ do
 
 	if vim.g.whichkeyAddSpec then vim.g.whichkeyAddSpec { subLeader, group = "󰃃 Marks" } end
 
-	-- stylua: ignore
-	keymap("n", subLeader .. "m", function() require("personal-plugins.marks").cycleMarks() end, { desc = "󰃀 Cycle marks" })
-	-- stylua: ignore
-	keymap("n", subLeader .. "r", function() require("personal-plugins.marks").deleteAllMarks() end, { desc = "󰃆 Delete marks" })
+	keymap("n", subLeader .. "m", marks.cycleMarks, { desc = "󰃀 Cycle marks" })
+	keymap("n", subLeader .. "r", marks.deleteAllMarks, { desc = "󰃆 Delete marks" })
 
-	for _, mark in pairs(require("personal-plugins.marks").config.marks) do
-		-- stylua: ignore
-		keymap("n", subLeader .. mark:lower(), function() require("personal-plugins.marks").setUnsetMark(mark) end, { desc = "󰃃 Set " .. mark })
+	for _, mark in pairs(marks.config.marks) do
+		keymap(
+			"n",
+			subLeader .. mark:lower(),
+			function() marks.setUnsetMark(mark) end,
+			{ desc = "󰃃 Set " .. mark }
+		)
 	end
 end
 
@@ -488,8 +479,7 @@ end
 
 keymap("n", "<leader>rr", vim.lsp.buf.rename, { desc = "󰑕 LSP rename" })
 
--- stylua: ignore
-keymap("n", "<leader>rc", function() require("personal-plugins.misc").camelSnakeLspRename() end, { desc = "󰑕 LSP rename: camel/snake" })
+keymap("n", "<leader>rc", misc("camelSnakeLspRename"), { desc = "󰑕 LSP rename: camel/snake" })
 
 keymap("n", "<leader>rq", function()
 	local updatedLine = vim.api.nvim_get_current_line():gsub("[\"']", { ['"'] = "'", ["'"] = '"' })
