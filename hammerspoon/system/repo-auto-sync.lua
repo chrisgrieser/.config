@@ -1,5 +1,6 @@
 local config = {
 	syncIntervalMins = 30,
+	-- csv-format: "location,icon"
 	permaReposPath = os.getenv("HOME") .. "/.config/perma-repos.csv",
 }
 
@@ -16,13 +17,7 @@ local function notify(msg) hs.notify.show("Hammerspoon", "", msg) end
 ---@alias Repo { icon: string, location: string }
 --------------------------------------------------------------------------------
 
--- get repos from perma-repos.csv
 M.reposToSync = {} ---@type Repo[]
-for line in io.lines(config.permaReposPath) do
-	local location, icon, _ = line:match("^(.-),(.-),(.-)$")
-	if not (location and icon) then return end
-	table.insert(M.reposToSync, { location = location, icon = icon })
-end
 
 --------------------------------------------------------------------------------
 -- SYNC IMPLEMENTATION
@@ -64,6 +59,7 @@ end
 
 ---@param notifyOnSuccess boolean set to false for regularly occurring syncs
 local function syncAllGitRepos(notifyOnSuccess)
+	-- GUARD
 	local hasInternetAccess = hs.network.reachability.internet():statusString():find("R") ---@diagnostic disable-line: undefined-field
 	if not hasInternetAccess then
 		u.notify("🛜⛔ No internet connection.")
@@ -73,10 +69,18 @@ local function syncAllGitRepos(notifyOnSuccess)
 		return
 	end
 
+	-- get repos from perma-repos.csv
+	M.reposToSync = {} -- reset
+	for line in io.lines(config.permaReposPath) do
+		local location, icon, _ = line:match("^(.-),(.-)")
+		if not (location and icon) then return end
+		table.insert(M.reposToSync, { location = location, icon = icon })
+	end
+
+	-- sync them all
 	for _, repo in pairs(M.reposToSync) do
 		syncOneRepo(repo)
 	end
-
 	M.timer_AllSyncs = hs.timer
 		.waitUntil(function() return repoSyncsInProgress() == "" end, function()
 			local syncedIcons = hs.fnutils.map(M.finishedSyncing, function(r) return r.icon end) or {}
