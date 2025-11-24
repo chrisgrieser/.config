@@ -278,22 +278,24 @@ end, vim.api.nvim_create_namespace("autoNohlAndSearchCount"))
 --------------------------------------------------------------------------------
 -- SKELETONS (TEMPLATES)
 
--- CONFIG
-local templateDir = vim.fn.stdpath("config") .. "/templates"
-local globToTemplateMap = {
-	[vim.fn.stdpath("config") .. "/lua/plugin-specs/**/*.lua"] = "plugin-spec.lua",
-	[vim.fn.stdpath("config") .. "/lsp/*.lua"] = "lsp-server-config.lua",
-	["**/*.lua"] = "module.lua",
+local templateConfig = {
+	templateDir = vim.fn.stdpath("config") .. "/templates",
+	ignoreDirs = { vim.fn.stdpath("data") },
+	globToTemplateMap = {
+		[vim.fn.stdpath("config") .. "/lua/plugin-specs/**/*.lua"] = "plugin-spec.lua",
+		[vim.fn.stdpath("config") .. "/lsp/*.lua"] = "lsp-server-config.lua",
+		["**/*.lua"] = "module.lua",
 
-	["**/*.py"] = "template.py",
-	["**/*.swift"] = "template.swift",
-	["**/*.{sh,zsh}"] = "template.zsh",
-	["**/*.applescript"] = "template.applescript",
+		["**/*.py"] = "template.py",
+		["**/*.swift"] = "template.swift",
+		["**/*.{sh,zsh}"] = "template.zsh",
+		["**/*.applescript"] = "template.applescript",
 
-	["**/*.mjs"] = "node-module.mjs",
-	["**/Alfred.alfredpreferences/workflows/**/*.js"] = "jxa.js",
-	["**/Justfile"] = "justfile.just",
-	["**/.github/workflows/*.{yml,yaml}"] = "github-action.yaml",
+		["**/*.mjs"] = "node-module.mjs",
+		["**/Alfred.alfredpreferences/workflows/**/*.js"] = "jxa.js",
+		["**/Justfile"] = "justfile.just",
+		["**/.github/workflows/*.{yml,yaml}"] = "github-action.yaml",
+	},
 }
 
 vim.api.nvim_create_autocmd({ "BufNewFile", "BufReadPost" }, {
@@ -304,14 +306,18 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufReadPost" }, {
 			local stats = vim.uv.fs_stat(ctx.file)
 			if not stats or stats.size > 10 then return end -- 10 bytes for file metadata
 			local filepath, bufnr = ctx.file, ctx.buf
+			local conf = templateConfig
+			local ignore = vim.iter(conf.ignoreDirs)
+				:any(function(dir) return vim.startswith(filepath, dir) end)
+			if ignore then return end
 
 			-- determine template from glob
-			local longestMatchingGlob = vim.iter(globToTemplateMap)
+			local longestMatchingGlob = vim.iter(conf.globToTemplateMap)
 				:filter(function(glob) return vim.glob.to_lpeg(glob):match(filepath) end)
 				:fold("", function(longGlob, glob) return #longGlob < #glob and glob or longGlob end)
 			if longestMatchingGlob == "" then return end
-			local templateFile = globToTemplateMap[longestMatchingGlob]
-			local templatePath = vim.fs.normalize(templateDir .. "/" .. templateFile)
+			local templateFile = conf.globToTemplateMap[longestMatchingGlob]
+			local templatePath = vim.fs.normalize(conf.templateDir .. "/" .. templateFile)
 			if not vim.uv.fs_stat(templatePath) then return end
 
 			-- read template & move to cursor placeholder
