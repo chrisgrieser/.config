@@ -23,10 +23,7 @@ local config = {
 	ignore = { -- literal match in whole path
 		oldfiles = {
 			"/COMMIT_EDITMSG",
-			(function() -- avoid error if snacks is disabled
-				local installed, snacksScratch = pcall(require, "plugin-specs.snacks-scratch")
-				if installed then return snacksScratch.opts.scratch.root end
-			end)(),
+			vim.fn.stdpath("data"),
 		},
 		mostChangedFiles = {
 			"/info.plist", -- Alfred

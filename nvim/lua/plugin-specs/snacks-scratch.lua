@@ -28,7 +28,6 @@ return {
 	"folke/snacks.nvim",
 	keys = {
 		{ "<leader>es", function() Snacks.scratch() end, desc = " Scratch buffer" },
-		-- stylua: ignore
 		{ "<leader>el", function() Snacks.scratch.select() end, desc = " List scratches" },
 	},
 	opts = {
@@ -46,6 +45,21 @@ return {
 						:join(" ")
 						:gsub("  ", " ")
 					vim.api.nvim_win_set_config(win.win, { title = title })
+				end,
+				on_buf = function(buf)
+					-- get nvim-lua typings at scratch location
+					if buf.opts.bo.filetype == "lua" then
+						local luarc = vim.fn.stdpath("data") .. "/scratch/.luarc.jsonc"
+						local file = io.open(luarc, "w")
+						local content = [[ {
+							"runtime.version": "LuaJIT",
+							"workspace.library": ["$VIMRUNTIME/lua", "${3rd}/luv/library"],
+							"diagnostics.globals": ["Chainsaw"]
+						} ]]
+						assert(file, "Could not create luarc for lua scratch")
+						file:write(content)
+						file:close()
+					end
 				end,
 			},
 			win_by_ft = {

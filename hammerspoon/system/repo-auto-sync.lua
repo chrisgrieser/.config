@@ -120,7 +120,8 @@ M.caff_SleepWatcherForRepoSync = c.new(function(event)
 		or event == c.screensaverWillStop
 		or event == c.systemDidWake
 	then
-		u.defer(2, function()
+		local delay = env.isAtOffice and 4 or 0 -- office needs a bit for wifi
+		u.defer(delay, function()
 			syncAllGitRepos()
 			M.recentlyTriggered = true
 			u.defer(7, function() M.recentlyTriggered = false end)
