@@ -392,23 +392,22 @@ return {
 					installed = true,
 					confirm = function(picker, item)
 						picker:close()
-						local bufnr = vim.api.nvim_create_buf(false, true)
-						local text = vim.inspect(vim.lsp.config[item.name])
-						vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, vim.split(text, "\n"))
-						Snacks.win {
-							ft = "lua",
-							title = " 󱈄 " .. item.name .. " ",
-							buf = bufnr,
-							border = vim.o.winborder --[[@as "rounded"|"single"|"double"]],
-							wo = {
-								statuscolumn = " ", -- adds padding
-								cursorline = true,
-								winfixbuf = true,
-								fillchars = "fold: ,eob: ",
-								foldmethod = "expr",
-								foldexpr = "v:lua.vim.treesitter.foldexpr()",
-							},
-						}
+						vim.schedule(function() -- scheduling needed for treesitter folding
+							Snacks.win {
+								title = " 󱈄 " .. item.name .. " ",
+								text = vim.inspect(vim.lsp.config[item.name]),
+								border = vim.o.winborder --[[@as "rounded"|"single"|"double"]],
+								bo = { ft = "lua" }, -- `.bo.ft` instead of `.ft` needed for treesitter folding
+								wo = {
+									statuscolumn = " ", -- adds padding
+									cursorline = true,
+									winfixbuf = true,
+									fillchars = "fold: ,eob: ",
+									foldmethod = "expr",
+									foldexpr = "v:lua.vim.treesitter.foldexpr()",
+								},
+							}
+						end)
 					end,
 				},
 			},
