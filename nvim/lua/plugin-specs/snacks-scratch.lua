@@ -30,6 +30,18 @@ return {
 		{ "<leader>es", function() Snacks.scratch() end, desc = " Scratch buffer" },
 		{ "<leader>el", function() Snacks.scratch.select() end, desc = " List scratches" },
 	},
+	build = function()
+		-- get nvim-lua typings at scratch location
+		local luarc = vim.fn.stdpath("data") .. "/scratch/.luarc.jsonc"
+		local file = io.open(luarc, "w")
+		local content = [[ {
+			"runtime.version": "LuaJIT",
+			"workspace.library": ["$VIMRUNTIME/lua", "${3rd}/luv/library"]
+		} ]]
+		assert(file, "Could not create luarc for lua scratch")
+		file:write(content)
+		file:close()
+	end,
 	---@type snacks.Config
 	opts = {
 		scratch = {
@@ -46,21 +58,6 @@ return {
 						:join(" ")
 						:gsub("  ", " ")
 					vim.api.nvim_win_set_config(win.win, { title = title })
-				end,
-				on_buf = function(buf)
-					-- get nvim-lua typings at scratch location
-					if buf.opts.bo.filetype == "lua" then
-						local luarc = vim.fn.stdpath("data") .. "/scratch/.luarc.jsonc"
-						local file = io.open(luarc, "w")
-						local content = [[ {
-							"runtime.version": "LuaJIT",
-							"workspace.library": ["$VIMRUNTIME/lua", "${3rd}/luv/library"],
-							"diagnostics.globals": ["Chainsaw"]
-						} ]]
-						assert(file, "Could not create luarc for lua scratch")
-						file:write(content)
-						file:close()
-					end
 				end,
 			},
 			win_by_ft = {

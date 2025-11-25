@@ -65,7 +65,7 @@ local function betterFileOpen(dir)
 			local itemPath = Snacks.picker.util.path(item)
 			item.status = changedFiles[itemPath]
 			if vim.startswith(item.file, ".") then item.status = "!!" end -- hidden files
-			return require("snacks.picker.format").file(item, picker)
+			return Snacks.picker.format.file(item, picker)
 		end,
 	}
 end
@@ -202,8 +202,7 @@ return {
 							picker:close()
 							return
 						end
-						-- regular file open
-						require("snacks.picker.actions").confirm(picker, item, action)
+						Snacks.picker.actions.confirm(picker, item, action)
 					end,
 					actions = {
 						complete_and_add_colon = function(picker)
@@ -388,8 +387,8 @@ return {
 				gh_pr = { layout = "big_preview" },
 				lsp_config = {
 					title = "Available LSPs",
+					installed = true, -- only available LSPs
 					layout = "big_preview",
-					installed = true,
 					confirm = function(picker, item)
 						picker:close()
 						vim.schedule(function() -- scheduling needed for treesitter folding

@@ -37,7 +37,6 @@ return {
 	keys = {
 		{ "ö", function() Snacks.words.jump(1, true) end, desc = "󰗲 Next reference" },
 		{ "Ö", function() Snacks.words.jump(-1, true) end, desc = "󰗲 Prev reference" },
-		{ "<leader>g?", function() Snacks.git.blame_line() end, desc = "󰆽 Blame line" },
 		{
 			"<leader>oi",
 			function()
@@ -73,7 +72,7 @@ return {
 		words = {
 			notify_jump = true,
 			modes = { "n" },
-			debounce = 300,
+			debounce = 300, -- delay until highlight
 		},
 		indent = {
 			char = "│",
@@ -85,15 +84,6 @@ return {
 			animate = {
 				-- slower for more dramatic effect :o
 				duration = { steps = 200, total = 1000 },
-			},
-		},
-		styles = {
-			blame_line = {
-				relative = "editor",
-				width = 0.65,
-				height = 0.8,
-				border = vim.o.winborder --[[@as "rounded"|"single"|"double"|"solid"]],
-				title = " 󰆽 Git blame ",
 			},
 		},
 	},
