@@ -56,6 +56,8 @@ return {
 					cond = function() return vim.bo.buftype == "" end,
 					icon = "󰙅",
 				},
+			},
+			lualine_c = {
 				{ require("personal-plugins.breadcrumbs").statusline },
 			},
 			lualine_x = {
