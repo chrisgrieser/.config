@@ -9,7 +9,7 @@ local function createRunKeymap(cmd)
 		local result = vim.system({ cmd, filepath }):wait()
 
 		local out = vim.trim((result.stdout or "") .. "\n" .. (result.stderr or ""))
-		local icon = require("snacks").util.icon(vim.bo[self.buf].ft, "filetype")
+		local icon = Snacks.util.icon(vim.bo[self.buf].ft, "filetype")
 		local level = vim.log.levels[result.code == 0 and "INFO" or "WARN"]
 
 		vim.notify(out, level, { title = cmd, icon = icon, ft = "text" })
@@ -27,9 +27,9 @@ end
 return {
 	"folke/snacks.nvim",
 	keys = {
-		{ "<leader>es", function() require("snacks").scratch() end, desc = " Scratch buffer" },
+		{ "<leader>es", function() Snacks.scratch() end, desc = " Scratch buffer" },
 		-- stylua: ignore
-		{ "<leader>el", function() require("snacks").scratch.select() end, desc = " List scratches" },
+		{ "<leader>el", function() Snacks.scratch.select() end, desc = " List scratches" },
 	},
 	opts = {
 		scratch = {

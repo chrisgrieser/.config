@@ -87,7 +87,7 @@ return {
 			mappings = false, -- disable icons for keymaps.
 			-- NOTE we cannot get icons from the keymap descriptions, so we just
 			-- use the icons from there and disable whickey's icon features
-			keys = { PageDown = "󰇚", PageUp = "󰸇" }
+			keys = { PageDown = "󰇚", PageUp = "󰸇" },
 		},
 		show_help = false,
 	},

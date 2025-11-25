@@ -4,7 +4,7 @@
 
 -- lightweight version of `telescope-import.nvim`
 local function importLuaModule()
-	require("snacks").picker.grep_word {
+	Snacks.picker.grep_word {
 		title = "󰢱 Import module",
 		cmd = "rg",
 		args = { "--only-matching" },
@@ -23,7 +23,7 @@ local function importLuaModule()
 		format = function(item, _picker) -- only display the grepped line
 			local out = {}
 			local line = item.line:gsub("^local ", "")
-			require("snacks").picker.highlight.format(item, line, out)
+			Snacks.picker.highlight.format(item, line, out)
 			return out
 		end,
 		confirm = function(picker, item) -- insert the line below the current one
@@ -38,7 +38,7 @@ end
 ---@param dir string? defaults to cwd
 local function betterFileOpen(dir)
 	local changedFiles = {}
-	local gitDir = require("snacks").git.get_root(dir)
+	local gitDir = Snacks.git.get_root(dir)
 	if gitDir then
 		local args = { "git", "-C", gitDir, "status", "--porcelain", "--ignored" }
 		local gitStatus = vim.system(args):wait().stdout or ""
@@ -54,15 +54,15 @@ local function betterFileOpen(dir)
 	end
 
 	local currentFile = vim.api.nvim_buf_get_name(0)
-	require("snacks").picker.files {
+	Snacks.picker.files {
 		cwd = dir,
 		title = "󰝰 " .. vim.fs.basename(dir or vim.uv.cwd()),
 		transform = function(item, _ctx) -- exclude the current file
-			local itemPath = require("snacks").picker.util.path(item)
+			local itemPath = Snacks.picker.util.path(item)
 			if itemPath == currentFile then return false end
 		end,
 		format = function(item, picker) -- add git status highlights
-			local itemPath = require("snacks").picker.util.path(item)
+			local itemPath = Snacks.picker.util.path(item)
 			item.status = changedFiles[itemPath]
 			if vim.startswith(item.file, ".") then item.status = "!!" end -- hidden files
 			return require("snacks.picker.format").file(item, picker)
@@ -97,11 +97,11 @@ return {
 		-- FILES
 		{ "go", betterFileOpen, desc = " Open files" },
 		{ "gn", function() betterFileOpen(vim.g.notesDir) end, desc = " Notes" },
-		{ "gt", function() require("snacks").picker.explorer() end, desc = "󰙅 File tree" },
+		{ "gt", function() Snacks.picker.explorer() end, desc = "󰙅 File tree" },
 		{ "gP", browseProject, desc = " Project" },
 		{
 			"gr",
-			function() require("snacks").picker.recent() end,
+			function() Snacks.picker.recent() end,
 			desc = "󰋚 Recent files",
 			nowait = true, -- due to nvim default mappings starting with `gr`
 		},
@@ -109,7 +109,7 @@ return {
 		{
 			"gp",
 			function()
-				require("snacks").picker.files {
+				Snacks.picker.files {
 					title = "󰈮 Local plugins",
 					cwd = vim.fn.stdpath("data") .. "/lazy",
 					exclude = { "*/tests/*", "*.toml", "*.tmux", "*.txt" },
@@ -123,67 +123,65 @@ return {
 		--------------------------------------------------------------------------
 		-- GREP
 
-		{ "gl", function() require("snacks").picker.grep() end, desc = "󰛢 Grep" },
+		{ "gl", function() Snacks.picker.grep() end, desc = "󰛢 Grep" },
 		{ "<leader>ci", importLuaModule, ft = "lua", desc = "󰢱 Import module" },
 
 		--------------------------------------------------------------------------
 		-- LSP
 
 		-- stylua: ignore start
-		{ "gf", function() require("snacks").picker.lsp_references() end, desc = "󰈿 References" },
-		{ "gd", function() require("snacks").picker.lsp_definitions() end, desc = "󰈿 Definitions" },
-		{ "gD", function() require("snacks").picker.lsp_type_definitions() end, desc = "󰜁 Type definitions" },
-		{ "gw", function() require("snacks").picker.lsp_workspace_symbols() end, desc = "󰒕 Workspace symbols" },
-		{ "<leader>il", function() require("snacks").picker.lsp_config() end, desc = "󰒕 LSP servers" },
+		{ "gf", function() Snacks.picker.lsp_references() end, desc = "󰈿 References" },
+		{ "gd", function() Snacks.picker.lsp_definitions() end, desc = "󰈿 Definitions" },
+		{ "gD", function() Snacks.picker.lsp_type_definitions() end, desc = "󰜁 Type definitions" },
+		{ "gw", function() Snacks.picker.lsp_workspace_symbols() end, desc = "󰒕 Workspace symbols" },
+		{ "<leader>il", function() Snacks.picker.lsp_config() end, desc = "󰒕 LSP servers" },
 
 		-- `lsp_symbols` tends to too much clutter like anonymous function
-		{ "gs", function() require("snacks").picker.treesitter() end, desc = "󰐅 Treesitter symbols" },
+		{ "gs", function() Snacks.picker.treesitter() end, desc = "󰐅 Treesitter symbols" },
 		-- treesitter does not work for markdown, so using LSP symbols here
-		{ "gs", function() require("snacks").picker.lsp_symbols() end, ft = "markdown", desc = "󰽛 Headings" },
+		{ "gs", function() Snacks.picker.lsp_symbols() end, ft = "markdown", desc = "󰽛 Headings" },
 		-- stylua: ignore end
 
 		--------------------------------------------------------------------------
 		-- GIT
 
-		{ "<leader>gs", function() require("snacks").picker.git_status() end, desc = "󰗲 Status" },
-		{ "<leader>gl", function() require("snacks").picker.git_log() end, desc = "󰗲 Log" },
-		{ "<leader>ga", function() require("snacks").picker.git_diff() end, desc = "󰐖 Hunks" },
+		{ "<leader>gs", function() Snacks.picker.git_status() end, desc = "󰗲 Status" },
+		{ "<leader>gl", function() Snacks.picker.git_log() end, desc = "󰗲 Log" },
+		{ "<leader>ga", function() Snacks.picker.git_diff() end, desc = "󰐖 Hunks" },
 		-- stylua: ignore
-		{ "<leader>gb", function() require("snacks").picker.git_branches() end, desc = "󰗲 Branches" },
+		{ "<leader>gb", function() Snacks.picker.git_branches() end, desc = "󰗲 Branches" },
 
 		-- stylua: ignore start
-		{ "<leader>gi", function() require("snacks").picker.gh_issue() end, desc = " GitHub Issues (open)" },
-		{ "<leader>gI", function() require("snacks").picker.gh_issue { state = "all" } end, desc = " GitHub Issues (all)" },
+		{ "<leader>gi", function() Snacks.picker.gh_issue() end, desc = " GitHub Issues (open)" },
+		{ "<leader>gI", function() Snacks.picker.gh_issue { state = "all" } end, desc = " GitHub Issues (all)" },
 		-- stylua: ignore end
 
 		--------------------------------------------------------------------------
 		-- INSPECT
 
-		{ "<leader>iv", function() require("snacks").picker.help() end, desc = "󰋖 Vim help" },
+		{ "<leader>iv", function() Snacks.picker.help() end, desc = "󰋖 Vim help" },
 		-- stylua: ignore start
-		{ "<leader>ih", function() require("snacks").picker.highlights() end, desc = " Highlights" },
-		{ "<leader>is", function() require("snacks").picker.pickers() end, desc = "󰗲 Snacks pickers" },
-		{ "<leader>ik", function() require("snacks").picker.keymaps() end, desc = "󰌌 Keymaps (global)" },
+		{ "<leader>ih", function() Snacks.picker.highlights() end, desc = " Highlights" },
+		{ "<leader>is", function() Snacks.picker.pickers() end, desc = "󰗲 Snacks pickers" },
+		{ "<leader>ik", function() Snacks.picker.keymaps() end, desc = "󰌌 Keymaps (global)" },
 		-- stylua: ignore end
 		{
 			"<leader>iK",
-			function()
-				require("snacks").picker.keymaps { global = false, title = "󰌌 Keymaps (buffer)" }
-			end,
+			function() Snacks.picker.keymaps { global = false, title = "󰌌 Keymaps (buffer)" } end,
 			desc = "󰌌 Keymaps (buffer)",
 		},
 
 		--------------------------------------------------------------------------
 		-- MISC
 		-- stylua: ignore
-		{ "<leader>pc", function() require("snacks").picker.colorschemes() end, desc = " Colorschemes" },
-		{ "<leader>ms", function() require("snacks").picker.marks() end, desc = "󰃁 Select mark" },
-		{ "<leader>ut", function() require("snacks").picker.undo() end, desc = "󰋚 Undo tree" },
+		{ "<leader>pc", function() Snacks.picker.colorschemes() end, desc = " Colorschemes" },
+		{ "<leader>ms", function() Snacks.picker.marks() end, desc = "󰃁 Select mark" },
+		{ "<leader>ut", function() Snacks.picker.undo() end, desc = "󰋚 Undo tree" },
 		-- stylua: ignore
-		{ "<C-.>", function() require("snacks").picker.icons() end, mode = { "n", "i" }, desc = "󱗿 Icon picker" },
+		{ "<C-.>", function() Snacks.picker.icons() end, mode = { "n", "i" }, desc = "󱗿 Icon picker" },
 
-		{ "g.", function() require("snacks").picker.resume() end, desc = "󰗲 Resume" },
-		{ "g!", function() require("snacks").picker.diagnostics() end, desc = " Diagnostics" },
+		{ "g.", function() Snacks.picker.resume() end, desc = "󰗲 Resume" },
+		{ "g!", function() Snacks.picker.diagnostics() end, desc = " Diagnostics" },
 	},
 
 	init = require("config.utils").loadGhToken, -- for issue & PR search
@@ -215,7 +213,7 @@ return {
 					},
 					-- if binary, open in system application instead
 					confirm = function(picker, item, action)
-						local absPath = require("snacks").picker.util.path(item) or ""
+						local absPath = Snacks.picker.util.path(item) or ""
 						local binaryExt = { "pdf", "png", "webp", "docx" }
 						local ext = absPath:match(".+%.([^.]+)$") or ""
 						if vim.tbl_contains(binaryExt, ext) then
@@ -412,25 +410,25 @@ return {
 					layout = "big_preview",
 					installed = true,
 					confirm = function(picker, item)
-							picker:close()
-							local bufnr = vim.api.nvim_create_buf(false, true)
-							local text = vim.inspect(vim.lsp.config[item.name])
-							vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, vim.split(text, "\n"))
-							require("snacks").win {
-								ft = "lua",
-								title = " 󱈄 " .. item.name .. " ",
-								buf = bufnr,
-								border = vim.o.winborder --[[@as "rounded"|"single"|"double"]],
-								wo = {
-									statuscolumn = " ", -- adds padding
-									cursorline = true,
-									winfixbuf = true,
-									fillchars = "fold: ,eob: ",
-									foldmethod = "indent",
-									winhighlight = "Normal:Normal",
-								},
-							}
-						end,
+						picker:close()
+						local bufnr = vim.api.nvim_create_buf(false, true)
+						local text = vim.inspect(vim.lsp.config[item.name])
+						vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, vim.split(text, "\n"))
+						Snacks.win {
+							ft = "lua",
+							title = " 󱈄 " .. item.name .. " ",
+							buf = bufnr,
+							border = vim.o.winborder --[[@as "rounded"|"single"|"double"]],
+							wo = {
+								statuscolumn = " ", -- adds padding
+								cursorline = true,
+								winfixbuf = true,
+								fillchars = "fold: ,eob: ",
+								foldmethod = "indent",
+								winhighlight = "Normal:Normal",
+							},
+						}
+					end,
 				},
 			},
 			formatters = {

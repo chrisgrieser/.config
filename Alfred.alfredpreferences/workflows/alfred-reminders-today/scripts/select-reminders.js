@@ -112,7 +112,9 @@ function run() {
 	const startOfToday = new Date();
 	startOfToday.setHours(0, 0, 0, 0);
 
+	const timelogStart1 = Date.now();
 	const swiftReminderOutput = app.doShellScript("./scripts/get-reminders.swift");
+
 	let /** @type {ReminderObj[]} */ remindersJson;
 	try {
 		remindersJson = JSON.parse(swiftReminderOutput);
@@ -121,6 +123,8 @@ function run() {
 		console.log(errmsg);
 		return JSON.stringify({ items: [{ title: errmsg, valid: false }] });
 	}
+	const durationSecs = (Date.now() - timelogStart1) / 1000;
+	console.log(`Fetched ${remindersJson.length} reminder(s) in ${durationSecs}s`);
 
 	/** @type {AlfredItem[]} */
 	const reminders = remindersJson.map((rem) => {
@@ -189,7 +193,6 @@ function run() {
 		};
 		return alfredItem;
 	});
-	console.log("Reminders:", reminders.length);
 
 	// GUARD no reminders
 	if (reminders.length === 0) {
@@ -222,14 +225,16 @@ function run() {
 		const cacheOutdated = showEvents && cacheIsOutdated(eventCachePath);
 		let /** @type {EventObj[]} */ eventsJson;
 		if (cacheOutdated) {
-			console.log("Writing new cache for events…");
+			const timelogStart2 = Date.now();
 			const swiftEventsOutput = app.doShellScript("./scripts/get-events-today.swift");
+			const durationSecs = (Date.now() - timelogStart2) / 1000;
 			try {
 				eventsJson = JSON.parse(swiftEventsOutput);
 			} catch (_error) {
 				const errmsg = swiftEventsOutput; // if not parsable, it's a message
 				return JSON.stringify({ items: [{ title: errmsg, valid: false }] });
 			}
+			console.log(`Fetched ${eventsJson.length} events in ${durationSecs}s`);
 			writeToFile(eventCachePath, swiftEventsOutput);
 		} else {
 			eventsJson = JSON.parse(readFile(eventCachePath));
@@ -289,7 +294,6 @@ function run() {
 				};
 			});
 	}
-	console.log("Events:", showEvents ? events.length : "not shown");
 
 	//───────────────────────────────────────────────────────────────────────────
 
