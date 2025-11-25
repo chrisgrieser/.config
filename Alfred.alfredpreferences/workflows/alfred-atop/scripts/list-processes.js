@@ -32,7 +32,7 @@ function run() {
 	const showPid = $.getenv("show_pid") === "1";
 
 	/** @type {Record<string, { name: string; childrenCount: number }> } */
-	const parentProcs = {};
+	const parentProcs = {}; // PERF `Map` not quicker, probably due to low integer keys
 
 	// common apps where process name and app name are different
 	/** @type {Record<string, Record<string, string>>} */
