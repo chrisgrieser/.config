@@ -120,19 +120,15 @@ return {
 			desc = "󰈮 Local plugins",
 		},
 
-		--------------------------------------------------------------------------
 		-- GREP
-
 		{ "gl", function() Snacks.picker.grep() end, desc = "󰛢 Grep" },
 		{ "<leader>ci", importLuaModule, ft = "lua", desc = "󰢱 Import module" },
 
-		--------------------------------------------------------------------------
 		-- LSP
-
-		-- stylua: ignore start
 		{ "gf", function() Snacks.picker.lsp_references() end, desc = "󰈿 References" },
 		{ "gd", function() Snacks.picker.lsp_definitions() end, desc = "󰈿 Definitions" },
 		{ "gD", function() Snacks.picker.lsp_type_definitions() end, desc = "󰜁 Type definitions" },
+		-- stylua: ignore
 		{ "gw", function() Snacks.picker.lsp_workspace_symbols() end, desc = "󰒕 Workspace symbols" },
 		{ "<leader>il", function() Snacks.picker.lsp_config() end, desc = "󰒕 LSP servers" },
 
@@ -140,46 +136,30 @@ return {
 		{ "gs", function() Snacks.picker.treesitter() end, desc = "󰐅 Treesitter symbols" },
 		-- treesitter does not work for markdown, so using LSP symbols here
 		{ "gs", function() Snacks.picker.lsp_symbols() end, ft = "markdown", desc = "󰽛 Headings" },
-		-- stylua: ignore end
 
-		--------------------------------------------------------------------------
 		-- GIT
-
 		{ "<leader>gs", function() Snacks.picker.git_status() end, desc = "󰗲 Status" },
 		{ "<leader>gl", function() Snacks.picker.git_log() end, desc = "󰗲 Log" },
 		{ "<leader>ga", function() Snacks.picker.git_diff() end, desc = "󰐖 Hunks" },
-		-- stylua: ignore
 		{ "<leader>gb", function() Snacks.picker.git_branches() end, desc = "󰗲 Branches" },
-
-		-- stylua: ignore start
 		{ "<leader>gi", function() Snacks.picker.gh_issue() end, desc = " GitHub Issues (open)" },
+		-- stylua: ignore
 		{ "<leader>gI", function() Snacks.picker.gh_issue { state = "all" } end, desc = " GitHub Issues (all)" },
-		-- stylua: ignore end
 
-		--------------------------------------------------------------------------
 		-- INSPECT
-
 		{ "<leader>iv", function() Snacks.picker.help() end, desc = "󰋖 Vim help" },
-		-- stylua: ignore start
 		{ "<leader>ih", function() Snacks.picker.highlights() end, desc = " Highlights" },
 		{ "<leader>is", function() Snacks.picker.pickers() end, desc = "󰗲 Snacks pickers" },
 		{ "<leader>ik", function() Snacks.picker.keymaps() end, desc = "󰌌 Keymaps (global)" },
-		-- stylua: ignore end
-		{
-			"<leader>iK",
-			function() Snacks.picker.keymaps { global = false, title = "󰌌 Keymaps (buffer)" } end,
-			desc = "󰌌 Keymaps (buffer)",
-		},
-
-		--------------------------------------------------------------------------
-		-- MISC
 		-- stylua: ignore
+		{ "<leader>iK", function() Snacks.picker.keymaps { global = false, title = "󰌌 Keymaps (buffer)" } end, desc = "󰌌 Keymaps (buffer)" },
+
+		-- MISC
 		{ "<leader>pc", function() Snacks.picker.colorschemes() end, desc = " Colorschemes" },
 		{ "<leader>ms", function() Snacks.picker.marks() end, desc = "󰃁 Select mark" },
 		{ "<leader>ut", function() Snacks.picker.undo() end, desc = "󰋚 Undo tree" },
 		-- stylua: ignore
 		{ "<C-.>", function() Snacks.picker.icons() end, mode = { "n", "i" }, desc = "󱗿 Icon picker" },
-
 		{ "g.", function() Snacks.picker.resume() end, desc = "󰗲 Resume" },
 		{ "g!", function() Snacks.picker.diagnostics() end, desc = " Diagnostics" },
 	},
