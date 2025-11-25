@@ -4,10 +4,6 @@
 -- 2. copy mason registry spec with desired version to `personal-mason-registry`
 --------------------------------------------------------------------------------
 
-local dontAutoEnable = {
-	-- "marksman",
-	"markdown-oxide",
-}
 local ensureInstalled = {
 	lsps = {
 		"bash-language-server", -- also used for zsh
@@ -23,8 +19,7 @@ local ensureInstalled = {
 		"harper-ls", -- natural language linter
 		"typos-lsp", -- spellchecker for code
 		"ltex-ls-plus", -- natural language linter (LanguageTool, ltex fork)
-		"marksman", -- markdown lsp
-		"markdown-oxide", -- markdown lsp
+		"marksman", -- markdown lsp (markdown-oxide is buggy with links to headings)
 
 		"basedpyright", -- python lsp (pyright fork)
 		"ruff", -- python linter & formatter
@@ -78,7 +73,6 @@ end
 local function enableLsps()
 	local installedPacks = require("mason-registry").get_installed_packages()
 	local lspConfigNames = vim.iter(installedPacks):fold({}, function(acc, pack)
-		if vim.tbl_contains(dontAutoEnable, pack.name) then return acc end
 		table.insert(acc, pack.spec.neovim and pack.spec.neovim.lspconfig)
 		return acc
 	end)

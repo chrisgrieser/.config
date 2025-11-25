@@ -61,12 +61,12 @@ local function betterFileOpen(dir)
 			local itemPath = require("snacks").picker.util.path(item)
 			if itemPath == currentFile then return false end
 		end,
-		-- format = function(item, picker) -- add git status highlights
-		-- 	local itemPath = require("snacks").picker.util.path(item)
-		-- 	item.status = changedFiles[itemPath]
-		-- 	if vim.startswith(item.file, ".") then item.status = "!!" end -- hidden files
-		-- 	return require("snacks.picker.format").file(item, picker)
-		-- end,
+		format = function(item, picker) -- add git status highlights
+			local itemPath = require("snacks").picker.util.path(item)
+			item.status = changedFiles[itemPath]
+			if vim.startswith(item.file, ".") then item.status = "!!" end -- hidden files
+			return require("snacks.picker.format").file(item, picker)
+		end,
 	}
 end
 
@@ -190,6 +190,59 @@ return {
 	opts = {
 		picker = {
 			sources = {
+				files = {
+					cmd = "rg",
+					args = {
+						"--files", -- turn `rg` into a file finder
+						"--sortr=modified", -- sort by recency, slight performance impact
+						"--no-config",
+						("--ignore-file=" .. vim.fs.normalize("~/.config/ripgrep/ignore")),
+					},
+					exclude = { -- keep this ignored even if toggling to show hidden/ignored
+						"node_modules",
+						".DS_Store",
+						"*.zip",
+					},
+					layout = "small_no_preview",
+					matcher = { frecency = true }, -- slight performance impact
+					win = {
+						input = {
+							keys = {
+								["<C-h>"] = { "toggle_hidden_and_ignored", mode = "i" }, -- consistent with `fzf`
+								[":"] = { "complete_and_add_colon", mode = "i" },
+							},
+						},
+					},
+					-- if binary, open in system application instead
+					confirm = function(picker, item, action)
+						local absPath = require("snacks").picker.util.path(item) or ""
+						local binaryExt = { "pdf", "png", "webp", "docx" }
+						local ext = absPath:match(".+%.([^.]+)$") or ""
+						if vim.tbl_contains(binaryExt, ext) then
+							vim.ui.open(absPath)
+							picker:close()
+							return
+						end
+						-- regular file open
+						require("snacks.picker.actions").confirm(picker, item, action)
+					end,
+					actions = {
+						complete_and_add_colon = function(picker)
+							-- snacks allows opening files with `file:lnum`, but it
+							-- only matches if the filename is complete. With this
+							-- action, we complete the filename if using the 1st colon
+							-- in the query.
+							local query = vim.api.nvim_get_current_line()
+							local file = picker:current().file
+							if not file or query:find(":") then
+								vim.fn.feedkeys(":", "n")
+								return
+							end
+							vim.api.nvim_set_current_line(file .. ":")
+							vim.cmd.startinsert { bang = true }
+						end,
+					},
+				},
 				undo = {
 					win = {
 						input = {
@@ -244,57 +297,6 @@ return {
 								["gE"] = "explorer_diagnostic_prev",
 							},
 						},
-					},
-				},
-				files = {
-					cmd = "rg",
-					args = {
-						"--sortr=modified", -- sort by recency, slight performance impact
-						("--ignore-file=" .. vim.fs.normalize("~/.config/ripgrep/ignore")),
-					},
-					exclude = { -- keep this ignored even if toggling to show hidden/ignored
-						"node_modules",
-						".DS_Store",
-						"*.zip",
-					},
-					layout = "small_no_preview",
-					matcher = { frecency = true }, -- slight performance impact
-					win = {
-						input = {
-							keys = {
-								["<C-h>"] = { "toggle_hidden_and_ignored", mode = "i" }, -- consistent with `fzf`
-								[":"] = { "complete_and_add_colon", mode = "i" },
-							},
-						},
-					},
-					-- if binary, open in system application instead
-					confirm = function(picker, item, action)
-						local absPath = require("snacks").picker.util.path(item) or ""
-						local binaryExt = { "pdf", "png", "webp", "docx" }
-						local ext = absPath:match(".+%.([^.]+)$") or ""
-						if vim.tbl_contains(binaryExt, ext) then
-							vim.ui.open(absPath)
-							picker:close()
-							return
-						end
-						-- regular file open
-						require("snacks.picker.actions").confirm(picker, item, action)
-					end,
-					actions = {
-						complete_and_add_colon = function(picker)
-							-- snacks allows opening files with `file:lnum`, but it
-							-- only matches if the filename is complete. With this
-							-- action, we complete the filename if using the 1st colon
-							-- in the query.
-							local query = vim.api.nvim_get_current_line()
-							local file = picker:current().file
-							if not file or query:find(":") then
-								vim.fn.feedkeys(":", "n")
-								return
-							end
-							vim.api.nvim_set_current_line(file .. ":")
-							vim.cmd.startinsert { bang = true }
-						end,
 					},
 				},
 				recent = {
