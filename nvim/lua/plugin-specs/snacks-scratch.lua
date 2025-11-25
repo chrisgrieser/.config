@@ -39,12 +39,12 @@ return {
 				height = 0.75,
 				footer_pos = "right",
 				keys = { q = false, ["<D-w>"] = "close" }, -- so `q` is available as my comment operator
-				on_win = function(win)
-					-- FIX display of scratchpad title (partially hardcoded when setting icon, etc.)
-					local icon = require("snacks").util.icon(vim.bo[win.buf].ft, "filetype")
-					local title = (" %s Scratch "):format(icon)
-					vim.api.nvim_win_set_config(win.win, { title = title })
-				end,
+				-- on_win = function(win)
+				-- 	-- FIX display of scratchpad title (partially hardcoded when setting icon, etc.)
+				-- 	local icon = require("snacks").util.icon(vim.bo[win.buf].ft, "filetype")
+				-- 	local title = (" %s Scratch "):format(icon)
+				-- 	vim.api.nvim_win_set_config(win.win, { title = title })
+				-- end,
 			},
 			win_by_ft = {
 				javascript = createRunKeymap("node"),

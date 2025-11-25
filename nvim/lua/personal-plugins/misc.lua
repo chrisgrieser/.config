@@ -398,26 +398,5 @@ function M.scrollLspOrOtherWin(lines)
 	end)
 end
 
------------------------------------------------------------------------------
-
-function M.lspCapabilities()
-	local clients = vim.lsp.get_clients { bufnr = 0 }
-	if #clients == 0 then
-		vim.notify("No LSPs attached.", vim.log.levels.WARN, { icon = "󱈄" })
-		return
-	end
-	vim.ui.select(clients, {
-		prompt = "󱈄 Select LSP:",
-		format_item = function(client) return client.name end,
-	}, function(client)
-		if not client then return end
-		vim.notify(
-			vim.inspect(vim.lsp.config[client.name]),
-			vim.log.levels.DEBUG,
-			{ icon = "󱈄", title = client.name .. " capabilities", ft = "lua" }
-		)
-	end)
-end
-
 --------------------------------------------------------------------------------
 return M
