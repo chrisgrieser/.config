@@ -13,9 +13,9 @@ local function keymap(mode, lhs, rhs, opts)
 	local success, _ = pcall(vim.keymap.set, mode, lhs, rhs, opts)
 	if not success then
 		local modes = type(mode) == "table" and table.concat(mode, ", ") or mode
-		local msg = ("[[%s]] %s"):format(modes, lhs)
+		local msg = ("**Duplicate keymap**\n[[%s]] %s"):format(modes, lhs)
 		vim.defer_fn(function() -- defer for notification plugin
-			vim.notify(msg, vim.log.levels.WARN, { title = "Duplicate keymap", timeout = false })
+			vim.notify(msg, vim.log.levels.WARN, { title = "User keybindings", timeout = false })
 		end, 1000)
 	end
 end
@@ -545,6 +545,6 @@ keymap("n", "<leader>ol", function()
 	vim.lsp.stop_client(clients, true)
 	vim.cmd("silent! update")
 	vim.defer_fn(vim.cmd.edit, 1000) -- wait for shutdown -> reload via `:edit` -> re-attach LSPs
-end, { desc = "󰑓 Restart attached LSPs" })
+end, { desc = "󰑓 LSP Restart" })
 
 --------------------------------------------------------------------------------
