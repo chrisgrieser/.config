@@ -11,7 +11,7 @@ return {
 	settings = {
 		Lua = {
 			completion = {
-				callSnippet = "Both",
+				callSnippet = "Disable", -- signature help more useful
 				keywordSnippet = "Replace",
 				showWord = "Disable", -- already done by completion plugin
 				workspaceWord = false, -- already done by completion plugin

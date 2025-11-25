@@ -3,6 +3,11 @@
 -- 1. uncomment personal registry in mason's `opts`
 -- 2. copy mason registry spec with desired version to `personal-mason-registry`
 --------------------------------------------------------------------------------
+
+local dontAutoEnable = {
+	-- "marksman",
+	"markdown-oxide",
+}
 local ensureInstalled = {
 	lsps = {
 		"bash-language-server", -- also used for zsh
@@ -73,6 +78,7 @@ end
 local function enableLsps()
 	local installedPacks = require("mason-registry").get_installed_packages()
 	local lspConfigNames = vim.iter(installedPacks):fold({}, function(acc, pack)
+		if vim.tbl_contains(dontAutoEnable, pack.name) then return acc end
 		table.insert(acc, pack.spec.neovim and pack.spec.neovim.lspconfig)
 		return acc
 	end)

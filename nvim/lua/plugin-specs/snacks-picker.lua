@@ -1,4 +1,4 @@
--- vim: foldlevel=3
+-- vim: foldlevel=4
 -- DOCS https://github.com/folke/snacks.nvim/blob/main/docs/picker.md
 --------------------------------------------------------------------------------
 
@@ -406,10 +406,10 @@ return {
 				gh_issue = { layout = "big_preview" },
 				gh_pr = { layout = "big_preview" },
 				lsp_config = {
-					title = "Installed LSPs",
+					title = "Available LSPs",
+					layout = "big_preview",
 					installed = true,
-					actions = {
-						inspectLsp = function(picker, item)
+					confirm = function(picker, item)
 							picker:close()
 							local bufnr = vim.api.nvim_create_buf(false, true)
 							local text = vim.inspect(vim.lsp.config[item.name])
@@ -429,19 +429,6 @@ return {
 								},
 							}
 						end,
-						toggleLsp = function(picker, item)
-							local changeTo = not vim.lsp.is_enabled(item.name)
-							vim.lsp.enable(item.name, changeTo)
-							vim.notify(changeTo and "Enabled" or "Disabled", nil, { title = item.name })
-							vim.defer_fn(function() picker:find() end, 200) -- refresh
-						end,
-					},
-					confirm = "inspectLsp",
-					win = {
-						input = {
-							keys = { ["<D-d>"] = { "toggleLsp", mode = "i" } },
-						},
-					},
 				},
 			},
 			formatters = {

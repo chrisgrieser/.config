@@ -44,7 +44,8 @@ return {
 		vim.g.whichkeyAddSpec { "<leader>l", group = spec.opts.visuals.icon .. " Log" }
 
 		-- lazyload `nvim-chainsaw` only when `Chainsaw` function is called
-		_G.Chainsaw = function(name) ---@diagnostic disable-line: duplicate-set-field
+		-- also disables LSP diagnostic for `Chainsaw`
+		_G.Chainsaw = function(name)
 			require("chainsaw") -- loading nvim-chainsaw will override `_G.Chainsaw`
 			Chainsaw(name) -- call original function
 		end

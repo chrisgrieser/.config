@@ -1,7 +1,8 @@
 {
 	"runtime.version": "LuaJIT",
 	"workspace": {
-		"ignoreDir": ["debug", "templates"]
+		"ignoreDir": ["debug", "templates"],
+		"library": ["$VIMRUNTIME/lua", "${3rd}/luv/library"]
 	},
 	"$schema": "https://raw.githubusercontent.com/LuaLS/vscode-lua/master/setting/schema.json"
 }
