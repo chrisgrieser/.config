@@ -411,31 +411,37 @@ return {
 					actions = {
 						inspectLsp = function(picker, item)
 							picker:close()
-							local win = require("snacks").scratch({
-								name = item.name,
-								id = item.name,
+							local bufnr = vim.api.nvim_create_buf(false, true)
+							local text = vim.inspect(vim.lsp.config[item.name])
+							vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, vim.split(text, "\n"))
+							require("snacks").win {
 								ft = "lua",
-								win = {
-									title = "lua_ls",
-									footer_keys = false,
-									keys = { q = "close", ["<CR>"] = false },
-									bo = { expandtab = false, shiftwidth = 2 },
-								}
-
-							})
-							assert(win)
-							local lines = vim.split(vim.inspect(vim.lsp.config[item.name]), "\n")
-							vim.api.nvim_buf_set_lines(win.buf, 0, -1, false, lines)
+								title = " 󱈄 " .. item.name .. " ",
+								buf = bufnr,
+								border = vim.o.winborder --[[@as "rounded"|"single"|"double"]],
+								wo = {
+									statuscolumn = " ", -- adds padding
+									cursorline = true,
+									winfixbuf = true,
+									fillchars = "fold: ,eob: ",
+									foldmethod = "indent",
+									winhighlight = "Normal:Normal",
+								},
+							}
 						end,
-
-						disableLsp = function(picker, item)
-							picker:close()
-							local client = vim.lsp.get_clients({ name = item.name })[1]
-							vim.lsp.stop_client(client, true)
-							vim.notify("disabled", nil, { title = item.name })
+						toggleLsp = function(picker, item)
+							local changeTo = not vim.lsp.is_enabled(item.name)
+							vim.lsp.enable(item.name, changeTo)
+							vim.notify(changeTo and "Enabled" or "Disabled", nil, { title = item.name })
+							vim.defer_fn(function() picker:find() end, 200) -- refresh
 						end,
 					},
 					confirm = "inspectLsp",
+					win = {
+						input = {
+							keys = { ["<D-d>"] = { "toggleLsp", mode = "i" } },
+						},
+					},
 				},
 			},
 			formatters = {

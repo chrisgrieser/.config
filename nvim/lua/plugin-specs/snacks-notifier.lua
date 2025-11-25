@@ -39,8 +39,6 @@ local function openNotif(idx)
 
 	-- create win with snacks API
 	require("snacks").win {
-		relative = "editor",
-		position = "float",
 		buf = bufnr,
 		height = height,
 		width = width,
