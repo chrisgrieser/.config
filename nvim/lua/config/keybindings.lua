@@ -166,6 +166,7 @@ keymap({ "n", "x", "i" }, "<D-e>", function() require("personal-plugins.misc").m
 keymap({ "n", "x", "i" }, "<D-k>", function() require("personal-plugins.misc").mdWrap("mdlink") end, { desc = " Link" })
 keymap({ "n", "x", "i" }, "<D-b>", function() require("personal-plugins.misc").mdWrap("**") end, { desc = " Bold" })
 keymap({ "n", "x", "i" }, "<D-i>", function() require("personal-plugins.misc").mdWrap("*") end, { desc = " Italic" })
+keymap("n", '"', function() require("personal-plugins.misc").mdWrap('"') end, { desc = ' Surround' })
 -- stylua: ignore end
 
 --------------------------------------------------------------------------------
@@ -398,7 +399,6 @@ keymap("n", "<leader>id", function()
 end, { desc = "󰋽 Next diagnostic" })
 
 -- stylua: ignore start
-keymap("n", "<leader>il", function() require("personal-plugins.misc").lspCapabilities() end, { desc = "󱈄 LSP capabilities" })
 keymap("n", "<leader>iL", function() vim.cmd.edit(vim.lsp.log.get_filename()) end, { desc = "󱂅 LSP log" })
 keymap("n", "<leader>ib", function() require("personal-plugins.misc").inspectBuffer() end, { desc = "󰽙 Buffer info" })
 -- stylua: ignore end
@@ -545,15 +545,6 @@ keymap("n", "<leader>ol", function()
 	vim.lsp.stop_client(clients, true)
 	vim.cmd("silent! update")
 	vim.defer_fn(vim.cmd.edit, 1000) -- wait for shutdown -> reload via `:edit` -> re-attach LSPs
-end, { desc = "󰑓 LSPs restart" })
-
-keymap("n", "<leader>oL", function()
-	local clients = vim.lsp.get_clients { bufnr = 0 }
-	local names = vim.iter(clients):map(function(client) return "- " .. client.name end):join("\n")
-	vim.notify(names, vim.log.levels.TRACE, { title = "Restarting LSPs", icon = "󰑓" })
-	vim.lsp.stop_client(clients, true)
-	vim.cmd("silent! update")
-	vim.defer_fn(vim.cmd.edit, 1000) -- wait for shutdown -> reload via `:edit` -> re-attach LSPs
-end, { desc = "󰑓 LSPs restart" })
+end, { desc = "󰑓 Restart attached LSPs" })
 
 --------------------------------------------------------------------------------

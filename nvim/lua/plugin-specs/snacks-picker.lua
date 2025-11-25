@@ -134,15 +134,13 @@ return {
 		{ "gd", function() require("snacks").picker.lsp_definitions() end, desc = "󰈿 Definitions" },
 		{ "gD", function() require("snacks").picker.lsp_type_definitions() end, desc = "󰜁 Type definitions" },
 		{ "gw", function() require("snacks").picker.lsp_workspace_symbols() end, desc = "󰒕 Workspace symbols" },
-		{ "gw", function() require("snacks").picker.lsp_workspace_symbols() end, desc = "󰒕 Workspace symbols" },
+		{ "<leader>il", function() require("snacks").picker.lsp_config() end, desc = "󰒕 LSP servers" },
 
 		-- `lsp_symbols` tends to too much clutter like anonymous function
 		{ "gs", function() require("snacks").picker.treesitter() end, desc = "󰐅 Treesitter symbols" },
 		-- treesitter does not work for markdown, so using LSP symbols here
 		{ "gs", function() require("snacks").picker.lsp_symbols() end, ft = "markdown", desc = "󰽛 Headings" },
 		-- stylua: ignore end
-		{ "<leader>ol", function() require("snacks").picker.lsp_config() end, desc = "󰒕 LSP Servers" },
-
 
 		--------------------------------------------------------------------------
 		-- GIT
@@ -177,7 +175,8 @@ return {
 
 		--------------------------------------------------------------------------
 		-- MISC
-
+		-- stylua: ignore
+		{ "<leader>pc", function() require("snacks").picker.colorschemes() end, desc = " Colorschemes" },
 		{ "<leader>ms", function() require("snacks").picker.marks() end, desc = "󰃁 Select mark" },
 		{ "<leader>ut", function() require("snacks").picker.undo() end, desc = "󰋚 Undo tree" },
 		-- stylua: ignore
@@ -407,12 +406,37 @@ return {
 				gh_issue = { layout = "big_preview" },
 				gh_pr = { layout = "big_preview" },
 				lsp_config = {
+					title = "Installed LSPs",
 					installed = true,
-					confirm = function(picker, item)
-						-- picker:close()
-						Chainsaw(item) -- 🪚
-					end
-				}
+					actions = {
+						inspectLsp = function(picker, item)
+							picker:close()
+							local win = require("snacks").scratch({
+								name = item.name,
+								id = item.name,
+								ft = "lua",
+								win = {
+									title = "lua_ls",
+									footer_keys = false,
+									keys = { q = "close", ["<CR>"] = false },
+									bo = { expandtab = false, shiftwidth = 2 },
+								}
+
+							})
+							assert(win)
+							local lines = vim.split(vim.inspect(vim.lsp.config[item.name]), "\n")
+							vim.api.nvim_buf_set_lines(win.buf, 0, -1, false, lines)
+						end,
+
+						disableLsp = function(picker, item)
+							picker:close()
+							local client = vim.lsp.get_clients({ name = item.name })[1]
+							vim.lsp.stop_client(client, true)
+							vim.notify("disabled", nil, { title = item.name })
+						end,
+					},
+					confirm = "inspectLsp",
+				},
 			},
 			formatters = {
 				file = { filename_first = true },

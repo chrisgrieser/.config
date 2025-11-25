@@ -469,7 +469,7 @@ local function luckyIndent(bufnr)
 
 	-- apply if needed
 	local opts = { title = "Lucky indent", icon = "󰉶" }
-	if spaces and not vim.bo.expandtab then
+	if spaces and not vim.bo.expandtab and vim.bo[bufnr].shiftwidth ~= #spaces then
 		vim.bo[bufnr].expandtab = true
 		vim.bo[bufnr].shiftwidth = #spaces
 		vim.notify_once(("Set indentation to %d spaces."):format(#spaces), nil, opts)
