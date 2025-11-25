@@ -547,4 +547,13 @@ keymap("n", "<leader>ol", function()
 	vim.defer_fn(vim.cmd.edit, 1000) -- wait for shutdown -> reload via `:edit` -> re-attach LSPs
 end, { desc = "󰑓 LSPs restart" })
 
+keymap("n", "<leader>oL", function()
+	local clients = vim.lsp.get_clients { bufnr = 0 }
+	local names = vim.iter(clients):map(function(client) return "- " .. client.name end):join("\n")
+	vim.notify(names, vim.log.levels.TRACE, { title = "Restarting LSPs", icon = "󰑓" })
+	vim.lsp.stop_client(clients, true)
+	vim.cmd("silent! update")
+	vim.defer_fn(vim.cmd.edit, 1000) -- wait for shutdown -> reload via `:edit` -> re-attach LSPs
+end, { desc = "󰑓 LSPs restart" })
+
 --------------------------------------------------------------------------------

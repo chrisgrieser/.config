@@ -3,7 +3,6 @@
 -- 1. uncomment personal registry in mason's `opts`
 -- 2. copy mason registry spec with desired version to `personal-mason-registry`
 --------------------------------------------------------------------------------
-local autoClean = false
 local ensureInstalled = {
 	lsps = {
 		"bash-language-server", -- also used for zsh
@@ -127,7 +126,6 @@ local function syncPackages()
 		end)
 
 		-- auto-clean unused packages
-		if not autoClean then return end
 		assert(#ensurePacks > 10, "< 10 mason packages, aborting uninstalls.")
 		local installedPackages = masonReg.get_installed_package_names()
 		vim.iter(installedPackages):each(function(packName)
