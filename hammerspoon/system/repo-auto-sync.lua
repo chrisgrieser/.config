@@ -1,8 +1,9 @@
 local config = {
 	syncIntervalMins = 30,
+	syncScriptAtLocation = ".sync-this-repo.sh",
+
 	-- csv-format: "location,icon"
 	permaReposPath = os.getenv("HOME") .. "/.config/perma-repos.csv",
-	syncScriptAtLocation = ".sync-this-repo.sh",
 }
 
 --------------------------------------------------------------------------------
@@ -79,9 +80,10 @@ local function syncAllGitRepos(silent)
 	M.timer_AllSyncs = hs.timer
 		.waitUntil(function() return repoSyncsInProgress() == "" end, function()
 			local syncedIcons = hs.fnutils.map(M.finishedSyncing, function(r) return r.icon end) or {}
-			local msg = "🔁 Sync done: " .. table.concat(syncedIcons)
+			local msg = #syncedIcons > 0 and "🔁 Sync done: " .. table.concat(syncedIcons)
+				or "⚠️Sync issue"
 			print(msg)
-			if not silent then hs.notify.show("Hammerspoon", "", msg) end
+			if #syncedIcons == 0 or not silent then hs.notify.show("Hammerspoon", "", msg) end
 		end)
 		:start()
 end

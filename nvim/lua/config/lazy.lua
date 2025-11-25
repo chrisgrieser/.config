@@ -147,8 +147,8 @@ local function checkForDuplicateKeys()
 				vim.iter(modes):each(function(mode)
 					if not alreadyMapped[mode] then alreadyMapped[mode] = {} end
 					if alreadyMapped[mode][lhs] then
-						local msg = ("[[%s]] %s"):format(mode, lhs)
-						local opts = { title = "Duplicate keymap", timeout = false }
+						local msg = ("**Duplicate keymap**\n[[%s]] %s"):format(mode, lhs)
+						local opts = { title = "lazy.nvim", timeout = false }
 						vim.notify(msg, vim.log.levels.WARN, opts)
 					else
 						alreadyMapped[mode][lhs] = true
