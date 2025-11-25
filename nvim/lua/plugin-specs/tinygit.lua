@@ -37,6 +37,7 @@ return {
 				end,
 				enforceType = true,
 			},
+			keymapHints = false,
 		},
 		push = {
 			openReferencedIssues = true,
