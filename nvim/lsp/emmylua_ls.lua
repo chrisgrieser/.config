@@ -3,16 +3,14 @@
 
 ---@type vim.lsp.Config
 return {
-	on_attach = function(client)
-		-- disable formatting in favor of `stylua`
-		client.server_capabilities.documentFormattingProvider = false
-		client.server_capabilities.documentRangeFormattingProvider = false
-	end,
 	settings = {
 		Lua = {
+			format = {
+				enable = false, -- disable in favor of `stylua`
+			},
 			diagnostics = {
 				disable = {
-					"unnecessary-if", -- buggy rule
+					"unnecessary-if", -- buggy
 				},
 			},
 			completion = {

@@ -3,7 +3,7 @@
 
 ---@param cmd string
 local function createRunKeymap(cmd)
-	local function runner(self) ---@param self { buf: number } passed by snacks
+	local function runner(self) ---@param self { buf: number } -- passed by snacks
 		vim.cmd("silent! update") -- save before running
 		local filepath = vim.api.nvim_buf_get_name(self.buf)
 		local result = vim.system({ cmd, filepath }):wait()
@@ -30,6 +30,7 @@ return {
 		{ "<leader>es", function() Snacks.scratch() end, desc = " Scratch buffer" },
 		{ "<leader>el", function() Snacks.scratch.select() end, desc = " List scratches" },
 	},
+	---@type snacks.Config
 	opts = {
 		scratch = {
 			filekey = { count = false, cwd = false, branch = false }, -- just one scratch per ft

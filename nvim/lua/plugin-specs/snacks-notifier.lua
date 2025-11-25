@@ -53,11 +53,10 @@ local function openNotif(idx)
 			cursorline = true,
 			winfixbuf = true,
 			fillchars = "fold: ,eob: ",
-			foldmethod = "expr", -- enable folding
+			foldmethod = "expr",
 			foldexpr = "v:lua.vim.treesitter.foldexpr()",
 			winhighlight = "Normal:Normal", -- fix markdown highlighting priority issue
 		},
-		bo = { modifiable = true },
 		keys = {
 			["<Tab>"] = function()
 				if idx == #history then return end
@@ -78,24 +77,20 @@ end
 return {
 	"folke/snacks.nvim",
 	keys = {
-		{
-			"<Esc>",
-			function() Snacks.notifier.hide() end,
-			desc = "󰎟 Dismiss notification",
-		},
+		{ "<Esc>", function() Snacks.notifier.hide() end, desc = "󰎟 Dismiss notification" },
 		{ "<leader>in", function() openNotif("last") end, desc = "󰎟 Last notification" },
 		-- stylua: ignore
 		{ "<leader>iN", function() Snacks.picker.notifications() end, desc = "󰎟 Notification history" },
 	},
+	---@type snacks.Config
 	opts = {
 		picker = {
 			sources = {
 				notifications = {
 					formatters = { severity = { level = false } },
 					confirm = function(picker)
-						local pickerIdx = picker:current().idx
+						openNotif(picker:current().idx)
 						picker:close()
-						openNotif(pickerIdx)
 					end,
 				},
 			},
