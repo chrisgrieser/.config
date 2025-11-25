@@ -134,12 +134,15 @@ return {
 		{ "gd", function() require("snacks").picker.lsp_definitions() end, desc = "󰈿 Definitions" },
 		{ "gD", function() require("snacks").picker.lsp_type_definitions() end, desc = "󰜁 Type definitions" },
 		{ "gw", function() require("snacks").picker.lsp_workspace_symbols() end, desc = "󰒕 Workspace symbols" },
+		{ "gw", function() require("snacks").picker.lsp_workspace_symbols() end, desc = "󰒕 Workspace symbols" },
 
 		-- `lsp_symbols` tends to too much clutter like anonymous function
 		{ "gs", function() require("snacks").picker.treesitter() end, desc = "󰐅 Treesitter symbols" },
 		-- treesitter does not work for markdown, so using LSP symbols here
 		{ "gs", function() require("snacks").picker.lsp_symbols() end, ft = "markdown", desc = "󰽛 Headings" },
 		-- stylua: ignore end
+		{ "<leader>ol", function() require("snacks").picker.lsp_config() end, desc = "󰒕 LSP Servers" },
+
 
 		--------------------------------------------------------------------------
 		-- GIT
@@ -374,15 +377,9 @@ return {
 						picker:close()
 					end,
 				},
-				git_branches = {
-					all = true, -- = include remotes
-				},
-				git_log = {
-					layout = "toggled_preview",
-				},
-				git_log_file = {
-					layout = "toggled_preview",
-				},
+				git_branches = { all = true }, -- = include remotes
+				git_log = { layout = "toggled_preview" },
+				git_log_file = { layout = "toggled_preview" },
 				git_status = {
 					layout = "big_preview",
 					win = {
@@ -407,12 +404,15 @@ return {
 						},
 					},
 				},
-				gh_issue = {
-					layout = "big_preview",
-				},
-				gh_pr = {
-					layout = "big_preview",
-				},
+				gh_issue = { layout = "big_preview" },
+				gh_pr = { layout = "big_preview" },
+				lsp_config = {
+					installed = true,
+					confirm = function(picker, item)
+						-- picker:close()
+						Chainsaw(item) -- 🪚
+					end
+				}
 			},
 			formatters = {
 				file = { filename_first = true },
