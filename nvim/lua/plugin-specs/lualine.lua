@@ -51,6 +51,11 @@ return {
 				},
 			},
 			lualine_b = {
+				{ -- cwd
+					function() return (vim.uv.cwd() or ""):gsub(os.getenv("HOME") or "", "~") end,
+					cond = function() return vim.bo.buftype == "" end,
+					icon = "󰙅",
+				},
 				{ require("personal-plugins.breadcrumbs").statusline },
 			},
 			lualine_x = {
