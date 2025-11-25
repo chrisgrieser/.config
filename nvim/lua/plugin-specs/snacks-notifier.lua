@@ -22,9 +22,7 @@ local function openNotif(idx)
 	Snacks.notifier.hide(notif.id)
 
 	-- win properties
-	local bufnr = vim.api.nvim_create_buf(false, true)
 	local lines = vim.split(notif.msg, "\n")
-	vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, lines)
 	local title = vim.trim((notif.icon or "") .. " " .. (notif.title or ""))
 
 	local height = math.min(#lines + 2, math.ceil(vim.o.lines * maxHeight))
@@ -36,17 +34,18 @@ local function openNotif(idx)
 	local moreLines = overflow > 0 and ("↓ %d lines"):format(overflow) or ""
 	local indexStr = ("(%d/%d)"):format(idx, #history)
 	local footer = vim.trim(indexStr .. "   " .. moreLines)
+	local ft = notif.ft or "markdown"
 
 	-- create win with snacks API
 	Snacks.win {
-		buf = bufnr,
+		text = lines,
 		height = height,
 		width = width,
 		title = vim.trim(title) ~= "" and " " .. title .. " " or nil,
 		footer = footer and " " .. footer .. " " or nil,
 		footer_pos = footer and "right" or nil,
 		border = vim.o.winborder --[[@as "rounded"|"single"|"double"]],
-		ft = notif.ft or "markdown", -- needed for treesitter folding to work
+		bo = { ft = ft }, -- `.bo.ft` instead of `.ft` needed for treesitter folding
 		wo = {
 			wrap = notif.ft ~= "lua",
 			statuscolumn = " ", -- adds padding
@@ -55,7 +54,7 @@ local function openNotif(idx)
 			fillchars = "fold: ,eob: ",
 			foldmethod = "expr",
 			foldexpr = "v:lua.vim.treesitter.foldexpr()",
-			winhighlight = "Normal:Normal", -- fix markdown highlighting priority issue
+			winhighlight = ft == "markdown" and "Normal:Normal" or nil, -- FIX hl-priority issue
 		},
 		keys = {
 			["<Tab>"] = function()
