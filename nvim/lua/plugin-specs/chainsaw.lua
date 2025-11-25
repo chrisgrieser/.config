@@ -10,9 +10,8 @@ return {
 		},
 		logStatements = {
 			variableLog = {
-				nvim_lua = "Chainsaw({{var}}) -- {{marker}}", -- nvim lua debug
+				nvim_lua = "Chainsaw({{var}}) -- {{marker}}", -- nvim-lua debug
 				lua = 'print("{{marker}} {{var}}: " .. hs.inspect({{var}}))', -- Hammerspoon
-				swift = 'fputs("{{marker}} {{var}}: \\({{var}} ?? "nil")", stderr)', -- to STDERR, requires `import Foundation`
 			},
 			assertLog = {
 				lua = 'assert({{var}}, "{{insert}}")', -- no marker, since intended to be permanent
@@ -44,37 +43,28 @@ return {
 		vim.g.whichkeyAddSpec { "<leader>l", group = spec.opts.visuals.icon .. " Log" }
 
 		-- lazyload `nvim-chainsaw` only when `Chainsaw` function is called
-		-- also disables LSP diagnostic for `Chainsaw`
 		_G.Chainsaw = function(name)
 			require("chainsaw") -- loading nvim-chainsaw will override `_G.Chainsaw`
 			Chainsaw(name) -- call original function
 		end
+
+		-- disables LSP diagnostic for `Chainsaw`
+		vim.lsp.config("lua_ls", {
+			on_init = function(client)
+				if client.root_dir:find("nvim") then
+					local globals = client.config.settings.Lua.diagnostics.globals or {}
+					globals = vim.list_extend(globals, { "Chainsaw" })
+				end
+			end,
+		})
 	end,
 	keys = {
-		{
-			"<leader>ll",
-			function() require("chainsaw").variableLog() end,
-			mode = { "n", "x" },
-			desc = "󰀫 variable",
-		},
-		{
-			"<leader>lo",
-			function() require("chainsaw").objectLog() end,
-			mode = { "n", "x" },
-			desc = "⬟ object",
-		},
-		{
-			"<leader>la",
-			function() require("chainsaw").assertLog() end,
-			mode = { "n", "x" },
-			desc = "󱈸 assert",
-		},
-		{
-			"<leader>lt",
-			function() require("chainsaw").typeLog() end,
-			mode = { "n", "x" },
-			desc = "󰜀 type",
-		},
+		-- stylua: ignore start
+		{ "<leader>ll", function() require("chainsaw").variableLog() end, mode = { "n", "x" }, desc = "󰀫 variable" },
+		{ "<leader>lo", function() require("chainsaw").objectLog() end, mode = { "n", "x" }, desc = "⬟ object" },
+		{ "<leader>la", function() require("chainsaw").assertLog() end, mode = { "n", "x" }, desc = "󱈸 assert" },
+		{ "<leader>lt", function() require("chainsaw").typeLog() end, mode = { "n", "x" }, desc = "󰜀 type" },
+		-- stylua: ignore end
 		{ "<leader>lm", function() require("chainsaw").messageLog() end, desc = "󰍩 message" },
 		{ "<leader>le", function() require("chainsaw").emojiLog() end, desc = " emoji" },
 		{ "<leader>ls", function() require("chainsaw").sound() end, desc = "󱄠 sound" },
@@ -83,25 +73,25 @@ return {
 		{ "<leader>lS", function() require("chainsaw").stacktraceLog() end, desc = " stacktrace" },
 		{ "<leader>lc", function() require("chainsaw").clearLog() end, desc = "󰃢 clear console" },
 		{ "<leader>lr", function() require("chainsaw").removeLogs() end, desc = "󰅗 remove logs" },
-		-- {
-		-- 	"<leader>lg",
-		-- 	function()
-		-- 		local marker = require("chainsaw.config.config").config.marker
-		-- 		require("snacks").picker.grep_word {
-		-- 			title = marker .. " log statements",
-		-- 			cmd = "rg",
-		-- 			args = { "--trim" },
-		-- 			search = marker,
-		-- 			regex = false,
-		-- 			live = false,
-		-- 			format = function(item, _picker) -- only display the grepped line
-		-- 				local out = {}
-		-- 				Snacks.picker.highlight.format(item, item.line, out)
-		-- 				return out
-		-- 			end,
-		-- 		}
-		-- 	end,
-		-- 	desc = "󰉹 grep log statements",
-		-- },
+		{
+			"<leader>lg",
+			function()
+				local marker = require("chainsaw.config.config").config.marker
+				Snacks.picker.grep_word {
+					title = marker .. " log statements",
+					cmd = "rg",
+					args = { "--trim" },
+					search = marker,
+					regex = false,
+					live = false,
+					format = function(item, _picker) -- only display the grepped line
+						local out = {}
+						Snacks.picker.highlight.format(item, item.line, out)
+						return out
+					end,
+				}
+			end,
+			desc = "󰉹 grep log statements",
+		},
 	},
 }
