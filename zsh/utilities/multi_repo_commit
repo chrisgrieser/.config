@@ -15,7 +15,7 @@ function actions_in_repo {
 	cp -f "$HOME/Desktop/.luarc.jsonc" .luarc.jsonc
 }
 
-commit_msg="chore: use new \`.luarc.jsonc\`"
+commit_msg="chore: update \`.luarc.jsonc\`"
 
 _export_github_token # defined in .zshenv
 
