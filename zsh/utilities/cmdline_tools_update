@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/usr/bin/env zsh
 echo "Checking for command line tools updates…"
 
 update=$(softwareupdate --list |
@@ -9,4 +9,5 @@ if [[ -z "$update" ]]; then
 	echo "No update for command line tools available."
 else
 	softwareupdate --install "$update"
+	"$ZDOTDIR/notificator" --title "🖥️ Command Line Tools" --message "Update finished." --sound "Blow"
 fi
