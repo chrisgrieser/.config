@@ -146,7 +146,7 @@ vim.opt.fillchars:append {
 vim.diagnostic.config {
 	severity_sort = true,
 	signs = {
-		text = { "󰅚 ", " ", "󰋽 ", "󰌶 " }, -- Error, Warn, Info, Hint
+		text = { "󰅚 ", " ", "󰋽 ", " " }, -- Error, Warn, Info, Hint
 	},
 	virtual_text = {
 		spacing = 2,
