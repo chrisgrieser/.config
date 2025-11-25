@@ -11,10 +11,11 @@ repo_names="nvim"
 # repo_names="finder-vim-mode|zsh-magic-dashboard|nvim|alfred|shimmering-obsidian|gitfred|obsidian-quadro|pseudometa-obsidian-plugin-template|grappling-hook"
 
 function actions_in_repo {
-	cp -f "$HOME/Desktop/pull_request_template.md" ./.github/pull_request_template.md
+	rm -rf .luarc.json
+	cp -f "$HOME/Desktop/.luarc.jsonc" .luarc.jsonc
 }
 
-commit_msg="chore: improve PR template & request AI usage disclosure"
+commit_msg="chore: use new \`.luarc.jsonc\`"
 
 _export_github_token # defined in .zshenv
 

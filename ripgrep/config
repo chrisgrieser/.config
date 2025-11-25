@@ -11,8 +11,7 @@
 # shortened display
 --trim
 
-# include hidden files, but not the git directory
---hidden
+# never include the git directory
 --glob=!.git/*
 
 # behavior
