@@ -58,6 +58,7 @@ return {
 			desc = " Invisible chars",
 		},
 	},
+	---@type snacks.Config
 	opts = {
 		input = {
 			icon = "",

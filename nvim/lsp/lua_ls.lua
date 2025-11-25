@@ -6,10 +6,10 @@ return {
 	settings = {
 		Lua = {
 			format = {
-				enable = false, -- disable formatting in favor of `stylua`
+				enable = false, -- disable in favor of `stylua`
 			},
 			completion = {
-				callSnippet = "Disable", -- signature help more useful
+				callSnippet = "Disable", -- signature-help more useful
 				keywordSnippet = "Replace",
 				showWord = "Disable", -- already done by completion plugin
 				workspaceWord = false, -- already done by completion plugin
@@ -26,10 +26,10 @@ return {
 				},
 				globals = { "vim" }, -- when working on nvim plugins that lack a `.luarc.json`
 			},
-			codeLens = {
-				enable = true, -- requires `vim.lsp.codelens.refresh` autocmd
+			codeLens = { -- reference count, `vim.lsp.codelens.refresh`
+				enable = true,
 			},
-			hint = { -- inlay hints
+			hint = { -- inlay hints, requires `vim.lsp.inlay_hint.enable`
 				enable = true,
 				setType = true,
 				arrayIndex = "Disable", -- too noisy

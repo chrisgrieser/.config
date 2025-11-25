@@ -14,7 +14,7 @@ function actions_in_repo {
 	cp -f "$HOME/Desktop/.luarc.jsonc" .luarc.jsonc
 }
 
-commit_msg="chore: add \`Chainsaw\` as diagnostic global to \`luarc.jsonc\`"
+commit_msg="chore: revert adding \`Chainsaw\` as global to \`luarc.jsonc\`"
 
 _export_github_token # defined in .zshenv
 

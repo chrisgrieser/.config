@@ -165,6 +165,7 @@ return {
 	},
 
 	init = require("config.utils").loadGhToken, -- for issue & PR search
+	---@type snacks.Config
 	opts = {
 		picker = {
 			sources = {
@@ -404,8 +405,8 @@ return {
 								cursorline = true,
 								winfixbuf = true,
 								fillchars = "fold: ,eob: ",
-								foldmethod = "indent",
-								winhighlight = "Normal:Normal",
+								foldmethod = "expr",
+								foldexpr = "v:lua.vim.treesitter.foldexpr()",
 							},
 						}
 					end,
@@ -457,9 +458,9 @@ return {
 						},
 					},
 				},
-				toggled_preview = {
+				toggled_preview = { ---@diagnostic disable-line: missing-fields
 					preset = "big_preview",
-					preview = false,
+					preview = false, ---@diagnostic disable-line: assign-type-mismatch
 				},
 				big_preview = {
 					preset = "wide_with_preview",
