@@ -3,7 +3,7 @@
 -- 1. uncomment personal registry in mason's `opts`
 -- 2. copy mason registry spec with desired version to `personal-mason-registry`
 --------------------------------------------------------------------------------
-
+local autoClean = false
 local ensureInstalled = {
 	lsps = {
 		"bash-language-server", -- also used for zsh
@@ -12,8 +12,7 @@ local ensureInstalled = {
 		"html-lsp",
 		"json-lsp",
 		"just-lsp",
-		"tombi", -- toml lsp (more modern)
-		"taplo", -- toml lsp (more established)
+		"tombi", -- toml lsp (more modern than taplo)
 		"ts_query_ls", -- treesitter query files
 		"yaml-language-server",
 
@@ -21,6 +20,7 @@ local ensureInstalled = {
 		"typos-lsp", -- spellchecker for code
 		"ltex-ls-plus", -- natural language linter (LanguageTool, ltex fork)
 		"marksman", -- markdown lsp
+		"markdown-oxide", -- markdown lsp
 
 		"basedpyright", -- python lsp (pyright fork)
 		"ruff", -- python linter & formatter
@@ -127,6 +127,7 @@ local function syncPackages()
 		end)
 
 		-- auto-clean unused packages
+		if not autoClean then return end
 		assert(#ensurePacks > 10, "< 10 mason packages, aborting uninstalls.")
 		local installedPackages = masonReg.get_installed_package_names()
 		vim.iter(installedPackages):each(function(packName)
