@@ -6,7 +6,7 @@ return {
 	event = "UIEnter",
 
 	config = function(_, opts)
-		require("snacks").setup(opts)
+		Snacks.setup(opts)
 
 		-- modify certain notifications
 		vim.notify = function(msg, lvl, nOpts) ---@diagnostic disable-line: duplicate-set-field intentional overwrite
@@ -25,7 +25,7 @@ return {
 			elseif msg:find("^%[nvim%-treesitter") then -- treesitter parser update
 				nOpts.id = "treesitter-parser-update"
 			end
-			require("snacks").notifier(msg, lvl, nOpts)
+			Snacks.notifier(msg, lvl, nOpts)
 		end
 
 		-- disable default keymaps to make the `?` help overview less cluttered
@@ -35,13 +35,13 @@ return {
 	end,
 
 	keys = {
-		{ "ö", function() require("snacks").words.jump(1, true) end, desc = "󰗲 Next reference" },
-		{ "Ö", function() require("snacks").words.jump(-1, true) end, desc = "󰗲 Prev reference" },
-		{ "<leader>g?", function() require("snacks").git.blame_line() end, desc = "󰆽 Blame line" },
+		{ "ö", function() Snacks.words.jump(1, true) end, desc = "󰗲 Next reference" },
+		{ "Ö", function() Snacks.words.jump(-1, true) end, desc = "󰗲 Prev reference" },
+		{ "<leader>g?", function() Snacks.git.blame_line() end, desc = "󰆽 Blame line" },
 		{
 			"<leader>oi",
 			function()
-				if require("snacks").indent.enabled then
+				if Snacks.indent.enabled then
 					vim.g.prev_listchars = vim.opt_local.listchars:get()
 					vim.opt_local.listchars:append {
 						tab = " ",
@@ -49,10 +49,10 @@ return {
 						trail = "·",
 						lead = "·",
 					}
-					require("snacks").indent.disable()
+					Snacks.indent.disable()
 				else
 					vim.opt_local.listchars = vim.g.prev_listchars
-					require("snacks").indent.enable()
+					Snacks.indent.enable()
 				end
 			end,
 			desc = " Invisible chars",

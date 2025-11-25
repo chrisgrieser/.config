@@ -775,7 +775,8 @@ rules:
                 foldername=$(basename "$sel")
                 zip --recurse-paths --symlinks "../$foldername.zip" .
                 open -R "../$foldername.zip"
-                afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/Volume Mount.aif" &
+                [[ -z "$FINDER_VIM_MODE_NO_SOUND" ]] && 
+                  afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/Volume Mount.aif" &
               else
                 osascript -e '
                   tell application "System Events" to tell process "Finder"
@@ -827,7 +828,8 @@ rules:
         to_if_alone:
           - { key_code: right_arrow, modifiers: [option] }
           - shell_command: |
-              afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/mic_unmute.caf" &
+              [[ -z "$FINDER_VIM_MODE_NO_SOUND" ]] && 
+                afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/mic_unmute.caf" &
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # i = close/collapse fold (I: do it recursively)
       - type: basic
@@ -835,7 +837,8 @@ rules:
         to_if_alone:
           - key_code: left_arrow
           - shell_command: |
-              afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/mic_mute.caf" &
+              [[ -z "$FINDER_VIM_MODE_NO_SOUND" ]] && 
+                afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/mic_mute.caf" &
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       - type: basic
         from: { key_code: i, modifiers: { mandatory: [shift] } }
