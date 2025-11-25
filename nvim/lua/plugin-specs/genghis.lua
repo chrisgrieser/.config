@@ -19,24 +19,23 @@ return {
 
 		{ "<M-CR>", function() require("genghis").navigateToFileInFolder("next") end, desc = "󰖽 Next file in folder" },
 		{ "<S-M-CR>", function() require("genghis").navigateToFileInFolder("prev") end, desc = "󰖿 Prev file in folder" },
+		{ "<D-l>", function() require("genghis").showInSystemExplorer() end, desc = "󰀶 Reveal in Finder" },
 		-- stylua: ignore end
 
 		{ "<leader>fr", function() require("genghis").renameFile() end, desc = "󰑕 Rename" },
-		-- stylua: ignore
-		{ "<leader>fn", function() require("genghis").createNewFileInFolder() end, desc = "󰝒 New in folder" },
-		{ "<leader>fN", function() require("genghis").createNewFile() end, desc = "󰝒 New" },
 		{ "<leader>fw", function() require("genghis").duplicateFile() end, desc = " Duplicate" },
 		{ "<leader>fm", function() require("genghis").moveToFolderInCwd() end, desc = "󱀱 Move" },
 		{ "<leader>fd", function() require("genghis").trashFile() end, desc = "󰩹 Delete" },
 		{ "<leader>fx", function() require("genghis").chmodx() end, desc = "󰒃 chmod +x" },
 
+		-- stylua: ignore
+		{ "<leader>fn", function() require("genghis").createNewFileInFolder() end, desc = "󰝒 New in folder" },
 		{
-			"<leader>rx",
+			"<leader>fn",
 			function() require("genghis").moveSelectionToNewFile() end,
 			mode = "x",
-			desc = "󰝒 Selection to new file",
+			desc = "󰝒 New file from selection",
 		},
-		-- stylua: ignore
-		{ "<D-l>", function() require("genghis").showInSystemExplorer() end, desc = "󰀶 Reveal in Finder" },
+		{ "<leader>fN", function() require("genghis").createNewFile() end, desc = "󰝒 New" },
 	},
 }

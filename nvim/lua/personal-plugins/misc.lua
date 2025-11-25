@@ -74,7 +74,7 @@ function M.restartNeovide()
 end
 
 ---Wraps text with markdown links, automatically inserting the URL if in a
----Markdown link if the `+` register has a URL
+---Markdown link if the `+` register has a URL. In normal mode, can undo.
 ---@param wrap string|"mdlink"
 function M.mdWrap(wrap)
 	local mode = vim.fn.mode()
@@ -96,9 +96,19 @@ function M.mdWrap(wrap)
 		insert = ("[%s](%s)"):format(text, clipboardUrl)
 	end
 
+	-- normal mode: check whether to undo instead
+	local prevOpt = vim.opt.iskeyword:get()
+	local shouldUndo = false
+	if mode == "n" then
+		vim.opt.iskeyword:append(wrap:sub(1, 1))
+		shouldUndo = vim.fn.expand("<cword>") == insert
+		if shouldUndo then insert = text end
+	end
+
 	-- insert
 	if mode == "n" then
 		vim.cmd.normal { '"_ciw' .. insert, bang = true }
+		vim.opt.iskeyword = prevOpt
 	elseif mode == "v" then
 		vim.cmd.normal { "gv", bang = true } -- re-select, since yank put us in normal mode
 		vim.cmd.normal { '"_c' .. insert, bang = true }
@@ -113,7 +123,8 @@ function M.mdWrap(wrap)
 		vim.api.nvim_win_set_cursor(0, { row, col + 1 })
 		if clipboardUrl == "" and text ~= "" then vim.cmd.normal { "f)", bang = true } end
 	else
-		vim.api.nvim_win_set_cursor(0, { row, col + #wrap })
+		local offset = shouldUndo and -#wrap or #wrap
+		vim.api.nvim_win_set_cursor(0, { row, col + offset })
 	end
 	if text == "" or clipboardUrl == "" then vim.cmd.startinsert() end
 end
