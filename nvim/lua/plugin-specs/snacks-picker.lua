@@ -61,12 +61,12 @@ local function betterFileOpen(dir)
 			local itemPath = require("snacks").picker.util.path(item)
 			if itemPath == currentFile then return false end
 		end,
-		format = function(item, picker) -- add git status highlights
-			local itemPath = require("snacks").picker.util.path(item)
-			item.status = changedFiles[itemPath]
-			if vim.startswith(item.file, ".") then item.status = "!!" end -- hidden files
-			return require("snacks.picker.format").file(item, picker)
-		end,
+		-- format = function(item, picker) -- add git status highlights
+		-- 	local itemPath = require("snacks").picker.util.path(item)
+		-- 	item.status = changedFiles[itemPath]
+		-- 	if vim.startswith(item.file, ".") then item.status = "!!" end -- hidden files
+		-- 	return require("snacks.picker.format").file(item, picker)
+		-- end,
 	}
 end
 
@@ -270,7 +270,7 @@ return {
 					-- if binary, open in system application instead
 					confirm = function(picker, item, action)
 						local absPath = require("snacks").picker.util.path(item) or ""
-						local binaryExt = { "pdf", "png", "webp" }
+						local binaryExt = { "pdf", "png", "webp", "docx" }
 						local ext = absPath:match(".+%.([^.]+)$") or ""
 						if vim.tbl_contains(binaryExt, ext) then
 							vim.ui.open(absPath)
