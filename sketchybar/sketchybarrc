@@ -28,8 +28,7 @@ sketchybar \
 	padding_left="0" margin="-5" color="$bg" \
 	\
 	--default \
-	icon.padding_right="3" label.padding_right="3" \
-	drawing="false" background.padding_right="10" \
+	icon.padding_right="3" label.padding_right="3" background.padding_right="10" \
 	icon.font="$nerd_font" icon.color="$fg" label.font="$system_font" label.color="$fg" \
 	\
 	popup.drawing="true" popup.horizontal="true" popup.topmost="false" \
@@ -38,7 +37,7 @@ sketchybar \
 	`#─── 1st MENUBAR ROW ─────────────────────────────────────────────────────` \
 	\
 	--add item clock $row_1 \
-	--set clock update_freq="1" drawing="true" padding_left="10" \
+	--set clock update_freq="1" padding_left="10" \
 	script="./components/clock.sh" \
 	\
 	--add item weather $row_1 \
@@ -47,7 +46,7 @@ sketchybar \
 	click_script="open -a Weather" \
 	\
 	--add item input_source $row_1 \
-	--set input_source update_freq="2" icon.padding_right="0" label.padding_right="0" \
+	--set input_source update_freq="2" icon.padding_right="0" label.padding_right="0"  \
 	script="./components/input_source_icon.sh" \
 	\
 	--add item github_notif $row_1 \
@@ -73,7 +72,7 @@ sketchybar \
 	click_script="open -a 'Activity Monitor'" \
 	\
 	--add graph cpu_graph $row_2 30 \
-	--set cpu_graph update_freq="3" drawing="true" \
+	--set cpu_graph update_freq="3" \
 	background.height="18" background.color="$bg" graph.color="0x00000000" \
 	script="./components/cpu.sh" \
 	click_script="open -a 'Activity Monitor'" \
@@ -87,7 +86,8 @@ sketchybar \
 	script="./components/no_internet.sh" \
 	\
 	--add item package_updates $row_2 \
-	--set package_updates icon="󱄖" update_freq="86400" icon.padding_right="0" label.padding_right="0" \
+	--set package_updates icon="󱄖" update_freq="86400" \
+	icon.padding_right="0" label.padding_right="0" \
 	script="./components/homebrew_update_tracker.sh" \
 	\
 	--add item sync_indicator $row_2 \
@@ -97,7 +97,7 @@ sketchybar \
 	--subscribe sync_indicator system_woke repo_files_update \
 	\
 	--add item japanese_word $row_2 \
-	--set japanese_word update_freq="600" drawing="true" \
+	--set japanese_word update_freq="600" \
 	script="./components/japanese_word/japanese_word.sh" \
 	click_script="./components/japanese_word/japanese_word.sh" \
 	\

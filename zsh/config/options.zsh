@@ -6,7 +6,7 @@
 # GENERAL
 setopt INTERACTIVE_COMMENTS # comments in interactive mode, useful for copypasting
 setopt GLOB_DOTS            # glob includes dotfiles
-setopt PIPE_FAIL            # tracability: exit if pipeline failed
+setopt PIPE_FAIL            # tracebility: exit if pipeline failed
 setopt NO_BANG_HIST         # don't expand `!`
 
 # HISTORY
@@ -16,7 +16,7 @@ setopt INC_APPEND_HISTORY # write immediately to history file
 setopt HIST_NO_STORE      # ignore history command itself for the history
 setopt HIST_IGNORE_SPACE  # cmds with leading space are not added to the history
 
-export HISTSIZE=20000
+export HISTSIZE=30000
 export SAVEHIST=$HISTSIZE
 # don't save in `$ZDOTDIR` as it's in my public dotfile repo
 export HISTFILE="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/zsh_history.zsh"
