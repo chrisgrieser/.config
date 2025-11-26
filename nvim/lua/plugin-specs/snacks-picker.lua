@@ -130,7 +130,6 @@ return {
 		{ "gD", function() Snacks.picker.lsp_type_definitions() end, desc = "󰜁 Type definitions" },
 		-- stylua: ignore
 		{ "gw", function() Snacks.picker.lsp_workspace_symbols() end, desc = "󰒕 Workspace symbols" },
-		{ "<leader>il", function() Snacks.picker.lsp_config() end, desc = "󰒕 LSP servers" },
 
 		-- `lsp_symbols` tends to too much clutter like anonymous function
 		{ "gs", function() Snacks.picker.treesitter() end, desc = "󰐅 Treesitter symbols" },
@@ -153,6 +152,7 @@ return {
 		{ "<leader>ik", function() Snacks.picker.keymaps() end, desc = "󰌌 Keymaps (global)" },
 		-- stylua: ignore
 		{ "<leader>iK", function() Snacks.picker.keymaps { global = false, title = "󰌌 Keymaps (buffer)" } end, desc = "󰌌 Keymaps (buffer)" },
+		{ "<leader>il", function() Snacks.picker.lsp_config() end, desc = "󰒕 LSP servers" },
 
 		-- MISC
 		{ "<leader>pc", function() Snacks.picker.colorschemes() end, desc = " Colorschemes" },
@@ -388,11 +388,24 @@ return {
 				lsp_config = {
 					layout = "big_preview",
 					confirm = function(picker, item)
+						if not item.enabled then
+							vim.notify("LSP server not configured", vim.log.levels.WARN)
+							return
+						end
 						picker:close()
+
+						local icons = Snacks.picker.config.get().icons.lsp
+						local icon = item.attached and icons.attached or icons.enabled
+						local client = item.attached and vim.lsp.get_clients({ name = item.name })[1]
+							or vim.lsp.config[item.name]
+						local type = item.attached and "attached" or "config"
+
 						vim.schedule(function() -- scheduling needed for treesitter folding
 							Snacks.win {
-								title = " 󱈄 " .. item.name .. " ",
-								text = vim.inspect(vim.lsp.config[item.name]),
+								title = (" %s %s (%s) "):format(icon, item.name, type),
+								text = vim.inspect(client),
+								width = 0.9,
+								height = 0.9,
 								border = vim.o.winborder --[[@as "rounded"|"single"|"double"]],
 								bo = { ft = "lua" }, -- `.bo.ft` instead of `.ft` needed for treesitter folding
 								wo = {
