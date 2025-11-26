@@ -1,7 +1,7 @@
 -- DOCS https://codeberg.org/mfussenegger/nvim-dap/wiki/Debug-Adapter-installation#vscode-js-debug
 --------------------------------------------------------------------------------
 
-local debugServerPath = vim.env.MASON .. "/packages/js-debug-adapter/js-debug/src/dapDebugServer.js"
+local dapServerPath = vim.env.MASON .. "/packages/js-debug-adapter/js-debug/src/dapDebugServer.js"
 local jsLangs = { "javascript", "typescript" }
 
 --------------------------------------------------------------------------------
@@ -12,7 +12,7 @@ require("dap").adapters["pwa-node"] = {
 	port = "${port}",
 	executable = {
 		command = "node",
-		args = { debugServerPath, "${port}" },
+		args = { dapServerPath, "${port}" },
 	},
 }
 
