@@ -55,7 +55,7 @@ return {
 			hl["@comment.note"] = { fg = colors.black, bg = hl["@comment.note"].fg }
 
 			-- mini.icons
-			hl.MiniIconsGreen = { fg = "#86f080" }
+			hl.MiniIconsGreen = { fg = "#4df096" }
 			hl.MiniIconsGrey = { fg = colors.fg_dark }
 
 			-- cursorword
