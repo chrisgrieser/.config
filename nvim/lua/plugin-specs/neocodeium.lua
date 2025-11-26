@@ -1,5 +1,8 @@
 -- lua alternative to the official codeium.vim plugin https://github.com/Exafunction/windsurf.vim
 --------------------------------------------------------------------------------
+-- INFO plugins are disabled when using `pass` via `$USING_PASS`, for safety
+-- adding redundant safeguards to disable AI for those buffers nonetheless
+--------------------------------------------------------------------------------
 
 return {
 	"monkoose/neocodeium",
@@ -10,7 +13,7 @@ return {
 		show_label = false, -- signcolumn label for number of suggestions
 		filetypes = {
 			bib = false,
-			text = false, -- `pass` passwords editing ft (extra safeguard)
+			text = false, -- filetype when editing in `pass` (1. extra safeguard)
 		},
 		filter = function(bufnr)
 			if vim.fn.reg_recording() ~= "" then return false end -- not when recording
@@ -20,7 +23,7 @@ return {
 			local ignoreBuffer = parent:find("private dotfiles")
 				or parent:find("leetcode") -- should do leetcode problems on my own
 				or name:lower():find("recovery") -- e.g. password recovery
-				or parent:find("/private/var/") -- `pass` cli buffers
+				or parent:find("/private/var/") -- path when editing in `pass` (2. extra safeguard)
 				or name == ".env"
 			return not ignoreBuffer -- `false` -> disable in that buffer
 		end,

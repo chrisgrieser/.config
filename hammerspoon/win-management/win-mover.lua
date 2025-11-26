@@ -55,10 +55,15 @@ M.wf_appsOnMouseScreen = wf.new(true)
 -- ACTIONS
 
 local function toggleMaximized()
-	local currentWin = hs.window.focusedWindow()
+	if u.isFront("Ivory") then
+		local masto = u.app("Ivory")
+		if masto then masto:mainWindow():setFrame(wu.toTheSide) end
+		return
+	end
 
-	local smallerWins = { "Finder", "Script Editor", "Reminders", "TextEdit", "System Settings" }
+	local currentWin = hs.window.focusedWindow()
 	local baseSize = wu.pseudoMax
+	local smallerWins = { "Finder", "Script Editor", "Reminders", "TextEdit", "System Settings" }
 	if u.isFront(smallerWins) then baseSize = wu.middleHalf end
 	if env.isProjector() then baseSize = hs.layout.maximized end
 
