@@ -5,6 +5,17 @@ const app = Application.currentApplication();
 app.includeStandardAdditions = true;
 //──────────────────────────────────────────────────────────────────────────────
 
+// DOCS https://developer.apple.com/documentation/iobluetooth/iobluetoothdevice
+/** @typedef {Object} BluetoothDevice
+ * @property {{js: string}} nameOrAddress
+ * @property {boolean} isConnected
+ * @property {{js: string}} addressString
+ * @property {unknown} closeConnection
+ * @property {unknown} openConnection
+ */
+
+//────────────────────────────────────────────────────────────────────────
+
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
@@ -28,17 +39,11 @@ function run() {
 
 	const excludedDevices = $.getenv("excluded_devices").split(/ *, */);
 
-	/** @typedef {Object} BluetoothDevice
-	 * @property {{js: string}} nameOrAddress
-	 * @property {boolean} isConnected
-	 * @property {{js: string}} addressString
-	 */
-
 	/** @type {BluetoothDevice[]} */
 	const devices = $.IOBluetoothDevice.pairedDevices.js;
 
 	/** @type {AlfredItem[]} */
-	const deviceArr = devices.flatMap((/** @type {BluetoothDevice} */ device) => {
+	const deviceArr = devices.flatMap((device) => {
 		const name = device.nameOrAddress.js;
 		const connectedIcon = device.isConnected ? "🟢 " : "🔴 ";
 		const address = device.addressString.js;
