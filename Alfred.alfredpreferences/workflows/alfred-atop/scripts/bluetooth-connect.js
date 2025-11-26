@@ -10,6 +10,17 @@ app.includeStandardAdditions = true;
 function run(argv) {
 	const selectedDeviceAddress = argv[0];
 
+  const device = $.IOBluetoothDevice.pairedDevices.js
+    .find(device => device.addressString.js === argv[0])
+  const connected = device.isConnected
+  const maxTimeout = Date.now() + 5000
+
+  // Toggle connection
+  connected ? device.closeConnection : device.openConnection
+
+  // Wait (with timeout) for connection to toggle before allowing script to terminate
+  while (device.isConnected === connected && Date.now() < maxTimeout) delay(0.5)
+
 	// DOCS https://developer.apple.com/documentation/iobluetooth/iobluetoothdevice
 	const devicesRaw = ObjC.unwrap($.IOBluetoothDevice.pairedDevices);
 	const allDevices = Array.from(devicesRaw, (d) => {

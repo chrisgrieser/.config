@@ -5,58 +5,52 @@ const app = Application.currentApplication();
 app.includeStandardAdditions = true;
 //──────────────────────────────────────────────────────────────────────────────
 
-// TODO assess whether `ObjC.import("IOBluetooth")` is useful
-// https://github.com/bosha/alfred-blueman-workflow/blob/master/src/bt_manager.jxa
-
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
-	const rerunSecs = Number.parseFloat($.getenv("rerun_s_bluetooth"));
+	// GUARD
+	const osVersion = $.NSProcessInfo.processInfo.operatingSystemVersion;
+	if (parseInt(osVersion.majorVersion) < 10 && parseInt(osVersion.minorVersion) < 15) {
+		return JSON.stringify({
+			items: [{ title: "⛔ This feature requires at least macOS 10.15", valid: false }],
+		});
+	}
+	// @ts-expect-error
+	if ($.CBManager.authorization !== $.CBManagerAuthorizationAllowedAlways) {
+		const item = {
+			title: "⛔ Unable to access Bluetooth",
+			subtitle: "Open System Settings, then grant Alfred Bluetooth permissions.",
+			valid: false,
+		};
+		return JSON.stringify({ items: [item] });
+	}
+	//───────────────────────────────────────────────────────────────────────────
+
 	const excludedDevices = $.getenv("excluded_devices").split(/ *, */);
 
-	// DOCS https://developer.apple.com/documentation/iobluetooth/iobluetoothdevice
-	const devicesRaw = ObjC.unwrap($.IOBluetoothDevice.pairedDevices);
-	const allDevices = Array.from(devicesRaw, (device) => {
+	/** @typedef {Object} BluetoothDevice
+	 * @property {{js: string}} nameOrAddress
+	 * @property {boolean} isConnected
+	 * @property {{js: string}} addressString
+	 */
+
+	/** @type {BluetoothDevice[]} */
+	const devices = $.IOBluetoothDevice.pairedDevices.js;
+
+	/** @type {AlfredItem[]} */
+	const deviceArr = devices.flatMap((/** @type {BluetoothDevice} */ device) => {
+		const name = device.nameOrAddress.js;
+		const connectedIcon = device.isConnected ? "🟢 " : "🔴 ";
+		const address = device.addressString.js;
+		if (excludedDevices.includes(name)) return [];
+
 		return {
-			name: ObjC.unwrap(device.nameOrAddress),
-			connected: ObjC.unwrap(device.isConnected),
-			address: ObjC.unwrap(device.addressString),
+			title: name,
+			subtitle: connectedIcon,
+			uid: address,
+			arg: address,
 		};
 	});
 
-	//───────────────────────────────────────────────────────────────────────────
-
-	// INFO `ioreg` only includes Apple periphery, but has battery info for them.
-	let applePeriData = app.doShellScript(
-		"ioreg -rak BatteryPercent | sed 's/data>/string>/' | plutil -convert json - -o - || true",
-	);
-	// prevent JSON.parse from failing when there is no periphery data
-	if (applePeriData.startsWith("<stdin>: Property List error")) applePeriData = "[]";
-
-	const /** @type {Record<string, any>} */ applePeriphery = {};
-	for (const device of JSON.parse(applePeriData)) {
-		applePeriphery[device.DeviceAddress] = device;
-	}
-
-	//───────────────────────────────────────────────────────────────────────────
-
-	const deviceArr = allDevices.map((device) => {
-		if (excludedDevices.includes(device.name)) return {};
-
-		const batteryLevel = applePeriphery[device.address]?.BatteryPercent || -1;
-		const batteryLow = batteryLevel < 10 ? "⚠️" : "";
-		const battery = batteryLevel > -1 ? `${batteryLow}${batteryLevel}%` : "";
-		const connected = device.connected ? "🟢 " : "🔴 ";
-
-		return {
-			title: device.name,
-			subtitle: `${connected} ${battery}`,
-			arg: device.address,
-		};
-	});
-
-	return JSON.stringify({
-		rerun: rerunSecs,
-		items: deviceArr,
-	});
+	return JSON.stringify({ rerun: 1, items: deviceArr });
 }
