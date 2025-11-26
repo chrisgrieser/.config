@@ -22,11 +22,26 @@ row_2="popup.clock"
 
 # PERF one call to speed up loading https://felixkratz.github.io/SketchyBar/config/tricks#batching-of-configuration-commands
 sketchybar \
-	--bar height="60" \
+	--bar \
+	height="60" position="top" display="all" \
+	padding_left="0" margin="-5" color="$bg" \
 	\
+	--default \
+	drawing="false" \
+	icon.padding_right="3" label.padding_right="3" background.padding_right="10" \
+	icon.font="$nerd_font" icon.color="$fg" label.font="$system_font" label.color="$fg" \
+	\
+	\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \
+	\
+	--add item clock $row_1 \
+	--set clock update_freq="1" padding_left="10" drawing="true" \
+	script="./components/clock.sh" \
 	\
 	--add item weather $row_1 \
-	--set weather update_freq="1200" icon.y_offset="-1" drawing="false" \
-	icon="AAA" \
+	--set weather update_freq="1200" icon.y_offset="-1" \
+	script="./components/weather.sh" \
 	\
+	\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \
+	\
+	\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \
 	--update # needs to run at the end of config and should not be run in an item script

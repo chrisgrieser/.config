@@ -199,19 +199,23 @@ end
 -- Increment or toggle if cursorword is true/false (Simplified version of dial.nvim)
 function M.toggleOrIncrement()
 	local toggles = {
-		["start"] = "end",
-		["up"] = "down",
-		["backward"] = "forward",
 		["true"] = "false",
-		["light"] = "dark",
-		["right"] = "left",
-		["top"] = "bottom",
-		["next"] = "previous",
-		["enable"] = "disable",
-		["enabled"] = "disabled",
-		["open"] = "close",
 		["yes"] = "no",
 		["on"] = "off",
+		["enable"] = "disable",
+		["enabled"] = "disabled",
+
+		["up"] = "down",
+		["top"] = "bottom",
+		["light"] = "dark",
+		["right"] = "left",
+		["width"] = "height",
+
+		["next"] = "previous",
+		["start"] = "end",
+		["backward"] = "forward",
+		["open"] = "close",
+
 		["and"] = "or",
 		["=="] = "!=",
 		[">"] = "<",
@@ -395,27 +399,6 @@ function M.scrollLspOrOtherWin(lines)
 	vim.api.nvim_win_call(winid, function()
 		local topline = vim.fn.winsaveview().topline
 		vim.fn.winrestview { topline = topline + lines }
-	end)
-end
-
------------------------------------------------------------------------------
-
-function M.lspCapabilities()
-	local clients = vim.lsp.get_clients { bufnr = 0 }
-	if #clients == 0 then
-		vim.notify("No LSPs attached.", vim.log.levels.WARN, { icon = "󱈄" })
-		return
-	end
-	vim.ui.select(clients, {
-		prompt = "󱈄 Select LSP:",
-		format_item = function(client) return client.name end,
-	}, function(client)
-		if not client then return end
-		vim.notify(
-			vim.inspect(vim.lsp.config[client.name]),
-			vim.log.levels.DEBUG,
-			{ icon = "󱈄", title = client.name .. " capabilities", ft = "lua" }
-		)
 	end)
 end
 
