@@ -35,8 +35,11 @@ local function importLuaModule()
 	}
 end
 
----@param dir string? defaults to cwd
+---@param dir string?
 local function betterFileOpen(dir)
+	dir = dir or vim.uv.cwd()
+	if not dir or dir == "/" then return vim.notify("No cwd set.", vim.log.levels.WARN) end
+
 	local changedFiles = {}
 	local gitDir = Snacks.git.get_root(dir)
 	if gitDir then
@@ -56,7 +59,7 @@ local function betterFileOpen(dir)
 	local currentFile = vim.api.nvim_buf_get_name(0)
 	Snacks.picker.files {
 		cwd = dir,
-		title = "󰝰 " .. vim.fs.basename(dir or vim.uv.cwd()),
+		title = "󰝰 " .. vim.fs.basename(dir),
 		transform = function(item, _ctx) -- exclude the current file
 			local itemPath = Snacks.picker.util.path(item)
 			if itemPath == currentFile then return false end

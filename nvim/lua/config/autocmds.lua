@@ -170,7 +170,9 @@ do
 			-- GUARD
 			local filename = vim.fs.basename(ctx.file)
 			if filename == "COMMIT_EDITMSG" or filename == "git-rebase-todo" then return end
-			if not vim.uv.cwd() then vim.uv.chdir("/") end -- cwd unset of dir was deleted
+			if not vim.uv.cwd() then -- cwd is unset if dir was deleted
+				vim.uv.chdir(vim.fn.stdpath("config")) -- fallback to nvim config
+			end
 
 			vim.schedule(function()
 				-- GUARD
