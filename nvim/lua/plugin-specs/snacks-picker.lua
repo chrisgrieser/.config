@@ -389,20 +389,17 @@ return {
 					layout = "big_preview",
 					confirm = function(picker, item)
 						if not item.enabled then
-							vim.notify("LSP server not configured", vim.log.levels.WARN)
+							vim.notify("LSP server not enabled", vim.log.levels.WARN)
 							return
 						end
 						picker:close()
 
-						local icons = Snacks.picker.config.get().icons.lsp
-						local icon = item.attached and icons.attached or icons.enabled
-						local client = item.attached and vim.lsp.get_clients({ name = item.name })[1]
-							or vim.lsp.config[item.name]
-						local type = item.attached and "attached" or "config"
-
 						vim.schedule(function() -- scheduling needed for treesitter folding
+							local client = item.attached and vim.lsp.get_clients({ name = item.name })[1]
+								or vim.lsp.config[item.name]
+							local type = item.attached and "running" or "enabled"
 							Snacks.win {
-								title = (" %s %s (%s) "):format(icon, item.name, type),
+								title = (" 󱈄 %s (%s) "):format(item.name, type),
 								text = vim.inspect(client),
 								width = 0.9,
 								height = 0.9,
