@@ -19,6 +19,9 @@ row_1="left"
 row_2="popup.clock"
 
 #───────────────────────────────────────────────────────────────────────────────
+# BUG since macOS Tahoe, `drawing` should not be called in initial call
+# https://github.com/FelixKratz/SketchyBar/issues/787
+#───────────────────────────────────────────────────────────────────────────────
 
 # PERF one call to speed up loading https://felixkratz.github.io/SketchyBar/config/tricks#batching-of-configuration-commands
 sketchybar \
@@ -33,7 +36,7 @@ sketchybar \
 	popup.drawing="true" popup.horizontal="true" popup.topmost="false" \
 	popup.y_offset="-35" y_offset="18" \
 	\
-	\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \
+	\                                                                           \
 	\
 	--add item clock $row_1 \
 	--set clock update_freq="1" padding_left="10" \
@@ -60,7 +63,7 @@ sketchybar \
 	--add event update_github_notif --subscribe github_notif update_github_notif \
 	--subscribe github_notif system_woke \
 	\
-	\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \
+	\                                                                           \
 	\
 	--add item ram $row_2 \
 	--set ram padding_left="16" update_freq="5" \
@@ -75,6 +78,10 @@ sketchybar \
 	--add item network_download $row_2 \
 	--set network_download icon="" update_freq="3" \
 	script="./components/network_download.sh" \
+	\
+	--add item network-upload $row_2 \
+	--set network-upload icon="" update_freq="3" \
+	script="./components/network_upload.sh" \
 	\
 	--add item no_internet $row_2 \
 	--set no_internet icon="󰖪" update_freq="4" \
@@ -92,5 +99,5 @@ sketchybar \
 	script="./components/japanese_word/japanese_word.sh" \
 	click_script="./components/japanese_word/japanese_word.sh" \
 	\
-	\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \
+	\                                                                           \
 	--update # needs to run at the end of config and should not be run in an item script
