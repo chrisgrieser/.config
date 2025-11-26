@@ -26,15 +26,15 @@ row_2="popup.clock"
 # PERF one call to speed up loading https://felixkratz.github.io/SketchyBar/config/tricks#batching-of-configuration-commands
 sketchybar \
 	--bar \
-	height="60" position="top" display="all" \
-	padding_left="0" margin="-5" color="$bg" \
+	height="75" position="top" display="all" \
+	padding_left="0" margin="-4" color="$bg" \
 	\
 	--default \
 	icon.padding_right="3" label.padding_right="3" background.padding_right="10" \
 	icon.font="$nerd_font" icon.color="$fg" label.font="$system_font" label.color="$fg" \
 	\
 	popup.drawing="true" popup.horizontal="true" popup.topmost="false" \
-	popup.y_offset="-35" y_offset="18" \
+	popup.y_offset="-48" y_offset="22" \
 	\
 	\                                                                           \
 	\
@@ -66,7 +66,7 @@ sketchybar \
 	\                                                                           \
 	\
 	--add item ram $row_2 \
-	--set ram padding_left="16" update_freq="5" \
+	--set ram padding_left="14" update_freq="5" \
 	icon.font="${nerd_font/[0-9]*/20.5}" label.padding_right="0" icon.padding_right="0" \
 	script="./components/ram.sh" \
 	\

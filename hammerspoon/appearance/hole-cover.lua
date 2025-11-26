@@ -8,7 +8,7 @@ local wu = require("win-management.window-utils")
 -- https://www.hammerspoon.org/Spoons/RoundedCorners.html
 local roundedCorner = hs.loadSpoon("RoundedCorners")
 if roundedCorner then
-	roundedCorner.radius = 8
+	roundedCorner.radius = 18 -- macOS Tahoe's radius
 	roundedCorner:start()
 end
 
@@ -32,11 +32,14 @@ function M.update()
 	local bgColor = toMode == "dark" and { red = 0.2, green = 0.2, blue = 0.2, alpha = 1 }
 		or { red = 0.8, green = 0.8, blue = 0.8, alpha = 1 }
 
-	-- three points, forming roughly a triangle
+	-- forming roughly a triangle
 	M.coverParts = {
-		hs.drawing.rectangle { x = pseudoMaxCorner - 9, y = screen.h - 3, w = 18, h = 3 },
-		hs.drawing.rectangle { x = pseudoMaxCorner - 6, y = screen.h - 6, w = 12, h = 3 },
-		hs.drawing.rectangle { x = pseudoMaxCorner - 3, y = screen.h - 9, w = 6, h = 3 },
+		hs.drawing.rectangle { x = pseudoMaxCorner - 24, y = screen.h - 5, w = 48, h = 5 },
+		hs.drawing.rectangle { x = pseudoMaxCorner - 20, y = screen.h - 10, w = 40, h = 5 },
+		hs.drawing.rectangle { x = pseudoMaxCorner - 16, y = screen.h - 15, w = 32, h = 5 },
+		hs.drawing.rectangle { x = pseudoMaxCorner - 12, y = screen.h - 20, w = 24, h = 5 },
+		hs.drawing.rectangle { x = pseudoMaxCorner - 8, y = screen.h - 25, w = 16, h = 5 },
+		hs.drawing.rectangle { x = pseudoMaxCorner - 4, y = screen.h - 30, w = 8, h = 5 },
 	}
 
 	for _, cover in pairs(M.coverParts) do
