@@ -1,0 +1,591 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string>com.vitorgalvao.alfred.denteazul</string>
+	<key>connections</key>
+	<dict>
+		<key>3BC562CB-FBCC-4222-9328-63EE7D3A2781</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>F265BD48-6184-4CF9-BC09-B9E17F241B4E</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>547D5716-1884-419B-987A-454B94A74D14</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>3BCDFECE-FED4-404D-A416-BBC72C1324CF</key>
+		<array/>
+		<key>C2CF456B-4648-4954-ACED-E39B2E6531C5</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>3BCDFECE-FED4-404D-A416-BBC72C1324CF</string>
+				<key>modifiers</key>
+				<integer>131072</integer>
+				<key>modifiersubtext</key>
+				<string>Ignore</string>
+				<key>vitoclose</key>
+				<true/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>AA94621B-D4A3-4096-903A-EDC3D1B93186</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>F265BD48-6184-4CF9-BC09-B9E17F241B4E</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>F265BD48-6184-4CF9-BC09-B9E17F241B4E</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>658FE294-DEF2-49E3-BFF3-60B4C4BF1439</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>10CDCB96-3D1F-461C-8CB2-208B28BEC8D6</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+	</dict>
+	<key>createdby</key>
+	<string>Vítor Galvão</string>
+	<key>description</key>
+	<string>Toggle bluetooth paired device connectivity</string>
+	<key>disabled</key>
+	<false/>
+	<key>name</key>
+	<string>Dente Azul</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>68</integer>
+				<key>script</key>
+				<string>ObjC.import("IOBluetooth")
+
+function envVar(varName) {
+  return $.NSProcessInfo
+    .processInfo
+    .environment
+    .objectForKey(varName).js
+}
+
+function run(argv) {
+  const address = argv[0]
+  const device = $.IOBluetoothDevice.pairedDevices.js
+    .find(device =&gt; device.addressString.js === address)
+  const name = device.nameOrAddress.js
+
+  const ignoredAddresses = envVar("ignored").split("\n")
+
+  Application("com.runningwithcrayons.Alfred").setConfiguration(
+    "ignored",
+    {
+      toValue: ignoredAddresses.concat(`${address} | ${name}`).join("\n"),
+      inWorkflow: envVar("alfred_workflow_bundleid")
+    }
+  )
+}</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>7</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>3BCDFECE-FED4-404D-A416-BBC72C1324CF</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>keyword</key>
+				<string>{var:device_toggle_keyword}</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>Gathering devices info…</string>
+				<key>script</key>
+				<string>ObjC.import("IOBluetooth")
+
+function run() {
+  // Check minimum OS
+  const osVersion = $.NSProcessInfo.processInfo.operatingSystemVersion
+
+  if (parseInt(osVersion.majorVersion) &lt; 10 &amp;&amp; parseInt(osVersion.minorVersion) &lt; 15) return JSON.stringify({
+    title: "A More Recent macOS Version Is Required",
+    subtitle: "This workflow requires at least macOS 10.15",
+    valid: false,
+    icon: { path: "icon_alt.png" }
+  })
+
+  // Check Bluetooth permissions
+  if ($.CBManager.authorization !== $.CBManagerAuthorizationAllowedAlways) return JSON.stringify({ items: [{
+    variables: { open_system_settings: true },
+    title: "Unable to Access Bluetooth",
+    subtitle: "Press ↩ to open System Settings, then grant Alfred Bluetooth permissions",
+    icon: { path: "icon_alt.png" }
+  }]})
+
+  // Ignored devices
+  const ignoredAddresses = $.NSProcessInfo.processInfo.environment.objectForKey("ignored").js
+    .split("\n")
+    .map(device =&gt; device.split("|")[0].trim())
+
+  // Main
+  const sfItems = $.IOBluetoothDevice.pairedDevices.js.flatMap(device =&gt; {
+    const address = device.addressString.js
+
+    if (ignoredAddresses.includes(address)) return []
+
+    const name = device.nameOrAddress.js
+    const connected = device.isConnected
+
+    return {
+      uid: address,
+      title: name,
+      subtitle: connected ? "Connected" : "Not Connected",
+      arg: address,
+      icon: { path: connected ? "icon.png" : "icon_alt.png" }
+    }
+  })
+
+  return JSON.stringify({ rerun: 0.5, items: sfItems })
+}</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>skipuniversalaction</key>
+				<true/>
+				<key>subtext</key>
+				<string>Action to Toggle Connection Status</string>
+				<key>title</key>
+				<string>Show Paired Bluetooth Devices</string>
+				<key>type</key>
+				<integer>7</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>C2CF456B-4648-4954-ACED-E39B2E6531C5</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>68</integer>
+				<key>script</key>
+				<string>ObjC.import("IOBluetooth")
+
+function run(argv) {
+  const device = $.IOBluetoothDevice.pairedDevices.js
+    .find(device =&gt; device.addressString.js === argv[0])
+  const connected = device.isConnected
+  const maxTimeout = Date.now() + 5000
+
+  // Toggle connection
+  connected ? device.closeConnection : device.openConnection
+
+  // Wait (with timeout) for connection to toggle before allowing script to terminate
+  while (device.isConnected === connected &amp;&amp; Date.now() &lt; maxTimeout) delay(0.5)
+}</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>7</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>AA94621B-D4A3-4096-903A-EDC3D1B93186</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>x-apple.systempreferences:com.apple.preference.security?Privacy_Bluetooth</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>658FE294-DEF2-49E3-BFF3-60B4C4BF1439</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string>{var:open_system_settings}</string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>5</integer>
+						<key>matchstring</key>
+						<string></string>
+						<key>outputlabel</key>
+						<string>Open System Settings</string>
+						<key>uid</key>
+						<string>10CDCB96-3D1F-461C-8CB2-208B28BEC8D6</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string></string>
+				<key>hideelse</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.conditional</string>
+			<key>uid</key>
+			<string>F265BD48-6184-4CF9-BC09-B9E17F241B4E</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>keyword</key>
+				<string>{var:full_toggle_keyword}</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>Gathering bluetooth status…</string>
+				<key>script</key>
+				<string>ObjC.import("IOBluetooth")
+
+function run() {
+  // Check minimum OS
+  const osVersion = $.NSProcessInfo.processInfo.operatingSystemVersion
+
+  if (parseInt(osVersion.majorVersion) &lt; 10 &amp;&amp; parseInt(osVersion.minorVersion) &lt; 15) return JSON.stringify({
+    title: "A More Recent macOS Version Is Required",
+    subtitle: "This workflow requires at least macOS 10.15",
+    valid: false,
+    icon: { path: "icon_alt.png" }
+  })
+
+  // Check Bluetooth permissions
+  if ($.CBManager.authorization !== $.CBManagerAuthorizationAllowedAlways) return JSON.stringify({ items: [{
+    variables: { open_system_settings: true },
+    title: "Unable to Access Bluetooth",
+    subtitle: "Press ↩ to open System Settings, then grant Alfred Bluetooth permissions",
+    icon: { path: "icon_alt.png" }
+  }]})
+
+  // Main
+  let currentState, toggleState, icon
+  const powerState = $.IOBluetoothHostController.alloc.init.powerState
+
+  if (powerState === 0) {
+    currentState = "Off"
+    toggleState = "on"
+    iconPath = "icon_alt.png"
+  } else  {
+    currentState = "On"
+    toggleState = "off"
+    iconPath = "icon.png"
+  }
+
+  return JSON.stringify({ items: [{
+    title: `Bluetooth is ${currentState}`,
+    subtitle: `Action to turn it ${toggleState}`,
+    arg: "toggle bluetooth",
+    icon: { path: iconPath }
+  }]})
+}</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>skipuniversalaction</key>
+				<true/>
+				<key>subtext</key>
+				<string>Turn Bluetooth On or Off</string>
+				<key>title</key>
+				<string>Toggle Bluetooth</string>
+				<key>type</key>
+				<integer>7</integer>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>3BC562CB-FBCC-4222-9328-63EE7D3A2781</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>68</integer>
+				<key>script</key>
+				<string>ObjC.import("IOBluetooth")
+
+const controller = $.IOBluetoothHostController.alloc.init
+const connected = controller.powerState
+const maxTimeout = Date.now() + 5000
+
+// Toggle connection
+connected ? controller.powerState = 0 : controller.powerState = 1
+
+// Wait (with timeout) for connection to toggle before allowing script to terminate
+while (controller.powerState === connected &amp;&amp; Date.now() &lt; maxTimeout) delay(0.5)</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>7</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>547D5716-1884-419B-987A-454B94A74D14</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string>## Usage
+
+Search your paired bluetooth devices via the `btd` keyword.
+
+![Connect of disconnect devices](images/about/btd.png)
+
+* &lt;kbd&gt;↩&lt;/kbd&gt; Toggle connected state.
+* &lt;kbd&gt;⇧&lt;/kbd&gt;&lt;kbd&gt;↩&lt;/kbd&gt; Ignore device. Restore it from the [Workflow’s Configuration](https://www.alfredapp.com/help/workflows/user-configuration/).
+
+Toggle bluetooth as a whole via the `btt` keyword.
+
+![Connect or disconnect bluetooth](images/about/btt.png)
+
+* &lt;kbd&gt;↩&lt;/kbd&gt; Toggle connected state.</string>
+	<key>uidata</key>
+	<dict>
+		<key>3BC562CB-FBCC-4222-9328-63EE7D3A2781</key>
+		<dict>
+			<key>xpos</key>
+			<real>80</real>
+			<key>ypos</key>
+			<real>515</real>
+		</dict>
+		<key>3BCDFECE-FED4-404D-A416-BBC72C1324CF</key>
+		<dict>
+			<key>xpos</key>
+			<real>310</real>
+			<key>ypos</key>
+			<real>65</real>
+		</dict>
+		<key>547D5716-1884-419B-987A-454B94A74D14</key>
+		<dict>
+			<key>xpos</key>
+			<real>310</real>
+			<key>ypos</key>
+			<real>515</real>
+		</dict>
+		<key>658FE294-DEF2-49E3-BFF3-60B4C4BF1439</key>
+		<dict>
+			<key>xpos</key>
+			<real>475</real>
+			<key>ypos</key>
+			<real>365</real>
+		</dict>
+		<key>AA94621B-D4A3-4096-903A-EDC3D1B93186</key>
+		<dict>
+			<key>xpos</key>
+			<real>310</real>
+			<key>ypos</key>
+			<real>215</real>
+		</dict>
+		<key>C2CF456B-4648-4954-ACED-E39B2E6531C5</key>
+		<dict>
+			<key>xpos</key>
+			<real>80</real>
+			<key>ypos</key>
+			<real>215</real>
+		</dict>
+		<key>F265BD48-6184-4CF9-BC09-B9E17F241B4E</key>
+		<dict>
+			<key>xpos</key>
+			<real>350</real>
+			<key>ypos</key>
+			<real>395</real>
+		</dict>
+	</dict>
+	<key>userconfigurationconfig</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>btd</string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>Device Toggle Keyword</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>device_toggle_keyword</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>btt</string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>Bluetooth Toggle Keyword</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>full_toggle_keyword</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string></string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+				<key>verticalsize</key>
+				<integer>6</integer>
+			</dict>
+			<key>description</key>
+			<string>Newline-separared list of devices to hide.</string>
+			<key>label</key>
+			<string>Ignored Devices</string>
+			<key>type</key>
+			<string>textarea</string>
+			<key>variable</key>
+			<string>ignored</string>
+		</dict>
+	</array>
+	<key>variablesdontexport</key>
+	<array/>
+	<key>version</key>
+	<string>25.3</string>
+	<key>webaddress</key>
+	<string>https://github.com/vitorgalvao/dente-azul-workflow/</string>
+</dict>
+</plist>

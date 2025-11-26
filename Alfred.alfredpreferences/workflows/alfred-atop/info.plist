@@ -1857,31 +1857,6 @@ Display mounted volumes directly via `vol`.
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>defaultvalue</key>
-				<integer>4</integer>
-				<key>markercount</key>
-				<integer>5</integer>
-				<key>maxvalue</key>
-				<integer>5</integer>
-				<key>minvalue</key>
-				<integer>1</integer>
-				<key>onlystoponmarkers</key>
-				<true/>
-				<key>showmarkers</key>
-				<true/>
-			</dict>
-			<key>description</key>
-			<string>refresh rate in seconds</string>
-			<key>label</key>
-			<string></string>
-			<key>type</key>
-			<string>slider</string>
-			<key>variable</key>
-			<string>rerun_s_bluetooth</string>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>default</key>
 				<string></string>
 				<key>placeholder</key>
