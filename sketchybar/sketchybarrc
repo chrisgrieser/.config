@@ -22,7 +22,6 @@ row_2="popup.clock"
 
 # PERF one call to speed up loading https://felixkratz.github.io/SketchyBar/config/tricks#batching-of-configuration-commands
 sketchybar \
-	`#─── BAR & DEFAULTS ──────────────────────────────────────────────────────` \
 	--bar \
 	height="60" position="top" display="all" \
 	padding_left="0" margin="-5" color="$bg" \
@@ -34,7 +33,7 @@ sketchybar \
 	popup.drawing="true" popup.horizontal="true" popup.topmost="false" \
 	popup.y_offset="-35" y_offset="18" \
 	\
-	`#─── 1st MENUBAR ROW ─────────────────────────────────────────────────────` \
+	\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \
 	\
 	--add item clock $row_1 \
 	--set clock update_freq="1" padding_left="10" \
@@ -49,13 +48,6 @@ sketchybar \
 	--set input_source update_freq="2" icon.padding_right="0" label.padding_right="0"  \
 	script="./components/input_source_icon.sh" \
 	\
-	--add item github_notif $row_1 \
-	--set github_notif update_freq="300" icon="" \
-	script="./components/github_notification_count.sh" \
-	click_script="open 'https://github.com/notifications'" \
-	--add event update_github_notif --subscribe github_notif update_github_notif \
-	--subscribe github_notif system_woke \
-	\
 	--add item reminders_count $row_1 \
 	--set reminders_count update_freq="300" icon="" \
 	script="./components/reminders_count.sh" \
@@ -63,7 +55,14 @@ sketchybar \
 	--add event update_reminder_count --subscribe reminders_count update_reminder_count \
 	--subscribe reminders_count system_woke front_app_switched \
 	\
-	`#─── 2nd MENUBAR ROW ─────────────────────────────────────────────────────` \
+	--add item github_notif $row_1 \
+	--set github_notif update_freq="300" icon="" \
+	script="./components/github_notification_count.sh" \
+	click_script="open 'https://github.com/notifications'" \
+	--add event update_github_notif --subscribe github_notif update_github_notif \
+	--subscribe github_notif system_woke \
+	\
+	\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \
 	\
 	--add item ram $row_2 \
 	--set ram padding_left="16" update_freq="5" \
@@ -82,13 +81,9 @@ sketchybar \
 	script="./components/network_download.sh" \
 	\
 	--add item no_internet $row_2 \
-	--set no_internet icon="󰖪" update_freq="4" icon.color="0xffff1111" icon.padding_right="0" label.padding_right="0" \
-	script="./components/no_internet.sh" \
-	\
-	--add item package_updates $row_2 \
-	--set package_updates icon="󱄖" update_freq="86400" \
+	--set no_internet icon="󰖪" update_freq="4" \
 	icon.padding_right="0" label.padding_right="0" \
-	script="./components/homebrew_update_tracker.sh" \
+	script="./components/no_internet.sh" \
 	\
 	--add item sync_indicator $row_2 \
 	--set sync_indicator icon="󰓦" update_freq="180" \
@@ -101,5 +96,5 @@ sketchybar \
 	script="./components/japanese_word/japanese_word.sh" \
 	click_script="./components/japanese_word/japanese_word.sh" \
 	\
-	`#─── END ─────────────────────────────────────────────────────────────────` \
+	\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \
 	--update # needs to run at the end of config and should not be run in an item script
