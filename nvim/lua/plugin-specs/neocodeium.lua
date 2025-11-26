@@ -18,8 +18,9 @@ return {
 			local parent = vim.fs.dirname(vim.api.nvim_buf_get_name(bufnr))
 			local name = vim.fs.basename(vim.api.nvim_buf_get_name(bufnr))
 			local ignoreBuffer = parent:find("private dotfiles")
-				or parent:find("leetcode") -- leetcode.nvim without help
+				or parent:find("leetcode") -- should do leetcode problems on my own
 				or name:lower():find("recovery") -- e.g. password recovery
+				or parent:find("/private/var/") -- `pass` cli buffers
 				or name == ".env"
 			return not ignoreBuffer -- `false` -> disable in that buffer
 		end,
@@ -48,6 +49,12 @@ return {
 			function() require("neocodeium").accept() end,
 			mode = "i",
 			desc = "󰚩 Accept full suggestion",
+		},
+		{
+			"<D-S>",
+			function() require("neocodeium").accept_word() end,
+			mode = "i",
+			desc = "󰚩 Accept word",
 		},
 		{
 			"<D-d>",
