@@ -386,8 +386,6 @@ return {
 				gh_issue = { layout = "big_preview" },
 				gh_pr = { layout = "big_preview" },
 				lsp_config = {
-					title = "Available LSPs",
-					installed = true, -- only available LSPs
 					layout = "big_preview",
 					confirm = function(picker, item)
 						picker:close()
