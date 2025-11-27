@@ -101,7 +101,7 @@ func parseTimeAndPriorityAndMessage(input: String, remForToday: Bool) -> ParsedR
 func fetchWebsiteTitle(from string: String) async throws -> String? {
 	guard
 		let url = URL(string: string),
-		url.scheme != nil && url.host != nil && url.scheme != "http" && url.scheme != "https"
+		url.scheme != nil && url.host != nil
 	else { return nil }
 
 	let (data, _) = try await URLSession.shared.data(from: url)
@@ -146,18 +146,25 @@ eventStore.requestFullAccessToReminders { granted, error in
 	}
 	let (hh, mm, bangs, amPm) = (parsed.hour, parsed.minute, parsed.bangs, parsed.amPm)
 	var title = parsed.msg
+	fputs("🪚 title: \(title)\n", stderr)
 	var body = ""
 
 	// if input is a URL, fetch title and use URL as body
-	let url = URL(string: parsed.msg)
-	let msgIsUrl = url != nil && url!.scheme != nil && url!.host != nil
-	if msgIsUrl {
-		let urlTitle = try! await fetchWebsiteTitle(from: parsed.msg)
-		if let urlTitle = try! await fetchWebsiteTitle(from: parsed.msg) {
-			title = urlTitle!
-			body = parsed.msg
+	var msgIsUrl = false
+	Task {
+		do {
+			if let urlTitle = try await fetchWebsiteTitle(from: parsed.msg) {
+				title = urlTitle
+				fputs("🪚 urlTitle: \(urlTitle)\n", stderr)
+				body = parsed.msg
+				msgIsUrl = true
+			}
+		} catch {
+			fputs("Failed to fetch website title: \(error)\n", stderr)
 		}
 	}
+	fputs("🪚 title: \(title)\n", stderr)
+	fputs("🪚 body: \(body)\n", stderr)
 
 	// CREATE REMINDER
 	let isAllDayReminder = (hh == nil && hh == nil)
