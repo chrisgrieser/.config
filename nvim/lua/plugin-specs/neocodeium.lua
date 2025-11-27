@@ -3,6 +3,7 @@
 -- INFO plugins are disabled when using `pass` via `$USING_PASS`, for safety
 -- adding redundant safeguards to disable AI for those buffers nonetheless
 --------------------------------------------------------------------------------
+-- alternative: https://github.com/milanglacier/minuet-ai.nvim
 
 return {
 	"monkoose/neocodeium",
