@@ -15,13 +15,9 @@
 	<key>quickadd_today_keyword</key>
 	<string>,</string>
 	<key>quickadd_tomorrow_keyword</key>
-	<string>,,</string>
+	<string>qq</string>
 	<key>reminder_list</key>
 	<string>Tasks</string>
-	<key>select_reminder_keyword</key>
-	<string>|</string>
-	<key>show_events</key>
-	<true/>
 	<key>sketchybar_trigger_name</key>
 	<string>update_reminder_count</string>
 </dict>
