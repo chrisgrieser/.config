@@ -52,7 +52,10 @@ return {
 			},
 			lualine_b = {
 				{ -- cwd
-					function() return (vim.uv.cwd() or ""):gsub(os.getenv("HOME") or "", "~") end,
+					function()
+						local cwd = (vim.uv.cwd() or "")
+						return cwd:gsub(os.getenv("HOME") or "", "~"):sub(1, 30)
+					end,
 					cond = function() return vim.bo.buftype == "" end,
 					icon = "󰙅",
 				},

@@ -9,7 +9,7 @@
 	<key>frontwin_keyword</key>
 	<string>//</string>
 	<key>max_recent_files</key>
-	<integer>250</integer>
+	<integer>200</integer>
 	<key>recent_keyword</key>
 	<string>gr</string>
 	<key>tag_keyword</key>

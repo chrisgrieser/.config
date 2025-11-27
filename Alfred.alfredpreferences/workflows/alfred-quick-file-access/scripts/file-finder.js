@@ -130,9 +130,10 @@ function run() {
 
 	// PARAMETERS
 	let { shellCmd, directory, absPathOutput, shallowOutput } = searchConfig[keyword];
-	const maxFiles = keyword === $.getenv("recent_keyword")
-		? Math.min(Number.parseInt($.getenv("max_recent_files"), 10), 9)
-		: undefined;
+	const maxFiles =
+		keyword === $.getenv("recent_keyword")
+			? Math.max(Number.parseInt($.getenv("max_recent_files")), 9)
+			: undefined;
 	if (keyword === $.getenv("frontwin_keyword")) {
 		directory = getFrontWin();
 		if (directory === "") return errorItem("⚠️ No Finder window found.");
