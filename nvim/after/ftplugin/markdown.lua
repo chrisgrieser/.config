@@ -15,6 +15,14 @@ optl.listchars:append { multispace = "·" }
 if vim.bo.buftype == "" then optl.signcolumn = "yes:4" end
 
 --------------------------------------------------------------------------------
+
+-- Format Table
+bkeymap("n", "<leader>rt", "vip:!pandoc --to=gfm<CR>", { desc = " Format table under cursor" })
+
+-- Reflow whole file
+bkeymap("n", "<D-S>", "gggwG``", { desc = " Reflow all lines" })
+
+--------------------------------------------------------------------------------
 -- AUTO BULLETS
 -- (simplified implementation of `bullets.vim`)
 do
@@ -70,11 +78,6 @@ do
 	-- stylua: ignore
 	bkeymap({ "n", "i" }, "<D-H>", function() headingsIncremantor(-1) end, { desc = " Decrement heading" })
 end
-
---------------------------------------------------------------------------------
-
--- Format Table
-bkeymap("n", "<leader>rt", "vip:!pandoc --to=gfm<CR>", { desc = " Format table under cursor" })
 
 --------------------------------------------------------------------------------
 
