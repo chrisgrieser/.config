@@ -1269,9 +1269,6 @@
 	<key>readme</key>
 	<string>## Requirements
 - macOS 15 (Sequoia) or higher
-- Xcode command line tools. (Alfred [automatically prompts you to install
-  them](https://www.alfredapp.com/help/kb/dependencies/), if they are not
-  available on your device.)
 
 ## Usage
 - Display reminders due today (or overdue) via the keyword `rem`. Configure the
@@ -1319,6 +1316,10 @@
 You can use this shortcut to create a new task for today due today. Use it in
 the Share Sheet or simply run it from the Lock Screen or Control Center.
 [➡️ Download the shortcut](https://raw.githubusercontent.com/chrisgrieser/alfred-reminders-today/blob/main/Task%20for%20today.shortcut)
+
+## Troubleshooting
+Refer to the [online README](https://github.com/chrisgrieser/alfred-reminders-today/blob/main/README.md) 
+for details how to fix common problems.
 
 ---
 
