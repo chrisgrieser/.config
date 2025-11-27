@@ -160,6 +160,7 @@ return {
 		-- MISC
 		{ "<leader>pc", function() Snacks.picker.colorschemes() end, desc = " Colorschemes" },
 		{ "<leader>ms", function() Snacks.picker.marks() end, desc = "󰃁 Select mark" },
+		{ "<leader>yy", function() Snacks.picker.registers() end, desc = "󱛢 Yank ring" },
 		{ "<leader>ut", function() Snacks.picker.undo() end, desc = "󰋚 Undo tree" },
 		-- stylua: ignore
 		{ "<C-.>", function() Snacks.picker.icons() end, mode = { "n", "i" }, desc = "󱗿 Icon picker" },
@@ -250,6 +251,9 @@ return {
 							picker:find() -- reload
 						end,
 					},
+				},
+				registers = {
+					transform = function(item) return item.label:find("[1-9]") ~= nil end, -- only numbered
 				},
 				explorer = {
 					auto_close = true,

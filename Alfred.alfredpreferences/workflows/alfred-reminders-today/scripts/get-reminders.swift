@@ -21,6 +21,7 @@ struct ReminderOutput: Codable {
 	let list: String
 	let listColor: String?  // for performance, only calculated if `includeAllLists` is true
 	let dueDate: String?
+	let completionDate: String?
 	let isAllDay: Bool
 	let isCompleted: Bool
 	let hasRecurrenceRules: Bool
@@ -175,6 +176,7 @@ eventStore.requestFullAccessToReminders { granted, error in
 					list: rem.calendar.title,
 					listColor: includeAllListsEnabled ? mapCGColorToEmoji(rem.calendar.cgColor) : nil,
 					dueDate: components?.date.flatMap { formatter.string(from: $0) },
+					completionDate: rem.completionDate.flatMap { formatter.string(from: $0) },
 					isAllDay: components?.hour == nil && components?.minute == nil,
 					isCompleted: rem.isCompleted,
 					hasRecurrenceRules: rem.hasRecurrenceRules,
