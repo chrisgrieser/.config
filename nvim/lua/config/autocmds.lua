@@ -297,6 +297,8 @@ local templateConfig = {
 		["**/Alfred.alfredpreferences/workflows/**/*.js"] = "jxa.js",
 		["**/Justfile"] = "justfile.just",
 		["**/.github/workflows/*.{yml,yaml}"] = "github-action.yaml",
+
+		[vim.g.notesDir.. "/**/*.md"] = "note.md",
 	},
 }
 

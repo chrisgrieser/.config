@@ -123,24 +123,20 @@ func requestRemindersAccess() async -> Bool {
 	}
 }
 
+func fail(_ msg: String) {
+	print("❌;" + msg)  // `;` used as separator in Alfred
+	semaphore.signal()
+}
+
 // ─────────────────────────────────────────────────────────────────────────────
 
-eventStore.requestFullAccessToReminders { granted, error in
-	func fail(_ msg: String) {
-		print("❌;" + msg)  // `;` used as separator in Alfred
-		semaphore.signal()
-	}
-
-	guard error == nil else {
-		fail("Error requesting access: " + error!.localizedDescription)
-		return
-	}
-	guard granted else {
-		fail("Access to Reminder.app not granted.")
-		return
-	}
+Task {  // wrapping in `Task` because `await` is not allowed in `main`
 	guard !input.isEmpty else {
 		fail("Input is empty.")
+		return
+	}
+	guard await requestRemindersAccess() else {
+		fail("Access to Reminder.app not granted.")
 		return
 	}
 	// ──────────────────────────────────────────────────────────────────────────
@@ -156,13 +152,13 @@ eventStore.requestFullAccessToReminders { granted, error in
 	var title = parsed.msg
 	var body = ""
 
-		// if input is a URL, fetch title and use URL as body
-		var msgIsUrl = false
-		if let urlTitle = try await fetchWebsiteTitle(from: parsed.msg) {
-			title = urlTitle
-			body = parsed.msg
-			msgIsUrl = true
-		}
+	// if input is a URL, fetch title and use URL as body
+	var msgIsUrl = false
+	if let urlTitle = try await fetchWebsiteTitle(from: parsed.msg) {
+		title = urlTitle
+		body = parsed.msg
+		msgIsUrl = true
+	}
 
 	// CREATE REMINDER
 	let isAllDayReminder = (hh == nil && hh == nil)
@@ -251,7 +247,7 @@ eventStore.requestFullAccessToReminders { granted, error in
 		notif.append(timeStr)
 	}
 	notif.append("\"\(title)\"")
-	if msgIsUrl { notif.append("(URL)") }
+	if msgIsUrl { notif.append("🔗") }
 	let alfredNotif = notif.joined(separator: "   ")
 	print("✅;" + alfredNotif)  // `;` used as separator in Alfred
 
