@@ -1,6 +1,0 @@
-# DOCS https://tombi-toml.github.io/tombi/docs/configuration
-
-# BUG not working: https://github.com/tombi-toml/tombi/issues/772
-[lint]
-[lint.rules]
-tables-out-of-order = "off"
