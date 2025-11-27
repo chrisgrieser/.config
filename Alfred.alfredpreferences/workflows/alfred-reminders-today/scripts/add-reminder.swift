@@ -26,7 +26,7 @@ func parseTimeAndPriorityAndMessage(input: String, remForToday: Bool) -> ParsedR
 
 	// parse bangs for priority
 	var bangs = ""  // default: no priority
-	let bangRegex = try! Regex(#"^!{1,3}|!{1,3}$"#)
+	let bangRegex = try! Regex("^!{1,3}|!{1,3}$")
 	if let match = try? bangRegex.firstMatch(in: msg) {
 		bangs = String(msg[match.range])
 		msg.removeSubrange(match.range)
@@ -101,14 +101,13 @@ func parseTimeAndPriorityAndMessage(input: String, remForToday: Bool) -> ParsedR
 func fetchWebsiteTitle(from string: String) async throws -> String? {
 	guard
 		let url = URL(string: string),
-		url.scheme != nil && url.host != nil
+		(url.scheme == "http" || url.scheme == "https") && url.host != nil
 	else { return nil }
 
 	let (data, _) = try await URLSession.shared.data(from: url)
 	guard let html = String(data: data, encoding: .utf8) else { return nil }
 
-	let regex = try! Regex(#"<title>(.*?)</title>"#)
-
+	let regex = try! Regex("<title>(.*?)</title>")
 	if let match = try? regex.firstMatch(in: html) {
 		return String(match.output[1].substring!)
 	}
