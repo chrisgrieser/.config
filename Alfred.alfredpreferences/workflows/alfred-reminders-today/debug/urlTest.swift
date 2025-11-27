@@ -6,6 +6,7 @@ func fetchWebsiteTitle(from string: String) async throws -> String? {
 		let url = URL(string: string),
 		url.scheme != nil && url.host != nil
 	else { return nil }
+	fputs("🪚 url: \(url)\n", stderr)
 
 	let (data, _) = try await URLSession.shared.data(from: url)
 	guard let html = String(data: data, encoding: .utf8) else { return nil }
@@ -13,11 +14,11 @@ func fetchWebsiteTitle(from string: String) async throws -> String? {
 	let regex = try! Regex(#"<title>(.*?)</title>"#)
 
 	if let match = try? regex.firstMatch(in: html) {
-		return String(html[match.range])
+		return String(match.output[1].substring!)
 	}
 	return nil
 }
 
-let title = try? await fetchWebsiteTitle(from: "https://www.apple.com")
+let title = try? await fetchWebsiteTitle(from: "http://www.stackoverflow.com")
 print(title ?? "nil")
 

@@ -110,9 +110,17 @@ func fetchWebsiteTitle(from string: String) async throws -> String? {
 	let regex = try! Regex(#"<title>(.*?)</title>"#)
 
 	if let match = try? regex.firstMatch(in: html) {
-		return String(html[match.range])
+		return String(match.output[1].substring!)
 	}
 	return nil
+}
+
+func requestRemindersAccess() async -> Bool {
+	await withCheckedContinuation { continuation in
+		eventStore.requestFullAccessToReminders { granted, error in
+			continuation.resume(returning: granted)
+		}
+	}
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -146,25 +154,15 @@ eventStore.requestFullAccessToReminders { granted, error in
 	}
 	let (hh, mm, bangs, amPm) = (parsed.hour, parsed.minute, parsed.bangs, parsed.amPm)
 	var title = parsed.msg
-	fputs("🪚 title: \(title)\n", stderr)
 	var body = ""
 
-	// if input is a URL, fetch title and use URL as body
-	var msgIsUrl = false
-	Task {
-		do {
-			if let urlTitle = try await fetchWebsiteTitle(from: parsed.msg) {
-				title = urlTitle
-				fputs("🪚 urlTitle: \(urlTitle)\n", stderr)
-				body = parsed.msg
-				msgIsUrl = true
-			}
-		} catch {
-			fputs("Failed to fetch website title: \(error)\n", stderr)
+		// if input is a URL, fetch title and use URL as body
+		var msgIsUrl = false
+		if let urlTitle = try await fetchWebsiteTitle(from: parsed.msg) {
+			title = urlTitle
+			body = parsed.msg
+			msgIsUrl = true
 		}
-	}
-	fputs("🪚 title: \(title)\n", stderr)
-	fputs("🪚 body: \(body)\n", stderr)
 
 	// CREATE REMINDER
 	let isAllDayReminder = (hh == nil && hh == nil)
