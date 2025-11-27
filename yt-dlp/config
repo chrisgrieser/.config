@@ -5,8 +5,6 @@
 # DOWNLOAD
 --limit-rate=4M
 --concurrent-fragments=3
---retries=5
---no-playlist
 --console-title # display progress in the terminal window title
 
 # FILE SYSTEM
@@ -18,5 +16,3 @@
 --replace-in-metadata "title" "FULL SCENE" "" # remove from title (regex supported)
 --output "%(title)s.%(ext)s" # https://github.com/yt-dlp/yt-dlp#output-template
 
-# POST PROCESSING
-# --exec "~/.config/yt-dlp/post-processing.sh {}"
