@@ -7,11 +7,14 @@
 on alfred_script(shellCmd)
 	# LAUNCH WEZTERM IF NEEDED
 	# (Appname is `WezTerm`, processname is `wezterm-gui`)
-	tell application "WezTerm" to activate
-	tell application "System Events"
-		repeat while (name of first application process whose frontmost is true) is not "wezterm-gui"
-			delay 0.05
-		end repeat
+	set i to 0 
+	tell application "System Events" 
+		repeat while (name of first application process whose frontmost is true) is not "wezterm-gui" 
+
+			tell application "WezTerm" to activate
+			delay 0.05 
+			if i > 100 then return 
+		end repeat 
 	end tell
 	delay 0.1 # ensure wezterm-gui is ready
 
