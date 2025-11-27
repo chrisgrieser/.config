@@ -3,7 +3,7 @@ export ZDOTDIR="$HOME/.config/zsh" # location of this zsh configuration
 
 # NEOVIM
 export EDITOR="nvim"
-export NEOVIDE_FORK="true" # spawn independent `neovide` instance
+export NEOVIDE_FORK="true"                            # spawn independent `neovide` instance
 export PATH="$HOME/.local/share/nvim/mason/bin":$PATH # make mason tools available
 
 # PANDOC
@@ -20,6 +20,6 @@ export PASSWORD_STORE_CHARACTER_SET="[:alnum:]" # many services break with speci
 # For security reasons, only export token for the processes that actually need
 # it, and using a token with a scope as limited as possible.
 function _export_github_token {
-	GITHUB_TOKEN="$(cat "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/private dotfiles/github-token.txt")"
+	GITHUB_TOKEN="$(cat "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Tech/api-keys/github-token.txt")"
 	export GITHUB_TOKEN
 }

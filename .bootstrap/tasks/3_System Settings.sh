@@ -80,8 +80,7 @@ defaults write com.apple.finder FXInfoPanesExpanded -dict \
 killall Finder
 
 # show/hide folders
-chflags hidden ~/{Movies,Music,Pictures,Public}
-chflags nohidden ~/Library
+chflags hidden ~/{Movies,Music,Pictures,Public,Library}
 
 #───────────────────────────────────────────────────────────────────────────────
 
