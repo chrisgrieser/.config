@@ -244,12 +244,13 @@ do
 	-- cycles through them
 	keymap("n", "<C-p>", '"1p', { desc = " Cyclic paste" })
 
+	-- yankring
 	vim.api.nvim_create_autocmd("TextYankPost", {
-		desc = "User: Make cyclic paste compatible with yanking",
 		callback = function()
-			-- store yanks in register 1 (by default it's stored in 0)
-			if vim.v.event.operator == "y" and vim.v.event.regname == "" then
-				vim.fn.setreg("1", vim.fn.getreg("0"))
+			if vim.v.event.operator == "y" then
+				for i = 9, 1, -1 do -- Shift all numbered registers.
+					vim.fn.setreg(tostring(i), vim.fn.getreg(tostring(i - 1)))
+				end
 			end
 		end,
 	})

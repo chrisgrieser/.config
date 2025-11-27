@@ -99,15 +99,12 @@ function run() {
 			return JSON.stringify({ items: [item] });
 		}
 		const reposOfPage = JSON.parse(response);
-		console.log(`Page ${page}: ${reposOfPage.length} repos`);
-
-		if (reposOfPage.length === 0) break;
 		allRepos.push(...reposOfPage);
-		if (reposOfPage.length < 100) break; // GitHub returns less than 100 when on last page
 		page++;
+		if (reposOfPage.length < 100) break; // GitHub returns less than 100 when on last page
 	}
-	console.log("🪚 allRepos:", JSON.stringify(allRepos[1], null, 2))
 
+	// Create items for Alfred
 	const repos = allRepos
 		.filter((/** @type {GithubRepo} */ repo) => !repo.archived) // github API does now allow filtering when requesting
 		.sort(

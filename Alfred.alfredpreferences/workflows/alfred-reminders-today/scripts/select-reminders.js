@@ -12,6 +12,7 @@ app.includeStandardAdditions = true;
  * @property {string} listColor
  * @property {boolean} isCompleted
  * @property {string} dueDate
+ * @property {string} completionDate
  * @property {boolean} isAllDay
  * @property {boolean} hasRecurrenceRules
  * @property {number} priority
@@ -132,15 +133,18 @@ function run() {
 		const content = (rem.title + "\n" + body).trim();
 		const [url] = content.match(urlRegex) || [];
 		const displayTitle = rem.title.replace(/\n+/g, " / "); // SIC titles can have newlines
-		const emoji = rem.isCompleted ? "☑️ " : "";
 
 		// SUBTITLE: display due time, past & missing due dates, list, and notes
 		const dueDateObj = new Date(rem.dueDate);
 		const dueTime = rem.isAllDay ? "" : new Date(rem.dueDate).toLocaleTimeString([], timeFmt);
+		const completionTime = rem.isCompleted
+			? "☑️ " + new Date(rem.completionDate).toLocaleTimeString([], timeFmt)
+			: "";
 		const pastDueDate = dueDateObj < startOfToday ? relativeDate(dueDateObj) : "";
 		const missingDueDate = rem.dueDate ? "" : "no due date";
 		const listName = includeAllLists ? rem.listColor + " " + rem.list : "";
 		const subtitle = [
+			completionTime,
 			rem.hasRecurrenceRules ? "🔁" : "",
 			"❗️".repeat(rem.priority), // white exclamation mark not visible in many themes
 			listName,
@@ -148,13 +152,13 @@ function run() {
 			body.replace(/\n+/g, " "),
 		]
 			.filter(Boolean)
-			.join("   ");
+			.join("    ");
 
 		// INFO the boolean are all stringified, so they are available as "true"
 		// and "false" after stringification, instead of the less clear "1" and "0"
 		/** @type {AlfredItem} */
 		const alfredItem = {
-			title: emoji + displayTitle,
+			title: displayTitle,
 			subtitle: subtitle,
 			text: { copy: content, largetype: content },
 			quicklookurl: url,
