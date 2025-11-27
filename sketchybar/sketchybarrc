@@ -83,11 +83,6 @@ sketchybar \
 	--set network-upload icon="" update_freq="3" \
 	script="./components/network_upload.sh" \
 	\
-	--add item no_internet $row_2 \
-	--set no_internet icon="󰖪" update_freq="4" \
-	icon.padding_right="0" label.padding_right="0" \
-	script="./components/no_internet.sh" \
-	\
 	--add item sync_indicator $row_2 \
 	--set sync_indicator icon="󰓦" update_freq="180" \
 	script="./components/git_sync_bar_icon.sh" \

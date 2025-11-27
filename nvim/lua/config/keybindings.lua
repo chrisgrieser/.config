@@ -64,6 +64,8 @@ keymap("n", "<C-l>", "<C-i>", { desc = "󱋿 Jump forward", unique = false })
 
 -- Search
 keymap("n", "-", "/")
+-- stylua: ignore
+keymap("c", "/", function() return vim.fn.getcmdtype() == "/" and "\\/" or "/" end, { expr = true, desc = "Auto-escape / in searches" })
 keymap("x", "-", "<Esc>/\\%V", { desc = " Search IN selection" })
 
 -- [g]oto [m]atching parenthesis (`remap` needed to use builtin `MatchIt` plugin)
