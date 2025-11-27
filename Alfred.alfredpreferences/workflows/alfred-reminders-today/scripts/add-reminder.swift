@@ -1,5 +1,6 @@
 #!/usr/bin/env swift
 import EventKit
+import Foundation
 
 let eventStore = EKEventStore()
 let semaphore = DispatchSemaphore(value: 0)
@@ -97,11 +98,28 @@ func parseTimeAndPriorityAndMessage(input: String, remForToday: Bool) -> ParsedR
 		hour: hour, minute: minute, msg: msg, bangs: bangs, amPm: amPm, errorMsg: errorMsg)
 }
 
+func fetchWebsiteTitle(from string: String) async throws -> String? {
+	guard
+		let url = URL(string: string),
+		url.scheme != nil && url.host != nil && url.scheme != "http" && url.scheme != "https"
+	else { return nil }
+
+	let (data, _) = try await URLSession.shared.data(from: url)
+	guard let html = String(data: data, encoding: .utf8) else { return nil }
+
+	let regex = try! Regex(#"<title>(.*?)</title>"#)
+
+	if let match = try? regex.firstMatch(in: html) {
+		return String(html[match.range])
+	}
+	return nil
+}
+
 // ─────────────────────────────────────────────────────────────────────────────
 
 eventStore.requestFullAccessToReminders { granted, error in
 	func fail(_ msg: String) {
-		print("❌;" + msg) // `;` used as separator in Alfred
+		print("❌;" + msg)  // `;` used as separator in Alfred
 		semaphore.signal()
 	}
 
@@ -119,7 +137,6 @@ eventStore.requestFullAccessToReminders { granted, error in
 	}
 	// ──────────────────────────────────────────────────────────────────────────
 
-
 	// PARSE INPUT
 	let remForToday = targetDay == "0"
 	let parsed = parseTimeAndPriorityAndMessage(input: input, remForToday: remForToday)
@@ -127,17 +144,28 @@ eventStore.requestFullAccessToReminders { granted, error in
 		fail(parsed.errorMsg!)
 		return
 	}
-	let (title, hh, mm, bangs, amPm) = (
-		parsed.msg, parsed.hour, parsed.minute, parsed.bangs, parsed.amPm
-	)
+	let (hh, mm, bangs, amPm) = (parsed.hour, parsed.minute, parsed.bangs, parsed.amPm)
+	var title = parsed.msg
+	var body = ""
+
+	// if input is a URL, fetch title and use URL as body
+	let url = URL(string: parsed.msg)
+	let msgIsUrl = url != nil && url!.scheme != nil && url!.host != nil
+	if msgIsUrl {
+		let urlTitle = try! await fetchWebsiteTitle(from: parsed.msg)
+		if let urlTitle = try! await fetchWebsiteTitle(from: parsed.msg) {
+			title = urlTitle!
+			body = parsed.msg
+		}
+	}
 
 	// CREATE REMINDER
 	let isAllDayReminder = (hh == nil && hh == nil)
 	let reminder = EKReminder(eventStore: eventStore)
 	reminder.title = title
 	reminder.isCompleted = false
+	reminder.notes = body
 
-	// PRIORITY
 	switch bangs.count {  // values based on RFC 5545, which Apple uses https://www.rfc-editor.org/rfc/rfc5545.html#section-3.8.1.9
 	case 1: reminder.priority = 9
 	case 2: reminder.priority = 5
@@ -208,9 +236,7 @@ eventStore.requestFullAccessToReminders { granted, error in
 
 	// NOTIFICATION FOR ALFRED
 	var notif: [String] = []
-	if !bangs.isEmpty {
-		notif.append(bangs)
-	}
+	if !bangs.isEmpty { notif.append(bangs) }
 	if !isAllDayReminder {
 		let minutesPadded = String(format: "%02d", mm!)
 		var hourDisplay = hh!
@@ -220,7 +246,8 @@ eventStore.requestFullAccessToReminders { granted, error in
 		notif.append(timeStr)
 	}
 	notif.append("\"\(title)\"")
-	let alfredNotif = notif.joined(separator: "    ")
+	if msgIsUrl { notif.append("(URL)") }
+	let alfredNotif = notif.joined(separator: "   ")
 	print("✅;" + alfredNotif)  // `;` used as separator in Alfred
 
 	semaphore.signal()
