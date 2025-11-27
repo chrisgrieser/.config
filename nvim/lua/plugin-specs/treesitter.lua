@@ -5,21 +5,20 @@
 
 local ensureInstalled = {
 	programmingLangs = {
-		"bash", -- used for zsh
+		"bash",
 		"zsh",
 		"javascript",
+		"typescript",
 		"lua",
 		"python",
 		"ruby", -- used by Brewfile
 		"rust",
 		"svelte",
 		"swift",
-		"typescript",
 		"vim",
 	},
 	dataFormats = {
 		"json",
-		"json5",
 		"jsonc",
 		"toml",
 		"xml", -- macOS `.plist` are also `.xml`
@@ -40,7 +39,6 @@ local ensureInstalled = {
 		"gitattributes",
 		"gitignore",
 		"just",
-		"make",
 		"query", -- treesitter query files
 		"requirements", -- pip requirements file
 	},
@@ -51,7 +49,8 @@ local ensureInstalled = {
 		"luadoc",
 		"luap", -- lua patterns
 		"regex",
-		"rst", -- python reST
+		"rst", -- for python
+		"vimdoc",
 	},
 }
 

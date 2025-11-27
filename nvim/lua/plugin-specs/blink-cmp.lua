@@ -58,7 +58,12 @@ return {
 					opts = { clipboard_register = "+" }, -- register to use for `$CLIPBOARD`
 				},
 				path = {
-					opts = { get_cwd = vim.uv.cwd },
+					opts = {
+						get_cwd = vim.uv.cwd,
+						show_hidden_files_by_default = true,
+						-- treat `/path` as cwd, not filesystem root (useful for markdown)
+						ignore_root_slash = true,
+					},
 				},
 				buffer = {
 					max_items = 4,

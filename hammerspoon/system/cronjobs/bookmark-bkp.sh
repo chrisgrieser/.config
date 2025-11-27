@@ -3,7 +3,7 @@
 # CONFIG
 max_number_of_bkps=100
 browser_setting="$HOME/Library/Application Support/BraveSoftware/Brave-Browser"
-bkp_destination="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Tech/Backups/Browser Bookmarks"
+bkp_destination="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Tech/backups/Browser Bookmarks"
 #───────────────────────────────────────────────────────────────────────────────
 
 isodate=$(date '+%Y-%m-%d')

@@ -4,7 +4,7 @@ local home = os.getenv("HOME")
 
 -- CONFIG
 local browserConfigs = home .. "/.config/browser-extension-configs/"
-local backupFolder = home .. "/Library/Mobile Documents/com~apple~CloudDocs/Tech/Backups/"
+local backupFolder = home .. "/Library/Mobile Documents/com~apple~CloudDocs/Tech/backups/"
 
 --------------------------------------------------------------------------------
 
