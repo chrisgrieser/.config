@@ -4,8 +4,11 @@
 
 -- https://platform.openai.com/usage
 -- https://platform.openai.com/docs/models
+-- CONFIG
 local model = "gpt-5-mini"
 local reasoning_effort = "minimal" -- all GPT-5 models reason, "medium" is too slow
+local apiKeyFile =
+	"$HOME/Library/Mobile Documents/com~apple~CloudDocs/Tech/api-keys/openai-api-key.txt"
 
 --------------------------------------------------------------------------------
 
@@ -122,9 +125,6 @@ local ccSpec = {
 		adapters = {
 			http = {
 				openai = function()
-					local apiKeyFile =
-						"$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/private dotfiles/openai-api-key.txt"
-
 					-- https://github.com/olimorris/codecompanion.nvim/blob/main/lua/codecompanion/adapters/http/openai.lua
 					return require("codecompanion.adapters").extend("openai", {
 						env = {
@@ -159,7 +159,7 @@ local ccSpec = {
 								I will send you some code, and I want you to simplify
 								the code while not diminishing its readability.
 
-								Keep the indentation level the same, and do not change 
+								Keep the indentation level the same, and do not change
 								for formatting style.
 							]]):format(ctx.filetype)
 						end,
@@ -189,7 +189,7 @@ local ccSpec = {
 						content = function(_ctx)
 							return [[
 								You are an editor for the English language.
-								I will send you some text, and I want you to improve the 
+								I will send you some text, and I want you to improve the
 								language, without changing the meaning.
 							]]
 						end,

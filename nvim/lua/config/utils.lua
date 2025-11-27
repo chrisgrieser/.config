@@ -28,7 +28,7 @@ end
 function M.loadGhToken()
 	if vim.env.GITHUB_TOKEN then return end
 	local tokenPath = os.getenv("HOME")
-		.. "/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/private dotfiles/github-token.txt"
+		.. "/Library/Mobile Documents/com~apple~CloudDocs/Tech/api-keys/github-token.txt"
 	local file = io.open(tokenPath, "r")
 	if not file then
 		vim.notify("Could not find file for `GITHUB_TOKEN`.", vim.log.levels.ERROR)
