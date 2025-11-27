@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 
 # CONFIG
-logpath_on_mac="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Tech/Backups/backups-to-external-drives.log"
+logpath_on_mac="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Tech/backups/backups-to-external-drives.log"
 max_number_of_archives=5
 archive_every_x_months=3
 

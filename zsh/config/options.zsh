@@ -16,12 +16,12 @@ setopt INC_APPEND_HISTORY # write immediately to history file
 setopt HIST_NO_STORE      # ignore history command itself for the history
 setopt HIST_IGNORE_SPACE  # cmds with leading space are not added to the history
 
-export HISTSIZE=20000
-export SAVEHIST=$HISTSIZE
-
-# 1. not in `$ZDOTDIR` as it's in public dotfiles; 
+# 1. not in `$ZDOTDIR` as it is in public dotfiles repo
 # 2. not in iCloud due to frequent merge conflicts
 export HISTFILE="$HOME/.local/share/zsh/zsh_history.zsh"
+
+export HISTSIZE=20000
+export SAVEHIST=$HISTSIZE
 
 # LANGUAGE
 # set English everywhere, fixes encoding issues

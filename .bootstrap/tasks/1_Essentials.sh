@@ -1,12 +1,6 @@
-sudo -v # ask for credentials upfront
+#!/usr/bin/env zsh
+sudo -v                     # ask for credentials upfront
 setopt INTERACTIVE_COMMENTS # for copy-pasting
-
-dotfolder="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder"
-if [[ ! -d "$dotfolder" ]]; then
-	echo "No folder named 'Dotfolder' found in iCloud."
-	return 1
-fi
-
 #───────────────────────────────────────────────────────────────────────────────
 
 # get dotfiles
@@ -21,7 +15,7 @@ source "$HOME/.config/zsh/.zshrc"
 
 #───────────────────────────────────────────────────────────────────────────────
 
-echo "Enter a name for this device such as 'Chris iMac Home'. It is also used for the Brewfile."
+echo "Enter a name for this device such as 'Chris iMac Home'."
 echo "Name: "
 read -r new_name
 sudo scutil --set ComputerName "$new_name"
@@ -40,7 +34,7 @@ brew install --no-quarantine --cask neovide
 brew install pinentry-mac pass
 defaults write org.gpgtools.common DisableKeychain -bool yes # prevent from saving in the keychains
 
-gpg --import "$dotfolder/Authentication/gpg-for-pass/private.key"
+gpg --import "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Tech/security/gpg-for-pass/private.key"
 ln -sf "$HOME/.config/gpg/gpg-agent.conf" ~/.gnupg/gpg-agent.conf
 gpgconf --kill gpg-agent # restart so the new gpg agent is recognized
 find ~/.gnupg -type f -exec chmod 600 {} \;

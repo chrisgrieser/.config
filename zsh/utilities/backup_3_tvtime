@@ -3,8 +3,8 @@
 # CONFIG
 repo="https://github.com/Hobo-Ware/tv-time-liberator"
 
-envfile_with_login="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Tech/private dotfiles/tvtime-liberator.txt"
-bkp_destination="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Tech/Backups/TV Time/"
+envfile_with_login="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Tech/api-keys/tvtime-liberator.txt"
+bkp_destination="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Tech/backups/TV Time/"
 
 #───────────────────────────────────────────────────────────────────────────────
 set -e
