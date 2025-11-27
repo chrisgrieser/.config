@@ -1313,6 +1313,11 @@
 	  [hotkey](https://www.alfredapp.com/help/workflows/triggers/hotkey/) to
 	  create a reminder due today from the current selection.
 
+## iOS Shortcut for creating new task
+You can use this shortcut to create a new task for today due today. Use it in
+the Share Sheet or simply run it from the Lock Screen or Control Center.
+[➡️ Download the shortcut](https://raw.githubusercontent.com/chrisgrieser/alfred-reminders-today/blob/main/Task%20for%20today.shortcut)
+
 ---
 
 #### Created by [Chris Grieser](https://chris-grieser.de/)   |   ⭐️ [Star on GitHub](https://github.com/chrisgrieser/alfred-reminders-today)</string>
