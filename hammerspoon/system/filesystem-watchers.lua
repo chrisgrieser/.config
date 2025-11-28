@@ -16,6 +16,13 @@ hs.fs.mkdir(backupFolder)
 
 --------------------------------------------------------------------------------
 
+M.pathw_icloud = pathw(home .. "/Library/Mobile Documents/com~apple~CloudDocs/", function(paths, _)
+	if not u.screenIsUnlocked() then return end -- prevent iCloud sync triggering in standby
+	
+	for _, path in pairs(paths) do
+	end
+end)
+
 M.pathw_desktop = pathw(home .. "/Desktop/", function(paths, _)
 	if not u.screenIsUnlocked() then return end -- prevent iCloud sync triggering in standby
 
