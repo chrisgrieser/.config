@@ -42,7 +42,7 @@ return {
 			lualine_a = {
 				{
 					"datetime",
-					style = "%H:%M",
+					style = "%H:%M:%S",
 					-- make the `:` blink
 					fmt = function(time) return time:gsub(":", os.time() % 2 == 0 and " " or ":") end,
 					cond = function() return vim.o.columns > 120 end, -- only if window is maximized
