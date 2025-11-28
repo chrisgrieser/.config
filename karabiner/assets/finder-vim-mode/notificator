@@ -1,11 +1,11 @@
-#!/bin/zsh
+#!/bin/zsh --no-rcs
 
 ####################################################
 ### Created by Vítor Galvão                      ###
 ### Find the latest version at:                  ###
 ###   https://github.com/vitorgalvao/notificator ###
 ####################################################
-### Modified by Chris Grieser for without Alfred ###
+# Modified by Chris Grieser for use without Alfred #
 ####################################################
 
 #───────────────────────────────────────────────────────────────────────────────
@@ -13,28 +13,38 @@
 readonly bundle_id="de.chris-grieser.finder-vim-mode"
 readonly name="Finder Vim Mode"
 readonly icon="/System/Library/CoreServices/Finder.app/Contents/Resources/Finder.icns"
-readonly app_location="$HOME/.cache/notificators"
+readonly cache_location="$HOME/.cache/notificators"
 
 #───────────────────────────────────────────────────────────────────────────────
 
+readonly program="${0:t}"
+
 # Helpers
+function error {
+  echo "${1}" >&2
+  exit 1
+}
+
 function show_notification {
   /usr/bin/open "${app}" --args "${notificator_message}" "${notificator_title}" "${notificator_subtitle}" "${notificator_sound}"
 }
 
+# Usage
 function usage {
   echo "
-    Trigger macOS notifications with icon.
+    Trigger macOS notifications from Alfred, using the Workflow icon.
+
+    Message is mandatory. Other flags are optional.
 
     Usage:
-      notificator --message <text> [options]
+      ${program} --message <text> [--title <text>] [--subtitle <text>] [--sound <name>]
 
     Options:
-      -m, --message <text>       Message text
-      -t, --title <text>         Title text
-      -s, --subtitle <text>      Subtitle text
-      -p, --sound <name>         Sound name (from /System/Library/Sounds)
-      -h, --help                 Show this help
+      -m, --message <text>    Message text.
+      -t, --title <text>      Title text.
+      -s, --subtitle <text>   Subtitle text.
+      -p, --sound <name>      Sound name (from /System/Library/Sounds).
+      -h, --help              Show this help.
   " | sed -E 's/^ {4}//'
 }
 
@@ -81,59 +91,33 @@ done
 set -- "${args[@]}"
 
 # Check for required arguments
-if [[ -z "${notificator_message}" ]]
-then
-  echo 'A message is mandatory! Aborting…' >&2
-  exit 1
-fi
-
-#───────────────────────────────────────────────────────────────────────────────
-
-readonly app="$app_location/Notificator for ${name}.app"
+[[ -n "${notificator_message}" ]] || error 'A message is mandatory! Aborting…'
+readonly app="${cache_location}/Notificator for ${name}.app"
+readonly checksum_icon="$(/usr/bin/shasum "${icon}" | cut -d ' ' -f 1)"
 readonly plist="${app}/Contents/Info.plist"
 
-# Exit early if Notificator exists and was modified fewer than 30 days ago
-if [[ -e "${app}" && "$(/bin/date -r "${app}" +%s)" -gt "$(/bin/date -v -30d +%s)" ]]; then
+# Exit early if Notificator exists and workflow icon is unmodified (its checksum equals the last field of the bundle ID)
+if [[ -d "${app}" && "${checksum_icon}" == "$(/usr/libexec/PlistBuddy -c "print :CFBundleIdentifier" "${plist}" | /usr/bin/awk -F '.' '{print $NF}')" ]]
+then
   show_notification
   exit 0
 fi
 
 # Pre-build checks
-if [[ -z "${bundle_id}" ]]
-then
-  echo "Workflow is missing the bundle identifier! Aborting…" >&2
-  exit 1
-fi
-
-if [[ -z "${name}" ]]
-then
-  echo "Workflow is missing the name! Aborting…" >&2
-  exit 1
-fi
-
-if [[ ! -f "${icon}" ]]
-then
-  echo "Workflow is missing the icon! Aborting…" >&2
-  exit 1
-fi
+[[ -n "${bundle_id}" ]] || error "Workflow is missing bundle identifier! Aborting…"
+[[ -n "${name}" ]]      || error "Workflow is missing name! Aborting…"
+[[ -f "${icon}" ]]      || error "Workflow is missing icon! Aborting…"
 
 # Build Notificator
 readonly jxa_script='
-  // Build argv/argc in a way that can be used from the applet inside the app bundle
-  ObjC.import("Foundation")
-  const args = $.NSProcessInfo.processInfo.arguments
-  const argv = []
-  const argc = args.count
-  for (let i = 0; i < argc; i++) { argv.push(args.objectAtIndex(i).js) }
-
-  // Notification script
+  const argv = $.NSProcessInfo.processInfo.arguments.js.map(arg => arg.js)
   const app = Application.currentApplication()
   app.includeStandardAdditions = true
 
-  if (argv.length < 2) { // We use "2" because the script will always see at least one argument: the applet itself
+  if (argv.length < 2) { // The script will always see at least one argument: the applet itself
     argv[1] = "Opening usage instructions…"
     argv[2] = "Notificator is a command-line app"
-    argv[4] = "Funk"
+    argv[4] = "Sosumi"
 
     app.openLocation("https://github.com/vitorgalvao/notificator#usage")
   }
@@ -152,16 +136,26 @@ readonly jxa_script='
 '
 
 [[ -d "${app}" ]] && /bin/rm -r "${app}"
-/bin/mkdir -p "${app_location}"
 /usr/bin/osacompile -l JavaScript -o "${app}" -e "${jxa_script}" 2> /dev/null
 
 # Modify Notificator
-/usr/libexec/PlistBuddy -c "add :CFBundleIdentifier string ${bundle_id}.notificator" "${plist}"
+/usr/libexec/PlistBuddy -c "add :CFBundleIdentifier string ${bundle_id}.notificator.${checksum_icon}" "${plist}"
 /usr/libexec/PlistBuddy -c 'add :LSUIElement string 1' "${plist}"
-/bin/cp "$icon" "${app}/Contents/Resources/applet.icns"
 
 # Redo signature
 /usr/bin/codesign --remove-signature "${app}"
 /usr/bin/codesign --sign - "${app}"
 
+# Modify icon
+# Must be done after signing to not get "resource fork, Finder informartion, or similar detritus not allowed" error
+/usr/bin/osascript -l JavaScript -e '
+  ObjC.import("AppKit")
+
+  function run(argv) {
+    const image = $.NSImage.alloc.initWithContentsOfFile(argv[0])
+    $.NSWorkspace.sharedWorkspace.setIconForFileOptions(image, argv[1], 0)
+  }
+' "${icon}" "${app}"
+
+# Notification
 show_notification
