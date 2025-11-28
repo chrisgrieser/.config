@@ -26,7 +26,7 @@ rules:
         from: { key_code: f7 }
         to:
           - shell_command: |
-              "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/alexa-virtual-trigger" \
+              "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Tech/alexa-virtual-trigger" \
                 "spotify-pause"
               "$HOME/.config/karabiner/assets/notificators/spotify-notificator" \
                 --title "Spotify" --message "⏸️ Pause"
@@ -37,7 +37,7 @@ rules:
         from: { key_code: f8 }
         to:
           - shell_command: |
-              "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/alexa-virtual-trigger" \
+              "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Tech/alexa-virtual-trigger" \
                 "spotify-play"
               "$HOME/.config/karabiner/assets/notificators/spotify-notificator" \
                 --title "Spotify" --message "▶️ Resume"
@@ -47,6 +47,6 @@ rules:
         from: { key_code: f9 }
         to:
           - shell_command: |
-              "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/alexa-virtual-trigger" \
+              "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Tech/alexa-virtual-trigger" \
                 "spotify-next"
         conditions: [*not-game]

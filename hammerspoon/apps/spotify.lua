@@ -22,7 +22,7 @@ M.aw_spotify = aw.new(function(appName, event, app)
 	-- using Alexa virtual trigger since its more reliable than `spotify_player`
 	local action = event == aw.launched and "pause" or "play"
 	local alexaTrigger = os.getenv("HOME")
-		.. "/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/alexa-virtual-trigger"
+		.. "/Library/Mobile Documents/com~apple~CloudDocs/Tech/alexa-virtual-trigger"
 	if not u.isExecutable(alexaTrigger) then return end
 	print("🎵 Spotify: " .. action)
 

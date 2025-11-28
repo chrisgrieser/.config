@@ -94,6 +94,7 @@ function run() {
 	}
 
 	// Paginate through all repos
+	/** @type {GithubRepo[]} */
 	const allRepos = [];
 	let page = 1;
 	while (true) {
@@ -112,32 +113,27 @@ function run() {
 
 	// Create items for Alfred
 	const repos = allRepos
-		.filter((/** @type {GithubRepo} */ repo) => !repo.archived) // github API does now allow filtering when requesting
-		.sort(
-			(
-				/** @type {GithubRepo&{isLocal: boolean}} */ a,
-				/** @type {GithubRepo&{isLocal: boolean}} */ b,
-			) => {
-				a.isLocal = Boolean(localRepos[a.name]);
-				b.isLocal = Boolean(localRepos[b.name]);
-				if (a.isLocal && !b.isLocal) return -1;
-				if (!a.isLocal && b.isLocal) return 1;
-				return 0; // use sorting from GitHub (updated status)
-			},
-		)
-		.map((/** @type {GithubRepo&{local: {path: string}|undefined}} */ repo) => {
+		.filter((repo) => !repo.archived) // GitHub API doesn't allow filtering
+		.sort((a, b) => { // sort local repos to the top
+			const aIsLocal = Boolean(localRepos[a.name]);
+			const bIsLocal = Boolean(localRepos[b.name]);
+			if (aIsLocal && !bIsLocal) return -1;
+			if (!aIsLocal && bIsLocal) return 1;
+			return 0; // otherwise use sorting from GitHub (updated status)
+		})
+		.map((repo) => {
 			let matcher = repo.name;
 			let type = "";
 			let subtitle = "";
-			repo.local = localRepos[repo.name];
+			const localRepo = localRepos[repo.name];
 			const memberRepo = repo.owner.login !== username;
-			const mainArg = repo.local?.path || repo.html_url;
+			const mainArg = localRepo?.path || repo.html_url;
 
 			// open in terminal when local, clone when not
 			let termAct = "Open in Terminal";
-			if (!repo.local) termAct = shallowClone ? `Shallow Clone (depth ${cloneDepth})` : "Clone";
-			const terminalArg = repo.local?.path || repo.html_url;
-			if (repo.local) {
+			if (!localRepo) termAct = shallowClone ? `Shallow Clone (depth ${cloneDepth})` : "Clone";
+			const terminalArg = localRepo?.path || repo.html_url;
+			if (localRepo) {
 				if (localRepos[repo.name]?.dirty) type += "✴️ ";
 				type += "📂 ";
 				matcher += "local ";
