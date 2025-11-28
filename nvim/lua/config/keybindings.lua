@@ -542,11 +542,11 @@ keymap("n", "<leader>oc", function() vim.wo.conceallevel = vim.wo.conceallevel =
 
 keymap("n", "<leader>ol", function()
 	local clients = vim.lsp.get_clients { bufnr = 0 }
-	local names = vim.iter(clients):map(function(client) return "- " .. client.name end):join("\n")
-	vim.notify(names, vim.log.levels.TRACE, { title = "Restarting LSPs", icon = "󰑓" })
-	vim.lsp.stop_client(clients, true)
-	vim.cmd("silent! update")
-	vim.defer_fn(vim.cmd.edit, 1000) -- wait for shutdown -> reload via `:edit` -> re-attach LSPs
+	local names = vim.tbl_map(function(client) return client.name end, clients)
+	local list = "- " .. table.concat(names, "\n- ")
+	vim.notify(list, nil, { title = "Restarting LSPs", icon = "󰑓" })
+	vim.lsp.enable(names, false)
+	vim.lsp.enable(names, true)
 end, { desc = "󰑓 LSP Restart" })
 
 --------------------------------------------------------------------------------
