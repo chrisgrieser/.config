@@ -15,7 +15,7 @@ function httpRequestWithHeaders(url, header) {
 		allHeaders += ` -H "${line}"`;
 	}
 	const curlRequest = `curl --silent --location ${allHeaders} "${url}" || true`;
-	console.log("curl command:", curlRequest);
+	console.log(curlRequest);
 	return app.doShellScript(curlRequest);
 }
 
@@ -50,10 +50,13 @@ function humanRelativeDate(isoDateStr) {
 }
 
 function getGithubToken() {
-	const tokenShellCmd = $.getenv("github_token_shell_cmd").trim();
+	const tokenShellCmd = $.getenv("github_token_shell_cmd");
 	const tokenFromZshenvCmd = "test -e $HOME/.zshenv && source $HOME/.zshenv ; echo $GITHUB_TOKEN";
 	let githubToken = $.getenv("github_token_from_alfred_prefs").trim();
-	if (!githubToken && tokenShellCmd) githubToken = app.doShellScript(tokenShellCmd).trim();
+	if (!githubToken && tokenShellCmd) {
+		githubToken = app.doShellScript(tokenShellCmd + " || true").trim();
+		if (!githubToken) console.log("GitHub token shell command failed.");
+	}
 	if (!githubToken) githubToken = app.doShellScript(tokenFromZshenvCmd);
 	return githubToken;
 }
@@ -82,21 +85,22 @@ function run() {
 		`Authorization: BEARER ${githubToken}`,
 	];
 	const response = httpRequestWithHeaders(apiUrl, headers);
+
+	// GUARD no response
 	if (!response) {
 		return JSON.stringify({
 			items: [{ title: "No response from GitHub.", subtitle: "Try again later.", valid: false }],
 		});
 	}
-	const responseObj = JSON.parse(response);
 
-	// GUARD error, for example invalid API token
+	// GUARD errors like invalid API token
+	const responseObj = JSON.parse(response);
 	if (responseObj.message) {
-		return JSON.stringify({
-			items: [{ title: responseObj.message, subtitle: "Error", valid: false }],
-		});
+		const item = { title: "Error", subtitle: responseObj.message, valid: false };
+		return JSON.stringify({ items: [item] });
 	}
 
-	// GUARD: no notifications
+	// GUARD no notifications
 	if (responseObj.length === 0) {
 		const deactivatedMods = {
 			cmd: { valid: false, subtitle: "" },

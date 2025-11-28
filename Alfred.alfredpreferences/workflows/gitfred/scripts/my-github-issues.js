@@ -22,15 +22,18 @@ function httpRequestWithHeaders(url, header) {
 		allHeaders += ` -H "${line}"`;
 	}
 	const curlRequest = `curl --silent --location ${allHeaders} "${url}" || true`;
-	console.log("curl command:", curlRequest);
+	console.log(curlRequest);
 	return app.doShellScript(curlRequest);
 }
 
 function getGithubToken() {
-	const tokenShellCmd = $.getenv("github_token_shell_cmd").trim();
+	const tokenShellCmd = $.getenv("github_token_shell_cmd");
 	const tokenFromZshenvCmd = "test -e $HOME/.zshenv && source $HOME/.zshenv ; echo $GITHUB_TOKEN";
 	let githubToken = $.getenv("github_token_from_alfred_prefs").trim();
-	if (!githubToken && tokenShellCmd) githubToken = app.doShellScript(tokenShellCmd).trim();
+	if (!githubToken && tokenShellCmd) {
+		githubToken = app.doShellScript(tokenShellCmd + " || true").trim();
+		if (!githubToken) console.log("GitHub token shell command failed.");
+	}
 	if (!githubToken) githubToken = app.doShellScript(tokenFromZshenvCmd);
 	return githubToken;
 }
@@ -48,15 +51,23 @@ function run() {
 	const apiUrl = `https://api.github.com/search/issues?q=involves:${username}&sort=updated&per_page=${issuesToSearch}`;
 	const headers = ["Accept: application/vnd.github.json", "X-GitHub-Api-Version: 2022-11-28"];
 	if (githubToken && includePrivate) headers.push(`Authorization: BEARER ${githubToken}`);
-
 	const response = httpRequestWithHeaders(apiUrl, headers);
+
+	// GUARD no response
 	if (!response) {
 		return JSON.stringify({
 			items: [{ title: "No response from GitHub.", subtitle: "Try again later.", valid: false }],
 		});
 	}
 
-	const issues = JSON.parse(response).items.map((/** @type {GithubIssue} */ item) => {
+	// GUARD errors like invalid API token
+	const responseObj = JSON.parse(response);
+	if (responseObj.message) {
+		const item = { title: "Error", subtitle: responseObj.message, valid: false };
+		return JSON.stringify({ items: [item] });
+	}
+
+	const issues = responseObj.items.map((/** @type {GithubIssue} */ item) => {
 		const issueAuthor = item.user.login;
 		const repo = (item.repository_url.match(/[^/]+$/) || "")[0];
 		const comments = item.comments > 0 ? "💬 " + item.comments.toString() : "";
