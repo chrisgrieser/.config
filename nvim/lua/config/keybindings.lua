@@ -483,7 +483,7 @@ end
 keymap("n", "<leader>rr", vim.lsp.buf.rename, { desc = "󰑕 LSP rename" })
 
 -- stylua: ignore
-keymap("n", "<leader>rc", function() require("personal-plugins.misc").renameCamelSnake() end, { desc = "󰑕 LSP rename: camel/snake" })
+keymap("n", "<leader>rc", function() require("personal-plugins.misc").camelSnakeLspRename() end, { desc = "󰑕 LSP rename: camel/snake" })
 
 keymap("n", "<leader>rq", function()
 	local updatedLine = vim.api.nvim_get_current_line():gsub("[\"']", { ['"'] = "'", ["'"] = '"' })

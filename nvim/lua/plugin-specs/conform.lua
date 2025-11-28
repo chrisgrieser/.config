@@ -47,6 +47,17 @@ return {
 					callback(nil, outLines)
 				end,
 			},
+			hardWrapAtTextwidth = {
+				format = function(_self, ctx, _lines, callback)
+					local cmd = (ctx.range ~= nil) and "=" or "gg=G"
+					vim.cmd.normal{ "gww", bang = true, range = "%" }
+					vim.cmd("normal! " .. cmd)
+					local out_lines = vim.api.nvim_buf_get_lines(0, 0, -1, true)
+					vim.cmd("normal! u")
+
+					callback(nil, out_lines)
+				end,
+			},
 			tsAddMissingImports = {
 				format = function(_self, ctx, _lines, callback)
 					-- PENDING https://github.com/stevearc/conform.nvim/issues/795
