@@ -8,8 +8,8 @@ ai() {
 	local reasoning='low'
 
 	# https://platform.openai.com/api-keys
-	private_dots="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/private dotfiles"
-	OPENAI_API_KEY="$(cat "$private_dots/openai-api-key.txt")"
+	api_key_file="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Tech/api-keys/openai-api-key.txt"
+	OPENAI_API_KEY="$(cat "$api_key_file")"
 
 	local system_prompt="
 		You are an experienced software engineer with expertise in all UNIX

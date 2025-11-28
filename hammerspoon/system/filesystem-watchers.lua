@@ -85,19 +85,8 @@ M.pathw_desktop = pathw(home .. "/Desktop/", function(paths, _)
 
 		-- STEAM GAME SHORTCUTS
 		elseif name:find("%.app$") and not isDownloaded then
-			local gameFolder = home .. "/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/Games/"
+			local gameFolder = home .. "/Library/Mobile Documents/com~apple~CloudDocs/Apps/Games/"
 			success, errmsg = os.rename(path, gameFolder .. name)
-
-		-- CHATGPT CONVERSATIONS
-		elseif name == "conversations.json" then
-			local targetLocation = home
-				.. "/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/llm-conversations/chatgpt.json"
-			success, errmsg = os.rename(path, targetLocation)
-			if success then
-				u.notify("✅ ChatGPT conversations moved.")
-				local parent = path:match("^.*/")
-				errmsg, success = hs.execute(("rm -rf %q"):format(parent))
-			end
 
 		-- AUTO-INSTALL OBSIDIAN ALPHA
 		elseif name:find("%.asar%.gz$") and isDownloaded then

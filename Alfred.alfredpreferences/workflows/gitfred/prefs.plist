@@ -18,6 +18,8 @@
 	<string>~/Developer</string>
 	<key>on_fork_branch</key>
 	<string>dev</string>
+	<key>only_100_recent_repos</key>
+	<true/>
 	<key>restore_mtime</key>
 	<string>quick-partial</string>
 	<key>setup_remotes_on_fork</key>
