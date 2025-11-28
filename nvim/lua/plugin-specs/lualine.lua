@@ -42,22 +42,22 @@ return {
 			lualine_a = {
 				{
 					"datetime",
-					style = "%H:%M:%S",
+					style = "%H:%M",
 					-- make the `:` blink
-					fmt = function(time)
-						return time:gsub(":(%d%d):", os.time() % 2 == 0 and ":%1 " or " %1:")
-					end,
+					fmt = function(time) return time:gsub(":", os.time() % 2 == 0 and " " or ":") end,
 					cond = function() return vim.o.columns > 120 end, -- only if window is maximized
 				},
 			},
 			lualine_b = {
 				{ -- cwd
 					function()
-						local cwd = (vim.uv.cwd() or "")
-						return cwd:gsub(os.getenv("HOME") or "", "~"):sub(1, 30)
+						local maxLength = 30
+						local cwd = (vim.uv.cwd() or ""):gsub(os.getenv("HOME") or "", "~")
+						if #cwd > maxLength then cwd = vim.trim(cwd:sub(1, maxLength)) .. "…" end
+						return cwd
 					end,
-					cond = function() return vim.bo.buftype == "" end,
 					icon = "󰙅",
+					cond = function() return vim.bo.buftype == "" end,
 				},
 			},
 			lualine_c = {
@@ -116,8 +116,9 @@ return {
 					function()
 						local qf = vim.fn.getqflist { idx = 0, title = true, size = true }
 						if qf.size == 0 then return "" end
-						return (" %d/%d (%s)"):format(qf.idx, qf.size, qf.title)
+						return ("%d/%d (%s)"):format(qf.idx, qf.size, qf.title)
 					end,
+					icon = "",
 				},
 				{
 					"fileformat",
@@ -147,7 +148,7 @@ return {
 					end,
 				},
 			},
-			lualine_y = {}, -- needed to remove %-progress in file
+			lualine_y = {}, -- empty to remove %-progress in file
 			lualine_z = {
 				{ "selectioncount", icon = "󰒆" },
 				{ -- line count
