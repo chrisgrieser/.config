@@ -34,7 +34,14 @@ local function openNotif(idx)
 	local moreLines = overflow > 0 and ("↓ %d lines"):format(overflow) or ""
 	local indexStr = ("(%d/%d)"):format(idx, #history)
 	local footer = vim.trim(indexStr .. "   " .. moreLines)
-	local ft = notif.ft or "markdown"
+
+	local levelCapitalized = notif.level:gsub("^%l", string.upper)
+	local highlights = {
+		"FloatBorder:SnacksNotifierBorder" .. levelCapitalized,
+		"FloatTitle:SnacksNotifierTitle" .. levelCapitalized,
+		"FloatFooter:SnacksNotifierFooter" .. levelCapitalized,
+	}
+	local winhighlights = table.concat(highlights, ",")
 
 	-- create win with snacks API
 	Snacks.win {
@@ -45,7 +52,7 @@ local function openNotif(idx)
 		footer = footer and " " .. footer .. " " or nil,
 		footer_pos = footer and "right" or nil,
 		border = vim.o.winborder --[[@as "rounded"|"single"|"double"]],
-		bo = { ft = ft }, -- `.bo.ft` instead of `.ft` needed for treesitter folding
+		bo = { ft = notif.ft or "markdown" }, -- `.bo.ft` instead of `.ft` needed for treesitter folding
 		wo = {
 			wrap = notif.ft ~= "lua",
 			statuscolumn = " ", -- adds padding
@@ -54,7 +61,7 @@ local function openNotif(idx)
 			fillchars = "fold: ,eob: ",
 			foldmethod = "expr",
 			foldexpr = "v:lua.vim.treesitter.foldexpr()",
-			winhighlight = ft == "markdown" and "Normal:Normal" or nil, -- FIX hl-priority issue
+			winhighlight = winhighlights,
 		},
 		keys = {
 			["<Tab>"] = function()

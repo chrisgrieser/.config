@@ -150,7 +150,7 @@ return {
 
 		-- INSPECT
 		{ "<leader>iv", function() Snacks.picker.help() end, desc = "󰋖 Vim help" },
-		{ "<leader>ih", function() Snacks.picker.highlights() end, desc = " Highlights" },
+		{ "<leader>ih", function() Snacks.picker.highlights() end, desc = " Highlight groups" },
 		{ "<leader>is", function() Snacks.picker.pickers() end, desc = "󰗲 Snacks pickers" },
 		{ "<leader>ik", function() Snacks.picker.keymaps() end, desc = "󰌌 Keymaps (global)" },
 		-- stylua: ignore

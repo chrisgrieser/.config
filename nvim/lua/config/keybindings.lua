@@ -396,7 +396,7 @@ keymap(
 --------------------------------------------------------------------------------
 -- INSPECT & EVAL
 
-keymap("n", "<leader>ii", vim.cmd.Inspect, { desc = "󱈄 Highlights under cursor" })
+keymap("n", "<leader>ii", vim.cmd.Inspect, { desc = "󱈄 Highlights at cursor" })
 keymap("n", "<leader>it", vim.cmd.InspectTree, { desc = " :InspectTree" })
 keymap("n", "<leader>ip", "<cmd>checkhealth nvim-treesitter<CR>", { desc = " TS Parsers" })
 keymap("n", "<leader>id", function()

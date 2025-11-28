@@ -3,7 +3,8 @@ return {
 	opts = {
 		file = {
 			["init.lua"] = { glyph = "󰢱" }, -- disable nvim glyph: https://github.com/echasnovski/mini.nvim/issues/1384
-			["README.md"] = { glyph = "" },
+			["README.md"] = { glyph = "" },
+			["Lorem Ipsum.md"] = { glyph = "󰣑" },
 			[".ignore"] = { glyph = "󰈉", hl = "MiniIconsGrey" },
 			["pre-commit"] = { glyph = "󰊢" },
 			["Brewfile"] = { glyph = "󱄖", hl = "MiniIconsYellow" },
@@ -14,7 +15,7 @@ return {
 			["log"] = { glyph = "󱂅", hl = "MiniIconsGrey" },
 			["gitignore"] = { glyph = "" },
 			["adblock"] = { glyph = "", hl = "MiniIconsRed" },
-			["add"] = { glyph = "" },
+			["add"] = { glyph = "" }, -- vim spellfile
 		},
 		filetype = {
 			["css"] = { glyph = "", hl = "MiniIconsRed" },
@@ -25,7 +26,6 @@ return {
 			["ccc-ui"] = { glyph = "" },
 			["scissors-snippet"] = { glyph = "󰩫" },
 			["rip-substitute"] = { glyph = "" },
-			["markdown.gh"] = { glyph = "" },
 		},
 	},
 }

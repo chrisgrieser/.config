@@ -17,10 +17,10 @@ return {
 			lsp_format = "first",
 		},
 		formatters_by_ft = {
-			markdown = { "hardWrapAtTextwidth", "markdownlint", "markdown-toc", "injected" },
+			markdown = { "hard-wrap-at-textwidth", "markdownlint", "markdown-toc", "injected" },
 			python = { "ruff_fix", "ruff_organize_imports" },
-			typescript = { "tsAddMissingImports", "tsRemoveUnusedImports", "biome-organize-imports" },
-			zsh = { "shellHome", "shellcheck" },
+			typescript = { "ts-add-missing-imports", "ts-remove-unused-imports", "biome-organize-imports" },
+			zsh = { "shell-home", "shellcheck" },
 			json = { lsp_format = "prefer", "jq" }, -- use `biome` (via LSP), with `jq` as fallback
 
 			-- _ = fallback, used when no formatters defined and no LSP available
@@ -38,20 +38,23 @@ return {
 			},
 			-----------------------------------------------------------------------
 			-- my custom formatters
-			shellHome = { -- replace `/Users/…` or `~` with `$HOME/`
+			["shell-home"] = { -- replace `/Users/…` or `~` with `$HOME/`
 				format = function(_self, _ctx, lines, callback)
-					for i = 1, #lines do
-						lines[i] = lines[i]:gsub("/Users/%a+", "$HOME"):gsub("~/", "$HOME/")
+					for _, line in pairs(lines) do
+						line = line:gsub("/Users/%a+", "$HOME"):gsub("~/", "$HOME/")
 					end
-					Chainsaw(lines) -- 🪚
-					callback(nil, lines)
+					local outLines = vim.tbl_map(
+						function(line) return line:gsub("/Users/%a+", "$HOME"):gsub("~/", "$HOME/") end,
+						lines
+					)
+					callback(nil, outLines)
 				end,
 			},
-			hardWrapAtTextwidth = {
+			["hard-wrap-at-textwidth"] = {
 				format = function(_self, ctx, _lines, callback)
 					local view = vim.fn.winsaveview()
 
-					vim.cmd("% normal! gww") -- each line, via `normal`, since `gggwG` breaks callouts
+					vim.cmd("$,1 normal! gww") -- each line, via `normal`, since `gggwG` breaks callouts
 					local formattedLines = vim.api.nvim_buf_get_lines(ctx.buf, 0, -1, true)
 					vim.cmd.undo()
 
@@ -59,20 +62,21 @@ return {
 					callback(nil, formattedLines)
 				end,
 			},
-			tsAddMissingImports = {
+			["ts-add-missing-imports"] = {
 				format = function(_self, ctx, _lines, callback)
 					-- PENDING https://github.com/stevearc/conform.nvim/issues/795
 					vim.lsp.buf.code_action {
 						context = { only = { "source.addMissingImports.ts" } }, ---@diagnostic disable-line: missing-fields, assign-type-mismatch
 						apply = true,
 					}
+					-- SIC works better without undoing changes, probably due to race
 					vim.defer_fn(function() -- deferred for code action to update buffer
 						local formattedLines = vim.api.nvim_buf_get_lines(ctx.buf, 0, -1, true)
 						callback(nil, formattedLines)
 					end, 100)
 				end,
 			},
-			tsRemoveUnusedImports = {
+			["ts-remove-unused-imports"] = {
 				format = function(_self, ctx, _lines, callback)
 					vim.lsp.buf.code_action {
 						context = { only = { "source.removeUnusedImports.ts" } }, ---@diagnostic disable-line: missing-fields, assign-type-mismatch
