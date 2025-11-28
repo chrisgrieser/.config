@@ -22,7 +22,7 @@ function httpRequestWithHeaders(url, header) {
 		allHeaders += ` -H "${line}"`;
 	}
 	const curlRequest = `curl --silent --location ${allHeaders} "${url}" || true`;
-	console.log("curl command:", curlRequest);
+	console.log(curlRequest);
 	return app.doShellScript(curlRequest);
 }
 
@@ -34,10 +34,13 @@ function shortNumber(starcount) {
 }
 
 function getGithubToken() {
-	const tokenShellCmd = $.getenv("github_token_shell_cmd") + " || echo 'invalid'";
+	const tokenShellCmd = $.getenv("github_token_shell_cmd");
 	const tokenFromZshenvCmd = "test -e $HOME/.zshenv && source $HOME/.zshenv ; echo $GITHUB_TOKEN";
 	let githubToken = $.getenv("github_token_from_alfred_prefs").trim();
-	if (!githubToken && tokenShellCmd) githubToken = app.doShellScript(tokenShellCmd).trim();
+	if (!githubToken && tokenShellCmd) {
+		githubToken = app.doShellScript(tokenShellCmd + " || true").trim();
+		if (!githubToken) console.log("GitHub token shell command failed.");
+	}
 	if (!githubToken) githubToken = app.doShellScript(tokenFromZshenvCmd);
 	return githubToken;
 }
@@ -48,13 +51,13 @@ function getGithubToken() {
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
 	const githubToken = getGithubToken();
-	console.log("🪚 githubToken:", githubToken);
 	const includePrivate = $.getenv("include_private_repos") === "1";
 	const username = $.getenv("github_username");
 	const localRepoFolder = $.getenv("local_repo_folder");
 	const cloneDepth = Number.parseInt($.getenv("clone_depth"));
 	const shallowClone = cloneDepth > 0;
 	const useAlfredFrecency = $.getenv("use_alfred_frecency") === "1";
+	const only100repos = $.getenv("only_100_recent_repos") === "1";
 
 	// determine local repos
 	/** @type {Record<string, {path: string; dirty: boolean|undefined}>} */
@@ -103,6 +106,7 @@ function run() {
 		console.log(`repos page #${page}: ${reposOfPage.length}`);
 		allRepos.push(...reposOfPage);
 		page++;
+		if (only100repos) break; // PERF only one request when user enabled this
 		if (reposOfPage.length < 100) break; // GitHub returns less than 100 when on last page
 	}
 

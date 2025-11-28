@@ -61,10 +61,18 @@ function run(argv) {
 	// DOCS https://docs.github.com/en/rest/search/search?apiVersion=2022-11-28#search-repositories
 	const apiUrl = "https://api.github.com/search/repositories?q=" + encodeURIComponent(query);
 	const response = httpRequest(apiUrl);
+
+	// GUARD no response
 	if (!response) {
 		return JSON.stringify({
 			items: [{ title: "No response from GitHub.", subtitle: "Try again later.", valid: false }],
 		});
+	}
+	// GUARD errors like invalid API token
+	const responseObj = JSON.parse(response);
+	if (responseObj.message) {
+		const item = { title: "Error", subtitle: responseObj.message, valid: false };
+		return JSON.stringify({ items: [item] });
 	}
 
 	//───────────────────────────────────────────────────────────────────────────
@@ -74,7 +82,7 @@ function run(argv) {
 	const shallowClone = cloneDepth > 0;
 
 	/** @type {AlfredItem[]} */
-	const repos = JSON.parse(response).items.map((/** @type {GithubRepo} */ repo) => {
+	const repos = responseObj.items.map((/** @type {GithubRepo} */ repo) => {
 		// INFO `pushed_at` refers to commits only https://github.com/orgs/community/discussions/24442
 		// CAVEAT `pushed_at` apparently also includes pushes via PR :(
 		const lastUpdated = repo.pushed_at ? humanRelativeDate(repo.pushed_at) : "";

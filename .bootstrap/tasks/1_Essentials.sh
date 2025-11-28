@@ -16,7 +16,7 @@ source "$HOME/.config/zsh/.zshrc"
 #───────────────────────────────────────────────────────────────────────────────
 
 echo "Enter a name for this device such as 'Chris iMac Home'."
-echo "Name: "
+printf "Name: "
 read -r new_name
 sudo scutil --set ComputerName "$new_name"
 

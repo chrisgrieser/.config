@@ -309,6 +309,10 @@ function clone {
 }
 
 function delete_forks_with_no_open_prs {
+	printf "GITHUB_TOKEN: "
+	read -r token
+	export GITHUB_TOKEN="$token"
+
 	local my_prs my_forks
 	my_prs=$(gh search prs --author="@me" --state=open --json="repository" --jq=".[].repository.name")
 	my_forks=$(gh repo list --fork | cut -f1)
