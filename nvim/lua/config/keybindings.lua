@@ -362,7 +362,10 @@ keymap("t", "<Esc>", [[<C-\><C-n>]], { desc = " Esc" })
 keymap("t", "<D-v>", [[<C-\><C-n>pi]], { desc = " Paste" })
 
 -- CMDLINE MODE
-keymap("c", "<D-v>", "<C-r>+", { desc = " Paste" })
+keymap("c", "<D-v>", function()
+	vim.fn.setreg("+", vim.trim(vim.fn.getreg("+"))) -- trim
+	return "<C-r>+"
+end, { expr = true, desc = " Paste" })
 keymap("c", "<D-c>", function()
 	local cmdline = vim.fn.getcmdline()
 	if cmdline == "" then return vim.notify("Nothing to copy.", vim.log.levels.WARN) end

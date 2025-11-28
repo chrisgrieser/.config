@@ -17,7 +17,7 @@ return {
 			lsp_format = "first",
 		},
 		formatters_by_ft = {
-			markdown = { "markdownlint", "markdown-toc", "injected" },
+			markdown = { "hardWrapAtTextwidth", "markdownlint", "markdown-toc", "injected" },
 			python = { "ruff_fix", "ruff_organize_imports" },
 			typescript = { "tsAddMissingImports", "tsRemoveUnusedImports", "biome-organize-imports" },
 			zsh = { "shellHome", "shellcheck" },
@@ -38,24 +38,25 @@ return {
 			},
 			-----------------------------------------------------------------------
 			-- my custom formatters
-			shellHome = { -- replace `/Users/…` with `$HOME/`
+			shellHome = { -- replace `/Users/…` or `~` with `$HOME/`
 				format = function(_self, _ctx, lines, callback)
-					local outLines = vim.tbl_map(
-						function(line) return line:gsub("/Users/%a+", "$HOME") end,
-						lines
-					)
-					callback(nil, outLines)
+					for i = 1, #lines do
+						lines[i] = lines[i]:gsub("/Users/%a+", "$HOME"):gsub("~/", "$HOME/")
+					end
+					Chainsaw(lines) -- 🪚
+					callback(nil, lines)
 				end,
 			},
 			hardWrapAtTextwidth = {
 				format = function(_self, ctx, _lines, callback)
-					local cmd = (ctx.range ~= nil) and "=" or "gg=G"
-					vim.cmd.normal{ "gww", bang = true, range = "%" }
-					vim.cmd("normal! " .. cmd)
-					local out_lines = vim.api.nvim_buf_get_lines(0, 0, -1, true)
-					vim.cmd("normal! u")
+					local view = vim.fn.winsaveview()
 
-					callback(nil, out_lines)
+					vim.cmd("% normal! gww") -- each line, via `normal`, since `gggwG` breaks callouts
+					local formattedLines = vim.api.nvim_buf_get_lines(ctx.buf, 0, -1, true)
+					vim.cmd.undo()
+
+					vim.fn.winrestview(view)
+					callback(nil, formattedLines)
 				end,
 			},
 			tsAddMissingImports = {
@@ -66,8 +67,8 @@ return {
 						apply = true,
 					}
 					vim.defer_fn(function() -- deferred for code action to update buffer
-						local outLines = vim.api.nvim_buf_get_lines(ctx.buf, 0, -1, true)
-						callback(nil, outLines)
+						local formattedLines = vim.api.nvim_buf_get_lines(ctx.buf, 0, -1, true)
+						callback(nil, formattedLines)
 					end, 100)
 				end,
 			},
@@ -78,8 +79,8 @@ return {
 						apply = true,
 					}
 					vim.defer_fn(function()
-						local outLines = vim.api.nvim_buf_get_lines(ctx.buf, 0, -1, true)
-						callback(nil, outLines)
+						local formattedLines = vim.api.nvim_buf_get_lines(ctx.buf, 0, -1, true)
+						callback(nil, formattedLines)
 					end, 100)
 				end,
 			},
