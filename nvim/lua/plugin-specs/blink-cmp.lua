@@ -61,8 +61,7 @@ return {
 					opts = {
 						get_cwd = vim.uv.cwd,
 						show_hidden_files_by_default = true,
-						-- treat `/path` as cwd, not filesystem root (useful for markdown)
-						ignore_root_slash = true,
+						ignore_root_slash = true, -- `/path` as cwd, not system root (useful in markdown)
 					},
 				},
 				buffer = {
@@ -76,11 +75,11 @@ return {
 					opts = {
 						-- show completions from all buffers used within the last x minutes
 						get_bufnrs = function()
-							local mins = 15
+							local lastXmins = 15
 							local allOpenBuffers = vim.fn.getbufinfo { buflisted = 1, bufloaded = 1 }
 							local recentBufs = vim.iter(allOpenBuffers)
 								:filter(function(buf)
-									local recentlyUsed = os.time() - buf.lastused < (60 * mins)
+									local recentlyUsed = os.time() - buf.lastused < (60 * lastXmins)
 									local nonSpecial = vim.bo[buf.bufnr].buftype == ""
 									return recentlyUsed and nonSpecial
 								end)
@@ -147,10 +146,7 @@ return {
 			documentation = {
 				auto_show = true,
 				auto_show_delay_ms = 250,
-				window = {
-					max_width = 50,
-					max_height = 20,
-				},
+				window = { max_width = 50, max_height = 20 },
 			},
 			menu = {
 				max_height = 12,
