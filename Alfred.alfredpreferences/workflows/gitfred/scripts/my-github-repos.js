@@ -34,7 +34,7 @@ function shortNumber(starcount) {
 }
 
 function getGithubToken() {
-	const tokenShellCmd = $.getenv("github_token_shell_cmd").trim();
+	const tokenShellCmd = $.getenv("github_token_shell_cmd") + " || echo 'invalid'";
 	const tokenFromZshenvCmd = "test -e $HOME/.zshenv && source $HOME/.zshenv ; echo $GITHUB_TOKEN";
 	let githubToken = $.getenv("github_token_from_alfred_prefs").trim();
 	if (!githubToken && tokenShellCmd) githubToken = app.doShellScript(tokenShellCmd).trim();
@@ -48,6 +48,7 @@ function getGithubToken() {
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
 	const githubToken = getGithubToken();
+	console.log("🪚 githubToken:", githubToken);
 	const includePrivate = $.getenv("include_private_repos") === "1";
 	const username = $.getenv("github_username");
 	const localRepoFolder = $.getenv("local_repo_folder");
@@ -99,6 +100,7 @@ function run() {
 			return JSON.stringify({ items: [item] });
 		}
 		const reposOfPage = JSON.parse(response);
+		console.log(`repos page #${page}: ${reposOfPage.length}`);
 		allRepos.push(...reposOfPage);
 		page++;
 		if (reposOfPage.length < 100) break; // GitHub returns less than 100 when on last page
