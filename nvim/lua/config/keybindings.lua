@@ -244,8 +244,8 @@ do
 	-- cycles through them
 	keymap("n", "<C-p>", '"1p', { desc = " Cyclic paste" })
 
-	-- yankring
 	vim.api.nvim_create_autocmd("TextYankPost", {
+		desc = "User: Yankring",
 		callback = function()
 			if vim.v.event.operator == "y" then
 				for i = 9, 1, -1 do -- Shift all numbered registers.

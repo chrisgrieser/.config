@@ -561,8 +561,8 @@ end
 --------------------------------------------------------------------------------
 
 -- MACROS
--- add sound while recording
-if jit.os == "OSX" then -- uses macOS system sounds
+-- add sound when recording
+if jit.os == "OSX" then
 	local function playSound(file)
 		local soundDir =
 			"/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/"
