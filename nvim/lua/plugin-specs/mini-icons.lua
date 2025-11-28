@@ -4,7 +4,6 @@ return {
 		file = {
 			["init.lua"] = { glyph = "󰢱" }, -- disable nvim glyph: https://github.com/echasnovski/mini.nvim/issues/1384
 			["README.md"] = { glyph = "" },
-			["Lorem Ipsum.md"] = { glyph = "󰣑" },
 			[".ignore"] = { glyph = "󰈉", hl = "MiniIconsGrey" },
 			["pre-commit"] = { glyph = "󰊢" },
 			["Brewfile"] = { glyph = "󱄖", hl = "MiniIconsYellow" },

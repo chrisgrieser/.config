@@ -54,10 +54,14 @@ return {
 				format = function(_self, ctx, _lines, callback)
 					local view = vim.fn.winsaveview()
 
-					vim.cmd("$,1 normal! gww") -- each line, via `normal`, since `gggwG` breaks callouts
+					-- 1. each line via `:normal`, since `gggwG` breaks callouts
+					-- 2. `global /./` instead of `% normal` since `gww` changes line
+					-- count and `%` uses line count at start, resulting in lines at
+					-- the bottom not being formatted
+					vim.cmd("global/./ normal! gww")
+
 					local formattedLines = vim.api.nvim_buf_get_lines(ctx.buf, 0, -1, true)
 					vim.cmd.undo()
-
 					vim.fn.winrestview(view)
 					callback(nil, formattedLines)
 				end,

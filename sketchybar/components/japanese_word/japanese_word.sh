@@ -15,7 +15,7 @@ word=$(jq ".[$random_num]" "$vocab_source")
 # from word, take the furigana (fallback to word if empty) and meaning
 hiragana=$(echo "$word" | jq -r ".furigana")
 kanji_or_katakana=$(echo "$word" | jq -r ".word")
-english=$(echo "$word" | jq -r ".meaning")
+english=$(echo "$word" | jq -r ".meaning" | cut -d"," -f1)
 japanese=${hiragana:-$kanji_or_katakana}
 
 #───────────────────────────────────────────────────────────────────────────────
