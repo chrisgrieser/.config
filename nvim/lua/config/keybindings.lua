@@ -507,12 +507,6 @@ end
 -- stylua: ignore
 keymap("i", "<D-t>", function() require("personal-plugins.auto-template-str").insertTemplateStr() end, { desc = "󰅳 Insert template string" })
 
--- FAST WARP
--- stylua: ignore
-keymap({ "n", "i" }, "<D-f>", function() require("personal-plugins.misc").fastWarp("forward") end, { desc = "󰑮 Fast warp" })
--- stylua: ignore
-keymap({ "n", "i" }, "<D-F>", function() require("personal-plugins.misc").fastWarp("backward") end, { desc = "󰑮 Fast warp (back)" })
-
 -- MULTI-EDIT
 keymap("n", "<D-j>", '*N"_cgn', { desc = "󰆿 Multi-edit cword" })
 keymap("x", "<D-j>", function()

@@ -18,6 +18,13 @@ return {
 		},
 		cr = { autoclose = true },
 		tabout = { enable = false, map = "<Nop>" },
+		fastwarp = {
+			map = "<D-f>",
+			rmap = "<D-F>", -- backwards
+			hopout = true,
+			nocursormove = false,
+			multiline = false,
+		},
 
 		extensions = { -- disable in these filetypes
 			filetype = { nft = { "TelescopePrompt", "snacks_picker_input", "rip-substitute" } },
