@@ -38,9 +38,10 @@ end)
 ---when any are found. Does nothing, if there are no duplicate citekeys.
 local function checkForDuplicateCitekeys()
 	local duplCitekeys = ""
-	local citekeysInFile = {}
+	local citekeysInFile = {} ---@type integer[]
 
 	for _, line in pairs(vim.api.nvim_buf_get_lines(0, 0, -1, true)) do
+		---@type string
 		local citekey = line:match("^@.-{(.*),")
 		if citekey then
 			if not citekeysInFile[citekey] then

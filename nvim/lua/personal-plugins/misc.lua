@@ -101,7 +101,8 @@ function M.startOrStopRecording(toggleKey, reg)
 	end
 end
 
----@param reg string vim register (single letter)
+-----@param reg string vim register (single letter)
+
 function M.playRecording(reg)
 	local hasRecording = vim.fn.getreg(reg) ~= ""
 	if hasRecording then

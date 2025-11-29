@@ -19,13 +19,13 @@ abbr("()", "() =>")
 -- open the next regex at https://regex101.com/
 bkeymap("n", "g/", function()
 	-- GUARD
-	local ok, tsSelect = pcall(require, "nvim-treesitter-textobjects.select")
+	local ok, tsSelect = pcall(require, "nvim-treesitter-textobjects.select") ---@diagnostic disable-line: no-unknown
 	if not (ok and tsSelect) then
 		vim.notify("`nvim-treesitter-textobjects` not installed.", vim.log.levels.WARN)
 		return
 	end
 	tsSelect.select_textobject("@regex.outer", "textobjects")
-	local notFound = vim.fn.mode():find("v") -- if a textobj is found, switches to visual mode
+	local notFound = vim.fn.mode():find("v") ~= nil -- if a textobj is found, switches to visual mode
 	if not notFound then
 		vim.notify("No regex found", nil, { title = "Regex101" })
 		return
