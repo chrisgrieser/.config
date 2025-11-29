@@ -2,6 +2,7 @@
 --------------------------------------------------------------------------------
 
 ---@param cmd string
+---@return { keys: { [string]: any } }
 local function createRunKeymap(cmd)
 	local function runner(self) ---@param self { buf: number } -- passed by snacks
 		vim.cmd("silent! update") -- save before running
