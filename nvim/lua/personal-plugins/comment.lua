@@ -21,8 +21,8 @@ end
 --------------------------------------------------------------------------------
 
 ---add horizontal line with the language's comment syntax and correctly indented
----@param addLabel any -- adds a label in replace mode
-function M.commentHr(addLabel)
+---@param replaceModeLabel any
+function M.commentHr(replaceModeLabel)
 	local comStr = getCommentstr()
 	if not comStr then return end
 	local startLn = vim.api.nvim_win_get_cursor(0)[1]
@@ -57,9 +57,9 @@ function M.commentHr(addLabel)
 	-- append lines & move
 	vim.api.nvim_buf_set_lines(0, startLn, startLn, true, { fullLine, "" })
 	local offset = #indent
-	if addLabel then offset = offset + comStrLength end
+	if replaceModeLabel then offset = offset + comStrLength end
 	vim.api.nvim_win_set_cursor(0, { startLn + 1, offset })
-	if addLabel then vim.cmd.startreplace() end
+	if replaceModeLabel then vim.cmd.startreplace() end
 end
 
 function M.duplicateLineAsComment()

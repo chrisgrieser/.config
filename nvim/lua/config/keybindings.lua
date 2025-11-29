@@ -25,13 +25,6 @@ end
 -- save before quitting (non-unique, since also set by Neovide)
 keymap("n", "<D-q>", vim.cmd.wqall, { desc = " Save & quit", unique = false })
 
-keymap(
-	{ "n", "x", "i" },
-	"<D-C-r>", -- `hyper` gets registered by neovide as `cmd+ctrl` (`D-C`)
-	function() require("personal-plugins.misc").restartNeovide() end,
-	{ desc = " Save & restart neovide" }
-)
-
 -- stylua: ignore
 keymap("n", "<leader>pd", function() vim.ui.open(vim.fn.stdpath("data") --[[@as string]]) end, { desc = "󰝰 Local data dir" })
 -- stylua: ignore
@@ -41,6 +34,27 @@ keymap("n", "<D-,>", function()
 	local pathOfThisFile = debug.getinfo(1, "S").source:gsub("^@", "")
 	vim.cmd.edit(pathOfThisFile)
 end, { desc = "󰌌 Edit keybindings" })
+
+keymap(
+	{ "n", "x", "i" },
+	"<D-C-r>", -- `hyper` gets registered by neovide as `cmd+ctrl` (`D-C`)
+	function() require("personal-plugins.misc").restartNeovide() end,
+	{ desc = " Save & restart neovide" }
+)
+
+-- terminal at cwd
+keymap(
+	{ "n", "x", "i" },
+	"<D-C-t>", -- `hyper` gets registered by neovide as cmd+ctrl
+	function()
+		assert(jit.os == "OSX", "requires macOS' `osascript`")
+		vim.system({ "osascript", "-e", 'tell application "WezTerm" to activate' }, {}, function()
+			local stdin = ("cd -q %q && clear\n"):format(vim.uv.cwd() or "")
+			vim.system({ "wezterm", "cli", "send-text", "--no-paste" }, { stdin = stdin })
+		end)
+	end,
+	{ desc = " Open cwd in WezTerm" }
+)
 
 --------------------------------------------------------------------------------
 -- NAVIGATION
@@ -63,10 +77,6 @@ keymap("n", "<C-l>", "<C-i>", { desc = "󱋿 Jump forward", unique = false })
 
 -- Search
 keymap("n", "-", "/")
-keymap("c", "/", function()
-	local isSearch = vim.fn.getcmdtype() == "/"
-	return isSearch and "\\/" or "/"
-end, { expr = true, desc = "Auto-escape / in searches" })
 keymap("x", "-", "<Esc>/\\%V", { desc = " Search IN selection" })
 
 -- [g]oto [m]atching parenthesis (`remap` needed to use builtin `MatchIt` plugin)
@@ -80,8 +90,8 @@ keymap("n", "gE", "[d", { desc = "󰋼 Previous diagnostic", remap = true })
 -- stylua: ignore
 keymap("n", "<D-U>", function() require("personal-plugins.misc").openUrlInBuffer() end, { desc = " Open URL in buffer" })
 
---------------------------------------------------------------------------------
--- MARKS
+---MARKS------------------------------------------------------------------------
+
 do
 	local marks = require("personal-plugins.marks")
 
@@ -284,10 +294,12 @@ end, { desc = " Paste at EoL" })
 
 keymap("i", "<D-v>", function()
 	vim.fn.setreg("+", vim.trim(vim.fn.getreg("+"))) -- trim
+	if vim.fn.mode() == "R" then return "<C-r>+" end
 	return "<C-g>u<C-r><C-o>+" -- `<C-g>u` adds undopoint before the paste
 end, { desc = " Paste", expr = true })
 
 keymap("n", "<D-v>", "p", { desc = " Paste" }) -- compatibility w/ macOS clipboard managers
+keymap("n", "qp", "R<C-r>+<Esc>", { desc = " Paste replacing" })
 
 ---TEXTOBJECTS------------------------------------------------------------------
 
@@ -321,14 +333,13 @@ end
 
 -- stylua: ignore start
 keymap("n", "qw", function() require("personal-plugins.comment").commentHr() end, { desc = "󰆈 Horizontal divider" })
-keymap("n", "qe", function() require("personal-plugins.comment").commentHr("label") end, { desc = "󰆈 Horizontal divider w/ label" })
+keymap("n", "qr", function() require("personal-plugins.comment").commentHr("replaceModeLabel") end, { desc = "󰆈 Horizontal divider w/ label" })
 keymap("n", "wq", function() require("personal-plugins.comment").duplicateLineAsComment() end, { desc = "󰆈 Duplicate line as comment" })
 keymap("n", "qf", function() require("personal-plugins.comment").docstring() end, { desc = "󰆈 Function docstring" })
 keymap("n", "Q", function() require("personal-plugins.comment").addCommentAtEol() end, { desc = "󰆈 Add comment at EoL" })
 -- stylua: ignore end
 
 ---LINE & CHARACTER MOVEMENT----------------------------------------------------
-
 keymap("n", "<Down>", "<cmd>. move +1<CR>==", { desc = "󰜮 Move line down" })
 keymap("n", "<Up>", "<cmd>. move -2<CR>==", { desc = "󰜷 Move line up" })
 keymap("n", "<Right>", [["zx"zp]], { desc = "➡️ Move char right" })
@@ -350,7 +361,6 @@ keymap("n", "<PageUp>", function() require("personal-plugins.misc").scrollLspOrO
 -- stylua: ignore end
 
 ---VARIOUS MODES----------------------------------------------------------------
-
 -- insert mode
 keymap("n", "i", function()
 	local lineEmpty = vim.trim(vim.api.nvim_get_current_line()) == ""
@@ -365,12 +375,6 @@ keymap("x", "v", "<C-v>", { desc = "`vv` starts visual block" })
 keymap("t", "<C-CR>", [[<C-\><C-n><C-w>w]], { desc = " Goto next window" })
 keymap("t", "<Esc>", [[<C-\><C-n>]], { desc = " Esc" })
 keymap("t", "<D-v>", [[<C-\><C-n>pi]], { desc = " Paste" })
-
--- replace mode
-keymap("R", "<D-v>", function()
-	vim.notify("🪚 🟩")
-	return "<C-r>+"
-end, { expr = true, desc = " Paste" })
 
 -- cmdline mode
 keymap("c", "<D-v>", function()
@@ -389,24 +393,7 @@ keymap("c", "<BS>", function()
 	if vim.fn.getcmdline() ~= "" then return "<BS>" end
 end, { expr = true, desc = "<BS> does not leave cmdline" })
 
---------------------------------------------------------------------------------
-
--- OPEN WEZTERM at cwd
-keymap(
-	{ "n", "x", "i" },
-	"<D-C-t>", -- `hyper` gets registered by neovide as cmd+ctrl
-	function()
-		assert(jit.os == "OSX", "requires macOS' `osascript`")
-		vim.system({ "osascript", "-e", 'tell application "WezTerm" to activate' }, {}, function()
-			local stdin = ("cd -q %q && clear\n"):format(vim.uv.cwd() or "")
-			vim.system({ "wezterm", "cli", "send-text", "--no-paste" }, { stdin = stdin })
-		end)
-	end,
-	{ desc = " Open cwd in WezTerm" }
-)
-
 ---INSPECT & EVAL---------------------------------------------------------------
-
 keymap("n", "<leader>ii", vim.cmd.Inspect, { desc = "󱈄 Highlights at cursor" })
 keymap("n", "<leader>it", vim.cmd.InspectTree, { desc = " :InspectTree" })
 keymap("n", "<leader>ip", "<cmd>checkhealth nvim-treesitter<CR>", { desc = " TS Parsers" })

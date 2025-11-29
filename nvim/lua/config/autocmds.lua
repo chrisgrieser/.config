@@ -17,11 +17,13 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 ---REPLACE MODE-----------------------------------------------------------------
+
 vim.api.nvim_create_autocmd("ModeChanged", {
-	desc = "User: uppercase the line when leaving replace mode",
+	desc = "User: uppercase the line when leaving replace mode on a comment",
 	pattern = "r:*", -- left replace-mode
 	callback = function(ctx)
 		if vim.bo[ctx.buf].filetype == "markdown" then return end
+		local isOnComment = vim.startswith(vim.trim(vim.api.nvim_get_current_line())
 		vim.cmd.normal { "gUU", bang = true }
 	end,
 })
@@ -35,7 +37,6 @@ vim.api.nvim_create_autocmd("ModeChanged", {
 })
 
 ---LSP CODELENS-----------------------------------------------------------------
-
 do
 	local function enableCodeLens(ctx)
 		local ft = vim.bo[ctx.buf].filetype
@@ -67,9 +68,7 @@ do
 	end
 end
 
---------------------------------------------------------------------------------
-
--- COLORSCHEMES DEPENDING ON SYSTEM MODE
+---COLORSCHEMES DEPENDING ON SYSTEM MODE----------------------------------------
 do
 	-- 1. tell neovide to sync `background` with system dark mode
 	-- (terminal already does so by default)
@@ -93,9 +92,8 @@ do
 	})
 end
 
---------------------------------------------------------------------------------
+---SYNC TERMINAL BACKGROUND-----------------------------------------------------
 
--- SYNC TERMINAL BACKGROUND
 -- https://github.com/neovim/neovim/issues/16572#issuecomment-1954420136
 -- https://www.reddit.com/r/neovim/comments/1ehidxy/you_can_remove_padding_around_neovim_instance/
 if vim.fn.has("gui_running") == 0 then
@@ -118,9 +116,8 @@ if vim.fn.has("gui_running") == 0 then
 		end,
 	})
 end
---------------------------------------------------------------------------------
+---AUTO-CLEANUP-----------------------------------------------------------------
 
--- AUTO-CLEANUP
 vim.api.nvim_create_autocmd("FocusLost", {
 	desc = "User: Auto-cleanup. Once a week, on first `FocusLost`, delete older files.",
 	once = true,
@@ -133,8 +130,7 @@ vim.api.nvim_create_autocmd("FocusLost", {
 	end,
 })
 
---------------------------------------------------------------------------------
--- AUTO-SAVE
+---AUTO-SAVE--------------------------------------------------------------------
 
 vim.api.nvim_create_autocmd({ "InsertLeave", "TextChanged", "BufLeave", "FocusLost" }, {
 	desc = "User: Auto-save",
@@ -160,8 +156,7 @@ vim.api.nvim_create_autocmd({ "InsertLeave", "TextChanged", "BufLeave", "FocusLo
 	end,
 })
 
---------------------------------------------------------------------------------
--- AUTO-CD TO PROJECT ROOT
+---AUTO-CD TO PROJECT ROOT------------------------------------------------------
 -- (simplified version of project.nvim)
 
 do
@@ -246,8 +241,7 @@ vim.api.nvim_create_autocmd("FocusGained", {
 	end,
 })
 
---------------------------------------------------------------------------------
--- AUTO-NOHL & INLINE SEARCH COUNT
+---AUTO-NOHL & INLINE SEARCH COUNT----------------------------------------------
 
 ---@param mode? "clear"
 local function searchCountIndicator(mode)
@@ -294,8 +288,7 @@ vim.on_key(function(key, _typed)
 	end
 end, vim.api.nvim_create_namespace("autoNohlAndSearchCount"))
 
---------------------------------------------------------------------------------
--- SKELETONS (TEMPLATES)
+---TEMPLATES--------------------------------------------------------------------
 
 local templateConfig = {
 	templateDir = vim.fn.stdpath("config") .. "/templates",
@@ -365,8 +358,7 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufReadPost" }, {
 	end,
 })
 
---------------------------------------------------------------------------------
--- ENFORCE SCROLLOFF AT EOF
+---ENFORCE SCROLLOFF AT EOF-----------------------------------------------------
 -- simplified version of https://github.com/Aasim-A/scrollEOF.nvim
 
 vim.api.nvim_create_autocmd({ "CursorMoved", "BufReadPost" }, {
@@ -397,9 +389,7 @@ vim.api.nvim_create_autocmd({ "BufReadPost", "BufNew" }, {
 	end,
 })
 
---------------------------------------------------------------------------------
--- FAVICON PREFIXES FOR URLS
--- inspired by the Obsidian favicon plugin: https://github.com/joethei/obsidian-link-favicon
+---FAVICON PREFIXES FOR URLS----------------------------------------------------
 
 -- REQUIREMENTS
 -- 1. nvim 0.10+
@@ -460,9 +450,7 @@ vim.api.nvim_create_autocmd({ "FocusGained", "BufReadPost", "TextChanged", "Inse
 	end,
 })
 
---------------------------------------------------------------------------------
-
--- LUCKY INDENT
+---LUCKY INDENT-----------------------------------------------------------------
 -- Auto-set indent based on first indented line. Ignores files when an
 -- `.editorconfig` is in effect. Simplified version of `guess-indent.nvim`.
 local function luckyIndent(bufnr)
@@ -507,8 +495,7 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 	end,
 })
 
---------------------------------------------------------------------------------
--- QUICKFIX ADD SIGNS
+---QUICKFIX SIGNS---------------------------------------------------------------
 
 vim.api.nvim_create_autocmd("QuickFixCmdPost", {
 	desc = "User: Add signs to quickfix (1/2)",
@@ -547,8 +534,8 @@ vim.api.nvim_create_autocmd("QuickFixCmdPost", {
 	end,
 })
 
---------------------------------------------------------------------------------
--- ADD NOTIFICATION TO LSP RENAME
+---ADD NOTIFICATION TO LSP RENAME-----------------------------------------------
+
 local originalRenameHandler = vim.lsp.handlers["textDocument/rename"]
 vim.lsp.handlers["textDocument/rename"] = function(err, result, ctx, config)
 	originalRenameHandler(err, result, ctx, config)
@@ -575,10 +562,8 @@ vim.lsp.handlers["textDocument/rename"] = function(err, result, ctx, config)
 	-- save all
 	if #changedFiles > 1 then vim.cmd("silent! wall") end
 end
---------------------------------------------------------------------------------
 
--- MACROS
--- add sound when recording
+---MACROS – ADD SOUND-----------------------------------------------------------
 if jit.os == "OSX" then
 	local function playSound(file)
 		local soundDir =
