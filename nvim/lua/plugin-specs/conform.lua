@@ -52,13 +52,14 @@ return {
 			},
 			["hard-wrap-at-textwidth"] = {
 				command = "nvim",
-				-- 1. each line via `:normal`, since `gggwG` breaks callouts
-				-- 2. `global /./` instead of `% normal` since `gww` changes line
-				-- count and `%` uses line count at start, resulting in lines at
-				-- the bottom not being formatted
 				args = {
 					"--headless",
-					"--clean",
+					"--clean", -- load no plugins/config
+					"+set textwidth=" .. vim.o.textwidth, -- hard-wrap width
+					-- 1. each line via `:normal`, since `gggwG` breaks callouts
+					-- 2. `global /./` instead of `% normal` since `gww` changes line
+					-- count and `%` uses line count at start, resulting in lines at
+					-- the bottom not being formatted
 					"+global /./ normal! gww",
 					"+wq",
 					"$FILENAME",

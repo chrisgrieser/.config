@@ -16,9 +16,26 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
---------------------------------------------------------------------------------
+---REPLACE MODE-----------------------------------------------------------------
+vim.api.nvim_create_autocmd("ModeChanged", {
+	desc = "User: uppercase the line when leaving replace mode",
+	pattern = "r:*", -- left replace-mode
+	callback = function(ctx)
+		if vim.bo[ctx.buf].filetype == "markdown" then return end
+		vim.cmd.normal { "gUU", bang = true }
+	end,
+})
+vim.api.nvim_create_autocmd("ModeChanged", {
+	desc = "User: automatically enter replace mode on third character",
+	pattern = "*:r", -- entered replace-mode
+	callback = function(ctx)
+		if vim.bo[ctx.buf].filetype == "markdown" then return end
+		vim.cmd.normal { "^3l", bang = true }
+	end,
+})
 
--- LSP CODELENS
+---LSP CODELENS-----------------------------------------------------------------
+
 do
 	local function enableCodeLens(ctx)
 		local ft = vim.bo[ctx.buf].filetype
@@ -298,7 +315,7 @@ local templateConfig = {
 		["**/Justfile"] = "justfile.just",
 		["**/.github/workflows/*.{yml,yaml}"] = "github-action.yaml",
 
-		[vim.g.notesDir.. "/**/*.md"] = "note.md",
+		[vim.g.notesDir .. "/**/*.md"] = "note.md",
 	},
 }
 

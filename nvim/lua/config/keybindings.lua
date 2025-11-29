@@ -20,8 +20,7 @@ local function keymap(mode, lhs, rhs, opts)
 	end
 end
 
---------------------------------------------------------------------------------
--- META
+---META-------------------------------------------------------------------------
 
 -- save before quitting (non-unique, since also set by Neovide)
 keymap("n", "<D-q>", vim.cmd.wqall, { desc = " Save & quit", unique = false })
@@ -160,6 +159,19 @@ keymap("n", "zl", function()
 	end)
 end, { desc = "󰓆 Spell suggestions" })
 
+-- template strings
+-- stylua: ignore
+keymap("i", "<D-t>", function() require("personal-plugins.auto-template-str").insertTemplateStr() end, { desc = "󰅳 Insert template string" })
+
+-- multi-edit
+keymap("n", "<D-j>", '*N"_cgn', { desc = "󰆿 Multi-edit cword" })
+keymap("x", "<D-j>", function()
+	local selection = vim.fn.getregion(vim.fn.getpos("."), vim.fn.getpos("v"), { type = "v" })[1]
+	assert(selection, "No selection")
+	vim.fn.setreg("/", "\\V" .. vim.fn.escape(selection, [[/\]]))
+	return '<Esc>"_cgn'
+end, { desc = "󰆿 Multi-edit selection", expr = true })
+
 -- Merging
 keymap("n", "m", "J", { desc = "󰽜 Merge line up" })
 keymap("n", "M", "<cmd>. move +1<CR>kJ", { desc = "󰽜 Merge line down" }) -- `:move` preserves marks
@@ -173,9 +185,8 @@ keymap({ "n", "x", "i" }, "<D-i>", function() require("personal-plugins.misc").m
 keymap("n", '"', function() require("personal-plugins.misc").mdWrap('"') end, { desc = ' Surround' })
 -- stylua: ignore end
 
---------------------------------------------------------------------------------
+---WHITESPACE & INDENTATION-----------------------------------------------------
 
--- WHITESPACE & INDENTATION
 keymap("n", "=", "[<Space>", { desc = " Blank above", remap = true }) -- remap, since nvim default
 keymap("n", "_", "]<Space>", { desc = " Blank below", remap = true })
 
@@ -186,15 +197,13 @@ keymap("n", "<S-Tab>", "<<", { desc = "󰉵 outdent" })
 keymap("x", "<S-Tab>", "<gv", { desc = "󰉵 outdent" })
 keymap("i", "<S-Tab>", "<C-d>", { desc = "󰉵 outdent", unique = false })
 
---------------------------------------------------------------------------------
--- QUICKFIX
+---QUICKFIX---------------------------------------------------------------------
 keymap("n", "gq", "<cmd>silent cnext<CR>zv", { desc = "󰴩 Next quickfix" })
 keymap("n", "gQ", "<cmd>silent cprev<CR>zv", { desc = "󰴩 Prev quickfix" })
 keymap("n", "<leader>qr", function() vim.cmd.cexpr("[]") end, { desc = "󰚃 Remove qf items" })
 keymap("n", "<leader>q1", "<cmd>silent cfirst<CR>zv", { desc = "󰴩 Goto 1st quickfix" })
 
---------------------------------------------------------------------------------
--- FOLDING
+---FOLDING----------------------------------------------------------------------
 keymap("n", "zz", "<cmd>%foldclose<CR>", { desc = " Close toplevel folds" })
 keymap("n", "zm", "zM", { desc = " Close all folds" })
 keymap("n", "zv", "zv", { desc = "󰘖 Open until cursor visible" }) -- just for which-key
@@ -202,8 +211,7 @@ keymap("n", "zr", "zR", { desc = "󰘖 Open all folds" })
 -- stylua: ignore
 keymap("n", "zf", function() vim.opt.foldlevel = vim.v.count1 end, { desc = " Set fold level to {count}" })
 
---------------------------------------------------------------------------------
--- SNIPPETS
+---SNIPPETS---------------------------------------------------------------------
 
 -- exit snippet https://github.com/neovim/neovim/issues/26449#issuecomment-1845293096
 keymap({ "i", "s" }, "<Esc>", function()
@@ -211,8 +219,7 @@ keymap({ "i", "s" }, "<Esc>", function()
 	return "<Esc>"
 end, { desc = "󰩫 Exit snippet", expr = true })
 
---------------------------------------------------------------------------------
--- CLIPBOARD
+---CLIPBOARD--------------------------------------------------------------------
 
 -- stylua: ignore
 keymap("n", "<leader>yb", function() require("personal-plugins.breadcrumbs").copy() end, { desc = "󰳮 breadcrumbs" })
@@ -239,7 +246,7 @@ do
 	})
 end
 
--- CYCLIC PASTE
+-- Yankring
 do
 	-- same as regular `p`, but when undoing the paste and then using `.`, will
 	-- paste `"2p`, so `<C-p>..... pastes all recent deletions and `pu.u.u.u.`
@@ -282,8 +289,7 @@ end, { desc = " Paste", expr = true })
 
 keymap("n", "<D-v>", "p", { desc = " Paste" }) -- compatibility w/ macOS clipboard managers
 
---------------------------------------------------------------------------------
--- TEXTOBJECTS
+---TEXTOBJECTS------------------------------------------------------------------
 
 local textobjRemaps = {
 	{ "c", "}", "", "curly" }, -------- [c]urly brace
@@ -304,8 +310,7 @@ keymap("n", "<Space>", '"_ciw', { desc = "󰬞 Change word" })
 keymap("x", "<Space>", '"_c', { desc = "󰒅 Change selection" })
 keymap("n", "<S-Space>", '"_daw', { desc = "󰬞 Delete word" })
 
---------------------------------------------------------------------------------
--- COMMENTS
+---COMMENTS---------------------------------------------------------------------
 -- requires `remap` or method from: https://www.reddit.com/r/neovim/comments/1ctc1zd/comment/l4c29rx/
 keymap({ "n", "x" }, "q", "gc", { desc = "󰆈 Comment operator", remap = true })
 keymap("n", "qq", "gcc", { desc = "󰆈 Comment line", remap = true })
@@ -316,13 +321,13 @@ end
 
 -- stylua: ignore start
 keymap("n", "qw", function() require("personal-plugins.comment").commentHr() end, { desc = "󰆈 Horizontal divider" })
+keymap("n", "qe", function() require("personal-plugins.comment").commentHr("label") end, { desc = "󰆈 Horizontal divider w/ label" })
 keymap("n", "wq", function() require("personal-plugins.comment").duplicateLineAsComment() end, { desc = "󰆈 Duplicate line as comment" })
 keymap("n", "qf", function() require("personal-plugins.comment").docstring() end, { desc = "󰆈 Function docstring" })
 keymap("n", "Q", function() require("personal-plugins.comment").addCommentAtEol() end, { desc = "󰆈 Add comment at EoL" })
 -- stylua: ignore end
 
---------------------------------------------------------------------------------
--- LINE & CHARACTER MOVEMENT
+---LINE & CHARACTER MOVEMENT----------------------------------------------------
 
 keymap("n", "<Down>", "<cmd>. move +1<CR>==", { desc = "󰜮 Move line down" })
 keymap("n", "<Up>", "<cmd>. move -2<CR>==", { desc = "󰜷 Move line up" })
@@ -333,9 +338,7 @@ keymap("x", "<Up>", [[:move '<-2<CR>gv=gv]], { desc = "󰜷 Move selection up", 
 keymap("x", "<Right>", [["zx"zpgvlolo]], { desc = "➡️ Move selection right" })
 keymap("x", "<left>", [["zxhh"zpgvhoho]], { desc = "⬅ Move selection left" })
 
---------------------------------------------------------------------------------
-
--- LSP
+---LSP--------------------------------------------------------------------------
 keymap({ "n", "x" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "󱐋 Code action" })
 
 -- stylua: ignore start
@@ -346,28 +349,35 @@ keymap("n", "<PageDown>", function() require("personal-plugins.misc").scrollLspO
 keymap("n", "<PageUp>", function() require("personal-plugins.misc").scrollLspOrOtherWin(-5) end, { desc = "↑ Scroll other win" })
 -- stylua: ignore end
 
---------------------------------------------------------------------------------
+---VARIOUS MODES----------------------------------------------------------------
 
--- INSERT MODE
+-- insert mode
 keymap("n", "i", function()
 	local lineEmpty = vim.trim(vim.api.nvim_get_current_line()) == ""
 	return lineEmpty and '"_cc' or "i"
 end, { expr = true, desc = "indented i on empty line" })
 
--- VISUAL MODE
+-- visual mode
 keymap("x", "V", "j", { desc = "repeated `V` selects more lines" })
 keymap("x", "v", "<C-v>", { desc = "`vv` starts visual block" })
 
--- TERMINAL MODE
+-- terminal mode
 keymap("t", "<C-CR>", [[<C-\><C-n><C-w>w]], { desc = " Goto next window" })
 keymap("t", "<Esc>", [[<C-\><C-n>]], { desc = " Esc" })
 keymap("t", "<D-v>", [[<C-\><C-n>pi]], { desc = " Paste" })
 
--- CMDLINE MODE
+-- replace mode
+keymap("R", "<D-v>", function()
+	vim.notify("🪚 🟩")
+	return "<C-r>+"
+end, { expr = true, desc = " Paste" })
+
+-- cmdline mode
 keymap("c", "<D-v>", function()
 	vim.fn.setreg("+", vim.trim(vim.fn.getreg("+"))) -- trim
 	return "<C-r>+"
 end, { expr = true, desc = " Paste" })
+
 keymap("c", "<D-c>", function()
 	local cmdline = vim.fn.getcmdline()
 	if cmdline == "" then return vim.notify("Nothing to copy.", vim.log.levels.WARN) end
@@ -395,8 +405,7 @@ keymap(
 	{ desc = " Open cwd in WezTerm" }
 )
 
---------------------------------------------------------------------------------
--- INSPECT & EVAL
+---INSPECT & EVAL---------------------------------------------------------------
 
 keymap("n", "<leader>ii", vim.cmd.Inspect, { desc = "󱈄 Highlights at cursor" })
 keymap("n", "<leader>it", vim.cmd.InspectTree, { desc = " :InspectTree" })
@@ -421,8 +430,7 @@ keymap("n", "<leader>ey", function()
 	vim.notify(lastExcmd, nil, { title = "Copied", icon = "󰅍", ft = syntax })
 end, { desc = "󰘳 Yank last ex-cmd" })
 
---------------------------------------------------------------------------------
--- WINDOWS & SPLITS
+---WINDOWS & SPLITS-------------------------------------------------------------
 
 -- stylua: ignore
 keymap({ "n", "v", "i" }, "<C-CR>", "<C-w>w", { desc = " Cycle windows" })
@@ -434,8 +442,7 @@ keymap("n", "<C-Down>", "<C-w>3+")
 keymap("n", "<C-Left>", "<C-w>5<")
 keymap("n", "<C-Right>", "<C-w>5>")
 
---------------------------------------------------------------------------------
--- BUFFERS & FILES
+---BUFFERS & FILES--------------------------------------------------------------
 
 -- stylua: ignore
 keymap({ "n", "x" }, "<CR>", function() require("personal-plugins.magnet").gotoAltFile() end, { desc = "󰬈 Goto alt-file" })
@@ -468,8 +475,7 @@ keymap("n", "<S-BS>", vim.cmd.bnext, { desc = "󰽙 Next buffer" })
 -- stylua: ignore
 keymap({ "n", "x", "i" }, "<D-L>", function() require("personal-plugins.misc").openWorkflowInAlfredPrefs() end, { desc = "󰮤 Reveal in Alfred" })
 
---------------------------------------------------------------------------------
--- MACROS
+---MACROS-----------------------------------------------------------------------
 
 do
 	local reg = "r"
@@ -482,8 +488,7 @@ do
 	keymap("n", "9", function() require("personal-plugins.misc").playRecording(reg) end, { desc = "󰃽 Play recording" })
 end
 
---------------------------------------------------------------------------------
--- REFACTORING
+---REFACTORING------------------------------------------------------------------
 
 keymap("n", "<leader>rr", vim.lsp.buf.rename, { desc = "󰑕 LSP rename" })
 
@@ -506,23 +511,7 @@ do
 	keymap("n", "<leader>r<Space>", function() retabber("spaces") end, { desc = "󱁐 Use spaces" })
 end
 
---------------------------------------------------------------------------------
-
--- TEMPLATE STRINGS
--- stylua: ignore
-keymap("i", "<D-t>", function() require("personal-plugins.auto-template-str").insertTemplateStr() end, { desc = "󰅳 Insert template string" })
-
--- MULTI-EDIT
-keymap("n", "<D-j>", '*N"_cgn', { desc = "󰆿 Multi-edit cword" })
-keymap("x", "<D-j>", function()
-	local selection = vim.fn.getregion(vim.fn.getpos("."), vim.fn.getpos("v"), { type = "v" })[1]
-	assert(selection, "No selection")
-	vim.fn.setreg("/", "\\V" .. vim.fn.escape(selection, [[/\]]))
-	return '<Esc>"_cgn'
-end, { desc = "󰆿 Multi-edit selection", expr = true })
-
---------------------------------------------------------------------------------
--- OPTION TOGGLING
+---OPTION TOGGLING--------------------------------------------------------------
 
 keymap("n", "<leader>on", "<cmd>set number!<CR>", { desc = " Line numbers" })
 keymap("n", "<leader>ow", "<cmd>set wrap!<CR>", { desc = "󰖶 Wrap" })

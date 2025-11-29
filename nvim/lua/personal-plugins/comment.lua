@@ -3,6 +3,7 @@ local M = {}
 
 local config = {
 	formatterWantsPadding = { "python", "swift", "toml" },
+	hrChar = "─",
 }
 
 --------------------------------------------------------------------------------
@@ -19,9 +20,9 @@ end
 
 --------------------------------------------------------------------------------
 
--- appends a horizontal line, with the language's comment syntax,
--- correctly indented and padded
-function M.commentHr()
+---add horizontal line with the language's comment syntax and correctly indented
+---@param addLabel any -- adds a label in replace mode
+function M.commentHr(addLabel)
 	local comStr = getCommentstr()
 	if not comStr then return end
 	local startLn = vim.api.nvim_win_get_cursor(0)[1]
@@ -35,14 +36,14 @@ function M.commentHr()
 		ln = ln - 1
 	until line ~= "" or ln == 0
 
-	-- determine hrLength
+	-- determine hr-length
 	local indentLength = vim.bo.expandtab and #indent or #indent * vim.bo.tabstop
 	local comStrLength = #(comStr:format(""))
 	local textwidth = vim.o.textwidth > 0 and vim.o.textwidth or 80
 	local hrLength = textwidth - (indentLength + comStrLength)
 
 	-- construct HR
-	local hrChar = comStr:find("%-") and "-" or "─"
+	local hrChar = comStr:find("%-") and "-" or config.hrChar
 	local hr = hrChar:rep(hrLength)
 	local hrWithComment = comStr:format(hr)
 
@@ -55,7 +56,10 @@ function M.commentHr()
 
 	-- append lines & move
 	vim.api.nvim_buf_set_lines(0, startLn, startLn, true, { fullLine, "" })
-	vim.api.nvim_win_set_cursor(0, { startLn + 1, #indent })
+	local offset = #indent
+	if addLabel then offset = offset + comStrLength end
+	vim.api.nvim_win_set_cursor(0, { startLn + 1, offset })
+	if addLabel then vim.cmd.startreplace() end
 end
 
 function M.duplicateLineAsComment()
