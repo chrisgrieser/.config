@@ -19,7 +19,11 @@ return {
 		formatters_by_ft = {
 			markdown = { "hard-wrap-at-textwidth", "markdownlint", "markdown-toc", "injected" },
 			python = { "ruff_fix", "ruff_organize_imports" },
-			typescript = { "ts-add-missing-imports", "ts-remove-unused-imports", "biome-organize-imports" },
+			typescript = {
+				"ts-add-missing-imports",
+				"ts-remove-unused-imports",
+				"biome-organize-imports",
+			},
 			zsh = { "shell-home", "shellcheck" },
 			json = { lsp_format = "prefer", "jq" }, -- use `biome` (via LSP), with `jq` as fallback
 
@@ -40,31 +44,26 @@ return {
 			-- my custom formatters
 			["shell-home"] = { -- replace `/Users/…` or `~` with `$HOME/`
 				format = function(_self, _ctx, lines, callback)
-					for _, line in pairs(lines) do
-						line = line:gsub("/Users/%a+", "$HOME"):gsub("~/", "$HOME/")
+					local function replace(line)
+						return line:gsub("/Users/%a+", "$HOME"):gsub("~/", "$HOME/")
 					end
-					local outLines = vim.tbl_map(
-						function(line) return line:gsub("/Users/%a+", "$HOME"):gsub("~/", "$HOME/") end,
-						lines
-					)
-					callback(nil, outLines)
+					callback(nil, vim.tbl_map(replace, lines))
 				end,
 			},
 			["hard-wrap-at-textwidth"] = {
-				format = function(_self, ctx, _lines, callback)
-					local view = vim.fn.winsaveview()
-
-					-- 1. each line via `:normal`, since `gggwG` breaks callouts
-					-- 2. `global /./` instead of `% normal` since `gww` changes line
-					-- count and `%` uses line count at start, resulting in lines at
-					-- the bottom not being formatted
-					vim.cmd("global/./ normal! gww")
-
-					local formattedLines = vim.api.nvim_buf_get_lines(ctx.buf, 0, -1, true)
-					vim.cmd.undo()
-					vim.fn.winrestview(view)
-					callback(nil, formattedLines)
-				end,
+				command = "nvim",
+				-- 1. each line via `:normal`, since `gggwG` breaks callouts
+				-- 2. `global /./` instead of `% normal` since `gww` changes line
+				-- count and `%` uses line count at start, resulting in lines at
+				-- the bottom not being formatted
+				args = {
+					"--headless",
+					"--clean",
+					"+global /./ normal! gww",
+					"+wq",
+					"$FILENAME",
+				},
+				stdin = false,
 			},
 			["ts-add-missing-imports"] = {
 				format = function(_self, ctx, _lines, callback)
