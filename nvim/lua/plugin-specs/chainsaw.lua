@@ -57,7 +57,7 @@ return {
 			on_init = function(client)
 				if (client.root_dir or ""):find("nvim") then
 					local globals = client.config.settings.Lua.diagnostics.globals or {}
-					globals = vim.list_extend(globals, { "Chainsaw" })
+					vim.list_extend(globals, { "Chainsaw" })
 				end
 			end,
 		})

@@ -24,6 +24,8 @@ return {
 			providers = {
 				dictionary = {
 					module = "blink-cmp-dictionary",
+					score_offset = -5,
+					max_items = 5,
 					min_keyword_length = 4,
 					opts = {
 						dictionary_directories = { vim.env.HOME .. "/.config/word-lists/" },
