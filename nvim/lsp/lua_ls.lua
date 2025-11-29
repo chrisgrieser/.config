@@ -22,17 +22,20 @@ return {
 				inferParamType = true, -- unannotated params are inferred instead of `any`
 				checkTableShape = true,
 			},
+			-- nameStyle = {
+			-- 	config = {
+			-- 		local_name_style = "camel_case",
+			-- 		local_function_name_style = "camel_case",
+			-- 	},
+			-- },
 			diagnostics = {
 				neededFileStatus = {
 					["await-in-sync"] = "Any",
-					["codestyle-check"] = "Any",
 					["incomplete-signature-doc"] = "Any",
 					["missing-global-doc"] = "Any",
 					["missing-local-export-doc"] = "Any",
-					["name-style-check"] = "Any",
 					["no-unknown"] = "Any",
 					["not-yieldable"] = "Any",
-					["spell-check"] = "Any",
 				},
 				unusedLocalExclude = { "_*" },
 				disable = {

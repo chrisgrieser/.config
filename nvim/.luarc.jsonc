@@ -6,5 +6,18 @@
 		"${3rd}/luv/library", // vim.uv,
 		"$HOME/.local/share/nvim/lazy/snacks.nvim/lua" // snacks.nvim
 	],
+	"diagnostics": {
+		"neededFileStatus": {
+			"name-style-check": "Opened"
+		}
+	},
+	"nameStyle.config": {
+		"local_name_style": "camel_case",
+		"localNameStyle": "camel_case",
+		"LocalFunctionNameStyle": "camel_case",
+		"LocalFunctionName": "camel_case",
+		"local_function_name": "camel_case",
+		"local_function_name_style": "camel_case"
+	},
 	"$schema": "https://raw.githubusercontent.com/LuaLS/vscode-lua/master/setting/schema.json"
 }
