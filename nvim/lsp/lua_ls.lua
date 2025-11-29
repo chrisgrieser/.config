@@ -15,7 +15,25 @@ return {
 				workspaceWord = false, -- already done by completion plugin
 				postfix = ".", -- useful for `table.insert` and the like
 			},
+			hover = {
+				expandAlias = false, -- `@alias`
+			},
+			type = {
+				inferParamType = true, -- unannotated params are inferred instead of `any`
+				checkTableShape = true,
+			},
 			diagnostics = {
+				neededFileStatus = {
+					["await-in-sync"] = "Any",
+					["codestyle-check"] = "Any",
+					["incomplete-signature-doc"] = "Any",
+					["missing-global-doc"] = "Any",
+					["missing-local-export-doc"] = "Any",
+					["name-style-check"] = "Any",
+					["no-unknown"] = "Any",
+					["not-yieldable"] = "Any",
+					["spell-check"] = "Any",
+				},
 				unusedLocalExclude = { "_*" },
 				disable = {
 					-- formatter already handles that
