@@ -38,9 +38,8 @@ return {
 			hl.LspCodeLens = { link = "LspInlayHint" }
 
 			-- Snacks
-			hl.SnacksPickerMatch = { fg = colors.yellow } -- make matches stand out more
-			hl.SnacksPickerGitStatusModified = { fg = colors.blue2 } -- differentiate from match color
-			hl.SnacksNormal = { link = "FloatBorder" }
+			-- hl.SnacksPickerMatch = { fg = colors.yellow } -- make matches stand out more
+			-- hl.SnacksPickerGitStatusModified = { fg = colors.blue2 } -- differentiate from match color
 
 			-- blink.cmp
 			hl.BlinkCmpKindFile = { link = "LspKindText" } -- FIX wrong bg for icons with source `path`

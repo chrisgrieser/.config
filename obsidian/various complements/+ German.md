@@ -1,6 +1,0 @@
-Tafelbilder
-Konstruktivismus
-Algorithmus
-Verallgemeinerbarkeit
-
-
