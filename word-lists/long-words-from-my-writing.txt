@@ -1,8 +1,4 @@
-%% cat manuscript.md | tr -d "_" | grep -E -o "[@äöüÄÖÜßA-Za-z-]+" | grep -v "@" | grep -v ".*-.*-.*-" | grep -v "^-" | sort -u | grep -E ".{10,}" > "$VAULT_PATH/Meta/Autocomplete Dictionaries/+ long words.md" %%
-%% open "obsidian://advanced-uri?vault=Main%20Vault&commandid=various-complements%253Areload-custom-dictionaries" %%
-
 Algorithms
-unintentionally
 Application
 Boundaries
 Christopher
@@ -21,6 +17,7 @@ Fragmentation
 Genericness
 Imperative
 Incentivizing
+Information System Research
 Inhibiting
 Inhibition
 Innovation
@@ -40,17 +37,20 @@ Polychrony
 Programming
 References
 Schulz-Schaeffer
+Science and Technology Studies
 Subsequently
 Synchronicity
 TechCrunch
 Technological
 Technologies
 Technology
+Technology Studies
 Underlying
 University
 Versioning
 accelerant
 acceleration
+acceleration of research
 accompanying
 accomplish
 accomplishing
@@ -83,6 +83,7 @@ attributed
 automating
 backward-compatible
 black-boxing
+black-boxing
 border-drawing
 boundaries
 breakdowns
@@ -102,6 +103,7 @@ communicate
 communication
 communicative
 comparatively
+compartmentalization
 compatibility
 compatibility-ensuring
 compatible
@@ -135,10 +137,13 @@ consistency
 consisting
 constantly
 constellation
+constellation of technological interdependence
 constellations
+constellations of technological interdependence
 constitute
 constitutes
 constraint
+constructivism
 constructivist
 contemporary
 contingency
@@ -291,6 +296,9 @@ infrastructures
 inhibition
 innovating
 innovation
+innovation imperative
+innovation society
+innovation studies
 innovation-impeding
 innovations
 innovative
@@ -302,14 +310,17 @@ insulation
 integrated
 intensification
 intentions
+inter-platform competition
 interaction
 interactions
 interactive
 interchangeably
 interconnected
 interdependence
+interdependence
 interdependence-relationships
 interdependent
+interdependent technologies
 interested
 interfaces
 interference
@@ -321,6 +332,7 @@ interrelatedness
 intervention
 interviewed
 interviews
+intra-platform competition
 intriguing
 introducing
 inventions
@@ -330,6 +342,7 @@ investigation
 investments
 irreplaceable
 iterations
+large technical system
 legitimize
 link-bibliography
 link-citations
@@ -352,9 +365,11 @@ methodological
 modification
 modifications
 modularity
+modularity
 modularization
 multi-faceted
 multi-homing
+multi-sided market
 necessitate
 negatively
 negligible
@@ -397,6 +412,7 @@ platformization
 policy-makers
 polychronic
 polychrony
+polychrony
 positively
 possibility
 potentially
@@ -408,6 +424,7 @@ preservation
 pro-innovation
 problematic
 procedures
+production community
 programmability
 programming
 proliferate
@@ -452,9 +469,13 @@ simultaneously
 situations
 smartphone
 smartphones
+social theory
 social-scientific
+social-scientific
+social-scientific innovation research
 sociological
 sociologists
+sociology of science
 software-based
 solutionism
 sophisticated
@@ -476,15 +497,19 @@ surprising
 susceptibility
 symmetrical
 synchronicity
+synchronicity
 synchronizing
 synchronous
 synchronously
+system theory
 systematic
 techcrunch
 technically
 technological
+technological interdependence
 technologically
 technologies
+technologization||
 technology
 themselves
 theoretical
@@ -496,6 +521,7 @@ transistors
 transition
 translation
 transmission
+two-sided market
 ubiquitous
 underlines
 underlining
@@ -504,6 +530,7 @@ understand
 understanding
 understood
 unilaterally
+unintentionally
 unsurprising
 veneration
 venturebeat

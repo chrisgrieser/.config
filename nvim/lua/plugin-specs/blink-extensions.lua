@@ -15,7 +15,7 @@ return {
 	opts = {
 		sources = {
 			-- add `git` and `dictionary` to the list
-			default = { "lsp", "path", "snippets", "buffer", "git", "dictionary" },
+			default = { "lsp", "path", "snippets", "buffer", "git", "dictionary", },
 
 			per_filetype = {
 				gitcommit = { "git" },
@@ -24,15 +24,13 @@ return {
 			providers = {
 				dictionary = {
 					module = "blink-cmp-dictionary",
-					name = "Dict",
-					min_keyword_length = 3,
+					min_keyword_length = 4,
 					opts = {
-						dictionaryFile = "/Users/chrisgrieser/Desktop/words_alpha.txt"
-					}
+						dictionary_directories = { vim.env.HOME .. "/.config/word-lists/" },
+					},
 				},
 				git = {
 					module = "blink-cmp-git",
-					name = "Git",
 					opts = {
 						before_reload_cache = function() end, -- silence cache-reload notification
 						commit = { enable = false },

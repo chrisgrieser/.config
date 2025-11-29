@@ -32,10 +32,3 @@ cross platform framework
 software ecosystem
 complementors
 
-algorithmisch||
-solutionisms||
-Effectively||
-operating system||
-Semantic Versioning||SemVer
-
-
