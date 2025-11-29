@@ -19,8 +19,8 @@ local ensureInstalled = {
 		"harper-ls", -- natural language linter
 		"typos-lsp", -- spellchecker for code
 		"ltex-ls-plus", -- natural language linter (LanguageTool, ltex fork)
-		-- "marksman", -- markdown lsp (markdown-oxide is buggy with links to headings)
-		"markdown-oxide",
+		"marksman", -- markdown lsp
+		-- "markdown-oxide", -- PENDING https://github.com/Feel-ix-343/markdown-oxide/issues/323
 
 		"basedpyright", -- python lsp (pyright fork)
 		"ruff", -- python linter & formatter
