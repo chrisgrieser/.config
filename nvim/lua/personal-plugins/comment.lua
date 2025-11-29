@@ -6,8 +6,7 @@ local config = {
 	hrChar = "─",
 }
 
---------------------------------------------------------------------------------
-
+---HELPERS----------------------------------------------------------------------
 ---@return string?
 local function getCommentstr()
 	local comStr = vim.bo.commentstring
@@ -16,6 +15,29 @@ local function getCommentstr()
 		return
 	end
 	return comStr
+end
+
+function M.setupReplaceModeHelpersForComments()
+	vim.api.nvim_create_autocmd("ModeChanged", {
+		desc = "User: uppercase the line when leaving replace mode on a comment",
+		pattern = "r:*", -- left replace-mode
+		callback = function(ctx)
+			if vim.bo[ctx.buf].filetype == "markdown" then return end
+			local line = vim.trim(vim.api.nvim_get_current_line())
+			local comChars = vim.trim(vim.bo.commentstring:format(""))
+			if vim.startswith(line, comChars) then vim.cmd.normal { "gUU", bang = true } end
+		end,
+	})
+	vim.api.nvim_create_autocmd("ModeChanged", {
+		desc = "User: automatically enter replace mode on third character",
+		pattern = "*:r", -- entered replace-mode
+		callback = function(ctx)
+			if vim.bo[ctx.buf].filetype == "markdown" then return end
+			local line = vim.trim(vim.api.nvim_get_current_line())
+			local comChars = vim.trim(vim.bo.commentstring:format(""))
+			if vim.startswith(line, comChars) then vim.cmd.normal { "^3l", bang = true } end
+		end,
+	})
 end
 
 --------------------------------------------------------------------------------
@@ -55,11 +77,16 @@ function M.commentHr(replaceModeLabel)
 	if vim.bo.ft == "markdown" then fullLine = "---" end
 
 	-- append lines & move
-	vim.api.nvim_buf_set_lines(0, startLn, startLn, true, { fullLine, "" })
-	local offset = #indent
-	if replaceModeLabel then offset = offset + comStrLength end
-	vim.api.nvim_win_set_cursor(0, { startLn + 1, offset })
-	if replaceModeLabel then vim.cmd.startreplace() end
+	vim.api.nvim_buf_set_lines(0, startLn, startLn, true, { fullLine })
+	if not replaceModeLabel then
+		vim.api.nvim_buf_set_lines(0, startLn + 1, startLn + 1, true, { "" })
+	end
+
+	vim.api.nvim_win_set_cursor(0, { startLn + 1, #indent })
+	if replaceModeLabel then
+		vim.cmd.normal { ("l"):rep(comStrLength), bang = true }
+		vim.cmd.startreplace()
+	end
 end
 
 function M.duplicateLineAsComment()
