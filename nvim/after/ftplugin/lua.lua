@@ -17,15 +17,17 @@ abbr("fi", "end")
 local function plusPlusMinusMinus(sign)
 	local row, col = vim.api.nvim_win_get_cursor(0)[1], vim.api.nvim_win_get_cursor(0)[2] or 0
 	local textBeforeCursor = vim.api.nvim_get_current_line():sub(col - 1, col)
-	if not textBeforeCursor:find("[%w_]%" .. sign) then
+	local afterVariable = textBeforeCursor:find("[%w_]%" .. sign)
+	if not afterVariable or vim.fn.mode() == "R" then
 		vim.api.nvim_feedkeys(sign, "n", true) -- pass through the trigger char
-	else
-		local line = vim.api.nvim_get_current_line()
-		local updated = line:gsub("([%w_]+)%" .. sign, "%1 = %1 " .. sign .. " 1")
-		vim.api.nvim_set_current_line(updated)
-		local diff = #updated - #line
-		vim.api.nvim_win_set_cursor(0, { row, col + diff })
+		return
 	end
+
+	local line = vim.api.nvim_get_current_line()
+	local updated = line:gsub("([%w_]+)%" .. sign, "%1 = %1 " .. sign .. " 1")
+	vim.api.nvim_set_current_line(updated)
+	local diff = #updated - #line
+	vim.api.nvim_win_set_cursor(0, { row, col + diff })
 end
 bkeymap("i", "+", function() plusPlusMinusMinus("+") end, { desc = "i++  i = i + 1" })
 bkeymap("i", "-", function() plusPlusMinusMinus("-") end, { desc = "i--  i = i - 1" })

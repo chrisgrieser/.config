@@ -1,4 +1,4 @@
--- MY VARIABLES
+---MY VARIABLES-----------------------------------------------------------------
 vim.g.localRepos = vim.env.HOME .. "/Developer"
 vim.g.notesDir = vim.env.HOME .. "/Notes"
 vim.g.iCloudSync = vim.env.HOME .. "/Library/Mobile Documents/com~apple~CloudDocs/Tech/nvim-data"
@@ -9,8 +9,7 @@ vim.g.useEmmyluaLsp = false
 vim.g.lightColor = "dawnfox"
 vim.g.darkColor = "tokyonight"
 
---------------------------------------------------------------------------------
--- GENERAL OPTIONS
+---GENERAL OPTIONS--------------------------------------------------------------
 vim.g.mapleader = ","
 vim.g.maplocalleader = "<Nop>"
 vim.opt.clipboard = "unnamedplus"
@@ -57,8 +56,7 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
---------------------------------------------------------------------------------
--- WRAP
+---WRAP-------------------------------------------------------------------------
 vim.opt.wrap = false -- off by default, enable when needed
 vim.opt.linebreak = true -- wrap at full words
 vim.opt.breakindent = true -- wrapped lines inherit indent from previous line
@@ -72,8 +70,7 @@ vim.api.nvim_create_autocmd("Filetype", {
 	end,
 })
 
---------------------------------------------------------------------------------
--- APPEARANCE
+---APPEARANCE-------------------------------------------------------------------
 vim.opt.cursorline = true
 vim.opt.cursorlineopt = "screenline" -- highlight visual line, not logical line
 vim.opt.colorcolumn = "+1" -- = one more than textwidth
@@ -86,9 +83,7 @@ vim.opt.winborder = "single"
 
 vim.opt.pumheight = 12 -- max height of completion menu
 
---------------------------------------------------------------------------------
--- EDITORCONFIG
-
+---EDITORCONFIG-----------------------------------------------------------------
 -- By default, nvim automatically sets `textwidth` to follow the
 -- `max_line_length` value of `editorconfig`. However, I prefer to keep have
 -- different values for `textwidth` and `max_line_length`, so vim behavior like
@@ -105,18 +100,13 @@ vim.opt.shiftwidth = 3
 vim.opt.shiftround = true
 vim.opt.smartindent = true
 
---------------------------------------------------------------------------------
--- MESSAGES & CMDLINE
-
+---MESSAGES & CMDLINE-----------------------------------------------------------
 vim.opt.report = 9001 -- disable most "x more/fewer lines" messages
 vim.opt.shortmess:append("ISs") -- no intro message, disable search count
 vim.opt.cmdheight = 0
-
 vim.lsp.set_log_level("ERROR")
 
---------------------------------------------------------------------------------
--- INVISIBLE CHARS
-
+---INVISIBLE CHARS--------------------------------------------------------------
 vim.opt.list = true
 vim.opt.conceallevel = 2 -- hide some chars in markdown and json
 vim.opt.listchars = {
@@ -143,9 +133,7 @@ vim.opt.fillchars:append {
 	verthoriz = "█",
 }
 
---------------------------------------------------------------------------------
--- DIAGNOSTICS
-
+---DIAGNOSTICS------------------------------------------------------------------
 vim.diagnostic.config {
 	severity_sort = true,
 	signs = {
