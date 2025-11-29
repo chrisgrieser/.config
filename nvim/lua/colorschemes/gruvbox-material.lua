@@ -16,13 +16,13 @@ return {
 		vim.g.gruvbox_material_inlay_hints_background = "dimmed"
 		vim.g.gruvbox_material_disable_italic_comment = 1
 
-		local name = vim.fs.basename(spec[1])
+		local name = vim.fs.basename(spec[1]) ---@type string
 		vim.api.nvim_create_autocmd("ColorScheme", {
 			desc = "User: Highlights for " .. name,
 			pattern = name,
 			callback = function()
 				local setHl = function(...) vim.api.nvim_set_hl(0, ...) end
-				local hlCmd = vim.cmd.highlight
+				local hlCmd = vim.cmd.highlight ---@type function
 
 				-- FIX MISSING HIGHLIGHTS
 				-- stop globals like `vim` in lua or `Objc` in JXA from being overwritten

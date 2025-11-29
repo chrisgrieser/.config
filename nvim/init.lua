@@ -3,6 +3,7 @@
 ---remaining config files not being loaded.
 ---@param module string
 local function safeRequire(module)
+	---@type boolean, string
 	local success, errmsg = pcall(require, module)
 	if not success then
 		local msg = ("Error loading `%s`: %s"):format(module, errmsg)

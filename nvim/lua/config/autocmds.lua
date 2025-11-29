@@ -57,7 +57,7 @@ do
 	-- 1. tell neovide to sync `background` with system dark mode
 	-- (terminal already does so by default)
 	vim.g.neovide_theme = "auto"
-	local prevBg
+	local prevBg ---@type string
 
 	-- 2. tell nvim to sync colorscheme with `background`
 	vim.api.nvim_create_autocmd("OptionSet", {
@@ -326,7 +326,7 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufReadPost" }, {
 
 			-- read template & move to cursor placeholder
 			local content = {}
-			local cursor
+			local cursor ---@type integer[]
 			local row = 1
 			for line in io.lines(templatePath) do
 				local placeholderPos = line:find("%$0")
