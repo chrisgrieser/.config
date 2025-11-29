@@ -119,8 +119,7 @@ do
 	end
 end
 
---------------------------------------------------------------------------------
--- EDITING
+---EDITING----------------------------------------------------------------------
 
 -- Undo
 keymap("n", "u", "<cmd>silent undo<CR>zv", { desc = "󰜊 Silent undo" })
@@ -195,8 +194,15 @@ keymap({ "n", "x", "i" }, "<D-i>", function() require("personal-plugins.misc").m
 keymap("n", '"', function() require("personal-plugins.misc").mdWrap('"') end, { desc = ' Surround' })
 -- stylua: ignore end
 
----WHITESPACE & INDENTATION-----------------------------------------------------
+-- exit snippet 
+-- https://github.com/neovim/neovim/issues/26449#issuecomment-1845293096
+keymap({ "i", "s" }, "<Esc>", function()
+	vim.snippet.stop()
+	return "<Esc>"
+end, { desc = "󰩫 Exit snippet", expr = true })
 
+
+---WHITESPACE & INDENTATION-----------------------------------------------------
 keymap("n", "=", "[<Space>", { desc = " Blank above", remap = true }) -- remap, since nvim default
 keymap("n", "_", "]<Space>", { desc = " Blank below", remap = true })
 
@@ -221,20 +227,8 @@ keymap("n", "zr", "zR", { desc = "󰘖 Open all folds" })
 -- stylua: ignore
 keymap("n", "zf", function() vim.opt.foldlevel = vim.v.count1 end, { desc = " Set fold level to {count}" })
 
----SNIPPETS---------------------------------------------------------------------
-
--- exit snippet https://github.com/neovim/neovim/issues/26449#issuecomment-1845293096
-keymap({ "i", "s" }, "<Esc>", function()
-	vim.snippet.stop()
-	return "<Esc>"
-end, { desc = "󰩫 Exit snippet", expr = true })
-
 ---CLIPBOARD--------------------------------------------------------------------
-
--- stylua: ignore
-keymap("n", "<leader>yb", function() require("personal-plugins.breadcrumbs").copy() end, { desc = "󰳮 breadcrumbs" })
-
--- STICKY YANK
+-- Sticky yank
 do
 	keymap({ "n", "x" }, "y", function()
 		vim.b.cursorPreYank = vim.api.nvim_win_get_cursor(0)
@@ -256,7 +250,7 @@ do
 	})
 end
 
--- Yankring
+-- yankring
 do
 	-- same as regular `p`, but when undoing the paste and then using `.`, will
 	-- paste `"2p`, so `<C-p>..... pastes all recent deletions and `pu.u.u.u.`
@@ -274,6 +268,9 @@ do
 		end,
 	})
 end
+
+-- stylua: ignore
+keymap("n", "<leader>yb", function() require("personal-plugins.breadcrumbs").copy() end, { desc = "󰳮 breadcrumbs" })
 
 -- keep the register clean
 keymap({ "n", "x" }, "x", '"_x')
@@ -337,6 +334,7 @@ keymap("n", "qr", function() require("personal-plugins.comment").commentHr("repl
 keymap("n", "wq", function() require("personal-plugins.comment").duplicateLineAsComment() end, { desc = "󰆈 Duplicate line as comment" })
 keymap("n", "qf", function() require("personal-plugins.comment").docstring() end, { desc = "󰆈 Function docstring" })
 keymap("n", "Q", function() require("personal-plugins.comment").addCommentAtEol() end, { desc = "󰆈 Add comment at EoL" })
+require("personal-plugins.comment").setupReplaceModeHelpersForComments()
 -- stylua: ignore end
 
 ---LINE & CHARACTER MOVEMENT----------------------------------------------------

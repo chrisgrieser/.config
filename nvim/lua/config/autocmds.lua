@@ -1,3 +1,4 @@
+---BASICS-----------------------------------------------------------------------
 vim.api.nvim_create_autocmd("TextYankPost", {
 	desc = "User: Highlighted Yank",
 	callback = function() vim.hl.on_yank { timeout = 1500 } end,
@@ -13,26 +14,6 @@ vim.api.nvim_create_autocmd("FileType", {
 	callback = function(ctx)
 		if vim.bo[ctx.buf].buftype ~= "" then return end
 		vim.cmd([[silent! normal! g`"]])
-	end,
-})
-
----REPLACE MODE-----------------------------------------------------------------
-
-vim.api.nvim_create_autocmd("ModeChanged", {
-	desc = "User: uppercase the line when leaving replace mode on a comment",
-	pattern = "r:*", -- left replace-mode
-	callback = function(ctx)
-		if vim.bo[ctx.buf].filetype == "markdown" then return end
-		local isOnComment = vim.startswith(vim.trim(vim.api.nvim_get_current_line())
-		vim.cmd.normal { "gUU", bang = true }
-	end,
-})
-vim.api.nvim_create_autocmd("ModeChanged", {
-	desc = "User: automatically enter replace mode on third character",
-	pattern = "*:r", -- entered replace-mode
-	callback = function(ctx)
-		if vim.bo[ctx.buf].filetype == "markdown" then return end
-		vim.cmd.normal { "^3l", bang = true }
 	end,
 })
 
@@ -116,8 +97,8 @@ if vim.fn.has("gui_running") == 0 then
 		end,
 	})
 end
----AUTO-CLEANUP-----------------------------------------------------------------
 
+---AUTO-CLEANUP-----------------------------------------------------------------
 vim.api.nvim_create_autocmd("FocusLost", {
 	desc = "User: Auto-cleanup. Once a week, on first `FocusLost`, delete older files.",
 	once = true,
@@ -131,7 +112,6 @@ vim.api.nvim_create_autocmd("FocusLost", {
 })
 
 ---AUTO-SAVE--------------------------------------------------------------------
-
 vim.api.nvim_create_autocmd({ "InsertLeave", "TextChanged", "BufLeave", "FocusLost" }, {
 	desc = "User: Auto-save",
 	callback = function(ctx)
@@ -158,7 +138,6 @@ vim.api.nvim_create_autocmd({ "InsertLeave", "TextChanged", "BufLeave", "FocusLo
 
 ---AUTO-CD TO PROJECT ROOT------------------------------------------------------
 -- (simplified version of project.nvim)
-
 do
 	local autoCdConfig = {
 		childOfRoot = {
@@ -203,8 +182,7 @@ do
 	})
 end
 
---------------------------------------------------------------------------------
-
+---AUTO-CLOSE DELETED BUFFERS---------------------------------------------------
 vim.api.nvim_create_autocmd("FocusGained", {
 	desc = "User: Close all non-existing buffers on `FocusGained`.",
 	callback = function()
@@ -242,7 +220,6 @@ vim.api.nvim_create_autocmd("FocusGained", {
 })
 
 ---AUTO-NOHL & INLINE SEARCH COUNT----------------------------------------------
-
 ---@param mode? "clear"
 local function searchCountIndicator(mode)
 	local signColumnPlusScrollbarWidth = 2 + 3 -- CONFIG
@@ -289,7 +266,6 @@ vim.on_key(function(key, _typed)
 end, vim.api.nvim_create_namespace("autoNohlAndSearchCount"))
 
 ---TEMPLATES--------------------------------------------------------------------
-
 local templateConfig = {
 	templateDir = vim.fn.stdpath("config") .. "/templates",
 	ignoreDirs = { vim.fn.stdpath("data") },
@@ -360,7 +336,6 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufReadPost" }, {
 
 ---ENFORCE SCROLLOFF AT EOF-----------------------------------------------------
 -- simplified version of https://github.com/Aasim-A/scrollEOF.nvim
-
 vim.api.nvim_create_autocmd({ "CursorMoved", "BufReadPost" }, {
 	desc = "User: Enforce scrolloff at EoF",
 	callback = function(ctx)
@@ -390,8 +365,7 @@ vim.api.nvim_create_autocmd({ "BufReadPost", "BufNew" }, {
 })
 
 ---FAVICON PREFIXES FOR URLS----------------------------------------------------
-
--- REQUIREMENTS
+-- Requirements
 -- 1. nvim 0.10+
 -- 2. `comment` Tresitter parser (`:TSInstall comment`) & active parser for the
 -- current buffer (e.g., in a lua buffer, the lua parser is required)
@@ -496,7 +470,6 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 })
 
 ---QUICKFIX SIGNS---------------------------------------------------------------
-
 vim.api.nvim_create_autocmd("QuickFixCmdPost", {
 	desc = "User: Add signs to quickfix (1/2)",
 	callback = function()
@@ -535,7 +508,6 @@ vim.api.nvim_create_autocmd("QuickFixCmdPost", {
 })
 
 ---ADD NOTIFICATION TO LSP RENAME-----------------------------------------------
-
 local originalRenameHandler = vim.lsp.handlers["textDocument/rename"]
 vim.lsp.handlers["textDocument/rename"] = function(err, result, ctx, config)
 	originalRenameHandler(err, result, ctx, config)
@@ -563,7 +535,7 @@ vim.lsp.handlers["textDocument/rename"] = function(err, result, ctx, config)
 	if #changedFiles > 1 then vim.cmd("silent! wall") end
 end
 
----MACROS – ADD SOUND-----------------------------------------------------------
+---ADD SOUND TO MACROS----------------------------------------------------------
 if jit.os == "OSX" then
 	local function playSound(file)
 		local soundDir =
