@@ -15,21 +15,11 @@ return {
 				workspaceWord = false, -- already done by completion plugin
 				postfix = ".", -- useful for `table.insert` and the like
 			},
-			hover = {
-				expandAlias = false, -- `@alias`
-			},
 			type = {
 				inferParamType = true, -- unannotated params are inferred instead of `any`
-				checkTableShape = true,
 			},
 			diagnostics = {
-				neededFileStatus = {
-					["await-in-sync"] = "Any",
-					["incomplete-signature-doc"] = "Any",
-					["missing-global-doc"] = "Any",
-					["missing-local-export-doc"] = "Any",
-					["not-yieldable"] = "Any",
-				},
+				groupFileStatus = { ["luadoc"] = "Any" }, -- require stricter annotations
 				unusedLocalExclude = { "_*" },
 				disable = {
 					-- formatter already handles that
@@ -51,7 +41,5 @@ return {
 			},
 		},
 	},
-	on_attach = {
-
-	}
+	on_attach = {},
 }

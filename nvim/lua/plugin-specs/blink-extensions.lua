@@ -6,17 +6,30 @@ return {
 	-- plugin configs nonetheless modular, we define another set of `blink.cmp`
 	-- config (lazy.nvim merges multiple configs).
 	"saghen/blink.cmp",
-	dependencies = "Kaiser-Yang/blink-cmp-git",
+	dependencies = {
+		"Kaiser-Yang/blink-cmp-git",
+		{ "Kaiser-Yang/blink-cmp-dictionary", dependencies = "nvim-lua/plenary.nvim" },
+	},
 	init = require("config.utils").loadGhToken,
 
 	opts = {
 		sources = {
-			default = { "lsp", "path", "snippets", "buffer", "git" }, -- add `git` to the list
+			-- add `git` and `dictionary` to the list
+			default = { "lsp", "path", "snippets", "buffer", "git", "dictionary" },
+
 			per_filetype = {
 				gitcommit = { "git" },
 			},
 
 			providers = {
+				dictionary = {
+					module = "blink-cmp-dictionary",
+					name = "Dict",
+					min_keyword_length = 3,
+					opts = {
+						dictionaryFile = "/Users/chrisgrieser/Desktop/words_alpha.txt"
+					}
+				},
 				git = {
 					module = "blink-cmp-git",
 					name = "Git",

@@ -17,6 +17,7 @@ function M.bufAbbrev(text, replace) vim.keymap.set("ia", text, replace, { buffer
 
 ---Helper function for LSPs that do not support ignore files (such as `ltex`)
 ---@param bufnr integer
+---@return boolean
 function M.isObsidianOrNotesOrIcloud(bufnr)
 	local path = vim.api.nvim_buf_get_name(bufnr)
 	local obsiDir = #vim.fs.find(".obsidian", { path = path, upward = true, type = "directory" }) > 0

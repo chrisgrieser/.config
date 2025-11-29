@@ -43,6 +43,7 @@ vim.opt.autowriteall = true
 
 vim.opt.jumpoptions:append("stack") -- https://www.reddit.com/r/neovim/comments/16nead7/comment/k1e1nj5/?context=3
 vim.opt.startofline = true -- motions like "G" also move to the first char
+vim.opt.mousescroll = "ver:1,hor:3" -- more fine-grained scrolling with mouse
 
 -- Formatting `vim.opt.formatoptions:remove("o")` would not work, since it's
 -- overwritten by ftplugins having the `o` option (which many do).
