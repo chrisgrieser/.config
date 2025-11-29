@@ -19,7 +19,8 @@ local ensureInstalled = {
 		"harper-ls", -- natural language linter
 		"typos-lsp", -- spellchecker for code
 		"ltex-ls-plus", -- natural language linter (LanguageTool, ltex fork)
-		"marksman", -- markdown lsp (markdown-oxide is buggy with links to headings)
+		-- "marksman", -- markdown lsp (markdown-oxide is buggy with links to headings)
+		"markdown-oxide",
 
 		"basedpyright", -- python lsp (pyright fork)
 		"ruff", -- python linter & formatter
