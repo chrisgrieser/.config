@@ -230,7 +230,7 @@ rules:
         conditions: [*leader-active]
         to: [{ shell_command: open -a "Highlights" }, *deactivate-leader, *remove-notice]
 
-      - description: "Github notifications"
+      - description: "[g]ithub notifications"
         type: basic
         from: { key_code: g }
         conditions: [*leader-active]
@@ -240,13 +240,13 @@ rules:
           - *deactivate-leader
           - *remove-notice
 
-      - description: "Activity Monitor"
+      - description: "[⎋] Activity Monitor"
         type: basic
         from: { key_code: escape }
         conditions: [*leader-active]
         to: [{ shell_command: open -a "Activity Monitor" }, *deactivate-leader, *remove-notice]
 
-      - description: "WhatsApp"
+      - description: "[w]hatsApp"
         type: basic
         from: { key_code: w }
         conditions: [*leader-active]
@@ -260,6 +260,15 @@ rules:
         from: { key_code: q }
         conditions: [*leader-active]
         to: [{ shell_command: open -a "Signal" }, *deactivate-leader, *remove-notice]
+
+      - description: "Microsoft [t]eams"
+        type: basic
+        from: { key_code: t }
+        conditions: [*leader-active]
+        to:
+          - shell_command: open "https://teams.live.com/v2/"
+          - *deactivate-leader
+          - *remove-notice
 
       - description: "M[e]ssenger"
         type: basic
