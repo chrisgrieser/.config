@@ -8,10 +8,8 @@ app.includeStandardAdditions = true;
 function run() {
 	/** @type AlfredItem[] */
 	const appsWithDict = app
-		// Caveat: Script Editor does not have .sdef file
 		.doShellScript(`find \
 			'/Applications' \
-			"$HOME/Applications" \
 			'/System/Applications' \
 			'/System/Library/CoreServices' \
 			'/System/Library/ScriptingAdditions' \
