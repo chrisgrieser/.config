@@ -48,7 +48,7 @@ keymap(
 	"<D-C-t>", -- `hyper` gets registered by neovide as cmd+ctrl
 	function()
 		assert(jit.os == "OSX", "requires macOS' `osascript`")
-		vim.system({ "osascript", "-e", 'tell application "WezTerm" to activate' }, {}, function()
+		vim.system({ "open", "-a", "WezTerm" }, {}, function()
 			local stdin = ("cd -q %q && clear\n"):format(vim.uv.cwd() or "")
 			vim.system({ "wezterm", "cli", "send-text", "--no-paste" }, { stdin = stdin })
 		end)
@@ -195,13 +195,12 @@ keymap({ "n", "x", "i" }, "<D-i>", function() require("personal-plugins.misc").m
 keymap("n", '"', function() require("personal-plugins.misc").mdWrap('"') end, { desc = ' Surround' })
 -- stylua: ignore end
 
--- exit snippet 
+-- exit snippet
 -- https://github.com/neovim/neovim/issues/26449#issuecomment-1845293096
 keymap({ "i", "s" }, "<Esc>", function()
 	vim.snippet.stop()
 	return "<Esc>"
 end, { desc = "󰩫 Exit snippet", expr = true })
-
 
 ---WHITESPACE & INDENTATION-----------------------------------------------------
 keymap("n", "=", "[<Space>", { desc = " Blank above", remap = true }) -- remap, since nvim default
