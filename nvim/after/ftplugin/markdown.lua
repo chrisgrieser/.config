@@ -34,16 +34,20 @@ optl.formatlistpat:append([[\|^\s*>\s\+]])
 bkeymap("i", ",", function()
 	local row, col = unpack(vim.api.nvim_win_get_cursor(0))
 	local textBeforeCursor = vim.api.nvim_get_current_line():sub(1, col)
-	local lang = textBeforeCursor:match(",,(%a*),,$")
+	local lang = textBeforeCursor:match(",,(%a*),$")
 	if not lang then
 		vim.api.nvim_feedkeys(",", "n", true) -- pass through the trigger char
 		return
 	end
-	local fff
+	local code = vim.split(vim.fn.getreg("+"), "\n")
+	local smallestIndent = vim.iter(code):fold(0, function(acc, line)
+		local indent = line:match("^%s*")
+		return math.min(acc, #indent)
+	end)
+	local dedented = vim.tbl_map(function(line) return line:sub(smallestIndent) end, code)
 
-	local clipboard = vim.fn.getreg("+")
-	local lnum, col = unpack(vim.api.nvim_win_get_cursor(0))
-	local curLine = vim.api.nvim_get_current_line()
+	local codeblock = vim.list_extend( "```" .. lang, dedented, "```" )
+	vim.api.nvim_buf_set_lines(0, row - 1, row, false, codeblock)
 end, { desc = " ,, -> Codeblock" })
 
 ---AUTO BULLETS-----------------------------------------------------------------
