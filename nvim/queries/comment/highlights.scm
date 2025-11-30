@@ -15,8 +15,3 @@
 ; SIC CAVEAT DEPRECATION DEBUG
 ("text" @comment.warning
   (#any-of? @comment.warning "SIC" "CAVEAT" "DEPRECATION" "DEBUG"))
-
-; MAKE UPPERCASE COMMENTS BOLD
-; (requires defining a hlgroup `@comments.bold` in the user config)
-("text" @comment.bold
-  (#lua-match? @comment.bold "^[%u%d%p][%u%d%p]+$"))

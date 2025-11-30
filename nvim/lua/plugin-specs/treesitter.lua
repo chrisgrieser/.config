@@ -90,18 +90,12 @@ return {
 			end,
 		})
 
-		-- COMMENTS parser
+		-- FIX todo-comments in languages where LSP overwrites their highlight
+		-- https://github.com/stsewd/tree-sitter-comment/issues/22
+		-- https://github.com/LuaLS/lua-language-server/issues/1809
 		vim.api.nvim_create_autocmd({ "ColorScheme", "VimEnter" }, {
 			desc = "User: highlights for the Treesitter `comments` parser",
-			callback = function()
-				-- FIX todo-comments in languages where LSP overwrites their highlight
-				-- https://github.com/stsewd/tree-sitter-comment/issues/22
-				-- https://github.com/LuaLS/lua-language-server/issues/1809
-				vim.api.nvim_set_hl(0, "@lsp.type.comment", {})
-
-				-- Define `@comment.bold` for `queries/comment/highlights.scm`
-				vim.api.nvim_set_hl(0, "@comment.bold", { bold = true })
-			end,
+			callback = function() vim.api.nvim_set_hl(0, "@lsp.type.comment", {}) end,
 		})
 	end,
 }
