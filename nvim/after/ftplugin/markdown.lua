@@ -23,14 +23,12 @@ vim.api.nvim_create_autocmd("InsertLeave", {
 	group = group,
 	buffer = 0,
 	callback = function()
+		local line = vim.api.nvim_get_current_line()
+		if line:find("^[|#]") then return end -- heading or table
 		local node = vim.treesitter.get_node()
-		while node do
-			if node:type() == "code_fence_content" then return end
-			if node:type() == "html_block" then return end
-			if vim.startswith(node:type(), "pipe_table") then return end
-			node = node:parent()
-		end
-		vim.cmd.normal { "gww", bang = true }
+		if node and node:type() == "code_fence_content" then return end
+		if node and node:type() == "html_block" then return end
+		vim.cmd.normal { "gw}", bang = true }
 	end,
 })
 
