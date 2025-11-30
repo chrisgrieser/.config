@@ -1,0 +1,22 @@
+#!/usr/bin/env zsh
+
+_export_github_token # defined in .zshenv
+#-------------------------------------------------------------------------------
+
+username=$(gh api user --jq='.login')
+if [[ -z "$1" ]]; then the_day="$(date '+%Y-%m-%d')"; else the_day="$(date -v "-${1}d" '+%Y-%m-%d')"; fi
+
+commits=$(gh search commits --limit=200 --author="$username" --committer="$username" \
+	--json="repository,commit" --author-date="$the_day" --sort=author-date --order=asc |
+	yq --prettyPrint $'.[] | .commit.committer.date + " " + .repository.name + " " + .commit.message' |
+	grep "^\d\d\d\d" | # keep only subjects, skip the body text of commits which is are new lines
+	cut -c12-16,26-)   # select only HH:MM
+count=$(echo "$commits" | wc -l | tr -d ' ')
+
+echo "$commits" | sed \
+	-Ee $'s/ (fix|refactor|build|ci|docs|feat|style|test|perf|chore|revert|break|improv)(\\(.+\\))?(!?):/ \e[1;35m\\1\e[0;36m\\2\e[7;31m\\3\e[0;38;5;245m:\e[0m/' \
+	-Ee $'s/ (release|bump):/ \e[1;32m\\1\e[0;38;5;245m:\e[0m/' \
+	-Ee $'s/([0-9][0-9]:[0-9][0-9]) ([^ ]* )/\e[0;38;5;245m\\1  \e[1;34m\\2\e[0m/' \
+	-Ee $'s/`[^`]*`/\e[0;33m&\e[0m/g' \
+	-Ee $'s/#[0-9]+/\e[0;31m&\e[0m/g'
+print "\e[1;38;5;245m───── \e[1;32mTotal: $count commits\e[1;38;5;245m ─────\e[0m"

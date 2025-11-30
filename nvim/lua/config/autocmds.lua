@@ -278,6 +278,7 @@ local templateConfig = {
 		["**/*.scm"] = "template.scm",
 		["**/*.swift"] = "template.swift",
 		["**/*.{sh,zsh}"] = "template.zsh",
+		["**/zsh/utilities/*"] = "template.zsh",
 		["**/*.applescript"] = "template.applescript",
 
 		["**/*.mjs"] = "node-module.mjs",
