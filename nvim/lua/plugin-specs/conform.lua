@@ -51,21 +51,19 @@ return {
 				end,
 			},
 			["hard-wrap-at-textwidth"] = {
-				format = function(_self, _ctx, lines, callback)
+				format = function(_self, ctx, _lines, callback)
 					local view = vim.fn.winsaveview()
 
-					for ln = #lines, 1, -1 do -- upwards to to avoid line shift
-						vim.api.nvim_win_set_cursor(0, { ln, 0 })
-						local node = vim.treesitter.get_node()
-						local doWrap = node
-							and node:type() ~= "code_fence_content"
-							and node:type() ~= "html_block"
-							and not vim.startswith(node:type(), "pipe_table")
-						if doWrap then vim.cmd.normal { "gww", bang = true } end
+					for _, diag in pairs(vim.diagnostic.get(ctx.buf)) do
+						local isMarkdownlintLinelength = diag.source == "markdownlint"
+							and vim.endswith(tostring(diag.code), "13")
+						if isMarkdownlintLinelength then
+							vim.diagnostic.jump({ diagnostic = diag })
+							vim.cmd.normal { "gw}", bang = true }
+						end
 					end
 					local formattedLines = vim.api.nvim_buf_get_lines(0, 0, -1, true)
 
-					vim.cmd.undo()
 					vim.fn.winrestview(view)
 					callback(nil, formattedLines)
 				end,
