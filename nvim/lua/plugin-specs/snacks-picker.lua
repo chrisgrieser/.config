@@ -128,6 +128,7 @@ return {
 
 		-- GREP
 		{ "gl", function() Snacks.picker.grep() end, desc = "󰛢 Grep" },
+		{ "gL", function() Snacks.picker.grep_word() end, desc = "󰛢 Grep cword" },
 		{ "<leader>ci", importLuaModule, ft = "lua", desc = "󰢱 Import module" },
 
 		-- LSP
@@ -257,6 +258,7 @@ return {
 				},
 				registers = {
 					transform = function(item) return item.label:find("[1-9]") ~= nil end, -- only numbered
+					confirm = { "yank", "close" },
 				},
 				explorer = {
 					auto_close = true,
@@ -362,7 +364,7 @@ return {
 				highlights = {
 					confirm = function(picker, item)
 						vim.fn.setreg("+", item.hl_group)
-						vim.notify(item.hl_group, nil, { title = "Copied", icon = "󰅍" })
+						Snacks.notify(item.hl_group, { title = "Copied", icon = "󰅍" })
 						picker:close()
 					end,
 				},
@@ -537,7 +539,7 @@ return {
 				preview = { keys = { ["<C-CR>"] = { "cycle_win" } } },
 			},
 			actions = {
-				-- FIX override snack's yank functin
+				-- FIX override snack's yank function to make it cleaner
 				yank = function(picker, item, action)
 					if not item then return end
 					local reg = action.reg or vim.v.register
@@ -545,7 +547,8 @@ return {
 					vim.fn.setreg(reg, value)
 					if action.notify ~= false then
 						local buf = item.buf or vim.api.nvim_win_get_buf(picker.main)
-						Snacks.notify(vim.trim(value), { title = "Copied", ft = vim.bo[buf].filetype })
+						local ft = vim.bo[buf].filetype
+						Snacks.notify(value, { icon = "󰅍", title = "Copied", ft = ft })
 					end
 				end,
 				list_down_wrapping = function(picker)
