@@ -97,13 +97,10 @@ do
 
 	marks.setup {
 		marks = { "A", "B", "C" },
-		signs = {
-			hlgroup = "StandingOut",
-			icons = { A = "󰬈", B = "󰬉", C = "󰬊" },
-		},
+		signs = { hlgroup = "StandingOut", icons = { A = "󰬈", B = "󰬉", C = "󰬊" } },
 	}
-	local subLeader = "<leader>m"
 
+	local subLeader = "<leader>m"
 	if vim.g.whichkeyAddSpec then vim.g.whichkeyAddSpec { subLeader, group = "󰃃 Marks" } end
 
 	keymap("n", subLeader .. "m", marks.cycleMarks, { desc = "󰃀 Cycle marks" })
