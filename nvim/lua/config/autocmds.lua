@@ -308,24 +308,12 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufReadPost" }, {
 			if longestMatchingGlob == "" then return end
 			local templateFile = conf.globToTemplateMap[longestMatchingGlob]
 			local templatePath = vim.fs.normalize(conf.templateDir .. "/" .. templateFile)
-			if not vim.uv.fs_stat(templatePath) then return end
 
-			-- read template & move to cursor placeholder
-			local content = {}
-			local cursor ---@type integer[]
-			local row = 1
-			for line in io.lines(templatePath) do
-				local placeholderPos = line:find("%$0")
-				if placeholderPos then
-					line = line:gsub("%$0", "")
-					local col = math.max(placeholderPos - 2, 0)
-					cursor = { row, col }
-				end
-				table.insert(content, line)
-				row = row + 1
-			end
-			vim.api.nvim_buf_set_lines(0, 0, -1, false, content)
-			if cursor then vim.api.nvim_win_set_cursor(0, cursor) end
+			-- read template
+			local file = io.open(templatePath, "r")
+			if not (file) then return end
+			local content = file:read("*a")
+			vim.snippet.expand(content) -- expands placeholders like `$0`
 
 			-- adjust filetype if needed (e.g. when applying a zsh template to .sh files)
 			local newFt = vim.filetype.match { buf = bufnr }

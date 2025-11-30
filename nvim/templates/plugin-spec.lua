@@ -1,4 +1,4 @@
 return {
-	"$0",
+	"${1:repo/name}",
 	opts = {},
 }
