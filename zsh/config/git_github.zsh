@@ -1,3 +1,4 @@
+#-ALIASES-----------------------------------------------------------------------
 alias gs='git status'
 alias co='git checkout'
 alias gd='git diff'
@@ -20,17 +21,16 @@ alias unlock='rm -v "$(git rev-parse --git-dir)/index.lock"'
 alias mark_commit="git tag 'mark' && echo $'Added tag \'mark\' to current commit.'"
 alias unmark_commit="git tag --delete 'mark'"
 
-function sync_repo { "$(git rev-parse --show-toplevel)/.sync-this-repo.sh"; }
+#-HELPERS-----------------------------------------------------------------------
 
-#───────────────────────────────────────────────────────────────────────────────
-
-# do not expose GITHUB_TOKEN
-function gh {
-	_export_github_token # defined in .zshenv
+function gh { # do not expose GITHUB_TOKEN
+	_export_github_token
 	command gh "$@"
 }
 
-#───────────────────────────────────────────────────────────────────────────────
+function sync_repo { "$(git rev-parse --show-toplevel)/.sync-this-repo.sh"; }
+
+#-HIGHLIGHTS--------------------------------------------------------------------
 
 # issues numbers
 ZSH_HIGHLIGHT_REGEXP+=('#[0-9]+' 'fg=blue,bold')
@@ -47,8 +47,7 @@ ZSH_HIGHLIGHT_REGEXP+=(
 	'fg=magenta,bold'
 )
 
-#───────────────────────────────────────────────────────────────────────────────
-# STAGING
+#-STAGING-----------------------------------------------------------------------
 
 alias gaa='git add --all'
 alias unadd='git restore --staged'
@@ -70,9 +69,7 @@ _changed_git_files() {
 compdef _changed_git_files ga
 compdef _changed_git_files restore
 
-#───────────────────────────────────────────────────────────────────────────────
-# SMART COMMIT
-
+#-COMMIT------------------------------------------------------------------------
 function _stageAllIfNoStagedChanges {
 	git diff --staged --quiet &&
 		git add --all &&
@@ -119,8 +116,8 @@ function gg {
 	printf "\e[1;34mPush:\e[0m " && git push --no-progress
 }
 
-#───────────────────────────────────────────────────────────────────────────────
-# SMART AMEND & FIXUP
+#-AMEND & FIXUP-----------------------------------------------------------------
+
 # select a recent commit to fixup *and* autosquash (not marked for next rebase!)
 function gf {
 	local target
@@ -156,11 +153,10 @@ function gM {
 	git status
 }
 
-#───────────────────────────────────────────────────────────────────────────────
-# similar to `gh pr create --web --fill`, but without dependency (and without
-# the need to set `gh` remote.)
-
+#-MISC--------------------------------------------------------------------------
 function pr {
+	# similar to `gh pr create --web --fill`, but without dependency 
+	# (and without the need to setup `gh` remote.)
 	git push
 	sleep 1 # needed for GitHub to register the new commit
 	local url
@@ -169,9 +165,21 @@ function pr {
 	open "$url/pull/new/$(git branch --show-current)"
 }
 
-#───────────────────────────────────────────────────────────────────────────────
+function gu { # Github Url: open & copy url
+	repo=$(git remote --verbose | head -n1 | sed -E 's/.*github.com:([^[:space:]]*).*/\1/')
+	api_url="https://github.com/$repo"
+	echo "$api_url" | pbcopy
+	open "$api_url"
+}
 
-# undo shallow clones
+function clone {
+	# WARN depth=1 is dangerous, as amending such a commit does result in a
+	# new commit without parent, effectively destroying git history (!!)
+	git clone --depth=15 "$1" --no-single-branch --no-tags
+	cd "$(basename "$1" .git)" || return 1
+	echo
+}
+
 function unshallow {
 	git fetch --unshallow
 	git pull --no-progress --tags # undo `git clone --no-tags`
@@ -193,38 +201,7 @@ function remote_info {
 	printf "\e[1;34mgh default repo:\e[0m " && gh repo set-default --view
 }
 
-# Github Url: open & copy url
-function gu {
-	repo=$(git remote --verbose | head -n1 | sed -E 's/.*github.com:([^[:space:]]*).*/\1/')
-	api_url="https://github.com/$repo"
-	echo "$api_url" | pbcopy
-	open "$api_url"
-}
-
-function my_commits_today {
-	local username the_day commits count
-	username=$(gh api user --jq='.login')
-	if [[ -z "$1" ]]; then the_day="$(date '+%Y-%m-%d')"; else the_day="$(date -v "-${1}d" '+%Y-%m-%d')"; fi
-
-	commits=$(gh search commits --limit=200 --author="$username" --committer="$username" \
-		--json="repository,commit" --author-date="$the_day" --sort=author-date --order=asc |
-		yq --prettyPrint $'.[] | .commit.committer.date + " " + .repository.name + " " + .commit.message' |
-		grep "^\d\d\d\d" | # keep only subjects, skip the body text of commits which is are new lines
-		cut -c12-16,26-)   # select only HH:MM
-	count=$(echo "$commits" | wc -l | tr -d ' ')
-
-	echo "$commits" | sed \
-		-Ee $'s/ (fix|refactor|build|ci|docs|feat|style|test|perf|chore|revert|break|improv)(\\(.+\\))?(!?):/ \e[1;35m\\1\e[0;36m\\2\e[7;31m\\3\e[0;38;5;245m:\e[0m/' \
-		-Ee $'s/ (release|bump):/ \e[1;32m\\1\e[0;38;5;245m:\e[0m/' \
-		-Ee $'s/([0-9][0-9]:[0-9][0-9]) ([^ ]* )/\e[0;38;5;245m\\1  \e[1;34m\\2\e[0m/' \
-		-Ee $'s/`[^`]*`/\e[0;33m&\e[0m/g' \
-		-Ee $'s/#[0-9]+/\e[0;31m&\e[0m/g'
-	print "\e[1;38;5;245m───── \e[1;32mTotal: $count commits\e[1;38;5;245m ─────\e[0m"
-}
-
-#───────────────────────────────────────────────────────────────────────────────
-# GIT LOG
-
+#-GIT LOG-----------------------------------------------------------------------
 # uses `_gitlog` from `magic-dashboard.zsh`
 function gl {
 	if [[ -z "$1" ]]; then
@@ -247,8 +224,8 @@ function reflog {
 	fi
 }
 
-# INTERACTIVE GIT LOG
-# uses `_gitlog` from `magic-dashboard.zsh`
+# interactive git log
+# (uses `_gitlog` from `magic-dashboard.zsh`)
 function gli {
 	if ! typeset -f _gitlog > /dev/null; then
 		echo "requires \`_gitlog.zsh\` from zsh magic-dashboard"
@@ -298,32 +275,7 @@ function gli {
 	fi
 }
 
-#───────────────────────────────────────────────────────────────────────────────
-
-function clone {
-	# WARN depth=1 is dangerous, as amending such a commit does result in a
-	# new commit without parent, effectively destroying git history (!!)
-	git clone --depth=15 "$1" --no-single-branch --no-tags
-	cd "$(basename "$1" .git)" || return 1
-	echo
-}
-
-function delete_forks_with_no_open_prs {
-	local my_prs my_forks
-	my_prs=$(gh search prs --author="@me" --state=open --json="repository" --jq=".[].repository.name")
-	my_forks=$(gh repo list --fork | cut -f1)
-	while read -r pr; do
-		my_forks=$(echo "$my_forks" | grep -v "/$pr")
-	done <<< "$my_prs"
-
-	forks_with_no_prs="$my_forks"
-	[[ -z "$forks_with_no_prs" ]] && print "\e[1;33mNo forks to delete.\e[0m" && return 0
-
-	# INFO still require confirmation as a safety net
-	# shellcheck disable=2001 # does not work for prepending
-	print -z "$(echo "$forks_with_no_prs" | sed 's/^/gh repo delete /')"
-}
-#───────────────────────────────────────────────────────────────────────────────
+#-RESTORE FROM GIT HISTORY------------------------------------------------------
 
 # pickaxe entire repo history
 function pickaxe {
@@ -333,8 +285,6 @@ function pickaxe {
 
 	git log -G"$1" --regexp-ignore-case
 }
-
-#───────────────────────────────────────────────────────────────────────────────
 
 # search for [g]it [d]eleted [f]ile
 function gdf {
