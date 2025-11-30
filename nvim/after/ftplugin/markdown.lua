@@ -22,8 +22,13 @@ vim.api.nvim_create_autocmd("InsertLeave", {
 	group = vim.api.nvim_create_augroup("auto-hardwrap", { clear = true }),
 	buffer = 0,
 	callback = function()
-		local likelyTable = vim.api.nvim_get_current_line():find("|.*|") ~= nil
-		if not likelyTable then vim.cmd.normal { "gww", bang = true } end
+		local node = vim.treesitter.get_node()
+		while node do
+			if node:type() == "code_fence_content" then return end
+			if vim.startswith(node:type(), "pipe_table") then return end
+			node = node:parent()
+		end
+		vim.cmd.normal { "gww", bang = true }
 	end,
 })
 

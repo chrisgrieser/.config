@@ -27,7 +27,8 @@ function run(argv) {
 	const pdfWinTitle = pdfApp.windows[0]?.name();
 	if (!pdfWinTitle) return "⚠️ No PDF window open.";
 
-	// EXAMPLE "YlijokiMantyla2003_Conflicting Time Perspectives in Academic Work.pdf – Page 1 of 24"
+	// EXAMPLE Highlights "YlijokiMantyla2003_Conflicting Time Perspectives in Academic Work.pdf – Page 1 of 24"
+	// CAVEAT PDF Expert lacks the page number
 	// INFO assumes that PDF files are have the format `{citekey}_{title}.pdf`
 	const [_, citekey, currentPage] = pdfWinTitle.match(/(.*?)_.* Page (\d+) of \d+/) || [];
 	const pageInPdf = Number.parseInt(currentPage || "0");
