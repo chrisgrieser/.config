@@ -69,6 +69,7 @@ local function movieLayout()
 		"Calendar",
 		"Alfred Preferences",
 		"Highlights",
+		"PDF Expert",
 		"Obsidian",
 		"WezTerm",
 		"Gmail",

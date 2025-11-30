@@ -1,13 +1,18 @@
 # vim: foldlevel=2
 # yaml-language-server: $schema=./schema/karabiner-mod-schema.json
 title: App-specific bindings
+anchors:
+  - &leftSidebar { key_code: "1", modifiers: { mandatory: [command] } }
+  - &rightSidebar { key_code: "0", modifiers: { mandatory: [command] } }
+  - &export { key_code: e, modifiers: { mandatory: [command, shift] } }
+  - &revealInFinder { key_code: l, modifiers: { mandatory: [command] } }
 rules:
   #─────────────────────────────────────────────────────────────────────────────
-  - description: "⌘1: Toggle LEFT sidebar"
+  - description: "Toggle LEFT sidebar"
     manipulators:
       # Microsoft Word
       - type: basic
-        from: { key_code: "1", modifiers: { mandatory: [command] } }
+        from: *leftSidebar
         to:
           - shell_command: |
               osascript -e '
@@ -17,19 +22,19 @@ rules:
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [com.microsoft.Word] }]
       # Safari
       - type: basic
-        from: { key_code: "1", modifiers: { mandatory: [command] } }
+        from: *leftSidebar
         to:
           - { key_code: l, modifiers: [shift, command] }
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [com.apple.Safari] }]
       # Finder
       - type: basic
-        from: { key_code: "1", modifiers: { mandatory: [command] } }
+        from: *leftSidebar
         to:
           - { key_code: s, modifiers: [control, command] }
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [com.apple.finder] }]
       # Calendar
       - type: basic
-        from: { key_code: "1", modifiers: { mandatory: [command] } }
+        from: *leftSidebar
         to:
           # needs UI element, since name of the menu items changes
           # howto inspect UI-elements https://www.sudoade.com/gui-scripting-with-applescript/
@@ -41,60 +46,67 @@ rules:
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [com.apple.iCal] }]
       # Maps
       - type: basic
-        from: { key_code: "1", modifiers: { mandatory: [command] } }
+        from: *leftSidebar
         to:
           - { key_code: s, modifiers: [command, option] }
         conditions:
           - { type: frontmost_application_if, bundle_identifiers: [com.apple.Maps] }
       # Monodraw
       - type: basic
-        from: { key_code: "1", modifiers: { mandatory: [command] } }
+        from: *leftSidebar
         to:
           - { key_code: semicolon, modifiers: [command, shift] }
         conditions:
           - { type: frontmost_application_if, bundle_identifiers: [com.helftone.monodraw] }
+      # PDF Expert
+      - type: basic
+        from: *leftSidebar
+        to:
+          - { key_code: "0", modifiers: [command, option] }
+        conditions:
+          - { type: frontmost_application_if, bundle_identifiers: [com.readdle.PDFExpert-Mac] }
   #─────────────────────────────────────────────────────────────────────────────
-  - description: "⌘0: Toggle RIGHT sidebar"
+  - description: "Toggle RIGHT sidebar"
     manipulators:
       # Highlights
       - type: basic
-        from: { key_code: "0", modifiers: { mandatory: [command] } }
+        from: *rightSidebar
         to:
           - { key_code: "2", modifiers: [command] }
         conditions:
           - { type: frontmost_application_if, bundle_identifiers: [net.highlightsapp.universal] }
       # Finder
       - type: basic
-        from: { key_code: "0", modifiers: { mandatory: [command] } }
+        from: *rightSidebar
         to:
           - { key_code: p, modifiers: [shift, command] }
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [com.apple.finder] }]
       # Brave
       - type: basic
-        from: { key_code: "0", modifiers: { mandatory: [command] } }
+        from: *rightSidebar
         to:
           - { key_code: "0", modifiers: [option] }
         conditions:
           - { type: frontmost_application_if, bundle_identifiers: [com.brave.Browser] }
       # Zoom
       - type: basic
-        from: { key_code: "0", modifiers: { mandatory: [command] } }
+        from: *rightSidebar
         to:
           - { key_code: h, modifiers: [command, shift] }
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [us.zoom.xos] }]
       # Monodraw
       - type: basic
-        from: { key_code: "0", modifiers: { mandatory: [command] } }
+        from: *rightSidebar
         to:
           - { key_code: quote, modifiers: [command, shift] }
         conditions:
           - { type: frontmost_application_if, bundle_identifiers: [com.helftone.monodraw] }
   #─────────────────────────────────────────────────────────────────────────────
-  - description: "⌘⇧E: Export"
+  - description: "Export"
     manipulators:
       # Microsoft Word
       - type: basic
-        from: { key_code: e, modifiers: { mandatory: [command, shift] } }
+        from: *export
         to:
           - shell_command: |
               osascript -e '
@@ -108,7 +120,7 @@ rules:
           - { type: frontmost_application_if, bundle_identifiers: [com.microsoft.Word] }
       # Microsoft Excel
       - type: basic
-        from: { key_code: e, modifiers: { mandatory: [command, shift] } }
+        from: *export
         to:
           - shell_command: |
               osascript -e '
@@ -122,7 +134,7 @@ rules:
           - { type: frontmost_application_if, bundle_identifiers: [com.microsoft.Excel] }
       # Preview
       - type: basic
-        from: { key_code: e, modifiers: { mandatory: [command, shift] } }
+        from: *export
         to:
           - shell_command: |
               osascript -e '
@@ -133,7 +145,7 @@ rules:
           - { type: frontmost_application_if, bundle_identifiers: [com.apple.Preview] }
       # TextEdit
       - type: basic
-        from: { key_code: e, modifiers: { mandatory: [command, shift] } }
+        from: *export
         to:
           - shell_command: |
               osascript -e '
@@ -141,18 +153,17 @@ rules:
                   click menu item "Export as PDF…" of menu "File" of menu bar 1
                 end tell'
         conditions:
-          - type: frontmost_application_if
-            bundle_identifiers: [ com.apple.TextEdit ]
+          - { type: frontmost_application_if, bundle_identifiers: [com.apple.TextEdit] }
       # Brave Browser
       - type: basic
-        from: { key_code: e, modifiers: { mandatory: [command, shift] } }
+        from: *export
         to:
           - { key_code: p, modifiers: [command] }
         conditions:
           - { type: frontmost_application_if, bundle_identifiers: [com.brave.Browser] }
       # Monodraw
       - type: basic
-        from: { key_code: e, modifiers: { mandatory: [command, shift] } }
+        from: *export
         to:
           - { key_code: a, modifiers: [command] }
           - { key_code: c, modifiers: [command] }
@@ -162,11 +173,11 @@ rules:
         conditions:
           - { type: frontmost_application_if, bundle_identifiers: [com.helftone.monodraw] }
   #─────────────────────────────────────────────────────────────────────────────
-  - description: "⌘L: Reveal in Finder"
+  - description: "Reveal in Finder"
     manipulators:
       # TextEdit, Preview
       - type: basic
-        from: { key_code: l, modifiers: { mandatory: [command] } }
+        from: *revealInFinder
         to:
           - shell_command: |
               front_app=$(osascript -e 'tell application "System Events" to get name of first process whose frontmost is true')
@@ -175,9 +186,20 @@ rules:
         conditions:
           - type: frontmost_application_if
             bundle_identifiers: [com.apple.TextEdit, com.apple.Preview]
+      # PDF Expert
+      - type: basic
+        from: *revealInFinder
+        to:
+          - shell_command: |
+              osascript -e '
+                tell application "System Events" to tell (first process where it is frontmost)
+                  click menu item "Show in Finder" of menu "File" of menu bar 1
+                end tell'
+        conditions:
+          - { type: frontmost_application_if, bundle_identifiers: [com.readdle.PDFExpert-Mac] }
       # Word
       - type: basic
-        from: { key_code: l, modifiers: { mandatory: [command] } }
+        from: *revealInFinder
         to:
           - shell_command: |
               osascript -e '
@@ -195,7 +217,7 @@ rules:
           - { type: frontmost_application_if, bundle_identifiers: [com.microsoft.Word] }
       # Highlights
       - type: basic
-        from: { key_code: l, modifiers: { mandatory: [command] } }
+        from: *revealInFinder
         to:
           # only 60%, since usually slightly to the left
           - software_function: { set_mouse_cursor_position: { x: 60%, y: 1%, screen: 0 } }
