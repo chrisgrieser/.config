@@ -24,7 +24,6 @@ brew "zsh-autosuggestions"
 brew "zsh-history-substring-search"
 brew "zsh-syntax-highlighting"
 tap "felixkratz/formulae"; brew "felixkratz/formulae/sketchybar"
-# tap "charmbracelet/tap" ; brew "charmbracelet/tap/crush"
 
 # APPS
 cask "alfred"
@@ -46,9 +45,10 @@ cask "slack"
 cask "wezterm"
 cask "zoom"
 cask "pdf-expert"
-mas "Highlights", id: 1498912833
+# mas "Highlights", id: 1498912833
 mas "Ivory", id: 6444602274
-mas "iPreview", id: 1519213509 # quicklook
+mas "Markdown Preview", id: 6739955340 # quicklook markdown
+mas "iPreview", id: 1519213509 # quicklook source files
 
 #───────────────────────────────────────────────────────────────────────────────
 

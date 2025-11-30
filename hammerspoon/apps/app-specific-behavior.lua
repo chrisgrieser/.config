@@ -5,9 +5,8 @@ local u = require("meta.utils")
 local wu = require("win-management.window-utils")
 local aw = hs.application.watcher
 local wf = hs.window.filter
---------------------------------------------------------------------------------
--- FINDER
 
+---FINDER-----------------------------------------------------------------------
 M.aw_finder = aw.new(function(appName, event, finder)
 	if event == aw.activated and appName == "Finder" then
 		finder:selectMenuItem { "View", "Hide Sidebar" }
@@ -15,9 +14,7 @@ M.aw_finder = aw.new(function(appName, event, finder)
 	end
 end):start()
 
---------------------------------------------------------------------------------
--- ZOOM
-
+---ZOOM-------------------------------------------------------------------------
 M.wf_zoom = wf.new("zoom.us"):subscribe(wf.windowCreated, function(newWin)
 	u.closeBrowserTabsWith("zoom.us") -- remove leftover tabs
 
@@ -32,9 +29,7 @@ M.wf_zoom = wf.new("zoom.us"):subscribe(wf.windowCreated, function(newWin)
 	end
 end)
 
---------------------------------------------------------------------------------
--- HIGHLIGHTS / PDF READER
-
+---PDF READER-------------------------------------------------------------------
 -- 1. Sync Dark & Light Mode
 -- 2. Start with Highlight Tool enabled
 M.aw_pdfreader = aw.new(function(appName, event, app)
@@ -50,9 +45,7 @@ M.aw_pdfreader = aw.new(function(appName, event, app)
 	end
 end):start()
 
---------------------------------------------------------------------------------
--- SCRIPT EDITOR
-
+---SCRIPT EDITOR----------------------------------------------------------------
 M.wf_scripteditor = wf
 	.new("Script Editor")
 	:subscribe(wf.windowCreated, function(newWin)
@@ -70,8 +63,7 @@ M.wf_scripteditor = wf
 		hs.pasteboard.setContents(clipb)
 	end)
 
---------------------------------------------------------------------------------
--- MASTODON (IVORY)
+---MASTODON---------------------------------------------------------------------
 local function scrollUp()
 	local masto = u.app("Ivory")
 	hs.eventtap.keyStroke({}, "left", 1, masto) -- go back
@@ -111,10 +103,8 @@ M.systemw_mastodon = c.new(function(event)
 	u.defer(2, scrollUp)
 end):start()
 
---------------------------------------------------------------------------------
-
--- BOOKMARKS SYNCED TO CHROME BOOKMARKS
--- so Alfred can pick up the Bookmarks without extra keyword
+---ALFRED-----------------------------------------------------------------------
+-- bookmarks synced to chrome bookmarks (so Alfred can pick up them up w/o keyword)
 do
 	local chromeBookmarks = os.getenv("HOME")
 		.. "/Library/Application Support/Google/Chrome/Default/Bookmarks"
@@ -129,9 +119,7 @@ do
 	M.pathw_bookmarks = hs.pathwatcher.new(chromeBookmarks, touchSymlink):start()
 end
 
---------------------------------------------------------------------------------
-
--- ALFRED Reminders Today workflow
+-- Reminders Today workflow
 -- clear cache on deactivation of Calendar, since the events have potentially changed
 M.aw_calendar = aw.new(function(appName, event, _app)
 	if (event == aw.deactivated or event == aw.terminated) and appName == "Calendar" then
@@ -142,5 +130,4 @@ M.aw_calendar = aw.new(function(appName, event, _app)
 end):start()
 
 --------------------------------------------------------------------------------
-
 return M

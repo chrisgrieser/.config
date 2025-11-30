@@ -434,10 +434,6 @@ return {
 				file = { filename_first = true },
 				selected = { unselected = false }, -- hide selection column when no selected items
 			},
-			previewers = {
-				diff = { builtin = false }, -- use `delta` automatically
-				git = { builtin = false },
-			},
 			toggles = {
 				regex = { icon = "r", value = true }, -- invert
 			},

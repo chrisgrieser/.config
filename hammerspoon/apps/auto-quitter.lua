@@ -51,9 +51,7 @@ local function quit(appName)
 	require("win-management.auto-tile").resetWinCount(appName)
 end
 
---------------------------------------------------------------------------------
--- Initialize
-
+---INITIALIZE-------------------------------------------------------------------
 ---apps with their last activation time
 ---@type table<string, integer|nil>
 M.idleApps = {}
@@ -65,7 +63,7 @@ end
 
 --------------------------------------------------------------------------------
 
----Watch app (de)activation & update `idleApps`
+-- Watch app (de)activation & update `idleApps`
 M.aw_appDeactivation = aw.new(function(appName, event)
 	-- ignore apps not included in configuration
 	if config.thresholdMins[appName] == nil then return end
@@ -77,7 +75,7 @@ M.aw_appDeactivation = aw.new(function(appName, event)
 	end
 end):start()
 
----Check apps regularly & quit if idle
+-- Check apps regularly & quit if idle
 M.timer_autoQuitter = hs.timer
 	.doEvery(config.checkIntervalSecs, function()
 		for app, lastActivation in pairs(M.idleApps) do

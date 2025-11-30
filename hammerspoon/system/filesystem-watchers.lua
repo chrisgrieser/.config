@@ -10,7 +10,6 @@ local backupFolder = home .. "/Library/Mobile Documents/com~apple~CloudDocs/Tech
 
 local u = require("meta.utils")
 local pathw = hs.pathwatcher.new
-
 hs.fs.mkdir(browserConfigs)
 hs.fs.mkdir(backupFolder)
 
@@ -115,8 +114,7 @@ M.pathw_desktop = pathw(home .. "/Desktop/", function(paths, _)
 			u.closeBrowserTabsWith("https://cdn.discordapp.com/attachments")
 		end
 
-		--------------------------------------------------------------------------
-		-- NOTIFY
+		---NOTIFY-----------------------------------------------------------------
 		if success == false then
 			u.notify(("⚠️ Failed to move: %q; %s"):format(name, errmsg or ""))
 		end

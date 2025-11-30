@@ -36,7 +36,7 @@ end
 -- INFO done manually to include app-specific toggling for:
 -- * System
 -- * Sketchybar
--- * Highlights PDF appearance
+-- * PDF appearance
 -- * Hammerspoon Console
 ---@param toMode "dark"|"light"
 function M.setDarkMode(toMode)

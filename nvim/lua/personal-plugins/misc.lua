@@ -80,8 +80,7 @@ function M.mdWrap(wrap)
 	if text == "" or clipboardUrl == "" then vim.cmd.startinsert() end
 end
 
---------------------------------------------------------------------------------
-
+---RECORDING--------------------------------------------------------------------
 ---start/stop with just one keypress & add notifications
 ---@param toggleKey string key used to trigger this function
 ---@param reg string vim register (single letter)
@@ -106,8 +105,7 @@ function M.startOrStopRecording(toggleKey, reg)
 	end
 end
 
------@param reg string vim register (single letter)
-
+---@param reg string vim register (single letter)
 function M.playRecording(reg)
 	local hasRecording = vim.fn.getreg(reg) ~= ""
 	if hasRecording then
@@ -118,8 +116,7 @@ function M.playRecording(reg)
 	end
 end
 
---------------------------------------------------------------------------------
-
+---CASING AND TOGGLING----------------------------------------------------------
 -- Simplified implementation of `coerce.nvim`
 function M.camelSnakeLspRename()
 	local cword = vim.fn.expand("<cword>")
@@ -243,7 +240,7 @@ function M.smartDuplicate()
 	local line = vim.api.nvim_get_current_line()
 	local ft = vim.bo.filetype
 
-	-- FILETYPE-SPECIFIC TWEAKS
+	-- filetype-specific tweaks
 	if ft == "css" then
 		line = line:gsub("(%a+):", {
 			top = "bottom",
@@ -263,10 +260,10 @@ function M.smartDuplicate()
 		line = line:gsub("^(%s*)if( .*:)$", "%1elif%2")
 	end
 
-	-- INSERT DUPLICATED LINE
+	-- insert duplicated line
 	vim.api.nvim_buf_set_lines(0, row, row, false, { line })
 
-	-- MOVE CURSOR DOWN, AND TO VALUE/FIELD (IF ANY)
+	-- move cursor down, and to value/field (if any)
 	local _, luadocFieldPos = line:find("%-%-%-@%w+ ")
 	local _, valuePos = line:find("[:=] ")
 	local targetCol = luadocFieldPos or valuePos or col

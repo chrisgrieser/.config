@@ -69,7 +69,7 @@ rules:
           - key_code: down_arrow
           - key_code: down_arrow
           - key_code: down_arrow
-        conditions: [*pdf-app, *pdf-normal-mode]
+        conditions: [*highlights-app, *pdf-normal-mode]
       - type: basic
         from: { key_code: k }
         to: # 12x up
@@ -85,7 +85,21 @@ rules:
           - key_code: up_arrow
           - key_code: up_arrow
           - key_code: up_arrow
-        conditions: [*pdf-app, *pdf-normal-mode]
+        conditions: [*highlights-app, *pdf-normal-mode]
+      - type: basic
+        from: { key_code: j }
+        to:
+          - key_code: down_arrow
+          - key_code: down_arrow
+          - key_code: down_arrow
+        conditions: [*pdf-expert-app, *pdf-normal-mode]
+      - type: basic
+        from: { key_code: k }
+        to:
+          - key_code: up_arrow
+          - key_code: up_arrow
+          - key_code: up_arrow
+        conditions: [*pdf-expert-app, *pdf-normal-mode]
       # h/l: left/right scroll
       - type: basic
         from: { key_code: h }
