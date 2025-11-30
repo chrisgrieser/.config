@@ -31,6 +31,8 @@ vim.api.nvim_create_autocmd("InsertLeave", {
 optl.formatlistpat:append([[\|^\s*>\s\+]])
 
 ---CODEBLOCKS-------------------------------------------------------------------
+-- typing `,,lang,,` creates a codeblock for that lang with dedented clipboard
+-- content inserted as code.
 bkeymap("i", ",", function()
 	local row, col = unpack(vim.api.nvim_win_get_cursor(0))
 	local textBeforeCursor = vim.api.nvim_get_current_line():sub(1, col)
@@ -39,15 +41,27 @@ bkeymap("i", ",", function()
 		vim.api.nvim_feedkeys(",", "n", true) -- pass through the trigger char
 		return
 	end
-	local code = vim.split(vim.fn.getreg("+"), "\n")
-	local smallestIndent = vim.iter(code):fold(0, function(acc, line)
-		local indent = line:match("^%s*")
-		return math.min(acc, #indent)
-	end)
-	local dedented = vim.tbl_map(function(line) return line:sub(smallestIndent) end, code)
 
-	local codeblock = vim.list_extend( "```" .. lang, dedented, "```" )
-	vim.api.nvim_buf_set_lines(0, row - 1, row, false, codeblock)
+	-- dedent clipboard content
+	local code = vim.split(vim.fn.getreg("+"), "\n")
+	while vim.trim(code[1]) == "" do
+		table.remove(code, 1)
+	end
+	while vim.trim(code[#code]) == "" do
+		table.remove(code)
+	end
+	local smallestIndent = vim.iter(code):fold(math.huge, function(acc, line)
+		local indent = #line:match("^%s*")
+		return math.min(acc, indent)
+	end)
+	local dedented = vim.tbl_map(function(line) return line:sub(smallestIndent + 1) end, code)
+
+	-- insert
+	table.insert(dedented, 1, "```" .. lang)
+	table.insert(dedented, "```")
+	vim.api.nvim_buf_set_lines(0, row - 1, row, false, dedented)
+	vim.api.nvim_win_set_cursor(0, { row, 1 })
+	vim.cmd.stopinsert()
 end, { desc = " ,, -> Codeblock" })
 
 ---AUTO BULLETS-----------------------------------------------------------------

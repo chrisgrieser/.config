@@ -1,12 +1,4 @@
 {
-  "Codeblock": {
-    "body": [
-      "```${1:lang}",
-      "$0",
-      "```"
-    ],
-    "prefix": "Codeblock"
-  },
   "German language frontmatter (for ltex)": {
     "body": [
       "---",
