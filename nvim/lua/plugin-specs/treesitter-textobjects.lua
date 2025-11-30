@@ -62,19 +62,6 @@ return {
 		{ "io", select("@conditional.inner"), mode = { "x", "o" }, desc = "󱕆 inner condition" },
 
 		---CUSTOM TEXTOBJECTS (defined in ./queries/*/textobjects.scm)--------------------------
-		{ "rl", select("@call.justCaller"), mode = "o", desc = "󰡱 rest of caller" },
-		{ "is", select("@selector.inner"), mode = { "x", "o" }, ft = "css", desc = " inner selector" },
-		{ "as", select("@selector.outer"), mode = { "x", "o" }, ft = "css", desc = " outer selector" },
-		{ "iP", select("@pipeline.inner"), mode = { "x", "o" }, ft = "zsh", desc = "󰟥 inner pipeline" },
-		{ "aP", select("@pipeline.outer"), mode = { "x", "o" }, ft = "zsh", desc = "󰟥 outer pipeline" },
-		-- stylua: ignore start
-		{ "il", select("@mdlink.inner"), mode={"x","o"}, ft = "markdown", desc = "󰍔 inner mdlink" },
-		{ "al", select("@mdlink.outer"), mode={"x","o"}, ft = "markdown", desc = "󰍔 outer mdlink" },
-		{ "ad", select("@docstring.outer"), mode={"x","o"}, desc = "󰌠 outer docstring", ft = "python" },
-		{ "id", select("@docstring.inner"), mode={"x","o"}, desc = "󰌠 inner docstring", ft = "python" },
-		{ "aE", select("@codeblock.outer"), mode={"x","o"}, desc = "󰍔 outer codeblock", ft = "markdown" },
-		{ "iE", select("@codeblock.inner"), mode={"x","o"}, desc = "󰍔 inner codeblock", ft = "markdown" },
-		-- stylua: ignore end
 		{ -- override default inner conditional for some languages
 			"io",
 			select("@conditional.conditionOnly"),
@@ -82,6 +69,20 @@ return {
 			desc = "󱕆 inner conditional",
 			ft = { "javascript", "typescript", "lua", "swift", "python", "bash", "zsh" },
 		},
+		{ "rl", select("@call.justCaller"), mode = "o", desc = "󰡱 rest of caller" },
+
+		-- stylua: ignore start
+		{ "is", select("@selector.inner"), mode={"x","o"}, ft = "css", desc = " inner selector" },
+		{ "as", select("@selector.outer"), mode={"x","o"}, ft = "css", desc = " outer selector" },
+		{ "iP", select("@pipeline.inner"), mode={"x","o"}, ft = "zsh", desc = "󰟥 inner pipeline" },
+		{ "aP", select("@pipeline.outer"), mode={"x","o"}, ft = "zsh", desc = "󰟥 outer pipeline" },
+		{ "il", select("@mdlink.inner"), mode={"x","o"}, ft = "markdown", desc = "󰍔 inner mdlink" },
+		{ "al", select("@mdlink.outer"), mode={"x","o"}, ft = "markdown", desc = "󰍔 outer mdlink" },
+		{ "aE", select("@codeblock.outer"), mode={"x","o"}, ft = "markdown", desc = "󰍔 outer codeblock" },
+		{ "iE", select("@codeblock.inner"), mode={"x","o"}, ft = "markdown", desc = "󰍔 inner codeblock" },
+		{ "ad", select("@docstring.outer"), mode={"x","o"}, ft = "python", desc = "󰌠 outer docstring" },
+		{ "id", select("@docstring.inner"), mode={"x","o"}, ft = "python", desc = "󰌠 inner docstring" },
+		-- stylua: ignore end
 
 		---COMMENTS---------------------------------------------------------------
 		-- only operator-pending to not conflict with selection-commenting
