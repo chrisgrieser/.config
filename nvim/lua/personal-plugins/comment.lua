@@ -3,7 +3,8 @@ local M = {}
 
 local config = {
 	formatterWantsPadding = { "python", "swift", "toml" },
-	hrChar = "─",
+	hrChar = "-",
+	useReplaceModeHelpersForComments = true,
 }
 
 ---HELPERS----------------------------------------------------------------------
@@ -17,7 +18,8 @@ local function getCommentstr()
 	return comStr
 end
 
-function M.setupReplaceModeHelpersForComments()
+function M.setup()
+	if not config.useReplaceModeHelpersForComments then return end
 	vim.api.nvim_create_autocmd("ModeChanged", {
 		desc = "User: uppercase the line when leaving replace mode on a comment",
 		pattern = "r:*", -- left replace-mode
@@ -29,13 +31,15 @@ function M.setupReplaceModeHelpersForComments()
 		end,
 	})
 	vim.api.nvim_create_autocmd("ModeChanged", {
-		desc = "User: automatically enter replace mode on third character",
+		desc = "User: automatically enter replace mode right position",
 		pattern = "*:r", -- entered replace-mode
 		callback = function(ctx)
 			if vim.bo[ctx.buf].filetype == "markdown" then return end
 			local line = vim.trim(vim.api.nvim_get_current_line())
 			local comChars = vim.trim(vim.bo.commentstring:format(""))
-			if vim.startswith(line, comChars) then vim.cmd.normal { "^3l", bang = true } end
+			if vim.startswith(line, comChars) then
+				vim.cmd.normal { "^" .. #comChars + 1 .. "l", bang = true }
+			end
 		end,
 	})
 end
@@ -65,13 +69,12 @@ function M.commentHr(replaceModeLabel)
 	local hrLength = textwidth - (indentLength + comStrLength)
 
 	-- construct HR
-	local hrChar = comStr:find("%-") and "-" or config.hrChar
-	local hr = hrChar:rep(hrLength)
+	local hr = config.hrChar:rep(hrLength)
 	local hrWithComment = comStr:format(hr)
 
 	-- filetype-specific considerations
 	if not vim.list_contains(config.formatterWantsPadding, vim.bo.ft) then
-		hrWithComment = hrWithComment:gsub(" ", hrChar)
+		hrWithComment = hrWithComment:gsub(" ", config.hrChar)
 	end
 	local fullLine = indent .. hrWithComment
 	if vim.bo.ft == "markdown" then fullLine = "---" end
@@ -84,7 +87,7 @@ function M.commentHr(replaceModeLabel)
 
 	vim.api.nvim_win_set_cursor(0, { startLn + 1, #indent })
 	if replaceModeLabel then
-		vim.cmd.normal { ("l"):rep(comStrLength), bang = true }
+		vim.cmd.normal { comStrLength + 1 .. "l", bang = true }
 		vim.cmd.startreplace()
 	end
 end
@@ -154,10 +157,19 @@ end
 
 --------------------------------------------------------------------------------
 
-function M.addCommentAtEol()
+---@param where "eol"|"above"|"below"
+function M.addCommentAtEol(where)
 	local comStr = getCommentstr()
 	if not comStr then return end
 	local lnum = vim.api.nvim_win_get_cursor(0)[1]
+
+	-- above/below: add empty line and move to it
+	if where == "above" or where == "below" then
+		if where == "above" then lnum = lnum - 1 end
+		vim.api.nvim_buf_set_lines(0, lnum, lnum, true, { "" })
+		lnum = lnum + 1
+		vim.api.nvim_win_set_cursor(0, { lnum, 0 })
+	end
 
 	-- determine comment behavior
 	local placeHolderAtEnd = comStr:find("%%s$") ~= nil

@@ -275,6 +275,7 @@ local templateConfig = {
 		["**/*.lua"] = "module.lua",
 
 		["**/*.py"] = "template.py",
+		["**/*.scm"] = "template.scm",
 		["**/*.swift"] = "template.swift",
 		["**/*.{sh,zsh}"] = "template.zsh",
 		["**/*.applescript"] = "template.applescript",
