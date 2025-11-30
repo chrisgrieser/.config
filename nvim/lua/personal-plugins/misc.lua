@@ -9,7 +9,11 @@ function M.restartNeovide()
 	local script = [=[
 		while pgrep -xq "neovide" ; do
 			sleep 0.05
-			i=$((i+1)) ; [[ $i -gt 40 ]] && return # timeout
+			i=$((i+1))
+			if [[ $i -gt 50 ]]; then
+				osascript -e 'display notification "Error" with title "Could not quit Neovide."'
+				return
+			fi
 		done
 		sleep 0.1
 		open -a "neovide"
@@ -26,7 +30,7 @@ function M.mdWrap(wrap)
 	local mode = vim.fn.mode()
 	if mode == "V" then
 		vim.notify("Visual line mode is not supported", vim.log.levels.WARN)
-		return 
+		return
 	end
 	local row, col = unpack(vim.api.nvim_win_get_cursor(0))
 
