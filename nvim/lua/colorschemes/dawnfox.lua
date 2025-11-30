@@ -38,6 +38,12 @@ return {
 				Conceal = { link = "Comment" }, -- leetcode.nvim, also more readability
 				LspCodeLens = { link = "LspInlayHint" },
 
+				-- todo comments
+				["@comment.todo"] = { style = "bold" },
+				["@comment.error"] = { style = "bold" },
+				["@comment.warning"] = { style = "bold" },
+				["@comment.note"] = { style = "bold" },
+
 				-- 1. `inline` code in comments
 				-- 2. italic removed only in markdown, (still inherited from comments elsewhere)
 				["@markup.raw"] = { bg = "#e9dfd2", style = "" },
@@ -86,6 +92,9 @@ return {
 				BlinkCmpGitLabelMentionId = { fg = "palette.orange" },
 				BlinkCmpGitKindIconMention = { fg = "palette.orange" },
 
+				-- blink.cmp.dictionary
+				BlinkCmpKindDict = { fg = "palette.blue" },
+
 				-- snacks notifier
 				SnacksNotifierTitleDebug = { fg = "palette.comment" }, -- use grey for debug
 				SnacksNotifierIconDebug = { fg = "palette.comment" },
@@ -98,7 +107,7 @@ return {
 
 				-- Snacks picker
 				SnacksIndent = { fg = "#e0cfbd" }, -- less contrast
-				SnacksPicker = { link = "Normal" },
+				SnacksPicker = { link = "Normal" }, -- FIX background
 				SnacksPickerMatch = { fg = "palette.orange" }, -- make matches stand out more
 			},
 		},

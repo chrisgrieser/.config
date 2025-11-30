@@ -21,7 +21,11 @@ vim.api.nvim_create_autocmd("InsertLeave", {
 	desc = "User: hard-wrap paragraph",
 	group = vim.api.nvim_create_augroup("auto-hardwrap", { clear = true }),
 	buffer = 0,
-	command = "normal! gww"
+	callback = function ()
+		if vim.api.nvim_get_current_line():find("|")
+
+		vim.cmd.normal { "gww", bang = true }
+	end
 })
 
 -- if soft-wrapping, also indent blockquotes for `breakindentopt`
@@ -30,8 +34,9 @@ optl.formatlistpat:append([[\|^\s*>\s\+]])
 ---CODEBLOCKS-------------------------------------------------------------------
 bkeymap("i", ",", function()
 	local row, col = unpack(vim.api.nvim_win_get_cursor(0))
-	local textBeforeCursor = vim.api.nvim_get_current_line():sub(col - 1, col)
-	if not afterVariable then
+	local textBeforeCursor = vim.api.nvim_get_current_line():sub(1, col)
+	local lang = textBeforeCursor:match(",,(%a*),,$")
+	if not lang then
 		vim.api.nvim_feedkeys(",", "n", true) -- pass through the trigger char
 		return
 	end
@@ -40,7 +45,6 @@ bkeymap("i", ",", function()
 	local clipboard = vim.fn.getreg("+")
 	local lnum, col = unpack(vim.api.nvim_win_get_cursor(0))
 	local curLine = vim.api.nvim_get_current_line()
-	local updated = curLine:gsub("^```", function(match) return match:sub(2) end
 end, { desc = " ,, -> Codeblock"  })
 
 ---AUTO BULLETS-----------------------------------------------------------------
