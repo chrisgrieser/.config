@@ -88,6 +88,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>BAFA567E-AAFC-4283-8B06-4CBCE296FA81</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>29D763E3-99DA-42EC-A264-3AA565CDC0F6</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>C8BAA286-8178-4777-B3D8-B9958B57D2DD</key>
 		<array>
 			<dict>
@@ -215,6 +228,21 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>command</key>
+				<integer>8</integer>
+				<key>confirm</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.systemcommand</string>
+			<key>uid</key>
+			<string>96BEB152-706D-407E-882B-113E7E4821F5</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -232,21 +260,6 @@
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
 			<string>6594A058-1046-48E9-82E3-FE0574D679D5</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>command</key>
-				<integer>8</integer>
-				<key>confirm</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.systemcommand</string>
-			<key>uid</key>
-			<string>96BEB152-706D-407E-882B-113E7E4821F5</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -357,6 +370,39 @@
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>3</integer>
+				<key>argumenttext</key>
+				<string>sketchybar</string>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>14</integer>
+				<key>hotmod</key>
+				<integer>1835008</integer>
+				<key>hotstring</key>
+				<string>E</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>2</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>BAFA567E-AAFC-4283-8B06-4CBCE296FA81</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
@@ -443,6 +489,17 @@
 			<real>350</real>
 			<key>ypos</key>
 			<real>20</real>
+		</dict>
+		<key>BAFA567E-AAFC-4283-8B06-4CBCE296FA81</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>note</key>
+			<string>restart sketchybar</string>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>460</real>
 		</dict>
 		<key>C8BAA286-8178-4777-B3D8-B9958B57D2DD</key>
 		<dict>

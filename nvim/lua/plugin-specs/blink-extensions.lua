@@ -21,7 +21,7 @@ return {
 			providers = {
 				dictionary = {
 					module = "blink-cmp-dictionary",
-					score_offset = -5,
+					score_offset = -7,
 					max_items = 6,
 					min_keyword_length = 4,
 					opts = {

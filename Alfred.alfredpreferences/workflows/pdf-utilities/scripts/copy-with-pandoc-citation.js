@@ -7,6 +7,7 @@ app.includeStandardAdditions = true;
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run(argv) {
+	// SELECTION
 	const selection = (argv[0] || "")
 		.replace(/[\n\r](?!\s)/g, " ") // remove single breaks
 		.replace(/(\w)- /g, "$1") // remove hyphenation
@@ -18,18 +19,20 @@ function run(argv) {
 		return "Without citation."; // Alfred notification
 	}
 
-	//───────────────────────────────────────────────────────────────────────────
+	// FILENAME
+	const frontApp = Application("System Events").processes.whose({ frontmost: true })[0];
+	if (!["PDF Expert", "Highlights"].includes(frontApp.name())) {
+		return "⚠️ Only PDF Expert or Highlights supported.";
+	}
+	const pdfWinTitle = frontApp.windows[0]?.name();
+	if (!pdfWinTitle) return "⚠️ No window open.";
 
-	const frontAppName = Application("System Events").processes.whose({ frontmost: true })[0].name();
-	const pdfWinTitle = Application("System Events").processes[frontAppName].windows[0]?.name();
-	if (!pdfWinTitle) return "⚠️ No PDF window open.";
-
-	// EXAMPLE Highlights "YlijokiMantyla2003_Conflicting Time Perspectives in Academic Work.pdf – Page 1 of 24"
-	// CAVEAT PDF Expert lacks the page number, thus falling back to `0`
-	// INFO assumes that PDF files are have the format `{citekey}_{title}.pdf`
+	// CITATION & PAGE NUMBER
+	// - Highlights "YlijokiMantyla2003_Conflicting Time Perspectives in Academic Work.pdf – Page 1 of 24"
+	// - PDF Expert lacks the page number, thus falling back to `0`
+	// - this assumes that PDF files are have the format `{citekey}_{title}.pdf`
 	const [_, citekey, currentPageStr] = pdfWinTitle.match(/(.*?)_.*(?:Page (\d+) of \d+)?/) || [];
 	const currentPage = Number.parseInt(currentPageStr || "0");
-
 	if (!citekey && !currentPage) {
 		app.setTheClipboardTo(selection);
 		return "Copied just selection: file without citekey";
