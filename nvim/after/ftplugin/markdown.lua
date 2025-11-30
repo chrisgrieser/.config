@@ -17,9 +17,10 @@ if vim.bo.buftype == "" then optl.signcolumn = "yes:3" end
 bkeymap("n", "<leader>rt", "vip:!pandoc --to=gfm<CR>", { desc = " Format table under cursor" })
 
 ---WRAP-------------------------------------------------------------------------
+local group = vim.api.nvim_create_augroup("auto-hardwrap", { clear = true })
 vim.api.nvim_create_autocmd("InsertLeave", {
-	desc = "User: hard-wrap paragraph",
-	group = vim.api.nvim_create_augroup("auto-hardwrap", { clear = true }),
+	desc = "User: auto-hard-wrap",
+	group = group,
 	buffer = 0,
 	callback = function()
 		local node = vim.treesitter.get_node()
@@ -37,7 +38,7 @@ vim.api.nvim_create_autocmd("InsertLeave", {
 optl.formatlistpat:append([[\|^\s*>\s\+]])
 
 ---CODEBLOCKS-------------------------------------------------------------------
--- typing `,,lang,,` creates a codeblock for that lang with dedented clipboard
+-- typing `,,lang,,` creates a codeblock for `lang` with dedented clipboard
 -- content inserted as code.
 bkeymap("i", ",", function()
 	local row, col = unpack(vim.api.nvim_win_get_cursor(0))
