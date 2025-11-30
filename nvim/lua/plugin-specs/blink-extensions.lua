@@ -12,7 +12,7 @@ return {
 	opts = {
 		sources = {
 			-- add `git` and `dictionary` to the list
-			default = { "lsp", "path", "snippets", "buffer", "git", "dictionary" },
+			default = { "lsp", "path", "snippets", "buffer", "git", },
 
 			per_filetype = {
 				gitcommit = { "git" },

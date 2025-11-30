@@ -543,58 +543,5 @@ if jit.os == "OSX" then
 		callback = function() playSound("end_record.caf") end, -- typos: ignore-line
 	})
 end
+--------------------------------------------------------------------------------
 
----READABLE LINE LENGTH IN MARKDOWN---------------------------------------------
-
-local function getWidth()
-	return vim.o.columns - (vim.o.textwidth + 1) - tonumber(vim.o.signcolumn:match("%d")) * 2
-end
-local function disable()
-	vim.api.nvim_win_close(vim.g.readableLength_win, true)
-	vim.g.readableLength_win = nil
-	vim.o.colorcolumn = vim.g.readableLength_origColorcol
-end
-local function enable()
-	local bufnr = vim.api.nvim_create_buf(false, true)
-	local width = getWidth()
-	if width < 1 then return end
-	local winid = vim.api.nvim_open_win(bufnr, false, {
-		split = "right",
-		width = width,
-		style = "minimal",
-	})
-	vim.wo[winid].winhighlight = "Normal:Colorcolumn"
-	vim.wo[winid].winfixbuf = true
-	vim.bo[bufnr].modifiable = false
-	vim.g.readableLength_win = winid
-	vim.o.colorcolumn = "" -- disable since wrapped as well
-end
-vim.api.nvim_create_autocmd("BufEnter", {
-	desc = "User: readable line length on markdown",
-	callback = function(ctx)
-		local isMarkdown = vim.bo[ctx.buf].filetype == "markdown"
-		if not vim.g.readableLength_origColorcol then
-			vim.g.readableLength_origColorcol = vim.o.colorcolumn
-		end
-
-		if isMarkdown and not vim.g.readableLength_win then
-			enable()
-		elseif not isMarkdown and vim.g.readableLength_win then
-			disable()
-		end
-	end,
-})
-
-vim.api.nvim_create_autocmd("VimResized", {
-	callback = function(ctx)
-		local isMarkdown = vim.bo[ctx.buf].filetype == "markdown"
-		local width = getWidth()
-		if isMarkdown and not vim.g.readableLength_win then
-			enable()
-		elseif width < 1 and vim.g.readableLength_win then
-			disable()
-		elseif vim.g.readableLength_win then
-			vim.api.nvim_win_set_config(vim.g.readableLength_win, { width = width })
-		end
-	end,
-})
