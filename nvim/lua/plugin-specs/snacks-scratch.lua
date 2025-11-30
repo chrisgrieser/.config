@@ -2,7 +2,7 @@
 --------------------------------------------------------------------------------
 
 ---@param cmd string
----@return { keys: { [string]: any } }
+---@return { keys: { [string]: table } }
 local function createRunKeymap(cmd)
 	local function runner(self) ---@param self { buf: number } -- passed by snacks
 		vim.cmd("silent! update") -- save before running
@@ -18,7 +18,7 @@ local function createRunKeymap(cmd)
 
 	return {
 		keys = {
-			[cmd] = { "<CR>", runner, desc = ("Run (%s)"):format(cmd) },
+			run = { "<CR>", runner, desc = ("run (%s)"):format(cmd) },
 		},
 	}
 end
@@ -49,11 +49,11 @@ return {
 			filekey = { count = false, cwd = false, branch = false }, -- just one scratch per ft
 			win = {
 				width = 0.75,
-				height = 0.75,
+				height = 0.8,
 				footer_pos = "right",
 				keys = { q = false, ["<D-w>"] = "close" }, -- so `q` is available as my comment operator
 				on_win = function(win)
-					-- FIX display of scratchpad title (partially hardcoded when setting icon, etc.)
+					-- FIX display of scratchpad title (partially hardcoded icon, etc.)
 					local title = vim.iter(win.opts.title)
 						:map(function(part) return vim.trim(part[1]) end)
 						:join(" ")
@@ -68,6 +68,24 @@ return {
 				applescript = createRunKeymap("osascript"),
 				swift = createRunKeymap("swift"),
 				zsh = createRunKeymap("zsh"),
+				lua = {
+					keys = {
+						source = { desc = "source" }, -- just to shorten keymap hint
+						print = {
+							-- overwrite chainsaw's `objectLog` with snacks.scratch's
+							-- special `print` (uses virtualtext instead of notification)
+							"<leader>lo",
+							function()
+								local logLine = ("print(%s)"):format(vim.fn.expand("<cword>"))
+								local installed, chainsaw = pcall(require, "chainsaw.config.config")
+								if installed then logLine = logLine .. " -- " .. chainsaw.config.marker end
+								vim.cmd.normal { "o", bang = true }
+								vim.api.nvim_set_current_line(logLine)
+							end,
+							desc = "print",
+						},
+					},
+				},
 			},
 		},
 	},
