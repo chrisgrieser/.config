@@ -38,7 +38,10 @@ end
 ---@param dir string?
 local function betterFileOpen(dir)
 	dir = dir or vim.uv.cwd()
-	if not dir or dir == "/" then return vim.notify("No cwd set.", vim.log.levels.WARN) end
+	if not dir or dir == "/" then
+		vim.notify("No cwd set.", vim.log.levels.WARN)
+		return
+	end
 
 	local changedFiles = {}
 	local gitDir = Snacks.git.get_root(dir)

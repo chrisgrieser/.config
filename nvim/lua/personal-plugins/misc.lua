@@ -25,7 +25,8 @@ end
 function M.mdWrap(wrap)
 	local mode = vim.fn.mode()
 	if mode == "V" then
-		return vim.notify("Visual line mode is not supported", vim.log.levels.WARN)
+		vim.notify("Visual line mode is not supported", vim.log.levels.WARN)
+		return 
 	end
 	local row, col = unpack(vim.api.nvim_win_get_cursor(0))
 
@@ -341,8 +342,9 @@ function M.scrollLspOrOtherWin(lines)
 		winid = otherWin
 	end
 
-	if not winid then return vim.notify("No other window found.", vim.log.levels.WARN) end
-
+	if not winid then
+		vim.notify("No other window found.", vim.log.levels.WARN)
+	end
 	vim.api.nvim_win_call(winid, function()
 		local topline = vim.fn.winsaveview().topline
 		vim.fn.winrestview { topline = topline + lines }
