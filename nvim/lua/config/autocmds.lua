@@ -549,23 +549,28 @@ end
 vim.api.nvim_create_autocmd("BufEnter", {
 	desc = "User: readable line length on markdown",
 	callback = function(ctx)
+		if not vim.g.readableLength then vim.g.readableLength = {} end
 		local isMarkdown = vim.bo[ctx.buf].filetype == "markdown"
-		local pseudoWin = vim.g.readableLineLengthWin
 
-		if isMarkdown and not pseudoWin then
+		if isMarkdown and not vim.g.readableLength.win then
+			vim.g.readableLength.origColorcol = vim.o.colorcolumn
+			vim.o.colorcolumn = ""
 			local bufnr = vim.api.nvim_create_buf(false, true)
+			local width = vim.o.columns - vim.o.textwidth - 1
+			if width < 5 then return end
 			local winid = vim.api.nvim_open_win(bufnr, false, {
 				split = "right",
-				width = vim.o.columns - vim.o.textwidth + 1,
+				width = width,
 				style = "minimal",
 			})
-			vim.wo[winid].winblend = 50
+			vim.wo[winid].winhighlight = "Normal:Colorcolumn"
 			vim.wo[winid].winfixbuf = true
 			vim.bo[bufnr].modifiable = false
-			vim.g.readableLineLengthWin = winid
-		elseif not isMarkdown and pseudoWin then
-			vim.api.nvim_win_close(pseudoWin, true)
-			vim.g.readableLineLengthWin = nil
+			vim.g.readableLength.win = winid
+		elseif not isMarkdown and vim.g.readableLength.win then
+			vim.o.colorcolumn = vim.g.readableLength.origColorcol
+			vim.api.nvim_win_close(vim.g.readableLength.win, true)
+			vim.g.readableLengthWin = nil
 		end
 	end,
 })

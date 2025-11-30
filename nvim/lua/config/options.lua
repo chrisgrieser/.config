@@ -123,14 +123,6 @@ vim.opt.fillchars:append {
 	eob = " ",
 	msgsep = "═",
 	lastline = "↓",
-	-- thick window separators
-	horiz = "▄",
-	vert = "█",
-	horizup = "█",
-	horizdown = "█",
-	vertleft = "█",
-	vertright = "█",
-	verthoriz = "█",
 }
 
 ---DIAGNOSTICS------------------------------------------------------------------
