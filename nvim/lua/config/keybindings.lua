@@ -168,7 +168,6 @@ keymap("n", "zl", function()
 	end)
 end, { desc = "󰓆 Spell suggestions" })
 keymap("i", "<D-d>", "<C-x><C-k>", { desc = "󰓆 Suggest dict word" })
--- execu
 
 -- template strings
 -- stylua: ignore
