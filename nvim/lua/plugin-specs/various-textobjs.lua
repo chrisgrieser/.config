@@ -45,7 +45,7 @@ return {
 
 		{ "ge", "<cmd>lua require('various-textobjs').diagnostic()<CR>", mode = {"x","o"}, desc = " diagnostic" },
 		{ "L", "<cmd>lua require('various-textobjs').url()<CR>", mode = "o", desc = " URL" },
-		{ "C", "<cmd>lua require('various-textobjs').column()<CR>", mode = {"x","o"}, desc = "ﴳ column" },
+		{ "|", "<cmd>lua require('various-textobjs').column()<CR>", mode = {"x","o"}, desc = "ﴳ column" },
 		{ "#", "<cmd>lua require('various-textobjs').color('outer')<CR>", mode = {"x","o"}, desc = " outer color" },
 
 		{ "in", "<cmd>lua require('various-textobjs').number('inner')<CR>", mode = {"x","o"}, desc = " inner number" },
@@ -61,14 +61,6 @@ return {
 		{ "a.", "<cmd>lua require('various-textobjs').chainMember('outer')<CR>", mode = {"x","o"}, desc = "󰌷 outer chainMember" },
 		{ "iR", "<cmd>lua require('various-textobjs').doubleSquareBrackets('inner')<CR>", mode = {"x","o"}, desc = "󰖬 inner wikilink" },
 		{ "aR", "<cmd>lua require('various-textobjs').doubleSquareBrackets('outer')<CR>", mode = {"x","o"}, desc = "󰖬 outer wikilink" },
-
-		-- css
-		-- { "is", "<cmd>lua require('various-textobjs').cssSelector('inner')<CR>", mode = {"x","o"}, ft = "css", desc = " inner selector" },
-		-- { "as", "<cmd>lua require('various-textobjs').cssSelector('outer')<CR>", mode = {"x","o"}, ft = "css", desc = " outer selector" },
-
-		-- shell
-		{ "ix", "<cmd>lua require('various-textobjs').shellPipe('inner')<CR>", mode = "o", ft = {"bash", "zsh"}, desc = "󰟥 inner pipe" },
-		{ "ax", "<cmd>lua require('various-textobjs').shellPipe('outer')<CR>", mode = "o", ft = {"bash", "zsh"}, desc = "󰟥 outer pipe" },
 		-- stylua: ignore end
 
 		{ -- indent last paste

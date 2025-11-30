@@ -1,5 +1,6 @@
 -- TREESITTER QUERY FILETYPE
 vim.bo.commentstring = "; %s" -- add space
+vim.bo.iskeyword = vim.go.iskeyword -- inherit global one instead of overwriting it
 
 -- for `:InspectTree`
 if vim.bo.buftype == "nofile" then
