@@ -17,7 +17,7 @@ return {
 			lsp_format = "first",
 		},
 		formatters_by_ft = {
-			markdown = { "hard-wrap-at-textwidth", "markdownlint", "markdown-toc", "injected" },
+			markdown = { "markdownlint", "markdown-toc", "injected" },
 			python = { "ruff_fix", "ruff_organize_imports" },
 			zsh = { "shell-home", "shellcheck" },
 			json = { lsp_format = "prefer", "jq" }, -- use `biome` (via LSP), with `jq` as fallback
@@ -48,24 +48,6 @@ return {
 						return line:gsub("/Users/%a+", "$HOME"):gsub("~/", "$HOME/")
 					end
 					callback(nil, vim.tbl_map(replace, lines))
-				end,
-			},
-			["hard-wrap-at-textwidth"] = {
-				format = function(_self, ctx, _lines, callback)
-					local view = vim.fn.winsaveview()
-
-					for _, diag in pairs(vim.diagnostic.get(ctx.buf)) do
-						local isMarkdownlintLinelength = diag.source == "markdownlint"
-							and vim.endswith(tostring(diag.code), "13")
-						if isMarkdownlintLinelength then
-							vim.diagnostic.jump({ diagnostic = diag })
-							vim.cmd.normal { "gw}", bang = true }
-						end
-					end
-					local formattedLines = vim.api.nvim_buf_get_lines(0, 0, -1, true)
-
-					vim.fn.winrestview(view)
-					callback(nil, formattedLines)
 				end,
 			},
 			["ts-add-missing-imports"] = {
