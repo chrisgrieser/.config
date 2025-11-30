@@ -52,20 +52,16 @@ return {
 			},
 			["hard-wrap-at-textwidth"] = {
 				command = "nvim",
-				args = {
-					"--headless",
-					"--clean", -- load no plugins/config
-					"+set textwidth=" .. vim.o.textwidth, -- hard-wrap width
-					-- 1. each line via `:normal`, since `gggwG` breaks callouts
-					-- 2. `global` instead of `% normal` since `gww` changes line
-					-- count and `%` uses line count at start, resulting in lines at
-					-- the bottom not being formatted
-					-- 3. `vglobal /|.*|/` to only affect non-table lines
-					"+vglobal /|.*|/ normal! gww",
-					"+wq",
-					"$FILENAME",
-				},
-				stdin = false,
+				format = function (_self, _ctx, lines, callback)
+					for i = #lines, 1, -1 do
+						local line = lines[i]
+						if #line > 80 then
+							table.insert(lines, i, string.rep(" ", 80))
+						end
+					end
+					local formattedLines = {}
+					callback(nil, formattedLines)
+				end
 			},
 			["ts-add-missing-imports"] = {
 				format = function(_self, ctx, _lines, callback)
