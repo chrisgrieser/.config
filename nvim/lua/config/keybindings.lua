@@ -338,7 +338,7 @@ keymap("n", "qr", function() require("personal-plugins.comment").commentHr("repl
 keymap("n", "wq", function() require("personal-plugins.comment").duplicateLineAsComment() end, { desc = "󰆈 Duplicate line as comment" })
 keymap("n", "qf", function() require("personal-plugins.comment").docstring() end, { desc = "󰆈 Function docstring" })
 keymap("n", "Q", function() require("personal-plugins.comment").addCommentAtEol() end, { desc = "󰆈 Add comment at EoL" })
-require("personal-plugins.comment").setupReplaceModeHelpersForComments()
+require("personal-plugins.comment").setup()
 -- stylua: ignore end
 
 ---LINE & CHARACTER MOVEMENT----------------------------------------------------

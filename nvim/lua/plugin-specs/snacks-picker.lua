@@ -537,6 +537,17 @@ return {
 				preview = { keys = { ["<C-CR>"] = { "cycle_win" } } },
 			},
 			actions = {
+				-- FIX override snack's yank functin
+				yank = function(picker, item, action)
+					if not item then return end
+					local reg = action.reg or vim.v.register
+					local value = item[action.field] or item.data or item.text
+					vim.fn.setreg(reg, value)
+					if action.notify ~= false then
+						local buf = item.buf or vim.api.nvim_win_get_buf(picker.main)
+						Snacks.notify(vim.trim(value), { title = "Copied", ft = vim.bo[buf].filetype })
+					end
+				end,
 				list_down_wrapping = function(picker)
 					local allVisible = #picker.list.items -- picker:count() only counts unfiltered
 					local current = picker.list.cursor -- picker:current().idx incorrect for `smart` source

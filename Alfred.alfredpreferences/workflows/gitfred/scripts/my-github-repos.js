@@ -2,7 +2,8 @@
 ObjC.import("stdlib");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
-//──────────────────────────────────────────────────────────────────────────────
+
+//-HELLO WORLD------------------------------------------------------------------
 
 /** @param {string} str */
 function alfredMatcher(str) {
@@ -114,7 +115,8 @@ function run() {
 	// Create items for Alfred
 	const repos = allRepos
 		.filter((repo) => !repo.archived) // GitHub API doesn't allow filtering
-		.sort((a, b) => { // sort local repos to the top
+		.sort((a, b) => {
+			// sort local repos to the top
 			const aIsLocal = Boolean(localRepos[a.name]);
 			const bIsLocal = Boolean(localRepos[b.name]);
 			if (aIsLocal && !bIsLocal) return -1;
