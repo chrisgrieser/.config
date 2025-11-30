@@ -18,6 +18,7 @@ M.wf_pseudoMax = wf.new({
 	"Obsidian",
 	"zoom.us",
 	"Highlights",
+	"PDF Expert",
 	"Signal",
 	"Gmail",
 	"Karabiner-Elements",

@@ -1,34 +1,40 @@
 # yaml-language-server: $schema=./schema/karabiner-mod-schema.json
-title: Vim Mode for Highlights.app
+title: Vim Mode for PDF Readers
 anchors:
   - conditions:
-      - &highlights-insert-mode { type: variable_if, name: HIGHLIGHTS_INSERT_MODE, value: true }
-      - &highlights-normal-mode { type: variable_unless, name: HIGHLIGHTS_INSERT_MODE, value: true }
+      - &pdf-insert-mode { type: variable_if, name: PDF_INSERT_MODE, value: true }
+      - &pdf-normal-mode { type: variable_unless, name: PDF_INSERT_MODE, value: true }
+      - &pdf-app
+        type: frontmost_application_if
+        bundle_identifiers: [net.highlightsapp.universal, com.readdle.PDFExpert-Mac]
+      - &pdf-expert-app
+        type: frontmost_application_if
+        bundle_identifiers: [com.readdle.PDFExpert-Mac]
       - &highlights-app
         type: frontmost_application_if
         bundle_identifiers: [net.highlightsapp.universal]
       - &german-keyboard { type: input_source_if, input_sources: [language: ^de$] }
   - to:
-      - &enter-normal-mode { set_variable: { name: HIGHLIGHTS_INSERT_MODE, value: false } }
-      - &enter-insert-mode { set_variable: { name: HIGHLIGHTS_INSERT_MODE, value: true } }
-      - &remove-notice { set_notification_message: { id: highlights-vim-notice, text: "" } }
+      - &enter-normal-mode { set_variable: { name: PDF_INSERT_MODE, value: false } }
+      - &enter-insert-mode { set_variable: { name: PDF_INSERT_MODE, value: true } }
+      - &remove-notice { set_notification_message: { id: pdf-vim-notice, text: "" } }
       - &set-notice
-        set_notification_message: { id: highlights-vim-notice, text: ✏️ Highlights Insert Mode }
+        set_notification_message: { id: pdf-vim-notice, text: ✏️ PDF Insert Mode }
 
 #───────────────────────────────────────────────────────────────────────────────
 rules:
-  - description: "✏️ Highlights Vim Mode: Triggers/Toggles"
+  - description: "✏️ PDF Vim Mode: Triggers/Toggles"
     manipulators:
       # Enter Normal Mode
       - type: basic
         from: { key_code: caps_lock }
         to_if_alone: [{ key_code: escape }, *remove-notice, *enter-normal-mode]
         to: [{ key_code: right_command, modifiers: [control, option] }] # preserve hyper key
-        conditions: [*highlights-app, *highlights-insert-mode]
+        conditions: [*pdf-app, *pdf-insert-mode]
       - type: basic
         from: { key_code: escape }
         to: [{ key_code: escape }, *remove-notice, *enter-normal-mode]
-        conditions: [*highlights-app, *highlights-insert-mode]
+        conditions: [*pdf-app, *pdf-insert-mode]
       # leave insert mode when quitting
       - type: basic
         from: { key_code: q, modifiers: { mandatory: [command] } }
@@ -36,16 +42,16 @@ rules:
           - { key_code: q, modifiers: [command] }
           - *remove-notice
           - *enter-normal-mode
-        conditions: [*highlights-app, *highlights-insert-mode]
+        conditions: [*pdf-app, *pdf-insert-mode]
       - type: basic
         from: { key_code: w, modifiers: { mandatory: [command] } }
         to:
           - { key_code: w, modifiers: [command] }
           - *remove-notice
           - *enter-normal-mode
-        conditions: [*highlights-app, *highlights-insert-mode]
+        conditions: [*pdf-app, *pdf-insert-mode]
   #─────────────────────────────────────────────────────────────────────────────
-  - description: "✏️ Highlights Vim Mode: Actions"
+  - description: "✏️ PDF Vim Mode: Actions"
     manipulators:
       # j/k: up/down scroll
       - type: basic
@@ -63,7 +69,7 @@ rules:
           - key_code: down_arrow
           - key_code: down_arrow
           - key_code: down_arrow
-        conditions: [*highlights-app, *highlights-normal-mode]
+        conditions: [*pdf-app, *pdf-normal-mode]
       - type: basic
         from: { key_code: k }
         to: # 12x up
@@ -79,7 +85,7 @@ rules:
           - key_code: up_arrow
           - key_code: up_arrow
           - key_code: up_arrow
-        conditions: [*highlights-app, *highlights-normal-mode]
+        conditions: [*pdf-app, *pdf-normal-mode]
       # h/l: left/right scroll
       - type: basic
         from: { key_code: h }
@@ -87,270 +93,317 @@ rules:
           # disadvantage of `mouse_key.horizontal_wheel` is that it requires
           # holding down the key briefly to
           - mouse_key: { horizontal_wheel: 40 }
-        conditions: [*highlights-app, *highlights-normal-mode]
+        conditions: [*highlights-app, *pdf-normal-mode]
       - type: basic
         from: { key_code: l }
         to:
           - mouse_key: { horizontal_wheel: -40 }
-        conditions: [*highlights-app, *highlights-normal-mode]
+        conditions: [*highlights-app, *pdf-normal-mode]
+      - type: basic
+        from: { key_code: h }
+        to:
+          - key_code: left_arrow
+          - key_code: left_arrow
+          - key_code: left_arrow
+        conditions: [*pdf-expert-app, *pdf-normal-mode]
+      - type: basic
+        from: { key_code: l }
+        to:
+          - key_code: right_arrow
+          - key_code: right_arrow
+          - key_code: right_arrow
+        conditions: [*pdf-expert-app, *pdf-normal-mode]
       # J/K: up/down full page
       - type: basic
         from: { key_code: j, modifiers: { mandatory: [shift] } }
         to:
           - key_code: page_down
-        conditions: [*highlights-app, *highlights-normal-mode]
+        conditions: [*pdf-app, *pdf-normal-mode]
       - type: basic
         from: { key_code: k, modifiers: { mandatory: [shift] } }
         to:
           - key_code: page_up
-        conditions: [*highlights-app, *highlights-normal-mode]
+        conditions: [*pdf-app, *pdf-normal-mode]
       # g/G fully down/up
       - type: basic
         from: { key_code: g }
         to:
           - { key_code: up_arrow, modifiers: [command] }
-        conditions: [*highlights-app, *highlights-normal-mode]
+        conditions: [*pdf-app, *pdf-normal-mode]
       - type: basic
         from: { key_code: g, modifiers: { mandatory: [shift] } }
         to:
           - { key_code: down_arrow, modifiers: [command] }
-        conditions: [*highlights-app, *highlights-normal-mode]
+        conditions: [*pdf-app, *pdf-normal-mode]
+      # `:` goto page
+      - type: basic
+        from: { key_code: period, modifiers: { mandatory: [shift] } }
+        to:
+          - { key_code: g, modifiers: [command, option] }
+        conditions: [*pdf-expert-app, *pdf-normal-mode]
       # C-h/C-l: back/forth in jump history
       - type: basic
         from: { key_code: h, modifiers: { mandatory: [control] } }
         to:
-          - shell_command: |
-              osascript -e '
-                tell application "System Events"
-                  tell process "Highlights"
-                    set frontmost to true
-                    click menu item "Back" of menu "Go" of menu bar 1
-                  end tell
-                end tell'
-        conditions: [*highlights-app, *highlights-normal-mode]
+          - { key_code: semicolon, modifiers: [command] }
+        conditions: [*pdf-app, *pdf-normal-mode]
       - type: basic
         from: { key_code: l, modifiers: { mandatory: [control] } }
         to:
-          - shell_command: |
-              osascript -e '
-                tell application "System Events"
-                  tell process "Highlights"
-                    set frontmost to true
-                    click menu item "Forward" of menu "Go" of menu bar 1
-                  end tell
-                end tell'
-        conditions: [*highlights-app, *highlights-normal-mode]
+          - { key_code: quote, modifiers: [command] }
+        conditions: [*pdf-app, *pdf-normal-mode]
   #─────────────────────────────────────────────────────────────────────────────
   - description: "✏️ Highlights Vim Mode: Insert Mode Entering"
     manipulators:
       - type: basic
         from: { key_code: a }
         to: [{ key_code: a }, *set-notice, *enter-insert-mode]
-        conditions: [*highlights-app, *highlights-normal-mode]
+        conditions: [*pdf-app, *pdf-normal-mode]
       - type: basic
         from: { key_code: b }
         to: [{ key_code: b }, *set-notice, *enter-insert-mode]
-        conditions: [*highlights-app, *highlights-normal-mode]
+        conditions: [*pdf-app, *pdf-normal-mode]
       - type: basic
         from: { key_code: c }
         to: [{ key_code: c }, *set-notice, *enter-insert-mode]
-        conditions: [*highlights-app, *highlights-normal-mode]
+        conditions: [*pdf-app, *pdf-normal-mode]
       - type: basic
         from: { key_code: d }
         to: [{ key_code: d }, *set-notice, *enter-insert-mode]
-        conditions: [*highlights-app, *highlights-normal-mode]
+        conditions: [*pdf-app, *pdf-normal-mode]
       - type: basic
         from: { key_code: e }
         to: [{ key_code: e }, *set-notice, *enter-insert-mode]
-        conditions: [*highlights-app, *highlights-normal-mode]
+        conditions: [*pdf-app, *pdf-normal-mode]
       - type: basic
         from: { key_code: f }
         to: [{ key_code: f }, *set-notice, *enter-insert-mode]
-        conditions: [*highlights-app, *highlights-normal-mode]
+        conditions: [*pdf-app, *pdf-normal-mode]
       - type: basic
         from: { key_code: i }
         to: [{ key_code: i }, *set-notice, *enter-insert-mode]
-        conditions: [*highlights-app, *highlights-normal-mode]
+        conditions: [*pdf-app, *pdf-normal-mode]
       - type: basic
         from: { key_code: m }
         to: [{ key_code: m }, *set-notice, *enter-insert-mode]
-        conditions: [*highlights-app, *highlights-normal-mode]
+        conditions: [*pdf-app, *pdf-normal-mode]
       - type: basic
         from: { key_code: n }
         to: [{ key_code: n }, *set-notice, *enter-insert-mode]
-        conditions: [*highlights-app, *highlights-normal-mode]
+        conditions: [*pdf-app, *pdf-normal-mode]
       - type: basic
         from: { key_code: o }
         to: [{ key_code: o }, *set-notice, *enter-insert-mode]
-        conditions: [*highlights-app, *highlights-normal-mode]
+        conditions: [*pdf-app, *pdf-normal-mode]
       - type: basic
         from: { key_code: p }
         to: [{ key_code: p }, *set-notice, *enter-insert-mode]
-        conditions: [*highlights-app, *highlights-normal-mode]
+        conditions: [*pdf-app, *pdf-normal-mode]
       - type: basic
         from: { key_code: q }
         to: [{ key_code: q }, *set-notice, *enter-insert-mode]
-        conditions: [*highlights-app, *highlights-normal-mode]
+        conditions: [*pdf-app, *pdf-normal-mode]
       - type: basic
         from: { key_code: r }
         to: [{ key_code: r }, *set-notice, *enter-insert-mode]
-        conditions: [*highlights-app, *highlights-normal-mode]
+        conditions: [*pdf-app, *pdf-normal-mode]
       - type: basic
         from: { key_code: s }
         to: [{ key_code: s }, *set-notice, *enter-insert-mode]
-        conditions: [*highlights-app, *highlights-normal-mode]
+        conditions: [*pdf-app, *pdf-normal-mode]
       - type: basic
         from: { key_code: t }
         to: [{ key_code: t }, *set-notice, *enter-insert-mode]
-        conditions: [*highlights-app, *highlights-normal-mode]
+        conditions: [*pdf-app, *pdf-normal-mode]
       - type: basic
         from: { key_code: u }
         to: [{ key_code: u }, *set-notice, *enter-insert-mode]
-        conditions: [*highlights-app, *highlights-normal-mode]
+        conditions: [*pdf-app, *pdf-normal-mode]
       - type: basic
         from: { key_code: v }
         to: [{ key_code: v }, *set-notice, *enter-insert-mode]
-        conditions: [*highlights-app, *highlights-normal-mode]
+        conditions: [*pdf-app, *pdf-normal-mode]
       - type: basic
         from: { key_code: w }
         to: [{ key_code: w }, *set-notice, *enter-insert-mode]
-        conditions: [*highlights-app, *highlights-normal-mode]
+        conditions: [*pdf-app, *pdf-normal-mode]
       - type: basic
         from: { key_code: x }
         to: [{ key_code: x }, *set-notice, *enter-insert-mode]
-        conditions: [*highlights-app, *highlights-normal-mode]
+        conditions: [*pdf-app, *pdf-normal-mode]
       - type: basic
         from: { key_code: y }
         to: [{ key_code: y }, *set-notice, *enter-insert-mode]
-        conditions: [*highlights-app, *highlights-normal-mode]
+        conditions: [*pdf-app, *pdf-normal-mode]
       - type: basic
         from: { key_code: z }
         to: [{ key_code: z }, *set-notice, *enter-insert-mode]
-        conditions: [*highlights-app, *highlights-normal-mode]
+        conditions: [*pdf-app, *pdf-normal-mode]
+      # Numbers
+      - type: basic
+        from: { key_code: "0" }
+        to: [{ key_code: "0" }, *set-notice, *enter-insert-mode]
+        conditions: [*pdf-app, *pdf-normal-mode]
+      - type: basic
+        from: { key_code: "1" }
+        to: [{ key_code: "1" }, *set-notice, *enter-insert-mode]
+        conditions: [*pdf-app, *pdf-normal-mode]
+      - type: basic
+        from: { key_code: "2" }
+        to: [{ key_code: "2" }, *set-notice, *enter-insert-mode]
+        conditions: [*pdf-app, *pdf-normal-mode]
+      - type: basic
+        from: { key_code: "3" }
+        to: [{ key_code: "3" }, *set-notice, *enter-insert-mode]
+        conditions: [*pdf-app, *pdf-normal-mode]
+      - type: basic
+        from: { key_code: "4" }
+        to: [{ key_code: "4" }, *set-notice, *enter-insert-mode]
+        conditions: [*pdf-app, *pdf-normal-mode]
+      - type: basic
+        from: { key_code: "5" }
+        to: [{ key_code: "5" }, *set-notice, *enter-insert-mode]
+        conditions: [*pdf-app, *pdf-normal-mode]
+      - type: basic
+        from: { key_code: "6" }
+        to: [{ key_code: "6" }, *set-notice, *enter-insert-mode]
+        conditions: [*pdf-app, *pdf-normal-mode]
+      - type: basic
+        from: { key_code: "7" }
+        to: [{ key_code: "7" }, *set-notice, *enter-insert-mode]
+        conditions: [*pdf-app, *pdf-normal-mode]
+      - type: basic
+        from: { key_code: "8" }
+        to: [{ key_code: "8" }, *set-notice, *enter-insert-mode]
+        conditions: [*pdf-app, *pdf-normal-mode]
+      - type: basic
+        from: { key_code: "9" }
+        to: [{ key_code: "9" }, *set-notice, *enter-insert-mode]
+        conditions: [*pdf-app, *pdf-normal-mode]
       # German Umlaute
       - type: basic
         from: { key_code: quote }
         to: [{ key_code: quote }, *set-notice, *enter-insert-mode]
-        conditions: [*highlights-app, *highlights-normal-mode, *german-keyboard]
+        conditions: [*pdf-app, *pdf-normal-mode, *german-keyboard]
       - type: basic
         from: { key_code: semicolon }
         to: [{ key_code: semicolon }, *set-notice, *enter-insert-mode]
-        conditions: [*highlights-app, *highlights-normal-mode, *german-keyboard]
+        conditions: [*pdf-app, *pdf-normal-mode, *german-keyboard]
       - type: basic
         from: { key_code: open_bracket }
         to: [{ key_code: open_bracket }, *set-notice, *enter-insert-mode]
-        conditions: [*highlights-app, *highlights-normal-mode, *german-keyboard]
+        conditions: [*pdf-app, *pdf-normal-mode, *german-keyboard]
 
       #───────────────────────────────────────────────────────────────────────
       - type: basic
         from: { key_code: a, modifiers: { mandatory: [shift] } }
         to: [{ key_code: a, modifiers: [shift] }, *set-notice, *enter-insert-mode]
-        conditions: [*highlights-app, *highlights-normal-mode]
+        conditions: [*pdf-app, *pdf-normal-mode]
       - type: basic
         from: { key_code: b, modifiers: { mandatory: [shift] } }
         to: [{ key_code: b, modifiers: [shift] }, *set-notice, *enter-insert-mode]
-        conditions: [*highlights-app, *highlights-normal-mode]
+        conditions: [*pdf-app, *pdf-normal-mode]
       - type: basic
         from: { key_code: c, modifiers: { mandatory: [shift] } }
         to: [{ key_code: c, modifiers: [shift] }, *set-notice, *enter-insert-mode]
-        conditions: [*highlights-app, *highlights-normal-mode]
+        conditions: [*pdf-app, *pdf-normal-mode]
       - type: basic
         from: { key_code: d, modifiers: { mandatory: [shift] } }
         to: [{ key_code: d, modifiers: [shift] }, *set-notice, *enter-insert-mode]
-        conditions: [*highlights-app, *highlights-normal-mode]
+        conditions: [*pdf-app, *pdf-normal-mode]
       - type: basic
         from: { key_code: e, modifiers: { mandatory: [shift] } }
         to: [{ key_code: e, modifiers: [shift] }, *set-notice, *enter-insert-mode]
-        conditions: [*highlights-app, *highlights-normal-mode]
+        conditions: [*pdf-app, *pdf-normal-mode]
       - type: basic
         from: { key_code: f, modifiers: { mandatory: [shift] } }
         to: [{ key_code: f, modifiers: [shift] }, *set-notice, *enter-insert-mode]
-        conditions: [*highlights-app, *highlights-normal-mode]
+        conditions: [*pdf-app, *pdf-normal-mode]
       - type: basic
         from: { key_code: h, modifiers: { mandatory: [shift] } }
         to: [{ key_code: h, modifiers: [shift] }, *set-notice, *enter-insert-mode]
-        conditions: [*highlights-app, *highlights-normal-mode]
+        conditions: [*pdf-app, *pdf-normal-mode]
       - type: basic
         from: { key_code: i, modifiers: { mandatory: [shift] } }
         to: [{ key_code: i, modifiers: [shift] }, *set-notice, *enter-insert-mode]
-        conditions: [*highlights-app, *highlights-normal-mode]
+        conditions: [*pdf-app, *pdf-normal-mode]
       - type: basic
         from: { key_code: l, modifiers: { mandatory: [shift] } }
         to: [{ key_code: l, modifiers: [shift] }, *set-notice, *enter-insert-mode]
-        conditions: [*highlights-app, *highlights-normal-mode]
+        conditions: [*pdf-app, *pdf-normal-mode]
       - type: basic
         from: { key_code: m, modifiers: { mandatory: [shift] } }
         to: [{ key_code: m, modifiers: [shift] }, *set-notice, *enter-insert-mode]
-        conditions: [*highlights-app, *highlights-normal-mode]
+        conditions: [*pdf-app, *pdf-normal-mode]
       - type: basic
         from: { key_code: n, modifiers: { mandatory: [shift] } }
         to: [{ key_code: n, modifiers: [shift] }, *set-notice, *enter-insert-mode]
-        conditions: [*highlights-app, *highlights-normal-mode]
+        conditions: [*pdf-app, *pdf-normal-mode]
       - type: basic
         from: { key_code: o, modifiers: { mandatory: [shift] } }
         to: [{ key_code: o, modifiers: [shift] }, *set-notice, *enter-insert-mode]
-        conditions: [*highlights-app, *highlights-normal-mode]
+        conditions: [*pdf-app, *pdf-normal-mode]
       - type: basic
         from: { key_code: p, modifiers: { mandatory: [shift] } }
         to: [{ key_code: p, modifiers: [shift] }, *set-notice, *enter-insert-mode]
-        conditions: [*highlights-app, *highlights-normal-mode]
+        conditions: [*pdf-app, *pdf-normal-mode]
       - type: basic
         from: { key_code: q, modifiers: { mandatory: [shift] } }
         to: [{ key_code: q, modifiers: [shift] }, *set-notice, *enter-insert-mode]
-        conditions: [*highlights-app, *highlights-normal-mode]
+        conditions: [*pdf-app, *pdf-normal-mode]
       - type: basic
         from: { key_code: r, modifiers: { mandatory: [shift] } }
         to: [{ key_code: r, modifiers: [shift] }, *set-notice, *enter-insert-mode]
-        conditions: [*highlights-app, *highlights-normal-mode]
+        conditions: [*pdf-app, *pdf-normal-mode]
       - type: basic
         from: { key_code: s, modifiers: { mandatory: [shift] } }
         to: [{ key_code: s, modifiers: [shift] }, *set-notice, *enter-insert-mode]
-        conditions: [*highlights-app, *highlights-normal-mode]
+        conditions: [*pdf-app, *pdf-normal-mode]
       - type: basic
         from: { key_code: t, modifiers: { mandatory: [shift] } }
         to: [{ key_code: t, modifiers: [shift] }, *set-notice, *enter-insert-mode]
-        conditions: [*highlights-app, *highlights-normal-mode]
+        conditions: [*pdf-app, *pdf-normal-mode]
       - type: basic
         from: { key_code: u, modifiers: { mandatory: [shift] } }
         to: [{ key_code: u, modifiers: [shift] }, *set-notice, *enter-insert-mode]
-        conditions: [*highlights-app, *highlights-normal-mode]
+        conditions: [*pdf-app, *pdf-normal-mode]
       - type: basic
         from: { key_code: v, modifiers: { mandatory: [shift] } }
         to: [{ key_code: v, modifiers: [shift] }, *set-notice, *enter-insert-mode]
-        conditions: [*highlights-app, *highlights-normal-mode]
+        conditions: [*pdf-app, *pdf-normal-mode]
       - type: basic
         from: { key_code: w, modifiers: { mandatory: [shift] } }
         to: [{ key_code: w, modifiers: [shift] }, *set-notice, *enter-insert-mode]
-        conditions: [*highlights-app, *highlights-normal-mode]
+        conditions: [*pdf-app, *pdf-normal-mode]
       - type: basic
         from: { key_code: x, modifiers: { mandatory: [shift] } }
         to: [{ key_code: x, modifiers: [shift] }, *set-notice, *enter-insert-mode]
-        conditions: [*highlights-app, *highlights-normal-mode]
+        conditions: [*pdf-app, *pdf-normal-mode]
       - type: basic
         from: { key_code: y, modifiers: { mandatory: [shift] } }
         to: [{ key_code: y, modifiers: [shift] }, *set-notice, *enter-insert-mode]
-        conditions: [*highlights-app, *highlights-normal-mode]
+        conditions: [*pdf-app, *pdf-normal-mode]
       - type: basic
         from: { key_code: z, modifiers: { mandatory: [shift] } }
         to: [{ key_code: z, modifiers: [shift] }, *set-notice, *enter-insert-mode]
-        conditions: [*highlights-app, *highlights-normal-mode]
+        conditions: [*pdf-app, *pdf-normal-mode]
       #─────────────────────────────────────────────────────────────────────────
       # German Umlaute
       - type: basic
         from: { key_code: semicolon, modifiers: { mandatory: [shift] } }
         to: [{ key_code: semicolon, modifiers: [shift] }, *set-notice, *enter-insert-mode]
-        conditions: [*highlights-app, *highlights-normal-mode, *german-keyboard]
+        conditions: [*pdf-app, *pdf-normal-mode, *german-keyboard]
       - type: basic
         from: { key_code: quote, modifiers: { mandatory: [shift] } }
         to: [{ key_code: quote, modifiers: [shift] }, *set-notice, *enter-insert-mode]
-        conditions: [*highlights-app, *highlights-normal-mode, *german-keyboard]
+        conditions: [*pdf-app, *pdf-normal-mode, *german-keyboard]
       - type: basic
         from: { key_code: open_bracket, modifiers: { mandatory: [shift] } }
         to: [{ key_code: open_bracket, modifiers: [shift] }, *set-notice, *enter-insert-mode]
-        conditions: [*highlights-app, *highlights-normal-mode, *german-keyboard]
+        conditions: [*pdf-app, *pdf-normal-mode, *german-keyboard]
       #─────────────────────────────────────────────────────────────────────────
       # hashtag "#" for annotation tags
       - type: basic
         from: { key_code: non_us_pound }
         to: [{ key_code: non_us_pound }, *set-notice, *enter-insert-mode]
-        conditions: [*highlights-app, *highlights-normal-mode]
+        conditions: [*pdf-app, *pdf-normal-mode]

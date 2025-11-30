@@ -45,6 +45,7 @@ cask "signal"
 cask "slack"
 cask "wezterm"
 cask "zoom"
+cask "pdf-expert"
 mas "Highlights", id: 1498912833
 mas "Ivory", id: 6444602274
 mas "iPreview", id: 1519213509 # quicklook
