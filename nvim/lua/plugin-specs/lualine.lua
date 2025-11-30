@@ -128,6 +128,10 @@ return {
 				{
 					"diagnostics",
 					cond = function() return vim.diagnostic.is_enabled { bufnr = 0 } end,
+					symbols = (function() -- use icons from `vim.diagnostic.config()`
+						local icons = vim.diagnostic.config().signs.text or { "E", "W", "I", "H" }
+						return { error = icons[1], warn = icons[2], info = icons[3], hint = icons[4] }
+					end)(),
 				},
 				{
 					"lsp_status",

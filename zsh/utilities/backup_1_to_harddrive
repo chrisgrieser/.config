@@ -119,14 +119,18 @@ else
 		end tell
 	EOD
 
-	if [[ -d "$archive_name" ]]; then
-		# restrict number of backups
-		command ls -r | tail +$((max_number_of_archives + 1)) | tr '' '\0' | xargs -0 rm -rf
-	else
+	if [[ ! -d "$archive_name" ]]; then
 		errors="$errors\nArchive not created."
 		open "$archive"
+		return
 	fi
 
+	# restrict number of backups
+	oldest_backups=$(command ls -r | tail +$((max_number_of_archives + 1)))
+	if [[ -n "$oldest_backups" ]]; then
+		echo "Removing outdated backup: $oldest_backups"
+		echo "$oldest_backups" | xargs -I{} rm -rf "{}"
+	fi
 fi
 
 #───────────────────────────────────────────────────────────────────────────────

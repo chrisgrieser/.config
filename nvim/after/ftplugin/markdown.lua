@@ -39,6 +39,7 @@ bkeymap("i", ",", function()
 		vim.api.nvim_feedkeys(",", "n", true) -- pass through the trigger char
 		return
 	end
+	local fff
 
 	local clipboard = vim.fn.getreg("+")
 	local lnum, col = unpack(vim.api.nvim_win_get_cursor(0))
