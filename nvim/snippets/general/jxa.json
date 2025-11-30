@@ -81,9 +81,7 @@
     "prefix": "file1 is older than file2"
   },
   "front app (process)": {
-    "body": [
-      "const frontAppName = Application(\"System Events\").processes.whose({ frontmost: true })[0];"
-    ],
+    "body": "const frontAppName = Application(\"System Events\").processes.whose({ frontmost: true })[0].name();",
     "prefix": "front app (process)"
   },
   "front window path (Finder)": {
