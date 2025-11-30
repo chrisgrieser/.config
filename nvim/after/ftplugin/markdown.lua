@@ -21,11 +21,10 @@ vim.api.nvim_create_autocmd("InsertLeave", {
 	desc = "User: hard-wrap paragraph",
 	group = vim.api.nvim_create_augroup("auto-hardwrap", { clear = true }),
 	buffer = 0,
-	callback = function ()
-		if vim.api.nvim_get_current_line():find("|")
-
-		vim.cmd.normal { "gww", bang = true }
-	end
+	callback = function()
+		local likelyTable = vim.api.nvim_get_current_line():find("|.*|") ~= nil
+		if not likelyTable then vim.cmd.normal { "gww", bang = true } end
+	end,
 })
 
 -- if soft-wrapping, also indent blockquotes for `breakindentopt`
@@ -41,11 +40,10 @@ bkeymap("i", ",", function()
 		return
 	end
 
-
 	local clipboard = vim.fn.getreg("+")
 	local lnum, col = unpack(vim.api.nvim_win_get_cursor(0))
 	local curLine = vim.api.nvim_get_current_line()
-end, { desc = " ,, -> Codeblock"  })
+end, { desc = " ,, -> Codeblock" })
 
 ---AUTO BULLETS-----------------------------------------------------------------
 -- (simplified implementation of `bullets.vim`)

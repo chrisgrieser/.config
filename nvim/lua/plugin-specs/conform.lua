@@ -19,13 +19,13 @@ return {
 		formatters_by_ft = {
 			markdown = { "hard-wrap-at-textwidth", "markdownlint", "markdown-toc", "injected" },
 			python = { "ruff_fix", "ruff_organize_imports" },
+			zsh = { "shell-home", "shellcheck" },
+			json = { lsp_format = "prefer", "jq" }, -- use `biome` (via LSP), with `jq` as fallback
 			typescript = {
 				"ts-add-missing-imports",
 				"ts-remove-unused-imports",
 				"biome-organize-imports",
 			},
-			zsh = { "shell-home", "shellcheck" },
-			json = { lsp_format = "prefer", "jq" }, -- use `biome` (via LSP), with `jq` as fallback
 
 			-- _ = fallback, used when no formatters defined and no LSP available
 			_ = { "trim_whitespace", "trim_newlines", "squeeze_blanks" },
@@ -57,10 +57,11 @@ return {
 					"--clean", -- load no plugins/config
 					"+set textwidth=" .. vim.o.textwidth, -- hard-wrap width
 					-- 1. each line via `:normal`, since `gggwG` breaks callouts
-					-- 2. `global /./` instead of `% normal` since `gww` changes line
+					-- 2. `global` instead of `% normal` since `gww` changes line
 					-- count and `%` uses line count at start, resulting in lines at
 					-- the bottom not being formatted
-					"+global /./ normal! gww",
+					-- 3. `vglobal /|.*|/` to only affect non-table lines
+					"+vglobal /|.*|/ normal! gww",
 					"+wq",
 					"$FILENAME",
 				},
@@ -73,7 +74,7 @@ return {
 						context = { only = { "source.addMissingImports.ts" } }, ---@diagnostic disable-line: missing-fields, assign-type-mismatch
 						apply = true,
 					}
-					-- SIC works better without undoing changes, probably due to race
+					-- works better without undoing changes, probably due to race?
 					vim.defer_fn(function() -- deferred for code action to update buffer
 						local formattedLines = vim.api.nvim_buf_get_lines(ctx.buf, 0, -1, true)
 						callback(nil, formattedLines)

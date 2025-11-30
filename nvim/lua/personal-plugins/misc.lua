@@ -163,6 +163,7 @@ function M.toggleOrIncrement()
 		["start"] = "end",
 		["backward"] = "forward",
 		["open"] = "close",
+		["inner"] = "outer",
 
 		["and"] = "or",
 		["=="] = "!=",
