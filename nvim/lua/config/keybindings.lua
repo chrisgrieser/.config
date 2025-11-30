@@ -167,6 +167,8 @@ keymap("n", "zl", function()
 		vim.cmd.normal { '"_ciw' .. selection, bang = true }
 	end)
 end, { desc = "󰓆 Spell suggestions" })
+keymap("i", "<D-d>", "<C-x><C-k>", { desc = "󰓆 Suggest dict word" })
+-- execu
 
 -- template strings
 -- stylua: ignore

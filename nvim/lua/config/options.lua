@@ -24,9 +24,10 @@ vim.opt.shadafile = vim.g.iCloudSync .. "/main.shada"
 vim.opt.swapfile = false -- doesn't help and only creates useless files and notifications
 
 vim.opt.spell = false
-vim.opt.spellfile = vim.fn.stdpath("config") .. "/spell/spellfile.add" -- needs `.add` extension
+vim.opt.spellfile = vim.fn.stdpath("config") .. "/spellfile.add" -- needs `.add` extension
 vim.opt.spelllang = "en_us" -- even with spellcheck disabled, still relevant for `z=`
 vim.opt.spelloptions = "camel"
+-- if jit.os == "OSX" then vim.opt.dictionary = "/usr/share/dict/words" end
 
 vim.opt.splitright = true -- split right instead of left
 vim.opt.splitbelow = true -- split down instead of up

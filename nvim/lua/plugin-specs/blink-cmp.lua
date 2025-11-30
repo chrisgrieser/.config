@@ -111,8 +111,7 @@ return {
 				"select_prev",
 				"fallback",
 			},
-			["<S-CR>"] = { "hide" },
-			["<D-c>"] = { "show" },
+			["<D-c>"] = { "show", "hide" },
 			["<PageDown>"] = { "scroll_documentation_down", "fallback" },
 			["<PageUp>"] = { "scroll_documentation_up", "fallback" },
 			["<D-g>"] = { "hide_signature", "fallback" }, -- fallback shows full signature

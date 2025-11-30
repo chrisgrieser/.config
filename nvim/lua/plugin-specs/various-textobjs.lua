@@ -30,6 +30,7 @@ return {
 		{ "gg", "<cmd>lua require('various-textobjs').entireBuffer()<CR>", mode = {"x","o"}, desc = " entire buffer" },
 
 		{ "n", "<cmd>lua require('various-textobjs').nearEoL()<CR>", mode = "o", desc = "󰑀 near EoL" },
+		{ "N", "2n", remap = true, mode = "o", desc = "󰑀 2x near EoL" },
 		{ "w", "<cmd>lua require('various-textobjs').toNextQuotationMark()<CR>", mode = "o", desc = " to next quote" },
 		{ "m", "<cmd>lua require('various-textobjs').toNextClosingBracket()<CR>", mode = "o", desc = "⦈ to closing bracket" },
 		{ "k", "<cmd>lua require('various-textobjs').anyQuote('inner')<CR>", mode = "o", desc = " inner-quote (any)" },
