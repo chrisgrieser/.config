@@ -21,7 +21,7 @@ return {
 		},
 	},
 	keys = {
-		-- MOVE
+		---MOVE-------------------------------------------------------------------
 		{
 			"<C-j>",
 			function()
@@ -39,19 +39,13 @@ return {
 			desc = " Goto prev function",
 		},
 
-		-- SWAP
-		{
-			"ä",
-			function() require("nvim-treesitter-textobjects.swap").swap_next("@parameter.inner") end,
-			desc = " Swap next arg",
-		},
-		{
-			"Ä",
-			function() require("nvim-treesitter-textobjects.swap").swap_previous("@parameter.inner") end,
-			desc = " Swap prev arg",
-		},
+		---SWAP-------------------------------------------------------------------
+		-- stylua: ignore start
+		{ "ä", function() require("nvim-treesitter-textobjects.swap").swap_next("@parameter.inner") end, desc = " Swap next arg" },
+		{ "Ä", function() require("nvim-treesitter-textobjects.swap").swap_previous("@parameter.inner") end, desc = " Swap prev arg" },
+		-- stylua: ignore end
 
-		-- TEXT OBJECTS
+		---TEXT OBJECTS-----------------------------------------------------------
 		{ "a<CR>", select("@return.outer"), mode = { "x", "o" }, desc = "↩ outer return" },
 		{ "i<CR>", select("@return.inner"), mode = { "x", "o" }, desc = "↩ inner return" },
 		{ "a/", select("@regex.outer"), mode = { "x", "o" }, desc = " outer regex" },
@@ -67,7 +61,7 @@ return {
 		{ "ao", select("@conditional.outer"), mode = { "x", "o" }, desc = "󱕆 outer condition" },
 		{ "io", select("@conditional.inner"), mode = { "x", "o" }, desc = "󱕆 inner condition" },
 
-		-- CUSTOM TEXTOBJECTS (defined in my .scm files)
+		---CUSTOM TEXTOBJECTS (defined in my .scm files)--------------------------
 		{ "rl", select("@call.justCaller"), mode = "o", desc = "󰡱 rest of caller" },
 		{
 			"ad",
@@ -91,7 +85,7 @@ return {
 			ft = { "javascript", "typescript", "lua", "swift", "python", "bash", "zsh" },
 		},
 
-		-- COMMENTS
+		---COMMENTS---------------------------------------------------------------
 		-- only operator-pending to not conflict with selection-commenting
 		{ "q", select("@comment.outer"), mode = "o", desc = "󰆈 single comment" },
 
@@ -107,7 +101,19 @@ return {
 			end,
 			desc = "󰆈 Change single comment",
 		},
-
+		{
+			"yQ",
+			function()
+				-- not using `@comment.inner`, since not supported for many languages
+				local cursorBefore = vim.api.nvim_win_get_cursor(0)
+				local selectObj = require("nvim-treesitter-textobjects.select").select_textobject
+				selectObj("@comment.outer", "textobjects")
+				local comStr = vim.bo.commentstring:format("")
+				vim.cmd.normal { "o" .. ("l"):rep(#comStr) .. "y", bang = true }
+				vim.api.nvim_win_set_cursor(0, cursorBefore)
+			end,
+			desc = "󰆈 Yank inner comment",
+		},
 		{
 			"dq",
 			function()

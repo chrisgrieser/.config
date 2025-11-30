@@ -21,7 +21,8 @@ return {
 			["typescript"] = { hl = "MiniIconsCyan" },
 			["vim"] = { glyph = "" }, -- used for `obsidian-vimrc`
 
-			-- plugin-filetypes
+			-- plugin-filetypes or special filetypes
+			["qf"] = { glyph = "" },
 			["ccc-ui"] = { glyph = "" },
 			["scissors-snippet"] = { glyph = "󰩫" },
 			["rip-substitute"] = { glyph = "" },

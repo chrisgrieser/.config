@@ -15,7 +15,7 @@ abbr("fi", "end")
 
 ---@param sign "+"|"-"
 local function plusPlusMinusMinus(sign)
-	local row, col = vim.api.nvim_win_get_cursor(0)[1], vim.api.nvim_win_get_cursor(0)[2] or 0
+	local row, col = unpack(vim.api.nvim_win_get_cursor(0))
 	local textBeforeCursor = vim.api.nvim_get_current_line():sub(col - 1, col)
 	local afterVariable = textBeforeCursor:find("[%w_]%" .. sign)
 	if not afterVariable or vim.fn.mode() == "R" then

@@ -1,7 +1,7 @@
 local bkeymap = require("config.utils").bufKeymap
 local optl = vim.opt_local
---------------------------------------------------------------------------------
 
+---GENERAL----------------------------------------------------------------------
 optl.expandtab = false
 optl.tabstop = 4 -- less nesting in md, so we can afford larger tabstop
 vim.bo.commentstring = "<!-- %s -->" -- add spaces
@@ -9,19 +9,41 @@ vim.bo.commentstring = "<!-- %s -->" -- add spaces
 -- so two trailing spaces are highlighted, but not a single trailing space
 optl.listchars:remove("trail")
 optl.listchars:append { multispace = "·" }
-optl.formatlistpat:append([[\|^\s*>\s\+]]) -- also indent blockquotes for `breakindentopt`
 
 -- since markdown has rarely indented lines, and also rarely has overlong lines,
 -- move everything a bit more to the right
 if vim.bo.buftype == "" then optl.signcolumn = "yes:3" end
 
---------------------------------------------------------------------------------
-
--- Format Table
 bkeymap("n", "<leader>rt", "vip:!pandoc --to=gfm<CR>", { desc = " Format table under cursor" })
 
---------------------------------------------------------------------------------
--- AUTO BULLETS
+---WRAP-------------------------------------------------------------------------
+vim.api.nvim_create_autocmd("InsertLeave", {
+	desc = "User: hard-wrap paragraph",
+	group = vim.api.nvim_create_augroup("auto-hardwrap", { clear = true }),
+	buffer = 0,
+	command = "normal! gww"
+})
+
+-- if soft-wrapping, also indent blockquotes for `breakindentopt`
+optl.formatlistpat:append([[\|^\s*>\s\+]])
+
+---CODEBLOCKS-------------------------------------------------------------------
+bkeymap("i", ",", function()
+	local row, col = unpack(vim.api.nvim_win_get_cursor(0))
+	local textBeforeCursor = vim.api.nvim_get_current_line():sub(col - 1, col)
+	if not afterVariable then
+		vim.api.nvim_feedkeys(",", "n", true) -- pass through the trigger char
+		return
+	end
+
+
+	local clipboard = vim.fn.getreg("+")
+	local lnum, col = unpack(vim.api.nvim_win_get_cursor(0))
+	local curLine = vim.api.nvim_get_current_line()
+	local updated = curLine:gsub("^```", function(match) return match:sub(2) end
+end, { desc = " ,, -> Codeblock"  })
+
+---AUTO BULLETS-----------------------------------------------------------------
 -- (simplified implementation of `bullets.vim`)
 do
 	optl.formatoptions:append("r") -- `<CR>` in insert mode
@@ -46,9 +68,7 @@ do
 	bkeymap("i", "<CR>", function() return autoBullet("<CR>") end, { expr = true })
 end
 
---------------------------------------------------------------------------------
--- HEADINGS
-
+---HEADINGS---------------------------------------------------------------------
 -- Jump to next/prev heading (`##` to skip level 1 and comments in code-blocks)
 bkeymap("n", "<C-j>", [[/^##\+ .*<CR>]], { desc = " Next heading" })
 bkeymap("n", "<C-k>", [[?^##\+ .*<CR>]], { desc = " Prev heading" })
@@ -77,9 +97,7 @@ do
 	bkeymap({ "n", "i" }, "<D-H>", function() headingsIncremantor(-1) end, { desc = " Decrement heading" })
 end
 
---------------------------------------------------------------------------------
-
--- CYCLE LIST TYPES
+---CYCLE LIST TYPES-------------------------------------------------------------
 bkeymap({ "n", "i" }, "<D-u>", function()
 	local lnum, col = unpack(vim.api.nvim_win_get_cursor(0))
 	local curLine = vim.api.nvim_get_current_line()
@@ -97,9 +115,7 @@ bkeymap({ "n", "i" }, "<D-u>", function()
 	vim.api.nvim_win_set_cursor(0, { lnum, math.max(1, col + diff) })
 end, { desc = "󰍔 Cycle list types" })
 
---------------------------------------------------------------------------------
-
--- MARKDOWN PREVIEW
+---MARKDOWN PREVIEW-------------------------------------------------------------
 bkeymap("n", "<leader>ep", function()
 	-- SOURCE https://github.com/sindresorhus/github-markdown-css
 	-- (replace `.markdown-body` with `body` and copypaste the first block)

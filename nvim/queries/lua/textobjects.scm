@@ -4,7 +4,7 @@
 ;───────────────────────────────────────────────────────────────────────────────
 ; just the caller of a function
 (function_call
-  name: (_) @call.caller)
+  name: (_) @call.justCaller)
 
 ; only loop and if conditions
 (while_statement
