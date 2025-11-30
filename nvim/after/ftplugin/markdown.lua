@@ -10,11 +10,22 @@ vim.bo.commentstring = "<!-- %s -->" -- add spaces
 optl.listchars:remove("trail")
 optl.listchars:append { multispace = "·" }
 
--- wrap
-optl.wrap = true
-optl.formatlistpat:append([[\|^\s*>\s\+]]) -- if wrapping, also indent blockquotes via `breakindentopt`
-
 bkeymap("n", "<leader>rt", "vip:!pandoc --to=gfm<CR>", { desc = " Format table under cursor" })
+
+---AUTO HARDWRAP----------------------------------------------------------------
+vim.api.nvim_create_autocmd("InsertLeave", {
+	desc = "User: auto-hard-wrap",
+	group = vim.api.nvim_create_augroup("auto-hardwrap", { clear = true }),
+	buffer = 0,
+	callback = function()
+		local line = vim.api.nvim_get_current_line()
+		if line:find("^[|#]") then return end -- heading or table
+		local node = vim.treesitter.get_node()
+		if node and node:type() == "code_fence_content" then return end
+		if node and node:type() == "html_block" then return end
+		vim.cmd.normal { "gw}", bang = true }
+	end,
+})
 
 ---CODEBLOCKS-------------------------------------------------------------------
 -- typing `,,lang,,` creates a codeblock for `lang` with dedented clipboard
