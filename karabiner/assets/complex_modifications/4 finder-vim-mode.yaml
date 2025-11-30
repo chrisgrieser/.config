@@ -103,7 +103,7 @@ rules:
           - key_code: down_arrow
           - key_code: down_arrow
           - key_code: down_arrow
-        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
       # K: 6k
       - type: basic
         from: { key_code: k, modifiers: { mandatory: [shift] } }
@@ -114,18 +114,18 @@ rules:
           - key_code: up_arrow
           - key_code: up_arrow
           - key_code: up_arrow
-        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
       # g(g), G,
       - type: basic
         from: { key_code: g }
         to:
           - { key_code: up_arrow, modifiers: [option] }
-        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
       - type: basic
         from: { key_code: g, modifiers: { mandatory: [shift] } }
         to_if_alone:
           - { key_code: down_arrow, modifiers: [option] }
-        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
       #─────────────────────────────────────────────────────────────────────────
       # :help
       # "?" on German keyboard
@@ -325,7 +325,7 @@ rules:
         from: { key_code: a }
         to_if_alone:
           - { key_code: a, modifiers: [command] }
-        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
       # A = select only files
       - type: basic
         from: { key_code: a, modifiers: { mandatory: [shift] } }
@@ -334,14 +334,14 @@ rules:
           # windows https://www.reddit.com/r/applescript/comments/uz9axo/comment/iayjrn4/?context=3
           - shell_command: |
               osascript -e ' tell application "Finder" to set the selection to files of Finder window 1'
-        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
       # MULTI-SELECT
       # <S-Space> = add down to selection
       - type: basic
         from: { key_code: spacebar, modifiers: { mandatory: [shift] } }
         to:
           - { key_code: down_arrow, modifiers: [shift] }
-        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
       #─────────────────────────────────────────────────────────────────────────
       # c = context menu ("right-click")
       - type: basic
@@ -415,11 +415,11 @@ rules:
         from: { key_code: d }
         to_if_alone:
           - { key_code: delete_or_backspace, modifiers: [command] }
-        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
       # D = open trash
       - type: basic
         from: { key_code: d, modifiers: { mandatory: [shift] } }
-        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
         to:
           # to open the "unified" trash (iCloud trash + user trash), needs to use
           # AppleScript and not `open "$HOME/.Trash"`
@@ -442,7 +442,12 @@ rules:
               "$HOME/.config/karabiner/assets/finder-vim-mode/notificator" \
                 --title "Finder Vim Mode" --message "✅ File(s) copied"
         conditions:
-          [*finder-app, *not-insert-mode, *move-inactive, *not-find-mode, *is-German-keyboard]
+          - *finder-app
+          - *not-insert-mode
+          - *move-inactive
+          - *not-find-mode
+          - *no-menu-open
+          - *is-German-keyboard
       - type: basic
         from: { key_code: "y" }
         to:
@@ -451,7 +456,12 @@ rules:
               "$HOME/.config/karabiner/assets/finder-vim-mode/notificator" \
                 --title "Finder Vim Mode" --message "✅ File(s) copied"
         conditions:
-          [*finder-app, *not-insert-mode, *move-inactive, *not-find-mode, *not-German-keyboard]
+          - *finder-app
+          - *not-insert-mode
+          - *move-inactive
+          - *not-find-mode
+          - *no-menu-open
+          - *not-German-keyboard
       # Y = yank (copy) file *content*
       - type: basic
         from: { key_code: z, modifiers: { mandatory: [shift] } } # y = z in German Keyboard
@@ -470,7 +480,12 @@ rules:
               "$HOME/.config/karabiner/assets/finder-vim-mode/notificator" \
                 --title "Finder Vim Mode" --message "$msg"
         conditions:
-          [*finder-app, *not-insert-mode, *move-inactive, *not-find-mode, *is-German-keyboard]
+          - *finder-app
+          - *not-insert-mode
+          - *move-inactive
+          - *not-find-mode
+          - *no-menu-open
+          - *is-German-keyboard
       - type: basic
         from: { key_code: y, modifiers: { mandatory: [shift] } }
         to:
@@ -481,7 +496,12 @@ rules:
               "$HOME/.config/karabiner/assets/finder-vim-mode/notificator" \
                 --title "Finder Vim Mode" --message "✅ File content copied"
         conditions:
-          [*finder-app, *not-insert-mode, *move-inactive, *not-find-mode, *not-German-keyboard]
+          - *finder-app
+          - *not-insert-mode
+          - *move-inactive
+          - *not-find-mode
+          - *no-menu-open
+          - *not-German-keyboard
         # comma: copy filepath
       - type: basic
         from: { key_code: comma }
@@ -501,7 +521,7 @@ rules:
               export LC_CTYPE="en_US.UTF-8" ; printf "$filepath" | pbcopy
               "$HOME/.config/karabiner/assets/finder-vim-mode/notificator" \
                   --title "✅ Filepath copied" --message "$filepath"
-        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
       # shift-comma: copy filename
       - type: basic
         from: { key_code: comma, modifiers: { mandatory: [shift] } }
@@ -521,13 +541,13 @@ rules:
               export LC_CTYPE="en_US.UTF-8" ; printf "$filename" | pbcopy
               "$HOME/.config/karabiner/assets/finder-vim-mode/notificator" \
                   --title "✅ Filename copied" --message "$filename"
-        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
       # p = paste file
       - type: basic
         from: { key_code: p }
         to_if_alone:
           - { key_code: v, modifiers: [command] }
-        conditions: [*finder-app, *not-insert-mode, *move-inactive, *not-find-mode]
+        conditions: [*finder-app, *not-insert-mode, *no-menu-open, *not-find-mode, *move-inactive]
       # P = paste (append) text *into* file
       - type: basic
         from: { key_code: p, modifiers: { mandatory: [shift] } }
@@ -542,13 +562,13 @@ rules:
               fi
               "$HOME/.config/karabiner/assets/finder-vim-mode/notificator" \
                 --title "Finder Vim Mode" --message "$msg"
-        conditions: [*finder-app, *not-insert-mode, *move-inactive, *not-find-mode]
+        conditions: [*finder-app, *not-insert-mode, *no-menu-open, *not-find-mode, *move-inactive]
       # w = duplicate (mnemonic: double-u)
       - type: basic
         from: { key_code: w }
         to_if_alone:
           - { key_code: d, modifiers: [command] }
-        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
       # x = cross-move items to other Finder window (if exactly 2 Finder windows)
       - type: basic
         from: { key_code: x }
@@ -581,7 +601,7 @@ rules:
               ')
               [[ -n "$error" ]] && "$HOME/.config/karabiner/assets/finder-vim-mode/notificator" \
                 --title "Finder Vim Mode" --message "$error"
-        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
       # X = cross-copy (duplicate)
       - type: basic
         from: { key_code: x, modifiers: { mandatory: [shift] } }
@@ -614,7 +634,7 @@ rules:
               ')
               [[ -n "$error" ]] && "$HOME/.config/karabiner/assets/finder-vim-mode/notificator" \
                 --title "Finder Vim Mode" --message "$error"
-        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
       # v = open first volume
       - type: basic
         from: { key_code: v }
@@ -632,7 +652,7 @@ rules:
                 set the_volume to (\"$first_volume\" as POSIX file)
                 tell application \"Finder\" to open the_volume
               ")
-        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
       # u = undo
       - type: basic
         from: { key_code: u }
@@ -673,7 +693,7 @@ rules:
           - { key_code: n, modifiers: [control, command] }
           - *enter-insert-mode # since folder renaming is also triggered
           - *insert-notice
-        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
       # n = New File
       - type: basic
         from: { key_code: n }
@@ -696,7 +716,7 @@ rules:
                 afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/begin_record.caf" &
           - *enter-insert-mode # since renaming is triggered
           - *insert-notice
-        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
       # b = Toggle `.bkp` (Backup).
       - type: basic
         from: { key_code: b }
@@ -732,7 +752,7 @@ rules:
               done
               [[ -z "$FINDER_VIM_MODE_NO_SOUND" ]] && 
                 afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/begin_record.caf" &
-        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
       # s = Create Symlink
       - type: basic
         from: { key_code: s }
@@ -758,13 +778,13 @@ rules:
               open -R "$first_symlink"
               [[ -z "$FINDER_VIM_MODE_NO_SOUND" ]] && 
                 afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/begin_record.caf" &
-        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
       # S = follow symlink (or alias)
       - type: basic
         from: { key_code: s, modifiers: { mandatory: [shift] } }
         to:
           - { key_code: r, modifiers: [command] }
-        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
       # z = zip files
       # (if single directory is selected, zip its file contents instead)
       - type: basic
@@ -1046,18 +1066,18 @@ rules:
           - { key_code: c, modifiers: [command] }
           - *start-move
           - *move-notice
-        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
       # p / cmd+v = paste content marked for move thing
       - type: basic
         from: { key_code: p }
-        conditions: [*finder-app, *not-insert-mode, *not-find-mode, *move-active]
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open, *move-active]
         to:
           - { key_code: v, modifiers: [command, option] }
           - *end-move
           - *remove-move-notice
       - type: basic
         from: { key_code: v, modifiers: { mandatory: [command] } }
-        conditions: [*finder-app, *not-insert-mode, *not-find-mode, *move-active]
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open, *move-active]
         to:
           - { key_code: v, modifiers: [command, option] }
           - *end-move
@@ -1073,7 +1093,7 @@ rules:
               "$HOME/.config/karabiner/assets/finder-vim-mode/notificator" \
                 --title "Finder Vim Mode" --message "✅ File(s) copied"
         conditions:
-          [*finder-app, *not-insert-mode, *not-find-mode, *move-active, *not-German-keyboard]
+          [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open, *move-active, *not-German-keyboard]
       - type: basic
         from: { key_code: z } # y and z switched on German keyboard
         to:
@@ -1081,14 +1101,14 @@ rules:
           - *end-move
           - *remove-move-notice
         conditions:
-          [*finder-app, *not-insert-mode, *not-find-mode, *move-active, *is-German-keyboard]
+          [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open, *move-active, *is-German-keyboard]
       - type: basic
         from: { key_code: c, modifiers: { mandatory: [command] } }
         to:
           - { key_code: c, modifiers: [command] }
           - *end-move
           - *remove-move-notice
-        conditions: [*finder-app, *not-insert-mode, *not-find-mode, *move-active]
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open, *move-active]
       #─────────────────────────────────────────────────────────────────────────
       #─────────────────────────────────────────────────────────────────────────
       # SORT BY
@@ -1102,7 +1122,7 @@ rules:
                 afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/end_record.caf" &
               "$HOME/.config/karabiner/assets/finder-vim-mode/notificator" \
                 --title "Finder Vim Mode" --message "⬇️ Sort by name"
-        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
       - type: basic # by modification date
         from: { key_code: "left_arrow" }
         to:
@@ -1113,7 +1133,7 @@ rules:
                 afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/end_record.caf" &
               "$HOME/.config/karabiner/assets/finder-vim-mode/notificator" \
                 --title "Finder Vim Mode" --message "⬅️ Sort by modification date"
-        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
       - type: basic # by size
         from: { key_code: "up_arrow" }
         to:
@@ -1124,7 +1144,7 @@ rules:
                 afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/end_record.caf" &
               "$HOME/.config/karabiner/assets/finder-vim-mode/notificator" \
                 --title "Finder Vim Mode" --message "⬆️ Sort by size"
-        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
       - type: basic # by kind
         from: { key_code: "right_arrow" }
         to:
@@ -1135,7 +1155,7 @@ rules:
                 afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/end_record.caf" &
               "$HOME/.config/karabiner/assets/finder-vim-mode/notificator" \
                 --title "Finder Vim Mode" --message "➡️ Sort by kind"
-        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
       - type: basic # by tags
         from: { key_code: "end" }
         to:
@@ -1146,7 +1166,7 @@ rules:
                 afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/end_record.caf" &
               "$HOME/.config/karabiner/assets/finder-vim-mode/notificator" \
                 --title "Finder Vim Mode" --message "🔚 Sort by tags"
-        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
       #─────────────────────────────────────────────────────────────────────────
       #─────────────────────────────────────────────────────────────────────────
       # NUMBER KEYS: TOGGLE TAGS
@@ -1154,42 +1174,42 @@ rules:
       - type: basic
         from: { key_code: "1" }
         to: [{ key_code: "1", modifiers: [control] }, *sound-for-tagging]
-        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
       - type: basic
         from: { key_code: "2" }
         to: [{ key_code: "2", modifiers: [control] }, *sound-for-tagging]
-        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
       - type: basic
         from: { key_code: "3" }
         to: [{ key_code: "3", modifiers: [control] }, *sound-for-tagging]
-        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
       - type: basic
         from: { key_code: "4" }
         to: [{ key_code: "4", modifiers: [control] }, *sound-for-tagging]
-        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
       - type: basic
         from: { key_code: "5" }
         to: [{ key_code: "5", modifiers: [control] }, *sound-for-tagging]
-        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
       - type: basic
         from: { key_code: "6" }
         to: [{ key_code: "6", modifiers: [control] }, *sound-for-tagging]
-        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
       - type: basic
         from: { key_code: "7" }
         to: [{ key_code: "7", modifiers: [control] }, *sound-for-tagging]
-        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
       - type: basic
         from: { key_code: "8" }
         to: [{ key_code: "8", modifiers: [control] }, *sound-for-tagging]
-        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
       - type: basic
         from: { key_code: "9" }
         to: [{ key_code: "9", modifiers: [control] }, *sound-for-tagging]
-        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
       # remove all tags
       - type: basic
         from: { key_code: "0" }
         to: [{ key_code: "0", modifiers: [control] }, *sound-for-tagging]
-        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
       #─────────────────────────────────────────────────────────────────────────

@@ -27,9 +27,8 @@ function run(argv) {
 	// EXAMPLE Highlights "YlijokiMantyla2003_Conflicting Time Perspectives in Academic Work.pdf – Page 1 of 24"
 	// CAVEAT PDF Expert lacks the page number, thus falling back to `0`
 	// INFO assumes that PDF files are have the format `{citekey}_{title}.pdf`
-	const [_, citekey, currentPage] = pdfWinTitle.match(/(.*?)_.* (?:Page (\d+) of \d+)?/) || [];
-	console.log("🪚 currentPage:", currentPage);
-	const pageInPdf = Number.parseInt(currentPage || "0");
+	const [_, citekey, currentPageStr] = pdfWinTitle.match(/(.*?)_.*(?:Page (\d+) of \d+)?/) || [];
+	const currentPage = Number.parseInt(currentPageStr || "0");
 
 	if (!citekey && !currentPage) {
 		app.setTheClipboardTo(selection);
@@ -48,7 +47,7 @@ function run(argv) {
 		}
 		// e.g.: pages = {55--78},
 		const firstTruePage = Number.parseInt(entry.match(/pages ?= ?\{(\d+)-+\d+\},/)?.[1] || "0");
-		trueCurrentPage = pageInPdf + firstTruePage - 1;
+		trueCurrentPage = currentPage + firstTruePage - 1;
 	}
 	const citation = `@${citekey}, p. ${trueCurrentPage || currentPage}`;
 
