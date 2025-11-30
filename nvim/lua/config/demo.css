@@ -1,6 +1,0 @@
-
-body ul.no-list.this-is-another,
-body ol.no-list {
-	padding: 0;
-	list-style-type: none;
-}

@@ -63,11 +63,15 @@ return {
 
 		---CUSTOM TEXTOBJECTS (defined in ./queries/*/textobjects.scm)--------------------------
 		{ "rl", select("@call.justCaller"), mode = "o", desc = "󰡱 rest of caller" },
+		{ "is", select("@selector.inner"), mode = { "x", "o" }, ft = "css", desc = " inner selector" },
+		{ "as", select("@selector.outer"), mode = { "x", "o" }, ft = "css", desc = " outer selector" },
+		{ "iP", select("@pipeline.inner"), mode = { "x", "o" }, ft = "zsh", desc = "󰟥 inner pipeline" },
+		{ "aP", select("@pipeline.outer"), mode = { "x", "o" }, ft = "zsh", desc = "󰟥 outer pipeline" },
+		{ "ix", select("@htmlparam.inner"), mode = { "x", "o" }, desc = "inner html param" },
+		{ "ax", select("@htmlparam.outer"), mode = { "x", "o" }, desc = "outer html param" },
+		-- stylua: ignore start
 		{ "il", select("@mdlink.inner"), mode={"x","o"}, ft = "markdown", desc = "󰍔 inner mdlink" },
 		{ "al", select("@mdlink.outer"), mode={"x","o"}, ft = "markdown", desc = "󰍔 outer mdlink" },
-		{ "as", select("@selector.outer"), mode={"x","o"}, ft = "css", desc = "css selector" },
-		{ "is", select("@selector.inner"), mode={"x","o"}, ft = "css", desc = "css selector" },
-		-- stylua: ignore start
 		{ "ad", select("@docstring.outer"), mode={"x","o"}, desc = "󰌠 outer docstring", ft = "python" },
 		{ "id", select("@docstring.inner"), mode={"x","o"}, desc = "󰌠 inner docstring", ft = "python" },
 		{ "aE", select("@codeblock.outer"), mode={"x","o"}, desc = "󰍔 outer codeblock", ft = "markdown" },
