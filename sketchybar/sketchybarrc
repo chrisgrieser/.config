@@ -89,10 +89,5 @@ sketchybar \
 	--add event repo_files_update \
 	--subscribe sync_indicator system_woke repo_files_update \
 	\
-	--add item japanese_word $row_2 \
-	--set japanese_word update_freq="600" \
-	script="./components/japanese_word/japanese_word.sh" \
-	click_script="./components/japanese_word/japanese_word.sh" \
-	\
 	\                                                                           \
 	--update # needs to run at the end of config and should not be run in an item script
