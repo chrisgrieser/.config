@@ -164,6 +164,7 @@ function M.toggleOrIncrement()
 		["above"] = "below",
 		["start"] = "end",
 		["backward"] = "forward",
+		["upwards"] = "downwards",
 		["open"] = "close",
 		["inner"] = "outer",
 

@@ -25,6 +25,7 @@ vim.api.nvim_create_autocmd("InsertLeave", {
 		local node = vim.treesitter.get_node()
 		while node do
 			if node:type() == "code_fence_content" then return end
+			if node:type() == "html_block" then return end
 			if vim.startswith(node:type(), "pipe_table") then return end
 			node = node:parent()
 		end
