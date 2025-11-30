@@ -25,8 +25,10 @@ end
 
 ---Wraps text with markdown links, automatically inserting the URL if in a
 ---Markdown link if the `+` register has a URL. In normal mode, can undo.
----@param wrap string|"mdlink"
-function M.mdWrap(wrap)
+---@param startWrap string|"mdlink"
+---@param endWrap? string defaults to `startWrap`
+function M.mdWrap(startWrap, endWrap)
+	if not endWrap then endWrap = startWrap end
 	local mode = vim.fn.mode()
 	if mode == "V" then
 		vim.notify("Visual line mode is not supported", vim.log.levels.WARN)
@@ -40,9 +42,9 @@ function M.mdWrap(wrap)
 		vim.cmd.normal { '"zy', bang = true }
 		text = vim.fn.getreg("z")
 	end
-	local insert = wrap .. text .. wrap
+	local insert = startWrap .. text .. endWrap
 	local clipboardUrl
-	if wrap == "mdlink" then
+	if startWrap == "mdlink" then
 		clipboardUrl = vim.fn.getreg("+"):match([[%l%l%l+://[^%s)%]}"'`>]+]]) or ""
 		insert = ("[%s](%s)"):format(text, clipboardUrl)
 	end
@@ -51,7 +53,7 @@ function M.mdWrap(wrap)
 	local prevOpt = vim.opt.iskeyword:get()
 	local shouldUndo = false
 	if mode == "n" then
-		vim.opt.iskeyword:append(wrap:sub(1, 1))
+		vim.opt.iskeyword:append({startWrap:sub(1, 1), endWrap:sub(1, 1)})
 		shouldUndo = vim.fn.expand("<cword>") == insert
 		if shouldUndo then insert = text end
 	end
@@ -70,11 +72,11 @@ function M.mdWrap(wrap)
 	end
 
 	-- cursor movement
-	if wrap == "mdlink" then
+	if startWrap == "mdlink" then
 		vim.api.nvim_win_set_cursor(0, { row, col + 1 })
 		if clipboardUrl == "" and text ~= "" then vim.cmd.normal { "f)", bang = true } end
 	else
-		local offset = shouldUndo and -#wrap or #wrap
+		local offset = shouldUndo and -#startWrap or #startWrap
 		vim.api.nvim_win_set_cursor(0, { row, col + offset })
 	end
 	if text == "" or clipboardUrl == "" then vim.cmd.startinsert() end
