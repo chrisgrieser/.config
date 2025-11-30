@@ -3,7 +3,7 @@ local M = {}
 
 local config = {
 	formatterWantsPadding = { "python", "swift", "toml" },
-	hrChar = "_",
+	hrChar = "-",
 }
 
 ---HELPERS----------------------------------------------------------------------
