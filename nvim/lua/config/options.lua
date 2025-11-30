@@ -123,6 +123,8 @@ vim.opt.fillchars:append {
 	eob = " ",
 	msgsep = "═",
 	lastline = "↓",
+	horiz = "═",
+	vert = "║",
 }
 
 ---DIAGNOSTICS------------------------------------------------------------------
