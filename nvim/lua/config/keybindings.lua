@@ -183,13 +183,18 @@ end, { desc = "󰆿 Multi-edit selection", expr = true })
 keymap("n", "m", "J", { desc = "󰽜 Merge line up" })
 keymap("n", "M", "<cmd>. move +1<CR>kJ", { desc = "󰽜 Merge line down" }) -- `:move` preserves marks
 
--- Markdown syntax (for comments useful to have in all filetypes)
+-- Markdown syntax (useful to have in all filetypes for comments)
 -- stylua: ignore start
 keymap({ "n", "x", "i" }, "<D-e>", function() require("personal-plugins.misc").mdWrap("`") end, { desc = " Inline code" })
 keymap({ "n", "x", "i" }, "<D-k>", function() require("personal-plugins.misc").mdWrap("mdlink") end, { desc = " Link" })
 keymap({ "n", "x", "i" }, "<D-b>", function() require("personal-plugins.misc").mdWrap("**") end, { desc = " Bold" })
 keymap({ "n", "x", "i" }, "<D-i>", function() require("personal-plugins.misc").mdWrap("*") end, { desc = " Italic" })
+
+-- simple surrounds
 keymap("n", '"', function() require("personal-plugins.misc").mdWrap('"') end, { desc = ' Surround' })
+keymap("n", "(", function() require("personal-plugins.misc").mdWrap("(", ")") end, { desc = "󰅲 Surround" })
+keymap("n", "[", function() require("personal-plugins.misc").mdWrap("[", "]") end, { desc = "󰅪 Surround" })
+keymap("n", "{", function() require("personal-plugins.misc").mdWrap("{", "}") end, { desc = " Surround" })
 -- stylua: ignore end
 
 -- exit snippet
@@ -395,8 +400,8 @@ end, { expr = true, desc = "<BS> does not leave cmdline" })
 
 ---INSPECT & EVAL---------------------------------------------------------------
 keymap("n", "<leader>ii", vim.cmd.Inspect, { desc = "󱈄 Highlights at cursor" })
-keymap("n", "<leader>it", vim.cmd.InspectTree, { desc = " :InspectTree" })
-keymap("n", "<leader>ip", "<cmd>checkhealth nvim-treesitter<CR>", { desc = " TS Parsers" })
+keymap("n", "<leader>it", vim.cmd.InspectTree, { desc = " TS Tree" })
+keymap("n", "<leader>iT", "<cmd>checkhealth nvim-treesitter<CR>", { desc = " TS Parsers" })
 keymap("n", "<leader>id", function()
 	local diag = vim.diagnostic.get_next()
 	vim.notify(vim.inspect(diag), nil, { ft = "lua" })
@@ -418,8 +423,6 @@ keymap("n", "<leader>ey", function()
 end, { desc = "󰘳 Yank last ex-cmd" })
 
 ---WINDOWS & SPLITS-------------------------------------------------------------
-
--- stylua: ignore
 keymap({ "n", "v", "i" }, "<C-CR>", "<C-w>w", { desc = " Cycle windows" })
 keymap({ "n", "x" }, "<C-v>", "<cmd>vertical leftabove split<CR>", { desc = " Vertical split" })
 keymap({ "n", "x" }, "<D-W>", vim.cmd.only, { desc = " Close other windows" })
@@ -431,11 +434,10 @@ keymap("n", "<C-Right>", "<C-w>5>")
 
 ---BUFFERS & FILES--------------------------------------------------------------
 
--- stylua: ignore
+-- stylua: ignore start
 keymap({ "n", "x" }, "<CR>", function() require("personal-plugins.magnet").gotoAltFile() end, { desc = "󰬈 Goto alt-file" })
-
--- stylua: ignore
 keymap({ "n", "x" }, "<D-CR>", function() require("personal-plugins.magnet").gotoMostChangedFile() end, { desc = "󰊢 Goto most changed file" })
+-- stylua: ignore end
 
 -- close window or buffer
 keymap({ "n", "x", "i" }, "<D-w>", function()
