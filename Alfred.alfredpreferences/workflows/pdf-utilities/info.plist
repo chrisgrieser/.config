@@ -552,6 +552,7 @@
 				<integer>0</integer>
 				<key>relatedApps</key>
 				<array>
+					<string>com.readdle.PDFExpert-Mac</string>
 					<string>net.highlightsapp.universal</string>
 				</array>
 				<key>relatedAppsMode</key>

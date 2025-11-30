@@ -241,7 +241,7 @@ do
 	keymap("n", "Y", function()
 		vim.b.cursorPreYank = vim.api.nvim_win_get_cursor(0)
 		return "y$"
-	end, { expr = true, unique = false })
+	end, { expr = true, unique = false }) -- non-unique, since nvim default
 
 	vim.api.nvim_create_autocmd("TextYankPost", {
 		desc = "User: Sticky yank",
@@ -259,7 +259,7 @@ do
 	-- same as regular `p`, but when undoing the paste and then using `.`, will
 	-- paste `"2p`, so `<C-p>..... pastes all recent deletions and `pu.u.u.u.`
 	-- cycles through them
-	keymap("n", "<C-p>", '"1p', { desc = " Cyclic paste" })
+	keymap("n", "<D-p>", '"1p', { desc = " Cyclic paste" })
 
 	vim.api.nvim_create_autocmd("TextYankPost", {
 		desc = "User: Yankring",
@@ -303,7 +303,6 @@ keymap("n", "<D-v>", "p", { desc = " Paste" }) -- compatibility w/ macOS clip
 keymap("n", "qp", "R<C-r>+<Esc>", { desc = " Paste replacing" })
 
 ---TEXTOBJECTS------------------------------------------------------------------
-
 local textobjRemaps = {
 	{ "c", "}", "", "curly" }, -------- [c]urly brace
 	{ "r", "]", "󰅪", "rectangular" }, -- [r]ectangular bracket
@@ -337,8 +336,10 @@ keymap("n", "qw", function() require("personal-plugins.comment").commentHr() end
 keymap("n", "qr", function() require("personal-plugins.comment").commentHr("replaceModeLabel") end, { desc = "󰆈 Horizontal divider w/ label" })
 keymap("n", "wq", function() require("personal-plugins.comment").duplicateLineAsComment() end, { desc = "󰆈 Duplicate line as comment" })
 keymap("n", "qf", function() require("personal-plugins.comment").docstring() end, { desc = "󰆈 Function docstring" })
-keymap("n", "Q", function() require("personal-plugins.comment").addCommentAtEol() end, { desc = "󰆈 Add comment at EoL" })
-require("personal-plugins.comment").setup()
+keymap("n", "Q", function() require("personal-plugins.comment").addComment("eol") end, { desc = "󰆈 Add comment at EoL" })
+keymap("n", "qO", function() require("personal-plugins.comment").addComment("above") end, { desc = "󰆈 Add comment above" })
+keymap("n", "qo", function() require("personal-plugins.comment").addComment("below") end, { desc = "󰆈 Add comment below" })
+require("personal-plugins.comment").setupReplaceModeHelpersForComments()
 -- stylua: ignore end
 
 ---LINE & CHARACTER MOVEMENT----------------------------------------------------

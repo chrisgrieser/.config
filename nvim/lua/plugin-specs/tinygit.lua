@@ -49,8 +49,8 @@ return {
 		statusline = {
 			blame = {
 				hideAuthorNames = { "Chris Grieser", "chrisgrieser" },
-				ignoreAuthors = { "🤖 automated" },
-				maxMsgLen = 72,
+				showOnlyTimeIfAuthor = { "🤖 automated" },
+				maxMsgLen = 50,
 			},
 			fileState = { icon = "" },
 		},
