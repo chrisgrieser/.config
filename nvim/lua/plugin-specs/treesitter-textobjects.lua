@@ -63,20 +63,14 @@ return {
 
 		---CUSTOM TEXTOBJECTS (defined in my .scm files)--------------------------
 		{ "rl", select("@call.justCaller"), mode = "o", desc = "󰡱 rest of caller" },
-		{
-			"ad",
-			select("@docstring.outer"),
-			mode = { "x", "o" },
-			desc = "󰌠 outer docstring",
-			ft = "python",
-		},
-		{
-			"id",
-			select("@docstring.inner"),
-			mode = { "x", "o" },
-			desc = "󰌠 inner docstring",
-			ft = "python",
-		},
+		{ "il", select("@mdlink.inner"), mode={"x","o"}, ft = "markdown", desc = "󰍔 inner mdlink" },
+		{ "al", select("@mdlink.outer"), mode={"x","o"}, ft = "markdown", desc = "󰍔 outer mdlink" },
+		-- stylua: ignore start
+		{ "ad", select("@docstring.outer"), mode={"x","o"}, desc = "󰌠 outer docstring", ft = "python" },
+		{ "id", select("@docstring.inner"), mode={"x","o"}, desc = "󰌠 inner docstring", ft = "python" },
+		{ "aE", select("@codeblock.outer"), mode={"x","o"}, desc = "󰍔 outer codeblock", ft = "markdown" },
+		{ "iE", select("@codeblock.inner"), mode={"x","o"}, desc = "󰍔 inner codeblock", ft = "markdown" },
+		-- stylua: ignore end
 		{ -- override default inner conditional for some languages
 			"io",
 			select("@conditional.conditionOnly"),
@@ -100,19 +94,6 @@ return {
 				vim.cmd.startinsert { bang = true }
 			end,
 			desc = "󰆈 Change single comment",
-		},
-		{
-			"yQ",
-			function()
-				-- not using `@comment.inner`, since not supported for many languages
-				local cursorBefore = vim.api.nvim_win_get_cursor(0)
-				local selectObj = require("nvim-treesitter-textobjects.select").select_textobject
-				selectObj("@comment.outer", "textobjects")
-				local comStr = vim.bo.commentstring:format("")
-				vim.cmd.normal { "o" .. ("l"):rep(#comStr) .. "y", bang = true }
-				vim.api.nvim_win_set_cursor(0, cursorBefore)
-			end,
-			desc = "󰆈 Yank inner comment",
 		},
 		{
 			"dq",
