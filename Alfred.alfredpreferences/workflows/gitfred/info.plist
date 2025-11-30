@@ -2166,9 +2166,9 @@ to set a hotkey to clone the repo in the frontmost browser tab</string>
 				<key>defaultvalue</key>
 				<integer>5</integer>
 				<key>markercount</key>
-				<integer>11</integer>
+				<integer>21</integer>
 				<key>maxvalue</key>
-				<integer>50</integer>
+				<integer>100</integer>
 				<key>minvalue</key>
 				<integer>0</integer>
 				<key>onlystoponmarkers</key>
@@ -2230,7 +2230,7 @@ to set a hotkey to clone the repo in the frontmost browser tab</string>
 			<key>description</key>
 			<string>Restores the modification time of files that git removes when cloning. "full" restores the mtime for every file, but is very slow on large repos. "partial" is magnitudes quicker, but restores the mtime only for files touched in the last x commits. When shallow-cloning (clone depth &gt; 0), this workflow will always use "partial".</string>
 			<key>label</key>
-			<string>Restore mtime</string>
+			<string></string>
 			<key>type</key>
 			<string>popupbutton</string>
 			<key>variable</key>

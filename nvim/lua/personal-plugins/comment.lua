@@ -4,7 +4,6 @@ local M = {}
 local config = {
 	formatterWantsPadding = { "python", "swift", "toml" },
 	hrChar = "-",
-	useReplaceModeHelpersForComments = true,
 }
 
 ---HELPERS----------------------------------------------------------------------
@@ -18,8 +17,7 @@ local function getCommentstr()
 	return comStr
 end
 
-function M.setup()
-	if not config.useReplaceModeHelpersForComments then return end
+function M.setupReplaceModeHelpersForComments()
 	vim.api.nvim_create_autocmd("ModeChanged", {
 		desc = "User: uppercase the line when leaving replace mode on a comment",
 		pattern = "r:*", -- left replace-mode
@@ -157,8 +155,8 @@ end
 
 --------------------------------------------------------------------------------
 
----@param where "eol"|"above"|"below"
-function M.addCommentAtEol(where)
+---@param where? "eol"|"above"|"below"
+function M.addComment(where)
 	local comStr = getCommentstr()
 	if not comStr then return end
 	local lnum = vim.api.nvim_win_get_cursor(0)[1]

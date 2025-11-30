@@ -5,7 +5,7 @@
 	<key>branch_on_clone</key>
 	<string>dev</string>
 	<key>clone_depth</key>
-	<integer>15</integer>
+	<integer>40</integer>
 	<key>fork_on_clone</key>
 	<true/>
 	<key>github_token_shell_cmd</key>

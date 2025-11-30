@@ -21,9 +21,14 @@ function run(argv) {
 
 	//───────────────────────────────────────────────────────────────────────────
 
-	const pdfWinTitle = Application("System Events").processes.Highlights?.windows[0]?.name();
-	// e.g.: "YlijokiMantyla2003_Conflicting Time Perspectives in Academic Work.pdf – Page 1 of 24"
-	// REQUIRED assumes that PDF files are have the format `{citekey}_{title}.pdf`
+	const pdfApp =
+		Application("System Events").processes.Highlights ||
+		Application("System Events").processes["PDF Expert"];
+	const pdfWinTitle = pdfApp.windows[0]?.name();
+	if (!pdfWinTitle) return "⚠️ No PDF window open.";
+
+	// EXAMPLE "YlijokiMantyla2003_Conflicting Time Perspectives in Academic Work.pdf – Page 1 of 24"
+	// INFO assumes that PDF files are have the format `{citekey}_{title}.pdf`
 	const [_, citekey, currentPage] = pdfWinTitle.match(/(.*?)_.* Page (\d+) of \d+/) || [];
 	const pageInPdf = Number.parseInt(currentPage || "0");
 
