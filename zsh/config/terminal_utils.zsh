@@ -187,7 +187,7 @@ function d {
 function ..d() {
 	# GUARD
 	if [[ ! "$PWD" =~ /Developer/ ]]; then
-		print '\e[0;33mCan only delete inside subfolder of "~/Developer".\e[0m'
+		print "\e[0;33mCan only delete inside subfolder of \$HOME/Developer.\e[0m"
 		return 1
 	elif [[ -n $(git log --branches --not --remotes) ]]; then
 		print '\e[0;33mRepo has unpushed commits.\e[0m'
@@ -200,39 +200,14 @@ function ..d() {
 		echo && inspect_venv
 	fi
 
+	# goto root
+	cd "$(git rev-parse --show-toplevel)" || return 1
+
 	# INFO `cd .` to trigger cd-hook *after* deletion
 	cd -q .. && trash "$OLDPWD" && cd .
 }
 
-#───────────────────────────────────────────────────────────────────────────────
-
-# interactive `jq`
-function ij {
-	# Read stdin into a temp file if data is provided via stdin
-	if ! [[ -t 0 ]]; then
-		file="$(mktemp)"
-		trap 'rm -f "$file"' EXIT
-		cat > "$file"
-	else
-		file="$1"
-	fi
-
-	final_query=$(
-		jq --raw-output ". |keys[]" "$file" | fzf \
-			--query="." --prompt="jq > " --no-info --disabled \
-			--bind="enter:transform-query(echo {q}.{+} | sed -Ee 's/\.([[:digit:]])$/[\1]/' -e 's/\.\././g' -e 's/\.$//' )" \
-			--bind="change:reload(jq --raw-output {q}'|keys[]' '$file')" \
-			--bind="esc:cancel" \
-			--bind="bs:backward-kill-word" \
-			--height="100%" --preview-window="60%" \
-			--preview="jq --color-output {q} '$file'"
-	)
-	[[ -z "$final_query" ]] && return 0
-	echo -n "$final_query" | pbcopy
-	print "\e[1;32mQuery copied:\e[0m $final_query"
-}
-
-#───────────────────────────────────────────────────────────────────────────────
+#-------------------------------------------------------------------------------
 
 # check website online status
 function watch_website {
@@ -248,3 +223,33 @@ function watch_website {
 	echo "🌐 $url is online again"
 	"$ZDOTDIR/notificator" --title "🌐 $url" --message "is online again" --sound "Blow"
 }
+
+#-------------------------------------------------------------------------------
+
+# interactive `jq`
+function ij {
+	# Read stdin into a temp file if data is provided via stdin
+	if ! [[ -t 0 ]]; then
+		file="$(mktemp)"
+		trap 'rm -f "$file"' EXIT
+		cat > "$file"
+	else
+		file="$1"
+	fi
+
+	final_query=$(
+		jq --raw-output ". |keys[]" "$file" | fzf \
+			--query="." --prompt="jq > " --no-info --disabled \
+			--bind='enter:transform-query(echo {q}.{+} | sed -Ee "s/\.([[:digit:]])$/[\1]/" -e "s/\.\././g" -e "s/\.$//" )' \
+			--bind="change:reload(jq --raw-output {q}'|keys[]' '$file')" \
+			--bind="esc:cancel" \
+			--bind="bs:backward-kill-word" \
+			--height="100%" --preview-window="60%" \
+			--preview="jq --color-output {q} '$file'"
+	)
+	[[ -z "$final_query" ]] && return 0
+	echo -n "$final_query" | pbcopy
+	print "\e[1;32mQuery copied:\e[0m $final_query"
+}
+
+#-------------------------------------------------------------------------------
