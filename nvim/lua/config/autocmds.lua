@@ -9,13 +9,22 @@ vim.api.nvim_create_autocmd("VimResized", {
 	command = "wincmd =",
 })
 
-vim.api.nvim_create_autocmd("FileType", {
+vim.api.nvim_create_autocmd("BufReadPost", {
 	desc = "User: Restore cursor position",
 	callback = function(ctx)
 		if vim.bo[ctx.buf].buftype ~= "" then return end
 		vim.cmd([[silent! normal! g`"]])
 	end,
 })
+
+-- https://github.com/neovim/neovim/issues/26449#issuecomment-1845293096
+-- using an insertmode mapping on `esc` breaks `:abbreviate`
+vim.api.nvim_create_autocmd("WinScrolled", {
+	desc = "User: exit snippet",
+	callback = function() vim.snippet.stop() end,
+})
+
+
 
 ---LSP CODELENS-----------------------------------------------------------------
 do
@@ -29,7 +38,7 @@ do
 		callback = enableCodeLens,
 	})
 	vim.api.nvim_create_autocmd("LspProgress", {
-		desc = "User: initialize codelense on first buffer",
+		desc = "User: initialize CodeLense on first buffer",
 		once = true,
 		callback = enableCodeLens,
 	})

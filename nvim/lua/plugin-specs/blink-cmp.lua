@@ -2,32 +2,6 @@
 -- DOCS https://cmp.saghen.dev/configuration/reference
 --------------------------------------------------------------------------------
 
----PENDING https://github.com/Saghen/blink.cmp/issues/743
----Choice snippets[^1] work with blink, but leave you with a completion via
----vim's popupmenu, for which blink does not provide mappings, thus requiring
----this function
----[^1]: https://code.visualstudio.com/docs/editing/userdefinedsnippets#_choice
----@param action "next"|"prev"|"select"|"select_and_snippet_forward"
----@return boolean success (popupmenu was open)
-local function vimPopupmenu(action)
-	if vim.fn.pumvisible() == 0 then return false end -- `false` -> attempt next command in blink.cmp
-
-	-- https://neovim.io/doc/user/insert.html#_insert-completion-popup-menu
-	local key
-	if action == "next" then key = "<C-n>" end
-	if action == "prev" then key = "<C-p>" end
-	if action:find("select") then key = "<C-y>" end
-	-- `feedkey` needed to send keys from insert mode
-	local feedkey = vim.api.nvim_replace_termcodes(key, true, false, true)
-	vim.api.nvim_feedkeys(feedkey, "n", false)
-
-	if action:find("snippet_forward") then vim.schedule(function() vim.snippet.jump(1) end) end
-
-	return true -- `true` -> do not attempt next command in blink.cmp
-end
-
---------------------------------------------------------------------------------
-
 return {
 	"saghen/blink.cmp",
 	event = { "InsertEnter", "CmdlineEnter" },
@@ -94,36 +68,23 @@ return {
 		keymap = {
 			-- https://cmp.saghen.dev/configuration/keymap.html
 			preset = "none",
-			["<CR>"] = {
-				function() return vimPopupmenu("select_and_snippet_forward") end,
-				"select_and_accept",
-				"fallback",
-			},
-			["<Tab>"] = {
-				function() return vimPopupmenu("next") end,
-				"snippet_forward",
-				"select_next",
-				"fallback",
-			},
-			["<S-Tab>"] = {
-				function() return vimPopupmenu("prev") end,
-				"snippet_backward",
-				"select_prev",
-				"fallback",
-			},
+			["<CR>"] = { "select_and_accept", "fallback" },
+			["<Tab>"] = { "snippet_forward", "select_next", "fallback" },
+			["<S-Tab>"] = { "snippet_backward", "select_prev", "fallback" },
 			["<D-c>"] = { "show", "hide" },
 			["<PageDown>"] = { "scroll_documentation_down", "fallback" },
 			["<PageUp>"] = { "scroll_documentation_up", "fallback" },
+			["<D-g>"] = { "show_signature", "hide_signature" },
 		},
 		signature = {
-			-- BUG https://github.com/Saghen/blink.cmp/issues/1670
-			-- signature disabled and using `lsp-signature` in the meantime
-			enabled = false,
+			enabled = true,
 			trigger = {
-				show_on_insert = true,
-				show_on_insert_on_trigger_character = true,
 				show_on_accept = true,
 				show_on_accept_on_trigger_character = true,
+
+				-- BUG https://github.com/Saghen/blink.cmp/issues/1670
+				show_on_insert = false,
+				show_on_insert_on_trigger_character = false,
 			},
 			window = {
 				max_width = 60,
