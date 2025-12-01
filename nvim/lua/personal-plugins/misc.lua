@@ -349,6 +349,7 @@ function M.scrollLspOrOtherWin(lines)
 
 	if not winid then
 		vim.notify("No other window found.", vim.log.levels.WARN)
+		return
 	end
 	vim.api.nvim_win_call(winid, function()
 		local topline = vim.fn.winsaveview().topline
