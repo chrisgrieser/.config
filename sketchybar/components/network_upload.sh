@@ -1,7 +1,12 @@
 #!/usr/bin/env zsh
 
 # CONFIG
-threshold_kb=50
+threshold_kb=20
+
+if [[ "$SENDER" == "forced" ]]; then # avoid flickering on reload
+	sketchybar --set "$NAME" drawing=false
+	return 0
+fi
 #───────────────────────────────────────────────────────────────────────────────
 
 # `netstat` only outputs as stream, so using `awk`'s `exit` to return the 1st value

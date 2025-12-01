@@ -2,6 +2,11 @@
 
 # CONFIG
 threshold_kb=100
+
+if [[ "$SENDER" == "forced" ]]; then # avoid flickering on reload
+	sketchybar --set "$NAME" drawing=false
+	return 0
+fi
 #───────────────────────────────────────────────────────────────────────────────
 
 # `netstat` only outputs as stream, so using `awk`'s `exit` to return 1st value
