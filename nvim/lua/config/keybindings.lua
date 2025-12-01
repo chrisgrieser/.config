@@ -56,9 +56,7 @@ keymap(
 	{ desc = " Open cwd in WezTerm" }
 )
 
---------------------------------------------------------------------------------
--- NAVIGATION
-
+---NAVIGATION-------------------------------------------------------------------
 -- make j/k on wrapped lines
 keymap({ "n", "x" }, "j", "gj")
 keymap({ "n", "x" }, "k", "gk")
@@ -91,7 +89,6 @@ keymap("n", "gE", "[d", { desc = "󰋼 Previous diagnostic", remap = true })
 keymap("n", "<D-U>", function() require("personal-plugins.misc").openUrlInBuffer() end, { desc = " Open URL in buffer" })
 
 ---MARKS------------------------------------------------------------------------
-
 do
 	local marks = require("personal-plugins.marks")
 

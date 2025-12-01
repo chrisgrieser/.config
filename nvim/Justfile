@@ -1,7 +1,7 @@
 set quiet := true
 
 debugConfig := "./debug/repro.lua"
-debugFile := "./debug/test-file.lua"
+debugFile := "./debug/test.scm"
 
 #───────────────────────────────────────────────────────────────────────────────
 
