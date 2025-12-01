@@ -401,6 +401,7 @@ keymap("n", "<leader>it", vim.cmd.InspectTree, { desc = " TS Syntax Tree" })
 keymap("n", "<leader>iT", "<cmd>checkhealth nvim-treesitter<CR>", { desc = " TS Parsers" })
 keymap("n", "<leader>id", function()
 	local diag = vim.diagnostic.get_next()
+	local fff
 	vim.notify(vim.inspect(diag), nil, { ft = "lua" })
 end, { desc = "󰋽 Next diagnostic" })
 
@@ -409,7 +410,11 @@ keymap("n", "<leader>iL", function() vim.cmd.edit(vim.lsp.log.get_filename()) en
 keymap("n", "<leader>ib", function() require("personal-plugins.misc").inspectBuffer() end, { desc = "󰽙 Buffer info" })
 -- stylua: ignore end
 
-keymap("n", "<leader>ee", ":lua = ", { desc = "󰢱 Eval lua expr" })
+keymap({ "n", "x" }, "<leader>ee", function()
+	local selection = vim.fn.mode() == "n" and ""
+		or vim.fn.getregion(vim.fn.getpos("."), vim.fn.getpos("v"))[1]
+	return ":lua = " .. selection
+end, { expr = true, desc = "󰢱 Eval selection" })
 keymap("n", "<leader>ey", function()
 	local cmd = vim.fn.getreg(":")
 	local syntax = vim.startswith(cmd, "lua") and "lua" or "vim"
@@ -443,11 +448,8 @@ keymap({ "n", "x", "i" }, "<D-w>", function()
 	if winClosed then return end
 
 	local bufCount = #vim.fn.getbufinfo { buflisted = 1 }
-	if bufCount == 1 then
-		vim.notify("Only one buffer open.", vim.log.levels.TRACE)
-	else
-		vim.cmd.bdelete()
-	end
+	if bufCount == 1 then return vim.notify("Only one buffer open.", vim.log.levels.TRACE) end
+	vim.cmd.bdelete()
 end, { desc = "󰽙 Close window/buffer" })
 
 keymap("n", "<BS>", function()

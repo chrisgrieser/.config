@@ -4,13 +4,15 @@ local M = {}
 local config = {
 	formatterWantsPadding = { "python", "swift", "toml" },
 	hrChar = "-",
+	ignoreReplaceModeHelpers = { "markdown" },
 }
 
 ---HELPERS----------------------------------------------------------------------
+
 ---@return string?
 local function getCommentstr()
 	local comStr = vim.bo.commentstring
-	if not comStr or comStr == "" then
+	if comStr == "" then
 		vim.notify("No commentstring for " .. vim.bo.ft, vim.log.levels.WARN, { title = "Comment" })
 		return
 	end
@@ -22,17 +24,17 @@ function M.setupReplaceModeHelpersForComments()
 		desc = "User: uppercase the line when leaving replace mode on a comment",
 		pattern = "r:*", -- left replace-mode
 		callback = function(ctx)
-			if vim.bo[ctx.buf].filetype == "markdown" then return end
+			if config.ignoreReplaceModeHelpers[vim.bo[ctx.buf].ft] then return end
 			local line = vim.trim(vim.api.nvim_get_current_line())
 			local comChars = vim.trim(vim.bo.commentstring:format(""))
 			if vim.startswith(line, comChars) then vim.cmd.normal { "gUU", bang = true } end
 		end,
 	})
 	vim.api.nvim_create_autocmd("ModeChanged", {
-		desc = "User: automatically enter replace mode right position",
+		desc = "User: automatically enter replace mode at lbale position",
 		pattern = "*:r", -- entered replace-mode
 		callback = function(ctx)
-			if vim.bo[ctx.buf].filetype == "markdown" then return end
+			if config.ignoreReplaceModeHelpers[vim.bo[ctx.buf].ft] then return end
 			local line = vim.trim(vim.api.nvim_get_current_line())
 			local comChars = vim.trim(vim.bo.commentstring:format(""))
 			if vim.startswith(line, comChars) then
@@ -42,7 +44,7 @@ function M.setupReplaceModeHelpersForComments()
 	})
 end
 
---------------------------------------------------------------------------------
+---COMMANDS---------------------------------------------------------------------
 
 ---add horizontal line with the language's comment syntax and correctly indented
 ---@param replaceModeLabel any
@@ -152,8 +154,6 @@ function M.docstring()
 		vim.notify(ft .. " is not supported.", vim.log.levels.WARN, { title = "docstring" })
 	end
 end
-
---------------------------------------------------------------------------------
 
 ---@param where? "eol"|"above"|"below"
 function M.addComment(where)
