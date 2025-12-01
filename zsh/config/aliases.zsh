@@ -1,27 +1,29 @@
-# SHORTHANDS
-alias q=' exit'     # leading space to ignore it in history due to `HIST_IGNORE_SPACE`
-alias r=' exec zsh' # do not reload with `source ~/.zshrc`, https://github.com/ohmyzsh/ohmyzsh/wiki/FAQ#how-do-i-reload-the-zshrc-file
-alias ydl='yt-dlp'  # cause I can never remember the name
-alias i='which'     # `i` for [i]nspect
+# shorthands
+alias q=" exit"     # leading space to ignore it in history due to `HIST_IGNORE_SPACE`
+alias r=" exec zsh" # do not reload with `source ~/.zshrc`, https://github.com/ohmyzsh/ohmyzsh/wiki/FAQ#how-do-i-reload-the-zshrc-file
+alias ydl="yt-dlp"  # cause I can never remember the name
+alias i="which"     # `i` for [i]nspect
 
-# DEFAULTS
-alias mv='mv -vi'
-alias ln='ln -vwis'
-alias cp='cp -vi'
-alias rm='rm -I'
-alias vidir='vidir --verbose'
-alias curl='curl --progress-bar'
-alias zip='zip --recurse-paths --symlinks'
+# defaults
+alias mv="mv -vi"
+alias ln="ln -vwis"
+alias cp="cp -vi"
+alias rm="rm -I"
+alias vidir="vidir --verbose"
+alias curl="curl --progress-bar"
+alias zip="zip --recurse-paths --symlinks"
 
-#───────────────────────────────────────────────────────────────────────────────
+# eza
+alias e='eza --all --sort=newest --hyperlink --no-quotes --ignore-glob=".DS_Store" '
+alias ee='eza --all --sort=newest --hyperlink --no-quotes --ignore-glob=".DS_Store" \
+	--time-style=relative --no-user --total-size --smart-group --long'
 
-# JUST
-alias j='just'
-alias ji='just init'
-alias jr='just release'
+# just
+alias j="just"
+alias ji="just init"
+alias jr="just release"
 
-#───────────────────────────────────────────────────────────────────────────────
-
+#-WRAPPER FUNCTIONS-------------------------------------------------------------
 function which { # colorized & showing all
 	builtin which -a "$@" | bat --language=sh --wrap=character
 }
@@ -38,8 +40,6 @@ function gh { # lazy load GITHUB_TOKEN for extra security
 	gh "$@"
 }
 
-#───────────────────────────────────────────────────────────────────────────────
-
 # 1. Define `pass cd` as pseudo-subcommand to go to the password store directory.
 # 2. Set `USING_PASS`, so nvim can detect `pass` and disable plugins.
 function pass {
@@ -51,8 +51,7 @@ function pass {
 }
 alias pw="pass"
 
-#───────────────────────────────────────────────────────────────────────────────
-# GLOBAL ALIASES
+#-GLOBAL ALIASES----------------------------------------------------------------
 alias -g G='| rg'
 alias -g B='| bat'
 alias -g N='| wc -l | tr -d " "' # count lines
