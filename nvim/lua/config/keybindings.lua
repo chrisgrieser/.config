@@ -128,6 +128,7 @@ keymap("n", "ww", function() require("personal-plugins.misc").smartDuplicate() e
 
 -- Toggles
 keymap("n", "~", "v~", { desc = "󰬴 Toggle char case (w/o moving)" })
+
 -- stylua: ignore
 keymap("n", "<", function() require("personal-plugins.misc").toggleTitleCase() end, { desc = "󰬴 Toggle lower/Title case" })
 keymap("n", ">", "gUiw", { desc = "󰬴 Uppercase cword" })
@@ -161,7 +162,6 @@ keymap("n", "zl", function()
 		vim.cmd.normal { '"_ciw' .. selection, bang = true }
 	end)
 end, { desc = "󰓆 Spell suggestions" })
-keymap("i", "<D-d>", "<C-x><C-k>", { desc = "󰓆 Suggest dict word" })
 
 -- template strings
 -- stylua: ignore
