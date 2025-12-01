@@ -29,8 +29,6 @@ vim.api.nvim_create_autocmd("WinScrolled", {
 ---LSP CODELENS-----------------------------------------------------------------
 do
 	local function enableCodeLens(ctx)
-		local ft = vim.bo[ctx.buf].filetype
-		if ft == "markdown" then return end -- useless info that heading is referenced in ToC
 		vim.lsp.codelens.refresh { bufnr = ctx.buf }
 	end
 	vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained" }, {

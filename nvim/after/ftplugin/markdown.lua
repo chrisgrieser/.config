@@ -22,13 +22,13 @@ vim.api.nvim_create_autocmd("InsertLeave", {
 	group = vim.api.nvim_create_augroup("auto-hardwrap", { clear = true }),
 	buffer = 0,
 	callback = function(ctx)
+		local line, node = vim.api.nvim_get_current_line(), vim.treesitter.get_node()
 		if vim.bo[ctx.buf].buftype ~= "" then return end
-		local line = vim.api.nvim_get_current_line()
+		if not line:sub(81):find(" ") then return end -- markdownlint's `line-length` spec
 		if line:find("^[|#]") then return end -- heading or table
-		local node = vim.treesitter.get_node()
 		if node and node:type() == "code_fence_content" then return end
 		if node and node:type() == "html_block" then return end
-		vim.cmd.normal { "gw}", bang = true }
+		vim.cmd.normal { "gww", bang = true }
 	end,
 })
 
