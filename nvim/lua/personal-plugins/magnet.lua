@@ -73,20 +73,24 @@ local function fmtPathForStatusbar(path)
 	return displayName
 end
 
----@return string|nil altBufferName, nil if no alt buffer
+---@return string|nil altBufferName ; nil if no alt buffer
 ---@nodiscard
 local function getAltBuffer()
-	local altBufnr = vim.fn.bufnr("#")
-	if altBufnr < 0 then return end
-	local valid = vim.api.nvim_buf_is_valid(altBufnr)
-	local nonSpecial = vim.bo[altBufnr].buftype == "" or vim.bo[altBufnr].buftype == "help"
-	local moreThanOneBuffer = #(vim.fn.getbufinfo { buflisted = 1 }) > 1
-	local currentBufNotAlt = vim.api.nvim_get_current_buf() ~= altBufnr -- fixes weird vim bug
-	local altBufExists = vim.uv.fs_stat(vim.api.nvim_buf_get_name(altBufnr)) ~= nil
+	local listedBufs = vim.fn.getbufinfo { buflisted = 1 }
+	if listedBufs == 1 then return end
+	table.sort(
+		listedBufs,
+		function(a, b) return (a.lastused or 0) > (b.lastused or 0) end
+	)
+	local altBuf = vim.iter(listedBufs):find(function(buf)
+		local valid = vim.api.nvim_buf_is_valid(buf.bufnr)
+		local nonSpecial = vim.bo[buf.bufnr].buftype == ""
+		local notCurrent = vim.api.nvim_get_current_buf() ~= buf.bufnr
+		local exists = vim.uv.fs_stat(buf.name) ~= nil
+		return valid and nonSpecial and notCurrent and exists
+	end)
 
-	if valid and nonSpecial and moreThanOneBuffer and currentBufNotAlt and altBufExists then
-		return vim.api.nvim_buf_get_name(altBufnr)
-	end
+	return altBuf and altBuf.name or nil
 end
 
 ---get the alternate oldfile, accounting for non-existing files

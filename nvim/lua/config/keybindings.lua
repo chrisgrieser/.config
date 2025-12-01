@@ -446,9 +446,7 @@ keymap({ "n", "x", "i" }, "<D-w>", function()
 	if bufCount == 1 then
 		vim.notify("Only one buffer open.", vim.log.levels.TRACE)
 	else
-		local bufPath = vim.api.nvim_buf_get_name(0)
-		table.insert(vim.v.oldfiles, 1, bufPath)
-		vim.cmd.bwipeout() -- as opposed to `:bdelete`, does not leave the buffer in oldfiles
+		vim.cmd.bdelete()
 	end
 end, { desc = "󰽙 Close window/buffer" })
 
