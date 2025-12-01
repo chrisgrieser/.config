@@ -331,6 +331,7 @@ keymap("n", "qf", function() require("personal-plugins.comment").docstring() end
 keymap("n", "Q", function() require("personal-plugins.comment").addComment("eol") end, { desc = "󰆈 Add comment at EoL" })
 keymap("n", "qO", function() require("personal-plugins.comment").addComment("above") end, { desc = "󰆈 Add comment above" })
 keymap("n", "qo", function() require("personal-plugins.comment").addComment("below") end, { desc = "󰆈 Add comment below" })
+keymap("n", "gS", function() require("personal-plugins.comment").gotoCommentHeader() end, { desc = "󰆈 Goto comment header" })
 require("personal-plugins.comment").setupReplaceModeHelpersForComments()
 -- stylua: ignore end
 

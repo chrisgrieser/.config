@@ -42,7 +42,7 @@ return {
 				mastodon = { pattern = "%.social/@", icon = " " },
 				linkedin = { pattern = "linkedin%.com", icon = "󰌻 " },
 				researchgate = { pattern = "researchgate%.net", icon = "󰙨 " },
-				researchgate = { pattern = "researchgate%.net", icon = "󰙨 " },
+				doi = { pattern = "doi%.org", icon = "󰑴 " },
 
 				-- tech companies
 				apple = { pattern = "apple%.com", icon = " " },
@@ -59,7 +59,10 @@ return {
 				techcrunch = { pattern = "techcrunch%.com", icon = "󰰥 " },
 				wired = { pattern = "wired%.com", icon = "󰬞 " },
 				nytimes = { pattern = "nytimes%.com", icon = "󰎕 " },
+				bloomberg = { pattern = "bloomberg%.com", icon = "󰎕 " },
+				guardian = { pattern = "theguardian%.com", icon = "󰎕 " },
 				zeit = { pattern = "zeit%.de", icon = "󰎕 " },
+				spiegel = { pattern = "spiegel%.de", icon = "󰎕 " },
 			},
 		},
 		-- makes toggling this plugin also toggle conceallevel

@@ -92,8 +92,19 @@ function M.commentHr(replaceModeLabel)
 	end
 end
 
-function M.selectCommentHeader()
+function M.gotoCommentHeader()
+	local lines = vim.api.nvim_buf_get_lines(0, 0, -1, true)
+	local commentHeaderLines = vim.tbl_filter(function(line)
+		local comChars = vim.trim(vim.bo.commentstring:format(""))
+		return line:find("%s*".. vim.pesc(comChars.. config.hrChar) .. con )
+	end, lines)
 
+	vim.ui.select(commentHeaderLines, {
+		prompt = "Comment Headers",
+	}, function (selection)
+		if not selection then return end
+
+	end)
 end
 
 function M.duplicateLineAsComment()
@@ -192,8 +203,8 @@ function M.addComment(where)
 	local newLine = emptyLine and indent or line .. spacing
 
 	-- write line
-	comStr = comStr:gsub("%%s", ""):gsub(" *$", "") .. " "
-	vim.api.nvim_set_current_line(newLine .. comStr)
+	local comChars = vim.trim(comStr:format("")) .. " "
+	vim.api.nvim_set_current_line(newLine .. comChars)
 
 	-- move cursor
 	if placeHolderAtEnd then

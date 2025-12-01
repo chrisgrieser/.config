@@ -34,8 +34,8 @@
     "prefix": "PENDING (+url)"
   },
   "REQUIREMENTS": {
-    "body": "$LINE_COMMENT REQUIREMENTS",
-    "prefix": "REQUIREMENTS"
+    "body": "$LINE_COMMENT REQUIREMENTS $0",
+    "prefix": "REQUIRED"
   },
   "SOURCE (+ url)": {
     "body": "$LINE_COMMENT SOURCE $0$CLIPBOARD",
