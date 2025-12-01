@@ -449,7 +449,7 @@ rules:
           - *no-menu-open
           - *is-German-keyboard
       - type: basic
-        from: { key_code: "y" }
+        from: { key_code: y }
         to:
           - { key_code: c, modifiers: [command] }
           - shell_command: |
@@ -1084,7 +1084,7 @@ rules:
           - *remove-move-notice
       # y / cmd+c = yank, which also aborts move
       - type: basic
-        from: { key_code: "y" }
+        from: { key_code: y }
         to:
           - { key_code: c, modifiers: [command] }
           - *end-move

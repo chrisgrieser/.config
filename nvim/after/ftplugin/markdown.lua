@@ -10,6 +10,10 @@ vim.bo.commentstring = "<!-- %s -->" -- add spaces
 optl.listchars:remove("trail")
 optl.listchars:append { multispace = "·" }
 
+-- since markdown has rarely indented lines, and also rarely has overlong lines,
+-- move everything a bit more to the right
+if vim.bo.buftype == "" then optl.signcolumn = "yes:4" end
+
 bkeymap("n", "<leader>rt", "vip:!pandoc --to=gfm<CR>", { desc = " Format table under cursor" })
 
 ---AUTO HARDWRAP----------------------------------------------------------------
