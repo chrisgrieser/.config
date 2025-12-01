@@ -65,7 +65,6 @@
 [diff]
 	algorithm = histogram ; https://luppeng.wordpress.com/2020/10/10/when-to-use-each-of-the-git-diff-algorithms/
 	colorMoved = true ; moved lines colored different than added/removed
-	relative = true
 
 ; view docx diffs https://spiffyk.cz/blog/git-pandoc/
 [diff "pandoc"]
@@ -82,9 +81,3 @@
 	hyperlinks = true
 	side-by-side = false
 ;────────────────────────────────────────────────────────────────────────────
-
-; ALTERNATE CONFIGURATION FOR SPECIFIC REPO
-; 1. needs to come AFTER the config they intend to overwrite
-; 2. test via `git config --get --show-origin user.name`
-[includeIf "gitdir:PLACEHOLDER"]
-	path = "./alternative-config"

@@ -61,7 +61,6 @@ local ccSpec = {
 	init = function() vim.g.whichkeyAddSpec { "<leader>a", group = " AI" } end,
 	config = function(_, opts)
 		require("codecompanion").setup(opts)
-
 		spinnerNotificationWhileRequest()
 
 		vim.api.nvim_create_autocmd("User", {
@@ -76,11 +75,12 @@ local ccSpec = {
 		})
 	end,
 	keys = {
-		-- stylua: ignore start
 		{ "<leader>ac", "<cmd>CodeCompanionChat toggle<CR>", desc = " Chat (toggle)" },
 		{ "<leader>an", "<cmd>CodeCompanionChat<CR>", desc = " Chat (new)" },
 		{ "<leader>aa", ":CodeCompanion<CR>", mode = "x", desc = " 󰘎 Prompt" },
+
 		-- builtin-prompts https://github.com/olimorris/codecompanion.nvim/blob/main/lua/codecompanion/config.lua
+		-- stylua: ignore start
 		{ "<leader>ae", function() require("codecompanion").prompt("explain") end, mode = "x", desc = " Explain" },
 		{ "<leader>af", function() require("codecompanion").prompt("fix") end, mode = "x", desc = " Fix" },
 		-- my own prompts
@@ -90,7 +90,18 @@ local ccSpec = {
 	},
 	opts = {
 		display = {
-			diff = { enabled = true }, -- https://codecompanion.olimorris.dev/configuration/chat-buffer.html#diff
+			diff = {
+				enabled = true,
+				inline = {
+					layout = "float", -- float|buffer
+					opts = {
+						context_lines = 3, -- Number of context lines in hunks
+						dim = 25, -- Background dim level for floating diff (0-100, [100 full transparent], only applies when layout = "float")
+						show_keymap_hints = true, -- Show "gda: accept | gdr: reject" hints above diff
+						show_removed = true, -- Show removed lines as virtual text
+					},
+				},
+			}, -- https://codecompanion.olimorris.dev/configuration/chat-buffer.html#diff
 
 			-- https://codecompanion.olimorris.dev/configuration/chat-buffer.html
 			chat = {
@@ -107,9 +118,17 @@ local ccSpec = {
 					},
 				},
 			},
+
 		},
 		strategies = {
-			inline = { adapter = "openai" },
+			inline = {
+				adapter = "openai",
+				keymaps = {
+					accept_change = { modes = { n = "ga" } },
+					reject_change = { modes = { n = "gb" } },
+					always_accept = { modes = { n = "gy" } },
+				},
+			},
 			chat = {
 				adapter = "openai",
 				keymaps = {

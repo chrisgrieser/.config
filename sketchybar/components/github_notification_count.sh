@@ -5,11 +5,18 @@ _export_github_token
 
 #───────────────────────────────────────────────────────────────────────────────
 
-# GUARD not when on projector
+if [[ "$SENDER" == "forced" ]]; then # avoid flickering on reload
+	sketchybar --set "$NAME" drawing=false
+	return 0
+fi
+
+# not on projector
 if [[ $(system_profiler SPDisplaysDataType | grep -c Resolution) -gt 1 ]]; then
 	sketchybar --set "$NAME" drawing=false
 	return 0
-elif [[ -z "$GITHUB_TOKEN" ]]; then
+fi
+
+if [[ -z "$GITHUB_TOKEN" ]]; then
 	sketchybar --set "$NAME" label="NO TOKEN" drawing=true
 	return 1
 fi
