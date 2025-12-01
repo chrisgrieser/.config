@@ -372,6 +372,8 @@ local favicons = {
 	stackoverflow = "󰓌",
 	ycombinator = "",
 	youtube = "",
+	slack = "󰒱",
+	discord = "󰙯",
 }
 
 local function addFavicons(bufnr)
@@ -544,4 +546,3 @@ if jit.os == "OSX" then
 	})
 end
 --------------------------------------------------------------------------------
-

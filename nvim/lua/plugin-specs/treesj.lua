@@ -1,4 +1,4 @@
--- DOCS https://github.com/Wansmer/treesj?tab=readme-ov-file#basic-node
+-- DOCS https://github.com/Wansmer/treesj#basic-node
 --------------------------------------------------------------------------------
 
 return {
@@ -18,7 +18,7 @@ return {
 		max_join_length = math.huge,
 	},
 	config = function(_, opts)
-		local gww = { both = { fallback = function() vim.cmd("normal! gww") end } }
+		local reflow = { both = { fallback = function() vim.cmd("normal! gw}") end } }
 		local joinWithoutCurly = {
 			-- remove curly brackets in js when joining if statements https://github.com/Wansmer/treesj/issues/150
 			statement_block = {
@@ -62,9 +62,9 @@ return {
 			},
 		}
 		opts.langs = {
-			comment = { source = gww, element = gww }, -- comments in any language
-			lua = { comment = gww },
-			jsdoc = { source = gww, description = gww },
+			comment = { source = reflow, element = reflow }, -- comments in any language
+			lua = { comment = reflow },
+			jsdoc = { source = reflow, description = reflow },
 			javascript = joinWithoutCurly,
 			typescript = joinWithoutCurly,
 			swift = swiftConfig,
