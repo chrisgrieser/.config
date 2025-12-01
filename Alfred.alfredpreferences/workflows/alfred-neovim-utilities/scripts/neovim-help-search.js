@@ -61,7 +61,7 @@ function run() {
 				subtitle: site,
 				arg: url,
 				mods: {
-					cmd: { arg: name },
+					cmd: { arg: name }, // copy command/function name
 				},
 				quicklookurl: url,
 				uid: url,
@@ -71,7 +71,7 @@ function run() {
 	return JSON.stringify({
 		items: items,
 		cache: {
-			// seconds: 3600 * 24 * 7, // every week
+			seconds: 3600 * 24 * 7, // every week
 			loosereload: true,
 		},
 	});

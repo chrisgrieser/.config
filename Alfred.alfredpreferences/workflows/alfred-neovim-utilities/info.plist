@@ -63,12 +63,35 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>15B20F5E-E701-4582-A8A9-E390689BE4A9</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>⌘: Copy command or function name</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
 		</array>
 		<key>15317DBA-B342-4CB9-9F08-0CBA70D39C07</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
 				<string>38E62E4E-8B37-483B-BBE3-257C2DD7EA30</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>15B20F5E-E701-4582-A8A9-E390689BE4A9</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>15317DBA-B342-4CB9-9F08-0CBA70D39C07</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -304,12 +327,20 @@
 				<key>text</key>
 				<string>{query}</string>
 				<key>title</key>
-				<string>✅ Copied</string>
+				<string>📋 Copied</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
 			<string>38E62E4E-8B37-483B-BBE3-257C2DD7EA30</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.junction</string>
+			<key>uid</key>
+			<string>15B20F5E-E701-4582-A8A9-E390689BE4A9</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -539,27 +570,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string></string>
-				<key>title</key>
-				<string>⚠️ {query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>F5BC25CE-C34C-4EF9-B428-71EDB9170948</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>alfredfiltersresults</key>
 				<true/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -632,6 +642,27 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>⚠️ {query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>F5BC25CE-C34C-4EF9-B428-71EDB9170948</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>openwith</key>
 				<string></string>
 				<key>sourcefile</key>
@@ -649,7 +680,8 @@
 	<string>## Commands
 - `:h`: Search the Neovim [online :help](https://neovim.io/doc/).
 	+ &lt;kbd&gt;⏎&lt;/kbd&gt;: Open the respective help.
-	+ &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy the help URL to the clipboard.
+	+ &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy the help URL.
+	+ &lt;kbd&gt;⌘⏎&lt;/kbd&gt;: Copy the command or function name.
 - `np`: Search [store.nvim](https://github.com/alex-popov-tech/store.nvim)
   for Neovim plugins (mnemonic: `[n]vim [p]lugins`).
 	+ &lt;kbd&gt;⏎&lt;/kbd&gt;: Open the GitHub repo.
@@ -718,9 +750,18 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>9</integer>
 			<key>xpos</key>
-			<real>220</real>
+			<real>320</real>
 			<key>ypos</key>
 			<real>135</real>
+		</dict>
+		<key>15B20F5E-E701-4582-A8A9-E390689BE4A9</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>9</integer>
+			<key>xpos</key>
+			<real>230</real>
+			<key>ypos</key>
+			<real>165</real>
 		</dict>
 		<key>26EB4BCF-56A8-43E4-AED6-0C121B00D55E</key>
 		<dict>
@@ -738,7 +779,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>9</integer>
 			<key>xpos</key>
-			<real>370</real>
+			<real>470</real>
 			<key>ypos</key>
 			<real>135</real>
 		</dict>
@@ -840,7 +881,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>9</integer>
 			<key>xpos</key>
-			<real>220</real>
+			<real>320</real>
 			<key>ypos</key>
 			<real>20</real>
 		</dict>

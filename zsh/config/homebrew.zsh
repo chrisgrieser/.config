@@ -1,7 +1,7 @@
 # DOCS https://docs.brew.sh/Manpage#environment
 #───────────────────────────────────────────────────────────────────────────────
 export HOMEBREW_BUNDLE_FILE="$HOME/.config/Brewfile"
-export HOMEBREW_EDITOR="open" # open in default macOS text editor
+export HOMEBREW_EDITOR="open" # open things in default macOS text editor
 
 export HOMEBREW_UPGRADE_GREEDY_CASKS="obsidian" # to also update installer version
 export HOMEBREW_DISPLAY_INSTALL_TIMES=1         # also serves as summary what was installed
