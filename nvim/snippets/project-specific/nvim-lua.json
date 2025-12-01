@@ -114,6 +114,10 @@
     ],
     "prefix": "get visual selection"
   },
+  "leave visual mode": {
+    "body": "vim.cmd.normal { vim.fn.mode(), bang = true } -- leave visual mode",
+    "prefix": "leave visual mode"
+  },
   "minimum version requirement": {
     "body": [
       "local version = vim.version()",
