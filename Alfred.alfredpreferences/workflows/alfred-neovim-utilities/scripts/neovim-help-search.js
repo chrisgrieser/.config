@@ -20,8 +20,8 @@ function camelCaseMatch(str) {
 
 /** @param {string} url @return {string} */
 function httpRequest(url) {
-	const queryURL = $.NSURL.URLWithString(url);
-	const data = $.NSData.dataWithContentsOfURL(queryURL);
+	const queryUrl = $.NSURL.URLWithString(url);
+	const data = $.NSData.dataWithContentsOfURL(queryUrl);
 	return $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding).js;
 }
 
@@ -52,7 +52,7 @@ function run() {
 
 			// matcher improvements
 			let matcher = camelCaseMatch(name) + site + camelCaseMatch(synonyms);
-			if (site === "builtin") matcher += " fn";
+			if (site === "vimfn") matcher += " fn";
 			if (name.includes("_hl")) matcher += " highlight";
 
 			return {
@@ -60,6 +60,9 @@ function run() {
 				match: matcher,
 				subtitle: site,
 				arg: url,
+				mods: {
+					cmd: { arg: name },
+				},
 				quicklookurl: url,
 				uid: url,
 			};
@@ -68,7 +71,7 @@ function run() {
 	return JSON.stringify({
 		items: items,
 		cache: {
-			seconds: 3600 * 24 * 7, // every week
+			// seconds: 3600 * 24 * 7, // every week
 			loosereload: true,
 		},
 	});

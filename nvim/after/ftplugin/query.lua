@@ -15,7 +15,11 @@ end
 -- for `:InspectTree` buffers
 if vim.bo.buftype == "nofile" then
 	vim.opt_local.listchars:append { lead = "│" }
-	-- to remove the delay for `q`
+
+	-- FIX missing `nowait` for `q`
+	-- 1. needs scheduled due to race with nvim's mapping
+	-- 2. needs extra check since commenting with `gc` creates temporary buffer
+	-- triggering this as well (sic)
 	local bufnr = vim.api.nvim_get_current_buf()
 	vim.schedule(function()
 		if not vim.api.nvim_buf_is_valid(bufnr) then return end
