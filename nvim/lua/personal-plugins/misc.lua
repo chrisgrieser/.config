@@ -2,6 +2,110 @@
 -- too big to put in the main config, where they would crowd the actual config.
 -- Every function is self-contained and should be bound to a keymap.
 local M = {}
+
+---CASING AND TOGGLING----------------------------------------------------------
+
+-- Increment or toggle if cursor is on a "toggle-word" like true/false 
+-- (simplified version of dial.nvim)
+function M.toggleOrIncrement()
+	local toggles = {
+		["true"] = "false",
+		["yes"] = "no",
+		["on"] = "off",
+		["enable"] = "disable",
+		["enabled"] = "disabled",
+
+		["up"] = "down",
+		["top"] = "bottom",
+		["light"] = "dark",
+		["right"] = "left",
+		["width"] = "height",
+
+		["next"] = "previous",
+		["before"] = "after",
+		["above"] = "below",
+		["start"] = "end",
+		["backward"] = "forward",
+		["open"] = "close",
+		["inner"] = "outer",
+
+		["and"] = "or",
+		["=="] = "!=",
+		[">"] = "<",
+		[">="] = "<=",
+		["||"] = "&&",
+	}
+	if vim.bo.ft == "javascript" or vim.bo.ft == "typescript" then
+		toggles["if"] = "else if" -- only one-way, due to the space in there
+		toggles["const"] = "let"
+		toggles["==="] = "!=="
+	elseif vim.bo.ft == "python" then
+		toggles["True"] = "False"
+	elseif vim.bo.ft == "swift" then
+		toggles["var"] = "let"
+	elseif vim.bo.ft == "zsh" or vim.bo.ft == "bash" or vim.bo.ft == "sh" then
+		toggles["if"] = "elif"
+		toggles["echo"] = "print"
+		toggles["||"] = "&&"
+	elseif vim.bo.ft == "lua" then
+		toggles["if"] = "elseif"
+		toggles["=="] = "~="
+	end
+
+	-- get cursor word
+	local iskeywordPrev = vim.opt.iskeyword:get()
+	vim.opt.iskeyword:remove { "_", "-" } -- so parts of words are picked up
+	-- cword does not include punctuation-only words, so checking `cWORD` for that
+	local cword = vim.fn.expand("<cWORD>"):find("^%p+$") and vim.fn.expand("<cWORD>")
+		or vim.fn.expand("<cword>")
+
+	-- toggle or increment
+	local newWord
+	for left, right in pairs(toggles) do
+		if cword == left then newWord = right end
+		if cword == right then newWord = left end
+	end
+	if newWord then -- a) toggle the word
+		local prevCursor = vim.api.nvim_win_get_cursor(0)
+		-- `iw` textobj does also work on punctuation only
+		vim.cmd.normal { '"_ciw' .. newWord, bang = true }
+		pcall(vim.api.nvim_win_set_cursor, 1, prevCursor)
+	else -- b) increment
+		-- needs `:execute` to escape `<C-a>`
+		vim.cmd.execute([["normal! ]] .. vim.v.count1 .. [[\<C-a>"]])
+	end
+
+	vim.opt.iskeyword = iskeywordPrev
+end
+
+-- Simplified implementation of `coerce.nvim`
+function M.camelSnakeLspRename()
+	local cword = vim.fn.expand("<cword>")
+	local snakePattern = "_(%w)"
+	local camelPattern = "([%l%d])(%u)"
+
+	if cword:find(snakePattern) then
+		local camelCased = cword:gsub(snakePattern, function(c1) return c1:upper() end)
+		vim.lsp.buf.rename(camelCased)
+	elseif cword:find(camelPattern) then
+		local snake_cased = cword:gsub(camelPattern, "%1_%2"):lower()
+		vim.lsp.buf.rename(snake_cased)
+	else
+		local msg = "Neither snake_case nor camelCase: " .. cword
+		vim.notify(msg, vim.log.levels.WARN, { title = "LSP Rename" })
+	end
+end
+
+function M.toggleTitleCase()
+	local prevCursor = vim.api.nvim_win_get_cursor(0)
+
+	local cword = vim.fn.expand("<cword>")
+	local cmd = cword == cword:lower() and "guiwgUl" or "guiw"
+	vim.cmd.normal { cmd, bang = true }
+
+	vim.api.nvim_win_set_cursor(0, prevCursor)
+end
+
 --------------------------------------------------------------------------------
 
 function M.restartNeovide()
@@ -82,6 +186,7 @@ function M.mdWrap(startWrap, endWrap)
 end
 
 ---RECORDING--------------------------------------------------------------------
+
 ---start/stop with just one keypress & add notifications
 ---@param toggleKey string key used to trigger this function
 ---@param reg string vim register (single letter)
@@ -117,108 +222,6 @@ function M.playRecording(reg)
 	end
 end
 
----CASING AND TOGGLING----------------------------------------------------------
--- Simplified implementation of `coerce.nvim`
-function M.camelSnakeLspRename()
-	local cword = vim.fn.expand("<cword>")
-	local snakePattern = "_(%w)"
-	local camelPattern = "([%l%d])(%u)"
-
-	if cword:find(snakePattern) then
-		local camelCased = cword:gsub(snakePattern, function(c1) return c1:upper() end)
-		vim.lsp.buf.rename(camelCased)
-	elseif cword:find(camelPattern) then
-		local snake_cased = cword:gsub(camelPattern, "%1_%2"):lower()
-		vim.lsp.buf.rename(snake_cased)
-	else
-		local msg = "Neither snake_case nor camelCase: " .. cword
-		vim.notify(msg, vim.log.levels.WARN, { title = "LSP Rename" })
-	end
-end
-
-function M.toggleTitleCase()
-	local prevCursor = vim.api.nvim_win_get_cursor(0)
-
-	local cword = vim.fn.expand("<cword>")
-	local cmd = cword == cword:lower() and "guiwgUl" or "guiw"
-	vim.cmd.normal { cmd, bang = true }
-
-	vim.api.nvim_win_set_cursor(0, prevCursor)
-end
-
--- Increment or toggle if cursorword is true/false (Simplified version of dial.nvim)
-function M.toggleOrIncrement()
-	local toggles = {
-		["true"] = "false",
-		["yes"] = "no",
-		["on"] = "off",
-		["enable"] = "disable",
-		["enabled"] = "disabled",
-
-		["up"] = "down",
-		["top"] = "bottom",
-		["light"] = "dark",
-		["right"] = "left",
-		["width"] = "height",
-
-		["next"] = "previous",
-		["before"] = "after",
-		["above"] = "below",
-		["start"] = "end",
-		["backward"] = "forward",
-		["open"] = "close",
-		["inner"] = "outer",
-
-		["and"] = "or",
-		["=="] = "!=",
-		[">"] = "<",
-		[">="] = "<=",
-		["||"] = "&&",
-	}
-	if vim.bo.ft == "javascript" or vim.bo.ft == "typescript" then
-		toggles["if"] = "else if" -- only one-way, due to the space in there
-		toggles["const"] = "let"
-		toggles["==="] = "!=="
-	elseif vim.bo.ft == "python" then
-		toggles["True"] = "False"
-	elseif vim.bo.ft == "swift" then
-		toggles["var"] = "let"
-	elseif vim.bo.ft == "zsh" or vim.bo.ft == "bash" or vim.bo.ft == "sh" then
-		toggles["if"] = "elif"
-		toggles["echo"] = "print"
-		toggles["||"] = "&&"
-	elseif vim.bo.ft == "lua" then
-		toggles["if"] = "elseif"
-		toggles["=="] = "~="
-	end
-	-----------------------------------------------------------------------------
-
-	-- get cursor word
-	local iskeywordPrev = vim.opt.iskeyword:get()
-	vim.opt.iskeyword:remove { "_", "-" } -- so parts of words are picked up
-	-- cword does not include punctuation-only words, so checking `cWORD` for that
-	local cword = vim.fn.expand("<cWORD>"):find("^%p+$") and vim.fn.expand("<cWORD>")
-		or vim.fn.expand("<cword>")
-
-	-- insert new word OR increment
-	local newWord
-	for left, right in pairs(toggles) do
-		if cword == left then newWord = right end
-		if cword == right then newWord = left end
-	end
-	if newWord then
-		local prevCursor = vim.api.nvim_win_get_cursor(0)
-		-- `iw` textobj does also work on punctuation only
-		vim.cmd.normal { '"_ciw' .. newWord, bang = true }
-		pcall(vim.api.nvim_win_set_cursor, 1, prevCursor)
-	else
-		-- needs `:execute` to escape `<C-a>`
-		vim.cmd.execute([["normal! ]] .. vim.v.count1 .. [[\<C-a>"]])
-	end
-
-	vim.opt.iskeyword = iskeywordPrev
-end
-
 --------------------------------------------------------------------------------
 
 function M.openUrlInBuffer()
@@ -235,8 +238,6 @@ function M.openUrlInBuffer()
 		if url then vim.ui.open(url) end
 	end)
 end
-
---------------------------------------------------------------------------------
 
 function M.smartDuplicate()
 	local row, col = unpack(vim.api.nvim_win_get_cursor(0))
@@ -273,8 +274,6 @@ function M.smartDuplicate()
 	vim.api.nvim_win_set_cursor(0, { row + 1, targetCol })
 end
 
---------------------------------------------------------------------------------
-
 function M.openWorkflowInAlfredPrefs()
 	local workflowUid =
 		vim.api.nvim_buf_get_name(0):match("Alfred%.alfredpreferences/workflows/(.-)/")
@@ -286,8 +285,6 @@ function M.openWorkflowInAlfredPrefs()
 	)
 	vim.system { "osascript", "-l", "JavaScript", "-e", jxa }
 end
-
---------------------------------------------------------------------------------
 
 function M.inspectBuffer()
 	local pseudoTilde = "∼" -- HACK `U+223C` instead of real `~` to prevent markdown-strikethrough
@@ -329,8 +326,6 @@ function M.inspectBuffer()
 	local opts = { title = "Inspect buffer", icon = "󰽙", timeout = 10000 }
 	vim.notify(table.concat(out, "\n"), vim.log.levels.DEBUG, opts)
 end
-
---------------------------------------------------------------------------------
 
 ---@param lines integer
 function M.scrollLspOrOtherWin(lines)
