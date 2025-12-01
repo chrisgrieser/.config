@@ -18,7 +18,7 @@ local config = {
 	},
 	oneBasedIndexing = { "lua", "r", "julia" },
 	icons = {
-		main = "",
+		main = "󰙅",
 		statuslineSeparator = " ",
 	},
 }

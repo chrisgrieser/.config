@@ -12,6 +12,7 @@ return {
 	end,
 	-----------------------------------------------------------------------------
 	opts = {
+		options = { dim_inactive = true },
 		specs = {
 			dawnfox = {
 				-- add more contrast, especially for `lualine`
