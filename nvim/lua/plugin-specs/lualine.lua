@@ -41,10 +41,6 @@ return {
 	"nvim-lualine/lualine.nvim",
 	event = "VeryLazy",
 	dependencies = "echasnovski/mini.icons",
-	init = function() -- so the ugly tabline and statusline are initially hidden
-		vim.opt.showtabline = 0
-		vim.opt.laststatus = 0
-	end,
 	opts = {
 		options = {
 			globalstatus = true, -- not statusline per window
