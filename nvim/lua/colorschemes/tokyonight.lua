@@ -13,10 +13,14 @@ return {
 	-----------------------------------------------------------------------------
 	opts = {
 		style = "moon",
+		lualine_bold = true,
+		day_brightness = 0.3, -- for `tokyonight-day`
+		dim_inactive = true,
 		styles = {
 			comments = { italic = false },
+			keywords = { italic = false },
 		},
-		lualine_bold = true,
+		--------------------------------------------------------------------------
 		on_colors = function(colors)
 			colors.git.change = colors.yellow -- yellow, not blue
 			colors.git.add = colors.green2 -- prettier green
@@ -24,8 +28,6 @@ return {
 		end,
 		on_highlights = function(hl, colors)
 			-- general
-			hl["@keyword"].italic = false
-			hl.Comment.italic = false
 			hl.StandingOut = { fg = colors.magenta2, bold = true }
 			hl["@keyword.return"] = { link = "StandingOut" }
 			hl["@markup.strong"] = { fg = colors.fg_dark, bold = true }
@@ -46,7 +48,7 @@ return {
 			hl.BlinkCmpLabelDescription = { link = "NonText" } -- FIX wrong color
 			hl.BlinkCmpLabelMatch = { fg = colors.yellow } -- make matches stand out more
 
-				-- blink.cmp.dictionary
+			-- blink.cmp.dictionary
 			hl.BlinkCmpKindDict = { fg = colors.blue }
 
 			-- apply color to `bg`, not `fg` (TODO INFO ERROR WARN)

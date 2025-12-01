@@ -18,6 +18,21 @@ vim.g.lualineAdd = function(whichBar, whichSection, component, where) ---@diagno
 	end, 1000)
 end
 
+local function hasSplit()
+	local splits = vim.iter(vim.api.nvim_list_wins())
+		:filter(function(win) return vim.api.nvim_win_get_config(win).split ~= nil end)
+		:totable()
+	return #splits > 1
+end
+
+local function addFtIconFromMiniIcon(filename)
+	local ok, icons = pcall(require, "mini.icons")
+	if not ok then return filename end
+	local icon, _, isDefault = icons.get("file", filename)
+	if isDefault then icon = icons.get("filetype", vim.bo.ft) end
+	return icon .. " " .. filename
+end
+
 --------------------------------------------------------------------------------
 
 return {
@@ -38,20 +53,18 @@ return {
 			-- so current file name is still visible when renaming/selecting
 			ignore_focus = { "snacks_input", "snacks_picker_input" },
 		},
+		--------------------------------------------------------------------------
 		winbar = {
 			lualine_b = {
-				"filename",
-				cond = function()
-					local splits = vim.iter(vim.api.nvim_list_wins())
-						:filter(function(win) return vim.api.nvim_win_get_config(win).split ~= nil end)
-						:totable()
-					return #splits > 0
-				end,
+				{ "filename", fmt = addFtIconFromMiniIcon, cond = hasSplit },
 			},
 		},
-		inactive = {
-			lualine_c = { "filename" },
+		inactive_winbar = {
+			lualine_c = {
+				{ "filename", fmt = addFtIconFromMiniIcon, cond = hasSplit },
+			},
 		},
+		--------------------------------------------------------------------------
 		tabline = {
 			lualine_a = {
 				{
@@ -63,18 +76,6 @@ return {
 				},
 			},
 			lualine_b = {
-				{ -- cwd
-					function()
-						local maxLength = 30
-						local cwd = (vim.uv.cwd() or ""):gsub(os.getenv("HOME") or "", "~")
-						if #cwd > maxLength then cwd = vim.trim(cwd:sub(1, maxLength)) .. "…" end
-						return cwd
-					end,
-					icon = "󰙅",
-					cond = function() return vim.bo.buftype == "" end,
-				},
-			},
-			lualine_c = {
 				{ require("personal-plugins.breadcrumbs").statusline },
 			},
 			lualine_x = {
@@ -99,24 +100,12 @@ return {
 						return curBranch ~= "main" and curBranch ~= "master"
 					end,
 				},
-				{ -- file name & icon
-					function()
-						local maxLength = 30
-						local absPath = vim.api.nvim_buf_get_name(0)
-						local name = vim.fs.basename(absPath)
-						if name == "" then name = vim.bo.ft end
-						if name == "" then name = "---" end
-						local displayName = #name < maxLength and name
-							or vim.trim(name:sub(1, maxLength)) .. "…"
-
-						local ok, icons = pcall(require, "mini.icons")
-						if not ok then return displayName end
-						local icon, _, isDefault = icons.get("file", name)
-						if isDefault then icon = icons.get("filetype", vim.bo.ft) end
-						if vim.startswith(absPath, vim.g.notesDir) then icon = "" end
-
-						return icon .. " " .. displayName
-					end,
+				{
+					"filename",
+					fmt = addFtIconFromMiniIcon,
+					shorting_target = 30,
+					file_status = false, -- modification status irrelevant, since auto-saving
+					newfile_status = true,
 				},
 			},
 			lualine_b = {
