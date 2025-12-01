@@ -92,22 +92,13 @@ local ccSpec = {
 		display = {
 			diff = {
 				enabled = true,
-				inline = {
-					layout = "float", -- float|buffer
-					opts = {
-						context_lines = 3, -- Number of context lines in hunks
-						dim = 25, -- Background dim level for floating diff (0-100, [100 full transparent], only applies when layout = "float")
-						show_keymap_hints = true, -- Show "gda: accept | gdr: reject" hints above diff
-						show_removed = true, -- Show removed lines as virtual text
-					},
-				},
 			}, -- https://codecompanion.olimorris.dev/configuration/chat-buffer.html#diff
 
 			-- https://codecompanion.olimorris.dev/configuration/chat-buffer.html
 			chat = {
 				auto_scroll = false,
 				intro_message = "",
-				fold_context = true, -- BUG not working
+				fold_context = true,
 				icons = { chat_context = "󰔌" }, -- icon for the fold context
 				window = {
 					opts = {
@@ -118,7 +109,6 @@ local ccSpec = {
 					},
 				},
 			},
-
 		},
 		strategies = {
 			inline = {

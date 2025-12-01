@@ -23,8 +23,7 @@ function M.restartNeovide()
 	vim.cmd.wqall()
 end
 
----Wraps text with markdown links, automatically inserting the URL if in a
----Markdown link if the `+` register has a URL. In normal mode, can undo.
+---Wraps text with markdown links, automatically inserting the URL if in a Markdown link if the `+` register has a URL. In normal mode, can undo.
 ---@param startWrap string|"mdlink"
 ---@param endWrap? string defaults to `startWrap`
 function M.mdWrap(startWrap, endWrap)

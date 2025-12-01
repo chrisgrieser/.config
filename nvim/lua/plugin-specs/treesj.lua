@@ -18,7 +18,7 @@ return {
 		max_join_length = math.huge,
 	},
 	config = function(_, opts)
-		local reflow = { both = { fallback = function() vim.cmd("normal! gw}") end } }
+		local reflow = { both = { fallback = function() vim.cmd("normal! gww") end } }
 		local joinWithoutCurly = {
 			-- remove curly brackets in js when joining if statements https://github.com/Wansmer/treesj/issues/150
 			statement_block = {
