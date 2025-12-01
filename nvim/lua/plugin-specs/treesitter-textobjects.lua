@@ -72,18 +72,19 @@ return {
 		{ "rl", select("@call.justCaller"), mode = "o", desc = "󰡱 rest of caller" },
 
 		-- stylua: ignore start
-		{ "ie", select("@emphasis.inner"), mode={"x","o"}, ft = "markdown", desc = " inner *" },
-		{ "ae", select("@emphasis.outer"), mode={"x","o"}, ft = "markdown", desc = " outer *" },
 		{ "is", select("@selector.inner"), mode={"x","o"}, ft = "css", desc = " inner selector" },
 		{ "as", select("@selector.outer"), mode={"x","o"}, ft = "css", desc = " outer selector" },
 		{ "iP", select("@pipeline.inner"), mode={"x","o"}, ft = "zsh", desc = "󰟥 inner pipeline" },
 		{ "aP", select("@pipeline.outer"), mode={"x","o"}, ft = "zsh", desc = "󰟥 outer pipeline" },
+		{ "ad", select("@docstring.outer"), mode={"x","o"}, ft = "python", desc = "󰌠 outer docstring" },
+		{ "id", select("@docstring.inner"), mode={"x","o"}, ft = "python", desc = "󰌠 inner docstring" },
+
 		{ "il", select("@mdlink.inner"), mode={"x","o"}, ft = "markdown", desc = "󰍔 inner mdlink" },
 		{ "al", select("@mdlink.outer"), mode={"x","o"}, ft = "markdown", desc = "󰍔 outer mdlink" },
 		{ "aE", select("@codeblock.outer"), mode={"x","o"}, ft = "markdown", desc = "󰍔 outer codeblock" },
 		{ "iE", select("@codeblock.inner"), mode={"x","o"}, ft = "markdown", desc = "󰍔 inner codeblock" },
-		{ "ad", select("@docstring.outer"), mode={"x","o"}, ft = "python", desc = "󰌠 outer docstring" },
-		{ "id", select("@docstring.inner"), mode={"x","o"}, ft = "python", desc = "󰌠 inner docstring" },
+		{ "if", select("@emphasis.inner"), mode={"x","o"}, ft = "markdown", desc = "󰍔 inner formatting" },
+		{ "af", select("@emphasis.outer"), mode={"x","o"}, ft = "markdown", desc = "󰍔 outer formatting" },
 		-- stylua: ignore end
 
 		---COMMENTS---------------------------------------------------------------
