@@ -102,7 +102,7 @@
     "prefix": "get buffer lines"
   },
   "get selection": {
-    "body": "vim.fn.getregion(vim.fn.getpos(\".\"), vim.fn.getpos(\"v\"), { type = vim.fn.mode() })",
+    "body": "vim.fn.getregion(vim.fn.getpos(\".\"), vim.fn.getpos(\"v\"))",
     "prefix": "get selection"
   },
   "get visual selection": {

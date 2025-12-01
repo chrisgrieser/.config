@@ -5,9 +5,7 @@
 2.`.gotoMostChangedFile` to go to the file in the cwd with the most git changes.
 3.`.altFileStatusbar()` and `.mostChangedFileStatusbar()` to display the
   respective file in the statusbar. If there is no alt-file, the first oldfile
-  is shown. If there is no changed file, nothing is shown.
-]]
---------------------------------------------------------------------------------
+  is shown. If there is no changed file, nothing is shown.]]
 
 local config = {
 	statusbar = {
@@ -33,7 +31,7 @@ local config = {
 	},
 }
 
---------------------------------------------------------------------------------
+---HELPERS----------------------------------------------------------------------
 local M = {}
 
 ---@param path string
@@ -73,24 +71,26 @@ local function fmtPathForStatusbar(path)
 	return displayName
 end
 
----@return string|nil altBufferName ; nil if no alt buffer
+---GET FILES--------------------------------------------------------------------
+---@return string? altBufferName ; nil if no alt buffer
 ---@nodiscard
 local function getAltBuffer()
 	local listedBufs = vim.fn.getbufinfo { buflisted = 1 }
 	if listedBufs == 1 then return end
-	table.sort(
-		listedBufs,
-		function(a, b) return (a.lastused or 0) > (b.lastused or 0) end
-	)
+
+	-- manually retrieving altbuf instead of `bufnr("#")` to avoid various
+	-- issues like: special buffer, altbuf being the current one, altbuf being
+	-- recently closed(= not listed), etc.
+	table.sort(listedBufs, function(a, b) return a.lastused > b.lastused end)
 	local altBuf = vim.iter(listedBufs):find(function(buf)
 		local valid = vim.api.nvim_buf_is_valid(buf.bufnr)
 		local nonSpecial = vim.bo[buf.bufnr].buftype == ""
 		local notCurrent = vim.api.nvim_get_current_buf() ~= buf.bufnr
-		local exists = vim.uv.fs_stat(buf.name) ~= nil
-		return valid and nonSpecial and notCurrent and exists
+		return valid and nonSpecial and notCurrent
 	end)
+	if not altBuf then return end
 
-	return altBuf and altBuf.name or nil
+	return altBuf.name
 end
 
 ---get the alternate oldfile, accounting for non-existing files
@@ -152,8 +152,7 @@ local function getMostChangedFile()
 	end
 end
 
---------------------------------------------------------------------------------
-
+---GOTO COMMANDS----------------------------------------------------------------
 function M.gotoAltFile()
 	if vim.bo.buftype ~= "" then
 		notify("Cannot do that in special buffer.", "warn")
@@ -166,7 +165,7 @@ function M.gotoAltFile()
 	elseif altOld then
 		vim.cmd.edit(altOld)
 	else
-		notify("No alt file or oldfile available.", "error")
+		notify("No alt-buffer or oldfile available.", "warn")
 	end
 end
 
@@ -185,9 +184,7 @@ function M.gotoMostChangedFile()
 	end
 end
 
---------------------------------------------------------------------------------
--- STATUSBAR
-
+---STATUSBAR--------------------------------------------------------------------
 vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained" }, {
 	desc = "Magnet: cache most changed file for statusbar",
 	group = vim.api.nvim_create_augroup("MagnetStatusbar", { clear = true }),
