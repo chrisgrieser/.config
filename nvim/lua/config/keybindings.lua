@@ -397,7 +397,7 @@ end, { expr = true, desc = "<BS> does not leave cmdline" })
 
 ---INSPECT & EVAL---------------------------------------------------------------
 keymap("n", "<leader>ii", vim.cmd.Inspect, { desc = "󱈄 Highlights at cursor" })
-keymap("n", "<leader>it", vim.cmd.InspectTree, { desc = " TS Tree" })
+keymap("n", "<leader>it", vim.cmd.InspectTree, { desc = " TS Syntax Tree" })
 keymap("n", "<leader>iT", "<cmd>checkhealth nvim-treesitter<CR>", { desc = " TS Parsers" })
 keymap("n", "<leader>id", function()
 	local diag = vim.diagnostic.get_next()

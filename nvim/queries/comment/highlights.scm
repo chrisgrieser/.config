@@ -2,7 +2,7 @@
 ; INFO this requires Treesitter `comments` parser: `TSInstall comments`
 ; https://github.com/nvim-treesitter/nvim-treesitter#adding-queries
 
-;-TODO COMMENTS-----------------------------------------------------------------
+;-TODO–COMMENTS-----------------------------------------------------------------
 
 ; PENDING GUARD REQUIREMENTS TEMP VALIDATE
 ("text" @comment.todo
