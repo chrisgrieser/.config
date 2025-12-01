@@ -21,7 +21,8 @@ vim.api.nvim_create_autocmd("InsertLeave", {
 	desc = "User: auto-hard-wrap",
 	group = vim.api.nvim_create_augroup("auto-hardwrap", { clear = true }),
 	buffer = 0,
-	callback = function()
+	callback = function(ctx)
+		if vim.bo[ctx.buf].buftype ~= "" then return end
 		local line = vim.api.nvim_get_current_line()
 		if line:find("^[|#]") then return end -- heading or table
 		local node = vim.treesitter.get_node()

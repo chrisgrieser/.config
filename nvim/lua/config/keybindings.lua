@@ -194,13 +194,6 @@ keymap("n", "[", function() require("personal-plugins.misc").mdWrap("[", "]") en
 keymap("n", "{", function() require("personal-plugins.misc").mdWrap("{", "}") end, { desc = " Surround" })
 -- stylua: ignore end
 
--- exit snippet
--- https://github.com/neovim/neovim/issues/26449#issuecomment-1845293096
-keymap({ "i", "s" }, "<Esc>", function()
-	vim.snippet.stop()
-	return "<Esc>"
-end, { desc = "󰩫 Exit snippet", expr = true })
-
 ---WHITESPACE & INDENTATION-----------------------------------------------------
 keymap("n", "=", "[<Space>", { desc = " Blank above", remap = true }) -- remap, since nvim default
 keymap("n", "_", "]<Space>", { desc = " Blank below", remap = true })
@@ -368,6 +361,11 @@ keymap("n", "i", function()
 	local lineEmpty = vim.trim(vim.api.nvim_get_current_line()) == ""
 	return lineEmpty and '"_cc' or "i"
 end, { expr = true, desc = "indented i on empty line" })
+
+-- select mode
+-- https://github.com/neovim/neovim/issues/26449#issuecomment-1845293096
+-- (not used in insert mode, since it breaks `:abbr` on pressing `<Esc>`)
+keymap("s", "<Esc>", "<cmd>lua vim.snippet.stop()<CR><Esc>", { desc = "󰩫 Exit snippet" })
 
 -- visual mode
 keymap("x", "V", "j", { desc = "repeated `V` selects more lines" })
