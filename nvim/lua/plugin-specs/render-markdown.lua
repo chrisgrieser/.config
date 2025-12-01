@@ -41,19 +41,31 @@ return {
 				mastodon = { pattern = "%.social/@", icon = " " },
 				linkedin = { pattern = "linkedin%.com", icon = "󰌻 " },
 				researchgate = { pattern = "researchgate%.net", icon = "󰙨 " },
+				github = { pattern = "github%.net", icon = " " },
+				apple = { pattern = "apple%.com", icon = "" },
+				google = { pattern = "google%.com", icon = "" },
+				microsoft = { pattern = "microsoft%.com", icon = "" },
+				neovim = { pattern = "neovim%.io", icon = "" },
+				openai = { pattern = "openai%.com", icon = "" },
+				reddit = { pattern = "reddit%.com", icon = "" },
+				stackoverflow = { pattern = "stackoverflow%.com", icon = "󰓌" },
+				ycombinator = { pattern = "ycombinator%.com", icon = "" },
+				youtube = { pattern = "youtube%.com", icon = "" },
+				slack = { pattern = "slack%.com", icon = "󰒱" },
+				discord = { pattern = "discord%.com", icon = "󰙯" },
 			},
 		},
 		-- makes toggling this plugin also toggle conceallevel
 		win_options = {
 			conceallevel = { default = 0, rendered = 2 },
 		},
-		-- LSP hovers: hide code block lines (CAVEAT: also affects code-companion)
-		-- overrides = {
-		-- 	buftype = {
-		-- 		nofile = {
-		-- 			code = { border = "hide", style = "normal" },
-		-- 		},
-		-- 	},
-		-- },
+		-- LSP hovers: hide code block lines (CAVEAT: also affects code-companion chat)
+		overrides = {
+			buftype = {
+				nofile = {
+					code = { border = "hide", style = "normal" },
+				},
+			},
+		},
 	},
 }
