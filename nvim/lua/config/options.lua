@@ -125,6 +125,11 @@ vim.opt.fillchars:append {
 	lastline = "↓",
 	horiz = "═",
 	vert = "║",
+	horizup = "╩",
+	horizdown = "╦",
+	vertleft = "╣",
+	vertright = "╠",
+	verthoriz = "╬",
 }
 
 ---DIAGNOSTICS------------------------------------------------------------------
