@@ -19,13 +19,15 @@ vim.g.lualineAdd = function(whichBar, whichSection, component, where) ---@diagno
 end
 
 local function hasSplit()
+	if vim.bo.buftype ~= "" then return false end
 	local splits = vim.iter(vim.api.nvim_list_wins())
 		:filter(function(win) return vim.api.nvim_win_get_config(win).split ~= nil end)
 		:totable()
 	return #splits > 1
 end
 
-local function addFtIconFromMiniIcon(filename)
+-- not using lualins's component since it reqquires `web-devicons`
+local function addFiletypeIcon(filename)
 	local ok, icons = pcall(require, "mini.icons")
 	if not ok then return filename end
 	local icon, _, isDefault = icons.get("file", filename)
@@ -45,10 +47,10 @@ return {
 	end,
 	opts = {
 		options = {
-			globalstatus = true,
+			globalstatus = true, -- not statusline per window
 			always_divide_middle = false,
 			section_separators = { left = "", right = "" }, -- save space
-			component_separators = { left = "", right = "" }, -- │
+			component_separators = { left = "", right = "" },
 
 			-- so current file name is still visible when renaming/selecting
 			ignore_focus = { "snacks_input", "snacks_picker_input" },
@@ -56,12 +58,12 @@ return {
 		--------------------------------------------------------------------------
 		winbar = {
 			lualine_b = {
-				{ "filename", fmt = addFtIconFromMiniIcon, cond = hasSplit },
+				{ "filename", fmt = addFiletypeIcon, cond = hasSplit, file_status = false },
 			},
 		},
 		inactive_winbar = {
 			lualine_c = {
-				{ "filename", fmt = addFtIconFromMiniIcon, cond = hasSplit },
+				{ "filename", fmt = addFiletypeIcon, cond = hasSplit, file_status = false },
 			},
 		},
 		--------------------------------------------------------------------------
@@ -90,6 +92,7 @@ return {
 				},
 			},
 		},
+		--------------------------------------------------------------------------
 		sections = {
 			lualine_a = {
 				{
@@ -102,7 +105,7 @@ return {
 				},
 				{
 					"filename",
-					fmt = addFtIconFromMiniIcon,
+					fmt = addFiletypeIcon,
 					shorting_target = 30,
 					file_status = false, -- modification status irrelevant, since auto-saving
 					newfile_status = true,
@@ -138,7 +141,6 @@ return {
 				},
 				{
 					"lsp_status",
-					icon = "󰒕",
 					ignore_lsp = { "typos_lsp", "efm" },
 					cond = function() -- only show component if LSP is active
 						if vim.g.lualine_lsp_active == nil then -- create autocmd only once
