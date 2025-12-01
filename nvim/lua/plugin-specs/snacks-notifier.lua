@@ -83,7 +83,14 @@ end
 return {
 	"folke/snacks.nvim",
 	keys = {
-		{ "<Esc>", function() Snacks.notifier.hide() end, desc = "󰎟 Dismiss notification" },
+		{
+			"<Esc>",
+			function()
+				Snacks.notifier.hide()
+				vim.snippet.stop()
+			end,
+			desc = "󰎟 Dismiss notice & exit snippet",
+		},
 		{ "<leader>in", function() openNotif("last") end, desc = "󰎟 Last notification" },
 		-- stylua: ignore
 		{ "<leader>iN", function() Snacks.picker.notifications() end, desc = "󰎟 Notification history" },

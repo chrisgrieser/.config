@@ -348,7 +348,6 @@ keymap("x", "<left>", [["zxhh"zpgvhoho]], { desc = "⬅ Move selection left" })
 keymap({ "n", "x" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "󱐋 Code action" })
 
 -- stylua: ignore start
-keymap({ "n", "i", "v" }, "<D-g>", function() vim.lsp.buf.signature_help { max_width = 70 } end, { desc = "󰏪 LSP signature" })
 keymap({ "n", "x" }, "<leader>h", function() vim.lsp.buf.hover { max_width = 70 } end, { desc = "󰋽 LSP hover" })
 
 keymap("n", "<PageDown>", function() require("personal-plugins.misc").scrollLspOrOtherWin(5) end, { desc = "↓ Scroll other win" })
@@ -356,16 +355,12 @@ keymap("n", "<PageUp>", function() require("personal-plugins.misc").scrollLspOrO
 -- stylua: ignore end
 
 ---VARIOUS MODES----------------------------------------------------------------
+
 -- insert mode
 keymap("n", "i", function()
 	local lineEmpty = vim.trim(vim.api.nvim_get_current_line()) == ""
 	return lineEmpty and '"_cc' or "i"
 end, { expr = true, desc = "indented i on empty line" })
-
--- select mode
--- https://github.com/neovim/neovim/issues/26449#issuecomment-1845293096
--- (not used in insert mode, since it breaks `:abbr` on pressing `<Esc>`)
-keymap("s", "<Esc>", "<cmd>lua vim.snippet.stop()<CR><Esc>", { desc = "󰩫 Exit snippet" })
 
 -- visual mode
 keymap("x", "V", "j", { desc = "repeated `V` selects more lines" })

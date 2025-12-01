@@ -35,39 +35,6 @@ local function importLuaModule()
 	}
 end
 
-local function selectCommentHeading()
-	local comStr = vim.trim(vim.bo.commentstring:format(""))
-	Snacks.picker.grep_word {
-		title = "comment heading",
-		cmd = "rg",
-		args = { "--only-matching" },
-		live = false,
-		regex = true,
-		search = "^\\s*" .. comStr ..  "[-\\w\\s]",
-		ft = "lua",
-
-		layout = { preset = "small_no_preview", layout = { width = 0.75 } },
-		transform = function(item, ctx) -- ensure items are unique
-			ctx.meta.done = ctx.meta.done or {}
-			local import = item.text:gsub(".-:", "") -- different occurrences of same import
-			if ctx.meta.done[import] then return false end
-			ctx.meta.done[import] = true
-		end,
-		format = function(item, _picker) -- only display the grepped line
-			local out = {}
-			local line = item.line:gsub("^local ", "")
-			Snacks.picker.highlight.format(item, line, out)
-			return out
-		end,
-		confirm = function(picker, item) -- insert the line below the current one
-			picker:close()
-			vim.cmd.normal { "o", bang = true }
-			vim.api.nvim_set_current_line(item.line)
-			vim.cmd.normal { "==l", bang = true }
-		end,
-	}
-end
-
 ---@param dir string?
 local function betterFileOpen(dir)
 	dir = dir or vim.uv.cwd()

@@ -21,4 +21,4 @@
 
 ; UPPERCASE WORDS
 ("text" @comment.bold
-  (#lua-match? @comment.bold "[%u%d%p][%u%d%p]+"))
+  (#lua-match? @comment.bold "^[%u%d%p][%u%d%p]+$"))

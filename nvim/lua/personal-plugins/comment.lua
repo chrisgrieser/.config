@@ -92,6 +92,10 @@ function M.commentHr(replaceModeLabel)
 	end
 end
 
+function M.selectCommentHeader()
+
+end
+
 function M.duplicateLineAsComment()
 	local comStr = getCommentstr()
 	if not comStr then return end
