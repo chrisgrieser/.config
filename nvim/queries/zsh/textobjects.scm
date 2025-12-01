@@ -11,5 +11,12 @@
 
 ; pipeline
 (pipeline
-  (command) @pipeline.inner @pipeline.outer
+  (command) @pipeline.inner)
+
+(pipeline
+  (command) @pipeline.outer
   "|" @pipeline.outer)
+
+(pipeline
+  "|" @pipeline.outer
+  (command) @pipeline.outer)
