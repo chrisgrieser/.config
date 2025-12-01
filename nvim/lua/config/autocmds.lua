@@ -18,17 +18,18 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 })
 
 -- https://github.com/neovim/neovim/issues/26449#issuecomment-1845293096
--- using an insertmode mapping on `esc` breaks `:abbreviate`
+-- using an insert-mode mapping on `esc` breaks `:abbreviate`, and `InsertLeave`
+-- also does not work
 vim.api.nvim_create_autocmd("WinScrolled", {
 	desc = "User: exit snippet",
 	callback = function() vim.snippet.stop() end,
 })
 
-
-
 ---LSP CODELENS-----------------------------------------------------------------
 do
 	local function enableCodeLens(ctx)
+		local ft = vim.bo[ctx.buf].filetype
+		if ft == "markdown" then return end -- useless info that heading is referenced in ToC
 		vim.lsp.codelens.refresh { bufnr = ctx.buf }
 	end
 	vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained" }, {
@@ -61,7 +62,7 @@ do
 	-- 1. tell neovide to sync `background` with system dark mode
 	-- (terminal already does so by default)
 	vim.g.neovide_theme = "auto"
-	local prevBg ---@type string
+	local prevBg
 
 	-- 2. tell nvim to sync colorscheme with `background`
 	vim.api.nvim_create_autocmd("OptionSet", {
@@ -146,7 +147,7 @@ vim.api.nvim_create_autocmd({ "InsertLeave", "TextChanged", "BufLeave", "FocusLo
 ---AUTO-CD TO PROJECT ROOT------------------------------------------------------
 -- (simplified version of project.nvim)
 do
-	local autoCdConfig = {
+	local config = {
 		childOfRoot = {
 			".git",
 			"Justfile",
@@ -173,14 +174,13 @@ do
 			end
 
 			vim.schedule(function()
-				-- GUARD
 				if not vim.api.nvim_buf_is_valid(ctx.buf) then return end
 				if vim.startswith(ctx.file, "/private/var/") then return end -- `pass` cli buffers
 
 				local root = vim.fs.root(ctx.buf, function(name, path)
 					local parentName = vim.fs.basename(vim.fs.dirname(path))
-					local dirHasParentMarker = vim.tbl_contains(autoCdConfig.parentOfRoot, parentName)
-					local dirHasChildMarker = vim.tbl_contains(autoCdConfig.childOfRoot, name)
+					local dirHasParentMarker = vim.tbl_contains(config.parentOfRoot, parentName)
+					local dirHasChildMarker = vim.tbl_contains(config.childOfRoot, name)
 					return dirHasChildMarker or dirHasParentMarker
 				end)
 				if root and root ~= "" then vim.uv.chdir(root) end
@@ -366,7 +366,7 @@ vim.api.nvim_create_autocmd({ "BufReadPost", "BufNew" }, {
 -- 1. nvim 0.10+
 -- 2. `comment` Tresitter parser (`:TSInstall comment`) & active parser for the
 -- current buffer (e.g., in a lua buffer, the lua parser is required)
--- 3. Font with Nerdfont glyphs
+-- 3. Nerdfont glyphs
 
 local favicons = {
 	apple = "",
@@ -378,27 +378,21 @@ local favicons = {
 	reddit = "",
 	stackoverflow = "󰓌",
 	ycombinator = "",
-	youtube = "",
-	slack = "󰒱",
-	discord = "󰙯",
 }
 
 local function addFavicons(bufnr)
 	if not bufnr then bufnr = 0 end
-	if not vim.api.nvim_buf_is_valid(bufnr) or vim.bo[bufnr].buftype ~= "" then return end
-	local hasCommentParser, urlQuery =
-		pcall(vim.treesitter.query.parse, "comment", "(uri) @string.special.url")
-	if not hasCommentParser then return end
-	local hasParserForFt, _ = pcall(vim.treesitter.get_parser, bufnr)
-	if not hasParserForFt then return end
-
 	local ns = vim.api.nvim_create_namespace("url-favicons")
 	vim.api.nvim_buf_clear_namespace(bufnr, ns, 0, -1)
 
-	local langTree = vim.treesitter.get_parser(bufnr)
-	if not langTree then return end
+	if not vim.api.nvim_buf_is_valid(bufnr) or vim.bo[bufnr].buftype ~= "" then return end
+	local hasCommentParser, urlQuery =
+		pcall(vim.treesitter.query.parse, "comment", "(uri) @string.special.url")
+	if not (hasCommentParser and urlQuery) then return end
+	local hasParserForFt, langTree = pcall(vim.treesitter.get_parser, bufnr)
+	if not (hasParserForFt and langTree) then return end
+
 	langTree:for_each_tree(function(tree, _)
-		if not urlQuery.iter_captures then return end
 		local commentUrlNodes = urlQuery:iter_captures(tree:root(), bufnr)
 		vim.iter(commentUrlNodes):each(function(_, node)
 			local nodeText = vim.treesitter.get_node_text(node, bufnr)
@@ -424,10 +418,10 @@ vim.api.nvim_create_autocmd({ "FocusGained", "BufReadPost", "TextChanged", "Inse
 })
 
 ---LUCKY INDENT-----------------------------------------------------------------
+
 -- Auto-set indent based on first indented line. Ignores files when an
 -- `.editorconfig` is in effect. Simplified version of `guess-indent.nvim`.
 local function luckyIndent(bufnr)
-	local linesToCheck = 50
 	if not vim.api.nvim_buf_is_valid(bufnr) or vim.bo[bufnr].buftype ~= "" then return end
 
 	-- don't apply if .editorconfig is in effect
@@ -436,7 +430,7 @@ local function luckyIndent(bufnr)
 
 	-- guess indent from first indented line
 	local indent
-	local maxToCheck = math.min(linesToCheck, vim.api.nvim_buf_line_count(bufnr))
+	local maxToCheck = math.min(30, vim.api.nvim_buf_line_count(bufnr))
 	local lines = vim.api.nvim_buf_get_lines(bufnr, 0, maxToCheck, false)
 	for lnum = 1, #lines do
 		-- require at least two spaces to avoid jsdoc setting indent to 1, etc.
@@ -541,12 +535,10 @@ if jit.os == "OSX" then
 			"/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/"
 		vim.system { "afplay", soundDir .. file }
 	end
-
 	vim.api.nvim_create_autocmd("RecordingEnter", {
 		desc = "User: Macro recording utilities (1/2)",
 		callback = function() playSound("begin_record.caf") end, -- typos: ignore-line
 	})
-
 	vim.api.nvim_create_autocmd("RecordingLeave", {
 		desc = "User: Macro recording utilities (2/2)",
 		callback = function() playSound("end_record.caf") end, -- typos: ignore-line
