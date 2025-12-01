@@ -18,4 +18,4 @@
 ;-BOLD UPPERCASE COMMENTS-------------------------------------------------------
 ; (requires defining a hlgroup `@comments.bold` in the user config)
 ("text" @comment.bold
-  (#lua-match? @comment.bold "^%u[%u%d%p]+$"))
+  (#lua-match? @comment.bold "^%u[%u%d][%u%d]+$")) ; at least 3 uppercase chars, to avoid words like `PR`

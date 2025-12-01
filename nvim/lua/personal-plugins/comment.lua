@@ -31,7 +31,7 @@ function M.setupReplaceModeHelpersForComments()
 		end,
 	})
 	vim.api.nvim_create_autocmd("ModeChanged", {
-		desc = "User: automatically enter replace mode at lbale position",
+		desc = "User: automatically enter replace mode at label position",
 		pattern = "*:r", -- entered replace-mode
 		callback = function(ctx)
 			if config.ignoreReplaceModeHelpers[vim.bo[ctx.buf].ft] then return end
@@ -47,7 +47,7 @@ end
 ---COMMANDS---------------------------------------------------------------------
 
 ---add horizontal line with the language's comment syntax and correctly indented
----@param replaceModeLabel any
+---@param replaceModeLabel "replaceModeLabel"|nil
 function M.commentHr(replaceModeLabel)
 	local comStr = getCommentstr()
 	if not comStr then return end
@@ -92,18 +92,22 @@ function M.commentHr(replaceModeLabel)
 	end
 end
 
+---a comment header = comment on its own line that starts with an uppercase word
 function M.gotoCommentHeader()
 	local lines = vim.api.nvim_buf_get_lines(0, 0, -1, true)
-	local commentHeaderLines = vim.tbl_filter(function(line)
+	local commentHeaders = {}
+	for ln = 1, #lines do
 		local comChars = vim.trim(vim.bo.commentstring:format(""))
-		return line:find("%s*".. vim.pesc(comChars.. config.hrChar) .. con )
-	end, lines)
-
-	vim.ui.select(commentHeaderLines, {
+		-- at least 3 uppercase chars, to avoid words like `PR`
+		local header = lines[ln]:match("^%s*" .. vim.pesc(comChars) .. ".?.?(%u[%u%d%s][%u%d%s]+)")
+		if header then table.insert(commentHeaders, { text = header, ln = ln }) end
+	end
+	vim.ui.select(commentHeaders, {
 		prompt = "Comment Headers",
-	}, function (selection)
+		format_item = function(item) return item.text end,
+	}, function(selection)
 		if not selection then return end
-
+		vim.api.nvim_win_set_cursor(0, { selection.ln, 0 })
 	end)
 end
 
