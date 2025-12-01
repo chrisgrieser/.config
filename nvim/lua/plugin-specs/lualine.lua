@@ -38,6 +38,20 @@ return {
 			-- so current file name is still visible when renaming/selecting
 			ignore_focus = { "snacks_input", "snacks_picker_input" },
 		},
+		winbar = {
+			lualine_b = {
+				"filename",
+				cond = function()
+					local splits = vim.iter(vim.api.nvim_list_wins())
+						:filter(function(win) return vim.api.nvim_win_get_config(win).split ~= nil end)
+						:totable()
+					return #splits > 0
+				end,
+			},
+		},
+		inactive = {
+			lualine_c = { "filename" },
+		},
 		tabline = {
 			lualine_a = {
 				{

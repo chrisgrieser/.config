@@ -401,7 +401,6 @@ keymap("n", "<leader>it", vim.cmd.InspectTree, { desc = " TS Syntax Tree" })
 keymap("n", "<leader>iT", "<cmd>checkhealth nvim-treesitter<CR>", { desc = " TS Parsers" })
 keymap("n", "<leader>id", function()
 	local diag = vim.diagnostic.get_next()
-	local fff
 	vim.notify(vim.inspect(diag), nil, { ft = "lua" })
 end, { desc = "󰋽 Next diagnostic" })
 
@@ -414,19 +413,19 @@ keymap({ "n", "x" }, "<leader>ee", function()
 	local selection = vim.fn.mode() == "n" and ""
 		or vim.fn.getregion(vim.fn.getpos("."), vim.fn.getpos("v"))[1]
 	return ":lua = " .. selection
-end, { expr = true, desc = "󰢱 Eval selection" })
+end, { expr = true, desc = "󰢱 Eval lua expr" })
 keymap("n", "<leader>ey", function()
 	local cmd = vim.fn.getreg(":")
 	local syntax = vim.startswith(cmd, "lua") and "lua" or "vim"
 	local lastExcmd = cmd:gsub("^lua ", ""):gsub("^= ?", "")
-	if lastExcmd == "" then return vim.notify("Nothing to copy", vim.log.levels.WARN) end
+	if lastExcmd == "" then return vim.notify("Nothing to copy", vim.log.levels.TRACE) end
 	vim.fn.setreg("+", lastExcmd)
 	vim.notify(lastExcmd, nil, { title = "Copied", icon = "󰅍", ft = syntax })
 end, { desc = "󰘳 Yank last ex-cmd" })
 
 ---WINDOWS & SPLITS-------------------------------------------------------------
 keymap({ "n", "v", "i" }, "<C-CR>", "<C-w>w", { desc = " Cycle windows" })
-keymap({ "n", "x" }, "<C-v>", "<cmd>vertical leftabove split<CR>", { desc = " Vertical split" })
+keymap({ "n", "x" }, "<C-v>", "<cmd>vertical split #<CR>", { desc = " Split altfile" })
 keymap({ "n", "x" }, "<D-W>", vim.cmd.only, { desc = " Close other windows" })
 
 keymap("n", "<C-Up>", "<C-w>3-")
@@ -444,7 +443,7 @@ keymap({ "n", "x" }, "<D-CR>", function() require("personal-plugins.magnet").got
 -- close window or buffer
 keymap({ "n", "x", "i" }, "<D-w>", function()
 	vim.cmd("silent! update")
-	local winClosed = pcall(vim.cmd.close)
+	local winClosed = pcall(vim.cmd.close) -- fails on last window
 	if winClosed then return end
 
 	local bufCount = #vim.fn.getbufinfo { buflisted = 1 }
@@ -489,7 +488,7 @@ end, { desc = " Switch quotes in line" })
 do
 	local function retabber(use)
 		vim.bo.expandtab = use == "spaces"
-		vim.bo.shiftwidth = 2
+		if use == "spaces" then vim.bo.shiftwidth = 2 end
 		vim.cmd.retab { bang = true }
 		vim.notify("Now using " .. use, nil, { title = ":retab", icon = "󰌒" })
 	end
@@ -501,6 +500,7 @@ end
 
 keymap("n", "<leader>on", "<cmd>set number!<CR>", { desc = " Line numbers" })
 keymap("n", "<leader>ow", "<cmd>set wrap!<CR>", { desc = "󰖶 Wrap" })
+keymap("n", "<leader>os", "<cmd>set spell!<CR>", { desc = "󰓆 Spellcheck" })
 
 keymap("n", "<leader>od", function()
 	local isEnabled = vim.diagnostic.is_enabled { bufnr = 0 }
