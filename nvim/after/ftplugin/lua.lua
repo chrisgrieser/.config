@@ -12,6 +12,7 @@ abbr("!=", "~=")
 abbr("!==", "~=")
 abbr("=~", "~=") -- shell uses `=~`
 abbr("fi", "end")
+abbr("tre", "then return end") -- typos: ignore-line
 
 ---@param sign "+"|"-"
 local function plusPlusMinusMinus(sign)

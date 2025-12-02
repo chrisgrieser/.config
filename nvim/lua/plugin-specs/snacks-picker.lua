@@ -278,7 +278,6 @@ return {
 								["o"] = "explorer_open", -- open with system application
 								["<CR>"] = "explorer_rename",
 								["-"] = "focus_input", -- i.e. search
-								["."] = "toggle_hidden_and_ignored",
 
 								-- consistent with `gh` for next hunk and `ge` for next diagnostic
 								["gh"] = "explorer_git_next",
@@ -306,7 +305,7 @@ return {
 					win = {
 						input = {
 							keys = {
-								["<C-i>"] = { "toggle_hidden_and_ignored", mode = "i" }, -- consistent with `fzf`
+								["<C-h>"] = { "toggle_hidden_and_ignored", mode = "i" }, -- consistent with `fzf`
 								["<C-r>"] = { "toggle_regex", mode = "i" },
 							},
 						},

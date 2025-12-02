@@ -20,7 +20,8 @@ end
 
 local function hasSplit()
 	if vim.bo.buftype ~= "" then return false end
-	local splits = vim.iter(vim.api.nvim_list_wins())
+	local winsInTab = vim.api.nvim_tabpage_list_wins(0)
+	local splits = vim.iter(winsInTab)
 		:filter(function(win) return vim.api.nvim_win_get_config(win).split ~= nil end)
 		:totable()
 	return #splits > 1

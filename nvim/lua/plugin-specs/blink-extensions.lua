@@ -5,11 +5,17 @@ return {
 	-- extensions are configured in blink's ` sources` config. To keep plugin
 	-- configs nonetheless modular, we define another set of `blink.cmp` config
 	-- (lazy.nvim merges multiple configs).
-	"saghen/blink.cmp", dependencies = { "Kaiser-Yang/blink-cmp-git", {
-		"Kaiser-Yang/blink-cmp-dictionary", dependencies = "nvim-lua/plenary.nvim"
-	}, }, init = require("config.utils").loadGhToken,
+	"saghen/blink.cmp",
+	dependencies = {
+		"Kaiser-Yang/blink-cmp-git",
+		{ "Kaiser-Yang/blink-cmp-dictionary" },
+	},
+	init = require("config.utils").loadGhToken,
 
 	opts = {
+		keymap = {
+			["<D-d>"] = { function(cmp) cmp.show { providers = { "dictionary" } } end },
+		},
 		sources = {
 			-- when to trigger extra-providers
 			default = { "lsp", "path", "snippets", "buffer", "git" },
