@@ -2,7 +2,6 @@ local M = {} -- persist from garbage collector
 
 local env = require("meta.environment")
 local u = require("meta.utils")
-local wu = require("win-management.window-utils")
 local aw = hs.application.watcher
 local wf = hs.window.filter
 
@@ -64,43 +63,25 @@ M.wf_scripteditor = wf
 	end)
 
 ---MASTODON---------------------------------------------------------------------
-local function scrollUp()
-	local masto = u.app("Ivory")
-	hs.eventtap.keyStroke({}, "left", 1, masto) -- go back
-	hs.eventtap.keyStroke({ "cmd" }, "1", 1, masto) -- go to home tab
-	hs.eventtap.keyStroke({ "cmd" }, "up", 1, masto) -- scroll up
-end
-
+-- auto-close any media windows
+-- auto-scroll up
 M.aw_masto = aw.new(function(appName, event, masto)
-	if appName ~= "Ivory" then return end
+	if appName ~= "Mona" then return end
 
 	if event == aw.deactivated then
-		-- close any media windows
-		local mediaWinName = "Ivory"
-		local isMediaWin = masto:mainWindow() and masto:mainWindow():title() == mediaWinName
+		local win = masto:mainWindow()
+		local isMediaWin = win and win:title():find("^Image")
 		local frontNotAlfred = hs.application.frontmostApplication():name() ~= "Alfred"
 		if #masto:allWindows() > 1 and isMediaWin and frontNotAlfred then
-			hs.eventtap.keyStroke({ "cmd" }, "w", 1, masto) -- hotkey, since `:close()` doesn't work
+			win:close()
 		end
-
-		u.defer(2, scrollUp) -- deferred to wait for potential media win to be closed
+	
+		u.defer(1, function ()
+			hs.eventtap.keyStroke({}, "left", 1, masto) -- go back
+			hs.eventtap.keyStroke({ "cmd" }, "1", 1, masto) -- go to home tab
+			hs.eventtap.keyStroke({ "cmd" }, "up", 1, masto) -- scroll up
+		end)
 	end
-end):start()
-
-local c = hs.caffeinate.watcher
-M.systemw_mastodon = c.new(function(event)
-	local cond = not (
-		event == c.screensaverDidStop
-		or event == c.screensDidWake
-		or event == c.systemDidWake
-	)
-	if not cond then return end
-	local masto = u.app("Ivory")
-	local mastoWin = masto and masto:mainWindow()
-	if not mastoWin then return end
-
-	u.defer(1, function() mastoWin:setFrame(wu.toTheSide) end) -- needs setFrame to hide part to the side
-	u.defer(2, scrollUp)
 end):start()
 
 ---ALFRED-----------------------------------------------------------------------
