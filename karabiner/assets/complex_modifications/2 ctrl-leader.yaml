@@ -48,7 +48,7 @@ rules:
   #─────────────────────────────────────────────────────────────────────────────
   - description: "🔺 App Switcher Actions"
     manipulators:
-      - description: "[?] Help"
+      - description: "[?] Cheatsheet"
         type: basic
         from: { key_code: hyphen, modifiers: { optional: [shift] } }
         conditions: [*leader-active]
@@ -59,9 +59,8 @@ rules:
               cd "$HOME/.config/karabiner/assets" || return 1
               yq '.rules[1].manipulators[].description' \
                 "./complex_modifications/2 ctrl-leader.yaml" |
-                sort -f |
-                sed 's/.*/- &/' > "/tmp/ctrl-leader.md"
-              qlmanage -p "/tmp/ctrl-leader.md" &
+                sort -f | sed 's/.*/- &/' > "/tmp/ctrl-leader.md"
+              qlmanage -p "/tmp/ctrl-leader.md"
               open -a "qlmanage" # to focus it
           - *deactivate-leader
           - *remove-notice
@@ -190,7 +189,6 @@ rules:
                 tell application "System Events" to tell process "Brave Browser"
                   set frontmost to true
                   click menu item "Reopen Closed Tab" of menu "File" of menu bar 1
-                  # click menu item "Reload This Page" of menu "View" of menu bar 1
                 end tell'
           - *deactivate-leader
           - *remove-notice
@@ -278,7 +276,7 @@ rules:
         conditions: [*leader-active]
         to: [{ shell_command: open -a "Signal" }, *deactivate-leader, *remove-notice]
 
-      - description: "Microsoft [t]eams"
+      - description: "[t] Microsoft [t]eams"
         type: basic
         from: { key_code: t }
         conditions: [*leader-active]
@@ -287,7 +285,7 @@ rules:
           - *deactivate-leader
           - *remove-notice
 
-      - description: "M[e]ssenger"
+      - description: "[e] M[e]ssenger"
         type: basic
         from: { key_code: e }
         conditions: [*leader-active]
@@ -296,7 +294,7 @@ rules:
           - *deactivate-leader
           - *remove-notice
 
-      - description: "Reddit (Alfred)"
+      - description: "[r]eddit (Alfred)" # typos: ignore-line
         type: basic
         from: { key_code: r }
         conditions: [*leader-active]
