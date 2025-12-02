@@ -99,7 +99,7 @@ function M.gotoCommentHeader()
 	for ln = 1, #lines do
 		local comChars = vim.trim(vim.bo.commentstring:format(""))
 		-- at least 3 uppercase chars, to avoid words like `PR`
-		local header = lines[ln]:match("^%s*" .. vim.pesc(comChars) .. ".?.?(%u[%u%d%s][%u%d%s]+)")
+		local header = lines[ln]:match("^%s*" .. vim.pesc(comChars) .. ".?(%u[%u%d%s][%u%d%s]+)")
 		if header then table.insert(commentHeaders, { text = header, ln = ln }) end
 	end
 	vim.ui.select(commentHeaders, {

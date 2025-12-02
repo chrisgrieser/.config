@@ -107,13 +107,13 @@ vim.lsp.set_log_level("ERROR")
 ---INVISIBLE CHARS--------------------------------------------------------------
 vim.opt.list = true
 vim.opt.conceallevel = 2 -- hide some chars in markdown and json
-vim.opt.listchars = {
-	nbsp = "󰚌",
+vim.opt.listchars:append {
+	nbsp = "␣",
 	precedes = "…",
 	extends = "…",
 	multispace = "·",
 	trail = " ",
-	tab = "  ", -- mostly set by indent-guide plugin, therefore only fallback
+	tab = "  ", -- already handled by indentation plugin
 	lead = " ",
 	space = " ",
 }
@@ -133,6 +133,7 @@ vim.opt.fillchars:append {
 ---DIAGNOSTICS------------------------------------------------------------------
 vim.diagnostic.config {
 	severity_sort = true,
+	jump = { float = true },
 	signs = {
 		text = { "󰅚 ", " ", "󰋽 ", " " }, -- Error, Warn, Info, Hint
 	},
@@ -151,9 +152,6 @@ vim.diagnostic.config {
 			if codeOrSource == "" then return "" end
 			return (" [%s]"):format(codeOrSource:gsub("%.$", ""))
 		end,
-	},
-	jump = {
-		float = true,
 	},
 	float = {
 		max_width = 70,
