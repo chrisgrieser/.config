@@ -61,7 +61,7 @@ return {
 			desc = "󰚩 Accept word",
 		},
 		{
-			"<D-d>",
+			"<D-a>",
 			function() require("neocodeium").cycle_or_complete(1) end,
 			mode = "i",
 			desc = "󰚩 Show/next suggestion",

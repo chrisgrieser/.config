@@ -41,11 +41,9 @@ return {
 				buffer = {
 					max_items = 4,
 					min_keyword_length = 4,
-
 					-- with `-7`, typing `then` in lua prioritizes the `then .. end`
 					-- snippet, effectively acting as `nvim-endwise`
 					score_offset = -7,
-
 					opts = {
 						-- show completions from all buffers used within the last x minutes
 						get_bufnrs = function()
