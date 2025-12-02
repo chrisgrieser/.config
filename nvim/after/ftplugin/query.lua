@@ -17,6 +17,7 @@ if vim.bo.buftype == "nofile" then
 	vim.opt_local.listchars:append { lead = "│" }
 
 	-- FIX missing `nowait` for `q`
+	-- PENDING https://github.com/neovim/neovim/pull/36804
 	-- 1. needs scheduled due to race with nvim's mapping
 	-- 2. needs extra check since commenting with `gc` creates temporary buffer
 	-- triggering this as well (sic)
