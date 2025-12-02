@@ -48,11 +48,9 @@ vim.opt.mousescroll = "ver:1,hor:3" -- more fine-grained scrolling with mouse
 -- Therefore needs to be set via autocommand.
 vim.api.nvim_create_autocmd("FileType", {
 	desc = "User: Remove `o` from `formatoptions`",
-	callback = function(ctx)
-		if ctx.match ~= "markdown" then
-			vim.opt_local.formatoptions:remove("o")
-			vim.opt_local.formatoptions:remove("t")
-		end
+	callback = function()
+		vim.opt_local.formatoptions:remove("o")
+		vim.opt_local.formatoptions:remove("t")
 	end,
 })
 
