@@ -381,11 +381,12 @@ local favicons = {
 }
 
 local function addFavicons(bufnr)
+	if not vim.api.nvim_buf_is_valid(bufnr) or vim.bo[bufnr].buftype ~= "" then return end
+
 	if not bufnr then bufnr = 0 end
 	local ns = vim.api.nvim_create_namespace("url-favicons")
 	vim.api.nvim_buf_clear_namespace(bufnr, ns, 0, -1)
 
-	if not vim.api.nvim_buf_is_valid(bufnr) or vim.bo[bufnr].buftype ~= "" then return end
 	local hasCommentParser, urlQuery =
 		pcall(vim.treesitter.query.parse, "comment", "(uri) @string.special.url")
 	if not (hasCommentParser and urlQuery) then return end
