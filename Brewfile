@@ -45,10 +45,8 @@ cask "slack"
 cask "wezterm"
 cask "zoom"
 cask "pdf-expert"
-# mas "Highlights", id: 1498912833
+cask "glance-chamburr", postinstall: 'xattr -rd com.apple.quarantine /Applications/Glance.app ; qlmanage -r'
 mas "Ivory", id: 6444602274
-mas "Markdown Preview", id: 6739955340 # quicklook markdown
-mas "iPreview", id: 1519213509 # quicklook source files
 
 #───────────────────────────────────────────────────────────────────────────────
 
