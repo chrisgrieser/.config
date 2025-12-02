@@ -4,8 +4,9 @@
 	+ <https://www.reddit.com/r/neovim/comments/1moxwv9/hexadecimal_colors_in_v012_ootb/>
 - `:restart`
 - `vim._extui`
-- textDocument.onTypeFormatting
+- `textDocument.onTypeFormatting`
 - `:Difftool` <https://www.reddit.com/r/neovim/comments/1o4eo6s/new_difftool_command_added_to_neovim/>
+- remove workaround in `after/ftplugin/query.lua`
 
 ```lua
 vim.api.nvim_create_autocmd("PackChanged", {

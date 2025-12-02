@@ -201,7 +201,7 @@ function ..d() {
 	fi
 
 	# goto root
-	cd "$(git rev-parse --show-toplevel)" || return 1
+	cd -q "$(git rev-parse --show-toplevel)" || return 1
 
 	# INFO `cd .` to trigger cd-hook *after* deletion
 	cd -q .. && trash "$OLDPWD" && cd .
