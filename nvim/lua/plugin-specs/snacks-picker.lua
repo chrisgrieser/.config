@@ -100,18 +100,31 @@ end
 return {
 	"folke/snacks.nvim",
 	keys = {
-		-- FILES
-		{ "go", betterFileOpen, desc = " Open files" },
-		{ "gn", function() betterFileOpen(vim.g.notesDir) end, desc = " Notes" },
-		{ "gt", function() Snacks.picker.explorer() end, desc = "󰙅 File tree" },
-		{ "gP", browseProject, desc = " Project" },
+		---FILES------------------------------------------------------------------
+		{ "gt", function() Snacks.picker.explorer() end, desc = " File tree" },
+		{ "go", betterFileOpen, desc = " Open files" },
+		{ "gn", function() betterFileOpen(vim.g.notesDir) end, desc = " Notes" },
+		{ "gP", browseProject, desc = " Project" },
+		{ "g,", function() betterFileOpen(vim.fn.stdpath("config")) end, desc = " nvim config" },
 		{
 			"gr",
 			function() Snacks.picker.recent() end,
-			desc = "󰋚 Recent files",
+			desc = " Recent files",
 			nowait = true, -- due to nvim default mappings starting with `gr`
 		},
-		{ "g,", function() betterFileOpen(vim.fn.stdpath("config")) end, desc = " nvim config" },
+		{
+			"gN",
+			function()
+				Snacks.picker.files {
+					title = " nvim runtime",
+					cwd = vim.env.VIMRUNTIME,
+					exclude = { "*.txt" },
+					matcher = { filename_bonus = false }, -- folder more important here
+					formatters = { file = { filename_first = false } },
+				}
+			end,
+			desc = " nvim runtime",
+		},
 		{
 			"gp",
 			function()
@@ -123,15 +136,15 @@ return {
 					formatters = { file = { filename_first = false } },
 				}
 			end,
-			desc = "󰈮 Local plugins",
+			desc = " Local plugins",
 		},
 
-		-- GREP
+		---GREP-------------------------------------------------------------------
 		{ "gl", function() Snacks.picker.grep() end, desc = "󰛢 Grep" },
 		{ "gL", function() Snacks.picker.grep_word() end, desc = "󰛢 Grep cword" },
 		{ "<leader>ci", importLuaModule, ft = "lua", desc = "󰢱 Import module" },
 
-		-- LSP
+		---LSP--------------------------------------------------------------------
 		{ "gf", function() Snacks.picker.lsp_references() end, desc = "󰈿 References" },
 		{ "gd", function() Snacks.picker.lsp_definitions() end, desc = "󰈿 Definitions" },
 		{ "gD", function() Snacks.picker.lsp_type_definitions() end, desc = "󰜁 Type definitions" },
@@ -143,7 +156,7 @@ return {
 		-- treesitter does not work for markdown, so using LSP symbols here
 		{ "gs", function() Snacks.picker.lsp_symbols() end, ft = "markdown", desc = "󰽛 Headings" },
 
-		-- GIT
+		---GIT--------------------------------------------------------------------
 		{ "<leader>gs", function() Snacks.picker.git_status() end, desc = "󰗲 Status" },
 		{ "<leader>gl", function() Snacks.picker.git_log() end, desc = "󰗲 Log" },
 		{ "<leader>ga", function() Snacks.picker.git_diff() end, desc = "󰐖 Hunks" },
@@ -152,7 +165,7 @@ return {
 		-- stylua: ignore
 		{ "<leader>gI", function() Snacks.picker.gh_issue { state = "all" } end, desc = " GitHub Issues (all)" },
 
-		-- INSPECT
+		---INSPECT----------------------------------------------------------------
 		{ "<leader>iv", function() Snacks.picker.help() end, desc = "󰋖 Vim help" },
 		{ "<leader>ih", function() Snacks.picker.highlights() end, desc = " Highlight groups" },
 		{ "<leader>is", function() Snacks.picker.pickers() end, desc = "󰗲 Snacks pickers" },
@@ -161,7 +174,7 @@ return {
 		{ "<leader>iK", function() Snacks.picker.keymaps { global = false, title = "󰌌 Keymaps (buffer)" } end, desc = "󰌌 Keymaps (buffer)" },
 		{ "<leader>il", function() Snacks.picker.lsp_config() end, desc = "󰒕 LSP servers" },
 
-		-- MISC
+		---MISC-------------------------------------------------------------------
 		{ "<leader>pc", function() Snacks.picker.colorschemes() end, desc = " Colorschemes" },
 		{ "<leader>ms", function() Snacks.picker.marks() end, desc = "󰃁 Select mark" },
 		{ "<leader>yy", function() Snacks.picker.registers() end, desc = "󱛢 Yank ring" },
@@ -479,6 +492,7 @@ return {
 						["<CR>"] = { "confirm", mode = "i" },
 						["<Tab>"] = { "list_down_wrapping", mode = "i" },
 						["<S-Tab>"] = { "list_up", mode = "i" },
+						["<C-v>"] = { "edit_vsplit", mode = "i" },
 						["<D-Up>"] = { "list_top", mode = "i" },
 						["<D-Down>"] = { "list_bottom", mode = "i" },
 
