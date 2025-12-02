@@ -44,7 +44,7 @@ return {
 	dependencies = "echasnovski/mini.icons",
 	opts = {
 		options = {
-			globalstatus = true, -- not statusline per window
+			globalstatus = true, -- false = one statusline per window
 			always_divide_middle = false,
 			section_separators = { left = "", right = "" }, -- save space
 			component_separators = { left = "", right = "" },

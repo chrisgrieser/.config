@@ -89,6 +89,7 @@ local function getAltBuffer()
 		return valid and nonSpecial and notCurrent
 	end)
 	if not altBuf then return end
+	if altBuf.bufnr == -1 then notify(vim.inspect(altBuf), "debug") end
 
 	return altBuf.name
 end

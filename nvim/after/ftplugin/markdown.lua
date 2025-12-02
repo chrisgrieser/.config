@@ -4,7 +4,7 @@ local optl = vim.opt_local
 ---GENERAL----------------------------------------------------------------------
 optl.expandtab = false
 optl.tabstop = 4 -- less nesting in md, so we can afford larger tabstop
-vim.bo.commentstring = "<!-- %s -->" -- add spaces
+optl.commentstring = "<!-- %s -->" -- add spaces
 
 -- so two trailing spaces are highlighted, but not a single trailing space
 optl.listchars:remove("trail")
@@ -16,7 +16,12 @@ if vim.bo.buftype == "" then optl.signcolumn = "yes:4" end
 
 bkeymap("n", "<leader>rt", "vip:!pandoc --to=gfm<CR>", { desc = " Format table under cursor" })
 
----AUTO HARDWRAP----------------------------------------------------------------
+---HARDWRAP---------------------------------------------------------------------
+
+-- when typing beyond `textwidth`
+vim.schedule(function() optl.formatoptions:append("t") end)
+
+-- when leaving insert mode
 vim.api.nvim_create_autocmd("InsertLeave", {
 	desc = "User: auto-hard-wrap",
 	group = vim.api.nvim_create_augroup("auto-hardwrap", { clear = true }),
