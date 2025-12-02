@@ -36,18 +36,16 @@ return {
 			position = "left",
 		},
 		link = {
-			wiki = {
-				icon = "󱗖 ",
-			},
+			wiki = { icon = "󱅷 " },
 			custom = {
-				-- tech companies
+				-- tech companies, PENDING https://github.com/MeanderingProgrammer/render-markdown.nvim/pull/565
 				apple = { pattern = "apple%.com", icon = " " },
 				microsoft = { pattern = "microsoft%.com", icon = " " },
-				openai = { pattern = "openai%.com", icon = " " },
-				ycombinator = { pattern = "ycombinator%.com", icon = " " },
+				hackernews = { pattern = "ycombinator%.com", icon = " " },
 				slack = { pattern = "slack%.com", icon = "󰒱 " },
-				-- already included in defaults: discord, github, google, neovim,,
-				-- reddit, stackoverflow, wikipedia, youtube
+				steam = { pattern = "steampowered%.com", icon = " " },
+				twitter = { pattern = "x%.com", icon = " " },
+				linkedin = { pattern = "linkedin%.com", icon = "󰌻 " },
 
 				-- news sites
 				medium = { pattern = "medium%.com", icon = "󰬔 " }, -- letter-glyphs named `alpha_x`
@@ -61,11 +59,11 @@ return {
 				spiegel = { pattern = "spiegel%.de", icon = "󰎕 " },
 
 				-- misc
-				myWebsite = { pattern = "chris%-grieser.de", icon = " " },
-				mastodon = { pattern = "%.social/@", icon = " " },
-				linkedin = { pattern = "linkedin%.com", icon = "󰌻 " },
-				researchgate = { pattern = "researchgate%.net", icon = "󰙨 " },
+				openai = { pattern = "openai%.com", icon = " " },
 				doi = { pattern = "doi%.org", icon = "󰑴 " },
+				mastodon = { pattern = "%.social/@", icon = " " },
+				researchgate = { pattern = "researchgate%.net", icon = "󰙨 " },
+				my_website = { pattern = "chris%-grieser.de", icon = " " },
 			},
 		},
 		-- makes toggling this plugin also toggle conceallevel
