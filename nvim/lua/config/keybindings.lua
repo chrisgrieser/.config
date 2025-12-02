@@ -48,10 +48,11 @@ keymap(
 	"<D-C-t>", -- `hyper` gets registered by neovide as cmd+ctrl
 	function()
 		assert(jit.os == "OSX", "requires macOS' `osascript`")
-		vim.system({ "open", "-a", "WezTerm" }, {}, function()
+		vim.system({ "open", "-a", 'WezTerm' }):wait()
+		vim.defer_fn(function()
 			local stdin = ("cd -q %q && clear\n"):format(vim.uv.cwd() or "")
 			vim.system({ "wezterm", "cli", "send-text", "--no-paste" }, { stdin = stdin })
-		end)
+		end, 400)
 	end,
 	{ desc = " Open cwd in WezTerm" }
 )
