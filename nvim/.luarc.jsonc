@@ -1,3 +1,4 @@
+// https://luals.github.io/wiki/settings/
 {
 	"runtime.version": "LuaJIT",
 	"workspace.ignoreDir": ["debug", "templates"],

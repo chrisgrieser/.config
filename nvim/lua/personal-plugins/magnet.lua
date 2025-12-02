@@ -89,7 +89,6 @@ local function getAltBuffer()
 		return valid and nonSpecial and notCurrent
 	end)
 	if not altBuf then return end
-	if altBuf.bufnr == -1 then notify(vim.inspect(altBuf), "debug") end
 
 	return altBuf.name
 end
@@ -159,12 +158,10 @@ function M.gotoAltFile()
 		notify("Cannot do that in special buffer.", "warn")
 		return
 	end
-	local altBuf, altOld = getAltBuffer(), getAltOldfile()
 
-	if altBuf then
-		vim.api.nvim_set_current_buf(vim.fn.bufnr("#"))
-	elseif altOld then
-		vim.cmd.edit(altOld)
+	local altFile = getAltBuffer() or getAltOldfile()
+	if altFile then
+		vim.cmd.edit(altFile)
 	else
 		notify("No alt-buffer or oldfile available.", "warn")
 	end
