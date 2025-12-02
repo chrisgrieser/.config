@@ -194,10 +194,7 @@ return {
 					matcher = { frecency = true }, -- slight performance impact
 					win = {
 						input = {
-							keys = {
-								["<C-h>"] = { "toggle_hidden_and_ignored", mode = "i" }, -- consistent with `fzf`
-								[":"] = { "complete_and_add_colon", mode = "i" },
-							},
+							keys = { [":"] = { "complete_and_add_colon", mode = "i" } },
 						},
 					},
 					-- if binary, open in system application instead
@@ -302,14 +299,6 @@ return {
 						("--ignore-file=" .. vim.fs.normalize("~/.config/ripgrep/ignore")),
 					},
 					layout = "big_preview",
-					win = {
-						input = {
-							keys = {
-								["<C-h>"] = { "toggle_hidden_and_ignored", mode = "i" }, -- consistent with `fzf`
-								["<C-r>"] = { "toggle_regex", mode = "i" },
-							},
-						},
-					},
 				},
 				help = {
 					confirm = function(picker)
@@ -502,6 +491,9 @@ return {
 						["<C-CR>"] = { "cycle_win", mode = "i" },
 						["<PageUp>"] = { "preview_scroll_up", mode = "i" },
 						["<PageDown>"] = { "preview_scroll_down", mode = "i" },
+
+						["<C-h>"] = { "toggle_hidden_and_ignored", mode = "i" }, -- consistent with `fzf`
+						["<C-r>"] = { "toggle_regex", mode = "i" },
 
 						["<D-s>"] = { "qflist_and_go", mode = "i" },
 						["<D-l>"] = { "reveal_in_macOS_Finder", mode = "i" },
