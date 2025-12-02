@@ -26,7 +26,7 @@ M.pathw_icloud = pathw(icloud, function(paths, _)
 	end)
 end):start()
 
--- auto-file from desktop
+-- AUTO-FILE FROM DESKTOP
 M.pathw_desktop = pathw(home .. "/Desktop/", function(paths, _)
 	if not u.screenIsUnlocked() then return end -- prevent iCloud sync triggering in standby
 
@@ -56,25 +56,30 @@ M.pathw_desktop = pathw(home .. "/Desktop/", function(paths, _)
 				os.remove(path)
 			end
 
-		-- VARIOUS BACKUP
+		---BROWSER EXTENSION SETTING BACKUPS--------------------------------------
 		elseif name == "ublacklist-settings.json" then
 			success, errmsg = os.rename(path, browserConfigs .. name)
 			if success then u.notify("✅ ublacklist settings backed up.") end
 		elseif name == "Redirector.json" then
 			success, errmsg = os.rename(path, browserConfigs .. name)
 			if success then u.notify("✅ Redirector settings backed up.") end
+		elseif name == "obsidian-web-clipper-settings.json" then
+			success, errmsg = os.rename(path, browserConfigs .. name)
+			if success then u.notify("✅ Obsidian web clipper settings backed up.") end
 		elseif name:find("vimium_c.*%.json") then
 			success, errmsg = os.rename(path, browserConfigs .. "vimium-c-settings.json")
 			if success then u.notify("✅ Vimium-c settings backed up.") end
 		elseif name:find("Inoreader Feeds.*%.xml") then
+
+		---APP AND SERVICE BACKUPS------------------------------------------------
+		elseif name == "following_accounts.csv" then
+			success, errmsg = os.rename(path, backupFolder .. "Mastodon/" .. name)
+			if success then u.notify("✅ Mastodon follows backed up.") end
 			success, errmsg = os.rename(path, backupFolder .. "Inoreader Feeds.opml")
 			if success then u.notify("✅ Inoreader feeds backed up.") end
 		elseif name == "Catch.xml" then
 			success, errmsg = os.rename(path, backupFolder .. "Catch Feeds.xml")
 			if success then u.notify("✅ Catch feeds backed up.") end
-		elseif name == "obsidian-web-clipper-settings.json" then
-			success, errmsg = os.rename(path, browserConfigs .. name)
-			if success then u.notify("✅ Obsidian web clipper settings backed up.") end
 		elseif name == "mailFilters.xml" then
 			success, errmsg = os.rename(path, backupFolder .. "Gmail Filters.xml")
 			if success then u.notify("✅ Gmail filters backed up.") end
@@ -82,7 +87,7 @@ M.pathw_desktop = pathw(home .. "/Desktop/", function(paths, _)
 			success, errmsg = os.rename(path, backupFolder .. "/Calendar/" .. name)
 			if success then u.notify("✅ Calendar data backed up.") end
 
-		-- BANKING
+		---BANKING----------------------------------------------------------------
 		elseif name:find("[%d-]_Kontoauszug_%d.*%.pdf$") or name:find(".*_zu_Depot_%d.*%.pdf$") then
 			local year = name:match("^%d%d%d%d") -- first year-digits in filename
 			if not year then return end -- file lacks year
@@ -94,12 +99,12 @@ M.pathw_desktop = pathw(home .. "/Desktop/", function(paths, _)
 			u.defer(1, function() os.rename(path, bankPath .. "/" .. name) end) -- delay ensures folder is created
 			u.openUrlInBg(bankPath)
 
-		-- STEAM GAME SHORTCUTS
+		---STEAM GAME SHORTCUTS---------------------------------------------------
 		elseif name:find("%.app$") and not isDownloaded then
 			local gameFolder = home .. "/Library/Mobile Documents/com~apple~CloudDocs/Apps/Games/"
 			success, errmsg = os.rename(path, gameFolder .. name)
 
-		-- AUTO-INSTALL OBSIDIAN ALPHA
+		---AUTO-INSTALL OBSIDIAN ALPHA--------------------------------------------
 		elseif name:find("%.asar%.gz$") and isDownloaded then
 			hs.execute(([[
 				cd %q || exit 1
