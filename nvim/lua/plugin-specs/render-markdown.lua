@@ -36,14 +36,10 @@ return {
 			position = "left",
 		},
 		link = {
+			wiki = {
+				icon = "󱗖 ",
+			},
 			custom = {
-				-- personal links
-				myWebsite = { pattern = "chris%-grieser.de", icon = " " },
-				mastodon = { pattern = "%.social/@", icon = " " },
-				linkedin = { pattern = "linkedin%.com", icon = "󰌻 " },
-				researchgate = { pattern = "researchgate%.net", icon = "󰙨 " },
-				doi = { pattern = "doi%.org", icon = "󰑴 " },
-
 				-- tech companies
 				apple = { pattern = "apple%.com", icon = " " },
 				microsoft = { pattern = "microsoft%.com", icon = " " },
@@ -63,6 +59,13 @@ return {
 				guardian = { pattern = "theguardian%.com", icon = "󰎕 " },
 				zeit = { pattern = "zeit%.de", icon = "󰎕 " },
 				spiegel = { pattern = "spiegel%.de", icon = "󰎕 " },
+
+				-- misc
+				myWebsite = { pattern = "chris%-grieser.de", icon = " " },
+				mastodon = { pattern = "%.social/@", icon = " " },
+				linkedin = { pattern = "linkedin%.com", icon = "󰌻 " },
+				researchgate = { pattern = "researchgate%.net", icon = "󰙨 " },
+				doi = { pattern = "doi%.org", icon = "󰑴 " },
 			},
 		},
 		-- makes toggling this plugin also toggle conceallevel

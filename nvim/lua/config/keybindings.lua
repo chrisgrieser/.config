@@ -517,5 +517,3 @@ keymap("n", "<leader>ol", function()
 	vim.lsp.enable(names, false)
 	vim.lsp.enable(names, true)
 end, { desc = "󰑓 LSP Restart" })
-
---------------------------------------------------------------------------------
