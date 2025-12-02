@@ -1,12 +1,14 @@
 # DOCS https://docs.brew.sh/Manpage#environment
 #───────────────────────────────────────────────────────────────────────────────
 export HOMEBREW_BUNDLE_FILE="$HOME/.config/Brewfile"
-export HOMEBREW_EDITOR="open" # open things in default macOS text editor
-
-export HOMEBREW_UPGRADE_GREEDY_CASKS="obsidian" # to also update installer version
-export HOMEBREW_DISPLAY_INSTALL_TIMES=1         # also serves as summary what was installed
+export HOMEBREW_EDITOR="open"           # open things in default macOS text editor
+export HOMEBREW_DISPLAY_INSTALL_TIMES=1 # also serves as summary what was installed
 export HOMEBREW_NO_ANALYTICS=1
 export HOMEBREW_NO_ENV_HINTS=1
+
+# Obsidian: to also update installer version
+# Word: since we unininstall the MS auto-installer via `brew bundle cleanup`
+export HOMEBREW_UPGRADE_GREEDY_CASKS="obsidian microsoft-word"
 
 alias bi='brew install'
 alias bu='brew uninstall --zap'
@@ -15,8 +17,7 @@ alias bf='brew bundle edit' # opens [b]rew[f]ile with $HOMEBREW_EDITOR
 alias bh='brew home'
 alias depending_on='brew uses --installed --recursive'
 
-#───────────────────────────────────────────────────────────────────────────────
-
+#-UPDATE EVERYTHING-------------------------------------------------------------
 function _pretty_header() {
 	[[ "$2" != "no-line-break" ]] && echo
 	defaults read -g AppleInterfaceStyle &> /dev/null && fg="\e[1;38;5;232m" || fg="\e[1;37m"
