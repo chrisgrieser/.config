@@ -2,8 +2,7 @@
 -- too big to put in the main config, where they would crowd the actual config.
 -- Every function is self-contained and should be bound to a keymap.
 local M = {}
-
----CASING AND TOGGLING----------------------------------------------------------
+--------------------------------------------------------------------------------
 
 -- Increment or toggle if cursor is on a "toggle-word" like true/false
 -- (simplified version of dial.nvim)
@@ -184,8 +183,6 @@ function M.mdWrap(startWrap, endWrap)
 	end
 	if text == "" or clipboardUrl == "" then vim.cmd.startinsert() end
 end
-
----RECORDING--------------------------------------------------------------------
 
 ---start/stop with just one keypress & add notifications
 ---@param toggleKey string key used to trigger this function
