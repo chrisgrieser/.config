@@ -55,7 +55,7 @@ local function spinnerNotificationWhileRequest()
 	})
 end
 
-local ccSpec = {
+return {
 	"olimorris/codecompanion.nvim",
 	cmd = { "CodeCompanion", "CodeCompanionChat" },
 	init = function() vim.g.whichkeyAddSpec { "<leader>a", group = " AI" } end,
@@ -213,16 +213,5 @@ local ccSpec = {
 				},
 			},
 		},
-	},
-}
-
---------------------------------------------------------------------------------
-
-return {
-	ccSpec,
-	{ -- modifications to render-markdown config
-		"MeanderingProgrammer/render-markdown.nvim",
-		ft = { "markdown", "codecompanion" },
-		opts = { file_types = { "markdown", "codecompanion" } },
 	},
 }

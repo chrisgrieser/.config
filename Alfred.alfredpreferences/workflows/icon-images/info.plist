@@ -635,7 +635,7 @@
 				<key>subtext</key>
 				<string></string>
 				<key>text</key>
-				<string>📸 OCR Screenshot</string>
+				<string>OCR Screenshot</string>
 				<key>withspace</key>
 				<true/>
 			</dict>
@@ -744,6 +744,8 @@
 			<dict>
 				<key>tasksettings</key>
 				<dict>
+					<key>target_path</key>
+					<string>{var:screenshot_path}</string>
 					<key>use_finder</key>
 					<false/>
 				</dict>
@@ -812,7 +814,7 @@
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>note</key>
-			<string>save screenshot path to trash later</string>
+			<string>save screenshot path for trashing</string>
 			<key>xpos</key>
 			<real>355</real>
 			<key>ypos</key>
@@ -823,7 +825,7 @@
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>590</real>
+			<real>595</real>
 			<key>ypos</key>
 			<real>695</real>
 		</dict>
@@ -874,7 +876,7 @@
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>740</real>
+			<real>745</real>
 			<key>ypos</key>
 			<real>695</real>
 		</dict>

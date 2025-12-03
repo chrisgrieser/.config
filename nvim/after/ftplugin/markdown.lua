@@ -14,6 +14,9 @@ optl.listchars:append { multispace = "·" }
 -- move everything a bit more to the right
 if vim.bo.buftype == "" then optl.signcolumn = "yes:4" end
 
+-- if soft-wrapping, also indent blockquotes via `breakindentopt`
+optl.formatlistpat:append([[\|^\s*>\s\+]])
+
 bkeymap("n", "<leader>rt", "vip:!pandoc --to=gfm<CR>", { desc = " Format table under cursor" })
 
 ---HARDWRAP---------------------------------------------------------------------

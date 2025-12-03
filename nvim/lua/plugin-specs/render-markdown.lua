@@ -15,8 +15,6 @@ return {
 		},
 	},
 	opts = {
-		restart_highlighter = true, -- nvim core bug fix https://github.com/MeanderingProgrammer/render-markdown.nvim/issues/488#issuecomment-3154937211
-
 		sign = { enabled = false },
 		latex = { enabled = false },
 		render_modes = { "n", "c", "i", "v", "V" },
@@ -28,7 +26,7 @@ return {
 			icons = { "󰲠 ", "󰲢 ", "󰲤 ", "󰲦 ", "󰲨 ", "󰲪 " },
 		},
 		bullet = {
-			icons = { "▪️", "▫️", "•", "◦" },
+			icons = { "▪️", "▫️", "•", "◦" }, -- smaller than default icons
 			ordered_icons = "", -- empty string = disable
 		},
 		code = {
@@ -38,15 +36,6 @@ return {
 		link = {
 			wiki = { icon = "󱅷 " },
 			custom = {
-				-- tech companies, PENDING https://github.com/MeanderingProgrammer/render-markdown.nvim/pull/565
-				apple = { pattern = "apple%.com", icon = " " },
-				microsoft = { pattern = "microsoft%.com", icon = " " },
-				hackernews = { pattern = "ycombinator%.com", icon = " " },
-				slack = { pattern = "slack%.com", icon = "󰒱 " },
-				steam = { pattern = "steampowered%.com", icon = " " },
-				twitter = { pattern = "x%.com", icon = " " },
-				linkedin = { pattern = "linkedin%.com", icon = "󰌻 " },
-
 				-- news sites
 				medium = { pattern = "medium%.com", icon = "󰬔 " }, -- letter-glyphs named `alpha_x`
 				verge = { pattern = "theverge%.com", icon = "󰰫 " },
@@ -66,8 +55,9 @@ return {
 				my_website = { pattern = "chris%-grieser.de", icon = " " },
 			},
 		},
-		-- makes toggling this plugin also toggle conceallevel
+		quote = { repeat_linebreak = true }, -- full border on soft-wrap
 		win_options = {
+			-- makes toggling this plugin also toggle conceallevel
 			conceallevel = { default = 0, rendered = 2 },
 		},
 		-- LSP hovers: hide code block lines (CAVEAT: also affects code-companion chat)

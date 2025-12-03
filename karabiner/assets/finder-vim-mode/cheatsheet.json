@@ -118,8 +118,14 @@
     "q\nclose win",
     "w\nduplicate",
     "e\nclose other wins",
-    "r\nrecent folder",
-    "t\n//",
+    {
+      "c": "#CCCCCC"
+    },
+    "r",
+    "t",
+    {
+      "c": "#c7a6ff"
+    },
     "z\nzip selection",
     "u (U)\nundo (redo)",
     "i (I)\nclose folds  (recurs.)",

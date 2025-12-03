@@ -1,5 +1,6 @@
 local spellfixes = {
 	ALfred = "Alfred",
+	broder = "border",
 	Brwoser = "Browser",
 	Markdwon = "Markdown",
 	THe = "The",

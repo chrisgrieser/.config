@@ -134,6 +134,7 @@ rules:
         to:
           - shell_command:
               qlmanage -p "$HOME/.config/karabiner/assets/finder-vim-mode/cheatsheet.png"
+              open -a "qlmanage" # to focus it
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *is-German-keyboard]
       # "?" on American keyboard
       - type: basic
@@ -141,6 +142,7 @@ rules:
         to:
           - shell_command:
               qlmanage -p "$HOME/.config/karabiner/assets/finder-vim-mode/cheatsheet.png"
+              open -a "qlmanage" # to focus it
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *not-German-keyboard]
       #─────────────────────────────────────────────────────────────────────────
       # INSERT MODE
@@ -297,26 +299,6 @@ rules:
           - *remove-menu-notice
           - *leave-find-mode
           - *remove-find-notice
-        conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
-      # r = recent folders
-      - type: basic
-        from: { key_code: r }
-        to_if_alone:
-          - shell_command: |
-              osascript -e '
-                tell application "System Events" to tell process "Finder"
-                	set frontmost to true
-                	click menu item "Recent Folders" of menu "Go" of menu bar 1 # actually only selects `Go`
-                	delay 0.1
-                	key code 125 # down, cycles to last item
-                	key code 126 # up
-                	key code 126 # up
-                	key code 126 # up
-                	key code 124 # right
-                end tell
-              '
-          - *start-menu
-          - *menu-notice
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
       #─────────────────────────────────────────────────────────────────────────
       # Selections
