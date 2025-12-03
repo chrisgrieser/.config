@@ -1,3 +1,9 @@
+local M = {} -- persist from garbage collector
+
+local env = require("meta.environment")
+local u = require("meta.utils")
+--------------------------------------------------------------------------------
+
 local config = {
 	syncIntervalMins = 30,
 	syncScriptAtLocation = ".sync-this-repo.sh",
@@ -5,13 +11,6 @@ local config = {
 	-- csv-format: "location,icon"
 	permaReposPath = os.getenv("HOME") .. "/.config/perma-repos.csv",
 }
-
---------------------------------------------------------------------------------
-
-local M = {} -- persist from garbage collector
-
-local env = require("meta.environment")
-local u = require("meta.utils")
 
 --------------------------------------------------------------------------------
 -- SYNC IMPLEMENTATION

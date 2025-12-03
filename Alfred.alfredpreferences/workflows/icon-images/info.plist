@@ -306,7 +306,7 @@
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
-				<string>https://www.freepik.com/search?query={query}&amp;selection=1</string>
+				<string>https://www.freepik.com/search?query={query}&amp;type=icon</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.openurl</string>

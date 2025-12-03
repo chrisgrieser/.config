@@ -25,17 +25,17 @@ killall "$app"
 
 # wait
 i=0
-while pgrep -xq "$front_app"; do
+while pgrep -xq "$app"; do
 	i=$((i + 1))
 	sleep 0.1
 	if [[ $i -gt 20 ]]; then
-		echo -n "⚠️ Could not quit $front_app" # Alfred notification
+		echo -n "⚠️ Could not quit $app" # Alfred notification
 		return 1
 	fi
 done
 sleep 0.1
 
 # restart
-[[ "$front_app" == "wezterm-gui" ]] && front_app="WezTerm" # process name differs from app name
-open -a "$front_app"
+[[ "$app" == "wezterm-gui" ]] && app="WezTerm" # process name differs from app name
+open -a "$app"
 echo -n "❗ Restarted $app" # Alfred notification

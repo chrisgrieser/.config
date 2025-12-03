@@ -27,7 +27,7 @@ M.aw_spotify = aw.new(function(appName, event, app)
 	print("🎵 Spotify: " .. action)
 
 	M.spotify_task = hs.task.new(alexaTrigger, nil, { "spotify-" .. action }):start()
-end) --[[@as hs.application.watcher]]
+end)
 
 M.aw_spotify:start()
 

@@ -3,7 +3,6 @@ local M = {}
 local env = require("meta.environment")
 local u = require("meta.utils")
 local wu = require("win-management.window-utils")
-
 local wf = hs.window.filter
 --------------------------------------------------------------------------------
 
@@ -52,9 +51,7 @@ M.wf_appsOnMouseScreen = wf.new(true)
 		if newWin:screen():id() ~= mouseScreen:id() then newWin:moveToScreen(mouseScreen) end
 	end)
 
---------------------------------------------------------------------------------
--- ACTIONS
-
+---ACTIONS----------------------------------------------------------------------
 local function toggleMaximized()
 	if u.isFront("Mona 6") then
 		local masto = u.app("Mona 6")
@@ -86,8 +83,7 @@ end
 local function tileRight() wu.moveResize(hs.window.focusedWindow(), hs.layout.right50) end
 local function tileLeft() wu.moveResize(hs.window.focusedWindow(), hs.layout.left50) end
 
---------------------------------------------------------------------------------
--- HOTKEYS
+---HOTKEYS----------------------------------------------------------------------
 hs.hotkey.bind({ "ctrl" }, "space", toggleMaximized)
 hs.hotkey.bind(u.hyper, "M", moveToNextDisplay)
 hs.hotkey.bind(u.hyper, "right", tileRight)

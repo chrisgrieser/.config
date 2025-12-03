@@ -1,20 +1,17 @@
 local M = {}
-local home = os.getenv("HOME")
 --------------------------------------------------------------------------------
 
 -- CONFIG
+local home = os.getenv("HOME")
 local browserConfigs = home .. "/.config/browser-extension-configs/"
 local backupFolder = home .. "/Library/Mobile Documents/com~apple~CloudDocs/Tech/backups/"
-
---------------------------------------------------------------------------------
 
 local u = require("meta.utils")
 local pathw = hs.pathwatcher.new
 hs.fs.mkdir(browserConfigs)
 hs.fs.mkdir(backupFolder)
 
---------------------------------------------------------------------------------
-
+---IPHONE SCANS-----------------------------------------------------------------
 -- move iPhone scans from iCloud root to Desktop
 local icloud = home .. "/Library/Mobile Documents/com~apple~CloudDocs"
 M.pathw_icloud = pathw(icloud, function(paths, _)
@@ -26,7 +23,7 @@ M.pathw_icloud = pathw(icloud, function(paths, _)
 	end)
 end):start()
 
--- AUTO-FILE FROM DESKTOP
+---AUTO-FILE FROM DESKTOP-------------------------------------------------------
 M.pathw_desktop = pathw(home .. "/Desktop/", function(paths, _)
 	if not u.screenIsUnlocked() then return end -- prevent iCloud sync triggering in standby
 

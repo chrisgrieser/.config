@@ -38,13 +38,11 @@ local function fallthrough()
 	end)
 end
 
---------------------------------------------------------------------------------
--- TRIGGERS
+---TRIGGERS---------------------------------------------------------------------
 M.wf_windowDestroyed = wf
 	.new(true) -- `true` = any app
 	:setOverrideFilter({ allowRoles = "AXStandardWindow", rejectTitles = { "^Login$", "^$" } })
 	:subscribe(wf.windowDestroyed, function () fallthrough() end)
-
 M.aw_noWinActivated = aw.new(function(name, event, _app)
 	if event == aw.activated and hs.fnutils.contains(config.fallthrough.whenNoWin, name) then
 		fallthrough()

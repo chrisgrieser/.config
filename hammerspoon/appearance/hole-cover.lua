@@ -1,20 +1,20 @@
+-- INFO Stop the macOS wallpaper from shining through gaps due to rounded corners of
+-- macOS apps.
+--------------------------------------------------------------------------------
 local M = {}
 
 local env = require("meta.environment")
 local u = require("meta.utils")
 local wu = require("win-management.window-utils")
---------------------------------------------------------------------------------
 
--- https://www.hammerspoon.org/Spoons/RoundedCorners.html
-local roundedCorner = hs.loadSpoon("RoundedCorners")
+---CORNERS OF THE SCREEN--------------------------------------------------------
+local roundedCorner = hs.loadSpoon("RoundedCorners") -- https://www.hammerspoon.org/Spoons/RoundedCorners.html
 if roundedCorner then
 	roundedCorner.radius = 18 -- macOS Tahoe's radius
 	roundedCorner:start()
 end
 
---------------------------------------------------------------------------------
-
----to stop wallpaper shining through
+---BETWEEN THE MASTODON APP & PSEUDO-MAXIMIZED WINDOW-----------------------
 function M.update()
 	if M.coverParts then
 		for _, cover in pairs(M.coverParts) do
@@ -48,8 +48,7 @@ function M.update()
 		cover:show()
 	end
 end
-
-M.update()
+M.update() -- initialize
 
 --------------------------------------------------------------------------------
 return M

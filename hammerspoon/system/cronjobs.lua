@@ -4,9 +4,8 @@ local env = require("meta.environment")
 local u = require("meta.utils")
 local wu = require("win-management.window-utils")
 local c = hs.caffeinate.watcher
---------------------------------------------------------------------------------
 
--- force reminders sync on startup
+---FORCE REMINDERS SYNC ON STARTUP----------------------------------------------
 if u.isSystemStart() then
 	print("📅 Syncing Reminders")
 	hs.execute("open -g -a Reminders") -- `-g` to open in background
@@ -16,9 +15,7 @@ if u.isSystemStart() then
 	end)
 end
 
---------------------------------------------------------------------------------
-
--- turn off display if
+---TURN OFF DISPLAY IF----------------------------------------------------------
 M.caff_projectorScreensaver = c.new(function(event)
 	if env.isAtOffice then return end
 
@@ -41,6 +38,7 @@ M.caff_projectorScreensaver = c.new(function(event)
 	end
 end):start()
 
+---CLOCK------------------------------------------------------------------------
 -- Show clock every full hour
 M.timer_clock = hs.timer
 	.doEvery(60, function()
@@ -65,9 +63,7 @@ M.timer_finesseBistro = hs.timer
 	end)
 	:start()
 
---------------------------------------------------------------------------------
--- NIGHTLY CRONJOBS
-
+---NIGHTLY MAINTENANCE----------------------------------------------------------
 -- CONFIG all `.sh` files in this directory are executed every other day at 01:00
 local cronjobDir = "./system/cronjobs"
 
@@ -92,10 +88,8 @@ M.timer_nightlyCronjobs = hs.timer
 	end, true)
 	:start()
 
---------------------------------------------------------------------------------
-
--- EMMYLUA UPDATER
--- HACK technically only needed once every hammerspoon update, but since there
+---EMMYLUA UPDATER--------------------------------------------------------------
+-- technically only needed once every hammerspoon update, but since there
 -- is no good API to detect updates, we just run it weekly instead.
 M.timer_emmyluaUpdater = hs.timer
 	.doAt("01:30", "01d", function()
@@ -103,9 +97,7 @@ M.timer_emmyluaUpdater = hs.timer
 	end)
 	:start()
 
---------------------------------------------------------------------------------
-
--- UPTIME CHECK
+---UPTIME CHECK-----------------------------------------------------------------
 local maxUptimeDays = 30
 M.timer_uptime = hs.timer
 	.doAt("01:30", "01d", function()
@@ -117,9 +109,7 @@ M.timer_uptime = hs.timer
 	end)
 	:start()
 
---------------------------------------------------------------------------------
--- SLEEP TIMER
-
+---SLEEP TIMER------------------------------------------------------------------
 -- When projector is connected, check every x min if device has been idle for y
 -- minutes. If so, alert and wait for z secs. If still idle then, quit
 -- all video apps.
