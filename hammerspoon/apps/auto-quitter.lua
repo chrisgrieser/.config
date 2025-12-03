@@ -2,7 +2,6 @@ local M = {} -- persist from garbage collector
 
 local env = require("meta.environment")
 local u = require("meta.utils")
-
 local aw = hs.application.watcher
 local now = os.time
 --------------------------------------------------------------------------------
@@ -28,7 +27,17 @@ local config = {
 	},
 }
 
---------------------------------------------------------------------------------
+---INITIALIZE-------------------------------------------------------------------
+---apps with their last activation time
+---@type table<string, integer|nil>
+M.idleApps = {}
+
+-- fill `idleApps` with all running apps and the current time
+for app, _ in pairs(config.thresholdMins) do
+	if u.appRunning(app) then M.idleApps[app] = now() end
+end
+
+---TRIGGER----------------------------------------------------------------------
 
 ---@param appName string name of the app
 local function quit(appName)
@@ -51,17 +60,6 @@ local function quit(appName)
 	require("win-management.auto-tile").resetWinCount(appName)
 end
 
----INITIALIZE-------------------------------------------------------------------
----apps with their last activation time
----@type table<string, integer|nil>
-M.idleApps = {}
-
--- fill `idleApps` with all running apps and the current time
-for app, _ in pairs(config.thresholdMins) do
-	if u.appRunning(app) then M.idleApps[app] = now() end
-end
-
---------------------------------------------------------------------------------
 
 -- Watch app (de)activation & update `idleApps`
 M.aw_appDeactivation = aw.new(function(appName, event)

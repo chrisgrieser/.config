@@ -1,9 +1,8 @@
 local M = {} -- persist from garbage collector
 
 local u = require("meta.utils")
---------------------------------------------------------------------------------
--- USB WATCHER
 
+---USB WATCHER------------------------------------------------------------------
 -- backup device: open terminal
 -- otherwise: open in Finder
 M.usb_externalDrive = hs.usb.watcher
@@ -38,9 +37,7 @@ M.usb_externalDrive = hs.usb.watcher
 	end)
 	:start()
 
---------------------------------------------------------------------------------
--- BATTERY
-
+---BATTERY----------------------------------------------------------------------
 M.timer_dailyBatteryCheck = hs.timer
 	.doAt("14:30", "01d", function()
 		local warnBelowPercent = 10 -- CONFIG

@@ -1,9 +1,8 @@
 local M = {}
 
-local console = require("appearance.console")
-local holeCover = require("appearance.hole-cover")
 local u = require("meta.utils")
---------------------------------------------------------------------------------
+
+---METHODS----------------------------------------------------------------------
 
 ---@param msg string
 ---@param threshold? number
@@ -13,8 +12,6 @@ local function logBrightness(msg, threshold)
 		or ("(%s)"):format(ambientText)
 	print(("🌗 %s %s"):format(msg, info))
 end
-
---------------------------------------------------------------------------------
 
 function M.autoSetBrightness()
 	local ambient = hs.brightness.ambient()
@@ -60,11 +57,11 @@ function M.setDarkMode(toMode)
 	end
 
 	-- hammerspoon itself
-	console.setConsoleColors(toMode)
-	holeCover.update()
+	require("appearance.console").setConsoleColors(toMode)
+	require("appearance.hole-cover").update()
 end
 
--- MANUAL TOGGLING OF DARK MODE
+---MANUALLY TOGGLE DARK MODE----------------------------------------------------
 -- forward-delete = `󰛨` on my Keychron keyboard
 hs.hotkey.bind({}, "forwarddelete", function()
 	local toMode = u.isDarkMode() and "light" or "dark"
@@ -72,7 +69,7 @@ hs.hotkey.bind({}, "forwarddelete", function()
 	logBrightness(("Manually toggled %s mode"):format(toMode))
 end)
 
---------------------------------------------------------------------------------
+---AUTO-SWITCH DARK MODE--------------------------------------------------------
 
 -- autoswitch dark mode and light mode
 -- If device has brightness sensor, uses a threshold to determine whether to

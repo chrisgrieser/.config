@@ -1,16 +1,14 @@
-local M = {} -- persist from garbage collector
+local M = {}
 
 local u = require("meta.utils")
 local cons = hs.console
 local wf = hs.window.filter
 local aw = hs.application.watcher
 
---------------------------------------------------------------------------------
+---DEBUGGING HELPER-----------------------------------------------------------------
 _G.i = hs.inspect -- `i()` to easier inspect in the console
---------------------------------------------------------------------------------
 
--- CONFIG
--- CONSOLE APPEARANCE
+---CONSOLE APPEARANCE-----------------------------------------------------------
 local baseFont = { name = "JetBrainsMonoNL NF", size = 22 }
 
 local function red(isDark)
@@ -34,9 +32,19 @@ local function blue(isDark)
 	return { red = 0, green = 0.1, blue = 0.5 }
 end
 
---------------------------------------------------------------------------------
+---@param toMode "dark"|"light"
+function M.setConsoleColors(toMode)
+	local isDark = toMode == "dark"
+	cons.outputBackgroundColor(base(not isDark))
+	cons.consolePrintColor(base(isDark))
+	cons.consoleCommandColor(blue(isDark))
+	cons.darkMode(isDark)
+end
 
--- CONSOLE SETTINGS
+-- initialize
+M.setConsoleColors(u.isDarkMode() and "dark" or "light")
+
+---CONSOLE SETTINGS-------------------------------------------------------------
 cons.titleVisibility("hidden")
 cons.toolbar(nil)
 cons.consoleFont(baseFont)
@@ -46,7 +54,7 @@ hs.consoleOnTop(true) -- buggy?
 hs.hotkey.setLogLevel(0) ---@diagnostic disable-line: undefined-field https://github.com/Hammerspoon/hammerspoon/issues/3491
 hs.application.enableSpotlightForNameSearches(false)
 
---------------------------------------------------------------------------------
+---CLEANUP CONSOLE CONTENT------------------------------------------------------
 
 ---filter console entries, removing logging for enabling/disabling hotkeys,
 ---useless layout info or warnings, or info on extension loading.
@@ -108,10 +116,20 @@ M.aw_hsConsole = aw.new(function(appName, eventType)
 	if eventType == aw.activated and appName == "Hammerspoon" then u.defer(0.1, M.cleanupConsole) end
 end):start()
 
---------------------------------------------------------------------------------
+-- Insert a separator in the console log every day at midnight
+M.timer_dailyConsoleSeparator = hs.timer
+	.doAt("00:01", "01d", function() -- `00:01` to ensure date switched to the next day
+		local date = os.date("%a, %d. %b")
+		-- stylua: ignore
+		print(("\n------------------------- %s -----------------------------\n"):format(date))
+	end, true)
+	:start()
 
--- APP-HOTKEYS
----@type fun(modifier: string[], key: string, action: function)
+---HOTKEYS FOR THE CONSOLE--------------------------------------------------
+
+---@param modifier string[]
+---@param key string
+---@param action function
 local function hammerspoonHotkey(modifier, key, action)
 	hs.hotkey.bind(modifier, key, function()
 		local frontApp = hs.application.frontmostApplication()
@@ -125,31 +143,7 @@ local function hammerspoonHotkey(modifier, key, action)
 end
 
 hammerspoonHotkey({ "cmd" }, "q", hs.closeConsole) -- prevent accidental quitting
-hammerspoonHotkey({ "cmd" }, "k", hs.console.clearConsole)
-
---------------------------------------------------------------------------------
--- Insert a separator in the console log every day at midnight
-M.timer_dailyConsoleSeparator = hs.timer
-	.doAt("00:01", "01d", function() -- `00:01` to ensure date switched to the next day
-		local date = os.date("%a, %d. %b")
-		-- stylua: ignore
-		print(("\n------------------------- %s -----------------------------\n"):format(date))
-	end, true)
-	:start()
-
---------------------------------------------------------------------------------
-
----@param toMode "dark"|"light"
-function M.setConsoleColors(toMode)
-	local isDark = toMode == "dark"
-	cons.outputBackgroundColor(base(not isDark))
-	cons.consolePrintColor(base(isDark))
-	cons.consoleCommandColor(blue(isDark))
-	cons.darkMode(isDark)
-end
-
--- initialize
-M.setConsoleColors(u.isDarkMode() and "dark" or "light")
+hammerspoonHotkey({ "cmd" }, "k", hs.console.clearConsole) -- consistent with terminals
 
 --------------------------------------------------------------------------------
 return M

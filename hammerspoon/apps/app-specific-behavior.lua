@@ -2,6 +2,7 @@ local M = {} -- persist from garbage collector
 
 local env = require("meta.environment")
 local u = require("meta.utils")
+local wu = require("win-management.window-utils")
 local aw = hs.application.watcher
 local wf = hs.window.filter
 
@@ -68,7 +69,10 @@ M.wf_scripteditor = wf
 M.aw_masto = aw.new(function(appName, event, masto)
 	if appName ~= "Mona 6" then return end
 
-	if event == aw.deactivated then
+	if event == aw.activated then
+		local win = masto:mainWindow()
+		if win then win:setFrame(wu.toTheSide) end
+	elseif event == aw.deactivated then
 		local win = masto:mainWindow()
 		local isMediaWin = win and win:title():find("^Image")
 		local frontNotAlfred = hs.application.frontmostApplication():name() ~= "Alfred"

@@ -1,11 +1,9 @@
 -- INFO prevent maximized window from covering `sketchybar` if they are unfocused
 --------------------------------------------------------------------------------
-
-local M = {} -- persist from garbage collector
+local M = {}
 
 local env = require("meta.environment")
 local u = require("meta.utils")
-
 local aw = hs.application.watcher
 --------------------------------------------------------------------------------
 

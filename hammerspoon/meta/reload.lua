@@ -9,8 +9,6 @@ hs.urlevent.bind("hs-reload", function()
 	u.defer(0.1, hs.reload)
 end)
 
---------------------------------------------------------------------------------
-
 if u.isSystemStart() then
 	hs.notify.show("Hammerspoon", "", "✅ Finished loading")
 else

@@ -1,6 +1,9 @@
-local M = {} ---@cast M table<string, any>
+local M = {}
+
 local env = require("meta.environment")
 local wu = require("win-management.window-utils")
+local wf = hs.window.filter
+local aw = hs.application.watcher
 --------------------------------------------------------------------------------
 
 local config = {
@@ -20,8 +23,7 @@ local config = {
 --------------------------------------------------------------------------------
 
 ---@param appName string
----@param _trigger string only for debugging purposes
-local function autoTile(appName, _trigger)
+local function autoTile(appName)
 	local app = hs.application.find(appName, true, true)
 	if not app then
 		M["winCount_" .. appName] = nil
@@ -79,21 +81,18 @@ local function autoTile(appName, _trigger)
 	end
 end
 
---------------------------------------------------------------------------------
+---TRIGGERING CONDITIONS--------------------------------------------------------
 
--- triggering conditions
-local wf = hs.window.filter
-local aw = hs.application.watcher
 for appName, ignoredWins in pairs(config.appsToAutoTile) do
 	M["winFilter_" .. appName] = wf.new(appName)
 		:setOverrideFilter({ rejectTitles = ignoredWins, allowRoles = "AXStandardWindow" })
-		:subscribe(wf.windowCreated, function() autoTile(appName, "win created") end)
-		:subscribe(wf.windowDestroyed, function() autoTile(appName, "win destroyed") end)
-		:subscribe(wf.windowFocused, function() autoTile(appName, "win focused") end)
+		:subscribe(wf.windowCreated, function() autoTile(appName) end)
+		:subscribe(wf.windowDestroyed, function() autoTile(appName) end)
+		:subscribe(wf.windowFocused, function() autoTile(appName) end)
 
 	M["appWatcher_" .. appName] = aw.new(function(name, event, autoTileApp)
 		if event == aw.activated and name == appName then
-			autoTile(appName, "app activated")
+			autoTile(appName)
 			autoTileApp:selectMenuItem { "Window", "Bring All to Front" }
 		elseif event == aw.terminated and name == appName then
 			M.resetWinCount(appName)
@@ -104,15 +103,6 @@ end
 ---helper function, so window-closing modules can reset the count here
 ---@param appName string
 function M.resetWinCount(appName) M["winCount_" .. appName] = nil end
-
--- DEBUG use `autotile()` in the console to inspect win counts
-function _G.autotile()
-	local msg = {"🪟 autotile win count:"}
-	for appName in pairs(config.appsToAutoTile) do
-		table.insert(msg, ("- %s: %s"):format(appName, M["winCount_" .. appName]))
-	end
-	print(table.concat(msg, "\n"))
-end
 
 --------------------------------------------------------------------------------
 return M

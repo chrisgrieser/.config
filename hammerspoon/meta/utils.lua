@@ -1,5 +1,6 @@
-local M = {} -- persist from garbage collector
---------------------------------------------------------------------------------
+local M = {}
+
+---SETTINGS---------------------------------------------------------------------
 
 -- bound to capslock via Karabiner elements
 M.hyper = { "cmd", "alt", "ctrl" }
@@ -19,7 +20,7 @@ M.videoAndAudioApps = {
 	"Twitch",
 }
 
---------------------------------------------------------------------------------
+---UTILS------------------------------------------------------------------------
 
 ---Differentiate code to be run on reload and code to be run on startup.
 ---REQUIRED dependent on the setup in `reload.lua`.
@@ -34,8 +35,8 @@ end
 ---ranges that go beyond midnight, e.g. 23 to 6.
 ---@param startHour integer time between 0 and 24. Also accepts floats like 13.5 for 13:30
 ---@param endHour integer time between 0 and 24
----@nodiscard
 ---@return boolean isInBetween
+---@nodiscard
 function M.betweenTime(startHour, endHour)
 	if startHour >= 24 or endHour >= 24 or startHour < 0 or endHour < 0 then
 		error("⚠️ BetweenTime: Invalid time range")
@@ -69,10 +70,9 @@ function M.writeToFile(filePath, str, append)
 	end
 end
 
----read the full file
 ---@param filePath string
----@nodiscard
 ---@return string|nil file content or nil when reading not successful
+---@nodiscard
 function M.readFile(filePath)
 	local file, err = io.open(filePath, "r")
 	if not file then return "ERROR: " .. err end
@@ -81,8 +81,8 @@ function M.readFile(filePath)
 	return content
 end
 
----@nodiscard
 ---@return boolean
+---@nodiscard
 function M.isDarkMode() return hs.execute("defaults read -g AppleInterfaceStyle") == "Dark\n" end
 
 ---Repeat a function multiple times, catching timers in table to avoid garbage
@@ -98,8 +98,8 @@ function M.defer(delaySecs, callbackFn)
 	end
 end
 
----@nodiscard
 ---@return boolean
+---@nodiscard
 function M.screenIsUnlocked()
 	local _, success = hs.execute(
 		'[[ "$(/usr/libexec/PlistBuddy -c "print :IOConsoleUsers:0:CGSSessionScreenIsLocked" /dev/stdin 2>/dev/null <<< "$(ioreg -n Root -d1 -a)")" != "true" ]]'
@@ -139,8 +139,8 @@ function M.app(appName)
 end
 
 ---@param appNames string|string[] app or apps that should be checked
----@nodiscard
 ---@return boolean true when *one* of the apps is frontmost
+---@nodiscard
 function M.isFront(appNames)
 	if appNames == nil then return false end
 	if type(appNames) == "string" then appNames = { appNames } end
@@ -151,8 +151,8 @@ function M.isFront(appNames)
 end
 
 ---@param appNames string|string[] app or apps that should be running
----@nodiscard
 ---@return boolean true when all apps are running
+---@nodiscard
 function M.appRunning(appNames)
 	if type(appNames) == "string" then appNames = { appNames } end
 	local allAreRunning = true
@@ -162,7 +162,6 @@ function M.appRunning(appNames)
 	return allAreRunning
 end
 
----@async
 ---@param appName string
 ---@param callbackFn function function to execute when a window of the app is available
 function M.whenAppWinAvailable(appName, callbackFn)
@@ -250,11 +249,13 @@ function M.createReminderToday(title)
 end
 
 ---Also notifies if the path is not executable
----(needed, as `hs.task.new` fails if the path is not executable)
+---(needed as `hs.task.new` fails if the path is not executable)
 ---@param path string
+---@return boolean
+---@nodiscard
 function M.isExecutable(path)
 	local permissions = hs.fs.attributes(path, "permissions") or ""
-	local executable = permissions:find("x")
+	local executable = permissions:find("x") ~= nil
 	if not executable then M.notify(("❌ %q is not executable"):format(path)) end
 	return executable
 end

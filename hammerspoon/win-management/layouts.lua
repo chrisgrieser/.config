@@ -6,8 +6,7 @@ local holeCover = require("appearance.hole-cover")
 local u = require("meta.utils")
 local wu = require("win-management.window-utils")
 
---------------------------------------------------------------------------------
--- HELPERS
+---HELPERS----------------------------------------------------------------------
 
 ---@param dockToUse string
 local function dockSwitcher(dockToUse)
@@ -23,8 +22,7 @@ end
 
 local function darkenDisplay() wu.iMacDisplay:setBrightness(0) end
 
--------------------------------------------------------------------------------
--- LAYOUTS
+---LAYOUTS---------------------------------------------------------------------
 
 ---@param shouldDarkenDisplay boolean
 local function workLayout(shouldDarkenDisplay)
@@ -80,9 +78,7 @@ local function movieLayout()
 	print("🔲 Layout: movie")
 end
 
---------------------------------------------------------------------------------
--- WHEN TO SET LAYOUT
-
+---WHEN TO SET LAYOUT-----------------------------------------------------------
 local isLayouting = false
 ---Select layout depending on number of screens, and prevent concurrent runs
 ---@param reason string?

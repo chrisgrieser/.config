@@ -1,6 +1,9 @@
 -- INFO This module will notify when the outside temperature passes the inside
 -- temperature or vice versa.
 --------------------------------------------------------------------------------
+local M = {} -- persist from garbage collector
+local u = require("meta.utils")
+--------------------------------------------------------------------------------
 
 local config = {
 	activeInMonths = { "Jun", "Jul", "Aug", "Sep" },
@@ -13,18 +16,12 @@ local config = {
 	longitude = 13,
 }
 
---------------------------------------------------------------------------------
-
--- GUARD
+---WHEN TO ENABLE THIS MODULE---------------------------------------------------
 local curMonth = tostring(os.date("%b"))
 local enabledForThisMonth = hs.fnutils.contains(config.activeInMonths, curMonth)
 local isAtHome = require("meta.environment").isAtHome
 if not enabledForThisMonth or not isAtHome then return end
-
 --------------------------------------------------------------------------------
-
-local M = {} -- persist from garbage collector
-local u = require("meta.utils")
 
 local function soundNotify(msg)
 	msg = "🌡" .. msg
@@ -32,8 +29,6 @@ local function soundNotify(msg)
 	print(msg)
 	hs.sound.getByName("Funk"):volume(0.5):play() ---@diagnostic disable-line: undefined-field
 end
-
---------------------------------------------------------------------------------
 
 -- DOCS https://brightsky.dev/docs/#get-/current_weather
 local callUrl = ("https://api.brightsky.dev/current_weather?lat=%d&lon=%d"):format(
@@ -72,8 +67,7 @@ local function getOutsideTemp()
 	end)
 end
 
---------------------------------------------------------------------------------
--- TRIGGERS
+---TRIGGERS---------------------------------------------------------------------
 -- 1. systemstart
 if u.isSystemStart() then getOutsideTemp() end
 
