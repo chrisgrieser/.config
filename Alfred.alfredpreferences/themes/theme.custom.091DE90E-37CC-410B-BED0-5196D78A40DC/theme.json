@@ -14,7 +14,7 @@
         "font" : "Lucida Grande",
         "color" : "#005EA7FF"
       },
-      "backgroundSelected" : "#6C6C6CFF",
+      "backgroundSelected" : "#727272FF",
       "text" : {
         "size" : 26,
         "colorSelected" : "#000000FF",
@@ -36,7 +36,7 @@
         "font" : "Lucida Grande",
         "color" : "#FEFFFFFF"
       },
-      "background" : "#424242FF",
+      "background" : "#404040FF",
       "roundness" : 15,
       "paddingVertical" : 12
     },

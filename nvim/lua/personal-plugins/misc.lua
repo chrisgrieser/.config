@@ -124,7 +124,7 @@ function M.restartNeovide()
 	]=]
 
 	vim.system({ "zsh", "-c", script }, { detach = true }) -- detach to run after nvim quit
-	vim.cmd.wqall()
+	vim.defer_fn(vim.cmd.wqall, 1)
 end
 
 ---Wraps text with markdown links, automatically inserting the URL if in a Markdown link if the `+` register has a URL. In normal mode, can undo.
@@ -156,7 +156,7 @@ function M.mdWrap(startWrap, endWrap)
 	local prevOpt = vim.opt.iskeyword:get()
 	local shouldUndo = false
 	if mode == "n" then
-		vim.opt.iskeyword:append({startWrap:sub(1, 1), endWrap:sub(1, 1)})
+		vim.opt.iskeyword:append { startWrap:sub(1, 1), endWrap:sub(1, 1) }
 		shouldUndo = vim.fn.expand("<cword>") == insert
 		if shouldUndo then insert = text end
 	end
