@@ -511,7 +511,3 @@ keymap("n", "<leader>ol", function()
 end, { desc = "󰑓 LSP Restart" })
 
 --------------------------------------------------------------------------------
-
--- lua/tinygit/commands/commit/preview.lua │ 6 ++++--
-vim.fn.matchadd("Error", [[-\+\ze\s*$]])
-
