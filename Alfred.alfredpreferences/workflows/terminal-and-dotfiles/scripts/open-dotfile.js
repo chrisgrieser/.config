@@ -47,7 +47,6 @@ function run() {
 		if (modifiedFiles.includes(relPath)) emoji += " ✴️";
 
 		// TYPE-ICON
-		// SOURCE
 		// 1. https://github.com/material-extensions/vscode-material-icon-theme/tree/main/icons
 		// 2. https://github.com/vscode-icons/vscode-icons/tree/master/icons
 		let type = "";
