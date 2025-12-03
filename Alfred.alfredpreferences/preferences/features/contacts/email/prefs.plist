@@ -12,5 +12,7 @@
 	<true/>
 	<key>singleSubjectEnabled</key>
 	<false/>
+	<key>useGmail</key>
+	<true/>
 </dict>
 </plist>

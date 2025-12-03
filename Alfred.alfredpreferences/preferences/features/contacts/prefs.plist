@@ -15,5 +15,7 @@
 	</array>
 	<key>mapURL</key>
 	<string>https://maps.google.com/?q={query}</string>
+	<key>showJobTitle</key>
+	<true/>
 </dict>
 </plist>
