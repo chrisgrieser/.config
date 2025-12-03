@@ -7,6 +7,12 @@
 ---@type vim.lsp.Config
 return {
 	filetypes = { "markdown" }, -- too many false positives elsewhere
+	root_dir = function(bufnr, on_dir)
+		-- do not load in specific repos (there is no `harperignore` to do this)
+		if require("config.utils").isObsidianOrNotesOrIcloud(bufnr) then return end
+		local rootMarkers = { ".git" }
+		on_dir(vim.fs.root(bufnr, rootMarkers))
+	end,
 	settings = {
 		["harper-ls"] = {
 			diagnosticSeverity = "hint",
@@ -30,11 +36,6 @@ return {
 			dialect = "American",
 		},
 	},
-	root_dir = function(bufnr, on_dir)
-		if require("config.utils").isObsidianOrNotesOrIcloud(bufnr) then return end
-		local rootMarkers = { ".git" }
-		on_dir(vim.fs.root(bufnr, rootMarkers))
-	end,
 	on_attach = function(_client, bufnr)
 		-- Using `harper` to write to the spell-file effectively does the same as
 		-- the builtin `zg`, but has the advantage that `harper` is hot-reloaded.

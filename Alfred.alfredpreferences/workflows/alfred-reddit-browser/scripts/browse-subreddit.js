@@ -92,7 +92,7 @@ function getHackernewsPosts(oldItems) {
 	// alternative "https://hacker-news.firebaseio.com/v0/topstories.json";
 	const url = `https://hn.algolia.com/api/v1/search_by_date?tags=front_page&hitsPerPage=${opts.pagesToRequest}`;
 	let response;
-	const apiResponse = app.doShellScript(`curl -sL "${url}"`);
+	const apiResponse = app.doShellScript(`curl --silent --location --max-time 10 "${url}"`);
 	try {
 		response = JSON.parse(apiResponse);
 	} catch (_error) {
@@ -203,11 +203,11 @@ function getRedditPosts(subredditName, oldItems) {
 
 	// DOCS https://www.reddit.com/dev/api#GET_new
 	const apiUrl = `https://www.reddit.com/r/${subredditName}/${opts.sortType}.json?limit=${opts.pagesToRequest}`;
-	const curlCommand = `curl --silent --user-agent "${userAgent}" "${apiUrl}"`;
+	const curlCommand = `curl --silent --max-time 10 --user-agent "${userAgent}" "${apiUrl}"`;
 	const response = app.doShellScript(curlCommand);
-	let jsonData
+	let jsonData;
 	try {
-		jsonData = JSON.parse(app.doShellScript(curlCommand));
+		jsonData = JSON.parse(response);
 		if (jsonData.error) {
 			const errorMsg = `Error ${jsonData.error}: ${jsonData.message}`;
 			console.log(errorMsg);
@@ -341,30 +341,30 @@ function run() {
 
 	// GUARD Error or no posts left after filtering
 	if (typeof posts === "string") {
-		const blockedByNs = posts.includes("blocked by network security");
-		const errorMsg = blockedByNs ? "You have been blocked by network security." : posts;
-		const info = blockedByNs
-			? "Usually, the workflow will work again in a few hours."
-			: "See debugging console for details.";
-		return JSON.stringify({
-			items: [
-				{
-					title: errorMsg,
-					subtitle: info,
-					valid: false,
-					mods: {
-						// in case of error, still allow to switch to next subreddit
-						cmd: { arg: "next", valid: true },
-						"cmd+shift": { arg: "prev", valid: true },
-					},
+		const errorMsg = posts;
+		const subtitle = "See debugging console for details.";
+
+		/** @type {AlfredItem[]} */
+		const items = [
+			{
+				title: errorMsg,
+				subtitle: subtitle,
+				valid: false,
+				mods: {
+					// in case of error, still allow to switch to next subreddit
+					cmd: { arg: "next", valid: true },
+					"cmd+shift": { arg: "prev", valid: true },
 				},
-				{
-					title: "Open subreddit in the browser",
-					subtitle: "r/" + subredditName,
-					arg: `https://www.reddit.com/r/${subredditName}`,
-				},
-			],
-		});
+			},
+		];
+		if (subredditName !== "hackernews") {
+			items.push({
+				title: "Open subreddit in the browser",
+				subtitle: "r/" + subredditName,
+				arg: `https://www.reddit.com/r/${subredditName}`,
+			});
+		}
+		return JSON.stringify({ items: items });
 	}
 	if (posts.length === 0) {
 		const msg = "No posts higher than minimum upvote count.";
