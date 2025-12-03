@@ -203,7 +203,7 @@ function getRedditPosts(subredditName, oldItems) {
 
 	// DOCS https://www.reddit.com/dev/api#GET_new
 	const apiUrl = `https://www.reddit.com/r/${subredditName}/${opts.sortType}.json?limit=${opts.pagesToRequest}`;
-	const curlCommand = `curl --silent --max-time 10 --user-agent "${userAgent}" "${apiUrl}"`;
+	const curlCommand = `curl --silent --max-time 10 --user-agent "${userAgent}" "${apiUrl}" || true`;
 	const response = app.doShellScript(curlCommand);
 	let jsonData;
 	try {
@@ -216,8 +216,9 @@ function getRedditPosts(subredditName, oldItems) {
 	} catch (_error) {
 		console.log("Failed curl command: " + curlCommand);
 		if (response.includes("You've been blocked by network security.")) {
-			console.log("network security complains.");
-			return "Reddit network security complains. Try again later.";
+			const errorMsg = "Reddit network security complains. Try again later.";
+			console.log(errorMsg);
+			return errorMsg;
 		}
 		return "Unknown error.";
 	}
@@ -342,13 +343,11 @@ function run() {
 	// GUARD Error or no posts left after filtering
 	if (typeof posts === "string") {
 		const errorMsg = posts;
-		const subtitle = "See debugging console for details.";
 
 		/** @type {AlfredItem[]} */
 		const items = [
 			{
 				title: errorMsg,
-				subtitle: subtitle,
 				valid: false,
 				mods: {
 					// in case of error, still allow to switch to next subreddit
