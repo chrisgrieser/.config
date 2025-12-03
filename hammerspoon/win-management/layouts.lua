@@ -38,9 +38,9 @@ local function workLayout(shouldDarkenDisplay)
 	u.quitFullscreenAndVideoApps()
 
 	-- open things
-	u.openApps { "Mona", "Gmail", "AlfredExtraPane", isWorkWeek() and "Slack" or nil }
+	u.openApps { "Mona 6", "Gmail", "AlfredExtraPane", isWorkWeek() and "Slack" or nil }
 	u.defer(1, function()
-		local masto = u.app("Mona")
+		local masto = u.app("Mona 6")
 		if masto then masto:mainWindow():setFrame(wu.toTheSide) end
 
 		local appsToLayout = { "Gmail", "Brave Browser", isWorkWeek() and "Slack" or nil }
@@ -74,7 +74,7 @@ local function movieLayout()
 		"WezTerm",
 		"Gmail",
 		"Neovide",
-		"Mona",
+		"Mona 6",
 		"Reminders",
 	}
 	print("🔲 Layout: movie")

@@ -56,8 +56,8 @@ M.wf_appsOnMouseScreen = wf.new(true)
 -- ACTIONS
 
 local function toggleMaximized()
-	if u.isFront("Mona") then
-		local masto = u.app("Mona")
+	if u.isFront("Mona 6") then
+		local masto = u.app("Mona 6")
 		if masto then masto:mainWindow():setFrame(wu.toTheSide) end
 		return
 	end

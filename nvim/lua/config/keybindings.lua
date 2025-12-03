@@ -25,6 +25,14 @@ end
 -- save before quitting (non-unique, since also set by Neovide)
 keymap("n", "<D-q>", vim.cmd.wqall, { desc = " Save & quit", unique = false })
 
+keymap(
+	{ "n", "x", "i" },
+	"<D-C-r>", -- `hyper` gets registered by neovide as `cmd+ctrl` (`D-C`)
+	function() require("personal-plugins.misc").restartNeovide() end,
+	{ desc = " Save & restart" }
+)
+
+
 -- stylua: ignore
 keymap("n", "<leader>pd", function() vim.ui.open(vim.fn.stdpath("data") --[[@as string]]) end, { desc = "󰝰 Local data dir" })
 -- stylua: ignore
@@ -35,20 +43,13 @@ keymap("n", "<D-,>", function()
 	vim.cmd.edit(pathOfThisFile)
 end, { desc = "󰌌 Edit keybindings" })
 
-keymap(
-	{ "n", "x", "i" },
-	"<D-C-r>", -- `hyper` gets registered by neovide as `cmd+ctrl` (`D-C`)
-	function() require("personal-plugins.misc").restartNeovide() end,
-	{ desc = " Save & restart neovide" }
-)
-
 -- terminal at cwd
 keymap(
 	{ "n", "x", "i" },
 	"<D-C-t>", -- `hyper` gets registered by neovide as cmd+ctrl
 	function()
 		assert(jit.os == "OSX", "requires macOS' `osascript`")
-		vim.system({ "open", "-a", 'WezTerm' }):wait()
+		vim.system({ "open", "-a", "WezTerm" }):wait()
 		vim.defer_fn(function()
 			local stdin = ("cd -q %q && clear\n"):format(vim.uv.cwd() or "")
 			vim.system({ "wezterm", "cli", "send-text", "--no-paste" }, { stdin = stdin })
@@ -155,24 +156,15 @@ end
 
 -- Spelling
 keymap("n", "z.", "1z=", { desc = "󰓆 Fix spelling" }) -- works even with `spell=false`
-keymap("n", "zl", function()
-	local suggestions = vim.fn.spellsuggest(vim.fn.expand("<cword>"))
-	suggestions = vim.list_slice(suggestions, 1, 9)
-	vim.ui.select(suggestions, { prompt = "󰓆 Spelling suggestions" }, function(selection)
-		if not selection then return end
-		vim.cmd.normal { '"_ciw' .. selection, bang = true }
-	end)
-end, { desc = "󰓆 Spell suggestions" })
 
--- template strings
+-- Template strings
 -- stylua: ignore
 keymap("i", "<D-t>", function() require("personal-plugins.auto-template-str").insertTemplateStr() end, { desc = "󰅳 Insert template string" })
 
--- multi-edit
+-- Multi-edit
 keymap("n", "<D-j>", '*N"_cgn', { desc = "󰆿 Multi-edit cword" })
 keymap("x", "<D-j>", function()
-	local selection = vim.fn.getregion(vim.fn.getpos("."), vim.fn.getpos("v"), { type = "v" })[1]
-	assert(selection, "No selection.")
+	local selection = vim.fn.getregion(vim.fn.getpos("."), vim.fn.getpos("v"))[1]
 	vim.fn.setreg("/", "\\V" .. vim.fn.escape(selection, [[/\]]))
 	return '<Esc>"_cgn'
 end, { desc = "󰆿 Multi-edit selection", expr = true })
@@ -188,7 +180,7 @@ keymap({ "n", "x", "i" }, "<D-k>", function() require("personal-plugins.misc").m
 keymap({ "n", "x", "i" }, "<D-b>", function() require("personal-plugins.misc").mdWrap("**") end, { desc = " Bold" })
 keymap({ "n", "x", "i" }, "<D-i>", function() require("personal-plugins.misc").mdWrap("*") end, { desc = " Italic" })
 
--- simple surrounds
+-- Simple surrounds
 keymap("n", '"', function() require("personal-plugins.misc").mdWrap('"') end, { desc = ' Surround' })
 keymap("n", "(", function() require("personal-plugins.misc").mdWrap("(", ")") end, { desc = "󰅲 Surround" })
 keymap("n", "[", function() require("personal-plugins.misc").mdWrap("[", "]") end, { desc = "󰅪 Surround" })
