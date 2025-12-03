@@ -509,3 +509,9 @@ keymap("n", "<leader>ol", function()
 	vim.lsp.enable(names, false)
 	vim.lsp.enable(names, true)
 end, { desc = "󰑓 LSP Restart" })
+
+--------------------------------------------------------------------------------
+
+-- lua/tinygit/commands/commit/preview.lua │ 6 ++++--
+vim.fn.matchadd("Error", [[-\+\ze\s*$]])
+
