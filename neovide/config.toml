@@ -7,7 +7,7 @@ tabs = false
 mouse-cursor-icon = "i-beam"
 
 [font]
-normal = ["JetBrainsMonoNL NF", "Monaco"]
+normal = ["JetBrainsMonoNL NF", "Menlo"]
 size = 24.5
 
 [box-drawing]
