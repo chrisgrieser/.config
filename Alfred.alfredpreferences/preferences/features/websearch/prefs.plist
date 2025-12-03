@@ -57,7 +57,7 @@
 			<key>text</key>
 			<string>ChatGPT: {query}</string>
 			<key>url</key>
-			<string>https://chatgpt.com?prompt={query}</string>
+			<string>https://chatgpt.com/?prompt={query}</string>
 		</dict>
 		<key>295774FE-716A-4B62-87C6-F36AB22838CC</key>
 		<dict>
