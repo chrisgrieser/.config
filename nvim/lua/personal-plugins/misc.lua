@@ -5,7 +5,7 @@ local M = {}
 
 ---CASING AND TOGGLING----------------------------------------------------------
 
--- Increment or toggle if cursor is on a "toggle-word" like true/false 
+-- Increment or toggle if cursor is on a "toggle-word" like true/false
 -- (simplified version of dial.nvim)
 function M.toggleOrIncrement()
 	local toggles = {

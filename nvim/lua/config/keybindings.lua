@@ -32,7 +32,6 @@ keymap(
 	{ desc = " Save & restart" }
 )
 
-
 -- stylua: ignore
 keymap("n", "<leader>pd", function() vim.ui.open(vim.fn.stdpath("data") --[[@as string]]) end, { desc = "󰝰 Local data dir" })
 -- stylua: ignore
