@@ -63,8 +63,7 @@ vim.opt.breakindentopt = "list:-1" -- wrap lists with correct indentation
 vim.api.nvim_create_autocmd("Filetype", {
 	desc = "User: set `showbreak` in regular buffers only",
 	callback = function(ctx)
-		if vim.bo[ctx.buf].buftype ~= "" or vim.bo[ctx.buf].ft == "markdown" then return end
-		vim.opt_local.showbreak = "↳ "
+		if vim.bo[ctx.buf].buftype == "" then vim.opt_local.showbreak = "↳ " end
 	end,
 })
 
