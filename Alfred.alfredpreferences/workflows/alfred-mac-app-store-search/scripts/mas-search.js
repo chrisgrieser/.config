@@ -150,15 +150,15 @@ function run(argv) {
 			icon: { path: imagePath || "" },
 			quicklookurl: app.screenshotUrls[0] || "",
 			mods: {
-				cmd: {
-					variables: { openIn: "browser" },
-					subtitle: "⌘: Open in browser",
-				},
 				shift: {
+					variables: { openIn: "browser" },
+					subtitle: "⇧: Open in browser",
+				},
+				cmd: {
 					arg: app.sellerUrl || "",
 					valid: Boolean(app.sellerUrl),
 					subtitle: app.sellerUrl
-						? "⇧: Open developer website  –  " + app.sellerUrl
+						? "⌘: Open developer website  –  " + app.sellerUrl
 						: "⛔ No website found.",
 					variables: { openIn: "browser" }, // seller url must be opened in browser
 				},

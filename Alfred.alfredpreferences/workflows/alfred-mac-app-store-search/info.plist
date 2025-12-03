@@ -55,7 +55,7 @@
 				<key>modifiers</key>
 				<integer>1048576</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Open in browser</string>
+				<string>⌘: Open developer website</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -65,7 +65,7 @@
 				<key>modifiers</key>
 				<integer>131072</integer>
 				<key>modifiersubtext</key>
-				<string>⇧: Open developer website</string>
+				<string>⇧: Open in browser</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -265,8 +265,8 @@
 	<string>## Usage
 Search the Mac App Store for apps via the keyword `mas`.
 - &lt;kbd&gt;⏎&lt;/kbd&gt; Open the result in `App Store.app`.
-- &lt;kbd&gt;⌘⏎&lt;/kbd&gt; Open the result in the browser.
-- &lt;kbd&gt;⇧⏎&lt;/kbd&gt; Open the developer's website, if available.
+- &lt;kbd&gt;⇧⏎&lt;/kbd&gt; Open the result in the browser.
+- &lt;kbd&gt;⌘⏎&lt;/kbd&gt; Open the developer's website, if available.
 - &lt;kbd&gt;⌥⏎&lt;/kbd&gt; Copy the App Store URL to your clipboard.
 - &lt;kbd&gt;⌃⏎&lt;/kbd&gt; Copy app's bundle ID to your clipboard.
 - &lt;kbd&gt;⌘Y&lt;/kbd&gt; Quick Look a screenshot of the app, if available.
@@ -418,7 +418,7 @@ and the Mac App Store.
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.4.0</string>
+	<string>1.4.1</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
