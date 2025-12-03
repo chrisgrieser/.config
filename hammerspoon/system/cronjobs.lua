@@ -106,7 +106,7 @@ M.timer_emmyluaUpdater = hs.timer
 --------------------------------------------------------------------------------
 
 -- UPTIME CHECK
-local maxUptimeDays = 50
+local maxUptimeDays = 30
 M.timer_uptime = hs.timer
 	.doAt("01:30", "01d", function()
 		local stdout = hs.execute("uptime") or ""
@@ -126,7 +126,7 @@ M.timer_uptime = hs.timer
 local config = {
 	checkIntervalMins = 10,
 	idleMins = 45,
-	timeToReactSecs = 90,
+	timeToReactSecs = 15,
 }
 
 M.timer_sleepAutoVideoOff = hs.timer
@@ -135,7 +135,7 @@ M.timer_sleepAutoVideoOff = hs.timer
 		if not env.isProjector() or not isIdle or not u.screenIsUnlocked() then return end
 
 		local alertMsg = ("💤 Will sleep in %ds if idle."):format(config.timeToReactSecs)
-		hs.alert(alertMsg, 4)
+		hs.alert(alertMsg, config.timeToReactSecs)
 		u.defer(config.timeToReactSecs, function()
 			local userDidSth = hs.host.idleTime() < config.timeToReactSecs
 			if userDidSth then return end
