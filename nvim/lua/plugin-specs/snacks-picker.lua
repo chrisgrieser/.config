@@ -149,7 +149,7 @@ return {
 		{ "gd", function() Snacks.picker.lsp_definitions() end, desc = "󰈿 Definitions" },
 		{ "gD", function() Snacks.picker.lsp_type_definitions() end, desc = "󰜁 Type definitions" },
 		-- stylua: ignore
-		{ "gw", function() Snacks.picker.lsp_workspace_symbols() end, desc = "󰒕 Workspace symbols" },
+		{ "gw", function() Snacks.picker.lsp_workspace_symbols() end, desc = " Workspace symbols" },
 
 		-- `lsp_symbols` tends to too much clutter like anonymous function
 		{ "gs", function() Snacks.picker.treesitter() end, desc = "󰐅 Treesitter symbols" },
@@ -172,7 +172,7 @@ return {
 		{ "<leader>ik", function() Snacks.picker.keymaps() end, desc = "󰌌 Keymaps (global)" },
 		-- stylua: ignore
 		{ "<leader>iK", function() Snacks.picker.keymaps { global = false, title = "󰌌 Keymaps (buffer)" } end, desc = "󰌌 Keymaps (buffer)" },
-		{ "<leader>il", function() Snacks.picker.lsp_config() end, desc = "󰒕 LSP servers" },
+		{ "<leader>il", function() Snacks.picker.lsp_config() end, desc = " LSP servers" },
 
 		---MISC-------------------------------------------------------------------
 		{ "<leader>pc", function() Snacks.picker.colorschemes() end, desc = " Colorschemes" },
