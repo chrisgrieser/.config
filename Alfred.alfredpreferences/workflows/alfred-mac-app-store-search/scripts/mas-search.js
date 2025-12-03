@@ -82,11 +82,11 @@ const fileExists = (/** @type {string} */ filePath) => Application("Finder").exi
  * @return {string=} cached path
  */
 function downloadImageOrGetCached(theApp) {
-	const arkwork = theApp.artworkUrl60 || theApp.artworkUrl100;
-	if (!arkwork) return "./icon.png"; // use default image of this workflow
+	const artwork = theApp.artworkUrl60 || theApp.artworkUrl100;
+	if (!artwork) return "./icon.png"; // use default image of this workflow
 	const imageCache = $.getenv("alfred_workflow_cache");
 	const path = `${imageCache}/${theApp.bundleId}.png`;
-	if (!fileExists(path)) standardApp.doShellScript(`curl --silent '${arkwork}' > '${path}'`);
+	if (!fileExists(path)) standardApp.doShellScript(`curl --silent '${artwork}' > '${path}'`);
 	return path;
 }
 
