@@ -13,21 +13,24 @@ mp4-movie = "IINA"
 archive = "/System/Library/CoreServices/Applications/Archive Utility.app"
 
 [schemes]
-mailto = "Brave Browser"  # enable Gmail brave://settings/handlers?search=protocol+handler
 web = "Brave Browser"
 magnet = "Transmission"
+mailto = "Brave Browser"
+# make Gmail the mailto handler and allow it.
+# 1. open brave://settings/handlers?search=protocol+handler
+# 2. open gmail: https://mail.google.com/
+# 3. in address bar, find prompt to allow gmail to handle mailto
 
 [extensions]
 txt = "TextEdit"  # do not open in editor for increased security
 env = "TextEdit"
-csv = "Easy CSV Editor"
 svg = "neovide"
 jsonc = "neovide"
 adblock = "neovide"
 md = "/Users/chrisgrieser/.config/obsidian/opener/Obsidian Opener.app"
 canvas = "/Users/chrisgrieser/.config/obsidian/opener/Obsidian Opener.app"
 base = "/Users/chrisgrieser/.config/obsidian/opener/Obsidian Opener.app"
-pdf = "Highlights"
+pdf = "PDF Expert"
 ics = "Calendar"
 torrent = "Transmission"
 html = "Brave Browser"

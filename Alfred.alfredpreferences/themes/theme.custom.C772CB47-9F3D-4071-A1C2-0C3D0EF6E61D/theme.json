@@ -4,7 +4,7 @@
       "textSpacing" : 7,
       "subtext" : {
         "size" : 19,
-        "colorSelected" : "#FFFFFFC4",
+        "colorSelected" : "#F1F1F1C4",
         "font" : "Lucida Grande",
         "color" : "#797979FF"
       },
