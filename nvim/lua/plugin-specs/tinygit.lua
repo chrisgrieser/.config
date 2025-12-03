@@ -26,6 +26,8 @@ return {
 		commit = {
 			keepAbortedMsgSecs = 60 * 10, -- 10 mins
 			spellcheck = true,
+			preview = { loglines = 5 },
+			keymapHints = false,
 			subject = {
 				autoFormat = function(subject)
 					-- remove trailing dot https://commitlint.js.org/reference/rules.html#body-full-stop
@@ -39,7 +41,6 @@ return {
 				end,
 				enforceType = true,
 			},
-			keymapHints = false,
 		},
 		push = {
 			openReferencedIssues = true,
