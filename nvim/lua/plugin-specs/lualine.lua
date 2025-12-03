@@ -74,9 +74,6 @@ return {
 					cond = function() return vim.o.columns > 120 end, -- only if window is maximized
 				},
 			},
-			lualine_b = {
-				{ require("personal-plugins.breadcrumbs").statusline },
-			},
 			lualine_x = {
 				-- HACK dummy, so tabline is never empty (in which case vim adds its ugly tabline)
 				{ function() return " " end },
@@ -138,7 +135,7 @@ return {
 				},
 				{
 					"lsp_status",
-					ignore_lsp = { "typos_lsp", "efm" },
+					ignore_lsp = { "typos_lsp", "efm", "stylua" },
 					cond = function() -- only show component if LSP is active
 						if vim.g.lualine_lsp_active == nil then -- create autocmd only once
 							vim.g.lualine_lsp_active = false

@@ -257,9 +257,6 @@ do
 	})
 end
 
--- stylua: ignore
-keymap("n", "<leader>yb", function() require("personal-plugins.breadcrumbs").copy() end, { desc = "󰳮 breadcrumbs" })
-
 -- keep the register clean
 keymap({ "n", "x" }, "x", '"_x')
 keymap({ "n", "x" }, "c", '"_c')
