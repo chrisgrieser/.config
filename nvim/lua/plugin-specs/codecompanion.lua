@@ -90,9 +90,7 @@ return {
 	},
 	opts = {
 		display = {
-			diff = {
-				enabled = true,
-			}, -- https://codecompanion.olimorris.dev/configuration/chat-buffer.html#diff
+			diff = { enabled = true }, -- https://codecompanion.olimorris.dev/configuration/chat-buffer.html#diff
 
 			-- https://codecompanion.olimorris.dev/configuration/chat-buffer.html
 			chat = {
