@@ -23,10 +23,8 @@ return {
 		{ "ga", ":Gitsigns stage_hunk<CR>", mode = "x", silent = true, desc = "󰊢 (Un-)Stage selection" },
 		{ "<leader>gA", "<cmd>Gitsigns stage_buffer<CR>", desc = "󰊢 Stage file" },
 
-		---@diagnostic disable: param-type-mismatch -- faulty annotation
 		{ "gh", function() require("gitsigns").nav_hunk("next", { foldopen = true, navigation_message = true }) end, desc = "󰊢 Next hunk" },
 		{ "gH", function() require("gitsigns").nav_hunk("prev", { foldopen = true, navigation_message = true }) end, desc = "󰊢 Previous hunk" },
-		---@diagnostic enable: param-type-mismatch
 		{ "gh", "<cmd>Gitsigns select_hunk<CR>", mode = { "o", "x" }, desc = "󰊢 Hunk textobj" },
 
 		-- UNDO
@@ -55,16 +53,14 @@ return {
 			function()
 				if vim.b.gitsignsPrevChanges then
 					require("gitsigns").reset_base()
-					vim.b.gitsignsPrevChanges = false
 				else
 					local filepath = vim.api.nvim_buf_get_name(0)
 					local gitArgs = { "git", "log", "--max-count=1", "--format=%h", "--", filepath }
 					local out = vim.system(gitArgs):wait()
 					local lastCommitToFile = vim.trim(out.stdout) .. "^"
-					---@diagnostic disable-next-line: param-type-mismatch -- fauly
 					require("gitsigns").change_base(lastCommitToFile)
-					vim.b.gitsignsPrevChanges = true
 				end
+				vim.b.gitsignsPrevChanges = not vim.b.gitsignsPrevChanges
 			end,
 			desc = "󰊢 Prev/present hunks",
 		},
@@ -72,10 +68,8 @@ return {
 	config = function(_, opts)
 		require("gitsigns").setup(opts)
 
-		-- STATUSLINE COMPONENTS
-		-- INFO Using gitsigns.nvim's data since lualine's builtin component
-		-- is updated much less frequently and is thus often out of sync
-		-- with the gitsigns in the signcolumn.
+		-- Using gitsigns's data since lualine's builtin component is updated less
+		-- frequently and thus often out of sync with gitsigns in the signcolumn.
 		vim.g.lualineAdd("sections", "lualine_y", {
 			"diff",
 			source = function()
@@ -83,11 +77,7 @@ return {
 				if not gs then return end
 				return { added = gs.added, modified = gs.changed, removed = gs.removed }
 			end,
-		}, "before")
-
-		vim.g.lualineAdd("tabline", "lualine_z", {
-			function() return " previous commit" end,
-			cond = function() return vim.b.gitsignsPrevChanges end,
+			fmt = function(str) return vim.b.gitsignsPrevChanges and "󰑟 " .. str or str end,
 		}, "before")
 	end,
 }

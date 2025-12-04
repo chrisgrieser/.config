@@ -399,11 +399,11 @@ keymap({ "n", "x" }, "<leader>ee", function()
 end, { expr = true, desc = "󰢱 Eval lua expr" })
 keymap("n", "<leader>ey", function()
 	local cmd = vim.fn.getreg(":")
-	local syntax = vim.startswith(cmd, "lua") and "lua" or "vim"
 	local lastExcmd = cmd:gsub("^lua ", ""):gsub("^= ?", "")
 	if lastExcmd == "" then return vim.notify("Nothing to copy", vim.log.levels.TRACE) end
-	vim.fn.setreg("+", lastExcmd)
+	local syntax = vim.startswith(cmd, "lua") and "lua" or "vim"
 	vim.notify(lastExcmd, nil, { title = "Copied", icon = "󰅍", ft = syntax })
+	vim.fn.setreg("+", lastExcmd)
 end, { desc = "󰘳 Yank last ex-cmd" })
 
 ---WINDOWS & SPLITS-------------------------------------------------------------
