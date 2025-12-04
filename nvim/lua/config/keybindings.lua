@@ -428,7 +428,6 @@ keymap({ "n", "x", "i" }, "<D-w>", function()
 	vim.cmd("silent! update")
 	local winClosed = pcall(vim.cmd.close) -- fails on last window
 	if winClosed then return end
-
 	local bufCount = #vim.fn.getbufinfo { buflisted = 1 }
 	if bufCount == 1 then return vim.notify("Only one buffer open.", vim.log.levels.TRACE) end
 	vim.cmd.bdelete()

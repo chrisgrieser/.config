@@ -19,7 +19,7 @@ return {
 		filetype = {
 			["css"] = { glyph = "", hl = "MiniIconsRed" },
 			["typescript"] = { hl = "MiniIconsCyan" },
-			["vim"] = { glyph = "" }, -- used for `obsidian-vimrc`
+			["vim"] = { glyph = "" },
 
 			-- plugin-filetypes or special filetypes
 			["qf"] = { glyph = "" },
