@@ -127,17 +127,15 @@ keymap("n", "<leader>ur", function() vim.cmd.later(vim.o.undolevels) end, { desc
 -- stylua: ignore
 keymap("n", "ww", function() require("personal-plugins.misc").smartDuplicate() end, { desc = "󰲢 Duplicate line" })
 
--- Toggles
-keymap("n", "~", "v~", { desc = "󰬴 Toggle char case (w/o moving)" })
-
 -- stylua: ignore
 keymap("n", "<", function() require("personal-plugins.misc").toggleTitleCase() end, { desc = "󰬴 Toggle lower/Title case" })
 keymap("n", ">", "gUiw", { desc = "󰬴 Uppercase cword" })
 
--- toggle common words or increment/decrement numbers
+-- Toggles
 -- stylua: ignore
 keymap("n", "+", function() require("personal-plugins.misc").toggleOrIncrement() end, { desc = "󰐖 Increment/toggle" })
 keymap("n", "ü", "<C-x>", { desc = "󰍵 Decrement" })
+keymap("n", "~", "v~", { desc = "󰬴 Toggle char case (w/o moving)" })
 
 keymap("n", "X", function()
 	local updatedLine = vim.api.nvim_get_current_line():gsub(".$", "")

@@ -20,8 +20,6 @@ rules:
         conditions: [*not-game]
       #─────────────────────────────────────────────────────────────────────────
 
-      # until spotify-play is fixed, use `f7` to pause.
-      # https://github.com/aome510/spotify-player/issues/804
       - type: basic
         from: { key_code: f7 }
         to:
@@ -49,4 +47,6 @@ rules:
           - shell_command: |
               "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Tech/alexa-virtual-trigger" \
                 "spotify-next"
+              "$HOME/.config/karabiner/assets/notificators/spotify-notificator" \
+                --title "Spotify" --message "⏭️ Next"
         conditions: [*not-game]
