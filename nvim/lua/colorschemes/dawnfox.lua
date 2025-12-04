@@ -27,6 +27,7 @@ return {
 				["LspSignatureActiveParameter"] = { link = "Visual" },
 				["@namespace.builtin.lua"] = { link = "@variable.builtin" }, -- `vim` and `hs`
 				["@character.printf"] = { link = "SpecialChar" },
+				["@punctuation.special.gitcommit"] = { link = "Operator" },
 				["ColorColumn"] = { bg = "#e9dfd2" },
 				["WinSeparator"] = { fg = "#cfc1b3" },
 				["Operator"] = { fg = "#846a52" },

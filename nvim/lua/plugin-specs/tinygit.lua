@@ -26,7 +26,7 @@ return {
 		commit = {
 			keepAbortedMsgSecs = 60 * 10, -- 10 mins
 			spellcheck = true,
-			preview = { loglines = 5 },
+			preview = { loglines = 4 },
 			keymapHints = false,
 			subject = {
 				autoFormat = function(subject)
