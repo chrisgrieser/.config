@@ -99,12 +99,15 @@ function M.gotoCommentHeader()
 	for ln = 1, #lines do
 		local comChars = vim.trim(vim.bo.commentstring:format(""))
 		-- at least 3 uppercase chars, to avoid words like `PR`
-		local header = lines[ln]:match("^%s*" .. vim.pesc(comChars) .. ".?(%u[%u%d%s][%u%d%s]+)")
-		if header then table.insert(commentHeaders, { text = header, ln = ln }) end
+		local header = lines[ln]:match("^%s*" .. vim.pesc(comChars) .. ".?(%u[%u%d%s%p][%u%d%s%p]+)")
+		if header then
+			header = header:gsub("%p*$", "") -- trailing punctuation = hr line
+			table.insert(commentHeaders, { text = header, ln = ln })
+		end
 	end
 	vim.ui.select(commentHeaders, {
 		prompt = "Comment Headers",
-		format_item = function(item) return item.text end,
+		format_item = function(item) return item.text:sub(1, 1) .. item.text:sub(2):lower() end,
 	}, function(selection)
 		if not selection then return end
 		vim.api.nvim_win_set_cursor(0, { selection.ln, 0 })
@@ -123,7 +126,7 @@ function M.duplicateLineAsComment()
 end
 
 -- simplified implementation of neogen.nvim
--- (reason: lsp usually provides better prefills for docstrings)
+-- (reason: LSP usually provides better prefills for docstrings)
 function M.docstring()
 	local ok, tsMove = pcall(require, "nvim-treesitter-textobjects.move")
 	if not (ok and tsMove) then
