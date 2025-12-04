@@ -20,9 +20,10 @@ return {
 			["css"] = { glyph = "", hl = "MiniIconsRed" },
 			["typescript"] = { hl = "MiniIconsCyan" },
 			["vim"] = { glyph = "" },
-
-			-- plugin-filetypes or special filetypes
 			["qf"] = { glyph = "" },
+
+			-- plugin-filetypes
+			["leetcode.nvim"] = { glyph = "󰐱" },
 			["ccc-ui"] = { glyph = "" },
 			["scissors-snippet"] = { glyph = "󰩫" },
 			["rip-substitute"] = { glyph = "" },

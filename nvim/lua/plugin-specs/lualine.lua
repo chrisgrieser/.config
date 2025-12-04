@@ -29,6 +29,7 @@ end
 
 -- not using lualins's component since it reqquires `web-devicons`
 local function addFiletypeIcon(filename)
+	if filename == "[No Name]" and vim.bo.ft ~= "" then filename = vim.bo.ft end -- fix name for special buffers
 	local ok, icons = pcall(require, "mini.icons")
 	if not ok then return filename end
 	local icon, _, isDefault = icons.get("file", filename)
@@ -48,8 +49,6 @@ return {
 			always_divide_middle = false,
 			section_separators = { left = "", right = "" }, -- save space
 			component_separators = { left = "", right = "" },
-
-			-- so current file name is still visible when renaming/selecting
 			ignore_focus = { "snacks_input", "snacks_picker_input" },
 		},
 		--------------------------------------------------------------------------
