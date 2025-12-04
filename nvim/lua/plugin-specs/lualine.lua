@@ -84,7 +84,6 @@ return {
 					cond = function() return vim.fn.reg_recording() ~= "" end,
 				},
 			},
-
 		},
 		--------------------------------------------------------------------------
 		sections = {
@@ -127,7 +126,10 @@ return {
 				},
 				{
 					"diagnostics",
-					cond = function() return vim.diagnostic.is_enabled { bufnr = 0 } end,
+					fmt = function(diag) -- hide diagnostics if disabled
+						if vim.diagnostic.is_enabled { bufnr = 0 } then return diag end
+						return "%#lualine_x_diagnostics_warn_normal#" .. "󱞍 "
+					end,
 					symbols = (function() -- use icons from `vim.diagnostic.config()`
 						local icons = vim.diagnostic.config().signs.text or { "E", "W", "I", "H" }
 						return { error = icons[1], warn = icons[2], info = icons[3], hint = icons[4] }
