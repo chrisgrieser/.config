@@ -11,7 +11,11 @@ return {
 	},
 	opts = {
 		move_cursor = false,
-		aliases = { c = "}", r = "]", m = "W", q = '"', z = "'", e = "`" },
+		-- stylua: ignore
+		aliases = { -- aliases mirror my custom textobj keymaps
+			c = "}", b = ")", r = "]",
+			q = '"', z = "'", e = "`", k = { '"', "'", "`" }, -- anyquote
+		},
 		-- stylua: ignore
 		keymaps = {
 			normal = "ys", normal_cur = "yss", delete = "ds", change = "cs",
