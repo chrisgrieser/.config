@@ -158,15 +158,15 @@ keymap("n", "z.", "1z=", { desc = "󰓆 Fix spelling" }) -- works even with `spe
 -- stylua: ignore
 keymap("i", "<D-t>", function() require("personal-plugins.auto-template-str").insertTemplateStr() end, { desc = "󰅳 Insert template string" })
 
--- Multi-edit
-keymap("n", "<D-j>", '*N"_cgn', { desc = "󰆿 Multi-edit cword" })
+-- Edits, repeatable via `.`
+keymap("n", "<D-j>", '*N"_cgn', { desc = "󰆿 Repeatable edit cword" })
 keymap("x", "<D-j>", function()
 	local selection = vim.fn.getregion(vim.fn.getpos("."), vim.fn.getpos("v"))[1]
 	vim.fn.setreg("/", "\\V" .. vim.fn.escape(selection, [[/\]]))
 	return '<Esc>"_cgn'
-end, { desc = "󰆿 Multi-edit selection", expr = true })
+end, { desc = "󰆿 Repeatable edit selection", expr = true })
 
--- Merging
+-- Merge lines
 keymap("n", "m", "J", { desc = "󰽜 Merge line up" })
 keymap("n", "M", "<cmd>. move +1<CR>kJ", { desc = "󰽜 Merge line down" }) -- `:move` preserves marks
 
@@ -236,18 +236,18 @@ do
 	})
 end
 
--- yankring
+-- Yankring
 do
-	-- same as regular `p`, but when undoing the paste and then using `.`, will
-	-- paste `"2p`, so `<C-p>..... pastes all recent deletions and `pu.u.u.u.`
-	-- cycles through them
-	keymap("n", "<D-p>", '"1p', { desc = " Cyclic paste" })
+	-- Make paste cyclic, that is when undoing the paste and then using `.`, will
+	-- paste `"2p`, so `p.....` pastes all recent things and `pu.u.u.u.`
+	keymap("n", "p", '"1p', { desc = " Paste" })
+	keymap("n", "<D-p>", 'u.', { desc = " Paste previous yank" })
 
 	vim.api.nvim_create_autocmd("TextYankPost", {
 		desc = "User: Yankring",
 		callback = function()
 			if vim.v.event.operator == "y" then
-				for i = 9, 1, -1 do -- Shift all numbered registers.
+				for i = 9, 1, -1 do -- shift all numbered registers.
 					vim.fn.setreg(tostring(i), vim.fn.getreg(tostring(i - 1)))
 				end
 			end
