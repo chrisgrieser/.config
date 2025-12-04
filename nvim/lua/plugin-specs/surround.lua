@@ -15,6 +15,7 @@ return {
 		aliases = { -- aliases mirror my custom textobj keymaps
 			c = "}", b = ")", r = "]",
 			q = '"', z = "'", e = "`", k = { '"', "'", "`" }, -- anyquote
+			s = { "}", ")", "]", '"', "'", "`" }, -- any surround
 		},
 		-- stylua: ignore
 		keymaps = {
