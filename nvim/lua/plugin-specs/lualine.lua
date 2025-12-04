@@ -85,6 +85,7 @@ return {
 					cond = function() return vim.fn.reg_recording() ~= "" end,
 				},
 			},
+
 		},
 		--------------------------------------------------------------------------
 		sections = {
