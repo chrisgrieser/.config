@@ -174,6 +174,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>A8717C00-E905-4106-A8B8-1251B15C340E</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>5CFB48F9-2348-4A1B-A5A6-034A8654DAC4</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>BCDE5A63-BF29-4CD2-B482-D2A56CD510A1</key>
 		<array>
 			<dict>
@@ -466,6 +479,76 @@
 			<string>A127DB2B-430B-415F-9B6D-9A9EE315AD8E</string>
 			<key>version</key>
 			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>5CFB48F9-2348-4A1B-A5A6-034A8654DAC4</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>2</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>svg</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>loading…</string>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/svg-tech-icons.js</string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>SVG tech icons</string>
+				<key>type</key>
+				<integer>8</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>A8717C00-E905-4106-A8B8-1251B15C340E</string>
+			<key>version</key>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -778,18 +861,18 @@
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>200</real>
+			<real>205</real>
 			<key>ypos</key>
-			<real>545</real>
+			<real>735</real>
 		</dict>
 		<key>0C4ED8B1-4503-4C11-9E1F-0752164AEC64</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>435</real>
+			<real>440</real>
 			<key>ypos</key>
-			<real>695</real>
+			<real>885</real>
 		</dict>
 		<key>1A28A029-A380-4B80-82C1-AB1863D8C0C6</key>
 		<dict>
@@ -805,9 +888,9 @@
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>30</real>
+			<real>35</real>
 			<key>ypos</key>
-			<real>695</real>
+			<real>885</real>
 		</dict>
 		<key>1EFB3948-B5DD-42BA-922A-4B3290C790BC</key>
 		<dict>
@@ -816,18 +899,18 @@
 			<key>note</key>
 			<string>save screenshot path for trashing</string>
 			<key>xpos</key>
-			<real>355</real>
+			<real>360</real>
 			<key>ypos</key>
-			<real>725</real>
+			<real>915</real>
 		</dict>
 		<key>25E873D0-DCD8-487D-B9DB-42A2026485D6</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>595</real>
+			<real>600</real>
 			<key>ypos</key>
-			<real>695</real>
+			<real>885</real>
 		</dict>
 		<key>365B08C4-71FA-44B3-BD68-AC921D879145</key>
 		<dict>
@@ -836,9 +919,9 @@
 			<key>note</key>
 			<string>copy file to clipboard</string>
 			<key>xpos</key>
-			<real>200</real>
+			<real>205</real>
 			<key>ypos</key>
-			<real>405</real>
+			<real>595</real>
 		</dict>
 		<key>3A193819-CC2F-4AC7-8AB0-EC5571B7878B</key>
 		<dict>
@@ -847,9 +930,9 @@
 			<key>note</key>
 			<string>annotate last screenshot</string>
 			<key>xpos</key>
-			<real>30</real>
+			<real>35</real>
 			<key>ypos</key>
-			<real>545</real>
+			<real>735</real>
 		</dict>
 		<key>59214D8E-53BE-4690-AF5F-36B2963D544A</key>
 		<dict>
@@ -858,9 +941,16 @@
 			<key>note</key>
 			<string>screenshot history</string>
 			<key>xpos</key>
-			<real>30</real>
+			<real>35</real>
 			<key>ypos</key>
-			<real>405</real>
+			<real>595</real>
+		</dict>
+		<key>5CFB48F9-2348-4A1B-A5A6-034A8654DAC4</key>
+		<dict>
+			<key>xpos</key>
+			<real>215</real>
+			<key>ypos</key>
+			<real>395</real>
 		</dict>
 		<key>7CF8B97A-6865-489C-8B65-3C892683D59E</key>
 		<dict>
@@ -876,18 +966,18 @@
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>745</real>
+			<real>750</real>
 			<key>ypos</key>
-			<real>695</real>
+			<real>885</real>
 		</dict>
 		<key>954BCFCB-400E-482D-8418-02C0D9453551</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>360</real>
+			<real>365</real>
 			<key>ypos</key>
-			<real>405</real>
+			<real>595</real>
 		</dict>
 		<key>95CF671F-9E2F-4CE9-92A0-BACEF07C97C8</key>
 		<dict>
@@ -905,9 +995,9 @@
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>200</real>
+			<real>205</real>
 			<key>ypos</key>
-			<real>695</real>
+			<real>885</real>
 		</dict>
 		<key>9C5C9CF6-0447-47E9-B412-85818504EFD1</key>
 		<dict>
@@ -916,9 +1006,9 @@
 			<key>note</key>
 			<string>trash temp file</string>
 			<key>xpos</key>
-			<real>590</real>
+			<real>595</real>
 			<key>ypos</key>
-			<real>815</real>
+			<real>1005</real>
 		</dict>
 		<key>A069BE51-DA62-4835-8048-AF3A608C97D0</key>
 		<dict>
@@ -940,6 +1030,13 @@
 			<key>ypos</key>
 			<real>275</real>
 		</dict>
+		<key>A8717C00-E905-4106-A8B8-1251B15C340E</key>
+		<dict>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>395</real>
+		</dict>
 		<key>BCDE5A63-BF29-4CD2-B482-D2A56CD510A1</key>
 		<dict>
 			<key>colorindex</key>
@@ -956,9 +1053,9 @@
 			<key>note</key>
 			<string>error</string>
 			<key>xpos</key>
-			<real>360</real>
+			<real>365</real>
 			<key>ypos</key>
-			<real>545</real>
+			<real>735</real>
 		</dict>
 		<key>E762EDDE-643D-48E5-B773-C89606259F8B</key>
 		<dict>
