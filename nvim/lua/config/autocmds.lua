@@ -438,6 +438,7 @@ local function luckyIndent(bufnr)
 		indent = lines[lnum]:match("^  +") or lines[lnum]:match("^\t*")
 		if #indent > 0 then break end
 	end
+	if not indent then return end
 	local spaces = indent:match(" +")
 	if vim.bo[bufnr].ft == "markdown" then
 		if not spaces then return end -- no indented line

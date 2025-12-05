@@ -58,17 +58,18 @@ keymap(
 )
 
 ---NAVIGATION-------------------------------------------------------------------
--- make j/k on wrapped lines
+-- 1. make mappings work on wrapped lines as well
+-- 2. make HJKL behave like hjkl but bigger with distance
 keymap({ "n", "x" }, "j", "gj")
 keymap({ "n", "x" }, "k", "gk")
 
--- make HJKL behave like hjkl but bigger with distance
--- (not mapping in op-pending, since using custom textobjects for those keys)
-keymap({ "n", "x" }, "H", "0^", { desc = "󰲠 char" }) -- scroll fully to the left
-keymap("o", "H", "^", { desc = "󰲠 char" })
-keymap({ "n", "x" }, "L", "$", { desc = "󰬓 char", remap = true }) -- remap for `nvim-origami` overload of `$`
+keymap({ "n", "x" }, "H", "g0g^") -- scroll fully to the left
+keymap("o", "H", "g^")
+keymap({ "n", "x" }, "L", "g$", { remap = true }) -- remap for `nvim-origami` overload of `$`
 keymap({ "n", "x" }, "J", "6gj", { desc = "6j" })
 keymap({ "n", "x" }, "K", "6gk", { desc = "6k" })
+keymap("n", "I", "g^i")
+keymap("n", "A", "g$a")
 
 -- Jump history
 keymap("n", "<C-h>", "<C-o>", { desc = "󱋿 Jump back" })
@@ -241,7 +242,7 @@ do
 	-- Make paste cyclic, that is when undoing the paste and then using `.`, will
 	-- paste `"2p`, so `p.....` pastes all recent things and `pu.u.u.u.`
 	keymap("n", "p", '"1p', { desc = " Paste" })
-	keymap("n", "<D-p>", 'u.', { desc = " Paste previous yank" })
+	keymap("n", "<D-p>", "u.", { desc = " Paste previous yank" })
 
 	vim.api.nvim_create_autocmd("TextYankPost", {
 		desc = "User: Yankring",

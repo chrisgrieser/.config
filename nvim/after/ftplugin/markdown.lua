@@ -27,9 +27,8 @@ if softwrap then
 	optl.formatlistpat:append([[\|^\s*>\s\+]]) -- also indent blockquotes via `breakindentopt`
 	vim.schedule(function() optl.showbreak = "" end)
 	require("personal-plugins.readable-length")
-	-- TODO
-	-- - keymaps
-	-- - closing func in keybindings
+	bkeymap("n", "<D-w>", vim.cmd.bdelete) -- prevent triggering `:close` from my keymaps
+	-- TODO keymaps
 else
 	-- HARD WRAP
 	-- when typing beyond `textwidth`
