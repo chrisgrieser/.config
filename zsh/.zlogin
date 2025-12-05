@@ -1,1 +1,0 @@
-export HUSHLOGIN=1

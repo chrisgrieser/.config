@@ -154,8 +154,8 @@ local config = {
 	show_new_tab_button_in_tab_bar = false,
 	hide_tab_bar_if_only_one_tab = true,
 	tab_max_width = 80,
-	use_fancy_tab_bar = false, -- `false` = style using terminal cells
-	window_frame = { font_size = 23 }, -- font size if using `fancy_tab_bar`
+	use_fancy_tab_bar = true, -- `false` = style using terminal cells
+	window_frame = { font_size = 30 }, -- font size if using `fancy_tab_bar`
 
 	-- Mouse Bindings
 	disable_default_mouse_bindings = false,

@@ -1,11 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-<dict>
-	<key>application</key>
-	<integer>1</integer>
-	<key>custom</key>
-	<string>-- AlfredGhostty Script v1.3.0
+-- AlfredGhostty Script v1.3.0
 -- Latest version: https://github.com/zeitlings/alfred-ghostty-script
 
 -- tab : t | window: n | split: d | quick terminal: qt
@@ -33,7 +26,7 @@ end hasWindows
 
 on waitForWindow(timeout_s)
 	set end_time to (current date) + timeout_s
-	repeat until hasWindows() or ((current date) &gt; end_time)
+	repeat until hasWindows() or ((current date) > end_time)
 		delay 0.05
 	end repeat
 	return hasWindows()
@@ -66,7 +59,7 @@ on handleWindow(just_activated)
 end handleWindow
 
 on log_(a_prefix, a_message)
-	do shell script "echo \"[$(date +%Y%m%d-%H%M%S)]\"  '" &amp; quoted form of a_prefix &amp; quoted form of a_message &amp; "' &gt;&gt; /tmp/alfred_ghostty/debug.log"
+	do shell script "echo \"[$(date +%Y%m%d-%H%M%S)]\"  '" & quoted form of a_prefix & quoted form of a_message & "' >> /tmp/alfred_ghostty/debug.log"
 end log_
 
 on send(a_command, just_activated)
@@ -80,7 +73,7 @@ on send(a_command, just_activated)
 		set arg to text 4 thru -1 of a_command
 		-- leading space to suppress saving in shell history
 		-- `-q` to suppress post-cd-hook output
-		set a_command to " cd -q " &amp; arg &amp; " &amp;&amp; clear"
+		set a_command to " cd -q " & arg & " && clear"
 	end if
 	
 	-- Only wait for shell load if:
@@ -101,7 +94,7 @@ on send(a_command, just_activated)
 	--  'Open Terminal Here' Universal Action is also handled properly.
 	do shell script "mkdir -p /tmp/alfred_ghostty"
 	set cmd_file to "/tmp/alfred_ghostty/cmd.txt"
-	do shell script "echo " &amp; quoted form of a_command &amp; " | iconv -t utf-8 &gt; " &amp; cmd_file -- Write command to file with explicit UTF-8 encoding
+	do shell script "echo " & quoted form of a_command & " | iconv -t utf-8 > " & cmd_file -- Write command to file with explicit UTF-8 encoding
 	
 	try
 		-- Works with editor, always fails with Alfred
@@ -114,9 +107,9 @@ on send(a_command, just_activated)
 	
 	-- Debug: Log the command content
 	--log_("Command passed: ", a_command)
-	--log_("File content: ", "$(cat " &amp; cmd_file &amp; ")")
+	--log_("File content: ", "$(cat " & cmd_file & ")")
 	
-	do shell script "cat " &amp; cmd_file &amp; " | tr -d '\\n' | pbcopy" -- Copy file contents to clipboard
+	do shell script "cat " & cmd_file & " | tr -d '\\n' | pbcopy" -- Copy file contents to clipboard
 	delay 0.1
 	
 	tell application "System Events"
@@ -134,15 +127,15 @@ on send(a_command, just_activated)
 	-- However, currently even plain text recovery fails when going through Alfred.
 	try
 		tell application "System Events"
-			set the clipboard to backup &amp; (delay 0.1)
+			set the clipboard to backup & (delay 0.1)
 		end tell
 		log {"Success. Backup has been restored to: ", backup as text}
 	on error errorMessage
 		-- Ignore the failed recovery
-		-- log "Failure. Unable to restore backup: " &amp; errorMessage as text 
+		-- log "Failure. Unable to restore backup: " & errorMessage as text 
 		-- log_ {"Failure: ", "Unable to restore backup"} -- ignore
 	end try
-	-- do shell script "rm " &amp; cmd_file
+	-- do shell script "rm " & cmd_file
 	
 end send
 
@@ -153,8 +146,8 @@ on send_quick_terminal(a_command, needs_wakeup)
 	
 	do shell script "mkdir -p /tmp/alfred_ghostty"
 	set cmd_file to "/tmp/alfred_ghostty/cmd.txt"
-	do shell script "echo " &amp; quoted form of a_command &amp; " | iconv -t utf-8 &gt; " &amp; cmd_file
-	do shell script "cat " &amp; cmd_file &amp; " | tr -d '\\n' | pbcopy" -- Copy file contents to clipboard
+	do shell script "echo " & quoted form of a_command & " | iconv -t utf-8 > " & cmd_file
+	do shell script "cat " & cmd_file & " | tr -d '\\n' | pbcopy" -- Copy file contents to clipboard
 	delay 0.1
 	
 	tell application "System Events"
@@ -188,8 +181,4 @@ on alfred_script(query)
 		end if
 		send(query, just_activated)
 	end if
-end alfred_script</string>
-	<key>prefix</key>
-	<integer>1</integer>
-</dict>
-</plist>
+end alfred_script
