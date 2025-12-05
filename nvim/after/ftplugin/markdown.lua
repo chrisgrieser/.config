@@ -55,6 +55,30 @@ else
 		end,
 	})
 end
+---AUTO BULLETS-----------------------------------------------------------------
+-- (simplified implementation of `bullets.vim`)
+do
+	vim.defer_fn(function () optl.formatoptions:append("o") end, 1) -- `o` in normal mode
+	optl.formatoptions:append("r") -- `<CR>` in insert mode
+
+	local function autoBullet(key)
+		-- cannot set opt.comments permanently, since it disturbs the correctly
+		-- indented continuation of bullet lists when hitting `opt.textwidth`
+		local comBefore = optl.comments:get()
+		-- stylua: ignore
+		optl.comments = {
+			"b:- [ ]", "b:- [x]", -- tasks
+			"b:*", "b:-", "b:+", -- bullets
+			"b:1.", -- ordered list
+			"n:>", -- blockquotes
+		}
+		vim.defer_fn(function() optl.comments = comBefore end, 100) -- deferred to restore only after key
+		return key
+	end
+
+	-- bkeymap("n", "o", function() return autoBullet("o") end, { expr = true })
+	-- bkeymap("i", "<CR>", function() return autoBullet("<CR>") end, { expr = true })
+end
 
 ---CODEBLOCKS-------------------------------------------------------------------
 -- typing `,,lang,,` creates a codeblock for `lang` with dedented clipboard
@@ -89,31 +113,6 @@ bkeymap("i", ",", function()
 	vim.api.nvim_win_set_cursor(0, { row, 1 })
 	vim.cmd.stopinsert()
 end, { desc = " ,, -> Codeblock" })
-
----AUTO BULLETS-----------------------------------------------------------------
--- (simplified implementation of `bullets.vim`)
-do
-	optl.formatoptions:append("r") -- `<CR>` in insert mode
-	optl.formatoptions:append("o") -- `o` in normal mode
-
-	local function autoBullet(key)
-		-- cannot set opt.comments permanently, since it disturbs the correctly
-		-- indented continuation of bullet lists when hitting `opt.textwidth`
-		local comBefore = optl.comments:get()
-		-- stylua: ignore
-		optl.comments = {
-			"b:- [ ]", "b:- [x]", -- tasks
-			"b:*", "b:-", "b:+", "b:\t*", "b:\t-", "b:\t+", -- unordered list
-			"b:1.", "b:\t1.", -- ordered list
-			"n:>", -- blockquotes
-		}
-		vim.defer_fn(function() optl.comments = comBefore end, 1) -- deferred to restore only after key
-		return key
-	end
-
-	bkeymap("n", "o", function() return autoBullet("o") end, { expr = true })
-	bkeymap("i", "<CR>", function() return autoBullet("<CR>") end, { expr = true })
-end
 
 ---HEADINGS---------------------------------------------------------------------
 -- Jump to next/prev heading (`##` to skip level 1 and comments in code-blocks)
