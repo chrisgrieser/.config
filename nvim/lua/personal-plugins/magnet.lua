@@ -84,7 +84,7 @@ local function getAltBuffer()
 	table.sort(listedBufs, function(a, b) return a.lastused > b.lastused end)
 	local altBuf = vim.iter(listedBufs):find(function(buf)
 		local valid = vim.api.nvim_buf_is_valid(buf.bufnr)
-		local nonSpecial = vim.bo[buf.bufnr].buftype == ""
+		local nonSpecial = vim.bo[buf.bufnr].buftype == "" and buf.name ~= ""
 		local notCurrent = vim.api.nvim_get_current_buf() ~= buf.bufnr
 		return valid and nonSpecial and notCurrent
 	end)
