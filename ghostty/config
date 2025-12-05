@@ -24,6 +24,6 @@ adjust-cursor-thickness = 2
 title = ""
 macos-titlebar-style = transparent
 macos-window-buttons = hidden
-window-width = 113
+window-width = 107
 window-height = 9999
 
