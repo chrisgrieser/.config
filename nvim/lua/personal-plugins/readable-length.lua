@@ -25,7 +25,6 @@ local function enable()
 		style = "minimal",
 	})
 	vim.wo[winid].winhighlight = "Normal:Colorcolumn"
-	vim.wo[winid].winfixbuf = true
 	vim.bo[bufnr].modifiable = false
 	dummyWin = winid
 	vim.o.colorcolumn = "" -- disable since wrapped as well
@@ -45,6 +44,14 @@ vim.api.nvim_create_autocmd("BufEnter", {
 		elseif not isMarkdown and dummyWin then
 			disable()
 		end
+	end,
+})
+
+vim.api.nvim_create_autocmd("BufHidden", {
+	group = group,
+	callback = function(ctx)
+		local isMarkdown = vim.bo[ctx.buf].filetype == "markdown"
+		if isMarkdown then disable() end
 	end,
 })
 

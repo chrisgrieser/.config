@@ -69,7 +69,6 @@ vim.api.nvim_create_autocmd("Filetype", {
 
 ---APPEARANCE-------------------------------------------------------------------
 vim.opt.cursorline = true
-vim.opt.cursorlineopt = "screenline" -- highlight visual line, not logical line
 vim.opt.colorcolumn = "+1" -- = one more than textwidth
 vim.opt.signcolumn = "yes:1"
 
