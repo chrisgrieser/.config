@@ -1,20 +1,29 @@
-# vim: filetype=config
 # DOCS https://ghostty.org/docs/config/reference
 #-------------------------------------------------------------------------------
 
+#-META--------------------------------------------------------------------------
 config-file	= ~/.config/ghostty/keybinds
 
-
-#-------------------------------------------------------------------------------
-
+#-BEHAVIOR----------------------------------------------------------------------
 confirm-close-surface = false
 shell-integration = zsh
 copy-on-select = clipboard
 mouse-hide-while-typing = true
+working-directory = "/Users/chrisgrieser/Desktop"
 
 #-APPEARANCE--------------------------------------------------------------------
-title = "Ghostty 👻"
 # theme = light:catppuccin-latte,dark:catppuccin-mocha
+
 font-family = "JetBrainsMonoNL NF"
 font-size = 24
 font-thicken = true
+
+adjust-cursor-thickness = 2
+
+#-WINDOW------------------------------------------------------------------------
+title = ""
+macos-titlebar-style = transparent
+macos-window-buttons = hidden
+window-width = 113
+window-height = 9999
+
