@@ -10,7 +10,7 @@ if [[ $(system_profiler SPDisplaysDataType | grep -c Resolution) -gt 1 ]] ; then
 	return 0
 fi
 
-# GUARD only trigger on deactivation of Reminders or Calendar
+# GUARD if app-switch, only trigger on deactivation of Reminders or Calendar
 if [[ "$SENDER" = "front_app_switched" ]]; then
 	mkdir -p "$HOME/.cache/sketchybar"
 	data="$HOME/.cache/sketchybar/front_app1"
