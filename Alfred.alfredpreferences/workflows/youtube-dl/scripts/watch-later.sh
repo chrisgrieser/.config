@@ -32,7 +32,7 @@ title=$(
 		sed -e 's/ - YouTube//'                 # cleanup
 )
 # decode HTML
-title=$(osascript -l "JavaScript" -e "'$title'.replace(/&#(\d+);/g, (_, code) => String.fromCharCode(code))")
+title=$(osascript -l "JavaScript" -e "'$title'.replace(/&#(\d+);/g, (_, code) => String.fromCharCode(code))" | sed 's/&amp;/&/g')
 
 # shellcheck disable=2154
 mkdir -p "$youtube_link_folder"

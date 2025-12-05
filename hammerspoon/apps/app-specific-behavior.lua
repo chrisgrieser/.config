@@ -68,13 +68,13 @@ M.wf_scripteditor = wf
 -- auto-scroll up
 M.aw_masto = aw.new(function(appName, event, masto)
 	if appName ~= "Mona 6" then return end
+	local win = masto:mainWindow()
+	if not win then return end
 
-	if event == aw.activated then
-		local win = masto:mainWindow()
-		if win then win:setFrame(wu.toTheSide) end
+	if event == aw.activated or event == aw.launched then
+		win:setFrame(wu.toTheSide)
 	elseif event == aw.deactivated then
-		local win = masto:mainWindow()
-		local isMediaWin = win and win:title():find("^Image")
+		local isMediaWin = win:title():find("^Image")
 		local frontNotAlfred = hs.application.frontmostApplication():name() ~= "Alfred"
 		if #masto:allWindows() > 1 and isMediaWin and frontNotAlfred then
 			win:close()
