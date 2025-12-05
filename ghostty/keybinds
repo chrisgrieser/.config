@@ -1,6 +1,7 @@
-# DOCS https://ghostty.org/docs/config/reference
+# DOCS https://ghostty.org/docs/config/keybind
 #-------------------------------------------------------------------------------
 
-macos-option-as-alt = true
+macos-option-as-alt = false
+keybind = cmd+enter=csi:^O
 #-------------------------------------------------------------------------------
 
