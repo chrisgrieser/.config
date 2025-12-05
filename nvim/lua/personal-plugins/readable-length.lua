@@ -22,6 +22,7 @@ local function enable()
 	if width < 1 then return end
 	dummyWin = vim.api.nvim_open_win(dummyBuf, false, {
 		split = "right",
+		style = "minimal",
 		width = width,
 	})
 	vim.wo[dummyWin].winhighlight = "Normal:Colorcolumn"

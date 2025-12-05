@@ -58,18 +58,16 @@ keymap(
 )
 
 ---NAVIGATION-------------------------------------------------------------------
--- 1. make mappings work on wrapped lines as well
--- 2. make HJKL behave like hjkl but bigger with distance
+-- make mappings work on wrapped lines as well
 keymap({ "n", "x" }, "j", "gj")
 keymap({ "n", "x" }, "k", "gk")
 
-keymap({ "n", "x" }, "H", "g0g^") -- scroll fully to the left
-keymap("o", "H", "g^")
-keymap({ "n", "x" }, "L", "g$", { remap = true }) -- remap for `nvim-origami` overload of `$`
+-- make HJKL behave like hjkl but bigger with distance
+keymap({ "n", "x" }, "H", "0^") -- scroll fully to the left
+keymap("o", "H", "^")
+keymap({ "n", "x" }, "L", "$", { remap = true }) -- remap for `nvim-origami` overload of `$`
 keymap({ "n", "x" }, "J", "6gj", { desc = "6j" })
 keymap({ "n", "x" }, "K", "6gk", { desc = "6k" })
-keymap("n", "I", "g^i")
-keymap("n", "A", "g$a")
 
 -- Jump history
 keymap("n", "<C-h>", "<C-o>", { desc = "󱋿 Jump back" })
