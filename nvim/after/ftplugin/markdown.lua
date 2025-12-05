@@ -28,6 +28,12 @@ if softwrap then
 	vim.schedule(function() optl.showbreak = "" end)
 	require("personal-plugins.readable-length")
 	bkeymap("n", "<D-w>", vim.cmd.bdelete) -- prevent triggering `:close` from my keymaps
+
+	bkeymap("n", "I", "g^i")
+	bkeymap("n", "A", "g$a")
+	bkeymap({ "n", "x" }, "H", "g^")
+	bkeymap("o", "H", "g^")
+	bkeymap({ "n", "x" }, "L", "g$")
 else
 	-- HARD WRAP
 	-- when typing beyond `textwidth`

@@ -1,0 +1,20 @@
+# vim: filetype=config
+# DOCS https://ghostty.org/docs/config/reference
+#-------------------------------------------------------------------------------
+
+config-file	= ~/.config/ghostty/keybinds
+
+
+#-------------------------------------------------------------------------------
+
+confirm-close-surface = false
+shell-integration = zsh
+copy-on-select = clipboard
+mouse-hide-while-typing = true
+
+#-APPEARANCE--------------------------------------------------------------------
+title = "Ghostty 👻"
+# theme = light:catppuccin-latte,dark:catppuccin-mocha
+font-family = "JetBrainsMonoNL NF"
+font-size = 24
+font-thicken = true
