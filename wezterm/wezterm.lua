@@ -4,16 +4,16 @@ local wt = require("wezterm")
 -- THEME
 -- the first theme in each list is used
 local darkThemes = {
-	"MaterialDesignColors",
-	"Afterglow (Gogh)",
-	"cyberpunk",
 	"Kanagawa (Gogh)",
+	"Afterglow (Gogh)",
+	"MaterialDesignColors",
+	"cyberpunk",
 	"ChallengerDeep",
 }
 local lightThemes = {
+	"Nord Light (Gogh)",
 	"GoogleLight (Gogh)",
 	"Ivory Light (terminal.sexy)",
-	"Nord Light (Gogh)",
 }
 
 local nordLight = wt.get_builtin_color_schemes()["Nord Light (Gogh)"]
@@ -99,7 +99,7 @@ local theme = require("theme-utils") -- my theme utils
 
 local config = {
 	-- Meta
-	check_for_updates = false, -- done via homebrew already
+	check_for_updates = true, -- done via homebrew already
 	automatically_reload_config = true,
 
 	-- Start/close
@@ -136,7 +136,6 @@ local config = {
 	-- macOS window bar window-related functionality, like split commands
 	-- (used by Hammerspoon)
 	window_decorations = "INTEGRATED_BUTTONS|RESIZE",
-	native_macos_fullscreen_mode = false,
 
 	-- Scroll & Scrollbar
 	enable_scroll_bar = true,

@@ -3,27 +3,34 @@
 
 #-META--------------------------------------------------------------------------
 config-file	= ~/.config/ghostty/keybinds
+auto-update-channel = stable
 
 #-BEHAVIOR----------------------------------------------------------------------
 confirm-close-surface = false
-shell-integration = zsh
-copy-on-select = clipboard
 mouse-hide-while-typing = true
+window-inherit-working-directory = false
 working-directory = "/Users/chrisgrieser/Desktop"
 
+copy-on-select = clipboard
+selection-clear-on-copy = false
+
 #-APPEARANCE--------------------------------------------------------------------
+# https://ghostty.org/docs/config/reference#theme
 # theme = light:catppuccin-latte,dark:catppuccin-mocha
 
 font-family = "JetBrainsMonoNL NF"
-font-size = 24
+font-size = 26
 font-thicken = true
+adjust-cell-width = -10%
 
 adjust-cursor-thickness = 2
 
 #-WINDOW------------------------------------------------------------------------
 title = ""
-macos-titlebar-style = transparent
-macos-window-buttons = hidden
-window-width = 107
-window-height = 9999
+macos-titlebar-style = hidden
+window-save-state = always
+macos-window-buttons = visible
+macos-titlebar-proxy-icon = hidden
+window-width = 97
+window-height = 9001
 
