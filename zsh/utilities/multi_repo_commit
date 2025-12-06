@@ -14,7 +14,7 @@ function actions_in_repo {
 	cp -f "$HOME/Desktop/nvim-type-check.yml" "./.github/workflows/nvim-type-check.yml"
 }
 
-commit_msg="ci: pin lua_ls version due to failing nvim-type-check"
+commit_msg="ci: fix pinning lua_ls version"
 
 _export_github_token # defined in .zshenv
 
