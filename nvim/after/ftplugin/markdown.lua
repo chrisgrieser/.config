@@ -14,7 +14,11 @@ optl.listchars:append { multispace = "·" }
 -- move everything a bit more to the right
 if vim.bo.buftype == "" then optl.signcolumn = "yes:4" end
 
+---KEYMAPS----------------------------------------------------------------------
+
 bkeymap("n", "<leader>rt", "vip:!pandoc --to=gfm<CR>", { desc = " Format table under cursor" })
+
+bkeymap("n", "<leader>x", "mzI- [ ] <Esc>`z", { desc = " Add task/checkbox" })
 
 ---WRAP-------------------------------------------------------------------------
 
@@ -31,9 +35,6 @@ if softwrap then
 
 	bkeymap("n", "I", "g^i")
 	bkeymap("n", "A", "g$a")
-	bkeymap({ "n", "x" }, "H", "g^")
-	bkeymap("o", "H", "g^")
-	bkeymap({ "n", "x" }, "L", "g$")
 else
 	-- HARD WRAP
 	-- when typing beyond `textwidth`
@@ -76,8 +77,8 @@ do
 		return key
 	end
 
-	-- bkeymap("n", "o", function() return autoBullet("o") end, { expr = true })
-	-- bkeymap("i", "<CR>", function() return autoBullet("<CR>") end, { expr = true })
+	bkeymap("n", "o", function() return autoBullet("o") end, { expr = true })
+	bkeymap("i", "<CR>", function() return autoBullet("<CR>") end, { expr = true })
 end
 
 ---CODEBLOCKS-------------------------------------------------------------------
