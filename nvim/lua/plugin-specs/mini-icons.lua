@@ -1,3 +1,6 @@
+-- DOCS https://github.com/nvim-mini/mini.icons/blob/main/doc/mini-icons.txt
+--------------------------------------------------------------------------------
+
 return {
 	"nvim-mini/mini.icons",
 	opts = {
