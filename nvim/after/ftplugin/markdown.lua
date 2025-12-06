@@ -50,15 +50,16 @@ do
 		local line = vim.api.nvim_get_current_line()
 
 		local indent = line:match("^%s*")
-		local list = line:match("^%s*([-*+] )")
 		local task = line:match("^%s*([-*+] %[[x ]%] )")
+		local list = not task and line:match("^%s*([-*+] )")
 		local blockquote = line:match("^%s*(>+ )")
 		local num = line:match("^%s*(%d+%. )")
-		local continued = task or list or num or blockquote or "" -- task before list, since they match
+		local continued = list or task or num or blockquote or ""
 		local emptyList = continued ~= "" and vim.trim(indent .. continued) == vim.trim(line)
 		if num then continued = num:gsub("%d+", function(n) return tostring(tonumber(n) + 1) end) end
 
-		if key == "o" then
+		if key:lower() == "o" then
+			if key == "O" then row = row - 1 end
 			vim.api.nvim_buf_set_lines(0, row, row, false, { indent .. continued })
 			vim.api.nvim_win_set_cursor(0, { row + 1, 1 })
 			vim.cmd.startinsert { bang = true } -- bang -> insert at EoL
@@ -69,12 +70,12 @@ do
 			local nextLine = indent .. continued .. afterCursor
 			vim.api.nvim_buf_set_lines(0, row - 1, row, false, { beforeCursor, nextLine })
 			vim.api.nvim_win_set_cursor(0, { row + 1, #(indent .. continued) })
-			vim.cmd.startinsert()
 		end
 	end
 
-	bkeymap("n", "o", function() autoBullet("o") end)
-	bkeymap("i", "<CR>", function() autoBullet("<CR>") end)
+	bkeymap("n", "o", function() autoBullet("o") end, { desc = " Auto-bullet o" })
+	bkeymap("n", "O", function() autoBullet("O") end, { desc = " Auto-bullet O" })
+	bkeymap("i", "<CR>", function() autoBullet("<CR>") end, { desc = " Auto-bullet <CR>" })
 end
 
 ---CODEBLOCKS-------------------------------------------------------------------

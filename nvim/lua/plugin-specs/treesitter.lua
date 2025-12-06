@@ -19,7 +19,6 @@ local ensureInstalled = {
 	},
 	dataFormats = {
 		"json",
-		"jsonc",
 		"toml",
 		"xml", -- macOS `.plist` are also `.xml`
 		"yaml",
@@ -39,7 +38,7 @@ local ensureInstalled = {
 		"gitattributes",
 		"gitignore",
 		"just",
-		"query", -- treesitter query files
+		"query", -- treesitter query files (.scm)
 		"requirements", -- pip requirements file
 	},
 	embeddedLangs = {
