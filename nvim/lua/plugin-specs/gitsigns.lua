@@ -1,3 +1,6 @@
+-- DOCS https://github.com/lewis6991/gitsigns.nvim?tab=readme-ov-file#️-installation--usage
+--------------------------------------------------------------------------------
+
 return {
 	"lewis6991/gitsigns.nvim",
 	event = "VeryLazy",
@@ -12,16 +15,16 @@ return {
 			topdelete = { show_count = true },
 			changedelete = { show_count = true },
 		},
-		current_line_blame_formatter = "<author> (<author_time:%R>): <summary>",
-		current_line_blame_formatter_nc = "+++ uncommitted",
 		current_line_blame = false, -- toggle with `:Gitsigns toggle_current_line_blame`
+		current_line_blame_formatter = "<summary> (<author_time:%R>, <author>))",
+		current_line_blame_formatter_nc = "+++ uncommitted",
 		current_line_blame_opts = { delay = 500 },
 	},
 	keys = {
 		-- stylua: ignore start
 		{ "ga", "<cmd>Gitsigns stage_hunk<CR>", desc = "󰊢 (Un-)Stage hunk" },
 		{ "ga", ":Gitsigns stage_hunk<CR>", mode = "x", silent = true, desc = "󰊢 (Un-)Stage selection" },
-		{ "<leader>gA", "<cmd>Gitsigns stage_buffer<CR>", desc = "󰊢 Stage file" },
+		{ "gA", "<cmd>Gitsigns stage_buffer<CR>", desc = "󰊢 Stage file" },
 
 		{ "gh", function() require("gitsigns").nav_hunk("next", { foldopen = true, navigation_message = true }) end, desc = "󰊢 Next hunk" },
 		{ "gH", function() require("gitsigns").nav_hunk("prev", { foldopen = true, navigation_message = true }) end, desc = "󰊢 Previous hunk" },
