@@ -10,10 +10,6 @@ optl.commentstring = "<!-- %s -->" -- add spaces
 optl.listchars:remove("trail")
 optl.listchars:append { multispace = "·" }
 
--- since markdown has rarely indented lines, and also rarely has overlong lines,
--- move everything a bit more to the right
-if vim.bo.buftype == "" then optl.signcolumn = "yes:4" end
-
 ---KEYMAPS----------------------------------------------------------------------
 
 bkeymap("n", "<leader>rt", "vip:!pandoc --to=gfm<CR>", { desc = " Format table under cursor" })
@@ -26,9 +22,16 @@ local softwrap = vim.startswith(vim.api.nvim_buf_get_name(0), vim.g.notesDir)
 
 if softwrap then
 	-- SOFT WRAP
-	require("zen-mode").open()
+	vim.schedule(function() optl.showbreak = "" end)
+	optl.formatlistpat:append([[\|^\s*>\s\+]]) -- also indent blockquotes via `breakindentopt`
+	optl.wrap = true
 else
 	-- HARD WRAP
+
+	-- since markdown has rarely indented lines, and also rarely has overlong lines,
+	-- move everything a bit more to the right
+	if vim.bo.buftype == "" then optl.signcolumn = "yes:4" end
+
 	-- when typing beyond `textwidth`
 	vim.schedule(function() optl.formatoptions:append("t") end)
 
@@ -52,7 +55,7 @@ end
 ---AUTO BULLETS-----------------------------------------------------------------
 -- (simplified implementation of `bullets.vim`)
 do
-	vim.defer_fn(function () optl.formatoptions:append("o") end, 1) -- `o` in normal mode
+	vim.defer_fn(function() optl.formatoptions:append("o") end, 1) -- `o` in normal mode
 	optl.formatoptions:append("r") -- `<CR>` in insert mode
 
 	local function autoBullet(key)
