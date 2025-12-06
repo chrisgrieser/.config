@@ -43,7 +43,7 @@ vim.api.nvim_create_autocmd("InsertLeave", {
 })
 
 ---AUTO BULLETS-----------------------------------------------------------------
--- (simplified implementation of `bullets.vim`)
+
 do
 	local function autoBullet(key)
 		local row, col = unpack(vim.api.nvim_win_get_cursor(0))
@@ -52,20 +52,20 @@ do
 		local indent = line:match("^%s*")
 		local list = line:match("^%s*([-*+] )")
 		local task = line:match("^%s*([-*+] %[[x ]%] )")
-		local blockquote = line:match("^%s*(>+)")
-		local number = line:match("^%s*(%d+%. )")
-		if number then
-			number = number:gsub("%d", function(num) return tostring(tonumber(num) + 1) end)
-		end
-		local continued = list or number or task or blockquote or ""
+		local blockquote = line:match("^%s*(>+ )")
+		local num = line:match("^%s*(%d+%. )")
+		local continued = task or list or num or blockquote or "" -- task before list, since they match
+		local emptyList = continued ~= "" and vim.trim(indent .. continued) == vim.trim(line)
+		if num then continued = num:gsub("%d+", function(n) return tostring(tonumber(n) + 1) end) end
 
 		if key == "o" then
 			vim.api.nvim_buf_set_lines(0, row, row, false, { indent .. continued })
 			vim.api.nvim_win_set_cursor(0, { row + 1, 1 })
-			vim.cmd.startinsert { bang = true }
-		else
-			local afterCursor = line:sub(col + 1)
-			local beforeCursor = line:sub(1, col - 1)
+			vim.cmd.startinsert { bang = true } -- bang -> insert at EoL
+		elseif key == "<CR>" and emptyList then
+			vim.api.nvim_set_current_line("")
+		elseif key == "<CR>" and not emptyList then
+			local beforeCursor, afterCursor = line:sub(1, col - 1), line:sub(col + 1)
 			local nextLine = indent .. continued .. afterCursor
 			vim.api.nvim_buf_set_lines(0, row - 1, row, false, { beforeCursor, nextLine })
 			vim.api.nvim_win_set_cursor(0, { row + 1, #(indent .. continued) })
@@ -73,8 +73,8 @@ do
 		end
 	end
 
-	bkeymap("n", "o", function() return autoBullet("o") end)
-	bkeymap("i", "<CR>", function() return autoBullet("<CR>") end)
+	bkeymap("n", "o", function() autoBullet("o") end)
+	bkeymap("i", "<CR>", function() autoBullet("<CR>") end)
 end
 
 ---CODEBLOCKS-------------------------------------------------------------------
@@ -90,13 +90,7 @@ bkeymap("i", ",", function()
 	end
 
 	-- dedent clipboard content
-	local code = vim.split(vim.fn.getreg("+"), "\n")
-	while vim.trim(code[1]) == "" do
-		table.remove(code, 1)
-	end
-	while vim.trim(code[#code]) == "" do
-		table.remove(code)
-	end
+	local code = vim.split(vim.fn.getreg("+"), "\n", { trimempty = true })
 	local smallestIndent = vim.iter(code):fold(math.huge, function(acc, line)
 		local indent = #line:match("^%s*")
 		return math.min(acc, indent)
@@ -108,11 +102,15 @@ bkeymap("i", ",", function()
 	table.insert(dedented, "```")
 	vim.api.nvim_buf_set_lines(0, row - 1, row, false, dedented)
 	vim.api.nvim_win_set_cursor(0, { row, 1 })
-	vim.cmd.stopinsert()
+	if lang == "" then
+		vim.cmd.startinsert { bang = true }
+	else
+		vim.cmd.stopinsert()
+	end
 end, { desc = " ,, -> Codeblock" })
 
 ---HEADINGS---------------------------------------------------------------------
--- Jump to next/prev heading (`##` to skip level 1 and comments in code-blocks)
+-- Jump to next/prev heading (`##` to skip H1 and comments in code-blocks)
 bkeymap("n", "<C-j>", [[/^##\+ .*<CR>]], { desc = " Next heading" })
 bkeymap("n", "<C-k>", [[?^##\+ .*<CR>]], { desc = " Prev heading" })
 
