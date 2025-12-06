@@ -84,7 +84,9 @@ local function getAltBuffer()
 	table.sort(listedBufs, function(a, b) return a.lastused > b.lastused end)
 	local altBuf = vim.iter(listedBufs):find(function(buf)
 		local valid = vim.api.nvim_buf_is_valid(buf.bufnr)
-		local nonSpecial = vim.bo[buf.bufnr].buftype == "" and buf.name ~= ""
+		local nonSpecial = vim.bo[buf.bufnr].buftype == ""
+			and vim.bo[buf.bufnr].buftype ~= "help"
+			and buf.name ~= ""
 		local notCurrent = vim.api.nvim_get_current_buf() ~= buf.bufnr
 		return valid and nonSpecial and notCurrent
 	end)
@@ -154,7 +156,7 @@ end
 
 ---GOTO COMMANDS----------------------------------------------------------------
 function M.gotoAltFile()
-	if vim.bo.buftype ~= "" then
+	if vim.bo.buftype ~= "" and vim.bo.buftype ~= "help" then
 		notify("Cannot do that in special buffer.", "warn")
 		return
 	end
