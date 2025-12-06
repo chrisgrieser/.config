@@ -184,15 +184,6 @@ do
 					return dirHasChildMarker or dirHasParentMarker
 				end)
 				if root and root ~= "" then vim.uv.chdir(root) end
-
-				--------------------------------------------------------------------
-
-				local shouldEnable = vim.startswith(root or "", vim.g.notesDir)
-				if shouldEnable then
-					require("zen-mode").open()
-				else
-					require("zen-mode").close()
-				end
 			end)
 		end,
 	})
