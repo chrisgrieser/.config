@@ -45,26 +45,36 @@ vim.api.nvim_create_autocmd("InsertLeave", {
 ---AUTO BULLETS-----------------------------------------------------------------
 -- (simplified implementation of `bullets.vim`)
 do
-	vim.defer_fn(function() optl.formatoptions:append("o") end, 1) -- `o` in normal mode
-	optl.formatoptions:append("r") -- `<CR>` in insert mode
-
 	local function autoBullet(key)
-		-- cannot set opt.comments permanently, since it disturbs the correctly
-		-- indented continuation of bullet lists when hitting `opt.textwidth`
-		local comBefore = optl.comments:get()
-		-- stylua: ignore
-		optl.comments = {
-			"b:- [ ]", "b:- [x]", -- tasks
-			"b:*", "b:-", "b:+", -- bullets
-			"b:1.", "b:2.", "b:3.", "b:4.", "b:5.", -- ordered list
-			"n:>", -- blockquotes
-		}
-		vim.defer_fn(function() optl.comments = comBefore end, 100) -- deferred to restore only after key
-		return key
+		local row, col = unpack(vim.api.nvim_win_get_cursor(0))
+		local line = vim.api.nvim_get_current_line()
+
+		local indent = line:match("^%s*")
+		local list = line:match("^%s*([-*+] )")
+		local task = line:match("^%s*([-*+] %[[x ]%] )")
+		local blockquote = line:match("^%s*(>+)")
+		local number = line:match("^%s*(%d+%. )")
+		if number then
+			number = number:gsub("%d", function(num) return tostring(tonumber(num) + 1) end)
+		end
+		local continued = list or number or task or blockquote or ""
+
+		if key == "o" then
+			vim.api.nvim_buf_set_lines(0, row, row, false, { indent .. continued })
+			vim.api.nvim_win_set_cursor(0, { row + 1, 1 })
+			vim.cmd.startinsert { bang = true }
+		else
+			local afterCursor = line:sub(col + 1)
+			local beforeCursor = line:sub(1, col - 1)
+			local nextLine = indent .. continued .. afterCursor
+			vim.api.nvim_buf_set_lines(0, row - 1, row, false, { beforeCursor, nextLine })
+			vim.api.nvim_win_set_cursor(0, { row + 1, #(indent .. continued) })
+			vim.cmd.startinsert()
+		end
 	end
 
-	bkeymap("n", "o", function() return autoBullet("o") end, { expr = true })
-	bkeymap("i", "<CR>", function() return autoBullet("<CR>") end, { expr = true })
+	bkeymap("n", "o", function() return autoBullet("o") end)
+	bkeymap("i", "<CR>", function() return autoBullet("<CR>") end)
 end
 
 ---CODEBLOCKS-------------------------------------------------------------------
