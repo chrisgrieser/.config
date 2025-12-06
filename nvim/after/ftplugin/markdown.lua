@@ -26,16 +26,7 @@ local softwrap = vim.startswith(vim.api.nvim_buf_get_name(0), vim.g.notesDir)
 
 if softwrap then
 	-- SOFT WRAP
-	-- disadvantage: https://github.com/neovim/neovim/issues/14409
-	optl.wrap = true
-	vim.b.readableLength = true
-	optl.formatlistpat:append([[\|^\s*>\s\+]]) -- also indent blockquotes via `breakindentopt`
-	vim.schedule(function() optl.showbreak = "" end)
-	require("personal-plugins.readable-length")
-	bkeymap("n", "<D-w>", vim.cmd.bdelete) -- prevent triggering `:close` from my keymaps
-
-	bkeymap("n", "I", "g^i")
-	bkeymap("n", "A", "g$a")
+	require("zen-mode").open()
 else
 	-- HARD WRAP
 	-- when typing beyond `textwidth`
@@ -57,6 +48,7 @@ else
 		end,
 	})
 end
+
 ---AUTO BULLETS-----------------------------------------------------------------
 -- (simplified implementation of `bullets.vim`)
 do
