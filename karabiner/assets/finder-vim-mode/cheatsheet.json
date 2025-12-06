@@ -118,10 +118,10 @@
     "q\nclose win",
     "w\nduplicate",
     "e\nclose other wins",
+    "r\nrecent",
     {
       "c": "#CCCCCC"
     },
-    "r",
     "t",
     {
       "c": "#c7a6ff"

@@ -301,6 +301,13 @@ rules:
           - *remove-find-notice
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
       #─────────────────────────────────────────────────────────────────────────
+      # r = recent
+      - type: basic
+        from: { key_code: r }
+        to_if_alone:
+          - { key_code: f, modifiers: [command, shift] }
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
+      #─────────────────────────────────────────────────────────────────────────
       # Selections
       # a = select all
       - type: basic

@@ -31,7 +31,7 @@ local function hasSplit()
 	return #splits > 1
 end
 
--- not using lualins's component since it reqquires `web-devicons`
+-- not using lualins's component since it requires `web-devicons`
 local function addFiletypeIcon(filename)
 	if filename == "[No Name]" and vim.bo.ft ~= "" then filename = vim.bo.ft end -- fix name for special buffers
 	local ok, icons = pcall(require, "mini.icons")
