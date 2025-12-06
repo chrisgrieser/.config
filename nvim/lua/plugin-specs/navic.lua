@@ -1,3 +1,6 @@
+-- DOCS https://github.com/SmiteshP/nvim-navic?tab=readme-ov-file#-customise
+--------------------------------------------------------------------------------
+
 return {
 	"SmiteshP/nvim-navic",
 	event = "LspAttach",

@@ -45,7 +45,7 @@ M.timer_clock = hs.timer
 		local isFullHour = os.date("%M") == "00"
 		if isFullHour and u.screenIsUnlocked() and not env.isProjector() then
 			local hour = tostring(os.date("%H:%M"))
-			hs.alert(hour, 2)
+			hs.alert(hour, 3)
 		end
 	end)
 	:start()
@@ -115,7 +115,7 @@ M.timer_uptime = hs.timer
 -- all video apps.
 local config = {
 	checkIntervalMins = 10,
-	idleMins = 45,
+	idleMins = 50,
 	timeToReactSecs = 20,
 }
 
@@ -126,10 +126,11 @@ M.timer_sleepAutoVideoOff = hs.timer
 
 		local alertMsg = ("💤 Will sleep in %ds if idle."):format(config.timeToReactSecs)
 		local alertId = hs.alert(alertMsg, config.timeToReactSecs)
+		hs.sound.getByName("Submarine"):volume(0.3):play() ---@diagnostic disable-line: undefined-field
 
 		-- remove alert earlier if user did something
 		u.defer(math.ceil(config.timeToReactSecs / 2), function()
-			local userDidSth = hs.host.idleTime() < config.timeToReactSecs
+			local userDidSth = hs.host.idleTime() < (config.timeToReactSecs / 2)
 			if userDidSth then hs.alert.closeSpecific(alertId) end
 		end)
 
