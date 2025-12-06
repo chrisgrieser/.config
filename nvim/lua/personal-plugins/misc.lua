@@ -260,9 +260,9 @@ function M.smartDuplicate()
 	elseif ft == "python" then
 		line = line:gsub("^(%s*)if( .*:)$", "%1elif%2")
 	elseif ft == "markdown" then
-		line = line:gsub("^(%s*)(%d+)%. ", function (indent, num)
-			local increment
-			return indent .. (tonumber(num) + 1) .. ". "
+		line = line:gsub("^(%s*)(%d+)%. ", function(indent, num)
+			local increment = tonumber(num) + 1
+			return indent .. increment .. ". "
 		end)
 	end
 
