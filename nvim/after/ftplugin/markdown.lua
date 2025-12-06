@@ -28,6 +28,7 @@ if softwrap then
 	-- SOFT WRAP
 	-- disadvantage: https://github.com/neovim/neovim/issues/14409
 	optl.wrap = true
+	vim.b.readableLength = true
 	optl.formatlistpat:append([[\|^\s*>\s\+]]) -- also indent blockquotes via `breakindentopt`
 	vim.schedule(function() optl.showbreak = "" end)
 	require("personal-plugins.readable-length")

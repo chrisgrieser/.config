@@ -5,15 +5,15 @@ local originalColorcol = vim.o.colorcolumn
 --------------------------------------------------------------------------------
 
 local function getWidth()
-	return vim.o.columns - (vim.o.textwidth + 1) - tonumber(vim.o.signcolumn:match("%d")) * 2
+	return vim.o.columns - (vim.o.textwidth + 1) - tonumber(vim.o.signcolumn:match("%d") or "0") * 2
 end
 
 local function disable()
-	if not dummyWin or not vim.api.nvim_win_is_valid(dummyWin) then return end
+	vim.api.nvim_buf_delete(dummyBuf, { force = true })
 	vim.wo[dummyWin].winhighlight = ""
 	pcall(vim.api.nvim_win_close, dummyWin, true)
 	dummyWin = nil
-	vim.o.colorcolumn = originalColorcol
+	vim.opt.colorcolumn = originalColorcol
 end
 
 local function enable()
@@ -31,33 +31,35 @@ local function enable()
 end
 
 --------------------------------------------------------------------------------
-local group = vim.api.nvim_create_augroup("MarkdownReadableLength", { clear = true })
+local group = vim.api.nvim_create_augroup("ReadableLength", { clear = true })
 
 vim.api.nvim_create_autocmd("BufEnter", {
 	group = group,
 	callback = function(ctx)
-		if ctx.buf == dummyBuf then
-			vim.api.nvim_buf_delete(ctx.buf, {})
-			return
-		end
-
 		if vim.bo[ctx.buf].buftype ~= "" then return end
-		local isMarkdown = vim.bo[ctx.buf].filetype == "markdown"
+		local shouldEnable = vim.b[ctx.buf].readableLength
 
-		if isMarkdown and not dummyWin then
+		if shouldEnable and not dummyWin then
 			enable()
-		elseif not isMarkdown and dummyWin then
+		elseif not shouldEnable and dummyWin then
 			disable()
 		end
+	end,
+})
+
+vim.api.nvim_create_autocmd("BufDelete", {
+	group = group,
+	callback = function(ctx)
+		if vim.b[ctx.buf].readableLength then disable() end
 	end,
 })
 
 vim.api.nvim_create_autocmd("VimResized", {
 	group = group,
 	callback = function(ctx)
-		local isMarkdown = vim.bo[ctx.buf].filetype == "markdown"
 		local width = getWidth()
-		if isMarkdown and not dummyWin then
+		local shouldEnable = vim.b[ctx.buf].readableLength
+		if shouldEnable and not dummyWin then
 			enable()
 		elseif width < 1 and dummyWin then
 			disable()
@@ -68,7 +70,7 @@ vim.api.nvim_create_autocmd("VimResized", {
 })
 
 -- initialize
-if vim.bo.filetype == "markdown" then enable() end
+if vim.b.readableLength then enable() end
 
 --------------------------------------------------------------------------------
 return M
