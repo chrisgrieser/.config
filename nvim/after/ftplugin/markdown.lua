@@ -43,9 +43,8 @@ vim.api.nvim_create_autocmd("InsertLeave", {
 })
 
 ---AUTO BULLETS-----------------------------------------------------------------
-
 do
-	local function autoBullet(key)
+	local function autoBullet(key) ---@param key "o"|"O"|"<CR>"
 		local row, col = unpack(vim.api.nvim_win_get_cursor(0))
 		local line = vim.api.nvim_get_current_line()
 
