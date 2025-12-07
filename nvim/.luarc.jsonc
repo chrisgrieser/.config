@@ -1,11 +1,15 @@
-// https://luals.github.io/wiki/settings/
+// DOCS https://luals.github.io/wiki/settings/
 {
 	"runtime.version": "LuaJIT",
-	"workspace.ignoreDir": ["debug", "templates"],
+
 	"workspace.library": [
 		"$VIMRUNTIME/lua", // nvim-lua runtime
 		"${3rd}/luv/library", // vim.uv,
 		"$HOME/.local/share/nvim/lazy/snacks.nvim/lua" // snacks.nvim
 	],
+
+	"diagnostics.ignoredFiles": "Disable", // `workspace.ignoreDir` not diagnosed even if open
+	"workspace.ignoreDir": ["debug", "templates"],
+
 	"$schema": "https://raw.githubusercontent.com/LuaLS/vscode-lua/master/setting/schema.json"
 }

@@ -76,11 +76,9 @@ M.aw_masto = aw.new(function(appName, event, masto)
 	elseif event == aw.deactivated then
 		local isMediaWin = win:title():find("^Image")
 		local frontNotAlfred = hs.application.frontmostApplication():name() ~= "Alfred"
-		if #masto:allWindows() > 1 and isMediaWin and frontNotAlfred then
-			win:close()
-		end
-	
-		u.defer(1, function ()
+		if #masto:allWindows() > 1 and isMediaWin and frontNotAlfred then win:close() end
+
+		u.defer(1, function()
 			hs.eventtap.keyStroke({}, "left", 1, masto) -- go back
 			hs.eventtap.keyStroke({ "cmd" }, "1", 1, masto) -- go to home tab
 			hs.eventtap.keyStroke({ "cmd" }, "up", 1, masto) -- scroll up

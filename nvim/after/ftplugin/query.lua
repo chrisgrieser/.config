@@ -1,20 +1,24 @@
 -- query = treesitter query language
 --------------------------------------------------------------------------------
 
-vim.bo.commentstring = "; %s" -- add space
-vim.bo.iskeyword = vim.go.iskeyword -- inherit global one instead of overwriting it
-
---------------------------------------------------------------------------------
-
--- for `.scm` files
+---.SCM FILES-------------------------------------------------------------------
 if vim.bo.buftype == "" then
 	vim.opt_local.tabstop = 2
 	vim.opt_local.expandtab = true
+	vim.bo.commentstring = "; %s" -- add space
+	vim.bo.iskeyword = vim.go.iskeyword -- inherit global one instead of overwriting it
 end
 
--- for `:InspectTree` buffers
+---:INSPECTTREE BUFFERS---------------------------------------------------------
 if vim.bo.buftype == "nofile" then
 	vim.opt_local.listchars:append { lead = "│" }
+
+	local msg = [[- `a` toggle anonymized nodes
+- `I` toggle nodes source langs
+- `o` query editor
+- `<CR>` jump to node
+- `q` close]]
+	vim.notify_once(msg, nil, { title = ":InspectTree keymaps", icon = "" })
 
 	-- FIX missing `nowait` for `q`
 	-- PENDING https://github.com/neovim/neovim/pull/36804
