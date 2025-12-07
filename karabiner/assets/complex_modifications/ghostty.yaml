@@ -1,0 +1,11 @@
+# yaml-language-server: $schema=./schema/karabiner-mod-schema.json
+#───────────────────────────────────────────────────────────────────────────────
+title: Ghostty
+#───────────────────────────────────────────────────────────────────────────────
+rules:
+  - description: Ghostty
+    manipulators:
+      - type: basic
+        from: { key_code: return, modifiers: { mandatory: [command] } }
+        to:
+          - { key_code: l, modifiers: [control] }

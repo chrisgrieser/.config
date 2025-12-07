@@ -7,16 +7,20 @@ auto-update-channel = stable
 
 #-BEHAVIOR----------------------------------------------------------------------
 confirm-close-surface = false
+quit-after-last-window-closed = true
+
 mouse-hide-while-typing = true
-window-inherit-working-directory = false
+window-inherit-working-directory = true
 working-directory = "~/Desktop"
 
 copy-on-select = clipboard
-selection-clear-on-copy = false
+selection-clear-on-copy = true
+
+macos-shortcuts = allow
 
 #-APPEARANCE--------------------------------------------------------------------
-# https://ghostty.org/docs/config/reference#theme
-# theme = light:catppuccin-latte,dark:catppuccin-mocha
+# `ghostty +list-themes`
+theme = "dark:Kanagawa Wave,light:Iceberg Light"
 
 font-family = "JetBrainsMonoNL NF"
 font-size = 26
@@ -25,8 +29,11 @@ adjust-cell-width = -10%
 
 adjust-cursor-thickness = 2
 
+bell-features = "border"
+
 #-WINDOW------------------------------------------------------------------------
-title = " "
+# title = " "
+title = "Ghostty"
 macos-titlebar-proxy-icon = "hidden"
 macos-titlebar-style = "tabs"
 

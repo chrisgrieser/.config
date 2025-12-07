@@ -4,16 +4,16 @@ local wt = require("wezterm")
 -- THEME
 -- the first theme in each list is used
 local darkThemes = {
-	"Kanagawa (Gogh)",
-	"Afterglow (Gogh)",
 	"MaterialDesignColors",
+	"Afterglow (Gogh)",
+	"Kanagawa (Gogh)",
 	"cyberpunk",
 	"ChallengerDeep",
 }
 local lightThemes = {
+	"Ivory Light (terminal.sexy)",
 	"Nord Light (Gogh)",
 	"GoogleLight (Gogh)",
-	"Ivory Light (terminal.sexy)",
 }
 
 local nordLight = wt.get_builtin_color_schemes()["Nord Light (Gogh)"]
