@@ -50,7 +50,7 @@ return {
 			hl.BlinkCmpKindDict = { fg = colors.blue } -- blink.cmp.dictionary
 
 			-- aerial
-			hl.AerialLine = { link = "Search" }
+			hl.AerialLine = { link = "Visual" }
 
 			-- apply color to `bg`, not `fg` (TODO INFO ERROR WARN)
 			hl["@comment.todo"] = { fg = colors.black, bg = hl["@comment.todo"].fg, bold = true }

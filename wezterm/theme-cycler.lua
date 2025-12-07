@@ -2,17 +2,6 @@ local M = {}
 local wt = require("wezterm")
 --------------------------------------------------------------------------------
 
----selects the color scheme depending on Dark/Light Mode
----@param lightTheme string
----@param darkTheme string
----@nodiscard
----@return string name of the string to set in config.colorscheme
-function M.autoScheme(darkTheme, lightTheme)
-	local currentMode = wt.gui.get_appearance()
-	local colorscheme = currentMode:find("Dark") and darkTheme or lightTheme
-	return colorscheme
-end
-
 ---cycle through builtin dark schemes in dark mode, and through light schemes in
 ---light mode
 function M.cycle(window, _)

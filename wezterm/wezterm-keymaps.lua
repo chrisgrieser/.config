@@ -7,7 +7,6 @@ local M = {}
 local wt = require("wezterm")
 local act = wt.action
 local actFun = wt.action_callback
-local theme = require("theme-utils")
 --------------------------------------------------------------------------------
 
 M.keys = {
@@ -31,17 +30,22 @@ M.keys = {
 	-- but expects another character, so this mapping fixes it
 	{ key = "n", mods = "ALT", action = act.SendString("~") },
 
+	-- Theme Cycler
+	{ key = "t", mods = "ALT", action = actFun(require("theme-cycler").cycle) },
+
 	---WEZTERM-------------------------------------------------------------------
 	{ key = "p", mods = "CMD", action = act.ActivateCommandPalette },
+	-- { key = "f", mods = "CMD", action = act.Search("CurrentSelectionOrEmptyString") },
 
-	-- vertical split 
+	-- vertical split
 	{ key = "v", mods = "CTRL", action = act.SplitHorizontal }, -- SIC, called horizontal by wezterm
 
 	-- closes panes, tabs, and windows
 	{ key = "w", mods = "CMD", action = act.CloseCurrentPane { confirm = false } },
 
-	-- Search
-	{ key = "f", mods = "CMD", action = act.Search("CurrentSelectionOrEmptyString") },
+	-- scroll-to-prompt, requires shell integration: https://wezfurlong.org/wezterm/config/lua/keyassignment/ScrollToPrompt.html
+	{ key = "k", mods = "CTRL", action = act.ScrollToPrompt(-1) },
+	{ key = "j", mods = "CTRL", action = act.ScrollToPrompt(1) },
 
 	{ -- cycles panes, then tabs, then windows
 		key = "Enter",
@@ -101,13 +105,6 @@ M.keys = {
 		},
 	},
 
-	-- scroll-to-prompt, requires shell integration: https://wezfurlong.org/wezterm/config/lua/keyassignment/ScrollToPrompt.html
-	{ key = "k", mods = "CTRL", action = act.ScrollToPrompt(-1) },
-	{ key = "j", mods = "CTRL", action = act.ScrollToPrompt(1) },
-
-	-- Theme Cycler
-	{ key = "t", mods = "ALT", action = actFun(theme.cycle) },
-
 	-----------------------------------------------------------------------------
 	-- HINT MODE (= Quick Select) -- https://wezfurlong.org/wezterm/quickselect.html
 	-- cmd+y -> copy text
@@ -125,7 +122,15 @@ M.keys = {
 			end),
 		},
 	},
+}
 
+--------------------------------------------------------------------------------
+
+-- https://wezterm.org/scrollback.html#configurable-search-mode-key-assignments
+M.searchModeKeys = {
+	-- cmd+g -> next/previous match, consistent with macOS behavior
+	{ key = "g", mods = "CMD", action = act.CopyMode("NextMatch") },
+	{ key = "g", mods = "CMD|SHIFT", action = act.CopyMode("PriorMatch") },
 }
 
 --------------------------------------------------------------------------------

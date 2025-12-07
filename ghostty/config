@@ -37,7 +37,7 @@ bell-features = "border,no-title"
 minimum-contrast = 3
 
 #-WINDOW------------------------------------------------------------------------
-title = " "
+title = " Ghostty "
 macos-titlebar-proxy-icon = "hidden"
 macos-titlebar-style = "tabs"
 window-padding-y = 0,10
@@ -63,6 +63,11 @@ keybind = ctrl+k=jump_to_prompt:-1
 keybind = cmd+enter=text:\x0f
 # cmd+l -> ctrl+l -> reveal in Finder
 keybind = cmd+l=text:\x0c
+# cmd+e -> escaped backticks and (and move cursor into it)
+keybind = cmd+e=text:\\`\\`\x1b[D\x1b[D
+
+# shift+enter -> ctrl+v, ctrl+j -> insert line break, see https://unix.stackexchange.com/a/80820
+keybind = shift+enter=text:\x16\x0a
 
 # these are managed via zsh already
 keybind = alt+arrow_left=unbind

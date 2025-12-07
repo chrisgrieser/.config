@@ -53,6 +53,7 @@ bindkey -M vicmd -s ' ' 'ciw' # -s flag sends direct keystrokes and therefore al
 bindkey -M vicmd 'U' redo
 bindkey -M vicmd 'm' vi-join
 bindkey -M vicmd -s 'Y' 'y$'
+bindkey -M viins '^?' backward-delete-char # fix backspace not being able to deleted a line break
 
 #───────────────────────────────────────────────────────────────────────────────
 # YANK/DELETE to (macOS) system clipboard

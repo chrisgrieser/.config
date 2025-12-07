@@ -22,7 +22,7 @@ if softwrap then
 	optl.formatlistpat:append([[\|^\s*>\s\+]]) -- also indent blockquotes via `breakindentopt`
 	vim.schedule(function() optl.showbreak = "" end)
 
-	bkeymap({ "n", "x" }, "H", "g1")
+	bkeymap({ "n", "x" }, "H", "g0")
 	bkeymap({ "n", "x" }, "L", "g$")
 	bkeymap("n", "I", "g^i")
 	bkeymap("n", "A", "g$a")
@@ -63,7 +63,7 @@ do
 		local blockquote = line:match("^%s*(>+ )")
 		local num = line:match("^%s*(%d+%. )")
 		local continued = list or task or num or blockquote or ""
-		local emptyList = continued ~= "" and vim.trim(indent .. continued) == vim.trim(line)
+		local emptyList = (continued ~= "") and vim.trim(indent .. continued) == vim.trim(line)
 		if num then continued = num:gsub("%d+", function(n) return tostring(tonumber(n) + 1) end) end
 
 		if key:lower() == "o" then
@@ -74,7 +74,8 @@ do
 		elseif key == "<CR>" and emptyList then
 			vim.api.nvim_set_current_line("")
 		elseif key == "<CR>" and not emptyList then
-			local beforeCursor, afterCursor = line:sub(1, col - 1), line:sub(col + 1)
+			local beforeCursor = col > 0 and line:sub(1, math.min(col - 1, 1)) or ""
+			local afterCursor = line:sub(col)
 			local nextLine = indent .. continued .. afterCursor
 			vim.api.nvim_buf_set_lines(0, row - 1, row, false, { beforeCursor, nextLine })
 			vim.api.nvim_win_set_cursor(0, { row + 1, #(indent .. continued) })

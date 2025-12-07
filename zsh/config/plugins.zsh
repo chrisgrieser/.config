@@ -19,7 +19,6 @@ source "$HOMEBREW_PREFIX/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh"
 # ZSH-AUTOPAIR
 source "$HOMEBREW_PREFIX/share/zsh-autopair/autopair.zsh"
 
-# ZSH-SYNTAX-HIGHLIGHTING
 # DOCS https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/docs/highlighters/regexp.md
 source "$HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 export ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets regexp)
@@ -32,7 +31,6 @@ source "$HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
 export ZSH_AUTOSUGGEST_HISTORY_IGNORE="?(#c50,)" # ignores long history items
 export ZSH_AUTOSUGGEST_STRATEGY=(history)
 export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=30
-bindkey '^Y' autosuggest-execute # remapped to `cmd+s` in WezTerm
 
 # do not accept autosuggestion when using vim's `A`
 export ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=("${ZSH_AUTOSUGGEST_ACCEPT_WIDGETS[@]/vi-add-eol/}")

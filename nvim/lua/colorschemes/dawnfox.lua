@@ -73,6 +73,9 @@ return {
 				-- `mini.icons`
 				MiniIconsGrey = { fg = "#767676" },
 
+				-- aerial
+				AerialLine = { link = "Visual" },
+
 				-- blink.cmp
 				BlinkCmpLabelMatch = { fg = "palette.orange" }, -- make matches stand out more
 				BlinkCmpDocBorder = { link = "FloatBorder" },
