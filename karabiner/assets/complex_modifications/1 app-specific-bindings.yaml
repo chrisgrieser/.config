@@ -207,6 +207,16 @@ rules:
           - type: frontmost_application_if
             bundle_identifiers: [com.runningwithcrayons.Alfred-Preferences]
   #───────────────────────────────────────────────────────────────────────
+  - description: "(Apps) Ghostty"
+    manipulators:
+      # FIX `cmd+,` opening in Textedit even though Neovide is the default app
+      - type: basic
+        from: { key_code: comma, modifiers: { mandatory: [command] } }
+        to:
+          - shell_command: open "$HOME/.config/ghostty/config"
+        conditions:
+          - { type: frontmost_application_if, bundle_identifiers: [com.mitchellh.ghostty] }
+  #───────────────────────────────────────────────────────────────────────
   - description: "(Apps) Script Editor"
     manipulators:
       # Quit without saving

@@ -40,3 +40,5 @@ window-save-state = "always"
 window-width = 97
 window-height = 9001
 window-position-x = 23
+window-padding-y = 0,10
+window-padding-x = 3,3

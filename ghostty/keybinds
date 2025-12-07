@@ -3,3 +3,20 @@
 # `ghostty +list-keybinds`
 #-------------------------------------------------------------------------------
 
+keybind = page_down=scroll_page_fractional:0.8
+keybind = page_up=scroll_page_fractional:-0.8
+
+keybind = cmd+p=toggle_command_palette
+
+#-ZSH BRIDGES-------------------------------------------------------------------
+
+# cmd+enter -> ctrl+o -> grappling hook
+keybind = cmd+enter=text:\x0f
+# cmd+z -> ctrl+z -> undo (via zshrc)
+keybind = cmd+z=text:\x1a
+# cmd+l -> ctrl+l -> reveal in Finder
+keybind = cmd+l=text:\x0c
+
+# these are managed via zsh already
+keybind = alt+arrow_left=unbind
+keybind = alt+arrow_right=unbind

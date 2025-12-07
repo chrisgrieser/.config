@@ -15,7 +15,7 @@ reload:
     return "" # to silence return
 
 inspect-keybindings:
-    osascript -e 'tell application "Shortcuts" to run shortcut named "ghostty-input" with input "ghostty +list-keybinds"'
+    osascript -e 'tell application "Shortcuts" to run shortcut named "ghostty-input" with input "ghostty +list-keybinds"' &> /dev/null
 
 theme-preview:
-    osascript -e 'tell application "Shortcuts" to run shortcut named "ghostty-input" with input "ghostty +list-themes"'
+    osascript -e 'tell application "Shortcuts" to run shortcut named "ghostty-input" with input "ghostty +list-themes"' &> /dev/null
