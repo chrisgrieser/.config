@@ -63,10 +63,8 @@ keymap({ "n", "x" }, "j", "gj")
 keymap({ "n", "x" }, "k", "gk")
 
 -- make HJKL behave like hjkl but bigger with distance
--- remap for `nvim-origami` overload of `$` and `^`
-keymap({ "n", "x" }, "H", "^", { remap = true }) -- `0` to scroll fully to the left
-keymap("o", "H", "^")
-keymap({ "n", "x" }, "L", "$", { remap = true })
+keymap({ "n", "x", "o" }, "H", "^", { remap = true }) -- remap for `nvim-origami` overload
+keymap({ "n", "x" }, "L", "$", { remap = true }) -- remap for `nvim-origami` overload
 keymap({ "n", "x" }, "J", "6gj", { desc = "6j" })
 keymap({ "n", "x" }, "K", "6gk", { desc = "6k" })
 
