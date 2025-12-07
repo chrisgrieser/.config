@@ -3,25 +3,27 @@
 
 return {
 	"stevearc/aerial.nvim",
-	cmd = { "AerialOpen", "AerialToggle", "AerialNavToggle" },
-	init = function()
-		vim.api.nvim_create_autocmd("BufEnter", {
-			group = vim.api.nvim_create_augroup("aerial", { clear = true }),
-			callback = function(ctx)
-				local bufname = vim.api.nvim_buf_get_name(ctx.buf)
-				if vim.startswith(bufname, vim.g.notesDir) then
-					vim.schedule(function() vim.cmd("AerialOpen!") end)
-				end
-			end,
-		})
-	end,
+	cmd = "AerialToggle",
+	event = "VeryLazy",
+	keys = {
+		{ "<D-0>", vim.cmd.AerialToggle, desc = " Aerial Toggle" },
+	},
 	opts = {
 		layout = {
 			default_direction = "prefer_right",
 			min_width = vim.o.columns - vim.o.textwidth - 8,
 		},
 		close_automatic_events = { "switch_buffer", "unfocus" },
-		autojump = true,
-		-- filter_kind = { }
+		autojump = false,
+		on_attach = function(bufnr)
+			vim.keymap.set("n", "<D-w>", function()
+				vim.cmd.AerialClose()
+				vim.cmd.bdelete()
+			end, { buffer = bufnr, desc = "Close Aerial with buffer" })
+		end,
+		open_automatic = function(bufnr)
+			local bufname = vim.api.nvim_buf_get_name(bufnr)
+			return vim.startswith(bufname, vim.g.notesDir)
+		end,
 	},
 }

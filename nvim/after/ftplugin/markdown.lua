@@ -20,6 +20,12 @@ if softwrap then
 	optl.wrap = true
 	optl.colorcolumn = ""
 	optl.formatlistpat:append([[\|^\s*>\s\+]]) -- also indent blockquotes via `breakindentopt`
+	vim.schedule(function() optl.showbreak = "" end)
+
+	bkeymap({ "n", "x" }, "H", "g1")
+	bkeymap({ "n", "x" }, "L", "g$")
+	bkeymap("n", "I", "g^i")
+	bkeymap("n", "A", "g$a")
 else
 	-- since markdown has rarely indented lines, and also rarely has overlong lines,
 	-- move everything a bit more to the right
@@ -27,11 +33,6 @@ else
 
 	-- when typing beyond `textwidth`
 	vim.schedule(function() optl.formatoptions:append("t") end)
-
-	bkeymap("n", "#", function()
-		vim.diagnostic.jump { count = 1 }
-		vim.defer_fn(function() vim.cmd.normal { "gw}", bang = true } end, 1)
-	end, { desc = " hard-wrap next line-length violation" })
 
 	-- when leaving insert mode
 	vim.api.nvim_create_autocmd("InsertLeave", {
