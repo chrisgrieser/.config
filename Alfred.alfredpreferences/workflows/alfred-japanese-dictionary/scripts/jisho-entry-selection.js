@@ -101,5 +101,8 @@ function run(argv) {
 			return alfredItem;
 		});
 
+	if (items.length === 0) {
+		return JSON.stringify({ items: [{ title: "No results found.", valid: false }] });
+	}
 	return JSON.stringify({ items: items });
 }

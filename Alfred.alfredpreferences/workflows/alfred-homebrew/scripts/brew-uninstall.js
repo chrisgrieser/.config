@@ -15,7 +15,7 @@ function run() {
 
 	/** @type{AlfredItem[]} */
 	const casks = app
-		.doShellScript('ls -1 "$(brew --prefix)/Caskroom"') // PERF `ls` quicker than `brew list`
+		.doShellScript("brew list --casks")
 		.split("\r")
 		.map((name) => {
 			const zap = useZap ? "--zap" : "";
@@ -32,8 +32,7 @@ function run() {
 
 	/** @type{AlfredItem[]} */
 	const formulas = app
-		// slower than `ls -1 "$(brew --prefix)/Caskroom"'`, but
-		// --installed-on-request is relevant
+		// slower than `brew list --formulae`, but `--installed-on-request` is relevant
 		.doShellScript("brew leaves --installed-on-request")
 		.split("\r")
 		.map((name) => {
