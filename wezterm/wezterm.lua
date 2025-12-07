@@ -73,7 +73,7 @@ end)
 ---SETTINGS---------------------------------------------------------------------
 local config = {
 	-- Meta
-	check_for_updates = false, -- done via homebrew already
+	check_for_updates = true,
 	automatically_reload_config = true,
 
 	-- Start/close
