@@ -35,12 +35,16 @@ function _grappling_hook {
 	local target="$HOME/Desktop"
 	[[ "$PWD" == "$target" ]] && target="$HOME/.config"
 	cd -q "$target" || return 1
-
 	zle reset-prompt
-	[[ "$TERM_PROGRAM" == "WezTerm" ]] && wezterm set-working-directory
+	if [[ "$TERM_PROGRAM" == "WezTerm" ]]; then wezterm set-working-directory; fi
 }
 zle -N _grappling_hook
-bindkey '^O' _grappling_hook # remapped to cmd+enter in wezterm keybindings
+bindkey '^O' _grappling_hook # remapped to `cmd+enter` via karabiner
+
+# cmd+l -> reveal cwd in finder
+function _reaveal_cwd_in_Finder { open .; }
+zle -N _reaveal_cwd_in_Finder
+bindkey '^L' _reaveal_cwd_in_Finder # remapped to `cmd+l` via karabiner
 
 #───────────────────────────────────────────────────────────────────────────────
 # RECENT DIRS
@@ -58,7 +62,7 @@ _gr() {
 	# get existing dirs
 	local -a folders=()
 	while IFS='' read -r dir; do # turn lines into array
-		expanded_dir="${dir/#\~/$HOME}"
+		expanded_dir="${dir/#\$HOME/$HOME}"
 		[[ -d "$expanded_dir" ]] && folders+=("$dir")
 	done < <(dirs -p | sed '1d')
 

@@ -47,14 +47,22 @@ keymap(
 	{ "n", "x", "i" },
 	"<D-C-t>", -- `hyper` gets registered by neovide as cmd+ctrl
 	function()
-		assert(jit.os == "OSX", "requires macOS' `osascript`")
-		vim.system({ "open", "-a", "WezTerm" }):wait()
-		vim.defer_fn(function()
-			local stdin = ("cd -q %q && clear\n"):format(vim.uv.cwd() or "")
-			vim.system({ "wezterm", "cli", "send-text", "--no-paste" }, { stdin = stdin })
-		end, 400)
+		assert(jit.os == "OSX", "requires macOS")
+		local ghosttyinstalled = vim.uv.fs_stat("/Applications/Ghostty.app") ~= nil
+
+		if ghosttyinstalled then
+			local applescript = 'tell application "Shortcuts" to run shortcut named "ghostty-input" with input '
+				.. ("%q"):format("cd -q %q && clear"):format(vim.uv.cwd() or "")
+			vim.system { "osascript", "-e", applescript }
+		else
+			vim.system({ "open", "-a", "WezTerm" }):wait()
+			vim.defer_fn(function()
+				local stdin = ("cd -q %q && clear\n"):format(vim.uv.cwd() or "")
+				vim.system({ "wezterm", "cli", "send-text", "--no-paste" }, { stdin = stdin })
+			end, 400)
+		end
 	end,
-	{ desc = " Open cwd in WezTerm" }
+	{ desc = " Open cwd in Terminal" }
 )
 
 ---NAVIGATION-------------------------------------------------------------------

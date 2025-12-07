@@ -3,20 +3,20 @@
 
 #-META--------------------------------------------------------------------------
 config-file	= "~/.config/ghostty/keybinds"
-auto-update-channel = stable
+auto-update = "download"
+macos-shortcuts = allow
 
 #-BEHAVIOR----------------------------------------------------------------------
 confirm-close-surface = false
 quit-after-last-window-closed = true
 
-mouse-hide-while-typing = true
 window-inherit-working-directory = true
 working-directory = "~/Desktop"
 
 copy-on-select = clipboard
 selection-clear-on-copy = true
+mouse-hide-while-typing = true
 
-macos-shortcuts = allow
 
 #-APPEARANCE--------------------------------------------------------------------
 # `ghostty +list-themes`
@@ -29,11 +29,10 @@ adjust-cell-width = -10%
 
 adjust-cursor-thickness = 2
 
-bell-features = "border"
+bell-features = "border,no-title"
 
 #-WINDOW------------------------------------------------------------------------
-# title = " "
-title = "Ghostty"
+title = " "
 macos-titlebar-proxy-icon = "hidden"
 macos-titlebar-style = "tabs"
 

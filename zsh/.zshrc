@@ -1,5 +1,6 @@
 # remove last login message that some terminals leave https://stackoverflow.com/a/69915614
-printf '\33c\e[3J'
+if [[ "$TERM_PROGRAM" != "WezTerm" ]]; then printf '\33c\e[3J'; fi
+
 #-------------------------------------------------------------------------------
 
 CONFIG_FILES=(
@@ -21,10 +22,7 @@ CONFIG_FILES=(
 )
 [[ "$OSTYPE" =~ "darwin" ]] && CONFIG_FILES+=(mac_specific)
 
-#───────────────────────────────────────────────────────────────────────────────
-
 for filename in "${CONFIG_FILES[@]}"; do
 	# shellcheck disable=1090
 	source "$ZDOTDIR/config/$filename.zsh"
 done
-

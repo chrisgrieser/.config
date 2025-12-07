@@ -1,11 +1,26 @@
-# yaml-language-server: $schema=./schema/karabiner-mod-schema.json
-#───────────────────────────────────────────────────────────────────────────────
+#-------------------------------------------------------------------------------
+# INFO these require the specific keybindings being set up in `zshrc`
+#-------------------------------------------------------------------------------
 title: Ghostty
-#───────────────────────────────────────────────────────────────────────────────
 rules:
   - description: Ghostty
     manipulators:
       - type: basic
-        from: { key_code: return, modifiers: { mandatory: [command] } }
+        from: { key_code: return_or_enter, modifiers: { mandatory: [command] } }
+        to:
+          - { key_code: o, modifiers: [control] }
+        conditions:
+          - { type: frontmost_application_if, bundle_identifiers: [com.mitchellh.ghostty] }
+      - type: basic
+        from: { key_code: l, modifiers: { mandatory: [command] } }
         to:
           - { key_code: l, modifiers: [control] }
+        conditions:
+          - { type: frontmost_application_if, bundle_identifiers: [com.mitchellh.ghostty] }
+      # FIX `cmd+,` opening in Textedit even though Neovide is the default app
+      - type: basic
+        from: { key_code: comma, modifiers: { mandatory: [command] } }
+        to:
+          - shell_command: open "$HOME/.config/ghostty/config"
+        conditions:
+          - { type: frontmost_application_if, bundle_identifiers: [com.mitchellh.ghostty] }

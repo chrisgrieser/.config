@@ -13,3 +13,9 @@ reload:
         end tell
     end tell
     return "" # to silence return
+
+inspect-keybindings:
+    osascript -e 'tell application "Shortcuts" to run shortcut named "ghostty-input" with input "ghostty +list-keybinds"'
+
+theme-preview:
+    osascript -e 'tell application "Shortcuts" to run shortcut named "ghostty-input" with input "ghostty +list-themes"'

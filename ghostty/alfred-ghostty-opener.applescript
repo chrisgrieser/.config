@@ -11,5 +11,5 @@ on alfred_script(shellCmd)
 	end if
 
 	-- run the shortcut
-	tell application "Shortcuts" to run shortcut named "Alfred-Ghostty-Bridge" with input shellCmd
+	tell application "Shortcuts" to run shortcut named "ghostty-input" with input shellCmd
 end alfred_script
