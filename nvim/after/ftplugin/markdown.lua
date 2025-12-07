@@ -12,35 +12,43 @@ optl.listchars:append { multispace = "·" }
 
 bkeymap("n", "<leader>rt", "vip:!pandoc --to=gfm<CR>", { desc = " Format table under cursor" })
 
----HARD WRAP--------------------------------------------------------------------
+---WRAP-------------------------------------------------------------------------
 
--- since markdown has rarely indented lines, and also rarely has overlong lines,
--- move everything a bit more to the right
-if vim.bo.buftype == "" then optl.signcolumn = "yes:4" end
+local softwrap = vim.startswith(vim.api.nvim_buf_get_name(0), vim.g.notesDir)
 
--- when typing beyond `textwidth`
-vim.schedule(function() optl.formatoptions:append("t") end)
+if softwrap then
+	optl.wrap = true
+	optl.colorcolumn = ""
+	optl.formatlistpat:append([[\|^\s*>\s\+]]) -- also indent blockquotes via `breakindentopt`
+else
+	-- since markdown has rarely indented lines, and also rarely has overlong lines,
+	-- move everything a bit more to the right
+	if vim.bo.buftype == "" then optl.signcolumn = "yes:4" end
 
-bkeymap("n", "#", function()
-	vim.diagnostic.jump { count = 1 }
-	vim.defer_fn(function() vim.cmd.normal { "gw}", bang = true } end, 1)
-end, { desc = " hard-wrap next line-length violation" })
+	-- when typing beyond `textwidth`
+	vim.schedule(function() optl.formatoptions:append("t") end)
 
--- when leaving insert mode
-vim.api.nvim_create_autocmd("InsertLeave", {
-	desc = "User: auto-hard-wrap",
-	group = vim.api.nvim_create_augroup("auto-hardwrap", { clear = true }),
-	buffer = 0,
-	callback = function(ctx)
-		local line, node = vim.api.nvim_get_current_line(), vim.treesitter.get_node()
-		if vim.bo[ctx.buf].buftype ~= "" then return end
-		if not line:sub(81):find(" ") then return end -- markdownlint's `line-length` spec
-		if line:find("^[|#]") then return end -- heading or table
-		if node and node:type() == "code_fence_content" then return end
-		if node and node:type() == "html_block" then return end
-		vim.cmd.normal { "gww", bang = true }
-	end,
-})
+	bkeymap("n", "#", function()
+		vim.diagnostic.jump { count = 1 }
+		vim.defer_fn(function() vim.cmd.normal { "gw}", bang = true } end, 1)
+	end, { desc = " hard-wrap next line-length violation" })
+
+	-- when leaving insert mode
+	vim.api.nvim_create_autocmd("InsertLeave", {
+		desc = "User: auto-hard-wrap",
+		group = vim.api.nvim_create_augroup("auto-hardwrap", { clear = true }),
+		buffer = 0,
+		callback = function(ctx)
+			local line, node = vim.api.nvim_get_current_line(), vim.treesitter.get_node()
+			if vim.bo[ctx.buf].buftype ~= "" then return end
+			if not line:sub(81):find(" ") then return end -- markdownlint's `line-length` spec
+			if line:find("^[|#]") then return end -- heading or table
+			if node and node:type() == "code_fence_content" then return end
+			if node and node:type() == "html_block" then return end
+			vim.cmd.normal { "gww", bang = true }
+		end,
+	})
+end
 
 ---AUTO BULLETS-----------------------------------------------------------------
 do
