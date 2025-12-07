@@ -17,10 +17,10 @@ copy-on-select = clipboard
 selection-clear-on-copy = true
 mouse-hide-while-typing = true
 
-
 #-APPEARANCE--------------------------------------------------------------------
 # `ghostty +list-themes`
 theme = "dark:Kanagawa Wave,light:Iceberg Light"
+unfocused-split-opacity = 0.95
 
 font-family = "JetBrainsMonoNL NF"
 font-size = 26

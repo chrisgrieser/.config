@@ -3,10 +3,16 @@
 # `ghostty +list-keybinds`
 #-------------------------------------------------------------------------------
 
-keybind = page_down=scroll_page_fractional:0.8
-keybind = page_up=scroll_page_fractional:-0.8
+keybind = page_down=scroll_page_fractional:0.9
+keybind = page_up=scroll_page_fractional:-0.9
 
 keybind = cmd+p=toggle_command_palette
+
+keybind = ctrl+v=new_split:right
+keybind = ctrl+enter=goto_split:next
+
+keybind = ctrl+j=jump_to_prompt:1
+keybind = ctrl+k=jump_to_prompt:-1
 
 #-ZSH BRIDGES-------------------------------------------------------------------
 

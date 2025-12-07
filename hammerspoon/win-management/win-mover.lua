@@ -11,17 +11,18 @@ local wf = hs.window.filter
 M.wf_pseudoMax = wf.new({
 	"Microsoft Word",
 	"Safari",
-	"WezTerm",
+	"Ghostty",
 	"Neovide",
 	"Slack",
 	"Obsidian",
 	"zoom.us",
-	"Highlights",
 	"PDF Expert",
 	"Signal",
 	"Gmail",
 	"Karabiner-Elements",
 	"Monodraw",
+	"WezTerm",
+	"Highlights",
 })
 	:setOverrideFilter({ fullscreen = false, rejectTitles = { "^Save$", "^Open$" } })
 	:subscribe(wf.windowCreated, function(win)
