@@ -1,9 +1,7 @@
 local wt = require("wezterm")
---------------------------------------------------------------------------------
 
--- THEME
--- the first theme in each list is used
-local darkThemes = {
+---THEME------------------------------------------------------------------------
+local darkThemes = { -- the first theme in each list is used
 	"Kanagawa (Gogh)",
 	"cyberpunk",
 	"MaterialDesignColors",
@@ -16,18 +14,15 @@ local lightThemes = {
 	"GoogleLight (Gogh)",
 }
 
+-- customization of `Nord Light`
 local nordLight = wt.get_builtin_color_schemes()["Nord Light (Gogh)"]
 nordLight.ansi[4] = "#c19a29" -- https://github.com/Gogh-Co/Gogh/blob/master/themes/Nord%20Light.yml
 nordLight.brights[3] = "#7eb87c"
 nordLight.brights[4] = "#DAB752"
 nordLight.brights[7] = "#45c1bd"
+local builtinSchemeOverrides = { ["Nord Light (Gogh)"] = nordLight }
 
-local builtinSchemeOverrides = {
-	["Nord Light (Gogh)"] = nordLight,
-}
-
---------------------------------------------------------------------------------
-
+---DEVICE-SPECIFIC--------------------------------------------------------------
 local deviceSpecific = {
 	home = {
 		fontSize = 26.3,
@@ -37,7 +32,7 @@ local deviceSpecific = {
 	office = {
 		fontSize = 27.3,
 		maxFps = 90,
-		winPos = { x = 375, y = -100, w = 1675 },
+		winPos = { x = 375, y = 0, w = 1675 },
 	},
 	mother = {
 		fontSize = 24,
@@ -46,60 +41,39 @@ local deviceSpecific = {
 	},
 }
 
---------------------------------------------------------------------------------
-
 -- device specific config
 local host = wt.hostname()
 local device = "home"
 if host:find("mini") or host:find("eduroam") then device = "office" end
 if host:find("Mother") then device = "mother" end
 
--- set window position on startup
+-- on start, move window to the side ("pseudo-maximized")
 wt.on("gui-startup", function(cmd)
-	-- on start, move window to the side ("pseudo-maximized")
 	local pos = deviceSpecific[device].winPos
 	local _, _, window = wt.mux.spawn_window(cmd or {})
-
 	window:gui_window():set_position(pos.x, pos.y)
 	local height = 3000 -- automatically truncated to maximum
 	window:gui_window():set_inner_size(pos.w, height)
 end)
 
---------------------------------------------------------------------------------
--- TAB & WINDOW TITLE
-
+---TAB TITLE--------------------------------------------------------------------
 -- https://wezfurlong.org/wezterm/config/lua/window-events/format-tab-title.html
 wt.on("format-tab-title", function(tab, _pane, _tabs, _panes, _config)
 	-- title set via `tab:set_title()` or `wezterm cli set-tab-title`
 	if tab.tab_title ~= "" then return " " .. tab.tab_title .. " " end
 
 	local winTitle = tab.active_pane.title -- set e.g. by `nvim` or `yt-dlp --console-title`
-	winTitle = winTitle:gsub("  +", " ") -- duplicate spaces, e.g. by `yt-dlp` progress
+	winTitle = winTitle:gsub("  +", " ") -- remove duplicate spaces, e.g. by `yt-dlp` progress
 	local cwd = tab.active_pane.current_working_dir.file_path:gsub("^.*/(.*)/$", "%1")
-
-	local icons = { zsh = "", crush = "󱥰" }
-	local icon = icons[winTitle] or ""
-
+	local icon = winTitle == "zsh" and "" or ""
 	local label = winTitle == "zsh" and cwd or winTitle
 	return (" %s %s "):format(icon, label)
 end)
 
--- nicer window title
-wt.on("format-window-title", function(_tab, _pane, tabs, _panes, _config)
-	local title = "WezTerm"
-	if #tabs > 1 then title = title .. (" (%d tabs)"):format(#tabs) end
-	return title
-end)
-
---------------------------------------------------------------------------------
--- SETTINGS
-
-local keymaps = require("wezterm-keymaps") -- my keymaps
-local theme = require("theme-utils") -- my theme utils
-
+---SETTINGS---------------------------------------------------------------------
 local config = {
 	-- Meta
-	check_for_updates = true, -- done via homebrew already
+	check_for_updates = false, -- done via homebrew already
 	automatically_reload_config = true,
 
 	-- Start/close
@@ -116,17 +90,16 @@ local config = {
 	cursor_blink_ease_out = "Constant",
 	force_reverse_video_cursor = true, -- `true` = color is reverse, `false` = color by color scheme
 
-	-- FONT
+	-- font
 	font = wt.font { family = "JetBrainsMono Nerd Font", weight = "Medium" },
 	cell_width = 0.9, -- effectively like letter-spacing
 	font_size = deviceSpecific[device].fontSize,
 	command_palette_font_size = deviceSpecific[device].fontSize,
 	custom_block_glyphs = false, -- don't use wezterm's box-char replacements since too thin
 
-	-- APPEARANCE
+	-- appearance
 	color_schemes = builtinSchemeOverrides,
-	color_scheme = 
-		theme.autoScheme(darkThemes[1], lightThemes[1]),
+	color_scheme = wt.gui.get_appearance():find("Dark") and darkThemes[1] or lightThemes[1],
 	window_background_opacity = 1,
 	bold_brightens_ansi_colors = "BrightAndBold",
 	max_fps = deviceSpecific[device].maxFps,
@@ -156,7 +129,7 @@ local config = {
 	use_fancy_tab_bar = false, -- `false` = style using terminal cells
 	window_frame = { font_size = 30 }, -- font size if using `fancy_tab_bar`
 
-	-- Mouse Bindings
+	-- Mouse
 	mouse_bindings = {
 		{ -- open link at normal leftclick & auto-copy selection if not a link
 			event = { Up = { streak = 1, button = "Left" } },
@@ -174,8 +147,8 @@ local config = {
 	},
 
 	-- Keybindings
-	keys = keymaps.keys,
-	key_tables = { copy_mode = keymaps.copymodeKeys },
+	keys = require("wezterm-keymaps").keys,
+	key_tables = { copy_mode = require("wezterm-keymaps").copymodeKeys },
 	send_composed_key_when_left_alt_is_pressed = true, -- fix @{}~ etc. on German keyboard
 	send_composed_key_when_right_alt_is_pressed = true,
 	use_dead_keys = true, -- do not expect another key after `^~`
