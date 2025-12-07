@@ -21,8 +21,6 @@ M.wf_pseudoMax = wf.new({
 	"Gmail",
 	"Karabiner-Elements",
 	"Monodraw",
-	"WezTerm",
-	"Highlights",
 })
 	:setOverrideFilter({ fullscreen = false, rejectTitles = { "^Save$", "^Open$" } })
 	:subscribe(wf.windowCreated, function(win)

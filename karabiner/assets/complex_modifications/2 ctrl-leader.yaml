@@ -137,12 +137,6 @@ rules:
         conditions: [*leader-active]
         to: [{ shell_command: open -a "Ghostty" }, *deactivate-leader, *remove-notice]
 
-      - description: "[L] Alternative Termina[l]"
-        type: basic
-        from: { key_code: l, modifiers: { mandatory: [shift] } }
-        conditions: [*leader-active]
-        to: [{ shell_command: open -a "WezTerm" }, *deactivate-leader, *remove-notice]
-
       - description: "[i] Rem[i]nder"
         type: basic
         from: { key_code: i }
