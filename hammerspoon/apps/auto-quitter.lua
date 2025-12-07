@@ -20,7 +20,6 @@ local config = {
 		Gmail = 5,
 		Slack = 30,
 		Signal = 30,
-		Highlights = 90,
 		["PDF Expert"] = 90,
 		["Alfred Preferences"] = 30,
 		["System Settings"] = 10,
