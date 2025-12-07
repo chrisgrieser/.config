@@ -53,10 +53,8 @@ mas "Mona 6", id: 1659154653
 # DEVICE-SPECIFIC INSTALLS
 device = `scutil --get ComputerName`
 
-if device.include?("Office")
-	cask "granola"
-end
 if device.include?("Home")
+	cask "granola"
 	brew "yt-dlp" ; brew "ffmpeg" # `ffmpeg` recommended for `yt-dlp`
 	cask "catch"
 	cask "bettertouchtool"
