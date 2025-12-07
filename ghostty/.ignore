@@ -1,1 +1,4 @@
 *.shortcut
+
+# gitignored to keep it device-specific, but should be accessed often
+!device-specific-config-override

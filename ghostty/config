@@ -1,10 +1,16 @@
-# vim: filetype=toml
 # DOCS https://ghostty.org/docs/config
 #-------------------------------------------------------------------------------
 
-#-META--------------------------------------------------------------------------
-auto-update = "download"
-macos-shortcuts = allow
+#-DEVICE-SPECIFIC---------------------------------------------------------------
+
+# device-specific config via gitignored override file
+# (prepending `?` ignores file if it does not exist)
+config-file = "?device-specific-config-override"
+
+font-size = 26
+window-width = 107
+window-height = 9001
+window-position-x = 25
 
 #-BEHAVIOR----------------------------------------------------------------------
 confirm-close-surface = false
@@ -21,10 +27,8 @@ selection-clear-on-copy = true
 theme = "dark:Kanagawa Wave,light:Iceberg Light"
 
 font-family = "JetBrainsMonoNL NF"
-font-size = 26
 font-thicken = true
 adjust-cell-width = -10%
-config-file: "./config-override"
 
 unfocused-split-opacity = 0.95
 adjust-cursor-thickness = 2
@@ -38,11 +42,6 @@ macos-titlebar-proxy-icon = "hidden"
 macos-titlebar-style = "tabs"
 window-padding-y = 0,10
 window-padding-x = 3,3
-
-# defaults, mostly managed by window manager (hammerspoon) already
-window-width = 107
-window-height = 9001
-window-position-x = 25
 
 #-KEYBINDINGS-------------------------------------------------------------------
 # `ghostty +list-keybinds`
