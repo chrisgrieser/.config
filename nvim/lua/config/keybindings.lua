@@ -48,10 +48,12 @@ keymap(
 	"<D-C-t>", -- `hyper` gets registered by neovide as cmd+ctrl
 	function()
 		assert(jit.os == "OSX", "requires macOS")
-		local shellCmd = ("cd -q %q && clear\n"):format(vim.uv.cwd() or "")
-		local applescript = 'tell application "Shortcuts" to run shortcut named "ghostty-input" with input '
-			.. ("%q"):format(shellCmd)
-		vim.system { "osascript", "-e", applescript }
+		local shellCmd = ("cd -q %q && clear"):format(vim.uv.cwd() or "")
+		vim.system({ "open", "-a", "WezTerm" }):wait()
+		vim.defer_fn(function()
+			local args = { "wezterm", "cli", "send-text", "--no-paste" }
+			vim.system(args, { stdin = shellCmd .. "\n" })
+		end, 400)
 	end,
 	{ desc = " Open cwd in Terminal" }
 )

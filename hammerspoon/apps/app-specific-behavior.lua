@@ -43,11 +43,9 @@ M.aw_pdfreader = aw.new(function(appName, event, app)
 		app:selectMenuItem { "View", "Theme", u.isDarkMode() and "Night" or "Day" }
 		app:selectMenuItem { "Annotate", "Highlight" }
 
-		u.defer(1, function()
-			local shellCmd =
-				'rm -rf "$HOME/Library/Mobile Documents/3L68KQB4HG~com~readdle~CommonDocuments/Documents/"'
-			hs.execute(shellCmd)
-		end)
+		local shellCmd =
+			'rm -rf "$HOME/Library/Mobile Documents/3L68KQB4HG~com~readdle~CommonDocuments/Documents/"'
+		hs.execute(shellCmd)
 	end
 end):start()
 

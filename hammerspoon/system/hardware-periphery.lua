@@ -27,7 +27,7 @@ M.usb_externalDrive = hs.usb.watcher
 		}
 
 		if hs.fnutils.contains(harddriveNames, name) then
-			hs.application.open("Ghostty")
+			hs.application.open("WezTerm")
 		else
 			-- search for mounted volumes, since the usb-watcher does not report it to us
 			local cmd =

@@ -135,7 +135,7 @@ rules:
         type: basic
         from: { key_code: l }
         conditions: [*leader-active]
-        to: [{ shell_command: open -a "Ghostty" }, *deactivate-leader, *remove-notice]
+        to: [{ shell_command: open -a "WezTerm" }, *deactivate-leader, *remove-notice]
 
       - description: "[i] Rem[i]nder"
         type: basic

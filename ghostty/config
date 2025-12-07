@@ -61,8 +61,6 @@ keybind = ctrl+k=jump_to_prompt:-1
 
 # cmd+enter -> ctrl+o -> grappling hook
 keybind = cmd+enter=text:\x0f
-# cmd+z -> ctrl+z -> undo (via zshrc)
-keybind = cmd+z=text:\x1a
 # cmd+l -> ctrl+l -> reveal in Finder
 keybind = cmd+l=text:\x0c
 

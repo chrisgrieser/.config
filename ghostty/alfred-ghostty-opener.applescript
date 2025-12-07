@@ -1,12 +1,16 @@
 on alfred_script(shellCmd)
-	# ensure ghostty is running, since shortcut fails if not
-	tell application "System Events"
-		if not (name of processes contains "ghostty") then
-			tell application "Ghostty" to activate
-			delay 0.1
-		end if
-	end tell
+	-- `cd` -> do not trigger post-cd-hook (`-q`) and `clear` afterwards
+	if (text 1 thru 3 of shellCmd) is "cd " then
+		set arg to text 4 thru -1 of shellCmd
+		-- leading space to suppress saving in shell history
+		-- `-q` to suppress post-cd-hook output
+		set shellCmd to " cd -q " & arg & " && clear"
+	end if
 
 	-- run the shortcut
-	tell application "Shortcuts"  to run shortcut named "ghostty-input" with input shellCmd
+	tell application "Shortcuts"
+		run shortcut named "ghostty-input" with input shellCmd
+		delay 2
+		quit
+	end tell
 end alfred_script

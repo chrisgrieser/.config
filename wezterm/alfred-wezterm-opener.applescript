@@ -1,12 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-<dict>
-	<key>application</key>
-	<integer>1</integer>
-	<key>custom</key>
-	<string># INFO to be entered in the Alfred Terminal settings (Kept here just for reference.)
-# alfredpreferences://navigateto/features&gt;terminal
+# INFO to be entered in the Alfred Terminal settings (Kept here just for reference.)
+# alfredpreferences://navigateto/features>terminal
 --------------------------------------------------------------------------------
 # DOCS https://wezfurlong.org/wezterm/cli/cli/send-text
 --------------------------------------------------------------------------------
@@ -20,7 +13,7 @@ on alfred_script(shellCmd)
 
 			tell application "WezTerm" to activate
 			delay 0.05 
-			if i &gt; 100 then return 
+			if i > 100 then return 
 		end repeat 
 	end tell
 	delay 0.1 # ensure wezterm-gui is ready
@@ -30,14 +23,10 @@ on alfred_script(shellCmd)
 		set arg to text 4 thru -1 of shellCmd
 		-- leading space to suppress saving in shell history
 		-- `-q` to suppress post-cd-hook output
-		set shellCmd to " cd -q " &amp; arg &amp; " &amp;&amp; clear"
+		set shellCmd to " cd -q " & arg & " && clear"
 	end if
 
 	# SEND COMMAND
 	set exportPath to "export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; "
-	do shell script (exportPath &amp; "echo " &amp; quoted form of shellCmd &amp; " | wezterm cli send-text --no-paste")
-end alfred_script</string>
-	<key>prefix</key>
-	<integer>1</integer>
-</dict>
-</plist>
+	do shell script (exportPath & "echo " & quoted form of shellCmd & " | wezterm cli send-text --no-paste")
+end alfred_script

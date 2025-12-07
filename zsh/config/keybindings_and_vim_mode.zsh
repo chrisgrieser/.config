@@ -24,9 +24,6 @@ bindkey '^F' edit-command-line
 bindkey '…' insert-last-word    # `alt+.` on macOS
 bindkey "^[[1;3D" backward-word # `alt+arrow` to move between words (emulating macOS default behavior)
 bindkey "^[[1;3C" forward-word  
-bindkey "^A" beginning-of-line  # also bound to `cmd+left` via wezterm
-bindkey "^E" end-of-line        # also bound to `cmd+right` via wezterm
-bindkey '^N' undo               # remapped to `cmd+z` via wezterm
 
 #───────────────────────────────────────────────────────────────────────────────
 # VI MODE
@@ -50,11 +47,8 @@ precmd_functions+=(_fix_cursor)
 # VIM BINDINGS
 
 bindkey -M vicmd 'k' up-line               # disable accidentally searching history
-bindkey -M viins '^?' backward-delete-char # FIX backspace
-
 bindkey -M vicmd 'L' vi-end-of-line
 bindkey -M vicmd 'H' vi-first-non-blank
-
 bindkey -M vicmd -s ' ' 'ciw' # -s flag sends direct keystrokes and therefore allows for remappings
 bindkey -M vicmd 'U' redo
 bindkey -M vicmd 'm' vi-join
