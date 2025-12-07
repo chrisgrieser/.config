@@ -15,7 +15,7 @@ return {
 		style = "moon",
 		lualine_bold = true,
 		day_brightness = 0.3, -- for `tokyonight-day`
-		dim_inactive = true,
+		dim_inactive = false, -- BUG does not dim signcolumn properly
 		styles = {
 			comments = { italic = false },
 			keywords = { italic = false },
