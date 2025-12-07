@@ -1,4 +1,4 @@
--- vim: foldlevel=3
+-- vim: foldlevel=4
 -- DOCS https://github.com/Wansmer/treesj#basic-node
 --------------------------------------------------------------------------------
 
@@ -44,22 +44,29 @@ return {
 				if_statement = {
 					join = { space_in_brackets = true },
 					split = {
-						omit = {
-							"else", -- for guard statements
-							"{",
-							"equality_expression",
-							"prefix_expression",
-							"tuple_expression",
-							"navigation_expression",
-							"boolean_literal", -- `true` and `false` only, mostly debugging
-						},
+						-- stylua: ignore
+						omit = { "else", "{", "equality_expression", "prefix_expression", "tuple_expression", "navigation_expression", "boolean_literal" },
 					},
 				},
 			},
 			zsh = {
 				pipeline = {
-					both = {
-						separator = "|",
+					both = { omit = { "|" } },
+					join = {
+						format_tree = function(tsj)
+							local children = tsj:children()
+							local lastChild = children[#children]
+							lastChild:update_text(" " .. lastChild:text())
+							tsj:update_children(children)
+						end,
+					},
+					split = {
+						format_tree = function(tsj)
+							local children = tsj:children()
+							local lastChild = children[#children]
+							lastChild:update_text("\t" .. lastChild:text())
+							tsj:update_children(children)
+						end,
 					},
 				},
 			},
@@ -68,6 +75,10 @@ return {
 		},
 	},
 	config = function(_, opts)
+		-- local zsh inherit from bash
+		opts.langs.zsh =
+			require("treesj.langs.utils").merge_preset(require("treesj.langs.bash"), opts.langs.zsh)
+
 		opts.langs.swift.guard_statement = opts.langs.swift.if_statement
 		opts.langs.typescript = opts.langs.javascript
 		require("treesj").setup(opts)

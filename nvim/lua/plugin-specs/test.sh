@@ -1,3 +1,2 @@
 #!/usr/bin/env zsh
-echo "hi"
-grep -q "hi"
+echo "hi" | grep -q "hi" | grep "fff"
