@@ -2,14 +2,14 @@
 #-------------------------------------------------------------------------------
 
 #-META--------------------------------------------------------------------------
-config-file	= ~/.config/ghostty/keybinds
+config-file	= "~/.config/ghostty/keybinds"
 auto-update-channel = stable
 
 #-BEHAVIOR----------------------------------------------------------------------
 confirm-close-surface = false
 mouse-hide-while-typing = true
 window-inherit-working-directory = false
-working-directory = "/Users/chrisgrieser/Desktop"
+working-directory = "~/Desktop"
 
 copy-on-select = clipboard
 selection-clear-on-copy = false
@@ -26,11 +26,11 @@ adjust-cell-width = -10%
 adjust-cursor-thickness = 2
 
 #-WINDOW------------------------------------------------------------------------
-title = ""
-macos-titlebar-style = hidden
-window-save-state = always
-macos-window-buttons = visible
-macos-titlebar-proxy-icon = hidden
+title = " "
+macos-titlebar-proxy-icon = "hidden"
+macos-titlebar-style = "tabs"
+
+window-save-state = "always"
 window-width = 97
 window-height = 9001
-
+window-position-x = 23

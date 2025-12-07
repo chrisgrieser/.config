@@ -32,16 +32,22 @@ end)
 ---PDF READER-------------------------------------------------------------------
 -- 1. Sync Dark & Light Mode
 -- 2. Start with Highlight Tool enabled
+-- 3. Delete useless iCloud PDF folder that's always created
 M.aw_pdfreader = aw.new(function(appName, event, app)
-	if event ~= aw.launched then return end
-	if appName == "Highlights" then
+	if event == aw.launched and appName == "Highlights" then
 		app:selectMenuItem { "View", "PDF Appearance", u.isDarkMode() and "Night" or "Default" }
 		app:selectMenuItem { "Tools", "Highlight" }
 		app:selectMenuItem { "Tools", "Color", "Yellow" }
 		app:selectMenuItem { "View", "Hide Toolbar" }
-	elseif appName == "PDF Expert" then
+	elseif event == aw.launched and appName == "PDF Expert" then
 		app:selectMenuItem { "View", "Theme", u.isDarkMode() and "Night" or "Day" }
 		app:selectMenuItem { "Annotate", "Highlight" }
+
+		u.defer(1, function()
+			local shellCmd =
+				'rm -rf "$HOME/Library/Mobile Documents/3L68KQB4HG~com~readdle~CommonDocuments/Documents/"'
+			hs.execute(shellCmd)
+		end)
 	end
 end):start()
 
