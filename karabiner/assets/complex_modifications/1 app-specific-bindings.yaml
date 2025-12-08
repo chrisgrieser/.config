@@ -233,4 +233,14 @@ rules:
               '
         conditions:
           - { type: frontmost_application_if, bundle_identifiers: [com.apple.ScriptEditor] }
+  #─────────────────────────────────────────────────────────────────────────────
+  - description: "(Apps) Ghostty"
+    manipulators:
+      # FIX `cmd+,` opening in Textedit even though Neovide is the default app
+      - type: basic
+        from: { key_code: comma, modifiers: { mandatory: [command] } }
+        to:
+          - shell_command: open "$HOME/.config/ghostty/config"
+        conditions:
+          - { type: frontmost_application_if, bundle_identifiers: [com.mitchellh.ghostty] }
   #───────────────────────────────────────────────────────────────────────

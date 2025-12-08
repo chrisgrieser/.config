@@ -69,6 +69,7 @@ local function movieLayout()
 		"PDF Expert",
 		"Obsidian",
 		"WezTerm",
+		"Ghostty",
 		"Gmail",
 		"Neovide",
 		"Mona 6",

@@ -42,10 +42,10 @@ cask "obsidian"
 cask "replacicon"
 cask "signal"
 cask "slack"
-cask "wezterm"
+cask "wezterm" ; cask "ghostty"
+cask "granola"
 cask "zoom"
 cask "pdf-expert"
-cask "granola"
 cask "glance-chamburr", postinstall: "xattr -rd com.apple.quarantine /Applications/Glance.app; qlmanage -r; sed -i '' 's/font-size: [0-9][0-9]px/font-size: 20px/' /Applications/Glance.app/Contents/PlugIns/QLPlugin.appex/Contents/Resources/shared-main.css"
 mas "Mona 6", id: 1659154653
 

@@ -6,11 +6,10 @@
 
 on alfred_script(shellCmd)
 	# LAUNCH WEZTERM IF NEEDED
-	# (Appname is `WezTerm`, processname is `wezterm-gui`)
 	set i to 0 
 	tell application "System Events" 
 		repeat while (name of first application process whose frontmost is true) is not "wezterm-gui" 
-			tell application "WezTerm" to activate
+			tell application "WezTerm" to activate # (Appname is `WezTerm`, processname is `wezterm-gui`)
 			delay 0.05 
 			if i > 100 then return 
 		end repeat 
@@ -20,8 +19,8 @@ on alfred_script(shellCmd)
 	# DETERMINE COMMAND
 	if (text 1 thru 3 of shellCmd) is "cd " then
 		set arg to text 4 thru -1 of shellCmd
-		-- leading space to suppress saving in shell history
-		-- `-q` to suppress post-cd-hook output
+		-- 1. leading space to suppress saving in shell history
+		-- 2. `-q` to suppress post-cd-hook output
 		set shellCmd to " cd -q " & arg & " && clear"
 	end if
 

@@ -7,6 +7,7 @@ update-alfred-terminal:
     #!/usr/bin/env zsh
     content=$(printf "%s" "$(cat ./alfred-wezterm-opener.applescript | sed 's/"/\\"/g')")
     /usr/libexec/PlistBuddy -c "Set :custom '$content'" ../Alfred.alfredpreferences/preferences/features/terminal/prefs.plist
+    killall "Alfred Preferences" &> /dev/null
     open "alfredpreferences://navigateto/features>terminal"
 
 # streaming
