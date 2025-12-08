@@ -100,7 +100,6 @@ vim.opt.smartindent = true
 vim.opt.report = 9001 -- disable most "x more/fewer lines" messages
 vim.opt.shortmess:append("ISs") -- no intro message, disable search count
 vim.opt.cmdheight = 0
-vim.lsp.set_log_level("ERROR")
 
 ---ACCESS CWD VIA WINDOW TITLE--------------------------------------------------
 -- (simpler then using `fn.serverstart()` with `nvim --server --remote-expr` )

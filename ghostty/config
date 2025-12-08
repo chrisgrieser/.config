@@ -24,12 +24,12 @@ selection-clear-on-copy = true
 
 #-APPEARANCE--------------------------------------------------------------------
 # `ghostty +list-themes`
-theme = "dark:Kanagawa Wave,light:Iceberg Light"
+theme = dark:Kanagawa Wave,light:Iceberg Light
 
 font-family = "JetBrainsMonoNL NF"
 font-thicken = true
 adjust-cell-width = -10%
-minimum-contrast = 3
+minimum-contrast = 1.1
 
 unfocused-split-opacity = 0.95
 adjust-cursor-thickness = 4
