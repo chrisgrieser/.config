@@ -42,22 +42,6 @@ keymap("n", "<D-,>", function()
 	vim.cmd.edit(pathOfThisFile)
 end, { desc = "󰌌 Edit keybindings" })
 
--- terminal at cwd
-keymap(
-	{ "n", "x", "i" },
-	"<D-C-t>", -- `hyper` gets registered by neovide as cmd+ctrl
-	function()
-		assert(jit.os == "OSX", "requires macOS")
-		local shellCmd = ("cd -q %q && clear"):format(vim.uv.cwd() or "")
-		vim.system({ "open", "-a", "WezTerm" }):wait()
-		vim.defer_fn(function()
-			local args = { "wezterm", "cli", "send-text", "--no-paste" }
-			vim.system(args, { stdin = shellCmd .. "\n" })
-		end, 400)
-	end,
-	{ desc = " Open cwd in Terminal" }
-)
-
 ---NAVIGATION-------------------------------------------------------------------
 -- make mappings work on wrapped lines as well
 keymap({ "n", "x" }, "j", "gj")

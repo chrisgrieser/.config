@@ -102,6 +102,12 @@ vim.opt.shortmess:append("ISs") -- no intro message, disable search count
 vim.opt.cmdheight = 0
 vim.lsp.set_log_level("ERROR")
 
+---ACCESS CWD VIA WINDOW TITLE--------------------------------------------------
+-- (simpler then using `fn.serverstart()` with `nvim --server --remote-expr` )
+vim.opt.title = true
+vim.opt.titlelen = 0 -- = do not shorten title
+vim.opt.titlestring = "%{getcwd()}"
+
 ---INVISIBLE CHARS--------------------------------------------------------------
 vim.opt.list = true
 vim.opt.conceallevel = 2 -- hide some chars in markdown and json

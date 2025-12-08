@@ -75,7 +75,7 @@ return {
 		},
 	},
 	config = function(_, opts)
-		-- local zsh inherit from bash
+		-- local zsh inherit from bash PENDING https://github.com/Wansmer/treesj/pull/195
 		opts.langs.zsh =
 			require("treesj.langs.utils").merge_preset(require("treesj.langs.bash"), opts.langs.zsh)
 
