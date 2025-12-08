@@ -4,6 +4,3 @@
 # ignore these files
 [files]
 extend-exclude = ["spelling.yml", "spelling-german.yml", "lorem.yml"]
-
-[default.extend-words]
-nversion = "nversion" # snippet name

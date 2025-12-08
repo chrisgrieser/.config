@@ -45,6 +45,7 @@ cask "slack"
 cask "wezterm"
 cask "zoom"
 cask "pdf-expert"
+cask "granola"
 cask "glance-chamburr", postinstall: "xattr -rd com.apple.quarantine /Applications/Glance.app; qlmanage -r; sed -i '' 's/font-size: [0-9][0-9]px/font-size: 20px/' /Applications/Glance.app/Contents/PlugIns/QLPlugin.appex/Contents/Resources/shared-main.css"
 mas "Mona 6", id: 1659154653
 
@@ -54,7 +55,6 @@ mas "Mona 6", id: 1659154653
 device = `scutil --get ComputerName`
 
 if device.include?("Home")
-	cask "granola"
 	brew "yt-dlp" ; brew "ffmpeg" # `ffmpeg` recommended for `yt-dlp`
 	cask "catch"
 	cask "bettertouchtool"

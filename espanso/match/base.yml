@@ -1,30 +1,21 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/espanso/espanso/dev/schemas/match.schema.json
 #───────────────────────────────────────────────────────────────────────────────
 matches:
-  # EMOJI & SYMBOLS
+  #-EMOJIS & SYMBOLS------------------------------------------------------------
   - { trigger: "->", replace: →, word: true } # unicode arrow
-  - { trigger: " mm", replace: " 🙈" }
   - { trigger: "<3", replace: "🩶" } # use grey haeart instead of red one
-  #─────────────────────────────────────────────────────────────────────────────
-  # PROFILES
+  #-PROFILES--------------------------------------------------------------------
   - { trigger: "!web", replace: https://chris-grieser.de/ }
   - { trigger: "!masto", replace: https://pkm.social/@pseudometa }
   - { trigger: "!name", replace: Christopher Grieser }
   - { trigger: "!paypal", replace: https://www.paypal.com/paypalme/ChrisGrieser }
-  #───────────────────────────────────────────────────────────────────────────
-  # DATES
+  #-DATE------------------------------------------------------------------------
   - trigger: "!iso"
     replace: "{{todayISO}}"
     vars:
       - name: todayISO
         type: date
         params: { format: "%Y-%m-%d" }
-  - trigger: "!today"
-    replace: "{{today}}"
-    vars:
-      - name: today
-        type: date
-        params: { format: "%d. %b. %Y" }
   - trigger: "!la"
     replace: "(last accessed: {{today}})"
     label: Last Accessed
@@ -32,7 +23,7 @@ matches:
       - name: today
         type: date
         params: { format: "%d. %b %Y" }
-  #─────────────────────────────────────────────────────────────────────────────
+  #-VERSION---------------------------------------------------------------------
   - trigger: "!version"
     replace: "macOS {{version}} ({{architecture}})"
     vars:
@@ -42,7 +33,7 @@ matches:
       - name: architecture
         type: shell
         params: { cmd: uname -p }
-  - trigger: "!nversion"
+  - trigger: "!nversion" # typos: ignore-line
     replace: "{{neovimVersion}}"
     vars:
       - name: neovimVersion
@@ -51,4 +42,5 @@ matches:
           cmd: |
             export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH 
             nvim --version | sed '$d'
-  #─────────────────────────────────────────────────────────────────────────────
+  #-----------------------------------------------------------------------------
+
