@@ -153,29 +153,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>3AE605B0-7AF2-4E35-855D-90F9C0941C8C</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>B7C92074-83A2-4839-8432-03A59A607415</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>ECF587F4-3E75-4AE7-84CB-BC53F357AC33</string>
-				<key>modifiers</key>
-				<integer>1048576</integer>
-				<key>modifiersubtext</key>
-				<string>⌘: Open in Contacts.app</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>43E23DEE-9CD4-4887-A9EE-796131D55BBA</key>
 		<array>
 			<dict>
@@ -1221,21 +1198,6 @@ open -g "hammerspoon://sync-repos"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>openwith</key>
-				<string></string>
-				<key>sourcefile</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openfile</string>
-			<key>uid</key>
-			<string>B7C92074-83A2-4839-8432-03A59A607415</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>argumenttype</key>
 				<integer>0</integer>
 				<key>keyword</key>
@@ -1301,72 +1263,44 @@ open -g "hammerspoon://sync-repos"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>anchorfields</key>
-				<true/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>https://www.google.com/search?q={query}+(site%3Awired.com+OR+site%3Atechcrunch.com+OR+site%3Abloomberg.com+OR+site%3Atheverge.com)&amp;tbm=nws</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>356FD4C8-B36D-452A-9861-0EF381DFF980</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>argumenttype</key>
 				<integer>0</integer>
-				<key>daterange</key>
-				<integer>0</integer>
-				<key>fields</key>
-				<array>
-					<dict>
-						<key>field</key>
-						<string>*</string>
-						<key>not</key>
-						<false/>
-						<key>split</key>
-						<true/>
-						<key>value</key>
-						<string>{query}</string>
-						<key>words</key>
-						<true/>
-					</dict>
-					<dict>
-						<key>field</key>
-						<string>kMDItemTextContent</string>
-						<key>not</key>
-						<false/>
-						<key>split</key>
-						<true/>
-						<key>value</key>
-						<string>{query}</string>
-						<key>words</key>
-						<true/>
-					</dict>
-				</array>
-				<key>includesystem</key>
-				<false/>
 				<key>keyword</key>
-				<string>@</string>
-				<key>limit</key>
-				<integer>0</integer>
-				<key>runningsubtext</key>
-				<string></string>
-				<key>scopes</key>
-				<array>
-					<string>~/Library/Application Support/AddressBook</string>
-				</array>
-				<key>sortmode</key>
-				<integer>0</integer>
+				<string>tn</string>
 				<key>subtext</key>
-				<string>waiting for query…</string>
-				<key>title</key>
-				<string>Contacts</string>
-				<key>types</key>
-				<array>
-					<string>com.apple.addressbook.person</string>
-				</array>
+				<string>for PhD data collection</string>
+				<key>text</key>
+				<string>Technews: {query}</string>
 				<key>withspace</key>
 				<true/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.input.filefilter</string>
+			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
-			<string>3AE605B0-7AF2-4E35-855D-90F9C0941C8C</string>
+			<string>B0836DFF-C845-4BD0-A416-7ADFEB44E1CE</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1391,17 +1325,29 @@ open -g "hammerspoon://sync-repos"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>openwith</key>
-				<string>/System/Applications/Contacts.app</string>
-				<key>sourcefile</key>
-				<string></string>
+				<key>adduuid</key>
+				<false/>
+				<key>allowemptyfiles</key>
+				<true/>
+				<key>createintermediatefolders</key>
+				<true/>
+				<key>filename</key>
+				<string>{var:technews_search_logfile}</string>
+				<key>filetext</key>
+				<string>- {isodate:yyyy-MM-dd HH:mm} – {query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>relativepathmode</key>
+				<integer>0</integer>
+				<key>type</key>
+				<integer>2</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.openfile</string>
+			<string>alfred.workflow.output.writefile</string>
 			<key>uid</key>
-			<string>ECF587F4-3E75-4AE7-84CB-BC53F357AC33</string>
+			<string>ED5C45B3-2B38-4478-A89D-9D2C9854805D</string>
 			<key>version</key>
-			<integer>3</integer>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1471,27 +1417,6 @@ open -g "hammerspoon://sync-repos"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>https://www.google.com/search?q={query}+(site%3Awired.com+OR+site%3Atechcrunch.com+OR+site%3Abloomberg.com+OR+site%3Atheverge.com)&amp;tbm=nws</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>356FD4C8-B36D-452A-9861-0EF381DFF980</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>autopaste</key>
 				<true/>
 				<key>clipboardtext</key>
@@ -1555,27 +1480,6 @@ open -g "hammerspoon://sync-repos"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>tn</string>
-				<key>subtext</key>
-				<string>for PhD data collection</string>
-				<key>text</key>
-				<string>Technews: {query}</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>B0836DFF-C845-4BD0-A416-7ADFEB44E1CE</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>matchmode</key>
 				<integer>1</integer>
 				<key>matchstring</key>
@@ -1593,33 +1497,6 @@ open -g "hammerspoon://sync-repos"</string>
 			<string>A51066A2-90E9-43BC-A689-373B76D3219F</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>adduuid</key>
-				<false/>
-				<key>allowemptyfiles</key>
-				<true/>
-				<key>createintermediatefolders</key>
-				<true/>
-				<key>filename</key>
-				<string>{var:technews_search_logfile}</string>
-				<key>filetext</key>
-				<string>- {isodate:yyyy-MM-dd HH:mm} – {query}</string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>relativepathmode</key>
-				<integer>0</integer>
-				<key>type</key>
-				<integer>2</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.writefile</string>
-			<key>uid</key>
-			<string>ED5C45B3-2B38-4478-A89D-9D2C9854805D</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -2095,7 +1972,7 @@ open -g "hammerspoon://sync-repos"</string>
 			<key>xpos</key>
 			<real>725</real>
 			<key>ypos</key>
-			<real>1015</real>
+			<real>785</real>
 		</dict>
 		<key>365F15E7-7819-4CA4-BAFF-C616400856DF</key>
 		<dict>
@@ -2116,18 +1993,6 @@ open -g "hammerspoon://sync-repos"</string>
 			<real>400</real>
 			<key>ypos</key>
 			<real>1045</real>
-		</dict>
-		<key>3AE605B0-7AF2-4E35-855D-90F9C0941C8C</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>note</key>
-			<string>contacts
-(adapted from "Deep Contacts" workflow)</string>
-			<key>xpos</key>
-			<real>550</real>
-			<key>ypos</key>
-			<real>825</real>
 		</dict>
 		<key>43E23DEE-9CD4-4887-A9EE-796131D55BBA</key>
 		<dict>
@@ -2370,7 +2235,7 @@ open -g "hammerspoon://sync-repos"</string>
 			<key>xpos</key>
 			<real>550</real>
 			<key>ypos</key>
-			<real>1070</real>
+			<real>840</real>
 		</dict>
 		<key>B3C4155D-FDD7-4641-A300-859FBE5E5E6E</key>
 		<dict>
@@ -2400,17 +2265,6 @@ open -g "hammerspoon://sync-repos"</string>
 			<real>30</real>
 			<key>ypos</key>
 			<real>1500</real>
-		</dict>
-		<key>B7C92074-83A2-4839-8432-03A59A607415</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>note</key>
-			<string>Open in Alfred</string>
-			<key>xpos</key>
-			<real>725</real>
-			<key>ypos</key>
-			<real>775</real>
 		</dict>
 		<key>C120F733-C46F-44AC-ADAA-504E11D52028</key>
 		<dict>
@@ -2486,15 +2340,6 @@ open -g "hammerspoon://sync-repos"</string>
 			<key>ypos</key>
 			<real>15</real>
 		</dict>
-		<key>ECF587F4-3E75-4AE7-84CB-BC53F357AC33</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>xpos</key>
-			<real>725</real>
-			<key>ypos</key>
-			<real>900</real>
-		</dict>
 		<key>ED5C45B3-2B38-4478-A89D-9D2C9854805D</key>
 		<dict>
 			<key>colorindex</key>
@@ -2504,7 +2349,7 @@ open -g "hammerspoon://sync-repos"</string>
 			<key>xpos</key>
 			<real>725</real>
 			<key>ypos</key>
-			<real>1135</real>
+			<real>905</real>
 		</dict>
 		<key>F45185F7-3072-47A6-A86F-0CE950BB7C1A</key>
 		<dict>
