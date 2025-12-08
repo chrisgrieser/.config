@@ -1,4 +1,4 @@
--- DOCS 
+-- DOCS
 -- https://codeberg.org/mfussenegger/nvim-dap/wiki/Debug-Adapter-installation#local-lua-debugger-vscode
 -- https://github.com/tomblind/local-lua-debugger-vscode
 --------------------------------------------------------------------------------

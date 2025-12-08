@@ -9,7 +9,7 @@ quote_style = "AutoPreferDouble"
 call_parentheses = "NoSingleTable"
 collapse_simple_statement = "Always"
 space_after_function_names = "Never"
-syntax = "Lua54"
+syntax = "LuaJIT"
 
 [sort_requires]
 enabled = true

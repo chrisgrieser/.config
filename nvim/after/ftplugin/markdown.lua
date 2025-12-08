@@ -38,6 +38,7 @@ else
 		callback = function(ctx)
 			local line, node = vim.api.nvim_get_current_line(), vim.treesitter.get_node()
 			if vim.bo[ctx.buf].buftype ~= "" then return end
+
 			if not line:sub(81):find(" ") then return end -- markdownlint's `line-length` spec
 			if line:find("^[|#]") then return end -- heading or table
 			if node and node:type() == "code_fence_content" then return end
