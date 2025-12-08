@@ -36,7 +36,7 @@ LESS+=" --shift=.2"                                           # amount of side-s
 LESS+=" --tilde"                                              # blank lines instead of tilde at end of file
 export LESS
 
-# don't clutter home dir (not disabling, as `delta` requires it for `n` navigation)
+# don't clutter home dir (not disabling it, since `delta` needs it for `n` navigation)
 export LESSHISTFILE="$HOME/.cache/less_history"
 
 #───────────────────────────────────────────────────────────────────────────────
@@ -45,12 +45,12 @@ export RIPGREP_CONFIG_PATH="$HOME/.config/ripgrep/config" # point config paths t
 
 # INFO multi-select `alt-enter` mapping consistent with the one for telescope
 export FZF_DEFAULT_OPTS='
-	--pointer="" --prompt=" " --scrollbar="▐" --ellipsis="…" --marker=" "
+	--pointer="" --prompt=" " --scrollbar="▐" --ellipsis="…" --marker="󰒆 "
 	--color=hl:208,hl+:208,pointer:206,marker:206
 	--scroll-off=5 --cycle --layout=reverse --height=90% --preview-window=border-left
 	--bind=tab:down,shift-tab:up
 	--bind=page-down:preview-page-down,page-up:preview-page-up
-	--bind=alt-enter:toggle+down,ctrl-a:toggle-all
+	--bind=alt-enter:toggle+down
 '
 
 # https://cli.github.com/manual/gh_help_environment

@@ -4,9 +4,5 @@
 <dict>
 	<key>contacts_keyword</key>
 	<string>@</string>
-	<key>useNotes</key>
-	<false/>
-	<key>useStreet</key>
-	<false/>
 </dict>
 </plist>
