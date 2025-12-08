@@ -1,6 +1,12 @@
-set quiet
+set quiet := true
 
 reload:
+    #!/usr/bin/env zsh
+    while ! pgrep -qx "wezterm"; do
+        open -a "WezTerm"
+        sleep 0.3
+    done
+    wezterm cli send-text --no-paste "exec zsh" # do not reload with `source $HOME/.zshrc`, https://github.com/ohmyzsh/ohmyzsh/wiki/FAQ#how-do-i-reload-the-zshrc-file
 
 count-lines:
     #!/usr/bin/env zsh

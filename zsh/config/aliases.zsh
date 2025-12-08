@@ -1,6 +1,6 @@
 # shorthands
 alias q=" exit"     # leading space to ignore it in history due to `HIST_IGNORE_SPACE`
-alias r=" exec zsh" # do not reload with `source ~/.zshrc`, https://github.com/ohmyzsh/ohmyzsh/wiki/FAQ#how-do-i-reload-the-zshrc-file
+alias r=" exec zsh" # do not reload with `source $HOME/.zshrc`, https://github.com/ohmyzsh/ohmyzsh/wiki/FAQ#how-do-i-reload-the-zshrc-file
 alias ydl="yt-dlp"  # cause I can never remember the name
 alias i="which"     # `i` for [i]nspect
 
@@ -34,7 +34,7 @@ function bat { # dark-mode aware
 	command bat --theme="$theme" "$@"
 }
 
-function gh { # lazy load GITHUB_TOKEN for extra security
+function gh {         # lazy load GITHUB_TOKEN for extra security
 	_export_github_token # defined in .zshenv
 	unfunction gh
 	gh "$@"
