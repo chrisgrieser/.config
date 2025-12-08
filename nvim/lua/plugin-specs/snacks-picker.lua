@@ -507,6 +507,7 @@ return {
 
 						["<C-h>"] = { "toggle_hidden_and_ignored", mode = "i" }, -- consistent with `fzf`
 						["<C-r>"] = { "toggle_regex", mode = "i" },
+						["<D-CR>"] = { "toggle_files_and_grep", mode = "i" },
 
 						["<D-s>"] = { "qflist_and_go", mode = "i" },
 						["<D-l>"] = { "reveal_in_macOS_Finder", mode = "i" },
@@ -591,6 +592,16 @@ return {
 					end
 
 					picker:find()
+				end,
+				toggle_files_and_grep = function(picker)
+					local source = picker.opts.source
+					local current = picker.input.filter[source == "files" and "pattern" or "search"]
+					picker:close()
+					if source == "files" then
+						Snacks.picker.grep { search = current }
+					else
+						Snacks.picker.files { pattern = current }
+					end
 				end,
 			},
 			prompt = "  ", -- 

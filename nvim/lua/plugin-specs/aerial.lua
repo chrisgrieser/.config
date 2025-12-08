@@ -14,15 +14,16 @@ return {
 			min_width = vim.o.columns - vim.o.textwidth - 4,
 			win_opts = { winhighlight = "Normal:ColorColumn" },
 		},
-
 		open_automatic = function(bufnr)
 			local ft = vim.bo[bufnr].filetype
 			if ft == "markdown" then return true end
 			if ft == "yaml" then return false end
+
+			local notManuallyClosed = not require("aerial").was_closed()
 			-- only open files with at least x symbols, and if aerial wasn't manually closed
 			return vim.api.nvim_buf_line_count(bufnr) > 80
 				and require("aerial").num_symbols(bufnr) > 8
-				and not require("aerial").was_closed() -- was not manually closed
+				and notManuallyClosed
 		end,
 		close_automatic_events = { "switch_buffer", "unfocus", "unsupported" },
 

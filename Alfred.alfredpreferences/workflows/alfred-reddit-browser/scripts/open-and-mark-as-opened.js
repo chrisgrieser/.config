@@ -36,7 +36,7 @@ function run(argv) {
 	/** @type{AlfredItem[]} */
 	const subredditCache = JSON.parse(readFile(subredditCachePath));
 	const selectedItemIdx = subredditCache.findIndex(
-		(item) => item.arg === selectedUrl || item.mods.shift.arg === selectedUrl,
+		(item) => item.arg === selectedUrl || item.mods?.shift?.arg === selectedUrl,
 	);
 
 	// mark the selected item as visited
@@ -51,7 +51,7 @@ function run(argv) {
 		// 2. for the readCache, we also remove the "new" icons
 		// 3. `subredditCache` then represents the unread items, and is therefore kept on top
 		const readCache = subredditCache.splice(0, selectedItemIdx + 1).map((item) => {
-			item.subtitle = item.subtitle.replace("🆕 ", "");
+			item.subtitle = (item.subtitle || "").replace("🆕 ", "");
 			return item;
 		});
 		const reOrderedCache = subredditCache.concat(readCache);
