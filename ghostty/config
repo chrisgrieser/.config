@@ -31,7 +31,7 @@ font-thicken = true
 adjust-cell-width = -10%
 
 unfocused-split-opacity = 0.95
-adjust-cursor-thickness = 2
+adjust-cursor-thickness = 4
 mouse-hide-while-typing = true
 bell-features = "border,no-title"
 minimum-contrast = 3
@@ -59,12 +59,17 @@ keybind = ctrl+k=jump_to_prompt:-1
 
 #-ZSH BRIDGES-------------------------------------------------------------------
 
-# cmd+enter -> ctrl+o -> grappling hook
+# cmd+enter -> ctrl+o -> cycle common directories (configured in zshrc)
 keybind = cmd+enter=text:\x0f
-# cmd+l -> ctrl+l -> reveal in Finder
+
+# cmd+l -> ctrl+l -> reveal in Finder (configured in zshrc)
 keybind = cmd+l=text:\x0c
-# cmd+e -> escaped backticks and (and move cursor into it)
+
+# cmd+e -> escaped backticks and (and move cursor into it via two left-arrows)
 keybind = cmd+e=text:\\`\\`\x1b[D\x1b[D
+
+# shift-space -> daw -> delete a word (in vi-mode)
+keybind = shift+space=text:daw
 
 # shift+enter -> ctrl+v, ctrl+j -> insert line break, see https://unix.stackexchange.com/a/80820
 keybind = shift+enter=text:\x16\x0a
