@@ -14,14 +14,6 @@ local lightThemes = {
 	"GoogleLight (Gogh)",
 }
 
--- customization of `Nord Light`
-local nordLight = wt.get_builtin_color_schemes()["Nord Light (Gogh)"]
-nordLight.ansi[4] = "#c19a29" -- https://github.com/Gogh-Co/Gogh/blob/master/themes/Nord%20Light.yml
-nordLight.brights[3] = "#7eb87c"
-nordLight.brights[4] = "#DAB752"
-nordLight.brights[7] = "#45c1bd"
-local builtinSchemeOverrides = { ["Nord Light (Gogh)"] = nordLight }
-
 ---DEVICE-SPECIFIC--------------------------------------------------------------
 local deviceSpecific = {
 	home = {
@@ -58,13 +50,10 @@ end)
 
 ---TAB TITLE--------------------------------------------------------------------
 -- https://wezfurlong.org/wezterm/config/lua/window-events/format-tab-title.html
-wt.on("format-tab-title", function(tab, _pane, _tabs, _panes, _config)
-	-- title set via `tab:set_title()` or `wezterm cli set-tab-title`
-	if tab.tab_title ~= "" then return " " .. tab.tab_title .. " " end
-
-	local winTitle = tab.active_pane.title -- set e.g. by `nvim` or `yt-dlp --console-title`
-	winTitle = winTitle:gsub("  +", " ") -- remove duplicate spaces, e.g. by `yt-dlp` progress
-	local cwd = tab.active_pane.current_working_dir.file_path:gsub("^.*/(.*)/$", "%1")
+wt.on("format-tab-title", function(tab, _tabs, _panes, _config, _hover, _max_width)
+	local winTitle = tab.tab_title  or tab.active_pane.title -- set e.g. by `nvim` or `yt-dlp --console-title`
+	local pane = wt.mux.get_pane(tab.active_pane.pane_id)
+	local cwd = pane:get_current_working_dir().file_path:gsub("^.*/(.*)/$", "%1")
 	local icon = winTitle == "zsh" and "" or ""
 	local label = winTitle == "zsh" and cwd or winTitle
 	return (" %s %s "):format(icon, label)
@@ -98,7 +87,6 @@ local config = {
 	custom_block_glyphs = false, -- don't use wezterm's box-char replacements since too thin
 
 	-- appearance
-	color_schemes = builtinSchemeOverrides,
 	color_scheme = wt.gui.get_appearance():find("Dark") and darkThemes[1] or lightThemes[1],
 	window_background_opacity = 1,
 	bold_brightens_ansi_colors = "BrightAndBold",
