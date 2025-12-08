@@ -52,7 +52,7 @@ local GUI = {}
 ---}
 ---```
 ---
----@return Key[]|{ copy_mode: Key[] }
+---@return Key[]|{ copy_mode: Key[], search_mode: Key[] }
 function GUI.default_key_tables() end
 
 ---Returns a table holding the effective default values
@@ -112,3 +112,5 @@ function GUI.gui_windows() end
 ---
 ---@return ScreenInformation
 function GUI.screens() end
+
+-- vim:ts=4:sts=4:sw=4:et:ai:si:sta:

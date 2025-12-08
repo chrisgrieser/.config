@@ -94,7 +94,7 @@ function M:activate() end
 ---which is why this method doesn't simply return a file path string
 ---
 ---@param self Pane
----@return string|nil cwd
+---@return Url|nil cwd
 function M:get_current_working_dir() end
 
 ---Returns a Lua representation of the `StableCursorPosition` struct
@@ -549,3 +549,5 @@ function M:tab() end
 ---@param self Pane
 ---@return MuxWindow window
 function M:window() end
+
+-- vim:ts=4:sts=4:sw=4:et:ai:si:sta:

@@ -10,6 +10,9 @@ update-alfred-terminal:
     killall "Alfred Preferences" &> /dev/null
     open "alfredpreferences://navigateto/features>terminal"
 
+open-wezterm-types-repo:
+    open "https://github.com/DrKJeff16/wezterm-types"
+
 # streaming
 update-types:
     #!/usr/bin/env zsh

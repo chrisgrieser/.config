@@ -1,3 +1,4 @@
+#:tombi schema.strict = false
 # https://github.com/JohnnyMorganz/StyLua#options
 #───────────────────────────────────────────────────────────────────────────────
 column_width = 100
@@ -7,6 +8,8 @@ indent_width = 3
 quote_style = "AutoPreferDouble"
 call_parentheses = "NoSingleTable"
 collapse_simple_statement = "Always"
+space_after_function_names = "Never"
+syntax = "Lua54"
 
 [sort_requires]
 enabled = true
