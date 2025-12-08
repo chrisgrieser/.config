@@ -17,10 +17,12 @@ return {
 
 		close_automatic_events = { "switch_buffer", "unfocus", "unsupported" },
 		open_automatic = function(bufnr)
-			if vim.bo[bufnr].filetype == "markdown" then return true end
+			local ft = vim.bo[bufnr].filetype
+			if ft == "markdown" then return true end
+			if ft == "yaml" then return false end
 			return vim.api.nvim_buf_line_count(bufnr) > 80
 				and require("aerial").num_symbols(bufnr) > 8
-				and not require("aerial").was_closed() -- was manually closed
+				and not require("aerial").was_closed() -- was not manually closed
 		end,
 
 		post_parse_symbol = function(_bufnr, item, _ctx) return item.name ~= "callback" end,
