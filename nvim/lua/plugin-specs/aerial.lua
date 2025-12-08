@@ -15,15 +15,16 @@ return {
 			win_opts = { winhighlight = "Normal:ColorColumn" },
 		},
 
-		close_automatic_events = { "switch_buffer", "unfocus", "unsupported" },
 		open_automatic = function(bufnr)
 			local ft = vim.bo[bufnr].filetype
 			if ft == "markdown" then return true end
 			if ft == "yaml" then return false end
+			-- only open files with at least x symbols, and if aerial wasn't manually closed
 			return vim.api.nvim_buf_line_count(bufnr) > 80
 				and require("aerial").num_symbols(bufnr) > 8
 				and not require("aerial").was_closed() -- was not manually closed
 		end,
+		close_automatic_events = { "switch_buffer", "unfocus", "unsupported" },
 
 		post_parse_symbol = function(_bufnr, item, _ctx) return item.name ~= "callback" end,
 
