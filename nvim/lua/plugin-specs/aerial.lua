@@ -9,7 +9,6 @@ return {
 		{ "<D-0>", "<cmd>AerialToggle!<CR>", desc = " Aerial Toggle" },
 	},
 	opts = {
-		backends = { "lsp", "treesitter", "markdown", "man" },
 		layout = {
 			default_direction = "prefer_right",
 			min_width = vim.o.columns - vim.o.textwidth - 8,

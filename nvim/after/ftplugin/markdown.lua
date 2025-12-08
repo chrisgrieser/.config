@@ -27,10 +27,6 @@ if softwrap then
 	bkeymap("n", "I", "g^i")
 	bkeymap("n", "A", "g$a")
 else
-	-- since markdown has rarely indented lines, and also rarely has overlong lines,
-	-- move everything a bit more to the right
-	if vim.bo.buftype == "" then optl.signcolumn = "yes:4" end
-
 	-- when typing beyond `textwidth`
 	vim.schedule(function() optl.formatoptions:append("t") end)
 
@@ -74,10 +70,10 @@ do
 		elseif key == "<CR>" and emptyList then
 			vim.api.nvim_set_current_line("")
 		elseif key == "<CR>" and not emptyList then
-			local beforeCursor = col > 0 and line:sub(1, math.min(col - 1, 1)) or ""
-			local afterCursor = line:sub(col)
-			local nextLine = indent .. continued .. afterCursor
-			vim.api.nvim_buf_set_lines(0, row - 1, row, false, { beforeCursor, nextLine })
+			local beforeCur, afterCur = line:sub(1, col), line:sub(col + 1)
+			if vim.startswith(afterCur, continued) then continued = "" end -- cursor before list markers
+			local nextLine = indent .. continued .. afterCur
+			vim.api.nvim_buf_set_lines(0, row - 1, row, false, { beforeCur, nextLine })
 			vim.api.nvim_win_set_cursor(0, { row + 1, #(indent .. continued) })
 		end
 	end

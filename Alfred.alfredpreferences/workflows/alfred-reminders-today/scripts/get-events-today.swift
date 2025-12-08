@@ -28,7 +28,7 @@ func mapCGColorToEmoji(_ cgColor: CGColor) -> String {
 
 	// Simple thresholds for mapping RGB to base colors
 	let redDiff = abs(r - 1.0) + g + b
-	let greenDiff = r + abs(g - 1.0) + b
+	let greenDiff = 0.8 * (r + abs(g - 1.0) + b)  // more range
 	let blueDiff = r + g + abs(b - 1.0)
 	let yellowDiff = abs(r - 1.0) + abs(g - 1.0) + b
 	let purpleDiff = abs(r - 1.0) + g + abs(b - 1.0)

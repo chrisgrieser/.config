@@ -176,9 +176,11 @@ Task {  // wrapping in `Task` because `await` is not allowed in `main`
 	// DETERMINE DAY WHEN TO ADD
 	let calendar = Calendar.current
 	let today = Date()
-	var dayToUse: Date
 
-	if let dateOffset = Int(targetDay) {
+	var dayToUse: Date?
+	if targetDay == "none" {
+		dayToUse = nil
+	} else if let dateOffset = Int(targetDay) {
 		dayToUse = calendar.date(byAdding: .day, value: dateOffset, to: today)!
 	} else {
 		let weekdayName: String = targetDay
@@ -187,7 +189,6 @@ Task {  // wrapping in `Task` because `await` is not allowed in `main`
 			"saturday": 7,
 		]
 		let weekday = weekdays[weekdayName.lowercased()]
-
 		dayToUse = calendar.nextDate(
 			after: today,
 			matching: DateComponents(weekday: weekday),
@@ -196,26 +197,28 @@ Task {  // wrapping in `Task` because `await` is not allowed in `main`
 	}
 
 	// SET DUE DATE
-	var dateComponents = calendar.dateComponents([.year, .month, .day], from: dayToUse)
-	if !isAllDayReminder {
-		dateComponents.hour = hh
-		dateComponents.minute = mm
-	}
-	reminder.dueDateComponents = dateComponents
-	reminder.startDateComponents = nil  // reminders created regularly have no start date, we mimic that
+	if dayToUse != nil {
+		var dateComponents = calendar.dateComponents([.year, .month, .day], from: dayToUse!)
+		if !isAllDayReminder {
+			dateComponents.hour = hh
+			dateComponents.minute = mm
+		}
+		reminder.dueDateComponents = dateComponents
+		reminder.startDateComponents = nil  // reminders created regularly have no start date, we mimic that
 
-	// ADD ALARM
-	// * Add an alarm to trigger a notification. Even though the reminder created
-	//   without an alarm looks the same as one with an alarm, an alarm is needed
-	//   to trigger the notification (see #2).
-	// * Whether all-day reminders do get a notification or not is determined by
-	//   by the user's reminder settings; adding an alarm to all-day reminders
-	//   would enforce a notification, regardless of the setting, so we add the
-	//   alarm only if the reminder is not all-day.
-	if !isAllDayReminder {
-		// Apple Reminders use absolute dates as alarm, not relative offset; we mimic that
-		let dueDate = calendar.date(from: dateComponents)!
-		reminder.addAlarm(EKAlarm(absoluteDate: dueDate))
+		// ADD ALARM
+		// * Add an alarm to trigger a notification. Even though the reminder created
+		//   without an alarm looks the same as one with an alarm, an alarm is needed
+		//   to trigger the notification (see #2).
+		// * Whether all-day reminders do get a notification or not is determined by
+		//   by the user's reminder settings; adding an alarm to all-day reminders
+		//   would enforce a notification, regardless of the setting, so we add the
+		//   alarm only if the reminder is not all-day.
+		if !isAllDayReminder {
+			// Apple Reminders use absolute dates as alarm, not relative offset; we mimic that
+			let dueDate = calendar.date(from: dateComponents)!
+			reminder.addAlarm(EKAlarm(absoluteDate: dueDate))
+		}
 	}
 
 	// SET LIST (= CALENDAR)

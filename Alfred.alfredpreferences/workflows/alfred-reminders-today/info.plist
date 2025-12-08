@@ -86,6 +86,32 @@
 				<false/>
 			</dict>
 		</array>
+		<key>2A1B3C4D-5E6F-7A8B-9C0D-1E2F3A4B5C6D</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>3B2C4D5E-6F7A-8B9C-0D1E-2F3A4B5C6D7E</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>3B2C4D5E-6F7A-8B9C-0D1E-2F3A4B5C6D7E</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>0F93036F-D158-49BB-97AF-DE600B8A3300</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>3F39C9B0-C119-4ABC-B784-1B3B4D911B7B</key>
 		<array>
 			<dict>
@@ -479,41 +505,33 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>tasksettings</key>
-				<dict>
-					<key>target_path</key>
-					<string>~/Library/Application Support/Alfred/Caches/workflows/{const:alfred_workflow_uid}</string>
-					<key>use_finder</key>
-					<false/>
-				</dict>
-				<key>taskuid</key>
-				<string>com.alfredapp.automation.core/files-and-folders/path.trash</string>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>focusedappvariable</key>
+				<true/>
+				<key>focusedappvariablename</key>
+				<string>focusedapp</string>
+				<key>hotkey</key>
+				<integer>-1</integer>
+				<key>hotmod</key>
+				<integer>262144</integer>
+				<key>hotstring</key>
+				<string>double tap</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.automation.task</string>
+			<string>alfred.workflow.trigger.hotkey</string>
 			<key>uid</key>
-			<string>AB977CE7-1D10-44F7-AFF8-0018203097F6</string>
+			<string>76767F1C-52B8-425C-8621-F7E67C523434</string>
 			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>externaltriggerid</key>
-				<string>reminder-today</string>
-				<key>passinputasargument</key>
-				<true/>
-				<key>passvariables</key>
-				<true/>
-				<key>workflowbundleid</key>
-				<string>self</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.callexternaltrigger</string>
-			<key>uid</key>
-			<string>5E6BB902-56B8-4291-8181-8D015E7F0A0D</string>
-			<key>version</key>
-			<integer>1</integer>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -572,33 +590,41 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>0</integer>
-				<key>focusedappvariable</key>
+				<key>externaltriggerid</key>
+				<string>reminder-today</string>
+				<key>passinputasargument</key>
 				<true/>
-				<key>focusedappvariablename</key>
-				<string>focusedapp</string>
-				<key>hotkey</key>
-				<integer>-1</integer>
-				<key>hotmod</key>
-				<integer>262144</integer>
-				<key>hotstring</key>
-				<string>double tap</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>0</integer>
-				<key>relatedAppsMode</key>
-				<integer>0</integer>
+				<key>passvariables</key>
+				<true/>
+				<key>workflowbundleid</key>
+				<string>self</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
+			<string>alfred.workflow.output.callexternaltrigger</string>
 			<key>uid</key>
-			<string>76767F1C-52B8-425C-8621-F7E67C523434</string>
+			<string>5E6BB902-56B8-4291-8181-8D015E7F0A0D</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>tasksettings</key>
+				<dict>
+					<key>target_path</key>
+					<string>~/Library/Application Support/Alfred/Caches/workflows/{const:alfred_workflow_uid}</string>
+					<key>use_finder</key>
+					<false/>
+				</dict>
+				<key>taskuid</key>
+				<string>com.alfredapp.automation.core/files-and-folders/path.trash</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.automation.task</string>
+			<key>uid</key>
+			<string>AB977CE7-1D10-44F7-AFF8-0018203097F6</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -835,6 +861,50 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/edit-reminder.swift</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>BC59BB81-9433-4E89-8ACA-3C201EB676F6</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>✅ Updated</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>49BE57F4-670B-4713-B036-981025E334C9</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>behaviour</key>
 				<integer>1</integer>
 				<key>fontmode</key>
@@ -884,30 +954,9 @@
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>BC59BB81-9433-4E89-8ACA-3C201EB676F6</string>
+			<string>E9FBABB7-D7D0-4EF6-A0F8-BC9B2124CB77</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>✅ Updated</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>49BE57F4-670B-4713-B036-981025E334C9</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -929,29 +978,6 @@
 			<string>A6117B6C-7738-4FC1-8297-B72F0FEEB9CC</string>
 			<key>version</key>
 			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/edit-reminder.swift</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>E9FBABB7-D7D0-4EF6-A0F8-BC9B2124CB77</string>
-			<key>version</key>
-			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1040,6 +1066,27 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>{var:quickadd_tomorrow_keyword}</string>
+				<key>subtext</key>
+				<string>tomorrow</string>
+				<key>text</key>
+				<string>✴️ Add to {var:reminder_list}: {query}</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>F282F9C0-5F8C-4504-889D-6F7B1B1A0CFA</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -1059,27 +1106,6 @@
 			<string>0F93036F-D158-49BB-97AF-DE600B8A3300</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>{var:quickadd_tomorrow_keyword}</string>
-				<key>subtext</key>
-				<string>tomorrow</string>
-				<key>text</key>
-				<string>✴️ Add to {var:reminder_list}: {query}</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>F282F9C0-5F8C-4504-889D-6F7B1B1A0CFA</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1139,6 +1165,27 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>delimiter</key>
+				<string>;</string>
+				<key>discardemptyarguments</key>
+				<false/>
+				<key>outputas</key>
+				<integer>0</integer>
+				<key>trimarguments</key>
+				<true/>
+				<key>variableprefix</key>
+				<string>split</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.split</string>
+			<key>uid</key>
+			<string>7D99EE52-032D-4805-BCFB-3C094F19F727</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>argument</key>
 				<string>{query}</string>
 				<key>passthroughargument</key>
@@ -1155,27 +1202,6 @@
 			<string>alfred.workflow.utility.argument</string>
 			<key>uid</key>
 			<string>D39A1AFE-3A07-40A3-BCD6-FE4A721D8959</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>delimiter</key>
-				<string>;</string>
-				<key>discardemptyarguments</key>
-				<false/>
-				<key>outputas</key>
-				<integer>0</integer>
-				<key>trimarguments</key>
-				<true/>
-				<key>variableprefix</key>
-				<string>split</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.split</string>
-			<key>uid</key>
-			<string>7D99EE52-032D-4805-BCFB-3C094F19F727</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1265,6 +1291,49 @@
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>{var:quickadd_nodate_keyword}</string>
+				<key>subtext</key>
+				<string>no due date</string>
+				<key>text</key>
+				<string>⚪ Add to {var:reminder_list}: {query}</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>2A1B3C4D-5E6F-7A8B-9C0D-1E2F3A4B5C6D</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string>{query}</string>
+				<key>passthroughargument</key>
+				<true/>
+				<key>variables</key>
+				<dict>
+					<key>notification_label</key>
+					<string>no due date</string>
+					<key>target_day</key>
+					<string>none</string>
+				</dict>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>3B2C4D5E-6F7A-8B9C-0D1E-2F3A4B5C6D7E</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>## Requirements
@@ -1304,8 +1373,11 @@
 	  start of end. For example, `buy milk!!` or `!!buy milk` will result in a
 	  reminder title `buy milk` with a medium priority (`!` = low, `!!` =
 	  medium, `!!!` = high).
-	+ Use `q1` create the reminder tomorrow, `q2` for the day after tomorrow,
-	  and `qm` for next Monday. All keywords are configurable.
+	+ You can use alternative keywords for different due dates of new reminders:
+		* `qn`: no due date
+		* `q1` tomorrow
+		* `q2` in two days
+		* `qm` next Monday
 	+ If the input is a bare URL, will move the URL to the reminder body and
 	  fetch the reminder title from the URL.
 	+ Configure the
@@ -1386,6 +1458,17 @@ for details how to fix common problems.
 			<key>ypos</key>
 			<real>1010</real>
 		</dict>
+		<key>2A1B3C4D-5E6F-7A8B-9C0D-1E2F3A4B5C6D</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>note</key>
+			<string>no due date</string>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>1140</real>
+		</dict>
 		<key>32A761BD-C231-44E7-88CB-7590C87A6BA6</key>
 		<dict>
 			<key>colorindex</key>
@@ -1396,6 +1479,15 @@ for details how to fix common problems.
 			<real>745</real>
 			<key>ypos</key>
 			<real>85</real>
+		</dict>
+		<key>3B2C4D5E-6F7A-8B9C-0D1E-2F3A4B5C6D7E</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>xpos</key>
+			<real>180</real>
+			<key>ypos</key>
+			<real>1170</real>
 		</dict>
 		<key>3F39C9B0-C119-4ABC-B784-1B3B4D911B7B</key>
 		<dict>
@@ -1846,6 +1938,27 @@ to set a hotkey to show reminders due today</string>
 			<key>config</key>
 			<dict>
 				<key>default</key>
+				<string>qn</string>
+				<key>placeholder</key>
+				<string>qn</string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>keyword to quick-add with no due date</string>
+			<key>label</key>
+			<string></string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>quickadd_nodate_keyword</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
 				<false/>
 				<key>required</key>
 				<false/>
@@ -1935,7 +2048,7 @@ to set a hotkey to show reminders due today</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>3.13.1</string>
+	<string>3.14.0</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>

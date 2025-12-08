@@ -12,6 +12,8 @@
 	<string>,,,</string>
 	<key>quickadd_nextMonday_keyword</key>
 	<string>,,,</string>
+	<key>quickadd_nodate_keyword</key>
+	<string>//</string>
 	<key>quickadd_today_keyword</key>
 	<string>,</string>
 	<key>quickadd_tomorrow_keyword</key>
@@ -20,6 +22,8 @@
 	<string>Tasks</string>
 	<key>select_reminder_keyword</key>
 	<string>//</string>
+	<key>show_events</key>
+	<true/>
 	<key>sketchybar_trigger_name</key>
 	<string>update_reminder_count</string>
 </dict>

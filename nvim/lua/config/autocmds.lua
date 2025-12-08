@@ -227,6 +227,8 @@ vim.api.nvim_create_autocmd("FocusGained", {
 })
 
 ---AUTO-NOHL & INLINE SEARCH COUNT----------------------------------------------
+
+---tip: use `vim.opt.shortmess:append("S")` to silence regular search count
 ---@param mode? "clear"
 local function searchCountIndicator(mode)
 	local signColumnPlusScrollbarWidth = 2 + 3 -- CONFIG
