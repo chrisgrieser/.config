@@ -33,6 +33,7 @@ M.keys = {
 	{ key = ",", mods = "CMD", action = actFun(function() wt.open_with(wt.config_file) end) },
 	{ key = "t", mods = "ALT", action = actFun(require("theme-cycler").cycle) },
 	{ key = "Enter", mods = "ALT", action = act.DisableDefaultAssignment }, -- used for `fzf`
+	{ key = "Escape", mods = "CTRL", action = wt.action.ShowDebugOverlay }, -- REPL
 
 	---TERMINAL KEYS-------------------------------------------------------------
 	{ key = "p", mods = "CMD", action = act.ActivateCommandPalette },

@@ -1,0 +1,55 @@
+---@meta
+
+---Describes a [`Pane`](lua://Pane).
+---
+---Unlike the `Pane` object, `PaneInformation` is a snapshot of
+---some of the key characteristics of the pane,
+---intended for use in synchronous, fast, event callbacks
+---that format GUI elements such as the window and tab title bars.
+---
+---@class PaneInformation
+---The height of the pane in cells.
+---
+---@field height number
+---Is `true` if the pane is the active pane within its containing tab.
+---
+---@field is_active boolean
+---Is `true` if the pane is in the zoomed state.
+---
+---@field is_zoomed boolean
+---The cell `x` coordinate of the left edge of the pane.
+---
+---@field left number
+---The height of the pane in pixels.
+---
+---@field pixel_height number
+---The pane ID.
+---
+---@field pane_id integer
+---The logical position of the pane within its containing layout.
+---
+---@field pane_index number
+---The width of the pane in pixels.
+---
+---@field pixel_width number
+---The progress state,
+---per [`Pane:get_progress()`](lua://Pane.get_progress)
+---at the time the pane information was captured.
+---
+---@field progress string
+---The title of the pane,
+---per [`Pane:get_title()`](lua://Pane.get_title)
+---at the time the pane information was captured.
+---
+---@field title string
+---The cell `y` coordinate of the top edge of the pane.
+---
+---@field top number
+---The user variables defined for the pane,
+---per [`Pane:get_user_vars()`](lua://Pane.get_user_vars)
+---at the time the pane information was captured.
+---
+---@field user_vars table<string, string>
+---The width of the pane in cells.
+---
+---@field width number

@@ -18,9 +18,8 @@ return {
 		max_join_length = math.huge,
 		langs = {
 			javascript = {
-				-- remove curly brackets in js when joining if statements https://github.com/Wansmer/treesj/issues/150
 				statement_block = {
-					join = {
+					join = { -- remove `{}` when joining if-statements https://github.com/Wansmer/treesj/issues/150
 						format_tree = function(tsj)
 							if tsj:tsnode():parent():type() == "if_statement" then
 								tsj:remove_child { "{", "}" }
@@ -31,8 +30,7 @@ return {
 						end,
 					},
 				},
-				-- one-line if-statement can be split into multi-line https://github.com/Wansmer/treesj/issues/150
-				expression_statement = {
+				expression_statement = { -- split one-line if-statement into multi-line https://github.com/Wansmer/treesj/issues/150
 					join = { enable = false },
 					split = {
 						enable = function(tsn) return tsn:parent():type() == "if_statement" end,
@@ -75,10 +73,6 @@ return {
 		},
 	},
 	config = function(_, opts)
-		-- local zsh inherit from bash PENDING https://github.com/Wansmer/treesj/pull/195
-		opts.langs.zsh =
-			require("treesj.langs.utils").merge_preset(require("treesj.langs.bash"), opts.langs.zsh)
-
 		opts.langs.swift.guard_statement = opts.langs.swift.if_statement
 		opts.langs.typescript = opts.langs.javascript
 		require("treesj").setup(opts)

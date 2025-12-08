@@ -1,0 +1,10 @@
+set quiet := true
+
+reload:
+    open -a "WezTerm"
+
+update-types:
+    #!/usr/bin/env zsh
+    git clone --depth=1 "https://github.com/DrKJeff16/wezterm-types" "/tmp/wezterm-types"
+    mv -f "/tmp/wezterm-types/lua/wezterm/types" "./types"
+
