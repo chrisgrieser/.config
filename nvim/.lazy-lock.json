@@ -14,6 +14,7 @@
   "mini.icons": { "branch": "main", "commit": "ff2e4f1d29f659cc2bad0f9256f2f6195c6b2428" },
   "mini.operators": { "branch": "main", "commit": "59f5fdbaaed7cce160076e70926cb16faadea78c" },
   "neocodeium": { "branch": "main", "commit": "bfe790d78e66adaa95cb50a8c75c64a752336e9c" },
+  "neovim-tips": { "branch": "master", "commit": "7ab9c2eb7a4a183f8f24cea97c4ab7a25d72e3c5" },
   "nightfox.nvim": { "branch": "main", "commit": "ba47d4b4c5ec308718641ba7402c143836f35aa9" },
   "nui.nvim": { "branch": "main", "commit": "de740991c12411b663994b2860f1a4fd0937c130" },
   "nvim-chainsaw": { "branch": "main", "commit": "a27b364040378fb86462cf156885a5da3d738c75" },
