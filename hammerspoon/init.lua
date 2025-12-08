@@ -1,12 +1,10 @@
--- HAMMERSPOON SETTINGS
+---HAMMERSPOON SETTINGS---------------------------------------------------------
 hs.autoLaunch(true)
 hs.menuIcon(false)
 hs.automaticallyCheckForUpdates(true)
 hs.window.animationDuration = 0
 
---------------------------------------------------------------------------------
--- LOAD MODULES
-
+---LOAD MODULES-----------------------------------------------------------------
 G = {} -- persist from garbage collector
 
 ---Try to require the module, and do not error when one of them cannot be
@@ -16,12 +14,10 @@ local function safeRequire(module)
 	local success, M = pcall(require, module)
 	G[module:sub(5)] = M
 	if not success then
-		hs.alert(M, 5)
+		hs.alert(M, 4)
 		print(M)
 	end
 end
-
---------------------------------------------------------------------------------
 
 safeRequire("appearance.console")
 safeRequire("appearance.hole-cover")
@@ -46,3 +42,4 @@ safeRequire("apps.app-specific-behavior")
 safeRequire("apps.spotify")
 
 safeRequire("meta.reload")
+safeRequire("meta.update-typings")

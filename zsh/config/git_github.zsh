@@ -61,7 +61,7 @@ _changed_git_files() {
 	local -a changed_files=()
 	while IFS='' read -r file; do # turn lines into array
 		changed_files+=("$file")
-	done < <(git -c status.relativePaths=true status --porcelain --untracked-files | cut -c4-)
+	done < <(git status --porcelain --untracked-files | cut -c4-)
 
 	local expl && _description -V git-changed-files expl 'Changed & Untracked Files'
 	compadd "${expl[@]}" -Q -- "${changed_files[@]}"

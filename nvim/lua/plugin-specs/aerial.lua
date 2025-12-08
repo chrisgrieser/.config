@@ -11,7 +11,7 @@ return {
 	opts = {
 		layout = {
 			default_direction = "prefer_right",
-			min_width = vim.o.columns - vim.o.textwidth - 3,
+			min_width = vim.o.columns - vim.o.textwidth - 4,
 			win_opts = { winhighlight = "Normal:ColorColumn" },
 		},
 

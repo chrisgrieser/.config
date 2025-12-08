@@ -1,10 +1,20 @@
 set quiet := true
 
 reload:
-    open -a "WezTerm"
+    open -a "WezTerm" # wezterm already uses auto-reload, just need to open it
 
+update-alfred-terminal:
+    #!/usr/bin/env zsh
+    content=$(printf "%s" "$(cat ./alfred-wezterm-opener.applescript | sed 's/"/\\"/g')")
+    /usr/libexec/PlistBuddy -c "Set :custom '$content'" ../Alfred.alfredpreferences/preferences/features/terminal/prefs.plist
+    open "alfredpreferences://navigateto/features>terminal"
+
+# streaming
 update-types:
     #!/usr/bin/env zsh
+    rm -rf "/tmp/wezterm-types"
+    rm -rf "./types"
     git clone --depth=1 "https://github.com/DrKJeff16/wezterm-types" "/tmp/wezterm-types"
-    mv -f "/tmp/wezterm-types/lua/wezterm/types" "./types"
+    mv -f "/tmp/wezterm-types/lua/wezterm/types" "./"
+    echo "Updated."
 

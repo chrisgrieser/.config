@@ -14,8 +14,9 @@ reload:
     end tell
     return "" # to silence return
 
-inspect-keybindings:
-    osascript -e 'tell application "Shortcuts" to run shortcut named "ghostty-input" with input "ghostty +list-keybinds"'
-
-theme-preview:
-    osascript -e 'tell application "Shortcuts" to run shortcut named "ghostty-input" with input "ghostty +list-themes"'
+update-alfred-terminal:
+    #!/usr/bin/env zsh
+    content=$(printf "%s" "$(cat ./alfred-ghostty-opener.applescript | sed 's/"/\\"/g')")
+    /usr/libexec/PlistBuddy -c "Set :custom '$content'" ../Alfred.alfredpreferences/preferences/features/terminal/prefs.plist
+    killall "Alfred Preferences" &> /dev/null
+    open "alfredpreferences://navigateto/features>terminal"

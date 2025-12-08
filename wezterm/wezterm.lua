@@ -9,9 +9,8 @@ local darkThemes = { -- the first theme in each list is used
 	"ChallengerDeep",
 }
 local lightThemes = {
-	"Nord Light (Gogh)",
-	"Ivory Light (terminal.sexy)",
 	"GoogleLight (Gogh)",
+	"Ivory Light (terminal.sexy)",
 }
 
 ---DEVICE-SPECIFIC--------------------------------------------------------------

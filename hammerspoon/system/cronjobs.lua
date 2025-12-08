@@ -88,15 +88,6 @@ M.timer_nightlyCronjobs = hs.timer
 	end, true)
 	:start()
 
----EMMYLUA UPDATER--------------------------------------------------------------
--- technically only needed once every hammerspoon update, but since there
--- is no good API to detect updates, we just run it weekly instead.
-M.timer_emmyluaUpdater = hs.timer
-	.doAt("01:30", "01d", function()
-		if os.date("%a") == "Sun" then hs.loadSpoon("EmmyLua") end
-	end)
-	:start()
-
 ---UPTIME CHECK-----------------------------------------------------------------
 local maxUptimeDays = 30
 M.timer_uptime = hs.timer

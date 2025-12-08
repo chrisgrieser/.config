@@ -7,6 +7,10 @@ reload:
     open -g "hammerspoon://hs-reload"
     echo " Hammerspoon reloaded"
 
+update-types:
+    open -g "hammerspoon://update-emmylua-types"
+    echo " EmmyLua typings updated"
+
 count-lines:
     #!/usr/bin/env zsh
     find . -name "*.lua" -not -path "*/Spoons/*" -print0 |

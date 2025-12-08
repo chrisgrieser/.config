@@ -10,7 +10,6 @@ on alfred_script(shellCmd)
 	set i to 0 
 	tell application "System Events" 
 		repeat while (name of first application process whose frontmost is true) is not "wezterm-gui" 
-
 			tell application "WezTerm" to activate
 			delay 0.05 
 			if i > 100 then return 
