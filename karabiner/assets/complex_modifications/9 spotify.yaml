@@ -1,14 +1,12 @@
 # yaml-language-server: $schema=./schema/karabiner-mod-schema.json
 #───────────────────────────────────────────────────────────────────────────────
-
 title: Spotify Control
 anchors:
-  - conditions:
-      - &not-game 
-        type: frontmost_application_unless
-        file_paths:
-          - "/Users/.*/Library/Application Support/Steam/steamapps/common/"
-          - "/Applications/StarCraft II/"
+  - &not-game 
+    type: frontmost_application_unless
+    file_paths:
+      - "/Users/.*/Library/Application Support/Steam/steamapps/common/"
+      - "/Applications/StarCraft II/"
 #───────────────────────────────────────────────────────────────────────────────
 rules:
   - description: Spotify Media Controls
@@ -19,7 +17,6 @@ rules:
           - shell_command: open "https://open.spotify.com/"
         conditions: [*not-game]
       #─────────────────────────────────────────────────────────────────────────
-
       - type: basic
         from: { key_code: f7 }
         to:
@@ -29,7 +26,6 @@ rules:
               "$HOME/.config/karabiner/assets/notificators/spotify-notificator" \
                 --title "Spotify" --message "⏸️ Pause"
         conditions: [*not-game]
-
 
       - type: basic
         from: { key_code: f8 }

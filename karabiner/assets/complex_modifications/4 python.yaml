@@ -1,4 +1,5 @@
 # yaml-language-server: $schema=./schema/karabiner-mod-schema.json
+#───────────────────────────────────────────────────────────────────────────────
 title: "Python windows (Pseudo-app when using `matplotlib`)"
 rules:
   # INFO due the capslock bindings, needs to come before any hyper-key mappings

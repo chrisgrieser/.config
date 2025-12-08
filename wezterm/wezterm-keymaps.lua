@@ -30,18 +30,10 @@ M.keys = {
 	},
 
 	---META----------------------------------------------------------------------
-	-- cmd+, -> open the config file
 	{ key = ",", mods = "CMD", action = actFun(function() wt.open_with(wt.config_file) end) },
-
 	{ key = "t", mods = "ALT", action = actFun(require("theme-cycler").cycle) },
 
-	-- FIX works with `send_composed_key_when_right_alt_is_pressed = true`
-	-- but expects another character, so this mapping fixes it
-	-- { key = "n", mods = "ALT", action = act.SendString("~") },
-
-	-- Theme Cycler
-
-	---WEZTERM-------------------------------------------------------------------
+	---TERMINAL KEYS-------------------------------------------------------------
 	{ key = "p", mods = "CMD", action = act.ActivateCommandPalette },
 	{ key = "v", mods = "CTRL", action = act.SplitHorizontal }, -- SIC actually vertical
 	{ key = "w", mods = "CMD", action = act.CloseCurrentPane { confirm = false } }, -- pane, then tab

@@ -1,5 +1,5 @@
-# vim: foldlevel=2
 # yaml-language-server: $schema=./schema/karabiner-mod-schema.json
+# vim: foldlevel=2
 title: App-specific bindings
 anchors:
   - &leftSidebar { key_code: "1", modifiers: { mandatory: [command] } }

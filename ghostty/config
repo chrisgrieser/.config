@@ -29,19 +29,18 @@ theme = "dark:Kanagawa Wave,light:Iceberg Light"
 font-family = "JetBrainsMonoNL NF"
 font-thicken = true
 adjust-cell-width = -10%
+minimum-contrast = 3
 
 unfocused-split-opacity = 0.95
 adjust-cursor-thickness = 4
 mouse-hide-while-typing = true
 bell-features = "border,no-title"
-minimum-contrast = 3
 
-#-WINDOW------------------------------------------------------------------------
-title = " Ghostty "
+# title = " "
+title = "Ghostty"
 macos-titlebar-proxy-icon = "hidden"
 macos-titlebar-style = "tabs"
 window-padding-y = 0,10
-window-padding-x = 3,3
 
 #-KEYBINDINGS-------------------------------------------------------------------
 # `ghostty +list-keybinds`

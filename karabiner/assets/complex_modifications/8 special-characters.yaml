@@ -1,5 +1,8 @@
 # yaml-language-server: $schema=./schema/karabiner-mod-schema.json
+#───────────────────────────────────────────────────────────────────────────────
 title: Special Characters
+anchors:
+  - &delay { key_code: vk_none, hold_down_milliseconds: 50 }
 rules:
   #─────────────────────────────────────────────────────────────────────────────
   # DEAD KEYS
@@ -10,7 +13,7 @@ rules:
         from: { key_code: grave_accent_and_tilde }
         to:
           - select_input_source: { input_source_id: com.apple.keylayout.US }
-          - { key_code: vk_none, hold_down_milliseconds: 50 }
+          - *delay
           - { key_code: "6", modifiers: [shift] }
         to_after_key_up:
           - select_input_source: { input_source_id: com.apple.keylayout.German }
@@ -19,7 +22,7 @@ rules:
         from: { key_code: equal_sign, modifiers: { mandatory: [shift] } }
         to:
           - select_input_source: { input_source_id: com.apple.keylayout.US }
-          - { key_code: vk_none, hold_down_milliseconds: 50 }
+          - *delay
           - key_code: non_us_backslash
         to_after_key_up:
           - select_input_source: { input_source_id: com.apple.keylayout.German }
@@ -28,13 +31,10 @@ rules:
         from: { key_code: "n", modifiers: { mandatory: [option] } }
         to:
           - select_input_source: { input_source_id: com.apple.keylayout.US }
-          - { key_code: vk_none, hold_down_milliseconds: 50 }
+          - *delay
           - { key_code: non_us_backslash, modifiers: [shift] }
         to_after_key_up:
           - select_input_source: { input_source_id: com.apple.keylayout.German }
-        conditions:
-          # `~` is the only dead key wezterm can manage on its own
-          - { type: frontmost_application_unless, file_paths: [wezterm-gui$] }
   #─────────────────────────────────────────────────────────────────────────────
   # REMAPPING
   - description: "Remap to make them available without alt+shift: \\[]"

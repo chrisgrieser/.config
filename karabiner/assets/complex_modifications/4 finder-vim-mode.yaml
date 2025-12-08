@@ -1,5 +1,6 @@
 # vim: foldlevel=5
 # yaml-language-server: $schema=./schema/karabiner-mod-schema.json
+#───────────────────────────────────────────────────────────────────────────────
 title: "Finder Vim Controls"
 homepage: https://github.com/chrisgrieser/finder-vim-mode
 maintainers: [pseudometa (chrisgrieser)]
@@ -132,17 +133,13 @@ rules:
       - type: basic
         from: { key_code: hyphen, modifiers: { mandatory: [shift] } }
         to:
-          - shell_command:
-              qlmanage -p "$HOME/.config/karabiner/assets/finder-vim-mode/cheatsheet.png"
-              open -a "qlmanage" # to focus it
+          - shell_command: open "$HOME/.config/karabiner/assets/finder-vim-mode/cheatsheet.png"
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *is-German-keyboard]
       # "?" on American keyboard
       - type: basic
         from: { key_code: slash, modifiers: { mandatory: [shift] } }
         to:
-          - shell_command:
-              qlmanage -p "$HOME/.config/karabiner/assets/finder-vim-mode/cheatsheet.png"
-              open -a "qlmanage" # to focus it
+          - shell_command: open "$HOME/.config/karabiner/assets/finder-vim-mode/cheatsheet.png"
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *not-German-keyboard]
       #─────────────────────────────────────────────────────────────────────────
       # INSERT MODE
