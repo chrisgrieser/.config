@@ -49,8 +49,7 @@ rules:
         from: *leftSidebar
         to:
           - { key_code: s, modifiers: [command, option] }
-        conditions:
-          - { type: frontmost_application_if, bundle_identifiers: [com.apple.Maps] }
+        conditions: [{ type: frontmost_application_if, bundle_identifiers: [com.apple.Maps] }]
       # Monodraw
       - type: basic
         from: *leftSidebar
