@@ -49,7 +49,7 @@ rules:
           - { key_code: "3", modifiers: [command, control] }
           - shell_command: |
               "$HOME/.config/karabiner/assets/notificators/highlights-notificator" \
-                  --title "Highlights" --message "Comment ✏️"
+                  --title "Highlights" --message "✏️ Comment"
         conditions:
           - type: frontmost_application_if
             bundle_identifiers: [net.highlightsapp.universal]
@@ -89,13 +89,13 @@ rules:
           - { key_code: "3", modifiers: [command, control] }
           - shell_command: |
               "$HOME/.config/karabiner/assets/notificators/highlights-notificator" \
-                  --title "Highlights" --message "Highlight 🟨"
+                  --title "Highlights" --message "🟨 Highlight"
         to_if_held_down:
           - { key_code: "u", modifiers: [control, command] }
           - { key_code: "1", modifiers: [control, command] }
           - shell_command: |
               "$HOME/.config/karabiner/assets/notificators/highlights-notificator" \
-                  --title "Highlights" --message "Underline 🖍️"
+                  --title "Highlights" --message "🖍️ Underline"
         conditions:
           - { type: frontmost_application_if, bundle_identifiers: [net.highlightsapp.universal] }
       # Gmail: Delete
@@ -140,7 +140,6 @@ rules:
               # some other text: google it
               # empty: do nothing
               #───────────────────────────────────────────────────────────────────────────────
-              # search_engine="https://www.google.com/search?q="
               search_engine="https://duckduckgo.com/?q="
               prev_clipboard=$(pbpaste)
               osascript -e 'tell application "System Events" to keystroke "c" using {command down}'
