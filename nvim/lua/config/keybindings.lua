@@ -453,13 +453,4 @@ end, { desc = "󰋽 Diagnostics" })
 -- stylua: ignore
 keymap("n", "<leader>oc", function() vim.wo.conceallevel = vim.wo.conceallevel == 0 and 2 or 0 end, { desc = "󰈉 Conceal" })
 
-keymap("n", "<leader>ol", function()
-	local clients = vim.lsp.get_clients { bufnr = 0 }
-	local names = vim.tbl_map(function(client) return client.name end, clients)
-	local list = "- " .. table.concat(names, "\n- ")
-	vim.notify(list, nil, { title = "Restarting LSPs", icon = "󰑓" })
-	vim.lsp.enable(names, false)
-	vim.lsp.enable(names, true)
-end, { desc = "󰑓 LSP Restart" })
-
 --------------------------------------------------------------------------------
