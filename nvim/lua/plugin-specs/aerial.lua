@@ -16,6 +16,15 @@ return {
 		},
 	},
 	opts = {
+		filter_kind = {
+			yaml = {
+				"Array",
+				"Key",
+				"Object",
+				"Field",
+				"Property",
+			}
+		},
 		layout = {
 			default_direction = "prefer_right",
 			min_width = vim.o.columns - vim.o.textwidth - 4,
