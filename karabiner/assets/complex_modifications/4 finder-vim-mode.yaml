@@ -9,7 +9,7 @@ anchors:
       - &finder-app { type: frontmost_application_if, bundle_identifiers: [^com\.apple\.finder$] }
       - &is-German-keyboard { type: input_source_if, input_sources: [language: ^de$] }
       - &not-German-keyboard { type: input_source_unless, input_sources: [language: ^de$] }
-      - &is-insert-mode { type: variable_if, name: FINDER_INSERT_MODE, value: 1 }
+      - &is-insert-mode { type: variable_if, name: FINDER_INSERT_MODE, value: true }
       - &not-insert-mode { type: variable_unless, name: FINDER_INSERT_MODE, value: true }
       - &is-find-mode { type: variable_if, name: FINDER_FIND_MODE, value: true }
       - &not-find-mode { type: variable_unless, name: FINDER_FIND_MODE, value: true }
@@ -143,8 +143,7 @@ rules:
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *not-German-keyboard]
       #─────────────────────────────────────────────────────────────────────────
       # INSERT MODE
-      # ENTER
-      # Rename
+      # Enter: Rename
       - type: basic
         from: { key_code: return_or_enter }
         to:
@@ -181,7 +180,7 @@ rules:
           - *enter-insert-mode
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
       # LEAVE INSERT MODE
-      # Confirm Insert Mode
+      # Enter: Confirm Insert Mode
       - type: basic
         from: { key_code: return_or_enter }
         to:
@@ -200,7 +199,6 @@ rules:
           - *leave-insert-mode
           - *remove-menu-notice
           - *end-menu
-
       #─────────────────────────────────────────────────────────────────────────
       #─────────────────────────────────────────────────────────────────────────
       # ABORT VARIOUS MODES

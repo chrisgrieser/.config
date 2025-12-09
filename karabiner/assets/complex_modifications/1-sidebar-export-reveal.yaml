@@ -1,5 +1,5 @@
 # yaml-language-server: $schema=./schema/karabiner-mod-schema.json
-# vim: foldlevel=2
+# vim: foldlevel=3
 title: App-specific bindings
 anchors:
   - &leftSidebar { key_code: "1", modifiers: { mandatory: [command] } }
@@ -158,7 +158,7 @@ rules:
           - { key_code: p, modifiers: [command] }
         conditions:
           - { type: frontmost_application_if, bundle_identifiers: [com.brave.Browser] }
-      # Monodraw
+      # Monodraw: Export to clipboard
       - type: basic
         from: *export
         to:
@@ -169,6 +169,17 @@ rules:
               osascript -e 'display notification "Exported to clipboard" with title "Monodraw"'
         conditions:
           - { type: frontmost_application_if, bundle_identifiers: [com.helftone.monodraw] }
+      # Highlights
+      - type: basic
+        from: *export
+        to:
+          - shell_command: |
+              osascript -e '
+                tell application "System Events" to tell process "Highlights"
+                  click menu item "PDF" of menu of menu item "Export Notes to..." of menu "File" of menu bar 1
+                end tell'
+        conditions:
+          - { type: frontmost_application_if, bundle_identifiers: [net.highlightsapp.universal] }
   #─────────────────────────────────────────────────────────────────────────────
   - description: "Reveal in Finder"
     manipulators:
@@ -212,7 +223,7 @@ rules:
               '
         conditions:
           - { type: frontmost_application_if, bundle_identifiers: [com.microsoft.Word] }
-      # Highlights
+      # Highlights / Monodraw
       - type: basic
         from: *revealInFinder
         to:
