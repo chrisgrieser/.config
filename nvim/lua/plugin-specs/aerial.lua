@@ -25,16 +25,7 @@ return {
 			end,
 			desc = "󰙅 Aerial Toggle",
 		},
-		{
-			"<leader>ia",
-			function()
-				local symbols = require("aerial").get_location()
-				local text = vim.iter(symbols):map(function(loc) return loc.kind end):join(", ")
-				vim.notify(text, nil, { title = "Aerial symbols", icon = "󰙅" })
-			end,
-			desc = "󰙅 Aerial symbols",
-		},
-		{
+		{ -- yank breadcrumbs
 			"<leader>yb",
 			function()
 				local crumbs = getBreadcrumbs()
@@ -42,6 +33,15 @@ return {
 				vim.notify(crumbs, nil, { title = "Copied", icon = "󰙅", ft = "text" })
 			end,
 			desc = "󰙅 Breadcrumbs",
+		},
+		{ -- inspect symbols
+			"<leader>ia",
+			function()
+				local symbols = require("aerial").get_location()
+				local text = vim.iter(symbols):map(function(loc) return loc.kind end):join(", ")
+				vim.notify(text, nil, { title = "Aerial symbols", icon = "󰙅" })
+			end,
+			desc = "󰙅 Aerial symbols",
 		},
 	},
 	config = function(_, opts)
