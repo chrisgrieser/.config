@@ -127,7 +127,7 @@ vim.opt.fillchars:append {
 }
 -- stylua: ignore
 -- vim.opt.fillchars:append { horiz = "═", vert = "║", horizup = "╩", horizdown = "╦", vertleft = "╣", vertright = "╠", verthoriz = "╬" }
-vim.opt.fillchars:append { horiz = "▄", vert = "█", horizup = "█", horizdown = "█", vertleft = "█", vertright = "█", verthoriz = "█" }
+vim.opt.fillchars:append { horiz = "▄", vert = "█", horizup = "█", horizdown = "▄", vertleft = "█", vertright = "█", verthoriz = "█" }
 
 ---DIAGNOSTICS------------------------------------------------------------------
 vim.diagnostic.config {

@@ -24,8 +24,14 @@ return {
 					conventions = "Any", -- disallow global variables
 				},
 				unusedLocalExclude = { "_*" },
-				disable = { "trailing-space" }, -- formatter already handles that
-				globals = { "vim" }, -- when working on nvim-plugins that lack a `.luarc.json`
+				disable = {
+					-- formatter already handles that
+					"trailing-space",
+					-- don't dim content of unused functions
+					-- (no loss of diagnostic, `unused-local` still informs about these functions)
+					"unused-function",
+				},
+				globals = { "vim" }, -- when working on nvim plugins that lack a `.luarc.json`
 			},
 			codeLens = { -- reference count, `vim.lsp.codelens.refresh`
 				enable = true,

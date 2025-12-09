@@ -27,6 +27,7 @@ return {
 
 			-- plugin-filetypes
 			["leetcode.nvim"] = { glyph = "󰐱" },
+			["aerial"] = { glyph = "󰙅" },
 			["ccc-ui"] = { glyph = "" },
 			["scissors-snippet"] = { glyph = "󰩫" },
 			["rip-substitute"] = { glyph = "" },
