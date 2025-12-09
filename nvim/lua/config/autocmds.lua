@@ -52,16 +52,17 @@ do
 
 	-- format with padding & icon
 	local originalDisplay = vim.lsp.codelens.display
-	vim.lsp.codelens.display = function(lenses, buffer, client_id) ---@diagnostic disable-line: duplicate-set-field
-		for _, lens in ipairs(lenses or {}) do
+	vim.lsp.codelens.display = function(lenses, buffer, clientId) ---@diagnostic disable-line: duplicate-set-field
+		local formattedLenses = vim.iter(lenses or {}):fold({}, function(acc, lens)
 			local title = lens.command and lens.command.title
-			if title then
-				local count = title:match("%d+") or "?"
-				local type = title:gsub("%d+", ""):gsub("references?:?", "  ")
-				lens.command.title = " " .. vim.trim(type) .. " " .. count .. " "
-			end
-		end
-		originalDisplay(lenses, buffer, client_id)
+			if not title then return acc end -- "Unresolved reference..."
+			local count = title:match("%d+") or "?"
+			local type = title:gsub("%d+", ""):gsub("references?:?", "  ")
+			lens.command.title = " " .. vim.trim(type) .. " " .. count .. " "
+			table.insert(acc, lens)
+			return acc
+		end)
+		originalDisplay(formattedLenses, buffer, clientId)
 	end
 end
 

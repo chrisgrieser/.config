@@ -45,7 +45,13 @@ return {
 		},
 	},
 	config = function(_, opts)
-		vim.g.lualineAdd("tabline", "lualine_b", { getBreadcrumbs, icon = "󰙅" })
+		vim.g.lualineAdd("tabline", "lualine_b", {
+			function()
+				local showCrumbs = vim.bo.ft == "json" or vim.bo.ft == "yaml"
+				return showCrumbs and getBreadcrumbs() or ""
+			end,
+			icon = "󰙅",
+		})
 		require("aerial").setup(opts)
 	end,
 	opts = {
