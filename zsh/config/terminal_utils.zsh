@@ -63,27 +63,35 @@ _escape_on_empty_buffer() {
 		zsh -c "$rg_cmd" |
 			eza --stdin --color=always --icons=always --sort=oldest |
 			fzf --ansi --multi --scheme=path --tiebreak=length,end \
-				--info=inline --height="50%" --header="^h: include hidden" \
+				--info=inline --height="50%" \
+				--header="^h: include hidden, ⌘l: reveal in Finder" \
 				--bind="ctrl-h:change-header(including hidden files)+reload($rg_cmd \
 					--hidden --no-ignore --no-ignore-files \
 					--glob='!/.git/' --glob='!node_modules' --glob='!__pycache__' --glob='!.DS_Store' |
-					eza --stdin --color=always --icons=always --sort=oldest)"
+					eza --stdin --color=always --icons=always --sort=oldest)" \
+				--expect="ctrl-l" # remapped in terminal to `cmd+l`
+				
 	)
 	zle reset-prompt
 	[[ -z "$selected" ]] && return 0
+	key_pressed=$(echo "$selected" | head -n1)
+	item="$(echo "$selected" | tail -n1 | cut -c3-)" # `cut` to remove the nerdfont icons
 
-	echo "$selected" | cut -c3- | xargs open # `cut` to remove the nerdfont icons
+	if [[ "$key_pressed" == "ctrl-l" ]]; then
+		open -R "$item"
+	else
+		open "$item"
+	fi
 }
 zle -N _escape_on_empty_buffer
-bindkey '\e' _escape_on_empty_buffer # `esc`
+bindkey '\e' _escape_on_empty_buffer #  `\e` = esc-key
 
 #───────────────────────────────────────────────────────────────────────────────
 
 # SEARCH AND REPLACE VIA `rg`
-# usage: sr "search" "replace" file1 file2 file3
 function sr {
 	if [[ $# -lt 3 ]]; then
-		echo "usage: sr 'search' 'replace' file1 file2 file3"
+		echo "usage: sr [search] [replace] [file|dir|glob]"
 		return 1
 	fi
 

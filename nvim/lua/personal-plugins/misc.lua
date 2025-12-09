@@ -20,6 +20,7 @@ function M.toggleOrIncrement()
 		["right"] = "left",
 		["width"] = "height",
 
+		["min"] = "max",
 		["next"] = "previous",
 		["before"] = "after",
 		["above"] = "below",

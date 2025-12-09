@@ -21,8 +21,7 @@ function man() {
 	lookup=$([[ -f "$builtin_help" && "$command" != "test"  ]] && echo "$builtin_help" || echo "$command")
 	pane_id=$(wezterm cli spawn -- command man "$lookup")
 	
-	# https://wezfurlong.org/wezterm/cli/cli/set-tab-title.html
-	wezterm cli set-tab-title --pane-id="$pane_id" " $command"
+	wezterm cli set-tab-title --pane-id="$pane_id" " $command" # https://wezfurlong.org/wezterm/cli/cli/set-tab-title.html
 }
 
 #───────────────────────────────────────────────────────────────────────────────

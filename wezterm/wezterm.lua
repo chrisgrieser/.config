@@ -50,7 +50,8 @@ end)
 ---TAB TITLE--------------------------------------------------------------------
 -- https://wezfurlong.org/wezterm/config/lua/window-events/format-tab-title.html
 wt.on("format-tab-title", function(tab, _tabs, _panes, _config, _hover, _max_width)
-	local winTitle = tab.tab_title  or tab.active_pane.title -- set e.g. by `nvim` or `yt-dlp --console-title`
+	if tab.tab_title ~= "" then return tab.tab_title end -- set via `wezterm cli set-tab-title`
+	local winTitle = tab.active_pane.title -- set procs like `nvim` or `yt-dlp --console-title`
 	local pane = wt.mux.get_pane(tab.active_pane.pane_id)
 	local cwd = pane:get_current_working_dir().file_path:gsub("^.*/(.*)/$", "%1")
 	local icon = winTitle == "zsh" and "" or ""
