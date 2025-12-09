@@ -1,24 +1,4 @@
----Warn when there are conflicting keymaps
----@param mode string|string[]
----@param lhs string
----@param rhs string|function
----@param opts? { desc?: string, unique?: boolean, remap?: boolean, silent?:boolean }
-local function keymap(mode, lhs, rhs, opts)
-	if not opts then opts = {} end
-
-	-- allow to disable with `unique=false` to overwrite nvim defaults: https://neovim.io/doc/user/vim_diff.html#default-mappings
-	if opts.unique == nil then opts.unique = true end
-
-	-- violating `unique=true` throws an error; using `pcall` to still load other mappings
-	local success, _ = pcall(vim.keymap.set, mode, lhs, rhs, opts)
-	if not success then
-		local modes = type(mode) == "table" and table.concat(mode, ", ") or mode
-		local msg = ("**Duplicate keymap**\n[[%s]] %s"):format(modes, lhs)
-		vim.defer_fn(function() -- defer for notification plugin
-			vim.notify(msg, vim.log.levels.WARN, { title = "User keybindings", timeout = false })
-		end, 1000)
-	end
-end
+local keymap = require("config.utils").uniqueKeymap
 
 ---META-------------------------------------------------------------------------
 
@@ -34,8 +14,6 @@ keymap(
 
 -- stylua: ignore
 keymap("n", "<leader>pd", function() vim.ui.open(vim.fn.stdpath("data") --[[@as string]]) end, { desc = "󰝰 Local data dir" })
--- stylua: ignore
-keymap("n", "<leader>pD", function() vim.ui.open(vim.g.iCloudSync) end, { desc = " Cloud data dir" })
 
 keymap("n", "<D-,>", function()
 	local pathOfThisFile = debug.getinfo(1, "S").source:gsub("^@", "")
@@ -468,21 +446,7 @@ keymap("n", "<leader>od", function()
 	vim.diagnostic.enable(not isEnabled, { bufnr = 0 })
 end, { desc = "󰋽 Diagnostics" })
 
-keymap("n", "<leader>oH", function()
-	local isEnabled = vim.lsp.inlay_hint.is_enabled { bufnr = 0 }
-	vim.lsp.inlay_hint.enable(not isEnabled, { bufnr = 0 })
-end, { desc = "󰋽 Inlay hints" })
-
 -- stylua: ignore
 keymap("n", "<leader>oc", function() vim.wo.conceallevel = vim.wo.conceallevel == 0 and 2 or 0 end, { desc = "󰈉 Conceal" })
-
-keymap("n", "<leader>ol", function()
-	local clients = vim.lsp.get_clients { bufnr = 0 }
-	local names = vim.tbl_map(function(client) return client.name end, clients)
-	local list = "- " .. table.concat(names, "\n- ")
-	vim.notify(list, nil, { title = "Restarting LSPs", icon = "󰑓" })
-	vim.lsp.enable(names, false)
-	vim.lsp.enable(names, true)
-end, { desc = "󰑓 LSP Restart" })
 
 --------------------------------------------------------------------------------

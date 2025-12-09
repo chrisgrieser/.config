@@ -1,6 +1,28 @@
 local M = {}
 --------------------------------------------------------------------------------
 
+---Warn when there are conflicting keymaps
+---@param mode string|string[]
+---@param lhs string
+---@param rhs string|function
+---@param opts? { desc?: string, unique?: boolean, remap?: boolean, silent?:boolean }
+function M.uniqueKeymap(mode, lhs, rhs, opts)
+	if not opts then opts = {} end
+
+	-- allow to disable with `unique=false` to overwrite nvim defaults: https://neovim.io/doc/user/vim_diff.html#default-mappings
+	if opts.unique == nil then opts.unique = true end
+
+	-- violating `unique=true` throws an error; using `pcall` to still load other mappings
+	local success, _ = pcall(vim.keymap.set, mode, lhs, rhs, opts)
+	if not success then
+		local modes = type(mode) == "table" and table.concat(mode, ", ") or mode
+		local msg = ("**Duplicate keymap**\n[[%s]] %s"):format(modes, lhs)
+		vim.defer_fn(function() -- defer for notification plugin
+			vim.notify(msg, vim.log.levels.WARN, { title = "User keybindings", timeout = false })
+		end, 1000)
+	end
+end
+
 ---sets `buffer`, `silent` and `nowait` to true
 ---@param mode string|string[]
 ---@param lhs string

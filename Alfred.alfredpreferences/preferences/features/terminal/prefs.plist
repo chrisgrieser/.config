@@ -26,8 +26,8 @@ on alfred_script(shellCmd)
 	# DETERMINE COMMAND
 	if (text 1 thru 3 of shellCmd) is "cd " then
 		set arg to text 4 thru -1 of shellCmd
-		-- leading space to suppress saving in shell history
-		-- `-q` to suppress post-cd-hook output
+		-- 1. leading space to suppress saving in shell history
+		-- 2. `-q` to suppress post-cd-hook output
 		set shellCmd to " cd -q " &amp; arg &amp; " &amp;&amp; clear"
 	end if
 

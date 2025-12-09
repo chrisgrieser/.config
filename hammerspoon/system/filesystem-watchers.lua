@@ -3,7 +3,7 @@ local M = {}
 
 -- CONFIG
 local home = os.getenv("HOME")
-local browserConfigs = home .. "/.config/browser-extension-configs/"
+local browserConfigs = home .. "/.config/browser-extensions/"
 local backupFolder = home .. "/Library/Mobile Documents/com~apple~CloudDocs/Tech/backups/"
 
 local u = require("meta.utils")

@@ -30,7 +30,7 @@ return {
 			if vim.bo[bufnr].ft == "markdown" then return true end -- always open in markdown
 
 			local symbols = require("aerial").num_symbols(bufnr)
-			local smallFile = vim.api.nvim_buf_line_count(bufnr) < 80
+			local smallFile = vim.api.nvim_buf_line_count(bufnr) < 120
 			local manySymbols = symbols > 8
 			if symbols == 0 then manySymbols = true end -- FIX closing aerial resulting in 0 for buffer
 
