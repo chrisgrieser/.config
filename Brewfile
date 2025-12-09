@@ -33,37 +33,38 @@ cask "betterzip"
 cask "brave-browser"
 cask "espanso"
 cask "font-jetbrains-mono-nerd-font"
+cask "glance-chamburr", postinstall: "xattr -rd com.apple.quarantine /Applications/Glance.app; qlmanage -r; sed -i '' 's/font-size: [0-9][0-9]px/font-size: 20px/' /Applications/Glance.app/Contents/PlugIns/QLPlugin.appex/Contents/Resources/shared-main.css"
+cask "granola"
 cask "hammerspoon", postinstall: 'defaults write org.hammerspoon.Hammerspoon MJConfigFile "$HOME/.config/hammerspoon/init.lua"'
-cask "karabiner-elements"
-cask "microsoft-word"
+cask "karabiner-elementsa"
 cask "monodraw"
 cask "neovide-app"
 cask "obsidian"
 cask "replacicon"
 cask "signal"
 cask "slack"
-cask "wezterm"
-# cask "ghostty"
-cask "granola"
 cask "zoom"
-cask "glance-chamburr", postinstall: "xattr -rd com.apple.quarantine /Applications/Glance.app; qlmanage -r; sed -i '' 's/font-size: [0-9][0-9]px/font-size: 20px/' /Applications/Glance.app/Contents/PlugIns/QLPlugin.appex/Contents/Resources/shared-main.css"
+csk "microsoft-word"
 mas "Mona 6", id: 1659154653
 
+cask "wezterm"
+# cask "ghostty"
 mas "Highlights", id: 1498912833
 # cask "pdf-expert"
+
 #───────────────────────────────────────────────────────────────────────────────
 
 # DEVICE-SPECIFIC INSTALLS
 device = `scutil --get ComputerName`
 
 if device.include?("Home")
-	brew "yt-dlp" ; brew "ffmpeg" # `ffmpeg` recommended for `yt-dlp`
-	cask "catch"
 	cask "bettertouchtool"
+	cask "catch"
+	brew "yt-dlp" ; brew "ffmpeg" # `ffmpeg` recommended for `yt-dlp`
 end
 if device.include?("Home") or device.include?("Mother")
 	cask "iina"
+	cask "qlvideo" # provides preview icons for `.mkv`
 	cask "steam"
 	cask "transmission"
-	cask "qlvideo" # provides preview icons for `.mkv`
 end

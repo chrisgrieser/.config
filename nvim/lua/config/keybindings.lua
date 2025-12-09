@@ -354,6 +354,7 @@ keymap({ "n", "x" }, "<leader>ee", function()
 		or vim.fn.getregion(vim.fn.getpos("."), vim.fn.getpos("v"))[1]
 	return ":lua = " .. selection
 end, { expr = true, desc = "󰢱 Eval lua expr" })
+
 keymap("n", "<leader>ey", function()
 	local cmd = vim.fn.getreg(":")
 	local lastExcmd = cmd:gsub("^lua ", ""):gsub("^= ?", "")
