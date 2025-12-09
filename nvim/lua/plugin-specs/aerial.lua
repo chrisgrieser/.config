@@ -1,12 +1,21 @@
 -- DOCS https://github.com/stevearc/aerial.nvim#options
 --------------------------------------------------------------------------------
 
+local wasClosedManually
+
 return {
 	"stevearc/aerial.nvim",
 	cmd = "AerialToggle",
 	event = "VeryLazy",
 	keys = {
-		{ "<D-0>", "<cmd>AerialToggle!<CR>", desc = " Aerial Toggle" },
+		{
+			"<D-0>",
+			function()
+				vim.g.wasClosedManually = require("aerial").is_open()
+				require("aerial").toggle { focus = false }
+			end,
+			desc = "󱘎 Aerial Toggle",
+		},
 	},
 	opts = {
 		layout = {
@@ -19,11 +28,8 @@ return {
 			if ft == "markdown" then return true end
 			if ft == "yaml" then return false end
 
-			local notManuallyClosed = not require("aerial").was_closed()
-			-- only open files with at least x symbols, and if aerial wasn't manually closed
 			return vim.api.nvim_buf_line_count(bufnr) > 80
 				and require("aerial").num_symbols(bufnr) > 8
-				and notManuallyClosed
 		end,
 		close_automatic_events = { "switch_buffer", "unfocus", "unsupported" },
 
@@ -33,8 +39,15 @@ return {
 			vim.keymap.set("n", "<D-j>", "<cmd>AerialNext<CR>", { buffer = bufnr })
 			vim.keymap.set("n", "<D-k>", "<cmd>AerialPrev<CR>", { buffer = bufnr })
 
-			-- FIX close `aerial` when buffer is closed
-			vim.keymap.set("n", "<D-w>", "<cmd>AerialClose<CR><cmd>bdelete<CR>", { buffer = bufnr })
+			vim.api.nvim_create_autocmd("WinClosed", {
+				desc = "User: Close aerial when win is closed",
+				buffer = bufnr,
+				once = true,
+				callback = function()
+					vim.g.wasClosedManually = false
+					require("aerial").close()
+				end,
+			})
 		end,
 	},
 }
