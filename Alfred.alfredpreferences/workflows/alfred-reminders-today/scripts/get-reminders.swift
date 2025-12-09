@@ -124,7 +124,7 @@ eventStore.requestFullAccessToReminders { granted, error in
 			withDueDateStarting: nil, ending: nil, calendars: selectedCalendars)
 
 	eventStore.fetchReminders(matching: predicate) { reminders in
-		guard let reminders = reminders else {
+		guard let reminders else {
 			print("[]")  // empty json array
 			semaphore.signal()
 			return

@@ -166,7 +166,7 @@ return {
 								I will send you some code, and I want you to simplify
 								the code while not diminishing its readability.
 
-								Keep the indentation level the same, and do not change
+								Keep the indentation level strictly the same, and do not change
 								for formatting style.
 							]]):format(ctx.filetype)
 						end,
