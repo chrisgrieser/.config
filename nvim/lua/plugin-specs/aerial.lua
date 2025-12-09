@@ -29,8 +29,12 @@ return {
 			"<leader>yb",
 			function()
 				local crumbs = getBreadcrumbs()
-				vim.fn.setreg("+", crumbs)
-				vim.notify(crumbs, nil, { title = "Copied", icon = "󰙅", ft = "text" })
+				if crumbs == "" then
+					vim.notify("No breadcrumbs", vim.log.levels.WARN, { icon = "󰙅" })
+				else
+					vim.fn.setreg("+", crumbs)
+					vim.notify(crumbs, nil, { title = "Copied", icon = "󰙅", ft = "text" })
+				end
 			end,
 			desc = "󰙅 Breadcrumbs",
 		},
@@ -45,13 +49,7 @@ return {
 		},
 	},
 	config = function(_, opts)
-		vim.g.lualineAdd("tabline", "lualine_b", {
-			function()
-				local showCrumbs = vim.bo.ft == "json" or vim.bo.ft == "yaml"
-				return showCrumbs and getBreadcrumbs() or ""
-			end,
-			icon = "󰙅",
-		})
+		vim.g.lualineAdd("tabline", "lualine_b", { getBreadcrumbs, icon = "󰙅" })
 		require("aerial").setup(opts)
 	end,
 	opts = {

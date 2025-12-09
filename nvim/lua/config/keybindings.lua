@@ -232,9 +232,10 @@ keymap("n", "P", function()
 end, { desc = " Paste at EoL" })
 
 keymap("i", "<D-v>", function()
-	vim.fn.setreg("+", vim.trim(vim.fn.getreg("+"))) -- trim
+	-- trim, if register is charwise
+	if vim.fn.getregtype("+") == "v" then vim.fn.setreg("+", vim.trim(vim.fn.getreg("+"))) end
 	if vim.fn.mode() == "R" then return "<C-r>+" end
-	return "<C-g>u<C-r><C-o>+" -- `<C-g>u` adds undopoint before the paste
+	return "<C-g>u<C-r><C-o>+" -- `<C-g>u` adds undopoint before the paste, `<C-r><C-o>` skips auto-indent
 end, { desc = " Paste", expr = true })
 
 keymap("n", "<D-v>", "p", { desc = " Paste" }) -- compatibility w/ macOS clipboard managers
