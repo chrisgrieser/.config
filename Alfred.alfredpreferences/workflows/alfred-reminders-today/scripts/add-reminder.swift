@@ -25,13 +25,12 @@ func parseTimeAndPriorityAndMessage(input: String, targetDay: String) -> ParsedR
 	func parseError(_ msg: String) -> ParsedResult {
 		return ParsedResult(hour: nil, minute: nil, msg: "", bangs: "", amPm: "", error: msg)
 	}
-
 	var msg = input
 	var hour: Int?
 	var minute: Int?
 	var amPm = ""
 
-	// parse bangs for priority
+	// PARSE BANGS (PRIORITY)
 	var bangs = ""  // default: no priority
 	let bangRegex = try! Regex("^!{1,3}|!{1,3}$")
 	if let bangMatch = try? bangRegex.firstMatch(in: msg) {
@@ -39,9 +38,9 @@ func parseTimeAndPriorityAndMessage(input: String, targetDay: String) -> ParsedR
 		msg.removeSubrange(bangMatch.range)
 	}
 
-	// parse due time
+	// DUE TIME PATTERNS
 	let hhmmPattern = #"(\d{1,2})[:.](\d{2}) ?(am|pm|AM|PM)?"#
-	let hhPattern = #"(\d{1,2}) ?()(am|pm|AM|PM)"#  // empty capture group so index is consistent
+	let hhPattern = #"(\d{1,2}) ?()(am|pm|AM|PM)"#  // empty 2nd capture group so index is consistent
 	let relativePattern = #"in (\d+) ?(minutes?|hours?|min|m|h)"#
 	let patterns = [  // only match pattern if it is at start or end of input
 		try! Regex("^\(hhmmPattern) "),
@@ -55,48 +54,51 @@ func parseTimeAndPriorityAndMessage(input: String, targetDay: String) -> ParsedR
 	if timeMatch != nil && targetDay == "none" {
 		return parseError("Cannot set a due time for a reminder without due date.")
 	}
+	if timeMatch == nil {  // no time found
+		return ParsedResult(hour: nil, minute: nil, msg: msg, bangs: bangs, amPm: "", error: nil)
+	}
 
-	if let timeMatch {
-		let capture = timeMatch.output.map { $0.substring }
-		let timeString = capture[0]!.trimmingCharacters(in: .whitespacesAndNewlines)
-		let isRelativeTime = timeString.starts(with: "in ")
+	// PARSE DUE TIME
+	let capture = timeMatch!.output.map { $0.substring }
+	let timeString = capture[0]!.trimmingCharacters(in: .whitespacesAndNewlines)
+	let isRelativeTime = timeString.starts(with: "in ")
 
-		if isRelativeTime {
-			guard targetDay == "0" else {
-				return parseError("Relative times are only supported for today.")
-			}
-			var inXmins = Int(capture[1]!)!
-			let unit = capture[2]!.starts(with: "m") ? "minutes" : "hours"
-			if unit == "hours" { inXmins *= 60 }
-
-			let now = Date()
-			let dueTime = Calendar.current.date(byAdding: .minute, value: inXmins, to: now)!
-			let dueTimeComps = Calendar.current.dateComponents([.day, .hour, .minute], from: dueTime)
-			let today = Calendar.current.dateComponents([.day], from: now).day
-			guard dueTimeComps.day == today else {
-				return parseError("Can't set a relative time that goes beyond today.")
-			}
-			hour = dueTimeComps.hour
-			minute = dueTimeComps.minute
-			amPm = ""
-		} else {
-			hour = Int(capture[1]!)
-			minute = capture[2]!.isEmpty ? 0 : Int(capture[2]!)  // empty capture group in `hhPattern`
-			amPm = (capture[3] ?? "").lowercased()
+	if isRelativeTime {
+		guard targetDay == "0" else {
+			return parseError("Relative times are only supported for today.")
 		}
+		var inXmins = Int(capture[1]!)!
+		let unit = capture[2]!.starts(with: "m") ? "minutes" : "hours"
+		if unit == "hours" { inXmins *= 60 }
+
+		let now = Date()
+		let dueTime = Calendar.current.date(byAdding: .minute, value: inXmins, to: now)!
+		let dueTimeComps = Calendar.current.dateComponents([.day, .hour, .minute], from: dueTime)
+		let today = Calendar.current.dateComponents([.day], from: now).day
+		guard dueTimeComps.day == today else {
+			return parseError("Can't set a relative time that goes beyond today.")
+		}
+		hour = dueTimeComps.hour
+		minute = dueTimeComps.minute
+		amPm = ""
+	} else {
+		// absolute time
+		hour = Int(capture[1]!)
+		minute = capture[2]!.isEmpty ? 0 : Int(capture[2]!)  // empty capture group in `hhPattern`
+		amPm = (capture[3] ?? "").lowercased()
 
 		let hasAmPm = !amPm.isEmpty
 		guard
 			(0..<60).contains(minute!)
 				&& ((!hasAmPm && (0..<24).contains(hour!)) || (hasAmPm && (1..<13).contains(hour!)))
 		else { return parseError("Invalid time: \"\(timeString)\"") }
+
 		if amPm == "pm" && hour != 12 { hour! += 12 }
 		if amPm == "am" && hour == 12 { hour = 0 }
-
-		msg.removeSubrange(timeMatch.range)
-		msg = msg.trimmingCharacters(in: .whitespacesAndNewlines)
 	}
 
+	msg.removeSubrange(timeMatch!.range)
+	msg = msg.trimmingCharacters(in: .whitespacesAndNewlines)
 	return ParsedResult(hour: hour, minute: minute, msg: msg, bangs: bangs, amPm: amPm, error: nil)
 }
 
