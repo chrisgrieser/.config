@@ -52,6 +52,9 @@ local ensureInstalled = {
 		"js-debug-adapter", -- js/ts
 		"local-lua-debugger-vscode", -- lua
 	},
+	other = {
+		"tree-sitter-cli", -- used by nvim-treesitter to install parsers
+	}
 }
 
 local nonMasonLsps = {
@@ -154,7 +157,7 @@ return {
 		vim.env.npm_config_cache = vim.env.HOME .. "/.cache/npm" -- don't crowd $HOME with `.npm` folder
 		require("mason").setup(opts)
 		enableLsps()
-		vim.defer_fn(syncPackages, 4000)
+		vim.defer_fn(syncPackages, 2000)
 	end,
 	opts = {
 		registries = {

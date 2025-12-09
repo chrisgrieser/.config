@@ -68,7 +68,7 @@ return {
 		-- auto-install parsers
 		if vim.fn.executable("tree-sitter") == 1 then
 			local parsersToInstall = vim.iter(vim.tbl_values(ensureInstalled)):flatten():totable()
-			vim.defer_fn(function() require("nvim-treesitter").install(parsersToInstall) end, 1000)
+			vim.defer_fn(function() require("nvim-treesitter").install(parsersToInstall) end, 3000)
 		else
 			local msg = "`tree-sitter-cli` not found. Skipping auto-install of parsers."
 			vim.notify(msg, vim.log.levels.WARN, { title = "Treesitter" })

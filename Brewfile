@@ -9,7 +9,7 @@ brew "gh"
 brew "git-delta"
 brew "just"
 brew "mas"
-brew "neovim" ; brew "tree-sitter-cli" # `nvim-treesitter` requires the cli
+brew "neovim"
 brew "node"
 brew "pandoc"
 brew "pass"

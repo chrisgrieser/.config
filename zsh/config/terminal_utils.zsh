@@ -64,7 +64,7 @@ _escape_on_empty_buffer() {
 			eza --stdin --color=always --icons=always --sort=oldest |
 			fzf --ansi --multi --scheme=path --tiebreak=length,end \
 				--info=inline --height="50%" \
-				--header="^h: include hidden, ⌘l: reveal in Finder" \
+				--header="^H: include hidden, ⌘L: reveal in Finder" \
 				--bind="ctrl-h:change-header(including hidden files)+reload($rg_cmd \
 					--hidden --no-ignore --no-ignore-files \
 					--glob='!/.git/' --glob='!node_modules' --glob='!__pycache__' --glob='!.DS_Store' |
