@@ -49,7 +49,7 @@ return {
 				showOnlyTimeIfAuthor = { "🤖 automated" },
 				maxMsgLen = 72,
 			},
-			-- fileState = { icon = "" },
+			fileState = { icon = "" },
 		},
 	},
 	config = function(_, opts)

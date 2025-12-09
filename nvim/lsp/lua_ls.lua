@@ -19,16 +19,13 @@ return {
 				inferParamType = true, -- unannotated params are inferred instead of `any`
 			},
 			diagnostics = {
-				groupFileStatus = { ["luadoc"] = "Any" }, -- require stricter annotations
-				unusedLocalExclude = { "_*" },
-				disable = {
-					-- formatter already handles that
-					"trailing-space",
-					-- don't dim content of unused functions
-					-- (no loss of diagnostic, `unused-local` still informs about these functions)
-					"unused-function",
+				groupFileStatus = {
+					luadoc = "Any", -- require stricter annotations
+					conventions = "Any", -- disallow global variables
 				},
-				globals = { "vim" }, -- when working on nvim plugins that lack a `.luarc.json`
+				unusedLocalExclude = { "_*" },
+				disable = { "trailing-space" }, -- formatter already handles that
+				globals = { "vim" }, -- when working on nvim-plugins that lack a `.luarc.json`
 			},
 			codeLens = { -- reference count, `vim.lsp.codelens.refresh`
 				enable = true,

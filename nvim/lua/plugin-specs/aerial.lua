@@ -1,8 +1,6 @@
 -- DOCS https://github.com/stevearc/aerial.nvim#options
 --------------------------------------------------------------------------------
 
-local wasClosedManually
-
 return {
 	"stevearc/aerial.nvim",
 	cmd = "AerialToggle",
@@ -11,7 +9,7 @@ return {
 		{
 			"<D-0>",
 			function()
-				wasClosedManually = require("aerial").is_open()
+				vim.b.aerialWasManuallyClosed = require("aerial").is_open()
 				require("aerial").toggle { focus = false }
 			end,
 			desc = "󱘎 Aerial Toggle",
@@ -34,7 +32,7 @@ return {
 			local manySymbols = symbols >= 10
 			if symbols == 0 then manySymbols = true end -- FIX closing aerial resulting in 0 for buffer
 
-			return (not smallFile) and manySymbols and not wasClosedManually
+			return (not smallFile) and manySymbols and not vim.b[bufnr].aerialWasManuallyClosed
 		end,
 		close_automatic_events = { "switch_buffer", "unfocus", "unsupported" },
 
@@ -49,7 +47,7 @@ return {
 				buffer = bufnr,
 				once = true,
 				callback = function()
-					wasClosedManually = false
+					vim.b[bufnr].aerialWasManuallyClosed = false
 					require("aerial").close()
 				end,
 			})
