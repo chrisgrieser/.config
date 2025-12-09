@@ -3,7 +3,7 @@
 # CONFIG
 location_of_this_file="$(dirname "$0")"
 vocab_source="$location_of_this_file/n5.json"
-output="romaji"
+output="hiragana" # romaji|hiragana
 
 #-------------------------------------------------------------------------------
 
@@ -17,11 +17,11 @@ word=$(jq ".[$random_num]" "$vocab_source")
 if [[ $output == "romaji" ]]; then
 	romaji=$(echo "$word" | jq -r ".romaji" | sed 's_ / _/_g')
 	japanese="$romaji:"
-	english=$(echo "$word" | jq -r ".meaning" | cut -d"," -f1)
 else
 	hiragana=$(echo "$word" | jq -r ".furigana")
 	kanji_or_katakana=$(echo "$word" | jq -r ".word")
 	japanese=${hiragana:-$kanji_or_katakana}
 fi
+english=$(echo "$word" | jq -r ".meaning" | cut -d"," -f1)
 
 sketchybar --set "$NAME" label="$japanese $english"

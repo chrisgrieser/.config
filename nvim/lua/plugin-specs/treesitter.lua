@@ -11,7 +11,7 @@ local ensureInstalled = {
 		"typescript",
 		"lua",
 		"python",
-		"ruby", -- used by Brewfile
+		"ruby", -- used by `Brewfile`
 		"rust",
 		"svelte",
 		"swift",
@@ -39,7 +39,7 @@ local ensureInstalled = {
 		"gitignore",
 		"just",
 		"query", -- treesitter query files (.scm)
-		"requirements", -- pip requirements file
+		"requirements", -- python's `requirements.txt`
 	},
 	embeddedLangs = {
 		"comment",
@@ -48,8 +48,7 @@ local ensureInstalled = {
 		"luadoc",
 		"luap", -- lua patterns
 		"regex",
-		"rst", -- for python
-		"vimdoc",
+		"vimdoc", -- `:help` files
 	},
 }
 
@@ -68,7 +67,7 @@ return {
 		-- auto-install parsers
 		if vim.fn.executable("tree-sitter") == 1 then
 			local parsersToInstall = vim.iter(vim.tbl_values(ensureInstalled)):flatten():totable()
-			vim.defer_fn(function() require("nvim-treesitter").install(parsersToInstall) end, 3000)
+			vim.defer_fn(function() require("nvim-treesitter").install(parsersToInstall) end, 2000)
 		else
 			local msg = "`tree-sitter-cli` not found. Skipping auto-install of parsers."
 			vim.notify(msg, vim.log.levels.WARN, { title = "Treesitter" })
@@ -82,7 +81,7 @@ return {
 				local hasStarted = pcall(vim.treesitter.start, ctx.buf) -- errors for filetypes with no parser
 
 				-- indent
-				local dontUseTreesitterIndent = { "bash", "zsh", "markdown", "javascript" }
+				local dontUseTreesitterIndent = { "bash", "markdown", "javascript" }
 				if hasStarted and not vim.list_contains(dontUseTreesitterIndent, ctx.match) then
 					vim.bo[ctx.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
 				end
