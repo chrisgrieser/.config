@@ -17,6 +17,14 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 	end,
 })
 
+vim.api.nvim_create_autocmd({ "BufWinEnter", "WinEnter", "WinLeave" }, {
+	desc = "User: Cursorline only in active window",
+	callback = function(ctx)
+		if vim.bo[ctx.buf].buftype ~= "" then return end
+		vim.opt_local.cursorline = ctx.event ~= "WinLeave"
+	end,
+})
+
 -- https://github.com/neovim/neovim/issues/26449#issuecomment-1845293096
 -- using an insert-mode mapping on `esc` breaks `:abbreviate`, and `InsertLeave`
 -- also does not work

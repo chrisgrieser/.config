@@ -11,7 +11,7 @@ return {
 		{
 			"<D-0>",
 			function()
-				vim.g.wasClosedManually = require("aerial").is_open()
+				wasClosedManually = require("aerial").is_open()
 				require("aerial").toggle { focus = false }
 			end,
 			desc = "󱘎 Aerial Toggle",
@@ -24,12 +24,17 @@ return {
 			win_opts = { winhighlight = "Normal:ColorColumn" },
 		},
 		open_automatic = function(bufnr)
-			local ft = vim.bo[bufnr].filetype
-			if ft == "markdown" then return true end
-			if ft == "yaml" then return false end
+			local narrowWin = vim.api.nvim_win_get_width(0) < vim.o.textwidth
+			if narrowWin then return false end
+			if vim.bo[bufnr].ft == "yaml" then return false end
+			if vim.bo[bufnr].ft == "markdown" then return true end -- always open in markdown
 
-			return vim.api.nvim_buf_line_count(bufnr) > 80
-				and require("aerial").num_symbols(bufnr) > 8
+			local symbols = require("aerial").num_symbols(bufnr)
+			local smallFile = vim.api.nvim_buf_line_count(bufnr) < 80
+			local manySymbols = symbols > 8
+			if symbols == 0 then manySymbols = true end -- FIX closing aerial resulting in 0 for buffer
+
+			return not smallFile and manySymbols and not wasClosedManually
 		end,
 		close_automatic_events = { "switch_buffer", "unfocus", "unsupported" },
 
@@ -44,7 +49,7 @@ return {
 				buffer = bufnr,
 				once = true,
 				callback = function()
-					vim.g.wasClosedManually = false
+					wasClosedManually = false
 					require("aerial").close()
 				end,
 			})
