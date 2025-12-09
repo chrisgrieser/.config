@@ -34,15 +34,15 @@ return {
 			local manySymbols = symbols > 8
 			if symbols == 0 then manySymbols = true end -- FIX closing aerial resulting in 0 for buffer
 
-			return not smallFile and manySymbols and not wasClosedManually
+			return (not smallFile) and manySymbols and not wasClosedManually
 		end,
 		close_automatic_events = { "switch_buffer", "unfocus", "unsupported" },
 
 		post_parse_symbol = function(_bufnr, item, _ctx) return item.name ~= "callback" end,
 
 		on_attach = function(bufnr)
-			vim.keymap.set("n", "<D-j>", "<cmd>AerialNext<CR>", { buffer = bufnr })
-			vim.keymap.set("n", "<D-k>", "<cmd>AerialPrev<CR>", { buffer = bufnr })
+			vim.keymap.set("n", "<C-j>", vim.cmd.AerialNext, { buffer = bufnr })
+			vim.keymap.set("n", "<C-k>", vim.cmd.AerialPrev, { buffer = bufnr })
 
 			vim.api.nvim_create_autocmd("WinClosed", {
 				desc = "User: Close aerial when win is closed",
