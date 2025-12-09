@@ -88,6 +88,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>DBB52345-766C-4EA1-81C2-20E30FBE25F0</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>29D763E3-99DA-42EC-A264-3AA565CDC0F6</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 	</dict>
 	<key>createdby</key>
 	<string>Chris Grieser</string>
@@ -109,7 +122,7 @@
 				<key>fixedorder</key>
 				<false/>
 				<key>items</key>
-				<string>[{"imagefile":"efb8cca57e4d67981a976010a2d2953e2aec83c5.png","title":"AltTab","arg":"AltTab","subtitle":""},{"imagefile":"31e8e84684405b35c7896380a515cd49fc250b5e.png","title":"Hammerspoon","arg":"hammerspoon_reload","subtitle":"🔁 reload"},{"imagefile":"31e8e84684405b35c7896380a515cd49fc250b5e.png","title":"Hammerspoon","arg":"Hammerspoon","subtitle":""},{"imagefile":"91a15ef6185b87dc073439ce4b7f2b120c5bfdca.png","title":"sketchybar","arg":"sketchybar","subtitle":"🔁 reload"},{"imagefile":"80cebc78d376b7946a2ab63288812da45a1764b3.png","title":"espanso","arg":"espanso","subtitle":""},{"title":"Front app","arg":"front_app"}]</string>
+				<string>[{"imagefile":"efb8cca57e4d67981a976010a2d2953e2aec83c5.png","title":"AltTab","arg":"AltTab","subtitle":""},{"imagefile":"31e8e84684405b35c7896380a515cd49fc250b5e.png","title":"Hammerspoon","arg":"hammerspoon_reload","subtitle":"🔁 reload"},{"imagefile":"31e8e84684405b35c7896380a515cd49fc250b5e.png","title":"Hammerspoon","arg":"Hammerspoon","subtitle":""},{"imagefile":"91a15ef6185b87dc073439ce4b7f2b120c5bfdca.png","title":"sketchybar","arg":"sketchybar","subtitle":"🔁 reload"},{"imagefile":"80cebc78d376b7946a2ab63288812da45a1764b3.png","title":"espanso","arg":"espanso","subtitle":""}]</string>
 				<key>matchmode</key>
 				<integer>2</integer>
 				<key>runningsubtext</key>
@@ -200,6 +213,43 @@
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
 			<string>29D763E3-99DA-42EC-A264-3AA565CDC0F6</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>3</integer>
+				<key>argumenttext</key>
+				<string>front_app</string>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>15</integer>
+				<key>hotmod</key>
+				<integer>1835008</integer>
+				<key>hotstring</key>
+				<string>R</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>2</integer>
+				<key>relatedApps</key>
+				<array>
+					<string>com.neovide.neovide</string>
+				</array>
+				<key>relatedAppsMode</key>
+				<integer>2</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>DBB52345-766C-4EA1-81C2-20E30FBE25F0</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -303,8 +353,6 @@
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
-			<key>note</key>
-			<string>background apps</string>
 			<key>xpos</key>
 			<real>190</real>
 			<key>ypos</key>
@@ -319,7 +367,7 @@
 			<key>xpos</key>
 			<real>350</real>
 			<key>ypos</key>
-			<real>185</real>
+			<real>330</real>
 		</dict>
 		<key>29D763E3-99DA-42EC-A264-3AA565CDC0F6</key>
 		<dict>
@@ -328,9 +376,9 @@
 			<key>note</key>
 			<string>restart</string>
 			<key>xpos</key>
-			<real>350</real>
+			<real>385</real>
 			<key>ypos</key>
-			<real>20</real>
+			<real>95</real>
 		</dict>
 		<key>6594A058-1046-48E9-82E3-FE0574D679D5</key>
 		<dict>
@@ -339,7 +387,7 @@
 			<key>xpos</key>
 			<real>190</real>
 			<key>ypos</key>
-			<real>155</real>
+			<real>300</real>
 		</dict>
 		<key>96BEB152-706D-407E-882B-113E7E4821F5</key>
 		<dict>
@@ -350,12 +398,14 @@
 			<key>xpos</key>
 			<real>430</real>
 			<key>ypos</key>
-			<real>155</real>
+			<real>300</real>
 		</dict>
 		<key>BAFA567E-AAFC-4283-8B06-4CBCE296FA81</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
+			<key>note</key>
+			<string>background apps</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
@@ -370,16 +420,27 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>155</real>
+			<real>300</real>
+		</dict>
+		<key>DBB52345-766C-4EA1-81C2-20E30FBE25F0</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>note</key>
+			<string>frontmost app</string>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>160</real>
 		</dict>
 		<key>E5141743-4533-4E28-A3EC-2E2A98659185</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>505</real>
+			<real>540</real>
 			<key>ypos</key>
-			<real>20</real>
+			<real>95</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

@@ -24,20 +24,14 @@ return {
 	},
 	opts = {
 		commit = {
-			keepAbortedMsgSecs = 60 * 10, -- 10 mins
+			keepAbortedMsgSecs = 60 * 10,
 			spellcheck = true,
 			preview = { loglines = 4 },
 			keymapHints = false,
 			subject = {
 				autoFormat = function(subject)
-					-- remove trailing dot https://commitlint.js.org/reference/rules.html#body-full-stop
-					subject = subject:gsub("%.$", "")
-
-					-- ensure title is lowercased
-					subject = subject
-						:gsub("^(%w+: )(.)", function(c1, c2) return c1 .. c2:lower() end) -- no scope
-						:gsub("^(%w+%b(): )(.)", function(c1, c2) return c1 .. c2:lower() end) -- with scope
-					return subject
+					-- remove trailing `.` & lowercase title
+					return subject:gsub("%.$", ""):gsub(": %u", string.lower)
 				end,
 				enforceType = true,
 			},
@@ -53,9 +47,9 @@ return {
 			blame = {
 				hideAuthorNames = { "Chris Grieser", "chrisgrieser" },
 				showOnlyTimeIfAuthor = { "🤖 automated" },
-				maxMsgLen = 50,
+				maxMsgLen = 72,
 			},
-			fileState = { icon = "" },
+			-- fileState = { icon = "" },
 		},
 	},
 	config = function(_, opts)

@@ -47,7 +47,7 @@ end
 ---COMMANDS---------------------------------------------------------------------
 
 ---add horizontal line with the language's comment syntax and correctly indented
----@param replaceModeLabel "replaceModeLabel"|nil
+---@param replaceModeLabel any|nil
 function M.commentHr(replaceModeLabel)
 	local comStr = getCommentstr()
 	if not comStr then return end

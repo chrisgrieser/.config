@@ -31,7 +31,7 @@ return {
 
 			local symbols = require("aerial").num_symbols(bufnr)
 			local smallFile = vim.api.nvim_buf_line_count(bufnr) < 120
-			local manySymbols = symbols > 8
+			local manySymbols = symbols >= 10
 			if symbols == 0 then manySymbols = true end -- FIX closing aerial resulting in 0 for buffer
 
 			return (not smallFile) and manySymbols and not wasClosedManually

@@ -123,20 +123,11 @@ end
 --------------------------------------------------------------------------------
 -- APP UTILS
 
----get exact appObject, avoiding the imprecision of hs.application(appname)
----@param appName string (literal & exact match)
----@return hs.application? nil if not found
+---get appObject based on literal string (`hs.application(appname)` uses pattern)
+---@param appName string literal match
+---@return hs.application|nil
 ---@nodiscard
-function M.app(appName)
-	-- FIX neovide and wezterm have differing CLI and app names
-	if appName:find("[Nn]eovide") then
-		return hs.application.find("^[Nn]eovide$")
-	elseif appName:find("[wW]ezterm") then
-		return hs.application.find("^[Ww]ezterm%-?g?u?i?$")
-	end
-
-	return hs.application.find(appName, true, true)
-end
+function M.app(appName) return hs.application.find(appName, true, true) end
 
 ---@param appNames string|string[] app or apps that should be checked
 ---@return boolean true when *one* of the apps is frontmost

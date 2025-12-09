@@ -43,8 +43,7 @@ function M.setDarkMode(toMode)
 	hs.osascript.applescript(applescript)
 
 	-- sketchybar
-	-- hs.execute(u.exportPath .. "sketchybar --reload")
-	hs.execute(u.exportPath .. "brew services restart sketchybar")
+	hs.execute(u.exportPath .. "sketchybar --reload")
 
 	-- PDF background
 	if u.appRunning("PDF Expert") then

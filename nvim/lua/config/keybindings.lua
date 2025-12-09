@@ -271,7 +271,7 @@ end
 
 -- stylua: ignore start
 keymap("n", "qw", function() require("personal-plugins.comment").commentHr() end, { desc = "󰆈 Horizontal divider" })
-keymap("n", "qr", function() require("personal-plugins.comment").commentHr("replaceModeLabel") end, { desc = "󰆈 Horizontal divider w/ label" })
+keymap("n", "qr", function() require("personal-plugins.comment").commentHr("replaceMode") end, { desc = "󰆈 Horizontal divider w/ label" })
 keymap("n", "wq", function() require("personal-plugins.comment").duplicateLineAsComment() end, { desc = "󰆈 Duplicate line as comment" })
 keymap("n", "qf", function() require("personal-plugins.comment").docstring() end, { desc = "󰆈 Function docstring" })
 keymap("n", "Q", function() require("personal-plugins.comment").addComment("eol") end, { desc = "󰆈 Add comment at EoL" })
