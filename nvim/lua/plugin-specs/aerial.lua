@@ -14,19 +14,38 @@ return {
 			end,
 			desc = "󱘎 Aerial Toggle",
 		},
+		{
+			"<leader>ia",
+			function()
+				local symbols = require("aerial").get_location()
+				local text = vim.iter(symbols):map(function(loc) return loc.kind end):join(", ")
+				vim.notify(text, nil, { title = "Aerial Symbols", icon = "󱘎" })
+			end,
+			desc = "󱘎 Aerial symbols",
+		},
 	},
+	config = function(_, opts)
+		vim.g.lualineAdd("tabline", "lualine_b", {
+			"aerial",
+			dense_sep = ".",
+			dense = true,
+			colored = false,
+			icon = "󰙅",
+			-- remove aerial's symbol & enclose array with []
+			fmt = function(str) return str:gsub("^.* ", ""):gsub("%.(%d+)", "[%1]") end,
+		})
+		require("aerial").setup(opts)
+	end,
 	opts = {
+		backends = {
+			yaml = { "lsp", "treesitter" },
+		},
+		icons = { Collapsed = "▶" }, -- fix indent
 		filter_kind = {
-			yaml = {
-				"Array",
-				"Key",
-				"Object",
-				"Field",
-				"Property",
-			}
+			-- _ = { "Array", "Boolean", "Class", "Constant", "Constructor", "Enum", "EnumMember", "Event", "Field", "File", "Function", "Interface", "Key", "Method", "Module", "Namespace", "Null", "Number", "Object", "Operator", "Package", "Property", "String", "Struct", "TypeParameter", "Variable" },
+			yaml = { "Array", "Module" },
 		},
 		layout = {
-			default_direction = "prefer_right",
 			min_width = vim.o.columns - vim.o.textwidth - 4,
 			win_opts = { winhighlight = "Normal:ColorColumn" },
 		},
