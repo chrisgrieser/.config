@@ -244,13 +244,11 @@ function M.smartDuplicate()
 
 	-- filetype-specific tweaks
 	if ft == "css" then
+		-- stylua: ignore
 		line = line:gsub("(%a+):", {
-			top = "bottom",
-			bottom = "top",
-			right = "left",
-			left = "right",
-			light = "dark",
-			dark = "light",
+			top = "bottom", bottom = "top",
+			right = "left", left = "right",
+			light = "dark", dark = "light",
 		})
 	elseif ft == "javascript" or ft == "typescript" or ft == "swift" then
 		line = line:gsub("^(%s*)if(.+{)$", "%1} else if%2")
@@ -260,7 +258,7 @@ function M.smartDuplicate()
 		line = line:gsub("^(%s*)if( .* then)$", "%1elif%2")
 	elseif ft == "python" then
 		line = line:gsub("^(%s*)if( .*:)$", "%1elif%2")
-	elseif ft == "markdown" then
+	elseif ft == "markdown" or ft == "text" then
 		line = line:gsub("^(%s*)(%d+)%. ", function(indent, num)
 			local increment = tonumber(num) + 1
 			return indent .. increment .. ". "

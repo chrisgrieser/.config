@@ -3,7 +3,7 @@ return {
 	event = "VeryLazy",
 	opts = {
 		current_only = true,
-		winblend = 10, -- only little transparency, since otherwise hard to see in some themes
+		winblend = 30, -- only little transparency, since otherwise hard to see in some themes
 		handlers = {
 			cursor = { enable = false },
 			marks = {

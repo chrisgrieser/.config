@@ -26,8 +26,8 @@ keymap({ "n", "x" }, "j", "gj")
 keymap({ "n", "x" }, "k", "gk")
 
 -- make HJKL behave like hjkl but bigger with distance
-keymap({ "n", "x" }, "J", "6gj", { desc = "6j" })
-keymap({ "n", "x" }, "K", "6gk", { desc = "6k" })
+keymap({ "n", "x" }, "J", "6gj")
+keymap({ "n", "x" }, "K", "6gk")
 
 -- Jump history
 keymap("n", "<C-h>", "<C-o>", { desc = "󱋿 Jump back" })
@@ -172,7 +172,7 @@ keymap("n", "zr", "zR", { desc = "󰘖 Open all folds" })
 -- stylua: ignore
 keymap("n", "zf", function() vim.opt.foldlevel = vim.v.count1 end, { desc = " Set fold level to {count}" })
 
----CLIPBOARD--------------------------------------------------------------------
+---YANKING----------------------------------------------------------------------
 -- Sticky yank
 do
 	keymap({ "n", "x" }, "y", function()
@@ -224,22 +224,25 @@ keymap("n", "dd", function()
 	return (lineEmpty and '"_dd' or "dd")
 end, { expr = true })
 
--- pasting
+---PASTING----------------------------------------------------------------------
 keymap("n", "P", function()
 	local curLine = vim.api.nvim_get_current_line():gsub("%s*$", "")
 	local reg = vim.trim(vim.fn.getreg("+"))
 	vim.api.nvim_set_current_line(curLine .. " " .. reg)
 end, { desc = " Paste at EoL" })
 
+-- insert mode paste
+-- 1. trim if register is charwise
+-- 2. add undopoint before the paste
+-- 3. skip auto-indent
 keymap("i", "<D-v>", function()
-	-- trim, if register is charwise
-	if vim.fn.getregtype("+") == "v" then vim.fn.setreg("+", vim.trim(vim.fn.getreg("+"))) end
+	local isCharwise = vim.fn.getregtype("+") == "v"
+	if isCharwise then vim.fn.setreg("+", vim.trim(vim.fn.getreg("+"))) end
 	if vim.fn.mode() == "R" then return "<C-r>+" end
 	return "<C-g>u<C-r><C-o>+" -- `<C-g>u` adds undopoint before the paste, `<C-r><C-o>` skips auto-indent
 end, { desc = " Paste", expr = true })
 
 keymap("n", "<D-v>", "p", { desc = " Paste" }) -- compatibility w/ macOS clipboard managers
-keymap("n", "qp", "R<C-r>+<Esc>", { desc = " Paste replacing" })
 
 ---TEXTOBJECTS------------------------------------------------------------------
 local textobjRemaps = {
@@ -441,7 +444,6 @@ end
 
 keymap("n", "<leader>on", "<cmd>set number!<CR>", { desc = " Line numbers" })
 keymap("n", "<leader>ow", "<cmd>set wrap!<CR>", { desc = "󰖶 Wrap" })
-keymap("n", "<leader>os", "<cmd>set spell!<CR>", { desc = "󰓆 Spellcheck" })
 
 keymap("n", "<leader>od", function()
 	local isEnabled = vim.diagnostic.is_enabled { bufnr = 0 }
@@ -450,5 +452,14 @@ end, { desc = "󰋽 Diagnostics" })
 
 -- stylua: ignore
 keymap("n", "<leader>oc", function() vim.wo.conceallevel = vim.wo.conceallevel == 0 and 2 or 0 end, { desc = "󰈉 Conceal" })
+
+keymap("n", "<leader>ol", function()
+	local clients = vim.lsp.get_clients { bufnr = 0 }
+	local names = vim.tbl_map(function(client) return client.name end, clients)
+	local list = "- " .. table.concat(names, "\n- ")
+	vim.notify(list, nil, { title = "Restarting LSPs", icon = "󰑓" })
+	vim.lsp.enable(names, false)
+	vim.lsp.enable(names, true)
+end, { desc = "󰑓 LSP Restart" })
 
 --------------------------------------------------------------------------------

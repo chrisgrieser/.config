@@ -9,6 +9,7 @@ optl.commentstring = "<!-- %s -->" -- add spaces
 -- so two trailing spaces are highlighted, but not a single trailing space
 optl.listchars:remove("trail")
 optl.listchars:append { multispace = "·" }
+optl.sidescrolloff = 3 -- lower, since we rarely go beyond textwidth
 
 bkeymap("n", "<leader>rt", "vip:!pandoc --to=gfm<CR>", { desc = " Format table under cursor" })
 
