@@ -45,8 +45,8 @@ cask "slack"
 cask "wezterm"
 cask "granola"
 cask "zoom"
-cask "pdf-expert"
 cask "glance-chamburr", postinstall: "xattr -rd com.apple.quarantine /Applications/Glance.app; qlmanage -r; sed -i '' 's/font-size: [0-9][0-9]px/font-size: 20px/' /Applications/Glance.app/Contents/PlugIns/QLPlugin.appex/Contents/Resources/shared-main.css"
+mas "Highlights", id: 1498912833
 mas "Mona 6", id: 1659154653
 
 #───────────────────────────────────────────────────────────────────────────────

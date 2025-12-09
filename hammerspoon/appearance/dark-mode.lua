@@ -44,8 +44,13 @@ function M.setDarkMode(toMode)
 
 	-- sketchybar
 	hs.execute(u.exportPath .. "sketchybar --reload")
+	-- hs.execute(u.exportPath .. "brew services restart sketchybar")
 
 	-- PDF background
+	if u.appRunning("Highlights") then
+		local pdfBg = toMode == "light" and "Default" or "Night"
+		u.app("Highlights"):selectMenuItem { "View", "PDF Appearance", pdfBg }
+	end
 	if u.appRunning("PDF Expert") then
 		local pdfBg = toMode == "light" and "Day" or "Night"
 		u.app("PDF Expert"):selectMenuItem { "View", "Theme", pdfBg }
