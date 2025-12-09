@@ -216,8 +216,8 @@ rules:
       - type: basic
         from: *revealInFinder
         to:
-          # only 60%, since usually slightly to the left
-          - software_function: { set_mouse_cursor_position: { x: 60%, y: 1%, screen: 0 } }
+          # on macOS Tahoe with pseudo-maximized window, position is ~30%
+          - software_function: { set_mouse_cursor_position: { x: 30%, y: 1%, screen: 0 } }
           - pointing_button: button2
           - key_code: down_arrow
           - key_code: return_or_enter

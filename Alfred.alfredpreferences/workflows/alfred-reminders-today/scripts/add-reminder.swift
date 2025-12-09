@@ -53,7 +53,7 @@ func parseTimeAndPriorityAndMessage(input: String, targetDay: String) -> ParsedR
 	]
 	let timeMatch = patterns.compactMap { try? $0.firstMatch(in: msg) }.first
 	if timeMatch != nil && targetDay == "none" {
-		return parseError("Cannot set a due time for a reminder without a target day.")
+		return parseError("Cannot set a due time for a reminder without due date.")
 	}
 
 	if let timeMatch {

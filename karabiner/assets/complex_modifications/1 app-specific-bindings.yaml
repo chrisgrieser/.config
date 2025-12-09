@@ -224,7 +224,7 @@ rules:
         to:
           - shell_command: |
               osascript -l JavaScript -e '
-                const currentDoc = Application("Script Editor").documents()[0]
+                const currentDoc = Application("Script Editor").documents()[0];
                 const currentLang = currentDoc.language().name();
                 const otherLang = currentLang === "AppleScript" ? "JavaScript" : "AppleScript";
                 const otherLangObj = Application("Script Editor").languages.byName(otherLang);
@@ -233,14 +233,4 @@ rules:
               '
         conditions:
           - { type: frontmost_application_if, bundle_identifiers: [com.apple.ScriptEditor] }
-  #─────────────────────────────────────────────────────────────────────────────
-  - description: "(Apps) Ghostty"
-    manipulators:
-      # FIX `cmd+,` opening in Textedit even though Neovide is the default app
-      - type: basic
-        from: { key_code: comma, modifiers: { mandatory: [command] } }
-        to:
-          - shell_command: open "$HOME/.config/ghostty/config"
-        conditions:
-          - { type: frontmost_application_if, bundle_identifiers: [com.mitchellh.ghostty] }
   #───────────────────────────────────────────────────────────────────────
