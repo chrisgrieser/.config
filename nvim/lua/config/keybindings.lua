@@ -445,12 +445,10 @@ end, { desc = "󱁐 Use spaces" })
 
 keymap("n", "<leader>on", "<cmd>set number!<CR>", { desc = " Line numbers" })
 keymap("n", "<leader>ow", "<cmd>set wrap!<CR>", { desc = "󰖶 Wrap" })
-
 keymap("n", "<leader>od", function()
 	local isEnabled = vim.diagnostic.is_enabled { bufnr = 0 }
 	vim.diagnostic.enable(not isEnabled, { bufnr = 0 })
 end, { desc = "󰋽 Diagnostics" })
-
 -- stylua: ignore
 keymap("n", "<leader>oc", function() vim.wo.conceallevel = vim.wo.conceallevel == 0 and 2 or 0 end, { desc = "󰈉 Conceal" })
 

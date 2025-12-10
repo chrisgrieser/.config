@@ -70,9 +70,9 @@ return {
 			["<Tab>"] = { "snippet_forward", "select_next", "fallback" },
 			["<S-Tab>"] = { "snippet_backward", "select_prev", "fallback" },
 			["<D-c>"] = { "show", "hide" },
-			["<PageDown>"] = { "scroll_documentation_down", "fallback" },
-			["<PageUp>"] = { "scroll_documentation_up", "fallback" },
 			["<D-g>"] = { "show_signature", "hide_signature" },
+			["<PageDown>"] = { "scroll_signature_down", "scroll_documentation_down", "fallback" },
+			["<PageUp>"] = { "scroll_signature_up", "scroll_documentation_up", "fallback" },
 		},
 		signature = {
 			enabled = true,
@@ -86,11 +86,11 @@ return {
 			},
 			window = {
 				max_width = 60,
-				max_height = 4,
+				-- max_height = 5,
 				direction_priority = { "s", "n" }, -- south first, to not block existing code
-				show_documentation = false, -- show larger documentation regular signature help
-				winhighlight = "Normal:ColorColumn", -- usually darker, so more contrast
-				border = "none", -- should be small since it appears so often
+				show_documentation = true, -- show larger documentation regular signature help
+				-- winhighlight = "Normal:ColorColumn", -- usually darker, so more contrast
+				-- border = "none", -- should be small since it appears so often
 			},
 		},
 		completion = {

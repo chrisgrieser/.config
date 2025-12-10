@@ -7,6 +7,8 @@ local aw = hs.application.watcher
 local wf = hs.window.filter
 
 ---FINDER-----------------------------------------------------------------------
+-- 1. hide sidebar
+-- 2. show as list
 M.aw_finder = aw.new(function(appName, event, finder)
 	if event == aw.activated and appName == "Finder" then
 		finder:selectMenuItem { "View", "Hide Sidebar" }
@@ -15,8 +17,10 @@ M.aw_finder = aw.new(function(appName, event, finder)
 end):start()
 
 ---ZOOM-------------------------------------------------------------------------
+-- 1. remove leftover tabs
+-- 2. close unneeded windows when entering meeting
 M.wf_zoom = wf.new("zoom.us"):subscribe(wf.windowCreated, function(newWin)
-	u.closeBrowserTabsWith("zoom.us") -- remove leftover tabs
+	u.closeBrowserTabsWith("zoom.us")
 
 	local newMeetingWindow = newWin:title() == "Zoom Meeting" or newWin:title() == ""
 	if newMeetingWindow then
@@ -39,6 +43,7 @@ M.aw_pdfreader = aw.new(function(appName, event, app)
 		app:selectMenuItem { "Tools", "Highlight" }
 		app:selectMenuItem { "Tools", "Color", "Yellow" }
 		app:selectMenuItem { "View", "Hide Toolbar" }
+		app:selectMenuItem { "View", "Hide Notes Panel" }
 	elseif event == aw.launched and appName == "PDF Expert" then
 		app:selectMenuItem { "View", "Theme", u.isDarkMode() and "Night" or "Day" }
 		app:selectMenuItem { "Annotate", "Highlight" }
@@ -50,6 +55,8 @@ M.aw_pdfreader = aw.new(function(appName, event, app)
 end):start()
 
 ---SCRIPT EDITOR----------------------------------------------------------------
+-- 1. on open, paste, and format
+-- 2. fix copypasting line breaks into other apps
 M.wf_scripteditor = wf
 	.new("Script Editor")
 	:subscribe(wf.windowCreated, function(newWin)
@@ -68,8 +75,8 @@ M.wf_scripteditor = wf
 	end)
 
 ---MASTODON---------------------------------------------------------------------
--- auto-close any media windows
--- auto-scroll up
+-- 1. auto-close any media windows
+-- 2. auto-scroll up
 M.aw_masto = aw.new(function(appName, event, masto)
 	if appName ~= "Mona 6" then return end
 	local win = masto:mainWindow()
@@ -91,7 +98,7 @@ M.aw_masto = aw.new(function(appName, event, masto)
 end):start()
 
 ---ALFRED-----------------------------------------------------------------------
--- bookmarks synced to chrome bookmarks (so Alfred can pick up them up w/o keyword)
+-- 1. Brave bookmarks synced to chrome bookmarks (so Alfred can pick up them up w/o keyword)
 do
 	local chromeBookmarks = os.getenv("HOME")
 		.. "/Library/Application Support/Google/Chrome/Default/Bookmarks"
@@ -106,8 +113,8 @@ do
 	M.pathw_bookmarks = hs.pathwatcher.new(chromeBookmarks, touchSymlink):start()
 end
 
--- Reminders Today workflow
--- clear cache on deactivation of Calendar, since the events have potentially changed
+-- 2. Reminders Today workflow
+-- -> clear cache when leaving Calendar, since events might have changed
 M.aw_calendar = aw.new(function(appName, event, _app)
 	if (event == aw.deactivated or event == aw.terminated) and appName == "Calendar" then
 		local cachePath = os.getenv("HOME")
