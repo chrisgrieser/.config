@@ -59,6 +59,7 @@
 - [nvim-treesitter/nvim-treesitter-textobjects](https://github.com/nvim-treesitter/nvim-treesitter-textobjects)
 - [olimorris/codecompanion.nvim](https://github.com/olimorris/codecompanion.nvim)
 - [saghen/blink.cmp](https://github.com/saghen/blink.cmp)
+- [stevearc/aerial.nvim](https://github.com/stevearc/aerial.nvim)
 - [stevearc/conform.nvim](https://github.com/stevearc/conform.nvim)
 - [theHamsta/nvim-dap-virtual-text](https://github.com/theHamsta/nvim-dap-virtual-text)
 - [ThePrimeagen/refactoring.nvim](https://github.com/ThePrimeagen/refactoring.nvim)
