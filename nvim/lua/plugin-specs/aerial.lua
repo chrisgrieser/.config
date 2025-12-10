@@ -17,7 +17,7 @@ local prevSymbolCount = {}
 return {
 	"stevearc/aerial.nvim",
 	cmd = "AerialToggle",
-	event = "VeryLazy",
+	lazy = false,
 	keys = {
 		{
 			"<D-0>",
