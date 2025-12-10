@@ -1373,8 +1373,9 @@
 	  start of end. For example, `buy milk!!` or `!!buy milk` will result in a
 	  reminder title `buy milk` with a medium priority (`!` = low, `!!` =
 	  medium, `!!!` = high).
-	+ You can use alternative keywords for different due dates of new reminders:
-		* `qn`: no due date
+	+ You can use alternative keywords to create new reminders with other due
+	  dates:
+		* `qn` no due date
 		* `q1` tomorrow
 		* `q2` in two days
 		* `qm` next Monday

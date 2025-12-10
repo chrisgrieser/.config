@@ -59,6 +59,7 @@ return {
 		backends = {
 			yaml = { "lsp", "treesitter" },
 			json = { "lsp", "treesitter" },
+			lua = { "treesitter" }, -- skips anonymous functions
 		},
 		filter_kind = {
 			-- _ = { "Array", "Boolean", "Class", "Constant", "Constructor", "Enum", "EnumMember", "Event", "Field", "File", "Function", "Interface", "Key", "Method", "Module", "Namespace", "Null", "Number", "Object", "Operator", "Package", "Property", "String", "Struct", "TypeParameter", "Variable" },
