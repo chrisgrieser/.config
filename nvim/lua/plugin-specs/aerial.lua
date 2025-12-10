@@ -10,6 +10,8 @@ local getBreadcrumbs = function()
 	return symbols
 end
 
+local prevSymbolCount = {}
+
 --------------------------------------------------------------------------------
 
 return {
@@ -81,12 +83,12 @@ return {
 			if vim.bo[bufnr].ft == "yaml" then return false end
 			if vim.bo[bufnr].ft == "markdown" then return true end -- always open in markdown
 
-			local symbols = require("aerial").num_symbols(bufnr)
 			local smallFile = vim.api.nvim_buf_line_count(bufnr) < 120
-			local manySymbols = symbols >= 10
-			if symbols == 0 then manySymbols = true end -- FIX closing aerial resulting in 0 for buffer
+			local manySymbols = require("aerial").num_symbols(bufnr) >= 10
+				or (prevSymbolCount[vim.api.nvim_buf_get_name(bufnr)] or 0) >= 10
+			local manuallyClosed = vim.b[bufnr].aerialWasManuallyClosed
 
-			return (not smallFile) and manySymbols and not vim.b[bufnr].aerialWasManuallyClosed
+			return (not smallFile) and manySymbols and not manuallyClosed
 		end,
 		close_automatic_events = { "switch_buffer", "unfocus", "unsupported" },
 
@@ -96,7 +98,10 @@ return {
 				buffer = bufnr,
 				once = true,
 				callback = function()
-					vim.b[bufnr].aerialWasManuallyClosed = false
+					-- FIX symbol count being zweo on close
+					local bufname = vim.api.nvim_buf_get_name(bufnr)
+					prevSymbolCount[bufname] = require("aerial").num_symbols(bufnr)
+
 					require("aerial").close()
 				end,
 			})
