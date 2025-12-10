@@ -1,12 +1,18 @@
 #!/usr/bin/env zsh
 
 filepath="xxx"
-original_clone_url="xxx"
+
 #-------------------------------------------------------------------------------
 brew install git-filter-repo
+
+original_clone_url="$(git remote get-url origin)"
 git filter-repo --invert-paths --path "$filepath"
+
 git remote add origin "$original_clone_url"
 git push --force --all
 git push --force --tags
+
+# very it's gone:
+git log --all -- "$filepath"
 #-------------------------------------------------------------------------------
 # brew uninstall git-filter-repo

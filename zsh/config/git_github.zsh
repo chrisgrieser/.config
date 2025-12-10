@@ -23,7 +23,7 @@ alias unmark_commit="git tag --delete 'mark'"
 
 #-HELPERS-----------------------------------------------------------------------
 
-function gh { # do not expose GITHUB_TOKEN
+function gh { # to not expose GITHUB_TOKEN
 	_export_github_token
 	command gh "$@"
 }
@@ -155,27 +155,27 @@ function gM {
 
 #-MISC--------------------------------------------------------------------------
 function pr {
-	# similar to `gh pr create --web --fill`, but without dependency 
+	# similar to `gh pr create --web --fill`, but without dependency
 	# (and without the need to setup `gh` remote.)
 	git push
 	sleep 1 # needed for GitHub to register the new commit
 	local url
-	url=$(git remote --verbose | head -n1 | cut -f2 | cut -d' ' -f1 |
-		sed -Ee 's|git@github.com:|https://github.com/|' -Ee 's|\.git$||')
-	open "$url/pull/new/$(git branch --show-current)"
+	repo=$(git remote --verbose | head -n1 | sed -Ee 's/.*github.com:([^[:space:]]*).*/\1/' -Ee 's/\.git$//')
+	branch=$(git branch --show-current)
+	open "https://github.com/$repo/pull/new/$branch"
 }
 
-function gu { # Github Url: open & copy url
-	repo=$(git remote --verbose | head -n1 | sed -E 's/.*github.com:([^[:space:]]*).*/\1/')
-	api_url="https://github.com/$repo"
-	echo "$api_url" | pbcopy
-	open "$api_url"
+function gu { # GitHub URL: open & copy url
+	repo=$(git remote --verbose | head -n1 | sed -Ee 's/.*github.com:([^[:space:]]*).*/\1/' -Ee 's/\.git$//')
+	git_url="https://github.com/$repo"
+	echo "$git_url" | pbcopy
+	open "$git_url"
 }
 
 function clone {
 	# WARN depth=1 is dangerous, as amending such a commit does result in a
 	# new commit without parent, effectively destroying git history (!!)
-	git clone --depth=15 "$1" --no-single-branch --no-tags
+	git clone --depth=30 "$1" --no-single-branch --no-tags
 	cd "$(basename "$1" .git)" || return 1
 	echo
 }
@@ -191,14 +191,6 @@ function unshallow {
 function delete_git_tag {
 	git fetch --no-progress --tags # fetch tags, in case clone is shallow
 	git tag --delete "$1" && git push origin --delete "$1"
-}
-
-function remote_info {
-	git --no-pager branch --all --verbose --verbose # 2x verbose shows tracked remote branches
-	echo
-	git remote --verbose
-	echo
-	printf "\e[1;34mgh default repo:\e[0m " && gh repo set-default --view
 }
 
 #-GIT LOG-----------------------------------------------------------------------
