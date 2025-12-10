@@ -14,5 +14,6 @@ git push --force --tags
 
 # very it's gone:
 git log --all -- "$filepath"
+git grep -a 'sensitive string' "$(git rev-list --all)"
 #-------------------------------------------------------------------------------
 # brew uninstall git-filter-repo

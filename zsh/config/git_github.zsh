@@ -43,7 +43,7 @@ ZSH_HIGHLIGHT_REGEXP+=($'\\\\`[^`]*\\\\`' 'fg=cyan,bold')
 
 # highlight conventional commits
 ZSH_HIGHLIGHT_REGEXP+=(
-	'(feat|fix|test|perf|build|ci|revert|refactor|chore|docs|break|style|improv)(\(.+\))?(\\?\!)?:'
+	'(feat|fix|test|perf|build|ci|revert|refactor|chore|docs|break|style)(\(.+\))?(\\?\!)?:'
 	'fg=magenta,bold'
 )
 
@@ -204,7 +204,6 @@ function gl {
 		_gitlog "$@"
 	fi
 }
-compdef _git gl
 
 function reflog {
 	if [[ -z "$1" ]]; then
