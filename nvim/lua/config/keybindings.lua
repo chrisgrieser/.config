@@ -46,7 +46,7 @@ keymap("n", "gE", "[d", { desc = "󰋼 Previous diagnostic", remap = true })
 
 -- Open URL in file
 -- stylua: ignore
-keymap("n", "<D-U>", function() require("personal-plugins.misc").openUrlInBuffer() end, { desc = " Open URL in buffer" })
+keymap("n", "<D-U>", function() require("personal-plugins.misc").openFirstUrlInBuffer() end, { desc = " Open URL in buffer" })
 
 ---MARKS------------------------------------------------------------------------
 do
@@ -429,16 +429,17 @@ keymap("n", "<leader>rq", function()
 	vim.api.nvim_set_current_line(updatedLine)
 end, { desc = " Switch quotes in line" })
 
-do
-	local function retabber(use)
-		vim.bo.expandtab = use == "spaces"
-		if use == "spaces" then vim.bo.shiftwidth = 2 end
-		vim.cmd.retab { bang = true }
-		vim.notify("Now using " .. use, nil, { title = ":retab", icon = "󰌒" })
-	end
-	keymap("n", "<leader>r<Tab>", function() retabber("tabs") end, { desc = "󰌒 Use tabs" })
-	keymap("n", "<leader>r<Space>", function() retabber("spaces") end, { desc = "󱁐 Use spaces" })
-end
+keymap("n", "<leader>r<Tab>", function()
+	vim.bo.expandtab = false
+	vim.cmd.retab { bang = true }
+	vim.notify("Now using tabs", nil, { title = ":retab", icon = "󰌒" })
+end, { desc = "󰌒 Use tabs" })
+keymap("n", "<leader>r<Space>", function()
+	vim.bo.expandtab = true
+	vim.bo.shiftwidth = 2
+	vim.cmd.retab { bang = true }
+	vim.notify("Now using spaces (2)", nil, { title = ":retab", icon = "󱁐" })
+end, { desc = "󱁐 Use spaces" })
 
 ---OPTION TOGGLING--------------------------------------------------------------
 

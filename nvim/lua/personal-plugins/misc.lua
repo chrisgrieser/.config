@@ -148,7 +148,10 @@ function M.mdWrap(startWrap, endWrap)
 	local insert = startWrap .. text .. endWrap
 	local clipboardUrl
 	if startWrap == "mdlink" then
-		clipboardUrl = vim.fn.getreg("+"):match([[%l%l%l+://[^%s)%]}"'`>]+]]) or ""
+		local clipb = vim.fn.getreg("+")
+		clipboardUrl = clipb:match("^#[%w-]+$") -- heading-link
+			or clipb:match([[^%l%l%l+://[^%s)%]}"'`>]+]]) -- url
+			or ""
 		insert = ("[%s](%s)"):format(text, clipboardUrl)
 	end
 
@@ -222,19 +225,16 @@ end
 
 --------------------------------------------------------------------------------
 
-function M.openUrlInBuffer()
-	local text = table.concat(vim.api.nvim_buf_get_lines(0, 0, -1, false), "\n")
-	local urls = {}
-	for url in text:gmatch([[%l%l%l+://[^%s)%]}"'`>]+]]) do
-		urls[#urls + 1] = url
+function M.openFirstUrlInBuffer()
+	local bufLines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+	for _, line in pairs(bufLines) do
+		local url = line:match([[%l%l%l+://[^%s)%]}"'`>]+]])
+		if url then
+			vim.ui.open(url)
+			return
+		end
 	end
-
-	if #urls == 0 then return vim.notify("No URL found in file.", vim.log.levels.WARN) end
-	if #urls == 1 then return vim.ui.open(urls[1]) end
-
-	vim.ui.select(urls, { prompt = " Open URL:" }, function(url)
-		if url then vim.ui.open(url) end
-	end)
+	vim.notify("No URL found in file.", vim.log.levels.WARN)
 end
 
 function M.smartDuplicate()

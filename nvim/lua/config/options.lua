@@ -56,9 +56,9 @@ vim.api.nvim_create_autocmd("FileType", {
 
 ---WRAP-------------------------------------------------------------------------
 vim.opt.wrap = false -- off by default, enable when needed
--- vim.opt.linebreak = true -- wrap at full words
--- vim.opt.breakindent = true -- wrapped lines inherit indent from previous line
--- vim.opt.breakindentopt = "list:-1" -- wrap lists with correct indentation
+vim.opt.linebreak = true -- wrap at full words
+vim.opt.breakindent = true -- wrapped lines inherit indent from previous line
+vim.opt.breakindentopt = "list:-1" -- wrap lists with correct indentation
 
 vim.api.nvim_create_autocmd("Filetype", {
 	desc = "User: set `showbreak` in regular buffers only",

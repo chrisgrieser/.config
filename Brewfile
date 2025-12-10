@@ -1,7 +1,6 @@
 # DOCS https://docs.brew.sh/Brew-Bundle-and-Brewfile
-#───────────────────────────────────────────────────────────────────────────────
 
-# CLI
+#-CLIS--------------------------------------------------------------------------
 brew "bat"
 brew "eza"
 brew "fzf"
@@ -23,38 +22,35 @@ brew "zsh-autopair"
 brew "zsh-autosuggestions"
 brew "zsh-history-substring-search"
 brew "zsh-syntax-highlighting"
-tap "felixkratz/formulae"; brew "felixkratz/formulae/sketchybar"
 
-# APPS
+#-APPS--------------------------------------------------------------------------
+tap "felixkratz/formulae"; brew "felixkratz/formulae/sketchybar"
 cask "alfred"
 cask "alt-tab"
 cask "appcleaner"
 cask "betterzip"
 cask "brave-browser"
 cask "espanso"
-cask "font-jetbrains-mono-nerd-font"
-cask "glance-chamburr", postinstall: "xattr -rd com.apple.quarantine /Applications/Glance.app; qlmanage -r; sed -i '' 's/font-size: [0-9][0-9]px/font-size: 20px/' /Applications/Glance.app/Contents/PlugIns/QLPlugin.appex/Contents/Resources/shared-main.css"
 cask "granola"
 cask "hammerspoon", postinstall: 'defaults write org.hammerspoon.Hammerspoon MJConfigFile "$HOME/.config/hammerspoon/init.lua"'
-cask "karabiner-elementsa"
+cask "karabiner-elements"
+cask "microsoft-word"
 cask "monodraw"
 cask "neovide-app"
 cask "obsidian"
 cask "replacicon"
 cask "signal"
 cask "slack"
+cask "wezterm"
 cask "zoom"
-csk "microsoft-word"
+mas "Highlights", id: 1498912833
 mas "Mona 6", id: 1659154653
 
-cask "wezterm"
-# cask "ghostty"
-mas "Highlights", id: 1498912833
-# cask "pdf-expert"
+#-OTHER-------------------------------------------------------------------------
+cask "font-jetbrains-mono-nerd-font"
+cask "glance-chamburr", postinstall: "xattr -rd com.apple.quarantine /Applications/Glance.app; qlmanage -r; sed -i '' 's/font-size: [0-9][0-9]px/font-size: 20px/' /Applications/Glance.app/Contents/PlugIns/QLPlugin.appex/Contents/Resources/shared-main.css"
 
-#───────────────────────────────────────────────────────────────────────────────
-
-# DEVICE-SPECIFIC INSTALLS
+#-DEVICE-SPECIFIC INSTALLS------------------------------------------------------
 device = `scutil --get ComputerName`
 
 if device.include?("Home")
