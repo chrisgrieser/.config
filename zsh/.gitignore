@@ -1,2 +1,7 @@
+# temp data
 .zsh_sessions
 .zcompdump
+
+# already moved to location outside my public dotfiles
+# (here just as additional safety net)
+.zsh_history
