@@ -13,22 +13,22 @@ let targetDay = ProcessInfo.processInfo.environment["target_day"]!
 // ─────────────────────────────────────────────────────────────────────────────
 
 struct ParsedResult {
-	let hour: Int?  // nil if no time (= all-day reminder)
-	let minute: Int?
-	let msg: String
+	let msg: String  // stripped of bangs and time
 	let bangs: String  // string with the number of exclamation marks
-	let amPm: String
-	let error: String?  // non-nil if error
+	let hour: Int?  // converted to absolute time in 24h-format (nil if no time = all-day reminder)
+	let minute: Int?  // converted to absolute time in 24h-format (nil if no time)
+	let amPmInput: String?  // the "am"/"pm" used for date input, "" when neither was used (nil if no time)
+	let errorMsg: String?  // non-nil if error
 }
 
 func parseTimeAndPriorityAndMessage(input: String, targetDay: String) -> ParsedResult {
 	func parseError(_ msg: String) -> ParsedResult {
-		return ParsedResult(hour: nil, minute: nil, msg: "", bangs: "", amPm: "", error: msg)
+		return ParsedResult(msg: "", bangs: "", hour: nil, minute: nil, amPmInput: nil, errorMsg: msg)
 	}
 	var msg = input
-	var hour: Int?
-	var minute: Int?
-	var amPm = ""
+	var hour: Int
+	var minute: Int
+	var amPm: String
 
 	// PARSE BANGS (PRIORITY)
 	var bangs = ""  // default: no priority
@@ -55,7 +55,8 @@ func parseTimeAndPriorityAndMessage(input: String, targetDay: String) -> ParsedR
 		return parseError("Cannot set a due time for a reminder without due date.")
 	}
 	if timeMatch == nil {  // no time found
-		return ParsedResult(hour: nil, minute: nil, msg: msg, bangs: bangs, amPm: "", error: nil)
+		return ParsedResult(
+			msg: msg, bangs: bangs, hour: nil, minute: nil, amPmInput: nil, errorMsg: nil)
 	}
 
 	// PARSE DUE TIME
@@ -76,30 +77,32 @@ func parseTimeAndPriorityAndMessage(input: String, targetDay: String) -> ParsedR
 		let dueTimeComps = Calendar.current.dateComponents([.day, .hour, .minute], from: dueTime)
 		let today = Calendar.current.dateComponents([.day], from: now).day
 		guard dueTimeComps.day == today else {
-			return parseError("Can't set a relative time that goes beyond today.")
+			return parseError("Cannot set a relative time that goes beyond today.")
 		}
-		hour = dueTimeComps.hour
-		minute = dueTimeComps.minute
+		hour = dueTimeComps.hour!
+		minute = dueTimeComps.minute!
 		amPm = ""
 	} else {
 		// absolute time
-		hour = Int(capture[1]!)
-		minute = capture[2]!.isEmpty ? 0 : Int(capture[2]!)  // empty capture group in `hhPattern`
+		hour = Int(capture[1]!)!
+		minute = capture[2]!.isEmpty ? 0 : Int(capture[2]!)!  // empty capture group in `hhPattern`
 		amPm = (capture[3] ?? "").lowercased()
 
 		let hasAmPm = !amPm.isEmpty
 		guard
-			(0..<60).contains(minute!)
-				&& ((!hasAmPm && (0..<24).contains(hour!)) || (hasAmPm && (1..<13).contains(hour!)))
+			(0..<60).contains(minute)
+				&& ((!hasAmPm && (0..<24).contains(hour)) || (hasAmPm && (1..<13).contains(hour)))
 		else { return parseError("Invalid time: \"\(timeString)\"") }
 
-		if amPm == "pm" && hour != 12 { hour! += 12 }
+		// convert 12h time into 24h
+		if amPm == "pm" && hour != 12 { hour += 12 }
 		if amPm == "am" && hour == 12 { hour = 0 }
 	}
 
 	msg.removeSubrange(timeMatch!.range)
 	msg = msg.trimmingCharacters(in: .whitespacesAndNewlines)
-	return ParsedResult(hour: hour, minute: minute, msg: msg, bangs: bangs, amPm: amPm, error: nil)
+	return ParsedResult(
+		msg: msg, bangs: bangs, hour: hour, minute: minute, amPmInput: amPm, errorMsg: nil)
 }
 
 func fetchWebsiteTitle(from string: String) async throws -> String? {
@@ -146,13 +149,12 @@ Task {  // wrapping in `Task` because `await` is not allowed in `main`
 
 	// PARSE INPUT
 	let parsed = parseTimeAndPriorityAndMessage(input: input, targetDay: targetDay)
-	if let errorMsg = parsed.error {
+	if let errorMsg = parsed.errorMsg {
 		fail(errorMsg)
 		return
 	}
-	let (hh, mm, bangs, amPm) = (parsed.hour, parsed.minute, parsed.bangs, parsed.amPm)
-	var title = parsed.msg
-	var body = ""
+	let (hh, mm, bangs, amPmInput) = (parsed.hour, parsed.minute, parsed.bangs, parsed.amPmInput)
+	var (title, body) = (parsed.msg, "")
 
 	// if input is a URL, fetch title and use URL as body
 	var msgIsUrl = false
@@ -249,9 +251,9 @@ Task {  // wrapping in `Task` because `await` is not allowed in `main`
 	if !isAllDayReminder {
 		let minutesPadded = String(format: "%02d", mm!)
 		var hourDisplay = hh!
-		if amPm == "am" && hh! == 0 { hourDisplay = 12 }
-		if amPm == "pm" && hh! != 12 { hourDisplay = hh! - 12 }
-		let timeStr = String(hourDisplay) + ":" + minutesPadded + amPm
+		if amPmInput == "am" && hh! == 0 { hourDisplay = 12 }
+		if amPmInput == "pm" && hh! != 12 { hourDisplay = hh! - 12 }
+		let timeStr = String(hourDisplay) + ":" + minutesPadded + (amPmInput ?? "")
 		notif.append(timeStr)
 	}
 	notif.append("\"\(title)\"")
