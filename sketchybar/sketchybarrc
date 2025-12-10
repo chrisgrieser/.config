@@ -20,6 +20,7 @@ row_2="popup.clock"
 
 #───────────────────────────────────────────────────────────────────────────────
 # BUG since macOS Tahoe, `drawing` should not be called in initial call
+# also, updates to `drawing` should not be done to quickly in a row
 # https://github.com/FelixKratz/SketchyBar/issues/787
 #───────────────────────────────────────────────────────────────────────────────
 
@@ -76,11 +77,11 @@ sketchybar \
 	script="./components/cpu.sh" \
 	\
 	--add item network_download $row_2 \
-	--set network_download icon="" update_freq="3" \
+	--set network_download icon="" update_freq="4" \
 	script="./components/network_download.sh" \
 	\
 	--add item network-upload $row_2 \
-	--set network-upload icon="" update_freq="3" \
+	--set network-upload icon="" update_freq="4" \
 	script="./components/network_upload.sh" \
 	\
 	--add item sync_indicator $row_2 \

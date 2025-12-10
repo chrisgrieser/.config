@@ -44,10 +44,7 @@ bindkey '^[[B' history-substring-search-down # arrow down
 #───────────────────────────────────────────────────────────────────────────────
 
 # SEMANTIC PROMPTS (WEZTERM) https://wezfurlong.org/wezterm/shell-integration
-[[ "$TERM_PROGRAM" == "WezTerm" ]] && source "$ZDOTDIR/plugins/wezterm_semantic_prompts.zsh"
-
-# MAGIC DASHBOARD
-source "$ZDOTDIR/plugins/magic_dashboard.zsh"
+[[ "$TERM_PROGRAM" == "WezTerm" ]] && source "$ZDOTDIR/../wezterm/semantic_prompts.zsh"
 
 # STARSHIP
 export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"

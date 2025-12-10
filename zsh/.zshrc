@@ -14,7 +14,7 @@ CONFIG_FILES=(
 	terminal_utils
 	aliases
 	docs_man
-	ai_help
+	magic_dashboard
 
 	git_github
 	homebrew
