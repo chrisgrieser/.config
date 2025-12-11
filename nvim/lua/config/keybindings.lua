@@ -6,7 +6,7 @@ keymap("n", "<D-q>", vim.cmd.wqall, { desc = " Save & quit", unique = false }
 
 keymap(
 	{ "n", "x", "i" },
-	"<D-C-r>", -- `hyper` gets registered by neovide as `cmd+ctrl` (`D-C`)
+	"<D-C-r>", -- `hyper` gets registered by neovide as `cmd+ctrl` (`<D-C-`)
 	function() require("personal-plugins.misc").restartNeovide() end,
 	{ desc = " Save & restart" }
 )
@@ -238,7 +238,7 @@ keymap("i", "<D-v>", function()
 	local isCharwise = vim.fn.getregtype("+") == "v"
 	if isCharwise then vim.fn.setreg("+", vim.trim(vim.fn.getreg("+"))) end
 	if vim.fn.mode() == "R" then return "<C-r>+" end
-	return "<C-g>u<C-r><C-o>+" -- `<C-g>u` adds undopoint before the paste, `<C-r><C-o>` skips auto-indent
+	return "<C-g>u<C-r><C-o>+" -- `<C-g>u` adds undopoint before, `<C-r><C-o>` skips auto-indent
 end, { desc = " Paste", expr = true })
 
 keymap("n", "<D-v>", "p", { desc = " Paste" }) -- compatibility w/ macOS clipboard managers
@@ -430,12 +430,6 @@ keymap("n", "<leader>r<Tab>", function()
 	vim.cmd.retab { bang = true }
 	vim.notify("Now using tabs", nil, { title = ":retab", icon = "󰌒" })
 end, { desc = "󰌒 Use tabs" })
-keymap("n", "<leader>r<Space>", function()
-	vim.bo.expandtab = true
-	vim.bo.shiftwidth = 2
-	vim.cmd.retab { bang = true }
-	vim.notify("Now using spaces (2)", nil, { title = ":retab", icon = "󱁐" })
-end, { desc = "󱁐 Use spaces" })
 
 ---OPTION TOGGLING--------------------------------------------------------------
 
