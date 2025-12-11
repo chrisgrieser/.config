@@ -45,7 +45,7 @@ local function syncAllGitRepos(silent)
 	-- GUARD
 	local hasInternetAccess = hs.network.reachability.internet():statusString():find("R") ---@diagnostic disable-line: undefined-field
 	if not hasInternetAccess then
-		u.notify("🛜⛔ No internet connection.")
+		u.notify("⛔🛜 No internet connection.")
 		return
 	end
 	local stillInProgress = repoSyncsInProgress()
@@ -80,7 +80,7 @@ local function syncAllGitRepos(silent)
 		.waitUntil(function() return repoSyncsInProgress() == "" end, function()
 			local syncedIcons = hs.fnutils.map(M.finishedSyncing, function(r) return r.icon end) or {}
 			local msg = #syncedIcons > 0 and "🔁 Sync done: " .. table.concat(syncedIcons)
-				or "⚠️Sync issue"
+				or "⚠️ Sync issue"
 			print(msg)
 			if #syncedIcons == 0 or not silent then hs.notify.show("Hammerspoon", "", msg) end
 		end)
@@ -110,20 +110,10 @@ end)
 -- 4. when going to sleep or when unlocking
 local c = hs.caffeinate.watcher
 M.caff_SleepWatcherForRepoSync = c.new(function(event)
-	if M.recentlyTriggered or env.isProjector() then return end
+	if env.isProjector() then return end
 
-	if
-		event == c.screensDidLock
-		or event == c.screensDidUnlock
-		or event == c.screensDidWake
-		or event == c.systemDidWake
-	then
-		local delay = env.isAtOffice and 4 or 0 -- office needs a bit for wifi
-		u.defer(delay, function()
-			syncAllGitRepos()
-			M.recentlyTriggered = true
-			u.defer(7, function() M.recentlyTriggered = false end)
-		end)
+	if event == c.screensDidLock or event == c.screensDidWake or event == c.systemDidWake then
+		u.defer(1, syncAllGitRepos)
 	end
 end):start()
 
