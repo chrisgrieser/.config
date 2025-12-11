@@ -6,8 +6,8 @@ local wu = require("win-management.window-utils")
 local wf = hs.window.filter
 --------------------------------------------------------------------------------
 
--- one screen: always open new pseudo-maximized
--- projector: always open new windows maximized
+-- one screen: always open windows pseudo-maximized
+-- projector: always open windows maximized
 M.wf_pseudoMax = wf.new({
 	"Microsoft Word",
 	"Safari",
@@ -19,9 +19,7 @@ M.wf_pseudoMax = wf.new({
 	"Highlights",
 	"Signal",
 	"Gmail",
-	"Karabiner-Elements",
 	"Monodraw",
-	"WezTerm",
 })
 	:setOverrideFilter({ fullscreen = false, rejectTitles = { "^Save$", "^Open$" } })
 	:subscribe(wf.windowCreated, function(win)

@@ -40,7 +40,6 @@ M.keys = {
 	{ key = "Escape", mods = "CTRL", action = act.ShowDebugOverlay }, -- REPL
 
 	---BASIC KEYS----------------------------------------------------------------
-	{ key = "p", mods = "CMD", action = act.ActivateCommandPalette },
 	{ key = "v", mods = "CTRL", action = act.SplitHorizontal }, -- SIC actually vertical
 	{ key = "w", mods = "CMD", action = act.CloseCurrentPane { confirm = false } }, -- pane, then tab
 	-- `cmd+n` should create new tab, not new window

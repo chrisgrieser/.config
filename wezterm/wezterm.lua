@@ -2,14 +2,12 @@ local wt = require("wezterm")
 
 ---THEME------------------------------------------------------------------------
 local darkThemes = { -- the first theme in each list is used
-	"Blazer",
 	"Kanagawa (Gogh)",
+	"Darkside (Gogh)",
 	"cyberpunk",
 	"MaterialDesignColors",
 	"Afterglow (Gogh)",
 	"ChallengerDeep",
-	"Darkside (Gogh)",
-	"TokyoNightStorm (Gogh)",
 }
 local lightThemes = {
 	"GoogleLight (Gogh)",
@@ -18,13 +16,13 @@ local lightThemes = {
 
 --------------------------------------------------------------------------------
 
-wt.on("gui-startup", function(opts)
-	opts = opts or {}
+wt.on("gui-startup", function(cmd)
 	local sideAppWidth = 0.185
 	local screenWidth = wt.gui.screens().main.width ---@diagnostic disable-line: undefined-field
-	opts.position = { x = screenWidth * sideAppWidth, y = 0 }
-	local _, _, win = wt.mux.spawn_window(opts)
+	local x = screenWidth * sideAppWidth
+	local _, _, win = wt.mux.spawn_window(cmd or {})
 	win:gui_window():set_inner_size(9001, 9001) -- automatically truncated to maximum
+	win:gui_window():set_position(x, 0)
 end)
 
 wt.on("format-tab-title", function(tab, _tabs, _panes, _config, _hover, _max_width)
@@ -38,11 +36,6 @@ wt.on("format-tab-title", function(tab, _tabs, _panes, _config, _hover, _max_wid
 	local icon = winTitle == "zsh" and "" or ""
 	local label = winTitle == "zsh" and cwdPath or winTitle
 	return (" %s %s "):format(icon, label)
-end)
-
-wt.on("window-config-reloaded", function(window, _pane)
-	--
-	window:toast_notification("Wezterm", "Configuration reloaded.", nil, 4000)
 end)
 
 ---SETTINGS---------------------------------------------------------------------
@@ -69,7 +62,6 @@ local config = {
 	font = wt.font { family = "JetBrainsMono Nerd Font", weight = "Medium" },
 	cell_width = 0.9, -- effectively like letter-spacing
 	font_size = 26.5,
-	command_palette_font_size = 26.5,
 	custom_block_glyphs = false, -- don't use wezterm's box-char replacements since too thin
 
 	-- appearance
