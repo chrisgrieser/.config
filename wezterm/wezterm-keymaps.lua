@@ -33,11 +33,13 @@ M.keys = {
 	{ key = "k", mods = "CTRL", action = act.ScrollToPrompt(-1) },
 	{ key = "j", mods = "CTRL", action = act.ScrollToPrompt(1) },
 
+	-- disable, since used for `fzf`
+	{ key = "Enter", mods = "ALT", action = act.DisableDefaultAssignment },
+
 	---META----------------------------------------------------------------------
 	{ key = ",", mods = "CMD", action = actFun(function() wt.open_with(wt.config_file) end) },
-	{ key = "t", mods = "ALT", action = actFun(require("theme-cycler").cycle) },
-	{ key = "Enter", mods = "ALT", action = act.DisableDefaultAssignment }, -- used for `fzf`
-	{ key = "Escape", mods = "CTRL", action = act.ShowDebugOverlay }, -- REPL
+	{ key = "Escape", mods = "CTRL", action = act.ShowDebugOverlay },
+	{ key = "t", mods = "CTRL", action = actFun(require("theme-cycler").cycle) },
 
 	---BASIC KEYS----------------------------------------------------------------
 	{ key = "v", mods = "CTRL", action = act.SplitHorizontal }, -- SIC actually vertical
@@ -94,6 +96,16 @@ M.keys = {
 				wt.open_with(url)
 			end),
 		},
+	},
+}
+
+---MOUSE------------------------------------------------------------------------
+-- https://wezterm.org/config/mouse#configuring-mouse-assignments
+M.mouse = {
+	{ -- open link at normal leftclick & auto-copy selection if not a link
+		event = { Up = { streak = 1, button = "Left" } },
+		mods = "NONE",
+		action = act.CompleteSelectionOrOpenLinkAtMouseCursor("Clipboard"),
 	},
 }
 

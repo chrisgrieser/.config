@@ -9,7 +9,8 @@ reload:
                 click menu item "Reload configuration" of menu "WezTerm" of menu bar 1
             end tell
         else
-            tell application "WezTerm" to launch
+            tell application "WezTerm" to activate
+            tell application "WezTerm" to activate
         end if
     end tell
     return "" # to silence return
@@ -32,4 +33,3 @@ update-types:
     git clone --depth=1 "https://github.com/DrKJeff16/wezterm-types" "/tmp/wezterm-types"
     mv -f "/tmp/wezterm-types/lua/wezterm/types" "./"
     echo "Updated."
-

@@ -25,7 +25,7 @@ wt.on("gui-startup", function(cmd)
 	win:gui_window():set_position(x, 0)
 end)
 
-wt.on("format-tab-title", function(tab, _tabs, _panes, _config, _hover, _max_width)
+wt.on("format-tab-title", function(tab)
 	-- set via `wezterm cli set-tab-title`
 	if tab.tab_title ~= "" then return " " .. tab.tab_title .. " " end
 
@@ -56,7 +56,7 @@ local config = {
 	cursor_blink_rate = 700,
 	cursor_blink_ease_in = "Constant", -- Constant = no fading
 	cursor_blink_ease_out = "Constant",
-	force_reverse_video_cursor = true, -- `true` = color is reverse, `false` = color by color scheme
+	force_reverse_video_cursor = true, -- `true` = color is reversed, `false` = color by color scheme
 
 	-- font
 	font = wt.font { family = "JetBrainsMono Nerd Font", weight = "Medium" },
@@ -90,22 +90,15 @@ local config = {
 	enable_tab_bar = true,
 	show_new_tab_button_in_tab_bar = false,
 	hide_tab_bar_if_only_one_tab = true,
-	tab_max_width = 90,
 	use_fancy_tab_bar = false, -- `false` = style using terminal cells
 	window_frame = { font_size = 30 }, -- font size if using `fancy_tab_bar`
-
-	-- Mouse
-	mouse_bindings = {
-		{ -- open link at normal leftclick & auto-copy selection if not a link
-			event = { Up = { streak = 1, button = "Left" } },
-			mods = "",
-			action = wt.action.CompleteSelectionOrOpenLinkAtMouseCursor("Clipboard"),
-		},
-	},
 
 	-- Bell
 	audible_bell = "Disabled",
 	visual_bell = { fade_in_duration_ms = 500, fade_out_duration_ms = 500, target = "CursorColor" },
+
+	-- Mouse
+	mouse_bindings = require("wezterm-keymaps").mouse,
 
 	-- Keybindings
 	keys = require("wezterm-keymaps").keys,
