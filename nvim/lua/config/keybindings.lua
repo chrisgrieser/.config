@@ -1,7 +1,6 @@
 local keymap = require("config.utils").uniqueKeymap
 
 ---META-------------------------------------------------------------------------
-
 -- save before quitting (non-unique, since also set by Neovide)
 keymap("n", "<D-q>", vim.cmd.wqall, { desc = " Save & quit", unique = false })
 
@@ -270,7 +269,7 @@ keymap({ "n", "x" }, "q", "gc", { desc = "󰆈 Comment operator", remap = true }
 keymap("n", "qq", "gcc", { desc = "󰆈 Comment line", remap = true })
 do
 	keymap("o", "u", "gc", { desc = "󰆈 Multiline comment", remap = true })
-	keymap("n", "guu", "guu") -- prevent previous mapping from overwriting `guu`
+	keymap("n", "guu", "guu") -- prevent prev keymap from overwriting `guu` (lowercase line)
 end
 
 -- stylua: ignore start
@@ -405,7 +404,6 @@ keymap("n", "<S-BS>", vim.cmd.bnext, { desc = "󰽙 Next buffer" })
 keymap({ "n", "x", "i" }, "<D-L>", function() require("personal-plugins.misc").openWorkflowInAlfredPrefs() end, { desc = "󰮤 Reveal in Alfred" })
 
 ---MACROS-----------------------------------------------------------------------
-
 do
 	local reg = "r"
 	local toggleKey = "0"
@@ -420,14 +418,12 @@ end
 ---REFACTORING------------------------------------------------------------------
 
 keymap("n", "<leader>rr", vim.lsp.buf.rename, { desc = "󰑕 LSP rename" })
-
--- stylua: ignore
-keymap("n", "<leader>rc", function() require("personal-plugins.misc").camelSnakeLspRename() end, { desc = "󰑕 LSP rename: camel/snake" })
-
 keymap("n", "<leader>rq", function()
 	local updatedLine = vim.api.nvim_get_current_line():gsub("[\"']", { ['"'] = "'", ["'"] = '"' })
 	vim.api.nvim_set_current_line(updatedLine)
 end, { desc = " Switch quotes in line" })
+-- stylua: ignore
+keymap("n", "<leader>rc", function() require("personal-plugins.misc").camelSnakeLspRename() end, { desc = "󰑕 LSP rename: camel/snake" })
 
 keymap("n", "<leader>r<Tab>", function()
 	vim.bo.expandtab = false
