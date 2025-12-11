@@ -29,20 +29,22 @@ M.keys = {
 		},
 	},
 
+	-- scroll-to-prompt, requires shell integration: https://wezfurlong.org/wezterm/config/lua/keyassignment/ScrollToPrompt.html
+	{ key = "k", mods = "CTRL", action = act.ScrollToPrompt(-1) },
+	{ key = "j", mods = "CTRL", action = act.ScrollToPrompt(1) },
+
 	---META----------------------------------------------------------------------
 	{ key = ",", mods = "CMD", action = actFun(function() wt.open_with(wt.config_file) end) },
 	{ key = "t", mods = "ALT", action = actFun(require("theme-cycler").cycle) },
 	{ key = "Enter", mods = "ALT", action = act.DisableDefaultAssignment }, -- used for `fzf`
 	{ key = "Escape", mods = "CTRL", action = wt.action.ShowDebugOverlay }, -- REPL
 
-	---TERMINAL KEYS-------------------------------------------------------------
+	---BASIC KEYS----------------------------------------------------------------
 	{ key = "p", mods = "CMD", action = act.ActivateCommandPalette },
 	{ key = "v", mods = "CTRL", action = act.SplitHorizontal }, -- SIC actually vertical
 	{ key = "w", mods = "CMD", action = act.CloseCurrentPane { confirm = false } }, -- pane, then tab
-
-	-- scroll-to-prompt, requires shell integration: https://wezfurlong.org/wezterm/config/lua/keyassignment/ScrollToPrompt.html
-	{ key = "k", mods = "CTRL", action = act.ScrollToPrompt(-1) },
-	{ key = "j", mods = "CTRL", action = act.ScrollToPrompt(1) },
+	-- `cmd+n` should create new tab, not new window
+	{ key = "n", mods = "CMD", action = act.SpawnTab("CurrentPaneDomain") },
 
 	{ -- cycles panes, then tabs, then windows
 		key = "Enter",
