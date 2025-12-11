@@ -16,43 +16,21 @@ local lightThemes = {
 	"Ivory Light (terminal.sexy)",
 }
 
----DEVICE-SPECIFIC--------------------------------------------------------------
-local deviceSpecific = {
-	home = {
-		fontSize = 26.3,
-		winPos = { x = 708, y = 0, w = 3135 },
-	},
-	office = {
-		fontSize = 27.3,
-		winPos = { x = 375, y = 0, w = 1675 },
-	},
-	mother = {
-		fontSize = 24,
-		winPos = { x = 620, y = 0, w = 2745 },
-	},
-}
+--------------------------------------------------------------------------------
 
--- device specific config
-local host = wt.hostname()
-local device = "home"
-if host:find("mini") or host:find("eduroam") then device = "office" end
-if host:find("Mother") then device = "mother" end
-
--- on start, move window to the side ("pseudo-maximized")
-wt.on("gui-startup", function(cmd)
-	---@type ScreenInformation
-	local screen = wt.gui.screens().main ---@diagnostic disable-line: undefined-field
-	local pos = deviceSpecific[device].winPos
-	local _, _, window = wt.mux.spawn_window(cmd or {})
-	window:gui_window():set_position(pos.x, pos.y)
-	local height = 3000 -- automatically truncated to maximum
-	window:gui_window():set_inner_size(pos.w, height)
+wt.on("gui-startup", function(opts)
+	opts = opts or {}
+	local sideAppWidth = 0.185
+	local screenWidth = wt.gui.screens().main.width ---@diagnostic disable-line: undefined-field
+	opts.position = { x = screenWidth * sideAppWidth, y = 0 }
+	local _, _, win = wt.mux.spawn_window(opts)
+	win:gui_window():set_inner_size(9001, 9001) -- automatically truncated to maximum
 end)
 
----TAB TITLE--------------------------------------------------------------------
--- https://wezfurlong.org/wezterm/config/lua/window-events/format-tab-title.html
 wt.on("format-tab-title", function(tab, _tabs, _panes, _config, _hover, _max_width)
-	if tab.tab_title ~= "" then return tab.tab_title end -- set via `wezterm cli set-tab-title`
+	-- set via `wezterm cli set-tab-title`
+	if tab.tab_title ~= "" then return " " .. tab.tab_title .. " " end
+
 	local winTitle = tab.active_pane.title -- set by procs like `nvim` or `yt-dlp --console-title`
 	local pane = wt.mux.get_pane(tab.active_pane.pane_id)
 	local cwd = pane:get_current_working_dir()
@@ -62,11 +40,16 @@ wt.on("format-tab-title", function(tab, _tabs, _panes, _config, _hover, _max_wid
 	return (" %s %s "):format(icon, label)
 end)
 
+wt.on("window-config-reloaded", function(window, _pane)
+	--
+	window:toast_notification("Wezterm", "Configuration reloaded.", nil, 4000)
+end)
+
 ---SETTINGS---------------------------------------------------------------------
 local config = {
 	-- Meta
 	check_for_updates = true,
-	automatically_reload_config = true,
+	automatically_reload_config = false, -- annoying with auto-save
 
 	-- Start/close
 	default_cwd = wt.home_dir .. "/Desktop",
@@ -85,8 +68,8 @@ local config = {
 	-- font
 	font = wt.font { family = "JetBrainsMono Nerd Font", weight = "Medium" },
 	cell_width = 0.9, -- effectively like letter-spacing
-	font_size = deviceSpecific[device].fontSize,
-	command_palette_font_size = deviceSpecific[device].fontSize,
+	font_size = 26.5,
+	command_palette_font_size = 26.5,
 	custom_block_glyphs = false, -- don't use wezterm's box-char replacements since too thin
 
 	-- appearance
