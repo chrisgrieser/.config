@@ -1,20 +1,9 @@
 local M = {} -- persist from garbage collector
 
-local env = require("meta.environment")
 local u = require("meta.utils")
 local wu = require("win-management.window-utils")
 local aw = hs.application.watcher
 local wf = hs.window.filter
-
----FINDER-----------------------------------------------------------------------
--- 1. hide sidebar
--- 2. show as list
-M.aw_finder = aw.new(function(appName, event, finder)
-	if event == aw.activated and appName == "Finder" then
-		finder:selectMenuItem { "View", "Hide Sidebar" }
-		if not env.isProjector() then finder:selectMenuItem { "View", "As List" } end
-	end
-end):start()
 
 ---ZOOM-------------------------------------------------------------------------
 -- 1. remove leftover tabs
@@ -83,7 +72,7 @@ M.aw_masto = aw.new(function(appName, event, masto)
 	if not win then return end
 
 	if event == aw.activated or event == aw.launched then
-		win:setFrame(wu.toTheSide)
+		wu.moveResize(win, wu.toTheSide)
 	elseif event == aw.deactivated then
 		local isMediaWin = win:title():find("^Image")
 		local frontNotAlfred = hs.application.frontmostApplication():name() ~= "Alfred"

@@ -5,7 +5,7 @@ hs.automaticallyCheckForUpdates(true)
 hs.window.animationDuration = 0
 
 ---LOAD MODULES-----------------------------------------------------------------
-G = {} -- persist from garbage collector
+G = {} ---@diagnostic disable-line: global-element -- persist from garbage collector
 
 ---Try to require the module, and do not error when one of them cannot be
 ---loaded, but do notify if there was an error.

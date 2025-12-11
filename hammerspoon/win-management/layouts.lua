@@ -36,15 +36,13 @@ local function workLayout(shouldDarkenDisplay)
 	u.quitFullscreenAndVideoApps()
 
 	-- open things
-	u.openApps { "Mona 6", "Gmail", "AlfredExtraPane", isWorkWeek() and "Slack" or nil }
+	local apps = { "Mona 6", "Gmail", "AlfredExtraPane", isWorkWeek() and "Slack" or nil }
+	u.openApps(apps)
 	u.defer(1, function()
-		local masto = u.app("Mona 6")
-		if masto then masto:mainWindow():setFrame(wu.toTheSide) end
-
-		local appsToLayout = { "Gmail", "Brave Browser", isWorkWeek() and "Slack" or nil }
-		for _, appName in pairs(appsToLayout) do
-			local win = u.app(appName):mainWindow()
-			if win then wu.moveResize(win, wu.pseudoMax) end
+		for _, name in pairs(apps) do
+			local win = u.app(name):mainWindow()
+			local size = name == "Mona 6" and wu.toTheSide or wu.pseudoMax
+			if win then wu.moveResize(win, size) end
 		end
 	end)
 

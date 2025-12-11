@@ -54,7 +54,7 @@ wt.on("format-tab-title", function(tab, _tabs, _panes, _config, _hover, _max_wid
 	local winTitle = tab.active_pane.title -- set procs like `nvim` or `yt-dlp --console-title`
 	local pane = wt.mux.get_pane(tab.active_pane.pane_id)
 	local cwd = pane:get_current_working_dir().file_path:gsub("^.*/(.*)/$", "%1")
-	local icon = winTitle == "zsh" and "" or ""
+	local icon = winTitle == "zsh" and "" or ""
 	local label = winTitle == "zsh" and cwd or winTitle
 	return (" %s %s "):format(icon, label)
 end)
@@ -128,11 +128,7 @@ local config = {
 
 	-- Bell
 	audible_bell = "Disabled",
-	visual_bell = { -- briefly flash cursor on visual bell
-		fade_in_duration_ms = 500,
-		fade_out_duration_ms = 500,
-		target = "CursorColor",
-	},
+	visual_bell = { fade_in_duration_ms = 500, fade_out_duration_ms = 500, target = "CursorColor" },
 
 	-- Keybindings
 	keys = require("wezterm-keymaps").keys,
