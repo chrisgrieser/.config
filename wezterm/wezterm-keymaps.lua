@@ -37,7 +37,7 @@ M.keys = {
 	{ key = ",", mods = "CMD", action = actFun(function() wt.open_with(wt.config_file) end) },
 	{ key = "t", mods = "ALT", action = actFun(require("theme-cycler").cycle) },
 	{ key = "Enter", mods = "ALT", action = act.DisableDefaultAssignment }, -- used for `fzf`
-	{ key = "Escape", mods = "CTRL", action = wt.action.ShowDebugOverlay }, -- REPL
+	{ key = "Escape", mods = "CTRL", action = act.ShowDebugOverlay }, -- REPL
 
 	---BASIC KEYS----------------------------------------------------------------
 	{ key = "p", mods = "CMD", action = act.ActivateCommandPalette },
@@ -49,7 +49,7 @@ M.keys = {
 	{ -- cycles panes, then tabs, then windows
 		key = "Enter",
 		mods = "CTRL",
-		action = wt.action_callback(function(win, pane)
+		action = actFun(function(win, pane)
 			local hasSplit = #pane:tab():panes() > 1
 			local action = hasSplit and act.ActivatePaneDirection("Next") or act.ActivateTabRelative(1)
 			win:perform_action(action, pane)
@@ -57,7 +57,7 @@ M.keys = {
 	},
 	{
 		key = "PageUp",
-		action = wt.action_callback(function(win, pane)
+		action = actFun(function(win, pane)
 			-- send key to fullscreen-TUI (like fzf), otherwise scroll https://github.com/wez/wezterm/discussions/4101
 			local action = pane:is_alt_screen_active() and act.SendKey { key = "PageUp" }
 				or act.ScrollByPage(-0.9)
@@ -66,7 +66,7 @@ M.keys = {
 	},
 	{
 		key = "PageDown",
-		action = wt.action_callback(function(win, pane)
+		action = actFun(function(win, pane)
 			local action = pane:is_alt_screen_active() and act.SendKey { key = "PageDown" }
 				or act.ScrollByPage(0.9)
 			win:perform_action(action, pane)

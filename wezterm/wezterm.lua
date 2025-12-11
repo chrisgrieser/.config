@@ -2,11 +2,14 @@ local wt = require("wezterm")
 
 ---THEME------------------------------------------------------------------------
 local darkThemes = { -- the first theme in each list is used
+	"Blazer",
 	"Kanagawa (Gogh)",
 	"cyberpunk",
 	"MaterialDesignColors",
 	"Afterglow (Gogh)",
 	"ChallengerDeep",
+	"Darkside (Gogh)",
+	"TokyoNightStorm (Gogh)",
 }
 local lightThemes = {
 	"GoogleLight (Gogh)",
@@ -17,17 +20,14 @@ local lightThemes = {
 local deviceSpecific = {
 	home = {
 		fontSize = 26.3,
-		maxFps = 120,
 		winPos = { x = 708, y = 0, w = 3135 },
 	},
 	office = {
 		fontSize = 27.3,
-		maxFps = 90,
 		winPos = { x = 375, y = 0, w = 1675 },
 	},
 	mother = {
 		fontSize = 24,
-		maxFps = 30,
 		winPos = { x = 620, y = 0, w = 2745 },
 	},
 }
@@ -40,6 +40,8 @@ if host:find("Mother") then device = "mother" end
 
 -- on start, move window to the side ("pseudo-maximized")
 wt.on("gui-startup", function(cmd)
+	---@type ScreenInformation
+	local screen = wt.gui.screens().main ---@diagnostic disable-line: undefined-field
 	local pos = deviceSpecific[device].winPos
 	local _, _, window = wt.mux.spawn_window(cmd or {})
 	window:gui_window():set_position(pos.x, pos.y)
@@ -51,11 +53,12 @@ end)
 -- https://wezfurlong.org/wezterm/config/lua/window-events/format-tab-title.html
 wt.on("format-tab-title", function(tab, _tabs, _panes, _config, _hover, _max_width)
 	if tab.tab_title ~= "" then return tab.tab_title end -- set via `wezterm cli set-tab-title`
-	local winTitle = tab.active_pane.title -- set procs like `nvim` or `yt-dlp --console-title`
+	local winTitle = tab.active_pane.title -- set by procs like `nvim` or `yt-dlp --console-title`
 	local pane = wt.mux.get_pane(tab.active_pane.pane_id)
-	local cwd = pane:get_current_working_dir().file_path:gsub("^.*/(.*)/$", "%1")
+	local cwd = pane:get_current_working_dir()
+	local cwdPath = cwd and cwd.file_path:gsub("^.*/(.*)/$", "%1") or "---"
 	local icon = winTitle == "zsh" and "" or ""
-	local label = winTitle == "zsh" and cwd or winTitle
+	local label = winTitle == "zsh" and cwdPath or winTitle
 	return (" %s %s "):format(icon, label)
 end)
 
@@ -90,7 +93,6 @@ local config = {
 	color_scheme = wt.gui.get_appearance():find("Dark") and darkThemes[1] or lightThemes[1],
 	window_background_opacity = 1,
 	bold_brightens_ansi_colors = "BrightAndBold",
-	max_fps = deviceSpecific[device].maxFps,
 	adjust_window_size_when_changing_font_size = false,
 
 	-- remove titlebar, but keep macOS traffic lights. Doing so enables some

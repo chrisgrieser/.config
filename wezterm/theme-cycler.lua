@@ -4,7 +4,7 @@ local wt = require("wezterm")
 
 ---cycle through builtin dark schemes in dark mode, and through light schemes in
 ---light mode
-function M.cycle(window, _)
+function M.cycle(window, _pane)
 	local allSchemes = wt.color.get_builtin_schemes()
 	local darkSchemes = {}
 	local lightSchemes = {}
@@ -31,7 +31,8 @@ function M.cycle(window, _)
 			window:set_config_overrides(overrides)
 
 			window:copy_to_clipboard(nextScheme)
-			window:toast_notification("Color scheme", nextScheme, nil, 4000)
+			window:toast_notification("Color scheme", nextScheme, nil, 4000) -- BUG not working here
+			wt.log_info("Color scheme:", nextScheme)
 			return
 		end
 	end
