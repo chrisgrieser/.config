@@ -40,15 +40,6 @@ return {
 			end,
 			desc = "󰙅 Breadcrumbs",
 		},
-		{ -- inspect symbols
-			"<leader>ia",
-			function()
-				local symbols = require("aerial").get_location()
-				local text = vim.iter(symbols):map(function(loc) return loc.kind end):join(", ")
-				vim.notify(text, nil, { title = "Aerial symbols", icon = "󰙅" })
-			end,
-			desc = "󰙅 Aerial symbols",
-		},
 	},
 	config = function(_, opts)
 		vim.g.lualineAdd("tabline", "lualine_b", { getBreadcrumbs, icon = "󰙅" })

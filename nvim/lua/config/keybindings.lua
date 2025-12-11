@@ -117,7 +117,7 @@ keymap("n", "z.", "1z=", { desc = "󰓆 Fix spelling" }) -- works even with `spe
 -- stylua: ignore
 keymap("i", "<D-t>", function() require("personal-plugins.auto-template-str").insertTemplateStr() end, { desc = "󰅳 Insert template string" })
 
--- Edits, repeatable via `.`
+-- Edits repeatable via `.`
 keymap("n", "<D-j>", '*N"_cgn', { desc = "󰆿 Repeatable edit cword" })
 keymap("x", "<D-j>", function()
 	local selection = vim.fn.getregion(vim.fn.getpos("."), vim.fn.getpos("v"))[1]

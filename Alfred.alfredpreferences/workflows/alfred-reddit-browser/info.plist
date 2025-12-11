@@ -159,8 +159,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>A567D598-1CEC-4307-A5B7-CA7E5193BA78</key>
-		<array/>
 		<key>E640FB36-75C7-4B36-A8AC-0F56468145CC</key>
 		<array>
 			<dict>
@@ -188,18 +186,7 @@
 			</dict>
 		</array>
 		<key>FF2B7000-6AD9-42B6-825C-E952CD707CFE</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>A567D598-1CEC-4307-A5B7-CA7E5193BA78</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
+		<array/>
 	</dict>
 	<key>createdby</key>
 	<string>Chris Grieser</string>
@@ -280,29 +267,6 @@
 			<string>5852A551-EFDF-47BB-A256-13A0D3975AA5</string>
 			<key>version</key>
 			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/reload-other-subreddits-in-bg.js</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>A567D598-1CEC-4307-A5B7-CA7E5193BA78</string>
-			<key>version</key>
-			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -681,17 +645,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>515</real>
 			<key>ypos</key>
 			<real>360</real>
-		</dict>
-		<key>A567D598-1CEC-4307-A5B7-CA7E5193BA78</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>note</key>
-			<string>PERF background reload caches of other subreddit</string>
-			<key>xpos</key>
-			<real>760</real>
-			<key>ypos</key>
-			<real>125</real>
 		</dict>
 		<key>E640FB36-75C7-4B36-A8AC-0F56468145CC</key>
 		<dict>
