@@ -116,7 +116,6 @@ M.caff_SleepWatcherForRepoSync = c.new(function(event)
 		event == c.screensDidLock
 		or event == c.screensDidUnlock
 		or event == c.screensDidWake
-		or event == c.screensaverWillStop
 		or event == c.systemDidWake
 	then
 		local delay = env.isAtOffice and 4 or 0 -- office needs a bit for wifi
