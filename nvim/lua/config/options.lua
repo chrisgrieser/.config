@@ -32,15 +32,14 @@ vim.opt.dictionary = {
 	"~/.config/word-lists/google-10000-english-medium.txt",
 	"~/.config/word-lists/google-10000-english-long.txt",
 }
--- vim.opt.completeopt:remove("menu")
+vim.opt.completeopt:remove("menu") -- annoyingly long
 
 vim.opt.splitright = true -- split right instead of left
 vim.opt.splitbelow = true -- split down instead of up
 
 vim.opt.iskeyword:append("-") -- treat `-` as word character, same as `_`
 
--- treat all numbers as positive (ignoring dashes), also makes `<C-x>` stop at `0`
-vim.opt.nrformats = { "unsigned" }
+vim.opt.nrformats = { "unsigned" } -- treat all numbers as positive & `<C-x>` stops at 0
 vim.opt.virtualedit = { "block" } -- in visual block mode, cursor can move beyond end of line
 
 vim.opt.autowriteall = true

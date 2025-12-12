@@ -112,7 +112,8 @@ end
 -- Spelling
 keymap("n", "z.", "1z=", { desc = "󰓆 Fix spelling" }) -- works even with `spell=false`
 keymap("i", "<D-d>", "<C-x><C-k>", { desc = "󰓆 Insert dict word" })
-keymap("i", "<D-D>", "<C-x><C-l>", { desc = "󰓆 Insert line from buffer" })
+keymap("i", "<D-n>", "<C-k>", { desc = "󰓆 Next dict word OR digraph" })
+-- はじめ
 
 -- Template strings
 -- stylua: ignore
