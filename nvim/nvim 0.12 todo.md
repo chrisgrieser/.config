@@ -7,6 +7,7 @@
 - `textDocument.onTypeFormatting`
 - `:Difftool` <https://www.reddit.com/r/neovim/comments/1o4eo6s/new_difftool_command_added_to_neovim/>
 - remove workaround in `after/ftplugin/query.lua`
+- inline completion: https://neovim.io/doc/user/lsp.html#lsp-inline_completion
 
 ```lua
 vim.api.nvim_create_autocmd("PackChanged", {

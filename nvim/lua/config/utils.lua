@@ -61,5 +61,34 @@ function M.loadGhToken()
 	file:close()
 end
 
+function M.ignoreBuffer(bufnr, filepath)
+	-- INFO plugins are disabled when using `pass` via `$USING_PASS`, for safety
+	-- adding redundant safeguards to disable AI for those buffers nonetheless
+
+	if not filepath then filepath = vim.api.nvim_buf_get_name(bufnr) end
+	if vim.fn.reg_recording() ~= "" then return false end -- not when recording
+	if vim.bo[bufnr].buftype ~= "" then return false end
+	if vim.bo[bufnr].filetype == "text" then return false end -- used by `pass`
+	if vim.bo[bufnr].filetype == "bib" then return false end
+
+	local parent, name = vim.fs.dirname(filepath), vim.fs.basename(filepath)
+	local parentsToIgnore = {
+		"security",
+		"api-keys",
+		"leetcode", -- should do leetcode problems on my own
+		"/private/var/", -- path when editing in `pass` (extra safeguard)
+	}
+	local ignoreParent = vim.iter(parentsToIgnore)
+		:any(function(ignored) return parent:find(ignored, 1, true) ~= nil end)
+	local namesToIgnore = {
+		".env",
+		"recovery", -- e.g., password recovery files
+		"Recovery",
+	}
+	local ignoreName = vim.iter(namesToIgnore)
+		:any(function(ignored) return name:find(ignored, 1, true) ~= nil end)
+	return not (ignoreParent or ignoreName)
+end
+
 --------------------------------------------------------------------------------
 return M
