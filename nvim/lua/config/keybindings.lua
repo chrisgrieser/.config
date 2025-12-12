@@ -111,6 +111,8 @@ end
 
 -- Spelling
 keymap("n", "z.", "1z=", { desc = "󰓆 Fix spelling" }) -- works even with `spell=false`
+keymap("i", "<D-d>", "<C-x><C-k>", { desc = "󰓆 Insert dict word" })
+keymap("i", "<D-D>", "<C-x><C-l>", { desc = "󰓆 Insert line from buffer" })
 
 -- Template strings
 -- stylua: ignore
@@ -416,7 +418,6 @@ do
 end
 
 ---REFACTORING------------------------------------------------------------------
-
 keymap("n", "<leader>rr", vim.lsp.buf.rename, { desc = "󰑕 LSP rename" })
 keymap("n", "<leader>rq", function()
 	local updatedLine = vim.api.nvim_get_current_line():gsub("[\"']", { ['"'] = "'", ["'"] = '"' })
@@ -432,7 +433,6 @@ keymap("n", "<leader>r<Tab>", function()
 end, { desc = "󰌒 Use tabs" })
 
 ---OPTION TOGGLING--------------------------------------------------------------
-
 keymap("n", "<leader>on", "<cmd>set number!<CR>", { desc = " Line numbers" })
 keymap("n", "<leader>ow", "<cmd>set wrap!<CR>", { desc = "󰖶 Wrap" })
 keymap("n", "<leader>od", function()

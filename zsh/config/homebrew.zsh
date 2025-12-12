@@ -19,9 +19,11 @@ alias depending_on='brew uses --installed --recursive'
 
 #-UPDATE EVERYTHING-------------------------------------------------------------
 function _pretty_header() {
-	[[ "$2" != "no-line-break" ]] && echo
-	defaults read -g AppleInterfaceStyle &> /dev/null && fg="\e[1;38;5;232m" || fg="\e[1;37m"
+	dark_fg="\e[1;38;5;232m"
+	light_fg="\e[1;30m"
 	bg="\e[1;44m"
+	fg=$(defaults read -g AppleInterfaceStyle &> /dev/null && echo "$dark_fg" || echo "$light_fg")
+	[[ "$2" != "no-line-break" ]] && echo
 	print "$fg$bg $1 \e[0m"
 }
 

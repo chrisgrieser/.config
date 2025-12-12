@@ -5,7 +5,7 @@ nerd_font="JetBrainsMonoNL NF:Regular:16"
 system_font="Lucida Grande:Regular:16.5"
 
 # switch colors depending on dark mode
-if defaults read -g AppleInterfaceStyle | grep -q "Dark"; then
+if defaults read -g AppleInterfaceStyle &> /dev/null; then
 	bg="0xff333333" # `0x` for hex, `ff` for alpha (= no transparency), `333333` as RGB
 	fg="0xffffffff"
 else
@@ -26,6 +26,7 @@ row_2="popup.clock"
 
 # PERF one call to speed up loading https://felixkratz.github.io/SketchyBar/config/tricks#batching-of-configuration-commands
 sketchybar \
+	`#--global bar settings----------------------------------------------------`\
 	--bar \
 	height="75" position="top" display="all" \
 	padding_left="0" margin="-4" color="$bg" \
@@ -37,7 +38,7 @@ sketchybar \
 	popup.drawing="true" popup.horizontal="true" popup.topmost="false" \
 	popup.y_offset="-48" y_offset="22" \
 	\
-	\                                                                           \
+	`#--1st-row----------------------------------------------------------------`\
 	\
 	--add item clock $row_1 \
 	--set clock update_freq="1" padding_left="10" \
@@ -64,7 +65,7 @@ sketchybar \
 	--add event update_github_notif --subscribe github_notif update_github_notif \
 	--subscribe github_notif system_woke \
 	\
-	\                                                                           \
+	`#--2nd-row----------------------------------------------------------------`\
 	\
 	--add item ram $row_2 \
 	--set ram padding_left="14" update_freq="5" \
@@ -95,5 +96,5 @@ sketchybar \
 	script="./components/japanese_word/japanese_word.sh" \
 	click_script="./components/japanese_word/japanese_word.sh" \
 	\
-	\                                                                           \
+	`#-------------------------------------------------------------------------`\
 	--update # needs to run at the end of config and should not be run in an item script

@@ -1,7 +1,9 @@
 local wt = require("wezterm")
 
 ---THEME------------------------------------------------------------------------
-local darkThemes = { -- the first theme in each list is used
+-- the first theme in each list is used
+local darkThemes = {
+	"Dracula (Gogh)",
 	"Kanagawa (Gogh)",
 	"Darkside (Gogh)",
 	"cyberpunk",
@@ -10,8 +12,7 @@ local darkThemes = { -- the first theme in each list is used
 	"ChallengerDeep",
 }
 local lightThemes = {
-	"Ura (Gogh)",
-	"Novel (Gogh)",
+	"RoséPineDawn (Gogh)",
 	"GoogleLight (Gogh)",
 	"Ivory Light (terminal.sexy)",
 }

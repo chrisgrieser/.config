@@ -44,7 +44,6 @@ function M.setDarkMode(toMode)
 
 	-- sketchybar
 	hs.execute(u.exportPath .. "sketchybar --reload")
-	-- hs.execute(u.exportPath .. "brew services restart sketchybar")
 
 	-- PDF background
 	if u.appRunning("Highlights") then

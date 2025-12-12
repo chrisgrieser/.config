@@ -1,54 +1,5 @@
-Algorithms
-Application
-Boundaries
-Christopher
-Compatibility
-Conclusion
-Consequently
-Considering
-Constellation
-Constellations
-Convergence
-Digitalization
-Effectively
-Essentially
-Experiences
-Fragmentation
-Genericness
-Imperative
-Incentivizing
-Information System Research
-Inhibiting
-Inhibition
-Innovation
-Interdependence
-Interdependent
-Interfaces
-Introduction
-Investigating
-Metaphorically
-Nevertheless
-Nonetheless
-Notwithstanding
-Organizing
-Originating
-Performance
-Polychrony
-Programming
-References
-Schulz-Schaeffer
 Science and Technology Studies
-Subsequently
-Synchronicity
-TechCrunch
-Technological
-Technologies
-Technology
 Technology Studies
-Underlying
-University
-Versioning
-accelerant
 acceleration
 acceleration of research
 accompanying
@@ -471,7 +422,6 @@ smartphone
 smartphones
 social theory
 social-scientific
-social-scientific
 social-scientific innovation research
 sociological
 sociologists
@@ -509,7 +459,7 @@ technological
 technological interdependence
 technologically
 technologies
-technologization||
+technologization
 technology
 themselves
 theoretical
