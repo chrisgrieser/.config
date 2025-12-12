@@ -24,7 +24,7 @@ return {
 	},
 	opts = {
 		commit = {
-			keepAbortedMsgSecs = 60 * 10,
+			keepAbortedMsgSecs = 60 * 10, -- 10 mins
 			spellcheck = true,
 			preview = { loglines = 4 },
 			keymapHints = false,
@@ -47,7 +47,7 @@ return {
 			blame = {
 				hideAuthorNames = { "Chris Grieser", "chrisgrieser" },
 				showOnlyTimeIfAuthor = { "🤖 automated" },
-				maxMsgLen = 72,
+				maxMsgLen = 50,
 			},
 			fileState = { icon = "" },
 		},

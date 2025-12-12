@@ -1,5 +1,4 @@
 {
-  "aerial.nvim": { "branch": "master", "commit": "8bb8697d180681746da41bef5c8691d04443af36" },
   "blink-cmp-git": { "branch": "master", "commit": "e3ad0ffaaa3b3b7e2158cc72cd6dad2d19842c46" },
   "blink.cmp": { "branch": "main", "commit": "b19413d214068f316c78978b08264ed1c41830ec" },
   "ccc.nvim": { "branch": "main", "commit": "9d1a256e006decc574789dfc7d628ca11644d4c2" },
@@ -22,6 +21,7 @@
   "nvim-justice": { "branch": "main", "commit": "728d689c47707150ee99d5bca7ca10a662240180" },
   "nvim-lsp-endhints": { "branch": "main", "commit": "1c237da6ebe64ff416751c13713eb8255ab7a612" },
   "nvim-lspconfig": { "branch": "master", "commit": "0044d0987ef7e624d04141d0f90d0481fd3c3663" },
+  "nvim-navic": { "branch": "master", "commit": "7d914a39a1ef8f4e22c2c4381abeef7c556f5a13" },
   "nvim-origami": { "branch": "main", "commit": "5d8bc3d4a089e363e508c8a0f5cd187c2871014e" },
   "nvim-rip-substitute": { "branch": "main", "commit": "37640813bdd57a403df541cb47a1adfdd352e27f" },
   "nvim-rulebook": { "branch": "main", "commit": "bb79ee19d6acbbdf1d5ed054bf2b7724759ee0f9" },
