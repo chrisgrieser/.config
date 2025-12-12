@@ -115,7 +115,7 @@ return {
 		display = {
 			-- disabled, since inline-stragy does not handle indents properly
 			-- PENDING https://github.com/olimorris/codecompanion.nvim/issues/2508
-			diff = { enabled = true }, -- https://codecompanion.olimorris.dev/configuration/chat-buffer.html#diff
+			diff = { enabled = false }, -- https://codecompanion.olimorris.dev/configuration/chat-buffer.html#diff
 
 			-- https://codecompanion.olimorris.dev/configuration/chat-buffer.html
 			chat = {
@@ -191,8 +191,8 @@ return {
 								I will send you some code, and I want you to simplify
 								the code while not diminishing its readability.
 
-								Keep the indentation level strictly the same, and do not
-								change for formatting style.
+								ENSURE YOU PRESERVE THE EXACT INDENTATION (TABS/SPACES) 
+								as it appears in the provided code.
 							]]):format(ctx.filetype)
 						end,
 					},

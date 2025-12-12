@@ -1,7 +1,7 @@
 {
 	"runtime.version": "Lua 5.4",
 
-	// treat them libraries, but ignore them in global diagnostics
+	// treat them as library, but ignore them in global diagnostics
 	"workspace.ignoreDir": ["types"],
 	"workspace.library": ["types"],
 

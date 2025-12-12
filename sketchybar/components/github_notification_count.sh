@@ -5,19 +5,27 @@ _export_github_token
 
 #───────────────────────────────────────────────────────────────────────────────
 
+function set_bar {
+	icon=""
+	[[ -z "$1" ]] && icon=""
+	sketchybar --set "$NAME" icon="$icon" label="$1"
+}
+
+#───────────────────────────────────────────────────────────────────────────────
+
 if [[ "$SENDER" == "forced" ]]; then # avoid flickering on reload
-	sketchybar --set "$NAME" drawing=false
+	set_bar ""
 	return 0
 fi
 
 # not on projector
 if [[ $(system_profiler SPDisplaysDataType | grep -c Resolution) -gt 1 ]]; then
-	sketchybar --set "$NAME" drawing=false
+	set_bar ""
 	return 0
 fi
 
 if [[ -z "$GITHUB_TOKEN" ]]; then
-	sketchybar --set "$NAME" label="NO TOKEN" drawing=true
+	set_bar "NO TOKEN"
 	return 1
 fi
 
@@ -35,18 +43,18 @@ response=$(curl --silent --location \
 	"https://api.github.com/notifications")
 
 if [[ -z "$response" ]]; then
-	sketchybar --set "$NAME" label="󰣼" drawing=true
+	set_bar "󰣼"
 	return 1
 fi
 error=$(echo "$response" | jq --raw-output ".message")
 if [[ -n "$error" ]]; then
-	sketchybar --set "$NAME" label=" $error" drawing=true
+	set_bar " $error"
 	return 1
 fi
 
 notification_count=$(echo "$response" | jq ". | length")
 if [[ $notification_count -eq 0 ]]; then
-	sketchybar --set "$NAME" drawing=false
+	set_bar ""
 else
-	sketchybar --set "$NAME" drawing=true label="$notification_count"
+	set_bar "$notification_count"
 fi

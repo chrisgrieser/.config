@@ -26,7 +26,7 @@ row_2="popup.clock"
 
 # PERF one call to speed up loading https://felixkratz.github.io/SketchyBar/config/tricks#batching-of-configuration-commands
 sketchybar \
-	`#--global bar settings----------------------------------------------------`\
+	`#--global-----------------------------------------------------------------`\
 	--bar \
 	height="75" position="top" display="all" \
 	padding_left="0" margin="-4" color="$bg" \
@@ -53,13 +53,13 @@ sketchybar \
 	script="./components/input_source_icon.sh" \
 	\
 	--add item reminders_count $row_1 \
-	--set reminders_count update_freq="300" icon="" \
+	--set reminders_count update_freq="300" \
 	script="./components/reminders_count.sh" \
 	--add event update_reminder_count --subscribe reminders_count update_reminder_count \
 	--subscribe reminders_count system_woke front_app_switched \
 	\
 	--add item github_notif $row_1 \
-	--set github_notif update_freq="300" icon="" \
+	--set github_notif update_freq="300" \
 	script="./components/github_notification_count.sh" \
 	click_script="open 'https://github.com/notifications'" \
 	--add event update_github_notif --subscribe github_notif update_github_notif \
@@ -90,11 +90,6 @@ sketchybar \
 	script="./components/git_sync_bar_icon.sh" \
 	--add event repo_files_update \
 	--subscribe sync_indicator system_woke repo_files_update \
-	\
-	--add item japanese_word $row_2 \
-	--set japanese_word update_freq="600" \
-	script="./components/japanese_word/japanese_word.sh" \
-	click_script="./components/japanese_word/japanese_word.sh" \
 	\
 	`#-------------------------------------------------------------------------`\
 	--update # needs to run at the end of config and should not be run in an item script

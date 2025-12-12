@@ -4,6 +4,13 @@
 list_name="Tasks"
 
 #───────────────────────────────────────────────────────────────────────────────
+function set_bar {
+	icon=""
+	[[ -z "$1" ]] && icon=""
+	sketchybar --set "$NAME" icon="$icon" label="$1"
+}
+
+#───────────────────────────────────────────────────────────────────────────────
 # GUARD only when not on projector
 if [[ $(system_profiler SPDisplaysDataType | grep -c Resolution) -gt 1 ]] ; then
 	sketchybar --set "$NAME" drawing=false
@@ -27,7 +34,7 @@ fi
 # include open reminders yesterday for reminders carrying over
 reminder_count=$(swift ./components/count-reminders.swift "$list_name")
 if [[ $reminder_count -eq 0 ]]; then
-	sketchybar --set "$NAME" drawing=false
+	set_bar ""
 else
-	sketchybar --set "$NAME" drawing=true label="$reminder_count"
+	sketchybar --set "$NAME" icon="" label="$reminder_count"
 fi
