@@ -10,6 +10,8 @@ local darkThemes = { -- the first theme in each list is used
 	"ChallengerDeep",
 }
 local lightThemes = {
+	"Ura (Gogh)",
+	"Novel (Gogh)",
 	"GoogleLight (Gogh)",
 	"Ivory Light (terminal.sexy)",
 }

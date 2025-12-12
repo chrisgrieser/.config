@@ -100,6 +100,9 @@ return {
 				-- blink.cmp.dictionary
 				BlinkCmpKindDict = { fg = "palette.blue" },
 
+				-- Copilot
+				CopilotSuggestion = { link = "NonText" },
+
 				-- snacks notifier
 				SnacksNotifierTitleDebug = { fg = "palette.comment" }, -- use grey for debug
 				SnacksNotifierIconDebug = { fg = "palette.comment" },

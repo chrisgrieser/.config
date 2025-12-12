@@ -36,15 +36,7 @@ local function workLayout(shouldDarkenDisplay)
 	u.quitFullscreenAndVideoApps()
 
 	-- open things
-	local apps = { "Mona 6", "Gmail", "AlfredExtraPane", isWorkWeek() and "Slack" or nil }
-	u.openApps(apps)
-	u.defer(1, function()
-		for _, name in pairs(apps) do
-			local win = u.app(name):mainWindow()
-			local size = name == "Mona 6" and wu.toTheSide or wu.pseudoMax
-			if win then wu.moveResize(win, size) end
-		end
-	end)
+	u.openApps { "Mona 6", "Gmail", "AlfredExtraPane", isWorkWeek() and "Slack" or nil }
 
 	print("🔲 Layout: work")
 end

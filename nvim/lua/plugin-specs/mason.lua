@@ -11,7 +11,6 @@ local ensureInstalled = {
 		"html-lsp",
 		"just-lsp",
 		"ts_query_ls", -- treesitter query files
-		"copilot-language-server",
 
 		"tombi", -- toml lsp (more modern than taplo)
 		"json-lsp",

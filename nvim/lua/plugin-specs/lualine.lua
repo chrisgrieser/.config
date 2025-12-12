@@ -142,7 +142,7 @@ return {
 				},
 				{
 					"lsp_status",
-					ignore_lsp = { "typos_lsp", "efm", "stylua" },
+					ignore_lsp = { "typos_lsp", "efm", "stylua", "copilot" },
 					cond = function() -- only show component if LSP is active
 						if vim.g.lualine_lsp_active == nil then -- create autocmd only once
 							vim.g.lualine_lsp_active = false

@@ -65,7 +65,7 @@ return {
 			"<D-a>",
 			function() require("neocodeium").cycle_or_complete(1) end,
 			mode = "i",
-			desc = "󰚩 Show/next suggestion",
+			desc = "󰚩 Next suggestion",
 		},
 		{ "<leader>oa", function() vim.cmd.NeoCodeium("toggle") end, desc = "󰚩 NeoCodeium" },
 	},

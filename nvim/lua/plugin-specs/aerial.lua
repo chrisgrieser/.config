@@ -63,6 +63,7 @@ return {
 
 		---VISUALS----------------------------------------------------------------
 		layout = {
+			default_direction = "right",
 			min_width = vim.o.columns - vim.o.textwidth - 4,
 			win_opts = { winhighlight = "Normal:ColorColumn" },
 		},
