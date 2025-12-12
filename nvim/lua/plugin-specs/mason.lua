@@ -8,13 +8,15 @@ local ensureInstalled = {
 	lsps = {
 		"bash-language-server", -- also used for zsh
 		"efm", -- integration of external linters
-		"gh-actions-language-server", -- github actions
 		"html-lsp",
-		"json-lsp",
 		"just-lsp",
-		"tombi", -- toml lsp (more modern than taplo)
 		"ts_query_ls", -- treesitter query files
+		"copilot-language-server",
+
+		"tombi", -- toml lsp (more modern than taplo)
+		"json-lsp",
 		"yaml-language-server",
+		"gh-actions-language-server", -- github actions
 
 		"harper-ls", -- natural language linter
 		"typos-lsp", -- spellchecker for code

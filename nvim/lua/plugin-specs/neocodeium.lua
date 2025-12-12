@@ -9,6 +9,7 @@ return {
 	"monkoose/neocodeium",
 	event = "InsertEnter",
 	cmd = "NeoCodeium",
+	enabled = false,
 	opts = {
 		silent = true,
 		show_label = false, -- signcolumn label for number of suggestions
