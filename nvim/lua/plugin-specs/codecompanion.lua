@@ -114,7 +114,7 @@ return {
 	opts = {
 		display = {
 			-- disabled, since inline-stragy does not handle indents properly
-			-- PENDING https://github.com/olimorris/codecompanion.nvim/issues/2507
+			-- PENDING https://github.com/olimorris/codecompanion.nvim/issues/2508
 			diff = { enabled = true }, -- https://codecompanion.olimorris.dev/configuration/chat-buffer.html#diff
 
 			-- https://codecompanion.olimorris.dev/configuration/chat-buffer.html

@@ -1,9 +1,6 @@
 vim.env.LAZY_STDPATH = "/tmp/nvim-debug"
 load(vim.fn.system("curl -s https://raw.githubusercontent.com/folke/lazy.nvim/main/bootstrap.lua"))()
 
-local apiKeyFile =
-	"$HOME/Library/Mobile Documents/com~apple~CloudDocs/Tech/api-keys/openai-api-key.txt"
-
 -- Your CodeCompanion setup
 local plugins = {
 	{
@@ -18,18 +15,20 @@ local plugins = {
 				chat = { adapter = "openai" },
 			},
 			opts = { log_level = "DEBUG" },
-		},
-		adapters = {
-			http = {
-				openai = function()
-					return require("codecompanion.adapters").extend("openai", {
-						api_key = ("cmd:cat %q"):format(apiKeyFile),
-						schema = {
-							model = { default = "gpt-5-mini" },
-							reasoning_effort = { default = "minimal" },
-						},
-					})
-				end,
+			adapters = {
+				http = {
+					openai = function()
+						return require("codecompanion.adapters").extend("openai", {
+							env = {
+								api_key = "…"
+							},
+							schema = {
+								model = { default = "gpt-5-mini" },
+								reasoning_effort = { default = "minimal" },
+							},
+						})
+					end,
+				},
 			},
 		},
 	},
