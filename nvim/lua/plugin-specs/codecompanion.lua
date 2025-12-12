@@ -73,10 +73,33 @@ return {
 				vim.system { "afplay", sound }
 			end,
 		})
+
+		vim.api.nvim_create_autocmd("User", {
+			desc = "User: leave visual mode",
+			pattern = "CodeCompanionRequestFinished",
+			callback = function()
+				if vim.fn.mode():lower() ~= "v" then return end
+				vim.cmd.normal { vim.fn.mode(), bang = true }
+			end,
+		})
+
+		vim.api.nvim_create_autocmd("User", {
+			desc = "User: format & show diff when CodeCompanion finished",
+			pattern = "CodeCompanionRequestFinished",
+			callback = function(ctx)
+				local ok, conform = pcall(require, "conform")
+				if not ok then vim.lsp.buf.format { bufnr = ctx.buf } end
+				if ok then conform.format { bufnr = ctx.buf } end
+				local ok2, gitsigns = pcall(require, "gitsigns")
+				if not ok2 then return end
+				gitsigns.toggle_linehl()
+				gitsigns.toggle_word_diff()
+				require("gitsigns.config").config.show_deleted = true
+			end,
+		})
 	end,
 	keys = {
 		{ "<leader>ac", "<cmd>CodeCompanionChat toggle<CR>", desc = " Chat (toggle)" },
-		{ "<leader>an", "<cmd>CodeCompanionChat<CR>", desc = " Chat (new)" },
 		{ "<leader>aa", ":CodeCompanion<CR>", mode = "x", desc = " 󰘎 Prompt" },
 
 		-- builtin-prompts https://github.com/olimorris/codecompanion.nvim/blob/main/lua/codecompanion/config.lua
@@ -90,7 +113,8 @@ return {
 	},
 	opts = {
 		display = {
-			diff = { enabled = true }, -- https://codecompanion.olimorris.dev/configuration/chat-buffer.html#diff
+			-- disabled, since inline-stragy does not handle indents properly
+			-- diff = { enabled = false }, -- https://codecompanion.olimorris.dev/configuration/chat-buffer.html#diff
 
 			-- https://codecompanion.olimorris.dev/configuration/chat-buffer.html
 			chat = {

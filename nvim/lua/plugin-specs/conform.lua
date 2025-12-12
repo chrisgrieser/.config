@@ -1,4 +1,4 @@
--- DOCS https://github.com/stevearc/conform.nvim?tab=readme-ov-file#formatters
+-- DOCS https://github.com/stevearc/conform.nvim#formatters
 --------------------------------------------------------------------------------
 
 return {

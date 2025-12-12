@@ -1,7 +1,12 @@
 -- save as `minimal-config.lua`
 -- run via: `nvim -u minimal-config.lua`
 --------------------------------------------------------------------------------
-local spec = {}
+local spec = {
+	"olimorris/codecompanion.nvim",
+	opts = {
+
+	}
+}
 
 --------------------------------------------------------------------------------
 vim.env.PATH = vim.fn.stdpath("data") .. "/mason/bin:" .. vim.env.PATH -- make LSPs available

@@ -60,7 +60,7 @@ return {
 			desc = "󰚩 Next suggestion",
 		},
 		{
-			"<D-a>",
+			"<D-A>",
 			function() require("neocodeium").cycle_or_complete(-1) end,
 			mode = "i",
 			desc = "󰚩 Prev suggestion",
