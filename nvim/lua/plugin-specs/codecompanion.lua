@@ -76,7 +76,7 @@ return {
 
 		vim.api.nvim_create_autocmd("User", {
 			desc = "User: leave visual mode",
-			pattern = "CodeCompanionRequestFinished",
+			pattern = "CodeCompanionInlineFinished",
 			callback = function()
 				if vim.fn.mode():lower() ~= "v" then return end
 				vim.cmd.normal { vim.fn.mode(), bang = true }
@@ -85,7 +85,7 @@ return {
 
 		vim.api.nvim_create_autocmd("User", {
 			desc = "User: format & show diff when CodeCompanion finished",
-			pattern = "CodeCompanionRequestFinished",
+			pattern = "CodeCompanionInlineFinished",
 			callback = function(ctx)
 				local ok, conform = pcall(require, "conform")
 				if not ok then vim.lsp.buf.format { bufnr = ctx.buf } end
@@ -114,7 +114,8 @@ return {
 	opts = {
 		display = {
 			-- disabled, since inline-stragy does not handle indents properly
-			-- diff = { enabled = false }, -- https://codecompanion.olimorris.dev/configuration/chat-buffer.html#diff
+			-- PENDING https://github.com/olimorris/codecompanion.nvim/issues/2507
+			diff = { enabled = true }, -- https://codecompanion.olimorris.dev/configuration/chat-buffer.html#diff
 
 			-- https://codecompanion.olimorris.dev/configuration/chat-buffer.html
 			chat = {
