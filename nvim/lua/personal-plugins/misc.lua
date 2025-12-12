@@ -134,17 +134,26 @@ function M.mdWrap(startWrap, endWrap)
 	if not endWrap then endWrap = startWrap end
 	local mode = vim.fn.mode()
 	if mode == "V" then
-		vim.notify("Visual line mode is not supported", vim.log.levels.WARN)
+		vim.notify("Visual line mode not supported", vim.log.levels.WARN)
 		return
 	end
 	local row, col = unpack(vim.api.nvim_win_get_cursor(0))
 
 	-- determine text
-	local text = mode == "n" and vim.fn.expand("<cword>") or ""
-	if mode == "v" then
+	local text = ""
+	if mode == "n" then
+		local cursorChar = vim.api.nvim_get_current_line():sub(col + 1, col + 1)
+		if not cursorChar:find("%w") then
+			vim.notify("String under cursor is not a word", vim.log.levels.WARN)
+			return
+		end
+		text = vim.fn.expand("<cword>")
+	elseif mode == "v" then
 		vim.cmd.normal { '"zy', bang = true }
 		text = vim.fn.getreg("z")
 	end
+
+	-- wrap text
 	local insert = startWrap .. text .. endWrap
 	local clipboardUrl
 	if startWrap == "mdlink" then
