@@ -1,7 +1,11 @@
 #!/usr/bin/env zsh
-export GIT_OPTIONAL_LOCKS=0
 
+# CONFIG
 perma_repos_path="$HOME/.config/perma-repos.csv"
+
+#-------------------------------------------------------------------------------
+
+export GIT_OPTIONAL_LOCKS=0
 all_changes=""
 
 #-UNCOMMITTED CHANGES-----------------------------------------------------------
@@ -33,7 +37,7 @@ done < "$perma_repos_path"
 
 #-SET---------------------------------------------------------------------------
 if [[ -z "$all_changes" ]]; then
-	sketchybar --set "$NAME" drawing=false
+	sketchybar --set "$NAME" icon="" label=""
 else
-	sketchybar --set "$NAME" drawing=true label="$all_changes"
+	sketchybar --set "$NAME" icon="󰓦" label="$all_changes"
 fi

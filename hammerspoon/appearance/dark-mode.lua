@@ -43,7 +43,7 @@ function M.setDarkMode(toMode)
 	hs.osascript.applescript(applescript)
 
 	-- sketchybar
-	vim.defer_fn(function() hs.execute(u.exportPath .. "sketchybar --reload") end, 4)
+	hs.execute(u.exportPath .. "sketchybar --reload")
 
 	-- PDF background
 	if u.appRunning("Highlights") then

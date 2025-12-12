@@ -13,11 +13,6 @@ function set_bar {
 
 #───────────────────────────────────────────────────────────────────────────────
 
-if [[ "$SENDER" == "forced" ]]; then # avoid flickering on reload
-	set_bar ""
-	return 0
-fi
-
 # not on projector
 if [[ $(system_profiler SPDisplaysDataType | grep -c Resolution) -gt 1 ]]; then
 	set_bar ""
