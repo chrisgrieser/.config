@@ -39,6 +39,8 @@ return {
 		end, "before")
 	end,
 	keys = {
+		{ "<leader>oa", function() vim.cmd.NeoCodeium("toggle") end, desc = "󰚩 NeoCodeium" },
+		{ "<leader>an", function() vim.cmd.NeoCodeium("restart") end, desc = "󰚩 NeoCodeium restart" },
 		{
 			"<D-s>",
 			function() require("neocodeium").accept() end,
@@ -63,6 +65,5 @@ return {
 			mode = "i",
 			desc = "󰚩 Prev suggestion",
 		},
-		{ "<leader>oa", function() vim.cmd.NeoCodeium("toggle") end, desc = "󰚩 NeoCodeium" },
 	},
 }
