@@ -186,3 +186,84 @@ bkeymap("n", "<leader>ep", function()
 
 	vim.ui.open(outputPath)
 end, { desc = " Preview" })
+
+--------------------------------------------------------------------------------
+
+-- stylua: ignore
+local romajiToHiraganaMap = {
+	a  = "あ", i  = "い", u  = "う", e  = "え", o  = "お",
+	ka = "か", ki = "き", ku = "く", ke = "け", ko = "こ",
+	sa = "さ", shi= "し", su = "す", se = "せ", so = "そ",
+	ta = "た", chi= "ち", tsu= "つ", te = "て", to = "と",
+	na = "な", ni = "に", nu = "ぬ", ne = "ね", no = "の",
+	ha = "は", hi = "ひ", fu = "ふ", he = "へ", ho = "ほ",
+	ma = "ま", mi = "み", mu = "む", me = "め", mo = "も",
+	ya = "や",            yu = "ゆ",            yo = "よ",
+	ra = "ら", ri = "り", ru = "る", re = "れ", ro = "ろ",
+	wa = "わ",                                  wo = "を",
+	n  = "ん",
+	ga = "が", gi = "ぎ", gu = "ぐ", ge = "げ", go = "ご",
+	za = "ざ", ji = "じ", zu = "ず", ze = "ぜ", zo = "ぞ",
+	da = "だ",                       de = "で", ["do"] = "ど",
+	ba = "ば", bi = "び", bu = "ぶ", be = "べ", bo = "ぼ", -- typos: ignore-line
+	pa = "ぱ", pi = "ぴ", pu = "ぷ", pe = "ぺ", po = "ぽ",
+	kya = "きゃ", kyu = "きゅ", kyo = "きょ",
+	sha = "しゃ", shu = "しゅ", sho = "しょ",
+	cha = "ちゃ", chu = "ちゅ", cho = "ちょ",
+	nya = "にゃ", nyu = "にゅ", nyo = "にょ",
+	hya = "ひゃ", hyu = "ひゅ", hyo = "ひょ",
+	mya = "みゃ", myu = "みゅ", myo = "みょ", -- typos: ignore-line
+	rya = "りゃ", ryu = "りゅ", ryo = "りょ",
+	gya = "ぎゃ", gyu = "ぎゅ", gyo = "ぎょ",
+	ja  = "じゃ", ju  = "じゅ", jo  = "じょ",
+	bya = "びゃ", byu = "びゅ", byo = "びょ",
+	pya = "ぴゃ", pyu = "ぴゅ", pyo = "ぴょ",
+}
+
+bkeymap("n", "#", function()
+	local cword = vim.fn.expand("<cword>")
+	if not cword:find("^%w+$") then
+		vim.notify("Word must be in Romaji.", nil, vim.log.levels.WARN)
+		return
+	end
+
+	local hiragana = cword:lower()
+	-- small tsu
+	hiragana = hiragana:gsub("[kstnhmyrwgzdbp][kstnhmyrwgzdbp]", function(m)
+		if m:sub(1, 1) == m:sub(2, 2) then return "っ" .. m:sub(1, 1) end
+		return m
+	end)
+
+	-- sort by length, to replace the longer romaji first
+	vim.iter(romajiToHiraganaMap):fold({{}, {}, {}}, function(acc, romaji, hira)
+		table.insert(acc[#romaji], { romaji, hira })
+		return acc
+	end)
+	:each(function(k, v)
+		hiragana = hiragana:gsub(k, v)
+	end)
+	vim.cmd.normal { "ciw" .. hiragana, bang = true }
+end)
+-- 	const cursor = editor.getCursor();
+-- 	const { from, to } = editor.wordAt(cursor);
+-- 	if (!from || !to) return;
+-- 	const cword = editor.getRange(from, to);
+-- 	if (!cword.match(/^\w+$/)) {
+-- 		new Notice("Word under cursor must be in Romaji.");
+-- 		return;
+-- 	}
+--
+-- 	// CONVERSION
+-- 	let hiragana = cword.toLowerCase();
+-- 	hiragana = hiragana.replace(/([kstnhmyrwgzdbp])\1/, "っ$1"); // small tsu
+-- 	// sort by length, to replace the longer romaji first
+-- 	const romajiByLength = Object.keys(romajiToHiraganaMap).sort((a, b) => b.length - a.length);
+-- 	for (const romaji of romajiByLength) {
+-- 		hiragana = hiragana.replaceAll(romaji, romajiToHiraganaMap[romaji]);
+-- 	}
+-- 	editor.replaceRange(hiragana, from, to);
+--
+-- 	// move cursor to end of word
+-- 	cursor.ch = to.ch - (cword.length - hiragana.length) - 1;
+-- 	editor.setCursor(cursor);
+-- }

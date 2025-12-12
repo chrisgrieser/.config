@@ -6,9 +6,15 @@ local wu = require("win-management.window-utils")
 local wf = hs.window.filter
 --------------------------------------------------------------------------------
 
--- one screen: always open windows pseudo-maximized
--- projector: always open windows maximized
-M.wf_pseudoMax = wf.new({
+-- CONFIG
+local smallWinApps = {
+	"Script Editor",
+	"Reminders",
+	"TextEdit",
+	"System Settings",
+	"Preview",
+}
+local pseudoMaxApps = {
 	"Microsoft Word",
 	"Safari",
 	"Neovide",
@@ -20,24 +26,23 @@ M.wf_pseudoMax = wf.new({
 	"Signal",
 	"Gmail",
 	"Monodraw",
-})
+}
+
+---AUTO-MOVEMENT AND AUTO-SIZING------------------------------------------------
+
+-- one screen: always open windows pseudo-maximized
+-- projector: always open windows maximized
+M.wf_pseudoMax = wf.new(pseudoMaxApps)
 	:setOverrideFilter({ fullscreen = false, rejectTitles = { "^Save$", "^Open$" } })
 	:subscribe(wf.windowCreated, function(win)
 		local size = env.isProjector() and hs.layout.maximized or wu.pseudoMax
 		wu.moveResize(win, size)
 	end)
 
-M.wf_middle_half = wf.new({
-	"TextEdit",
-	"Preview",
-	"Script Editor",
-	"Reminders",
-	"System Settings",
-})
+-- windows that should be sized smaller
+M.wf_middle_half = wf.new(smallWinApps)
 	:setOverrideFilter({ fullscreen = false })
 	:subscribe(wf.windowCreated, function(win) wu.moveResize(win, wu.middleHalf) end)
-
---------------------------------------------------------------------------------
 
 -- If two screens, always move new windows to Mouse Screen
 M.wf_appsOnMouseScreen = wf.new(true)
@@ -49,24 +54,28 @@ M.wf_appsOnMouseScreen = wf.new(true)
 		if newWin:screen():id() ~= mouseScreen:id() then newWin:moveToScreen(mouseScreen) end
 	end)
 
----ACTIONS----------------------------------------------------------------------
+---HOTKEYS----------------------------------------------------------------------
 local function toggleMaximized()
-	local currentWin = hs.window.focusedWindow()
+	local frontWin = hs.window.focusedWindow()
+	if env.isProjector() then
+		wu.moveResize(frontWin, hs.layout.maximized)
+		return
+	end
+
 	local baseSize = wu.pseudoMax
+	if u.isFront("Finder") or u.isFront(smallWinApps) then baseSize = wu.middleHalf end
+	if u.isFront("Mona 6") then baseSize = wu.toTheSide end
 
-	local smallerWins = { "Finder", "Script Editor", "Reminders", "TextEdit", "System Settings" }
-	if u.isFront(smallerWins) then baseSize = wu.middleHalf end
-	if env.isProjector() then baseSize = hs.layout.maximized end
+	local screen = frontWin:screen():frame()
+	local isMaximized = frontWin:frame().w == screen.w and frontWin:frame().h == screen.h
+	local newSize = isMaximized and baseSize or hs.layout.maximized
 
-	local newSize = wu.winHasSize(currentWin, baseSize) and hs.layout.maximized or baseSize
-	if u.isFront("Mona 6") then newSize = wu.toTheSide end
-
-	wu.moveResize(currentWin, newSize)
+	wu.moveResize(frontWin, newSize)
 end
 
 local function moveToNextDisplay()
 	if #hs.screen.allScreens() < 2 then
-		hs.alert("Cannot move, since there is only one screen.", 3)
+		hs.alert("Cannot move to next display since there is only one.", 3)
 		return
 	end
 	local win = hs.window.focusedWindow()
@@ -77,7 +86,6 @@ end
 local function tileRight() wu.moveResize(hs.window.focusedWindow(), hs.layout.right50) end
 local function tileLeft() wu.moveResize(hs.window.focusedWindow(), hs.layout.left50) end
 
----HOTKEYS----------------------------------------------------------------------
 hs.hotkey.bind({ "ctrl" }, "space", toggleMaximized)
 hs.hotkey.bind(u.hyper, "M", moveToNextDisplay)
 hs.hotkey.bind(u.hyper, "right", tileRight)
