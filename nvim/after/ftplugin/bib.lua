@@ -1,6 +1,6 @@
 -- scroll down on reading a file
 vim.schedule(function()
-	if vim.b.bib_did_scroll then return end
+	if vim.b.bib_did_scroll then return end -- only once per buf-read
 	vim.cmd.normal { "G", bang = true }
 	vim.b.bib_did_scroll = true
 end)

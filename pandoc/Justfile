@@ -1,4 +1,4 @@
-set quiet
+set quiet := true
 
 format-main-bibliography:
     #!/usr/bin/env zsh

@@ -4,4 +4,4 @@
 # ignore these files
 # INFO (needs glob due to conform.nvim appending stuff for temporary file)
 [files]
-extend-exclude = ["*main-bibliography.bib"] # too many false positives
+extend-exclude = ["*.bib"] # too many false positives
