@@ -20,8 +20,8 @@ local lightThemes = {
 --------------------------------------------------------------------------------
 
 wt.on("gui-startup", function(cmd)
-	local sideAppWidth = 0.18 -- same as value in hammerspoon config
-	local screen = wt.gui.screens().main
+	local sideAppWidth = 0.185 -- same as value in hammerspoon config
+	local screen = wt.gui.screens().active
 	local x = screen.width * sideAppWidth
 	local _, _, win = wt.mux.spawn_window(cmd or {})
 	win:gui_window():set_inner_size(screen.width - x, screen.height)
@@ -59,7 +59,7 @@ local config = {
 
 	-- Mouse & Cursor
 	hide_mouse_cursor_when_typing = true,
-	default_cursor_style = "BlinkingBar", -- mostly overwritten by vi-mode.zsh
+	default_cursor_style = "BlinkingBar", -- fallback, since mostly overwritten by vi-mode.zsh
 	cursor_thickness = "0.07cell",
 	cursor_blink_rate = 700,
 	cursor_blink_ease_in = "Constant", -- Constant = no fading

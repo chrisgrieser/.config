@@ -20,10 +20,8 @@ autoload -U edit-command-line
 zle -N edit-command-line
 bindkey '^F' edit-command-line
 
-# remappings
+# dot-repeat (of last argument)
 bindkey '…' insert-last-word    # `alt+.` on macOS
-bindkey "^[[1;3D" backward-word # `alt+arrow` to move between words (emulating macOS default behavior)
-bindkey "^[[1;3C" forward-word  
 
 #───────────────────────────────────────────────────────────────────────────────
 # VI MODE
@@ -54,6 +52,12 @@ bindkey -M vicmd 'U' redo
 bindkey -M vicmd 'm' vi-join
 bindkey -M vicmd -s 'Y' 'y$'
 bindkey -M viins '^?' backward-delete-char # fix backspace not being able to deleted a line break
+
+# insert mode movements
+bindkey "^[[1;3D" backward-word # `alt+arrow` to move between words (emulating macOS default behavior)
+bindkey "^[[1;3C" forward-word  
+bindkey "^A" beginning-of-line  # also bound to `cmd+left` via wezterm
+bindkey "^E" end-of-line        # also bound to `cmd+right` via wezterm
 
 #───────────────────────────────────────────────────────────────────────────────
 # YANK/DELETE to (macOS) system clipboard

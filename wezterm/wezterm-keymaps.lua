@@ -36,6 +36,10 @@ M.keys = {
 	-- disable, since used for `fzf`
 	{ key = "Enter", mods = "ALT", action = act.DisableDefaultAssignment },
 
+	-- Emulates macOS' cmd-right & cmd-left
+	{ key = "LeftArrow", mods = "CMD", action = act.SendKey { key = "a", mods = "CTRL" } },
+	{ key = "RightArrow", mods = "CMD", action = act.SendKey { key = "e", mods = "CTRL" } },
+
 	---META----------------------------------------------------------------------
 	{ key = ",", mods = "CMD", action = actFun(function() wt.open_with(wt.config_file) end) },
 	{ key = "Escape", mods = "CTRL", action = act.ShowDebugOverlay },
@@ -91,13 +95,13 @@ M.keys = {
 		key = "o",
 		mods = "CMD",
 		action = act.QuickSelectArgs {
+			label = "Open url/commit/issue",
+			-- skip_action_on_paste = true, -- in next release
 			patterns = {
 				[[https?://[^\]",' ]+\w]], -- https-url
 				"[a-f0-9]{7,40}", -- commits
 				"(?<=#)[0-9]+", -- issues (without #)
 			},
-			label = "Open url/commit/issue",
-			-- skip_action_on_paste = true, -- in next release
 			action = actFun(function(win, pane)
 				local match = win:get_selection_text_for_pane(pane)
 				if match:find("^https?://") then return wt.open_with(match) end

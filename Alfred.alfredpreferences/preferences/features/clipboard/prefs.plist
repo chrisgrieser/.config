@@ -19,6 +19,7 @@
 		<string>KeePassXC</string>
 		<string>MacPass</string>
 		<string>KeeWeb</string>
+		<string>Passwords</string>
 	</array>
 	<key>fastAppendBackToClipboard</key>
 	<true/>
@@ -57,5 +58,7 @@
 	<true/>
 	<key>viewerKeyword</key>
 	<string>cb</string>
+	<key>viewerKeywordEnabled</key>
+	<false/>
 </dict>
 </plist>
