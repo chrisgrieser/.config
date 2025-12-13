@@ -10,7 +10,12 @@ local efmConfig = {
 			lintStdin = true, -- caveat: linting from stdin does not support `.markdownlintignore`
 			lintIgnoreExitCode = true,
 			lintSeverity = vim.diagnostic.severity.INFO,
-			lintFormats = { "%f:%l:%c MD%n/%m", "%f:%l MD%n/%m" },
+			lintFormats = {
+				"%f:%l:%c error MD%n/%m",
+				"%f:%l error MD%n/%m",
+				"%f:%l:%c warning MD%n/%m",
+				"%f:%l warning MD%n/%m",
+			},
 			rootMarkers = { ".markdownlint.yaml" },
 		},
 	},
@@ -28,6 +33,7 @@ local efmConfig = {
 				"-:%l:%c: %tarning: %m [SC%n]",
 				"-:%l:%c: %tote: %m [SC%n]",
 			},
+			rootMarkers = { ".git" },
 		},
 	},
 }
