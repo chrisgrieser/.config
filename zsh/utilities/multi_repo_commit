@@ -5,16 +5,16 @@ github_username="chrisgrieser"
 # set -e
 
 # repo_names="alfred|shimmering-obsidian|gitfred"
-repo_names="nvim"
+# repo_names="nvim"
 # repo_names="obsidian-quadro|pseudometa-obsidian-plugin-template|grappling-hook|obsidian-proofreader"
 # ALL
-# repo_names="finder-vim-mode|zsh-magic-dashboard|nvim|alfred|shimmering-obsidian|gitfred|obsidian-quadro|pseudometa-obsidian-plugin-template|grappling-hook"
+repo_names="finder-vim-mode|zsh-magic-dashboard|nvim|alfred|shimmering-obsidian|gitfred|obsidian-quadro|pseudometa-obsidian-plugin-template|grappling-hook|obsidian-proofreader"
 
 function actions_in_repo {
-	cp -f "$HOME/Desktop/nvim-type-check.yml" "./.github/workflows/nvim-type-check.yml"
+	cp -f "$HOME/Desktop/.markdownlint.yaml" ".markdownlint.yaml"
 }
 
-commit_msg="ci: unpin lua_ls in nvim type check since issue is resolved"
+commit_msg="ci: update markdownlint"
 
 _export_github_token # defined in .zshenv
 

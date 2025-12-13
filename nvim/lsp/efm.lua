@@ -9,13 +9,14 @@ local efmConfig = {
 			lintCommand = "markdownlint --stdin",
 			lintStdin = true, -- caveat: linting from stdin doesn't support `.markdownlintignore`
 			lintIgnoreExitCode = true,
-			lintSeverity = vim.diagnostic.severity.INFO,
-			lintFormats = { -- don't capture severity via `%t`, since it's too often `error`
-				"stdin:%l:%c error MD%n/%*[^ ] %m",
-				"stdin:%l error MD%n/%*[^ ] %m",
-				"stdin:%l:%c warning MD%n/%*[^ ] %m",
-				"stdin:%l warning MD%n/%*[^ ] %m",
+			lintFormats = {
+				"stdin:%l:%c %trror MD%n/%*[^ ] %m",
+				"stdin:%l %trror MD%n/%*[^ ] %m",
+				"stdin:%l:%c %tarning MD%n/%*[^ ] %m",
+				"stdin:%l %tarning MD%n/%*[^ ] %m",
 			},
+			-- lower severity level (warnings require `default: warning` in markdownlint.yaml)
+			lintCategoryMap = { w = "I", e = "W" },
 			rootMarkers = { ".markdownlint.yaml" },
 		},
 	},

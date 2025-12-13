@@ -238,8 +238,7 @@ end, { desc = " Paste at EoL" })
 -- 2. add undopoint before the paste
 -- 3. skip auto-indent
 keymap("i", "<D-v>", function()
-	local isCharwise = vim.fn.getregtype("+") == "v"
-	if isCharwise then vim.fn.setreg("+", vim.trim(vim.fn.getreg("+"))) end
+	vim.fn.setreg("+", vim.trim(vim.fn.getreg("+"))) -- trim
 	if vim.fn.mode() == "R" then return "<C-r>+" end
 	return "<C-g>u<C-r><C-o>+" -- `<C-g>u` adds undopoint before, `<C-r><C-o>` skips auto-indent
 end, { desc = " Paste", expr = true })
