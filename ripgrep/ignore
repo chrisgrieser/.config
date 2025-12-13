@@ -1,5 +1,6 @@
 # Mac Stuff
 .Trash
+.localized
 
 # useless stuff inside pseudo-apps
 **/*.app/*

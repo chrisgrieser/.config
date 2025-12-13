@@ -21,7 +21,7 @@ on alfred_script(shellCmd)
 		set arg to text 4 thru -1 of shellCmd
 		-- 1. leading space to suppress saving in shell history
 		-- 2. `-q` to suppress post-cd-hook output
-		set shellCmd to " cd -q " & arg & " && clear"
+		set shellCmd to " builtin cd -q " & arg & " && clear"
 	end if
 
 	# SEND COMMAND

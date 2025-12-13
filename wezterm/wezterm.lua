@@ -24,7 +24,7 @@ wt.on("gui-startup", function(cmd)
 	local screenWidth = wt.gui.screens().main.width
 	local x = screenWidth * sideAppWidth
 	local _, _, win = wt.mux.spawn_window(cmd or {})
-	win:gui_window():set_inner_size(9001, 9001) -- automatically truncated to maximum
+	win:gui_window():set_inner_size(9001, ) -- automatically truncated to maximum
 	win:gui_window():set_position(x, 0)
 end)
 

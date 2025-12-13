@@ -56,10 +56,11 @@ bindkey -M menuselect '\r' .accept-line            # <CR> select & execute
 
 zstyle ':completion:*' file-sort modification follow # "follow" makes it follow symlinks
 
-# INFO inserting "path-directories" to add "directories in cdpath" to the top
+# INFO inserting "path-directories" to add "directories in cdpath" to the top,
+# and "recent-dirs" to add "recent directories" from `cdr` after it
 # (does not work with `AUTO_CD` though; requires leading `cd`)
 zstyle ':completion:*' group-order \
-	path-directories local-directories directories \
+	path-directories recent-dirs local-directories directories \
 	all-expansions expansions options \
 	aliases suffix-aliases functions reserved-words builtins commands executables \
 	remotes hosts recent-branches commits

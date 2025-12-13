@@ -61,7 +61,7 @@ function _list_files_here {
 	local eza_output
 	eza_output=$(
 		eza --width="$COLUMNS" --all --grid --color=always --icons \
-			--git-ignore --ignore-glob=".DS_Store" \
+			--git-ignore --ignore-glob=".DS_Store|.localized" \
 			--sort=oldest --group-directories-first --no-quotes \
 			--git --long --no-user --no-permissions --no-filesize --no-time \
       "$PWD"

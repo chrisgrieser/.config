@@ -14,7 +14,7 @@ __pycache__
 *.dmg
 
 #───────────────────────────────────────────────────────────────────────────────
-# NOTE as opposed to `.ignore` files (used e.g. by ripgrep), 
+# NOTE as opposed to `.ignore` files (used e.g. by ripgrep),
 # gitignore files do not accept syntax such as `*.{ext1,ext2}`
 
 # Microsoft Office temporary files

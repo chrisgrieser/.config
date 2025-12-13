@@ -28,11 +28,11 @@ function -() { cd - || return; } # `-` to trigger `cd -` (workaround since canno
 autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
 add-zsh-hook chpwd chpwd_recent_dirs
 
-zstyle ':chpwd:*' recent-dirs-max 20
-zstyle ':chpwd:*' recent-dirs-file "$HOME/.local/share/zsh/zsh_history.zsh"
-zstyle ':chpwd:*' recent-dirs-default true
-zstyle ':chpwd:*' recent-dirs-insert true
-alias gr=" cdr"
+zstyle ':chpwd:*' recent-dirs-max 15
+zstyle ':chpwd:*' recent-dirs-file "$HOME/.local/share/zsh/chpwd-recent-dirs"
+zstyle ':chpwd:*' recent-dirs-default true # make `cdr` fallback to `cd`
+zstyle ':completion:*' recent-dirs-insert "both"
+alias cd=" cdr" # alias back to `cd` -> `cd` now also does recent directories
 
 #-KEYMAPS-----------------------------------------------------------------------
 
@@ -40,7 +40,7 @@ alias gr=" cdr"
 function _grappling_hook {
 	local target="$HOME/Desktop"
 	[[ "$PWD" == "$target" ]] && target="$HOME/.config"
-	cd -q "$target" || return 1
+	builtin cd -q "$target" || return 1
 	zle reset-prompt
 	if [[ "$TERM_PROGRAM" == "WezTerm" ]]; then wezterm set-working-directory; fi
 }
