@@ -147,12 +147,9 @@ function run() {
 			// biome-ignore format: does not need to be read so often
 			const { full_name, description, url, pretty, tags, author, name } = repo;
 
-			const subtitle = [
-				"⭐ " + pretty.stars,
-				author,
-				pretty.updated_at,
-				description,
-			].join("  ·  ");
+			const subtitle = ["⭐ " + pretty.stars, author, pretty.updated_at, description]
+				.filter(Boolean)
+				.join("  ·  ");
 
 			/** @type {(AlfredItem & {fullRepo: string})} */
 			const item = {

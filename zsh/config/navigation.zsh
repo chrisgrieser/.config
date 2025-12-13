@@ -28,12 +28,15 @@ function -() { builtin cd - || return; } # `-` to trigger `cd -` (workaround sin
 # https://zsh.sourceforge.io/Doc/Release/User-Contributions.html#Recent-Directories
 autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
 add-zsh-hook chpwd chpwd_recent_dirs
+alias gr=" cdr"
 
-zstyle ':chpwd:*' recent-dirs-max 8 # so the list to other completions is shorter
+zstyle ':chpwd:*' recent-dirs-max 20
 zstyle ':chpwd:*' recent-dirs-file "$HOME/.local/share/zsh/chpwd-recent-dirs"
 
+# together, these make `cdr` search for and insert the instead of numbers
 zstyle ':chpwd:*' recent-dirs-default true # make `cdr` fallback to `cd`
 zstyle ':completion:*' recent-dirs-insert "always" # insert dir instead of numbers
+zstyle ':chpwd:*:*' recent-dirs-prune "parent" # using "pattern:…" not working
 
 #-KEYMAPS-----------------------------------------------------------------------
 

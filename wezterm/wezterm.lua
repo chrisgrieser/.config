@@ -20,7 +20,7 @@ local lightThemes = {
 --------------------------------------------------------------------------------
 
 wt.on("gui-startup", function(cmd)
-	local sideAppWidth = 0.185 -- same as value in hammerspoon config
+	local sideAppWidth = 0.18 -- same as value in hammerspoon config
 	local screen = wt.gui.screens().main
 	local x = screen.width * sideAppWidth
 	local _, _, win = wt.mux.spawn_window(cmd or {})

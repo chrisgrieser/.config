@@ -1,5 +1,5 @@
 # DOCS
-# official docs             https://zsh.sourceforge.io/Guide/zshguide06.html
+# zsh docs                  https://zsh.sourceforge.io/Guide/zshguide06.html
 # zstyle                    https://zsh.sourceforge.io/Doc/Release/Completion-System.html#Standard-Styles
 # good guide                https://thevaluable.dev/zsh-completion-guide-examples/
 # zsh-autocomplete config   https://github.com/marlonrichert/zsh-autocomplete#configuration
@@ -56,11 +56,10 @@ bindkey -M menuselect '\r' .accept-line            # <CR> select & execute
 
 zstyle ':completion:*' file-sort modification follow # "follow" makes it follow symlinks
 
-# INFO inserting "path-directories" to add "directories in cdpath" to the top,
-# and "recent-dirs" to add "recent directories" from `cdr` after it
-# (does not work with `AUTO_CD` though; requires leading `cd`)
+# INFO inserting "path-directories" to add "directories in cdpath" to the top
+# (does not work with `AUTO_CD` though; thus this requires a leading `cd`)
 zstyle ':completion:*' group-order \
-	path-directories recent-dirs local-directories directories \
+	path-directories local-directories directories \
 	all-expansions expansions options \
 	aliases suffix-aliases functions reserved-words builtins commands executables \
 	remotes hosts recent-branches commits
