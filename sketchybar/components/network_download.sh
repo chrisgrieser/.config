@@ -16,6 +16,7 @@ function set_empty {
 #───────────────────────────────────────────────────────────────────────────────
 
 # `netstat` only outputs as stream, so using `awk`'s `exit` to return 1st value
+# -> `$6` would be the upload
 download=$(netstat -w1 | awk '/[0-9]/ {print int($3/1024) ; exit }')
 unit="k"
 

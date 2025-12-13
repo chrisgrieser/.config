@@ -134,7 +134,7 @@ do
 
 		vim.api.nvim_set_current_line(updated)
 		local diff = #updated - #curLine
-		vim.api.nvim_win_set_cursor(0, { lnum, col + diff })
+		vim.api.nvim_win_set_cursor(0, { lnum, math.max(col + diff, 0) })
 	end
 
 	-- <D-h> remapped to <D-5>, since used by macOS PENDING https://github.com/neovide/neovide/issues/3099

@@ -36,7 +36,7 @@ end)
 wt.on("format-tab-title", function(tab)
 	if tab.tab_title ~= "" then return " " .. tab.tab_title .. " " end -- set by wezterm cli
 
-	local winTitle = tab.active_pane.title -- set by process, or foreground process
+	local winTitle = tab.active_pane.title -- set by process (or name of foreground process)
 	local pane = wt.mux.get_pane(tab.active_pane.pane_id)
 	local process = (pane:get_foreground_process_name() or ""):gsub(".*/", "")
 	if process ~= "zsh" then return ("  %s "):format(winTitle) end
