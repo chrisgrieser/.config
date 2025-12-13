@@ -93,29 +93,23 @@ M.keys = {
 		action = act.QuickSelectArgs {
 			patterns = {
 				[[https?://[^\]",' ]+\w]], -- https-url
-				"[a-f0-9]{7,40}", -- hashes
+				"[a-f0-9]{7,40}", -- commits
 				"(?<=#)[0-9]+", -- issues (without #)
 			},
 			label = "Open url/commit/issue",
 			-- skip_action_on_paste = true, -- in next release
 			action = actFun(function(win, pane)
 				local match = win:get_selection_text_for_pane(pane)
-				if match:find("^https?://") then
-					wt.open_with(match)
-					return
-				end
-				local cwd = (pane:get_current_working_dir() or {}).file_path
-				if not cwd then return end
+				if match:find("^https?://") then return wt.open_with(match) end
 
-				local type = #match < 6 and "commits" or "issues"
-				local ok, stdout, _ = wt.run_child_process { "git", "-C", cwd, "remote", "--verbose" }
-				if not ok then return end
-				local repo = stdout:match("github%.com[/:](%S+)")
-				if not repo then
-					wt.log_info("remote info has no github url:", stdout)
-					return
-				end
-				repo = repo:gsub("%.git$", "")
+				local cwd = (pane:get_current_working_dir() or {}).file_path
+				if not cwd then return wt.log_info("no cwd") end
+				local type = #match < 7 and "issues" or "commit"
+				local ok, stdout, stderr =
+					wt.run_child_process { "git", "-C", cwd, "remote", "--verbose" }
+				if not ok then return wt.log_info("remote info failed:", stderr) end
+				local repo = (stdout:match("github%.com[/:](%S+)") or ""):gsub("%.git$", "")
+				if repo == "" then return wt.log_info("remote info has no github url:", stdout) end
 
 				local url = ("https://github.com/%s/%s/%s"):format(repo, type, match)
 				wt.open_with(url)
