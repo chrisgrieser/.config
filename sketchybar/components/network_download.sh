@@ -3,6 +3,16 @@
 # CONFIG
 threshold_kb=100
 
+#-------------------------------------------------------------------------------
+
+function set_empty {
+	# setting padding needed, since `drawing=false` is buggy
+	sketchybar --set "$NAME" label="" icon="" \
+		background.padding_right="0" icon.padding_right="0" label.padding_right="0"
+}
+
+[[ "$SENDER" = "forced" ]] && set_empty # prevent initial flickering
+
 #───────────────────────────────────────────────────────────────────────────────
 
 # `netstat` only outputs as stream, so using `awk`'s `exit` to return 1st value
@@ -11,8 +21,8 @@ unit="k"
 
 # only show when more than threshold
 if [[ $download -lt $threshold_kb ]]; then
-	sketchybar --set "$NAME" label="" icon="" background.padding_right="0"
-	return 0
+	set_empty
+	return
 fi
 
 # switch to Mb when more than 1024kb, Gb when more than 1024kb, etc.
@@ -25,4 +35,5 @@ if [[ $download -gt 1024 ]]; then
 	unit="G"
 fi
 
-sketchybar --set "$NAME" label="${download}${unit}" icon="" background.padding_right="10"
+sketchybar --set "$NAME" label="${download}${unit}" icon="" \
+	background.padding_right="10" icon.padding_right="3" label.padding_right="3"

@@ -94,6 +94,7 @@ local config = {
 	show_new_tab_button_in_tab_bar = false,
 	hide_tab_bar_if_only_one_tab = true,
 	use_fancy_tab_bar = false, -- `false` = style using terminal cells
+	tab_max_width = 30,
 	window_frame = { font_size = 30 }, -- font size if using `fancy_tab_bar`
 
 	-- Bell

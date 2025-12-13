@@ -21,16 +21,14 @@ return {
 				IgnoreLinkTitle = true,
 			},
 			linters = {
-				-- disable buggy rules
-				SentenceCapitalization = false, -- https://github.com/Automattic/harper/issues/1056
-				UnclosedQuotes = false, -- https://github.com/Automattic/harper/issues/1573
-				-- CommaFixes = false, -- https://github.com/Automattic/harper/issues/1097
+				UseTitleCase = false, -- I prefer sentence case headings
+
+				-- disable buggy rules?
+				SentenceCapitalization = true, -- https://github.com/Automattic/harper/issues/1056
+				UnclosedQuotes = true, -- https://github.com/Automattic/harper/issues/1573
 
 				-- enable extra rules?
 				UseGenitive = true,
-				BoringWords = false,
-				LinkingVerbs = false,
-				SpelledNumbers = false,
 			},
 			isolateEnglish = true, -- experimental; in mixed-language doc only check English
 			dialect = "American",
