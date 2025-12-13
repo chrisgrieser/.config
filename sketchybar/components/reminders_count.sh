@@ -7,7 +7,7 @@ list_name="Tasks"
 function set_empty {
 	# setting padding needed, since `drawing=false` is buggy
 	sketchybar --set "$NAME" label="" icon="" \
-		background.padding_right="0" icon.padding_right="0" label.padding_right="0"
+		background.padding_right="0" icon.padding_right="0" label.padding_right="0" 
 }
 
 # GUARD only when not on projector

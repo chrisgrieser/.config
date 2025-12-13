@@ -41,7 +41,7 @@ sketchybar \
 	`#--1st-row----------------------------------------------------------------`\
 	\
 	--add item clock $row_1 \
-	--set clock update_freq="1" padding_left="10" \
+	--set clock update_freq="1" padding_left="10" padding_right="12" \
 	script="./components/clock.sh" \
 	\
 	--add item weather $row_1 \
