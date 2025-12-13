@@ -12,7 +12,10 @@ return {
 		{ "L", function() require("origami").dollar() end, mode = { "n", "x" }, desc = "Origami L" },
 	},
 	opts = {
-		foldKeymaps = { setup = false }, -- setting on my own since I remap `H` and `L`
+		foldKeymaps = {
+			setup = false, -- setting on my own since I remap `H` and `L`
+			scrollLeftOnCaret = true, -- `^` should scroll left (basically mapped to `0^`)
+		},
 		foldtext = {
 			padding = 2,
 			lineCount = { template = "󰘖 %d" },

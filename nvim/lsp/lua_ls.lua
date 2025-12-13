@@ -19,11 +19,6 @@ return {
 				inferParamType = true, -- unannotated params are inferred instead of `any`
 			},
 			diagnostics = {
-				groupFileStatus = {
-					luadoc = "Any", -- require stricter annotations
-					conventions = "Any", -- disallow global variables
-				},
-				unusedLocalExclude = { "_*" },
 				disable = {
 					-- formatter already handles that
 					"trailing-space",

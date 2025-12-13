@@ -1,9 +1,20 @@
 {
-	"runtime.version": "Lua 5.4",
+	"runtime.version": "Lua 5.4", // https://github.com/Hammerspoon/hammerspoon/issues/2217,
 
-	// treat them as library, but ignore them in global diagnostics
-	"workspace.ignoreDir": ["types"],
-	"workspace.library": ["types"],
+	// treat them libraries, but ignore them in global diagnostics
+	"workspace": {
+		"library": ["types"],
+		"ignoreDir": ["types"]
+	},
+
+	"diagnostics": {
+		"unusedLocalExclude": ["_*"], // allow `_varname` for unused variables
+		"groupFileStatus": {
+			"luadoc": "Any", // require stricter annotations
+			"conventions": "Any" // disallow global variables
+		},
+		"ignoredFiles": "Disable" // `workspace.ignoreDir` not diagnosed even if open
+	},
 
 	"$schema": "https://raw.githubusercontent.com/LuaLS/vscode-lua/master/setting/schema.json"
 }
