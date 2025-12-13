@@ -33,7 +33,7 @@ M.pathw_desktop = pathw(home .. "/Desktop/", function(paths, _)
 		-- ADD BIBTEX ENTRIES TO LIBRARY
 		elseif ext == "bib" and isDownloaded then
 			local bibEntry = u.readFile(path)
-			if bibEntry then
+			if bibEntry and #bibEntry < 10000 then -- prevent large libraries from being automatically merged
 				bibEntry = bibEntry:gsub("\n?$", "\n")
 				local libraryPath = home .. "/.config/pandoc/main-bibliography.bib"
 				u.writeToFile(libraryPath, bibEntry, true)

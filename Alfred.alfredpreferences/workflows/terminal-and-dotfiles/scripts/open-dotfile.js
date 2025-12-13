@@ -27,10 +27,15 @@ function run() {
 	const rgOutput = app
 		.doShellScript(
 			`PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH ; \
-			rg --no-config --files --hidden --sortr=modified \
-			--ignore-file=${dotfilesFolder}/ripgrep/ignore "${dotfilesFolder}"`,
+			rg --follow --no-config --files --hidden --sortr=modified \
+			--ignore-file=${dotfilesFolder}/ripgrep/ignore "${dotfilesFolder}" 2>&1 || true`,
+			// can error on broken symlinks, exiting via `true` so .doShellScript doesn't fail
 		)
 		.split("\r");
+	if (rgOutput[0].includes("No such file or directory (os error 2)")) {
+		console.log("broken symlink?", rgOutput[0]);
+		return JSON.stringify({ items: [{ title: "Error", subtitle: rgOutput[0] }] });
+	}
 
 	/** @type{AlfredItem|{}[]} */
 	const fileArray = rgOutput.map((absPath) => {

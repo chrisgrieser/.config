@@ -1,12 +1,14 @@
 #!/usr/bin/env zsh
 
 # CONFIG
-max_file_size_mb=8 # dict.cc binary is 8mb
+max_file_size_mb=2
 
 #───────────────────────────────────────────────────────────────────────────────
 
 # safeguard against accidental pushing of large files
-large_files=$(find . -not -path "**/.git/**" -size +${max_file_size_mb}M)
+large_files=$(find . -size +${max_file_size_mb}M -not \
+	-path "**/.git/**" -not -name "dictcc_arm64" -not -path "*/menu/menu") # exceptions
+
 if [[ -n "$large_files" ]]; then
 	echo "Large file(s) found. Aborting commit."
 	echo "${large_files//.\//- }"
