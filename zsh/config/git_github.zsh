@@ -194,10 +194,9 @@ function delete_git_tag {
 	git tag --delete "$1" && git push origin --delete "$1"
 }
 
-
 # git status all
 function gsa {
-	local first git_status
+	local first git_status repo icon
 
 	while read -r line; do
 		repo=$(echo "$line" | cut -d, -f1)
@@ -209,7 +208,7 @@ function gsa {
 		fi
 	done < "$HOME/.config/perma-repos.csv"
 
-	[[ -z "$first" ]] && echo "All repos are clean."
+	if [[ -z "$first" ]]; then echo "All repos are clean."; fi
 }
 
 #-GIT LOG-----------------------------------------------------------------------
@@ -238,7 +237,7 @@ function reflog {
 # (uses `_gitlog` from `magic-dashboard.zsh`)
 function gli {
 	if ! typeset -f _gitlog > /dev/null; then
-		echo "requires \`_gitlog.zsh\` from zsh magic-dashboard"
+		echo "requires \`_gitlog\` function from zsh magic-dashboard"
 		return 1
 	fi
 
@@ -259,7 +258,7 @@ function gli {
 				--header-first --header="↵ Checkout   ^H Hash   ^G GitHub   ^D Diff" \
 				--expect="ctrl-h,ctrl-g,ctrl-d" --with-nth=2.. --preview-window="55%" \
 				--preview="$preview_cmd" \
-				--height="100%" #required for wezterm's pane:is_alt_screen_active()
+				--height="100%" #required for wezterm's `pane:is_alt_screen_active()`
 	)
 	[[ -z "$selected" ]] && return 0 # aborted
 
@@ -273,11 +272,7 @@ function gli {
 		repo=$(git remote --verbose | head -n1 | cut -f2 | cut -d' ' -f1 |
 			sed -Ee 's/git@github.com://' -Ee 's/\.git$//')
 		local url="https://github.com/$repo/commit/$hash"
-		if [[ "$OSTYPE" =~ "darwin" ]]; then
-			open "$url"
-		else
-			echo "$url"
-		fi
+		[[ "$OSTYPE" =~ "darwin" ]] && open "$url" || echo "$url"
 	elif [[ "$key_pressed" == "ctrl-d" ]]; then
 		git diff "$hash"^!
 	else
