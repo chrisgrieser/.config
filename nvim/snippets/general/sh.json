@@ -128,6 +128,10 @@
     "body": "line=$(echo \"\\$${1:str}\" | sed -n \"${2:n}p\")",
     "prefix": "get nth line from string"
   },
+  "hyperlink (OSC 8)": {
+    "body": "\\e]8;;${1:url}\\a${2:title}\\e]8;;\\a",
+    "prefix": "hyperlink (OSC 8)"
+  },
   "i++": {
     "body": "((${1:i}++))",
     "prefix": "i++"

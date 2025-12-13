@@ -46,6 +46,8 @@ M.keys = {
 	{ key = "w", mods = "CMD", action = act.CloseCurrentPane { confirm = false } }, -- pane, then tab
 	-- `cmd+n` should create new tab, not new window
 	{ key = "n", mods = "CMD", action = act.SpawnTab("CurrentPaneDomain") },
+	-- clearing scrollback should also clear the viewport
+	{ key = "k", mods = "CMD", action = act.ClearScrollback("ScrollbackAndViewport") },
 
 	{ -- cycles panes, then tabs, then windows
 		key = "Enter",
