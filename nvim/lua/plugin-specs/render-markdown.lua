@@ -34,7 +34,6 @@ return {
 			position = "left",
 		},
 		link = {
-			wiki = { icon = "󱅷 " },
 			custom = {
 				-- news sites
 				medium = { pattern = "medium%.com", icon = "󰬔 " }, -- letter-glyphs named `alpha_x`
