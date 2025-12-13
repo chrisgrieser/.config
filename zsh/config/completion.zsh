@@ -82,5 +82,5 @@ zstyle ':autocomplete:*' ignored-input '..d'
 #───────────────────────────────────────────────────────────────────────────────
 # OTHER
 
-# do not save in dotfile repo
+# do not save in public dotfile repo
 export ZSH_COMPDUMP="$HOME/.local/share/zsh/zcompdump"

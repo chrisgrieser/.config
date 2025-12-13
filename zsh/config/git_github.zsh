@@ -178,7 +178,7 @@ function clone {
 	local depth=30
 	print "Cloning with depth: $depth\n"
 	git clone --depth=$depth --no-single-branch --no-tags
-	cd "$(basename "$1" .git)" && echo
+	builtin cd "$(basename "$1" .git)" && echo
 }
 
 function unshallow {
@@ -304,7 +304,7 @@ function gdf {
 	[[ -z $search ]] && print "\e[1;33mNo search query provided.\e[0m" && return 1
 	if ! command -v fzf &> /dev/null; then echo "fzf not installed." && return 1; fi
 
-	cd -q "$(git rev-parse --show-toplevel)" || return 1
+	builtin cd -q "$(git rev-parse --show-toplevel)" || return 1
 	if [[ $(git rev-parse --is-shallow-repository) == "true" ]]; then
 		print "\e[1;33mUnshallowing repo…\e[0m"
 		unshallow && echo

@@ -117,8 +117,7 @@ function _magic_dashboard {
 		printf '\e[0;33m"%s" has been moved or deleted.\e[0m\n' "$(basename "$PWD")"
 		if [[ -d "$OLDPWD" ]]; then
 			print '\e[0;33mMoving to last directory.\e[0m\n'
-			# shellcheck disable=2164
-			cd "$OLDPWD"
+			builtin cd "$OLDPWD" || return
 		fi
 		return 0
 	fi

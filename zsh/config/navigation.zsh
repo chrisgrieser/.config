@@ -18,21 +18,22 @@ function chpwd {
 }
 
 #-SHORTHANDS--------------------------------------------------------------------
-alias ..=" cd .." # leading space to ignore it in history due to `HIST_IGNORE_SPACE`
-alias ...=" cd ../.."
-alias ....=" cd ../../.."
-function -() { cd - || return; } # `-` to trigger `cd -` (workaround since cannot set alias for `-`)
+alias ..=" builtin cd .." # leading space to ignore it in history due to `HIST_IGNORE_SPACE`
+alias ...=" builtin cd ../.."
+alias ....=" builtin cd ../../.."
+alias .....=" builtin cd ../../../.."
+function -() { builtin cd - || return; } # `-` to trigger `cd -` (workaround since cannot set alias for `-`)
 
 #-RECENT DIRS-------------------------------------------------------------------
 # https://zsh.sourceforge.io/Doc/Release/User-Contributions.html#Recent-Directories
 autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
 add-zsh-hook chpwd chpwd_recent_dirs
 
-zstyle ':chpwd:*' recent-dirs-max 15
+zstyle ':chpwd:*' recent-dirs-max 8 # so the list to other completions is shorter
 zstyle ':chpwd:*' recent-dirs-file "$HOME/.local/share/zsh/chpwd-recent-dirs"
+
 zstyle ':chpwd:*' recent-dirs-default true # make `cdr` fallback to `cd`
-zstyle ':completion:*' recent-dirs-insert "both"
-alias cd=" cdr" # alias back to `cd` -> `cd` now also does recent directories
+zstyle ':completion:*' recent-dirs-insert "always" # insert dir instead of numbers
 
 #-KEYMAPS-----------------------------------------------------------------------
 

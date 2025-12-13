@@ -20,11 +20,11 @@ local lightThemes = {
 --------------------------------------------------------------------------------
 
 wt.on("gui-startup", function(cmd)
-	local sideAppWidth = 0.185
-	local screenWidth = wt.gui.screens().main.width
-	local x = screenWidth * sideAppWidth
+	local sideAppWidth = 0.185 -- same as value in hammerspoon config
+	local screen = wt.gui.screens().main
+	local x = screen.width * sideAppWidth
 	local _, _, win = wt.mux.spawn_window(cmd or {})
-	win:gui_window():set_inner_size(9001, ) -- automatically truncated to maximum
+	win:gui_window():set_inner_size(screen.width - x, screen.height)
 	win:gui_window():set_position(x, 0)
 end)
 

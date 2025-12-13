@@ -15,7 +15,7 @@ function delete_DS_Store {
 }
 
 function cake {
-	mkdir -p "$1" && cd "$1" || return 1
+	mkdir -p "$1" && builtin cd "$1" || return 1
 }
 function topen {
 	touch "$1" && open "$1"
@@ -209,10 +209,10 @@ function ..d() {
 	fi
 
 	# goto root
-	cd -q "$(git rev-parse --show-toplevel)" || return 1
+	builtin cd -q "$(git rev-parse --show-toplevel)" || return 1
 
 	# INFO `cd .` to trigger cd-hook *after* deletion
-	cd -q .. && trash "$OLDPWD" && cd .
+	builtin cd -q .. && trash "$OLDPWD" && builtin cd . || return 1
 }
 
 #-------------------------------------------------------------------------------
