@@ -45,7 +45,7 @@ return {
 			["shell-home"] = { -- replace `/Users/…` or `~` with `$HOME/`
 				format = function(_self, _ctx, lines, callback)
 					local function replace(line)
-						return line:gsub("/Users/%a+", "$HOME"):gsub("~/", "$HOME/")
+						return line:gsub("/Users/%a+", "$HOME"):gsub("([^/\\])~/", "%1$HOME/")
 					end
 					callback(nil, vim.tbl_map(replace, lines))
 				end,

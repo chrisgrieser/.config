@@ -1692,7 +1692,7 @@ to set a hotkey to show reminders due today</string>
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>note</key>
-			<string>update sketchybar reminders count</string>
+			<string>update sketchybar component</string>
 			<key>xpos</key>
 			<real>1250</real>
 			<key>ypos</key>

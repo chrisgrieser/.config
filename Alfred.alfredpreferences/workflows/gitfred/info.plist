@@ -1645,7 +1645,7 @@ The workflow will check for the token in the following order:
 			<key>colorindex</key>
 			<integer>9</integer>
 			<key>note</key>
-			<string>update sketchybar reminders count</string>
+			<string>update sketchybar component</string>
 			<key>xpos</key>
 			<real>495</real>
 			<key>ypos</key>

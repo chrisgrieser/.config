@@ -175,9 +175,10 @@ function gu { # GitHub URL: open & copy url
 function clone {
 	# WARN depth=1 is dangerous, as amending such a commit does result in a
 	# new commit without parent, effectively destroying git history (!!)
-	git clone --depth=30 "$1" --no-single-branch --no-tags
-	cd "$(basename "$1" .git)" || return 1
-	echo
+	local depth=30
+	print "Cloning with depth: $depth\n"
+	git clone --depth=$depth --no-single-branch --no-tags
+	cd "$(basename "$1" .git)" && echo
 }
 
 function unshallow {
@@ -191,6 +192,24 @@ function unshallow {
 function delete_git_tag {
 	git fetch --no-progress --tags # fetch tags, in case clone is shallow
 	git tag --delete "$1" && git push origin --delete "$1"
+}
+
+
+# git status all
+function gsa {
+	local first git_status
+
+	while read -r line; do
+		repo=$(echo "$line" | cut -d, -f1)
+		icon=$(echo "$line" | cut -d, -f2)
+		git_status=$(git -C "${repo/#\~/$HOME}" -c status.color=always status)
+		if [[ -n "$git_status" ]]; then
+			[[ -n "$first" ]] && echo || first=false
+			print "\e[1;34m$repo\e[0m $icon\n$git_status"
+		fi
+	done < "$HOME/.config/perma-repos.csv"
+
+	[[ -z "$first" ]] && echo "All repos are clean."
 }
 
 #-GIT LOG-----------------------------------------------------------------------
@@ -337,14 +356,3 @@ function gdf {
 	fi
 }
 #-------------------------------------------------------------------------------
-
-## git status all
-function gsa {
-	cut -d, -f1 "$HOME/.config/perma-repos.csv" | while read -r repo; do
-		git_status=$(git -C "${repo/#\~/$HOME}" status.color=always status)
-		[[ -z "$git_status" ]] && continue
-		print "\e[1;34m$repo\e[0m"
-		echo "$git_status"
-		echo
-	done
-}
