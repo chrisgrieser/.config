@@ -56,19 +56,19 @@ _escape_on_empty_buffer() {
 	fi
 
 	local selected
-	## no need for `--sortr=modified`, since using `eza --sort=oldest` afterwards
+	# no need for `--sortr=modified`, since using `eza --sort=oldest` afterwards
 	local rg_cmd="rg --no-config --files --ignore-file='$HOME/.config/ripgrep/ignore'"
 
 	selected=$(
 		zsh -c "$rg_cmd" |
-			eza --stdin --color=always --icons=always --sort=oldest |
+			eza --stdin --color=always --icons=always --sort=oldest --no-quotes |
 			fzf --ansi --multi --scheme=path --tiebreak=length,end \
 				--info=inline --height="50%" \
 				--header="^H: include hidden, ⌘L: reveal in Finder" \
 				--bind="ctrl-h:change-header(including hidden files)+reload($rg_cmd \
 					--hidden --no-ignore --no-ignore-files \
 					--glob='!/.git/' --glob='!node_modules' --glob='!__pycache__' --glob='!.DS_Store' |
-					eza --stdin --color=always --icons=always --sort=oldest)" \
+					eza --stdin --color=always --icons=always --sort=oldest --no-quotes)" \
 				--expect="ctrl-l" # remapped in terminal to `cmd+l`
 				
 	)

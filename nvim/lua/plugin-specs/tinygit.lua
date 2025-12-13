@@ -46,7 +46,7 @@ return {
 		statusline = {
 			blame = {
 				hideAuthorNames = { "Chris Grieser", "chrisgrieser" },
-				showOnlyTimeIfAuthor = { "🤖 automated" },
+				showOnlyTimeIfAuthor = { "🤖 automated", "📱 GitJournal" },
 				maxMsgLen = 50,
 			},
 			fileState = { icon = "" },
