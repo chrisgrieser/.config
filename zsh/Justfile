@@ -3,7 +3,9 @@ set quiet := true
 reload:
     #!/usr/bin/env zsh
     if pgrep -qx "wezterm-gui"; then
-        wezterm cli send-text --no-paste "exec zsh" # do not reload with `source $HOME/.zshrc`, https://github.com/ohmyzsh/ohmyzsh/wiki/FAQ#how-do-i-reload-the-zshrc-file
+        # do not reload with `source $HOME/.zshrc`, https://github.com/ohmyzsh/ohmyzsh/wiki/FAQ#how-do-i-reload-the-zshrc-file
+        # leading space to not save in in history
+        wezterm cli send-text --no-paste " exec zsh"
         open -a "WezTerm" # to focus it
     else
         open -a "WezTerm"

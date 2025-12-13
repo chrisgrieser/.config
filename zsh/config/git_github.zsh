@@ -340,7 +340,11 @@ function gdf {
 
 ## git status all
 function gsa {
-	local perma_repos
-	perma_repos=$(cut -d, -f1 "$HOME/.config/perma-repos.csv" | sed -e "s|~|$HOME|")
-	echo "$perma_repos"
+	cut -d, -f1 "$HOME/.config/perma-repos.csv" | while read -r repo; do
+		git_status=$(git -C "${repo/#\~/$HOME}" status.color=always status)
+		[[ -z "$git_status" ]] && continue
+		print "\e[1;34m$repo\e[0m"
+		echo "$git_status"
+		echo
+	done
 }
