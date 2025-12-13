@@ -21,6 +21,7 @@ local ensureInstalled = {
 		"toml",
 		"xml", -- also used by .plist and .svg files, since they are basically xml
 		"yaml",
+		"bibtex",
 	},
 	content = {
 		"css",

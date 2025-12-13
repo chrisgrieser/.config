@@ -10,7 +10,6 @@ return {
 	"monkoose/neocodeium",
 	event = "InsertEnter",
 	cmd = "NeoCodeium",
-	enabled = true,
 	opts = {
 		silent = true,
 		show_label = false, -- signcolumn label for number of suggestions
@@ -18,7 +17,8 @@ return {
 			bib = false,
 			text = false, -- filetype when editing in `pass` (1. extra safeguard)
 		},
-		filter = require("config.utils").ignoreBuffer,
+		-- `filter` should return `false` to disable AI on buffer
+		filter = require("config.utils").allowBuffer,
 	},
 	config = function(_, opts)
 		require("neocodeium").setup(opts)
