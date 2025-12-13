@@ -5,7 +5,6 @@
 
 local ensureInstalled = {
 	programmingLangs = {
-		"bash",
 		"zsh",
 		"javascript",
 		"typescript",
@@ -20,7 +19,7 @@ local ensureInstalled = {
 	dataFormats = {
 		"json",
 		"toml",
-		"xml", -- macOS `.plist` are also `.xml`
+		"xml", -- also used by .plist and .svg files, since they are basically xml
 		"yaml",
 	},
 	content = {
@@ -34,12 +33,13 @@ local ensureInstalled = {
 		"editorconfig",
 		"git_config",
 		"git_rebase",
-		"gitcommit",
 		"gitattributes",
+		"gitcommit",
 		"gitignore",
 		"just",
 		"query", -- treesitter query files (.scm)
 		"requirements", -- python's `requirements.txt`
+		"vimdoc", -- `:help` files
 	},
 	embeddedLangs = {
 		"comment",
@@ -48,7 +48,7 @@ local ensureInstalled = {
 		"luadoc",
 		"luap", -- lua patterns
 		"regex",
-		"vimdoc", -- `:help` files
+		"bash", -- embedded in GitHub Actions, etc.
 	},
 }
 
@@ -81,14 +81,14 @@ return {
 				local hasStarted = pcall(vim.treesitter.start, ctx.buf) -- errors for filetypes with no parser
 
 				-- indent
-				local dontUseTreesitterIndent = { "zsh", "markdown", "javascript" }
+				local dontUseTreesitterIndent = { "zsh", "bash", "markdown", "javascript" }
 				if hasStarted and not vim.list_contains(dontUseTreesitterIndent, ctx.match) then
 					vim.bo[ctx.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
 				end
 			end,
 		})
 
-		-- COMMENTS parser
+		-- comments parser
 		vim.api.nvim_create_autocmd({ "ColorScheme", "VimEnter" }, {
 			desc = "User: highlights for the Treesitter `comments` parser",
 			callback = function()

@@ -160,16 +160,16 @@ vim.diagnostic.config {
 	float = {
 		max_width = 70,
 		header = "",
+		focusable = true, -- allow entering float
 		prefix = function(_, _, total) return (total > 1 and "• " or ""), "Comment" end,
 		suffix = function(diag)
 			local source = (diag.source or ""):gsub(" ?%.$", "")
 			local code = diag.code and ": " .. diag.code or ""
 			return " " .. source .. code, "Comment"
 		end,
-		format = function(diag)
+		format = function(diag) -- remove trailing `.`
 			return diag.source == "lua_ls" and diag.message:gsub("%.$", "") or diag.message
 		end,
-		focusable = true, -- allow entering float
 		close_events = {
 			"CursorMoved",
 			"TextChanged", -- leave out "TextChangedI" to continue showing diagnostics while typing
@@ -185,7 +185,7 @@ vim.api.nvim_create_autocmd("WinNew", {
 		vim.defer_fn(function()
 			if not vim.b.lsp_floating_preview then return end -- no lsp float
 			local bufnr = vim.api.nvim_win_get_buf(vim.b.lsp_floating_preview)
-			if vim.bo[bufnr].filetype ~= "" then return end -- other lsp float
+			if vim.bo[bufnr].filetype ~= "" then return end -- other type of lsp float
 			vim.bo[bufnr].filetype = "markdown"
 		end, 1)
 	end,
