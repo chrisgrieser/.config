@@ -28,17 +28,22 @@ wt.on("gui-startup", function(cmd)
 	win:gui_window():set_position(x, 0)
 end)
 
+-- set tab name based on
+-- 1. `wezterm cli set-tab-title`
+-- 2. title set by processes, like `nvim` or `yt-dlp --console-title`
+-- 3. name of the foreground process
+-- 4. if the foreground process is zsh, then the current working directory
 wt.on("format-tab-title", function(tab)
-	-- set via `wezterm cli set-tab-title`
-	if tab.tab_title ~= "" then return " " .. tab.tab_title .. " " end
+	if tab.tab_title ~= "" then return " " .. tab.tab_title .. " " end -- set by wezterm cli
 
-	local winTitle = tab.active_pane.title -- set by procs like `nvim` or `yt-dlp --console-title`
+	local winTitle = tab.active_pane.title -- set by process, or foreground process
 	local pane = wt.mux.get_pane(tab.active_pane.pane_id)
+	local process = (pane:get_foreground_process_name() or ""):gsub(".*/", "")
+	if process ~= "zsh" then return ("  %s "):format(winTitle) end
+
 	local cwd = pane:get_current_working_dir()
-	local cwdPath = cwd and cwd.file_path:gsub("^.*/(.*)/$", "%1") or "---"
-	local icon = winTitle == "zsh" and "" or ""
-	local label = winTitle == "zsh" and cwdPath or winTitle
-	return (" %s %s "):format(icon, label)
+	local cwdPath = cwd and cwd.file_path:gsub("^.*/(.*)/$", "%1") or "???"
+	return ("  %s "):format(cwdPath)
 end)
 
 ---SETTINGS---------------------------------------------------------------------
@@ -94,7 +99,7 @@ local config = {
 	show_new_tab_button_in_tab_bar = false,
 	hide_tab_bar_if_only_one_tab = true,
 	use_fancy_tab_bar = false, -- `false` = style using terminal cells
-	tab_max_width = 30,
+	tab_max_width = 60,
 	window_frame = { font_size = 30 }, -- font size if using `fancy_tab_bar`
 
 	-- Bell
