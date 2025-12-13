@@ -1,10 +1,10 @@
 local M = {}
-local wt = require("wezterm")
 --------------------------------------------------------------------------------
 
 ---cycle through builtin dark schemes in dark mode, and through light schemes in
 ---light mode
 function M.cycle(window, _pane)
+	local wt = require("wezterm")
 	local allSchemes = wt.color.get_builtin_schemes()
 	local darkSchemes = {}
 	local lightSchemes = {}
@@ -21,8 +21,7 @@ function M.cycle(window, _pane)
 	end
 
 	local currentScheme = window:effective_config().color_scheme
-	local isDarkMode = wt.gui.get_appearance():find("Dark")
-	local schemesToSearch = isDarkMode and darkSchemes or lightSchemes
+	local schemesToSearch = wt.gui.get_appearance():find("Dark") and darkSchemes or lightSchemes
 	for i = 1, #schemesToSearch do
 		if schemesToSearch[i] == currentScheme then
 			local overrides = window:get_config_overrides() or {}
@@ -31,9 +30,9 @@ function M.cycle(window, _pane)
 			window:set_config_overrides(overrides)
 
 			window:copy_to_clipboard(nextScheme)
-			window:toast_notification("Color scheme", nextScheme, nil, 4000) -- BUG not working here
+			window:toast_notification("Color scheme", nextScheme, nil, 4000) -- BUG not working in keymaps
 			wt.log_info("Color scheme:", nextScheme)
-			return
+			return -- stop loop
 		end
 	end
 end
