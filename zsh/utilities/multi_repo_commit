@@ -5,16 +5,16 @@ github_username="chrisgrieser"
 # set -e
 
 # repo_names="alfred|shimmering-obsidian|gitfred"
-# repo_names="nvim"
+repo_names="nvim"
 # repo_names="obsidian-quadro|pseudometa-obsidian-plugin-template|grappling-hook|obsidian-proofreader"
 # ALL
-repo_names="finder-vim-mode|zsh-magic-dashboard|nvim|alfred|shimmering-obsidian|gitfred|obsidian-quadro|pseudometa-obsidian-plugin-template|grappling-hook|obsidian-proofreader"
+# repo_names="finder-vim-mode|zsh-magic-dashboard|nvim|alfred|shimmering-obsidian|gitfred|obsidian-quadro|pseudometa-obsidian-plugin-template|grappling-hook|obsidian-proofreader"
 
 function actions_in_repo {
 	cp -f "$HOME/Desktop/.markdownlint.yaml" ".markdownlint.yaml"
 }
 
-commit_msg="ci: update markdownlint"
+commit_msg="ci: update markdownlint config"
 
 _export_github_token # defined in .zshenv
 
@@ -73,6 +73,7 @@ while read -r repo; do
 	git add --all && git commit -m "$commit_msg" && git push --no-progress
 
 	# WARN AMEND
+	# git push --no-progress --force
 	# git add --all && git commit --amend --no-edit && git push --no-progress --force
 
 	success=$?

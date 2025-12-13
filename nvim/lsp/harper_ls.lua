@@ -23,9 +23,9 @@ return {
 			linters = {
 				UseTitleCase = false, -- I prefer sentence case headings
 
-				-- disable buggy rules?
-				SentenceCapitalization = true, -- https://github.com/Automattic/harper/issues/1056
-				UnclosedQuotes = true, -- https://github.com/Automattic/harper/issues/1573
+				-- disable buggy rules
+				SentenceCapitalization = false, -- https://github.com/Automattic/harper/issues/1056
+				UnclosedQuotes = false, -- https://github.com/Automattic/harper/issues/1573
 
 				-- enable extra rules?
 				UseGenitive = true,

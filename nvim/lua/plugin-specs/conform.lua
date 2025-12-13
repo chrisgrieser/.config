@@ -40,6 +40,10 @@ return {
 			shellcheck = { -- add `--shell=bash` to force to work with `zsh`
 				args = "'$FILENAME' --format=diff --shell=bash | patch -p1 '$FILENAME'",
 			},
+			["markdown-toc"] = {
+				-- order used by markdownlint's `unordered-style: sublist`
+				prepend_args = { "--bullets", "-", "--bullets", "+", "--bullets", "*" },
+			},
 			-----------------------------------------------------------------------
 			-- my custom formatters
 			["shell-home"] = { -- replace `/Users/…` or `~` with `$HOME/`
