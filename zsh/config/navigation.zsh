@@ -1,34 +1,40 @@
 # DOCS
 # https://blog.meain.io/2023/navigating-around-in-shell/
 # https://zsh.sourceforge.io/Doc/Release/Options.html#Changing-Directories
-#───────────────────────────────────────────────────────────────────────────────
 
-# OPTIONS
+#-OPTIONS-----------------------------------------------------------------------
 
 # make all directories in these folders available as `cd` targets from anywhere
 export CDPATH="$HOME/Desktop/:$HOME/Developer/:$ZDOTDIR/cd-bookmarks"
 
 setopt CD_SILENT   # don't echo the directory after `cd`
-setopt CHASE_LINKS # follow symlinks when they are `cd` target
+setopt CHASE_LINKS # follow symlinks when they are `cd` target (for symlinks in `cd-bookmarks`)
 setopt AUTO_CD     # `cd` to directories without typing `cd`
-setopt AUTO_PUSHD  # push to directory stack on cd (used for own `gr` function)
 
-# POST-DIRECTORY-CHANGE-HOOK (use `cd -q` to suppress this hook)
+# post-directory-change-hook (use `cd -q` to suppress this hook)
 function chpwd {
 	_magic_dashboard
 	_auto_venv
 }
 
-#───────────────────────────────────────────────────────────────────────────────
-# SHORTHANDS
-
-# INFO leading space to ignore it in history due to HIST_IGNORE_SPACE
-alias ..=" cd .."
+#-SHORTHANDS--------------------------------------------------------------------
+alias ..=" cd .." # leading space to ignore it in history due to `HIST_IGNORE_SPACE`
 alias ...=" cd ../.."
 alias ....=" cd ../../.."
-alias ..g=' cd "$(git rev-parse --show-toplevel)"' # goto git root
+function -() { cd - || return; } # `-` to trigger `cd -` (workaround since cannot set alias for `-`)
 
-#───────────────────────────────────────────────────────────────────────────────
+#-RECENT DIRS-------------------------------------------------------------------
+# https://zsh.sourceforge.io/Doc/Release/User-Contributions.html#Recent-Directories
+autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
+add-zsh-hook chpwd chpwd_recent_dirs
+
+zstyle ':chpwd:*' recent-dirs-max 20
+zstyle ':chpwd:*' recent-dirs-file "$HOME/.local/share/zsh/zsh_history.zsh"
+zstyle ':chpwd:*' recent-dirs-default true
+zstyle ':chpwd:*' recent-dirs-insert true
+alias gr=" cdr"
+
+#-KEYMAPS-----------------------------------------------------------------------
 
 # cmd+enter -> goto desktop / dotfiles
 function _grappling_hook {
@@ -45,30 +51,3 @@ bindkey '^O' _grappling_hook # remapped to `cmd+enter` via karabiner
 function _reaveal_cwd_in_Finder { open .; }
 zle -N _reaveal_cwd_in_Finder
 bindkey '^L' _reaveal_cwd_in_Finder # remapped to `cmd+l` via karabiner
-
-#───────────────────────────────────────────────────────────────────────────────
-# RECENT DIRS
-# the zsh builtin `cdr` does something similar, but completes based on a number
-# as argument, so the completions are not searched
-
-function gr {
-	local goto=${1:-"$OLDPWD"}
-	cd "$goto" || return 1
-}
-
-_gr() {
-	[[ $CURRENT -ne 2 ]] && return # only complete first word
-
-	# get existing dirs
-	local -a folders=()
-	while IFS='' read -r dir; do # turn lines into array
-		expanded_dir="${dir/#\$HOME/$HOME}"
-		[[ -d "$expanded_dir" ]] && folders+=("$dir")
-	done < <(dirs -p | sed '1d')
-
-	local expl && _description -V recent-folders expl 'Recent Folders'
-	compadd "${expl[@]}" -Q -- "${folders[@]}"
-}
-compdef _gr gr
-
-#───────────────────────────────────────────────────────────────────────────────
