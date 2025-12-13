@@ -8,7 +8,7 @@ max_number_of_bkps=3
 ignore_repos=$(cut -d, -f1 "$HOME/.config/perma-repos.csv" |
 	xargs basename |
 	tr "\n" "|" |
-	sed -e "s/.$//") # construct regex pattern for `grep`
+	sed -e "s/|$//") # construct regex pattern for `grep`
 
 _export_github_token # defined in .zshenv
 

@@ -336,3 +336,11 @@ function gdf {
 		git checkout "$last_commit"
 	fi
 }
+#-------------------------------------------------------------------------------
+
+## git status all
+function gsa {
+	local perma_repos
+	perma_repos=$(cut -d, -f1 "$HOME/.config/perma-repos.csv" | sed -e "s|~|$HOME|")
+	echo "$perma_repos"
+}
