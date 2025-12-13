@@ -69,10 +69,10 @@ return {
 			["<CR>"] = { "select_and_accept", "fallback" },
 			["<Tab>"] = { "snippet_forward", "select_next", "fallback" },
 			["<S-Tab>"] = { "snippet_backward", "select_prev", "fallback" },
-			["<D-c>"] = { "show", "hide" },
 			["<D-g>"] = { "show_signature", "hide_signature" },
 			["<PageDown>"] = { "scroll_signature_down", "scroll_documentation_down", "fallback" },
 			["<PageUp>"] = { "scroll_signature_up", "scroll_documentation_up", "fallback" },
+			["<D-c>"] = { "show", "hide" },
 		},
 		signature = {
 			enabled = true,

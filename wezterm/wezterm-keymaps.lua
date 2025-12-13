@@ -87,32 +87,37 @@ M.keys = {
 	---HINT MODE (QUICK SELECT)--------------------------------------------------
 	{ key = "y", mods = "CMD", action = act.QuickSelect }, -- https://wezfurlong.org/wezterm/quickselect.html
 
-	{ -- cmd+shift+u -> open URL (like `f` in vimium)
-		key = "u",
-		mods = "CMD|SHIFT",
+	{ -- cmd+o -> open URL (like `f` in vimium)
+		key = "o",
+		mods = "CMD",
 		action = act.QuickSelectArgs {
 			patterns = {
 				[[https?://[^\]",' ]+\w]], -- https-url
 				"[a-f0-9]{7,40}", -- hashes
-				"#[0-9]+", -- issues
+				"(?<=#)[0-9]+", -- issues (without #)
 			},
-			label = "Open URL",
+			label = "Open url/commit/issue",
+			-- skip_action_on_paste = true, -- in next release
 			action = actFun(function(win, pane)
-				-- CAVEAT only works in my repos
-				local githubUsername = "chrisgrieser"
-
 				local match = win:get_selection_text_for_pane(pane)
-				local cwd = pane:get_current_working_dir()
-				local repoName = cwd and cwd.file_path:gsub("^.*/(.*)/$", "%1") or "NO CWD"
-				local url
-				if match:find("^%x+$") then
-					wt.run_child_process { 'ls', '-l' }
-					url = ("https://github.com/%s/%s/commit/%s"):format(githubUsername, repoName, match)
-				elseif match:find("^#%d+$") then
-					url = ("https://github.com/%s/%s/issues%s"):format(githubUsername, repoName, match)
-				else
-					url = match
+				if match:find("^https?://") then
+					wt.open_with(match)
+					return
 				end
+				local cwd = (pane:get_current_working_dir() or {}).file_path
+				if not cwd then return end
+
+				local type = #match < 6 and "commits" or "issues"
+				local ok, stdout, _ = wt.run_child_process { "git", "-C", cwd, "remote", "--verbose" }
+				if not ok then return end
+				local repo = stdout:match("github%.com[/:](%S+)")
+				if not repo then
+					wt.log_info("remote info has no github url:", stdout)
+					return
+				end
+				repo = repo:gsub("%.git$", "")
+
+				local url = ("https://github.com/%s/%s/%s"):format(repo, type, match)
 				wt.open_with(url)
 			end),
 		},
