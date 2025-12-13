@@ -91,10 +91,28 @@ M.keys = {
 		key = "u",
 		mods = "CMD|SHIFT",
 		action = act.QuickSelectArgs {
-			patterns = { [[https?://[^\]",' ]+\w]] },
+			patterns = {
+				[[https?://[^\]",' ]+\w]], -- https-url
+				"[a-f0-9]{7,40}", -- hashes
+				"#[0-9]+", -- issues
+			},
 			label = "Open URL",
 			action = actFun(function(win, pane)
-				local url = win:get_selection_text_for_pane(pane)
+				-- CAVEAT only works in my repos
+				local githubUsername = "chrisgrieser"
+
+				local match = win:get_selection_text_for_pane(pane)
+				local cwd = pane:get_current_working_dir()
+				local repoName = cwd and cwd.file_path:gsub("^.*/(.*)/$", "%1") or "NO CWD"
+				local url
+				if match:find("^%x+$") then
+					wt.run_child_process { 'ls', '-l' }
+					url = ("https://github.com/%s/%s/commit/%s"):format(githubUsername, repoName, match)
+				elseif match:find("^#%d+$") then
+					url = ("https://github.com/%s/%s/issues%s"):format(githubUsername, repoName, match)
+				else
+					url = match
+				end
 				wt.open_with(url)
 			end),
 		},
