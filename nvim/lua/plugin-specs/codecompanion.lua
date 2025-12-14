@@ -1,11 +1,9 @@
 -- DOCS https://codecompanion.olimorris.dev/
 --------------------------------------------------------------------------------
 
--- https://platform.openai.com/usage
 -- https://platform.openai.com/docs/models
 local adapter = { name = "openai_responses", model = "gpt-5-mini" }
-local verbosity = "low" --low|medium|high
-local reasoningEffort = "minimal" -- minimal|low|medium|high
+local reasoningEffort = "minimal" -- minimal|low|medium|high https://platform.openai.com/docs/api-reference/responses/create#responses_create-reasoning
 
 local apiKeyFile =
 	"$HOME/Library/Mobile Documents/com~apple~CloudDocs/Tech/api-keys/openai-api-key.txt"
@@ -133,9 +131,8 @@ local ccSpec = {
 							-- feature (i.e., `false` means the default value is used,
 							-- which is `medium` for reasoning effort.)
 							-- stylua: ignore
-							["reasoning.effort"] = { default = reasoningEffort, enabled = function() return true end },
+							["reasoning.effort"] = { default = reasoningEffort },
 							["reasoning.summary"] = { enabled = function() return false end }, -- requires organizational access
-							verbosity = { default = verbosity },
 						},
 					})
 				end,
