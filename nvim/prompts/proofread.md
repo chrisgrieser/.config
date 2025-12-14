@@ -8,6 +8,9 @@ opts:
   modes: [v]
   auto_submit: true
   ignore_system_prompt: true
+  adapter:
+    name: openai
+    model: gpt-5-nano
 ---
 
 ## System

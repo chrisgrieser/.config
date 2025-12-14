@@ -118,6 +118,14 @@ return {
 				},
 			},
 		},
+		interactions = {
+			chat = {
+				adapter = { name = model.provider, model = model.name }
+			},
+			inline = {
+				adapter = { name = model.provider, model = model.name }
+			},
+		},
 		adapters = {
 			http = {
 				openai = function()
@@ -127,7 +135,6 @@ return {
 							api_key = ("cmd:cat %q"):format(model.apiKeyFile),
 						},
 						schema = {
-							model = { default = model.name },
 							reasoning_effort = { default = model.reasoningEffort },
 						},
 					})
@@ -143,6 +150,7 @@ return {
 				auto_scroll = false,
 				fold_context = true,
 				icons = { chat_context = "󰔌" }, -- icon for the fold context
+				intro_message = "Use `?` for help.",
 				window = {
 					opts = {
 						foldlevel = 1,
@@ -154,7 +162,6 @@ return {
 			},
 		},
 		strategies = {
-			inline = { adapter = model.provider },
 			chat = {
 				adapter = model.provider,
 				keymaps = {
