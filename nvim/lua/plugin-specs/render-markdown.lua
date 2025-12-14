@@ -59,7 +59,7 @@ return {
 			-- makes toggling this plugin also toggle conceallevel
 			conceallevel = { default = 0, rendered = 2 },
 		},
-		-- LSP hovers: hide code block lines (CAVEAT: also affects code-companion chat)
+		-- LSP hovers: hide code block lines
 		overrides = {
 			buftype = {
 				nofile = {

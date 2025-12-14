@@ -63,7 +63,7 @@ local function postRequestHook()
 			if jit.os ~= "OSX" then return end
 			local sound =
 				"/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/head_gestures_double_shake.caf"
-			vim.system { "afplay", sound }
+			vim.system { "afplay", "--volume", "0.5", sound }
 		end,
 	})
 
@@ -85,7 +85,7 @@ local function postRequestHook()
 	})
 end
 
-return {
+local ccSpec = {
 	"olimorris/codecompanion.nvim",
 	cmd = { "CodeCompanion", "CodeCompanionChat" },
 	init = function() vim.g.whichkeyAddSpec { "<leader>a", group = " AI" } end,
@@ -145,7 +145,7 @@ return {
 				},
 			},
 		},
-		strategies = {
+		interactions = {
 			inline = {
 				adapter = adapter,
 				keymaps = {
@@ -160,6 +160,24 @@ return {
 					next_header = { modes = { n = "<C-j>", i = "<C-j>" } },
 					previous_header = { modes = { n = "<C-k>", i = "<C-k>" } },
 					fold_code = { modes = { n = "zz" } },
+				},
+			},
+		},
+	},
+}
+--------------------------------------------------------------------------------
+return {
+	ccSpec,
+	{ -- modifications to render-markdown config
+		"MeanderingProgrammer/render-markdown.nvim",
+		ft = { "markdown", "codecompanion" },
+		opts = {
+			file_types = { "markdown", "codecompanion" },
+			overrides = {
+				filetype = {
+					codecompanion = {
+						code = { border = "thick", style = "full" },
+					},
 				},
 			},
 		},
