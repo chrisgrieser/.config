@@ -4,7 +4,6 @@
 -- https://platform.openai.com/usage
 -- https://platform.openai.com/docs/models
 local adapter = { name = "openai_responses", model = "gpt-5-mini" }
-local reasoningEffort = "minimal" -- all GPT-5 models reason, "medium" is too slow
 local apiKeyFile =
 	"$HOME/Library/Mobile Documents/com~apple~CloudDocs/Tech/api-keys/openai-api-key.txt"
 local useGitSignsInlineDiff = true
@@ -124,8 +123,8 @@ return {
 					return require("codecompanion.adapters").extend("openai_responses", {
 						env = { api_key = ("cmd:cat %q"):format(apiKeyFile) },
 						schema = {
-							reasoning_effort = { default = reasoningEffort },
-							["reasoning.effort"] = { default = reasoningEffort },
+							-- SIC setting `enabled` required for the other value to take effect
+							["reasoning.effort"] = { default = "minimal", enabled = true },
 						},
 					})
 				end,
