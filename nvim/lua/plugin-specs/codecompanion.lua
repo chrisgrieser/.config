@@ -10,8 +10,8 @@ local model = {
 	apiKeyFile = "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Tech/api-keys/openai-api-key.txt",
 	provider = "openai",
 }
-local useGitSignsInlineDiff = false
-local formatInlineResult = false
+local useGitSignsInlineDiff = true
+local formatInlineResult = true
 
 --------------------------------------------------------------------------------
 
@@ -26,13 +26,14 @@ local function spinnerNotificationWhileRequest()
 		desc = "User: CodeCompanion spinner (start)",
 		pattern = "CodeCompanionRequestStarted",
 		callback = function(ctx)
+			local modelName = ctx.data.adapter.model
 			timer = assert(vim.uv.new_timer())
 			timer:start(
 				0,
 				updateIntervalMs,
 				vim.schedule_wrap(function()
 					local spinner = spinners[math.floor(vim.uv.now() / updateIntervalMs) % #spinners + 1]
-					vim.notify("Request running " .. spinner, vim.log.levels.DEBUG, {
+					vim.notify(modelName .. " " .. spinner, vim.log.levels.DEBUG, {
 						title = "CodeCompanion",
 						icon = "",
 						timeout = false,
@@ -46,9 +47,10 @@ local function spinnerNotificationWhileRequest()
 		desc = "User: CodeCompanion spinner (stop)",
 		pattern = "CodeCompanionRequestFinished",
 		callback = function(ctx)
+			local modelName = ctx.data.adapter.model
 			timer:stop()
 			timer:close()
-			vim.notify("Request finished ✅", nil, {
+			vim.notify(modelName .. " finished ✅", nil, {
 				title = "CodeCompanion",
 				icon = "",
 				timeout = 2000,
@@ -59,15 +61,6 @@ local function spinnerNotificationWhileRequest()
 end
 
 local function postRequestHook()
-	vim.api.nvim_create_autocmd("User", {
-		desc = "User: leave visual mode",
-		pattern = "CodeCompanionInlineFinished",
-		callback = function()
-			if vim.fn.mode():lower() ~= "v" then return end
-			vim.cmd.normal { vim.fn.mode(), bang = true }
-		end,
-	})
-
 	vim.api.nvim_create_autocmd("User", {
 		desc = "User: Sound when CodeCompanion finished",
 		pattern = "CodeCompanionRequestFinished",
@@ -90,9 +83,7 @@ local function postRequestHook()
 			end
 			local ok2, gitsigns = pcall(require, "gitsigns")
 			if ok2 and useGitSignsInlineDiff then
-				gitsigns.toggle_linehl()
-				gitsigns.toggle_word_diff()
-				require("gitsigns.config").config.show_deleted = true
+				gitsigns.setup { show_deleted = true, linehl = true, word_diff = true }
 			end
 		end,
 	})
@@ -108,7 +99,9 @@ return {
 		postRequestHook()
 	end,
 	keys = {
+		{ "<leader>ac", "<cmd>CodeCompanionChat toggle<CR>", desc = " Chat (toggle)" },
 		{ "<leader>aa", ":CodeCompanion<CR>", mode = "x", desc = " 󰘎 Prompt" },
+
 		-- stylua: ignore
 		{ "<leader>as", function() require("codecompanion").prompt("simplify") end, mode = "x", desc = " Simplify" },
 		-- stylua: ignore
@@ -140,8 +133,24 @@ return {
 			},
 		},
 		display = {
-			-- disabled, since inline-stragy does not handle indents properly
-			diff = { enabled = false },
+			diff = {
+				enabled = false, -- disabled, since inline-stragy does not handle indents properly
+			},
+			-- https://codecompanion.olimorris.dev/configuration/chat-buffer.html
+			chat = {
+				auto_scroll = false,
+				intro_message = "",
+				fold_context = true,
+				icons = { chat_context = "󰔌" }, -- icon for the fold context
+				window = {
+					opts = {
+						foldlevel = 1,
+						foldmethod = "expr",
+						foldexpr = "v:lua.vim.treesitter.foldexpr()", -- allow folding codeblocks
+						statuscolumn = " ", -- padding
+					},
+				},
+			},
 		},
 		strategies = {
 			inline = {
@@ -152,7 +161,17 @@ return {
 					always_accept = { modes = { n = "gy" } },
 				},
 			},
-			chat = { adapter = model.provider },
+			chat = {
+				adapter = model.provider,
+				keymaps = {
+					close = { modes = { n = "q" }, opts = { nowait = true } },
+					stop = { modes = { n = "<C-c>" } },
+					clear = { modes = { n = "<D-k>", i = "<D-k>" } },
+					next_header = { modes = { n = "<C-j>", i = "<C-j>" } },
+					previous_header = { modes = { n = "<C-k>", i = "<C-k>" } },
+					fold_code = { modes = { n = "zz" } },
+				}
+			},
 		},
 	},
 }

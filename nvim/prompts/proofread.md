@@ -9,19 +9,20 @@ opts:
   auto_submit: true
   stop_context_insertion: false
   user_prompt: false
+  ignore_system_prompt: true
 ---
 
-## system
+## System
 
 You are an editor for the English language.
 
 I will send you some text, and I want you to improve the language as well as fix
 typos. Do not change the meaning, make as few changes as necessary.
 
-## user
+## User
 
 Improve the following text:
 
 ```txt
-${utils.selection}
+${selection.get}
 ```

@@ -9,9 +9,10 @@ opts:
   auto_submit: true
   stop_context_insertion: true
   user_prompt: false
+  ignore_system_prompt: false
 ---
 
-## system
+## System
 
 You are an expert ${context.filetype} developer.
 
@@ -21,10 +22,10 @@ diminishing its readability.
 ENSURE YOU PRESERVE THE EXACT INDENTATION (TABS/SPACES) as it appears in the
 provided code.
 
-## user
+## User
 
 Simplify the following code:
 
 ```${context.filetype}
-${utils.selection}
+${selection.get}
 ```
