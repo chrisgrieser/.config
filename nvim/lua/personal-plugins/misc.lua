@@ -255,6 +255,7 @@ function M.smartDuplicate()
 			top = "bottom", bottom = "top",
 			right = "left", left = "right",
 			light = "dark", dark = "light",
+			width = "height", height = "width",
 		})
 	elseif ft == "javascript" or ft == "typescript" or ft == "swift" then
 		line = line:gsub("^(%s*)if(.+{)$", "%1} else if%2")
@@ -264,7 +265,7 @@ function M.smartDuplicate()
 		line = line:gsub("^(%s*)if( .* then)$", "%1elif%2")
 	elseif ft == "python" then
 		line = line:gsub("^(%s*)if( .*:)$", "%1elif%2")
-	elseif ft == "markdown" or ft == "text" then
+	elseif ft == "markdown" then -- increment numbered list
 		line = line:gsub("^(%s*)(%d+)%. ", function(indent, num)
 			local increment = tonumber(num) + 1
 			return indent .. increment .. ". "
@@ -287,9 +288,8 @@ function M.openWorkflowInAlfredPrefs()
 	if not workflowUid then return vim.notify("Not in an Alfred directory.", vim.log.levels.WARN) end
 
 	-- https://www.alfredforum.com/topic/18390-get-currently-edited-workflow-uri/
-	local jxa = ('Application("com.runningwithcrayons.Alfred").revealWorkflow(%q)'):format(
-		workflowUid
-	)
+	local jxa = "Application('com.runningwithcrayons.Alfred')"
+		.. (".revealWorkflow(%q)"):format(workflowUid)
 	vim.system { "osascript", "-l", "JavaScript", "-e", jxa }
 end
 

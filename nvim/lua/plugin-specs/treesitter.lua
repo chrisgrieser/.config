@@ -59,6 +59,8 @@ return {
 	"nvim-treesitter/nvim-treesitter",
 	lazy = false,
 	build = ":TSUpdate",
+	branch = "main", -- new versions follow `main`
+
 	opts = {
 		install_dir = vim.fn.stdpath("data") .. "/treesitter",
 	},

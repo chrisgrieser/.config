@@ -21,6 +21,7 @@ function alfredMatcher(str) {
 // biome-ignore lint/correctness/noUnusedVariables: alfred run
 function run() {
 	const dotfilesFolder = $.getenv("dotfiles_folder");
+
 	const modifiedFiles = app
 		.doShellScript(`git -C "${dotfilesFolder}" diff --name-only`)
 		.split("\r");
@@ -32,6 +33,8 @@ function run() {
 			// can error on broken symlinks, exiting via `true` so .doShellScript doesn't fail
 		)
 		.split("\r");
+
+	// GUARD
 	if (rgOutput[0].includes("No such file or directory (os error 2)")) {
 		console.log("broken symlink?", rgOutput[0]);
 		return JSON.stringify({ items: [{ title: "Error", subtitle: rgOutput[0] }] });

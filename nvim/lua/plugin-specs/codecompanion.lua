@@ -1,12 +1,13 @@
 -- DOCS https://codecompanion.olimorris.dev/
 --------------------------------------------------------------------------------
 
+-- CONFIG
 -- https://platform.openai.com/docs/models
 local adapter = { name = "openai_responses", model = "gpt-5-mini" }
 local reasoningEffort = "minimal" -- minimal|low|medium|high https://platform.openai.com/docs/api-reference/responses/create#responses_create-reasoning
-
 local apiKeyFile =
 	"$HOME/Library/Mobile Documents/com~apple~CloudDocs/Tech/api-keys/openai-api-key.txt"
+
 local useGitSignsInlineDiff = true
 local formatInlineResult = true
 
@@ -30,7 +31,7 @@ local function spinnerNotificationWhileRequest()
 				updateIntervalMs,
 				vim.schedule_wrap(function()
 					local spinner = spinners[math.floor(vim.uv.now() / updateIntervalMs) % #spinners + 1]
-					vim.notify(modelName .. " " .. spinner, vim.log.levels.DEBUG, {
+					vim.notify(modelName .. " " .. spinner, vim.log.levels.TRACE, {
 						title = "CodeCompanion",
 						icon = "",
 						id = ctx.data.id, -- replaces existing notification when using snacks.notifier
@@ -46,7 +47,7 @@ local function spinnerNotificationWhileRequest()
 			timer:stop()
 			timer:close()
 			if ctx.data.status == "success" then
-				vim.notify(ctx.data.adapter.model .. " finished ✅", nil, {
+				vim.notify(ctx.data.adapter.model .. " finished ✅", vim.log.levels.TRACE, {
 					title = "CodeCompanion",
 					icon = "",
 					id = ctx.data.id,
@@ -155,8 +156,8 @@ local ccSpec = {
 			},
 		},
 		display = {
-			diff = { enabled = false }, -- disabled, since inline-stragy does not handle indents properly
-			chat = { -- https://codecompanion.olimorris.dev/configuration/chat-buffer.html
+			diff = { enabled = false }, -- disabled, since `inline` doesn't handle indents properly
+			chat = {
 				auto_scroll = false,
 				fold_context = true,
 				intro_message = "Use `?` for help.",
@@ -188,7 +189,7 @@ local ccSpec = {
 --------------------------------------------------------------------------------
 return {
 	ccSpec,
-	{ -- modifications to render-markdown config
+	{ -- modifications to render-markdown config (merged via lazy.nvim)
 		"MeanderingProgrammer/render-markdown.nvim",
 		ft = { "markdown", "codecompanion" },
 		opts = {

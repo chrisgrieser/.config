@@ -710,7 +710,7 @@
 			<key>description</key>
 			<string></string>
 			<key>label</key>
-			<string>Dotfiles Folder</string>
+			<string>Dotfiles folder</string>
 			<key>type</key>
 			<string>filepicker</string>
 			<key>variable</key>
