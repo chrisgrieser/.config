@@ -32,7 +32,6 @@ local function spinnerNotificationWhileRequest()
 					vim.notify(modelName .. " " .. spinner, vim.log.levels.DEBUG, {
 						title = "CodeCompanion",
 						icon = "",
-						timeout = false,
 						id = ctx.data.id, -- replaces existing notification
 					})
 				end)
@@ -63,7 +62,7 @@ local function postRequestHook()
 			if jit.os ~= "OSX" then return end
 			local sound =
 				"/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/head_gestures_double_shake.caf"
-			vim.system { "afplay", "--volume", "0.5", sound }
+			vim.system { "afplay", "--volume", "0.3", sound }
 		end,
 	})
 
@@ -87,6 +86,7 @@ end
 
 local ccSpec = {
 	"olimorris/codecompanion.nvim",
+	dependencies = "nvim-lua/plenary.nvim",
 	cmd = { "CodeCompanion", "CodeCompanionChat" },
 	init = function() vim.g.whichkeyAddSpec { "<leader>a", group = " AI" } end,
 	config = function(_, opts)
@@ -108,6 +108,7 @@ local ccSpec = {
 		-- stylua: ignore end
 	},
 	opts = {
+		opts = { log_level = "DEBUG" },
 		prompt_library = {
 			markdown = {
 				dirs = {
