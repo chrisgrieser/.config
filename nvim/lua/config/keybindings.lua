@@ -428,6 +428,12 @@ keymap("n", "<leader>r<Tab>", function()
 	vim.cmd.retab { bang = true }
 	vim.notify("Now using tabs", nil, { title = ":retab", icon = "󰌒" })
 end, { desc = "󰌒 Use tabs" })
+keymap("n", "<leader>r<Space>", function()
+	vim.bo.expandtab = true
+	vim.bo.shiftwidth = 2
+	vim.cmd.retab { bang = true }
+	vim.notify("Now using spaces (2)", nil, { title = ":retab", icon = "󱁐" })
+end, { desc = "󱁐 Use spaces" })
 
 ---OPTION TOGGLING--------------------------------------------------------------
 keymap("n", "<leader>on", "<cmd>set number!<CR>", { desc = " Line numbers" })
