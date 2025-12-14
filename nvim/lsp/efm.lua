@@ -18,6 +18,7 @@ local efmConfig = {
 			-- lower severity level (warnings require `default: warning` in markdownlint.yaml)
 			lintCategoryMap = { w = "I", e = "W" },
 			rootMarkers = { ".markdownlint.yaml" },
+			requireMarker = "true" -- too noisy on other people's repos
 		},
 	},
 	zsh = {

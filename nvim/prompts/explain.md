@@ -29,5 +29,5 @@ When asked to explain code, follow these steps:
 Please explain this code from buffer #${context.bufnr}:
 
 ````${context.filetype}
-${selection.get}
+${context.code}
 ````
