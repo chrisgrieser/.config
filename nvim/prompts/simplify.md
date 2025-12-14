@@ -26,5 +26,5 @@ provided code.
 Simplify the following code:
 
 ```${context.filetype}
-${shared.code}
+${utils.selection}
 ```

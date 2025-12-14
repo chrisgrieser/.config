@@ -14,13 +14,14 @@ opts:
 ## system
 
 You are an editor for the English language.
-I will send you some text, and I want you to improve the
-language, without changing the meaning.
+
+I will send you some text, and I want you to improve the language as well as fix
+typos. Do not change the meaning, make as few changes as necessary.
 
 ## user
 
-Simplify the following code:
+Improve the following text:
 
-```${context.filetype}
-${shared.code}
+```txt
+${utils.selection}
 ```
