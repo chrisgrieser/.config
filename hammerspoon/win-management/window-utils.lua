@@ -11,9 +11,13 @@ M.toTheSide = hs.geometry { x = -side.cutoff, y = 0.055, w = side.w + side.cutof
 
 --------------------------------------------------------------------------------
 
----@param win hs.window
+---@param win hs.window|string if string, search for main window of app with that name
 ---@param pos hs.geometry
 function M.moveResize(win, pos)
+	if type(win) == "string" then
+		win = u.app(win):mainWindow()
+		if not win then return end
+	end
 	if not (win and win:isMaximizable() and win:isStandard()) then return end
 
 	-- handle negative positions (= win partially not on screen) by converting
