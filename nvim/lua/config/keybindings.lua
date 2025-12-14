@@ -24,7 +24,7 @@ end, { desc = "󰌌 Edit keybindings" })
 keymap({ "n", "x" }, "j", "gj")
 keymap({ "n", "x" }, "k", "gk")
 
--- make HJKL behave like hjkl but bigger with distance
+-- make HJKL behave like hjkl but with bigger distance
 keymap({ "n", "x" }, "J", "6gj")
 keymap({ "n", "x" }, "K", "6gk")
 
