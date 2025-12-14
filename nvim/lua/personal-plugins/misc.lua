@@ -235,16 +235,14 @@ end
 --------------------------------------------------------------------------------
 
 function M.openFirstUrlInBuffer()
-	local bufLines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
-	for _, line in pairs(bufLines) do
-		local url = line:match([[%l%l%l+://[^%s)%]}"'`>]+]])
-		if url then
-			vim.ui.open(url)
-			return
-		end
+	local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+	for _, line in ipairs(lines) do
+		local url = line:match([[%l+://[^%s%)%]}"'`>]+]])
+		if url then return vim.ui.open(url) end
 	end
 	vim.notify("No URL found in file.", vim.log.levels.WARN)
 end
+
 
 function M.smartDuplicate()
 	local row, col = unpack(vim.api.nvim_win_get_cursor(0))

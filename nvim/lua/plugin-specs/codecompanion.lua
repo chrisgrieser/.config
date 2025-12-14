@@ -1,4 +1,3 @@
--- vim: foldlevel=2
 -- DOCS https://codecompanion.olimorris.dev/
 --------------------------------------------------------------------------------
 
@@ -103,8 +102,10 @@ return {
 		{ "<leader>aa", ":CodeCompanion<CR>", mode = "x", desc = " 󰘎 Prompt" },
 
 		-- stylua: ignore start
+		-- needs to be `explain_` to not use the builtin `explain`
+		{ "<leader>ae", function() require("codecompanion").prompt("explain_") end, mode = "x", desc = " Explain" },
+
 		{ "<leader>as", function() require("codecompanion").prompt("simplify") end, mode = "x", desc = " Simplify" },
-		{ "<leader>ae", function() require("codecompanion").prompt("explain") end, mode = "x", desc = " Simplify" },
 		{ "<leader>ap", function() require("codecompanion").prompt("proofread") end, mode = "x", desc = " Proofread" },
 		-- stylua: ignore end
 	},
@@ -142,6 +143,14 @@ return {
 				auto_scroll = false,
 				fold_context = true,
 				icons = { chat_context = "󰔌" }, -- icon for the fold context
+				window = {
+					opts = {
+						foldlevel = 1,
+						foldmethod = "expr",
+						foldexpr = "v:lua.vim.treesitter.foldexpr()", -- allow folding codeblocks
+						statuscolumn = " ", -- padding
+					},
+				},
 			},
 		},
 		strategies = {
