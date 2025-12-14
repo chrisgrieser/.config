@@ -3,12 +3,10 @@
 
 -- https://platform.openai.com/usage
 -- https://platform.openai.com/docs/models
-local model = {
-	name = "gpt-5-mini",
-	reasoningEffort = "minimal", -- all GPT-5 models reason, "medium" is too slow
-	apiKeyFile = "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Tech/api-keys/openai-api-key.txt",
-	provider = "openai",
-}
+local adapter = { name = "openai_responses", model = "gpt-5-mini" }
+local reasoningEffort = "minimal" -- all GPT-5 models reason, "medium" is too slow
+local apiKeyFile =
+	"$HOME/Library/Mobile Documents/com~apple~CloudDocs/Tech/api-keys/openai-api-key.txt"
 local useGitSignsInlineDiff = true
 local formatInlineResult = true
 
@@ -99,12 +97,13 @@ return {
 	end,
 	keys = {
 		{ "<leader>ac", "<cmd>CodeCompanionChat toggle<CR>", desc = " Chat (toggle)" },
+		-- stylua: ignore
+		{ "q", "<cmd>CodeCompanionChat toggle<CR>", ft = "codecompanion", nowait = true, desc = " Close Chat" },
 		{ "<leader>aa", ":CodeCompanion<CR>", mode = "x", desc = " 󰘎 Prompt" },
 
 		-- stylua: ignore start
 		-- needs to be `explain_` to not use the builtin `explain`
 		{ "<leader>ae", function() require("codecompanion").prompt("explain_") end, mode = "x", desc = " Explain" },
-
 		{ "<leader>as", function() require("codecompanion").prompt("simplify") end, mode = "x", desc = " Simplify" },
 		{ "<leader>ap", function() require("codecompanion").prompt("proofread") end, mode = "x", desc = " Proofread" },
 		-- stylua: ignore end
@@ -118,24 +117,15 @@ return {
 				},
 			},
 		},
-		interactions = {
-			chat = {
-				adapter = { name = model.provider, model = model.name }
-			},
-			inline = {
-				adapter = { name = model.provider, model = model.name }
-			},
-		},
 		adapters = {
 			http = {
-				openai = function()
-					-- https://github.com/olimorris/codecompanion.nvim/blob/main/lua/codecompanion/adapters/http/openai.lua
-					return require("codecompanion.adapters").extend("openai", {
-						env = {
-							api_key = ("cmd:cat %q"):format(model.apiKeyFile),
-						},
+				-- https://github.com/olimorris/codecompanion.nvim/blob/main/lua/codecompanion/adapters/http/openai_responses.lua
+				openai_responses = function()
+					return require("codecompanion.adapters").extend("openai_responses", {
+						env = { api_key = ("cmd:cat %q"):format(apiKeyFile) },
 						schema = {
-							reasoning_effort = { default = model.reasoningEffort },
+							reasoning_effort = { default = reasoningEffort },
+							["reasoning.effort"] = { default = reasoningEffort },
 						},
 					})
 				end,
@@ -152,20 +142,20 @@ return {
 				icons = { chat_context = "󰔌" }, -- icon for the fold context
 				intro_message = "Use `?` for help.",
 				window = {
-					opts = {
-						foldlevel = 1,
-						foldmethod = "expr",
-						foldexpr = "v:lua.vim.treesitter.foldexpr()", -- allow folding codeblocks
-						statuscolumn = " ", -- padding
-					},
+					opts = { conceallevel = 0, statuscolumn = " " },
 				},
 			},
 		},
 		strategies = {
-			chat = {
-				adapter = model.provider,
+			inline = {
+				adapter = adapter,
 				keymaps = {
-					close = { modes = { n = "q" }, opts = { nowait = true } },
+					stop = { modes = { n = "<C-c>" } },
+				},
+			},
+			chat = {
+				adapter = adapter,
+				keymaps = {
 					stop = { modes = { n = "<C-c>" } },
 					clear = { modes = { n = "<D-k>", i = "<D-k>" } },
 					next_header = { modes = { n = "<C-j>", i = "<C-j>" } },
