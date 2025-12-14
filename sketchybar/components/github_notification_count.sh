@@ -19,13 +19,13 @@ if [[ $(system_profiler SPDisplaysDataType | grep -c Resolution) -gt 1 ]]; then
 	return 0
 fi
 
-# GUARD if app-switch, only trigger on deactivation of Reminders or Calendar
+# GUARD if app-switch, only trigger on deactivation of Brave
 if [[ "$SENDER" = "front_app_switched" ]]; then
 	mkdir -p "$HOME/.cache/sketchybar"
 	data="$HOME/.cache/sketchybar/front_app2"
 	[[ -f "$data" ]] && deactivated_app=$(<"$data")
 	echo -n "$INFO" >"$data"
-	[[ "$deactivated_app" != "Reminders" && "$deactivated_app" != "Calendar" ]] && return 0
+	[[ "$deactivated_app" != "Brave Browser" ]] && return 0
 fi
 
 if [[ -z "$GITHUB_TOKEN" ]]; then

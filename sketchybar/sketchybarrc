@@ -59,7 +59,7 @@ sketchybar \
 	script="./components/github_notification_count.sh" \
 	click_script="open 'https://github.com/notifications'" \
 	--add event update_github_notif --subscribe github_notif update_github_notif \
-	--subscribe github_notif system_woke \
+	--subscribe github_notif system_woke front_app_switched \
 	\
 	`#--2nd-row----------------------------------------------------------------`\
 	\
