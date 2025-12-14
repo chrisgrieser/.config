@@ -33,7 +33,7 @@ local function spinnerNotificationWhileRequest()
 					vim.notify(modelName .. " " .. spinner, vim.log.levels.DEBUG, {
 						title = "CodeCompanion",
 						icon = "",
-						id = ctx.data.id, -- replaces existing notification
+						id = ctx.data.id, -- replaces existing notification when using snacks.notifier
 					})
 				end)
 			)
@@ -43,14 +43,17 @@ local function spinnerNotificationWhileRequest()
 		desc = "User: CodeCompanion spinner (stop)",
 		pattern = "CodeCompanionRequestFinished",
 		callback = function(ctx)
-			local modelName = ctx.data.adapter.model
 			timer:stop()
 			timer:close()
-			vim.notify(modelName .. " finished ✅", nil, {
-				title = "CodeCompanion",
-				icon = "",
-				id = ctx.data.id,
-			})
+			if ctx.data.status == "success" then
+				vim.notify(ctx.data.adapter.model .. " finished ✅", nil, {
+					title = "CodeCompanion",
+					icon = "",
+					id = ctx.data.id,
+				})
+			else
+				Snacks.notifier.hide(ctx.data.id)
+			end
 		end,
 	})
 end
@@ -59,8 +62,9 @@ local function postRequestHook()
 	vim.api.nvim_create_autocmd("User", {
 		desc = "User: Sound when CodeCompanion finished",
 		pattern = "CodeCompanionRequestFinished",
-		callback = function()
-			if jit.os ~= "OSX" then return end
+		callback = function(ctx)
+			if ctx.data.status ~= "success" then return end
+			if jit.os ~= "OSX" then return end -- using macOS' `afplay`
 			local sound =
 				"/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/head_gestures_double_shake.caf"
 			vim.system { "afplay", "--volume", "0.3", sound }
@@ -85,6 +89,17 @@ local function postRequestHook()
 	})
 end
 
+local function leaveVisualOnInlineRequest()
+	vim.api.nvim_create_autocmd("User", {
+		desc = "User: leave visual mode",
+		pattern = "CodeCompanionInlineStarted",
+		callback = function()
+			if vim.fn.mode():lower() ~= "v" then return end
+			vim.cmd.normal { vim.fn.mode(), bang = true }
+		end,
+	})
+end
+
 local ccSpec = {
 	"olimorris/codecompanion.nvim",
 	dependencies = "nvim-lua/plenary.nvim",
@@ -92,6 +107,7 @@ local ccSpec = {
 	init = function() vim.g.whichkeyAddSpec { "<leader>a", group = " AI" } end,
 	config = function(_, opts)
 		require("codecompanion").setup(opts)
+		leaveVisualOnInlineRequest()
 		spinnerNotificationWhileRequest()
 		postRequestHook()
 	end,
