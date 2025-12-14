@@ -53,7 +53,6 @@ local function spinnerNotificationWhileRequest()
 			vim.notify(modelName .. " finished ✅", nil, {
 				title = "CodeCompanion",
 				icon = "",
-				timeout = 2000,
 				id = ctx.data.id,
 			})
 		end,
@@ -83,7 +82,8 @@ local function postRequestHook()
 			end
 			local ok2, gitsigns = pcall(require, "gitsigns")
 			if ok2 and useGitSignsInlineDiff then
-				gitsigns.setup { show_deleted = true, linehl = true, word_diff = true }
+				require("gitsigns.config").config.show_deleted = true
+				gitsigns.setup { linehl = true, word_diff = true }
 			end
 		end,
 	})
@@ -102,10 +102,11 @@ return {
 		{ "<leader>ac", "<cmd>CodeCompanionChat toggle<CR>", desc = " Chat (toggle)" },
 		{ "<leader>aa", ":CodeCompanion<CR>", mode = "x", desc = " 󰘎 Prompt" },
 
-		-- stylua: ignore
+		-- stylua: ignore start
 		{ "<leader>as", function() require("codecompanion").prompt("simplify") end, mode = "x", desc = " Simplify" },
-		-- stylua: ignore
+		{ "<leader>ae", function() require("codecompanion").prompt("explain") end, mode = "x", desc = " Simplify" },
 		{ "<leader>ap", function() require("codecompanion").prompt("proofread") end, mode = "x", desc = " Proofread" },
+		-- stylua: ignore end
 	},
 	opts = {
 		prompt_library = {
@@ -139,28 +140,12 @@ return {
 			-- https://codecompanion.olimorris.dev/configuration/chat-buffer.html
 			chat = {
 				auto_scroll = false,
-				intro_message = "",
 				fold_context = true,
 				icons = { chat_context = "󰔌" }, -- icon for the fold context
-				window = {
-					opts = {
-						foldlevel = 1,
-						foldmethod = "expr",
-						foldexpr = "v:lua.vim.treesitter.foldexpr()", -- allow folding codeblocks
-						statuscolumn = " ", -- padding
-					},
-				},
 			},
 		},
 		strategies = {
-			inline = {
-				adapter = model.provider,
-				keymaps = {
-					accept_change = { modes = { n = "ga" } },
-					reject_change = { modes = { n = "gb" } },
-					always_accept = { modes = { n = "gy" } },
-				},
-			},
+			inline = { adapter = model.provider },
 			chat = {
 				adapter = model.provider,
 				keymaps = {
@@ -170,7 +155,7 @@ return {
 					next_header = { modes = { n = "<C-j>", i = "<C-j>" } },
 					previous_header = { modes = { n = "<C-k>", i = "<C-k>" } },
 					fold_code = { modes = { n = "zz" } },
-				}
+				},
 			},
 		},
 	},

@@ -7,8 +7,6 @@ opts:
   placement: replace
   modes: [v]
   auto_submit: true
-  stop_context_insertion: false
-  user_prompt: false
   ignore_system_prompt: true
 ---
 

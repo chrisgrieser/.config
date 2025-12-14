@@ -46,8 +46,7 @@ return {
 			function()
 				require("gitsigns").toggle_linehl()
 				require("gitsigns").toggle_word_diff()
-				local conf = require("gitsigns.config").config
-				conf.show_deleted = not conf.show_deleted
+				require("gitsigns").toggle_deleted()
 			end,
 			desc = " Inline diff view",
 		},
