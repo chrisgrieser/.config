@@ -546,7 +546,7 @@ if jit.os == "OSX" then
 	local function playSound(file)
 		local soundDir =
 			"/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/"
-		vim.system { "afplay", soundDir .. file }
+		vim.system { "afplay", "--volume", "0.5", soundDir .. file }
 	end
 	vim.api.nvim_create_autocmd("RecordingEnter", {
 		desc = "User: Macro recording utilities (1/2)",

@@ -9,7 +9,7 @@ opts:
   auto_submit: true
   ignore_system_prompt: true
   adapter:
-    name: openai
+    name: openai_responses
     model: gpt-5-nano
 ---
 

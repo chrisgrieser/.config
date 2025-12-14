@@ -4,6 +4,9 @@
 -- https://platform.openai.com/usage
 -- https://platform.openai.com/docs/models
 local adapter = { name = "openai_responses", model = "gpt-5-mini" }
+local verbosity = "low" --low|medium|high
+local reasoningEffort = "minimal" -- minimal|low|medium|high
+
 local apiKeyFile =
 	"$HOME/Library/Mobile Documents/com~apple~CloudDocs/Tech/api-keys/openai-api-key.txt"
 local useGitSignsInlineDiff = true
@@ -108,13 +111,9 @@ local ccSpec = {
 		-- stylua: ignore end
 	},
 	opts = {
-		opts = { log_level = "DEBUG" },
 		prompt_library = {
 			markdown = {
-				dirs = {
-					vim.fn.stdpath("config") .. "/prompts", -- in nvim config
-					-- also accepts relative path to cwd https://codecompanion.olimorris.dev/configuration/prompt-library#adding-prompts
-				},
+				dirs = { vim.fn.stdpath("config") .. "/prompts" },
 			},
 		},
 		adapters = {
@@ -124,26 +123,31 @@ local ccSpec = {
 					return require("codecompanion.adapters").extend("openai_responses", {
 						env = { api_key = ("cmd:cat %q"):format(apiKeyFile) },
 						schema = {
-							-- SIC setting `enabled` required for the other value to take effect
-							["reasoning.effort"] = { default = "minimal", enabled = true },
+							model = {
+								choices = {
+									["gpt-5-mini"] = { opts = { can_reason = true } },
+									["gpt-5-nano"] = { opts = { can_reason = true } },
+								},
+							},
+							-- `enabled` means whether the parameter is enabled, not the
+							-- feature (i.e., `false` means the default value is used,
+							-- which is `medium` for reasoning effort.)
+							-- stylua: ignore
+							["reasoning.effort"] = { default = reasoningEffort, enabled = function() return true end },
+							["reasoning.summary"] = { enabled = function() return false end }, -- requires organizational access
+							verbosity = { default = verbosity },
 						},
 					})
 				end,
 			},
 		},
 		display = {
-			diff = {
-				enabled = false, -- disabled, since inline-stragy does not handle indents properly
-			},
-			-- https://codecompanion.olimorris.dev/configuration/chat-buffer.html
-			chat = {
+			diff = { enabled = false }, -- disabled, since inline-stragy does not handle indents properly
+			chat = { -- https://codecompanion.olimorris.dev/configuration/chat-buffer.html
 				auto_scroll = false,
 				fold_context = true,
-				icons = { chat_context = "󰔌" }, -- icon for the fold context
 				intro_message = "Use `?` for help.",
-				window = {
-					opts = { conceallevel = 0, statuscolumn = " " },
-				},
+				window = { opts = { statuscolumn = " " } }, -- padding
 			},
 		},
 		interactions = {
@@ -161,6 +165,8 @@ local ccSpec = {
 					next_header = { modes = { n = "<C-j>", i = "<C-j>" } },
 					previous_header = { modes = { n = "<C-k>", i = "<C-k>" } },
 					fold_code = { modes = { n = "zz" } },
+					yank_code = { modes = { n = "gy" } }, -- last code block
+					debug = { modes = { n = "gd" } },
 				},
 			},
 		},
