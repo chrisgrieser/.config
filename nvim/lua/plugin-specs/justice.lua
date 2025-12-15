@@ -3,6 +3,7 @@ return {
 	keys = {
 		{ "<leader>j", function() require("justice").select() end, desc = "󰖷 Just" },
 	},
+	init = function() vim.env.npm_config_fund = false end, -- disable funding nags
 	opts = {
 		recipeModes = {
 			terminal = {

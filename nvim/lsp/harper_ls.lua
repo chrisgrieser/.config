@@ -32,6 +32,7 @@ return {
 		},
 	},
 	on_attach = function(_client, bufnr)
+		-- `zg` and `zG` for adding words to the workspace/user dict
 		vim.keymap.set("n", "zg", function()
 			vim.lsp.buf.code_action {
 				filter = function(a) return a.command == "HarperAddToWSDict" end,

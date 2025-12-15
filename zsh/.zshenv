@@ -3,7 +3,6 @@ export ZDOTDIR="$HOME/.config/zsh" # location of this zsh configuration
 
 # NEOVIM
 export EDITOR="nvim"
-export NEOVIDE_FORK="true"                            # spawn independent `neovide` instance
 export PATH="$HOME/.local/share/nvim/mason/bin":$PATH # make mason tools available
 
 # PANDOC

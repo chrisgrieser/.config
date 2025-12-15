@@ -25,18 +25,27 @@ alias .....=" builtin cd ../../../.."
 function -() { builtin cd - || return; } # `-` to trigger `cd -` (workaround since cannot set alias for `-`)
 
 #-RECENT DIRS-------------------------------------------------------------------
-# https://zsh.sourceforge.io/Doc/Release/User-Contributions.html#Recent-Directories
-autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
-add-zsh-hook chpwd chpwd_recent_dirs
-alias gr=" cdr"
+# my own implementation of `chpwd_recent_dirs` using zsh's directory stack for
+# completing full file paths.
 
-zstyle ':chpwd:*' recent-dirs-max 20
-zstyle ':chpwd:*' recent-dirs-file "$HOME/.local/share/zsh/chpwd-recent-dirs"
+setopt AUTO_PUSHD # push to directory stack on `cd`
+export DIRSTACKSIZE=10
+function gr {
+	local goto=${1:-"$OLDPWD"}
+	cd "$goto" || return 1
+}
 
-# together, these make `cdr` search for and insert the instead of numbers
-zstyle ':chpwd:*' recent-dirs-default true # make `cdr` fallback to `cd`
-zstyle ':completion:*' recent-dirs-insert "always" # insert dir instead of numbers
-zstyle ':chpwd:*:*' recent-dirs-prune "parent" # using "pattern:…" not working
+_gr() {
+	local -a folders=() # turn lines from `dirs -p` into array for `compadd`
+	while IFS='' read -r dir; do
+		local abspath="${dir/#\~/$HOME}"
+		[[ -d "$abspath" && "$abspath" != "$PWD" && "$abspath" != "$HOME" ]] && folders+=("$dir")
+	done < <(dirs -p) # remove current directory
+
+	local expl && _description -V recent-folders expl 'Recent folders'
+	compadd "${expl[@]}" -Q -- "${folders[@]}"
+}
+compdef _gr gr
 
 #-KEYMAPS-----------------------------------------------------------------------
 
