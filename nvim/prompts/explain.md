@@ -22,12 +22,13 @@ When asked to explain code, follow these steps:
 3. Explain each function or significant block of code, including parameters and
    return values.
 4. Highlight any specific functions or methods used and their roles.
-5. Provide context on how the code fits into a larger application if applicable.
+5. Provide context on how the code fits into a larger application (if
+   applicable).
 
 ## User
 
 Please explain this code from buffer #${context.bufnr}:
 
 ````${context.filetype}
-${context.code}
+${selection.get}
 ````

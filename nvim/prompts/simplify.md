@@ -24,5 +24,5 @@ provided code.
 Simplify the following code:
 
 ```${context.filetype}
-${context.code}
+${selection.get}
 ```
