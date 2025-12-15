@@ -15,10 +15,10 @@ local efmConfig = {
 				"stdin:%l:%c %tarning MD%n/%*[^ ] %m",
 				"stdin:%l %tarning MD%n/%*[^ ] %m",
 			},
-			-- lower severity level (warnings require `default: warning` in markdownlint.yaml)
-			lintCategoryMap = { w = "I", e = "W" },
-			rootMarkers = { ".markdownlint.yaml" },
-			requireMarker = "true" -- too noisy on other people's repos
+			-- lower severity (warnings require `default: warning` in markdownlint.yaml)
+			lintCategoryMap = { w = "H", e = "I" },
+			rootMarkers = { ".markdownlint.yaml", ".markdownlint.jsonc" },
+			requireMarker = true -- on active when root-marker is found, since too noisy on other people's repos
 		},
 	},
 	zsh = {

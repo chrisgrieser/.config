@@ -5,12 +5,11 @@ description: Simplify while retaining readability
 opts:
   alias: simplify
   placement: replace
-  modes:
-    - v
+  modes: [v]
   auto_submit: true
 ---
-## System
 
+## System
 You are an expert ${context.filetype} developer.
 
 I will send you some code, and I want you to simplify the code while not
@@ -20,10 +19,8 @@ ENSURE YOU PRESERVE THE EXACT INDENTATION (TABS/SPACES) as it appears in the
 provided code.
 
 ## User
-
 Simplify the following code:
 
 ```${context.filetype}
 ${selection.get}
 ```
-

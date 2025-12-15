@@ -1,7 +1,3 @@
-
-> [!INFO]  
-> This note is a symlink to `pandoc/README.md` in [my dotfile directory](https://github.com/chrisgrieser/dotfiles)
-
 ## Tutorials
 - [Pandoc and Obsidian - Create slideshows, PDFs and Word documents - Obsidian Publish](https://publish.obsidian.md/hub/04+-+Guides%2C+Workflows%2C+%26+Courses/Community+Talks/YT+-+Pandoc+and+Obsidian+-+Create+slideshows%2C+PDFs+and+Word+documents)
 
@@ -149,10 +145,10 @@ geometry: "margin=2cm"
 - Tools for Automatic References
 	+ [url2cite](https://github.com/phiresky/pandoc-url2cite/) ([usage with normal citekeys](https://github.com/phiresky/pandoc-url2cite/issues/10#issuecomment-899101361))
 	+ [manubot](https://github.com/manubot)
-- filters can be written in [[Lua]]
+- filters can be written in Lua
 
 > [!INFO] Priority of Filters  
-> Filters, Lua-filters, and citeproc processing are applied in the order specified on the command line.  
+> Filters, Lua-filters, and `citeproc` processing are applied in the order specified on the command line.  
 > –[Pandoc Docs](https://pandoc.org/MANUAL.html#option--filter)
 
 **Why Lua Filters?**
