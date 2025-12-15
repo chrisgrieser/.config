@@ -163,7 +163,7 @@ return {
 	opts = {
 		registries = {
 			-- personal registry must come first to have priority
-			-- "file:" .. vim.fn.stdpath("config") .. "/personal-mason-registry",
+			-- "file:" .. vim.fn.stdpath("config") .. "/mason-registry",
 			"github:mason-org/mason-registry",
 		},
 		ui = {

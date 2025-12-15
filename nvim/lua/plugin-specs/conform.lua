@@ -37,14 +37,16 @@ return {
 					json = { "jq" },
 				},
 			},
-			shellcheck = { -- add `--shell=bash` to force to work with `zsh`
+			shellcheck = {
+				-- add `--shell=bash` to force to work with `zsh`
 				args = "'$FILENAME' --format=diff --shell=bash | patch -p1 '$FILENAME'",
 			},
 			["markdown-toc"] = {
 				-- order used by markdownlint's `unordered-style: sublist`
 				prepend_args = { "--bullets", "-", "--bullets", "+", "--bullets", "*" },
+
+				-- FIX frontmatter being affected https://github.com/jonschlinkert/markdown-toc/issues/151
 				condition = function(_self, ctx)
-					-- FIX frontmatter being affected https://github.com/jonschlinkert/markdown-toc/issues/151
 					local firstLine = vim.api.nvim_buf_get_lines(ctx.buf, 0, 1, false)[1]
 					return firstLine ~= "---"
 				end,

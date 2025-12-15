@@ -6,6 +6,9 @@
 ```bash
 ├── lsp
 ├── dap
+├── queries
+├── prompts
+├── mason-registry
 ├── lua
 │  ├── config
 │  ├── colorschemes
@@ -16,7 +19,6 @@
 │  ├── ftdetect
 │  ├── indent
 │  └── syntax
-├── queries
 ├── snippets
 │  ├── general
 │  └── project-specific

@@ -16,7 +16,7 @@ local efmConfig = {
 				"stdin:%l %tarning MD%n/%*[^ ] %m",
 			},
 			-- lower severity (warnings require `default: warning` in markdownlint.yaml)
-			lintCategoryMap = { w = "H", e = "I" },
+			lintCategoryMap = { w = "N", e = "I" }, -- warning -> hint, error -> info
 			rootMarkers = { ".markdownlint.yaml", ".markdownlint.jsonc" },
 			requireMarker = true -- on active when root-marker is found, since too noisy on other people's repos
 		},

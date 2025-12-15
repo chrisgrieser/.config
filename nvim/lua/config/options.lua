@@ -5,7 +5,7 @@ vim.g.iCloudSync = vim.env.HOME .. "/Library/Mobile Documents/com~apple~CloudDoc
 
 vim.g.useEmmyluaLsp = false
 
--- names need to match `lua/colorschemes/{name}.lua` & name for `colorscheme:`
+-- names need to match `lua/colorschemes/{name}.lua` & the name for `vim.cmd.colorscheme`
 vim.g.lightColor = "dawnfox"
 vim.g.darkColor = "tokyonight"
 
@@ -126,9 +126,10 @@ vim.opt.fillchars:append {
 	msgsep = "═",
 	lastline = "↓",
 }
+
 -- stylua: ignore
--- vim.opt.fillchars:append { horiz = "═", vert = "║", horizup = "╩", horizdown = "╦", vertleft = "╣", vertright = "╠", verthoriz = "╬" }
-vim.opt.fillchars:append { horiz = "▄", vert = "█", horizup = "█", horizdown = "▄", vertleft = "█", vertright = "█", verthoriz = "█" }
+vim.opt.fillchars:append { horiz = "═", vert = "║", horizup = "╩", horizdown = "╦", vertleft = "╣", vertright = "╠", verthoriz = "╬" }
+-- vim.opt.fillchars:append { horiz = "▄", vert = "█", horizup = "█", horizdown = "▄", vertleft = "█", vertright = "█", verthoriz = "█" }
 
 ---DIAGNOSTICS------------------------------------------------------------------
 vim.diagnostic.config {
@@ -143,7 +144,7 @@ vim.diagnostic.config {
 			min = vim.diagnostic.severity.WARN, -- leave out Info & Hint
 		},
 		format = function(diag)
-			local msg = diag.message:gsub("%.$", "") -- lua_ls adds trailing `.`
+			local msg = diag.message:gsub("%.$", "") -- remove trailing `.` from lua_ls
 			return msg
 		end,
 		suffix = function(diag)

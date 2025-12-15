@@ -13,27 +13,31 @@ __pycache__
 *.alfredworkflow
 *.dmg
 
-#───────────────────────────────────────────────────────────────────────────────
+#-------------------------------------------------------------------------------
 # NOTE as opposed to `.ignore` files (used e.g. by ripgrep),
-# gitignore files do not accept syntax such as `*.{ext1,ext2}`
+# gitignore files do NOT accept syntax such as `*.{ext1,ext2}`
+#-------------------------------------------------------------------------------
 
-# Microsoft Office temporary files
+# MS Office temporary files
 ~$*.docx
 ~$*.xlsx
 ~$*.pptx
 
-# safety net to prevent sensitive data accidentally being added
+# conform.nvim temporary files
+.conform.*
+
+# prevent sensitive data from being added
+.zsh_history
+.bash_history
 *.kdb
 *.kdbx
 *.gpg
 *.pfx
 *.key
-.zsh_history
-.bash_history
 *.env
 .env
 
-# prevent accidental inclusion of big files or partial downloads
+# prevent big files or partial downloads from being added
 *.part
 *.crdownload
 *.mp4
