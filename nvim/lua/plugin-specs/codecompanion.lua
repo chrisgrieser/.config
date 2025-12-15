@@ -75,9 +75,9 @@ local function postRequestHook()
 	vim.api.nvim_create_autocmd("User", {
 		desc = "User: format & show diff when CodeCompanion finished",
 		pattern = "CodeCompanionInlineFinished",
-		callback = function(ctx)
-			local ok, conform = pcall(require, "conform")
+		callback = vim.schedule_wrap(function(ctx)
 			if formatInlineResult then
+				local ok, conform = pcall(require, "conform")
 				if not ok then vim.lsp.buf.format { bufnr = ctx.buf } end
 				if ok then conform.format { bufnr = ctx.buf } end
 			end
@@ -86,7 +86,7 @@ local function postRequestHook()
 				require("gitsigns.config").config.show_deleted = true
 				gitsigns.setup { linehl = true, word_diff = true }
 			end
-		end,
+		end),
 	})
 end
 

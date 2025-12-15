@@ -1,6 +1,6 @@
--- INFO A bunch of commands that are too small to be published as plugins, but
--- too big to put in the main config, where they would crowd the actual config.
--- Every function is self-contained and should be bound to a keymap.
+-- INFO A collection of commands that are too small to publish as plugins, but
+-- too large to place in the main config, where they would clutter the actual config.
+-- Each function is self-contained and should be bound to a keymap.
 local M = {}
 --------------------------------------------------------------------------------
 
