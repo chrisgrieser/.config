@@ -7,6 +7,7 @@ brew install git-filter-repo
 
 original_clone_url="$(git remote get-url origin)"
 # git filter-repo --strip-blobs-bigger-than 1M
+# git filter-repo --invert-paths --path-glob '*.png'
 git filter-repo --invert-paths --path "$filepath"
 
 git remote add origin "$original_clone_url"
@@ -15,6 +16,7 @@ git push --force --tags
 
 # verify it's gone:
 git log --all -- "$filepath"
+# git log --all -- "*.png"
 git grep -a 'sensitive string' "$(git rev-list --all)"
 #-------------------------------------------------------------------------------
 # brew uninstall git-filter-repo
