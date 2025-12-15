@@ -37,17 +37,6 @@ end
 ---@param replace string
 function M.bufAbbrev(text, replace) vim.keymap.set("ia", text, replace, { buffer = true }) end
 
----Helper function for LSPs that do not support ignore files (such as `ltex`)
----@param bufnr integer
----@return boolean
-function M.isObsidianOrNotesOrIcloud(bufnr)
-	local path = vim.api.nvim_buf_get_name(bufnr)
-	local obsiDir = #vim.fs.find(".obsidian", { path = path, upward = true, type = "directory" }) > 0
-	local iCloudDocs = vim.startswith(path, vim.env.HOME .. "/Library/Mobile Documents/")
-	local notesDir = vim.startswith(path, vim.g.notesDir)
-	return obsiDir or notesDir or iCloudDocs
-end
-
 function M.loadGhToken()
 	if vim.env.GITHUB_TOKEN then return end
 	local tokenPath = os.getenv("HOME")

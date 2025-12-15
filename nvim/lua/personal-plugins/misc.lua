@@ -109,20 +109,15 @@ end
 --------------------------------------------------------------------------------
 
 function M.restartNeovide()
-	assert(jit.os == "OSX" and vim.g.neovide, "requires macOS' `open -a` & neovide")
+	assert(vim.g.neovide, "Requires neovide.")
 	local script = [=[
 		while pgrep -xq "neovide" ; do
 			sleep 0.05
-			i=$((i+1))
-			if [[ $i -gt 50 ]]; then
-				osascript -e 'display notification "Error" with title "Could not quit Neovide."'
-				return
-			fi
+			i=$((i+1)) ; [[ $i -gt 50 ]] && return 1 # timeout
 		done
 		sleep 0.1
-		open -a "neovide"
+		[[ "$OSTYPE" =~ "darwin" ]] && open -a "neovide" || neovide # on macOS, use `open -a`
 	]=]
-
 	vim.system({ "zsh", "-c", script }, { detach = true }) -- detach to run after nvim quit
 	vim.defer_fn(vim.cmd.wqall, 1)
 end

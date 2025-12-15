@@ -11,9 +11,8 @@ return {
 		["harper-ls"] = {
 			excludePatterns = {
 				vim.env.HOME .. "/Library/Mobile Documents/**", -- anything in iCloud
-				vim.g.notesDir .. "/**",
 				vim.env.HOME .. "/phd-data-analysis/**",
-				vim.env.HOME .. "/writing-vault/**",
+				vim.g.notesDir .. "/**",
 			},
 
 			diagnosticSeverity = "hint",
