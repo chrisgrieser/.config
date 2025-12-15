@@ -10,22 +10,26 @@ local plugins = {
 		dependencies = "nvim-lua/plenary.nvim",
 		lazy = false,
 		keys = {
-			{ ",ae", function() require("codecompanion").prompt("explain") end, mode = "x" },
+			{ ",ae", function() require("codecompanion").prompt("explain_") end, mode = "x" },
 		},
 		opts = {
 			interactions = {
-				chat = { adapter = { name = "openai", model = "gpt-5-mini" } },
+				chat = { adapter = { name = "openai_responses", model = "gpt-5-mini" } },
 			},
 			opts = { log_level = "DEBUG" },
 			adapters = {
 				http = {
-					openai = function()
-						return require("codecompanion.adapters").extend("openai", {
-							env = {
-								api_key = ("cmd:cat %q"):format(apiKeyFile),
-							},
+					openai_responses = function()
+						return require("codecompanion.adapters").extend("openai_responses", {
+							env = { api_key = ("cmd:cat %q"):format(apiKeyFile) },
 							schema = {
-								reasoning_effort = { default = "minimal" },
+								model = {
+									choices = {
+										["gpt-5-mini"] = { opts = { can_reason = true } },
+									},
+								},
+								["reasoning.effort"] = { default = "minimal" },
+								["reasoning.summary"] = { enabled = function() return false end },
 							},
 						})
 					end,

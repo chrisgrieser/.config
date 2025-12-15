@@ -126,6 +126,7 @@ local ccSpec = {
 		-- stylua: ignore end
 	},
 	opts = {
+		opts = { log_level = "DEBUG" },
 		prompt_library = {
 			markdown = {
 				dirs = { vim.fn.stdpath("config") .. "/prompts" },
