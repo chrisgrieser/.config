@@ -104,7 +104,7 @@ end
 local ccSpec = {
 	"olimorris/codecompanion.nvim",
 	dependencies = "nvim-lua/plenary.nvim",
-	cmd = { "CodeCompanion", "CodeCompanionChat" },
+	cmd = { "CodeCompanion", "CodeCompanionChat", "CodeCompanionActions" },
 	init = function() vim.g.whichkeyAddSpec { "<leader>a", group = " AI" } end,
 	config = function(_, opts)
 		require("codecompanion").setup(opts)
@@ -115,7 +115,7 @@ local ccSpec = {
 	keys = {
 		{ "<leader>ac", "<cmd>CodeCompanionChat toggle<CR>", desc = " Chat (toggle)" },
 		-- stylua: ignore
-		{ "q", "<cmd>CodeCompanionChat toggle<CR>", ft = "codecompanion", nowait = true, desc = " Close Chat" },
+		{ "q", "<cmd>CodeCompanionChat toggle<CR>", ft = "codecompanion", nowait = true, desc = " Close chat" },
 		{ "<leader>aa", ":CodeCompanion<CR>", mode = "x", desc = " 󰘎 Prompt" },
 
 		-- stylua: ignore start
@@ -144,10 +144,6 @@ local ccSpec = {
 									["gpt-5-nano"] = { opts = { can_reason = true } },
 								},
 							},
-							-- `enabled` means whether the parameter is enabled, not the
-							-- feature (i.e., `false` means the default value is used,
-							-- which is `medium` for reasoning effort.)
-							-- stylua: ignore
 							["reasoning.effort"] = { default = reasoningEffort },
 							["reasoning.summary"] = { enabled = function() return false end }, -- requires organizational access
 						},

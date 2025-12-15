@@ -26,6 +26,7 @@ return {
 			["qf"] = { glyph = "" },
 
 			-- plugin-filetypes
+			["codecompanion"] = { glyph = "" },
 			["leetcode.nvim"] = { glyph = "󰐱" },
 			["aerial"] = { glyph = "󰙅" },
 			["ccc-ui"] = { glyph = "" },

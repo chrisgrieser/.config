@@ -1,5 +1,5 @@
 return {
-	"$CLIPBOARD",
+	"${1:repo}",
 	opts = {
 		$0
 	},
