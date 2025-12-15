@@ -32,6 +32,16 @@ M.keys = {
 	-- scroll-to-prompt, requires shell integration: https://wezfurlong.org/wezterm/config/lua/keyassignment/ScrollToPrompt.html
 	{ key = "k", mods = "CTRL", action = act.ScrollToPrompt(-1) },
 	{ key = "j", mods = "CTRL", action = act.ScrollToPrompt(1) },
+	{
+		key = "i",
+		mods = "CMD",
+		action = actFun(function(_win, pane)
+			local zones = pane:get_semantic_zones("Output")
+			for _, z in pairs(zones) do
+				wt.log_info(z)
+			end
+		end),
+	},
 
 	-- disable, since used for `fzf`
 	{ key = "Enter", mods = "ALT", action = act.DisableDefaultAssignment },

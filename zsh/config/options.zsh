@@ -5,9 +5,8 @@
 
 # GENERAL
 setopt INTERACTIVE_COMMENTS # comments in interactive mode, useful for copypasting
-setopt GLOB_DOTS            # glob includes dotfiles
 setopt PIPE_FAIL            # tracebility: exit if pipeline failed
-setopt NO_BANG_HIST         # don't expand `!`
+setopt NO_BANG_HIST         # don't expand `!`, since used for commit messages
 
 # HISTORY
 setopt HIST_IGNORE_DUPS
