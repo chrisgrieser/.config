@@ -38,12 +38,14 @@ return {
 				filter = function(a) return a.command == "HarperAddToWSDict" end,
 				apply = true,
 			}
+			vim.notify("Added to user dict.", nil, { icon = "󰓆", title = "harper" })
 		end, { desc = "󰓆 Add word to workspace dict", buffer = bufnr })
 		vim.keymap.set("n", "zG", function()
 			vim.lsp.buf.code_action {
 				filter = function(a) return a.command == "HarperAddToUserDict" end,
 				apply = true,
 			}
+			vim.notify("Added to user dict.", nil, { icon = "󰓆", title = "harper" })
 		end, { desc = "󰓆 Add word to user dict", buffer = bufnr })
 	end,
 }
