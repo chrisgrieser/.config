@@ -338,17 +338,15 @@ keymap("c", "<BS>", function()
 end, { expr = true, desc = "<BS> does not leave cmdline" })
 
 ---INSPECT & EVAL---------------------------------------------------------------
-keymap("n", "<leader>ii", vim.cmd.Inspect, { desc = "󱈄 Highlights at cursor" })
-keymap("n", "<leader>it", vim.cmd.InspectTree, { desc = " TS Syntax Tree" })
+keymap("n", "<leader>ii", vim.cmd.Inspect, { desc = "󱈄 Inspect at cursor" })
+keymap("n", "<leader>it", vim.cmd.InspectTree, { desc = " TS syntax tree" })
 keymap("n", "<leader>id", function()
 	local diag = vim.diagnostic.get_next()
 	vim.notify(vim.inspect(diag), nil, { ft = "lua" })
 end, { desc = "󰋽 Next diagnostic" })
 
--- stylua: ignore start
-keymap("n", "<leader>iL", function() vim.cmd.edit(vim.lsp.log.get_filename()) end, { desc = "󱂅 LSP log" })
+-- stylua: ignore
 keymap("n", "<leader>ib", function() require("personal-plugins.misc").inspectBuffer() end, { desc = "󰽙 Buffer info" })
--- stylua: ignore end
 
 keymap({ "n", "x" }, "<leader>ee", function()
 	local selection = vim.fn.mode() == "n" and ""

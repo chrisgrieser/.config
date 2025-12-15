@@ -5,10 +5,10 @@ description: Simplify while retaining readability
 opts:
   alias: simplify
   placement: replace
-  modes: [v]
+  modes:
+    - v
   auto_submit: true
 ---
-
 ## System
 
 You are an expert ${context.filetype} developer.
@@ -26,3 +26,4 @@ Simplify the following code:
 ```${context.filetype}
 ${selection.get}
 ```
+
