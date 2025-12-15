@@ -19,12 +19,13 @@ vim.g.lualineAdd = function(whichBar, whichSection, component, where) ---@diagno
 end
 
 local function hasSplit()
-	if vim.bo.buftype ~= "" then return false end
+	if vim.bo.buftype ~= "" and not vim.wo.diff then return false end
 	local winsInTab = vim.api.nvim_tabpage_list_wins(0)
 	local splits = vim.iter(winsInTab)
 		:filter(function(win)
 			local isSplit = vim.api.nvim_win_get_config(win).split ~= nil
 			local specialWin = vim.bo[vim.api.nvim_win_get_buf(win)].buftype ~= ""
+				and not vim.wo[win].diff
 			return isSplit and not specialWin
 		end)
 		:totable()
@@ -33,6 +34,7 @@ end
 
 -- not using lualins's component since it requires `web-devicons`
 local function addFiletypeIcon(filename)
+	if vim.wo.diff and vim.bo.buftype == "nowrite" then return " Diff" end
 	if filename == "[No Name]" and vim.bo.ft ~= "" then filename = vim.bo.ft end -- fix name for special buffers
 	local ok, icons = pcall(require, "mini.icons")
 	if not ok then return filename end

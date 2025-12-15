@@ -29,8 +29,12 @@ return {
 		{
 			"gh",
 			function()
-				if vim.wo.diff then return vim.cmd.normal { "]c", bang = true } end
-				require("gitsigns").nav_hunk("next", { foldopen = true, navigation_message = true })
+				if vim.wo.diff then
+					local ok = pcall(vim.cmd.normal, { "]c", bang = true })
+					if not ok then vim.cmd.normal { "gg]c", bang = true } end -- make it wrap
+				else
+					require("gitsigns").nav_hunk("next", { foldopen = true, navigation_message = true })
+				end
 			end,
 			desc = "󰊢 Next hunk",
 		},
@@ -43,9 +47,25 @@ return {
 			desc = "󰊢 Previous hunk",
 		},
 		{
-			"<leader>gD",
-			function() require("gitsigns").diffthis("~1", { split = "belowright" }) end,
-			desc = "󰊢 Diff to parent",
+			"<leader>gd",
+			function()
+				if not vim.wo.diff then
+					local filepath = vim.api.nvim_buf_get_name(0)
+					local gitArgs = { "git", "log", "--max-count=1", "--format=%h", "--", filepath }
+					local lastCommit = vim.system(gitArgs):wait().stdout
+					local pre = vim.trim(out.stdout) .. "^"
+					require("gitsigns").diffthis(lastCommitToFile, { split = "belowright" })
+				else
+					-- close all diff windows
+					local winsInTab = vim.api.nvim_tabpage_list_wins(0)
+					vim.iter(winsInTab):each(function(win)
+						local buf = vim.api.nvim_win_get_buf(win)
+						local isDiffWin = vim.wo[win].diff and vim.bo[buf].buftype == "nowrite"
+						if isDiffWin then vim.api.nvim_win_close(win, true) end
+					end)
+				end
+			end,
+			desc = "󰊢 Last diff of file",
 		},
 
 		-- UNDO
