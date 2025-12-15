@@ -242,9 +242,8 @@ rules:
         to:
           - shell_command: |
               osascript -e '
-                tell application "System Events" to tell process "Granola"
-                    set frontmost to true
-                    click menu item "Quit Completely" of menu "Granola" of menu bar 1
+                tell application "System Events" 
+                    tell process "Granola" to click menu item "Quit Completely" of menu "Granola" of menu bar 1
                     sleep 0.2
                     key code 36 
                 end tell'
