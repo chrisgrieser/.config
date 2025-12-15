@@ -6,13 +6,14 @@ filepath="xxx"
 brew install git-filter-repo
 
 original_clone_url="$(git remote get-url origin)"
+# git filter-repo --strip-blobs-bigger-than 1M
 git filter-repo --invert-paths --path "$filepath"
 
 git remote add origin "$original_clone_url"
 git push --force --all
 git push --force --tags
 
-# very it's gone:
+# verify it's gone:
 git log --all -- "$filepath"
 git grep -a 'sensitive string' "$(git rev-list --all)"
 #-------------------------------------------------------------------------------

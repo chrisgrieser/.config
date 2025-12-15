@@ -500,8 +500,10 @@ return {
 						["<Down>"] = { "history_forward", mode = "i" },
 
 						["<D-f>"] = { "toggle_maximize", mode = "i" }, -- [f]ullscreen
-						["<D-p>"] = { "toggle_preview", mode = "i" },
 						["<C-CR>"] = { "cycle_win", mode = "i" },
+
+						-- not for `small_no_preview`, since it has no 2nd win
+						["<D-p>"] = { "toggle_preview", mode = "i" },
 						["<PageUp>"] = { "preview_scroll_up", mode = "i" },
 						["<PageDown>"] = { "preview_scroll_down", mode = "i" },
 
