@@ -993,8 +993,6 @@
 ---to specify the font.
 ---
 ---@field font? AllFontAttributes
----DEPRECATED
----@field font_antialias? Deprecated
 ---By default, wezterm will use an appropriate system-specific method
 ---for locating the fonts that you specify using the options below.
 ---Additionally, if you configure the `config.font_dirs` option,
@@ -2663,4 +2661,4 @@
 ---
 ---@field xim_im_name? string
 
--- vim:ts=4:sts=4:sw=4:et:ai:si:sta:
+-- vim: set ts=4 sts=4 sw=4 et ai si sta:

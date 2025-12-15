@@ -29,10 +29,10 @@ wt.on("gui-startup", function(cmd)
 end)
 
 -- set tab name based on
--- 1. `wezterm cli set-tab-title`
--- 2. title set by processes, like `nvim` or `yt-dlp --console-title`
+-- 1. set by `wezterm cli set-tab-title`
+-- 2. set by processes like `nvim` or `yt-dlp --console-title`
 -- 3. name of the foreground process
--- 4. if the foreground process is zsh, then the current working directory
+-- 4. the current working directory (if the foreground process is zsh)
 wt.on("format-tab-title", function(tab)
 	if tab.tab_title ~= "" then return " " .. tab.tab_title .. " " end -- set by wezterm cli
 
@@ -92,13 +92,13 @@ local config = {
 		bottom = "0.3cell",
 	},
 	min_scroll_bar_height = "3cell",
-	scrollback_lines = 10000,
+	scrollback_lines = 20000,
 
 	-- Tabs
 	enable_tab_bar = true,
 	show_new_tab_button_in_tab_bar = false,
 	hide_tab_bar_if_only_one_tab = true,
-	use_fancy_tab_bar = false, -- `false` = style using terminal cells
+	use_fancy_tab_bar = false, -- `false` = style using terminal cells instead of native tabs
 	tab_max_width = 60,
 	window_frame = { font_size = 30 }, -- font size if using `fancy_tab_bar`
 
