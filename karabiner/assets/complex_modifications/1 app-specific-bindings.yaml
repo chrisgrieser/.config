@@ -234,7 +234,6 @@ rules:
         conditions:
           - { type: frontmost_application_if, bundle_identifiers: [com.apple.ScriptEditor] }
   #─────────────────────────────────────────────────────────────────────────────
-  #───────────────────────────────────────────────────────────────────────
   - description: "(Apps) Granola"
     manipulators:
       # Quit completely
@@ -242,9 +241,12 @@ rules:
         from: { key_code: q, modifiers: { mandatory: [command] } }
         to:
           - shell_command: |
-              osascript -l JavaScript -e '
+              osascript -e '
                 tell application "System Events" to tell process "Granola"
-                    click menu item "Granola" of menu "Insert" of menu bar 1
+                    click menu item "Quit Completely" of menu "Granola" of menu bar 1
+                    sleep 0.2
+                    key code 36 
                 end tell'
         conditions:
-          [{ type: frontmost_application_if, bundle_identifiers: [com.apple.ScriptEditor] }]
+          [{ type: frontmost_application_if, bundle_identifiers: [com.granola.app] }]
+  #─────────────────────────────────────────────────────────────────────────────
