@@ -275,7 +275,7 @@ keymap({ "n", "x" }, "q", "gc", { desc = "󰆈 Comment operator", remap = true }
 keymap("n", "qq", "gcc", { desc = "󰆈 Comment line", remap = true })
 do
 	keymap("o", "u", "gc", { desc = "󰆈 Multiline comment", remap = true })
-	keymap("n", "guu", "guu") -- prevent prev keymap from overwriting `guu` (lowercase line)
+	keymap("n", "guu", "guu") -- prevent previous keymap from overwriting `guu` (lowercase line)
 end
 
 -- stylua: ignore start

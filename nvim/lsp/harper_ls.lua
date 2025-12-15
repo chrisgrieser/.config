@@ -21,31 +21,19 @@ return {
 			dialect = "American",
 			linters = {
 				UseTitleCase = false, -- I prefer sentence case headings
-
-				-- disable buggy rules
-				SentenceCapitalization = false, -- https://github.com/Automattic/harper/issues/1056
-				UnclosedQuotes = false, -- https://github.com/Automattic/harper/issues/1573
-
-				-- enable extra rules
-				UseGenitive = true,
+				SentenceCapitalization = false, -- buggy: https://github.com/Automattic/harper/issues/1056
+				UnclosedQuotes = false, -- buggy: https://github.com/Automattic/harper/issues/1573
 			},
 		},
 	},
 	on_attach = function(_client, bufnr)
-		-- `zg` and `zG` for adding words to the workspace/user dict
 		vim.keymap.set("n", "zg", function()
 			vim.lsp.buf.code_action {
-				filter = function(a) return a.command == "HarperAddToWSDict" end,
+				filter = function(a)
+					return a.command == "HarperAddToWSDict" or a.command == "HarperAddToUserDict"
+				end,
 				apply = true,
 			}
-			vim.notify("Added to user dict.", nil, { icon = "󰓆", title = "harper" })
-		end, { desc = "󰓆 Add word to workspace dict", buffer = bufnr })
-		vim.keymap.set("n", "zG", function()
-			vim.lsp.buf.code_action {
-				filter = function(a) return a.command == "HarperAddToUserDict" end,
-				apply = true,
-			}
-			vim.notify("Added to user dict.", nil, { icon = "󰓆", title = "harper" })
-		end, { desc = "󰓆 Add word to user dict", buffer = bufnr })
+		end, { desc = "󰓆 Add word to spellfile", buffer = bufnr })
 	end,
 }

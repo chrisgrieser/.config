@@ -5,7 +5,7 @@
 if [[ "$focusedapp" == "com.apple.finder" ]]; then
 	dir_to_open=$(osascript -e 'tell application "Finder" to return POSIX path of (target of window 1 as alias)' | sed -E 's|/$||')
 elif [[ "$focusedapp" == "md.obsidian" ]]; then
-	vault_location="$HOME" # CONFIG
+	vault_location="$HOME" # assumes all vault are in this folder
 	win_title=$(osascript -e 'tell application "System Events" to tell process "Obsidian" to return name of front window')
 	vault_name=$(echo "$win_title" | sed -E 's|.* - (.*) - .*|\1|')
 	dir_to_open="$vault_location/$vault_name"

@@ -18,6 +18,9 @@ return {
 		sign = { enabled = false },
 		latex = { enabled = false },
 		render_modes = { "n", "c", "i", "v", "V" },
+		quote = {
+			repeat_linebreak = true, -- full border on soft-wrap
+		},
 		html = {
 			comment = { text = "󰆈" },
 		},
@@ -36,7 +39,7 @@ return {
 		link = {
 			custom = {
 				-- news sites
-				medium = { pattern = "medium%.com", icon = "󰬔 " }, -- letter-glyphs named `alpha_x`
+				medium = { pattern = "medium%.com", icon = "󰬔 " }, -- letter-glyphs named `alpha_…`
 				verge = { pattern = "theverge%.com", icon = "󰰫 " },
 				techcrunch = { pattern = "techcrunch%.com", icon = "󰰥 " },
 				wired = { pattern = "wired%.com", icon = "󰬞 " },
@@ -54,13 +57,11 @@ return {
 				my_website = { pattern = "chris%-grieser.de", icon = " " },
 			},
 		},
-		quote = { repeat_linebreak = true }, -- full border on soft-wrap
-		win_options = {
-			-- makes toggling this plugin also toggle conceallevel
+		--------------------------------------------------------------------------
+		win_options = { -- makes toggling this plugin also toggle conceallevel
 			conceallevel = { default = 0, rendered = 2 },
 		},
-		-- LSP hovers: hide code block lines
-		overrides = {
+		overrides = { -- LSP hovers: hide code block lines
 			buftype = {
 				nofile = {
 					code = { border = "hide", style = "normal" },
