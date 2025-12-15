@@ -9,14 +9,13 @@ return {
 	filetypes = { "markdown" }, -- too many false positives elsewhere
 	settings = {
 		["harper-ls"] = {
-			excludePatterns = {
+			excludePatterns = { -- PENDING https://github.com/Automattic/harper/issues/2339
 				vim.env.HOME .. "/Library/Mobile Documents/**", -- anything in iCloud
 				vim.env.HOME .. "/phd-data-analysis/**",
-				-- vim.g.notesDir .. "/**",
 			},
 
 			diagnosticSeverity = "hint",
-			userDictPath = vim.o.spellfile,
+			userDictPath = vim.o.spellfile, -- share it with vim's spellcheck
 			markdown = { IgnoreLinkTitle = true },
 			isolateEnglish = true, -- experimental; in mixed-language doc only check English
 			dialect = "American",
@@ -27,20 +26,23 @@ return {
 				SentenceCapitalization = false, -- https://github.com/Automattic/harper/issues/1056
 				UnclosedQuotes = false, -- https://github.com/Automattic/harper/issues/1573
 
-				-- enable extra rules?
+				-- enable extra rules
 				UseGenitive = true,
 			},
 		},
 	},
 	on_attach = function(_client, bufnr)
-		-- Using `harper` to write to the spell-file effectively does the same as
-		-- the builtin `zg`, but has the advantage that `harper` is hot-reloaded.
 		vim.keymap.set("n", "zg", function()
 			vim.lsp.buf.code_action {
-				filter = function(a)
-					return a.command == "HarperAddToUserDict" or a.command == "HarperAddToWSDict"
-				end,
+				filter = function(a) return a.command == "HarperAddToWSDict" end,
+				apply = true,
 			}
-		end, { desc = "󰓆 Add word to spellfile", buffer = bufnr })
+		end, { desc = "󰓆 Add word to workspace dict", buffer = bufnr })
+		vim.keymap.set("n", "zG", function()
+			vim.lsp.buf.code_action {
+				filter = function(a) return a.command == "HarperAddToUserDict" end,
+				apply = true,
+			}
+		end, { desc = "󰓆 Add word to user dict", buffer = bufnr })
 	end,
 }
