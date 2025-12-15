@@ -43,7 +43,7 @@ function M.bufAbbrev(text, replace) vim.keymap.set("ia", text, replace, { buffer
 function M.isObsidianOrNotesOrIcloud(bufnr)
 	local path = vim.api.nvim_buf_get_name(bufnr)
 	local obsiDir = #vim.fs.find(".obsidian", { path = path, upward = true, type = "directory" }) > 0
-	local iCloudDocs = vim.startswith(path, os.getenv("HOME") .. "/Library/Mobile Documents/")
+	local iCloudDocs = vim.startswith(path, vim.env.HOME .. "/Library/Mobile Documents/")
 	local notesDir = vim.startswith(path, vim.g.notesDir)
 	return obsiDir or notesDir or iCloudDocs
 end

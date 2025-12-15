@@ -7,19 +7,20 @@
 ---@type vim.lsp.Config
 return {
 	filetypes = { "markdown" }, -- too many false positives elsewhere
-	root_dir = function(bufnr, on_dir)
-		-- do not load in specific repos (there is no `harperignore` to do this)
-		if require("config.utils").isObsidianOrNotesOrIcloud(bufnr) then return end
-		local rootMarkers = { ".git" }
-		on_dir(vim.fs.root(bufnr, rootMarkers))
-	end,
 	settings = {
 		["harper-ls"] = {
+			excludePatterns = {
+				vim.env.HOME .. "/Library/Mobile Documents/**", -- anything in iCloud
+				vim.g.notesDir .. "/**",
+				vim.env.HOME .. "/phd-data-analysis/**",
+				vim.env.HOME .. "/writing-vault/**",
+			},
+
 			diagnosticSeverity = "hint",
 			userDictPath = vim.o.spellfile,
-			markdown = {
-				IgnoreLinkTitle = true,
-			},
+			markdown = { IgnoreLinkTitle = true },
+			isolateEnglish = true, -- experimental; in mixed-language doc only check English
+			dialect = "American",
 			linters = {
 				UseTitleCase = false, -- I prefer sentence case headings
 
@@ -30,8 +31,6 @@ return {
 				-- enable extra rules?
 				UseGenitive = true,
 			},
-			isolateEnglish = true, -- experimental; in mixed-language doc only check English
-			dialect = "American",
 		},
 	},
 	on_attach = function(_client, bufnr)

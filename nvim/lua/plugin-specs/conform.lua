@@ -27,7 +27,7 @@ return {
 				"biome-organize-imports",
 			},
 
-			-- _ = fallback, used when no formatters defined and no LSP available
+			-- fallback, used when no formatters defined and no LSP available
 			_ = { "trim_whitespace", "trim_newlines", "squeeze_blanks" },
 		},
 		formatters = {
@@ -47,8 +47,12 @@ return {
 
 				-- FIX frontmatter being affected https://github.com/jonschlinkert/markdown-toc/issues/151
 				condition = function(_self, ctx)
-					local firstLine = vim.api.nvim_buf_get_lines(ctx.buf, 0, 1, false)[1]
-					return firstLine ~= "---"
+					-- only enable if the `<!-- toc -->` is present
+					local lines = vim.api.nvim_buf_get_lines(ctx.buf, 0, -1, false)
+					for _, line in pairs(lines) do
+						if line == "<!-- toc -->" then return true end
+					end
+					return false
 				end,
 			},
 			-----------------------------------------------------------------------

@@ -7,6 +7,7 @@ return {
 	root_dir = function(bufnr, on_dir)
 		-- do not load in specific repos (there is no `ltexignore` to do this)
 		if require("config.utils").isObsidianOrNotesOrIcloud(bufnr) then return end
+
 		local rootMarkers = { ".git" }
 		on_dir(vim.fs.root(bufnr, rootMarkers))
 	end,

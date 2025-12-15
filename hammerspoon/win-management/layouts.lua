@@ -41,6 +41,9 @@ local function workLayout(shouldDarkenDisplay)
 		wu.moveResize("Mona 6", wu.toTheSide)
 		wu.moveResize("Gmail", wu.pseudoMax)
 		if isWorkWeek() then wu.moveResize("Slack", wu.pseudoMax) end
+		u.defer(1, function() -- scroll up
+			hs.eventtap.keyStroke({ "cmd" }, "up", 1, u.app("Mona 6"))
+		end)
 	end)
 
 	print("🔲 Layout: work")
