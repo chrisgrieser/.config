@@ -46,21 +46,3 @@ _gr() {
 	compadd "${expl[@]}" -Q -- "${folders[@]}"
 }
 compdef _gr gr
-
-#-KEYMAPS-----------------------------------------------------------------------
-
-# cmd+enter -> goto desktop / dotfiles
-function _grappling_hook {
-	local target="$HOME/Desktop"
-	[[ "$PWD" == "$target" ]] && target="$HOME/.config"
-	builtin cd -q "$target" || return 1
-	zle reset-prompt
-	if [[ "$TERM_PROGRAM" == "WezTerm" ]]; then wezterm set-working-directory; fi
-}
-zle -N _grappling_hook
-bindkey '^O' _grappling_hook # remapped to `cmd+enter` via karabiner
-
-# cmd+l -> reveal cwd in finder
-function _reaveal_cwd_in_Finder { open .; }
-zle -N _reaveal_cwd_in_Finder
-bindkey '^L' _reaveal_cwd_in_Finder # remapped to `cmd+l` via karabiner

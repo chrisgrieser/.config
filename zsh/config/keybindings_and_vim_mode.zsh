@@ -3,9 +3,9 @@
 # - `bindkey -M main` to show existing keybinds
 # - some bindings with '^' are reserved (^M=enter, ^I=tab)
 # - available built-in widgets https://zsh.sourceforge.io/Doc/Release/Zsh-Line-Editor.html#Standard-Widgets
-#───────────────────────────────────────────────────────────────────────────────
-# CUSTOM KEYBINDINGS
+#-------------------------------------------------------------------------------
 
+#-CUSTOM KEYBINDINGS------------------------------------------------------------
 # ctrl+u -> cut whole buffer
 function _cut-buffer {
 	print -n -- "$BUFFER" | pbcopy
@@ -23,8 +23,30 @@ bindkey '^F' edit-command-line
 # dot-repeat (of last argument)
 bindkey '…' insert-last-word    # `alt+.` on macOS
 
-#───────────────────────────────────────────────────────────────────────────────
-# VI MODE
+bindkey "^[[1;3D" backward-word # `alt+arrow` to move between words (emulating macOS default behavior)
+bindkey "^[[1;3C" forward-word
+
+#-TERMINAL BRIDGE---------------------------------------------------------------
+# these bindings are remapped in the Terminal app via WezTerm config
+bindkey "^A" beginning-of-line  # remapped to `cmd+left`
+bindkey "^E" end-of-line        # remapped to `cmd+right`
+bindkey '^Z' undo               # remapped to `cmd+z`
+
+function _grappling_hook {
+	local target="$HOME/Desktop"
+	[[ "$PWD" == "$target" ]] && target="$HOME/.config"
+	builtin cd -q "$target" || return 1
+	zle reset-prompt
+	if [[ "$TERM_PROGRAM" == "WezTerm" ]]; then wezterm set-working-directory; fi
+}
+zle -N _grappling_hook
+bindkey '^O' _grappling_hook # remapped to `cmd+enter`
+
+function _reaveal_cwd_in_Finder { open .; }
+zle -N _reaveal_cwd_in_Finder
+bindkey '^L' _reaveal_cwd_in_Finder # remapped to `cmd+l`
+
+#-VI MODE-----------------------------------------------------------------------
 bindkey -v # enable vi mode
 export KEYTIMEOUT=1 # no delay when pressing <Esc>
 
@@ -41,9 +63,7 @@ zle -N zle-keymap-select
 _fix_cursor() { echo -ne '\e[5 q'; }
 precmd_functions+=(_fix_cursor)
 
-#───────────────────────────────────────────────────────────────────────────────
-# VIM BINDINGS
-
+#-VIM BINDINGS------------------------------------------------------------------
 bindkey -M vicmd 'k' up-line               # disable accidentally searching history
 bindkey -M vicmd 'L' vi-end-of-line
 bindkey -M vicmd 'H' vi-first-non-blank
@@ -53,15 +73,7 @@ bindkey -M vicmd 'm' vi-join
 bindkey -M vicmd -s 'Y' 'y$'
 bindkey -M viins '^?' backward-delete-char # fix backspace not being able to deleted a line break
 
-# insert mode movements
-bindkey "^[[1;3D" backward-word # `alt+arrow` to move between words (emulating macOS default behavior)
-bindkey "^[[1;3C" forward-word  
-bindkey "^A" beginning-of-line  # also bound to `cmd+left` via wezterm
-bindkey "^E" end-of-line        # also bound to `cmd+right` via wezterm
-
-#───────────────────────────────────────────────────────────────────────────────
-# YANK/DELETE to (macOS) system clipboard
-
+#-YANK/DELETE TO (MACOS) SYSTEM CLIPBOARD---------------------------------------
 function _vi_yank_pbcopy { zle vi-yank; print -n -- "$CUTBUFFER" | pbcopy; }
 zle -N _vi_yank_pbcopy
 bindkey -M vicmd 'y' _vi_yank_pbcopy
@@ -74,8 +86,7 @@ function _vi_delete_pbcopy { zle vi-delete; print -n -- "$CUTBUFFER" | pbcopy; }
 zle -N _vi_delete_pbcopy
 bindkey -M vicmd 'd' _vi_delete_pbcopy
 
-#───────────────────────────────────────────────────────────────────────────────
-# ADD VIM TEXT OBJECTS
+#-ADD VIM TEXT OBJECTS----------------------------------------------------------
 autoload -U select-bracketed && zle -N select-bracketed
 
 # CAVEAT cannot be removed to other keys (i.e., there is no `onmap`)

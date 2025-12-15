@@ -17,6 +17,9 @@ M.keys = {
 	-- cmd+l -> ctrl+l -> reveal current directory in Finder (configured in zshrc)
 	{ key = "l", mods = "CMD", action = act.SendKey { key = "l", mods = "CTRL" } },
 
+	-- cmd+z -> ctrl+z -> undo
+	{ key = "z", mods = "CMD", action = act.SendKey { key = "z", mods = "CTRL" } },
+
 	-- shift-space -> daw -> delete a word (in vi-mode)
 	{ key = "Space", mods = "SHIFT", action = act.SendString("daw") },
 
@@ -29,17 +32,18 @@ M.keys = {
 		},
 	},
 
-	-- scroll-to-prompt, requires shell integration: https://wezfurlong.org/wezterm/config/lua/keyassignment/ScrollToPrompt.html
+	-- semantic-zone-interaction, requires shell integration: https://wezfurlong.org/wezterm/config/lua/keyassignment/ScrollToPrompt.html
 	{ key = "k", mods = "CTRL", action = act.ScrollToPrompt(-1) },
 	{ key = "j", mods = "CTRL", action = act.ScrollToPrompt(1) },
 	{
-		key = "i",
+		key = "s",
 		mods = "CMD",
-		action = actFun(function(_win, pane)
-			local zones = pane:get_semantic_zones("Output")
-			for _, z in pairs(zones) do
-				wt.log_info(z)
-			end
+		action = actFun(function(win, pane)
+			local currentRow = pane:get_cursor_position().y
+			local lastZone = pane:get_semantic_zone_at(0, currentRow - 1)
+			local lastOutput = pane:get_text_from_semantic_zone(lastZone)
+			win:copy_to_clipboard(lastOutput, "Clipboard")
+			win:toast_notification("Copied last output", lastOutput, nil, 4000) -- BUG not working in keymaps
 		end),
 	},
 
