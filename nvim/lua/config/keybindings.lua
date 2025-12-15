@@ -11,6 +11,13 @@ keymap(
 	{ desc = " Save & restart" }
 )
 
+keymap(
+	{ "n", "x", "i" },
+	"<D-C-t>", -- `hyper` gets registered by neovide as cmd+ctrl
+	function() require("personal-plugins.misc").openCwdInTerminal() end,
+	{ desc = " Open cwd in Terminal" }
+)
+
 -- stylua: ignore
 keymap("n", "<leader>pd", function() vim.ui.open(vim.fn.stdpath("data") --[[@as string]]) end, { desc = "󰝰 Local data dir" })
 

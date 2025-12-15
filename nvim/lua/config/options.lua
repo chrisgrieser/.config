@@ -100,14 +100,6 @@ vim.opt.report = 9001 -- disable most "x more/fewer lines" messages
 vim.opt.shortmess:append("ISs") -- no intro message, disable search count
 vim.opt.cmdheight = 0
 
----ACCESS CWD VIA WINDOW TITLE--------------------------------------------------
--- (simpler then using `fn.serverstart()` with `nvim --server --remote-expr` )
-if vim.g.neovide then
-	vim.opt.title = true
-	vim.opt.titlelen = 0 -- = do not shorten title
-	vim.opt.titlestring = "%{getcwd()}"
-end
-
 ---INVISIBLE CHARS--------------------------------------------------------------
 vim.opt.list = true
 vim.opt.conceallevel = 2 -- hide some chars in markdown and json

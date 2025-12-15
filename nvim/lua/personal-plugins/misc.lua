@@ -122,6 +122,21 @@ function M.restartNeovide()
 	vim.defer_fn(vim.cmd.wqall, 1)
 end
 
+function M.openCwdInTerminal()
+	assert(jit.os == "OSX", "requires macOS' `open`")
+	local cdCommand = (" cd -q %q && clear"):format(vim.uv.cwd() or "")
+	local script = ([=[
+		open -a "WezTerm" # focus/launch
+		while ! pgrep -xq "wezterm-gui" ; do
+			sleep 0.1
+			i=$((i+1)) ; [[ $i -gt 20 ]] && return 1 # timeout
+		done
+		sleep 0.4
+		echo %q | wezterm cli send-text --no-paste
+	]=]):format(cdCommand)
+	vim.system { "zsh", "-c", script }
+end
+
 ---Wraps text with markdown links, automatically inserting the URL if in a Markdown link if the `+` register has a URL. In normal mode, can undo.
 ---@param startWrap string|"mdlink"
 ---@param endWrap? string defaults to `startWrap`

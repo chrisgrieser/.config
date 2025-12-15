@@ -11,13 +11,14 @@ optl.listchars:remove("trail")
 optl.listchars:append { multispace = "·" }
 optl.sidescrolloff = 3 -- lower, since we rarely go beyond textwidth
 
+-- keymaps
 bkeymap("n", "<leader>rt", "vip:!pandoc --to=gfm<CR>", { desc = " Format table under cursor" })
-bkeymap(
-	"n",
-	">",
-	function() require("personal-plugins.hiraganafy")() end,
-	{ desc = " Hiraganafy" }
-)
+-- stylua: ignore
+bkeymap("n", ">", function() require("personal-plugins.hiraganafy")() end, { desc = " Hiraganafy" })
+
+-- abbreviations
+local abbr = require("config.utils").bufAbbrev
+abbr("->", "→")
 
 ---HARD WRAP--------------------------------------------------------------------
 
