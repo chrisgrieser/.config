@@ -19,6 +19,7 @@ local pseudoMaxApps = {
 	"Safari",
 	"Neovide",
 	"Slack",
+	"Granola",
 	"Obsidian",
 	"zoom.us",
 	"PDF Expert",

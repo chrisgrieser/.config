@@ -12,7 +12,7 @@ return {
 			excludePatterns = {
 				vim.env.HOME .. "/Library/Mobile Documents/**", -- anything in iCloud
 				vim.env.HOME .. "/phd-data-analysis/**",
-				vim.g.notesDir .. "/**",
+				-- vim.g.notesDir .. "/**",
 			},
 
 			diagnosticSeverity = "hint",
@@ -37,8 +37,9 @@ return {
 		-- the builtin `zg`, but has the advantage that `harper` is hot-reloaded.
 		vim.keymap.set("n", "zg", function()
 			vim.lsp.buf.code_action {
-				filter = function(a) return a.title:find("^Add .* to the user dictionary%.") ~= nil end,
-				apply = true,
+				filter = function(a)
+					return a.command == "HarperAddToUserDict" or a.command == "HarperAddToWSDict"
+				end,
 			}
 		end, { desc = "󰓆 Add word to spellfile", buffer = bufnr })
 	end,

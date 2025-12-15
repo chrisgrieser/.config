@@ -234,3 +234,17 @@ rules:
         conditions:
           - { type: frontmost_application_if, bundle_identifiers: [com.apple.ScriptEditor] }
   #─────────────────────────────────────────────────────────────────────────────
+  #───────────────────────────────────────────────────────────────────────
+  - description: "(Apps) Granola"
+    manipulators:
+      # Quit completely
+      - type: basic
+        from: { key_code: q, modifiers: { mandatory: [command] } }
+        to:
+          - shell_command: |
+              osascript -l JavaScript -e '
+                tell application "System Events" to tell process "Granola"
+                    click menu item "Granola" of menu "Insert" of menu bar 1
+                end tell'
+        conditions:
+          [{ type: frontmost_application_if, bundle_identifiers: [com.apple.ScriptEditor] }]
