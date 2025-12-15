@@ -53,8 +53,8 @@ bindkey -M menuselect '\r' .accept-line            # <CR> select & execute
 
 #───────────────────────────────────────────────────────────────────────────────
 # SORT
-
-zstyle ':completion:*' file-sort modification follow # "follow" makes it follow symlinks
+# sort by modification date and follow symlinks
+zstyle ':completion:*' file-sort modification follow
 
 # INFO inserting "path-directories" to add "directories in cdpath" to the top
 # (does not work with `AUTO_CD` though; thus this requires a leading `cd`)
@@ -67,11 +67,6 @@ zstyle ':completion:*' group-order \
 #────────────────────────────────────────────────────────────────────────────
 
 # IGNORE
-# remove the _ignored completer set by zsh-autocomplete, so things ignored by
-# `ignored-patterns` take effect https://stackoverflow.com/a/67510126
-zstyle ':completion:*' completer \
-	_expand _complete _correct _approximate _complete:-fuzzy _prefix
-
 zstyle ':completion:*' ignored-patterns \
 	".git" ".DS_Store" ".localized" "node_modules" "__pycache__"
 

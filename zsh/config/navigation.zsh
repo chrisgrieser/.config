@@ -26,10 +26,10 @@ function -() { builtin cd - || return; } # `-` to trigger `cd -` (workaround sin
 
 #-RECENT DIRS-------------------------------------------------------------------
 # my own implementation of `chpwd_recent_dirs` using zsh's directory stack for
-# completing full file paths.
+# completing full file paths and more control over filtering since excluding
+# files with `recent-dirs-prune` does not work for me.
+# The directory stack is saved by `zsh-autocomplete`, see also https://github.com/marlonrichert/zsh-autocomplete/issues/837
 
-setopt AUTO_PUSHD # push to directory stack on `cd`
-export DIRSTACKSIZE=10
 function gr {
 	local goto=${1:-"$OLDPWD"}
 	cd "$goto" || return 1
