@@ -50,7 +50,7 @@ end)
 local config = {
 	-- Meta
 	check_for_updates = true,
-	automatically_reload_config = false, -- annoying with auto-save
+	automatically_reload_config = false, -- annoying with auto-save, reload via `just` instead
 
 	-- Start/close
 	default_cwd = wt.home_dir .. "/Desktop",
