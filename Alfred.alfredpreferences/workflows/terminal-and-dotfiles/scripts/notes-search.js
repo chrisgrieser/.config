@@ -19,10 +19,10 @@ function run() {
 	const notesFolder = $.getenv("notes_folder");
 	const notes = app.doShellScript(
 		`PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH ; \
-			rg --no-config --files --hidden --sortr=modified \
+			rg --no-config --follow --files --hidden --sortr=modified \
 			--glob='!.Archive' --glob='*.{md,pdf}' --ignore-file="$HOME/.config/ripgrep/ignore" \
-			"${notesFolder}"
-		`,
+			"${notesFolder}" 2>&1 || true`,
+		// can error on broken symlinks, exiting via `true` so .doShellScript doesn't fail
 	);
 
 	//───────────────────────────────────────────────────────────────────────────

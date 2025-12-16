@@ -245,7 +245,8 @@ function gli {
 
 	local preview_format="%C(yellow)%h %C(red)%D %n%C(blue)%an %C(green)(%ch)%C(reset) %n%n%C(bold)%C(magenta)%s%C(reset) %n%b"
 	local preview_cmd="git show {1} --stat=\$FZF_PREVIEW_COLUMNS --color=always --format='$preview_format' \
-		| sed '\$d' ; git --no-pager diff {1}^!"
+		| sed -e '\$d' -e $'s/ \\|/ \e[1;30m│\e[0m/' ; \
+		git --no-pager diff {1}^!"
 
 	if [[ -x "$(command -v delta)" ]]; then
 		theme="$(defaults read -g AppleInterfaceStyle &> /dev/null && echo "dark" || echo "light")"
@@ -312,7 +313,7 @@ function gdf {
 	# lots of CPU are accumulating
 	sleep 1
 
-	# TEST check for accumulating zsh processes bug
+	# check for accumulating zsh processes bug
 	trap 'echo ; ps cAo "%cpu,command" | grep --color=never "zsh\|%CPU"' EXIT
 
 	if [[ -z "$deleted_path" ]]; then

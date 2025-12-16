@@ -13,9 +13,8 @@ return {
 		},
 	},
 	opts = {
-		default_format_opts = {
-			lsp_format = "first",
-		},
+		log_level = vim.log.levels.DEBUG,
+		default_format_opts = { lsp_format = "first" },
 		formatters_by_ft = {
 			markdown = { "markdownlint", "markdown-toc", "injected" },
 			python = { "ruff_fix", "ruff_organize_imports" },
@@ -31,10 +30,14 @@ return {
 			_ = { "trim_whitespace", "trim_newlines", "squeeze_blanks" },
 		},
 		formatters = {
-			injected = {
-				ignore_errors = true,
-				lang_to_formatters = {
-					json = { "jq" },
+			injected = { -- https://github.com/stevearc/conform.nvim/blob/master/doc/formatter_options.md#injected
+				options = {
+					ignore_errors = true,
+					lang_to_formatters = {
+						json = { "jq" },
+						yaml = { "yq" },
+						lua = { "stylua" },
+					},
 				},
 			},
 			shellcheck = {

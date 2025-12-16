@@ -193,6 +193,7 @@ return {
 			sources = {
 				files = {
 					cmd = "rg",
+					follow = true,
 					args = {
 						"--files", -- turn `rg` into a file finder
 						"--sortr=modified", -- sort by recency, slight performance impact
