@@ -32,12 +32,15 @@ function M.update()
 
 	-- forming roughly a triangle
 	M.coverParts = {
-		hs.drawing.rectangle { x = hole - 4, y = screen.h - 30, w = 8, h = 5 },
-		hs.drawing.rectangle { x = hole - 8, y = screen.h - 25, w = 16, h = 5 },
-		hs.drawing.rectangle { x = hole - 12, y = screen.h - 20, w = 24, h = 5 },
-		hs.drawing.rectangle { x = hole - 16, y = screen.h - 15, w = 32, h = 5 },
-		hs.drawing.rectangle { x = hole - 20, y = screen.h - 10, w = 40, h = 5 },
-		hs.drawing.rectangle { x = hole - 24, y = screen.h - 5, w = 48, h = 5 },
+		hs.drawing.rectangle { x = hole - 4, y = screen.h - 45, w = 8, h = 5 },
+		hs.drawing.rectangle { x = hole - 8, y = screen.h - 40, w = 16, h = 5 },
+		hs.drawing.rectangle { x = hole - 12, y = screen.h - 35, w = 24, h = 5 },
+		hs.drawing.rectangle { x = hole - 16, y = screen.h - 30, w = 32, h = 5 },
+		hs.drawing.rectangle { x = hole - 20, y = screen.h - 25, w = 40, h = 5 },
+		hs.drawing.rectangle { x = hole - 24, y = screen.h - 20, w = 48, h = 5 },
+		hs.drawing.rectangle { x = hole - 28, y = screen.h - 15, w = 56, h = 5 },
+		hs.drawing.rectangle { x = hole - 32, y = screen.h - 10, w = 64, h = 5 },
+		hs.drawing.rectangle { x = hole - 36, y = screen.h - 5, w = 72, h = 5 },
 	}
 
 	for _, cover in pairs(M.coverParts) do
