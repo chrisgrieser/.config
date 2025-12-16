@@ -2,7 +2,7 @@ return {
 	"lewis6991/satellite.nvim",
 	event = "VeryLazy",
 	opts = {
-		current_only = true,
+		current_only = false,
 		winblend = 30, -- only little transparency, since otherwise hard to see in some themes
 		handlers = {
 			cursor = { enable = false },

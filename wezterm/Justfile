@@ -30,6 +30,6 @@ update-types:
     #!/usr/bin/env zsh
     rm -rf "/tmp/wezterm-types"
     rm -rf "./types"
-    git clone --depth=1 "https://github.com/DrKJeff16/wezterm-types" "/tmp/wezterm-types"
+    git clone --depth=2 "https://github.com/DrKJeff16/wezterm-types" "/tmp/wezterm-types"
     mv -f "/tmp/wezterm-types/lua/wezterm/types" "./"
     echo "Updated."
