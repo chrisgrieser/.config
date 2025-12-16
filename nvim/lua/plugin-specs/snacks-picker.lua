@@ -308,6 +308,7 @@ return {
 				},
 				grep = {
 					regex = false, -- use fixed strings by default
+					follow = true,
 					cmd = "rg",
 					args = {
 						"--sortr=modified", -- sort by recency, slight performance impact
@@ -438,7 +439,8 @@ return {
 				file = { filename_first = true },
 			},
 			toggles = {
-				regex = { icon = "r", value = true }, -- invert
+				regex = { icon = "r", value = true }, -- invert (only display if enabled)
+				follow = { icon = "", value = false }, -- invert (-> only display if disabled)
 			},
 			ui_select = true,
 			layout = "wide_with_preview", -- = default layout
@@ -512,6 +514,7 @@ return {
 
 						["<C-h>"] = { "toggle_hidden_and_ignored", mode = "i" }, -- consistent with `fzf`
 						["<C-r>"] = { "toggle_regex", mode = "i" },
+						["<C-f>"] = { "toggle_follow", mode = "i" },
 
 						["<D-s>"] = { "qflist_and_go", mode = "i" },
 						["<D-l>"] = { "reveal_in_macOS_Finder", mode = "i" },
