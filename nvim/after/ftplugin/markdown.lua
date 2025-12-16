@@ -86,16 +86,19 @@ end
 
 ---YAML FRONTMATTER-------------------------------------------------------------
 bkeymap("n", "<leader>ry", function()
-	local keyToInsert = "aliases" -- CONFIG
+	-- CONFIG
+	local linesToInsert = { "aliases:", "  - " }
+
 	local hasFrontmatter = vim.api.nvim_buf_get_lines(0, 0, 1, false)[1] == "---"
 	if hasFrontmatter then
 		vim.notify("Frontmatter already exists.")
 		vim.api.nvim_win_set_cursor(0, { 2, 0 })
 	else
-		local frontmatter = { "---", keyToInsert .. ": ", "---", "" }
-		vim.api.nvim_buf_set_lines(0, 0, 0, false, frontmatter)
-		vim.api.nvim_win_set_cursor(0, { 2, 0 })
-		vim.cmd.startinsert{ bang = true }
+		table.insert(linesToInsert, 1, "---")
+		vim.list_extend(linesToInsert, { "---", "" })
+		vim.api.nvim_buf_set_lines(0, 0, 0, false, linesToInsert)
+		vim.api.nvim_win_set_cursor(0, { #linesToInsert - 2, 0 })
+		vim.cmd.startinsert { bang = true }
 	end
 end, { desc = " Add frontmatter" })
 

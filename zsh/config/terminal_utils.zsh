@@ -33,7 +33,7 @@ function line_count() {
 		-not -path "./tests/**" \
 		-not -path "./.git/**" -not -path "./node_modules/**" -not -path "./doc/**" \
 		-not -path "**/__pycache__/**" -not -path "./.venv/**" -not -name ".DS_Store" \
-		-not -name "LICENSE" -not -iregex ".*\.(webp|png|svg|jpe?g|json|ya?ml|md|toml|editorconfig)$" \
+		-not -name "LICENSE" -not -name "*.json" -not -name "*.y*ml" \
 		-print0 | xargs -0 wc -l
 }
 
@@ -61,16 +61,16 @@ _escape_on_empty_buffer() {
 
 	selected=$(
 		zsh -c "$rg_cmd" |
-			eza --stdin --color=always --icons=always --sort=oldest --no-quotes --no-symlinks |
+			eza --stdin --color=always --icons=always --sort=oldest --no-quotes |
+			sed 's/ [^ ]*->.*//' | # remove symlink target from eza's output
 			fzf --ansi --multi --scheme=path --tiebreak=length,end \
 				--info=inline --height="50%" \
 				--header="^H: include hidden, ⌘L: reveal in Finder" \
 				--bind="ctrl-h:change-header(including hidden files)+reload($rg_cmd \
-					--hidden --no-ignore --no-ignore-files \
-					--glob='!/.git/' --glob='!node_modules' --glob='!__pycache__' --glob='!.DS_Store' |
-					eza --stdin --color=always --icons=always --sort=oldest --no-quotes)" \
-				--expect="ctrl-l" # remapped in terminal to `cmd+l`
-				
+				--hidden --no-ignore --no-ignore-files \
+				--glob='!/.git/' --glob='!node_modules' --glob='!__pycache__' --glob='!.DS_Store' |
+				eza --stdin --color=always --icons=always --sort=oldest --no-quotes)" \
+				--expect="ctrl-l" # remapped in terminal app to `cmd+l`
 	)
 	zle reset-prompt
 	[[ -z "$selected" ]] && return 0
