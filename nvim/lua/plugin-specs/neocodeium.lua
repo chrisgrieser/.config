@@ -1,9 +1,10 @@
--- lua alternative to the official codeium.vim plugin https://github.com/Exafunction/windsurf.vim
+-- DOCS https://github.com/monkoose/neocodeium#️-setup
 --------------------------------------------------------------------------------
--- alternatives
+-- ALTERNATIVES
 -- BYOK: https://github.com/milanglacier/minuet-ai.nvim
--- Copilot plugin: https://github.com/zbirenbaum/copilot.lua#setup-and-configuration
--- Copilot LSP (with nvim 0.12)https://github.com/github/copilot-language-server-release
+-- Copilot plugin (subscription): https://github.com/zbirenbaum/copilot.lua#setup-and-configuration
+-- Copilot LSP (subscription), requires nvim 0.12 https://github.com/github/copilot-language-server-release
+-- Specific key: https://github.com/4tyone/snek-nvim
 --------------------------------------------------------------------------------
 
 return {
