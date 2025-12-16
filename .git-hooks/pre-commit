@@ -6,8 +6,8 @@ max_file_size_mb=2
 #───────────────────────────────────────────────────────────────────────────────
 
 # safeguard against accidental pushing of large files
-large_files=$(find . -size +${max_file_size_mb}M -not \
-	-path "**/.git/**" -not -name "dictcc_arm64" -not -path "*/menu/menu") # exceptions
+large_files=$(find . -size +${max_file_size_mb}M -not -path "**/.git/**" \
+	-not -name "dictcc_arm64" -not -path "*/menu/menu") # exceptions
 
 if [[ -n "$large_files" ]]; then
 	echo "Large file(s) found. Aborting commit."

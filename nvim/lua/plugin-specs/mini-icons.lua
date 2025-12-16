@@ -13,7 +13,7 @@ return {
 		},
 		extension = {
 			["d.ts"] = { hl = "MiniIconsRed" }, -- distinguish `.d.ts` from `.ts`
-			["applescript"] = { glyph = "󰀵", hl = "MiniIconsGrey" },
+			["applescript"] = { glyph = "󰀵" },
 			["log"] = { glyph = "󱂅", hl = "MiniIconsGrey" },
 			["gitignore"] = { glyph = "" },
 			["adblock"] = { glyph = "", hl = "MiniIconsRed" },
@@ -29,7 +29,6 @@ return {
 			-- plugin-filetypes
 			["codecompanion"] = { glyph = "" },
 			["leetcode.nvim"] = { glyph = "󰐱" },
-			["aerial"] = { glyph = "󰙅" },
 			["ccc-ui"] = { glyph = "" },
 			["scissors-snippet"] = { glyph = "󰩫" },
 			["rip-substitute"] = { glyph = "" },
