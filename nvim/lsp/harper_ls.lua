@@ -12,6 +12,7 @@ return {
 			excludePatterns = { -- PENDING https://github.com/Automattic/harper/issues/2339
 				vim.env.HOME .. "/Library/Mobile Documents/**", -- anything in iCloud
 				vim.env.HOME .. "/phd-data-analysis/**",
+				vim.g.notesDir .. "/**",
 			},
 
 			diagnosticSeverity = "hint",

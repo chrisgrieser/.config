@@ -18,6 +18,11 @@ local plugins = {
 					adapter = { name = "openai_responses", model = "gpt-5-mini" },
 				},
 			},
+			prompt_library = {
+				markdown = {
+					dirs = { vim.env.HOME .. "/.config/nvim/prompts" },
+				},
+			},
 			adapters = {
 				http = {
 					openai_responses = function()
