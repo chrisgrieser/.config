@@ -40,7 +40,7 @@ function line_count() {
 # file finder
 # `fd` replacement using just `rg`
 function fd {
-	rg --hidden --no-config --files --binary --ignore-file="$HOME/.config/ripgrep/ignore" |
+	rg --hidden --follow --no-config --files --binary --ignore-file="$HOME/.config/ripgrep/ignore" |
 		rg "$@"
 }
 
@@ -57,11 +57,11 @@ _escape_on_empty_buffer() {
 
 	local selected
 	# no need for `--sortr=modified`, since using `eza --sort=oldest` afterwards
-	local rg_cmd="rg --no-config --files --ignore-file='$HOME/.config/ripgrep/ignore'"
+	local rg_cmd="rg --no-config --follow --files --ignore-file='$HOME/.config/ripgrep/ignore'"
 
 	selected=$(
 		zsh -c "$rg_cmd" |
-			eza --stdin --color=always --icons=always --sort=oldest --no-quotes |
+			eza --stdin --color=always --icons=always --sort=oldest --no-quotes --no-symlinks |
 			fzf --ansi --multi --scheme=path --tiebreak=length,end \
 				--info=inline --height="50%" \
 				--header="^H: include hidden, ⌘L: reveal in Finder" \
