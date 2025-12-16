@@ -2,7 +2,6 @@
 -- Actions: https://wezfurlong.org/wezterm/config/lua/keyassignment/index.html#available-key-assignments
 -- Key-Names: https://wezfurlong.org/wezterm/config/keys.html#configuring-key-assignments
 --------------------------------------------------------------------------------
-
 local M = {}
 local wt = require("wezterm")
 local act = wt.action
@@ -35,17 +34,6 @@ M.keys = {
 	-- semantic-zone-interaction, requires shell integration: https://wezfurlong.org/wezterm/config/lua/keyassignment/ScrollToPrompt.html
 	{ key = "k", mods = "CTRL", action = act.ScrollToPrompt(-1) },
 	{ key = "j", mods = "CTRL", action = act.ScrollToPrompt(1) },
-	{
-		key = "s",
-		mods = "CMD",
-		action = actFun(function(win, pane)
-			local currentRow = pane:get_cursor_position().y
-			local lastZone = pane:get_semantic_zone_at(0, currentRow - 1)
-			local lastOutput = pane:get_text_from_semantic_zone(lastZone)
-			win:copy_to_clipboard(lastOutput, "Clipboard")
-			win:toast_notification("Copied last output", lastOutput, nil, 4000) -- BUG not working in keymaps
-		end),
-	},
 
 	-- disable, since used for `fzf`
 	{ key = "Enter", mods = "ALT", action = act.DisableDefaultAssignment },
@@ -114,7 +102,7 @@ M.keys = {
 			patterns = {
 				[[https?://[^\]",' ]+\w]], -- regular URLs
 				"[a-f0-9]{7,40}", -- commits
-				"(?<=#)[0-9]{1,6}", -- issues (# not included since lookbehind)
+				"(?<=#)[0-9]{1,6}", -- issues (the `#` not included due to the lookbehind)
 			},
 			action = actFun(function(win, pane)
 				local match = win:get_selection_text_for_pane(pane)

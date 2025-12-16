@@ -154,7 +154,7 @@ function M.mdWrap(startWrap, endWrap)
 	if mode == "n" then
 		local cursorChar = vim.api.nvim_get_current_line():sub(col + 1, col + 1)
 		if not cursorChar:find("%w") then
-			vim.notify("String under cursor is not a word", vim.log.levels.WARN)
+			vim.notify("String under cursor is not a word or number.", vim.log.levels.WARN)
 			return
 		end
 		text = vim.fn.expand("<cword>")
