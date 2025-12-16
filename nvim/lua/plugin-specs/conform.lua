@@ -13,6 +13,7 @@ return {
 		},
 	},
 	opts = {
+		log_level = vim.log.levels.WARN, -- for `ConformInfo`
 		default_format_opts = { lsp_format = "first" },
 		formatters_by_ft = {
 			markdown = { "markdownlint", "markdown-toc", "injected" },
