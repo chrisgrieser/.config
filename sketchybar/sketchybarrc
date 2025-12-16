@@ -80,8 +80,8 @@ sketchybar \
 	--add item sync_indicator $row_2 \
 	--set sync_indicator update_freq="180" \
 	script="./components/git_sync_bar_icon.sh" \
-	--add event repo_files_update \
-	--subscribe sync_indicator system_woke repo_files_update \
+	--add event sync_indicator \
+	--subscribe sync_indicator system_woke sync_indicator \
 	\
 	`#--------------------------------------------------------------------------`\
 	--update # needs to run at the end of config and should not be run in an item script

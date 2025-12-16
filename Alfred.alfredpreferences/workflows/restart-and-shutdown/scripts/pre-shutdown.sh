@@ -30,5 +30,8 @@ while read -r line; do
 	fi
 done < "$HOME/.config/perma-repos.csv"
 
-# for Alfred conditional to prompt shutdown
-echo -n "success"
+#-------------------------------------------------------------------------------
+
+echo -n "success" # for Alfred conditional to prompt shutdown
+
+sketchybar --trigger sync_indicator # sketchybar sync icon
