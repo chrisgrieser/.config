@@ -13,7 +13,6 @@ return {
 		},
 	},
 	opts = {
-		log_level = vim.log.levels.DEBUG,
 		default_format_opts = { lsp_format = "first" },
 		formatters_by_ft = {
 			markdown = { "markdownlint", "markdown-toc", "injected" },
@@ -33,10 +32,12 @@ return {
 			injected = { -- https://github.com/stevearc/conform.nvim/blob/master/doc/formatter_options.md#injected
 				options = {
 					ignore_errors = true,
-					lang_to_formatters = {
+					lang_to_formatters = { -- need to set formatters https://github.com/stevearc/conform.nvim/issues/791
 						json = { "jq" },
-						yaml = { "yq" },
+						yaml = { "yq" }, -- also applies to yaml frontmatter
 						lua = { "stylua" },
+						zsh = { "shfmt" },
+						bash = { "shfmt" },
 					},
 				},
 			},

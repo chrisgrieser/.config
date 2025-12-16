@@ -29,7 +29,7 @@ function run() {
 		.doShellScript(
 			`PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH ; \
 			rg --follow --no-config --files --hidden --sortr=modified \
-			--ignore-file=${dotfilesFolder}/ripgrep/ignore \
+			--ignore-file="$HOME/.config/ripgrep/ignore" \
 			"${dotfilesFolder}" 2>&1 || true`,
 			// can error on broken symlinks, exiting via `true` so .doShellScript doesn't fail
 		)
