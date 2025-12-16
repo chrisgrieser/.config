@@ -104,7 +104,7 @@ vim.opt.cmdheight = 0
 vim.opt.list = true
 vim.opt.conceallevel = 2 -- hide some chars in markdown and json
 vim.opt.listchars:append {
-	nbsp = "␣",
+	nbsp = "󰚌", -- ␣
 	precedes = "…",
 	extends = "…",
 	multispace = "·",

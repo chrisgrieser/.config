@@ -2,7 +2,7 @@
 #───────────────────────────────────────────────────────────────────────────────
 # DOCS https://espanso.org/docs/configuration/app-specific-configurations/
 
-filter_class: com.brave.Browser
+filter_class: com.brave.Browser # INFO also matches Brave PWAs
 
 extra_includes:
   - ../match/_emoji-reacts.yml

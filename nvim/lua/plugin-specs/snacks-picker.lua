@@ -219,10 +219,8 @@ return {
 
 						local symlinkTarget = vim.uv.fs_readlink(absPath)
 						if symlinkTarget then
-							Chainsaw(item) -- 🪚
-							item.file = symlinkTarget
-							item._path = vim.fs.normalize((item.cwd or "") .. "/" .. symlinkTarget)
-							Chainsaw(item._path) -- 🪚
+							local linkDir = vim.fs.dirname(item._path) -- not cwd, to handle relative symlinks
+							item._path = vim.fs.normalize(linkDir .. "/" .. symlinkTarget)
 						end
 
 						local binaryExt = { "pdf", "png", "webp", "docx" }

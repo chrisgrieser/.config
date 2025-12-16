@@ -84,6 +84,20 @@ do
 	bkeymap("i", "<CR>", function() autoBullet("<CR>") end, { desc = " Auto-bullet <CR>" })
 end
 
+---YAML FRONTMATTER-------------------------------------------------------------
+bkeymap("n", "<leader>ry", function()
+	local hasFrontmatter = vim.api.nvim_buf_get_lines(0, 0, 1, false)[1] == "---"
+	if hasFrontmatter then
+		vim.notify("Frontmatter already exists.")
+		vim.api.nvim_win_set_cursor(0, { 2, 0 })
+	else
+		local frontmatter = { "---", "", "---", "" }
+		vim.api.nvim_buf_set_lines(0, 0, 0, false, frontmatter)
+		vim.api.nvim_win_set_cursor(0, { 2, 0 })
+		vim.cmd.startinsert()
+	end
+end, { desc = " Add frontmatter" })
+
 ---CODEBLOCKS-------------------------------------------------------------------
 -- typing `,,lang,,` creates a codeblock for `lang` with dedented clipboard
 -- content inserted as code.

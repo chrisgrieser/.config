@@ -17,6 +17,7 @@ return {
 			["log"] = { glyph = "󱂅", hl = "MiniIconsGrey" },
 			["gitignore"] = { glyph = "" },
 			["adblock"] = { glyph = "", hl = "MiniIconsRed" },
+			["scm"] = { hl = "MiniIconsRed" }, -- treesitter query files
 			["add"] = { glyph = "" }, -- vim spellfile
 		},
 		filetype = {
