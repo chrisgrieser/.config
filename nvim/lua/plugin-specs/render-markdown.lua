@@ -48,6 +48,7 @@ return {
 				guardian = { pattern = "theguardian%.com", icon = "󰎕 " },
 				zeit = { pattern = "zeit%.de", icon = "󰎕 " },
 				spiegel = { pattern = "spiegel%.de", icon = "󰎕 " },
+				tagesschau = { pattern = "tagesschau%.de", icon = "󰎕 " },
 
 				-- misc
 				openai = { pattern = "openai%.com", icon = " " },
