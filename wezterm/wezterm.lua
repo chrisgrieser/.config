@@ -12,7 +12,7 @@ local darkThemes = {
 	"ChallengerDeep",
 }
 local lightThemes = {
-	"RoséPineDawn (Gogh)",
+	"Ef-Kassio",
 	"GoogleLight (Gogh)",
 	"Ivory Light (terminal.sexy)",
 }

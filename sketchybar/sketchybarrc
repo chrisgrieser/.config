@@ -28,7 +28,7 @@ row_2="popup.clock"
 sketchybar \
 	`#--global------------------------------------------------------------------`\
 	--bar \
-	height="75" position="top" display="all" \
+	height="80" position="top" display="all" \
 	padding_left="0" margin="-4" color="$bg" \
 	\
 	--default \
@@ -36,7 +36,7 @@ sketchybar \
 	icon.font="$nerd_font" icon.color="$fg" label.font="$system_font" label.color="$fg" \
 	\
 	popup.drawing="true" popup.horizontal="true" popup.topmost="false" \
-	popup.y_offset="-48" y_offset="22" \
+	popup.y_offset="-52" y_offset="24" \
 	\
 	`#--1st-row-----------------------------------------------------------------`\
 	\

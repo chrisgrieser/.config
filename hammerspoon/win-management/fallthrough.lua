@@ -8,7 +8,7 @@ local aw = hs.application.watcher
 local config = {
 	fallthrough = {
 		whenNoWin = { "Finder", "Brave Browser", "Obsidian", "Hammerspoon" },
-		always = { "Mona 6", "Transmission" },
+		always = { "Mona", "Transmission" },
 	},
 }
 

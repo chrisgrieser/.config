@@ -44,7 +44,7 @@ cask "slack"
 cask "wezterm"
 cask "zoom"
 mas "Highlights", id: 1498912833
-mas "Mona 6", id: 1659154653
+mas "Mona", id: 6755672518
 
 #-OTHER-------------------------------------------------------------------------
 cask "font-jetbrains-mono-nerd-font"

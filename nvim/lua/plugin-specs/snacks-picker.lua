@@ -161,9 +161,9 @@ return {
 		{ "<leader>gl", function() Snacks.picker.git_log() end, desc = "󰗲 Log" },
 		{ "<leader>ga", function() Snacks.picker.git_diff() end, desc = "󰐖 Hunks" },
 		{ "<leader>gb", function() Snacks.picker.git_branches() end, desc = "󰗲 Branches" },
-		{ "<leader>gi", function() Snacks.picker.gh_issue() end, desc = " GitHub Issues (open)" },
+		{ "<leader>gi", function() Snacks.picker.gh_issue() end, desc = " GitHub issues (open)" },
 		-- stylua: ignore
-		{ "<leader>gI", function() Snacks.picker.gh_issue { state = "all" } end, desc = " GitHub Issues (all)" },
+		{ "<leader>gI", function() Snacks.picker.gh_issue { state = "all" } end, desc = " GitHub issues (all)" },
 
 		---INSPECT----------------------------------------------------------------
 		{ "<leader>iv", function() Snacks.picker.help() end, desc = "󰋖 Vim help" },
@@ -176,6 +176,7 @@ return {
 
 		---MISC-------------------------------------------------------------------
 		{ "<leader>pc", function() Snacks.picker.colorschemes() end, desc = " Colorschemes" },
+		{ "<leader>eh", function() Snacks.picker.command_history() end, desc = " Ex-cmd history" },
 		{ "<leader>ms", function() Snacks.picker.marks() end, desc = "󰃁 Select mark" },
 		{ "<leader>yy", function() Snacks.picker.registers() end, desc = "󱛢 Yank ring" },
 		{ "<leader>ut", function() Snacks.picker.undo() end, desc = "󰋚 Undo tree" },
@@ -430,6 +431,7 @@ return {
 						end)
 					end,
 				},
+				command_history = { layout = "small_no_preview" }
 			},
 			formatters = {
 				file = { filename_first = true },

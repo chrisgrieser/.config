@@ -3,7 +3,7 @@
 title: Mona Vim Mode
 anchors:
   - conditions:
-      - &is-mona { type: frontmost_application_if, bundle_identifiers: [com.jonny.mona] }
+      - &is-mona { type: frontmost_application_if, bundle_identifiers: [com.jonny.supermona] }
 #-------------------------------------------------------------------------------
 rules:
   - description: "Mona Vim mode"
@@ -12,7 +12,7 @@ rules:
       # CAVEAT these mappings makes writing new messages not possible, it's only
       # useful for purely reading in Mona.
       #-------------------------------------------------------------------------
-      # `o` to open a link
+      # `o` to open a link in the browser
       - type: basic
         from: { key_code: o }
         to:
@@ -20,6 +20,12 @@ rules:
           - { key_code: vk_none, hold_down_milliseconds: 100 }
           - { key_code: down_arrow }
           - { key_code: return_or_enter }
+        conditions: [*is-mona]
+      # `O` to open a the tweet in the browser
+      - type: basic
+        from: { key_code: o, modifiers: { mandatory: [shift] } }
+        to:
+          - { key_code: o, modifiers: [command, shift] }
         conditions: [*is-mona]
       # `hjkl`
       - type: basic

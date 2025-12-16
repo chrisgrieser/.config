@@ -77,14 +77,14 @@ _escape_on_empty_buffer() {
 	key_pressed=$(echo "$selected" | head -n1)
 	item="$(echo "$selected" | tail -n1 | cut -c3-)" # `cut` to remove the nerdfont icons
 
-	if [[ "$key_pressed" == "ctrl-l" ]]; then
+	if [[ "$key_pressed" == "ctrl-l" ]]; then # mapped via terminal to `cmd+l`
 		open -R "$item"
 	else
 		open "$item"
 	fi
 }
 zle -N _escape_on_empty_buffer
-bindkey '\e' _escape_on_empty_buffer #  `\e` = esc-key
+bindkey '\e' _escape_on_empty_buffer # `\e` = esc-key
 
 #───────────────────────────────────────────────────────────────────────────────
 

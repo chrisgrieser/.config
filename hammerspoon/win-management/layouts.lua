@@ -36,13 +36,13 @@ local function workLayout(shouldDarkenDisplay)
 	u.quitFullscreenAndVideoApps()
 
 	-- open things
-	u.openApps { "Mona 6", "AlfredExtraPane", "Gmail", isWorkWeek() and "Slack" or nil }
+	u.openApps { "Mona", "AlfredExtraPane", "Gmail", isWorkWeek() and "Slack" or nil }
 	u.defer(1, function()
-		wu.moveResize("Mona 6", wu.toTheSide)
+		wu.moveResize("Mona", wu.toTheSide)
 		wu.moveResize("Gmail", wu.pseudoMax)
 		if isWorkWeek() then wu.moveResize("Slack", wu.pseudoMax) end
 		u.defer(1, function() -- scroll up
-			hs.eventtap.keyStroke({ "cmd" }, "up", 1, u.app("Mona 6"))
+			hs.eventtap.keyStroke({ "cmd" }, "up", 1, u.app("Mona"))
 		end)
 	end)
 
@@ -70,7 +70,7 @@ local function movieLayout()
 		"WezTerm",
 		"Gmail",
 		"Neovide",
-		"Mona 6",
+		"Mona",
 		"Reminders",
 	}
 	print("🔲 Layout: movie")

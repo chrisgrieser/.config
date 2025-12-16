@@ -368,7 +368,7 @@ keymap("n", "<leader>ey", function()
 	local syntax = vim.startswith(cmd, "lua") and "lua" or "vim"
 	vim.notify(lastExcmd, nil, { title = "Copied", icon = "󰅍", ft = syntax })
 	vim.fn.setreg("+", lastExcmd)
-end, { desc = "󰘳 Yank last ex-cmd" })
+end, { desc = " Yank last ex-cmd" })
 
 ---WINDOWS & SPLITS-------------------------------------------------------------
 keymap({ "n", "v", "i" }, "<C-CR>", "<C-w>w", { desc = " Cycle windows" })

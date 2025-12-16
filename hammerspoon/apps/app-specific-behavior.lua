@@ -67,7 +67,7 @@ M.wf_scripteditor = wf
 -- 1. auto-close any media windows
 -- 2. auto-scroll up
 M.aw_masto = aw.new(function(appName, event, masto)
-	if appName ~= "Mona 6" then return end
+	if appName ~= "Mona" then return end
 	local win = masto:mainWindow()
 	if not win then return end
 

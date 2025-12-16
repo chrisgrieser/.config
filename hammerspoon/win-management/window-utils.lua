@@ -4,7 +4,7 @@ local u = require("meta.utils")
 --------------------------------------------------------------------------------
 
 M.iMacDisplay = hs.screen("Built%-in")
-local side = { w = 0.185, cutoff = 0.05 }
+local side = { w = 0.185, cutoff = 0.055 }
 M.pseudoMax = hs.geometry { x = side.w, y = 0, w = (1 - side.w), h = 1 }
 M.middleHalf = hs.geometry { x = side.w, y = 0, w = 0.6, h = 1 }
 M.toTheSide = hs.geometry { x = -side.cutoff, y = 0.055, w = side.w + side.cutoff, h = 0.945 }

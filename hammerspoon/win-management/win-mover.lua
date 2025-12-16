@@ -65,7 +65,7 @@ local function toggleMaximized()
 
 	local baseSize = wu.pseudoMax
 	if u.isFront("Finder") or u.isFront(smallWinApps) then baseSize = wu.middleHalf end
-	if u.isFront("Mona 6") then baseSize = wu.toTheSide end
+	if u.isFront("Mona") then baseSize = wu.toTheSide end
 
 	local screen = frontWin:screen():frame()
 	local isMaximized = frontWin:frame().w == screen.w and frontWin:frame().h == screen.h
