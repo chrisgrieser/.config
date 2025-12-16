@@ -212,17 +212,27 @@ return {
 							keys = { [":"] = { "complete_and_add_colon", mode = "i" } },
 						},
 					},
-					-- if binary, open in system application instead
+					-- 1. if binary, open in system application instead
+					-- 2. if symlink, open the target, not the link
 					confirm = function(picker, item, action)
 						local absPath = Snacks.picker.util.path(item) or ""
+
+						local symlinkTarget = vim.uv.fs_readlink(absPath)
+						if symlinkTarget then
+							Chainsaw(item) -- 🪚
+							item.file = symlinkTarget
+							item._path = vim.fs.normalize((item.cwd or "") .. "/" .. symlinkTarget)
+							Chainsaw(item._path) -- 🪚
+						end
+
 						local binaryExt = { "pdf", "png", "webp", "docx" }
 						local ext = absPath:match(".+%.([^.]+)$") or ""
 						if vim.tbl_contains(binaryExt, ext) then
 							vim.ui.open(absPath)
 							picker:close()
-							return
+						else
+							Snacks.picker.actions.confirm(picker, item, action)
 						end
-						Snacks.picker.actions.confirm(picker, item, action)
 					end,
 					actions = {
 						complete_and_add_colon = function(picker)
@@ -433,14 +443,16 @@ return {
 						end)
 					end,
 				},
-				command_history = { layout = "small_no_preview" }
+				command_history = { layout = "small_no_preview" },
 			},
 			formatters = {
 				file = { filename_first = true },
 			},
 			toggles = {
-				regex = { icon = "r", value = true }, -- invert (only display if enabled)
-				follow = { icon = "", value = false }, -- invert (-> only display if disabled)
+				regex = { icon = "", value = true }, -- invert (only display if enabled)
+				follow = { icon = "󰌸", value = false }, -- invert (-> only display if disabled)
+				ignored = { icon = "󰈉" }, -- invert (-> only display if disabled)
+				hidden = { icon = "󰒉" }, -- invert (-> only display if disabled)
 			},
 			ui_select = true,
 			layout = "wide_with_preview", -- = default layout
