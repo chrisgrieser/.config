@@ -1,7 +1,7 @@
 set quiet := true
 
 debugConfig := "./debug/repro.lua"
-debugFile := "./debug/demo-for-repro.lua"
+debugFile := "./debug/test.md"
 
 #───────────────────────────────────────────────────────────────────────────────
 
