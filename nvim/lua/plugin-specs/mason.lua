@@ -41,12 +41,13 @@ local ensureInstalled = {
 		vim.g.useEmmyluaLsp and "emmylua_ls" or "lua-language-server", -- lua LSP
 	},
 	linters = {
-		"markdownlint", -- via efm
+		"markdownlint", -- via efm/conform.nvim
 		"shellcheck", -- shell linter via efm PENDING https://github.com/bash-lsp/bash-language-server/issues/663
 	},
 	formatters = {
-		"markdown-toc", -- automatic table-of-contents
+		"markdown-toc", -- automatic table-of-contents via conform.nvim
 		"shfmt", -- shell formatter (via bashls)
+		"mdformat", -- markdown formatter via conform.nvim
 	},
 	debuggers = {
 		"debugpy", -- python
@@ -55,7 +56,7 @@ local ensureInstalled = {
 	},
 	other = {
 		"tree-sitter-cli", -- used by nvim-treesitter to install parsers
-	}
+	},
 }
 
 local nonMasonLsps = {
@@ -120,7 +121,11 @@ local function syncPackages()
 		end
 		-- auto-install missing packages & auto-update installed ones
 		vim.iter(ensurePacks):each(function(packName)
-			if not masonReg.has_package(packName) then return end
+			if not masonReg.has_package(packName) then
+				local msg = ("No package [%s] available."):format(packName)
+				vim.notify(msg, vim.log.levels.WARN, { title = "mason" })
+				return
+			end
 			local pack = masonReg.get_package(packName)
 			if pack:is_installed() then
 				local latestVersion = pack:get_latest_version()
