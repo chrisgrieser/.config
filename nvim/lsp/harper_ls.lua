@@ -7,7 +7,6 @@
 ---@type vim.lsp.Config
 return {
 	filetypes = { "markdown" }, -- too many false positives elsewhere
-	root_markers = { ".harper-dictionary.txt", ".git" }, -- PENDING https://github.com/neovim/nvim-lspconfig/pull/4246
 	settings = {
 		["harper-ls"] = {
 			excludePatterns = { -- PENDING https://github.com/Automattic/harper/issues/2339
