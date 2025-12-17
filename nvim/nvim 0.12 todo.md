@@ -10,6 +10,7 @@
 - inline completion: <https://neovim.io/doc/user/lsp.html#lsp-inline_completion>
 - incremental selection: `vim.lsp.buf.selection_range()`
 - `:Undotree`
+- vim.pack wrapper https://www.reddit.com/r/neovim/s/drTr1iSvPl
 
 ```lua
 vim.api.nvim_create_autocmd("PackChanged", {
