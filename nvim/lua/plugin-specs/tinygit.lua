@@ -1,3 +1,6 @@
+-- see also: https://github.com/esmuellert/vscode-diff.nvim
+--------------------------------------------------------------------------------
+
 return {
 	"chrisgrieser/nvim-tinygit",
 	event = "VeryLazy", -- load for status line component

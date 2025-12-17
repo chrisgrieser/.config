@@ -30,7 +30,7 @@ local ensureInstalled = {
 
 		"biome", -- ts/js/json/css linter/formatter
 		"eslint-lsp", -- ts/js linter (only Obsidian plugins, otherwise using `biome`)
-		"typescript-language-server", -- used via `typescript-tools.nvim`
+		"typescript-language-server",
 		-- "tsgo", -- experimental typescript lsp
 
 		"css-lsp",

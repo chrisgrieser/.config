@@ -74,7 +74,7 @@ vim.opt.signcolumn = "yes:1"
 vim.opt.sidescrolloff = 15
 vim.opt.scrolloff = 13
 
-vim.opt.winborder = "single"
+vim.opt.winborder = "rounded"
 
 vim.opt.pumheight = 12 -- max height of completion menu
 
