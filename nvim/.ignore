@@ -12,7 +12,4 @@ templates/**
 # lazy.nvim
 .lazy-lock.json
 
-# spell-file compiled
-*.add.spl
-
 .gitkeep
