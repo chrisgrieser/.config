@@ -297,6 +297,8 @@ rules:
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
       #─────────────────────────────────────────────────────────────────────────
       # r = recent folders
+      # HACK right-click dock icon. hacky, but the only good way to do it 
+      # (and less buggy than navigating to the recent folders in the menubar) 
       - type: basic
         from: { key_code: r }
         to_if_alone:

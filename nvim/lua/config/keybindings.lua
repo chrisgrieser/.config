@@ -13,7 +13,7 @@ keymap(
 
 keymap(
 	{ "n", "x", "i" },
-	"<D-C-t>", -- `hyper` gets registered by neovide as cmd+ctrl
+	"<D-C-t>", -- `hyper` gets registered by neovide as `cmd+ctrl` (`<D-C-`)
 	function() require("personal-plugins.misc").openCwdInTerminal() end,
 	{ desc = " Open cwd in Terminal" }
 )

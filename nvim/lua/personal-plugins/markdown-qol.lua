@@ -4,7 +4,7 @@ local M = {}
 ---Wraps text with markdown links, automatically inserting the URL if in a Markdown link if the `+` register has a URL. In normal mode, can undo.
 ---@param startWrap string|"mdlink"
 ---@param endWrap? string defaults to `startWrap`
-function M.mdWrap(startWrap, endWrap)
+function M.wrap(startWrap, endWrap)
 	if not endWrap then endWrap = startWrap end
 	local mode = vim.fn.mode()
 	if mode == "V" then
@@ -156,7 +156,7 @@ end
 
 ---@param css string url or absolute path
 function M.previewViaPandoc(css)
-	local outputPath = "/tmp/markdown-preview.html"
+	local outputPath = "mktemp -t example"
 	if vim.fn.executable("pandoc") == 0 then
 		vim.notify("Pandoc not found.", vim.log.levels.WARN)
 		return
@@ -174,6 +174,24 @@ function M.previewViaPandoc(css)
 	}):wait()
 
 	vim.ui.open(outputPath)
+end
+
+function M.codeBlockFromClipboard()
+	-- dedent clipboard content
+	local code = vim.split(vim.fn.getreg("+"), "\n", { trimempty = true })
+	local smallestIndent = vim.iter(code):fold(math.huge, function(acc, line)
+		local indent = #line:match("^%s*")
+		return math.min(acc, indent)
+	end)
+	local dedented = vim.tbl_map(function(line) return line:sub(smallestIndent + 1) end, code)
+
+	-- insert
+	local row = vim.api.nvim_win_get_cursor(0)[1]
+	table.insert(dedented, 1, "```")
+	table.insert(dedented, "```")
+	vim.api.nvim_buf_set_lines(0, row - 1, row, false, dedented)
+	vim.api.nvim_win_set_cursor(0, { row, 1 })
+	vim.cmd.startinsert { bang = true }
 end
 
 --------------------------------------------------------------------------------

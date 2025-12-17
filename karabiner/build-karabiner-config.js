@@ -2,7 +2,6 @@
 ObjC.import("Foundation");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
-
 //──────────────────────────────────────────────────────────────────────────────
 
 /** @param {string} path */
@@ -23,12 +22,12 @@ function writeToFile(filepath, text) {
 /** @param {string[]} argv */
 // biome-ignore lint/correctness/noUnusedVariables: JXA
 function run(argv) {
-	const profileToUse = argv[0] || "Default"; // CONFIG
+	const profileToUse = argv[0] || "Default";
 	const home = app.pathTo("home folder");
 	const karabinerJson = home + "/.config/karabiner/karabiner.json";
 	const customRulesDir = home + "/.config/karabiner/assets/complex_modifications/";
 
-	// GUARD yq is installed
+	// GUARD `yq` not installed
 	const yqNotInstalled = app.doShellScript("command -v yq || echo 'false'") === "false";
 	if (yqNotInstalled) return "󱎘 yq is not installed.";
 
@@ -45,15 +44,15 @@ function run(argv) {
 	`);
 
 	// 2. merge jsons
-	/** @type {unknown[]} */
 	const customRules = [];
 	const ruleFile = app.doShellScript(`ls "${tempDir}" | grep ".json"`).split("\r");
 	for (const fileName of ruleFile) {
 		const filePath = tempDir + "/" + fileName;
 		const ruleSet = JSON.parse(readFile(filePath))?.rules;
-		if (!ruleSet) return "󱎘 Parsing issue";
-		ruleSet.forEach((/** @type {unknown} */ rule) => customRules.push(rule));
-		app.doShellScript(`rm "${filePath}"`); // delete leftover JSON
+		if (!ruleSet) return "󱎘 Missing `.rules` in " + fileName;
+		for (const rule of ruleSet) {
+			customRules.push(rule);
+		}
 	}
 
 	// 3. insert new rules into karabiner config

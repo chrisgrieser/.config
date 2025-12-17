@@ -51,6 +51,13 @@ bkeymap("n", "<leader>ep", function()
 	require("personal-plugins.markdown-qol").previewViaPandoc(css)
 end, { desc = " Preview" })
 
+bkeymap(
+	{ "n", "i" },
+	"<D-C-e>", -- `hyper` gets registered by neovide as `cmd+ctrl` (`<D-C-`)
+	function() require("personal-plugins.markdown-qol").codeBlockFromClipboard() end,
+	{ desc = " Codeblock" }
+)
+
 ---HARD WRAP--------------------------------------------------------------------
 
 -- when typing beyond `textwidth`
@@ -78,37 +85,5 @@ bkeymap("n", "#", function()
 	vim.diagnostic.jump { count = 1 }
 	vim.defer_fn(function() vim.cmd.normal { "gw}", bang = true } end, 1)
 end, { desc = " hard-wrap next line-length violation" })
-
----CODEBLOCKS-------------------------------------------------------------------
--- typing `,,lang,,` creates a codeblock for `lang` with dedented clipboard
--- content inserted as code.
-bkeymap("i", ",", function()
-	local row, col = unpack(vim.api.nvim_win_get_cursor(0))
-	local textBeforeCursor = vim.api.nvim_get_current_line():sub(1, col)
-	local lang = textBeforeCursor:match(",,(%a*),$")
-	if not lang then
-		vim.api.nvim_feedkeys(",", "n", true) -- pass through the trigger char
-		return
-	end
-
-	-- dedent clipboard content
-	local code = vim.split(vim.fn.getreg("+"), "\n", { trimempty = true })
-	local smallestIndent = vim.iter(code):fold(math.huge, function(acc, line)
-		local indent = #line:match("^%s*")
-		return math.min(acc, indent)
-	end)
-	local dedented = vim.tbl_map(function(line) return line:sub(smallestIndent + 1) end, code)
-
-	-- insert
-	table.insert(dedented, 1, "```" .. lang)
-	table.insert(dedented, "```")
-	vim.api.nvim_buf_set_lines(0, row - 1, row, false, dedented)
-	vim.api.nvim_win_set_cursor(0, { row, 1 })
-	if lang == "" then
-		vim.cmd.startinsert { bang = true }
-	else
-		vim.cmd.stopinsert()
-	end
-end, { desc = " ,, -> Codeblock" })
 
 --------------------------------------------------------------------------------
