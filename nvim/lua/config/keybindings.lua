@@ -203,18 +203,16 @@ end
 
 -- Yankring
 do
-	-- Make paste cyclic, that is when undoing the paste and then using `.`, will
-	-- paste `"2p`, so `p.....` pastes all recent things and `pu.u.u.u.`
-	keymap("n", "p", '"1p', { desc = " Paste" })
-	keymap("n", "<D-p>", "u.", { desc = " Paste previous yank" })
+	-- When undoing the paste and then using `.`, will paste `"2p`, so
+	-- `<D-p>.....` pastes all recent things and `<D-p>u.u.u.u.`, cycles through
+	keymap("n", "<D-p>", '"1p', { desc = " Paste from yankring" })
 
 	vim.api.nvim_create_autocmd("TextYankPost", {
 		desc = "User: Yankring",
 		callback = function()
-			if vim.v.event.operator == "y" then
-				for i = 9, 1, -1 do -- shift all numbered registers
-					vim.fn.setreg(tostring(i), vim.fn.getreg(tostring(i - 1)))
-				end
+			if vim.v.event.operator ~= "y" then return end
+			for i = 9, 1, -1 do -- shift all numbered registers
+				vim.fn.setreg(tostring(i), vim.fn.getreg(tostring(i - 1)))
 			end
 		end,
 	})

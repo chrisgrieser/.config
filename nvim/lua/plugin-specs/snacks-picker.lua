@@ -198,7 +198,7 @@ return {
 						"--files", -- turn `rg` into a file finder
 						"--sortr=modified", -- sort by recency, slight performance impact
 						"--no-config",
-						("--ignore-file=" .. vim.fs.normalize("~/.config/ripgrep/ignore")),
+						("--ignore-file=" .. vim.env.HOME .. "/.config/ripgrep/ignore"),
 					},
 					exclude = { -- keep this ignored even if toggling to show hidden/ignored
 						"node_modules",
@@ -320,7 +320,8 @@ return {
 					cmd = "rg",
 					args = {
 						"--sortr=modified", -- sort by recency, slight performance impact
-						("--ignore-file=" .. vim.fs.normalize("~/.config/ripgrep/ignore")),
+						"--no-config",
+						("--ignore-file=" .. vim.env.HOME .. "/.config/ripgrep/ignore"),
 					},
 					layout = "big_preview",
 				},

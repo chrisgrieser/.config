@@ -157,7 +157,7 @@ function M.mdWrap(startWrap, endWrap)
 			vim.notify("String under cursor is not a word or number.", vim.log.levels.WARN)
 			return
 		end
-		text = vim.fn.expand("<cword>")
+		text = startWrap == "`" and vim.fn.expand("<cWORD>") or vim.fn.expand("<cword>")
 	elseif mode == "v" then
 		vim.cmd.normal { '"zy', bang = true }
 		text = vim.fn.getreg("z")
@@ -179,13 +179,16 @@ function M.mdWrap(startWrap, endWrap)
 	local shouldUndo = false
 	if mode == "n" then
 		vim.opt.iskeyword:append { startWrap:sub(1, 1), endWrap:sub(1, 1) }
-		shouldUndo = vim.fn.expand("<cword>") == insert
+		local cword = startWrap == "`" and vim.fn.expand("<cWORD>") or vim.fn.expand("<cword>")
+		shouldUndo = (startWrap ~= "`" and cword == insert)
+			or (startWrap == "`" and cword:sub(2, -2) == insert)
 		if shouldUndo then insert = text end
 	end
 
 	-- insert
 	if mode == "n" then
-		vim.cmd.normal { '"_ciw' .. insert, bang = true }
+		local wordArg = startWrap == "`" and "W" or "w"
+		vim.cmd.normal { '"_ci' .. wordArg .. insert, bang = true }
 		vim.opt.iskeyword = prevOpt
 	elseif mode == "v" then
 		vim.cmd.normal { "gv", bang = true } -- re-select, since yank put us in normal mode

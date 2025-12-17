@@ -3,28 +3,6 @@
 <a href="https://dotfyle.com/chrisgrieser/config-nvim"><img alt="badge 2" src="https://dotfyle.com/chrisgrieser/config-nvim/badges/leaderkey?style=flat"/></a>
 <a href="https://dotfyle.com/chrisgrieser/config-nvim"><img alt="badge 3" src="https://dotfyle.com/chrisgrieser/config-nvim/badges/plugin-manager?style=flat"/></a>
 
-```bash
-├── lsp
-├── dap
-├── queries
-├── prompts
-├── mason-registry
-├── lua
-│  ├── config
-│  ├── colorschemes
-│  ├── personal-plugins
-│  ├── plugin-specs
-├── after
-│  ├── ftplugin
-│  ├── ftdetect
-│  ├── indent
-│  └── syntax
-├── snippets
-│  ├── general
-│  └── project-specific
-└── templates
-```
-
 ## All installed plugins
 - [altermo/ultimate-autopair.nvim](https://github.com/altermo/ultimate-autopair.nvim)
 - [chrisgrieser/nvim-chainsaw](https://github.com/chrisgrieser/nvim-chainsaw)
