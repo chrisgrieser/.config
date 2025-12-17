@@ -47,7 +47,6 @@ local ensureInstalled = {
 	formatters = {
 		"markdown-toc", -- automatic table-of-contents via conform.nvim
 		"shfmt", -- shell formatter (via bashls)
-		"mdformat", -- markdown formatter via conform.nvim
 	},
 	debuggers = {
 		"debugpy", -- python

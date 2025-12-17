@@ -220,7 +220,9 @@ return {
 						local symlinkTarget = vim.uv.fs_readlink(absPath)
 						if symlinkTarget then
 							local linkDir = vim.fs.dirname(item._path) -- not cwd, to handle relative symlinks
-							item._path = vim.fs.normalize(linkDir .. "/" .. symlinkTarget)
+							local original = vim.fs.normalize(linkDir .. "/" .. symlinkTarget)
+							assert(vim.uv.fs_stat(original), "file does not exist: " .. original)
+							item._path = original
 						end
 
 						local binaryExt = { "pdf", "png", "webp", "docx" }

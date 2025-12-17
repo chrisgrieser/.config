@@ -153,11 +153,8 @@ return {
 				vim.cmd.normal { "v", bang = true } -- leave visual mode
 
 				local exists = vim.uv.fs_stat(vim.fs.normalize(path)) ~= nil
-				if exists then
-					vim.ui.open(path)
-				else
-					vim.notify("Path does not exist.", vim.log.levels.WARN)
-				end
+				if not exists then return vim.notify("Path does not exist.", vim.log.levels.WARN) end
+				vim.ui.open(path)
 			end,
 			desc = " Open next path",
 		},

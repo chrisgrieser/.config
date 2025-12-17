@@ -40,7 +40,7 @@ anchors:
         set_notification_message: { id: menu-notice, text: "Finder Vim Mode\n\n➡️ Menu Mode" }
       - &sound-for-tagging
         shell_command: |
-          [[ -z "$FINDER_VIM_MODE_NO_SOUND" ]] && 
+          [[ -z "$FINDER_VIM_MODE_NO_SOUND" ]] &&
             afplay '/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/acknowledgment_sent.caf' &
 
 #───────────────────────────────────────────────────────────────────────────────
@@ -297,8 +297,8 @@ rules:
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
       #─────────────────────────────────────────────────────────────────────────
       # r = recent folders
-      # HACK right-click dock icon. hacky, but the only good way to do it 
-      # (and less buggy than navigating to the recent folders in the menubar) 
+      # HACK right-click dock icon. hacky, but the only good way to do it
+      # (and less buggy than navigating to the recent folders in the menubar)
       - type: basic
         from: { key_code: r }
         to_if_alone:
@@ -309,10 +309,9 @@ rules:
                 tell application "System Events"
                   tell process "Dock" to perform action "AXShowMenu" of UI element "Finder" of list 1
                   delay 0.1
-                  key code 125 using {command down} # arrow down
-                  key code 125 using {command down}
-                  key code 125 using {command down}
-                  key code 125 using {command down}
+                  # key code 125 = arrow down, 126 = arrow up
+                  key code 125 using {option down} # down the list
+                  key code 126 using {command down} # up one section
                 end tell'
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
       # R = recent files
@@ -686,7 +685,7 @@ rules:
           - *enter-insert-mode # enters insert mode since folder renaming is also triggered
           - *insert-notice
           - shell_command: |
-              [[ -z "$FINDER_VIM_MODE_NO_SOUND" ]] && 
+              [[ -z "$FINDER_VIM_MODE_NO_SOUND" ]] &&
                 afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/facetime/multiway_join.caf" &
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # M = Move selection to new folder
@@ -715,7 +714,7 @@ rules:
                   click menu item "Rename" of menu "File" of menu bar 1
                 end tell
               '
-              [[ -z "$FINDER_VIM_MODE_NO_SOUND" ]] && 
+              [[ -z "$FINDER_VIM_MODE_NO_SOUND" ]] &&
                 afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/begin_record.caf" &
           - *enter-insert-mode # since renaming is triggered
           - *insert-notice
@@ -753,7 +752,7 @@ rules:
                 fi
                 mv -n "$file" "$newName"
               done
-              [[ -z "$FINDER_VIM_MODE_NO_SOUND" ]] && 
+              [[ -z "$FINDER_VIM_MODE_NO_SOUND" ]] &&
                 afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/begin_record.caf" &
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
       # s = Create Symlink
@@ -779,7 +778,7 @@ rules:
               done
               first_symlink="$(echo "$selectedFiles" | head -n1)-symlink"
               open -R "$first_symlink"
-              [[ -z "$FINDER_VIM_MODE_NO_SOUND" ]] && 
+              [[ -z "$FINDER_VIM_MODE_NO_SOUND" ]] &&
                 afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/begin_record.caf" &
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
       # S = follow symlink (or alias)
@@ -803,7 +802,7 @@ rules:
                 foldername=$(basename "$sel")
                 zip --recurse-paths --symlinks "../$foldername.zip" .
                 open -R "../$foldername.zip"
-                [[ -z "$FINDER_VIM_MODE_NO_SOUND" ]] && 
+                [[ -z "$FINDER_VIM_MODE_NO_SOUND" ]] &&
                   afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/Volume Mount.aif" &
               else
                 osascript -e '
@@ -825,7 +824,7 @@ rules:
                 foldername=$(basename "$sel")
                 zip --recurse-paths --symlinks "../$foldername.zip" .
                 open -R "../$foldername.zip"
-                [[ -z "$FINDER_VIM_MODE_NO_SOUND" ]] && 
+                [[ -z "$FINDER_VIM_MODE_NO_SOUND" ]] &&
                   afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/Volume Mount.aif" &
               else
                 osascript -e '
@@ -840,7 +839,7 @@ rules:
         to:
           - { key_code: period, modifiers: [command, shift] }
           - shell_command: |
-              [[ -z "$FINDER_VIM_MODE_NO_SOUND" ]] && 
+              [[ -z "$FINDER_VIM_MODE_NO_SOUND" ]] &&
                 afplay '/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/facetime/multiway_leave.caf' &
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       #─────────────────────────────────────────────────────────────────────────
@@ -851,7 +850,7 @@ rules:
         to_if_alone:
           - key_code: right_arrow
           - shell_command: |
-              [[ -z "$FINDER_VIM_MODE_NO_SOUND" ]] && 
+              [[ -z "$FINDER_VIM_MODE_NO_SOUND" ]] &&
                 afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/mic_unmute.caf" &
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       - type: basic
@@ -859,7 +858,7 @@ rules:
         to_if_alone:
           - { key_code: right_arrow, modifiers: [option] }
           - shell_command: |
-              [[ -z "$FINDER_VIM_MODE_NO_SOUND" ]] && 
+              [[ -z "$FINDER_VIM_MODE_NO_SOUND" ]] &&
                 afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/mic_unmute.caf" &
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # i = close/collapse fold (I: do it recursively)
@@ -868,7 +867,7 @@ rules:
         to_if_alone:
           - key_code: left_arrow
           - shell_command: |
-              [[ -z "$FINDER_VIM_MODE_NO_SOUND" ]] && 
+              [[ -z "$FINDER_VIM_MODE_NO_SOUND" ]] &&
                 afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/mic_mute.caf" &
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       - type: basic
@@ -876,7 +875,7 @@ rules:
         to_if_alone:
           - { key_code: left_arrow, modifiers: [option] }
           - shell_command: |
-              [[ -z "$FINDER_VIM_MODE_NO_SOUND" ]] && 
+              [[ -z "$FINDER_VIM_MODE_NO_SOUND" ]] &&
                 afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/mic_mute.caf" &
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # <C-h>/<C-l> = History back/forward
@@ -1121,7 +1120,7 @@ rules:
           - { key_code: "1", modifiers: [control, option, command] }
           - { key_code: "up_arrow", modifiers: [option] } # go to top
           - shell_command: |
-              [[ -z "$FINDER_VIM_MODE_NO_SOUND" ]] && 
+              [[ -z "$FINDER_VIM_MODE_NO_SOUND" ]] &&
                 afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/end_record.caf" &
               "$HOME/.config/karabiner/assets/finder-vim-mode/notificator" \
                 --title "Finder Vim Mode" --message "⬇️ Sort by name"
@@ -1132,7 +1131,7 @@ rules:
           - { key_code: "5", modifiers: [control, option, command] }
           - { key_code: "up_arrow", modifiers: [option] } # go to top
           - shell_command: |
-              [[ -z "$FINDER_VIM_MODE_NO_SOUND" ]] && 
+              [[ -z "$FINDER_VIM_MODE_NO_SOUND" ]] &&
                 afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/end_record.caf" &
               "$HOME/.config/karabiner/assets/finder-vim-mode/notificator" \
                 --title "Finder Vim Mode" --message "⬅️ Sort by modification date"
@@ -1143,7 +1142,7 @@ rules:
           - { key_code: "6", modifiers: [control, option, command] }
           - { key_code: "up_arrow", modifiers: [option] } # go to top
           - shell_command: |
-              [[ -z "$FINDER_VIM_MODE_NO_SOUND" ]] && 
+              [[ -z "$FINDER_VIM_MODE_NO_SOUND" ]] &&
                 afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/end_record.caf" &
               "$HOME/.config/karabiner/assets/finder-vim-mode/notificator" \
                 --title "Finder Vim Mode" --message "⬆️ Sort by size"
@@ -1154,7 +1153,7 @@ rules:
           - { key_code: "2", modifiers: [control, option, command] }
           - { key_code: "up_arrow", modifiers: [option] } # go to top
           - shell_command: |
-              [[ -z "$FINDER_VIM_MODE_NO_SOUND" ]] && 
+              [[ -z "$FINDER_VIM_MODE_NO_SOUND" ]] &&
                 afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/end_record.caf" &
               "$HOME/.config/karabiner/assets/finder-vim-mode/notificator" \
                 --title "Finder Vim Mode" --message "➡️ Sort by kind"
@@ -1165,7 +1164,7 @@ rules:
           - { key_code: "7", modifiers: [control, option, command] }
           - { key_code: "up_arrow", modifiers: [option] } # go to top
           - shell_command: |
-              [[ -z "$FINDER_VIM_MODE_NO_SOUND" ]] && 
+              [[ -z "$FINDER_VIM_MODE_NO_SOUND" ]] &&
                 afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/end_record.caf" &
               "$HOME/.config/karabiner/assets/finder-vim-mode/notificator" \
                 --title "Finder Vim Mode" --message "🔚 Sort by tags"

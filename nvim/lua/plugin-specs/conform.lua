@@ -5,32 +5,19 @@ return {
 	"stevearc/conform.nvim",
 	cmd = "ConformInfo",
 	keys = {
-		{
-			"<D-s>",
-			function() require("conform").format() end,
-			mode = { "n", "x" },
-			desc = "󱉯 Format buffer",
-		},
+		-- stylua: ignore
+		{ "<D-s>", function() require("conform").format() end, mode = { "n", "x" }, desc = "󱉯 Format buffer" },
 	},
 	opts = {
 		log_level = vim.log.levels.WARN, -- for `ConformInfo`
 		default_format_opts = { lsp_format = "first" },
 		formatters_by_ft = {
-			markdown = {
-				"mdformat",
-				"no-blank-after-heading",
-				"markdown-toc",
-				"markdownlint",
-				"injected",
-			},
+			markdown = { "no-blank-after-heading", "markdown-toc", "markdownlint", "injected" },
 			python = { "ruff_fix", "ruff_organize_imports" },
 			zsh = { "shell-home", "shellcheck" },
 			json = { lsp_format = "prefer", "jq" }, -- use `biome` (via LSP), with `jq` as fallback
-			typescript = {
-				"ts-add-missing-imports",
-				"ts-remove-unused-imports",
-				"biome-organize-imports",
-			},
+			-- stylua: ignore
+			typescript = { "ts-add-missing-imports", "ts-remove-unused-imports", "biome-organize-imports" },
 
 			-- fallback, used when no formatters defined and no LSP available
 			_ = { "trim_whitespace", "trim_newlines", "squeeze_blanks" },
@@ -65,9 +52,6 @@ return {
 					end
 					return false
 				end,
-			},
-			mdformat = {
-				prepend_args = { "--number", "--wrap=" .. vim.o.textwidth },
 			},
 			---MY CUSTOM FORMATTERS------------------------------------------------
 			["no-blank-after-heading"] = {
