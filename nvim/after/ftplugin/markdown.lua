@@ -11,14 +11,39 @@ optl.listchars:remove("trail")
 optl.listchars:append { multispace = "·" }
 optl.sidescrolloff = 3 -- lower, since we rarely go beyond textwidth
 
--- keymaps
+---KEYMAPS----------------------------------------------------------------------
+
 bkeymap("n", "<leader>rt", "vip:!pandoc --to=gfm<CR>", { desc = " Format table under cursor" })
 -- stylua: ignore
 bkeymap("n", ">", function() require("personal-plugins.hiraganafy")() end, { desc = " Hiraganafy" })
 
--- abbreviations
-local abbr = require("config.utils").bufAbbrev
-abbr("->", "→")
+-- auto-bullet
+-- stylua: ignore start
+bkeymap("n", "o", function() require("personal-plugins.markdown-qol").autoBullet("o") end, { desc = " Auto-bullet o" })
+bkeymap("n", "O", function() require("personal-plugins.markdown-qol").autoBullet("O") end, { desc = " Auto-bullet O" })
+bkeymap("i", "<CR>", function() require("personal-plugins.markdown-qol").autoBullet("<CR>") end, { desc = " Auto-bullet <CR>" })
+-- stylua: ignore end
+
+-- cycle list
+-- stylua: ignore
+bkeymap({ "n", "i" }, "<D-u>", function() require("personal-plugins.markdown-qol").cycleList() end, { desc = "󰍔 Cycle list types" })
+
+-- headings
+-- Jump to next/prev heading (`##` to skip H1 and comments in code-blocks)
+bkeymap("n", "<C-j>", [[/^##\+ .*<CR>]], { desc = " Next heading" })
+bkeymap("n", "<C-k>", [[?^##\+ .*<CR>]], { desc = " Prev heading" })
+
+-- <D-h> remapped to <D-5>, since used by macOS PENDING https://github.com/neovide/neovide/issues/3099
+-- stylua: ignore
+bkeymap({ "n", "i" }, "<D-5>", function() require("personal-plugins.markdown-qol").incrementHeading(1) end, { desc = " Increment heading" })
+-- stylua: ignore
+bkeymap({ "n", "i" }, "<D-H>", function() require("personal-plugins.markdown-qol").incrementHeading(-1) end, { desc = " Decrement heading" })
+
+-- aliases frontmatter
+bkeymap("n", "<leader>ra", function()
+	local toInsert = { "aliases:", "  - " }
+	require("personal-plugins.markdown-qol").insertFrontmatter(toInsert)
+end, { desc = " Add aliases frontmatter" })
 
 ---HARD WRAP--------------------------------------------------------------------
 
@@ -47,60 +72,6 @@ bkeymap("n", "#", function()
 	vim.diagnostic.jump { count = 1 }
 	vim.defer_fn(function() vim.cmd.normal { "gw}", bang = true } end, 1)
 end, { desc = " hard-wrap next line-length violation" })
-
----AUTO BULLETS-----------------------------------------------------------------
-do
-	local function autoBullet(key) ---@param key "o"|"O"|"<CR>"
-		local row, col = unpack(vim.api.nvim_win_get_cursor(0))
-		local line = vim.api.nvim_get_current_line()
-
-		local indent = line:match("^%s*")
-		local task = line:match("^%s*([-*+] %[[x ]%] )")
-		local list = not task and line:match("^%s*([-*+] )")
-		local blockquote = line:match("^%s*(>+ )")
-		local num = line:match("^%s*(%d+%. )")
-		local continued = list or task or num or blockquote or ""
-		local emptyList = (continued ~= "") and vim.trim(indent .. continued) == vim.trim(line)
-		if num then continued = num:gsub("%d+", function(n) return tostring(tonumber(n) + 1) end) end
-
-		if key:lower() == "o" then
-			if key == "O" then row = row - 1 end
-			vim.api.nvim_buf_set_lines(0, row, row, false, { indent .. continued })
-			vim.api.nvim_win_set_cursor(0, { row + 1, 1 })
-			vim.cmd.startinsert { bang = true } -- bang -> insert at EoL
-		elseif key == "<CR>" and emptyList then
-			vim.api.nvim_set_current_line("")
-		elseif key == "<CR>" and not emptyList then
-			local beforeCur, afterCur = line:sub(1, col), line:sub(col + 1)
-			if vim.startswith(afterCur, continued) then continued = "" end -- cursor before list markers
-			local nextLine = indent .. continued .. afterCur
-			vim.api.nvim_buf_set_lines(0, row - 1, row, false, { beforeCur, nextLine })
-			vim.api.nvim_win_set_cursor(0, { row + 1, #(indent .. continued) })
-		end
-	end
-
-	bkeymap("n", "o", function() autoBullet("o") end, { desc = " Auto-bullet o" })
-	bkeymap("n", "O", function() autoBullet("O") end, { desc = " Auto-bullet O" })
-	bkeymap("i", "<CR>", function() autoBullet("<CR>") end, { desc = " Auto-bullet <CR>" })
-end
-
----YAML FRONTMATTER-------------------------------------------------------------
-bkeymap("n", "<leader>ry", function()
-	-- CONFIG
-	local linesToInsert = { "aliases:", "  - " }
-
-	local hasFrontmatter = vim.api.nvim_buf_get_lines(0, 0, 1, false)[1] == "---"
-	if hasFrontmatter then
-		vim.notify("Frontmatter already exists.")
-		vim.api.nvim_win_set_cursor(0, { 2, 0 })
-	else
-		table.insert(linesToInsert, 1, "---")
-		vim.list_extend(linesToInsert, { "---", "" })
-		vim.api.nvim_buf_set_lines(0, 0, 0, false, linesToInsert)
-		vim.api.nvim_win_set_cursor(0, { #linesToInsert - 2, 0 })
-		vim.cmd.startinsert { bang = true }
-	end
-end, { desc = " Add frontmatter" })
 
 ---CODEBLOCKS-------------------------------------------------------------------
 -- typing `,,lang,,` creates a codeblock for `lang` with dedented clipboard
@@ -134,58 +105,9 @@ bkeymap("i", ",", function()
 	end
 end, { desc = " ,, -> Codeblock" })
 
----HEADINGS---------------------------------------------------------------------
--- Jump to next/prev heading (`##` to skip H1 and comments in code-blocks)
-bkeymap("n", "<C-j>", [[/^##\+ .*<CR>]], { desc = " Next heading" })
-bkeymap("n", "<C-k>", [[?^##\+ .*<CR>]], { desc = " Prev heading" })
-
-do
-	local function headingsIncremantor(dir) ---@param dir 1|-1
-		local lnum, col = unpack(vim.api.nvim_win_get_cursor(0))
-		local curLine = vim.api.nvim_get_current_line()
-
-		local updated = curLine:gsub("^#* ", function(match)
-			if dir == -1 and match ~= "# " then return match:sub(2) end
-			if dir == 1 and match ~= "###### " then return "#" .. match end
-			return ""
-		end)
-		if updated == curLine then updated = (dir == 1 and "## " or "###### ") .. curLine end
-
-		vim.api.nvim_set_current_line(updated)
-		local diff = #updated - #curLine
-		vim.api.nvim_win_set_cursor(0, { lnum, math.max(col + diff, 0) })
-	end
-
-	-- <D-h> remapped to <D-5>, since used by macOS PENDING https://github.com/neovide/neovide/issues/3099
-	-- stylua: ignore
-	bkeymap({ "n", "i" }, "<D-5>", function() headingsIncremantor(1) end, { desc = " Increment heading" })
-	-- stylua: ignore
-	bkeymap({ "n", "i" }, "<D-H>", function() headingsIncremantor(-1) end, { desc = " Decrement heading" })
-end
-
----CYCLE LIST TYPES-------------------------------------------------------------
-bkeymap({ "n", "i" }, "<D-u>", function()
-	local lnum, col = unpack(vim.api.nvim_win_get_cursor(0))
-	local curLine = vim.api.nvim_get_current_line()
-
-	local updated = curLine:gsub("^(%s*)([%p%d x]* )", function(indent, list)
-		if list:find("[*+-] ") and not list:find("%- %[") then return indent .. "- [ ] " end -- bullet -> task
-		if vim.startswith(list, "- [") then return indent .. "1. " end -- task -> number
-		return indent .. "- " -- number/other -> bullet
-	end)
-	-- none -> bullet
-	if updated == curLine then updated = curLine:gsub("^(%s*)(.*)", "%1- %2") end
-
-	vim.api.nvim_set_current_line(updated)
-	local diff = #updated - #curLine
-	vim.api.nvim_win_set_cursor(0, { lnum, math.max(1, col + diff) })
-end, { desc = "󰍔 Cycle list types" })
-
 ---MARKDOWN PREVIEW-------------------------------------------------------------
 bkeymap("n", "<leader>ep", function()
-	-- SOURCE https://github.com/sindresorhus/github-markdown-css
-	-- (replace `.markdown-body` with `body` and copypaste the first block)
-	local css = vim.fn.stdpath("config") .. "/after/ftplugin/github-markdown.css"
+	local css = vim.env.HOME .. "/.config/pandoc/css/github-markdown.css"
 
 	local outputPath = "/tmp/markdown-preview.html"
 	vim.cmd("silent! update")

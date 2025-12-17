@@ -1,2 +1,3 @@
 # exclude these files from git diffs and stats
 **/*.csl linguist-vendored
+**/*.css linguist-vendored

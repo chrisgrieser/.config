@@ -137,16 +137,16 @@ keymap("n", "M", "<cmd>. move +1<CR>kJ", { desc = "󰽜 Merge line down" }) -- `
 
 -- Markdown syntax (useful to have in all filetypes for comments)
 -- stylua: ignore start
-keymap({ "n", "x", "i" }, "<D-e>", function() require("personal-plugins.misc").mdWrap("`") end, { desc = " Inline code" })
-keymap({ "n", "x", "i" }, "<D-k>", function() require("personal-plugins.misc").mdWrap("mdlink") end, { desc = " Link" })
-keymap({ "n", "x", "i" }, "<D-b>", function() require("personal-plugins.misc").mdWrap("**") end, { desc = " Bold" })
-keymap({ "n", "x", "i" }, "<D-i>", function() require("personal-plugins.misc").mdWrap("*") end, { desc = " Italic" })
+keymap({ "n", "x", "i" }, "<D-e>", function() require("personal-plugins.markdown-qol").wrap("`") end, { desc = " Inline code" })
+keymap({ "n", "x", "i" }, "<D-k>", function() require("personal-plugins.markdown-qol").wrap("mdlink") end, { desc = " Link" })
+keymap({ "n", "x", "i" }, "<D-b>", function() require("personal-plugins.markdown-qol").wrap("**") end, { desc = " Bold" })
+keymap({ "n", "x", "i" }, "<D-i>", function() require("personal-plugins.markdown-qol").wrap("*") end, { desc = " Italic" })
 
 -- Simple surrounds
-keymap("n", '"', function() require("personal-plugins.misc").mdWrap('"') end, { desc = ' Surround' })
-keymap("n", "(", function() require("personal-plugins.misc").mdWrap("(", ")") end, { desc = "󰅲 Surround" })
-keymap("n", "[", function() require("personal-plugins.misc").mdWrap("[", "]") end, { desc = "󰅪 Surround" })
-keymap("n", "{", function() require("personal-plugins.misc").mdWrap("{", "}") end, { desc = " Surround" })
+keymap("n", '"', function() require("personal-plugins.markdown-qol").wrap('"') end, { desc = ' Surround' })
+keymap("n", "(", function() require("personal-plugins.markdown-qol").wrap("(", ")") end, { desc = "󰅲 Surround" })
+keymap("n", "[", function() require("personal-plugins.markdown-qol").wrap("[", "]") end, { desc = "󰅪 Surround" })
+keymap("n", "{", function() require("personal-plugins.markdown-qol").wrap("{", "}") end, { desc = " Surround" })
 -- stylua: ignore end
 
 ---WHITESPACE & INDENTATION-----------------------------------------------------

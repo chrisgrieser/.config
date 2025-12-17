@@ -1,0 +1,158 @@
+local M = {}
+--------------------------------------------------------------------------------
+
+---Wraps text with markdown links, automatically inserting the URL if in a Markdown link if the `+` register has a URL. In normal mode, can undo.
+---@param startWrap string|"mdlink"
+---@param endWrap? string defaults to `startWrap`
+function M.mdWrap(startWrap, endWrap)
+	if not endWrap then endWrap = startWrap end
+	local mode = vim.fn.mode()
+	if mode == "V" then
+		vim.notify("Visual line mode not supported", vim.log.levels.WARN)
+		return
+	end
+	local row, col = unpack(vim.api.nvim_win_get_cursor(0))
+	local useBigWord = startWrap == "`"
+
+	-- determine text
+	local text = ""
+	if mode == "n" then
+		local cursorChar = vim.api.nvim_get_current_line():sub(col + 1, col + 1)
+		if not cursorChar:find("%w") and not useBigWord then
+			vim.notify("String under cursor is not a word or number.", vim.log.levels.WARN)
+			return
+		end
+		text = startWrap == "`" and vim.fn.expand("<cWORD>") or vim.fn.expand("<cword>")
+	elseif mode == "v" then
+		vim.cmd.normal { '"zy', bang = true }
+		text = vim.fn.getreg("z")
+	end
+
+	-- wrap text
+	local insert = startWrap .. text .. endWrap
+	local clipboardUrl
+	if startWrap == "mdlink" then
+		local clipb = vim.fn.getreg("+")
+		clipboardUrl = clipb:match("^#[%w-]+$") -- heading-link
+			or clipb:match([[^%l%l%l+://[^%s)%]}"'`>]+]]) -- url
+			or ""
+		insert = ("[%s](%s)"):format(text, clipboardUrl)
+	end
+
+	-- normal mode: check whether to undo instead
+	local prevOpt = vim.opt.iskeyword:get()
+	local shouldUndo = false
+	if mode == "n" then
+		vim.opt.iskeyword:append { startWrap:sub(1, 1), endWrap:sub(1, 1) }
+		local cword = useBigWord and vim.fn.expand("<cWORD>") or vim.fn.expand("<cword>")
+		shouldUndo = (not useBigWord and cword == insert)
+			or (useBigWord and vim.startswith(insert, startWrap:rep(2)))
+		if shouldUndo then insert = useBigWord and text:sub(2, -2) or text end
+	end
+
+	-- insert
+	if mode == "n" then
+		local wordArg = startWrap == "`" and "W" or "w"
+		vim.cmd.normal { '"_ci' .. wordArg .. insert, bang = true }
+		vim.opt.iskeyword = prevOpt
+	elseif mode == "v" then
+		vim.cmd.normal { "gv", bang = true } -- re-select, since yank put us in normal mode
+		vim.cmd.normal { '"_c' .. insert, bang = true }
+	elseif mode == "i" then
+		local curLine = vim.api.nvim_get_current_line()
+		local newLine = curLine:sub(1, col) .. insert .. curLine:sub(col + 1)
+		vim.api.nvim_set_current_line(newLine)
+	end
+
+	-- cursor movement
+	if startWrap == "mdlink" then
+		vim.api.nvim_win_set_cursor(0, { row, col + 1 })
+		if clipboardUrl == "" and text ~= "" then vim.cmd.normal { "f)", bang = true } end
+	else
+		local offset = shouldUndo and -#startWrap or #startWrap
+		vim.api.nvim_win_set_cursor(0, { row, col + offset })
+	end
+	if text == "" or clipboardUrl == "" then vim.cmd.startinsert() end
+end
+
+---@param key "o"|"O"|"<CR>"
+function M.autoBullet(key)
+	local row, col = unpack(vim.api.nvim_win_get_cursor(0))
+	local line = vim.api.nvim_get_current_line()
+
+	local indent = line:match("^%s*")
+	local task = line:match("^%s*([-*+] %[[x ]%] )")
+	local list = not task and line:match("^%s*([-*+] )")
+	local blockquote = line:match("^%s*(>+ )")
+	local num = line:match("^%s*(%d+%. )")
+	local continued = list or task or num or blockquote or ""
+	local emptyList = (continued ~= "") and vim.trim(indent .. continued) == vim.trim(line)
+	if num then continued = num:gsub("%d+", function(n) return tostring(tonumber(n) + 1) end) end
+
+	if key:lower() == "o" then
+		if key == "O" then row = row - 1 end
+		vim.api.nvim_buf_set_lines(0, row, row, false, { indent .. continued })
+		vim.api.nvim_win_set_cursor(0, { row + 1, 1 })
+		vim.cmd.startinsert { bang = true } -- bang -> insert at EoL
+	elseif key == "<CR>" and emptyList then
+		vim.api.nvim_set_current_line("")
+	elseif key == "<CR>" and not emptyList then
+		local beforeCur, afterCur = line:sub(1, col), line:sub(col + 1)
+		if vim.startswith(afterCur, continued) then continued = "" end -- cursor before list markers
+		local nextLine = indent .. continued .. afterCur
+		vim.api.nvim_buf_set_lines(0, row - 1, row, false, { beforeCur, nextLine })
+		vim.api.nvim_win_set_cursor(0, { row + 1, #(indent .. continued) })
+	end
+end
+
+---@param linesToInsert string[]
+function M.insertFrontmatter(linesToInsert)
+	local hasFrontmatter = vim.api.nvim_buf_get_lines(0, 0, 1, false)[1] == "---"
+	if hasFrontmatter then
+		vim.notify("Frontmatter already exists.")
+		vim.api.nvim_win_set_cursor(0, { 2, 0 })
+	else
+		table.insert(linesToInsert, 1, "---")
+		vim.list_extend(linesToInsert, { "---", "" })
+		vim.api.nvim_buf_set_lines(0, 0, 0, false, linesToInsert)
+		vim.api.nvim_win_set_cursor(0, { #linesToInsert - 2, 0 })
+		vim.cmd.startinsert { bang = true }
+	end
+end
+
+---@param dir 1|-1
+function M.incrementHeading(dir)
+	local lnum, col = unpack(vim.api.nvim_win_get_cursor(0))
+	local curLine = vim.api.nvim_get_current_line()
+
+	local updated = curLine:gsub("^#* ", function(match)
+		if dir == -1 and match ~= "# " then return match:sub(2) end
+		if dir == 1 and match ~= "###### " then return "#" .. match end
+		return ""
+	end)
+	if updated == curLine then updated = (dir == 1 and "## " or "###### ") .. curLine end
+
+	vim.api.nvim_set_current_line(updated)
+	local diff = #updated - #curLine
+	vim.api.nvim_win_set_cursor(0, { lnum, math.max(col + diff, 0) })
+end
+
+function M.cycleList()
+	local lnum, col = unpack(vim.api.nvim_win_get_cursor(0))
+	local curLine = vim.api.nvim_get_current_line()
+
+	local updated = curLine:gsub("^(%s*)([%p%d x]* )", function(indent, list)
+		if list:find("[*+-] ") and not list:find("%- %[") then return indent .. "- [ ] " end -- bullet -> task
+		if vim.startswith(list, "- [") then return indent .. "1. " end -- task -> number
+		return indent .. "- " -- number/other -> bullet
+	end)
+	-- none -> bullet
+	if updated == curLine then updated = curLine:gsub("^(%s*)(.*)", "%1- %2") end
+
+	vim.api.nvim_set_current_line(updated)
+	local diff = #updated - #curLine
+	vim.api.nvim_win_set_cursor(0, { lnum, math.max(1, col + diff) })
+end
+
+--------------------------------------------------------------------------------
+return M
