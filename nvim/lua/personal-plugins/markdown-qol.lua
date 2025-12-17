@@ -180,10 +180,14 @@ function M.codeBlockFromClipboard()
 	-- dedent clipboard content
 	local code = vim.split(vim.fn.getreg("+"), "\n", { trimempty = true })
 	local smallestIndent = vim.iter(code):fold(math.huge, function(acc, line)
+		if vim.trim(line) == "" then return acc end -- ignore empty lines for indent
 		local indent = #line:match("^%s*")
 		return math.min(acc, indent)
 	end)
-	local dedented = vim.tbl_map(function(line) return line:sub(smallestIndent + 1) end, code)
+	local dedented = vim.tbl_map(function(line)
+		if vim.trim(line) == "" then return line end -- ignore empty lines for indent
+		return line:sub(smallestIndent + 1)
+	end, code)
 
 	-- insert
 	local row = vim.api.nvim_win_get_cursor(0)[1]
