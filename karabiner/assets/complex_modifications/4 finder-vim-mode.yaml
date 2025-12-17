@@ -296,9 +296,26 @@ rules:
           - *remove-find-notice
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
       #─────────────────────────────────────────────────────────────────────────
-      # r = recent
+      # r = recent folders
       - type: basic
         from: { key_code: r }
+        to_if_alone:
+          - *start-menu
+          - *menu-notice
+          - shell_command: |
+              osascript -e '
+                tell application "System Events"
+                  tell process "Dock" to perform action "AXShowMenu" of UI element "Finder" of list 1
+                  delay 0.1
+                  key code 125 using {command down} # arrow down
+                  key code 125 using {command down}
+                  key code 125 using {command down}
+                  key code 125 using {command down}
+                end tell'
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
+      # R = recent files
+      - type: basic
+        from: { key_code: r, modifiers: { mandatory: [shift] } }
         to_if_alone:
           - { key_code: f, modifiers: [command, shift] }
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]

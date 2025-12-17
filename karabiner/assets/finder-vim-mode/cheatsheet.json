@@ -118,7 +118,7 @@
     "q\nclose win",
     "w\nduplicate",
     "e\nclose other wins",
-    "r\nrecent",
+    "r (R)\nrecent folders (files)",
     {
       "c": "#CCCCCC"
     },
