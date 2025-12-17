@@ -448,10 +448,10 @@ return {
 				file = { filename_first = true },
 			},
 			toggles = {
-				regex = { icon = "", value = true }, -- invert (only display if enabled)
-				follow = { icon = "󰌸", value = false }, -- invert (-> only display if disabled)
-				ignored = { icon = "󰈉" }, -- invert (-> only display if disabled)
-				hidden = { icon = "󰒉" }, -- invert (-> only display if disabled)
+				regex = { icon = "", value = true }, -- invert -> only display if enabled
+				follow = { icon = "󰌺", value = false }, -- invert -> only display if disabled
+				ignored = { icon = "󱈄" },
+				hidden = { icon = "󱗼" },
 			},
 			ui_select = true,
 			layout = "wide_with_preview", -- = default layout

@@ -45,6 +45,12 @@ bkeymap("n", "<leader>ra", function()
 	require("personal-plugins.markdown-qol").insertFrontmatter(toInsert)
 end, { desc = " Add aliases frontmatter" })
 
+-- preview
+bkeymap("n", "<leader>ep", function()
+	local css = vim.env.HOME .. "/.config/pandoc/css/github-markdown.css"
+	require("personal-plugins.markdown-qol").previewViaPandoc(css)
+end, { desc = " Preview" })
+
 ---HARD WRAP--------------------------------------------------------------------
 
 -- when typing beyond `textwidth`
@@ -104,25 +110,5 @@ bkeymap("i", ",", function()
 		vim.cmd.stopinsert()
 	end
 end, { desc = " ,, -> Codeblock" })
-
----MARKDOWN PREVIEW-------------------------------------------------------------
-bkeymap("n", "<leader>ep", function()
-	local css = vim.env.HOME .. "/.config/pandoc/css/github-markdown.css"
-	local outputPath = "/tmp/markdown-preview.html"
-
-	vim.cmd("silent! update")
-
-	-- create github-html via pandoc
-	vim.system({
-		"pandoc",
-		"--from=gfm+rebase_relative_paths", -- rebasing, so images are available at output location
-		vim.api.nvim_buf_get_name(0),
-		"--output=" .. outputPath,
-		"--standalone",
-		"--css=" .. css,
-	}):wait()
-
-	vim.ui.open(outputPath)
-end, { desc = " Preview" })
 
 --------------------------------------------------------------------------------

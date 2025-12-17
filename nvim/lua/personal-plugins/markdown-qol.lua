@@ -154,5 +154,27 @@ function M.cycleList()
 	vim.api.nvim_win_set_cursor(0, { lnum, math.max(1, col + diff) })
 end
 
+---@param css string url or absolute path
+function M.previewViaPandoc(css)
+	local outputPath = "/tmp/markdown-preview.html"
+	if vim.fn.executable("pandoc") == 0 then
+		vim.notify("Pandoc not found.", vim.log.levels.WARN)
+		return
+	end
+
+	vim.cmd("silent! update")
+	vim.system({
+		"pandoc",
+		"--from=gfm+rebase_relative_paths", -- rebasing, so images are available at output location
+		vim.api.nvim_buf_get_name(0),
+		"--output=" .. outputPath,
+		"--standalone",
+		"--css=" .. css,
+		"--title-prefix=Preview from nvim", -- used only in browser tab title
+	}):wait()
+
+	vim.ui.open(outputPath)
+end
+
 --------------------------------------------------------------------------------
 return M
