@@ -9,7 +9,7 @@ return {
 			shfmt = { spaceRedirects = true },
 			includeAllWorkspaceSymbols = false, -- prevents var-renaming affecting other files
 			globPattern = "**/*@(.sh|.bash|.zsh)",
-			shellcheckArguments = "--shell=bash",
+			shellcheckArguments = "--shell=bash", -- not working yet
 		},
 	},
 	root_markers = {

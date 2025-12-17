@@ -7,7 +7,7 @@
 ---@type vim.lsp.Config
 return {
 	filetypes = { "markdown" }, -- too many false positives elsewhere
-	root_markers = { ".git", ".harper-dictionary.txt" }, -- PENDING https://github.com/neovim/nvim-lspconfig/pull/4246
+	root_markers = { ".harper-dictionary.txt", ".git" }, -- PENDING https://github.com/neovim/nvim-lspconfig/pull/4246
 	settings = {
 		["harper-ls"] = {
 			excludePatterns = { -- PENDING https://github.com/Automattic/harper/issues/2339
@@ -22,7 +22,7 @@ return {
 			isolateEnglish = true, -- experimental; in mixed-language doc only check English
 			dialect = "American",
 			linters = {
-				UseTitleCase = false, -- I prefer sentence case headings
+				UseTitleCase = false, -- prefer sentence case headings
 				SentenceCapitalization = false, -- buggy: https://github.com/Automattic/harper/issues/1056
 				UnclosedQuotes = false, -- buggy: https://github.com/Automattic/harper/issues/1573
 			},

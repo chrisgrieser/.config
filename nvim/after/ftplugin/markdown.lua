@@ -108,12 +108,11 @@ end, { desc = " ,, -> Codeblock" })
 ---MARKDOWN PREVIEW-------------------------------------------------------------
 bkeymap("n", "<leader>ep", function()
 	local css = vim.env.HOME .. "/.config/pandoc/css/github-markdown.css"
-
 	local outputPath = "/tmp/markdown-preview.html"
+
 	vim.cmd("silent! update")
 
 	-- create github-html via pandoc
-	-- (alternative: github API https://docs.github.com/en/rest/markdown/markdown)
 	vim.system({
 		"pandoc",
 		"--from=gfm+rebase_relative_paths", -- rebasing, so images are available at output location
