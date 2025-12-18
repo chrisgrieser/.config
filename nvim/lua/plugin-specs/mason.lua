@@ -1,17 +1,11 @@
 --------------------------------------------------------------------------------
--- INFO – TO PIN VERSIONS
+-- INFO HOW TO PIN VERSIONS
 -- 1. uncomment personal registry in mason's `opts`
 -- 2. copy mason registry spec with desired version to `personal-mason-registry`
---------------------------------------------------------------------------------
--- PENDING https://github.com/mason-org/mason-registry/pull/12811
-vim.lsp.enable("rumdl")
-
 --------------------------------------------------------------------------------
 
 local ensureInstalled = {
 	lsps = {
-		"bash-language-server", -- also used for zsh
-		"efm", -- integration of external linters
 		"html-lsp",
 		"just-lsp",
 		"ts_query_ls", -- treesitter query files
@@ -23,10 +17,8 @@ local ensureInstalled = {
 
 		"harper-ls", -- natural language linter
 		"typos-lsp", -- spellchecker for code
-		"ltex-ls-plus", -- natural language linter (LanguageTool, ltex fork)
 		"marksman", -- markdown lsp
 		"rumdl", -- modern markdownlint
-		-- "markdown-oxide", -- PENDING https://github.com/Feel-ix-343/markdown-oxide/issues/323
 
 		"basedpyright", -- python lsp (pyright fork)
 		"ruff", -- python linter & formatter
@@ -44,12 +36,10 @@ local ensureInstalled = {
 
 		"stylua", -- lua formatter
 		vim.g.useEmmyluaLsp and "emmylua_ls" or "lua-language-server", -- lua LSP
-	},
-	linters = {
-		"shellcheck", -- shell linter via efm PENDING https://github.com/bash-lsp/bash-language-server/issues/663
-	},
-	formatters = {
-		"markdown-toc", -- automatic table-of-contents via conform.nvim
+
+		"bash-language-server", -- also used for zsh
+		"efm", -- integration of external linters
+		"shellcheck", -- shell linter (via efm) PENDING https://github.com/bash-lsp/bash-language-server/issues/663
 		"shfmt", -- shell formatter (via bashls)
 	},
 	debuggers = {
@@ -58,6 +48,7 @@ local ensureInstalled = {
 		"local-lua-debugger-vscode", -- lua
 	},
 	other = {
+		"markdown-toc", -- automatic table-of-contents via conform.nvim
 		"tree-sitter-cli", -- used by nvim-treesitter to install parsers
 	},
 }

@@ -15,14 +15,14 @@ function httpRequest(url) {
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
-	const docsUrl = "https://api.github.com/repos/tldr-pages/tldr/git/trees/main?recursive=1";
-	const baseUrl = "https://tldr.inbrowser.app/pages/";
+	const docsUrl = "https://api.github.com/repos/rvben/rumdl/git/trees/main?recursive=1";
+	const baseUrl = "https://github.com/rvben/rumdl/tree/main/docs";
 
 	const workArray = JSON.parse(httpRequest(docsUrl)).tree.flatMap(
 		(/** @type {{ path: string; }} */ entry) => {
 			const path = entry.path;
-			const [_, category, cli] = path.match(/\/(osx|common)\/([^/]+)\.md$/) || [];
-			if (!category || !cli) return [];
+			const [_, page] = path.match(/\/(osx|common)\/([^/]+)\.md$/) || []
+			if (!page) return [];
 
 			const url = `${baseUrl}/${category}/${cli}`;
 

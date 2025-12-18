@@ -2,7 +2,6 @@
 # ------------------------------------------------------------------------------
 
 [global]
-flavor = "standard"
 line-length = 80
 disable = [
   "MD007",  # ul-indent: not compatible with using tabs
@@ -28,5 +27,9 @@ lines-below = 0  # rule of proximity
 [MD029]  # ol-prefix
 style = "ordered"
 
+[MD033]  # inline-html
+allowed-elements = ["a", "img"]  # badges
+
 [MD063]  # heading-capitalization
 style = "sentence_case"
+
