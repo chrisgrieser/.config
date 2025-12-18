@@ -145,7 +145,7 @@ keymap({ "n", "x", "i" }, "<D-i>", function() require("personal-plugins.markdown
 -- Simple surrounds
 keymap("n", '"', function() require("personal-plugins.markdown-qol").wrap('"') end, { desc = ' Surround' })
 keymap("n", "(", function() require("personal-plugins.markdown-qol").wrap("(", ")") end, { desc = "󰅲 Surround" })
-keymap("n", "[", function() require("personal-plugins.markdown-qol").wrap("[", "]") end, { desc = "󰅪 Surround" })
+keymap("n", "[", function() require("personal-plugins.markdown-qol").wrap("[", "]") end, { nowait = true, desc = "󰅪 Surround" })
 keymap("n", "{", function() require("personal-plugins.markdown-qol").wrap("{", "}") end, { desc = " Surround" })
 -- stylua: ignore end
 

@@ -21,15 +21,12 @@ function run() {
 	const sectionsArr = app
 		.doShellScript(`curl -s "${pandocDocsUrl}"`)
 		.split(">") // INFO split by tags, not lines, since html formatting breaks up some tags across lines
-		.filter(
-			(htmlTag) =>
-				(htmlTag.includes("<span id=") || htmlTag.includes("<section id=")) &&
-				!htmlTag.includes('id="cb'),
-		)
-		.map((htmlTag) => {
+		.flatMap((htmlTag) => {
+			if (!htmlTag.includes("<span id=") && !htmlTag.includes("<section id=")) return [];
+			if (htmlTag.includes('id="cb')) return [];
 			htmlTag = htmlTag.replaceAll("\r", "");
 			const [_, name, levelStr] = htmlTag.match(/id="(.*?)"\s*class="(.*?)"/) || [];
-			if (!name || !levelStr) return {};
+			if (!name || !levelStr) return [];
 			const url = `${pandocDocsUrl}#${name}`;
 
 			let displayName = name

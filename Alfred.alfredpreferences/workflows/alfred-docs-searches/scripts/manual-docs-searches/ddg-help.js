@@ -6,8 +6,8 @@ app.includeStandardAdditions = true;
 
 /** @param {string} url @return {string} */
 function httpRequest(url) {
-	const queryURL = $.NSURL.URLWithString(url);
-	const data = $.NSData.dataWithContentsOfURL(queryURL);
+	const queryUrl = $.NSURL.URLWithString(url);
+	const data = $.NSData.dataWithContentsOfURL(queryUrl);
 	return $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding).js;
 }
 
@@ -22,17 +22,17 @@ function prettyString(str) {
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
-	const docsURL =
+	const docsUrl =
 		"https://api.github.com/repos/duckduckgo/duckduckgo-help-pages/git/trees/master?recursive=1";
-	const baseURL = "https://duckduckgo.com/duckduckgo-help-pages";
+	const baseUrl = "https://duckduckgo.com/duckduckgo-help-pages";
 
-	const workArray = JSON.parse(httpRequest(docsURL)).tree.map(
+	const workArray = JSON.parse(httpRequest(docsUrl)).tree.flatMap(
 		(/** @type {{ path: string; }} */ entry) => {
 			const path = entry.path;
 			const [_, subsite] = path.match(/^_docs\/(.*)\.md$/) || [];
-			if (!subsite || subsite.startsWith("_")) return {};
+			if (!subsite || subsite.startsWith("_")) return [];
 
-			const url = `${baseURL}/${subsite}`;
+			const url = `${baseUrl}/${subsite}`;
 			let [category, title] = subsite.split("/");
 			if (!title) {
 				title = category

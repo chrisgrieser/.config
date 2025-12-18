@@ -14,11 +14,11 @@ function alfredMatcher(str) {
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
-	const docsURL = "https://api.github.com/repos/wez/wezterm/git/trees/main?recursive=1";
-	const baseURL = "https://wezterm.org";
+	const docsUrl = "https://api.github.com/repos/wez/wezterm/git/trees/main?recursive=1";
+	const baseUrl = "https://wezterm.org";
 	const docPathRegex = /^docs\/.*\.md$/i;
 
-	const workArray = JSON.parse(app.doShellScript(`curl -sL "${docsURL}"`))
+	const workArray = JSON.parse(app.doShellScript(`curl -sL "${docsUrl}"`))
 		.tree.filter((/** @type {{ path: string; }} */ file) => docPathRegex.test(file.path))
 		.reverse()
 		.map((/** @type {{ path: string }} */ entry) => {
@@ -26,7 +26,7 @@ function run() {
 			const parts = entryPath.split("/");
 			const title = parts.pop() || "??";
 			const category = parts.join("/");
-			const url = `${baseURL}/${entryPath}`;
+			const url = `${baseUrl}/${entryPath}`;
 
 			return {
 				title: title,

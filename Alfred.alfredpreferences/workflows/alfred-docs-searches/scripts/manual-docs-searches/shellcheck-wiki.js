@@ -8,18 +8,18 @@ app.includeStandardAdditions = true;
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
-	const baseURL = "https://www.shellcheck.net/wiki/";
+	const baseUrl = "https://www.shellcheck.net/wiki/";
 	const ahrefRegex = /.*?href='(.*?)'>.*?<\/a>(.*?)(<\/li>|$)/i;
 
 	const jsonArr = app
-		.doShellScript(`curl -sL '${baseURL}'`)
+		.doShellScript(`curl --silent --location '${baseUrl}'`)
 		.split("\r")
 		.slice(3, -1)
-		.map((/** @type {string} */ line) => {
+		.flatMap((/** @type {string} */ line) => {
 			const title = line.replace(ahrefRegex, "$1");
-			if (title === "</li>") return {};
+			if (title === "</li>") return [];
 			const desc = line.replace(ahrefRegex, "$2").replaceAll("&ndash;", "").trim();
-			const url = baseURL + title;
+			const url = baseUrl + title;
 
 			// if rule with number, add the number alone to the matcher as well
 			const hasNumber = title.match(/\d{4}$/);

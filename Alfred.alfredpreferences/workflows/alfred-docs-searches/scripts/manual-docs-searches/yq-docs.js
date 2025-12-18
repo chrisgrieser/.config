@@ -6,8 +6,8 @@ app.includeStandardAdditions = true;
 
 /** @param {string} url @return {string} */
 function httpRequest(url) {
-	const queryURL = $.NSURL.URLWithString(url);
-	const data = $.NSData.dataWithContentsOfURL(queryURL);
+	const queryUrl = $.NSURL.URLWithString(url);
+	const data = $.NSData.dataWithContentsOfURL(queryUrl);
 	return $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding).js;
 }
 //──────────────────────────────────────────────────────────────────────────────
@@ -15,11 +15,11 @@ function httpRequest(url) {
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
-	const docsURL = "https://api.github.com/repos/mikefarah/yq/git/trees/master?recursive=1";
-	const baseURL = "https://mikefarah.gitbook.io/yq";
+	const docsUrl = "https://api.github.com/repos/mikefarah/yq/git/trees/master?recursive=1";
+	const baseUrl = "https://mikefarah.gitbook.io/yq";
 	const docPathRegex = /^pkg\/yqlib\/doc\/(.*)\.md$/i;
 
-	const workArray = JSON.parse(httpRequest(docsURL)).tree.map(
+	const workArray = JSON.parse(httpRequest(docsUrl)).tree.map(
 		(/** @type {{ path: string; }} */ entry) => {
 			const path = entry.path;
 			if (
@@ -32,7 +32,7 @@ function run() {
 
 			const subsite = path.replace(docPathRegex, "$1");
 			const [category, title] = subsite.split("/");
-			const url = `${baseURL}/${subsite}`;
+			const url = `${baseUrl}/${subsite}`;
 
 			return {
 				title: title.replaceAll("-", " "),
