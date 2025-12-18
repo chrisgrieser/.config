@@ -16,8 +16,8 @@ disable = [
 style = "sublist"
 
 [MD013]  # line-length
-tables = false
-code_block_line_length = 90
+reflow = true
+reflow-mode = "default"  # Reflow mode: "default", "normalize", or "sentence-per-line" (default: "default")
 
 [MD022]  # blanks-around-headings
 lines-below = 0  # rule of proximity
