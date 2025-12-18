@@ -23,7 +23,7 @@ return {
 				msg = msg .. "  "
 				nOpts.icon = "󰊢 "
 				nOpts.id = "gitsigns"
-			elseif msg:find("^%[nvim%-treesitter%]") then -- treesitter parser update
+			elseif msg:find("^%[nvim%-treesitter/") then -- treesitter parser update
 				nOpts.id = "treesitter-parser-update"
 			end
 			Snacks.notifier(msg, lvl, nOpts)
