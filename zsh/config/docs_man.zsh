@@ -25,14 +25,3 @@ function man() {
 }
 
 #───────────────────────────────────────────────────────────────────────────────
-
-# CHEAT.SH
-# aggregates stackoverflow, tl;dr and many other help pages
-# DOCS https://cht.sh/:help
-function cht() {
-	# `curl cht.sh/:styles-demo`
-	style=$(defaults read -g AppleInterfaceStyle &> /dev/null && echo "monokai" || echo "trac")
-
-	query=${*// /-} # dash as separator for subcommands, e.g. git-rebase
-	curl -s "https://cht.sh/$query?style=$style"
-}

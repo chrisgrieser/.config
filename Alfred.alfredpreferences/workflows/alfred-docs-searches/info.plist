@@ -281,6 +281,39 @@
 				<false/>
 			</dict>
 		</array>
+		<key>58CAB13F-C33D-41E4-8863-59C2B4C9A7D0</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>A6A588B4-6474-4862-B661-C38931F307FA</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>70C4F79D-D608-41A7-B2FF-723F59D79DDF</string>
+				<key>modifiers</key>
+				<integer>524288</integer>
+				<key>modifiersubtext</key>
+				<string>⌥: Copy URL</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>EBAA70B7-71C8-4932-8966-6907AA7FCE8C</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>⌘: Copy text</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>5A2D4239-FC30-482F-831B-D2E261B44B7F</key>
 		<array>
 			<dict>
@@ -1974,11 +2007,60 @@ curl -sL "https://raw.githubusercontent.com/chrisgrieser/alfred-docs-searches/ma
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>2</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>tldr</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>loading…</string>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>scripts/manual-docs-searches/search-tldr.js</string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>tldr: {query}</string>
+				<key>type</key>
+				<integer>8</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>58CAB13F-C33D-41E4-8863-59C2B4C9A7D0</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>## DevDocs
 Enable the devdocs you want to use in the workflow configuration. The
-enabled devdocs are searched by using the name as keyword, for example `haskell
+enabled DevDocs are searched by using the name as keyword, for example `haskell
 foobar` to search the Haskell DevDocs for "foobar."
 
 A few common languages have short-hands noted in the popup selection, such as
@@ -1991,7 +2073,7 @@ A few common languages have short-hands noted in the popup selection, such as
 
 ### Pinning specific versions
 1. In the workflow configuration, go to the `pinned devdocs versions` section.
-   (Depending on your screen height, you might need to scroll down.)
+   (Depending on your screen height, you might have to scroll down.)
 2. The versions available are listed under the key `slug` in [this json
    file](https://devdocs.io/docs.json).
 3. The replacements take the form `alfred_keyword:pinned_version`, one version
@@ -2025,6 +2107,7 @@ the directory `./devdocs/icons/{keyword}.png`. PRs are welcome.
 - `odd`: Obsidian developer docs
 - `ddg`: DuckDuckGo help pages
 - `man`: man pages (and their options) at [mankier](https://www.mankier.com/)
+- `tldr`: tldr.sh
 
 ### Utilities
 - `color`: named CSS colors
@@ -2212,6 +2295,15 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>30</real>
 			<key>ypos</key>
 			<real>525</real>
+		</dict>
+		<key>58CAB13F-C33D-41E4-8863-59C2B4C9A7D0</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>1395</real>
 		</dict>
 		<key>5A2D4239-FC30-482F-831B-D2E261B44B7F</key>
 		<dict>
