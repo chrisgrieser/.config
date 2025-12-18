@@ -12,18 +12,17 @@ disable = [
   "MD041",  # first-line-h1: ignore-comments for linters can be in the first line
 ]
 
+# ------------------------------------------------------------------------------
+
 [MD004]  # ul-style
 style = "sublist"
 
 [MD013]  # line-length
 reflow = true
-reflow-mode = "default"  # Reflow mode: "default", "normalize", or "sentence-per-line" (default: "default")
+reflow-mode = "default"  # default|normalize|sentence-per-line
 
 [MD022]  # blanks-around-headings
 lines-below = 0  # rule of proximity
 
 [MD029]  # ol-prefix
 style = "ordered"
-
-[MD033]  # no-inline-html
-allowed-elements = ["img", "details", "summary", "kbd", "a"]
