@@ -23,8 +23,9 @@ function do_backup {
 # HELPER FUNCTIONS
 
 function _pretty_header() {
-	echo
-	defaults read -g AppleInterfaceStyle &> /dev/null && fg="\e[1;38;5;232m" || fg="\e[1;37m"
+	light_fg="\e[1;38;5;255m" # force white
+	dark_fg="\e[1;30m"
+	fg=$(defaults read -g AppleInterfaceStyle &> /dev/null && echo "$dark_fg" || echo "$light_fg")
 	bg="\e[1;44m"
 	[[ "$2" == "special" ]] && bg="\e[1;45m"
 	print "$fg$bg $1 \e[0m"
