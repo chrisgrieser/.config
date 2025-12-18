@@ -44,7 +44,7 @@ local function openNotif(idx)
 	local winhighlights = table.concat(highlights, ",")
 
 	-- create win with snacks API
-	Snacks.win {
+	local win = Snacks.win {
 		text = lines,
 		height = height,
 		width = width,
@@ -76,6 +76,9 @@ local function openNotif(idx)
 			end,
 		},
 	}
+	vim.api.nvim_win_call(win.win, function()
+		-- vim.fn.matchadd("WarningMsg", "")
+	end)
 end
 
 --------------------------------------------------------------------------------
