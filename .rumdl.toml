@@ -4,17 +4,13 @@
 [global]
 line-length = 80
 disable = [
-  "MD007",  # ul-indent: not compatible with using tabs
-  "MD010",  # no-hard-tabs: taken care of by .editorconfig
   "MD032",  # blanks-around-lists: space waster
-  "MD036",  # no-emphasis-as-heading: sometimes useful
-  "MD041",  # first-line-h1: ignore-comments for linters can be in the first line
 ]
 
 # ------------------------------------------------------------------------------
 
-[MD004]  # ul-style
-style = "consistent"  # sublist expects `*` first, unfortunately
+[MD007] # ul-indent
+indent = 4  # consistent with .editorconfig
 
 [MD013]  # line-length
 code-blocks = false

@@ -17,7 +17,7 @@ function httpRequest(url) {
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
 	const docsUrl = "https://raw.githubusercontent.com/rvben/rumdl/refs/heads/main/docs/RULES.md";
-	const baseUrl = "https://github.com/rvben/rumdl/tree/main/docs";
+	const baseUrl = "https://github.com/rvben/rumdl/blob/main/docs";
 
 	const workArray = httpRequest(docsUrl)
 		.split("\n")

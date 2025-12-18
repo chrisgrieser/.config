@@ -80,10 +80,4 @@ vim.api.nvim_create_autocmd("InsertLeave", {
 	end,
 })
 
--- fix line-length violations reported by markdownlint
-bkeymap("n", "#", function()
-	vim.diagnostic.jump { count = 1 }
-	vim.defer_fn(function() vim.cmd.normal { "gw}", bang = true } end, 1)
-end, { desc = " hard-wrap next line-length violation" })
-
 --------------------------------------------------------------------------------

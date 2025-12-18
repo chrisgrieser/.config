@@ -41,7 +41,7 @@ return {
 			},
 			["markdown-toc"] = {
 				-- order used by markdownlint's `unordered-style: sublist`
-				prepend_args = { "--bullets", "-", "--bullets", "+", "--bullets", "*" },
+				prepend_args = { "--bullets", "-" },
 
 				-- FIX frontmatter being affected https://github.com/jonschlinkert/markdown-toc/issues/151
 				condition = function(_self, ctx)
