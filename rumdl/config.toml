@@ -1,0 +1,29 @@
+# DOCS https://github.com/rvben/rumdl/blob/main/docs/global-settings.md
+# ------------------------------------------------------------------------------
+
+[global]
+flavor = "standard"
+line-length = 80
+disable = [
+  "MD007",  # ul-indent: not compatible with using tabs
+  "MD010",  # no-hard-tabs: taken care of by .editorconfig
+  "MD032",  # blanks-around-lists: space waster
+  "MD036",  # no-emphasis-as-heading: sometimes useful
+  "MD041",  # first-line-h1: ignore-comments for linters can be in the first line
+]
+
+[MD004]  # ul-style
+style = "sublist"
+
+[MD013]  # line-length
+tables = false
+code_block_line_length = 90
+
+[MD022]  # blanks-around-headings
+lines-below = 0  # rule of proximity
+
+[MD029]  # ol-prefix
+style = "ordered"
+
+[MD033]  # no-inline-html
+allowed-elements = ["img", "details", "summary", "kbd", "a"]
