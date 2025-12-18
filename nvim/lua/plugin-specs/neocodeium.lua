@@ -41,30 +41,19 @@ return {
 	end,
 	keys = {
 		{ "<leader>oa", function() vim.cmd.NeoCodeium("toggle") end, desc = "󰚩 NeoCodeium" },
-		{ "<leader>an", function() vim.cmd.NeoCodeium("restart") end, desc = "󰚩 NeoCodeium restart" },
+		-- stylua: ignore start
+		{ "<D-s>", function() require("neocodeium").accept() end, mode = "i", desc = "󰚩 Accept full suggestion" },
+		{ "<D-S>", function() require("neocodeium").accept_word() end, mode = "i", desc = "󰚩 Accept word" },
+		{ "<D-a>", function() require("neocodeium").cycle_or_complete(1) end, mode = "i", desc = "󰚩 Next suggestion" },
+		{ "<D-A>", function() require("neocodeium").cycle_or_complete(-1) end, mode = "i", desc = "󰚩 Prev suggestion" },
+		-- stylua: ignore end
 		{
-			"<D-s>",
-			function() require("neocodeium").accept() end,
-			mode = "i",
-			desc = "󰚩 Accept full suggestion",
-		},
-		{
-			"<D-S>",
-			function() require("neocodeium").accept_word() end,
-			mode = "i",
-			desc = "󰚩 Accept word",
-		},
-		{
-			"<D-a>",
-			function() require("neocodeium").cycle_or_complete(1) end,
-			mode = "i",
-			desc = "󰚩 Next suggestion",
-		},
-		{
-			"<D-A>",
-			function() require("neocodeium").cycle_or_complete(-1) end,
-			mode = "i",
-			desc = "󰚩 Prev suggestion",
+			"<leader>an",
+			function()
+				vim.cmd.NeoCodeium("restart")
+				vim.notify("Restarting…", nil, { title = "NeoCodeium", icon = "󰚩" })
+			end,
+			desc = "󰚩 NeoCodeium restart",
 		},
 	},
 }

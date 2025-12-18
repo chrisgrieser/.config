@@ -5,9 +5,11 @@ description: Explain how code in a buffer works
 opts:
   alias: explain_
   auto_submit: true
-  modes: [v]
+  modes:
+    - v
   stop_context_insertion: true
 ---
+
 ## System
 You are an expert ${context.filetype} programmer who excels at explaining code
 clearly and concisely.

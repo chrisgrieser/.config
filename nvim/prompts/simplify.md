@@ -5,7 +5,8 @@ description: Simplify while retaining readability
 opts:
   alias: simplify
   placement: replace
-  modes: [v]
+  modes:
+    - v
   auto_submit: true
 ---
 

@@ -82,10 +82,7 @@ local function postRequestHook()
 				if ok then conform.format { bufnr = ctx.buf } end
 			end
 			local ok2, gitsigns = pcall(require, "gitsigns")
-			if ok2 and useGitSignsInlineDiff then
-				require("gitsigns.config").config.show_deleted = true
-				gitsigns.setup { linehl = true, word_diff = true }
-			end
+			if ok2 and useGitSignsInlineDiff then gitsigns.preview_hunk_inline() end
 		end),
 	})
 end
@@ -118,9 +115,10 @@ local ccSpec = {
 		{ "q", "<cmd>CodeCompanionChat toggle<CR>", ft = "codecompanion", nowait = true, desc = " Close chat" },
 		{ "<leader>aa", ":CodeCompanion<CR>", mode = "x", desc = " 󰘎 Prompt" },
 
+		-- needs to be `explain_` and `fix_` to not use the builtins
 		-- stylua: ignore start
-		-- needs to be `explain_` to not use the builtin `explain`
 		{ "<leader>ae", function() require("codecompanion").prompt("explain_") end, mode = "x", desc = " Explain" },
+		{ "<leader>af", function() require("codecompanion").prompt("fix_") end, mode = "x", desc = " Fix" },
 		{ "<leader>as", function() require("codecompanion").prompt("simplify") end, mode = "x", desc = " Simplify" },
 		{ "<leader>ap", function() require("codecompanion").prompt("proofread") end, mode = "x", desc = " Proofread" },
 		-- stylua: ignore end

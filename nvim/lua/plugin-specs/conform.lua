@@ -35,6 +35,9 @@ return {
 					},
 				},
 			},
+			yq = {
+				args = { "--prettyPrint", '... style="flow"', "-" },
+			},
 			shellcheck = {
 				-- add `--shell=bash` to force to work with `zsh`
 				args = "'$FILENAME' --format=diff --shell=bash | patch -p1 '$FILENAME'",

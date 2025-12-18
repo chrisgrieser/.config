@@ -58,19 +58,19 @@ _escape_on_empty_buffer() {
 	local selected
 	# no need for `--sortr=modified`, since using `eza --sort=oldest` afterwards
 	local rg_cmd="rg --no-config --follow --files --ignore-file='$HOME/.config/ripgrep/ignore'"
+	# sed to remove `->` symlink indicator
+	local eza_cmd="eza --color=always --icons=always --sort=oldest --no-quotes | sed 's/ [^ ]*->.*//'"
 
 	selected=$(
-		zsh -c "$rg_cmd" |
-			eza --stdin --color=always --icons=always --sort=oldest --no-quotes |
-			sed 's/ [^ ]*->.*//' | # remove symlink target from eza's output
-			fzf --ansi --multi --scheme=path --tiebreak=length,end \
-				--info=inline --height="50%" \
-				--header="^H: include hidden, ⌘L: reveal in Finder" \
-				--bind="ctrl-h:change-header(including hidden files)+reload($rg_cmd \
+		zsh -c "$rg_cmd" | zsh -c "$eza_cmd" | fzf \
+			--ansi --multi --scheme=path --tiebreak=length,end \
+			--info=inline --height="50%" \
+			--header="^H: include hidden, ⌘L: reveal in Finder" \
+			--bind="ctrl-h:change-header(including hidden files)+reload($rg_cmd \
 				--hidden --no-ignore --no-ignore-files \
 				--glob='!/.git/' --glob='!node_modules' --glob='!__pycache__' --glob='!.DS_Store' |
-				eza --stdin --color=always --icons=always --sort=oldest --no-quotes)" \
-				--expect="ctrl-l" # remapped in terminal app to `cmd+l`
+				$eza_cmd)" \
+			--expect="ctrl-l"
 	)
 	zle reset-prompt
 	[[ -z "$selected" ]] && return 0

@@ -5,7 +5,8 @@ description: Proofread natural language text
 opts:
   alias: proofread
   placement: replace
-  modes: [v]
+  modes:
+    - v
   auto_submit: true
   ignore_system_prompt: true
   adapter:
