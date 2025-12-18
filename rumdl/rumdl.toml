@@ -18,6 +18,7 @@ disable = [
 style = "consistent"  # sublist expects `*` first, unfortunately
 
 [MD013]  # line-length
+code-blocks = false
 reflow = true  # enable auto-formatting
 reflow-mode = "default"  # default|normalize|sentence-per-line
 
@@ -29,7 +30,3 @@ style = "ordered"
 
 [MD063]  # heading-capitalization
 style = "sentence_case"
-
-[per-file-ignores]
-"**/README.md" = ["MD033"]  # Allow inline HTML in README
-"./nvim/README.md" = ["MD033"]  # Allow inline HTML in README

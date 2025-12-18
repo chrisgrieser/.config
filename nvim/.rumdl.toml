@@ -1,0 +1,2 @@
+[MD033]  # inline-html
+allowed-elements = ["a", "img"]  # badges

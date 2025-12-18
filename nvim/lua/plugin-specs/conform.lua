@@ -10,7 +10,7 @@ return {
 	},
 	opts = {
 		log_level = vim.log.levels.WARN, -- for `ConformInfo`
-		default_format_opts = { lsp_format = "first" },
+		default_format_opts = { lsp_format = "last" },
 		formatters_by_ft = {
 			markdown = { "markdown-toc", "injected" },
 			python = { "ruff_fix", "ruff_organize_imports" },

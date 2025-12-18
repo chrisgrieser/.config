@@ -23,7 +23,7 @@ alias unmark_commit="git tag --delete 'mark'"
 
 #-HELPERS-----------------------------------------------------------------------
 
-function gh { # to not expose GITHUB_TOKEN
+function gh { # to not expose `GITHUB_TOKEN`
 	_export_github_token
 	command gh "$@"
 }
