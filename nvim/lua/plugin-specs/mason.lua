@@ -3,6 +3,10 @@
 -- 1. uncomment personal registry in mason's `opts`
 -- 2. copy mason registry spec with desired version to `personal-mason-registry`
 --------------------------------------------------------------------------------
+-- PENDING https://github.com/mason-org/mason-registry/pull/12811
+vim.lsp.enable("rumdl")
+
+--------------------------------------------------------------------------------
 
 local ensureInstalled = {
 	lsps = {

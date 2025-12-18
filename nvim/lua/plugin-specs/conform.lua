@@ -12,7 +12,7 @@ return {
 		log_level = vim.log.levels.WARN, -- for `ConformInfo`
 		default_format_opts = { lsp_format = "first" },
 		formatters_by_ft = {
-			markdown = { "no-blank-after-heading", "markdown-toc", "markdownlint", "injected" },
+			markdown = { "markdown-toc", "injected" },
 			python = { "ruff_fix", "ruff_organize_imports" },
 			zsh = { "shell-home", "shellcheck" },
 			json = { lsp_format = "prefer", "jq" }, -- use `biome` (via LSP), with `jq` as fallback
@@ -35,9 +35,6 @@ return {
 					},
 				},
 			},
-			yq = {
-				args = { "--prettyPrint", '... style="flow"', "-" },
-			},
 			shellcheck = {
 				-- add `--shell=bash` to force to work with `zsh`
 				args = "'$FILENAME' --format=diff --shell=bash | patch -p1 '$FILENAME'",
@@ -57,20 +54,6 @@ return {
 				end,
 			},
 			---MY CUSTOM FORMATTERS------------------------------------------------
-			["no-blank-after-heading"] = {
-				format = function(_self, _ctx, lines, callback)
-					local filtered = {}
-					for ln = 1, #lines do
-						local prevLine = lines[ln - 1] or ""
-						local nextLine = lines[ln + 1] or ""
-						local skip = prevLine:find("^#+ ")
-							and lines[ln] == ""
-							and not (nextLine:find("^#+ ") or nextLine:find("^```"))
-						if not skip then table.insert(filtered, lines[ln]) end
-					end
-					callback(nil, filtered)
-				end,
-			},
 			["shell-home"] = { -- replace `/Users/…` or `~` with `$HOME/`
 				format = function(_self, _ctx, lines, callback)
 					local function replace(line)

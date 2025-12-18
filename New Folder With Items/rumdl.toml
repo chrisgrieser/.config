@@ -15,10 +15,10 @@ disable = [
 # ------------------------------------------------------------------------------
 
 [MD004]  # ul-style
-style = "sublist"
+style = "consistent"  # sublist expects `*` first, unfortunately
 
 [MD013]  # line-length
-reflow = true
+reflow = true  # enable auto-formatting
 reflow-mode = "default"  # default|normalize|sentence-per-line
 
 [MD022]  # blanks-around-headings
@@ -26,3 +26,10 @@ lines-below = 0  # rule of proximity
 
 [MD029]  # ol-prefix
 style = "ordered"
+
+[MD063]  # heading-capitalization
+style = "sentence_case"
+
+[per-file-ignores]
+"**/README.md" = ["MD033"]  # Allow inline HTML in README
+"./nvim/README.md" = ["MD033"]  # Allow inline HTML in README
