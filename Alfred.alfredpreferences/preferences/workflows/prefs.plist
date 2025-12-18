@@ -27,5 +27,7 @@ Get PLACEHOLDER the `KEYWORD` keyword.
 	<true/>
 	<key>showCanvasHints</key>
 	<false/>
+	<key>showResolvedVariables</key>
+	<false/>
 </dict>
 </plist>

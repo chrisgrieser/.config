@@ -10,6 +10,7 @@ function httpRequest(url) {
 	const data = $.NSData.dataWithContentsOfURL(queryUrl);
 	return $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding).js;
 }
+
 //──────────────────────────────────────────────────────────────────────────────
 
 /** @type {AlfredRun} */
@@ -21,7 +22,7 @@ function run() {
 	const workArray = JSON.parse(httpRequest(docsUrl)).tree.flatMap(
 		(/** @type {{ path: string; }} */ entry) => {
 			const path = entry.path;
-			const [_, category, cli] = path.match(/\/(osx|common)\/([^/]+)\.md$/) || [];
+			const [_, category, cli] = path.match(/\/(osx|common)\/(.+)\.md$/) || [];
 			if (!category || !cli) return [];
 
 			const url = `${baseUrl}/${category}/${cli}`;

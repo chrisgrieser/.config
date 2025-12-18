@@ -453,6 +453,39 @@
 		</array>
 		<key>A89D07AD-BB4E-4D63-B7B7-DDB763334AEC</key>
 		<array/>
+		<key>AB52210D-B2C6-4394-A498-0071400B3AB9</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>A6A588B4-6474-4862-B661-C38931F307FA</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>70C4F79D-D608-41A7-B2FF-723F59D79DDF</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string>⌥: Copy URL</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>EBAA70B7-71C8-4932-8966-6907AA7FCE8C</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>⌘: Copy text</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>B88D572C-2770-41B2-B7BD-FF771975A4E8</key>
 		<array>
 			<dict>
@@ -2011,7 +2044,7 @@ curl -sL "https://raw.githubusercontent.com/chrisgrieser/alfred-docs-searches/ma
 			<key>config</key>
 			<dict>
 				<key>alfredfiltersresults</key>
-				<false/>
+				<true/>
 				<key>alfredfiltersresultsmatchmode</key>
 				<integer>2</integer>
 				<key>argumenttreatemptyqueryasnil</key>
@@ -2053,6 +2086,55 @@ curl -sL "https://raw.githubusercontent.com/chrisgrieser/alfred-docs-searches/ma
 			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
 			<string>58CAB13F-C33D-41E4-8863-59C2B4C9A7D0</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>2</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>rumdl</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>loading…</string>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>scripts/manual-docs-searches/rumdl-rules.js</string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>rumdl rules: {query}</string>
+				<key>type</key>
+				<integer>8</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>AB52210D-B2C6-4394-A498-0071400B3AB9</string>
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
@@ -2107,7 +2189,8 @@ the directory `./devdocs/icons/{keyword}.png`. PRs are welcome.
 - `odd`: Obsidian developer docs
 - `ddg`: DuckDuckGo help pages
 - `man`: man pages (and their options) at [mankier](https://www.mankier.com/)
-- `tldr`: tldr.sh
+- `tldr`: tl;dr pages
+- `rumdl`: rumdl rules
 
 ### Utilities
 - `color`: named CSS colors
@@ -2429,6 +2512,15 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>730</real>
 			<key>ypos</key>
 			<real>480</real>
+		</dict>
+		<key>AB52210D-B2C6-4394-A498-0071400B3AB9</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>1510</real>
 		</dict>
 		<key>B88D572C-2770-41B2-B7BD-FF771975A4E8</key>
 		<dict>
@@ -40119,7 +40211,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>2.22.0</string>
+	<string>2.23.0</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>

@@ -10,34 +10,38 @@ function httpRequest(url) {
 	const data = $.NSData.dataWithContentsOfURL(queryUrl);
 	return $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding).js;
 }
+
 //──────────────────────────────────────────────────────────────────────────────
 
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
-	const docsUrl = "https://api.github.com/repos/rvben/rumdl/git/trees/main?recursive=1";
+	const docsUrl = "https://raw.githubusercontent.com/rvben/rumdl/refs/heads/main/docs/RULES.md";
 	const baseUrl = "https://github.com/rvben/rumdl/tree/main/docs";
 
-	const workArray = JSON.parse(httpRequest(docsUrl)).tree.flatMap(
-		(/** @type {{ path: string; }} */ entry) => {
-			const path = entry.path;
-			const [_, page] = path.match(/\/(osx|common)\/([^/]+)\.md$/) || []
-			if (!page) return [];
+	const workArray = httpRequest(docsUrl)
+		.split("\n")
+		.flatMap((line) => {
+			const [_, id, name, desc] =
+				line.match(/^\|.*?(MD\d{3}).*?\| *(.*?) *\| *(.*?) *\|$/) || [];
+			if (!(id && name && desc)) return [];
 
-			const url = `${baseUrl}/${category}/${cli}`;
+			const url = `${baseUrl}/${id.toLowerCase()}.md`;
+			const num = id.match(/\d\d$/)?.[0] || "";
+			const subtitle = desc === name ? id : `${id}: ${desc}`;
 
 			return {
-				title: cli,
-				subtitle: category,
+				title: name,
+				subtitle: subtitle,
+				match: [id, num, name].join(" "),
 				mods: {
-					cmd: { arg: cli }, // copy entry
+					cmd: { arg: id }, // copy entry
 				},
 				arg: url,
 				quicklookurl: url,
-				uid: cli,
+				uid: id,
 			};
-		},
-	);
+		});
 
 	return JSON.stringify({
 		items: workArray,
