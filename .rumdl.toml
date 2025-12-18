@@ -5,11 +5,12 @@
 line-length = 80
 disable = [
   "MD032",  # blanks-around-lists: space waster
+  "MD041",  # first-line-h1: not useful here
 ]
 
 # ------------------------------------------------------------------------------
 
-[MD007] # ul-indent
+[MD007]  # ul-indent
 indent = 4  # consistent with .editorconfig
 
 [MD013]  # line-length
@@ -28,4 +29,3 @@ allowed-elements = ["a", "img"]  # badges
 
 [MD063]  # heading-capitalization
 style = "sentence_case"
-

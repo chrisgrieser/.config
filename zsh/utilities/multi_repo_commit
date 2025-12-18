@@ -11,10 +11,16 @@ repo_names="alfred|shimmering-obsidian|gitfred"
 # repo_names="finder-vim-mode|zsh-magic-dashboard|nvim|alfred|shimmering-obsidian|gitfred|obsidian-quadro|pseudometa-obsidian-plugin-template|grappling-hook|obsidian-proofreader"
 
 function actions_in_repo {
-	cp -f "$HOME/Desktop/.rsync-exclude" ".rsync-exclude"
+	# rm -f ./.github/workflows/markdownlint.yml
+	# rm -f ./.markdownlint.yaml
+	cp -f "$HOME/Desktop/.rumdl.toml" .
+	# cp -f "$HOME/Desktop/.editorconfig" .
+	# cp -f "$HOME/Desktop/markdown-linting.yml" "./.github/workflows/markdown-linting.yml"
+	# cp -f "$HOME/Desktop/pull_request_template.md" "./.github/pull_request_template.md"
+	# rumdl fmt
 }
 
-commit_msg="ci: update .rsync-exclude"
+commit_msg="ci: remove now obsolete markdownlint GitHub action"
 
 _export_github_token # defined in .zshenv
 
@@ -70,11 +76,10 @@ while read -r repo; do
 	actions_in_repo
 
 	# COMMIT
-	git add --all && git commit -m "$commit_msg" && git push --no-progress
+	# git add --all && git commit -m "$commit_msg" && git push --no-progress
 
 	# WARN AMEND
-	# git push --no-progress --force
-	# git add --all && git commit --amend --no-edit && git push --no-progress --force
+	git add --all && git commit --amend --no-edit && git push --no-progress --force
 
 	success=$?
 	if [[ $success -ne 0 ]]; then

@@ -1,7 +1,7 @@
 ## Tutorials
-- [Pandoc and Obsidian - Create slideshows, PDFs and Word documents - Obsidian Publish](https://publish.obsidian.md/hub/04+-+Guides%2C+Workflows%2C+%26+Courses/Community+Talks/YT+-+Pandoc+and+Obsidian+-+Create+slideshows%2C+PDFs+and+Word+documents)
+- [Pandoc and Obsidian - Create slideshows, PDFs and Word documents](https://publish.obsidian.md/hub/04+-+Guides%2C+Workflows%2C+%26+Courses/Community+Talks/YT+-+Pandoc+and+Obsidian+-+Create+slideshows%2C+PDFs+and+Word+documents)
 
-**Lingo**
+> **Lingo**
 > defaults = configs  
 > extensions = filetype-specific settings  
 > reference-docs = templates  
@@ -19,11 +19,6 @@ pandoc --list-extensions=markdown
 
 ## Tools
 - Most user-friendly: [docdown](https://github.com/lowercasename/docdown)
-- [Shell Commands Plugin in Obsidian](https://github.com/Taitava/obsidian-shellcommands) with this code:
-
-```bash
-export PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH ; {{folder_path:absolute}}/{{file_name}} -o {{folder_path:absolute}}/{{title}}.docx --citeproc --bibliography=/Users/matt/Documents/zotero.bib --csl=/Users/matt/Documents/apa.csl --reference-doc=/Users/matt/Documents/essay-template2.docx
-```
 
 ## Handling Bibliography
 
@@ -57,13 +52,15 @@ nocite: @one, @two
 pandoc "My Library.bib" -t csljson -o "bibtexjson.json"
 ```
 
-## Resolving Citations
-Use Pandoc solely as citation resolver, without changing the format (i.e., markdown as input and output file):
+## Resolving citations
+Use Pandoc solely as citation resolver, without changing the format (i.e.,
+Markdown as input and output file):
 
 ```bash
 # https://superuser.com/a/1161832
 # https://stackoverflow.com/a/68933915/22114136
-pandoc --citeproc --bibliography="$HOME/.pandoc/bibliography.bib" input.md -o output.md --to=markdown-citations --metadata="suppress-bibliography:true"
+pandoc --citeproc --bibliography="$HOME/.pandoc/bibliography.bib" \
+    input.md -o output.md --to=markdown-citations --metadata="suppress-bibliography:true"
 ```
 
 ```bash
@@ -74,9 +71,11 @@ pandoc intermediate.json -t gfm -o output.md -s
 ```
 
 ## Priority of Options
+
 **Higher overwrites lower**
 1. Direct CLI arguments
-2. Arguments from the defaults-file (`--defaults`) (default location: `~/.pandoc/defaults`)
+2. Arguments from the defaults-file (`--defaults`) (default location:
+   `~/.pandoc/defaults`)
 3. Another defaults file imported in the defaults file. (`defaults: entry`)
 4. Metadata set as CLI argument (`--metadata`)
 5. YAML of the Document (in the docs referred to as "Metadata")
@@ -84,22 +83,43 @@ pandoc intermediate.json -t gfm -o output.md -s
 
 > Options specified in a defaults file itself always have priority over those in another file included with a `defaults: entry`.  
 > –[Pandoc Docs](https://pandoc.org/MANUAL.html#defaults-files)
-
+>
 > `--metadata=KEY[:VAL]`: (…) A value specified on the command line overrides a value specified in the document using YAML metadata blocks. (…)  
 > `--metadata-file=FILE`: (…) Generally, the input will be handled the same as in YAML metadata blocks. This option can be used repeatedly to include multiple metadata files; values in files specified later on the command line will be preferred over those specified in earlier files. Metadata values specified inside the document, or by using -M, overwrite values specified with this option.  
 > –[Pandoc Docs](https://pandoc.org/MANUAL.html#option--metadata)
 
 ## How Templating works
-> yeah, the pandoc docs aren't really good in explaining templates. For odt, pptx, and docs, pandoc calls templates "reference documents" (`--reference-doc`), where you style a docx (etc) document and when selected as reference for a docx output, the output gets styled the same way as that document.
+> yeah, the pandoc docs aren't really good in explaining templates. For odt,
+> `pptx,` and docs, pandoc calls templates "reference documents"
+> (`--reference-doc`), where you style a `docx` document and when selected
+> as reference for a `docx` output, the output gets styled the same way as that
+> document.
 >
-> for *all* other output formats you need actual templates (`--template`), which depend on the output format (html template + css for html output, etc.). Most notoriously, for a PDF output, the type of template you need depends on the pdf-engine (`--pdf-engine`) you use are using, since pandoc does not directly convert to pdf, but converts to PDF via something like an "intermediate format". In most cases, it's either a html-based pdf-engine (e.g. `wkhtmltopdf`) in which case you need a html and css template (and need to know html and css for that), or a latex-based pdf-engine (e.g. `pdflatex`), in which case the template needs to be written in latex. And to make it even more complicated, in both cases, there are some variables for the templates (e.g., margins) **which** can be set in the yaml-metadata of the markdown document.
+> for *all* other output formats you need actual templates (`--template`), which
+> depend on the output format (HTML template + CSS for HTML output, etc.). Most
+> notoriously, for a PDF output, the type of template you need depends on the
+> PDF-engine (`--pdf-engine`) you use are using, since pandoc does not directly
+> convert to PDF but converts to PDF via something like an "intermediate
+> format". In most cases, it's either a html-based pdf-engine (e.g.
+> `wkhtmltopdf`) in which case you need a html and css template (and need to
+> know html and css for that), or a latex-based pdf-engine (e.g. `pdflatex`), in
+> which case the template needs to be written in latex. And to make it even more
+> complicated, in both cases, there are some variables for the templates (e.g.,
+> margins) **which** can be set in the YAML of the Markdown document.
 >
-> So if you want PDF output, you either have to learn html/css, latex, or simply export to docx (and convert the docx to a pdf), with the latter being probably the easiest approach.
+> So if you want PDF output, you either have to learn HTML/CSS, LaTeX, or simply
+> export to `docx` (and convert the `docx` to a PDF), with the latter being probably
+> the easiest approach.
 
-**Summary**
-- output format is `docx` or `pptx`, you need a reference-document in those formats, where you have pre-applied all your styling. Those concern the templating of the look, the templating of content is limited.
-- output format is `html`, the look of the output is determined by an `html` template (content) and a `css` file (looks)
-- output format is `pdf`, you either need a `latex` template (which determines looks & content) or you need the `html-css`-combination from above. (Different PDF engines use different forms of templates.)
+### Summary
+- output format is `docx` or `pptx`, you need a reference-document in those
+  formats, where you have pre-applied all your styling. Those concern the
+  templating of the look, the templating of content is limited.
+- output format is `html`, the look of the output is determined by an `html`
+  template (content) and a `css` file (looks)
+- output format is `pdf`, you either need a `latex` template (which determines
+  looks & content) or you need the `html-css`-combination from above. (Different
+  PDF engines use different forms of templates.)
 
 ## Useful Snippets
 
@@ -136,15 +156,16 @@ pandoc "my file.docx" --track-changes=all -t markdown | grep -C3 "{\."
 
 ```yaml
 ---
-geometry: "margin=2cm"
+geometry: margin=2cm
 ---
+
 ```
 
 ## Filters
 - [raghur/mermaid-filter: Pandoc filter for creating diagrams in mermaid syntax blocks in markdown docs](https://github.com/raghur/mermaid-filter)
 - Tools for Automatic References
-	+ [url2cite](https://github.com/phiresky/pandoc-url2cite/) ([usage with normal citekeys](https://github.com/phiresky/pandoc-url2cite/issues/10#issuecomment-899101361))
-	+ [manubot](https://github.com/manubot)
+    - [url2cite](https://github.com/phiresky/pandoc-url2cite/) ([usage with normal citekeys](https://github.com/phiresky/pandoc-url2cite/issues/10#issuecomment-899101361))
+    - [manubot](https://github.com/manubot)
 - filters can be written in Lua
 
 > [!INFO] Priority of Filters  
