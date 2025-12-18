@@ -21,6 +21,7 @@ local ensureInstalled = {
 		"typos-lsp", -- spellchecker for code
 		"ltex-ls-plus", -- natural language linter (LanguageTool, ltex fork)
 		"marksman", -- markdown lsp
+		"rumdl", -- modern markdownlint
 		-- "markdown-oxide", -- PENDING https://github.com/Feel-ix-343/markdown-oxide/issues/323
 
 		"basedpyright", -- python lsp (pyright fork)
