@@ -28,7 +28,10 @@ style = "ordered"
 [MD033]  # inline-html
 allowed-elements = ["a", "img"]  # badges
 
-[MD049]  # emphasis style
+[MD049]  # emphasis-style
+style = "asterisk"  # better than underscore, since it's not considered a word-char
+
+[MD050]  # strong-style
 style = "asterisk"  # better than underscore, since it's not considered a word-char
 
 [MD063]  # heading-capitalization

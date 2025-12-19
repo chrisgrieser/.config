@@ -12,20 +12,19 @@ repo_names="alfred|shimmering-obsidian|gitfred"
 
 function actions_in_repo {
 	cp -f "$HOME/Desktop/.rumdl.toml" .
-	rm -f "./.github/workflows/markdown-linting.yml"
-	cp -f "$HOME/Desktop/rumdl-lint.yml" "./.github/workflows/rumdl-lint.yml"
-
-	# rm -f ./.github/workflows/markdownlint.yml
+	rumdl fmt
 	# rm -f ./.markdownlint.yaml
+
+	# cp -f "$HOME/Desktop/rumdl-lint.yml" "./.github/workflows/rumdl-lint.yml"
+	# rm -f ./.github/workflows/markdownlint.yml
+
 	# cp -f "$HOME/Desktop/.editorconfig" .
-	# cp -f "$HOME/Desktop/markdown-linting.yml" "./.github/workflows/markdown-linting.yml"
 	# cp -f "$HOME/Desktop/pull_request_template.md" "./.github/pull_request_template.md"
-	# rumdl fmt
 }
 
 commit_msg="ci: update rumdl config and ci"
 
-amend="false" # WARN
+amend_no_edit="true"
 
 #───────────────────────────────────────────────────────────────────────────────
 #───────────────────────────────────────────────────────────────────────────────
@@ -50,7 +49,7 @@ print "\e[1;34mRepos to update ($repo_count):\e[0m"
 echo "$repos_to_update" | rs
 echo
 
-if [[ "$amend" == "true" ]] ; then
+if [[ "$amend_no_edit" == "true" ]] ; then
 	print "\e[0;33mWARN: Amending to previous commit"
 else
 	print "\e[1;34mCommit message:\e[0m"
@@ -84,15 +83,10 @@ while read -r repo; do
 	actions_in_repo
 
 	# COMMIT/AMEND
-	if [[ "$amend" == "true" ]] ; then
-		# amend_msg="ci: update rumdl.toml"
-		git add --all && 
-			git commit --amend --no-edit && 
-			git push --no-progress --force
+	if [[ "$amend_no_edit" == "true" ]] ; then
+		git add --all && git commit --amend --no-edit && git push --no-progress --force
 	else
-		git add --all && 
-			git commit --message="$commit_msg" && 
-			git push --no-progress
+		git add --all && git commit --message="$commit_msg" && git push --no-progress
 	fi
 
 	success=$?
