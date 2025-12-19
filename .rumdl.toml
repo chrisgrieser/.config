@@ -15,7 +15,6 @@ indent = 4  # consistent with .editorconfig
 [MD013]  # line-length
 code-blocks = false
 reflow = true  # enable auto-formatting
-reflow-mode = "default"  # default|normalize|sentence-per-line
 
 [MD022]  # blanks-around-headings
 lines-below = 0  # rule of proximity

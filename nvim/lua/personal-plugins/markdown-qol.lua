@@ -156,7 +156,7 @@ end
 
 ---@param css string url or absolute path
 function M.previewViaPandoc(css)
-	local outputPath = "mktemp -t example"
+	local outputPath = "/tmp/markdown-preview.html"
 	if vim.fn.executable("pandoc") == 0 then
 		vim.notify("Pandoc not found.", vim.log.levels.WARN)
 		return

@@ -26,9 +26,9 @@ alias gd='git diff'
 ```
 
 ### Inherit completions from a git sub-command
-There are completion functions such as `_git-log`, but those
-are stored in `_git` and are as such only available after `_git` was used at
-least once. Thus, this one will not work:
+There are completion functions such as `_git-log`, but those are stored in
+`_git` and are as such only available after `_git` was used at least once. Thus,
+this one will not work:
 
 ```bash
 function gl {
@@ -38,8 +38,8 @@ compdef _git-log gl
 ```
 
 The solution is to add a file `_gl` to `$FPATH`, since files in `$FPATH` do are
-able to use functions from other completions files. (Note that the `#compdef
-cmd-name` at the top is required.)
+able to use functions from other completions files. (Note that the
+`#compdef cmd-name` at the top is required.)
 
 ```bash
 #compdef gl

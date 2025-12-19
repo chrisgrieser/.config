@@ -22,5 +22,4 @@ Do not change the meaning, make as few changes as possible. The text may contain
 Markdown formatting, which should be preserved when appropriate.
 
 ## User
-The text is:
-${context.code}
+The text is: ${context.code}

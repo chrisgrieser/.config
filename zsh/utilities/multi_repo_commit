@@ -22,12 +22,11 @@ function actions_in_repo {
 
 commit_msg="ci: remove now obsolete markdownlint GitHub action"
 
-amend="false" # WARN
+amend="true" # WARN
 
+#───────────────────────────────────────────────────────────────────────────────
+#───────────────────────────────────────────────────────────────────────────────
 _export_github_token # defined in .zshenv
-
-#───────────────────────────────────────────────────────────────────────────────
-#───────────────────────────────────────────────────────────────────────────────
 
 # GUARD
 if [[ -z "$GITHUB_TOKEN" ]]; then
@@ -83,9 +82,14 @@ while read -r repo; do
 
 	# COMMIT/AMEND
 	if [[ "$amend" == "true" ]] ; then
-		git add --all && git commit --amend --no-edit && git push --no-progress --force
+		# amend_msg="ci: update rumdl.toml"
+		git add --all && 
+			git commit --amend --no-edit && 
+			git push --no-progress --force
 	else
-		git add --all && git commit -m "$commit_msg" && git push --no-progress
+		git add --all && 
+			git commit --message="$commit_msg" && 
+			git push --no-progress
 	fi
 
 	success=$?
