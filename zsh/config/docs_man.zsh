@@ -1,6 +1,6 @@
 # --HELP PAGE
 # colorized
-alias -g H="--help | bat --language=help --style=plain"
+alias -g H="--help | bat --language=help --style=plain --wrap=character"
 ZSH_HIGHLIGHT_REGEXP+=(' H$' 'fg=magenta,bold')
 
 #───────────────────────────────────────────────────────────────────────────────

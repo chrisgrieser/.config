@@ -38,9 +38,9 @@ local function workLayout(shouldDarkenDisplay)
 	-- open things
 	u.openApps { "Mona", "AlfredExtraPane", "Gmail", isWorkWeek() and "Slack" or nil }
 	u.defer(1, function()
-		wu.moveResize("Mona", wu.toTheSide)
 		wu.moveResize("Gmail", wu.pseudoMax)
 		if isWorkWeek() then wu.moveResize("Slack", wu.pseudoMax) end
+		wu.moveResize("Mona", wu.toTheSide)
 		u.defer(1, function() -- scroll up
 			hs.eventtap.keyStroke({ "cmd" }, "up", 1, u.app("Mona"))
 		end)

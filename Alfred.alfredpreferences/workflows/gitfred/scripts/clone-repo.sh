@@ -103,20 +103,21 @@ fi
 # INFO Alfred stores checkbox settings as `"1"` or `"0"` (stringified)
 if [[ "$github_username" != "$owner" && "$fork_on_clone" == "1" ]]; then
 
-	if [[ -x "$(command -v gh)" ]]; then
-		token=$github_token_from_alfred_prefs
-		[[ -z "$token" ]] && token=$(zsh -c "$github_token_shell_cmd")
-		# shellcheck disable=1091
-		[[ -z "$token" ]] && token=$(test -e "$HOME"/.zshenv && source "$HOME/.zshenv" && echo "$GITHUB_TOKEN")
-		if [[ -n "$token" ]]; then
-			export GITHUB_TOKEN="$token"
-			gh repo fork --remote=false &> /dev/null
-		else
-			echo "ERROR: Cannot fork, \`GITHUB_TOKEN\` not found." >&2
-		fi
-	else
+	if [[ ! -x "$(command -v gh)" ]]; then
 		echo "ERROR: Cannot fork, \`gh\` not installed."
+		return 1
 	fi
+	token=$github_token_from_alfred_prefs
+	[[ -z "$token" ]] && token=$(zsh -c "$github_token_shell_cmd")
+	# shellcheck disable=1091
+	[[ -z "$token" ]] && token=$(test -e "$HOME"/.zshenv && source "$HOME/.zshenv" && echo "$GITHUB_TOKEN")
+	if [[ -z "$token" ]]; then
+		echo "ERROR: Cannot fork, \`GITHUB_TOKEN\` not found." >&2
+		return 1
+	fi
+
+	export GITHUB_TOKEN="$token"
+	gh repo fork &> /dev/null
 
 	if [[ "$setup_remotes_on_fork" == "1" ]]; then
 		git remote rename origin upstream
