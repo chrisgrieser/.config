@@ -153,7 +153,7 @@ function gM {
 	git status
 }
 
-#-MISC--------------------------------------------------------------------------
+#-REMOTES-----------------------------------------------------------------------
 function pr {
 	# similar to `gh pr create --web --fill`, but without dependency
 	# (and without the need to setup `gh` remote.)
@@ -172,12 +172,19 @@ function gu { # GitHub URL: open & copy url
 	open "$git_url"
 }
 
+function sync_fork {
+	gh repo sync
+	default_branch=$(git symbolic-ref --quiet --short refs/remotes/origin/HEAD | cut -d/ -f2)
+	git reset "$default_branch"
+	git push
+}
+
 function clone {
 	# WARN depth=1 is dangerous, as amending such a commit does result in a
 	# new commit without parent, effectively destroying git history (!!)
 	local depth=30
 	print "Cloning with depth: $depth\n"
-	git clone --depth=$depth --no-single-branch --no-tags
+	git clone --depth=$depth "$1" --no-single-branch --no-tags
 	builtin cd "$(basename "$1" .git)" && echo
 }
 
@@ -188,6 +195,8 @@ function unshallow {
 	git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
 	git fetch origin
 }
+
+#-------------------------------------------------------------------------------
 
 function delete_git_tag {
 	git fetch --no-progress --tags # fetch tags, in case clone is shallow

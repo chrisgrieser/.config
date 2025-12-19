@@ -107,7 +107,9 @@ if [[ "$github_username" != "$owner" && "$fork_on_clone" == "1" ]]; then
 		echo "ERROR: Cannot fork, \`gh\` not installed."
 		return 1
 	fi
-	token=$github_token_from_alfred_prefs
+
+	# get token
+	token="$github_token_from_alfred_prefs"
 	[[ -z "$token" ]] && token=$(zsh -c "$github_token_shell_cmd")
 	# shellcheck disable=1091
 	[[ -z "$token" ]] && token=$(test -e "$HOME"/.zshenv && source "$HOME/.zshenv" && echo "$GITHUB_TOKEN")
@@ -115,14 +117,10 @@ if [[ "$github_username" != "$owner" && "$fork_on_clone" == "1" ]]; then
 		echo "ERROR: Cannot fork, \`GITHUB_TOKEN\` not found." >&2
 		return 1
 	fi
-
 	export GITHUB_TOKEN="$token"
-	gh repo fork &> /dev/null
 
-	if [[ "$setup_remotes_on_fork" == "1" ]]; then
-		git remote rename origin upstream
-		git remote add origin "git@github.com:$github_username/$reponame.git"
-	fi
+	setup_remotes=$([[ "$setup_remotes_on_fork" == "1" ]] && echo "true" || echo "false")
+	gh repo fork --remote="$setup_remotes" &> /dev/null
 
 	if [[ -n "$on_fork_branch" ]]; then
 		git switch --create "$on_fork_branch" &> /dev/null
