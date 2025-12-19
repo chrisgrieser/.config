@@ -17,14 +17,21 @@ rules:
   - description: "Mona Vim Mode"
     manipulators:
       # ENTER INSERT MODE
-      - type: basic
-        from: { key_code: r } # reply to tweet
+      - type: basic # reply to tweet
+        from: { key_code: r }
         to: [{ key_code: r }, *set-notice, *enter-insert-mode]
         conditions: [*is-mona, *mona-normal-mode]
-      - type: basic
-        from: { key_code: n, modifiers: { mandatory: [command] } } # new tweet
+      - type: basic # new tweet
+        from: { key_code: n, modifiers: { mandatory: [command] } }
         to: [{ key_code: n, modifiers: [command] }, *set-notice, *enter-insert-mode]
         conditions: [*is-mona, *mona-normal-mode]
+      - type: basic # confirm the new tweet
+        from: { key_code: return_or_enter, modifiers: { mandatory: [command] } }
+        to:
+          - { key_code: return_or_enter, modifiers: [command] }
+          - *remove-notice
+          - *enter-normal-mode
+        conditions: [*is-mona, *mona-insert-mode]
       # ENTER NORMAL MODE
       - type: basic
         from: { key_code: caps_lock }

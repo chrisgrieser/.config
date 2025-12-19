@@ -36,3 +36,8 @@ style = "asterisk"  # better than underscore, since it's not considered a word-c
 
 [MD063]  # heading-capitalization
 style = "sentence_case"
+
+# ------------------------------------------------------------------------------
+
+[MD060]  # auto-format tables
+enabled = true  # opt-in, since rule still experimental
