@@ -5,8 +5,8 @@ github_username="chrisgrieser"
 # set -e
 
 # repo_names="alfred|shimmering-obsidian|gitfred"
-# repo_names="nvim"
-repo_names="obsidian-quadro|pseudometa-obsidian-plugin-template|grappling-hook|obsidian-proofreader"
+repo_names="nvim"
+# repo_names="obsidian-quadro|pseudometa-obsidian-plugin-template|grappling-hook|obsidian-proofreader"
 # ALL
 # repo_names="finder-vim-mode|zsh-magic-dashboard|nvim|alfred|shimmering-obsidian|gitfred|obsidian-quadro|pseudometa-obsidian-plugin-template|grappling-hook|obsidian-proofreader"
 
@@ -14,9 +14,6 @@ function actions_in_repo {
 	cp -f "$HOME/Desktop/.rumdl.toml" .
 	rumdl fmt
 	rm -f ./.markdownlint.yaml
-	rm -f ./.stylelintrc.yml
-
-	cp -f "$HOME/Desktop/pre-commit" "./.githooks/pre-commit"
 
 	cp -f "$HOME/Desktop/rumdl-lint.yml" "./.github/workflows/rumdl-lint.yml"
 	rm -f ./.github/workflows/markdownlint.yml
@@ -24,9 +21,9 @@ function actions_in_repo {
 	cp -f "$HOME/Desktop/.editorconfig" .
 }
 
-commit_msg="ci: update pre-commit and switch from markdownlint to rumdl"
+commit_msg="ci: switch from \`markdownlint\` to \`rumdl\`"
 
-amend_no_edit="true"
+amend_no_edit="false"
 
 #───────────────────────────────────────────────────────────────────────────────
 #───────────────────────────────────────────────────────────────────────────────
