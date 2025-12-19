@@ -87,17 +87,6 @@ local function postRequestHook()
 	})
 end
 
-local function leaveVisualOnInlineRequest()
-	vim.api.nvim_create_autocmd("User", {
-		desc = "User: leave visual mode",
-		pattern = "CodeCompanionInlineStarted",
-		callback = function()
-			if vim.fn.mode():lower() ~= "v" then return end
-			vim.cmd.normal { vim.fn.mode(), bang = true }
-		end,
-	})
-end
-
 local ccSpec = {
 	"olimorris/codecompanion.nvim",
 	dependencies = "nvim-lua/plenary.nvim",
@@ -105,9 +94,18 @@ local ccSpec = {
 	init = function() vim.g.whichkeyAddSpec { "<leader>a", group = " AI" } end,
 	config = function(_, opts)
 		require("codecompanion").setup(opts)
-		leaveVisualOnInlineRequest()
 		spinnerNotificationWhileRequest()
 		postRequestHook()
+
+		-- PENDING https://github.com/olimorris/codecompanion.nvim/pull/2562
+		vim.api.nvim_create_autocmd("User", {
+			desc = "User: leave visual mode",
+			pattern = "CodeCompanionInlineStarted",
+			callback = function()
+				if vim.fn.mode():lower() ~= "v" then return end
+				vim.cmd.normal { vim.fn.mode(), bang = true }
+			end,
+		})
 	end,
 	keys = {
 		{ "<leader>ac", "<cmd>CodeCompanionChat toggle<CR>", desc = " Chat (toggle)" },
@@ -138,6 +136,8 @@ local ccSpec = {
 						env = { api_key = ("cmd:cat %q"):format(apiKeyFile) },
 						schema = {
 							["reasoning.effort"] = { default = reasoningEffort },
+
+							-- PENDING https://github.com/olimorris/codecompanion.nvim/pull/2561
 							["reasoning.summary"] = { enabled = function() return false end }, -- requires organizational access
 
 							-- PENDING https://github.com/olimorris/codecompanion.nvim/pull/2560

@@ -9,6 +9,9 @@ disable = [
 
 # ------------------------------------------------------------------------------
 
+[MD004]  # ul-style
+style = "dash"  # GitHub default & quicker to type
+
 [MD007]  # ul-indent
 indent = 4  # consistent with .editorconfig
 
