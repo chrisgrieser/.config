@@ -43,7 +43,7 @@ return {
 			desc = "󰊢 Previous hunk",
 		},
 		{
-			"<leader>gd",
+			"<leader>gD",
 			function()
 				if not vim.wo.diff then -- start `diffthis` with last change to the file
 					local filepath = vim.api.nvim_buf_get_name(0)
