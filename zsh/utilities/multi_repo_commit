@@ -14,7 +14,7 @@ function actions_in_repo {
 	git apply "$HOME"/Desktop/patch
 }
 
-commit_msg="ci: unexclude pull_request_template from rumdl"
+commit_msg="ci: update rumdl config"
 
 amend_no_edit="false"
 
@@ -76,7 +76,10 @@ while read -r repo; do
 
 	# COMMIT/AMEND
 	if [[ "$amend_no_edit" == "true" ]]; then
-		git add --all && git commit --amend --no-edit && git push --no-progress --force
+		git add --all &&
+			# git commit --amend --message="$commit_msg" &&
+			git commit --amend --no-edit &&
+			git push --no-progress --force
 	else
 		git add --all && git commit --message="$commit_msg" && git push --no-progress
 	fi
