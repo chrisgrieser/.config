@@ -12,9 +12,10 @@ repo_names="finder-vim-mode|zsh-magic-dashboard|nvim|alfred|shimmering-obsidian|
 
 function actions_in_repo {
 	git apply "$HOME"/Desktop/patch
+	rumdl fmt --disable=MD007
 }
 
-commit_msg="ci: update rumdl config"
+commit_msg="docs: enforce sentence case headings"
 
 amend_no_edit="false"
 
