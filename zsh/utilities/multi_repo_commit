@@ -5,19 +5,21 @@ github_username="chrisgrieser"
 # set -e
 
 # repo_names="alfred|shimmering-obsidian|gitfred"
-# repo_names="nvim"
+repo_names="nvim"
 # repo_names="obsidian-quadro|pseudometa-obsidian-plugin-template|grappling-hook|obsidian-proofreader"
 # ALL
-repo_names="finder-vim-mode|zsh-magic-dashboard|nvim|alfred|shimmering-obsidian|gitfred|obsidian-quadro|pseudometa-obsidian-plugin-template|grappling-hook|obsidian-proofreader"
+# repo_names="finder-vim-mode|zsh-magic-dashboard|nvim|alfred|shimmering-obsidian|gitfred|obsidian-quadro|pseudometa-obsidian-plugin-template|grappling-hook|obsidian-proofreader"
 
 function actions_in_repo {
-	git apply "$HOME"/Desktop/patch
+	git reset --hard HEAD^
+	git apply "$HOME"/Desktop/patchN
+	sed -i '' -e 's/^# Nvim-/# nvim-/' -e '1s/$/ <!-- rumdl-disable-line MD063 `nvim` lowercased -->/' README.md
 	rumdl fmt --disable=MD007
 }
 
 commit_msg="docs: enforce sentence case headings"
 
-amend_no_edit="false"
+amend_no_edit="true"
 
 #───────────────────────────────────────────────────────────────────────────────
 #───────────────────────────────────────────────────────────────────────────────
@@ -70,7 +72,7 @@ not_updated=0
 while read -r repo; do
 	print "\e[1;34mUpdating $repo… ($i/$repo_count)\e[0m"
 	# WARN depth 2 relevant for prevent history loss when amending
-	git clone --no-progress --depth=2 "git@github.com:$github_username/$repo"
+	git clone --no-progress --depth=5 "git@github.com:$github_username/$repo"
 	cd "$repo" || return 1
 
 	actions_in_repo
