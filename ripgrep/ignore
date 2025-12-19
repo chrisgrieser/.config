@@ -23,6 +23,9 @@ LICENSE
 .editorconfig
 .markdownlint.{yaml,yml,json}
 
+# rumdl
+.rumdl_cache
+
 # academic software projects
 CITATION.{cff,bib}
 

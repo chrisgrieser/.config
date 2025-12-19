@@ -2,7 +2,7 @@
   "exclude file (typos) + ignore file (typos)": {
     "body": [
       "[files]",
-      "extend-exclude = [\"*${1:filename}\"] # * due to conform.nvim temp file"
+      "extend-exclude = [\"${1:filename}\"]"
     ],
     "prefix": [
       "exclude file (typos)",

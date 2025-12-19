@@ -1,8 +1,8 @@
-# Karabiner Config Infos
+# Karabiner config infos
 Written in YAML, since more readable than JSON. This "source code" of the
 configs is located in `/assets/complex_modifications/`.
 
-## Quick Reloading setup
+## Quick reloading setup
 - this triggers script `build-karabiner-config.js`, which converts the YAML to
   JSON and compiles the `karabiner.json`
 - this requires `yq` being installed on the system.

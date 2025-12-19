@@ -71,8 +71,7 @@ pandoc intermediate.json -t gfm -o output.md -s
 ```
 
 ## Priority of Options
-
-**Higher overwrites lower**
+Higher overwrites lower:
 1. Direct CLI arguments
 2. Arguments from the defaults-file (`--defaults`) (default location:
    `~/.pandoc/defaults`)
@@ -100,10 +99,10 @@ pandoc intermediate.json -t gfm -o output.md -s
 > notoriously, for a PDF output, the type of template you need depends on the
 > PDF-engine (`--pdf-engine`) you use are using, since pandoc does not directly
 > convert to PDF but converts to PDF via something like an "intermediate
-> format". In most cases, it's either a html-based pdf-engine (e.g.
-> `wkhtmltopdf`) in which case you need a html and css template (and need to
-> know html and css for that), or a latex-based pdf-engine (e.g. `pdflatex`), in
-> which case the template needs to be written in latex. And to make it even more
+> format". In most cases, it's either an HTML PDF-engine (e.g.
+> `wkhtmltopdf`) in which case you need an HTML and CSS template (and have to
+> know HTML and CSS for that). Or a LaTeX-based PDF-engine (e.g. `pdflatex`), in
+> which case the template needs to be written in LaTeX. And to make it even more
 > complicated, in both cases, there are some variables for the templates (e.g.,
 > margins) **which** can be set in the YAML of the Markdown document.
 >
@@ -151,8 +150,9 @@ pandoc "my file.docx" --track-changes=all -t markdown | grep -C3 "{\."
 ```
 
 ## Templates
-- [GitHub - Wandmalfarbe/pandoc-latex-template: A pandoc LaTeX template to convert markdown files to PDF or LaTeX.](https://github.com/Wandmalfarbe/pandoc-latex-template)
-- [GitHub - kjhealy/pandoc-templates: Some templates for Pandoc.](https://github.com/kjhealy/pandoc-templates)
+- [Wandmalfarbe/pandoc-latex-template: A pandoc LaTeX template to convert
+  markdown files to PDF or LaTeX.](https://github.com/Wandmalfarbe/pandoc-latex-template)
+- [kjhealy/pandoc-templates: Some templates for Pandoc.](https://github.com/kjhealy/pandoc-templates)
 
 ```yaml
 ---
@@ -162,18 +162,33 @@ geometry: margin=2cm
 ```
 
 ## Filters
-- [raghur/mermaid-filter: Pandoc filter for creating diagrams in mermaid syntax blocks in markdown docs](https://github.com/raghur/mermaid-filter)
+- [raghur/mermaid-filter: Pandoc filter for creating diagrams in mermaid syntax
+  blocks in markdown docs](https://github.com/raghur/mermaid-filter)
 - Tools for Automatic References
-    - [url2cite](https://github.com/phiresky/pandoc-url2cite/) ([usage with normal citekeys](https://github.com/phiresky/pandoc-url2cite/issues/10#issuecomment-899101361))
+    - [url2cite](https://github.com/phiresky/pandoc-url2cite/) ([usage with
+      normal
+      citekeys](https://github.com/phiresky/pandoc-url2cite/issues/10#issuecomment-899101361))
     - [manubot](https://github.com/manubot)
 - filters can be written in Lua
 
 > [!INFO] Priority of Filters  
-> Filters, Lua-filters, and `citeproc` processing are applied in the order specified on the command line.  
-> –[Pandoc Docs](https://pandoc.org/MANUAL.html#option--filter)
+> Filters, Lua-filters, and `citeproc` processing are applied in the order
+> specified on the command line.  [Pandoc
+> Docs](https://pandoc.org/MANUAL.html#option--filter)
 
 **Why Lua Filters?**
-> Although traditional filters are very flexible, they have a couple of disadvantages. First, there is some overhead in writing JSON to stdout and reading it from stdin (twice, once on each side of the filter). Second, whether a filter will work will depend on details of the user's environment. A filter may require an interpreter for a certain programming language to be available, as well as a library for manipulating the pandoc AST in JSON form. One cannot simply provide a filter that can be used by anyone who has a certain version of the pandoc executable.
+> Although traditional filters are very flexible, they have a couple of
+> disadvantages. First, there is some overhead in writing JSON to `stdout` and
+> reading it from `stdin` (twice, once on each side of the filter). Second,
+> whether a filter will work will depend on details of the user's environment. A
+> filter may require an interpreter for a certain programming language to be
+> available, as well as a library for manipulating the pandoc AST in JSON form.
+> One cannot simply provide a filter that can be used by anyone who has a
+> certain version of the pandoc executable.
 >
-> Starting with version 2.0, pandoc makes it possible to write filters in Lua without any external dependencies at all. A Lua interpreter (version 5.3) and a Lua library for creating pandoc filters is built into the pandoc executable. Pandoc data types are marshaled to Lua directly, avoiding the overhead of writing JSON to stdout and reading it from stdin.
+> Starting with version 2.0, pandoc makes it possible to write filters in Lua
+> without any external dependencies at all. A Lua interpreter (version 5.3) and
+> a Lua library for creating pandoc filters is built into the pandoc executable.
+> Pandoc data types are marshaled to Lua directly, avoiding the overhead of
+> writing JSON to `stdout` and reading it from `stdin.`
 - [Pandoc - Pandoc Lua Filters](https://pandoc.org/lua-filters.html)
