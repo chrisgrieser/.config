@@ -36,7 +36,8 @@ fi
 
 # only non-forked, non-archived repos
 repos_to_update=$(gh repo list --limit=100 --no-archived --source --visibility=public \
-	--json="name" --jq=".[].name | select(test(\"$repo_names\"))")
+	--json="name" --jq=".[].name | select(test(\"$repo_names\"))" |
+	grep -vE "scissors|rulebook|puppeteer")
 repo_count=$(echo "$repos_to_update" | wc -l | tr -d " ")
 
 # confirmation that everything is correct
@@ -71,7 +72,7 @@ i=1
 not_updated=0
 while read -r repo; do
 	print "\e[1;34mUpdating $repo… ($i/$repo_count)\e[0m"
-	# WARN depth 2 relevant for prevent history loss when amending
+	# WARN depth 5 relevant for prevent history loss when amending (extra safety net)
 	git clone --no-progress --depth=5 "git@github.com:$github_username/$repo"
 	cd "$repo" || return 1
 
