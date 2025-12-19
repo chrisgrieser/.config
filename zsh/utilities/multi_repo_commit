@@ -11,19 +11,12 @@ repo_names="nvim"
 # repo_names="finder-vim-mode|zsh-magic-dashboard|nvim|alfred|shimmering-obsidian|gitfred|obsidian-quadro|pseudometa-obsidian-plugin-template|grappling-hook|obsidian-proofreader"
 
 function actions_in_repo {
-	cp -f "$HOME/Desktop/.rumdl.toml" .
-	rumdl fmt
-	rm -f ./.markdownlint.yaml
-
-	cp -f "$HOME/Desktop/rumdl-lint.yml" "./.github/workflows/rumdl-lint.yml"
-	rm -f ./.github/workflows/markdownlint.yml
-
-	cp -f "$HOME/Desktop/.editorconfig" .
+	git mv .github/PULL_REQUEST_TEMPLATE.md .github/pull_request_template.md
 }
 
 commit_msg="ci: switch from \`markdownlint\` to \`rumdl\`"
 
-amend_no_edit="false"
+amend_no_edit="true"
 
 #───────────────────────────────────────────────────────────────────────────────
 #───────────────────────────────────────────────────────────────────────────────
