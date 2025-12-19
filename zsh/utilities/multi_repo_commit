@@ -22,6 +22,8 @@ function actions_in_repo {
 
 commit_msg="ci: remove now obsolete markdownlint GitHub action"
 
+amend="false" # WARN
+
 _export_github_token # defined in .zshenv
 
 #───────────────────────────────────────────────────────────────────────────────
@@ -46,8 +48,12 @@ print "\e[1;34mRepos to update ($repo_count):\e[0m"
 echo "$repos_to_update" | rs
 echo
 
-print "\e[1;34mCommit message:\e[0m"
-echo "$commit_msg"
+if [[ "$amend" == "true" ]] ; then
+	print "\e[0;33mWARN: Amending to previous commit"
+else
+	print "\e[1;34mCommit message:\e[0m"
+	echo "$commit_msg"
+fi
 
 echo
 print "\e[1;34mActions:\e[0m"
@@ -75,11 +81,12 @@ while read -r repo; do
 
 	actions_in_repo
 
-	# COMMIT
-	# git add --all && git commit -m "$commit_msg" && git push --no-progress
-
-	# WARN AMEND
-	git add --all && git commit --amend --no-edit && git push --no-progress --force
+	# COMMIT/AMEND
+	if [[ "$amend" == "true" ]] ; then
+		git add --all && git commit --amend --no-edit && git push --no-progress --force
+	else
+		git add --all && git commit -m "$commit_msg" && git push --no-progress
+	fi
 
 	success=$?
 	if [[ $success -ne 0 ]]; then
