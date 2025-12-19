@@ -5,18 +5,18 @@ github_username="chrisgrieser"
 # set -e
 
 # repo_names="alfred|shimmering-obsidian|gitfred"
-repo_names="nvim"
+# repo_names="nvim"
 # repo_names="obsidian-quadro|pseudometa-obsidian-plugin-template|grappling-hook|obsidian-proofreader"
 # ALL
-# repo_names="finder-vim-mode|zsh-magic-dashboard|nvim|alfred|shimmering-obsidian|gitfred|obsidian-quadro|pseudometa-obsidian-plugin-template|grappling-hook|obsidian-proofreader"
+repo_names="finder-vim-mode|zsh-magic-dashboard|nvim|alfred|shimmering-obsidian|gitfred|obsidian-quadro|pseudometa-obsidian-plugin-template|grappling-hook|obsidian-proofreader"
 
 function actions_in_repo {
-	git mv .github/PULL_REQUEST_TEMPLATE.md .github/pull_request_template.md
+	git apply "$HOME"/Desktop/patch
 }
 
-commit_msg="ci: switch from \`markdownlint\` to \`rumdl\`"
+commit_msg="ci: unexclude pull_request_template from rumdl"
 
-amend_no_edit="true"
+amend_no_edit="false"
 
 #───────────────────────────────────────────────────────────────────────────────
 #───────────────────────────────────────────────────────────────────────────────
@@ -41,7 +41,7 @@ print "\e[1;34mRepos to update ($repo_count):\e[0m"
 echo "$repos_to_update" | rs
 echo
 
-if [[ "$amend_no_edit" == "true" ]] ; then
+if [[ "$amend_no_edit" == "true" ]]; then
 	print "\e[0;33mWARN: Amending to previous commit"
 else
 	print "\e[1;34mCommit message:\e[0m"
@@ -75,7 +75,7 @@ while read -r repo; do
 	actions_in_repo
 
 	# COMMIT/AMEND
-	if [[ "$amend_no_edit" == "true" ]] ; then
+	if [[ "$amend_no_edit" == "true" ]]; then
 		git add --all && git commit --amend --no-edit && git push --no-progress --force
 	else
 		git add --all && git commit --message="$commit_msg" && git push --no-progress
