@@ -175,7 +175,7 @@ function gu { # GitHub URL: open & copy url
 function sync_fork {
 	gh repo sync
 	default_branch=$(git symbolic-ref --quiet --short refs/remotes/origin/HEAD | cut -d/ -f2)
-	git reset "$default_branch"
+	git rebase "$default_branch"
 	git push
 }
 

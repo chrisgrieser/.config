@@ -30,7 +30,8 @@
 [pull]
 	rebase = true ; always `pull --rebase` instead of merging https://blog.sffc.xyz/post/185195398930/why-you-should-use-git-pull-ff-only
 [push]
-	autoSetupRemote = true ; create remote branch if it doesn't exist yet
+	default = current ; create remote branch if it doesn't exist yet
+	autoSetupRemote = true ; also track remote branch
 
 [branch]
 	sort = -committerdate ; sort by recency, not by name

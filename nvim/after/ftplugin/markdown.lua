@@ -2,8 +2,7 @@ local bkeymap = require("config.utils").bufKeymap
 local optl = vim.opt_local
 
 ---GENERAL----------------------------------------------------------------------
-optl.expandtab = false
-optl.tabstop = 4 -- less nesting in md, so we can afford larger tabstop
+optl.expandtab = true
 optl.commentstring = "<!-- %s -->" -- add spaces
 
 -- so two trailing spaces are highlighted, but not a single trailing space
@@ -15,7 +14,7 @@ optl.sidescrolloff = 3 -- lower, since we rarely go beyond textwidth
 
 bkeymap("n", "<leader>rt", "vip:!pandoc --to=gfm<CR>", { desc = " Format table under cursor" })
 -- stylua: ignore
-bkeymap("n", ">", function() require("personal-plugins.hiraganafy")() end, { desc = " Hiraganafy" })
+bkeymap("n", "#", function() require("personal-plugins.hiraganafy")() end, { desc = " Hiraganafy" })
 
 -- auto-bullet
 -- stylua: ignore start

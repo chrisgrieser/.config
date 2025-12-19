@@ -137,14 +137,16 @@ local ccSpec = {
 					return require("codecompanion.adapters").extend("openai_responses", {
 						env = { api_key = ("cmd:cat %q"):format(apiKeyFile) },
 						schema = {
+							["reasoning.effort"] = { default = reasoningEffort },
+							["reasoning.summary"] = { enabled = function() return false end }, -- requires organizational access
+
+							-- PENDING https://github.com/olimorris/codecompanion.nvim/pull/2560
 							model = {
 								choices = {
 									["gpt-5-mini"] = { opts = { can_reason = true } },
 									["gpt-5-nano"] = { opts = { can_reason = true } },
 								},
 							},
-							["reasoning.effort"] = { default = reasoningEffort },
-							["reasoning.summary"] = { enabled = function() return false end }, -- requires organizational access
 						},
 					})
 				end,
