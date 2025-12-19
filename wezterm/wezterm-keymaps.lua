@@ -48,6 +48,7 @@ M.keys = {
 	{ key = "t", mods = "CTRL", action = actFun(require("theme-cycler").cycle) },
 
 	---BASIC KEYS----------------------------------------------------------------
+	{ key = "p", mods = "CMD", action = act.ActivateCommandPalette },
 	{ key = "v", mods = "CTRL", action = act.SplitHorizontal }, -- SIC actually vertical
 	{ key = "w", mods = "CMD", action = act.CloseCurrentPane { confirm = false } }, -- pane, then tab
 	-- `cmd+n` should create new tab, not new window

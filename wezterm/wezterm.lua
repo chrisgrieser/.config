@@ -70,6 +70,7 @@ local config = {
 	font = wt.font { family = "JetBrainsMono Nerd Font", weight = "Medium" },
 	cell_width = 0.9, -- effectively like letter-spacing
 	font_size = 26.5,
+	command_palette_font_size = 26.5,
 	custom_block_glyphs = false, -- don't use wezterm's box-char replacements since too thin
 
 	-- appearance
