@@ -61,6 +61,7 @@ local function movieLayout()
 	u.openApps { "YouTube", env.isAtHome and "BetterTouchTool" or nil }
 	u.quitApps {
 		"Signal",
+		"Granola",
 		"Slack",
 		"Calendar",
 		"Alfred Preferences",

@@ -22,6 +22,7 @@ local config = {
 		Signal = 30,
 		Highlights = 90,
 		["PDF Expert"] = 90,
+		["Granola"] = 90,
 		["Alfred Preferences"] = 30,
 		["System Settings"] = 10,
 	},

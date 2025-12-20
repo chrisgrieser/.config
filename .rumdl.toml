@@ -2,7 +2,6 @@
 
 [global]
 line-length = 80
-cache-dir = ".cache"
 disable = [
   "MD032",  # blanks-around-lists: space waster
   "MD041",  # first-line-h1: not useful here

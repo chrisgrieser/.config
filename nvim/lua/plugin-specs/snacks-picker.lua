@@ -203,7 +203,7 @@ return {
 					exclude = { -- keep this ignored even if toggling to show hidden/ignored
 						"node_modules",
 						".DS_Store",
-						"*.zip",
+						".rumdle_cache",
 					},
 					layout = "small_no_preview",
 					matcher = { frecency = true }, -- slight performance impact
