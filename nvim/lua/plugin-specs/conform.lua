@@ -12,7 +12,7 @@ return {
 		log_level = vim.log.levels.WARN, -- for `ConformInfo`
 		default_format_opts = { lsp_format = "last" },
 		formatters_by_ft = {
-			markdown = { "markdown-toc", "injected" },
+			markdown = { "markdown-toc", "injected", "listify-links-in-notes" },
 			python = { "ruff_fix", "ruff_organize_imports" },
 			zsh = { "shell-home", "shellcheck" },
 			json = { lsp_format = "prefer", "jq" }, -- use `biome` (via LSP), with `jq` as fallback
@@ -54,12 +54,25 @@ return {
 				end,
 			},
 			---MY CUSTOM FORMATTERS------------------------------------------------
+			["listify-links-in-notes"] = {
+				format = function(_self, _ctx, lines, callback)
+					if vim.uv.cwd() ~= vim.g.notesDir then return end
+					local updated = vim.tbl_map(function(line)
+						return line
+							:gsub("^%[%[.-%]%]$", "- %0") -- wikilinks
+							:gsub("^%[.-]%(.-%)$", "- %0") -- mdlinks
+					end, lines)
+					callback(nil, updated)
+				end,
+			},
 			["shell-home"] = { -- replace `/Users/…` or `~` with `$HOME/`
 				format = function(_self, _ctx, lines, callback)
-					local function replace(line)
-						return line:gsub("/Users/%a+", "$HOME"):gsub("([^/\\])~/", "%1$HOME/")
-					end
-					callback(nil, vim.tbl_map(replace, lines))
+					local updated = vim.tbl_map(function(line)
+						return line
+							:gsub("/Users/%a+", "$HOME") -- /Users/name
+							:gsub("([^/\\])~/", "%1$HOME/") -- ~/
+					end, lines)
+					callback(nil, updated)
 				end,
 			},
 			["ts-add-missing-imports"] = {

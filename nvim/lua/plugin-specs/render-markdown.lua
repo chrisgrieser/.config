@@ -6,6 +6,13 @@ return {
 	dependencies = "echasnovski/mini.icons",
 
 	ft = "markdown",
+	init = function()
+		vim.api.nvim_set_hl(0, "@wikilink", { link = "Label" })
+		vim.api.nvim_create_autocmd({ "ColorScheme", "VimEnter" }, {
+			desc = "User: Highlights for satellite.nvim",
+			callback = function() vim.api.nvim_set_hl(0, "@wikilink", { link = "Label" }) end,
+		})
+	end,
 	keys = {
 		{
 			"<leader>oc",

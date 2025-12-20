@@ -5,6 +5,9 @@
 
 (link_text) @mdlink.inner
 
+((inline) @mdlink.outer
+  (shortcut_link) @mdlink.outer)
+
 ;-------------------------------------------------------------------------------
 ; emphasis
 ((strong_emphasis) @emphasis.inner
