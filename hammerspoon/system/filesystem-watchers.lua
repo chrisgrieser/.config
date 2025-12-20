@@ -6,6 +6,8 @@ local home = os.getenv("HOME")
 local browserConfigs = home .. "/.config/browser-extensions/"
 local backupFolder = home .. "/Library/Mobile Documents/com~apple~CloudDocs/Tech/backups/"
 
+--------------------------------------------------------------------------------
+
 local u = require("meta.utils")
 local pathw = hs.pathwatcher.new
 hs.fs.mkdir(browserConfigs)
@@ -16,18 +18,18 @@ M.pathw_desktop = pathw(home .. "/Desktop/", function(paths, _)
 	if not u.screenIsUnlocked() then return end -- prevent iCloud sync triggering in standby
 
 	for _, path in pairs(paths) do
-		local name = path:match(".*/(.+)")
+		local parent, name = path:match("(.+)/(.+)")
+		parent = parent:sub(#(home .. "/Desktop/"))
 		local ext = name:match("%.([^.]-)$")
 
-		-- HACK only downloaded files get quarantined, thus this detects downloads
+		-- HACK only downloaded files get quarantined, so this method detects downloads
 		local exists, msg = pcall(hs.fs.xattr.get, path, "com.apple.quarantine")
 		local isDownloaded = exists and msg ~= nil
 		local success, errmsg
 
 		-- REMOVE ALFREDWORKFLOWS & ICAL
 		if (ext == "alfredworkflow" or ext == "ics") and isDownloaded then
-			-- delay, so auto-open from the browser is triggered first, and since
-			-- Apple Calendar needs the file to exist before adding it
+			-- delay, since Apple Calendar needs the file to exist while adding it
 			u.defer(60, function() os.remove(path) end)
 
 		-- ADD BIBTEX ENTRIES TO LIBRARY
@@ -74,18 +76,19 @@ M.pathw_desktop = pathw(home .. "/Desktop/", function(paths, _)
 
 		---BANKING----------------------------------------------------------------
 		elseif name:find("[%d-]_Kontoauszug_%d.*%.pdf$") or name:find(".*_zu_Depot_%d.*%.pdf$") then
-			local year = name:match("^%d%d%d%d") -- first year-digits in filename
-			if not year then return end -- file lacks year
-
-			local folder = name:find("Kontoauszug") and "DKB Geldkonten" or "DKB Depot"
-			local bankPath = ("%s/Documents/Finanzen/Vermögen (DKB)/%s/%s"):format(home, folder, year)
-
-			success, errmsg = hs.fs.mkdir(bankPath) -- create directory in case of new year
-			u.defer(1, function() os.rename(path, bankPath .. "/" .. name) end) -- delay ensures folder is created
-			u.openUrlInBg(bankPath)
+			local year = name:match("^%d%d%d%d")
+			if year then
+				local folder = name:find("Kontoauszug") and "DKB Geldkonten" or "DKB Depot"
+				-- stylua: ignore
+				local bankPath = ("%s/Documents/Finanzen/Vermögen (DKB)/%s/%s"):format(home, folder, year)
+				success, errmsg = hs.fs.mkdir(bankPath) -- create directory in case of new year
+				u.defer(1, function() os.rename(path, bankPath .. "/" .. name) end) -- delay ensures folder is created
+				u.openUrlInBg(bankPath)
+			end
 
 		---STEAM GAME SHORTCUTS---------------------------------------------------
-		elseif name:find("%.app$") and not isDownloaded then
+		elseif name:find("%.app$") and not isDownloaded and parent == "" then
+			-- parent condition prevents downloads of apps in nested folders to be moved
 			local gameFolder = home .. "/Library/Mobile Documents/com~apple~CloudDocs/Apps/Games/"
 			success, errmsg = os.rename(path, gameFolder .. name)
 

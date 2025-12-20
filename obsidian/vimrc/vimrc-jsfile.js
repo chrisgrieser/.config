@@ -157,10 +157,10 @@ function cycleListTypes() {
 	const { line: lnum, ch: col } = editor.getCursor();
 	const curLine = editor.getLine(lnum);
 
-	let updatedLine = curLine.replace(/^(\s*)([-*+>#.)[\]\d x]+) /, (_, indent, list) => {
+	let updatedLine = curLine.replace(/^(\s*)([-*+.[\]\d x]+) /, (_, indent, list) => {
 		if (list.match(/^[-*+](?! \[)/)) return indent + "- [ ] "; // bullet -> task
 		if (list.startsWith("- [")) return indent + "1. "; // task -> number
-		return indent + "- "; // number/other -> bullet
+		return indent; // number -> none
 	});
 	// none -> bullet
 	if (updatedLine === curLine) updatedLine = curLine.replace(/^(\s*)(.*)/, "$1- $2");

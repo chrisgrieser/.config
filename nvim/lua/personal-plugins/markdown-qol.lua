@@ -141,10 +141,9 @@ function M.cycleList()
 	local lnum, col = unpack(vim.api.nvim_win_get_cursor(0))
 	local curLine = vim.api.nvim_get_current_line()
 
-	local updated = curLine:gsub("^(%s*)([%p%d x]* )", function(indent, list)
-		if list:find("[*+-] ") and not list:find("%- %[") then return indent .. "- [ ] " end -- bullet -> task
-		if vim.startswith(list, "- [") then return indent .. "1. " end -- task -> number
-		return indent .. "- " -- number/other -> bullet
+	local updated = curLine:gsub("^(%s*)([%d.*+-]+ )", function(indent, list)
+		if list:find("[*+-] ") and not list:find("%- %[") then return indent .. "1. " end -- bullet -> number
+		return indent -- number -> none
 	end)
 	-- none -> bullet
 	if updated == curLine then updated = curLine:gsub("^(%s*)(.*)", "%1- %2") end

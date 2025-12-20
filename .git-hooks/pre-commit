@@ -1,12 +1,13 @@
 #!/usr/bin/env zsh
+# safeguard against accidental pushing of large files
+#-------------------------------------------------------------------------------
 
 # CONFIG
-max_file_size_mb=2
+max_file_size=2M
 
-#───────────────────────────────────────────────────────────────────────────────
+#-------------------------------------------------------------------------------
 
-# safeguard against accidental pushing of large files
-large_files=$(find . -size +${max_file_size_mb}M -not -path "**/.git/**" \
+large_files=$(find . -type "file" -not -path "./.git/**" -size +${max_file_size} \
 	-not -name "dictcc_arm64" -not -path "*/menu/menu") # exceptions
 
 if [[ -n "$large_files" ]]; then
