@@ -1,16 +1,23 @@
 -- DOCS https://github.com/MeanderingProgrammer/render-markdown.nvim#setup
 --------------------------------------------------------------------------------
 
+local wikilinkHlgroup = "Label"
+
+--------------------------------------------------------------------------------
+
 return {
 	"MeanderingProgrammer/render-markdown.nvim",
 	dependencies = "echasnovski/mini.icons",
 
 	ft = "markdown",
 	init = function()
-		vim.api.nvim_set_hl(0, "@wikilink", { link = "Label" })
+		-- also set wikilinks in conceal is disabled (like on the cursorline)
+		-- (semantic highlighting by `marksman` lsp)
 		vim.api.nvim_create_autocmd({ "ColorScheme", "VimEnter" }, {
-			desc = "User: Highlights for satellite.nvim",
-			callback = function() vim.api.nvim_set_hl(0, "@wikilink", { link = "Label" }) end,
+			desc = "User: Highlights for wikilinks",
+			callback = function()
+				vim.api.nvim_set_hl(0, "@lsp.type.class.markdown", { link = wikilinkHlgroup })
+			end,
 		})
 	end,
 	keys = {
@@ -44,9 +51,18 @@ return {
 			position = "left",
 		},
 		link = {
+			wiki = {
+				-- highlight wikilinks when conceal is active
+				-- (or: markdown_inline query: `((shortcut_link) @wikilink (#set! priority 130))`)
+				icon = "󰴚 ",
+				highlight = wikilinkHlgroup,
+				scope_highlight = wikilinkHlgroup,
+			},
 			custom = {
+				web = { icon = " " }, -- for links that do not match a pattern below
+
 				-- news sites
-				medium = { pattern = "medium%.com", icon = "󰬔 " }, -- letter-glyphs named `alpha_…`
+				medium = { pattern = "medium%.com", icon = "󰬔 " }, -- letter-glyphs are named `alpha_…`
 				verge = { pattern = "theverge%.com", icon = "󰰫 " },
 				techcrunch = { pattern = "techcrunch%.com", icon = "󰰥 " },
 				wired = { pattern = "wired%.com", icon = "󰬞 " },
