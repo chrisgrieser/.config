@@ -318,7 +318,6 @@ return {
 				},
 				grep = {
 					regex = false, -- use fixed strings by default
-					follow = true,
 					cmd = "rg",
 					args = {
 						"--sortr=modified", -- sort by recency, slight performance impact

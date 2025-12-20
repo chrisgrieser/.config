@@ -121,7 +121,7 @@ return {
 					function()
 						local qf = vim.fn.getqflist { idx = 0, title = true, size = true }
 						if qf.size == 0 then return "" end
-						return ("%d/%d (%s)"):format(qf.idx, qf.size, qf.title)
+						return ("%d/%d (%s)"):format(qf.idx, qf.size, qf.title:gsub(": ?$", ""))
 					end,
 					icon = "",
 				},
