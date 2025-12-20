@@ -102,23 +102,32 @@ M.keys = {
 			-- skip_action_on_paste = true, -- in next release
 			patterns = {
 				[[https?://[^\]",' ]+\w]], -- regular URLs
-				[[https?://[^\]",' ]+\w]], -- regular URLs
+				[[[^'"]+/[^'"]+\.\w{2,4}]], -- absolute or relative path (no quotes allowed in file name)
 				"[a-f0-9]{7,40}", -- commits
-				"(?<=#)[0-9]{1,6}", -- issues (the `#` not included due to the lookbehind)
+				"(?<=#)[0-9]{1,6}", -- issues (the `#` excluded due to the lookbehind)
 			},
 			action = actFun(function(win, pane)
 				local match = win:get_selection_text_for_pane(pane)
+				local cwd = (pane:get_current_working_dir() or {}).file_path
+
+				-- url
 				if match:find("^https?://") then return wt.open_with(match) end
 
-				local cwd = (pane:get_current_working_dir() or {}).file_path
-				if not cwd then return wt.log_info("no cwd") end
+				-- absolute path of a file
+				if match:find("^/") then return wt.open_with(match) end
+
+				if not cwd then return wt.log_info("No cwd found.") end
+
+				-- relative path of a file
+				if match:find("/") then return wt.open_with(cwd .. "/" .. match) end
+
+				-- commit or issue
 				local type = #match < 7 and "issues" or "commit"
 				local ok, stdout, stderr =
 					wt.run_child_process { "git", "-C", cwd, "remote", "--verbose" }
 				if not ok then return wt.log_info("remote info failed:", stderr) end
 				local repo = (stdout:match("github%.com[/:](%S+)") or ""):gsub("%.git$", "")
 				if repo == "" then return wt.log_info("remote info has no github url:", stdout) end
-
 				local url = ("https://github.com/%s/%s/%s"):format(repo, type, match)
 				wt.open_with(url)
 			end),
