@@ -21,7 +21,6 @@
 .github
 LICENSE
 .editorconfig
-.markdownlint.{yaml,yml,json}
 
 # rumdl
 .rumdl_cache

@@ -1,7 +1,9 @@
 # DOCS https://github.com/rvben/rumdl/blob/main/docs/global-settings.md
+#:tombi schema.strict = false # for the `cache` key
 
 [global]
 line-length = 80
+cache = false # fast enough without cache, avoids clogging file searches with `.rumdl-cache`
 disable = [
   "MD032",  # blanks-around-lists: space waster
   "MD041",  # first-line-h1: not useful here
@@ -40,3 +42,4 @@ enabled = true  # opt-in, since rule still experimental
 [MD063]  # heading-capitalization
 enabled = true  # opt-in rule
 style = "sentence_case"
+ignore-words = ["nvim", "Obsidian", "Alfred"]

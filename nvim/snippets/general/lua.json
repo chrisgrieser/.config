@@ -159,6 +159,7 @@
   "url-encode": {
     "body": [
       "---@param unencoded string",
+      "---@return string",
       "local function urlEncode(unencoded)",
       "\tlocal encoded = unencoded:gsub(",
       "\t\t\"([^%w%-_.~])\",",
