@@ -469,7 +469,7 @@
 				<key>destinationuid</key>
 				<string>70C4F79D-D608-41A7-B2FF-723F59D79DDF</string>
 				<key>modifiers</key>
-				<integer>0</integer>
+				<integer>524288</integer>
 				<key>modifiersubtext</key>
 				<string>⌥: Copy URL</string>
 				<key>vitoclose</key>
@@ -2520,7 +2520,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>1510</real>
+			<real>1515</real>
 		</dict>
 		<key>B88D572C-2770-41B2-B7BD-FF771975A4E8</key>
 		<dict>

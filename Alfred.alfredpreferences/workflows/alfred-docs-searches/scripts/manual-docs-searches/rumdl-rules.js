@@ -28,11 +28,10 @@ function run() {
 
 			const url = `${baseUrl}/${id.toLowerCase()}.md`;
 			const num = id.match(/\d\d$/)?.[0] || "";
-			const subtitle = desc === name ? id : `${id}: ${desc}`;
 
 			return {
 				title: name,
-				subtitle: subtitle,
+				subtitle: `${id}: ${desc}`,
 				match: [id, num, name].join(" "),
 				mods: {
 					cmd: { arg: id }, // copy entry
