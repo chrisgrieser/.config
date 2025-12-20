@@ -98,9 +98,10 @@ M.keys = {
 		key = "o",
 		mods = "CMD",
 		action = act.QuickSelectArgs {
-			label = "Open url/commit/issue",
+			label = "Open file/url/commit/issue",
 			-- skip_action_on_paste = true, -- in next release
 			patterns = {
+				[[https?://[^\]",' ]+\w]], -- regular URLs
 				[[https?://[^\]",' ]+\w]], -- regular URLs
 				"[a-f0-9]{7,40}", -- commits
 				"(?<=#)[0-9]{1,6}", -- issues (the `#` not included due to the lookbehind)

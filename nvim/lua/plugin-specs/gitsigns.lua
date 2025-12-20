@@ -43,24 +43,20 @@ return {
 			desc = "󰊢 Previous hunk",
 		},
 		{
-			"<leader>gD",
+			"<leader>op",
 			function()
-				if not vim.wo.diff then -- start `diffthis` with last change to the file
+				if vim.b.gitsignsPrevChanges then
+					require("gitsigns").reset_base()
+				else
 					local filepath = vim.api.nvim_buf_get_name(0)
 					local gitArgs = { "git", "log", "--max-count=1", "--format=%h", "--", filepath }
-					local lastCommit = assert(vim.system(gitArgs):wait().stdout)
-					local prevCommit = vim.trim(lastCommit) .. "^"
-					require("gitsigns").diffthis(prevCommit, { split = "belowright" })
-				else -- close all diff windows
-					local winsInTab = vim.api.nvim_tabpage_list_wins(0)
-					vim.iter(winsInTab):each(function(win)
-						local buf = vim.api.nvim_win_get_buf(win)
-						local isDiffWin = vim.wo[win].diff and vim.bo[buf].buftype == "nowrite"
-						if isDiffWin then vim.api.nvim_win_close(win, true) end
-					end)
+					local out = vim.system(gitArgs):wait()
+					local lastCommitToFile = vim.trim(out.stdout) .. "^"
+					require("gitsigns").change_base(lastCommitToFile)
 				end
+				vim.b.gitsignsPrevChanges = not vim.b.gitsignsPrevChanges
 			end,
-			desc = "󰊢 Last diff of file",
+			desc = "󰊢 Prev/present hunks",
 		},
 
 		-- UNDO
@@ -95,6 +91,7 @@ return {
 				if not gs then return end
 				return { added = gs.added, modified = gs.changed, removed = gs.removed }
 			end,
+			fmt = function(str) return vim.b.gitsignsPrevChanges and "󰑟 " .. str or str end,
 		}, "before")
 	end,
 }
