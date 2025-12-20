@@ -11,10 +11,7 @@ repo_names="nvim"
 # repo_names="finder-vim-mode|zsh-magic-dashboard|nvim|alfred|shimmering-obsidian|gitfred|obsidian-quadro|pseudometa-obsidian-plugin-template|grappling-hook|obsidian-proofreader"
 
 function actions_in_repo {
-	git reset --hard HEAD^
 	git apply "$HOME"/Desktop/patchN
-	sed -i '' -e 's/^# Nvim-/# nvim-/' -e '1s/$/ <!-- rumdl-disable-line MD063 `nvim` lowercased -->/' README.md
-	rumdl fmt --disable=MD007
 }
 
 commit_msg="docs: enforce sentence case headings"
@@ -36,8 +33,7 @@ fi
 
 # only non-forked, non-archived repos
 repos_to_update=$(gh repo list --limit=100 --no-archived --source --visibility=public \
-	--json="name" --jq=".[].name | select(test(\"$repo_names\"))" |
-	grep -vE "scissors|rulebook|puppeteer")
+	--json="name" --jq=".[].name | select(test(\"$repo_names\"))")
 repo_count=$(echo "$repos_to_update" | wc -l | tr -d " ")
 
 # confirmation that everything is correct

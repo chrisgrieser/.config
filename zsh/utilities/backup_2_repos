@@ -2,7 +2,7 @@
 
 # CONFIG
 bkp_destination="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Tech/backups/My Repos/"
-max_number_of_bkps=4
+max_number_of_bkps=7
 ignore_repos_regex=".password-store" # to not keep gpg-key & pass-store at same cloud provider 
 
 _export_github_token # use GITHUB_TOKEN from .zshenv
