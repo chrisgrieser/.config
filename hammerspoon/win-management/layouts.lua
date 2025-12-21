@@ -40,9 +40,14 @@ local function workLayout(shouldDarkenDisplay)
 	u.defer(1, function()
 		wu.moveResize("Gmail", wu.pseudoMax)
 		if isWorkWeek() then wu.moveResize("Slack", wu.pseudoMax) end
+	end)
+	u.defer(2, function()
 		wu.moveResize("Mona", wu.toTheSide)
-		u.defer(1, function() -- scroll up
-			hs.eventtap.keyStroke({ "cmd" }, "up", 1, u.app("Mona"))
+		u.defer(1, function()
+			local masto = u.app("Mona")
+			hs.eventtap.keyStroke({}, "left", 1, masto) -- go back
+			hs.eventtap.keyStroke({ "cmd" }, "1", 1, masto) -- go to home tab
+			hs.eventtap.keyStroke({ "cmd" }, "up", 1, masto) -- scroll up
 		end)
 	end)
 

@@ -336,6 +336,10 @@
     "body": "${1:text}=$(echo -n \"$${1:text}\" | sed -e 's/^ *//' -e 's/ *$//')",
     "prefix": "trim whitespace"
   },
+  "unique lines": {
+    "body": "| sort --unique",
+    "prefix": "unique lines"
+  },
   "url encode (curl)": {
     "body": "curl --get --url \"${1:api_url}\" --data-urlencode \"q=${2:query}\"",
     "prefix": "url-encode (curl)"
