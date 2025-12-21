@@ -211,8 +211,8 @@ end
 
 -- Yankring
 do
-	-- When undoing the paste and then using `.`, will paste `"2p`, so
-	-- `<D-p>.....` pastes all recent things and `<D-p>u.u.u.u.`, cycles through
+	-- When undoing the paste and then using `.`, will paste `"2p`, so `<D-p>...`
+	-- pastes all recent things and `<D-p>u.u.u.u.`, cycles through them
 	keymap("n", "<D-p>", '"1p', { desc = " Paste from yankring" })
 
 	vim.api.nvim_create_autocmd("TextYankPost", {

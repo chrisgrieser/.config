@@ -153,8 +153,13 @@ function M.addTitleToUrl()
 	local out = vim.system({ "curl", "--silent", "--location", innerUrl }):wait()
 	if out.code ~= 0 then return vim.notify(out.stderr, vim.log.levels.ERROR) end
 	local title = out.stdout:match("<title>(.-)</title>")
+	if not title then return vim.notify("No title found.", vim.log.levels.WARN) end
+	title = title:gsub("^GitHub %- ", "") -- cleanup
 
-	local updatedLine = line:gsub(vim.pesc(url), ("[%s](%s)"):format(title, innerUrl))
+	local urlStart, urlEnd = line:find(url, nil, true) -- `find` has literal search, `gsub` does not
+	local updatedLine = line:sub(1, urlStart - 1)
+		.. ("[%s](%s)"):format(title, innerUrl)
+		.. line:sub(urlEnd + 1)
 	vim.api.nvim_set_current_line(updatedLine)
 end
 

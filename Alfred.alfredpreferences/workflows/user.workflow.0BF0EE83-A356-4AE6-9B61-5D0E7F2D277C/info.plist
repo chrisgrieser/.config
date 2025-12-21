@@ -206,9 +206,9 @@
 			<key>note</key>
 			<string>log the search</string>
 			<key>xpos</key>
-			<real>225</real>
+			<real>205</real>
 			<key>ypos</key>
-			<real>155</real>
+			<real>135</real>
 		</dict>
 		<key>885F85E1-2699-4386-AA95-92A8E33D563E</key>
 		<dict>
@@ -217,27 +217,27 @@
 			<key>note</key>
 			<string>tech news search</string>
 			<key>xpos</key>
-			<real>55</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>465</real>
+			<real>325</real>
 		</dict>
 		<key>8C31E6B3-0697-4002-B4FB-2C29F9026E5F</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>1</integer>
 			<key>xpos</key>
-			<real>225</real>
+			<real>205</real>
 			<key>ypos</key>
-			<real>35</real>
+			<real>15</real>
 		</dict>
 		<key>9E9347E2-24A7-4FB3-B9BA-14FA4A20B17B</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>230</real>
+			<real>205</real>
 			<key>ypos</key>
-			<real>465</real>
+			<real>325</real>
 		</dict>
 		<key>CB80E9BA-2569-4E62-8E06-36AB6D87D98F</key>
 		<dict>
@@ -246,18 +246,18 @@
 			<key>note</key>
 			<string>tech news search</string>
 			<key>xpos</key>
-			<real>50</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>90</real>
+			<real>70</real>
 		</dict>
 		<key>ED052E9C-B19A-49B2-911E-269694015242</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>405</real>
+			<real>380</real>
 			<key>ypos</key>
-			<real>465</real>
+			<real>325</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

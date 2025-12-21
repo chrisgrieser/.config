@@ -158,7 +158,7 @@
 				<key>modifiers</key>
 				<integer>1048576</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: open in Obsidian</string>
+				<string>⌘: Open in Obsidian</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -1935,7 +1935,7 @@ open -g "hammerspoon://sync-repos"</string>
 			<key>colorindex</key>
 			<integer>9</integer>
 			<key>xpos</key>
-			<real>935</real>
+			<real>950</real>
 			<key>ypos</key>
 			<real>905</real>
 		</dict>
@@ -1975,7 +1975,7 @@ open -g "hammerspoon://sync-repos"</string>
 			<key>colorindex</key>
 			<integer>9</integer>
 			<key>xpos</key>
-			<real>685</real>
+			<real>700</real>
 			<key>ypos</key>
 			<real>820</real>
 		</dict>
@@ -2359,7 +2359,7 @@ open -g "hammerspoon://sync-repos"</string>
 			<key>colorindex</key>
 			<integer>9</integer>
 			<key>xpos</key>
-			<real>785</real>
+			<real>800</real>
 			<key>ypos</key>
 			<real>905</real>
 		</dict>
@@ -2471,7 +2471,7 @@ open -g "hammerspoon://sync-repos"</string>
 			<key>colorindex</key>
 			<integer>9</integer>
 			<key>xpos</key>
-			<real>785</real>
+			<real>800</real>
 			<key>ypos</key>
 			<real>790</real>
 		</dict>
