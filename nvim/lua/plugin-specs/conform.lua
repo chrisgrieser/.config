@@ -59,8 +59,9 @@ return {
 					if vim.uv.cwd() ~= vim.g.notesDir then return end
 					local updated = vim.tbl_map(function(line)
 						return line
-							:gsub("^%[%[.-%]%]$", "- %0") -- wikilinks
-							:gsub("^%[.-]%(.-%)$", "- %0") -- mdlinks
+							:gsub("^%[%[.*%]%]$", "- %0") -- wikilinks
+							:gsub("^%[.*]%(.*%)$", "- %0") -- mdlinks
+							:gsub("^<.*>$", "- %0") -- bare links
 					end, lines)
 					callback(nil, updated)
 				end,

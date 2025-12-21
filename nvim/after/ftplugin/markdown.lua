@@ -20,8 +20,13 @@ bkeymap("n", "#", function() require("personal-plugins.hiraganafy")() end, { des
 -- stylua: ignore start
 bkeymap("n", "o", function() require("personal-plugins.markdown-qol").autoBullet("o") end, { desc = " Auto-bullet o" })
 bkeymap("n", "O", function() require("personal-plugins.markdown-qol").autoBullet("O") end, { desc = " Auto-bullet O" })
-bkeymap("i", "<CR>", function() require("personal-plugins.markdown-qol").autoBullet("<CR>") end, { desc = " Auto-bullet <CR>" })
 -- stylua: ignore end
+do
+	-- stylua: ignore
+	bkeymap("i", "<CR>", function() require("personal-plugins.markdown-qol").autoBullet("<CR>") end, { desc = " Auto-bullet <CR>" })
+	-- local ok, blink = pcall(require, "blink.cmp")
+	-- if ok and blink then blink.setup() end
+end
 
 -- cycle list
 -- stylua: ignore
