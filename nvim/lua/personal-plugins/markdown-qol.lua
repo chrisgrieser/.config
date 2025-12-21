@@ -144,8 +144,18 @@ function M.incrementHeading(dir)
 	vim.api.nvim_win_set_cursor(0, { lnum, math.max(col + diff, 0) })
 end
 
-function M.getTitleForUrl()
-	-- https://pdf2md.morethan.io
+function M.addTitleToUrl()
+	local line = vim.api.nvim_get_current_line()
+	local url = line:match([[<?%l+://%S+>?]])
+	if vim.endswith(url, ")") then return vim.notify("Already Markdown link.") end
+	local innerUrl = url:gsub(">$", ""):gsub("^<", "") -- bare URL enclosed in `<>` due to MD034
+
+	local out = vim.system({ "curl", "--silent", "--location", innerUrl }):wait()
+	if out.code ~= 0 then return vim.notify(out.stderr, vim.log.levels.ERROR) end
+	local title = out.stdout:match("<title>(.-)</title>")
+
+	local updatedLine = line:gsub(vim.pesc(url), ("[%s](%s)"):format(title, innerUrl))
+	vim.api.nvim_set_current_line(updatedLine)
 end
 
 function M.cycleList()

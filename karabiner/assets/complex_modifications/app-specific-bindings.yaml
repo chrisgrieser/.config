@@ -110,21 +110,22 @@ rules:
           - key_code: tab
           - key_code: spacebar
         conditions:
-          - { type: frontmost_application_if, bundle_identifiers: [com.brave.Browser] }
+          # `$` to ensure PWAs aren't matched (which also start with that bundle ID)
+          - { type: frontmost_application_if, bundle_identifiers: [com.brave.Browser$] }
       # shift+cmd+,: extension settings
       - type: basic
         from: { key_code: comma, modifiers: { mandatory: [command, shift] } }
         to:
           - shell_command: open 'chrome://extensions/'
         conditions:
-          - { type: frontmost_application_if, bundle_identifiers: [com.brave.Browser] }
+          - { type: frontmost_application_if, bundle_identifiers: [com.brave.Browser$] }
       # ctrl+c: Copy last code block (for ChatGPT)
       - type: basic
         from: { key_code: c, modifiers: { mandatory: [control] } }
         to:
           - { key_code: comma, modifiers: [command, shift] }
         conditions:
-          - { type: frontmost_application_if, bundle_identifiers: [com.brave.Browser] }
+          - { type: frontmost_application_if, bundle_identifiers: [com.brave.Browser$] }
       # dev tools -> element picker
       - type: basic
         from: { key_code: escape, modifiers: { mandatory: [control] } }
