@@ -200,11 +200,7 @@ return {
 						"--no-config",
 						("--ignore-file=" .. vim.env.HOME .. "/.config/ripgrep/ignore"),
 					},
-					exclude = { -- keep this ignored even if toggling to show hidden/ignored
-						"node_modules",
-						".DS_Store",
-						".rumdle_cache",
-					},
+					exclude = { "node_modules", ".DS_Store" }, -- keep this ignored even if toggling to show hidden/ignored
 					layout = "small_no_preview",
 					matcher = { frecency = true }, -- slight performance impact
 					win = {
