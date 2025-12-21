@@ -206,6 +206,10 @@
       "osascript -l JavaScript"
     ]
   },
+  "overwrite last line": {
+    "body": "printf \"\\r%s\" \"overwrite\"",
+    "prefix": "overwrite last line (printf)"
+  },
   "plist: extract key": {
     "body": "plutil -extract name.childkey xml1 -o - example.plist | sed -n 4p | cut -d'>' -f2 | cut -d'<' -f1",
     "prefix": "plist: extract key"
@@ -216,7 +220,7 @@
   },
   "printf: erase current line": {
     "body": "printf \"\\33[2K\\r\" # fully erase the current line",
-    "prefix": "printf: erase current line"
+    "prefix": "erase current line (printf)"
   },
   "progress bar": {
     "body": [
