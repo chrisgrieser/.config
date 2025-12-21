@@ -10,9 +10,8 @@ abbr("let", "local")
 abbr("===", "==")
 abbr("!=", "~=")
 abbr("!==", "~=")
-abbr("=~", "~=") -- shell uses `=~`
+abbr("=~", "~=") -- shell uses `=~` for regex matching
 abbr("fi", "end")
-abbr("tre", "then return end") -- typos: ignore-line
 
 ---@param sign "+"|"-"
 local function plusPlusMinusMinus(sign)

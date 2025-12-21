@@ -49,6 +49,10 @@
     "body": "⎵",
     "prefix": "space (underbracket)"
   },
+  "star": {
+    "body": "⭐ ",
+    "prefix": "star"
+  },
   "tab": {
     "body": "↹ ",
     "prefix": "tab"

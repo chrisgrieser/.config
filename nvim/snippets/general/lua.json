@@ -156,6 +156,10 @@
     "filetype": "lua",
     "prefix": "split (gmatch)"
   },
+  "tre (then return end)": {
+    "body": "then return end",
+    "prefix": "tre (then return end)"
+  },
   "url-encode": {
     "body": [
       "---@param unencoded string",
