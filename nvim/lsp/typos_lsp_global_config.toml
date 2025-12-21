@@ -1,5 +1,14 @@
-# PENDING https://github.com/crate-ci/typos/issues/316#issuecomment-2886204780
 
 # Custom ignore regex patterns: https://github.com/crate-ci/typos/blob/master/docs/reference.md#example-configurations
+# PENDING https://github.com/crate-ci/typos/issues/316#issuecomment-2886204780
 [default]
 extend-ignore-re = ["[^\\n]*typos: ignore-line[^\\n]*\\n"]
+
+# ------------------------------------------------------------------------------
+[default.extend-identifiers]  # not word, if multi-casing: https://github.com/crate-ci/typos/blob/master/docs/design.md#identifiers-and-words
+OpenAi = "OpenAI"  # enforce correct casing
+
+# ------------------------------------------------------------------------------
+# to ignore typos defined in this file itself…
+[files]
+extend-exclude = ["**/.config/nvim/lsp/typos_lsp_global_config.toml"]
