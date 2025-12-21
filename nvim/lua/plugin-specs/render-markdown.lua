@@ -82,8 +82,9 @@ return {
 			},
 		},
 		--------------------------------------------------------------------------
-		win_options = { -- makes toggling this plugin also toggle conceallevel
-			conceallevel = { default = 0, rendered = 2 },
+		win_options = {
+			conceallevel = { default = 0 }, -- makes toggling this plugin also toggle conceallevel
+			concealcursor = { rendered = vim.o.concealcursor }
 		},
 		overrides = { -- LSP hovers: hide code block lines
 			buftype = {
