@@ -23,19 +23,23 @@ return {
 			dialect = "American",
 			linters = {
 				UseTitleCase = false, -- prefer sentence case headings
-				SentenceCapitalization = false, -- buggy: https://github.com/Automattic/harper/issues/1056
-				UnclosedQuotes = false, -- buggy: https://github.com/Automattic/harper/issues/1573
+				SentenceCapitalization = true, -- PENDING https://github.com/Automattic/harper/issues/1056
+				UnclosedQuotes = false, -- PENDING https://github.com/Automattic/harper/issues/1573
+				PhrasalVerbAsCompoundNoun = false, -- PENDING https://github.com/Automattic/harper/issues/2369
 			},
 		},
 	},
 	on_attach = function(_client, bufnr)
-		vim.keymap.set("n", "zg", function()
+		local function addToDict(which)
 			vim.lsp.buf.code_action {
-				filter = function(a)
-					return a.command == "HarperAddToWSDict" or a.command == "HarperAddToUserDict"
-				end,
+				filter = function(a) return a.command == ("HarperAddTo%sDict"):format(which) end,
 				apply = true,
 			}
-		end, { desc = "󰓆 Add word to spellfile", buffer = bufnr })
+		end
+		vim.keymap.set("n", "zg", "<Nop>", { buffer = bufnr })
+		-- stylua: ignore
+		vim.keymap.set("n", "zgu", function() addToDict("User") end, { desc = "󰓆 User dict", buffer = bufnr })
+		-- stylua: ignore
+		vim.keymap.set("n", "zgw", function() addToDict("WS") end, { desc = "󰓆 Workspace dict", buffer = bufnr })
 	end,
 }

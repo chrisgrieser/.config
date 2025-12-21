@@ -55,7 +55,7 @@ return {
 			{ -- base groups
 				mode = { "n", "x" },
 				{ "g", group = "Goto" },
-				{ "z", group = "Folds & spelling" },
+				{ "z", group = " Folds & Spelling" },
 			},
 		},
 		plugins = {

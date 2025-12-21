@@ -144,6 +144,10 @@ function M.incrementHeading(dir)
 	vim.api.nvim_win_set_cursor(0, { lnum, math.max(col + diff, 0) })
 end
 
+function M.getTitleForUrl()
+	-- https://pdf2md.morethan.io
+end
+
 function M.cycleList()
 	local lnum, col = unpack(vim.api.nvim_win_get_cursor(0))
 	local curLine = vim.api.nvim_get_current_line()
