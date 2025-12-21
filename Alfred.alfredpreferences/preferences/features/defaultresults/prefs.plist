@@ -6,7 +6,6 @@
 	<array>
 		<string>features.websearch.duckduckgo.fallback</string>
 		<string>features.websearch.custom.5C714277-3404-4E28-9DE2-F5FC7E40B190.fallback</string>
-		<string>features.websearch.custom.26ACAC4A-35A8-452D-91BD-82EB22FF544B.fallback</string>
 	</array>
 	<key>showContacts</key>
 	<false/>

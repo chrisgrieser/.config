@@ -73,9 +73,6 @@ return {
 				-- `mini.icons`
 				MiniIconsGrey = { fg = "#767676" },
 
-				-- aerial
-				AerialLine = { link = "Visual" },
-
 				-- blink.cmp
 				BlinkCmpLabelMatch = { fg = "palette.orange" }, -- make matches stand out more
 				BlinkCmpDocBorder = { link = "FloatBorder" },
@@ -96,12 +93,6 @@ return {
 				BlinkCmpGitKindIconIssue = { fg = "palette.orange" },
 				BlinkCmpGitLabelMentionId = { fg = "palette.orange" },
 				BlinkCmpGitKindIconMention = { fg = "palette.orange" },
-
-				-- blink.cmp.dictionary
-				BlinkCmpKindDict = { fg = "palette.blue" },
-
-				-- Copilot
-				CopilotSuggestion = { link = "NonText" },
 
 				-- snacks notifier
 				SnacksNotifierTitleDebug = { fg = "palette.comment" }, -- use grey for debug

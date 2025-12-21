@@ -47,10 +47,6 @@ return {
 			hl.BlinkCmpLabelDetail = { link = "Comment" } -- FIX wrong color
 			hl.BlinkCmpLabelDescription = { link = "NonText" } -- FIX wrong color
 			hl.BlinkCmpLabelMatch = { fg = colors.yellow } -- make matches stand out more
-			hl.BlinkCmpKindDict = { fg = colors.blue } -- blink.cmp.dictionary
-
-			-- aerial
-			hl.AerialLine = { link = "Visual" }
 
 			-- apply color to `bg`, not `fg` (TODO INFO ERROR WARN)
 			hl["@comment.todo"] = { fg = colors.black, bg = hl["@comment.todo"].fg, bold = true }

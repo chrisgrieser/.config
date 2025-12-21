@@ -77,31 +77,46 @@ end
 
 ---@param key "o"|"O"|"<CR>"
 function M.autoBullet(key)
-	local row, col = unpack(vim.api.nvim_win_get_cursor(0))
-	local line = vim.api.nvim_get_current_line()
+	-- GUARD blink.cmp
+	local ok, blink = pcall(require, "blink.cmp")
+	if key == "<CR>" and ok and blink.is_menu_visible() then
+		blink.accept()
+		return
+	end
 
-	local indent = line:match("^%s*")
-	local task = line:match("^%s*([-*+] %[[x ]%] )")
-	local list = not task and line:match("^%s*([-*+] )")
-	local blockquote = line:match("^%s*(>+ )")
-	local num = line:match("^%s*(%d+%. )")
-	local continued = list or task or num or blockquote or ""
-	local emptyList = (continued ~= "") and vim.trim(indent .. continued) == vim.trim(line)
-	if num then continued = num:gsub("%d+", function(n) return tostring(tonumber(n) + 1) end) end
+	local row, col = unpack(vim.api.nvim_win_get_cursor(0))
+	local indent, continued = "", ""
+	local ln = row
+	local emptyList = false
+	repeat
+		local line = vim.api.nvim_buf_get_lines(0, ln - 1, ln, false)[1]
+		ln = ln - 1
+		if ln == 0 then break end
+		indent = line:match("^%s*")
+		local task = line:match("^%s*([-*+] %[[x ]%] )")
+		local list = not task and line:match("^%s*([-*+] )")
+		local blockquote = line:match("^%s*(>+ )")
+		local num = line:match("^%s*(%d+%. )")
+		continued = list or task or num or blockquote or ""
+		emptyList = (continued ~= "") and vim.trim(indent .. continued) == vim.trim(line)
+		if num then continued = num:gsub("%d+", function(n) return tostring(tonumber(n) + 1) end) end
+	until continued == "" and indent ~= "" -- loop to consider bullets on hard-wrapped lines
+	if continued ~= "" then continued = indent .. continued end
 
 	if key:lower() == "o" then
 		if key == "O" then row = row - 1 end
-		vim.api.nvim_buf_set_lines(0, row, row, false, { indent .. continued })
+		vim.api.nvim_buf_set_lines(0, row, row, false, { continued })
 		vim.api.nvim_win_set_cursor(0, { row + 1, 1 })
 		vim.cmd.startinsert { bang = true } -- bang -> insert at EoL
 	elseif key == "<CR>" and emptyList then
 		vim.api.nvim_set_current_line("")
 	elseif key == "<CR>" and not emptyList then
+		local line = vim.api.nvim_get_current_line()
 		local beforeCur, afterCur = line:sub(1, col), line:sub(col + 1)
 		if vim.startswith(afterCur, continued) then continued = "" end -- cursor before list markers
-		local nextLine = indent .. continued .. afterCur
+		local nextLine = continued .. afterCur
 		vim.api.nvim_buf_set_lines(0, row - 1, row, false, { beforeCur, nextLine })
-		vim.api.nvim_win_set_cursor(0, { row + 1, #(indent .. continued) })
+		vim.api.nvim_win_set_cursor(0, { row + 1, #(continued) })
 	end
 end
 

@@ -47,6 +47,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>0CF81EB7-998A-4707-BEFE-E07DF2D5E09D</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>F348B0E3-C941-4CC7-8402-C129E448D64D</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>0DF397E6-7179-4A9B-A07A-B32165613998</key>
 		<array>
 			<dict>
@@ -136,6 +149,16 @@
 				<integer>0</integer>
 				<key>modifiersubtext</key>
 				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>0CF81EB7-998A-4707-BEFE-E07DF2D5E09D</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>⌘: open in Obsidian</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -1295,6 +1318,14 @@ open -g "hammerspoon://sync-repos"</string>
 			<integer>1</integer>
 		</dict>
 		<dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.junction</string>
+			<key>uid</key>
+			<string>0CF81EB7-998A-4707-BEFE-E07DF2D5E09D</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
 			<key>config</key>
 			<dict>
 				<key>alfredfiltersresults</key>
@@ -1938,6 +1969,15 @@ open -g "hammerspoon://sync-repos"</string>
 			<real>885</real>
 			<key>ypos</key>
 			<real>15</real>
+		</dict>
+		<key>0CF81EB7-998A-4707-BEFE-E07DF2D5E09D</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>9</integer>
+			<key>xpos</key>
+			<real>685</real>
+			<key>ypos</key>
+			<real>820</real>
 		</dict>
 		<key>0DF397E6-7179-4A9B-A07A-B32165613998</key>
 		<dict>

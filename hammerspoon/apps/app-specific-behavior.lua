@@ -86,6 +86,17 @@ M.aw_masto = aw.new(function(appName, event, masto)
 	end
 end):start()
 
+---BROWSER----------------------------------------------------------------------
+-- remove `?tab=readme-ov-file` from github URLs
+M.aw_browser = aw.new(function(appName, event, _app)
+	if appName == "Brave Browser" and event == aw.deactivated then
+		local clipb = hs.pasteboard.getContents()
+		if not clipb then return end
+		clipb = clipb:gsub("(https://github%.com/.*)%?tab=readme%-ov%-file(#.*)", "%1%2")
+		hs.pasteboard.setContents(clipb)
+	end
+end):start()
+
 ---ALFRED-----------------------------------------------------------------------
 -- 1. Brave bookmarks synced to chrome bookmarks (so Alfred can pick up them up w/o keyword)
 do

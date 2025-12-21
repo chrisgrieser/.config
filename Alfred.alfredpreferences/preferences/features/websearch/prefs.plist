@@ -119,11 +119,11 @@
 			<key>enabled</key>
 			<true/>
 			<key>keyword</key>
-			<string>//</string>
+			<string>ducky</string>
 			<key>text</key>
-			<string>Vibe Link</string>
+			<string>🍀 Lucky</string>
 			<key>url</key>
-			<string>https://vb.lk/{query}</string>
+			<string>https://duckduckgo.com/?q={query}+!ducky</string>
 		</dict>
 		<key>61F594D9-D1EC-4E69-BCBB-5FE36128955E</key>
 		<dict>
@@ -179,17 +179,6 @@
 			<string>Call with Facetime: {query}</string>
 			<key>url</key>
 			<string>tel://{query}</string>
-		</dict>
-		<key>D711E5FA-D1E8-457F-B69E-8BC7A516CF29</key>
-		<dict>
-			<key>enabled</key>
-			<true/>
-			<key>keyword</key>
-			<string>archive</string>
-			<key>text</key>
-			<string>Archive.is</string>
-			<key>url</key>
-			<string>https://archive.is/submit/?url={query}</string>
 		</dict>
 		<key>DAD3D033-2DF1-41A9-AA76-8310F6E2327A</key>
 		<dict>

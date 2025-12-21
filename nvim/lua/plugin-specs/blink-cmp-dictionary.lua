@@ -5,6 +5,15 @@
 -- (lazy.nvim merges multiple configs).
 -----------------------------------------------------------------------------
 
+-- fix color
+vim.api.nvim_create_autocmd({ "ColorScheme", "VimEnter" }, {
+	desc = "User: Highlights for blink-cmp-dictionary",
+	group = vim.api.nvim_create_augroup("blink-cmp-dictionary", { clear = true }),
+	callback = function() vim.api.nvim_set_hl(0, "BlinkCmpKindDict", { link = "Function" }) end,
+})
+
+--------------------------------------------------------------------------------
+
 return {
 	"saghen/blink.cmp",
 	dependencies = "Kaiser-Yang/blink-cmp-dictionary",
