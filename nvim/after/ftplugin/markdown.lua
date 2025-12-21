@@ -20,13 +20,8 @@ bkeymap("n", "#", function() require("personal-plugins.hiraganafy")() end, { des
 -- stylua: ignore start
 bkeymap("n", "o", function() require("personal-plugins.markdown-qol").autoBullet("o") end, { desc = " Auto-bullet o" })
 bkeymap("n", "O", function() require("personal-plugins.markdown-qol").autoBullet("O") end, { desc = " Auto-bullet O" })
+bkeymap("i", "<CR>", function() require("personal-plugins.markdown-qol").autoBullet("<CR>") end, { desc = " Auto-bullet <CR>" })
 -- stylua: ignore end
-do
-	-- stylua: ignore
-	bkeymap("i", "<CR>", function() require("personal-plugins.markdown-qol").autoBullet("<CR>") end, { desc = " Auto-bullet <CR>" })
-	-- local ok, blink = pcall(require, "blink.cmp")
-	-- if ok and blink then blink.setup() end
-end
 
 -- cycle list
 -- stylua: ignore
@@ -70,21 +65,5 @@ bkeymap(
 
 -- when typing beyond `textwidth`
 vim.schedule(function() optl.formatoptions:append("t") end)
-
--- when leaving insert mode
-vim.api.nvim_create_autocmd("InsertLeave", {
-	desc = "User: auto-hard-wrap",
-	group = vim.api.nvim_create_augroup("auto-hardwrap", { clear = true }),
-	buffer = 0,
-	callback = function(ctx)
-		local line, node = vim.api.nvim_get_current_line(), vim.treesitter.get_node()
-		if vim.bo[ctx.buf].buftype ~= "" then return end
-		if not line:sub(81):find(" ") then return end -- markdownlint's `line-length` spec
-		if line:find("^[|#]") then return end -- heading or table
-		if node and node:type() == "code_fence_content" then return end
-		if node and node:type() == "html_block" then return end
-		vim.cmd.normal { "gww", bang = true }
-	end,
-})
 
 --------------------------------------------------------------------------------
