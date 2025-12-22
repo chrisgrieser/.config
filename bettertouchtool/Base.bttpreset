@@ -1,6 +1,4 @@
 {
-  "BTTPresetCreatorNotes" : "",
-  "BTTPresetInfoURL" : "",
   "BTTPresetName" : "Base",
   "BTTPresetColor" : "0.000000, 83.772828, 146.595663, 255.000000",
   "BTTGeneralSettings" : {
@@ -189,7 +187,7 @@
     },
     "BSTSnapAreaDefaultPictoDistanceFromBottom" : 0.10000000149011612
   },
-  "BTTPresetUUID" : "7B8E0CA8-F765-4019-9F25-D40FEAFFB7B8",
+  "BTTPresetUUID" : "9271DFD9-54E4-4715-925A-78C30C9B2979",
   "BTTPresetContent" : [
     {
       "BTTAppBundleIdentifier" : "com.colliderli.iina",
@@ -1433,14 +1431,14 @@
               "BTTOrder" : 1
             },
             {
-              "BTTLastUpdatedAt" : 1766444328.0605149,
+              "BTTLastUpdatedAt" : 1766446147.6109591,
               "BTTTriggerParentUUID" : "8E600F6C-2065-4D28-A1FF-2D5EE6D9FD21",
               "BTTIsPureAction" : true,
               "BTTTriggerClass" : "BTTTriggerTypeNormalMouse",
               "BTTUUID" : "DA5A257C-DC67-43B2-8C5E-D25D06C0903F",
               "BTTPredefinedActionType" : 345,
               "BTTPredefinedActionName" : "Pause Execution  or  Delay Next Action (async  or  not blocking)",
-              "BTTDelayNextActionBy" : "0.1",
+              "BTTDelayNextActionBy" : "0.2",
               "BTTOrder" : 3
             },
             {
