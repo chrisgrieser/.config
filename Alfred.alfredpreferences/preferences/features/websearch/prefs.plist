@@ -119,9 +119,9 @@
 			<key>enabled</key>
 			<true/>
 			<key>keyword</key>
-			<string>ducky</string>
+			<string>//</string>
 			<key>text</key>
-			<string>🍀 Lucky</string>
+			<string>Lucky</string>
 			<key>url</key>
 			<string>https://duckduckgo.com/?q={query}+!ducky</string>
 		</dict>
