@@ -55,7 +55,6 @@ function run() {
 	const username = $.getenv("github_username");
 	const localRepoFolder = $.getenv("local_repo_folder");
 	const cloneDepth = Number.parseInt($.getenv("clone_depth"));
-	const shallowClone = cloneDepth > 0;
 	const useAlfredFrecency = $.getenv("use_alfred_frecency") === "1";
 	const only100repos = $.getenv("only_100_recent_repos") === "1";
 
@@ -104,6 +103,10 @@ function run() {
 			return JSON.stringify({ items: [item] });
 		}
 		const reposOfPage = JSON.parse(response);
+		if (reposOfPage.message) {
+			const item = { title: reposOfPage.message, arg: reposOfPage.documentation };
+			return JSON.stringify({ items: [item] });
+		}
 		console.log(`repos page #${page}: ${reposOfPage.length}`);
 		allRepos.push(...reposOfPage);
 		page++;
@@ -132,7 +135,7 @@ function run() {
 
 			// open in terminal when local, clone when not
 			let termAct = "Open in Terminal";
-			if (!localRepo) termAct = shallowClone ? `Shallow Clone (depth ${cloneDepth})` : "Clone";
+			if (!localRepo) termAct = cloneDepth > 0 ? `Shallow Clone (depth ${cloneDepth})` : "Clone";
 			const terminalArg = localRepo?.path || repo.html_url;
 			if (localRepo) {
 				if (localRepos[repo.name]?.dirty) type += "✴️ ";

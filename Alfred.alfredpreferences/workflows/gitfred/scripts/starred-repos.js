@@ -1,12 +1,21 @@
 #!/usr/bin/env osascript -l JavaScript
 ObjC.import("stdlib");
+const app = Application.currentApplication();
+app.includeStandardAdditions = true;
 //──────────────────────────────────────────────────────────────────────────────
 
-/** @param {string} url */
+/** @param {string} url @return {string} */
 function httpRequest(url) {
 	const queryUrl = $.NSURL.URLWithString(url);
-	const requestData = $.NSData.dataWithContentsOfURL(queryUrl);
-	return $.NSString.alloc.initWithDataEncoding(requestData, $.NSUTF8StringEncoding).js;
+	const data = $.NSData.dataWithContentsOfURL(queryUrl);
+	return $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding).js;
+}
+
+/** @param {string} str */
+function alfredMatcher(str) {
+	const clean = str.replace(/[-_.]/g, " ");
+	const camelCaseSeparated = str.replace(/([A-Z])/g, " $1");
+	return [clean, camelCaseSeparated, str].join(" ") + " ";
 }
 
 /** @param {string} isoDateStr */
@@ -50,38 +59,35 @@ function shortNumber(starcount) {
 
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
-function run(argv) {
-	const query = argv[0];
-
-	// GUARD
-	if (!query) {
-		return JSON.stringify({ items: [{ title: "Waiting for query…", valid: false }] });
-	}
-
-	// DOCS https://docs.github.com/en/rest/search/search?apiVersion=2022-11-28#search-repositories
-	const apiUrl = "https://api.github.com/search/repositories?q=" + encodeURIComponent(query);
-	const response = httpRequest(apiUrl);
-
-	// GUARD no response
-	if (!response) {
-		return JSON.stringify({
-			items: [{ title: "No response from GitHub.", subtitle: "Try again later.", valid: false }],
-		});
-	}
-	// GUARD errors like invalid API token
-	const responseObj = JSON.parse(response);
-	if (responseObj.message) {
-		const item = { title: "Error", subtitle: responseObj.message, valid: false };
-		return JSON.stringify({ items: [item] });
-	}
-
-	//───────────────────────────────────────────────────────────────────────────
-
-	const forkOnClone = $.getenv("fork_on_clone") === "1";
+function run() {
+	const username = $.getenv("github_username");
 	const cloneDepth = Number.parseInt($.getenv("clone_depth"));
+	const forkOnClone = $.getenv("fork_on_clone") === "1";
+
+	// DOCS https://docs.github.com/en/rest/activity/starring?apiVersion=2022-11-28#list-repositories-starred-by-the-authenticated-user
+	// CAVEAT API does not allow combining the starred repo search with a query,
+	// so we have to fetch them all and filter locally ourselves (via Alfred)
+	const apiUrl = `https://api.github.com/users/${username}/starred?per_page=100`;
+
+	// Paginate through all repos
+	/** @type {GithubRepo[]} */
+	const allRepos = [];
+	let page = 1;
+	while (true) {
+		const response = httpRequest(apiUrl + `&page=${page}`);
+		if (!response) {
+			const item = { title: "No response from GitHub. Try again later.", valid: false };
+			return JSON.stringify({ items: [item] });
+		}
+		const reposOfPage = JSON.parse(response);
+		console.log(`repos page #${page}: ${reposOfPage.length}`);
+		allRepos.push(...reposOfPage);
+		page++;
+		if (reposOfPage.length < 100) break; // GitHub returns less than 100 when on last page
+	}
 
 	/** @type {AlfredItem[]} */
-	const repos = responseObj.items.map((/** @type {GithubRepo} */ repo) => {
+	const items = allRepos.map((repo) => {
 		// INFO `pushed_at` refers to commits only https://github.com/orgs/community/discussions/24442
 		// CAVEAT `pushed_at` apparently also includes pushes via PR :(
 		const lastUpdated = repo.pushed_at ? humanRelativeDate(repo.pushed_at) : "";
@@ -108,7 +114,7 @@ function run(argv) {
 			title: type + repo.name,
 			subtitle: subtitle,
 			arg: repo.html_url,
-			// no `match:`, since not using Alfred for filtering results
+			match: alfredMatcher(repo.name),
 			quicklookurl: repo.html_url,
 			mods: {
 				cmd: {
@@ -122,19 +128,5 @@ function run(argv) {
 		};
 	});
 
-	// GUARD no results
-	if (repos.length === 0) {
-		repos.push({
-			title: "🚫 No results",
-			subtitle: `No results found for '${query}'`,
-			valid: false,
-			mods: {
-				shift: { valid: false },
-				cmd: { valid: false },
-				alt: { valid: false },
-				ctrl: { valid: false },
-			},
-		});
-	}
-	return JSON.stringify({ items: repos });
+	return JSON.stringify({ items: items });
 }
