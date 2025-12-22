@@ -15,6 +15,7 @@ local config = {
 
 local M = {}
 local ns = vim.api.nvim_create_namespace("mark-signs")
+local lastMarkSet
 
 ---@param msg string
 ---@param level? "info"|"warn"|"error"
@@ -26,8 +27,8 @@ end
 ---@param mark string
 ---@return boolean
 local function cursorIsAtMark(mark)
-	local row, _col, bufnr, _path = unpack(vim.api.nvim_get_mark(mark, {}))
-	if not row then return false end
+	local row, _col, bufnr, path = unpack(vim.api.nvim_get_mark(mark, {}))
+	if path == nil or path == "" then return false end -- mark not set
 	local cursorRow = vim.api.nvim_win_get_cursor(0)[1]
 	local currentBuf = vim.api.nvim_get_current_buf()
 	return cursorRow == row and currentBuf == bufnr -- do not check for col
@@ -36,7 +37,7 @@ end
 ---@param mark string
 local function setSignForMark(mark)
 	local row, _col, bufnr, path = unpack(vim.api.nvim_get_mark(mark, {}))
-	if not row then return end -- mark not set
+	if path == nil or path == "" then return end -- mark not set
 
 	local function setExtmark(buf, line)
 		vim.api.nvim_buf_set_extmark(buf, ns, line - 1, 0, {
@@ -64,20 +65,24 @@ end
 
 ---@param mark string
 local function deleteMark(mark)
-	local row, _col, bufnr, _path = unpack(vim.api.nvim_get_mark(mark, {}))
-	if not row then return end -- mark not set
+	local row, _col, bufnr, path = unpack(vim.api.nvim_get_mark(mark, {}))
+	if path == nil or path == "" then return end -- mark not set
 	vim.api.nvim_del_mark(mark)
-	notify(("Mark [%s] deleted."):format(mark))
 	vim.api.nvim_buf_clear_namespace(bufnr, ns, row - 1, row)
+end
+
+---@return string[]
+local function getSetMarks()
+	return vim.tbl_filter(function(mark)
+		local row = unpack(vim.api.nvim_get_mark(mark, {}))
+		return row ~= nil and row ~= 0
+	end, config.marks)
 end
 
 --------------------------------------------------------------------------------
 
 function M.cycleMarks()
-	local marksSet = vim
-		.iter(config.marks)
-		:filter(function(mark) return vim.api.nvim_get_mark(mark, {}) ~= nil end)
-		:totable()
+	local marksSet = getSetMarks()
 
 	if #marksSet == 0 then
 		notify("No mark has been set.")
@@ -108,34 +113,50 @@ function M.cycleMarks()
 	if success then
 		vim.cmd.normal { "zv", bang = true } -- open folds at cursor
 	else
-		notify(("Mark [%s] not valid anymore."):format(nextMark.name), "warn")
+		notify(("Mark [%s] not valid anymore."):format(nextMark), "warn")
 		vim.api.nvim_del_mark(nextMark)
 	end
 end
 
----@param mark string
-function M.setUnsetMark(mark)
-	if cursorIsAtMark(mark) then
-		deleteMark(mark)
-		notify(("Mark [%s] deleted."):format(mark))
-	else
-		deleteMark(mark) -- silent, since this func itself notifies
-		local row, col = unpack(vim.api.nvim_win_get_cursor(0))
-		vim.api.nvim_buf_set_mark(0, mark, row, col, {})
-		setSignForMark(mark)
-		notify(("Mark [%s] set."):format(mark))
+function M.setUnsetMark()
+	local setMarks = getSetMarks()
+
+	-- if cursor is at a mark, delete it
+	for _, mark in ipairs(setMarks) do
+		if cursorIsAtMark(mark) then
+			deleteMark(mark)
+			notify(("Mark [%s] deleted."):format(mark))
+			return
+		end
 	end
+
+	-- otherwise, set mark
+	local firstUnsetMark = vim.iter(config.marks)
+		:find(function(mark) return not vim.list_contains(setMarks, mark) end)
+	local markToSet = firstUnsetMark
+	if not markToSet then
+		local nextMark = config.marks[1]
+		for _, mark in ipairs(config.marks) do
+			if lastMarkSet and mark > lastMarkSet then -- lua can compare letters
+				nextMark = mark
+				break
+			end
+		end
+		markToSet = nextMark
+	end
+
+	deleteMark(markToSet)
+	local row, col = unpack(vim.api.nvim_win_get_cursor(0))
+	vim.api.nvim_buf_set_mark(0, markToSet, row, col, {})
+	lastMarkSet = markToSet
+	setSignForMark(markToSet)
+	notify(("Mark [%s] set."):format(markToSet))
 end
 
---------------------------------------------------------------------------------
-
 function M.loadSigns()
-	vim.schedule(
- -- deferred to ensure shadafile is loaded
-	)
-	vim.defer_fn(function()
+	vim.schedule(function() -- scheduled to ensure shadafile is loaded
 		vim.iter(config.marks):each(setSignForMark)
-	end, 250)
+	end)
 end
 
 --------------------------------------------------------------------------------
