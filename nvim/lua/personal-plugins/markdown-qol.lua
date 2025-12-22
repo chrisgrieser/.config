@@ -149,39 +149,56 @@ function M.followUrlOrWikilink()
 	local wikilinkPattern = "%[%[.-]]"
 	local row, col = unpack(vim.api.nvim_win_get_cursor(0))
 	local url, wikilink
+	local ln = row
 	local line = vim.api.nvim_get_current_line()
+
 	-- look in current line
-
-
-
+	local idx = 0
+	col = col - 1
+	while true do
+		local partialLine = line:sub(idx)
+		local urlStart, urlEnd = partialLine:find(urlPattern)
+		local wikiStart, wikiEnd = partialLine:find(wikilinkPattern)
+		if urlEnd and (col <= idx + urlEnd) and (urlEnd < (wikiEnd or math.huge)) then
+			url = partialLine:sub(assert(urlStart), urlEnd)
+			break
+		elseif wikiEnd and (col <= idx + wikiEnd) then
+			wikilink = partialLine:sub(assert(wikiStart), wikiEnd)
+			break
+		end
+		if not urlEnd and not wikiEnd then break end -- no link found in line
+		idx = idx + math.min(urlEnd or math.huge, wikiEnd or math.huge) -- look for next link
+	end
 
 	-- look forward in upcoming lines
 	local maxForward = 10
-	local ln = row + 1
 	local totalLines = vim.api.nvim_buf_line_count(0)
-	while true do
-		line = vim.api.nvim_buf_get_lines(0, ln - 1, ln, false)[1]
-		url = line:match(urlPattern)
-		wikilink = line:match(wikilinkPattern)
-		if url or wikilink then break end
+	while not (url or wikilink) do
 		ln = ln + 1
 		if ln > totalLines or ln > row + maxForward then
 			local msg = ("Could not find URL or wikilink within %d lines."):format(maxForward)
 			vim.notify(msg, vim.log.levels.WARN)
 			return
 		end
+		line = vim.api.nvim_buf_get_lines(0, ln - 1, ln, false)[1]
+		url = line:match(urlPattern)
+		wikilink = line:match(wikilinkPattern)
+		if url or wikilink then break end
 	end
 
-	if url then vim.ui.open(url) end
-	if wikilink then
+	if url then
+		local 
+		local targetCol = line:find(mdLink or url, nil, true) - 1
+		vim.api.nvim_win_set_cursor(0, { ln, targetCol })
+		vim.ui.open(url)
+	elseif wikilink then
 		-- vim.lsp.buf.definition requires to be on the link
-		local start = line:find( wikilink, nil, true)
-		vim.api.nvim_win_set_cursor(0, { ln, start })
+		local targetCol = line:find(wikilink, nil, true) - 1
+		vim.api.nvim_win_set_cursor(0, { ln, targetCol })
 		local hasMarksman = vim.lsp.get_clients({ name = "marksman", bufnr = 0 })[1]
 		if not hasMarksman then return vim.notify("Marksman not attached.", vim.log.levels.WARN) end
 		vim.lsp.buf.definition()
 	end
-	vim.api.nvim_win_set_cursor(0, { ln, 0 })
 end
 
 function M.addTitleToUrl()
