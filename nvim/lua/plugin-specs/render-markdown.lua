@@ -30,13 +30,11 @@ return {
 	},
 	opts = {
 		sign = { enabled = false },
-		latex = { enabled = false },
-		render_modes = { "n", "c", "i", "v", "V" },
 		quote = {
 			repeat_linebreak = true, -- full border on soft-wrap
 		},
 		html = {
-			comment = { text = "󰆈" },
+			comment = { text = "󰆈" }, -- PENDING https://github.com/MeanderingProgrammer/render-markdown.nvim/issues/574
 		},
 		heading = {
 			position = "inline", -- remove indentation of headings
@@ -82,9 +80,9 @@ return {
 			},
 		},
 		--------------------------------------------------------------------------
+		render_modes = { "n", "c", "i", "v", "V" },
 		win_options = {
 			conceallevel = { default = 0 }, -- makes toggling this plugin also toggle conceallevel
-			concealcursor = { rendered = vim.o.concealcursor }
 		},
 		overrides = { -- LSP hovers: hide code block lines
 			buftype = {

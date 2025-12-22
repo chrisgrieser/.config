@@ -21,6 +21,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>0826010C-E66F-493B-82C9-47D614D621D2</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>59FFE38C-6865-4166-9303-9C4BE1C7766C</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>0A57AF60-AF83-4456-BA6B-C5074E68B218</key>
 		<array>
 			<dict>
@@ -39,16 +52,6 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>25E873D0-DCD8-487D-B9DB-42A2026485D6</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>9C5C9CF6-0447-47E9-B412-85818504EFD1</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -127,6 +130,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>365B08C4-71FA-44B3-BD68-AC921D879145</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>91363023-70E5-4857-94B6-46B825E1AD17</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>9C5C9CF6-0447-47E9-B412-85818504EFD1</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -584,6 +600,60 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<true/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>scripts/screenshot.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>59FFE38C-6865-4166-9303-9C4BE1C7766C</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>21</integer>
+				<key>hotmod</key>
+				<integer>1179648</integer>
+				<key>hotstring</key>
+				<string>4</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>0826010C-E66F-493B-82C9-47D614D621D2</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
@@ -802,6 +872,26 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>tasksettings</key>
+				<dict>
+					<key>target_path</key>
+					<string>{var:screenshot_path}</string>
+					<key>use_finder</key>
+					<false/>
+				</dict>
+				<key>taskuid</key>
+				<string>com.alfredapp.automation.core/files-and-folders/path.trash</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.automation.task</string>
+			<key>uid</key>
+			<string>9C5C9CF6-0447-47E9-B412-85818504EFD1</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>autopaste</key>
 				<false/>
 				<key>clipboardtext</key>
@@ -853,26 +943,6 @@
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>tasksettings</key>
-				<dict>
-					<key>target_path</key>
-					<string>{var:screenshot_path}</string>
-					<key>use_finder</key>
-					<false/>
-				</dict>
-				<key>taskuid</key>
-				<string>com.alfredapp.automation.core/files-and-folders/path.trash</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.automation.task</string>
-			<key>uid</key>
-			<string>9C5C9CF6-0447-47E9-B412-85818504EFD1</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
@@ -887,6 +957,17 @@
 			<key>ypos</key>
 			<real>275</real>
 		</dict>
+		<key>0826010C-E66F-493B-82C9-47D614D621D2</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>note</key>
+			<string>screenshot</string>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>670</real>
+		</dict>
 		<key>0A57AF60-AF83-4456-BA6B-C5074E68B218</key>
 		<dict>
 			<key>colorindex</key>
@@ -894,7 +975,7 @@
 			<key>xpos</key>
 			<real>200</real>
 			<key>ypos</key>
-			<real>725</real>
+			<real>950</real>
 		</dict>
 		<key>0C4ED8B1-4503-4C11-9E1F-0752164AEC64</key>
 		<dict>
@@ -903,7 +984,7 @@
 			<key>xpos</key>
 			<real>435</real>
 			<key>ypos</key>
-			<real>860</real>
+			<real>1085</real>
 		</dict>
 		<key>1A28A029-A380-4B80-82C1-AB1863D8C0C6</key>
 		<dict>
@@ -921,7 +1002,7 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>860</real>
+			<real>1085</real>
 		</dict>
 		<key>1EFB3948-B5DD-42BA-922A-4B3290C790BC</key>
 		<dict>
@@ -932,7 +1013,7 @@
 			<key>xpos</key>
 			<real>355</real>
 			<key>ypos</key>
-			<real>890</real>
+			<real>1115</real>
 		</dict>
 		<key>25E873D0-DCD8-487D-B9DB-42A2026485D6</key>
 		<dict>
@@ -941,7 +1022,7 @@
 			<key>xpos</key>
 			<real>595</real>
 			<key>ypos</key>
-			<real>860</real>
+			<real>1085</real>
 		</dict>
 		<key>365B08C4-71FA-44B3-BD68-AC921D879145</key>
 		<dict>
@@ -952,7 +1033,7 @@
 			<key>xpos</key>
 			<real>200</real>
 			<key>ypos</key>
-			<real>585</real>
+			<real>810</real>
 		</dict>
 		<key>3A193819-CC2F-4AC7-8AB0-EC5571B7878B</key>
 		<dict>
@@ -963,7 +1044,7 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>725</real>
+			<real>950</real>
 		</dict>
 		<key>59214D8E-53BE-4690-AF5F-36B2963D544A</key>
 		<dict>
@@ -974,7 +1055,16 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>585</real>
+			<real>810</real>
+		</dict>
+		<key>59FFE38C-6865-4166-9303-9C4BE1C7766C</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>xpos</key>
+			<real>200</real>
+			<key>ypos</key>
+			<real>670</real>
 		</dict>
 		<key>5CFB48F9-2348-4A1B-A5A6-034A8654DAC4</key>
 		<dict>
@@ -1001,7 +1091,7 @@
 			<key>xpos</key>
 			<real>745</real>
 			<key>ypos</key>
-			<real>860</real>
+			<real>1085</real>
 		</dict>
 		<key>954BCFCB-400E-482D-8418-02C0D9453551</key>
 		<dict>
@@ -1010,7 +1100,7 @@
 			<key>xpos</key>
 			<real>360</real>
 			<key>ypos</key>
-			<real>585</real>
+			<real>810</real>
 		</dict>
 		<key>95CF671F-9E2F-4CE9-92A0-BACEF07C97C8</key>
 		<dict>
@@ -1030,7 +1120,7 @@
 			<key>xpos</key>
 			<real>200</real>
 			<key>ypos</key>
-			<real>860</real>
+			<real>1085</real>
 		</dict>
 		<key>9C5C9CF6-0447-47E9-B412-85818504EFD1</key>
 		<dict>
@@ -1039,9 +1129,9 @@
 			<key>note</key>
 			<string>trash temp file</string>
 			<key>xpos</key>
-			<real>590</real>
+			<real>895</real>
 			<key>ypos</key>
-			<real>980</real>
+			<real>1085</real>
 		</dict>
 		<key>A069BE51-DA62-4835-8048-AF3A608C97D0</key>
 		<dict>
@@ -1099,7 +1189,7 @@
 			<key>xpos</key>
 			<real>360</real>
 			<key>ypos</key>
-			<real>725</real>
+			<real>950</real>
 		</dict>
 		<key>E762EDDE-643D-48E5-B773-C89606259F8B</key>
 		<dict>

@@ -100,11 +100,8 @@ vim.opt.report = 9001 -- disable most "x more/fewer lines" messages
 vim.opt.shortmess:append("ISs") -- no intro message, disable search count
 vim.opt.cmdheight = 0
 
----CONCEAL----------------------------------------------------------------------
-vim.opt.conceallevel = 2 -- hide some chars in markdown and json
-vim.opt.concealcursor = "n" -- do not display current line conceals in normal mode
-
 ---INVISIBLE CHARS--------------------------------------------------------------
+vim.opt.conceallevel = 2 -- hide some chars in markdown and json
 vim.opt.list = true
 vim.opt.listchars:append {
 	nbsp = "󰚌", -- ␣
