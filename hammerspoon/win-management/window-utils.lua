@@ -5,9 +5,9 @@ local u = require("meta.utils")
 
 M.iMacDisplay = hs.screen("Built%-in")
 local sideW = 0.185
-M.pseudoMax = hs.geometry { x = sideW, y = 0, w = (1- sideW), h = 1 }
+M.pseudoMax = hs.geometry { x = sideW, y = 0, w = (1 - sideW), h = 1 }
 M.middleHalf = hs.geometry { x = sideW, y = 0, w = 0.6, h = 1 }
-M.toTheSide = hs.geometry { x = 0, y = 0.055, w = sideW, h = 1 }
+M.toTheSide = hs.geometry { x = 0, y = 0.055, w = sideW, h = 1 } -- height 1 to not leave corners at bottom
 
 --------------------------------------------------------------------------------
 -- INFO to allow a narrower window in Mona

@@ -85,13 +85,8 @@ local function moveToNextDisplay()
 	win:moveToScreen(win:screen():next(), true)
 end
 
-local function tileRight() wu.moveResize(hs.window.focusedWindow(), hs.layout.right50) end
-local function tileLeft() wu.moveResize(hs.window.focusedWindow(), hs.layout.left50) end
-
 hs.hotkey.bind({ "ctrl" }, "space", toggleMaximized)
 hs.hotkey.bind(u.hyper, "M", moveToNextDisplay)
-hs.hotkey.bind(u.hyper, "right", tileRight)
-hs.hotkey.bind(u.hyper, "left", tileLeft)
 
 --------------------------------------------------------------------------------
 return M

@@ -1,7 +1,7 @@
 -- INFO
--- This module uses macOS' builtin full-screen tiling functionality and its
--- spacing functionality to quickly create a vertical split of two paired apps
--- apps via one hotkey.
+-- This module is a wrapper around macOS' builtin full-screen tiling
+-- functionality to keep automatically restore windows when one of the two
+-- splits is closed.
 --------------------------------------------------------------------------------
 local M = {}
 --------------------------------------------------------------------------------

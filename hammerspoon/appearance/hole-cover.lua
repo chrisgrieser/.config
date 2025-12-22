@@ -9,7 +9,7 @@ local u = require("meta.utils")
 ---CORNERS OF THE SCREEN--------------------------------------------------------
 local roundedCorner = hs.loadSpoon("RoundedCorners") -- https://www.hammerspoon.org/Spoons/RoundedCorners.html
 if roundedCorner then
-	roundedCorner.radius = 5
+	roundedCorner.radius = 8
 	roundedCorner:start()
 end
 
@@ -28,9 +28,10 @@ function M.update()
 	local bgColor = u.isDarkMode() and { red = 0.2, green = 0.2, blue = 0.2, alpha = 1 }
 		or { red = 0.8, green = 0.8, blue = 0.8, alpha = 1 }
 
+	local height = 20
 	M.cover = hs
 		.canvas
-		.new({ x = 0, y = screen.h - 40, w = screen.w, h = 40 }) --[[@as hs.canvas]]
+		.new({ x = 0, y = screen.h - height, w = screen.w, h = height }) --[[@as hs.canvas]]
 		:appendElements({
 			{ type = "rectangle", action = "fill", fillColor = bgColor },
 		}) --[[@as hs.canvas]]
