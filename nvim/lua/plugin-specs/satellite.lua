@@ -6,10 +6,7 @@ return {
 		winblend = 30, -- only little transparency, since otherwise hard to see in some themes
 		handlers = {
 			cursor = { enable = false },
-			marks = {
-				enable = true,
-				key = "<leader>m", -- key with which marks are created, needed to hook up satellite to it
-			},
+			marks = { enable = true },
 		},
 	},
 	init = function()

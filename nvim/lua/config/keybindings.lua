@@ -43,9 +43,6 @@ keymap("n", "<C-l>", "<C-i>", { desc = "󱋿 Jump forward", unique = false })
 keymap("n", "-", "/")
 keymap("x", "-", "<Esc>/\\%V", { desc = " Search within selection" })
 
--- [g]oto [m]atching parenthesis (`remap` needed to use builtin `MatchIt` plugin)
-keymap("n", "gm", "%", { desc = "󰅪 Goto match", remap = true })
-
 -- Diagnostics
 keymap("n", "ge", "]d", { desc = "󰋼 Next diagnostic", remap = true })
 keymap("n", "gE", "[d", { desc = "󰋼 Previous diagnostic", remap = true })
@@ -59,11 +56,8 @@ do
 	local marks = require("personal-plugins.marks")
 	marks.loadSigns()
 
-	local subLeader = "<leader>m"
-	if vim.g.whichkeyAddSpec then vim.g.whichkeyAddSpec { subLeader, group = "󰃀 Marks" } end
-
-	keymap("n", subLeader .. "m", marks.cycleMarks, { desc = "󰃀 Cycle marks" })
-	keymap("n", subLeader .. "s", marks.setUnsetMark, { desc = "󰃅 Set/unset marks" })
+	keymap("n", "gm", marks.cycleMarks, { desc = "󰃀 Cycle marks" })
+	keymap("n", "<leader>m", marks.setUnsetMark, { desc = "󰃅 Set/unset marks" })
 end
 
 ---EDITING----------------------------------------------------------------------

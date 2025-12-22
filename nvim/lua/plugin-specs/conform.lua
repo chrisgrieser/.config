@@ -61,7 +61,7 @@ return {
 						return line
 							:gsub("^%[%[.*%]%]$", "- %0") -- wikilinks
 							:gsub("^%[.*]%(.*%)$", "- %0") -- mdlinks
-							:gsub("^<.*>$", "- %0") -- bare links
+							:gsub("^<[^!].*>$", "- %0") -- bare links, not html-comment
 					end, lines)
 					callback(nil, updated)
 				end,

@@ -88,7 +88,7 @@ function M.cycleMarks()
 		notify("No mark has been set.")
 		return
 	elseif #marksSet == 1 and cursorIsAtMark(marksSet[1]) then
-		notify("Already at the only mark set.")
+		notify(("[%s] is the only mark set."):format(marksSet[1]))
 		return
 	end
 
@@ -113,7 +113,7 @@ function M.cycleMarks()
 	if success then
 		vim.cmd.normal { "zv", bang = true } -- open folds at cursor
 	else
-		notify(("Mark [%s] not valid anymore."):format(nextMark), "warn")
+		notify(("[%s] not valid anymore"):format(nextMark), "warn")
 		vim.api.nvim_del_mark(nextMark)
 	end
 end
@@ -122,35 +122,27 @@ function M.setUnsetMark()
 	local setMarks = getSetMarks()
 
 	-- if cursor is at a mark, delete it
-	for _, mark in ipairs(setMarks) do
-		if cursorIsAtMark(mark) then
-			deleteMark(mark)
-			notify(("Mark [%s] deleted."):format(mark))
-			return
-		end
+	local markAtCursor = vim.iter(setMarks):find(function(mark) return cursorIsAtMark(mark) end)
+	if markAtCursor then
+		deleteMark(markAtCursor)
+		notify(("[%s] deleted"):format(markAtCursor))
+		return
 	end
 
 	-- otherwise, set mark
 	local firstUnsetMark = vim.iter(config.marks)
 		:find(function(mark) return not vim.list_contains(setMarks, mark) end)
-	local markToSet = firstUnsetMark
-	if not markToSet then
-		local nextMark = config.marks[1]
-		for _, mark in ipairs(config.marks) do
-			if lastMarkSet and mark > lastMarkSet then -- lua can compare letters
-				nextMark = mark
-				break
-			end
-		end
-		markToSet = nextMark
-	end
+	local nextMarkAfterLastSet = vim.iter(config.marks):find(
+		function(mark) return lastMarkSet and (mark > lastMarkSet) end
+	) -- lua can compare letters
+	local markToSet = firstUnsetMark or nextMarkAfterLastSet or config.marks[1]
 
 	deleteMark(markToSet)
 	local row, col = unpack(vim.api.nvim_win_get_cursor(0))
 	vim.api.nvim_buf_set_mark(0, markToSet, row, col, {})
 	lastMarkSet = markToSet
 	setSignForMark(markToSet)
-	notify(("Mark [%s] set."):format(markToSet))
+	notify(("[%s] set"):format(markToSet))
 end
 
 function M.loadSigns()
