@@ -154,7 +154,7 @@ function M.followUrlOrWikilink()
 
 	-- look in current line
 	local idx = 0
-	col = col - 1
+	col = col + 1
 	while true do
 		local partialLine = line:sub(idx)
 		local urlStart, urlEnd = partialLine:find(urlPattern)
@@ -187,14 +187,15 @@ function M.followUrlOrWikilink()
 	end
 
 	if url then
-		local 
-		local targetCol = line:find(mdLink or url, nil, true) - 1
-		vim.api.nvim_win_set_cursor(0, { ln, targetCol })
+		-- move cursor to start of mdlink, or of the url
+		local mdLink = line:find("%[.-]%(" .. vim.pesc(url) .. "%)")
+		local targetCol = mdLink or line:find(mdLink or url, nil, true)
+		vim.api.nvim_win_set_cursor(0, { ln, targetCol - 1 })
 		vim.ui.open(url)
 	elseif wikilink then
-		-- vim.lsp.buf.definition requires to be on the link
-		local targetCol = line:find(wikilink, nil, true) - 1
-		vim.api.nvim_win_set_cursor(0, { ln, targetCol })
+		-- `vim.lsp.buf.definition` requires to be on the link
+		local targetCol = line:find(wikilink, nil, true)
+		vim.api.nvim_win_set_cursor(0, { ln, targetCol - 1 })
 		local hasMarksman = vim.lsp.get_clients({ name = "marksman", bufnr = 0 })[1]
 		if not hasMarksman then return vim.notify("Marksman not attached.", vim.log.levels.WARN) end
 		vim.lsp.buf.definition()

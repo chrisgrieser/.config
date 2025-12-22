@@ -177,7 +177,6 @@ return {
 		---MISC-------------------------------------------------------------------
 		{ "<leader>pc", function() Snacks.picker.colorschemes() end, desc = " Colorschemes" },
 		{ "<leader>eh", function() Snacks.picker.command_history() end, desc = " Ex-cmd history" },
-		{ "<leader>ms", function() Snacks.picker.marks() end, desc = "󰃁 Select mark" },
 		{ "<leader>yy", function() Snacks.picker.registers() end, desc = "󱛢 Yank ring" },
 		{ "<leader>ut", function() Snacks.picker.undo() end, desc = "󰋚 Undo tree" },
 		-- stylua: ignore
@@ -258,21 +257,6 @@ return {
 						},
 					},
 					layout = "big_preview",
-				},
-				marks = {
-					transform = function(item) return item.label:find("%u") ~= nil end, -- only global marks
-					win = {
-						input = {
-							keys = { ["<D-d>"] = { "delete_mark", mode = "i" } },
-						},
-					},
-					actions = {
-						delete_mark = function(picker)
-							local markName = picker:current().label
-							require("personal-plugins.marks").deleteMark(markName)
-							picker:find() -- reload
-						end,
-					},
 				},
 				registers = {
 					transform = function(item) return item.label:find("[1-9]") ~= nil end, -- only numbered

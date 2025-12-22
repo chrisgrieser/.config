@@ -58,25 +58,11 @@ keymap("n", "<D-U>", function() require("personal-plugins.misc").openFirstUrlInB
 do
 	local marks = require("personal-plugins.marks")
 
-	marks.setup {
-		marks = { "A", "B", "C" },
-		signs = { hlgroup = "StandingOut", icons = { A = "󰬈", B = "󰬉", C = "󰬊" } },
-	}
-
 	local subLeader = "<leader>m"
 	if vim.g.whichkeyAddSpec then vim.g.whichkeyAddSpec { subLeader, group = "󰃃 Marks" } end
 
 	keymap("n", subLeader .. "m", marks.cycleMarks, { desc = "󰃀 Cycle marks" })
 	keymap("n", subLeader .. "r", marks.deleteAllMarks, { desc = "󰃆 Delete marks" })
-
-	for _, mark in pairs(marks.config.marks) do
-		keymap(
-			"n",
-			subLeader .. mark:lower(),
-			function() marks.setUnsetMark(mark) end,
-			{ desc = "󰃃 Set " .. mark }
-		)
-	end
 end
 
 ---EDITING----------------------------------------------------------------------
