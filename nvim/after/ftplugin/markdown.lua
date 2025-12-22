@@ -32,6 +32,10 @@ bkeymap({ "n", "i" }, "<D-u>", function() require("personal-plugins.markdown-qol
 bkeymap("n", "<C-j>", [[/^##\+ .*<CR>]], { desc = " Next heading" })
 bkeymap("n", "<C-k>", [[?^##\+ .*<CR>]], { desc = " Prev heading" })
 
+-- follow url/wikilink
+-- stylua: ignore
+bkeymap("n", "gx", function() require("personal-plugins.markdown-qol").followUrlOrWikilink() end, { desc = " Follow URL/Wikilink" })
+
 -- <D-h> remapped to <D-5>, since used by macOS PENDING https://github.com/neovide/neovide/issues/3099
 -- stylua: ignore
 bkeymap({ "n", "i" }, "<D-5>", function() require("personal-plugins.markdown-qol").incrementHeading(1) end, { desc = " Increment heading" })

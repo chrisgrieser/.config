@@ -144,6 +144,46 @@ function M.incrementHeading(dir)
 	vim.api.nvim_win_set_cursor(0, { lnum, math.max(col + diff, 0) })
 end
 
+function M.followUrlOrWikilink()
+	local urlPattern = [[%l+://[^%s)%]}"'`>]+]]
+	local wikilinkPattern = "%[%[.-]]"
+	local row, col = unpack(vim.api.nvim_win_get_cursor(0))
+	local url, wikilink
+	local line = vim.api.nvim_get_current_line()
+	-- look in current line
+
+
+
+
+	-- look forward in upcoming lines
+	local maxForward = 10
+	local ln = row + 1
+	local totalLines = vim.api.nvim_buf_line_count(0)
+	while true do
+		line = vim.api.nvim_buf_get_lines(0, ln - 1, ln, false)[1]
+		url = line:match(urlPattern)
+		wikilink = line:match(wikilinkPattern)
+		if url or wikilink then break end
+		ln = ln + 1
+		if ln > totalLines or ln > row + maxForward then
+			local msg = ("Could not find URL or wikilink within %d lines."):format(maxForward)
+			vim.notify(msg, vim.log.levels.WARN)
+			return
+		end
+	end
+
+	if url then vim.ui.open(url) end
+	if wikilink then
+		-- vim.lsp.buf.definition requires to be on the link
+		local start = line:find( wikilink, nil, true)
+		vim.api.nvim_win_set_cursor(0, { ln, start })
+		local hasMarksman = vim.lsp.get_clients({ name = "marksman", bufnr = 0 })[1]
+		if not hasMarksman then return vim.notify("Marksman not attached.", vim.log.levels.WARN) end
+		vim.lsp.buf.definition()
+	end
+	vim.api.nvim_win_set_cursor(0, { ln, 0 })
+end
+
 function M.addTitleToUrl()
 	local line = vim.api.nvim_get_current_line()
 	local url = line:match([[<?%l+://%S+>?]])
