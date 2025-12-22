@@ -59,11 +59,10 @@ function run() {
 			items: [{ title: "No response from GitHub.", subtitle: "Try again later.", valid: false }],
 		});
 	}
-
-	// GUARD errors like invalid API token
+	// GUARD errors like invalid API token or rate limit
 	const responseObj = JSON.parse(response);
 	if (responseObj.message) {
-		const item = { title: "Error", subtitle: responseObj.message, valid: false };
+		const item = { title: "Request denied.", subtitle: responseObj.message, valid: false };
 		return JSON.stringify({ items: [item] });
 	}
 

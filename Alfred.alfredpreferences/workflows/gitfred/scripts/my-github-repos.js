@@ -104,7 +104,11 @@ function run() {
 		}
 		const reposOfPage = JSON.parse(response);
 		if (reposOfPage.message) {
-			const item = { title: reposOfPage.message, arg: reposOfPage.documentation };
+			const item = {
+				title: "GitHub denied request.",
+				subtitle: reposOfPage.message,
+				valid: false,
+			};
 			return JSON.stringify({ items: [item] });
 		}
 		console.log(`repos page #${page}: ${reposOfPage.length}`);
