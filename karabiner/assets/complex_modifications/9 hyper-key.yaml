@@ -22,45 +22,52 @@ rules:
         # history (CleanShot) (done in `finder-vim-alfred-addon.yaml` to consider
         # Finder vim mode properly)
   #─────────────────────────────────────────────────────────────────────────────
+  - description: "⇪ Window Movement"
+    manipulators:
+      - type: basic
+        from: { key_code: down_arrow, modifiers: *hyper }
+        to: [{ key_code: down_arrow, modifiers: [control, fn] }]
+      - type: basic
+        from: { key_code: up_arrow, modifiers: *hyper }
+        to: [{ key_code: up_arrow, modifiers: [control, fn] }]
+      - type: basic
+        from: { key_code: right_arrow, modifiers: *hyper }
+        to: [{ key_code: right_arrow, modifiers: [control, fn] }]
+      - type: basic
+        from: { key_code: left_arrow, modifiers: *hyper }
+        to: [{ key_code: left_arrow, modifiers: [control, fn] }]
+      - type: basic # restore previous layout
+        from: { key_code: end, modifiers: *hyper }
+        to: [{ key_code: r, modifiers: [control, fn] }]
+  #─────────────────────────────────────────────────────────────────────────────
   - description: "⇪ Insert Mode Vim"
     manipulators:
       # Movement
       - type: basic
         from: { key_code: h, modifiers: *hyper }
-        to:
-          - key_code: left_arrow
+        to: [{ key_code: left_arrow }]
       - type: basic
         from: { key_code: j, modifiers: *hyper }
-        to:
-          - key_code: down_arrow
+        to: [{ key_code: down_arrow }]
       - type: basic
         from: { key_code: k, modifiers: *hyper }
-        to:
-          - key_code: up_arrow
+        to: [{ key_code: up_arrow }]
       - type: basic
         from: { key_code: l, modifiers: *hyper }
-        to:
-          - key_code: right_arrow
+        to: [{ key_code: right_arrow }]
       - type: basic
         from: { key_code: p, modifiers: *hyper }
-        to:
-          - { key_code: e, modifiers: [control] }
+        to: [{ key_code: e, modifiers: [control] }]
       - type: basic
         from: { key_code: u, modifiers: *hyper }
-        to:
-          - { key_code: a, modifiers: [control] }
-      # word to the left
+        to: [{ key_code: a, modifiers: [control] }]
       - type: basic
         from: { key_code: i, modifiers: *hyper }
-        to:
-          - { key_code: left_arrow, modifiers: [option] }
-      # word to the right
+        to: [{ key_code: left_arrow, modifiers: [option] }]
       - type: basic
         from: { key_code: o, modifiers: *hyper }
-        to:
-          - { key_code: right_arrow, modifiers: [option] }
-      # delete word
-      - type: basic
+        to: [{ key_code: right_arrow, modifiers: [option] }]
+      - type: basic # delete word
         from: { key_code: spacebar, modifiers: *hyper }
         to:
           - { key_code: right_arrow, modifiers: [option] } # to the right end of the word

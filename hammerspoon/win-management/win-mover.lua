@@ -17,6 +17,7 @@ local smallWinApps = {
 }
 local pseudoMaxApps = {
 	"Microsoft Word",
+	"Brave Browser",
 	"Safari",
 	"Neovide",
 	"Slack",
@@ -43,7 +44,7 @@ M.wf_pseudoMax = wf.new(pseudoMaxApps)
 	end)
 
 M.wf_middle_half = wf.new(smallWinApps)
-	:setOverrideFilter({ fullscreen = false })
+	:setOverrideFilter({ fullscreen = false, rejectTitles = { "^Save$", "^Open$" } })
 	:subscribe(wf.windowCreated, function(win)
 		if require("win-management.auto-tile").winIsOfAutotileApp(win) then return end
 		wu.moveResize(win, wu.middleHalf)
