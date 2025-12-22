@@ -1,3 +1,6 @@
+-- DOCS https://github.com/lewis6991/satellite.nvim
+--------------------------------------------------------------------------------
+
 return {
 	"lewis6991/satellite.nvim",
 	event = "VeryLazy",
@@ -6,7 +9,10 @@ return {
 		winblend = 30, -- only little transparency, since otherwise hard to see in some themes
 		handlers = {
 			cursor = { enable = false },
-			marks = { enable = true },
+			marks = {
+				enable = true,
+				key = "", -- prevent `m` override from satellite.nvim
+			},
 		},
 	},
 	init = function()

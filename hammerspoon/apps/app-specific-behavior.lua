@@ -64,7 +64,7 @@ M.wf_scripteditor = wf
 	end)
 
 ---MASTODON---------------------------------------------------------------------
--- 1. auto-close any media windows
+-- 1. auto-close media windows
 -- 2. auto-scroll up
 M.aw_masto = aw.new(function(appName, event, masto)
 	if appName ~= "Mona" then return end

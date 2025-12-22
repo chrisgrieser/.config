@@ -100,9 +100,21 @@ for appName, ignoredWins in pairs(config.appsToAutoTile) do
 	end):start()
 end
 
----helper function, so window-closing modules can reset the count here
+---HELPERS----------------------------------------------------------------------
+
 ---@param appName string
 function M.resetWinCount(appName) M["winCount_" .. appName] = nil end
+
+---@param win hs.window
+---@return boolean
+function M.winIsOfAutotileApp(win)
+	local appName = win:application():name() ---@diagnostic disable-line: undefined-field
+	local autoTileApps = {}
+	for name, _ in pairs(config.appsToAutoTile) do
+		table.insert(autoTileApps, name)
+	end
+	return hs.fnutils.contains(autoTileApps, appName)
+end
 
 --------------------------------------------------------------------------------
 return M

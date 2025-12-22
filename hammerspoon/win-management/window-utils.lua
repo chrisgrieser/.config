@@ -23,7 +23,7 @@ function M.moveResize(win, pos)
 	if not (win and win:isMaximizable() and win:isStandard()) then return end
 
 	-- resize with redundancy, since macOS sometimes doesn't resize properly
-	u.defer({ 0, 0.4, 0.8 }, function() win:moveToUnit(pos) end)
+	u.defer({ 0, 0.5 }, function() win:moveToUnit(pos) end)
 end
 
 --------------------------------------------------------------------------------

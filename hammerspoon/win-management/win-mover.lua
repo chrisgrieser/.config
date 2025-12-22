@@ -13,6 +13,7 @@ local smallWinApps = {
 	"TextEdit",
 	"System Settings",
 	"Preview",
+	"Finder",
 }
 local pseudoMaxApps = {
 	"Microsoft Word",
@@ -36,14 +37,17 @@ local pseudoMaxApps = {
 M.wf_pseudoMax = wf.new(pseudoMaxApps)
 	:setOverrideFilter({ fullscreen = false, rejectTitles = { "^Save$", "^Open$" } })
 	:subscribe(wf.windowCreated, function(win)
+		if require("win-management.auto-tile").winIsOfAutotileApp(win) then return end
 		local size = env.isProjector() and hs.layout.maximized or wu.pseudoMax
 		wu.moveResize(win, size)
 	end)
 
--- windows that should be sized smaller
 M.wf_middle_half = wf.new(smallWinApps)
 	:setOverrideFilter({ fullscreen = false })
-	:subscribe(wf.windowCreated, function(win) wu.moveResize(win, wu.middleHalf) end)
+	:subscribe(wf.windowCreated, function(win)
+		if require("win-management.auto-tile").winIsOfAutotileApp(win) then return end
+		wu.moveResize(win, wu.middleHalf)
+	end)
 
 -- If two screens, always move new windows to Mouse Screen
 M.wf_appsOnMouseScreen = wf.new(true)
@@ -58,19 +62,15 @@ M.wf_appsOnMouseScreen = wf.new(true)
 ---HOTKEYS----------------------------------------------------------------------
 local function toggleMaximized()
 	local frontWin = hs.window.focusedWindow()
-	if env.isProjector() then
-		wu.moveResize(frontWin, hs.layout.maximized)
-		return
-	end
+	local frontApp = frontWin:application():name() ---@diagnostic disable-line: undefined-field
 
-	local baseSize = wu.pseudoMax
-	if u.isFront("Finder") or u.isFront(smallWinApps) then baseSize = wu.middleHalf end
-	if u.isFront("Mona") then baseSize = wu.toTheSide end
+	if env.isProjector() then return wu.moveResize(frontWin, hs.layout.maximized) end
+	if frontApp == "Mona" then return wu.moveResize(frontWin, wu.toTheSide) end
 
+	local baseSize = hs.fnutils.contains(smallWinApps, frontApp) and wu.middleHalf or wu.pseudoMax
 	local screen = frontWin:screen():frame()
 	local isMaximized = frontWin:frame().w == screen.w and frontWin:frame().h == screen.h
 	local newSize = isMaximized and baseSize or hs.layout.maximized
-
 	wu.moveResize(frontWin, newSize)
 end
 
