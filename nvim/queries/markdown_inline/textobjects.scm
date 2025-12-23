@@ -1,18 +1,12 @@
 ; extends
 
 ; mdlink
-(inline_link) @mdlink.outer
+(inline_link
+  (link_text) @mdlink.inner) @mdlink.outer
 
-(link_text) @mdlink.inner
-
-;-------------------------------------------------------------------------------
 ; emphasis
-((strong_emphasis) @emphasis.inner
+((strong_emphasis) @emphasis.inner @emphasis.outer
   (#offset! @emphasis.inner 0 2 0 -2))
 
-((emphasis) @emphasis.inner
+((emphasis) @emphasis.inner @emphasis.outer
   (#offset! @emphasis.inner 0 1 0 -1))
-
-(strong_emphasis) @emphasis.outer
-
-(emphasis) @emphasis.outer

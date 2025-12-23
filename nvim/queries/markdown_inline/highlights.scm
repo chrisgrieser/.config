@@ -10,10 +10,11 @@
 
 ; wikilinks
 (inline
-  "[" ; ensures to match `[[links]]`, but not `[links]`
-  (shortcut_link)
-  "]"
-  (#set! priority 130)) @markdown.internal_link ; priority to overwrite LSP highlight
+  "[" @markup.link ; ensures to match `[[links]]`, but not `[links]`
+  (shortcut_link
+    (link_text) @markdown.internal_link)
+  "]" @markup.link
+  (#set! priority 130)) ; priority to overwrite LSP highlight
 
 ;-----------------------------------------------------------------------------
 ; de-emphasize URLs in mdlinks
