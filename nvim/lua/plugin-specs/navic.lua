@@ -1,11 +1,14 @@
--- DOCS https://github.com/SmiteshP/nvim-navic?tab=readme-ov-file#-customise
+-- DOCS https://github.com/SmiteshP/nvim-navic#-customise
 --------------------------------------------------------------------------------
 
 return {
 	"SmiteshP/nvim-navic",
 	event = "LspAttach",
 	opts = {
-		lsp = { auto_attach = true },
+		lsp = {
+			auto_attach = true,
+			preference = { "obsidian-ls" }
+		},
 		icons = { enabled = false }, -- save space in statusline
 		separator = " ",
 		depth_limit = 7,
