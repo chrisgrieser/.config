@@ -67,6 +67,7 @@ for i in {1..200}; do
 	printf "\rSearching for volume… %s" "${spinner:$pos:1}"
 	sleep 0.2
 done
+printf "\n"
 
 if [[ -z "$volume_name" ]]; then
 	print "\e[1;33mTimeout, no volume found.\e[0m"
@@ -93,7 +94,7 @@ _pretty_header "Archive of backups" "special"
 archive="$volume_name/older backups"
 mkdir -p "$archive"
 cd "$archive" || return 1
-oldest_backup_date=$(command ls | tail -n1 | cut -d_ -f3) # assumes iso8691 & 2 `_`
+oldest_backup_date=$(command ls | tail -n1 | cut -d_ -f3) # assumes ISO-8691 & two `_`
 
 oldest_timestamp=0 # no backups yet
 [[ -n "$oldest_backup_date" ]] && oldest_timestamp=$(date -j -f "%Y-%m-%d" "$oldest_backup_date" "+%s")
