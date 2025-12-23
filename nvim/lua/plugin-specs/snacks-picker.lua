@@ -2,6 +2,14 @@
 -- DOCS https://github.com/folke/snacks.nvim/blob/main/docs/picker.md
 --------------------------------------------------------------------------------
 
+-- disable default keymaps to make the `?` help overview less cluttered
+vim.defer_fn(function()
+	require("snacks.picker.config.defaults").defaults.win.input.keys = {}
+	require("snacks.picker.config.defaults").defaults.win.list.keys = {}
+	require("snacks.picker.config.sources").explorer.win.list.keys = {}
+end, 2000)
+--------------------------------------------------------------------------------
+
 -- lightweight version of `telescope-import.nvim`
 local function importLuaModule()
 	Snacks.picker.grep_word {
@@ -504,7 +512,7 @@ return {
 						["<PageUp>"] = { "preview_scroll_up", mode = "i" },
 						["<PageDown>"] = { "preview_scroll_down", mode = "i" },
 
-						["<C-h>"] = { "toggle_hidden_and_ignored", mode = "i" }, -- consistent with `fzf`
+						["<C-h>"] = { { "toggle_hidden", "toggle_ignored" }, mode = "i" }, -- consistent with `fzf`
 						["<C-r>"] = { "toggle_regex", mode = "i" },
 						["<C-f>"] = { "toggle_follow", mode = "i" },
 

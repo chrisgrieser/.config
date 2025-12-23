@@ -86,6 +86,7 @@ function run() {
 			find "${dotfilesFolder}" -type d \
 			-not -path "**/.git/*" \
 			-not -path "**/*.app/*" \
+			-not -path "**/*.app" \
 			-not -path "**/Alfred.alfredpreferences/*" \
 			-not -path "**/hammerspoon/Spoons/*"
 		`)

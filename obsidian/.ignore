@@ -1,5 +1,5 @@
 hotkeys.json
 
 # Automator App Internals
-*.app
+**/*.app
 ApplicationStub.icns
