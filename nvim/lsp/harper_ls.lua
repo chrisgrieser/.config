@@ -23,7 +23,7 @@ return {
 			dialect = "American",
 			linters = {
 				UseTitleCase = false, -- prefer sentence case headings
-				SentenceCapitalization = true, -- PENDING https://github.com/Automattic/harper/issues/1056
+				SentenceCapitalization = false, -- PENDING https://github.com/Automattic/harper/issues/1056
 				UnclosedQuotes = false, -- PENDING https://github.com/Automattic/harper/issues/1573
 				PhrasalVerbAsCompoundNoun = false, -- PENDING https://github.com/Automattic/harper/issues/2369
 			},
