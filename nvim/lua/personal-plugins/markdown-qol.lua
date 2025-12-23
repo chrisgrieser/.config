@@ -213,9 +213,9 @@ function M.addTitleToUrl()
 
 	local out = vim.system({ "curl", "--silent", "--location", innerUrl }):wait()
 	if out.code ~= 0 then return vim.notify(out.stderr, vim.log.levels.ERROR) end
-	local title = out.stdout:match("<title.->(.-)</title>") or ""
-	if title == "" then vim.notify("No title found.", vim.log.levels.WARN) end
+	local title = vim.trim(out.stdout:match("<title.->(.-)</title>") or "")
 	title = title -- cleanup
+		:gsub("[\n\r]+", " ")
 		:gsub("^GitHub %- ", "")
 		:gsub(" · GitHub", "")
 
@@ -224,6 +224,11 @@ function M.addTitleToUrl()
 		.. ("[%s](%s)"):format(title, innerUrl)
 		.. line:sub(urlEnd + 1)
 	vim.api.nvim_set_current_line(updatedLine)
+	if title == "" then
+		vim.notify("No title found.", vim.log.levels.WARN)
+		local row = vim.api.nvim_win_get_cursor(0)[1]
+		vim.api.nvim_win_set_cursor(0, { row, urlStart + 1 })
+	end
 end
 
 function M.cycleList()
