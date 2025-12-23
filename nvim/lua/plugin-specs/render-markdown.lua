@@ -1,11 +1,6 @@
 -- DOCS https://github.com/MeanderingProgrammer/render-markdown.nvim#setup
 --------------------------------------------------------------------------------
 
--- consistent with the color from `query/markdown_inline/highlights.scm`
-local internalLinkHighlight = "@tag"
-
---------------------------------------------------------------------------------
-
 return {
 	"MeanderingProgrammer/render-markdown.nvim",
 	dependencies = "echasnovski/mini.icons",
@@ -39,10 +34,10 @@ return {
 			position = "left",
 		},
 		link = {
-			wiki = { icon = "󰴚 ", highlight = internalLinkHighlight },
+			wiki = { icon = "" },
 			custom = {
 				-- internal links (same as wikilink)
-				file = { pattern = "%.md$", icon = "󰴚 ", highlight = internalLinkHighlight },
+				file = { pattern = "%.md$", icon = "" },
 
 				-- for links that do not match a pattern below
 				web = { icon = " " },

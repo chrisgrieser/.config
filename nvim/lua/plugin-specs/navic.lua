@@ -5,10 +5,7 @@ return {
 	"SmiteshP/nvim-navic",
 	event = "LspAttach",
 	opts = {
-		lsp = {
-			auto_attach = true,
-			preference = { "obsidian-ls" }
-		},
+		lsp = { auto_attach = true },
 		icons = { enabled = false }, -- save space in statusline
 		separator = " ",
 		depth_limit = 7,
