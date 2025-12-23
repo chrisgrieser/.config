@@ -43,7 +43,7 @@ function M.setDarkMode(toMode)
 	hs.osascript.applescript(applescript)
 
 	-- sketchybar
-	u.defer(1, function() hs.execute(u.exportPath .. "sketchybar --reload") end)
+	hs.execute(u.exportPath .. "sketchybar --reload")
 
 	-- PDF background
 	if u.appRunning("Highlights") then

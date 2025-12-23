@@ -27,9 +27,16 @@ return {
 			colors.comment = "#767fb1" -- bit more contrast (original: #636da6)
 		end,
 		on_highlights = function(hl, colors)
-			-- general
+			-- custom highlights
 			hl.StandingOut = { fg = colors.magenta2, bold = true }
 			hl["@keyword.return"] = { link = "StandingOut" }
+			hl["@markdown.internal_link"] = {
+				fg = colors.magenta,
+				sp = colors.magenta, -- underline color of spaces
+				underline = true,
+			}
+
+			-- general
 			hl["@markup.strong"] = { fg = colors.fg_dark, bold = true }
 			hl["@string.documentation.python"] = { link = "Comment" }
 			hl.LspSignatureActiveParameter = { link = "Visual" }

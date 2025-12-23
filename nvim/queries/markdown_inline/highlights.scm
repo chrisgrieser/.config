@@ -1,13 +1,13 @@
 ; extends
 
-; internal links to Markdown files: `@tag` highlight
+; internal links to Markdown files: `@markdown.internal_link` highlight
 (inline_link
-  (link_text) @tag
+  (link_text) @markdown.internal_link
   (link_destination) @_dest
   (#lua-match? @_dest ".*%.md$"))
 
-; wikilinks: `@tag` highlight (priority to overwrite LSP highlight)
-((shortcut_link) @tag (#set! priority 130))
+; wikilinks: `@markdown.internal_link` highlight (priority to overwrite LSP highlight)
+((shortcut_link) @markdown.internal_link (#set! priority 130))
 
 ; URLs in mdlinks: `@comment` highlight
 (inline_link

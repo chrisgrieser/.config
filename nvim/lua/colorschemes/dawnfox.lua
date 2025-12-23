@@ -21,9 +21,16 @@ return {
 		},
 		groups = {
 			dawnfox = {
-				-- general
+				-- custom highlights
 				["StandingOut"] = { fg = "#9f2e69", style = "bold" },
 				["@keyword.return"] = { link = "StandingOut" },
+				["@markdown.internal_link"] = {
+					fg = "palette.magenta",
+					sp = "palette.magenta", -- underline color of spaces
+					style = "underline",
+				},
+
+				-- general
 				["LspSignatureActiveParameter"] = { link = "Visual" },
 				["@namespace.builtin.lua"] = { link = "@variable.builtin" }, -- `vim` and `hs`
 				["@character.printf"] = { link = "SpecialChar" },
@@ -33,7 +40,7 @@ return {
 				["Operator"] = { fg = "#846a52" },
 				["@string.special.url.comment"] = { style = "underline" },
 				["@markup.link.label.markdown_inline"] = { fg = "palette.orange.dim" }, -- for md in notifications
-				["@markup.strong"] = { fg = "palette.magenta", style = "bold" },
+				["@markup.strong"] = { fg = "palette.blue", style = "bold" },
 				["Added"] = { link = "diffAdded" },
 				["Removed"] = { link = "diffRemoved" },
 				["Whitespace"] = { fg = "#dfccd4" }, -- a bit darker
