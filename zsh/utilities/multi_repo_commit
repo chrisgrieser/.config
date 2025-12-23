@@ -4,19 +4,19 @@
 github_username="chrisgrieser"
 # set -e
 
-# repo_names="alfred|shimmering-obsidian|gitfred"
-repo_names="nvim"
+repo_names="alfred|shimmering-obsidian|gitfred"
+# repo_names="nvim"
 # repo_names="obsidian-quadro|pseudometa-obsidian-plugin-template|grappling-hook|obsidian-proofreader"
 # ALL
 # repo_names="finder-vim-mode|zsh-magic-dashboard|nvim|alfred|shimmering-obsidian|gitfred|obsidian-quadro|pseudometa-obsidian-plugin-template|grappling-hook|obsidian-proofreader"
 
 function actions_in_repo {
-	git apply "$HOME"/Desktop/patchN
+	cp -f "$HOME/Desktop/.rsync-exclude" "./.rsync-exclude"
 }
 
-commit_msg="docs: enforce sentence case headings"
+commit_msg="ci: update .rsync-exclude"
 
-amend_no_edit="true"
+amend_no_edit="false"
 
 #───────────────────────────────────────────────────────────────────────────────
 #───────────────────────────────────────────────────────────────────────────────
@@ -42,7 +42,7 @@ echo "$repos_to_update" | rs
 echo
 
 if [[ "$amend_no_edit" == "true" ]]; then
-	print "\e[0;33mWARN: Amending to previous commit"
+	print "\e[0;33mWARN: Amending to previous commit\e[0m"
 else
 	print "\e[1;34mCommit message:\e[0m"
 	echo "$commit_msg"
@@ -76,10 +76,7 @@ while read -r repo; do
 
 	# COMMIT/AMEND
 	if [[ "$amend_no_edit" == "true" ]]; then
-		git add --all &&
-			# git commit --amend --message="$commit_msg" &&
-			git commit --amend --no-edit &&
-			git push --no-progress --force
+		git add --all && git commit --amend --no-edit && git push --no-progress --force
 	else
 		git add --all && git commit --message="$commit_msg" && git push --no-progress
 	fi
