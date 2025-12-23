@@ -1,18 +1,22 @@
 ; extends
 
-; internal links to Markdown files: `@markdown.internal_link` highlight
+;-------------------------------------------------------------------------------
+; INFO `@markdown.internal_link` needs to be defined manually
+; internal links to Markdown files
 (inline_link
   (link_text) @markdown.internal_link
-  (link_destination) @_dest
-  (#lua-match? @_dest ".*%.md$"))
+  (link_destination) @_
+  (#lua-match? @_ "%.md$"))
 
-; wikilinks: `@markdown.internal_link` highlight (priority to overwrite LSP highlight)
+; wikilinks
 (inline
-  "["
-  (shortcut_link) @markdown.internal_link
-  (#set! priority 130))
+  "[" ; ensures to match `[[links]]`, but not `[links]`
+  (shortcut_link)
+  "]"
+  (#set! priority 130)) @markdown.internal_link ; priority to overwrite LSP highlight
 
-; URLs in mdlinks: `@comment` highlight
+;-----------------------------------------------------------------------------
+; de-emphasize URLs in mdlinks
 (inline_link
   (link_text)
   (link_destination) @comment)

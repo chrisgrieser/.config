@@ -9,17 +9,14 @@ local isAtMother = host:find("Mother")
 
 if isAtMother then
 	vim.g.neovide_scale_factor = 0.9
-	vim.g.neovide_refresh_rate = 30
 	vim.g.neovide_padding_top = 4
 	vim.g.neovide_padding_left = 6
 elseif isAtOffice then
 	vim.g.neovide_scale_factor = 1.05
-	vim.g.neovide_refresh_rate = 45
 	vim.g.neovide_padding_top = 0
 	vim.g.neovide_padding_left = 2
 else
 	vim.g.neovide_scale_factor = 1.00
-	vim.g.neovide_refresh_rate = 45
 	vim.g.neovide_padding_top = 18
 	vim.g.neovide_padding_left = 8
 end
@@ -47,7 +44,7 @@ vim.g.neovide_input_macos_option_key_is_meta = "none" -- disable, so `{@~` etc. 
 
 -- Appearance
 vim.g.neovide_opacity = 1
-vim.g.neovide_underline_stroke_scale = 2.5 -- fix underline thickness
+vim.g.neovide_underline_stroke_scale = 1.8 -- fix underline thickness
 
 -- behavior
 vim.g.neovide_remember_window_size = true
