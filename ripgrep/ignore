@@ -1,6 +1,7 @@
 # Mac Stuff
 .Trash
 .localized
+.DS_Store
 
 # useless stuff inside pseudo-apps
 **/*.app/*
@@ -18,7 +19,6 @@
 # IGNORE PROJECT BOILERPLATE
 
 # general
-.github
 LICENSE
 .editorconfig
 
@@ -35,7 +35,6 @@ package-lock.json
 versions.json
 manifest.json
 {ts,js}config.json
-biome.{json,jsonc}
 
 # python
 __init__.py

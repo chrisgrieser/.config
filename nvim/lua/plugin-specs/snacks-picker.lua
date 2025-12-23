@@ -205,9 +205,9 @@ return {
 						"--files", -- turn `rg` into a file finder
 						"--sortr=modified", -- sort by recency, slight performance impact
 						"--no-config",
+						-- these are *always* ignored, even if `toggle_ignored` is switched
 						("--ignore-file=" .. vim.env.HOME .. "/.config/ripgrep/ignore"),
 					},
-					exclude = { "node_modules", ".DS_Store" }, -- keep this ignored even if toggling to show hidden/ignored
 					layout = "small_no_preview",
 					matcher = { frecency = true }, -- slight performance impact
 					win = {
@@ -310,6 +310,7 @@ return {
 					args = {
 						"--sortr=modified", -- sort by recency, slight performance impact
 						"--no-config",
+						-- these are *always* ignored, even if `toggle_ignored` is switched
 						("--ignore-file=" .. vim.env.HOME .. "/.config/ripgrep/ignore"),
 					},
 					layout = "big_preview",
@@ -378,7 +379,7 @@ return {
 					win = {
 						input = {
 							keys = {
-								["<Tab>"] = { "list_down_wrapping", mode = "i" },
+								["<Tab>"] = { "list_down", mode = "i" },
 								["<Space>"] = { "git_stage", mode = "i" },
 								-- <CR> opens the file as usual
 							},
@@ -390,7 +391,7 @@ return {
 					win = {
 						input = {
 							keys = {
-								["<Tab>"] = { "list_down_wrapping", mode = "i" },
+								["<Tab>"] = { "list_down", mode = "i" },
 								["<Space>"] = { "git_stage", mode = "i" },
 								-- <CR> opens the file as usual
 							},
@@ -436,11 +437,15 @@ return {
 			formatters = {
 				file = { filename_first = true },
 			},
+			previewers = {
+				diff = {
+					-- style = "terminal", -- "terminal" = use git command (deltas)
+					wo = { wrap = false }, -- PENDING https://github.com/folke/snacks.nvim/issues/2490
+				},
+			},
 			toggles = {
-				regex = { icon = "", value = true }, -- invert -> only display if enabled
-				follow = { icon = "󰌺", value = false }, -- invert -> only display if disabled
-				ignored = { icon = "󱈄" },
-				hidden = { icon = "󱗼" },
+				regex = { value = true }, -- invert -> only display if enabled
+				follow = { value = false }, -- invert -> only display if disabled
 			},
 			ui_select = true,
 			layout = "wide_with_preview", -- = default layout
@@ -494,7 +499,7 @@ return {
 					keys = {
 						["<Esc>"] = { "close", mode = "i" }, --> disable normal mode
 						["<CR>"] = { "confirm", mode = "i" },
-						["<Tab>"] = { "list_down_wrapping", mode = "i" },
+						["<Tab>"] = { "list_down", mode = "i" },
 						["<S-Tab>"] = { "list_up", mode = "i" },
 						["<C-v>"] = { "edit_vsplit", mode = "i" },
 						["<D-Up>"] = { "list_top", mode = "i" },
@@ -512,7 +517,8 @@ return {
 						["<PageUp>"] = { "preview_scroll_up", mode = "i" },
 						["<PageDown>"] = { "preview_scroll_down", mode = "i" },
 
-						["<C-h>"] = { { "toggle_hidden", "toggle_ignored" }, mode = "i" }, -- consistent with `fzf`
+						-- mapping consistent with `fzf`
+						["<C-h>"] = { { "toggle_hidden", "toggle_ignored" }, mode = "i" }, ---@diagnostic disable-line: assign-type-mismatch
 						["<C-r>"] = { "toggle_regex", mode = "i" },
 						["<C-f>"] = { "toggle_follow", mode = "i" },
 
@@ -559,12 +565,6 @@ return {
 						Snacks.notify(value, { icon = "󰅍", title = "Copied", ft = ft })
 					end
 				end,
-				list_down_wrapping = function(picker)
-					local allVisible = #picker.list.items -- picker:count() only counts unfiltered
-					local current = picker.list.cursor -- picker:current().idx incorrect for `smart` source
-					local action = current == allVisible and "list_top" or "list_down"
-					picker:action(action)
-				end,
 				reveal_in_macOS_Finder = function(picker)
 					assert(jit.os == "OSX", "requires macOS")
 					local path = picker:current().file
@@ -583,22 +583,6 @@ return {
 					vim.cmd.normal { "zv", bang = true } -- open folds
 
 					vim.api.nvim_exec_autocmds("QuickFixCmdPost", {})
-				end,
-				toggle_hidden_and_ignored = function(picker)
-					picker.opts["hidden"] = not picker.opts.hidden
-					picker.opts["ignored"] = not picker.opts.ignored
-
-					if picker.opts.finder ~= "explorer" then
-						-- remove `--ignore-file` extra arg
-						picker.opts["_originalArgs"] = picker.opts["_originalArgs"] or picker.opts.args
-						local noIgnoreFileArgs = vim.iter(picker.opts.args)
-							:filter(function(arg) return not vim.startswith(arg, "--ignore-file=") end)
-							:totable()
-						picker.opts["args"] = picker.opts.hidden and noIgnoreFileArgs
-							or picker.opts["_originalArgs"]
-					end
-
-					picker:find()
 				end,
 			},
 			prompt = "  ", -- 
