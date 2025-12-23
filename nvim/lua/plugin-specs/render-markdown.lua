@@ -36,11 +36,8 @@ return {
 		link = {
 			wiki = { icon = "" },
 			custom = {
-				-- internal links (same as wikilink)
-				file = { pattern = "%.md$", icon = "" },
-
-				-- for links that do not match a pattern below
-				web = { icon = " " },
+				web = { icon = " " }, -- for links that do not match a pattern below
+				internal_link = { pattern = "^[^h]", icon = "" }, -- i.e., not starting with `http`
 
 				-- news sites
 				medium = { pattern = "medium%.com", icon = "󰬔 " }, -- letter-glyphs are named `alpha_…`

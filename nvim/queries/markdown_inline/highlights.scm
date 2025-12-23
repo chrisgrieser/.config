@@ -2,11 +2,11 @@
 
 ;-------------------------------------------------------------------------------
 ; INFO `@markdown.internal_link` needs to be defined manually
-; internal links to Markdown files
+; internal markdown links (= not an URL)
 (inline_link
   (link_text) @markdown.internal_link
   (link_destination) @_
-  (#lua-match? @_ "%.md$"))
+  (#not-match? @_ "^https?://"))
 
 ; wikilinks
 (inline

@@ -16,6 +16,6 @@
   (#any-of? @comment.warning "SIC" "CAVEAT" "DEPRECATION" "DEBUG"))
 
 ;-BOLD UPPERCASE COMMENTS-------------------------------------------------------
-; (requires defining a hlgroup `@comments.bold` in the user config)
+; requires defining a hlgroup `@comments.bold` in the user config
 ("text" @comment.bold
-  (#lua-match? @comment.bold "^%u[%u%d]+$")) ; at least 2 uppercase chars
+  (#lua-match? @comment.bold "^%u[%u%d_]+$")) ; at least 2 uppercase chars
