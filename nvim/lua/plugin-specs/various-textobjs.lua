@@ -157,8 +157,12 @@ return {
 				path = path:gsub("%%(%x%x)", function(h) return string.char(tonumber(h, 16)) end)
 
 				local exists = vim.uv.fs_stat(path) ~= nil
-				if not exists then return vim.notify("Path does not exist.", vim.log.levels.WARN) end
-				vim.cmd.edit(path)
+				if exists then
+					vim.cmd.edit(path)
+				else
+					local msg = ("Path does not exist: %q"):format(path)
+					vim.notify(msg, vim.log.levels.WARN)
+				end
 			end,
 			desc = " Open next path",
 		},

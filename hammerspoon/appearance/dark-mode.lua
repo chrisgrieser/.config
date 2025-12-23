@@ -43,7 +43,8 @@ function M.setDarkMode(toMode)
 	hs.osascript.applescript(applescript)
 
 	-- sketchybar
-	hs.execute(u.exportPath .. "sketchybar --reload")
+	-- delay so sketchybar picks up on system mode change
+	u.defer(0.1, function() hs.execute(u.exportPath .. "sketchybar --reload") end)
 
 	-- PDF background
 	if u.appRunning("Highlights") then
