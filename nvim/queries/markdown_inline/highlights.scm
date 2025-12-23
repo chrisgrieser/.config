@@ -7,7 +7,10 @@
   (#lua-match? @_dest ".*%.md$"))
 
 ; wikilinks: `@markdown.internal_link` highlight (priority to overwrite LSP highlight)
-((shortcut_link) @markdown.internal_link (#set! priority 130))
+(inline
+  "["
+  (shortcut_link) @markdown.internal_link
+  (#set! priority 130))
 
 ; URLs in mdlinks: `@comment` highlight
 (inline_link
