@@ -47,7 +47,7 @@ require("lazy").setup {
 		colorscheme = { vim.g.darkColor, vim.g.lightColor, "habamax" },
 	},
 	git = {
-		log = { "--since=5 days ago" }, -- `:Lazy log` shows commits since last x days
+		log = { "--since=7 days ago" }, -- `:Lazy log` shows commits since last x days
 	},
 	ui = {
 		title = " 󰒲 lazy.nvim ",

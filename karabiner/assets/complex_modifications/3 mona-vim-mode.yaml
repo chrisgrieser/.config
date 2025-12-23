@@ -90,3 +90,8 @@ rules:
         from: { key_code: l }
         to: [{ key_code: right_arrow }]
         conditions: [*is-mona, *mona-normal-mode]
+      # g to move to the top
+      - type: basic
+        from: { key_code: g }
+        to: [{ key_code: up_arrow, modifiers: [command] }]
+        conditions: [*is-mona, *mona-normal-mode]

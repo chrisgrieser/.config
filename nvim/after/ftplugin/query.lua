@@ -13,6 +13,15 @@ end
 if vim.bo.buftype == "nofile" then
 	vim.opt_local.listchars:append { lead = "│" }
 
+	vim.keymap.set("n", "?", function()
+		local msg = [[- `a` toggle anonymized nodes
+- `I` toggle nodes source langs
+- `o` query editor
+- `<CR>` jump to node
+- `q` close]]
+		vim.notify(msg, nil, { title = ":InspectTree keymaps", icon = "" })
+	end, { buffer = true, desc = "Keymap help" })
+
 	-- FIX missing `nowait` for `q`
 	-- PENDING https://github.com/neovim/neovim/pull/36804
 	-- 1. needs scheduled due to race with nvim's mapping

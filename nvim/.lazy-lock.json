@@ -1,5 +1,4 @@
 {
-  "blink-cmp-dictionary": { "branch": "master", "commit": "944b3b215b01303672d4213758db7c5c5a1e3c92" },
   "blink-cmp-git": { "branch": "master", "commit": "e3ad0ffaaa3b3b7e2158cc72cd6dad2d19842c46" },
   "blink.cmp": { "branch": "main", "commit": "b19413d214068f316c78978b08264ed1c41830ec" },
   "ccc.nvim": { "branch": "main", "commit": "9d1a256e006decc574789dfc7d628ca11644d4c2" },
@@ -21,7 +20,7 @@
   "nvim-genghis": { "branch": "main", "commit": "7e7a37e166b0244f12f9f78f96a36473704683ff" },
   "nvim-justice": { "branch": "main", "commit": "3597e5dffae97d87d1099b4ab88f706bcff1a760" },
   "nvim-lsp-endhints": { "branch": "main", "commit": "20a05a41c55fd729ad0123bb3542e5a2071421dd" },
-  "nvim-lspconfig": { "branch": "master", "commit": "5eeb45c8c469b84777a5bd8796b698c8a1c780a7" },
+  "nvim-lspconfig": { "branch": "master", "commit": "9926584b606c4f6314d7aa0a34951b4a87d9111e" },
   "nvim-navic": { "branch": "master", "commit": "7d914a39a1ef8f4e22c2c4381abeef7c556f5a13" },
   "nvim-origami": { "branch": "main", "commit": "e33d5cac5a3097f77a087274948c13736f25d2f8" },
   "nvim-rip-substitute": { "branch": "main", "commit": "b93ed65cd0d7ea30dd36451dfddeb9cf32fecad2" },
