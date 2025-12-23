@@ -379,7 +379,7 @@ return {
 					win = {
 						input = {
 							keys = {
-								["<Tab>"] = { "list_down", mode = "i" },
+								["<Tab>"] = { "list_down_wrapping", mode = "i" },
 								["<Space>"] = { "git_stage", mode = "i" },
 								-- <CR> opens the file as usual
 							},
@@ -391,7 +391,7 @@ return {
 					win = {
 						input = {
 							keys = {
-								["<Tab>"] = { "list_down", mode = "i" },
+								["<Tab>"] = { "list_down_wrapping", mode = "i" },
 								["<Space>"] = { "git_stage", mode = "i" },
 								-- <CR> opens the file as usual
 							},
@@ -501,7 +501,7 @@ return {
 					keys = {
 						["<Esc>"] = { "close", mode = "i" }, --> disable normal mode
 						["<CR>"] = { "confirm", mode = "i" },
-						["<Tab>"] = { "list_down", mode = "i" },
+						["<Tab>"] = { "list_down_wrapping", mode = "i" },
 						["<S-Tab>"] = { "list_up", mode = "i" },
 						["<C-v>"] = { "edit_vsplit", mode = "i" },
 						["<D-Up>"] = { "list_top", mode = "i" },
@@ -540,7 +540,7 @@ return {
 						["gg"] = "list_top",
 						["j"] = "list_down",
 						["k"] = "list_up",
-						["<Tab>"] = "list_down",
+						["<Tab>"] = "list_down_wrapping",
 						["<S-Tab>"] = "list_up",
 						["q"] = "close",
 						["<Esc>"] = "close",
@@ -585,6 +585,12 @@ return {
 					vim.cmd.normal { "zv", bang = true } -- open folds
 
 					vim.api.nvim_exec_autocmds("QuickFixCmdPost", {})
+				end,
+				list_down_wrapping = function(picker)
+					local allVisible = #picker.list.items -- picker:count() only counts unfiltered
+					local current = picker.list.cursor -- picker:current().idx incorrect for `smart` source
+					local action = current == allVisible and "list_top" or "list_down"
+					picker:action(action)
 				end,
 			},
 			prompt = "  ", -- 

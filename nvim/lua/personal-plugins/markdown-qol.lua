@@ -144,8 +144,8 @@ function M.incrementHeading(dir)
 	vim.api.nvim_win_set_cursor(0, { lnum, math.max(col + diff, 0) })
 end
 
-function M.followUrlOrWikilink()
-	local urlPattern = [[%l+://[^%s)%]}"'`>]+]]
+function M.followMdlinkOrWikilink()
+	local mdlinkPattern = "%[.-]%((.-)%)"
 	local wikilinkPattern = "%[%[.-]]"
 	local row, col = unpack(vim.api.nvim_win_get_cursor(0))
 	local url, wikilink
@@ -157,13 +157,13 @@ function M.followUrlOrWikilink()
 	col = col + 1
 	while true do
 		local partialLine = line:sub(idx)
-		local urlStart, urlEnd = partialLine:find(urlPattern)
-		local wikiStart, wikiEnd = partialLine:find(wikilinkPattern)
+		local _, urlEnd = partialLine:find(mdlinkPattern)
+		local _, wikiEnd = partialLine:find(wikilinkPattern)
 		if urlEnd and (col <= idx + urlEnd) and (urlEnd < (wikiEnd or math.huge)) then
-			url = partialLine:sub(assert(urlStart), urlEnd)
+			url = partialLine:match(mdlinkPattern)
 			break
 		elseif wikiEnd and (col <= idx + wikiEnd) then
-			wikilink = partialLine:sub(assert(wikiStart), wikiEnd)
+			wikilink = partialLine:match(wikilinkPattern)
 			break
 		end
 		if not urlEnd and not wikiEnd then break end -- no link found in line
@@ -181,15 +181,14 @@ function M.followUrlOrWikilink()
 			return
 		end
 		line = vim.api.nvim_buf_get_lines(0, ln - 1, ln, false)[1]
-		url = line:match(urlPattern)
+		url = line:match(mdlinkPattern)
 		wikilink = line:match(wikilinkPattern)
 		if url or wikilink then break end
 	end
 
 	if url then
 		-- move cursor to start of mdlink, or of the url
-		local mdLink = line:find("%[.-]%(" .. vim.pesc(url) .. "%)")
-		local targetCol = mdLink or line:find(mdLink or url, nil, true)
+		local targetCol = line:find(mdlinkPattern)
 		vim.api.nvim_win_set_cursor(0, { ln, targetCol - 1 })
 		vim.ui.open(url)
 	elseif wikilink then
@@ -210,8 +209,8 @@ function M.addTitleToUrl()
 
 	local out = vim.system({ "curl", "--silent", "--location", innerUrl }):wait()
 	if out.code ~= 0 then return vim.notify(out.stderr, vim.log.levels.ERROR) end
-	local title = out.stdout:match("<title>(.-)</title>")
-	if not title then return vim.notify("No title found.", vim.log.levels.WARN) end
+	local title = out.stdout:match("<title.->(.-)</title>")
+	if not title or title == "" then return vim.notify("No title found.", vim.log.levels.WARN) end
 	title = title:gsub("^GitHub %- ", "") -- cleanup
 
 	local urlStart, urlEnd = line:find(url, nil, true) -- `find` has literal search, `gsub` does not

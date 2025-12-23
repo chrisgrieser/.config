@@ -145,7 +145,6 @@ return {
 			"g-",
 			function()
 				require("various-textobjs").filepath("outer")
-
 				local foundPath = vim.fn.mode() == "v" -- only switches to visual mode when textobj found
 				if not foundPath then return end
 

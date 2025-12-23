@@ -160,6 +160,17 @@
     "body": "then return end",
     "prefix": "tre (then return end)"
   },
+  "url-decode": {
+    "body": [
+      "---@param str string",
+      "---@return string",
+      "local function url_decode(str)",
+      "\treturn str:gsub(\"+\", \" \")",
+      "\t\t:gsub(\"%%(%x%x)\", function(h) return string.char(tonumber(h, 16)) end)",
+      "end"
+    ],
+    "prefix": "decode URL"
+  },
   "url-encode": {
     "body": [
       "---@param unencoded string",
@@ -172,7 +183,7 @@
       "\treturn encoded",
       "end"
     ],
-    "prefix": "url-encode"
+    "prefix": "encode URL"
   },
   "write file": {
     "body": [

@@ -2,14 +2,13 @@
 --------------------------------------------------------------------------------
 
 -- consistent with the color from `query/markdown_inline/highlights.scm`
-local wikilinkHlgroup = "@tag"
+local internalLinkHighlight = "@tag"
 
 --------------------------------------------------------------------------------
 
 return {
 	"MeanderingProgrammer/render-markdown.nvim",
 	dependencies = "echasnovski/mini.icons",
-
 	ft = "markdown",
 	keys = {
 		{
@@ -40,16 +39,10 @@ return {
 			position = "left",
 		},
 		link = {
-			wiki = {
-				-- highlight wikilinks when conceal is active
-				-- (or: markdown_inline query: `((shortcut_link) @wikilink (#set! priority 130))`)
-				icon = "󰴚 ",
-				highlight = wikilinkHlgroup,
-				-- scope_highlight = wikilinkHlgroup,
-			},
+			wiki = { icon = "󰴚 ", highlight = internalLinkHighlight },
 			custom = {
-				-- internal links
-				file = { pattern = "%.md$", highlight = wikilinkHlgroup, icon = "󰴚 " },
+				-- internal links (same as wikilink)
+				file = { pattern = "%.md$", icon = "󰴚 ", highlight = internalLinkHighlight },
 
 				-- for links that do not match a pattern below
 				web = { icon = " " },

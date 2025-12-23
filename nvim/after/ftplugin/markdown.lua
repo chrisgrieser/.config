@@ -34,7 +34,7 @@ bkeymap("n", "<C-k>", [[?^##\+ .*<CR>]], { desc = " Prev heading" })
 
 -- follow url/wikilink
 -- stylua: ignore
-bkeymap("n", "gx", function() require("personal-plugins.markdown-qol").followUrlOrWikilink() end, { desc = " Follow URL/Wikilink" })
+bkeymap("n", "gx", function() require("personal-plugins.markdown-qol").followMdlinkOrWikilink() end, { desc = " Follow URL/Wikilink" })
 
 -- <D-h> remapped to <D-5>, since used by macOS PENDING https://github.com/neovide/neovide/issues/3099
 -- stylua: ignore
