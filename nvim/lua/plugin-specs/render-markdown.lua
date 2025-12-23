@@ -1,7 +1,8 @@
 -- DOCS https://github.com/MeanderingProgrammer/render-markdown.nvim#setup
 --------------------------------------------------------------------------------
 
-local wikilinkHlgroup = "Label"
+-- consistent with the color from `query/markdown_inline/highlights.scm`
+local wikilinkHlgroup = "@tag"
 
 --------------------------------------------------------------------------------
 
@@ -10,16 +11,6 @@ return {
 	dependencies = "echasnovski/mini.icons",
 
 	ft = "markdown",
-	init = function()
-		-- also set wikilinks in conceal is disabled (like on the cursorline)
-		-- (semantic highlighting by `marksman` lsp)
-		vim.api.nvim_create_autocmd({ "ColorScheme", "VimEnter" }, {
-			desc = "User: Highlights for wikilinks",
-			callback = function()
-				vim.api.nvim_set_hl(0, "@lsp.type.class.markdown", { link = wikilinkHlgroup })
-			end,
-		})
-	end,
 	keys = {
 		{
 			"<leader>oc",
@@ -54,11 +45,11 @@ return {
 				-- (or: markdown_inline query: `((shortcut_link) @wikilink (#set! priority 130))`)
 				icon = "󰴚 ",
 				highlight = wikilinkHlgroup,
-				scope_highlight = wikilinkHlgroup,
+				-- scope_highlight = wikilinkHlgroup,
 			},
 			custom = {
 				-- internal links
-				file = { pattern = "%.md$", priority = 100, highlight = wikilinkHlgroup, icon = "󰴚 " },
+				file = { pattern = "%.md$", highlight = wikilinkHlgroup, icon = "󰴚 " },
 
 				-- for links that do not match a pattern below
 				web = { icon = " " },

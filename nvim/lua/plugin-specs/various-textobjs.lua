@@ -150,17 +150,16 @@ return {
 				if not foundPath then return end
 
 				local path = vim.fn.getregion(vim.fn.getpos("."), vim.fn.getpos("v"), { type = "v" })[1]
-				Chainsaw(path) -- 🪚
 				vim.cmd.normal { "v", bang = true } -- leave visual mode
 
 				local dirOfFile = vim.fs.dirname(vim.api.nvim_buf_get_name(0))
-				Chainsaw(dirOfFile) -- 🪚
 				path = vim.fs.normalize(dirOfFile .. "/" .. path)
-				Chainsaw(path) -- 🪚
+				-- url-decode
+				path = path:gsub("%%(%x%x)", function(h) return string.char(tonumber(h, 16)) end)
 
 				local exists = vim.uv.fs_stat(path) ~= nil
 				if not exists then return vim.notify("Path does not exist.", vim.log.levels.WARN) end
-				vim.ui.open(path)
+				vim.cmd.edit(path)
 			end,
 			desc = " Open next path",
 		},

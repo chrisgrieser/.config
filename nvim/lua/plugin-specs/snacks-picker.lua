@@ -444,8 +444,10 @@ return {
 				},
 			},
 			toggles = {
-				regex = { value = true }, -- invert -> only display if enabled
-				follow = { value = false }, -- invert -> only display if disabled
+				regex = { icon = "regex", value = true }, -- invert -> only display if enabled
+				follow = { icon = "no follow", value = false }, -- invert -> only display if disabled
+				ignored = { icon = "ignored" },
+				hidden = { icon = "hidden" },
 			},
 			ui_select = true,
 			layout = "wide_with_preview", -- = default layout
