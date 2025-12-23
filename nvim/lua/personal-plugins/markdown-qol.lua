@@ -96,7 +96,7 @@ function M.autoBullet(key)
 
 	local line = vim.api.nvim_get_current_line()
 	local emptyList = (continued ~= "") and vim.trim(indent .. continued) == vim.trim(line)
-	if key:lower() == "o" then
+	if key == "o" or key == "O" then
 		if key == "O" then row = row - 1 end
 		vim.api.nvim_buf_set_lines(0, row, row, false, { continued })
 		vim.api.nvim_win_set_cursor(0, { row + 1, 1 })
@@ -205,6 +205,7 @@ function M.followMdlinkOrWikilink()
 end
 
 function M.addTitleToUrl()
+	assert(vim.fn.executable("curl") == 1, "`curl` not found.")
 	local line = vim.api.nvim_get_current_line()
 	local url = line:match([[<?%l+://%S+>?]])
 	if vim.endswith(url, ")") then return vim.notify("Already Markdown link.") end
@@ -212,9 +213,11 @@ function M.addTitleToUrl()
 
 	local out = vim.system({ "curl", "--silent", "--location", innerUrl }):wait()
 	if out.code ~= 0 then return vim.notify(out.stderr, vim.log.levels.ERROR) end
-	local title = out.stdout:match("<title.->(.-)</title>")
-	if not title or title == "" then return vim.notify("No title found.", vim.log.levels.WARN) end
-	title = title:gsub("^GitHub %- ", "") -- cleanup
+	local title = out.stdout:match("<title.->(.-)</title>") or ""
+	if title == "" then vim.notify("No title found.", vim.log.levels.WARN) end
+	title = title -- cleanup
+		:gsub("^GitHub %- ", "")
+		:gsub(" · GitHub", "")
 
 	local urlStart, urlEnd = line:find(url, nil, true) -- `find` has literal search, `gsub` does not
 	local updatedLine = line:sub(1, urlStart - 1)
@@ -241,11 +244,8 @@ end
 
 ---@param css string url or absolute path
 function M.previewViaPandoc(css)
+	assert(vim.fn.executable("pandoc") == 1, "Pandoc not found.")
 	local outputPath = "/tmp/markdown-preview.html"
-	if vim.fn.executable("pandoc") == 0 then
-		vim.notify("Pandoc not found.", vim.log.levels.WARN)
-		return
-	end
 
 	vim.cmd("silent! update")
 	vim.system({

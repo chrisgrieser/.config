@@ -34,10 +34,12 @@ return {
 			position = "left",
 		},
 		link = {
+			-- no icon for internal links, since distinguished via color in
+			-- `query/markdown_inline/highlights.scm`
+			hyperlink = "",
 			wiki = { icon = "" },
 			custom = {
 				web = { icon = " " }, -- for links that do not match a pattern below
-				internal_link = { pattern = "^[^h]", icon = "" }, -- i.e., not starting with `http`
 
 				-- news sites
 				medium = { pattern = "medium%.com", icon = "󰬔 " }, -- letter-glyphs are named `alpha_…`
