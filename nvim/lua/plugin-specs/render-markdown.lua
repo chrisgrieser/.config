@@ -57,13 +57,11 @@ return {
 				scope_highlight = wikilinkHlgroup,
 			},
 			custom = {
-				file = {
-					pattern = "^%.+/",
-					highlight = wikilinkHlgroup,
-					scope_highlight = wikilinkHlgroup,
-					icon = "󰴚 ",
-				},
-				web = { icon = " " }, -- for links that do not match a pattern below
+				-- internal links
+				file = { pattern = "%.md$", priority = 100, highlight = wikilinkHlgroup, icon = "󰴚 " },
+
+				-- for links that do not match a pattern below
+				web = { icon = " " },
 
 				-- news sites
 				medium = { pattern = "medium%.com", icon = "󰬔 " }, -- letter-glyphs are named `alpha_…`
