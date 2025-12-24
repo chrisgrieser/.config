@@ -14,6 +14,7 @@ return {
 		},
 	},
 	opts = {
+		completions = { lsp = { enabled = true } },
 		sign = { enabled = false },
 		quote = {
 			repeat_linebreak = true, -- full border on soft-wrap
@@ -22,7 +23,9 @@ return {
 			comment = { text = "󰆈" }, -- PENDING https://github.com/MeanderingProgrammer/render-markdown.nvim/issues/574
 		},
 		heading = {
-			position = "inline", -- remove indentation of headings
+			position = "inline", -- = remove indentation of headings
+			width = "block",
+			min_width = vim.o.textwidth + 1,
 			icons = { "󰲠 ", "󰲢 ", "󰲤 ", "󰲦 ", "󰲨 ", "󰲪 " },
 		},
 		bullet = {
@@ -31,14 +34,15 @@ return {
 		},
 		code = {
 			border = "thin",
-			-- border = "thick",
 			position = "left",
 			width = "block",
+			min_width = 55,
+			language_border = "▃",
 			language_left = "█",
 			language_right = "█",
-			language_border = "▁",
 			left_pad = 1,
 			right_pad = 1,
+			highlight_border = "DiffText",
 		},
 		link = {
 			-- no icon for internal links, since distinguished via color in
