@@ -9,7 +9,7 @@ local u = require("meta.utils")
 ---CORNERS OF THE SCREEN--------------------------------------------------------
 local roundedCorner = hs.loadSpoon("RoundedCorners") -- https://www.hammerspoon.org/Spoons/RoundedCorners.html
 if roundedCorner then
-	roundedCorner.radius = 8
+	roundedCorner.radius = 15 -- higher for macOS Tahoe
 	roundedCorner:start()
 end
 
