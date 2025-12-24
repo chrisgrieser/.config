@@ -19,7 +19,6 @@
 - [echasnovski/mini.icons](https://github.com/echasnovski/mini.icons)
 - [folke/snacks.nvim](https://github.com/folke/snacks.nvim)
 - [folke/which-key.nvim](https://github.com/folke/which-key.nvim)
-- [Kaiser-Yang/blink-cmp-dictionary](https://github.com/Kaiser-Yang/blink-cmp-dictionary)
 - [Kaiser-Yang/blink-cmp-git](https://github.com/Kaiser-Yang/blink-cmp-git)
 - [kawre/leetcode.nvim](https://github.com/kawre/leetcode.nvim)
 - [kylechui/nvim-surround](https://github.com/kylechui/nvim-surround)
