@@ -6,8 +6,9 @@ return {
 	settings = {
 		rumdl = {
 			-- less noisy, since `info` diagnostics are configured to not get virtual text
-			MD012 = { severity = "info", },
-			MD009 = { severity = "info" },
+			MD012 = { severity = "info" }, -- multiple blank lines
+			MD009 = { severity = "info" }, -- trailing spaces
+			MD060 = { severity = "info" }, -- table columns
 		},
 	},
 	on_attach = function()
@@ -19,6 +20,7 @@ return {
 				for _, d in ipairs(result.items) do
 					if d.code == "MD012" then d.severity = vim.diagnostic.severity.INFO end
 					if d.code == "MD009" then d.severity = vim.diagnostic.severity.INFO end
+					if d.code == "MD060" then d.severity = vim.diagnostic.severity.INFO end
 				end
 			end
 			return orig(err, result, ctx, config)

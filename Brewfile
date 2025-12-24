@@ -32,7 +32,6 @@ cask "appcleaner"
 cask "betterzip"
 cask "brave-browser"
 cask "espanso"
-cask "granola"
 cask "hammerspoon", postinstall: 'defaults write org.hammerspoon.Hammerspoon MJConfigFile "$HOME/.config/hammerspoon/init.lua"'
 cask "karabiner-elements"
 cask "microsoft-word"
@@ -58,6 +57,9 @@ if device.include?("Home")
 	cask "bettertouchtool"
 	cask "catch"
 	brew "yt-dlp" ; brew "ffmpeg" # `ffmpeg` recommended for `yt-dlp`
+end
+if device.include?("Home") or device.include?("Office")
+	cask "granola"
 end
 if device.include?("Home") or device.include?("Mother")
 	cask "iina"
