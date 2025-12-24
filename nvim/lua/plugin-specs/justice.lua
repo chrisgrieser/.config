@@ -11,6 +11,7 @@ return {
 			},
 		},
 		window = {
+			recipeCommentMaxLen = 0, -- `0` = hide recipe comments
 			highlightGroups = {
 				quickKey = "StandingOut",
 			},
