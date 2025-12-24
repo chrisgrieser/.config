@@ -13,14 +13,11 @@ if roundedCorner then
 	roundedCorner:start()
 end
 
----BOTTOM OF THE SCREEN PSEUDO-MAXIMIZED WINDOW-----------------------
+---BOTTOM OF THE SCREEN --------------------------------------------------------
 function M.update()
-	if M.coverParts then
-		for _, cover in pairs(M.coverParts) do
-			if cover.delete then cover:delete() end
-			cover = nil
-		end
-		M.coverParts = nil
+	if M.cover then
+		M.cover:delete() ---@diagnostic disable-line: undefined-field
+		M.cover = nil
 	end
 	if env.isProjector() then return end
 
