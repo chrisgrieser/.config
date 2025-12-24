@@ -35,6 +35,18 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>D84572DF-5D6A-4AB1-9BEB-945CB7678C2D</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>0AFB82C2-9EEE-4164-A0EF-F87F65EE719F</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
 		</array>
 		<key>29D763E3-99DA-42EC-A264-3AA565CDC0F6</key>
 		<array>
@@ -302,6 +314,19 @@
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>unstackview</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.hidealfred</string>
+			<key>uid</key>
+			<string>D84572DF-5D6A-4AB1-9BEB-945CB7678C2D</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
@@ -370,6 +395,13 @@
 			<real>30</real>
 			<key>ypos</key>
 			<real>300</real>
+		</dict>
+		<key>D84572DF-5D6A-4AB1-9BEB-945CB7678C2D</key>
+		<dict>
+			<key>xpos</key>
+			<real>360</real>
+			<key>ypos</key>
+			<real>505</real>
 		</dict>
 		<key>DBB52345-766C-4EA1-81C2-20E30FBE25F0</key>
 		<dict>
