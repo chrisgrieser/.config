@@ -172,6 +172,7 @@ return {
 		{ "<leader>gi", function() Snacks.picker.gh_issue() end, desc = " GitHub issues (open)" },
 		-- stylua: ignore
 		{ "<leader>gI", function() Snacks.picker.gh_issue { state = "all" } end, desc = " GitHub issues (all)" },
+		{ "<leader>gP", function() Snacks.picker.gh_pr() end, desc = " GitHub PRs" },
 
 		---INSPECT----------------------------------------------------------------
 		{ "<leader>iv", function() Snacks.picker.help() end, desc = "󰋖 Vim help" },
@@ -274,7 +275,7 @@ return {
 					layout = {
 						auto_hide = { "input" },
 						preset = "small_no_preview",
-						layout = { height = 0.9 },
+						layout = { height = 0.85 },
 					},
 					win = {
 						list = {
@@ -483,7 +484,7 @@ return {
 				big_preview = {
 					preset = "wide_with_preview",
 					layout = {
-						height = 0.95,
+						height = 0.85,
 						[2] = { width = 0.6 }, -- second win is the preview
 					},
 				},
