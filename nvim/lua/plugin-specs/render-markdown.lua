@@ -30,8 +30,15 @@ return {
 			ordered_icons = "", -- empty string = disable
 		},
 		code = {
-			border = "thick",
+			border = "thin",
+			-- border = "thick",
 			position = "left",
+			width = "block",
+			language_left = "█",
+			language_right = "█",
+			language_border = "▁",
+			left_pad = 1,
+			right_pad = 1,
 		},
 		link = {
 			-- no icon for internal links, since distinguished via color in

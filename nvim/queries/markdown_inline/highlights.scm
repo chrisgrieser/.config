@@ -6,6 +6,7 @@
 (inline_link
   (link_text) @markdown.internal_link
   (link_destination) @_
+  (#match? @_ "\\.md$")
   (#not-match? @_ "^https?://"))
 
 ; wikilinks

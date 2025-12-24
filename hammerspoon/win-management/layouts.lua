@@ -10,6 +10,7 @@ local wu = require("win-management.window-utils")
 
 ---@param dockToUse string
 local function dockSwitcher(dockToUse)
+	if env.isAtMother then dockToUse = "mother-" .. dockToUse end
 	local alfredUri = "alfred://runtrigger/de.chris-grieser.dock-switcher/load-dock-layout/?argument="
 		.. dockToUse
 	u.openUrlInBg(alfredUri)
@@ -36,10 +37,10 @@ local function workLayout(shouldDarkenDisplay)
 	u.quitFullscreenAndVideoApps()
 
 	-- open things
-	u.openApps { "Mona", "AlfredExtraPane", "Gmail", isWorkWeek() and "Slack" or nil }
+	u.openApps { "Mona", isWorkWeek() and "Slack" or nil, "Gmail", "AlfredExtraPane" }
 	u.defer(1, function()
-		wu.moveResize("Gmail", wu.pseudoMax)
 		if isWorkWeek() then wu.moveResize("Slack", wu.pseudoMax) end
+		wu.moveResize("Gmail", wu.pseudoMax)
 	end)
 	u.defer(2, function() wu.moveResize("Mona", wu.toTheSide) end)
 
@@ -50,7 +51,7 @@ local function movieLayout()
 	darkmode.setDarkMode("dark")
 	darkenDisplay()
 	holeCover.update()
-	dockSwitcher(env.isAtMother and "mother-movie" or "movie")
+	dockSwitcher("movie")
 
 	-- turn off showing hidden files
 	hs.execute("defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder")
