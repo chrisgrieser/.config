@@ -6,13 +6,12 @@ return {
 	settings = {
 		rumdl = {
 			-- less noisy, since `info` diagnostics are configured to not get virtual text
-			-- PENDING https://github.com/rvben/rumdl/issues/217
-			MD012 = { severity = "info" },
+			MD012 = { severity = "info", },
 			MD009 = { severity = "info" },
 		},
 	},
 	on_attach = function()
-		-- PENDING https://github.com/rvben/rumdl/issues/217
+		-- fix the above, PENDING https://github.com/rvben/rumdl/issues/229
 		local orig = vim.lsp.handlers["textDocument/diagnostic"]
 		vim.lsp.handlers["textDocument/diagnostic"] = function(err, result, ctx, config)
 			local client = assert(vim.lsp.get_client_by_id(ctx.client_id))

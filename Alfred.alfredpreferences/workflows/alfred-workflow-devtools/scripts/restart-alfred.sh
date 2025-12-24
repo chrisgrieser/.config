@@ -8,7 +8,7 @@ osascript -e 'display notification "" with title "Restarting Alfred…"'
 # Restart Alfred
 killall -9 "Alfred"
 while pgrep -xq "Alfred"; do sleep 0.1; done
-sleep 0.1
+sleep 0.2
 open -a "Alfred 5"
 osascript -e 'tell application id "com.runningwithcrayons.Alfred" to search'
 
