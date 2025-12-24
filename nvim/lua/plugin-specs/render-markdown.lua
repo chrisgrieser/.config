@@ -25,21 +25,23 @@ return {
 		heading = {
 			position = "inline", -- = remove indentation of headings
 			width = "block",
-			min_width = vim.o.textwidth + 1,
+			min_width = vim.o.textwidth,
 			icons = { "󰲠 ", "󰲢 ", "󰲤 ", "󰲦 ", "󰲨 ", "󰲪 " },
 		},
+		dash = {
+			width = vim.o.textwidth,
+		},
 		bullet = {
-			icons = { "▪️", "▫️", "•", "◦" }, -- smaller than default icons
-			ordered_icons = "", -- empty string = disable
+			icons = { "◇", "▪️", "▫️", "•","◦" }, -- ◆◇•◦▫️▪️
 		},
 		code = {
 			border = "thin",
 			position = "left",
 			width = "block",
-			min_width = 55,
+			min_width = 50,
 			language_border = "▃",
-			language_left = "█",
-			language_right = "█",
+			language_left = "▃█",
+			language_right = "█▃",
 			left_pad = 1,
 			right_pad = 1,
 			highlight_border = "DiffText",

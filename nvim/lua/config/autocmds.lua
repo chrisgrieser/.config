@@ -83,7 +83,7 @@ do
 			if vim.v.option_new == prevBg then return end
 			prevBg = vim.v.option_new
 
-			-- vim.cmd.highlight("clear") -- so next theme isn't affected by previous one
+			vim.cmd.highlight("clear") -- so next theme isn't affected by previous one
 			local newColor = vim.v.option_new == "light" and vim.g.lightColor or vim.g.darkColor
 			vim.schedule(function() pcall(vim.cmd.colorscheme, newColor) end)
 		end,

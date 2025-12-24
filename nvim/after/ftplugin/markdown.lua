@@ -10,6 +10,10 @@ optl.listchars:remove("trail")
 optl.listchars:append { multispace = "·" }
 optl.sidescrolloff = 3 -- lower, since we rarely go beyond textwidth
 
+-- wrap
+vim.schedule(function() optl.formatoptions:append("t") end) -- when typing beyond `textwidth`
+optl.colorcolumn = ""
+
 ---KEYMAPS----------------------------------------------------------------------
 
 bkeymap("n", "<leader>rt", "vip:!pandoc --to=gfm<CR>", { desc = " Format table under cursor" })
@@ -64,10 +68,5 @@ bkeymap(
 	function() require("personal-plugins.markdown-qol").codeBlockFromClipboard() end,
 	{ desc = " Codeblock" }
 )
-
----HARD WRAP--------------------------------------------------------------------
-
--- when typing beyond `textwidth`
-vim.schedule(function() optl.formatoptions:append("t") end)
 
 --------------------------------------------------------------------------------
