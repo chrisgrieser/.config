@@ -165,7 +165,7 @@ syn match   scptCond "\<end if\>"
 hi def link scptCond Conditional
 
 " --- Repeat ---
-syn keyword scptRepeat repeat with from to by continue 
+syn keyword scptRepeat repeat with from to by continue
 syn match   scptRepeat "\<repeat while\>"
 syn match   scptRepeat "\<repeat until\>"
 syn match   scptRepeat "\<repeat with\>"
@@ -180,7 +180,7 @@ syn match   scptException "\<end error\>"
 hi def link scptException Exception
 
 " --- Keyword ---
-syn keyword scptKeyword end tell times exit 
+syn keyword scptKeyword end tell times exit
 syn keyword scptKeyword application file alias activate
 syn keyword scptKeyword script on return without given
 syn keyword scptKeyword considering ignoring items delimiters
@@ -222,7 +222,7 @@ syn match   scptUnitBT "\<cubic metres\>"
 hi def link scptUnitBT scptKey
 
 " Metric Units
-syn keyword scptUnitMT liters centimeters meters kilometers grams kilograms 
+syn keyword scptUnitMT liters centimeters meters kilometers grams kilograms
 syn match   scptUnitMT "\<square meters\>"
 syn match   scptUnitMT "\<square kilometers\>"
 syn match   scptUnitMT "\<cubic centimeters\>"
