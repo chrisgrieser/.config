@@ -33,6 +33,7 @@ return {
 		},
 		bullet = {
 			icons = { "◇", "▪️", "▫️", "•","◦" }, -- ◆◇•◦▫️▪️
+			ordered_icons = "" -- disable overwriting ordered list numbers with 1-2-3
 		},
 		code = {
 			border = "thin",

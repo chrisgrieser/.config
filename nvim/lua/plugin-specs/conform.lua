@@ -12,7 +12,7 @@ return {
 		log_level = vim.log.levels.WARN, -- for `ConformInfo`
 		default_format_opts = { lsp_format = "last" },
 		formatters_by_ft = {
-			markdown = { "markdown-toc", "injected", "listify-links-in-notes" },
+			markdown = { "markdown-toc", "listify-links-in-notes" },
 			python = { "ruff_fix", "ruff_organize_imports" },
 			zsh = { "shell-home", "shellcheck" },
 			json = { lsp_format = "prefer", "jq" }, -- use `biome` (via LSP), with `jq` as fallback
@@ -23,18 +23,6 @@ return {
 			_ = { "trim_whitespace", "trim_newlines", "squeeze_blanks" },
 		},
 		formatters = {
-			injected = { -- https://github.com/stevearc/conform.nvim/blob/master/doc/formatter_options.md#injected
-				options = {
-					ignore_errors = true,
-					lang_to_formatters = { -- need to set formatters https://github.com/stevearc/conform.nvim/issues/791
-						json = { "jq" },
-						yaml = { "yq" }, -- also applies to yaml frontmatter
-						lua = { "stylua" },
-						zsh = { "shfmt" },
-						bash = { "shfmt" },
-					},
-				},
-			},
 			shellcheck = {
 				-- add `--shell=bash` to force to work with `zsh`
 				args = "'$FILENAME' --format=diff --shell=bash | patch -p1 '$FILENAME'",

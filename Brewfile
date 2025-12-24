@@ -35,7 +35,6 @@ cask "espanso"
 cask "hammerspoon", postinstall: 'defaults write org.hammerspoon.Hammerspoon MJConfigFile "$HOME/.config/hammerspoon/init.lua"'
 cask "karabiner-elements"
 cask "microsoft-word"
-cask "monodraw"
 cask "neovide-app"
 cask "obsidian"
 cask "replacicon"
@@ -59,6 +58,7 @@ if device.include?("Home")
 	brew "yt-dlp" ; brew "ffmpeg" # `ffmpeg` recommended for `yt-dlp`
 end
 if device.include?("Home") or device.include?("Office")
+	cask "monodraw"
 	cask "granola"
 end
 if device.include?("Home") or device.include?("Mother")
