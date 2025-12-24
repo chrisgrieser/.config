@@ -66,6 +66,7 @@ M.wf_scripteditor = wf
 ---MASTODON---------------------------------------------------------------------
 -- 1. auto-close media windows
 -- 2. auto-scroll up
+local mastoHasScrolled = false
 M.aw_masto = aw.new(function(appName, event, masto)
 	if appName ~= "Mona" then return end
 	local win = masto:mainWindow()
@@ -80,9 +81,12 @@ M.aw_masto = aw.new(function(appName, event, masto)
 	end
 
 	u.defer(1, function()
+		if mastoHasScrolled then return end
+		mastoHasScrolled = true
 		hs.eventtap.keyStroke({}, "left", 1, masto) -- go back
 		hs.eventtap.keyStroke({ "cmd" }, "1", 1, masto) -- go to home tab
 		hs.eventtap.keyStroke({ "cmd" }, "up", 1, masto) -- scroll up
+		u.defer(10, function() mastoHasScrolled = false end)
 	end)
 end):start()
 
