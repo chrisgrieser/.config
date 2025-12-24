@@ -1,4 +1,4 @@
--- vim: foldlevel=4
+-- vim: foldlevel=3
 -- DOCS https://github.com/folke/snacks.nvim/blob/main/docs/picker.md
 --------------------------------------------------------------------------------
 
@@ -271,8 +271,11 @@ return {
 					confirm = { "yank", "close" },
 				},
 				explorer = {
-					auto_close = true,
-					layout = { preset = "very_vertical" },
+					layout = {
+						auto_hide = { "input" },
+						preset = "small_no_preview",
+						layout = { height = 0.9 },
+					},
 					win = {
 						list = {
 							keys = {
@@ -298,12 +301,7 @@ return {
 						},
 					},
 				},
-				recent = {
-					layout = "small_no_preview",
-					filter = {
-						filter = function(item) return vim.fs.basename(item.file) ~= "COMMIT_EDITMSG" end,
-					},
-				},
+				recent = { layout = "small_no_preview" },
 				grep = {
 					regex = false, -- use fixed strings by default
 					cmd = "rg",
@@ -340,7 +338,6 @@ return {
 						preset = "small_no_preview",
 						layout = { width = 0.7 },
 					},
-					matcher = { frecency = true }, -- slight performance impact
 					-- PENDING https://github.com/folke/snacks.nvim/pull/2520
 					confirm = function(picker, item, action)
 						picker:close()
@@ -371,7 +368,6 @@ return {
 						picker:close()
 					end,
 				},
-				git_branches = { all = true }, -- = include remotes
 				git_log = { layout = "toggled_preview" },
 				git_log_file = { layout = "toggled_preview" },
 				git_status = {
@@ -401,7 +397,6 @@ return {
 				gh_issue = { layout = "big_preview" },
 				gh_pr = { layout = "big_preview" },
 				lsp_config = {
-					layout = "big_preview",
 					confirm = function(picker, item)
 						if not item.enabled then
 							vim.notify("LSP server not enabled", vim.log.levels.WARN)
@@ -467,10 +462,6 @@ return {
 						},
 					},
 				},
-				very_vertical = {
-					preset = "small_no_preview",
-					layout = { height = 0.95, width = 0.45 },
-				},
 				wide_with_preview = {
 					preset = "small_no_preview",
 					layout = {
@@ -484,14 +475,15 @@ return {
 						},
 					},
 				},
-				toggled_preview = { ---@diagnostic disable-line: missing-fields
+				toggled_preview = {
 					preset = "big_preview",
-					preview = false, ---@diagnostic disable-line: assign-type-mismatch
+					hidden = { "preview" },
+					layout = {},
 				},
 				big_preview = {
 					preset = "wide_with_preview",
 					layout = {
-						height = 0.85,
+						height = 0.95,
 						[2] = { width = 0.6 }, -- second win is the preview
 					},
 				},
