@@ -1,22 +1,22 @@
----Set up plugin-specific groups cleanly with the plugin config
----(Accessed via `vim.g`, as this file's exports are used by `lazy.nvim`.)
----@param spec { [1]: string, mode?: string[], group: string }
-vim.g.whichkeyAddSpec = function(spec) ---@diagnostic disable-line: duplicate-set-field for the empty functions in `lazy.nvim` setup
-	if not spec.mode then spec.mode = { "n", "x" } end
-	-- Deferred to ensure spec is loaded after whichkey itself
-	vim.defer_fn(function() require("which-key").add(spec) end, 1000)
-end
-
---------------------------------------------------------------------------------
-
 return {
 	"folke/which-key.nvim",
 	event = "VeryLazy",
+	enabled = false,
+	init = function()
+		---Set up plugin-specific groups cleanly with the plugin config
+		---(Accessed via `vim.g`, as this file's exports are used by `lazy.nvim`.)
+		---@param spec { [1]: string, mode?: string[], group: string }
+		vim.g.whichkeyAddSpec = function(spec) ---@diagnostic disable-line: duplicate-set-field for the empty functions in `lazy.nvim` setup
+			if not spec.mode then spec.mode = { "n", "x" } end
+			-- Deferred to ensure spec is loaded after whichkey itself
+			vim.defer_fn(function() require("which-key").add(spec) end, 1000)
+		end
+	end,
 	opts = {
-		delay = 200,
+		delay = 400,
 		preset = "helix",
 		win = {
-			border = vim.o.winborder,
+			-- border = vim.o.winborder,
 			height = { min = 1, max = 0.99 },
 		},
 
