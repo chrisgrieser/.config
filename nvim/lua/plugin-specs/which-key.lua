@@ -18,7 +18,7 @@ return {
 		preset = "helix",
 		win = {
 			border = vim.o.winborder,
-			height = { min = 1, max = 0.99 },
+			height = { min = 1, max = 0.95 },
 		},
 
 		spec = {
@@ -85,11 +85,12 @@ return {
 		icons = {
 			group = "", -- different color for groups already distinguishable enough
 			separator = "│",
-			mappings = false, -- disable icons for keymaps.
+			mappings = false, -- disable icons for keymaps
 			-- NOTE we cannot get icons from the keymap descriptions, so we just
 			-- use the icons from there and disable whickey's icon features
 			keys = { PageDown = "󰇚", PageUp = "󰸇" },
 		},
+		keys = { scroll_down = "<PageDown>", scroll_up = "<PageUp>" },
 		show_help = false,
 	},
 
@@ -100,8 +101,8 @@ return {
 			local count = node:count()
 			-- HACK set the description but if you navigate back and forth in whichkey,
 			-- it'll try to adding the count again so only do it if it doesn't end in `)`
-			if node.desc and count > 0 and node.desc:sub(-1) ~= ")" then
-				node.desc = node.desc .. " (" .. count .. ")"
+			if node.desc and count > 0 and not vim.endswith(node.desc, ")") then
+				node.desc = ("%s (%d)"):format(node.desc, count)
 			end
 			return orig_view_item(node, view_opts)
 		end

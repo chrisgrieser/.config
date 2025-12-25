@@ -45,11 +45,8 @@ end
 
 ---@param dir string?
 local function betterFileOpen(dir)
-	dir = dir or vim.uv.cwd()
-	if not dir or dir == "/" then
-		vim.notify("No cwd set.", vim.log.levels.WARN)
-		return
-	end
+	if not dir then dir = vim.uv.cwd() end
+	assert(dir and dir ~= "/", "No cwd set.")
 
 	local changedFiles = {}
 	local gitDir = Snacks.git.get_root(dir)
@@ -58,7 +55,7 @@ local function betterFileOpen(dir)
 		local gitStatus = vim.system(args):wait().stdout or ""
 		local changes = vim.split(gitStatus, "\n", { trimempty = true })
 		changedFiles = vim.iter(changes):fold({}, function(acc, line)
-			local relPath = line:sub(4):gsub("^.+ -> ", "") -- gsub for renames
+			local relPath = line:sub(4):gsub("^.+ -> ", "") -- `gsub` for renames
 			local absPath = gitDir .. "/" .. relPath
 			local change = line:sub(1, 2)
 			if change == "??" then change = " A" end -- just nicer highlights for untracked
@@ -191,7 +188,7 @@ return {
 		-- stylua: ignore
 		{ "<C-.>", function() Snacks.picker.icons() end, mode = { "n", "i" }, desc = "󱗿 Icon picker" },
 		{ "g.", function() Snacks.picker.resume() end, desc = "󰗲 Resume" },
-		{ "g!", function() Snacks.picker.diagnostics() end, desc = " Diagnostics" },
+		{ "g!", function() Snacks.picker.diagnostics() end, desc = " Workspace diagnostics" },
 	},
 
 	init = require("config.utils").loadGhToken, -- for issue & PR search
@@ -335,10 +332,7 @@ return {
 					layout = { max_height = 8, preset = "ivy" },
 				},
 				icons = {
-					layout = {
-						preset = "small_no_preview",
-						layout = { width = 0.7 },
-					},
+					layout = { preset = "small_no_preview", layout = { width = 0.7 } },
 					-- PENDING https://github.com/folke/snacks.nvim/pull/2520
 					confirm = function(picker, item, action)
 						picker:close()
@@ -363,6 +357,7 @@ return {
 					end,
 				},
 				highlights = {
+					-- confirm = copy name
 					confirm = function(picker, item)
 						vim.fn.setreg("+", item.hl_group)
 						Snacks.notify(item.hl_group, { title = "Copied", icon = "󰅍" })
@@ -399,6 +394,7 @@ return {
 				gh_issue = { layout = "big_preview" },
 				gh_pr = { layout = "big_preview" },
 				lsp_config = {
+					-- confirm: open LSP config
 					confirm = function(picker, item)
 						if not item.enabled then
 							vim.notify("LSP server not enabled", vim.log.levels.WARN)
@@ -428,6 +424,22 @@ return {
 							}
 						end)
 					end,
+					actions = {
+						disableLsp = function(picker)
+							-- snacks allows opening files with `file:lnum`, but it
+							-- only matches if the filename is complete. With this
+							-- action, we complete the filename if using the 1st colon
+							-- in the query.
+							local query = vim.api.nvim_get_current_line()
+							local file = picker:current().file
+							if not file or query:find(":") then
+								vim.fn.feedkeys(":", "n")
+								return
+							end
+							vim.api.nvim_set_current_line(file .. ":")
+							vim.cmd.startinsert { bang = true }
+						end,
+					},
 				},
 				command_history = { layout = "small_no_preview" },
 			},
@@ -480,7 +492,7 @@ return {
 				big_preview = {
 					preset = "wide_with_preview",
 					layout = {
-						height = 0.85,
+						height = 0.8,
 						[2] = { width = 0.7 }, -- second win is the preview
 					},
 				},
@@ -503,7 +515,6 @@ return {
 						["<D-f>"] = { "toggle_maximize", mode = "i" }, -- [f]ullscreen
 						["<C-CR>"] = { "cycle_win", mode = "i" },
 
-						-- not for `small_no_preview`, since it has no 2nd win
 						["<D-p>"] = { "toggle_preview", mode = "i" },
 						["<PageUp>"] = { "preview_scroll_up", mode = "i" },
 						["<PageDown>"] = { "preview_scroll_down", mode = "i" },
@@ -544,7 +555,7 @@ return {
 				preview = { keys = { ["<C-CR>"] = { "cycle_win" } } },
 			},
 			actions = {
-				-- FIX override snack's yank function to make it cleaner
+				-- override snack's yank function to make it cleaner
 				yank = function(picker, item, action)
 					if not item then return end
 					local reg = action.reg or vim.v.register
@@ -556,16 +567,15 @@ return {
 						Snacks.notify(value, { icon = "󰅍", title = "Copied", ft = ft })
 					end
 				end,
-				reveal_in_macOS_Finder = function(picker)
+				reveal_in_macOS_Finder = function(picker, item, _action)
 					assert(jit.os == "OSX", "requires macOS")
-					local path = picker:current().file
-					if picker:current().cwd then path = picker:current().cwd .. "/" .. path end
-					vim.system { "open", "-R", path }
+					local absPath = assert(Snacks.picker.util.path(item), "no path")
+					vim.system { "open", "-R", absPath }
 					picker:close()
 				end,
-				qflist_and_go = function(picker)
+				qflist_and_go = function(picker, _item, _action)
 					local query = vim.api.nvim_get_current_line()
-					local title = ("%s: %s"):format(picker.title, query)
+					local title = picker.title .. (query and ": " .. query or "")
 					picker:action("qflist")
 					vim.fn.setqflist({}, "a", { title = title }) -- add missing title to qflist
 
@@ -575,7 +585,7 @@ return {
 
 					vim.api.nvim_exec_autocmds("QuickFixCmdPost", {})
 				end,
-				list_down_wrapping = function(picker)
+				list_down_wrapping = function(picker, _item, _action)
 					local allVisible = #picker.list.items -- picker:count() only counts unfiltered
 					local current = picker.list.cursor -- picker:current().idx incorrect for `smart` source
 					local action = current == allVisible and "list_top" or "list_down"
