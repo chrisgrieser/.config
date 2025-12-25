@@ -43,7 +43,7 @@ return {
 			language_border = "▃",
 			language_left = "▃█",
 			language_right = "█▃",
-			left_pad = 1,
+			left_pad = 0,
 			right_pad = 1,
 			highlight_border = "PmenuThumb",
 		},

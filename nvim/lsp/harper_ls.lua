@@ -23,9 +23,9 @@ return {
 			dialect = "American",
 			linters = {
 				UseTitleCase = false, -- prefer sentence case headings
-				SentenceCapitalization = false, -- PENDING https://github.com/Automattic/harper/issues/1056
 				UnclosedQuotes = false, -- PENDING https://github.com/Automattic/harper/issues/1573
-				PhrasalVerbAsCompoundNoun = false, -- PENDING https://github.com/Automattic/harper/issues/2369
+				SentenceCapitalization = true, -- https://github.com/Automattic/harper/issues/1056
+				PhrasalVerbAsCompoundNoun = true, -- https://github.com/Automattic/harper/issues/2369
 			},
 		},
 	},
@@ -38,8 +38,8 @@ return {
 			vim.notify(("Added to %s dict."):format(which))
 		end
 		-- stylua: ignore
-		vim.keymap.set("n", "zg", function() addToDict("User") end, { desc = "󰓆 User dict", buffer = bufnr })
+		vim.keymap.set("n", "zg", function() addToDict("WS") end, { desc = "󰓆 Workspace dict", buffer = bufnr })
 		-- stylua: ignore
-		vim.keymap.set("n", "zG", function() addToDict("WS") end, { desc = "󰓆 Workspace dict", buffer = bufnr })
+		vim.keymap.set("n", "zG", function() addToDict("User") end, { desc = "󰓆 User dict", buffer = bufnr })
 	end,
 }
