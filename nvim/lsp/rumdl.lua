@@ -1,4 +1,4 @@
--- DOCS https://github.com/rvben/rumdl/issues/194#issuecomment-3675558541
+-- DOCS https://github.com/rvben/rumdl/blob/main/docs/lsp.md
 --------------------------------------------------------------------------------
 
 ---@type vim.lsp.Config

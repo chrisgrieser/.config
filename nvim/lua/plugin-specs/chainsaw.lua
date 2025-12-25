@@ -55,7 +55,7 @@ return {
 		-- disables LSP diagnostic for `Chainsaw`
 		vim.lsp.config("lua_ls", {
 			on_init = function(client)
-				if (client.root_dir or ""):find("nvim") then
+				if client.root_dir and client.root_dir:find("nvim") then
 					local globals = client.config.settings.Lua.diagnostics.globals or {}
 					table.insert(globals, "Chainsaw")
 				end

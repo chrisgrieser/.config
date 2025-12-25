@@ -43,14 +43,13 @@ return {
 			},
 			---MY CUSTOM FORMATTERS------------------------------------------------
 			["listify-links-in-notes"] = {
+				condition = function(_, ctx) return vim.startswith(ctx.dirname, vim.g.notesDir) end,
 				format = function(_self, _ctx, lines, callback)
-					if vim.uv.cwd() ~= vim.g.notesDir then return end
 					local updated = vim.tbl_map(function(line)
 						return line
 							:gsub("^%[%[.*%]%]$", "- %0") -- wikilinks
 							:gsub("^%[.*]%(.*%)$", "- %0") -- mdlinks
 							:gsub("^<[^!].*>$", "- %0") -- bare links, not html-comment
-							:gsub("^(%s*)%- %- ", "%1- ") -- duplicate list markers, PENDING https://github.com/rvben/rumdl/issues/227
 					end, lines)
 					callback(nil, updated)
 				end,

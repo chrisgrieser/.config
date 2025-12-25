@@ -4,6 +4,7 @@
 <a href="https://dotfyle.com/chrisgrieser/config-nvim"><img alt="badge 3" src="https://dotfyle.com/chrisgrieser/config-nvim/badges/plugin-manager?style=flat"/></a>
 
 ## All installed plugins
+<!-- auto-generate list -->
 - [altermo/ultimate-autopair.nvim](https://github.com/altermo/ultimate-autopair.nvim)
 - [chrisgrieser/nvim-chainsaw](https://github.com/chrisgrieser/nvim-chainsaw)
 - [chrisgrieser/nvim-genghis](https://github.com/chrisgrieser/nvim-genghis)

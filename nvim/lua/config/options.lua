@@ -12,6 +12,7 @@ vim.g.darkColor = "tokyonight"
 ---GENERAL OPTIONS--------------------------------------------------------------
 vim.g.mapleader = ","
 vim.g.maplocalleader = "<Nop>"
+
 vim.opt.clipboard = "unnamedplus"
 
 vim.opt.ignorecase = true
@@ -119,8 +120,15 @@ vim.opt.fillchars:append {
 	lastline = "↓",
 }
 
--- stylua: ignore
-vim.opt.fillchars:append { horiz = "═", vert = "║", horizup = "╩", horizdown = "╦", vertleft = "╣", vertright = "╠", verthoriz = "╬" }
+vim.opt.fillchars:append {
+	horiz = "═",
+	vert = "║",
+	horizup = "╩",
+	horizdown = "╦",
+	vertleft = "╣",
+	vertright = "╠",
+	verthoriz = "╬",
+}
 -- vim.opt.fillchars:append { horiz = "▄", vert = "█", horizup = "█", horizdown = "▄", vertleft = "█", vertright = "█", verthoriz = "█" }
 
 ---DIAGNOSTICS------------------------------------------------------------------
