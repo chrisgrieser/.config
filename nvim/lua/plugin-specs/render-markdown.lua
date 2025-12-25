@@ -32,8 +32,8 @@ return {
 			width = vim.o.textwidth,
 		},
 		bullet = {
-			icons = { "◇", "▪️", "▫️", "•","◦" }, -- ◆◇•◦▫️▪️
-			ordered_icons = "" -- disable overwriting ordered list numbers with 1-2-3
+			icons = { "◇", "▪️", "▫️" }, -- ◆◇•◦▫️▪️
+			ordered_icons = "", -- disable overwriting ordered list numbers with 1-2-3
 		},
 		code = {
 			border = "thin",
@@ -45,7 +45,7 @@ return {
 			language_right = "█▃",
 			left_pad = 1,
 			right_pad = 1,
-			highlight_border = "DiffText",
+			highlight_border = "PmenuThumb",
 		},
 		link = {
 			-- no icon for internal links, since distinguished via color in
