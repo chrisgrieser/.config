@@ -4,6 +4,8 @@ alias co='git checkout'
 alias gd='git diff'
 alias gb='git switch'
 alias grh='git clean --force -d && git reset --hard' # remove untracked files & undo all changes
+alias gt='git stash push && git stash show 0'
+alias gT='git stash pop'
 
 alias irb='git rebase --interactive --committer-date-is-author-date' # [i]nteractive [r]e[b]ase
 alias crb='git add --all ; git rebase --continue'                    # [c]ontinue [r]e[b]ase

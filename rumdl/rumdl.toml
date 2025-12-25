@@ -3,39 +3,40 @@
 [global]
 line-length = 80
 disable = [
-  "MD032",  # blanks-around-lists: space waster
-  "MD041",  # first-line-h1: not useful here
+  "blanks-around-lists",  # space waster
+  "first-line-h1",
 ]
+cache = false  # avoid noisy `.rumdl_cache`
 
 # ------------------------------------------------------------------------------
 
-[MD004]  # ul-style
+[ul-style]
 style = "dash"  # GitHub default & quicker to type
 
-[MD007]  # ul-indent
+[ul-indent]
 indent = 4  # consistent with .editorconfig
 
-[MD013]  # line-length
+[line-length]
 code-blocks = false
 reflow = true  # enable auto-formatting
 
-[MD022]  # blanks-around-headings
+[blanks-around-headings]
 lines-below = 0  # rule of proximity
 
-[MD029]  # ol-prefix
+[ol-prefix]
 style = "ordered"
 
-[MD033]  # inline-html
+[no-inline-html]
 allowed-elements = ["a", "img"]  # badges
 
-[MD049]  # emphasis-style
-style = "asterisk"  # better than underscore, since it's not considered a word-char
+[emphasis-style]
+style = "asterisk"  # better than underscore, since not considered a word-char
 
-[MD050]  # strong-style
-style = "asterisk"  # better than underscore, since it's not considered a word-char
+[strong-style]
+style = "asterisk"
 
-[MD060]  # auto-format tables
-enabled = true  # opt-in, since rule still experimental
+[table-format]
+enabled = true  # opt-in rule
 
 [MD063]  # heading-capitalization
 enabled = true  # opt-in rule

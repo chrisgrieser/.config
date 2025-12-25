@@ -7,7 +7,6 @@ return {
 	opts = {
 		signs_staged_enable = true,
 		attach_to_untracked = true,
-		max_file_length = 3000,
 		-- stylua: ignore
 		count_chars = { "", "󰬻", "󰬼", "󰬽", "󰬾", "󰬿", "󰭀", "󰭁", "󰭂", ["+"] = "󰿮" },
 		signs = {

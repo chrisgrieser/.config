@@ -22,7 +22,7 @@ jobs:
       - name: Update plugin list
         run: |
           # CONFIG
-          last_line_before_plugins="## All installed plugins"
+          last_line_before_plugins="<!-- auto-generate list -->"
           nvim_readme="./nvim/README.md"
           lazy_lock="./nvim/.lazy-lock.json"
           lazy_specs_path="./nvim/lua/plugin-specs"
