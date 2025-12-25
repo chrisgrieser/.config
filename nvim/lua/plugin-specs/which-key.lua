@@ -1,27 +1,28 @@
+---Set up plugin-specific groups cleanly with the plugin config
+---(Accessed via `vim.g`, as this file's exports are used by `lazy.nvim`.)
+---@param spec { [1]: string, mode?: string[], group: string }
+vim.g.whichkeyAddSpec = function(spec) ---@diagnostic disable-line: duplicate-set-field for the empty functions in `lazy.nvim` setup
+	if not spec.mode then spec.mode = { "n", "x" } end
+	-- Deferred to ensure spec is loaded after whichkey itself
+	vim.defer_fn(function()
+		local ok, whichkey = pcall(require, "which-key")
+		if ok and whichkey then whichkey.add(spec) end
+	end, 1000)
+end
+
 return {
 	"folke/which-key.nvim",
 	event = "VeryLazy",
-	enabled = false,
-	init = function()
-		---Set up plugin-specific groups cleanly with the plugin config
-		---(Accessed via `vim.g`, as this file's exports are used by `lazy.nvim`.)
-		---@param spec { [1]: string, mode?: string[], group: string }
-		vim.g.whichkeyAddSpec = function(spec) ---@diagnostic disable-line: duplicate-set-field for the empty functions in `lazy.nvim` setup
-			if not spec.mode then spec.mode = { "n", "x" } end
-			-- Deferred to ensure spec is loaded after whichkey itself
-			vim.defer_fn(function() require("which-key").add(spec) end, 1000)
-		end
-	end,
 	opts = {
 		delay = 400,
 		preset = "helix",
 		win = {
-			-- border = vim.o.winborder,
+			border = vim.o.winborder,
 			height = { min = 1, max = 0.99 },
 		},
 
 		spec = {
-			{ -- leader subgroups
+			{
 				mode = { "n", "x" },
 				{ "<leader>", group = "󰓎 Leader" },
 				{ "<leader>c", group = " Code action" },
@@ -34,8 +35,13 @@ return {
 				{ "<leader>r", group = "󱗘 Refactor" },
 				{ "<leader>u", group = "󰕌 Undo" },
 			},
+			{
+				mode = "n",
+				{ "g", group = "Goto" },
+				{ "z", group = " Folds & Spelling" },
+			},
 			{ -- using my list instead of `text_objects` preset, since it's too crowded
-				mode = { "o", "x" },
+				mode = "o",
 				{ "r", group = "rest of" },
 				{ "i", group = "inner" },
 				{ "a", group = "outer" },
@@ -51,11 +57,6 @@ return {
 				{ "iw", desc = "󰬞 word" },
 				{ "aw", desc = "󰬞 word" },
 				{ "gn", desc = " search result" },
-			},
-			{ -- base groups
-				mode = { "n", "x" },
-				{ "g", group = "Goto" },
-				{ "z", group = " Folds & Spelling" },
 			},
 		},
 		plugins = {

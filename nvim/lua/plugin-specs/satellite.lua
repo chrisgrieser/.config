@@ -11,7 +11,7 @@ return {
 			cursor = { enable = false },
 			marks = {
 				enable = true,
-				key = "", -- stop satellite.nvim from adding delays to my `m` keybind
+				key = "<Nop>", -- stop satellite.nvim from adding delays to my `m` keybind
 			},
 		},
 	},
