@@ -189,5 +189,5 @@ defaults write com.apple.archiveutility archive-reveal-after -int 1
 #-TEXTEDIT----------------------------------------------------------------------
 defaults write com.apple.TextEdit NSShowAppCentricOpenPanelInsteadOfUntitledFile -bool false
 defaults write com.apple.TextEdit RichText -bool false
-defaults write com.apple.TextEdit NSFixedPitchFontSize -int 24
 defaults write com.apple.TextEdit ShowPageBreaks -bool true
+defaults write com.apple.TextEdit NSFixedPitchFontSize -int 24
