@@ -141,7 +141,7 @@ rules:
         from: { key_code: escape, modifiers: { mandatory: [control] } }
         to:
           - { key_code: i, modifiers: [option, command] }
-          - { key_code: vk_none, hold_down_milliseconds: 400 }
+          - { key_code: vk_none, hold_down_milliseconds: 500 }
           - { key_code: c, modifiers: [shift, command] }
         conditions:
           - { type: frontmost_application_if, bundle_identifiers: [md.obsidian] }
