@@ -1,14 +1,13 @@
 #!/usr/bin/env zsh
-# SOURCES FOR MAC DEFAULT SETTINGS
+#-SOURCES FOR MAC DEFAULT SETTINGS----------------------------------------------
 # https://github.com/herrbischoff/awesome-macos-command-line
 # https://github.com/mathiasbynens/dotfiles/blob/master/.macos
 # https://macos-defaults.com/
-#───────────────────────────────────────────────────────────────────────────────
+#-------------------------------------------------------------------------------
 
 sudo -v # ask for permissions upfront
 
-#───────────────────────────────────────────────────────────────────────────────
-# SYSTEM PREFS
+#-SYSTEM PREFS------------------------------------------------------------------
 
 # Cloudflare
 dns_address_1="1.1.1.1"
@@ -20,8 +19,7 @@ networksetup -listallnetworkservices |
 	tr -d "*" | # remove "*" marking disabled services
 	xargs -I {} networksetup -setdnsservers {} "$dns_address_1" "$dns_address_2"
 
-#───────────────────────────────────────────────────────────────────────────────
-# FINDER
+#-FINDER------------------------------------------------------------------------
 defaults write com.apple.finder CreateDesktop false     # disable desktop icons & make desktop unfocussable
 defaults write com.apple.finder QuitMenuItem -bool true # Finder quitable
 
@@ -159,38 +157,37 @@ defaults write com.apple.spaces spans-displays -int 0
 # create "Untitled" file instead of open dialog
 defaults write -g NSShowAppCentricOpenPanelInsteadOfUntitledFile -bool false
 
-#───────────────────────────────────────────────────────────────────────────────
-# DOCK (Hot corners)
-# INFO Dock settings do not need to be saved, since the Dock-Switcher setup also
+#-DOCK--------------------------------------------------------------------------
+# Dock settings do not need to be saved, since the Dock-Switcher setup also
 # saves them, and therefore syncs them across devices already as soon as
 # Dock-switcher is run.
 
-#───────────────────────────────────────────────────────────────────────────────
-# TIME MACHINE
-
-# Prevent Time Machine from prompting to use new hard drives as backup volume
+#-TIME MACHINE------------------------------------------------------------------
+# prevent Time Machine from prompting to use new hard drives as backup volume
 defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
 sudo tmutil disable # disable automatic backups
 
-#───────────────────────────────────────────────────────────────────────────────
-# SAFARI
+#-SAFARI------------------------------------------------------------------------
 defaults write com.apple.Safari IncludeDevelopMenu -bool true            # Enable Develop menu & Inspector
 defaults write com.apple.Safari ShowFullURLInSmartSearchField -bool true # full URL in address bar
 defaults write com.apple.Safari HomePage -string "about:blank"           # faster loading
 defaults write com.apple.Safari DownloadsPath -string "$HOME/Desktop"    # Download path
 
-#───────────────────────────────────────────────────────────────────────────────
-# APP STORE
+#-APP STORE---------------------------------------------------------------------
 defaults write com.apple.appstore InAppReviewEnabled -bool false
 defaults write com.apple.commerce AutoUpdate -bool false
 
-# App Store Update freq
 defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 2
 defaults write com.apple.SoftwareUpdate AutomaticCheckEnabled -bool true
 defaults write com.apple.SoftwareUpdate AutomaticDownload -int 1 # Download newly available updates in background
 
-#───────────────────────────────────────────────────────────────────────────────
-# ARCHIVE UTILITY
+#-ARCHIVE UTILITY---------------------------------------------------------------
 # shellcheck disable=2088
 defaults write com.apple.archiveutility dearchive-move-after -string '~/.Trash'
 defaults write com.apple.archiveutility archive-reveal-after -int 1
+
+#-TEXTEDIT----------------------------------------------------------------------
+defaults write com.apple.TextEdit NSShowAppCentricOpenPanelInsteadOfUntitledFile -bool false
+defaults write com.apple.TextEdit RichText -bool false
+defaults write com.apple.TextEdit NSFixedPitchFontSize -int 24
+defaults write com.apple.TextEdit ShowPageBreaks -bool true
