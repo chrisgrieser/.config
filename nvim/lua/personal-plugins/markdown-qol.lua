@@ -95,7 +95,8 @@ function M.autoBullet(key)
 	if continued ~= "" then continued = indent .. continued end
 
 	local line = vim.api.nvim_get_current_line()
-	local emptyList = (continued ~= "") and vim.trim(indent .. continued) == vim.trim(line)
+	local emptyList = ((continued ~= "") and vim.trim(indent .. continued) == vim.trim(line))
+		or line:match("^%s*%d+%. $")
 	if key == "o" or key == "O" then
 		if key == "O" then row = row - 1 end
 		vim.api.nvim_buf_set_lines(0, row, row, false, { continued })

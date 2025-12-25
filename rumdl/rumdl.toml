@@ -38,7 +38,7 @@ style = "asterisk"
 [table-format]
 enabled = true  # opt-in rule
 
-[MD063]  # heading-capitalization
+[heading-capitalization]
 enabled = true  # opt-in rule
 style = "sentence_case"
 ignore-words = ["nvim", "Obsidian", "Alfred"]

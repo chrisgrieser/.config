@@ -3,4 +3,15 @@
 
 # ignore these files
 [files]
-extend-exclude = ["spelling.yml", "spelling-german.yml", "lorem.yml"]
+extend-exclude = ["spelling.yml", "spelling-german.yml"]
+
+# ignore these words, since they are common in German
+[default.extend-words]
+als = "als"
+ist = "ist"
+ein = "ein"
+oder = "oder"
+vor = "vor"
+sie = "sie"
+habe = "habe"
+alle = "alle"

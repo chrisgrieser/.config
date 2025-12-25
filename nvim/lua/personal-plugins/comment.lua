@@ -210,7 +210,8 @@ function M.addComment(where)
 	local newLine = emptyLine and indent or line .. spacing
 
 	-- write line
-	local comChars = vim.trim(comStr:format("")) .. " "
+	local comChars = vim.trim(comStr:format(""))
+	if placeHolderAtEnd then comChars = comChars .. " " end
 	vim.api.nvim_set_current_line(newLine .. comChars)
 
 	-- move cursor

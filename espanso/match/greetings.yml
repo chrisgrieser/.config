@@ -1,0 +1,18 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/espanso/espanso/dev/schemas/match.schema.json
+#───────────────────────────────────────────────────────────────────────────────
+matches:
+  - trigger: "!basketball"
+    replace: >
+      Hey guys i want to wish you all a merry Christmas. The internet is full of copypasted holiday
+      messages, that people don't even read and just forward to others. I don't like that. I like to
+      write what i deeply wish and what comes from my heart. Our friendships are very important and
+      will never be represented by a simple message copied from elsewhere. This being said I would
+      like to thank all of you. You are the best basketball team I've ever played with.
+  - trigger: "!basketball"
+    replace: >
+      Ich will euch allen ein frohes Weihnachten wünschen. Im Internet gibt’s ja diese ganzen
+      kopierten Feiertagsnachrichten, die die Leute einfach weiterleiten, ohne sie wirklich zu
+      lesen. Das ist nicht so mein Ding. Ich schreibe lieber, was mir wirklich am Herzen liegt.
+      Unsere Freundschaften, sind mir wichtig und lassen sich nicht einfach durch einen
+      gecopypasteten Spruch ausdrücken. Also, danke an euch alle! Ihr seid das beste Basketballteam,
+      mit dem ich je gespielt habe.
