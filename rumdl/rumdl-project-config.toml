@@ -1,0 +1,43 @@
+# DOCS https://github.com/rvben/rumdl/blob/main/docs/global-settings.md
+
+[global]
+line-length = 80
+disable = [
+  "blanks-around-lists",  # space waster
+]
+cache = false  # avoid noisy `.rumdl_cache`
+
+# ------------------------------------------------------------------------------
+
+[ul-style]
+style = "dash"  # GitHub default & quicker to type
+
+[ul-indent]
+indent = 4  # consistent with .editorconfig
+
+[line-length]
+code-blocks = false
+reflow = true  # enable auto-formatting
+
+[blanks-around-headings]
+lines-below = 0  # rule of proximity
+
+[ol-prefix]
+style = "ordered"
+
+[no-inline-html]
+allowed-elements = ["a", "img"]  # badges
+
+[emphasis-style]
+style = "asterisk"  # better than underscore, since not considered a word-char
+
+[strong-style]
+style = "asterisk"
+
+[table-format]
+enabled = true  # opt-in rule
+
+[MD063]  # heading-capitalization
+enabled = true  # opt-in rule
+style = "sentence_case"
+ignore-words = ["nvim", "Obsidian", "Alfred"]
