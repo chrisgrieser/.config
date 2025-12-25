@@ -13,7 +13,7 @@ return {
 				vim.env.HOME .. "/Library/Mobile Documents/**", -- anything in iCloud
 				vim.env.HOME .. "/phd-data-analysis/**",
 				vim.env.HOME .. "/writing-vault/**", -- reports pandoc citations as spelling errors, etc.
-				-- vim.g.notesDir .. "/**", -- too much German
+				vim.g.notesDir .. "/**", -- too much German
 			},
 
 			diagnosticSeverity = "hint",
@@ -35,11 +35,11 @@ return {
 				filter = function(a) return a.command == ("HarperAddTo%sDict"):format(which) end,
 				apply = true,
 			}
+			vim.notify(("Added to %s dict."):format(which))
 		end
-		vim.keymap.set("n", "zg", "<Nop>", { buffer = bufnr })
 		-- stylua: ignore
-		vim.keymap.set("n", "zgu", function() addToDict("User") end, { desc = "󰓆 User dict", buffer = bufnr })
+		vim.keymap.set("n", "zg", function() addToDict("User") end, { desc = "󰓆 User dict", buffer = bufnr })
 		-- stylua: ignore
-		vim.keymap.set("n", "zgw", function() addToDict("WS") end, { desc = "󰓆 Workspace dict", buffer = bufnr })
+		vim.keymap.set("n", "zG", function() addToDict("WS") end, { desc = "󰓆 Workspace dict", buffer = bufnr })
 	end,
 }

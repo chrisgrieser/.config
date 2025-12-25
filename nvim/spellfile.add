@@ -5,6 +5,7 @@ OS
 PR
 QuickLook
 UNIX
+cmp
 copypasted
 frontmatter
 harper
@@ -19,7 +20,7 @@ s
 subwords
 treesitter
 txt
+url
 wikilink
 workspace
 zsh
-url

@@ -14,9 +14,9 @@ function actions_in_repo {
 	cp -f "$HOME/.config/rumdl/rumdl-project-config.toml" ./.rumdl.toml
 }
 
-commit_msg="ci: update rumdle config"
+commit_msg="ci: update rumdl config"
 
-amend_no_edit="false"
+amend="no-edit" # no-edit|only-message|false
 
 #───────────────────────────────────────────────────────────────────────────────
 #───────────────────────────────────────────────────────────────────────────────
@@ -41,16 +41,17 @@ print "\e[1;34mRepos to update ($repo_count):\e[0m"
 echo "$repos_to_update" | rs
 echo
 
-if [[ "$amend_no_edit" == "true" ]]; then
-	print "\e[0;33mWARN: Amending to previous commit\e[0m"
-else
+[[ "$amend" != "false" ]] && print "\e[1;33mWARN: amend $amend\e[0m"
+if [[ "$amend" != "no-edit" ]]; then
 	print "\e[1;34mCommit message:\e[0m"
 	echo "$commit_msg"
 fi
+if [[ "$amend" != "only-message" ]]; then
+	echo
+	print "\e[1;34mActions:\e[0m"
+	declare -f actions_in_repo | sed '1d;$d;s/^\t//' | bat --language=sh --no-pager
+fi
 
-echo
-print "\e[1;34mActions:\e[0m"
-declare -f actions_in_repo | sed '1d;$d;s/^\t//' | bat --language=sh --no-pager
 echo
 print "\e[1;34mProceed? (y/n)\e[0m"
 read -r pressed
@@ -75,8 +76,10 @@ while read -r repo; do
 	actions_in_repo
 
 	# COMMIT/AMEND
-	if [[ "$amend_no_edit" == "true" ]]; then
-		git add --all && git commit --amend --no-edit && git push --no-progress --force
+	if [[ "$amend" == "no-edit" ]]; then
+		git add --all && git commit --amend --no-edit && git push --force --no-progress
+	elif [[ "$amend" == "only-message" ]]; then
+		git add --all && git commit --amend --message="$commit_msg" && git push --force --no-progress
 	else
 		git add --all && git commit --message="$commit_msg" && git push --no-progress
 	fi

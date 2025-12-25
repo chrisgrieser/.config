@@ -23,7 +23,7 @@ lines-below = 0  # rule of proximity
 style = "ordered"
 
 [no-inline-html]
-allowed-elements = ["a", "img"]  # badges
+allowed-elements = ["a", "img", "kbd"]  # badges
 
 [emphasis-style]
 style = "asterisk"  # better than underscore, since not considered a word-char

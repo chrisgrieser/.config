@@ -13,7 +13,7 @@ return {
 	"folke/which-key.nvim",
 	event = "VeryLazy",
 	opts = {
-		delay = 400,
+		delay = 200,
 		preset = "helix",
 		win = {
 			border = vim.o.winborder,
@@ -63,7 +63,7 @@ return {
 			registers = false,
 			spelling = { enabled = false },
 			-- stylua: ignore
-			presets = { motions = false, g = false, text_objects = false, z = false, nav = false, operator = false },
+			presets = { g = false, z = false, motions = false, text_objects = false, nav = false, operator = false },
 		},
 		filter = function(map)
 			-- need to remove comment mapping shere, since they are nvim-builtins
