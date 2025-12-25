@@ -2,10 +2,7 @@
 
 [global]
 line-length = 80
-disable = [
-  "blanks-around-lists",  # space waster
-]
-cache = false  # avoid noisy `.rumdl_cache`
+disable = ["blanks-around-lists"]  # space waster
 
 # ------------------------------------------------------------------------------
 
@@ -37,7 +34,12 @@ style = "asterisk"
 [table-format]
 enabled = true  # opt-in rule
 
-[MD063]  # heading-capitalization
+[heading-capitalization]
 enabled = true  # opt-in rule
 style = "sentence_case"
 ignore-words = ["nvim", "Obsidian", "Alfred"]
+
+# ------------------------------------------------------------------------------
+
+[per-file-ignores]
+".github/pull_request_template.md" = ["first-line-h1"]

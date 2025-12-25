@@ -4,17 +4,17 @@
 github_username="chrisgrieser"
 # set -e
 
-repo_names="alfred|shimmering-obsidian|gitfred"
+# repo_names="alfred|shimmering-obsidian|gitfred"
 # repo_names="nvim"
 # repo_names="obsidian-quadro|pseudometa-obsidian-plugin-template|grappling-hook|obsidian-proofreader"
 # ALL
-# repo_names="finder-vim-mode|zsh-magic-dashboard|nvim|alfred|shimmering-obsidian|gitfred|obsidian-quadro|pseudometa-obsidian-plugin-template|grappling-hook|obsidian-proofreader"
+repo_names="finder-vim-mode|zsh-magic-dashboard|nvim|alfred|shimmering-obsidian|gitfred|obsidian-quadro|pseudometa-obsidian-plugin-template|grappling-hook|obsidian-proofreader"
 
 function actions_in_repo {
-	cp -f "$HOME/Desktop/.rsync-exclude" "./.rsync-exclude"
+	cp -f "$HOME/.config/rumdl/rumdl-project-config.toml" ./.rumdl.toml
 }
 
-commit_msg="ci: update .rsync-exclude"
+commit_msg="ci: update rumdle config"
 
 amend_no_edit="false"
 
