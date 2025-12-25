@@ -10,11 +10,13 @@
 ---@param where "after"|"before"? defaults to "after"
 vim.g.lualineAdd = function(whichBar, whichSection, component, where) ---@diagnostic disable-line: duplicate-set-field for the empty functions in `lazy.nvim` setup
 	vim.defer_fn(function() -- deferred so other plugins do not load lualine too early
+		local ok, lualine = pcall(require, "lualine")
+		if not (ok and lualine) then return end
 		local componentObj = type(component) == "table" and component or { component }
-		local sectionConfig = require("lualine").get_config()[whichBar][whichSection] or {}
+		local sectionConfig = lualine.get_config()[whichBar][whichSection] or {}
 		local pos = where == "before" and 1 or #sectionConfig + 1
 		table.insert(sectionConfig, pos, componentObj)
-		require("lualine").setup { [whichBar] = { [whichSection] = sectionConfig } }
+		lualine.setup { [whichBar] = { [whichSection] = sectionConfig } }
 	end, 1000)
 end
 

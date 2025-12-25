@@ -328,7 +328,7 @@ return {
 						local lnum = item.pos[1]
 						vim.cmd(("edit +%d %s"):format(lnum, item.file))
 					end,
-					layout = "toggled_preview",
+					layout = { preset = "big_preview", hidden = { "preview" } },
 				},
 				colorschemes = {
 					-- at the bottom, so there is more space to preview
@@ -369,8 +369,9 @@ return {
 						picker:close()
 					end,
 				},
-				git_log = { layout = "toggled_preview" },
-				git_log_file = { layout = "toggled_preview" },
+				git_log = {
+					layout = { preset = "big_preview", hidden = { "preview" } },
+				},
 				git_status = {
 					layout = "big_preview",
 					win = {
@@ -466,8 +467,8 @@ return {
 				wide_with_preview = {
 					preset = "small_no_preview",
 					layout = {
-						width = 0.99,
-						[2] = { -- as second column
+						width = 0.999,
+						[2] = {
 							win = "preview",
 							title = "{preview}",
 							border = vim.o.winborder --[[@as "rounded"|"single"|"double"|"solid"]],
@@ -476,16 +477,11 @@ return {
 						},
 					},
 				},
-				toggled_preview = {
-					preset = "big_preview",
-					hidden = { "preview" },
-					layout = {},
-				},
 				big_preview = {
 					preset = "wide_with_preview",
 					layout = {
 						height = 0.85,
-						[2] = { width = 0.6 }, -- second win is the preview
+						[2] = { width = 0.7 }, -- second win is the preview
 					},
 				},
 			},

@@ -2,7 +2,7 @@
 - LSP color support:
     - <https://www.reddit.com/r/neovim/comments/1k7arqq/lsp_document_color_support_available_on_master/>
     - <https://www.reddit.com/r/neovim/comments/1moxwv9/hexadecimal_colors_in_v012_ootb/>
-- `:restart`
+- `:restart` <https://github.com/neovide/neovide/discussions/1713>
 - `vim._extui`
 - `textDocument.onTypeFormatting`
 - `:Difftool` <https://www.reddit.com/r/neovim/comments/1o4eo6s/new_difftool_command_added_to_neovim/>
@@ -10,8 +10,10 @@
 - inline completion: <https://neovim.io/doc/user/lsp.html#lsp-inline_completion>
 - incremental selection: `vim.lsp.buf.selection_range()`
 - `:Undotree`
-- `vim.pack` wrapper <https://www.reddit.com/r/neovim/s/drTr1iSvPl>
 - `vim.fs.exists`
+- `vim.pack` wrapper
+    - <https://www.reddit.com/r/neovim/s/drTr1iSvPl>
+    - <https://github.com/zuqini/zpack.nvim>
 
 ```lua
 vim.api.nvim_create_autocmd("PackChanged", {

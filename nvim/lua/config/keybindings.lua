@@ -132,7 +132,8 @@ keymap({ "n", "x", "i" }, "<D-b>", function() require("personal-plugins.markdown
 keymap({ "n", "x", "i" }, "<D-i>", function() require("personal-plugins.markdown-qol").wrap("*") end, { desc = " Italic" })
 
 -- Simple surrounds
-keymap("n", '"', function() require("personal-plugins.markdown-qol").wrap('"') end, { desc = ' Surround' })
+keymap("n", '"', function() require("personal-plugins.markdown-qol").wrap('"') end, { desc = " Surround" })
+keymap("n", "'", function() require("personal-plugins.markdown-qol").wrap("'") end, { desc = " Surround" })
 keymap("n", "(", function() require("personal-plugins.markdown-qol").wrap("(", ")") end, { desc = "󰅲 Surround" })
 keymap("n", "[", function() require("personal-plugins.markdown-qol").wrap("[", "]") end, { nowait = true, desc = "󰅪 Surround" })
 keymap("n", "{", function() require("personal-plugins.markdown-qol").wrap("{", "}") end, { desc = " Surround" })

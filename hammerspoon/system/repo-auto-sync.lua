@@ -19,6 +19,11 @@ local config = {
 
 ---@param silent? "silent"
 local function syncAllGitRepos(silent)
+	-- idempotent
+	if M.isSyncing then return end
+	M.isSyncing = true
+	u.defer(3, function() M.isSyncing = false end)
+
 	-- reset
 	M.reposToSync = {} ---@type Repo[]
 	M.finishedSyncing = {} ---@type Repo[]

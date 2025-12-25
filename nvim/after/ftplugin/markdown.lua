@@ -1,7 +1,5 @@
-local bkeymap = require("config.utils").bufKeymap
+---OPTIONS----------------------------------------------------------------------
 local optl = vim.opt_local
-
----GENERAL----------------------------------------------------------------------
 optl.expandtab = true
 optl.commentstring = "<!-- %s -->" -- add spaces
 
@@ -15,6 +13,7 @@ vim.schedule(function() optl.formatoptions:append("t") end) -- when typing beyon
 optl.colorcolumn = ""
 
 ---KEYMAPS----------------------------------------------------------------------
+local bkeymap = require("config.utils").bufKeymap
 
 bkeymap("n", "<leader>rt", "vip:!pandoc --to=gfm<CR>", { desc = " Format table under cursor" })
 -- stylua: ignore
