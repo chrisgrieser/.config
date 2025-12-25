@@ -6,8 +6,8 @@ local M = {}
 hs.hotkey.bind({ "option", "control" }, "j", function()
 	local isJapanese = hs.keycodes.currentMethod() ~= nil
 
+	-- SIC Japanese defined by METHOD, Latin languages by LAYOUT
 	if isJapanese then
-		-- SIC Japanese defined by METHOD, Latin languages by LAYOUT
 		hs.keycodes.setLayout("German")
 	else
 		hs.keycodes.setMethod("Hiragana")
