@@ -14,8 +14,6 @@ return {
 		},
 	},
 	opts = {
-		completions = { lsp = { enabled = true } },
-		sign = { enabled = false },
 		quote = {
 			repeat_linebreak = true, -- full border on soft-wrap
 		},
@@ -24,9 +22,10 @@ return {
 		},
 		heading = {
 			position = "inline", -- = remove indentation of headings
-			width = "block",
+			width = "block", -- = not full width
 			min_width = vim.o.textwidth,
-			icons = { "󰲠 ", "󰲢 ", "󰲤 ", "󰲦 ", "󰲨 ", "󰲪 " },
+			icons = { " 󰎤 ", " 󰎧 ", " 󰎪 ", " 󰎭 ", " 󰎱 ", " 󰎳 " }, -- `numeric_x` glyphs
+			-- icons = { " 󰲠 ", " 󰲢 ", " 󰲤 ", " 󰲦 ", " 󰲨 ", " 󰲪 " },
 		},
 		dash = {
 			width = vim.o.textwidth,
@@ -36,15 +35,15 @@ return {
 			ordered_icons = "", -- disable overwriting ordered list numbers with 1-2-3
 		},
 		code = {
-			border = "thin",
 			position = "left",
-			width = "block",
+			width = "block", -- = not full width
 			min_width = 50,
+			-- border = "thin", -- use the `above`/`below` chars
 			below = "▔", -- ▀
 			above = "▁", -- ▃
 			language_border = "▁",
-			language_left = "▁█",
-			language_right = "█▁",
+			language_left = "▁▁█",
+			language_right = "█",
 			left_pad = 1,
 			right_pad = 1,
 			highlight_border = "PmenuThumb",
@@ -54,6 +53,7 @@ return {
 			-- `query/markdown_inline/highlights.scm`
 			hyperlink = "",
 			wiki = { icon = "" },
+
 			custom = {
 				web = { icon = " " }, -- for links that do not match a pattern below
 
@@ -78,9 +78,11 @@ return {
 			},
 		},
 		--------------------------------------------------------------------------
+		sign = { enabled = false },
 		render_modes = { "n", "c", "i", "v", "V" },
 		win_options = {
 			conceallevel = { default = 0 }, -- makes toggling this plugin also toggle conceallevel
+			colorcolumn = { rendered = "" } -- disabled on render, since heading width already indicates it
 		},
 		overrides = { -- LSP hovers: hide code block lines
 			buftype = {

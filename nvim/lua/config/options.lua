@@ -69,8 +69,8 @@ vim.api.nvim_create_autocmd("Filetype", {
 
 ---APPEARANCE-------------------------------------------------------------------
 vim.opt.cursorline = true
-vim.opt.colorcolumn = "+1" -- = one more than textwidth
 vim.opt.signcolumn = "yes:1"
+vim.opt.colorcolumn = "+1" -- = one more than textwidth
 
 vim.opt.sidescrolloff = 15
 vim.opt.scrolloff = 13

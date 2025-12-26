@@ -10,7 +10,6 @@ optl.sidescrolloff = 3 -- lower, since we rarely go beyond textwidth
 
 -- wrap
 vim.schedule(function() optl.formatoptions:append("t") end) -- when typing beyond `textwidth`
-optl.colorcolumn = ""
 
 ---KEYMAPS----------------------------------------------------------------------
 local bkeymap = require("config.utils").bufKeymap
