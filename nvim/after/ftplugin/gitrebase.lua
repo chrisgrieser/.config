@@ -3,8 +3,8 @@ vim.opt_local.listchars:remove("multispace")
 
 -- KEYMAPS
 local bkeymap = require("config.utils").bufKeymap
-bkeymap("n", "<CR>", "ZZ", { desc = " Confirm" })
-bkeymap("n", "q", vim.cmd.cquit, { desc = " Abort" })
+bkeymap("n", "<CR>", "ZZ", { desc = " Confirm" }) -- quit with saving = confirm
+bkeymap("n", "q", vim.cmd.cquit, { desc = " Abort" }) -- quit with error = aborting
 
 -- `:Cycle` is vim ftplugin
 bkeymap("n", "<Tab>", vim.cmd.Cycle, { desc = " Next conv. commit type" })
