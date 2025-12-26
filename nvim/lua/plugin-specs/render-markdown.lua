@@ -38,14 +38,14 @@ return {
 			position = "left",
 			width = "block", -- = not full width
 			min_width = 50,
-			-- border = "thin", -- use the `above`/`below` chars
+			left_pad = 1,
+			right_pad = 1,
+			border = "thin", -- use the `above`/`below` chars as is
 			below = "▔", -- ▀
 			above = "▁", -- ▃
 			language_border = "▁",
 			language_left = "▁▁█",
 			language_right = "█",
-			left_pad = 1,
-			right_pad = 1,
 			highlight_border = "PmenuThumb",
 		},
 		link = {

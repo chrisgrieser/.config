@@ -1,9 +1,10 @@
-/* SOURCE https://github.com/sindresorhus/github-markdown-css */ 
-/* replaced `.markdown-body` with `body` and copypasted the first block */
-/* copied at 2025-04-20 */ 
+/* SOURCE https://github.com/sindresorhus/github-markdown-css
+copied at 2025-04-20
+alternative (slightly worse styling): https://github.com/atlekbai/ghpdf/blob/main/src/ghpdf/static/github.css */
 /* ────────────────────────────────────────────────────────────────────────── */
 
-/* this block below copypasted from https://github.com/sindresorhus/github-markdown-css?tab=readme-ov-file#usage */ 
+/* this block below copypasted from https://github.com/sindresorhus/github-markdown-css?tab=readme-ov-file#usage
+   and replaced `.markdown-body` with `body` */
 body {
 	box-sizing: border-box;
 	min-width: 200px;
