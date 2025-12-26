@@ -7,6 +7,15 @@ vim.defer_fn(function()
 	require("snacks.picker.config.defaults").defaults.win.input.keys = {}
 	require("snacks.picker.config.defaults").defaults.win.list.keys = {}
 	require("snacks.picker.config.sources").explorer.win.list.keys = {}
+
+	-- remove the numbers from `vim.ui.select`
+	local orig = require("snacks.picker.format").ui_select
+	require("snacks.picker.format").ui_select = function(opts)
+		return function(item, picker)
+			local formatted = orig(opts)(item, picker)
+			return vim.list_slice(formatted, 3)
+		end
+	end
 end, 2000)
 --------------------------------------------------------------------------------
 
@@ -89,15 +98,10 @@ local function browseProject()
 		return acc
 	end)
 
-	if #projects == 0 then
-		vim.notify("No projects found.", vim.log.levels.WARN)
-	elseif #projects == 1 then
-		betterFileOpen(projectsFolder .. "/" .. projects[1])
-	else
-		vim.ui.select(projects, { prompt = " Select project" }, function(project)
-			if project then betterFileOpen(projectsFolder .. "/" .. project) end
-		end)
-	end
+	if #projects == 0 then return vim.notify("No projects found.", vim.log.levels.WARN) end
+	vim.ui.select(projects, { prompt = " Select project" }, function(project)
+		if project then betterFileOpen(projectsFolder .. "/" .. project) end
+	end)
 end
 
 --------------------------------------------------------------------------------
@@ -198,14 +202,13 @@ return {
 			sources = {
 				select = { -- vim.ui.select
 					layout = {
-						layout = {
-							min_width = 40,
-							backdrop = 40,
-							width = 0.6,
-						},
+						layout = { min_width = 40, backdrop = 40, width = 0.6 },
 					},
-					-- no count; LSP and action type can be inspected
-					format = function(item) return { item.formatted } end,
+					format = function(item)
+						vim.notify(vim.inspect(item)) -- 🪚
+						return { item.formatted }
+					end,
+
 					kinds = {}, -- allows-kind-specific config
 				},
 				files = {
