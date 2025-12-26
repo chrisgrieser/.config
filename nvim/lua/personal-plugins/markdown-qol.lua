@@ -148,8 +148,9 @@ end
 function M.followMdlinkOrWikilink()
 	local mdlinkPattern = "%[.-]%((.-)%)"
 	local wikilinkPattern = "%[%[.-]]"
+	local urlPattern = "https?://[^%s%]'\"]+"
 	local row, col = unpack(vim.api.nvim_win_get_cursor(0))
-	local url, wikilink
+	local mdlink, wikilink, url
 	local ln = row
 	local line = vim.api.nvim_get_current_line()
 
@@ -158,23 +159,32 @@ function M.followMdlinkOrWikilink()
 	col = col + 1
 	while true do
 		local partialLine = line:sub(idx)
-		local _, urlEnd = partialLine:find(mdlinkPattern)
+		local _, mdlinkEnd = partialLine:find(mdlinkPattern)
 		local _, wikiEnd = partialLine:find(wikilinkPattern)
-		if urlEnd and (col <= idx + urlEnd) and (urlEnd < (wikiEnd or math.huge)) then
-			url = partialLine:match(mdlinkPattern)
+		local _, urlEnd = partialLine:find(urlPattern)
+		if
+			mdlinkEnd
+			and (col <= idx + mdlinkEnd)
+			and (mdlinkEnd < (wikiEnd or math.huge))
+			and (mdlinkEnd < (urlEnd or math.huge))
+		then
+			mdlink = partialLine:match(mdlinkPattern)
 			break
-		elseif wikiEnd and (col <= idx + wikiEnd) then
+		elseif wikiEnd and (col <= idx + wikiEnd) and (wikiEnd < (urlEnd or math.huge)) then
 			wikilink = partialLine:match(wikilinkPattern)
 			break
+		elseif urlEnd and (col <= idx + urlEnd) then
+			url = partialLine:match(urlPattern)
+			break
 		end
-		if not urlEnd and not wikiEnd then break end -- no link found in line
-		idx = idx + math.min(urlEnd or math.huge, wikiEnd or math.huge) -- look for next link
+		if not (mdlinkEnd or wikiEnd or urlEnd) then break end -- no link found in line
+		idx = idx + math.min(mdlinkEnd or math.huge, wikiEnd or math.huge, urlEnd or math.huge)
 	end
 
 	-- look forward in upcoming lines
 	local maxForward = 10
 	local totalLines = vim.api.nvim_buf_line_count(0)
-	while not (url or wikilink) do
+	while not (mdlink or wikilink or url) do
 		ln = ln + 1
 		if ln > totalLines or ln > row + maxForward then
 			local msg = ("Could not find URL or wikilink within %d lines."):format(maxForward)
@@ -182,19 +192,21 @@ function M.followMdlinkOrWikilink()
 			return
 		end
 		line = vim.api.nvim_buf_get_lines(0, ln - 1, ln, false)[1]
-		url = line:match(mdlinkPattern)
+		mdlink = line:match(mdlinkPattern)
 		wikilink = line:match(wikilinkPattern)
-		if url or wikilink then break end
+		if mdlink or wikilink then break end
 	end
 
 	if url then
-		local isFileLink = not vim.startswith(url, "http")
-		if isFileLink then return vim.cmd.edit(url) end
+		vim.ui.open(url)
+	if mdlink then
+		local isFileLink = not vim.startswith(mdlink, "http")
+		if isFileLink then return vim.cmd.edit(mdlink) end
 
 		-- move cursor to start of mdlink, or of the url
 		local targetCol = line:find(mdlinkPattern)
 		vim.api.nvim_win_set_cursor(0, { ln, targetCol - 1 })
-		vim.ui.open(url)
+		vim.ui.open(mdlink)
 	elseif wikilink then
 		-- `vim.lsp.buf.definition` requires to be on the link
 		local targetCol = line:find(wikilink, nil, true)
@@ -236,7 +248,9 @@ function M.renameAndUpdateBacklinks()
 		local err = function(msg) vim.notify(msg, vim.log.levels.ERROR) end
 
 		-- RENAME FILE ITSELF
+		if newName:find("[/:\\]") then return err("Invalid filename.") end
 		if newName == oldName then return err("Cannot use the same filename.") end
+		if vim.trim(newName) == "" then return err("Cannot use empty filename.") end
 		local newPath = vim.fs.joinpath(vim.fs.dirname(oldPath), newName .. ".md")
 		if vim.uv.fs_stat(newPath) then return err(("File %q already exists."):format(newName)) end
 		vim.cmd("silent! update")
@@ -290,18 +304,17 @@ function M.renameAndUpdateBacklinks()
 		end)
 
 		-- NOTIFY
-		if updateCount > 0 then
+		local msg = ("**%q to %q.**"):format(oldName, newName) .. "\n\n"
+		if updateCount == 0 then
+			msg = msg .. "No backlinks found to be updated."
+		else
 			local s1 = updateCount > 1 and "s" or ""
 			local s2 = #filesChanged > 1 and "s" or ""
-			local msg = {
-				("**%q to %q.**"):format(oldName, newName),
-				"",
-				("Updated [%d] backlink%s in [%d] file%s:"):format(updateCount, s1, #filesChanged, s2),
-				table.concat(filesChanged, "\n"),
-			}
-			vim.notify(table.concat(msg, "\n"), nil, { title = "Renamed file", icon = icon })
-		else
-			local msg = ("%q to %q."):format(oldName, newName),
+			-- stylua: ignore
+			msg = msg
+				.. ("Updated [%d] backlink%s in [%d] file%s:"):format(updateCount, s1, #filesChanged, s2)
+				.. "\n"
+				.. table.concat(filesChanged, "\n")
 		end
 		vim.notify(msg, nil, { title = "Renamed file", icon = icon })
 	end)
@@ -320,7 +333,7 @@ function M.addTitleToUrl()
 	title = title -- cleanup
 		:gsub("[\n\r]+", " ")
 		:gsub("^GitHub %- ", "")
-		:gsub(" · GitHub", "")
+		:gsub(" · GitHub$", "")
 
 	local urlStart, urlEnd = line:find(url, nil, true) -- `find` has literal search, `gsub` does not
 	local updatedLine = line:sub(1, urlStart - 1)
@@ -352,7 +365,7 @@ end
 
 ---@param css string url or absolute path
 function M.previewViaPandoc(css)
-	assert(vim.fn.executable("pandoc") == 1, "Pandoc not found.")
+	assert(vim.fn.executable("pandoc") == 1, "`pandoc` not found")
 	local outputPath = "/tmp/markdown-preview.html"
 
 	vim.cmd("silent! update")
