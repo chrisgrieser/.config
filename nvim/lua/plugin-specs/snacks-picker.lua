@@ -98,10 +98,15 @@ local function browseProject()
 		return acc
 	end)
 
-	if #projects == 0 then return vim.notify("No projects found.", vim.log.levels.WARN) end
-	vim.ui.select(projects, { prompt = " Select project" }, function(project)
-		if project then betterFileOpen(projectsFolder .. "/" .. project) end
-	end)
+	if #projects == 0 then
+		vim.notify("No projects found.", vim.log.levels.WARN)
+	elseif #projects == 1 then
+		betterFileOpen(projectsFolder .. "/" .. projects[1])
+	else
+		vim.ui.select(projects, { prompt = " Select project" }, function(project)
+			if project then betterFileOpen(projectsFolder .. "/" .. project) end
+		end)
+	end
 end
 
 --------------------------------------------------------------------------------
@@ -387,9 +392,9 @@ return {
 					win = {
 						input = {
 							keys = {
+								-- <CR> opens the file as usual
 								["<Tab>"] = { "list_down_wrapping", mode = "i" },
 								["<Space>"] = { "git_stage", mode = "i" },
-								-- <CR> opens the file as usual
 							},
 						},
 					},
@@ -399,9 +404,9 @@ return {
 					win = {
 						input = {
 							keys = {
+								-- <CR> opens the file as usual
 								["<Tab>"] = { "list_down_wrapping", mode = "i" },
 								["<Space>"] = { "git_stage", mode = "i" },
-								-- <CR> opens the file as usual
 							},
 						},
 					},
@@ -409,7 +414,7 @@ return {
 				gh_issue = { layout = "big_preview" },
 				gh_pr = { layout = "big_preview" },
 				lsp_config = {
-					-- confirm: open LSP config
+					-- confirm: inspect LSP config
 					confirm = function(picker, item)
 						if not item.enabled then
 							vim.notify("LSP server not enabled", vim.log.levels.WARN)
@@ -439,22 +444,6 @@ return {
 							}
 						end)
 					end,
-					actions = {
-						disableLsp = function(picker)
-							-- snacks allows opening files with `file:lnum`, but it
-							-- only matches if the filename is complete. With this
-							-- action, we complete the filename if using the 1st colon
-							-- in the query.
-							local query = vim.api.nvim_get_current_line()
-							local file = picker:current().file
-							if not file or query:find(":") then
-								vim.fn.feedkeys(":", "n")
-								return
-							end
-							vim.api.nvim_set_current_line(file .. ":")
-							vim.cmd.startinsert { bang = true }
-						end,
-					},
 				},
 				command_history = { layout = "small_no_preview" },
 			},

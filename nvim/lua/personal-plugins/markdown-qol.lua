@@ -205,6 +205,23 @@ function M.followMdlinkOrWikilink()
 	end
 end
 
+function M.rename()
+	---@type lsp.TextDocumentEdit
+	local edit = {
+		textDocument = { uri = vim.uri_from_bufnr(0) },
+		edits = {
+			{
+				newText = vim.fn.expand("<cword>"),
+				range = {
+					start = { line = 1, character = 1 },
+					["end"] = { line = 1, character = 2 },
+				},
+			},
+		},
+	}
+	vim.lsp.util.apply_text_document_edit(edit, nil, vim.o.encoding)
+end
+
 function M.addTitleToUrl()
 	assert(vim.fn.executable("curl") == 1, "`curl` not found.")
 	local line = vim.api.nvim_get_current_line()
