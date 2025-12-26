@@ -203,7 +203,7 @@ function M.followMdlinkOrWikilink()
 	end
 
 	if mdlink or url then
-		local isFileLink = not (vim.startswith(mdlink, "http") or url)
+		local isFileLink = not url and not vim.startswith(mdlink, "http")
 		if isFileLink then return vim.cmd.edit(mdlink) end
 
 		-- move cursor to start of mdlink or url
