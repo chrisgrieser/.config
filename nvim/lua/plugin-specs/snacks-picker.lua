@@ -196,6 +196,10 @@ return {
 	opts = {
 		picker = {
 			sources = {
+				select = {
+					layout = "small_no_preview",
+					-- kind = { }
+				},
 				files = {
 					cmd = "rg",
 					follow = true,
