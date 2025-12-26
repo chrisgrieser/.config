@@ -196,9 +196,17 @@ return {
 	opts = {
 		picker = {
 			sources = {
-				select = {
-					layout = "small_no_preview",
-					-- kind = { }
+				select = { -- vim.ui.select
+					layout = {
+						layout = {
+							min_width = 40,
+							backdrop = 40,
+							width = 0.6,
+						},
+					},
+					-- no count; LSP and action type can be inspected
+					format = function(item) return { item.formatted } end,
+					kinds = {}, -- allows-kind-specific config
 				},
 				files = {
 					cmd = "rg",
