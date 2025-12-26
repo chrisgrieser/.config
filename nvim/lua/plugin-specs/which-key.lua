@@ -18,7 +18,7 @@ return {
 		preset = "helix",
 		win = {
 			border = vim.o.winborder,
-			height = { min = 1, max = 0.95 },
+			height = { min = 1, max = 0.99 },
 		},
 
 		spec = {
@@ -34,13 +34,11 @@ return {
 				{ "<leader>q", group = " Quickfix" },
 				{ "<leader>r", group = "󱗘 Refactor" },
 				{ "<leader>u", group = "󰕌 Undo" },
-			},
-			{
-				mode = "n",
+
 				{ "g", group = "Goto" },
 				{ "z", group = " Folds & Spelling" },
 			},
-			{ -- using my list instead of `text_objects` preset, since it's too crowded
+			{ -- using my list instead of `text_objects` preset to reduce noise
 				mode = "o",
 				{ "r", group = "rest of" },
 				{ "i", group = "inner" },
@@ -67,7 +65,7 @@ return {
 			presets = { g = false, z = false, motions = false, text_objects = false, nav = false, operator = false },
 		},
 		filter = function(map)
-			-- need to remove comment mapping shere, since they are nvim-builtins
+			-- need to remove mappings here, since they are nvim-builtins
 			-- that do still show up with disabled whichkey-preset
 			-- stylua: ignore
 			local nvimBultins = { "<C-W><C-D>", "<C-W>d", "gc", "gcc", "gra", "gri", "grn", "grr", "grt", "g~", "gO" }
