@@ -205,28 +205,26 @@ function M.followMdlinkOrWikilink()
 	end
 end
 
-
 function M.backlinks()
 	assert(Snacks, "snacks.nvim not found.")
 	local wikilinkForThisFile = vim.fs.basename(vim.api.nvim_buf_get_name(0)):gsub("%.md$", "")
-	Snacks.picker.grep_word {
+	Snacks.picker.grep {
 		title = " Backlinks",
 		cmd = "rg",
 		args = { "--no-config", "--glob=*.md" },
 		live = false,
 		regex = true,
 		search = "\\[\\[" .. vim.fn.escape(wikilinkForThisFile, "\\") .. "(#.+)?\\]\\]",
-		format = "files"
 	}
 end
 
-function M.getBacklinks()
+function M.renameFileAndBacklinks()
 	assert(vim.bo.ft == "markdown", "Only Markdown files supported.")
 	assert(vim.fn.executable("rg") == 1, "rg not found.")
 
 	local thisFile = vim.fs.basename(vim.api.nvim_buf_get_name(0)):gsub("%.md$", "")
 	local backlinkPatterns = {
-		"\\[\\[" .. vim.fn.escape(thisFile, "\\") .. "(#.+)?\\]\\]"
+		"\\[\\[" .. vim.fn.escape(thisFile, "\\") .. "(#.+)?\\]\\]",
 	}
 
 	local out = vim.system({
@@ -235,43 +233,39 @@ function M.getBacklinks()
 		"--json", -- prints result as json lines
 		"--glob=*.md",
 		"--",
-		backlinkPatterns[1]
+		backlinkPatterns[1],
 	}):wait()
 	assert(out.code == 0, "rg error: " .. out.stderr)
 
 	local jsonLines = vim.split(vim.trim(out.stdout or ""), "\n")
-	local matches = vim.iter(jsonLines):fold({}, function(acc, jsonLine)
+	local cwd = assert(vim.uv.cwd(), "No cwd set.")
+
+	local newName = "placeholder"
+
+	local changes = 0
+	vim.iter(jsonLines):each(function(jsonLine)
 		local o = vim.json.decode(jsonLine)
-		if o.type ~= "match" then return acc end -- `start`, `end`, and `summary` jsons
+		if o.type ~= "match" then return end -- `start`, `end`, and `summary` jsons
+		local path = cwd .. "/" .. o.data.path.text
+
+		---@type lsp.TextDocumentEdit
+		local textDocumentEdits = {
+			textDocument = { uri = vim.uri_from_fname(path) },
+			edits = {},
+		}
 		for _, submatch in ipairs(o.data.submatches) do
-			table.insert(acc, {
-				file = o.data.path.text,
-				lnum = o.data.line_number - 1,
-				startCol = submatch.start,
-				endCol = submatch["end"],
-			})
-		end
-		return acc
-	end)
-
-	Chainsaw(matches) -- 🪚
-	-----------------------------------------------------------------------------
-
-	if true then return end -- TODO
-	local filepath = vim.api.nvim_buf_get_name(0)
-	local edit = {
-		textDocument = { uri = vim.uri_from_fname(filepath) },
-		edits = {
-			{
-				newText = vim.fn.expand("<cword>"),
+			table.insert(textDocumentEdits, {
+				newText = newName,
 				range = {
-					start = { line = 1, character = 1 },
-					["end"] = { line = 1, character = 2 },
+					start = { line = o.data.line_number - 1, character = submatch.start },
+					["end"] = { line = o.data.line_number - 1, character = submatch["end"] },
 				},
-			},
-		},
-	}
-	vim.lsp.util.apply_text_document_edit(edit, nil, vim.o.encoding)
+			})
+			changes = changes + 1
+		end
+		vim.lsp.util.apply_text_document_edit(textDocumentEdits, nil, vim.o.encoding)
+	end)
+	vim.notify(("Updated %d backlinks"):format(changes, vim.log.levels.INFO)
 end
 
 function M.addTitleToUrl()

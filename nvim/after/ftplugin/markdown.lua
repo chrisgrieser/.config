@@ -75,4 +75,11 @@ bkeymap(
 	{ desc = " Backlinks" }
 )
 
+bkeymap(
+	"n",
+	"<leader>fr",
+	function() require("personal-plugins.markdown-qol").renameFileAndBacklinks() end,
+	{ desc = " Rename file & backlinks" }
+)
+
 --------------------------------------------------------------------------------

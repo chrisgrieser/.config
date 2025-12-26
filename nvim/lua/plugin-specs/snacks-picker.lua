@@ -21,7 +21,7 @@ end, 2000)
 
 -- lightweight version of `telescope-import.nvim`
 local function importLuaModule()
-	Snacks.picker.grep_word {
+	Snacks.picker.grep {
 		title = "󰢱 Import module",
 		cmd = "rg",
 		args = { "--only-matching", "--no-config" },
@@ -496,7 +496,7 @@ return {
 					preset = "wide_with_preview",
 					layout = {
 						height = 0.8,
-						[2] = { width = 0.7 }, -- second win is the preview
+						[2] = { width = 0.6 }, -- second win is the preview
 					},
 				},
 			},
