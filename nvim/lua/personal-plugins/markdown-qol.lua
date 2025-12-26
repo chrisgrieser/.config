@@ -207,41 +207,46 @@ end
 
 function M.backlinks()
 	assert(Snacks, "snacks.nvim not found.")
-	local wikilinkForThisFile = vim.fs.basename(vim.api.nvim_buf_get_name(0)):gsub("%.md$", "")
+	local basename = vim.fs.basename(vim.api.nvim_buf_get_name(0)):gsub("%.md$", "")
 	Snacks.picker.grep {
 		title = " Backlinks",
 		cmd = "rg",
 		args = { "--no-config", "--glob=*.md" },
 		live = false,
 		regex = true,
-		search = "\\[\\[" .. vim.fn.escape(wikilinkForThisFile, "\\") .. "(#.+)?\\]\\]",
+		search = "\\[\\[" .. vim.fn.escape(basename, "\\") .. "(#.+)?\\]\\]",
 	}
 end
 
 -- PENDING https://github.com/artempyanykh/marksman/issues/405
 function M.renameAndUpdateBacklinks()
 	assert(vim.bo.ft == "markdown", "Only Markdown files supported.")
-	assert(vim.fn.executable("rg") == 1, "rg not found.")
+	assert(vim.fn.executable("rg") == 1, "`ripgrep` not found.")
 
-	local oldFilepath = vim.api.nvim_buf_get_name(0)
-	local oldName = vim.fs.basename(oldFilepath):gsub("%.md$", "")
+	local icon = "󰑕"
+	local oldPath = vim.api.nvim_buf_get_name(0)
+	local oldName = vim.fs.basename(oldPath):gsub("%.md$", "")
 	local oldBufnr = vim.api.nvim_get_current_buf()
 
-	vim.ui.input({ prompt = "Rename to: ", default = oldName }, function(newName)
+	vim.ui.input({
+		prompt = icon .. " Rename & update backlinks to: ",
+		default = oldName,
+	}, function(newName)
 		if not newName then return end
+		local err = function(msg) vim.notify(msg, vim.log.levels.ERROR) end
 
-		-- rename file itself
-		local newFilePath = vim.fs.joinpath(vim.fs.dirname(oldFilepath), newName .. ".md")
+		-- RENAME FILE ITSELF
+		if newName == oldName then return err("Cannot use the same filename.") end
+		local newPath = vim.fs.joinpath(vim.fs.dirname(oldPath), newName .. ".md")
+		if vim.uv.fs_stat(newPath) then return err(("File %q already exists."):format(newName)) end
 		vim.cmd("silent! update")
-		local success = vim.uv.fs_rename(oldFilepath, newFilePath)
-		if not success then
-			vim.notify(("Failed to rename %q to %q."):format(oldName, newName), vim.log.levels.ERROR)
-			return
-		end
-		vim.cmd.edit(newFilePath)
+		local success, errmsg = vim.uv.fs_rename(oldPath, newPath)
+		if not success then return err(("Failed to rename to %q: %s"):format(newName, errmsg)) end
+		vim.cmd.edit(newPath)
+		vim.cmd("silent! write")
 		vim.api.nvim_buf_delete(oldBufnr, { force = true })
 
-		-- update backlinks
+		-- UPDATE BACKLINKS
 		local out = vim.system({
 			"rg",
 			"--no-config",
@@ -251,7 +256,11 @@ function M.renameAndUpdateBacklinks()
 			"--",
 			"\\[\\[" .. vim.fn.escape(oldName, "\\") .. "([#|].+)?\\]\\]",
 		}):wait()
-		assert(out.code == 0, "rg error: " .. out.stderr)
+		if out.code ~= 0 then
+			local d = vim.json.decode(out.stdout)
+			local noBacklinksFound = d and d.data and d.data.stats and d.data.stats.matches == 0
+			if not noBacklinksFound then return err("rg error: " .. out.stderr) end
+		end
 
 		local jsonLines = vim.split(vim.trim(out.stdout or ""), "\n")
 		local cwd = assert(vim.uv.cwd(), "No cwd set.")
@@ -280,16 +289,21 @@ function M.renameAndUpdateBacklinks()
 			vim.lsp.util.apply_text_document_edit(textDocumentEdits, nil, vim.o.encoding)
 		end)
 
-		-- notify
-		local s1 = updateCount > 1 and "s" or ""
-		local s2 = #filesChanged > 1 and "s" or ""
-		local msg = {
-			("Renamed %q to %q."):format(oldName, newName),
-			"",
-			("Updated [%d] backlink%s in [%d] file%s:"):format(updateCount, s1, #filesChanged, s2),
-			table.concat(filesChanged, "\n"),
-		}
-		vim.notify(table.concat(msg, "\n"), nil, { title = "Renamed file" })
+		-- NOTIFY
+		if updateCount > 0 then
+			local s1 = updateCount > 1 and "s" or ""
+			local s2 = #filesChanged > 1 and "s" or ""
+			local msg = {
+				("**%q to %q.**"):format(oldName, newName),
+				"",
+				("Updated [%d] backlink%s in [%d] file%s:"):format(updateCount, s1, #filesChanged, s2),
+				table.concat(filesChanged, "\n"),
+			}
+			vim.notify(table.concat(msg, "\n"), nil, { title = "Renamed file", icon = icon })
+		else
+			local msg = ("%q to %q."):format(oldName, newName),
+		end
+		vim.notify(msg, nil, { title = "Renamed file", icon = icon })
 	end)
 end
 
