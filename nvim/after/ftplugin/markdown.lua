@@ -78,7 +78,7 @@ bkeymap(
 bkeymap(
 	"n",
 	"<leader>fr",
-	function() require("personal-plugins.markdown-qol").renameFileAndBacklinks() end,
+	function() require("personal-plugins.markdown-qol").renameAndUpdateBacklinks() end,
 	{ desc = " Rename file & backlinks" }
 )
 

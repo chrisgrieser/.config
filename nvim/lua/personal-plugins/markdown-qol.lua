@@ -218,54 +218,79 @@ function M.backlinks()
 	}
 end
 
-function M.renameFileAndBacklinks()
+-- PENDING https://github.com/artempyanykh/marksman/issues/405
+function M.renameAndUpdateBacklinks()
 	assert(vim.bo.ft == "markdown", "Only Markdown files supported.")
 	assert(vim.fn.executable("rg") == 1, "rg not found.")
 
-	local thisFile = vim.fs.basename(vim.api.nvim_buf_get_name(0)):gsub("%.md$", "")
-	local backlinkPatterns = {
-		"\\[\\[" .. vim.fn.escape(thisFile, "\\") .. "(#.+)?\\]\\]",
-	}
+	local oldFilepath = vim.api.nvim_buf_get_name(0)
+	local oldName = vim.fs.basename(oldFilepath):gsub("%.md$", "")
+	local oldBufnr = vim.api.nvim_get_current_buf()
 
-	local out = vim.system({
-		"rg",
-		"--no-config",
-		"--json", -- prints result as json lines
-		"--glob=*.md",
-		"--",
-		backlinkPatterns[1],
-	}):wait()
-	assert(out.code == 0, "rg error: " .. out.stderr)
+	vim.ui.input({ prompt = "Rename to: ", default = oldName }, function(newName)
+		if not newName then return end
 
-	local jsonLines = vim.split(vim.trim(out.stdout or ""), "\n")
-	local cwd = assert(vim.uv.cwd(), "No cwd set.")
-
-	local newName = "placeholder"
-
-	local changes = 0
-	vim.iter(jsonLines):each(function(jsonLine)
-		local o = vim.json.decode(jsonLine)
-		if o.type ~= "match" then return end -- `start`, `end`, and `summary` jsons
-		local path = cwd .. "/" .. o.data.path.text
-
-		---@type lsp.TextDocumentEdit
-		local textDocumentEdits = {
-			textDocument = { uri = vim.uri_from_fname(path) },
-			edits = {},
-		}
-		for _, submatch in ipairs(o.data.submatches) do
-			table.insert(textDocumentEdits, {
-				newText = newName,
-				range = {
-					start = { line = o.data.line_number - 1, character = submatch.start },
-					["end"] = { line = o.data.line_number - 1, character = submatch["end"] },
-				},
-			})
-			changes = changes + 1
+		-- rename file itself
+		local newFilePath = vim.fs.joinpath(vim.fs.dirname(oldFilepath), newName .. ".md")
+		vim.cmd("silent! update")
+		local success = vim.uv.fs_rename(oldFilepath, newFilePath)
+		if not success then
+			vim.notify(("Failed to rename %q to %q."):format(oldName, newName), vim.log.levels.ERROR)
+			return
 		end
-		vim.lsp.util.apply_text_document_edit(textDocumentEdits, nil, vim.o.encoding)
+		vim.cmd.edit(newFilePath)
+		vim.api.nvim_buf_delete(oldBufnr, { force = true })
+
+		-- update backlinks
+		local out = vim.system({
+			"rg",
+			"--no-config",
+			"--json", -- prints result as json lines
+			"--glob=*.md",
+			"--replace=" .. "[[" .. newName .. "$1]]",
+			"--",
+			"\\[\\[" .. vim.fn.escape(oldName, "\\") .. "([#|].+)?\\]\\]",
+		}):wait()
+		assert(out.code == 0, "rg error: " .. out.stderr)
+
+		local jsonLines = vim.split(vim.trim(out.stdout or ""), "\n")
+		local cwd = assert(vim.uv.cwd(), "No cwd set.")
+		local updateCount, filesChanged = 0, {}
+		vim.iter(jsonLines):each(function(jsonLine)
+			local o = vim.json.decode(jsonLine)
+			if o.type ~= "match" then return end -- `start`, `end`, and `summary` jsons
+			local path = cwd .. "/" .. o.data.path.text
+
+			---@type lsp.TextDocumentEdit
+			local textDocumentEdits = {
+				textDocument = { uri = vim.uri_from_fname(path) },
+				edits = {},
+			}
+			for _, submatch in ipairs(o.data.submatches) do
+				table.insert(textDocumentEdits.edits, {
+					newText = submatch.replacement.text,
+					range = {
+						start = { line = o.data.line_number - 1, character = submatch.start },
+						["end"] = { line = o.data.line_number - 1, character = submatch["end"] },
+					},
+				})
+				updateCount = updateCount + 1
+			end
+			table.insert(filesChanged, "- " .. vim.fs.basename(path))
+			vim.lsp.util.apply_text_document_edit(textDocumentEdits, nil, vim.o.encoding)
+		end)
+
+		-- notify
+		local s1 = updateCount > 1 and "s" or ""
+		local s2 = #filesChanged > 1 and "s" or ""
+		local msg = {
+			("Renamed %q to %q."):format(oldName, newName),
+			"",
+			("Updated [%d] backlink%s in [%d] file%s:"):format(updateCount, s1, #filesChanged, s2),
+			table.concat(filesChanged, "\n"),
+		}
+		vim.notify(table.concat(msg, "\n"), nil, { title = "Renamed file" })
 	end)
-	vim.notify(("Updated %d backlinks"):format(changes, vim.log.levels.INFO)
 end
 
 function M.addTitleToUrl()
