@@ -384,7 +384,7 @@ function M.previewViaPandoc(css)
 	local outputPath = "/tmp/markdown-preview.html"
 
 	vim.cmd("silent! update")
-	vim.system({
+	local out = vim.system({
 		"pandoc",
 		"--from=gfm+rebase_relative_paths", -- rebasing, so images are available at output location
 		vim.api.nvim_buf_get_name(0),
@@ -393,6 +393,10 @@ function M.previewViaPandoc(css)
 		"--css=" .. css,
 		"--title-prefix=Preview from nvim", -- used only in browser tab title
 	}):wait()
+	if out.code ~= 0 then
+		vim.notify(vim.trim(out.stderr), vim.log.levels.ERROR)
+		return
+	end
 
 	vim.ui.open(outputPath)
 end

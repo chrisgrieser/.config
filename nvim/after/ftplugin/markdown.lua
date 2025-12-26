@@ -57,7 +57,7 @@ bkeymap("n", "<leader>cu", function() require("personal-plugins.markdown-qol").a
 
 -- preview
 bkeymap("n", "<leader>ep", function()
-	local css = vim.env.HOME .. "/.config/pandoc/css/github-markdown.css"
+	local css = vim.env.HOME .. "/.config/pandoc/css/github-markdown2.css"
 	require("personal-plugins.markdown-qol").previewViaPandoc(css)
 end, { desc = " Preview" })
 

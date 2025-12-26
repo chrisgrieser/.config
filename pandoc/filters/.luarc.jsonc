@@ -5,8 +5,8 @@
 		"globals": ["pandoc"],
 		"unusedLocalExclude": ["_*"], // allow `_varname` for unused variables
 		"groupFileStatus": {
-			"luadoc": "Any", // require stricter annotations
-			"conventions": "Any" // disallow global variables
+			"luadoc": "None", // we don't have the type info
+			"conventions": "None" // we often overwrite globals in pandoc filters
 		}
 	},
 
