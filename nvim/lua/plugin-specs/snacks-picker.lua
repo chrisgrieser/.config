@@ -24,7 +24,7 @@ local function importLuaModule()
 	Snacks.picker.grep_word {
 		title = "󰢱 Import module",
 		cmd = "rg",
-		args = { "--only-matching" },
+		args = { "--only-matching", "--no-config" },
 		live = false,
 		regex = true,
 		search = [[local (\w+) ?= ?require\(["'](.*?)["']\)(\.[\w.]*)?]],
@@ -51,7 +51,6 @@ local function importLuaModule()
 		end,
 	}
 end
-
 ---@param dir string?
 local function betterFileOpen(dir)
 	if not dir then dir = vim.uv.cwd() end

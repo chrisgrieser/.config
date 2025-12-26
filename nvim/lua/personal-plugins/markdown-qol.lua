@@ -205,7 +205,59 @@ function M.followMdlinkOrWikilink()
 	end
 end
 
-function M.rename()
+
+function M.backlinks()
+	assert(Snacks, "snacks.nvim not found.")
+	local wikilinkForThisFile = vim.fs.basename(vim.api.nvim_buf_get_name(0)):gsub("%.md$", "")
+	Snacks.picker.grep_word {
+		title = " Backlinks",
+		cmd = "rg",
+		args = { "--no-config", "--glob=*.md" },
+		live = false,
+		regex = true,
+		search = "\\[\\[" .. vim.fn.escape(wikilinkForThisFile, "\\") .. "(#.+)?\\]\\]",
+		format = "files"
+	}
+end
+
+function M.getBacklinks()
+	assert(vim.bo.ft == "markdown", "Only Markdown files supported.")
+	assert(vim.fn.executable("rg") == 1, "rg not found.")
+
+	local thisFile = vim.fs.basename(vim.api.nvim_buf_get_name(0)):gsub("%.md$", "")
+	local backlinkPatterns = {
+		"\\[\\[" .. vim.fn.escape(thisFile, "\\") .. "(#.+)?\\]\\]"
+	}
+
+	local out = vim.system({
+		"rg",
+		"--no-config",
+		"--json", -- prints result as json lines
+		"--glob=*.md",
+		"--",
+		backlinkPatterns[1]
+	}):wait()
+	assert(out.code == 0, "rg error: " .. out.stderr)
+
+	local jsonLines = vim.split(vim.trim(out.stdout or ""), "\n")
+	local matches = vim.iter(jsonLines):fold({}, function(acc, jsonLine)
+		local o = vim.json.decode(jsonLine)
+		if o.type ~= "match" then return acc end -- `start`, `end`, and `summary` jsons
+		for _, submatch in ipairs(o.data.submatches) do
+			table.insert(acc, {
+				file = o.data.path.text,
+				lnum = o.data.line_number - 1,
+				startCol = submatch.start,
+				endCol = submatch["end"],
+			})
+		end
+		return acc
+	end)
+
+	Chainsaw(matches) -- 🪚
+	-----------------------------------------------------------------------------
+
+	if true then return end -- TODO
 	local filepath = vim.api.nvim_buf_get_name(0)
 	local edit = {
 		textDocument = { uri = vim.uri_from_fname(filepath) },

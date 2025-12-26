@@ -68,4 +68,11 @@ bkeymap(
 	{ desc = " Codeblock" }
 )
 
+bkeymap(
+	"n",
+	"<leader>rb",
+	function() require("personal-plugins.markdown-qol").backlinks() end,
+	{ desc = " Backlinks" }
+)
+
 --------------------------------------------------------------------------------
