@@ -44,8 +44,8 @@ keymap("n", "-", "/")
 keymap("x", "-", "<Esc>/\\%V", { desc = " Search within selection" })
 
 -- Diagnostics
-keymap("n", "ge", "]d", { desc = "󰋼 Next diagnostic", remap = true })
-keymap("n", "gE", "[d", { desc = "󰋼 Previous diagnostic", remap = true })
+keymap("n", "ge", "]d", { desc = "󰋽 Next diagnostic", remap = true })
+keymap("n", "gE", "[d", { desc = "󰋽 Previous diagnostic", remap = true })
 
 -- Open URL in file
 -- stylua: ignore
@@ -55,9 +55,11 @@ keymap("n", "<D-U>", function() require("personal-plugins.misc").openFirstUrlInB
 do
 	local marks = require("personal-plugins.marks")
 	marks.loadSigns()
+	if vim.g.whichkeyAddSpec then vim.g.whichkeyAddSpec { "<leader>m", group = "󰃀 Marks" } end
 
-	keymap("n", "gm", marks.cycleMarks, { desc = "󰃀 Cycle marks" })
-	keymap("n", "<leader>m", marks.setUnsetMark, { desc = "󰃅 Set/unset marks" })
+	keymap("n", "<leader>mm", marks.cycleMarks, { desc = "󰃀 Cycle marks" })
+	keymap("n", "<leader>ma", marks.setUnsetA, { desc = "󰃅 Set A" })
+	keymap("n", "<leader>mb", marks.setUnsetB, { desc = "󰃅 Set B" })
 end
 
 ---EDITING----------------------------------------------------------------------

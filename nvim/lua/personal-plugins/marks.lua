@@ -15,7 +15,6 @@ local config = {
 
 local M = {}
 local ns = vim.api.nvim_create_namespace("mark-signs")
-local lastMarkSet
 
 ---@param msg string
 ---@param level? "info"|"warn"|"error"
@@ -63,27 +62,30 @@ local function setSignForMark(mark)
 	})
 end
 
+---if cursor is at a mark, delete it, otherwise set it
 ---@param mark string
-local function deleteMark(mark)
-	local row, _col, bufnr, path = unpack(vim.api.nvim_get_mark(mark, {}))
-	if path == nil or path == "" then return end -- mark not set
-	vim.api.nvim_del_mark(mark)
-	vim.api.nvim_buf_clear_namespace(bufnr, ns, row - 1, row)
-end
+local function setUnsetMark(mark)
+	-- delete mark
+	local mrow, _mcol, bufnr, path = unpack(vim.api.nvim_get_mark(mark, {}))
+	if path and path ~= "" then
+		vim.api.nvim_del_mark(mark)
+		vim.api.nvim_buf_clear_namespace(bufnr, ns, mrow - 1, mrow)
+	end
+	if cursorIsAtMark(mark) then return end
 
----@return string[]
-local function getSetMarks()
-	return vim.tbl_filter(function(mark)
-		local row = unpack(vim.api.nvim_get_mark(mark, {}))
-		return row ~= nil and row ~= 0
-	end, config.marks)
+	-- if cursor not at mark, set it at the new position
+	local row, col = unpack(vim.api.nvim_win_get_cursor(0))
+	vim.api.nvim_buf_set_mark(0, mark, row, col, {})
+	setSignForMark(mark)
 end
 
 --------------------------------------------------------------------------------
 
 function M.cycleMarks()
-	local marksSet = getSetMarks()
-
+	local marksSet = vim.tbl_filter(function(mark)
+		local row = unpack(vim.api.nvim_get_mark(mark, {}))
+		return row ~= nil and row ~= 0
+	end, config.marks)
 	if #marksSet == 0 then
 		notify("No mark has been set.")
 		return
@@ -118,31 +120,8 @@ function M.cycleMarks()
 	end
 end
 
-function M.setUnsetMark()
-	local setMarks = getSetMarks()
-
-	-- if cursor is at a mark, delete it
-	local markAtCursor = vim.iter(setMarks):find(function(mark) return cursorIsAtMark(mark) end)
-	if markAtCursor then
-		deleteMark(markAtCursor)
-		notify(("[%s] deleted"):format(markAtCursor))
-		return
-	end
-
-	-- otherwise, set mark
-	local firstUnsetMark = vim.iter(config.marks)
-		:find(function(mark) return not vim.list_contains(setMarks, mark) end)
-	local nextMarkAfterLastSet = vim.iter(config.marks):find(
-		function(mark) return lastMarkSet and (mark > lastMarkSet) end
-	) -- lua can compare letters
-	local markToSet = firstUnsetMark or nextMarkAfterLastSet or config.marks[1]
-
-	deleteMark(markToSet)
-	local row, col = unpack(vim.api.nvim_win_get_cursor(0))
-	vim.api.nvim_buf_set_mark(0, markToSet, row, col, {})
-	lastMarkSet = markToSet
-	setSignForMark(markToSet)
-	notify(("[%s] set"):format(markToSet))
+for _, mark in ipairs(config.marks) do
+	M["setUnset" .. mark] = function() setUnsetMark(mark) end
 end
 
 function M.loadSigns()

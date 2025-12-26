@@ -153,8 +153,7 @@ return {
 
 				local dirOfFile = vim.fs.dirname(vim.api.nvim_buf_get_name(0))
 				path = vim.fs.normalize(dirOfFile .. "/" .. path)
-				-- url-decode
-				path = path:gsub("%%(%x%x)", function(h) return string.char(tonumber(h, 16)) end)
+				path = vim.uri_decode(path)
 
 				local exists = vim.uv.fs_stat(path) ~= nil
 				if exists then

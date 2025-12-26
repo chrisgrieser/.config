@@ -11,10 +11,10 @@ return {
 			cursor = { enable = false },
 			marks = {
 				enable = true,
-				-- Stop satellite.nvim from adding delays to my `m` keybind,
-				-- requires a string, does not work with `<Nop>`, and adds subtle
-				-- bugs when using `""`, so we use ¶ as a throw-away we don't use
-				key = "¶",
+				-- Stop satellite.nvim from adding delays to my `m` keybind. Requires
+				-- a string, but do not use `""` or `<Nop>`, since they break things
+				-- like whichkey, use a throwaway like ¶ if nothing fits.
+				key = "<leader>m",
 			},
 		},
 	},

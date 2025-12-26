@@ -206,9 +206,9 @@ function M.followMdlinkOrWikilink()
 end
 
 function M.rename()
-	---@type lsp.TextDocumentEdit
+	local filepath = vim.api.nvim_buf_get_name(0)
 	local edit = {
-		textDocument = { uri = vim.uri_from_bufnr(0) },
+		textDocument = { uri = vim.uri_from_fname(filepath) },
 		edits = {
 			{
 				newText = vim.fn.expand("<cword>"),
