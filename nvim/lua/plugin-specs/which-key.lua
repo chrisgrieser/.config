@@ -39,7 +39,7 @@ return {
 				{ "z", group = " Folds & Spelling" },
 			},
 			{ -- using my list instead of `text_objects` preset to reduce noise
-				mode = "o",
+				mode = { "o", "x" },
 				{ "r", group = "rest of" },
 				{ "i", group = "inner" },
 				{ "a", group = "outer" },
