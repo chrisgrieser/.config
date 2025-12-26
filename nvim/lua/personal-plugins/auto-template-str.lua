@@ -19,7 +19,7 @@ local function updateNode(strNode, insertAtCursor, textTransformer, cursorMove, 
 		return
 	end
 	local nodeRow, nodeStartCol, _, nodeEndCol = strNode:range()
-	local _, cursorCol = unpack(vim.api.nvim_win_get_cursor(0))
+	local cursorCol = vim.api.nvim_win_get_cursor(0)[2]
 
 	-- 1. `insertAtCursor`
 	local posInNode = cursorCol - nodeStartCol
@@ -29,17 +29,17 @@ local function updateNode(strNode, insertAtCursor, textTransformer, cursorMove, 
 	nodeText = textTransformer(nodeText)
 	vim.api.nvim_buf_set_text(0, nodeRow, nodeStartCol, nodeRow, nodeEndCol, { nodeText })
 
-	-- 3. `cursorMove`
+	-- 3. `cursorMove` & `cursorOffset`
 	if cursorMove == "nodeEnd" then cursorCol = nodeEndCol end
-
-	-- 4. `cursorOffset`
 	vim.api.nvim_win_set_cursor(0, { nodeRow + 1, cursorCol + cursorOffset })
 end
 
 --------------------------------------------------------------------------------
 
+local filetypeFuncs = {}
+
 ---@param node TSNode
-local function luaStr(node)
+function filetypeFuncs.lua(node)
 	local strNode
 	if node:type() == "string" then
 		strNode = node
@@ -53,7 +53,7 @@ local function luaStr(node)
 end
 
 ---@param node TSNode
-local function pyStr(node)
+function filetypeFuncs.python(node)
 	local strNode
 	if node:type() == "string" then
 		strNode = node
@@ -67,7 +67,7 @@ local function pyStr(node)
 end
 
 ---@param node TSNode
-local function jsStr(node)
+function filetypeFuncs.javascript(node)
 	local strNode
 	if node:type() == "string" or node:type() == "template_string" then
 		strNode = node
@@ -77,9 +77,10 @@ local function jsStr(node)
 	local transformer = function(nodeText) return "`" .. nodeText:sub(2, -2) .. "`" end
 	updateNode(strNode, "${}", transformer, nil, 2)
 end
+filetypeFuncs.typescript = filetypeFuncs.javascript
 
 ---@param node TSNode
-local function swiftStr(node)
+function filetypeFuncs.swift(node)
 	local strNode
 	if node:type() == "line_str_text" then
 		strNode = node
@@ -93,26 +94,14 @@ end
 --------------------------------------------------------------------------------
 
 function M.insertTemplateStr()
-	if vim.fn.mode() ~= "i" then
-		warn("Only works in insert mode.")
-		return
-	end
+	if vim.fn.mode() ~= "i" then return warn("Only works in insert mode.") end
 
-	local availableFiletypes = {
-		lua = luaStr,
-		python = pyStr,
-		javascript = jsStr,
-		typescript = jsStr,
-		swift = swiftStr,
-	}
-	local updateFunc = availableFiletypes[vim.bo.ft]
-	if not updateFunc then
-		warn("Not configured for " .. vim.bo.ft)
-		return
-	end
-
+	local updateFunc = filetypeFuncs[vim.bo.ft]
+	if not updateFunc then return warn("Not configured for " .. vim.bo.ft) end
 	local nodeAtCursor = vim.treesitter.get_node()
-	if nodeAtCursor then updateFunc(nodeAtCursor) end
+	if not nodeAtCursor then return warn("No node at cursor") end
+
+	updateFunc(nodeAtCursor)
 end
 
 --------------------------------------------------------------------------------

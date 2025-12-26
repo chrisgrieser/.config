@@ -9,7 +9,6 @@
   "leetcode.nvim": { "branch": "master", "commit": "fdd3f91800b3983e27bc9fcfb99cfa7293d7f11a" },
   "lualine.nvim": { "branch": "master", "commit": "47f91c416daef12db467145e16bed5bbfe00add8" },
   "mason.nvim": { "branch": "main", "commit": "57e5a8addb8c71fb063ee4acda466c7cf6ad2800" },
-  "mini.clue": { "branch": "main", "commit": "5f0f5ca2ab967755ccde80795d7f0f33fe0015b7" },
   "mini.icons": { "branch": "main", "commit": "ff2e4f1d29f659cc2bad0f9256f2f6195c6b2428" },
   "mini.operators": { "branch": "main", "commit": "6df2fd410afd55ebd87757345031fc0af0c95068" },
   "neocodeium": { "branch": "main", "commit": "bfe790d78e66adaa95cb50a8c75c64a752336e9c" },

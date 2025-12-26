@@ -11,7 +11,10 @@ return {
 			cursor = { enable = false },
 			marks = {
 				enable = true,
-				key = false, -- stop satellite.nvim from adding delays to my `m` keybind
+				-- Stop satellite.nvim from adding delays to my `m` keybind,
+				-- requires a string, does not work with `<Nop>`, and adds subtle
+				-- bugs when using `""`, so we use ¶ as a throw-away we don't use
+				key = "¶",
 			},
 		},
 	},

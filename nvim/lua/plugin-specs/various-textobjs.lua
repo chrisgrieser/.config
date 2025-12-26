@@ -63,7 +63,7 @@ return {
 		{ "aR", "<cmd>lua require('various-textobjs').doubleSquareBrackets('outer')<CR>", mode = {"x","o"}, desc = "󰖬 outer wikilink" },
 		-- stylua: ignore end
 
-		{ -- indent last paste
+		{ -- indent last paste, useful for python
 			"^",
 			function()
 				require("various-textobjs").lastChange()
