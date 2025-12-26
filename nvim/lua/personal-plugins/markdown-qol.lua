@@ -148,7 +148,7 @@ end
 function M.followMdlinkOrWikilink()
 	local mdlinkPattern = "%[.-]%((.-)%)"
 	local wikilinkPattern = "%[%[.-]]"
-	local urlPattern = "https?://[^%s%]'\"]+"
+	local urlPattern = [[%l+://[^%s)%]}"'`>]+]]
 	local row, col = unpack(vim.api.nvim_win_get_cursor(0))
 	local mdlink, wikilink, url
 	local ln = row
@@ -192,23 +192,26 @@ function M.followMdlinkOrWikilink()
 			return
 		end
 		line = vim.api.nvim_buf_get_lines(0, ln - 1, ln, false)[1]
-		mdlink = line:match(mdlinkPattern)
-		wikilink = line:match(wikilinkPattern)
-		if mdlink or wikilink then break end
+		local mdlinkStart = line:find(mdlinkPattern)
+		local wikiStart = line:find(wikilinkPattern)
+		local urlStart = line:find(urlPattern)
+		local closest =
+			math.min(mdlinkStart or math.huge, wikiStart or math.huge, urlStart or math.huge)
+		if closest == mdlinkStart then mdlink = line:match(mdlinkPattern) end
+		if closest == wikiStart then wikilink = line:match(wikilinkPattern) end
+		if closest == urlStart then url = line:match(urlPattern) end
 	end
 
-	if url then
-		vim.ui.open(url)
-	if mdlink then
-		local isFileLink = not vim.startswith(mdlink, "http")
+	if mdlink or url then
+		local isFileLink = not (vim.startswith(mdlink, "http") or url)
 		if isFileLink then return vim.cmd.edit(mdlink) end
 
-		-- move cursor to start of mdlink, or of the url
-		local targetCol = line:find(mdlinkPattern)
+		-- move cursor to start of mdlink or url
+		local targetCol = mdlink and line:find(mdlinkPattern) or line:find(urlPattern)
 		vim.api.nvim_win_set_cursor(0, { ln, targetCol - 1 })
-		vim.ui.open(mdlink)
+		vim.ui.open(mdlink or url)
 	elseif wikilink then
-		-- `vim.lsp.buf.definition` requires to be on the link
+		-- `vim.lsp.buf.definition` requires that cursor is on the link
 		local targetCol = line:find(wikilink, nil, true)
 		vim.api.nvim_win_set_cursor(0, { ln, targetCol - 1 })
 		local hasMarksman = vim.lsp.get_clients({ name = "marksman", bufnr = 0 })[1]
@@ -218,21 +221,32 @@ function M.followMdlinkOrWikilink()
 end
 
 function M.backlinks()
-	assert(Snacks, "snacks.nvim not found.")
-	local basename = vim.fs.basename(vim.api.nvim_buf_get_name(0)):gsub("%.md$", "")
+	assert(vim.bo.ft == "markdown", "Only for Markdown files.")
+	assert(Snacks, "snacks.nvim not found")
+	local path = vim.api.nvim_buf_get_name(0)
+	local basename = vim.fs.basename(path):gsub("%.md$", "")
+	local wikilinkPattern = "\\[\\[" .. vim.fn.escape(basename, "\\") .. "(#.+)?\\]\\]"
+	local cwd = assert(vim.uv.cwd(), "cwd not found")
+	local relpathEncoded = vim.uri_encode(path:sub(#cwd + 1))
+	local mdlinkPattern = "\\]\\(" .. "\\.?" .. relpathEncoded .. "\\)"
 	Snacks.picker.grep {
 		title = " Backlinks",
 		cmd = "rg",
-		args = { "--no-config", "--glob=*.md" },
+		args = {
+			"--no-config",
+			"--glob=*.md",
+			"--ignore-case", -- since `vim.uri_encode` uses uppercase
+		},
 		live = false,
 		regex = true,
-		search = "\\[\\[" .. vim.fn.escape(basename, "\\") .. "(#.+)?\\]\\]",
+		search = wikilinkPattern .. "|" .. mdlinkPattern,
 	}
 end
 
 -- PENDING https://github.com/artempyanykh/marksman/issues/405
-function M.renameAndUpdateBacklinks()
-	assert(vim.bo.ft == "markdown", "Only Markdown files supported.")
+-- Caveat: does not support mdlinks `[]()` yet
+function M.renameAndUpdateWikilinks()
+	assert(vim.bo.ft == "markdown", "Only for Markdown files.")
 	assert(vim.fn.executable("rg") == 1, "`ripgrep` not found.")
 
 	local icon = "󰑕"
@@ -272,6 +286,7 @@ function M.renameAndUpdateBacklinks()
 		}):wait()
 		if out.code ~= 0 then
 			local d = vim.json.decode(out.stdout)
+			-- `rg` exits 1 if no match was found, which is not an error for us though
 			local noBacklinksFound = d and d.data and d.data.stats and d.data.stats.matches == 0
 			if not noBacklinksFound then return err("rg error: " .. out.stderr) end
 		end

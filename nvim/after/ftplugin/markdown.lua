@@ -70,7 +70,7 @@ bkeymap(
 
 bkeymap(
 	"n",
-	"<leader>rb",
+	"<leader>cb",
 	function() require("personal-plugins.markdown-qol").backlinks() end,
 	{ desc = " Backlinks" }
 )
@@ -78,7 +78,7 @@ bkeymap(
 bkeymap(
 	"n",
 	"<leader>fr",
-	function() require("personal-plugins.markdown-qol").renameAndUpdateBacklinks() end,
+	function() require("personal-plugins.markdown-qol").renameAndUpdateWikilinks() end,
 	{ desc = " Rename file & backlinks" }
 )
 
