@@ -241,7 +241,7 @@ function M.backlinks()
 		live = false,
 		regex = true,
 		search = getBacklinkRegex(),
-		format = function(item, _picker)
+		format = function(item, _picker) -- just display the file
 			local out = {}
 			Snacks.picker.highlight.format(item, item.file, out)
 			return out
