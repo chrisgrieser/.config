@@ -297,7 +297,7 @@ function gli {
 # pickaxe entire repo history
 function pickaxe {
 	[[ -z $1 ]] && print "\e[1;33mNo search query provided.\e[0m" && return 1
-	print "Reminder: Mostly, these are deletion commits. Thus, the checkout target should usually be the parent commit: \e[1;36mgit checkout {hash}^\e[0m"
+	print "Reminder: Mostly, these are deletion commits. Thus, the checkout target should usually be the parent commit. \e[1;36mgit checkout {hash}^\e[0m"
 	echo
 
 	git log -G"$1" --regexp-ignore-case

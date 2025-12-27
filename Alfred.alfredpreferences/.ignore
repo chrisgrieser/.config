@@ -3,6 +3,9 @@
 !/workflows/
 !alfred-gallery-downloads.yaml
 !AlfredExtraPane.json
+!.gitignore
+!.ignore
+!.gitattributes
 
 # images
 /workflows/**/*.png
@@ -12,6 +15,7 @@
 
 # these are symlinked multiple times, only need to keep the originals on this level
 !/alfred.d.ts
+!/jsconfig.json
 /workflows/**/alfred.d.ts
 /workflows/**/jsconfig.json
 /workflows/**/jxa-globals.d.ts
