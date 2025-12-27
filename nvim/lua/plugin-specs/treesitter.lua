@@ -63,7 +63,7 @@ return {
 		install_dir = vim.fn.stdpath("data") .. "/treesitter",
 	},
 	init = function()
-		-- auto-install parsers
+		-- auto-install parsers (no-op if already installed)
 		if vim.fn.executable("tree-sitter") == 1 then
 			local parsersToInstall = vim.iter(vim.tbl_values(ensureInstalled)):flatten():totable()
 			vim.defer_fn(function() require("nvim-treesitter").install(parsersToInstall) end, 2000)
