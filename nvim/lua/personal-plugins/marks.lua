@@ -65,18 +65,16 @@ end
 ---if cursor is at a mark, delete it, otherwise set it
 ---@param mark string
 local function setUnsetMark(mark)
-	-- delete mark
-	local mrow, _mcol, bufnr, path = unpack(vim.api.nvim_get_mark(mark, {}))
-	if path and path ~= "" then
-		vim.api.nvim_del_mark(mark)
-		vim.api.nvim_buf_clear_namespace(bufnr, ns, mrow - 1, mrow)
-	end
-	if cursorIsAtMark(mark) then return end
+	local mrow, _mcol, bufnr, _path = unpack(vim.api.nvim_get_mark(mark, {}))
+	vim.api.nvim_buf_clear_namespace(bufnr, ns, mrow - 1, mrow) -- delete old sign
 
-	-- if cursor not at mark, set it at the new position
-	local row, col = unpack(vim.api.nvim_win_get_cursor(0))
-	vim.api.nvim_buf_set_mark(0, mark, row, col, {})
-	setSignForMark(mark)
+	if cursorIsAtMark(mark) then
+		vim.api.nvim_del_mark(mark)
+	else
+		local row, col = unpack(vim.api.nvim_win_get_cursor(0))
+		vim.api.nvim_buf_set_mark(0, mark, row, col, {})
+		setSignForMark(mark)
+	end
 end
 
 --------------------------------------------------------------------------------

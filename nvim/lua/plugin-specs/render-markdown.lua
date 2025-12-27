@@ -38,7 +38,7 @@ return {
 			position = "left",
 			width = "block", -- = not full width
 			min_width = 50,
-			left_pad = 0, -- buggy with tabs in code blocks
+			left_pad = 0, -- PENDING https://github.com/MeanderingProgrammer/render-markdown.nvim/issues/576
 			right_pad = 1,
 			border = "thin", -- use the `above`/`below` chars as is
 			below = "▔", -- ▀
