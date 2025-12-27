@@ -303,23 +303,19 @@ function M.renameAndUpdateWikilinks()
 		vim.iter(jsonLines):each(function(jsonLine)
 			local o = vim.json.decode(jsonLine)
 			if o.type ~= "match" then return end -- `start`, `end`, and `summary` jsons
-			local path = cwd .. "/" .. o.data.path.text
-			table.insert(filesChanged, "- " .. vim.fs.basename(path))
+			local relPath = o.data.path.text
+			table.insert(filesChanged, "- " .. relPath)
 
 			---@type lsp.TextDocumentEdit
 			local textDocumentEdits = {
-				textDocument = { uri = vim.uri_from_fname(path) },
+				textDocument = { uri = vim.uri_from_fname(cwd .. "/" .. relPath) },
 				edits = {},
 			}
 			for _, submatch in ipairs(o.data.submatches) do
-				local origText = o.data.submatches[1].match.text
-				local old = vim.startswith(origText, "[[") and 
-				local replacement = origText:gsub(vim.pesc(oldName), vim.pesc(newName))
-				if vim.startswith(origText, "](") then
-					local oldEncoded = vim.uri_encode(oldName)
-					local newEncoded = vim.uri_encode(newName)
-					replacement = origText:gsub(vim.pesc(oldEncoded), vim.pesc(newEncoded))
-				end
+				local origText = submatch.match.text
+				local old = vim.startswith(origText, "[[") and oldName or vim.uri_encode(oldName)
+				local new = vim.startswith(origText, "[[") and newName or vim.uri_encode(newName)
+				local replacement = origText:gsub(vim.pesc(old), vim.pesc(new))
 				table.insert(textDocumentEdits.edits, {
 					newText = replacement,
 					range = {

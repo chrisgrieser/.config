@@ -28,6 +28,7 @@ function M.toggleOrIncrement()
 		["backward"] = "forward",
 		["open"] = "close",
 		["inner"] = "outer",
+		["encode"] = "decode",
 
 		["and"] = "or",
 		["=="] = "!=",
