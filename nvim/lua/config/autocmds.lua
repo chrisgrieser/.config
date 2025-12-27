@@ -262,7 +262,14 @@ local function searchCountIndicator(mode)
 end
 
 -- without the `searchCountIndicator`, this `on_key` simply does `auto-nohl`
-vim.on_key(function(key, _typed)
+local ignoredPrevkeys = { "g", vim.g.mapleader } -- don't trigger for `gn` or `<leader>n`
+local prevKey
+vim.on_key(function(key, typed)
+	local ignore = vim.tbl_contains(ignoredPrevkeys, prevKey)
+	Chainsaw(prevKey) -- 🪚
+	prevKey = typed
+	if ignore then return end
+
 	key = vim.fn.keytrans(key)
 	local isCmdlineSearch = vim.fn.getcmdtype():find("[/?]") ~= nil
 	local isNormalMode = vim.api.nvim_get_mode().mode == "n"
@@ -393,8 +400,8 @@ local favicons = {
 
 local function addFavicons(bufnr)
 	if not vim.api.nvim_buf_is_valid(bufnr) or vim.bo[bufnr].buftype ~= "" then return end
-
 	if not bufnr then bufnr = 0 end
+
 	local ns = vim.api.nvim_create_namespace("url-favicons")
 	vim.api.nvim_buf_clear_namespace(bufnr, ns, 0, -1)
 
@@ -412,7 +419,7 @@ local function addFavicons(bufnr)
 			local icon = favicons[sitename]
 			if not icon then return end
 
-			local row, col = node:start() ---@cast col integer
+			local row, col = node:start()
 			vim.api.nvim_buf_set_extmark(bufnr, ns, row, col, {
 				virt_text = { { icon .. " ", "Comment" } },
 				virt_text_pos = "inline",
@@ -430,9 +437,9 @@ vim.api.nvim_create_autocmd({ "FocusGained", "BufReadPost", "TextChanged", "Inse
 })
 
 ---LUCKY INDENT-----------------------------------------------------------------
-
 -- Auto-set indent based on first indented line. Ignores files when an
 -- `.editorconfig` is in effect. Simplified version of `guess-indent.nvim`.
+
 local function luckyIndent(bufnr)
 	if not vim.api.nvim_buf_is_valid(bufnr) or vim.bo[bufnr].buftype ~= "" then return end
 

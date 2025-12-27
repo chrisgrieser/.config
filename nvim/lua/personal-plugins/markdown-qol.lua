@@ -316,6 +316,10 @@ function M.renameAndUpdateWikilinks()
 				local old = vim.startswith(origText, "[[") and oldName or vim.uri_encode(oldName)
 				local new = vim.startswith(origText, "[[") and newName or vim.uri_encode(newName)
 				local replacement = origText:gsub(vim.pesc(old), vim.pesc(new))
+				if replacement == origText then
+					vim.notify(("Link %s could not be updated."):format(origText), vim.log.levels.WARN)
+					return
+				end
 				table.insert(textDocumentEdits.edits, {
 					newText = replacement,
 					range = {
