@@ -63,7 +63,7 @@ rules:
         from: { key_code: o }
         to:
           - { key_code: l, modifiers: [command] }
-          - { key_code: vk_none, hold_down_milliseconds: 100 }
+          - { key_code: vk_none, hold_down_milliseconds: 200 }
           - { key_code: down_arrow }
           - { key_code: return_or_enter }
         conditions: [*is-mona, *mona-normal-mode]

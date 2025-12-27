@@ -3,11 +3,12 @@ local M = {} -- persist from garbage collector
 local u = require("meta.utils")
 --------------------------------------------------------------------------------
 
-M.iMacDisplay = hs.screen("Built%-in")
 local sideW = 0.185
+local barHeight = 0.055
+M.iMacDisplay = hs.screen("Built%-in")
 M.pseudoMax = hs.geometry { x = sideW, y = 0, w = (1 - sideW), h = 1 }
 M.middleHalf = hs.geometry { x = sideW, y = 0, w = 0.6, h = 1 }
-M.toTheSide = hs.geometry { x = 0, y = 0.06, w = sideW, h = 1 } -- height 1 to not leave corners at bottom
+M.toTheSide = hs.geometry { x = 0, y = barHeight, w = sideW, h = 1 } -- height 1 = no corners at bottom
 
 --------------------------------------------------------------------------------
 -- INFO to allow a narrower window in Mona
