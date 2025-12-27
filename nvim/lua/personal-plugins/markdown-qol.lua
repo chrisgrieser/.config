@@ -224,7 +224,7 @@ end
 local function getBacklinkRegex()
 	local path = vim.api.nvim_buf_get_name(0)
 	local basename = vim.fs.basename(path):gsub("%.md$", "")
-	local wikilinkPattern = "\\[\\[" .. vim.fn.escape(basename, "\\") .. "(#.+)?\\]\\]"
+	local wikilinkPattern = "\\[\\[" .. vim.fn.escape(basename, "\\") .. "([#|].*)?\\]\\]"
 	local cwd = assert(vim.uv.cwd(), "cwd not found")
 	local relpathEncoded = vim.uri_encode(path:sub(#cwd + 1)):gsub("%%%w%w", string.upper)
 	local mdlinkPattern = "\\]\\(" .. "\\.?" .. relpathEncoded .. "\\)"
@@ -303,6 +303,7 @@ function M.renameAndUpdateWikilinks()
 			local o = vim.json.decode(jsonLine)
 			if o.type ~= "match" then return end -- `start`, `end`, and `summary` jsons
 			local path = cwd .. "/" .. o.data.path.text
+			table.insert(filesChanged, "- " .. vim.fs.basename(path))
 
 			---@type lsp.TextDocumentEdit
 			local textDocumentEdits = {
@@ -321,7 +322,7 @@ function M.renameAndUpdateWikilinks()
 				})
 				updateCount = updateCount + 1
 			end
-			table.insert(filesChanged, "- " .. vim.fs.basename(path))
+			-- LSP-API is the easiest method for replacing in non-open documents
 			vim.lsp.util.apply_text_document_edit(textDocumentEdits, nil, vim.o.encoding)
 		end)
 

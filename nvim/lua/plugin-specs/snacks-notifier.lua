@@ -3,7 +3,6 @@
 
 ---@param idx number|"last"
 local function openNotif(idx)
-	-- CONFIG
 	local maxWidth = 0.85
 	local maxHeight = 0.85
 
@@ -78,7 +77,7 @@ local function openNotif(idx)
 	}
 	vim.api.nvim_win_call(win.win, function()
 		-- emphasize filenames in errors
-		vim.fn.matchadd("@comment.note", [[[^/]\+\.lua:\d\+\ze:]])
+		vim.fn.matchadd("@comment.hint", [[[^/]\+\.lua:\d\+\ze:]])
 	end)
 end
 

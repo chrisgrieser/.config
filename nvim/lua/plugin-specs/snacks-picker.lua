@@ -160,7 +160,8 @@ return {
 
 		---GREP-------------------------------------------------------------------
 		{ "gl", function() Snacks.picker.grep() end, desc = "󰛢 Grep" },
-		{ "gL", function() Snacks.picker.grep_word() end, desc = "󰛢 Grep cword" },
+		-- stylua: ignore
+		{ "gL", function() Snacks.picker.grep { search = vim.fn.expand("<cword>") } end, desc = "󰛢 Grep cword" },
 		{ "<leader>ci", importLuaModule, ft = "lua", desc = "󰢱 Import module" },
 
 		---LSP--------------------------------------------------------------------
@@ -294,11 +295,8 @@ return {
 					confirm = { "yank", "close" },
 				},
 				explorer = {
-					layout = {
-						auto_hide = { "input" },
-						preset = "small_no_preview",
-						layout = { height = 0.85 },
-					},
+					layout = { preset = "small_no_preview", layout = { height = 0.85 } },
+					jump = { close = true },
 					win = {
 						list = {
 							keys = {
@@ -314,6 +312,7 @@ return {
 								["o"] = "explorer_open", -- open with system application
 								["<CR>"] = "explorer_rename",
 								["-"] = "focus_input", -- i.e. search
+								["<C-CR>"] = { "cycle_win", mode = "i" },
 
 								-- consistent with `gh` for next hunk and `ge` for next diagnostic
 								["gh"] = "explorer_git_next",
@@ -334,7 +333,6 @@ return {
 						-- these are *always* ignored, even if `toggle_ignored` is switched
 						("--ignore-file=" .. vim.env.HOME .. "/.config/ripgrep/ignore"),
 					},
-					layout = "big_preview",
 				},
 				help = {
 					confirm = function(picker)

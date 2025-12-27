@@ -61,7 +61,7 @@ local function syncAllGitRepos(silent)
 
 	-- sync them
 	for _, repo in pairs(M.reposToSync) do
-		local syncScriptPath = repo.location:gsub("~", os.getenv("HOME") or "")
+		local syncScriptPath = repo.location:gsub("^~", os.getenv("HOME") or "")
 			.. "/"
 			.. config.syncScriptAtLocation
 		assert(u.isExecutable(syncScriptPath), "no sync script found at " .. syncScriptPath)
@@ -117,8 +117,10 @@ local c = hs.caffeinate.watcher
 M.caff_SleepWatcherForRepoSync = c.new(function(event)
 	if env.isProjector() then return end
 
-	if event == c.screensDidLock or event == c.screensDidWake or event == c.systemDidWake then
-		u.defer(1, syncAllGitRepos)
+	if event == c.screensDidLock then
+		syncAllGitRepos()
+	elseif event == c.screensDidWake or event == c.systemDidWake then
+		u.defer(2, syncAllGitRepos)
 	end
 end):start()
 
