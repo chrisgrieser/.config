@@ -66,7 +66,7 @@ end
 ---@param mark string
 local function setUnsetMark(mark)
 	local mrow, _mcol, bufnr, _path = unpack(vim.api.nvim_get_mark(mark, {}))
-	vim.api.nvim_buf_clear_namespace(bufnr, ns, mrow - 1, mrow) -- delete old sign
+	if mrow > 0 then vim.api.nvim_buf_clear_namespace(bufnr, ns, mrow - 1, mrow) end -- delete old sign
 
 	if cursorIsAtMark(mark) then
 		vim.api.nvim_del_mark(mark)

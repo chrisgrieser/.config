@@ -60,14 +60,14 @@ return {
 				-- news sites
 				medium = { pattern = "medium%.com", icon = "󰬔 " }, -- letter-glyphs are named `alpha_…`
 				verge = { pattern = "theverge%.com", icon = "󰰫 " },
-				techcrunch = { pattern = "techcrunch%.com", icon = "󰰥 " },
+				techcrunch = { pattern = "techcrunch%.com", icon = "󰬛󰬊 " },
 				wired = { pattern = "wired%.com", icon = "󰬞 " },
-				nytimes = { pattern = "nytimes%.com", icon = "󰎕 " },
-				bloomberg = { pattern = "bloomberg%.com", icon = "󰎕 " },
-				guardian = { pattern = "theguardian%.com", icon = "󰎕 " },
-				zeit = { pattern = "zeit%.de", icon = "󰎕 " },
-				spiegel = { pattern = "spiegel%.de", icon = "󰎕 " },
-				tagesschau = { pattern = "tagesschau%.de", icon = "󰎕 " },
+				nytimes = { pattern = "nytimes%.com", icon = "󰬕󰬠 " },
+				bloomberg = { pattern = "bloomberg%.com", icon = "󰯯 " },
+				guardian = { pattern = "theguardian%.com", icon = "󰯾 " },
+				zeit = { pattern = "zeit%.de", icon = "󰬡 " },
+				spiegel = { pattern = "spiegel%.de", icon = "󰬚 " },
+				tagesschau = { pattern = "tagesschau%.de", icon = "󰰥 " },
 
 				-- misc
 				openai = { pattern = "openai%.com", icon = " " },

@@ -1,15 +1,17 @@
 ---OPTIONS----------------------------------------------------------------------
 local optl = vim.opt_local
+
 optl.expandtab = true
 optl.commentstring = "<!-- %s -->" -- add spaces
 
 -- so two trailing spaces are highlighted, but not a single trailing space
 optl.listchars:remove("trail")
 optl.listchars:append { multispace = "·" }
+
 optl.sidescrolloff = 3 -- lower, since we rarely go beyond textwidth
 
--- wrap
-vim.schedule(function() optl.formatoptions:append("t") end) -- when typing beyond `textwidth`
+-- hard-wrap when typing beyond `textwidth`
+vim.schedule(function() optl.formatoptions:append("t") end)
 
 ---KEYMAPS----------------------------------------------------------------------
 local bkeymap = require("config.utils").bufKeymap

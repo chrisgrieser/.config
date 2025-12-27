@@ -241,6 +241,11 @@ function M.backlinks()
 		live = false,
 		regex = true,
 		search = getBacklinkRegex(),
+		format = function(item, _picker)
+			local out = {}
+			Snacks.picker.highlight.format(item, item.file, out)
+			return out
+		end,
 	}
 end
 
@@ -281,9 +286,8 @@ function M.renameAndUpdateWikilinks()
 			"--no-config",
 			"--json", -- prints result as json lines
 			"--glob=*.md",
-			"--replace=" .. "[[" .. newName .. "$1]]",
 			"--",
-			"\\[\\[" .. vim.fn.escape(oldName, "\\") .. "([#|].+)?\\]\\]",
+			getBacklinkRegex(),
 		}):wait()
 		if out.code ~= 0 then
 			local d = vim.json.decode(out.stdout)
@@ -306,8 +310,10 @@ function M.renameAndUpdateWikilinks()
 				edits = {},
 			}
 			for _, submatch in ipairs(o.data.submatches) do
+				local replacement =
+					o.data.submatches[1].match.text:gsub(vim.pesc(oldName), vim.pesc(newName))
 				table.insert(textDocumentEdits.edits, {
-					newText = submatch.replacement.text,
+					newText = replacement,
 					range = {
 						start = { line = o.data.line_number - 1, character = submatch.start },
 						["end"] = { line = o.data.line_number - 1, character = submatch["end"] },

@@ -349,8 +349,8 @@
     "prefix": "url-encode (curl)"
   },
   "url-encode": {
-    "body": "| jq --raw-input --slurp --null-input --raw-output 'input | @uri'",
-    "prefix": "url-encode (jq pipe)"
+    "body": "echo -n \"$str\" | jq --raw-input --slurp --null-input --raw-output 'input | @uri'",
+    "prefix": "url-encode (jq)"
   },
   "urlEncode": {
     "body": "osascript -l JavaScript -e \"encodeURIComponent('${1:text}')\"",

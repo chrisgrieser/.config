@@ -2,21 +2,27 @@
 -- DOCS https://github.com/folke/snacks.nvim/blob/main/docs/picker.md
 --------------------------------------------------------------------------------
 
--- disable default keymaps to make the `?` help overview less cluttered
-vim.defer_fn(function()
-	require("snacks.picker.config.defaults").defaults.win.input.keys = {}
-	require("snacks.picker.config.defaults").defaults.win.list.keys = {}
-	require("snacks.picker.config.sources").explorer.win.list.keys = {}
+vim.api.nvim_create_autocmd("User", {
+	group = vim.api.nvim_create_augroup("SnacksPickerOverrides", { clear = true }),
+	desc = "User: lazy-load snacks-picker overwrites",
+	pattern = "VeryLazy",
+	callback = function(_ctx)
+		-- disable default keymaps to make the `?` help overview less cluttered
+		require("snacks.picker.config.defaults").defaults.win.input.keys = {}
+		require("snacks.picker.config.defaults").defaults.win.list.keys = {}
+		require("snacks.picker.config.sources").explorer.win.list.keys = {}
 
-	-- remove the numbers from `vim.ui.select`
-	local orig = require("snacks.picker.format").ui_select
-	require("snacks.picker.format").ui_select = function(opts)
-		return function(item, picker)
-			local formatted = orig(opts)(item, picker)
-			return vim.list_slice(formatted, 3)
+		-- remove the numbers from `vim.ui.select`
+		local orig = require("snacks.picker.format").ui_select
+		require("snacks.picker.format").ui_select = function(opts)
+			return function(item, picker)
+				local formatted = orig(opts)(item, picker)
+				return vim.list_slice(formatted, 3)
+			end
 		end
-	end
-end, 2000)
+	end,
+})
+
 --------------------------------------------------------------------------------
 
 -- lightweight version of `telescope-import.nvim`
