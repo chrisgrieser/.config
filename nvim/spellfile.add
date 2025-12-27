@@ -25,3 +25,6 @@ wikilink
 workspace
 zsh
 uri
+foldmethod
+customizable
+LSP

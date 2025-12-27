@@ -226,11 +226,10 @@ local function getBacklinkRegex()
 	local basename = vim.fs.basename(path):gsub("%.md$", "")
 	local wikilinkPattern = "\\[\\[" .. vim.fn.escape(basename, "\\") .. "(#.+)?\\]\\]"
 	local cwd = assert(vim.uv.cwd(), "cwd not found")
-	local relpathEncoded = vim.uri_encode(path:sub(#cwd + 1))
+	local relpathEncoded = vim.uri_encode(path:sub(#cwd + 1)):gsub("%%%w%w", string.upper)
 	local mdlinkPattern = "\\]\\(" .. "\\.?" .. relpathEncoded .. "\\)"
 	return wikilinkPattern .. "|" .. mdlinkPattern
 end
-
 
 function M.backlinks()
 	assert(vim.bo.ft == "markdown", "Only for Markdown files.")

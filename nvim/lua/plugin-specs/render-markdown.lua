@@ -38,7 +38,7 @@ return {
 			position = "left",
 			width = "block", -- = not full width
 			min_width = 50,
-			left_pad = 1,
+			left_pad = 0, -- buggy with tabs in code blocks
 			right_pad = 1,
 			border = "thin", -- use the `above`/`below` chars as is
 			below = "▔", -- ▀
