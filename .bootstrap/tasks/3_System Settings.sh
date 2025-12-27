@@ -86,13 +86,11 @@ chflags hidden ~/{Movies,Music,Pictures,Public,Library}
 defaults write com.apple.universalaccess reduceTransparency -bool true
 killall Finder
 
-# these three need restart
-# mouse speed: 3 = max speed from System Preferences
-# https://mac-os-key-repeat.vercel.app/
-defaults write -g com.apple.mouse.scaling 4.0
+# these three need restart https://mac-os-key-repeat.vercel.app/
+defaults write -g com.apple.mouse.scaling 4.0 # normal minimum: 3
 defaults write -g InitialKeyRepeat -int 10 # normal minimum: 15 (225ms)
 defaults write -g KeyRepeat -int 2         # normal minimum: 2 (30ms)
-# Disable press-and-hold for keys in favor of key repeat
+# Disable press-and-hold in favor of key repeat
 defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
 
 defaults write -g NSInitialToolTipDelay -int 500 # default: 2000
