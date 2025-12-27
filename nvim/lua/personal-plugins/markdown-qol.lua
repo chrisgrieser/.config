@@ -204,7 +204,7 @@ function M.followMdlinkOrWikilink()
 
 	if mdlink or url then
 		local isFileLink = not url and not vim.startswith(mdlink, "http")
-		if isFileLink then return vim.cmd.edit(mdlink) end
+		if isFileLink then return vim.cmd.edit(vim.uri_decode(mdlink)) end
 
 		-- move cursor to start of mdlink or url
 		local targetCol = mdlink and line:find(mdlinkPattern) or line:find(urlPattern)
@@ -221,8 +221,10 @@ function M.followMdlinkOrWikilink()
 end
 --------------------------------------------------------------------------------
 
-local function getBacklinkRegex()
-	local path = vim.api.nvim_buf_get_name(0)
+---@param currentFilepath? string
+---@return string pattern
+local function getBacklinkRegex(currentFilepath)
+	local path = currentFilepath or vim.api.nvim_buf_get_name(0)
 	local basename = vim.fs.basename(path):gsub("%.md$", "")
 	local wikilinkPattern = "\\[\\[" .. vim.fn.escape(basename, "\\") .. "([#|].*)?\\]\\]"
 	local cwd = assert(vim.uv.cwd(), "cwd not found")
@@ -250,7 +252,6 @@ function M.backlinks()
 end
 
 -- PENDING https://github.com/artempyanykh/marksman/issues/405
--- Caveat: does not support mdlinks `[]()` yet
 function M.renameAndUpdateWikilinks()
 	assert(vim.bo.ft == "markdown", "Only for Markdown files.")
 	assert(vim.fn.executable("rg") == 1, "`ripgrep` not found.")
@@ -287,7 +288,7 @@ function M.renameAndUpdateWikilinks()
 			"--json", -- prints result as json lines
 			"--glob=*.md",
 			"--",
-			getBacklinkRegex(),
+			getBacklinkRegex(oldPath),
 		}):wait()
 		if out.code ~= 0 then
 			local d = vim.json.decode(out.stdout)
@@ -311,8 +312,14 @@ function M.renameAndUpdateWikilinks()
 				edits = {},
 			}
 			for _, submatch in ipairs(o.data.submatches) do
-				local replacement =
-					o.data.submatches[1].match.text:gsub(vim.pesc(oldName), vim.pesc(newName))
+				local origText = o.data.submatches[1].match.text
+				local old = vim.startswith(origText, "[[") and 
+				local replacement = origText:gsub(vim.pesc(oldName), vim.pesc(newName))
+				if vim.startswith(origText, "](") then
+					local oldEncoded = vim.uri_encode(oldName)
+					local newEncoded = vim.uri_encode(newName)
+					replacement = origText:gsub(vim.pesc(oldEncoded), vim.pesc(newEncoded))
+				end
 				table.insert(textDocumentEdits.edits, {
 					newText = replacement,
 					range = {
@@ -325,6 +332,7 @@ function M.renameAndUpdateWikilinks()
 			-- LSP-API is the easiest method for replacing in non-open documents
 			vim.lsp.util.apply_text_document_edit(textDocumentEdits, nil, vim.o.encoding)
 		end)
+		vim.cmd.wall()
 
 		-- NOTIFY
 		local msg = ("**%q to %q.**"):format(oldName, newName) .. "\n\n"

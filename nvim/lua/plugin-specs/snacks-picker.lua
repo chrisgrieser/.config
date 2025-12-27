@@ -137,12 +137,12 @@ return {
 				Snacks.picker.files {
 					title = " nvim runtime",
 					cwd = vim.env.VIMRUNTIME,
-					exclude = { "*.txt" },
+					exclude = { "*.txt", "*/testdir/*" },
 					matcher = { filename_bonus = false }, -- folder more important here
 					formatters = { file = { filename_first = false } },
 				}
 			end,
-			desc = " nvim runtime",
+			desc = " nvim runtime",
 		},
 		{
 			"gp",
@@ -155,7 +155,7 @@ return {
 					formatters = { file = { filename_first = false } },
 				}
 			end,
-			desc = " Local plugins",
+			desc = "󰈮 Local plugins",
 		},
 
 		---GREP-------------------------------------------------------------------
