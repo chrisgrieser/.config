@@ -219,27 +219,29 @@ function M.followMdlinkOrWikilink()
 		vim.lsp.buf.definition()
 	end
 end
+--------------------------------------------------------------------------------
 
-function M.backlinks()
-	assert(vim.bo.ft == "markdown", "Only for Markdown files.")
-	assert(Snacks, "snacks.nvim not found")
+local function getBacklinkRegex()
 	local path = vim.api.nvim_buf_get_name(0)
 	local basename = vim.fs.basename(path):gsub("%.md$", "")
 	local wikilinkPattern = "\\[\\[" .. vim.fn.escape(basename, "\\") .. "(#.+)?\\]\\]"
 	local cwd = assert(vim.uv.cwd(), "cwd not found")
 	local relpathEncoded = vim.uri_encode(path:sub(#cwd + 1))
 	local mdlinkPattern = "\\]\\(" .. "\\.?" .. relpathEncoded .. "\\)"
+	return wikilinkPattern .. "|" .. mdlinkPattern
+end
+
+
+function M.backlinks()
+	assert(vim.bo.ft == "markdown", "Only for Markdown files.")
+	assert(Snacks, "snacks.nvim not found")
 	Snacks.picker.grep {
 		title = " Backlinks",
 		cmd = "rg",
-		args = {
-			"--no-config",
-			"--glob=*.md",
-			"--ignore-case", -- since `vim.uri_encode` uses uppercase
-		},
+		args = { "--no-config", "--glob=*.md" },
 		live = false,
 		regex = true,
-		search = wikilinkPattern .. "|" .. mdlinkPattern,
+		search = getBacklinkRegex(),
 	}
 end
 
