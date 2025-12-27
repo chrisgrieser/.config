@@ -22,17 +22,15 @@ M.wf_zoom = wf.new("zoom.us"):subscribe(wf.windowCreated, function(newWin)
 	end
 end)
 
----PDF READER-------------------------------------------------------------------
+---PDF READERS------------------------------------------------------------------
 -- 1. Sync Dark & Light Mode
 -- 2. Start with Highlight Tool enabled
 -- 3. Delete useless iCloud PDF folder that's always created
-M.aw_pdfreader = aw.new(function(appName, event, app)
+M.aw_pdfreaders = aw.new(function(appName, event, app)
 	if event == aw.launched and appName == "Highlights" then
 		app:selectMenuItem { "View", "PDF Appearance", u.isDarkMode() and "Night" or "Default" }
 		app:selectMenuItem { "Tools", "Highlight" }
 		app:selectMenuItem { "Tools", "Color", "Yellow" }
-		app:selectMenuItem { "View", "Hide Toolbar" }
-		app:selectMenuItem { "View", "Hide Notes Panel" }
 	elseif event == aw.launched and appName == "PDF Expert" then
 		app:selectMenuItem { "View", "Theme", u.isDarkMode() and "Night" or "Day" }
 		app:selectMenuItem { "Annotate", "Highlight" }
@@ -66,7 +64,6 @@ M.wf_scripteditor = wf
 ---MASTODON---------------------------------------------------------------------
 -- 1. auto-close media windows
 -- 2. auto-scroll up
-local mastoHasScrolled = false
 M.aw_masto = aw.new(function(appName, event, masto)
 	if appName ~= "Mona" then return end
 	local win = masto:mainWindow()
@@ -81,13 +78,13 @@ M.aw_masto = aw.new(function(appName, event, masto)
 	end
 
 	u.defer(1, function()
-		if mastoHasScrolled then return end
-		mastoHasScrolled = true
+		if M.mastoHasScrolled then return end
+		M.mastoHasScrolled = true
 		hs.eventtap.keyStroke({}, "left", 1, masto) -- go back
 		hs.eventtap.keyStroke({ "cmd" }, "1", 1, masto) -- go to home tab
 		hs.eventtap.keyStroke({ "cmd" }, "up", 1, masto) -- scroll up
-		u.defer(10, function() mastoHasScrolled = false end)
 	end)
+	u.defer(2, function() M.mastoHasScrolled = false end)
 end):start()
 
 ---BROWSER----------------------------------------------------------------------
