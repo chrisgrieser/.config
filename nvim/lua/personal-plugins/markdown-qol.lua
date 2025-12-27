@@ -328,7 +328,7 @@ function M.renameAndUpdateWikilinks()
 			-- LSP-API is the easiest method for replacing in non-open documents
 			vim.lsp.util.apply_text_document_edit(textDocumentEdits, nil, vim.o.encoding)
 		end)
-		vim.cmd.wall()
+		if updateCount > 0 then vim.cmd("silent! wall") end -- save all changes
 
 		-- NOTIFY
 		local msg = ("**%q to %q.**"):format(oldName, newName) .. "\n\n"
