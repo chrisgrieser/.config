@@ -1,17 +1,16 @@
 local M = {}
 --------------------------------------------------------------------------------
 
----Wraps text with markdown links, automatically inserting the URL if in a Markdown link if the `+` register has a URL. In normal mode, can undo.
+---Wraps text with markdown links, automatically inserting the URL if in a
+---Markdown link if the `+` register has a URL. In normal mode, can undo.
 ---@param startWrap string|"mdlink"
 ---@param endWrap? string defaults to `startWrap`
 function M.wrap(startWrap, endWrap)
-	---@type fun(msg: string): nil
-	local function warn(msg) vim.notify(msg, vim.log.levels.WARN) end
-
 	if not endWrap then endWrap = startWrap end
 	local mode = vim.fn.mode()
 	if mode == "V" then
-		return warn("Visual mode not supported")
+		vim.notify("Visual line mode not supported", vim.log.levels.WARN)
+		return
 	end
 	local row, col = unpack(vim.api.nvim_win_get_cursor(0))
 	local useBigWord = startWrap == "`"

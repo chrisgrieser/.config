@@ -85,7 +85,7 @@ return {
 				show_on_insert_on_trigger_character = false,
 			},
 			window = {
-				max_width = 60,
+				max_width = 65,
 				-- max_height = 5,
 				direction_priority = { "s", "n" }, -- south first, to not block existing code
 				show_documentation = true, -- show larger documentation regular signature help

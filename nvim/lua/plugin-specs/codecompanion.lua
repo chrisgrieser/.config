@@ -13,6 +13,18 @@ local formatInlineResult = true
 
 --------------------------------------------------------------------------------
 
+local function leaveVisualOnInlineRequest()
+	-- needed, since my fix was reverted, probably for the wrong reason https://github.com/olimorris/codecompanion.nvim/pull/2562
+	vim.api.nvim_create_autocmd("User", {
+		desc = "User: leave visual mode",
+		pattern = "CodeCompanionInlineStarted",
+		callback = function()
+			if vim.fn.mode():lower() ~= "v" then return end
+			vim.cmd.normal { vim.fn.mode(), bang = true }
+		end,
+	})
+end
+
 local function spinnerNotificationWhileRequest()
 	if not package.loaded["snacks"] then return end
 
@@ -94,6 +106,7 @@ local ccSpec = {
 	init = function() vim.g.whichkeyAddSpec { "<leader>a", group = " AI" } end,
 	config = function(_, opts)
 		require("codecompanion").setup(opts)
+		leaveVisualOnInlineRequest()
 		spinnerNotificationWhileRequest()
 		postRequestHook()
 	end,
@@ -135,7 +148,6 @@ local ccSpec = {
 
 							-- PENDING https://github.com/olimorris/codecompanion.nvim/pull/2561
 							["reasoning.summary"] = { enabled = function() return false end }, -- requires organizational access
-
 						},
 					})
 				end,

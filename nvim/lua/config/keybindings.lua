@@ -294,7 +294,7 @@ keymap("x", "<left>", [["zxhh"zpgvhoho]], { desc = "⬅ Move selection left" })
 keymap({ "n", "x" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "󱐋 Code action" })
 
 -- stylua: ignore start
-keymap({ "n", "x" }, "<leader>h", function() vim.lsp.buf.hover { max_width = 70 } end, { desc = "󰋽 LSP hover" })
+keymap({ "n", "x" }, "<leader>h", function() vim.lsp.buf.hover { max_width = 80 } end, { desc = "󰋽 LSP hover" })
 
 keymap("n", "<PageDown>", function() require("personal-plugins.misc").scrollLspOrOtherWin(5) end, { desc = "↓ Scroll other win" })
 keymap("n", "<PageUp>", function() require("personal-plugins.misc").scrollLspOrOtherWin(-5) end, { desc = "↑ Scroll other win" })
