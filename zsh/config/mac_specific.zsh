@@ -1,5 +1,6 @@
 function eject {
-	volumes=$(df -ih | grep -io "\s/Volumes/.*" | grep -v "/Volumes/Recovery" | cut -c2-)
+	volumes=$(df | grep ' /Volumes/' | grep --invert-match '/Volumes/Recovery' | 
+		grep --only-matching '/Volumes/.*')
 	if [[ -z "$volumes" ]]; then
 		print "\e[1;33mNo mounted volume found.\e[0m"
 		return 1
@@ -15,7 +16,8 @@ function eject {
 
 # open first ejectable volume
 function vvv {
-	first_volume=$(df | grep " /Volumes/" | grep -v "/Volumes/Recovery" | awk -F '   ' '{print $NF}' | head -n1)
+	first_volume=$(df | grep ' /Volumes/' | grep --invert-match '/Volumes/Recovery' | 
+		grep --only-matching '/Volumes/.*' | head -n1)
 	if [[ -d "$first_volume" ]]; then
 		open "$first_volume"
 	else

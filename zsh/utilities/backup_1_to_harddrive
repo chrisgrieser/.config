@@ -55,12 +55,12 @@ function backup() {
 
 spinner="⠋⠙⠹⠸⠼⠴⠦⠧⠇⠏"
 for i in {1..200}; do
-	volume_name="$(df | grep --only-matching " /Volumes/.*" |
-		grep -v "/Volumes/Recovery" | cut -c2-)"
-	if [[ $(echo "$volume_name" | wc -l) -gt 1 ]]; then
+	volumes=$(df | grep ' /Volumes/' | grep --invert-match '/Volumes/Recovery' | 
+		grep --only-matching '/Volumes/.*')
+	if [[ $(echo "$volumes" | wc -l) -gt 1 ]]; then
 		print "\e[1;33mMore than one volume connected.\e[0m"
 		return 1
-	elif [[ -n "$volume_name" ]]; then
+	elif [[ -n "$volumes" ]]; then
 		break
 	fi
 	pos=$((i % ${#spinner}))

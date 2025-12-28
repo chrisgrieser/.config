@@ -11,7 +11,7 @@ return {
 			"<leader>oi",
 			function()
 				if Snacks.indent.enabled then
-					vim.g.prev_listchars = vim.opt_local.listchars:get()
+					vim.b.prev_listchars = vim.opt_local.listchars:get()
 					vim.opt_local.listchars:append {
 						tab = " ",
 						space = "·",
@@ -20,7 +20,7 @@ return {
 					}
 					Snacks.indent.disable()
 				else
-					vim.opt_local.listchars = vim.g.prev_listchars
+					vim.opt_local.listchars = vim.b.prev_listchars
 					Snacks.indent.enable()
 				end
 			end,

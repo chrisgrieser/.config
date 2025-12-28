@@ -33,7 +33,7 @@ safeRequire("win-management.fallthrough")
 safeRequire("system.cronjobs")
 safeRequire("system.filesystem-watchers")
 safeRequire("system.repo-auto-sync")
-safeRequire("system.hardware-periphery")
+safeRequire("system.external-drives")
 safeRequire("system.japanese")
 safeRequire("system.weather-reminder")
 

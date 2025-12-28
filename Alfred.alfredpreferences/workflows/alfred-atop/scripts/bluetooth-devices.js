@@ -37,6 +37,17 @@ function run() {
 	}
 	//───────────────────────────────────────────────────────────────────────────
 
+	// CAVEAT this only shows the battery for first-party Apple devices
+	const shellCmd =
+		"ioreg -rak BatteryPercent | sed 's/data>/string>/' | plutil -convert json - -o -";
+	const batteryInfo = JSON.parse(app.doShellScript(shellCmd)).reduce(
+		(/** @type {any} */ acc, /** @type {any} */ device) => {
+			acc[device.DeviceAddress] = device.BatteryPercent;
+			return acc;
+		},
+		{},
+	);
+
 	const excludedDevices = $.getenv("excluded_devices").split(/ *, */);
 
 	/** @type {BluetoothDevice[]} */
@@ -45,13 +56,15 @@ function run() {
 	/** @type {AlfredItem[]} */
 	const deviceArr = devices.flatMap((device) => {
 		const name = device.nameOrAddress.js;
+		if (excludedDevices.includes(name)) return [];
+
 		const connectedIcon = device.isConnected ? "🟢 " : "🔴 ";
 		const address = device.addressString.js;
-		if (excludedDevices.includes(name)) return [];
+		const battery = batteryInfo[address] ? batteryInfo[address] + "%" : "";
 
 		return {
 			title: name,
-			subtitle: connectedIcon,
+			subtitle: connectedIcon + "  " + battery,
 			uid: address,
 			arg: address,
 		};
