@@ -84,7 +84,7 @@ chflags hidden ~/{Movies,Music,Pictures,Public,Library}
 
 # Reduce Transparency (native mac apps & menubar)
 defaults write com.apple.universalaccess reduceTransparency -bool true
-killall Finder
+killall Finder && killall -KILL SystemUIServer
 
 # these three need restart https://mac-os-key-repeat.vercel.app/
 defaults write -g com.apple.mouse.scaling 4.0 # normal minimum: 3

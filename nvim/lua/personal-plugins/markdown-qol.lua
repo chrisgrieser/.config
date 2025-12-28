@@ -395,6 +395,7 @@ function M.cycleList()
 end
 
 function M.previewViaPandoc()
+	assert(vim.bo.ft == "markdown", "Only for Markdown files.")
 	assert(vim.fn.executable("pandoc") == 1, "`pandoc` not found")
 	local pathOfThisLuaFile = debug.getinfo(1, "S").source:sub(2)
 	local css = vim.fs.dirname(pathOfThisLuaFile) .. "/github-markdown.css"
@@ -402,8 +403,7 @@ function M.previewViaPandoc()
 	vim.cmd("silent! update")
 
 	local filepath = vim.api.nvim_buf_get_name(0)
-	local filename = vim.fs.basename(filepath)
-	local outputPath = ("/tmp/%s.html"):format(filename)
+	local filename = vim.fs.basename(filepath):gsub("%.md$", "")
 	local out = vim.system({
 		"pandoc",
 		filepath,
@@ -411,7 +411,7 @@ function M.previewViaPandoc()
 		"--to=html",
 		"--standalone",
 		"--css=" .. css,
-		"--title-prefix=Preview of " .. filename, -- used in browser tab title
+		"--title-prefix=" .. filename, -- used in browser tab title
 	}):wait()
 	assert(out.code == 0, vim.trim(out.stderr))
 
@@ -429,6 +429,9 @@ function M.previewViaPandoc()
 		end)
 
 	-- write & open in browser
+	local location = "/tmp/markdown-previews"
+	vim.fn.mkdir(location, "p")
+	local outputPath = ("%s/%s.html"):format(location, filename)
 	local file, errmsg = io.open(outputPath, "w")
 	assert(file, errmsg)
 	file:write(html)
