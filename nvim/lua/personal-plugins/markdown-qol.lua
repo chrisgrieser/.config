@@ -399,6 +399,19 @@ function M.previewViaPandoc(css)
 	assert(vim.fn.executable("pandoc") == 1, "`pandoc` not found")
 	local outputPath = "/tmp/markdown-preview.html"
 
+
+	-- <div class="note">
+	-- <div class="title">
+	-- <p>Note</p>
+	-- </div>
+	-- <p>Do not do that.</p>
+	-- </div>
+
+	-- <div class="markdown-alert markdown-alert-note">
+	-- <p class="markdown-alert-title">Note</p>
+	-- <p>foobar
+	-- </div>
+
 	vim.cmd("silent! update")
 	local out = vim.system({
 		"pandoc",

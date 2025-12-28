@@ -2,6 +2,9 @@
 copied at 2025-04-20
 alternative (slightly worse styling): https://github.com/atlekbai/ghpdf/blob/main/src/ghpdf/static/github.css */
 /* ────────────────────────────────────────────────────────────────────────── */
+/* biome-ignore-all lint: vendored code */
+/* ────────────────────────────────────────────────────────────────────────── */
+
 
 /* this block below copypasted from https://github.com/sindresorhus/github-markdown-css?tab=readme-ov-file#usage
    and replaced `.markdown-body` with `body` */
