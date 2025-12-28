@@ -504,7 +504,7 @@ rules:
           - *not-find-mode
           - *no-menu-open
           - *not-German-keyboard
-        # comma: copy filepath
+        # comma: copy absolute path
       - type: basic
         from: { key_code: comma }
         to:
@@ -522,14 +522,14 @@ rules:
               ')
               export LC_CTYPE="en_US.UTF-8" ; printf "$filepath" | pbcopy
               "$HOME/.config/karabiner/assets/finder-vim-mode/notificator" \
-                  --title "✅ Filepath copied" --message "$filepath"
+                  --title "✅ Absolute path copied" --message "$filepath"
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
-      # shift-comma: copy filename
+      # shift-comma: git-relative filename
       - type: basic
         from: { key_code: comma, modifiers: { mandatory: [shift] } }
         to:
           - shell_command: |
-              filepath=$(osascript -e '
+              abs_path=$(osascript -e '
                 tell application "Finder"
                   if (count of (selection as list)) > 0 then
                     set thePath to (item 1 of (get selection) as text)
@@ -539,10 +539,13 @@ rules:
                 end tell
                 return POSIX path of thePath
               ')
-              filename=$(basename "$filepath")
-              export LC_CTYPE="en_US.UTF-8" ; printf "$filename" | pbcopy
+              git_root="$(git -C "$(dirname "$abs_path")" rev-parse --show-toplevel)"
+              if [[ -n "$git_root" ]]; then
+                rel_path=".${abs_path#$git_root}"
+                export LC_CTYPE="en_US.UTF-8" ; printf "$rel_path" | pbcopy
+              fi
               "$HOME/.config/karabiner/assets/finder-vim-mode/notificator" \
-                  --title "✅ Filename copied" --message "$filename"
+                  --title "✅ git-relative path copied" --message "$rel_path"
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
       # p = paste file
       - type: basic

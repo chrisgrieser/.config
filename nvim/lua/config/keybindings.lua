@@ -47,6 +47,9 @@ keymap("x", "-", "<Esc>/\\%V", { desc = " Search within selection" })
 keymap("n", "ge", "]d", { desc = "󰋽 Next diagnostic", remap = true })
 keymap("n", "gE", "[d", { desc = "󰋽 Previous diagnostic", remap = true })
 
+-- [g]oto [m]atching parenthesis (`remap` needed to use builtin `MatchIt` plugin)
+keymap("n", "gm", "%", { desc = "󰅪 Goto match", remap = true })
+
 -- Open URL in file
 -- stylua: ignore
 keymap("n", "<D-U>", function() require("personal-plugins.misc").openFirstUrlInBuffer() end, { desc = " Open URL in buffer" })
@@ -419,18 +422,6 @@ keymap("n", "<leader>rq", function()
 end, { desc = " Switch quotes in line" })
 -- stylua: ignore
 keymap("n", "<leader>rc", function() require("personal-plugins.misc").camelSnakeLspRename() end, { desc = "󰑕 LSP rename: camel/snake" })
-
-keymap("n", "<leader>r<Tab>", function()
-	vim.bo.expandtab = false
-	vim.cmd.retab { bang = true }
-	vim.notify("Now using tabs", nil, { title = ":retab", icon = "󰌒" })
-end, { desc = "󰌒 Use tabs" })
-keymap("n", "<leader>r<Space>", function()
-	vim.bo.expandtab = true
-	vim.bo.shiftwidth = 2
-	vim.cmd.retab { bang = true }
-	vim.notify("Now using spaces (2)", nil, { title = ":retab", icon = "󱁐" })
-end, { desc = "󱁐 Use spaces" })
 
 ---OPTION TOGGLING--------------------------------------------------------------
 keymap("n", "<leader>on", "<cmd>set number!<CR>", { desc = " Line numbers" })
