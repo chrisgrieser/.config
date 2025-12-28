@@ -397,35 +397,38 @@ end
 ---@param css string url or absolute path
 function M.previewViaPandoc(css)
 	assert(vim.fn.executable("pandoc") == 1, "`pandoc` not found")
+	assert(css, "Missing `css` argument.")
 	local outputPath = "/tmp/markdown-preview.html"
 
-
-	-- <div class="note">
-	-- <div class="title">
-	-- <p>Note</p>
-	-- </div>
-	-- <p>Do not do that.</p>
-	-- </div>
-
-	-- <div class="markdown-alert markdown-alert-note">
-	-- <p class="markdown-alert-title">Note</p>
-	-- <p>foobar
-	-- </div>
-
+	local filepath = vim.api.nvim_buf_get_name(0)
 	vim.cmd("silent! update")
 	local out = vim.system({
 		"pandoc",
+		filepath,
 		"--from=gfm+rebase_relative_paths", -- rebasing, so images are available at output location
-		vim.api.nvim_buf_get_name(0),
-		"--output=" .. outputPath,
+		"--to=html",
 		"--standalone",
 		"--css=" .. css,
-		"--title-prefix=Preview from nvim", -- used only in browser tab title
+		"--title-prefix=Preview of " .. vim.fs.basename(filepath), -- used in browser tab title
 	}):wait()
-	if out.code ~= 0 then
-		vim.notify(vim.trim(out.stderr), vim.log.levels.ERROR)
-		return
-	end
+	assert(out.code == 0, vim.trim(out.stderr))
+
+	-- Convert pandoc's output for callouts to the one GitHub uses
+	local callouts = { "note", "warning", "tip", "important", "caution" }
+	local html = out.stdout
+		:gsub('div class="(%a-)"', function(kind)
+			if not vim.table_contains(callouts, kind:lower()) then return end
+			return ('div class="markdown-alert markdown-alert-%s"'):format(kind)
+		end)
+		:gsub('<div class="title">%s*<p>(%a-)</p>%s*</div>', function(kind)
+			if not vim.table_contains(callouts, kind:lower()) then return end
+			return ('<p class="markdown-alert-title">%s</p>'):format(kind)
+		end)
+
+	local file, errmsg = io.open(outputPath, "w")
+	assert(file, errmsg)
+	file:write(html)
+	file:close()
 
 	vim.ui.open(outputPath)
 end

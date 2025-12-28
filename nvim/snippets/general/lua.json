@@ -113,16 +113,10 @@
   },
   "read file": {
     "body": [
-      "---@param filePath string",
-      "---@return string|nil content nil if error",
-      "---@return string|nil errormsg nil if no error",
-      "local function readFile(filePath)",
-      "\tlocal file, err = io.open(filePath, \"r\")",
-      "\tif not file then return nil, err end",
-      "\tlocal content = file:read(\"*a\")",
-      "\tfile:close()",
-      "\treturn content, nil",
-      "end"
+      "local file, errmsg = io.open(${1:path}, \"e\")",
+      "assert(file, errmsg)",
+      "local content = file:read(\"*a\")",
+      "file:close()"
     ],
     "prefix": "read file"
   },
@@ -187,15 +181,10 @@
   },
   "write file": {
     "body": [
-      "---@param path string",
-      "---@param content string",
-      "local function writeFile(path, content)",
-      "\tlocal file = io.open(path, \"w\")",
-      "\tif file then",
-      "\t\tfile:write(content)",
-      "\t\tfile:close()",
-      "\tend",
-      "end"
+      "local file, errmsg = io.open(${1:path}, \"w\")",
+      "assert(file, errmsg)",
+      "file:write(${2:content})",
+      "file:close()"
     ],
     "description": "Overwriting file, for appending use `a` instead of `w`.",
     "prefix": "write file"
