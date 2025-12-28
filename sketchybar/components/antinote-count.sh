@@ -25,11 +25,11 @@ fi
 #───────────────────────────────────────────────────────────────────────────────
 
 sql_path="$HOME/Library/Containers/com.chabomakers.Antinote/Data/Documents/notes.sqlite3"
-antinotes=$(sqlite3 "$sql_path" "SELECT content FROM notes")
-if [[ -z $antinotes ]]; then
+antinotes=$(sqlite3 -json "$sql_path" "SELECT content FROM notes")
+if [[ -z $(echo "$antinotes" | jq --raw-output ".[].content") ]]; then
 	set_empty
 else
-	antinote_count=$(echo "$antinotes" | wc -l | tr -d " ")
+	antinote_count=$(echo "$antinotes" | jq --raw-output ".[] | length")
 	sketchybar --set "$NAME" icon="󰔷" label="$antinote_count" \
 		background.padding_right="10" icon.padding_right="3" label.padding_right="3"
 fi

@@ -1,8 +1,10 @@
 ; extends
 
 ;-------------------------------------------------------------------------------
-; INFO `@markdown.internal_link` needs to be defined manually
-; internal markdown links (= not an URL)
+; add `@markdown.internal_link` to internal links
+; (the highlight for `@markdown.internal_link` needs to be defined manually)
+
+; internal markdown links
 (inline_link
   (link_text) @markdown.internal_link
   (link_destination) @_
@@ -21,5 +23,4 @@
 ; de-emphasize URLs in mdlinks
 (inline_link
   (link_text)
-  (link_destination) @comment
-  (#lua-match? @comment "^http"))
+  (link_destination) @comment)

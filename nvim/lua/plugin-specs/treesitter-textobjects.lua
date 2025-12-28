@@ -1,4 +1,4 @@
--- DOCS https://github.com/nvim-treesitter/nvim-treesitter-textobjects/tree/main#nvim-treesitter-textobjectshttps://github.com/nvim-treesitter/nvim-treesitter-textobjects/tree/main#nvim-treesitter-textobjects
+-- DOCS https://github.com/nvim-treesitter/nvim-treesitter-textobjects/tree/main#nvim-treesitter-textobjects
 --------------------------------------------------------------------------------
 
 local function select(textobj)

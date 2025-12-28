@@ -38,24 +38,25 @@ function getRelativeDate(timestamp) {
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
 	const sqlPath = "$HOME/Library/Containers/com.chabomakers.Antinote/Data/Documents/notes.sqlite3";
-	const sqlQuery = "SELECT id,lastModified,content FROM notes ORDER BY lastModified DESC"
+	const sqlQuery = "SELECT id,lastModified,content FROM notes ORDER BY lastModified DESC";
+	const out = app.doShellScript(`sqlite3 -json "${sqlPath}" "${sqlQuery}"`);
 
+	// DOCS https://antinote.io/user-manual?#url-schemes
 	/** @type {AlfredItem[]} */
-	const alfredItems = app
-		.doShellScript(`sqlite3 "${sqlPath}" "${sqlQuery}"`)
-		.split("\r")
-		.map((item) => {
-			const [id, lastModified, content] = item.split("|");
-			const timestamp = new Date(lastModified + "Z").getTime();
-			return {
-				title: content,
-				subtitle: getRelativeDate(timestamp),
-				arg: id,
-				mods: {
-					cmd: { arg: content }, // copy content
-				},
-			};
-		});
+	const alfredItems = JSON.parse(out).map((/** @type {any} */ item) => {
+		const { id, lastModified, content } = item;
+		const timestamp = new Date(lastModified + "Z").getTime();
+		const title = content.trim().replaceAll("\n", " – ") || "(empty note)";
+
+		return {
+			title: title,
+			subtitle: getRelativeDate(timestamp),
+			arg: id,
+			mods: {
+				cmd: { arg: content }, // copy content
+			},
+		};
+	});
 
 	return JSON.stringify({ items: alfredItems });
 }
