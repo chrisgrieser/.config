@@ -57,10 +57,12 @@ end, { desc = " Add aliases frontmatter" })
 bkeymap("n", "<leader>cu", function() require("personal-plugins.markdown-qol").addTitleToUrl() end, { desc = " Add title to URL" })
 
 -- preview
-bkeymap("n", "<leader>ep", function()
-	local css = vim.env.HOME .. "/.config/pandoc/css/github-markdown.css"
-	require("personal-plugins.markdown-qol").previewViaPandoc(css)
-end, { desc = " Preview" })
+bkeymap(
+	"n",
+	"<leader>ep",
+	function() require("personal-plugins.markdown-qol").previewViaPandoc() end,
+	{ desc = " Preview" }
+)
 
 bkeymap(
 	{ "n", "i" },

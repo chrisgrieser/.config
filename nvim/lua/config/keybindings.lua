@@ -22,8 +22,8 @@ keymap(
 keymap("n", "<leader>pd", function() vim.ui.open(vim.fn.stdpath("data") --[[@as string]]) end, { desc = "󰝰 Local data dir" })
 
 keymap("n", "<D-,>", function()
-	local pathOfThisFile = debug.getinfo(1, "S").source:gsub("^@", "")
-	vim.cmd.edit(pathOfThisFile)
+	local pathOfThisLuaFile = debug.getinfo(1, "S").source:gsub("^@", "")
+	vim.cmd.edit(pathOfThisLuaFile)
 end, { desc = "󰌌 Edit keybindings" })
 
 ---NAVIGATION-------------------------------------------------------------------

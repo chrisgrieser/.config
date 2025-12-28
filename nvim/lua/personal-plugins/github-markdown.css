@@ -11,7 +11,7 @@ alternative (slightly worse styling): https://github.com/atlekbai/ghpdf/blob/mai
 body {
 	box-sizing: border-box;
 	min-width: 200px;
-	/* max-width: 980px; */
+	max-width: 980px;
 	margin: 0 auto;
 	padding: 45px;
 }

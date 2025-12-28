@@ -104,8 +104,8 @@
     "prefix": "nodiscard"
   },
   "path of this file": {
-    "body": "local pathOfThisFile = debug.getinfo(1, \"S\").source:sub(2)",
-    "prefix": "path of this file"
+    "body": "local pathOfThisLuaFile = debug.getinfo(1, \"S\").source:sub(2)",
+    "prefix": "path of this lua file"
   },
   "path separator (os-independent)": {
     "body": "local osPathSep = package.config:sub(1, 1)",

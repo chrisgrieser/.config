@@ -77,7 +77,7 @@ local function openNotif(idx)
 	}
 	vim.api.nvim_win_call(win.win, function()
 		-- emphasize filenames in errors
-		vim.fn.matchadd("@comment.hint", [[[^/]\+\.lua:\d\+\ze:]])
+		vim.fn.matchadd("DiagnosticInfo", [[[^/]\+\.lua:\d\+\ze:]])
 	end)
 end
 

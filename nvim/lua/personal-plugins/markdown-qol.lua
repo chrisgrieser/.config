@@ -394,14 +394,16 @@ function M.cycleList()
 	vim.api.nvim_win_set_cursor(0, { lnum, math.max(1, col + diff) })
 end
 
----@param css string url or absolute path
-function M.previewViaPandoc(css)
+function M.previewViaPandoc()
 	assert(vim.fn.executable("pandoc") == 1, "`pandoc` not found")
-	assert(css, "Missing `css` argument.")
-	local outputPath = "/tmp/markdown-preview.html"
+	local pathOfThisLuaFile = debug.getinfo(1, "S").source:sub(2)
+	local css = vim.fs.dirname(pathOfThisLuaFile) .. "/github-markdown.css"
+	assert(vim.uv.fs_stat(css), "Missing CSS file: " .. css)
+	vim.cmd("silent! update")
 
 	local filepath = vim.api.nvim_buf_get_name(0)
-	vim.cmd("silent! update")
+	local filename = vim.fs.basename(filepath)
+	local outputPath = ("/tmp/%s.html"):format(filename)
 	local out = vim.system({
 		"pandoc",
 		filepath,
@@ -409,28 +411,29 @@ function M.previewViaPandoc(css)
 		"--to=html",
 		"--standalone",
 		"--css=" .. css,
-		"--title-prefix=Preview of " .. vim.fs.basename(filepath), -- used in browser tab title
+		"--title-prefix=Preview of " .. filename, -- used in browser tab title
 	}):wait()
 	assert(out.code == 0, vim.trim(out.stderr))
 
 	-- Convert pandoc's output for callouts to the one GitHub uses
+	-- PENDING https://github.com/jgm/pandoc/issues/11365
 	local callouts = { "note", "warning", "tip", "important", "caution" }
 	local html = out.stdout
 		:gsub('div class="(%a-)"', function(kind)
-			if not vim.table_contains(callouts, kind:lower()) then return end
+			if not vim.list_contains(callouts, kind:lower()) then return end
 			return ('div class="markdown-alert markdown-alert-%s"'):format(kind)
 		end)
 		:gsub('<div class="title">%s*<p>(%a-)</p>%s*</div>', function(kind)
-			if not vim.table_contains(callouts, kind:lower()) then return end
+			if not vim.list_contains(callouts, kind:lower()) then return end
 			return ('<p class="markdown-alert-title">%s</p>'):format(kind)
 		end)
 
+	-- write & open in browser
 	local file, errmsg = io.open(outputPath, "w")
 	assert(file, errmsg)
 	file:write(html)
 	file:close()
-
-	vim.ui.open(outputPath)
+	vim.ui.open(outputPath) -- open in browser
 end
 
 function M.codeBlockFromClipboard()
