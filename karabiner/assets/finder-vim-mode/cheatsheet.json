@@ -235,7 +235,7 @@
     "b\ntoggle  \"-bkp\" suffix",
     "n (N)\nnew file (dir)",
     "m (M)\nmove (to new dir)",
-    ", (⇧,)\nyank path (name)",
+    ", (⇧,)\ncopy abs/rel. path",
     ".\ntoggle hidden files",
     {
       "c": "#ffb896"

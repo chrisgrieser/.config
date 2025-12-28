@@ -543,9 +543,12 @@ rules:
               if [[ -n "$git_root" ]]; then
                 rel_path=".${abs_path#$git_root}"
                 export LC_CTYPE="en_US.UTF-8" ; printf "$rel_path" | pbcopy
-              fi
-              "$HOME/.config/karabiner/assets/finder-vim-mode/notificator" \
+                "$HOME/.config/karabiner/assets/finder-vim-mode/notificator" \
                   --title "✅ git-relative path copied" --message "$rel_path"
+              else
+                "$HOME/.config/karabiner/assets/finder-vim-mode/notificator" \
+                  --title "⚠️ Not in git repo" --message "file: $abs_path"
+              fi
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
       # p = paste file
       - type: basic
