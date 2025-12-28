@@ -22,7 +22,7 @@ fi
 # GUARD if app-switch, only trigger on deactivation of Brave
 if [[ "$SENDER" = "front_app_switched" ]]; then
 	mkdir -p "$HOME/.cache/sketchybar"
-	data="$HOME/.cache/sketchybar/front_app2"
+	data="$HOME/.cache/sketchybar/front_app_$NAME"
 	[[ -f "$data" ]] && deactivated_app=$(<"$data")
 	echo -n "$INFO" >"$data"
 	[[ "$deactivated_app" != "Brave Browser" ]] && return 0

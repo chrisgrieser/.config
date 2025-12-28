@@ -1,7 +1,6 @@
 #!/usr/bin/env zsh
 
-# CONFIG
-list_name="Tasks"
+sql_path="$HOME/Library/Containers/com.chabomakers.Antinote/Data/Documents/notes.sqlite3"
 
 #───────────────────────────────────────────────────────────────────────────────
 function set_empty {
@@ -16,13 +15,13 @@ if [[ $(system_profiler SPDisplaysDataType | grep -c Resolution) -gt 1 ]]; then
 	return
 fi
 
-# GUARD if app-switch, only trigger on deactivation of Reminders or Calendar
+# GUARD if app-switch, only trigger on deactivation of Antinote
 if [[ "$SENDER" = "front_app_switched" ]]; then
 	mkdir -p "$HOME/.cache/sketchybar"
 	data="$HOME/.cache/sketchybar/front_app_$NAME"
 	[[ -f "$data" ]] && deactivated_app=$(< "$data")
 	echo -n "$INFO" > "$data"
-	[[ "$deactivated_app" != "Reminders" && "$deactivated_app" != "Calendar" ]] && return 0
+	[[ "$deactivated_app" != "Antinote" ]] && return 0
 fi
 
 # wait for sync of reminders
@@ -31,10 +30,10 @@ fi
 #───────────────────────────────────────────────────────────────────────────────
 
 # include open reminders yesterday for reminders carrying over
-reminder_count=$(swift ./components/count-reminders.swift "$list_name")
-if [[ $reminder_count -eq 0 ]]; then
+antinote_count=$(sqlite3 "$sql_path" "SELECT content FROM notes")
+if [[ -z $antinote_count ]]; then
 	set_empty
 else
-	sketchybar --set "$NAME" icon="" label="$reminder_count" \
+	sketchybar --set "$NAME" icon="△" label="$antinote_count" \
 		background.padding_right="10" icon.padding_right="3" label.padding_right="3"
 fi
