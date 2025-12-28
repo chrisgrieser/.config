@@ -13,7 +13,7 @@ return {
 				vim.env.HOME .. "/Library/Mobile Documents/**", -- anything in iCloud
 				vim.env.HOME .. "/phd-data-analysis/**",
 				vim.env.HOME .. "/writing-vault/**", -- reports pandoc citations as spelling errors, etc.
-				-- vim.g.notesDir .. "/**", -- too much German
+				vim.g.notesDir .. "/**", -- too much German
 			},
 
 			diagnosticSeverity = "hint",

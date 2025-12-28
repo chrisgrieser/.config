@@ -5,52 +5,52 @@
 --------------------------------------------------------------------------------
 
 local ensureInstalled = {
-	lsps = {
-		"html-lsp",
-		"just-lsp",
-		"ts_query_ls", -- treesitter query files
+	-- LSPS
+	"html-lsp",
+	"just-lsp",
+	"ts_query_ls", -- treesitter query files
 
-		"tombi", -- toml lsp (more modern than taplo)
-		"json-lsp",
-		"yaml-language-server",
-		"gh-actions-language-server", -- github actions
+	"tombi", -- toml lsp (more modern than taplo)
+	"json-lsp",
+	"yaml-language-server",
+	"gh-actions-language-server", -- github actions
 
-		"harper-ls", -- natural language linter
-		"typos-lsp", -- spellchecker for code
-		"marksman", -- markdown lsp
-		"rumdl", -- modern markdownlint
+	"harper-ls", -- natural language linter
+	"ltex-ls-plus", -- natural language linter (LanguageTool, ltex fork)
+	"typos-lsp", -- spellchecker for code
+	"marksman", -- markdown lsp
+	"rumdl", -- modern markdownlint
 
-		"basedpyright", -- python lsp (pyright fork)
-		"ruff", -- python linter & formatter
-		-- "pyrefly", -- python type checker, still alpha
-		-- "ty", -- python type checker, still alpha
+	"basedpyright", -- python lsp (pyright fork)
+	"ruff", -- python linter & formatter
+	-- "pyrefly", -- python type checker, still alpha
+	-- "ty", -- python type checker, still alpha
 
-		"biome", -- ts/js/json/css linter/formatter
-		"eslint-lsp", -- ts/js linter (only Obsidian plugins, otherwise using `biome`)
-		"typescript-language-server",
-		-- "tsgo", -- experimental typescript lsp
+	"biome", -- ts/js/json/css linter/formatter
+	"eslint-lsp", -- ts/js linter (only Obsidian plugins, otherwise using `biome`)
+	"typescript-language-server",
+	-- "tsgo", -- experimental typescript lsp
 
-		"css-lsp",
-		"css-variables-language-server", -- support css variables across multiple files
-		"emmet-language-server", -- css/html snippets
+	"css-lsp",
+	"css-variables-language-server", -- support css variables across multiple files
+	"emmet-language-server", -- css/html snippets
 
-		"stylua", -- lua formatter
-		vim.g.useEmmyluaLsp and "emmylua_ls" or "lua-language-server", -- lua LSP
+	"stylua", -- lua formatter
+	vim.g.useEmmyluaLsp and "emmylua_ls" or "lua-language-server", -- lua LSP
 
-		"bash-language-server", -- also used for zsh
-		"efm", -- integration of external linters
-		"shellcheck", -- shell linter (via efm) PENDING https://github.com/bash-lsp/bash-language-server/issues/663
-		"shfmt", -- shell formatter (via bashls)
-	},
-	debuggers = {
-		"debugpy", -- python
-		"js-debug-adapter", -- js/ts
-		"local-lua-debugger-vscode", -- lua
-	},
-	other = {
-		"markdown-toc", -- automatic table-of-contents via conform.nvim
-		"tree-sitter-cli", -- used by nvim-treesitter to install parsers
-	},
+	"bash-language-server", -- also used for zsh
+	"efm", -- integration of external linters
+	"shellcheck", -- shell linter (via efm) PENDING https://github.com/bash-lsp/bash-language-server/issues/663
+	"shfmt", -- shell formatter (via bashls)
+
+	-- DEBUGGERS
+	"debugpy", -- python
+	"js-debug-adapter", -- js/ts
+	"local-lua-debugger-vscode", -- lua
+
+	-- OTHER
+	"markdown-toc", -- automatic table-of-contents via conform.nvim
+	"tree-sitter-cli", -- used by nvim-treesitter to install parsers
 }
 
 local nonMasonLsps = {
@@ -105,16 +105,13 @@ end
 -- 2. update installed ones
 -- 3. uninstall unused packages
 local function syncPackages()
-	local ensurePacks = vim.iter(vim.tbl_values(ensureInstalled)):flatten():totable()
 	local masonReg = require("mason-registry")
 
 	masonReg.refresh(function(ok, _)
-		if not ok then
-			notify("Could not update mason registry.", "error")
-			return
-		end
+		assert(ok, "Could not refresh mason registry.")
+
 		-- auto-install missing packages & auto-update installed ones
-		vim.iter(ensurePacks):each(function(packName)
+		vim.iter(ensureInstalled):each(function(packName)
 			if not masonReg.has_package(packName) then
 				local msg = ("No package [%s] available."):format(packName)
 				vim.notify(msg, vim.log.levels.WARN, { title = "mason" })
@@ -131,10 +128,10 @@ local function syncPackages()
 		end)
 
 		-- auto-clean unused packages
-		assert(#ensurePacks > 10, "< 10 mason packages, aborting uninstalls.")
+		assert(#ensureInstalled > 10, "< 10 mason packages, aborting uninstalls.")
 		local installedPackages = masonReg.get_installed_package_names()
 		vim.iter(installedPackages):each(function(packName)
-			if vim.tbl_contains(ensurePacks, packName) then return end
+			if vim.tbl_contains(ensureInstalled, packName) then return end
 			masonReg.get_package(packName):uninstall({}, function(success, error)
 				local lvl = success and "info" or "error"
 				local msg = success and ("[%s] uninstalled."):format(packName)
@@ -169,10 +166,7 @@ return {
 			height = 0.85,
 			width = 0.8,
 			backdrop = 60,
-			icons = {
-				package_installed = "✓",
-				package_pending = "󰔟",
-			},
+			icons = { package_installed = "✓", package_pending = "󰔟" },
 			keymaps = { -- consistent with keymaps for lazy.nvim
 				uninstall_package = "x",
 				toggle_help = "?",

@@ -4,53 +4,52 @@
 --------------------------------------------------------------------------------
 
 local ensureInstalled = {
-	programmingLangs = {
-		"zsh",
-		"javascript",
-		"typescript",
-		"lua",
-		"python",
-		"ruby", -- used by `Brewfile`
-		"rust",
-		"svelte",
-		"swift",
-		"vim",
-	},
-	dataFormats = {
-		"json",
-		"toml",
-		"xml", -- also used by .plist and .svg files, since they are basically xml
-		"yaml",
-		"bibtex",
-	},
-	content = {
-		"css",
-		"html",
-		"markdown",
-		"markdown_inline",
-	},
-	specialFiletypes = {
-		"diff",
-		"editorconfig",
-		"git_config",
-		"git_rebase",
-		"gitattributes",
-		"gitcommit",
-		"gitignore",
-		"just",
-		"query", -- treesitter query files (.scm)
-		"requirements", -- python's `requirements.txt`
-		"vimdoc", -- `:help` files
-	},
-	embeddedLangs = {
-		"comment",
-		"graphql",
-		"jsdoc",
-		"luadoc",
-		"luap", -- lua patterns
-		"regex",
-		"bash", -- embedded in GitHub Actions, etc.
-	},
+	-- PROGRAMMING LANGS
+	"zsh",
+	"javascript",
+	"typescript",
+	"lua",
+	"python",
+	"ruby", -- used by `Brewfile`
+	"rust",
+	"svelte",
+	"swift",
+	"vim",
+
+	-- DATAFORMATS
+	"json",
+	"toml",
+	"xml", -- also used by .plist and .svg files, since they are basically xml
+	"yaml",
+	"bibtex",
+
+	-- CONTENT
+	"css",
+	"html",
+	"markdown",
+	"markdown_inline",
+
+	-- SPECIAL FILETYPES
+	"diff",
+	"editorconfig",
+	"git_config",
+	"git_rebase",
+	"gitattributes",
+	"gitcommit",
+	"gitignore",
+	"just",
+	"query", -- treesitter query files (.scm)
+	"requirements", -- python's `requirements.txt`
+	"vimdoc", -- `:help` files
+
+	-- EMBEDDED LANGUAGES
+	"comment",
+	"graphql",
+	"jsdoc",
+	"luadoc",
+	"luap", -- lua patterns
+	"regex",
+	"bash", -- embedded in GitHub Actions, etc.
 }
 
 --------------------------------------------------------------------------------
@@ -65,8 +64,7 @@ return {
 	init = function()
 		-- auto-install parsers (no-op if already installed)
 		if vim.fn.executable("tree-sitter") == 1 then
-			local parsersToInstall = vim.iter(vim.tbl_values(ensureInstalled)):flatten():totable()
-			vim.defer_fn(function() require("nvim-treesitter").install(parsersToInstall) end, 2000)
+			vim.defer_fn(function() require("nvim-treesitter").install(ensureInstalled) end, 2000)
 		else
 			local msg = "`tree-sitter-cli` not found. Skipping auto-install of parsers."
 			vim.notify(msg, vim.log.levels.WARN, { title = "Treesitter" })

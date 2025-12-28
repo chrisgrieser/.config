@@ -5,11 +5,13 @@ local M = {}
 ---@param startWrap string|"mdlink"
 ---@param endWrap? string defaults to `startWrap`
 function M.wrap(startWrap, endWrap)
+	---@type fun(msg: string): nil
+	local function warn(msg) vim.notify(msg, vim.log.levels.WARN) end
+
 	if not endWrap then endWrap = startWrap end
 	local mode = vim.fn.mode()
 	if mode == "V" then
-		vim.notify("Visual line mode not supported", vim.log.levels.WARN)
-		return
+		return warn("Visual mode not supported")
 	end
 	local row, col = unpack(vim.api.nvim_win_get_cursor(0))
 	local useBigWord = startWrap == "`"
@@ -221,14 +223,14 @@ function M.followMdlinkOrWikilink()
 end
 --------------------------------------------------------------------------------
 
----@param currentFilepath? string
+---@param filepath? string
 ---@return string pattern
-local function getBacklinkRegex(currentFilepath)
-	local path = currentFilepath or vim.api.nvim_buf_get_name(0)
-	local basename = vim.fs.basename(path):gsub("%.md$", "")
+local function getBacklinkRegex(filepath)
+	if not filepath then filepath = vim.api.nvim_buf_get_name(0) end
+	local basename = vim.fs.basename(filepath):gsub("%.md$", "")
 	local wikilinkPattern = "\\[\\[" .. vim.fn.escape(basename, "\\") .. "([#|].*)?\\]\\]"
 	local cwd = assert(vim.uv.cwd(), "cwd not found")
-	local relpathEncoded = vim.uri_encode(path:sub(#cwd + 1)):gsub("%%%w%w", string.upper)
+	local relpathEncoded = vim.uri_encode(filepath:sub(#cwd + 1)):gsub("%%%w%w", string.upper)
 	local mdlinkPattern = "\\]\\(" .. "\\.?" .. relpathEncoded .. "\\)"
 	return wikilinkPattern .. "|" .. mdlinkPattern
 end
@@ -316,10 +318,7 @@ function M.renameAndUpdateWikilinks()
 				local old = vim.startswith(origText, "[[") and oldName or vim.uri_encode(oldName)
 				local new = vim.startswith(origText, "[[") and newName or vim.uri_encode(newName)
 				local replacement = origText:gsub(vim.pesc(old), vim.pesc(new))
-				if replacement == origText then
-					vim.notify(("Link %s could not be updated."):format(origText), vim.log.levels.WARN)
-					return
-				end
+				if replacement == origText then err(("Link %s not be updated."):format(origText)) end
 				table.insert(textDocumentEdits.edits, {
 					newText = replacement,
 					range = {
@@ -411,12 +410,11 @@ function M.previewViaPandoc()
 		"--to=html",
 		"--standalone",
 		"--css=" .. css,
-		"--title-prefix=" .. filename, -- used in browser tab title
+		"--title-prefix=" .. filename, -- used as browser tab title
 	}):wait()
 	assert(out.code == 0, vim.trim(out.stderr))
 
 	-- Convert pandoc's output for callouts to the one GitHub uses
-	-- PENDING https://github.com/jgm/pandoc/issues/11365
 	local callouts = { "note", "warning", "tip", "important", "caution" }
 	local html = out.stdout
 		:gsub('div class="(%a-)"', function(kind)
