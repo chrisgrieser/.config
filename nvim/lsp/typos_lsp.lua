@@ -4,7 +4,7 @@
 ---@type vim.lsp.Config
 return {
 	init_options = {
-		diagnosticSeverity = "Hint",
+		diagnosticSeverity = "Warning",
 		config = vim.fn.stdpath("config") .. "/lsp/typos_lsp_global_config.toml",
 	},
 }
