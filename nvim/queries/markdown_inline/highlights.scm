@@ -17,7 +17,7 @@
   (shortcut_link
     (link_text) @markdown.internal_link)
   "]" @markup.link
-  (#set! priority 130)) ; priority to overwrite LSP highlight
+  (#set! priority 130)) ; priority to overwrite LSP highlight from `marksman`
 
 ;-----------------------------------------------------------------------------
 ; de-emphasize URLs in mdlinks
