@@ -9,11 +9,11 @@
 			<key>enabled</key>
 			<true/>
 			<key>keyword</key>
-			<string>utf</string>
+			<string>utf||icon</string>
 			<key>text</key>
-			<string>UTF characters: '{query}'</string>
+			<string>Unicode chars: '{query}'</string>
 			<key>url</key>
-			<string>https://www.compart.com/en/unicode/search?q={query}</string>
+			<string>https://unicode-explorer.com/search/?q={query}</string>
 		</dict>
 		<key>01B6F235-3466-4ACA-9EF1-12A595817B41</key>
 		<dict>

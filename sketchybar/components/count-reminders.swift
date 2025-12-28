@@ -47,6 +47,7 @@ eventStore.requestFullAccessToReminders { granted, error in
 			return
 		}
 
+		// include open reminders yesterday for reminders carrying over
 		let remindersDueNow = reminders.filter { rem in
 			if rem.isCompleted { return false }
 			return (rem.dueDateComponents?.date ?? Date.distantFuture) <= Date.now

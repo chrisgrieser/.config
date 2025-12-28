@@ -1,8 +1,5 @@
 #!/usr/bin/env zsh
 
-sql_path="$HOME/Library/Containers/com.chabomakers.Antinote/Data/Documents/notes.sqlite3"
-
-#───────────────────────────────────────────────────────────────────────────────
 function set_empty {
 	# setting padding needed, since `drawing=false` is buggy
 	sketchybar --set "$NAME" label="" icon="" \
@@ -22,18 +19,17 @@ if [[ "$SENDER" = "front_app_switched" ]]; then
 	[[ -f "$data" ]] && deactivated_app=$(< "$data")
 	echo -n "$INFO" > "$data"
 	[[ "$deactivated_app" != "Antinote" ]] && return 0
+	sleep 1 # wait for database update
 fi
-
-# wait for sync of reminders
-[[ "$SENDER" == "system_woke" ]] && sleep 5
 
 #───────────────────────────────────────────────────────────────────────────────
 
-# include open reminders yesterday for reminders carrying over
-antinote_count=$(sqlite3 "$sql_path" "SELECT content FROM notes")
-if [[ -z $antinote_count ]]; then
+sql_path="$HOME/Library/Containers/com.chabomakers.Antinote/Data/Documents/notes.sqlite3"
+antinotes=$(sqlite3 "$sql_path" "SELECT content FROM notes")
+if [[ -z $antinotes ]]; then
 	set_empty
 else
-	sketchybar --set "$NAME" icon="△" label="$antinote_count" \
+	antinote_count=$(echo "$antinotes" | wc -l | tr -d " ")
+	sketchybar --set "$NAME" icon="󰔷" label="$antinote_count" \
 		background.padding_right="10" icon.padding_right="3" label.padding_right="3"
 fi

@@ -30,8 +30,7 @@ fi
 
 #───────────────────────────────────────────────────────────────────────────────
 
-# include open reminders yesterday for reminders carrying over
-reminder_count=$(swift ./components/count-reminders.swift "$list_name")
+reminder_count=$(swift "$HOME/.config/sketchybar/components/count-reminders.swift" "$list_name")
 if [[ $reminder_count -eq 0 ]]; then
 	set_empty
 else

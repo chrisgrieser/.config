@@ -3,6 +3,7 @@
 # CONFIG
 nerd_font="JetBrainsMonoNL NF:Regular:16"
 system_font="Lucida Grande:Regular:16.5"
+comps="$HOME/.config/sketchybar/components"
 
 # switch colors depending on dark mode
 if defaults read -g AppleInterfaceStyle &> /dev/null; then
@@ -42,26 +43,26 @@ sketchybar \
 	\
 	--add item clock $row_1 \
 	--set clock update_freq="1" padding_left="10" padding_right="12" \
-	script="./components/clock.sh" \
+	script="$comps/clock.sh" \
 	\
 	--add item weather $row_1 \
 	--set weather update_freq="1200" icon.y_offset="-1" \
-	script="./components/weather.sh" \
+	script="$comps/weather.sh" \
 	\
 	--add item reminders_count $row_1 \
 	--set reminders_count update_freq="300" \
-	script="./components/reminders_count.sh" \
+	script="$comps/reminders_count.sh" \
 	--add event update_reminder_count --subscribe reminders_count update_reminder_count \
 	--subscribe reminders_count system_woke front_app_switched \
 	\
 	--add item antinote_count $row_1 \
-	--set antinote_count update_freq="300" \
-	script="./components/antinote-count.sh" \
+	--set antinote_count update_freq="150" \
+	script="$comps/antinote-count.sh" \
 	--subscribe antinote_count system_woke front_app_switched \
 	\
 	--add item github_notif $row_1 \
-	--set github_notif update_freq="300" \
-	script="./components/github_notification_count.sh" \
+	--set github_notif update_freq="150" \
+	script="$comps/github_notification_count.sh" \
 	click_script="open 'https://github.com/notifications'" \
 	--add event update_github_notif --subscribe github_notif update_github_notif \
 	--subscribe github_notif system_woke front_app_switched \
@@ -71,20 +72,20 @@ sketchybar \
 	--add item ram $row_2 \
 	--set ram padding_left="14" update_freq="5" \
 	icon.font="${nerd_font/[0-9]*/20.5}" label.padding_right="0" icon.padding_right="0" \
-	script="./components/ram.sh" \
+	script="$comps/ram.sh" \
 	\
 	--add graph cpu_graph $row_2 40 \
 	--set cpu_graph update_freq="3" \
 	background.height="18" background.color="$bg" graph.color="0x00000000" \
-	script="./components/cpu.sh" \
+	script="$comps/cpu.sh" \
 	\
 	--add item network_download $row_2 \
 	--set network_download update_freq="4" \
-	script="./components/network_download.sh" \
+	script="$comps/network_download.sh" \
 	\
 	--add item sync_indicator $row_2 \
 	--set sync_indicator update_freq="180" \
-	script="./components/git_sync_bar_icon.sh" \
+	script="$comps/git_sync_bar_icon.sh" \
 	--add event sync_indicator \
 	--subscribe sync_indicator system_woke sync_indicator \
 	\
