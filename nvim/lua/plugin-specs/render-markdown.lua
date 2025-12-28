@@ -20,6 +20,10 @@ return {
 		html = {
 			comment = { text = "󰆈" }, -- PENDING https://github.com/MeanderingProgrammer/render-markdown.nvim/issues/574
 		},
+		pipe_table = {
+			border_enabled = true,
+			border_virtual = true, -- borders not on empty lines -> preserves blank lines
+		},
 		heading = {
 			position = "inline", -- = remove indentation of headings
 			width = "block", -- = not full width

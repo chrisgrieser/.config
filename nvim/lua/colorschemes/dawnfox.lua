@@ -40,6 +40,8 @@ return {
 				["Operator"] = { fg = "#846a52" },
 				["@string.special.url.comment"] = { style = "underline" },
 				["@markup.link.label.markdown_inline"] = { fg = "palette.orange.dim" }, -- for md in notifications
+				["@markup.link"] = { style = "" }, -- no bold
+				["@markup.link.url"] = { style = "" }, -- no italic
 				["@markup.strong"] = { fg = "palette.blue", style = "bold" },
 				["Added"] = { link = "diffAdded" },
 				["Removed"] = { link = "diffRemoved" },

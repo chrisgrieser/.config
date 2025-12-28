@@ -2,7 +2,7 @@
 local function gotoBreakpoint(dir)
 	local breakpoints = require("dap.breakpoints").get()
 	local noBreakpoints = #vim.iter(breakpoints):totable() == 0 -- vim.iter needed for sparse array
-	if noBreakpoints == 0 then
+	if noBreakpoints then
 		vim.notify("No breakpoints set", vim.log.levels.WARN, { icon = "󰃤", "dap" })
 		return
 	end

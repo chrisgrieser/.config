@@ -7,7 +7,7 @@
   (link_text) @markdown.internal_link
   (link_destination) @_
   (#lua-match? @_ "%.md$")
-  (#not-lua-match? @_ "^https?://"))
+  (#not-lua-match? @_ "^http"))
 
 ; wikilinks
 (inline
@@ -21,4 +21,5 @@
 ; de-emphasize URLs in mdlinks
 (inline_link
   (link_text)
-  (link_destination) @comment)
+  (link_destination) @comment
+  (#lua-match? @comment "^http"))
