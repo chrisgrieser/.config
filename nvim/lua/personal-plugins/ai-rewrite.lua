@@ -24,18 +24,27 @@ local config = {
 			Follow the task and rewrite the code.
 			- Output nothing but the code, if not stated otherwise.
 			- Do not add Markdown code fences.
+			- Restpect the indentation used in the original code.
 		]],
 		tasks = {
 			simplify = [[Simplify the code without diminishing its readability.]],
-			fix = [[Fix any mistake in the following code.
+			fix = [[
+				Fix any mistake in the following code.
 				Add a leading comment with a bullet list of what has been changed.
 			]],
 		},
 	},
 	postSuccess = {
 		showCostIfHigherThan = 0.001,
-		lspRangeFormat = false, -- if LSP server supports `textDocument/rangeFormatting`
+		lspRangeFormat = true, -- if LSP server supports `textDocument/rangeFormatting`
 		sound = true, -- currently macOS only
+		hook = function()
+			local ok, gitsigns = pcall(require, "gitsigns")
+			if not ok then return end
+			vim.cmd.normal { "k", bang = true } -- in case cursor is already at hunk start
+			gitsigns.nav_hunk("next")
+			vim.defer_fn(gitsigns.preview_hunk_inline, 100) -- `nav_hunk` is async without callback
+		end,
 	},
 }
 
@@ -51,6 +60,8 @@ local function notify(msg, level, opts)
 	vim.notify(msg, vim.log.levels[level:upper()], opts)
 end
 
+---@param task string one of the keys of `opts.prompt.tasks`
+---@return nil
 function M.rewrite(task)
 	local ctx = {
 		bufnr = vim.api.nvim_get_current_buf(),
@@ -68,12 +79,14 @@ function M.rewrite(task)
 	-- SELECTION
 	local mode = vim.fn.mode()
 	assert(mode:find("[nV]"), "Only normal and visual line mode are supported.")
+	local prevCursor = vim.api.nvim_win_get_cursor(0)
 	if mode == "n" then vim.cmd.normal { "Vip", bang = true } end
 	local startPos, endPos = vim.fn.getpos("."), vim.fn.getpos("v")
 	local startRow, endRow = startPos[2], endPos[2]
 	local selectionLines = vim.fn.getregion(startPos, endPos)
 	local selection = table.concat(selectionLines, "\n")
 	vim.cmd.normal { "V", bang = true } -- leave visual line mode
+	if mode == "n" then vim.api.nvim_win_set_cursor(ctx.winid, prevCursor) end
 	if startRow > endRow then -- selection was reversed
 		startRow, endRow = endRow, startRow
 	end
@@ -91,7 +104,7 @@ function M.rewrite(task)
 		notify(msg, "warn")
 		return
 	end
-	taskPrompt = "The task is: " .. taskPrompt
+	taskPrompt = "The task is: " .. vim.trim(taskPrompt)
 
 	-- PREPARE REQUEST
 	-- DOCS Responses API https://platform.openai.com/docs/api-reference/responses/get
@@ -116,7 +129,7 @@ function M.rewrite(task)
 
 	-- START NOTIFICATION / SPINNER
 	local timer
-	local staticMsg = ("%s (%s)"):format(task, model)
+	local staticMsg = ("[%s] %s"):format(task, model)
 	if package.loaded["snacks"] then
 		local spinners = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" }
 		local updateIntervalMs = 250
@@ -137,7 +150,7 @@ function M.rewrite(task)
 	-- SIGNS
 	local ns = vim.api.nvim_create_namespace("ai-rewrite")
 	vim.api.nvim_buf_set_extmark(ctx.bufnr, ns, startRow - 1, 0, {
-		sign_text = "┃" .. config.appearance.icon,
+		sign_text = "┃" .. config.appearance.icon, -- first line also gets icon
 		sign_hl_group = config.appearance.signHlgroup,
 	})
 	vim.api.nvim_buf_set_extmark(ctx.bufnr, ns, startRow, 0, {
@@ -161,7 +174,7 @@ function M.rewrite(task)
 			local msg = "✅ " .. staticMsg
 			local cost = (resp.usage.input_tokens / 1000 / 1000) * config.openai.costPerMilTokens.input
 				+ (resp.usage.output_tokens / 1000 / 1000) * config.openai.costPerMilTokens.output
-			if config.postSuccess.showCostIfHigherThan > cost then
+			if cost > config.postSuccess.showCostIfHigherThan then
 				msg = msg .. ("\n\n(cost: %s$)"):format(cost)
 			end
 			notify(msg, "info", { id = "ai-rewrite" })
@@ -199,6 +212,7 @@ function M.rewrite(task)
 					vim.system { "afplay", "--volume", "0.4", sound }
 				end
 			end
+			config.postSuccess.hook()
 		end)
 	)
 end

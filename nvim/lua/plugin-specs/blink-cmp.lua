@@ -90,7 +90,6 @@ return {
 				direction_priority = { "s", "n" }, -- south first, to not block existing code
 				show_documentation = true,
 				winhighlight = "Normal:ColorColumn", -- usually darker, so more contrast
-				border = "none", -- should be small since it appears so often
 			},
 		},
 		completion = {
