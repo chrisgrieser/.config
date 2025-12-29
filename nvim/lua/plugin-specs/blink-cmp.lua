@@ -86,11 +86,11 @@ return {
 			},
 			window = {
 				max_width = 65,
-				-- max_height = 5,
+				max_height = 12,
 				direction_priority = { "s", "n" }, -- south first, to not block existing code
-				show_documentation = true, -- show larger documentation regular signature help
-				-- winhighlight = "Normal:ColorColumn", -- usually darker, so more contrast
-				-- border = "none", -- should be small since it appears so often
+				show_documentation = true,
+				winhighlight = "Normal:ColorColumn", -- usually darker, so more contrast
+				border = "none", -- should be small since it appears so often
 			},
 		},
 		completion = {

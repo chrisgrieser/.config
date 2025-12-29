@@ -11,7 +11,9 @@ local config = {
 		You are an export developer {{filetype}} developer.
 
 		I will send you some code, and I want you to simplify the code while not
-		diminishing its readability.
+		diminishing its readability. 
+
+		Output nothing but the simplified code.
 	]],
 	postSuccessHook = function(bufnr)
 		if jit.os == "OSX" then -- using macOS' `afplay`
@@ -34,25 +36,26 @@ function M.rewrite()
 	local file, errmsg = io.open(vim.fs.normalize(config.openai.apiKeyFile), "r")
 	assert(file, errmsg)
 	local openaiApiKey = file:read("*a")
-	Chainsaw(openaiApiKey) -- 🪚
 	file:close()
 
 	-- SELECTION
+	local mode = vim.fn.mode()
+	assert(mode:find("[nvV]"), "Only normal and visual modes are supported.")
+	if mode == "n" then vim.cmd.normal { "vip", bang = true } end
 	local selectionLines = vim.fn.getregion(vim.fn.getpos("."), vim.fn.getpos("v"))
 	local selection = table.concat(selectionLines, "\n")
-	local mode = vim.fn.mode()
-	if mode:find("[Vv]") then vim.cmd.normal { mode, bang = true } end -- leave visual mode
+	vim.cmd.normal { vim.fn.mode(), bang = true } -- leave visual mode
 
 	-- PROMPTS
-	local systemPrompt = config.systemPrompt:gsub("{{filetype}}", vim.bo.filetype)
+	local systemPrompt = vim.trim(config.systemPrompt):gsub("{{filetype}}", vim.bo.ft)
 	local userPrompt = ([[```{{filetype}}\n{{selection}}\n```]])
-		:gsub("{{filetype}}", vim.bo.filetype)
+		:gsub("{{filetype}}", vim.bo.ft)
 		:gsub("{{selection}}", vim.pesc(selection))
 
 	-- SEND REQUEST
 	-- DOCS https://platform.openai.com/docs/api-reference/responses/get
 	local url = "https://api.openai.com/v1/responses"
-	local timeoutSecs = 30
+	local timeoutSecs = 15
 	local data = {
 		model = config.openai.model,
 		reasoning = { effort = config.openai.reasoningEffort },
@@ -61,19 +64,25 @@ function M.rewrite()
 			{ role = "user", content = userPrompt },
 		},
 	}
-	local dataEnc = vim.json.encode(data)
-
 	-- stylua: ignore
-	local out = vim.system ({
+	local curlArgs = {
 		"curl", "--silent", "--max-time", tostring(timeoutSecs), url,
 		"--header", "Content-Type: application/json",
 		"--header", "Authorization: Bearer " .. openaiApiKey,
-		"--data", "-@", -- `-@` -> read from stdin
-	}, { stdin = dataEnc }):wait()
+		"--data", vim.json.encode(data),
+	}
+
+	local out = vim.system(curlArgs):wait()
 	assert(out.code == 0, "OpenAI request failed: " .. out.stderr)
-	local response = vim.json.decode(out.stdout)
-	if response.error then error(response.error.message) end
-	Chainsaw(response) -- 🪚
+	local response = vim.json.decode(out.stdout, { luanil = { object = true } })
+	if response.error then
+		vim.notify(response.error.message, vim.log.levels.ERROR)
+		return
+	end
+	local answer = response.output[2].content[1].text
+	Chainsaw(answer) -- 🪚
+	local cost = response.usage.total_tokens * costPerToken
+	Chainsaw(cost) -- 🪚
 end
 
 --------------------------------------------------------------------------------
