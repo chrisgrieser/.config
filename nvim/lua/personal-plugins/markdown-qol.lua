@@ -313,12 +313,16 @@ function M.renameAndUpdateWikilinks()
 				edits = {},
 			}
 			for _, submatch in ipairs(o.data.submatches) do
-				local origText = submatch.match.text
-				local replacement = origText:gsub(vim.pesc(oldName), vim.pesc(newName))
-				local isMdlink = not vim.startswith(origText, "[[")
-				if isMdlink then
-					local old, new = vim.uri_encode(oldName), vim.uri_encode(newName)
-					replacement = origText:gsub(vim.pesc(old), vim.pesc(new))
+				local origText, replacement = submatch.match.text, ""
+				if vim.startswith(origText, "[[") then
+					replacement = origText:gsub(vim.pesc(oldName), vim.pesc(newName))
+				else
+					replacement = origText:gsub("%[(.-)%]%((.-)%)", function(label, destination)
+						local oldEncoded, newEncoded = vim.uri_encode(oldName), vim.uri_encode(newName)
+						destination = destination:gsub(vim.pesc(oldEncoded), vim.pesc(newEncoded))
+						label = label:gsub(vim.pesc(oldName), vim.pesc(newName))
+						return ("[%s](%s)"):format(label, destination)
+					end)
 				end
 				if replacement == origText then err(("Link %s not be updated."):format(origText)) end
 				table.insert(textDocumentEdits.edits, {

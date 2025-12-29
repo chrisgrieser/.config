@@ -391,24 +391,24 @@ return {
 					layout = { preset = "big_preview", hidden = { "preview" } },
 				},
 				git_status = {
-					layout = "big_preview",
+					layout = "big_vertical",
 					win = {
 						input = {
 							keys = {
 								-- <CR> opens the file as usual
-								["<Tab>"] = { "list_down_wrapping", mode = "i" },
+								["<Tab>"] = { "list_down", mode = "i" },
 								["<Space>"] = { "git_stage", mode = "i" },
 							},
 						},
 					},
 				},
 				git_diff = {
-					layout = "big_preview",
+					layout = "big_vertical",
 					win = {
 						input = {
 							keys = {
 								-- <CR> opens the file as usual
-								["<Tab>"] = { "list_down_wrapping", mode = "i" },
+								["<Tab>"] = { "list_down", mode = "i" },
 								["<Space>"] = { "git_stage", mode = "i" },
 							},
 						},
@@ -503,13 +503,24 @@ return {
 						[2] = { width = 0.6 }, -- second win is the preview
 					},
 				},
+				big_vertical = {
+					preview = "main",
+					cycle = true, -- `list_(down|up)` action wraps
+
+					layout = {
+						bo
+						title = "{title} {live} {flags}",
+						{ win = "list", border = "none" },
+						{ win = "input", height = 1, border = "bottom" },
+					},
+				},
 			},
 			win = {
 				input = {
 					keys = {
 						["<Esc>"] = { "close", mode = "i" }, --> disable normal mode
 						["<CR>"] = { "confirm", mode = "i" },
-						["<Tab>"] = { "list_down_wrapping", mode = "i" },
+						["<Tab>"] = { "list_down", mode = "i" },
 						["<S-Tab>"] = { "list_up", mode = "i" },
 						["<C-v>"] = { "edit_vsplit", mode = "i" },
 						["<D-Up>"] = { "list_top", mode = "i" },
@@ -547,7 +558,7 @@ return {
 						["gg"] = "list_top",
 						["j"] = "list_down",
 						["k"] = "list_up",
-						["<Tab>"] = "list_down_wrapping",
+						["<Tab>"] = "list_down",
 						["<S-Tab>"] = "list_up",
 						["q"] = "close",
 						["<Esc>"] = "close",
@@ -562,8 +573,8 @@ return {
 				preview = { keys = { ["<C-CR>"] = { "cycle_win" } } },
 			},
 			actions = {
-				-- override snack's yank function to make it cleaner
 				yank = function(picker, item, action)
+					-- override snack's yank function to make it cleaner
 					if not item then return end
 					local reg = action.reg or vim.v.register
 					local value = item[action.field] or item.data or item.text
@@ -591,12 +602,6 @@ return {
 					vim.cmd.normal { "zv", bang = true } -- open folds
 
 					vim.api.nvim_exec_autocmds("QuickFixCmdPost", {})
-				end,
-				list_down_wrapping = function(picker, _item, _action)
-					local allVisible = #picker.list.items -- picker:count() only counts unfiltered
-					local current = picker.list.cursor -- picker:current().idx incorrect for `smart` source
-					local action = current == allVisible and "list_top" or "list_down"
-					picker:action(action)
 				end,
 			},
 			prompt = "  ", -- 
