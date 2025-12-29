@@ -16,6 +16,7 @@ local config = {
 	appearance = {
 		icon = "󰚩",
 		signHlgroup = "DiagnosticSignInfo",
+		spinnerDuringRequest = true, -- requires notifier from `snacks.nvim`
 	},
 	prompt = {
 		system = [[
@@ -43,7 +44,7 @@ local config = {
 			if not ok then return end
 			vim.cmd.normal { "k", bang = true } -- in case cursor is already at hunk start
 			gitsigns.nav_hunk("next")
-			vim.defer_fn(gitsigns.preview_hunk_inline, 100) -- `nav_hunk` is async without callback
+			vim.defer_fn(gitsigns.preview_hunk_inline, 100) -- `nav_hunk` has no callback but is async…
 		end,
 	},
 }
@@ -130,7 +131,7 @@ function M.rewrite(task)
 	-- START NOTIFICATION / SPINNER
 	local timer
 	local staticMsg = ("[%s] %s"):format(task, model)
-	if package.loaded["snacks"] then
+	if package.loaded["snacks"] and config.appearance.spinnerDuringRequest then
 		local spinners = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" }
 		local updateIntervalMs = 250
 		timer = assert(vim.uv.new_timer())
