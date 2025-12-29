@@ -177,10 +177,10 @@ return {
 		{ "gs", function() Snacks.picker.lsp_symbols() end, ft = "markdown", desc = "󰽛 Headings" },
 
 		---GIT--------------------------------------------------------------------
-		{ "<leader>gs", function() Snacks.picker.git_status() end, desc = "󰗲 Status" },
-		{ "<leader>gl", function() Snacks.picker.git_log() end, desc = "󰗲 Log" },
 		{ "<leader>ga", function() Snacks.picker.git_diff() end, desc = "󰐖 Hunks" },
-		{ "<leader>gb", function() Snacks.picker.git_branches() end, desc = "󰗲 Branches" },
+		{ "<leader>gA", function() Snacks.picker.git_status() end, desc = "󰐖 Files" },
+		{ "<leader>gl", function() Snacks.picker.git_log() end, desc = "󱎸 Log" },
+		{ "<leader>gb", function() Snacks.picker.git_branches() end, desc = "󰘬 Branches" },
 		{ "<leader>gi", function() Snacks.picker.gh_issue() end, desc = " GitHub issues (open)" },
 		-- stylua: ignore
 		{ "<leader>gI", function() Snacks.picker.gh_issue { state = "all" } end, desc = " GitHub issues (all)" },
@@ -395,6 +395,7 @@ return {
 					win = {
 						-- <CR> opens the file as usual
 						list = { keys = { ["<Space>"] = "git_stage" } },
+						preview = { keys = { ["<Space>"] = "git_stage" } },
 					},
 				},
 				git_diff = {
@@ -402,6 +403,7 @@ return {
 					win = {
 						-- <CR> opens the file as usual
 						list = { keys = { ["<Space>"] = "git_stage" } },
+						preview = { keys = { ["<Space>"] = "git_stage" } },
 					},
 				},
 				gh_issue = { layout = "big_preview" },
@@ -496,15 +498,12 @@ return {
 				sidebar = {
 					preview = "main",
 					cycle = true, -- `list_(down|up)` action wraps
-					auto_hide = { "input" },
 					layout = {
 						box = "vertical",
 						position = "left",
-						width = 0.25,
+						width = 0.3,
 						min_width = 25,
-						border = "right",
-						{ win = "input", height = 1, border = "bottom" },
-						{ win = "list" },
+						{ win = "list", },
 						{ win = "preview" },
 					},
 				},

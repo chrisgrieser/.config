@@ -47,13 +47,5 @@ return {
 		{ "<D-a>", function() require("neocodeium").cycle_or_complete(1) end, mode = "i", desc = "󰚩 Next suggestion" },
 		{ "<D-A>", function() require("neocodeium").cycle_or_complete(-1) end, mode = "i", desc = "󰚩 Prev suggestion" },
 		-- stylua: ignore end
-		{
-			"<leader>an",
-			function()
-				vim.cmd.NeoCodeium("restart")
-				vim.notify("Restarting…", nil, { title = "NeoCodeium", icon = "󰚩" })
-			end,
-			desc = "󰚩 NeoCodeium restart",
-		},
 	},
 }

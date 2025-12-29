@@ -144,6 +144,8 @@ keymap("n", "[", function() require("personal-plugins.markdown-qol").wrap("[", "
 keymap("n", "{", function() require("personal-plugins.markdown-qol").wrap("{", "}") end, { desc = " Surround" })
 -- stylua: ignore end
 
+keymap("x", "<leader>aa", function() require("personal-plugins.ai-rewrite").rewrite() end, { desc = "󰚩 AI rewrite" })
+
 ---WHITESPACE & INDENTATION-----------------------------------------------------
 keymap("n", "=", "[<Space>", { desc = " Blank above", remap = true }) -- remap, since nvim default
 keymap("n", "_", "]<Space>", { desc = " Blank below", remap = true })

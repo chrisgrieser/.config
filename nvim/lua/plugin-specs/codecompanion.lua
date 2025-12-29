@@ -102,6 +102,7 @@ end
 local ccSpec = {
 	"olimorris/codecompanion.nvim",
 	dependencies = "nvim-lua/plenary.nvim",
+	enabled = false,
 	cmd = { "CodeCompanion", "CodeCompanionChat", "CodeCompanionActions" },
 	init = function() vim.g.whichkeyAddSpec { "<leader>a", group = " AI" } end,
 	config = function(_, opts)

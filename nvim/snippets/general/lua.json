@@ -113,7 +113,7 @@
   },
   "read file": {
     "body": [
-      "local file, errmsg = io.open(${1:path}, \"e\")",
+      "local file, errmsg = io.open(${1:path}, \"r\")",
       "assert(file, errmsg)",
       "local content = file:read(\"*a\")",
       "file:close()"

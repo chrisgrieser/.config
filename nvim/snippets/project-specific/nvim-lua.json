@@ -105,15 +105,6 @@
     "body": "vim.fn.getregion(vim.fn.getpos(\".\"), vim.fn.getpos(\"v\"))",
     "prefix": "get selection"
   },
-  "get visual selection": {
-    "body": [
-      "local startLn, startCol = unpack(vim.api.nvim_buf_get_mark(0, \"<\"))",
-      "local endLn, endCol = unpack(vim.api.nvim_buf_get_mark(0, \">\"))",
-      "local selection = vim.api.nvim_buf_get_text(0, startLn - 1, startCol, endLn - 1, endCol + 1, {})",
-      "local text = table.concat(selection, \"\\n\")"
-    ],
-    "prefix": "get visual selection"
-  },
   "leave visual mode": {
     "body": "vim.cmd.normal { vim.fn.mode(), bang = true } -- leave visual mode",
     "prefix": "leave visual mode"
