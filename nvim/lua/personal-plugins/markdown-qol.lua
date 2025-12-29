@@ -227,10 +227,10 @@ end
 local function getBacklinkRegex(filepath)
 	if not filepath then filepath = vim.api.nvim_buf_get_name(0) end
 	local basename = vim.fs.basename(filepath):gsub("%.md$", "")
-	local wikilinkPattern = "\\[\\[" .. vim.fn.escape(basename, "\\") .. "([#|].*)?\\]\\]"
+	local wikilinkPattern = "\\[\\[" .. vim.fn.escape(basename, "\\") .. "([#|].*?)?\\]\\]"
 	local cwd = assert(vim.uv.cwd(), "cwd not found")
 	local relpathEncoded = vim.uri_encode(filepath:sub(#cwd + 1)):gsub("%%%w%w", string.upper)
-	local mdlinkPattern = "\\]\\(" .. "\\.?" .. relpathEncoded .. "\\)"
+	local mdlinkPattern = "\\[.*?\\]\\(" .. "\\.?" .. relpathEncoded .. "\\)"
 	return wikilinkPattern .. "|" .. mdlinkPattern
 end
 
@@ -314,9 +314,12 @@ function M.renameAndUpdateWikilinks()
 			}
 			for _, submatch in ipairs(o.data.submatches) do
 				local origText = submatch.match.text
-				local old = vim.startswith(origText, "[[") and oldName or vim.uri_encode(oldName)
-				local new = vim.startswith(origText, "[[") and newName or vim.uri_encode(newName)
-				local replacement = origText:gsub(vim.pesc(old), vim.pesc(new))
+				local replacement = origText:gsub(vim.pesc(oldName), vim.pesc(newName))
+				local isMdlink = not vim.startswith(origText, "[[")
+				if isMdlink then
+					local old, new = vim.uri_encode(oldName), vim.uri_encode(newName)
+					replacement = origText:gsub(vim.pesc(old), vim.pesc(new))
+				end
 				if replacement == origText then err(("Link %s not be updated."):format(origText)) end
 				table.insert(textDocumentEdits.edits, {
 					newText = replacement,
