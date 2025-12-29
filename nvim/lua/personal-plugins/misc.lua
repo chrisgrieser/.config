@@ -29,6 +29,7 @@ function M.toggleOrIncrement()
 		["open"] = "close",
 		["inner"] = "outer",
 		["encode"] = "decode",
+		["input"] = "output",
 
 		["and"] = "or",
 		["=="] = "!=",

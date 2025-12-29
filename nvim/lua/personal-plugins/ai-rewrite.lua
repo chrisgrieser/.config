@@ -3,15 +3,16 @@ local M = {}
 
 local config = {
 	openai = {
-		model = "gpt-5-mini",
+		model = "gpt-5-mini", -- https://platform.openai.com/docs/models/gpt-5-mini
 		reasoningEffort = "minimal",
+		costPerMilTokens = { input = 0.25, output = 2 },
 		apiKeyFile = "~/Library/Mobile Documents/com~apple~CloudDocs/Tech/api-keys/openai-api-key.txt",
 	},
 	systemPrompt = [[
 		You are an export developer {{filetype}} developer.
 
 		I will send you some code, and I want you to simplify the code while not
-		diminishing its readability. 
+		diminishing its readability.
 
 		Output nothing but the simplified code.
 	]],
@@ -31,6 +32,19 @@ local config = {
 	end,
 }
 
+--------------------------------------------------------------------------------
+
+---@param msg string
+---@param level? "info"|"warn"|"error"|"trace"
+---@param opts? table
+local function notify(msg, level, opts)
+	if not level then level = "info" end
+	if not opts then opts = {} end
+	opts.title = "AI Rewrite"
+	opts.icon = "󰚩"
+	vim.notify(msg, vim.log.levels[level:upper()], opts)
+end
+
 function M.rewrite()
 	-- API KEY
 	local file, errmsg = io.open(vim.fs.normalize(config.openai.apiKeyFile), "r")
@@ -40,11 +54,13 @@ function M.rewrite()
 
 	-- SELECTION
 	local mode = vim.fn.mode()
-	assert(mode:find("[nvV]"), "Only normal and visual modes are supported.")
-	if mode == "n" then vim.cmd.normal { "vip", bang = true } end
-	local selectionLines = vim.fn.getregion(vim.fn.getpos("."), vim.fn.getpos("v"))
+	assert(mode:find("[nV]"), "Only normal and visual line mode are supported.")
+	if mode == "n" then vim.cmd.normal { "Vip", bang = true } end
+	local startPos, endPos = vim.fn.getpos("."), vim.fn.getpos("v")
+	local startRow, en = startPos[2]
+	local selectionLines = vim.fn.getregion(startPos, endPos)
 	local selection = table.concat(selectionLines, "\n")
-	vim.cmd.normal { vim.fn.mode(), bang = true } -- leave visual mode
+	vim.cmd.normal { "V", bang = true } -- leave visual line mode
 
 	-- PROMPTS
 	local systemPrompt = vim.trim(config.systemPrompt):gsub("{{filetype}}", vim.bo.ft)
@@ -52,10 +68,9 @@ function M.rewrite()
 		:gsub("{{filetype}}", vim.bo.ft)
 		:gsub("{{selection}}", vim.pesc(selection))
 
-	-- SEND REQUEST
-	-- DOCS https://platform.openai.com/docs/api-reference/responses/get
-	local url = "https://api.openai.com/v1/responses"
-	local timeoutSecs = 15
+	-- PREPARE REQUEST
+	local url = "https://api.openai.com/v1/responses" -- https://platform.openai.com/docs/api-reference/responses/get
+	local timeoutSecs = 20
 	local data = {
 		model = config.openai.model,
 		reasoning = { effort = config.openai.reasoningEffort },
@@ -64,25 +79,65 @@ function M.rewrite()
 			{ role = "user", content = userPrompt },
 		},
 	}
-	-- stylua: ignore
-	local curlArgs = {
-		"curl", "--silent", "--max-time", tostring(timeoutSecs), url,
-		"--header", "Content-Type: application/json",
-		"--header", "Authorization: Bearer " .. openaiApiKey,
-		"--data", vim.json.encode(data),
+	local curlArgs = { -- stylua: ignore
+		"curl",
+		"--silent",
+		url,
+		"--header",
+		"Content-Type: application/json",
+		"--header",
+		"Authorization: Bearer " .. openaiApiKey,
+		"--data",
+		vim.json.encode(data),
 	}
+	local model = config.openai.model
 
-	local out = vim.system(curlArgs):wait()
-	assert(out.code == 0, "OpenAI request failed: " .. out.stderr)
-	local response = vim.json.decode(out.stdout, { luanil = { object = true } })
-	if response.error then
-		vim.notify(response.error.message, vim.log.levels.ERROR)
-		return
+	-- SPINNER
+	if package.loaded["snacks"] then
+		local spinners = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" }
+		local updateIntervalMs = 250
+		local timer = assert(vim.uv.new_timer())
+		timer:start(
+			0,
+			updateIntervalMs,
+			vim.schedule_wrap(function()
+				local spinner = spinners[math.floor(vim.uv.now() / updateIntervalMs) % #spinners + 1]
+				-- id to replace existing notification when using snacks.notifier
+				notify(model .. " " .. spinner, "trace", {
+					id = "ongoing-ai-rewrite-request",
+				})
+			end)
+		)
+	else
+		notify(model .. " started", "trace")
 	end
-	local answer = response.output[2].content[1].text
-	Chainsaw(answer) -- 🪚
-	local cost = response.usage.total_tokens * costPerToken
-	Chainsaw(cost) -- 🪚
+
+	-- SEND REQUEST
+	vim.system(
+		curlArgs,
+		{ timeout = 1000 * timeoutSecs },
+		vim.schedule_wrap(function(out)
+			-- GUARD
+			if out.code == 124 then return notify("OpenAI request timed out.", "warn") end
+			if out.code ~= 0 then return notify("OpenAI request failed: " .. out.stderr, "warn") end
+			local resp = vim.json.decode(out.stdout, { luanil = { object = true } })
+			if resp.error then return notify(resp.error.message, "error") end
+
+			-- NOTIFY
+			local cost = (resp.usage.input_tokens / 1000 / 1000) * config.openai.costPerMilTokens.input
+				+ (resp.usage.output_tokens / 1000 / 1000) * config.openai.costPerMilTokens.output
+			local msg = {
+				model .. " finished ✅",
+				"",
+				("(cost: %s$)"):format(cost),
+			}
+			notify(table.concat(msg, "\n"), "trace", { id = "ongoing-ai-rewrite-request" })
+
+			-- UPDATE BUFFER
+			local answer = resp.output[2].content[1].text
+			vim.api.nvim_buf_set_lines(0, startRow - 1, endRow, false, vim.split(answer, "\n"))
+		end)
+	)
 end
 
 --------------------------------------------------------------------------------
