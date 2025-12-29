@@ -2,8 +2,7 @@ local M = {}
 --------------------------------------------------------------------------------
 
 local config = {
-	provider = {
-		name = "openai",
+	openai = {
 		model = "gpt-5-mini",
 		reasoningEffort = "minimal",
 		apiKeyFile = "~/Library/Mobile Documents/com~apple~CloudDocs/Tech/api-keys/openai-api-key.txt",
@@ -31,27 +30,47 @@ local config = {
 }
 
 function M.rewrite()
-	-- API Key
+	-- API KEY
 	local file, errmsg = io.open(vim.fs.normalize(config.provider.apiKeyFile), "r")
 	assert(file, errmsg)
 	local openaiApiKey = file:read("*a")
 	file:close()
 
-	-- selection
-	local selection = vim.fn.getregion(vim.fn.getpos("."), vim.fn.getpos("v"))
+	-- SELECTION
+	local selectionLines = vim.fn.getregion(vim.fn.getpos("."), vim.fn.getpos("v"))
+	local selection = table.concat(selectionLines, "\n")
 	local mode = vim.fn.mode()
 	if mode:find("[Vv]") then vim.cmd.normal { mode, bang = true } end -- leave visual mode
 
-	-- send request
-	local url = "https://api.openai.com/v1/chat/completions"
-	local headers = { ["Content-Type"] = "application/json", ["Authorization"] = "Bearer " .. openaiApiKey }
-	local data = {
-		model = config.provider.model,
-		messages = {
-			{ role = "system", content = config.systemPrompt },
-			{ role = "user", content = string.format(config.systemPrompt, { filetype = vim.bo.filetype }) },
-		}
+	-- PROMPTS
+	local systemPrompt = config.systemPrompt:gsub("{{filetype}}", vim.bo.filetype)
+	local userPrompt = ([[```{{filetype}}\n{{selection}}\n```]])
+		:gsub("{{filetype}}", vim.bo.filetype)
+		:gsub("{{selection}}", vim.pesc(selection))
+
+	-- SEND REQUEST
+	-- DOCS https://platform.openai.com/docs/api-reference/responses/get
+	local url = "https://api.openai.com/v1/responses"
+	local headers = {
+		["Content-Type"] = "application/json",
+		["Authorization"] = "Bearer " .. openaiApiKey,
 	}
+	local data = {
+		model = config.openai.model,
+		reasoning = { effort = config.openai.reasoningEffort },
+		input = {
+			{ role = "system", content = systemPrompt },
+			{ role = "user", content = userPrompt },
+		},
+	}
+
+	-- stylua: ignore
+	local response = vim.system ({
+		"curl", "--silent", "--max-time", "30", url,
+		"--header", "Content-Type: application/json",
+		"--header", "Bearer " .. openaiApiKey,
+		"--data", "-@", -- `-@` -> read from stdin
+	}, { stdin = vim.json.encode(data) })
 end
 
 --------------------------------------------------------------------------------

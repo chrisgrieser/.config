@@ -27,6 +27,7 @@ return {
 					"MORFOLOGIK_RULE_EN_US", -- spellcheck done via Harper instead
 					"EN_QUOTES", -- don't expect smart quotes
 					"WHITESPACE_RULE", -- too many false positives
+					"UPPERCASE_SENTENCE_START", -- done via Harper
 				},
 				["de-DE"] = {
 					"GERMAN_SPELLER_RULE", -- too many false positives

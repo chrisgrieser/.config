@@ -44,9 +44,9 @@ response=$(jq -n --arg model "$model" --arg system_prompt "$system_prompt" \
 			]
 		}' |
 	curl --silent --max-time 30 "https://api.openai.com/v1/responses" \
-		-H "Content-Type: application/json" \
-		-H "Authorization: Bearer $OPENAI_API_KEY" \
-		-d @-)
+		--header "Content-Type: application/json" \
+		--header "Authorization: Bearer $OPENAI_API_KEY" \
+		--data @-) # `@-` = stdin
 
 # GUARD
 if [[ -z "$response" ]]; then
