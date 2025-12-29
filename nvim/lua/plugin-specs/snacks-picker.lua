@@ -461,6 +461,7 @@ return {
 			layout = "wide_with_preview", -- = default layout
 			layouts = { -- define available layouts
 				small_no_preview = {
+					cycle = true, -- `list_(down|up)` action wraps
 					layout = {
 						box = "horizontal",
 						width = 0.65,

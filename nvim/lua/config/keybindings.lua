@@ -144,6 +144,7 @@ keymap("n", "[", function() require("personal-plugins.markdown-qol").wrap("[", "
 keymap("n", "{", function() require("personal-plugins.markdown-qol").wrap("{", "}") end, { desc = " Surround" })
 -- stylua: ignore end
 
+if vim.g.whichkeyAddSpec then vim.g.whichkeyAddSpec { "<leader>a", group = "󰚩 AI" } end
 keymap({"n", "x"}, "<leader>aa", function() require("personal-plugins.ai-rewrite").rewrite() end, { desc = "󰚩 AI rewrite" })
 
 ---WHITESPACE & INDENTATION-----------------------------------------------------
