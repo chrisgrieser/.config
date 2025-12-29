@@ -20,12 +20,18 @@ fi
 
 #-GENERIC CASES-----------------------------------------------------------------
 [[ "$app" == "front_app" ]] && app=$(osascript -e 'tell application "System Events" to return name of first process whose frontmost is true')
+
+# FIX Alfred sometimes triggering on neovide, even though it was excluded
 if [[ "$app" == "neovide" ]]; then
-	echo -n "⚠ Alfred failed detecting neovide as front app."
-	return 1
+	echo -n "⚠ Workaround for failed neovide-detection."
+	osascript -e 'tell application "System Events" 
+		keystroke "Z"
+		keystroke "Z"
+	end tell'
+else
+	killall "$app"
 fi
 
-killall "$app"
 
 # wait
 i=0

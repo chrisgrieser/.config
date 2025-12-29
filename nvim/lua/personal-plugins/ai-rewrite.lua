@@ -15,6 +15,7 @@ local config = {
 	timeoutSecs = 30,
 	appearance = {
 		icon = "󰚩",
+		signText = "┃",
 		signHlgroup = "DiagnosticSignInfo",
 		spinnerDuringRequest = true, -- requires notifier from `snacks.nvim`
 	},
@@ -149,13 +150,17 @@ function M.rewrite(task)
 	end
 
 	-- SIGNS
+	if vim.api.nvim_strwidth(config.appearance.signText .. config.appearance.icon) > 2 then
+		notify("Sign text + icon must be 2 chars wide max.", "warn")
+		return
+	end
 	local ns = vim.api.nvim_create_namespace("ai-rewrite")
 	vim.api.nvim_buf_set_extmark(ctx.bufnr, ns, startRow - 1, 0, {
-		sign_text = "┃" .. config.appearance.icon, -- first line also gets icon
+		sign_text = config.appearance.signText .. config.appearance.icon, -- first line also gets icon
 		sign_hl_group = config.appearance.signHlgroup,
 	})
 	vim.api.nvim_buf_set_extmark(ctx.bufnr, ns, startRow, 0, {
-		sign_text = "┃",
+		sign_text = config.appearance.signText,
 		sign_hl_group = config.appearance.signHlgroup,
 		end_row = endRow - 1,
 	})

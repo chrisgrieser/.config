@@ -461,7 +461,7 @@ return {
 			layout = "wide_with_preview", -- = default layout
 			layouts = { -- define available layouts
 				small_no_preview = {
-					cycle = true, -- `list_(down|up)` action wraps
+					cycle = true, -- `list_up/down` action wraps
 					layout = {
 						box = "horizontal",
 						width = 0.65,
@@ -498,10 +498,10 @@ return {
 				},
 				sidebar = {
 					preview = "main",
-					cycle = true, -- `list_(down|up)` action wraps
+					cycle = true, -- `list_up/down` action wraps
 					layout = {
 						box = "vertical",
-						position = "left",
+						position = "left", -- = left-split
 						width = 0.3,
 						min_width = 25,
 						{ win = "list", },
