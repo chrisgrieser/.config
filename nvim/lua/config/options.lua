@@ -91,8 +91,8 @@ require("editorconfig").properties.max_line_length = nil
 vim.opt.textwidth = 80
 
 vim.opt.expandtab = false -- mostly set by `editorconfig`, therefore only fallback
-vim.opt.tabstop = 3
-vim.opt.shiftwidth = 4
+vim.opt.tabstop = 3 -- width of a tab
+vim.opt.shiftwidth = 4 -- number of spaces a tab translates to
 vim.opt.shiftround = true
 vim.opt.smartindent = true
 
