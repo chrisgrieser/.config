@@ -391,27 +391,17 @@ return {
 					layout = { preset = "big_preview", hidden = { "preview" } },
 				},
 				git_status = {
-					layout = "big_vertical",
+					layout = "sidebar",
 					win = {
-						input = {
-							keys = {
-								-- <CR> opens the file as usual
-								["<Tab>"] = { "list_down", mode = "i" },
-								["<Space>"] = { "git_stage", mode = "i" },
-							},
-						},
+						-- <CR> opens the file as usual
+						list = { keys = { ["<Space>"] = "git_stage" } },
 					},
 				},
 				git_diff = {
-					layout = "big_vertical",
+					layout = "sidebar",
 					win = {
-						input = {
-							keys = {
-								-- <CR> opens the file as usual
-								["<Tab>"] = { "list_down", mode = "i" },
-								["<Space>"] = { "git_stage", mode = "i" },
-							},
-						},
+						-- <CR> opens the file as usual
+						list = { keys = { ["<Space>"] = "git_stage" } },
 					},
 				},
 				gh_issue = { layout = "big_preview" },
@@ -503,15 +493,19 @@ return {
 						[2] = { width = 0.6 }, -- second win is the preview
 					},
 				},
-				big_vertical = {
+				sidebar = {
 					preview = "main",
 					cycle = true, -- `list_(down|up)` action wraps
-
+					auto_hide = { "input" },
 					layout = {
-						bo
-						title = "{title} {live} {flags}",
-						{ win = "list", border = "none" },
+						box = "vertical",
+						position = "left",
+						width = 0.25,
+						min_width = 25,
+						border = "right",
 						{ win = "input", height = 1, border = "bottom" },
+						{ win = "list" },
+						{ win = "preview" },
 					},
 				},
 			},
@@ -519,6 +513,7 @@ return {
 				input = {
 					keys = {
 						["<Esc>"] = { "close", mode = "i" }, --> disable normal mode
+						["<D-w>"] = { "close", mode = "i" },
 						["<CR>"] = { "confirm", mode = "i" },
 						["<Tab>"] = { "list_down", mode = "i" },
 						["<S-Tab>"] = { "list_up", mode = "i" },
@@ -552,6 +547,9 @@ return {
 				},
 				list = {
 					keys = {
+						["q"] = "close",
+						["<Esc>"] = "close",
+						["<D-w>"] = "close",
 						["<C-CR>"] = "cycle_win",
 						["<D-p>"] = "toggle_preview",
 						["G"] = "list_bottom",
@@ -560,8 +558,8 @@ return {
 						["k"] = "list_up",
 						["<Tab>"] = "list_down",
 						["<S-Tab>"] = "list_up",
-						["q"] = "close",
-						["<Esc>"] = "close",
+						["<PageUp>"] = "preview_scroll_up",
+						["<PageDown>"] = "preview_scroll_down",
 
 						["<D-l>"] = "reveal_in_macOS_Finder",
 						["<D-c>"] = "yank",
@@ -570,7 +568,15 @@ return {
 						["?"] = "toggle_help_list",
 					},
 				},
-				preview = { keys = { ["<C-CR>"] = { "cycle_win" } } },
+				preview = {
+					keys = {
+						["q"] = "close",
+						["<D-w>"] = "close",
+						["<C-CR>"] = "cycle_win",
+						["<Tab>"] = "list_down", -- cycle list from the preview win
+						["<S-Tab>"] = "list_up",
+					},
+				},
 			},
 			actions = {
 				yank = function(picker, item, action)

@@ -57,7 +57,13 @@ return {
 			always_divide_middle = false,
 			section_separators = { left = "", right = "" }, -- save space
 			component_separators = { left = "", right = "" },
-			ignore_focus = { "snacks_input", "snacks_picker_input", "" },
+			ignore_focus = {
+				"snacks_input",
+				"snacks_picker_list",
+				"snacks_picker_input",
+				"snacks_picker_preview",
+				"",
+			},
 		},
 		--------------------------------------------------------------------------
 		winbar = {
