@@ -172,11 +172,6 @@ function M.playRecording(reg)
 		local msg = "There is no recording."
 		vim.notify(msg, vim.log.levels.WARN, { title = "Recording", icon = "󰃾" })
 	end
-
-
-
-
-
 end
 
 --------------------------------------------------------------------------------
@@ -185,9 +180,7 @@ function M.openFirstUrlInBuffer()
 	local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
 	for _, line in ipairs(lines) do
 		local url = line:match("%l+://[^%s%)%]}\"'`>]+")
-		if url then
-			return vim.ui.open(url)
-		end
+		if url then return vim.ui.open(url) end
 	end
 	vim.notify("No URL found in file.", vim.log.levels.WARN)
 end

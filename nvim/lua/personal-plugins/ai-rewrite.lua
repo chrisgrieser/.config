@@ -13,16 +13,20 @@ local config = {
 		apiKeyCmd = { "cat", vim.env.HOME .. "/Library/Mobile Documents/com~apple~CloudDocs/Tech/api-keys/openai-api-key.txt" },
 	},
 	timeoutSecs = 30,
-	systemPrompt = [[
-		You are an export developer {{filetype}} developer.
-
-		I will send you some code, and I want you to simplify the code while not
-		diminishing its readability.
-
-		Output nothing but the simplified code.
-	]],
+	prompt = {
+		system = [[
+			You are an export developer {{filetype}} developer.
+			I will give you a task as well as some code.
+			Follow the task and rewrite the code.
+			Output nothing but the simplified code, without comment or markdown fences.
+		]],
+		tasks = {
+			simplify = "Simplify the code without diminishing its readability.",
+			fix = "Fix any mistask in the following code.",
+		},
+	},
 	postSuccess = {
-		lspFormat = true,
+		lspRangeFormat = true,
 		sound = true, -- currently macOS only
 	},
 }
@@ -35,12 +39,13 @@ local config = {
 local function notify(msg, level, opts)
 	if not level then level = "info" end
 	if not opts then opts = {} end
-	opts.title = "AI Rewrite"
+	opts.title = "AI rewrite"
 	opts.icon = "󰚩"
 	vim.notify(msg, vim.log.levels[level:upper()], opts)
 end
 
-function M.rewrite()
+function M.rewrite(task)
+	-- CONTEXT
 	local bufnr = vim.api.nvim_get_current_buf()
 	local winid = vim.api.nvim_get_current_win()
 
@@ -61,12 +66,23 @@ function M.rewrite()
 	local selectionLines = vim.fn.getregion(startPos, endPos)
 	local selection = table.concat(selectionLines, "\n")
 	vim.cmd.normal { "V", bang = true } -- leave visual line mode
+	if startRow > endRow then -- selection was reversed
+		startRow, endRow = endRow, startRow
+	end
 
 	-- PROMPTS
-	local systemPrompt = vim.trim(config.systemPrompt):gsub("{{filetype}}", vim.bo.ft)
+	local systemPrompt = vim.trim(config.prompt.system):gsub("{{filetype}}", vim.bo.ft)
+	local taskPrompt = vim.trim(config.prompt.tasks[task])
 	local userPrompt = ([[```{{filetype}}\n{{selection}}\n```]])
 		:gsub("{{filetype}}", vim.bo.ft)
 		:gsub("{{selection}}", vim.pesc(selection))
+	if not taskPrompt then
+		local msg = "Unknown task: "
+			.. task
+			.. "\n\nThe task must be one to the keys of `opts.prompt.tasks`"
+		notify(msg)
+		return
+	end
 
 	-- PREPARE REQUEST
 	-- DOCS Responses API https://platform.openai.com/docs/api-reference/responses/get
@@ -76,9 +92,11 @@ function M.rewrite()
 		reasoning = { effort = config.openai.reasoningEffort },
 		input = {
 			{ role = "system", content = systemPrompt },
+			{ role = "system", content = taskPrompt },
 			{ role = "user", content = userPrompt },
 		},
 	}
+	if vim.fn.executable("curl") == 0 then return notify("`curl` not found.", "error") end
 	-- stylua: ignore
 	local curlArgs = {
 		"curl", "--silent", config.openai.endpoint,
@@ -99,12 +117,24 @@ function M.rewrite()
 			vim.schedule_wrap(function()
 				local spinner = spinners[math.floor(vim.uv.now() / updateIntervalMs) % #spinners + 1]
 				-- id to replace existing notification when using snacks.notifier
-				notify(model .. " " .. spinner, "trace", { id = "ongoing-ai-rewrite-request" })
+				notify(model .. " " .. spinner, "trace", { id = "ai-rewrite" })
 			end)
 		)
 	else
 		notify(model .. " started", "trace")
 	end
+
+	-- SIGNS
+	local ns = vim.api.nvim_create_namespace("ai-rewrite")
+	vim.api.nvim_buf_set_extmark(bufnr, ns, startRow - 1, 0, {
+		sign_text = "󰚩", -- different text in first row
+		sign_hl_group = "DiagnosticSignHint",
+	})
+	vim.api.nvim_buf_set_extmark(bufnr, ns, startRow, 0, {
+		sign_text = "AI",
+		sign_hl_group = "DiagnosticSignHint",
+		end_row = endRow - 1,
+	})
 
 	-- SEND REQUEST
 	vim.system(
@@ -120,28 +150,31 @@ function M.rewrite()
 			-- NOTIFY
 			local cost = (resp.usage.input_tokens / 1000 / 1000) * config.openai.costPerMilTokens.input
 				+ (resp.usage.output_tokens / 1000 / 1000) * config.openai.costPerMilTokens.output
-			local msg = ("%s finished ✅\n\n(cost: %d)"):format(model, cost)
-			notify(msg, "trace", { id = "ongoing-ai-rewrite-request" })
+			local msg = ("%s finished ✅\n\n(cost: %s$)"):format(model, cost)
+			notify(msg, "trace", { id = "ai-rewrite" })
+
+			-- STOP SPINNER & SIGNS
 			if timer then
 				timer:stop()
 				timer:close()
 			end
+			vim.api.nvim_buf_clear_namespace(bufnr, ns, 0, -1) -- clear signs
 
 			-- UPDATE BUFFER
 			local answer = resp.output[2].content[1].text
-			if startRow > endRow then -- selection was reversed
-				startRow, endRow = endRow, startRow
-			end
-			vim.api.nvim_buf_set_lines(bufnr, startRow - 1, endRow, false, vim.split(answer, "\n"))
+			local answerLines = vim.split(answer, "\n")
+			vim.api.nvim_buf_set_lines(bufnr, startRow - 1, endRow, false, answerLines)
 			vim.api.nvim_win_set_cursor(winid, { startRow, 0 })
 
 			-- POST SUCCESS
-			if config.postSuccess.lspFormat then
+			if config.postSuccess.lspRangeFormat then
 				local formattingLsps =
-					vim.lsp.get_clients { bufnr = bufnr, method = "textDocument/formatting" }
+					vim.lsp.get_clients { bufnr = bufnr, method = "textDocument/rangeFormatting" }
 				if #formattingLsps > 0 then
-					local range = { start = { startRow - 1, 0 }, ["end"] = { endRow - 1, -1 } }
-					vim.lsp.buf.format { bufnr = bufnr, range = range }
+					local newEndRow = startRow + #answerLines - 1
+					local range = { start = { startRow - 1, 0 }, ["end"] = { newEndRow, -1 } }
+					-- delay needed to ensure buffer was updated
+					vim.defer_fn(function() vim.lsp.buf.format { bufnr = bufnr, range = range } end, 100)
 				end
 			end
 			if config.postSuccess.sound then
