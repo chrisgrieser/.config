@@ -144,8 +144,21 @@ keymap("n", "[", function() require("personal-plugins.markdown-qol").wrap("[", "
 keymap("n", "{", function() require("personal-plugins.markdown-qol").wrap("{", "}") end, { desc = " Surround" })
 -- stylua: ignore end
 
-if vim.g.whichkeyAddSpec then vim.g.whichkeyAddSpec { "<leader>a", group = "󰚩 AI" } end
-keymap({"n", "x"}, "<leader>aa", function() require("personal-plugins.ai-rewrite").rewrite() end, { desc = "󰚩 AI rewrite" })
+do
+	if vim.g.whichkeyAddSpec then vim.g.whichkeyAddSpec { "<leader>a", group = "󰚩 AI" } end
+	keymap(
+		{ "n", "x" },
+		"<leader>as",
+		function() require("personal-plugins.ai-rewrite").rewrite("simplify") end,
+		{ desc = "󰚩 Simplify" }
+	)
+	keymap(
+		{ "n", "x" },
+		"<leader>af",
+		function() require("personal-plugins.ai-rewrite").rewrite("fix") end,
+		{ desc = "󰚩 Fix" }
+	)
+end
 
 ---WHITESPACE & INDENTATION-----------------------------------------------------
 keymap("n", "=", "[<Space>", { desc = " Blank above", remap = true }) -- remap, since nvim default

@@ -77,14 +77,14 @@ M.aw_masto = aw.new(function(appName, event, masto)
 		if #masto:allWindows() > 1 and isMediaWin and frontNotAlfred then win:close() end
 	end
 
-	u.defer(1, function()
+	u.defer(2, function()
 		if M.mastoHasScrolled then return end
 		M.mastoHasScrolled = true
 		hs.eventtap.keyStroke({}, "left", 1, masto) -- go back
 		hs.eventtap.keyStroke({ "cmd" }, "1", 1, masto) -- go to home tab
 		hs.eventtap.keyStroke({ "cmd" }, "up", 1, masto) -- scroll up
+		u.defer(3, function() M.mastoHasScrolled = false end)
 	end)
-	u.defer(2, function() M.mastoHasScrolled = false end)
 end):start()
 
 ---BROWSER----------------------------------------------------------------------
