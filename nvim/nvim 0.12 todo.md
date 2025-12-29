@@ -14,6 +14,8 @@
 - `vim.pack` wrapper
     - <https://www.reddit.com/r/neovim/s/drTr1iSvPl>
     - <https://github.com/zuqini/zpack.nvim>
+- `vim.json.encode` supports formatting → switch to `nvim-0.12` branch for
+  `nvim-scissors`
 
 ```lua
 vim.api.nvim_create_autocmd("PackChanged", {

@@ -31,9 +31,10 @@ local config = {
 
 function M.rewrite()
 	-- API KEY
-	local file, errmsg = io.open(vim.fs.normalize(config.provider.apiKeyFile), "r")
+	local file, errmsg = io.open(vim.fs.normalize(config.openai.apiKeyFile), "r")
 	assert(file, errmsg)
 	local openaiApiKey = file:read("*a")
+	Chainsaw(openaiApiKey) -- 🪚
 	file:close()
 
 	-- SELECTION
@@ -51,10 +52,7 @@ function M.rewrite()
 	-- SEND REQUEST
 	-- DOCS https://platform.openai.com/docs/api-reference/responses/get
 	local url = "https://api.openai.com/v1/responses"
-	local headers = {
-		["Content-Type"] = "application/json",
-		["Authorization"] = "Bearer " .. openaiApiKey,
-	}
+	local timeoutSecs = 30
 	local data = {
 		model = config.openai.model,
 		reasoning = { effort = config.openai.reasoningEffort },
@@ -63,14 +61,19 @@ function M.rewrite()
 			{ role = "user", content = userPrompt },
 		},
 	}
+	local dataEnc = vim.json.encode(data)
 
 	-- stylua: ignore
-	local response = vim.system ({
-		"curl", "--silent", "--max-time", "30", url,
+	local out = vim.system ({
+		"curl", "--silent", "--max-time", tostring(timeoutSecs), url,
 		"--header", "Content-Type: application/json",
-		"--header", "Bearer " .. openaiApiKey,
+		"--header", "Authorization: Bearer " .. openaiApiKey,
 		"--data", "-@", -- `-@` -> read from stdin
-	}, { stdin = vim.json.encode(data) })
+	}, { stdin = dataEnc }):wait()
+	assert(out.code == 0, "OpenAI request failed: " .. out.stderr)
+	local response = vim.json.decode(out.stdout)
+	if response.error then error(response.error.message) end
+	Chainsaw(response) -- 🪚
 end
 
 --------------------------------------------------------------------------------

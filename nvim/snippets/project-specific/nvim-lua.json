@@ -102,7 +102,7 @@
     "prefix": "get buffer lines"
   },
   "get selection": {
-    "body": "vim.fn.getregion(vim.fn.getpos(\".\"), vim.fn.getpos(\"v\"))",
+    "body": "local selectionLines = vim.fn.getregion(vim.fn.getpos(\".\"), vim.fn.getpos(\"v\"))",
     "prefix": "get selection"
   },
   "leave visual mode": {
@@ -123,21 +123,6 @@
     "body": "vim.cmd.normal { \"${1:keys}\", bang = true }",
     "prefix": ":normal"
   },
-  "select + vim.ui.select": {
-    "body": [
-      "vim.ui.select(items, {",
-      "\tprompt = \"${1:prompt_text}\",",
-      "\tformat_item = function(item) return ${2:item} end,",
-      "}, function (selection)",
-      "\tif not selection then return end",
-      "\t$0",
-      "end)"
-    ],
-    "prefix": [
-      "ui.select",
-      "vim.ui.select"
-    ]
-  },
   "set current line": {
     "body": "vim.api.nvim_set_current_line($0)",
     "prefix": "set current line"
@@ -145,17 +130,5 @@
   "vim.notify": {
     "body": "vim.notify(${1:msg}, vim.log.levels.${2:level}, { title = ${3:title}, icon = ${4:icon} })",
     "prefix": "vim.notify"
-  },
-  "vim.ui.input + ui.input": {
-    "body": [
-      "vim.ui.input({ prompt = \"${1:text}\" }, function(input)",
-      "\tif not input or input == \"\" then return end",
-      "\t$0",
-      "end)"
-    ],
-    "prefix": [
-      "vim.ui.input",
-      "ui.input"
-    ]
   }
 }

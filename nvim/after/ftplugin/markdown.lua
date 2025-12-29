@@ -13,6 +13,10 @@ optl.sidescrolloff = 3 -- lower, since we rarely go beyond textwidth
 -- hard-wrap when typing beyond `textwidth`
 vim.schedule(function() optl.formatoptions:append("t") end)
 
+---ABBREVIATIONS----------------------------------------------------------------
+local abbr = require("config.utils").bufAbbrev
+abbr("->", "→")
+
 ---KEYMAPS----------------------------------------------------------------------
 local bkeymap = require("config.utils").bufKeymap
 

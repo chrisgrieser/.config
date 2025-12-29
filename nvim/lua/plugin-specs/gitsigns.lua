@@ -21,7 +21,7 @@ return {
 	keys = {
 		{ "ga", "<cmd>Gitsigns stage_hunk<CR>", desc = "󰊢 (Un-)Stage hunk" },
 		-- stylua: ignore
-		{ "ga", ":Gitsigns stage_hunk<CR>", mode = "x", silent = true, desc = "󰊢 (Un-)Stage selection" },
+		{ "ga", ":Gitsigns stage_hunk<CR>", mode = "x", silent = true, desc = "󰊢 Un/stage selection" },
 		{ "gA", "<cmd>Gitsigns stage_buffer<CR>", desc = "󰊢 Stage file" },
 		{ "gh", "<cmd>Gitsigns select_hunk<CR>", mode = { "o", "x" }, desc = "󰊢 Hunk textobj" },
 
