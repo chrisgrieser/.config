@@ -10,18 +10,21 @@ return {
 		{
 			"<leader>oi",
 			function()
-				if Snacks.indent.enabled then
-					vim.b.prev_listchars = vim.opt_local.listchars:get()
-					vim.opt_local.listchars:append {
-						tab = " ",
-						space = "·",
-						trail = "·",
-						lead = "·",
-					}
-					Snacks.indent.disable()
-				else
-					vim.opt_local.listchars = vim.b.prev_listchars
+				local function reEnable()
+					vim.opt_local.listchars = vim.b.indent_prevListChars
 					Snacks.indent.enable()
+					vim.api.nvim_del_autocmd(vim.b.indent_autocmdId)
+				end
+
+				if Snacks.indent.enabled then
+					vim.b.indent_prevListChars = vim.opt_local.listchars:get()
+					-- stylua: ignore
+					vim.opt_local.listchars:append { tab = " ", space = "·", trail = "·", lead = "·" }
+					Snacks.indent.disable()
+					vim.b.indent_autocmdId =
+						vim.api.nvim_create_autocmd("BufLeave", { callback = reEnable })
+				else
+					reEnable()
 				end
 			end,
 			desc = " Invisible chars",

@@ -28,6 +28,7 @@ return {
 					"EN_QUOTES", -- don't expect smart quotes
 					"WHITESPACE_RULE", -- too many false positives
 					"UPPERCASE_SENTENCE_START", -- done via Harper
+					"CONSECUTIVE_SPACES", -- done by Harper & rumdl
 				},
 				["de-DE"] = {
 					"GERMAN_SPELLER_RULE", -- too many false positives

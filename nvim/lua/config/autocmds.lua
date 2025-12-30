@@ -36,8 +36,7 @@ vim.api.nvim_create_autocmd("WinScrolled", {
 ---LSP CODELENS-----------------------------------------------------------------
 do
 	local function enableCodeLens(ctx)
-		local ft = vim.bo[ctx.buf].filetype
-		if ft == "markdown" then return end -- useless info that heading is referenced in ToC
+		if vim.bo[ctx.buf].filetype == "markdown" then return end -- useless info for headings
 		vim.lsp.codelens.refresh { bufnr = ctx.buf }
 	end
 	vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained" }, {
@@ -51,14 +50,15 @@ do
 	})
 
 	-- format with padding & icon
+	local icon = ""
 	local originalDisplay = vim.lsp.codelens.display
 	vim.lsp.codelens.display = function(lenses, buffer, clientId) ---@diagnostic disable-line: duplicate-set-field
 		local formattedLenses = vim.iter(lenses or {}):fold({}, function(acc, lens)
 			local title = lens.command and lens.command.title
 			if not title then return acc end -- "Unresolved reference..."
 			local count = title:match("%d+") or "?"
-			local type = title:gsub("%d+", ""):gsub("references?:?", "  ")
-			lens.command.title = " " .. vim.trim(type) .. " " .. count .. " "
+			local type = vim.trim(title:gsub("%d+", ""):gsub("references?:?", icon))
+			lens.command.title = " " .. type .. " " .. count .. " "
 			table.insert(acc, lens)
 			return acc
 		end)
