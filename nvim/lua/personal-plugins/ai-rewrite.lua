@@ -8,11 +8,9 @@ local config = {
 		reasoningEffort = "minimal",
 		costPerMilTokens = { input = 0.25, output = 2 }, -- just for cost notification
 		apiKey = vim.env.OPENAI_API_KEY,
-		apiKeyCmd = { -- fallback, if `apiKey` is not set
-			"cat",
-			vim.env.HOME
-				.. "/Library/Mobile Documents/com~apple~CloudDocs/Tech/api-keys/openai-api-key.txt",
-		},
+		-- stylua: ignore
+		-- fallback, if `apiKey` is not set
+		apiKeyCmd = { "cat", vim.env.HOME .. "/Library/Mobile Documents/com~apple~CloudDocs/Tech/api-keys/openai-api-key.txt" },
 		timeoutSecs = 30,
 	},
 	appearance = {
@@ -183,7 +181,8 @@ local function rewrite(task, customPrompt)
 
 			-- NOTIFY WITH EXPLANATION
 			local msg = ("# %s (%s)\n%s"):format(task, model, explanation)
-			local cost = (resp.usage.input_tokens / 1000 / 1000) * config.provider.costPerMilTokens.input
+			local cost = (resp.usage.input_tokens / 1000 / 1000)
+					* config.provider.costPerMilTokens.input
 				+ (resp.usage.output_tokens / 1000 / 1000) * config.provider.costPerMilTokens.output
 			if cost > config.postSuccess.showCostIfHigherThan then
 				msg = msg .. ("\n\n*cost: %s$*"):format(cost)
@@ -232,7 +231,7 @@ local function rewrite(task, customPrompt)
 				end, formatDelay)
 			end
 
-			-- CursorMoved/BufLeave: disable word-diff and remove notification
+			-- CURSORMOVED/BUFLEAVE: DISABLE WORD-DIFF AND REMOVE NOTIFICATION
 			local delay = config.postSuccess.lspRangeFormat and formatDelay + 100 or 0
 			vim.defer_fn(function()
 				vim.api.nvim_create_autocmd({ "CursorMoved", "BufLeave" }, {
