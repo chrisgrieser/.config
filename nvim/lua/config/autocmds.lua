@@ -50,17 +50,16 @@ do
 	})
 
 	-- format with padding & icon
+	-- caveat: flickers on refresh, since there is an eager display in
+	-- `resolve_lenses` which is not exposed
 	local function formatLenses(lenses)
 		local icon = ""
 		local formattedLenses = vim.iter(lenses or {}):fold({}, function(acc, lens)
 			local title = lens.command and lens.command.title
-			if title then
-				local count = title:match("%d+") or "?"
-				local type = vim.trim(title:gsub("%d+", ""):gsub("references?:?", icon))
-				lens.command.title = " " .. type .. " " .. count .. " "
-			else
-				lens.command = { title = "?" }
-			end
+			if not title then return acc end -- filter "Unresolved lens…"
+			local count = title:match("%d+") or "?"
+			local type = vim.trim(title:gsub("%d+", ""):gsub("references?:?", icon))
+			lens.command.title = " " .. type .. " " .. count .. " "
 			table.insert(acc, lens)
 			return acc
 		end)

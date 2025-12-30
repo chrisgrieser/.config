@@ -23,7 +23,7 @@ fi
 
 # FIX Alfred sometimes triggering on neovide, even though it was excluded
 if [[ "$app" == "neovide" ]]; then
-	echo -n "⚠ Workaround for failed neovide-detection."
+	echo "⚠ Workaround for failed neovide-detection."
 	osascript -e 'tell application "System Events" 
 		keystroke "Z"
 		keystroke "Z"
