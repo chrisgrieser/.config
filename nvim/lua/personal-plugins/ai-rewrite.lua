@@ -2,17 +2,19 @@ local M = {}
 --------------------------------------------------------------------------------
 
 local config = {
-	openai = {
+	provider = {
 		endpoint = "https://api.openai.com/v1/responses", -- only supports OpenAI-compatible
 		model = "gpt-5-mini", -- https://platform.openai.com/docs/models/gpt-5-mini
 		reasoningEffort = "minimal",
-		costPerMilTokens = { input = 0.25, output = 2 },
+		costPerMilTokens = { input = 0.25, output = 2 }, -- just for cost notification
 		apiKey = vim.env.OPENAI_API_KEY,
-		-- stylua: ignore
-		-- fallback, if `apiKey` is not set
-		apiKeyCmd = { "cat", vim.env.HOME .. "/Library/Mobile Documents/com~apple~CloudDocs/Tech/api-keys/openai-api-key.txt" },
+		apiKeyCmd = { -- fallback, if `apiKey` is not set
+			"cat",
+			vim.env.HOME
+				.. "/Library/Mobile Documents/com~apple~CloudDocs/Tech/api-keys/openai-api-key.txt",
+		},
+		timeoutSecs = 30,
 	},
-	timeoutSecs = 30,
 	appearance = {
 		icon = "󰚩",
 		signText = "║",
@@ -25,19 +27,17 @@ local config = {
 			Follow the instruction and rewrite the code.
 
 			Explain in short bullet points what you did, followed by the
-			rewritten code in a markdown code block.
+			rewritten code in a Markdown code block.
 		]],
 		tasks = {
 			simplify = "Simplify the code without diminishing its readability.",
-			fix = "Fix any mistake in the following code.",
+			fix = "Fix any mistake in the code.",
 		},
 	},
 	postSuccess = {
 		showCostIfHigherThan = 0.001,
 		sound = true, -- currently macOS only
-		lspRangeFormat = true, -- if LSP supports `textDocument/rangeFormatting`
 		wordDiffViaGitsigns = true, -- requires `gitsigns.nvim`
-		keyToRemoveDiffAndNotif = "q",
 	},
 }
 
@@ -64,9 +64,9 @@ local function rewrite(task, customPrompt)
 	}
 
 	-- API KEY
-	local openaiApiKey = config.openai.apiKey
+	local openaiApiKey = config.provider.apiKey
 	if not openaiApiKey then
-		local out = vim.system(config.openai.apiKeyCmd):wait()
+		local out = vim.system(config.provider.apiKeyCmd):wait()
 		assert(out.code == 0, "Could not get OpenAI API key: " .. out.stderr)
 		openaiApiKey = vim.trim(out.stdout)
 	end
@@ -102,10 +102,10 @@ local function rewrite(task, customPrompt)
 
 	-- PREPARE REQUEST
 	-- DOCS Responses API https://platform.openai.com/docs/api-reference/responses/get
-	local model = config.openai.model
+	local model = config.provider.model
 	local data = {
 		model = model,
-		reasoning = { effort = config.openai.reasoningEffort },
+		reasoning = { effort = config.provider.reasoningEffort },
 		input = {
 			{ role = "system", content = systemPrompt },
 			{ role = "system", content = taskPrompt },
@@ -115,7 +115,7 @@ local function rewrite(task, customPrompt)
 	if vim.fn.executable("curl") == 0 then return notify("`curl` not found.", "error") end
 	-- stylua: ignore
 	local curlArgs = {
-		"curl", "--silent", config.openai.endpoint,
+		"curl", "--silent", config.provider.endpoint,
 		"--header", "Content-Type: application/json",
 		"--header", "Authorization: Bearer " .. openaiApiKey,
 		"--data", vim.json.encode(data),
@@ -160,7 +160,7 @@ local function rewrite(task, customPrompt)
 	-- SEND REQUEST
 	vim.system(
 		curlArgs,
-		{ timeout = 1000 * config.timeoutSecs },
+		{ timeout = 1000 * config.provider.timeoutSecs },
 		vim.schedule_wrap(function(out)
 			-- STOP SPINNER & SIGNS
 			if timer then
@@ -183,8 +183,8 @@ local function rewrite(task, customPrompt)
 
 			-- NOTIFY WITH EXPLANATION
 			local msg = ("# %s (%s)\n%s"):format(task, model, explanation)
-			local cost = (resp.usage.input_tokens / 1000 / 1000) * config.openai.costPerMilTokens.input
-				+ (resp.usage.output_tokens / 1000 / 1000) * config.openai.costPerMilTokens.output
+			local cost = (resp.usage.input_tokens / 1000 / 1000) * config.provider.costPerMilTokens.input
+				+ (resp.usage.output_tokens / 1000 / 1000) * config.provider.costPerMilTokens.output
 			if cost > config.postSuccess.showCostIfHigherThan then
 				msg = msg .. ("\n\n*cost: %s$*"):format(cost)
 			end
@@ -204,18 +204,6 @@ local function rewrite(task, customPrompt)
 			vim.api.nvim_win_set_cursor(ctx.winid, { startRow, 0 })
 
 			-- POST SUCCESS
-			if config.postSuccess.lspRangeFormat then
-				local formattingLsps =
-					vim.lsp.get_clients { bufnr = ctx.bufnr, method = "textDocument/rangeFormatting" }
-				if #formattingLsps > 0 then
-					local newEndRow = startRow + #rewrittenLines - 1
-					local range = { start = { startRow - 1, 0 }, ["end"] = { newEndRow, -1 } }
-					vim.defer_fn(
-						function() vim.lsp.buf.format { bufnr = ctx.bufnr, range = range } end,
-						100 -- delay needed to ensure buffer was updated, scheduling not enough
-					)
-				end
-			end
 			if config.postSuccess.sound then
 				if jit.os == "OSX" then -- using macOS' `afplay`
 					local sound =
@@ -231,17 +219,35 @@ local function rewrite(task, customPrompt)
 				gitsigns.config.show_deleted = true
 			end
 
-			-- KEYMAP TO REMOVE NOTIFICATION/DIFF 
-			vim.keymap.set("n", config.postSuccess.keyToRemoveDiffAndNotif, function()
-				if package.loaded["snacks"] then Snacks.notifier.hide() end
-				local ok, gitsigns = pcall(require, "gitsigns.config")
-				if ok then
-					gitsigns.config.linehl = false
-					gitsigns.config.word_diff = false
-					gitsigns.config.show_deleted = false
-				end
-				vim.keymap.del("n", config.postSuccess.keyToRemoveDiffAndNotif, { buffer = ctx.bufnr })
-			end, { buffer = ctx.bufnr })
+			-- LSP RANGE FORMATTING
+			local formatDelay = 100 -- FIX needed to ensure buffer was updated, scheduling not enough
+			local formattingLsps =
+				vim.lsp.get_clients { bufnr = ctx.bufnr, method = "textDocument/rangeFormatting" }
+			if #formattingLsps > 0 then
+				local newEndRow = startRow + #rewrittenLines - 1
+				local range = { start = { startRow - 1, 0 }, ["end"] = { newEndRow, -1 } }
+				vim.defer_fn(function()
+					vim.cmd.undojoin() -- = next undo reverts change & formatting
+					vim.lsp.buf.format { bufnr = ctx.bufnr, range = range }
+				end, formatDelay)
+			end
+
+			-- CursorMoved/BufLeave: disable word-diff and remove notification
+			local delay = config.postSuccess.lspRangeFormat and formatDelay + 100 or 0
+			vim.defer_fn(function()
+				vim.api.nvim_create_autocmd({ "CursorMoved", "BufLeave" }, {
+					buffer = ctx.bufnr,
+					once = true,
+					callback = function()
+						if package.loaded["snacks"] then Snacks.notifier.hide() end
+						local ok, gitsigns = pcall(require, "gitsigns.config")
+						if not (ok and config.postSuccess.wordDiffViaGitsigns) then return end
+						gitsigns.config.linehl = false
+						gitsigns.config.word_diff = false
+						gitsigns.config.show_deleted = false
+					end,
+				})
+			end, delay)
 		end)
 	)
 end
