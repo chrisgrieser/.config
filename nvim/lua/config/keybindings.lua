@@ -148,14 +148,20 @@ do
 	if vim.g.whichkeyAddSpec then vim.g.whichkeyAddSpec { "<leader>a", group = "󰚩 AI" } end
 	keymap(
 		{ "n", "x" },
+		"<leader>aa",
+		function() require("personal-plugins.ai-rewrite").task() end,
+		{ desc = "󰘎 Prompt" }
+	)
+	keymap(
+		{ "n", "x" },
 		"<leader>as",
-		function() require("personal-plugins.ai-rewrite").rewrite("simplify") end,
+		function() require("personal-plugins.ai-rewrite").task("simplify") end,
 		{ desc = "󰚩 Simplify" }
 	)
 	keymap(
 		{ "n", "x" },
 		"<leader>af",
-		function() require("personal-plugins.ai-rewrite").rewrite("fix") end,
+		function() require("personal-plugins.ai-rewrite").task("fix") end,
 		{ desc = "󰚩 Fix" }
 	)
 end

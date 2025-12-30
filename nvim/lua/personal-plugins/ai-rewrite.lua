@@ -24,9 +24,8 @@ local config = {
 			I will give you an instruction as well as some code.
 			Follow the instruction and rewrite the code.
 
-			Briefly explain what you did, followed by the rewritten code in a
-			markdown code block.
-			- In the explanation, use bullet points if making more than one point.
+			Explain in short bullet points what you did, followed by the
+			rewritten code in a markdown code block.
 		]],
 		tasks = {
 			simplify = "Simplify the code without diminishing its readability.",
@@ -36,7 +35,7 @@ local config = {
 	postSuccess = {
 		showCostIfHigherThan = 0.001,
 		sound = true, -- currently macOS only
-		lspRangeFormat = false, -- if LSP server supports `textDocument/rangeFormatting`
+		lspRangeFormat = true, -- if LSP server supports `textDocument/rangeFormatting`
 		hook = function()
 			-- local ok, gitsigns = pcall(require, "gitsigns")
 			-- if not ok then return end
@@ -59,9 +58,9 @@ local function notify(msg, level, opts)
 	vim.notify(msg, vim.log.levels[level:upper()], opts)
 end
 
----@param task string one of the keys of `opts.prompt.tasks`
+---@param task string
 ---@return nil
-function M.rewrite(task)
+local function rewrite(task)
 	local ctx = {
 		bufnr = vim.api.nvim_get_current_buf(),
 		winid = vim.api.nvim_get_current_win(),
@@ -81,12 +80,13 @@ function M.rewrite(task)
 	assert(mode:find("[nV]"), "Only normal and visual line mode are supported.")
 	local prevCursor = vim.api.nvim_win_get_cursor(0)
 	if mode == "n" then vim.cmd.normal { "Vip", bang = true } end
-	local startPos, endPos = vim.fn.getpos("."), vim.fn.getpos("v")
-	local startRow, endRow = startPos[2], endPos[2]
-	local selectionLines = vim.fn.getregion(startPos, endPos)
-	local selection = table.concat(selectionLines, "\n")
 	vim.cmd.normal { "V", bang = true } -- leave visual line mode
 	if mode == "n" then vim.api.nvim_win_set_cursor(ctx.winid, prevCursor) end
+
+	local startRow = vim.api.nvim_buf_get_mark(ctx.bufnr, "<")[1]
+	local endRow = vim.api.nvim_buf_get_mark(ctx.bufnr, ">")[1]
+	local selectionLines = vim.api.nvim_buf_get_lines(ctx.bufnr, startRow - 1, endRow, false)
+	local selection = table.concat(selectionLines, "\n")
 	if startRow > endRow then -- selection was reversed
 		startRow, endRow = endRow, startRow
 	end
@@ -99,13 +99,6 @@ function M.rewrite(task)
 		notify("Task not specified.\n\nMust be one to the keys of `opts.prompt.tasks`.", "warn")
 		return
 	end
-	local taskPrompt = config.prompt.tasks[task]
-	if not taskPrompt then
-		local msg = "Unknown task: " .. task .. "\n\nMust be one to the keys of `opts.prompt.tasks`."
-		notify(msg, "warn")
-		return
-	end
-	taskPrompt = "The task is: " .. vim.trim(taskPrompt)
 
 	-- PREPARE REQUEST
 	-- DOCS Responses API https://platform.openai.com/docs/api-reference/responses/get
@@ -130,7 +123,7 @@ function M.rewrite(task)
 
 	-- START NOTIFICATION / SPINNER
 	local timer
-	local staticMsg = ("[%s] %s"):format(task, model)
+	local progressMsg = ("[%s] %s"):format(task, model)
 	if package.loaded["snacks"] then
 		local spinners = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" }
 		local updateIntervalMs = 250
@@ -140,12 +133,12 @@ function M.rewrite(task)
 			updateIntervalMs,
 			vim.schedule_wrap(function()
 				local spinner = spinners[math.floor(vim.uv.now() / updateIntervalMs) % #spinners + 1]
-				-- id to replace existing notification when using snacks.notifier
-				notify(staticMsg .. " " .. spinner, "trace", { id = "ai-rewrite" })
+				-- `id` to replace existing notification when using snacks.notifier
+				notify(progressMsg .. " " .. spinner, "trace", { id = "ai-rewrite" })
 			end)
 		)
 	else
-		notify(staticMsg .. "…", "trace")
+		notify(progressMsg .. "…", "trace")
 	end
 
 	-- SIGNS
@@ -186,18 +179,22 @@ function M.rewrite(task)
 			local code = resp.output[2].content[1].text
 			local explanation, rewritten = code:match("^(.+)\n+```%w*\n(.+)\n```")
 			assert(explanation and rewritten, "Could not parse answer: " .. rewritten)
+			explanation = vim.trim(explanation:gsub("Changes made:%s*", "")) .. "  "
+			-- trailing spaces to fix wrapping issues in notification window
 
 			-- NOTIFY
-			local msg = "✅ " .. staticMsg
+			local msg = ("# %s (%s)"):format(task, model)
 			local cost = (resp.usage.input_tokens / 1000 / 1000) * config.openai.costPerMilTokens.input
 				+ (resp.usage.output_tokens / 1000 / 1000) * config.openai.costPerMilTokens.output
 			if cost > config.postSuccess.showCostIfHigherThan then
 				msg = msg .. ("\n\n(cost: %s$)"):format(cost)
 			end
-			msg = msg .. "\n\n" .. explanation
+			msg = msg .. "\n" .. explanation
 			notify(msg, "info", { id = "ai-rewrite", timeout = false })
 
 			-- UPDATE BUFFER
+			-- fix indentation ourselves, since LLMs often do this wrong, even when
+			-- explicitly prompted to respect original indentation
 			local rewrittenLines = vim.split(rewritten, "\n")
 			local indentedLines = vim.tbl_map(function(line)
 				-- `vim.text.indent` only indents w/ spaces, so we need to indent manually
@@ -231,6 +228,27 @@ function M.rewrite(task)
 			config.postSuccess.hook()
 		end)
 	)
+end
+
+---@param task string? if not specified, prompt user
+function M.task(task)
+	if task then
+		local taskPrompt = config.prompt.tasks[task]
+		if not taskPrompt then
+			local msg = "Unknown task: "
+				.. task
+				.. "\n\nMust be one to the keys of `opts.prompt.tasks`."
+			notify(msg, "warn")
+			return
+		end
+		M.task(taskPrompt)
+	else
+		local icon = config.appearance.icon
+		vim.ui.input({ prompt = "Instruction: " }, function(taskPrompt)
+			if not taskPrompt then return end
+			M.task(taskPrompt)
+		end)
+	end
 end
 
 --------------------------------------------------------------------------------
