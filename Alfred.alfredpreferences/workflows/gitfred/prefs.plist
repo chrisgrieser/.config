@@ -6,6 +6,8 @@
 	<string>dev</string>
 	<key>clone_depth</key>
 	<integer>40</integer>
+	<key>create_local_branches_on_clone</key>
+	<true/>
 	<key>fork_on_clone</key>
 	<true/>
 	<key>github_token_shell_cmd</key>

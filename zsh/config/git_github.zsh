@@ -186,7 +186,7 @@ function clone {
 	# new commit without parent, effectively destroying git history (!!)
 	local depth=30
 	print "Cloning with depth: $depth\n"
-	git clone --depth=$depth "$1" --no-tags
+	git clone --depth=$depth "$1" --no-single-branch --no-tags
 	builtin cd "$(basename "$1" .git)" && echo
 }
 
