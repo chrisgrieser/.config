@@ -445,22 +445,15 @@ end
 
 function M.codeBlockFromClipboard()
 	-- dedent clipboard content
-	local code = vim.split(vim.fn.getreg("+"), "\n", { trimempty = true })
-	local smallestIndent = vim.iter(code):fold(math.huge, function(acc, line)
-		if vim.trim(line) == "" then return acc end -- ignore empty lines for indent
-		local indent = #line:match("^%s*")
-		return math.min(acc, indent)
-	end)
-	local dedented = vim.tbl_map(function(line)
-		if vim.trim(line) == "" then return line end -- ignore empty lines for indent
-		return line:sub(smallestIndent + 1)
-	end, code)
+	local code = vim.fn.getreg("+"):gsub("%s*$", ""):gsub("^%s*\n", "") -- trim, but not 1st indent
+	local dedented = vim.text.indent(0, code)
+	local lines = vim.split(dedented, "\n")
 
 	-- insert
 	local row = vim.api.nvim_win_get_cursor(0)[1]
-	table.insert(dedented, 1, "```")
-	table.insert(dedented, "```")
-	vim.api.nvim_buf_set_lines(0, row - 1, row, false, dedented)
+	table.insert(lines, 1, "```")
+	table.insert(lines, "```")
+	vim.api.nvim_buf_set_lines(0, row - 1, row, false, lines)
 	vim.api.nvim_win_set_cursor(0, { row, 1 })
 	vim.cmd.startinsert { bang = true }
 end
