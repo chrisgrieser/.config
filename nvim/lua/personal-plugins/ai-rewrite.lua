@@ -35,14 +35,9 @@ local config = {
 	postSuccess = {
 		showCostIfHigherThan = 0.001,
 		sound = true, -- currently macOS only
-		lspRangeFormat = true, -- if LSP server supports `textDocument/rangeFormatting`
-		hook = function()
-			-- local ok, gitsigns = pcall(require, "gitsigns")
-			-- if not ok then return end
-			-- vim.cmd.normal { "k", bang = true } -- in case cursor is already at hunk start
-			-- gitsigns.nav_hunk("next")
-			-- vim.defer_fn(gitsigns.preview_hunk_inline, 100) -- `nav_hunk` has no callback but is async…
-		end,
+		lspRangeFormat = true, -- if LSP supports `textDocument/rangeFormatting`
+		wordDiffViaGitsigns = true, -- requires `gitsigns.nvim`
+		keyToRemoveDiffAndNotif = "q",
 	},
 }
 
@@ -58,9 +53,10 @@ local function notify(msg, level, opts)
 	vim.notify(msg, vim.log.levels[level:upper()], opts)
 end
 
----@param task string
+---@param task? string one to the keys of `opts.prompt.tasks`
+---@param customPrompt? string
 ---@return nil
-local function rewrite(task)
+local function rewrite(task, customPrompt)
 	local ctx = {
 		bufnr = vim.api.nvim_get_current_buf(),
 		winid = vim.api.nvim_get_current_win(),
@@ -95,10 +91,14 @@ local function rewrite(task)
 	-- PROMPTS
 	local systemPrompt = config.prompt.system:gsub("{{filetype}}", vim.bo.ft)
 	local userPrompt = ("The code is:\n```%s\n%s\n```"):format(vim.bo.ft, selection)
-	if not task then
-		notify("Task not specified.\n\nMust be one to the keys of `opts.prompt.tasks`.", "warn")
+	local taskPrompt = customPrompt or config.prompt.tasks[task]
+	if not taskPrompt then
+		local msg = ("Unknown task: %s"):format(task)
+			.. "\n\nMust be one to the keys of `opts.prompt.tasks`."
+		notify(msg, "warn")
 		return
 	end
+	taskPrompt = vim.trim("The task is: " .. taskPrompt)
 
 	-- PREPARE REQUEST
 	-- DOCS Responses API https://platform.openai.com/docs/api-reference/responses/get
@@ -143,7 +143,7 @@ local function rewrite(task)
 
 	-- SIGNS
 	if vim.api.nvim_strwidth(config.appearance.signText .. config.appearance.icon) > 2 then
-		notify("Sign text + icon must be 2 chars wide max.", "warn")
+		notify("Sign text + icon must be 1 char each.", "warn")
 		return
 	end
 	local ns = vim.api.nvim_create_namespace("ai-rewrite")
@@ -179,17 +179,15 @@ local function rewrite(task)
 			local code = resp.output[2].content[1].text
 			local explanation, rewritten = code:match("^(.+)\n+```%w*\n(.+)\n```")
 			assert(explanation and rewritten, "Could not parse answer: " .. rewritten)
-			explanation = vim.trim(explanation:gsub("Changes made:%s*", "")) .. "  "
-			-- trailing spaces to fix wrapping issues in notification window
+			explanation = vim.trim(explanation:gsub("Changes made:%s*", ""))
 
-			-- NOTIFY
-			local msg = ("# %s (%s)"):format(task, model)
+			-- NOTIFY WITH EXPLANATION
+			local msg = ("# %s (%s)\n%s"):format(task, model, explanation)
 			local cost = (resp.usage.input_tokens / 1000 / 1000) * config.openai.costPerMilTokens.input
 				+ (resp.usage.output_tokens / 1000 / 1000) * config.openai.costPerMilTokens.output
 			if cost > config.postSuccess.showCostIfHigherThan then
-				msg = msg .. ("\n\n(cost: %s$)"):format(cost)
+				msg = msg .. ("\n\n*cost: %s$*"):format(cost)
 			end
-			msg = msg .. "\n" .. explanation
 			notify(msg, "info", { id = "ai-rewrite", timeout = false })
 
 			-- UPDATE BUFFER
@@ -225,28 +223,38 @@ local function rewrite(task)
 					vim.system { "afplay", "--volume", "0.4", sound }
 				end
 			end
-			config.postSuccess.hook()
+			if config.postSuccess.wordDiffViaGitsigns then
+				local ok, gitsigns = pcall(require, "gitsigns.config")
+				if not ok then return end
+				gitsigns.config.linehl = true
+				gitsigns.config.word_diff = true
+				gitsigns.config.show_deleted = true
+			end
+
+			-- KEYMAP TO REMOVE NOTIFICATION/DIFF 
+			vim.keymap.set("n", config.postSuccess.keyToRemoveDiffAndNotif, function()
+				if package.loaded["snacks"] then Snacks.notifier.hide() end
+				local ok, gitsigns = pcall(require, "gitsigns.config")
+				if ok then
+					gitsigns.config.linehl = false
+					gitsigns.config.word_diff = false
+					gitsigns.config.show_deleted = false
+				end
+				vim.keymap.del("n", config.postSuccess.keyToRemoveDiffAndNotif, { buffer = ctx.bufnr })
+			end, { buffer = ctx.bufnr })
 		end)
 	)
 end
 
----@param task string? if not specified, prompt user
+---@param task string? one to the keys of `opts.prompt.tasks`; if not specified prompt user
 function M.task(task)
 	if task then
-		local taskPrompt = config.prompt.tasks[task]
-		if not taskPrompt then
-			local msg = "Unknown task: "
-				.. task
-				.. "\n\nMust be one to the keys of `opts.prompt.tasks`."
-			notify(msg, "warn")
-			return
-		end
-		M.task(taskPrompt)
+		rewrite(task, nil)
 	else
-		local icon = config.appearance.icon
-		vim.ui.input({ prompt = "Instruction: " }, function(taskPrompt)
-			if not taskPrompt then return end
-			M.task(taskPrompt)
+		local label = vim.trim(config.appearance.icon .. " Prompt:") .. " "
+		vim.ui.input({ prompt = label }, function(customPrompt)
+			if not customPrompt then return end
+			rewrite("custom prompt", customPrompt)
 		end)
 	end
 end
