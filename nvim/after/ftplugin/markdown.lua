@@ -21,7 +21,6 @@ abbr("->", "→")
 ---KEYMAPS----------------------------------------------------------------------
 local bkeymap = require("config.utils").bufKeymap
 
-bkeymap("n", "<leader>rt", "vip:!pandoc --to=gfm<CR>", { desc = " Format table under cursor" })
 -- stylua: ignore
 bkeymap("n", "#", function() require("personal-plugins.hiraganafy")() end, { desc = " Hiraganafy" })
 
