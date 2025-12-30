@@ -2,6 +2,7 @@
 local optl = vim.opt_local
 
 optl.expandtab = true
+optl.shiftwidth = 4
 optl.commentstring = "<!-- %s -->" -- add spaces
 
 -- so two trailing spaces are highlighted, but not a single trailing space

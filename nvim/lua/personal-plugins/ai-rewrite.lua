@@ -23,11 +23,10 @@ local config = {
 			You are an export {{filetype}} developer.
 			I will give you an instruction as well as some code.
 			Follow the instruction and rewrite the code.
-			
-			Briefly explain what you did, followed by the rewritten code in a 
+
+			Briefly explain what you did, followed by the rewritten code in a
 			markdown code block.
-			- In the explanation, use bullet points when making more than one point.
-			- In the code, respect the indentation of the original code.
+			- In the explanation, use bullet points if making more than one point.
 		]],
 		tasks = {
 			simplify = "Simplify the code without diminishing its readability.",
@@ -36,8 +35,8 @@ local config = {
 	},
 	postSuccess = {
 		showCostIfHigherThan = 0.001,
-		lspRangeFormat = false, -- if LSP server supports `textDocument/rangeFormatting`
 		sound = true, -- currently macOS only
+		lspRangeFormat = false, -- if LSP server supports `textDocument/rangeFormatting`
 		hook = function()
 			-- local ok, gitsigns = pcall(require, "gitsigns")
 			-- if not ok then return end
@@ -66,6 +65,7 @@ function M.rewrite(task)
 	local ctx = {
 		bufnr = vim.api.nvim_get_current_buf(),
 		winid = vim.api.nvim_get_current_win(),
+		usesSpaces = vim.bo.expandtab,
 	}
 
 	-- API KEY
@@ -198,9 +198,14 @@ function M.rewrite(task)
 			notify(msg, "info", { id = "ai-rewrite", timeout = false })
 
 			-- UPDATE BUFFER
-			local indentedRewrite = vim.text.indent(oldIndent, rewritten)
-			local rewrittenLines = vim.split(indentedRewrite, "\n")
-			vim.api.nvim_buf_set_lines(ctx.bufnr, startRow - 1, endRow, false, rewrittenLines)
+			local rewrittenLines = vim.split(rewritten, "\n")
+			local indentedLines = vim.tbl_map(function(line)
+				-- `vim.text.indent` only indents w/ spaces, so we need to indent manually
+				if line == "" then return "" end
+				local indentChar = ctx.usesSpaces and " " or "\t"
+				return indentChar:rep(oldIndent) .. line
+			end, rewrittenLines)
+			vim.api.nvim_buf_set_lines(ctx.bufnr, startRow - 1, endRow, false, indentedLines)
 			vim.api.nvim_win_set_cursor(ctx.winid, { startRow, 0 })
 
 			-- POST SUCCESS

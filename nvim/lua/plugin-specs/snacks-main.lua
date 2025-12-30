@@ -22,8 +22,10 @@ return {
 					-- stylua: ignore
 					vim.opt_local.listchars:append { tab = " ", space = "·", trail = "·", lead = "·" }
 					Snacks.indent.disable()
-					vim.b.indent_autocmdId =
-						vim.api.nvim_create_autocmd("BufLeave", { callback = reEnable })
+					vim.b.indent_autocmdId = vim.api.nvim_create_autocmd("BufLeave", {
+						callback = reEnable,
+						buffer = 0,
+					})
 				else
 					reEnable()
 				end
