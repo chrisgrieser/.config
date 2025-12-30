@@ -10,6 +10,7 @@ return {
 		{
 			"<leader>oi",
 			function()
+				-- toggle invisible chars, disable when leaving buffer
 				local function reEnable()
 					vim.opt_local.listchars = vim.b.indent_prevListChars
 					Snacks.indent.enable()
