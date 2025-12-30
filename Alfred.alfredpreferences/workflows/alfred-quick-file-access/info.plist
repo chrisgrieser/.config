@@ -1697,9 +1697,35 @@ to modify the respective hotkey</string>
 			<key>variable</key>
 			<string>max_recent_files</string>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>finder</string>
+				<key>pairs</key>
+				<array>
+					<array>
+						<string>Finder</string>
+						<string>finder</string>
+					</array>
+					<array>
+						<string>Path Finder</string>
+						<string>pathfinder</string>
+					</array>
+				</array>
+			</dict>
+			<key>description</key>
+			<string>Select an alterntive file manager for the "front window" search.</string>
+			<key>label</key>
+			<string>File manager</string>
+			<key>type</key>
+			<string>popupbutton</string>
+			<key>variable</key>
+			<string>front_window_file_manager</string>
+		</dict>
 	</array>
 	<key>version</key>
-	<string>1.3.1</string>
+	<string>1.4.0</string>
 	<key>webaddress</key>
 	<string>chris-grieser.de</string>
 </dict>

@@ -33,15 +33,16 @@ return {
 	},
 	build = function()
 		-- get nvim-lua typings at scratch location
-		local luarc = vim.fn.stdpath("data") .. "/scratch/.luarc.jsonc"
-		local file = io.open(luarc, "w")
+		local scratchRoot = vim.fn.stdpath("data") .. "/scratch" -- default root
+		vim.fn.mkdir(scratchRoot, "p")
+		local luarc = io.open(scratchRoot .. "/.luarc.jsonc", "w")
+		assert(luarc, "Could not create luarc for lua scratch")
 		local content = [[ {
 			"runtime.version": "LuaJIT",
 			"workspace.library": ["$VIMRUNTIME/lua", "${3rd}/luv/library"]
 		} ]]
-		assert(file, "Could not create luarc for lua scratch")
-		file:write(content)
-		file:close()
+		luarc:write(content)
+		luarc:close()
 	end,
 	---@type snacks.Config
 	opts = {

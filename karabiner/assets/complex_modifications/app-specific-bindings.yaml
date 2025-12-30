@@ -210,15 +210,6 @@ rules:
   #───────────────────────────────────────────────────────────────────────
   - description: "(Apps) Script Editor"
     manipulators:
-      # Quit without saving
-      - type: basic
-        from: { key_code: q, modifiers: { mandatory: [command] } }
-        to:
-          - { key_code: q, modifiers: [command] }
-          - { key_code: vk_none, hold_down_milliseconds: 400 }
-          - { key_code: delete_or_backspace, modifiers: [command] }
-        conditions:
-          [{ type: frontmost_application_if, bundle_identifiers: [com.apple.ScriptEditor] }]
       # toggle syntax (Javascript <-> Applescript)
       - type: basic
         from: { key_code: s, modifiers: { mandatory: [option] } }

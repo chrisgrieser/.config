@@ -165,7 +165,7 @@ declare const Application: {
 		// accepts arrays only for *files*?! https://github.com/chrisgrieser/finder-vim-mode/issues/3
 		select(path: PathObj | PathObj[]): void;
 		selection(): FinderItem[];
-		finderWindows: { target: FinderItem };
+		finderWindows: { target(): FinderItem, (): FinderItem }[];
 		insertionLocation(): FinderItem;
 		// https://medium.com/hackernoon/javascript-for-automation-in-macos-3b499da40da1
 		make(options: {

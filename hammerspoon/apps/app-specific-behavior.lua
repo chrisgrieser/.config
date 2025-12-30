@@ -49,6 +49,7 @@ M.wf_scripteditor = wf
 	:subscribe(wf.windowCreated, function(newWin)
 		-- paste, and format
 		if newWin:title() == "Untitled" then
+			hs.eventtap.keyStroke({ "cmd" }, "a") -- select old contents
 			hs.eventtap.keyStroke({ "cmd" }, "v")
 			hs.osascript.javascript('Application("Script Editor").documents()[0].checkSyntax()')
 		end

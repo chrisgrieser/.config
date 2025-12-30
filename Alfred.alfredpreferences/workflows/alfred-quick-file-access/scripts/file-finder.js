@@ -10,8 +10,24 @@ function alfredMatcher(str) {
 	return [clean, str].join(" ") + " ";
 }
 
-/** @return {string} path of front Finder window; `""` if there is no Finder window */
-function getFrontWin() {
+/** @return {string} path from PathFinder front window; `""` if unavailable */
+function getPathFinderWin() {
+	try {
+		const pf = Application("Path Finder");
+		// @ts-expect-error
+		if (pf.running() && pf.finderWindows.length > 0) {
+			// @ts-expect-error
+			const path = pf.finderWindows[0].target.posixPath();
+			if (path) return path;
+		}
+	} catch (_error) {
+		// PathFinder not available
+	}
+	return "";
+}
+
+/** @return {string} path from Finder front window; `""` if unavailable */
+function getFinderWin() {
 	try {
 		const path = Application("Finder").insertionLocation().url().slice(7, -1);
 		return decodeURIComponent(path);
@@ -135,8 +151,9 @@ function run() {
 			? Math.max(Number.parseInt($.getenv("max_recent_files")), 9)
 			: undefined;
 	if (keyword === $.getenv("frontwin_keyword")) {
-		directory = getFrontWin();
-		if (directory === "") return errorItem("⚠️ No Finder window found.");
+		const fileManager = $.getenv("front_window_file_manager");
+		directory = fileManager === "finder" ? getFinderWin() : getPathFinderWin();
+		if (directory === "") return errorItem(`⚠️ No ${fileManager} window found.`);
 	}
 	if (directory) shellCmd = shellCmd.replace("%s", directory);
 
