@@ -31,17 +31,15 @@ return {
 		{ "<leader>es", function() Snacks.scratch() end, desc = " Scratch buffer" },
 		{ "<leader>el", function() Snacks.scratch.select() end, desc = " List scratches" },
 	},
-	build = function()
-		-- get nvim-lua typings at scratch location
+	build = function() -- get nvim-lua typings at scratch location
 		local scratchRoot = vim.fn.stdpath("data") .. "/scratch" -- default root
 		vim.fn.mkdir(scratchRoot, "p")
 		local luarc = io.open(scratchRoot .. "/.luarc.jsonc", "w")
 		assert(luarc, "Could not create luarc for lua scratch")
-		local content = [[ {
+		luarc:write([[ {
 			"runtime.version": "LuaJIT",
 			"workspace.library": ["$VIMRUNTIME/lua", "${3rd}/luv/library"]
-		} ]]
-		luarc:write(content)
+		} ]])
 		luarc:close()
 	end,
 	---@type snacks.Config

@@ -12,7 +12,7 @@ return {
 			["Brewfile"] = { glyph = "󱄖", hl = "MiniIconsYellow" },
 		},
 		extension = {
-			["d.ts"] = { hl = "MiniIconsRed" }, -- distinguish `.d.ts` from `.ts`
+			["d.ts"] = { hl = "MiniIconsGreen" }, -- distinguish `.d.ts` from `.ts`
 			["applescript"] = { glyph = "󰀵" },
 			["log"] = { glyph = "󱂅", hl = "MiniIconsGrey" },
 			["gitignore"] = { glyph = "" },
@@ -21,13 +21,12 @@ return {
 			["add"] = { glyph = "" }, -- vim spellfile
 		},
 		filetype = {
-			["css"] = { glyph = "", hl = "MiniIconsRed" },
+			["css"] = { glyph = "", hl = "MiniIconsRed" },
 			["typescript"] = { hl = "MiniIconsCyan" },
 			["vim"] = { glyph = "" },
 			["qf"] = { glyph = "" },
 
 			-- plugin-filetypes
-			["codecompanion"] = { glyph = "" },
 			["leetcode.nvim"] = { glyph = "󰐱" },
 			["ccc-ui"] = { glyph = "" },
 			["scissors-snippet"] = { glyph = "󰩫" },

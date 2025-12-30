@@ -15,37 +15,35 @@ local config = {
 	timeoutSecs = 30,
 	appearance = {
 		icon = "󰚩",
-		signText = "┃",
+		signText = "║",
 		signHlgroup = "DiagnosticSignInfo",
-		spinnerDuringRequest = true, -- requires notifier from `snacks.nvim`
 	},
 	prompt = {
 		system = [[
 			You are an export {{filetype}} developer.
-			I will give you a task as well as some code.
-			Follow the task and rewrite the code.
-			- Output nothing but the code, if not stated otherwise.
-			- Do not add Markdown code fences.
-			- Restpect the indentation used in the original code.
+			I will give you an instruction as well as some code.
+			Follow the instruction and rewrite the code.
+			
+			Briefly explain what you did, followed by the rewritten code in a 
+			markdown code block.
+			- In the explanation, use bullet points when making more than one point.
+			- In the code, respect the indentation of the original code.
 		]],
 		tasks = {
-			simplify = [[Simplify the code without diminishing its readability.]],
-			fix = [[
-				Fix any mistake in the following code.
-				Add a leading comment with a bullet list of what has been changed.
-			]],
+			simplify = "Simplify the code without diminishing its readability.",
+			fix = "Fix any mistake in the following code.",
 		},
 	},
 	postSuccess = {
 		showCostIfHigherThan = 0.001,
-		lspRangeFormat = true, -- if LSP server supports `textDocument/rangeFormatting`
+		lspRangeFormat = false, -- if LSP server supports `textDocument/rangeFormatting`
 		sound = true, -- currently macOS only
 		hook = function()
-			local ok, gitsigns = pcall(require, "gitsigns")
-			if not ok then return end
-			vim.cmd.normal { "k", bang = true } -- in case cursor is already at hunk start
-			gitsigns.nav_hunk("next")
-			vim.defer_fn(gitsigns.preview_hunk_inline, 100) -- `nav_hunk` has no callback but is async…
+			-- local ok, gitsigns = pcall(require, "gitsigns")
+			-- if not ok then return end
+			-- vim.cmd.normal { "k", bang = true } -- in case cursor is already at hunk start
+			-- gitsigns.nav_hunk("next")
+			-- vim.defer_fn(gitsigns.preview_hunk_inline, 100) -- `nav_hunk` has no callback but is async…
 		end,
 	},
 }
@@ -92,6 +90,7 @@ function M.rewrite(task)
 	if startRow > endRow then -- selection was reversed
 		startRow, endRow = endRow, startRow
 	end
+	local _, oldIndent = vim.text.indent(0, selection)
 
 	-- PROMPTS
 	local systemPrompt = config.prompt.system:gsub("{{filetype}}", vim.bo.ft)
@@ -132,7 +131,7 @@ function M.rewrite(task)
 	-- START NOTIFICATION / SPINNER
 	local timer
 	local staticMsg = ("[%s] %s"):format(task, model)
-	if package.loaded["snacks"] and config.appearance.spinnerDuringRequest then
+	if package.loaded["snacks"] then
 		local spinners = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" }
 		local updateIntervalMs = 250
 		timer = assert(vim.uv.new_timer())
@@ -170,11 +169,23 @@ function M.rewrite(task)
 		curlArgs,
 		{ timeout = 1000 * config.timeoutSecs },
 		vim.schedule_wrap(function(out)
+			-- STOP SPINNER & SIGNS
+			if timer then
+				timer:stop()
+				timer:close()
+			end
+			vim.api.nvim_buf_clear_namespace(ctx.bufnr, ns, 0, -1) -- clear signs
+
 			-- GUARD
 			if out.code == 124 then return notify("OpenAI request timed out.", "warn") end
 			if out.code ~= 0 then return notify("OpenAI request failed: " .. out.stderr, "warn") end
 			local resp = vim.json.decode(out.stdout, { luanil = { object = true } })
 			if resp.error then return notify(resp.error.message, "error") end
+
+			-- PROCESS RESPONSE
+			local code = resp.output[2].content[1].text
+			local explanation, rewritten = code:match("^(.+)\n+```%w*\n(.+)\n```")
+			assert(explanation and rewritten, "Could not parse answer: " .. rewritten)
 
 			-- NOTIFY
 			local msg = "✅ " .. staticMsg
@@ -183,19 +194,13 @@ function M.rewrite(task)
 			if cost > config.postSuccess.showCostIfHigherThan then
 				msg = msg .. ("\n\n(cost: %s$)"):format(cost)
 			end
-			notify(msg, "info", { id = "ai-rewrite" })
-
-			-- STOP SPINNER & SIGNS
-			if timer then
-				timer:stop()
-				timer:close()
-			end
-			vim.api.nvim_buf_clear_namespace(ctx.bufnr, ns, 0, -1) -- clear signs
+			msg = msg .. "\n\n" .. explanation
+			notify(msg, "info", { id = "ai-rewrite", timeout = false })
 
 			-- UPDATE BUFFER
-			local answer = resp.output[2].content[1].text
-			local answerLines = vim.split(answer, "\n")
-			vim.api.nvim_buf_set_lines(ctx.bufnr, startRow - 1, endRow, false, answerLines)
+			local indentedRewrite = vim.text.indent(oldIndent, rewritten)
+			local rewrittenLines = vim.split(indentedRewrite, "\n")
+			vim.api.nvim_buf_set_lines(ctx.bufnr, startRow - 1, endRow, false, rewrittenLines)
 			vim.api.nvim_win_set_cursor(ctx.winid, { startRow, 0 })
 
 			-- POST SUCCESS
@@ -203,7 +208,7 @@ function M.rewrite(task)
 				local formattingLsps =
 					vim.lsp.get_clients { bufnr = ctx.bufnr, method = "textDocument/rangeFormatting" }
 				if #formattingLsps > 0 then
-					local newEndRow = startRow + #answerLines - 1
+					local newEndRow = startRow + #rewrittenLines - 1
 					local range = { start = { startRow - 1, 0 }, ["end"] = { newEndRow, -1 } }
 					vim.defer_fn(
 						function() vim.lsp.buf.format { bufnr = ctx.bufnr, range = range } end,
