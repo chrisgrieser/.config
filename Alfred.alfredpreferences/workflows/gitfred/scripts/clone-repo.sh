@@ -34,12 +34,12 @@ fi
 
 # clone with depth
 if [[ $clone_depth -eq 0 ]]; then
-	msg=$(git clone "$ssh_url" --no-single-branch --no-tags "$clone_dir" 2>&1)
+	msg=$(git clone "$ssh_url" --no-tags "$clone_dir" 2>&1)
 else
 	# WARN depth=1 is dangerous, as amending such a commit does result in a
 	# new commit without parent, effectively destroying git history (!!)
 	[[ $clone_depth -eq 1 ]] && clone_depth=2
-	msg=$(git clone "$ssh_url" --depth="$clone_depth" --no-single-branch --no-tags "$clone_dir" 2>&1)
+	msg=$(git clone "$ssh_url" --depth="$clone_depth" --no-tags "$clone_dir" 2>&1)
 fi
 
 success=$?

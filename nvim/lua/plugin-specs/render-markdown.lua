@@ -57,6 +57,8 @@ return {
 			-- `query/markdown_inline/highlights.scm`
 			hyperlink = "",
 			wiki = { icon = "" },
+			email = "󰇮 ",
+			footnote = { icon = "  ", superscript = false },
 
 			custom = {
 				web = { icon = " " }, -- for links that do not match a pattern below
@@ -86,7 +88,7 @@ return {
 		render_modes = { "n", "c", "i", "v", "V" },
 		win_options = {
 			conceallevel = { default = 0 }, -- makes toggling this plugin also toggle conceallevel
-			colorcolumn = { rendered = "" } -- disabled on render, since heading width already indicates it
+			colorcolumn = { rendered = "" }, -- disabled on render, since heading width already indicates it
 		},
 		overrides = { -- LSP hovers: hide code block lines
 			buftype = {

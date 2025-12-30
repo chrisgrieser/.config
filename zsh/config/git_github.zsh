@@ -186,16 +186,13 @@ function clone {
 	# new commit without parent, effectively destroying git history (!!)
 	local depth=30
 	print "Cloning with depth: $depth\n"
-	git clone --depth=$depth "$1" --no-single-branch --no-tags
+	git clone --depth=$depth "$1" --no-tags
 	builtin cd "$(basename "$1" .git)" && echo
 }
 
 function unshallow {
 	git fetch --unshallow
 	git pull --no-progress --tags # undo `git clone --no-tags`
-	# undo `--single-branch` https://stackoverflow.com/a/17937889/22114136
-	git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
-	git fetch origin
 }
 
 #-------------------------------------------------------------------------------
