@@ -432,6 +432,41 @@ function M.codeBlockFromClipboard()
 	vim.cmd.startinsert { bang = true }
 end
 
+--------------------------------------------------------------------------------
+
+---@param url string
+---@return nil
+local function getTitleForUrl(url)
+	local out = vim.system({ "curl", "--silent", "--location", url }):wait()
+	if out.code ~= 0 then
+		return vim.notify(out.stderr, vim.log.levels.ERROR)
+	end
+	local title = vim.trim(out.stdout:match("<title.->(.-)</title>") or "")
+	title = title -- cleanup
+		:gsub("[\n\r]+", " ")
+		:gsub("^GitHub %- ", "")
+		:gsub(" · GitHub$", "")
+
+end
+
+function M.addTitleToUrl()
+	assert(vim.fn.executable("curl") == 1, "`curl` not found.")
+	local line = vim.api.nvim_get_current_line()
+	local url = line:match([[<?%l+://%S+>?]])
+	if vim.endswith(url, ")") then return vim.notify("Already Markdown link.") end
+	local innerUrl = url:gsub(">$", ""):gsub("^<", "") -- bare URL enclosed in `<>` due to MD034
+
+	local urlStart, urlEnd = line:find(url, nil, true) -- `find` has literal search, `gsub` does not
+	local updatedLine = line:sub(1, urlStart - 1)
+		.. ("[%s](%s)"):format(title, innerUrl)
+		.. line:sub(urlEnd + 1)
+	vim.api.nvim_set_current_line(updatedLine)
+	if title == "" then
+		vim.notify("No title found.", vim.log.levels.WARN)
+		local row = vim.api.nvim_win_get_cursor(0)[1]
+		vim.api.nvim_win_set_cursor(0, { row, urlStart + 1 })
+	end
+end
 ---updates any url in the register to a mdlink if in a Markdown buffer
 ---@param reg '"'|"+"|string
 ---@return nil
@@ -451,6 +486,7 @@ function M.fetchTitleForUrlIfMarkdown(reg)
 		:gsub("[\n\r]+", " ")
 		:gsub("^GitHub %- ", "")
 		:gsub(" · GitHub$", "")
+		:gsub("&amp;", "&")
 
 	local mdlink = ("[%s](%s)"):format(title, url)
 	vim.fn.setreg(reg, mdlink)

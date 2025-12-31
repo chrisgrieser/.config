@@ -391,7 +391,7 @@ return {
 					layout = { preset = "big_preview", hidden = { "preview" } },
 				},
 				git_status = {
-					layout = "sidebar",
+					layout = "git_sidebar",
 					win = {
 						-- <CR> opens the file as usual
 						list = { keys = { ["<Space>"] = "git_stage" } },
@@ -399,7 +399,7 @@ return {
 					},
 				},
 				git_diff = {
-					layout = "sidebar",
+					layout = "git_sidebar",
 					win = {
 						-- <CR> opens the file as usual
 						list = { keys = { ["<Space>"] = "git_stage" } },
@@ -408,16 +408,8 @@ return {
 				},
 				gh_issue = { layout = "big_preview" },
 				gh_pr = { layout = "big_preview" },
-				treesitter = {
-					layout = {
-						preset = "sidebar",
-						win = {
-							preview = {
-								wo = { number = false },
-							},
-						},
-					},
-				},
+				treesitter = { layout = "sidebar" },
+				lsp_symbols = { layout = "sidebar" },
 				lsp_config = {
 					-- confirm: inspect LSP config
 					confirm = function(picker, item)
@@ -495,7 +487,6 @@ return {
 							title = "{preview}",
 							border = vim.o.winborder --[[@as "rounded"|"single"|"double"|"solid"]],
 							width = 0.5,
-							wo = { number = false, statuscolumn = " ", signcolumn = "no" },
 						},
 					},
 				},
@@ -514,11 +505,21 @@ return {
 						position = "left", -- = left-split
 						width = 0.3,
 						min_width = 25,
+						{ win = "input", height = 1, border = "bottom" },
 						{ win = "list" },
-						{
-							win = "preview",
-							wo = { number = false, statuscolumn = " ", signcolumn = "no" },
-						},
+						{ win = "preview" },
+					},
+				},
+				git_sidebar = {
+					preview = "main",
+					cycle = true, -- `list_up/down` action wraps
+					layout = {
+						box = "vertical",
+						position = "left", -- = left-split
+						width = 0.3,
+						min_width = 25,
+						{ win = "list" },
+						{ win = "preview" },
 					},
 				},
 			},
@@ -588,6 +589,11 @@ return {
 						["<C-CR>"] = "cycle_win",
 						["<Tab>"] = "list_down", -- cycle list from the preview win
 						["<S-Tab>"] = "list_up",
+					},
+					wo = {
+						number = false,
+						statuscolumn = " ",
+						signcolumn = "no",
 					},
 				},
 			},

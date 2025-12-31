@@ -26,6 +26,7 @@ bkeymap("n", "p", function()
 	require("personal-plugins.md-qol").fetchTitleForUrlIfMarkdown("+")
 	return "p"
 end, { desc = " Paste auto-fetch title for URL", expr = true })
+bkeymap("n", "<leader>cu", qol.addTitleToUrl, { desc = " Add title to URL" })
 
 bkeymap("n", "o", function() qol.autoBullet("o") end, { desc = " Auto-bullet o" })
 bkeymap("n", "O", function() qol.autoBullet("O") end, { desc = " Auto-bullet O" })
