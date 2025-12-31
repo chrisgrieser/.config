@@ -47,7 +47,7 @@ end):start()
 M.wf_scripteditor = wf
 	.new("Script Editor")
 	:subscribe(wf.windowCreated, function(newWin)
-		-- paste, and format
+		-- paste and format
 		if newWin:title() == "Untitled" then
 			hs.eventtap.keyStroke({ "cmd" }, "a") -- select old contents
 			hs.eventtap.keyStroke({ "cmd" }, "v")
@@ -77,13 +77,14 @@ M.aw_masto = aw.new(function(appName, event, masto)
 		local frontNotAlfred = hs.application.frontmostApplication():name() ~= "Alfred"
 		if #masto:allWindows() > 1 and isMediaWin and frontNotAlfred then win:close() end
 
+		local minScrollIntervalSecs = 20
 		u.defer(2, function()
 			if M.mastoHasScrolled then return end
 			M.mastoHasScrolled = true
 			hs.eventtap.keyStroke({}, "left", 1, masto) -- go back
 			hs.eventtap.keyStroke({ "cmd" }, "1", 1, masto) -- go to home tab
 			hs.eventtap.keyStroke({ "cmd" }, "up", 1, masto) -- scroll up
-			u.defer(3, function() M.mastoHasScrolled = false end)
+			u.defer(minScrollIntervalSecs, function() M.mastoHasScrolled = false end)
 		end)
 	end
 end):start()

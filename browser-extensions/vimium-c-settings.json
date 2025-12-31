@@ -1,7 +1,7 @@
 {
 	"name": "Vimium C",
-	"@time": "12/21/2025, 3:21:09 PM",
-	"time": 1766326869935,
+	"@time": "12/31/2025, 12:41:10 PM",
+	"time": 1767181270429,
 	"environment": {
 		"extension": "2.12.2",
 		"platform": "mac",
@@ -11,8 +11,8 @@
 	"exclusionListenHash": false,
 	"exclusionRules": [
 		{
-			"passKeys": "j k ",
-			"pattern": "^https://github\\.com/\\.*/(issues|pulls)$"
+			"passKeys": "c j k o x ",
+			"pattern": "^https:\\/\\/github\\.com\\/.*\\/(issues|pulls)$"
 		},
 		{
 			"passKeys": "/ ",
@@ -24,7 +24,7 @@
 		},
 		{
 			"passKeys": "/ j k l ",
-			"pattern": "^https://duckduckgo.com/.*ia=web"
+			"pattern": "^https:\\/\\/duckduckgo\\.com\\/.*ia=web"
 		},
 		{
 			"passKeys": "",
@@ -53,10 +53,6 @@
 		{
 			"passKeys": "? ",
 			"pattern": ":https://devdocs.io/"
-		},
-		{
-			"passKeys": "j k ",
-			"pattern": "^https://www.reddit.com/r/\\w+/$"
 		},
 		{
 			"passKeys": "? ",
