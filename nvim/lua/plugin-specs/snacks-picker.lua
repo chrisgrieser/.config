@@ -408,6 +408,16 @@ return {
 				},
 				gh_issue = { layout = "big_preview" },
 				gh_pr = { layout = "big_preview" },
+				treesitter = {
+					layout = {
+						preset = "sidebar",
+						win = {
+							preview = {
+								wo = { number = false },
+							},
+						},
+					},
+				},
 				lsp_config = {
 					-- confirm: inspect LSP config
 					confirm = function(picker, item)
@@ -504,8 +514,11 @@ return {
 						position = "left", -- = left-split
 						width = 0.3,
 						min_width = 25,
-						{ win = "list", },
-						{ win = "preview" },
+						{ win = "list" },
+						{
+							win = "preview",
+							wo = { number = false, statuscolumn = " ", signcolumn = "no" },
+						},
 					},
 				},
 			},

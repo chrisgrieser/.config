@@ -1,6 +1,6 @@
 -- INFO A collection of commands that are too small to publish as plugins, but
--- too large to place in the main config, where they would clutter the actual config.
--- Each function is self-contained and should be bound to a keymap.
+-- too large to place in the main config, where they would clutter the actual
+-- config. Each function is self-contained and should be bound to a keymap.
 local M = {}
 --------------------------------------------------------------------------------
 
@@ -299,6 +299,19 @@ function M.scrollLspOrOtherWin(lines)
 		local topline = vim.fn.winsaveview().topline
 		vim.fn.winrestview { topline = topline + lines }
 	end)
+end
+
+---1. works with negative numbers or floats, expecting `,` or `.` as decimal separator
+---2. does support thousands separators
+function M.sumOfAllNumbersInBuf()
+	local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+	local sum = vim.iter(lines):fold(0, function(sum, line)
+		local digits = line:match("%-?%d+[,.]?%d*")
+		if not digits then return sum end
+		local num = tonumber(digits:gsub(",", ".")) -- `tonumber` expects `.` as decimal separator
+		return sum + num
+	end)
+	vim.notify(sum, nil, { title = "Sum", icon = "∑" })
 end
 
 --------------------------------------------------------------------------------

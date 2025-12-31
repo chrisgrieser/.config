@@ -432,7 +432,8 @@ function M.codeBlockFromClipboard()
 	vim.cmd.startinsert { bang = true }
 end
 
----@param reg string
+---updates any url in the register to a mdlink if in a Markdown buffer
+---@param reg '"'|"+"|string
 ---@return nil
 function M.fetchTitleForUrlIfMarkdown(reg)
 	if vim.bo.ft ~= "markdown" then return end

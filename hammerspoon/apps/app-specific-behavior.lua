@@ -65,6 +65,28 @@ M.wf_scripteditor = wf
 ---MASTODON---------------------------------------------------------------------
 -- 1. auto-close media windows
 -- 2. auto-scroll up
+
+local function scrollMasto()
+	local masto = u.app("Mona")
+	if not masto then return end
+	local win = masto:mainWindow()
+	if not win then return end
+
+	if M.mastoHasScrolled then return end
+	M.mastoHasScrolled = true
+	hs.eventtap.keyStroke({}, "left", 1, masto) -- go back
+	hs.eventtap.keyStroke({ "cmd" }, "1", 1, masto) -- go to home tab
+	hs.eventtap.keyStroke({ "cmd" }, "up", 1, masto) -- scroll up
+	local minScrollIntervalSecs = 20
+	u.defer(minScrollIntervalSecs, function() M.mastoHasScrolled = false end)
+end
+
+M.caff_masto = hs.caffeinate.watcher
+	.new(function(event)
+		if event == hs.caffeinate.watcher.screensDidWake then scrollMasto() end
+	end)
+	:start()
+
 M.aw_masto = aw.new(function(appName, event, masto)
 	if appName ~= "Mona" then return end
 	local win = masto:mainWindow()
@@ -76,16 +98,7 @@ M.aw_masto = aw.new(function(appName, event, masto)
 		local isMediaWin = win:title():find("^Image")
 		local frontNotAlfred = hs.application.frontmostApplication():name() ~= "Alfred"
 		if #masto:allWindows() > 1 and isMediaWin and frontNotAlfred then win:close() end
-
-		local minScrollIntervalSecs = 20
-		u.defer(2, function()
-			if M.mastoHasScrolled then return end
-			M.mastoHasScrolled = true
-			hs.eventtap.keyStroke({}, "left", 1, masto) -- go back
-			hs.eventtap.keyStroke({ "cmd" }, "1", 1, masto) -- go to home tab
-			hs.eventtap.keyStroke({ "cmd" }, "up", 1, masto) -- scroll up
-			u.defer(minScrollIntervalSecs, function() M.mastoHasScrolled = false end)
-		end)
+		u.defer(2, scrollMasto)
 	end
 end):start()
 
