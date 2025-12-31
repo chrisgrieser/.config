@@ -301,17 +301,15 @@ function M.scrollLspOrOtherWin(lines)
 	end)
 end
 
----1. works with negative numbers or floats, expecting `,` or `.` as decimal separator
+---1. works with negative numbers or floats, with `,` or `.` as decimal separator
 ---2. does support thousands separators
 function M.sumOfAllNumbersInBuf()
-	local text = vim.api.nvim_buf_get_text(0, 0, 0, -1, -1, {})
-	
-	local sum = vim.iter(lines):fold(0, function(sum, line)
-		local digits = line:match("%-?%d+[,.]?%d*")
-		if not digits then return sum end
-		local num = tonumber(digits:gsub(",", ".")) -- `tonumber` expects `.` as decimal separator
-		return sum + num
-	end)
+	local text = table.concat(vim.api.nvim_buf_get_lines(0, 0, -1, false), "\n")
+	local sum = 0
+	for digits in text:gmatch("%-?%d+[,.]?%d*") do
+		local num = digits:gsub(",", ".") -- `tonumber` expects `.` as decimal separator
+		sum = sum + tonumber(num)
+	end
 	vim.notify(sum, nil, { title = "Sum", icon = "∑" })
 end
 
