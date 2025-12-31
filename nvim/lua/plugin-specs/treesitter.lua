@@ -19,7 +19,7 @@ local ensureInstalled = {
 	-- DATAFORMATS
 	"json",
 	"toml",
-	"xml", -- also used by .plist and .svg files, since they are basically xml
+	"xml", -- also used by .plist and .svg files, since they are essentially xml
 	"yaml",
 	"bibtex",
 	-- not `csv`, since the highlighting isn't very good

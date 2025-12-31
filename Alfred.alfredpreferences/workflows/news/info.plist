@@ -164,7 +164,7 @@
 				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>keyword</key>
-				<string>paywall||unlock</string>
+				<string>paywall||unlock||unpaywall</string>
 				<key>subtext</key>
 				<string>archive.today</string>
 				<key>text</key>
