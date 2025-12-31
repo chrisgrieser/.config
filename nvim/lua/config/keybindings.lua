@@ -248,7 +248,7 @@ end, { expr = true })
 ---PASTING----------------------------------------------------------------------
 keymap("n", "P", function()
 	local reg = "+"
-	require("personal-plugins.md-qol").fetchTitleForUrlIfMarkdown(reg)
+	require("personal-plugins.md-qol").addTitleToUrlIfMarkdown(reg)
 	local curLine = vim.api.nvim_get_current_line():gsub("%s*$", "")
 	local clipb = vim.trim(vim.fn.getreg(reg))
 	vim.api.nvim_set_current_line(curLine .. " " .. clipb)
@@ -261,7 +261,7 @@ end, { desc = " Paste at EoL" })
 keymap("i", "<D-v>", function()
 	local reg = "+"
 	vim.fn.setreg(reg, vim.trim(vim.fn.getreg(reg))) -- trim
-	require("personal-plugins.md-qol").fetchTitleForUrlIfMarkdown(reg)
+	require("personal-plugins.md-qol").addTitleToUrlIfMarkdown(reg)
 	if vim.fn.mode() == "R" then return "<C-r>" .. reg end
 	return "<C-g>u<C-r><C-o>" .. reg -- `<C-g>u` adds undopoint before, `<C-r><C-o>` skips auto-indent
 end, { desc = " Paste", expr = true })

@@ -1,3 +1,6 @@
+-- DOCS https://github.com/nvim-mini/mini.operators/blob/main/doc/mini-operators.txt
+--------------------------------------------------------------------------------
+
 return {
 	"nvim-mini/mini.operators",
 	keys = {
@@ -10,8 +13,8 @@ return {
 	},
 	opts = {
 		evaluate = { prefix = "" }, -- disable
-		replace = { prefix = "s", reindent_linewise = true },
-		exchange = { prefix = "sx", reindent_linewise = true },
+		replace = { prefix = "s" },
+		exchange = { prefix = "sx" },
 		sort = { prefix = "sy" },
 		multiply = { prefix = "" }, -- disable -> set our own in `make_mappings`
 	},

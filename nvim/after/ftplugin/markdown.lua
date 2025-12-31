@@ -9,8 +9,6 @@ optl.commentstring = "<!-- %s -->" -- add spaces
 optl.listchars:remove("trail")
 optl.listchars:append { multispace = "·" }
 
-optl.sidescrolloff = 3 -- lower, since we rarely go beyond textwidth
-
 -- hard-wrap when typing beyond `textwidth`
 vim.schedule(function() optl.formatoptions:append("t") end)
 
@@ -23,9 +21,9 @@ local bkeymap = require("config.utils").bufKeymap
 local qol = require("personal-plugins.md-qol")
 
 bkeymap("n", "p", function()
-	require("personal-plugins.md-qol").fetchTitleForUrlIfMarkdown("+")
+	require("personal-plugins.md-qol").addTitleToUrlIfMarkdown("+")
 	return "p"
-end, { desc = " Paste auto-fetch title for URL", expr = true })
+end, { desc = " Paste (+ add title if URL)", expr = true })
 bkeymap("n", "<leader>cu", qol.addTitleToUrl, { desc = " Add title to URL" })
 
 bkeymap("n", "o", function() qol.autoBullet("o") end, { desc = " Auto-bullet o" })

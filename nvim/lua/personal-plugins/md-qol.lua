@@ -435,26 +435,32 @@ end
 --------------------------------------------------------------------------------
 
 ---@param url string
----@return nil
+---@return string?
 local function getTitleForUrl(url)
+	assert(vim.fn.executable("curl") == 1, "`curl` not found.")
 	local out = vim.system({ "curl", "--silent", "--location", url }):wait()
 	if out.code ~= 0 then
-		return vim.notify(out.stderr, vim.log.levels.ERROR)
+		vim.notify(out.stderr, vim.log.levels.ERROR)
+		return
 	end
 	local title = vim.trim(out.stdout:match("<title.->(.-)</title>") or "")
 	title = title -- cleanup
 		:gsub("[\n\r]+", " ")
 		:gsub("^GitHub %- ", "")
 		:gsub(" · GitHub$", "")
-
+		:gsub("&amp;", "&")
+	return title
 end
 
 function M.addTitleToUrl()
-	assert(vim.fn.executable("curl") == 1, "`curl` not found.")
+	assert(vim.bo.ft == "markdown", "Only for Markdown files.")
+
 	local line = vim.api.nvim_get_current_line()
 	local url = line:match([[<?%l+://%S+>?]])
 	if vim.endswith(url, ")") then return vim.notify("Already Markdown link.") end
 	local innerUrl = url:gsub(">$", ""):gsub("^<", "") -- bare URL enclosed in `<>` due to MD034
+	local title = getTitleForUrl(innerUrl)
+	if not title then return end
 
 	local urlStart, urlEnd = line:find(url, nil, true) -- `find` has literal search, `gsub` does not
 	local updatedLine = line:sub(1, urlStart - 1)
@@ -465,29 +471,21 @@ function M.addTitleToUrl()
 		vim.notify("No title found.", vim.log.levels.WARN)
 		local row = vim.api.nvim_win_get_cursor(0)[1]
 		vim.api.nvim_win_set_cursor(0, { row, urlStart + 1 })
+		vim.schedule(vim.cmd.startinsert)
 	end
 end
 ---updates any url in the register to a mdlink if in a Markdown buffer
 ---@param reg '"'|"+"|string
 ---@return nil
-function M.fetchTitleForUrlIfMarkdown(reg)
+function M.addTitleToUrlIfMarkdown(reg)
 	if vim.bo.ft ~= "markdown" then return end
-	assert(vim.fn.executable("curl") == 1, "`curl` not found.")
 
 	local clipb = vim.fn.getreg(reg)
 	local url = clipb:match("^%l+://%S+$") -- not ending with `)` to not match mdlinks
-	local alreadyMdlink = url and vim.endswith(url, ")")
-	if not url or alreadyMdlink then return end
+	if not url then return end
 
-	local out = vim.system({ "curl", "--silent", "--location", url }):wait()
-	if out.code ~= 0 then return vim.notify(out.stderr, vim.log.levels.ERROR) end
-	local title = vim.trim(out.stdout:match("<title.->(.-)</title>") or "")
-	title = title -- cleanup
-		:gsub("[\n\r]+", " ")
-		:gsub("^GitHub %- ", "")
-		:gsub(" · GitHub$", "")
-		:gsub("&amp;", "&")
-
+	local title = getTitleForUrl(url)
+	if not title then return end
 	local mdlink = ("[%s](%s)"):format(title, url)
 	vim.fn.setreg(reg, mdlink)
 
