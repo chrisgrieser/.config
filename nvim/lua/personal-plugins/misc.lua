@@ -304,7 +304,8 @@ end
 ---1. works with negative numbers or floats, expecting `,` or `.` as decimal separator
 ---2. does support thousands separators
 function M.sumOfAllNumbersInBuf()
-	local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+	local text = vim.api.nvim_buf_get_text(0, 0, 0, -1, -1, {})
+	
 	local sum = vim.iter(lines):fold(0, function(sum, line)
 		local digits = line:match("%-?%d+[,.]?%d*")
 		if not digits then return sum end
