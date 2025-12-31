@@ -56,11 +56,6 @@ bkeymap("n", "<leader>ra", function()
 	require("personal-plugins.markdown-qol").insertFrontmatter(toInsert)
 end, { desc = " Add aliases frontmatter" })
 
--- add title to url
--- stylua: ignore
-bkeymap("n", "<leader>cu", function() require("personal-plugins.markdown-qol").addTitleToUrl() end, { desc = " Add title to URL" })
-
--- preview
 bkeymap(
 	"n",
 	"<leader>ep",

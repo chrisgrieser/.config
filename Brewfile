@@ -25,7 +25,6 @@ brew "zsh-syntax-highlighting"
 
 #-APPS--------------------------------------------------------------------------
 tap "felixkratz/formulae"; brew "felixkratz/formulae/sketchybar"
-cask "antinote"
 cask "alfred"
 cask "alt-tab"
 cask "appcleaner"

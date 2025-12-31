@@ -356,33 +356,6 @@ function M.renameAndUpdateWikilinks()
 	end)
 end
 
-function M.addTitleToUrl()
-	assert(vim.fn.executable("curl") == 1, "`curl` not found.")
-	local line = vim.api.nvim_get_current_line()
-	local url = line:match([[<?%l+://%S+>?]])
-	if vim.endswith(url, ")") then return vim.notify("Already Markdown link.") end
-	local innerUrl = url:gsub(">$", ""):gsub("^<", "") -- bare URL enclosed in `<>` due to MD034
-
-	local out = vim.system({ "curl", "--silent", "--location", innerUrl }):wait()
-	if out.code ~= 0 then return vim.notify(out.stderr, vim.log.levels.ERROR) end
-	local title = vim.trim(out.stdout:match("<title.->(.-)</title>") or "")
-	title = title -- cleanup
-		:gsub("[\n\r]+", " ")
-		:gsub("^GitHub %- ", "")
-		:gsub(" · GitHub$", "")
-
-	local urlStart, urlEnd = line:find(url, nil, true) -- `find` has literal search, `gsub` does not
-	local updatedLine = line:sub(1, urlStart - 1)
-		.. ("[%s](%s)"):format(title, innerUrl)
-		.. line:sub(urlEnd + 1)
-	vim.api.nvim_set_current_line(updatedLine)
-	if title == "" then
-		vim.notify("No title found.", vim.log.levels.WARN)
-		local row = vim.api.nvim_win_get_cursor(0)[1]
-		vim.api.nvim_win_set_cursor(0, { row, urlStart + 1 })
-	end
-end
-
 function M.cycleList()
 	local lnum, col = unpack(vim.api.nvim_win_get_cursor(0))
 	local curLine = vim.api.nvim_get_current_line()

@@ -241,13 +241,3 @@ rules:
                 end tell'
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [com.granola.app] }]
   #─────────────────────────────────────────────────────────────────────────────
-  - description: "(Apps) Antinote"
-    manipulators:
-      # Prevent accidental qutting
-      - type: basic
-        from: { key_code: q, modifiers: { mandatory: [command] } }
-        to:
-          - { key_code: w, modifiers: [command] }
-        conditions:
-          - { type: frontmost_application_if, bundle_identifiers: [com.chabomakers.Antinote] }
-  #─────────────────────────────────────────────────────────────────────────────

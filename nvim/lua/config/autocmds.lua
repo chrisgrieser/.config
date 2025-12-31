@@ -71,6 +71,40 @@ do
 		originalDisplay(formatLenses(lenses), bufnr, client_id)
 	end
 end
+---AUTO-FETCH TITLE IN MARKDOWN FILES-------------------------------------------
+local origPaste = vim.paste
+vim.paste = function(lines, phase) ---@diagnostic disable-line: duplicate-set-field intentional override
+	if not (vim.bo.filetype == "markdown" and #lines == 1) then return origPaste(lines, phase) end
+	if vim.fn.executable("curl") == 0 then return origPaste(lines, phase) end
+
+	local url = lines[1]:match([[<?%l+://%S+>?]])
+	local alreadyMdlink = url and vim.endswith(url, ")")
+	if not url or alreadyMdlink then return origPaste(lines, phase) end
+	local innerUrl = url:gsub("^<", ""):gsub(">$", "") -- bare URL enclosed in `<>` due to MD034
+
+	local out = vim.system({ "curl", "--silent", "--location", innerUrl }):wait()
+	if out.code ~= 0 then
+		vim.notify(out.stderr, vim.log.levels.ERROR)
+		return origPaste(lines, phase)
+	end
+	local title = vim.trim(out.stdout:match("<title.->(.-)</title>") or "")
+	title = title -- cleanup
+		:gsub("[\n\r]+", " ")
+		:gsub("^GitHub %- ", "")
+		:gsub(" · GitHub$", "")
+
+	local mdlink = ("[%s](%s)"):format(title, innerUrl)
+	lines[1] = lines[1]:gsub(vim.pesc(url), vim.pesc(mdlink))
+
+	if title == "" then
+		vim.notify("No title found.", vim.log.levels.WARN)
+		local urlStart = lines[1]:find(mdlink, nil, true)
+		local row = vim.api.nvim_win_get_cursor(0)[1]
+		vim.defer_fn(function() vim.api.nvim_win_set_cursor(0, { row, urlStart + 1 }) end, 100)
+	end
+
+	return origPaste(lines, phase)
+end
 
 ---COLORSCHEMES DEPENDING ON SYSTEM MODE----------------------------------------
 do
