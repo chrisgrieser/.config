@@ -22,6 +22,7 @@ local ensureInstalled = {
 	"xml", -- also used by .plist and .svg files, since they are basically xml
 	"yaml",
 	"bibtex",
+	-- not `csv`, since the highlighting isn't very good
 
 	-- CONTENT
 	"css",

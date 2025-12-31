@@ -247,9 +247,11 @@ end, { expr = true })
 
 ---PASTING----------------------------------------------------------------------
 keymap("n", "P", function()
+	local reg = "+"
+	require("personal-plugins.md-qol").fetchTitleForUrlIfMarkdown(reg)
 	local curLine = vim.api.nvim_get_current_line():gsub("%s*$", "")
-	local reg = vim.trim(vim.fn.getreg("+"))
-	vim.api.nvim_set_current_line(curLine .. " " .. reg)
+	local clipb = vim.trim(vim.fn.getreg(reg))
+	vim.api.nvim_set_current_line(curLine .. " " .. clipb)
 end, { desc = " Paste at EoL" })
 
 -- insert mode paste
@@ -258,13 +260,14 @@ end, { desc = " Paste at EoL" })
 -- 3. skip auto-indent
 keymap("i", "<D-v>", function()
 	local reg = "+"
-	if vim.bo.ft == "markdown" then require("personal-plugins.md-qol").fetchTitleForUrl("+) end
-	vim.fn.setreg("+", vim.trim(vim.fn.getreg("+"))) -- trim
-	if vim.fn.mode() == "R" then return "<C-r>+" end
-	return "<C-g>u<C-r><C-o>+" -- `<C-g>u` adds undopoint before, `<C-r><C-o>` skips auto-indent
+	vim.fn.setreg(reg, vim.trim(vim.fn.getreg(reg))) -- trim
+	require("personal-plugins.md-qol").fetchTitleForUrlIfMarkdown(reg)
+	if vim.fn.mode() == "R" then return "<C-r>" .. reg end
+	return "<C-g>u<C-r><C-o>" .. reg -- `<C-g>u` adds undopoint before, `<C-r><C-o>` skips auto-indent
 end, { desc = " Paste", expr = true })
 
-keymap("n", "<D-v>", "p", { desc = " Paste" }) -- compatibility w/ macOS clipboard managers
+-- compatibility w/ macOS clipboard managers; remap to inherit changes to `p`
+keymap("n", "<D-v>", "p", { desc = " Paste", remap = true })
 
 ---TEXTOBJECTS------------------------------------------------------------------
 local textobjRemaps = {

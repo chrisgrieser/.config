@@ -434,12 +434,11 @@ end
 
 ---@param reg string
 ---@return nil
-function M.fetchTitleForUrl(reg)
-	if vim.bo.ft == "markdown" then return end
+function M.fetchTitleForUrlIfMarkdown(reg)
+	if vim.bo.ft ~= "markdown" then return end
 	assert(vim.fn.executable("curl") == 1, "`curl` not found.")
 
 	local clipb = vim.fn.getreg(reg)
-
 	local url = clipb:match("^%l+://%S+$") -- not ending with `)` to not match mdlinks
 	local alreadyMdlink = url and vim.endswith(url, ")")
 	if not url or alreadyMdlink then return end
@@ -455,12 +454,14 @@ function M.fetchTitleForUrl(reg)
 	local mdlink = ("[%s](%s)"):format(title, url)
 	vim.fn.setreg(reg, mdlink)
 
-	-- move cursor to start of title
+	-- scroll left & move cursor to start of title
 	vim.defer_fn(function()
+		vim.cmd.normal { "zH", bang = true } -- scroll fully left
 		local line = vim.api.nvim_get_current_line()
 		local urlStart = line:find(mdlink, nil, true)
 		local row = vim.api.nvim_win_get_cursor(0)[1]
-		vim.api.nvim_win_set_cursor(0, { row, urlStart + 1 })
+		vim.api.nvim_win_set_cursor(0, { row, urlStart })
+		if title == "" then vim.schedule(vim.cmd.startinsert) end
 	end, 1) -- deferred to act after the paste
 end
 --------------------------------------------------------------------------------

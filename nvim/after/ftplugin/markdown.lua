@@ -22,9 +22,10 @@ abbr("->", "→")
 local bkeymap = require("config.utils").bufKeymap
 local qol = require("personal-plugins.md-qol")
 
--- paste auto-fetches title for URLs
-bkeymap("n", "p", qol.pasteUrlFetchTitle, { desc = " Paste URL and fetch title" })
-bkeymap("n", "p", qol.pasteUrlFetchTitle, { desc = " Paste URL and fetch title" })
+bkeymap("n", "p", function()
+	require("personal-plugins.md-qol").fetchTitleForUrlIfMarkdown("+")
+	return "p"
+end, { desc = " Paste auto-fetch title for URL", expr = true })
 
 bkeymap("n", "o", function() qol.autoBullet("o") end, { desc = " Auto-bullet o" })
 bkeymap("n", "O", function() qol.autoBullet("O") end, { desc = " Auto-bullet O" })
