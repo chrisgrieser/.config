@@ -417,6 +417,7 @@ function M.previewViaPandoc()
 end
 
 function M.codeBlockFromClipboard()
+	assert(vim.bo.ft == "markdown", "Only for Markdown files.")
 	-- dedent clipboard content
 	local code = vim.fn.getreg("+"):gsub("%s*$", ""):gsub("^%s*\n", "") -- trim, but not 1st indent
 	local dedented = vim.text.indent(0, code)
@@ -431,5 +432,36 @@ function M.codeBlockFromClipboard()
 	vim.cmd.startinsert { bang = true }
 end
 
+---@param reg string
+---@return nil
+function M.fetchTitleForUrl(reg)
+	if vim.bo.ft == "markdown" then return end
+	assert(vim.fn.executable("curl") == 1, "`curl` not found.")
+
+	local clipb = vim.fn.getreg(reg)
+
+	local url = clipb:match("^%l+://%S+$") -- not ending with `)` to not match mdlinks
+	local alreadyMdlink = url and vim.endswith(url, ")")
+	if not url or alreadyMdlink then return end
+
+	local out = vim.system({ "curl", "--silent", "--location", url }):wait()
+	if out.code ~= 0 then return vim.notify(out.stderr, vim.log.levels.ERROR) end
+	local title = vim.trim(out.stdout:match("<title.->(.-)</title>") or "")
+	title = title -- cleanup
+		:gsub("[\n\r]+", " ")
+		:gsub("^GitHub %- ", "")
+		:gsub(" · GitHub$", "")
+
+	local mdlink = ("[%s](%s)"):format(title, url)
+	vim.fn.setreg(reg, mdlink)
+
+	-- move cursor to start of title
+	vim.defer_fn(function()
+		local line = vim.api.nvim_get_current_line()
+		local urlStart = line:find(mdlink, nil, true)
+		local row = vim.api.nvim_win_get_cursor(0)[1]
+		vim.api.nvim_win_set_cursor(0, { row, urlStart + 1 })
+	end, 1) -- deferred to act after the paste
+end
 --------------------------------------------------------------------------------
 return M

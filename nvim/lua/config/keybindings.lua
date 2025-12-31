@@ -131,17 +131,17 @@ keymap("n", "M", "<cmd>. move +1<CR>kJ", { desc = "󰽜 Merge line down" }) -- `
 
 -- Markdown syntax (useful to have in all filetypes for comments)
 -- stylua: ignore start
-keymap({ "n", "x", "i" }, "<D-e>", function() require("personal-plugins.markdown-qol").wrap("`") end, { desc = " Inline code" })
-keymap({ "n", "x", "i" }, "<D-k>", function() require("personal-plugins.markdown-qol").wrap("mdlink") end, { desc = " Link" })
-keymap({ "n", "x", "i" }, "<D-b>", function() require("personal-plugins.markdown-qol").wrap("**") end, { desc = " Bold" })
-keymap({ "n", "x", "i" }, "<D-i>", function() require("personal-plugins.markdown-qol").wrap("*") end, { desc = " Italic" })
+keymap({ "n", "x", "i" }, "<D-e>", function() require("personal-plugins.md-qol").wrap("`") end, { desc = " Inline code" })
+keymap({ "n", "x", "i" }, "<D-k>", function() require("personal-plugins.md-qol").wrap("mdlink") end, { desc = " Link" })
+keymap({ "n", "x", "i" }, "<D-b>", function() require("personal-plugins.md-qol").wrap("**") end, { desc = " Bold" })
+keymap({ "n", "x", "i" }, "<D-i>", function() require("personal-plugins.md-qol").wrap("*") end, { desc = " Italic" })
 
 -- Simple surrounds
-keymap("n", '"', function() require("personal-plugins.markdown-qol").wrap('"') end, { desc = " Surround" })
-keymap("n", "'", function() require("personal-plugins.markdown-qol").wrap("'") end, { desc = " Surround" })
-keymap("n", "(", function() require("personal-plugins.markdown-qol").wrap("(", ")") end, { desc = "󰅲 Surround" })
-keymap("n", "[", function() require("personal-plugins.markdown-qol").wrap("[", "]") end, { nowait = true, desc = "󰅪 Surround" })
-keymap("n", "{", function() require("personal-plugins.markdown-qol").wrap("{", "}") end, { desc = " Surround" })
+keymap("n", '"', function() require("personal-plugins.md-qol").wrap('"') end, { desc = " Surround" })
+keymap("n", "'", function() require("personal-plugins.md-qol").wrap("'") end, { desc = " Surround" })
+keymap("n", "(", function() require("personal-plugins.md-qol").wrap("(", ")") end, { desc = "󰅲 Surround" })
+keymap("n", "[", function() require("personal-plugins.md-qol").wrap("[", "]") end, { nowait = true, desc = "󰅪 Surround" })
+keymap("n", "{", function() require("personal-plugins.md-qol").wrap("{", "}") end, { desc = " Surround" })
 -- stylua: ignore end
 
 do
@@ -257,6 +257,8 @@ end, { desc = " Paste at EoL" })
 -- 2. add undopoint before the paste
 -- 3. skip auto-indent
 keymap("i", "<D-v>", function()
+	local reg = "+"
+	if vim.bo.ft == "markdown" then require("personal-plugins.md-qol").fetchTitleForUrl("+) end
 	vim.fn.setreg("+", vim.trim(vim.fn.getreg("+"))) -- trim
 	if vim.fn.mode() == "R" then return "<C-r>+" end
 	return "<C-g>u<C-r><C-o>+" -- `<C-g>u` adds undopoint before, `<C-r><C-o>` skips auto-indent
