@@ -37,7 +37,6 @@
 - [nvim-mini/mini.operators](https://github.com/nvim-mini/mini.operators)
 - [nvim-treesitter/nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)
 - [nvim-treesitter/nvim-treesitter-textobjects](https://github.com/nvim-treesitter/nvim-treesitter-textobjects)
-- [olimorris/codecompanion.nvim](https://github.com/olimorris/codecompanion.nvim)
 - [saghen/blink.cmp](https://github.com/saghen/blink.cmp)
 - [SmiteshP/nvim-navic](https://github.com/SmiteshP/nvim-navic)
 - [stevearc/conform.nvim](https://github.com/stevearc/conform.nvim)
