@@ -83,7 +83,7 @@ end
 
 M.caff_masto = hs.caffeinate.watcher
 	.new(function(event)
-		if event == hs.caffeinate.watcher.screensDidWake then scrollMasto() end
+		if event == hs.caffeinate.watcher.screensDidWake then u.defer(2, scrollMasto) end
 	end)
 	:start()
 

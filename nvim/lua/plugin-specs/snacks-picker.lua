@@ -1,4 +1,3 @@
--- vim: foldlevel=3
 -- DOCS https://github.com/folke/snacks.nvim/blob/main/docs/picker.md
 --------------------------------------------------------------------------------
 
@@ -215,11 +214,6 @@ return {
 					layout = {
 						layout = { min_width = 40, backdrop = 40, width = 0.6 },
 					},
-					format = function(item)
-						vim.notify(vim.inspect(item)) -- 🪚
-						return { item.formatted }
-					end,
-
 					kinds = {}, -- allows-kind-specific config
 				},
 				files = {
@@ -352,7 +346,7 @@ return {
 				},
 				colorschemes = {
 					-- at the bottom, so there is more space to preview
-					layout = { max_height = 8, preset = "ivy" },
+					layout = { hidden = { "preview" }, max_height = 8, preset = "ivy" },
 				},
 				icons = {
 					layout = { preset = "small_no_preview", layout = { width = 0.7 } },
