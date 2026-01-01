@@ -44,18 +44,16 @@ end):start()
 ---SCRIPT EDITOR----------------------------------------------------------------
 -- 1. on open, paste, and format
 -- 2. fix copypasting line breaks into other apps
-M.wf_scripteditor = wf
-	.new("Script Editor")
+M.wf_scripteditor = wf.new("Script Editor")
 	:subscribe(wf.windowCreated, function(newWin)
 		-- paste and format
 		if newWin:title() == "Untitled" then
-			hs.eventtap.keyStroke({ "cmd" }, "a") -- select old contents
 			hs.eventtap.keyStroke({ "cmd" }, "v")
 			hs.osascript.javascript('Application("Script Editor").documents()[0].checkSyntax()')
 		end
 	end)
-	-- fix copypasting line breaks into other apps
 	:subscribe(wf.windowUnfocused, function()
+		-- fix copypasting line breaks into other apps
 		local clipb = hs.pasteboard.getContents()
 		if not clipb then return end
 		clipb = clipb:gsub("\r", " \n")
@@ -89,15 +87,20 @@ M.caff_masto = hs.caffeinate.watcher
 
 M.aw_masto = aw.new(function(appName, event, masto)
 	if appName ~= "Mona" then return end
-	local win = masto:mainWindow()
-	if not win then return end
 
 	if event == aw.activated or event == aw.launched then
-		wu.moveResize(win, wu.toTheSide)
+		local username = "pseudometa"
+		for _, win in pairs(masto:allWindows()) do
+			local title = win:title()
+			if title == username or title == "Home" then wu.moveResize(win, wu.toTheSide) end
+			if title == "Compose" then win:focus() end
+		end
 	elseif event == aw.deactivated then
-		local isMediaWin = win:title():find("^Image")
-		local frontNotAlfred = hs.application.frontmostApplication():name() ~= "Alfred"
-		if #masto:allWindows() > 1 and isMediaWin and frontNotAlfred then win:close() end
+		for _, win in pairs(masto:allWindows()) do
+			local isMediaWin = win:title():find("^Image")
+			local frontNotAlfred = hs.application.frontmostApplication():name() ~= "Alfred"
+			if #masto:allWindows() > 1 and isMediaWin and frontNotAlfred then win:close() end
+		end
 		u.defer(2, scrollMasto)
 	end
 end):start()
