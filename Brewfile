@@ -6,26 +6,27 @@ brew "eza"
 brew "fzf"
 brew "gh"
 brew "git-delta"
+brew "ripgrep"
 brew "just"
-brew "mas"
 brew "neovim"
-brew "node"
 brew "pandoc"
 brew "pass"
-brew "pinentry-mac", postinstall: "defaults write org.gpgtools.common DisableKeychain -bool yes"
-brew "python" # installs most recent python version (macOS system python is only 3.9)
-brew "ripgrep"
-brew "starship"
 brew "yq"
+
+#-PACKAGES----------------------------------------------------------------------
+brew "mas"
+brew "node"
+brew "python" # installs most recent python version (macOS system python is only 3.9)
+
+#-ZSH---------------------------------------------------------------------------
+brew "starship"
 brew "zsh-autocomplete"
 brew "zsh-autopair"
 brew "zsh-autosuggestions"
 brew "zsh-history-substring-search"
 brew "zsh-syntax-highlighting"
-brew "languagetool", postinstall: "brew services start languagetool" # https://dev.languagetool.org/http-server
 
 #-APPS--------------------------------------------------------------------------
-tap "felixkratz/formulae"; brew "felixkratz/formulae/sketchybar"
 cask "alfred"
 cask "alt-tab"
 cask "appcleaner"
@@ -44,10 +45,19 @@ cask "wezterm"
 cask "zoom"
 mas "Highlights", id: 1498912833
 mas "Mona", id: 6755672518
+tap "felixkratz/formulae"; brew "felixkratz/formulae/sketchybar"
 
 #-OTHER-------------------------------------------------------------------------
 cask "font-jetbrains-mono-nerd-font"
+
+# quicklook for source code
 cask "glance-chamburr", postinstall: "xattr -rd com.apple.quarantine /Applications/Glance.app; qlmanage -r; sed -i '' 's/font-size: [0-9][0-9]px/font-size: 20px/' /Applications/Glance.app/Contents/PlugIns/QLPlugin.appex/Contents/Resources/shared-main.css"
+
+# for languagetool browser extension; see https://dev.languagetool.org/http-server
+brew "languagetool", postinstall: "brew services start languagetool"
+
+# For Alfred Pass workflow
+brew "pinentry-mac", postinstall: "defaults write org.gpgtools.common DisableKeychain -bool yes"
 
 #-DEVICE-SPECIFIC INSTALLS------------------------------------------------------
 device = `scutil --get ComputerName`
@@ -63,7 +73,7 @@ if device.include?("Home") or device.include?("Office")
 end
 if device.include?("Home") or device.include?("Mother")
 	cask "iina"
-	cask "qlvideo" # provides preview icons for `.mkv`
+	cask "qlvideo" # provides quickook & preview icons for `.mkv` 
 	cask "steam"
 	cask "transmission"
 end
