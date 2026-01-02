@@ -40,11 +40,14 @@ function gh {         # lazy load GITHUB_TOKEN for extra security
 	gh "$@"
 }
 
-# 1. Define `pass cd` as pseudo-subcommand to go to the password store directory.
-# 2. Set `USING_PASS`, so nvim can detect `pass` and disable plugins.
+# 1. `pass cd` as pseudo-subcommand to go to the password store directory.
+# 2. `pass lock` as pseudo-subcommand to lock the gpg-agent.
+# 3. Set `USING_PASS`, so nvim can detect `pass` and disable plugins.
 function pass {
 	if [[ "$1" == "cd" ]]; then
 		cd "$PASSWORD_STORE_DIR" || return 1
+	elif [[ "$1" == "logout" || "$1" == "lock" ]]; then
+		gpgconf --kill gpg-agent
 	else
 		env "USING_PASS=true" command pass "$@"
 	fi

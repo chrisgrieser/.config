@@ -12,7 +12,7 @@ brew "neovim"
 brew "node"
 brew "pandoc"
 brew "pass"
-brew "pinentry-mac"
+brew "pinentry-mac", postinstall: "defaults write org.gpgtools.common DisableKeychain -bool yes"
 brew "python" # installs most recent python version (macOS system python is only 3.9)
 brew "ripgrep"
 brew "starship"
