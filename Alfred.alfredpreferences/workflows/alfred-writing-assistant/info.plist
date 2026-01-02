@@ -471,27 +471,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>⚠️ Apple Intelligence</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>BF4EBC7E-B09A-4709-8132-D893A585F49C</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>conditions</key>
 				<array>
 					<dict>
@@ -591,6 +570,27 @@
 			<string>alfred.workflow.trigger.universalaction</string>
 			<key>uid</key>
 			<string>8381EC56-AD14-4D7B-91BF-C21F7828F3EB</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>⚠️ Apple Intelligence</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>BF4EBC7E-B09A-4709-8132-D893A585F49C</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -759,9 +759,9 @@ DOUBLE CLICK TO EDIT</string>
 			<key>colorindex</key>
 			<integer>10</integer>
 			<key>xpos</key>
-			<real>665</real>
+			<real>715</real>
 			<key>ypos</key>
-			<real>375</real>
+			<real>550</real>
 		</dict>
 		<key>C1BED2FD-BC8A-49F4-9F65-1C12FCF12F3D</key>
 		<dict>

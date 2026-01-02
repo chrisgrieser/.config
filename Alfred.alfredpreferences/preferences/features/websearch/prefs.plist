@@ -158,6 +158,17 @@
 			<key>url</key>
 			<string>https://www.tvtime.com/discover/search?q={query}</string>
 		</dict>
+		<key>A2BBDC96-EE79-4DAB-AF51-AB2C19ACD827</key>
+		<dict>
+			<key>enabled</key>
+			<true/>
+			<key>keyword</key>
+			<string>ai</string>
+			<key>text</key>
+			<string>ChatGPT (Thinking)</string>
+			<key>url</key>
+			<string>https://chatgpt.com/c/69579fd1-8880-8327-b6f5-8e938218ffa5</string>
+		</dict>
 		<key>B0E74EF5-D489-4FA0-9F57-0B056365432B</key>
 		<dict>
 			<key>enabled</key>

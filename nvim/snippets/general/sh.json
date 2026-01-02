@@ -129,7 +129,7 @@
     "prefix": "get nth line from string"
   },
   "hyperlink (OSC 8)": {
-    "body": "print \"\\e]8;;${1:url}\\a${2:title}\\e]8;;\\a\"",
+    "body": "print \"\\x1b]8;;${1:URL}\\x07${2:TITLE}\\x1b]8;;\\x07\"",
     "prefix": "hyperlink (OSC 8)"
   },
   "i++": {

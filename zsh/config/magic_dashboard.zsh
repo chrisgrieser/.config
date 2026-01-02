@@ -46,12 +46,14 @@ function _gitlog {
 			-e 's/tag: / /g' \
 			-e 's/ -> /   /g' \
 			-e 's/\* /· /' \
+			-Ee $'s/ release:/ \e[1;32mrelease\e[0;38;5;245m:\e[0m/' \
 			-Ee $'s/ ([a-z]+)(\\(.+\\))?(!?):/ \e[1;35m\\1\e[1;36m\\2\e[7;31m\\3\e[0;38;5;245m:\e[0m/' \
 			-Ee $'s/`[^`]*`/\e[0;36m&\e[0m/g' \
 			-Ee $'s/#[0-9]+/\e[0;31m&\e[0m/g' \
 			-Ee "s_([a-f0-9]{7,40})_\x1b]8;;https://github.com/${repo}/commit/\1\x07\1\x1b]8;;\x07_" \
 			-Ee "s_#([0-9]+)_\x1b]8;;https://github.com/${repo}/issues/\1\x07#\1\x1b]8;;\x07_"
 		# INFO last two replacements adds hyperlinks to hashes and issues
+		# \x1b]8;;{URL}\x07{TITLE}\x1b]8;;\x07
 }
 
 function _list_files_here {

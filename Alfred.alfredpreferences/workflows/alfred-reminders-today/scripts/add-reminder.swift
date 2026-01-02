@@ -6,6 +6,10 @@ let eventStore = EKEventStore()
 let semaphore = DispatchSemaphore(value: 0)
 
 // Alfred environment variables
+guard CommandLine.arguments.count > 1 else {
+	fputs("No input argument provided.", stderr)
+	exit(0)
+}
 let input = CommandLine.arguments[1].trimmingCharacters(in: .whitespacesAndNewlines)
 let reminderList = ProcessInfo.processInfo.environment["reminder_list"]!
 let targetDay = ProcessInfo.processInfo.environment["target_day"]!
@@ -130,7 +134,7 @@ func requestRemindersAccess() async -> Bool {
 }
 
 func fail(_ msg: String) {
-	print("❌;" + msg)  // `;` used as separator in Alfred
+	print("❌\n" + msg)  // `\n` used as separator in Alfred, since input cannot contain newlines
 	semaphore.signal()
 }
 
@@ -259,7 +263,7 @@ Task {  // wrapping in `Task` because `await` is not allowed in `main`
 	notif.append("\"\(title)\"")
 	if msgIsUrl { notif.append("🔗") }
 	let alfredNotif = notif.joined(separator: "   ")
-	print("✅;" + alfredNotif)  // `;` used as separator in Alfred
+	print("✅\n" + alfredNotif)  // `\n` used as separator in Alfred
 
 	semaphore.signal()
 }
