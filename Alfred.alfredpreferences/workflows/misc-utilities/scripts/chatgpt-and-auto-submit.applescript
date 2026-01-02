@@ -8,5 +8,7 @@ on run argv
 			delay 0.1
 		end repeat
 	end tell
-	tell application "System Events" to key code 36 -- return
+
+	# submit the prompt instead of requiring the uer to confirm it with `enter`
+	tell application "System Events" to key code 36 -- enter
 end run

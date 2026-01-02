@@ -168,23 +168,13 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>03BE9390-3271-4FC7-9500-527674AE7239</string>
+				<string>C1BED2FD-BC8A-49F4-9F65-1C12FCF12F3D</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
 				<string></string>
 				<key>sourceoutputuid</key>
 				<string>6A9A07ED-56CE-416D-954E-5102FB0711E8</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>C1BED2FD-BC8A-49F4-9F65-1C12FCF12F3D</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -450,27 +440,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>No selection.</string>
-				<key>title</key>
-				<string>⚠️ Apple Intelligence</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>03BE9390-3271-4FC7-9500-527674AE7239</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>conditions</key>
 				<array>
 					<dict>
@@ -479,11 +448,11 @@
 						<key>matchcasesensitive</key>
 						<false/>
 						<key>matchmode</key>
-						<integer>4</integer>
+						<integer>1</integer>
 						<key>matchstring</key>
-						<string>^\s*$</string>
+						<string></string>
 						<key>outputlabel</key>
-						<string>empty</string>
+						<string>non-empty</string>
 						<key>uid</key>
 						<string>6A9A07ED-56CE-416D-954E-5102FB0711E8</string>
 					</dict>
@@ -491,7 +460,7 @@
 				<key>elselabel</key>
 				<string>text</string>
 				<key>hideelse</key>
-				<false/>
+				<true/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.conditional</string>
@@ -627,15 +596,6 @@ You can also trigger the synonym suggestion with the keyword `syn`.
 Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
-		<key>03BE9390-3271-4FC7-9500-527674AE7239</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>10</integer>
-			<key>xpos</key>
-			<real>305</real>
-			<key>ypos</key>
-			<real>375</real>
-		</dict>
 		<key>16C4AEFA-0A32-4B8B-8C80-7DC517AFCA22</key>
 		<dict>
 			<key>colorindex</key>
@@ -787,10 +747,12 @@ DOUBLE CLICK TO EDIT</string>
 		<dict>
 			<key>colorindex</key>
 			<integer>10</integer>
+			<key>note</key>
+			<string>non-empty</string>
 			<key>xpos</key>
-			<real>180</real>
+			<real>195</real>
 			<key>ypos</key>
-			<real>395</real>
+			<real>405</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

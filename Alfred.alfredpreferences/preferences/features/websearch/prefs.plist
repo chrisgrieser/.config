@@ -48,17 +48,6 @@
 			<key>url</key>
 			<string>https://kickasstorrents.cc/search?query={query}</string>
 		</dict>
-		<key>26ACAC4A-35A8-452D-91BD-82EB22FF544B</key>
-		<dict>
-			<key>enabled</key>
-			<true/>
-			<key>keyword</key>
-			<string>ai</string>
-			<key>text</key>
-			<string>ChatGPT: {query}</string>
-			<key>url</key>
-			<string>https://chatgpt.com/?prompt={query}</string>
-		</dict>
 		<key>295774FE-716A-4B62-87C6-F36AB22838CC</key>
 		<dict>
 			<key>enabled</key>
@@ -157,17 +146,6 @@
 			<string>tvtime: '{query}'</string>
 			<key>url</key>
 			<string>https://www.tvtime.com/discover/search?q={query}</string>
-		</dict>
-		<key>A2BBDC96-EE79-4DAB-AF51-AB2C19ACD827</key>
-		<dict>
-			<key>enabled</key>
-			<true/>
-			<key>keyword</key>
-			<string>ai</string>
-			<key>text</key>
-			<string>ChatGPT (Thinking)</string>
-			<key>url</key>
-			<string>https://chatgpt.com/c/69579fd1-8880-8327-b6f5-8e938218ffa5</string>
 		</dict>
 		<key>B0E74EF5-D489-4FA0-9F57-0B056365432B</key>
 		<dict>
