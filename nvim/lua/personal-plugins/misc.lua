@@ -194,10 +194,10 @@ function M.smartDuplicate()
 	if ft == "css" then
 		-- stylua: ignore
 		line = line:gsub("(%a+):", {
-			top = "bottom", bottom = "top",
-			right = "left", left = "right",
-			light = "dark", dark = "light",
-			width = "height", height = "width",
+			top = "bottom:", bottom = "top:",
+			right = "left:", left = "right:",
+			light = "dark:", dark = "light:",
+			width = "height:", height = "width:",
 		})
 	elseif ft == "javascript" or ft == "typescript" or ft == "swift" then
 		line = line:gsub("^(%s*)if(.+{)$", "%1} else if%2")

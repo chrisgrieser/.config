@@ -26,7 +26,7 @@ async function updatePlugins() {
 }
 
 function freezeInterface() {
-	const delaySecs = 4;
+	const delaySecs = 5;
 	new Notice(`Will freeze Obsidian in ${delaySecs}s`, delaySecs * 1000);
 	electronWindow.openDevTools(); // devtools need to be open for debugger to work
 
