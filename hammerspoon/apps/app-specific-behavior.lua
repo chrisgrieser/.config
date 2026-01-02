@@ -75,15 +75,16 @@ local function scrollMasto()
 	hs.eventtap.keyStroke({}, "left", 1, masto) -- go back
 	hs.eventtap.keyStroke({ "cmd" }, "1", 1, masto) -- go to home tab
 	hs.eventtap.keyStroke({ "cmd" }, "up", 1, masto) -- scroll up
-	local minScrollIntervalSecs = 20
+	local minScrollIntervalSecs = 3
 	u.defer(minScrollIntervalSecs, function() M.mastoHasScrolled = false end)
 end
 
-M.caff_masto = hs.caffeinate.watcher
-	.new(function(event)
-		if event == hs.caffeinate.watcher.screensDidWake then u.defer(2, scrollMasto) end
-	end)
-	:start()
+local c = hs.caffeinate.watcher
+M.caff_masto = c.new(function(event)
+	if event == c.screensaverDidStop or event == c.screensaverDidStop then
+		u.defer(2, scrollMasto)
+	end
+end):start()
 
 M.aw_masto = aw.new(function(appName, event, masto)
 	if appName ~= "Mona" then return end
@@ -106,12 +107,12 @@ M.aw_masto = aw.new(function(appName, event, masto)
 end):start()
 
 ---BROWSER----------------------------------------------------------------------
--- remove `?tab=readme-ov-file` from github URLs
+-- remove `?tab=readme-ov-file` from GitHub URLs
 M.aw_browser = aw.new(function(appName, event, _app)
 	if appName == "Brave Browser" and event == aw.deactivated then
 		local clipb = hs.pasteboard.getContents()
 		if not clipb then return end
-		clipb = clipb:gsub("(https://github%.com/.*)%?tab=readme%-ov%-file(#.*)", "%1%2")
+		clipb = clipb:gsub("^(https://github%.com/.*)%?tab=readme%-ov%-file(#.*)", "%1%2")
 		hs.pasteboard.setContents(clipb)
 	end
 end):start()
@@ -123,7 +124,7 @@ do
 		.. "/Library/Application Support/Google/Chrome/Default/Bookmarks"
 
 	-- The pathwatcher is triggered by changes of the *target*, while this function
-	-- touches the *symlink itself* due to `-h`. Thus, there is no need to affect
+	-- touches the *symlink itself* due to `-h`. Thus, there is no need to touch
 	-- the symlink target here.
 	local function touchSymlink() hs.execute(("touch -h %q"):format(chromeBookmarks)) end
 
