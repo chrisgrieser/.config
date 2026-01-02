@@ -22,6 +22,7 @@ brew "zsh-autopair"
 brew "zsh-autosuggestions"
 brew "zsh-history-substring-search"
 brew "zsh-syntax-highlighting"
+brew "languagetool", postinstall: "brew services start languagetool" # https://dev.languagetool.org/http-server
 
 #-APPS--------------------------------------------------------------------------
 tap "felixkratz/formulae"; brew "felixkratz/formulae/sketchybar"
