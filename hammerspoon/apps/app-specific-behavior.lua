@@ -75,8 +75,7 @@ local function scrollMasto()
 	hs.eventtap.keyStroke({}, "left", 1, masto) -- go back
 	hs.eventtap.keyStroke({ "cmd" }, "1", 1, masto) -- go to home tab
 	hs.eventtap.keyStroke({ "cmd" }, "up", 1, masto) -- scroll up
-	local minScrollIntervalSecs = 3
-	u.defer(minScrollIntervalSecs, function() M.mastoHasScrolled = false end)
+	u.defer(3, function() M.mastoHasScrolled = false end)
 end
 
 local c = hs.caffeinate.watcher

@@ -20,9 +20,10 @@ return {
 		html = {
 			comment = {
 				text = function(ctx)
-					local commentWithoutSyntax = ctx.text:match("^<!%-%-%s*(.-)%s*%-%->$")
-					if not commentWithoutSyntax then return "" end
-					return "󰆈 " .. commentWithoutSyntax
+					local text = ctx.text:match("^<!%-%-%s*(.-)%s*%-%->$")
+					if not text then return "" end
+					text = text:gsub("\n.*", "…")
+					return "󰆈 " .. text
 				end,
 			},
 		},

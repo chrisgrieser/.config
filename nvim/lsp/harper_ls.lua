@@ -19,13 +19,11 @@ return {
 			diagnosticSeverity = "hint",
 			userDictPath = vim.o.spellfile, -- share it with vim's spellcheck
 			markdown = { IgnoreLinkTitle = true },
-			isolateEnglish = true, -- experimental; in mixed-language doc only check English
+			isolateEnglish = false, -- https://github.com/Automattic/harper/issues/2383#issuecomment-3706591759
 			dialect = "American",
 			linters = {
 				UseTitleCase = false, -- prefer sentence case headings
-				UnclosedQuotes = false, -- PENDING https://github.com/Automattic/harper/issues/1573
-				SentenceCapitalization = true, -- https://github.com/Automattic/harper/issues/1056
-				PhrasalVerbAsCompoundNoun = true, -- https://github.com/Automattic/harper/issues/2369
+				UnclosedQuotes = true, -- PENDING https://github.com/Automattic/harper/issues/1573
 			},
 		},
 	},

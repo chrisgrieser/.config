@@ -117,7 +117,7 @@ function M.restartNeovide()
 			sleep 0.05
 			i=$((i+1)) ; [[ $i -gt 50 ]] && return 1 # timeout
 		done
-		sleep 0.1
+		sleep 0.2
 		[[ "$OSTYPE" =~ "darwin" ]] && open -a "neovide" || neovide # on macOS, use `open -a`
 	]=]
 	vim.system({ "zsh", "-c", script }, { detach = true }) -- detach to run after nvim quit
