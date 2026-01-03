@@ -56,7 +56,7 @@ bkeymap("n", "<leader>ep", qol.previewViaPandoc, { desc = " Preview" })
 bkeymap({ "n", "i" }, "<D-C-e>", qol.codeBlockFromClipboard, { desc = " Codeblock" })
 
 bkeymap("n", "<leader>cb", qol.backlinks, { desc = " Backlinks" })
-bkeymap("n", "<leader>fr", qol.renameAndUpdateWikilinks, { desc = " Rename file & backlinks" })
+-- bkeymap("n", "<leader>fr", qol.renameAndUpdateWikilinks, { desc = " Rename file & backlinks" })
 
 -- stylua: ignore
 bkeymap("n", "#", function() require("personal-plugins.hiraganafy")() end, { desc = " Hiraganafy" })

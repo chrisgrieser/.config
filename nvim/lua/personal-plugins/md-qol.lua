@@ -215,13 +215,7 @@ function M.followMdlinkOrWikilink()
 		-- `vim.lsp.buf.definition` requires that cursor is on the link
 		local targetCol = line:find(wikilink, nil, true)
 		vim.api.nvim_win_set_cursor(0, { ln, targetCol - 1 })
-		local hasMarksman = vim.lsp.get_clients({ name = "marksman", bufnr = 0 })[1]
-		local hasZk = vim.lsp.get_clients({ name = "zk", bufnr = 0 })[1]
-		if hasMarksman or hasZk then
-			vim.lsp.buf.definition()
-		else
-			vim.notify("No wikilink-capable LSP attached.", vim.log.levels.WARN)
-		end
+		vim.lsp.buf.definition() -- requires marksman, zk, or markdown-oxide
 	end
 end
 --------------------------------------------------------------------------------
