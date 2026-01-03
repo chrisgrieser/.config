@@ -1,5 +1,4 @@
 # DOCS https://starship.rs/config/
-# ──────────────────────────────────────────────────────────────────────────────
 
 format = """[\
 ${custom.dev_folder_indicator}$directory${custom.folder_number}\
@@ -19,9 +18,7 @@ $python\
 """
 add_newline = false
 
-# ──────────────────────────────────────────────────────────────────────────────
-# LEFT SIDE
-
+# LEFT SIDE---------------------------------------------------------------------
 [character]  # ▓▒░    nerdfont ids start with `nf-ple-`
 success_symbol = "[ ](fg:black)"
 error_symbol = "[ ](fg:red)"
@@ -91,9 +88,7 @@ format = "[ 󱎘  ]($style)"
 when = '[[ -f "package.json" ]] && jq ".main // error(\"\")" package.json && [[ ! -d "node_modules" ]]'
 style = "fg:red bold bg:black"
 
-# ──────────────────────────────────────────────────────────────────────────────
-# GIT COMPONENTS
-
+# GIT COMPONENTS----------------------------------------------------------------
 [custom.main_branch]
 description = 'since "ignore_branches" fully hides git_branch component, still showing the symbol'
 when = "[[ $(git branch --show-current) == 'main' ]]"
@@ -128,7 +123,7 @@ style = "fg:purple bg:black bold"
 format = " [ $branch]($style)"
 ignore_branches = ["main"]
 
-# INFO putting a variable into round bracket ensures that the bracket content is
+# putting a variable into round bracket ensures that the bracket content is
 # only shown when the variable is set. `bright-black` is effectively gray.
 [git_metrics]  # lines
 disabled = false
@@ -140,9 +135,7 @@ format = """\
 [\\)](fg:bright-black bg:black))\
 """
 
-# ───────────────────────────────────────────────────────────────────────────────
-# RIGHT SIDE
-
+# RIGHT SIDE--------------------------------------------------------------------
 [cmd_duration]
 min_time = 3000
 format = "[󰔟 $duration](bold cyan)"

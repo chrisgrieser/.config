@@ -447,6 +447,7 @@ local function getTitleForUrl(url)
 		:gsub("^GitHub %- ", "")
 		:gsub(" · GitHub$", "")
 		:gsub("&amp;", "&")
+		:gsub("&#x27;", "'")
 	return title
 end
 
