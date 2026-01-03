@@ -1,9 +1,8 @@
----Try to require the module, but do not throw error when one of them cannot be
----loaded. Without this, any error in one config file would result in the
+---Try to require the module, but do not throw an error when one of them cannot
+---be loaded. Without this, any error in one config file would result in the
 ---remaining config files not being loaded.
 ---@param module string
 local function safeRequire(module)
-	---@type boolean, string
 	local success, errmsg = pcall(require, module)
 	if not success then
 		local msg = ("Error loading `%s`: %s"):format(module, errmsg)
@@ -16,8 +15,10 @@ safeRequire("config.reopen-last-file")
 safeRequire("config.options") -- before plugins, so they are available for them
 
 -- For extra security, do not load plugins when using `pass`.
---(requires starting it via `env="USING_PASS=true" pass`)
+-- (requires starting it via `env="USING_PASS=true" pass`)
 if vim.env.USING_PASS then
+	vim.keymap.set("n", "L", "$", { buffer = true })
+	vim.keymap.set("n", "H", "0^", { buffer = true })
 	vim.keymap.set("n", "ss", "VP", { desc = "Substitute line", buffer = true })
 	vim.keymap.set("n", "S", "v$P", { desc = "Substitute to EoL", buffer = true })
 	vim.keymap.set("n", "<CR>", "ZZ", { desc = "Save and exit", buffer = true })
