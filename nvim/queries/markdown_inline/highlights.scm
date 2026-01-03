@@ -9,7 +9,8 @@
   (link_text) @markdown.internal_link
   (link_destination) @_
   (#lua-match? @_ "%.md$")
-  (#not-lua-match? @_ "^http"))
+  (#not-lua-match? @_ "^http")
+  (#set! priority 130)) ; priority to overwrite LSP highlights
 
 ; wikilinks
 (inline
@@ -17,7 +18,7 @@
   (shortcut_link
     (link_text) @markdown.internal_link)
   "]" @markup.link
-  (#set! priority 130)) ; priority to overwrite LSP highlight from `marksman`
+  (#set! priority 130)) ; priority to overwrite LSP highlights
 
 ;-----------------------------------------------------------------------------
 ; de-emphasize URLs in mdlinks

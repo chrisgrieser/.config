@@ -484,7 +484,7 @@ function M.addTitleToUrlIfMarkdown(reg)
 	if node and node:type() == "html_block" then return end
 	local col = vim.api.nvim_win_get_cursor(0)[2]
 	local charUnderCursor = vim.api.nvim_get_current_line():sub(col + 1, col + 1)
-	if charUnderCursor == "(" then return end -- inserting into mdlink
+	if charUnderCursor:find("[(<]") then return end -- inserting into mdlink / bare link
 
 	local clipb = vim.fn.getreg(reg)
 	local url = clipb:match("^%l+://%S+$") -- not ending with `)` to not match mdlinks
