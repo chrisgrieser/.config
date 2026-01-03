@@ -356,7 +356,7 @@ end, { expr = true, desc = "<BS> does not leave cmdline" })
 keymap("n", "<leader>ii", vim.cmd.Inspect, { desc = "󱈄 Inspect at cursor" })
 keymap("n", "<leader>it", vim.cmd.InspectTree, { desc = " TS syntax tree" })
 -- stylua: ignore
-keymap("n", "<leader>ia", function() require("personal-plugins.misc").InspectNodeAncestors() end, { desc = " Node ancestors" })
+keymap("n", "<leader>ia", function() require("personal-plugins.misc").inspectNodeAncestors() end, { desc = " Node ancestors" })
 -- stylua: ignore
 keymap("n", "<leader>i+", function() require("personal-plugins.misc").sumOfAllNumbersInBuf() end, { desc = "∑ Sum of numbers in buffer" })
 keymap("n", "<leader>iT", "<cmd>checkhealth nvim-treesitter<CR>", { desc = " TS Parsers" })

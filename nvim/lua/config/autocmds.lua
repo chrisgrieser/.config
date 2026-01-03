@@ -39,7 +39,7 @@ do
 		-- if vim.bo[ctx.buf].filetype == "markdown" then return end -- useless info for headings
 		vim.lsp.codelens.refresh { bufnr = ctx.buf }
 	end
-	vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained" }, {
+	vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained", "LspAttach" }, {
 		desc = "User: enable LSP codelenses",
 		callback = enableCodeLens,
 	})
