@@ -16,7 +16,7 @@ return {
 		select = {
 			lookahead = true,
 			-- `true` would even include line breaks in charwise objects,
-			-- thus staying with `false`
+			-- thus staying with `false` https://github.com/nvim-treesitter/nvim-treesitter-textobjects/issues/850
 			include_surrounding_whitespace = false,
 		},
 	},
