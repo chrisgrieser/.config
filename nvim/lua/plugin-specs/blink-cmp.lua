@@ -23,11 +23,23 @@ return {
 							and not charsBefore:find("%s%-%-?")
 						return luadocButNotComment
 					end,
-					transform_items = function(ctx, items)
-						Chainsaw(items) -- 🪚
-						Chainsaw(ctx) -- 🪚
-						return items
-
+					transform_items = function(_ctx, items)
+						return vim.iter(items)
+							:filter(function(item)
+								-- filter aliases, PENDING https://github.com/Feel-ix-343/markdown-oxide/issues/330
+								if item.client_name ~= "markdown_oxide" then return true end
+								if item.textEdit.newText:find(">") then return false end
+								return true
+							end)
+							:map(function(item)
+								if item.client_name ~= "markdown_oxide" then return item end
+								if item.labelDetails and item.labelDetails.details then
+									item.labelDetails.details = " "
+										.. item.labelDetails.details:gsub("%.md$", "")
+								end
+								return item
+							end)
+							:totable()
 					end,
 				},
 				snippets = {

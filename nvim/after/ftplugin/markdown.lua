@@ -60,6 +60,7 @@ bkeymap("n", "#", function() require("personal-plugins.hiraganafy")() end, { des
 
 -- rename file via markdown-oxide
 bkeymap("n", "<leader>fr", function()
+	-- PENDING https://github.com/Feel-ix-343/markdown-oxide/issues/288
 	local filename = vim.fs.basename(vim.api.nvim_buf_get_name(0)):gsub("%.md$", "")
 	vim.lsp.buf.rename(nil, {
 		filter = function(client) return client.name == "markdown_oxide" end,
