@@ -216,8 +216,12 @@ function M.followMdlinkOrWikilink()
 		local targetCol = line:find(wikilink, nil, true)
 		vim.api.nvim_win_set_cursor(0, { ln, targetCol - 1 })
 		local hasMarksman = vim.lsp.get_clients({ name = "marksman", bufnr = 0 })[1]
-		if not hasMarksman then return vim.notify("Marksman not attached.", vim.log.levels.WARN) end
-		vim.lsp.buf.definition()
+		local hasZk = vim.lsp.get_clients({ name = "zk", bufnr = 0 })[1]
+		if hasMarksman or hasZk then
+			vim.lsp.buf.definition()
+		else
+			vim.notify("No wikilink-capable LSP attached.", vim.log.levels.WARN)
+		end
 	end
 end
 --------------------------------------------------------------------------------
