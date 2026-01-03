@@ -18,7 +18,13 @@ return {
 			repeat_linebreak = true, -- full border on soft-wrap
 		},
 		html = {
-			comment = { text = "󰆈" }, -- PENDING https://github.com/MeanderingProgrammer/render-markdown.nvim/issues/574
+			comment = {
+				text = function(ctx)
+					local commentWithoutSyntax = ctx.text:match("^<!%-%-%s*(.-)%s*%-%->$")
+					if not commentWithoutSyntax then return "" end
+					return "󰆈 " .. commentWithoutSyntax
+				end,
+			},
 		},
 		pipe_table = {
 			border_enabled = true,
@@ -28,8 +34,8 @@ return {
 			position = "inline", -- = remove indentation of headings
 			width = "block", -- = not full width
 			min_width = vim.o.textwidth,
-			icons = { " 󰎤 ", " 󰎧 ", " 󰎪 ", " 󰎭 ", " 󰎱 ", " 󰎳 " }, -- `numeric_x` glyphs
-			-- icons = { " 󰲠 ", " 󰲢 ", " 󰲤 ", " 󰲦 ", " 󰲨 ", " 󰲪 " },
+			icons = { "󰎤 ", "󰎧 ", "󰎪 ", "󰎭 ", "󰎱 ", "󰎳 " }, -- `numeric_x` glyphs
+			-- icons = { "󰲠 ", "󰲢 ", "󰲤 ", "󰲦 ", "󰲨 ", "󰲪 " },
 		},
 		dash = {
 			width = vim.o.textwidth,

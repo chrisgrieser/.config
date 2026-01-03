@@ -17,7 +17,6 @@ nnoremap g, :openThisVimrc<CR>
 exmap openDevTools jscommand { electronWindow.openDevTools() }
 nnoremap ? :obcommand<CR>:openDevTools<CR>
 
-
 "───────────────────────────────────────────────────────────────────────────────
 " CLIPBOARD
 
