@@ -36,7 +36,7 @@ vim.api.nvim_create_autocmd("WinScrolled", {
 ---LSP CODELENS-----------------------------------------------------------------
 do
 	local function enableCodeLens(ctx)
-		if vim.bo[ctx.buf].filetype == "markdown" then return end -- useless info for headings
+		-- if vim.bo[ctx.buf].filetype == "markdown" then return end -- useless info for headings
 		vim.lsp.codelens.refresh { bufnr = ctx.buf }
 	end
 	vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained" }, {
@@ -53,12 +53,13 @@ do
 	-- caveat: flickers on refresh, since there is an eager display in
 	-- `resolve_lenses` which is not exposed
 	local function formatLenses(lenses)
-		local icon = ""
+		local icon = "󰏷"
 		local formattedLenses = vim.iter(lenses or {}):fold({}, function(acc, lens)
 			local title = lens.command and lens.command.title
 			if not title then return acc end -- filter "Unresolved lens…"
 			local count = title:match("%d+") or "?"
-			local type = vim.trim(title:gsub("%d+", ""):gsub("references?:?", icon))
+			local type =
+				vim.trim(title:gsub("%d+", ""):gsub("references?:?", icon):gsub(" to file ", ""))
 			lens.command.title = " " .. type .. " " .. count .. " "
 			table.insert(acc, lens)
 			return acc
@@ -541,7 +542,6 @@ vim.lsp.handlers["textDocument/rename"] = function(err, result, ctx, config)
 	local changedFiles, changeCount = {}, 0
 	if result.changes then
 		changedFiles = vim.iter(vim.tbl_keys(result.changes))
-			:filter(function(file) return #result.changes[file] > 0 end)
 			:map(function(uri) return "- " .. vim.fs.basename(vim.uri_to_fname(uri)) end)
 			:totable()
 		changeCount = vim.iter(result.changes)
@@ -550,17 +550,18 @@ vim.lsp.handlers["textDocument/rename"] = function(err, result, ctx, config)
 		changedFiles = vim.iter(result.documentChanges)
 			:map(function(file)
 				local uri = file.textDocument and file.textDocument.uri or file.newUri
-				return "- " .. vim.fs.basename(vim.uri_to_fname(uri))
+				local extra = file.kind == "rename" and " (renamed)" or ""
+				return "- " .. vim.fs.basename(vim.uri_to_fname(uri)) .. extra
 			end)
 			:totable()
 		changeCount = vim.iter(result.documentChanges)
-			:fold(0, function(sum, _, ch) return sum + #(ch.edits or 1) end)
+			:fold(0, function(sum, ch) return sum + (ch.edits and #ch.edits or 1) end)
 	end
 	assert(changeCount > 0, "Unknown form of changes reported by LSP.")
 
 	-- notification
 	local pluralS = changeCount > 1 and "s" or ""
-	local msg = ("[%d] instance%s"):format(changeCount, pluralS)
+	local msg = ("[%d] change%s"):format(changeCount, pluralS)
 	if #changedFiles > 1 then
 		local fileList = table.concat(changedFiles, "\n")
 		msg = ("**%s in [%d] files**\n%s"):format(msg, #changedFiles, fileList)
