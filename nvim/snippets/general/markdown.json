@@ -45,6 +45,10 @@
     "description": "HTML tag for keys",
     "prefix": "kbd"
   },
+  "meh (😐)": {
+    "body": "😐 $0",
+    "prefix": "meh (😐)"
+  },
   "no (❌)": {
     "body": "❌ $0",
     "prefix": "no (❌)"

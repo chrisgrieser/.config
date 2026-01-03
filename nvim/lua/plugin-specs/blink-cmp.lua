@@ -13,6 +13,8 @@ return {
 				lsp = {
 					fallbacks = {}, -- do not use `buffer` as fallback
 
+					-- PENDING https://github.com/saghen/blink.cmp/issues/2339
+
 					-- CHANGES FOR `LUA_LS`
 					enabled = function()
 						if vim.bo.ft ~= "lua" then return true end

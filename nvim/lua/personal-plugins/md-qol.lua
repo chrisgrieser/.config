@@ -382,9 +382,8 @@ function M.renameFileViaOxide()
 	end
 
 	local filename = vim.fs.basename(vim.api.nvim_buf_get_name(0)):gsub("%.md$", "")
-	vim.lsp.buf.rename(nil, {
-		filter = function(client) return client.name == "markdown_oxide" end,
-	})
+	vim.lsp.buf.rename(nil, { name = "markdown_oxide" })
+
 	-- workaround to prefill the current file name
 	vim.schedule(function()
 		vim.api.nvim_set_current_line(filename)
