@@ -23,6 +23,12 @@ return {
 							and not charsBefore:find("%s%-%-?")
 						return luadocButNotComment
 					end,
+					transform_items = function(ctx, items)
+						Chainsaw(items) -- 🪚
+						Chainsaw(ctx) -- 🪚
+						return items
+
+					end,
 				},
 				snippets = {
 					-- don't show when triggered manually (= length 0), useful
@@ -113,7 +119,12 @@ return {
 						{ "label", "label_description", "kind_icon", gap = 1 },
 					},
 					components = {
-						label = { width = { max = 45 } },
+						label = {
+							width = { max = 45 },
+							text = function(ctx)
+								return ctx.label .. " " .. ctx.label_detail:gsub("%.md$", "")
+							end,
+						},
 						label_description = { width = { max = 20 } },
 						kind_icon = {
 							text = function(ctx)
