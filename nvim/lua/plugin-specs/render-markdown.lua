@@ -40,6 +40,9 @@ return {
 		},
 		dash = {
 			width = vim.o.textwidth,
+
+			-- PENDING https://github.com/MeanderingProgrammer/render-markdown.nvim/issues/579
+			priority = 1,
 		},
 		bullet = {
 			icons = { "◇", "▪️", "▫️" }, -- ◆◇•◦▫️▪️

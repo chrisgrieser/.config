@@ -55,10 +55,20 @@ bkeymap("n", "<leader>ep", qol.previewViaPandoc, { desc = " Preview" })
 -- `hyper` gets registered by neovide as `cmd+ctrl` (`<D-C-`)
 bkeymap({ "n", "i" }, "<D-C-e>", qol.codeBlockFromClipboard, { desc = " Codeblock" })
 
-bkeymap("n", "<leader>cb", qol.backlinks, { desc = " Backlinks" })
--- bkeymap("n", "<leader>fr", qol.renameAndUpdateWikilinks, { desc = " Rename file & backlinks" })
-
 -- stylua: ignore
 bkeymap("n", "#", function() require("personal-plugins.hiraganafy")() end, { desc = " Hiraganafy" })
+
+-- rename file via markdown-oxide
+bkeymap("n", "<leader>fr", function()
+	local filename = vim.fs.basename(vim.api.nvim_buf_get_name(0)):gsub("%.md$", "")
+	vim.lsp.buf.rename(nil, {
+		filter = function(client) return client.name == "markdown_oxide" end,
+	})
+	-- workaround to prefill the current file name
+	vim.schedule(function()
+		vim.api.nvim_set_current_line(filename)
+		vim.cmd.startinsert { bang = true }
+	end)
+end, { desc = " Rename & update refs" })
 
 --------------------------------------------------------------------------------

@@ -18,9 +18,8 @@ local ensureInstalled = {
 	"harper-ls", -- natural language linter
 	"ltex-ls-plus", -- natural language linter (LanguageTool, ltex fork)
 	"typos-lsp", -- spellchecker for code
-	"marksman", -- markdown lsp
 	"rumdl", -- modern markdownlint
-	"markdown-oxide", -- zettenkasten-lsp
+	"markdown-oxide", -- zettenkasten-lsp, bit better than `marksman`
 
 	"basedpyright", -- python lsp (pyright fork)
 	"ruff", -- python linter & formatter
@@ -75,7 +74,6 @@ end
 local function enableLsps()
 	local installedPacks = require("mason-registry").get_installed_packages()
 	local lspConfigNames = vim.iter(installedPacks):fold({}, function(acc, pack)
-		if pack.name == "marksman" then return acc end
 		table.insert(acc, pack.spec.neovim and pack.spec.neovim.lspconfig)
 		return acc
 	end)

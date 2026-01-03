@@ -114,7 +114,7 @@ return {
 					},
 					components = {
 						label = { width = { max = 45 } },
-						label_description = { width = { max = 15 } },
+						label_description = { width = { max = 20 } },
 						kind_icon = {
 							text = function(ctx)
 								local source, client =
