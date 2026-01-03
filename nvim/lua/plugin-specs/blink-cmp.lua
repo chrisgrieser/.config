@@ -12,6 +12,8 @@ return {
 			providers = {
 				lsp = {
 					fallbacks = {}, -- do not use `buffer` as fallback
+
+					-- CHANGES FOR `LUA_LS`
 					enabled = function()
 						if vim.bo.ft ~= "lua" then return true end
 
@@ -23,6 +25,8 @@ return {
 							and not charsBefore:find("%s%-%-?")
 						return luadocButNotComment
 					end,
+
+					-- CHANGES FOR `MARKDOWN_OXIDE`
 					transform_items = function(_ctx, items)
 						return vim.iter(items)
 							:filter(function(item)

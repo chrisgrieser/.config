@@ -314,5 +314,17 @@ function M.sumOfAllNumbersInBuf()
 	vim.notify(sum, nil, { title = "Sum", icon = "∑" })
 end
 
+function M.InspectNodeAncestors()
+	local node = vim.treesitter.get_node()
+	if not node then return vim.notify("No node under cursor.", vim.log.levels.WARN) end
+	local ancestors = {}
+	while node do
+		table.insert(ancestors, node:type())
+		node = node:parent()
+	end
+	local out = table.concat(ancestors, " > ")
+	vim.notify(out, nil, { title = "Node ancestors", icon = "" })
+end
+
 --------------------------------------------------------------------------------
 return M

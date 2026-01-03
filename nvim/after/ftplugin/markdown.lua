@@ -58,18 +58,6 @@ bkeymap({ "n", "i" }, "<D-C-e>", qol.codeBlockFromClipboard, { desc = " Codeb
 -- stylua: ignore
 bkeymap("n", "#", function() require("personal-plugins.hiraganafy")() end, { desc = " Hiraganafy" })
 
--- rename file via markdown-oxide
-bkeymap("n", "<leader>fr", function()
-	-- PENDING https://github.com/Feel-ix-343/markdown-oxide/issues/288
-	local filename = vim.fs.basename(vim.api.nvim_buf_get_name(0)):gsub("%.md$", "")
-	vim.lsp.buf.rename(nil, {
-		filter = function(client) return client.name == "markdown_oxide" end,
-	})
-	-- workaround to prefill the current file name
-	vim.schedule(function()
-		vim.api.nvim_set_current_line(filename)
-		vim.cmd.startinsert { bang = true }
-	end)
-end, { desc = " Rename & update refs" })
+bkeymap("n", "<leader>fr", qol.renameFileViaOxide, { desc = " Rename & update refs" })
 
 --------------------------------------------------------------------------------
