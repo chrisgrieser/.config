@@ -538,13 +538,25 @@ vim.lsp.handlers["textDocument/rename"] = function(err, result, ctx, config)
 	if err or not result then return end
 
 	-- count changes
-	local changes = result.changes or result.documentChanges or {}
-	local changedFiles = vim.iter(vim.tbl_keys(changes))
-		:filter(function(file) return #changes[file] > 0 end)
-		:map(function(file) return "- " .. vim.fs.basename(file) end)
-		:totable()
-	local changeCount = vim.iter(changes)
-		:fold(0, function(sum, _, change) return sum + #(change.edits or change) end)
+	local changedFiles, changeCount = {}, 0
+	if result.changes then
+		changedFiles = vim.iter(vim.tbl_keys(result.changes))
+			:filter(function(file) return #result.changes[file] > 0 end)
+			:map(function(uri) return "- " .. vim.fs.basename(vim.uri_to_fname(uri)) end)
+			:totable()
+		changeCount = vim.iter(result.changes)
+			:fold(0, function(sum, _, ch) return sum + #(ch.edits or ch) end)
+	elseif result.documentChanges then
+		changedFiles = vim.iter(result.documentChanges)
+			:map(function(file)
+				local uri = file.textDocument and file.textDocument.uri or file.newUri
+				return "- " .. vim.fs.basename(vim.uri_to_fname(uri))
+			end)
+			:totable()
+		changeCount = vim.iter(result.documentChanges)
+			:fold(0, function(sum, _, ch) return sum + #(ch.edits or 1) end)
+	end
+	assert(changeCount > 0, "Unknown form of changes reported by LSP.")
 
 	-- notification
 	local pluralS = changeCount > 1 and "s" or ""

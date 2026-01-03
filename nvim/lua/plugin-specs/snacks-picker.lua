@@ -165,6 +165,12 @@ return {
 
 		---LSP--------------------------------------------------------------------
 		{ "gf", function() Snacks.picker.lsp_references() end, desc = "󰈿 References" },
+		{
+			"gf",
+			function() Snacks.picker.lsp_references { auto_confirm = false } end,
+			ft = "markdown",
+			desc = "󰈿 References",
+		},
 		{ "gd", function() Snacks.picker.lsp_definitions() end, desc = "󰈿 Definitions" },
 		{ "gD", function() Snacks.picker.lsp_type_definitions() end, desc = "󰜁 Type definitions" },
 		-- stylua: ignore

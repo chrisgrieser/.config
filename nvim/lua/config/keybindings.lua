@@ -451,3 +451,32 @@ end, { desc = "󰋽 Diagnostics" })
 keymap("n", "<leader>oc", function() vim.wo.conceallevel = vim.wo.conceallevel == 0 and 2 or 0 end, { desc = "󰈉 Conceal" })
 
 --------------------------------------------------------------------------------
+
+local documentChanges = {
+	{
+		edits = {
+			{
+				_index = 1,
+				newText = "[[abc]]",
+				range = {
+					["end"] = {
+						character = 15,
+						line = 3,
+					},
+					start = {
+						character = 0,
+						line = 3,
+					},
+				},
+			},
+		},
+		textDocument = {
+			uri = "file:///Users/chrisgrieser/Notes/%F0%9F%A7%A9%20Coding/Useful%20CLIs.md",
+		},
+	},
+	{
+		kind = "rename",
+		newUri = "file:///Users/chrisgrieser/Notes/%F0%9F%8C%80%20General/abc.md",
+		oldUri = "file:///Users/chrisgrieser/Notes/%F0%9F%8C%80%20General/Lorem%20Ipsum.md",
+	},
+}
