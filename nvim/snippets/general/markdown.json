@@ -68,6 +68,10 @@
     "description": "HTML tag for keys",
     "prefix": "kbd"
   },
+  "no (❌)": {
+    "body": "❌ $0",
+    "prefix": "no (❌)"
+  },
   "note (GitHub callout)": {
     "body": [
       "> [!NOTE]",
@@ -94,5 +98,9 @@
     ],
     "description": "https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax#alerts",
     "prefix": "warning (callout)"
+  },
+  "yes (✅)": {
+    "body": "✅ $0",
+    "prefix": "yes (✅)"
   }
 }

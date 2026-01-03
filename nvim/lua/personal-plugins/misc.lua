@@ -30,6 +30,7 @@ function M.toggleOrIncrement()
 		["inner"] = "outer",
 		["encode"] = "decode",
 		["input"] = "output",
+		["✅"] = "❌",
 
 		["and"] = "or",
 		["=="] = "!=",

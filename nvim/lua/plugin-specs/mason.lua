@@ -20,7 +20,6 @@ local ensureInstalled = {
 	"typos-lsp", -- spellchecker for code
 	"marksman", -- markdown lsp
 	"rumdl", -- modern markdownlint
-	"markdown-oxide", -- zettenkasten-lsp
 
 	"basedpyright", -- python lsp (pyright fork)
 	"ruff", -- python linter & formatter

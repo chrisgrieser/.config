@@ -476,7 +476,14 @@ end
 ---@param reg '"'|"+"|string
 ---@return nil
 function M.addTitleToUrlIfMarkdown(reg)
-	if vim.bo.ft ~= "markdown" then return end
+	-- GUARD
+	if vim.bo.ft ~= "markdown" or vim.bo.buftype ~= "" then return end
+	local node = vim.treesitter.get_node()
+	if node and node:type() == "code_fence_content" then return end
+	if node and node:type() == "html_block" then return end
+	local col = vim.api.nvim_win_get_cursor(0)[2]
+	local charUnderCursor = vim.api.nvim_get_current_line():sub(col + 1, col + 1)
+	if charUnderCursor == "(" then return end -- inserting into mdlink
 
 	local clipb = vim.fn.getreg(reg)
 	local url = clipb:match("^%l+://%S+$") -- not ending with `)` to not match mdlinks
