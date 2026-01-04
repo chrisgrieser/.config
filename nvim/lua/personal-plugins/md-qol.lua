@@ -372,23 +372,5 @@ function M.addTitleToUrlIfMarkdown(reg)
 	end, 1) -- deferred to act after the paste
 end
 
--- PENDING https://github.com/Feel-ix-343/markdown-oxide/issues/288
-function M.renameFileViaOxide()
-	local node = vim.treesitter.get_node()
-	local parent = node and node:parent()
-	if parent and vim.endswith(parent:type(), "heading") then
-		vim.notify("On heading, would rename heading, not file.", vim.log.levels.WARN)
-		return
-	end
-
-	local filename = vim.fs.basename(vim.api.nvim_buf_get_name(0)):gsub("%.md$", "")
-	vim.lsp.buf.rename(nil, { name = "markdown_oxide" })
-
-	-- workaround to prefill the current file name
-	vim.schedule(function()
-		vim.api.nvim_set_current_line(filename)
-		vim.cmd.startinsert { bang = true }
-	end)
-end
 --------------------------------------------------------------------------------
 return M

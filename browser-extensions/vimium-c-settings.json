@@ -1,7 +1,7 @@
 {
 	"name": "Vimium C",
-	"@time": "12/31/2025, 12:41:10 PM",
-	"time": 1767181270429,
+	"@time": "1/4/2026, 10:02:08 AM",
+	"time": 1767517328222,
 	"environment": {
 		"extension": "2.12.2",
 		"platform": "mac",
@@ -126,7 +126,8 @@
 		"map w removeTab mayClose",
 		"map t Vomnibar.activateTabSelection",
 		"# using if-then, since `runKey` does not work with the `mayClose` parameter",
-		"map s copyCurrentUrl format=\"[${title}](${url})\" $then=\"w\" # copy as markdown link & close",
+		"map s copyCurrentUrl $then=\"w\" # copy & close",
+		"map S copyCurrentUrl format=\"[${title}](${url})\" $then=\"w\" # copy as markdown link & close",
 		"",
 		"# WINDOWS",
 		"map M joinTabs",
@@ -166,7 +167,7 @@
 		"map r reload",
 		"map gs toggleViewSource",
 		"",
-		"# goto issues I authored ",
+		"# goto issues authored by me",
 		"# https://github.com/gdh1995/vimium-c/wiki/Substitute-URLs-and-text-during-commands",
 		"# https://github.com/gdh1995/vimium-c/discussions/996#discussioncomment-6752943",
 		"# `sed` parameter uses `,` as delimiter (allowed are: `/@#,`)",

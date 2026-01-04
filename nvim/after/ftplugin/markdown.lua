@@ -58,6 +58,4 @@ bkeymap({ "n", "i" }, "<D-C-e>", qol.codeBlockFromClipboard, { desc = " Codeb
 -- stylua: ignore
 bkeymap("n", "#", function() require("personal-plugins.hiraganafy")() end, { desc = " Hiraganafy" })
 
-bkeymap("n", "<leader>fr", qol.renameFileViaOxide, { desc = " Rename & update refs" })
-
 --------------------------------------------------------------------------------
