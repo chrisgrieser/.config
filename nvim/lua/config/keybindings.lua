@@ -352,6 +352,10 @@ keymap("c", "<BS>", function()
 	if vim.fn.getcmdline() ~= "" then return "<BS>" end
 end, { expr = true, desc = "<BS> does not leave cmdline" })
 
+keymap("c", "<C-a>", "<C-b>", { desc = "Goto start of cmdline" })
+keymap("c", "<D-Left>", "<C-b>", { desc = "Goto start of cmdline" })
+keymap("c", "<D-Right>", "<C-e>", { desc = "Goto end of cmdline" })
+
 ---INSPECT & EVAL---------------------------------------------------------------
 keymap("n", "<leader>ii", vim.cmd.Inspect, { desc = "󱈄 Inspect at cursor" })
 keymap("n", "<leader>it", vim.cmd.InspectTree, { desc = " TS syntax tree" })
