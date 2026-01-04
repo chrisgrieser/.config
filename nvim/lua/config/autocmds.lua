@@ -57,10 +57,9 @@ do
 		local formattedLenses = vim.iter(lenses or {}):fold({}, function(acc, lens)
 			local title = lens.command and lens.command.title
 			if not title then return acc end -- filter "Unresolved lens…"
-			local count = title:match("%d+") or "?"
-			local type =
-				vim.trim(title:gsub("%d+", ""):gsub("references?:?", icon):gsub(" to file ", ""))
-			lens.command.title = " " .. type .. " " .. count .. " "
+			lens.command.title = title
+				:gsub("(%d+) reference(s?) to file", " %1 backlink%2 ") -- markdown_oxide
+				:gsub("(%d+) references?", " " .. icon .. " %1 ") -- lua_ls
 			table.insert(acc, lens)
 			return acc
 		end)

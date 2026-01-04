@@ -391,7 +391,7 @@ return {
 					layout = { preset = "big_preview", hidden = { "preview" } },
 				},
 				git_status = {
-					layout = "git_sidebar",
+					layout = "sidebar_no_input",
 					win = {
 						-- <CR> opens the file as usual
 						list = { keys = { ["<Space>"] = "git_stage" } },
@@ -399,7 +399,7 @@ return {
 					},
 				},
 				git_diff = {
-					layout = "git_sidebar",
+					layout = "sidebar_no_input",
 					win = {
 						-- <CR> opens the file as usual
 						list = { keys = { ["<Space>"] = "git_stage" } },
@@ -502,7 +502,7 @@ return {
 					cycle = true, -- `list_up/down` action wraps
 					layout = {
 						box = "vertical",
-						position = "left", -- = left-split
+						position = "left", -- = split window
 						width = 0.3,
 						min_width = 25,
 						{ win = "input", height = 1, border = "bottom" },
@@ -510,12 +510,12 @@ return {
 						{ win = "preview" },
 					},
 				},
-				git_sidebar = {
+				sidebar_no_input = {
 					preview = "main",
 					cycle = true, -- `list_up/down` action wraps
 					layout = {
 						box = "vertical",
-						position = "left", -- = left-split
+						position = "left", -- = split window
 						width = 0.3,
 						min_width = 25,
 						{ win = "list" },

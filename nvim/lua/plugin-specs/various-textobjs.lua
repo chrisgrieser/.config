@@ -1,6 +1,6 @@
 return {
 	"chrisgrieser/nvim-various-textobjs",
-	opts = { debug = false },
+	opts = { debug = true },
 	keys = {
 		{ -- subword
 			"<Space>",

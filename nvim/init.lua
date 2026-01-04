@@ -31,10 +31,5 @@ safeRequire("config.autocmds")
 safeRequire("config.keybindings")
 
 safeRequire("personal-plugins.git-conflict")
+safeRequire("config.spellfixes")
 vim.schedule(function() safeRequire("personal-plugins.ui-hack") end) -- wait for loading notification plugin
-
-vim.api.nvim_create_autocmd("InsertEnter", {
-	desc = "User: lazy-load spellfixes",
-	once = true,
-	callback = function() safeRequire("config.spellfixes") end,
-})
