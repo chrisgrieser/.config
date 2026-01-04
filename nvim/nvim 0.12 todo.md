@@ -16,6 +16,7 @@
     - <https://github.com/zuqini/zpack.nvim>
 - `vim.json.encode` supports formatting → switch to `nvim-0.12` branch for
   `nvim-scissors`
+- `vim.fs.read`
 
 ```lua
 vim.api.nvim_create_autocmd("PackChanged", {

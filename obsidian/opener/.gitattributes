@@ -1,2 +1,0 @@
-# exclude these files from git diffs and stats
-*.app linguist-generated

@@ -372,5 +372,28 @@ function M.addTitleToUrlIfMarkdown(reg)
 	end, 1) -- deferred to act after the paste
 end
 
+function M.openInObsidian()
+	-- get vaults
+	assert(jit.os == "OSX", "obsidianJson path only works on macOS.")
+	local obsidianJson = vim.env.HOME .. "/Library/Application Support/obsidian/obsidian.json"
+	local file, errmsg = io.open(obsidianJson, "r")
+	assert(file, errmsg)
+	local json = file:read("*a")
+	file:close()
+	local vaults = vim.tbl_values(vim.json.decode(json).vaults)
+
+	-- check if file is in Obsidian vault
+	local curFile = vim.api.nvim_buf_get_name(0)
+	local notInVault = not vim.iter(vaults):any(function(v) return vim.startswith(curFile, v.path) end)
+	local inHiddenFolder = curFile:find("/%.") -- `.trash` or `.obsidian`
+	if notInVault or inHiddenFolder then
+		vim.notify("File is not in an Obsidian vault.", vim.log.levels.WARN)
+		return
+	end
+
+	local uri = "obsidian://open?path=" .. vim.uri_encode(curFile)
+	vim.ui.open(uri)
+end
+
 --------------------------------------------------------------------------------
 return M

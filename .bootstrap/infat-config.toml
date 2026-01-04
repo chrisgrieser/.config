@@ -1,5 +1,5 @@
 # DEFAULT FILE OPENERS
-# DOCS https://github.com/philocalyst/infat#5-configuration
+# https://github.com/philocalyst/infat#5-configuration
 # Apps outside of `/Applications/` require an absolute path or path relative to
 # the home directory https://github.com/philocalyst/infat/blob/main/README.md#5-configuration
 # ──────────────────────────────────────────────────────────────────────────────
@@ -30,5 +30,5 @@ pdf = "Highlights"
 ics = "Calendar"
 torrent = "Transmission"
 html = "Brave Browser"
-url = "Brave Browser"  # link files
-webloc = "Brave Browser"  # link files
+url = "Brave Browser"
+webloc = "Brave Browser"
