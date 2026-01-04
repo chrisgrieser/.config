@@ -34,8 +34,8 @@ bkeymap({ "n", "i" }, "<D-u>", qol.cycleList, { desc = "󰍔 Cycle list types" }
 
 -- headings
 -- Jump to next/prev heading (`##` to skip H1 and comments in code-blocks)
-bkeymap("n", "<C-j>", [[/^##\+ .*<CR>]], { desc = " Next heading" })
-bkeymap("n", "<C-k>", [[?^##\+ .*<CR>]], { desc = " Prev heading" })
+bkeymap("n", "<C-j>", [[/^##\+ .*<CR><cmd>nohlsearch<CR>]], { desc = " Next heading" })
+bkeymap("n", "<C-k>", [[?^##\+ .*<CR><cmd>nohlsearch<CR>]], { desc = " Prev heading" })
 
 -- stylua: ignore
 bkeymap("n", "gx", qol.followMdlinkOrWikilink, { desc = " Follow URL/Wikilink" })
