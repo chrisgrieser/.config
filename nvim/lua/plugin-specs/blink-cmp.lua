@@ -31,20 +31,20 @@ return {
 					-- CHANGES FOR `MARKDOWN_OXIDE`
 					transform_items = function(_ctx, items)
 						return vim.iter(items)
+							-- filter aliases, PENDING https://github.com/Feel-ix-343/markdown-oxide/issues/330
 							:filter(function(item)
-								-- filter aliases, PENDING https://github.com/Feel-ix-343/markdown-oxide/issues/330
 								if item.client_name ~= "markdown_oxide" then return true end
 								if item.textEdit.newText:find(">") then return false end
 								return true
 							end)
-							:map(function(item)
-								if item.client_name ~= "markdown_oxide" then return item end
-								if item.labelDetails and item.labelDetails.details then
-									item.labelDetails.details = " "
-										.. item.labelDetails.details:gsub("%.md$", "")
-								end
-								return item
-							end)
+							-- :map(function(item) -- FIX spacing between label and details
+							-- 	if item.client_name ~= "markdown_oxide" then return item end
+							-- 	if item.labelDetails and item.labelDetails.details then
+							-- 		item.labelDetails.details = " "
+							-- 			.. item.labelDetails.details:gsub("%.md$", "")
+							-- 	end
+							-- 	return item
+							-- end)
 							:totable()
 					end,
 				},
@@ -137,12 +137,7 @@ return {
 						{ "label", "label_description", "kind_icon", gap = 1 },
 					},
 					components = {
-						label = {
-							width = { max = 45 },
-							text = function(ctx)
-								return ctx.label .. " " .. ctx.label_detail:gsub("%.md$", "")
-							end,
-						},
+						label = { width = { max = 45 } },
 						label_description = { width = { max = 20 } },
 						kind_icon = {
 							text = function(ctx)
