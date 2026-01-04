@@ -30,21 +30,28 @@ return {
 
 					-- CHANGES FOR `MARKDOWN_OXIDE`
 					transform_items = function(_ctx, items)
-						return vim.iter(items)
+						return vim
+							.iter(items)
 							-- filter aliases, PENDING https://github.com/Feel-ix-343/markdown-oxide/issues/330
-							:filter(function(item)
-								if item.client_name ~= "markdown_oxide" then return true end
-								if item.textEdit.newText:find(">") then return false end
-								return true
-							end)
-							-- :map(function(item) -- FIX spacing between label and details
-							-- 	if item.client_name ~= "markdown_oxide" then return item end
-							-- 	if item.labelDetails and item.labelDetails.details then
-							-- 		item.labelDetails.details = " "
-							-- 			.. item.labelDetails.details:gsub("%.md$", "")
-							-- 	end
-							-- 	return item
-							-- end)
+							:filter(
+								function(item)
+									if item.client_name ~= "markdown_oxide" then return true end
+									if item.textEdit.newText:find(">") then return false end
+									return true
+								end
+							)
+							-- FIX spacing for Aliases, see https://github.com/Feel-ix-343/markdown-oxide/issues/332
+							:map(
+								function(item) -- FIX spacing between label and details
+									if item.client_name ~= "markdown_oxide" then return item end
+									if item.labelDetails and item.labelDetails.detail then
+										item.labelDetails.description =
+											item.labelDetails.detail:gsub("%.md$", "")
+										item.labelDetails.detail = nil
+									end
+									return item
+								end
+							)
 							:totable()
 					end,
 				},
@@ -133,9 +140,7 @@ return {
 				draw = {
 					align_to = "none", -- keep in place
 					treesitter = { "lsp" },
-					columns = {
-						{ "label", "label_description", "kind_icon", gap = 1 },
-					},
+					columns = { { "label", "label_description", gap = 1 }, { "kind_icon" } },
 					components = {
 						label = { width = { max = 45 } },
 						label_description = { width = { max = 20 } },

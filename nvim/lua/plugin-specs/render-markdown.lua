@@ -47,6 +47,7 @@ return {
 			ordered_icons = "", -- disable overwriting ordered list numbers with 1-2-3
 		},
 		code = {
+			-- priority = 140, -- to not cover yank highlights (200) and diagnostics (150)
 			position = "left",
 			width = "block", -- = not full width
 			min_width = 50,
