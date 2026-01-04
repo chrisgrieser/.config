@@ -40,18 +40,18 @@ return {
 		},
 		dash = {
 			width = vim.o.textwidth,
-			priority = 10, -- to not cover codelens from `markdown-oxide` if there is frontmatter
+			priority = 10, -- don't cover codelens from `markdown-oxide` for 1st line of frontmatter
 		},
 		bullet = {
 			icons = { "◇", "▪️", "▫️" }, -- ◆◇•◦▫️▪️
 			ordered_icons = "", -- disable overwriting ordered list numbers with 1-2-3
 		},
 		code = {
-			-- priority = 140, -- to not cover yank highlights (200) and diagnostics (150)
+			priority = 140, -- PENDING https://github.com/MeanderingProgrammer/render-markdown.nvim/pull/581
 			position = "left",
 			width = "block", -- = not full width
 			min_width = 50,
-			left_pad = 0, -- don't use due to uneven padding https://github.com/MeanderingProgrammer/render-markdown.nvim/issues/576#issuecomment-3694595069
+			left_pad = 0, -- better `0` due to uneven padding https://github.com/MeanderingProgrammer/render-markdown.nvim/issues/576#issuecomment-3694595069
 			right_pad = 1,
 			border = "thin", -- use the `above`/`below` chars as is
 			below = "▔", -- ▀▔

@@ -339,6 +339,7 @@ function M.addTitleToUrl()
 		vim.schedule(vim.cmd.startinsert)
 	end
 end
+
 ---updates any url in the register to a mdlink if in a Markdown buffer
 ---@param reg '"'|"+"|string
 ---@return nil
@@ -372,9 +373,11 @@ function M.addTitleToUrlIfMarkdown(reg)
 	end, 1) -- deferred to act after the paste
 end
 
+--------------------------------------------------------------------------------
+
 function M.openInObsidian()
 	-- get vaults
-	assert(jit.os == "OSX", "obsidianJson path only works on macOS.")
+	assert(jit.os == "OSX", "current `obsidianJson` path only works on macOS.")
 	local obsidianJson = vim.env.HOME .. "/Library/Application Support/obsidian/obsidian.json"
 	local file, errmsg = io.open(obsidianJson, "r")
 	assert(file, errmsg)

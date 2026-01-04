@@ -1,7 +1,7 @@
 ---BASICS-----------------------------------------------------------------------
 vim.api.nvim_create_autocmd("TextYankPost", {
 	desc = "User: Highlighted Yank",
-	callback = function() vim.hl.on_yank { timeout = 5500 } end,
+	callback = function() vim.hl.on_yank { timeout = 1500 } end,
 })
 
 vim.api.nvim_create_autocmd("VimResized", {

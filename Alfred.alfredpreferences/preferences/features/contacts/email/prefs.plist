@@ -4,8 +4,6 @@
 <dict>
 	<key>keyword</key>
 	<string>ma</string>
-	<key>keywordEnabled</key>
-	<false/>
 	<key>multiSubjectEnabled</key>
 	<false/>
 	<key>showViewerIfMultiEmail</key>
