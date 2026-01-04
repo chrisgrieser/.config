@@ -41,8 +41,12 @@ return {
 
 		---SWAP-------------------------------------------------------------------
 		-- stylua: ignore start
-		{ "ä", function() require("nvim-treesitter-textobjects.swap").swap_next("@parameter.inner") end, desc = " Swap next arg" },
-		{ "Ä", function() require("nvim-treesitter-textobjects.swap").swap_previous("@parameter.inner") end, desc = " Swap prev arg" },
+		{ "ä", function() require("nvim-treesitter-textobjects.swap").swap_next("@parameter.inner") end, desc = " Swap arg" },
+		{ "Ä", function() require("nvim-treesitter-textobjects.swap").swap_previous("@parameter.inner") end, desc = " Swap arg" },
+
+		-- `@markdown_section` is custom textobject defined in `query/markdown.scm`
+		{ "ä", function() require("nvim-treesitter-textobjects.swap").swap_next("@markdown_section") end, ft = "markdown", desc = " Swap section" },
+		{ "Ä", function() require("nvim-treesitter-textobjects.swap").swap_previous("@markdown_section") end, ft = "markdown", desc = " Swap section" },
 		-- stylua: ignore end
 
 		---TEXT OBJECTS-----------------------------------------------------------

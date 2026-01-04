@@ -53,8 +53,8 @@ return {
 			left_pad = 0, -- don't use due to uneven padding https://github.com/MeanderingProgrammer/render-markdown.nvim/issues/576#issuecomment-3694595069
 			right_pad = 1,
 			border = "thin", -- use the `above`/`below` chars as is
-			below = "▔", -- ▀
-			above = "▁", -- ▃
+			below = "▔", -- ▀▔
+			above = "▁", -- ▃▁
 			language_border = "▁",
 			language_left = "▁▁█",
 			language_right = "█",
