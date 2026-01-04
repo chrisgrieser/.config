@@ -32,7 +32,7 @@ return {
 			border_virtual = true, -- borders not on empty lines -> preserves blank lines
 		},
 		heading = {
-			position = "inline", -- = remove indentation of headings
+			position = "right", -- = remove indentation of headings
 			width = "block", -- = not full width
 			min_width = vim.o.textwidth,
 			icons = { "󰎤 ", "󰎧 ", "󰎪 ", "󰎭 ", "󰎱 ", "󰎳 " }, -- `numeric_x` glyphs
@@ -40,9 +40,7 @@ return {
 		},
 		dash = {
 			width = vim.o.textwidth,
-
-			-- PENDING https://github.com/MeanderingProgrammer/render-markdown.nvim/issues/579
-			priority = 1,
+			priority = 10, -- to not cover codelens from `markdown-oxide` if there is frontmatter
 		},
 		bullet = {
 			icons = { "◇", "▪️", "▫️" }, -- ◆◇•◦▫️▪️
@@ -98,7 +96,7 @@ return {
 		render_modes = { "n", "c", "i", "v", "V" },
 		win_options = {
 			conceallevel = { default = 0 }, -- makes toggling this plugin also toggle conceallevel
-			colorcolumn = { rendered = "" }, -- disabled on render, since heading width already indicates it
+			-- colorcolumn = { rendered = "" }, -- disabled on render, since heading width already indicates it
 		},
 		overrides = { -- LSP hovers: hide code block lines
 			buftype = {
