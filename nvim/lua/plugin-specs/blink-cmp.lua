@@ -140,26 +140,25 @@ return {
 				draw = {
 					align_to = "none", -- keep in place
 					treesitter = { "lsp" },
-					columns = { { "label", "kind_icon" } },
+					columns = { { "label" }, { "kind_icon" } },
 					components = {
 						label = {
-							width = { max = 40, fill = true },
+							width = { max = 50 },
+							-- put label, details, and description into one component
+							-- for sparse display without gaps
 							text = function(ctx)
-								return ctx.label .. ctx.label_detail .. " " .. ctx.label_description
+								return ctx.label
+									.. ctx.label_detail
+									.. (#ctx.label_description > 0 and " " .. ctx.label_description or "")
 							end,
 							highlight = function(ctx)
-								-- label and label details
+								local totalLength = (#ctx.label + #ctx.label_detail)
+									+ (#ctx.label_description > 0 and #ctx.label_description + 1 or 0) -- +1 for the gap
 								local hls = {
 									-- stylua: ignore
 									{ 0, #ctx.label, group = ctx.deprecated and "BlinkCmpLabelDeprecated" or "BlinkCmpLabel" },
+									{ #ctx.label, totalLength, group = "BlinkCmpLabelDetail" },
 								}
-								if ctx.label_detail or ctx.label_description then
-									local totalLength = #ctx.label
-										+ #(ctx.label_detail or "")
-										+ #(ctx.label_description or "")
-									-- stylua: ignore
-									table.insert(hls, { #ctx.label, totalLength, group = "BlinkCmpLabelDetail" })
-								end
 
 								-- characters matched on the label by the fuzzy matcher
 								for _, idx in ipairs(ctx.label_matched_indices) do

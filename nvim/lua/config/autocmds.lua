@@ -35,18 +35,19 @@ vim.api.nvim_create_autocmd("WinScrolled", {
 
 ---LSP CODELENS-----------------------------------------------------------------
 do
-	local function enableCodeLens(ctx)
-		-- if vim.bo[ctx.buf].filetype == "markdown" then return end -- useless info for headings
-		vim.lsp.codelens.refresh { bufnr = ctx.buf }
-	end
+	local function enableCodeLens(ctx) vim.lsp.codelens.refresh { bufnr = ctx.buf } end
 	vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained", "LspAttach" }, {
 		desc = "User: enable LSP codelenses",
 		callback = enableCodeLens,
 	})
 	vim.api.nvim_create_autocmd("LspProgress", {
-		desc = "User: initialize CodeLense on first buffer",
-		once = true,
-		callback = enableCodeLens,
+		desc = "User: initialize CodeLenses on first buffer",
+		callback = function(ctx)
+			if ctx.data.params.value.kind == "end" then
+				Chainsaw(ctx.data) -- 🪚
+				enableCodeLens(ctx)
+			end
+		end,
 	})
 
 	-- format with padding & icon
