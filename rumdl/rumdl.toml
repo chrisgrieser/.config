@@ -43,5 +43,5 @@ enabled = true  # opt-in rule
 style = "sentence_case"
 ignore-words = ["nvim", "Obsidian", "Alfred"]
 
-[MD072]  # sort frontmatter keys (no alias yet) https://github.com/rvben/rumdl/blob/main/docs/md072.md
-enabled = true
+[frontmatter-key-sort]
+enabled = true  # opt-in rule
