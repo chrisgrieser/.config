@@ -8,9 +8,9 @@ export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
 
 # CONFIG
 # 1. right-click on a location in Google Maps to get the latitude/longitude
-# 2. WARN only very vague location as this dotfile repo is public
-readonly latitude=52
-readonly longitude=13
+# 2. WARN only approxide location as this file is in my public repo
+readonly latitude=52.5
+readonly longitude=13.4
 
 #───────────────────────────────────────────────────────────────────────────────
 
