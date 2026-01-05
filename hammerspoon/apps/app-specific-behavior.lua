@@ -80,8 +80,8 @@ end
 
 local c = hs.caffeinate.watcher
 M.caff_masto = c.new(function(event)
-	if event == c.screensaverDidStop or event == c.screensaverDidStop then
-		u.defer(2, scrollMasto)
+	if event == c.screensaverDidStop or event == c.screensDidWake then
+		u.defer({ 0, 2 }, scrollMasto)
 	end
 end):start()
 
