@@ -1,11 +1,9 @@
-# ignore all Alfred configs except the workflows
-/*
-!/workflows/
-!alfred-gallery-downloads.yaml
-!AlfredExtraPane.json
-!.gitignore
-!.ignore
-!.gitattributes
+# ignore Alfred's own configs
+preferences
+remote
+resources
+themes
+workflowextras
 
 # images
 /workflows/**/*.png
@@ -13,9 +11,7 @@
 # 3rd-party workflows, manually marked as such
 /workflows/*\[3rd-Party\]
 
-# these are symlinked multiple times, only need to keep the originals on this level
-!/alfred.d.ts
-!/jsconfig.json
+# these are symlinked multiple times, only need to keep the on the top-level
 /workflows/**/alfred.d.ts
 /workflows/**/jsconfig.json
 /workflows/**/jxa-globals.d.ts

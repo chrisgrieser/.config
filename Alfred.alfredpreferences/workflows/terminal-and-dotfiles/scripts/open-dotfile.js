@@ -83,12 +83,10 @@ function run() {
 	/** @type{AlfredItem|{}[]} */
 	const folderArray = app
 		.doShellScript(`
-			find "${dotfilesFolder}" -type d \
+			find "${dotfilesFolder}" -type "directory" \
 			-not -path "**/.git/*" \
-			-not -path "**/*.app/*" \
-			-not -path "**/*.app" \
+			-not -path "**/hammerspoon/Spoons/*" \
 			-not -path "**/Alfred.alfredpreferences/*" \
-			-not -path "**/hammerspoon/Spoons/*"
 		`)
 		.split("\r")
 		.map((/** @type {string} */ absPath) => {
