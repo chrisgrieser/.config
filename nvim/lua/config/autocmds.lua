@@ -35,18 +35,16 @@ vim.api.nvim_create_autocmd("WinScrolled", {
 
 ---LSP CODELENS-----------------------------------------------------------------
 do
-	local function enableCodeLens(ctx) vim.lsp.codelens.refresh { bufnr = ctx.buf } end
-	vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained", "LspAttach" }, {
+	vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained", "LspAttach", "LspProgress" }, {
 		desc = "User: enable LSP codelenses",
-		callback = enableCodeLens,
-	})
-	vim.api.nvim_create_autocmd("LspProgress", {
-		desc = "User: initialize CodeLenses on first buffer",
 		callback = function(ctx)
-			if ctx.data.params.value.kind == "end" then
-				Chainsaw(ctx.data) -- 🪚
-				enableCodeLens(ctx)
-			end
+			-- when the LSP has loaded the workspace (needed for `lua_ls`)
+			local lspProgressEnd = ctx.event == "LspProgress"
+				and ctx.data.params.value.kind == "end"
+				and ctx.data.params.value.title == "Loading workspace"
+			if ctx.event == "LspProgress" and not lspProgressEnd then return end
+
+			vim.lsp.codelens.refresh { bufnr = ctx.buf }
 		end,
 	})
 
@@ -60,7 +58,7 @@ do
 			if not title then return acc end -- filter "Unresolved lens…"
 			lens.command.title = title
 				:gsub("(%d+) reference(s?) to file", " %1 backlink%2 ") -- markdown_oxide
-				:gsub("(%d+) references?", " " .. icon .. " %1 ") -- lua_ls
+				:gsub("(%d+) references?", " " .. icon .. " %1 ")
 			table.insert(acc, lens)
 			return acc
 		end)
