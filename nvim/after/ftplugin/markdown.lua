@@ -58,6 +58,10 @@ bkeymap({ "n", "i" }, "<D-C-e>", qol.codeBlockFromClipboard, { desc = " Codeb
 -- stylua: ignore
 bkeymap("n", "#", function() require("personal-plugins.hiraganafy")() end, { desc = " Hiraganafy" })
 
-bkeymap("n", "<D-L>", qol.openInObsidian, { desc = " Open in Obsidian" })
+bkeymap("n", "<D-L>", function ()
+	local path = vim.api.nvim_buf_get_name(0)
+	local uri = "obsidian://open?path=" .. vim.uri_encode(path)
+	vim.ui.open(uri)
+end, { desc = " Open in Obsidian" })
 
 --------------------------------------------------------------------------------
