@@ -140,10 +140,35 @@ return {
 				draw = {
 					align_to = "none", -- keep in place
 					treesitter = { "lsp" },
-					columns = { { "label", "label_description", gap = 1 }, { "kind_icon" } },
+					columns = { { "label", "kind_icon" } },
 					components = {
-						label = { width = { max = 45 } },
-						label_description = { width = { max = 20 } },
+						label = {
+							width = { max = 40, fill = true },
+							text = function(ctx)
+								return ctx.label .. ctx.label_detail .. " " .. ctx.label_description
+							end,
+							highlight = function(ctx)
+								-- label and label details
+								local hls = {
+									-- stylua: ignore
+									{ 0, #ctx.label, group = ctx.deprecated and "BlinkCmpLabelDeprecated" or "BlinkCmpLabel" },
+								}
+								if ctx.label_detail or ctx.label_description then
+									local totalLength = #ctx.label
+										+ #(ctx.label_detail or "")
+										+ #(ctx.label_description or "")
+									-- stylua: ignore
+									table.insert(hls, { #ctx.label, totalLength, group = "BlinkCmpLabelDetail" })
+								end
+
+								-- characters matched on the label by the fuzzy matcher
+								for _, idx in ipairs(ctx.label_matched_indices) do
+									table.insert(hls, { idx, idx + 1, group = "BlinkCmpLabelMatch" })
+								end
+
+								return hls
+							end,
+						},
 						kind_icon = {
 							text = function(ctx)
 								local source, client =
