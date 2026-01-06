@@ -9,6 +9,12 @@
       },
       {
         "language": [
+          "swift"
+        ],
+        "path": "./general/swift.json"
+      },
+      {
+        "language": [
           "just"
         ],
         "path": "./general/justfile.json"

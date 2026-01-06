@@ -1,0 +1,9 @@
+{
+  "read file": {
+    "body": [
+      "let url = URL(fileURLWithPath: \"/path/to/file.txt\")",
+      "let contents = try String(contentsOf: url, encoding: .utf8)"
+    ],
+    "prefix": "read file"
+  }
+}
