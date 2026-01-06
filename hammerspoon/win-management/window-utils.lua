@@ -5,12 +5,11 @@ local u = require("meta.utils")
 
 M.iMacDisplay = hs.screen("Built%-in")
 
-
 local side = { w = 0.185, cutoff = 0.055 }
 M.pseudoMax = hs.geometry { x = side.w, y = 0, w = (1 - side.w), h = 1 }
 M.middleHalf = hs.geometry { x = side.w, y = 0, w = 0.6, h = 1 }
 M.toTheSide = hs.geometry {
-	-- cutoff necessary to hide sidebar, since Mona has a minimum app width 
+	-- cutoff necessary to hide sidebar, since Mona has a minimum app width
 	-- (popup wins don't, but cannot switch to non-home-tabs)
 	x = -side.cutoff,
 	y = 0.055, -- sketchybar height

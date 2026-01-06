@@ -32,7 +32,7 @@ M.usb_externalDrives = usb.new(function(device)
 		-- search for mounted volumes, since the usb-watcher does not report it to us
 		local cmd = [[df | grep ' /Volumes/' | grep -v '/Volumes/Recovery' | 
 			grep --only-matching '/Volumes/.*' | head -n1 | xargs -I{} open '{}']]
-		u.defer({1, 3}, function() hs.execute(cmd) end)
+		u.defer({ 1, 3 }, function() hs.execute(cmd) end)
 	end
 end):start()
 

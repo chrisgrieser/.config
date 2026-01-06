@@ -17,6 +17,12 @@
   (#eq? @keyword.return "assert")
   (#set! priority 130))
 
+((goto_statement) @keyword.return ; for `goto continue` (pseudo continue-statement)
+  (#set! priority 130))
+
+((label_statement) @keyword.return ; for `::continue::` (pseudo continue-statement)
+  (#set! priority 130))
+
 ;-------------------------------------------------------------------------------
 ; highlight string concatenation with `+` as error
 ; (error: "attempt to perform arithmetic on string")

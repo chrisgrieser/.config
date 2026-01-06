@@ -100,7 +100,7 @@ Task {
 		.filter { $0.title.first?.isEmoji == false }
 	let titles = remWithNoEmoji.map(\.title).joined(separator: "\n")
 	if titles.isEmpty {
-		print("No reminders to update.")
+		print("✅ No reminders to update.")
 		exit(0)
 	}
 
@@ -127,7 +127,7 @@ Task {
 	}
 
 	let s = remWithNoEmoji.count == 1 ? "" : "s"
-	print("Added emoji to \(remWithNoEmoji.count) reminder\(s).")
+	print("✅ Added emoji to \(remWithNoEmoji.count) reminder\(s).")
 	semaphore.signal()
 }
 _ = semaphore.wait(timeout: .distantFuture)

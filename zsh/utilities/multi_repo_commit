@@ -11,10 +11,10 @@ repo_names="nvim"
 # repo_names="finder-vim-mode|zsh-magic-dashboard|nvim|alfred|shimmering-obsidian|gitfred|obsidian-quadro|pseudometa-obsidian-plugin-template|grappling-hook|obsidian-proofreader"
 
 function actions_in_repo {
-	mv ./pull_request_template.md ./.github/pull_request_template.md
+	cp -f "$HOME"/.config/.stylua.toml ./.stylua.toml
 }
 
-commit_msg="ci: fix pull request template location"
+commit_msg="ci: add label-support to stylua config"
 
 amend="false" # no-edit|only-message|false
 

@@ -33,6 +33,13 @@
     "body": "---@cast ${1:varName} ${2:string}",
     "prefix": "cast (@cast)"
   },
+  "continue (via goto)": {
+    "body": [
+      "if ${1:cond} then goto continue end",
+      "::continue::"
+    ],
+    "prefix": "continue (via goto)"
+  },
   "count occurrences in string": {
     "body": "local count = select(2, ${1:str}:gsub(\"${2:find}\", \"\"))",
     "prefix": "count occurrences in string"

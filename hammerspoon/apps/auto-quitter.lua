@@ -61,7 +61,6 @@ local function quit(appName)
 	require("win-management.auto-tile").resetWinCount(appName)
 end
 
-
 -- Watch app (de)activation & update `idleApps`
 M.aw_appDeactivation = aw.new(function(appName, event)
 	-- ignore apps not included in configuration

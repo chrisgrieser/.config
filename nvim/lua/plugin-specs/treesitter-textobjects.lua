@@ -7,11 +7,12 @@ local function select(textobj)
 	end
 end
 
--- requires `; extends \n(list_item) @md_list_item` in `.queries/markdown/textobjects.scm`
----@param lhs string
+---If in a markdown list, swap the list item up/down, if not move the line
+---up/down instead. This is useful for lists with sub-items, or for lists which
+---span multiple lines due to hard-wrapping.
+---Requires `; extends \n(list_item) @md_list_item` in `queries/markdown/textobjects.scm`
 ---@param dir "next"|"previous"
----@return string? expr
-local function swapMdList(lhs, dir)
+local function swapMdListOrLine(dir)
 	local node = vim.treesitter.get_node()
 	while node do
 		if node:type() == "list_item" then
@@ -20,8 +21,7 @@ local function swapMdList(lhs, dir)
 		end
 		node = node:parent()
 	end
-	local orgiMap = vim.iter(vim.api.nvim_get_keymap("n")):find(function(m) return m.lhs == lhs end)
-	return orgiMap.rhs
+	vim.cmd(dir == "next" and ". move +1" or ". move -2")
 end
 
 --------------------------------------------------------------------------------
@@ -63,25 +63,13 @@ return {
 		-- stylua: ignore start
 		{ "ä", function() require("nvim-treesitter-textobjects.swap").swap_next("@parameter.inner") end, desc = " Swap arg" },
 		{ "Ä", function() require("nvim-treesitter-textobjects.swap").swap_previous("@parameter.inner") end, desc = " Swap arg" },
-		-- stylua: ignore end
 
-		-- `@markdown_section` is a custom object defined in `./queries/markdown/textobjects.scm`
+		-- `@md_section` is a custom object defined in `./queries/markdown/textobjects.scm`
 		{ "ä", function() require("nvim-treesitter-textobjects.swap").swap_next("@md_section") end, ft = "markdown", desc = "󰍔 Swap section" },
 		{ "Ä", function() require("nvim-treesitter-textobjects.swap").swap_previous("@md_section") end, ft = "markdown", desc = "󰍔 Swap section" },
-		{
-			"<Down>",
-			function() return swapMdList("<Down>", "next") end,
-			ft = "markdown",
-			expr = true,
-			desc = "󰍔 Move line/list-item down",
-		},
-		{
-			"<Up>",
-			function() return swapMdList("<Up>", "previous") end,
-			ft = "markdown",
-			expr = true,
-			desc = "󰍔 Move line/list-item up",
-		},
+		{ "<Down>", function() swapMdListOrLine("next") end, ft = "markdown", desc = "󰍔 Move line/list-item down" },
+		{ "<Up>", function() swapMdListOrLine("previous") end, ft = "markdown", desc = "󰍔 Move line/list-item up" },
+		-- stylua: ignore end
 
 		---TEXT OBJECTS-----------------------------------------------------------
 		{ "a<CR>", select("@return.outer"), mode = { "x", "o" }, desc = "↩ outer return" },
