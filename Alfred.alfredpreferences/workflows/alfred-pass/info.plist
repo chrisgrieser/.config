@@ -1307,6 +1307,10 @@ echo "pinentry-program $(brew --prefix)/bin/pinentry-mac" &gt; $HOME/.gnupg/gpg-
 gpgconf --kill gpg-agent # restart the agent
 ```
 
+4. *Optional:* For additional security, you can disable storing the `gpg` password in the macOS keychain, 
+   ensuring that the password must be reentered every time: 
+   `defaults write org.gpgtools.common DisableKeychain -bool yes`
+
 ## Configuration
 This workflow reads all `PASSWORD_STORE_*` environment variables that have been
 added to your `~/.zshenv`, so most configuration is done by exporting the
@@ -1697,7 +1701,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 				<key>required</key>
 				<false/>
 				<key>text</key>
-				<string>Run `pass git push` after any changes.</string>
+				<string>Run `pass git push` after all changes.</string>
 			</dict>
 			<key>description</key>
 			<string></string>
