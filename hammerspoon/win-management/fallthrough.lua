@@ -26,7 +26,7 @@ local function fallthrough()
 		local nextWin = hs.fnutils.find(
 			hs.window:orderedWindows(), -- all visible windows in order
 			function(win)
-				if not win:application() or not win:isStandard() then return false end
+				if not (win:application() and win:isStandard()) then return false end
 				local appName = win:application():name()
 				local fromFallThroughApp = hs.fnutils.contains(config.fallthrough.always, appName)
 				return not fromFallThroughApp
