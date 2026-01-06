@@ -896,7 +896,7 @@
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>785</real>
+			<real>730</real>
 			<key>ypos</key>
 			<real>150</real>
 		</dict>
@@ -909,7 +909,7 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>400</real>
+			<real>435</real>
 		</dict>
 		<key>0A57AF60-AF83-4456-BA6B-C5074E68B218</key>
 		<dict>
@@ -918,7 +918,7 @@
 			<key>xpos</key>
 			<real>200</real>
 			<key>ypos</key>
-			<real>680</real>
+			<real>715</real>
 		</dict>
 		<key>0C4ED8B1-4503-4C11-9E1F-0752164AEC64</key>
 		<dict>
@@ -927,7 +927,7 @@
 			<key>xpos</key>
 			<real>435</real>
 			<key>ypos</key>
-			<real>815</real>
+			<real>850</real>
 		</dict>
 		<key>1A28A029-A380-4B80-82C1-AB1863D8C0C6</key>
 		<dict>
@@ -945,7 +945,7 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>815</real>
+			<real>850</real>
 		</dict>
 		<key>1EFB3948-B5DD-42BA-922A-4B3290C790BC</key>
 		<dict>
@@ -956,7 +956,7 @@
 			<key>xpos</key>
 			<real>355</real>
 			<key>ypos</key>
-			<real>845</real>
+			<real>880</real>
 		</dict>
 		<key>25E873D0-DCD8-487D-B9DB-42A2026485D6</key>
 		<dict>
@@ -965,7 +965,7 @@
 			<key>xpos</key>
 			<real>595</real>
 			<key>ypos</key>
-			<real>815</real>
+			<real>850</real>
 		</dict>
 		<key>365B08C4-71FA-44B3-BD68-AC921D879145</key>
 		<dict>
@@ -976,7 +976,7 @@
 			<key>xpos</key>
 			<real>200</real>
 			<key>ypos</key>
-			<real>540</real>
+			<real>575</real>
 		</dict>
 		<key>3A193819-CC2F-4AC7-8AB0-EC5571B7878B</key>
 		<dict>
@@ -987,7 +987,7 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>680</real>
+			<real>715</real>
 		</dict>
 		<key>59214D8E-53BE-4690-AF5F-36B2963D544A</key>
 		<dict>
@@ -998,7 +998,7 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>540</real>
+			<real>575</real>
 		</dict>
 		<key>59FFE38C-6865-4166-9303-9C4BE1C7766C</key>
 		<dict>
@@ -1007,12 +1007,12 @@
 			<key>xpos</key>
 			<real>200</real>
 			<key>ypos</key>
-			<real>400</real>
+			<real>435</real>
 		</dict>
 		<key>5CFB48F9-2348-4A1B-A5A6-034A8654DAC4</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>9</integer>
+			<integer>12</integer>
 			<key>xpos</key>
 			<real>200</real>
 			<key>ypos</key>
@@ -1034,7 +1034,7 @@
 			<key>xpos</key>
 			<real>745</real>
 			<key>ypos</key>
-			<real>815</real>
+			<real>850</real>
 		</dict>
 		<key>954BCFCB-400E-482D-8418-02C0D9453551</key>
 		<dict>
@@ -1043,7 +1043,7 @@
 			<key>xpos</key>
 			<real>360</real>
 			<key>ypos</key>
-			<real>540</real>
+			<real>575</real>
 		</dict>
 		<key>95CF671F-9E2F-4CE9-92A0-BACEF07C97C8</key>
 		<dict>
@@ -1052,7 +1052,7 @@
 			<key>note</key>
 			<string>png → icns</string>
 			<key>xpos</key>
-			<real>615</real>
+			<real>560</real>
 			<key>ypos</key>
 			<real>15</real>
 		</dict>
@@ -1063,7 +1063,7 @@
 			<key>xpos</key>
 			<real>200</real>
 			<key>ypos</key>
-			<real>815</real>
+			<real>850</real>
 		</dict>
 		<key>9C5C9CF6-0447-47E9-B412-85818504EFD1</key>
 		<dict>
@@ -1074,7 +1074,7 @@
 			<key>xpos</key>
 			<real>895</real>
 			<key>ypos</key>
-			<real>815</real>
+			<real>850</real>
 		</dict>
 		<key>A069BE51-DA62-4835-8048-AF3A608C97D0</key>
 		<dict>
@@ -1092,14 +1092,14 @@
 			<key>note</key>
 			<string>convert to webp</string>
 			<key>xpos</key>
-			<real>615</real>
+			<real>560</real>
 			<key>ypos</key>
 			<real>150</real>
 		</dict>
 		<key>A8717C00-E905-4106-A8B8-1251B15C340E</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>9</integer>
+			<integer>12</integer>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
@@ -1132,14 +1132,14 @@
 			<key>xpos</key>
 			<real>360</real>
 			<key>ypos</key>
-			<real>680</real>
+			<real>715</real>
 		</dict>
 		<key>E762EDDE-643D-48E5-B773-C89606259F8B</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>950</real>
+			<real>895</real>
 			<key>ypos</key>
 			<real>150</real>
 		</dict>
@@ -1148,7 +1148,7 @@
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>785</real>
+			<real>730</real>
 			<key>ypos</key>
 			<real>15</real>
 		</dict>

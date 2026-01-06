@@ -21,11 +21,11 @@
 				<false/>
 			</dict>
 		</array>
-		<key>60F3C199-F637-4C1B-9D15-7B8E16957561</key>
+		<key>665E2FA3-60A1-4FD0-B978-AA364EC1E11A</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>8239AB55-5756-4F08-AF47-3E6EEE64514E</string>
+				<string>9C688A36-1FD9-4D90-80C8-5E137987DC58</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -34,37 +34,11 @@
 				<false/>
 			</dict>
 		</array>
-		<key>7BED6E2F-6CF0-4956-889E-096899CD7047</key>
+		<key>68387AD9-ECC3-4998-88E7-6B37F8F7163C</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>9AD22EA9-7218-4E8E-B508-601B4250BA47</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>7E61C1B7-0FA8-4D1C-A56F-A7D3405ABEEC</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>EC8EA4E1-1FE9-4EC2-BDAE-0CB164238CA9</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>8239AB55-5756-4F08-AF47-3E6EEE64514E</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>9408BC99-C7F9-4B6D-A010-CF2178F4FC65</string>
+				<string>2EA46AC6-E906-4DCB-9559-68237A3A7C7A</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -86,23 +60,60 @@
 				<false/>
 			</dict>
 		</array>
-		<key>9408BC99-C7F9-4B6D-A010-CF2178F4FC65</key>
+		<key>98F14930-72D8-4B76-B5FA-128EEA1AEC72</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>E118FF31-5A15-4BE3-AF18-16A037503F55</string>
+				<string>68387AD9-ECC3-4998-88E7-6B37F8F7163C</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
 				<string></string>
-				<key>sourceoutputuid</key>
-				<string>52A23456-F831-47B7-9BA3-F69FA9D761D0</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>9C688A36-1FD9-4D90-80C8-5E137987DC58</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>4D5E5425-4BC5-4240-91A5-271964280B2A</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>A3DE30E2-B222-4A74-B20D-99D70B9D4B53</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>9C688A36-1FD9-4D90-80C8-5E137987DC58</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>C69FCE38-9396-4B8E-955C-DCEBFCA8D585</string>
+				<string>665E2FA3-60A1-4FD0-B978-AA364EC1E11A</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>⌘: Open file afterwards</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>AE89EC05-ABD1-4FBA-8F53-15015B588EB0</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>90593B71-D876-45D6-8534-007AFD1C5A80</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -124,19 +135,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>DEC20578-C2C9-42E4-A921-6C4B3CEAB995</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>3AB74DE6-F287-423D-A08E-245F8D3177B7</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 	</dict>
 	<key>createdby</key>
 	<string>Chris Grieser</string>
@@ -145,45 +143,9 @@
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
-	<string>Personal Dotfiles &amp; Notes</string>
+	<string>Personal Dotfiles</string>
 	<key>objects</key>
 	<array>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>openwith</key>
-				<string>/System/Applications/TextEdit.app</string>
-				<key>sourcefile</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openfile</string>
-			<key>uid</key>
-			<string>EC8EA4E1-1FE9-4EC2-BDAE-0CB164238CA9</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>acceptsfiles</key>
-				<true/>
-				<key>acceptsmulti</key>
-				<integer>1</integer>
-				<key>acceptstext</key>
-				<false/>
-				<key>acceptsurls</key>
-				<false/>
-				<key>name</key>
-				<string>Open with TextEdit</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.universalaction</string>
-			<key>uid</key>
-			<string>7E61C1B7-0FA8-4D1C-A56F-A7D3405ABEEC</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
@@ -198,6 +160,50 @@
 			<string>9AD22EA9-7218-4E8E-B508-601B4250BA47</string>
 			<key>version</key>
 			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>keyword</key>
+				<string>leetcode</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>LeetCode.nvim</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>87B867FD-9C0D-4E91-B4B5-1EE3C8193EC3</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>neovide "leetcode.nvim"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>11</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>61E53F25-50A2-4148-8015-065A22C828EE</string>
+			<key>version</key>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -251,136 +257,23 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>acceptsfiles</key>
-				<true/>
-				<key>acceptsmulti</key>
-				<integer>0</integer>
-				<key>acceptstext</key>
-				<false/>
-				<key>acceptsurls</key>
-				<false/>
-				<key>name</key>
-				<string>Open in Neovide</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.universalaction</string>
-			<key>uid</key>
-			<string>DEC20578-C2C9-42E4-A921-6C4B3CEAB995</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>openwith</key>
-				<string>/System/Volumes/Data/Applications/neovide.app</string>
-				<key>sourcefile</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openfile</string>
-			<key>uid</key>
-			<string>3AB74DE6-F287-423D-A08E-245F8D3177B7</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alfredfiltersresults</key>
-				<true/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>2</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<true/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
 				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>escaping</key>
-				<integer>0</integer>
+				<integer>2</integer>
 				<key>keyword</key>
-				<string>gn</string>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<true/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>1</integer>
-				<key>runningsubtext</key>
-				<string>loading…</string>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/notes-search.js</string>
+				<string>sync</string>
 				<key>subtext</key>
-				<string>{var:notes_folder}</string>
-				<key>title</key>
-				<string>Files in Notes folder</string>
-				<key>type</key>
-				<integer>8</integer>
+				<string>all perma-repos</string>
+				<key>text</key>
+				<string>🔁 Sync Repos</string>
 				<key>withspace</key>
-				<true/>
+				<false/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
+			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
-			<string>7BED6E2F-6CF0-4956-889E-096899CD7047</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>path</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.browseinterminal</string>
-			<key>uid</key>
-			<string>E118FF31-5A15-4BE3-AF18-16A037503F55</string>
+			<string>AE89EC05-ABD1-4FBA-8F53-15015B588EB0</string>
 			<key>version</key>
 			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>0</integer>
-				<key>focusedappvariable</key>
-				<true/>
-				<key>focusedappvariablename</key>
-				<string></string>
-				<key>hotkey</key>
-				<integer>17</integer>
-				<key>hotmod</key>
-				<integer>1835008</integer>
-				<key>hotstring</key>
-				<string>T</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>2</integer>
-				<key>relatedApps</key>
-				<array>
-					<string>com.apple.finder</string>
-					<string>md.obsidian</string>
-				</array>
-				<key>relatedAppsMode</key>
-				<integer>1</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
-			<key>uid</key>
-			<string>60F3C199-F637-4C1B-9D15-7B8E16957561</string>
-			<key>version</key>
-			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -388,75 +281,23 @@
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
-				<integer>0</integer>
+				<integer>102</integer>
 				<key>script</key>
-				<string></string>
+				<string># requires this url-scheme being defined in the hammerspoon config
+open -g "hammerspoon://sync-repos"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>./scripts/get-cwd.sh</string>
+				<string></string>
 				<key>type</key>
-				<integer>8</integer>
+				<integer>11</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>8239AB55-5756-4F08-AF47-3E6EEE64514E</string>
+			<string>90593B71-D876-45D6-8534-007AFD1C5A80</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>conditions</key>
-				<array>
-					<dict>
-						<key>inputstring</key>
-						<string></string>
-						<key>matchcasesensitive</key>
-						<false/>
-						<key>matchmode</key>
-						<integer>1</integer>
-						<key>matchstring</key>
-						<string></string>
-						<key>outputlabel</key>
-						<string>cwd found</string>
-						<key>uid</key>
-						<string>52A23456-F831-47B7-9BA3-F69FA9D761D0</string>
-					</dict>
-				</array>
-				<key>elselabel</key>
-				<string>not found</string>
-				<key>hideelse</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.conditional</string>
-			<key>uid</key>
-			<string>9408BC99-C7F9-4B6D-A010-CF2178F4FC65</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string></string>
-				<key>title</key>
-				<string>⚠️ No cwd found</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>C69FCE38-9396-4B8E-955C-DCEBFCA8D585</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -497,44 +338,150 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>neovide "leetcode.nvim"</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>11</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>61E53F25-50A2-4148-8015-065A22C828EE</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>argumenttype</key>
-				<integer>1</integer>
+				<integer>0</integer>
 				<key>keyword</key>
-				<string>leetcode</string>
+				<string>spell</string>
 				<key>subtext</key>
-				<string></string>
+				<string>$1: Misspelling     $2: Correct Spelling</string>
 				<key>text</key>
-				<string>LeetCode.nvim</string>
+				<string>Spelling: {query}</string>
 				<key>withspace</key>
 				<true/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
-			<string>87B867FD-9C0D-4E91-B4B5-1EE3C8193EC3</string>
+			<string>A3DE30E2-B222-4A74-B20D-99D70B9D4B53</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/add-to-espanso-spellings.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>9C688A36-1FD9-4D90-80C8-5E137987DC58</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>🔠 Spellfix added</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>4D5E5425-4BC5-4240-91A5-271964280B2A</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string></string>
+				<key>passthroughargument</key>
+				<true/>
+				<key>variables</key>
+				<dict>
+					<key>open</key>
+					<string>true</string>
+				</dict>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>665E2FA3-60A1-4FD0-B978-AA364EC1E11A</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>karabiner</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>🔁 Toggle Karabiner Elements</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>98F14930-72D8-4B76-B5FA-128EEA1AEC72</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>scripts/toggle-karabiner.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>68387AD9-ECC3-4998-88E7-6B37F8F7163C</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>Karabiner Elements</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>2EA46AC6-E906-4DCB-9559-68237A3A7C7A</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -543,14 +490,14 @@
 	<string></string>
 	<key>uidata</key>
 	<dict>
-		<key>3AB74DE6-F287-423D-A08E-245F8D3177B7</key>
+		<key>2EA46AC6-E906-4DCB-9559-68237A3A7C7A</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>8</integer>
+			<integer>12</integer>
 			<key>xpos</key>
-			<real>790</real>
+			<real>330</real>
 			<key>ypos</key>
-			<real>145</real>
+			<real>670</real>
 		</dict>
 		<key>4694D7EB-2482-44FA-881E-2597A9A90F9C</key>
 		<dict>
@@ -561,74 +508,72 @@
 			<key>ypos</key>
 			<real>35</real>
 		</dict>
-		<key>60F3C199-F637-4C1B-9D15-7B8E16957561</key>
+		<key>4D5E5425-4BC5-4240-91A5-271964280B2A</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>11</integer>
-			<key>note</key>
-			<string>open cwd in terminal</string>
+			<integer>2</integer>
 			<key>xpos</key>
-			<real>30</real>
+			<real>405</real>
 			<key>ypos</key>
-			<real>310</real>
+			<real>505</real>
 		</dict>
 		<key>61E53F25-50A2-4148-8015-065A22C828EE</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>5</integer>
+			<integer>3</integer>
 			<key>xpos</key>
-			<real>190</real>
+			<real>770</real>
 			<key>ypos</key>
-			<real>610</real>
+			<real>35</real>
 		</dict>
-		<key>7BED6E2F-6CF0-4956-889E-096899CD7047</key>
+		<key>665E2FA3-60A1-4FD0-B978-AA364EC1E11A</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
-			<key>note</key>
-			<string>search notes</string>
 			<key>xpos</key>
-			<real>30</real>
+			<real>185</real>
 			<key>ypos</key>
-			<real>170</real>
+			<real>575</real>
 		</dict>
-		<key>7E61C1B7-0FA8-4D1C-A56F-A7D3405ABEEC</key>
+		<key>68387AD9-ECC3-4998-88E7-6B37F8F7163C</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>8</integer>
-			<key>xpos</key>
-			<real>630</real>
-			<key>ypos</key>
-			<real>30</real>
-		</dict>
-		<key>8239AB55-5756-4F08-AF47-3E6EEE64514E</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>11</integer>
+			<integer>12</integer>
 			<key>xpos</key>
 			<real>190</real>
 			<key>ypos</key>
-			<real>310</real>
+			<real>670</real>
 		</dict>
 		<key>87B867FD-9C0D-4E91-B4B5-1EE3C8193EC3</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>5</integer>
+			<integer>3</integer>
 			<key>note</key>
 			<string>leetcode.nvim</string>
 			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
 			<real>610</real>
+			<key>ypos</key>
+			<real>35</real>
 		</dict>
-		<key>9408BC99-C7F9-4B6D-A010-CF2178F4FC65</key>
+		<key>90593B71-D876-45D6-8534-007AFD1C5A80</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>11</integer>
+			<integer>5</integer>
 			<key>xpos</key>
-			<real>355</real>
+			<real>190</real>
 			<key>ypos</key>
-			<real>330</real>
+			<real>175</real>
+		</dict>
+		<key>98F14930-72D8-4B76-B5FA-128EEA1AEC72</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>12</integer>
+			<key>note</key>
+			<string>toggle Karabiner</string>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>670</real>
 		</dict>
 		<key>9AD22EA9-7218-4E8E-B508-601B4250BA47</key>
 		<dict>
@@ -637,61 +582,56 @@
 			<key>ypos</key>
 			<real>35</real>
 		</dict>
-		<key>B63AE3AB-D363-4FD4-A1B0-C70C8D9ECF2E</key>
+		<key>9C688A36-1FD9-4D90-80C8-5E137987DC58</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>3</integer>
+			<integer>2</integer>
+			<key>xpos</key>
+			<real>255</real>
+			<key>ypos</key>
+			<real>505</real>
+		</dict>
+		<key>A3DE30E2-B222-4A74-B20D-99D70B9D4B53</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>note</key>
+			<string>Add Spelling correction to espanso</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>450</real>
+			<real>505</real>
 		</dict>
-		<key>C69FCE38-9396-4B8E-955C-DCEBFCA8D585</key>
+		<key>AE89EC05-ABD1-4FBA-8F53-15015B588EB0</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>11</integer>
+			<integer>5</integer>
+			<key>note</key>
+			<string>repo sync</string>
 			<key>xpos</key>
-			<real>465</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>375</real>
+			<real>175</real>
 		</dict>
-		<key>DEC20578-C2C9-42E4-A921-6C4B3CEAB995</key>
+		<key>B63AE3AB-D363-4FD4-A1B0-C70C8D9ECF2E</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>8</integer>
+			<integer>7</integer>
 			<key>xpos</key>
-			<real>630</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>145</real>
-		</dict>
-		<key>E118FF31-5A15-4BE3-AF18-16A037503F55</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>11</integer>
-			<key>xpos</key>
-			<real>465</real>
-			<key>ypos</key>
-			<real>250</real>
+			<real>325</real>
 		</dict>
 		<key>E6384D1F-F4A7-49AA-AB84-8A910B1DDB3F</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>3</integer>
+			<integer>7</integer>
 			<key>note</key>
 			<string>run custom update command defined in `homebrew.zsh`</string>
 			<key>xpos</key>
 			<real>190</real>
 			<key>ypos</key>
-			<real>450</real>
-		</dict>
-		<key>EC8EA4E1-1FE9-4EC2-BDAE-0CB164238CA9</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>8</integer>
-			<key>xpos</key>
-			<real>790</real>
-			<key>ypos</key>
-			<real>30</real>
+			<real>325</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

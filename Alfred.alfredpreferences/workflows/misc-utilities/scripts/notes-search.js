@@ -18,12 +18,11 @@ function aMatcher(str) {
 function run() {
 	const notesFolder = $.getenv("notes_folder");
 	const notes = app
-		.doShellScript(
+		.doShellScript( // `--follow` for symlink-aliases
 			`PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH ; \
-			rg --follow --no-config --files --sortr=modified \
-			--ignore-file="$HOME/.config/ripgrep/ignore" \
+			rg --follow --no-config --files --sortr=modified --glob="*.md" \
 			"${notesFolder}" 2>&1 || true`,
-			// can error on broken symlinks, exiting via `true` so .doShellScript doesn't fail
+			// can error on broken symlinks, thus exiting via `true` so .doShellScript doesn't fail
 		)
 		.split("\r");
 
