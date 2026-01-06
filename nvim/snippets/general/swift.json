@@ -1,8 +1,13 @@
 {
+  ".trim": {
+    "body": ".trimmingCharacters(in: .whitespacesAndNewlines)",
+    "prefix": ".trim"
+  },
   "read file": {
     "body": [
-      "let url = URL(fileURLWithPath: \"/path/to/file.txt\")",
-      "let contents = try String(contentsOf: url, encoding: .utf8)"
+      "let filepath = \"${1:/path/to/file.txt}\"",
+      "let fileUrl = URL(fileURLWithPath: (filepath as NSString).expandingTildeInPath)",
+      "let contents = try String(contentsOf: fileUrl, encoding: .utf8)"
     ],
     "prefix": "read file"
   }
