@@ -147,6 +147,17 @@
 			<key>url</key>
 			<string>https://www.tvtime.com/discover/search?q={query}</string>
 		</dict>
+		<key>934DA0B5-B5BE-4D38-94A1-E2472A42E7D3</key>
+		<dict>
+			<key>enabled</key>
+			<true/>
+			<key>keyword</key>
+			<string>op</string>
+			<key>text</key>
+			<string>Obsidian plugins: {query}</string>
+			<key>url</key>
+			<string>https://obsidian.md/plugins?search={query}</string>
+		</dict>
 		<key>B0E74EF5-D489-4FA0-9F57-0B056365432B</key>
 		<dict>
 			<key>enabled</key>

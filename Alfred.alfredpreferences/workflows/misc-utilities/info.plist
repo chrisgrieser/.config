@@ -47,19 +47,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>0CF81EB7-998A-4707-BEFE-E07DF2D5E09D</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>F348B0E3-C941-4CC7-8402-C129E448D64D</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>0DF397E6-7179-4A9B-A07A-B32165613998</key>
 		<array>
 			<dict>
@@ -136,39 +123,6 @@
 				<integer>0</integer>
 				<key>modifiersubtext</key>
 				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>24C3039B-3479-4A94-B197-D4A052C6EAE3</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>F348B0E3-C941-4CC7-8402-C129E448D64D</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>0CF81EB7-998A-4707-BEFE-E07DF2D5E09D</string>
-				<key>modifiers</key>
-				<integer>1048576</integer>
-				<key>modifiersubtext</key>
-				<string>⌘: Open in Obsidian</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>ACEEEAAB-B3B7-436B-9989-81AD81B9A10A</string>
-				<key>modifiers</key>
-				<integer>524288</integer>
-				<key>modifiersubtext</key>
-				<string>⌥: Copy URL</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -457,19 +411,6 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>8D0538B5-46D7-4A6B-B800-3C208CB8971B</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>ACEEEAAB-B3B7-436B-9989-81AD81B9A10A</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>05F49135-52DB-4122-8F38-52993ABBBFCB</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -1394,35 +1335,6 @@ open -g "hammerspoon://sync-repos"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>F348B0E3-C941-4CC7-8402-C129E448D64D</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.junction</string>
-			<key>uid</key>
-			<string>0CF81EB7-998A-4707-BEFE-E07DF2D5E09D</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -1463,95 +1375,6 @@ open -g "hammerspoon://sync-repos"</string>
 			<string>642F1D70-B635-49FC-894B-02013EB50A41</string>
 			<key>version</key>
 			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alfredfiltersresults</key>
-				<true/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>2</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<true/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>op</string>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<true/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>1</integer>
-				<key>runningsubtext</key>
-				<string>loading…</string>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/obsidian-plugin-search.js</string>
-				<key>subtext</key>
-				<string></string>
-				<key>title</key>
-				<string>Obsidian plugin search…</string>
-				<key>type</key>
-				<integer>8</integer>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>24C3039B-3479-4A94-B197-D4A052C6EAE3</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>📋 Copied</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>05F49135-52DB-4122-8F38-52993ABBBFCB</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>autopaste</key>
-				<false/>
-				<key>clipboardtext</key>
-				<string>{query}</string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>transient</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.clipboard</string>
-			<key>uid</key>
-			<string>ACEEEAAB-B3B7-436B-9989-81AD81B9A10A</string>
-			<key>version</key>
-			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1984,15 +1807,6 @@ open -g "hammerspoon://sync-repos"</string>
 			<key>ypos</key>
 			<real>285</real>
 		</dict>
-		<key>05F49135-52DB-4122-8F38-52993ABBBFCB</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>9</integer>
-			<key>xpos</key>
-			<real>950</real>
-			<key>ypos</key>
-			<real>1030</real>
-		</dict>
 		<key>06224ECC-9341-4E8F-B2A2-42DB4C645A3C</key>
 		<dict>
 			<key>colorindex</key>
@@ -2023,15 +1837,6 @@ open -g "hammerspoon://sync-repos"</string>
 			<real>885</real>
 			<key>ypos</key>
 			<real>15</real>
-		</dict>
-		<key>0CF81EB7-998A-4707-BEFE-E07DF2D5E09D</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>9</integer>
-			<key>xpos</key>
-			<real>700</real>
-			<key>ypos</key>
-			<real>945</real>
 		</dict>
 		<key>0DF397E6-7179-4A9B-A07A-B32165613998</key>
 		<dict>
@@ -2099,15 +1904,6 @@ open -g "hammerspoon://sync-repos"</string>
 			<real>635</real>
 			<key>ypos</key>
 			<real>1715</real>
-		</dict>
-		<key>24C3039B-3479-4A94-B197-D4A052C6EAE3</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>9</integer>
-			<key>xpos</key>
-			<real>550</real>
-			<key>ypos</key>
-			<real>975</real>
 		</dict>
 		<key>2BA2E52E-6876-4A61-A185-652BA211060B</key>
 		<dict>
@@ -2207,10 +2003,12 @@ open -g "hammerspoon://sync-repos"</string>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
+			<key>note</key>
+			<string>prompt ChatGPT (without needing to press `enter`)</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>960</real>
+			<real>940</real>
 		</dict>
 		<key>704D62CC-045A-43CF-9FBC-5E0B24259336</key>
 		<dict>
@@ -2401,15 +2199,6 @@ open -g "hammerspoon://sync-repos"</string>
 			<key>ypos</key>
 			<real>430</real>
 		</dict>
-		<key>ACEEEAAB-B3B7-436B-9989-81AD81B9A10A</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>9</integer>
-			<key>xpos</key>
-			<real>800</real>
-			<key>ypos</key>
-			<real>1030</real>
-		</dict>
 		<key>B3C4155D-FDD7-4641-A300-859FBE5E5E6E</key>
 		<dict>
 			<key>colorindex</key>
@@ -2464,7 +2253,7 @@ open -g "hammerspoon://sync-repos"</string>
 			<key>xpos</key>
 			<real>185</real>
 			<key>ypos</key>
-			<real>960</real>
+			<real>940</real>
 		</dict>
 		<key>D29A152C-35C4-4892-831E-76C22D401194</key>
 		<dict>
@@ -2530,15 +2319,6 @@ open -g "hammerspoon://sync-repos"</string>
 			<real>30</real>
 			<key>ypos</key>
 			<real>15</real>
-		</dict>
-		<key>F348B0E3-C941-4CC7-8402-C129E448D64D</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>9</integer>
-			<key>xpos</key>
-			<real>800</real>
-			<key>ypos</key>
-			<real>915</real>
 		</dict>
 		<key>F45185F7-3072-47A6-A86F-0CE950BB7C1A</key>
 		<dict>

@@ -217,16 +217,6 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>A069BE51-DA62-4835-8048-AF3A608C97D0</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
 				<string>1A28A029-A380-4B80-82C1-AB1863D8C0C6</string>
 				<key>modifiers</key>
 				<integer>0</integer>
@@ -237,7 +227,7 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>B32F63A8-6D03-43EB-A7CD-70F7DCAB2622</string>
+				<string>A069BE51-DA62-4835-8048-AF3A608C97D0</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -245,12 +235,9 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
-		</array>
-		<key>FF1B8F7A-4E33-4A50-A895-F3B34197EB14</key>
-		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>F03A86F4-1AD4-408D-B232-2B8569EDE9A7</string>
+				<string>B32F63A8-6D03-43EB-A7CD-70F7DCAB2622</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -345,56 +332,12 @@
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
-				<string>https://www.freepik.com/search?query={query}&amp;type=icon</string>
+				<string>https://www.flaticon.com/search?word={query}</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
-			<string>A069BE51-DA62-4835-8048-AF3A608C97D0</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/shrink-image.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>F03A86F4-1AD4-408D-B232-2B8569EDE9A7</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>acceptsmulti</key>
-				<integer>1</integer>
-				<key>filetypes</key>
-				<array>
-					<string>public.jpeg</string>
-					<string>public.png</string>
-					<string>public.tiff</string>
-				</array>
-				<key>name</key>
-				<string>Shrink Image to 70%</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.action</string>
-			<key>uid</key>
-			<string>FF1B8F7A-4E33-4A50-A895-F3B34197EB14</string>
+			<string>1A28A029-A380-4B80-82C1-AB1863D8C0C6</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -431,12 +374,33 @@
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
-				<string>https://www.flaticon.com/search?word={query}</string>
+				<string>https://www.freepik.com/search?query={query}&amp;type=icon</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
-			<string>1A28A029-A380-4B80-82C1-AB1863D8C0C6</string>
+			<string>A069BE51-DA62-4835-8048-AF3A608C97D0</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>https://www.svgrepo.com/vectors/{query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>B32F63A8-6D03-43EB-A7CD-70F7DCAB2622</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -503,27 +467,6 @@
 			<string>alfred.workflow.trigger.action</string>
 			<key>uid</key>
 			<string>A127DB2B-430B-415F-9B6D-9A9EE315AD8E</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>https://www.svgrepo.com/vectors/{query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>B32F63A8-6D03-43EB-A7CD-70F7DCAB2622</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -609,7 +552,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>scripts/screenshot.sh</string>
+				<string>scripts/screenshot-and-copy-as-file.sh</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
@@ -953,20 +896,20 @@
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>600</real>
+			<real>785</real>
 			<key>ypos</key>
-			<real>275</real>
+			<real>150</real>
 		</dict>
 		<key>0826010C-E66F-493B-82C9-47D614D621D2</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>note</key>
-			<string>screenshot</string>
+			<string>screenshot &amp; copy as file</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>670</real>
+			<real>400</real>
 		</dict>
 		<key>0A57AF60-AF83-4456-BA6B-C5074E68B218</key>
 		<dict>
@@ -975,7 +918,7 @@
 			<key>xpos</key>
 			<real>200</real>
 			<key>ypos</key>
-			<real>950</real>
+			<real>680</real>
 		</dict>
 		<key>0C4ED8B1-4503-4C11-9E1F-0752164AEC64</key>
 		<dict>
@@ -984,16 +927,16 @@
 			<key>xpos</key>
 			<real>435</real>
 			<key>ypos</key>
-			<real>1085</real>
+			<real>815</real>
 		</dict>
 		<key>1A28A029-A380-4B80-82C1-AB1863D8C0C6</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>12</integer>
 			<key>xpos</key>
-			<real>200</real>
+			<real>345</real>
 			<key>ypos</key>
-			<real>235</real>
+			<real>15</real>
 		</dict>
 		<key>1DDF0A99-4F65-4AEE-BE37-899EC79F3272</key>
 		<dict>
@@ -1002,7 +945,7 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>1085</real>
+			<real>815</real>
 		</dict>
 		<key>1EFB3948-B5DD-42BA-922A-4B3290C790BC</key>
 		<dict>
@@ -1013,7 +956,7 @@
 			<key>xpos</key>
 			<real>355</real>
 			<key>ypos</key>
-			<real>1115</real>
+			<real>845</real>
 		</dict>
 		<key>25E873D0-DCD8-487D-B9DB-42A2026485D6</key>
 		<dict>
@@ -1022,7 +965,7 @@
 			<key>xpos</key>
 			<real>595</real>
 			<key>ypos</key>
-			<real>1085</real>
+			<real>815</real>
 		</dict>
 		<key>365B08C4-71FA-44B3-BD68-AC921D879145</key>
 		<dict>
@@ -1033,7 +976,7 @@
 			<key>xpos</key>
 			<real>200</real>
 			<key>ypos</key>
-			<real>810</real>
+			<real>540</real>
 		</dict>
 		<key>3A193819-CC2F-4AC7-8AB0-EC5571B7878B</key>
 		<dict>
@@ -1044,7 +987,7 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>950</real>
+			<real>680</real>
 		</dict>
 		<key>59214D8E-53BE-4690-AF5F-36B2963D544A</key>
 		<dict>
@@ -1055,7 +998,7 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>810</real>
+			<real>540</real>
 		</dict>
 		<key>59FFE38C-6865-4166-9303-9C4BE1C7766C</key>
 		<dict>
@@ -1064,7 +1007,7 @@
 			<key>xpos</key>
 			<real>200</real>
 			<key>ypos</key>
-			<real>670</real>
+			<real>400</real>
 		</dict>
 		<key>5CFB48F9-2348-4A1B-A5A6-034A8654DAC4</key>
 		<dict>
@@ -1073,7 +1016,7 @@
 			<key>xpos</key>
 			<real>200</real>
 			<key>ypos</key>
-			<real>470</real>
+			<real>245</real>
 		</dict>
 		<key>7CF8B97A-6865-489C-8B65-3C892683D59E</key>
 		<dict>
@@ -1091,7 +1034,7 @@
 			<key>xpos</key>
 			<real>745</real>
 			<key>ypos</key>
-			<real>1085</real>
+			<real>815</real>
 		</dict>
 		<key>954BCFCB-400E-482D-8418-02C0D9453551</key>
 		<dict>
@@ -1100,7 +1043,7 @@
 			<key>xpos</key>
 			<real>360</real>
 			<key>ypos</key>
-			<real>810</real>
+			<real>540</real>
 		</dict>
 		<key>95CF671F-9E2F-4CE9-92A0-BACEF07C97C8</key>
 		<dict>
@@ -1109,7 +1052,7 @@
 			<key>note</key>
 			<string>png → icns</string>
 			<key>xpos</key>
-			<real>430</real>
+			<real>615</real>
 			<key>ypos</key>
 			<real>15</real>
 		</dict>
@@ -1120,7 +1063,7 @@
 			<key>xpos</key>
 			<real>200</real>
 			<key>ypos</key>
-			<real>1085</real>
+			<real>815</real>
 		</dict>
 		<key>9C5C9CF6-0447-47E9-B412-85818504EFD1</key>
 		<dict>
@@ -1131,7 +1074,7 @@
 			<key>xpos</key>
 			<real>895</real>
 			<key>ypos</key>
-			<real>1085</real>
+			<real>815</real>
 		</dict>
 		<key>A069BE51-DA62-4835-8048-AF3A608C97D0</key>
 		<dict>
@@ -1147,11 +1090,11 @@
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>note</key>
-			<string>→ webp</string>
+			<string>convert to webp</string>
 			<key>xpos</key>
-			<real>430</real>
+			<real>615</real>
 			<key>ypos</key>
-			<real>275</real>
+			<real>150</real>
 		</dict>
 		<key>A8717C00-E905-4106-A8B8-1251B15C340E</key>
 		<dict>
@@ -1160,16 +1103,16 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>470</real>
+			<real>245</real>
 		</dict>
 		<key>B32F63A8-6D03-43EB-A7CD-70F7DCAB2622</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>12</integer>
 			<key>xpos</key>
-			<real>200</real>
-			<key>ypos</key>
 			<real>350</real>
+			<key>ypos</key>
+			<real>125</real>
 		</dict>
 		<key>BCDE5A63-BF29-4CD2-B482-D2A56CD510A1</key>
 		<dict>
@@ -1178,7 +1121,7 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>180</real>
+			<real>65</real>
 		</dict>
 		<key>DB04958D-077C-46BC-B90E-838C686616B0</key>
 		<dict>
@@ -1189,45 +1132,25 @@
 			<key>xpos</key>
 			<real>360</real>
 			<key>ypos</key>
-			<real>950</real>
+			<real>680</real>
 		</dict>
 		<key>E762EDDE-643D-48E5-B773-C89606259F8B</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>765</real>
+			<real>950</real>
 			<key>ypos</key>
-			<real>275</real>
+			<real>150</real>
 		</dict>
 		<key>F0335C72-7DC6-4793-ADCD-3909E4CDE001</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>600</real>
+			<real>785</real>
 			<key>ypos</key>
 			<real>15</real>
-		</dict>
-		<key>F03A86F4-1AD4-408D-B232-2B8569EDE9A7</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>xpos</key>
-			<real>600</real>
-			<key>ypos</key>
-			<real>145</real>
-		</dict>
-		<key>FF1B8F7A-4E33-4A50-A895-F3B34197EB14</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>note</key>
-			<string>shrink to 70%</string>
-			<key>xpos</key>
-			<real>430</real>
-			<key>ypos</key>
-			<real>145</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
