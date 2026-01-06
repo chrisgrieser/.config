@@ -4,7 +4,7 @@
 ---@type vim.lsp.Config
 return {
 	-- leave out `.git` to not attach to non-note repos due to https://github.com/Feel-ix-343/markdown-oxide/issues/323
-	root_markers = { ".moxide.toml", ".obsidian" },
+	root_markers = {},
 	workspace_required = true,
 
 	on_attach = function(_client, bufnr)

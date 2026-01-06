@@ -1,0 +1,4 @@
+; extends
+
+(section) @local.scope
+

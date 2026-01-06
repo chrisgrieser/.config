@@ -11,10 +11,10 @@ repo_names="nvim"
 # repo_names="finder-vim-mode|zsh-magic-dashboard|nvim|alfred|shimmering-obsidian|gitfred|obsidian-quadro|pseudometa-obsidian-plugin-template|grappling-hook|obsidian-proofreader"
 
 function actions_in_repo {
-	cp -f "$HOME"/.config/.stylua.toml ./.stylua.toml
+	stylua .
 }
 
-commit_msg="ci: add label-support to stylua config"
+commit_msg="style: re-format with updated stylua config"
 
 amend="false" # no-edit|only-message|false
 
