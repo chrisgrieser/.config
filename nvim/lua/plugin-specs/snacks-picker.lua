@@ -406,7 +406,10 @@ return {
 				},
 				gh_issue = { layout = "big_preview" },
 				gh_pr = { layout = "big_preview" },
-				treesitter = { layout = "sidebar" },
+				treesitter = {
+					layout = "sidebar",
+					filter = { markdown = { "Field" } }, -- requires `queries/markdown/locals.scm`
+				},
 				lsp_symbols = { layout = "sidebar" },
 				lsp_config = {
 					-- confirm: inspect LSP config
