@@ -22,3 +22,7 @@ function _export_github_token {
 	GITHUB_TOKEN="$(cat "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Tech/api-keys/github-token.txt")"
 	export GITHUB_TOKEN
 }
+function export_openai_apikey {
+	OPENAI_API_KEY="$(cat "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Tech/api-keys/openai-api-key.txt")"
+	export OPENAI_API_KEY
+}
