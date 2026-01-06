@@ -252,14 +252,14 @@ function gli {
 	local hash key_pressed selected repo
 
 	local preview_format="%C(yellow)%h %C(red)%D %n%C(blue)%an %C(green)(%ch)%C(reset) %n%n%C(bold)%C(magenta)%s%C(reset) %n%b"
-	# local preview_cmd="git show {1} --stat=\$FZF_PREVIEW_COLUMNS --color=always --format='$preview_format' \
-	# 	| sed -e '\$d' -e $'s/ \\|/ \e[1;30m│\e[0m/' ; \
-	# 	git --no-pager diff {1}^!"
-	local preview_cmd="git --no-pager diff {1}^"
+	local preview_cmd="git show {1} --stat=\$FZF_PREVIEW_COLUMNS --color=always --format='$preview_format' \
+		| sed -e '\$d'  -e $'s/ \\|/ \e[1;30m│\e[0m/' ; \
+		print '\n\e[1;30m────────\e[0m' ; \
+		git show --format='' {1}"
 
 	if [[ -x "$(command -v delta)" ]]; then
 		theme="$(defaults read -g AppleInterfaceStyle &> /dev/null && echo "dark" || echo "light")"
-		preview_cmd="$preview_cmd | delta --$theme"
+		preview_cmd="$preview_cmd | delta --$theme --no-gitconfig"
 	fi
 
 	selected=$(
