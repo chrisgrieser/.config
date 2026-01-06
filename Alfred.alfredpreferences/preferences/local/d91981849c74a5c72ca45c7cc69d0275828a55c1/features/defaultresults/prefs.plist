@@ -7,8 +7,7 @@
 		<string>~/Applications</string>
 		<string>~/Desktop</string>
 		<string>~/Documents</string>
-		<string>~/Library/Mobile Documents/com~apple~CloudDocs/Academia</string>
-		<string>~/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder</string>
+		<string>~/Library/Mobile Documents/com~apple~CloudDocs</string>
 	</array>
 </dict>
 </plist>
