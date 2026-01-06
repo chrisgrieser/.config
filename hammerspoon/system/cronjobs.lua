@@ -133,6 +133,7 @@ M.timer_sleepAutoVideoOff = hs.timer
 			u.notify("💤 SleepTimer triggered")
 			u.closeAllFinderWins()
 			u.quitFullscreenAndVideoApps()
+			u.closeBrowserTabsWith("all")
 		end)
 	end)
 	:start()

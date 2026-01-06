@@ -183,8 +183,9 @@ end
 
 ---close all tabs instead of closing all windows to avoid confirmation prompt
 ---"do you really want to x tabs?"
----@param urlPart string
+---@param urlPart string|"all"
 function M.closeBrowserTabsWith(urlPart)
+	if urlPart == "all" then urlPart = "." end
 	local browser = "Brave Browser"
 	hs.osascript.applescript(([[
 		tell application %q
