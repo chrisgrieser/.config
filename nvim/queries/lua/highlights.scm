@@ -13,9 +13,13 @@
 ("return" @keyword.return
   (#set! priority 130))
 
+((identifier) @keyword.return
+  (#eq? @keyword.return "assert")
+  (#set! priority 130))
+
 ;-------------------------------------------------------------------------------
 ; highlight string concatenation with `+` as error
-; ("attempt to perform ; arithmetic on string")
+; (error: "attempt to perform arithmetic on string")
 (binary_expression
   "+" @comment.error
   (string))

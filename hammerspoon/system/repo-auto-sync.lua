@@ -64,7 +64,7 @@ local function syncAllGitRepos(silent)
 		local syncScriptPath = repo.location:gsub("^~", os.getenv("HOME") or "")
 			.. "/"
 			.. config.syncScriptAtLocation
-		assert(u.isExecutable(syncScriptPath), "no sync script found at " .. syncScriptPath)
+		assert(u.isExecutableFile(syncScriptPath), "no sync script found at " .. syncScriptPath)
 
 		M.task_sync[repo.location] = hs.task
 			.new(syncScriptPath, function(exitCode, stdout, stderr)

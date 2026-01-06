@@ -239,7 +239,9 @@ end
 ---@param path string
 ---@return boolean
 ---@nodiscard
-function M.isExecutable(path)
+function M.isExecutableFile(path)
+	local isFile = hs.fs.attributes(path, "mode") == "file"
+	if not isFile then return false end
 	local permissions = hs.fs.attributes(path, "permissions") or ""
 	local executable = permissions:find("x") ~= nil
 	if not executable then M.notify(("❌ %q is not executable"):format(path)) end

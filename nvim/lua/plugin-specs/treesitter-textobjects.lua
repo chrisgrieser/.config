@@ -7,6 +7,25 @@ local function select(textobj)
 	end
 end
 
+-- requires `; extends \n(list_item) @md_list_item` in `.queries/markdown/textobjects.scm`
+---@param lhs string
+---@param dir "next"|"previous"
+---@return string? expr
+local function swapMdList(lhs, dir)
+	local node = vim.treesitter.get_node()
+	while node do
+		if node:type() == "list_item" then
+			require("nvim-treesitter-textobjects.swap")["swap_" .. dir]("@md_list_item")
+			return
+		end
+		node = node:parent()
+	end
+	local orgiMap = vim.iter(vim.api.nvim_get_keymap("n")):find(function(m) return m.lhs == lhs end)
+	return orgiMap.rhs
+end
+
+--------------------------------------------------------------------------------
+
 return {
 	"nvim-treesitter/nvim-treesitter-textobjects",
 	dependencies = "nvim-treesitter/nvim-treesitter",
@@ -44,11 +63,25 @@ return {
 		-- stylua: ignore start
 		{ "ä", function() require("nvim-treesitter-textobjects.swap").swap_next("@parameter.inner") end, desc = " Swap arg" },
 		{ "Ä", function() require("nvim-treesitter-textobjects.swap").swap_previous("@parameter.inner") end, desc = " Swap arg" },
+		-- stylua: ignore end
 
 		-- `@markdown_section` is a custom object defined in `./queries/markdown/textobjects.scm`
-		{ "ä", function() require("nvim-treesitter-textobjects.swap").swap_next("@md_section") end, ft = "markdown", desc = " Swap section" },
-		{ "Ä", function() require("nvim-treesitter-textobjects.swap").swap_previous("@md_section") end, ft = "markdown", desc = " Swap section" },
-		-- stylua: ignore end
+		{ "ä", function() require("nvim-treesitter-textobjects.swap").swap_next("@md_section") end, ft = "markdown", desc = "󰍔 Swap section" },
+		{ "Ä", function() require("nvim-treesitter-textobjects.swap").swap_previous("@md_section") end, ft = "markdown", desc = "󰍔 Swap section" },
+		{
+			"<Down>",
+			function() return swapMdList("<Down>", "next") end,
+			ft = "markdown",
+			expr = true,
+			desc = "󰍔 Move line/list-item down",
+		},
+		{
+			"<Up>",
+			function() return swapMdList("<Up>", "previous") end,
+			ft = "markdown",
+			expr = true,
+			desc = "󰍔 Move line/list-item up",
+		},
 
 		---TEXT OBJECTS-----------------------------------------------------------
 		{ "a<CR>", select("@return.outer"), mode = { "x", "o" }, desc = "↩ outer return" },

@@ -69,22 +69,24 @@ local cronjobDir = "./system/cronjobs"
 
 M.timer_nightlyCronjobs = hs.timer
 	.doAt("01:00", "01d", function()
-		if os.date("%w") % 3 ~= 0 then return end -- only twice a week
-
-		for file in hs.fs.dir(cronjobDir) do
-			local jobfile = cronjobDir .. "/" .. file
-			if file:find("%.sh$") and u.isExecutable(jobfile) then
-				M["cronjob_" .. file] = hs.task
-					.new(jobfile, function(code)
-						if code ~= 0 then
-							u.notify("❌ Cronjob failed: " .. file)
-							return
-						end
-						print("✅ Cronjob: " .. file)
-					end)
-					:start()
+		local function runEveryFileIn(dir)
+			for file in hs.fs.dir(dir) do
+				local jobfile = dir .. "/" .. file
+				if u.isExecutableFile(jobfile) then
+					M["cronjob_" .. file] = hs.task
+						.new(jobfile, function(code, stdout, stderr)
+							local output = (stdout .. "\n" .. stderr):gsub("^%s+", ""):gsub("%s+$", "")
+							local msg = "Cronjob " .. file .. (output ~= "" and ": " .. output or "")
+							if code ~= 0 then return u.notify("❌ " .. msg) end
+							print("✅ " .. msg)
+						end)
+						:start()
+				end
 			end
 		end
+
+		runEveryFileIn(cronjobDir .. "/daily")
+		if os.date("%w") % 3 == 0 then runEveryFileIn(cronjobDir .. "/biweekly") end
 	end, true)
 	:start()
 

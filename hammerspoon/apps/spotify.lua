@@ -13,7 +13,7 @@ M.aw_spotify = aw.new(function(appName, event, app)
 	if not (event == aw.launched or event == aw.terminated) then return end
 
 	local audioApp = hs.fnutils.contains(u.videoAndAudioApps, appName)
-	local steamGames = (app:path() or ""):find("/Application Support/Steam/steamapps/common/") 
+	local steamGames = (app:path() or ""):find("/Application Support/Steam/steamapps/common/")
 	local otherGames = (app:path() or ""):find("/Applications/StarCraft II/")
 	if not (audioApp or steamGames or otherGames) then return end
 
@@ -23,7 +23,7 @@ M.aw_spotify = aw.new(function(appName, event, app)
 	local action = event == aw.launched and "pause" or "play"
 	local alexaTrigger = os.getenv("HOME")
 		.. "/Library/Mobile Documents/com~apple~CloudDocs/Tech/alexa-virtual-trigger"
-	if not u.isExecutable(alexaTrigger) then return end
+	if not u.isExecutableFile(alexaTrigger) then return end
 	print("🎵 Spotify: " .. action)
 
 	M.spotify_task = hs.task.new(alexaTrigger, nil, { "spotify-" .. action }):start()
