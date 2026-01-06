@@ -235,16 +235,6 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>B32F63A8-6D03-43EB-A7CD-70F7DCAB2622</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
 		</array>
 	</dict>
 	<key>createdby</key>
@@ -254,7 +244,7 @@
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
-	<string>Icons &amp; Images</string>
+	<string>Icons, Images and Screenshots</string>
 	<key>objects</key>
 	<array>
 		<dict>
@@ -380,27 +370,6 @@
 			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
 			<string>A069BE51-DA62-4835-8048-AF3A608C97D0</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>https://www.svgrepo.com/vectors/{query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>B32F63A8-6D03-43EB-A7CD-70F7DCAB2622</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1104,15 +1073,6 @@
 			<real>30</real>
 			<key>ypos</key>
 			<real>245</real>
-		</dict>
-		<key>B32F63A8-6D03-43EB-A7CD-70F7DCAB2622</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>12</integer>
-			<key>xpos</key>
-			<real>350</real>
-			<key>ypos</key>
-			<real>125</real>
 		</dict>
 		<key>BCDE5A63-BF29-4CD2-B482-D2A56CD510A1</key>
 		<dict>

@@ -20,7 +20,8 @@ function alfredMatcher(str) {
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: alfred run
 function run() {
-	const dotfilesFolder = $.getenv("dotfiles_folder");
+	// CONFIG
+	const dotfilesFolder = app.pathTo("home folder") + "/.config";
 
 	const modifiedFiles = app
 		.doShellScript(`git -C "${dotfilesFolder}" diff --name-only`)

@@ -16,7 +16,9 @@ function aMatcher(str) {
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
-	const notesFolder = $.getenv("notes_folder");
+	// CONFIG
+	const notesFolder = app.pathTo("home folder") + "/Notes";
+
 	const notes = app
 		.doShellScript( // `--follow` for symlink-aliases
 			`PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH ; \

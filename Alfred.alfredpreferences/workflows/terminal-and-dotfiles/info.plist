@@ -21,19 +21,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>665E2FA3-60A1-4FD0-B978-AA364EC1E11A</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>9C688A36-1FD9-4D90-80C8-5E137987DC58</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>68387AD9-ECC3-4998-88E7-6B37F8F7163C</key>
 		<array>
 			<dict>
@@ -95,16 +82,6 @@
 				<integer>0</integer>
 				<key>modifiersubtext</key>
 				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>665E2FA3-60A1-4FD0-B978-AA364EC1E11A</string>
-				<key>modifiers</key>
-				<integer>1048576</integer>
-				<key>modifiersubtext</key>
-				<string>⌘: Open file afterwards</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -403,26 +380,6 @@ open -g "hammerspoon://sync-repos"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argument</key>
-				<string></string>
-				<key>passthroughargument</key>
-				<true/>
-				<key>variables</key>
-				<dict>
-					<key>open</key>
-					<string>true</string>
-				</dict>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>665E2FA3-60A1-4FD0-B978-AA364EC1E11A</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>keyword</key>
@@ -497,7 +454,7 @@ open -g "hammerspoon://sync-repos"</string>
 			<key>xpos</key>
 			<real>330</real>
 			<key>ypos</key>
-			<real>670</real>
+			<real>665</real>
 		</dict>
 		<key>4694D7EB-2482-44FA-881E-2597A9A90F9C</key>
 		<dict>
@@ -515,25 +472,16 @@ open -g "hammerspoon://sync-repos"</string>
 			<key>xpos</key>
 			<real>405</real>
 			<key>ypos</key>
-			<real>505</real>
+			<real>500</real>
 		</dict>
 		<key>61E53F25-50A2-4148-8015-065A22C828EE</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>770</real>
+			<real>615</real>
 			<key>ypos</key>
 			<real>35</real>
-		</dict>
-		<key>665E2FA3-60A1-4FD0-B978-AA364EC1E11A</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>xpos</key>
-			<real>185</real>
-			<key>ypos</key>
-			<real>575</real>
 		</dict>
 		<key>68387AD9-ECC3-4998-88E7-6B37F8F7163C</key>
 		<dict>
@@ -542,7 +490,7 @@ open -g "hammerspoon://sync-repos"</string>
 			<key>xpos</key>
 			<real>190</real>
 			<key>ypos</key>
-			<real>670</real>
+			<real>665</real>
 		</dict>
 		<key>87B867FD-9C0D-4E91-B4B5-1EE3C8193EC3</key>
 		<dict>
@@ -551,7 +499,7 @@ open -g "hammerspoon://sync-repos"</string>
 			<key>note</key>
 			<string>leetcode.nvim</string>
 			<key>xpos</key>
-			<real>610</real>
+			<real>455</real>
 			<key>ypos</key>
 			<real>35</real>
 		</dict>
@@ -573,7 +521,7 @@ open -g "hammerspoon://sync-repos"</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>670</real>
+			<real>665</real>
 		</dict>
 		<key>9AD22EA9-7218-4E8E-B508-601B4250BA47</key>
 		<dict>
@@ -589,25 +537,25 @@ open -g "hammerspoon://sync-repos"</string>
 			<key>xpos</key>
 			<real>255</real>
 			<key>ypos</key>
-			<real>505</real>
+			<real>500</real>
 		</dict>
 		<key>A3DE30E2-B222-4A74-B20D-99D70B9D4B53</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>note</key>
-			<string>Add Spelling correction to espanso</string>
+			<string>add spelling correction to espanso</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>505</real>
+			<real>500</real>
 		</dict>
 		<key>AE89EC05-ABD1-4FBA-8F53-15015B588EB0</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>note</key>
-			<string>repo sync</string>
+			<string>sync all perma-repos</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
@@ -627,7 +575,7 @@ open -g "hammerspoon://sync-repos"</string>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>note</key>
-			<string>run custom update command defined in `homebrew.zsh`</string>
+			<string>runs custom update command defined in `homebrew.zsh`</string>
 			<key>xpos</key>
 			<real>190</real>
 			<key>ypos</key>
@@ -635,50 +583,7 @@ open -g "hammerspoon://sync-repos"</string>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
-	<array>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>default</key>
-				<string>~/.config</string>
-				<key>filtermode</key>
-				<integer>1</integer>
-				<key>placeholder</key>
-				<string></string>
-				<key>required</key>
-				<true/>
-			</dict>
-			<key>description</key>
-			<string></string>
-			<key>label</key>
-			<string>Dotfiles folder</string>
-			<key>type</key>
-			<string>filepicker</string>
-			<key>variable</key>
-			<string>dotfiles_folder</string>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>default</key>
-				<string>~/notes</string>
-				<key>filtermode</key>
-				<integer>1</integer>
-				<key>placeholder</key>
-				<string>~/notes</string>
-				<key>required</key>
-				<true/>
-			</dict>
-			<key>description</key>
-			<string></string>
-			<key>label</key>
-			<string>Notes folder</string>
-			<key>type</key>
-			<string>filepicker</string>
-			<key>variable</key>
-			<string>notes_folder</string>
-		</dict>
-	</array>
+	<array/>
 	<key>version</key>
 	<string></string>
 	<key>webaddress</key>

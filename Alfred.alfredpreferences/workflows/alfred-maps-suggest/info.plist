@@ -434,7 +434,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 				</array>
 			</dict>
 			<key>description</key>
-			<string>primary, open with `⏎`</string>
+			<string>primary provider (open with `⏎`)</string>
 			<key>label</key>
 			<string>open at</string>
 			<key>type</key>
@@ -460,7 +460,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 				</array>
 			</dict>
 			<key>description</key>
-			<string>secondary, open with `⌘⏎`</string>
+			<string>secondary provider (open with `⌘⏎`)</string>
 			<key>label</key>
 			<string></string>
 			<key>type</key>
