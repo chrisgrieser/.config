@@ -178,8 +178,6 @@ return {
 
 		-- `lsp_symbols` tends to too much clutter like anonymous function
 		{ "gs", function() Snacks.picker.treesitter() end, desc = "󰐅 Treesitter symbols" },
-		-- treesitter does not work for markdown, so using LSP symbols here
-		{ "gs", function() Snacks.picker.lsp_symbols() end, ft = "markdown", desc = "󰽛 Headings" },
 
 		---GIT--------------------------------------------------------------------
 		{ "<leader>ga", function() Snacks.picker.git_diff() end, desc = "󰐖 Hunks" },
