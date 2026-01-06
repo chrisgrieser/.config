@@ -161,7 +161,6 @@ function pr {
 	# (and without the need to setup `gh` remote.)
 	git push
 	sleep 1 # needed for GitHub to register the new commit
-	local url
 	repo=$(git remote --verbose | head -n1 | sed -Ee 's/.*github.com:([^[:space:]]*).*/\1/' -Ee 's/\.git$//')
 	branch=$(git branch --show-current)
 	open "https://github.com/$repo/pull/new/$branch"
@@ -244,20 +243,18 @@ function reflog {
 # interactive git log
 # (uses `_gitlog` from `magic-dashboard.zsh`)
 function gli {
-	if ! typeset -f _gitlog > /dev/null; then
-		echo "requires \`_gitlog\` function from zsh magic-dashboard"
-		return 1
-	fi
-
-	local hash key_pressed selected repo
+	if ! [[ "$OSTYPE" =~ "darwin" ]]; then echo "requires macOS for \`pbcopy\` and \`open\`" && return 1; fi
+	if ! typeset -f _gitlog > /dev/null; then echo "requires \`_gitlog\` function from zsh magic-dashboard" && return 1; fi
 
 	local preview_format="%C(yellow)%h %C(red)%D %n%C(blue)%an %C(green)(%ch)%C(reset) %n%n%C(bold)%C(magenta)%s%C(reset) %n%b"
 	local preview_cmd="git show {1} --stat=\$FZF_PREVIEW_COLUMNS --color=always --format='$preview_format' \
-		| sed -e '\$d'  -e $'s/ \\|/ \e[1;30m│\e[0m/' ; \
-		print '\n\e[1;30m────────\e[0m' ; \
+		| sed -e '\$d' -e $'s/ \\|/ \e[1;30m│\e[0m/' ; \
+		print '\e[1;30m' ; printf '―%.0s' \$(seq 1 \$FZF_PREVIEW_COLUMNS) ; print '\e[0m' ; \
 		git show --format='' {1}"
 
 	if [[ -x "$(command -v delta)" ]]; then
+		# 1. theme, since cannot auto-detect mode in subshell
+		# 2. `--no-gitconfig` since `--hyperlink` break emojis
 		theme="$(defaults read -g AppleInterfaceStyle &> /dev/null && echo "dark" || echo "light")"
 		preview_cmd="$preview_cmd | delta --$theme --no-gitconfig"
 	fi
@@ -265,29 +262,19 @@ function gli {
 	selected=$(
 		_gitlog --no-graph --color=always |
 			fzf --ansi --no-sort --track \
-				--header-first --header="↵ Checkout   ^H Hash   ^G GitHub   ^D Diff" \
-				--expect="ctrl-h,ctrl-g,ctrl-d" --with-nth=2.. --preview-window="55%" \
+				--with-nth=2.. --preview-window="55%" \
 				--preview="$preview_cmd" \
+				--header-first --header="↵: Open in GitHub   ^H: Copy Hash" \
+				--bind='ctrl-h:execute(echo -n {1} | pbcopy ; echo hash copied)+abort' \
 				--height="100%" #required for wezterm's `pane:is_alt_screen_active()`
 	)
 	[[ -z "$selected" ]] && return 0 # aborted
 
-	key_pressed=$(echo "$selected" | head -n1)
-	hash=$(echo "$selected" | sed '1d' | cut -d' ' -f1)
-
-	if [[ "$key_pressed" == "ctrl-h" ]]; then
-		echo -n "$hash" | pbcopy
-		print "\e[1;33m$hash\e[0m copied."
-	elif [[ "$key_pressed" == "ctrl-g" ]]; then
-		repo=$(git remote --verbose | head -n1 | cut -f2 | cut -d' ' -f1 |
-			sed -Ee 's/git@github.com://' -Ee 's/\.git$//')
-		local url="https://github.com/$repo/commit/$hash"
-		[[ "$OSTYPE" =~ "darwin" ]] && open "$url" || echo "$url"
-	elif [[ "$key_pressed" == "ctrl-d" ]]; then
-		git diff "$hash"^!
-	else
-		git checkout "$hash"
-	fi
+	local hash repo
+	hash=$(echo "$selected" | cut -d' ' -f1)
+	repo=$(git remote --verbose | head -n1 | cut -f2 | cut -d' ' -f1 |
+		sed -Ee 's/git@github.com://' -Ee 's/\.git$//')
+	open "https://github.com/$repo/commit/$hash"
 }
 
 #-RESTORE FROM GIT HISTORY------------------------------------------------------
