@@ -66,7 +66,7 @@ local function toggleMaximized()
 	local frontApp = frontWin:application():name() ---@diagnostic disable-line: undefined-field
 
 	if env.isProjector() then return wu.moveResize(frontWin, hs.layout.maximized) end
-	if frontApp == "Mona" then return wu.moveResize(frontWin, wu.toTheSide) end
+	if frontApp == "Ivory" then return wu.moveResize(frontWin, wu.toTheSide) end
 
 	local baseSize = hs.fnutils.contains(smallWinApps, frontApp) and wu.middleHalf or wu.pseudoMax
 	local screen = frontWin:screen():frame()

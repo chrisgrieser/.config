@@ -44,7 +44,8 @@ cask "slack"
 cask "wezterm"
 cask "zoom"
 mas "Highlights", id: 1498912833
-mas "Mona", id: 6755672518
+# mas "Mona", id: 6755672518
+mas "Ivory", id: 6444602274
 tap "felixkratz/formulae"; brew "felixkratz/formulae/sketchybar"
 
 #-OTHER-------------------------------------------------------------------------

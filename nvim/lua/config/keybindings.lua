@@ -6,14 +6,14 @@ keymap("n", "<D-q>", vim.cmd.wqall, { desc = " Save & quit", unique = false }
 
 keymap(
 	{ "n", "x", "i" },
-	"<D-C-r>", -- `blue` gets registered by neovide as `cmd+ctrl` (`<D-C-`)
+	"<D-C-r>", -- `hyper` gets registered by neovide as `cmd+ctrl` (`<D-C-`)
 	function() require("personal-plugins.misc").restartNeovide() end,
 	{ desc = " Save & restart" }
 )
 
 keymap(
 	{ "n", "x", "i" },
-	"<D-C-t>", -- `blue` gets registered by neovide as `cmd+ctrl` (`<D-C-`)
+	"<D-C-t>", -- `hyper` gets registered by neovide as `cmd+ctrl` (`<D-C-`)
 	function() require("personal-plugins.misc").openCwdInTerminal() end,
 	{ desc = " Open cwd in Terminal" }
 )
@@ -337,7 +337,7 @@ keymap("t", "<D-v>", [[<C-\><C-n>pi]], { desc = " Paste" })
 
 -- cmdline mode
 keymap("c", "<D-v>", function()
-	vim.fn.setreg("+", vim.trim(vim.fn.getreg("+"))) -- trim
+	vim.fn.setreg("+", vim.trim(vim.fn.getreg("+")))
 	return "<C-r>+"
 end, { expr = true, desc = " Paste" })
 

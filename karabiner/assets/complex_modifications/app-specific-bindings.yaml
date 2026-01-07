@@ -241,3 +241,25 @@ rules:
                 end tell'
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [com.granola.app] }]
   #─────────────────────────────────────────────────────────────────────────────
+  - description: "(Apps) Ivory"
+    manipulators:
+      # FIX `o` opening wrong link
+      - type: basic
+        from: { key_code: o }
+        to:
+          - { key_code: right_arrow }
+          - { key_code: vk_none, hold_down_milliseconds: 200 }
+          - { key_code: o }
+        conditions: [{ type: frontmost_application_if, bundle_identifiers: [com.tapbots.Ivory] }]
+      # add missing vim bindings
+      - type: basic
+        from: { key_code: l }
+        to:
+          - { key_code: right_arrow }
+        conditions: [{ type: frontmost_application_if, bundle_identifiers: [com.tapbots.Ivory] }]
+      - type: basic
+        from: { key_code: h }
+        to:
+          - { key_code: left_arrow }
+        conditions: [{ type: frontmost_application_if, bundle_identifiers: [com.tapbots.Ivory] }]
+  #─────────────────────────────────────────────────────────────────────────────

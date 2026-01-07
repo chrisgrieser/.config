@@ -22,8 +22,7 @@ return {
 				text = function(ctx)
 					local text = ctx.text:match("^<!%-%-%s*(.-)%s*%-%->$")
 					if not text then return "" end
-					text = text:gsub("\n.*", "…")
-					return "󰆈 " .. text
+					return "󰆈 " .. text:gsub("\n.*", "…")
 				end,
 			},
 		},
@@ -47,7 +46,6 @@ return {
 			ordered_icons = "", -- disable overwriting ordered list numbers with 1-2-3
 		},
 		code = {
-			priority = 140, -- PENDING https://github.com/MeanderingProgrammer/render-markdown.nvim/pull/581
 			position = "left",
 			width = "block", -- = not full width
 			min_width = 50,

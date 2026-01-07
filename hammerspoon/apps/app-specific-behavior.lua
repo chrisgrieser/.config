@@ -64,36 +64,14 @@ M.wf_scripteditor = wf.new("Script Editor")
 -- 1. auto-close media windows
 -- 2. auto-scroll up
 
-local function scrollMasto()
-	local masto = u.app("Mona")
-	if not masto then return end
-	local win = masto:mainWindow()
-	if not win then return end
-
-	if M.mastoHasScrolled then return end
-	M.mastoHasScrolled = true
-	hs.eventtap.keyStroke({}, "left", 1, masto) -- go back
-	hs.eventtap.keyStroke({ "cmd" }, "1", 1, masto) -- go to home tab
-	hs.eventtap.keyStroke({ "cmd" }, "up", 1, masto) -- scroll up
-	u.defer(3, function() M.mastoHasScrolled = false end)
-end
-
-local c = hs.caffeinate.watcher
-M.caff_masto = c.new(function(event)
-	if event == c.screensaverDidStop or event == c.screensDidWake then
-		u.defer({ 0, 2 }, scrollMasto)
-	end
-end):start()
-
 M.aw_masto = aw.new(function(appName, event, masto)
-	if appName ~= "Mona" then return end
+	if appName ~= "Ivory" then return end
 
 	if event == aw.activated or event == aw.launched then
 		local username = "pseudometa"
 		for _, win in pairs(masto:allWindows()) do
 			local title = win:title()
 			if title == username or title == "Home" then wu.moveResize(win, wu.toTheSide) end
-			if title == "Compose" then win:focus() end
 		end
 	elseif event == aw.deactivated then
 		for _, win in pairs(masto:allWindows()) do
@@ -101,7 +79,10 @@ M.aw_masto = aw.new(function(appName, event, masto)
 			local frontNotAlfred = hs.application.frontmostApplication():name() ~= "Alfred"
 			if #masto:allWindows() > 1 and isMediaWin and frontNotAlfred then win:close() end
 		end
-		u.defer(2, scrollMasto)
+
+		hs.eventtap.keyStroke({}, "left", 1, masto) -- go back
+		hs.eventtap.keyStroke({ "cmd" }, "1", 1, masto) -- go to home tab
+		hs.eventtap.keyStroke({ "cmd" }, "up", 1, masto) -- scroll up
 	end
 end):start()
 

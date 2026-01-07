@@ -37,12 +37,12 @@ local function workLayout(shouldDarkenDisplay)
 	u.quitFullscreenAndVideoApps()
 
 	-- open things
-	u.openApps { "Mona", isWorkWeek() and "Slack" or nil, "Gmail", "AlfredExtraPane" }
+	u.openApps { "Ivory", isWorkWeek() and "Slack" or nil, "Gmail", "AlfredExtraPane" }
 	u.defer(1, function()
+		wu.moveResize("Ivory", wu.toTheSide)
 		if isWorkWeek() then wu.moveResize("Slack", wu.pseudoMax) end
 		wu.moveResize("Gmail", wu.pseudoMax)
 	end)
-	u.defer(2, function() wu.moveResize("Mona", wu.toTheSide) end)
 
 	print("🔲 Layout: work")
 end
@@ -69,7 +69,7 @@ local function movieLayout()
 		"WezTerm",
 		"Gmail",
 		"Neovide",
-		"Mona",
+		"Ivory",
 		"Reminders",
 	}
 	print("🔲 Layout: movie")

@@ -78,17 +78,6 @@ rules:
           - { key_code: "3", modifiers: [command] }
         conditions:
           - { type: frontmost_application_if, bundle_identifiers: [com.apple.iCal] }
-      # Mona: back to Home column
-      - type: basic
-        from: { pointing_button: button4 }
-        to:
-          - shell_command: |
-              osascript -e '
-                tell application "System Events" to tell process "Finder"
-                  click menu item "Home" of menu "View" of menu bar 1
-                end tell'
-        conditions:
-          - { type: frontmost_application_if, bundle_identifiers: [com.jonny.supermona] }
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Mouse) 5 (top)"
     manipulators:
