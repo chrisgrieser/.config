@@ -21,7 +21,7 @@ return {
 			["add"] = { glyph = "" }, -- vim spellfile
 		},
 		filetype = {
-			["css"] = { glyph = "", hl = "MiniIconsRed" },
+			["css"] = { glyph = "", hl = "MiniIconsRed" },
 			["typescript"] = { hl = "MiniIconsCyan" },
 			["vim"] = { glyph = "" },
 			["qf"] = { glyph = "" },
