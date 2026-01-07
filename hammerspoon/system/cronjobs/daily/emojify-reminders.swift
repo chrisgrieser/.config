@@ -124,7 +124,7 @@ Task {
 	// AI request
 	guard let response = try await openaiRequest(titles) else { exit(1) }
 	let emojis = response.split(separator: "\n")
-		.map { $0.replacingOccurrences(of: "- ", with: "") }
+		.map { $0.replacingOccurrences(of: "- ", with: "") }  // AI tends to respond in kind with bullet list
 	if emojis.count != remWithNoEmoji.count {
 		print("⚠️ \(remWithNoEmoji.count) reminders, but AI provided \(emojis.count). ")
 	}
