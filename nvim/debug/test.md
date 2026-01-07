@@ -1,11 +1,10 @@
-# Harper false positives
+<!-- rumdl-disable -->
 
-With LuaSnip, this is an opt-in feature.
+<!-- harper: ignore -->
+defiend
+**Qua**litative **D**ata analysis **R**ealized in **O**bsidian
 
-In your VScode snippet, use this token.
+**Qua**litative **D**ata analysis **R**ealized in **O**bsidian <!-- harper: ignore -->
 
----
-
-With my solution, this is an opt-in feature.
-
-In your VScode snippet use this token.
+<!-- spellcheck: ignore -->
+**Qua**litative **D**ata analysis **R**ealized in **O**bsidian
