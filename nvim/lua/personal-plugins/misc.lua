@@ -322,7 +322,7 @@ function M.inspectNodeAncestors()
 		table.insert(ancestors, 1, node:type())
 		node = node:parent()
 	end
-	local out = "^ " .. table.concat(ancestors, "\n│ ")
+	local out = "↑ " .. table.concat(ancestors, "\n| ")
 	vim.notify(out, nil, { title = "Node ancestors", icon = "", timeout = false })
 end
 
