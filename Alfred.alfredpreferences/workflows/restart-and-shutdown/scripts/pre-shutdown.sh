@@ -1,6 +1,11 @@
 #!/usr/bin/env zsh
-set -e
 
+# CONFIG
+perma_repo_file="$HOME/.config/perma-repos.csv"
+
+#-------------------------------------------------------------------------------
+
+set -e
 alfred_dir="$PWD" # stored, since cd'ing later
 function notify() {
 	"$alfred_dir/notificator" --title "Pre-shutdown sync…" --message "$1"
@@ -24,7 +29,7 @@ while read -r line; do
 		notify "⚠️$icon $name not synced."
 		return 1
 	fi
-done < "$HOME/.config/perma-repos.csv"
+done < "$perma_repo_file"
 
 #-------------------------------------------------------------------------------
 
