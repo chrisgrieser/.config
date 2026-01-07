@@ -7,7 +7,7 @@ vim.g.useEmmyluaLsp = false
 
 -- names need to match `lua/colorschemes/{name}.lua` & the name for `vim.cmd.colorscheme`
 vim.g.lightColor = "dawnfox"
-vim.g.darkColor = "teide"
+vim.g.darkColor = "tokyonight"
 
 ---GENERAL OPTIONS--------------------------------------------------------------
 vim.g.mapleader = ","

@@ -55,6 +55,12 @@ return {
 			hl.BlinkCmpLabelDescription = { link = "NonText" } -- FIX wrong color
 			hl.BlinkCmpLabelMatch = { fg = colors.yellow } -- make matches stand out more
 
+			-- apply color to `bg`, not `fg` (TODO INFO ERROR WARN)
+			hl["@comment.todo"] = { fg = colors.black, bg = hl["@comment.todo"].fg, bold = true }
+			hl["@comment.error"] = { fg = colors.black, bg = hl["@comment.error"].fg, bold = true }
+			hl["@comment.warning"] = { fg = colors.black, bg = hl["@comment.warning"].fg, bold = true }
+			hl["@comment.note"] = { fg = colors.black, bg = hl["@comment.note"].fg, bold = true }
+
 			-- mini.icons
 			hl.MiniIconsGreen = { fg = "#4df096" }
 			hl.MiniIconsGrey = { fg = colors.fg_dark }

@@ -36,15 +36,14 @@ require("lazy").setup {
 	spec = "plugin-specs",
 	rocks = { enabled = false }, -- no need
 	defaults = { lazy = true },
-	lockfile = vim.fn.stdpath("config") .. "/.lazy-lock.json", -- make lockfile hidden
+	lockfile = vim.fn.stdpath("config") .. "/.lazy-lock.json", -- prepend dot to filename
 	dev = {
-		patterns = { "nvim", "blink.cmp" }, -- for repos matching `patterns`… (`nvim` = all nvim repos)
+		patterns = { "nvim" }, -- for repos matching `patterns`… (`nvim` = all nvim repos)
 		path = vim.g.localRepos, -- …use local repo, if one exists in `path`…
 		fallback = true, -- …and if not, fallback to fetching from GitHub
 	},
 	install = {
-		-- load one of these during installation at startup
-		colorscheme = { vim.g.darkColor, vim.g.lightColor, "habamax" },
+		colorscheme = { "habamax" }, -- load during installation at startup
 	},
 	git = {
 		log = { "--since=7 days ago" }, -- `:Lazy log` shows commits since last x days
@@ -71,11 +70,8 @@ require("lazy").setup {
 			},
 			["!"] = {
 				function(plugin)
-					vim.notify(vim.inspect(plugin), nil, {
-						title = "Inspect " .. plugin.name,
-						ft = "lua",
-						icon = "󱈄",
-					})
+					local opts = { title = "Inspect " .. plugin.name, ft = "lua", icon = "󱈄" }
+					vim.notify(vim.inspect(plugin), nil, opts)
 				end,
 				desc = "󱈄 Inspect Plugin",
 			},
