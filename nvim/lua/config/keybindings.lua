@@ -184,8 +184,8 @@ keymap("n", "zr", "zR", { desc = "󰘖 Open all folds" })
 keymap("n", "zf", function() vim.opt.foldlevel = vim.v.count1 end, { desc = " Set fold level to {count}" })
 
 ---YANKING----------------------------------------------------------------------
--- Sticky yank
-do
+
+do -- Sticky yank
 	keymap({ "n", "x" }, "y", function()
 		vim.b.cursorPreYank = vim.api.nvim_win_get_cursor(0)
 		return "y"

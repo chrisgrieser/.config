@@ -18,11 +18,13 @@ return {
 		dim_inactive = false, -- BUG does not dim signcolumn properly
 		styles = {
 			comments = { italic = false },
+			keywords = { italic = false },
 		},
 		--------------------------------------------------------------------------
 		on_colors = function(colors)
 			colors.git.change = colors.yellow -- yellow, not blue
 			colors.comment = "#767fb1" -- more contrast
+			colors.red = "#bd7176" -- less saturation
 		end,
 		on_highlights = function(hl, colors)
 			-- custom highlights
@@ -30,11 +32,13 @@ return {
 			hl["@keyword.return"] = { link = "StandingOut" }
 			hl["@markdown.internal_link"] = {
 				fg = colors.magenta,
-				sp = colors.magenta, -- underline color of spaces
+				sp = colors.magenta, -- `sp` -> underline color of spaces
 				underline = true,
 			}
 
 			-- general
+			hl.LspInlayHint = { link = "FloatBorder" }
+			hl["@lsp.type.parameter"] = { fg = colors.yellow }
 			hl["@lsp.type.parameter"] = { fg = colors.yellow }
 			hl["@markup.strong"] = { fg = colors.fg_dark, bold = true }
 			hl["@string.documentation.python"] = { link = "Comment" }
