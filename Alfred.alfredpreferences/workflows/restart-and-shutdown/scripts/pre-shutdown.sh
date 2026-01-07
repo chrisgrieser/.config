@@ -8,7 +8,7 @@ perma_repo_file="$HOME/.config/perma-repos.csv"
 set -e
 alfred_dir="$PWD" # stored, since cd'ing later
 function notify() {
-	"$alfred_dir/notificator" --title "Pre-shutdown sync…" --message "$1"
+	"$alfred_dir/notificator" --title "Pre-shutdown sync" --message "$1"
 }
 
 #-------------------------------------------------------------------------------
