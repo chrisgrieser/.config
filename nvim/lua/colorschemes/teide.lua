@@ -55,7 +55,6 @@ return {
 			hl.BlinkCmpLabelMatch = { fg = colors.yellow } -- make matches stand out more
 
 			-- mini.icons
-			hl.MiniIconsGreen = { fg = "#4df096" }
 			hl.MiniIconsGrey = { fg = colors.fg_dark }
 
 			-- cursorword
