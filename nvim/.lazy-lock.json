@@ -36,7 +36,7 @@
   "render-markdown.nvim": { "branch": "main", "commit": "da6a7b25471ab23824f3429225973186eb0b62d2" },
   "satellite.nvim": { "branch": "main", "commit": "d6c681e3b01e45a899eae5569d0cf08849479683" },
   "snacks.nvim": { "branch": "main", "commit": "fe7cfe9800a182274d0f868a74b7263b8c0c020b" },
-  "tokyonight.nvim": { "branch": "main", "commit": "5da1b76e64daf4c5d410f06bcb6b9cb640da7dfd" },
+  "teide.nvim": { "branch": "main", "commit": "c8df92c32cd8f9741858241474c9069af74c20ca" },
   "treesj": { "branch": "main", "commit": "186084dee5e9c8eec40f6e39481c723dd567cb05" },
   "ultimate-autopair.nvim": { "branch": "v0.6", "commit": "72e160cb1ce8c0db2ac4315f77d97420a2f4223d" },
   "which-key.nvim": { "branch": "main", "commit": "3aab2147e74890957785941f0c1ad87d0a44c15a" }

@@ -49,12 +49,6 @@ return {
 				Conceal = { link = "Comment" }, -- leetcode.nvim, also more readability
 				LspCodeLens = { link = "LspInlayHint" },
 
-				-- todo comments
-				["@comment.todo"] = { style = "bold" },
-				["@comment.error"] = { style = "bold" },
-				["@comment.warning"] = { style = "bold" },
-				["@comment.note"] = { style = "bold" },
-
 				-- 1. `inline` code in comments
 				-- 2. italic removed only in markdown, (still inherited from comments elsewhere)
 				["@markup.raw"] = { bg = "#e9dfd2", style = "" },
