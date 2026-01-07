@@ -177,7 +177,7 @@ vim.diagnostic.config {
 }
 
 vim.api.nvim_create_autocmd("WinNew", {
-	desc = "User: Use markdown highlighting in diagnostic floats",
+	desc = "User: Use Markdown highlighting in diagnostic floats",
 	callback = function()
 		vim.defer_fn(function()
 			if not vim.b.lsp_floating_preview then return end -- no lsp float
