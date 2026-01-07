@@ -10,7 +10,21 @@ let config = [
 		"~/Library/Mobile Documents/com~apple~CloudDocs/Tech/api-keys/openai-api-key.txt",
 	"openaiModel": "gpt-5-nano",
 	"reasoningEffort": "minimal",
-	"systemPrompt": "Replace each line in the following text with one thematically fitting emoji.",
+	"systemPrompt": """
+		Replace item in the following text with exactly one emoji that thematically
+		fits the item. Respond with one emoji per line. Try to use different emojis
+		for different items.
+
+		Example input:
+		- buy milk
+		- clean kitchen
+
+		Example output:
+		- 🍼
+		- 🧼
+
+		The text is:
+	""",
 ]
 
 // -----------------------------------------------------------------------------
@@ -98,7 +112,10 @@ Task {
 		withDueDateStarting: nil, ending: nil, calendars: [reminderList])
 	let remWithNoEmoji = await fetchReminders(eventStore, predicate)
 		.filter { $0.title.first?.isEmoji == false }
-	let titles = remWithNoEmoji.map(\.title).joined(separator: "\n")
+	let titles =
+		remWithNoEmoji
+		.map { "- " + $0.title.replacingOccurrences(of: "\n", with: " ") }  // using bullet list helps AI
+		.joined(separator: "\n")
 	if titles.isEmpty {
 		print("✅ No reminders to update.")
 		exit(0)
@@ -107,15 +124,14 @@ Task {
 	// AI request
 	guard let response = try await openaiRequest(titles) else { exit(1) }
 	let emojis = response.split(separator: "\n")
+		.map { $0.replacingOccurrences(of: "- ", with: "") }
 	if emojis.count != remWithNoEmoji.count {
-		print(
-			"⚠️ \(remWithNoEmoji.count) reminders, but AI provided \(emojis.count). Will proceed with the emojis available."
-		)
+		print("⚠️ \(remWithNoEmoji.count) reminders, but AI provided \(emojis.count). ")
 	}
 
 	// Update reminders
 	for (i, emoji) in emojis.enumerated() {
-		if i >= emojis.count { break }
+		if i >= remWithNoEmoji.count { break }
 		let rem = remWithNoEmoji[i]
 		rem.title = String(emoji) + " " + rem.title
 		do {
