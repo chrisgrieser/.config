@@ -5,7 +5,7 @@ local u = require("meta.utils")
 local wu = require("win-management.window-utils")
 local c = hs.caffeinate.watcher
 local timerAt = hs.timer.doAt
-local timerEvery = hs.timer.doEvery
+local timerEverySecs = hs.timer.doEvery
 
 ---FORCE REMINDERS SYNC ON STARTUP----------------------------------------------
 if u.isSystemStart() then
@@ -42,7 +42,7 @@ end):start()
 
 ---CLOCK------------------------------------------------------------------------
 -- Show clock every full hour
-M.timer_clock = timerEvery(60, function()
+M.timer_clock = timerEverySecs(60, function()
 	local isFullHour = os.date("%M") == "00"
 	if isFullHour and u.screenIsUnlocked() and not env.isProjector() then
 		local hour = tostring(os.date("%H:%M"))
@@ -83,8 +83,12 @@ do
 		end
 	end
 
-	M.timer_nightlyCronjobs = timerAt("01:00", "01d", function()
-		runEveryFileIn(cronjobDir .. "/daily")
+	M.timer_hourlyCronjobs = timerEverySecs(3600, function()
+		if not u.screenIsUnlocked() then return end
+		runEveryFileIn(cronjobDir .. "/hourly")
+	end):start()
+
+	M.timer_biweeklyCronjobs = timerAt("01:00", "01d", function()
 		if os.date("%w") % 3 == 0 then runEveryFileIn(cronjobDir .. "/biweekly") end
 	end, true):start()
 end
@@ -109,7 +113,7 @@ local config = {
 	timeToReactSecs = 20,
 }
 
-M.timer_sleepAutoVideoOff = timerEvery(config.checkIntervalMins * 60, function()
+M.timer_sleepAutoVideoOff = timerEverySecs(config.checkIntervalMins * 60, function()
 	local isIdle = (hs.host.idleTime() / 60) > config.idleMins
 	if not env.isProjector() or not isIdle or not u.screenIsUnlocked() then return end
 
