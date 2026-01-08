@@ -19,7 +19,7 @@ local ensureInstalled = {
 	"ltex-ls-plus", -- natural language linter (LanguageTool, ltex fork)
 	"typos-lsp", -- spellchecker for code
 	"rumdl", -- modern markdownlint
-	"markdown-oxide", -- zettenkasten-lsp, bit better than `marksman`
+	"markdown-oxide", -- zettenkasten-lsp, a bit better than `marksman`
 
 	"basedpyright", -- python lsp (pyright fork)
 	"ruff", -- python linter & formatter
