@@ -80,9 +80,11 @@ M.aw_masto = aw.new(function(appName, event, masto)
 			if #masto:allWindows() > 1 and isMediaWin and frontNotAlfred then win:close() end
 		end
 
-		hs.eventtap.keyStroke({}, "left", 1, masto) -- go back
-		hs.eventtap.keyStroke({ "cmd" }, "1", 1, masto) -- go to home tab
-		hs.eventtap.keyStroke({ "cmd" }, "up", 1, masto) -- scroll up
+		u.defer(1, function()
+			hs.eventtap.keyStroke({}, "left", 1, masto) -- go back
+			hs.eventtap.keyStroke({ "cmd" }, "1", 1, masto) -- go to home tab
+			hs.eventtap.keyStroke({ "cmd" }, "up", 1, masto) -- scroll up
+		end)
 	end
 end):start()
 

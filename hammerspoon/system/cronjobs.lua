@@ -11,7 +11,7 @@ local timerEverySecs = hs.timer.doEvery
 if u.isSystemStart() then
 	print("📅 Syncing Reminders")
 	hs.execute("open -g -a Reminders") -- `-g` to open in background
-	u.defer(10, function()
+	u.defer(8, function()
 		u.quitApps("Reminders")
 		hs.execute(u.exportPath .. "sketchybar --trigger update_reminder_count")
 	end)
@@ -75,7 +75,8 @@ do
 					:gsub("%s+$", "")
 					:gsub("^✅ ", "") -- redundant, since we add emojis here as well
 					:gsub("^❌ ", "")
-				local msg = "Cronjob " .. file .. (output ~= "" and ": " .. output or "")
+				local fileShort = file:gsub("%.%w+$", "")
+				local msg = "🕑 " .. fileShort .. (output ~= "" and ": " .. output or "")
 				if code ~= 0 then return u.notify("❌ " .. msg) end
 				print("✅ " .. msg)
 			end):start()

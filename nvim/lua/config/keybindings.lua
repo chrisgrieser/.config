@@ -89,7 +89,7 @@ keymap("n", "ü", "<C-x>", { desc = "󰍵 Decrement" })
 keymap("n", "~", "v~", { desc = "󰬴 Toggle char case (w/o moving)" })
 
 keymap("n", "X", function()
-	local updatedLine = vim.api.nvim_get_current_line():gsub(".$", "")
+	local updatedLine = vim.api.nvim_get_current_line():sub(1, -2)
 	vim.api.nvim_set_current_line(updatedLine)
 end, { desc = "󱎘 Delete char at EoL" })
 
