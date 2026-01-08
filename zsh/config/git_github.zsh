@@ -264,7 +264,7 @@ function gli {
 			fzf --ansi --no-sort --track \
 				--with-nth=2.. --preview-window="55%" \
 				--preview="$preview_cmd" \
-				--header-first --header="↵: Open in GitHub   ^H: Copy Hash" \
+				--header-first --header="↵: Open at GitHub   ^H: Copy hash" \
 				--bind='ctrl-h:execute(echo -n {1} | pbcopy ; echo hash copied)+abort' \
 				--height="100%" #required for wezterm's `pane:is_alt_screen_active()`
 	)

@@ -215,9 +215,7 @@ return {
 		picker = {
 			sources = {
 				select = { -- vim.ui.select
-					layout = {
-						layout = { min_width = 40, backdrop = 40, width = 0.6 },
-					},
+					layout = { layout = { min_width = 40, width = 0.6 } },
 					kinds = {}, -- allows-kind-specific config
 				},
 				files = {
@@ -412,6 +410,7 @@ return {
 				},
 				lsp_symbols = { layout = "sidebar" },
 				lsp_config = {
+					layout = "big_preview",
 					-- confirm: inspect LSP config
 					confirm = function(picker, item)
 						if not item.enabled then
