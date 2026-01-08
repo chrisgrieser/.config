@@ -1,0 +1,6 @@
+{
+  "set priority": {
+    "body": "(#set! priority 130)",
+    "prefix": "set priority"
+  }
+}

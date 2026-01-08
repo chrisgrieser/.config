@@ -146,6 +146,12 @@
           "scissors-snippet"
         ],
         "path": "./scissors-snippet.json"
+      },
+      {
+        "language": [
+          "query"
+        ],
+        "path": "./query.json"
       }
     ]
   },
