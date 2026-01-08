@@ -75,7 +75,7 @@ M.aw_masto = aw.new(function(appName, event, masto)
 		end
 	elseif event == aw.deactivated then
 		for _, win in pairs(masto:allWindows()) do
-			local isMediaWin = win:title():find("^Image")
+			local isMediaWin = win:title():find("^Image") or win:title():find("^Ivory$")
 			local frontNotAlfred = hs.application.frontmostApplication():name() ~= "Alfred"
 			if #masto:allWindows() > 1 and isMediaWin and frontNotAlfred then win:close() end
 		end

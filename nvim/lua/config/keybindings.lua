@@ -118,12 +118,12 @@ end, { desc = "󰓆 Spell suggestions" })
 keymap("i", "<D-t>", function() require("personal-plugins.auto-template-str").insertTemplateStr() end, { desc = "󰅳 Insert template string" })
 
 -- Edits repeatable via `.`
-keymap("n", "<D-j>", '*N"_cgn', { desc = "󰆿 Repeatable edit cword" })
+keymap("n", "<D-j>", '*N"_cgn', { desc = "󰆿 Repeatable edit (cword)" })
 keymap("x", "<D-j>", function()
 	local selection = vim.fn.getregion(vim.fn.getpos("."), vim.fn.getpos("v"))[1]
 	vim.fn.setreg("/", "\\V" .. vim.fn.escape(selection, [[/\]]))
 	return '<Esc>"_cgn'
-end, { desc = "󰆿 Repeatable edit selection", expr = true })
+end, { desc = "󰆿 Repeatable edit (selection)", expr = true })
 
 -- Merge lines
 keymap("n", "m", "J", { desc = "󰽜 Merge line up" })
