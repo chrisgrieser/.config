@@ -558,8 +558,8 @@ vim.lsp.handlers["textDocument/rename"] = function(err, result, ctx, config)
 	assert(changeCount > 0, "Unknown form of changes reported by LSP.")
 
 	-- notification
-	local pluralS = changeCount > 1 and "s" or ""
-	local msg = ("[%d] change%s"):format(changeCount, pluralS)
+	local s = changeCount > 1 and "s" or ""
+	local msg = ("[%d] change%s"):format(changeCount, s)
 	if #changedFiles > 1 then
 		local fileList = table.concat(changedFiles, "\n")
 		msg = ("**%s in [%d] files**\n%s"):format(msg, #changedFiles, fileList)
