@@ -549,7 +549,7 @@ vim.lsp.handlers["textDocument/rename"] = function(err, result, ctx, config)
 			:map(function(file)
 				local uri = file.textDocument and file.textDocument.uri or file.newUri
 				local extra = file.kind == "rename" and " (renamed)" or ""
-				return "- " .. vim.fs.basename(vim.uri_to_fname(uri)) .. extra
+				return "* " .. vim.fs.basename(vim.uri_to_fname(uri)) .. extra
 			end)
 			:totable()
 		changeCount = vim.iter(result.documentChanges)
