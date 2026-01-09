@@ -9,7 +9,7 @@ local aw = hs.application.watcher
 _G.i = hs.inspect -- `i()` to easier inspect in the console
 
 ---CONSOLE APPEARANCE-----------------------------------------------------------
-local baseFont = { name = "JetBrainsMonoNL NF", size = 22 }
+local baseFont = { name = "JetBrainsMonoNL NF", size = 20 }
 
 local function red(isDark)
 	if isDark then return { red = 1, green = 0, blue = 0 } end
@@ -124,26 +124,6 @@ M.timer_dailyConsoleSeparator = hs.timer
 		print(("\n------------------------- %s -----------------------------\n"):format(date))
 	end, true)
 	:start()
-
----HOTKEYS FOR THE CONSOLE--------------------------------------------------
-
----@param modifier string[]
----@param key string
----@param action function
-local function hammerspoonHotkey(modifier, key, action)
-	hs.hotkey.bind(modifier, key, function()
-		local frontApp = hs.application.frontmostApplication()
-		if frontApp:name() == "Hammerspoon" then
-			action()
-		else
-			-- passthrough
-			hs.eventtap.keyStroke(modifier, key, 1, frontApp)
-		end
-	end)
-end
-
-hammerspoonHotkey({ "cmd" }, "q", hs.closeConsole) -- prevent accidental quitting
-hammerspoonHotkey({ "cmd" }, "k", hs.console.clearConsole) -- consistent with terminals
 
 --------------------------------------------------------------------------------
 return M

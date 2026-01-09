@@ -1,13 +1,3 @@
----@diagnostic disable
---------------------------------------------------------------------------------
-
-local function process(a, b)
-	print(a)
-	print(b)
-
-	local function sort(a, b)
-		if a > b then return b, a end
-		return a, b
-	end
-
-end
+-- Recall that XXXX defined the sum of two elements of 𝐅𝑛 to be the element of 𝐅𝑛
+-- obtained by adding corresponding coordinates; see 1.13. As XXXX will now see,
+-- addition has a simple geometric interpretation in the special case of 𝐑2.

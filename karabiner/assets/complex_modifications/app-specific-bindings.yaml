@@ -241,6 +241,16 @@ rules:
                 end tell'
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [com.granola.app] }]
   #─────────────────────────────────────────────────────────────────────────────
+  - description: "(Apps) Hammerspoon"
+    manipulators:
+      # prevent accidental quitting
+      - type: basic
+        from: { key_code: q, modifiers: { mandatory: [command] } }
+        to:
+          - { key_code: w, modifiers: [command] }
+        conditions:
+          - { type: frontmost_application_if, bundle_identifiers: [org.hammerspoon.Hammerspoon] }
+  #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) Ivory"
     manipulators:
       # FIX `o` opening wrong link

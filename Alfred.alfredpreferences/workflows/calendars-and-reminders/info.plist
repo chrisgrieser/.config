@@ -317,7 +317,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>~/.config/hammerspoon/system/cronjobs/daily/emojify-reminders.swift</string>
+				<string>~/.config/hammerspoon/system/cronjobs/hourly/emojify-reminders.swift</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
