@@ -24,6 +24,51 @@ local function swapMdListOrLine(dir)
 	vim.cmd(dir == "next" and ". move +1" or ". move -2")
 end
 
+local function addDocstring()
+	require( "nvim-treesitter-textobjects.move").goto_previous_start("@function.outer", "textobjects")
+
+	local ft = vim.bo.filetype
+	local indent = vim.api.nvim_get_current_line():match("^%s*")
+	local ln = vim.api.nvim_win_get_cursor(0)[1]
+
+	if ft == "python" then
+		indent = indent .. (" "):rep(4)
+		vim.api.nvim_buf_set_lines(0, ln, ln, false, { indent .. ('"'):rep(6) })
+		vim.api.nvim_win_set_cursor(0, { ln + 1, #indent + 3 })
+		vim.cmd.startinsert()
+	elseif ft == "javascript" then
+		vim.cmd.normal { "t)", bang = true } -- go to parameter, since cursor has to be on diagnostic for code action
+		vim.lsp.buf.code_action {
+			filter = function(action) return action.title == "Infer parameter types from usage" end,
+			apply = true,
+		}
+		-- goto docstring (deferred, so code action can finish first)
+		vim.defer_fn(function()
+			vim.api.nvim_win_set_cursor(0, { ln + 1, 0 })
+			vim.cmd.normal { "t)", bang = true }
+		end, 100)
+	elseif ft == "typescript" then
+		-- add TSDoc
+		vim.api.nvim_buf_set_lines(0, ln - 1, ln - 1, false, { indent .. "/**  */" })
+		vim.api.nvim_win_set_cursor(0, { ln, #indent + 4 })
+		vim.cmd.startinsert()
+	elseif ft == "lua" then
+		local paramLine = vim.api.nvim_get_current_line():match("function.*%((.*)%)$")
+		if not paramLine then return end
+		local params = vim.split(paramLine, ", ?")
+		local luadocLines = vim.iter(params)
+			:map(function(param) return ("%s---@param %s any"):format(indent, param) end)
+			:totable()
+		vim.api.nvim_buf_set_lines(0, ln - 1, ln - 1, false, luadocLines)
+		-- goto 1st param type & edit it
+		vim.api.nvim_win_set_cursor(0, { ln, #luadocLines[1] })
+		vim.cmd.normal { '"_ciw', bang = true }
+		vim.cmd.startinsert { bang = true }
+	else
+		vim.notify(ft .. " is not supported.", vim.log.levels.WARN, { title = "docstring" })
+	end
+end
+
 --------------------------------------------------------------------------------
 
 return {
@@ -116,7 +161,7 @@ return {
 		---COMMENTS---------------------------------------------------------------
 		-- only operator-pending to not conflict with selection-commenting
 		{ "q", select("@comment.outer"), mode = "o", desc = "󰆈 single comment" },
-
+		{ "qf", addDocstring, desc = "󰆈 add docstring" },
 		{
 			"cq",
 			function()

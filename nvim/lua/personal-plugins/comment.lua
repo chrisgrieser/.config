@@ -9,32 +9,24 @@ local config = {
 
 ---HELPERS----------------------------------------------------------------------
 
----@return string?
-local function getCommentstr()
-	local comStr = vim.bo.commentstring
-	if comStr == "" then
-		vim.notify("No commentstring for " .. vim.bo.ft, vim.log.levels.WARN, { title = "Comment" })
-		return
-	end
-	return comStr
-end
-
 function M.setupReplaceModeHelpersForComments()
 	vim.api.nvim_create_autocmd("ModeChanged", {
 		desc = "User: uppercase the line when leaving replace mode on a comment",
 		pattern = "r:*", -- left replace-mode
 		callback = function(ctx)
-			if config.ignoreReplaceModeHelpers[vim.bo[ctx.buf].ft] then return end
-			local line = vim.trim(vim.api.nvim_get_current_line())
+			if vim.list_contains(config.ignoreReplaceModeHelpers, vim.bo[ctx.buf].ft) then return end
+			local line = vim.api.nvim_get_current_line()
 			local comChars = vim.trim(vim.bo.commentstring:format(""))
-			if vim.startswith(line, comChars) then vim.cmd.normal { "gUU", bang = true } end
+			if vim.startswith(vim.trim(line), comChars) then
+				vim.api.nvim_set_current_line(line:upper())
+			end
 		end,
 	})
 	vim.api.nvim_create_autocmd("ModeChanged", {
 		desc = "User: automatically enter replace mode at label position",
 		pattern = "*:r", -- entered replace-mode
 		callback = function(ctx)
-			if config.ignoreReplaceModeHelpers[vim.bo[ctx.buf].ft] then return end
+			if vim.list_contains(config.ignoreReplaceModeHelpers, vim.bo[ctx.buf].ft) then return end
 			local line = vim.trim(vim.api.nvim_get_current_line())
 			local comChars = vim.trim(vim.bo.commentstring:format(""))
 			if vim.startswith(line, comChars) then
@@ -47,10 +39,9 @@ end
 ---COMMANDS---------------------------------------------------------------------
 
 ---add horizontal line with the language's comment syntax and correctly indented
----@param replaceModeLabel any|nil
+---@param replaceModeLabel? any
 function M.commentHr(replaceModeLabel)
-	local comStr = getCommentstr()
-	if not comStr then return end
+	local comStr = assert(vim.bo.commentstring, "Comment string not set for " .. vim.bo.ft)
 	local startLn = vim.api.nvim_win_get_cursor(0)[1]
 
 	-- determine indent
@@ -92,31 +83,8 @@ function M.commentHr(replaceModeLabel)
 	end
 end
 
----a comment header = comment on its own line that starts with an uppercase word
-function M.gotoCommentHeader()
-	local lines = vim.api.nvim_buf_get_lines(0, 0, -1, true)
-	local commentHeaders = {}
-	for ln = 1, #lines do
-		local comChars = vim.trim(vim.bo.commentstring:format(""))
-		-- at least 3 uppercase chars, to avoid words like `PR`
-		local header = lines[ln]:match("^%s*" .. vim.pesc(comChars) .. ".?(%u[%u%d%s%p][%u%d%s%p]+)")
-		if header then
-			header = header:gsub("%p*$", "") -- trailing punctuation = hr line
-			table.insert(commentHeaders, { text = header, ln = ln })
-		end
-	end
-	vim.ui.select(commentHeaders, {
-		prompt = "Comment Headers",
-		format_item = function(item) return item.text:sub(1, 1) .. item.text:sub(2):lower() end,
-	}, function(selection)
-		if not selection then return end
-		vim.api.nvim_win_set_cursor(0, { selection.ln, 0 })
-	end)
-end
-
 function M.duplicateLineAsComment()
-	local comStr = getCommentstr()
-	if not comStr then return end
+	local comStr = assert(vim.bo.commentstring, "Comment string not set for " .. vim.bo.ft)
 	local lnum, col = unpack(vim.api.nvim_win_get_cursor(0))
 	local curLine = vim.api.nvim_get_current_line()
 	local indent, content = curLine:match("^(%s*)(.*)")
@@ -125,62 +93,9 @@ function M.duplicateLineAsComment()
 	vim.api.nvim_win_set_cursor(0, { lnum + 1, col })
 end
 
--- simplified implementation of neogen.nvim
--- (reason: LSP usually provides better prefills for docstrings)
-function M.docstring()
-	local ok, tsMove = pcall(require, "nvim-treesitter-textobjects.move")
-	if not (ok and tsMove) then
-		vim.notify("`nvim-treesitter-textobjects` not installed.", vim.log.levels.WARN)
-		return
-	end
-	tsMove.goto_previous_start("@function.outer", "textobjects")
-
-	local ft = vim.bo.filetype
-	local indent = vim.api.nvim_get_current_line():match("^%s*")
-	local ln = vim.api.nvim_win_get_cursor(0)[1]
-
-	if ft == "python" then
-		indent = indent .. (" "):rep(4)
-		vim.api.nvim_buf_set_lines(0, ln, ln, false, { indent .. ('"'):rep(6) })
-		vim.api.nvim_win_set_cursor(0, { ln + 1, #indent + 3 })
-		vim.cmd.startinsert()
-	elseif ft == "javascript" then
-		vim.cmd.normal { "t)", bang = true } -- go to parameter, since cursor has to be on diagnostic for code action
-		vim.lsp.buf.code_action {
-			filter = function(action) return action.title == "Infer parameter types from usage" end,
-			apply = true,
-		}
-		-- goto docstring (deferred, so code action can finish first)
-		vim.defer_fn(function()
-			vim.api.nvim_win_set_cursor(0, { ln + 1, 0 })
-			vim.cmd.normal { "t)", bang = true }
-		end, 100)
-	elseif ft == "typescript" then
-		-- add TSDoc
-		vim.api.nvim_buf_set_lines(0, ln - 1, ln - 1, false, { indent .. "/**  */" })
-		vim.api.nvim_win_set_cursor(0, { ln, #indent + 4 })
-		vim.cmd.startinsert()
-	elseif ft == "lua" then
-		local paramLine = vim.api.nvim_get_current_line():match("function.*%((.*)%)$")
-		if not paramLine then return end
-		local params = vim.split(paramLine, ", ?")
-		local luadocLines = vim.iter(params)
-			:map(function(param) return ("%s---@param %s any"):format(indent, param) end)
-			:totable()
-		vim.api.nvim_buf_set_lines(0, ln - 1, ln - 1, false, luadocLines)
-		-- goto 1st param type & edit it
-		vim.api.nvim_win_set_cursor(0, { ln, #luadocLines[1] })
-		vim.cmd.normal { '"_ciw', bang = true }
-		vim.cmd.startinsert { bang = true }
-	else
-		vim.notify(ft .. " is not supported.", vim.log.levels.WARN, { title = "docstring" })
-	end
-end
-
 ---@param where? "eol"|"above"|"below"
 function M.addComment(where)
-	local comStr = getCommentstr()
-	if not comStr then return end
+	local comStr = assert(vim.bo.commentstring, "Comment string not set for " .. vim.bo.ft)
 	local lnum = vim.api.nvim_win_get_cursor(0)[1]
 
 	-- above/below: add empty line and move to it

@@ -51,8 +51,14 @@ keymap("n", "gE", "[d", { desc = "󰋽 Previous diagnostic", remap = true })
 keymap("n", "gm", "%", { desc = "󰅪 Goto match", remap = true })
 
 -- Open URL in file
--- stylua: ignore
-keymap("n", "<D-U>", function() require("personal-plugins.misc").openFirstUrlInBuffer() end, { desc = " Open URL in buffer" })
+keymap("n", "<D-U>", function()
+	local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+	for _, line in ipairs(lines) do
+		local url = line:match("%l+://[^%s%)%]}\"'`>]+")
+		if url then return vim.ui.open(url) end
+	end
+	vim.notify("No URL found in file.", vim.log.levels.WARN)
+end, { desc = " Open URL in buffer" })
 
 ---MARKS------------------------------------------------------------------------
 do
@@ -286,17 +292,16 @@ do
 	keymap("n", "guu", "guu") -- prevent previous keymap from overwriting `guu` (lowercase line)
 end
 
--- stylua: ignore start
-keymap("n", "qw", function() require("personal-plugins.comment").commentHr() end, { desc = "󰆈 Horizontal divider" })
-keymap("n", "qr", function() require("personal-plugins.comment").commentHr("replaceMode") end, { desc = "󰆈 Horizontal divider w/ label" })
-keymap("n", "wq", function() require("personal-plugins.comment").duplicateLineAsComment() end, { desc = "󰆈 Duplicate line as comment" })
-keymap("n", "qf", function() require("personal-plugins.comment").docstring() end, { desc = "󰆈 Function docstring" })
-keymap("n", "Q", function() require("personal-plugins.comment").addComment("eol") end, { desc = "󰆈 Add comment at EoL" })
-keymap("n", "qO", function() require("personal-plugins.comment").addComment("above") end, { desc = "󰆈 Add comment above" })
-keymap("n", "qo", function() require("personal-plugins.comment").addComment("below") end, { desc = "󰆈 Add comment below" })
-keymap("n", "gS", function() require("personal-plugins.comment").gotoCommentHeader() end, { desc = "󰆈 Goto comment header" })
-require("personal-plugins.comment").setupReplaceModeHelpersForComments()
--- stylua: ignore end
+do
+	local com = require("personal-plugins.comment")
+	keymap("n", "qw", com.commentHr, { desc = "󰆈 Divider" })
+	keymap("n", "qr", function() com.commentHr("replaceMode") end, { desc = "󰆈 Divider + label" })
+	keymap("n", "wq", com.duplicateLineAsComment, { desc = "󰆈 Duplicate line as comment" })
+	keymap("n", "Q", function() com.addComment("eol") end, { desc = "󰆈 Add comment at EoL" })
+	keymap("n", "qO", function() com.addComment("above") end, { desc = "󰆈 Add comment above" })
+	keymap("n", "qo", function() com.addComment("below") end, { desc = "󰆈 Add comment below" })
+	com.setupReplaceModeHelpersForComments()
+end
 
 ---LINE & CHARACTER MOVEMENT----------------------------------------------------
 keymap("n", "<Down>", "<cmd>. move +1<CR>==", { desc = "󰜮 Move line down" })
