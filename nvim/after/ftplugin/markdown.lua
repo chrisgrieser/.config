@@ -1,3 +1,7 @@
+local abbr = require("config.utils").bufAbbrev
+local bkeymap = require("config.utils").bufKeymap
+local qol = require("personal-plugins.md-qol")
+
 ---OPTIONS----------------------------------------------------------------------
 local optl = vim.opt_local
 
@@ -14,60 +18,56 @@ optl.listchars:append { multispace = "·" }
 vim.schedule(function() optl.formatoptions:append("t") end)
 
 ---ABBREVIATIONS----------------------------------------------------------------
-local abbr = require("config.utils").bufAbbrev
 abbr("->", "→")
 
----KEYMAPS----------------------------------------------------------------------
-local bkeymap = require("config.utils").bufKeymap
-local qol = require("personal-plugins.md-qol")
-
+---ADD TITLE TO URLS------------------------------------------------------------
 bkeymap("n", "p", function()
 	require("personal-plugins.md-qol").addTitleToUrlIfMarkdown("+")
 	return "p"
-end, { desc = " Paste (+ add title if URL)", expr = true })
-bkeymap("n", "<leader>cu", qol.addTitleToUrl, { desc = " Add title to URL" })
+end, { desc = "󰍔 Paste (+ add title if URL)", expr = true })
+bkeymap("n", "<leader>cu", qol.addTitleToUrl, { desc = "󰍔 Add title to URL" })
 
--- auto-bullet
-bkeymap("n", "o", function() qol.autoBullet("o") end, { desc = " Auto-bullet o" })
-bkeymap("n", "O", function() qol.autoBullet("O") end, { desc = " Auto-bullet O" })
-bkeymap("i", "<CR>", function() qol.autoBullet("<CR>") end, { desc = " Auto-bullet <CR>" })
+---AUTO-BULLET------------------------------------------------------------------
+bkeymap("n", "o", function() qol.autoBullet("o") end, { desc = "󰍔 Auto-bullet o" })
+bkeymap("n", "O", function() qol.autoBullet("O") end, { desc = "󰍔 Auto-bullet O" })
+bkeymap("i", "<CR>", function() qol.autoBullet("<CR>") end, { desc = "󰍔 Auto-bullet <CR>" })
 
--- formatting
+---FORMATTING-------------------------------------------------------------------
 bkeymap({ "n", "i" }, "<D-u>", qol.cycleList, { desc = "󰍔 Cycle list types" })
 bkeymap({ "n", "x", "i" }, "<D-k>", function() qol.wrap("mdlink") end, { desc = "󰍔 Link" })
 bkeymap({ "n", "x", "i" }, "<D-b>", function() qol.wrap("**") end, { desc = "󰍔 Bold" })
 bkeymap({ "n", "x", "i" }, "<D-i>", function() qol.wrap("*") end, { desc = "󰍔 Italic" })
+bkeymap({ "n", "x", "i" }, "<D-e>", function() qol.wrap("`") end, { desc = "󰍔 Inline code" })
 
--- headings
+---HEADINGS---------------------------------------------------------------------
 -- Jump to next/prev heading (`##` to skip H1 and comments in code-blocks)
-bkeymap("n", "<C-j>", [[/^##\+ .*<CR><cmd>nohlsearch<CR>]], { desc = " Next heading" })
-bkeymap("n", "<C-k>", [[?^##\+ .*<CR><cmd>nohlsearch<CR>]], { desc = " Prev heading" })
-
--- stylua: ignore
-bkeymap("n", "gx", qol.followMdlinkOrWikilink, { desc = " Follow URL/Wikilink" })
+bkeymap("n", "<C-j>", [[/^##\+ .*<CR><cmd>nohlsearch<CR>]], { desc = "󰍔 Next heading" })
+bkeymap("n", "<C-k>", [[?^##\+ .*<CR><cmd>nohlsearch<CR>]], { desc = "󰍔 Prev heading" })
 
 -- <D-h> remapped to <D-5>, since used by macOS PENDING https://github.com/neovide/neovide/issues/3099
-bkeymap({ "n", "i" }, "<D-5>", function() qol.incrementHeading(1) end, { desc = " Heading++" })
-bkeymap({ "n", "i" }, "<D-H>", function() qol.incrementHeading(-1) end, { desc = " Heading--" })
+bkeymap({ "n", "i" }, "<D-5>", function() qol.incrementHeading(1) end, { desc = "󰍔 Heading++" })
+bkeymap({ "n", "i" }, "<D-H>", function() qol.incrementHeading(-1) end, { desc = "󰍔 Heading--" })
+
+---MISC-------------------------------------------------------------------------
+bkeymap("n", "<leader>ep", qol.previewViaPandoc, { desc = "󰍔 Preview" })
+bkeymap("n", "gx", qol.followMdlinkOrWikilink, { desc = "󰍔 Follow URL/Wikilink" })
+
+-- `hyper` gets registered by neovide as `cmd+ctrl` (`<D-C-`)
+bkeymap({ "n", "i" }, "<D-C-e>", qol.codeBlockFromClipboard, { desc = "󰍔 Codeblock" })
+
+-- stylua: ignore
+bkeymap("n", "#", function() require("personal-plugins.hiraganafy")() end, { desc = "󰍔 Hiraganafy" })
+
+bkeymap("n", "<D-L>", function()
+	local path = vim.api.nvim_buf_get_name(0)
+	local uri = "obsidian://open?path=" .. vim.uri_encode(path)
+	vim.ui.open(uri)
+end, { desc = "󰍔 Open in Obsidian" })
 
 -- aliases frontmatter
 bkeymap("n", "<leader>ra", function()
 	local toInsert = { "aliases:", "  - " }
 	qol.insertFrontmatter(toInsert)
-end, { desc = " Add aliases frontmatter" })
-
-bkeymap("n", "<leader>ep", qol.previewViaPandoc, { desc = " Preview" })
-
--- `hyper` gets registered by neovide as `cmd+ctrl` (`<D-C-`)
-bkeymap({ "n", "i" }, "<D-C-e>", qol.codeBlockFromClipboard, { desc = " Codeblock" })
-
--- stylua: ignore
-bkeymap("n", "#", function() require("personal-plugins.hiraganafy")() end, { desc = " Hiraganafy" })
-
-bkeymap("n", "<D-L>", function ()
-	local path = vim.api.nvim_buf_get_name(0)
-	local uri = "obsidian://open?path=" .. vim.uri_encode(path)
-	vim.ui.open(uri)
-end, { desc = " Open in Obsidian" })
+end, { desc = "󰍔 Add aliases frontmatter" })
 
 --------------------------------------------------------------------------------
