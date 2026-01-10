@@ -27,9 +27,9 @@ function M.setupReplaceModeHelpersForComments()
 		pattern = "*:r", -- entered replace-mode
 		callback = function(ctx)
 			if vim.list_contains(config.ignoreReplaceModeHelpers, vim.bo[ctx.buf].ft) then return end
-			local line = vim.trim(vim.api.nvim_get_current_line())
+			local line = vim.api.nvim_get_current_line()
 			local comChars = vim.trim(vim.bo.commentstring:format(""))
-			if vim.startswith(line, comChars) then
+			if vim.startswith(vim.trim(line), comChars) then
 				vim.cmd.normal { "^" .. #comChars + 1 .. "l", bang = true }
 			end
 		end,
@@ -41,7 +41,7 @@ end
 ---add horizontal line with the language's comment syntax and correctly indented
 ---@param replaceModeLabel? any
 function M.commentHr(replaceModeLabel)
-	local comStr = assert(vim.bo.commentstring, "Comment string not set for " .. vim.bo.ft)
+	assert(vim.bo.commentstring ~= "", "Comment string not set for " .. vim.bo.ft)
 	local startLn = vim.api.nvim_win_get_cursor(0)[1]
 
 	-- determine indent
@@ -55,13 +55,13 @@ function M.commentHr(replaceModeLabel)
 
 	-- determine hr-length
 	local indentLength = vim.bo.expandtab and #indent or #indent * vim.bo.tabstop
-	local comStrLength = #(comStr:format(""))
+	local comStrLength = #(vim.bo.commentstring:format(""))
 	local textwidth = vim.o.textwidth > 0 and vim.o.textwidth or 80
 	local hrLength = textwidth - (indentLength + comStrLength)
 
 	-- construct HR
 	local hr = config.hrChar:rep(hrLength)
-	local hrWithComment = comStr:format(hr)
+	local hrWithComment = vim.bo.commentstring:format(hr)
 
 	-- filetype-specific considerations
 	if not vim.list_contains(config.formatterWantsPadding, vim.bo.ft) then
@@ -84,18 +84,18 @@ function M.commentHr(replaceModeLabel)
 end
 
 function M.duplicateLineAsComment()
-	local comStr = assert(vim.bo.commentstring, "Comment string not set for " .. vim.bo.ft)
+	assert(vim.bo.commentstring ~= "", "Comment string not set for " .. vim.bo.ft)
 	local lnum, col = unpack(vim.api.nvim_win_get_cursor(0))
 	local curLine = vim.api.nvim_get_current_line()
 	local indent, content = curLine:match("^(%s*)(.*)")
-	local commentedLine = indent .. comStr:format(content)
+	local commentedLine = indent .. vim.bo.commentstring:format(content)
 	vim.api.nvim_buf_set_lines(0, lnum - 1, lnum, false, { commentedLine, curLine })
 	vim.api.nvim_win_set_cursor(0, { lnum + 1, col })
 end
 
 ---@param where? "eol"|"above"|"below"
 function M.addComment(where)
-	local comStr = assert(vim.bo.commentstring, "Comment string not set for " .. vim.bo.ft)
+	assert(vim.bo.commentstring ~= "", "Comment string not set for " .. vim.bo.ft)
 	local lnum = vim.api.nvim_win_get_cursor(0)[1]
 
 	-- above/below: add empty line and move to it
@@ -107,12 +107,12 @@ function M.addComment(where)
 	end
 
 	-- determine comment behavior
-	local placeHolderAtEnd = comStr:find("%%s$") ~= nil
+	local placeHolderAtEnd = vim.bo.commentstring:find("%%s$") ~= nil
 	local line = vim.api.nvim_get_current_line()
-	local emptyLine = line == ""
 
 	-- if empty line, add indent of first non-blank line after cursor
 	local indent = ""
+	local emptyLine = line == ""
 	if emptyLine then
 		local i = lnum
 		local lastLine = vim.api.nvim_buf_line_count(0)
@@ -125,7 +125,7 @@ function M.addComment(where)
 	local newLine = emptyLine and indent or line .. spacing
 
 	-- write line
-	local comChars = vim.trim(comStr:format(""))
+	local comChars = vim.trim(vim.bo.commentstring:format(""))
 	if placeHolderAtEnd then comChars = comChars .. " " end
 	vim.api.nvim_set_current_line(newLine .. comChars)
 
