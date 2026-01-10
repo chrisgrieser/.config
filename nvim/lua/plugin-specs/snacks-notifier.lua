@@ -98,7 +98,7 @@ return {
 				or msg:find("^Error executing vim.schedule.*/_folding_range.lua:%d+")
 			if ignore then return end
 
-			if msg:find("^%[nvim%-treesitter/") then nOpts = { id = "treesitter-parser-update" } end
+			if vim.startswith(msg, "[nvim-treesitter/") then nOpts = { id = "treesitter-update" } end
 			Snacks.notifier(msg, lvl, nOpts)
 		end
 	end,

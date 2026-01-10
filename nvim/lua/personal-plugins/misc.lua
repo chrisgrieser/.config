@@ -72,7 +72,7 @@ function M.toggleOrIncrement()
 		local prevCursor = vim.api.nvim_win_get_cursor(0)
 		-- `iw` textobj does also work on punctuation only
 		vim.cmd.normal { '"_ciw' .. newWord, bang = true }
-		pcall(vim.api.nvim_win_set_cursor, 1, prevCursor)
+		pcall(vim.api.nvim_win_set_cursor, 0, prevCursor)
 	else -- b) increment
 		-- needs `:execute` to escape `<C-a>`
 		vim.cmd.execute([["normal! ]] .. vim.v.count1 .. [[\<C-a>"]])
@@ -101,11 +101,9 @@ end
 
 function M.toggleTitleCase()
 	local prevCursor = vim.api.nvim_win_get_cursor(0)
-
 	local cword = vim.fn.expand("<cword>")
 	local cmd = cword == cword:lower() and "guiwgUl" or "guiw"
 	vim.cmd.normal { cmd, bang = true }
-
 	vim.api.nvim_win_set_cursor(0, prevCursor)
 end
 
@@ -294,7 +292,7 @@ function M.scrollLspOrOtherWin(lines)
 end
 
 ---1. works with negative numbers or floats, with `,` or `.` as decimal separator
----2. does support thousands separators
+---2. does not support thousands separators
 function M.sumOfAllNumbersInBuf()
 	local text = table.concat(vim.api.nvim_buf_get_lines(0, 0, -1, false), "\n")
 	local sum = 0

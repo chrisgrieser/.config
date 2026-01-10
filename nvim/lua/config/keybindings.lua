@@ -126,6 +126,7 @@ keymap("i", "<D-t>", function() require("personal-plugins.auto-template-str").in
 -- Edits repeatable via `.`
 keymap("n", "<D-j>", '*N"_cgn', { desc = "󰆿 Repeatable edit (cword)" })
 keymap("x", "<D-j>", function()
+	assert(vim.fn.mode() == "v", "Only visual (character) mode.")
 	local selection = vim.fn.getregion(vim.fn.getpos("."), vim.fn.getpos("v"))[1]
 	vim.fn.setreg("/", "\\V" .. vim.fn.escape(selection, [[/\]]))
 	return '<Esc>"_cgn'
