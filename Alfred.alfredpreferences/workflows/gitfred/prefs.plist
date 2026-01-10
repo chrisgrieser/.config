@@ -24,8 +24,6 @@
 	<true/>
 	<key>restore_mtime</key>
 	<string>quick-partial</string>
-	<key>setup_remotes_on_fork</key>
-	<true/>
 	<key>sketchybar_trigger_name</key>
 	<string>update_github_notif</string>
 </dict>
