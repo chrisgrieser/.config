@@ -27,11 +27,16 @@ bkeymap("n", "p", function()
 end, { desc = " Paste (+ add title if URL)", expr = true })
 bkeymap("n", "<leader>cu", qol.addTitleToUrl, { desc = " Add title to URL" })
 
+-- auto-bullet
 bkeymap("n", "o", function() qol.autoBullet("o") end, { desc = " Auto-bullet o" })
 bkeymap("n", "O", function() qol.autoBullet("O") end, { desc = " Auto-bullet O" })
 bkeymap("i", "<CR>", function() qol.autoBullet("<CR>") end, { desc = " Auto-bullet <CR>" })
 
+-- formatting
 bkeymap({ "n", "i" }, "<D-u>", qol.cycleList, { desc = "󰍔 Cycle list types" })
+bkeymap({ "n", "x", "i" }, "<D-k>", function() qol.wrap("mdlink") end, { desc = "󰍔 Link" })
+bkeymap({ "n", "x", "i" }, "<D-b>", function() qol.wrap("**") end, { desc = "󰍔 Bold" })
+bkeymap({ "n", "x", "i" }, "<D-i>", function() qol.wrap("*") end, { desc = "󰍔 Italic" })
 
 -- headings
 -- Jump to next/prev heading (`##` to skip H1 and comments in code-blocks)

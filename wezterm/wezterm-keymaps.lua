@@ -49,6 +49,7 @@ M.keys = {
 
 	---BASIC KEYS----------------------------------------------------------------
 	{ key = "p", mods = "CMD", action = act.ActivateCommandPalette },
+	{ key = "+", mods = "CMD", action = act.IncreaseFontSize }, -- FIX not using `=`
 	{ key = "v", mods = "CTRL", action = act.SplitHorizontal }, -- SIC actually vertical
 	{ key = "w", mods = "CMD", action = act.CloseCurrentPane { confirm = false } }, -- pane, then tab
 	-- `cmd+n` should create new tab, not new window

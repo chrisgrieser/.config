@@ -151,7 +151,7 @@
         "language": [
           "query"
         ],
-        "path": "./query.json"
+        "path": "./project-specific/treesitter-query-files.json"
       }
     ]
   },

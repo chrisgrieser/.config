@@ -136,12 +136,9 @@ end, { desc = "󰆿 Repeatable edit (selection)", expr = true })
 keymap("n", "m", "J", { desc = "󰽜 Merge line up" })
 keymap("n", "M", "<cmd>. move +1<CR>kJ", { desc = "󰽜 Merge line down" }) -- `:move` preserves marks
 
--- Markdown syntax (useful to have in all filetypes for comments)
 -- stylua: ignore start
+-- Markdown inline comments (useful to have in all filetypes for comments)
 keymap({ "n", "x", "i" }, "<D-e>", function() require("personal-plugins.md-qol").wrap("`") end, { desc = " Inline code" })
-keymap({ "n", "x", "i" }, "<D-k>", function() require("personal-plugins.md-qol").wrap("mdlink") end, { desc = " Link" })
-keymap({ "n", "x", "i" }, "<D-b>", function() require("personal-plugins.md-qol").wrap("**") end, { desc = " Bold" })
-keymap({ "n", "x", "i" }, "<D-i>", function() require("personal-plugins.md-qol").wrap("*") end, { desc = " Italic" })
 
 -- Simple surrounds
 keymap("n", '"', function() require("personal-plugins.md-qol").wrap('"') end, { desc = " Surround" })
