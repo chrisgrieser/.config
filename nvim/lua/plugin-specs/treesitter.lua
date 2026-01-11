@@ -1,4 +1,3 @@
--- DOCS
 -- https://github.com/nvim-treesitter/nvim-treesitter/tree/main
 -- https://github.com/nvim-treesitter/nvim-treesitter/blob/main/SUPPORTED_LANGUAGES.md
 --------------------------------------------------------------------------------
@@ -22,7 +21,7 @@ local ensureInstalled = {
 	"xml", -- also used by .plist and .svg files, since they are essentially xml
 	"yaml",
 	"bibtex",
-	-- not `csv`, since the highlighting isn't very good
+	"csv", -- highlighting isn't very good though
 
 	-- CONTENT
 	"css",
