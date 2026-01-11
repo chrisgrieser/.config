@@ -78,7 +78,7 @@ do
 				local fileShort = file:gsub("%.%w+$", "")
 				local msg = "🕑 " .. fileShort .. (output ~= "" and ": " .. output or "")
 				if code ~= 0 then return u.notify("❌ " .. msg) end
-				print("✅ " .. msg)
+				print(msg)
 			end):start()
 			::continue::
 		end
