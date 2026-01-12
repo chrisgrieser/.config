@@ -79,14 +79,12 @@ local function getAltBuffer()
 	if listedBufs == 1 then return end
 
 	-- manually retrieving altbuf instead of `bufnr("#")` to avoid various
-	-- issues like: special buffer, altbuf being the current one, altbuf being
-	-- recently closed(= not listed), etc.
+	-- issues like special buffers, altbuf being the current one, altbuf being
+	-- recently closed (= not listed), etc.
 	table.sort(listedBufs, function(a, b) return a.lastused > b.lastused end)
 	local altBuf = vim.iter(listedBufs):find(function(buf)
 		local valid = vim.api.nvim_buf_is_valid(buf.bufnr)
-		local nonSpecial = vim.bo[buf.bufnr].buftype == ""
-			and vim.bo[buf.bufnr].buftype ~= "help"
-			and buf.name ~= ""
+		local nonSpecial = vim.bo[buf.bufnr].buftype == "" and buf.name ~= ""
 		local notCurrent = vim.api.nvim_get_current_buf() ~= buf.bufnr
 		return valid and nonSpecial and notCurrent
 	end)
@@ -96,7 +94,7 @@ local function getAltBuffer()
 end
 
 ---get the alternate oldfile, accounting for non-existing files
----@return string|nil oldfile; nil if none exists in all oldfiles
+---@return string? oldfile nil if none exists in all oldfiles
 ---@nodiscard
 local function getAltOldfile()
 	local curPath = vim.api.nvim_buf_get_name(0)
@@ -108,8 +106,8 @@ local function getAltOldfile()
 	end
 end
 
----@return string? filepath
----@return string? errmsg
+---@return string? filepath nil if error
+---@return string? errmsg nil if no error
 local function getMostChangedFile()
 	local gitRoot = vim.system({ "git", "rev-parse", "--show-toplevel" }):wait()
 	if gitRoot.code ~= 0 or not gitRoot.stdout then return nil, "Not in git repo." end
