@@ -35,10 +35,10 @@ local config = {
 local M = {}
 
 ---@param path string
----@param oneOff string[]
+---@param oneOf string[]
 ---@return boolean
-local function literalMatchesOneOf(path, oneOff)
-	return vim.iter(oneOff):any(function(p) return path:find(p, nil, true) ~= nil end)
+local function literalMatchesOneOf(path, oneOf)
+	return vim.iter(oneOf):any(function(p) return path:find(p, nil, true) ~= nil end)
 end
 
 ---@param msg string
@@ -150,16 +150,13 @@ local function getMostChangedFile()
 	if mostChangedFile.path then
 		return mostChangedFile.path, nil
 	else
-		return nil, "All changed files either ignored, deleted, or binaries."
+		return nil, "No changed file that is not ignored, deleted, or binary."
 	end
 end
 
 ---GOTO COMMANDS----------------------------------------------------------------
 function M.gotoAltFile()
-	if vim.bo.buftype ~= "" and vim.bo.buftype ~= "help" then
-		notify("Cannot do that in special buffer.", "warn")
-		return
-	end
+	if vim.bo.buftype ~= "" then return notify("Cannot do that in special buffer.", "warn") end
 
 	local altFile = getAltBuffer() or getAltOldfile()
 	if altFile then
@@ -171,10 +168,7 @@ end
 
 function M.gotoMostChangedFile()
 	local targetFile, errmsg = getMostChangedFile()
-	if errmsg then
-		notify(errmsg, "warn")
-		return
-	end
+	if errmsg then return notify(errmsg, "warn") end
 
 	local currentFile = vim.api.nvim_buf_get_name(0)
 	if targetFile == currentFile then
