@@ -136,8 +136,8 @@ end, { desc = "󰆿 Repeatable edit (selection)", expr = true })
 keymap("n", "m", "J", { desc = "󰽜 Merge line up" })
 keymap("n", "M", "<cmd>. move +1<CR>kJ", { desc = "󰽜 Merge line down" }) -- `:move` preserves marks
 
--- stylua: ignore start
 -- Markdown inline comments (useful to have in all filetypes for comments)
+-- stylua: ignore start
 keymap({ "n", "x", "i" }, "<D-e>", function() require("personal-plugins.md-qol").wrap("`") end, { desc = " Inline code" })
 
 -- Simple surrounds
