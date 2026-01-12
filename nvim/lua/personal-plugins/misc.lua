@@ -301,6 +301,7 @@ function M.sumOfAllNumbersInBuf()
 		sum = sum + tonumber(num)
 	end
 	vim.notify(sum, nil, { title = "Sum", icon = "∑" })
+	vim.fn.setreg("+", sum)
 end
 
 function M.inspectNodeAncestors()
