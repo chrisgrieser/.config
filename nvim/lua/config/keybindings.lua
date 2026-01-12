@@ -189,7 +189,7 @@ keymap("n", "zf", function() vim.opt.foldlevel = vim.v.count1 end, { desc = "
 
 ---YANKING----------------------------------------------------------------------
 
-do -- Sticky yank
+do -- STICKY YANK
 	keymap({ "n", "x" }, "y", function()
 		vim.b.cursorPreYank = vim.api.nvim_win_get_cursor(0)
 		return "y"
@@ -210,8 +210,7 @@ do -- Sticky yank
 	})
 end
 
--- Yankring
-do
+do -- YANKRING
 	-- When undoing the paste and then using `.`, will paste `"2p`, so `<D-p>...`
 	-- pastes all recent things and `<D-p>u.u.u.u.`, cycles through them
 	keymap("n", "<D-p>", '"1p', { desc = " Paste from yankring" })
@@ -362,20 +361,19 @@ keymap("c", "<D-Right>", "<C-e>", { desc = "Goto end of cmdline" })
 ---INSPECT & EVAL---------------------------------------------------------------
 keymap("n", "<leader>ii", vim.cmd.Inspect, { desc = "󱈄 Inspect at cursor" })
 keymap("n", "<leader>it", vim.cmd.InspectTree, { desc = " TS syntax tree" })
--- stylua: ignore
-keymap("n", "<leader>ia", function() require("personal-plugins.misc").inspectNodeAncestors() end, { desc = " Node ancestors" })
--- stylua: ignore
-keymap("n", "<leader>i+", function() require("personal-plugins.misc").sumOfAllNumbersInBuf() end, { desc = "∑ Sum of numbers in buffer" })
 keymap("n", "<leader>iT", "<cmd>checkhealth nvim-treesitter<CR>", { desc = " TS Parsers" })
+
+-- stylua: ignore start
+keymap("n", "<leader>ia", function() require("personal-plugins.misc").inspectNodeAncestors() end, { desc = " Node ancestors" })
+keymap("n", "<leader>i+", function() require("personal-plugins.misc").sumOfAllNumbersInBuf() end, { desc = "∑ Sum of numbers in buffer" })
+keymap("n", "<leader>iL", function() vim.cmd.edit(vim.lsp.log.get_filename()) end, { desc = "󱂅 LSP log" })
+keymap("n", "<leader>ib", function() require("personal-plugins.misc").inspectBuffer() end, { desc = "󰽙 Buffer info" })
+-- stylua: ignore end
+
 keymap("n", "<leader>id", function()
 	local diag = vim.diagnostic.get_next()
 	vim.notify(vim.inspect(diag), nil, { ft = "lua" })
 end, { desc = "󰋽 Next diagnostic" })
-
--- stylua: ignore start
-keymap("n", "<leader>iL", function() vim.cmd.edit(vim.lsp.log.get_filename()) end, { desc = "󱂅 LSP log" })
--- stylua: ignore
-keymap("n", "<leader>ib", function() require("personal-plugins.misc").inspectBuffer() end, { desc = "󰽙 Buffer info" })
 
 keymap({ "n", "x" }, "<leader>ee", function()
 	local selection = vim.fn.mode() == "n" and ""
@@ -409,7 +407,6 @@ keymap({ "n", "x" }, "<CR>", function() require("personal-plugins.magnet").gotoA
 keymap({ "n", "x" }, "<D-CR>", function() require("personal-plugins.magnet").gotoMostChangedFile() end, { desc = "󰊢 Goto most changed file" })
 -- stylua: ignore end
 
--- close window or buffer
 keymap({ "n", "x", "i" }, "<D-w>", function()
 	vim.cmd("silent! update")
 	local winClosed = pcall(vim.cmd.close) -- fails on last window
