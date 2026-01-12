@@ -44,21 +44,20 @@ local function setSignForMark(mark)
 		})
 	end
 
-	if bufnr ~= 0 then
+	local fileAlreadyOpened = bufnr ~= 0
+	if fileAlreadyOpened then
 		setExtmark(bufnr, row, mark)
-		return
+	else
+		vim.api.nvim_create_autocmd("BufReadPost", {
+			desc = "User(once): Add signs for mark " .. mark,
+			callback = function(ctx)
+				if ctx.file == path then
+					setExtmark(ctx.buf, row, mark)
+					return true -- delete this autocmd
+				end
+			end,
+		})
 	end
-
-	-- setup setting signs for marks that are in files that are not opened yet
-	vim.api.nvim_create_autocmd("BufReadPost", {
-		desc = "User(once): Add signs for mark " .. mark,
-		callback = function(ctx)
-			if ctx.file == path then
-				setExtmark(ctx.buf, row, mark)
-				return true -- delete this autocmd
-			end
-		end,
-	})
 end
 
 ---if cursor is at a mark, delete it, otherwise set it
