@@ -253,8 +253,8 @@ end, { desc = " Paste at EoL" })
 keymap("i", "<D-v>", function()
 	local reg = "+"
 	vim.fn.setreg(reg, vim.trim(vim.fn.getreg(reg))) -- trim
-	require("personal-plugins.md-qol").addTitleToUrlIfMarkdown(reg)
 	if vim.fn.mode() == "R" then return "<C-r>" .. reg end
+	require("personal-plugins.md-qol").addTitleToUrlIfMarkdown(reg)
 	return "<C-g>u<C-r><C-o>" .. reg -- `<C-g>u` adds undopoint before, `<C-r><C-o>` skips auto-indent
 end, { desc = " Paste", expr = true })
 
