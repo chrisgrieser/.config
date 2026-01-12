@@ -63,6 +63,7 @@ end, { desc = " Open URL in buffer" })
 ---MARKS------------------------------------------------------------------------
 do
 	local marks = require("personal-plugins.marks")
+
 	marks.loadSigns()
 	if vim.g.whichkeyAddSpec then vim.g.whichkeyAddSpec { "<leader>m", group = "󰃀 Marks" } end
 
