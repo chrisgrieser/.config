@@ -366,9 +366,9 @@ keymap("n", "<leader>iT", "<cmd>checkhealth nvim-treesitter<CR>", { desc = " 
 
 -- stylua: ignore start
 keymap("n", "<leader>ia", function() require("personal-plugins.misc").inspectNodeAncestors() end, { desc = " Node ancestors" })
-keymap("n", "<leader>i+", function() require("personal-plugins.misc").sumOfAllNumbersInBuf() end, { desc = "∑ Sum of numbers in buffer" })
 keymap("n", "<leader>iL", function() vim.cmd.edit(vim.lsp.log.get_filename()) end, { desc = "󱂅 LSP log" })
 keymap("n", "<leader>ib", function() require("personal-plugins.misc").inspectBuffer() end, { desc = "󰽙 Buffer info" })
+keymap("n", "<leader>i+", function() require("personal-plugins.misc").sumOfAllNumbersInBuf() end, { desc = "∑ Sum of numbers in buffer" })
 -- stylua: ignore end
 
 keymap("n", "<leader>id", function()
