@@ -393,13 +393,13 @@ end, { desc = " Yank last ex-cmd" })
 
 ---WINDOWS & SPLITS-------------------------------------------------------------
 keymap({ "n", "v", "i" }, "<C-CR>", "<C-w>w", { desc = " Cycle windows" })
-keymap({ "n", "x" }, "<C-v>", "<cmd>vertical split #<CR>", { desc = " Split altfile" })
-keymap({ "n", "x" }, "<D-W>", vim.cmd.only, { desc = " Close other windows" })
+keymap({ "n", "x", "i" }, "<C-v>", "<cmd>vertical split #<CR>", { desc = " Split altfile" })
+keymap({ "n", "x", "i" }, "<D-W>", vim.cmd.only, { desc = " Close other windows" })
 
-keymap("n", "<C-Up>", "<C-w>3-")
-keymap("n", "<C-Down>", "<C-w>3+")
-keymap("n", "<C-Left>", "<C-w>5<")
-keymap("n", "<C-Right>", "<C-w>5>")
+keymap({ "n", "v", "i" }, "<C-Up>", "<C-w>3-")
+keymap({ "n", "v", "i" }, "<C-Down>", "<C-w>3+")
+keymap({ "n", "v", "i" }, "<C-Left>", "<C-w>5<")
+keymap({ "n", "v", "i" }, "<C-Right>", "<C-w>5>")
 
 ---BUFFERS & FILES--------------------------------------------------------------
 

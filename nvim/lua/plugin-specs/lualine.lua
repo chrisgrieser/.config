@@ -34,7 +34,7 @@ local function hasSplit()
 	return #splits > 1
 end
 
--- not using lualins's component since it requires `web-devicons`
+-- not using lualine's component since it requires `web-devicons`
 local function addFiletypeIcon(filename)
 	if vim.wo.diff and vim.bo.buftype == "nowrite" then return " Diff" end
 	if filename == "[No Name]" and vim.bo.ft ~= "" then filename = vim.bo.ft end -- fix name for special buffers
