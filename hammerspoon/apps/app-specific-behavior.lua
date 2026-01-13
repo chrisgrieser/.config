@@ -78,7 +78,8 @@ M.aw_masto = aw.new(function(appName, event, masto)
 			local isMediaWin = win:title():find("^Image") or win:title():find("^Ivory$")
 			local frontNotAlfred = hs.application.frontmostApplication():name() ~= "Alfred"
 			if #masto:allWindows() > 1 and isMediaWin and frontNotAlfred then
-				hs.eventtap.keyStroke({}, "escape", 1, masto) -- `win:close()` does not work
+				pcall(function() win:close() end)
+				hs.eventtap.keyStroke({}, "escape", 1, masto) -- `win:close()` sometimes does not work
 			end
 		end
 
