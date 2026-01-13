@@ -5,7 +5,7 @@ local M = {}
 ---@param mode string|string[]
 ---@param lhs string
 ---@param rhs string|function
----@param opts? { desc?: string, unique?: boolean, remap?: boolean, silent?:boolean }
+---@param opts? vim.keymap.set.Opts
 function M.uniqueKeymap(mode, lhs, rhs, opts)
 	if not opts then opts = {} end
 
@@ -27,7 +27,7 @@ end
 ---@param mode string|string[]
 ---@param lhs string
 ---@param rhs string|function
----@param opts? {desc?: string, unique?: boolean, buffer?: number|boolean, remap?: boolean, silent?:boolean, nowait?: boolean}
+---@param opts? vim.keymap.set.Opts
 function M.bufKeymap(mode, lhs, rhs, opts)
 	opts = vim.tbl_extend("force", { buffer = true, silent = true, nowait = true }, opts or {})
 	vim.keymap.set(mode, lhs, rhs, opts)

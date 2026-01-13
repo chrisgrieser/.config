@@ -192,20 +192,20 @@ keymap("n", "zf", function() vim.opt.foldlevel = vim.v.count1 end, { desc = "
 
 do -- STICKY YANK
 	keymap({ "n", "x" }, "y", function()
-		vim.b.cursorPreYank = vim.api.nvim_win_get_cursor(0)
+		vim.b.preYankCursor = vim.api.nvim_win_get_cursor(0)
 		return "y"
 	end, { expr = true })
 	keymap("n", "Y", function()
-		vim.b.cursorPreYank = vim.api.nvim_win_get_cursor(0)
+		vim.b.preYankCursor = vim.api.nvim_win_get_cursor(0)
 		return "y$"
 	end, { expr = true, unique = false }) -- non-unique, since nvim default
 
 	vim.api.nvim_create_autocmd("TextYankPost", {
 		desc = "User: Sticky yank",
 		callback = function()
-			if vim.v.event.operator == "y" and vim.v.event.regname == "" and vim.b.cursorPreYank then
-				vim.api.nvim_win_set_cursor(0, vim.b.cursorPreYank)
-				vim.b.cursorPreYank = nil
+			if vim.v.event.operator == "y" and vim.b.preYankCursor then
+				vim.api.nvim_win_set_cursor(0, vim.b.preYankCursor)
+				vim.b.preYankCursor = nil
 			end
 		end,
 	})
@@ -383,7 +383,7 @@ keymap({ "n", "x" }, "<leader>ee", function()
 end, { expr = true, desc = "󰢱 Eval lua expr" })
 
 keymap("n", "<leader>ey", function()
-	local cmd = vim.fn.getreg(":")
+	local cmd = vim.trim(vim.fn.getreg(":"))
 	local lastExcmd = cmd:gsub("^lua ", ""):gsub("^= ?", "")
 	if lastExcmd == "" then return vim.notify("Nothing to copy", vim.log.levels.TRACE) end
 	local syntax = vim.startswith(cmd, "lua") and "lua" or "vim"
