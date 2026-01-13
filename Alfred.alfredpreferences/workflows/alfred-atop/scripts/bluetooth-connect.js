@@ -15,8 +15,13 @@ function run(argv) {
 	const device = devices.find((d) => d.addressString.js === selectedDeviceAddress);
 	if (!device) return "⚠️ Unknown error.";
 
-	// SIC function call without `()`, due to being Objective-C?
-	device.isConnected ? device.closeConnection : device.openConnection;
+	if (device.isConnected) {
+		// SIC function call without `()`, due to being Objective-C?
+		device.closeConnection
+	} else {
+		// SIC function call works when null is passed as argument, I don't understand why
+		device.openConnection(null)
+	}
 
 	// notification
 	const action = device.isConnected ? "🔴 Disconnected from" : "🟢 Connected to";
