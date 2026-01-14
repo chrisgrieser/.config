@@ -314,6 +314,8 @@ local function getTitleForUrl(url)
 		:gsub(" · GitHub$", "")
 		:gsub("&amp;", "&")
 		:gsub("&#x27;", "'")
+		:gsub("%[", "\\[") -- escape for markdown
+		:gsub("%]", "\\]")
 	return title
 end
 
