@@ -247,7 +247,7 @@ keymap("n", "P", function()
 end, { desc = " Paste at EoL" })
 
 -- insert mode paste
--- 1. trim if register is charwise
+-- 1. trim if register
 -- 2. add undopoint before the paste
 -- 3. skip auto-indent
 keymap("i", "<D-v>", function()
