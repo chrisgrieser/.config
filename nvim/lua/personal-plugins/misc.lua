@@ -294,7 +294,10 @@ end
 ---1. works with negative numbers or floats, with `,` or `.` as decimal separator
 ---2. does not support thousands separators
 function M.sumOfAllNumbersInBuf()
-	local text = table.concat(vim.api.nvim_buf_get_lines(0, 0, -1, false), "\n")
+	local mode = vim.fn.mode()
+	local lines = mode == "n" and vim.api.nvim_buf_get_lines(0, 0, -1, false)
+		or vim.fn.getregion(vim.fn.getpos("."), vim.fn.getpos("v"), { type = mode })
+	local text = table.concat(lines, "\n")
 	local sum = 0
 	for digits in text:gmatch("%-?%d+[,.]?%d*") do
 		local num = digits:gsub(",", ".") -- `tonumber` expects `.` as decimal separator
