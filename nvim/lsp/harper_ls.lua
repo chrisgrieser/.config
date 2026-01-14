@@ -11,6 +11,7 @@ return {
 		["harper-ls"] = {
 			excludePatterns = { -- PENDING https://github.com/Automattic/harper/issues/2339
 				vim.env.HOME .. "/Library/Mobile Documents/**", -- anything in iCloud
+				vim.env.HOME .. "/Documents/**", -- mostly German documents
 				vim.env.HOME .. "/phd-data-analysis/**",
 				vim.env.HOME .. "/writing-vault/**", -- reports pandoc citations as spelling errors, etc.
 				vim.g.notesDir .. "/**", -- too much German
