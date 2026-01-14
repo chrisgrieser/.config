@@ -99,7 +99,7 @@ require("lazy").setup {
 			-- Disable unused builtin plugins from neovim
 			-- stylua: ignore
 			disabled_plugins = {
-				"rplugin", -- needed when using `:UpdateRemotePlugins` (e.g. magma.nvim)
+				"rplugin", -- do not disable when using `:UpdateRemotePlugins` (needed by some plugins)
 				"netrwPlugin", "tutor", "health", "tohtml", "gzip",
 				"zipPlugin", "tarPlugin", "osc52",
 			},
