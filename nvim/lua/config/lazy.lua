@@ -43,7 +43,8 @@ require("lazy").setup {
 		fallback = true, -- …and if not, fallback to fetching from GitHub
 	},
 	install = {
-		colorscheme = { "habamax" }, -- load during installation at startup
+		-- load one of these during installation at startup
+		colorscheme = { vim.g.darkColor, vim.g.lightColor, "habamax" },
 	},
 	git = {
 		log = { "--since=7 days ago" }, -- `:Lazy log` shows commits since last x days
