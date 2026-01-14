@@ -15,7 +15,7 @@ mp4-movie = "IINA"
 web = "Brave Browser"
 magnet = "Transmission"
 mailto = "Brave Browser"
-# INFO to make Gmail the mailto handler and allow it.
+# INFO to make Gmail the mailto handler
 # 1. open brave://settings/handlers?search=protocol+handler
 # 2. open gmail: https://mail.google.com/
 # 3. in address bar, find prompt to allow gmail to handle mailto
