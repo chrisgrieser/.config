@@ -300,40 +300,44 @@ end
 
 ---@param url string
 ---@return string placeholder
+---@async
 local function getTitleForUrl(url)
 	assert(vim.fn.executable("curl") == 1, "`curl` not found.")
-	local placeholder = " fetching"
+	local placeholder = "fetching…"
 	local bufnr = vim.api.nvim_get_current_buf()
 
-	local function replacePlaceholder(with)
-		local lines = vim.api.nvim_buf_get_lines(bufnr, 0, 1, false)
-		for ln, line in ipairs(lines) do
-			local placeholderPos = lines[ln]:find(placeholder, nil, true)
-			if placeholderPos then
-				local updatedLine = line:gsub(placeholder, vim.pesc(with))
-				vim.api.nvim_buf_set_lines(bufnr, ln - 1, ln, false, { updatedLine })
-				return
-			end
-		end
-	end
+	vim.system(
+		{ "curl", "--silent", "--location", url },
+		{},
+		vim.schedule_wrap(function(out)
+			if out.code ~= 0 then vim.notify(out.stderr, vim.log.levels.ERROR) end
+			local title = vim.trim(out.stdout:match("<title.->(.-)</title>") or "")
+			title = title -- cleanup
+				:gsub("[\n\r]+", " ")
+				:gsub("^GitHub %- ", "")
+				:gsub(" · GitHub$", "")
+				:gsub("&amp;", "&")
+				:gsub("&#x27;", "'")
+				:gsub("%[", "\\[") -- escape for markdown
+				:gsub("%]", "\\]")
+			if title == "" then vim.notify("No title found.") end
 
-	vim.system({ "curl", "--silent", "--location", url }, {}, function(out)
-		if out.code ~= 0 then
-			vim.notify(out.stderr, vim.log.levels.ERROR)
-			replacePlaceholder("failed to fetch")
-			return
-		end
-		local title = vim.trim(out.stdout:match("<title.->(.-)</title>") or "")
-		title = title -- cleanup
-			:gsub("[\n\r]+", " ")
-			:gsub("^GitHub %- ", "")
-			:gsub(" · GitHub$", "")
-			:gsub("&amp;", "&")
-			:gsub("&#x27;", "'")
-			:gsub("%[", "\\[") -- escape for markdown
-			:gsub("%]", "\\]")
-		replacePlaceholder(title)
-	end)
+			local lines = vim.api.nvim_buf_get_lines(bufnr, 0, -1, false)
+			local row, col
+			for lnum, line in ipairs(lines) do
+				col = line:find(placeholder, nil, true)
+				row = lnum
+				if col then break end
+			end
+			assert(col, "Placeholder not found.")
+			local updatedLine = lines[row]:gsub(vim.pesc(placeholder), vim.pesc(title))
+			vim.api.nvim_buf_set_lines(bufnr, row - 1, row, false, { updatedLine })
+			if title == "" and vim.api.nvim_get_current_buf() == bufnr then
+				vim.api.nvim_win_set_cursor(0, { row, col - 1 })
+				vim.cmd.startinsert()
+			end
+		end)
+	)
 
 	return placeholder
 end
@@ -372,20 +376,9 @@ function M.addTitleToUrlIfMarkdown(reg)
 	local url = clipb:match("^%l+://%S+$") -- not ending with `)` to not match mdlinks
 	if not url then return end
 
-	local title = getTitleForUrl(url)
-	if not title then return end
-	local mdlink = ("[%s](%s)"):format(title, url)
+	local placeholder = getTitleForUrl(url)
+	local mdlink = ("[%s](%s)"):format(placeholder, url)
 	vim.fn.setreg(reg, mdlink)
-
-	-- scroll left & move cursor to start of title
-	vim.defer_fn(function()
-		vim.cmd.normal { "zH", bang = true } -- scroll fully left
-		local line = vim.api.nvim_get_current_line()
-		local urlStart = line:find(mdlink, nil, true)
-		local row = vim.api.nvim_win_get_cursor(0)[1]
-		vim.api.nvim_win_set_cursor(0, { row, urlStart })
-		if title == "" then vim.schedule(vim.cmd.startinsert) end
-	end, 1) -- deferred to act after the paste
 end
 
 --------------------------------------------------------------------------------
