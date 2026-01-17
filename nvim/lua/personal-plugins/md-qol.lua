@@ -302,21 +302,22 @@ end
 ---@return string?
 local function getTitleForUrl(url)
 	assert(vim.fn.executable("curl") == 1, "`curl` not found.")
-	local out = vim.system({ "curl", "--silent", "--location", url }):wait()
-	if out.code ~= 0 then
-		vim.notify(out.stderr, vim.log.levels.ERROR)
-		return
-	end
-	local title = vim.trim(out.stdout:match("<title.->(.-)</title>") or "")
-	title = title -- cleanup
-		:gsub("[\n\r]+", " ")
-		:gsub("^GitHub %- ", "")
-		:gsub(" · GitHub$", "")
-		:gsub("&amp;", "&")
-		:gsub("&#x27;", "'")
-		:gsub("%[", "\\[") -- escape for markdown
-		:gsub("%]", "\\]")
-	return title
+	vim.system({ "curl", "--silent", "--location", url }, {}, function(out)
+		if out.code ~= 0 then
+			vim.notify(out.stderr, vim.log.levels.ERROR)
+			return
+		end
+		local title = vim.trim(out.stdout:match("<title.->(.-)</title>") or "")
+		title = title -- cleanup
+			:gsub("[\n\r]+", " ")
+			:gsub("^GitHub %- ", "")
+			:gsub(" · GitHub$", "")
+			:gsub("&amp;", "&")
+			:gsub("&#x27;", "'")
+			:gsub("%[", "\\[") -- escape for markdown
+			:gsub("%]", "\\]")
+		return title
+	end)
 end
 
 function M.addTitleToUrl()
