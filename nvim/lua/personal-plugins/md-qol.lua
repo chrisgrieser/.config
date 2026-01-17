@@ -299,12 +299,28 @@ end
 --------------------------------------------------------------------------------
 
 ---@param url string
----@return string?
+---@return string placeholder
 local function getTitleForUrl(url)
 	assert(vim.fn.executable("curl") == 1, "`curl` not found.")
+	local placeholder = " fetching"
+	local bufnr = vim.api.nvim_get_current_buf()
+
+	local function replacePlaceholder(with)
+		local lines = vim.api.nvim_buf_get_lines(bufnr, 0, 1, false)
+		for ln, line in ipairs(lines) do
+			local placeholderPos = lines[ln]:find(placeholder, nil, true)
+			if placeholderPos then
+				local updatedLine = line:gsub(placeholder, vim.pesc(with))
+				vim.api.nvim_buf_set_lines(bufnr, ln - 1, ln, false, { updatedLine })
+				return
+			end
+		end
+	end
+
 	vim.system({ "curl", "--silent", "--location", url }, {}, function(out)
 		if out.code ~= 0 then
 			vim.notify(out.stderr, vim.log.levels.ERROR)
+			replacePlaceholder("failed to fetch")
 			return
 		end
 		local title = vim.trim(out.stdout:match("<title.->(.-)</title>") or "")
@@ -316,8 +332,10 @@ local function getTitleForUrl(url)
 			:gsub("&#x27;", "'")
 			:gsub("%[", "\\[") -- escape for markdown
 			:gsub("%]", "\\]")
-		return title
+		replacePlaceholder(title)
 	end)
+
+	return placeholder
 end
 
 function M.addTitleToUrl()
@@ -327,20 +345,14 @@ function M.addTitleToUrl()
 	local url = line:match([[<?%l+://%S+>?]])
 	if vim.endswith(url, ")") then return vim.notify("Already Markdown link.") end
 	local innerUrl = url:gsub(">$", ""):gsub("^<", "") -- bare URL enclosed in `<>` due to MD034
-	local title = getTitleForUrl(innerUrl)
-	if not title then return end
+	local placeholder = getTitleForUrl(innerUrl)
+	if not placeholder then return end
 
 	local urlStart, urlEnd = line:find(url, nil, true) -- `find` has literal search, `gsub` does not
 	local updatedLine = line:sub(1, urlStart - 1)
-		.. ("[%s](%s)"):format(title, innerUrl)
+		.. ("[%s](%s)"):format(placeholder, innerUrl)
 		.. line:sub(urlEnd + 1)
 	vim.api.nvim_set_current_line(updatedLine)
-	if title == "" then
-		vim.notify("No title found.", vim.log.levels.WARN)
-		local row = vim.api.nvim_win_get_cursor(0)[1]
-		vim.api.nvim_win_set_cursor(0, { row, urlStart + 1 })
-		vim.schedule(vim.cmd.startinsert)
-	end
 end
 
 ---updates any url in the register to a mdlink if in a Markdown buffer

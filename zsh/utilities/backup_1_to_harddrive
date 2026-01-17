@@ -83,7 +83,12 @@ device_name="$(scutil --get ComputerName)"
 backup_dest="$volume/Backup_$device_name"
 mkdir -p "$backup_dest"
 cd "$backup_dest" || return 1
-echo "$(date '+%Y-%m-%d %H:%M:%S') Backup to $volume started" >> "$logpath_on_mac"
+
+echo -n "Backup: $(date '+%Y-%m-%d %H:%M'), $volume -- " >> "$logpath_on_mac"
+
+# if exiting non-zero or aborting, add the missing line break
+trap '[[ "$?" -ne 0 ]] && echo "not completed" >> "$logpath_on_mac"' EXIT
+
 do_backup
 
 #───────────────────────────────────────────────────────────────────────────────
@@ -139,16 +144,15 @@ fi
 # LOG & NOTIFY
 
 _pretty_header "Report" "special"
-
 if [[ -z "$errors" ]]; then
 	print "✅ Backup completed: $volume"
 	"$ZDOTDIR/notificator" --title "Backup" --message "✅ completed" --sound "Blow"
-	log_msg="$(date '+%Y-%m-%d %H:%M:%S') Backup to $volume completed"
+
+	echo "completed: $(date '+%H:%M')" >> "$logpath_on_mac"
+	echo "Backup: $(date '+%Y-%m-%d %H:%M')" >> "$backup_dest/last_backup.log"
 else
 	print "\e[1;31m$errors\e[0m"
 	"$ZDOTDIR/notificator" --title "Backup" --message "⚠️ Errors occurred." --sound "Basso"
-	log_msg="$(date '+%Y-%m-%d %H:%M:%S') Backup to $volume had errors"
-fi
 
-echo "$log_msg" >> "$logpath_on_mac"
-echo "$log_msg" >> "$backup_dest/last_backup.log"
+	echo "had errors: $(date '+%H:%M')" >> "$logpath_on_mac"
+fi
