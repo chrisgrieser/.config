@@ -303,7 +303,8 @@ end
 ---@async
 local function getTitleForUrl(url)
 	assert(vim.fn.executable("curl") == 1, "`curl` not found.")
-	local placeholder = "fetching…"
+	vim.b.fetch_count = (vim.b.fetch_count or 0) + 1
+	local placeholder = "fetching title #" .. vim.b.fetch_count
 	local bufnr = vim.api.nvim_get_current_buf()
 
 	vim.system(
