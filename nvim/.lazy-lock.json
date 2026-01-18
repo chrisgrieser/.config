@@ -13,7 +13,7 @@
   "neocodeium": { "branch": "main", "commit": "bfe790d78e66adaa95cb50a8c75c64a752336e9c" },
   "nightfox.nvim": { "branch": "main", "commit": "ba47d4b4c5ec308718641ba7402c143836f35aa9" },
   "nui.nvim": { "branch": "main", "commit": "de740991c12411b663994b2860f1a4fd0937c130" },
-  "nvim-chainsaw": { "branch": "main", "commit": "4021f1b81e5d3550d690aae3fa0f7090648a2c8e" },
+  "nvim-chainsaw": { "branch": "main", "commit": "dcdfff845e03ed6ff91f4c1ff1527f8ad7b7b2f9" },
   "nvim-dap": { "branch": "master", "commit": "cdfd55a133f63228c55f91378f12908cb2a78ded" },
   "nvim-dap-virtual-text": { "branch": "master", "commit": "fbdb48c2ed45f4a8293d0d483f7730d24467ccb6" },
   "nvim-genghis": { "branch": "main", "commit": "29b050ec541b70f472c5870402b863f349fad0c6" },

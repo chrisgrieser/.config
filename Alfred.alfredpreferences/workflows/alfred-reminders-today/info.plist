@@ -564,6 +564,7 @@
 				<string>which -a "swift" &gt;&amp;2
 swift --version &gt;&amp;2
 xcode-select --version &gt;&amp;2
+xcode-select --print-path &gt;&amp;2
 ./scripts/select-reminders.js</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
@@ -1098,7 +1099,8 @@ xcode-select --version &gt;&amp;2
 				<string>which -a "swift" &gt;&amp;2
 swift --version &gt;&amp;2
 xcode-select --version &gt;&amp;2
-./scripts/add-reminder.swift</string>
+xcode-select --print-path &gt;&amp;2
+./scripts/add-reminder.swift "$*"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -2056,7 +2058,7 @@ to set a hotkey to show reminders due today</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>3.14.1_2</string>
+	<string>3.14.1_3</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>

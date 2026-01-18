@@ -4,7 +4,9 @@
 -- BYOK: https://github.com/milanglacier/minuet-ai.nvim
 -- Copilot plugin (subscription): https://github.com/zbirenbaum/copilot.lua#setup-and-configuration
 -- Copilot LSP (subscription), requires nvim 0.12 https://github.com/github/copilot-language-server-release
--- Specific key: https://github.com/4tyone/snek-nvim
+-- 
+-- Cerebras: https://github.com/4tyone/snek-nvim
+-- Cerebras: https://github.com/jim-at-jibba/nvim-stride
 --------------------------------------------------------------------------------
 
 return {
