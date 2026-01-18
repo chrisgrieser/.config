@@ -75,10 +75,14 @@ M.pathw_desktop = pathw(home .. "/Desktop/", function(paths, _)
 			if success then u.notify("✅ Calendar data backed up.") end
 
 		---BANKING----------------------------------------------------------------
-		elseif name:find("[%d-]_Kontoauszug_%d.*%.pdf$") or name:find(".*_zu_Depot_%d.*%.pdf$") then
+		elseif
+			name:find("[%d-]_Kontoauszug_%d.*%.pdf$")
+			or name:find(".*_zu_Depot_%d.*%.pdf$")
+			or name:find(".*_Festgeldkonto%.pdf$")
+		then
 			local year = name:match("^%d%d%d%d")
 			if year then
-				local folder = name:find("Kontoauszug") and "DKB Geldkonten" or "DKB Depot"
+				local folder = name:find("Depo") and "DKB Depot" or "DKB Geldkonten"
 				-- stylua: ignore
 				local bankPath = ("%s/Documents/Finanzen/Vermögen (DKB)/%s/%s"):format(home, folder, year)
 				success, errmsg = hs.fs.mkdir(bankPath) -- create directory in case of new year

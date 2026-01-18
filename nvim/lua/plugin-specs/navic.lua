@@ -20,7 +20,7 @@ return {
 			"<leader>yb",
 			function()
 				local rawdata = require("nvim-navic").get_data()
-				if not rawdata or #rawdata == 0 then return end
+				if not rawdata or #rawdata == 0 then return vim.notify("No breadcrumbs") end
 				local breadcrumbs = ""
 				for _, v in pairs(rawdata) do
 					breadcrumbs = breadcrumbs .. v.name .. "."

@@ -7,8 +7,8 @@ let semaphore = DispatchSemaphore(value: 0)
 
 // Alfred environment variables
 guard CommandLine.arguments.count > 1 else {
-	print("❌\n", stderr)
-	exit(0)
+	print("❌\nNo input argument provided.")
+	exit(1)
 }
 let input = CommandLine.arguments[1].trimmingCharacters(in: .whitespacesAndNewlines)
 let reminderList = ProcessInfo.processInfo.environment["reminder_list"]!
