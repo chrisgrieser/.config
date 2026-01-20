@@ -74,6 +74,15 @@ M.pathw_desktop = pathw(home .. "/Desktop/", function(paths, _)
 			success, errmsg = os.rename(path, backupFolder .. "/Calendar/" .. name)
 			if success then u.notify("✅ Calendar data backed up.") end
 
+		---RECEIPTS---------------------------------------------------------------
+		elseif name:find("Rechnung_" .. ("%d"):rep(16) .. "_" .. ("%d"):rep(10)) then
+			-- Vodafone
+			local year = os.date("%Y")
+			-- stylua: ignore
+			local receiptPath = ("%s/Documents/Wohnung/laufende Kosten/Vodafone/%s/"):format(home, year)
+			success, errmsg = hs.fs.mkdir(receiptPath)
+			u.defer(1, function() os.rename(path, receiptPath .. "/" .. name) end) -- delay ensures folder is created
+			u.openUrlInBg(receiptPath)
 		---BANKING----------------------------------------------------------------
 		elseif
 			name:find("[%d-]_Kontoauszug_%d.*%.pdf$")
@@ -82,7 +91,7 @@ M.pathw_desktop = pathw(home .. "/Desktop/", function(paths, _)
 		then
 			local year = name:match("^%d%d%d%d")
 			if year then
-				local folder = name:find("Depo") and "DKB Depot" or "DKB Geldkonten"
+				local folder = name:find("Depot") and "DKB Depot" or "DKB Geldkonten"
 				-- stylua: ignore
 				local bankPath = ("%s/Documents/Finanzen/Vermögen (DKB)/%s/%s"):format(home, folder, year)
 				success, errmsg = hs.fs.mkdir(bankPath) -- create directory in case of new year
