@@ -69,17 +69,6 @@ require("lazy").setup {
 				end,
 				desc = " Open issue/commit",
 			},
-			["!"] = {
-				function(plugin)
-					local opts = { title = "Inspect " .. plugin.name, ft = "lua", icon = "󱈄" }
-					vim.notify(vim.inspect(plugin), nil, opts)
-				end,
-				desc = "󱈄 Inspect Plugin",
-			},
-			-- remove these from the keymap hints shown with `?`
-			["<localleader>i"] = false,
-			["<localleader>t"] = false,
-			["<localleader>l"] = false,
 		},
 	},
 	checker = {
@@ -116,10 +105,10 @@ require("lazy.view.config").keys.details = "<Tab>"
 
 --------------------------------------------------------------------------------
 -- KEYMAPS FOR NVIM TRIGGERING LAZY
-local keymap = vim.keymap.set
-keymap("n", "<leader>pp", require("lazy").sync, { desc = "󰒲 Lazy sync", unique = true })
-keymap("n", "<leader>pl", require("lazy").home, { desc = "󰒲 Lazy home", unique = true })
-keymap("n", "<leader>pi", require("lazy").install, { desc = "󰒲 Lazy install", unique = true })
+local keymap = require("config.utils").uniqueKeymap
+keymap("n", "<leader>pp", require("lazy").sync, { desc = "󰒲 Lazy sync" })
+keymap("n", "<leader>pl", require("lazy").home, { desc = "󰒲 Lazy home" })
+keymap("n", "<leader>pi", require("lazy").install, { desc = "󰒲 Lazy install" })
 
 --------------------------------------------------------------------------------
 -- TEST FOR DUPLICATE KEYS on every startup
