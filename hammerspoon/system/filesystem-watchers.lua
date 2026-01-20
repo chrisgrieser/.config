@@ -29,7 +29,7 @@ M.pathw_desktop = pathw(home .. "/Desktop/", function(paths, _)
 
 		-- REMOVE ALFREDWORKFLOWS & ICAL
 		if (ext == "alfredworkflow" or ext == "ics") and isDownloaded then
-			-- delay, since Apple Calendar needs the file to exist while adding it
+			-- delay, since Apple Calendar/Alfred need the file to exist while adding it
 			u.defer(60, function() os.remove(path) end)
 
 		-- ADD BIBTEX ENTRIES TO LIBRARY
@@ -104,20 +104,6 @@ M.pathw_desktop = pathw(home .. "/Desktop/", function(paths, _)
 			-- parent condition prevents downloads of apps in nested folders to be moved
 			local gameFolder = home .. "/Library/Mobile Documents/com~apple~CloudDocs/Apps/Games/"
 			success, errmsg = os.rename(path, gameFolder .. name)
-
-		---AUTO-INSTALL OBSIDIAN ALPHA--------------------------------------------
-		elseif name:find("%.asar%.gz$") and isDownloaded then
-			hs.execute(([[
-				cd %q || exit 1
-				mv obsidian-*.*.*.asar.gz "$HOME/Library/Application Support/obsidian/"
-				cd "$HOME/Library/Application Support/obsidian/"
-				rm obsidian-*.*.*.asar
-				gunzip obsidian-*.*.*.asar.gz
-				killall Obsidian
-				while pgrep -xq "Obsidian" ; do sleep 0.1; done
-				open -a "Obsidian"
-			]]):format(home .. "/Desktop/"))
-			u.closeBrowserTabsWith("https://cdn.discordapp.com/attachments")
 		end
 
 		---NOTIFY-----------------------------------------------------------------
