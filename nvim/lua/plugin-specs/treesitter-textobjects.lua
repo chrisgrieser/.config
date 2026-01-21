@@ -7,23 +7,6 @@ local function select(textobj)
 	end
 end
 
----If in a markdown list, swap the list item up/down, if not move the line
----up/down instead. This is useful for lists with sub-items, or for lists which
----span multiple lines due to hard-wrapping.
----Requires `; extends \n(list_item) @md_list_item` in `queries/markdown/textobjects.scm`
----@param dir "next"|"previous"
-local function swapMdListOrLine(dir)
-	local node = vim.treesitter.get_node()
-	while node do
-		if node:type() == "list_item" then
-			require("nvim-treesitter-textobjects.swap")["swap_" .. dir]("@md_list_item")
-			return
-		end
-		node = node:parent()
-	end
-	vim.cmd(dir == "next" and ". move +1" or ". move -2")
-end
-
 local function addDocstring()
 	require( "nvim-treesitter-textobjects.move").goto_previous_start("@function.outer", "textobjects")
 
@@ -112,8 +95,6 @@ return {
 		-- `@md_section` is a custom object defined in `./queries/markdown/textobjects.scm`
 		{ "ä", function() require("nvim-treesitter-textobjects.swap").swap_next("@md_section") end, ft = "markdown", desc = "󰍔 Swap section" },
 		{ "Ä", function() require("nvim-treesitter-textobjects.swap").swap_previous("@md_section") end, ft = "markdown", desc = "󰍔 Swap section" },
-		{ "<Down>", function() swapMdListOrLine("next") end, ft = "markdown", desc = "󰍔 Move line/list-item down" },
-		{ "<Up>", function() swapMdListOrLine("previous") end, ft = "markdown", desc = "󰍔 Move line/list-item up" },
 		-- stylua: ignore end
 
 		---TEXT OBJECTS-----------------------------------------------------------
