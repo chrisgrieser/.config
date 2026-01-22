@@ -37,7 +37,7 @@ cask "hammerspoon", postinstall: 'defaults write org.hammerspoon.Hammerspoon MJC
 cask "karabiner-elements"
 cask "microsoft-word"
 cask "neovide-app"
-cask "obsidian"
+cask "obsidian", greedy: true # greedy for installer version
 cask "replacicon"
 cask "signal"
 cask "slack"

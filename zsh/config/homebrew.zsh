@@ -6,10 +6,6 @@ export HOMEBREW_DISPLAY_INSTALL_TIMES=1 # also serves as summary what was instal
 export HOMEBREW_NO_ANALYTICS=1
 export HOMEBREW_NO_ENV_HINTS=1
 
-# Obsidian: to also update installer version
-# Word: since we unininstall the MS auto-installer via `brew bundle cleanup`
-export HOMEBREW_UPGRADE_GREEDY_CASKS="obsidian microsoft-word"
-
 alias bi='brew install'
 alias bu='brew uninstall --zap'
 alias br='brew reinstall'
