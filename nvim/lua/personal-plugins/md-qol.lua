@@ -228,8 +228,8 @@ function M.cycleList()
 		if list:find("[*+-] ") and not list:find("%- %[") then return indent .. "1. " end -- bullet -> number
 		return indent -- number -> none
 	end)
-	-- none -> bullet
-	if updated == curLine then updated = curLine:gsub("^(%s*)(.*)", "%1- %2") end
+	-- none/heading -> bullet
+	if updated == curLine then updated = curLine:gsub("^(%s*)#* ?(.*)", "%1- %2") end
 
 	vim.api.nvim_set_current_line(updated)
 	local diff = #updated - #curLine

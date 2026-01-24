@@ -162,8 +162,8 @@ function cycleListTypes() {
 		if (list.startsWith("- [")) return indent + "1. "; // task -> number
 		return indent; // number -> none
 	});
-	// none -> bullet
-	if (updatedLine === curLine) updatedLine = curLine.replace(/^(\s*)(.*)/, "$1- $2");
+	// none/heading -> bullet
+	if (updatedLine === curLine) updatedLine = curLine.replace(/^(\s*)(?:#+ )?(.*)/, "$1- $2");
 
 	editor.setLine(lnum, updatedLine);
 	const diff = updatedLine.length - curLine.length;
