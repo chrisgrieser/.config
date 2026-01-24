@@ -9,11 +9,12 @@ on run argv
 	tell application "Finder"
 		activate
 
-		if ((count Finder windows) = 0) then return "No Window open"
+		if ((count Finder windows) = 0) then return "No window open"
 		set targetFolder to (target of Finder window 1 as alias)
 
 		set sourceItem to (itemPath as POSIX file)
 		move sourceItem to targetFolder with replacing
+		return -- return nothing, so Alfred notification is not triggered
 
 	end tell
 end run
