@@ -25,7 +25,7 @@ function M.autoSetBrightness()
 		or ambient > 1 and 0.6
 		or 0.5
 
-	print(("💡 ambient brightness: %.1f -> target: %s"):format(ambient, target))
+	print(("💡 ambient brightness: %.1f -> setting brightness to %s"):format(ambient, target))
 	local iMacDisplay = require("win-management.window-utils").iMacDisplay
 	iMacDisplay:setBrightness(target)
 end
