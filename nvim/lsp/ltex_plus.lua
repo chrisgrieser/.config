@@ -4,6 +4,19 @@
 ---@type vim.lsp.Config
 return {
 	filetypes = { "markdown" },
+	root_dir = function(bufnr, on_dir)
+		-- do not load in specific repos (there is no `ltexignore` to do this)
+		local pathsToIgnore = {
+			vim.env.HOME .. "/phd-data-analysis/",
+			vim.g.notesDir,
+		}
+		local filepath = vim.api.nvim_buf_get_name(bufnr)
+		local ignore = vim.iter(pathsToIgnore):any(function(p) return vim.startswith(filepath, p) end)
+		if ignore then return end
+
+		local rootMarkers = { ".git" }
+		on_dir(vim.fs.root(bufnr, rootMarkers))
+	end,
 	settings = {
 		ltex = {
 			language = "auto", -- also per-file via yaml header: `lang: de-DE` https://ltex-plus.github.io/ltex-plus/advanced-usage.html#set-language-in-markdown-with-yaml-front-matter
