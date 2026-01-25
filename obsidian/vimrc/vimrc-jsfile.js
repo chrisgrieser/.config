@@ -136,17 +136,19 @@ function gotoLastLinkInFile() {
 
 /** h1 -> h2, h2 -> h3, etc. */
 /** @param {1|-1} dir */
-function headingIncrementor(dir) {
+function incrementHeading(dir) {
 	const { line: lnum, ch: col } = editor.getCursor();
 	const curLine = editor.getLine(lnum);
-	const cleanLine = curLine.replace(/^- |\*\*|__/g, ""); // remove other md formatting
 
-	let updatedLine = cleanLine.replace(/^#* /, (match) => {
+	let updatedLine = curLine.replace(/^#* /, (match) => {
 		if (dir === -1 && match !== "# ") return match.slice(1);
 		if (dir === 1 && match !== "###### ") return "#" + match;
 		return "";
 	});
-	if (updatedLine === cleanLine) updatedLine = (dir === 1 ? "## " : "###### ") + cleanLine;
+	if (updatedLine === curLine) {
+		const noEmphasis = curLine.replace(/^[*_][*_]?|[*_][*_]?$/g, "")
+		updatedLine = (dir === 1 ? "# " : "###### ") + noEmphasis;
+	}
 
 	editor.setLine(lnum, updatedLine);
 	const diff = updatedLine.length - curLine.length;
@@ -175,7 +177,7 @@ function showAllTasks() {
 	const allTasks = editor
 		.getValue()
 		.split("\n")
-		.filter((line) => line.match(/^\s*- \[[x ]\]/))
+		.filter((line) => line.match(/^\s*- \[[x ]\] /))
 		.map((line) => (line.length > maxLen ? `${line.slice(0, maxLen)}…` : line));
 	const header = allTasks.length > 1 ? `${allTasks.length} tasks:\n` : "";
 	new Notice(header + allTasks.join("\n"), 0);

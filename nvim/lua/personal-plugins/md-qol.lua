@@ -139,7 +139,10 @@ function M.incrementHeading(dir)
 		if dir == 1 and match ~= "###### " then return "#" .. match end
 		return ""
 	end)
-	if updated == curLine then updated = (dir == 1 and "## " or "###### ") .. curLine end
+	if updated == curLine then
+		local noEmphasis = curLine:gsub("^[*_][*_]?", ""):gsub("[*_][*_]?$", "")
+		updated = (dir == 1 and "# " or "###### ") .. noEmphasis
+	end
 
 	vim.api.nvim_set_current_line(updated)
 	local diff = #updated - #curLine
@@ -224,10 +227,17 @@ function M.cycleList()
 	local lnum, col = unpack(vim.api.nvim_win_get_cursor(0))
 	local curLine = vim.api.nvim_get_current_line()
 
-	local updated = curLine:gsub("^(%s*)([%d.*+-]+ )", function(indent, list)
-		if list:find("[*+-] ") and not list:find("%- %[") then return indent .. "1. " end -- bullet -> number
-		return indent -- number -> none
-	end)
+	local updated = curLine
+		:gsub("^(%s*)([%d.*+-]+ )", function(indent, list)
+			local isTask = curLine:find("^%s*[*+-] %[[x ]%]")
+			if isTask then return indent .. list end
+			if list:find("[*+-] ") then return indent .. "1. " end -- bullet -> number
+			return indent -- number -> none
+		end)
+		:gsub("^%s*[*+-] %[[x ]%] ", function(task)
+			local toggledTask = task:gsub("%[([x ])%]", { x = "[ ]", [" "] = "[x]" })
+			return toggledTask
+		end)
 	-- none/heading -> bullet
 	if updated == curLine then updated = curLine:gsub("^(%s*)#* ?(.*)", "%1- %2") end
 

@@ -186,10 +186,10 @@ nnoremap <Left> dlhhp
 
 " h1 -> h2, h2 -> h3, etc.
 " <M-h> = cmd+h
-exmap headingIncrement jsfile Meta/vimrc-jsfile.js { headingIncrementor(1) }
+exmap headingIncrement jsfile Meta/vimrc-jsfile.js { incrementHeading(1) }
 nnoremap <M-h> :headingIncrement<CR>
 inoremap <M-h> <Esc>:headingIncrement<CR>a
-exmap headingDecrement jsfile Meta/vimrc-jsfile.js { headingIncrementor(-1) }
+exmap headingDecrement jsfile Meta/vimrc-jsfile.js { incrementHeading(-1) }
 nnoremap <M-S-h> :headingDecrement<CR>
 inoremap <M-S-h> <Esc>:headingDecrement<CR>a
 
