@@ -75,9 +75,8 @@ end
 local function enableLsps()
 	local installedPacks = require("mason-registry").get_installed_packages()
 	local lspConfigNames = vim.iter(installedPacks):fold({}, function(acc, pack)
-		Chainsaw(pack) -- 🪚
+		if pack.name == "markdown-oxide" then return acc end -- ignore
 		table.insert(acc, pack.spec.neovim and pack.spec.neovim.lspconfig)
-		if pack.name == "markdown_oxide" then return acc end -- ignore
 		return acc
 	end)
 	vim.lsp.enable(lspConfigNames)

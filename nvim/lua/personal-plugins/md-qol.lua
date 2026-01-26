@@ -78,7 +78,7 @@ end
 
 ---@param key "o"|"O"|"<CR>"
 function M.autoBullet(key)
-	assert(key == "o" or key == "O" or key == "<CR>", "key must be `o`, `O`, or `<CR>`")
+	assert(key == "o" or key == "O" or key == "<CR>", "`autoBullet()` only accepts `o`, `O`, or `<CR>`")
 	local row, col = unpack(vim.api.nvim_win_get_cursor(0))
 	local indent, continued = "", ""
 	local ln = row
@@ -132,7 +132,7 @@ end
 
 ---@param dir 1|-1
 function M.incrementHeading(dir)
-	assert(dir == 1 or dir == -1, "dir must be `1` or `-1`")
+	assert(dir == 1 or dir == -1, "`incrementHeading()` only accepts `1` or `-1`")
 	local lnum, col = unpack(vim.api.nvim_win_get_cursor(0))
 	local curLine = vim.api.nvim_get_current_line()
 
@@ -222,8 +222,9 @@ function M.followMdlinkOrWikilink()
 		-- `vim.lsp.buf.definition` requires that cursor is on the link
 		local targetCol = line:find(wikilink, nil, true)
 		vim.api.nvim_win_set_cursor(0, { ln, targetCol - 1 })
-		local hasGotoDefinitionProvider = vim.lsp.get_clients { bufnr = 0, method = "textDocument/definition" }[1]
-		assert(hasGotoDefinitionProvider, "No LSP client supports `textDocument/definition`.")
+		local hasDefinitionProvider =
+			vim.lsp.get_clients({ bufnr = 0, method = "textDocument/definition" })[1]
+		assert(hasDefinitionProvider, "No LSP client supporting `textDocument/definition` found.")
 		vim.lsp.buf.definition() -- requires marksman, zk, or markdown-oxide
 	end
 end
