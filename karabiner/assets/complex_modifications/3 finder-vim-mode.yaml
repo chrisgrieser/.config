@@ -9,6 +9,7 @@ anchors:
       - &finder-app { type: frontmost_application_if, bundle_identifiers: [^com\.apple\.finder$] }
       - &is-German-keyboard { type: input_source_if, input_sources: [language: ^de$] }
       - &not-German-keyboard { type: input_source_unless, input_sources: [language: ^de$] }
+
       - &is-insert-mode { type: variable_if, name: FINDER_INSERT_MODE, value: true }
       - &not-insert-mode { type: variable_unless, name: FINDER_INSERT_MODE, value: true }
       - &is-find-mode { type: variable_if, name: FINDER_FIND_MODE, value: true }
@@ -23,21 +24,25 @@ anchors:
       - &insert-notice
         set_notification_message: { id: insert-notice, text: "Finder Vim Mode\n\n✏️ INSERT" }
       - &remove-insert-notice { set_notification_message: { id: insert-notice, text: "" } }
+
       - &enter-find-mode { set_variable: { name: FINDER_FIND_MODE, value: true } }
       - &leave-find-mode { set_variable: { name: FINDER_FIND_MODE, value: false } }
       - &find-notice
         set_notification_message: { id: find-notice, text: "Finder Vim Mode\n\n🔎 FIND" }
       - &remove-find-notice { set_notification_message: { id: find-notice, text: "" } }
-      - &remove-move-notice { set_notification_message: { id: move-notice, text: "" } }
-      - &move-notice
-        set_notification_message: { id: move-notice, text: "Finder Vim Mode\n\n✂️ Move active" }
+
       - &start-move { set_variable: { name: FINDER_MOVE_ACTIVE, value: true } }
       - &end-move { set_variable: { name: FINDER_MOVE_ACTIVE, value: false } }
+      - &move-notice
+        set_notification_message: { id: move-notice, text: "Finder Vim Mode\n\n✂️ Move active" }
+      - &remove-move-notice { set_notification_message: { id: move-notice, text: "" } }
+
       - &start-menu { set_variable: { name: FINDER_MENU_ACTIVE, value: true } }
       - &end-menu { set_variable: { name: FINDER_MENU_ACTIVE, value: false } }
-      - &remove-menu-notice { set_notification_message: { id: menu-notice, text: "" } }
       - &menu-notice
         set_notification_message: { id: menu-notice, text: "Finder Vim Mode\n\n➡️ Menu Mode" }
+      - &remove-menu-notice { set_notification_message: { id: menu-notice, text: "" } }
+
       - &sound-for-tagging
         shell_command: |
           [[ -z "$FINDER_VIM_MODE_NO_SOUND" ]] &&
@@ -199,6 +204,7 @@ rules:
           - *leave-insert-mode
           - *remove-menu-notice
           - *end-menu
+        conditions: [*finder-app]
       #─────────────────────────────────────────────────────────────────────────
       #─────────────────────────────────────────────────────────────────────────
       # ABORT VARIOUS MODES
