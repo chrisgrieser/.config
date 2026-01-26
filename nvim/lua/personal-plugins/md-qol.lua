@@ -78,6 +78,7 @@ end
 
 ---@param key "o"|"O"|"<CR>"
 function M.autoBullet(key)
+	assert(key == "o" or key == "O" or key == "<CR>", "key must be `o`, `O`, or `<CR>`")
 	local row, col = unpack(vim.api.nvim_win_get_cursor(0))
 	local indent, continued = "", ""
 	local ln = row
@@ -131,6 +132,7 @@ end
 
 ---@param dir 1|-1
 function M.incrementHeading(dir)
+	assert(dir == 1 or dir == -1, "dir must be `1` or `-1`")
 	local lnum, col = unpack(vim.api.nvim_win_get_cursor(0))
 	local curLine = vim.api.nvim_get_current_line()
 
@@ -140,7 +142,9 @@ function M.incrementHeading(dir)
 		return ""
 	end)
 	if updated == curLine then
+		-- for MD036: no-emphasis-as-heading https://github.com/rvben/rumdl/blob/main/docs/md036.md
 		local noEmphasis = curLine:gsub("^[*_][*_]?", ""):gsub("[*_][*_]?$", "")
+
 		updated = (dir == 1 and "# " or "###### ") .. noEmphasis
 	end
 
@@ -191,7 +195,7 @@ function M.followMdlinkOrWikilink()
 	while not (mdlink or wikilink or url) do
 		ln = ln + 1
 		if ln > totalLines or ln > row + maxForward then
-			local msg = ("Could not find URL or wikilink within %d lines."):format(maxForward)
+			local msg = ("Could not find URL, mdlink, or wikilink within %d lines."):format(maxForward)
 			vim.notify(msg, vim.log.levels.WARN)
 			return
 		end
@@ -218,6 +222,8 @@ function M.followMdlinkOrWikilink()
 		-- `vim.lsp.buf.definition` requires that cursor is on the link
 		local targetCol = line:find(wikilink, nil, true)
 		vim.api.nvim_win_set_cursor(0, { ln, targetCol - 1 })
+		local hasGotoDefinitionProvider = vim.lsp.get_clients { bufnr = 0, method = "textDocument/definition" }[1]
+		assert(hasGotoDefinitionProvider, "No LSP client supports `textDocument/definition`.")
 		vim.lsp.buf.definition() -- requires marksman, zk, or markdown-oxide
 	end
 end
@@ -234,8 +240,8 @@ function M.cycle(type)
 			local isTask = curLine:find("^%s*[*+-] %[[ x-]%] ")
 			if isTask then return indent .. list end
 			if list:find("[*+-] ") then return indent .. "1. " end -- bullet -> number
-			if list:find("[*+-] ") then return indent end -- number -> none
-			return indent
+			if list:find("%d+%. ") then return indent end -- number -> none
+			return indent .. list -- edge cases caught by initial pattern, like `1-1` at start of line
 		end)
 		if updated == curLine then -- none/heading/task -> bullet
 			updated = curLine
@@ -243,12 +249,12 @@ function M.cycle(type)
 				:gsub("^#+ ", "") -- remove heading
 				:gsub("^(%s*)(.*)", "%1- %2") -- add bullet
 		end
-	else
+	elseif type == "task" then
 		updated = curLine:gsub("^%s*[*+-] %[[ x-]%] ", function(task)
 			return task:gsub("%[[ x-]%]", {
 				["[ ]"] = "[x]",
 				["[x]"] = "[-]",
-				["[-]"] = "[ ]", -- `- [-]` pending task (set via render-markdown.nvim)
+				["[-]"] = "[ ]", -- `- [-]` is a pending task (set via render-markdown.nvim)
 			})
 		end)
 		if updated == curLine then -- none/bullet/number -> task
@@ -257,6 +263,8 @@ function M.cycle(type)
 				:gsub("^(%s*)[*+-] ", "%1") -- remove bullet
 				:gsub("^(%s*)(.*)", "%1- [ ] %2") -- add open task
 		end
+	else
+		error(("Unknown type for `.cycle()`: `%s`"):format(type))
 	end
 
 	vim.api.nvim_set_current_line(updated)
@@ -330,7 +338,7 @@ end
 ---@return string placeholder
 ---@async
 local function getTitleForUrl(url)
-	assert(vim.fn.executable("curl") == 1, "`curl` not found.")
+	assert(vim.fn.executable("curl") == 1, "`curl` not found")
 	vim.b.fetch_count = (vim.b.fetch_count or 0) + 1
 	local placeholder = " fetching title #" .. vim.b.fetch_count
 	local bufnr = vim.api.nvim_get_current_buf()
@@ -347,7 +355,7 @@ local function getTitleForUrl(url)
 				:gsub(" · GitHub$", "")
 				:gsub("&amp;", "&")
 				:gsub("&#x27;", "'")
-				:gsub("%[", "\\[") -- escape for markdown
+				:gsub("%[", "\\[") -- escape for mdlink `[]()`
 				:gsub("%]", "\\]")
 			if title == "" then vim.notify("No title found.") end
 
@@ -358,7 +366,7 @@ local function getTitleForUrl(url)
 				row = lnum
 				if col then break end
 			end
-			assert(col, "Placeholder not found.")
+			assert(col, "Placeholder not found, it has likely been changed.")
 			local updatedLine = lines[row]:gsub(vim.pesc(placeholder), vim.pesc(title))
 			vim.api.nvim_buf_set_lines(bufnr, row - 1, row, false, { updatedLine })
 			if title == "" and vim.api.nvim_get_current_buf() == bufnr then
@@ -392,8 +400,9 @@ end
 ---@param reg '"'|"+"|string
 ---@return nil
 function M.addTitleToUrlIfMarkdown(reg)
-	-- GUARD
+	-- GUARD silently instead of assert, since it could be used for all paste commands
 	if vim.bo.ft ~= "markdown" or vim.bo.buftype ~= "" then return end
+
 	local node = vim.treesitter.get_node()
 	if node and node:type() == "code_fence_content" then return end
 	if node and node:type() == "html_block" then return end
