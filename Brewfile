@@ -54,7 +54,7 @@ cask "font-jetbrains-mono-nerd-font"
 cask "glance-chamburr", postinstall: "xattr -rd com.apple.quarantine /Applications/Glance.app; qlmanage -r; sed -i '' 's/font-size: [0-9][0-9]px/font-size: 20px/' /Applications/Glance.app/Contents/PlugIns/QLPlugin.appex/Contents/Resources/shared-main.css"
 
 # for languagetool browser extension; see https://dev.languagetool.org/http-server
-brew "languagetool", postinstall: "sleep 1 && brew services start languagetool"
+brew "languagetool", postinstall: "sleep 1 ; brew services start languagetool"
 
 # For Alfred Pass workflow
 brew "pinentry-mac", postinstall: "defaults write org.gpgtools.common DisableKeychain -bool yes"
@@ -65,6 +65,7 @@ device = `scutil --get ComputerName`
 if device.include?("Home")
 	cask "bettertouchtool"
 	cask "catch"
+	cask "ausweisapp" # pairing with phone app only works in private wifi
 	brew "yt-dlp" ; brew "ffmpeg" # `ffmpeg` recommended for `yt-dlp`
 end
 if device.include?("Home") or device.include?("Office")
