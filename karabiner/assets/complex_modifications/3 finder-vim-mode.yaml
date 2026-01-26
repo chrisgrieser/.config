@@ -205,6 +205,9 @@ rules:
           - *remove-menu-notice
           - *end-menu
         conditions: [*finder-app]
+      # Theoretically, the same applies to `cmd+tab`, but I cannot figure out
+      # how to replicate the behavior of only triggering on key-up of the `cmd`
+      # so properly emulate the `cmd+tab` behavior.
       #─────────────────────────────────────────────────────────────────────────
       #─────────────────────────────────────────────────────────────────────────
       # ABORT VARIOUS MODES

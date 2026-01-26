@@ -44,7 +44,7 @@ function M.setDarkMode(toMode)
 
 	-- sketchybar
 	-- delay so sketchybar picks up on system mode change
-	u.defer(0.4, function() hs.execute(u.exportPath .. "sketchybar --reload") end)
+	u.defer(1, function() hs.execute(u.exportPath .. "sketchybar --reload") end)
 
 	-- PDF background
 	if u.appRunning("Highlights") then
@@ -62,7 +62,7 @@ function M.setDarkMode(toMode)
 end
 
 ---MANUALLY TOGGLE DARK MODE----------------------------------------------------
--- forward-delete = `󰛨` on my Keychron keyboard
+-- forward-delete = light-bulb-key on my Keychron keyboard
 hs.hotkey.bind({}, "forwarddelete", function()
 	local toMode = u.isDarkMode() and "light" or "dark"
 	M.setDarkMode(toMode)
@@ -79,12 +79,8 @@ function M.autoSwitch()
 	local ambient = hs.brightness.ambient()
 	local hasBrightnessSensor = ambient > -1
 
-	local targetMode
-	if hasBrightnessSensor then
-		targetMode = ambient > lightThreshold and "light" or "dark"
-	else
-		targetMode = u.betweenTime(7, 20) and "light" or "dark"
-	end
+	local targetMode = hasBrightnessSensor and (ambient > lightThreshold and "light" or "dark")
+		or (u.betweenTime(7, 20) and "light" or "dark")
 
 	if targetMode == "light" and u.isDarkMode() then
 		logBrightness("Auto-switch to light.", lightThreshold)
