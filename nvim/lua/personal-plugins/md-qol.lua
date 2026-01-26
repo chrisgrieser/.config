@@ -235,7 +235,11 @@ function M.cycleList()
 			return indent -- number -> none
 		end)
 		:gsub("^%s*[*+-] %[[ x-]%] ", function(task)
-			local toggledTask = task:gsub("%[([ x-])%]", { [" "] = "[x]", x = "[-]", ["-"] = "[ ]" })
+			local toggledTask = task:gsub("%[[ x-]%]", {
+				["[ ]"] = "[x]",
+				["[x]"] = "[-]",
+				["[-]"] = "[ ]", -- `- [-]` pending task (set via render-markdown.nvim)
+			})
 			return toggledTask
 		end)
 	-- none/heading -> bullet
