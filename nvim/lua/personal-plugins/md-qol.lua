@@ -229,13 +229,13 @@ function M.cycleList()
 
 	local updated = curLine
 		:gsub("^(%s*)([%d.*+-]+ )", function(indent, list)
-			local isTask = curLine:find("^%s*[*+-] %[[x ]%]")
+			local isTask = curLine:find("^%s*[*+-] %[[ x-]%]")
 			if isTask then return indent .. list end
 			if list:find("[*+-] ") then return indent .. "1. " end -- bullet -> number
 			return indent -- number -> none
 		end)
-		:gsub("^%s*[*+-] %[[x ]%] ", function(task)
-			local toggledTask = task:gsub("%[([x ])%]", { x = "[ ]", [" "] = "[x]" })
+		:gsub("^%s*[*+-] %[[ x-]%] ", function(task)
+			local toggledTask = task:gsub("%[([ x-])%]", { [" "] = "[x]", x = "[-]", ["-"] = "[ ]" })
 			return toggledTask
 		end)
 	-- none/heading -> bullet
