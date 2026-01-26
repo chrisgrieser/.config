@@ -45,6 +45,15 @@ return {
 			icons = { "◇", "▪️", "▫️" }, -- ◆◇•◦▫️▪️
 			ordered_icons = "", -- disable overwriting ordered list numbers with 1-2-3
 		},
+		checkbox = {
+			checked = {
+				icon = "󰄵 ",
+			},
+			custom = {
+
+				todo = { raw = "[-]", rendered = "󰡖 ", highlight = "RenderMarkdownInfo" },
+			},
+		},
 		code = {
 			position = "left",
 			width = "block", -- = not full width
