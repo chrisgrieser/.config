@@ -4,16 +4,12 @@ const app = Application.currentApplication();
 app.includeStandardAdditions = true;
 //──────────────────────────────────────────────────────────────────────────────
 
-function isEnterprise() {
-	return Boolean($.getenv("github_enterprise_url")?.trim());
-}
+const isEnterprise = $.getenv("github_enterprise_url").trim() !== "";
 
-/**
- * @param {string} token
- */
+/** @param {string} token */
 function getApiBaseUrl(token) {
 	const enterpriseUrl = $.getenv("github_enterprise_url")?.trim();
-	return isEnterprise() && token ? `https://${enterpriseUrl}/api/v3` : "https://api.github.com";
+	return isEnterprise && token ? `https://${enterpriseUrl}/api/v3` : "https://api.github.com";
 }
 
 /**

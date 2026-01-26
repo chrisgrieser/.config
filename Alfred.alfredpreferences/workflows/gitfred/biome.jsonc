@@ -1,0 +1,70 @@
+// https://biomejs.dev/reference/configuration/
+// https://biomejs.dev/linter/javascript/rules/
+//──────────────────────────────────────────────────────────────────────────────
+{
+	"linter": {
+		"domains": { "project": "none" }, // standalone js files only here
+
+		// rule update: 2025-08-18
+		"rules": {
+			"performance": {
+				"noAwaitInLoops": "on",
+				"noBarrelFile": "on"
+			},
+			"style": {
+				"noInferrableTypes": "on", // typos: ignore-line
+				"noNestedTernary": "on",
+				"noProcessEnv": "on",
+				"noSubstr": "on",
+				"noUnusedTemplateLiteral": "on",
+				"noUselessElse": "on",
+				"noYodaExpression": "on",
+				"useAtIndex": "on",
+				"useConsistentArrayType": "on",
+				"useDefaultSwitchClause": "on",
+				"useExportsLast": "on",
+				"useFilenamingConvention": "on",
+				"useForOf": "on",
+				"useGroupedAccessorPairs": "on",
+				"useNamingConvention": "on",
+				"useNumericSeparators": "on",
+				"useObjectSpread": "on",
+				"useReadonlyClassProperties": "on",
+				"useShorthandAssign": "on",
+				"useTemplate": "off" // not useful
+			},
+			"suspicious": {
+				"noConstantBinaryExpressions": "on",
+				"noEmptyBlockStatements": "on",
+				"noUnassignedVariables": "on",
+				"noVar": "on",
+				"useAwait": "on",
+				"useErrorMessage": "on",
+				"useStaticResponseMethods": "on"
+			},
+			"complexity": {
+				"noImplicitCoercions": "on",
+				"noUselessStringConcat": "on",
+				"useWhile": "on"
+			},
+			"correctness": {
+				"noProcessGlobal": "on",
+				"noUndeclaredVariables": "on",
+				"useJsonImportAttributes": "on",
+				"useSingleJsDocAsterisk": "on",
+				"useParseIntRadix": "off"
+			}
+		}
+	},
+	"javascript": {
+		"globals": ["$", "Application", "ObjC", "Path", "delay"] // JXA globals
+	},
+	"formatter": {
+		"useEditorconfig": true,
+		"lineWidth": 100, // needs to be set despite editorconfig https://github.com/biomejs/biome/issues/6475#issuecomment-2994126794
+		"formatWithErrors": true
+	},
+	"files": {
+		"ignoreUnknown": true
+	}
+}

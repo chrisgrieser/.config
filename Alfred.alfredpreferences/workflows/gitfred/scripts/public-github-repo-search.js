@@ -4,16 +4,12 @@ const app = Application.currentApplication();
 app.includeStandardAdditions = true;
 //──────────────────────────────────────────────────────────────────────────────
 
-/**
- * @param {string} token
- */
+const isEnterprise = $.getenv("github_enterprise_url").trim() !== "";
+
+/** @param {string} token */
 function getApiBaseUrl(token) {
 	const enterpriseUrl = $.getenv("github_enterprise_url")?.trim();
-	return isEnterprise() && token ? `https://${enterpriseUrl}/api/v3` : "https://api.github.com";
-}
-
-function isEnterprise() {
-	return Boolean($.getenv("github_enterprise_url")?.trim());
+	return isEnterprise && token ? `https://${enterpriseUrl}/api/v3` : "https://api.github.com";
 }
 
 function getGithubToken() {
@@ -100,11 +96,12 @@ function run(argv) {
 
 	// DOCS https://docs.github.com/en/rest/search/search?apiVersion=2022-11-28#search-repositories
 	const githubToken = getGithubToken();
-	const apiUrl = getApiBaseUrl(githubToken) + "/search/repositories?q=" + encodeURIComponent(query);
+	const apiUrl =
+		getApiBaseUrl(githubToken) + "/search/repositories?q=" + encodeURIComponent(query);
 
 	// Enterprise requires authentication
 	let response;
-	if (isEnterprise() && githubToken) {
+	if (isEnterprise && githubToken) {
 		const headers = [
 			"Accept: application/vnd.github.json",
 			"X-GitHub-Api-Version: 2022-11-28",

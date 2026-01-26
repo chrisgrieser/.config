@@ -4,15 +4,12 @@ const app = Application.currentApplication();
 app.includeStandardAdditions = true;
 //──────────────────────────────────────────────────────────────────────────────
 
+const isEnterprise = $.getenv("github_enterprise_url").trim() !== "";
 
-const isEnterprise = Boolean($.getenv("github_enterprise_url").trim());
-
-/**
- * @param {string} token
- */
+/** @param {string} token */
 function getApiBaseUrl(token) {
 	const enterpriseUrl = $.getenv("github_enterprise_url")?.trim();
-	return isEnterprise() && token ? `https://${enterpriseUrl}/api/v3` : "https://api.github.com";
+	return isEnterprise && token ? `https://${enterpriseUrl}/api/v3` : "https://api.github.com";
 }
 
 /** @param {string} str */
@@ -102,7 +99,7 @@ function run() {
 		// DOCS https://docs.github.com/en/rest/repos/repos?apiVersion=2022-11-28#list-repositories-for-the-authenticated-user--parameters
 		apiUrl = `${apiBase}/user/repos?per_page=100&sort=updated`;
 		headers.push(`Authorization: BEARER ${githubToken}`);
-	} else if (githubToken && isEnterprise()) {
+	} else if (githubToken && isEnterprise) {
 		headers.push(`Authorization: BEARER ${githubToken}`);
 	}
 
