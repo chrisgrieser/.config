@@ -33,7 +33,8 @@ bkeymap("n", "O", function() qol.autoBullet("O") end, { desc = "󰍔 Auto-bullet
 bkeymap("i", "<CR>", function() qol.autoBullet("<CR>") end, { desc = "󰍔 Auto-bullet <CR>" })
 
 ---FORMATTING-------------------------------------------------------------------
-bkeymap({ "n", "i" }, "<D-u>", qol.cycleList, { desc = "󰍔 Cycle list types" })
+bkeymap({ "n", "x", "i" }, "<D-u>", function() qol.cycle("list") end, { desc = "󰍔 Cycle list types" })
+bkeymap({ "n", "x", "i" }, "<D-x>", function() qol.cycle("task") end, { desc = "󰍔 Cycle task states" })
 bkeymap({ "n", "x", "i" }, "<D-k>", function() qol.wrap("mdlink") end, { desc = "󰍔 Link" })
 bkeymap({ "n", "x", "i" }, "<D-b>", function() qol.wrap("**") end, { desc = "󰍔 Bold" })
 bkeymap({ "n", "x", "i" }, "<D-i>", function() qol.wrap("*") end, { desc = "󰍔 Italic" })

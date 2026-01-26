@@ -1563,21 +1563,16 @@ Including private repos/PRs/issues now also requires explicitly enabling them in
   a GitHub repo from the current browser tab. ([Note that Firefox is not
   supported.](https://www.alfredforum.com/topic/16748-how-to-do-x-in-firefox-from-alfred/))
 
-## GitHub Token
+## GitHub token
 The `GITHUB_TOKEN` is optional and only required for showing notifications,
-private repos, PRs, and issues repos. The token requires the respective access
-rights.
-
-Note that other than for notifications, the workflow does not use the token by
-default, since including private noticeably slows down the search. To search
-private repos, PRs, and issues, you also need to enable the respective workflow
-setting.
+including private repos/PRs/issues, or when using an enterprise URL. The token
+naturally requires the respective access rights.
 
 The workflow will check for the token in the following order:
 1. The `GITHUB_TOKEN` in the Alfred workflow configuration.
 2. A shell command that outputs your `GITHUB_TOKEN`, such as `cat
    $HOME/my_token.txt`, defined in your workflow settings.
-3. A token exported in your `.zshenv`, such as `export GITHUB_TOKEN=…`.
+3. A token exported in your `~/.zshenv` via `export GITHUB_TOKEN=…`.
 
 ---
 

@@ -223,27 +223,41 @@ function M.followMdlinkOrWikilink()
 end
 --------------------------------------------------------------------------------
 
-function M.cycleList()
+---@param type "list"|"task"
+function M.cycle(type)
 	local lnum, col = unpack(vim.api.nvim_win_get_cursor(0))
 	local curLine = vim.api.nvim_get_current_line()
+	local updated
 
-	local updated = curLine
-		:gsub("^(%s*)([%d.*+-]+ )", function(indent, list)
-			local isTask = curLine:find("^%s*[*+-] %[[ x-]%]")
+	if type == "list" then
+		updated = curLine:gsub("^(%s*)([%d.*+-]+ )", function(indent, list)
+			local isTask = curLine:find("^%s*[*+-] %[[ x-]%] ")
 			if isTask then return indent .. list end
 			if list:find("[*+-] ") then return indent .. "1. " end -- bullet -> number
-			return indent -- number -> none
+			if list:find("[*+-] ") then return indent end -- number -> none
+			return indent
 		end)
-		:gsub("^%s*[*+-] %[[ x-]%] ", function(task)
-			local toggledTask = task:gsub("%[[ x-]%]", {
+		if updated == curLine then -- none/heading/task -> bullet
+			updated = curLine
+				:gsub("^(%s*)[*+-] %[[ x-]%] ", "%1") -- remove task
+				:gsub("^#+ ", "") -- remove heading
+				:gsub("^(%s*)(.*)", "%1- %2") -- add bullet
+		end
+	else
+		updated = curLine:gsub("^%s*[*+-] %[[ x-]%] ", function(task)
+			return task:gsub("%[[ x-]%]", {
 				["[ ]"] = "[x]",
 				["[x]"] = "[-]",
 				["[-]"] = "[ ]", -- `- [-]` pending task (set via render-markdown.nvim)
 			})
-			return toggledTask
 		end)
-	-- none/heading -> bullet
-	if updated == curLine then updated = curLine:gsub("^(%s*)#* ?(.*)", "%1- %2") end
+		if updated == curLine then -- none/bullet/number -> task
+			updated = curLine
+				:gsub("^(%s*)%d+%. ", "%1") -- remove number
+				:gsub("^(%s*)[*+-] ", "%1") -- remove bullet
+				:gsub("^(%s*)(.*)", "%1- [ ] %2") -- add open task
+		end
+	end
 
 	vim.api.nvim_set_current_line(updated)
 	local diff = #updated - #curLine
