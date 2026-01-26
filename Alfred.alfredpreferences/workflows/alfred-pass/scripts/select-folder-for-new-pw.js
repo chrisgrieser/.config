@@ -4,6 +4,16 @@ const app = Application.currentApplication();
 app.includeStandardAdditions = true;
 //──────────────────────────────────────────────────────────────────────────────
 
+/** @param {string} str */
+function camelCaseMatch(str) {
+	const subwords = str.replace(/[-_./]/g, " ");
+	const fullword = str.replace(/[-_./]/g, "");
+	const camelCaseSeparated = str.replace(/([A-Z])/g, " $1");
+	return [subwords, camelCaseSeparated, fullword, str].join(" ") + " ";
+}
+
+//──────────────────────────────────────────────────────────────────────────────
+
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
@@ -19,12 +29,13 @@ function run() {
 	const stdout = app.doShellScript(shellCmd);
 	const userHasFolders = stdout.trim() !== "";
 	if (userHasFolders) {
-		stdout.split("\r").map((/** @type {string} */ folder) => {
+		stdout.split("\r").forEach((/** @type {string} */ folder) => {
 			folder = folder.slice(2); // remove `./`
 			passwordFolders.push({
 				title: "📂 " + folder,
 				uid: folder, // remember user choice for next time
 				arg: "", // empty for next Alfred prompt
+				match: camelCaseMatch(folder),
 				variables: { folder: folder },
 			});
 		});
