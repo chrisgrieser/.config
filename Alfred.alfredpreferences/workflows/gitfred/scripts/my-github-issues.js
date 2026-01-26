@@ -4,6 +4,18 @@ const app = Application.currentApplication();
 app.includeStandardAdditions = true;
 //──────────────────────────────────────────────────────────────────────────────
 
+function isEnterprise() {
+	return Boolean($.getenv("github_enterprise_url")?.trim());
+}
+
+/**
+ * @param {string} token
+ */
+function getApiBaseUrl(token) {
+	const enterpriseUrl = $.getenv("github_enterprise_url")?.trim();
+	return isEnterprise() && token ? `https://${enterpriseUrl}/api/v3` : "https://api.github.com";
+}
+
 /** @param {string} str */
 function alfredMatcher(str) {
 	const clean = str.replace(/[-()_.:#/\\;,[\]]/g, " ");
@@ -48,9 +60,9 @@ function run() {
 
 	// DOCS https://docs.github.com/en/rest/issues/issues?apiVersion=2022-11-28#list-issues-assigned-to-the-authenticated-user--parameters
 	const issuesToSearch = 50; // up to 100, for performance set lower
-	const apiUrl = `https://api.github.com/search/issues?q=involves:${username}&sort=updated&per_page=${issuesToSearch}`;
+	const apiUrl = `${getApiBaseUrl(githubToken)}/search/issues?q=involves:${username}&sort=updated&per_page=${issuesToSearch}`;
 	const headers = ["Accept: application/vnd.github.json", "X-GitHub-Api-Version: 2022-11-28"];
-	if (githubToken && includePrivate) headers.push(`Authorization: BEARER ${githubToken}`);
+	if (githubToken && (includePrivate || isEnterprise())) headers.push(`Authorization: BEARER ${githubToken}`);
 	const response = httpRequestWithHeaders(apiUrl, headers);
 
 	// GUARD no response

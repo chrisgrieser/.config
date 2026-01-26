@@ -4,10 +4,36 @@
 
 # VARIABLES
 https_url="$1"
-source_repo=$(echo "$https_url" | sed -E 's_.*github.com/([^/?]*/[^/?]*).*_\1_')
+# Determine GitHub host (github.com or enterprise)
+if [[ -n "$github_enterprise_url" ]]; then
+	github_host="$github_enterprise_url"
+	is_enterprise=true
+else
+	github_host="github.com"
+	is_enterprise=false
+fi
+# Parse owner/repo from URL (handles both github.com and enterprise URLs)
+# Escape dots for regex (. -> \.)
+github_host_escaped="${github_host//./\\.}"
+source_repo=$(echo "$https_url" | sed -E "s_.*${github_host_escaped}/([^/?]*/[^/?]*).*_\1_")
 reponame=$(echo "$source_repo" | cut -d '/' -f2)
 owner=$(echo "$source_repo" | cut -d '/' -f1)
-ssh_url="git@github.com:$source_repo"
+
+# Determine clone URL (SSH for github.com, HTTPS with token for Enterprise)
+if [[ "$is_enterprise" == true ]]; then
+	# Get token for Enterprise authentication
+	token="$github_token_from_alfred_prefs"
+	[[ -z "$token" && -n "$github_token_shell_cmd" ]] && token=$(zsh -c "$github_token_shell_cmd")
+	# shellcheck disable=1091
+	[[ -z "$token" ]] && token=$(test -e "$HOME"/.zshenv && source "$HOME/.zshenv" && echo "$GITHUB_TOKEN")
+	if [[ -z "$token" ]]; then
+		echo "ERROR: Cannot clone from Enterprise, \`GITHUB_TOKEN\` not found."
+		return 1
+	fi
+	clone_url="https://oauth2:${token}@${github_host}/${source_repo}.git"
+else
+	clone_url="git@${github_host}:$source_repo"
+fi
 
 [[ ! -e "$local_repo_folder" ]] && mkdir -p "$local_repo_folder"
 cd "$local_repo_folder" || return 1
@@ -34,12 +60,12 @@ fi
 
 # clone with depth
 if [[ $clone_depth -eq 0 ]]; then
-	msg=$(git clone "$ssh_url" --no-single-branch --no-tags "$clone_dir" 2>&1)
+	msg=$(git clone "$clone_url" --no-single-branch --no-tags "$clone_dir" 2>&1)
 else
 	# WARN depth=1 is dangerous, as amending such a commit does result in a
 	# new commit without parent, effectively destroying git history (!!)
 	[[ $clone_depth -eq 1 ]] && clone_depth=2
-	msg=$(git clone "$ssh_url" --depth="$clone_depth" --no-single-branch --no-tags "$clone_dir" 2>&1)
+	msg=$(git clone "$clone_url" --depth="$clone_depth" --no-single-branch --no-tags "$clone_dir" 2>&1)
 fi
 
 success=$?

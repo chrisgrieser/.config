@@ -7,6 +7,9 @@ token=$github_token_from_alfred_prefs
 [[ -z "$token" && -n "$github_token_shell_cmd" ]] && token=$(zsh -c "$github_token_shell_cmd")
 [[ -z "$token" ]] && token=$GITHUB_TOKEN
 
+# Determine GitHub host (github.com or enterprise)
+github_host="${github_enterprise_url:-github.com}"
+
 #────────────────────────────────────────────────────────────────────────────
 
 # MARK AS READ/DONE
@@ -14,12 +17,13 @@ if [[ "$mode" == "read" || "$mode" == "done" ]]; then
 	# DOCS https://docs.github.com/en/rest/activity/notifications?apiVersion=2022-11-28#mark-a-thread-as-read
 	method=$([[ "$mode" == "read" ]] && echo "PATCH" || echo "DELETE")
 	thread_id="$1"
+	api_base=$([[ -n "$github_enterprise_url" ]] && echo "https://${github_enterprise_url}/api/v3" || echo "https://api.github.com")
 	curl --silent --location \
 		--request "$method" \
 		-H "Accept: application/vnd.github+json" \
 		-H "Authorization: Bearer $token" \
 		-H "X-GitHub-Api-Version: 2022-11-28" \
-		"https://api.github.com/notifications/threads/$thread_id"
+		"${api_base}/notifications/threads/$thread_id"
 	return 0
 fi
 
@@ -31,7 +35,7 @@ fi
 api_url="$1"
 if [[ -z "$api_url" && "$mode" == "open" ]]; then
 	# some notification types like ci-activity do not provide a thread
-	github_url="https://github.com/notifications"
+	github_url="https://${github_host}/notifications"
 else
 	response=$(curl -sL -H "Accept: application/vnd.github+json" \
 		-H "Authorization: Bearer $token" \
@@ -43,14 +47,14 @@ else
 	# VALIDATE
 	if [[ -z "$github_url" && "$mode" == "open" ]]; then
 		# some notification types like ci-activity do not provide a thread
-		github_url="https://github.com/notifications"
+		github_url="https://${github_host}/notifications"
 	fi
 fi
 
 # action
 if [[ "$mode" == "open" ]]; then
 	open "$github_url"
-	if [[ "$github_url" == "https://github.com/notifications" ]]; then
+	if [[ "$github_url" == "https://${github_host}/notifications" ]]; then
 		echo "Opening notification inbox at GitHub instead."
 		return 1
 	fi
