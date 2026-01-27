@@ -49,7 +49,7 @@ function run(argv) {
 	const language = $.getenv("date_locale");
 	const resultInBrackets = $.getenv("in_brackets") === "1";
 	const addLineBreak = $.getenv("line_break_after") === "1";
-	const bundesland = $.getenv("bundesland_feiertage");
+	const germanState = $.getenv("bundesland_feiertage");
 
 	/** @type {Intl.DateTimeFormatOptions} */
 	const dateFormatOption = { year: "numeric", month: "short", day: "2-digit" };
@@ -79,18 +79,20 @@ function run(argv) {
 	}
 
 	// calculate new date
-	const dayOnNextWeek = startDate.getDate() + 7 * weekCounter; // next week's date as days from startdate
+	const dayOnNextWeek = startDate.getDate() + weekCounter * 7; // next week's date as days from startDate
 	const nextDate = startDate; // counts from startdate
-	nextDate.setDate(dayOnNextWeek); // counting from the startDate, update to the new day
-	let output = nextDate.toLocaleDateString(language, dateFormatOption); // format
+	nextDate.setDate(dayOnNextWeek); // counting from startDate, update to new day
+	let output = nextDate.toLocaleDateString(language, dateFormatOption);
 
 	// consider state-specific German holidays
-	if (bundesland) {
-		const nextDateIso = nextDate.toLocaleTimeString().slice(0, 10);
-		const url = `https://feiertage-api.de/api/?jahr=${nextDate.getFullYear()}&nur_land=${bundesland}`;
-		const feiertageJson = JSON.parse(httpRequest(url));
-		for (const [name, feiertag] of Object.entries(feiertageJson)) {
-			if (feiertag.datum === nextDateIso) output += ` ${name} ${feiertag.hinweis}`;
+	if (germanState) {
+		const nextDateIso = new Date(nextDate.getTime() - nextDate.getTimezoneOffset() * 60_000)
+			.toISOString()
+			.slice(0, 10);
+		const url = `https://feiertage-api.de/api/?jahr=${nextDate.getFullYear()}&nur_land=${germanState}`;
+		const holidayJson = JSON.parse(httpRequest(url));
+		for (const [name, holiday] of Object.entries(holidayJson)) {
+			if (holiday.datum === nextDateIso) output += ` ${name} ${holiday.hinweis}`.trimEnd();
 		}
 	}
 
