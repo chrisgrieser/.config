@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 #───────────────────────────────────────────────────────────────────────────────
-# This script needs to set set in the Transmission.app settings at: 
+# This script needs to set set in the Transmission.app settings at:
 # Transfers → Management → Call Script
 # Further info: https://github.com/transmission/transmission/blob/main/docs/Scripts.md#scripts
 #───────────────────────────────────────────────────────────────────────────────
@@ -14,12 +14,12 @@ action_log="./.post-processing.log"
 cd "$TR_TORRENT_DIR" || return 1 # `$TR_TORRENT_DIR` is where the downloads are placed
 
 # DELETE CLUTTER
-# the macOS version of `find` does not support `-regex` with `|`, so we search
-# for each file type separately
+# the macOS version of `find` does not support `-regex` with `|`, so we need to
+# search for each file type separately
 find . \( -name "*.txt" -or -name "*.nfo" -or -name "*.md" -or -name "*.exe" \
 	-or -name "*.png" -or -name "*.jp*g" \) -delete -print
 find . -type directory -empty -delete -print           # now empty folders
-find . -type directory -name "Sample" -exec rm -r {} + # Folders with content do not accept `-delete`
+find . -type directory -name "Sample" -exec rm -r {} + # since folders with content don't accept `-delete`
 sleep 1
 
 # UNNEST IF SINGLE FILE
@@ -53,7 +53,7 @@ find "." -maxdepth 1 -name "*.mkv" | while read -r old_name; do
 done
 
 # QUIT TRANSMISSION, IF NO OTHER ACTIVE TORRENTS
-sleep 15 # time for potential new torrents to be initialized
+sleep 15 # time for any torrents in queue to be initialized
 incomplete_dir=$(defaults read org.m0k.transmission IncompleteDownloadFolder)
 active_torrents=$(find "$incomplete_dir" -mindepth 1 -not -name ".DS_Store" -not -name ".localized")
 [[ -z "$active_torrents" ]] && killall "Transmission"
