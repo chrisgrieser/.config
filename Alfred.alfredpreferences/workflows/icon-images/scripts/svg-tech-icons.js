@@ -20,8 +20,11 @@ function run() {
 	const iconRepos = {
 		vscode: { name: "vscode-icons/vscode-icons", branch: "master" },
 		material: { name: "material-extensions/vscode-material-icon-theme", branch: "main" },
+		"simple-icons": { name: "simple-icons/simple-icons", branch: "develop" },
 	};
+	// INFO svgs are assumed to be `./icons/*.svg`
 	//---------------------------------------------------------------------------
+
 	/** @type {AlfredItem[]} */
 	const items = [];
 
@@ -30,14 +33,12 @@ function run() {
 		const response = httpRequest(apiUrl);
 		const tree = JSON.parse(response).tree;
 		tree.forEach((/** @type {{path: string}} */ item) => {
-			const [_, filetype] = item.path.match(/^icons\/(.*)\.svg$/) || [];
-			if (!filetype) return;
-			const displayName = filetype.replaceAll("file_type_", "");
-			const url = `https://raw.githubusercontent.com/${repo.name}/${repo.branch}/icons/${filetype}.svg`;
+			const iconName = item.path.match(/^icons\/(.*)\.svg$/)?.[1];
+			if (!iconName) return;
 			items.push({
-				title: displayName,
+				title: iconName.replaceAll("file_type_", ""),
 				subtitle: iconGroup,
-				arg: url,
+				arg: `https://raw.githubusercontent.com/${repo.name}/${repo.branch}/icons/${iconName}.svg`,
 			});
 		});
 	}

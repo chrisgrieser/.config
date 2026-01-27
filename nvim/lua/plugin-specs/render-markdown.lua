@@ -46,12 +46,10 @@ return {
 			ordered_icons = "", -- disable overwriting ordered list numbers with 1-2-3
 		},
 		checkbox = {
-			checked = {
-				icon = "󰄵 ",
-			},
+			checked = { icon = "󰄵" },
+			unchecked = { icon = "󰄱" },
 			custom = {
-
-				todo = { raw = "[-]", rendered = "󰡖 ", highlight = "RenderMarkdownInfo" },
+				todo = { rendered = "󰡖", raw = "[-]", highlight = "RenderMarkdownInfo" },
 			},
 		},
 		code = {

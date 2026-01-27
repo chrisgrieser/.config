@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>bundleid</key>
-	<string>de.chris-grieser.calendars-and-reminders</string>
+	<string>de.chris-grieser.calendars-and-reminderssss</string>
 	<key>category</key>
 	<string>❇️</string>
 	<key>connections</key>
@@ -26,19 +26,6 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>283D0A7E-38AF-4925-914D-2CD9B91BF86A</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>83689A66-B839-474D-BC92-BED2781518F0</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>99232981-13A1-4EF3-8C1F-0D82787913DA</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -78,19 +65,6 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>76E1AACF-EF35-4FD7-B856-1E5CF0CD9583</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>E39AA7E2-C43C-4D6C-B9B5-457E5B2E9F4E</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>83689A66-B839-474D-BC92-BED2781518F0</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -253,81 +227,6 @@
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>Emojify reminders</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>99232981-13A1-4EF3-8C1F-0D82787913DA</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>0</integer>
-				<key>focusedappvariable</key>
-				<false/>
-				<key>focusedappvariablename</key>
-				<string></string>
-				<key>hotkey</key>
-				<integer>47</integer>
-				<key>hotmod</key>
-				<integer>1835008</integer>
-				<key>hotstring</key>
-				<string>.</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>2</integer>
-				<key>relatedAppsMode</key>
-				<integer>0</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
-			<key>uid</key>
-			<string>E39AA7E2-C43C-4D6C-B9B5-457E5B2E9F4E</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>~/.config/hammerspoon/system/cronjobs/hourly/emojify-reminders.swift</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>83689A66-B839-474D-BC92-BED2781518F0</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
 	</array>
 	<key>readme</key>
 	<string>## Usage
@@ -369,15 +268,6 @@ Get PLACEHOLDER the `KEYWORD` keyword.
 			<key>ypos</key>
 			<real>15</real>
 		</dict>
-		<key>83689A66-B839-474D-BC92-BED2781518F0</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>8</integer>
-			<key>xpos</key>
-			<real>200</real>
-			<key>ypos</key>
-			<real>425</real>
-		</dict>
 		<key>87BFEDC0-1C8A-4E29-85AA-D54B51D22C6F</key>
 		<dict>
 			<key>colorindex</key>
@@ -385,16 +275,7 @@ Get PLACEHOLDER the `KEYWORD` keyword.
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>150</real>
-		</dict>
-		<key>99232981-13A1-4EF3-8C1F-0D82787913DA</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>8</integer>
-			<key>xpos</key>
-			<real>365</real>
-			<key>ypos</key>
-			<real>425</real>
+			<real>165</real>
 		</dict>
 		<key>A231C332-4D05-4B0D-9FFB-0C8B95A71526</key>
 		<dict>
@@ -403,7 +284,7 @@ Get PLACEHOLDER the `KEYWORD` keyword.
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>265</real>
+			<real>280</real>
 		</dict>
 		<key>B6B9DEBE-EEA7-4350-9C89-B6870A9BAF44</key>
 		<dict>
@@ -414,17 +295,6 @@ Get PLACEHOLDER the `KEYWORD` keyword.
 			<key>ypos</key>
 			<real>45</real>
 		</dict>
-		<key>E39AA7E2-C43C-4D6C-B9B5-457E5B2E9F4E</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>8</integer>
-			<key>note</key>
-			<string>emojify reminders</string>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>425</real>
-		</dict>
 		<key>FE19AE4D-98F7-4938-A3AC-1178A0C638A4</key>
 		<dict>
 			<key>colorindex</key>
@@ -432,7 +302,7 @@ Get PLACEHOLDER the `KEYWORD` keyword.
 			<key>xpos</key>
 			<real>200</real>
 			<key>ypos</key>
-			<real>150</real>
+			<real>165</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
