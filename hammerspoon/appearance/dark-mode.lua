@@ -44,7 +44,7 @@ function M.setDarkMode(toMode)
 
 	-- sketchybar
 	-- delay so sketchybar picks up on system mode change
-	u.defer(1, function() hs.execute(u.exportPath .. "sketchybar --reload") end)
+	u.defer(2, function() hs.execute(u.exportPath .. "sketchybar --reload") end)
 
 	-- PDF background
 	if u.appRunning("Highlights") then
