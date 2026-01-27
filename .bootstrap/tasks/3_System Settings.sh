@@ -27,6 +27,9 @@ defaults write com.apple.finder QuitMenuItem -bool true # Finder quitable
 defaults write com.apple.finder NewWindowTarget 'PfHm'
 defaults write com.apple.finder NewWindowTargetPath -string "file://${HOME}/Library/Mobile%20Documents/com~apple~CloudDocs/File%20Hub"
 
+# column view
+defaults write com.apple.finder _FXEnableColumnAutoSizing -bool true
+
 # other settings
 defaults write com.apple.finder FXEnableExtensionChangeWarning -int 0
 defaults write com.apple.finder WarnOnEmptyTrash -int 0
