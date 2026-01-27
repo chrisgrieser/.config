@@ -1,5 +1,9 @@
 #!/usr/bin/env zsh
-# DOCS https://github.com/transmission/transmission/blob/main/docs/Scripts.md#scripts
+#───────────────────────────────────────────────────────────────────────────────
+# This script needs to set set in the Transmission.app settings at: 
+# Transfers → Management → Call Script
+# Further info: https://github.com/transmission/transmission/blob/main/docs/Scripts.md#scripts
+#───────────────────────────────────────────────────────────────────────────────
 # TEST torrents: https://webtorrent.io/free-torrents
 #───────────────────────────────────────────────────────────────────────────────
 
@@ -33,9 +37,9 @@ find "." -maxdepth 1 -name "*.mkv" | while read -r old_name; do
 	old_name_no_ext=${old_name%.*}
 	clean_name=$(
 		echo "$old_name_no_ext" |
-			cut -c3- | # remove `./` from `find`
+			cut -c3- | # remove leading `./` from `find`
 			tr "._" " " |
-			sed 's/ *\[[^[:space:]]*\] *//g' |   # tags for the subbing group
+			sed 's/ *\[[^[:space:]]*\] *//g' |   # remove tags of the subbing group
 			sed -E 's/(1080p|720p|480p).*/\1/' | # video file info after the resolution info
 			tr -d "()[]" | tr -s " "             # remove leftover spaces or double brackets
 	)
