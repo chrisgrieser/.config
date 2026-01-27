@@ -21,7 +21,7 @@ function ensureCacheFolderExists() {
 	const finder = Application("Finder");
 	const cacheDir = $.getenv("alfred_workflow_cache");
 	if (!finder.exists(Path(cacheDir))) {
-		console.log("Cache Dir does not exist and is created.");
+		console.log("Cache dir does not exist and is created.");
 		const cacheDirBasename = $.getenv("alfred_workflow_bundleid");
 		const cacheDirParent = cacheDir.slice(0, -cacheDirBasename.length);
 		finder.make({
@@ -30,6 +30,13 @@ function ensureCacheFolderExists() {
 			withProperties: { name: cacheDirBasename },
 		});
 	}
+}
+
+/** @param {string} url @return {string} */
+function httpRequest(url) {
+	const queryUrl = $.NSURL.URLWithString(url);
+	const data = $.NSData.dataWithContentsOfURL(queryUrl);
+	return $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding).js;
 }
 
 const fileExists = (/** @type {string} */ filePath) => Application("Finder").exists(Path(filePath));
@@ -62,41 +69,32 @@ function run(argv) {
 		writeToFile(cacheDir + "/startDate", dateInput);
 		writeToFile(cacheDir + "/weekCounter", weekCounter.toString());
 	} else {
-		if (!fileExists(cacheDir + "/startDate")) return "No Starting Date found."; 
-		if (!fileExists(cacheDir + "/weekCounter")) return "No Starting Date found."; 
+		if (!fileExists(cacheDir + "/startDate") || !fileExists(cacheDir + "/weekCounter")) {
+			return "No start-date found. Initialize with Alfred keyword `weekly`.";
+		}
 
 		startDate = new Date(readFile(cacheDir + "/startDate"));
-		weekCounter = 1 + Number.parseInt(readFile(cacheDir + "/weekCounter"));
+		weekCounter = Number.parseInt(readFile(cacheDir + "/weekCounter")) + 1;
 		writeToFile(cacheDir + "/weekCounter", weekCounter.toString());
 	}
 
 	// calculate new date
-	const dayOne = startDate.getDate(); // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/parse
-	const nextweekDay = dayOne + 7 * weekCounter; // the next weeks date as days from from the StartDate's day
-
-	const nextWeek = startDate; // counts from startdate
-	nextWeek.setDate(nextweekDay); // counting from the startDate, update to the new day
-	let output = nextWeek.toLocaleDateString(language, dateFormatOption); // format
+	const dayOnNextWeek = startDate.getDate() + 7 * weekCounter; // next week's date as days from startdate
+	const nextDate = startDate; // counts from startdate
+	nextDate.setDate(dayOnNextWeek); // counting from the startDate, update to the new day
+	let output = nextDate.toLocaleDateString(language, dateFormatOption); // format
 
 	// consider state-specific German holidays
 	if (bundesland) {
-		const url = `https://feiertage-api.de/api/?jahr=${nextWeek.getFullYear()}&nur_land=${bundesland}`;
-		const feiertageJSON = JSON.parse(app.doShellScript(`curl -s "${url}"`));
-		const feiertage = Object.keys(feiertageJSON).map((tag) => {
-			const isoDate = feiertageJSON[tag].datum;
-			const desc = tag + " " + feiertageJSON[tag].hinweis;
-			return [isoDate, desc];
-		});
-
-		const nextWeekISO = nextWeek.toISOString().slice(0, 10);
-
-		for (const feiertag in feiertage) {
-			const feiertagISODate = feiertag[0];
-			const desc = feiertag[1];
-			if (feiertagISODate === nextWeekISO) output += " " + desc;
+		const nextDateIso = nextDate.toLocaleTimeString().slice(0, 10);
+		const url = `https://feiertage-api.de/api/?jahr=${nextDate.getFullYear()}&nur_land=${bundesland}`;
+		const feiertageJson = JSON.parse(httpRequest(url));
+		for (const [name, feiertag] of Object.entries(feiertageJson)) {
+			if (feiertag.datum === nextDateIso) output += ` ${name} ${feiertag.hinweis}`;
 		}
 	}
 
+	// output
 	if (resultInBrackets) output = `(${output})`;
 	if (addLineBreak) output += "\n";
 	return output;
