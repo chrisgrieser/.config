@@ -14,7 +14,7 @@ return {
 			hideKeymapHints = true,
 		},
 		keymaps = {
-			insertModeConfirm = "<CR>",
+			insertModeConfirmAndSubstituteInBuffer = "<CR>",
 		},
 		editingBehavior = {
 			autoCaptureGroups = true,
