@@ -35,6 +35,10 @@ if [[ $download -gt 1024 ]]; then
 	download=$((download / 1024))
 	unit="G"
 fi
+if [[ $download -gt 1024 ]]; then
+	download="+++" # happens sometimes with office wifis
+	unit=""
+fi
 
 sketchybar --set "$NAME" label="${download}${unit}" icon="" \
 	background.padding_right="10" icon.padding_right="3" label.padding_right="3"
