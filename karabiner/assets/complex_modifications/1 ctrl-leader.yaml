@@ -58,7 +58,7 @@ rules:
               export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
               cd "$HOME/.config/karabiner/assets" || return 1
               yq '.rules[1].manipulators[].description' \
-                "./complex_modifications/2 ctrl-leader.yaml" |
+                "./complex_modifications/1 ctrl-leader.yaml" |
                 sort -f | sed 's/.*/- &/' > "/tmp/ctrl-leader.md"
               qlmanage -p "/tmp/ctrl-leader.md"
               open -a "qlmanage" # to focus it
