@@ -23,12 +23,12 @@ rules:
         from: { key_code: left_control }
         conditions: [*leader-inactive, *not-game]
         to: [{ key_code: left_control }]
-        to_if_alone: [*activate-leader, *set-notice] # only if alone, so it can still be used as modifier
+        to_if_alone: [*activate-leader, *set-notice] # `to_if_alone` -> can still be used as modifier
       - type: basic
         from: { key_code: right_command }
         conditions: [*leader-inactive, *not-game]
         to: [{ key_code: right_command }]
-        to_if_alone: [*activate-leader, *set-notice] # only if alone, so it can still be used as modifier
+        to_if_alone: [*activate-leader, *set-notice] # `to_if_alone` -> can still be used as modifier
 
       # Pass through 2x L-Ctrl for Alfred
       - type: basic
@@ -60,7 +60,7 @@ rules:
               yq '.rules[1].manipulators[].description' \
                 "./complex_modifications/1 ctrl-leader.yaml" |
                 sort -f | sed 's/.*/- &/' > "/tmp/ctrl-leader.md"
-              qlmanage -p "/tmp/ctrl-leader.md"
+              qlmanage -p "/tmp/ctrl-leader.md" &
               open -a "qlmanage" # to focus it
           - *deactivate-leader
           - *remove-notice
@@ -141,7 +141,6 @@ rules:
         type: basic
         from: { key_code: l }
         conditions: [*leader-active]
-        # to: [{ shell_command: open -a "Ghostty" }, *deactivate-leader, *remove-notice]
         to: [{ shell_command: open -a "WezTerm" }, *deactivate-leader, *remove-notice]
 
       - description: "[i] Rem[i]nder"
@@ -149,8 +148,7 @@ rules:
         from: { key_code: i }
         conditions: [*leader-active]
         to:
-          # open Smart List "Scheduled"
-          - shell_command: |
+          - shell_command: | # open Smart List "Scheduled"
               osascript -e '
                 tell application "Reminders" to activate
                 tell application "System Events" to tell process "Reminders"
@@ -250,7 +248,10 @@ rules:
         type: basic
         from: { key_code: p }
         conditions: [*leader-active]
-        to: [{ shell_command: open -a "Highlights" }, *deactivate-leader, *remove-notice]
+        to:
+          - shell_command: open -a "Highlights" | open -a "PDF Expert"
+          - *deactivate-leader
+          - *remove-notice
 
       - description: "[g]ithub notifications"
         type: basic
