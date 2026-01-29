@@ -12,7 +12,7 @@ return {
 		log_level = vim.log.levels.WARN, -- for `ConformInfo`
 		default_format_opts = { lsp_format = "last" },
 		formatters_by_ft = {
-			markdown = { "markdown-toc", "listify-links-in-notes" },
+			markdown = { "listify-links-in-notes" },
 			python = { "ruff_fix", "ruff_organize_imports" },
 			zsh = { "shell-home", "shellcheck" },
 			json = { lsp_format = "prefer", "jq" }, -- use `biome` (via LSP), with `jq` as fallback
@@ -26,20 +26,6 @@ return {
 			shellcheck = {
 				-- add `--shell=bash` to force to work with `zsh`
 				args = "'$FILENAME' --format=diff --shell=bash | patch -p1 '$FILENAME'",
-			},
-			["markdown-toc"] = {
-				-- order used by markdownlint's `unordered-style: sublist`
-				prepend_args = { "--bullets", "-" },
-
-				-- FIX frontmatter being affected https://github.com/jonschlinkert/markdown-toc/issues/151
-				condition = function(_self, ctx)
-					-- only enable if the `<!-- toc -->` is present
-					local lines = vim.api.nvim_buf_get_lines(ctx.buf, 0, -1, false)
-					for _, line in pairs(lines) do
-						if line == "<!-- toc -->" then return true end
-					end
-					return false
-				end,
 			},
 			---MY CUSTOM FORMATTERS------------------------------------------------
 			["listify-links-in-notes"] = {

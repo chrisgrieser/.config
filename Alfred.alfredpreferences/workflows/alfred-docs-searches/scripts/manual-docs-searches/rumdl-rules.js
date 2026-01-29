@@ -17,7 +17,7 @@ function httpRequest(url) {
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
 	const docsUrl = "https://raw.githubusercontent.com/rvben/rumdl/refs/heads/main/docs/RULES.md";
-	const baseUrl = "https://github.com/rvben/rumdl/blob/main/docs";
+	const baseUrl = "https://rumdl.dev";
 
 	const workArray = httpRequest(docsUrl)
 		.split("\n")
@@ -26,7 +26,7 @@ function run() {
 				line.match(/^\|.*?(MD\d{3}).*?\| *(.*?) *\| *(.*?) *\|$/) || [];
 			if (!(id && name && desc)) return [];
 
-			const url = `${baseUrl}/${id.toLowerCase()}.md`;
+			const url = `${baseUrl}/${id.toLowerCase()}/`;
 			const num = id.match(/\d\d$/)?.[0] || "";
 
 			return {

@@ -49,7 +49,6 @@ local ensureInstalled = {
 	"local-lua-debugger-vscode", -- lua
 
 	-- OTHER
-	"markdown-toc", -- automatic table-of-contents via conform.nvim
 	"tree-sitter-cli", -- used by nvim-treesitter to install parsers
 }
 

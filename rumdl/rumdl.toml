@@ -45,3 +45,6 @@ ignore-words = ["nvim", "Obsidian", "Alfred"]
 
 [frontmatter-key-sort]
 enabled = true  # opt-in rule
+
+[toc-validation]
+enabled = true  # opt-in rule

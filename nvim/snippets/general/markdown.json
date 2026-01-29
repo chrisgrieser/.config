@@ -35,7 +35,8 @@
     "body": [
       "## Table of contents",
       "",
-      "<!-- toc -->"
+      "<!-- toc -->",
+      "<!-- tocstop -->"
     ],
     "description": "https://github.com/jonschlinkert/markdown-toc#tocinsert",
     "prefix": "insert toc (Table of contents)"
