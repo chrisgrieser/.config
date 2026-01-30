@@ -25,7 +25,7 @@ function M.autoSetBrightness()
 		or ambient > 1 and 0.6
 		or 0.5
 
-	print(("💡 ambient brightness: %.1f -> setting brightness to %s"):format(ambient, target))
+	print(("💡 ambient: %.1f -> setting brightness to %s"):format(ambient, target))
 	local iMacDisplay = require("win-management.window-utils").iMacDisplay
 	iMacDisplay:setBrightness(target)
 end
@@ -83,10 +83,10 @@ function M.autoSwitch()
 		or (u.betweenTime(7, 20) and "light" or "dark")
 
 	if targetMode == "light" and u.isDarkMode() then
-		logBrightness("Auto-switch to light.", lightThreshold)
+		logBrightness("Auto-switch to light", lightThreshold)
 		M.setDarkMode("light")
 	elseif targetMode == "dark" and not (u.isDarkMode()) then
-		logBrightness("Auto-switch to dark.", lightThreshold)
+		logBrightness("Auto-switch to dark", lightThreshold)
 		M.setDarkMode("dark")
 	else
 		logBrightness("Auto-switch skipped.", lightThreshold)

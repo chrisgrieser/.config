@@ -1,0 +1,831 @@
+#compdef rumdl
+
+autoload -U is-at-least
+
+_rumdl() {
+    typeset -A opt_args
+    typeset -a _arguments_options
+    local ret=1
+
+    if is-at-least 5.2; then
+        _arguments_options=(-s -S -C)
+    else
+        _arguments_options=(-s -C)
+    fi
+
+    local context curcontext="$curcontext" state line
+    _arguments "${_arguments_options[@]}" : \
+'--color=[Control colored output\: auto, always, never]:COLOR:(auto always never)' \
+'(--no-config --isolated)--config=[Path to configuration file]:CONFIG:_default' \
+'--no-config[Ignore all configuration files and use built-in defaults]' \
+'(--no-config)--isolated[Ignore all configuration files (alias for --no-config)]' \
+'-h[Print help]' \
+'--help[Print help]' \
+'-V[Print version]' \
+'--version[Print version]' \
+":: :_rumdl_commands" \
+"*::: :->rumdl" \
+&& ret=0
+    case $state in
+    (rumdl)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:rumdl-command-$line[1]:"
+        case $line[1] in
+            (check)
+_arguments "${_arguments_options[@]}" : \
+'-d+[Disable specific rules (comma-separated)]:DISABLE:_default' \
+'--disable=[Disable specific rules (comma-separated)]:DISABLE:_default' \
+'-e+[Enable only specific rules (comma-separated)]:ENABLE:_default' \
+'--enable=[Enable only specific rules (comma-separated)]:ENABLE:_default' \
+'--rules=[Enable only specific rules (comma-separated)]:ENABLE:_default' \
+'--extend-enable=[Extend the list of enabled rules (additive with config)]:EXTEND_ENABLE:_default' \
+'--extend-disable=[Extend the list of disabled rules (additive with config)]:EXTEND_DISABLE:_default' \
+'--exclude=[Exclude specific files or directories (comma-separated glob patterns)]:EXCLUDE:_default' \
+'--include=[Include only specific files or directories (comma-separated glob patterns)]:INCLUDE:_default' \
+'--respect-gitignore=[Respect .gitignore files when scanning directories (does not apply to explicitly provided paths)]::RESPECT_GITIGNORE:(true false)' \
+'-o+[Output format\: text (default) or json]:OUTPUT:_default' \
+'--output=[Output format\: text (default) or json]:OUTPUT:_default' \
+'--output-format=[Output format (default\: text, or \$RUMDL_OUTPUT_FORMAT, or output-format in config)]:OUTPUT_FORMAT:(text full concise grouped json json-lines github gitlab pylint azure sarif junit)' \
+'--flavor=[Markdown flavor\: standard (default), mkdocs, mdx, or quarto]:FLAVOR:(standard mkdocs mdx quarto)' \
+'--stdin-filename=[Filename to use when reading from stdin (e.g., README.md)]:STDIN_FILENAME:_default' \
+'--cache-dir=[Directory to store cache files (default\: .rumdl_cache, or \$RUMDL_CACHE_DIR, or cache-dir in config)]:CACHE_DIR:_default' \
+'--fail-on=[Exit code behavior\: '\''any'\'' (default) exits 1 on any violation, '\''warning'\'' on warning+error, '\''error'\'' only on errors, '\''never'\'' always exits 0]:FAIL_ON:(any warning error never)' \
+'--color=[Control colored output\: auto, always, never]:COLOR:(auto always never)' \
+'(--no-config --isolated)--config=[Path to configuration file]:CONFIG:_default' \
+'-f[Fix issues automatically where possible]' \
+'--fix[Fix issues automatically where possible]' \
+'--diff[Show diff of what would be fixed instead of fixing files]' \
+'--check[Exit with code 1 if any formatting changes would be made (for CI)]' \
+'-l[List all available rules]' \
+'--list-rules[List all available rules]' \
+'--no-exclude[Disable all exclude patterns]' \
+'-v[Show detailed output]' \
+'--verbose[Show detailed output]' \
+'--profile[Show profiling information]' \
+'--statistics[Show statistics summary of rule violations]' \
+'-q[Print diagnostics, but nothing else]' \
+'--quiet[Print diagnostics, but nothing else]' \
+'--show-full-path[Show absolute file paths in output instead of relative paths]' \
+'--stdin[Read from stdin instead of files]' \
+'--stderr[Output diagnostics to stderr instead of stdout]' \
+'-s[Disable all logging (but still exit with status code upon detecting diagnostics)]' \
+'--silent[Disable all logging (but still exit with status code upon detecting diagnostics)]' \
+'-w[Run in watch mode by re-running whenever files change]' \
+'--watch[Run in watch mode by re-running whenever files change]' \
+'--force-exclude[Enforce exclude patterns even for explicitly specified files]' \
+'--no-cache[Disable caching (re-check all files)]' \
+'--no-config[Ignore all configuration files and use built-in defaults]' \
+'(--no-config)--isolated[Ignore all configuration files (alias for --no-config)]' \
+'-h[Print help]' \
+'--help[Print help]' \
+'*::paths -- Files or directories to lint (use '\''-'\'' for stdin):_default' \
+&& ret=0
+;;
+(fmt)
+_arguments "${_arguments_options[@]}" : \
+'-d+[Disable specific rules (comma-separated)]:DISABLE:_default' \
+'--disable=[Disable specific rules (comma-separated)]:DISABLE:_default' \
+'-e+[Enable only specific rules (comma-separated)]:ENABLE:_default' \
+'--enable=[Enable only specific rules (comma-separated)]:ENABLE:_default' \
+'--rules=[Enable only specific rules (comma-separated)]:ENABLE:_default' \
+'--extend-enable=[Extend the list of enabled rules (additive with config)]:EXTEND_ENABLE:_default' \
+'--extend-disable=[Extend the list of disabled rules (additive with config)]:EXTEND_DISABLE:_default' \
+'--exclude=[Exclude specific files or directories (comma-separated glob patterns)]:EXCLUDE:_default' \
+'--include=[Include only specific files or directories (comma-separated glob patterns)]:INCLUDE:_default' \
+'--respect-gitignore=[Respect .gitignore files when scanning directories (does not apply to explicitly provided paths)]::RESPECT_GITIGNORE:(true false)' \
+'-o+[Output format\: text (default) or json]:OUTPUT:_default' \
+'--output=[Output format\: text (default) or json]:OUTPUT:_default' \
+'--output-format=[Output format (default\: text, or \$RUMDL_OUTPUT_FORMAT, or output-format in config)]:OUTPUT_FORMAT:(text full concise grouped json json-lines github gitlab pylint azure sarif junit)' \
+'--flavor=[Markdown flavor\: standard (default), mkdocs, mdx, or quarto]:FLAVOR:(standard mkdocs mdx quarto)' \
+'--stdin-filename=[Filename to use when reading from stdin (e.g., README.md)]:STDIN_FILENAME:_default' \
+'--cache-dir=[Directory to store cache files (default\: .rumdl_cache, or \$RUMDL_CACHE_DIR, or cache-dir in config)]:CACHE_DIR:_default' \
+'--fail-on=[Exit code behavior\: '\''any'\'' (default) exits 1 on any violation, '\''warning'\'' on warning+error, '\''error'\'' only on errors, '\''never'\'' always exits 0]:FAIL_ON:(any warning error never)' \
+'--color=[Control colored output\: auto, always, never]:COLOR:(auto always never)' \
+'(--no-config --isolated)--config=[Path to configuration file]:CONFIG:_default' \
+'-f[Fix issues automatically where possible]' \
+'--fix[Fix issues automatically where possible]' \
+'--diff[Show diff of what would be fixed instead of fixing files]' \
+'--check[Exit with code 1 if any formatting changes would be made (for CI)]' \
+'-l[List all available rules]' \
+'--list-rules[List all available rules]' \
+'--no-exclude[Disable all exclude patterns]' \
+'-v[Show detailed output]' \
+'--verbose[Show detailed output]' \
+'--profile[Show profiling information]' \
+'--statistics[Show statistics summary of rule violations]' \
+'-q[Print diagnostics, but nothing else]' \
+'--quiet[Print diagnostics, but nothing else]' \
+'--show-full-path[Show absolute file paths in output instead of relative paths]' \
+'--stdin[Read from stdin instead of files]' \
+'--stderr[Output diagnostics to stderr instead of stdout]' \
+'-s[Disable all logging (but still exit with status code upon detecting diagnostics)]' \
+'--silent[Disable all logging (but still exit with status code upon detecting diagnostics)]' \
+'-w[Run in watch mode by re-running whenever files change]' \
+'--watch[Run in watch mode by re-running whenever files change]' \
+'--force-exclude[Enforce exclude patterns even for explicitly specified files]' \
+'--no-cache[Disable caching (re-check all files)]' \
+'--no-config[Ignore all configuration files and use built-in defaults]' \
+'(--no-config)--isolated[Ignore all configuration files (alias for --no-config)]' \
+'-h[Print help]' \
+'--help[Print help]' \
+'*::paths -- Files or directories to lint (use '\''-'\'' for stdin):_default' \
+&& ret=0
+;;
+(init)
+_arguments "${_arguments_options[@]}" : \
+'--color=[Control colored output\: auto, always, never]:COLOR:(auto always never)' \
+'(--no-config --isolated)--config=[Path to configuration file]:CONFIG:_default' \
+'--pyproject[Generate configuration for pyproject.toml instead of .rumdl.toml]' \
+'--no-config[Ignore all configuration files and use built-in defaults]' \
+'(--no-config)--isolated[Ignore all configuration files (alias for --no-config)]' \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(rule)
+_arguments "${_arguments_options[@]}" : \
+'-o+[Output format\: text, json, or json-lines]:FORMAT:_default' \
+'--output-format=[Output format\: text, json, or json-lines]:FORMAT:_default' \
+'-c+[Filter by category (use --list-categories to see options)]:CATEGORY:_default' \
+'--category=[Filter by category (use --list-categories to see options)]:CATEGORY:_default' \
+'--color=[Control colored output\: auto, always, never]:COLOR:(auto always never)' \
+'(--no-config --isolated)--config=[Path to configuration file]:CONFIG:_default' \
+'-f[Filter to only fixable rules]' \
+'--fixable[Filter to only fixable rules]' \
+'--explain[Include full documentation in output (for json/json-lines)]' \
+'--list-categories[List available categories and exit]' \
+'--no-config[Ignore all configuration files and use built-in defaults]' \
+'(--no-config)--isolated[Ignore all configuration files (alias for --no-config)]' \
+'-h[Print help]' \
+'--help[Print help]' \
+'::rule -- Rule name or ID (optional, omit to list all rules):_default' \
+&& ret=0
+;;
+(explain)
+_arguments "${_arguments_options[@]}" : \
+'--color=[Control colored output\: auto, always, never]:COLOR:(auto always never)' \
+'(--no-config --isolated)--config=[Path to configuration file]:CONFIG:_default' \
+'--no-config[Ignore all configuration files and use built-in defaults]' \
+'(--no-config)--isolated[Ignore all configuration files (alias for --no-config)]' \
+'-h[Print help]' \
+'--help[Print help]' \
+':rule -- Rule name or ID to explain:_default' \
+&& ret=0
+;;
+(config)
+_arguments "${_arguments_options[@]}" : \
+'--output=[Output format (e.g. toml, json)]:OUTPUT:_default' \
+'--color=[Control colored output\: auto, always, never]:COLOR:(auto always never)' \
+'(--no-config --isolated)--config=[Path to configuration file]:CONFIG:_default' \
+'--defaults[Show only the default configuration values]' \
+'--no-defaults[Show only non-default configuration values (exclude defaults)]' \
+'--no-config[Ignore all configuration files and use built-in defaults]' \
+'(--no-config)--isolated[Ignore all configuration files (alias for --no-config)]' \
+'-h[Print help]' \
+'--help[Print help]' \
+":: :_rumdl__config_commands" \
+"*::: :->config" \
+&& ret=0
+
+    case $state in
+    (config)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:rumdl-config-command-$line[1]:"
+        case $line[1] in
+            (get)
+_arguments "${_arguments_options[@]}" : \
+'--color=[Control colored output\: auto, always, never]:COLOR:(auto always never)' \
+'(--no-config --isolated)--config=[Path to configuration file]:CONFIG:_default' \
+'--no-config[Ignore all configuration files and use built-in defaults]' \
+'(--no-config)--isolated[Ignore all configuration files (alias for --no-config)]' \
+'-h[Print help]' \
+'--help[Print help]' \
+':key:_default' \
+&& ret=0
+;;
+(file)
+_arguments "${_arguments_options[@]}" : \
+'--color=[Control colored output\: auto, always, never]:COLOR:(auto always never)' \
+'(--no-config --isolated)--config=[Path to configuration file]:CONFIG:_default' \
+'--no-config[Ignore all configuration files and use built-in defaults]' \
+'(--no-config)--isolated[Ignore all configuration files (alias for --no-config)]' \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" : \
+":: :_rumdl__config__help_commands" \
+"*::: :->help" \
+&& ret=0
+
+    case $state in
+    (help)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:rumdl-config-help-command-$line[1]:"
+        case $line[1] in
+            (get)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(file)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+        esac
+    ;;
+esac
+;;
+(server)
+_arguments "${_arguments_options[@]}" : \
+'--port=[TCP port to listen on (for debugging)]:PORT:_default' \
+'-c+[Path to rumdl configuration file]:CONFIG:_default' \
+'--config=[Path to rumdl configuration file]:CONFIG:_default' \
+'--color=[Control colored output\: auto, always, never]:COLOR:(auto always never)' \
+'--stdio[Use stdio for communication (default)]' \
+'-v[Enable verbose logging]' \
+'--verbose[Enable verbose logging]' \
+'--no-config[Ignore all configuration files and use built-in defaults]' \
+'(--no-config)--isolated[Ignore all configuration files (alias for --no-config)]' \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(schema)
+_arguments "${_arguments_options[@]}" : \
+'--color=[Control colored output\: auto, always, never]:COLOR:(auto always never)' \
+'(--no-config --isolated)--config=[Path to configuration file]:CONFIG:_default' \
+'--no-config[Ignore all configuration files and use built-in defaults]' \
+'(--no-config)--isolated[Ignore all configuration files (alias for --no-config)]' \
+'-h[Print help]' \
+'--help[Print help]' \
+":: :_rumdl__schema_commands" \
+"*::: :->schema" \
+&& ret=0
+
+    case $state in
+    (schema)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:rumdl-schema-command-$line[1]:"
+        case $line[1] in
+            (generate)
+_arguments "${_arguments_options[@]}" : \
+'--color=[Control colored output\: auto, always, never]:COLOR:(auto always never)' \
+'(--no-config --isolated)--config=[Path to configuration file]:CONFIG:_default' \
+'--no-config[Ignore all configuration files and use built-in defaults]' \
+'(--no-config)--isolated[Ignore all configuration files (alias for --no-config)]' \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(check)
+_arguments "${_arguments_options[@]}" : \
+'--color=[Control colored output\: auto, always, never]:COLOR:(auto always never)' \
+'(--no-config --isolated)--config=[Path to configuration file]:CONFIG:_default' \
+'--no-config[Ignore all configuration files and use built-in defaults]' \
+'(--no-config)--isolated[Ignore all configuration files (alias for --no-config)]' \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(print)
+_arguments "${_arguments_options[@]}" : \
+'--color=[Control colored output\: auto, always, never]:COLOR:(auto always never)' \
+'(--no-config --isolated)--config=[Path to configuration file]:CONFIG:_default' \
+'--no-config[Ignore all configuration files and use built-in defaults]' \
+'(--no-config)--isolated[Ignore all configuration files (alias for --no-config)]' \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" : \
+":: :_rumdl__schema__help_commands" \
+"*::: :->help" \
+&& ret=0
+
+    case $state in
+    (help)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:rumdl-schema-help-command-$line[1]:"
+        case $line[1] in
+            (generate)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(check)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(print)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+        esac
+    ;;
+esac
+;;
+(import)
+_arguments "${_arguments_options[@]}" : \
+'-o+[Output file path (default\: .rumdl.toml)]:OUTPUT:_default' \
+'--output=[Output file path (default\: .rumdl.toml)]:OUTPUT:_default' \
+'--format=[Output format\: toml or json]:FORMAT:_default' \
+'--color=[Control colored output\: auto, always, never]:COLOR:(auto always never)' \
+'(--no-config --isolated)--config=[Path to configuration file]:CONFIG:_default' \
+'--dry-run[Show converted config without writing to file]' \
+'--no-config[Ignore all configuration files and use built-in defaults]' \
+'(--no-config)--isolated[Ignore all configuration files (alias for --no-config)]' \
+'-h[Print help]' \
+'--help[Print help]' \
+':file -- Path to markdownlint config file (JSON/YAML):_default' \
+&& ret=0
+;;
+(vscode)
+_arguments "${_arguments_options[@]}" : \
+'--color=[Control colored output\: auto, always, never]:COLOR:(auto always never)' \
+'(--no-config --isolated)--config=[Path to configuration file]:CONFIG:_default' \
+'--force[Force reinstall the current version even if already installed]' \
+'--update[Update to the latest version (only if newer version available)]' \
+'--status[Show installation status without installing]' \
+'--no-config[Ignore all configuration files and use built-in defaults]' \
+'(--no-config)--isolated[Ignore all configuration files (alias for --no-config)]' \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(completions)
+_arguments "${_arguments_options[@]}" : \
+'--color=[Control colored output\: auto, always, never]:COLOR:(auto always never)' \
+'(--no-config --isolated)--config=[Path to configuration file]:CONFIG:_default' \
+'-l[List available shells]' \
+'--list[List available shells]' \
+'--no-config[Ignore all configuration files and use built-in defaults]' \
+'(--no-config)--isolated[Ignore all configuration files (alias for --no-config)]' \
+'-h[Print help]' \
+'--help[Print help]' \
+'::shell -- Shell to generate completions for (detected from $SHELL if omitted):(bash elvish fish powershell zsh)' \
+&& ret=0
+;;
+(clean)
+_arguments "${_arguments_options[@]}" : \
+'--color=[Control colored output\: auto, always, never]:COLOR:(auto always never)' \
+'(--no-config --isolated)--config=[Path to configuration file]:CONFIG:_default' \
+'--no-config[Ignore all configuration files and use built-in defaults]' \
+'(--no-config)--isolated[Ignore all configuration files (alias for --no-config)]' \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(version)
+_arguments "${_arguments_options[@]}" : \
+'--color=[Control colored output\: auto, always, never]:COLOR:(auto always never)' \
+'(--no-config --isolated)--config=[Path to configuration file]:CONFIG:_default' \
+'--no-config[Ignore all configuration files and use built-in defaults]' \
+'(--no-config)--isolated[Ignore all configuration files (alias for --no-config)]' \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" : \
+":: :_rumdl__help_commands" \
+"*::: :->help" \
+&& ret=0
+
+    case $state in
+    (help)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:rumdl-help-command-$line[1]:"
+        case $line[1] in
+            (check)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(fmt)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(init)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(rule)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(explain)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(config)
+_arguments "${_arguments_options[@]}" : \
+":: :_rumdl__help__config_commands" \
+"*::: :->config" \
+&& ret=0
+
+    case $state in
+    (config)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:rumdl-help-config-command-$line[1]:"
+        case $line[1] in
+            (get)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(file)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+(server)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(schema)
+_arguments "${_arguments_options[@]}" : \
+":: :_rumdl__help__schema_commands" \
+"*::: :->schema" \
+&& ret=0
+
+    case $state in
+    (schema)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:rumdl-help-schema-command-$line[1]:"
+        case $line[1] in
+            (generate)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(check)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(print)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+(import)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(vscode)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(completions)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(clean)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(version)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+        esac
+    ;;
+esac
+}
+
+(( $+functions[_rumdl_commands] )) ||
+_rumdl_commands() {
+    local commands; commands=(
+'check:Lint Markdown files and print warnings/errors' \
+'fmt:Format Markdown files (alias for check --fix)' \
+'init:Initialize a new configuration file' \
+'rule:Show information about a rule or list all rules' \
+'explain:Explain a rule with detailed information and examples' \
+'config:Show configuration or query a specific key' \
+'server:Start the Language Server Protocol server' \
+'schema:Generate or check JSON schema for rumdl.toml' \
+'import:Import and convert markdownlint configuration files' \
+'vscode:Install the rumdl VS Code extension' \
+'completions:Generate shell completion scripts' \
+'clean:Clear the cache' \
+'version:Show version information' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'rumdl commands' commands "$@"
+}
+(( $+functions[_rumdl__check_commands] )) ||
+_rumdl__check_commands() {
+    local commands; commands=()
+    _describe -t commands 'rumdl check commands' commands "$@"
+}
+(( $+functions[_rumdl__clean_commands] )) ||
+_rumdl__clean_commands() {
+    local commands; commands=()
+    _describe -t commands 'rumdl clean commands' commands "$@"
+}
+(( $+functions[_rumdl__completions_commands] )) ||
+_rumdl__completions_commands() {
+    local commands; commands=()
+    _describe -t commands 'rumdl completions commands' commands "$@"
+}
+(( $+functions[_rumdl__config_commands] )) ||
+_rumdl__config_commands() {
+    local commands; commands=(
+'get:Query a specific config key (e.g. global.exclude or MD013.line_length)' \
+'file:Show the absolute path of the configuration file that was loaded' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'rumdl config commands' commands "$@"
+}
+(( $+functions[_rumdl__config__file_commands] )) ||
+_rumdl__config__file_commands() {
+    local commands; commands=()
+    _describe -t commands 'rumdl config file commands' commands "$@"
+}
+(( $+functions[_rumdl__config__get_commands] )) ||
+_rumdl__config__get_commands() {
+    local commands; commands=()
+    _describe -t commands 'rumdl config get commands' commands "$@"
+}
+(( $+functions[_rumdl__config__help_commands] )) ||
+_rumdl__config__help_commands() {
+    local commands; commands=(
+'get:Query a specific config key (e.g. global.exclude or MD013.line_length)' \
+'file:Show the absolute path of the configuration file that was loaded' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'rumdl config help commands' commands "$@"
+}
+(( $+functions[_rumdl__config__help__file_commands] )) ||
+_rumdl__config__help__file_commands() {
+    local commands; commands=()
+    _describe -t commands 'rumdl config help file commands' commands "$@"
+}
+(( $+functions[_rumdl__config__help__get_commands] )) ||
+_rumdl__config__help__get_commands() {
+    local commands; commands=()
+    _describe -t commands 'rumdl config help get commands' commands "$@"
+}
+(( $+functions[_rumdl__config__help__help_commands] )) ||
+_rumdl__config__help__help_commands() {
+    local commands; commands=()
+    _describe -t commands 'rumdl config help help commands' commands "$@"
+}
+(( $+functions[_rumdl__explain_commands] )) ||
+_rumdl__explain_commands() {
+    local commands; commands=()
+    _describe -t commands 'rumdl explain commands' commands "$@"
+}
+(( $+functions[_rumdl__fmt_commands] )) ||
+_rumdl__fmt_commands() {
+    local commands; commands=()
+    _describe -t commands 'rumdl fmt commands' commands "$@"
+}
+(( $+functions[_rumdl__help_commands] )) ||
+_rumdl__help_commands() {
+    local commands; commands=(
+'check:Lint Markdown files and print warnings/errors' \
+'fmt:Format Markdown files (alias for check --fix)' \
+'init:Initialize a new configuration file' \
+'rule:Show information about a rule or list all rules' \
+'explain:Explain a rule with detailed information and examples' \
+'config:Show configuration or query a specific key' \
+'server:Start the Language Server Protocol server' \
+'schema:Generate or check JSON schema for rumdl.toml' \
+'import:Import and convert markdownlint configuration files' \
+'vscode:Install the rumdl VS Code extension' \
+'completions:Generate shell completion scripts' \
+'clean:Clear the cache' \
+'version:Show version information' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'rumdl help commands' commands "$@"
+}
+(( $+functions[_rumdl__help__check_commands] )) ||
+_rumdl__help__check_commands() {
+    local commands; commands=()
+    _describe -t commands 'rumdl help check commands' commands "$@"
+}
+(( $+functions[_rumdl__help__clean_commands] )) ||
+_rumdl__help__clean_commands() {
+    local commands; commands=()
+    _describe -t commands 'rumdl help clean commands' commands "$@"
+}
+(( $+functions[_rumdl__help__completions_commands] )) ||
+_rumdl__help__completions_commands() {
+    local commands; commands=()
+    _describe -t commands 'rumdl help completions commands' commands "$@"
+}
+(( $+functions[_rumdl__help__config_commands] )) ||
+_rumdl__help__config_commands() {
+    local commands; commands=(
+'get:Query a specific config key (e.g. global.exclude or MD013.line_length)' \
+'file:Show the absolute path of the configuration file that was loaded' \
+    )
+    _describe -t commands 'rumdl help config commands' commands "$@"
+}
+(( $+functions[_rumdl__help__config__file_commands] )) ||
+_rumdl__help__config__file_commands() {
+    local commands; commands=()
+    _describe -t commands 'rumdl help config file commands' commands "$@"
+}
+(( $+functions[_rumdl__help__config__get_commands] )) ||
+_rumdl__help__config__get_commands() {
+    local commands; commands=()
+    _describe -t commands 'rumdl help config get commands' commands "$@"
+}
+(( $+functions[_rumdl__help__explain_commands] )) ||
+_rumdl__help__explain_commands() {
+    local commands; commands=()
+    _describe -t commands 'rumdl help explain commands' commands "$@"
+}
+(( $+functions[_rumdl__help__fmt_commands] )) ||
+_rumdl__help__fmt_commands() {
+    local commands; commands=()
+    _describe -t commands 'rumdl help fmt commands' commands "$@"
+}
+(( $+functions[_rumdl__help__help_commands] )) ||
+_rumdl__help__help_commands() {
+    local commands; commands=()
+    _describe -t commands 'rumdl help help commands' commands "$@"
+}
+(( $+functions[_rumdl__help__import_commands] )) ||
+_rumdl__help__import_commands() {
+    local commands; commands=()
+    _describe -t commands 'rumdl help import commands' commands "$@"
+}
+(( $+functions[_rumdl__help__init_commands] )) ||
+_rumdl__help__init_commands() {
+    local commands; commands=()
+    _describe -t commands 'rumdl help init commands' commands "$@"
+}
+(( $+functions[_rumdl__help__rule_commands] )) ||
+_rumdl__help__rule_commands() {
+    local commands; commands=()
+    _describe -t commands 'rumdl help rule commands' commands "$@"
+}
+(( $+functions[_rumdl__help__schema_commands] )) ||
+_rumdl__help__schema_commands() {
+    local commands; commands=(
+'generate:Generate/update the JSON schema file' \
+'check:Check if the schema is up-to-date' \
+'print:Print the schema to stdout' \
+    )
+    _describe -t commands 'rumdl help schema commands' commands "$@"
+}
+(( $+functions[_rumdl__help__schema__check_commands] )) ||
+_rumdl__help__schema__check_commands() {
+    local commands; commands=()
+    _describe -t commands 'rumdl help schema check commands' commands "$@"
+}
+(( $+functions[_rumdl__help__schema__generate_commands] )) ||
+_rumdl__help__schema__generate_commands() {
+    local commands; commands=()
+    _describe -t commands 'rumdl help schema generate commands' commands "$@"
+}
+(( $+functions[_rumdl__help__schema__print_commands] )) ||
+_rumdl__help__schema__print_commands() {
+    local commands; commands=()
+    _describe -t commands 'rumdl help schema print commands' commands "$@"
+}
+(( $+functions[_rumdl__help__server_commands] )) ||
+_rumdl__help__server_commands() {
+    local commands; commands=()
+    _describe -t commands 'rumdl help server commands' commands "$@"
+}
+(( $+functions[_rumdl__help__version_commands] )) ||
+_rumdl__help__version_commands() {
+    local commands; commands=()
+    _describe -t commands 'rumdl help version commands' commands "$@"
+}
+(( $+functions[_rumdl__help__vscode_commands] )) ||
+_rumdl__help__vscode_commands() {
+    local commands; commands=()
+    _describe -t commands 'rumdl help vscode commands' commands "$@"
+}
+(( $+functions[_rumdl__import_commands] )) ||
+_rumdl__import_commands() {
+    local commands; commands=()
+    _describe -t commands 'rumdl import commands' commands "$@"
+}
+(( $+functions[_rumdl__init_commands] )) ||
+_rumdl__init_commands() {
+    local commands; commands=()
+    _describe -t commands 'rumdl init commands' commands "$@"
+}
+(( $+functions[_rumdl__rule_commands] )) ||
+_rumdl__rule_commands() {
+    local commands; commands=()
+    _describe -t commands 'rumdl rule commands' commands "$@"
+}
+(( $+functions[_rumdl__schema_commands] )) ||
+_rumdl__schema_commands() {
+    local commands; commands=(
+'generate:Generate/update the JSON schema file' \
+'check:Check if the schema is up-to-date' \
+'print:Print the schema to stdout' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'rumdl schema commands' commands "$@"
+}
+(( $+functions[_rumdl__schema__check_commands] )) ||
+_rumdl__schema__check_commands() {
+    local commands; commands=()
+    _describe -t commands 'rumdl schema check commands' commands "$@"
+}
+(( $+functions[_rumdl__schema__generate_commands] )) ||
+_rumdl__schema__generate_commands() {
+    local commands; commands=()
+    _describe -t commands 'rumdl schema generate commands' commands "$@"
+}
+(( $+functions[_rumdl__schema__help_commands] )) ||
+_rumdl__schema__help_commands() {
+    local commands; commands=(
+'generate:Generate/update the JSON schema file' \
+'check:Check if the schema is up-to-date' \
+'print:Print the schema to stdout' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'rumdl schema help commands' commands "$@"
+}
+(( $+functions[_rumdl__schema__help__check_commands] )) ||
+_rumdl__schema__help__check_commands() {
+    local commands; commands=()
+    _describe -t commands 'rumdl schema help check commands' commands "$@"
+}
+(( $+functions[_rumdl__schema__help__generate_commands] )) ||
+_rumdl__schema__help__generate_commands() {
+    local commands; commands=()
+    _describe -t commands 'rumdl schema help generate commands' commands "$@"
+}
+(( $+functions[_rumdl__schema__help__help_commands] )) ||
+_rumdl__schema__help__help_commands() {
+    local commands; commands=()
+    _describe -t commands 'rumdl schema help help commands' commands "$@"
+}
+(( $+functions[_rumdl__schema__help__print_commands] )) ||
+_rumdl__schema__help__print_commands() {
+    local commands; commands=()
+    _describe -t commands 'rumdl schema help print commands' commands "$@"
+}
+(( $+functions[_rumdl__schema__print_commands] )) ||
+_rumdl__schema__print_commands() {
+    local commands; commands=()
+    _describe -t commands 'rumdl schema print commands' commands "$@"
+}
+(( $+functions[_rumdl__server_commands] )) ||
+_rumdl__server_commands() {
+    local commands; commands=()
+    _describe -t commands 'rumdl server commands' commands "$@"
+}
+(( $+functions[_rumdl__version_commands] )) ||
+_rumdl__version_commands() {
+    local commands; commands=()
+    _describe -t commands 'rumdl version commands' commands "$@"
+}
+(( $+functions[_rumdl__vscode_commands] )) ||
+_rumdl__vscode_commands() {
+    local commands; commands=()
+    _describe -t commands 'rumdl vscode commands' commands "$@"
+}
+
+if [ "$funcstack[1]" = "_rumdl" ]; then
+    _rumdl "$@"
+else
+    compdef _rumdl rumdl
+fi

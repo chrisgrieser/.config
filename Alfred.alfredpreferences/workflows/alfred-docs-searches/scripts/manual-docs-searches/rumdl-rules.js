@@ -16,31 +16,27 @@ function httpRequest(url) {
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
-	const docsUrl = "https://raw.githubusercontent.com/rvben/rumdl/refs/heads/main/docs/RULES.md";
-	const baseUrl = "https://rumdl.dev";
+	const jsonUrl = "https://raw.githubusercontent.com/rvben/rumdl/main/rules.json";
 
-	const workArray = httpRequest(docsUrl)
-		.split("\n")
-		.flatMap((line) => {
-			const [_, id, name, desc] =
-				line.match(/^\|.*?(MD\d{3}).*?\| *(.*?) *\| *(.*?) *\|$/) || [];
-			if (!(id && name && desc)) return [];
-
-			const url = `${baseUrl}/${id.toLowerCase()}/`;
-			const num = id.match(/\d\d$/)?.[0] || "";
+	const workArray = JSON.parse(httpRequest(jsonUrl)).map(
+		(
+			/** @type {{ code: string; name: string; summary: string; category: string; url: string; }} */ rule,
+		) => {
+			const { code, name, summary, category, url } = rule;
 
 			return {
-				title: name,
-				subtitle: `${id}: ${desc}`,
-				match: [id, num, name].join(" "),
+				title: `${code} – ${name}`,
+				subtitle: `[${category}] ${summary}`,
+				match: [code, name, category, summary].join(" "),
 				mods: {
-					cmd: { arg: id }, // copy entry
+					cmd: { arg: code }, // copy entry
 				},
 				arg: url,
 				quicklookurl: url,
-				uid: id,
+				uid: code,
 			};
-		});
+		},
+	);
 
 	return JSON.stringify({
 		items: workArray,
