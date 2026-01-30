@@ -4,7 +4,7 @@
 -- BYOK: https://github.com/milanglacier/minuet-ai.nvim
 -- Copilot plugin (subscription): https://github.com/zbirenbaum/copilot.lua#setup-and-configuration
 -- Copilot LSP (subscription), requires nvim 0.12 https://github.com/github/copilot-language-server-release
--- 
+--
 -- Cerebras: https://github.com/4tyone/snek-nvim
 -- Cerebras: https://github.com/jim-at-jibba/nvim-stride
 --------------------------------------------------------------------------------
@@ -13,7 +13,7 @@ return {
 	"monkoose/neocodeium",
 	event = "InsertEnter",
 	cmd = "NeoCodeium",
-	enabled = false,
+	-- enabled = false,
 	opts = {
 		silent = true,
 		show_label = false, -- signcolumn label for number of suggestions
@@ -28,8 +28,6 @@ return {
 		require("neocodeium").setup(opts)
 
 		vim.g.lualineAdd("sections", "lualine_x", function()
-			if vim.fn.reg_recording() ~= "" then return "" end -- not needed since disabled when recording
-
 			-- number meanings: https://github.com/monkoose/neocodeium#-statusline
 			local status, server = require("neocodeium").get_status()
 			if status == 0 and server == 0 then return "" end -- working correctly = no component
@@ -37,8 +35,8 @@ return {
 			if server == 2 then return "󱚟 server" end
 			if status == 1 then return "󱚧 global" end
 			if status == 2 or status == 3 or status == 4 then return "󱚧 buffer" end
-			if status == 6 then return "󱚧 buftype" end
 			if status == 5 then return "󱚧 encoding" end
+			if status == 6 then return "󱚧 buftype" end
 			return "󱚟 Unknown error"
 		end, "before")
 	end,

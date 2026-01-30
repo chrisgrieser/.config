@@ -134,3 +134,4 @@ matches:
   - { replace: line, trigger: lien, propagate_case: true, word: true }
   - { replace: fails, trigger: faisl, propagate_case: true, word: true }
   - { replace: without, trigger: withuot, propagate_case: true, word: true }
+  - { replace: new, trigger: enw, propagate_case: true, word: true }
