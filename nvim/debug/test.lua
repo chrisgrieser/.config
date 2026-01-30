@@ -1,3 +1,4 @@
--- Recall that XXXXXX defined the sum of two elements of 𝐅𝑛 to be the element of 𝐅𝑛
--- obtained by adding corresponding coordinates; see 1.13. As XXXXXX will now see,
--- addition has a simple geometric interpretation in the special case of 𝐑2.
+local function quicksort(list)
+	local f = 1
+	
+end

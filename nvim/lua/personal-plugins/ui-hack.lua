@@ -9,6 +9,7 @@ local hasNotificationPlugin = (
 )
 if not hasNotificationPlugin then return end
 if vim.fn.has("gui_running") == 0 then return end -- somehow this only works in a GUI?
+vim.notify("🪚 🔵")
 --------------------------------------------------------------------------------
 
 local config = {
