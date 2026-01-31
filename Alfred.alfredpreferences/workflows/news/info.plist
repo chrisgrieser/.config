@@ -149,7 +149,7 @@
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
-				<string>https://archive.today/{query}</string>
+				<string>https://removepaywalls.com/{query}</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.openurl</string>
