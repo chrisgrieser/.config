@@ -37,11 +37,14 @@ local function workLayout(shouldDarkenDisplay)
 	u.quitFullscreenAndVideoApps()
 
 	-- open things
-	u.openApps { "Ivory", isWorkWeek() and "Slack" or nil, "Gmail", "AlfredExtraPane" }
-	u.defer({1, 2}, function()
-		wu.moveResize("Ivory", wu.toTheSide)
+	u.openApps { isWorkWeek() and "Slack" or nil, "Gmail", "AlfredExtraPane" }
+	u.defer(1, function()
 		if isWorkWeek() then wu.moveResize("Slack", wu.pseudoMax) end
 		wu.moveResize("Gmail", wu.pseudoMax)
+
+		-- FIX Ivory not opening correctly
+		u.openApps("Ivory")
+		u.defer(1, function() wu.moveResize("Ivory", wu.toTheSide) end)
 	end)
 
 	print("🔲 Layout: work")
