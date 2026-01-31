@@ -38,11 +38,6 @@ local function workLayout(shouldDarkenDisplay)
 
 	-- open things
 	u.openApps { "Ivory", isWorkWeek() and "Slack" or nil, "Gmail", "AlfredExtraPane" }
-	u.defer(1, function()
-		wu.moveResize("Ivory", wu.toTheSide)
-		if isWorkWeek() then wu.moveResize("Slack", wu.pseudoMax) end
-		wu.moveResize("Gmail", wu.pseudoMax)
-	end)
 
 	print("🔲 Layout: work")
 end
