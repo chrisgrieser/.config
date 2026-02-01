@@ -15,5 +15,6 @@ else
 	-- is reloading
 	print("\n---------------------- HAMMERSPOON RELOAD ----------------------\n")
 	os.remove(reloadIndicator)
+	hs.notify.show("Hammerspoon", "", "✅ Finished reload")
 	u.defer(0.2, require("appearance.console").cleanupConsole)
 end

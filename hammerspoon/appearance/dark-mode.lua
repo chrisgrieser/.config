@@ -89,7 +89,7 @@ function M.autoSwitch()
 		logBrightness("Auto-switch to dark", lightThreshold)
 		M.setDarkMode("dark")
 	else
-		logBrightness("Auto-switch skipped.", lightThreshold)
+		logBrightness("No auto-switch.", lightThreshold)
 	end
 end
 
