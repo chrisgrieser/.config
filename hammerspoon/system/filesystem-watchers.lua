@@ -44,9 +44,6 @@ M.pathw_desktop = pathw(home .. "/Desktop/", function(paths, _)
 			end
 
 		---BROWSER EXTENSION SETTING BACKUPS--------------------------------------
-		elseif name == "ublacklist-settings.json" then
-			success, errmsg = os.rename(path, browserConfigs .. name)
-			if success then u.notify("✅ ublacklist settings backed up.") end
 		elseif name == "Redirector.json" then
 			success, errmsg = os.rename(path, browserConfigs .. name)
 			if success then u.notify("✅ Redirector settings backed up.") end
@@ -61,7 +58,7 @@ M.pathw_desktop = pathw(home .. "/Desktop/", function(paths, _)
 		---APP AND SERVICE BACKUPS------------------------------------------------
 		elseif name == "following_accounts.csv" then
 			success, errmsg = os.rename(path, backupFolder .. "Mastodon/" .. name)
-			if success then u.notify("✅ Mastodon follows backed up.") end
+			if success then u.notify("✅ Mastodon followings backed up.") end
 			success, errmsg = os.rename(path, backupFolder .. "Inoreader Feeds.opml")
 			if success then u.notify("✅ Inoreader feeds backed up.") end
 		elseif name == "Catch.xml" then
@@ -83,17 +80,14 @@ M.pathw_desktop = pathw(home .. "/Desktop/", function(paths, _)
 			success, errmsg = hs.fs.mkdir(receiptPath)
 			u.defer(1, function() os.rename(path, receiptPath .. "/" .. name) end) -- delay ensures folder is created
 			u.openUrlInBg(receiptPath)
+
 		---BANKING----------------------------------------------------------------
-		elseif
-			name:find("[%d-]_Kontoauszug_%d.*%.pdf$")
-			or name:find(".*_zu_Depot_%d.*%.pdf$")
-			or name:find(".*_Festgeldkonto%.pdf$")
-		then
-			local year = name:match("^%d%d%d%d")
-			if year then
-				local folder = name:find("Depot") and "DKB Depot" or "DKB Geldkonten"
+		elseif name:find("[%d-]_Kontoauszug_.*%.pdf$") or name:find(".*_zu_Depot_.*%.pdf$") then
+			local year = (name:match("_20%d%d") or name:match("^%d%d%d%d") or ""):gsub("^_", "")
+			if year ~= nil then
+				local folder = name:find("Depot") and "Depot" or "Geldkonten"
 				-- stylua: ignore
-				local bankPath = ("%s/Documents/Finanzen/Vermögen (DKB)/%s/%s"):format(home, folder, year)
+				local bankPath = ("%s/Documents/Finanzen/Vermögen (ING-DiBa)/%s/%s"):format(home, folder, year)
 				success, errmsg = hs.fs.mkdir(bankPath) -- create directory in case of new year
 				u.defer(1, function() os.rename(path, bankPath .. "/" .. name) end) -- delay ensures folder is created
 				u.openUrlInBg(bankPath)
