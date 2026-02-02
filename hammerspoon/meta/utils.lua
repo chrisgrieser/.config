@@ -167,7 +167,8 @@ end
 function M.openApps(appNames)
 	if type(appNames) == "string" then appNames = { appNames } end
 	for _, name in pairs(appNames) do
-		hs.application.open(name)
+		local runs = M.app(name) ~= nil
+		if not runs then hs.application.open(name) end
 	end
 end
 
