@@ -39,7 +39,7 @@ local function workLayout(shouldDarkenDisplay)
 
 	-- open things
 	u.openApps { "Ivory", isWorkWeek() and "Slack" or nil, "Gmail", "AlfredExtraPane" }
-	u.defer(1, function() u.openApps("Ivory") end) -- FIX Ivory not opening correctly
+	u.defer(1, function() u.app("Gmail"):activate() end)
 
 	print("🔲 Layout: work")
 end

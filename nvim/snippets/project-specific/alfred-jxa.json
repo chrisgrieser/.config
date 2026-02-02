@@ -1,4 +1,17 @@
 {
+  "Alfred Error Item (function)": {
+    "body": [
+      "/**",
+      " * @param {string} title",
+      " * @param {string=} subtitle",
+      " */",
+      "function alfredErrorItem(title, subtitle) {",
+      "\tif (!subtitle) subtitle = \"\";",
+      "\treturn JSON.stringify({ items: [{ title: \"⛔ \" + title, subtitle: subtitle, valid: false }] });",
+      "}"
+    ],
+    "prefix": "Error item func (Alfred)"
+  },
   "AlfredRun": {
     "body": [
       "/** @type {AlfredRun} */",
@@ -143,6 +156,6 @@
   },
   "reload Alfred workflow": {
     "body": "Application(\"com.runningwithcrayons.Alfred\").reloadWorkflow(\\$.getenv(\"alfred_workflow_bundleid\"))",
-    "prefix": "reload Alfred workflow"
+    "prefix": "reload workflow (Alfred)"
   }
 }
