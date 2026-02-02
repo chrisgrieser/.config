@@ -60,10 +60,6 @@ function run() {
 		);
 	} catch (_error) {
 		console.log("`ioreg` output could not be parsed: " + ioregOutput);
-		return alfredErrorItem(
-			"`ioreg` output could not be parsed.",
-			"Check the Alfred debugging log for further information.",
-		);
 	}
 
 	const excludedDevices = $.getenv("excluded_devices").split(/ *, */);
