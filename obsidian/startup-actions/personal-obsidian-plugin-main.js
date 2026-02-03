@@ -97,8 +97,9 @@ function updateSpellStatusbar(plugin) {
 	}
 }
 
-function updateProgressStatusbar(plugin) {
+function updateProgressStatusbar(plugin, editor) {
 	const { app, progressStatusbar } = plugin;
+	if editor.li
 	progressStatusbar.style.setProperty("display", "none");
 }
 
@@ -170,9 +171,12 @@ class StartupActionsPlugin extends obsidian.Plugin {
 		this.registerEvent(this.app.vault.on("config-changed", () => updateSpellStatusbar(this)));
 
 		// 1c. statusbar: progress
-		this.app.workspace.onLayoutReady(() => updateSpellStatusbar(this));
-		- TODO on scroll
-		this.registerEvent(this.app.vault.on("", () => updateProgressStatusbar(this)));
+		this.app.workspace.onLayoutReady(() => updateProgressStatusbar(this));
+		this.registerEvent(
+			this.app.workspace.on("editor-selection-change", (editor) => {
+				updateProgressStatusbar(this, editor);
+			}),
+		);
 
 		// 2. "New file in folder" command
 		this.addCommand({
