@@ -8,7 +8,7 @@ class NewFileInFolder extends obsidian.FuzzySuggestModal {
 
 	constructor(app) {
 		super(app);
-		this.setPlaceholder("Select folder to create new file in…");
+		this.setPlaceholder("Select folder to create new file in.");
 
 		// navigate via `Tab` and `Shift-tab`
 		this.scope.register([], "Tab", () => {
@@ -146,8 +146,8 @@ function ensureScrolloffset(editor) {
 	const excessAtTop = viewportHeight * distancePercent - cursorCoord.top;
 	const excessAtBottom = cursorCoord.bottom - viewportHeight * (1 - distancePercent);
 	if (excessAtTop > 0) {
-		// INFO editor.scrollTo()'s y is referring to the top of `.cm-scroller`
-		// which can be retrieved from editor.getScrollInfo().top. It's an
+		// INFO `editor.scrollTo()`'s `y` is referring to the top of `.cm-scroller`
+		// which can be retrieved from `editor.getScrollInfo().top`. It's an
 		// absolute value marking the top of the file (beyond the viewport).
 		editor.scrollTo(null, viewportTop - excessAtTop);
 	}
@@ -200,7 +200,7 @@ class StartupActionsPlugin extends obsidian.Plugin {
 		// 3. hide window buttons
 		if (!this.app.isMobile) electronWindow.setWindowButtonVisibility(false);
 
-		// 4. register URIs
+		// 4. register URI for reloading plugins
 		// use via: obsidian://reload-plugin?id=plugin_id&vault=vault_name
 		this.app.workspace.onLayoutReady(() => {
 			this.registerObsidianProtocolHandler("reload-plugin", async (uriParams) => {
