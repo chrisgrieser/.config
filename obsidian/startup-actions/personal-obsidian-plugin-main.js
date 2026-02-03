@@ -97,6 +97,11 @@ function updateSpellStatusbar(plugin) {
 	}
 }
 
+function updateProgressStatusbar(plugin) {
+	const { app, progressStatusbar } = plugin;
+	progressStatusbar.style.setProperty("display", "none");
+}
+
 async function reloadPlugin(app, pluginId) {
 	if (!pluginId) {
 		new Notice("No plugin ID provided.");
@@ -145,6 +150,7 @@ class StartupActionsPlugin extends obsidian.Plugin {
 	tasksAreUpdating = false;
 	taskStatusbar = this.addStatusBarItem();
 	spellStatusbar = this.addStatusBarItem();
+	progressStatusbar = this.addStatusBarItem();
 	scrollRef = null;
 
 	onload() {
@@ -162,6 +168,11 @@ class StartupActionsPlugin extends obsidian.Plugin {
 		// 1b. statusbar: spellcheck
 		this.app.workspace.onLayoutReady(() => updateSpellStatusbar(this));
 		this.registerEvent(this.app.vault.on("config-changed", () => updateSpellStatusbar(this)));
+
+		// 1c. statusbar: progress
+		this.app.workspace.onLayoutReady(() => updateSpellStatusbar(this));
+		- TODO on scroll
+		this.registerEvent(this.app.vault.on("", () => updateProgressStatusbar(this)));
 
 		// 2. "New file in folder" command
 		this.addCommand({
