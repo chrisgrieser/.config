@@ -91,16 +91,27 @@ function updateSpellStatusbar(plugin) {
 	if (app.vault.getConfig("spellcheck")) {
 		spellStatusbar.style.setProperty("display", "block");
 		spellStatusbar.style.setProperty("order", -2); // move to the *very* left
-		spellStatusbar.setText("✓"); // utf checkmarks
+		spellStatusbar.setText("✓"); // utf checkmark
 	} else {
 		spellStatusbar.style.setProperty("display", "none");
 	}
 }
 
 function updateProgressStatusbar(plugin, editor) {
+	const minLines = 100; // CONFIG
 	const { app, progressStatusbar } = plugin;
-	if editor.li
-	progressStatusbar.style.setProperty("display", "none");
+	if (!editor) editor = app.workspace.activeEditor?.editor;
+	const totalLines = editor?.lineCount() || 0;
+	if (totalLines < minLines) {
+		progressStatusbar.style.setProperty("display", "none");
+		return;
+	}
+	const currentLine = editor.getCursor().line;
+	const progress = Math.round((currentLine / totalLines) * 100);
+	const progressText = `${progress}%`;
+	progressStatusbar.style.setProperty("order", -3); // move to the very, very left
+	progressStatusbar.style.setProperty("display", "block");
+	progressStatusbar.setText(progressText);
 }
 
 async function reloadPlugin(app, pluginId) {
