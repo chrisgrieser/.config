@@ -24,7 +24,7 @@ function do_backup {
 
 function _pretty_header() {
 	light_fg="\e[1;38;5;255m" # force white
-	dark_fg="\e[1;30m"
+	dark_fg="\e[1;38;5;232m" # force black
 	fg=$(defaults read -g AppleInterfaceStyle &> /dev/null && echo "$dark_fg" || echo "$light_fg")
 	bg="\e[1;44m"
 	[[ "$2" == "special" ]] && bg="\e[1;45m"
@@ -42,6 +42,7 @@ function backup() {
 		errors="$errors\n$short_name does not exist."
 		return 1
 	fi
+	echo
 	_pretty_header "Backup: $short_name"
 	mkdir -p "$bkp_to"
 
@@ -94,6 +95,7 @@ do_backup
 #───────────────────────────────────────────────────────────────────────────────
 # ARCHIVE OLDER BACKUPS
 
+echo
 _pretty_header "Archive of backups" "special"
 
 archive="$volume/older backups"
@@ -143,6 +145,7 @@ fi
 #───────────────────────────────────────────────────────────────────────────────
 # LOG & NOTIFY
 
+echo
 _pretty_header "Report" "special"
 if [[ -z "$errors" ]]; then
 	print "✅ Backup completed: $volume"
