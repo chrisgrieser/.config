@@ -13,6 +13,8 @@ async function updatePlugins() {
 	const app = view.app;
 	new Notice("Checking for updates…");
 	await app.plugins.checkForUpdates();
+	const allNotices = activeDocument.body.getElementsByClassName("notice");
+	for (const el of allNotices) el.hide();
 
 	// Click "Update All" Button
 	setTimeout(() => {
