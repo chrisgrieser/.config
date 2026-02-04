@@ -249,17 +249,24 @@ function run() {
 			.filter((event) => new Date(event.endTime).getTime() > Date.now()) // exclude past events
 			.map((event) => {
 				// time
-				const endOfToday = new Date().setHours(23, 59, 59);
+				const startOfToday = (new Date().setHours(0, 0, 0, 0)) - 1 // -1, since allday events start at midnight
+				const endOfToday = new Date().setHours(23, 59, 59, 59);
+				const startTime = new Date(event.startTime);
 				const endTime = new Date(event.endTime);
-				const endsAfterToday = endTime.getTime() > endOfToday;
+				const startedToday = startTime.getTime() > startOfToday && startTime.getTime() < endOfToday;
+				const endsToday = endTime.getTime() > startOfToday && endTime.getTime() < endOfToday;
+				const multiDayEvent = !startedToday || !endsToday;
+
 				let timeDisplay = "";
-				if (!event.isAllDay) {
-					const start = new Date(event.startTime).toLocaleTimeString([], timeFmt);
+				if (endsToday && !event.isAllDay) {
+					const start = startTime.toLocaleTimeString([], timeFmt)
 					const end = endTime.toLocaleTimeString([], timeFmt);
-					timeDisplay = start + " – " + end;
-				} else if (event.isAllDay && endsAfterToday) {
+					timeDisplay = ((startedToday ? start : "") + " – " + end).trim();
+				} else if (multiDayEvent) {
 					const daysUntilEnd = Math.ceil((endTime.getTime() - endOfToday) / 86_400_000);
-					timeDisplay = daysUntilEnd === 1 ? "ends tomorrow" : `ends in ${daysUntilEnd} days`;
+					if (!startedToday && daysUntilEnd === 0) timeDisplay = "ends today";
+					else if (daysUntilEnd === 1) timeDisplay = "ends tomorrow"
+					else timeDisplay = `ends in ${daysUntilEnd} days`;
 				}
 
 				// location
