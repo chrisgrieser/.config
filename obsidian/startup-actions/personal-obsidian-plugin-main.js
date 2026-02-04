@@ -163,7 +163,6 @@ class StartupActionsPlugin extends obsidian.Plugin {
 	taskStatusbar = this.addStatusBarItem();
 	spellStatusbar = this.addStatusBarItem();
 	progressStatusbar = this.addStatusBarItem();
-	scrollRef = null;
 
 	onload() {
 		console.info(this.manifest.name + " loaded.");
