@@ -2,6 +2,7 @@
 declare class Notice {
 	constructor(msg: string, duration?: number);
 	setMessage(msg: string): void;
+	hide(): void;
 }
 
 // ELECTRON

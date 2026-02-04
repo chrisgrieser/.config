@@ -11,19 +11,17 @@ function deleteLastChar() {
 
 async function updatePlugins() {
 	const app = view.app;
-	new Notice("Checking for updates…");
+	const notice = new Notice("Checking for updates…");
 	await app.plugins.checkForUpdates();
-	const allNotices = activeDocument.body.getElementsByClassName("notice");
-	for (const el of allNotices) el.hide();
+	notice.hide();
 
 	// Click "Update All" Button
 	setTimeout(() => {
 		const updateCount = Object.keys(app.plugins.updates).length;
-		if (updateCount > 0) {
-			app.setting.open();
-			app.setting.openTabById("community-plugins");
-			app.setting.activeTab.containerEl.findAll(".mod-cta").last().click();
-		}
+		if (updateCount === 0) return;
+		app.setting.open();
+		app.setting.openTabById("community-plugins");
+		app.setting.activeTab.containerEl.findAll(".mod-cta").last().click();
 	}, 1500); // timeout to avoid race condition still happening somehow
 }
 
@@ -148,7 +146,7 @@ function incrementHeading(dir) {
 		return "";
 	});
 	if (updatedLine === curLine) {
-		const noEmphasis = curLine.replace(/^[*_][*_]?|[*_][*_]?$/g, "")
+		const noEmphasis = curLine.replace(/^[*_][*_]?|[*_][*_]?$/g, "");
 		updatedLine = (dir === 1 ? "# " : "###### ") + noEmphasis;
 	}
 
