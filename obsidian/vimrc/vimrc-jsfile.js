@@ -387,33 +387,11 @@ function inspectUnresolvedLinks() {
 		const basename = filepath.slice(0, -3);
 		filesWithUnresolved.push(basename + ": " + unresolvedTargets.join(", "));
 	}
-	const msg1 =
+	const msg =
 		filesWithUnresolved.length > 0
 			? "Unresolved links:\n- " + filesWithUnresolved.join("\n- ")
 			: "No unresolved links.";
-	new Notice(msg1, 0);
-
-	// ORPHANS
-	const ignoredFolders = ["Meta"]; // CONFIG
-	const ignoredExtensions = ["md"];
-	const resolvedLinkCache = app.metadataCache.resolvedLinks;
-	const /** @type {Record<string, boolean>} */ allLinks = {};
-	for (const [_, resolvedLinks] of Object.entries(resolvedLinkCache)) {
-		for (const link of Object.keys(resolvedLinks)) {
-			allLinks[link] = true;
-		}
-	}
-	const orphans = app.vault
-		.getFiles()
-		.filter((f) => {
-			const isOrphan = !allLinks[f.path];
-			const nonMarkdown = !ignoredExtensions.includes(f.extension);
-			const notInIgnoredFolder = ignoredFolders.every((folder) => !f.path.startsWith(folder));
-			return isOrphan && nonMarkdown && notInIgnoredFolder;
-		})
-		.map((file) => "- " + file.path);
-	const msg2 = orphans.length > 0 ? "Orphans:\n" + orphans.join("\n") : "No orphans.";
-	new Notice(msg2, 0);
+	new Notice(msg, 0);
 }
 
 function toggleComment() {
