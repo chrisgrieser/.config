@@ -246,26 +246,31 @@ function run() {
 
 		// Format events for Alfred
 		events = eventsJson
-			.filter((event) => new Date(event.endTime).getTime() > Date.now()) // exclude past events
+
+			// exclude past events, already filtered in the event-fetching swift-script,
+			// but those are cached for a while, so some events might be over now
+			.filter((event) => new Date(event.endTime).getTime() > Date.now())
+
 			.map((event) => {
 				// time
-				const startOfToday = (new Date().setHours(0, 0, 0, 0)) - 1 // -1, since allday events start at midnight
+				const startOfToday = new Date().setHours(0, 0, 0, 0);
 				const endOfToday = new Date().setHours(23, 59, 59, 59);
 				const startTime = new Date(event.startTime);
 				const endTime = new Date(event.endTime);
-				const startedToday = startTime.getTime() > startOfToday && startTime.getTime() < endOfToday;
-				const endsToday = endTime.getTime() > startOfToday && endTime.getTime() < endOfToday;
+				const startedToday =
+					startTime.getTime() >= startOfToday && startTime.getTime() <= endOfToday;
+				const endsToday = endTime.getTime() >= startOfToday && endTime.getTime() <= endOfToday;
 				const multiDayEvent = !startedToday || !endsToday;
 
 				let timeDisplay = "";
 				if (endsToday && !event.isAllDay) {
-					const start = startTime.toLocaleTimeString([], timeFmt)
+					const start = startTime.toLocaleTimeString([], timeFmt);
 					const end = endTime.toLocaleTimeString([], timeFmt);
 					timeDisplay = ((startedToday ? start : "") + " – " + end).trim();
 				} else if (multiDayEvent) {
 					const daysUntilEnd = Math.ceil((endTime.getTime() - endOfToday) / 86_400_000);
 					if (!startedToday && daysUntilEnd === 0) timeDisplay = "ends today";
-					else if (daysUntilEnd === 1) timeDisplay = "ends tomorrow"
+					else if (daysUntilEnd === 1) timeDisplay = "ends tomorrow";
 					else timeDisplay = `ends in ${daysUntilEnd} days`;
 				}
 
