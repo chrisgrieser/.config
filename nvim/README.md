@@ -6,6 +6,7 @@
 ## All installed plugins
 <!-- auto-generate list -->
 - [altermo/ultimate-autopair.nvim](https://github.com/altermo/ultimate-autopair.nvim)
+- [BlinkResearchLabs/blink-edit.nvim](https://github.com/BlinkResearchLabs/blink-edit.nvim)
 - [chrisgrieser/nvim-chainsaw](https://github.com/chrisgrieser/nvim-chainsaw)
 - [chrisgrieser/nvim-genghis](https://github.com/chrisgrieser/nvim-genghis)
 - [chrisgrieser/nvim-justice](https://github.com/chrisgrieser/nvim-justice)
