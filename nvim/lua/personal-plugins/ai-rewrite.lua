@@ -30,6 +30,7 @@ local config = {
 		tasks = {
 			simplify = "Simplify the code without diminishing its readability.",
 			fix = "Fix any mistake in the code.",
+			 = "Fix any mistake in the code.",
 		},
 	},
 	postSuccess = {
