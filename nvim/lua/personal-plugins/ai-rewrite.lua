@@ -30,7 +30,7 @@ local config = {
 		tasks = {
 			simplify = "Simplify the code without diminishing its readability.",
 			fix = "Fix any mistake in the code.",
-			 = "Fix any mistake in the code.",
+			complete = "Complete the code.",
 		},
 	},
 	postSuccess = {
@@ -72,11 +72,17 @@ local function rewrite(task, customPrompt)
 
 	-- SELECTION
 	local mode = vim.fn.mode()
-	assert(mode:find("[nV]"), "Only normal and visual line mode are supported.")
-	local prevCursor = vim.api.nvim_win_get_cursor(0)
-	if mode == "n" then vim.cmd.normal { "Vip", bang = true } end
-	vim.cmd.normal { "V", bang = true } -- leave visual line mode
-	if mode == "n" then vim.api.nvim_win_set_cursor(ctx.winid, prevCursor) end
+	if mode == "n" then
+		local prevCursor = vim.api.nvim_win_get_cursor(0)
+		vim.cmd.normal { "Vip", bang = true }
+		vim.cmd.normal { "V", bang = true } -- leave visual line mode
+		vim.api.nvim_win_set_cursor(ctx.winid, prevCursor)
+	elseif mode:lower() == "v" then
+		vim.cmd.normal { mode, bang = true } -- leave visual mode
+	else
+		notify("Only normal and visual mode are supported.", "error")
+		return
+	end
 
 	local startRow = vim.api.nvim_buf_get_mark(ctx.bufnr, "<")[1]
 	local endRow = vim.api.nvim_buf_get_mark(ctx.bufnr, ">")[1]
@@ -233,7 +239,7 @@ local function rewrite(task, customPrompt)
 			end
 
 			-- CURSORMOVED/BUFLEAVE: DISABLE WORD-DIFF AND REMOVE NOTIFICATION
-			local delay = config.postSuccess.lspRangeFormat and formatDelay + 100 or 0
+			local delay = (config.postSuccess.lspRangeFormat and formatDelay or 0) + 100
 			vim.defer_fn(function()
 				vim.api.nvim_create_autocmd({ "CursorMoved", "BufLeave" }, {
 					buffer = ctx.bufnr,
