@@ -16,6 +16,10 @@
 		<true/>
 		<key>alfred.action.getinfo</key>
 		<true/>
+		<key>alfred.action.mixed.email</key>
+		<true/>
+		<key>alfred.action.mixed.emailto</key>
+		<true/>
 		<key>alfred.action.movereplace</key>
 		<true/>
 		<key>alfred.action.open</key>
