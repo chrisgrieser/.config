@@ -65,7 +65,7 @@ function M.allowBuffer(bufnr, filepath)
 
 	local pathsToIgnore = {
 		"security",
-		"leetcode", -- should do leetcode problems on my own
+		"leetcode/", -- should do leetcode problems on my own
 		"/private/var/", -- path when editing in `pass` (extra safeguard)
 		"api-key",
 		".env",

@@ -1,7 +1,9 @@
--- SETUP
--- 1. Get cookie: https://github.com/kawre/leetcode.nvim#sign-in
--- 2. Copy the `csrftoken` and `LEETCODE_SESSION` cookies, join them with `;`,
--- and ensure no trailing line break
+-- DOCS Get cookie https://github.com/kawre/leetcode.nvim#sign-in
+-- 1. Login at https://leetcode.com/
+-- 2. DevTools -> Network -> Search for `graphql` -> reload site if needed
+-- 3. Under `Set-Cookie`, copy the `csrftoken` and `LEETCODE_SESSION` cookies,
+-- keep the prefix, join them with `;`, and ensure no trailing line break:
+-- -> should be: `csrftoken=…;LEETCODE_SESSION=…`
 --------------------------------------------------------------------------------
 
 return {

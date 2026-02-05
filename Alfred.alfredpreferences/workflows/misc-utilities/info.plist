@@ -397,6 +397,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>EA3A19CE-75AB-49B3-BC09-3E586FF40F12</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>58B99BD7-0261-4778-B1A2-D5694DC6326D</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 	</dict>
 	<key>createdby</key>
 	<string>Chris Grieser</string>
@@ -1115,6 +1128,59 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>⚠️ No cwd found</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>04209C0E-6238-4FCB-9DA6-926760A3F8AC</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>acceptsmulti</key>
+				<integer>1</integer>
+				<key>filetypes</key>
+				<array/>
+				<key>name</key>
+				<string>Open with TextEdit</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.action</string>
+			<key>uid</key>
+			<string>EA3A19CE-75AB-49B3-BC09-3E586FF40F12</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>openwith</key>
+				<string>/System/Applications/TextEdit.app</string>
+				<key>sourcefile</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openfile</string>
+			<key>uid</key>
+			<string>58B99BD7-0261-4778-B1A2-D5694DC6326D</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>argumenttype</key>
 				<integer>1</integer>
 				<key>keyword</key>
@@ -1147,27 +1213,6 @@
 			<string>F45185F7-3072-47A6-A86F-0CE950BB7C1A</string>
 			<key>version</key>
 			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string></string>
-				<key>title</key>
-				<string>⚠️ No cwd found</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>04209C0E-6238-4FCB-9DA6-926760A3F8AC</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1349,7 +1394,7 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>810</real>
+			<real>885</real>
 		</dict>
 		<key>04209C0E-6238-4FCB-9DA6-926760A3F8AC</key>
 		<dict>
@@ -1405,7 +1450,7 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>590</real>
+			<real>750</real>
 		</dict>
 		<key>1ED4AA3A-8918-44D4-94C9-14DF95FD6FE1</key>
 		<dict>
@@ -1476,7 +1521,14 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>955</real>
+			<real>1030</real>
+		</dict>
+		<key>58B99BD7-0261-4778-B1A2-D5694DC6326D</key>
+		<dict>
+			<key>xpos</key>
+			<real>190</real>
+			<key>ypos</key>
+			<real>635</real>
 		</dict>
 		<key>61B6049A-0E52-4E28-A813-05177E38D595</key>
 		<dict>
@@ -1505,7 +1557,7 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>1090</real>
+			<real>1165</real>
 		</dict>
 		<key>6DD1B7E7-F945-479C-9FA5-3AA4C34FB352</key>
 		<dict>
@@ -1550,7 +1602,7 @@
 			<key>xpos</key>
 			<real>365</real>
 			<key>ypos</key>
-			<real>955</real>
+			<real>1030</real>
 		</dict>
 		<key>9A900E48-E8F5-47BE-B456-7A5E542DD443</key>
 		<dict>
@@ -1641,7 +1693,7 @@
 			<key>xpos</key>
 			<real>190</real>
 			<key>ypos</key>
-			<real>955</real>
+			<real>1030</real>
 		</dict>
 		<key>AEB73B80-DDDC-4375-A7D0-412096A7DD93</key>
 		<dict>
@@ -1659,7 +1711,7 @@
 			<key>xpos</key>
 			<real>365</real>
 			<key>ypos</key>
-			<real>810</real>
+			<real>885</real>
 		</dict>
 		<key>B403FA59-A517-4002-9856-417D52F5C974</key>
 		<dict>
@@ -1688,7 +1740,7 @@
 			<key>xpos</key>
 			<real>195</real>
 			<key>ypos</key>
-			<real>1090</real>
+			<real>1165</real>
 		</dict>
 		<key>D29A152C-35C4-4892-831E-76C22D401194</key>
 		<dict>
@@ -1717,7 +1769,7 @@
 			<key>xpos</key>
 			<real>190</real>
 			<key>ypos</key>
-			<real>810</real>
+			<real>885</real>
 		</dict>
 		<key>DBA23210-36B3-4B6B-82B3-1D73F0EC2283</key>
 		<dict>
@@ -1737,12 +1789,19 @@
 			<key>ypos</key>
 			<real>340</real>
 		</dict>
+		<key>EA3A19CE-75AB-49B3-BC09-3E586FF40F12</key>
+		<dict>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>635</real>
+		</dict>
 		<key>F45185F7-3072-47A6-A86F-0CE950BB7C1A</key>
 		<dict>
 			<key>xpos</key>
 			<real>190</real>
 			<key>ypos</key>
-			<real>590</real>
+			<real>750</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
