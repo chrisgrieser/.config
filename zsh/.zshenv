@@ -10,10 +10,13 @@ export PATH="$HOME/.local/share/nvim/mason/bin":$PATH # make mason tools availab
 alias pandoc='pandoc --data-dir="$HOME/.config/pandoc"'
 
 # PASS
+# https://git.zx2c4.com/password-store/about/
 export PASSWORD_STORE_DIR="$HOME/.password-store"
 export PASSWORD_STORE_CLIP_TIME=60
 export PASSWORD_STORE_GENERATED_LENGTH=30       # some services break with longer passwords m(
-export PASSWORD_STORE_CHARACTER_SET="[:alnum:]" # many services break with special chars m(
+# 1. many services break with special chars m(
+# 2. exclude `lIO0` due to them looking too similar
+export PASSWORD_STORE_CHARACTER_SET="[A-HJ-NP-Za-hj-np-z1-9]"
 
 # GITHUB_TOKEN https://github.com/settings/tokens
 # For security reasons, only export token for the processes that actually need
