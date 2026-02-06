@@ -11,14 +11,10 @@ github_username="chrisgrieser"
 repo_names="shimmering-focus|finder-vim-mode|zsh-magic-dashboard|nvim|alfred|shimmering-obsidian|gitfred|obsidian-quadro|pseudometa-obsidian-plugin-template|grappling-hook|obsidian-proofreader"
 
 function actions_in_repo {
-	if [[ -e "./.rumdl.toml" ]]; then
-		cp -f "$HOME/.config/rumdl/rumdl-project-config.toml" "./.rumdl.toml"
-		rumdl fmt
-		rumdl fmt
-	fi
+	cp -f "$HOME/Desktop/FUNDING.yml" "./.github/FUNDING.yml"
 }
 
-commit_msg="style: include toc-validation in rumdl config"
+commit_msg="chore: add GitHub sponsorship"
 
 amend="false" # no-edit|only-message|false
 
