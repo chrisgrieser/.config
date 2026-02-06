@@ -2,7 +2,7 @@
 
 # CONFIG
 github_username="chrisgrieser"
-# set -e
+download_location="$HOME/Developer/"
 
 # repo_names="alfred|shimmering-obsidian|gitfred"
 # repo_names="nvim"
@@ -10,19 +10,12 @@ github_username="chrisgrieser"
 # ALL
 repo_names="shimmering-focus|finder-vim-mode|zsh-magic-dashboard|nvim|alfred|shimmering-obsidian|gitfred|obsidian-quadro|pseudometa-obsidian-plugin-template|grappling-hook|obsidian-proofreader"
 
-function actions_in_repo {
-	git apply "$HOME"/Desktop/patchB
-}
-
-commit_msg="docs: update sponsorship info"
-
-amend="false" # no-edit|only-message|false
 
 #───────────────────────────────────────────────────────────────────────────────
 #───────────────────────────────────────────────────────────────────────────────
-_export_github_token # defined in .zshenv
 
 # GUARD
+_export_github_token # defined in .zshenv
 if [[ -z "$GITHUB_TOKEN" ]]; then
 	print "\e[1;31mNo GitHub token found\e[0m"
 	return 1
@@ -37,21 +30,11 @@ repos_to_update=$(gh repo list --limit=100 --no-archived --source --visibility=p
 repo_count=$(echo "$repos_to_update" | wc -l | tr -d " ")
 
 # confirmation that everything is correct
-print "\e[1;34mRepos to update ($repo_count):\e[0m"
+print "\e[1;34mRepos to download ($repo_count):\e[0m"
 echo "$repos_to_update" | rs
 echo
-
-[[ "$amend" != "false" ]] && print "\e[1;33mWARN: amend $amend\e[0m"
-if [[ "$amend" != "no-edit" ]]; then
-	print "\e[1;34mCommit message:\e[0m"
-	echo "$commit_msg"
-fi
-if [[ "$amend" != "only-message" ]]; then
-	echo
-	print "\e[1;34mActions:\e[0m"
-	declare -f actions_in_repo | sed '1d;$d;s/^\t//' | bat --language=sh --no-pager
-fi
-
+print "\e[1;34mDownload location:\e[0m"
+echo "$download_location"
 echo
 print "\e[1;34mProceed? (y/n)\e[0m"
 read -r pressed
@@ -62,44 +45,19 @@ echo
 
 #───────────────────────────────────────────────────────────────────────────────
 
-cd /tmp || return 1
+if [[ -d "$download_location" ]]; then
+	cd "$download_location" || return 1
+else
+	echo "$download_location does not exist."
+	return 1
+fi
 
-# clone each repo, do the replacements, and git add/commit/push
-i=1
-not_updated=0
+# clone each repo
 while read -r repo; do
-	print "\e[1;34mUpdating $repo… ($i/$repo_count)\e[0m"
-	# WARN depth 5 relevant for prevent history loss when amending (extra safety net)
-	git clone --no-progress --depth=5 "git@github.com:$github_username/$repo"
-	cd "$repo" || return 1
-
-	actions_in_repo
-
-	# COMMIT/AMEND
-	if [[ "$amend" == "no-edit" ]]; then
-		git add --all && git commit --amend --no-edit && git push --force --no-progress
-	elif [[ "$amend" == "only-message" ]]; then
-		git add --all && git commit --amend --message="$commit_msg" && git push --force --no-progress
-	else
-		git add --all && git commit --message="$commit_msg" && git push --no-progress
-	fi
-
-	success=$?
-	if [[ $success -ne 0 ]]; then
-		print "\e[1;33mDid not update $repo.\e[0m"
-		((not_updated++))
-	fi
-
-	echo
-	cd ..
-	rm -rf "$repo"
-	((i++))
+	# WARN depth 2 relevant for prevent history loss when amending
+	git clone --no-progress --depth=2 "git@github.com:$github_username/$repo"
 done <<< "$repos_to_update"
 
 #───────────────────────────────────────────────────────────────────────────────
 
-if [[ $not_updated -gt 0 ]]; then
-	echo "────────────────────────"
-	print "\e[1;33m$not_updated repo(s) not updated.\e[0m"
-fi
-"$ZDOTDIR/notificator" --title "🌐Multi-repo commit" --message "Update finished." --sound "Blow"
+"$ZDOTDIR/notificator" --title "🌐Multi-repo download" --message "Download finished." --sound "Blow"
