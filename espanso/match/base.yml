@@ -8,7 +8,6 @@ matches:
   - { trigger: "!web", replace: https://chris-grieser.de/ }
   - { trigger: "!masto", replace: https://pkm.social/@pseudometa }
   - { trigger: "!name", replace: Christopher Grieser }
-  - { trigger: "!paypal", replace: https://www.paypal.com/paypalme/ChrisGrieser }
   #-DATE------------------------------------------------------------------------
   - trigger: "!iso"
     replace: "{{todayISO}}"
