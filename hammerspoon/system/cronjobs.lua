@@ -68,7 +68,10 @@ do
 	local function runEveryFileIn(dir)
 		for file in hs.fs.dir(dir) do
 			local jobfile = dir .. "/" .. file
-			if not u.isExecutableFile(jobfile) then goto continue end
+			if not u.isExecutableFile(jobfile) then
+				print("⚠️ " .. jobfile .. " is not executable")
+				goto continue
+			end
 			local task = hs.task.new
 			M["cronjob_" .. file] = task(jobfile, function(code, stdout, stderr)
 				local output = (stdout .. "\n" .. stderr)
@@ -85,7 +88,6 @@ do
 	end
 
 	M.timer_hourlyCronjobs = timerEverySecs(3600, function()
-		if not u.screenIsUnlocked() then return end
 		runEveryFileIn(cronjobDir .. "/hourly")
 	end):start()
 
