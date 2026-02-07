@@ -142,7 +142,7 @@ keymap("n", "M", "<cmd>. move +1<CR>kJ", { desc = "󰽜 Merge line down" }) -- `
 keymap({ "n", "x", "i" }, "<D-e>", function() require("personal-plugins.md-qol").wrap("`") end, { desc = " Inline code" })
 
 -- Simple surrounds
--- keymap("n", '"', function() require("personal-plugins.md-qol").wrap('"') end, { desc = " Surround" })
+keymap("n", '"', function() require("personal-plugins.md-qol").wrap('"') end, { desc = " Surround" })
 keymap("n", "'", function() require("personal-plugins.md-qol").wrap("'") end, { desc = " Surround" })
 keymap("n", "(", function() require("personal-plugins.md-qol").wrap("(", ")") end, { desc = "󰅲 Surround" })
 keymap("n", "[", function() require("personal-plugins.md-qol").wrap("[", "]") end, { nowait = true, desc = "󰅪 Surround" })
