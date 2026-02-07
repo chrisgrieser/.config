@@ -82,7 +82,7 @@ M.pathw_desktop = pathw(home .. "/Desktop/", function(paths, _)
 			u.openUrlInBg(receiptPath)
 
 		---BANKING----------------------------------------------------------------
-		elseif name:find("[%d-]_Kontoauszug_.*%.pdf$") or name:find(".*_zu_Depot_.*%.pdf$") then
+		elseif name:find("[%d-]_Kontoauszug_.*%.pdf$") or name:find("^Direkt_Depot_.*%.pdf$") then
 			local year = (name:match("_20%d%d") or name:match("^%d%d%d%d") or ""):gsub("^_", "")
 			if year ~= nil then
 				local folder = name:find("Depot") and "Depot" or "Geldkonten"
