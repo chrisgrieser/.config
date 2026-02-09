@@ -18,6 +18,7 @@ M.videoAndAudioApps = {
 	"Crunchyroll",
 	"TikTok",
 	"Twitch",
+	"Prime Video",
 }
 
 ---UTILS------------------------------------------------------------------------
