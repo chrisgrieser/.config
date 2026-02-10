@@ -1,0 +1,477 @@
+# Backup
+
+## Future Reminders
+
+- [ ] 🔌 5m Kabel, 3-fach Stecker (Tüte mitnehmen) — due: 2026-02-10T17:00:00+01:00 — list: Tasks
+- [ ] 🧵 Schneiderei Pulli — due: 2026-02-10T18:00:00+01:00 — list: Tasks
+- [ ] 🧭 Markus Hegemony — due: 2026-02-11T00:00:00+01:00 — list: Tasks
+- [ ] 🔒 Close Paypal account — due: 2026-02-11T00:00:00+01:00 — list: Tasks
+- [ ] 📑 Jochen Antrag lesen — due: 2026-02-11T00:00:00+01:00 — list: Tasks
+- [ ] 🔑 Schlüsselupdate — due: 2026-02-12T10:30:00+01:00 — list: Tasks
+- [ ] 💾 Backup — due: 2026-02-15T00:00:00+01:00 — list: Tasks
+- [ ] 💦 — due: 2026-02-15T00:00:00+01:00 — list: Tasks
+- [ ] 🔄 Mitnorm Beraterwechsel — due: 2026-02-16T00:00:00+01:00 — list: Tasks
+- [ ] ♨️ Termin Gasterme Wartung — due: 2026-03-02T00:00:00+01:00 — list: Tasks
+- [ ] 🗂️ Jawari fragen: Berufsunfähigkeitsversicherung — due: 2026-03-23T14:00:00+01:00 — list: Tasks
+- [ ] ⏰ Zeitumstellung 2 zu 3 — due: 2026-03-29T00:00:00+01:00 — list: Tasks
+- [ ] 🧾 Update neues Semesterticket — due: 2026-03-30T00:00:00+02:00 — list: Tasks
+- [ ] ♻️ mason-registry: remove deprecated packages — due: 2026-04-03T00:00:00+02:00 — list: Tasks
+- [ ] 👁️‍🗨️ Augen-Screening Befund mitnehmen — due: 2026-04-20T09:00:00+02:00 — list: Tasks
+- [ ] 👁️‍🗨️ Augen-Screening Befund mitnehmen — due: 2026-05-11T09:00:00+02:00 — list: Tasks
+- [ ] 🏦 Extra-Zinsen bei Ing-Diba Tagesgeld endet — due: 2026-05-26T00:00:00+02:00 — list: Tasks
+- [ ] ⚡ Stromzähler-Stand für Octopus Energy — due: 2026-06-01T00:00:00+02:00 — list: Tasks
+- [ ] 🦷 Zahnarzt Termin — due: 2026-06-08T00:00:00+02:00 — list: Tasks
+- [ ] ♨️ Vattenfall Account löschen — due: 2026-07-01T00:00:00+02:00 — list: Tasks
+- [ ] 💸 Steuererklärung — due: 2026-07-27T00:00:00+02:00 — list: Tasks
+- [ ] 🧾 Mac-Kauf solange noch Bildungsrabatt — due: 2026-09-01T00:00:00+02:00 — list: Tasks
+- [ ] 🦠 jährl. Grippe- & Covid-Impfung — due: 2026-09-14T00:00:00+02:00 — list: Tasks
+- [ ] 📱 BVG Ticket-App wieder installieren — due: 2026-09-28T00:00:00+02:00 — list: Tasks
+- [ ] ⏰ Zeitumstellung von 3 auf 2 — due: 2026-10-25T00:00:00+02:00 — list: Tasks
+- [ ] 🧾 Ing-DiBa Freistellungsauftrag für 2027 — due: 2026-12-01T00:00:00+01:00 — list: Tasks
+- [ ] 🎵 Spotify Student Abo läuft aus — due: 2027-01-07T00:00:00+01:00 — list: Tasks
+- [ ] 🚫📄 Amazon Prime kündigen — due: 2027-02-01T00:00:00+01:00 — list: Tasks
+- [ ] 💨 Vertragslaufzeit GASAG endet — due: 2027-04-01T00:00:00+02:00 — list: Tasks
+- [ ] 🧾 Vertragslaufzeit Strom endet — due: 2027-06-01T00:00:00+02:00 — list: Tasks
+- [ ] 💰 Festgeld wird frei — due: 2027-07-29T00:00:00+02:00 — list: Tasks
+- [ ] 🪪 DKB Konto kündigen — due: 2027-08-09T00:00:00+02:00 — list: Tasks
+- [ ] 🦠 Thetanus-Diphterie Impfung auffrischen — due: 2028-10-01T00:00:00+02:00 — list: Tasks
+- [ ] 🆔 Perso & Reisepass erneuern — due: 2035-03-01T00:00:00+01:00 — list: Tasks
+
+## Future Calendar Events
+
+- ERC-Probe-Interview — 2026-02-12T14:00:00+01:00 → 2026-02-12T15:00:00+01:00 — calendar: SOS Teamkalender
+- Suse Party — 2026-02-12T18:00:00+01:00 → 2026-02-12T20:00:00+01:00 — calendar: SOS Teamkalender
+- IKEA – Speditionslieferung - 1581818436 — 2026-02-13T14:00:00+01:00 → 2026-02-13T21:00:00+01:00 — calendar: Termine
+- Joe — 2026-02-14T16:00:00+01:00 → 2026-02-14T17:00:00+01:00 — calendar: Termine
+- Schornsteinfeger — 2026-02-16T09:00:00+01:00 → 2026-02-16T11:00:00+01:00 — calendar: Termine
+- 👥 Online Jour Fixe — 2026-02-16T13:30:00+01:00 → 2026-02-16T14:00:00+01:00 — calendar: SOS Teamkalender
+- 👥 Online Jour Fixe — 2026-02-23T13:30:00+01:00 → 2026-02-23T14:00:00+01:00 — calendar: SOS Teamkalender
+- 👥 Online Jour Fixe — 2026-03-02T13:30:00+01:00 → 2026-03-02T14:00:00+01:00 — calendar: SOS Teamkalender
+- Netzpolitischer Abend — 2026-03-03T20:00:00+01:00 → 2026-03-03T22:00:00+01:00 — calendar: Termine
+- 🍺 Stifti-Stammtisch — 2026-03-06T19:00:00+01:00 → 2026-03-06T22:00:00+01:00 — calendar: Termine
+- 👥 Online Jour Fixe — 2026-03-09T13:30:00+01:00 → 2026-03-09T14:00:00+01:00 — calendar: SOS Teamkalender
+- Kevin Riegers Geburtstag — 2026-03-11T00:00:00+01:00 → 2026-03-11T23:59:59+01:00 — calendar: Geburtstage
+- 👥 Online Jour Fixe — 2026-03-16T13:30:00+01:00 → 2026-03-16T14:00:00+01:00 — calendar: SOS Teamkalender
+- 👥 Online Jour Fixe — 2026-03-23T13:30:00+01:00 → 2026-03-23T14:00:00+01:00 — calendar: SOS Teamkalender
+- 👨‍⚕️ Dr. Afshin Jawari — 2026-03-23T14:50:00+01:00 → 2026-03-23T15:00:00+01:00 — calendar: Termine
+- Søren Bragdos Geburtstag — 2026-03-26T00:00:00+01:00 → 2026-03-26T23:59:59+01:00 — calendar: Geburtstage
+- 👥 Online Jour Fixe — 2026-03-30T13:30:00+02:00 → 2026-03-30T14:00:00+02:00 — calendar: SOS Teamkalender
+- Ostersonntag (§) — 2026-04-05T00:00:00+02:00 → 2026-04-05T23:59:59+02:00 — calendar: Berliner Feiertage
+- Ostermontag (§) — 2026-04-06T00:00:00+02:00 → 2026-04-06T23:59:59+02:00 — calendar: Berliner Feiertage
+- 👥 Online Jour Fixe — 2026-04-06T13:30:00+02:00 → 2026-04-06T14:00:00+02:00 — calendar: SOS Teamkalender
+- 🍺 Stifti-Stammtisch — 2026-04-06T19:00:00+02:00 → 2026-04-06T22:00:00+02:00 — calendar: Termine
+- Netzpolitischer Abend — 2026-04-07T20:00:00+02:00 → 2026-04-07T22:00:00+02:00 — calendar: Termine
+- 👥 Online Jour Fixe — 2026-04-13T13:30:00+02:00 → 2026-04-13T14:00:00+02:00 — calendar: SOS Teamkalender
+- Clara Gutjahr Geburtstag — 2026-04-18T00:00:00+02:00 → 2026-04-18T23:59:59+02:00 — calendar: Geburtstage
+- 👥 Online Jour Fixe — 2026-04-20T13:30:00+02:00 → 2026-04-20T14:00:00+02:00 — calendar: SOS Teamkalender
+- 👁️ Augenarzt Dr. Valeska Skutella — 2026-04-20T14:30:00+02:00 → 2026-04-20T14:45:00+02:00 — calendar: Termine
+- 👥 Online Jour Fixe — 2026-04-27T13:30:00+02:00 → 2026-04-27T14:00:00+02:00 — calendar: SOS Teamkalender
+- Tag der Arbeit (§) — 2026-05-01T00:00:00+02:00 → 2026-05-01T23:59:59+02:00 — calendar: Berliner Feiertage
+- 👥 Online Jour Fixe — 2026-05-04T13:30:00+02:00 → 2026-05-04T14:00:00+02:00 — calendar: SOS Teamkalender
+- Netzpolitischer Abend — 2026-05-05T20:00:00+02:00 → 2026-05-05T22:00:00+02:00 — calendar: Termine
+- 🍺 Stifti-Stammtisch — 2026-05-06T19:00:00+02:00 → 2026-05-06T22:00:00+02:00 — calendar: Termine
+- 👥 Online Jour Fixe — 2026-05-11T13:30:00+02:00 → 2026-05-11T14:00:00+02:00 — calendar: SOS Teamkalender
+- 👁️ Augenarzt Dr. Lubos Frano — 2026-05-11T14:25:00+02:00 → 2026-05-11T14:45:00+02:00 — calendar: Termine
+- Christi Himmelfahrt (§) — 2026-05-14T00:00:00+02:00 → 2026-05-14T23:59:59+02:00 — calendar: Berliner Feiertage
+- Brettspiel-Wochenende  — 2026-05-14T00:00:00+02:00 → 2026-05-17T23:59:59+02:00 — calendar: Termine
+- 👥 Online Jour Fixe — 2026-05-18T13:30:00+02:00 → 2026-05-18T14:00:00+02:00 — calendar: SOS Teamkalender
+- Pfingstmontag (§) — 2026-05-25T00:00:00+02:00 → 2026-05-25T23:59:59+02:00 — calendar: Berliner Feiertage
+- Dewi Jumpas Geburtstag — 2026-05-25T00:00:00+02:00 → 2026-05-25T23:59:59+02:00 — calendar: Geburtstage
+- 👥 Online Jour Fixe — 2026-05-25T13:30:00+02:00 → 2026-05-25T14:00:00+02:00 — calendar: SOS Teamkalender
+- RMZ Jour Fixe FUFAF/EPAC — 2026-05-27T00:00:00+02:00 → 2026-05-27T23:59:59+02:00 — calendar: SOS Teamkalender
+- Ende des Fachgebiets SOS — 2026-05-31T00:00:00+02:00 → 2026-05-31T23:59:59+02:00 — calendar: SOS Teamkalender
+- Ola Borres Geburtstag — 2026-06-01T00:00:00+02:00 → 2026-06-01T23:59:59+02:00 — calendar: Geburtstage
+- 👥 Online Jour Fixe — 2026-06-01T13:30:00+02:00 → 2026-06-01T14:00:00+02:00 — calendar: SOS Teamkalender
+- Netzpolitischer Abend — 2026-06-02T20:00:00+02:00 → 2026-06-02T22:00:00+02:00 — calendar: Termine
+- Fronleichnam (§) — 2026-06-04T00:00:00+02:00 → 2026-06-04T23:59:59+02:00 — calendar: Berliner Feiertage
+- Badfenster lackieren mit Suse — 2026-06-06T00:00:00+02:00 → 2026-06-06T23:59:59+02:00 — calendar: Termine
+- 🍺 Stifti-Stammtisch — 2026-06-06T19:00:00+02:00 → 2026-06-06T22:00:00+02:00 — calendar: Termine
+- 👥 Online Jour Fixe — 2026-06-08T13:30:00+02:00 → 2026-06-08T14:00:00+02:00 — calendar: SOS Teamkalender
+- 👥 Online Jour Fixe — 2026-06-15T13:30:00+02:00 → 2026-06-15T14:00:00+02:00 — calendar: SOS Teamkalender
+- 👥 Online Jour Fixe — 2026-06-22T13:30:00+02:00 → 2026-06-22T14:00:00+02:00 — calendar: SOS Teamkalender
+- KI-Konferenz Studienstiftung — 2026-06-27T00:00:00+02:00 → 2026-06-28T23:59:59+02:00 — calendar: Termine
+- 👥 Online Jour Fixe — 2026-06-29T13:30:00+02:00 → 2026-06-29T14:00:00+02:00 — calendar: SOS Teamkalender
+- 👥 Online Jour Fixe — 2026-07-06T13:30:00+02:00 → 2026-07-06T14:00:00+02:00 — calendar: SOS Teamkalender
+- 🍺 Stifti-Stammtisch — 2026-07-06T19:00:00+02:00 → 2026-07-06T22:00:00+02:00 — calendar: Termine
+- Netzpolitischer Abend — 2026-07-07T20:00:00+02:00 → 2026-07-07T22:00:00+02:00 — calendar: Termine
+- Viktor Angersbachs Geburtstag — 2026-07-13T00:00:00+02:00 → 2026-07-13T23:59:59+02:00 — calendar: Geburtstage
+- 👥 Online Jour Fixe — 2026-07-13T13:30:00+02:00 → 2026-07-13T14:00:00+02:00 — calendar: SOS Teamkalender
+- 👥 Online Jour Fixe — 2026-07-20T13:30:00+02:00 → 2026-07-20T14:00:00+02:00 — calendar: SOS Teamkalender
+- Markus Hoffmann Geburtstag — 2026-07-22T00:00:00+02:00 → 2026-07-22T23:59:59+02:00 — calendar: Geburtstage
+- 👥 Online Jour Fixe — 2026-07-27T13:30:00+02:00 → 2026-07-27T14:00:00+02:00 — calendar: SOS Teamkalender
+- 💸 Steuererklärung Deadline — 2026-07-31T00:00:00+02:00 → 2026-07-31T23:59:59+02:00 — calendar: Termine
+- 👥 Online Jour Fixe — 2026-08-03T13:30:00+02:00 → 2026-08-03T14:00:00+02:00 — calendar: SOS Teamkalender
+- Netzpolitischer Abend — 2026-08-04T20:00:00+02:00 → 2026-08-04T22:00:00+02:00 — calendar: Termine
+- 🍺 Stifti-Stammtisch — 2026-08-06T19:00:00+02:00 → 2026-08-06T22:00:00+02:00 — calendar: Termine
+- 👥 Online Jour Fixe — 2026-08-10T13:30:00+02:00 → 2026-08-10T14:00:00+02:00 — calendar: SOS Teamkalender
+- 👥 Online Jour Fixe — 2026-08-17T13:30:00+02:00 → 2026-08-17T14:00:00+02:00 — calendar: SOS Teamkalender
+- 👥 Online Jour Fixe — 2026-08-24T13:30:00+02:00 → 2026-08-24T14:00:00+02:00 — calendar: SOS Teamkalender
+- 👥 Online Jour Fixe — 2026-08-31T13:30:00+02:00 → 2026-08-31T14:00:00+02:00 — calendar: SOS Teamkalender
+- Lucas Santo's Geburtstag — 2026-09-01T00:00:00+02:00 → 2026-09-01T23:59:59+02:00 — calendar: Geburtstage
+- Netzpolitischer Abend — 2026-09-01T20:00:00+02:00 → 2026-09-01T22:00:00+02:00 — calendar: Termine
+- 🍺 Stifti-Stammtisch — 2026-09-06T19:00:00+02:00 → 2026-09-06T22:00:00+02:00 — calendar: Termine
+- 👥 Online Jour Fixe — 2026-09-07T13:30:00+02:00 → 2026-09-07T14:00:00+02:00 — calendar: SOS Teamkalender
+- 👥 Online Jour Fixe — 2026-09-14T13:30:00+02:00 → 2026-09-14T14:00:00+02:00 — calendar: SOS Teamkalender
+- Susanne Wollin-Gierings Geburtstag — 2026-09-17T00:00:00+02:00 → 2026-09-17T23:59:59+02:00 — calendar: Geburtstage
+- 👥 Online Jour Fixe — 2026-09-21T13:30:00+02:00 → 2026-09-21T14:00:00+02:00 — calendar: SOS Teamkalender
+- 11. Konferenz Führung und Organisationskultur — 2026-09-25T00:00:00+02:00 → 2026-09-27T23:59:59+02:00 — calendar: Termine
+- 👥 Online Jour Fixe — 2026-09-28T13:30:00+02:00 → 2026-09-28T14:00:00+02:00 — calendar: SOS Teamkalender
+- Tag der Deutschen Einheit (§) — 2026-10-03T00:00:00+02:00 → 2026-10-03T23:59:59+02:00 — calendar: Berliner Feiertage
+- 👥 Online Jour Fixe — 2026-10-05T13:30:00+02:00 → 2026-10-05T14:00:00+02:00 — calendar: SOS Teamkalender
+- 🍺 Stifti-Stammtisch — 2026-10-06T19:00:00+02:00 → 2026-10-06T22:00:00+02:00 — calendar: Termine
+- Netzpolitischer Abend — 2026-10-06T20:00:00+02:00 → 2026-10-06T22:00:00+02:00 — calendar: Termine
+- Onkel Buns Geburtstag — 2026-10-12T00:00:00+02:00 → 2026-10-12T23:59:59+02:00 — calendar: Geburtstage
+- 👥 Online Jour Fixe — 2026-10-12T13:30:00+02:00 → 2026-10-12T14:00:00+02:00 — calendar: SOS Teamkalender
+- 👥 Online Jour Fixe — 2026-10-19T13:30:00+02:00 → 2026-10-19T14:00:00+02:00 — calendar: SOS Teamkalender
+- 👥 Online Jour Fixe — 2026-10-26T13:30:00+01:00 → 2026-10-26T14:00:00+01:00 — calendar: SOS Teamkalender
+- Allerheiligen (§) — 2026-11-01T00:00:00+01:00 → 2026-11-01T23:59:59+01:00 — calendar: Berliner Feiertage
+- Sophie Burkhards Geburtstag — 2026-11-02T00:00:00+01:00 → 2026-11-02T23:59:59+01:00 — calendar: Geburtstage
+- 👥 Online Jour Fixe — 2026-11-02T13:30:00+01:00 → 2026-11-02T14:00:00+01:00 — calendar: SOS Teamkalender
+- Netzpolitischer Abend — 2026-11-03T20:00:00+01:00 → 2026-11-03T22:00:00+01:00 — calendar: Termine
+- 🍺 Stifti-Stammtisch — 2026-11-06T19:00:00+01:00 → 2026-11-06T22:00:00+01:00 — calendar: Termine
+- 👥 Online Jour Fixe — 2026-11-09T13:30:00+01:00 → 2026-11-09T14:00:00+01:00 — calendar: SOS Teamkalender
+- 👥 Online Jour Fixe — 2026-11-16T13:30:00+01:00 → 2026-11-16T14:00:00+01:00 — calendar: SOS Teamkalender
+- Buß- und Bettag (§) — 2026-11-18T00:00:00+01:00 → 2026-11-18T23:59:59+01:00 — calendar: Berliner Feiertage
+- 👥 Online Jour Fixe — 2026-11-23T13:30:00+01:00 → 2026-11-23T14:00:00+01:00 — calendar: SOS Teamkalender
+- 👥 Online Jour Fixe — 2026-11-30T13:30:00+01:00 → 2026-11-30T14:00:00+01:00 — calendar: SOS Teamkalender
+- Netzpolitischer Abend — 2026-12-01T20:00:00+01:00 → 2026-12-01T22:00:00+01:00 — calendar: Termine
+- Kordian Gontarskas Geburtstag — 2026-12-04T00:00:00+01:00 → 2026-12-04T23:59:59+01:00 — calendar: Geburtstage
+- 🍺 Stifti-Stammtisch — 2026-12-06T19:00:00+01:00 → 2026-12-06T22:00:00+01:00 — calendar: Termine
+- 👥 Online Jour Fixe — 2026-12-07T13:30:00+01:00 → 2026-12-07T14:00:00+01:00 — calendar: SOS Teamkalender
+- Markus Griesers Geburtstag — 2026-12-08T00:00:00+01:00 → 2026-12-08T23:59:59+01:00 — calendar: Geburtstage
+- Andy Gunawans Geburtstag — 2026-12-10T00:00:00+01:00 → 2026-12-10T23:59:59+01:00 — calendar: Geburtstage
+- 👥 Online Jour Fixe — 2026-12-14T13:30:00+01:00 → 2026-12-14T14:00:00+01:00 — calendar: SOS Teamkalender
+- 👥 Online Jour Fixe — 2026-12-21T13:30:00+01:00 → 2026-12-21T14:00:00+01:00 — calendar: SOS Teamkalender
+- 1. Weihnachtstag (§) — 2026-12-25T00:00:00+01:00 → 2026-12-25T23:59:59+01:00 — calendar: Berliner Feiertage
+- 2. Weihnachtstag (§) — 2026-12-26T00:00:00+01:00 → 2026-12-26T23:59:59+01:00 — calendar: Berliner Feiertage
+- 👥 Online Jour Fixe — 2026-12-28T13:30:00+01:00 → 2026-12-28T14:00:00+01:00 — calendar: SOS Teamkalender
+- Neujahr (§) — 2027-01-01T00:00:00+01:00 → 2027-01-01T23:59:59+01:00 — calendar: Berliner Feiertage
+- 👥 Online Jour Fixe — 2027-01-04T13:30:00+01:00 → 2027-01-04T14:00:00+01:00 — calendar: SOS Teamkalender
+- Netzpolitischer Abend — 2027-01-05T20:00:00+01:00 → 2027-01-05T22:00:00+01:00 — calendar: Termine
+- 🍺 Stifti-Stammtisch — 2027-01-06T19:00:00+01:00 → 2027-01-06T22:00:00+01:00 — calendar: Termine
+- 👥 Online Jour Fixe — 2027-01-11T13:30:00+01:00 → 2027-01-11T14:00:00+01:00 — calendar: SOS Teamkalender
+- 👥 Online Jour Fixe — 2027-01-18T13:30:00+01:00 → 2027-01-18T14:00:00+01:00 — calendar: SOS Teamkalender
+- 👥 Online Jour Fixe — 2027-01-25T13:30:00+01:00 → 2027-01-25T14:00:00+01:00 — calendar: SOS Teamkalender
+- Mutter Geburtstag — 2027-01-31T00:00:00+01:00 → 2027-01-31T23:59:59+01:00 — calendar: Geburtstage
+- 👥 Online Jour Fixe — 2027-02-01T13:30:00+01:00 → 2027-02-01T14:00:00+01:00 — calendar: SOS Teamkalender
+- Netzpolitischer Abend — 2027-02-02T20:00:00+01:00 → 2027-02-02T22:00:00+01:00 — calendar: Termine
+- 🍺 Stifti-Stammtisch — 2027-02-06T19:00:00+01:00 → 2027-02-06T22:00:00+01:00 — calendar: Termine
+- 👥 Online Jour Fixe — 2027-02-08T13:30:00+01:00 → 2027-02-08T14:00:00+01:00 — calendar: SOS Teamkalender
+- 👥 Online Jour Fixe — 2027-02-15T13:30:00+01:00 → 2027-02-15T14:00:00+01:00 — calendar: SOS Teamkalender
+- 👥 Online Jour Fixe — 2027-02-22T13:30:00+01:00 → 2027-02-22T14:00:00+01:00 — calendar: SOS Teamkalender
+- 👥 Online Jour Fixe — 2027-03-01T13:30:00+01:00 → 2027-03-01T14:00:00+01:00 — calendar: SOS Teamkalender
+- Netzpolitischer Abend — 2027-03-02T20:00:00+01:00 → 2027-03-02T22:00:00+01:00 — calendar: Termine
+- 🍺 Stifti-Stammtisch — 2027-03-06T19:00:00+01:00 → 2027-03-06T22:00:00+01:00 — calendar: Termine
+- 👥 Online Jour Fixe — 2027-03-08T13:30:00+01:00 → 2027-03-08T14:00:00+01:00 — calendar: SOS Teamkalender
+- Kevin Riegers Geburtstag — 2027-03-11T00:00:00+01:00 → 2027-03-11T23:59:59+01:00 — calendar: Geburtstage
+- 👥 Online Jour Fixe — 2027-03-15T13:30:00+01:00 → 2027-03-15T14:00:00+01:00 — calendar: SOS Teamkalender
+- 👥 Online Jour Fixe — 2027-03-22T13:30:00+01:00 → 2027-03-22T14:00:00+01:00 — calendar: SOS Teamkalender
+- Karfreitag (§) — 2027-03-26T00:00:00+01:00 → 2027-03-26T23:59:59+01:00 — calendar: Berliner Feiertage
+- Søren Bragdos Geburtstag — 2027-03-26T00:00:00+01:00 → 2027-03-26T23:59:59+01:00 — calendar: Geburtstage
+- Ostersonntag (§) — 2027-03-28T00:00:00+01:00 → 2027-03-28T23:59:59+02:00 — calendar: Berliner Feiertage
+- Ostermontag (§) — 2027-03-29T00:00:00+02:00 → 2027-03-29T23:59:59+02:00 — calendar: Berliner Feiertage
+- 👥 Online Jour Fixe — 2027-03-29T13:30:00+02:00 → 2027-03-29T14:00:00+02:00 — calendar: SOS Teamkalender
+- 👥 Online Jour Fixe — 2027-04-05T13:30:00+02:00 → 2027-04-05T14:00:00+02:00 — calendar: SOS Teamkalender
+- 🍺 Stifti-Stammtisch — 2027-04-06T19:00:00+02:00 → 2027-04-06T22:00:00+02:00 — calendar: Termine
+- Netzpolitischer Abend — 2027-04-06T20:00:00+02:00 → 2027-04-06T22:00:00+02:00 — calendar: Termine
+- 👥 Online Jour Fixe — 2027-04-12T13:30:00+02:00 → 2027-04-12T14:00:00+02:00 — calendar: SOS Teamkalender
+- Clara Gutjahr Geburtstag — 2027-04-18T00:00:00+02:00 → 2027-04-18T23:59:59+02:00 — calendar: Geburtstage
+- 👥 Online Jour Fixe — 2027-04-19T13:30:00+02:00 → 2027-04-19T14:00:00+02:00 — calendar: SOS Teamkalender
+- 👥 Online Jour Fixe — 2027-04-26T13:30:00+02:00 → 2027-04-26T14:00:00+02:00 — calendar: SOS Teamkalender
+- Tag der Arbeit (§) — 2027-05-01T00:00:00+02:00 → 2027-05-01T23:59:59+02:00 — calendar: Berliner Feiertage
+- 👥 Online Jour Fixe — 2027-05-03T13:30:00+02:00 → 2027-05-03T14:00:00+02:00 — calendar: SOS Teamkalender
+- Netzpolitischer Abend — 2027-05-04T20:00:00+02:00 → 2027-05-04T22:00:00+02:00 — calendar: Termine
+- Christi Himmelfahrt (§) — 2027-05-06T00:00:00+02:00 → 2027-05-06T23:59:59+02:00 — calendar: Berliner Feiertage
+- 🍺 Stifti-Stammtisch — 2027-05-06T19:00:00+02:00 → 2027-05-06T22:00:00+02:00 — calendar: Termine
+- 👥 Online Jour Fixe — 2027-05-10T13:30:00+02:00 → 2027-05-10T14:00:00+02:00 — calendar: SOS Teamkalender
+- Pfingstsonntag (§) — 2027-05-16T00:00:00+02:00 → 2027-05-16T23:59:59+02:00 — calendar: Berliner Feiertage
+- Pfingstmontag (§) — 2027-05-17T00:00:00+02:00 → 2027-05-17T23:59:59+02:00 — calendar: Berliner Feiertage
+- 👥 Online Jour Fixe — 2027-05-17T13:30:00+02:00 → 2027-05-17T14:00:00+02:00 — calendar: SOS Teamkalender
+- 👥 Online Jour Fixe — 2027-05-24T13:30:00+02:00 → 2027-05-24T14:00:00+02:00 — calendar: SOS Teamkalender
+- Dewi Jumpas Geburtstag — 2027-05-25T00:00:00+02:00 → 2027-05-25T23:59:59+02:00 — calendar: Geburtstage
+- 👥 Online Jour Fixe — 2027-05-31T13:30:00+02:00 → 2027-05-31T14:00:00+02:00 — calendar: SOS Teamkalender
+- Ola Borres Geburtstag — 2027-06-01T00:00:00+02:00 → 2027-06-01T23:59:59+02:00 — calendar: Geburtstage
+- Netzpolitischer Abend — 2027-06-01T20:00:00+02:00 → 2027-06-01T22:00:00+02:00 — calendar: Termine
+- 🍺 Stifti-Stammtisch — 2027-06-06T19:00:00+02:00 → 2027-06-06T22:00:00+02:00 — calendar: Termine
+- 👥 Online Jour Fixe — 2027-06-07T13:30:00+02:00 → 2027-06-07T14:00:00+02:00 — calendar: SOS Teamkalender
+- 👥 Online Jour Fixe — 2027-06-14T13:30:00+02:00 → 2027-06-14T14:00:00+02:00 — calendar: SOS Teamkalender
+- 👥 Online Jour Fixe — 2027-06-21T13:30:00+02:00 → 2027-06-21T14:00:00+02:00 — calendar: SOS Teamkalender
+- 👥 Online Jour Fixe — 2027-06-28T13:30:00+02:00 → 2027-06-28T14:00:00+02:00 — calendar: SOS Teamkalender
+- 👥 Online Jour Fixe — 2027-07-05T13:30:00+02:00 → 2027-07-05T14:00:00+02:00 — calendar: SOS Teamkalender
+- 🍺 Stifti-Stammtisch — 2027-07-06T19:00:00+02:00 → 2027-07-06T22:00:00+02:00 — calendar: Termine
+- Netzpolitischer Abend — 2027-07-06T20:00:00+02:00 → 2027-07-06T22:00:00+02:00 — calendar: Termine
+- 👥 Online Jour Fixe — 2027-07-12T13:30:00+02:00 → 2027-07-12T14:00:00+02:00 — calendar: SOS Teamkalender
+- Viktor Angersbachs Geburtstag — 2027-07-13T00:00:00+02:00 → 2027-07-13T23:59:59+02:00 — calendar: Geburtstage
+- 👥 Online Jour Fixe — 2027-07-19T13:30:00+02:00 → 2027-07-19T14:00:00+02:00 — calendar: SOS Teamkalender
+- Markus Hoffmann Geburtstag — 2027-07-22T00:00:00+02:00 → 2027-07-22T23:59:59+02:00 — calendar: Geburtstage
+- 👥 Online Jour Fixe — 2027-07-26T13:30:00+02:00 → 2027-07-26T14:00:00+02:00 — calendar: SOS Teamkalender
+- 💸 Steuererklärung Deadline — 2027-07-31T00:00:00+02:00 → 2027-07-31T23:59:59+02:00 — calendar: Termine
+- 👥 Online Jour Fixe — 2027-08-02T13:30:00+02:00 → 2027-08-02T14:00:00+02:00 — calendar: SOS Teamkalender
+- Netzpolitischer Abend — 2027-08-03T20:00:00+02:00 → 2027-08-03T22:00:00+02:00 — calendar: Termine
+- 🍺 Stifti-Stammtisch — 2027-08-06T19:00:00+02:00 → 2027-08-06T22:00:00+02:00 — calendar: Termine
+- 👥 Online Jour Fixe — 2027-08-09T13:30:00+02:00 → 2027-08-09T14:00:00+02:00 — calendar: SOS Teamkalender
+- 👥 Online Jour Fixe — 2027-08-16T13:30:00+02:00 → 2027-08-16T14:00:00+02:00 — calendar: SOS Teamkalender
+- 👥 Online Jour Fixe — 2027-08-23T13:30:00+02:00 → 2027-08-23T14:00:00+02:00 — calendar: SOS Teamkalender
+- 👥 Online Jour Fixe — 2027-08-30T13:30:00+02:00 → 2027-08-30T14:00:00+02:00 — calendar: SOS Teamkalender
+- Lucas Santo's Geburtstag — 2027-09-01T00:00:00+02:00 → 2027-09-01T23:59:59+02:00 — calendar: Geburtstage
+- 👥 Online Jour Fixe — 2027-09-06T13:30:00+02:00 → 2027-09-06T14:00:00+02:00 — calendar: SOS Teamkalender
+- 🍺 Stifti-Stammtisch — 2027-09-06T19:00:00+02:00 → 2027-09-06T22:00:00+02:00 — calendar: Termine
+- Netzpolitischer Abend — 2027-09-07T20:00:00+02:00 → 2027-09-07T22:00:00+02:00 — calendar: Termine
+- 👥 Online Jour Fixe — 2027-09-13T13:30:00+02:00 → 2027-09-13T14:00:00+02:00 — calendar: SOS Teamkalender
+- Susanne Wollin-Gierings Geburtstag — 2027-09-17T00:00:00+02:00 → 2027-09-17T23:59:59+02:00 — calendar: Geburtstage
+- 👥 Online Jour Fixe — 2027-09-20T13:30:00+02:00 → 2027-09-20T14:00:00+02:00 — calendar: SOS Teamkalender
+- 👥 Online Jour Fixe — 2027-09-27T13:30:00+02:00 → 2027-09-27T14:00:00+02:00 — calendar: SOS Teamkalender
+- Tag der Deutschen Einheit (§) — 2027-10-03T00:00:00+02:00 → 2027-10-03T23:59:59+02:00 — calendar: Berliner Feiertage
+- 👥 Online Jour Fixe — 2027-10-04T13:30:00+02:00 → 2027-10-04T14:00:00+02:00 — calendar: SOS Teamkalender
+- Netzpolitischer Abend — 2027-10-05T20:00:00+02:00 → 2027-10-05T22:00:00+02:00 — calendar: Termine
+- 🍺 Stifti-Stammtisch — 2027-10-06T19:00:00+02:00 → 2027-10-06T22:00:00+02:00 — calendar: Termine
+- 👥 Online Jour Fixe — 2027-10-11T13:30:00+02:00 → 2027-10-11T14:00:00+02:00 — calendar: SOS Teamkalender
+- Onkel Buns Geburtstag — 2027-10-12T00:00:00+02:00 → 2027-10-12T23:59:59+02:00 — calendar: Geburtstage
+- 👥 Online Jour Fixe — 2027-10-18T13:30:00+02:00 → 2027-10-18T14:00:00+02:00 — calendar: SOS Teamkalender
+- 👥 Online Jour Fixe — 2027-10-25T13:30:00+02:00 → 2027-10-25T14:00:00+02:00 — calendar: SOS Teamkalender
+- Reformationstag (§) — 2027-10-31T00:00:00+02:00 → 2027-10-31T23:59:59+01:00 — calendar: Berliner Feiertage
+- Allerheiligen (§) — 2027-11-01T00:00:00+01:00 → 2027-11-01T23:59:59+01:00 — calendar: Berliner Feiertage
+- 👥 Online Jour Fixe — 2027-11-01T13:30:00+01:00 → 2027-11-01T14:00:00+01:00 — calendar: SOS Teamkalender
+- Sophie Burkhards Geburtstag — 2027-11-02T00:00:00+01:00 → 2027-11-02T23:59:59+01:00 — calendar: Geburtstage
+- Netzpolitischer Abend — 2027-11-02T20:00:00+01:00 → 2027-11-02T22:00:00+01:00 — calendar: Termine
+- 🍺 Stifti-Stammtisch — 2027-11-06T19:00:00+01:00 → 2027-11-06T22:00:00+01:00 — calendar: Termine
+- 👥 Online Jour Fixe — 2027-11-08T13:30:00+01:00 → 2027-11-08T14:00:00+01:00 — calendar: SOS Teamkalender
+- 👥 Online Jour Fixe — 2027-11-15T13:30:00+01:00 → 2027-11-15T14:00:00+01:00 — calendar: SOS Teamkalender
+- Buß- und Bettag (§) — 2027-11-17T00:00:00+01:00 → 2027-11-17T23:59:59+01:00 — calendar: Berliner Feiertage
+- 👥 Online Jour Fixe — 2027-11-22T13:30:00+01:00 → 2027-11-22T14:00:00+01:00 — calendar: SOS Teamkalender
+- 👥 Online Jour Fixe — 2027-11-29T13:30:00+01:00 → 2027-11-29T14:00:00+01:00 — calendar: SOS Teamkalender
+- Kordian Gontarskas Geburtstag — 2027-12-04T00:00:00+01:00 → 2027-12-04T23:59:59+01:00 — calendar: Geburtstage
+- 👥 Online Jour Fixe — 2027-12-06T13:30:00+01:00 → 2027-12-06T14:00:00+01:00 — calendar: SOS Teamkalender
+- 🍺 Stifti-Stammtisch — 2027-12-06T19:00:00+01:00 → 2027-12-06T22:00:00+01:00 — calendar: Termine
+- Netzpolitischer Abend — 2027-12-07T20:00:00+01:00 → 2027-12-07T22:00:00+01:00 — calendar: Termine
+- Markus Griesers Geburtstag — 2027-12-08T00:00:00+01:00 → 2027-12-08T23:59:59+01:00 — calendar: Geburtstage
+- Andy Gunawans Geburtstag — 2027-12-10T00:00:00+01:00 → 2027-12-10T23:59:59+01:00 — calendar: Geburtstage
+- 👥 Online Jour Fixe — 2027-12-13T13:30:00+01:00 → 2027-12-13T14:00:00+01:00 — calendar: SOS Teamkalender
+- 👥 Online Jour Fixe — 2027-12-20T13:30:00+01:00 → 2027-12-20T14:00:00+01:00 — calendar: SOS Teamkalender
+- 1. Weihnachtstag (§) — 2027-12-25T00:00:00+01:00 → 2027-12-25T23:59:59+01:00 — calendar: Berliner Feiertage
+- 2. Weihnachtstag (§) — 2027-12-26T00:00:00+01:00 → 2027-12-26T23:59:59+01:00 — calendar: Berliner Feiertage
+- 👥 Online Jour Fixe — 2027-12-27T13:30:00+01:00 → 2027-12-27T14:00:00+01:00 — calendar: SOS Teamkalender
+- Neujahr (§) — 2028-01-01T00:00:00+01:00 → 2028-01-01T23:59:59+01:00 — calendar: Berliner Feiertage
+- 👥 Online Jour Fixe — 2028-01-03T13:30:00+01:00 → 2028-01-03T14:00:00+01:00 — calendar: SOS Teamkalender
+- Netzpolitischer Abend — 2028-01-04T20:00:00+01:00 → 2028-01-04T22:00:00+01:00 — calendar: Termine
+- 🍺 Stifti-Stammtisch — 2028-01-06T19:00:00+01:00 → 2028-01-06T22:00:00+01:00 — calendar: Termine
+- 👥 Online Jour Fixe — 2028-01-10T13:30:00+01:00 → 2028-01-10T14:00:00+01:00 — calendar: SOS Teamkalender
+- 👥 Online Jour Fixe — 2028-01-17T13:30:00+01:00 → 2028-01-17T14:00:00+01:00 — calendar: SOS Teamkalender
+- 👥 Online Jour Fixe — 2028-01-24T13:30:00+01:00 → 2028-01-24T14:00:00+01:00 — calendar: SOS Teamkalender
+- Mutter Geburtstag — 2028-01-31T00:00:00+01:00 → 2028-01-31T23:59:59+01:00 — calendar: Geburtstage
+- 👥 Online Jour Fixe — 2028-01-31T13:30:00+01:00 → 2028-01-31T14:00:00+01:00 — calendar: SOS Teamkalender
+- Netzpolitischer Abend — 2028-02-01T20:00:00+01:00 → 2028-02-01T22:00:00+01:00 — calendar: Termine
+- 🍺 Stifti-Stammtisch — 2028-02-06T19:00:00+01:00 → 2028-02-06T22:00:00+01:00 — calendar: Termine
+- 👥 Online Jour Fixe — 2028-02-07T13:30:00+01:00 → 2028-02-07T14:00:00+01:00 — calendar: SOS Teamkalender
+- 👥 Online Jour Fixe — 2028-02-14T13:30:00+01:00 → 2028-02-14T14:00:00+01:00 — calendar: SOS Teamkalender
+- 👥 Online Jour Fixe — 2028-02-21T13:30:00+01:00 → 2028-02-21T14:00:00+01:00 — calendar: SOS Teamkalender
+- 👥 Online Jour Fixe — 2028-02-28T13:30:00+01:00 → 2028-02-28T14:00:00+01:00 — calendar: SOS Teamkalender
+- 👥 Online Jour Fixe — 2028-03-06T13:30:00+01:00 → 2028-03-06T14:00:00+01:00 — calendar: SOS Teamkalender
+- 🍺 Stifti-Stammtisch — 2028-03-06T19:00:00+01:00 → 2028-03-06T22:00:00+01:00 — calendar: Termine
+- Netzpolitischer Abend — 2028-03-07T20:00:00+01:00 → 2028-03-07T22:00:00+01:00 — calendar: Termine
+- Kevin Riegers Geburtstag — 2028-03-11T00:00:00+01:00 → 2028-03-11T23:59:59+01:00 — calendar: Geburtstage
+- 👥 Online Jour Fixe — 2028-03-13T13:30:00+01:00 → 2028-03-13T14:00:00+01:00 — calendar: SOS Teamkalender
+- 👥 Online Jour Fixe — 2028-03-20T13:30:00+01:00 → 2028-03-20T14:00:00+01:00 — calendar: SOS Teamkalender
+- Søren Bragdos Geburtstag — 2028-03-26T00:00:00+01:00 → 2028-03-26T23:59:59+02:00 — calendar: Geburtstage
+- 👥 Online Jour Fixe — 2028-03-27T13:30:00+02:00 → 2028-03-27T14:00:00+02:00 — calendar: SOS Teamkalender
+- 👥 Online Jour Fixe — 2028-04-03T13:30:00+02:00 → 2028-04-03T14:00:00+02:00 — calendar: SOS Teamkalender
+- Netzpolitischer Abend — 2028-04-04T20:00:00+02:00 → 2028-04-04T22:00:00+02:00 — calendar: Termine
+- 🍺 Stifti-Stammtisch — 2028-04-06T19:00:00+02:00 → 2028-04-06T22:00:00+02:00 — calendar: Termine
+- 👥 Online Jour Fixe — 2028-04-10T13:30:00+02:00 → 2028-04-10T14:00:00+02:00 — calendar: SOS Teamkalender
+- Karfreitag (§) — 2028-04-14T00:00:00+02:00 → 2028-04-14T23:59:59+02:00 — calendar: Berliner Feiertage
+- Ostersonntag (§) — 2028-04-16T00:00:00+02:00 → 2028-04-16T23:59:59+02:00 — calendar: Berliner Feiertage
+- Ostermontag (§) — 2028-04-17T00:00:00+02:00 → 2028-04-17T23:59:59+02:00 — calendar: Berliner Feiertage
+- 👥 Online Jour Fixe — 2028-04-17T13:30:00+02:00 → 2028-04-17T14:00:00+02:00 — calendar: SOS Teamkalender
+- Clara Gutjahr Geburtstag — 2028-04-18T00:00:00+02:00 → 2028-04-18T23:59:59+02:00 — calendar: Geburtstage
+- 👥 Online Jour Fixe — 2028-04-24T13:30:00+02:00 → 2028-04-24T14:00:00+02:00 — calendar: SOS Teamkalender
+- Tag der Arbeit (§) — 2028-05-01T00:00:00+02:00 → 2028-05-01T23:59:59+02:00 — calendar: Berliner Feiertage
+- 👥 Online Jour Fixe — 2028-05-01T13:30:00+02:00 → 2028-05-01T14:00:00+02:00 — calendar: SOS Teamkalender
+- Netzpolitischer Abend — 2028-05-02T20:00:00+02:00 → 2028-05-02T22:00:00+02:00 — calendar: Termine
+- 🍺 Stifti-Stammtisch — 2028-05-06T19:00:00+02:00 → 2028-05-06T22:00:00+02:00 — calendar: Termine
+- 👥 Online Jour Fixe — 2028-05-08T13:30:00+02:00 → 2028-05-08T14:00:00+02:00 — calendar: SOS Teamkalender
+- 👥 Online Jour Fixe — 2028-05-15T13:30:00+02:00 → 2028-05-15T14:00:00+02:00 — calendar: SOS Teamkalender
+- 👥 Online Jour Fixe — 2028-05-22T13:30:00+02:00 → 2028-05-22T14:00:00+02:00 — calendar: SOS Teamkalender
+- Dewi Jumpas Geburtstag — 2028-05-25T00:00:00+02:00 → 2028-05-25T23:59:59+02:00 — calendar: Geburtstage
+- 👥 Online Jour Fixe — 2028-05-29T13:30:00+02:00 → 2028-05-29T14:00:00+02:00 — calendar: SOS Teamkalender
+- Ola Borres Geburtstag — 2028-06-01T00:00:00+02:00 → 2028-06-01T23:59:59+02:00 — calendar: Geburtstage
+- Pfingstsonntag (§) — 2028-06-04T00:00:00+02:00 → 2028-06-04T23:59:59+02:00 — calendar: Berliner Feiertage
+- Pfingstmontag (§) — 2028-06-05T00:00:00+02:00 → 2028-06-05T23:59:59+02:00 — calendar: Berliner Feiertage
+- 👥 Online Jour Fixe — 2028-06-05T13:30:00+02:00 → 2028-06-05T14:00:00+02:00 — calendar: SOS Teamkalender
+- 🍺 Stifti-Stammtisch — 2028-06-06T19:00:00+02:00 → 2028-06-06T22:00:00+02:00 — calendar: Termine
+- Netzpolitischer Abend — 2028-06-06T20:00:00+02:00 → 2028-06-06T22:00:00+02:00 — calendar: Termine
+- 👥 Online Jour Fixe — 2028-06-12T13:30:00+02:00 → 2028-06-12T14:00:00+02:00 — calendar: SOS Teamkalender
+- Fronleichnam (§) — 2028-06-15T00:00:00+02:00 → 2028-06-15T23:59:59+02:00 — calendar: Berliner Feiertage
+- Volksaufstand DDR (§) — 2028-06-17T00:00:00+02:00 → 2028-06-17T23:59:59+02:00 — calendar: Berliner Feiertage
+- 👥 Online Jour Fixe — 2028-06-19T13:30:00+02:00 → 2028-06-19T14:00:00+02:00 — calendar: SOS Teamkalender
+- 👥 Online Jour Fixe — 2028-06-26T13:30:00+02:00 → 2028-06-26T14:00:00+02:00 — calendar: SOS Teamkalender
+- 👥 Online Jour Fixe — 2028-07-03T13:30:00+02:00 → 2028-07-03T14:00:00+02:00 — calendar: SOS Teamkalender
+- Netzpolitischer Abend — 2028-07-04T20:00:00+02:00 → 2028-07-04T22:00:00+02:00 — calendar: Termine
+- 🍺 Stifti-Stammtisch — 2028-07-06T19:00:00+02:00 → 2028-07-06T22:00:00+02:00 — calendar: Termine
+- 👥 Online Jour Fixe — 2028-07-10T13:30:00+02:00 → 2028-07-10T14:00:00+02:00 — calendar: SOS Teamkalender
+- Viktor Angersbachs Geburtstag — 2028-07-13T00:00:00+02:00 → 2028-07-13T23:59:59+02:00 — calendar: Geburtstage
+- 👥 Online Jour Fixe — 2028-07-17T13:30:00+02:00 → 2028-07-17T14:00:00+02:00 — calendar: SOS Teamkalender
+- Markus Hoffmann Geburtstag — 2028-07-22T00:00:00+02:00 → 2028-07-22T23:59:59+02:00 — calendar: Geburtstage
+- 👥 Online Jour Fixe — 2028-07-24T13:30:00+02:00 → 2028-07-24T14:00:00+02:00 — calendar: SOS Teamkalender
+- 💸 Steuererklärung Deadline — 2028-07-31T00:00:00+02:00 → 2028-07-31T23:59:59+02:00 — calendar: Termine
+- 👥 Online Jour Fixe — 2028-07-31T13:30:00+02:00 → 2028-07-31T14:00:00+02:00 — calendar: SOS Teamkalender
+- Netzpolitischer Abend — 2028-08-01T20:00:00+02:00 → 2028-08-01T22:00:00+02:00 — calendar: Termine
+- 🍺 Stifti-Stammtisch — 2028-08-06T19:00:00+02:00 → 2028-08-06T22:00:00+02:00 — calendar: Termine
+- 👥 Online Jour Fixe — 2028-08-07T13:30:00+02:00 → 2028-08-07T14:00:00+02:00 — calendar: SOS Teamkalender
+- 👥 Online Jour Fixe — 2028-08-14T13:30:00+02:00 → 2028-08-14T14:00:00+02:00 — calendar: SOS Teamkalender
+- 👥 Online Jour Fixe — 2028-08-21T13:30:00+02:00 → 2028-08-21T14:00:00+02:00 — calendar: SOS Teamkalender
+- 👥 Online Jour Fixe — 2028-08-28T13:30:00+02:00 → 2028-08-28T14:00:00+02:00 — calendar: SOS Teamkalender
+- Lucas Santo's Geburtstag — 2028-09-01T00:00:00+02:00 → 2028-09-01T23:59:59+02:00 — calendar: Geburtstage
+- 👥 Online Jour Fixe — 2028-09-04T13:30:00+02:00 → 2028-09-04T14:00:00+02:00 — calendar: SOS Teamkalender
+- Netzpolitischer Abend — 2028-09-05T20:00:00+02:00 → 2028-09-05T22:00:00+02:00 — calendar: Termine
+- 🍺 Stifti-Stammtisch — 2028-09-06T19:00:00+02:00 → 2028-09-06T22:00:00+02:00 — calendar: Termine
+- 👥 Online Jour Fixe — 2028-09-11T13:30:00+02:00 → 2028-09-11T14:00:00+02:00 — calendar: SOS Teamkalender
+- Susanne Wollin-Gierings Geburtstag — 2028-09-17T00:00:00+02:00 → 2028-09-17T23:59:59+02:00 — calendar: Geburtstage
+- 👥 Online Jour Fixe — 2028-09-18T13:30:00+02:00 → 2028-09-18T14:00:00+02:00 — calendar: SOS Teamkalender
+- 👥 Online Jour Fixe — 2028-09-25T13:30:00+02:00 → 2028-09-25T14:00:00+02:00 — calendar: SOS Teamkalender
+- 👥 Online Jour Fixe — 2028-10-02T13:30:00+02:00 → 2028-10-02T14:00:00+02:00 — calendar: SOS Teamkalender
+- Tag der Deutschen Einheit (§) — 2028-10-03T00:00:00+02:00 → 2028-10-03T23:59:59+02:00 — calendar: Berliner Feiertage
+- Netzpolitischer Abend — 2028-10-03T20:00:00+02:00 → 2028-10-03T22:00:00+02:00 — calendar: Termine
+- 🍺 Stifti-Stammtisch — 2028-10-06T19:00:00+02:00 → 2028-10-06T22:00:00+02:00 — calendar: Termine
+- 👥 Online Jour Fixe — 2028-10-09T13:30:00+02:00 → 2028-10-09T14:00:00+02:00 — calendar: SOS Teamkalender
+- Onkel Buns Geburtstag — 2028-10-12T00:00:00+02:00 → 2028-10-12T23:59:59+02:00 — calendar: Geburtstage
+- 👥 Online Jour Fixe — 2028-10-16T13:30:00+02:00 → 2028-10-16T14:00:00+02:00 — calendar: SOS Teamkalender
+- 👥 Online Jour Fixe — 2028-10-23T13:30:00+02:00 → 2028-10-23T14:00:00+02:00 — calendar: SOS Teamkalender
+- 👥 Online Jour Fixe — 2028-10-30T13:30:00+01:00 → 2028-10-30T14:00:00+01:00 — calendar: SOS Teamkalender
+- Reformationstag (§) — 2028-10-31T00:00:00+01:00 → 2028-10-31T23:59:59+01:00 — calendar: Berliner Feiertage
+- Allerheiligen (§) — 2028-11-01T00:00:00+01:00 → 2028-11-01T23:59:59+01:00 — calendar: Berliner Feiertage
+- Sophie Burkhards Geburtstag — 2028-11-02T00:00:00+01:00 → 2028-11-02T23:59:59+01:00 — calendar: Geburtstage
+- 👥 Online Jour Fixe — 2028-11-06T13:30:00+01:00 → 2028-11-06T14:00:00+01:00 — calendar: SOS Teamkalender
+- 🍺 Stifti-Stammtisch — 2028-11-06T19:00:00+01:00 → 2028-11-06T22:00:00+01:00 — calendar: Termine
+- Netzpolitischer Abend — 2028-11-07T20:00:00+01:00 → 2028-11-07T22:00:00+01:00 — calendar: Termine
+- 👥 Online Jour Fixe — 2028-11-13T13:30:00+01:00 → 2028-11-13T14:00:00+01:00 — calendar: SOS Teamkalender
+- 👥 Online Jour Fixe — 2028-11-20T13:30:00+01:00 → 2028-11-20T14:00:00+01:00 — calendar: SOS Teamkalender
+- Buß- und Bettag (§) — 2028-11-22T00:00:00+01:00 → 2028-11-22T23:59:59+01:00 — calendar: Berliner Feiertage
+- 👥 Online Jour Fixe — 2028-11-27T13:30:00+01:00 → 2028-11-27T14:00:00+01:00 — calendar: SOS Teamkalender
+- Kordian Gontarskas Geburtstag — 2028-12-04T00:00:00+01:00 → 2028-12-04T23:59:59+01:00 — calendar: Geburtstage
+- 👥 Online Jour Fixe — 2028-12-04T13:30:00+01:00 → 2028-12-04T14:00:00+01:00 — calendar: SOS Teamkalender
+- Netzpolitischer Abend — 2028-12-05T20:00:00+01:00 → 2028-12-05T22:00:00+01:00 — calendar: Termine
+- 🍺 Stifti-Stammtisch — 2028-12-06T19:00:00+01:00 → 2028-12-06T22:00:00+01:00 — calendar: Termine
+- Markus Griesers Geburtstag — 2028-12-08T00:00:00+01:00 → 2028-12-08T23:59:59+01:00 — calendar: Geburtstage
+- Andy Gunawans Geburtstag — 2028-12-10T00:00:00+01:00 → 2028-12-10T23:59:59+01:00 — calendar: Geburtstage
+- 👥 Online Jour Fixe — 2028-12-11T13:30:00+01:00 → 2028-12-11T14:00:00+01:00 — calendar: SOS Teamkalender
+- 👥 Online Jour Fixe — 2028-12-18T13:30:00+01:00 → 2028-12-18T14:00:00+01:00 — calendar: SOS Teamkalender
+- 1. Weihnachtstag (§) — 2028-12-25T00:00:00+01:00 → 2028-12-25T23:59:59+01:00 — calendar: Berliner Feiertage
+- 👥 Online Jour Fixe — 2028-12-25T13:30:00+01:00 → 2028-12-25T14:00:00+01:00 — calendar: SOS Teamkalender
+- 2. Weihnachtstag (§) — 2028-12-26T00:00:00+01:00 → 2028-12-26T23:59:59+01:00 — calendar: Berliner Feiertage
+- Neujahr (§) — 2029-01-01T00:00:00+01:00 → 2029-01-01T23:59:59+01:00 — calendar: Berliner Feiertage
+- 👥 Online Jour Fixe — 2029-01-01T13:30:00+01:00 → 2029-01-01T14:00:00+01:00 — calendar: SOS Teamkalender
+- Netzpolitischer Abend — 2029-01-02T20:00:00+01:00 → 2029-01-02T22:00:00+01:00 — calendar: Termine
+- 🍺 Stifti-Stammtisch — 2029-01-06T19:00:00+01:00 → 2029-01-06T22:00:00+01:00 — calendar: Termine
+- 👥 Online Jour Fixe — 2029-01-08T13:30:00+01:00 → 2029-01-08T14:00:00+01:00 — calendar: SOS Teamkalender
+- 👥 Online Jour Fixe — 2029-01-15T13:30:00+01:00 → 2029-01-15T14:00:00+01:00 — calendar: SOS Teamkalender
+- 👥 Online Jour Fixe — 2029-01-22T13:30:00+01:00 → 2029-01-22T14:00:00+01:00 — calendar: SOS Teamkalender
+- 👥 Online Jour Fixe — 2029-01-29T13:30:00+01:00 → 2029-01-29T14:00:00+01:00 — calendar: SOS Teamkalender
+- Mutter Geburtstag — 2029-01-31T00:00:00+01:00 → 2029-01-31T23:59:59+01:00 — calendar: Geburtstage
+- 👥 Online Jour Fixe — 2029-02-05T13:30:00+01:00 → 2029-02-05T14:00:00+01:00 — calendar: SOS Teamkalender
+- 🍺 Stifti-Stammtisch — 2029-02-06T19:00:00+01:00 → 2029-02-06T22:00:00+01:00 — calendar: Termine
+- Netzpolitischer Abend — 2029-02-06T20:00:00+01:00 → 2029-02-06T22:00:00+01:00 — calendar: Termine
+- 👥 Online Jour Fixe — 2029-02-12T13:30:00+01:00 → 2029-02-12T14:00:00+01:00 — calendar: SOS Teamkalender
+- 👥 Online Jour Fixe — 2029-02-19T13:30:00+01:00 → 2029-02-19T14:00:00+01:00 — calendar: SOS Teamkalender
+- 👥 Online Jour Fixe — 2029-02-26T13:30:00+01:00 → 2029-02-26T14:00:00+01:00 — calendar: SOS Teamkalender
+- 👥 Online Jour Fixe — 2029-03-05T13:30:00+01:00 → 2029-03-05T14:00:00+01:00 — calendar: SOS Teamkalender
+- 🍺 Stifti-Stammtisch — 2029-03-06T19:00:00+01:00 → 2029-03-06T22:00:00+01:00 — calendar: Termine
+- Netzpolitischer Abend — 2029-03-06T20:00:00+01:00 → 2029-03-06T22:00:00+01:00 — calendar: Termine
+- Kevin Riegers Geburtstag — 2029-03-11T00:00:00+01:00 → 2029-03-11T23:59:59+01:00 — calendar: Geburtstage
+- 👥 Online Jour Fixe — 2029-03-12T13:30:00+01:00 → 2029-03-12T14:00:00+01:00 — calendar: SOS Teamkalender
+- 👥 Online Jour Fixe — 2029-03-19T13:30:00+01:00 → 2029-03-19T14:00:00+01:00 — calendar: SOS Teamkalender
+- Søren Bragdos Geburtstag — 2029-03-26T00:00:00+02:00 → 2029-03-26T23:59:59+02:00 — calendar: Geburtstage
+- 👥 Online Jour Fixe — 2029-03-26T13:30:00+02:00 → 2029-03-26T14:00:00+02:00 — calendar: SOS Teamkalender
+- Karfreitag (§) — 2029-03-30T00:00:00+02:00 → 2029-03-30T23:59:59+02:00 — calendar: Berliner Feiertage
+- Ostermontag (§) — 2029-04-02T00:00:00+02:00 → 2029-04-02T23:59:59+02:00 — calendar: Berliner Feiertage
+- 👥 Online Jour Fixe — 2029-04-02T13:30:00+02:00 → 2029-04-02T14:00:00+02:00 — calendar: SOS Teamkalender
+- Netzpolitischer Abend — 2029-04-03T20:00:00+02:00 → 2029-04-03T22:00:00+02:00 — calendar: Termine
+- 🍺 Stifti-Stammtisch — 2029-04-06T19:00:00+02:00 → 2029-04-06T22:00:00+02:00 — calendar: Termine
+- 👥 Online Jour Fixe — 2029-04-09T13:30:00+02:00 → 2029-04-09T14:00:00+02:00 — calendar: SOS Teamkalender
+- 👥 Online Jour Fixe — 2029-04-16T13:30:00+02:00 → 2029-04-16T14:00:00+02:00 — calendar: SOS Teamkalender
+- Clara Gutjahr Geburtstag — 2029-04-18T00:00:00+02:00 → 2029-04-18T23:59:59+02:00 — calendar: Geburtstage
+- 👥 Online Jour Fixe — 2029-04-23T13:30:00+02:00 → 2029-04-23T14:00:00+02:00 — calendar: SOS Teamkalender
+- 👥 Online Jour Fixe — 2029-04-30T13:30:00+02:00 → 2029-04-30T14:00:00+02:00 — calendar: SOS Teamkalender
+- Tag der Arbeit (§) — 2029-05-01T00:00:00+02:00 → 2029-05-01T23:59:59+02:00 — calendar: Berliner Feiertage
+- Netzpolitischer Abend — 2029-05-01T20:00:00+02:00 → 2029-05-01T22:00:00+02:00 — calendar: Termine
+- 🍺 Stifti-Stammtisch — 2029-05-06T19:00:00+02:00 → 2029-05-06T22:00:00+02:00 — calendar: Termine
+- 👥 Online Jour Fixe — 2029-05-07T13:30:00+02:00 → 2029-05-07T14:00:00+02:00 — calendar: SOS Teamkalender
+- Christi Himmelfahrt (§) — 2029-05-10T00:00:00+02:00 → 2029-05-10T23:59:59+02:00 — calendar: Berliner Feiertage
+- 👥 Online Jour Fixe — 2029-05-14T13:30:00+02:00 → 2029-05-14T14:00:00+02:00 — calendar: SOS Teamkalender
+- Pfingstmontag (§) — 2029-05-21T00:00:00+02:00 → 2029-05-21T23:59:59+02:00 — calendar: Berliner Feiertage
+- 👥 Online Jour Fixe — 2029-05-21T13:30:00+02:00 → 2029-05-21T14:00:00+02:00 — calendar: SOS Teamkalender
+- Dewi Jumpas Geburtstag — 2029-05-25T00:00:00+02:00 → 2029-05-25T23:59:59+02:00 — calendar: Geburtstage
+- 👥 Online Jour Fixe — 2029-05-28T13:30:00+02:00 → 2029-05-28T14:00:00+02:00 — calendar: SOS Teamkalender
+- Fronleichnam (§) — 2029-05-31T00:00:00+02:00 → 2029-05-31T23:59:59+02:00 — calendar: Berliner Feiertage
+- Ola Borres Geburtstag — 2029-06-01T00:00:00+02:00 → 2029-06-01T23:59:59+02:00 — calendar: Geburtstage
+- 👥 Online Jour Fixe — 2029-06-04T13:30:00+02:00 → 2029-06-04T14:00:00+02:00 — calendar: SOS Teamkalender
+- Netzpolitischer Abend — 2029-06-05T20:00:00+02:00 → 2029-06-05T22:00:00+02:00 — calendar: Termine
+- 🍺 Stifti-Stammtisch — 2029-06-06T19:00:00+02:00 → 2029-06-06T22:00:00+02:00 — calendar: Termine
+- 👥 Online Jour Fixe — 2029-06-11T13:30:00+02:00 → 2029-06-11T14:00:00+02:00 — calendar: SOS Teamkalender
+- 👥 Online Jour Fixe — 2029-06-18T13:30:00+02:00 → 2029-06-18T14:00:00+02:00 — calendar: SOS Teamkalender
+- 👥 Online Jour Fixe — 2029-06-25T13:30:00+02:00 → 2029-06-25T14:00:00+02:00 — calendar: SOS Teamkalender
+- 👥 Online Jour Fixe — 2029-07-02T13:30:00+02:00 → 2029-07-02T14:00:00+02:00 — calendar: SOS Teamkalender
+- Netzpolitischer Abend — 2029-07-03T20:00:00+02:00 → 2029-07-03T22:00:00+02:00 — calendar: Termine
+- 🍺 Stifti-Stammtisch — 2029-07-06T19:00:00+02:00 → 2029-07-06T22:00:00+02:00 — calendar: Termine
+- 👥 Online Jour Fixe — 2029-07-09T13:30:00+02:00 → 2029-07-09T14:00:00+02:00 — calendar: SOS Teamkalender
+- Viktor Angersbachs Geburtstag — 2029-07-13T00:00:00+02:00 → 2029-07-13T23:59:59+02:00 — calendar: Geburtstage
+- 👥 Online Jour Fixe — 2029-07-16T13:30:00+02:00 → 2029-07-16T14:00:00+02:00 — calendar: SOS Teamkalender
+- Markus Hoffmann Geburtstag — 2029-07-22T00:00:00+02:00 → 2029-07-22T23:59:59+02:00 — calendar: Geburtstage
+- 👥 Online Jour Fixe — 2029-07-23T13:30:00+02:00 → 2029-07-23T14:00:00+02:00 — calendar: SOS Teamkalender
+- 👥 Online Jour Fixe — 2029-07-30T13:30:00+02:00 → 2029-07-30T14:00:00+02:00 — calendar: SOS Teamkalender
+- 💸 Steuererklärung Deadline — 2029-07-31T00:00:00+02:00 → 2029-07-31T23:59:59+02:00 — calendar: Termine
+- 👥 Online Jour Fixe — 2029-08-06T13:30:00+02:00 → 2029-08-06T14:00:00+02:00 — calendar: SOS Teamkalender
+- 🍺 Stifti-Stammtisch — 2029-08-06T19:00:00+02:00 → 2029-08-06T22:00:00+02:00 — calendar: Termine
+- Netzpolitischer Abend — 2029-08-07T20:00:00+02:00 → 2029-08-07T22:00:00+02:00 — calendar: Termine
+- 👥 Online Jour Fixe — 2029-08-13T13:30:00+02:00 → 2029-08-13T14:00:00+02:00 — calendar: SOS Teamkalender
+- 👥 Online Jour Fixe — 2029-08-20T13:30:00+02:00 → 2029-08-20T14:00:00+02:00 — calendar: SOS Teamkalender
+- 👥 Online Jour Fixe — 2029-08-27T13:30:00+02:00 → 2029-08-27T14:00:00+02:00 — calendar: SOS Teamkalender
+- Lucas Santo's Geburtstag — 2029-09-01T00:00:00+02:00 → 2029-09-01T23:59:59+02:00 — calendar: Geburtstage
+- 👥 Online Jour Fixe — 2029-09-03T13:30:00+02:00 → 2029-09-03T14:00:00+02:00 — calendar: SOS Teamkalender
+- Netzpolitischer Abend — 2029-09-04T20:00:00+02:00 → 2029-09-04T22:00:00+02:00 — calendar: Termine
+- 🍺 Stifti-Stammtisch — 2029-09-06T19:00:00+02:00 → 2029-09-06T22:00:00+02:00 — calendar: Termine
+- 👥 Online Jour Fixe — 2029-09-10T13:30:00+02:00 → 2029-09-10T14:00:00+02:00 — calendar: SOS Teamkalender
+- Susanne Wollin-Gierings Geburtstag — 2029-09-17T00:00:00+02:00 → 2029-09-17T23:59:59+02:00 — calendar: Geburtstage
+- 👥 Online Jour Fixe — 2029-09-17T13:30:00+02:00 → 2029-09-17T14:00:00+02:00 — calendar: SOS Teamkalender
+- 👥 Online Jour Fixe — 2029-09-24T13:30:00+02:00 → 2029-09-24T14:00:00+02:00 — calendar: SOS Teamkalender
+- 👥 Online Jour Fixe — 2029-10-01T13:30:00+02:00 → 2029-10-01T14:00:00+02:00 — calendar: SOS Teamkalender
+- Netzpolitischer Abend — 2029-10-02T20:00:00+02:00 → 2029-10-02T22:00:00+02:00 — calendar: Termine
+- Tag der Deutschen Einheit (§) — 2029-10-03T00:00:00+02:00 → 2029-10-03T23:59:59+02:00 — calendar: Berliner Feiertage
+- 🍺 Stifti-Stammtisch — 2029-10-06T19:00:00+02:00 → 2029-10-06T22:00:00+02:00 — calendar: Termine
+- 👥 Online Jour Fixe — 2029-10-08T13:30:00+02:00 → 2029-10-08T14:00:00+02:00 — calendar: SOS Teamkalender
+- Onkel Buns Geburtstag — 2029-10-12T00:00:00+02:00 → 2029-10-12T23:59:59+02:00 — calendar: Geburtstage
+- 👥 Online Jour Fixe — 2029-10-15T13:30:00+02:00 → 2029-10-15T14:00:00+02:00 — calendar: SOS Teamkalender
+- 👥 Online Jour Fixe — 2029-10-22T13:30:00+02:00 → 2029-10-22T14:00:00+02:00 — calendar: SOS Teamkalender
+- 👥 Online Jour Fixe — 2029-10-29T13:30:00+01:00 → 2029-10-29T14:00:00+01:00 — calendar: SOS Teamkalender
+- Reformationstag (§) — 2029-10-31T00:00:00+01:00 → 2029-10-31T23:59:59+01:00 — calendar: Berliner Feiertage
+- Allerheiligen (§) — 2029-11-01T00:00:00+01:00 → 2029-11-01T23:59:59+01:00 — calendar: Berliner Feiertage
+- Sophie Burkhards Geburtstag — 2029-11-02T00:00:00+01:00 → 2029-11-02T23:59:59+01:00 — calendar: Geburtstage
+- 👥 Online Jour Fixe — 2029-11-05T13:30:00+01:00 → 2029-11-05T14:00:00+01:00 — calendar: SOS Teamkalender
+- 🍺 Stifti-Stammtisch — 2029-11-06T19:00:00+01:00 → 2029-11-06T22:00:00+01:00 — calendar: Termine
+- Netzpolitischer Abend — 2029-11-06T20:00:00+01:00 → 2029-11-06T22:00:00+01:00 — calendar: Termine
+- 👥 Online Jour Fixe — 2029-11-12T13:30:00+01:00 → 2029-11-12T14:00:00+01:00 — calendar: SOS Teamkalender
+- 👥 Online Jour Fixe — 2029-11-19T13:30:00+01:00 → 2029-11-19T14:00:00+01:00 — calendar: SOS Teamkalender
+- Buß- und Bettag (§) — 2029-11-21T00:00:00+01:00 → 2029-11-21T23:59:59+01:00 — calendar: Berliner Feiertage
+- 👥 Online Jour Fixe — 2029-11-26T13:30:00+01:00 → 2029-11-26T14:00:00+01:00 — calendar: SOS Teamkalender
+- 👥 Online Jour Fixe — 2029-12-03T13:30:00+01:00 → 2029-12-03T14:00:00+01:00 — calendar: SOS Teamkalender
+- Kordian Gontarskas Geburtstag — 2029-12-04T00:00:00+01:00 → 2029-12-04T23:59:59+01:00 — calendar: Geburtstage
+- Netzpolitischer Abend — 2029-12-04T20:00:00+01:00 → 2029-12-04T22:00:00+01:00 — calendar: Termine
+- 🍺 Stifti-Stammtisch — 2029-12-06T19:00:00+01:00 → 2029-12-06T22:00:00+01:00 — calendar: Termine
+- Markus Griesers Geburtstag — 2029-12-08T00:00:00+01:00 → 2029-12-08T23:59:59+01:00 — calendar: Geburtstage
+- Andy Gunawans Geburtstag — 2029-12-10T00:00:00+01:00 → 2029-12-10T23:59:59+01:00 — calendar: Geburtstage
+- 👥 Online Jour Fixe — 2029-12-10T13:30:00+01:00 → 2029-12-10T14:00:00+01:00 — calendar: SOS Teamkalender
+- 👥 Online Jour Fixe — 2029-12-17T13:30:00+01:00 → 2029-12-17T14:00:00+01:00 — calendar: SOS Teamkalender
+- 👥 Online Jour Fixe — 2029-12-24T13:30:00+01:00 → 2029-12-24T14:00:00+01:00 — calendar: SOS Teamkalender
+- 1. Weihnachtstag (§) — 2029-12-25T00:00:00+01:00 → 2029-12-25T23:59:59+01:00 — calendar: Berliner Feiertage
+- 2. Weihnachtstag (§) — 2029-12-26T00:00:00+01:00 → 2029-12-26T23:59:59+01:00 — calendar: Berliner Feiertage
+- 👥 Online Jour Fixe — 2029-12-31T13:30:00+01:00 → 2029-12-31T14:00:00+01:00 — calendar: SOS Teamkalender
+- Neujahr (§) — 2030-01-01T00:00:00+01:00 → 2030-01-01T23:59:59+01:00 — calendar: Berliner Feiertage
+- Netzpolitischer Abend — 2030-01-01T20:00:00+01:00 → 2030-01-01T22:00:00+01:00 — calendar: Termine
+- 🍺 Stifti-Stammtisch — 2030-01-06T19:00:00+01:00 → 2030-01-06T22:00:00+01:00 — calendar: Termine
+- 👥 Online Jour Fixe — 2030-01-07T13:30:00+01:00 → 2030-01-07T14:00:00+01:00 — calendar: SOS Teamkalender
+- 👥 Online Jour Fixe — 2030-01-14T13:30:00+01:00 → 2030-01-14T14:00:00+01:00 — calendar: SOS Teamkalender
+- 👥 Online Jour Fixe — 2030-01-21T13:30:00+01:00 → 2030-01-21T14:00:00+01:00 — calendar: SOS Teamkalender
+- 👥 Online Jour Fixe — 2030-01-28T13:30:00+01:00 → 2030-01-28T14:00:00+01:00 — calendar: SOS Teamkalender
+- Mutter Geburtstag — 2030-01-31T00:00:00+01:00 → 2030-01-31T23:59:59+01:00 — calendar: Geburtstage
+- 👥 Online Jour Fixe — 2030-02-04T13:30:00+01:00 → 2030-02-04T14:00:00+01:00 — calendar: SOS Teamkalender
+- Netzpolitischer Abend — 2030-02-05T20:00:00+01:00 → 2030-02-05T22:00:00+01:00 — calendar: Termine
+- 🍺 Stifti-Stammtisch — 2030-02-06T19:00:00+01:00 → 2030-02-06T22:00:00+01:00 — calendar: Termine
