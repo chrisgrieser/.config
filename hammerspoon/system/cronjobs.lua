@@ -67,9 +67,10 @@ do
 
 	local function runEveryFileIn(dir)
 		for file in hs.fs.dir(dir) do
+			if file == "." or file == ".." then goto continue end -- special UNIX location
 			local jobfile = dir .. "/" .. file
 			if not u.isExecutableFile(jobfile) then
-				print("⚠️ " .. jobfile .. " is not executable")
+				print("⚠️ " .. jobfile .. " is not executable.")
 				goto continue
 			end
 			local task = hs.task.new
