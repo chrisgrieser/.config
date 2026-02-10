@@ -213,7 +213,7 @@ do -- STICKY YANK
 end
 
 do -- YANKRING
-	-- When undoing the paste and then using `.`, will paste `"2p`, so `<D-p>...`
+	-- When undoing the paste and then using `.`, will paste `"2p`, thus `<D-p>...`
 	-- pastes all recent things and `<D-p>u.u.u.u.`, cycles through them
 	keymap("n", "<D-p>", '"1p', { desc = " Paste from yankring" })
 
@@ -354,7 +354,7 @@ end, { desc = "󰅍 Yank cmdline" })
 
 keymap("c", "<BS>", function()
 	if vim.fn.getcmdline() ~= "" then return "<BS>" end
-end, { expr = true, desc = "<BS> does not leave cmdline" })
+end, { expr = true, desc = "disable <BS> when cmdline is empty" })
 
 keymap("c", "<C-a>", "<C-b>", { desc = "Goto start of cmdline" })
 keymap("c", "<D-Left>", "<C-b>", { desc = "Goto start of cmdline" })
@@ -363,7 +363,6 @@ keymap("c", "<D-Right>", "<C-e>", { desc = "Goto end of cmdline" })
 ---INSPECT & EVAL---------------------------------------------------------------
 keymap("n", "<leader>ii", vim.cmd.Inspect, { desc = "󱈄 Inspect at cursor" })
 keymap("n", "<leader>it", vim.cmd.InspectTree, { desc = " TS syntax tree" })
-keymap("n", "<leader>iT", "<cmd>checkhealth nvim-treesitter<CR>", { desc = " TS Parsers" })
 
 -- stylua: ignore start
 keymap("n", "<leader>ia", function() require("personal-plugins.misc").inspectNodeAncestors() end, { desc = " Node ancestors" })
@@ -465,6 +464,6 @@ keymap("n", "<leader>ol", function()
 	vim.notify(list, nil, { title = "Restarting LSPs", icon = "󰑓" })
 	vim.lsp.enable(names, false)
 	vim.lsp.enable(names, true)
-end, { desc = "󰑓 LSP Restart" })
+end, { desc = "󰑓 LSP restart" })
 
 --------------------------------------------------------------------------------
