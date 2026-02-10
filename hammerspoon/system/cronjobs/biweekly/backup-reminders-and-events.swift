@@ -113,9 +113,8 @@ Task {  // wrapping in `Task` because `await` is not allowed in `main`
 	let events = fetchFutureEvents()
 	let md = buildMarkdown(reminders: reminders, events: events)
 
-	let expandedPath =
-		(backupFolder as NSString).expandingTildeInPath
-	let outputURL = URL(fileURLWithPath: expandedPath)
+	let outputFile = (backupFolder as NSString).expandingTildeInPath + "/Reminders & Events.md"
+	let outputURL = URL(fileURLWithPath: outputFile)
 	try md.write(to: outputURL, atomically: true, encoding: .utf8)
 
 	print("✅ Backup written to \(outputURL.path)")

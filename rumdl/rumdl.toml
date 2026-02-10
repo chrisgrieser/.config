@@ -48,3 +48,15 @@ enabled = true  # opt-in rule
 
 [toc-validation]
 enabled = true  # opt-in rule
+
+# ------------------------------------------------------------------------------
+
+# DOCS https://rumdl.dev/code-block-tools/
+[code-block-tools]
+enabled = true
+timeout = 10000  # 10 seconds
+
+[code-block-tools.languages]
+python = { lint = ["ruff:check"], format = ["ruff:format"] }
+shell = { lint = ["shellcheck"], format = ["shfmt"] }
+lua = { lint = ["stylua"], format = ["stylua"] }
