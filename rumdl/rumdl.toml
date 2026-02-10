@@ -58,5 +58,9 @@ timeout = 10000  # 10 seconds
 
 [code-block-tools.languages]
 python = { lint = ["ruff:check"], format = ["ruff:format"] }
+css = { lint = ["biome:check"], format = ["biome:format"] }
 shell = { lint = ["shellcheck"], format = ["shfmt"] }
 lua = { lint = ["stylua"], format = ["stylua"] }
+toml = { lint = ["tombi"], format = ["tombi"] }
+markdown = { lint = ["rumdl"], format = ["rumdl"] }
+json = { format = ["jq"] }
