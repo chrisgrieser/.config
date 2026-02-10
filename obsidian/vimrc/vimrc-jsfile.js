@@ -124,9 +124,13 @@ function gotoLineWithPattern(direction, pattern, wrap) {
 	_setCursorAndAddToJumplist(editor, prevCursor, { line: lnumWithPattern, ch: 0 });
 }
 
-function gotoLastLinkInFile() {
-	const pattern = "[[";
-	const lastOccurrence = editor.getValue().lastIndexOf(pattern);
+function gotoLastLinkOrTodoInFile() {
+	// CONFIG
+	const pattern1 = "[[";
+	const pattern2 = "TODO";
+
+	const text = editor.getValue();
+	const lastOccurrence = Math.max(text.lastIndexOf(pattern1), text.lastIndexOf(pattern2));
 	const prevCursor = editor.getCursor();
 	const newCursor = editor.offsetToPos(lastOccurrence);
 	_setCursorAndAddToJumplist(editor, prevCursor, newCursor);

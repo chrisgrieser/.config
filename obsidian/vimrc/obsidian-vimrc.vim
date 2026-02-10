@@ -397,26 +397,18 @@ onoremap im iW
 onoremap aq a"
 onoremap iq i"
 onoremap az a'
-onoremap iz i'
-onoremap ae a`
 onoremap ie i`
 onoremap ir i[
 onoremap ar a[
-onoremap ac a{
-onoremap ic i{
 
 vnoremap am aW
 vnoremap im iW
 vnoremap aq a"
 vnoremap iq i"
-vnoremap az a'
-vnoremap iz i'
 vnoremap ae a`
 vnoremap ie i`
 vnoremap ir i[
 vnoremap ar a[
-vnoremap ac a{
-vnoremap ic i{
 
 " emulate some text objects from nvim-various-textobjs
 nnoremap ygg ggyG
@@ -584,8 +576,8 @@ exmap markAsRead obcommand quadro:mark-datafile-as-read
 nnoremap ,rr :markAsRead<CR>
 
 " goto last link in file
-exmap gotoLastLinkInFile jsfile Meta/vimrc-jsfile.js { gotoLastLinkInFile() }
-nnoremap g. :gotoLastLinkInFile<CR>
+exmap gotoLastLinkOrTodoInFile jsfile Meta/vimrc-jsfile.js { gotoLastLinkOrTodoInFile() }
+nnoremap g. :gotoLastLinkOrTodoInFile<CR>
 
 " goto next/prev paragraph with link
 " (`zt<C-y><C-y>` so long lines are fully visible in the editor)
