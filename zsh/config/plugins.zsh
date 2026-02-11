@@ -1,5 +1,5 @@
 # shellcheck disable=SC1091
-#───────────────────────────────────────────────────────────────────────────────
+#-------------------------------------------------------------------------------
 
 # LOAD HOMEBREW COMPLETIONS
 # load various completions of clis installed via homebrew
@@ -14,7 +14,7 @@ source "$HOMEBREW_PREFIX/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh"
 # autoload compinit -Uz +X && compinit
 # [[ $(uname -p) == "i386" ]] && compaudit | xargs chmod g-w # FIX for Intel Mac, https://github.com/zsh-users/zsh-completions/issues/433#issuecomment-629539004
 
-#───────────────────────────────────────────────────────────────────────────────
+#-------------------------------------------------------------------------------
 
 # ZSH-AUTOPAIR
 source "$HOMEBREW_PREFIX/share/zsh-autopair/autopair.zsh"
@@ -41,7 +41,7 @@ source "$HOMEBREW_PREFIX/share/zsh-history-substring-search/zsh-history-substrin
 bindkey '^[[A' history-substring-search-up   # arrow up
 bindkey '^[[B' history-substring-search-down # arrow down
 
-#───────────────────────────────────────────────────────────────────────────────
+#-------------------------------------------------------------------------------
 
 # SEMANTIC PROMPTS (WEZTERM) https://wezfurlong.org/wezterm/shell-integration
 [[ "$TERM_PROGRAM" == "WezTerm" ]] && source "$ZDOTDIR/../wezterm/semantic_prompts.zsh"
@@ -49,3 +49,8 @@ bindkey '^[[B' history-substring-search-down # arrow down
 # STARSHIP
 export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
 eval "$(starship init zsh)"
+
+#-------------------------------------------------------------------------------
+
+# OBSIDIAN https://help.obsidian.md/cli#macOS
+export PATH="$PATH:/Applications/Obsidian.app/Contents/MacOS"

@@ -135,3 +135,4 @@ matches:
   - { replace: fails, trigger: faisl, propagate_case: true, word: true }
   - { replace: without, trigger: withuot, propagate_case: true, word: true }
   - { replace: new, trigger: enw, propagate_case: true, word: true }
+  - { replace: and, trigger: nad, propagate_case: true, word: true }
