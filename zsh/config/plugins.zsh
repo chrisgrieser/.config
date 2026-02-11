@@ -6,8 +6,8 @@
 # needs to be run *before* compinit/zsh-autocomplete
 export FPATH="$ZDOTDIR/completions:$HOMEBREW_PREFIX/share/zsh/site-functions:$FPATH"
 
-# ZSH-COMPLETIONS
-# also loads compinit stuff, therefore has to be loaded before most plugins
+# ZSH-AUTOCOMPLETE
+# also loads compinit stuff, therefore has to be loaded *before* most plugins
 source "$HOMEBREW_PREFIX/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh"
 
 # INFO not needed when using zsh-autocomplete
@@ -30,8 +30,7 @@ typeset -A ZSH_HIGHLIGHT_REGEXP # actual highlights defined in other files
 source "$HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
 export ZSH_AUTOSUGGEST_HISTORY_IGNORE="?(#c50,)" # ignores long history items
 export ZSH_AUTOSUGGEST_STRATEGY=(history)
-export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=30
-
+export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=35
 # do not accept autosuggestion when using vim's `A`
 export ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=("${ZSH_AUTOSUGGEST_ACCEPT_WIDGETS[@]/vi-add-eol/}")
 
