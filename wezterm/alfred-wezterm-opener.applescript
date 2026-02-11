@@ -1,4 +1,4 @@
-# INFO to be entered in the Alfred Terminal settings (Kept here just for reference.)
+# INFO to be entered in the Alfred Terminal settings at
 # alfredpreferences://navigateto/features>terminal
 --------------------------------------------------------------------------------
 # DOCS https://wezfurlong.org/wezterm/cli/cli/send-text
@@ -9,12 +9,13 @@ on alfred_script(shellCmd)
 	set i to 0 
 	tell application "System Events" 
 		repeat while (name of first application process whose frontmost is true) is not "wezterm-gui" 
-			tell application "WezTerm" to activate # (Appname is `WezTerm`, processname is `wezterm-gui`)
+			tell application "WezTerm" to activate # Appname is `WezTerm`, processname is `wezterm-gui`
 			delay 0.05 
 			if i > 100 then return 
 		end repeat 
 	end tell
-	delay 0.1 # ensure wezterm-gui is ready
+	delay 0.15 # ensure wezterm-gui is ready
+	tell application "WezTerm" to activate
 
 	# DETERMINE COMMAND
 	if (text 1 thru 3 of shellCmd) is "cd " then
