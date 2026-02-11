@@ -96,8 +96,8 @@ func openaiRequest(_ input: String) async throws -> String? {
 
 // -----------------------------------------------------------------------------
 
-// wrapping in `Task` because top-level `await` is not allowed
-Task {
+Task {  // wrapping in `Task` because top-level `await` is not allowed
+
 	// Get open reminders without emoji
 	guard await requestRemindersAccess() else {
 		print("❌ Access to Reminder.app not granted.")
