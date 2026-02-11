@@ -78,7 +78,10 @@ end
 
 ---@param key "o"|"O"|"<CR>"
 function M.autoBullet(key)
-	assert(key == "o" or key == "O" or key == "<CR>", "`autoBullet()` only accepts `o`, `O`, or `<CR>`")
+	assert(
+		key == "o" or key == "O" or key == "<CR>",
+		"`autoBullet()` only accepts `o`, `O`, or `<CR>`"
+	)
 	local row, col = unpack(vim.api.nvim_win_get_cursor(0))
 	local indent, continued = "", ""
 	local ln = row
@@ -142,10 +145,12 @@ function M.incrementHeading(dir)
 		return ""
 	end)
 	if updated == curLine then
-		-- for MD036: no-emphasis-as-heading https://github.com/rvben/rumdl/blob/main/docs/md036.md
-		local noEmphasis = curLine:gsub("^[*_][*_]?", ""):gsub("[*_][*_]?$", "")
+		local noEmphasisOrBullet = curLine
+			:gsub("^[*_][*_]?", "") -- for MD036: no-emphasis-as-heading https://github.com/rvben/rumdl/blob/main/docs/md036.md
+			:gsub("[*_][*_]?$", "")
+			:gsub("^%s*[*+-] ", "") -- no bullet
 
-		updated = (dir == 1 and "# " or "###### ") .. noEmphasis
+		updated = (dir == 1 and "# " or "###### ") .. noEmphasisOrBullet
 	end
 
 	vim.api.nvim_set_current_line(updated)
