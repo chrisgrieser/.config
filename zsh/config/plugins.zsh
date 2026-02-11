@@ -22,8 +22,8 @@ source "$HOMEBREW_PREFIX/share/zsh-autopair/autopair.zsh"
 # DOCS https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/docs/highlighters/regexp.md
 source "$HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 export ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets regexp)
-# shellcheck disable=2034 # used in other files
-typeset -A ZSH_HIGHLIGHT_REGEXP # actual highlights defined in other files
+# shellcheck disable=2034 # variable is used in other config files
+typeset -A ZSH_HIGHLIGHT_REGEXP # just declaration, my custom highlights are defined in other files
 
 # ZSH-AUTOSUGGESTIONS
 # https://github.com/zsh-users/zsh-autosuggestions#configuration
