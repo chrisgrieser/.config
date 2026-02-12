@@ -31,6 +31,9 @@ M.aw_pdfreaders = aw.new(function(appName, event, app)
 		app:selectMenuItem { "View", "PDF Appearance", u.isDarkMode() and "Night" or "Default" }
 		app:selectMenuItem { "Tools", "Highlight" }
 		app:selectMenuItem { "Tools", "Color", "Yellow" }
+		app:selectMenuItem { "View", "Thumbnails" }
+	elseif event == aw.launched and appName == "Preview" then
+		app:selectMenuItem { "View", "Thumbnails" }
 	elseif event == aw.launched and appName == "PDF Expert" then
 		app:selectMenuItem { "View", "Theme", u.isDarkMode() and "Night" or "Day" }
 		app:selectMenuItem { "Annotate", "Highlight" }

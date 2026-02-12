@@ -71,6 +71,7 @@ end
 if device.include?("Home") or device.include?("Office")
 	cask "monodraw"
 	cask "granola"
+	cask "webex" # TEMP
 end
 if device.include?("Home") or device.include?("Mother")
 	cask "iina"
