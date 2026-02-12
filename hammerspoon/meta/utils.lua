@@ -10,8 +10,9 @@ M.hyper = { "cmd", "alt", "ctrl" }
 M.exportPath = "export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; "
 
 M.videoAndAudioApps = {
-	"IINA",
 	"zoom.us",
+	"Webex",
+	"IINA",
 	"FaceTime",
 	"Netflix",
 	"YouTube",

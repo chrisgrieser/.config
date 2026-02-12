@@ -24,6 +24,7 @@ local pseudoMaxApps = {
 	"Granola",
 	"Obsidian",
 	"zoom.us",
+	"Webex",
 	"PDF Expert",
 	"Highlights",
 	"Signal",
