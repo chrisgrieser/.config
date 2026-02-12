@@ -1,11 +1,21 @@
 #!/usr/bin/env zsh
-steam_dir="$HOME/Library/Application Support/Steam/steamapps/common/"
-icon=$(find "$steam_dir" -path "*.app/Contents/Resources/*.icns" -mmin -60 | head -n1)
-[[ -f "$icon" ]] || exit 1
 
+# CONFIG
+steam_dir="$HOME/Library/Application Support/Steam/steamapps/common/"
 game_dir="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Apps/Games/"
+
+#-------------------------------------------------------------------------------
+
+icon=$(find "$steam_dir" -path "*.app/Contents/Resources/*.icns" -mmin -60 | head -n1)
+if [[ ! -f "$icon" ]] ; then
+	echo "No icon found."
+	exit 1
+fi
 game_shortcut=$(find "$game_dir" -maxdepth 1 -name "*.app" -mmin -60 | head -n1)
-[[ -f "$game_shortcut" ]] || exit 1
+if [[ ! -d "$game_shortcut" ]] ; then # `-d`, since `.app` are actually directories
+	echo "No game shortcut found."
+	exit 1
+fi
 
 #-------------------------------------------------------------------------------
 
