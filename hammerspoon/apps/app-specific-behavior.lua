@@ -23,7 +23,7 @@ M.wf_zoom = wf.new("zoom.us"):subscribe(wf.windowCreated, function(newWin)
 end)
 
 ---PDF READERS------------------------------------------------------------------
--- 1. Sync Dark & Light Mode
+-- 1. Sync Dark/Light Mode
 -- 2. Start with Highlight Tool enabled
 -- 3. Delete useless iCloud PDF folder that's always created
 M.aw_pdfreaders = aw.new(function(appName, event, app)
@@ -33,7 +33,8 @@ M.aw_pdfreaders = aw.new(function(appName, event, app)
 		app:selectMenuItem { "Tools", "Color", "Yellow" }
 		app:selectMenuItem { "View", "Thumbnails" }
 	elseif event == aw.launched and appName == "Preview" then
-		app:selectMenuItem { "View", "Thumbnails" }
+		local isPdf = app:mainWindow():title():find("%.pdf")
+		if isPdf then app:selectMenuItem { "View", "Thumbnails" } end
 	elseif event == aw.launched and appName == "PDF Expert" then
 		app:selectMenuItem { "View", "Theme", u.isDarkMode() and "Night" or "Day" }
 		app:selectMenuItem { "Annotate", "Highlight" }
