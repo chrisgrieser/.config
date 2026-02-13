@@ -24,7 +24,6 @@ stackoverflow.com###announcement-banner
 help.obsidian.md##.site-body-left-column
 
 ! ai
-chatgpt.com##.sticky.bottom-0
 
 ! search
 duckduckgo.com##[data-testid="feedback-prompt"]
