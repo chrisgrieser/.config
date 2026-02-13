@@ -9,9 +9,11 @@
 	<key>map_provider</key>
 	<string>https://maps.apple.com/place?q=</string>
 	<key>quickadd_in2days_keyword</key>
-	<string>,,,</string>
+	<string>,,</string>
 	<key>quickadd_nextMonday_keyword</key>
-	<string>,,,</string>
+	<string>,,</string>
+	<key>quickadd_nodate_keyword</key>
+	<string>//</string>
 	<key>quickadd_today_keyword</key>
 	<string>,</string>
 	<key>quickadd_tomorrow_keyword</key>
