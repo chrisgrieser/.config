@@ -1,9 +1,5 @@
 set quiet := true
 
-# WARN the `^M` breaks the formatting via the just-lsp
-#-------------------------------------------------------------------------------
-
-
 reload:
     #!/usr/bin/env zsh
     if pgrep -qx "wezterm-gui"; then

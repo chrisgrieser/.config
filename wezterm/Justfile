@@ -1,5 +1,9 @@
 set quiet := true
 
+typeAnnotationRepo := "https://github.com/DrKJeff16/wezterm-types"
+
+#-------------------------------------------------------------------------------
+
 reload:
     #!/usr/bin/osascript
     tell application "System Events"
@@ -23,13 +27,13 @@ update-alfred-terminal:
     open "alfredpreferences://navigateto/features>terminal"
 
 open-wezterm-types-repo:
-    open "https://github.com/DrKJeff16/wezterm-types"
+    open {{ typeAnnotationRepo }}
 
 # streaming
 update-types:
     #!/usr/bin/env zsh
     rm -rf "/tmp/wezterm-types"
     rm -rf "./types"
-    git clone --depth=2 "https://github.com/DrKJeff16/wezterm-types" "/tmp/wezterm-types"
+    git clone --depth=2 {{ typeAnnotationRepo }} "/tmp/wezterm-types"
     mv -f "/tmp/wezterm-types/lua/wezterm/types" "./"
     echo "Updated."
