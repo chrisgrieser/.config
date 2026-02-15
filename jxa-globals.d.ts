@@ -215,15 +215,17 @@ declare function delay(seconds: number): void;
 // biome-ignore-start lint/suspicious/noExplicitAny: not set by me
 // biome-ignore-start lint/style/useNamingConvention: not set by me
 declare const $: {
+	(path: string): any;
+	(paths: string[]): any;
 	NSWorkspace: any; // REQUIRES `ObjC.import("Foundation")`
 	NSPasteboard: any; // REQUIRES `ObjC.import("AppKit")`
 	NSFilenamesPboardType: any;
-	(paths: string[]): any;
 	IOBluetoothDevice: any; // REQUIRES `ObjC.import("IOBluetooth")`
 
 	// REQUIRES `ObjC.import("stdlib")`
 	getenv: (envVar: string) => string;
 	NSFileManager: any;
+	NSDictionary: any;
 	NSUTF8StringEncoding: any;
 	NSFileModificationDate: any;
 	NSProcessInfo: any;

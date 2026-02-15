@@ -160,8 +160,12 @@
     "body": [
       "/** @param {string} path */",
       "function readFile(path) {",
-      "\tconst data = \\$.NSFileManager.defaultManager.contentsAtPath(path);",
-      "\tconst str = \\$.NSString.alloc.initWithDataEncoding(data, \\$.NSUTF8StringEncoding);",
+      "\tconst fm = \\$.NSFileManager.defaultManager;",
+      "\tconst data = fm.contentsAtPath(\\$(path).stringByStandardizingPath);",
+      "\t// biome-ignore format: -",
+      "\tconst encoding = \\$.NSString.stringEncodingForDataEncodingOptionsConvertedStringUsedLossyConversion(data, \\$.NSDictionary.dictionary, null, null);",
+      "\tif (encoding === 0) throw new Error(\"Unable to detect string encoding\");",
+      "\tconst str = \\$.NSString.alloc.initWithDataEncoding(data, encoding);",
       "\treturn ObjC.unwrap(str);",
       "}"
     ],
