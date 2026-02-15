@@ -169,7 +169,7 @@
   },
   "run (JXA)": {
     "body": [
-      "// biome-ignore lint/correctness/noUnusedVariables: Alfred run",
+      "// biome-ignore lint/correctness/noUnusedVariables: JXA run",
       "function run() {",
       "\t$0",
       "}"

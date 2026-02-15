@@ -92,6 +92,9 @@ M.pathw_desktop = pathw(home .. "/Desktop/", function(paths, _)
 				u.defer(1, function() os.rename(path, bankPath .. "/" .. name) end) -- delay ensures folder is created
 				u.openUrlInBg(bankPath)
 			end
+		elseif name:find("^Umsatzanzeige_.*%.csv$") then
+			local bankPath = home .. "/Documents/Finanzen/Vermögen (ING-DiBa)/Umsatz/csv/"
+			os.rename(path, bankPath .. "/" .. name)
 
 		---STEAM GAME SHORTCUTS---------------------------------------------------
 		elseif name:find("%.app$") and not isDownloaded and parent == "" then
