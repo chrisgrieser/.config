@@ -53,7 +53,7 @@ end
 ---@param bufnr integer
 ---@param filepath string
 ---@return boolean -- return `false` to disable on this buffer
-function M.allowBuffer(bufnr, filepath)
+function M.allowBufferForAi(bufnr, filepath)
 	-- INFO plugins are disabled when using `pass` via `$USING_PASS`, for safety
 	-- adding redundant safeguards to disable AI for those buffers nonetheless
 
@@ -62,6 +62,7 @@ function M.allowBuffer(bufnr, filepath)
 	if vim.bo[bufnr].buftype ~= "" then return false end
 	if vim.bo[bufnr].filetype == "text" then return false end -- disable, since `txt` used by `pass` and others
 	if vim.bo[bufnr].filetype == "bib" then return false end -- too large and not useful
+	if vim.bo[bufnr].filetype == "csv" then return false end -- too large / sensitive data
 
 	local pathsToIgnore = {
 		"security",

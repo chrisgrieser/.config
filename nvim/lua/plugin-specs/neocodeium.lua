@@ -22,7 +22,7 @@ return {
 			text = false, -- filetype when editing in `pass` (1. extra safeguard)
 		},
 		-- `filter` should return `false` to disable AI on buffer
-		filter = require("config.utils").allowBuffer,
+		filter = require("config.utils").allowBufferForAi,
 	},
 	config = function(_, opts)
 		require("neocodeium").setup(opts)
