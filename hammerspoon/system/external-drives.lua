@@ -3,7 +3,6 @@ local M = {} -- persist from garbage collector
 local u = require("meta.utils")
 local usb = hs.usb.watcher
 
----USB WATCHER------------------------------------------------------------------
 -- backup device: open terminal
 -- otherwise: open in Finder
 M.usb_externalDrives = usb.new(function(device)
@@ -12,7 +11,7 @@ M.usb_externalDrives = usb.new(function(device)
 		"CHERRY Wireless Device", -- Mouse at mother
 		"Keychron K3", ------------- Keyboard at home & office
 		"SP 150", ------------------ RICOH printer
-		"Integrated RGB Camera", --- Docking Station in the office
+		"Integrated RGB Camera", --- Docking station in the office
 		"USB 10/100/1000 LAN", ----- ^
 		"T27hv-20", ---------------- ^
 	}
