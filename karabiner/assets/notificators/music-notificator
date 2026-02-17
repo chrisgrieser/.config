@@ -3,16 +3,16 @@
 ####################################################
 ### Created by Vítor Galvão                      ###
 ### Find the latest version at:                  ###
-###   https://github.com/vitorgalvao/notificator ###
+### https://github.com/vitorgalvao/notificator ###
 ####################################################
 # Modified by Chris Grieser for use without Alfred #
 ####################################################
 
 #───────────────────────────────────────────────────────────────────────────────
 # CONFIG
-readonly bundle_id="de.chris-grieser.spotify-notificator"
-readonly name="Spotify"
-readonly icon="$HOME/.config/karabiner/assets/notificators/Spotify.icns"
+readonly bundle_id="de.chris-grieser.music-notificator"
+readonly name="Music"
+readonly icon="$HOME/.config/karabiner/assets/notificators/Amazon Music.icns"
 readonly cache_location="$HOME/.cache/notificators"
 
 #───────────────────────────────────────────────────────────────────────────────

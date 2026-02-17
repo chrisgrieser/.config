@@ -5,7 +5,7 @@ local u = require("meta.utils")
 local aw = hs.application.watcher
 --------------------------------------------------------------------------------
 
--- auto-pause/resume Spotify on launch/quit of apps with sound or on Steam games
+-- auto-pause/resume music on launch/quit of apps with sound or on Steam games
 M.aw_music = aw.new(function(appName, event, app)
 	-- GUARD
 	if not env.isAtHome or env.isProjector() then return end
@@ -17,7 +17,7 @@ M.aw_music = aw.new(function(appName, event, app)
 	local otherGames = (app:path() or ""):find("/Applications/StarCraft II/")
 	if not (audioApp or steamGames or otherGames) then return end
 
-	if M.spotify_task and M.spotify_task:isRunning() then M.spotify_task:terminate() end
+	if M.music_task and M.music_task:isRunning() then M.music_task:terminate() end
 
 	-- using Alexa virtual trigger since its more reliable than `spotify_player`
 	local action = event == aw.launched and "pause" or "play"
@@ -26,7 +26,7 @@ M.aw_music = aw.new(function(appName, event, app)
 	if not u.isExecutableFile(alexaTrigger) then return end
 	print("🎵 Spotify: " .. action)
 
-	M.spotify_task = hs.task.new(alexaTrigger, nil, { "spotify-" .. action }):start()
+	M.music_task = hs.task.new(alexaTrigger, nil, { "spotify-" .. action }):start()
 end)
 
 M.aw_music:start()

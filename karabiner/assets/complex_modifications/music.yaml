@@ -12,18 +12,12 @@ rules:
   - description: Spotify Media Controls
     manipulators:
       - type: basic
-        from: { key_code: f3 }
-        to:
-          - shell_command: open "https://open.spotify.com/"
-        conditions: [*not-game]
-      #─────────────────────────────────────────────────────────────────────────
-      - type: basic
         from: { key_code: f7 }
         to:
           - shell_command: |
               "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Tech/alexa-virtual-trigger" \
-                "spotify-pause"
-              "$HOME/.config/karabiner/assets/notificators/spotify-notificator" \
+                "music-pause"
+              "$HOME/.config/karabiner/assets/notificators/music-notificator" \
                 --title "Spotify" --message "⏸️ Pause"
         conditions: [*not-game]
 
@@ -32,8 +26,8 @@ rules:
         to:
           - shell_command: |
               "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Tech/alexa-virtual-trigger" \
-                "spotify-play"
-              "$HOME/.config/karabiner/assets/notificators/spotify-notificator" \
+                "music-play"
+              "$HOME/.config/karabiner/assets/notificators/music-notificator" \
                 --title "Spotify" --message "▶️ Resume"
         conditions: [*not-game]
 
@@ -42,7 +36,7 @@ rules:
         to:
           - shell_command: |
               "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Tech/alexa-virtual-trigger" \
-                "spotify-next"
-              "$HOME/.config/karabiner/assets/notificators/spotify-notificator" \
+                "music-next"
+              "$HOME/.config/karabiner/assets/notificators/music-notificator" \
                 --title "Spotify" --message "⏭️ Next"
         conditions: [*not-game]
