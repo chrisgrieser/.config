@@ -13,6 +13,16 @@ alias bf='brew bundle edit' # opens [b]rew[f]ile with $HOMEBREW_EDITOR
 alias bh='brew home'
 alias depending_on='brew uses --installed --recursive'
 
+# $1: count of formulae/casks to list
+function recent_updates() {
+	local default_count=10
+	local count=${1:-$default_count}
+	_pretty_header "Recently updated formulae" "no-line-break"
+	brew list -t --formulae | head -n"$count" | rs
+	_pretty_header "Recently updated casks"
+	brew list -t --casks | head -n"$count" | rs
+}
+
 #-UPDATE EVERYTHING-------------------------------------------------------------
 function _pretty_header() {
 	light_fg="\e[1;38;5;255m" # force white

@@ -11,6 +11,13 @@ anchors:
 rules:
   - description: Spotify Media Controls
     manipulators:
+
+      - type: basic
+        from: { key_code: f3 }
+        to:
+          - shell_command: open "https://music.amazon.de/"
+        conditions: [*not-game]
+
       - type: basic
         from: { key_code: f7 }
         to:
@@ -18,7 +25,7 @@ rules:
               "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Tech/alexa-virtual-trigger" \
                 "music-pause"
               "$HOME/.config/karabiner/assets/notificators/music-notificator" \
-                --title "Spotify" --message "⏸️ Pause"
+                --title "Music" --message "⏸️ Pause"
         conditions: [*not-game]
 
       - type: basic
@@ -28,7 +35,7 @@ rules:
               "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Tech/alexa-virtual-trigger" \
                 "music-play"
               "$HOME/.config/karabiner/assets/notificators/music-notificator" \
-                --title "Spotify" --message "▶️ Resume"
+                --title "Music" --message "▶️ Resume"
         conditions: [*not-game]
 
       - type: basic
@@ -38,5 +45,5 @@ rules:
               "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Tech/alexa-virtual-trigger" \
                 "music-next"
               "$HOME/.config/karabiner/assets/notificators/music-notificator" \
-                --title "Spotify" --message "⏭️ Next"
+                --title "Music" --message "⏭️ Next"
         conditions: [*not-game]
