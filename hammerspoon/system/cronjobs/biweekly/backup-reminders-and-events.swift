@@ -73,7 +73,9 @@ func buildMarkdown(reminders: [EKReminder], events: [EKEvent]) -> String {
 		}) {
 			let due = markdownDate(r.dueDateComponents?.date)
 			let list = r.calendar?.title ?? "Unknown list"
-			md += "- \(r.title ?? "(no title)") — due: \(due) — list: \(list)\n"
+			let title = r.title ?? "(no title)"
+			let desc = r.notes ? " (\(r.notes!))" : ""
+			md += "- \(title)\(desc) — due: \(due) — list: \(list)\n"
 		}
 	}
 
