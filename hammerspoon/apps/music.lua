@@ -6,7 +6,7 @@ local aw = hs.application.watcher
 --------------------------------------------------------------------------------
 
 -- auto-pause/resume Spotify on launch/quit of apps with sound or on Steam games
-M.aw_spotify = aw.new(function(appName, event, app)
+M.aw_music = aw.new(function(appName, event, app)
 	-- GUARD
 	if not env.isAtHome or env.isProjector() then return end
 	if not u.screenIsUnlocked() then return end
@@ -29,7 +29,7 @@ M.aw_spotify = aw.new(function(appName, event, app)
 	M.spotify_task = hs.task.new(alexaTrigger, nil, { "spotify-" .. action }):start()
 end)
 
-M.aw_spotify:start()
+M.aw_music:start()
 
 --------------------------------------------------------------------------------
 return M

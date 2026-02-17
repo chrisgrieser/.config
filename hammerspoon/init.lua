@@ -39,7 +39,7 @@ safeRequire("system.weather-reminder")
 
 safeRequire("apps.auto-quitter")
 safeRequire("apps.app-specific-behavior")
-safeRequire("apps.spotify")
+safeRequire("apps.music")
 
 safeRequire("meta.reload")
 safeRequire("meta.update-typings")
