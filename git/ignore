@@ -14,7 +14,7 @@ __pycache__
 *.dmg
 
 #-------------------------------------------------------------------------------
-# NOTE as opposed to `.ignore` files (used e.g. by ripgrep),
+# WARN as opposed to `.ignore` files (used e.g. by ripgrep),
 # gitignore files do NOT accept syntax such as `*.{ext1,ext2}`
 #-------------------------------------------------------------------------------
 
@@ -26,7 +26,7 @@ __pycache__
 # conform.nvim temporary files
 .conform.*
 
-# prevent sensitive data from being added
+# prevent sensitive data from being accidentally added
 .zsh_history
 .bash_history
 *.kdb
@@ -36,8 +36,9 @@ __pycache__
 *.key
 *.env
 .env
+*recovery*
 
-# prevent big files or partial downloads from being added
+# prevent big files or partial downloads from being accidentally added
 *.part
 *.crdownload
 *.mp4
