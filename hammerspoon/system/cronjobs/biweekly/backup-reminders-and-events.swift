@@ -1,18 +1,17 @@
 #!/usr/bin/env swift
-// -----------------------------------------------------------------------------
-// CONFIG
-let backupFolder = "~/Library/Mobile Documents/com~apple~CloudDocs/Tech/backups/Calendar & Reminders/"
-
-
-// -----------------------------------------------------------------------------
-
 import EventKit
 import Foundation
 
-let store = EKEventStore()
-let semaphore = DispatchSemaphore(value: 0)
+// -----------------------------------------------------------------------------
+
+// CONFIG
+let backupFolder =
+	"~/Library/Mobile Documents/com~apple~CloudDocs/Tech/backups/Calendar & Reminders/"
 
 // -----------------------------------------------------------------------------
+
+let store = EKEventStore()
+let semaphore = DispatchSemaphore(value: 0)
 
 func requestRemindersAccess() async -> Bool {
 	await withCheckedContinuation { continuation in
@@ -74,8 +73,8 @@ func buildMarkdown(reminders: [EKReminder], events: [EKEvent]) -> String {
 			let due = markdownDate(r.dueDateComponents?.date)
 			let list = r.calendar?.title ?? "Unknown list"
 			let title = r.title ?? "(no title)"
-			let desc = r.notes ? " (\(r.notes!))" : ""
-			md += "- \(title)\(desc) — due: \(due) — list: \(list)\n"
+			let desc = r.notes != nil && r.notes != "" ? " (\(r.notes!))" : ""
+			md += "- \(title)\(desc) [\(list)] — \(due)\n"
 		}
 	}
 
@@ -87,7 +86,8 @@ func buildMarkdown(reminders: [EKReminder], events: [EKEvent]) -> String {
 			let start = markdownDate(e.startDate)
 			let end = markdownDate(e.endDate)
 			let calendar = e.calendar.title
-			md += "- \(e.title ?? "(no title)") — \(start) → \(end) — calendar: \(calendar)\n"
+			let title = e.title ?? "(no title)"
+			md += "- \(title) [\(calendar)] — \(start) → \(end)\n"
 		}
 	}
 
