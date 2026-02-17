@@ -297,7 +297,7 @@ rules:
         from: { key_code: e }
         conditions: [*leader-active]
         to:
-          - shell_command: open "https://www.messenger.com/"
+          - shell_command: open "https://www.facebook.com/messages/"
           - *deactivate-leader
           - *remove-notice
 
