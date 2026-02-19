@@ -5,7 +5,8 @@ import EventKit
 
 let config = [
 	"reminderList": "Tasks",
-	"ignoreRemindersWithPattern": ".*\\(.*\\)",
+	"ignoreRemindersWithPattern": #"^\S{25,}$"#,  // 25+ chars with no space -> potentially a password
+
 	"openaiApiKey": ProcessInfo.processInfo.environment["OPENAI_API_KEY"],
 	"apiKeyFilepath":  // fallback if no OPENAI_API_KEY provided
 		"~/Library/Mobile Documents/com~apple~CloudDocs/Tech/api-keys/openai-api-key.txt",
@@ -112,10 +113,14 @@ Task {  // wrapping in `Task` because top-level `await` is not allowed
 	}
 	let predicate = eventStore.predicateForIncompleteReminders(
 		withDueDateStarting: nil, ending: nil, calendars: [reminderList])
-	let ignoreRegex = try! Regex(config["ignoreRegex"] || "")
+	let ignoreRegex = try! Regex(config["ignoreRemindersWithPattern"]! ?? "")
 	let remWithNoEmoji = await fetchReminders(eventStore, predicate)
-		.filter { $0.title.first?.isEmoji == false }  // already has emoji
-		.filter { $0.title.matches(of: RegexComponent)(".*\n.*") == false }  // AI can't handle multiline
+		.filter {
+			let hasNoEmoji = $0.title.first?.isEmoji == false
+			let notIgnored = $0.title.firstMatch(of: ignoreRegex) == nil
+			let notMultiLine = !$0.title.contains("\n")
+			return hasNoEmoji && notIgnored && notMultiLine
+		}
 	let titles =
 		remWithNoEmoji
 		.map { "- " + $0.title.replacingOccurrences(of: "\n", with: " ") }  // using bullet list helps AI
