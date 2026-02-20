@@ -3,6 +3,8 @@
 
 return {
 	"hat0uma/csvview.nvim",
+	enabled = false,
+
 	ft = "csv",
 	keys = {
 		{ "<leader>cc", "<cmd>CsvViewToggle<CR>", desc = " CSV view toggle", ft = "csv" },
