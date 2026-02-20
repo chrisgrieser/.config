@@ -25,7 +25,7 @@ rules:
               "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Tech/alexa-virtual-trigger" \
                 "music-pause"
               "$HOME/.config/karabiner/assets/notificators/music-notificator" \
-                --title "Music" --message "⏸️ Pause"
+                --title "Amazon Music" --message "⏸️ Pause"
         conditions: [*not-game]
 
       - type: basic
@@ -35,7 +35,7 @@ rules:
               "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Tech/alexa-virtual-trigger" \
                 "music-play"
               "$HOME/.config/karabiner/assets/notificators/music-notificator" \
-                --title "Music" --message "▶️ Resume"
+                --title "Amazon Music" --message "▶️ Resume"
         conditions: [*not-game]
 
       - type: basic
@@ -45,5 +45,5 @@ rules:
               "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Tech/alexa-virtual-trigger" \
                 "music-next"
               "$HOME/.config/karabiner/assets/notificators/music-notificator" \
-                --title "Music" --message "⏭️ Next"
+                --title "Amazon Music" --message "⏭️ Next"
         conditions: [*not-game]
