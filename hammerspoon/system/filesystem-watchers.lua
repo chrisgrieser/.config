@@ -93,7 +93,7 @@ M.pathw_desktop = pathw(home .. "/Desktop/", function(paths, _)
 				u.openUrlInBg(bankPath)
 			end
 		elseif name:find("^Umsatzanzeige_.*%.csv$") then
-			local bankPath = home .. "/Documents/Finanzen/Vermögen (ING-DiBa)/Umsatz/csv/"
+			local bankPath = home .. "/Documents/Finanzen/Vermögen (ING-DiBa)/Umsatz/"
 			os.rename(path, bankPath .. "/" .. name)
 		elseif name:find("Depotuebersicht.*%.pdf") or name:find("Depotuebersicht.*%.csv") then
 			local bankPath = home .. "Documents/Finanzen/Vermögen (ING-DiBa)/Depot/Depotübersicht/" -- typos: ignore-line
