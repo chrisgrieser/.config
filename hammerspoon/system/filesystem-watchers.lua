@@ -95,6 +95,9 @@ M.pathw_desktop = pathw(home .. "/Desktop/", function(paths, _)
 		elseif name:find("^Umsatzanzeige_.*%.csv$") then
 			local bankPath = home .. "/Documents/Finanzen/Vermögen (ING-DiBa)/Umsatz/csv/"
 			os.rename(path, bankPath .. "/" .. name)
+		elseif name:find("Depotuebersicht.*%.pdf") or name:find("Depotuebersicht.*%.csv") then
+			local bankPath = home .. "Documents/Finanzen/Vermögen (ING-DiBa)/Depot/Depotübersicht/" -- typos: ignore-line
+			os.rename(path, bankPath .. "/" .. name)
 
 		---STEAM GAME SHORTCUTS---------------------------------------------------
 		elseif name:find("%.app$") and not isDownloaded and parent == "" then

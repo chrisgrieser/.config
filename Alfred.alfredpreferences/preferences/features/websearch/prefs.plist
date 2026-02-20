@@ -147,6 +147,17 @@
 			<key>url</key>
 			<string>https://www.linguee.com/english-german/search?query={query}</string>
 		</dict>
+		<key>8AE994F1-7B56-4F81-A873-9C43F730F91D</key>
+		<dict>
+			<key>enabled</key>
+			<true/>
+			<key>keyword</key>
+			<string>wer||stream</string>
+			<key>text</key>
+			<string>Wer streamt es: {query}</string>
+			<key>url</key>
+			<string>https://www.werstreamt.es/filme-serien/?q={query}</string>
+		</dict>
 		<key>8EE37181-DD3F-4F34-A086-859FED6FB0C0</key>
 		<dict>
 			<key>enabled</key>
