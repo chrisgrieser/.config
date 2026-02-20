@@ -27,7 +27,10 @@ local function openNotif(idx)
 	local minHeight = 5
 	local height = math.min(#lines + 2, math.ceil(vim.o.lines * maxHeight))
 	height = math.max(height, minHeight)
-	local longestLine = vim.iter(lines):fold(0, function(acc, line) return math.max(acc, #line) end)
+	local longestLine = vim.iter(lines):fold(0, function(acc, line)
+		local len = #(line:gsub("\t", "    "))
+		return math.max(acc, len)
+	end)
 	longestLine = math.max(longestLine, #title)
 	local width = math.min(longestLine + 3, math.ceil(vim.o.columns * maxWidth))
 
