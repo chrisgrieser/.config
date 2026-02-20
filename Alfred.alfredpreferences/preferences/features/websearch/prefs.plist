@@ -26,6 +26,17 @@
 			<key>url</key>
 			<string>https://www.urbandictionary.com/define.php?term={query}</string>
 		</dict>
+		<key>01D673F6-DFE5-4262-B78F-4B27304CCD8D</key>
+		<dict>
+			<key>enabled</key>
+			<true/>
+			<key>keyword</key>
+			<string>etf||isin||justetf</string>
+			<key>text</key>
+			<string>justETF: {query}</string>
+			<key>url</key>
+			<string>https://www.justetf.com/en/search.html?query={query}</string>
+		</dict>
 		<key>14966442-8C2D-4B37-87AC-601732095648</key>
 		<dict>
 			<key>enabled</key>
