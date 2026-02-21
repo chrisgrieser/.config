@@ -22,7 +22,7 @@ return {
 				text = function(ctx)
 					local text = ctx.text:match("^<!%-%-%s*(.-)%s*%-%->$")
 					if not text then return "" end
-					return "󰆈 " .. text:gsub("\n.*", "…")
+					return "󰆈 " .. text:gsub("\n.*", " ↓↓↓")
 				end,
 			},
 		},
