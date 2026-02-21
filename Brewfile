@@ -75,7 +75,10 @@ if device.include?("Home") or device.include?("Office")
 end
 if device.include?("Home") or device.include?("Mother")
 	cask "iina"
-	# cask "qlvideo" # version 3 bugs
 	cask "steam"
 	cask "transmission"
+
+	# thumbnails for qlvideo 3 broken
+	# thus disabling here to keep using 2.22 https://github.com/Marginal/QLVideo/issues/165
+	# cask "qlvideo"
 end
