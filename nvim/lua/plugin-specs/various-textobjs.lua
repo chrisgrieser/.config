@@ -59,6 +59,8 @@ return {
 
 		{ "i.", "<cmd>lua require('various-textobjs').chainMember('inner')<CR>", mode = {"x","o"}, desc = "󰌷 inner chainMember" },
 		{ "a.", "<cmd>lua require('various-textobjs').chainMember('outer')<CR>", mode = {"x","o"}, desc = "󰌷 outer chainMember" },
+		{ "i,", "<cmd>lua require('various-textobjs').argument('inner')<CR>", mode = {"x","o"}, desc = "󰌷 inner argument" },
+		{ "a,", "<cmd>lua require('various-textobjs').argument('outer')<CR>", mode = {"x","o"}, desc = "󰌷 outer argument" },
 		{ "iR", "<cmd>lua require('various-textobjs').doubleSquareBrackets('inner')<CR>", mode = {"x","o"}, desc = "󰖬 inner wikilink" },
 		{ "aR", "<cmd>lua require('various-textobjs').doubleSquareBrackets('outer')<CR>", mode = {"x","o"}, desc = "󰖬 outer wikilink" },
 		-- stylua: ignore end
