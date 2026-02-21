@@ -96,7 +96,8 @@ M.pathw_desktop = pathw(home .. "/Desktop/", function(paths, _)
 			local bankPath = home .. "/Documents/Finanzen/Vermögen (ING-DiBa)/csv-analysis/Umsatz/"
 			os.rename(path, bankPath .. "/" .. name)
 		elseif name:find("Depotuebersicht.*%.pdf") or name:find("Depotuebersicht.*%.csv") then
-			local bankPath = home .. "/Documents/Finanzen/Vermögen (ING-DiBa)/csv-analysis/Depot/"
+			local bankPath = home
+				.. "/Documents/Finanzen/Vermögen (ING-DiBa)/csv-analysis/Depotübersicht/" -- typos: ignore-line
 			os.rename(path, bankPath .. "/" .. name)
 
 		---STEAM GAME SHORTCUTS---------------------------------------------------
