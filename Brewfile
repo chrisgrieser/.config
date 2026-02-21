@@ -75,7 +75,7 @@ if device.include?("Home") or device.include?("Office")
 end
 if device.include?("Home") or device.include?("Mother")
 	cask "iina"
-	cask "qlvideo" # provides quickook & preview icons for `.mkv` 
+	# cask "qlvideo" # version 3 bugs
 	cask "steam"
 	cask "transmission"
 end
