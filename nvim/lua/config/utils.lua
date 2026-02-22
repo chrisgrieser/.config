@@ -63,6 +63,7 @@ function M.allowBufferForAi(bufnr, filepath)
 	if vim.bo[bufnr].filetype == "text" then return false end -- disable, since `txt` used by `pass` and others
 	if vim.bo[bufnr].filetype == "bib" then return false end -- too large and not useful
 	if vim.bo[bufnr].filetype == "csv" then return false end -- too large / sensitive data
+	if not vim.fs.basename(filepath):find("%.") then return false end -- extensionless file
 
 	local pathsToIgnore = {
 		"security",

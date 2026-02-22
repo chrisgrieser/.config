@@ -1,49 +1,52 @@
 # yaml-language-server: $schema=./schema/karabiner-mod-schema.json
 #───────────────────────────────────────────────────────────────────────────────
-title: Spotify Control
+title: Media keys
 anchors:
-  - &not-game 
+  - &not-game
     type: frontmost_application_unless
     file_paths:
       - "/Users/.*/Library/Application Support/Steam/steamapps/common/"
       - "/Applications/StarCraft II/"
 #───────────────────────────────────────────────────────────────────────────────
 rules:
-  - description: Spotify Media Controls
+  - description: Media keys
     manipulators:
-
       - type: basic
         from: { key_code: f3 }
         to:
-          - shell_command: open "https://music.amazon.de/"
+          - shell_command: |
+              "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Tech/alexa/alexa-virtual-trigger" \
+                "light-toggle"
+        conditions: [*not-game]
+
+      - type: basic
+        from: { key_code: f4 }
+        to:
+          - shell_command: |
+              "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Tech/alexa/alexa-virtual-trigger" \
+                "music-like"
         conditions: [*not-game]
 
       - type: basic
         from: { key_code: f7 }
         to:
           - shell_command: |
-              "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Tech/alexa-virtual-trigger" \
+              "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Tech/alexa/alexa-virtual-trigger" \
                 "music-pause"
-              "$HOME/.config/karabiner/assets/notificators/music-notificator" \
-                --title "Amazon Music" --message "⏸️ Pause"
         conditions: [*not-game]
 
       - type: basic
         from: { key_code: f8 }
         to:
           - shell_command: |
-              "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Tech/alexa-virtual-trigger" \
+              "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Tech/alexa/alexa-virtual-trigger" \
                 "music-play"
-              "$HOME/.config/karabiner/assets/notificators/music-notificator" \
-                --title "Amazon Music" --message "▶️ Resume"
         conditions: [*not-game]
 
       - type: basic
         from: { key_code: f9 }
         to:
           - shell_command: |
-              "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Tech/alexa-virtual-trigger" \
+              "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Tech/alexa/alexa-virtual-trigger" \
                 "music-next"
-              "$HOME/.config/karabiner/assets/notificators/music-notificator" \
-                --title "Amazon Music" --message "⏭️ Next"
         conditions: [*not-game]

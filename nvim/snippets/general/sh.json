@@ -192,7 +192,7 @@
     "prefix": "notify (msg)"
   },
   "notify (var)": {
-    "body": "osascript -e \"display notification \\\"\\\" with title \\\"$${1:var}\\\"\"",
+    "body": "osascript -e \"display notification \\\"\\\" with title \\\"\\$${1:var}\\\"\"",
     "prefix": "notify (var)"
   },
   "null (pipe)": {

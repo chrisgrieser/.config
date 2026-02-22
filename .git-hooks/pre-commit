@@ -8,7 +8,7 @@ max_file_size=2M
 #-------------------------------------------------------------------------------
 
 large_files=$(find . -type "file" -not -path "./.git/**" -size +${max_file_size} \
-	-not -name "dictcc_arm64" -not -path "*/menu/menu") # exceptions
+	-not -name "dictcc_arm64" -not -path "*/menu/menu" -not -path "*StardewValley*") # exceptions
 
 if [[ -n "$large_files" ]]; then
 	echo "❌ Large file(s) found. Aborting commit."

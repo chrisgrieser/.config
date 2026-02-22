@@ -19,14 +19,13 @@ M.aw_music = aw.new(function(appName, event, app)
 
 	if M.music_task and M.music_task:isRunning() then M.music_task:terminate() end
 
-	-- using Alexa virtual trigger since its more reliable than `spotify_player`
 	local action = event == aw.launched and "pause" or "play"
 	local alexaTrigger = os.getenv("HOME")
 		.. "/Library/Mobile Documents/com~apple~CloudDocs/Tech/alexa-virtual-trigger"
 	if not u.isExecutableFile(alexaTrigger) then return end
-	print("🎵 Spotify: " .. action)
+	print("🎵 Music: " .. action)
 
-	M.music_task = hs.task.new(alexaTrigger, nil, { "spotify-" .. action }):start()
+	M.music_task = hs.task.new(alexaTrigger, nil, { "music-" .. action }):start()
 end)
 
 M.aw_music:start()

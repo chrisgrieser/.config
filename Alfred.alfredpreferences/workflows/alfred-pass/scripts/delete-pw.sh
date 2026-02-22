@@ -1,4 +1,5 @@
 #!/usr/bin/env zsh
 
 entry="$*"
-pass delete "$entry" &>/dev/null
+pass delete "$entry" 2>&1 
+echo "$entry"
