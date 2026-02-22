@@ -15,7 +15,7 @@ rules:
         from: { key_code: f3 }
         to:
           - shell_command: |
-              "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Tech/alexa/alexa-virtual-trigger" \
+              "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Tech/alexa/virtual-trigger" \
                 "light-toggle"
         conditions: [*not-game]
 
@@ -23,7 +23,7 @@ rules:
         from: { key_code: f4 }
         to:
           - shell_command: |
-              "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Tech/alexa/alexa-virtual-trigger" \
+              "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Tech/alexa/virtual-trigger" \
                 "music-like"
         conditions: [*not-game]
 
@@ -31,7 +31,7 @@ rules:
         from: { key_code: f7 }
         to:
           - shell_command: |
-              "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Tech/alexa/alexa-virtual-trigger" \
+              "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Tech/alexa/virtual-trigger" \
                 "music-pause"
         conditions: [*not-game]
 
@@ -39,7 +39,7 @@ rules:
         from: { key_code: f8 }
         to:
           - shell_command: |
-              "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Tech/alexa/alexa-virtual-trigger" \
+              "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Tech/alexa/virtual-trigger" \
                 "music-play"
         conditions: [*not-game]
 
@@ -47,6 +47,6 @@ rules:
         from: { key_code: f9 }
         to:
           - shell_command: |
-              "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Tech/alexa/alexa-virtual-trigger" \
+              "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Tech/alexa/virtual-trigger" \
                 "music-next"
         conditions: [*not-game]

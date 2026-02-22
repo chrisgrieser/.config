@@ -21,7 +21,7 @@ M.aw_music = aw.new(function(appName, event, app)
 
 	local action = event == aw.launched and "pause" or "play"
 	local alexaTrigger = os.getenv("HOME")
-		.. "/Library/Mobile Documents/com~apple~CloudDocs/Tech/alexa-virtual-trigger"
+		.. "/Library/Mobile Documents/com~apple~CloudDocs/Tech/alexa/virtual-trigger"
 	if not u.isExecutableFile(alexaTrigger) then return end
 	print("🎵 Music: " .. action)
 
