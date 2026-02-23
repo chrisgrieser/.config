@@ -29,7 +29,6 @@ end)
 -- 3. Delete useless iCloud PDF folder that's always created
 M.aw_pdfreaders = aw.new(function(appName, event, app)
 	if event == aw.launched and appName == "Highlights" then
-		app:selectMenuItem { "View", "PDF Appearance", u.isDarkMode() and "Night" or "Default" }
 		app:selectMenuItem { "Tools", "Highlight" }
 		app:selectMenuItem { "Tools", "Color", "Yellow" }
 		app:selectMenuItem { "View", "Thumbnails" }
