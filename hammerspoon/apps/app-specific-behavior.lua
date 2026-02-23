@@ -5,21 +5,22 @@ local wu = require("win-management.window-utils")
 local aw = hs.application.watcher
 local wf = hs.window.filter
 
----ZOOM-------------------------------------------------------------------------
+---VIDEO CALLS------------------------------------------------------------------
 -- 1. remove leftover tabs
 -- 2. close unneeded windows when entering meeting
-M.wf_zoom = wf.new("zoom.us"):subscribe(wf.windowCreated, function(newWin)
+M.wf_zoom = wf.new({ "zoom.us", "Webex" }):subscribe(wf.windowCreated, function(newWin)
 	u.closeBrowserTabsWith("zoom.us")
+	u.closeBrowserTabsWith("webex.com")
 
 	local newMeetingWindow = newWin:title() == "Zoom Meeting" or newWin:title() == ""
-	if newMeetingWindow then
-		u.defer(2, function()
-			local zoom = newWin:application()
-			if not zoom or zoom:findWindow("Update") then return end
-			local mainWin = zoom:findWindow("Zoom Workplace") or zoom:findWindow("Login")
-			if mainWin then mainWin:close() end
-		end)
-	end
+
+	if newMeetingWindow then return end
+	u.defer(2, function()
+		local zoom = newWin:application()
+		if not zoom or zoom:findWindow("Update") then return end
+		local mainWin = zoom:findWindow("Zoom Workplace") or zoom:findWindow("Login")
+		if mainWin then mainWin:close() end
+	end)
 end)
 
 ---PDF READERS------------------------------------------------------------------

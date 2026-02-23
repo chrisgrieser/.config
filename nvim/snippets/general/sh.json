@@ -60,7 +60,7 @@
     "prefix": "default value"
   },
   "directory of script": {
-    "body": "\"\\$(dirname \"$0\")\"",
+    "body": "\"\\$(dirname \"\\$0\")\"",
     "prefix": "path of this file (relative)"
   },
   "elseif": {

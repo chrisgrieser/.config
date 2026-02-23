@@ -3,11 +3,12 @@
 
 return {
 	"kylechui/nvim-surround",
+	init = function () vim.g.nvim_surround_no_normal_mappings = true end,
 	keys = {
-		{ "ys", desc = "󰅪 Add surround operator" },
+		{ "ys", "<Plug>(nvim-surround-normal)", desc = "󰅪 Add surround operator" },
 		{ "yS", "ys$", desc = "󰅪 Surround to EoL", remap = true },
-		{ "ds", desc = "󰅪 Delete surround operator" },
-		{ "cs", desc = "󰅪 Change surround operator" },
+		{ "ds", "<Plug>(nvim-surround-delete)", desc = "󰅪 Delete surround operator" },
+		{ "cs", "<Plug>(nvim-surround-change)", desc = "󰅪 Change surround operator" },
 	},
 	opts = {
 		move_cursor = false,
@@ -16,12 +17,6 @@ return {
 			c = "}", b = ")", r = "]",
 			q = '"', z = "'", e = "`", k = { '"', "'", "`" }, -- anyquote
 			s = { "}", ")", "]", '"', "'", "`" }, -- any surround
-		},
-		-- stylua: ignore
-		keymaps = {
-			normal = "ys", normal_cur = "yss", delete = "ds", change = "cs",
-			visual = false, normal_line = false, normal_cur_line = false,
-			visual_line = false, insert_line = false, insert = false,
 		},
 		surrounds = {
 			-- disable fallback to prevent accidental changes
@@ -39,7 +34,6 @@ return {
 				find = "if .- then .- end",
 				delete = "(if .- then )().-( end)()",
 			},
-			-- bla "ffffff fffffff"
 			R = { -- double square brackets
 				add = { "[[", "]]" },
 				find = "%[%[.-%]%]",
