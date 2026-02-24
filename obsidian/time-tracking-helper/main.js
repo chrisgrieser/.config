@@ -66,8 +66,7 @@ function monthlyReport(app, monthOffset) {
 	const monthNames = Array.from({ length: 12 }, (_, i) =>
 		new Date(0, i).toLocaleString("default", { month: "long" }),
 	);
-	monthNames.unshift(""); // index 0-11 -> index 1-12 (more intuitive)
-	const monthName = monthNames[theMonth];
+	const monthName = monthNames[theMonth - 1]; // monthNames are 0-indexed
 
 	// aggregate values for the month
 	const dailyNotesForThisMonth = app.vault.getMarkdownFiles().filter((file) => {

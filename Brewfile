@@ -49,9 +49,7 @@ tap "felixkratz/formulae"; brew "felixkratz/formulae/sketchybar"
 
 #-OTHER-------------------------------------------------------------------------
 cask "font-jetbrains-mono-nerd-font"
-
-# quicklook for source code
-cask "glance-chamburr", postinstall: "xattr -rd com.apple.quarantine /Applications/Glance.app; qlmanage -r; sed -i '' 's/font-size: [0-9][0-9]px/font-size: 20px/' /Applications/Glance.app/Contents/PlugIns/QLPlugin.appex/Contents/Resources/shared-main.css"
+mas "Glance 2", id: 1564688210 # quicklook for source code
 
 # for languagetool browser extension; see https://dev.languagetool.org/http-server
 brew "languagetool", postinstall: "sleep 1 ; brew services start languagetool"
