@@ -6,5 +6,9 @@
   "quiet": {
     "body": "set quiet := true",
     "prefix": "quiet"
+  },
+  "set variable": {
+    "body": "${1:varname} := \"${2:value}\"",
+    "prefix": "set variable"
   }
 }

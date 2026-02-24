@@ -1,11 +1,16 @@
 set quiet := true
 
+vault_path := "$HOME/writing-vault/"
+
 #───────────────────────────────────────────────────────────────────────────────
 
 [macos]
 build-and-reload:
     #!/usr/bin/env zsh
     plugin_id=$(grep '"id"' "./manifest.json" | cut -d'"' -f4)
+    mkdir -p "{{ vault_path }}/.obsidian/plugins/$plugin_id/"
+    cp -f "./main.js" "{{ vault_path }}/.obsidian/plugins/$plugin_id/"
+    cp -f "./manifest.json" "{{ vault_path }}/.obsidian/plugins/$plugin_id/"
     open "obsidian://reload-plugin?id=$plugin_id"
 
 zip:

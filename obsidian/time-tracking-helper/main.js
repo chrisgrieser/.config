@@ -71,7 +71,9 @@ function monthlyReport(app, monthOffset) {
 	// aggregate values for the month
 	const dailyNotesForThisMonth = app.vault.getMarkdownFiles().filter((file) => {
 		const [_, _day, month, year] = file.basename.match(SETTINGS.dailyNoteNamePattern) || [];
-		return Number(year) === currentYear && Number(month) === theMonth;
+		const isYear = Number(year) === currentYear
+		const isMonth = Number(month) === theMonth
+		return isYear && isMonth
 	});
 	if (dailyNotesForThisMonth.length === 0) {
 		new Notice(`No daily notes found for ${monthName}.`);
