@@ -4,8 +4,8 @@
 const SETTINGS = {
 	// example line: 9:00-11:00 Arbeit, 12:00-15:30 Orga, 15:30-17:00 Arbeit
 	timePattern: /(\d{1,2}[.:]\d{2})-(\d{1,2}[.:]\d{2}) ([\wÄÖÜäöü]+)/,
-	dailyNoteNamePattern: /(\d{2}).(\d{2}).(\d{4})/, // DD.MM.YYYY or DD-MM-YYYY
 	hourSeparator: /[.:]/,
+	dailynoteNamePattern: /(\d{2}).(\d{2}).(\d{4})/, // DD.MM.YYYY or DD-MM-YYYY
 	thresholdHours: { praise: 7, overwork: 9 },
 };
 
@@ -45,11 +45,11 @@ function lineToReport(app, editor) {
 	});
 
 	// easter egg notifications
-	if (activities.total > SETTINGS.thresholdHours.praise) {
-		const msg = `Ganze ${activities.total}h heute!\n\nChris ist stolz auf Dich! 💪`; // typos: ignore-line
-		new Notice(msg, 10_000);
-	} else if (activities.total > SETTINGS.thresholdHours.overwork) {
+	if (activities.total > SETTINGS.thresholdHours.overwork) {
 		const msg = `${activities.total}h? Überarbeite dich nicht! 😟`; 
+		new Notice(msg, 10_000);
+	} else if (activities.total > SETTINGS.thresholdHours.praise) {
+		const msg = `Ganze ${activities.total}h heute!\n\nChris ist stolz auf Dich! 💪`; // typos: ignore-line
 		new Notice(msg, 10_000);
 	}
 }
@@ -72,9 +72,7 @@ function monthlyReport(app, monthOffset) {
 	// aggregate values for the month
 	const dailyNotesForThisMonth = app.vault.getMarkdownFiles().filter((file) => {
 		const [_, _day, month, year] = file.basename.match(SETTINGS.dailyNoteNamePattern) || [];
-		const isThisYear = year === currentYear.toString();
-		const isTheMonth = month === theMonth.toString();
-		return isThisYear && isTheMonth;
+		return Number(year) === currentYear && Number(month) === theMonth;
 	});
 	if (dailyNotesForThisMonth.length === 0) {
 		new Notice(`No daily notes found for ${monthName}.`);
