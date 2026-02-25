@@ -25,6 +25,7 @@ rules:
           - shell_command: |
               "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Tech/alexa/virtual-trigger" \
                 "music-like"
+              afplay "/System/Library/Sounds/Frog.aiff" &
         conditions: [*not-game]
 
       - type: basic
