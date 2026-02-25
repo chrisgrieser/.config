@@ -134,17 +134,21 @@ function run() {
 		const [url] = content.match(urlRegex) || [];
 		const displayTitle = rem.title.replace(/\n+/g, " / "); // SIC titles can have newlines
 
-		// SUBTITLE: display due time, past & missing due dates, list, and notes
+		// SUBTITLE
 		const dueDateObj = new Date(rem.dueDate);
 		const dueTime = rem.isAllDay ? "" : new Date(rem.dueDate).toLocaleTimeString([], timeFmt);
-		const completionTime = rem.isCompleted
-			? "☑️ " + new Date(rem.completionDate).toLocaleTimeString([], timeFmt)
-			: "";
+
+		const complDateObj = new Date(rem.completionDate);
+		const completedToday = rem.isCompleted && complDateObj > startOfToday;
+		const complTime =
+			(rem.isCompleted ? "☑️" : "") +
+			(completedToday ? " " + complDateObj.toLocaleTimeString([], timeFmt) : "");
+
 		const pastDueDate = dueDateObj < startOfToday ? relativeDate(dueDateObj) : "";
 		const missingDueDate = rem.dueDate ? "" : "no due date";
 		const listName = includeAllLists ? rem.listColor + " " + rem.list : "";
 		const subtitle = [
-			completionTime,
+			complTime,
 			rem.hasRecurrenceRules ? "🔁" : "",
 			"❗️".repeat(rem.priority), // white exclamation mark not visible in many themes
 			listName,
