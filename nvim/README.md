@@ -20,6 +20,7 @@
 - [echasnovski/mini.icons](https://github.com/echasnovski/mini.icons)
 - [folke/snacks.nvim](https://github.com/folke/snacks.nvim)
 - [folke/which-key.nvim](https://github.com/folke/which-key.nvim)
+- [hat0uma/csvview.nvim](https://github.com/hat0uma/csvview.nvim)
 - [Kaiser-Yang/blink-cmp-git](https://github.com/Kaiser-Yang/blink-cmp-git)
 - [kawre/leetcode.nvim](https://github.com/kawre/leetcode.nvim)
 - [kylechui/nvim-surround](https://github.com/kylechui/nvim-surround)
