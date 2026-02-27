@@ -1,5 +1,6 @@
 local M = {} -- persist from garbage collector
 
+local env = require("meta.environment")
 local u = require("meta.utils")
 local wu = require("win-management.window-utils")
 local aw = hs.application.watcher
@@ -22,6 +23,16 @@ M.wf_zoom = wf.new({ "zoom.us", "Webex" }):subscribe(wf.windowCreated, function(
 		if mainWin then mainWin:close() end
 	end)
 end)
+
+---FINDER-----------------------------------------------------------------------
+-- 1. hide sidebar
+-- 2. show as list
+M.aw_finder = aw.new(function(appName, event, finder)
+	if event == aw.activated and appName == "Finder" then
+		finder:selectMenuItem { "View", "Hide Sidebar" }
+		if not env.isProjector() then finder:selectMenuItem { "View", "As List" } end
+	end
+end):start()
 
 ---PDF READERS------------------------------------------------------------------
 -- 1. Sync Dark/Light Mode
