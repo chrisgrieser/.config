@@ -40,7 +40,7 @@ done
 
 # ARCHIVE THEM
 print "\e[1;34mCompressing $repos_count repos…\e[0m"
-archive_name="${repos_count} Repos – $(date +%Y-%m-%d).zip"
+archive_name="$(date +%Y-%m-%d) (${repos_count} repos).zip"
 zip --recurse-paths --symlinks --quiet "$bkp_destination/$archive_name" . || return 1
 rm -rf "/tmp/repos"
 
