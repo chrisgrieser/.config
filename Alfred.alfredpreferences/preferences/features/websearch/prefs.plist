@@ -235,6 +235,17 @@
 			<key>url</key>
 			<string>https://store.steampowered.com/search/?term={query}</string>
 		</dict>
+		<key>E3765E86-6854-4AC3-9749-018366EFCEE0</key>
+		<dict>
+			<key>enabled</key>
+			<true/>
+			<key>keyword</key>
+			<string>bgg</string>
+			<key>text</key>
+			<string>BoardGameGeek: {query}</string>
+			<key>url</key>
+			<string>https://boardgamegeek.com/geeksearch.php?action=search&amp;objecttype=boardgame&amp;q={query}</string>
+		</dict>
 		<key>E4054817-5F89-4E38-A2CA-D1911A9A4D8E</key>
 		<dict>
 			<key>enabled</key>

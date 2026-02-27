@@ -35,7 +35,6 @@ local function workLayout(shouldDarkenDisplay)
 	-- close things
 	u.closeAllFinderWins()
 	u.quitFullscreenAndVideoApps()
-	u.quitApps("Steam")
 
 	-- open things
 	u.openApps { "Ivory", isWorkWeek() and "Slack" or nil, "Gmail", "AlfredExtraPane" }
