@@ -463,6 +463,18 @@
 							"vendor_id": {
 								"type": "integer"
 							},
+							"is_keyboard": {
+								"type": "boolean"
+							},
+							"is_built_in_keyboard": {
+								"type": "boolean"
+							},
+							"is_game_pad": {
+								"type": "boolean"
+							},
+							"is_pointing_device": {
+								"type": "boolean"
+							},
 							"product_id": {
 								"type": "integer"
 							},
