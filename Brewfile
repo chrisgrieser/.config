@@ -75,8 +75,5 @@ if device.include?("Home") or device.include?("Mother")
 	cask "iina"
 	cask "steam"
 	cask "transmission"
-
-	# thumbnails for qlvideo 3 broken
-	# thus disabling here to keep using 2.22 https://github.com/Marginal/QLVideo/issues/165
-	# cask "qlvideo"
+	cask "qlvideo" # thumbnails for videos
 end
