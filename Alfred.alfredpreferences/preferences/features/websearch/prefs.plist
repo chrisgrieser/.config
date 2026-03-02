@@ -202,6 +202,17 @@
 			<key>url</key>
 			<string>tel://{query}</string>
 		</dict>
+		<key>D8DB23B9-72BD-42F2-A4EF-1ACF3AF99650</key>
+		<dict>
+			<key>enabled</key>
+			<true/>
+			<key>keyword</key>
+			<string>npm</string>
+			<key>text</key>
+			<string>npm: {query}</string>
+			<key>url</key>
+			<string>https://www.npmjs.com/search?q={query}</string>
+		</dict>
 		<key>DAD3D033-2DF1-41A9-AA76-8310F6E2327A</key>
 		<dict>
 			<key>enabled</key>
