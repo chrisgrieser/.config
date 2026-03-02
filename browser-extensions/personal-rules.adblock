@@ -30,7 +30,7 @@ chatgpt.com###thread-bottom-container + div
 chatgpt.com##[href="/apps"]
 chatgpt.com##[href="/codex"]
 chatgpt.com##[aria-label="Upgrade"]
-chatgpt.com##.sticky.bottom-0
+chatgpt.com###stage-slideover-sidebar .sticky.bottom-0
 
 ! search
 duckduckgo.com##[data-testid="feedback-prompt"]
