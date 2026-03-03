@@ -1,9 +1,6 @@
 // @ts-nocheck // using pure javascript without the whole toolchain here
-//──────────────────────────────────────────────────────────────────────────────
-const obsidian = require("obsidian");
-//──────────────────────────────────────────────────────────────────────────────
 
-class NewFileInFolder extends obsidian.FuzzySuggestModal {
+class NewFileInFolder extends require("obsidian").FuzzySuggestModal {
 	activeFileDir = this.app.workspace.getActiveFile()?.path.replace(/\/[^/]+$/, "");
 
 	constructor(app) {
@@ -158,7 +155,7 @@ function ensureScrolloffset(editor) {
 
 //──────────────────────────────────────────────────────────────────────────────
 
-class StartupActionsPlugin extends obsidian.Plugin {
+class StartupActionsPlugin extends require("obsidian").Plugin {
 	tasksAreUpdating = false;
 	taskStatusbar = this.addStatusBarItem();
 	spellStatusbar = this.addStatusBarItem();

@@ -39,6 +39,27 @@ rules:
   #─────────────────────────────────────────────────────────────────────────────
   - description: (Apps) Finder
     manipulators:
+      # page-up/down: scroll (for quicklook windows)
+      - type: basic
+        from: { key_code: page_up }
+        to:
+          - mouse_key: { vertical_wheel: -110 }
+        conditions: [{ type: frontmost_application_if, bundle_identifiers: [com.apple.finder] }]
+      - type: basic
+        from: { key_code: page_down }
+        to:
+          - mouse_key: { vertical_wheel: 110 }
+        conditions: [{ type: frontmost_application_if, bundle_identifiers: [com.apple.finder] }]
+      - type: basic
+        from: { key_code: k, modifiers: { mandatory: [option] } }
+        to:
+          - mouse_key: { vertical_wheel: -110 }
+        conditions: [{ type: frontmost_application_if, bundle_identifiers: [com.apple.finder] }]
+      - type: basic
+        from: { key_code: j, modifiers: { mandatory: [option] } }
+        to:
+          - mouse_key: { vertical_wheel: 110 }
+        conditions: [{ type: frontmost_application_if, bundle_identifiers: [com.apple.finder] }]
       # cmd+q -> close all windows
       - type: basic
         from: { key_code: q, modifiers: { mandatory: [command] } }

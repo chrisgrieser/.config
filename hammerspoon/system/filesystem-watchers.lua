@@ -27,12 +27,12 @@ M.pathw_desktop = pathw(home .. "/Desktop/", function(paths, _)
 		local isDownloaded = exists and msg ~= nil
 		local success, errmsg
 
-		-- REMOVE ALFREDWORKFLOWS & ICAL
+		---REMOVE ALFREDWORKFLOWS & ICAL------------------------------------------
 		if (ext == "alfredworkflow" or ext == "ics") and isDownloaded then
 			-- delay, since Apple Calendar/Alfred need the file to exist while adding it
 			u.defer(60, function() os.remove(path) end)
 
-		-- ADD BIBTEX ENTRIES TO LIBRARY
+		---ADD BIBTEX ENTRIES TO LIBRARY------------------------------------------
 		elseif ext == "bib" and isDownloaded then
 			local bibEntry = u.readFile(path)
 			if bibEntry and #bibEntry < 10000 then -- prevent large libraries from being automatically merged
