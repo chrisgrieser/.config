@@ -1,4 +1,6 @@
 // @ts-nocheck // using pure javascript without the whole toolchain here
+const obsidian = require("obsidian");
+//------------------------------------------------------------------------------
 
 const SETTINGS = {
 	// example line: 9:00-11:00 Arbeit, 12:00-15:30 Orga, 15:30-17:00 Arbeit
@@ -114,34 +116,64 @@ function monthlyReport(app, monthOffset) {
 }
 
 //──────────────────────────────────────────────────────────────────────────────
-class NewTimer extends require("obsidian").ExtendedInputModal {
+
+function beep() {
+	const ctx = new AudioContext();
+	const osc = ctx.createOscillator();
+	osc.connect(ctx.destination);
+	osc.start();
+	osc.stop(ctx.currentTime + 0.2); // 200ms
+}
+
+class NewTimer extends obsidian.Modal {
 	constructor(app) {
 		super(app);
-		this.setTitle("Enter time in minutes");
+		this.setTitle("Enter time");
 
-		let name = "";
-		new Setting(this.contentEl).setName("Name").addText((text) =>
+		const confirm = () => {
+			this.close();
+			new Notice(`Started timer for ${inputMin}min`);
+			beep()
+			setTimeout(() => beep(), 200);
+
+			// set timeout to end timer
+			setTimeout(
+				() => {
+					new Notice(`Timer for ${inputMin}min ended`);
+				},
+				inputMin * 1000,
+			);
+		};
+
+		const validTime = (value) => /^\d+$/.test(value);
+
+		let inputMin = "";
+		let confirmButton;
+		new obsidian.Setting(this.contentEl).setName("Minutes").addText((text) => {
 			text.onChange((value) => {
-				name = value;
-			}),
-		);
+				inputMin = value;
+				confirmButton?.setDisabled(!validTime(inputMin));
+			});
+			// press enter to confirm
+			text.inputEl.addEventListener("keydown", (event) => {
+				if (event.key === "Enter" && validTime(inputMin)) {
+					event.preventDefault();
+					confirm();
+				}
+			});
+		});
 
-		new Setting(this.contentEl).addButton((btn) =>
-			btn
-				.setButtonText("Submit")
-				.setCta()
-				.onClick(() => {
-					this.close();
-					onSubmit(name);
-				}),
-		);
+		new obsidian.Setting(this.contentEl)
+			.addButton((btn) => btn.setButtonText("Cancel").onClick(() => this.close()))
+			.addButton(
+				(btn) => (confirmButton = btn.setButtonText("Start").setCta().onClick(confirm)),
+			);
 	}
-}
 }
 
 //──────────────────────────────────────────────────────────────────────────────
 
-class TimeTrackingHelperPlugin extends require("obsidian").Plugin {
+class TimeTrackingHelperPlugin extends obsidian.Plugin {
 	onload() {
 		console.info(this.manifest.name + " loaded.");
 

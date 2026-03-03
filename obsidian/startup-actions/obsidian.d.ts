@@ -4,6 +4,12 @@ declare class Notice {
 	setMessage(msg: string): void;
 	hide(): void;
 }
+declare class Setting {
+	constructor(el: HTMLElement);
+	setName(name: string): Setting;
+	addText(callback: (text: { onChange: (value: string) => void }) => void): Setting;
+	addButton(callback: (btn: { setButtonText: (value: string) => void; setIcon: (value: string) => void; onClick: () => void }) => void): Setting;
+}
 
 // ELECTRON
 declare const process: { versions: Record<string, string> };

@@ -10,6 +10,7 @@
 	"javascript": {
 		"globals": [
 			"Notice", // Obsidian
+			"Setting", // Obsidian
 			"request", // Obsidian
 			"editor", // vimrc plugin
 			"view", // vimrc plugin
