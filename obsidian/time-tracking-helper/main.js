@@ -126,7 +126,8 @@ function beep() {
 }
 
 function rainbowNotice(msg) {
-	new Notice("").noticeEl.innerHTML = `
+	const notice = new Notice("", 5000)
+	notice.noticeEl.innerHTML = `
 		<span style="
 			display: block;
 			width: 16rem;
@@ -134,6 +135,7 @@ function rainbowNotice(msg) {
 			line-height: 1;
 			background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet);
 			text-align: right;
+			color: white;
 		">${msg}</span>
 	`;
 }
