@@ -125,6 +125,19 @@ function beep() {
 	osc.stop(ctx.currentTime + 0.2); // 200ms
 }
 
+function rainbowNotice(msg) {
+	new Notice("").noticeEl.innerHTML = `
+		<span style="
+			display: block;
+			width: 16rem;
+			height: 1rem;
+			line-height: 1;
+			background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet);
+			text-align: right;
+		">${msg}</span>
+	`;
+}
+
 class NewTimer extends obsidian.Modal {
 	constructor(app) {
 		super(app);
@@ -132,17 +145,15 @@ class NewTimer extends obsidian.Modal {
 
 		const confirm = () => {
 			this.close();
-			new Notice(`Started timer for ${inputMin}min`);
-			beep()
-			setTimeout(() => beep(), 200);
+
+			rainbowNotice(`Timer for ${inputMin}min started.`);
 
 			// set timeout to end timer
-			setTimeout(
-				() => {
-					new Notice(`Timer for ${inputMin}min ended`);
-				},
-				inputMin * 1000,
-			);
+			setTimeout(() => {
+				rainbowNotice("Time is up!");
+				beep();
+				setTimeout(() => beep(), 500);
+			}, inputMin * 1000 * 60);
 		};
 
 		const validTime = (value) => /^\d+$/.test(value);

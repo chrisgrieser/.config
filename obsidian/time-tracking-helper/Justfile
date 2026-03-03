@@ -21,13 +21,3 @@ build-and-reload:
 
     # reload (REQUIRES: registering the URI manually in a helper plugin)
     open "obsidian://reload-plugin?id=$plugin_id&vault=$vault_name"
-
-zip:
-    #!/usr/bin/env zsh
-    name="time-tracking-helper"
-    rm "$name.zip"
-    mkdir "$name"
-    cp ./* "./$name/"
-    zip -r "$name.zip" "./$name" >/dev/null
-    rm -rf "./$name"
-    open -R "$name.zip"
