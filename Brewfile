@@ -49,7 +49,9 @@ tap "felixkratz/formulae"; brew "felixkratz/formulae/sketchybar"
 
 #-OTHER-------------------------------------------------------------------------
 cask "font-jetbrains-mono-nerd-font"
-mas "Glance 2", id: 1564688210 # quicklook for source code
+
+tap "flewgg/tap" ; cask "flewgg/tap/unfold"
+# mas "Glance 2", id: 1564688210 # quicklook for source code
 
 # for languagetool browser extension; see https://dev.languagetool.org/http-server
 brew "languagetool", postinstall: "sleep 1 ; brew services start languagetool"
