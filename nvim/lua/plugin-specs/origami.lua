@@ -17,7 +17,7 @@ return {
 			scrollLeftOnCaret = true, -- `^` should scroll left (basically mapped to `0^`)
 		},
 		foldtext = {
-			padding = 2,
+			padding = { width = 2 },
 			lineCount = { template = "󰘖 %d" },
 		},
 	},
