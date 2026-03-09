@@ -11,10 +11,11 @@ local timerEverySecs = hs.timer.doEvery
 if u.isSystemStart() then
 	print("📅 Syncing Reminders")
 	hs.execute("open -g -a Reminders") -- `-g` to open in background
-	u.defer(8, function()
-		u.quitApps("Reminders")
-		hs.execute(u.exportPath .. "sketchybar --trigger update_reminder_count")
-	end)
+	u.defer(8, function() u.quitApps("Reminders") end)
+	u.defer(
+		{ 5, 10, 15 },
+		function() hs.execute(u.exportPath .. "sketchybar --trigger update_reminder_count") end
+	)
 end
 
 ---TURN OFF DISPLAY IF----------------------------------------------------------
@@ -88,9 +89,10 @@ do
 		end
 	end
 
-	M.timer_hourlyCronjobs = timerEverySecs(3600, function()
-		runEveryFileIn(cronjobDir .. "/hourly")
-	end):start()
+	M.timer_hourlyCronjobs = timerEverySecs(
+		3600,
+		function() runEveryFileIn(cronjobDir .. "/hourly") end
+	):start()
 
 	M.timer_biweeklyCronjobs = timerAt("01:00", "01d", function()
 		if os.date("%w") % 3 == 0 then runEveryFileIn(cronjobDir .. "/biweekly") end
