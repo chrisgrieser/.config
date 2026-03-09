@@ -94,15 +94,15 @@ return {
 		Snacks.setup(opts)
 
 		-- modify certain notifications
-		vim.notify = function(msg, lvl, nOpts) ---@diagnostic disable-line: duplicate-set-field intentional overwrite
+		vim.notify = function(msg, lvl, notiOpts) ---@diagnostic disable-line: duplicate-set-field intentional overwrite
 			if type(msg) ~= "string" then msg = tostring(msg) end
 
 			local ignore = (msg == "No code actions available" and vim.bo.ft == "typescript")
 				or msg:find("^Error executing vim.schedule.*/_folding_range.lua:%d+")
 			if ignore then return end
 
-			if vim.startswith(msg, "[nvim-treesitter/") then nOpts = { id = "treesitter-update" } end
-			Snacks.notifier(msg, lvl, nOpts)
+			if vim.startswith(msg, "[nvim-treesitter/") then notiOpts = { id = "treesitter-update" } end
+			Snacks.notifier(msg, lvl, notiOpts)
 		end
 	end,
 	keys = {
@@ -141,7 +141,7 @@ return {
 		},
 		styles = {
 			notification = {
-				focusable = false,
+				focusable = true,
 				wo = { winblend = 10, wrap = true },
 			},
 		},

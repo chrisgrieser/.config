@@ -1,19 +1,15 @@
 {
 	"name": "Vimium C",
-	"@time": "1/4/2026, 10:02:08 AM",
-	"time": 1767517328222,
+	"@time": "3/9/2026, 5:42:06 PM",
+	"time": 1773074526087,
 	"environment": {
 		"extension": "2.12.2",
 		"platform": "mac",
-		"chromium": 143
+		"chromium": 145
 	},
 	"allBrowserUrls": true,
 	"exclusionListenHash": false,
 	"exclusionRules": [
-		{
-			"passKeys": "c j k o x ",
-			"pattern": "^https:\\/\\/github\\.com\\/.*\\/(issues|pulls)$"
-		},
 		{
 			"passKeys": "/ ",
 			"pattern": "^https:\\/\\/www\\.google(.(?!udm=2))*$"
@@ -117,6 +113,7 @@
 		"map e closeTabsOnRight",
 		"map m removeTab mayClose",
 		"map u restoreTab",
+		"map yt duplicateTab",
 		"",
 		"# WASD",
 		"map a previousTab",

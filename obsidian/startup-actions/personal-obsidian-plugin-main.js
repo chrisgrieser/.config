@@ -97,11 +97,11 @@ function updateSpellStatusbar(plugin) {
 }
 
 function updateProgressStatusbar(plugin, editor) {
-	const minLines = 100; // CONFIG
+	const minLines = 80; // CONFIG
 	const { app, progressStatusbar } = plugin;
 	if (!editor) editor = app.workspace.activeEditor?.editor;
 	const totalLines = editor?.lineCount() || 0;
-	if (totalLines < minLines) {
+	if (!editor || totalLines < minLines) {
 		progressStatusbar.style.setProperty("display", "none");
 		return;
 	}
@@ -158,7 +158,6 @@ function ensureScrolloffset(editor) {
 //──────────────────────────────────────────────────────────────────────────────
 
 class StartupActionsPlugin extends obsidian.Plugin {
-	tasksAreUpdating = false;
 	taskStatusbar = this.addStatusBarItem();
 	spellStatusbar = this.addStatusBarItem();
 	progressStatusbar = this.addStatusBarItem();
@@ -186,6 +185,7 @@ class StartupActionsPlugin extends obsidian.Plugin {
 				updateProgressStatusbar(this, editor);
 			}),
 		);
+		this.registerEvent(this.app.workspace.on("file-open", () => updateProgressStatusbar(this)));
 
 		// 2. "New file in folder" command
 		this.addCommand({
@@ -198,14 +198,16 @@ class StartupActionsPlugin extends obsidian.Plugin {
 		// 3. hide window buttons
 		if (!this.app.isMobile) electronWindow.setWindowButtonVisibility(false);
 
-		// 4. register URI for reloading plugins
-		// use via: obsidian://reload-plugin?id=plugin_id&vault=vault_name
+		// 4. register URIs
 		this.app.workspace.onLayoutReady(() => {
+			// a) URI for reloading plugins
+			// use via: obsidian://reload-plugin?id=plugin_id&vault=vault_name
 			this.registerObsidianProtocolHandler("reload-plugin", async (uriParams) => {
 				const pluginId = uriParams?.id;
 				await reloadPlugin(this.app, pluginId);
 			});
 
+			// b) URI for reloading vault
 			this.registerObsidianProtocolHandler("reload-vault", () => {
 				this.app.commands.executeCommandById("app:reload");
 			});
