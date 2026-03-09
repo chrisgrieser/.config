@@ -5,7 +5,7 @@ import EventKit
 
 let config = [
 	"reminderList": "Tasks",
-	"ignoreRemindersWithPattern": #"^\S{25,}$"#,  // 25+ chars with no space -> potentially a password
+	"ignoreRemindersWithPattern": #"\w{25,}"#,  // 25+ chars with no space -> potentially a password
 
 	"openaiApiKey": ProcessInfo.processInfo.environment["OPENAI_API_KEY"],
 	"apiKeyFilepath":  // fallback if no OPENAI_API_KEY provided
