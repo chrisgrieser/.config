@@ -1,0 +1,44 @@
+# yaml-language-server: $schema=./schema/karabiner-mod-schema.json
+#───────────────────────────────────────────────────────────────────────────────
+title: Game Shortcuts
+rules:
+  - description: CIV 5
+    manipulators:
+      # toggle strategic view
+      - type: basic
+        from: { key_code: tab }
+        to:
+          - { key_code: f10, modifiers: [fn] }
+        conditions:
+          - { type: frontmost_application_if, bundle_identifiers: [com.aspyr.civ5xp.steam] }
+      # mouse-top: next unit
+      - type: basic
+        from: { pointing_button: button5 }
+        to:
+          - { key_code: period }
+        conditions:
+          - { type: frontmost_application_if, bundle_identifiers: [com.aspyr.civ5xp.steam] }
+      # mouse-bottom: previous unit
+      - type: basic
+        from: { pointing_button: button4 }
+        to:
+          - { key_code: comma }
+        conditions:
+          - { type: frontmost_application_if, bundle_identifiers: [com.aspyr.civ5xp.steam] }
+  #------------------------------------------------------------------------------
+  - description: Endless Legend
+    manipulators:
+      # next city
+      - type: basic
+        from: { pointing_button: button4 }
+        to:
+          - { key_code: tab }
+        conditions:
+          - { type: frontmost_application_if, bundle_identifiers: [PLACEHOLDER] }
+      # prev city
+      - type: basic
+        from: { pointing_button: button5 }
+        to:
+          - { key_code: tab, modifiers: [shift] }
+        conditions:
+          - { type: frontmost_application_if, bundle_identifiers: [PLACEHOLDER] }
