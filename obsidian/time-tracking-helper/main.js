@@ -126,7 +126,7 @@ function beep() {
 }
 
 function rainbowNotice(msg) {
-	const notice = new Notice("", 5000)
+	const notice = new Notice("", 5000);
 	notice.noticeEl.innerHTML = `
 		<span style="
 			display: block;
@@ -151,11 +151,14 @@ class NewTimer extends obsidian.Modal {
 			rainbowNotice(`Timer for ${inputMin}min started.`);
 
 			// set timeout to end timer
-			setTimeout(() => {
-				rainbowNotice("Time is up!");
-				beep();
-				setTimeout(() => beep(), 500);
-			}, inputMin * 1000 * 60);
+			setTimeout(
+				() => {
+					rainbowNotice("Time is up!");
+					beep();
+					setTimeout(() => beep(), 500);
+				},
+				inputMin * 1000 * 60,
+			);
 		};
 
 		const validTime = (value) => /^\d+$/.test(value);
@@ -186,7 +189,28 @@ class NewTimer extends obsidian.Modal {
 
 //──────────────────────────────────────────────────────────────────────────────
 
+function updateProgressStatusbar(plugin, editor) {
+	const minLines = 80; // CONFIG
+	const { app, progressStatusbar } = plugin;
+	if (!editor) editor = app.workspace.activeEditor?.editor;
+	const totalLines = editor?.lineCount() || 0;
+	if (!editor || totalLines < minLines) {
+		progressStatusbar.style.setProperty("display", "none");
+		return;
+	}
+	const currentLine = editor.getCursor().line;
+	const progress = Math.round((currentLine / totalLines) * 100);
+	const progressText = `${progress}%`;
+	progressStatusbar.style.setProperty("order", -3); // move to the very, very left
+	progressStatusbar.style.setProperty("display", "block");
+	progressStatusbar.setText(progressText);
+}
+
+//──────────────────────────────────────────────────────────────────────────────
+
 class TimeTrackingHelperPlugin extends obsidian.Plugin {
+	progressStatusbar = this.addStatusBarItem();
+
 	onload() {
 		console.info(this.manifest.name + " loaded.");
 
@@ -214,6 +238,15 @@ class TimeTrackingHelperPlugin extends obsidian.Plugin {
 			icon: "timer",
 			callback: () => new NewTimer(this.app).open(),
 		});
+
+		// progress statusbar
+		this.app.workspace.onLayoutReady(() => updateProgressStatusbar(this));
+		this.registerEvent(
+			this.app.workspace.on("editor-selection-change", (editor) => {
+				updateProgressStatusbar(this, editor);
+			}),
+		);
+		this.registerEvent(this.app.workspace.on("file-open", () => updateProgressStatusbar(this)));
 	}
 }
 
