@@ -152,6 +152,12 @@
           "query"
         ],
         "path": "./project-specific/treesitter-query-files.json"
+      },
+      {
+        "language": [
+          "jsonc"
+        ],
+        "path": "./jsonc.json"
       }
     ]
   },
