@@ -3,6 +3,7 @@
 
 return {
 	"hat0uma/csvview.nvim",
+	enabled = false,
 
 	ft = "csv",
 	keys = {
