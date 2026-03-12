@@ -16,17 +16,17 @@ let config = [
 	"systemPrompt": """
 		Replace item in the following text with exactly one emoji that thematically
 		fits the item. Respond with one emoji per line. Try to use different emojis
-		for different items.
+		for different items. The input text is either in English or in German.
 
 		Example input:
 		- buy milk
-		- clean kitchen
+		- Bad putzen
 
 		Example output:
 		- 🍼
 		- 🧼
 
-		The text is:
+		The input text is:
 	""",
 ]
 
