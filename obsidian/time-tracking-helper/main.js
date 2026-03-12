@@ -46,12 +46,12 @@ function lineToReport(app, editor) {
 	});
 
 	// easter egg notifications
-	if (activities.total > SETTINGS.thresholdHours.overwork) {
+	if (activities.total >= SETTINGS.thresholdHours.overwork) {
 		const msg = `${activities.total}h? Überarbeite dich nicht! 😟`;
-		new Notice(msg, 10_000);
-	} else if (activities.total > SETTINGS.thresholdHours.praise) {
+		new Notice(msg, 13_000);
+	} else if (activities.total >= SETTINGS.thresholdHours.praise) {
 		const msg = `Ganze ${activities.total}h heute!\n\nChris ist stolz auf Dich! 💪`; // typos: ignore-line
-		new Notice(msg, 10_000);
+		new Notice(msg, 13_000);
 	}
 }
 
