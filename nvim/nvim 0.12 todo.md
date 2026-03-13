@@ -11,8 +11,9 @@
 - incremental selection: `vim.lsp.buf.selection_range()`
 - `:Undotree`
 - `vim.fs.exists`
-- `vim.pack` wrapper
-    - <https://www.reddit.com/r/neovim/s/drTr1iSvPl>
+- `vim.pack`
+    - [A Guide to vim.pack (Neovim built-in plugin manager) – Evgeni Chasnovski](https://echasnovski.com/blog/2026-03-13-a-guide-to-vim-pack)
+    - wrapper <https://www.reddit.com/r/neovim/s/drTr1iSvPl>
     - <https://github.com/zuqini/zpack.nvim>
 - `vim.json.encode` supports formatting → switch to `nvim-0.12` branch for
   `nvim-scissors`
