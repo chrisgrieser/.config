@@ -6,6 +6,7 @@ return {
 	-- using `biome` instead (this key overrides `settings.format.enable = true`)
 	init_options = { provideFormatter = false },
 
+	---@type lspconfig.settings.cssls
 	settings = {
 		css = {
 			lint = {

@@ -17,6 +17,7 @@ return {
 		local rootMarkers = { ".git" }
 		on_dir(vim.fs.root(bufnr, rootMarkers))
 	end,
+	---@type lspconfig.settings.ltex
 	settings = {
 		ltex = {
 			language = "auto", -- also per-file via yaml header: `lang: de-DE` https://ltex-plus.github.io/ltex-plus/advanced-usage.html#set-language-in-markdown-with-yaml-front-matter

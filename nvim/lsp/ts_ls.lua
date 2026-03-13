@@ -12,6 +12,8 @@ local config = {
 			importModuleSpecifierPreference = "non-relative",
 		},
 	},
+
+	---@type lspconfig.settings.ts_ls
 	settings = {
 		diagnostics = {
 			ignoredCodes = {

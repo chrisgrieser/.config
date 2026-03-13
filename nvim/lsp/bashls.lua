@@ -4,6 +4,7 @@
 ---@type vim.lsp.Config
 return {
 	filetypes = { "sh", "bash", "zsh" }, -- force it to work in zsh as well
+	---@type lspconfig.settings.bashls
 	settings = {
 		bashIde = {
 			shfmt = { spaceRedirects = true },

@@ -77,5 +77,5 @@ if device.include?("Home") or device.include?("Mother")
 	cask "iina"
 	cask "steam"
 	cask "transmission"
-	cask "qlvideo" # thumbnails for videos
+	# cask "qlvideo" # thumbnails not working: https://github.com/Marginal/QuickLookVideo/issues/173
 end
