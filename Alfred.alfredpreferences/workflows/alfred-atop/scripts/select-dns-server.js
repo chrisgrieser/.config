@@ -36,7 +36,7 @@ function run() {
 		.doShellScript(`networksetup -getdnsservers "${serviceName}"`)
 		.split("\r")[0];
 	for (const dns of dnsChoices) {
-		if (dns.arg[0] === currentDns) dns.title += " ✅";
+		if (dns.arg?.[0] === currentDns) dns.title += " ✅";
 	}
 
 	return JSON.stringify({ items: dnsChoices });
