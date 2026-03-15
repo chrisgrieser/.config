@@ -63,7 +63,6 @@ brew "pinentry-mac", postinstall: "defaults write org.gpgtools.common DisableKey
 device = `scutil --get ComputerName`
 
 if device.include?("Home")
-	cask "raspberry-pi-imager"
 	cask "bettertouchtool"
 	cask "catch"
 	cask "ausweisapp" # pairing with phone app only works in private wifi
