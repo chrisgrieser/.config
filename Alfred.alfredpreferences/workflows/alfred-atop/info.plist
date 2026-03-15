@@ -1963,9 +1963,31 @@ Display mounted volumes directly via `vol`.
 			<key>variable</key>
 			<string>dns_keyword</string>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>Google, 8.8.8.8, 8.8.4.4
+Cloudflare, 1.1.1.1, 1.0.0.1</string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+				<key>verticalsize</key>
+				<integer>9</integer>
+			</dict>
+			<key>description</key>
+			<string>one server per line, separate the name, primary and secondary address with ","</string>
+			<key>label</key>
+			<string></string>
+			<key>type</key>
+			<string>textarea</string>
+			<key>variable</key>
+			<string>dns_choices</string>
+		</dict>
 	</array>
 	<key>version</key>
-	<string>1.8.3</string>
+	<string>1.9.0</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
