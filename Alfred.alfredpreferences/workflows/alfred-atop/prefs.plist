@@ -4,11 +4,6 @@
 <dict>
 	<key>bluetooth_keyword</key>
 	<string>bbb</string>
-	<key>dns_choices</key>
-	<string>Google, 8.8.8.8, 8.8.4.4
-Cloudflare, 1.1.1.1, 1.0.0.1
-AdGuard (public),94.140.14.14,94.140.15.15
-Pi-Hole at home, 192.168.2.111, 192.168.2.112</string>
 	<key>excluded_devices</key>
 	<string>iPhone CG, Chris iPad, Mac mini Office, Chris iMac Home</string>
 	<key>memory_threshold_mb</key>
