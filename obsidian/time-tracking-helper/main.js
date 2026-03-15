@@ -8,9 +8,10 @@ const SETTINGS = {
 	hourSeparator: /[.:]/,
 	dailynoteNamePattern: /(\d{2}).(\d{2}).(\d{4})/, // DD.MM.YYYY or DD-MM-YYYY
 	thresholdHours: { praise: 7, overwork: 9 },
+	minLinesForProgress: 80,
 };
 
-//──────────────────────────────────────────────────────────────────────────────
+//------------------------------------------------------------------------------
 
 function lineToReport(app, editor) {
 	const cursor = editor.getCursor("from");
@@ -117,84 +118,11 @@ function monthlyReport(app, monthOffset) {
 
 //──────────────────────────────────────────────────────────────────────────────
 
-function beep() {
-	const ctx = new AudioContext();
-	const osc = ctx.createOscillator();
-	osc.connect(ctx.destination);
-	osc.start();
-	osc.stop(ctx.currentTime + 0.2); // 200ms
-}
-
-function rainbowNotice(msg) {
-	const notice = new Notice("", 5000);
-	notice.noticeEl.innerHTML = `
-		<span style="
-			display: block;
-			width: 16rem;
-			height: 1rem;
-			line-height: 1;
-			background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet);
-			text-align: right;
-			color: white;
-		">${msg}</span>
-	`;
-}
-
-class NewTimer extends obsidian.Modal {
-	constructor(app) {
-		super(app);
-		this.setTitle("Enter time");
-
-		const confirm = () => {
-			this.close();
-
-			rainbowNotice(`Timer for ${inputMin}min started.`);
-
-			// set timeout to end timer
-			setTimeout(
-				() => {
-					rainbowNotice("Time is up!");
-					beep();
-					setTimeout(() => beep(), 500);
-				},
-				inputMin * 1000 * 60,
-			);
-		};
-
-		const validTime = (value) => /^\d+$/.test(value);
-
-		let inputMin = "";
-		let confirmButton;
-		new obsidian.Setting(this.contentEl).setName("Minutes").addText((text) => {
-			text.onChange((value) => {
-				inputMin = value;
-				confirmButton?.setDisabled(!validTime(inputMin));
-			});
-			// press enter to confirm
-			text.inputEl.addEventListener("keydown", (event) => {
-				if (event.key === "Enter" && validTime(inputMin)) {
-					event.preventDefault();
-					confirm();
-				}
-			});
-		});
-
-		new obsidian.Setting(this.contentEl)
-			.addButton((btn) => btn.setButtonText("Cancel").onClick(() => this.close()))
-			.addButton(
-				(btn) => (confirmButton = btn.setButtonText("Start").setCta().onClick(confirm)),
-			);
-	}
-}
-
-//──────────────────────────────────────────────────────────────────────────────
-
 function updateProgressStatusbar(plugin, editor) {
-	const minLines = 80; // CONFIG
 	const { app, progressStatusbar } = plugin;
 	if (!editor) editor = app.workspace.activeEditor?.editor;
 	const totalLines = editor?.lineCount() || 0;
-	if (!editor || totalLines < minLines) {
+	if (!editor || totalLines < SETTINGS.minLinesForProgress) {
 		progressStatusbar.style.setProperty("display", "none");
 		return;
 	}
@@ -231,12 +159,6 @@ class TimeTrackingHelperPlugin extends obsidian.Plugin {
 			name: "Report for previous month",
 			icon: "calendar-days",
 			callback: () => monthlyReport(this.app, -1),
-		});
-		this.addCommand({
-			id: "run-timer",
-			name: "Run timer",
-			icon: "timer",
-			callback: () => new NewTimer(this.app).open(),
 		});
 
 		// progress statusbar
