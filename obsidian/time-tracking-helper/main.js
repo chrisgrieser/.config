@@ -47,13 +47,18 @@ function lineToReport(app, editor) {
 	});
 
 	// easter egg notifications
-	if (activities.total >= SETTINGS.thresholdHours.overwork) {
-		const msg = `${activities.total}h? Überarbeite dich nicht! 😟`;
-		new Notice(msg, 13_000);
+	const [_, day, month, year] = activeFile.basename.match(SETTINGS.dailynoteNamePattern) || [];
+	const date = day && month && year && new Date(year, month - 1, day);
+	const isWeekend = date && (date.getDay() === 0 || date.getDay() === 6);
+	let msg = "";
+	if (isWeekend) {
+		msg = "Du sollst nicht am Wochenende arbeiten! 😟";
+	} else if (activities.total >= SETTINGS.thresholdHours.overwork) {
+		msg = `${activities.total}h? Überarbeite dich nicht! 😟`;
 	} else if (activities.total >= SETTINGS.thresholdHours.praise) {
-		const msg = `Ganze ${activities.total}h heute!\n\nChris ist stolz auf Dich! 💪`; // typos: ignore-line
-		new Notice(msg, 13_000);
+		msg = `Ganze ${activities.total}h heute!\n\nChris ist stolz auf Dich! 💪`; // typos: ignore-line
 	}
+	if (msg) new Notice(msg, 13_000);
 }
 
 function monthlyReport(app, monthOffset) {
@@ -65,10 +70,7 @@ function monthlyReport(app, monthOffset) {
 		theMonth += 12;
 		currentYear -= 1;
 	}
-	const monthNames = Array.from({ length: 12 }, (_, i) =>
-		new Date(0, i).toLocaleString("default", { month: "long" }),
-	);
-	const monthName = monthNames[theMonth - 1]; // monthNames are 0-indexed
+	const monthName = new Date(0, theMonth - 1).toLocaleString("default", { month: "long" });
 
 	// aggregate values for the month
 	const dailyNotesForThisMonth = app.vault.getMarkdownFiles().filter((file) => {
