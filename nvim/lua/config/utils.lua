@@ -58,12 +58,14 @@ function M.allowBufferForAi(bufnr, filepath)
 	-- adding redundant safeguards to disable AI for those buffers nonetheless
 
 	if not filepath then filepath = vim.api.nvim_buf_get_name(bufnr) end
+	local ft, filename = vim.bo[bufnr].filetype, vim.fs.basename(filepath)
 	if vim.fn.reg_recording() ~= "" then return false end -- disable when recording
 	if vim.bo[bufnr].buftype ~= "" then return false end
-	if vim.bo[bufnr].filetype == "text" then return false end -- disable, since `txt` used by `pass` and others
-	if vim.bo[bufnr].filetype == "bib" then return false end -- too large and not useful
-	if vim.bo[bufnr].filetype == "csv" then return false end -- too large / sensitive data
-	if not vim.fs.basename(filepath):find("%.") then return false end -- extensionless file
+	if ft == "text" then return false end -- disable, since `txt` used by `pass` and others
+	if ft == "bib" then return false end -- too large and not useful
+	if ft == "csv" then return false end -- too large / sensitive data
+	if filename == "config.local" then return false end -- too large / sensitive data
+	if not filename:find("%.") then return false end -- extensionless file
 
 	local pathsToIgnore = {
 		"security",
