@@ -54,6 +54,8 @@ function pass {
 }
 alias pw="pass"
 
+alias gpg_restart="gpgconf --kill all && gpgconf --launch gpg-agent"
+
 #-GLOBAL ALIASES----------------------------------------------------------------
 alias -g G='| rg'
 alias -g B='| bat'

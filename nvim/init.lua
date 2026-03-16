@@ -20,7 +20,7 @@ if vim.env.USING_PASS then
 	vim.keymap.set("n", "L", "$", { buffer = true })
 	vim.keymap.set("n", "H", "0^", { buffer = true })
 	vim.keymap.set("n", "ss", "VP", { desc = "Substitute line", buffer = true })
-	vim.keymap.set("n", "S", "v$P", { desc = "Substitute to EoL", buffer = true })
+	vim.keymap.set("n", "S", "v$hP", { desc = "Substitute to EoL", buffer = true })
 	vim.keymap.set("n", "<CR>", "ZZ", { desc = "Save and exit", buffer = true })
 else
 	safeRequire("config.lazy") -- load plugins
