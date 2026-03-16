@@ -352,6 +352,7 @@
 				<integer>0</integer>
 				<key>filetypes</key>
 				<array>
+					<string>gg.flew.unfold.markdown</string>
 					<string>net.daringfireball.markdown</string>
 				</array>
 				<key>name</key>
