@@ -8,7 +8,7 @@ rules:
       - type: basic
         from: { key_code: j }
         conditions:
-          - { type: frontmost_application_if, bundle_identifiers: [com.brave.Browser] }
+          - { type: frontmost_application_if, bundle_identifiers: [^com.brave.Browser$] }
           - { type: variable_unless, name: LEADER_ACTIVE, value: true }
         to:
           - key_code: j
