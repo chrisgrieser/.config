@@ -35,7 +35,7 @@ brew install pinentry-mac pass
 defaults write org.gpgtools.common DisableKeychain -bool yes # prevent from saving in the keychains
 
 gpg --import "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Tech/security/gpg-for-pass/private.key"
-ln -sf "$HOME/.config/gpg/gpg-agent.conf" ~/.gnupg/gpg-agent.conf
+ln -sf "$HOME/.config/gpg/gpg-agent.conf" ~/.gnupg
 gpgconf --kill gpg-agent # restart so the new gpg agent is recognized
 find ~/.gnupg -type f -exec chmod 600 {} \;
 find ~/.gnupg -type d -exec chmod 700 {} \;
@@ -47,6 +47,6 @@ if [[ $(uname -p) == "i386" ]]; then
 fi
 git clone git@github.com:chrisgrieser/.password-store
 
-ln -sf "$HOME/.config/ssh/config" "$HOME/.ssh/config"
+ln -sf "$HOME/.config/ssh/config" ~/.ssh/
 
 #───────────────────────────────────────────────────────────────────────────────
