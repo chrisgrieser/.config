@@ -29,6 +29,8 @@ __pycache__
 # prevent sensitive data from being accidentally added
 .zsh_history
 .bash_history
+zsh_history
+bash_history
 *.kdb
 *.kdbx
 *.gpg
@@ -37,7 +39,7 @@ __pycache__
 *.env
 .env
 *recovery*
-.ssh/config.local
+config.local
 
 # prevent big files or partial downloads from being accidentally added
 *.part

@@ -51,7 +51,6 @@ tap "felixkratz/formulae"; brew "felixkratz/formulae/sketchybar"
 cask "font-jetbrains-mono-nerd-font"
 
 tap "flewgg/tap" ; cask "flewgg/tap/unfold"
-# mas "Glance 2", id: 1564688210 # quicklook for source code
 
 # for languagetool browser extension; see https://dev.languagetool.org/http-server
 brew "languagetool", postinstall: "sleep 1 ; brew services start languagetool"
@@ -63,19 +62,20 @@ brew "pinentry-mac", postinstall: "defaults write org.gpgtools.common DisableKey
 device = `scutil --get ComputerName`
 
 if device.include?("Home")
+	brew "yt-dlp" ; brew "ffmpeg" # `ffmpeg` recommended for `yt-dlp`
+	cask "ausweisapp" # pairing with phone app only works in private wifi
 	cask "bettertouchtool"
 	cask "catch"
-	cask "ausweisapp" # pairing with phone app only works in private wifi
-	brew "yt-dlp" ; brew "ffmpeg" # `ffmpeg` recommended for `yt-dlp`
+	cask "raspberry-pi-imager"
 end
 if device.include?("Home") or device.include?("Office")
-	cask "monodraw"
 	cask "granola"
+	cask "monodraw"
 	cask "webex" # TEMP
 end
 if device.include?("Home") or device.include?("Mother")
+	# cask "qlvideo" # thumbnails not working: https://github.com/Marginal/QuickLookVideo/issues/173
 	cask "iina"
 	cask "steam"
 	cask "transmission"
-	# cask "qlvideo" # thumbnails not working: https://github.com/Marginal/QuickLookVideo/issues/173
 end
