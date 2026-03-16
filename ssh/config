@@ -9,7 +9,7 @@ Include ~/.ssh/config.local
 Host *
 	AddKeysToAgent yes # automatically cache keys in `ssh-agent`
 	UseKeychain yes # automatically add to macOS `Keychain Access.app`
-	IdentitiesOnly yes # only try `IdentityFile`s explicitly listed, not all keys
+	IdentitiesOnly no # only try `IdentityFile`s explicitly listed, not all keys
 
 Host github.com
 	User git

@@ -334,7 +334,7 @@
 				<key>removeextension</key>
 				<false/>
 				<key>text</key>
-				<string>takes ~20s</string>
+				<string>takes ~10s</string>
 				<key>title</key>
 				<string>⏳ pandoc &amp; headless browser…</string>
 			</dict>
