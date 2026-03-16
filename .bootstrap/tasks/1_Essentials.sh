@@ -47,4 +47,6 @@ if [[ $(uname -p) == "i386" ]]; then
 fi
 git clone git@github.com:chrisgrieser/.password-store
 
+ln -sf "$HOME/.config/ssh/config" "$HOME/.ssh/config"
+
 #───────────────────────────────────────────────────────────────────────────────

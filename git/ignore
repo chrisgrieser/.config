@@ -37,6 +37,7 @@ __pycache__
 *.env
 .env
 *recovery*
+.ssh/config.local
 
 # prevent big files or partial downloads from being accidentally added
 *.part
