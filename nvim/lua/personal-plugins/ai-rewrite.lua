@@ -35,7 +35,7 @@ local config = {
 	},
 	postSuccess = {
 		showCostIfHigherThan = 0.001,
-		sound = true, -- currently macOS only
+		sound = true, -- macOS only
 		wordDiffViaGitsigns = true, -- requires `gitsigns.nvim`
 	},
 }
@@ -266,7 +266,7 @@ function M.task(task)
 		local label = vim.trim(config.appearance.icon .. " Prompt:") .. " "
 		vim.ui.input({ prompt = label }, function(customPrompt)
 			if not customPrompt then return end
-			rewrite("custom prompt", customPrompt)
+			rewrite(nil, customPrompt)
 		end)
 	end
 end
