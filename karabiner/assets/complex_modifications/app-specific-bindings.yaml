@@ -280,6 +280,13 @@ rules:
           - { key_code: w, modifiers: [command] }
         conditions:
           - { type: frontmost_application_if, bundle_identifiers: [org.hammerspoon.Hammerspoon] }
+      # clear console
+      - type: basic
+        from: { key_code: k, modifiers: { mandatory: [command] } }
+        to:
+          - shell_command: open -g "hammerspoon://clear-console"
+        conditions:
+          - { type: frontmost_application_if, bundle_identifiers: [org.hammerspoon.Hammerspoon] }
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) Ivory"
     manipulators:

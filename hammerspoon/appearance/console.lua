@@ -8,6 +8,9 @@ local aw = hs.application.watcher
 ---DEBUGGING HELPER-----------------------------------------------------------------
 _G.i = hs.inspect -- `i()` to easier inspect in the console
 
+-- URI for Karabiner
+hs.urlevent.bind("clear-console", hs.console.clearConsole)
+
 ---CONSOLE APPEARANCE-----------------------------------------------------------
 local baseFont = { name = "JetBrainsMonoNL NF", size = 20 }
 
