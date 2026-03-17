@@ -23,9 +23,9 @@ rules:
         from: { key_code: f4 }
         to:
           - shell_command: |
+              afplay "/System/Library/Sounds/Frog.aiff" &
               "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Tech/alexa/virtual-trigger" \
                 "music-like"
-              afplay "/System/Library/Sounds/Frog.aiff" &
         conditions: [*not-game]
 
       - type: basic
