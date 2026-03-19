@@ -66,12 +66,12 @@ if device.include?("Home")
 	cask "ausweisapp" # pairing with phone app only works in private wifi
 	cask "bettertouchtool"
 	cask "catch"
+	mas "NIIMBOT", id: 6755411172 # label printer
 end
 if device.include?("Home") or device.include?("Office")
 	cask "granola"
 	cask "monodraw"
 	cask "webex" # TEMP
-	mas "NIIMBOT", id: 6755411172 # label printer
 end
 if device.include?("Home") or device.include?("Mother")
 	# cask "qlvideo" # thumbnails not working: https://github.com/Marginal/QuickLookVideo/issues/173
