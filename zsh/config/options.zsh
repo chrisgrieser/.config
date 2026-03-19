@@ -1,4 +1,4 @@
-# DOCS 
+# DOCS
 # https://zsh.sourceforge.io/Doc/Release/Options.html
 # https://zsh.sourceforge.io/Doc/Release/Parameters.html#Parameters-Used-By-The-Shell
 #───────────────────────────────────────────────────────────────────────────────
@@ -19,7 +19,8 @@ setopt HIST_IGNORE_SPACE  # cmds with leading space are not added to the history
 # 2. not in iCloud due to frequent merge conflicts
 export HISTFILE="$HOME/.local/share/zsh/zsh_history.zsh"
 
-export HISTSIZE=20000
+# not too high for additional privacy (private info not stored for long)
+export HISTSIZE=1000
 export SAVEHIST=$HISTSIZE
 
 # LANGUAGE

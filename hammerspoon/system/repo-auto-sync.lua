@@ -117,7 +117,7 @@ local c = hs.caffeinate.watcher
 M.caff_SleepWatcherForRepoSync = c.new(function(event)
 	if env.isProjector() then return end
 
-	if event == c.screensDidLock then
+	if event == c.screensDidLock or event == c.screensDidUnlock then
 		syncAllGitRepos()
 	elseif event == c.screensDidWake or event == c.systemDidWake then
 		u.defer(2, syncAllGitRepos)
