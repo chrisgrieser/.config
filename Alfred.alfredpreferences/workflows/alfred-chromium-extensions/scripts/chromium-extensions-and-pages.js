@@ -25,9 +25,9 @@ const fileExists = (/** @type {string} */ filePath) => Application("Finder").exi
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
 	const browser = $.getenv("browser");
-	const browserVars = JSON.parse(readFile("./scripts/browser-vars.json"));
+	const data = JSON.parse(readFile("./scripts/settings-and-browser-data.json"));
 	const home = app.pathTo("home folder");
-	const extensionPath = browserVars.extensionPath[browser].replace(/^~/, home);
+	const extensionPath = data.extensionPath[browser].replace(/^~/, home);
 
 	// GUARD browser not installed
 	if (!fileExists(extensionPath)) {
@@ -43,9 +43,8 @@ function run() {
 	}
 
 	// SETTINGS
-	const settings = JSON.parse(readFile("./scripts/all-chromium-browser-settings.json"));
-	settings.push(...browserVars.extraSettingsPages[browser]);
-	const iconPath = browserVars.appIcon[browser];
+	const settings = [...data.allChromiumBrowserSettings, ...data.browserSpecificSettings[browser]];
+	const iconPath = data.appIcon[browser];
 	for (const page of settings) {
 		page.uid = page.arg;
 		page.icon = { path: iconPath };
@@ -59,7 +58,6 @@ function run() {
 	const extensions = app
 		.doShellScript(`find "${extensionPath}" -name "manifest.json" -maxdepth 3 -mindepth 3`)
 		.split("\r")
-		// biome-ignore lint/complexity/noExcessiveCognitiveComplexity: okay here
 		.reduce((/** @type {AlfredItem[]} */ acc, manifestPath) => {
 			const root = manifestPath.slice(0, -13);
 			const id = root.replace(/.*Extensions\/(\w+)\/.*/, "$1");
@@ -109,12 +107,9 @@ function run() {
 
 			// emoji/icon
 			const emoji = optionsPath ? "" : " 🚫"; // indicate no options available
-			const icon =
-				manifest.icons["128"] ||
-				manifest.icons["64"] ||
-				manifest.icons["48"] ||
-				manifest.icons["32"] ||
-				manifest.icons["16"];
+			const icon = ["128", "64", "48", "32", "16"]
+				.map((size) => manifest.icons[size])
+				.find(Boolean);
 			const iconPath = root + icon;
 
 			/** @type {AlfredItem} */
