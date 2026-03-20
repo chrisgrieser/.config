@@ -16,7 +16,7 @@ brew "yq"
 #-PACKAGES----------------------------------------------------------------------
 brew "mas"
 brew "node"
-brew "python" # installs most recent python version (macOS system python is only 3.9)
+brew "python" # most recent python version, since macOS system python is only 3.9
 
 #-ZSH---------------------------------------------------------------------------
 brew "starship"
@@ -66,7 +66,7 @@ if device.include?("Home")
 	cask "ausweisapp" # pairing with phone app only works in private wifi
 	cask "bettertouchtool"
 	cask "catch"
-	mas "NIIMBOT", id: 6755411172 # label printer
+	mas "Niimbot", id: 6755411172 # label printer
 end
 if device.include?("Home") or device.include?("Office")
 	cask "granola"
