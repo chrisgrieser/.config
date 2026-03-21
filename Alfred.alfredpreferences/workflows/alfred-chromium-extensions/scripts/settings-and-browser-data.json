@@ -12,19 +12,20 @@
 		"Thorium": "/Applications/Thorium.app/Contents/Resources/app.icns"
 	},
 	"allChromiumBrowserSettings": [
-		{ "title": "⚙️ Settings", "arg": "chrome://settings/" },
-		{ "title": "🚀 Get Started", "arg": "chrome://settings/getStarted/" },
-		{ "title": "🎨 Appearance", "arg": "chrome://settings/appearance/" },
+		{ "title": "⚙️ Settings", "arg": "chrome://settings" },
+		{ "title": "🚀 Get Started", "arg": "chrome://settings/getStarted" },
+		{ "title": "🎨 Appearance", "arg": "chrome://settings/appearance" },
 		{ "title": "📝 Autofill", "arg": "chrome://settings/autofill" },
 		{ "title": "🔑 Passwords", "arg": "chrome://password-manager/passwords" },
 		{ "title": "🔒 Privacy", "arg": "chrome://settings/privacy" },
-		{ "title": "🔍 Search", "arg": "chrome://settings/search/" },
-		{ "title": "⚙️ Extensions", "arg": "chrome://extensions/" },
-		{ "title": "⌨️ Extension Keyboard Shortcuts", "arg": "chrome://extensions/shortcuts/" },
-		{ "title": "⬇️ Downloads", "arg": "chrome://downloads/" },
-		{ "title": "🔖 Bookmarks", "arg": "chrome://bookmarks/" },
-		{ "title": "🧪 Flags", "arg": "chrome://flags/" },
-		{ "title": "🕟 History", "arg": "chrome://history/" }
+		{ "title": "🔍 Search", "arg": "chrome://settings/search" },
+		{ "title": "⚙️ Extensions", "arg": "chrome://extensions" },
+		{ "title": "⌨️ Extension Keyboard Shortcuts", "arg": "chrome://extensions/shortcuts" },
+		{ "title": "⬇️ Downloads", "arg": "chrome://downloads" },
+		{ "title": "🔖 Bookmarks", "arg": "chrome://bookmarks" },
+		{ "title": "🧪 Flags", "arg": "chrome://flags" },
+		{ "title": "🕟 History", "arg": "chrome://history" },
+		{ "title": "📱 Apps (PWAs)", "arg": "chrome://apps" }
 	],
 	"browserSpecificSettings": {
 		"Google Chrome": [],
@@ -37,10 +38,13 @@
 			{ "title": "📝 Brave Content", "arg": "brave://settings/braveContent" },
 			{ "title": "🔁 Brave Sync", "arg": "brave://settings/braveSync/setup" },
 			{ "title": "🛠️ Brave Sync Internals", "arg": "brave://sync-internals" },
-			{ "title": "🍏 Brave PWAs", "arg": "brave://apps" },
 			{ "title": "ℹ️ Brave Version", "arg": "brave://version" }
 		],
 		"Arc": [],
 		"Thorium": []
+	},
+	"openOtherExtensionPage": {
+		"Stylus": "manage.html",
+		"Redirector": "redirector.html"
 	}
 }

@@ -96,9 +96,7 @@ function run() {
 				"";
 
 			// EXCEPTIONS where a different page/name is more convenient or more correct
-			if (name === "Stylus") optionsPath = "manage.html";
-			if (name === "Redirector") optionsPath = "redirector.html";
-			if (name === "Violentmonkey") optionsPath += "#scripts";
+			if (data.openOtherExtensionPage[name]) optionsPath = data.openOtherExtensionPage[name];
 
 			// URLs
 			const optionsUrl = `chrome-extension://${id}/${optionsPath}`;
