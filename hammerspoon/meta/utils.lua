@@ -218,7 +218,9 @@ function M.quitFullscreenAndVideoApps()
 	end
 
 	-- extra video apps
-	for file in hs.fs.dir(os.getenv("HOME") .. "/RomComs") do
+	local extraVideoAppDir = os.getenv("HOME")
+		.. "/Library/Mobile Documents/com~apple~CloudDocs/Apps/Love/"
+	for file in hs.fs.dir(extraVideoAppDir) do
 		if file:find("%.app$") then M.quitApps(file) end
 	end
 
