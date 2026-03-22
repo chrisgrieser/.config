@@ -95,6 +95,7 @@ M.pathw_desktop = pathw(home .. "/Desktop/", function(paths, _)
 		elseif name:find("^Umsatzanzeige_.*%.csv$") then
 			local bankPath = home .. "/Documents/Finanzen/Vermögen (ING-DiBa)/csv-analysis/Umsatz/"
 			os.rename(path, bankPath .. "/" .. name)
+			-- adding first digits to prevent filing depot files of mother
 		elseif name:find("Depotuebersicht8038.*%.csv") then
 			local bankPath = home
 				.. "/Documents/Finanzen/Vermögen (ING-DiBa)/csv-analysis/Depotübersicht/" -- typos: ignore-line
