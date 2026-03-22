@@ -30,6 +30,7 @@ local pseudoMaxApps = {
 	"Signal",
 	"Gmail",
 	"Monodraw",
+	"NIIMBOT",
 }
 
 ---AUTO-MOVEMENT AND AUTO-SIZING------------------------------------------------
