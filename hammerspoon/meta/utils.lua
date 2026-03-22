@@ -17,8 +17,6 @@ M.videoAndAudioApps = {
 	"Netflix",
 	"YouTube",
 	"Crunchyroll",
-	"TikTok",
-	"Twitch",
 	"Prime Video",
 }
 
@@ -219,10 +217,15 @@ function M.quitFullscreenAndVideoApps()
 		if win:isFullScreen() then win:setFullScreen(false) end
 	end
 
+	-- extra video apps
+	for file in hs.fs.dir(os.getenv("HOME") .. "/RomComs") do
+		if file:find("%.app$") then M.quitApps(file) end
+	end
+
 	-- prevent the automatic quitting of audio-apps from triggering a music start
 	require("apps.music").aw_music:stop()
 	M.quitApps(M.videoAndAudioApps)
-	M.defer(1, function() 	require("apps.music").aw_music:start() end)
+	M.defer(1, function() require("apps.music").aw_music:start() end)
 end
 
 ---@param title string
