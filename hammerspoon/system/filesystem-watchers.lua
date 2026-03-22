@@ -110,7 +110,7 @@ M.pathw_desktop = pathw(home .. "/Desktop/", function(paths, _)
 
 		---NOTIFY-----------------------------------------------------------------
 		if success == false then
-			u.notify(("⚠️ Failed to move: %q; %s"):format(name, errmsg or ""))
+			u.notify(("⚠️ Failed to move %q: %s"):format(name, errmsg or ""))
 		end
 	end
 end):start()
