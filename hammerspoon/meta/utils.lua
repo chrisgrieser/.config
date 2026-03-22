@@ -221,7 +221,8 @@ function M.quitFullscreenAndVideoApps()
 	local extraVideoAppDir = os.getenv("HOME")
 		.. "/Library/Mobile Documents/com~apple~CloudDocs/Apps/Love/"
 	for file in hs.fs.dir(extraVideoAppDir) do
-		if file:find("%.app$") then M.quitApps(file) end
+		local app = file:match("([^/]+)%.app$")
+		if app then M.quitApps(app) end
 	end
 
 	-- prevent the automatic quitting of audio-apps from triggering a music start
