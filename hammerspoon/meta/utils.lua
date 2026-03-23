@@ -11,13 +11,13 @@ M.exportPath = "export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PA
 
 M.videoAndAudioApps = {
 	"zoom.us",
-	"Webex",
 	"IINA",
 	"FaceTime",
-	"Netflix",
-	"YouTube",
-	"Crunchyroll",
-	"Prime Video",
+	-- PENDING https://github.com/brave/brave-browser/issues/53803
+	-- "Netflix",
+	-- "YouTube",
+	-- "Crunchyroll",
+	-- "Prime Video",
 }
 
 ---UTILS------------------------------------------------------------------------

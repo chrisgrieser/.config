@@ -6,13 +6,9 @@ local wu = require("win-management.window-utils")
 local aw = hs.application.watcher
 local wf = hs.window.filter
 
----VIDEO CALLS------------------------------------------------------------------
--- remove leftover tabs
-M.wf_zoom = wf.new({ "zoom.us", "Webex" }):subscribe(wf.windowCreated, function(_newWin)
-	u.defer(4, function()
-		u.closeBrowserTabsWith("zoom.us")
-		u.closeBrowserTabsWith("webex.com")
-	end)
+---ZOOM------------------------------------------------------------------
+M.wf_zoom = wf.new("zoom.us"):subscribe(wf.windowCreated, function(_newWin)
+	u.defer(4, function() u.closeBrowserTabsWith("zoom.us") end)
 end)
 
 ---FINDER-----------------------------------------------------------------------
@@ -37,13 +33,6 @@ M.aw_pdfreaders = aw.new(function(appName, event, app)
 	elseif event == aw.launched and appName == "Preview" then
 		local isPdf = app:mainWindow():title():find("%.pdf")
 		if isPdf then app:selectMenuItem { "View", "Thumbnails" } end
-	elseif event == aw.launched and appName == "PDF Expert" then
-		app:selectMenuItem { "View", "Theme", u.isDarkMode() and "Night" or "Day" }
-		app:selectMenuItem { "Annotate", "Highlight" }
-
-		local shellCmd =
-			'rm -rf "$HOME/Library/Mobile Documents/3L68KQB4HG~com~readdle~CommonDocuments/Documents/"'
-		hs.execute(shellCmd)
 	end
 end):start()
 

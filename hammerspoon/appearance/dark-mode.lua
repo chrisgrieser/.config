@@ -27,13 +27,12 @@ function M.autoSetBrightness()
 
 	print(("💡 ambient: %.1f -> setting brightness to %s"):format(ambient, target))
 	local iMacDisplay = require("win-management.window-utils").iMacDisplay
-	iMacDisplay:setBrightness(target)
+	if iMacDisplay then iMacDisplay:setBrightness(target) end
 end
 
 -- INFO done manually to include app-specific toggling for:
 -- * System
 -- * Sketchybar
--- * PDF appearance
 -- * Hammerspoon Console
 ---@param toMode "dark"|"light"
 function M.setDarkMode(toMode)
@@ -45,12 +44,6 @@ function M.setDarkMode(toMode)
 	-- sketchybar
 	-- delay so sketchybar picks up on system mode change
 	u.defer(2, function() hs.execute(u.exportPath .. "sketchybar --reload") end)
-
-	-- PDF background
-	if u.appRunning("PDF Expert") then
-		local pdfBg = toMode == "light" and "Day" or "Night"
-		u.app("PDF Expert"):selectMenuItem { "View", "Theme", pdfBg }
-	end
 
 	-- hammerspoon itself
 	require("appearance.console").setConsoleColors(toMode)
