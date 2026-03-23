@@ -71,7 +71,6 @@ end
 if device.include?("Home") or device.include?("Office")
 	cask "granola"
 	cask "monodraw"
-	cask "webex" # TEMP
 end
 if device.include?("Home") or device.include?("Mother")
 	# cask "qlvideo" # thumbnails not working: https://github.com/Marginal/QuickLookVideo/issues/173
