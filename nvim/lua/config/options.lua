@@ -189,3 +189,9 @@ vim.api.nvim_create_autocmd("WinNew", {
 })
 
 --------------------------------------------------------------------------------
+
+vim.filetype.add {
+	extension = {
+		base = "yaml", -- Obsidian bases
+	},
+}
