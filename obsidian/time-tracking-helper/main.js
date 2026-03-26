@@ -52,7 +52,7 @@ function lineToReport(app, editor) {
 	const isWeekend = date && (date.getDay() === 0 || date.getDay() === 6);
 	let msg = "";
 	if (isWeekend) {
-		msg = "Du sollst nicht am Wochenende arbeiten! 😟";
+		msg = "Das Wochenende ist zum Erholen da, nicht zum Arbeiten! 😟"; // typos: ignore-line
 	} else if (activities.total >= SETTINGS.thresholdHours.overwork) {
 		msg = `${activities.total}h? Überarbeite dich nicht! 😟`;
 	} else if (activities.total >= SETTINGS.thresholdHours.praise) {
