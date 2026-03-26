@@ -303,7 +303,7 @@ end
 ---TEMPLATES--------------------------------------------------------------------
 local templateConfig = {
 	templateDir = vim.fn.stdpath("config") .. "/templates",
-	ignoreDirs = { vim.fn.stdpath("data") },
+	ignoreDirs = { vim.fn.stdpath("data"), "/tmp/" },
 	globToTemplateMap = {
 		[vim.fn.stdpath("config") .. "/lua/plugin-specs/**/*.lua"] = "plugin-spec.lua",
 		[vim.fn.stdpath("config") .. "/lsp/*.lua"] = "lsp-server-config.lua",
