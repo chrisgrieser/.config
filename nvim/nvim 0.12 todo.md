@@ -10,7 +10,7 @@
 - [local dev with vim.pack](https://www.reddit.com/r/neovim/comments/1s8cbye/the_feature_im_missing_the_most_after_migrating/)
 - `vim.json.encode` supports formatting → switch to `nvim-0.12` branch for
   `nvim-scissors`
-- `vim.fs.read`
+- Renamed vim.diff to `vim.text.diff.`
 - [Release 0.16.0 · neovide/neovide](https://github.com/neovide/neovide/releases/tag/0.16.0)
 
 ```lua
