@@ -8,17 +8,16 @@ require("various-textobjs").setup {
 --------------------------------------------------------------------------------
 
 require("config.utils").pluginKeymaps {
-	keys = {
-		{ -- subword
-			"<Space>",
-			function()
-				-- for deletions use the outer subword, otherwise the inner
-				local scope = vim.v.operator == "d" and "outer" or "inner"
-				require("various-textobjs").subword(scope)
-			end,
-			mode = "o",
-			desc = "󰬞 subword",
-		},
+	{ -- subword
+		"<Space>",
+		function()
+			-- for deletions use the outer subword, otherwise the inner
+			local scope = vim.v.operator == "d" and "outer" or "inner"
+			require("various-textobjs").subword(scope)
+		end,
+		mode = "o",
+		desc = "󰬞 subword",
+	},
 
 	-- stylua: ignore start
 	{ ".", "<cmd>lua require('various-textobjs').emoji()<CR>", mode = {"x","o"}, desc = " emoji" },
@@ -68,110 +67,109 @@ require("config.utils").pluginKeymaps {
 	{ "a.", "<cmd>lua require('various-textobjs').chainMember('outer')<CR>", mode = {"x","o"}, desc = "󰌷 outer chainMember" },
 	{ "iR", "<cmd>lua require('various-textobjs').doubleSquareBrackets('inner')<CR>", mode = {"x","o"}, desc = "󰖬 inner wikilink" },
 	{ "aR", "<cmd>lua require('various-textobjs').doubleSquareBrackets('outer')<CR>", mode = {"x","o"}, desc = "󰖬 outer wikilink" },
-		-- stylua: ignore end
+	-- stylua: ignore end
 
-		{ -- indent last paste, useful for python
-			"^",
-			function()
-				require("various-textobjs").lastChange()
-				local changeFound = vim.fn.mode() == "v"
-				if changeFound then vim.cmd.normal { ">", bang = true } end
-			end,
-			desc = "󰉶 Indent last paste",
-		},
-		{ -- dedent last paste (if showing up falsely in whichkey, disable `maplocalleader`)
-			"\\", -- shift-^ on my keyboard
-			function()
-				require("various-textobjs").lastChange()
-				local changeFound = vim.fn.mode() == "v"
-				if changeFound then vim.cmd.normal { "<", bang = true } end
-			end,
-			desc = "󰉵 Dedent last paste",
-		},
-		{ -- delete surrounding indentation
-			"dsi",
-			function()
-				local cursorBefore = vim.api.nvim_win_get_cursor(0)
+	{ -- indent last paste, useful for python
+		"^",
+		function()
+			require("various-textobjs").lastChange()
+			local changeFound = vim.fn.mode() == "v"
+			if changeFound then vim.cmd.normal { ">", bang = true } end
+		end,
+		desc = "󰉶 Indent last paste",
+	},
+	{ -- dedent last paste (if showing up falsely in whichkey, disable `maplocalleader`)
+		"\\", -- shift-^ on my keyboard
+		function()
+			require("various-textobjs").lastChange()
+			local changeFound = vim.fn.mode() == "v"
+			if changeFound then vim.cmd.normal { "<", bang = true } end
+		end,
+		desc = "󰉵 Dedent last paste",
+	},
+	{ -- delete surrounding indentation
+		"dsi",
+		function()
+			local cursorBefore = vim.api.nvim_win_get_cursor(0)
 
-				require("various-textobjs").indentation("outer", "outer")
-				local indentationFound = vim.fn.mode() == "V"
-				if not indentationFound then return end
+			require("various-textobjs").indentation("outer", "outer")
+			local indentationFound = vim.fn.mode() == "V"
+			if not indentationFound then return end
 
-				vim.cmd.normal { "<", bang = true } -- dedent indentation
-				local endBorderLn = vim.api.nvim_buf_get_mark(0, ">")[1]
-				local startBorderLn = vim.api.nvim_buf_get_mark(0, "<")[1]
-				vim.cmd(endBorderLn .. " delete") -- delete end first so line index is not shifted
-				vim.cmd(startBorderLn .. " delete")
+			vim.cmd.normal { "<", bang = true } -- dedent indentation
+			local endBorderLn = vim.api.nvim_buf_get_mark(0, ">")[1]
+			local startBorderLn = vim.api.nvim_buf_get_mark(0, "<")[1]
+			vim.cmd(endBorderLn .. " delete") -- delete end first so line index is not shifted
+			vim.cmd(startBorderLn .. " delete")
 
-				-- defer to due race condition with sticky deletion
-				vim.defer_fn(function() vim.api.nvim_win_set_cursor(0, cursorBefore) end, 1)
-			end,
-			desc = " Delete surrounding indent",
-		},
-		{ -- yank surrounding inner indentation
-			"ysii", -- `ysi` would conflict with `ysib` (surround + textobj), thus 2nd `i`
-			function()
-				-- identify start- and end-border
-				local startPos = vim.api.nvim_win_get_cursor(0)
-				require("various-textobjs").indentation("outer", "outer")
-				local indentationFound = vim.fn.mode() == "V"
-				if not indentationFound then return end
-				vim.cmd.normal { "V", bang = true } -- leave visual mode so <> marks are set
-				vim.api.nvim_win_set_cursor(0, startPos) -- restore (= sticky yank)
+			-- defer to due race condition with sticky deletion
+			vim.defer_fn(function() vim.api.nvim_win_set_cursor(0, cursorBefore) end, 1)
+		end,
+		desc = " Delete surrounding indent",
+	},
+	{ -- yank surrounding inner indentation
+		"ysii", -- `ysi` would conflict with `ysib` (surround + textobj), thus 2nd `i`
+		function()
+			-- identify start- and end-border
+			local startPos = vim.api.nvim_win_get_cursor(0)
+			require("various-textobjs").indentation("outer", "outer")
+			local indentationFound = vim.fn.mode() == "V"
+			if not indentationFound then return end
+			vim.cmd.normal { "V", bang = true } -- leave visual mode so <> marks are set
+			vim.api.nvim_win_set_cursor(0, startPos) -- restore (= sticky yank)
 
-				-- copy them into the `+` register
-				local startLn = vim.api.nvim_buf_get_mark(0, "<")[1] - 1
-				local endLn = vim.api.nvim_buf_get_mark(0, ">")[1] - 1
-				local startLine = vim.api.nvim_buf_get_lines(0, startLn, startLn + 1, false)[1]
-				local endLine = vim.api.nvim_buf_get_lines(0, endLn, endLn + 1, false)[1]
-				vim.fn.setreg("+", startLine .. "\n" .. endLine .. "\n")
+			-- copy them into the `+` register
+			local startLn = vim.api.nvim_buf_get_mark(0, "<")[1] - 1
+			local endLn = vim.api.nvim_buf_get_mark(0, ">")[1] - 1
+			local startLine = vim.api.nvim_buf_get_lines(0, startLn, startLn + 1, false)[1]
+			local endLine = vim.api.nvim_buf_get_lines(0, endLn, endLn + 1, false)[1]
+			vim.fn.setreg("+", startLine .. "\n" .. endLine .. "\n")
 
-				-- highlight yanked text
-				local dur = 1500 -- CONFIG
-				local ns = vim.api.nvim_create_namespace("ysii")
-				local bufnr = vim.api.nvim_get_current_buf()
-				vim.hl.range(bufnr, ns, "IncSearch", { startLn, 0 }, { startLn, -1 }, { timeout = dur })
-				vim.hl.range(bufnr, ns, "IncSearch", { endLn, 0 }, { endLn, -1 }, { timeout = dur })
-			end,
-			desc = "󰅍 Yank surrounding indent",
-		},
-		{ -- open URL (forward seeking)
-			"gx",
-			function()
-				require("various-textobjs").url() -- select URL
-				local foundURL = vim.fn.mode() == "v" -- only switches to visual mode when textobj found
-				if not foundURL then return end
+			-- highlight yanked text
+			local dur = 1500 -- CONFIG
+			local ns = vim.api.nvim_create_namespace("ysii")
+			local bufnr = vim.api.nvim_get_current_buf()
+			vim.hl.range(bufnr, ns, "IncSearch", { startLn, 0 }, { startLn, -1 }, { timeout = dur })
+			vim.hl.range(bufnr, ns, "IncSearch", { endLn, 0 }, { endLn, -1 }, { timeout = dur })
+		end,
+		desc = "󰅍 Yank surrounding indent",
+	},
+	{ -- open URL (forward seeking)
+		"gx",
+		function()
+			require("various-textobjs").url() -- select URL
+			local foundURL = vim.fn.mode() == "v" -- only switches to visual mode when textobj found
+			if not foundURL then return end
 
-				local url = vim.fn.getregion(vim.fn.getpos("."), vim.fn.getpos("v"), { type = "v" })[1]
-				vim.ui.open(url) -- requires nvim 0.10
-				vim.cmd.normal { "v", bang = true } -- leave visual mode
-			end,
-			desc = " Open next URL",
-		},
-		{
-			"g-",
-			function()
-				require("various-textobjs").filepath("outer")
-				local foundPath = vim.fn.mode() == "v" -- only switches to visual mode when textobj found
-				if not foundPath then return end
+			local url = vim.fn.getregion(vim.fn.getpos("."), vim.fn.getpos("v"), { type = "v" })[1]
+			vim.ui.open(url) -- requires nvim 0.10
+			vim.cmd.normal { "v", bang = true } -- leave visual mode
+		end,
+		desc = " Open next URL",
+	},
+	{
+		"g-",
+		function()
+			require("various-textobjs").filepath("outer")
+			local foundPath = vim.fn.mode() == "v" -- only switches to visual mode when textobj found
+			if not foundPath then return end
 
-				local path = vim.fn.getregion(vim.fn.getpos("."), vim.fn.getpos("v"), { type = "v" })[1]
-				vim.cmd.normal { "v", bang = true } -- leave visual mode
+			local path = vim.fn.getregion(vim.fn.getpos("."), vim.fn.getpos("v"), { type = "v" })[1]
+			vim.cmd.normal { "v", bang = true } -- leave visual mode
 
-				local dirOfFile = vim.fs.dirname(vim.api.nvim_buf_get_name(0))
-				path = vim.fs.normalize(dirOfFile .. "/" .. path)
-				path = vim.uri_decode(path)
+			local dirOfFile = vim.fs.dirname(vim.api.nvim_buf_get_name(0))
+			path = vim.fs.normalize(dirOfFile .. "/" .. path)
+			path = vim.uri_decode(path)
 
-				local exists = vim.uv.fs_stat(path) ~= nil
-				if exists then
-					vim.cmd.edit(path)
-				else
-					local msg = ("Path does not exist: %q"):format(path)
-					vim.notify(msg, vim.log.levels.WARN)
-				end
-			end,
-			desc = " Open next path",
-		},
+			local exists = vim.uv.fs_stat(path) ~= nil
+			if exists then
+				vim.cmd.edit(path)
+			else
+				local msg = ("Path does not exist: %q"):format(path)
+				vim.notify(msg, vim.log.levels.WARN)
+			end
+		end,
+		desc = " Open next path",
 	},
 }
 
