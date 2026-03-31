@@ -15,6 +15,7 @@ require("gitsigns").setup {
 	current_line_blame_formatter_nc = "+++ uncommitted",
 	current_line_blame_opts = { delay = 500 },
 }
+
 --------------------------------------------------------------------------------
 
 require("config.utils").pluginKeymaps {

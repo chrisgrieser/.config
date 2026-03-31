@@ -7,6 +7,6 @@ require("config.utils").pluginKeymaps {
 
 --------------------------------------------------------------------------------
 
-require("nvim-surround").setup {
+require("surround").setup {
 
 }

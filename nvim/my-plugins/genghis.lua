@@ -39,5 +39,3 @@ require("config.utils").pluginKeymaps {
 	},
 	{ "<leader>fN", function() require("genghis").createNewFile() end, desc = "󰝒 New" },
 }
-
---------------------------------------------------------------------------------

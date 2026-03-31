@@ -1,0 +1,42 @@
+-- DOCS Get cookie https://github.com/kawre/leetcode.nvim#sign-in
+-- 1. Login at https://leetcode.com/
+-- 2. DevTools -> Network -> Search for `graphql` -> reload site if needed
+-- 3. Under `Set-Cookie`, copy the `csrftoken` and `LEETCODE_SESSION` cookies,
+-- keep the prefix, join them with `;`, and ensure no trailing line break:
+-- -> should be: `csrftoken=…;LEETCODE_SESSION=…`
+--------------------------------------------------------------------------------
+vim.pack.add {
+	"https://github.com/nvim-lua/plenary.nvim",
+	"https://github.com/MunifTanjim/nui.nvim",
+	"https://github.com/kawre/leetcode.nvim",
+}
+--------------------------------------------------------------------------------
+
+-- https://github.com/kawre/leetcode.nvim#-commands
+vim.g.whichkeyAddSpec { "<leader>x", group = "󰹂 Leetcode" }
+require("config.utils").pluginKeymaps {
+	{ "<leader>xx", "<cmd>Leet run<CR>", { desc = " Run" } },
+	{ "<leader>xx", "<cmd>Leet run<CR>", { desc = " Run" } },
+	{ "<leader>xd", "<cmd>Leet desc<CR>", { desc = " Toggle problem desc" } },
+	{ "<leader>xs", "<cmd>Leet submit<CR>", { desc = " Submit" } },
+	{ "<leader>xo", "<cmd>Leet open<CR>", { desc = "󰖟 Open in browser" } },
+	{ "<leader>xh", "<cmd>Leet info<CR>", { desc = " Hints" } },
+	{ "<leader>xm", "<cmd>Leet menu<CR>", { desc = "󰹯 Leetcode menu" } },
+	{ "<leader>xp", "<cmd>Leet list difficulty=easy<CR>", { desc = " Problem list (easy)" } },
+	-- stylua: ignore
+	{"<leader>xr", "<cmd>Leet random difficulty=easy<CR>", { desc = " Random problem (easy)" }},
+	{ "<leader>xa", "<cmd>Leet list status=ac<CR>", { desc = " Accepted problem" } },
+}
+
+--------------------------------------------------------------------------------
+
+require("leetcode").setup {
+	lang = "typescript", -- https://github.com/kawre/leetcode.nvim#lang
+	storage = {
+		home = vim.g.iCloudSync .. "/leetcode",
+	},
+	description = {
+		position = "left",
+		width = "40%",
+	},
+}

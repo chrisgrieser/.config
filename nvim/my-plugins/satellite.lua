@@ -1,7 +1,7 @@
 vim.pack.add { "https://github.com/lewis6991/satellite.nvim" }
 --------------------------------------------------------------------------------
 
-require("satellite.nvim").setup {
+require("satellite").setup {
 	current_only = false,
 	winblend = 25, -- only little transparency, since otherwise hard to see in some themes
 	handlers = {

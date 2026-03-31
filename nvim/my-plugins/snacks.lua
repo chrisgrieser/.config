@@ -7,6 +7,6 @@ require("config.utils").pluginKeymaps {
 
 --------------------------------------------------------------------------------
 
-require("snacks.nvim").setup {
+require("snacks").setup {
 
 }

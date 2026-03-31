@@ -11,7 +11,7 @@ vim.api.nvim_create_autocmd("PackChanged", {
 
 vim.pack.add { "https://github.com/nvim-treesitter/nvim-treesitter" }
 
-require("treesitter").setup {
+require("nvim-treesitter").setup {
 	install_dir = vim.fn.stdpath("data") .. "/treesitter",
 }
 --------------------------------------------------------------------------------
@@ -105,7 +105,7 @@ vim.api.nvim_create_autocmd({ "ColorScheme", "VimEnter" }, {
 	end,
 })
 
--- `ts_query_ls`: use the custom directory set in the treesitter config
+-- tell `ts_query_ls` to use the custom directory set in the treesitter config
 local tsDir = require("nvim-treesitter.config").get_install_dir("parser")
 vim.lsp.config("ts_query_ls", {
 	init_options = { parser_install_directories = { tsDir } },
