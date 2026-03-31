@@ -2,18 +2,16 @@
 -- This snippet redirects cmdline messages to `vim.notify`, silencing `Press
 -- Enter to continue` prompts, even with `cmdheight=0`.
 --------------------------------------------------------------------------------
-local hasNotificationPlugin = (
-	package.loaded["nvim-notify"]
+local hasNotificationPlugin = package.loaded["nvim-notify"]
 	or package.loaded["snacks"]
 	or package.loaded["mini.notify"]
-)
 if not hasNotificationPlugin then return end
 if vim.fn.has("gui_running") == 0 then return end -- somehow this only works in a GUI?
 --------------------------------------------------------------------------------
 
 local config = {
-	msgKind = { -- existing kinds: https://neovim.io/doc/user/ui.html#ui-messages
-		ignore = { "return_prompt", "search_cmd", "undo" },
+	msgKind = { -- existing kinds: https://neovim.io/doc/user/api-ui-events/#ui-messages
+		ignore = { "search_cmd", "undo", "empty" },
 		mini = { "bufwrite" }, -- more minimal style when using `snacks.notifier`
 	},
 	notification = { icon = "󰍩" },
@@ -36,20 +34,15 @@ local function attach()
 		end
 		if event ~= "msg_show" then return end
 
-		-- ignore & deal with "press enter to continue" prompts
-		local kind, content, _replace, _history = ... -- for `msg_show` only https://neovim.io/doc/user/ui.html#ui-messages
-		if kind == "return_prompt" then -- SIC we're still being blocked, thus need to feedkey `<CR>`
-			local esc = vim.api.nvim_replace_termcodes("<CR>", true, true, true)
-			vim.api.nvim_feedkeys(esc, "n", false)
-		end
+		local kind, content, _replace, _history = ... -- for `msg_show` only https://neovim.io/doc/user/api-ui-events/#ui-messages
 		if vim.list_contains(config.msgKind.ignore, kind) then return end
 
 		-- notification text and options
 		local text = vim.iter(content):fold("", function(acc, chunk) return acc .. chunk[2] end)
-		text = vim.trim(text):gsub("^(E%d+):", "[%1]") -- colorize error code when using `snacks`
+		text = vim.trim(text):gsub("^(E%d+):", "[%1]") -- emphasize error codes
 
 		local level = vim.log.levels.INFO
-		if kind == "emsg" or vim.endswith(kind, "error") or vim.endswith(kind, "err") then
+		if kind == "emsg" or kind:find("erro?r?$") then -- typos: ignore-line
 			level = vim.log.levels.ERROR
 		elseif kind == "wmsg" then
 			level = vim.log.levels.WARN
