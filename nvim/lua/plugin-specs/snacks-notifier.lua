@@ -98,7 +98,7 @@ return {
 			if type(msg) ~= "string" then msg = tostring(msg) end
 
 			local ignore = (msg == "No code actions available" and vim.bo.ft == "typescript")
-				or msg:find("^Error executing vim.schedule.*/_folding_range.lua:%d+")
+				or msg:find("Vim%(foldclose%):E490: No fold found")
 			if ignore then return end
 
 			if vim.startswith(msg, "[nvim-treesitter/") then notiOpts = { id = "treesitter-update" } end
