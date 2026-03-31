@@ -50,9 +50,10 @@ local function attach()
 
 		local opts = { title = kind, icon = config.notification.icon }
 		if kind == "lua_print" then opts.ft = "lua" end
+		if kind == "progress" then opts.id = "ui-redirect-notify" end
 		if vim.list_contains(config.msgKind.mini, kind) and package.loaded["snacks"] then
 			opts.style = "minimal"
-			opts.id = "ui-hack-mini-notify"
+			opts.id = "ui-redirect"
 			if opts.icon then opts.icon = " " .. opts.icon .. " " end
 		end
 

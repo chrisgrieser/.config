@@ -32,4 +32,4 @@ safeRequire("config.keybindings")
 
 safeRequire("personal-plugins.git-conflict")
 safeRequire("config.spellfixes")
-vim.schedule(function() safeRequire("personal-plugins.ui-hack") end) -- wait for loading notification plugin
+vim.schedule(function() safeRequire("personal-plugins.ui-redirect") end) -- wait for loading notification plugin

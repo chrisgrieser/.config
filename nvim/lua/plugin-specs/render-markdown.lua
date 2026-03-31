@@ -102,7 +102,7 @@ return {
 		render_modes = { "n", "c", "i", "v", "V" },
 		win_options = {
 			conceallevel = { default = 0 }, -- makes toggling this plugin also toggle conceallevel
-			colorcolumn = { rendered = "" }, -- disabled on render, since heading width already indicates it
+			colorcolumn = { default = vim.o.colorcolumn, rendered = "" }, -- disabled on render, since heading width already indicates it
 		},
 		overrides = { -- LSP hovers: hide code block lines
 			buftype = {
