@@ -344,20 +344,19 @@ end
 ---@return string placeholder
 ---@async
 local function getTitleForUrl(url)
-	assert(vim.fn.executable("curl") == 1, "`curl` not found")
 	vim.b.fetch_count = (vim.b.fetch_count or 0) + 1
 	local placeholder = " fetching title #" .. vim.b.fetch_count
 	local bufnr = vim.api.nvim_get_current_buf()
 
-	vim.system(
-		{ "curl", "--silent", "--location", url },
-		{ timeout = 10000 }, -- in ms
-		vim.schedule_wrap(function(out)
-			if out.code == 124 then vim.notify("Timeout", vim.log.levels.ERROR) end
-			if out.code ~= 0 then vim.notify(out.stderr, vim.log.levels.ERROR) end
-			local title = vim.trim(out.stdout:match("<title.->(.-)</title>") or "")
+	vim.net.request(
+		url,
+		{},
+		vim.schedule_wrap(function(err, out)
+			if err then vim.notify(err, vim.log.levels.ERROR) end
+			local title = vim.trim(out.body:match("<title.->(.-)</title>") or "")
 			title = title -- cleanup
 				:gsub("[\n\r]+", " ")
+				:gsub("  +", " ")
 				:gsub("^GitHub %- ", "")
 				:gsub(" · GitHub$", "")
 				:gsub("&amp;", "&")

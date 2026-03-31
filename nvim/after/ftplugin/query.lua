@@ -21,15 +21,4 @@ if vim.bo.buftype == "nofile" then
 - `q` close]]
 		vim.notify(msg, nil, { title = ":InspectTree keymaps", icon = "" })
 	end, { buffer = true, desc = "Keymap help" })
-
-	-- FIX missing `nowait` for `q`
-	-- PENDING https://github.com/neovim/neovim/pull/36804
-	-- 1. needs scheduled due to race with nvim's mapping
-	-- 2. needs extra check since commenting with `gc` creates temporary buffer
-	-- triggering this as well (sic)
-	local bufnr = vim.api.nvim_get_current_buf()
-	vim.schedule(function()
-		if not vim.api.nvim_buf_is_valid(bufnr) then return end
-		vim.keymap.set("n", "q", vim.cmd.close, { buffer = bufnr, nowait = true })
-	end)
 end

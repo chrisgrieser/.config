@@ -134,7 +134,7 @@ vim.opt.fillchars:append {
 ---DIAGNOSTICS------------------------------------------------------------------
 vim.diagnostic.config {
 	severity_sort = true,
-	jump = { float = true },
+	jump = { on_jump = vim.diagnostic.open_float },
 	signs = {
 		text = { "󰅚 ", " ", "󰋽 ", " " }, -- Error, Warn, Info, Hint
 	},
@@ -189,3 +189,6 @@ vim.api.nvim_create_autocmd("WinNew", {
 })
 
 --------------------------------------------------------------------------------
+local b
+local b
+local b

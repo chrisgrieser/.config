@@ -33,44 +33,6 @@ vim.api.nvim_create_autocmd("WinScrolled", {
 	callback = function() vim.snippet.stop() end,
 })
 
----LSP CODELENS-----------------------------------------------------------------
-do
-	vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained", "LspAttach", "LspProgress" }, {
-		desc = "User: enable LSP codelenses",
-		callback = function(ctx)
-			-- when the LSP has loaded the workspace (needed for `lua_ls`)
-			local lspProgressEnd = ctx.event == "LspProgress"
-				and ctx.data.params.value.kind == "end"
-				and ctx.data.params.value.title == "Loading workspace"
-			if ctx.event == "LspProgress" and not lspProgressEnd then return end
-
-			vim.lsp.codelens.refresh { bufnr = ctx.buf }
-		end,
-	})
-
-	-- format with padding & icon
-	-- caveat: flickers on refresh, since there is an eager display in
-	-- `resolve_lenses` which is not exposed
-	local function formatLenses(lenses)
-		local icon = "󰏷"
-		local formattedLenses = vim.iter(lenses or {}):fold({}, function(acc, lens)
-			local title = lens.command and lens.command.title
-			if not title then return acc end -- filter "Unresolved lens…"
-			lens.command.title = title
-				:gsub("(%d+) reference(s?) to file", " %1 backlink%2 ") -- markdown_oxide
-				:gsub("(%d+) references?", " " .. icon .. " %1 ")
-			table.insert(acc, lens)
-			return acc
-		end)
-		return formattedLenses
-	end
-
-	local originalDisplay = vim.lsp.codelens.display
-	vim.lsp.codelens.display = function(lenses, bufnr, client_id) ---@diagnostic disable-line: duplicate-set-field
-		originalDisplay(formatLenses(lenses), bufnr, client_id)
-	end
-end
-
 ---COLORSCHEMES DEPENDING ON SYSTEM MODE----------------------------------------
 do
 	-- 1. tell neovide to sync `background` with system dark mode
