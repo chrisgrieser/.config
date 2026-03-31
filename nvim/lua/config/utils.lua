@@ -33,6 +33,26 @@ function M.bufKeymap(mode, lhs, rhs, opts)
 	vim.keymap.set(mode, lhs, rhs, opts)
 end
 
+---@param maps {[1]: string, [2]: string|function, mode?: string|string[], desc?: string, nowait?: boolean, ft?: string|string[]}[]
+function M.pluginKeymaps(maps)
+	for _, map in ipairs(maps) do
+		local opts = { desc = map.desc, nowait = map.nowait }
+		if not map.ft then
+			M.uniqueKeymap(map[3] or "n", map[1], map[2], opts)
+		else
+			local ft = type(map.ft) == "string" and { map.ft } or map.ft ---@cast ft string[]
+			vim.api.nvim_create_autocmd("FileType", {
+				desc = "User: plugin ft-keymap",
+				callback = function(ctx)
+					if not vim.tbl_contains(ft, ctx.match) then return end
+					opts.buffer = ctx.buf
+					M.uniqueKeymap(map[3] or "n", map[1], map[2], opts)
+				end,
+			})
+		end
+	end
+end
+
 ---@param text string
 ---@param replace string
 function M.bufAbbrev(text, replace) vim.keymap.set("ia", text, replace, { buffer = true }) end
@@ -75,8 +95,9 @@ function M.allowBufferForAi(bufnr, filepath)
 		".env",
 		"recovery", -- e.g., password recovery files
 	}
-	local ignorePath = vim.iter(pathsToIgnore)
-		:any(function(ignored) return filepath:lower():find(ignored, 1, true) ~= nil end)
+	local ignorePath = vim.iter(pathsToIgnore):any(
+		function(ignored) return filepath:lower():find(ignored, 1, true) ~= nil end
+	)
 
 	if ignorePath then
 		vim.notify_once("Disabled AI on this buffer.")
