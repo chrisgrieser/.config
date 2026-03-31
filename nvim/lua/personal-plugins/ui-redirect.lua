@@ -22,7 +22,6 @@ local config = {
 local ns = vim.api.nvim_create_namespace("ui-hack")
 
 local function attach()
-	---@diagnostic disable-next-line: redundant-parameter incomplete annotation from nvim core
 	vim.ui_attach(ns, { ext_messages = true }, function(event, ...)
 		if event == "msg_history_show" then
 			local msgs = ...
