@@ -1,0 +1,186 @@
+-- DOCS https://github.com/nvim-lualine/lualine.nvim#default-configuration
+
+--------------------------------------------------------------------------------
+-- INFO needs to be loaded before other plugins to provider this helper function
+--------------------------------------------------------------------------------
+
+---Set up plugin-specific statusline components with the respective plugin's config
+---@param whichBar "tabline"|"winbar"|"inactive_winbar"|"sections"
+---@param whichSection "lualine_a"|"lualine_b"|"lualine_c"|"lualine_x"|"lualine_y"|"lualine_z"
+---@param component function|table the component forming the lualine
+---@param where "after"|"before"? defaults to "after"
+vim.g.lualineAdd = function(whichBar, whichSection, component, where) ---@diagnostic disable-line: duplicate-set-field for the empty functions in `lazy.nvim` setup
+	vim.defer_fn(function() -- deferred so other plugins do not load lualine too early
+		local ok, lualine = pcall(require, "lualine")
+		if not (ok and lualine) then return end
+		local componentObj = type(component) == "table" and component or { component }
+		local sectionConfig = lualine.get_config()[whichBar][whichSection] or {}
+		local pos = where == "before" and 1 or #sectionConfig + 1
+		table.insert(sectionConfig, pos, componentObj)
+		lualine.setup { [whichBar] = { [whichSection] = sectionConfig } }
+	end, 1000)
+end
+
+--------------------------------------------------------------------------------
+
+vim.pack.add {
+	"https://github.com/echasnovski/mini.icons",
+	"https://github.com/nvim-lualine/lualine.nvim",
+}
+
+--------------------------------------------------------------------------------
+
+local function hasSplit()
+	if vim.bo.buftype ~= "" and not vim.wo.diff then return false end
+	local winsInTab = vim.api.nvim_tabpage_list_wins(0)
+	local splits = vim.iter(winsInTab)
+		:filter(function(win)
+			local isSplit = vim.api.nvim_win_get_config(win).split ~= nil
+			local specialWin = vim.bo[vim.api.nvim_win_get_buf(win)].buftype ~= ""
+				and not vim.wo[win].diff
+			return isSplit and not specialWin
+		end)
+		:totable()
+	return #splits > 1
+end
+
+-- not using lualine's component since it requires `web-devicons`
+local function addFiletypeIcon(filename)
+	if vim.wo.diff and vim.bo.buftype == "nowrite" then return " Diff" end
+	if filename == "[No Name]" and vim.bo.ft ~= "" then filename = vim.bo.ft end -- fix name for special buffers
+	local ok, icons = pcall(require, "mini.icons")
+	if not ok then return filename end
+	local icon, _, isDefault = icons.get("file", filename)
+	if isDefault then icon = icons.get("filetype", vim.bo.ft) end
+	return icon .. " " .. filename
+end
+
+require("lualine").setup {
+	options = {
+		globalstatus = true, -- false = one statusline per window
+		always_divide_middle = false,
+		section_separators = { left = "", right = "" }, -- save space
+		component_separators = { left = "", right = "" },
+		ignore_focus = {
+			"snacks_input",
+			"snacks_picker_list",
+			"snacks_picker_input",
+			"snacks_picker_preview",
+			"",
+		},
+	},
+	--------------------------------------------------------------------------
+	winbar = {
+		lualine_b = {
+			{ "filename", fmt = addFiletypeIcon, cond = hasSplit, file_status = false },
+		},
+	},
+	inactive_winbar = {
+		lualine_c = {
+			{ "filename", fmt = addFiletypeIcon, cond = hasSplit, file_status = false },
+		},
+	},
+	--------------------------------------------------------------------------
+	tabline = {
+		lualine_a = {
+			{
+				"datetime",
+				style = "%H:%M:%S",
+				-- make the `:` blink
+				fmt = function(time) return time:gsub(":", os.time() % 2 == 0 and " " or ":") end,
+				cond = function() return vim.o.columns > 120 end, -- only if window is maximized
+			},
+		},
+		lualine_x = {
+			-- HACK dummy, so tabline is never empty (in which case vim adds its ugly tabline)
+			{ function() return " " end },
+		},
+		lualine_z = {
+			{
+				function() return "Recording…" end,
+				icon = "󰃽",
+				cond = function() return vim.fn.reg_recording() ~= "" end,
+			},
+		},
+	},
+	--------------------------------------------------------------------------
+	sections = {
+		lualine_a = {
+			{
+				"branch",
+				icon = "",
+				cond = function() -- only if not on `main` or `master`
+					local curBranch = require("lualine.components.branch.git_branch").get_branch()
+					return curBranch ~= "main" and curBranch ~= "master"
+				end,
+			},
+			{
+				"filename",
+				fmt = addFiletypeIcon,
+				shorting_target = 30,
+				file_status = false, -- modification status irrelevant, since auto-saving
+				newfile_status = true,
+			},
+		},
+		lualine_b = {
+			{ require("personal-plugins.magnet").altFileStatusbar },
+		},
+		lualine_c = {
+			{ require("personal-plugins.magnet").mostChangedFileStatusbar },
+		},
+		lualine_x = {
+			{ -- Quickfix counter
+				function()
+					local qf = vim.fn.getqflist { idx = 0, title = true, size = true }
+					if qf.size == 0 then return "" end
+					return ("%d/%d (%s)"):format(qf.idx, qf.size, qf.title)
+				end,
+				icon = "",
+			},
+			{
+				"fileformat",
+				icon = "󰌑",
+				cond = function() return vim.bo.fileformat ~= "unix" end,
+			},
+			{
+				"diagnostics",
+				fmt = function(diag) -- hide diagnostics if disabled
+					if vim.diagnostic.is_enabled { bufnr = 0 } then return diag end
+					return "%#lualine_x_diagnostics_warn_normal#" .. "󱞍 "
+				end,
+				symbols = (function() -- use icons from `vim.diagnostic.config()`
+					local icons = ((vim.diagnostic.config() or {}).signs or {}).text
+						or { "E", "W", "I", "H" }
+					return { error = icons[1], warn = icons[2], info = icons[3], hint = icons[4] }
+				end)(),
+			},
+			{
+				"lsp_status",
+				ignore_lsp = { "typos_lsp", "efm", "stylua" },
+				cond = function() -- only show component if LSP is active
+					if vim.g.lualine_lsp_active == nil then -- create autocmd only once
+						vim.g.lualine_lsp_active = false
+						vim.api.nvim_create_autocmd("LspProgress", {
+							desc = "User: Hide LSP progress component after 2s",
+							callback = function()
+								vim.g.lualine_lsp_active = true
+								vim.defer_fn(function() vim.g.lualine_lsp_active = false end, 2000)
+							end,
+						})
+					end
+					return vim.g.lualine_lsp_active
+				end,
+			},
+		},
+		lualine_y = {}, -- empty to remove %-progress in file
+		lualine_z = {
+			{ "selectioncount", icon = "󰒆" },
+			{ -- line count
+				function() return vim.api.nvim_buf_line_count(0) end,
+				icon = "",
+				cond = function() return vim.bo.buftype == "" end,
+			},
+			{ "location" },
+		},
+	},
+}

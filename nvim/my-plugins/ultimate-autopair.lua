@@ -7,6 +7,6 @@ require("config.utils").pluginKeymaps {
 
 --------------------------------------------------------------------------------
 
-require("ultimate-autopair.nvim").setup {
+require("ultimate-autopair").setup {
 
 }

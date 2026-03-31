@@ -1,6 +1,8 @@
 -- DOCS https://github.com/nvim-lualine/lualine.nvim#default-configuration
 --------------------------------------------------------------------------------
 
+-- INFO need to load this plugin earlier than others for `vim.g.lualineAdd`
+
 ---Adds a component lualine was already set up. This enables lazy-loading
 ---plugins that add statusline components.
 ---(Accessed via `vim.g`, as this file's exports are used by `lazy.nvim`.)
@@ -9,16 +11,15 @@
 ---@param component function|table the component forming the lualine
 ---@param where "after"|"before"? defaults to "after"
 vim.g.lualineAdd = function(whichBar, whichSection, component, where) ---@diagnostic disable-line: duplicate-set-field for the empty functions in `lazy.nvim` setup
-	vim.defer_fn(function() -- deferred so other plugins do not load lualine too early
-		local ok, lualine = pcall(require, "lualine")
-		if not (ok and lualine) then return end
-		local componentObj = type(component) == "table" and component or { component }
-		local sectionConfig = lualine.get_config()[whichBar][whichSection] or {}
-		local pos = where == "before" and 1 or #sectionConfig + 1
-		table.insert(sectionConfig, pos, componentObj)
-		lualine.setup { [whichBar] = { [whichSection] = sectionConfig } }
-	end, 1000)
+	local lualine = require("lualine")
+	local componentObj = type(component) == "table" and component or { component }
+	local sectionConfig = lualine.get_config()[whichBar][whichSection] or {}
+	local pos = where == "before" and 1 or #sectionConfig + 1
+	table.insert(sectionConfig, pos, componentObj)
+	lualine.setup { [whichBar] = { [whichSection] = sectionConfig } }
 end
+
+--------------------------------------------------------------------------------
 
 local function hasSplit()
 	if vim.bo.buftype ~= "" and not vim.wo.diff then return false end

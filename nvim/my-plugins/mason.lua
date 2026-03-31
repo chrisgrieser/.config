@@ -7,6 +7,6 @@ require("config.utils").pluginKeymaps {
 
 --------------------------------------------------------------------------------
 
-require("mason.nvim").setup {
+require("mason").setup {
 
 }

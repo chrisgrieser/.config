@@ -7,6 +7,7 @@ require("config.utils").pluginKeymaps {
 
 --------------------------------------------------------------------------------
 
+-- TODO blink.cmp.git as well
 require("blink.cmp").setup {
 
 }
