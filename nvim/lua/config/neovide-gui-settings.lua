@@ -8,7 +8,7 @@ local isAtOffice = host:find("eduroam") or host:find("mini")
 local isAtMother = host:find("Mother")
 
 if isAtMother then
-	vim.g.neovide_scale_factor = 0.9
+	vim.g.neovide_scale_factor = 0.90
 	vim.g.neovide_padding_top = 4
 	vim.g.neovide_padding_left = 6
 elseif isAtOffice then
