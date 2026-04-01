@@ -1,14 +1,3 @@
----MY VARIABLES-----------------------------------------------------------------
-vim.g.localRepos = vim.env.HOME .. "/Developer"
-vim.g.notesDir = vim.env.HOME .. "/Notes"
-vim.g.iCloudSync = vim.env.HOME .. "/Library/Mobile Documents/com~apple~CloudDocs/Tech/nvim-data"
-
-vim.g.useEmmyluaLsp = false
-
--- names need to match `lua/colorschemes/{name}.lua` & the name for `vim.cmd.colorscheme`
-vim.g.lightColor = "dawnfox"
-vim.g.darkColor = "tokyonight"
-
 ---GENERAL OPTIONS--------------------------------------------------------------
 vim.g.mapleader = ","
 vim.g.maplocalleader = "<Nop>"

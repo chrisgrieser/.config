@@ -36,7 +36,8 @@ local ensureInstalled = {
 	"emmet-language-server", -- css/html snippets
 
 	"stylua", -- lua formatter
-	vim.g.useEmmyluaLsp and "emmylua_ls" or "lua-language-server", -- lua LSP
+	"lua-language-server", -- lua LSP
+	-- "emmylua_ls", -- modern lua LSP, still buggy
 
 	"bash-language-server", -- also used for zsh
 	"efm", -- integration of external linters

@@ -9,6 +9,15 @@ local function safeRequire(module)
 		vim.schedule(function() vim.notify(msg, vim.log.levels.ERROR) end)
 	end
 end
+
+---MY VARIABLES-----------------------------------------------------------------
+vim.g.localRepos = vim.env.HOME .. "/Developer"
+vim.g.notesDir = vim.env.HOME .. "/Notes"
+vim.g.iCloudSync = vim.env.HOME .. "/Library/Mobile Documents/com~apple~CloudDocs/Tech/nvim-data"
+
+-- names need to match `lua/colorschemes/{name}.lua` & the name for `vim.cmd.colorscheme`
+vim.g.lightColor = "dawnfox"
+vim.g.darkColor = "tokyonight"
 --------------------------------------------------------------------------------
 
 safeRequire("config.reopen-last-file")
