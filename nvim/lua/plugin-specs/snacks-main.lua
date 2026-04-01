@@ -3,7 +3,7 @@
 
 return {
 	"folke/snacks.nvim",
-	event = "UIEnter",
+	lazy = false,
 	keys = {
 		{ "ö", function() Snacks.words.jump(1, true) end, desc = "󰗲 Next reference" },
 		{ "Ö", function() Snacks.words.jump(-1, false) end, desc = "󰗲 Prev reference" },

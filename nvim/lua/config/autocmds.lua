@@ -142,14 +142,15 @@ do
 		-- also trigger on `FocusGained` to account for deletions of file outside nvim
 		desc = "User: Auto-cd to project root",
 		callback = function(ctx)
-			-- GUARD
-			local filename = vim.fs.basename(ctx.file)
-			if filename == "COMMIT_EDITMSG" or filename == "git-rebase-todo" then return end
-			if not vim.uv.cwd() then -- cwd is unset if dir was deleted
-				vim.uv.chdir(vim.fn.stdpath("config")) -- fallback to nvim config
-			end
-
 			vim.schedule(function()
+				local filename = vim.fs.basename(ctx.file)
+				if filename == "COMMIT_EDITMSG" or filename == "git-rebase-todo" then return end
+				if not vim.uv.cwd() then -- cwd is unset if dir was deleted
+					vim.notify("Unable to auto-cd to project root", vim.log.levels.WARN)
+					vim.uv.chdir(vim.fn.stdpath("config")) -- fallback to nvim config
+					return
+				end
+
 				if not vim.api.nvim_buf_is_valid(ctx.buf) then return end
 				if vim.startswith(ctx.file, "/private/var/") then return end -- `pass` cli buffers
 

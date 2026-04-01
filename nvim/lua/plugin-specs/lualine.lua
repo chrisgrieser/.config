@@ -146,8 +146,9 @@ return {
 						return "%#lualine_x_diagnostics_warn_normal#" .. "󱞍 "
 					end,
 					symbols = (function() -- use icons from `vim.diagnostic.config()`
-						local icons = ((vim.diagnostic.config() or {}).signs or {}).text
-							or { "E", "W", "I", "H" }
+						local icons = { "E", "W", "I", "H" }
+						local signConf = (vim.diagnostic.config() or {}).signs
+						if type(signConf) == "table" and signConf.text then icons = signConf.text end
 						return { error = icons[1], warn = icons[2], info = icons[3], hint = icons[4] }
 					end)(),
 				},
