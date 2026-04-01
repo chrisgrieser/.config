@@ -26,10 +26,6 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
--- empty funcs to prevent errors when bisecting plugins (-> lualine / whichkey are disabled)
-vim.g.lualineAdd = function() end ---@diagnostic disable-line: duplicate-set-field
-vim.g.whichkeyAddSpec = function() end ---@diagnostic disable-line: duplicate-set-field
-
 --------------------------------------------------------------------------------
 
 require("lazy").setup {

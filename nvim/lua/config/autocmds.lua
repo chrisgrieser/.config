@@ -137,33 +137,35 @@ do
 			"Cellar", -- homebrew
 		},
 	}
+	local function autocd(ctx)
+		local bufnr = ctx and ctx.buf or vim.api.nvim_get_current_buf()
+		local filepath = ctx and ctx.file or vim.api.nvim_buf_get_name(bufnr)
+		local filename = vim.fs.basename(filepath)
+
+		if not vim.api.nvim_buf_is_valid(bufnr) then return end
+		if filename == "COMMIT_EDITMSG" or filename == "git-rebase-todo" then return end
+		if vim.startswith(filepath, "/private/var/") then return end -- `pass` cli buffers
+		if not vim.uv.cwd() then -- cwd is unset if dir was deleted
+			vim.notify("No cwd set, falling back to nvim config dir.", vim.log.levels.WARN)
+			vim.uv.chdir(vim.fn.stdpath("config")) -- fallback to nvim config
+			return
+		end
+
+		local root = vim.fs.root(bufnr, function(name, path)
+			local parentName = vim.fs.basename(vim.fs.dirname(path))
+			local dirHasParentMarker = vim.tbl_contains(config.parentOfRoot, parentName)
+			local dirHasChildMarker = vim.tbl_contains(config.childOfRoot, name)
+			return dirHasChildMarker or dirHasParentMarker
+		end)
+		if root and root ~= "" then vim.uv.chdir(root) end
+	end
 
 	vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained" }, {
 		-- also trigger on `FocusGained` to account for deletions of file outside nvim
 		desc = "User: Auto-cd to project root",
-		callback = function(ctx)
-			vim.schedule(function()
-				local filename = vim.fs.basename(ctx.file)
-				if filename == "COMMIT_EDITMSG" or filename == "git-rebase-todo" then return end
-				if not vim.uv.cwd() then -- cwd is unset if dir was deleted
-					vim.notify("Unable to auto-cd to project root", vim.log.levels.WARN)
-					vim.uv.chdir(vim.fn.stdpath("config")) -- fallback to nvim config
-					return
-				end
-
-				if not vim.api.nvim_buf_is_valid(ctx.buf) then return end
-				if vim.startswith(ctx.file, "/private/var/") then return end -- `pass` cli buffers
-
-				local root = vim.fs.root(ctx.buf, function(name, path)
-					local parentName = vim.fs.basename(vim.fs.dirname(path))
-					local dirHasParentMarker = vim.tbl_contains(config.parentOfRoot, parentName)
-					local dirHasChildMarker = vim.tbl_contains(config.childOfRoot, name)
-					return dirHasChildMarker or dirHasParentMarker
-				end)
-				if root and root ~= "" then vim.uv.chdir(root) end
-			end)
-		end,
+		callback = vim.schedule_wrap(autocd),
 	})
+	autocd() -- on first buffer
 end
 
 ---AUTO-CLOSE DELETED BUFFERS---------------------------------------------------
