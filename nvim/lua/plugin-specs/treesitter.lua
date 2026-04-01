@@ -57,6 +57,7 @@ local ensureInstalled = {
 return {
 	"nvim-treesitter/nvim-treesitter",
 	lazy = false,
+	priority = 1000,
 	build = ":TSUpdate",
 	opts = {
 		install_dir = vim.fn.stdpath("data") .. "/treesitter",
