@@ -48,4 +48,4 @@ safeRequire("config.spellfixes")
 vim.schedule(function() safeRequire("personal-plugins.ui-redirect") end) -- wait for loading notification plugin
 
 -- PENDING neovide not setting filetype https://github.com/neovide/neovide/issues/3444
-if vim.bo.ft == "" then vim.bo.ft = vim.filetype.match { buf = 0 } end
+if vim.bo.ft == "" then pcall(vim.cmd.edit) end

@@ -1,15 +1,17 @@
 vim.pack.add { "https://github.com/chrisgrieser/nvim-spider" }
 --------------------------------------------------------------------------------
 
-vim.keymap.set(
-	{ "n", "x", "o" },
-	"e",
-	"<cmd>lua require('spider').motion('e')<CR>",
-	{ desc = "󰯊 end of subword" }
-)
-vim.keymap.set(
-	{ "n", "x", "o" },
-	"b",
-	"<cmd>lua require('spider').motion('b')<CR>",
-	{ desc = "󰯊 beginning of subword" }
-)
+require("config.utils").pluginKeymaps {
+	{
+		"e",
+		"<cmd>lua require('spider').motion('e')<CR>",
+		mode = { "n", "x", "o" },
+		desc = "󰯊 end of subword",
+	},
+	{
+		"b",
+		"<cmd>lua require('spider').motion('b')<CR>",
+		mode = { "n", "x" }, -- not `o`, since we use a different textobject for that
+		desc = "󰯊 beginning of subword",
+	},
+}

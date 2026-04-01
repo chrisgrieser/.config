@@ -1,14 +1,14 @@
 vim.pack.add { "https://github.com/stevearc/conform.nvim" }
 --------------------------------------------------------------------------------
 
-require("config.utils").pluginKeymaps {}
-
-vim.keymap.set(
-	{ "n", "x" },
-	"<D-s>",
-	function() require("conform").format() end,
-	{ desc = "󱉯 Format buffer" }
-)
+require("config.utils").pluginKeymaps {
+	{
+		"<D-s>",
+		function() require("conform").format() end,
+		mode = { "n", "x" },
+		desc = "󱉯 Format buffer",
+	},
+}
 
 --------------------------------------------------------------------------------
 

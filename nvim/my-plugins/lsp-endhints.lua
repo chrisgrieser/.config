@@ -1,12 +1,9 @@
 vim.pack.add { "https://github.com/chrisgrieser/nvim-lsp-endhints" }
 --------------------------------------------------------------------------------
 
-vim.keymap.set(
-	"n",
-	"<leader>oh",
-	function() require("lsp-endhints").toggle() end,
-	{ desc = "󰑀 Endhints" }
-)
+require("config.utils").pluginKeymaps {
+	{ "<leader>oh", function() require("lsp-endhints").toggle() end, desc = "󰑀 Endhints" },
+}
 
 --------------------------------------------------------------------------------
 

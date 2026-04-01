@@ -1,7 +1,9 @@
 vim.pack.add { "https://github.com/chrisgrieser/nvim-justice" }
 --------------------------------------------------------------------------------
 
-vim.keymap.set("n", "<leader>j", function() require("justice").select() end, { desc = "󰖷 Just" })
+require("config.utils").pluginKeymaps {
+	{ "<leader>j", function() require("justice").select() end, desc = "󰖷 Just" },
+}
 
 require("justice").setup {
 	recipeModes = {

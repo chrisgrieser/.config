@@ -1,12 +1,14 @@
 vim.pack.add { "https://github.com/chrisgrieser/nvim-rip-substitute" }
 --------------------------------------------------------------------------------
 
-vim.keymap.set(
-	{ "n", "x" },
-	"<leader>rs",
-	function() require("rip-substitute").sub() end,
-	{ desc = " rip-substitute" }
-)
+require("config.utils").pluginKeymaps {
+	{
+		"<leader>rs",
+		function() require("rip-substitute").sub() end,
+		mode = { "n", "x" },
+		desc = " rip-substitute",
+	},
+}
 
 --------------------------------------------------------------------------------
 
