@@ -7,6 +7,7 @@ keymap("n", "<D-q>", vim.cmd.wqall, { desc = " Save & quit", unique = false }
 keymap(
 	{ "n", "x", "i" },
 	"<D-C-r>", -- `hyper` gets registered by Neovide as `cmd+ctrl` (`<D-C-`)
+	-- PENDING https://github.com/neovide/neovide/issues/3438#issuecomment-4165277928
 	function() require("personal-plugins.misc").restartNeovide() end,
 	{ desc = " Save & restart" }
 )

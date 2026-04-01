@@ -40,6 +40,7 @@ do
 	vim.g.neovide_theme = "auto"
 	local prevBg
 
+	-- PENDING https://github.com/neovide/neovide/issues/3443
 	-- 2. tell nvim to sync colorscheme with `background`
 	vim.api.nvim_create_autocmd("OptionSet", {
 		desc = "User: Sync colorscheme with `background`",
