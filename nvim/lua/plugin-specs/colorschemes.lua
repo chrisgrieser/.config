@@ -11,14 +11,16 @@ else
 	bg = vim.o.background
 end
 
-if bg == "dark" then
-	lightScheme.config = nil
-	lightScheme.priority = nil
-	lightScheme.lazy = true
-else
-	darkScheme.init = nil
-	darkScheme.priority = nil
-	darkScheme.lazy = true
+if vim.g.darkColor ~= vim.g.lightColor then
+	if bg == "dark" then
+		lightScheme.config = nil
+		lightScheme.priority = nil
+		lightScheme.lazy = true
+	else
+		darkScheme.init = nil
+		darkScheme.priority = nil
+		darkScheme.lazy = true
+	end
 end
 
 --------------------------------------------------------------------------------
