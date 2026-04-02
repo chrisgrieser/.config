@@ -120,17 +120,6 @@ return {
 	},
 	---@type snacks.Config
 	opts = {
-		picker = {
-			sources = {
-				notifications = {
-					formatters = { severity = { level = false } },
-					confirm = function(picker)
-						openNotif(picker:current().idx)
-						picker:close()
-					end,
-				},
-			},
-		},
 		notifier = {
 			timeout = 7500,
 			sort = { "added" }, -- sort only by time

@@ -56,6 +56,7 @@ local function importLuaModule()
 		end,
 	}
 end
+
 ---@param dir string?
 local function betterFileOpen(dir)
 	if not dir then dir = vim.uv.cwd() end
@@ -217,6 +218,13 @@ return {
 				select = { -- vim.ui.select
 					layout = { layout = { min_width = 40, width = 0.6 } },
 					kinds = {}, -- allows-kind-specific config
+				},
+				notifications = {
+					formatters = { severity = { level = false } },
+					confirm = function(picker)
+						require("config.snacks-helpers").openNotif(picker:current().idx)
+						picker:close()
+					end,
 				},
 				files = {
 					cmd = "rg",
