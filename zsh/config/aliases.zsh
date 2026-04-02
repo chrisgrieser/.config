@@ -49,7 +49,7 @@ function pass {
 	elif [[ "$1" == "logout" || "$1" == "lock" ]]; then
 		gpgconf --kill gpg-agent
 	else
-		env "USING_PASS=true" command pass "$@"
+		env "EDITOR=nvim -u nvim -u $HOME/.config/nvim/lua/config/config-for-pass.lua" command pass "$@"
 	fi
 }
 alias pw="pass"

@@ -27,7 +27,7 @@ if vim.env.USING_PASS then
 	vim.keymap.set("n", "H", "0^")
 	vim.keymap.set("n", "ss", "VP", { desc = "Substitute line" })
 	vim.keymap.set("n", "S", "v$hP", { desc = "Substitute to EoL" })
-	vim.keymap.set("n", "<CR>", "ZZ", { desc = "Save and exit" })
+	vim.keymap.set("n", "<CR>", "ZZ", { desc = "Save and exit", buffer = true })
 else
 	-- empty funcs to prevent errors when bisecting plugins (-> lualine / whichkey are disabled)
 	vim.g.lualineAdd = function() end ---@diagnostic disable-line: duplicate-set-field
