@@ -104,7 +104,7 @@ vim.opt.listchars:append {
 	space = " ",
 }
 vim.opt.fillchars:append {
-	eob = " ",
+	eob = " ", -- no `~` at end of buffer
 	msgsep = "═",
 	lastline = "↓",
 }

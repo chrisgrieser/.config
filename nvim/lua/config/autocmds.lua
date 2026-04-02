@@ -34,7 +34,6 @@ vim.api.nvim_create_autocmd("WinScrolled", {
 })
 
 ---SYNC TERMINAL BACKGROUND-----------------------------------------------------
-
 -- https://github.com/neovim/neovim/issues/16572#issuecomment-1954420136
 -- https://www.reddit.com/r/neovim/comments/1ehidxy/you_can_remove_padding_around_neovim_instance/
 if vim.fn.has("gui_running") == 0 then
