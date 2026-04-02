@@ -2,8 +2,7 @@
 vim.pack.add { "https://github.com/nvim-mini/mini.icons" }
 --------------------------------------------------------------------------------
 
--- BUG
--- `hl = ""` needed when using vim.pack
+-- BUG `hl = ""` needed when using vim.pack
 
 require("mini.icons").setup {
 	file = {
@@ -27,7 +26,6 @@ require("mini.icons").setup {
 		["typescript"] = { hl = "MiniIconsCyan" },
 		["vim"] = { glyph = "", hl = "" },
 		["qf"] = { glyph = "", hl = "" },
-		["nvim-pack"] = { glyph = "󰐱", hl = "" },
 
 		-- plugin-filetypes
 		["leetcode.nvim"] = { glyph = "󱫩", hl = "" },

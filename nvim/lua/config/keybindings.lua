@@ -31,7 +31,9 @@ keymap("n", "<leader>pd", function()
 end, { desc = "󰝰 Local data dir" })
 
 -- stylua: ignore
-keymap("n", "<leader>pl", function() vim.pack.update(nil, { offline = true }) end, { desc = "󰐱 List plugins" })
+keymap("n", "<leader>pl", function()
+	vim.ui.open(vim.fn.stdpath("log") --[[@as string]] .. "/nvim-pack.log")
+end, { desc = "󰐱 Log of updated plugins" })
 keymap("n", "<leader>pp", function() vim.pack.update() end, { desc = "󰐱 Update plugins" })
 
 ---NAVIGATION-------------------------------------------------------------------

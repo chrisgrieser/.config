@@ -46,6 +46,7 @@ end
 
 -- not using lualine's component since it requires `web-devicons`
 local function addFiletypeIcon(filename)
+	if vim.bo.filetype == "nvim-pack" then return "󰐱 vim.pack" end
 	if vim.wo.diff and vim.bo.buftype == "nowrite" then return " Diff" end
 	if filename == "[No Name]" and vim.bo.ft ~= "" then filename = vim.bo.ft end -- fix name for special buffers
 	local ok, icons = pcall(require, "mini.icons")
