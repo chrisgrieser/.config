@@ -5,6 +5,7 @@
 -- * local dev with vim.pack https://www.reddit.com/r/neovim/comments/1s8cbye/the_feature_im_missing_the_most_after_migrating/
 -- * mini.icons bug
 -- * measure startup time
+-- * delete unused plugins
 
 --------------------------------------------------------------------------------
 local u = require("config.utils")

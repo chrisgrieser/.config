@@ -1,14 +1,5 @@
-# imported vim files
 after/**/*.vim
-
-# snippets files (already using nvim-scissors for that)
 snippets/**
-!snippets/package.json
-
-# skeletons rarely touched
 templates/**
-
-# lazy.nvim
-.lazy-lock.json
-
+ nvim-pack-lock.json
 .gitkeep

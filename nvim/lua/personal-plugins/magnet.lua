@@ -27,6 +27,7 @@ local config = {
 		mostChangedFiles = {
 			"/info.plist", -- Alfred
 			"/prefs.plist", -- Alfred
+			"nvim-pack-lock.json",
 		},
 	},
 }
