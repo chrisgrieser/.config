@@ -26,14 +26,19 @@ end, { desc = "󰌌 Edit keybindings" })
 
 ---PACKAGES---------------------------------------------------------------------
 
-keymap("n", "<leader>pd", function()
-	vim.ui.open(vim.fn.stdpath("data") --[[@as string]])
-end, { desc = "󰝰 Local data dir" })
+keymap(
+	"n",
+	"<leader>pd",
+	function() vim.ui.open(vim.fn.stdpath("data")) end,
+	{ desc = "󰝰 Local data dir" }
+)
 
--- stylua: ignore
-keymap("n", "<leader>pl", function()
-	vim.ui.open(vim.fn.stdpath("log") --[[@as string]] .. "/nvim-pack.log")
-end, { desc = "󰐱 Log of updated plugins" })
+keymap(
+	"n",
+	"<leader>pl",
+	function() vim.ui.open(vim.fn.stdpath("log") .. "/nvim-pack.log") end,
+	{ desc = "󰐱 Log of updated plugins" }
+)
 keymap("n", "<leader>pp", function() vim.pack.update() end, { desc = "󰐱 Update plugins" })
 
 ---NAVIGATION-------------------------------------------------------------------
