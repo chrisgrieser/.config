@@ -72,6 +72,3 @@ require("tokyonight").setup {
 		hl.SpellLocal = { underdotted = true, sp = hl.SpellLocal.sp }
 	end,
 }
-
---------------------------------------------------------------------------------
-if vim.o.background == "dark" then vim.cmd.colorscheme("tokyonight") end

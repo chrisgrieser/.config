@@ -33,31 +33,6 @@ vim.api.nvim_create_autocmd("WinScrolled", {
 	callback = function() vim.snippet.stop() end,
 })
 
----COLORSCHEMES DEPENDING ON SYSTEM MODE----------------------------------------
-do
-	-- 1. tell neovide to sync `background` with system dark mode
-	-- (terminal already does so by default)
-	vim.g.neovide_theme = "auto"
-	local prevBg
-
-	-- PENDING https://github.com/neovide/neovide/issues/3443
-	-- 2. tell nvim to sync colorscheme with `background`
-	vim.api.nvim_create_autocmd("OptionSet", {
-		desc = "User: Sync colorscheme with `background`",
-		pattern = "background",
-		callback = function()
-			-- prevent recursion, since some colorschemes also set background
-			-- (not using `vim.v.option_old` due to race with multiple triggerings)
-			if vim.v.option_new == prevBg then return end
-			prevBg = vim.v.option_new
-
-			vim.cmd.highlight("clear") -- so next theme isn't affected by previous one
-			local newColor = vim.v.option_new == "light" and vim.g.lightColor or vim.g.darkColor
-			vim.schedule(function() pcall(vim.cmd.colorscheme, newColor) end)
-		end,
-	})
-end
-
 ---SYNC TERMINAL BACKGROUND-----------------------------------------------------
 
 -- https://github.com/neovim/neovim/issues/16572#issuecomment-1954420136

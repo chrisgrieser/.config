@@ -15,9 +15,6 @@ vim.g.localRepos = vim.env.HOME .. "/Developer"
 vim.g.notesDir = vim.env.HOME .. "/Notes"
 vim.g.iCloudSync = vim.env.HOME .. "/Library/Mobile Documents/com~apple~CloudDocs/Tech/nvim-data"
 
--- names need to match `lua/colorschemes/{name}.lua` & the name for `vim.cmd.colorscheme`
-vim.g.lightColor = "dawnfox"
-vim.g.darkColor = "tokyonight"
 --------------------------------------------------------------------------------
 
 safeRequire("config.reopen-last-file")
@@ -26,18 +23,18 @@ safeRequire("config.options") -- before plugins, so they are available for them
 -- For extra security, do not load plugins when using `pass`.
 -- (requires starting it via `env="USING_PASS=true" pass`)
 if vim.env.USING_PASS then
-	vim.keymap.set("n", "L", "$", { buffer = true })
-	vim.keymap.set("n", "H", "0^", { buffer = true })
-	vim.keymap.set("n", "ss", "VP", { desc = "Substitute line", buffer = true })
-	vim.keymap.set("n", "S", "v$hP", { desc = "Substitute to EoL", buffer = true })
-	vim.keymap.set("n", "<CR>", "ZZ", { desc = "Save and exit", buffer = true })
+	vim.keymap.set("n", "L", "$")
+	vim.keymap.set("n", "H", "0^")
+	vim.keymap.set("n", "ss", "VP", { desc = "Substitute line" })
+	vim.keymap.set("n", "S", "v$hP", { desc = "Substitute to EoL" })
+	vim.keymap.set("n", "<CR>", "ZZ", { desc = "Save and exit" })
 else
 	-- empty funcs to prevent errors when bisecting plugins (-> lualine / whichkey are disabled)
 	vim.g.lualineAdd = function() end ---@diagnostic disable-line: duplicate-set-field
 	vim.g.whichkeyAddSpec = function() end ---@diagnostic disable-line: duplicate-set-field
 
 	safeRequire("config.lazy") -- load plugins
-	vim.cmd.colorscheme(vim.o.background == "dark" and vim.g.darkColor or vim.g.lightColor)
+	safeRequire("config.colorscheme")
 end
 
 safeRequire("config.neovide-gui-settings")
@@ -49,4 +46,4 @@ safeRequire("config.spellfixes")
 vim.schedule(function() safeRequire("personal-plugins.messages-to-notify") end) -- wait for loading notification plugin
 
 -- PENDING neovide not setting filetype https://github.com/neovide/neovide/issues/3444
-if vim.bo.ft == "" then pcall(vim.cmd.edit) end
+if vim.bo.ft == "" and vim.g.neovide then pcall(vim.cmd.edit) end

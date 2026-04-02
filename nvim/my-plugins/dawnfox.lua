@@ -107,6 +107,3 @@ require("nightfox").setup {
 		},
 	},
 }
-
---------------------------------------------------------------------------------
-if vim.o.background == "dark" then vim.cmd.colorscheme("tokyonight") end

@@ -32,6 +32,7 @@ end
 
 -- INFO done manually to include app-specific toggling for:
 -- * System
+-- * Neovim
 -- * Sketchybar
 -- * Hammerspoon Console
 ---@param toMode "dark"|"light"
@@ -41,9 +42,14 @@ function M.setDarkMode(toMode)
 		.. (toMode == "light" and "false" or "true")
 	hs.osascript.applescript(applescript)
 
+	-- neovim
+	local nvimLuaCmd = ("<cmd>lua vim.g.setColorscheme(%q)<CR>"):format(toMode)
+	local shellCmd = ("nvim --server '/tmp/nvim_server.pipe' --remote-send %q"):format(nvimLuaCmd)
+	hs.execute(u.exportPath .. shellCmd)
+
 	-- sketchybar
-	-- delay so sketchybar picks up on system mode change
-	u.defer(2, function() hs.execute(u.exportPath .. "sketchybar --reload") end)
+	-- delay to pick up system mode change
+	u.defer(1, function() hs.execute(u.exportPath .. "sketchybar --reload") end)
 
 	-- hammerspoon itself
 	require("appearance.console").setConsoleColors(toMode)
