@@ -7,7 +7,6 @@ local hasNotificationPlugin = package.loaded["nvim-notify"]
 	or package.loaded["snacks"]
 	or package.loaded["mini.notify"]
 if not hasNotificationPlugin then return end
-if vim.fn.has("gui_running") == 0 then return end -- somehow this only works in a GUI?
 --------------------------------------------------------------------------------
 
 local config = {
@@ -20,7 +19,7 @@ local config = {
 
 --------------------------------------------------------------------------------
 
-local ns = vim.api.nvim_create_namespace("ui-hack")
+local ns = vim.api.nvim_create_namespace("messages-to-notify")
 
 local function attach()
 	vim.ui_attach(ns, { ext_messages = true }, function(event, ...)
@@ -50,10 +49,10 @@ local function attach()
 
 		local opts = { title = kind, icon = config.notification.icon }
 		if kind == "lua_print" then opts.ft = "lua" end
-		if kind == "progress" then opts.id = "ui-redirect-notify" end
+		if kind == "progress" then opts.id = "messages-to-notify" end
 		if vim.list_contains(config.msgKind.mini, kind) and package.loaded["snacks"] then
 			opts.style = "minimal"
-			opts.id = "ui-redirect"
+			opts.id = "messages-to-notify"
 			if opts.icon then opts.icon = " " .. opts.icon .. " " end
 		end
 

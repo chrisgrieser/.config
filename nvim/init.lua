@@ -37,6 +37,7 @@ else
 	vim.g.whichkeyAddSpec = function() end ---@diagnostic disable-line: duplicate-set-field
 
 	safeRequire("config.lazy") -- load plugins
+	vim.cmd.colorscheme(vim.o.background == "dark" and vim.g.darkColor or vim.g.lightColor)
 end
 
 safeRequire("config.neovide-gui-settings")
