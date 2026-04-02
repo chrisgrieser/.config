@@ -6,6 +6,8 @@
 	<string>vim</string>
 	<key>old_search</key>
 	<string>old</string>
+	<key>plugin_installation_path</key>
+	<string>~/.local/share/nvim/site/pack/core/opt</string>
 	<key>plugin_search</key>
 	<string>nv</string>
 </dict>

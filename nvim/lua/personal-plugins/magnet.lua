@@ -5,7 +5,8 @@
 2.`.gotoMostChangedFile` to go to the file in the cwd with the most git changes.
 3.`.altFileStatusbar()` and `.mostChangedFileStatusbar()` to display the
   respective file in the statusbar. If there is no alt-file, the first oldfile
-  is shown. If there is no changed file, nothing is shown.]]
+  is shown. If there is no changed file, nothing is shown.
+]]
 
 local config = {
 	statusbar = {
@@ -26,7 +27,6 @@ local config = {
 		mostChangedFiles = {
 			"/info.plist", -- Alfred
 			"/prefs.plist", -- Alfred
-			"lazy-lock.json", -- lazy.nvim
 		},
 	},
 }

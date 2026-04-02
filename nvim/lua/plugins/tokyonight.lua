@@ -33,8 +33,6 @@ require("tokyonight").setup {
 		hl.LspSignatureActiveParameter = { link = "Visual" }
 		hl.Added = { fg = colors.green2 }
 		hl.Removed = { fg = colors.red }
-		hl.Bold = { bold = true } -- FIX missing color in lazy.nvim window
-		hl.Italic = { italic = true } -- FIX missing color in lazy.nvim window
 		hl.LspCodeLens = { link = "LspInlayHint" }
 
 		-- Snacks

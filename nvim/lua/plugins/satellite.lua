@@ -6,13 +6,7 @@ require("satellite").setup {
 	winblend = 25, -- only little transparency, since otherwise hard to see in some themes
 	handlers = {
 		cursor = { enable = false },
-		marks = {
-			enable = true,
-			-- Stop satellite.nvim from adding delays to my `m` keybind. Requires
-			-- a string, but do not use `""` or `<Nop>`, since they break things
-			-- like whichkey, use a throwaway like ¶ if nothing fits.
-			key = "<leader>m",
-		},
+		marks = { enable = false }, -- buggy
 	},
 }
 

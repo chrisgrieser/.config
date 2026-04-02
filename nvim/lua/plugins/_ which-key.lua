@@ -3,7 +3,6 @@
 --------------------------------------------------------------------------------
 
 ---Set up plugin-specific groups with the respective plugin's config
----(Accessed via `vim.g`, as this file's exports are used by `lazy.nvim`.)
 ---@param spec { [1]: string, mode?: string[], group: string }
 vim.g.whichkeyAddSpec = function(spec) ---@diagnostic disable-line: duplicate-set-field for the empty functions in `lazy.nvim` setup
 	if not spec.mode then spec.mode = { "n", "x" } end

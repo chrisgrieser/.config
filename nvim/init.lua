@@ -33,4 +33,6 @@ sRequire("config.spellfixes")
 sRequire("personal-plugins.messages-to-notify")
 
 -- PENDING neovide not setting filetype https://github.com/neovide/neovide/issues/3444
-if vim.bo.ft == "" and vim.g.neovide then pcall(vim.cmd.edit) end
+vim.schedule(function()
+	if vim.bo.ft == "" and vim.g.neovide then pcall(vim.cmd.edit) end
+end)

@@ -159,7 +159,7 @@ require("mason").setup {
 		width = 0.8,
 		backdrop = 60,
 		icons = { package_installed = "✓", package_pending = "󰔟" },
-		keymaps = { -- consistent with keymaps for lazy.nvim
+		keymaps = {
 			uninstall_package = "x",
 			toggle_help = "?",
 			toggle_package_expand = "<Tab>",
