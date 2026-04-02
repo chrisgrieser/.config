@@ -1,5 +1,8 @@
 -- vim: foldlevel=2
-vim.pack.add { "https://github.com/folke/snacks.nvim" }
+vim.pack.add {
+	"https://github.com/nvim-mini/mini.icons",
+	"https://github.com/folke/snacks.nvim",
+}
 --------------------------------------------------------------------------------
 
 ---@type snacks.Config

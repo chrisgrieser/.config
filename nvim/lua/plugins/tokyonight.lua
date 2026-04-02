@@ -1,4 +1,4 @@
-vim.pack.add { "https://github.com/folke/tokyonight" }
+vim.pack.add { "https://github.com/folke/tokyonight.nvim" }
 -- palette: https://github.com/folke/tokyonight.nvim/blob/main/extras/lua/tokyonight_moon.lua
 --------------------------------------------------------------------------------
 

@@ -1,15 +1,3 @@
----Try to require the module, but do not throw an error when one of them cannot
----be loaded. Without this, any error in one config file would result in the
----remaining config files not being loaded.
----@param module string
-local function safeRequire(module)
-	local success, errmsg = pcall(require, module)
-	if not success then
-		local msg = ("Error loading `%s`: %s"):format(module, errmsg)
-		vim.schedule(function() vim.notify(msg, vim.log.levels.ERROR) end)
-	end
-end
-
 ---MY VARIABLES-----------------------------------------------------------------
 vim.g.localRepos = vim.env.HOME .. "/Developer"
 vim.g.notesDir = vim.env.HOME .. "/Notes"

@@ -52,10 +52,11 @@ require("config.utils").pluginKeymaps {
 	{ "ge", "<cmd>lua require('various-textobjs').diagnostic()<CR>", mode = {"x","o"}, desc = " diagnostic" },
 	{ "L", "<cmd>lua require('various-textobjs').url()<CR>", mode = "o", desc = " URL" },
 	{ "|", "<cmd>lua require('various-textobjs').column()<CR>", mode = {"x","o"}, desc = "ﴳ column" },
-	{ "#", "<cmd>lua require('various-textobjs').color('outer')<CR>", mode = {"x","o"}, desc = " outer color" },
+	{ "#", "<cmd>lua require('various-textobjs').color('outer')<CR>", mode = {"x","o"}, desc = " outer color", unique = false },
 
-	{ "in", "<cmd>lua require('various-textobjs').number('inner')<CR>", mode = {"x","o"}, desc = " inner number" },
-	{ "an", "<cmd>lua require('various-textobjs').number('outer')<CR>", mode = {"x","o"}, desc = " outer number" },
+	-- non-unique, since nvim-default binding for outer/inner selection extension
+	{ "in", "<cmd>lua require('various-textobjs').number('inner')<CR>", mode = {"x","o"}, desc = " inner number", unique = false },
+	{ "an", "<cmd>lua require('various-textobjs').number('outer')<CR>", mode = {"x","o"}, desc = " outer number", unique = false },
 
 	{ "ii", "<cmd>lua require('various-textobjs').indentation('inner', 'inner')<CR>", mode = {"x","o"}, desc = "󰉶 inner indent" },
 	{ "ai", "<cmd>lua require('various-textobjs').indentation('outer', 'outer')<CR>", mode = {"x","o"}, desc = "󰉶 outer indent" },
@@ -146,6 +147,7 @@ require("config.utils").pluginKeymaps {
 			vim.cmd.normal { "v", bang = true } -- leave visual mode
 		end,
 		desc = " Open next URL",
+		unique = false, -- nvim-default binding
 	},
 	{
 		"g-",

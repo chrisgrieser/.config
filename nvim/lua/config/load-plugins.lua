@@ -13,7 +13,7 @@ local function safeRequire(module)
 	local success, errmsg = pcall(require, module)
 	if not success then
 		local msg = ("Error loading `%s`: %s"):format(module, errmsg)
-		vim.schedule(function() vim.notify(msg, vim.log.levels.ERROR) end)
+		vim.notify(msg)
 	end
 end
 --------------------------------------------------------------------------------
@@ -26,3 +26,5 @@ for name, type in vim.fs.dir(pluginPath) do
 		safeRequire(pluginDir .. "." .. name:gsub("%.lua$", ""))
 	end
 end
+--------------------------------------------------------------------------------
+

@@ -31,8 +31,8 @@ keymap("n", "<leader>pd", function()
 end, { desc = "󰝰 Local data dir" })
 
 -- stylua: ignore
--- keymap("n", "<leader>pl", function() vim.pack.update(nil, { offline = true }) end, { desc = "󰐱 List plugins" })
--- keymap("n", "<leader>pp", function() vim.pack.update() end, { desc = "󰐱 Update plugins" })
+keymap("n", "<leader>pl", function() vim.pack.update(nil, { offline = true }) end, { desc = "󰐱 List plugins" })
+keymap("n", "<leader>pp", function() vim.pack.update() end, { desc = "󰐱 Update plugins" })
 
 ---NAVIGATION-------------------------------------------------------------------
 -- make mappings work on wrapped lines as well

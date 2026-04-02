@@ -1,1 +1,0 @@
-/Users/chrisgrieser/.config/nvim/lsp/ts_ls.lua

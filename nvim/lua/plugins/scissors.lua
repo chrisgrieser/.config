@@ -29,5 +29,4 @@ require("scissors").setup {
 		picker = "snacks",
 		telescope = { alsoSearchSnippetBody = true },
 	},
-	jsonFormatter = "jq", -- `jq` pre-installed on newer macOS versions
 }
