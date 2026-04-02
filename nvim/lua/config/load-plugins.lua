@@ -1,14 +1,28 @@
--- require("config.lazy")
+local useLazy = false
+--------------------------------------------------------------------------------
+if useLazy then
+	require("config.lazy")
+	return
+end
+--------------------------------------------------------------------------------
 
+-- make update progress clear
+vim.g.neovide_progress_bar_height = 30
+
+local function safeRequire(module)
+	local success, errmsg = pcall(require, module)
+	if not success then
+		local msg = ("Error loading `%s`: %s"):format(module, errmsg)
+		vim.schedule(function() vim.notify(msg, vim.log.levels.ERROR) end)
+	end
+end
 --------------------------------------------------------------------------------
 local pluginDir = "plugins"
 local pluginPath = vim.fn.stdpath("config") .. "/lua/" .. pluginDir
 
 for name, type in vim.fs.dir(pluginPath) do
-	assert
-	if name:find("%..*%.lua") then
-		vim.notify("plugin-spec name must not contain dots")
-	elseif type == "file" and vim.endswith(name, ".lua") then
-		require(pluginDir .. "." .. name:gsub("%.lua$", ""))
+	assert(not name:find("%..*%.lua"), "filename must not contain dots due `require`: " .. name)
+	if type == "file" and vim.endswith(name, ".lua") then
+		safeRequire(pluginDir .. "." .. name:gsub("%.lua$", ""))
 	end
 end

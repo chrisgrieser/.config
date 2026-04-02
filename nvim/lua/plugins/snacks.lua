@@ -50,12 +50,12 @@ opts.scratch = {
 		end,
 	},
 	win_by_ft = {
-		javascript = helpers.createRunKeymap("node"),
-		typescript = helpers.createRunKeymap("node"),
-		python = helpers.createRunKeymap("python3"),
-		applescript = helpers.createRunKeymap("osascript"),
-		swift = helpers.createRunKeymap("swift"),
-		zsh = helpers.createRunKeymap("zsh"),
+		javascript = helpers.createScratchRunKeymap("node"),
+		typescript = helpers.createScratchRunKeymap("node"),
+		python = helpers.createScratchRunKeymap("python3"),
+		applescript = helpers.createScratchRunKeymap("osascript"),
+		swift = helpers.createScratchRunKeymap("swift"),
+		zsh = helpers.createScratchRunKeymap("zsh"),
 		lua = {
 			keys = {
 				source = { desc = "source" }, -- just to shorten keymap hint

@@ -38,15 +38,14 @@ function M.pluginKeymaps(maps)
 	for _, map in ipairs(maps) do
 		local opts = { desc = map.desc, nowait = map.nowait, remap = map.remap }
 		if not map.ft then
-			M.uniqueKeymap(map[3] or "n", map[1], map[2], opts)
+			M.uniqueKeymap(map.mode or "n", map[1], map[2], opts)
 		else
-			local ft = type(map.ft) == "string" and { map.ft } or map.ft ---@cast ft string[]
+			local filetypes = type(map.ft) == "string" and { map.ft } or map.ft ---@cast filetypes string[]
 			vim.api.nvim_create_autocmd("FileType", {
 				desc = "User: plugin ft-keymap",
 				callback = function(ctx)
-					if not vim.tbl_contains(ft, ctx.match) then return end
-					opts.buffer = ctx.buf
-					M.uniqueKeymap(map[3] or "n", map[1], map[2], opts)
+					if not vim.tbl_contains(filetypes, ctx.match) then return end
+					M.bufKeymap(map.mode or "n", map[1], map[2], opts)
 				end,
 			})
 		end

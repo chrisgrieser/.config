@@ -12,7 +12,7 @@ require("config.utils").pluginKeymaps {
 
 --------------------------------------------------------------------------------
 
-require("surround").setup {
+require("nvim-surround").setup {
 	move_cursor = false,
 	-- stylua: ignore
 	aliases = { -- aliases mirror my custom textobj keymaps

@@ -11,16 +11,14 @@ vim.pack.add { "https://github.com/monkoose/neocodeium" }
 --------------------------------------------------------------------------------
 
 require("neocodeium").setup {
-	opts = {
-		silent = true,
-		show_label = false, -- signcolumn label for number of suggestions
-		filetypes = {
-			bib = false,
-			text = false, -- filetype when editing in `pass` (1. extra safeguard)
-		},
-		-- `filter` should return `false` to disable AI on buffer
-		filter = require("config.utils").allowBufferForAi,
+	silent = true,
+	show_label = false, -- signcolumn label for number of suggestions
+	filetypes = {
+		bib = false,
+		text = false, -- filetype when editing in `pass` (1. extra safeguard)
 	},
+	-- `filter` should return `false` to disable AI on buffer
+	filter = require("config.utils").allowBufferForAi,
 }
 
 --------------------------------------------------------------------------------
