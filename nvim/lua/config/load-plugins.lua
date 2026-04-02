@@ -1,30 +1,24 @@
-local useLazy = false
---------------------------------------------------------------------------------
-if useLazy then
-	require("config.lazy")
-	return
-end
---------------------------------------------------------------------------------
-
 -- make update progress clear
 vim.g.neovide_progress_bar_height = 30
 
-local function safeRequire(module)
-	local success, errmsg = pcall(require, module)
-	if not success then
-		local msg = ("Error loading `%s`: %s"):format(module, errmsg)
-		vim.notify(msg)
-	end
-end
+-- empty funcs to prevent errors when bisecting plugins (-> lualine / whichkey are disabled)
+vim.g.lualineAdd = function() end ---@diagnostic disable-line: duplicate-set-field
+vim.g.whichkeyAddSpec = function() end ---@diagnostic disable-line: duplicate-set-field
 --------------------------------------------------------------------------------
 local pluginDir = "plugins"
 local pluginPath = vim.fn.stdpath("config") .. "/lua/" .. pluginDir
+local sRequire = require("config.utils").safeRequire
 
 for name, type in vim.fs.dir(pluginPath) do
 	assert(not name:find("%..*%.lua"), "filename must not contain dots due `require`: " .. name)
 	if type == "file" and vim.endswith(name, ".lua") then
-		safeRequire(pluginDir .. "." .. name:gsub("%.lua$", ""))
+		sRequire(pluginDir .. "." .. name:gsub("%.lua$", ""))
 	end
 end
 --------------------------------------------------------------------------------
 
+vim.api.nvim_create_autocmd("FileType", {
+	desc = "User: nvim-pack keymaps",
+	pattern = "nvim-pack",
+	callback = function() vim.keymap.set("n", "q", vim.cmd.quit, { nowait = true, buffer = true }) end,
+})

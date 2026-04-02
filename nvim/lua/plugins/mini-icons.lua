@@ -27,9 +27,10 @@ require("mini.icons").setup {
 		["typescript"] = { hl = "MiniIconsCyan" },
 		["vim"] = { glyph = "", hl = "" },
 		["qf"] = { glyph = "", hl = "" },
+		["nvim-pack"] = { glyph = "󰐱", hl = "" },
 
 		-- plugin-filetypes
-		["leetcode.nvim"] = { glyph = "󰐱", hl = "" },
+		["leetcode.nvim"] = { glyph = "󱫩", hl = "" },
 		["ccc-ui"] = { glyph = "", hl = "" },
 		["scissors-snippet"] = { glyph = "󰩫", hl = "" },
 		["rip-substitute"] = { glyph = "", hl = "" },

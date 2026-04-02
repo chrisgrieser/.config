@@ -1,6 +1,18 @@
 local M = {}
 --------------------------------------------------------------------------------
 
+---Try to require the module, but do not throw an error when one of them cannot
+---be loaded. Without this, any error in one config file would result in the
+---remaining config files not being loaded.
+---@param module string
+function M.safeRequire(module)
+	local success, errmsg = pcall(require, module)
+	if success then return end
+
+	local msg = ("Error loading `%s`: %s"):format(module, errmsg)
+	vim.notify(msg, vim.log.levels.ERROR)
+end
+
 ---Warn when there are conflicting keymaps
 ---@param mode string|string[]
 ---@param lhs string

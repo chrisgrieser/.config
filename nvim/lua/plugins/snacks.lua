@@ -553,18 +553,20 @@ do
 	end
 
 	-- picker: disable default keymaps to make the `?` help overview less cluttered
-	require("snacks.picker.config.defaults").defaults.win.input.keys = {}
-	require("snacks.picker.config.defaults").defaults.win.list.keys = {}
-	require("snacks.picker.config.sources").explorer.win.list.keys = {}
+	vim.defer_fn(function ()
+		require("snacks.picker.config.defaults").defaults.win.input.keys = {}
+		require("snacks.picker.config.defaults").defaults.win.list.keys = {}
+		require("snacks.picker.config.sources").explorer.win.list.keys = {}
 
-	-- picker: remove the numbers from `vim.ui.select`
-	local orig = require("snacks.picker.format").ui_select
-	require("snacks.picker.format").ui_select = function(o)
-		return function(item, picker)
-			local formatted = orig(o)(item, picker)
-			return vim.list_slice(formatted, 3)
+		-- picker: remove the numbers from `vim.ui.select`
+		local orig = require("snacks.picker.format").ui_select
+		require("snacks.picker.format").ui_select = function(o)
+			return function(item, picker)
+				local formatted = orig(o)(item, picker)
+				return vim.list_slice(formatted, 3)
+			end
 		end
-	end
+	end, 2000)
 end
 
 --------------------------------------------------------------------------------

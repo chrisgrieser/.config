@@ -1,13 +1,13 @@
 -- vim: foldlevel=3
 -- DOCS https://cmp.saghen.dev/configuration/reference
-vim.pack.add {
-	-- `version` required to download pre-built binary
-	{ src = "https://github.com/saghen/blink.cmp", version = vim.version.range("*") },
 
+vim.pack.add {
+	-- `version` to download pre-built binary
+	{ src = "https://github.com/saghen/blink.cmp", version = vim.version.range("*") },
 	"https://github.com/Kaiser-Yang/blink-cmp-git", -- complete git issue/PR numbers
 }
---------------------------------------------------------------------------------
 
+--------------------------------------------------------------------------------
 
 local opts = {
 	sources = {
@@ -228,4 +228,8 @@ opts = vim.tbl_deep_extend("force", opts, {
 })
 
 --------------------------------------------------------------------------------
-require("blink.cmp").setup(opts)
+vim.api.nvim_create_autocmd({ "InsertEnter", "CmdlineEnter" }, {
+	desc = "User: Lazy-load blink-cmp",
+	once = true,
+	callback = function() require("blink.cmp").setup(opts) end,
+})
