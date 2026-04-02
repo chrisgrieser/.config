@@ -33,10 +33,10 @@ function M.bufKeymap(mode, lhs, rhs, opts)
 	vim.keymap.set(mode, lhs, rhs, opts)
 end
 
----@param maps {[1]: string, [2]: string|function, mode?: string|string[], desc?: string, nowait?: boolean, ft?: string|string[]}[]
+---@param maps {[1]: string, [2]: string|function, mode?: string|string[], desc?: string, nowait?: boolean, ft?: string|string[], remap?: boolean}[]
 function M.pluginKeymaps(maps)
 	for _, map in ipairs(maps) do
-		local opts = { desc = map.desc, nowait = map.nowait }
+		local opts = { desc = map.desc, nowait = map.nowait, remap = map.remap }
 		if not map.ft then
 			M.uniqueKeymap(map[3] or "n", map[1], map[2], opts)
 		else
