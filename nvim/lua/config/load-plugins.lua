@@ -5,12 +5,10 @@
 -- * local dev with vim.pack https://www.reddit.com/r/neovim/comments/1s8cbye/the_feature_im_missing_the_most_after_migrating/
 -- * mini.icons bug
 -- * measure startup time
--- * delete unused plugins
+-- * auto-cleanup unused plugins
 
 --------------------------------------------------------------------------------
 local u = require("config.utils")
-
-vim.g.neovide_progress_bar_height = 30 -- thicker progress bar already during installs
 
 -- empty funcs to prevent errors when bisecting plugins (-> lualine / whichkey are disabled)
 vim.g.lualineAdd = function() end ---@diagnostic disable-line: duplicate-set-field

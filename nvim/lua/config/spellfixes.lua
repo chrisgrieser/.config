@@ -90,7 +90,9 @@ local spellfixes = {
 	wrod = "word",
 }
 
-for wrong, correct in pairs(spellfixes) do
-	-- `ia` = insert mode abbreviations
-	vim.keymap.set("ia", wrong, correct)
-end
+vim.schedule(function()
+	for wrong, correct in pairs(spellfixes) do
+		-- `ia` = insert mode abbreviations
+		vim.keymap.set("ia", wrong, correct)
+	end
+end)
