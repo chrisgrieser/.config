@@ -7,6 +7,8 @@ return {
 	keys = {
 		{ "ö", function() Snacks.words.jump(1, true) end, desc = "󰗲 Next reference" },
 		{ "Ö", function() Snacks.words.jump(-1, false) end, desc = "󰗲 Prev reference" },
+		{ "<leader>es", function() Snacks.scratch() end, desc = " Scratch buffer" },
+		{ "<leader>el", function() Snacks.scratch.select() end, desc = " List scratches" },
 		{
 			"<leader>oi",
 			function()

@@ -1,14 +1,15 @@
 -- vim: foldlevel=3
 -- DOCS https://cmp.saghen.dev/configuration/reference
 vim.pack.add {
-	-- version required to download pre-built binary
+	-- `version` required to download pre-built binary
 	{ src = "https://github.com/saghen/blink.cmp", version = vim.version.range("*") },
-}
 
+	"https://github.com/Kaiser-Yang/blink-cmp-git", -- complete git issue/PR numbers
+}
 --------------------------------------------------------------------------------
 
--- TODO blink.cmp.git as well
-require("blink.cmp").setup {
+
+local opts = {
 	sources = {
 		providers = {
 			lsp = {
@@ -154,8 +155,8 @@ require("blink.cmp").setup {
 							local totalLength = (#ctx.label + #ctx.label_detail)
 								+ (#ctx.label_description > 0 and #ctx.label_description + 1 or 0) -- +1 for the gap
 							local hls = {
-									-- stylua: ignore
-									{ 0, #ctx.label, group = ctx.deprecated and "BlinkCmpLabelDeprecated" or "BlinkCmpLabel" },
+								-- stylua: ignore
+								{ 0, #ctx.label, group = ctx.deprecated and "BlinkCmpLabelDeprecated" or "BlinkCmpLabel" },
 								{ #ctx.label, totalLength, group = "BlinkCmpLabelDetail" },
 							}
 
@@ -195,4 +196,36 @@ require("blink.cmp").setup {
 		},
 	},
 }
+
 --------------------------------------------------------------------------------
+
+-- `blink-cmp-git`
+require("config.utils").loadGhToken()
+opts = vim.tbl_deep_extend("force", opts, {
+	sources = {
+		default = { "lsp", "path", "snippets", "buffer", "git" },
+		per_filetype = {
+			gitcommit = { "git" },
+		},
+
+		providers = {
+			git = {
+				module = "blink-cmp-git",
+				opts = {
+					before_reload_cache = function() end, -- silence cache-reload notification
+					commit = { enable = false },
+					git_centers = {
+						github = {
+							pull_request = { enable = false },
+							mention = { enable = false },
+							issue = { get_documentation = function() return "" end }, -- disable doc window
+						},
+					},
+				},
+			},
+		},
+	},
+})
+
+--------------------------------------------------------------------------------
+require("blink.cmp").setup(opts)
