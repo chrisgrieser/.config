@@ -45,7 +45,7 @@ safeRequire("config.keybindings")
 
 safeRequire("personal-plugins.git-conflict")
 safeRequire("config.spellfixes")
-vim.schedule(function() safeRequire("personal-plugins.ui-redirect") end) -- wait for loading notification plugin
+vim.schedule(function() safeRequire("personal-plugins.messages-to-notify") end) -- wait for loading notification plugin
 
 -- PENDING neovide not setting filetype https://github.com/neovide/neovide/issues/3444
 if vim.bo.ft == "" then pcall(vim.cmd.edit) end

@@ -1,6 +1,7 @@
 -- INFO
 -- This snippet redirects cmdline messages to `vim.notify`, silencing `Press
 -- Enter to continue` prompts, even with `cmdheight=0`.
+-- Alternative with `require('vim._core.ui2')`: https://www.reddit.com/r/neovim/comments/1sa95g4/no_more_press_enter_with_ui2_with_example/
 --------------------------------------------------------------------------------
 local hasNotificationPlugin = package.loaded["nvim-notify"]
 	or package.loaded["snacks"]
