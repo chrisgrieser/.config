@@ -14,27 +14,42 @@ local u = require("config.utils")
 vim.g.lualineAdd = function() end ---@diagnostic disable-line: duplicate-set-field
 vim.g.whichkeyAddSpec = function() end ---@diagnostic disable-line: duplicate-set-field
 
+---HANDLE LOCAL PLUGINS---------------------------------------------------------
+
+-- create dummy package for `packpath`
+local dummy = vim.fn.stdpath("data") .. "/symlink-to-local-plugins/"
+vim.opt.packpath:prepend(dummy)
+vim.fn.mkdir(dummy .. "/pack/core/", "p")
+-- using `start` instead of `opt` to avoid need to call `:packadd`
+vim.uv.fs_symlink(vim.g.localRepos, dummy .. "/pack/dummy/start", { dir = true })
+
+local localPlugins = vim.iter(vim.fs.dir(vim.g.localRepos))
+	:filter(function(_name, type) return type == "directory" end)
+	:map(function(name, _type)
+		local shortName = name:gsub("%.nvim$", ""):gsub("nvim%-", "")
+		return shortName -- plugin-spec-filenames usually use short form
+	end)
+	:totable()
+
 ---AUTO-INSTALL AND LOAD--------------------------------------------------------
-
-local localPlugins = {}
-do
-	for name, type in vim.fs.dir(vim.g.localRepos) do
-		if type == "directory" then
-			local localPlugin = vim.g.localRepos .. "/" .. name
-			table.insert(localPlugins, localPlugin)
-		end
-	end
-end
-
-local pluginSpecDir = "plugins"
+local pluginSpecDir = "plugin-specs"
 local pluginSpecPath = vim.fn.stdpath("config") .. "/lua/" .. pluginSpecDir
-for name, type in vim.fs.dir(pluginSpecPath) do
+vim.iter(vim.fs.dir(pluginSpecPath)):each(function(name, type)
 	assert(not name:find("%..*%.lua"), "Filename must not contain dots due `require`: " .. name)
-	local ignore = name:find("justice")
-	if type == "file" and vim.endswith(name, ".lua") and not ignore then
-		u.safeRequire(pluginSpecDir .. "." .. name:gsub("%.lua$", ""))
+	local basename = name:gsub("%.lua$", "")
+	if type ~= "file" or not vim.endswith(name, ".lua") then return end
+	local isLocallyAvailable = vim.tbl_contains(localPlugins, basename)
+
+	if isLocallyAvailable then
+		-- HACK to load plugin config without triggering `vim.pack.add`
+		local orig, noop = vim.pack.add, function() end
+		vim.pack.add = noop
+		u.safeRequire(pluginSpecDir .. "." .. basename)
+		vim.pack.add = orig
+	else
+		u.safeRequire(pluginSpecDir .. "." .. basename)
 	end
-end
+end)
 
 ---AUTO-CLEANUP-----------------------------------------------------------------
 vim.api.nvim_create_autocmd("VimEnter", { -- VimEnter to not uninstall plugins still installing

@@ -7,7 +7,7 @@ vim.pack.add {
 
 ---@type snacks.Config
 local opts = {}
-local helpers = require("config.snacks-helpers")
+local helpers = require("personal-plugins.snacks-helpers")
 --------------------------------------------------------------------------------
 
 opts.input = {
