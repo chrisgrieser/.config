@@ -6,8 +6,6 @@
 -- TODO
 -- * local dev with vim.pack https://www.reddit.com/r/neovim/comments/1s8cbye/the_feature_im_missing_the_most_after_migrating/
 -- * mini.icons bug
--- * measure startup time
--- * auto-cleanup unused plugins
 -- * \e[1;31m
 
 --------------------------------------------------------------------------------
@@ -17,6 +15,7 @@ local u = require("config.utils")
 vim.g.lualineAdd = function() end ---@diagnostic disable-line: duplicate-set-field
 vim.g.whichkeyAddSpec = function() end ---@diagnostic disable-line: duplicate-set-field
 
+---AUTO-INSTALL-----------------------------------------------------------------
 local pluginDir = "plugins"
 local pluginPath = vim.fn.stdpath("config") .. "/lua/" .. pluginDir
 
@@ -27,16 +26,25 @@ for name, type in vim.fs.dir(pluginPath) do
 	end
 end
 
+---AUTO-CLEANUP-----------------------------------------------------------------
+vim.defer_fn(function()
+	local outdatedPlugins = vim.iter(vim.pack.get())
+		:filter(function(x) return not x.active end)
+		:map(function(x) return x.spec.name end)
+		:totable()
+	if #outdatedPlugins == 0 then return end
+	vim.pack.del(outdatedPlugins)
+end, 500)
+
 ---GLOBAL KEYMAPS---------------------------------------------------------------
 
-u.uniqueKeymap(
-	"n",
-	"<leader>pl",
-	function() vim.pack.update(nil, { offline = true }) end,
-	{ desc = "󰐱 List plugins" }
-)
+u.uniqueKeymap("n", "<leader>pl", function()
+	local plugData = vim.pack.get()
+	local allPlugins = vim.iter(plugData):map(function(x) return "* " .. x.spec.name end):join("\n")
+	vim.notify(allPlugins, nil, { title = #plugData .. " plugins", icon = "󰐱", timeout = false })
+end, { desc = "󰐱 List plugins" })
+
 u.uniqueKeymap("n", "<leader>pL", function()
-	Chainsaw("aaaaaaa") -- 🪚
 	vim.cmd.edit(vim.fn.stdpath("log") .. "/nvim-pack.log")
 	vim.schedule(function()
 		vim.bo.filetype = "nvim-pack"
@@ -44,12 +52,14 @@ u.uniqueKeymap("n", "<leader>pL", function()
 		vim.fn.search("========== Update", "b") -- goto last update
 	end)
 end, { desc = "󰐱 Log of updated plugins" })
+
 u.uniqueKeymap(
 	"n",
 	"<leader>pr",
 	function() vim.pack.update(nil, { offline = true, target = "lockfile" }) end,
 	{ desc = "󰐱 Restore from lockfile" }
 )
+
 u.uniqueKeymap(
 	"n",
 	"<leader>pp",

@@ -84,7 +84,7 @@ opts.notifier = {
 	timeout = 7500,
 	sort = { "added" }, -- sort only by time
 	width = { min = 12, max = 0.45 },
-	height = { min = 1, max = 0.65 },
+	height = { min = 1, max = 0.8 },
 	icons = { error = "󰅚", warn = "", info = "󰋽", debug = "󰃤", trace = "󰓗" },
 	top_down = false,
 }
@@ -549,11 +549,12 @@ do
 		if ignore then return end
 
 		if vim.startswith(msg, "[nvim-treesitter/") then notiOpts = { id = "treesitter-update" } end
+		msg = msg:gsub("^vim%.pack: ", "[vim.pack] ")
 		Snacks.notifier(msg, lvl, notiOpts)
 	end
 
 	-- picker: disable default keymaps to make the `?` help overview less cluttered
-	vim.defer_fn(function ()
+	vim.defer_fn(function()
 		require("snacks.picker.config.defaults").defaults.win.input.keys = {}
 		require("snacks.picker.config.defaults").defaults.win.list.keys = {}
 		require("snacks.picker.config.sources").explorer.win.list.keys = {}
@@ -609,7 +610,11 @@ require("config.utils").pluginKeymaps {
 	{ "go", helpers.betterFileOpen, desc = " Open files" },
 	{ "gn", function() helpers.betterFileOpen(vim.g.notesDir) end, desc = " Notes" },
 	{ "gP", helpers.browseProject, desc = " Project" },
-	{ "g,", function() helpers.betterFileOpen(vim.fn.stdpath("config")) end, desc = " nvim config" },
+	{
+		"g,",
+		function() helpers.betterFileOpen(vim.fn.stdpath("config")) end,
+		desc = " nvim config",
+	},
 	{
 		"gr",
 		function() Snacks.picker.recent() end,
@@ -664,6 +669,7 @@ require("config.utils").pluginKeymaps {
 
 	-- `lsp_symbols` tends to too much clutter like anonymous function
 	{ "gs", function() Snacks.picker.treesitter() end, desc = "󰐅 Treesitter symbols" },
+	{ "gs", function() Snacks.picker.lsp_symbols() end, desc = " LSP symbols", ft = "nvim-pack" },
 
 	-- git
 	{ "<leader>ga", function() Snacks.picker.git_diff() end, desc = "󰐖 Hunks" },
