@@ -77,11 +77,6 @@ require("chainsaw").setup {
 	},
 }
 --------------------------------------------------------------------------------
--- lazyload `nvim-chainsaw` only when `Chainsaw` function is called
-_G.Chainsaw = function(name) ---@diagnostic disable-line: duplicate-set-field intentional overwrite
-	require("chainsaw") -- loading nvim-chainsaw will override `_G.Chainsaw`
-	Chainsaw(name) -- call original function
-end
 
 -- disable LSP diagnostic for `Chainsaw`
 vim.lsp.config("lua_ls", {
