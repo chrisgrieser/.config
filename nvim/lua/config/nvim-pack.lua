@@ -64,7 +64,18 @@ local function openCommitOrIssue()
 		return
 	end
 
-	local row, col = unpack(vim.api.nvim_win_get_cursor(0))
+	local row = vim.api.nvim_win_get_cursor(0)[1]
+	local repoLine
+	while row > 1 do
+		repoLine = vim.api.nvim_buf_get_lines(0, row - 2, row - 1, false)[1]
+		if vim.startswith(repoLine, "Source: ") then break end
+		row = row - 1
+	end
+	if not repoLine then error("No source line found.") end
+	local repo = repoLine:match("Source: *(%S+)")
+	-- https://github.com/nvim-treesitter/nvim-treesitter/issues/8609
+	local url = repo .. (issue and "/issues/" .. issue or "")
+	vim.fn.jobstart({ "open", url }, { detach = true })
 end
 
 vim.api.nvim_create_autocmd("FileType", {

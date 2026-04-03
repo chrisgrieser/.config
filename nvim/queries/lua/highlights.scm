@@ -14,7 +14,7 @@
   (#set! priority 130))
 
 ((identifier) @keyword.return
-  (#eq? @keyword.return "assert")
+  (#any-of? @keyword.return "assert" "error")
   (#set! priority 130))
 
 ((goto_statement) @keyword.return ; for `goto continue` (pseudo continue-statement)
