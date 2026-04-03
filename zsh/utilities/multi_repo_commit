@@ -5,16 +5,17 @@ github_username="chrisgrieser"
 # set -e
 
 # repo_names="alfred|shimmering-obsidian|gitfred"
-# repo_names="nvim"
+repo_names="nvim"
 # repo_names="obsidian-quadro|pseudometa-obsidian-plugin-template|grappling-hook|obsidian-proofreader"
 # ALL
-repo_names="shimmering-focus|finder-vim-mode|zsh-magic-dashboard|nvim|alfred|shimmering-obsidian|gitfred|obsidian-quadro|pseudometa-obsidian-plugin-template|grappling-hook|obsidian-proofreader"
+# repo_names="shimmering-focus|finder-vim-mode|zsh-magic-dashboard|nvim|alfred|shimmering-obsidian|gitfred|obsidian-quadro|pseudometa-obsidian-plugin-template|grappling-hook|obsidian-proofreader"
 
 function actions_in_repo {
-	git apply "$HOME"/Desktop/patchB
+	cp -f "$HOME/Desktop/.emmyrc.json" ./
+	cp -f "$HOME/Desktop/.luarc.jsonc" ./
 }
 
-commit_msg="docs: update sponsorship info"
+commit_msg="chore: update emmyrc/luarc for nvim 0.12 (uv now included in VIMRUNTIME)"
 
 amend="false" # no-edit|only-message|false
 

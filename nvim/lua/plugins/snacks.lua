@@ -634,7 +634,7 @@ require("config.utils").pluginKeymaps {
 		function()
 			Snacks.picker.files {
 				title = "󰈮 Local plugins",
-				cwd = vim.fn.stdpath("data") .. "/lazy",
+				cwd = vim.fn.stdpath("data") .. "/site/pack/core/opt",
 				exclude = { "*/tests/*", "*.toml", "*.tmux", "*.txt" },
 				matcher = { filename_bonus = false }, -- folder more important here
 				formatters = { file = { filename_first = false } },

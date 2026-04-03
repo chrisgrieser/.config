@@ -1,4 +1,6 @@
--- DOCS https://echasnovski.com/blog/2026-03-13-a-guide-to-vim-pack#many-vim-pack-add
+-- DOCS
+-- https://neovim.io/doc/user/pack/#vim.pack
+-- https://echasnovski.com/blog/2026-03-13-a-guide-to-vim-pack#many-vim-pack-add
 --------------------------------------------------------------------------------
 
 -- TODO
@@ -6,6 +8,7 @@
 -- * mini.icons bug
 -- * measure startup time
 -- * auto-cleanup unused plugins
+-- * \e[1;31m
 
 --------------------------------------------------------------------------------
 local u = require("config.utils")
@@ -27,20 +30,51 @@ end
 ---GLOBAL KEYMAPS---------------------------------------------------------------
 u.uniqueKeymap(
 	"n",
-	"<leader>pl",
+	"<leader>pL",
 	function() vim.ui.open(vim.fn.stdpath("log") .. "/nvim-pack.log") end,
 	{ desc = "󰐱 Log of updated plugins" }
 )
-u.uniqueKeymap("n", "<leader>pp", function() vim.pack.update() end, { desc = "󰐱 Update plugins" })
+u.uniqueKeymap(
+	"n",
+	"<leader>pl",
+	function() vim.pack.update(nil, { offline = true }) end,
+	{ desc = "󰐱 List plugins" }
+)
+u.uniqueKeymap(
+	"n",
+	"<leader>pr",
+	function() vim.pack.update(nil, { offline = true, target = "lockfile" }) end,
+	{ desc = "󰐱 Restore from lockfile" }
+)
+u.uniqueKeymap(
+	"n",
+	"<leader>pp",
+	function() vim.pack.update() end,
+	{ desc = "󰐱 Update plugins" }
+)
 
 ---NVIM-PACK WINDOW KEYMAPS-----------------------------------------------------
+
+local function openCommitOrIssue()
+	local curLine = vim.api.nvim_get_current_line()
+	local issue = curLine:match("#(%d+)")
+	local commit = curLine:match("^> (%x+) ")
+	if not issue and not commit then
+		vim.notify("No commit or issue on current line.", vim.log.levels.WARN)
+		return
+	end
+
+	local row, col = unpack(vim.api.nvim_win_get_cursor(0))
+end
+
 vim.api.nvim_create_autocmd("FileType", {
 	desc = "User: nvim-pack keymaps",
 	pattern = "nvim-pack",
 	callback = function()
-		u.bufKeymap("n", "q", vim.cmd.quit)
-		u.bufKeymap("n", "<CR>", vim.cmd.write, { desc = "󰐱 Confirm update" })
+		u.bufKeymap("n", "q", vim.cmd.quit, { desc = "󰐱 Quit" })
+		u.bufKeymap("n", "<D-CR>", vim.cmd.write, { desc = "󰐱 Confirm update" })
 		u.bufKeymap("n", "<C-j>", "]]", { remap = true, desc = "󰐱 Next plugin" })
 		u.bufKeymap("n", "<C-k>", "[[", { remap = true, desc = "󰐱 Previous plugin" })
+		u.bufKeymap("n", "gi", openCommitOrIssue, { desc = "󰐱 Open commit or issue" })
 	end,
 })
