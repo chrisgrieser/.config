@@ -28,21 +28,21 @@ for name, type in vim.fs.dir(pluginPath) do
 end
 
 ---GLOBAL KEYMAPS---------------------------------------------------------------
-u.uniqueKeymap(
-	"n",
-	"<leader>pL",
-	function()
-		vim.cmd.edit(vim.fn.stdpath("log") .. "/nvim-pack.log")
 
-	end,
-	{ desc = "󰐱 Log of updated plugins" }
-)
 u.uniqueKeymap(
 	"n",
 	"<leader>pl",
 	function() vim.pack.update(nil, { offline = true }) end,
 	{ desc = "󰐱 List plugins" }
 )
+u.uniqueKeymap("n", "<leader>pL", function()
+	vim.cmd.edit(vim.fn.stdpath("log") .. "/nvim-pack.log")
+	vim.schedule(function()
+		vim.bo.filetype = "nvim-pack"
+		vim.cmd.normal { "G", bang = true } -- bottom of file
+		vim.fn.search("========== Update", "b") -- goto last update
+	end)
+end, { desc = "󰐱 Log of updated plugins" })
 u.uniqueKeymap(
 	"n",
 	"<leader>pr",
@@ -84,20 +84,10 @@ vim.api.nvim_create_autocmd("FileType", {
 	desc = "User: nvim-pack keymaps",
 	pattern = "nvim-pack",
 	callback = function()
-		u.bufKeymap("n", "q", vim.cmd.quit, { desc = "󰐱 Quit" })
+		u.bufKeymap("n", "q", vim.cmd.close, { desc = "󰐱 Quit" })
 		u.bufKeymap("n", "<D-CR>", vim.cmd.write, { desc = "󰐱 Confirm update" })
 		u.bufKeymap("n", "<C-j>", "]]", { remap = true, desc = "󰐱 Next plugin" })
 		u.bufKeymap("n", "<C-k>", "[[", { remap = true, desc = "󰐱 Previous plugin" })
 		u.bufKeymap("n", "gi", openCommitOrIssue, { desc = "󰐱 Open commit or issue" })
-	end,
-})
-
-vim.api.nvim_create_autocmd("FileType", {
-	desc = "User: nvim-pack log filetype",
-	pattern = "log",
-	callback = function(ctx)
-		if ctx.file == vim.fn.stdpath("log") .. "/nvim-pack.log" then
-			vim.bo[ctx.buf].filetype = "nvim-pack"
-		end
 	end,
 })
