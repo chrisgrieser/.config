@@ -4,26 +4,25 @@
 --------------------------------------------------------------------------------
 
 -- TODO
--- * local dev with vim.pack https://www.reddit.com/r/neovim/comments/1s8cbye/the_feature_im_missing_the_most_after_migrating/
 -- * mini.icons bug
 -- * \e[1;31m
 
 --------------------------------------------------------------------------------
 local u = require("config.utils")
 
--- empty funcs to prevent errors when bisecting plugins (-> lualine / whichkey are disabled)
+-- empty funcs to prevent errors when bisecting plugins (-> lualine/whichkey are disabled)
 vim.g.lualineAdd = function() end ---@diagnostic disable-line: duplicate-set-field
 vim.g.whichkeyAddSpec = function() end ---@diagnostic disable-line: duplicate-set-field
 
 ---AUTO-INSTALL AND LOAD--------------------------------------------------------
 
-local pluginInstallPath = vim.fn.stdpath("data") .. "/site/pack/core/opt"
-for name, type in vim.fs.dir(vim.g.localRepos) do
-	if type == "directory" then
-		local localPlugin = vim.g.localRepos .. "/" .. name
-		local managedPlugin = pluginInstallPath .. "/" .. name
-		local out = vim.uv.fs_symlink(localPlugin, managedPlugin, { dir = true })
-		vim.defer_fn(function() vim.notify(out) end, 1000)
+local localPlugins = {}
+do
+	for name, type in vim.fs.dir(vim.g.localRepos) do
+		if type == "directory" then
+			local localPlugin = vim.g.localRepos .. "/" .. name
+			table.insert(localPlugins, localPlugin)
+		end
 	end
 end
 
@@ -31,24 +30,27 @@ local pluginSpecDir = "plugins"
 local pluginSpecPath = vim.fn.stdpath("config") .. "/lua/" .. pluginSpecDir
 for name, type in vim.fs.dir(pluginSpecPath) do
 	assert(not name:find("%..*%.lua"), "Filename must not contain dots due `require`: " .. name)
-	if type == "file" and vim.endswith(name, ".lua") then
+	local ignore = name:find("justice")
+	if type == "file" and vim.endswith(name, ".lua") and not ignore then
 		u.safeRequire(pluginSpecDir .. "." .. name:gsub("%.lua$", ""))
 	end
 end
 
 ---AUTO-CLEANUP-----------------------------------------------------------------
-vim.defer_fn(function()
-	local outdatedPlugins = vim.iter(vim.pack.get())
-		:filter(function(x) return not x.active end)
-		:map(function(x) return x.spec.name end)
-		:totable()
-	if #outdatedPlugins == 0 then return end
-	if (#outdatedPlugins > 10) then
-		vim.notify ("Not uninstalling more than 10 plugins at once.", vim.log.levels.DEBUG)
-		return
-	end
-	vim.pack.del(outdatedPlugins)
-end, 1000)
+vim.api.nvim_create_autocmd("VimEnter", { -- VimEnter to not uninstall plugins still installing
+	desc = "User: auto-cleanup unused plugins",
+	callback = function()
+		vim.defer_fn(function()
+			local outdatedPlugins = vim.iter(vim.pack.get())
+				:filter(function(x) return not x.active end)
+				:map(function(x) return x.spec.name end)
+				:totable()
+			if #outdatedPlugins == 0 then return end
+			assert(#outdatedPlugins <= 10, "Not uninstalling more than 10 plugins at once.")
+			vim.pack.del(outdatedPlugins)
+		end, 1000)
+	end,
+})
 
 ---GLOBAL KEYMAPS---------------------------------------------------------------
 u.uniqueKeymap("n", "<leader>pl", function()

@@ -17,12 +17,18 @@
       "rev": "944ef13cc8d8fe8b846c91f36041c8dfb85ca000",
       "src": "https://github.com/lewis6991/gitsigns.nvim"
     },
-    "lualine.nvim": [],
+    "lualine.nvim": {
+      "rev": "47f91c416daef12db467145e16bed5bbfe00add8",
+      "src": "https://github.com/nvim-lualine/lualine.nvim"
+    },
     "mason.nvim": {
       "rev": "44d1e90e1f66e077268191e3ee9d2ac97cc18e65",
       "src": "https://github.com/mason-org/mason.nvim"
     },
-    "mini.icons": [],
+    "mini.icons": {
+      "rev": "7fdae2443a0e2910015ca39ad74b50524ee682d3",
+      "src": "https://github.com/nvim-mini/mini.icons"
+    },
     "mini.operators": {
       "rev": "fccb5e3ef0cc319b217ed9c7db1a4672dd6b766c",
       "src": "https://github.com/nvim-mini/mini.operators"
@@ -42,10 +48,6 @@
     "nvim-genghis": {
       "rev": "d5b697f791173a99b13665c90ca08ddc1ab8b1f1",
       "src": "https://github.com/chrisgrieser/nvim-genghis"
-    },
-    "nvim-justice": {
-      "rev": "c0148ac407560dba56c43e660fe239cd5f59ceb8",
-      "src": "https://github.com/chrisgrieser/nvim-justice"
     },
     "nvim-lsp-endhints": {
       "rev": "85d072ab00ada2b0eeb738c76b11580cf74faf13",

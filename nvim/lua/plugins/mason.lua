@@ -168,7 +168,11 @@ require("mason").setup {
 }
 
 enableLsps()
-vim.defer_fn(syncPackages, 2000)
+
+vim.api.nvim_create_autocmd("VimEnter", {
+	desc = "User: sync mason packages",
+	callback = function() vim.defer_fn(syncPackages, 2000) end,
+})
 
 require("config.utils").pluginKeymaps {
 	{ "<leader>pm", vim.cmd.Mason, desc = " Mason home" },
