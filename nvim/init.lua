@@ -22,7 +22,7 @@ local sRequire = require("config.utils").safeRequire
 sRequire("config.options") -- before plugins, so they are available for them
 sRequire("config.neovide-gui-settings")
 
-sRequire("config.load-plugins")
+sRequire("config.nvim-pack")
 sRequire("config.colorscheme")
 
 sRequire("config.autocmds")

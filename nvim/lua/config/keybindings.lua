@@ -33,14 +33,6 @@ keymap(
 	{ desc = "󰝰 Local data dir" }
 )
 
-keymap(
-	"n",
-	"<leader>pl",
-	function() vim.ui.open(vim.fn.stdpath("log") .. "/nvim-pack.log") end,
-	{ desc = "󰐱 Log of updated plugins" }
-)
-keymap("n", "<leader>pp", function() vim.pack.update() end, { desc = "󰐱 Update plugins" })
-
 ---NAVIGATION-------------------------------------------------------------------
 -- make mappings work on wrapped lines as well
 keymap({ "n", "x" }, "j", "gj")

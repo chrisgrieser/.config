@@ -24,12 +24,23 @@ for name, type in vim.fs.dir(pluginPath) do
 	end
 end
 
----NVIM-PACK KEYMAPS------------------------------------------------------------
+---GLOBAL KEYMAPS---------------------------------------------------------------
+u.uniqueKeymap(
+	"n",
+	"<leader>pl",
+	function() vim.ui.open(vim.fn.stdpath("log") .. "/nvim-pack.log") end,
+	{ desc = "󰐱 Log of updated plugins" }
+)
+u.uniqueKeymap("n", "<leader>pp", function() vim.pack.update() end, { desc = "󰐱 Update plugins" })
+
+---NVIM-PACK WINDOW KEYMAPS-----------------------------------------------------
 vim.api.nvim_create_autocmd("FileType", {
 	desc = "User: nvim-pack keymaps",
 	pattern = "nvim-pack",
 	callback = function()
 		u.bufKeymap("n", "q", vim.cmd.quit)
-		u.bufKeymap("n", "<D-s>", vim.cmd.write) -- = confirm update
+		u.bufKeymap("n", "<CR>", vim.cmd.write, { desc = "󰐱 Confirm update" })
+		u.bufKeymap("n", "<C-j>", "]]", { remap = true, desc = "󰐱 Next plugin" })
+		u.bufKeymap("n", "<C-k>", "[[", { remap = true, desc = "󰐱 Previous plugin" })
 	end,
 })
