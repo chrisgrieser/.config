@@ -30,7 +30,7 @@
       "src": "https://github.com/echasnovski/mini.icons"
     },
     "mini.operators": {
-      "rev": "65bc941bca46fb3f33bb2fdcc7b67417fb474a10",
+      "rev": "fccb5e3ef0cc319b217ed9c7db1a4672dd6b766c",
       "src": "https://github.com/nvim-mini/mini.operators"
     },
     "neocodeium": {
@@ -72,6 +72,10 @@
     "nvim-rulebook": {
       "rev": "4c20ae78964cbf25333c0af141f9231c93b27566",
       "src": "https://github.com/chrisgrieser/nvim-rulebook"
+    },
+    "nvim-scissors": {
+      "rev": "9d22ecef2d019a72748f23cec9db32c7f7b222d2",
+      "src": "https://github.com/chrisgrieser/nvim-scissors"
     },
     "nvim-spider": {
       "rev": "af2f73ffd62e61a091b3503845b7704d76d81d95",

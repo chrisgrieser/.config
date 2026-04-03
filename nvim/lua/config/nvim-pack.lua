@@ -15,12 +15,14 @@ local u = require("config.utils")
 vim.g.lualineAdd = function() end ---@diagnostic disable-line: duplicate-set-field
 vim.g.whichkeyAddSpec = function() end ---@diagnostic disable-line: duplicate-set-field
 
----AUTO-INSTALL-----------------------------------------------------------------
+---AUTO-INSTALL AND LOAD--------------------------------------------------------
 local pluginDir = "plugins"
 local pluginPath = vim.fn.stdpath("config") .. "/lua/" .. pluginDir
 
+-- vim.opt.packpath:prepend(pluginPath)
+
 for name, type in vim.fs.dir(pluginPath) do
-	assert(not name:find("%..*%.lua"), "filename must not contain dots due `require`: " .. name)
+	assert(not name:find("%..*%.lua"), "Filename must not contain dots due `require`: " .. name)
 	if type == "file" and vim.endswith(name, ".lua") then
 		u.safeRequire(pluginDir .. "." .. name:gsub("%.lua$", ""))
 	end
@@ -34,10 +36,9 @@ vim.defer_fn(function()
 		:totable()
 	if #outdatedPlugins == 0 then return end
 	vim.pack.del(outdatedPlugins)
-end, 500)
+end, 1000)
 
 ---GLOBAL KEYMAPS---------------------------------------------------------------
-
 u.uniqueKeymap("n", "<leader>pl", function()
 	local plugData = vim.pack.get()
 	local allPlugins = vim.iter(plugData):map(function(x) return "* " .. x.spec.name end):join("\n")
@@ -51,7 +52,7 @@ u.uniqueKeymap("n", "<leader>pL", function()
 		vim.cmd.normal { "G", bang = true } -- bottom of file
 		vim.fn.search("========== Update", "b") -- goto last update
 	end)
-end, { desc = "󰐱 Log of updated plugins" })
+end, { desc = "󰐱 Log of updates" })
 
 u.uniqueKeymap(
 	"n",
@@ -68,7 +69,6 @@ u.uniqueKeymap(
 )
 
 ---NVIM-PACK WINDOW KEYMAPS-----------------------------------------------------
-
 local function openCommitOrIssue()
 	local curLine = vim.api.nvim_get_current_line()
 	local issue = curLine:match("#(%d+)")

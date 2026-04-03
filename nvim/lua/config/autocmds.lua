@@ -63,10 +63,8 @@ vim.api.nvim_create_autocmd("FocusLost", {
 	once = true,
 	callback = function()
 		if jit.os ~= "OSX" then return end -- using macOS commands
-		if os.date("%a") == "Mon" then
-			vim.system { "find", vim.o.undodir, "-mtime", "+30d", "-delete" }
-			vim.system { "find", vim.lsp.log.get_filename(), "-size", "+20M", "-delete" }
-		end
+		vim.system { "find", vim.o.undodir, "-mtime", "+30d", "-delete" }
+		vim.system { "find", vim.lsp.log.get_filename(), "-size", "+20M", "-delete" }
 	end,
 })
 
