@@ -16,23 +16,23 @@ vim.g.lualineAdd = function() end ---@diagnostic disable-line: duplicate-set-fie
 vim.g.whichkeyAddSpec = function() end ---@diagnostic disable-line: duplicate-set-field
 
 ---AUTO-INSTALL AND LOAD--------------------------------------------------------
-local pluginDir = "plugins"
-local pluginPath = vim.fn.stdpath("config") .. "/lua/" .. pluginDir
 
+local pluginInstallPath = vim.fn.stdpath("data") .. "/site/pack/core/opt"
 for name, type in vim.fs.dir(vim.g.localRepos) do
 	if type == "directory" then
 		local localPlugin = vim.g.localRepos .. "/" .. name
-		local managedPlugin = pluginPath .. "/" .. name
-		vim.defer_fn(function() vim.notify(managedPlugin) end, 1000)
-		vim.fn.delete(managedPlugin, "rf")
-		vim.uv.fs_symlink(localPlugin, managedPlugin)
+		local managedPlugin = pluginInstallPath .. "/" .. name
+		local out = vim.uv.fs_symlink(localPlugin, managedPlugin, { dir = true })
+		vim.defer_fn(function() vim.notify(out) end, 1000)
 	end
 end
 
-for name, type in vim.fs.dir(pluginPath) do
+local pluginSpecDir = "plugins"
+local pluginSpecPath = vim.fn.stdpath("config") .. "/lua/" .. pluginSpecDir
+for name, type in vim.fs.dir(pluginSpecPath) do
 	assert(not name:find("%..*%.lua"), "Filename must not contain dots due `require`: " .. name)
 	if type == "file" and vim.endswith(name, ".lua") then
-		u.safeRequire(pluginDir .. "." .. name:gsub("%.lua$", ""))
+		u.safeRequire(pluginSpecDir .. "." .. name:gsub("%.lua$", ""))
 	end
 end
 
@@ -43,6 +43,10 @@ vim.defer_fn(function()
 		:map(function(x) return x.spec.name end)
 		:totable()
 	if #outdatedPlugins == 0 then return end
+	if (#outdatedPlugins > 10) then
+		vim.notify ("Not uninstalling more than 10 plugins at once.", vim.log.levels.DEBUG)
+		return
+	end
 	vim.pack.del(outdatedPlugins)
 end, 1000)
 

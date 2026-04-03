@@ -5,6 +5,8 @@ require("config.utils").pluginKeymaps {
 	{ "<leader>j", function() require("justice").select() end, desc = "󰖷 Just" },
 }
 
+if true then return end
+
 require("justice").setup {
 	recipeModes = {
 		terminal = {
