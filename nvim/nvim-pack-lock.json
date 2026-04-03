@@ -18,7 +18,7 @@
       "src": "https://github.com/lewis6991/gitsigns.nvim"
     },
     "lualine.nvim": {
-      "rev": "47f91c416daef12db467145e16bed5bbfe00add8",
+      "rev": "b527db98c89d9b548b442d9371b4e25e114ee507",
       "src": "https://github.com/nvim-lualine/lualine.nvim"
     },
     "mason.nvim": {
@@ -48,6 +48,10 @@
     "nvim-genghis": {
       "rev": "d5b697f791173a99b13665c90ca08ddc1ab8b1f1",
       "src": "https://github.com/chrisgrieser/nvim-genghis"
+    },
+    "nvim-justice": {
+      "rev": "c0148ac407560dba56c43e660fe239cd5f59ceb8",
+      "src": "https://github.com/chrisgrieser/nvim-justice"
     },
     "nvim-lsp-endhints": {
       "rev": "85d072ab00ada2b0eeb738c76b11580cf74faf13",

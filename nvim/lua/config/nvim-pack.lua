@@ -1,12 +1,6 @@
 -- DOCS
 -- https://neovim.io/doc/user/pack/#vim.pack
--- https://echasnovski.com/blog/2026-03-13-a-guide-to-vim-pack#many-vim-pack-add
---------------------------------------------------------------------------------
-
--- TODO
--- * mini.icons bug
--- * \e[1;31m
-
+-- https://echasnovski.com/blog/2026-03-13-a-guide-to-vim-pack
 --------------------------------------------------------------------------------
 local u = require("config.utils")
 
@@ -20,8 +14,11 @@ vim.g.whichkeyAddSpec = function() end ---@diagnostic disable-line: duplicate-se
 local dummy = vim.fn.stdpath("data") .. "/symlink-to-local-plugins/"
 vim.opt.packpath:prepend(dummy)
 vim.fn.mkdir(dummy .. "/pack/core/", "p")
--- using `start` instead of `opt` to avoid need to call `:packadd`
-vim.uv.fs_symlink(vim.g.localRepos, dummy .. "/pack/dummy/start", { dir = true })
+vim.uv.fs_symlink(
+	vim.g.localRepos,
+	dummy .. "/pack/core/start", -- `start` instead of `opt` to not need to call `:packadd`
+	{ dir = true }
+)
 
 local localPlugins = vim.iter(vim.fs.dir(vim.g.localRepos))
 	:filter(function(_name, type) return type == "directory" end)
@@ -46,6 +43,10 @@ vim.iter(vim.fs.dir(pluginSpecPath)):each(function(name, type)
 		vim.pack.add = noop
 		u.safeRequire(pluginSpecDir .. "." .. basename)
 		vim.pack.add = orig
+		vim.schedule(function()
+			local msg = ("[%s] loaded from local repo."):format(basename)
+			vim.notify(msg, nil, { title = "nvim-pack", icon = "󰐱" })
+		end)
 	else
 		u.safeRequire(pluginSpecDir .. "." .. basename)
 	end
@@ -69,9 +70,9 @@ vim.api.nvim_create_autocmd("VimEnter", { -- VimEnter to not uninstall plugins s
 
 ---GLOBAL KEYMAPS---------------------------------------------------------------
 u.uniqueKeymap("n", "<leader>pl", function()
-	local plugData = vim.pack.get()
-	local allPlugins = vim.iter(plugData):map(function(x) return "* " .. x.spec.name end):join("\n")
-	vim.notify(allPlugins, nil, { title = #plugData .. " plugins", icon = "󰐱", timeout = false })
+	local data = vim.pack.get()
+	local all = vim.iter(data):map(function(x) return "* " .. x.spec.name end):join("\n")
+	vim.notify(all, nil, { title = #data .. " plugins (nvim-pack)", icon = "󰐱", timeout = false })
 end, { desc = "󰐱 List plugins" })
 
 u.uniqueKeymap("n", "<leader>pL", function()
