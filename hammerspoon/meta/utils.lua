@@ -66,7 +66,7 @@ function M.writeToFile(filePath, str, append)
 		file:write(str)
 		file:close()
 	else
-		print("Error:", err)
+		print("Error writing to file:", err)
 	end
 end
 

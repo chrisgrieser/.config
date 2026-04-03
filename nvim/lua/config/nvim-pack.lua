@@ -24,7 +24,7 @@ local localPlugins = vim.iter(vim.fs.dir(vim.g.localRepos))
 	:filter(function(_name, type) return type == "directory" end)
 	:map(function(name, _type)
 		local shortName = name:gsub("%.nvim$", ""):gsub("nvim%-", "")
-		return shortName -- plugin-spec-filenames usually use short form
+		return shortName -- my plugin-spec-filenames use short form
 	end)
 	:totable()
 
@@ -58,8 +58,8 @@ vim.api.nvim_create_autocmd("VimEnter", { -- VimEnter to not uninstall plugins s
 	callback = function()
 		vim.defer_fn(function()
 			local outdatedPlugins = vim.iter(vim.pack.get())
-				:filter(function(x) return not x.active end)
-				:map(function(x) return x.spec.name end)
+				:filter(function(p) return not p.active end)
+				:map(function(p) return p.spec.name end)
 				:totable()
 			if #outdatedPlugins == 0 then return end
 			assert(#outdatedPlugins <= 10, "Not uninstalling more than 10 plugins at once.")
@@ -71,7 +71,7 @@ vim.api.nvim_create_autocmd("VimEnter", { -- VimEnter to not uninstall plugins s
 ---GLOBAL KEYMAPS---------------------------------------------------------------
 u.uniqueKeymap("n", "<leader>pl", function()
 	local data = vim.pack.get()
-	local all = vim.iter(data):map(function(x) return "* " .. x.spec.name end):join("\n")
+	local all = vim.iter(data):map(function(p) return "* " .. p.spec.name end):join("\n")
 	vim.notify(all, nil, { title = #data .. " plugins (nvim-pack)", icon = "󰐱", timeout = false })
 end, { desc = "󰐱 List plugins" })
 
