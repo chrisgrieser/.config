@@ -19,7 +19,15 @@ vim.g.whichkeyAddSpec = function() end ---@diagnostic disable-line: duplicate-se
 local pluginDir = "plugins"
 local pluginPath = vim.fn.stdpath("config") .. "/lua/" .. pluginDir
 
--- vim.opt.packpath:prepend(pluginPath)
+for name, type in vim.fs.dir(vim.g.localRepos) do
+	if type == "directory" then
+		local localPlugin = vim.g.localRepos .. "/" .. name
+		local managedPlugin = pluginPath .. "/" .. name
+		vim.defer_fn(function() vim.notify(managedPlugin) end, 1000)
+		vim.fn.delete(managedPlugin, "rf")
+		vim.uv.fs_symlink(localPlugin, managedPlugin)
+	end
+end
 
 for name, type in vim.fs.dir(pluginPath) do
 	assert(not name:find("%..*%.lua"), "Filename must not contain dots due `require`: " .. name)

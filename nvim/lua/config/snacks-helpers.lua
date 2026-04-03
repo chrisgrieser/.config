@@ -50,10 +50,7 @@ function M.ensureLuarcForScratch()
 	vim.fn.mkdir(scratchRoot, "p")
 	local luarc = io.open(scratchRoot .. "/.luarc.jsonc", "w")
 	assert(luarc, "Could not create luarc for lua scratch")
-	luarc:write([[ {
-	"runtime.version": "LuaJIT",
-	"workspace.library": ["$VIMRUNTIME/lua", "${3rd}/luv/library"]
-} ]])
+	luarc:write('{ "runtime.version": "LuaJIT", "workspace.library": ["$VIMRUNTIME/lua"] }')
 	luarc:close()
 end
 
