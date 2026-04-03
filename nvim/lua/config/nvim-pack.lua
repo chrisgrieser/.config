@@ -126,7 +126,7 @@ vim.api.nvim_create_autocmd("FileType", {
 	pattern = "nvim-pack",
 	callback = function()
 		u.bufKeymap("n", "q", vim.cmd.bdelete, { desc = "󰐱 Quit" })
-		u.bufKeymap("n", "<D-CR>", vim.cmd.write, { desc = "󰐱 Confirm update" })
+		u.bufKeymap("n", "<CR>", vim.cmd.write, { desc = "󰐱 Confirm update" })
 		u.bufKeymap("n", "<C-j>", "]]", { remap = true, desc = "󰐱 Next plugin" })
 		u.bufKeymap("n", "<C-k>", "[[", { remap = true, desc = "󰐱 Previous plugin" })
 		u.bufKeymap("n", "gi", openCommitOrIssue, { desc = "󰐱 Open commit or issue" })
