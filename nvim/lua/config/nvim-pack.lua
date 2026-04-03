@@ -31,7 +31,10 @@ end
 u.uniqueKeymap(
 	"n",
 	"<leader>pL",
-	function() vim.ui.open(vim.fn.stdpath("log") .. "/nvim-pack.log") end,
+	function()
+		vim.cmd.edit(vim.fn.stdpath("log") .. "/nvim-pack.log")
+
+	end,
 	{ desc = "󰐱 Log of updated plugins" }
 )
 u.uniqueKeymap(
@@ -86,5 +89,15 @@ vim.api.nvim_create_autocmd("FileType", {
 		u.bufKeymap("n", "<C-j>", "]]", { remap = true, desc = "󰐱 Next plugin" })
 		u.bufKeymap("n", "<C-k>", "[[", { remap = true, desc = "󰐱 Previous plugin" })
 		u.bufKeymap("n", "gi", openCommitOrIssue, { desc = "󰐱 Open commit or issue" })
+	end,
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+	desc = "User: nvim-pack log filetype",
+	pattern = "log",
+	callback = function(ctx)
+		if ctx.file == vim.fn.stdpath("log") .. "/nvim-pack.log" then
+			vim.bo[ctx.buf].filetype = "nvim-pack"
+		end
 	end,
 })
