@@ -67,4 +67,4 @@ local function detach() vim.ui_detach(ns) end
 local group = vim.api.nvim_create_augroup("ui-hack", { clear = true })
 vim.api.nvim_create_autocmd("CmdlineLeave", { group = group, callback = attach })
 vim.api.nvim_create_autocmd("CmdlineEnter", { group = group, callback = detach })
-attach() -- initialize
+vim.schedule(attach) -- initialize

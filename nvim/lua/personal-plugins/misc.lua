@@ -109,20 +109,6 @@ end
 
 --------------------------------------------------------------------------------
 
-function M.restartNeovide()
-	assert(vim.g.neovide, "Requires neovide.")
-	local script = [=[
-		while pgrep -xq "neovide" ; do
-			sleep 0.05
-			i=$((i+1)) ; [[ $i -gt 50 ]] && return 1 # timeout
-		done
-		sleep 0.2
-		[[ "$OSTYPE" =~ "darwin" ]] && open -a "neovide" || neovide # on macOS, use `open -a`
-	]=]
-	vim.system({ "zsh", "-c", script }, { detach = true }) -- detach to run after nvim quit
-	vim.defer_fn(vim.cmd.wqall, 1)
-end
-
 function M.openCwdInTerminal()
 	assert(jit.os == "OSX", "requires macOS' `open`")
 	local cdCommand = (" cd -q %q && clear"):format(vim.uv.cwd() or "")

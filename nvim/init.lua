@@ -19,6 +19,23 @@ vim.api.nvim_create_autocmd("VimEnter", {
 	end),
 })
 
+---FIX--------------------------------------------------------------------------
+-- `vim.g.neovide` not set initially during `:restart`
+
+local tempfile = "/tmp/neovide-restart"
+require("config.utils").uniqueKeymap({ "n", "x", "i" }, "<D-C-r>", function()
+	if vim.g.neovide then
+		local file = io.open(tempfile, "w")
+		if file then file:close() end
+	end
+	vim.cmd.restart()
+end, { desc = " Save & restart" })
+
+if vim.uv.fs_stat(tempfile) ~= nil then
+	vim.g.neovide = true
+	pcall(os.remove, tempfile)
+end
+
 ---LOAD MODULES-----------------------------------------------------------------
 local sRequire = require("config.utils").safeRequire
 
@@ -34,8 +51,3 @@ sRequire("config.keybindings")
 sRequire("personal-plugins.git-conflict")
 sRequire("config.spellfixes")
 sRequire("personal-plugins.messages-to-notify")
-
--- PENDING neovide not setting filetype https://github.com/neovide/neovide/issues/3444
-vim.schedule(function()
-	if vim.bo.ft == "" and vim.g.neovide then pcall(vim.cmd.edit) end
-end)
