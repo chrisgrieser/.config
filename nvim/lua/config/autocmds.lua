@@ -9,14 +9,12 @@ vim.api.nvim_create_autocmd("VimResized", {
 	command = "wincmd =",
 })
 
+-- BUG not working anymore on *first* buffer opened
 vim.api.nvim_create_autocmd("BufReadPost", {
 	desc = "User: Restore cursor position",
 	callback = function(ctx)
-		vim.defer_fn(function ()
-			if vim.bo[ctx.buf].buftype ~= "" then return end
-			vim.cmd([[silent! normal! g`"]])
-			vim.notify("🪚 🟩")
-		end, 1000)
+		if vim.bo[ctx.buf].buftype ~= "" then return end
+		vim.cmd([[silent! normal! g`"]])
 	end,
 })
 

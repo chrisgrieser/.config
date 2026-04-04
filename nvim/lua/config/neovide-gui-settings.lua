@@ -45,7 +45,7 @@ vim.g.neovide_input_macos_option_key_is_meta = "none" -- disable, so `{@~` etc. 
 -- appearance
 vim.g.neovide_opacity = 1
 vim.g.neovide_underline_stroke_scale = 2.5 -- fix underline thickness
-vim.g.neovide_progress_bar_height = 20
+vim.g.neovide_progress_bar_height = 30
 
 -- behavior
 vim.g.neovide_remember_window_size = true
