@@ -9,7 +9,6 @@ vim.api.nvim_create_autocmd("VimResized", {
 	command = "wincmd =",
 })
 
--- BUG not working anymore on *first* buffer opened
 vim.api.nvim_create_autocmd("BufReadPost", {
 	desc = "User: Restore cursor position",
 	callback = function(ctx)

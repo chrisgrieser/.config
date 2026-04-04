@@ -6,15 +6,17 @@ vim.g.iCloudSync = vim.env.HOME .. "/Library/Mobile Documents/com~apple~CloudDoc
 ---REOPEN LAST FILE IF NO FILE TO OPEN------------------------------------------
 vim.api.nvim_create_autocmd("VimEnter", {
 	desc = "User: re-open last file",
-	callback = function()
-		if vim.fn.argc(-1) > 0 then return end -- was opened with args
+	callback = vim.schedule_wrap(function()
+		local wasOpenedWithArgs = vim.fn.argc(-1) > 0
+		if wasOpenedWithArgs then return end
 		local toOpen = vim.iter(vim.v.oldfiles):find(function(file)
 			local notGitCommitMsg = vim.fs.basename(file) ~= "COMMIT_EDITMSG"
 			local exists = vim.uv.fs_stat(file) ~= nil
 			return exists and notGitCommitMsg
 		end)
-		if toOpen then vim.cmd.edit(toOpen) end
-	end,
+		if not toOpen then return end
+		vim.cmd.edit(toOpen)
+	end),
 })
 
 ---LOAD MODULES-----------------------------------------------------------------
