@@ -88,6 +88,22 @@ keymap("n", "<leader>uu", ":earlier ", { desc = "󰜊 Undo to earlier" })
 -- stylua: ignore
 keymap("n", "<leader>ur", function() vim.cmd.later(vim.o.undolevels) end, { desc = "󰛒 Redo all" })
 
+keymap("n", "<leader>ut", function()
+	if not package.loaded["undotree"] then
+		vim.cmd.packadd("nvim.undotree")
+		vim.api.nvim_create_autocmd("FileType", {
+			user = "User: undotree settings",
+			pattern = "nvim-undotree",
+			callback = function(ctx)
+				vim.keymap.set("n", "q", vim.cmd.close, { buffer = ctx.buf, nowait = true })
+				local win = vim.fn.bufwinid(ctx.buf)
+				vim.wo[win].list = false
+			end,
+		})
+	end
+	require("undotree").open()
+end, { desc = "󰋚 Undo tree" })
+
 -- Duplicate
 -- stylua: ignore
 keymap("n", "ww", function() require("personal-plugins.misc").smartDuplicate() end, { desc = "󰲢 Duplicate line" })
@@ -465,12 +481,8 @@ end, { desc = "󰋽 Diagnostics" })
 keymap("n", "<leader>oc", function() vim.wo.conceallevel = vim.wo.conceallevel == 0 and 2 or 0 end, { desc = "󰈉 Conceal" })
 
 keymap("n", "<leader>ol", function()
-	local clients = vim.lsp.get_clients { bufnr = 0 }
-	local names = vim.tbl_map(function(client) return client.name end, clients)
-	local list = "- " .. table.concat(names, "\n- ")
-	vim.notify(list, nil, { title = "Restarting LSPs", icon = "󰑓" })
-	vim.lsp.enable(names, false)
-	vim.lsp.enable(names, true)
+	vim.cmd.lsp("restart")
+	vim.notify("Restarting LSPs", vim.log.levels.DEBUG)
 end, { desc = "󰑓 LSP restart" })
 
 --------------------------------------------------------------------------------

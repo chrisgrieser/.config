@@ -164,18 +164,6 @@ opts.picker = {
 				end,
 			},
 		},
-		undo = {
-			win = {
-				input = {
-					keys = {
-						-- <CR>: restores the selected undo point
-						["<D-c>"] = { "yank_add", mode = "i" },
-						["<D-d>"] = { "yank_del", mode = "i" },
-					},
-				},
-			},
-			layout = "big_preview",
-		},
 		registers = {
 			transform = function(item) return item.label:find("[1-9]") ~= nil end, -- only numbered
 			confirm = { "yank", "close" },
@@ -522,7 +510,6 @@ opts.picker = {
 	prompt = "  ", -- 
 	icons = {
 		ui = { selected = "󰒆" },
-		undo = { saved = "" }, -- useless, since I have auto-saving
 		git = {
 			staged = "󰐖", -- consistent with tinygit
 			added = "󰎔",
@@ -694,7 +681,6 @@ require("config.utils").pluginKeymaps {
 	{ "<leader>pc", function() Snacks.picker.colorschemes() end, desc = " Colorschemes" },
 	{ "<leader>eh", function() Snacks.picker.command_history() end, desc = " Ex-cmd history" },
 	{ "<leader>yy", function() Snacks.picker.registers() end, desc = "󱛢 Yank ring" },
-	{ "<leader>ut", function() Snacks.picker.undo() end, desc = "󰋚 Undo tree" },
 	-- stylua: ignore
 	{ "<C-.>", function() Snacks.picker.icons() end, mode = { "n", "i" }, desc = "󱗿 Icon picker" },
 	{ "g.", function() Snacks.picker.resume() end, desc = "󰗲 Resume" },

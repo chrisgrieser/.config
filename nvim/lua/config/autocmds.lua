@@ -12,8 +12,11 @@ vim.api.nvim_create_autocmd("VimResized", {
 vim.api.nvim_create_autocmd("BufReadPost", {
 	desc = "User: Restore cursor position",
 	callback = function(ctx)
-		if vim.bo[ctx.buf].buftype ~= "" then return end
-		vim.cmd([[silent! normal! g`"]])
+		vim.defer_fn(function ()
+			if vim.bo[ctx.buf].buftype ~= "" then return end
+			vim.cmd([[silent! normal! g`"]])
+			vim.notify("🪚 🟩")
+		end, 1000)
 	end,
 })
 
