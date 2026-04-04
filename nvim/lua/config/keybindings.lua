@@ -84,7 +84,7 @@ keymap("n", "<leader>ut", function()
 	if not package.loaded["undotree"] then
 		vim.cmd.packadd("nvim.undotree")
 		vim.api.nvim_create_autocmd("FileType", {
-			user = "User: undotree settings",
+			desc = "User: undotree settings",
 			pattern = "nvim-undotree",
 			callback = function(ctx)
 				vim.keymap.set("n", "q", vim.cmd.close, { buffer = ctx.buf, nowait = true })
