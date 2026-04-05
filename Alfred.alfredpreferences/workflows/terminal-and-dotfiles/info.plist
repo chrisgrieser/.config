@@ -8,13 +8,11 @@
 	<string>❇️</string>
 	<key>connections</key>
 	<dict>
-		<key>3B075944-9330-4173-B143-D456715F890A</key>
-		<array/>
 		<key>4694D7EB-2482-44FA-881E-2597A9A90F9C</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>3B075944-9330-4173-B143-D456715F890A</string>
+				<string>7B13503C-1D31-4489-8A47-C30590A755FC</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -115,28 +113,17 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string># not using open pending: https://github.com/neovide/neovide/issues/3444#issuecomment-4188793273
-# open "$1"
-
-neovide "$1" --fork</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
+				<key>openwith</key>
 				<string></string>
-				<key>type</key>
-				<integer>5</integer>
+				<key>sourcefile</key>
+				<string></string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.script</string>
+			<string>alfred.workflow.action.openfile</string>
 			<key>uid</key>
-			<string>3B075944-9330-4173-B143-D456715F890A</string>
+			<string>7B13503C-1D31-4489-8A47-C30590A755FC</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -412,15 +399,6 @@ open -g "hammerspoon://sync-repos"</string>
 			<key>ypos</key>
 			<real>665</real>
 		</dict>
-		<key>3B075944-9330-4173-B143-D456715F890A</key>
-		<dict>
-			<key>note</key>
-			<string>open</string>
-			<key>xpos</key>
-			<real>190</real>
-			<key>ypos</key>
-			<real>35</real>
-		</dict>
 		<key>4694D7EB-2482-44FA-881E-2597A9A90F9C</key>
 		<dict>
 			<key>note</key>
@@ -447,6 +425,13 @@ open -g "hammerspoon://sync-repos"</string>
 			<real>190</real>
 			<key>ypos</key>
 			<real>665</real>
+		</dict>
+		<key>7B13503C-1D31-4489-8A47-C30590A755FC</key>
+		<dict>
+			<key>xpos</key>
+			<real>190</real>
+			<key>ypos</key>
+			<real>35</real>
 		</dict>
 		<key>90593B71-D876-45D6-8534-007AFD1C5A80</key>
 		<dict>
