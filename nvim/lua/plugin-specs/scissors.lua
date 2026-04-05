@@ -1,4 +1,7 @@
-vim.pack.add { "https://github.com/chrisgrieser/nvim-scissors" }
+vim.pack.add {
+	"https://github.com/folke/snacks.nvim",
+	"https://github.com/chrisgrieser/nvim-scissors",
+}
 --------------------------------------------------------------------------------
 
 vim.g.whichkeyAddSpec { "<leader>n", group = "󰩫 Snippets" }

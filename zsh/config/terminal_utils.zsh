@@ -87,7 +87,9 @@ _escape_on_empty_buffer() {
 			while ! pgrep -xq "neovide"; do sleep 0.1; done
 			sleep 0.6
 		fi
-		nvim --server '/tmp/nvim_server.pipe' --remote-send "<cmd>edit $1<CR>"
+		open -a "Neovide" # focus it
+		abspath=$(realpath "$item")
+		nvim --server '/tmp/nvim_server.pipe' --remote-send "<cmd>edit $abspath<CR>"
 	fi
 }
 zle -N _escape_on_empty_buffer

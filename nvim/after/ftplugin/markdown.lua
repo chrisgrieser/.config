@@ -41,9 +41,8 @@ bkeymap({ "n", "x", "i" }, "<D-i>", function() qol.wrap("*") end, { desc = "󰍔
 bkeymap({ "n", "x", "i" }, "<D-e>", function() qol.wrap("`") end, { desc = "󰍔 Inline code" })
 
 ---HEADINGS---------------------------------------------------------------------
--- Jump to next/prev heading (`##` to skip H1 and comments in code-blocks)
-bkeymap("n", "<C-j>", [[/^##\+ .*<CR><cmd>nohlsearch<CR>]], { desc = "󰍔 Next heading" })
-bkeymap("n", "<C-k>", [[?^##\+ .*<CR><cmd>nohlsearch<CR>]], { desc = "󰍔 Prev heading" })
+bkeymap("n", "<C-j>", "]]", { desc = "󰍔 Next heading", remap = true }) -- remap, since using filetype-mapping
+bkeymap("n", "<C-k>", "[[", { desc = "󰍔 Prev heading", remap = true })
 
 -- <D-h> remapped to <D-5>, since used by macOS PENDING https://github.com/neovide/neovide/issues/3099
 bkeymap({ "n", "i" }, "<D-5>", function() qol.incrementHeading(1) end, { desc = "󰍔 Heading++" })
