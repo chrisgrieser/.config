@@ -1,0 +1,155 @@
+#!/bin/zsh --no-rcs
+
+####################################################
+### Created by Vítor Galvão                      ###
+### Find the latest version at:                  ###
+###   https://github.com/vitorgalvao/notificator ###
+####################################################
+
+readonly program="${0:t}"
+
+# Helpers
+function error {
+  echo "${1}" >&2
+  exit 1
+}
+
+function show_notification {
+  /usr/bin/open "${app}" --args "${notificator_message}" "${notificator_title}" "${notificator_subtitle}" "${notificator_sound}"
+}
+
+# Usage
+function usage {
+  echo "
+    Trigger macOS notifications from Alfred, using the Workflow icon.
+
+    Message is mandatory. Other flags are optional.
+
+    Usage:
+      ${program} --message <text> [--title <text>] [--subtitle <text>] [--sound <name>]
+
+    Options:
+      -m, --message <text>    Message text.
+      -t, --title <text>      Title text.
+      -s, --subtitle <text>   Subtitle text.
+      -p, --sound <name>      Sound name (from /System/Library/Sounds).
+      -h, --help              Show this help.
+  " | sed -E 's/^ {4}//'
+}
+
+# Options
+args=()
+while [[ "${1}" ]]
+do
+  case "${1}" in
+    -h | --help)
+      usage
+      exit 0
+      ;;
+    -m | --message)
+      readonly notificator_message="${2}"
+      shift
+      ;;
+    -t | --title)
+      readonly notificator_title="${2}"
+      shift
+      ;;
+    -s | --subtitle)
+      readonly notificator_subtitle="${2}"
+      shift
+      ;;
+    -p | --sound)
+      readonly notificator_sound="${2}"
+      shift
+      ;;
+    --)
+      shift
+      args+=("${@}")
+      break
+      ;;
+    -*)
+      echo "Unrecognised option: ${1}"
+      exit 1
+      ;;
+    *)
+      args+=("${1}")
+      ;;
+  esac
+  shift
+done
+set -- "${args[@]}"
+
+# Check for required arguments
+[[ -n "${notificator_message}" ]] || error 'A message is mandatory! Aborting…'
+
+readonly bundle_id="$(/usr/bin/tr -cd '[:alnum:]._-' <<< "${alfred_workflow_bundleid}")"
+readonly name="$(/usr/bin/tr -cd '[:alnum:]._- ' <<< "${alfred_workflow_name}")"
+readonly icon="${alfred_preferences}/workflows/${alfred_workflow_uid}/icon.png"
+readonly checksum_icon="$(/usr/bin/shasum "${icon}" | cut -d ' ' -f 1)"
+readonly app="${alfred_workflow_cache}/Notificator for ${name}.app"
+readonly plist="${app}/Contents/Info.plist"
+
+# Exit early if Notificator exists and workflow icon is unmodified (its checksum equals the last field of the bundle ID)
+if [[ -d "${app}" && "${checksum_icon}" == "$(/usr/libexec/PlistBuddy -c "print :CFBundleIdentifier" "${plist}" | /usr/bin/awk -F '.' '{print $NF}')" ]]
+then
+  show_notification
+  exit 0
+fi
+
+# Pre-build checks
+[[ -n "${bundle_id}" ]] || error "Workflow is missing bundle identifier! Aborting…"
+[[ -n "${name}" ]]      || error "Workflow is missing name! Aborting…"
+[[ -f "${icon}" ]]      || error "Workflow is missing icon! Aborting…"
+
+# Build Notificator
+readonly jxa_script='
+  const argv = $.NSProcessInfo.processInfo.arguments.js.map(arg => arg.js)
+  const app = Application.currentApplication()
+  app.includeStandardAdditions = true
+
+  if (argv.length < 2) { // The script will always see at least one argument: the applet itself
+    argv[1] = "Opening usage instructions…"
+    argv[2] = "Notificator is a command-line app"
+    argv[4] = "Sosumi"
+
+    app.openLocation("https://github.com/vitorgalvao/notificator#usage")
+  }
+
+  const message = argv[1]
+  const title = argv[2]
+  const subtitle = argv[3]
+  const sound = argv[4]
+
+  const options = {}
+  if (title) options.withTitle = title
+  if (subtitle) options.subtitle = subtitle
+  if (sound) options.soundName = sound
+
+  app.displayNotification(message, options)
+'
+
+[[ -d "${app}" ]] && /bin/rm -r "${app}"
+/bin/mkdir -p "${alfred_workflow_cache}"
+/usr/bin/osacompile -l JavaScript -o "${app}" -e "${jxa_script}" 2> /dev/null
+
+# Modify Notificator
+/usr/libexec/PlistBuddy -c "add :CFBundleIdentifier string ${bundle_id}.notificator.${checksum_icon}" "${plist}"
+/usr/libexec/PlistBuddy -c 'add :LSUIElement string 1' "${plist}"
+
+# Redo signature
+/usr/bin/codesign --remove-signature "${app}"
+/usr/bin/codesign --sign - "${app}"
+
+# Modify icon
+# Must be done after signing to not get "resource fork, Finder informartion, or similar detritus not allowed" error
+/usr/bin/osascript -l JavaScript -e '
+  ObjC.import("AppKit")
+
+  function run(argv) {
+    const image = $.NSImage.alloc.initWithContentsOfFile(argv[0])
+    $.NSWorkspace.sharedWorkspace.setIconForFileOptions(image, argv[1], 0)
+  }
+' "${icon}" "${app}"
+
+# Notification
+show_notification

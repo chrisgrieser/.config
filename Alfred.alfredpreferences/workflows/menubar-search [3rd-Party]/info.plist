@@ -149,6 +149,35 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>0</integer>
+				<key>hotmod</key>
+				<integer>0</integer>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>892B9EF8-E33C-4D32-BBEB-591DFBEFFFEC</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>alfredfiltersresults</key>
 				<false/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -182,7 +211,7 @@ if [ ! -f "./menu/menu" ]; then
   "items": [
     {
       "arg": "compile-script",
-      "title": "Compile the binary first",
+      "title": "You need to compile the binary first",
       "subtitle": "Press ↩ to compile. You will be notified when it’s done."
     }
   ]
@@ -221,35 +250,6 @@ fi</string>
 			<string>25DA0D72-264A-4CD8-9A6A-9FFD4B652DF1</string>
 			<key>version</key>
 			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>0</integer>
-				<key>focusedappvariable</key>
-				<false/>
-				<key>focusedappvariablename</key>
-				<string></string>
-				<key>hotkey</key>
-				<integer>0</integer>
-				<key>hotmod</key>
-				<integer>0</integer>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>0</integer>
-				<key>relatedAppsMode</key>
-				<integer>0</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
-			<key>uid</key>
-			<string>892B9EF8-E33C-4D32-BBEB-591DFBEFFFEC</string>
-			<key>version</key>
-			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -426,8 +426,8 @@ if [ ! -f "./menu/menu" ]; then
   "items": [
     {
       "arg": "compile-script",
-      "title": "Compile the binary first",
-      "subtitle": "Press ↩ to compile. You will be notified when done."
+      "title": "You need to compile the binary first",
+      "subtitle": "Press ↩ to compile. You will be notified when it’s done."
     }
   ]
 }
@@ -498,20 +498,24 @@ Search through menu options of the frontmost application.
 
 ## Usage
 
-Search menubar items of the frontmost app via the `menu` keyword. Prepend your query with `#` to search by keyboard shortcut. Press &lt;kbd&gt;↩&lt;/kbd&gt; to action the item.
+Search menu bar items of the frontmost app via the `menu` keyword.
 
 ![Searching through Xcode menu items](images/keyword-usage.png)
 
-![Searching through Xcode menu items with shortcut](images/keyword-usage-search-with-shortcut.png)
+* &lt;kbd&gt;↩&lt;/kbd&gt; Action the item.
 
 Configure the Hotkey for faster triggering.
 
-Fuzzy searches supported. For instance, `menu cw` will match the menu item **Close Window**
+Prepend your query with `#` to search by keyboard shortcut.
+
+![Searching through Xcode menu items with shortcut](images/keyword-usage-search-with-shortcut.png)
+
+Fuzzy searches supported. For instance, `menu cw` will match the menu item ‘Close Window’.
 
 ## Credits
 
 - This repo is a fork of [Benzi Ahamed](https://github.com/BenziAhamed)’s [Menu Bar Search](https://github.com/BenziAhamed/Menu-Bar-Search) ([abandoned](https://github.com/BenziAhamed/Menu-Bar-Search/pull/33)), including a [fix](https://github.com/occludedpixel/Menu-Bar-Search) from [occludedpixel](https://github.com/occludedpixel).
-- Based on the ctwise's ObjC implementation of [Menu Bar Search](https://www.alfredforum.com/topic/1993-menu-search/), which I've ported over to Swift and added caching and per app configuration to speed things up.
+- Based on the ctwise’s ObjC implementation of [Menu Bar Search](https://www.alfredforum.com/topic/1993-menu-search/), which Benzi Ahamed has ported over to Swift and added caching and per app configuration to speed things up.
 - Bundled with Apple’s [swift-protobuf](https://github.com/apple/swift-protobuf), licensed under [Apache License 2.0](https://github.com/apple/swift-protobuf/blob/main/LICENSE.txt).</string>
 	<key>uidata</key>
 	<dict>
@@ -531,7 +535,7 @@ Fuzzy searches supported. For instance, `menu cw` will match the menu item **Clo
 			<key>colorindex</key>
 			<integer>1</integer>
 			<key>note</key>
-			<string>Compile binary.</string>
+			<string>Compile binary</string>
 			<key>xpos</key>
 			<real>675</real>
 			<key>ypos</key>
@@ -745,7 +749,7 @@ Note: Some apps like BBEdit mark certain items as disabled when Alfred is active
 		</dict>
 	</array>
 	<key>version</key>
-	<string>2025.5</string>
+	<string>2026.1</string>
 	<key>webaddress</key>
 	<string>https://github.com/April-June-August/Alfred--Menu-Bar-Search</string>
 </dict>

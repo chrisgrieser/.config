@@ -50,8 +50,6 @@ tap "felixkratz/formulae"; brew "felixkratz/formulae/sketchybar"
 #-OTHER-------------------------------------------------------------------------
 cask "font-jetbrains-mono-nerd-font"
 
-tap "flewgg/tap" ; cask "flewgg/tap/unfold"
-
 # for languagetool browser extension; see https://dev.languagetool.org/http-server
 brew "languagetool", postinstall: "sleep 1 ; brew services start languagetool"
 

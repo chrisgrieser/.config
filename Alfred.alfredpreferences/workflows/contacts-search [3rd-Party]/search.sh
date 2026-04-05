@@ -9,7 +9,10 @@ LEFT JOIN ZABCDNOTE n ON n.ZCONTACT = r.Z_PK
 GROUP BY r.ZUNIQUEID;"
 
 # Load Contacts
-find "${contacts_dir}" -name "AddressBook-v22.abcddb" -exec sqlite3 -json {} "${sqlQuery}" \; |
+find "${contacts_dir}" -name "AddressBook-v22.abcddb" \
+-exec echo '[{"ABpath": "{}", "data":' \; \
+-exec sqlite3 -json {} "${sqlQuery}" \; \
+-exec echo "}]" \; |
 jq -cs \
    --argjson useJobTitle "${useJobTitle}" \
    --argjson useOrganization "${useOrganization}" \
@@ -20,7 +23,7 @@ jq -cs \
    --argjson sortBy "${sortBy}" \
 '{
     "items": (if (length > 0) then walk(if . == "" then null end) |
-    map(.[] | select(.ZUNIQUEID | endswith("ABPerson")) |
+    map((.[].ABpath[:-23]) as $ABpath | .[].data[] | select(.ZUNIQUEID | endswith("ABPerson")) |
         (.ZPHONENUMBER | fromjson | join(" ") | gsub("(\\(|\\))"; "")) as $PHONES |
         (.ZEMAILADDRESS | fromjson | join(" ")) as $EMAILS |
         (if (.ZORGANIZATION != null and .ZFIRSTNAME == null and .ZLASTNAME == null) then false else true end) as $isNotORG |
@@ -39,6 +42,7 @@ jq -cs \
                 (if $useStreet == 1 then .ZSTREET else empty end),
                 (if $useNotes == 1 then .ZTEXT else empty end)
             ] | map(select(.)) | join(" "),
+            "variables": {"ABpath": $ABpath},
             "sortindex": (if $title != "No Name" then (if $sortBy == 0 then $title else .ZSORTINGLASTNAME end) else "~" end)
     	}
     ) | sort_by(.sortindex) else

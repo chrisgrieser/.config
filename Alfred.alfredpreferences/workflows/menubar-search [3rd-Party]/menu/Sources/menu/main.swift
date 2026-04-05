@@ -19,8 +19,7 @@ args.parse()
 var app: NSRunningApplication?
 if args.pid == -1 {
     app = NSWorkspace.shared.menuBarOwningApplication
-}
-else {
+} else {
     app = NSRunningApplication(processIdentifier: args.pid)
 }
 
@@ -38,7 +37,9 @@ case .success:
     break
 
 case .apiDisabled:
-    Alfred.quit("Assistive applications are not enabled in System Preferences.", subtitle: "Is accessibility enabled for Alfred?")
+    Alfred.quit(
+        "Assistive applications are not enabled in System Preferences.",
+        subtitle: "Is accessibility enabled for Alfred?")
 
 case .noValue:
     Alfred.quit("No menu bar", subtitle: "\(appDisplayName) does not have a native menu bar")
@@ -65,9 +66,9 @@ let fm = FileManager.default
 let settingsPath = Alfred.data(path: "settings.txt")
 if fm.fileExists(atPath: settingsPath) {
     if let attributes = try? fm.attributesOfItem(atPath: settingsPath),
-       let mod = attributes[.modificationDate] as? Date,
-       // let settingsData = try? Data.init(contentsOf: .init(fileURLWithPath: settingsPath))
-       let settingsText = try? String(contentsOfFile: settingsPath)
+        let mod = attributes[.modificationDate] as? Date,
+        // let settingsData = try? Data.init(contentsOf: .init(fileURLWithPath: settingsPath))
+        let settingsText = try? String(contentsOfFile: settingsPath)
     {
         do {
             let settings = try Settings(textFormatString: settingsText)
@@ -82,27 +83,25 @@ if fm.fileExists(atPath: settingsPath) {
                 let appOverride = settings.appFilters[i]
 
                 if appOverride.disabled {
-                    Alfred.quit("Menu search disabled!", subtitle: "\(appDisplayName)", icon: "item-icons/icon.error.png")
+                    Alfred.quit(
+                        "Menu search disabled!", subtitle: "\(appDisplayName)",
+                        icon: "item-icons/icon.error.png")
                 }
 
                 args.options.appFilter = appOverride
                 if args.options.appFilter.cacheDuration > 0 {
                     args.cacheTimeout = args.options.appFilter.cacheDuration
                     args.cachingEnabled = true
-                }
-                else {
+                } else {
                     args.cachingEnabled = false
                 }
             }
-        }
-        catch let error as TextFormatDecodingError {
+        } catch let error as TextFormatDecodingError {
             Alfred.quit("\(error)", subtitle: "Settings Error")
-        }
-        catch {
+        } catch {
             Alfred.quit("Invalid settings file", subtitle: settingsPath)
         }
-    }
-    else {
+    } else {
         Alfred.quit("Invalid settings file", subtitle: settingsPath)
     }
 }
@@ -121,15 +120,15 @@ if fm.fileExists(atPath: settingsPath) {
 let menuItems: [MenuItem]
 let a = Alfred()
 
-if args.cachingEnabled, let items = Cache.load(app: appBundleId, settingsModifiedInterval: settingsModifiedInterval) {
+if args.cachingEnabled,
+    let items = Cache.load(app: appBundleId, settingsModifiedInterval: settingsModifiedInterval)
+{
     // caching enabled and we were able to load information
     menuItems = items
-}
-else {
+} else {
     if args.loadAsync {
         menuItems = menuBar.loadAsync(args.options)
-    }
-    else {
+    } else {
         menuItems = menuBar.load(args.options)
     }
     if args.cachingEnabled {
@@ -142,55 +141,105 @@ else {
 // func r(_ menu: MenuItem) -> () {
 func render(_ menu: MenuItem) {
     let apple = menu.appleMenuItem
-    a.add(.with {
-        $0.uid = args.learning ? "\(appBundleId)>\(menu.uid)" : ""
-        // Add ❌️ prefix for disabled items
-        let titleText = menu.shortcut.isEmpty ? menu.title : "\(menu.title) - \(menu.shortcut)"
-        $0.title = menu.enabled ? titleText : "❌️ \(titleText)"
-        $0.subtitle = menu.subtitle
-        $0.arg = menu.arg
-        $0.icon.path = apple ? "item-icons/apple-icon.png" : appPath
-        $0.icon.type = apple ? "" : "fileicon"
-    })
+    a.add(
+        .with {
+            $0.uid = args.learning ? "\(appBundleId)>\(menu.uid)" : ""
+            // Add ❌️ prefix for disabled items
+            let titleText = menu.shortcut.isEmpty ? menu.title : "\(menu.title) - \(menu.shortcut)"
+            $0.title = menu.enabled ? titleText : "❌️ \(titleText)"
+            $0.subtitle = menu.subtitle
+            $0.arg = menu.arg
+            $0.icon.path = apple ? "item-icons/apple-icon.png" : appPath
+            $0.icon.type = apple ? "" : "fileicon"
+        })
 }
 
-let r = render // prevent swiftc compiler segfault
+let r = render  // prevent swiftc compiler segfault
 
 if !args.query.isEmpty {
     let term = args.query
-    
+    let queryTerms = term.split(separator: " ").map { String($0) }
+
     menuItems
         .map { (menu: MenuItem) -> (menu: MenuItem, search: (matched: Bool, score: Int)) in
+            let combinedPath = menu.searchPath.joined(separator: " ")
+            var bestScore = 0
+            var matched = false
+
+            // Try 1: Direct menu item match
             var level = menu.path.count - 1
             let menuText = menu.searchPath[level] + " " + menu.shortcut.lowercased()
-            let search = menuText.fastMatch(term)
+            var search = menuText.fastMatch(term)
             if search.matched {
-                return (menu, search)
+                matched = true
+                // Boost if substring match (word-level or continuous)
+                if menuText.contains(term) { search.score *= 100 }
+                bestScore = max(bestScore, search.score * 1000)
             }
+
+            // Try 2: Combined path match
+            search = combinedPath.fastMatch(term)
+            if search.matched {
+                matched = true
+                if combinedPath.contains(term) { search.score *= 100 }
+                bestScore = max(bestScore, search.score * 500)
+            }
+
+            // Try 3: Multi-term match (words in any order)
+            if queryTerms.count > 1 {
+                var allMatched = true
+                var totalScore = 0
+                var substringCount = 0
+
+                for queryTerm in queryTerms {
+                    let termMatch = combinedPath.fastMatch(queryTerm)
+                    if termMatch.matched {
+                        var termScore = termMatch.score
+                        if combinedPath.contains(queryTerm) {
+                            termScore *= 100
+                            substringCount += 1
+                        }
+                        totalScore += termScore
+                    } else {
+                        allMatched = false
+                        break
+                    }
+                }
+
+                if allMatched {
+                    matched = true
+                    let avgScore = totalScore / queryTerms.count
+                    bestScore = max(bestScore, avgScore * 300)
+                }
+            }
+
+            // Try 4: Parent level match
             level -= 1
             var levelAdjust = 2
             while level >= 0 {
-                var search = menu.searchPath[level].fastMatch(term)
+                search = menu.searchPath[level].fastMatch(term)
                 if search.matched {
-                    if search.score > 0 {
-                        search.score /= levelAdjust
-                    } else {
-                        search.score *= levelAdjust
-                    }
-                    return (menu, search)
+                    matched = true
+                    if menu.searchPath[level].contains(term) { search.score *= 100 }
+                    bestScore = max(bestScore, (search.score * 100) / levelAdjust)
                 }
                 level -= 1
                 levelAdjust *= 2
             }
-            return (menu, (false, 0))
+
+            // Boost enabled menus
+            if matched && menu.enabled {
+                bestScore *= 10
+            }
+
+            return (menu, (matched, bestScore))
         }
         .filter { $0.search.matched }
-        .sorted(by: {$0.search.score > $1.search.score})
+        .sorted(by: { $0.search.score > $1.search.score })
         .forEach { item in
             r(item.menu)
         }
-}
-else if args.options.appFilter.showAppleMenu, args.reorderAppleMenuToLast, menuItems.count > 0 {
+} else if args.options.appFilter.showAppleMenu, args.reorderAppleMenuToLast, menuItems.count > 0 {
     // rearrange so that Apple menu items are last
     // do not use filter as its slow with unnecessary copying
     // instead we find
@@ -216,25 +265,24 @@ else if args.options.appFilter.showAppleMenu, args.reorderAppleMenuToLast, menuI
         }
         // print all apple items
         menuItems[i..<j].forEach { r($0) }
-    }
-    else {
+    } else {
         // no apple menu item at the start?
         // print everything
         // ideally we do not get here
         menuItems.forEach { r($0) }
     }
-}
-else {
+} else {
     // no search query, no reorder of menu items
     menuItems.forEach { r($0) }
 }
 
 if a.results.items.count == 0 {
-    a.add(AlfredResultItem.with {
-        $0.title = "No Menu Items Found"
-        $0.subtitle = "No menu items found for ‘\(args.query)’"
-        $0.icon = .with { $0.path = "item-icons/icon.error.png" }
-    })
+    a.add(
+        AlfredResultItem.with {
+            $0.title = "No Menu Items Found"
+            $0.subtitle = "No menu items found for ‘\(args.query)’"
+            $0.icon = .with { $0.path = "item-icons/icon.error.png" }
+        })
 }
 
 print(a.resultsJson)

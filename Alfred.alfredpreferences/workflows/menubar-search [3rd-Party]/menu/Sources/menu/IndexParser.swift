@@ -19,10 +19,9 @@ public enum IndexParser {
         while i < end {
             let c = text.unicodeScalars[i].value
             if c >= 48, c <= 57 {
-                n = n * 10 + Int(c - 48) // "0" is 48
+                n = n * 10 + Int(c - 48)  // "0" is 48
                 pending = true
-            }
-            else if pending {
+            } else if pending {
                 indices.append(n)
                 n = 0
                 pending = false

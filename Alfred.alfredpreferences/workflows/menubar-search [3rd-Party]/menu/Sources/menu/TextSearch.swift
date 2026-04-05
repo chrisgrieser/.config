@@ -9,7 +9,7 @@
 import Foundation
 
 extension String {
-    
+
     var anchorTerm: String {
         var result = ""
         var consume = true
@@ -27,12 +27,12 @@ extension String {
         }
         return result
     }
-    
+
     func fastMatch(_ query: String) -> (matched: Bool, score: Int) {
         if query.count > self.count {
             return (false, 0)
         }
-        
+
         let anchorTerm = self.anchorTerm
         if anchorTerm.hasPrefix(query) {
             let unmatched = (anchorTerm.count - query.count)
@@ -59,7 +59,8 @@ extension String {
                 lastMatchIndex = pos
                 if queryIndex == lastIndex {
                     let unmatchedSuffixCount = count - pos - 1
-                    let score = (maxRun * 100) - (gaps * 1) - (unmatchedPrefixCount * 7) - (unmatchedSuffixCount * 1)
+                    let score =
+                        (maxRun * 100) - (gaps * 1) - (unmatchedPrefixCount * 7) - (unmatchedSuffixCount * 1)
                     return (true, score)
                 }
                 queryIndex = query.index(after: queryIndex)

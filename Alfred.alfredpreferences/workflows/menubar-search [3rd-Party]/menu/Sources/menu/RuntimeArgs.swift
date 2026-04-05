@@ -34,7 +34,7 @@ class RuntimeArgs {
 
     var options = MenuGetterOptions()
 
-    var i = 1 // skip name of program
+    var i = 1  // skip name of program
     var current: String? {
         return i < CommandLine.arguments.count ? CommandLine.arguments[i] : nil
     }
@@ -43,18 +43,18 @@ class RuntimeArgs {
         i += 1
     }
 
-    let createInt: (String)->Int? = { Int($0) }
-    let createInt32: (String)->Int32? = { Int32($0) }
-    let createBool: (String)->Bool? = { Bool($0) }
-    let createDouble: (String)->Double? = { Double($0) }
-    let createBoolFromInt: (String)->Bool? = { value in
+    let createInt: (String) -> Int? = { Int($0) }
+    let createInt32: (String) -> Int32? = { Int32($0) }
+    let createBool: (String) -> Bool? = { Bool($0) }
+    let createDouble: (String) -> Double? = { Double($0) }
+    let createBoolFromInt: (String) -> Bool? = { value in
         if let v = Int(value), v == 1 {
             return true
         }
         return false
     }
 
-    func parse<T>(_ create: (String)->T?, _ error: String)->T {
+    func parse<T>(_ create: (String) -> T?, _ error: String) -> T {
         if let arg = current, let value = create(arg) {
             advance()
             return value
@@ -62,7 +62,7 @@ class RuntimeArgs {
         Alfred.quit(error)
     }
 
-    func parseOptional<T>(_ create: (String)->T?, _ fallback: T)->T {
+    func parseOptional<T>(_ create: (String) -> T?, _ fallback: T) -> T {
         if let arg = current {
             advance()
             return create(arg) ?? fallback
@@ -85,7 +85,8 @@ class RuntimeArgs {
                 advance()
                 if let arg = current {
                     advance()
-                    query = arg.folding(options: [.diacriticInsensitive, .caseInsensitive, .widthInsensitive], locale: nil)
+                    query = arg.folding(
+                        options: [.diacriticInsensitive, .caseInsensitive, .widthInsensitive], locale: nil)
                     query = parseToShortcut(from: query)
                 }
 
@@ -125,7 +126,8 @@ class RuntimeArgs {
 
             case "-show-apple-menu":
                 advance()
-                options.appFilter.showAppleMenu = parse(createBoolFromInt, "Expected 0/1 after -show-apple-menu")
+                options.appFilter.showAppleMenu = parse(
+                    createBoolFromInt, "Expected 0/1 after -show-apple-menu")
 
             case "-recache":
                 advance()
@@ -141,7 +143,8 @@ class RuntimeArgs {
 
             case "-show-disabled":
                 advance()
-                options.appFilter.showDisabledMenuItems = parse(createBoolFromInt, "Expected 0/1 after -show-disabled")
+                options.appFilter.showDisabledMenuItems = parse(
+                    createBoolFromInt, "Expected 0/1 after -show-disabled")
 
             case "-dump":
                 advance()
@@ -150,24 +153,27 @@ class RuntimeArgs {
             case "-show-folders":
                 let a = Alfred()
                 let icon = AlfredResultItemIcon.with { $0.path = "item-icons/icon.settings.png" }
-                a.add(AlfredResultItem.with {
-                    $0.title = "Settings Folder"
-                    $0.arg = Alfred.data()
-                    $0.icon = icon
-                })
-                if !FileManager.default.fileExists(atPath: Alfred.data(path: "settings.txt")) {
-                    a.add(AlfredResultItem.with {
-                        $0.title = "View a sample Settings file"
-                        $0.subtitle = "You can use this as a reference to customise per app configuration"
-                        $0.arg = "sample settings.txt"
+                a.add(
+                    AlfredResultItem.with {
+                        $0.title = "Settings Folder"
+                        $0.arg = Alfred.data()
                         $0.icon = icon
                     })
+                if !FileManager.default.fileExists(atPath: Alfred.data(path: "settings.txt")) {
+                    a.add(
+                        AlfredResultItem.with {
+                            $0.title = "View a sample Settings file"
+                            $0.subtitle = "You can use this as a reference to customise per app configuration"
+                            $0.arg = "sample settings.txt"
+                            $0.icon = icon
+                        })
                 }
-                a.add(AlfredResultItem.with {
-                    $0.title = "Cache Folder"
-                    $0.arg = Alfred.cache()
-                    $0.icon = icon
-                })
+                a.add(
+                    AlfredResultItem.with {
+                        $0.title = "Cache Folder"
+                        $0.arg = Alfred.cache()
+                        $0.icon = icon
+                    })
                 //        for cache in Cache.getCachedMenuControls() {
                 //            let expiry = Date(timeIntervalSince1970: cache.control.timeout)
                 //            let now = Date()
@@ -197,7 +203,7 @@ class RuntimeArgs {
     }
 }
 
-func parseToShortcut(from _term: String)->String {
+func parseToShortcut(from _term: String) -> String {
     if !_term.hasPrefix("#") || _term.count < 2 {
         return _term
     }
@@ -246,12 +252,13 @@ func parseToShortcut(from _term: String)->String {
         ("left", "◀︎"),
         ("right", "▶︎"),
         ("down", "▼"),
-        ("up", "▲")
+        ("up", "▲"),
     ]
 
     for (keycode, key) in keys {
         if let index = term.firstIndex(of: keycode) {
-            res.append(key); term.remove(at: index)
+            res.append(key)
+            term.remove(at: index)
         }
     }
 

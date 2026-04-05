@@ -59,17 +59,6 @@
 			<key>url</key>
 			<string>https://kickasstorrents.cc/search?query={query}</string>
 		</dict>
-		<key>1F12016A-4AEE-49CA-B527-38B32E1F6934</key>
-		<dict>
-			<key>enabled</key>
-			<true/>
-			<key>keyword</key>
-			<string>mtg</string>
-			<key>text</key>
-			<string>MtG card searrch: {query}</string>
-			<key>url</key>
-			<string>https://scryfall.com/search?q={query}</string>
-		</dict>
 		<key>295774FE-716A-4B62-87C6-F36AB22838CC</key>
 		<dict>
 			<key>enabled</key>

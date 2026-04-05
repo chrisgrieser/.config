@@ -8,7 +8,7 @@ let package = Package(
     dependencies: [
         // Dependencies declare other packages that this package depends on.
         // .package(url: /* package url */, from: "1.0.0"),
-        .package(name: "SwiftProtobuf", path: "./swift-protobuf"),
+        .package(name: "SwiftProtobuf", path: "./swift-protobuf")
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
@@ -22,7 +22,7 @@ let package = Package(
                     "-Xlinker", "-sectcreate",
                     "-Xlinker", "__TEXT",
                     "-Xlinker", "__info_plist",
-                    "-Xlinker", "Sources/Info.plist"
+                    "-Xlinker", "Sources/Info.plist",
                 ])
             ]),
         .testTarget(

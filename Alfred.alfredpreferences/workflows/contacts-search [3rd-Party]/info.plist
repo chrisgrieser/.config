@@ -134,7 +134,10 @@
 				<integer>102</integer>
 				<key>script</key>
 				<string>if [[ -z ${urlHandler} ]]; then
-	find "${contacts_dir}" -name "${1}.abcdp" -print0
+	metadata_file="${ABpath}/Metadata/${1}.abcdp"
+	mkdir -p "${ABpath}/Metadata"
+	[[ -f "${metadata_file}" ]] || touch "${metadata_file}"
+	printf "${metadata_file}"
 else
 	open -u "${urlHandler//\{uid\}/${1}}"
 	printf 0
@@ -593,7 +596,7 @@ Custom URL Handler</string>
 	<key>variablesdontexport</key>
 	<array/>
 	<key>version</key>
-	<string>2025.11</string>
+	<string>2026.3</string>
 	<key>webaddress</key>
 	<string>https://github.com/FireFingers21/alfred-contacts-search</string>
 </dict>
