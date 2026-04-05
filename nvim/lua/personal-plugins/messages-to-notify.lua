@@ -11,7 +11,7 @@ if not hasNotificationPlugin then return end
 
 local config = {
 	msgKind = { -- existing kinds: https://neovim.io/doc/user/api-ui-events/#ui-messages
-		ignore = { "search_cmd", "undo", "empty" },
+		ignore = { "search_cmd", "search_count", "undo", "empty" },
 		mini = { "bufwrite" }, -- more minimal style when using `snacks.notifier`
 	},
 	notification = { icon = "󰍩" },
@@ -29,12 +29,11 @@ local function attach()
 				:map(function(entry)
 					return vim.iter(entry[2]):fold("", function(acc, msg) return acc .. msg[2] end)
 				end)
-				:join("\n---\n")
-			local nOpts = { title = ":messages", icon = config.notification.icon, ft = "text" }
-			vim.notify(vim.trim(out), nil, nOpts)
+				:join("\n*****\n")
+			vim.notify(vim.trim(out), nil, { title = ":messages", icon = config.notification.icon })
 			return
 		end
-		if event ~= "msg_show" then return end
+		assert(event == "msg_show", "unexpected event: " .. event)
 
 		local kind, content, _replace, _history = ... -- for `msg_show` only https://neovim.io/doc/user/api-ui-events/#ui-messages
 		if vim.list_contains(config.msgKind.ignore, kind) then return end
@@ -44,11 +43,9 @@ local function attach()
 		text = vim.trim(text):gsub("^(E%d+):", "[%1]") -- emphasize error codes
 
 		local level = vim.log.levels.INFO
-		if vim.list_contains({ "emsg", "lua_error", "shell_err", "echoerr", "rpcerr" }, kind) then
-			level = vim.log.levels.ERROR
-		elseif kind == "wmsg" then
-			level = vim.log.levels.WARN
-		end
+		local err = vim.list_contains({ "emsg", "lua_error", "shell_err", "echoerr", "rpcerr" }, kind)
+		if err then level = vim.log.levels.ERROR end
+		if kind == "wmsg" then level = vim.log.levels.WARN end
 
 		local opts = { title = kind, icon = config.notification.icon }
 		if kind == "lua_print" then opts.ft = "lua" end

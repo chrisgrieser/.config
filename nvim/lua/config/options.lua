@@ -66,7 +66,7 @@ vim.opt.scrolloff = 13
 
 vim.opt.winborder = "single"
 
-vim.opt.pumheight = 12 -- max height of completion menu
+vim.opt.pumheight = 12 -- max height of native completion menu
 
 ---EDITORCONFIG-----------------------------------------------------------------
 -- By default, nvim automatically sets `textwidth` to follow the
@@ -79,24 +79,24 @@ vim.opt.pumheight = 12 -- max height of completion menu
 require("editorconfig").properties.max_line_length = nil
 vim.opt.textwidth = 80
 
-vim.opt.expandtab = false -- mostly set by `editorconfig`, therefore only fallback
+-- mostly set by `editorconfig`, therefore only fallback
+vim.opt.expandtab = false
 vim.opt.tabstop = 3 -- width of a tab
 vim.opt.shiftwidth = 3 -- number of tabs/spaces inserted when indenting
+
+-- indent behavior
 vim.opt.shiftround = true
 vim.opt.smartindent = true
-
----MESSAGES & CMDLINE-----------------------------------------------------------
-vim.opt.report = 9001 -- disable most "x more/fewer lines" messages
-vim.opt.shortmess:append("ISs") -- no intro message, disable search count
-vim.opt.cmdheight = 0
 
 ---INVISIBLE CHARS--------------------------------------------------------------
 vim.opt.conceallevel = 2 -- hide some chars in markdown and json
 
 vim.opt.list = true -- show invisible chars (`listchars` below)
-vim.api.nvim_create_autocmd("BufReadPost", {
-	desc = "User: Show listchars only in regular buffers",
-	callback = function(ctx) vim.opt_local.list = vim.bo[ctx.buf].buftype == "" end,
+vim.api.nvim_create_autocmd("FileType", {
+	desc = "User: Disable listchars in special buffers",
+	callback = function(ctx)
+		if vim.bo[ctx.buf].buftype ~= "" then vim.opt_local.list = false end
+	end,
 })
 
 vim.opt.listchars:append {
@@ -124,7 +124,6 @@ vim.opt.fillchars:append {
 	vertright = "╠",
 	verthoriz = "╬",
 }
--- vim.opt.fillchars:append { horiz = "▄", vert = "█", horizup = "█", horizdown = "▄", vertleft = "█", vertright = "█", verthoriz = "█" }
 
 ---DIAGNOSTICS------------------------------------------------------------------
 vim.diagnostic.config {
@@ -177,14 +176,12 @@ vim.diagnostic.config {
 
 vim.api.nvim_create_autocmd("WinNew", {
 	desc = "User: Use Markdown highlighting in diagnostic floats",
-	callback = function()
-		vim.defer_fn(function()
-			if not vim.b.lsp_floating_preview then return end -- no lsp float
-			local bufnr = vim.api.nvim_win_get_buf(vim.b.lsp_floating_preview)
-			if vim.bo[bufnr].filetype ~= "" then return end -- other type of lsp float
-			vim.bo[bufnr].filetype = "markdown"
-		end, 1)
-	end,
+	callback = vim.schedule_wrap(function()
+		if not vim.b.lsp_floating_preview then return end -- no lsp float
+		local bufnr = vim.api.nvim_win_get_buf(vim.b.lsp_floating_preview)
+		if vim.bo[bufnr].filetype ~= "" then return end -- other type of lsp float
+		vim.bo[bufnr].filetype = "markdown"
+	end),
 })
 
 --------------------------------------------------------------------------------
