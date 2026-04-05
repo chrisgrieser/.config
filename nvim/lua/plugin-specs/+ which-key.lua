@@ -83,10 +83,11 @@ require("which-key").setup {
 	icons = {
 		group = "", -- different color for groups already distinguishable enough
 		separator = "│",
-		mappings = false, -- disable icons for keymaps
+		keys = { PageDown = "󰇚", PageUp = "󰸇" },
+
 		-- NOTE we cannot get icons from the keymap descriptions, so we just
 		-- use the icons from there and disable whickey's icon features
-		keys = { PageDown = "󰇚", PageUp = "󰸇" },
+		mappings = false, -- disable icons for keymaps
 	},
 	keys = {
 		scroll_down = "<PageDown>",
