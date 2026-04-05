@@ -2,10 +2,10 @@
 vim.pack.add { "https://github.com/nvim-mini/mini.icons" }
 --------------------------------------------------------------------------------
 
--- REQUIRED  hl` key for filetypes/extensions not in the default list 
+-- REQUIRED hl` key for files/extensions not in the default list 
 require("mini.icons").setup {
 	file = {
-		["init.lua"] = { glyph = "󰢱" }, -- disable nvim glyph: https://github.com/echasnovski/mini.nvim/issues/1384
+		["init.lua"] = { glyph = "󰢱" }, -- disable nvim glyph: https://github.com/nvim-mini/mini.nvim/issues/1384
 		["README.md"] = { glyph = "" },
 		[".ignore"] = { glyph = "󰈉", hl = "MiniIconsGrey" },
 		["pre-commit"] = { glyph = "󰊢", hl = "MiniIconsGrey" },

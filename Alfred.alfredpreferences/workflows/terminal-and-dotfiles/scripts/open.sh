@@ -8,4 +8,5 @@ if ! pgrep -xq "neovide"; then
 	while ! pgrep -xq "neovide"; do sleep 0.1; done
 	sleep 0.6
 fi
+open -a "Neovide"
 nvim --server '/tmp/nvim_server.pipe' --remote-send "<cmd>edit $1<CR>"

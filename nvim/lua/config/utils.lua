@@ -29,10 +29,14 @@ function M.uniqKeymap(mode, lhs, rhs, opts)
 	-- violating `unique=true` throws an error; using `pcall` to still load other mappings
 	local success, _ = pcall(vim.keymap.set, mode, lhs, rhs, opts)
 	if success then return end
+
 	local modes = type(mode) == "table" and table.concat(mode, ", ") or mode
-	local msg = ("**Duplicate keymap**\n[[%s]] %s"):format(modes, lhs)
+	local caller = debug.getinfo(1, "Sl") -- S: source, l: currentline
+	local source = vim.fs.basename(caller.source)
+	local msg = ("`(%s)`  %s  **%s:%d**"):format(modes, lhs, source, caller.currentline)
+
 	vim.defer_fn(function() -- defer for notification plugin
-		vim.notify(msg, vim.log.levels.WARN, { title = "User keybindings", timeout = false })
+		vim.notify(msg, vim.log.levels.WARN, { title = "Duplicate keymap", timeout = false })
 	end, 1000)
 end
 

@@ -29,5 +29,9 @@ return {
 				vim.cmd.startinsert { bang = true }
 			end)
 		end, { desc = "󰑕 Rename & update refs", buffer = bufnr })
+
+		-- codelens shows backlinks count on top of file 
+		-- (where it's also not in the way, so it can be enabled by default)
+		vim.lsp.codelens.enable(true, { bufnr = bufnr })
 	end,
 }
