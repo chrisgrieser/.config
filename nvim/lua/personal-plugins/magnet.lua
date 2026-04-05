@@ -1,9 +1,9 @@
 --[[ INFO NVIM-MAGNET
-1.`.gotoAltFile()` as an improved version of `:buffer #` that avoids special
+1.`.gotoAltFile()` is an improved version of `:buffer #` that avoids special
   buffers, deleted buffers, non-existent files etc. and falls back
   to the first oldfile, if there is currently only one buffer.
-2.`.gotoMostChangedFile` to go to the file in the cwd with the most git changes.
-3.`.altFileStatusbar()` and `.mostChangedFileStatusbar()` to display the
+2.`.gotoMostChangedFile` goes to the file in the cwd with the most git changes.
+3.`.altFileStatusbar()` and `.mostChangedFileStatusbar()` display the
   respective file in the statusbar. If there is no alt-file, the first oldfile
   is shown. If there is no changed file, nothing is shown.
 ]]
