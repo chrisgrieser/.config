@@ -8,11 +8,13 @@
 	<string>❇️</string>
 	<key>connections</key>
 	<dict>
+		<key>3B075944-9330-4173-B143-D456715F890A</key>
+		<array/>
 		<key>4694D7EB-2482-44FA-881E-2597A9A90F9C</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>9AD22EA9-7218-4E8E-B508-601B4250BA47</string>
+				<string>3B075944-9330-4173-B143-D456715F890A</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -26,19 +28,6 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>2EA46AC6-E906-4DCB-9559-68237A3A7C7A</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>87B867FD-9C0D-4E91-B4B5-1EE3C8193EC3</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>61E53F25-50A2-4148-8015-065A22C828EE</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -126,59 +115,26 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>openwith</key>
-				<string></string>
-				<key>sourcefile</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openfile</string>
-			<key>uid</key>
-			<string>9AD22EA9-7218-4E8E-B508-601B4250BA47</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>keyword</key>
-				<string>leetcode</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>LeetCode.nvim</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>87B867FD-9C0D-4E91-B4B5-1EE3C8193EC3</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>script</key>
-				<string>neovide "leetcode.nvim"</string>
+				<string># not using open pending: https://github.com/neovide/neovide/issues/3444#issuecomment-4188793273
+# open "$1"
+
+neovide "$1" --fork</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
 				<string></string>
 				<key>type</key>
-				<integer>11</integer>
+				<integer>5</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>61E53F25-50A2-4148-8015-065A22C828EE</string>
+			<string>3B075944-9330-4173-B143-D456715F890A</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -234,27 +190,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>sync</string>
-				<key>subtext</key>
-				<string>all perma-repos</string>
-				<key>text</key>
-				<string>🔁 Sync Repos</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>AE89EC05-ABD1-4FBA-8F53-15015B588EB0</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -275,6 +210,27 @@ open -g "hammerspoon://sync-repos"</string>
 			<string>90593B71-D876-45D6-8534-007AFD1C5A80</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>sync</string>
+				<key>subtext</key>
+				<string>all perma-repos</string>
+				<key>text</key>
+				<string>🔁 Sync Repos</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>AE89EC05-ABD1-4FBA-8F53-15015B588EB0</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -336,6 +292,27 @@ open -g "hammerspoon://sync-repos"</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>🔠 Spellfix added</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>4D5E5425-4BC5-4240-91A5-271964280B2A</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -362,18 +339,18 @@ open -g "hammerspoon://sync-repos"</string>
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
-				<false/>
+				<true/>
 				<key>removeextension</key>
 				<false/>
 				<key>text</key>
 				<string>{query}</string>
 				<key>title</key>
-				<string>🔠 Spellfix added</string>
+				<string>Karabiner Elements</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
-			<string>4D5E5425-4BC5-4240-91A5-271964280B2A</string>
+			<string>2EA46AC6-E906-4DCB-9559-68237A3A7C7A</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -421,27 +398,6 @@ open -g "hammerspoon://sync-repos"</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>Karabiner Elements</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>2EA46AC6-E906-4DCB-9559-68237A3A7C7A</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
@@ -455,6 +411,15 @@ open -g "hammerspoon://sync-repos"</string>
 			<real>330</real>
 			<key>ypos</key>
 			<real>665</real>
+		</dict>
+		<key>3B075944-9330-4173-B143-D456715F890A</key>
+		<dict>
+			<key>note</key>
+			<string>open</string>
+			<key>xpos</key>
+			<real>190</real>
+			<key>ypos</key>
+			<real>35</real>
 		</dict>
 		<key>4694D7EB-2482-44FA-881E-2597A9A90F9C</key>
 		<dict>
@@ -474,15 +439,6 @@ open -g "hammerspoon://sync-repos"</string>
 			<key>ypos</key>
 			<real>500</real>
 		</dict>
-		<key>61E53F25-50A2-4148-8015-065A22C828EE</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>xpos</key>
-			<real>615</real>
-			<key>ypos</key>
-			<real>35</real>
-		</dict>
 		<key>68387AD9-ECC3-4998-88E7-6B37F8F7163C</key>
 		<dict>
 			<key>colorindex</key>
@@ -491,17 +447,6 @@ open -g "hammerspoon://sync-repos"</string>
 			<real>190</real>
 			<key>ypos</key>
 			<real>665</real>
-		</dict>
-		<key>87B867FD-9C0D-4E91-B4B5-1EE3C8193EC3</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>note</key>
-			<string>leetcode.nvim</string>
-			<key>xpos</key>
-			<real>455</real>
-			<key>ypos</key>
-			<real>35</real>
 		</dict>
 		<key>90593B71-D876-45D6-8534-007AFD1C5A80</key>
 		<dict>
@@ -522,13 +467,6 @@ open -g "hammerspoon://sync-repos"</string>
 			<real>30</real>
 			<key>ypos</key>
 			<real>665</real>
-		</dict>
-		<key>9AD22EA9-7218-4E8E-B508-601B4250BA47</key>
-		<dict>
-			<key>xpos</key>
-			<real>195</real>
-			<key>ypos</key>
-			<real>35</real>
 		</dict>
 		<key>9C688A36-1FD9-4D90-80C8-5E137987DC58</key>
 		<dict>

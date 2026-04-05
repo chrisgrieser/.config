@@ -5,6 +5,7 @@ no-multigrid = false
 title-hidden = true
 tabs = false
 mouse-cursor-icon = "i-beam"
+icon = "~/.config/neovide/macOS icon.icns"  # only in the Dock, elsewhere determined by `replacicon`
 
 [font]
 normal = ["JetBrainsMonoNL NF", "Menlo"]
