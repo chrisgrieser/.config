@@ -1,20 +1,19 @@
 vim.pack.add {
-	"https://github.com/echasnovski/mini.icons",
+	"https://github.com/nvim-mini/mini.icons",
 	"https://github.com/MeanderingProgrammer/render-markdown.nvim",
 }
 --------------------------------------------------------------------------------
 
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = "markdown",
-	callback = function(ctx)
-		vim.keymap.set(
-			"n",
-			"<leader>oc",
-			function() require("render-markdown").toggle() end,
-			{ desc = " Markdown render", buffer = ctx.buf }
-		)
-	end,
-})
+require("config.utils").pluginKeymaps {
+	{
+		"<leader>oc",
+		function() require("render-markdown").toggle() end,
+		desc = " Markdown render",
+		ft = "markdown",
+	},
+}
+
+--------------------------------------------------------------------------------
 
 require("render-markdown").setup {
 	quote = {

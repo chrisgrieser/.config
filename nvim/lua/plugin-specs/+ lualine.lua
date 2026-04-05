@@ -138,11 +138,7 @@ require("lualine").setup {
 				end,
 				icon = "",
 			},
-			{
-				"fileformat",
-				icon = "󰌑",
-				cond = function() return vim.bo.fileformat ~= "unix" end,
-			},
+			{ "fileformat", icon = "󰌑", cond = function() return vim.bo.fileformat ~= "unix" end },
 			{
 				"diagnostics",
 				fmt = function(diag) -- hide diagnostics if disabled

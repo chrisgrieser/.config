@@ -56,9 +56,6 @@ bkeymap("n", "gx", qol.followMdlinkOrWikilink, { desc = "󰍔 Follow URL/Wikilin
 -- `hyper` gets registered by neovide as `cmd+ctrl` (`<D-C-`)
 bkeymap({ "n", "i" }, "<D-C-e>", qol.codeBlockFromClipboard, { desc = "󰍔 Codeblock" })
 
--- stylua: ignore
-bkeymap("n", "#", function() require("personal-plugins.hiraganafy")() end, { desc = "󰍔 Hiraganafy" })
-
 bkeymap("n", "<D-L>", function()
 	local path = vim.api.nvim_buf_get_name(0)
 	local uri = "obsidian://open?path=" .. vim.uri_encode(path)

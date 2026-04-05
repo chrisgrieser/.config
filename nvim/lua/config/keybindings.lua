@@ -470,12 +470,23 @@ keymap("n", "<leader>rc", function() require("personal-plugins.misc").camelSnake
 ---OPTION TOGGLING--------------------------------------------------------------
 keymap("n", "<leader>on", "<cmd>set number!<CR>", { desc = " Line numbers" })
 keymap("n", "<leader>ow", "<cmd>set wrap!<CR>", { desc = "󰖶 Wrap" })
+
 keymap("n", "<leader>od", function()
 	local isEnabled = vim.diagnostic.is_enabled { bufnr = 0 }
 	vim.diagnostic.enable(not isEnabled, { bufnr = 0 })
 end, { desc = "󰋽 Diagnostics" })
--- stylua: ignore
-keymap("n", "<leader>oc", function() vim.wo.conceallevel = vim.wo.conceallevel == 0 and 2 or 0 end, { desc = "󰈉 Conceal" })
+
+keymap("n", "<leader>or", function()
+	local isEnabled = vim.lsp.codelens.is_enabled { bufnr = 0 }
+	vim.lsp.codelens.enable(not isEnabled, { bufnr = 0 })
+end, { desc = "󰈿 References (CodeLens)" })
+
+keymap(
+	"n",
+	"<leader>oc",
+	function() vim.wo.conceallevel = vim.wo.conceallevel == 0 and 2 or 0 end,
+	{ desc = "󰈉 Conceal" }
+)
 
 keymap("n", "<leader>ol", function()
 	vim.cmd.lsp("restart")

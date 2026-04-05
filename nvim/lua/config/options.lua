@@ -88,6 +88,11 @@ vim.opt.shiftwidth = 3 -- number of tabs/spaces inserted when indenting
 vim.opt.shiftround = true
 vim.opt.smartindent = true
 
+---MESSAGES & CMDLINE-----------------------------------------------------------
+vim.opt.report = 9001 -- disable most "x more/fewer lines" messages
+vim.opt.shortmess:append("I") -- no intro message
+vim.opt.cmdheight = 0
+
 ---INVISIBLE CHARS--------------------------------------------------------------
 vim.opt.conceallevel = 2 -- hide some chars in markdown and json
 

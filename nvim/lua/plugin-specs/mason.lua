@@ -1,8 +1,8 @@
 vim.pack.add { "https://github.com/mason-org/mason.nvim" }
 --------------------------------------------------------------------------------
 -- INFO HOW TO PIN VERSIONS
--- 1. uncomment personal registry in mason's `opts`
--- 2. copy mason registry spec with desired version to `personal-mason-registry`
+-- 1. uncomment registry in mason's `opts` below
+-- 2. copy mason registry spec with desired version to `mason-registry/packages/…`
 --------------------------------------------------------------------------------
 
 local ensureInstalled = {
@@ -44,11 +44,6 @@ local ensureInstalled = {
 	"efm", -- integration of external linters
 	"shellcheck", -- shell linter (via efm) PENDING https://github.com/bash-lsp/bash-language-server/issues/663
 	"shfmt", -- shell formatter (via bashls)
-
-	-- DEBUGGERS
-	"debugpy", -- python
-	"js-debug-adapter", -- js/ts
-	"local-lua-debugger-vscode", -- lua
 
 	-- OTHER
 	"tree-sitter-cli", -- used by nvim-treesitter to install parsers
@@ -171,7 +166,8 @@ enableLsps()
 
 vim.api.nvim_create_autocmd("VimEnter", {
 	desc = "User: sync mason packages",
-	callback = function() vim.defer_fn(syncPackages, 2000) end,
+	-- deferred to not install at same time as plugins
+	callback = function() vim.defer_fn(syncPackages, 1000) end,
 })
 
 require("config.utils").pluginKeymaps {

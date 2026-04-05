@@ -36,7 +36,6 @@ function M.uniqKeymap(mode, lhs, rhs, opts)
 	end, 1000)
 end
 
----sets `buffer`, `silent` and `nowait` to true
 ---@param mode string|string[]
 ---@param lhs string
 ---@param rhs string|function
@@ -49,6 +48,8 @@ end
 ---@param maps {[1]: string, [2]: string|function, mode?: string|string[], desc?: string, nowait?: boolean, ft?: string|string[], remap?: boolean, unique?: boolean, expr?: boolean}[]
 function M.pluginKeymaps(maps)
 	for _, map in ipairs(maps) do
+		local lhs, rhs = map[1], map[2]
+		local mode = map.mode or "n"
 		local opts = {
 			desc = map.desc,
 			nowait = map.nowait,
@@ -57,14 +58,15 @@ function M.pluginKeymaps(maps)
 			expr = map.expr,
 		}
 		if not map.ft then
-			M.uniqKeymap(map.mode or "n", map[1], map[2], opts)
+			M.uniqKeymap(mode, lhs, rhs, opts)
 		else
-			local filetypes = type(map.ft) == "string" and { map.ft } or map.ft ---@cast filetypes string[]
 			vim.api.nvim_create_autocmd("FileType", {
-				desc = "User: plugin ft-keymap",
+				desc = "User: plugin filetype-keymap",
+				pattern = map.ft,
 				callback = function(ctx)
-					if not vim.tbl_contains(filetypes, ctx.match) then return end
-					M.bufKeymap(map.mode or "n", map[1], map[2], opts)
+					opts.buffer = ctx.buf
+					opts.nowait = true
+					vim.keymap.set(mode, lhs, rhs, opts)
 				end,
 			})
 		end
