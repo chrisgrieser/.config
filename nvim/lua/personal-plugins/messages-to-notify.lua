@@ -25,11 +25,14 @@ local function attach()
 	vim.ui_attach(ns, { ext_messages = true }, function(event, ...)
 		if event == "msg_history_show" then
 			local msgs = ...
-			local out = vim.iter(msgs):fold("", function(acc, entry)
-				local msg = vim.iter(entry[2]):fold("", function(acc2, msg) return acc2 .. msg[2] end)
-				return acc .. msg .. "\n\n"
-			end)
-			vim.notify(out, nil, { title = ":messages", icon = config.notification.icon })
+			local out = vim.iter(msgs)
+				:map(function(entry)
+					return vim.iter(entry[2]):fold("", function(acc, msg) return acc .. msg[2] end)
+				end)
+				:join("\n---\n")
+			local nOpts = { title = ":messages", icon = config.notification.icon, ft = "text" }
+			vim.notify(vim.trim(out), nil, nOpts)
+			return
 		end
 		if event ~= "msg_show" then return end
 
