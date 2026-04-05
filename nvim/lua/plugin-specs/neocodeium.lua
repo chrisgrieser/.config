@@ -1,13 +1,12 @@
 --------------------------------------------------------------------------------
+vim.pack.add { "https://github.com/monkoose/neocodeium" }
+--------------------------------------------------------------------------------
 -- ALTERNATIVES
 -- BYOK: https://github.com/milanglacier/minuet-ai.nvim
 -- Copilot plugin (subscription): https://github.com/zbirenbaum/copilot.lua#setup-and-configuration
 -- Copilot LSP (subscription), requires nvim 0.12 https://github.com/github/copilot-language-server-release
---
 -- Cerebras: https://github.com/4tyone/snek-nvim
 -- Cerebras: https://github.com/jim-at-jibba/nvim-stride
---------------------------------------------------------------------------------
-vim.pack.add { "https://github.com/monkoose/neocodeium" }
 --------------------------------------------------------------------------------
 
 require("neocodeium").setup {
@@ -17,8 +16,38 @@ require("neocodeium").setup {
 		bib = false,
 		text = false, -- filetype when editing in `pass` (1. extra safeguard)
 	},
-	-- `filter` should return `false` to disable AI on buffer
-	filter = require("config.utils").allowBufferForAi,
+	filter = function (bufnr)
+		-- INFO plugins are disabled when using `pass`, for safety
+		-- adding redundant safeguards to disable AI for those buffers nonetheless
+		local filepath = vim.api.nvim_buf_get_name(bufnr)
+		local ft, filename = vim.bo[bufnr].filetype, vim.fs.basename(filepath)
+		if vim.fn.reg_recording() ~= "" then return false end -- disable when recording
+		if vim.bo[bufnr].buftype ~= "" then return false end
+		if ft == "text" then return false end -- disable, since `txt` used by `pass` and others
+		if ft == "bib" then return false end -- too large and not useful
+		if ft == "csv" then return false end -- too large / sensitive data
+		if filename == "config.local" then return false end -- sensitive data
+		if not filename:find("%.") then return false end -- extensionless file
+
+		local pathsToIgnore = {
+			"security",
+			"leetcode/", -- should do leetcode problems on my own
+			"/private/var/", -- path when editing in `pass` (extra safeguard)
+			"api-key",
+			".env",
+			"recovery", -- e.g., password recovery files
+		}
+		local ignorePath = vim.iter(pathsToIgnore):any(
+			function(ignored) return filepath:lower():find(ignored, 1, true) ~= nil end
+		)
+
+		if ignorePath then
+			vim.notify_once("Disabled AI on this buffer.")
+			return false --> return `false` to disable
+		else
+			return true
+		end
+	end
 }
 
 --------------------------------------------------------------------------------

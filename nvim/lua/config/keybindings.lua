@@ -1,4 +1,4 @@
-local keymap = require("config.utils").uniqueKeymap
+local keymap = require("config.utils").uniqKeymap
 
 ---META-------------------------------------------------------------------------
 -- save before quitting (non-unique, since also set by Neovide)
@@ -95,8 +95,12 @@ keymap("n", "<leader>ut", function()
 end, { desc = "󰋚 Undo tree" })
 
 -- Duplicate
--- stylua: ignore
-keymap("n", "ww", function() require("personal-plugins.misc").smartDuplicate() end, { desc = "󰲢 Duplicate line" })
+keymap(
+	"n",
+	"ww",
+	function() require("personal-plugins.misc").smartDuplicate() end,
+	{ desc = "󰲢 Duplicate line", unique = false } -- not unique to overwrite mapping from mini.operators
+)
 
 -- stylua: ignore
 keymap("n", "<", function() require("personal-plugins.misc").toggleTitleCase() end, { desc = "󰬴 Toggle lower/Title case" })

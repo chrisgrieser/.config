@@ -69,13 +69,13 @@ vim.api.nvim_create_autocmd("VimEnter", { -- VimEnter to not uninstall plugins s
 })
 
 ---GLOBAL KEYMAPS---------------------------------------------------------------
-u.uniqueKeymap("n", "<leader>pl", function()
+u.uniqKeymap("n", "<leader>pl", function()
 	local data = vim.pack.get()
 	local all = vim.iter(data):map(function(p) return "* " .. p.spec.name end):join("\n")
 	vim.notify(all, nil, { title = #data .. " plugins (nvim-pack)", icon = "󰐱", timeout = false })
 end, { desc = "󰐱 List plugins" })
 
-u.uniqueKeymap("n", "<leader>pL", function()
+u.uniqKeymap("n", "<leader>pL", function()
 	vim.cmd.edit(vim.fn.stdpath("log") .. "/nvim-pack.log")
 	vim.schedule(function()
 		vim.bo.filetype = "nvim-pack"
@@ -84,14 +84,14 @@ u.uniqueKeymap("n", "<leader>pL", function()
 	end)
 end, { desc = "󰐱 Log of updates" })
 
-u.uniqueKeymap(
+u.uniqKeymap(
 	"n",
 	"<leader>pr",
 	function() vim.pack.update(nil, { offline = true, target = "lockfile" }) end,
 	{ desc = "󰐱 Restore from lockfile" }
 )
 
-u.uniqueKeymap(
+u.uniqKeymap(
 	"n",
 	"<leader>pp",
 	function() vim.pack.update() end,

@@ -13,14 +13,5 @@ require("mini.operators").setup {
 	replace = { prefix = "s" },
 	exchange = { prefix = "sx" },
 	sort = { prefix = "sy" },
-	multiply = { prefix = "" }, -- disable -> set our own in `make_mappings`
+	multiply = { prefix = "w" },
 }
-
--- Do not set `multiply` mapping for line, since we use our own, as
--- multiply's transformation function only supports pre-duplication
--- changes, which prevents us from doing post-duplication cursor
--- movements.
-require("mini.operators").make_mappings(
-	"multiply",
-	{ textobject = "w", selection = "w", line = "" }
-)

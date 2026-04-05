@@ -31,9 +31,8 @@ local function attach()
 				end)
 				:join("\n*****\n")
 			vim.notify(vim.trim(out), nil, { title = ":messages", icon = config.notification.icon })
-			return
 		end
-		assert(event == "msg_show", "unexpected event: " .. event)
+		if event ~= "msg_show" then return end -- ignore other events suhc as window positioning
 
 		local kind, content, _replace, _history = ... -- for `msg_show` only https://neovim.io/doc/user/api-ui-events/#ui-messages
 		if vim.list_contains(config.msgKind.ignore, kind) then return end
@@ -63,6 +62,8 @@ end
 local function detach() vim.ui_detach(ns) end
 
 --------------------------------------------------------------------------------
+
+vim.opt.cmdheight = 0
 
 local group = vim.api.nvim_create_augroup("ui-hack", { clear = true })
 vim.api.nvim_create_autocmd("CmdlineLeave", { group = group, callback = attach })

@@ -20,7 +20,7 @@ end
 ---@param lhs string
 ---@param rhs string|function
 ---@param opts? vim.keymap.set.Opts
-function M.uniqueKeymap(mode, lhs, rhs, opts)
+function M.uniqKeymap(mode, lhs, rhs, opts)
 	if not opts then opts = {} end
 
 	-- allow to disable with `unique=false` to overwrite nvim defaults: https://neovim.io/doc/user/vim_diff.html#default-mappings
@@ -42,7 +42,7 @@ end
 ---@param rhs string|function
 ---@param opts? vim.keymap.set.Opts
 function M.bufKeymap(mode, lhs, rhs, opts)
-	opts = vim.tbl_extend("force", { buffer = true, silent = true, nowait = true }, opts or {})
+	opts = vim.tbl_extend("force", { buffer = true, nowait = true }, opts or {})
 	vim.keymap.set(mode, lhs, rhs, opts)
 end
 
@@ -57,7 +57,7 @@ function M.pluginKeymaps(maps)
 			expr = map.expr,
 		}
 		if not map.ft then
-			M.uniqueKeymap(map.mode or "n", map[1], map[2], opts)
+			M.uniqKeymap(map.mode or "n", map[1], map[2], opts)
 		else
 			local filetypes = type(map.ft) == "string" and { map.ft } or map.ft ---@cast filetypes string[]
 			vim.api.nvim_create_autocmd("FileType", {
@@ -86,43 +86,6 @@ function M.loadGhToken()
 	end
 	vim.env.GITHUB_TOKEN = file:read("*l") -- read first line
 	file:close()
-end
-
----@param bufnr integer
----@param filepath string
----@return boolean -- return `false` to disable on this buffer
-function M.allowBufferForAi(bufnr, filepath)
-	-- INFO plugins are disabled when using `pass` via `$USING_PASS`, for safety
-	-- adding redundant safeguards to disable AI for those buffers nonetheless
-
-	if not filepath then filepath = vim.api.nvim_buf_get_name(bufnr) end
-	local ft, filename = vim.bo[bufnr].filetype, vim.fs.basename(filepath)
-	if vim.fn.reg_recording() ~= "" then return false end -- disable when recording
-	if vim.bo[bufnr].buftype ~= "" then return false end
-	if ft == "text" then return false end -- disable, since `txt` used by `pass` and others
-	if ft == "bib" then return false end -- too large and not useful
-	if ft == "csv" then return false end -- too large / sensitive data
-	if filename == "config.local" then return false end -- too large / sensitive data
-	if not filename:find("%.") then return false end -- extensionless file
-
-	local pathsToIgnore = {
-		"security",
-		"leetcode/", -- should do leetcode problems on my own
-		"/private/var/", -- path when editing in `pass` (extra safeguard)
-		"api-key",
-		".env",
-		"recovery", -- e.g., password recovery files
-	}
-	local ignorePath = vim.iter(pathsToIgnore):any(
-		function(ignored) return filepath:lower():find(ignored, 1, true) ~= nil end
-	)
-
-	if ignorePath then
-		vim.notify_once("Disabled AI on this buffer.")
-		return false --> return `false` to disable
-	else
-		return true
-	end
 end
 
 --------------------------------------------------------------------------------

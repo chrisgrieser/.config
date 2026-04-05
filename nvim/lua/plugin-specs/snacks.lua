@@ -541,6 +541,7 @@ do
 	end
 
 	-- picker: disable default keymaps to make the `?` help overview less cluttered
+	-- (deferred, since they load a bunch of snacks modules)
 	vim.defer_fn(function()
 		require("snacks.picker.config.defaults").defaults.win.input.keys = {}
 		require("snacks.picker.config.defaults").defaults.win.list.keys = {}
@@ -554,7 +555,7 @@ do
 				return vim.list_slice(formatted, 3)
 			end
 		end
-	end, 2000)
+	end, 4000)
 end
 
 --------------------------------------------------------------------------------

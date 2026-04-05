@@ -1,7 +1,7 @@
 local tempfile = "/tmp/neovide-restart"
 --------------------------------------------------------------------------------
 
-require("config.utils").uniqueKeymap({ "n", "x", "i" }, "<D-C-r>", function()
+require("config.utils").uniqKeymap({ "n", "x", "i" }, "<D-C-r>", function()
 	-- FIX
 	-- 1. `vim.g.neovide` not set initially during `:restart`
 	-- 2. wrong position loading after restart
