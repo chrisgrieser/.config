@@ -88,8 +88,6 @@ keymap("n", "<leader>ut", function()
 			pattern = "nvim-undotree",
 			callback = function(ctx)
 				vim.keymap.set("n", "q", vim.cmd.close, { buffer = ctx.buf, nowait = true })
-				local win = vim.fn.bufwinid(ctx.buf)
-				vim.wo[win].list = false
 			end,
 		})
 	end
@@ -273,6 +271,9 @@ keymap("i", "<D-v>", function()
 	require("personal-plugins.md-qol").addTitleToUrlIfMarkdown(reg)
 	return "<C-g>u<C-r><C-o>" .. reg -- `<C-g>u` adds undopoint before, `<C-r><C-o>` skips auto-indent
 end, { desc = " Paste", expr = true })
+
+-- default paste
+keymap("n", "p", "]p", { desc = " Paste & indent" })
 
 -- compatibility w/ macOS clipboard managers; remap to inherit changes to `p`
 keymap("n", "<D-v>", "p", { desc = " Paste", remap = true })

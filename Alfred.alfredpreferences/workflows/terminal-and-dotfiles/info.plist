@@ -12,7 +12,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>7B13503C-1D31-4489-8A47-C30590A755FC</string>
+				<string>8FA06A4E-E3FC-48E3-B626-7CF713B1D091</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -113,17 +113,25 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>openwith</key>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
 				<string></string>
-				<key>sourcefile</key>
-				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/open.sh</string>
+				<key>type</key>
+				<integer>8</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.openfile</string>
+			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>7B13503C-1D31-4489-8A47-C30590A755FC</string>
+			<string>8FA06A4E-E3FC-48E3-B626-7CF713B1D091</string>
 			<key>version</key>
-			<integer>3</integer>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -426,10 +434,10 @@ open -g "hammerspoon://sync-repos"</string>
 			<key>ypos</key>
 			<real>665</real>
 		</dict>
-		<key>7B13503C-1D31-4489-8A47-C30590A755FC</key>
+		<key>8FA06A4E-E3FC-48E3-B626-7CF713B1D091</key>
 		<dict>
 			<key>xpos</key>
-			<real>190</real>
+			<real>195</real>
 			<key>ypos</key>
 			<real>35</real>
 		</dict>

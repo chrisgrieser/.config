@@ -33,6 +33,7 @@ if isRestarting then
 	local reopenPrevPosition = function()
 		vim.cmd.edit(prevFile)
 		vim.api.nvim_win_set_cursor(0, { tonumber(row), tonumber(col) })
+		vim.cmd.normal { "zH", bang = true } -- fully scroll to the left
 	end
 	restoreFunc = reopenPrevPosition
 

@@ -23,7 +23,7 @@ abbr("->", "→")
 ---ADD TITLE TO URLS------------------------------------------------------------
 bkeymap("n", "p", function()
 	require("personal-plugins.md-qol").addTitleToUrlIfMarkdown("+")
-	return "p"
+	return "]p" -- `]p` pastes and indents
 end, { desc = "󰍔 Paste (+ add title if URL)", expr = true })
 bkeymap("n", "<leader>cu", qol.addTitleToUrl, { desc = "󰍔 Add title to URL" })
 

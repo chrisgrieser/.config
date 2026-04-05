@@ -33,8 +33,8 @@ vim.opt.startofline = true -- motions like "G" also move to the first char
 vim.opt.mousescroll = "ver:1,hor:3" -- more fine-grained scrolling with mouse
 
 -- Formatting `vim.opt.formatoptions:remove("o")` would not work, since it's
--- overwritten by ftplugins having the `o` option (which many do).
--- Therefore needs to be set via autocommand.
+-- overwritten by ftplugins having the `o` option (which many do). Therefore,
+-- this needs to be set via autocommand.
 vim.api.nvim_create_autocmd("FileType", {
 	desc = "User: Remove `o` from `formatoptions`",
 	callback = function()
@@ -92,7 +92,13 @@ vim.opt.cmdheight = 0
 
 ---INVISIBLE CHARS--------------------------------------------------------------
 vim.opt.conceallevel = 2 -- hide some chars in markdown and json
-vim.opt.list = true
+
+vim.opt.list = true -- show invisible chars (`listchars` below)
+vim.api.nvim_create_autocmd("BufReadPost", {
+	desc = "User: Show listchars only in regular buffers",
+	callback = function(ctx) vim.opt_local.list = vim.bo[ctx.buf].buftype == "" end,
+})
+
 vim.opt.listchars:append {
 	nbsp = "␣",
 	precedes = "…",

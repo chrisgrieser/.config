@@ -80,7 +80,12 @@ _escape_on_empty_buffer() {
 	if [[ "$key_pressed" == "ctrl-l" ]]; then # mapped via terminal to `cmd+l`
 		open -R "$item"
 	else
-		open "$item"
+		# open "$item"
+		# PENDING https://github.com/neovide/neovide/issues/3444#issuecomment-4188793273
+		open -a "Neovide"
+		while ! pgrep -xq "neovide"; do sleep 0.1; done
+		sleep 0.5
+		nvim --server '/tmp/nvim_server.pipe' --remote-send "<cmd>edit $1<CR>"
 	fi
 }
 zle -N _escape_on_empty_buffer
