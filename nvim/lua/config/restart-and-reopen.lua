@@ -5,12 +5,13 @@ require("config.utils").uniqueKeymap({ "n", "x", "i" }, "<D-C-r>", function()
 	-- FIX
 	-- 1. `vim.g.neovide` not set initially during `:restart`
 	-- 2. wrong position loading after restart
+	-- 3. wrong background
 	if vim.g.neovide then
 		local file, errmsg = io.open(tempfile, "w")
 		assert(file, errmsg)
 		local row, col = unpack(vim.api.nvim_win_get_cursor(0))
 		local filepath = vim.api.nvim_buf_get_name(0)
-		file:write(table.concat({ filepath, row, col }, ":"))
+		file:write(table.concat({ filepath, row, col, vim.o.background }, ":"))
 		file:close()
 	end
 
@@ -27,11 +28,12 @@ if isRestarting then
 	-- FIX #1 `vim.g.neovide` not set initially
 	vim.g.neovide = true
 
-	-- FIX #2 wrong position
+	-- FIX #2 wrong position & background
 	local file, errmsg = io.open(tempfile, "r")
 	assert(file, errmsg)
 	local content = file:read("*a")
-	local prevFile, row, col = unpack(vim.split(content, ":"))
+	local prevFile, row, col, background = unpack(vim.split(content, ":"))
+	vim.o.background = background
 	file:close()
 	local reopenPrevPosition = function()
 		vim.cmd.edit(prevFile)
