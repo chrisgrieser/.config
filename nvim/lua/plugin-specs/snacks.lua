@@ -139,7 +139,7 @@ opts.picker = {
 				end
 
 				local binaryExt = { "pdf", "png", "webp", "docx" }
-				local ext = absPath:match(".+%.([^.]+)$") or ""
+				local ext = (vim.fs.ext(absPath))
 				if vim.tbl_contains(binaryExt, ext) then
 					vim.ui.open(absPath)
 					picker:close()

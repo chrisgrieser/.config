@@ -11,10 +11,10 @@ vim.api.nvim_create_autocmd("VimResized", {
 
 vim.api.nvim_create_autocmd("BufReadPost", {
 	desc = "User: Restore cursor position",
-	callback = vim.schedule_wrap(function(ctx)
+	callback = function(ctx)
 		if vim.bo[ctx.buf].buftype ~= "" then return end
 		vim.cmd([[silent! normal! g`"]])
-	end),
+	end,
 })
 
 vim.api.nvim_create_autocmd({ "BufWinEnter", "WinEnter", "WinLeave" }, {
@@ -345,8 +345,8 @@ local function addFavicons(bufnr)
 	local hasCommentParser, urlQuery =
 		pcall(vim.treesitter.query.parse, "comment", "(uri) @string.special.url")
 	if not (hasCommentParser and urlQuery) then return end
-	local hasParserForFt, langTree = pcall(vim.treesitter.get_parser, bufnr)
-	if not (hasParserForFt and langTree) then return end
+	local langTree = vim.treesitter.get_parser(bufnr)
+	if not langTree then return end
 
 	langTree:for_each_tree(function(tree, _)
 		local commentUrlNodes = urlQuery:iter_captures(tree:root(), bufnr)
