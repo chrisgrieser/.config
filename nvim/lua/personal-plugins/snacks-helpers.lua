@@ -45,15 +45,6 @@ function M.createScratchRunKeymap(cmd)
 	}
 end
 
-function M.ensureLuarcForScratch()
-	local scratchRoot = vim.fn.stdpath("data") .. "/scratch" -- default root
-	vim.fn.mkdir(scratchRoot, "p")
-	local luarc = io.open(scratchRoot .. "/.luarc.jsonc", "w")
-	assert(luarc, "Could not create luarc for lua scratch")
-	luarc:write('{ "runtime.version": "LuaJIT", "workspace.library": ["$VIMRUNTIME/lua"] }')
-	luarc:close()
-end
-
 function M.openNotif(idx)
 	local maxWidth = 0.85
 	local maxHeight = 0.85

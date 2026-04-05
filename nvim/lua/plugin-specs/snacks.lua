@@ -571,7 +571,12 @@ require("config.utils").pluginKeymaps {
 	{
 		"<leader>es",
 		function()
-			if vim.bo.ft == "lua" then helpers.ensureLuarcForScratch() end
+			if vim.bo.ft == "lua" then -- ensure .luarc.jsonc
+				local scratchRoot = vim.fn.stdpath("data") .. "/scratch" -- default root for snacks
+				local json = '{ "runtime.version": "LuaJIT", "workspace.library": ["$VIMRUNTIME/lua"] }'
+				vim.fn.mkdir(scratchRoot, "p")
+				vim.fn.writefile({ json }, scratchRoot .. "/.luarc.jsonc")
+			end
 			Snacks.scratch()
 		end,
 		desc = " Scratch buffer",

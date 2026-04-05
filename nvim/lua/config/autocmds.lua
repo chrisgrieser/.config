@@ -285,9 +285,7 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufReadPost" }, {
 			local templatePath = vim.fs.normalize(conf.templateDir .. "/" .. templateFile)
 
 			-- read template
-			local file = io.open(templatePath, "r")
-			if not file then return end
-			local content = file:read("*a")
+			local content = table.concat(vim.fn.readfile(templatePath), "\n")
 			vim.snippet.expand(content) -- expands placeholders like `$0`
 
 			-- adjust filetype if needed (e.g. when applying a zsh template to .sh files)
@@ -315,15 +313,6 @@ vim.api.nvim_create_autocmd({ "CursorMoved", "BufReadPost" }, {
 			topline = topline + toplineFoldAmount
 			vim.fn.winrestview { topline = topline + scrolloff - visualDistanceToEof }
 		end
-	end,
-})
-
--- FIX for some reason `scrolloff` sometimes being set to `0` on new buffers!?
-local originalScrolloff = vim.o.scrolloff
-vim.api.nvim_create_autocmd({ "BufReadPost", "BufNew" }, {
-	desc = "User: FIX scrolloff on entering new buffer",
-	callback = function(ctx)
-		if vim.bo[ctx.buf].buftype == "" then vim.opt.scrolloff = originalScrolloff end
 	end,
 })
 

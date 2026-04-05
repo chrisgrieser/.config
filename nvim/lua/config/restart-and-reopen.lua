@@ -7,12 +7,10 @@ require("config.utils").uniqueKeymap({ "n", "x", "i" }, "<D-C-r>", function()
 	-- 2. wrong position loading after restart
 	-- 3. wrong background
 	if vim.g.neovide then
-		local file, errmsg = io.open(tempfile, "w")
-		assert(file, errmsg)
 		local row, col = unpack(vim.api.nvim_win_get_cursor(0))
 		local filepath = vim.api.nvim_buf_get_name(0)
-		file:write(table.concat({ filepath, row, col, vim.o.background }, ":"))
-		file:close()
+		local line = table.concat({ filepath, row, col, vim.o.background }, ":")
+		vim.fn.writefile({ line }, tempfile)
 	end
 
 	vim.cmd("silent! update")
@@ -29,12 +27,9 @@ if isRestarting then
 	vim.g.neovide = true
 
 	-- FIX #2 wrong position & background
-	local file, errmsg = io.open(tempfile, "r")
-	assert(file, errmsg)
-	local content = file:read("*a")
+	local content = vim.fn.readfile(tempfile)[1]
 	local prevFile, row, col, background = unpack(vim.split(content, ":"))
 	vim.o.background = background
-	file:close()
 	local reopenPrevPosition = function()
 		vim.cmd.edit(prevFile)
 		vim.api.nvim_win_set_cursor(0, { tonumber(row), tonumber(col) })
@@ -57,7 +52,4 @@ else
 end
 
 --------------------------------------------------------------------------------
-vim.api.nvim_create_autocmd("VimEnter", {
-	desc = "User: re-open last file",
-	callback = vim.schedule_wrap(restoreFunc),
-})
+vim.api.nvim_create_autocmd("VimEnter", { callback = vim.schedule_wrap(restoreFunc) })

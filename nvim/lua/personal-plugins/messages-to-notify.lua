@@ -41,7 +41,7 @@ local function attach()
 		text = vim.trim(text):gsub("^(E%d+):", "[%1]") -- emphasize error codes
 
 		local level = vim.log.levels.INFO
-		if kind == "emsg" or kind:find("erro?r?$") then -- typos: ignore-line
+		if vim.list_contains({ "emsg", "lua_error", "shell_err", "echoerr", "rpcerr" }, kind) then
 			level = vim.log.levels.ERROR
 		elseif kind == "wmsg" then
 			level = vim.log.levels.WARN
@@ -49,7 +49,7 @@ local function attach()
 
 		local opts = { title = kind, icon = config.notification.icon }
 		if kind == "lua_print" then opts.ft = "lua" end
-		if kind == "progress" then opts.id = "messages-to-notify" end
+		if kind == "progress" then opts.id = "messages-to-notify" end -- id results in replacing old notif
 		if vim.list_contains(config.msgKind.mini, kind) and package.loaded["snacks"] then
 			opts.style = "minimal"
 			opts.id = "messages-to-notify"
