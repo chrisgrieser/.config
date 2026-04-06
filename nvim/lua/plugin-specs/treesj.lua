@@ -1,6 +1,8 @@
 -- vim: foldlevel=3
 -- DOCS https://github.com/Wansmer/treesj#basic-node
-vim.pack.add { "https://github.com/Wansmer/treesj" }
+vim.pack.add({
+	"https://github.com/Wansmer/treesj",
+}, { load = function() end }) -- lazy-loading via `:packadd` later
 --------------------------------------------------------------------------------
 
 Keymap { "<leader>s", function() require("treesj").toggle() end, desc = "󰗈 Split-join lines" }
@@ -78,4 +80,10 @@ local opts = {
 opts.langs.swift.guard_statement = opts.langs.swift.if_statement
 opts.langs.typescript = opts.langs.javascript
 
-require("treesj").setup(opts)
+--------------------------------------------------------------------------------
+
+-- lazy-load, since it eagerly loads all modules
+vim.defer_fn(function()
+	vim.cmd.packadd("treesj")
+	require("treesj").setup(opts)
+end, 500)

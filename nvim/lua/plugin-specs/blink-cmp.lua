@@ -229,7 +229,7 @@ opts = vim.tbl_deep_extend("force", opts, {
 --------------------------------------------------------------------------------
 
 vim.api.nvim_create_autocmd({ "InsertEnter", "CmdlineEnter" }, {
-	desc = "User: Lazy-load blink-cmp",
+	desc = "User: lazy-load blink-cmp",
 	once = true,
 	callback = function()
 		vim.cmd.packadd("blink.cmp")

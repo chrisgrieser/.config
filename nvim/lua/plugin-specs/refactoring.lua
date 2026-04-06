@@ -1,13 +1,7 @@
-vim.pack.add {
+vim.pack.add({
 	"https://github.com/nvim-lua/plenary.nvim",
 	"https://github.com/ThePrimeagen/refactoring.nvim",
-}
---------------------------------------------------------------------------------
-
-require("refactoring").setup {
-	show_success_message = true,
-}
-
+}, { load = function() end }) -- lazy-loading via `:packadd` later
 --------------------------------------------------------------------------------
 
 Keymap {
@@ -31,3 +25,10 @@ Keymap {
 	expr = true,
 	desc = " Extract function",
 }
+--------------------------------------------------------------------------------
+
+vim.defer_fn(function()
+	vim.cmd.packadd("plenary.nvim")
+	vim.cmd.packadd("refactoring.nvim")
+	require("refactoring").setup { show_success_message = true }
+end, 500)

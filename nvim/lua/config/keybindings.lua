@@ -46,7 +46,7 @@ Keymap { "ge", "]d", desc = "󰋽 Next diagnostic", remap = true }
 Keymap { "gE", "[d", desc = "󰋽 Previous diagnostic", remap = true }
 
 -- [g]oto [m]atching parenthesis (`remap` needed to use builtin `MatchIt` plugin)
-Keymap { "n", "gm", "%", desc = "󰅪 Goto match", remap = true }
+Keymap { "gm", "%", desc = "󰅪 Goto match", remap = true }
 
 -- Open URL in file
 Keymap {
