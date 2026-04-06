@@ -1,21 +1,26 @@
 local tempfile = "/tmp/neovide-restart"
 --------------------------------------------------------------------------------
 
-require("config.utils").uniqKeymap({ "n", "x", "i" }, "<D-C-r>", function()
-	-- FIX
-	-- 1. `vim.g.neovide` not set initially during `:restart`
-	-- 2. wrong position loading after restart
-	-- 3. wrong background
-	if vim.g.neovide then
-		local row, col = unpack(vim.api.nvim_win_get_cursor(0))
-		local filepath = vim.api.nvim_buf_get_name(0)
-		local line = table.concat({ filepath, row, col, vim.o.background }, ":")
-		vim.fn.writefile({ line }, tempfile)
-	end
+UniqMap {
+	"<D-C-r>",
+	function()
+		-- FIX
+		-- 1. `vim.g.neovide` not set initially during `:restart`
+		-- 2. wrong position loading after restart
+		-- 3. wrong background
+		if vim.g.neovide then
+			local row, col = unpack(vim.api.nvim_win_get_cursor(0))
+			local filepath = vim.api.nvim_buf_get_name(0)
+			local line = table.concat({ filepath, row, col, vim.o.background }, ":")
+			vim.fn.writefile({ line }, tempfile)
+		end
 
-	vim.cmd("silent! update")
-	vim.cmd.restart()
-end, { desc = " Save & restart" })
+		vim.cmd("silent! update")
+		vim.cmd.restart()
+	end,
+	desc = " Save & restart",
+	mode = { "n", "x", "i" },
+}
 
 --------------------------------------------------------------------------------
 

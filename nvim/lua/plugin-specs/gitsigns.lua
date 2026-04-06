@@ -16,6 +16,18 @@ require("gitsigns").setup {
 	current_line_blame_opts = { delay = 500 },
 }
 
+-- Using gitsigns's data since lualine's builtin component is updated less
+-- frequently and thus often out of sync with gitsigns in the signcolumn.
+vim.g.lualineAdd("sections", "lualine_y", {
+	"diff",
+	source = function()
+		local gs = vim.b.gitsigns_status_dict
+		if not gs then return end
+		return { added = gs.added, modified = gs.changed, removed = gs.removed }
+	end,
+	fmt = function(str) return vim.b.gitsignsPrevChanges and "󰑟 " .. str or str end,
+}, "before")
+
 --------------------------------------------------------------------------------
 
 require("config.utils").pluginKeymaps {

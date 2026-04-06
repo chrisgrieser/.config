@@ -16,13 +16,17 @@ function M.safeRequire(module)
 end
 
 ---Warn when there are conflicting keymaps
----@param mode string|string[]
----@param lhs string
----@param rhs string|function
----@param opts? vim.keymap.set.Opts
-function M.uniqKeymap(mode, lhs, rhs, opts)
-	if not opts then opts = {} end
-
+---@param map vim.keymap.set.Opts|{mode: string|string[], [1]: string, [2]: string|function}
+_G.UniqMap = function(map)
+	local mode = map.mode or "n"
+	local lhs, rhs = map[1], map[2]
+	local opts = {
+		desc = map.desc,
+		nowait = map.nowait,
+		remap = map.remap,
+		unique = map.unique,
+		expr = map.expr,
+	}
 	-- allow to disable with `unique=false` to overwrite nvim defaults: https://neovim.io/doc/user/vim_diff.html#default-mappings
 	if opts.unique == nil then opts.unique = true end
 
@@ -62,7 +66,7 @@ function M.pluginKeymaps(maps)
 			expr = map.expr,
 		}
 		if not map.ft then
-			M.uniqKeymap(mode, lhs, rhs, opts)
+			UniqMap(map)
 		else
 			vim.api.nvim_create_autocmd("FileType", {
 				desc = "User: plugin filetype-keymap",

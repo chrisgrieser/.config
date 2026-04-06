@@ -69,34 +69,37 @@ vim.api.nvim_create_autocmd("VimEnter", { -- VimEnter to not uninstall plugins s
 })
 
 ---GLOBAL KEYMAPS---------------------------------------------------------------
-u.uniqKeymap("n", "<leader>pl", function()
-	local data = vim.pack.get()
-	local all = vim.iter(data):map(function(p) return "* " .. p.spec.name end):join("\n")
-	vim.notify(all, nil, { title = #data .. " plugins (nvim-pack)", icon = "󰐱", timeout = false })
-end, { desc = "󰐱 List plugins" })
+UniqMap {
+	"<leader>pl",
+	function()
+		local data = vim.pack.get()
+		local all = vim.iter(data):map(function(p) return "* " .. p.spec.name end):join("\n")
+		local nOpts = { title = #data .. " plugins (nvim-pack)", icon = "󰐱", timeout = false }
+		vim.notify(all, nil, nOpts)
+	end,
+	desc = "󰐱 List plugins",
+}
 
-u.uniqKeymap("n", "<leader>pL", function()
-	vim.cmd.edit(vim.fn.stdpath("log") .. "/nvim-pack.log")
-	vim.schedule(function()
-		vim.bo.filetype = "nvim-pack"
-		vim.cmd.normal { "G", bang = true } -- bottom of file
-		vim.fn.search("========== Update", "b") -- goto last update
-	end)
-end, { desc = "󰐱 Log of updates" })
+UniqMap {
+	"<leader>pL",
+	function()
+		vim.cmd.edit(vim.fn.stdpath("log") .. "/nvim-pack.log")
+		vim.schedule(function()
+			vim.bo.filetype = "nvim-pack"
+			vim.cmd.normal { "G", bang = true } -- bottom of file
+			vim.fn.search("========== Update", "b") -- goto last update
+		end)
+	end,
+	desc = "󰐱 Log of updates",
+}
 
-u.uniqKeymap(
-	"n",
+UniqMap {
 	"<leader>pr",
 	function() vim.pack.update(nil, { offline = true, target = "lockfile" }) end,
-	{ desc = "󰐱 Restore from lockfile" }
-)
+	desc = "󰐱 Restore from lockfile",
+}
 
-u.uniqKeymap(
-	"n",
-	"<leader>pp",
-	function() vim.pack.update() end,
-	{ desc = "󰐱 Update plugins" }
-)
+UniqMap { "<leader>pp", function() vim.pack.update() end, desc = "󰐱 Update plugins" }
 
 ---NVIM-PACK WINDOW KEYMAPS-----------------------------------------------------
 local function openCommitOrIssue()

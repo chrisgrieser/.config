@@ -73,6 +73,10 @@
       "rev": "4c20ae78964cbf25333c0af141f9231c93b27566",
       "src": "https://github.com/chrisgrieser/nvim-rulebook"
     },
+    "nvim-scissors": {
+      "rev": "52055050445b46088a695856b6e0ba359dc0e009",
+      "src": "git@github.com:chrisgrieser/nvim-scissors"
+    },
     "nvim-spider": {
       "rev": "af2f73ffd62e61a091b3503845b7704d76d81d95",
       "src": "https://github.com/chrisgrieser/nvim-spider"
