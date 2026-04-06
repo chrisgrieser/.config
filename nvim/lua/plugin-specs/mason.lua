@@ -141,8 +141,12 @@ end
 
 --------------------------------------------------------------------------------
 
+vim.env.npm_config_cache = vim.env.HOME .. "/.cache/npm" -- don't crowd $HOME with `.npm` folder
+enableLsps()
+
+Keymap { "<leader>pm", vim.cmd.Mason, desc = " Mason home" }
+
 vim.schedule(function()
-	vim.env.npm_config_cache = vim.env.HOME .. "/.cache/npm" -- don't crowd $HOME with `.npm` folder
 	require("mason").setup {
 		registries = {
 			-- personal registry must come first to have priority
@@ -158,12 +162,6 @@ vim.schedule(function()
 		},
 	}
 
-	enableLsps()
+	-- deferred to not install at same time as plugins
+	vim.defer_fn(syncPackages, 1000)
 end)
-
-vim.api.nvim_create_autocmd("VimEnter", { -- deferred to not install at same time as plugins
-	desc = "User: sync mason packages",
-	callback = function() vim.defer_fn(syncPackages, 1000) end,
-})
-
-Keymap { "<leader>pm", vim.cmd.Mason, desc = " Mason home" }
