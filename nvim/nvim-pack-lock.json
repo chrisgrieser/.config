@@ -55,7 +55,7 @@
     },
     "nvim-lsp-endhints": {
       "rev": "85d072ab00ada2b0eeb738c76b11580cf74faf13",
-      "src": "git@github.com:chrisgrieser/nvim-lsp-endhints"
+      "src": "https://github.com/chrisgrieser/nvim-lsp-endhints"
     },
     "nvim-lspconfig": {
       "rev": "a776085e04f7b15d0b59fae2244df07d98360ab4",

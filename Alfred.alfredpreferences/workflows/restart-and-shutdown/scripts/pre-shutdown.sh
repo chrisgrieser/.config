@@ -35,4 +35,3 @@ done < "$perma_repo_file"
 
 echo -n "success" # trigger shutdown prompt in Alfred
 notify "✅ All synced."
-sketchybar --trigger sync_indicator # sketchybar sync icon

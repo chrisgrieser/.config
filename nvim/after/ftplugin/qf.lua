@@ -1,4 +1,4 @@
-Bufmap { "q", vim.cmd.close, desc = " Close" }
+Bufmap { "q", vim.cmd.close, desc = " Close", nowait = true }
 
 -- keep <CR> behavior of going to entry, even if <CR> is mapped to something else otherwise
 Bufmap { "<CR>", "<CR>" }

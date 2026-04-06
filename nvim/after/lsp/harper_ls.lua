@@ -36,9 +36,7 @@ return {
 			}
 			vim.notify(("Added to %s dict."):format(which))
 		end
-		-- stylua: ignore
-		vim.keymap.set("n", "zg", function() addToDict("WS") end, { desc = "󰓆 Workspace dict", buffer = bufnr })
-		-- stylua: ignore
-		vim.keymap.set("n", "zG", function() addToDict("User") end, { desc = "󰓆 User dict", buffer = bufnr })
+		Bufmap { "zg", addToDict("WS"), desc = "󰓆 Workspace dict", buf = bufnr }
+		Bufmap { "zg", addToDict("User"), desc = "󰓆 User dict", buf = bufnr }
 	end,
 }

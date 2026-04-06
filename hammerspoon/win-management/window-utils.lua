@@ -13,9 +13,9 @@ M.toTheSide = hs.geometry {
 	-- cutoff necessary to hide sidebar, since app has a minimum app width
 	-- (popup wins don't, but cannot switch to non-home-tabs)
 	x = -side.cutoff,
-	y = 0.055, -- sketchybar height
+	y = 0,
 	w = side.w + side.cutoff,
-	h = 1, -- height 1 = no corners at bottom
+	h = 1, -- height = 1 -> no corners at bottom
 }
 
 ---@param win hs.window|string if string, search for main window of app with that name

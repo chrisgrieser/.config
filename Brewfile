@@ -41,11 +41,16 @@ cask "obsidian", greedy: true # greedy for installer version
 cask "replacicon"
 cask "signal"
 cask "slack"
-cask "stats"
 cask "wezterm"
 cask "zoom"
 mas "Highlights", id: 1498912833
 mas "Ivory", id: 6444602274
+
+
+#-MENUBAR-----------------------------------------------------------------------
+cask "stats"
+cask "reminders-menubar"
+cask "gitify"
 
 #-OTHER-------------------------------------------------------------------------
 cask "font-jetbrains-mono-nerd-font"
@@ -64,7 +69,6 @@ if device.include?("Home")
 	cask "ausweisapp" # pairing with phone app only works in private wifi
 	cask "bettertouchtool"
 	cask "catch"
-	mas "Niimbot", id: 6755411172 # label printer
 end
 if device.include?("Home") or device.include?("Office")
 	cask "granola"

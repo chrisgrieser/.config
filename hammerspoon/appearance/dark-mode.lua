@@ -33,7 +33,6 @@ end
 -- INFO done manually to include app-specific toggling for:
 -- * System
 -- * Neovim
--- * Sketchybar
 -- * Hammerspoon Console
 ---@param toMode "dark"|"light"
 function M.setDarkMode(toMode)

@@ -31,10 +31,18 @@ local function changeScaleFactor(delta)
 	local opts = { id = "scale_factor", icon = icon, title = "Scale factor" }
 	vim.notify(tostring(vim.g.neovide_scale_factor), nil, opts)
 end
--- stylua: ignore
-vim.keymap.set({ "n", "x", "i" }, "<D-+>", function() changeScaleFactor(0.01) end, { desc = " Zoom" })
--- stylua: ignore
-vim.keymap.set({ "n", "x", "i" }, "<D-->", function() changeScaleFactor(-0.01) end, { desc = " Zoom" })
+Keymap {
+	"<D-+>",
+	function() changeScaleFactor(0.01) end,
+	mode = { "n", "x", "i" },
+	desc = " Zoom",
+}
+Keymap {
+	"<D-->",
+	function() changeScaleFactor(-0.01) end,
+	mode = { "n", "x", "i" },
+	desc = " Zoom",
+}
 
 --------------------------------------------------------------------------------
 
@@ -44,7 +52,7 @@ vim.g.neovide_input_macos_option_key_is_meta = "none" -- disable, so `{@~` etc. 
 
 -- appearance
 vim.g.neovide_opacity = 1
--- vim.g.neovide_highlight_matching_pair = true
+-- vim.g.neovide_highlight_matching_pair = true -- PENDING https://github.com/neovide/neovide/issues/3458
 vim.g.neovide_underline_stroke_scale = 2.5 -- fix underline thickness
 vim.g.neovide_progress_bar_height = 30
 

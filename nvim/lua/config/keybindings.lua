@@ -90,9 +90,7 @@ Keymap {
 			vim.api.nvim_create_autocmd("FileType", {
 				desc = "User: undotree settings",
 				pattern = "nvim-undotree",
-				callback = function(ctx)
-					vim.keymap.set("n", "q", vim.cmd.close, { buffer = ctx.buf, nowait = true })
-				end,
+				callback = function(ctx) Bufmap { "q", vim.cmd.close, buf = ctx.buf, nowait = true } end,
 			})
 		end
 		require("undotree").open()
@@ -110,7 +108,7 @@ Keymap {
 
 -- stylua: ignore
 Keymap { "<", function() require("personal-plugins.misc").toggleTitleCase() end, desc = "󰬴 Toggle lower/Title case" }
-Keymap { ">", "gUiw", { desc = "󰬴 Uppercase cword" } }
+Keymap { ">", "gUiw", desc = "󰬴 Uppercase cword" }
 
 -- Toggles
 -- stylua: ignore

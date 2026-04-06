@@ -92,25 +92,42 @@ local function autoSetLayout(reason)
 	u.defer(4, function() isLayouting = false end)
 end
 
--- 1. Change of screen numbers
+-- 1. menu bar button
+-- set movie layout & move windows to projector screen
+do
+	M.menubarItem = hs
+		.menubar
+		.new(false, "moveAllWinsToProjectorScreen") ---@diagnostic disable-line: need-check-nil
+		:setTitle("Ⱅ ") ---@diagnostic disable-line: undefined-field
+		:setClickCallback(function()
+			movieLayout()
+			local projectorScreen = hs.screen.primaryScreen()
+			for _, win in pairs(hs.window:orderedWindows()) do
+				win:moveToScreen(projectorScreen, true)
+			end
+		end)
+end
+
+-- 2. Change of screen numbers
 local prevScreenCount = #hs.screen.allScreens()
 M.displayCountWatcher = hs.screen.watcher
 	.new(function()
 		local currentScreenCount = #hs.screen.allScreens()
-		if prevScreenCount ~= currentScreenCount then -- Dock changes also trigger the screenwatcher
-			autoSetLayout("display-count-change")
-			prevScreenCount = currentScreenCount
-		end
+
+		if prevScreenCount == currentScreenCount then return end -- Dock changes also trigger the screenwatcher
+		autoSetLayout("display-count-change")
+		if currentScreenCount == 2 then M.menubarItem:returnToMenuBar() end
+		if currentScreenCount < 2 then M.menubarItem:removeFromMenuBar() end
 	end)
 	:start()
 
--- 2. Hotkey
+-- 3. Hotkey
 hs.hotkey.bind(u.hyper, "home", autoSetLayout)
 
--- 3. Systemstart
+-- 4. Systemstart
 if u.isSystemStart() then autoSetLayout() end
 
--- 4. Waking
+-- 5. Waking
 M.caff_unlock = hs.caffeinate.watcher
 	.new(function(event)
 		local wokeUp = event == hs.caffeinate.watcher.screensDidUnlock
@@ -120,27 +137,6 @@ M.caff_unlock = hs.caffeinate.watcher
 		end
 	end)
 	:start()
-
--- 5. menu bar button
--- set movie layout & move windows to projector screen
-if not env.isAtOffice then
-	M.menubarItem = hs
-		.menubar
-		.new(true, "moveAllWinsToProjectorScreen") ---@diagnostic disable-line: need-check-nil
-		:setTitle("Ⱅ ") ---@diagnostic disable-line: undefined-field
-		:setClickCallback(function()
-			if #hs.screen.allScreens() < 2 then
-				hs.alert("Only for multi-monitor setups.")
-				return
-			end
-
-			movieLayout()
-			local projectorScreen = hs.screen.primaryScreen()
-			for _, win in pairs(hs.window:orderedWindows()) do
-				win:moveToScreen(projectorScreen, true)
-			end
-		end)
-end
 
 --------------------------------------------------------------------------------
 return M

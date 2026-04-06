@@ -46,19 +46,29 @@ local config = {
 		client.server_capabilities.documentRangeFormattingProvider = false
 
 		-- quick access to code action
-		vim.keymap.set("n", "<leader>rt", function()
-			vim.lsp.buf.code_action {
-				filter = function(act) return act.title == "Convert to template string" end,
-				apply = true,
-			}
-		end, { desc = " Template string code action", buffer = bufnr })
+		Bufmap {
+			"<leader>rt",
+			function()
+				vim.lsp.buf.code_action {
+					filter = function(act) return act.title == "Convert to template string" end,
+					apply = true,
+				}
+			end,
+			desc = " Template string code action",
+			buf = bufnr,
+		}
 
 		-- filter the "Move to file" code action
-		vim.keymap.set("n", "<leader>ca", function()
-			vim.lsp.buf.code_action {
-				filter = function(act) return act.kind ~= "refactor.move" end,
-			}
-		end, { desc = " Code action", buffer = bufnr })
+		Bufmap {
+			"<leader>ca",
+			function()
+				vim.lsp.buf.code_action {
+					filter = function(act) return act.kind ~= "refactor.move" end,
+				}
+			end,
+			desc = " Code action",
+			buf = bufnr,
+		}
 	end,
 }
 

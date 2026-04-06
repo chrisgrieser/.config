@@ -1,8 +1,6 @@
 -- vim: foldlevel=3
 -- DOCS https://github.com/Wansmer/treesj#basic-node
-vim.pack.add({
-	"https://github.com/Wansmer/treesj",
-}, { load = function() end }) -- lazy-loading via `:packadd` later
+vim.pack.add { "https://github.com/Wansmer/treesj" }
 --------------------------------------------------------------------------------
 
 Keymap { "<leader>s", function() require("treesj").toggle() end, desc = "󰗈 Split-join lines" }

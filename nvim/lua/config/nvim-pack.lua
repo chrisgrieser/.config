@@ -122,7 +122,7 @@ local function openCommitOrIssue()
 	vim.ui.open(url)
 end
 
-Keymap { "q", vim.cmd.bdelete, ft = "nvim-pack", desc = "󰐱 Quit" }
+Keymap { "q", vim.cmd.bdelete, ft = "nvim-pack", nowait = true, desc = "󰐱 Quit" }
 Keymap { "<CR>", vim.cmd.write, ft = "nvim-pack", desc = "󰐱 Confirm update" }
 Keymap { "<C-j>", "]]", remap = true, ft = "nvim-pack", desc = "󰐱 Next plugin" }
 Keymap { "<C-k>", "[[", remap = true, ft = "nvim-pack", desc = "󰐱 Previous plugin" }

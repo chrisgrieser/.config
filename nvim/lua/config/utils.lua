@@ -3,13 +3,8 @@
 _G.Keymap = function(map)
 	local mode = map.mode or "n"
 	local lhs, rhs = map[1], map[2]
-	local opts = {
-		desc = map.desc,
-		nowait = map.nowait,
-		remap = map.remap,
-		unique = map.unique,
-		expr = map.expr,
-	}
+	local opts = vim.deepcopy(map)
+	opts.ft, opts.mode, opts[1], opts[2] = nil, nil, nil, nil
 	local globalMap = not map.ft
 
 	if globalMap then
@@ -33,8 +28,7 @@ _G.Keymap = function(map)
 			desc = "User: plugin filetype-keymap",
 			pattern = map.ft,
 			callback = function(ctx)
-				opts.buffer = ctx.buf
-				opts.nowait = true
+				opts.buf = ctx.buf
 				vim.keymap.set(mode, lhs, rhs, opts)
 			end,
 		})
@@ -45,7 +39,7 @@ end
 ---@param map vim.keymap.set.Opts|{mode: string|string[], ft: string|string[], [1]: string, [2]: string|function}
 ---@param bufnr? number
 _G.Bufmap = function(map, bufnr)
-	map.buffer = bufnr or true
+	map.buf = bufnr or 0
 	map.unique = false -- usually overwriting a global keymap
 	Keymap(map)
 end
