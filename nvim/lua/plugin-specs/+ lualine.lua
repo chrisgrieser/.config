@@ -1,9 +1,11 @@
 -- DOCS https://github.com/nvim-lualine/lualine.nvim#default-configuration
-
+vim.pack.add {
+	"https://github.com/nvim-mini/mini.icons",
+	"https://github.com/nvim-lualine/lualine.nvim",
+}
 --------------------------------------------------------------------------------
+
 -- INFO needs to be loaded before other plugins to provider this helper function
---------------------------------------------------------------------------------
-
 ---Set up plugin-specific statusline components with the respective plugin's config
 ---@param whichBar "tabline"|"winbar"|"inactive_winbar"|"sections"
 ---@param whichSection "lualine_a"|"lualine_b"|"lualine_c"|"lualine_x"|"lualine_y"|"lualine_z"
@@ -20,13 +22,6 @@ vim.g.lualineAdd = function(whichBar, whichSection, component, where) ---@diagno
 		lualine.setup { [whichBar] = { [whichSection] = sectionConfig } }
 	end, 1000)
 end
-
---------------------------------------------------------------------------------
-
-vim.pack.add {
-	"https://github.com/nvim-mini/mini.icons",
-	"https://github.com/nvim-lualine/lualine.nvim",
-}
 
 --------------------------------------------------------------------------------
 

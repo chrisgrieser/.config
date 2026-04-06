@@ -16,6 +16,7 @@ Keymap {
 		end
 
 		vim.cmd("silent! update")
+		vim.fn.serverstop(vim.g.serverAddress)
 		vim.cmd.restart()
 	end,
 	desc = " Save & restart",

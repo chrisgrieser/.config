@@ -1,6 +1,7 @@
 vim.g.localRepos = vim.env.HOME .. "/Developer"
 vim.g.notesDir = vim.env.HOME .. "/Notes"
 vim.g.iCloudSync = vim.env.HOME .. "/Library/Mobile Documents/com~apple~CloudDocs/Tech/nvim-data"
+vim.g.serverAddress = "/tmp/nvim_server.pipe"
 
 --------------------------------------------------------------------------------
 

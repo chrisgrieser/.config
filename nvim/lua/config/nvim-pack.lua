@@ -12,39 +12,38 @@ vim.g.whichkeyAddSpec = function() end ---@diagnostic disable-line: duplicate-se
 
 -- create dummy package for `packpath`
 local dummy = vim.fn.stdpath("data") .. "/symlink-to-local-plugins/"
-vim.opt.packpath:prepend(dummy)
+vim.opt.packpath:prepend(dummy) -- prepend to prioritize local plugins
 vim.fn.mkdir(dummy .. "/pack/core/", "p")
-vim.uv.fs_symlink(
-	vim.g.localRepos,
-	dummy .. "/pack/core/start", -- `start` instead of `opt` to not need to call `:packadd`
-	{ dir = true }
-)
+vim.uv.fs_symlink(vim.g.localRepos, dummy .. "/pack/core/opt", { dir = true })
 
-local localPlugins = vim.iter(vim.fs.dir(vim.g.localRepos))
-	:filter(function(_name, type) return type == "directory" end)
-	:map(function(name, _type)
+local localPlugins = {}
+for name, type in vim.fs.dir(vim.g.localRepos) do
+	if type == "directory" then
 		local shortName = name:gsub("%.nvim$", ""):gsub("nvim%-", "")
-		return shortName -- my plugin-spec-filenames use short form
-	end)
-	:totable()
+		localPlugins[shortName] = name -- my plugin-specs use the short plugin name
+	end
+end
 
 ---AUTO-INSTALL AND LOAD--------------------------------------------------------
 local pluginSpecDir = "plugin-specs"
 local pluginSpecPath = vim.fn.stdpath("config") .. "/lua/" .. pluginSpecDir
 vim.iter(vim.fs.dir(pluginSpecPath)):each(function(name, type)
 	assert(not name:find("%..*%.lua"), "Filename must not contain dots due `require`: " .. name)
-	local basename = name:gsub("%.lua$", "")
 	if type ~= "file" or not vim.endswith(name, ".lua") then return end
-	local isLocallyAvailable = vim.tbl_contains(localPlugins, basename)
+	local basename = name:gsub("%.lua$", "")
+	local localName = localPlugins[basename]
 
-	if isLocallyAvailable then
+	if localName then
 		-- HACK to load plugin config without triggering `vim.pack.add`
 		local orig, noop = vim.pack.add, function() end
 		vim.pack.add = noop
+
+		vim.cmd.packadd(localName)
 		u.safeRequire(pluginSpecDir .. "." .. basename)
+
 		vim.pack.add = orig
 		vim.schedule(function()
-			local msg = ("[%s] loaded from local repo."):format(basename)
+			local msg = ("[%s] loaded from local repo."):format(localName)
 			vim.notify(msg, nil, { title = "nvim-pack", icon = "󰐱" })
 		end)
 	else

@@ -21,7 +21,7 @@ _G.Keymap = function(map)
 		if success then return end
 
 		local modes = type(mode) == "table" and table.concat(mode, ", ") or mode
-		local caller = debug.getinfo(2, "Sln") -- S: source, l: currentline, n: name
+		local caller = debug.getinfo(2, "Sl") -- S: source, l: currentline
 		local source = vim.fs.basename(caller.source)
 		local msg = ("`(%s)`  %s  **%s:%d**"):format(modes, lhs, source, caller.currentline)
 
@@ -69,34 +69,6 @@ function M.safeRequire(module)
 	vim.defer_fn(function() -- defer for notification plugin
 		vim.notify(msg, vim.log.levels.ERROR, { title = "User config", timeout = false })
 	end, 1000)
-end
-
----@param maps {[1]: string, [2]: string|function, mode?: string|string[], desc?: string, nowait?: boolean, ft?: string|string[], remap?: boolean, unique?: boolean, expr?: boolean}[]
-function M.pluginKeymaps(maps)
-	for _, map in ipairs(maps) do
-		local lhs, rhs = map[1], map[2]
-		local mode = map.mode or "n"
-		local opts = {
-			desc = map.desc,
-			nowait = map.nowait,
-			remap = map.remap,
-			unique = map.unique,
-			expr = map.expr,
-		}
-		if not map.ft then
-			Keymap(map)
-		else
-			vim.api.nvim_create_autocmd("FileType", {
-				desc = "User: plugin filetype-keymap",
-				pattern = map.ft,
-				callback = function(ctx)
-					opts.buffer = ctx.buf
-					opts.nowait = true
-					vim.keymap.set(mode, lhs, rhs, opts)
-				end,
-			})
-		end
-	end
 end
 
 function M.loadGhToken()

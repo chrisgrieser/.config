@@ -560,135 +560,133 @@ end
 
 --------------------------------------------------------------------------------
 
-require("config.utils").pluginKeymaps {
-	---WORDS---------------------------------------------------------------------
-	{ "ö", function() Snacks.words.jump(1, true) end, desc = "󰗲 Next reference" },
-	{ "Ö", function() Snacks.words.jump(-1, false) end, desc = "󰗲 Prev reference" },
+---WORDS---------------------------------------------------------------------
+Keymap { "ö", function() Snacks.words.jump(1, true) end, desc = "󰗲 Next reference" }
+Keymap { "Ö", function() Snacks.words.jump(-1, false) end, desc = "󰗲 Prev reference" }
 
-	---INDENT--------------------------------------------------------------------
-	{ "<leader>oi", helpers.toggleInvisibleChars, desc = " Invisible chars" },
+---INDENT--------------------------------------------------------------------
+Keymap { "<leader>oi", helpers.toggleInvisibleChars, desc = " Invisible chars" }
 
-	---SCRATCH-------------------------------------------------------------------
-	{
-		"<leader>es",
-		function()
-			if vim.bo.ft == "lua" then -- ensure .luarc.jsonc
-				local scratchRoot = vim.fn.stdpath("data") .. "/scratch" -- default root for snacks
-				local json = '{ "runtime.version": "LuaJIT", "workspace.library": ["$VIMRUNTIME/lua"] }'
-				vim.fn.mkdir(scratchRoot, "p")
-				vim.fn.writefile({ json }, scratchRoot .. "/.luarc.jsonc")
-			end
-			Snacks.scratch()
-		end,
-		desc = " Scratch buffer",
-	},
-	{ "<leader>el", function() Snacks.scratch.select() end, desc = " List scratches" },
-
-	---NOTIFY--------------------------------------------------------------------
-	{
-		"<Esc>",
-		function()
-			Snacks.notifier.hide()
-			vim.snippet.stop()
-		end,
-		desc = "󰎟 Dismiss notice & exit snippet",
-	},
-	{ "<leader>in", function() helpers.openNotif("last") end, desc = "󰎟 Last notification" },
-	{ "<leader>iN", function() Snacks.picker.notifications() end, desc = "󰎟 Notif. history" },
-
-	---PICKER--------------------------------------------------------------------
-
-	-- files
-	{ "gt", function() Snacks.picker.explorer() end, desc = " File tree" },
-	{ "go", helpers.betterFileOpen, desc = " Open files" },
-	{ "gn", function() helpers.betterFileOpen(vim.g.notesDir) end, desc = " Notes" },
-	{ "gP", helpers.browseProject, desc = " Project" },
-	{
-		"g,",
-		function() helpers.betterFileOpen(vim.fn.stdpath("config")) end,
-		desc = " nvim config",
-	},
-	{
-		"gr",
-		function() Snacks.picker.recent() end,
-		desc = " Recent files",
-		nowait = true, -- due to nvim default mappings starting with `gr`
-	},
-	{
-		"gN",
-		function()
-			Snacks.picker.files {
-				title = " nvim runtime",
-				cwd = vim.env.VIMRUNTIME,
-				exclude = { "*.txt", "*/testdir/*" },
-				matcher = { filename_bonus = false }, -- folder more important here
-				formatters = { file = { filename_first = false } },
-			}
-		end,
-		desc = " nvim runtime",
-	},
-	{
-		"gp",
-		function()
-			Snacks.picker.files {
-				title = "󰈮 Local plugins",
-				cwd = vim.fn.stdpath("data") .. "/site/pack/core/opt",
-				exclude = { "*/tests/*", "*.toml", "*.tmux", "*.txt" },
-				matcher = { filename_bonus = false }, -- folder more important here
-				formatters = { file = { filename_first = false } },
-			}
-		end,
-		desc = "󰈮 Local plugins",
-	},
-
-	-- grep
-	{ "gl", function() Snacks.picker.grep() end, desc = "󰛢 Grep" },
-	-- stylua: ignore
-	{ "gL", function() Snacks.picker.grep { search = vim.fn.expand("<cword>") } end, desc = "󰛢 Grep cword" },
-	{ "<leader>ci", helpers.importLuaModule, ft = "lua", desc = "󰢱 Import module" },
-
-	-- LSP
-	{ "gf", function() Snacks.picker.lsp_references() end, desc = "󰈿 References" },
-	{
-		"gf",
-		function() Snacks.picker.lsp_references { auto_confirm = false } end,
-		ft = "markdown",
-		desc = "󰈿 References",
-	},
-	{ "gd", function() Snacks.picker.lsp_definitions() end, desc = "󰈿 Definitions" },
-	{ "gD", function() Snacks.picker.lsp_type_definitions() end, desc = "󰜁 Type definitions" },
-	-- stylua: ignore
-	{ "gw", function() Snacks.picker.lsp_workspace_symbols() end, desc = " Workspace symbols" },
-
-	-- `lsp_symbols` tends to too much clutter like anonymous function
-	{ "gs", function() Snacks.picker.treesitter() end, desc = "󰐅 Treesitter symbols" },
-	{ "gs", function() Snacks.picker.lsp_symbols() end, desc = " LSP symbols", ft = "nvim-pack" },
-
-	-- git
-	{ "<leader>ga", function() Snacks.picker.git_diff() end, desc = "󰐖 Hunks" },
-	{ "<leader>gA", function() Snacks.picker.git_status() end, desc = "󰐖 Files" },
-	{ "<leader>gl", function() Snacks.picker.git_log() end, desc = "󱎸 Log" },
-	{ "<leader>gb", function() Snacks.picker.git_branches() end, desc = "󰘬 Branches" },
-	{ "<leader>gi", function() Snacks.picker.gh_issue() end, desc = " GitHub issues (open)" },
-	-- stylua: ignore
-	{ "<leader>gI", function() Snacks.picker.gh_issue { state = "all" } end, desc = " GitHub issues (all)" },
-	{ "<leader>gP", function() Snacks.picker.gh_pr() end, desc = " GitHub PRs" },
-
-	-- inspect
-	{ "<leader>iv", function() Snacks.picker.help() end, desc = "󰋖 Vim help" },
-	{ "<leader>ih", function() Snacks.picker.highlights() end, desc = " Highlight groups" },
-	{ "<leader>is", function() Snacks.picker.pickers() end, desc = "󰗲 Snacks pickers" },
-	{ "<leader>ik", function() Snacks.picker.keymaps() end, desc = "󰌌 Keymaps (global)" },
-	-- stylua: ignore
-	{ "<leader>iK", function() Snacks.picker.keymaps { global = false, title = "󰌌 Keymaps (buffer)" } end, desc = "󰌌 Keymaps (buffer)" },
-	{ "<leader>il", function() Snacks.picker.lsp_config() end, desc = " LSP servers" },
-
-	-- misc
-	{ "<leader>pc", function() Snacks.picker.colorschemes() end, desc = " Colorschemes" },
-	{ "<leader>eh", function() Snacks.picker.command_history() end, desc = " Ex-cmd history" },
-	{ "<leader>yy", function() Snacks.picker.registers() end, desc = "󱛢 Yank ring" },
-	-- stylua: ignore
-	{ "<C-.>", function() Snacks.picker.icons() end, mode = { "n", "i" }, desc = "󱗿 Icon picker" },
-	{ "g.", function() Snacks.picker.resume() end, desc = "󰗲 Resume" },
-	{ "g!", function() Snacks.picker.diagnostics() end, desc = " Workspace diagnostics" },
+---SCRATCH-------------------------------------------------------------------
+Keymap {
+	"<leader>es",
+	function()
+		if vim.bo.ft == "lua" then -- ensure .luarc.jsonc
+			local scratchRoot = vim.fn.stdpath("data") .. "/scratch" -- default root for snacks
+			local json = '{ "runtime.version": "LuaJIT", "workspace.library": ["$VIMRUNTIME/lua"] }'
+			vim.fn.mkdir(scratchRoot, "p")
+			vim.fn.writefile({ json }, scratchRoot .. "/.luarc.jsonc")
+		end
+		Snacks.scratch()
+	end,
+	desc = " Scratch buffer",
 }
+Keymap { "<leader>el", function() Snacks.scratch.select() end, desc = " List scratches" }
+
+---NOTIFY--------------------------------------------------------------------
+Keymap {
+	"<Esc>",
+	function()
+		Snacks.notifier.hide()
+		vim.snippet.stop()
+	end,
+	desc = "󰎟 Dismiss notice & exit snippet",
+}
+Keymap { "<leader>in", function() helpers.openNotif("last") end, desc = "󰎟 Last notification" }
+Keymap { "<leader>iN", function() Snacks.picker.notifications() end, desc = "󰎟 Notif. history" }
+
+---PICKER--------------------------------------------------------------------
+
+-- files
+Keymap { "gt", function() Snacks.picker.explorer() end, desc = " File tree" }
+Keymap { "go", helpers.betterFileOpen, desc = " Open files" }
+Keymap { "gn", function() helpers.betterFileOpen(vim.g.notesDir) end, desc = " Notes" }
+Keymap { "gP", helpers.browseProject, desc = " Project" }
+Keymap {
+	"g,",
+	function() helpers.betterFileOpen(vim.fn.stdpath("config")) end,
+	desc = " nvim config",
+}
+Keymap {
+	"gr",
+	function() Snacks.picker.recent() end,
+	desc = " Recent files",
+	nowait = true, -- due to nvim default mappings starting with `gr`
+}
+Keymap {
+	"gN",
+	function()
+		Snacks.picker.files {
+			title = " nvim runtime",
+			cwd = vim.env.VIMRUNTIME,
+			exclude = { "*.txt", "*/testdir/*" },
+			matcher = { filename_bonus = false }, -- folder more important here
+			formatters = { file = { filename_first = false } },
+		}
+	end,
+	desc = " nvim runtime",
+}
+Keymap {
+	"gp",
+	function()
+		Snacks.picker.files {
+			title = "󰈮 Local plugins",
+			cwd = vim.fn.stdpath("data") .. "/site/pack/core/opt",
+			exclude = { "*/tests/*", "*.toml", "*.tmux", "*.txt" },
+			matcher = { filename_bonus = false }, -- folder more important here
+			formatters = { file = { filename_first = false } },
+		}
+	end,
+	desc = "󰈮 Local plugins",
+}
+
+-- grep
+Keymap { "gl", function() Snacks.picker.grep() end, desc = "󰛢 Grep" }
+-- stylua: ignore
+Keymap { "gL", function() Snacks.picker.grep { search = vim.fn.expand("<cword>") } end, desc = "󰛢 Grep cword" }
+Keymap { "<leader>ci", helpers.importLuaModule, ft = "lua", desc = "󰢱 Import module" }
+
+-- LSP
+Keymap { "gf", function() Snacks.picker.lsp_references() end, desc = "󰈿 References" }
+Keymap {
+	"gf",
+	function() Snacks.picker.lsp_references { auto_confirm = false } end,
+	ft = "markdown",
+	desc = "󰈿 References",
+}
+Keymap { "gd", function() Snacks.picker.lsp_definitions() end, desc = "󰈿 Definitions" }
+Keymap { "gD", function() Snacks.picker.lsp_type_definitions() end, desc = "󰜁 Type definitions" }
+-- stylua: ignore
+Keymap { "gw", function() Snacks.picker.lsp_workspace_symbols() end, desc = " Workspace symbols" }
+
+-- `lsp_symbols` tends to too much clutter like anonymous function
+Keymap { "gs", function() Snacks.picker.treesitter() end, desc = "󰐅 Treesitter symbols" }
+Keymap { "gs", function() Snacks.picker.lsp_symbols() end, desc = " LSP symbols", ft = "nvim-pack" }
+
+-- git
+Keymap { "<leader>ga", function() Snacks.picker.git_diff() end, desc = "󰐖 Hunks" }
+Keymap { "<leader>gA", function() Snacks.picker.git_status() end, desc = "󰐖 Files" }
+Keymap { "<leader>gl", function() Snacks.picker.git_log() end, desc = "󱎸 Log" }
+Keymap { "<leader>gb", function() Snacks.picker.git_branches() end, desc = "󰘬 Branches" }
+Keymap { "<leader>gi", function() Snacks.picker.gh_issue() end, desc = " GitHub issues (open)" }
+-- stylua: ignore
+Keymap { "<leader>gI", function() Snacks.picker.gh_issue { state = "all" } end, desc = " GitHub issues (all)" }
+Keymap { "<leader>gP", function() Snacks.picker.gh_pr() end, desc = " GitHub PRs" }
+
+-- inspect
+Keymap { "<leader>iv", function() Snacks.picker.help() end, desc = "󰋖 Vim help" }
+Keymap { "<leader>ih", function() Snacks.picker.highlights() end, desc = " Highlight groups" }
+Keymap { "<leader>is", function() Snacks.picker.pickers() end, desc = "󰗲 Snacks pickers" }
+Keymap { "<leader>ik", function() Snacks.picker.keymaps() end, desc = "󰌌 Keymaps (global)" }
+-- stylua: ignore
+Keymap { "<leader>iK", function() Snacks.picker.keymaps { global = false, title = "󰌌 Keymaps (buffer)" } end, desc = "󰌌 Keymaps (buffer)" }
+Keymap { "<leader>il", function() Snacks.picker.lsp_config() end, desc = " LSP servers" }
+
+-- misc
+Keymap { "<leader>pc", function() Snacks.picker.colorschemes() end, desc = " Colorschemes" }
+Keymap { "<leader>eh", function() Snacks.picker.command_history() end, desc = " Ex-cmd history" }
+Keymap { "<leader>yy", function() Snacks.picker.registers() end, desc = "󱛢 Yank ring" }
+-- stylua: ignore
+Keymap { "<C-.>", function() Snacks.picker.icons() end, mode = { "n", "i" }, desc = "󱗿 Icon picker" }
+Keymap { "g.", function() Snacks.picker.resume() end, desc = "󰗲 Resume" }
+Keymap { "g!", function() Snacks.picker.diagnostics() end, desc = " Workspace diagnostics" }
