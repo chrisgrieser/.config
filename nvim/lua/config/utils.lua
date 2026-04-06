@@ -15,9 +15,9 @@ function M.safeRequire(module)
 	end, 1000)
 end
 
----Warn when there are conflicting keymaps
----@param map vim.keymap.set.Opts|{mode: string|string[], [1]: string, [2]: string|function}
-_G.UniqMap = function(map)
+---Warn when there are conflicting keymaps & use API similar to lazy.nvim keymaps
+---@param map vim.keymap.set.Opts|{mode: string|string[], ft: string|string[], [1]: string, [2]: string|function}
+_G.Keymap = function(map)
 	local mode = map.mode or "n"
 	local lhs, rhs = map[1], map[2]
 	local opts = {
@@ -27,21 +27,41 @@ _G.UniqMap = function(map)
 		unique = map.unique,
 		expr = map.expr,
 	}
-	-- allow to disable with `unique=false` to overwrite nvim defaults: https://neovim.io/doc/user/vim_diff.html#default-mappings
-	if opts.unique == nil then opts.unique = true end
+	local globalMap = not map.ft
 
-	-- violating `unique=true` throws an error; using `pcall` to still load other mappings
-	local success, _ = pcall(vim.keymap.set, mode, lhs, rhs, opts)
-	if success then return end
+	if globalMap then
+		-- allow to disable with `unique=false` to overwrite nvim defaults: https://neovim.io/doc/user/vim_diff.html#default-mappings
+		if opts.unique == nil then opts.unique = true end
 
-	local modes = type(mode) == "table" and table.concat(mode, ", ") or mode
-	local caller = debug.getinfo(1, "Sl") -- S: source, l: currentline
-	local source = vim.fs.basename(caller.source)
-	local msg = ("`(%s)`  %s  **%s:%d**"):format(modes, lhs, source, caller.currentline)
+		-- violating `unique=true` throws an error; using `pcall` to still load other mappings
+		local success, _ = pcall(vim.keymap.set, mode, lhs, rhs, opts)
+		if success then return end
 
-	vim.defer_fn(function() -- defer for notification plugin
-		vim.notify(msg, vim.log.levels.WARN, { title = "Duplicate keymap", timeout = false })
-	end, 1000)
+		local modes = type(mode) == "table" and table.concat(mode, ", ") or mode
+		local caller = debug.getinfo(2, "Sl") -- S: source, l: currentline
+		local source = vim.fs.basename(caller.source)
+		local msg = ("`(%s)`  %s  **%s:%d**"):format(modes, lhs, source, caller.currentline)
+
+		vim.defer_fn(function() -- defer for notification plugin
+			vim.notify(msg, vim.log.levels.WARN, { title = "Duplicate keymap", timeout = false })
+		end, 1000)
+	else
+		vim.api.nvim_create_autocmd("FileType", {
+			desc = "User: plugin filetype-keymap",
+			pattern = map.ft,
+			callback = function(ctx)
+				opts.buffer = ctx.buf
+				opts.nowait = true
+				vim.keymap.set(mode, lhs, rhs, opts)
+			end,
+		})
+		return
+	end
+end
+
+_G.Bufmap = function (map)
+	map.buffer = true
+	Keymap(map)
 end
 
 ---@param mode string|string[]
@@ -66,7 +86,7 @@ function M.pluginKeymaps(maps)
 			expr = map.expr,
 		}
 		if not map.ft then
-			UniqMap(map)
+			Keymap(map)
 		else
 			vim.api.nvim_create_autocmd("FileType", {
 				desc = "User: plugin filetype-keymap",

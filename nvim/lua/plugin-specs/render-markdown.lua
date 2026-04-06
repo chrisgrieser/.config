@@ -4,13 +4,11 @@ vim.pack.add {
 }
 --------------------------------------------------------------------------------
 
-require("config.utils").pluginKeymaps {
-	{
-		"<leader>oc",
-		function() require("render-markdown").toggle() end,
-		desc = " Markdown render",
-		ft = "markdown",
-	},
+Keymap {
+	"<leader>oc",
+	function() require("render-markdown").toggle() end,
+	desc = " Markdown render",
+	ft = "markdown",
 }
 
 --------------------------------------------------------------------------------

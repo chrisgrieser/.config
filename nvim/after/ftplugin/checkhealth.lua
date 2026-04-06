@@ -1,1 +1,1 @@
-vim.keymap.set("n", "q", vim.cmd.bdelete, { desc = "Quit", nowait = true, buffer = true })
+Bufmap { "q", vim.cmd.bdelete, desc = "Quit", nowait = true }

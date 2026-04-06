@@ -1,7 +1,7 @@
 local tempfile = "/tmp/neovide-restart"
 --------------------------------------------------------------------------------
 
-UniqMap {
+Keymap {
 	"<D-C-r>",
 	function()
 		-- FIX
