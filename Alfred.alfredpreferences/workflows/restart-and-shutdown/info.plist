@@ -88,19 +88,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>EBB628BA-A9FC-452C-8312-32DF09B51043</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>29D763E3-99DA-42EC-A264-3AA565CDC0F6</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 	</dict>
 	<key>createdby</key>
 	<string>Chris Grieser</string>
@@ -227,35 +214,23 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>3</integer>
-				<key>argumenttext</key>
-				<string>sketchybar</string>
-				<key>focusedappvariable</key>
-				<false/>
-				<key>focusedappvariablename</key>
-				<string></string>
-				<key>hotkey</key>
-				<integer>12</integer>
-				<key>hotmod</key>
-				<integer>1835008</integer>
-				<key>hotstring</key>
-				<string>Q</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
+				<key>argumenttype</key>
 				<integer>2</integer>
-				<key>relatedAppsMode</key>
-				<integer>0</integer>
+				<key>keyword</key>
+				<string>shutdown</string>
+				<key>subtext</key>
+				<string>sync all perma-repos before</string>
+				<key>text</key>
+				<string>Shutdown</string>
+				<key>withspace</key>
+				<false/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
+			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
-			<string>EBB628BA-A9FC-452C-8312-32DF09B51043</string>
+			<string>C8BAA286-8178-4777-B3D8-B9958B57D2DD</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -294,27 +269,6 @@
 			<string>96BEB152-706D-407E-882B-113E7E4821F5</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>shutdown</string>
-				<key>subtext</key>
-				<string>sync all perma-repos before</string>
-				<key>text</key>
-				<string>Shutdown</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>C8BAA286-8178-4777-B3D8-B9958B57D2DD</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -371,9 +325,9 @@
 			<key>note</key>
 			<string>success?</string>
 			<key>xpos</key>
-			<real>350</real>
+			<real>355</real>
 			<key>ypos</key>
-			<real>470</real>
+			<real>340</real>
 		</dict>
 		<key>29D763E3-99DA-42EC-A264-3AA565CDC0F6</key>
 		<dict>
@@ -391,9 +345,9 @@
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>190</real>
+			<real>205</real>
 			<key>ypos</key>
-			<real>440</real>
+			<real>310</real>
 		</dict>
 		<key>96BEB152-706D-407E-882B-113E7E4821F5</key>
 		<dict>
@@ -404,7 +358,7 @@
 			<key>xpos</key>
 			<real>430</real>
 			<key>ypos</key>
-			<real>440</real>
+			<real>310</real>
 		</dict>
 		<key>C8BAA286-8178-4777-B3D8-B9958B57D2DD</key>
 		<dict>
@@ -415,7 +369,7 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>440</real>
+			<real>310</real>
 		</dict>
 		<key>DBB52345-766C-4EA1-81C2-20E30FBE25F0</key>
 		<dict>
@@ -436,17 +390,6 @@
 			<real>360</real>
 			<key>ypos</key>
 			<real>70</real>
-		</dict>
-		<key>EBB628BA-A9FC-452C-8312-32DF09B51043</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>note</key>
-			<string>sketchybar</string>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>300</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

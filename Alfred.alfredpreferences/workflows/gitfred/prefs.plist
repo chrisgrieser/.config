@@ -24,7 +24,5 @@
 	<true/>
 	<key>restore_mtime</key>
 	<string>quick-partial</string>
-	<key>sketchybar_trigger_name</key>
-	<string>update_github_notif</string>
 </dict>
 </plist>

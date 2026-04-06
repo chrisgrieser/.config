@@ -80,23 +80,14 @@ require("lualine").setup {
 	tabline = {
 		lualine_a = {
 			{
-				"datetime",
-				style = "%H:%M:%S",
-				-- make the `:` blink
-				fmt = function(time) return time:gsub(":", os.time() % 2 == 0 and " " or ":") end,
-				cond = function() return vim.o.columns > 120 end, -- only if window is maximized
+				function() return "Recording…" end,
+				icon = "󰃽",
+				cond = function() return vim.fn.reg_recording() ~= "" end,
 			},
 		},
 		lualine_x = {
 			-- HACK dummy, so tabline is never empty (in which case vim adds its ugly tabline)
 			{ function() return " " end },
-		},
-		lualine_z = {
-			{
-				function() return "Recording…" end,
-				icon = "󰃽",
-				cond = function() return vim.fn.reg_recording() ~= "" end,
-			},
 		},
 	},
 	--------------------------------------------------------------------------
