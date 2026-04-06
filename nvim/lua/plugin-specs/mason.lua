@@ -141,32 +141,28 @@ end
 
 --------------------------------------------------------------------------------
 
-vim.env.npm_config_cache = vim.env.HOME .. "/.cache/npm" -- don't crowd $HOME with `.npm` folder
-
-require("mason").setup {
-	registries = {
-		-- personal registry must come first to have priority
-		-- "file:" .. vim.fn.stdpath("config") .. "/mason-registry",
-		"github:mason-org/mason-registry",
-	},
-	ui = {
-		height = 0.85,
-		width = 0.8,
-		backdrop = 60,
-		icons = { package_installed = "✓", package_pending = "󰔟" },
-		keymaps = {
-			uninstall_package = "x",
-			toggle_help = "?",
-			toggle_package_expand = "<Tab>",
+vim.schedule(function()
+	vim.env.npm_config_cache = vim.env.HOME .. "/.cache/npm" -- don't crowd $HOME with `.npm` folder
+	require("mason").setup {
+		registries = {
+			-- personal registry must come first to have priority
+			-- "file:" .. vim.fn.stdpath("config") .. "/mason-registry",
+			"github:mason-org/mason-registry",
 		},
-	},
-}
+		ui = {
+			height = 0.85,
+			width = 0.8,
+			backdrop = 60,
+			icons = { package_installed = "✓", package_pending = "󰔟" },
+			keymaps = { uninstall_package = "x", toggle_help = "?", toggle_package_expand = "<Tab>" },
+		},
+	}
 
-enableLsps()
+	enableLsps()
+end)
 
-vim.api.nvim_create_autocmd("VimEnter", {
+vim.api.nvim_create_autocmd("VimEnter", { -- deferred to not install at same time as plugins
 	desc = "User: sync mason packages",
-	-- deferred to not install at same time as plugins
 	callback = function() vim.defer_fn(syncPackages, 1000) end,
 })
 

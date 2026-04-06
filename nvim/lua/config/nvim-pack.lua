@@ -52,18 +52,17 @@ vim.iter(vim.fs.dir(pluginSpecPath)):each(function(name, type)
 end)
 
 ---AUTO-CLEANUP-----------------------------------------------------------------
-vim.api.nvim_create_autocmd("VimEnter", { -- VimEnter to not uninstall plugins still installing
+vim.api.nvim_create_autocmd("FocusLost", { -- on `FocusLost`, since `vim.pack.get()` is blocking?
 	desc = "User: auto-cleanup unused plugins",
+	once = true,
 	callback = function()
-		vim.defer_fn(function()
-			local outdatedPlugins = vim.iter(vim.pack.get())
-				:filter(function(p) return not p.active end)
-				:map(function(p) return p.spec.name end)
-				:totable()
-			if #outdatedPlugins == 0 then return end
-			assert(#outdatedPlugins <= 10, "Not uninstalling more than 10 plugins at once.")
-			vim.pack.del(outdatedPlugins)
-		end, 1000)
+		local outdatedPlugins = vim.iter(vim.pack.get())
+			:filter(function(p) return not p.active end)
+			:map(function(p) return p.spec.name end)
+			:totable()
+		if #outdatedPlugins == 0 then return end
+		assert(#outdatedPlugins <= 10, "Not uninstalling more than 10 plugins at once.")
+		vim.pack.del(outdatedPlugins)
 	end,
 })
 

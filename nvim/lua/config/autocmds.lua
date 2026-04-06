@@ -244,8 +244,8 @@ local templateConfig = {
 	ignoreDirs = { vim.fn.stdpath("data"), "/tmp/" },
 	globToTemplateMap = {
 		[vim.fn.stdpath("config") .. "/lsp/*.lua"] = "lsp-server-config.lua",
+		[vim.fn.stdpath("config") .. "/lua/plugin-specs/*.lua"] = "vim-pack-plugin.lua",
 		["**/*.lua"] = "module.lua",
-		[vim.fn.stdpath("config") .. "/plugins/*.lua"] = "vim-pack-plugin.lua",
 
 		["**/*.py"] = "template.py",
 		["**/*.scm"] = "template.scm",
