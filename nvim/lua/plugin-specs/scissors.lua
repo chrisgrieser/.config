@@ -6,14 +6,12 @@ vim.pack.add {
 
 vim.g.whichkeyAddSpec { "<leader>n", group = "󰩫 Snippets" }
 
-require("config.utils").pluginKeymaps {
-	{ "<leader>nn", function() require("scissors").editSnippet() end, desc = "󰩫 Edit" },
-	{
-		"<leader>na",
-		function() require("scissors").addNewSnippet() end,
-		mode = { "n", "x" },
-		desc = "󰩫 Add",
-	},
+Keymap { "<leader>nn", function() require("scissors").editSnippet() end, desc = "󰩫 Edit" }
+Keymap {
+	"<leader>na",
+	function() require("scissors").addNewSnippet() end,
+	mode = { "n", "x" },
+	desc = "󰩫 Add",
 }
 
 --------------------------------------------------------------------------------

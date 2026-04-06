@@ -1,16 +1,16 @@
 vim.pack.add { "https://github.com/chrisgrieser/nvim-origami" }
 --------------------------------------------------------------------------------
 
-require("config.utils").pluginKeymaps {
-	{ "h", function() require("origami").h() end, mode = { "n", "x" }, desc = "Origami h" },
-	{ "H", function() require("origami").caret() end, mode = { "n", "x" }, desc = "Origami H" },
-	{ "l", function() require("origami").l() end, mode = { "n", "x" }, desc = "Origami l" },
-	{ "L", function() require("origami").dollar() end, mode = { "n", "x" }, desc = "Origami L" },
-}
+Keymap { "h", function() require("origami").h() end, mode = { "n", "x" }, desc = "Origami h" }
+Keymap { "H", function() require("origami").caret() end, mode = { "n", "x" }, desc = "Origami H" }
+Keymap { "l", function() require("origami").l() end, mode = { "n", "x" }, desc = "Origami l" }
+Keymap { "L", function() require("origami").dollar() end, mode = { "n", "x" }, desc = "Origami L" }
 
 --------------------------------------------------------------------------------
+
 vim.opt.foldlevel = 99 -- disable vim's auto-fold
 vim.opt.foldlevelstart = 99
+
 require("origami").setup {
 	foldKeymaps = {
 		setup = false, -- setting on my own since I remap `H` and `L`

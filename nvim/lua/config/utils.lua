@@ -1,20 +1,3 @@
-local M = {}
---------------------------------------------------------------------------------
-
----Try to require the module, but do not throw an error when one of them cannot
----be loaded. Without this, any error in one config file would result in the
----remaining config files not being loaded.
----@param module string
-function M.safeRequire(module)
-	local success, errmsg = pcall(require, module)
-	if success then return end
-
-	local msg = ("Error loading `%s`: %s"):format(module, errmsg)
-	vim.defer_fn(function() -- defer for notification plugin
-		vim.notify(msg, vim.log.levels.ERROR, { title = "User config", timeout = false })
-	end, 1000)
-end
-
 ---Warn when there are conflicting keymaps & use API similar to lazy.nvim keymaps
 ---@param map vim.keymap.set.Opts|{mode: string|string[], ft: string|string[], [1]: string, [2]: string|function}
 _G.Keymap = function(map)
@@ -38,7 +21,7 @@ _G.Keymap = function(map)
 		if success then return end
 
 		local modes = type(mode) == "table" and table.concat(mode, ", ") or mode
-		local caller = debug.getinfo(2, "Sl") -- S: source, l: currentline
+		local caller = debug.getinfo(2, "Sln") -- S: source, l: currentline, n: name
 		local source = vim.fs.basename(caller.source)
 		local msg = ("`(%s)`  %s  **%s:%d**"):format(modes, lhs, source, caller.currentline)
 
@@ -59,18 +42,33 @@ _G.Keymap = function(map)
 	end
 end
 
-_G.Bufmap = function (map)
-	map.buffer = true
+---@param map vim.keymap.set.Opts|{mode: string|string[], ft: string|string[], [1]: string, [2]: string|function}
+---@param bufnr? number
+_G.Bufmap = function(map, bufnr)
+	map.buf = bufnr or 0
+	map.unique = false -- usually overwriting a global keymap
 	Keymap(map)
 end
 
----@param mode string|string[]
----@param lhs string
----@param rhs string|function
----@param opts? vim.keymap.set.Opts
-function M.bufKeymap(mode, lhs, rhs, opts)
-	opts = vim.tbl_extend("force", { buffer = true, nowait = true }, opts or {})
-	vim.keymap.set(mode, lhs, rhs, opts)
+---@param text string
+---@param replace string
+_G.BufAbbr = function(text, replace) vim.keymap.set("ia", text, replace, { buffer = true }) end
+
+--------------------------------------------------------------------------------
+local M = {}
+
+---Try to require the module, but do not throw an error when one of them cannot
+---be loaded. Without this, any error in one config file would result in the
+---remaining config files not being loaded.
+---@param module string
+function M.safeRequire(module)
+	local success, errmsg = pcall(require, module)
+	if success then return end
+
+	local msg = ("Error loading `%s`: %s"):format(module, errmsg)
+	vim.defer_fn(function() -- defer for notification plugin
+		vim.notify(msg, vim.log.levels.ERROR, { title = "User config", timeout = false })
+	end, 1000)
 end
 
 ---@param maps {[1]: string, [2]: string|function, mode?: string|string[], desc?: string, nowait?: boolean, ft?: string|string[], remap?: boolean, unique?: boolean, expr?: boolean}[]
@@ -100,10 +98,6 @@ function M.pluginKeymaps(maps)
 		end
 	end
 end
-
----@param text string
----@param replace string
-function M.bufAbbrev(text, replace) vim.keymap.set("ia", text, replace, { buffer = true }) end
 
 function M.loadGhToken()
 	if vim.env.GITHUB_TOKEN then return end

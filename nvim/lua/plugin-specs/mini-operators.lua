@@ -1,10 +1,8 @@
 vim.pack.add { "https://github.com/nvim-mini/mini.operators" }
 --------------------------------------------------------------------------------
 
-require("config.utils").pluginKeymaps {
-	{ "S", "s$", desc = "󰅪 Substitute to EoL", remap = true },
-	{ "W", "w$", desc = "󰅪 Multiply to EoL", remap = true },
-}
+Keymap { "S", "s$", desc = "󰅪 Substitute to EoL", remap = true }
+Keymap { "W", "w$", desc = "󰅪 Multiply to EoL", remap = true }
 
 --------------------------------------------------------------------------------
 

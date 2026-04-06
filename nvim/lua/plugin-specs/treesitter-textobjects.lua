@@ -61,107 +61,105 @@ local function addDocstring()
 	end
 end
 
-require("config.utils").pluginKeymaps {
-	---MOVE-------------------------------------------------------------------
-	{
-		"<C-j>",
-		function()
-			local move = require("nvim-treesitter-textobjects.move")
-			move.goto_next_start("@function.outer", "textobjects")
-		end,
-		desc = " Goto next function",
-	},
-	{
-		"<C-k>",
-		function()
-			local move = require("nvim-treesitter-textobjects.move")
-			move.goto_previous_start("@function.outer", "textobjects")
-		end,
-		desc = " Goto prev function",
-	},
+---MOVE-------------------------------------------------------------------
+Keymap {
+	"<C-j>",
+	function()
+		local move = require("nvim-treesitter-textobjects.move")
+		move.goto_next_start("@function.outer", "textobjects")
+	end,
+	desc = " Goto next function",
+}
+Keymap {
+	"<C-k>",
+	function()
+		local move = require("nvim-treesitter-textobjects.move")
+		move.goto_previous_start("@function.outer", "textobjects")
+	end,
+	desc = " Goto prev function",
+}
 
-	---SWAP----------------------------------------------------------------------
+---SWAP----------------------------------------------------------------------
 
-	-- stylua: ignore start
-	{ "ä", function() require("nvim-treesitter-textobjects.swap").swap_next("@parameter.inner") end, desc = " Swap arg" },
-	{ "Ä", function() require("nvim-treesitter-textobjects.swap").swap_previous("@parameter.inner") end, desc = " Swap arg" },
+-- stylua: ignore start
+Keymap { "ä", function() require("nvim-treesitter-textobjects.swap").swap_next("@parameter.inner") end, desc = " Swap arg" }
+Keymap { "Ä", function() require("nvim-treesitter-textobjects.swap").swap_previous("@parameter.inner") end, desc = " Swap arg" }
 
-	-- `@md_section` is a custom object defined in `./queries/markdown/textobjects.scm`
-	{ "ä", function() require("nvim-treesitter-textobjects.swap").swap_next("@md_section") end, ft = "markdown", desc = "󰍔 Swap section" },
-	{ "Ä", function() require("nvim-treesitter-textobjects.swap").swap_previous("@md_section") end, ft = "markdown", desc = "󰍔 Swap section" },
-	-- stylua: ignore end
+-- `@md_section` is a custom object defined in `./queries/markdown/textobjects.scm`
+Keymap { "ä", function() require("nvim-treesitter-textobjects.swap").swap_next("@md_section") end, ft = "markdown", desc = "󰍔 Swap section" }
+Keymap { "Ä", function() require("nvim-treesitter-textobjects.swap").swap_previous("@md_section") end, ft = "markdown", desc = "󰍔 Swap section" }
+-- stylua: ignore end
 
-	---TEXT OBJECTS--------------------------------------------------------------
-	{ "a<CR>", select("@return.outer"), mode = { "x", "o" }, desc = "↩ outer return" },
-	{ "i<CR>", select("@return.inner"), mode = { "x", "o" }, desc = "↩ inner return" },
-	{ "a/", select("@regex.outer"), mode = { "x", "o" }, desc = " outer regex" },
-	{ "i/", select("@regex.inner"), mode = { "x", "o" }, desc = " inner regex" },
-	{ "aa", select("@parameter.outer"), mode = { "x", "o" }, desc = "󰏪 outer arg" },
-	{ "ia", select("@parameter.inner"), mode = { "x", "o" }, desc = "󰏪 inner arg" },
-	{ "iu", select("@loop.inner"), mode = { "x", "o" }, desc = "󰛤 inner loop" },
-	{ "au", select("@loop.outer"), mode = { "x", "o" }, desc = "󰛤 outer loop" },
-	{ "al", select("@call.outer"), mode = { "x", "o" }, desc = "󰡱 outer call" },
-	{ "il", select("@call.inner"), mode = { "x", "o" }, desc = "󰡱 inner call" },
-	{ "af", select("@function.outer"), mode = { "x", "o" }, desc = " outer function" },
-	{ "if", select("@function.inner"), mode = { "x", "o" }, desc = " inner function" },
-	{ "ao", select("@conditional.outer"), mode = { "x", "o" }, desc = "󱕆 outer condition" },
-	{ "io", select("@conditional.inner"), mode = { "x", "o" }, desc = "󱕆 inner condition" },
+---TEXT OBJECTS--------------------------------------------------------------
+Keymap { "a<CR>", select("@return.outer"), mode = { "x", "o" }, desc = "↩ outer return" }
+Keymap { "i<CR>", select("@return.inner"), mode = { "x", "o" }, desc = "↩ inner return" }
+Keymap { "a/", select("@regex.outer"), mode = { "x", "o" }, desc = " outer regex" }
+Keymap { "i/", select("@regex.inner"), mode = { "x", "o" }, desc = " inner regex" }
+Keymap { "aa", select("@parameter.outer"), mode = { "x", "o" }, desc = "󰏪 outer arg" }
+Keymap { "ia", select("@parameter.inner"), mode = { "x", "o" }, desc = "󰏪 inner arg" }
+Keymap { "iu", select("@loop.inner"), mode = { "x", "o" }, desc = "󰛤 inner loop" }
+Keymap { "au", select("@loop.outer"), mode = { "x", "o" }, desc = "󰛤 outer loop" }
+Keymap { "al", select("@call.outer"), mode = { "x", "o" }, desc = "󰡱 outer call" }
+Keymap { "il", select("@call.inner"), mode = { "x", "o" }, desc = "󰡱 inner call" }
+Keymap { "af", select("@function.outer"), mode = { "x", "o" }, desc = " outer function" }
+Keymap { "if", select("@function.inner"), mode = { "x", "o" }, desc = " inner function" }
+Keymap { "ao", select("@conditional.outer"), mode = { "x", "o" }, desc = "󱕆 outer condition" }
+Keymap { "io", select("@conditional.inner"), mode = { "x", "o" }, desc = "󱕆 inner condition" }
 
-	---CUSTOM TEXTOBJECTS (defined in ./queries/*/textobjects.scm)--------------------------
-	{ -- override default inner conditional for some languages
-		"io",
-		select("@conditional.conditionOnly"),
-		mode = { "x", "o" },
-		desc = "󱕆 inner conditional",
-		ft = { "javascript", "typescript", "lua", "swift", "python", "bash", "zsh" },
-	},
-	{ "rl", select("@call.justCaller"), mode = "o", desc = "󰡱 rest of caller" },
+---CUSTOM TEXTOBJECTS (defined in ./queries/*/textobjects.scm)--------------------------
+Keymap { -- override default inner conditional for some languages
+	"io",
+	select("@conditional.conditionOnly"),
+	mode = { "x", "o" },
+	desc = "󱕆 inner conditional",
+	ft = { "javascript", "typescript", "lua", "swift", "python", "bash", "zsh" },
+}
+Keymap { "rl", select("@call.justCaller"), mode = "o", desc = "󰡱 rest of caller" }
 
-	-- stylua: ignore start
-	{ "is", select("@selector.inner"), mode={"x","o"}, ft = "css", desc = " inner selector" },
-	{ "as", select("@selector.outer"), mode={"x","o"}, ft = "css", desc = " outer selector" },
-	{ "iP", select("@pipeline.inner"), mode={"x","o"}, ft = "zsh", desc = "󰟥 inner pipeline" },
-	{ "aP", select("@pipeline.outer"), mode={"x","o"}, ft = "zsh", desc = "󰟥 outer pipeline" },
-	{ "ad", select("@docstring.outer"), mode={"x","o"}, ft = "python", desc = "󰌠 outer docstring" },
-	{ "id", select("@docstring.inner"), mode={"x","o"}, ft = "python", desc = "󰌠 inner docstring" },
+-- stylua: ignore start
+Keymap { "is", select("@selector.inner"), mode={"x","o"}, ft = "css", desc = " inner selector" }
+Keymap { "as", select("@selector.outer"), mode={"x","o"}, ft = "css", desc = " outer selector" }
+Keymap { "iP", select("@pipeline.inner"), mode={"x","o"}, ft = "zsh", desc = "󰟥 inner pipeline" }
+Keymap { "aP", select("@pipeline.outer"), mode={"x","o"}, ft = "zsh", desc = "󰟥 outer pipeline" }
+Keymap { "ad", select("@docstring.outer"), mode={"x","o"}, ft = "python", desc = "󰌠 outer docstring" }
+Keymap { "id", select("@docstring.inner"), mode={"x","o"}, ft = "python", desc = "󰌠 inner docstring" }
 
-	{ "il", select("@mdlink.inner"), mode={"x","o"}, ft = "markdown", desc = "󰍔 inner mdlink" },
-	{ "al", select("@mdlink.outer"), mode={"x","o"}, ft = "markdown", desc = "󰍔 outer mdlink" },
-	{ "aE", select("@codeblock.outer"), mode={"x","o"}, ft = "markdown", desc = "󰍔 outer codeblock" },
-	{ "iE", select("@codeblock.inner"), mode={"x","o"}, ft = "markdown", desc = "󰍔 inner codeblock" },
-	{ "if", select("@emphasis.inner"), mode={"x","o"}, ft = "markdown", desc = "󰍔 inner formatting" },
-	{ "af", select("@emphasis.outer"), mode={"x","o"}, ft = "markdown", desc = "󰍔 outer formatting" },
-	-- stylua: ignore end
+Keymap { "il", select("@mdlink.inner"), mode={"x","o"}, ft = "markdown", desc = "󰍔 inner mdlink" }
+Keymap { "al", select("@mdlink.outer"), mode={"x","o"}, ft = "markdown", desc = "󰍔 outer mdlink" }
+Keymap { "aE", select("@codeblock.outer"), mode={"x","o"}, ft = "markdown", desc = "󰍔 outer codeblock" }
+Keymap { "iE", select("@codeblock.inner"), mode={"x","o"}, ft = "markdown", desc = "󰍔 inner codeblock" }
+Keymap { "if", select("@emphasis.inner"), mode={"x","o"}, ft = "markdown", desc = "󰍔 inner formatting" }
+Keymap { "af", select("@emphasis.outer"), mode={"x","o"}, ft = "markdown", desc = "󰍔 outer formatting" }
+-- stylua: ignore end
 
-	---COMMENTS---------------------------------------------------------------
-	-- only operator-pending to not conflict with selection-commenting
-	{ "q", select("@comment.outer"), mode = "o", desc = "󰆈 single comment" },
-	{ "qf", addDocstring, desc = "󰆈 add docstring" },
-	{
-		"cq",
-		function()
-			-- not using `@comment.inner`, since not supported for many languages
-			local selectObj = require("nvim-treesitter-textobjects.select").select_textobject
-			selectObj("@comment.outer", "textobjects")
-			local comStr = vim.bo.commentstring:format("")
-			vim.cmd.normal { "c" .. comStr, bang = true }
-			vim.cmd.startinsert { bang = true }
-		end,
-		desc = "󰆈 Change single comment",
-	},
-	{
-		"dq",
-		function()
-			-- as opposed to regular usage of the textobj, also trims the line
-			-- and preserves the cursor position
-			local cursorBefore = vim.api.nvim_win_get_cursor(0)
-			local selectObj = require("nvim-treesitter-textobjects.select").select_textobject
-			selectObj("@comment.outer", "textobjects")
-			vim.cmd.normal { "d", bang = true }
-			local trimmedLine = vim.api.nvim_get_current_line():gsub("%s+$", "")
-			vim.api.nvim_set_current_line(trimmedLine)
-			vim.api.nvim_win_set_cursor(0, cursorBefore)
-		end,
-		desc = "󰆈 Sticky delete single comment",
-	},
+---COMMENTS---------------------------------------------------------------
+-- only operator-pending to not conflict with selection-commenting
+Keymap { "q", select("@comment.outer"), mode = "o", desc = "󰆈 single comment" }
+Keymap { "qf", addDocstring, desc = "󰆈 add docstring" }
+Keymap {
+	"cq",
+	function()
+		-- not using `@comment.inner`, since not supported for many languages
+		local selectObj = require("nvim-treesitter-textobjects.select").select_textobject
+		selectObj("@comment.outer", "textobjects")
+		local comStr = vim.bo.commentstring:format("")
+		vim.cmd.normal { "c" .. comStr, bang = true }
+		vim.cmd.startinsert { bang = true }
+	end,
+	desc = "󰆈 Change single comment",
+}
+Keymap {
+	"dq",
+	function()
+		-- as opposed to regular usage of the textobj, also trims the line
+		-- and preserves the cursor position
+		local cursorBefore = vim.api.nvim_win_get_cursor(0)
+		local selectObj = require("nvim-treesitter-textobjects.select").select_textobject
+		selectObj("@comment.outer", "textobjects")
+		vim.cmd.normal { "d", bang = true }
+		local trimmedLine = vim.api.nvim_get_current_line():gsub("%s+$", "")
+		vim.api.nvim_set_current_line(trimmedLine)
+		vim.api.nvim_win_set_cursor(0, cursorBefore)
+	end,
+	desc = "󰆈 Sticky delete single comment",
 }

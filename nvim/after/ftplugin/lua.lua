@@ -1,16 +1,13 @@
-local abbr = require("config.utils").bufAbbrev
---------------------------------------------------------------------------------
-
 -- FIXES HABITS
 -- from writing too much in other languages
-abbr("//", "--")
-abbr("const", "local")
-abbr("let", "local")
-abbr("===", "==")
-abbr("!=", "~=")
-abbr("!==", "~=")
-abbr("=~", "~=") -- shell uses `=~` for regex matching
-abbr("fi", "end")
+BufAbbr("//", "--")
+BufAbbr("const", "local")
+BufAbbr("let", "local")
+BufAbbr("===", "==")
+BufAbbr("!=", "~=")
+BufAbbr("!==", "~=")
+BufAbbr("=~", "~=") -- shell uses `=~` for regex matching
+BufAbbr("fi", "end")
 
 ---@param sign "+"|"-"
 local function plusPlusMinusMinus(sign)

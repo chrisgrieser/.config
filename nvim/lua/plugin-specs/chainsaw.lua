@@ -3,41 +3,39 @@ vim.pack.add { "https://github.com/chrisgrieser/nvim-chainsaw" }
 
 vim.g.whichkeyAddSpec { "<leader>l", group = "󰹈 Log" }
 
-require("config.utils").pluginKeymaps {
-	-- stylua: ignore start
-	{ "<leader>ll", function() require("chainsaw").variableLog() end, mode = { "n", "x" }, desc = "󰀫 variable" },
-	{ "<leader>lo", function() require("chainsaw").objectLog() end, mode = { "n", "x" }, desc = "⬟ object" },
-	{ "<leader>la", function() require("chainsaw").assertLog() end, mode = { "n", "x" }, desc = "󱈸 assert" },
-	{ "<leader>lt", function() require("chainsaw").typeLog() end, mode = { "n", "x" }, desc = "󰜀 type" },
-	-- stylua: ignore end
-	{ "<leader>lm", function() require("chainsaw").messageLog() end, desc = "󰍩 message" },
-	{ "<leader>le", function() require("chainsaw").emojiLog() end, desc = " emoji" },
-	{ "<leader>ls", function() require("chainsaw").sound() end, desc = "󱄠 sound" },
-	{ "<leader>lp", function() require("chainsaw").timeLog() end, desc = "󱎫 performance" },
-	{ "<leader>ld", function() require("chainsaw").debugLog() end, desc = "󰃤 debugger" },
-	{ "<leader>lS", function() require("chainsaw").stacktraceLog() end, desc = " stacktrace" },
-	{ "<leader>lc", function() require("chainsaw").clearLog() end, desc = "󰃢 clear console" },
-	{ "<leader>lr", function() require("chainsaw").removeLogs() end, desc = "󰅗 remove logs" },
-	{
-		"<leader>lg",
-		function()
-			local marker = require("chainsaw.config.config").config.marker
-			Snacks.picker.grep_word {
-				title = marker .. " log statements",
-				cmd = "rg",
-				args = { "--trim" },
-				search = marker,
-				regex = false,
-				live = false,
-				format = function(item, _picker) -- only display the grepped line
-					local out = {}
-					Snacks.picker.highlight.format(item, item.line, out)
-					return out
-				end,
-			}
-		end,
-		desc = "󰉹 grep log statements",
-	},
+-- stylua: ignore start
+Keymap { "<leader>ll", function() require("chainsaw").variableLog() end, mode = { "n", "x" }, desc = "󰀫 variable" }
+Keymap { "<leader>lo", function() require("chainsaw").objectLog() end, mode = { "n", "x" }, desc = "⬟ object" }
+Keymap { "<leader>la", function() require("chainsaw").assertLog() end, mode = { "n", "x" }, desc = "󱈸 assert" }
+Keymap { "<leader>lt", function() require("chainsaw").typeLog() end, mode = { "n", "x" }, desc = "󰜀 type" }
+-- stylua: ignore end
+Keymap { "<leader>lm", function() require("chainsaw").messageLog() end, desc = "󰍩 message" }
+Keymap { "<leader>le", function() require("chainsaw").emojiLog() end, desc = " emoji" }
+Keymap { "<leader>ls", function() require("chainsaw").sound() end, desc = "󱄠 sound" }
+Keymap { "<leader>lp", function() require("chainsaw").timeLog() end, desc = "󱎫 performance" }
+Keymap { "<leader>ld", function() require("chainsaw").debugLog() end, desc = "󰃤 debugger" }
+Keymap { "<leader>lS", function() require("chainsaw").stacktraceLog() end, desc = " stacktrace" }
+Keymap { "<leader>lc", function() require("chainsaw").clearLog() end, desc = "󰃢 clear console" }
+Keymap { "<leader>lr", function() require("chainsaw").removeLogs() end, desc = "󰅗 remove logs" }
+Keymap {
+	"<leader>lg",
+	function()
+		local marker = require("chainsaw.config.config").config.marker
+		Snacks.picker.grep_word {
+			title = marker .. " log statements",
+			cmd = "rg",
+			args = { "--trim" },
+			search = marker,
+			regex = false,
+			live = false,
+			format = function(item, _picker) -- only display the grepped line
+				local out = {}
+				Snacks.picker.highlight.format(item, item.line, out)
+				return out
+			end,
+		}
+	end,
+	desc = "󰉹 grep log statements",
 }
 
 --------------------------------------------------------------------------------

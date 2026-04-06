@@ -1,4 +1,3 @@
---------------------------------------------------------------------------------
 vim.pack.add { "https://github.com/monkoose/neocodeium" }
 --------------------------------------------------------------------------------
 -- ALTERNATIVES
@@ -16,7 +15,7 @@ require("neocodeium").setup {
 		bib = false,
 		text = false, -- filetype when editing in `pass` (1. extra safeguard)
 	},
-	filter = function (bufnr)
+	filter = function(bufnr)
 		-- INFO plugins are disabled when using `pass`, for safety
 		-- adding redundant safeguards to disable AI for those buffers nonetheless
 		local filepath = vim.api.nvim_buf_get_name(bufnr)
@@ -47,20 +46,18 @@ require("neocodeium").setup {
 		else
 			return true
 		end
-	end
+	end,
 }
 
 --------------------------------------------------------------------------------
 
-require("config.utils").pluginKeymaps {
-	{ "<leader>oa", function() vim.cmd.NeoCodeium("toggle") end, desc = "󰚩 NeoCodeium" },
-	-- stylua: ignore start
-	{ "<D-s>", function() require("neocodeium").accept() end, mode = "i", desc = "󰚩 Accept full suggestion" },
-	{ "<D-S>", function() require("neocodeium").accept_word() end, mode = "i", desc = "󰚩 Accept word" },
-	{ "<D-a>", function() require("neocodeium").cycle_or_complete(1) end, mode = "i", desc = "󰚩 Next suggestion" },
-	{ "<D-A>", function() require("neocodeium").cycle_or_complete(-1) end, mode = "i", desc = "󰚩 Prev suggestion" },
-	-- stylua: ignore end
-}
+Keymap { "<leader>oa", function() vim.cmd.NeoCodeium("toggle") end, desc = "󰚩 NeoCodeium" }
+-- stylua: ignore start
+Keymap { "<D-s>", function() require("neocodeium").accept() end, mode = "i", desc = "󰚩 Accept full suggestion" }
+Keymap { "<D-S>", function() require("neocodeium").accept_word() end, mode = "i", desc = "󰚩 Accept word" }
+Keymap { "<D-a>", function() require("neocodeium").cycle_or_complete(1) end, mode = "i", desc = "󰚩 Next suggestion" }
+Keymap { "<D-A>", function() require("neocodeium").cycle_or_complete(-1) end, mode = "i", desc = "󰚩 Prev suggestion" }
+-- stylua: ignore end
 
 --------------------------------------------------------------------------------
 vim.g.lualineAdd("sections", "lualine_x", function()

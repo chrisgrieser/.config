@@ -1,17 +1,14 @@
-local abbr = require("config.utils").bufAbbrev
---------------------------------------------------------------------------------
-
 vim.bo.commentstring = "// %s" -- add space
 
 --------------------------------------------------------------------------------
 
 -- ABBREVIATIONS
-abbr("cosnt", "const") -- typos: ignore-line
-abbr("local", "const")
-abbr("elseif", "else if")
-abbr("--", "//")
-abbr("~=", "!==")
-abbr("()", "() =>")
+BufAbbr("cosnt", "const") -- typos: ignore-line
+BufAbbr("local", "const")
+BufAbbr("elseif", "else if")
+BufAbbr("--", "//")
+BufAbbr("~=", "!==")
+BufAbbr("()", "() =>")
 
 --------------------------------------------------------------------------------
 

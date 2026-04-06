@@ -1,13 +1,14 @@
 -- vim: foldlevel=3
 -- DOCS https://github.com/Wansmer/treesj#basic-node
-
 vim.pack.add { "https://github.com/Wansmer/treesj" }
 --------------------------------------------------------------------------------
 
-require("config.utils").pluginKeymaps {
-	{ "<leader>s", function() require("treesj").toggle() end, desc = "󰗈 Split-join lines" },
-	-- stylua: ignore
-	{ "<leader>s", "gw}", ft = { "markdown", "text", "gitcommit" }, desc = "󰗈 Reflow rest of paragraph" },
+Keymap { "<leader>s", function() require("treesj").toggle() end, desc = "󰗈 Split-join lines" }
+Keymap {
+	"<leader>s",
+	"gw}",
+	ft = { "markdown", "text", "gitcommit" },
+	desc = "󰗈 Reflow rest of paragraph",
 }
 
 --------------------------------------------------------------------------------

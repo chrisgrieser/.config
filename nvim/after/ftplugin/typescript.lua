@@ -7,26 +7,29 @@ vim.cmd.compiler("tsc")
 
 --------------------------------------------------------------------------------
 
-local bkeymap = require("config.utils").bufKeymap
-
 -- When typing `await`, automatically add `async` to the function declaration
-bkeymap("i", "t", function()
-	vim.api.nvim_feedkeys("t", "n", true) -- pass through the trigger char
-	local col = vim.api.nvim_win_get_cursor(0)[2]
-	local textBeforeCursor = vim.api.nvim_get_current_line():sub(col - 3, col)
-	if textBeforeCursor ~= "awai" then return end
-	-----------------------------------------------------------------------------
+Bufmap {
+	"t",
+	function()
+		vim.api.nvim_feedkeys("t", "n", true) -- pass through the trigger char
+		local col = vim.api.nvim_win_get_cursor(0)[2]
+		local textBeforeCursor = vim.api.nvim_get_current_line():sub(col - 3, col)
+		if textBeforeCursor ~= "awai" then return end
+		-----------------------------------------------------------------------------
 
-	local funcNode = vim.treesitter.get_node()
-	local functionNodes = { "arrow_function", "function_declaration", "function" }
+		local funcNode = vim.treesitter.get_node()
+		local functionNodes = { "arrow_function", "function_declaration", "function" }
 
-	repeat -- loop trough ancestors till function node found
-		funcNode = funcNode and funcNode:parent()
-		if not funcNode then return end
-	until vim.tbl_contains(functionNodes, funcNode:type())
+		repeat -- loop trough ancestors till function node found
+			funcNode = funcNode and funcNode:parent()
+			if not funcNode then return end
+		until vim.tbl_contains(functionNodes, funcNode:type()) ---@diagnostic disable-line: need-check-nil
 
-	local functionText = vim.treesitter.get_node_text(funcNode, 0)
-	if vim.startswith(functionText, "async") then return end -- already async
-	local startRow, startCol = funcNode:start()
-	vim.api.nvim_buf_set_text(0, startRow, startCol, startRow, startCol, { "async " })
-end, { desc = "󰛦 Auto-add `async`" })
+		local functionText = vim.treesitter.get_node_text(funcNode, 0)
+		if vim.startswith(functionText, "async") then return end -- already async
+		local startRow, startCol = funcNode:start()
+		vim.api.nvim_buf_set_text(0, startRow, startCol, startRow, startCol, { "async " })
+	end,
+	mode = "i",
+	desc = "󰛦 Auto-add `async`",
+}

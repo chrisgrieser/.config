@@ -15,40 +15,46 @@ end, 1)
 
 --------------------------------------------------------------------------------
 -- ABBREVIATIONS
-local abbr = require("config.utils").bufAbbrev
-abbr("true", "True")
-abbr("false", "False")
-abbr("//", "#")
-abbr("--", "#")
-abbr("null", "None")
-abbr("nil", "None")
-abbr("none", "None")
-abbr("trim", "strip")
-abbr("function", "def")
+BufAbbr("true", "True")
+BufAbbr("false", "False")
+BufAbbr("//", "#")
+BufAbbr("--", "#")
+BufAbbr("null", "None")
+BufAbbr("nil", "None")
+BufAbbr("none", "None")
+BufAbbr("trim", "strip")
+BufAbbr("function", "def")
 
 --------------------------------------------------------------------------------
 -- KEYMAPS
 
-local bkeymap = require("config.utils").bufKeymap
-bkeymap("n", "g/", function()
-	vim.cmd.normal { '"zyi"vi"', bang = true } -- yank & reselect inside quotes
+Bufmap {
+	"g/",
+	function()
+		vim.cmd.normal { '"zyi"vi"', bang = true } -- yank & reselect inside quotes
 
-	local flagInLine = vim.api.nvim_get_current_line():match("re%.([MIDSUA])")
-	local data = {
-		regex = vim.fn.getreg("z"),
-		flags = flagInLine and "g" .. flagInLine:gsub("D", "S"):lower() or "g",
-		substitution = "", -- TODO
-		delimiter = '"',
-		flavor = "python",
-		testString = "",
-	}
+		local flagInLine = vim.api.nvim_get_current_line():match("re%.([MIDSUA])")
+		local data = {
+			regex = vim.fn.getreg("z"),
+			flags = flagInLine and "g" .. flagInLine:gsub("D", "S"):lower() or "g",
+			substitution = "", -- TODO
+			delimiter = '"',
+			flavor = "python",
+			testString = "",
+		}
 
-	require("rip-substitute.open-at-regex101").open(data)
-end, { desc = " Open in regex101" })
+		require("rip-substitute.open-at-regex101").open(data)
+	end,
+	desc = " Open in regex101",
+}
 
-bkeymap("n", "<leader>ci", function()
-	vim.lsp.buf.code_action {
-		filter = function(a) return a.title:find("import") ~= nil end,
-		apply = true,
-	}
-end, { desc = " Import word under cursor" })
+Bufmap {
+	"<leader>ci",
+	function()
+		vim.lsp.buf.code_action {
+			filter = function(a) return a.title:find("import") ~= nil end,
+			apply = true,
+		}
+	end,
+	desc = " Import word under cursor",
+}

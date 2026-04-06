@@ -170,6 +170,4 @@ vim.api.nvim_create_autocmd("VimEnter", {
 	callback = function() vim.defer_fn(syncPackages, 1000) end,
 })
 
-require("config.utils").pluginKeymaps {
-	{ "<leader>pm", vim.cmd.Mason, desc = " Mason home" },
-}
+Keymap { "<leader>pm", vim.cmd.Mason, desc = " Mason home" }

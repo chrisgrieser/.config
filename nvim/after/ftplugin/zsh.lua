@@ -1,8 +1,5 @@
--- ABBREVIATIONS
-local abbr = require("config.utils").bufAbbrev
-
-abbr("//", "#")
-abbr("delay", "sleep")
-abbr("const", "local")
-abbr("let", "local")
-abbr("~=", "=~") -- lua uses `=~`
+BufAbbr("//", "#")
+BufAbbr("delay", "sleep")
+BufAbbr("const", "local")
+BufAbbr("let", "local")
+BufAbbr("~=", "=~") -- lua uses `=~`

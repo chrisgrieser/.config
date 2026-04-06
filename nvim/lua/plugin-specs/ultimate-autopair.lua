@@ -7,9 +7,7 @@ vim.pack.add {
 }
 --------------------------------------------------------------------------------
 
-require("config.utils").pluginKeymaps {
-	{ "<D-o>", "{<CR>", mode = "i", desc = " Open new scope", remap = true },
-}
+Keymap { "<D-o>", "{<CR>", mode = "i", desc = " Open new scope", remap = true }
 
 --------------------------------------------------------------------------------
 

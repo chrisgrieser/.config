@@ -6,7 +6,6 @@ vim.opt_local.expandtab = false
 
 --------------------------------------------------------------------------------
 
-local abbr = require("config.utils").bufAbbrev
-abbr("--", "//")
-abbr("local", "let")
-abbr("const", "let")
+BufAbbr("--", "//")
+BufAbbr("local", "let")
+BufAbbr("const", "let")

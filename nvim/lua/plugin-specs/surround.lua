@@ -3,12 +3,10 @@
 vim.pack.add { "https://github.com/kylechui/nvim-surround" }
 --------------------------------------------------------------------------------
 
-require("config.utils").pluginKeymaps {
-	{ "ys", "<Plug>(nvim-surround-normal)", desc = "󰅪 Add surround operator" },
-	{ "yS", "ys$", desc = "󰅪 Surround to EoL", remap = true },
-	{ "ds", "<Plug>(nvim-surround-delete)", desc = "󰅪 Delete surround operator" },
-	{ "cs", "<Plug>(nvim-surround-change)", desc = "󰅪 Change surround operator" },
-}
+Keymap { "ys", "<Plug>(nvim-surround-normal)", desc = "󰅪 Add surround operator" }
+Keymap { "yS", "ys$", desc = "󰅪 Surround to EoL", remap = true }
+Keymap { "ds", "<Plug>(nvim-surround-delete)", desc = "󰅪 Delete surround operator" }
+Keymap { "cs", "<Plug>(nvim-surround-change)", desc = "󰅪 Change surround operator" }
 
 --------------------------------------------------------------------------------
 
