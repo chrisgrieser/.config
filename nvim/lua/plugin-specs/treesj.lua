@@ -81,7 +81,4 @@ opts.langs.typescript = opts.langs.javascript
 --------------------------------------------------------------------------------
 
 -- lazy-load, since it eagerly loads all modules
-vim.defer_fn(function()
-	vim.cmd.packadd("treesj")
-	require("treesj").setup(opts)
-end, 500)
+vim.defer_fn(function() require("treesj").setup(opts) end, 500)

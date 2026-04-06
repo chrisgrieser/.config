@@ -2,12 +2,9 @@
 -- Compared to other autopair plugins, has nicer behavior of adjusting spacing
 -- when typing space after a bracket.
 --------------------------------------------------------------------------------
-vim.pack.add({
-	{
-		src = "https://github.com/altermo/ultimate-autopair.nvim",
-		version = "v0.6",
-	},
-}, { load = function() end }) -- lazy-loading via `:packadd` later
+vim.pack.add {
+	{ src = "https://github.com/altermo/ultimate-autopair.nvim", version = "v0.6" },
+}
 --------------------------------------------------------------------------------
 
 Keymap { "<D-o>", "{<CR>", mode = "i", desc = " Open new scope", remap = true }
@@ -67,13 +64,9 @@ local opts = {
 	},
 }
 --------------------------------------------------------------------------------
-
 -- lazy-load, since it eagerly loads all modules
 vim.api.nvim_create_autocmd({ "InsertEnter", "CmdlineEnter" }, {
 	desc = "User: lazy-load ultimate-autopair",
 	once = true,
-	callback = function()
-		vim.cmd.packadd("ultimate-autopair.nvim")
-		require("ultimate-autopair").setup(opts)
-	end,
+	callback = function() require("ultimate-autopair").setup(opts) end,
 })
