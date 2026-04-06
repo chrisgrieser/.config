@@ -13,8 +13,8 @@ sRequire("config.options") -- before plugins, so they are available for them
 sRequire("config.neovide-gui-settings") -- correct gui settings during plugin installation
 
 sRequire("config.nvim-pack")
-sRequire("personal-plugins.messages-to-notify") -- after plugins, since requiring notif. plugin
-sRequire("config.colorscheme")
+sRequire("personal-plugins.messages-to-notify") -- after plugins, since needing notification plugin
+sRequire("config.colorscheme") -- after plugins, since needing colorscheme plugin
 
 sRequire("config.autocmds")
 sRequire("config.keybindings")
