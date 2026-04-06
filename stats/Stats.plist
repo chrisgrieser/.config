@@ -65,11 +65,11 @@
 	<key>CombinedModules</key>
 	<true/>
 	<key>CombinedModules_popup</key>
-	<true/>
+	<false/>
 	<key>CombinedModules_separator</key>
 	<false/>
 	<key>CombinedModules_spacing</key>
-	<string>4</string>
+	<string>8</string>
 	<key>Disk_barChart_position</key>
 	<integer>3</integer>
 	<key>Disk_label_position</key>
@@ -161,7 +161,7 @@
 	<key>NSStatusItem Preferred Position CPU_bar_chart</key>
 	<integer>417</integer>
 	<key>NSStatusItem Preferred Position CombinedModules</key>
-	<real>271</real>
+	<real>441</real>
 	<key>NSStatusItem Preferred Position Network_network_chart</key>
 	<integer>307</integer>
 	<key>NSStatusItem Restore Position CPU_line_chart</key>
@@ -196,7 +196,7 @@
 	<key>Network_network_chart_frame</key>
 	<false/>
 	<key>Network_network_chart_historyCount</key>
-	<integer>90</integer>
+	<integer>60</integer>
 	<key>Network_network_chart_label</key>
 	<true/>
 	<key>Network_network_chart_reverseOrder</key>
@@ -240,7 +240,7 @@
 	<key>Network_widgetActivationThreshold</key>
 	<integer>99</integer>
 	<key>RAM_barChart_position</key>
-	<integer>2</integer>
+	<integer>0</integer>
 	<key>RAM_bar_chart_box</key>
 	<false/>
 	<key>RAM_bar_chart_color</key>
@@ -252,13 +252,15 @@
 	<key>RAM_combinedProcesses</key>
 	<true/>
 	<key>RAM_label_position</key>
-	<integer>3</integer>
+	<integer>4</integer>
 	<key>RAM_lineChart_position</key>
-	<integer>0</integer>
+	<integer>3</integer>
 	<key>RAM_line_chart_box</key>
 	<false/>
 	<key>RAM_line_chart_color</key>
 	<string>monochrome</string>
+	<key>RAM_line_chart_frame</key>
+	<false/>
 	<key>RAM_line_chart_label</key>
 	<true/>
 	<key>RAM_line_chart_value</key>
@@ -274,7 +276,7 @@
 	<key>RAM_oneView</key>
 	<true/>
 	<key>RAM_pieChart_position</key>
-	<integer>4</integer>
+	<integer>1</integer>
 	<key>RAM_pie_chart_label</key>
 	<true/>
 	<key>RAM_pie_chart_monochrome</key>
@@ -290,13 +292,13 @@
 	<key>RAM_tachometer_position</key>
 	<integer>8</integer>
 	<key>RAM_text_position</key>
-	<integer>1</integer>
+	<integer>2</integer>
 	<key>RAM_updateInterval</key>
 	<integer>5</integer>
 	<key>RAM_updateTopInterval</key>
 	<integer>5</integer>
 	<key>RAM_widget</key>
-	<string>line_chart</string>
+	<string>bar_chart</string>
 	<key>SSD_network_chart_downloadColor</key>
 	<string>monochrome</string>
 	<key>SSD_network_chart_uploadColor</key>

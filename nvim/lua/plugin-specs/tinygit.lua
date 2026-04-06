@@ -48,7 +48,7 @@ require("tinygit").setup {
 		blame = {
 			hideAuthorNames = { "Chris Grieser", "chrisgrieser" },
 			showOnlyTimeIfAuthor = { "🤖 automated" },
-			maxMsgLen = 50,
+			maxMsgLen = 72,
 		},
 		fileState = { icon = "" },
 	},

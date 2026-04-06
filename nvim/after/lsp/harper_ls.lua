@@ -37,6 +37,6 @@ return {
 			vim.notify(("Added to %s dict."):format(which))
 		end
 		Keymap { "zg", function() addToDict("WS") end, desc = "󰓆 Workspace dict", buf = bufnr }
-		Keymap { "zG", function() addToDict("User") end, desc = "󰓆 Workspace dict", buf = bufnr }
+		Keymap { "zG", function() addToDict("User") end, desc = "󰓆 User dict", buf = bufnr }
 	end,
 }
