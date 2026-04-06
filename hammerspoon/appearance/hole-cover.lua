@@ -3,9 +3,6 @@
 --------------------------------------------------------------------------------
 local M = {}
 
-local env = require("meta.environment")
-local u = require("meta.utils")
-
 ---CORNERS OF THE SCREEN--------------------------------------------------------
 local roundedCorner = hs.loadSpoon("RoundedCorners") -- https://www.hammerspoon.org/Spoons/RoundedCorners.html
 if roundedCorner then
@@ -23,10 +20,11 @@ function M.update()
 		M.cover_top:delete() ---@diagnostic disable-line: undefined-field
 		M.cover_top = nil
 	end
-	if env.isProjector() then return end
 
 	local screen = hs.screen.mainScreen():fullFrame()
-	local bgColor = u.isDarkMode() and { red = 0.1, green = 0.1, blue = 0.1, alpha = 1 }
+
+	local bgColor = require("meta.utils").isDarkMode()
+			and { red = 0.1, green = 0.1, blue = 0.1, alpha = 1 }
 		or { red = 0.88, green = 0.88, blue = 0.88, alpha = 1 }
 
 	local height = 20
