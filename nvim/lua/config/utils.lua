@@ -45,7 +45,7 @@ end
 ---@param map vim.keymap.set.Opts|{mode: string|string[], ft: string|string[], [1]: string, [2]: string|function}
 ---@param bufnr? number
 _G.Bufmap = function(map, bufnr)
-	map.buf = bufnr or 0
+	map.buffer = bufnr or true
 	map.unique = false -- usually overwriting a global keymap
 	Keymap(map)
 end

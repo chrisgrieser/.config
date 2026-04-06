@@ -5,6 +5,6 @@
 return {
 	init_options = {
 		diagnosticSeverity = "Info",
-		config = vim.fn.stdpath("config") .. "/lsp/typos_lsp_global_config.toml",
+		config = vim.fn.stdpath("config") .. "/after/lsp/typos_lsp_global_config.toml",
 	},
 }

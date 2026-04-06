@@ -41,11 +41,11 @@ cask "obsidian", greedy: true # greedy for installer version
 cask "replacicon"
 cask "signal"
 cask "slack"
+cask "stats"
 cask "wezterm"
 cask "zoom"
 mas "Highlights", id: 1498912833
 mas "Ivory", id: 6444602274
-tap "felixkratz/formulae"; brew "felixkratz/formulae/sketchybar"
 
 #-OTHER-------------------------------------------------------------------------
 cask "font-jetbrains-mono-nerd-font"

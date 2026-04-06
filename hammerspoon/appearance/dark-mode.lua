@@ -47,10 +47,6 @@ function M.setDarkMode(toMode)
 	local shellCmd = ("nvim --server '/tmp/nvim_server.pipe' --remote-send %q"):format(nvimLuaCmd)
 	hs.execute(u.exportPath .. shellCmd)
 
-	-- sketchybar
-	-- delay to pick up system mode change
-	u.defer(1, function() hs.execute(u.exportPath .. "sketchybar --reload") end)
-
 	-- hammerspoon itself
 	require("appearance.console").setConsoleColors(toMode)
 	require("appearance.hole-cover").update()
