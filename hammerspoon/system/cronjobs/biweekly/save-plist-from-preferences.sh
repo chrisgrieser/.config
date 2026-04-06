@@ -20,11 +20,12 @@ plists=(
 	org.cups.PrintingPrefs
 
 	# apps
+	com.runningwithcrayons.Alfred-Preferences
+	com.runningwithcrayons.Alfred
+	mr.pennyworth.AlfredExtraPane
 	com.Replacicon.Replacicon
 	com.helftone.monodraw.plist
 	com.colliderli.iina
-	com.runningwithcrayons.Alfred-Preferences
-	com.runningwithcrayons.Alfred
 	com.tinyspeck.slackmacgap
 	net.freemacsoft.AppCleaner
 	org.giorgiocalderolla.Catch
@@ -32,6 +33,9 @@ plists=(
 	us.zoom.xos
 	com.macitbetter.betterzip.plist
 	com.lwouis.alt-tab-macos.plist
+	eu.exelban.Stats
+	com.electron.gitify
+	app.cotypist.Cotypist
 )
 
 #───────────────────────────────────────────────────────────────────────────────

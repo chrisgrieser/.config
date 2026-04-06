@@ -5,11 +5,12 @@ _G.Keymap = function(map)
 	local lhs, rhs = map[1], map[2]
 	local opts = vim.deepcopy(map)
 	opts.ft, opts.mode, opts[1], opts[2] = nil, nil, nil, nil
-	local globalMap = not map.ft
 
-	if globalMap then
-		-- allow to disable with `unique=false` to overwrite nvim defaults: https://neovim.io/doc/user/vim_diff.html#default-mappings
-		if opts.unique == nil then opts.unique = true end
+	if not map.ft then
+		-- 1. allow to disable with `unique=false` to overwrite nvim defaults
+		-- 2. do not set `unique` for buffer-specific maps, since they are supposed
+		--    to overwrite global ones
+		if opts.unique == nil and opts.buf == nil then opts.unique = true end
 
 		-- violating `unique=true` throws an error; using `pcall` to still load other mappings
 		local success, _ = pcall(vim.keymap.set, mode, lhs, rhs, opts)
@@ -37,10 +38,8 @@ _G.Keymap = function(map)
 end
 
 ---@param map vim.keymap.set.Opts|{mode: string|string[], ft: string|string[], [1]: string, [2]: string|function}
----@param bufnr? number
-_G.Bufmap = function(map, bufnr)
-	map.buf = bufnr or 0
-	map.unique = false -- usually overwriting a global keymap
+_G.Bufmap = function(map)
+	map.buf = 0
 	Keymap(map)
 end
 

@@ -10,7 +10,7 @@ return {
 	on_attach = function(_client, bufnr)
 		-- rename file via `vim.lsp.buf.rename` to also update references
 		-- Caveat: breaks URIs in mdlinks https://github.com/Feel-ix-343/markdown-oxide/issues/331
-		Bufmap {
+		Keymap {
 			"<leader>fr",
 			function()
 				-- PENDING https://github.com/Feel-ix-343/markdown-oxide/issues/288

@@ -46,7 +46,7 @@ local config = {
 		client.server_capabilities.documentRangeFormattingProvider = false
 
 		-- quick access to code action
-		Bufmap {
+		Keymap {
 			"<leader>rt",
 			function()
 				vim.lsp.buf.code_action {
@@ -59,7 +59,7 @@ local config = {
 		}
 
 		-- filter the "Move to file" code action
-		Bufmap {
+		Keymap {
 			"<leader>ca",
 			function()
 				vim.lsp.buf.code_action {

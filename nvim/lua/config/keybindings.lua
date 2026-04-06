@@ -90,7 +90,7 @@ Keymap {
 			vim.api.nvim_create_autocmd("FileType", {
 				desc = "User: undotree settings",
 				pattern = "nvim-undotree",
-				callback = function(ctx) Bufmap { "q", vim.cmd.close, buf = ctx.buf, nowait = true } end,
+				callback = function(ctx) Keymap { "q", vim.cmd.close, buf = ctx.buf, nowait = true } end,
 			})
 		end
 		require("undotree").open()

@@ -140,7 +140,7 @@ func fail(_ msg: String) {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-Task {  // wrapping in `Task` because `await` is not allowed in `main`
+Task {  // wrapping in `Task` because `await` is not allowed in main thread
 	guard !input.isEmpty else {
 		fail("Input is empty.")
 		return
@@ -219,13 +219,13 @@ Task {  // wrapping in `Task` because `await` is not allowed in `main`
 		reminder.startDateComponents = nil  // reminders created regularly have no start date, we mimic that
 
 		// ADD ALARM
-		// * Add an alarm to trigger a notification. Even though the reminder created
-		//   without an alarm looks the same as one with an alarm, an alarm is needed
-		//   to trigger the notification (see #2).
-		// * Whether all-day reminders do get a notification or not is determined by
+		// * Add an alarm to trigger a notification. Even though the reminder
+		//   created without an alarm looks the same as one with an alarm, an alarm
+		//   is needed to trigger the notification (see #2).
+		// * Whether all-day reminders do get a notification or not is determined
 		//   by the user's reminder settings; adding an alarm to all-day reminders
-		//   would enforce a notification, regardless of the setting, so we add the
-		//   alarm only if the reminder is not all-day.
+		//   would enforce a notification, regardless of the setting, so we add
+		//   the alarm only if the reminder is not all-day.
 		if !isAllDayReminder {
 			// Apple Reminders use absolute dates as alarm, not relative offset; we mimic that
 			let dueDate = calendar.date(from: dateComponents)!

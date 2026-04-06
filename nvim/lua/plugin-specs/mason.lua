@@ -141,27 +141,26 @@ end
 
 --------------------------------------------------------------------------------
 
-vim.env.npm_config_cache = vim.env.HOME .. "/.cache/npm" -- don't crowd $HOME with `.npm` folder
-enableLsps()
-
 Keymap { "<leader>pm", vim.cmd.Mason, desc = " Mason home" }
 
-vim.schedule(function()
-	require("mason").setup {
-		registries = {
-			-- personal registry must come first to have priority
-			-- "file:" .. vim.fn.stdpath("config") .. "/mason-registry",
-			"github:mason-org/mason-registry",
-		},
-		ui = {
-			height = 0.85,
-			width = 0.8,
-			backdrop = 60,
-			icons = { package_installed = "✓", package_pending = "󰔟" },
-			keymaps = { uninstall_package = "x", toggle_help = "?", toggle_package_expand = "<Tab>" },
-		},
-	}
+--------------------------------------------------------------------------------
 
-	-- deferred to not install at same time as plugins
-	vim.defer_fn(syncPackages, 1000)
-end)
+vim.env.npm_config_cache = vim.env.HOME .. "/.cache/npm" -- don't crowd $HOME with `.npm` folder
+require("mason").setup {
+	registries = {
+		-- personal registry must come first to have priority
+		-- "file:" .. vim.fn.stdpath("config") .. "/mason-registry",
+		"github:mason-org/mason-registry",
+	},
+	ui = {
+		height = 0.85,
+		width = 0.8,
+		backdrop = 60,
+		icons = { package_installed = "✓", package_pending = "󰔟" },
+		keymaps = { uninstall_package = "x", toggle_help = "?", toggle_package_expand = "<Tab>" },
+	},
+}
+enableLsps()
+
+-- deferred to not install at same time as plugins
+vim.defer_fn(syncPackages, 1000)
