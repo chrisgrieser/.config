@@ -124,7 +124,8 @@ M.timer_sleepAutoVideoOff = timerEverySecs(config.checkIntervalMins * 60, functi
 	hs.sound.getByName("Submarine"):volume(0.3):play() ---@diagnostic disable-line: undefined-field
 
 	-- remove alert earlier if user did something
-	u.defer(math.ceil(config.timeToReactSecs / 2), function()
+	local halfTime = math.ceil(config.timeToReactSecs / 2)
+	u.defer(halfTime, function()
 		local userDidSth = hs.host.idleTime() < (config.timeToReactSecs / 2)
 		if userDidSth then hs.alert.closeSpecific(alertId) end
 	end)

@@ -37,7 +37,7 @@
 	<key>CPU_mini_position</key>
 	<integer>1</integer>
 	<key>CPU_notifications_totalLoad_state</key>
-	<true/>
+	<false/>
 	<key>CPU_notifications_totalLoad_value</key>
 	<integer>90</integer>
 	<key>CPU_pieChart_position</key>
@@ -328,7 +328,7 @@
 	<key>ble_d7-c1-40-35-32-47</key>
 	<false/>
 	<key>ble_d7-c1-40-35-32-47_notification</key>
-	<string>0.05</string>
+	<string>0.1</string>
 	<key>dockIcon</key>
 	<false/>
 	<key>runAtLoginInitialized</key>
