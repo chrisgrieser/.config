@@ -30,7 +30,7 @@ local pluginSpecPath = vim.fn.stdpath("config") .. "/lua/" .. pluginSpecDir
 vim.iter(vim.fs.dir(pluginSpecPath)):each(function(name, type)
 	assert(not name:find("%..*%.lua"), "Filename must not contain dots due `require`: " .. name)
 	if type ~= "file" or not vim.endswith(name, ".lua") then return end
-	local basename = name:gsub("%.lua$", "")
+	local basename = name:gsub("%.lua$", "") -- = the short name
 	local localName = localPlugins[basename]
 
 	if localName then
@@ -67,19 +67,9 @@ vim.api.nvim_create_autocmd("FocusLost", { -- on `FocusLost`, since `vim.pack.ge
 })
 
 ---GLOBAL KEYMAPS---------------------------------------------------------------
-Keymap {
-	"<leader>pl",
-	function()
-		local data = vim.pack.get()
-		local all = vim.iter(data):map(function(p) return "* " .. p.spec.name end):join("\n")
-		local nOpts = { title = #data .. " plugins (nvim-pack)", icon = "󰐱", timeout = false }
-		vim.notify(all, nil, nOpts)
-	end,
-	desc = "󰐱 List plugins",
-}
 
 Keymap {
-	"<leader>pL",
+	"<leader>pl",
 	function()
 		vim.cmd.edit(vim.fn.stdpath("log") .. "/nvim-pack.log")
 		vim.schedule(function()
@@ -133,20 +123,17 @@ vim.api.nvim_create_autocmd("FileType", {
 	desc = "User: Conceal noise in nvim-pack window",
 	pattern = "nvim-pack",
 	callback = function(ctx)
-		vim.opt_local.conceallevel = 2
-		vim.opt_local.concealcursor = "nv"
-		local ns = vim.api.nvim_create_namespace("conceal-nvim-pack-noise")
+		vim.opt_local.foldmethod = "manual"
 
 		local lines = vim.api.nvim_buf_get_lines(ctx.buf, 0, -1, false)
+		local foldlength = 6 -- 6 for `# Updates`, 3 for `# Same`
+
 		for lnum = 1, #lines do
-			if lines[lnum]:find("^Path: ") then
-				vim.api.nvim_buf_set_extmark(ctx.buf, ns, lnum - 1, 0, {
-					conceal_lines = "",
-					end_row = lnum + 2,
-					end_col = 0,
-				})
-				lnum = lnum + 2
+			if vim.startswith(lines[lnum], "## ") then
+				local startLn, endLn = lnum, lnum + foldlength
+				vim.cmd.fold { range = { startLn, endLn } }
 			end
+			if vim.startswith(lines[lnum], "# Same") then foldlength = 3 end
 		end
 	end,
 })
