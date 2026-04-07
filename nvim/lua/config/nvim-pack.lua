@@ -10,7 +10,7 @@ vim.g.whichkeyAddSpec = function() end ---@diagnostic disable-line: duplicate-se
 
 ---HANDLE LOCAL PLUGINS---------------------------------------------------------
 
--- create dummy package for `packpath`
+-- create dummy package-bundle for `packpath`
 local dummy = vim.fn.stdpath("data") .. "/symlink-to-local-plugins/"
 vim.opt.packpath:prepend(dummy) -- prepend to prioritize local plugins
 vim.fn.mkdir(dummy .. "/pack/core/", "p")
@@ -19,19 +19,19 @@ vim.uv.fs_symlink(vim.g.localRepos, dummy .. "/pack/core/opt", { dir = true })
 local localPlugins = {}
 for name, type in vim.fs.dir(vim.g.localRepos) do
 	if type == "directory" then
-		local shortName = name:gsub("%.nvim$", ""):gsub("nvim%-", "")
-		localPlugins[shortName] = name -- my plugin-specs use the short plugin name
+		local pluginName = name:gsub("%.nvim$", ""):gsub("nvim%-", "")
+		localPlugins[pluginName] = name
 	end
 end
 
 ---AUTO-INSTALL AND LOAD--------------------------------------------------------
 local pluginSpecDir = "plugin-specs"
 local pluginSpecPath = vim.fn.stdpath("config") .. "/lua/" .. pluginSpecDir
-vim.iter(vim.fs.dir(pluginSpecPath)):each(function(name, type)
-	assert(not name:find("%..*%.lua"), "Filename must not contain dots due `require`: " .. name)
-	if type ~= "file" or not vim.endswith(name, ".lua") then return end
-	local basename = name:gsub("%.lua$", "") -- = the short name
-	local localName = localPlugins[basename]
+vim.iter(vim.fs.dir(pluginSpecPath)):each(function(fileName, type)
+	assert(not fileName:find("%..*%.lua"), "Filename must not contain dots due `require`: " .. fileName)
+	if type ~= "file" or not vim.endswith(fileName, ".lua") then return end
+	local pluginName = fileName:gsub("%.lua$", "")
+	local localName = localPlugins[pluginName]
 
 	if localName then
 		-- HACK to load plugin config without triggering `vim.pack.add`
@@ -39,7 +39,7 @@ vim.iter(vim.fs.dir(pluginSpecPath)):each(function(name, type)
 		vim.pack.add = noop
 
 		vim.cmd.packadd(localName)
-		u.safeRequire(pluginSpecDir .. "." .. basename)
+		u.safeRequire(pluginSpecDir .. "." .. pluginName)
 
 		vim.pack.add = orig
 		vim.schedule(function()
@@ -47,7 +47,7 @@ vim.iter(vim.fs.dir(pluginSpecPath)):each(function(name, type)
 			vim.notify(msg, nil, { title = "nvim-pack", icon = "󰐱" })
 		end)
 	else
-		u.safeRequire(pluginSpecDir .. "." .. basename)
+		u.safeRequire(pluginSpecDir .. "." .. pluginName)
 	end
 end)
 
@@ -74,7 +74,6 @@ Keymap {
 		vim.cmd.edit(vim.fn.stdpath("log") .. "/nvim-pack.log")
 		vim.schedule(function()
 			vim.bo.filetype = "nvim-pack"
-			vim.cmd.normal { "G", bang = true } -- bottom of file
 			vim.fn.search("========== Update", "b") -- goto last update
 		end)
 	end,
@@ -118,7 +117,7 @@ Keymap { "<C-j>", "]]", remap = true, ft = "nvim-pack", desc = "󰐱 Next plugin
 Keymap { "<C-k>", "[[", remap = true, ft = "nvim-pack", desc = "󰐱 Previous plugin" }
 Keymap { "gi", openCommitOrIssue, ft = "nvim-pack", desc = "󰐱 Open commit or issue" }
 
----CONCEAL NOISE-IN NVIM-PACK-WINDOW--------------------------------------------
+---CONCEAL NOISE IN NVIM-PACK WINDOW--------------------------------------------
 vim.api.nvim_create_autocmd("FileType", {
 	desc = "User: Conceal noise in nvim-pack window",
 	pattern = "nvim-pack",
@@ -130,8 +129,7 @@ vim.api.nvim_create_autocmd("FileType", {
 
 		for lnum = 1, #lines do
 			if vim.startswith(lines[lnum], "## ") then
-				local startLn, endLn = lnum, lnum + foldlength
-				vim.cmd.fold { range = { startLn, endLn } }
+				vim.cmd.fold { range = { lnum, lnum + foldlength } } -- fold repo details
 			end
 			if vim.startswith(lines[lnum], "# Same") then foldlength = 3 end
 		end
