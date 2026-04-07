@@ -142,9 +142,10 @@ vim.api.nvim_create_autocmd("FileType", {
 			if lines[lnum]:find("^Path: ") then
 				vim.api.nvim_buf_set_extmark(ctx.buf, ns, lnum - 1, 0, {
 					conceal_lines = "",
-					end_row = lnum - 1,
+					end_row = lnum + 2,
 					end_col = 0,
 				})
+				lnum = lnum + 2
 			end
 		end
 	end,
