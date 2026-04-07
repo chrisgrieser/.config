@@ -92,42 +92,24 @@ local function autoSetLayout(reason)
 	u.defer(4, function() isLayouting = false end)
 end
 
--- 1. menu bar button
--- set movie layout & move windows to projector screen
-do
-	M.menubarItem = hs
-		.menubar
-		.new(false, "moveAllWinsToProjectorScreen") ---@diagnostic disable-line: need-check-nil
-		:setTitle("Ⱅ ") ---@diagnostic disable-line: undefined-field
-		:setClickCallback(function()
-			movieLayout()
-			local projectorScreen = hs.screen.primaryScreen()
-			for _, win in pairs(hs.window:orderedWindows()) do
-				win:moveToScreen(projectorScreen, true)
-			end
-		end)
-end
-
--- 2. Change of screen numbers
+-- 1. Change of screen numbers
 local prevScreenCount = #hs.screen.allScreens()
 M.displayCountWatcher = hs.screen.watcher
 	.new(function()
 		local currentScreenCount = #hs.screen.allScreens()
-
 		if prevScreenCount == currentScreenCount then return end -- Dock changes also trigger the screenwatcher
+		prevScreenCount = currentScreenCount
 		autoSetLayout("display-count-change")
-		if currentScreenCount == 2 then M.menubarItem:returnToMenuBar() end
-		if currentScreenCount < 2 then M.menubarItem:removeFromMenuBar() end
 	end)
 	:start()
 
--- 3. Hotkey
+-- 2. Hotkey
 hs.hotkey.bind(u.hyper, "home", autoSetLayout)
 
--- 4. Systemstart
+-- 3. Systemstart
 if u.isSystemStart() then autoSetLayout() end
 
--- 5. Waking
+-- 4. Waking
 M.caff_unlock = hs.caffeinate.watcher
 	.new(function(event)
 		local wokeUp = event == hs.caffeinate.watcher.screensDidUnlock

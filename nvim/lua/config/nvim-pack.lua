@@ -127,3 +127,25 @@ Keymap { "<CR>", vim.cmd.write, ft = "nvim-pack", desc = "󰐱 Confirm update" }
 Keymap { "<C-j>", "]]", remap = true, ft = "nvim-pack", desc = "󰐱 Next plugin" }
 Keymap { "<C-k>", "[[", remap = true, ft = "nvim-pack", desc = "󰐱 Previous plugin" }
 Keymap { "gi", openCommitOrIssue, ft = "nvim-pack", desc = "󰐱 Open commit or issue" }
+
+---CONCEAL NOISE-IN NVIM-PACK-WINDOW--------------------------------------------
+vim.api.nvim_create_autocmd("FileType", {
+	desc = "User: Conceal noise in nvim-pack window",
+	pattern = "nvim-pack",
+	callback = function(ctx)
+		vim.opt_local.conceallevel = 2
+		vim.opt_local.concealcursor = "nv"
+		local ns = vim.api.nvim_create_namespace("conceal-nvim-pack-noise")
+
+		local lines = vim.api.nvim_buf_get_lines(ctx.buf, 0, -1, false)
+		for lnum = 1, #lines do
+			if lines[lnum]:find("^Path: ") then
+				vim.api.nvim_buf_set_extmark(ctx.buf, ns, lnum - 1, 0, {
+					conceal_lines = "",
+					end_row = lnum - 1,
+					end_col = 0,
+				})
+			end
+		end
+	end,
+})
