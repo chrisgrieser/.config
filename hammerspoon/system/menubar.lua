@@ -9,12 +9,17 @@ local aw = hs.application.watcher
 local config = {
 	reminderIcon = "✔ ",
 	githubNotifIcon = "⏺ ",
+	winToProjectorIcon = "Ⱅ ",
 }
 
 ---REMINDER COUNT---------------------------------------------------------------
-M.reminderCount = newMenubar(true, "reminderCount"):setTitle(config.reminderIcon) ---@diagnostic disable-line: undefined-field
+M.reminderCount = newMenubar(false, "reminderCount"):setTitle(config.reminderIcon) ---@diagnostic disable-line: undefined-field
 
 local function updateReminderCount()
+	if #hs.screen.allScreens() == 2 then
+		M.reminderCount:removeFromMenuBar()
+		return
+	end
 	if M.updateReminders and M.updateReminders:isRunning() then return end
 	M.updateReminders = hs.task
 		.new("./system/menubar/count-reminders.swift", function(code, stdout, stderr)
@@ -34,9 +39,13 @@ end
 
 --------------------------------------------------------------------------------
 
-M.githubNotifCount = newMenubar(true, "githubNotifCount"):setTitle(config.githubNotifIcon) ---@diagnostic disable-line: undefined-field
+M.githubNotifCount = newMenubar(false, "githubNotifCount"):setTitle(config.githubNotifIcon) ---@diagnostic disable-line: undefined-field
 
 local function updateGithubNotifCount()
+	if #hs.screen.allScreens() == 2 then
+		M.githubNotifCount:removeFromMenuBar()
+		return
+	end
 	if M.updateGithubNotifCount and M.updateGithubNotifCount:isRunning() then return end
 
 	-- running `curl` request in a shell script, since hammerspoons's
@@ -60,20 +69,31 @@ end
 
 --------------------------------------------------------------------------------
 
-M.winsToProjectorButton = newMenubar(false, "moveAllWinsToProjectorScreen")
-	:setTitle("Ⱅ ") ---@diagnostic disable-line: undefined-field
-	:setClickCallback(function()
-		local projectorScreen = hs.screen.primaryScreen()
-		for _, win in pairs(hs.window:orderedWindows()) do
-			win:moveToScreen(projectorScreen, true)
-		end
-	end)
+M.winsToProjectorButton =
+	newMenubar(false, "winsToProjectorButton"):setTitle(config.winToProjectorIcon) ---@diagnostic disable-line: undefined-field
+
+local function updateWinsToProjectorButton()
+	if #hs.screen.allScreens() == 2 then
+		M.winsToProjectorButton
+			:returnToMenuBar()
+			:setTitle(config.winToProjectorIcon)
+			:setClickCallback(function()
+				local projectorScreen = hs.screen.primaryScreen()
+				for _, win in pairs(hs.window:orderedWindows()) do
+					win:moveToScreen(projectorScreen, true)
+				end
+			end)
+	else
+		M.winsToProjectorButton:removeFromMenuBar()
+	end
+end
 
 ---TRIGGERS---------------------------------------------------------------------
 
 -- 0. initialize
 updateReminderCount()
 updateGithubNotifCount()
+updateWinsToProjectorButton()
 
 -- 1. timer
 M.timer = timerEverySecs(360, function()
@@ -93,25 +113,11 @@ hs.urlevent.bind("menubar-reminders-update", updateReminderCount)
 hs.urlevent.bind("menubar-github-notifications-update", updateGithubNotifCount)
 
 -- 4. screen count
-local function showOrHideItems()
-	if #hs.screen.allScreens() == 2 then
-		M.winsToProjectorButton:returnToMenuBar()
-		M.reminderCount:removeFromMenuBar()
-		M.githubNotifCount:removeFromMenuBar()
-	else
-		M.winsToProjectorButton:removeFromMenuBar()
-		updateReminderCount()
-	end
-end
-showOrHideItems() -- initialize
-
-local prevScreenCount = #hs.screen.allScreens()
 M.displayCountWatcher = hs.screen.watcher
 	.new(function()
-		local currentScreenCount = #hs.screen.allScreens()
-		if prevScreenCount == currentScreenCount then return end -- Dock changes also trigger the screenwatcher
-		prevScreenCount = currentScreenCount
-		showOrHideItems()
+		updateReminderCount()
+		updateGithubNotifCount()
+		updateWinsToProjectorButton()
 	end)
 	:start()
 

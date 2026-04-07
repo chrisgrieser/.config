@@ -93,7 +93,7 @@ local function autoSetLayout(reason)
 end
 
 -- 1. Change of screen numbers
-local prevScreenCount = #hs.screen.allScreens()
+local prevScreenCount
 M.displayCountWatcher = hs.screen.watcher
 	.new(function()
 		local currentScreenCount = #hs.screen.allScreens()
