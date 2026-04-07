@@ -119,8 +119,7 @@ do
 		if filename == "COMMIT_EDITMSG" or filename == "git-rebase-todo" then return end
 		if vim.startswith(filepath, "/private/var/") then return end -- `pass` cli buffers
 		if not vim.uv.cwd() then -- cwd is unset if dir was deleted
-			vim.notify("No cwd set, falling back to nvim config dir.", vim.log.levels.WARN)
-			vim.uv.chdir(vim.fn.stdpath("config")) -- fallback to nvim config
+			vim.notify("No cwd set.", vim.log.levels.WARN, { timeout = false })
 			return
 		end
 
