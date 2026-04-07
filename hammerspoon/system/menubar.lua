@@ -12,9 +12,7 @@ local config = {
 }
 
 ---REMINDER COUNT---------------------------------------------------------------
-M.reminderCount = newMenubar(true, "reminderCount")
-	:setTitle(config.reminderIcon) ---@diagnostic disable-line: undefined-field
-	:setClickCallback(function() hs.application.open("Reminders") end)
+M.reminderCount = newMenubar(true, "reminderCount"):setTitle(config.reminderIcon) ---@diagnostic disable-line: undefined-field
 
 local function updateReminderCount()
 	if M.updateReminders and M.updateReminders:isRunning() then return end
@@ -36,9 +34,7 @@ end
 
 --------------------------------------------------------------------------------
 
-M.githubNotifCount = newMenubar(true, "githubNotifCount")
-	:setTitle(config.githubNotifIcon) ---@diagnostic disable-line: undefined-field
-	:setClickCallback(function() hs.urlevent.openURL("https://github.com/notifications") end)
+M.githubNotifCount = newMenubar(true, "githubNotifCount"):setTitle(config.githubNotifIcon) ---@diagnostic disable-line: undefined-field
 
 local function updateGithubNotifCount()
 	if M.updateGithubNotifCount and M.updateGithubNotifCount:isRunning() then return end
@@ -87,13 +83,12 @@ end):start()
 
 -- 2. app watcher
 M.appWatcher = aw.new(function(appName, event, _appObj)
-	if event == aw.deactivated and (appName == "Reminders" or appName == "Calendar") then
-		updateReminderCount()
-	end
-	if event == aw.deactivated and appName == "Brave Browser" then updateGithubNotifCount() end
+	if not (event == aw.terminated or event == aw.deactivated) then return end
+	if appName == "Reminders" or appName == "Calendar" then updateReminderCount() end
+	if appName == "Brave Browser" then updateGithubNotifCount() end
 end):start()
 
--- 3. URI
+-- 3. URI (used by Alfred workflows)
 hs.urlevent.bind("menubar-reminders-update", updateReminderCount)
 hs.urlevent.bind("menubar-github-notifications-update", updateGithubNotifCount)
 
@@ -116,7 +111,6 @@ M.displayCountWatcher = hs.screen.watcher
 		local currentScreenCount = #hs.screen.allScreens()
 		if prevScreenCount == currentScreenCount then return end -- Dock changes also trigger the screenwatcher
 		prevScreenCount = currentScreenCount
-
 		showOrHideItems()
 	end)
 	:start()

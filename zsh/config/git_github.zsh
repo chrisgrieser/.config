@@ -16,9 +16,7 @@ alias cherry='git cherry-pick'
 alias push='git push'
 alias pull='git pull'
 alias reset='git reset'
-
 alias gundo='git reset --mixed HEAD@{1}'
-alias unlock='rm -v "$(git rev-parse --git-dir)/index.lock"'
 
 alias mark_commit="git tag 'mark' && echo $'Added tag \'mark\' to current commit.'"
 alias unmark_commit="git tag --delete 'mark'"

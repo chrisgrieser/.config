@@ -24,5 +24,7 @@
 	<true/>
 	<key>restore_mtime</key>
 	<string>quick-partial</string>
+	<key>uri_trigger</key>
+	<string>hammerspoon://menubar-github-notifications-update</string>
 </dict>
 </plist>
