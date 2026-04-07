@@ -1507,7 +1507,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>./scripts/sketchybar-update.sh</string>
+				<string>./scripts/post-notification-change-hook.sh</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
@@ -1640,7 +1640,7 @@ The workflow will check for the token in the following order:
 			<key>colorindex</key>
 			<integer>9</integer>
 			<key>note</key>
-			<string>update sketchybar component</string>
+			<string>post notification change hook</string>
 			<key>xpos</key>
 			<real>495</real>
 			<key>ypos</key>
@@ -2336,6 +2336,27 @@ to set a hotkey to clone the repo in the frontmost browser tab</string>
 				<key>default</key>
 				<string></string>
 				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>URI to be triggered after changes of notification count. Leave empty to disable.</string>
+			<key>label</key>
+			<string>Post-notification-change hooks</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>uri_trigger</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string></string>
+				<key>placeholder</key>
 				<string>update_notification_counter</string>
 				<key>required</key>
 				<false/>
@@ -2343,9 +2364,9 @@ to set a hotkey to clone the repo in the frontmost browser tab</string>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>sketchybar users: Trigger to be executed after actioning a notification. Leave empty to disable.</string>
+			<string>Sketchybar: Trigger to update a menubar component after notification count changes. Leave empty to disable.</string>
 			<key>label</key>
-			<string>sketchybar trigger</string>
+			<string></string>
 			<key>type</key>
 			<string>textfield</string>
 			<key>variable</key>
@@ -2353,7 +2374,7 @@ to set a hotkey to clone the repo in the frontmost browser tab</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>2.4.0</string>
+	<string>2.5.0</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>

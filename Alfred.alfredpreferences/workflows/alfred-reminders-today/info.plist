@@ -1127,7 +1127,7 @@ xcode-select --print-path &gt;&amp;2
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>./scripts/sketchybar-update.sh</string>
+				<string>./scripts/post-change-hook.sh</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
@@ -1701,7 +1701,7 @@ to set a hotkey to show reminders due today</string>
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>note</key>
-			<string>update sketchybar component</string>
+			<string>post-change-hook</string>
 			<key>xpos</key>
 			<real>1250</real>
 			<key>ypos</key>
@@ -2048,9 +2048,30 @@ to set a hotkey to show reminders due today</string>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>Sketchybar users: Name of the trigger to update a menubar component. Leave empty to disable.</string>
+			<string>URI to be triggered after changes of reminder count. Leave empty to disable.</string>
 			<key>label</key>
-			<string>Sketchybar trigger</string>
+			<string>Post-change hooks</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>uri_trigger</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string></string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>Sketchybar: Trigger to update a menubar component after reminder count changes. Leave empty to disable.</string>
+			<key>label</key>
+			<string></string>
 			<key>type</key>
 			<string>textfield</string>
 			<key>variable</key>
@@ -2058,7 +2079,7 @@ to set a hotkey to show reminders due today</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>3.14.3</string>
+	<string>3.15.0</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
