@@ -15,12 +15,12 @@ Keymap {
 vim.api.nvim_create_autocmd("VimEnter", {
 	callback = vim.schedule_wrap(function()
 		local isRestarting = vim.uv.fs_stat(restartSession) ~= nil
-		local wasNotOpenedWithArgs = vim.fn.argc(-1) == 0
+		local notOpenedWithArgs = vim.fn.argc(-1) == 0
 
 		if isRestarting then
 			vim.cmd.source(restartSession)
 			pcall(os.remove, restartSession)
-		elseif wasNotOpenedWithArgs then
+		elseif notOpenedWithArgs then
 			local lastFile = vim.iter(vim.v.oldfiles):find(function(file)
 				local notGitCommitMsg = vim.fs.basename(file) ~= "COMMIT_EDITMSG"
 				local exists = vim.uv.fs_stat(file) ~= nil
