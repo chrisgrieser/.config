@@ -10,7 +10,7 @@ if roundedCorner then
 	roundedCorner:start()
 end
 
----BOTTOM OF THE SCREEN --------------------------------------------------------
+---BOTTOM/TOP OF THE SCREEN ----------------------------------------------------
 function M.update()
 	if M.cover_bottom then
 		M.cover_bottom:delete() ---@diagnostic disable-line: undefined-field
