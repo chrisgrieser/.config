@@ -11,14 +11,17 @@ if isAtMother then
 	vim.g.neovide_scale_factor = 0.90
 	vim.g.neovide_padding_top = 4
 	vim.g.neovide_padding_left = 6
+	vim.g.neovide_progress_bar_height = 20
 elseif isAtOffice then
 	vim.g.neovide_scale_factor = 1.05
 	vim.g.neovide_padding_top = 0
 	vim.g.neovide_padding_left = 2
+	vim.g.neovide_progress_bar_height = 20
 else
 	vim.g.neovide_scale_factor = 1.00
 	vim.g.neovide_padding_top = 18
 	vim.g.neovide_padding_left = 8
+	vim.g.neovide_progress_bar_height = 30
 end
 vim.opt.linespace = -2 -- less line height
 
@@ -52,9 +55,8 @@ vim.g.neovide_input_macos_option_key_is_meta = "none" -- disable, so `{@~` etc. 
 
 -- appearance
 vim.g.neovide_opacity = 1
--- vim.g.neovide_highlight_matching_pair = true -- PENDING https://github.com/neovide/neovide/issues/3458
 vim.g.neovide_underline_stroke_scale = 2.5 -- fix underline thickness
-vim.g.neovide_progress_bar_height = 30
+-- vim.g.neovide_highlight_matching_pair = true -- PENDING https://github.com/neovide/neovide/issues/3458
 
 -- behavior
 vim.g.neovide_remember_window_size = true
