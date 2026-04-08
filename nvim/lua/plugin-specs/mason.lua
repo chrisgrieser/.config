@@ -33,6 +33,7 @@ local ensureInstalled = {
 	-- "tsgo", -- experimental typescript lsp
 
 	"css-lsp",
+	-- "csskit", -- modern css LSP https://csskit.rs/
 	"css-variables-language-server", -- support css variables across multiple files
 	"emmet-language-server", -- css/html snippets
 

@@ -257,7 +257,7 @@ opts.picker = {
 			-- confirm = copy name
 			confirm = function(picker, item)
 				vim.fn.setreg("+", item.hl_group)
-				Snacks.notify(item.hl_group, { title = "Copied", icon = "󰅍" })
+				vim.notify(item.hl_group, nil, { title = "Copied", icon = "󰅍" })
 				picker:close()
 			end,
 		},
@@ -485,7 +485,7 @@ opts.picker = {
 			if action.notify ~= false then
 				local buf = item.buf or vim.api.nvim_win_get_buf(picker.main)
 				local ft = vim.bo[buf].filetype
-				Snacks.notify(value, { icon = "󰅍", title = "Copied", ft = ft })
+				vim.notify(value, nil, { icon = "󰅍", title = "Copied", ft = ft })
 			end
 		end,
 		reveal_in_macOS_Finder = function(picker, item, _action)
@@ -661,6 +661,7 @@ Keymap { "gw", function() Snacks.picker.lsp_workspace_symbols() end, desc = "
 
 -- `lsp_symbols` tends to too much clutter like anonymous function
 Keymap { "gs", function() Snacks.picker.treesitter() end, desc = "󰐅 Treesitter symbols" }
+-- stylua: ignore
 Keymap { "gs", function() Snacks.picker.lsp_symbols() end, desc = " LSP symbols", ft = "nvim-pack" }
 
 -- git
