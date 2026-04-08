@@ -4,7 +4,6 @@ local darkmode = require("appearance.dark-mode")
 local env = require("meta.environment")
 local holeCover = require("appearance.hole-cover")
 local u = require("meta.utils")
-local wu = require("win-management.window-utils")
 
 ---HELPERS----------------------------------------------------------------------
 
@@ -35,11 +34,8 @@ local function workLayout(shouldDarkenDisplay)
 	u.quitFullscreenAndVideoApps()
 
 	-- open things
-	u.openApps { "Ivory", isWorkWeek() and "Slack" or nil, "Gmail", "AlfredExtraPane" }
-	u.defer({ 1, 2 }, function()
-		hs.application.open("Ivory") -- FIX Ivory sometimes not opening
-		u.app("Gmail"):activate() -- activate Gmail last
-	end)
+	u.openApps { "Ivory", isWorkWeek() and "Slack" or nil, "Gmail", "AlfredExtraPane", "Stats" }
+	u.defer(1, function() u.app("Gmail"):activate() end) -- activate Gmail last
 
 	print("🔲 Layout: work")
 end
@@ -55,10 +51,10 @@ local function movieLayout()
 
 	u.openApps { "YouTube", env.isAtHome and "BetterTouchTool" or nil }
 	u.quitApps {
+		"Stats",
 		"Signal",
 		"Granola",
 		"Slack",
-		"Calendar",
 		"Alfred Preferences",
 		"Highlights",
 		"Obsidian",
@@ -66,6 +62,7 @@ local function movieLayout()
 		"Neovide",
 		"Ivory",
 		"Reminders",
+		"Calendar",
 	}
 	print("🔲 Layout: movie")
 end
@@ -83,7 +80,7 @@ local function autoSetLayout(reason)
 		-- when turning projector off at night, then the display should be dark so
 		-- not to get up to just turn down brightness
 		local shouldDarkenDisplay = u.betweenTime(22, 6) and reason == "display-count-change"
-		if shouldDarkenDisplay then darkenDisplay() end
+		if shouldDarkenDisplay then darkmode.darkenDisplay() end
 
 		workLayout(shouldDarkenDisplay)
 	end

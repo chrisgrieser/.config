@@ -42,10 +42,17 @@
 	<integer>90</integer>
 	<key>CPU_pieChart_position</key>
 	<integer>3</integer>
+	<key>CPU_popup_keyboardShortcut</key>
+	<array>
+		<integer>59</integer>
+		<integer>55</integer>
+		<integer>58</integer>
+		<integer>18</integer>
+	</array>
 	<key>CPU_position</key>
 	<integer>0</integer>
 	<key>CPU_processes</key>
-	<integer>10</integer>
+	<integer>8</integer>
 	<key>CPU_splitValue</key>
 	<false/>
 	<key>CPU_state</key>
@@ -55,7 +62,7 @@
 	<key>CPU_updateInterval</key>
 	<integer>5</integer>
 	<key>CPU_updateTopInterval</key>
-	<integer>5</integer>
+	<integer>3</integer>
 	<key>CPU_usagePerCore</key>
 	<true/>
 	<key>CPU_widget</key>
@@ -145,12 +152,12 @@
 	Ym9va9QCAAAAAAUQQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 	AAAAAAAAAAAAAAAAALQBAAAEAAAAAwMAAAAAACAFAAAAAQEAAFVzZXJzAAAADAAAAAEB
 	AABjaHJpc2dyaWVzZXIHAAAAAQEAAC5jb25maWcABQAAAAEBAABzdGF0cwAAABAAAAAB
-	BgAAEAAAACAAAAA0AAAARAAAAAgAAAAEAwAA0FoAAAAAAAAIAAAABAMAAB2eAwAAAAAA
-	CAAAAAQDAABxop0hAAAAAAgAAAAEAwAAoxNyIgAAAAAQAAAAAQYAAGwAAAB8AAAAjAAA
-	AJwAAAAIAAAAAAQAAEHHwfUQO5nmGAAAAAECAAACAAAAAAAAAA8AAAAAAAAAAAAAAAAA
+	BgAAEAAAACAAAAA0AAAARAAAAAgAAAAEAwAAoVgAAAAAAAAIAAAABAMAAKqVAwAAAAAA
+	CAAAAAQDAACxKSUDAAAAAAgAAAAEAwAA7155AwAAAAAQAAAAAQYAAGwAAAB8AAAAjAAA
+	AJwAAAAIAAAAAAQAAEHHwnhknb5ZGAAAAAECAAACAAAAAAAAAA8AAAAAAAAAAAAAAAAA
 	AAAAAAAAAQUAAAgAAAAEAwAAAgAAAAAAAAAEAAAAAwMAAPUBAAAIAAAAAQkAAGZpbGU6
-	Ly8vDAAAAAEBAABNYWNpbnRvc2ggSEQIAAAABAMAAACQgpbnAAAACAAAAAAEAABBx7aI
-	8oAAACQAAAABAQAARjU0QjcyRUItRDFCQi00NzY3LUFDODgtOTVBMTQ3QkIwRjA2GAAA
+	Ly8vDAAAAAEBAABNYWNpbnRvc2ggSEQIAAAABAMAAABQoRtzAAAACAAAAAAEAABBx7aI
+	8oAAACQAAAABAQAANEZBQjVENkUtQkFCNC00MkY4LUEwOEYtOTlCMDI0NTE0QkRGGAAA
 	AAECAACBAAAAAQAAAO8TAAABAAAAAAAAAAAAAAABAAAAAQEAAC8AAADYAAAA/v///wEA
 	AAAAAAAAEQAAAAQQAABUAAAAAAAAAAUQAACsAAAAAAAAABAQAADUAAAAAAAAAEAQAADE
 	AAAAAAAAAAIgAACoAQAAAAAAAAUgAAAYAQAAAAAAABAgAAAoAQAAAAAAABEgAABcAQAA
@@ -185,6 +192,10 @@
 	<string>560 474 800 448 0 0 1920 1080 </string>
 	<key>NSWindow Frame eu.exelban.Stats.Settings.WindowFrame</key>
 	<string>664 385 728 480 0 0 2048 1121 </string>
+	<key>Network_base</key>
+	<string>byte</string>
+	<key>Network_emojiCC</key>
+	<false/>
 	<key>Network_label_position</key>
 	<integer>3</integer>
 	<key>Network_networkChart_position</key>
@@ -207,10 +218,17 @@
 	<string>monochrome</string>
 	<key>Network_oneView</key>
 	<true/>
+	<key>Network_popup_keyboardShortcut</key>
+	<array>
+		<integer>59</integer>
+		<integer>55</integer>
+		<integer>58</integer>
+		<integer>20</integer>
+	</array>
 	<key>Network_position</key>
 	<integer>5</integer>
 	<key>Network_processes</key>
-	<integer>5</integer>
+	<integer>8</integer>
 	<key>Network_reader</key>
 	<string>process</string>
 	<key>Network_speed_icon</key>
@@ -235,10 +253,22 @@
 	<integer>2</integer>
 	<key>Network_text_position</key>
 	<integer>1</integer>
+	<key>Network_updateICMPInterval</key>
+	<integer>2</integer>
+	<key>Network_uploadColor</key>
+	<string>secondPurple</string>
+	<key>Network_usageReset</key>
+	<string>Never</string>
 	<key>Network_widget</key>
 	<string>network_chart</string>
 	<key>Network_widgetActivationThreshold</key>
 	<integer>99</integer>
+	<key>Network_widgetActivationThresholdSize</key>
+	<string>MB</string>
+	<key>Network_widgetActivationThresholdState</key>
+	<false/>
+	<key>RAM_appColor</key>
+	<string>secondBlue</string>
 	<key>RAM_barChart_position</key>
 	<integer>0</integer>
 	<key>RAM_bar_chart_box</key>
@@ -251,10 +281,12 @@
 	<true/>
 	<key>RAM_combinedProcesses</key>
 	<true/>
+	<key>RAM_compressedColor</key>
+	<string>secondPurple</string>
 	<key>RAM_label_position</key>
-	<integer>4</integer>
+	<integer>5</integer>
 	<key>RAM_lineChart_position</key>
-	<integer>3</integer>
+	<integer>4</integer>
 	<key>RAM_line_chart_box</key>
 	<false/>
 	<key>RAM_line_chart_color</key>
@@ -266,9 +298,9 @@
 	<key>RAM_line_chart_value</key>
 	<false/>
 	<key>RAM_memory_position</key>
-	<integer>7</integer>
+	<integer>8</integer>
 	<key>RAM_mini_position</key>
-	<integer>6</integer>
+	<integer>7</integer>
 	<key>RAM_notifications_total_state</key>
 	<true/>
 	<key>RAM_notifications_total_value</key>
@@ -281,24 +313,39 @@
 	<true/>
 	<key>RAM_pie_chart_monochrome</key>
 	<true/>
+	<key>RAM_popup_keyboardShortcut</key>
+	<array>
+		<integer>59</integer>
+		<integer>55</integer>
+		<integer>58</integer>
+		<integer>19</integer>
+	</array>
 	<key>RAM_position</key>
 	<integer>2</integer>
+	<key>RAM_processes</key>
+	<integer>8</integer>
 	<key>RAM_splitValue</key>
 	<false/>
 	<key>RAM_state</key>
 	<true/>
 	<key>RAM_state_position</key>
-	<integer>5</integer>
+	<integer>6</integer>
+	<key>RAM_tachometer_label</key>
+	<true/>
+	<key>RAM_tachometer_monochrome</key>
+	<true/>
 	<key>RAM_tachometer_position</key>
-	<integer>8</integer>
-	<key>RAM_text_position</key>
 	<integer>2</integer>
+	<key>RAM_text_position</key>
+	<integer>3</integer>
 	<key>RAM_updateInterval</key>
 	<integer>5</integer>
 	<key>RAM_updateTopInterval</key>
 	<integer>5</integer>
 	<key>RAM_widget</key>
 	<string>bar_chart</string>
+	<key>RAM_wiredColor</key>
+	<string>teal</string>
 	<key>SSD_network_chart_downloadColor</key>
 	<string>monochrome</string>
 	<key>SSD_network_chart_uploadColor</key>

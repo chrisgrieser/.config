@@ -35,10 +35,7 @@ function M.darkenDisplay()
 	if iMacDisplay then iMacDisplay:setBrightness(0) end
 end
 
--- INFO done manually to include app-specific toggling for:
--- * System
--- * Neovim
--- * Hammerspoon Console
+-- System, Neovim, Hammerspoon Console
 ---@param toMode "dark"|"light"
 function M.setDarkMode(toMode)
 	-- System
@@ -46,12 +43,12 @@ function M.setDarkMode(toMode)
 		.. (toMode == "light" and "false" or "true")
 	hs.osascript.applescript(applescript)
 
-	-- neovim
+	-- Neovim
 	local nvimLuaCmd = ("<cmd>lua vim.g.setColorscheme(%q)<CR>"):format(toMode)
 	local shellCmd = ("nvim --server '/tmp/nvim_server.pipe' --remote-send %q"):format(nvimLuaCmd)
 	hs.execute(u.exportPath .. shellCmd)
 
-	-- hammerspoon itself
+	-- Hammerspoon itself
 	require("appearance.console").setConsoleColors(toMode)
 	require("appearance.hole-cover").update()
 end
@@ -75,7 +72,7 @@ function M.autoSwitch()
 	local hasBrightnessSensor = ambient > -1
 
 	local targetMode = hasBrightnessSensor and (ambient > lightThreshold and "light" or "dark")
-		or (u.betweenTime(7, 20) and "light" or "dark")
+		or (u.betweenTime(7, 18) and "light" or "dark")
 
 	if targetMode == "light" and u.isDarkMode() then
 		logBrightness("Auto-switch to light", lightThreshold)

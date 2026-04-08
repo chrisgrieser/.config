@@ -661,8 +661,6 @@ Keymap { "gw", function() Snacks.picker.lsp_workspace_symbols() end, desc = "
 
 -- `lsp_symbols` tends to too much clutter like anonymous function
 Keymap { "gs", function() Snacks.picker.treesitter() end, desc = "󰐅 Treesitter symbols" }
--- stylua: ignore
-Keymap { "gs", function() Snacks.picker.lsp_symbols() end, desc = " LSP symbols", ft = "nvim-pack" }
 
 -- git
 Keymap { "<leader>ga", function() Snacks.picker.git_diff() end, desc = "󰐖 Hunks" }
