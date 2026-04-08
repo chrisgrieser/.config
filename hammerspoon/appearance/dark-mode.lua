@@ -30,6 +30,11 @@ function M.autoSetBrightness()
 	if iMacDisplay then iMacDisplay:setBrightness(target) end
 end
 
+function M.darkenDisplay()
+	local iMacDisplay = require("win-management.window-utils").iMacDisplay
+	if iMacDisplay then iMacDisplay:setBrightness(0) end
+end
+
 -- INFO done manually to include app-specific toggling for:
 -- * System
 -- * Neovim

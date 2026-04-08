@@ -13,7 +13,7 @@ local config = {
 }
 
 ---REMINDER COUNT---------------------------------------------------------------
-M.reminderCount = newMenubar(false, "reminderCount"):setTitle(config.reminderIcon) ---@diagnostic disable-line: undefined-field
+M.reminderCount = newMenubar(false, "reminderCount") --[[@as hs.menubar]]
 
 local function updateReminderCount()
 	if #hs.screen.allScreens() == 2 then
@@ -31,7 +31,7 @@ local function updateReminderCount()
 			if count == 0 then
 				M.reminderCount:removeFromMenuBar()
 			else
-				M.reminderCount:returnToMenuBar():setTitle(config.reminderIcon .. count)
+				M.reminderCount:returnToMenuBar():setTitle(config.reminderIcon .. count) ---@diagnostic disable-line: undefined-field
 			end
 		end)
 		:start()
@@ -39,7 +39,7 @@ end
 
 --------------------------------------------------------------------------------
 
-M.githubNotifCount = newMenubar(false, "githubNotifCount"):setTitle(config.githubNotifIcon) ---@diagnostic disable-line: undefined-field
+M.githubNotifCount = newMenubar(false, "githubNotifCount") --[[@as hs.menubar]]
 
 local function updateGithubNotifCount()
 	if #hs.screen.allScreens() == 2 then
@@ -61,7 +61,7 @@ local function updateGithubNotifCount()
 			if count == 0 then
 				M.githubNotifCount:removeFromMenuBar()
 			else
-				M.githubNotifCount:returnToMenuBar():setTitle(config.githubNotifIcon .. count)
+				M.githubNotifCount:returnToMenuBar():setTitle(config.githubNotifIcon .. count) ---@diagnostic disable-line: undefined-field
 			end
 		end)
 		:start()
@@ -70,18 +70,21 @@ end
 --------------------------------------------------------------------------------
 
 M.winsToProjectorButton =
-	newMenubar(false, "winsToProjectorButton"):setTitle(config.winToProjectorIcon) ---@diagnostic disable-line: undefined-field
+	newMenubar(false, "winsToProjectorButton") --[[@as hs.menubar]]
 
 local function updateWinsToProjectorButton()
 	if #hs.screen.allScreens() == 2 then
 		M.winsToProjectorButton
 			:returnToMenuBar()
-			:setTitle(config.winToProjectorIcon)
+			:setTitle(config.winToProjectorIcon) ---@diagnostic disable-line: undefined-field
 			:setClickCallback(function()
+				-- move all windows to projector
 				local projectorScreen = hs.screen.primaryScreen()
 				for _, win in pairs(hs.window:orderedWindows()) do
 					win:moveToScreen(projectorScreen, true)
 				end
+				-- darken display
+				require("appearance.dark-mode").darkenDisplay()
 			end)
 	else
 		M.winsToProjectorButton:removeFromMenuBar()

@@ -1,12 +1,30 @@
+---@class MyConfig.Keymap : vim.keymap.set.Opts
+---@field [1] string -- lhs
+---@field [2] string|function -- rhs
+---@field mode? string|string[] -- defaults to "n"
+---@field ft? string|string[] keymap only for these filetypes
+
 ---Warn when there are conflicting keymaps & use API similar to lazy.nvim keymaps
----@param map vim.keymap.set.Opts|{mode: string|string[], ft: string|string[], [1]: string, [2]: string|function}
+---@param map MyConfig.Keymap
 _G.Keymap = function(map)
 	local mode = map.mode or "n"
 	local lhs, rhs = map[1], map[2]
 	local opts = vim.deepcopy(map)
 	opts.ft, opts.mode, opts[1], opts[2] = nil, nil, nil, nil
 
+	local caller = debug.getinfo(2, "Sl") -- S: source, l: currentline
+	local source = vim.fs.basename(caller.source) .. ":" .. caller.currentline
+
+	if map[3] then
+		vim.defer_fn(function()
+			local msg = ("%s  **%s**"):format(lhs, source)
+			vim.notify(msg, vim.log.levels.WARN, { title = "Keymap with 3 args", timeout = false })
+		end, 1000)
+		return
+	end
+
 	if not map.ft then
+		-- GLOBAL keymap
 		-- 1. allow to disable with `unique=false` to overwrite nvim defaults
 		-- 2. do not set `unique` for buffer-specific maps, since they are supposed
 		--    to overwrite global ones
@@ -17,14 +35,13 @@ _G.Keymap = function(map)
 		if success then return end
 
 		local modes = type(mode) == "table" and table.concat(mode, ", ") or mode
-		local caller = debug.getinfo(2, "Sl") -- S: source, l: currentline
-		local source = vim.fs.basename(caller.source)
-		local msg = ("`(%s)`  %s  **%s:%d**"):format(modes, lhs, source, caller.currentline)
+		local msg = ("`(%s)`  %s  **%s**"):format(modes, lhs, source)
 
 		vim.defer_fn(function() -- defer for notification plugin
 			vim.notify(msg, vim.log.levels.WARN, { title = "Duplicate keymap", timeout = false })
 		end, 1000)
 	else
+		-- FILETYPE keymap
 		vim.api.nvim_create_autocmd("FileType", {
 			desc = "User: plugin filetype-keymap",
 			pattern = map.ft,
@@ -33,11 +50,10 @@ _G.Keymap = function(map)
 				vim.keymap.set(mode, lhs, rhs, opts)
 			end,
 		})
-		return
 	end
 end
 
----@param map vim.keymap.set.Opts|{mode: string|string[], ft: string|string[], [1]: string, [2]: string|function}
+---@param map MyConfig.Keymap
 _G.Bufmap = function(map)
 	map.buf = 0
 	Keymap(map)
@@ -45,7 +61,7 @@ end
 
 ---@param text string
 ---@param replace string
-_G.BufAbbr = function(text, replace) vim.keymap.set("ia", text, replace, { buffer = true }) end
+_G.BufAbbr = function(text, replace) vim.keymap.set("ia", text, replace, { buf = 0 }) end
 
 --------------------------------------------------------------------------------
 local M = {}

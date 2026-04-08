@@ -163,4 +163,7 @@ require("mason").setup {
 enableLsps()
 
 -- deferred to not install at same time as plugins
-vim.defer_fn(syncPackages, 1000)
+vim.api.nvim_create_autocmd("VimEnter", {
+	desc = "User: Sync mason packages",
+	callback = function(_ctx) vim.defer_fn(syncPackages, 1000) end,
+})

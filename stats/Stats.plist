@@ -161,7 +161,7 @@
 	<key>NSStatusItem Preferred Position CPU_bar_chart</key>
 	<integer>417</integer>
 	<key>NSStatusItem Preferred Position CombinedModules</key>
-	<real>441</real>
+	<real>346</real>
 	<key>NSStatusItem Preferred Position Network_network_chart</key>
 	<integer>307</integer>
 	<key>NSStatusItem Restore Position CPU_line_chart</key>
@@ -184,7 +184,7 @@
 	<key>NSWindow Frame NSNavPanelAutosaveName</key>
 	<string>560 474 800 448 0 0 1920 1080 </string>
 	<key>NSWindow Frame eu.exelban.Stats.Settings.WindowFrame</key>
-	<string>600 342 728 480 0 0 1920 1049 </string>
+	<string>664 385 728 480 0 0 2048 1121 </string>
 	<key>Network_label_position</key>
 	<integer>3</integer>
 	<key>Network_networkChart_position</key>

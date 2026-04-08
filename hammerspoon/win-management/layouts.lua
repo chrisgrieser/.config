@@ -21,8 +21,6 @@ local function isWorkWeek()
 	return weekday ~= "Sat" and weekday ~= "Sun"
 end
 
-local function darkenDisplay() wu.iMacDisplay:setBrightness(0) end
-
 ---LAYOUTS---------------------------------------------------------------------
 
 ---@param shouldDarkenDisplay boolean
@@ -48,7 +46,7 @@ end
 
 local function movieLayout()
 	darkmode.setDarkMode("dark")
-	darkenDisplay()
+	darkmode.darkenDisplay()
 	holeCover.update()
 	dockSwitcher("movie")
 
