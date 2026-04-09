@@ -201,16 +201,16 @@ function delete_git_tag {
 
 function git_explore {
 	echo "Most changed files last year"
-	git log --format=format: --name-only --since="1 year ago" | sort | uniq -c | sort -nr | head -20
+	git log --format=format: --name-only --since="1 year ago" | sort | uniq -c | sort -nr | head -10
 	echo
 	echo "Authors"
-	git shortlog --summary --numbered --no-merges
+	git shortlog --summary --numbered --no-merges | head -10
 	echo
 	echo "Files with frequent bug fixes"
-	git log --extended-regexp --regexp-ignore-case --grep="fix|bug|broken" --name-only --format='' | sort | uniq -c | sort -nr | head -20
+	git log --extended-regexp --regexp-ignore-case --grep="fix|bug|broken" --name-only --format='' | sort | uniq -c | sort -nr | head -10
 	echo
 	echo "Commits per month"
-	git log --format='%ad' --date=format:'%Y-%m' | sort | uniq -c
+	git log --format='%ad' --date=format:'%Y-%m' | sort | uniq -c | column
 }
 
 # git status all
