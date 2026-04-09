@@ -205,6 +205,12 @@ function git_explore {
 	echo
 	echo "Authors"
 	git shortlog --summary --numbered --no-merges
+	echo
+	echo "Files with frequent bug fixes"
+	git log --extended-regexp --regexp-ignore-case --grep="fix|bug|broken" --name-only --format='' | sort | uniq -c | sort -nr | head -20
+	echo
+	echo "Commits per month"
+	git log --format='%ad' --date=format:'%Y-%m' | sort | uniq -c
 }
 
 # git status all
