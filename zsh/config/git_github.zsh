@@ -199,6 +199,14 @@ function delete_git_tag {
 	git tag --delete "$1" && git push origin --delete "$1"
 }
 
+function git_explore {
+	echo "Most changed files last year"
+	git log --format=format: --name-only --since="1 year ago" | sort | uniq -c | sort -nr | head -20
+	echo
+	echo "Authors"
+	git shortlog --summary --numbered --no-merges
+}
+
 # git status all
 function gsa {
 	local first git_status repo icon
