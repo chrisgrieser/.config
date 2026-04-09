@@ -388,20 +388,9 @@ Keymap { "<Down>", "<cmd>. move +1<CR>==", desc = "󰜮 Move line down" }
 Keymap { "<Up>", "<cmd>. move -2<CR>==", desc = "󰜷 Move line up" }
 Keymap { "<Right>", [["zx"zp]], desc = "➡️ Move char right" }
 Keymap { "<Left>", [["zdh"zph]], desc = "⬅ Move char left" }
-Keymap {
-	"<Down>",
-	[[:move '>+1<CR>gv=gv]],
-	mode = "x",
-	desc = "󰜮 Move selection down",
-	silent = true,
-}
-Keymap {
-	"<Up>",
-	[[:move '<-2<CR>gv=gv]],
-	mode = "x",
-	desc = "󰜷 Move selection up",
-	silent = true,
-}
+-- stylua: ignore
+Keymap { "<Down>", [[:move '>+1<CR>gv=gv]], mode = "x", desc = "󰜮 Move selection down", silent = true }
+Keymap { "<Up>", [[:move '<-2<CR>gv=gv]], mode = "x", desc = "󰜷 Move selection up", silent = true }
 Keymap { "<Right>", [["zx"zpgvlolo]], mode = "x", desc = "➡️ Move selection right" }
 Keymap { "<left>", [["zxhh"zpgvhoho]], mode = "x", desc = "⬅ Move selection left" }
 
@@ -490,11 +479,6 @@ Keymap { "<D-Right>", "<C-e>", mode = "c", desc = "Goto end of cmdline" }
 Keymap { "<leader>ii", vim.cmd.Inspect, desc = "󱈄 Inspect at cursor" }
 Keymap { "<leader>it", vim.cmd.InspectTree, desc = " TS syntax tree" }
 
-Keymap {
-	"<leader>ia",
-	function() require("personal-plugins.misc").inspectNodeAncestors() end,
-	desc = " Node ancestors",
-}
 Keymap {
 	"<leader>iL",
 	function() vim.cmd.edit(vim.lsp.log.get_filename()) end,
