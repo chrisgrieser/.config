@@ -32,15 +32,6 @@ function httpRequest(url) {
 
 //──────────────────────────────────────────────────────────────────────────────
 
-// biome-ignore-start lint/style/useNamingConvention: not useful here
-const manaNameMap = {
-	U: "blue",
-	W: "white",
-	B: "black",
-	R: "red",
-	G: "green",
-};
-
 /** @type {Record<string, string>} */
 const manaEmojiMap = {
 	"{U}": "🔵",
@@ -61,7 +52,6 @@ const manaEmojiMap = {
 	"{9}": "9️⃣",
 	"{10}": "🔟",
 };
-// biome-ignore-end lint/style/useNamingConvention: not useful here
 
 const rarityEmojiMap = {
 	common: "🥉",
@@ -100,16 +90,17 @@ function run(argv) {
 	const items = cardData.flatMap((/** @type {ScryfallCard} */ card) => {
 		if (onlyPaper && !card.games.includes("paper")) return [];
 
-		let color = card.colors?.[0] ? manaNameMap[card.colors[0]] : "colorless";
-		if (card.colors && card.colors.length > 1) color = "multi";
+		let icon = card.colors?.[0] || "colorless";
+		if (card.colors && card.colors.length > 1) icon = "multi";
+		if (card.type_line.includes("Land")) icon = "land";
 
 		const purchaseUrl = card.purchase_uris?.[market];
-		const eurPrice = card.prices?.eur ? card.prices.eur + "€" : "";
-		const usdPrice = card.prices?.usd ? card.prices.usd + "$" : "";
+		const eurPrice = card.prices?.eur ? card.prices.eur + " €" : "";
+		const usdPrice = card.prices?.usd ? "$" + card.prices.usd : "";
 		const displayPrice = market === "cardmarket" ? eurPrice : usdPrice;
-		const image = card.image_uris?.png;
-		const manaCost = card.mana_cost?.replace(/\{.+\}/g, (match) => manaEmojiMap[match]);
-		const yearOfRelease = `${card.released_at.slice(0, 4)}`;
+		const imageUrl = card.image_uris?.png;
+		const manaCost = card.mana_cost?.replace(/\{\w+\}/g, (cost) => manaEmojiMap[cost] || cost);
+		const yearOfRelease = card.released_at.slice(0, 4);
 		const rarity = rarityEmojiMap[card.rarity] || card.rarity;
 		const combatStats = card.power && card.toughness ? `${card.power}/${card.toughness}` : "";
 		const type = [combatStats, card.type_line].filter(Boolean).join(" ");
@@ -122,17 +113,17 @@ function run(argv) {
 		return {
 			title: card.name,
 			subtitle: subtitle,
-			icon: { path: `./mana-symbols/${color}.png` },
+			icon: { path: `./mana-symbols/${icon}.png` },
 			arg: card.scryfall_uri,
-			quicklookurl: image,
+			quicklookurl: imageUrl,
 			mods: {
 				cmd: { arg: purchaseUrl },
 				opt: { arg: card.scryfall_uri }, // copy scryfall url
 				ctrl: {
 					// copy card image
-					arg: image,
-					valid: Boolean(image),
-					subtitle: image ? "⌃: Copy card image" : "⛔ Card image not available",
+					arg: imageUrl,
+					valid: Boolean(imageUrl),
+					subtitle: imageUrl ? "⌃: Copy card image" : "⛔ Card image not available",
 				},
 			},
 		};

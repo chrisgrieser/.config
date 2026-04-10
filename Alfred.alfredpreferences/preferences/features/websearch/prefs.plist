@@ -191,17 +191,6 @@
 			<key>url</key>
 			<string>https://chromewebstore.google.com/search/{query}</string>
 		</dict>
-		<key>C1FCC87C-DC05-4C13-8954-BCFBCACCEE49</key>
-		<dict>
-			<key>enabled</key>
-			<true/>
-			<key>keyword</key>
-			<string>cm</string>
-			<key>text</key>
-			<string>cardmarket: {query}</string>
-			<key>url</key>
-			<string>https://www.cardmarket.com/en/Magic/Products/Search?category=1&amp;searchString={query}&amp;searchMode=v2</string>
-		</dict>
 		<key>CB53E08B-32B8-4062-98CC-5A36E97438A4</key>
 		<dict>
 			<key>enabled</key>
@@ -324,5 +313,7 @@
 			<string>https://duckduckgo.com/?q={query}&amp;iar=images</string>
 		</dict>
 	</dict>
+	<key>onlyShowEnabledInPrefs</key>
+	<true/>
 </dict>
 </plist>
