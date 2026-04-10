@@ -21,7 +21,7 @@
     "prefix": "argv (node)"
   },
   "cast (JSDoc)": {
-    "body": "/** @type {${1:string}} */ (${2:bracketedVar})",
+    "body": "const ${1:varname} = /** @type {${2:string}} */ (${3:bracketedValue})",
     "prefix": "cast (JSDoc)"
   },
   "class (JSDoc) + typedef (JSDoc)": {

@@ -222,27 +222,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>📋 Copied</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>8F6464BE-8E3C-4BC7-BBF0-9C914AAED379</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -252,7 +231,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>./scripts/copy-file.js</string>
+				<string>./scripts/copy-image.sh</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
@@ -263,6 +242,27 @@
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>📋 Copied</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>8F6464BE-8E3C-4BC7-BBF0-9C914AAED379</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>## Usage
@@ -272,9 +272,10 @@ Search MtG cards via the `mtg` keyword.
 - &lt;kbd&gt;⌘⏎&lt;/kbd&gt; open the card on cardmarket or tcgplayer.
 - &lt;kbd&gt;⌃⏎&lt;/kbd&gt; copy the card image to the clipboard.
 
----
-
-#### Workflow created by [Chris Grieser](https://chris-grieser.de/)</string>
+## Credits
+- Card data from [Scryfall](https://scryfall.com)
+- Icons by from [Vítor Galvão's MtG Workflow](https://alfred.app/workflows/vitor/mtg-card-search/).
+- Workflow created by [Chris Grieser](https://chris-grieser.de/)</string>
 	<key>uidata</key>
 	<dict>
 		<key>28EE6501-5F14-4E44-AD05-B2B2720A4DA0</key>
@@ -282,7 +283,7 @@ Search MtG cards via the `mtg` keyword.
 			<key>colorindex</key>
 			<integer>10</integer>
 			<key>xpos</key>
-			<real>615</real>
+			<real>545</real>
 			<key>ypos</key>
 			<real>30</real>
 		</dict>
@@ -293,7 +294,7 @@ Search MtG cards via the `mtg` keyword.
 			<key>note</key>
 			<string>copy image to clipboard</string>
 			<key>xpos</key>
-			<real>470</real>
+			<real>400</real>
 			<key>ypos</key>
 			<real>340</real>
 		</dict>
@@ -302,7 +303,7 @@ Search MtG cards via the `mtg` keyword.
 			<key>colorindex</key>
 			<integer>10</integer>
 			<key>xpos</key>
-			<real>400</real>
+			<real>330</real>
 			<key>ypos</key>
 			<real>175</real>
 		</dict>
@@ -311,7 +312,7 @@ Search MtG cards via the `mtg` keyword.
 			<key>colorindex</key>
 			<integer>10</integer>
 			<key>xpos</key>
-			<real>470</real>
+			<real>400</real>
 			<key>ypos</key>
 			<real>30</real>
 		</dict>
@@ -320,7 +321,7 @@ Search MtG cards via the `mtg` keyword.
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>630</real>
+			<real>560</real>
 			<key>ypos</key>
 			<real>340</real>
 		</dict>
@@ -329,7 +330,7 @@ Search MtG cards via the `mtg` keyword.
 			<key>colorindex</key>
 			<integer>10</integer>
 			<key>xpos</key>
-			<real>535</real>
+			<real>465</real>
 			<key>ypos</key>
 			<real>185</real>
 		</dict>
@@ -338,7 +339,7 @@ Search MtG cards via the `mtg` keyword.
 			<key>colorindex</key>
 			<integer>10</integer>
 			<key>xpos</key>
-			<real>120</real>
+			<real>50</real>
 			<key>ypos</key>
 			<real>185</real>
 		</dict>

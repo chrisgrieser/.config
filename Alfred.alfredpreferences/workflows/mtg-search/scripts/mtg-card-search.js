@@ -23,12 +23,14 @@ function httpRequest(url) {
  * @property {{cardmarket: string, tcgplayer: string}} purchase_uris
  * @property {{usd: string, eur: string}?} prices
  * @property {{small: string, normal: string, large: string, png: string}?} image_uris
+ * @property {number?} power
+ * @property {number?} toughness
  */
 
 //──────────────────────────────────────────────────────────────────────────────
 
 // biome-ignore-start lint/style/useNamingConvention: not useful here
-const colorNameMap = {
+const manaNameMap = {
 	U: "blue",
 	W: "white",
 	B: "black",
@@ -37,13 +39,13 @@ const colorNameMap = {
 };
 
 /** @type {Record<string, string>} */
-const colorIconMap = {
+const manaEmojiMap = {
 	"{U}": "🔵",
 	"{W}": "🟡",
 	"{B}": "⚫",
 	"{R}": "🔴",
 	"{G}": "🟢",
-	"{C}": "♢",
+	"{C}": "💠",
 	"{X}": "✖",
 	"{1}": "1️⃣",
 	"{2}": "2️⃣",
@@ -56,8 +58,14 @@ const colorIconMap = {
 	"{9}": "9️⃣",
 	"{10}": "🔟",
 };
-
 // biome-ignore-end lint/style/useNamingConvention: not useful here
+
+const rarityEmojiMap = {
+	common: "🥉",
+	uncommon: "🥈",
+	rare: "🥇",
+	mythic: "⭐",
+};
 
 /**
  * @param {string} title
@@ -74,42 +82,49 @@ function errorItem(title, subtitle) {
 function run(argv) {
 	const query = argv[0];
 	if (!query) return errorItem("Search for card…", "Supports Scryfall search syntax.");
+	const market = /** @type {"cardmarket"|"tcgplayer"} */ ($.getenv("market"));
 
 	// DOCS https://scryfall.com/docs/api/cards/search
 	const apiUrl = "https://api.scryfall.com/cards/search?q=" + encodeURIComponent(query);
 	const response = httpRequest(apiUrl);
 	if (!response) return errorItem("No response from Scryfall", "Try again later");
-
 	const cardData = JSON.parse(response).data;
 	if (cardData.length === 0) return errorItem("No cards found.");
 
 	/** @type {AlfredItem[]} */
 	const items = cardData.map((/** @type {ScryfallCard} */ card) => {
-		let color = card.colors?.[0] ? colorNameMap[card.colors[0]] : "colorless";
+		let color = card.colors?.[0] ? manaNameMap[card.colors[0]] : "colorless";
 		if (card.colors && card.colors.length > 1) color = "multi";
 
-		const purchaseUrl = card.purchase_uris?.cardmarket;
-		const price = card.prices?.eur ? card.prices.eur + "€" : "";
+		const purchaseUrl = card.purchase_uris?.[market];
+		const eurPrice = card.prices?.eur ? card.prices.eur + "€" : "";
+		const usdPrice = card.prices?.usd ? card.prices.usd + "$" : "";
+		const displayPrice = market === "cardmarket" ? eurPrice : usdPrice;
 		const image = card.image_uris?.png;
-		const manaCost = card.mana_cost?.replace(/\{.\}/g, (match) => colorIconMap[match]);
-		const yearOfRelease = `(${card.released_at.slice(0, 4)})`
-		const subtitle = [
-			manaCost,
-			`${card.type_line}`,
-			price,
-			yearOfRelease
-		].filter(Boolean).join("    ");
+		const manaCost = card.mana_cost?.replace(/\{.\}/g, (match) => manaEmojiMap[match]);
+		const yearOfRelease = `${card.released_at.slice(0, 4)}`;
+		const rarity = rarityEmojiMap[card.rarity] || card.rarity;
+		const combatStats = card.power && card.toughness ? `${card.power}/${card.toughness}` : "";
+		const extra = `(${rarity} ${yearOfRelease})`;
+		const subtitle = [manaCost, `${card.type_line}`, combatStats, displayPrice, extra]
+			.filter(Boolean)
+			.join("    ");
 
 		return {
 			title: card.name,
 			subtitle: subtitle,
-			icon: { path: `./mtg-icons/${color}.png` },
+			icon: { path: `./mana-symbols/${color}.png` },
 			arg: card.scryfall_uri,
 			quicklookurl: image,
 			mods: {
 				cmd: { arg: purchaseUrl },
 				opt: { arg: card.scryfall_uri }, // copy scryfall url
-				ctrl: { arg: image }, // copy card image
+				ctrl: {
+					// copy card image
+					arg: image,
+					valid: Boolean(image),
+					subtitle: image ? "⌃: Copy card image" : "⛔ Card image not available",
+				},
 			},
 		};
 	});
