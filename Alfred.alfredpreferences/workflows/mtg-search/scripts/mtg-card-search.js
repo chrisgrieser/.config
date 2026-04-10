@@ -18,6 +18,8 @@ function httpRequest(url) {
  * @property {string} mana_cost
  * @property {string} type_line instant, sorcery, etc
  * @property {string} oracle_text the card body
+ * @property {string} set abbreviation
+ * @property {string} set_name full name
  * @property {"common"|"uncommon"|"rare"|"mythic"} rarity
  * @property {("U"|"W"|"B"|"R"|"G")[]?} colors
  * @property {{cardmarket: string, tcgplayer: string}} purchase_uris
@@ -25,6 +27,7 @@ function httpRequest(url) {
  * @property {{small: string, normal: string, large: string, png: string}?} image_uris
  * @property {number?} power
  * @property {number?} toughness
+ * @property {("paper"|"mtgo"|"arena")[]} games
  */
 
 //──────────────────────────────────────────────────────────────────────────────
@@ -45,7 +48,7 @@ const manaEmojiMap = {
 	"{B}": "⚫",
 	"{R}": "🔴",
 	"{G}": "🟢",
-	"{C}": "💠",
+	"{C}": "💠", // colorless -> diamond mana
 	"{X}": "✖",
 	"{1}": "1️⃣",
 	"{2}": "2️⃣",
@@ -64,7 +67,7 @@ const rarityEmojiMap = {
 	common: "🥉",
 	uncommon: "🥈",
 	rare: "🥇",
-	mythic: "⭐",
+	mythic: "🔸",
 };
 
 /**
@@ -83,16 +86,20 @@ function run(argv) {
 	const query = argv[0];
 	if (!query) return errorItem("Search for card…", "Supports Scryfall search syntax.");
 	const market = /** @type {"cardmarket"|"tcgplayer"} */ ($.getenv("market"));
+	const onlyPaper = $.getenv("only_paper") === "1";
 
 	// DOCS https://scryfall.com/docs/api/cards/search
-	const apiUrl = "https://api.scryfall.com/cards/search?q=" + encodeURIComponent(query);
+	const apiUrl =
+		"https://api.scryfall.com/cards/search?order=released&q=" + encodeURIComponent(query);
 	const response = httpRequest(apiUrl);
 	if (!response) return errorItem("No response from Scryfall", "Try again later");
 	const cardData = JSON.parse(response).data;
 	if (cardData.length === 0) return errorItem("No cards found.");
 
 	/** @type {AlfredItem[]} */
-	const items = cardData.map((/** @type {ScryfallCard} */ card) => {
+	const items = cardData.flatMap((/** @type {ScryfallCard} */ card) => {
+		if (onlyPaper && !card.games.includes("paper")) return [];
+
 		let color = card.colors?.[0] ? manaNameMap[card.colors[0]] : "colorless";
 		if (card.colors && card.colors.length > 1) color = "multi";
 
@@ -101,14 +108,16 @@ function run(argv) {
 		const usdPrice = card.prices?.usd ? card.prices.usd + "$" : "";
 		const displayPrice = market === "cardmarket" ? eurPrice : usdPrice;
 		const image = card.image_uris?.png;
-		const manaCost = card.mana_cost?.replace(/\{.\}/g, (match) => manaEmojiMap[match]);
+		const manaCost = card.mana_cost?.replace(/\{.+\}/g, (match) => manaEmojiMap[match]);
 		const yearOfRelease = `${card.released_at.slice(0, 4)}`;
 		const rarity = rarityEmojiMap[card.rarity] || card.rarity;
 		const combatStats = card.power && card.toughness ? `${card.power}/${card.toughness}` : "";
-		const extra = `(${rarity} ${yearOfRelease})`;
-		const subtitle = [manaCost, `${card.type_line}`, combatStats, displayPrice, extra]
+		const type = [combatStats, card.type_line].filter(Boolean).join(" ");
+		const set = card.set.toUpperCase();
+
+		const subtitle = [manaCost, type, displayPrice, `${rarity} ${set} ${yearOfRelease}`]
 			.filter(Boolean)
-			.join("    ");
+			.join("      ");
 
 		return {
 			title: card.name,
