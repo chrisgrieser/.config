@@ -16,7 +16,7 @@ function getApiBaseUrl(token) {
 function alfredMatcher(str) {
 	const clean = str.replace(/[-()_.:#/\\;,[\]]/g, " ");
 	const camelCaseSeparated = str.replace(/([A-Z])/g, " $1");
-	return [clean, camelCaseSeparated, str].join(" ");
+	return [clean, camelCaseSeparated, str].join(" ") + " ";
 }
 
 /**
@@ -98,7 +98,8 @@ function run() {
 			else if (item.state_reason === "completed") icon += "🟣 ";
 		}
 
-		let matcher = alfredMatcher(item.title) + " " + alfredMatcher(repo) + " " + item.state;
+		let matcher =
+			alfredMatcher(item.title) + alfredMatcher(repo) + item.state + " " + item.number;
 		if (item.pull_request) matcher += " pr";
 		else matcher += " issue";
 		if (item.draft) matcher += " draft";
