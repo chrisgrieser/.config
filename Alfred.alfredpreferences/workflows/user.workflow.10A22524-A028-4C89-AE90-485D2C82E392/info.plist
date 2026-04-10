@@ -21,8 +21,54 @@
 				<false/>
 			</dict>
 		</array>
+		<key>4BD99ED3-7319-434E-BAE0-BFD07191622C</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>AB8A889D-A1A3-4100-8CE8-BDFFF0AD9206</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>7E4A42EE-5667-4DDF-AB03-35310ED40D63</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>28EE6501-5F14-4E44-AD05-B2B2720A4DA0</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>ACBECE87-2E63-42E7-980A-06E987B77635</key>
 		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>7E4A42EE-5667-4DDF-AB03-35310ED40D63</string>
+				<key>modifiers</key>
+				<integer>524288</integer>
+				<key>modifiersubtext</key>
+				<string>⌥: Copy Scryfall URL</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>4BD99ED3-7319-434E-BAE0-BFD07191622C</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>⌘: Open on cardmarket</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
 			<dict>
 				<key>destinationuid</key>
 				<string>AB8A889D-A1A3-4100-8CE8-BDFFF0AD9206</string>
@@ -37,9 +83,9 @@
 				<key>destinationuid</key>
 				<string>2BFF5652-FDE1-4D0A-A3B2-259210C8DDDD</string>
 				<key>modifiers</key>
-				<integer>1048576</integer>
+				<integer>262144</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Copy card image</string>
+				<string>⌃: Copy card image</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -58,8 +104,56 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>alfredfiltersresults</key>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>7E4A42EE-5667-4DDF-AB03-35310ED40D63</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
 				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>📋 Copied</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>28EE6501-5F14-4E44-AD05-B2B2720A4DA0</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.junction</string>
+			<key>uid</key>
+			<string>4BD99ED3-7319-434E-BAE0-BFD07191622C</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
 				<key>alfredfiltersresultsmatchmode</key>
 				<integer>2</integer>
 				<key>argumenttreatemptyqueryasnil</key>
@@ -77,7 +171,7 @@
 				<key>queuedelayimmediatelyinitially</key>
 				<true/>
 				<key>queuedelaymode</key>
-				<integer>0</integer>
+				<integer>1</integer>
 				<key>queuemode</key>
 				<integer>1</integer>
 				<key>runningsubtext</key>
@@ -181,6 +275,13 @@ Get PLACEHOLDER the `KEYWORD` keyword.
 #### Workflow created by [Chris Grieser](https://chris-grieser.de/)</string>
 	<key>uidata</key>
 	<dict>
+		<key>28EE6501-5F14-4E44-AD05-B2B2720A4DA0</key>
+		<dict>
+			<key>xpos</key>
+			<real>615</real>
+			<key>ypos</key>
+			<real>30</real>
+		</dict>
 		<key>2BFF5652-FDE1-4D0A-A3B2-259210C8DDDD</key>
 		<dict>
 			<key>colorindex</key>
@@ -191,6 +292,20 @@ Get PLACEHOLDER the `KEYWORD` keyword.
 			<real>470</real>
 			<key>ypos</key>
 			<real>340</real>
+		</dict>
+		<key>4BD99ED3-7319-434E-BAE0-BFD07191622C</key>
+		<dict>
+			<key>xpos</key>
+			<real>390</real>
+			<key>ypos</key>
+			<real>175</real>
+		</dict>
+		<key>7E4A42EE-5667-4DDF-AB03-35310ED40D63</key>
+		<dict>
+			<key>xpos</key>
+			<real>470</real>
+			<key>ypos</key>
+			<real>30</real>
 		</dict>
 		<key>8F6464BE-8E3C-4BC7-BBF0-9C914AAED379</key>
 		<dict>
@@ -203,8 +318,6 @@ Get PLACEHOLDER the `KEYWORD` keyword.
 		</dict>
 		<key>AB8A889D-A1A3-4100-8CE8-BDFFF0AD9206</key>
 		<dict>
-			<key>note</key>
-			<string>open on Scryfall</string>
 			<key>xpos</key>
 			<real>470</real>
 			<key>ypos</key>
