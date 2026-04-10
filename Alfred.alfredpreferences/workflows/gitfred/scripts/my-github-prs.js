@@ -119,7 +119,7 @@ function run() {
 		return {
 			title: icon + item.title,
 			subtitle: subtitle,
-			match: alfredMatcher(item.title) + alfredMatcher(repo),
+			match: alfredMatcher(item.title) + alfredMatcher(repo) + item.number,
 			arg: item.html_url,
 			quicklookurl: item.html_url,
 		};
