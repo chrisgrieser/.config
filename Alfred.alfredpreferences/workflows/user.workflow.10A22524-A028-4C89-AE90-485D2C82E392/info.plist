@@ -222,6 +222,27 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>📋 Copied</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>8F6464BE-8E3C-4BC7-BBF0-9C914AAED379</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -242,33 +263,14 @@
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>📋 Copied</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>8F6464BE-8E3C-4BC7-BBF0-9C914AAED379</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
 	</array>
 	<key>readme</key>
 	<string>## Usage
-Get PLACEHOLDER the `KEYWORD` keyword.
-- &lt;kbd&gt;⏎&lt;/kbd&gt; open the page in the browser.
-- &lt;kbd&gt;⌥⏎&lt;/kbd&gt; copy the page URL.
+Search MtG cards via the `mtg` keyword.
+- &lt;kbd&gt;⏎&lt;/kbd&gt; open the card on Scryfall.
+- &lt;kbd&gt;⌥⏎&lt;/kbd&gt; copy the Scryfall URL.
+- &lt;kbd&gt;⌘⏎&lt;/kbd&gt; open the card on cardmarket or tcgplayer.
+- &lt;kbd&gt;⌃⏎&lt;/kbd&gt; copy the card image to the clipboard.
 
 ---
 
@@ -277,6 +279,8 @@ Get PLACEHOLDER the `KEYWORD` keyword.
 	<dict>
 		<key>28EE6501-5F14-4E44-AD05-B2B2720A4DA0</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>10</integer>
 			<key>xpos</key>
 			<real>615</real>
 			<key>ypos</key>
@@ -285,7 +289,7 @@ Get PLACEHOLDER the `KEYWORD` keyword.
 		<key>2BFF5652-FDE1-4D0A-A3B2-259210C8DDDD</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>12</integer>
+			<integer>5</integer>
 			<key>note</key>
 			<string>copy image to clipboard</string>
 			<key>xpos</key>
@@ -295,13 +299,17 @@ Get PLACEHOLDER the `KEYWORD` keyword.
 		</dict>
 		<key>4BD99ED3-7319-434E-BAE0-BFD07191622C</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>10</integer>
 			<key>xpos</key>
-			<real>390</real>
+			<real>400</real>
 			<key>ypos</key>
 			<real>175</real>
 		</dict>
 		<key>7E4A42EE-5667-4DDF-AB03-35310ED40D63</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>10</integer>
 			<key>xpos</key>
 			<real>470</real>
 			<key>ypos</key>
@@ -310,21 +318,25 @@ Get PLACEHOLDER the `KEYWORD` keyword.
 		<key>8F6464BE-8E3C-4BC7-BBF0-9C914AAED379</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>12</integer>
+			<integer>5</integer>
 			<key>xpos</key>
 			<real>630</real>
 			<key>ypos</key>
-			<real>345</real>
+			<real>340</real>
 		</dict>
 		<key>AB8A889D-A1A3-4100-8CE8-BDFFF0AD9206</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>10</integer>
 			<key>xpos</key>
-			<real>470</real>
+			<real>535</real>
 			<key>ypos</key>
 			<real>185</real>
 		</dict>
 		<key>ACBECE87-2E63-42E7-980A-06E987B77635</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>10</integer>
 			<key>xpos</key>
 			<real>120</real>
 			<key>ypos</key>
@@ -332,7 +344,57 @@ Get PLACEHOLDER the `KEYWORD` keyword.
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
-	<array/>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>mtg</string>
+				<key>placeholder</key>
+				<string>mtg</string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>Keyword</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>keyword</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>cardmarket</string>
+				<key>pairs</key>
+				<array>
+					<array>
+						<string>cardmarket (EU)</string>
+						<string>cardmarket</string>
+					</array>
+					<array>
+						<string>tcgplayer (US)</string>
+						<string>tcgplayer</string>
+					</array>
+				</array>
+			</dict>
+			<key>description</key>
+			<string>Which prices to display and where to open purchase URLs.</string>
+			<key>label</key>
+			<string>Market</string>
+			<key>type</key>
+			<string>popupbutton</string>
+			<key>variable</key>
+			<string>market</string>
+		</dict>
+	</array>
+	<key>version</key>
+	<string>0.9</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>

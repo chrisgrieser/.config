@@ -27,14 +27,37 @@ function httpRequest(url) {
 
 //──────────────────────────────────────────────────────────────────────────────
 
-const colorMap = {
-	// biome-ignore-start lint/style/useNamingConvention: not useful here
+// biome-ignore-start lint/style/useNamingConvention: not useful here
+const colorNameMap = {
 	U: "blue",
 	W: "white",
 	B: "black",
 	R: "red",
 	G: "green",
-}; // biome-ignore-end lint/style/useNamingConvention: not useful here
+};
+
+/** @type {Record<string, string>} */
+const colorIconMap = {
+	"{U}": "🔵",
+	"{W}": "🟡",
+	"{B}": "⚫",
+	"{R}": "🔴",
+	"{G}": "🟢",
+	"{C}": "♢",
+	"{X}": "✖",
+	"{1}": "1️⃣",
+	"{2}": "2️⃣",
+	"{3}": "3️⃣",
+	"{4}": "4️⃣",
+	"{5}": "5️⃣",
+	"{6}": "6️⃣",
+	"{7}": "7️⃣",
+	"{8}": "8️⃣",
+	"{9}": "9️⃣",
+	"{10}": "🔟",
+};
+
+// biome-ignore-end lint/style/useNamingConvention: not useful here
 
 /**
  * @param {string} title
@@ -62,13 +85,20 @@ function run(argv) {
 
 	/** @type {AlfredItem[]} */
 	const items = cardData.map((/** @type {ScryfallCard} */ card) => {
-		let color = card.colors?.[0] ? colorMap[card.colors[0]] : "colorless";
+		let color = card.colors?.[0] ? colorNameMap[card.colors[0]] : "colorless";
 		if (card.colors && card.colors.length > 1) color = "multi";
 
 		const purchaseUrl = card.purchase_uris?.cardmarket;
 		const price = card.prices?.eur ? card.prices.eur + "€" : "";
 		const image = card.image_uris?.png;
-		const subtitle = [card.mana_cost, `${card.type_line}`, price].filter(Boolean).join("    ");
+		const manaCost = card.mana_cost?.replace(/\{.\}/g, (match) => colorIconMap[match]);
+		const yearOfRelease = `(${card.released_at.slice(0, 4)})`
+		const subtitle = [
+			manaCost,
+			`${card.type_line}`,
+			price,
+			yearOfRelease
+		].filter(Boolean).join("    ");
 
 		return {
 			title: card.name,
