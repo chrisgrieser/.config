@@ -229,9 +229,9 @@
 				<key>removeextension</key>
 				<false/>
 				<key>text</key>
-				<string></string>
+				<string>{var:cardname}</string>
 				<key>title</key>
-				<string>📋 Copied</string>
+				<string>🃏 Copied image</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.output.notification</string>
@@ -473,7 +473,7 @@ There is an [alternative workflow by Vítor Galvão](https://alfred.app/workflow
 				</array>
 			</dict>
 			<key>description</key>
-			<string>Display if card is illegal or banned in the selected format. "None" shows no indicator at all.</string>
+			<string>Display if card is illegal or banned in the selected format. ("None" shows no indicator at all.)</string>
 			<key>label</key>
 			<string>Legality</string>
 			<key>type</key>

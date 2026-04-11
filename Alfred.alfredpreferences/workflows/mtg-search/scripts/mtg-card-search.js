@@ -22,6 +22,8 @@ app.includeStandardAdditions = true;
  * @property {number?} toughness
  * @property {("paper"|"mtgo"|"arena")[]} games
  * @property {Record<string, "legal"|"not_legal"|"banned">} legalities
+ * @property {boolean} gamechanger
+ * @property {ScryfallCard[]} card_faces for flippable cards
  */
 
 //──────────────────────────────────────────────────────────────────────────────
@@ -59,11 +61,17 @@ const rarityEmojiMap = {
  * @param {string?} [subtitle]
  */
 function errorItem(title, subtitle) {
-	return JSON.stringify({ items: [{
-		title: title,
-		subtitle: subtitle || "",
-		valid: false,
-	}] });
+	const url = (title.match(/https?:\/\/\S+/) || (subtitle || "").match(/https?:\/\/\S+/))?.[0];
+	return JSON.stringify({
+		items: [
+			{
+				title: title,
+				subtitle: subtitle || "",
+				arg: url,
+				valid: Boolean(url),
+			},
+		],
+	});
 }
 
 //------------------------------------------------------------------------------
@@ -82,18 +90,22 @@ function run(argv) {
 		"https://api.scryfall.com/cards/search?order=released&q=" + encodeURIComponent(query);
 	const response = app.doShellScript(`curl "${apiUrl}"`);
 	if (!response) return errorItem("No response from Scryfall", "Try again later");
-	console.log("🪚 response:", response);
 	const json = JSON.parse(response);
 	if (json.object === "error") {
-		const [_, info, rest] = json.details.match(/(^[^.]+\. )(.*)/) || ["", json.details, ""];
-		console.log("🪚 rest:", rest);
-		console.log("🪚 info:", info);
-		return errorItem(info, rest);
+		console.log("⚠️ error object:", JSON.stringify(json, null, 2));
+		let [_, title, subtitle] = json.details.match(/(^[^.]+\. )(.*)/) || ["", json.details, ""];
+		if (json.warnings) subtitle += " " + json.warnings.join(" ");
+		return errorItem(title.trim(), subtitle.trim());
 	}
 
 	/** @type {AlfredItem[]} */
 	const items = json.data.flatMap((/** @type {ScryfallCard} */ card) => {
 		if (onlyPaper && !card.games.includes("paper")) return [];
+
+		// for flippable card use the front; add it's properties to the main card
+		// object, since properties are split across card and card face for them.
+		const flippable = card.card_faces;
+		if (flippable) card = { ...card, ...card.card_faces[0] };
 
 		let icon = card.colors?.[0] || "colorless";
 		if (card.colors && card.colors.length > 1) icon = "multi";
@@ -112,23 +124,21 @@ function run(argv) {
 		const set = card.set.toUpperCase();
 		const legality =
 			illegalityFormat === "none" || card.legalities[illegalityFormat] === "legal" ? "" : "⛔";
+		const gameChanger = card.gamechanger ? "⭐" : "";
+		const flipIcon = card.card_faces ? "🔄" : "";
 
-		const subtitle = [
-			manaCost,
-			type,
-			displayPrice,
-			legality,
-			`${rarity} ${set} (${yearOfRelease})`,
-		]
+		const subtitle = [manaCost, type, displayPrice, `${rarity} ${set} (${yearOfRelease})`]
 			.filter(Boolean)
 			.join("      ");
+		const title = [card.name, flipIcon, gameChanger, legality].filter(Boolean).join("  ");
 
 		return {
-			title: card.name,
+			title: title,
 			subtitle: subtitle,
 			icon: { path: `./mana-symbols/${icon}.png` },
 			arg: card.scryfall_uri,
 			quicklookurl: imageUrl,
+			variables: { cardname: card.name },
 			mods: {
 				cmd: { arg: purchaseUrl },
 				opt: { arg: card.scryfall_uri }, // copy scryfall url
