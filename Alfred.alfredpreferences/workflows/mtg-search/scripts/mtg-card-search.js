@@ -54,7 +54,7 @@ const manaEmojiMap = {
 };
 
 const rarityEmojiMap = {
-	common: "🥉",
+	common: "",
 	uncommon: "🥈",
 	rare: "🥇",
 	mythic: "🔸",
@@ -106,7 +106,7 @@ function run(argv) {
 		const type = [combatStats, card.type_line].filter(Boolean).join(" ");
 		const set = card.set.toUpperCase();
 
-		const subtitle = [manaCost, type, displayPrice, `${rarity} ${set} ${yearOfRelease}`]
+		const subtitle = [manaCost, type, displayPrice, `${rarity} ${set} (${yearOfRelease})`]
 			.filter(Boolean)
 			.join("      ");
 
