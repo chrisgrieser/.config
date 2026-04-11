@@ -66,7 +66,7 @@
       "src": "https://github.com/chrisgrieser/nvim-origami"
     },
     "nvim-rip-substitute": {
-      "rev": "652c4f032a38d6095e88530e00e4b58b4cd53df1",
+      "rev": "76865f7abba5f285e3f9d3cd4c0ad97250eb04de",
       "src": "https://github.com/chrisgrieser/nvim-rip-substitute"
     },
     "nvim-rulebook": {
