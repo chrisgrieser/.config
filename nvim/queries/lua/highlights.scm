@@ -13,7 +13,8 @@
 ("return" @keyword.return
   (#set! priority 130))
 
-((identifier) @keyword.return
+(function_call
+  (identifier) @keyword.return
   (#any-of? @keyword.return "assert" "error")
   (#set! priority 130))
 

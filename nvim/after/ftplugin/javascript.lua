@@ -39,10 +39,13 @@ Bufmap {
 		local data = {
 			regex = regex,
 			flags = flags,
-			substitution = substitution,
+			substitution = substitution or "", -- documented as optional, but seems to be required
 			delimiter = "/",
 			flavor = "javascript",
 			testString = "",
+
+			listSubstitution = "", -- undocumented, but seems to be required
+			unitTests = {}, -- documented as optional, but seems to be required
 		}
 
 		tsSelect.select_textobject("@regex.inner", "textobjects") -- reselect for easier pasting
