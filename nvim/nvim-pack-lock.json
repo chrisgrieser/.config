@@ -49,16 +49,12 @@
       "rev": "d5b697f791173a99b13665c90ca08ddc1ab8b1f1",
       "src": "https://github.com/chrisgrieser/nvim-genghis"
     },
-    "nvim-justice": {
-      "rev": "c0148ac407560dba56c43e660fe239cd5f59ceb8",
-      "src": "https://github.com/chrisgrieser/nvim-justice"
-    },
     "nvim-lsp-endhints": {
       "rev": "a86e7ca7a92ef003008d7eb5d153c63bcc89f79c",
       "src": "https://github.com/chrisgrieser/nvim-lsp-endhints"
     },
     "nvim-lspconfig": {
-      "rev": "c588db330592fa477a70d2fee6ba20a57194bdc3",
+      "rev": "cb5bc0b2b35a6d513e3298d285db81453e791f4f",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-origami": {
@@ -86,7 +82,7 @@
       "src": "https://github.com/kylechui/nvim-surround"
     },
     "nvim-tinygit": {
-      "rev": "518f7a874a4ccbc628a974ff670f134253dbde08",
+      "rev": "3fc9d33f0377a2fc55bab74d8e7d3b05602f4e24",
       "src": "https://github.com/chrisgrieser/nvim-tinygit"
     },
     "nvim-treesitter": {
@@ -102,7 +98,7 @@
       "src": "https://github.com/chrisgrieser/nvim-various-textobjs"
     },
     "plenary.nvim": {
-      "rev": "b9fd5226c2f76c951fc8ed5923d85e4de065e509",
+      "rev": "74b06c6c75e4eeb3108ec01852001636d85a932b",
       "src": "https://github.com/nvim-lua/plenary.nvim"
     },
     "refactoring.nvim": {

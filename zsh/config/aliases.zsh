@@ -30,7 +30,9 @@ function which { # colorized & showing all
 
 function bat { # dark-mode aware
 	local theme   # list themes via `bat --list-themes`
-	theme="$(defaults read -g AppleInterfaceStyle &> /dev/null && echo "Dracula" || echo "Monokai Extended Light")"
+	local light_theme="Monokai Extended Light"
+	local dark_theme="Catppuccin Mocha"
+	theme="$(defaults read -g AppleInterfaceStyle &> /dev/null && echo "$dark_theme" || echo "$light_theme")"
 	command bat --theme="$theme" "$@"
 }
 
