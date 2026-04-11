@@ -222,6 +222,27 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>📋 Copied</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>8F6464BE-8E3C-4BC7-BBF0-9C914AAED379</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -241,27 +262,6 @@
 			<string>2BFF5652-FDE1-4D0A-A3B2-259210C8DDDD</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string></string>
-				<key>title</key>
-				<string>📋 Copied</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>8F6464BE-8E3C-4BC7-BBF0-9C914AAED379</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 	</array>
 	<key>readme</key>
@@ -418,6 +418,68 @@ There is an [alternative workflow by Vítor Galvão](https://alfred.app/workflow
 			<string>checkbox</string>
 			<key>variable</key>
 			<string>only_paper</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>none</string>
+				<key>pairs</key>
+				<array>
+					<array>
+						<string>None</string>
+						<string>none</string>
+					</array>
+					<array>
+						<string>Standard</string>
+						<string>standard</string>
+					</array>
+					<array>
+						<string>Commander</string>
+						<string>commander</string>
+					</array>
+					<array>
+						<string>Oathbreaker</string>
+						<string>oathbreaker</string>
+					</array>
+					<array>
+						<string>Modern</string>
+						<string>modern</string>
+					</array>
+					<array>
+						<string>Pioneer</string>
+						<string>pioneer</string>
+					</array>
+					<array>
+						<string>Pauper</string>
+						<string>pauper</string>
+					</array>
+					<array>
+						<string>Penny</string>
+						<string>penny</string>
+					</array>
+					<array>
+						<string>Alchemy</string>
+						<string>alchemy</string>
+					</array>
+					<array>
+						<string>Legacy</string>
+						<string>legacy</string>
+					</array>
+					<array>
+						<string>Vintage</string>
+						<string>vintage</string>
+					</array>
+				</array>
+			</dict>
+			<key>description</key>
+			<string>Display if card is illegal or banned in the selected format. "None" shows no indicator at all.</string>
+			<key>label</key>
+			<string>Legality</string>
+			<key>type</key>
+			<string>popupbutton</string>
+			<key>variable</key>
+			<string>illegality_format_1</string>
 		</dict>
 	</array>
 	<key>version</key>

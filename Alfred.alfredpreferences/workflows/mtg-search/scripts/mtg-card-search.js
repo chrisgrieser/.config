@@ -4,13 +4,6 @@ const app = Application.currentApplication();
 app.includeStandardAdditions = true;
 //------------------------------------------------------------------------------
 
-/** @param {string} url @return {string} */
-function httpRequest(url) {
-	const queryUrl = $.NSURL.URLWithString(url);
-	const data = $.NSData.dataWithContentsOfURL(queryUrl);
-	return $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding).js;
-}
-
 /** @typedef {Object} ScryfallCard
  * @property {string} name
  * @property {string} scryfall_uri
@@ -28,6 +21,7 @@ function httpRequest(url) {
  * @property {number?} power
  * @property {number?} toughness
  * @property {("paper"|"mtgo"|"arena")[]} games
+ * @property {Record<string, "legal"|"not_legal"|"banned">} legalities
  */
 
 //──────────────────────────────────────────────────────────────────────────────
@@ -54,7 +48,7 @@ const manaEmojiMap = {
 };
 
 const rarityEmojiMap = {
-	common: "",
+	common: "🥉",
 	uncommon: "🥈",
 	rare: "🥇",
 	mythic: "🔸",
@@ -65,7 +59,11 @@ const rarityEmojiMap = {
  * @param {string?} [subtitle]
  */
 function errorItem(title, subtitle) {
-	return JSON.stringify({ items: [{ title: title, subtitle: subtitle || "", valid: false }] });
+	return JSON.stringify({ items: [{
+		title: title,
+		subtitle: subtitle || "",
+		valid: false,
+	}] });
 }
 
 //------------------------------------------------------------------------------
@@ -77,17 +75,24 @@ function run(argv) {
 	if (!query) return errorItem("Search for card…", "Supports Scryfall search syntax.");
 	const market = /** @type {"cardmarket"|"tcgplayer"} */ ($.getenv("market"));
 	const onlyPaper = $.getenv("only_paper") === "1";
+	const illegalityFormat = $.getenv("illegality_format_1");
 
 	// DOCS https://scryfall.com/docs/api/cards/search
 	const apiUrl =
 		"https://api.scryfall.com/cards/search?order=released&q=" + encodeURIComponent(query);
-	const response = httpRequest(apiUrl);
+	const response = app.doShellScript(`curl "${apiUrl}"`);
 	if (!response) return errorItem("No response from Scryfall", "Try again later");
-	const cardData = JSON.parse(response).data;
-	if (cardData.length === 0) return errorItem("No cards found.");
+	console.log("🪚 response:", response);
+	const json = JSON.parse(response);
+	if (json.object === "error") {
+		const [_, info, rest] = json.details.match(/(^[^.]+\. )(.*)/) || ["", json.details, ""];
+		console.log("🪚 rest:", rest);
+		console.log("🪚 info:", info);
+		return errorItem(info, rest);
+	}
 
 	/** @type {AlfredItem[]} */
-	const items = cardData.flatMap((/** @type {ScryfallCard} */ card) => {
+	const items = json.data.flatMap((/** @type {ScryfallCard} */ card) => {
 		if (onlyPaper && !card.games.includes("paper")) return [];
 
 		let icon = card.colors?.[0] || "colorless";
@@ -105,8 +110,16 @@ function run(argv) {
 		const combatStats = card.power && card.toughness ? `${card.power}/${card.toughness}` : "";
 		const type = [combatStats, card.type_line].filter(Boolean).join(" ");
 		const set = card.set.toUpperCase();
+		const legality =
+			illegalityFormat === "none" || card.legalities[illegalityFormat] === "legal" ? "" : "⛔";
 
-		const subtitle = [manaCost, type, displayPrice, `${rarity} ${set} (${yearOfRelease})`]
+		const subtitle = [
+			manaCost,
+			type,
+			displayPrice,
+			legality,
+			`${rarity} ${set} (${yearOfRelease})`,
+		]
 			.filter(Boolean)
 			.join("      ");
 
