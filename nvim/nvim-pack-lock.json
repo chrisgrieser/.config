@@ -18,7 +18,7 @@
       "src": "https://github.com/lewis6991/gitsigns.nvim"
     },
     "lualine.nvim": {
-      "rev": "f5d2a8570f8b736ddb9bb4be504355bcd6e15ec8",
+      "rev": "a905eeebc4e63fdc48b5135d3bf8aea5618fb21c",
       "src": "https://github.com/nvim-lualine/lualine.nvim"
     },
     "mason.nvim": {
@@ -58,7 +58,7 @@
       "src": "https://github.com/chrisgrieser/nvim-lsp-endhints"
     },
     "nvim-lspconfig": {
-      "rev": "cb5bc0b2b35a6d513e3298d285db81453e791f4f",
+      "rev": "8a9378a822719346a0288fa004dab302ca3c0a8f",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-origami": {
@@ -110,7 +110,7 @@
       "src": "https://github.com/ThePrimeagen/refactoring.nvim"
     },
     "render-markdown.nvim": {
-      "rev": "54d4b5431e9634ee3d8d30784e017239b5b89d41",
+      "rev": "0fd43fb4b1f073931c4b481f5f3b7cea3749e190",
       "src": "https://github.com/MeanderingProgrammer/render-markdown.nvim"
     },
     "satellite.nvim": {

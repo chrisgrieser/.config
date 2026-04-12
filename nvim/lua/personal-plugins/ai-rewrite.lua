@@ -3,8 +3,14 @@ local M = {}
 
 local config = {
 	provider = {
-		endpoint = "http://localhost:11434/v1/chat/completion",
-		model = "apple-foundationmodel",
+		endpoint = "https://api.openai.com/v1/responses", -- only supports OpenAI-compatible
+		model = "gpt-5.4-mini", -- https://developers.openai.com/api/docs/models/gpt-5.4-mini
+		reasoningEffort = "low",
+		costPerMilTokens = { input = 0.75, output = 4 }, -- just for cost notification
+		apiKey = vim.env.OPENAI_API_KEY,
+		-- stylua: ignore
+		-- fallback, if `apiKey` is not set
+		apiKeyCmd = { "cat", vim.env.HOME .. "/Library/Mobile Documents/com~apple~CloudDocs/Tech/api-keys/openai-api-key.txt" },
 		timeoutSecs = 30,
 	},
 	appearance = {
@@ -56,6 +62,14 @@ local function rewrite(task, customPrompt)
 		usesSpaces = vim.bo.expandtab,
 	}
 
+	-- API KEY
+	local openaiApiKey = config.provider.apiKey
+	if not openaiApiKey then
+		local out = vim.system(config.provider.apiKeyCmd):wait()
+		assert(out.code == 0, "Could not get OpenAI API key: " .. out.stderr)
+		openaiApiKey = vim.trim(out.stdout)
+	end
+
 	-- SELECTION
 	local mode = vim.fn.mode()
 	if mode == "n" then
@@ -96,7 +110,8 @@ local function rewrite(task, customPrompt)
 	local model = config.provider.model
 	local data = {
 		model = model,
-		messages = {
+		reasoning = { effort = config.provider.reasoningEffort },
+		input = {
 			{ role = "system", content = systemPrompt },
 			{ role = "system", content = taskPrompt },
 			{ role = "user", content = userPrompt },
@@ -105,8 +120,9 @@ local function rewrite(task, customPrompt)
 	if vim.fn.executable("curl") == 0 then return notify("`curl` not found.", "error") end
 	-- stylua: ignore
 	local curlArgs = {
-		"curl", config.provider.endpoint,
+		"curl", "--silent", config.provider.endpoint,
 		"--header", "Content-Type: application/json",
+		"--header", "Authorization: Bearer " .. openaiApiKey,
 		"--data", vim.json.encode(data),
 	}
 
@@ -159,6 +175,8 @@ local function rewrite(task, customPrompt)
 			vim.api.nvim_buf_clear_namespace(ctx.bufnr, ns, 0, -1) -- clear signs
 
 			-- GUARD
+			if out.code == 124 then return notify("OpenAI request timed out.", "warn") end
+			if out.code ~= 0 then return notify("OpenAI request failed: " .. out.stderr, "warn") end
 			local resp = vim.json.decode(out.stdout, { luanil = { object = true } })
 			if resp.error then return notify(resp.error.message, "error") end
 
