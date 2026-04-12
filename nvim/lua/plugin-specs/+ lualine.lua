@@ -139,7 +139,7 @@ require("lualine").setup {
 			},
 			{
 				"lsp_status",
-				ignore_lsp = { "typos_lsp", "efm" },
+				ignore_lsp = { "typos_lsp" },
 				cond = function() -- only show component if LSP is active
 					if vim.g.lualine_lsp_active == nil then -- create autocmd only once
 						vim.g.lualine_lsp_active = false
