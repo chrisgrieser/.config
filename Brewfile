@@ -47,8 +47,10 @@ cask "zoom"
 mas "Highlights", id: 1498912833
 mas "Ivory", id: 6444602274
 
-#-OTHER-------------------------------------------------------------------------
+#-DEPENDENCIES------------------------------------------------------------------
 cask "font-jetbrains-mono-nerd-font"
+
+cask "apfel" # make Apple Intelligence accessible as CLI
 
 # for languagetool browser extension; see https://dev.languagetool.org/http-server
 brew "languagetool", postinstall: "sleep 1 ; brew services start languagetool"
