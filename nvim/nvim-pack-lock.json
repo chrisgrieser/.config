@@ -49,6 +49,10 @@
       "rev": "d5b697f791173a99b13665c90ca08ddc1ab8b1f1",
       "src": "https://github.com/chrisgrieser/nvim-genghis"
     },
+    "nvim-justice": {
+      "rev": "c0148ac407560dba56c43e660fe239cd5f59ceb8",
+      "src": "https://github.com/chrisgrieser/nvim-justice"
+    },
     "nvim-lsp-endhints": {
       "rev": "a86e7ca7a92ef003008d7eb5d153c63bcc89f79c",
       "src": "https://github.com/chrisgrieser/nvim-lsp-endhints"
