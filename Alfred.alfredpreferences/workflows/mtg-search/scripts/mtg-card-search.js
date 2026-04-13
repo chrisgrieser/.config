@@ -118,6 +118,8 @@ function run(argv) {
 		const imageUrl = card.image_uris?.png;
 		const manaCost = card.mana_cost?.replace(/\{\w+\}/g, (cost) => manaEmojiMap[cost] || cost);
 		const yearOfRelease = card.released_at.slice(0, 4);
+		const notReleasedYet = new Date(card.released_at) > new Date();
+		const futureIcon = notReleasedYet ? "🕒" : "";
 		const rarity = rarityEmojiMap[card.rarity] || card.rarity;
 		const combatStats = card.power && card.toughness ? `${card.power}/${card.toughness}` : "";
 		const type = [combatStats, card.type_line].filter(Boolean).join(" ");
@@ -130,7 +132,14 @@ function run(argv) {
 		const subtitle = [manaCost, type, displayPrice, `${rarity} ${set} (${yearOfRelease})`]
 			.filter(Boolean)
 			.join("      ");
-		const title = [card.name, flipIcon, gameChanger, legality].filter(Boolean).join("  ");
+		const title = [
+			card.name,
+			flipIcon,
+			gameChanger,
+			futureIcon || legality, // future cards are always illegal, thus replacing with future icon
+		]
+			.filter(Boolean)
+			.join("  ");
 
 		return {
 			title: title,
