@@ -167,6 +167,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>F91AEB7D-3B89-45E5-9787-B04C0AF03C46</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>2BF753F7-810C-4B51-8046-50E2B9FF28BA</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 	</dict>
 	<key>createdby</key>
 	<string>Chris Grieser</string>
@@ -381,28 +394,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>delimiter</key>
-				<string>
-</string>
-				<key>discardemptyarguments</key>
-				<false/>
-				<key>outputas</key>
-				<integer>1</integer>
-				<key>trimarguments</key>
-				<true/>
-				<key>variableprefix</key>
-				<string>split</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.split</string>
-			<key>uid</key>
-			<string>0ED04EDE-8208-4421-A966-60E07D5C6DD0</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>concurrently</key>
 				<true/>
 				<key>escaping</key>
@@ -457,6 +448,49 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>delimiter</key>
+				<string>
+</string>
+				<key>discardemptyarguments</key>
+				<false/>
+				<key>outputas</key>
+				<integer>1</integer>
+				<key>trimarguments</key>
+				<true/>
+				<key>variableprefix</key>
+				<string>split</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.split</string>
+			<key>uid</key>
+			<string>0ED04EDE-8208-4421-A966-60E07D5C6DD0</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>⚠️ {query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>2BF753F7-810C-4B51-8046-50E2B9FF28BA</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>conditions</key>
 				<array>
 					<dict>
@@ -483,27 +517,6 @@
 			<string>alfred.workflow.utility.conditional</string>
 			<key>uid</key>
 			<string>CC856733-C498-40D0-81FD-B25BD95B9D2D</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string></string>
-				<key>title</key>
-				<string>⚠️ {query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>2BF753F7-810C-4B51-8046-50E2B9FF28BA</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -538,9 +551,9 @@ There is an [alternative workflow by Vítor Galvão](https://alfred.app/workflow
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>665</real>
+			<real>630</real>
 			<key>ypos</key>
-			<real>440</real>
+			<real>475</real>
 		</dict>
 		<key>0ED04EDE-8208-4421-A966-60E07D5C6DD0</key>
 		<dict>
@@ -549,9 +562,9 @@ There is an [alternative workflow by Vítor Galvão](https://alfred.app/workflow
 			<key>note</key>
 			<string>split image files in case of flippable card</string>
 			<key>xpos</key>
-			<real>550</real>
+			<real>515</real>
 			<key>ypos</key>
-			<real>470</real>
+			<real>505</real>
 		</dict>
 		<key>28EE6501-5F14-4E44-AD05-B2B2720A4DA0</key>
 		<dict>
@@ -565,11 +578,11 @@ There is an [alternative workflow by Vítor Galvão](https://alfred.app/workflow
 		<key>2BF753F7-810C-4B51-8046-50E2B9FF28BA</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>5</integer>
+			<integer>1</integer>
 			<key>xpos</key>
-			<real>525</real>
+			<real>990</real>
 			<key>ypos</key>
-			<real>555</real>
+			<real>600</real>
 		</dict>
 		<key>2BFF5652-FDE1-4D0A-A3B2-259210C8DDDD</key>
 		<dict>
@@ -601,7 +614,7 @@ to set hotkey for quick card lookup</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>485</real>
+			<real>480</real>
 		</dict>
 		<key>7E4A42EE-5667-4DDF-AB03-35310ED40D63</key>
 		<dict>
@@ -646,16 +659,16 @@ to set hotkey for quick card lookup</string>
 			<key>xpos</key>
 			<real>225</real>
 			<key>ypos</key>
-			<real>485</real>
+			<real>480</real>
 		</dict>
 		<key>CC856733-C498-40D0-81FD-B25BD95B9D2D</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>390</real>
+			<real>395</real>
 			<key>ypos</key>
-			<real>505</real>
+			<real>605</real>
 		</dict>
 		<key>F91AEB7D-3B89-45E5-9787-B04C0AF03C46</key>
 		<dict>
@@ -664,9 +677,9 @@ to set hotkey for quick card lookup</string>
 			<key>note</key>
 			<string>open on scryfall</string>
 			<key>xpos</key>
-			<real>835</real>
+			<real>800</real>
 			<key>ypos</key>
-			<real>440</real>
+			<real>475</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

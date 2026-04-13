@@ -9,12 +9,10 @@ app.includeStandardAdditions = true;
 function run(argv) {
 	const localImagePath = argv[0];
 
-	// example: {path}/6904ea20-e504-47da-95a0-08739fdde260_0.png (`_0` or `_1` suffix -> flippable)
+	// example: {path}/6904ea20-e504-47da-95a0-08739fdde260_0.png
+	// (`_0` & `_1` were added to indicate card sides and are not part of the id)
 	const scryfallId = localImagePath.match(/.*\/(.*)(_[01])\.png$/)?.[1];
-	if (!scryfallId) {
-		console.log("No scryfallId found in path:", localImagePath);
-		return;
-	}
+	if (!scryfallId) return "No scryfall-id found in const path:" + localImagePath;
 
 	// DOCS https://scryfall.com/docs/api/cards/id
 	const apiUrl = `https://api.scryfall.com/cards/${scryfallId}`;
