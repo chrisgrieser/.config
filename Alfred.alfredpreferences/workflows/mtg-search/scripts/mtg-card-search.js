@@ -86,7 +86,7 @@ function run(argv) {
 	// DOCS https://scryfall.com/docs/api/cards/search
 	const apiUrl =
 		"https://api.scryfall.com/cards/search?order=released&q=" + encodeURIComponent(query);
-	// not using c-bridge http-request, since it fails on error-response
+	// not using c-bridge for http-request, since it fails on error-response
 	const response = app.doShellScript(`curl "${apiUrl}"`);
 	if (!response) return errorItem("No response from Scryfall", "Try again later");
 	const json = JSON.parse(response);

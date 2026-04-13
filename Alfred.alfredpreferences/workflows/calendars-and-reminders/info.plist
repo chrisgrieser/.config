@@ -81,84 +81,27 @@
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
-	<string>Calendars &amp; Reminders</string>
+	<string>Calendar &amp; Shopping list</string>
 	<key>objects</key>
 	<array>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/add-to-shopping-list.applescript</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>C3DA3277-BB54-4ABE-8029-E88E025FCB49</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>🛒 Added to Shopping List</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>7F4E66EF-60F9-4B4E-9C6A-2711AFC2FA70</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
 				<key>argumenttype</key>
 				<integer>0</integer>
 				<key>keyword</key>
-				<string>ein</string>
+				<string>cal</string>
 				<key>subtext</key>
-				<string>{var:shopping_list}</string>
+				<string>supports natural language for date-time</string>
 				<key>text</key>
-				<string>Add to list: "{query}"</string>
+				<string>New event: "{query}"</string>
 				<key>withspace</key>
 				<true/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
-			<string>20271AD9-0EEA-4974-8C14-15ACBF7A48E8</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>type</key>
-				<integer>3</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.transform</string>
-			<key>uid</key>
-			<string>65273B8B-813B-4F3B-BBFA-C41039170683</string>
+			<string>62ED7765-D475-43A5-B75A-9877C34F2423</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -188,27 +131,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>cal</string>
-				<key>subtext</key>
-				<string>supports natural language for date-time</string>
-				<key>text</key>
-				<string>New event: "{query}"</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>62ED7765-D475-43A5-B75A-9877C34F2423</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>acceptsfiles</key>
 				<false/>
 				<key>acceptsmulti</key>
@@ -227,6 +149,84 @@
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/add-to-shopping-list.applescript</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>C3DA3277-BB54-4ABE-8029-E88E025FCB49</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>ein</string>
+				<key>subtext</key>
+				<string>{var:shopping_list}</string>
+				<key>text</key>
+				<string>Add to list: "{query}"</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>20271AD9-0EEA-4974-8C14-15ACBF7A48E8</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>🛒 Added to Shopping List</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>7F4E66EF-60F9-4B4E-9C6A-2711AFC2FA70</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>type</key>
+				<integer>3</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.transform</string>
+			<key>uid</key>
+			<string>65273B8B-813B-4F3B-BBFA-C41039170683</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
@@ -239,7 +239,7 @@
 			<key>xpos</key>
 			<real>200</real>
 			<key>ypos</key>
-			<real>220</real>
+			<real>15</real>
 		</dict>
 		<key>20271AD9-0EEA-4974-8C14-15ACBF7A48E8</key>
 		<dict>
@@ -250,7 +250,7 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>15</real>
+			<real>285</real>
 		</dict>
 		<key>4E6193F3-2424-4AF9-94D6-A64C758518FB</key>
 		<dict>
@@ -259,7 +259,7 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>350</real>
+			<real>145</real>
 		</dict>
 		<key>62ED7765-D475-43A5-B75A-9877C34F2423</key>
 		<dict>
@@ -270,7 +270,7 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>220</real>
+			<real>15</real>
 		</dict>
 		<key>65273B8B-813B-4F3B-BBFA-C41039170683</key>
 		<dict>
@@ -279,7 +279,7 @@
 			<key>xpos</key>
 			<real>180</real>
 			<key>ypos</key>
-			<real>45</real>
+			<real>315</real>
 		</dict>
 		<key>7F4E66EF-60F9-4B4E-9C6A-2711AFC2FA70</key>
 		<dict>
@@ -288,7 +288,7 @@
 			<key>xpos</key>
 			<real>365</real>
 			<key>ypos</key>
-			<real>15</real>
+			<real>285</real>
 		</dict>
 		<key>C3DA3277-BB54-4ABE-8029-E88E025FCB49</key>
 		<dict>
@@ -297,7 +297,7 @@
 			<key>xpos</key>
 			<real>235</real>
 			<key>ypos</key>
-			<real>15</real>
+			<real>285</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
