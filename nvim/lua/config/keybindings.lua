@@ -25,7 +25,7 @@ Keymap {
 }
 
 Keymap {
-	"<leader>pd",
+	"<leader>pD",
 	function() vim.ui.open(vim.fn.stdpath("log")) end,
 	desc = "󰝰 Log dir",
 }
