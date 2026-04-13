@@ -69,9 +69,10 @@ M.aw_masto = aw.new(function(appName, event, masto)
 			if title == username or title == "Home" then wu.moveResize(win, wu.toTheSide) end
 		end
 	elseif event == aw.deactivated then
+		local frontApp = hs.application.frontmostApplication()
 		for _, win in pairs(masto:allWindows()) do
 			local isMediaWin = win:title():find("^Image") or win:title():find("^Ivory$")
-			local frontNotAlfred = hs.application.frontmostApplication():name() ~= "Alfred"
+			local frontNotAlfred = frontApp and frontApp:name() ~= "Alfred" or true
 			if #masto:allWindows() > 1 and isMediaWin and frontNotAlfred then
 				pcall(function() win:close() end)
 				hs.eventtap.keyStroke({}, "escape", 1, masto) -- `win:close()` sometimes does not work

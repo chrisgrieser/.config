@@ -108,7 +108,8 @@ function M.resetWinCount(appName) M["winCount_" .. appName] = nil end
 ---@param win hs.window
 ---@return boolean
 function M.winIsOfAutotileApp(win)
-	local appName = win:application():name() ---@diagnostic disable-line: undefined-field
+	local appName = win:application() and win:application():name() ---@diagnostic disable-line: undefined-field
+	if not appName then return false end
 	local autoTileApps = {}
 	for name, _ in pairs(config.appsToAutoTile) do
 		table.insert(autoTileApps, name)

@@ -33,12 +33,22 @@ function run(argv) {
 	if (!response) return "No response from Scryfall";
 	const json = JSON.parse(response);
 	if (json.object === "error") return json.details;
-
-	const imageUrl = json.image_uris?.normal;
-	if (!imageUrl) return "No image found for the card.";
-
 	ensureCacheFolderExists();
-	const cacheLocation = $.getenv("alfred_workflow_cache") + "/quick-card-lookup.jpg";
-	app.doShellScript(`curl --silent --location "${imageUrl}" --output "${cacheLocation}"`);
-	return cacheLocation; // open via Alfred's image view
+
+	/** @type {ScryfallCard} */
+	const card = json;
+
+	const isFlippable = card.card_faces;
+	const cardSides = isFlippable ? [card.card_faces[0], card.card_faces[1]] : [card];
+
+	let localCardImagePaths = "";
+	for (let i = 0; i < cardSides.length; i++) {
+		const imageUrl = cardSides[i].image_uris?.png;
+		if (!imageUrl) return "No image found for the card.";
+
+		const cacheLocation = $.getenv("alfred_workflow_cache") + `/quick-card-lookup${i}.png`;
+		app.doShellScript(`curl --silent --location "${imageUrl}" --output "${cacheLocation}"`);
+		localCardImagePaths += cacheLocation + "\n";
+	}
+	return localCardImagePaths; // open via Alfred's image view
 }

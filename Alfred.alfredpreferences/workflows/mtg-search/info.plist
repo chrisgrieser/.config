@@ -8,6 +8,19 @@
 	<string>⭐️</string>
 	<key>connections</key>
 	<dict>
+		<key>0ED04EDE-8208-4421-A966-60E07D5C6DD0</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>033E15E9-9630-4D79-B031-EE8F0CEE6C63</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>2BFF5652-FDE1-4D0A-A3B2-259210C8DDDD</key>
 		<array>
 			<dict>
@@ -120,7 +133,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>F1943C6E-D15C-42BE-9CC8-23EEA2A7CD1E</string>
+				<string>0ED04EDE-8208-4421-A966-60E07D5C6DD0</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -133,19 +146,6 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>2BF753F7-810C-4B51-8046-50E2B9FF28BA</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>F1943C6E-D15C-42BE-9CC8-23EEA2A7CD1E</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>033E15E9-9630-4D79-B031-EE8F0CEE6C63</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -345,23 +345,24 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>matchmode</key>
+				<key>delimiter</key>
+				<string>
+</string>
+				<key>discardemptyarguments</key>
+				<false/>
+				<key>outputas</key>
 				<integer>1</integer>
-				<key>matchstring</key>
-				<string>\n$</string>
-				<key>regexcaseinsensitive</key>
-				<false/>
-				<key>regexmultiline</key>
-				<false/>
-				<key>replacestring</key>
-				<string></string>
+				<key>trimarguments</key>
+				<true/>
+				<key>variableprefix</key>
+				<string>split</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.utility.replace</string>
+			<string>alfred.workflow.utility.split</string>
 			<key>uid</key>
-			<string>F1943C6E-D15C-42BE-9CC8-23EEA2A7CD1E</string>
+			<string>0ED04EDE-8208-4421-A966-60E07D5C6DD0</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -430,7 +431,7 @@
 						<key>matchmode</key>
 						<integer>4</integer>
 						<key>matchstring</key>
-						<string>\.(png|jpe?g)$</string>
+						<string>\.png</string>
 						<key>outputlabel</key>
 						<string>image</string>
 						<key>uid</key>
@@ -481,6 +482,7 @@ Search MtG cards via the `mtg` keyword.
 - &lt;kbd&gt;⌘Y&lt;/kbd&gt; Quick Look the card image.
 
 Use the [hotkey](https://www.alfredapp.com/help/workflows/triggers/hotkey/) to quickly loop up the card for currently selected text. (This requires the text to unambigously match a card.)
+- In case of a flippable card, use &lt;kbd&gt;→&lt;/kbd&gt; and &lt;kbd&gt;←&lt;/kbd&gt; to flip between card sides.
 
 ## Preview Pane
 It is recommended to use this workflow with [AlfredExtraPane](https://github.com/mr-pennyworth/alfred-extra-pane) as this provides card image previews.
@@ -499,9 +501,20 @@ There is an [alternative workflow by Vítor Galvão](https://alfred.app/workflow
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>585</real>
+			<real>665</real>
 			<key>ypos</key>
 			<real>460</real>
+		</dict>
+		<key>0ED04EDE-8208-4421-A966-60E07D5C6DD0</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
+			<key>note</key>
+			<string>split image files in case of flippable card</string>
+			<key>xpos</key>
+			<real>550</real>
+			<key>ypos</key>
+			<real>490</real>
 		</dict>
 		<key>28EE6501-5F14-4E44-AD05-B2B2720A4DA0</key>
 		<dict>
@@ -603,20 +616,9 @@ to set hotkey for quick card lookup</string>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>380</real>
+			<real>390</real>
 			<key>ypos</key>
 			<real>525</real>
-		</dict>
-		<key>F1943C6E-D15C-42BE-9CC8-23EEA2A7CD1E</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>note</key>
-			<string>remove \n</string>
-			<key>xpos</key>
-			<real>525</real>
-			<key>ypos</key>
-			<real>490</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

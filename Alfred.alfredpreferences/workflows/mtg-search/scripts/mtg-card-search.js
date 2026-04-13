@@ -29,7 +29,7 @@ app.includeStandardAdditions = true;
 /** @type {Record<string, string>} */
 const manaEmojiMap = {
 	"{U}": "🔵",
-	"{W}": "🟡",
+	"{W}": "🟡", // yellow works on white background and is still associated with white mane
 	"{B}": "⚫",
 	"{R}": "🔴",
 	"{G}": "🟢",
@@ -101,7 +101,7 @@ function run(argv) {
 
 	/** @type {AlfredItem[]} */
 	const items = json.data.flatMap((/** @type {ScryfallCard} */ card) => {
-		// for flippable card use the front; add it's properties to the main card
+		// for flippable cards use the front & add their properties to the main card
 		// object, since properties are split across card and card face for them.
 		const flippable = card.card_faces;
 		if (flippable) card = { ...card, ...card.card_faces[0] };
