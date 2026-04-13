@@ -8,6 +8,19 @@
 	<string>⭐️</string>
 	<key>connections</key>
 	<dict>
+		<key>033E15E9-9630-4D79-B031-EE8F0CEE6C63</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>F91AEB7D-3B89-45E5-9787-B04C0AF03C46</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>0ED04EDE-8208-4421-A966-60E07D5C6DD0</key>
 		<array>
 			<dict>
@@ -345,6 +358,29 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<true/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>scripts/open-at-scryfall.js</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>F91AEB7D-3B89-45E5-9787-B04C0AF03C46</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>delimiter</key>
 				<string>
 </string>
@@ -482,7 +518,8 @@ Search MtG cards via the `mtg` keyword.
 - &lt;kbd&gt;⌘Y&lt;/kbd&gt; Quick Look the card image.
 
 Use the [hotkey](https://www.alfredapp.com/help/workflows/triggers/hotkey/) to quickly loop up the card for currently selected text. (This requires the text to unambigously match a card.)
-- In case of a flippable card, use &lt;kbd&gt;→&lt;/kbd&gt; and &lt;kbd&gt;←&lt;/kbd&gt; to flip between card sides.
+- &lt;kbd&gt;⏎&lt;/kbd&gt; open the card on Scryfall.
+- &lt;kbd&gt;→&lt;/kbd&gt; and &lt;kbd&gt;←&lt;/kbd&gt; to flip between card sides (in case of a flippable card).
 
 ## Preview Pane
 It is recommended to use this workflow with [AlfredExtraPane](https://github.com/mr-pennyworth/alfred-extra-pane) as this provides card image previews.
@@ -503,7 +540,7 @@ There is an [alternative workflow by Vítor Galvão](https://alfred.app/workflow
 			<key>xpos</key>
 			<real>665</real>
 			<key>ypos</key>
-			<real>460</real>
+			<real>440</real>
 		</dict>
 		<key>0ED04EDE-8208-4421-A966-60E07D5C6DD0</key>
 		<dict>
@@ -514,7 +551,7 @@ There is an [alternative workflow by Vítor Galvão](https://alfred.app/workflow
 			<key>xpos</key>
 			<real>550</real>
 			<key>ypos</key>
-			<real>490</real>
+			<real>470</real>
 		</dict>
 		<key>28EE6501-5F14-4E44-AD05-B2B2720A4DA0</key>
 		<dict>
@@ -532,7 +569,7 @@ There is an [alternative workflow by Vítor Galvão](https://alfred.app/workflow
 			<key>xpos</key>
 			<real>525</real>
 			<key>ypos</key>
-			<real>575</real>
+			<real>555</real>
 		</dict>
 		<key>2BFF5652-FDE1-4D0A-A3B2-259210C8DDDD</key>
 		<dict>
@@ -564,7 +601,7 @@ to set hotkey for quick card lookup</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>505</real>
+			<real>485</real>
 		</dict>
 		<key>7E4A42EE-5667-4DDF-AB03-35310ED40D63</key>
 		<dict>
@@ -609,7 +646,7 @@ to set hotkey for quick card lookup</string>
 			<key>xpos</key>
 			<real>225</real>
 			<key>ypos</key>
-			<real>505</real>
+			<real>485</real>
 		</dict>
 		<key>CC856733-C498-40D0-81FD-B25BD95B9D2D</key>
 		<dict>
@@ -618,7 +655,18 @@ to set hotkey for quick card lookup</string>
 			<key>xpos</key>
 			<real>390</real>
 			<key>ypos</key>
-			<real>525</real>
+			<real>505</real>
+		</dict>
+		<key>F91AEB7D-3B89-45E5-9787-B04C0AF03C46</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
+			<key>note</key>
+			<string>open on scryfall</string>
+			<key>xpos</key>
+			<real>835</real>
+			<key>ypos</key>
+			<real>440</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

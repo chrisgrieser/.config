@@ -5,6 +5,7 @@ app.includeStandardAdditions = true;
 //------------------------------------------------------------------------------
 
 /** @typedef {Object} ScryfallCard
+ * @property {string} id
  * @property {string} name
  * @property {string} scryfall_uri
  * @property {string} released_at iso 8601 date

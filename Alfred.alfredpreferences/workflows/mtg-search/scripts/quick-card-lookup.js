@@ -17,6 +17,7 @@ function ensureCacheFolderExists() {
 		withProperties: { name: cacheDirBasename },
 	});
 }
+const fileExists = (/** @type {string} */ filePath) => Application("Finder").exists(Path(filePath));
 
 //------------------------------------------------------------------------------
 
@@ -43,12 +44,16 @@ function run(argv) {
 
 	let localCardImagePaths = "";
 	for (let i = 0; i < cardSides.length; i++) {
-		const imageUrl = cardSides[i].image_uris?.png;
+		const side = cardSides[i];
+		const imageUrl = side.image_uris?.png;
 		if (!imageUrl) return "No image found for the card.";
 
-		const cacheLocation = $.getenv("alfred_workflow_cache") + `/quick-card-lookup${i}.png`;
-		app.doShellScript(`curl --silent --location "${imageUrl}" --output "${cacheLocation}"`);
-		localCardImagePaths += cacheLocation + "\n";
+		const localImagePath = $.getenv("alfred_workflow_cache") + `/${card.id}_${i}.png`;
+
+		if (!fileExists(localImagePath)) {
+			app.doShellScript(`curl --silent --location "${imageUrl}" --output "${localImagePath}"`);
+		}
+		localCardImagePaths += localImagePath + "\n";
 	}
 	return localCardImagePaths; // open via Alfred's image view
 }
