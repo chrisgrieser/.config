@@ -26,8 +26,6 @@ app.includeStandardAdditions = true;
  * @property {ScryfallCard[]} card_faces for flippable cards
  */
 
-//──────────────────────────────────────────────────────────────────────────────
-
 /** @type {Record<string, string>} */
 const manaEmojiMap = {
 	"{U}": "🔵",
@@ -82,12 +80,13 @@ function run(argv) {
 	const query = argv[0];
 	if (!query) return errorItem("Search for card…", "Supports Scryfall search syntax.");
 	const market = /** @type {"cardmarket"|"tcgplayer"} */ ($.getenv("market"));
-	const onlyPaper = $.getenv("only_paper") === "1";
+	const showOnlyPaper = $.getenv("only_paper") === "1";
 	const illegalityFormat = $.getenv("illegality_format_1");
 
 	// DOCS https://scryfall.com/docs/api/cards/search
 	const apiUrl =
 		"https://api.scryfall.com/cards/search?order=released&q=" + encodeURIComponent(query);
+	// not using c-bridge http-request, since it fails on error-response
 	const response = app.doShellScript(`curl "${apiUrl}"`);
 	if (!response) return errorItem("No response from Scryfall", "Try again later");
 	const json = JSON.parse(response);
@@ -98,10 +97,10 @@ function run(argv) {
 		return errorItem(title.trim(), subtitle.trim());
 	}
 
+	const onlyOnlineCards = [];
+
 	/** @type {AlfredItem[]} */
 	const items = json.data.flatMap((/** @type {ScryfallCard} */ card) => {
-		if (onlyPaper && !card.games.includes("paper")) return [];
-
 		// for flippable card use the front; add it's properties to the main card
 		// object, since properties are split across card and card face for them.
 		const flippable = card.card_faces;
@@ -124,6 +123,8 @@ function run(argv) {
 		const combatStats = card.power && card.toughness ? `${card.power}/${card.toughness}` : "";
 		const type = [combatStats, card.type_line].filter(Boolean).join(" ");
 		const set = card.set.toUpperCase();
+		const onlyOnline = !card.games.includes("paper");
+		const onlyOnlineIcon = onlyOnline ? "🌐" : "";
 		const legality =
 			illegalityFormat === "none" || card.legalities[illegalityFormat] === "legal" ? "" : "⛔";
 		const gameChanger = card.gamechanger ? "⭐" : "";
@@ -133,15 +134,16 @@ function run(argv) {
 			.filter(Boolean)
 			.join("      ");
 		const title = [
+			gameChanger,
 			card.name,
 			flipIcon,
-			gameChanger,
+			onlyOnlineIcon,
 			futureIcon || legality, // future cards are always illegal, thus replacing with future icon
 		]
 			.filter(Boolean)
 			.join("  ");
 
-		return {
+		const alfredItem = {
 			title: title,
 			subtitle: subtitle,
 			icon: { path: `./mana-symbols/${icon}.png` },
@@ -159,7 +161,24 @@ function run(argv) {
 				},
 			},
 		};
+
+		if (showOnlyPaper && onlyOnline) {
+			onlyOnlineCards.push(alfredItem);
+			return [];
+		}
+		return alfredItem;
 	});
+
+	// items can only be 0 if the search resulted in online-only cards, because
+	// scryfall already reports an error in that case
+	if (items.length === 0) {
+		onlyOnlineCards.unshift({
+			title: "Only MTGO or MtG Arena cards found for this query.",
+			subtitle: "They are displayed below.",
+			valid: false,
+		});
+		return JSON.stringify({ items: onlyOnlineCards });
+	}
 
 	return JSON.stringify({ items: items });
 }

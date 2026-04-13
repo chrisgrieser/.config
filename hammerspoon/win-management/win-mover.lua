@@ -75,7 +75,7 @@ local function toggleMaximized()
 	wu.moveResize(frontWin, newSize)
 end
 
-local function moveToNextDisplay()
+local function toNextDisplay()
 	if #hs.screen.allScreens() < 2 then
 		hs.alert("Cannot move to next display since there is only one.", 3)
 		return
@@ -86,7 +86,7 @@ local function moveToNextDisplay()
 end
 
 hs.hotkey.bind({ "ctrl" }, "space", toggleMaximized)
-hs.hotkey.bind(u.hyper, "M", moveToNextDisplay)
+hs.hotkey.bind(u.hyper, "N", toNextDisplay)
 
 --------------------------------------------------------------------------------
 return M

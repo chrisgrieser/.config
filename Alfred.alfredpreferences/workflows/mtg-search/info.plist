@@ -34,6 +34,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>5F97F23A-88E5-4989-99F1-924AF2DACF3E</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>C76BA2C6-B4C1-4F40-9545-E63E0263FD3C</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>7E4A42EE-5667-4DDF-AB03-35310ED40D63</key>
 		<array>
 			<dict>
@@ -86,6 +99,19 @@
 				<integer>262144</integer>
 				<key>modifiersubtext</key>
 				<string>⌃: Copy card image</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>C76BA2C6-B4C1-4F40-9545-E63E0263FD3C</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>2BF753F7-810C-4B51-8046-50E2B9FF28BA</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -263,6 +289,81 @@
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>⚠️ {query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>2BF753F7-810C-4B51-8046-50E2B9FF28BA</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>scripts/quick-card-lookup2.js</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>C76BA2C6-B4C1-4F40-9545-E63E0263FD3C</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>1</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>46</integer>
+				<key>hotmod</key>
+				<integer>1835008</integer>
+				<key>hotstring</key>
+				<string>M</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>2</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>5F97F23A-88E5-4989-99F1-924AF2DACF3E</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>## Usage
@@ -294,6 +395,15 @@ There is an [alternative workflow by Vítor Galvão](https://alfred.app/workflow
 			<key>ypos</key>
 			<real>30</real>
 		</dict>
+		<key>2BF753F7-810C-4B51-8046-50E2B9FF28BA</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
+			<key>xpos</key>
+			<real>410</real>
+			<key>ypos</key>
+			<real>545</real>
+		</dict>
 		<key>2BFF5652-FDE1-4D0A-A3B2-259210C8DDDD</key>
 		<dict>
 			<key>colorindex</key>
@@ -313,6 +423,18 @@ There is an [alternative workflow by Vítor Galvão](https://alfred.app/workflow
 			<real>330</real>
 			<key>ypos</key>
 			<real>175</real>
+		</dict>
+		<key>5F97F23A-88E5-4989-99F1-924AF2DACF3E</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
+			<key>note</key>
+			<string>DOUBLE CLICK THIS
+to set hotkey for quick card lookup</string>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>545</real>
 		</dict>
 		<key>7E4A42EE-5667-4DDF-AB03-35310ED40D63</key>
 		<dict>
@@ -349,6 +471,15 @@ There is an [alternative workflow by Vítor Galvão](https://alfred.app/workflow
 			<real>50</real>
 			<key>ypos</key>
 			<real>185</real>
+		</dict>
+		<key>C76BA2C6-B4C1-4F40-9545-E63E0263FD3C</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
+			<key>xpos</key>
+			<real>225</real>
+			<key>ypos</key>
+			<real>545</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
