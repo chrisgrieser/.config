@@ -110,7 +110,7 @@ end
 --------------------------------------------------------------------------------
 
 function M.openCwdInTerminal()
-	assert(jit.os == "OSX", "requires macOS' `open`")
+	assert(jit.os == "OSX", "This command requires macOS' `open` cli")
 	local cdCommand = (" cd -q %q && clear"):format(vim.uv.cwd() or "")
 	local script = ([=[
 		open -a "WezTerm" # focus/launch
@@ -291,18 +291,6 @@ function M.sumOfAllNumbersInBuf()
 	end
 	vim.notify(sum, nil, { title = "Sum", icon = "∑" })
 	vim.fn.setreg("+", sum)
-end
-
-function M.inspectNodeAncestors()
-	local node = vim.treesitter.get_node()
-	if not node then return vim.notify("No node under cursor.", vim.log.levels.WARN) end
-	local ancestors = {}
-	while node do
-		table.insert(ancestors, 1, node:type())
-		node = node:parent()
-	end
-	local out = "↑ " .. table.concat(ancestors, "\n| ")
-	vim.notify(out, nil, { title = "Node ancestors", icon = "", timeout = false })
 end
 
 --------------------------------------------------------------------------------

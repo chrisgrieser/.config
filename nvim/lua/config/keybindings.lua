@@ -24,6 +24,12 @@ Keymap {
 	desc = "󰝰 Local data dir",
 }
 
+Keymap {
+	"<leader>pd",
+	function() vim.ui.open(vim.fn.stdpath("log")) end,
+	desc = "󰝰 Log dir",
+}
+
 ---NAVIGATION-------------------------------------------------------------------
 -- make mappings work on wrapped lines as well
 Keymap { "j", "gj", mode = { "n", "x" } }
