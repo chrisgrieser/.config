@@ -14,9 +14,9 @@
 	<string>Chris Grieser</string>
 	<key>defaultReadme</key>
 	<string>## Usage
-Get PLACEHOLDER the `KEYWORD` keyword.
+Search PLACEHOLDER with the `KEYWORD` keyword.
 - &lt;kbd&gt;⏎&lt;/kbd&gt; open the page in the browser.
-- &lt;kbd&gt;⌥⏎&lt;/kbd&gt; copy the page URL.
+- &lt;kbd&gt;⌥&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt; copy the page URL.
 
 ---
 

@@ -26,7 +26,7 @@
       "src": "https://github.com/mason-org/mason.nvim"
     },
     "mini.icons": {
-      "rev": "7fdae2443a0e2910015ca39ad74b50524ee682d3",
+      "rev": "bac6317300e205335df425296570d84322730067",
       "src": "https://github.com/nvim-mini/mini.icons"
     },
     "mini.operators": {
@@ -42,7 +42,7 @@
       "src": "https://github.com/EdenEast/nightfox.nvim"
     },
     "nvim-chainsaw": {
-      "rev": "b7b742c7e7021a72dd44865875592012b948e51f",
+      "rev": "7a19a42ec97ca4ee2c280d6d2c8ae51c482953b7",
       "src": "https://github.com/chrisgrieser/nvim-chainsaw"
     },
     "nvim-genghis": {
@@ -74,11 +74,11 @@
       "src": "https://github.com/chrisgrieser/nvim-rulebook"
     },
     "nvim-scissors": {
-      "rev": "52055050445b46088a695856b6e0ba359dc0e009",
+      "rev": "9cc1ba06afa8b23b0d30cadc02c40940df1d701e",
       "src": "https://github.com/chrisgrieser/nvim-scissors"
     },
     "nvim-spider": {
-      "rev": "af2f73ffd62e61a091b3503845b7704d76d81d95",
+      "rev": "4fdd56a4f45bca13a607632e15a6f9f8d1b1f99e",
       "src": "https://github.com/chrisgrieser/nvim-spider"
     },
     "nvim-surround": {
@@ -98,7 +98,7 @@
       "src": "https://github.com/nvim-treesitter/nvim-treesitter-textobjects"
     },
     "nvim-various-textobjs": {
-      "rev": "e049b24fc2042a424843a8db79af5ceb273be6f6",
+      "rev": "ad78e9d925c95d675b32dd7ba6d253f96ce063fe",
       "src": "https://github.com/chrisgrieser/nvim-various-textobjs"
     },
     "plenary.nvim": {
