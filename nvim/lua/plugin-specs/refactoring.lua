@@ -1,4 +1,5 @@
 vim.pack.add {
+	-- WARN plenary.nvim is deprecated https://github.com/ThePrimeagen/refactoring.nvim/issues/518
 	"https://github.com/nvim-lua/plenary.nvim",
 	"https://github.com/nvim-treesitter/nvim-treesitter",
 	"https://github.com/ThePrimeagen/refactoring.nvim",
