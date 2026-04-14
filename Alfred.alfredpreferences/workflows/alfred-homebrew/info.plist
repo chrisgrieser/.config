@@ -787,7 +787,7 @@ and the Mac App Store.
 				<key>default</key>
 				<string>bi</string>
 				<key>placeholder</key>
-				<string>bu</string>
+				<string>bi</string>
 				<key>required</key>
 				<true/>
 				<key>trim</key>

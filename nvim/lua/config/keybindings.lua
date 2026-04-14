@@ -590,9 +590,9 @@ do
 
 	vim.fn.setreg(reg, "") -- clear on startup to avoid accidents
 	-- stylua: ignore
-	Keymap{toggleKey, function() require("personal-plugins.misc").startOrStopRecording(toggleKey, reg) end,  desc = "󰃽 Start/stop recording" }
+	Keymap{toggleKey, function() require("personal-plugins.misc").startOrStopRecording(toggleKey, reg) end, desc = "󰃽 Start/stop recording" }
 	-- stylua: ignore
-	Keymap{"9", function() require("personal-plugins.misc").playRecording(reg) end,  desc = "󰃽 Play recording" }
+	Keymap{"9", function() require("personal-plugins.misc").playRecording(reg) end, desc = "󰃽 Play recording" }
 end
 
 ---REFACTORING------------------------------------------------------------------
