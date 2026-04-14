@@ -42,7 +42,7 @@ function run(argv) {
 
 	let localCardImagePaths = "";
 	ensureCacheFolderExists();
-	for (let i = 0; i < 2; i++) {
+	for (let i = 0; i < cardSides.length; i++) {
 		const side = cardSides[i];
 		const imageUrl = side.image_uris?.png;
 		if (!imageUrl) return "No image found for the card.";
