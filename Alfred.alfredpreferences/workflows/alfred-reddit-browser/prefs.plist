@@ -17,6 +17,7 @@
 	<key>subreddits</key>
 	<string>neovim
 macapps
-anime</string>
+anime
+magicTCG</string>
 </dict>
 </plist>
