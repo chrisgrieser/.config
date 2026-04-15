@@ -437,7 +437,7 @@ open -g "hammerspoon://sync-repos"</string>
 		<key>8FA06A4E-E3FC-48E3-B626-7CF713B1D091</key>
 		<dict>
 			<key>xpos</key>
-			<real>195</real>
+			<real>190</real>
 			<key>ypos</key>
 			<real>35</real>
 		</dict>
