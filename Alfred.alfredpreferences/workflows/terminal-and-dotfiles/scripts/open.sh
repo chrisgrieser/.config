@@ -2,7 +2,7 @@
 
 # open "$1"
 
-# PENDING https://github.com/neovide/neovide/issues/3444#issuecomment-4188793273
+# PENDING https://github.com/neovide/neovide/issues/3482
 if ! pgrep -xq "neovide"; then
 	open -a "Neovide"
 	while ! pgrep -xq "neovide"; do sleep 0.1; done
