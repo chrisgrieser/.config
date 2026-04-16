@@ -122,11 +122,11 @@ vim.api.nvim_create_autocmd("FileType", {
 	desc = "User: Conceal noise in nvim-pack window",
 	pattern = "nvim-pack",
 	callback = function(ctx)
-		vim.opt_local.foldmethod = "manual"
+		vim.opt_local.wrap = true
 
+		vim.opt_local.foldmethod = "manual"
 		local lines = vim.api.nvim_buf_get_lines(ctx.buf, 0, -1, false)
 		local foldlength = 6 -- 6 for `# Updates`, 3 for `# Same`
-
 		for lnum = 1, #lines do
 			if vim.startswith(lines[lnum], "## ") then
 				vim.cmd.fold { range = { lnum, lnum + foldlength } } -- fold repo details
