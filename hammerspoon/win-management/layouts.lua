@@ -4,6 +4,7 @@ local darkmode = require("appearance.dark-mode")
 local env = require("meta.environment")
 local holeCover = require("appearance.hole-cover")
 local u = require("meta.utils")
+local wu = require("win-management.window-utils")
 
 ---HELPERS----------------------------------------------------------------------
 
@@ -35,7 +36,10 @@ local function workLayout(shouldDarkenDisplay)
 
 	-- open things
 	u.openApps { "Ivory", isWorkWeek() and "Slack" or nil, "Gmail", "AlfredExtraPane", "Stats" }
-	u.defer(1, function() u.app("Gmail"):activate() end) -- activate Gmail last
+	u.defer(1, function()
+		wu.moveResize(u.app("Ivory"):mainWindow(), wu.toTheSide)
+		u.app("Gmail"):activate() -- activate Gmail last
+	end)
 
 	print("🔲 Layout: work")
 end
