@@ -1,5 +1,9 @@
 {
   "plugins": {
+    "async.nvim": {
+      "rev": "7a1d7d49933fbe902b84b55f352a3b10fd587331",
+      "src": "https://github.com/lewis6991/async.nvim"
+    },
     "blink-cmp-git": {
       "rev": "10783593af764424018a95e75df6ad5a8b66fe07",
       "src": "https://github.com/Kaiser-Yang/blink-cmp-git"
@@ -101,13 +105,9 @@
       "rev": "ad78e9d925c95d675b32dd7ba6d253f96ce063fe",
       "src": "https://github.com/chrisgrieser/nvim-various-textobjs"
     },
-    "plenary.nvim": {
-      "rev": "74b06c6c75e4eeb3108ec01852001636d85a932b",
-      "src": "https://github.com/nvim-lua/plenary.nvim"
-    },
     "refactoring.nvim": {
       "rev": "f06ac3d457128f9d512103399b367c4be49a2421",
-      "src": "https://github.com/ThePrimeagen/refactoring.nvim"
+      "src": "https://github.com/theprimeagen/refactoring.nvim"
     },
     "render-markdown.nvim": {
       "rev": "d67113f11384c0dad96fced2f7b91f1fc811e97f",
