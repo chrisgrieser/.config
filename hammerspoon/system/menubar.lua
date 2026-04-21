@@ -31,7 +31,11 @@ local function updateReminderCount()
 			if count == 0 then
 				M.reminderCount:removeFromMenuBar()
 			else
-				M.reminderCount:returnToMenuBar():setTitle(config.reminderIcon .. count) ---@diagnostic disable-line: undefined-field
+				M
+					.reminderCount
+					:returnToMenuBar()
+					:setTitle(config.reminderIcon .. count) ---@diagnostic disable-line: undefined-field
+					:setClickCallback(function() hs.application.open("Reminders") end)
 			end
 		end)
 		:start()
@@ -61,7 +65,13 @@ local function updateGithubNotifCount()
 			if count == 0 then
 				M.githubNotifCount:removeFromMenuBar()
 			else
-				M.githubNotifCount:returnToMenuBar():setTitle(config.githubNotifIcon .. count) ---@diagnostic disable-line: undefined-field
+				M
+					.githubNotifCount
+					:returnToMenuBar()
+					:setTitle(config.githubNotifIcon .. count) ---@diagnostic disable-line: undefined-field
+					:setClickCallback(
+						function() hs.urlevent.openURL("https://github.com/notifications") end
+					)
 			end
 		end)
 		:start()
@@ -69,12 +79,12 @@ end
 
 --------------------------------------------------------------------------------
 
-M.winsToProjectorButton =
-	newMenubar(false, "winsToProjectorButton") --[[@as hs.menubar]]
+M.winsToProjectorButton = newMenubar(false, "winsToProjectorButton") --[[@as hs.menubar]]
 
 local function updateWinsToProjectorButton()
 	if #hs.screen.allScreens() == 2 then
-		M.winsToProjectorButton
+		M
+			.winsToProjectorButton
 			:returnToMenuBar()
 			:setTitle(config.winToProjectorIcon) ---@diagnostic disable-line: undefined-field
 			:setClickCallback(function()
@@ -95,6 +105,7 @@ end
 
 -- 0. initialize
 updateReminderCount()
+if u.isSystemStart() then u.defer(4, updateReminderCount) end -- wait for sync
 updateGithubNotifCount()
 updateWinsToProjectorButton()
 
