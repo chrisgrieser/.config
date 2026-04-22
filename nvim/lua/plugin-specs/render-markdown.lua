@@ -94,6 +94,8 @@ require("render-markdown").setup {
 			doi = { pattern = "doi%.org", icon = "󰑴 " },
 			mastodon = { pattern = "%.social/@", icon = " " },
 			researchgate = { pattern = "researchgate%.net", icon = "󰙨 " },
+			discord = { pattern = "discord%.gg", icon = "" },
+			facebook = { pattern = "facebook%.com", icon = "󰈌" },
 			my_website = { pattern = "chris%-grieser.de", icon = " " },
 		},
 	},

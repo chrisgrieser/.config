@@ -37,7 +37,7 @@ LESS+=" --tilde"                                              # blank lines inst
 export LESS
 
 # don't clutter home dir (not disabling it, since `delta` needs it for `n` navigation)
-export LESSHISTFILE="$HOME/.cache/less_history"
+export LESSHISTFILE="$HOME/.cache/less/history"
 
 #───────────────────────────────────────────────────────────────────────────────
 
