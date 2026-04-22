@@ -55,6 +55,8 @@ export FZF_DEFAULT_OPTS='
 
 # https://cli.github.com/manual/gh_help_environment
 export GH_NO_UPDATE_NOTIFIER=1 # updates managed via homebrew
+export GH_TELEMETRY=false
+export DO_NOT_TRACK=true
 
 #───────────────────────────────────────────────────────────────────────────────
 # NPM & NODE
