@@ -1,11 +1,11 @@
 {
 	"name": "Vimium C",
-	"@time": "3/9/2026, 5:42:06 PM",
-	"time": 1773074526087,
+	"@time": "4/25/2026, 10:44:45 PM",
+	"time": 1777149885791,
 	"environment": {
 		"extension": "2.12.2",
 		"platform": "mac",
-		"chromium": 145
+		"chromium": 147
 	},
 	"allBrowserUrls": true,
 	"exclusionListenHash": false,
@@ -15,7 +15,7 @@
 			"pattern": "^https:\\/\\/www\\.google(.(?!udm=2))*$"
 		},
 		{
-			"passKeys": "0 N f ",
+			"passKeys": "0 N f s ",
 			"pattern": "^https://.*.crunchyroll.com"
 		},
 		{
