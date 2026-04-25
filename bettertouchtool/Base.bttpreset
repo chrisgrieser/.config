@@ -188,7 +188,7 @@
     },
     "BSTSnapAreaDefaultPictoDistanceFromBottom" : 0.10000000149011612
   },
-  "BTTPresetUUID" : "6C119B59-9284-4724-91B1-94C5B88BB0ED",
+  "BTTPresetUUID" : "5318252F-CF24-4102-A68A-C2FE15F7B98F",
   "BTTPresetContent" : [
     {
       "BTTAppBundleIdentifier" : "com.colliderli.iina",
@@ -284,27 +284,44 @@
       "BTTAppProcessName" : "Crunchyroll - Watch Popular Anime",
       "BTTTriggers" : [
         {
-          "BTTLastUpdatedAt" : 1777143401.4922481,
-          "BTTTriggerType" : 100,
-          "BTTTriggerTypeDescriptionReadOnly" : "3 Finger Swipe Left",
-          "BTTTriggerTypeDescription" : "⏮️ start of video",
+          "BTTLastUpdatedAt" : 1777143401.499063,
+          "BTTTriggerType" : 103,
+          "BTTTriggerTypeDescriptionReadOnly" : "3 Finger Swipe Down",
+          "BTTTriggerTypeDescription" : "🔊 volume down (added HUD)",
           "BTTTriggerClass" : "BTTTriggerTypeTouchpadAll",
-          "BTTUUID" : "BE7F5F03-8AA1-4377-AF45-38DF17CAB3B1",
-          "BTTOrder" : 4,
+          "BTTUUID" : "17475DA4-58AC-4C56-8415-E9EEAFD88E7B",
+          "BTTAutoAdaptActionToKeyboardLayout" : true,
+          "BTTGenericActionConfig" : "autoAdapt",
+          "BTTShortcutToSend" : "125",
+          "BTTRepeatRate" : 0.45439633727073669,
+          "BTTRepeatDelay" : 0.45766967535018921,
+          "BTTOrder" : 6,
           "BTTActionsToExecute" : [
             {
-              "BTTLastUpdatedAt" : 1777143401.492775,
-              "BTTTriggerParentUUID" : "BE7F5F03-8AA1-4377-AF45-38DF17CAB3B1",
-              "BTTIsPureAction" : true,
-              "BTTUUID" : "0D4A698B-B4F1-4B8D-8AB0-0D98C11A0DA2",
-              "BTTLayoutIndependentActionChar" : "0",
-              "BTTShortcutToSend" : "29",
-              "BTTOrder" : 2
+              "BTTLastUpdatedAt" : 1777143401.499711,
+              "BTTTriggerType" : 182,
+              "BTTTriggerTypeDescriptionReadOnly" : "Corner Click Top Left",
+              "BTTTriggerTypeDescription" : "Volume Up",
+              "BTTTriggerParentUUID" : "17475DA4-58AC-4C56-8415-E9EEAFD88E7B",
+              "BTTTriggerClass" : "BTTTriggerTypeMagicMouse",
+              "BTTUUID" : "0AC35D74-2651-4074-A062-5CC7E8710CFE",
+              "BTTAutoAdaptActionToKeyboardLayout" : true,
+              "BTTGenericActionConfig" : "autoAdapt",
+              "BTTShortcutToSend" : "125",
+              "BTTRepeatRate" : 0.45439633727073669,
+              "BTTOrder" : 0,
+              "BTTGestureNotes" : "Volume Up"
             }
           ],
-          "BTTGestureNotes" : "⏮️ start of video",
+          "BTTGestureNotes" : "🔊 volume down (added HUD)",
+          "BTTTriggerConfig" : {
+            "BTTNoTouchTimeout" : 0,
+            "BTTHUDText" : "⬇️",
+            "BTTShowHUD" : 1
+          },
           "BTTTriggerCheatSheetConfig" : {
-            "BTTCheatSheetActionLabel" : "⏮️ start of video"
+            "BTTCheatSheetActionLabel" : "🔊 volume down",
+            "BTTCheatSheetExclude" : 0
           }
         },
         {
@@ -332,7 +349,7 @@
           }
         },
         {
-          "BTTLastUpdatedAt" : 1777143401.487031,
+          "BTTLastUpdatedAt" : 1777144286.5107021,
           "BTTTriggerType" : 167,
           "BTTTriggerTypeDescriptionReadOnly" : "2 Finger Swipe From Top Edge",
           "BTTTriggerTypeDescription" : "📙 skip intro",
@@ -341,23 +358,16 @@
           "BTTOrder" : 1,
           "BTTActionsToExecute" : [
             {
-              "BTTLastUpdatedAt" : 1777143401.48895,
+              "BTTLastUpdatedAt" : 1777144280.8666902,
               "BTTTriggerParentUUID" : "4C8FA825-A02C-4C99-A512-52D960B8D2D1",
               "BTTIsPureAction" : true,
-              "BTTUUID" : "8F229EDF-7E1C-4810-B4F6-D9BD4727C039",
-              "BTTPredefinedActionType" : 426,
-              "BTTPredefinedActionName" : "Find or Search Text on Screen & Move Mouse",
-              "BTTGenericActionConfig2" : "{\"BTTFindImageSearchRegion\":8,\"BTTFindTextSearchDirection\":1,\"BTTActionWaitForConditionsInterval\":1,\"BTTActionWaitForConditionsTimeout\":10,\"BTTFindTextMatchMode\":1,\"BTTFindTextContinueActionExecution\":0,\"BTTFindText\":\"SKIP INTRO\",\"BTTFindTextRequiredOccurences\":0,\"BTTFindTextMoveMouseTo\":2,\"BTTFindTextSearchOn\":2}",
+              "BTTUUID" : "9EA16559-41B8-42EA-BFCE-7BA6414488AC",
+              "BTTLayoutIndependentActionChar" : "s",
+              "BTTAdditionalActionData" : {
+
+              },
+              "BTTShortcutToSend" : "1",
               "BTTOrder" : 1
-            },
-            {
-              "BTTLastUpdatedAt" : 1777143401.489924,
-              "BTTTriggerParentUUID" : "4C8FA825-A02C-4C99-A512-52D960B8D2D1",
-              "BTTIsPureAction" : true,
-              "BTTUUID" : "D599EC1E-7E73-4EFA-AF7E-B79C43FCA583",
-              "BTTPredefinedActionType" : 421,
-              "BTTPredefinedActionName" : "Left Click - Without Modifier Keys",
-              "BTTOrder" : 2
             }
           ],
           "BTTGestureNotes" : "📙 skip intro",
@@ -407,44 +417,27 @@
           }
         },
         {
-          "BTTLastUpdatedAt" : 1777143401.499063,
-          "BTTTriggerType" : 103,
-          "BTTTriggerTypeDescriptionReadOnly" : "3 Finger Swipe Down",
-          "BTTTriggerTypeDescription" : "🔊 volume down (added HUD)",
+          "BTTLastUpdatedAt" : 1777144505.3482308,
+          "BTTTriggerType" : 100,
+          "BTTTriggerTypeDescriptionReadOnly" : "3 Finger Swipe Left",
+          "BTTTriggerTypeDescription" : "⏮️ previous video (needs Improve Crunchyroll extension)",
           "BTTTriggerClass" : "BTTTriggerTypeTouchpadAll",
-          "BTTUUID" : "17475DA4-58AC-4C56-8415-E9EEAFD88E7B",
-          "BTTAutoAdaptActionToKeyboardLayout" : true,
-          "BTTGenericActionConfig" : "autoAdapt",
-          "BTTShortcutToSend" : "125",
-          "BTTRepeatRate" : 0.45439633727073669,
-          "BTTRepeatDelay" : 0.45766967535018921,
-          "BTTOrder" : 6,
+          "BTTUUID" : "BE7F5F03-8AA1-4377-AF45-38DF17CAB3B1",
+          "BTTOrder" : 4,
           "BTTActionsToExecute" : [
             {
-              "BTTLastUpdatedAt" : 1777143401.499711,
-              "BTTTriggerType" : 182,
-              "BTTTriggerTypeDescriptionReadOnly" : "Corner Click Top Left",
-              "BTTTriggerTypeDescription" : "Volume Up",
-              "BTTTriggerParentUUID" : "17475DA4-58AC-4C56-8415-E9EEAFD88E7B",
-              "BTTTriggerClass" : "BTTTriggerTypeMagicMouse",
-              "BTTUUID" : "0AC35D74-2651-4074-A062-5CC7E8710CFE",
-              "BTTAutoAdaptActionToKeyboardLayout" : true,
-              "BTTGenericActionConfig" : "autoAdapt",
-              "BTTShortcutToSend" : "125",
-              "BTTRepeatRate" : 0.45439633727073669,
-              "BTTOrder" : 0,
-              "BTTGestureNotes" : "Volume Up"
+              "BTTLastUpdatedAt" : 1777143401.492775,
+              "BTTTriggerParentUUID" : "BE7F5F03-8AA1-4377-AF45-38DF17CAB3B1",
+              "BTTIsPureAction" : true,
+              "BTTUUID" : "0D4A698B-B4F1-4B8D-8AB0-0D98C11A0DA2",
+              "BTTLayoutIndependentActionChar" : "0",
+              "BTTShortcutToSend" : "29",
+              "BTTOrder" : 2
             }
           ],
-          "BTTGestureNotes" : "🔊 volume down (added HUD)",
-          "BTTTriggerConfig" : {
-            "BTTNoTouchTimeout" : 0,
-            "BTTHUDText" : "⬇️",
-            "BTTShowHUD" : 1
-          },
+          "BTTGestureNotes" : "⏮️ previous video (needs Improve Crunchyroll extension)",
           "BTTTriggerCheatSheetConfig" : {
-            "BTTCheatSheetActionLabel" : "🔊 volume down",
-            "BTTCheatSheetExclude" : 0
+            "BTTCheatSheetActionLabel" : "⏮️ previous video"
           }
         }
       ]
