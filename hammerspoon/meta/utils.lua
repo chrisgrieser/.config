@@ -13,11 +13,10 @@ M.videoAndAudioApps = {
 	"zoom.us",
 	"IINA",
 	"FaceTime",
-	-- PENDING https://github.com/brave/brave-browser/issues/53803
-	-- "Netflix",
-	-- "YouTube",
-	-- "Crunchyroll",
-	-- "Prime Video",
+	"Netflix",
+	"YouTube",
+	"Crunchyroll",
+	"Prime Video",
 }
 
 ---UTILS------------------------------------------------------------------------
