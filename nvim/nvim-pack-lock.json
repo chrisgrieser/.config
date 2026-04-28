@@ -22,7 +22,7 @@
       "src": "https://github.com/lewis6991/gitsigns.nvim"
     },
     "lualine.nvim": {
-      "rev": "a905eeebc4e63fdc48b5135d3bf8aea5618fb21c",
+      "rev": "131a558e13f9f28b15cd235557150ccb23f89286",
       "src": "https://github.com/nvim-lualine/lualine.nvim"
     },
     "mason.nvim": {
@@ -38,7 +38,7 @@
       "src": "https://github.com/nvim-mini/mini.operators"
     },
     "neocodeium": {
-      "rev": "248423483a34eb2949347b89b7697baf5d9dbe88",
+      "rev": "b176a109e37298d9489860b94badbfb2e4677ac2",
       "src": "https://github.com/monkoose/neocodeium"
     },
     "nightfox.nvim": {
@@ -62,7 +62,7 @@
       "src": "https://github.com/chrisgrieser/nvim-lsp-endhints"
     },
     "nvim-lspconfig": {
-      "rev": "eeef061d58d759b5419c1e20c4b3a5bc3154f871",
+      "rev": "bf5abe69c1874531f359a822d0cff4d73e26113f",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-origami": {
@@ -106,7 +106,7 @@
       "src": "https://github.com/chrisgrieser/nvim-various-textobjs"
     },
     "refactoring.nvim": {
-      "rev": "f06ac3d457128f9d512103399b367c4be49a2421",
+      "rev": "c12b0e17e9d2ac67f9f4c4e7636d78798a70463f",
       "src": "https://github.com/theprimeagen/refactoring.nvim"
     },
     "render-markdown.nvim": {
