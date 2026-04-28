@@ -58,7 +58,7 @@ M.timer_finesseBistro = timerAt("12:00", "01d", function()
 	end
 end):start()
 
----NIGHTLY MAINTENANCE----------------------------------------------------------
+-- MAINTENANCE------------------------------------------------------------------
 do
 	local cronjobDir = "./system/cronjobs" -- CONFIG
 
