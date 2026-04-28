@@ -30,7 +30,7 @@ app.includeStandardAdditions = true;
 /** @type {Record<string, string>} */
 const manaEmojiMap = {
 	"{U}": "🔵",
-	"{W}": "🟡", // yellow works on white background and is still associated with white mane
+	"{W}": "🟡", // yellow works on white background and is still associated with white mana
 	"{B}": "⚫",
 	"{R}": "🔴",
 	"{G}": "🟢",
