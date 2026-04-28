@@ -106,7 +106,7 @@
       "src": "https://github.com/chrisgrieser/nvim-various-textobjs"
     },
     "refactoring.nvim": {
-      "rev": "c12b0e17e9d2ac67f9f4c4e7636d78798a70463f",
+      "rev": "bcd819d06d88fa78e14f49a40f91c849bdf866bf",
       "src": "https://github.com/theprimeagen/refactoring.nvim"
     },
     "render-markdown.nvim": {
