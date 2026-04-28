@@ -9,10 +9,10 @@ app.includeStandardAdditions = true;
  * @property {string} name
  * @property {string} scryfall_uri
  * @property {string} released_at iso 8601 date
- * @property {string} mana_cost
+ * @property {string} mana_cost e.g. {2}{W}
  * @property {string} type_line instant, sorcery, etc
  * @property {string} oracle_text the card body
- * @property {string} set abbreviation
+ * @property {string} set abbreviated
  * @property {string} set_name full name
  * @property {"common"|"uncommon"|"rare"|"mythic"} rarity
  * @property {("U"|"W"|"B"|"R"|"G")[]?} colors
@@ -129,7 +129,7 @@ function run(argv) {
 		const onlyOnlineIcon = onlyOnline ? "🌐" : "";
 		const legality =
 			illegalityFormat === "none" || card.legalities[illegalityFormat] === "legal" ? "" : "⛔";
-		const gameChanger = card.gamechanger ? "⭐" : "";
+		const gameChanger = card.gamechanger ? "❗" : "";
 		const flipIcon = card.card_faces ? "🔄" : "";
 
 		const subtitle = [manaCost, type, displayPrice, `${rarity} ${set} (${yearOfRelease})`]
