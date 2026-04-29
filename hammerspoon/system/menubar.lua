@@ -6,7 +6,7 @@ local aw = hs.application.watcher
 ---CONFIG-----------------------------------------------------------------------
 local config = {
 	reminderIcon = "✔ ",
-	githubNotifIcon = "⦿ ", -- ⦿◉●○
+	githubNotifIcon = "● ", -- ⦿◉●○
 	winToProjectorIcon = "Ⱅ ",
 }
 
