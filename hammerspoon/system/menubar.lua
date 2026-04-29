@@ -1,8 +1,6 @@
 local M = {}
 
 local u = require("meta.utils")
-local newMenubar = hs.menubar.new
-local timerEverySecs = hs.timer.doEvery
 local aw = hs.application.watcher
 
 ---CONFIG-----------------------------------------------------------------------
@@ -13,7 +11,7 @@ local config = {
 }
 
 ---REMINDER COUNT---------------------------------------------------------------
-M.reminderCount = newMenubar(false, "reminderCount") --[[@as hs.menubar]]
+M.reminderCount = hs.menubar.new(false, "reminderCount") --[[@as hs.menubar]]
 
 local function updateReminderCount()
 	if #hs.screen.allScreens() == 2 then
@@ -43,7 +41,7 @@ end
 
 --------------------------------------------------------------------------------
 
-M.githubNotifCount = newMenubar(false, "githubNotifCount") --[[@as hs.menubar]]
+M.githubNotifCount = hs.menubar.new(false, "githubNotifCount") --[[@as hs.menubar]]
 
 local function updateGithubNotifCount()
 	if #hs.screen.allScreens() == 2 then
@@ -79,7 +77,7 @@ end
 
 --------------------------------------------------------------------------------
 
-M.winsToProjectorButton = newMenubar(false, "winsToProjectorButton") --[[@as hs.menubar]]
+M.winsToProjectorButton = hs.menubar.new(false, "winsToProjectorButton") --[[@as hs.menubar]]
 
 local function updateWinsToProjectorButton()
 	if #hs.screen.allScreens() == 2 then
@@ -105,15 +103,17 @@ end
 
 -- 0. initialize
 updateReminderCount()
-if u.isSystemStart() then u.defer({3, 10}, updateReminderCount) end -- wait for sync
+if u.isSystemStart() then u.defer({ 3, 10 }, updateReminderCount) end -- wait for sync
 updateGithubNotifCount()
 updateWinsToProjectorButton()
 
 -- 1. timer
-M.timer = timerEverySecs(360, function()
-	updateReminderCount()
-	updateGithubNotifCount()
-end):start()
+M.timer = hs.timer
+	.doEvery(360, function()
+		updateReminderCount()
+		updateGithubNotifCount()
+	end)
+	:start()
 
 -- 2. app watcher
 M.appWatcher = aw.new(function(appName, event, _appObj)
@@ -127,7 +127,7 @@ end):start()
 hs.urlevent.bind("menubar-reminders-update", updateReminderCount)
 hs.urlevent.bind("menubar-github-notifications-update", updateGithubNotifCount)
 
--- 4. screen count
+-- 4. screen count change
 M.displayCountWatcher = hs.screen.watcher
 	.new(function()
 		updateReminderCount()
