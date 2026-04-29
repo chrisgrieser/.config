@@ -8,7 +8,7 @@ local aw = hs.application.watcher
 ---CONFIG-----------------------------------------------------------------------
 local config = {
 	reminderIcon = "✔ ",
-	githubNotifIcon = "⏺ ",
+	githubNotifIcon = "◉ ",
 	winToProjectorIcon = "Ⱅ ",
 }
 
@@ -105,7 +105,7 @@ end
 
 -- 0. initialize
 updateReminderCount()
-if u.isSystemStart() then u.defer(4, updateReminderCount) end -- wait for sync
+if u.isSystemStart() then u.defer({3, 10}, updateReminderCount) end -- wait for sync
 updateGithubNotifCount()
 updateWinsToProjectorButton()
 
@@ -117,9 +117,10 @@ end):start()
 
 -- 2. app watcher
 M.appWatcher = aw.new(function(appName, event, _appObj)
-	if not (event == aw.terminated or event == aw.deactivated) then return end
-	if appName == "Reminders" or appName == "Calendar" then updateReminderCount() end
-	if appName == "Brave Browser" then updateGithubNotifCount() end
+	if event == aw.terminated or event == aw.deactivated then
+		if appName == "Reminders" or appName == "Calendar" then updateReminderCount() end
+		if appName == "Brave Browser" then updateGithubNotifCount() end
+	end
 end):start()
 
 -- 3. URI (used by Alfred workflows)

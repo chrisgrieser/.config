@@ -11,7 +11,7 @@ local timerEverySecs = hs.timer.doEvery
 if u.isSystemStart() then
 	print("📅 Syncing Reminders")
 	hs.execute("open -g -a Reminders") -- `-g` to open in background
-	u.defer(8, function() u.quitApps("Reminders") end)
+	u.defer({5, 15}, function() u.quitApps("Reminders") end)
 end
 
 ---TURN OFF DISPLAY IF----------------------------------------------------------
