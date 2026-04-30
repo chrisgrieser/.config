@@ -40,7 +40,7 @@ M.aw_pdfreaders = aw.new(function(appName, event, app)
 		app:selectMenuItem { "Tools", "Color", "Yellow" }
 		app:selectMenuItem { "View", "Thumbnails" }
 	elseif event == aw.launched and appName == "Preview" then
-		local isPdf = app:mainWindow():title():find("%.pdf")
+		local isPdf = app:mainWindow() and app:mainWindow():title():find("%.pdf")
 		if isPdf then app:selectMenuItem { "View", "Thumbnails" } end
 	end
 end):start()

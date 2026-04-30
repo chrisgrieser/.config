@@ -60,7 +60,7 @@ local function updateGithubNotifCount()
 				return
 			end
 			local count = tonumber(stdout)
-			if count == 0 then
+			if count == 0 or count == nil then
 				M.githubNotifCount:removeFromMenuBar()
 			else
 				M
