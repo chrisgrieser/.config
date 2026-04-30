@@ -11,7 +11,7 @@ local timerEverySecs = hs.timer.doEvery
 if u.isSystemStart() then
 	print("📅 Syncing Reminders")
 	hs.execute("open -g -a Reminders") -- `-g` to open in background
-	u.defer({5, 15}, function() u.quitApps("Reminders") end)
+	u.defer({ 5, 15 }, function() u.quitApps("Reminders") end)
 end
 
 ---TURN OFF DISPLAY IF----------------------------------------------------------
@@ -93,6 +93,8 @@ do
 	M.timer_biweeklyCronjobs = timerAt("01:00", "01d", function()
 		if os.date("%w") % 3 == 0 then runEveryFileIn(cronjobDir .. "/biweekly") end
 	end, true):start()
+
+	M.RUN = function() runEveryFileIn(cronjobDir .. "/biweekly") end
 end
 
 ---UPTIME CHECK-----------------------------------------------------------------

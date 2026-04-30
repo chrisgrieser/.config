@@ -25,7 +25,7 @@ local function updateReminderCount()
 				u.notify("❌ Could not update reminders count: " .. stderr)
 				return
 			end
-			local count = tonumber(stdout)
+			local count = tonumber(stdout) or "?"
 			if count == 0 then
 				M.reminderCount:removeFromMenuBar()
 			else
@@ -59,8 +59,8 @@ local function updateGithubNotifCount()
 				u.notify("❌ Could not update github notifications count: " .. stderr)
 				return
 			end
-			local count = tonumber(stdout)
-			if count == 0 or count == nil then
+			local count = tonumber(stdout) or "?"
+			if count == 0 then
 				M.githubNotifCount:removeFromMenuBar()
 			else
 				M
