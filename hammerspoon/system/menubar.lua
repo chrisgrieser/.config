@@ -20,7 +20,7 @@ local function updateReminderCount()
 	end
 	if M.updateReminders and M.updateReminders:isRunning() then return end
 	M.updateReminders = hs.task
-		.new("./system/menubar/count-reminders.swift", function(code, stdout, stderr)
+		.new("./system/menubar/count-reminders.sh", function(code, stdout, stderr)
 			if code ~= 0 then
 				u.notify("❌ Could not update reminders count: " .. stderr)
 				return

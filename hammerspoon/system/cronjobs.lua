@@ -65,6 +65,8 @@ do
 	local function runEveryFileIn(dir)
 		for file in hs.fs.dir(dir) do
 			if file == "." or file == ".." then goto continue end -- special UNIX locations
+			local ext = file:match("%.%w+$")
+			if ext ~= ".sh" and ext ~= ".applescript" then goto continue end
 			local jobfile = dir .. "/" .. file
 			if not u.isExecutableFile(jobfile) then
 				print("⚠️ " .. jobfile .. " is not executable.")
@@ -72,10 +74,7 @@ do
 			end
 			local task = hs.task.new
 			M["cronjob_" .. file] = task(jobfile, function(code, stdout, stderr)
-				local output = (stdout .. "\n" .. stderr)
-					:gsub("%s+$", "")
-					:gsub("^✅ ", "") -- remove redundant emojis, since we add emojis here as well
-					:gsub("^❌ ", "")
+				local output = (stdout .. "\n" .. stderr):gsub("%s+$", "")
 				local fileShort = file:gsub("%.%w+$", "")
 				local msg = "🕑 " .. fileShort .. (output ~= "" and ": " .. output or "")
 				if code ~= 0 then return u.notify("❌ " .. msg) end
