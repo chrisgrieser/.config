@@ -89,13 +89,15 @@ require("render-markdown").setup {
 			spiegel = { pattern = "spiegel%.de", icon = "󰬚 " },
 			tagesschau = { pattern = "tagesschau%.de", icon = "󰰥 " },
 
-			-- misc
-			openai = { pattern = "openai%.com", icon = " " },
-			doi = { pattern = "doi%.org", icon = "󰑴 " },
+			-- social media
 			mastodon = { pattern = "%.social/@", icon = " " },
 			researchgate = { pattern = "researchgate%.net", icon = "󰙨 " },
 			discord = { pattern = "discord%.gg", icon = " " },
 			facebook = { pattern = "facebook%.com", icon = "󰈌 " },
+
+			-- misc
+			openai = { pattern = "openai%.com", icon = " " },
+			doi = { pattern = "doi%.org", icon = "󰑴 " },
 			my_website = { pattern = "chris%-grieser.de", icon = " " },
 		},
 	},
