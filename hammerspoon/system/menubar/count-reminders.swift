@@ -1,49 +1,39 @@
-#!/usr/bin/swift
+#!/usr/bin/env swift
 import EventKit
 import Foundation
 
 let eventStore = EKEventStore()
 let semaphore = DispatchSemaphore(value: 0)
-// ─────────────────────────────────────────────────────────────────────────────
 
-// CONFIG
-let listName = "Tasks"
+let listName = "Tasks"  // CONFIG
 
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 
 eventStore.requestFullAccessToReminders { granted, error in
 	if let error = error {
 		print("❌ Error requesting access: \(error.localizedDescription)\n")
-		semaphore.signal()
-		return
+		exit(1)
 	}
 	guard granted else {
 		print("❌ Access to Reminders not granted.\n")
-		semaphore.signal()
-		return
+		exit(1)
 	}
 
-	// Find the calendar (list) by name
-	guard
-		let calendarList = eventStore.calendars(for: .reminder).first(where: { $0.title == listName })
+	guard let list = eventStore.calendars(for: .reminder).first(where: { $0.title == listName })
 	else {
-		print("❌ No calendar found with the name '\(listName)'.\n")
-		semaphore.signal()
-		return
+		print("❌ No list found with the name '\(listName)'.\n")
+		exit(1)
 	}
 
-	// Get all reminders from that calendar
-	let predicate = eventStore.predicateForReminders(in: [calendarList])
-
+	let predicate = eventStore.predicateForReminders(in: [list])
 	eventStore.fetchReminders(matching: predicate) { reminders in
-		guard let reminders = reminders else {
+		guard let allReminders = reminders else {
 			print("❌ Failed to fetch reminders.\n")
-			semaphore.signal()
-			return
+			exit(1)
 		}
 
 		// include open reminders yesterday for reminders carrying over
-		let remindersDueNow = reminders.filter { rem in
+		let remindersDueNow = allReminders.filter { rem in
 			if rem.isCompleted { return false }
 			return (rem.dueDateComponents?.date ?? Date.distantFuture) <= Date.now
 		}
