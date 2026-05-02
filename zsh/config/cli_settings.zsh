@@ -1,6 +1,10 @@
 # shellcheck disable=SC1091
 #───────────────────────────────────────────────────────────────────────────────
 
+export DO_NOT_TRACK=1 # https://donottrack.sh/
+
+#───────────────────────────────────────────────────────────────────────────────
+
 # Affects filetype-coloring in eza, fd, and completion menus
 # DOCS https://github.com/eza-community/eza/blob/main/man/eza_colors.5.md
 # INFO does also accept specific files via glob, e.g. `README.md=4;33`,
