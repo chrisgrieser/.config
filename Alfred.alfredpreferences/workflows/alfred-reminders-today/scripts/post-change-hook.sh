@@ -8,7 +8,6 @@ if [[ -n "$sketchybar_trigger_name" ]]; then
 		echo "Could not update sketchybar component: sketchybar not installed." >&2
 		return 1
 	else
-		sleep 2 # wait for sync
 		sketchybar --trigger "$sketchybar_trigger_name"
 	fi
 fi

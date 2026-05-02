@@ -15,7 +15,7 @@ M.videoAndAudioApps = {
 	"FaceTime",
 	"Netflix",
 	"YouTube",
-	"Crunchyroll",
+	"Crunchyroll - Watch Popular Anime", -- for some reason PWA name stay in this long form
 	"Prime Video",
 }
 
