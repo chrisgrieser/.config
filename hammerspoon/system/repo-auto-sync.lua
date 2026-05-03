@@ -50,7 +50,7 @@ local function syncAllGitRepos(silent)
 	-- GUARD
 	local hasInternetAccess = hs.network.reachability.internet():statusString():find("R") ---@diagnostic disable-line: undefined-field
 	if not hasInternetAccess then
-		u.notify("⛔🛜 No internet connection.")
+		u.notify("⛔🛜 Repo sync: No internet connection.")
 		return
 	end
 	local stillInProgress = repoSyncsInProgress()

@@ -1,7 +1,7 @@
 {
 	"name": "Vimium C",
-	"@time": "4/25/2026, 10:44:45 PM",
-	"time": 1777149885791,
+	"@time": "5/3/2026, 9:11:10 PM",
+	"time": 1777835470246,
 	"environment": {
 		"extension": "2.12.2",
 		"platform": "mac",
@@ -178,7 +178,7 @@
 		"map yg copyCurrentUrl sed=\"s=https://github.com/(.+?/.[^/?]+).*=$1=\" # copy github part of an url https://github.com/gdh1995/vimium-c/wiki/Substitute-URLs-and-text-during-commands",
 		"map ym copyCurrentUrl format=\"[${title}](${url})\" # copy as markdown link",
 		"map yw copyWindowInfo format=\"${url}\" # copy links of all tabs",
-		"map ya copyWindowInfo format=\"${title}\\u0020${url}\" # copy links of all tabs with title",
+		"map ya copyWindowInfo format=\"${title}\" # copy titles of all tabs",
 		""
 	],
 	"regexFindMode": true,
