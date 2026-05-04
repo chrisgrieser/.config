@@ -106,6 +106,15 @@ M.pathw_desktop = pathw(home .. "/Desktop/", function(paths, _)
 			-- parent condition prevents downloads of apps in nested folders to be moved
 			local gameFolder = home .. "/Library/Mobile Documents/com~apple~CloudDocs/Apps/Games/"
 			success, errmsg = os.rename(path, gameFolder .. name)
+
+		---MTG DECKLISTS---------------------------------------------------
+		elseif name:find("%.txt$") then
+			local firstLine = io.lines(path)()
+			if firstLine == "// COMMANDER" then -- manabox export always has this 1st line
+				local basename = name:gsub("%.txt$", "")
+				local destination = home .. ("/Notes/👤 Personal/Games/%s Deck.md"):format(basename)
+				success, errmsg = os.rename(path, destination)
+			end
 		end
 
 		---NOTIFY-----------------------------------------------------------------
