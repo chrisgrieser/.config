@@ -15,7 +15,8 @@ hs.fs.mkdir(backupFolder)
 
 ---AUTO-FILE FROM DESKTOP-------------------------------------------------------
 M.pathw_desktop = pathw(home .. "/Desktop/", function(paths, _)
-	if not u.screenIsUnlocked() then return end -- prevent iCloud sync triggering in standby
+	-- prevent duplicate triggering due to iCloud sync in standby
+	if not u.screenIsUnlocked() then return end
 
 	for _, path in pairs(paths) do
 		local parent, name = path:match("(.+)/(.+)")
