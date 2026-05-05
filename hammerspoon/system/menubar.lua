@@ -109,7 +109,7 @@ updateWinsToProjectorButton()
 
 -- 1. timer
 M.timer = hs.timer
-	.doEvery(360, function()
+	.doEvery(180, function()
 		updateReminderCount()
 		updateGithubNotifCount()
 	end)

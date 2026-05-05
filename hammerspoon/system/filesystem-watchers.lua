@@ -48,6 +48,9 @@ M.pathw_desktop = pathw(home .. "/Desktop/", function(paths, _)
 		elseif name == "Redirector.json" then
 			success, errmsg = os.rename(path, browserConfigs .. name)
 			if success then u.notify("✅ Redirector settings backed up.") end
+			elseif name == "[RedirectWeb] Redirects.redirectweb" then
+				success, errmsg = os.rename(path, backupFolder .. name)
+				if success then u.notify("✅ Redirector settings backed up.") end
 		elseif name == "obsidian-web-clipper-settings.json" then
 			success, errmsg = os.rename(path, browserConfigs .. name)
 			if success then u.notify("✅ Obsidian web clipper settings backed up.") end
@@ -116,6 +119,10 @@ M.pathw_desktop = pathw(home .. "/Desktop/", function(paths, _)
 				local destination = home .. ("/Notes/👤 Personal/Games/%s Deck.md"):format(basename)
 				success, errmsg = os.rename(path, destination)
 			end
+		elseif name == "wants.txt" then
+			local content = u.readFile(path)
+			hs.pasteboard.setContents(content)
+			u.notify("✅ Wantlist copied.")
 		end
 
 		---NOTIFY-----------------------------------------------------------------
