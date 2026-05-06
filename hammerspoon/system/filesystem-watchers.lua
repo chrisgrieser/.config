@@ -122,6 +122,7 @@ M.pathw_desktop = pathw(home .. "/Desktop/", function(paths, _)
 				local content = u.readFile(path)
 				hs.pasteboard.setContents(content)
 				u.notify("✅ Wantlist copied.")
+				hs.urlevent.openURL("https://www.cardmarket.com/en/Magic/Wants/23642383/AddDeckList")
 			end
 		end
 
