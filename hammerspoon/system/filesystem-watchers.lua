@@ -122,7 +122,6 @@ M.pathw_desktop = pathw(home .. "/Desktop/", function(paths, _)
 				local content = u.readFile(path)
 				hs.pasteboard.setContents(content)
 				u.notify("✅ Wantlist copied.")
-				os.remove(path)
 			end
 		end
 
