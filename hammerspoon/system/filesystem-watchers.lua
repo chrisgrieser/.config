@@ -58,6 +58,8 @@ M.pathw_desktop = pathw(home .. "/Desktop/", function(paths, _)
 			success, errmsg = os.rename(path, browserConfigs .. "vimium-c-settings.json")
 			if success then u.notify("✅ Vimium-c settings backed up.") end
 		elseif name:find("Inoreader Feeds.*%.xml") then
+			success, errmsg = os.rename(path, browserConfigs .. "Inoreader Feeds.opml")
+			if success then u.notify("✅ Inoreader feeds backed up.") end
 
 		---APP AND SERVICE BACKUPS------------------------------------------------
 		elseif name == "following_accounts.csv" then
