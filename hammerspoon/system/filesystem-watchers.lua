@@ -27,6 +27,7 @@ M.pathw_desktop = pathw(home .. "/Desktop/", function(paths, _)
 		local exists, msg = pcall(hs.fs.xattr.get, path, "com.apple.quarantine")
 		local isDownloaded = exists and msg ~= nil
 		local success, errmsg
+		if not exists then goto continue end
 
 		---REMOVE ALFREDWORKFLOWS & ICAL------------------------------------------
 		if (ext == "alfredworkflow" or ext == "ics") and isDownloaded then
@@ -125,6 +126,7 @@ M.pathw_desktop = pathw(home .. "/Desktop/", function(paths, _)
 				hs.pasteboard.setContents(content)
 				hs.urlevent.openURL("https://www.cardmarket.com/en/Magic/Wants/23642383/AddDeckList")
 				u.notify("✅ Wantlist copied.")
+				success, errmsg = os.rename(path, path .. "-bkp")
 			end
 		end
 
@@ -132,6 +134,8 @@ M.pathw_desktop = pathw(home .. "/Desktop/", function(paths, _)
 		if success == false then
 			u.notify(("⚠️ Failed to move %q: %s"):format(name, errmsg or ""))
 		end
+
+		::continue::
 	end
 end):start()
 
