@@ -38,7 +38,7 @@
       "src": "https://github.com/nvim-mini/mini.operators"
     },
     "neocodeium": {
-      "rev": "b176a109e37298d9489860b94badbfb2e4677ac2",
+      "rev": "c04e74f4ad09ecb5803f0c5457bb9defa8a0700e",
       "src": "https://github.com/monkoose/neocodeium"
     },
     "nightfox.nvim": {

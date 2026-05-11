@@ -86,7 +86,7 @@ M.pathw_desktop = pathw(home .. "/Desktop/", function(paths, _)
 			local receiptPath = ("%s/Documents/Wohnung/laufende Kosten/Vodafone/%s/"):format(home, year)
 			success, errmsg = hs.fs.mkdir(receiptPath)
 			u.defer(1, function() os.rename(path, receiptPath .. "/" .. name) end) -- delay ensures folder is created
-			u.openUrlInBg(receiptPath)
+			hs.open(receiptPath)
 
 		---BANKING----------------------------------------------------------------
 		elseif name:find("[%d-]_Kontoauszug_.*%.pdf$") or name:find("^Direkt_Depot_.*%.pdf$") then
@@ -97,7 +97,7 @@ M.pathw_desktop = pathw(home .. "/Desktop/", function(paths, _)
 				local bankPath = ("%s/Documents/Finanzen/Vermögen (ING-DiBa)/%s/%s"):format(home, folder, year)
 				success, errmsg = hs.fs.mkdir(bankPath) -- create directory in case of new year
 				u.defer(1, function() os.rename(path, bankPath .. "/" .. name) end) -- delay ensures folder is created
-				u.openUrlInBg(bankPath)
+				hs.open(bankPath)
 			end
 		elseif name:find("^Umsatzanzeige_.*%.csv$") then
 			local bankPath = home .. "/Documents/Finanzen/Vermögen (ING-DiBa)/csv-analysis/Umsatz/"
