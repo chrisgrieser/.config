@@ -126,7 +126,7 @@ M.pathw_desktop = pathw(home .. "/Desktop/", function(paths, _)
 				hs.pasteboard.setContents(content)
 				hs.urlevent.openURL("https://www.cardmarket.com/en/Magic/Wants/23642383/AddDeckList")
 				u.notify("✅ Wantlist copied.")
-				success, errmsg = os.rename(path, path .. "-bkp")
+				success, errmsg = os.rename(path, path .. "-imported")
 			end
 		end
 
