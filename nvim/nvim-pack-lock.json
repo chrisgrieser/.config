@@ -30,11 +30,11 @@
       "src": "https://github.com/mason-org/mason.nvim"
     },
     "mini.icons": {
-      "rev": "bac6317300e205335df425296570d84322730067",
+      "rev": "9c7b1b90b15bdd69c52f6e31889dbc9987c30ec4",
       "src": "https://github.com/nvim-mini/mini.icons"
     },
     "mini.operators": {
-      "rev": "fccb5e3ef0cc319b217ed9c7db1a4672dd6b766c",
+      "rev": "76e7c5b672147956fa188bf8649ce0b1c8ea4a48",
       "src": "https://github.com/nvim-mini/mini.operators"
     },
     "neocodeium": {
