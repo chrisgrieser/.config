@@ -69,6 +69,8 @@ func getShortcut(_ cmd: String?, _ modifiers: Int, _ virtualKey: Int) -> String 
     if let s = shortcut {
         let unicodeValue = s.unicodeScalars[s.unicodeScalars.startIndex].value
         switch unicodeValue {
+        case 0x000d:
+            shortcut = "↩"
         case 0x007f:
             shortcut = "⌦"
         case 0x0008:

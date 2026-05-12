@@ -813,17 +813,17 @@ to set hotkey for quick card lookup</string>
 				</array>
 			</dict>
 			<key>description</key>
-			<string>Display if card is illegal or banned in the selected format. ("None" shows no indicator at all.)</string>
+			<string>Display if card is illegal, banned, or game changer in the selected format. ("None" shows no indicator at all.)</string>
 			<key>label</key>
 			<string>Legality</string>
 			<key>type</key>
 			<string>popupbutton</string>
 			<key>variable</key>
-			<string>illegality_format_1</string>
+			<string>format_legality_1</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.0.1</string>
+	<string>1.0.2</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
