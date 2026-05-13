@@ -282,20 +282,19 @@ function run() {
 				const maxLen = 40;
 				const eventUrl = event.location?.match(urlRegex)?.[0];
 				const icon = eventUrl ? "🌐" : "📍";
-				let locationDisplay = event.location?.replaceAll("\n", " ") || "";
-				if (locationDisplay.length > maxLen) {
-					locationDisplay = locationDisplay.slice(0, maxLen) + "…";
+				let location = event.location?.replaceAll("\n", " ") || "";
+				if (location.length > maxLen) {
+					location = location.slice(0, maxLen) + "…";
 				}
-				let openUrl = eventUrl || "";
-				if (!eventUrl && event.location) {
-					openUrl = mapProvider + encodeURIComponent(event.location);
-				}
+				const locationDisplay = event.location ? `${icon} ${location}` : "";
+				const openUrl =
+					eventUrl || (event.location ? mapProvider + encodeURIComponent(event.location) : "");
 
 				// subtitle
 				const subtitle = [
 					event.hasRecurrenceRules ? "🔁" : "",
 					timeDisplay,
-					event.location ? `${icon} ${locationDisplay}` : "",
+					locationDisplay,
 					event.calendarColor + " " + event.calendar,
 				]
 					.filter(Boolean)
@@ -306,7 +305,21 @@ function run() {
 					title: event.title,
 					subtitle: subtitle,
 					icon: { path: "./calendar.png" },
-					mods: { cmd: invalid, shift: invalid, alt: invalid, fn: invalid, ctrl: invalid },
+					mods: {
+						shift: invalid,
+						alt: invalid,
+						fn: invalid,
+						ctrl: invalid,
+
+						// for events, make `cmd+return` behave same as `return`, so
+						// it mirrors the `cmd+return` behavior for reminders
+						cmd: {
+							subtitle: "⌘: Open " + locationDisplay,
+							arg: openUrl,
+							valid: Boolean(openUrl),
+							variables: { mode: "open-event" },
+						},
+					},
 
 					valid: Boolean(openUrl), // only actionable if there is a location
 					arg: openUrl,
