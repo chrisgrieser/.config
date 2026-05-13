@@ -178,7 +178,7 @@
 			<key>text</key>
 			<string>Obsidian plugins: {query}</string>
 			<key>url</key>
-			<string>https://obsidian.md/plugins?search={query}</string>
+			<string>https://community.obsidian.md/search?q={query}</string>
 		</dict>
 		<key>B0E74EF5-D489-4FA0-9F57-0B056365432B</key>
 		<dict>
