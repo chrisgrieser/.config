@@ -317,7 +317,7 @@ function run() {
 							subtitle: "⌘: Open " + locationDisplay,
 							arg: openUrl,
 							valid: Boolean(openUrl),
-							variables: { mode: "open-event" },
+							variables: { cmdMode: "open-url" },
 						},
 					},
 
