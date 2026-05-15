@@ -73,6 +73,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>609E3B2D-1026-465A-B311-BB0950958E9A</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>7E4A42EE-5667-4DDF-AB03-35310ED40D63</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>7E4A42EE-5667-4DDF-AB03-35310ED40D63</key>
 		<array>
 			<dict>
@@ -95,6 +108,16 @@
 				<integer>524288</integer>
 				<key>modifiersubtext</key>
 				<string>⌥: Copy Scryfall URL</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>609E3B2D-1026-465A-B311-BB0950958E9A</string>
+				<key>modifiers</key>
+				<integer>131072</integer>
+				<key>modifiersubtext</key>
+				<string>⇧: Copy card name in double square brackets</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -228,6 +251,14 @@
 			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
 			<string>28EE6501-5F14-4E44-AD05-B2B2720A4DA0</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.junction</string>
+			<key>uid</key>
+			<string>609E3B2D-1026-465A-B311-BB0950958E9A</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -562,7 +593,7 @@ both and see which implementation of the card search you prefer.
 			<key>xpos</key>
 			<real>630</real>
 			<key>ypos</key>
-			<real>475</real>
+			<real>555</real>
 		</dict>
 		<key>0ED04EDE-8208-4421-A966-60E07D5C6DD0</key>
 		<dict>
@@ -573,7 +604,7 @@ both and see which implementation of the card search you prefer.
 			<key>xpos</key>
 			<real>515</real>
 			<key>ypos</key>
-			<real>505</real>
+			<real>585</real>
 		</dict>
 		<key>28EE6501-5F14-4E44-AD05-B2B2720A4DA0</key>
 		<dict>
@@ -582,7 +613,7 @@ both and see which implementation of the card search you prefer.
 			<key>xpos</key>
 			<real>525</real>
 			<key>ypos</key>
-			<real>15</real>
+			<real>110</real>
 		</dict>
 		<key>2BF753F7-810C-4B51-8046-50E2B9FF28BA</key>
 		<dict>
@@ -591,7 +622,7 @@ both and see which implementation of the card search you prefer.
 			<key>xpos</key>
 			<real>990</real>
 			<key>ypos</key>
-			<real>600</real>
+			<real>680</real>
 		</dict>
 		<key>2BFF5652-FDE1-4D0A-A3B2-259210C8DDDD</key>
 		<dict>
@@ -602,16 +633,16 @@ both and see which implementation of the card search you prefer.
 			<key>xpos</key>
 			<real>380</real>
 			<key>ypos</key>
-			<real>265</real>
+			<real>360</real>
 		</dict>
 		<key>4BD99ED3-7319-434E-BAE0-BFD07191622C</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>10</integer>
 			<key>xpos</key>
-			<real>310</real>
+			<real>280</real>
 			<key>ypos</key>
-			<real>130</real>
+			<real>230</real>
 		</dict>
 		<key>5F97F23A-88E5-4989-99F1-924AF2DACF3E</key>
 		<dict>
@@ -623,7 +654,16 @@ to set hotkey for quick card lookup</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>480</real>
+			<real>560</real>
+		</dict>
+		<key>609E3B2D-1026-465A-B311-BB0950958E9A</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>10</integer>
+			<key>xpos</key>
+			<real>220</real>
+			<key>ypos</key>
+			<real>140</real>
 		</dict>
 		<key>7E4A42EE-5667-4DDF-AB03-35310ED40D63</key>
 		<dict>
@@ -632,7 +672,7 @@ to set hotkey for quick card lookup</string>
 			<key>xpos</key>
 			<real>380</real>
 			<key>ypos</key>
-			<real>15</real>
+			<real>110</real>
 		</dict>
 		<key>8F6464BE-8E3C-4BC7-BBF0-9C914AAED379</key>
 		<dict>
@@ -641,7 +681,7 @@ to set hotkey for quick card lookup</string>
 			<key>xpos</key>
 			<real>540</real>
 			<key>ypos</key>
-			<real>265</real>
+			<real>360</real>
 		</dict>
 		<key>AB8A889D-A1A3-4100-8CE8-BDFFF0AD9206</key>
 		<dict>
@@ -650,7 +690,7 @@ to set hotkey for quick card lookup</string>
 			<key>xpos</key>
 			<real>445</real>
 			<key>ypos</key>
-			<real>140</real>
+			<real>235</real>
 		</dict>
 		<key>ACBECE87-2E63-42E7-980A-06E987B77635</key>
 		<dict>
@@ -659,7 +699,7 @@ to set hotkey for quick card lookup</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>140</real>
+			<real>235</real>
 		</dict>
 		<key>C76BA2C6-B4C1-4F40-9545-E63E0263FD3C</key>
 		<dict>
@@ -668,7 +708,7 @@ to set hotkey for quick card lookup</string>
 			<key>xpos</key>
 			<real>225</real>
 			<key>ypos</key>
-			<real>480</real>
+			<real>560</real>
 		</dict>
 		<key>CC856733-C498-40D0-81FD-B25BD95B9D2D</key>
 		<dict>
@@ -677,7 +717,7 @@ to set hotkey for quick card lookup</string>
 			<key>xpos</key>
 			<real>395</real>
 			<key>ypos</key>
-			<real>605</real>
+			<real>685</real>
 		</dict>
 		<key>F91AEB7D-3B89-45E5-9787-B04C0AF03C46</key>
 		<dict>
@@ -688,7 +728,7 @@ to set hotkey for quick card lookup</string>
 			<key>xpos</key>
 			<real>800</real>
 			<key>ypos</key>
-			<real>475</real>
+			<real>555</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

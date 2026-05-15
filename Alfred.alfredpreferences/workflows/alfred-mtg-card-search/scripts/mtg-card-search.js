@@ -155,6 +155,7 @@ function run(argv) {
 			variables: { cardname: card.name },
 			mods: {
 				cmd: { arg: purchaseUrl },
+				shift: { arg: `[[${card.name}]]` }, // copy card name
 				opt: { arg: card.scryfall_uri }, // copy scryfall url
 				ctrl: {
 					// copy card image
