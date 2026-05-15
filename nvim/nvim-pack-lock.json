@@ -14,7 +14,7 @@
       "version": ">=0.0.0"
     },
     "conform.nvim": {
-      "rev": "9fd3b3a91b0981d60d2bc688c8cd1680320ee5de",
+      "rev": "18aeab3d63d350dcf44d64c462cc489a3412af40",
       "src": "https://github.com/stevearc/conform.nvim"
     },
     "gitsigns.nvim": {

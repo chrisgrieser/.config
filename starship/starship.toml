@@ -21,7 +21,7 @@ add_newline = false
 # LEFT SIDE---------------------------------------------------------------------
 [character]  # ▓▒░    nerdfont ids start with `nf-ple-`
 success_symbol = "[ ](fg:black)"
-error_symbol = "[ ](fg:red)"
+error_symbol = "[ ](fg:red)"
 vimcmd_symbol = "[ ](fg:cyan)"
 
 [status]  # exit code
