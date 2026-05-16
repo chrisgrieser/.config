@@ -25,9 +25,9 @@ M.pathw_desktop = pathw(home .. "/Desktop/", function(paths, _)
 
 		-- HACK only downloaded files get quarantined, so this method detects downloads
 		local exists, msg = pcall(hs.fs.xattr.get, path, "com.apple.quarantine")
+		if not exists then goto continue end
 		local isDownloaded = exists and msg ~= nil
 		local success, errmsg
-		if not exists then goto continue end
 
 		---REMOVE ALFREDWORKFLOWS & ICAL------------------------------------------
 		if (ext == "alfredworkflow" or ext == "ics") and isDownloaded then
