@@ -94,30 +94,29 @@ M.pathw_desktop = pathw(home .. "/Desktop/", function(paths, _)
 			if year ~= nil then
 				local folder = name:find("Depot") and "Depot" or "Geldkonten"
 				-- stylua: ignore
-				local bankPath = ("%s/Documents/Finanzen/Vermögen (ING-DiBa)/%s/%s"):format(home, folder, year)
+				local bankPath = ("%s/Documents/Finanzen/Vermögen/%s/%s"):format(home, folder, year)
 				success, errmsg = hs.fs.mkdir(bankPath) -- create directory in case of new year
 				u.defer(1, function() os.rename(path, bankPath .. "/" .. name) end) -- delay ensures folder is created
 				hs.open(bankPath)
 			end
 		elseif name:find("^Umsatzanzeige_.*%.csv$") then
-			local bankPath = home .. "/Documents/Finanzen/Vermögen (ING-DiBa)/csv-analysis/Umsatz/"
+			local bankPath = home .. "/Documents/Finanzen/Vermögen/csv-analysis/Umsatz/"
 			os.rename(path, bankPath .. "/" .. name)
-			-- adding first digits to prevent filing depot files of mother
-		elseif name:find("Depotuebersicht8038.*%.csv") then
+		elseif name:find("Depotuebersicht8038.*%.csv") then -- digits to prevent matching depot of others
 			local bankPath = home
-				.. "/Documents/Finanzen/Vermögen (ING-DiBa)/csv-analysis/Depotübersicht/" -- typos: ignore-line
+				.. "/Documents/Finanzen/Vermögen/csv-analysis/Depotübersicht/"
 			os.rename(path, bankPath .. "/" .. name)
 
 		---STEAM GAME SHORTCUTS---------------------------------------------------
 		elseif name:find("%.app$") and not isDownloaded and parent == "" then
-			-- parent condition prevents downloads of apps in nested folders to be moved
+			-- `parent == ""` prevents downloads of apps in nested folders to be moved
 			local gameFolder = home .. "/Library/Mobile Documents/com~apple~CloudDocs/Apps/Games/"
 			success, errmsg = os.rename(path, gameFolder .. name)
 
 		---MTG DECKLISTS---------------------------------------------------
 		elseif name:find("%.txt$") then
 			local firstLine = io.lines(path)()
-			if firstLine == "// COMMANDER" then -- manabox export always has this 1st line
+			if firstLine == "// COMMANDER" then -- manabox deck exports always have this 1st line
 				local basename = name:gsub("%.txt$", "")
 				local destination = home .. ("/Notes/👤 Personal/Games/%s Deck.md"):format(basename)
 				success, errmsg = os.rename(path, destination)

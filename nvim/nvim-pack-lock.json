@@ -38,7 +38,7 @@
       "src": "https://github.com/nvim-mini/mini.operators"
     },
     "neocodeium": {
-      "rev": "c04e74f4ad09ecb5803f0c5457bb9defa8a0700e",
+      "rev": "7ba4cfe345ca09694d9e215f16090af5c336d7c7",
       "src": "https://github.com/monkoose/neocodeium"
     },
     "nightfox.nvim": {
@@ -62,7 +62,7 @@
       "src": "https://github.com/chrisgrieser/nvim-lsp-endhints"
     },
     "nvim-lspconfig": {
-      "rev": "8f7e64066e2641d5e7d494962a9c7051e3d38dd5",
+      "rev": "3de240997fc3208eb29df5e5c17ba4665961bd84",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-origami": {
