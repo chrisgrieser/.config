@@ -21,6 +21,7 @@ app.includeStandardAdditions = true;
  * @property {{small: string, normal: string, large: string, png: string}?} image_uris
  * @property {number?} power
  * @property {number?} toughness
+ * @property {number?} loyalty for planeswalkers
  * @property {("paper"|"mtgo"|"arena")[]} games
  * @property {Record<string, "legal"|"not_legal"|"banned">} legalities
  * @property {boolean} game_changer
@@ -122,8 +123,9 @@ function run(argv) {
 		const notReleasedYet = new Date(card.released_at) > new Date();
 		const futureIcon = notReleasedYet ? "🕒" : "";
 		const rarity = rarityEmojiMap[card.rarity] || card.rarity;
-		const combatStats = card.power && card.toughness ? `${card.power}/${card.toughness}` : "";
-		const type = [combatStats, card.type_line].filter(Boolean).join(" ");
+		let stats = card.power && card.toughness ? `${card.power}/${card.toughness}` : "";
+		if (!stats && card.loyalty) stats = `[${card.loyalty}]`;
+		const type = [stats, card.type_line].filter(Boolean).join(" ");
 		const set = card.set.toUpperCase();
 		const onlyOnline = !card.games.includes("paper");
 		const onlyOnlineIcon = onlyOnline ? "🌐" : "";
