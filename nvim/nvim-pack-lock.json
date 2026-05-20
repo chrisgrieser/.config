@@ -26,19 +26,19 @@
       "src": "https://github.com/nvim-lualine/lualine.nvim"
     },
     "mason.nvim": {
-      "rev": "8e921c2b68571e978db5d4d3fef9c9a7f8755473",
+      "rev": "cbf8d285e1462dd24acf3507817be2bbcb035919",
       "src": "https://github.com/mason-org/mason.nvim"
     },
     "mini.icons": {
-      "rev": "9c7b1b90b15bdd69c52f6e31889dbc9987c30ec4",
+      "rev": "520995f1d75da0e4cc901ee95080b1ff2bc46b94",
       "src": "https://github.com/nvim-mini/mini.icons"
     },
     "mini.operators": {
-      "rev": "76e7c5b672147956fa188bf8649ce0b1c8ea4a48",
+      "rev": "d9b2f3892ad177cc141987ccfa8944cf21474f77",
       "src": "https://github.com/nvim-mini/mini.operators"
     },
     "neocodeium": {
-      "rev": "7ba4cfe345ca09694d9e215f16090af5c336d7c7",
+      "rev": "a1f73887af6cc4b09cb15cc96e0b72d7932552a5",
       "src": "https://github.com/monkoose/neocodeium"
     },
     "nightfox.nvim": {
@@ -62,7 +62,7 @@
       "src": "https://github.com/chrisgrieser/nvim-lsp-endhints"
     },
     "nvim-lspconfig": {
-      "rev": "3de240997fc3208eb29df5e5c17ba4665961bd84",
+      "rev": "246572944c2a1e2a646c2e7609ff619b0fe74c18",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-origami": {
@@ -70,7 +70,7 @@
       "src": "https://github.com/chrisgrieser/nvim-origami"
     },
     "nvim-rip-substitute": {
-      "rev": "9fe08300808a67773325d97ecb36d5777cc8e80d",
+      "rev": "c65592d88f0fa00396e260da99d9e419f4891e3b",
       "src": "https://github.com/chrisgrieser/nvim-rip-substitute"
     },
     "nvim-rulebook": {
