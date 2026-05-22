@@ -4,15 +4,15 @@ vim.g.iCloudSync = vim.env.HOME .. "/Library/Mobile Documents/com~apple~CloudDoc
 vim.g.serverAddress = "/tmp/nvim_server.pipe"
 
 --------------------------------------------------------------------------------
-require("config.utils") -- first to load globals
+require("config.utils") -- load first for its globals
 
 local sRequire = require("config.utils").safeRequire
 
 sRequire("config.restart-and-reopen")
 sRequire("config.options") -- before plugins, so they are available for them
-sRequire("config.neovide-gui-settings") -- correct gui settings during plugin installation
+sRequire("config.neovide-gui-settings") -- have gui settings during plugin installation
 
-sRequire("config.nvim-pack")
+sRequire("config.nvim-pack") -- loads plugins
 sRequire("personal-plugins.messages-to-notify") -- after plugins, since needing notification plugin
 sRequire("config.colorscheme") -- after plugins, since needing colorscheme plugin
 

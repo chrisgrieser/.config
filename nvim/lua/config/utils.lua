@@ -2,7 +2,7 @@
 ---@field [1] string -- lhs
 ---@field [2] string|function -- rhs
 ---@field mode? string|string[] -- defaults to "n"
----@field ft? string|string[] keymap only for these filetypes
+---@field ft? string|string[] -- set keymap only for these filetypes
 
 ---Warn when there are conflicting keymaps & use API similar to lazy.nvim keymaps
 ---@param map MyConfig.Keymap
