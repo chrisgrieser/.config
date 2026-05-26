@@ -93,6 +93,24 @@ function run(argv) {
 	const response = app.doShellScript(`curl "${apiUrl}"`);
 	if (!response) return errorItem("No response from Scryfall", "Try again later");
 	const json = JSON.parse(response);
+
+	if (json.code === "not_found") {
+		return JSON.stringify({
+			items: [
+				{
+					title: "No card found.",
+					subtitle: "↩: search for it on DuckDuckGo      ⌘↩: open Scryfall syntax guide",
+					arg: "https://duckduckgo.com/?q=" + encodeURIComponent("mtg " + query),
+					mods: {
+						cmd: {
+							arg: "https://scryfall.com/docs/syntax",
+							subtitle: "⌘↩: open Scryfall syntax guide",
+						},
+					},
+				},
+			],
+		});
+	}
 	if (json.object === "error") {
 		console.log("⚠️ error object:", JSON.stringify(json, null, 2));
 		let [_, title, subtitle] = json.details.match(/(^[^.]+\. )(.*)/) || ["", json.details, ""];

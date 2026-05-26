@@ -114,10 +114,10 @@ M.pathw_desktop = pathw(home .. "/Desktop/", function(paths, _)
 			success, errmsg = os.rename(path, gameFolder .. name)
 
 		---MTG DECKLISTS---------------------------------------------------
-		elseif name:find("%.txt$") then
+		elseif name:find("%.txt$") or name:find("%.txt%-bkp$") then
 			local firstLine = io.lines(path)()
 			if firstLine == "// COMMANDER" then -- manabox deck exports always have this 1st line
-				local basename = name:gsub("%.txt$", "")
+				local basename = name:gsub("%..+$", "")
 				local destination = home .. ("/Notes/👤 Personal/Games/%s Deck.md"):format(basename)
 				success, errmsg = os.rename(path, destination)
 			elseif name == "wants.txt" then
