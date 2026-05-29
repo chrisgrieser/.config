@@ -139,3 +139,4 @@ matches:
   - { triggers: [yuo, oyu], replace: you, propagate_case: true }
   - { trigger: wiht, replace: with, propagate_case: true, word: true }
   - { trigger: logn, replace: long, propagate_case: true, word: true }
+  - { trigger: alst, replace: last, propagate_case: true, word: true }
