@@ -120,7 +120,7 @@ M.pathw_desktop = pathw(home .. "/Desktop/", function(paths, _)
 				local basename = name:gsub("%..+$", "")
 				local destination = home .. ("/Notes/👤 Personal/Games/%s Deck.md"):format(basename)
 				success, errmsg = os.rename(path, destination)
-			elseif name == "wants.txt" then
+			elseif name == "wants.txt" or name == "wants.txt-bkp" then
 				local content = u.readFile(path)
 				hs.pasteboard.setContents(content)
 				hs.urlevent.openURL("https://www.cardmarket.com/en/Magic/Wants/23642383/AddDeckList")
