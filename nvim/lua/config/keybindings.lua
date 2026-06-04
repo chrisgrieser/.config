@@ -91,14 +91,7 @@ Keymap { "<leader>ur", function() vim.cmd.later(vim.o.undolevels) end, desc = "ó
 Keymap {
 	"<leader>ut",
 	function()
-		if not package.loaded["undotree"] then
-			vim.cmd.packadd("nvim.undotree")
-			vim.api.nvim_create_autocmd("FileType", {
-				desc = "User: undotree settings",
-				pattern = "nvim-undotree",
-				callback = function(ctx) Keymap { "q", vim.cmd.close, buf = ctx.buf, nowait = true } end,
-			})
-		end
+		if not package.loaded["undotree"] then vim.cmd.packadd("nvim.undotree") end
 		require("undotree").open()
 	end,
 	desc = "ó°‹š Undo tree",

@@ -240,7 +240,11 @@ end
 ---TEMPLATES--------------------------------------------------------------------
 local templateConfig = {
 	templateDir = vim.fn.stdpath("config") .. "/templates",
-	ignoreDirs = { vim.fn.stdpath("data"), "/tmp/" },
+	ignoreDirs = {
+		vim.fn.stdpath("data"),
+		vim.fn.stdpath("config") .. "/after/ftplugin/",
+		"/tmp/",
+	},
 	globToTemplateMap = {
 		[vim.fn.stdpath("config") .. "/lsp/*.lua"] = "lsp-server-config.lua",
 		[vim.fn.stdpath("config") .. "/lua/plugin-specs/*.lua"] = "vim-pack-plugin.lua",
@@ -367,7 +371,7 @@ end
 vim.api.nvim_create_autocmd({ "FocusGained", "BufReadPost", "TextChanged", "InsertLeave" }, {
 	desc = "User: Add favicons to URLs",
 	callback = function(ctx)
-		local delay = ctx.event == "BufReadPost" and 300 or 0 -- wait for treesitter, for some reason
+		local delay = ctx.event == "BufReadPost" and 300 or 0 -- wait for treesitter
 		vim.defer_fn(function() addFavicons(ctx.buf) end, delay)
 	end,
 })
