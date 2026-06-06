@@ -50,7 +50,7 @@
       "src": "https://github.com/chrisgrieser/nvim-chainsaw"
     },
     "nvim-genghis": {
-      "rev": "12d62b0aaeb0bf6e52f2335d532813a8b8105baa",
+      "rev": "e6fd1f42736b15e63c0c703457c5ca162228a2f3",
       "src": "https://github.com/chrisgrieser/nvim-genghis"
     },
     "nvim-justice": {

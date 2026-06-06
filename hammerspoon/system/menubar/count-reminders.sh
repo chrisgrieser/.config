@@ -6,4 +6,4 @@ osascript -e '
 ' &> /dev/null
 
 sleep 1
-cat "/tmp/reminder-count"
+cat "/tmp/reminder-count" || echo "0" # `/tmp/` cleared after restart
