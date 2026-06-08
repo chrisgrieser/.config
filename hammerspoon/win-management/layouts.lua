@@ -38,7 +38,8 @@ local function workLayout(shouldDarkenDisplay)
 	u.openApps { "Ivory", isWorkWeek() and "Slack" or nil, "Gmail", "AlfredExtraPane", "Stats" }
 	u.defer(1, function()
 		wu.moveResize(u.app("Ivory"):mainWindow(), wu.toTheSide)
-		u.app("Gmail"):activate() -- activate Gmail last
+		local gmail = u.app("Gmail")
+		if gmail then gmail:activate() end -- activate Gmail last
 	end)
 
 	print("🔲 Layout: work")
