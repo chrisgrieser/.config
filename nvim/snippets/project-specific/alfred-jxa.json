@@ -1,12 +1,8 @@
 {
   "Alfred Error Item (function)": {
     "body": [
-      "/**",
-      " * @param {string} title",
-      " * @param {string=} subtitle",
-      " */",
+      "/** @param {string} title @param {string=} subtitle */",
       "function alfredErrorItem(title, subtitle) {",
-      "\tif (!subtitle) subtitle = \"\";",
       "\treturn JSON.stringify({ items: [{ title: \"⛔ \" + title, subtitle: subtitle, valid: false }] });",
       "}"
     ],

@@ -74,6 +74,11 @@ function httpRequest(url) {
  * @property {object} installed
  */
 
+/** @param {string} title @param {string=} subtitle */
+function alfredErrorItem(title, subtitle) {
+	return JSON.stringify({ items: [{ title: "⛔ " + title, subtitle: subtitle, valid: false }] });
+}
+
 //──────────────────────────────────────────────────────────────────────────────
 
 /** @type {AlfredRun} */
@@ -83,6 +88,13 @@ function run() {
 	const formulaIcon = "🍺";
 	const installedIcon = "✅";
 	const deprecatedIcon = "⚠️";
+
+	// 0. Version check since Homebrew API changed with 6.0
+	const homebrewVersion = Number(app.doShellScript("brew --version").match(/Homebrew (\d+\.\d)/)?.[1] || "0");
+	if (homebrewVersion < 6.0) {
+		return alfredErrorItem("Homebrew version 6.0 or newer required");
+		// TODO
+	}
 
 	// 1. MAIN DATA (already cached by homebrew)
 	// DOCS https://formulae.brew.sh/docs/api/ & https://docs.brew.sh/Querying-Brew
@@ -129,7 +141,7 @@ function run() {
 
 	// 4. CREATE ALFRED ITEMS (will be cached for an hour by Alfred)
 	/** @type{(AlfredItem&{downloads:number})[]} */
-	const casks = Object.entries((brewData.casks)).map(([caskname, cask]) => {
+	const casks = Object.entries(brewData.casks).map(([caskname, cask]) => {
 		const name = caskname;
 		let icons = "";
 		if (installedCasks.includes(name)) icons += " " + installedIcon;
@@ -162,7 +174,7 @@ function run() {
 	});
 
 	/** @type{(AlfredItem&{downloads:number})[]} */
-	const formulas = Object.entries((brewData.formulae)).map(([formulaname, formula]) => {
+	const formulas = Object.entries(brewData.formulae).map(([formulaname, formula]) => {
 		const name = formulaname;
 		let icons = "";
 		if (installedFormulas.includes(name)) icons += " " + installedIcon;
