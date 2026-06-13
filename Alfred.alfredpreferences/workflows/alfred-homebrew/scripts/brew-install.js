@@ -90,10 +90,15 @@ function run() {
 	const deprecatedIcon = "⚠️";
 
 	// 0. Version check since Homebrew API changed with 6.0
-	const homebrewVersion = Number(app.doShellScript("brew --version").match(/Homebrew (\d+\.\d)/)?.[1] || "0");
-	if (homebrewVersion < 6.0) {
-		return alfredErrorItem("Homebrew version 6.0 or newer required");
-		// TODO
+	const brewVersionStr =
+		app.doShellScript("brew --version").match(/Homebrew (\d+\.\d)/)?.[1] || "0";
+	console.log("Homebrew version: " + brewVersionStr);
+	const brewVersion = Number(brewVersionStr);
+	if (brewVersion < 6.0) {
+		return alfredErrorItem(
+			"This workflow requires Homebrew 6.0 or newer.",
+			"You can update Homebrew by running `brew update` in your terminal.",
+		);
 	}
 
 	// 1. MAIN DATA (already cached by homebrew)
