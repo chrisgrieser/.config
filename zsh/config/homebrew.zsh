@@ -57,7 +57,7 @@ function update() {
 	_pretty_header "brew upgrade"
 	# not combined with `brew bundle install` to visually separate them
 	if [[ -n $(brew outdated) ]]; then
-		brew upgrade
+		brew upgrade --yes
 	else
 		echo "✅ Already up-to-date."
 	fi
