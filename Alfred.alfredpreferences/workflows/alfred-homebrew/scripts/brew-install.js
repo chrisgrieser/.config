@@ -74,9 +74,23 @@ function httpRequest(url) {
  * @property {object} installed
  */
 
-/** @param {string} title @param {string=} subtitle */
-function alfredErrorItem(title, subtitle) {
-	return JSON.stringify({ items: [{ title: "⛔ " + title, subtitle: subtitle, valid: false }] });
+/**
+ * @param {string} title
+ * @param {string=} subtitle
+ * @param {string=} arg
+ */
+function alfredErrorItem(title, subtitle, arg) {
+	const icon = arg ? "⛔" : "⚠️";
+	return JSON.stringify({
+		items: [
+			{
+				title: icon + " " + title,
+				subtitle: subtitle,
+				valid: Boolean(arg),
+				arg: arg || "",
+			},
+		],
+	});
 }
 
 //──────────────────────────────────────────────────────────────────────────────
@@ -96,36 +110,45 @@ function run() {
 	const brewVersion = Number(brewVersionStr);
 	if (brewVersion < 6.0) {
 		return alfredErrorItem(
-			"This workflow requires Homebrew 6.0 or newer.",
+			"This workflow now requires Homebrew 6.0 or newer.",
 			"You can update Homebrew by running `brew update` in your terminal.",
 		);
 	}
 
 	// 1. MAIN DATA (already cached by homebrew)
 	// DOCS https://formulae.brew.sh/docs/api/ & https://docs.brew.sh/Querying-Brew
-	// these files contain the API response of casks and formulas as payload; they
+	// This file contains the API response of casks and formulas as payload; they
 	// are updated on each `brew update`. Since they are effectively caches,
 	// there is no need create caches of our own.
+	const apiCacheFolder = app.pathTo("home folder") + "/Library/Caches/Homebrew/api/internal";
+	const brewCache = apiCacheFolder + "/packages.arm64_tahoe.jws.json";
 
-	const brewJson =
-		app.pathTo("home folder") +
-		"/Library/Caches/Homebrew/api/internal/packages.arm64_tahoe.jws.json";
+	if (!fileExists(brewCache)) {
+		app.doShellScript("brew update"); // re-creates the cache
 
-	if (!fileExists(brewJson)) app.doShellScript("brew update");
+		// in case homebrew uses a different cache location, e.g. for other architectures
+		const apiCache = app.doShellScript('ls -1 "$HOME/Library/Caches/Homebrew/api/internal"');
+		console.log("Files in API cache folder:", apiCache);
+		if (!fileExists(brewCache)) {
+			return alfredErrorItem(
+				"Unable to find Homebrew cache file.",
+				"↩: Report the issue on GitHub: https://github.com/chrisgrieser/alfred-homebrew/issues/21",
+				"https://github.com/chrisgrieser/alfred-homebrew/issues/21",
+			);
+		}
+	}
 
 	// SIC data must be parsed twice, since that is how the cache is saved by homebrew
-	const brewData = JSON.parse(JSON.parse(readFile(brewJson)).payload);
+	const brewData = JSON.parse(JSON.parse(readFile(brewCache)).payload);
 
 	// 2. LOCAL INSTALLATION DATA (determined live every run)
-	// PERF `ls` quicker than `brew list`
-	// (and the json files miss actual installation info)
+	// PERF `ls` quicker than `brew list` (and the json files miss actual installation info)
 	const installedFormulas = app.doShellScript('ls -1 "$(brew --prefix)/Cellar"').split("\r");
 	const installedCasks = app.doShellScript('ls -1 "$(brew --prefix)/Caskroom"').split("\r");
 
 	// 3. DOWNLOAD COUNTS (cached by this workflow)
 	// DOCS https://formulae.brew.sh/analytics/
-	// INFO separate from Alfred's caching mechanism, since the installed
-	// packages should be determined more frequently
+	// separate from Alfred's caching, since installed packages should be determined more frequently
 	const cask90d = $.getenv("alfred_workflow_cache") + "/caskDownloads90d.json";
 	const formula90d = $.getenv("alfred_workflow_cache") + "/formulaDownloads90d.json";
 	let caskDlRaw;
@@ -154,11 +177,13 @@ function run() {
 
 		const downloads = caskDownloads[name] ? `${caskDownloads[name][0].count}↓` : "";
 		const desc = cask.desc || "";
+		const depsInfo = cask.depends_on_args?.[":macos"];
+		const deps = depsInfo !== ":any" ? `(needs ${depsInfo})` : "";
 
 		return {
 			title: name + icons,
 			match: alfredMatcher(name) + desc,
-			subtitle: [caskIcon, downloads, " ", desc].join(" "),
+			subtitle: [caskIcon, downloads, deps, " ", desc].join(" "),
 			arg: `--cask ${name}`,
 			variables: { brewfileLine: `cask "${name}"` },
 			quicklookurl: cask.homepage,

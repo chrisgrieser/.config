@@ -8,6 +8,31 @@
 	<string>⭐️</string>
 	<key>connections</key>
 	<dict>
+		<key>0B1362D0-2954-4E22-8A4D-483ACC34A337</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>43FA04CA-7C43-4E16-99CD-66908BA9AD2D</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>29197F0C-557D-41F6-848C-DB541D29D2A2</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>3C20F055-7280-4028-891B-A35ACB3DE213</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>0BAF56E8-B65A-478A-B848-F09FFE73A12B</key>
 		<array>
 			<dict>
@@ -170,7 +195,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>3C20F055-7280-4028-891B-A35ACB3DE213</string>
+				<string>0B1362D0-2954-4E22-8A4D-483ACC34A337</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -225,6 +250,106 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>43FA04CA-7C43-4E16-99CD-66908BA9AD2D</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string>brew install {query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.terminalcommand</string>
+			<key>uid</key>
+			<string>EDA21286-4E28-4304-A9DB-0BA74AB2C370</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string></string>
+						<key>matchcasesensitive</key>
+						<true/>
+						<key>matchmode</key>
+						<integer>4</integer>
+						<key>matchstring</key>
+						<string>^http</string>
+						<key>outputlabel</key>
+						<string>URL</string>
+						<key>uid</key>
+						<string>29197F0C-557D-41F6-848C-DB541D29D2A2</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>terminal args</string>
+				<key>hideelse</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.conditional</string>
+			<key>uid</key>
+			<string>0B1362D0-2954-4E22-8A4D-483ACC34A337</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string>{var:copy_brewfile_line_on_install}</string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string>0</string>
+						<key>outputlabel</key>
+						<string>false</string>
+						<key>uid</key>
+						<string>29197F0C-557D-41F6-848C-DB541D29D2A2</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>true</string>
+				<key>hideelse</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.conditional</string>
+			<key>uid</key>
+			<string>3C20F055-7280-4028-891B-A35ACB3DE213</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>alfredfiltersresults</key>
 				<true/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -270,53 +395,6 @@
 			<string>72D18DBC-72FF-40AA-B367-D4C148AEC3A6</string>
 			<key>version</key>
 			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string>brew install {query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.terminalcommand</string>
-			<key>uid</key>
-			<string>EDA21286-4E28-4304-A9DB-0BA74AB2C370</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>conditions</key>
-				<array>
-					<dict>
-						<key>inputstring</key>
-						<string>{var:copy_brewfile_line_on_install}</string>
-						<key>matchcasesensitive</key>
-						<false/>
-						<key>matchmode</key>
-						<integer>0</integer>
-						<key>matchstring</key>
-						<string>0</string>
-						<key>outputlabel</key>
-						<string>false</string>
-						<key>uid</key>
-						<string>29197F0C-557D-41F6-848C-DB541D29D2A2</string>
-					</dict>
-				</array>
-				<key>elselabel</key>
-				<string>true</string>
-				<key>hideelse</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.conditional</string>
-			<key>uid</key>
-			<string>3C20F055-7280-4028-891B-A35ACB3DE213</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -629,6 +707,15 @@ and the Mac App Store.
 #### Created by [Chris Grieser](https://chris-grieser.de/)   |   ⭐️ [Star on GitHub](https://github.com/chrisgrieser/alfred-homebrew)</string>
 	<key>uidata</key>
 	<dict>
+		<key>0B1362D0-2954-4E22-8A4D-483ACC34A337</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>xpos</key>
+			<real>215</real>
+			<key>ypos</key>
+			<real>150</real>
+		</dict>
 		<key>0BAF56E8-B65A-478A-B848-F09FFE73A12B</key>
 		<dict>
 			<key>colorindex</key>
@@ -638,16 +725,16 @@ and the Mac App Store.
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>515</real>
+			<real>665</real>
 		</dict>
 		<key>0D984FC5-A902-42FB-80F8-A9D0310C86BB</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>475</real>
+			<real>550</real>
 			<key>ypos</key>
-			<real>130</real>
+			<real>295</real>
 		</dict>
 		<key>0F3F996A-3FC8-4FBD-990C-9D54C43DD642</key>
 		<dict>
@@ -656,18 +743,18 @@ and the Mac App Store.
 			<key>note</key>
 			<string>brew uninstall</string>
 			<key>xpos</key>
-			<real>470</real>
+			<real>545</real>
 			<key>ypos</key>
-			<real>620</real>
+			<real>785</real>
 		</dict>
 		<key>2468D124-88C6-438D-B2C6-627ADEEEC31D</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>470</real>
+			<real>545</real>
 			<key>ypos</key>
-			<real>245</real>
+			<real>410</real>
 		</dict>
 		<key>3C20F055-7280-4028-891B-A35ACB3DE213</key>
 		<dict>
@@ -676,9 +763,9 @@ and the Mac App Store.
 			<key>note</key>
 			<string>copy Brewfile line</string>
 			<key>xpos</key>
-			<real>318</real>
+			<real>358</real>
 			<key>ypos</key>
-			<real>35</real>
+			<real>165</real>
 		</dict>
 		<key>3F95A285-6177-405E-B2B0-518A7C0276F2</key>
 		<dict>
@@ -687,27 +774,36 @@ and the Mac App Store.
 			<key>note</key>
 			<string>brew info</string>
 			<key>xpos</key>
-			<real>470</real>
+			<real>545</real>
 			<key>ypos</key>
+			<real>530</real>
+		</dict>
+		<key>43FA04CA-7C43-4E16-99CD-66908BA9AD2D</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>xpos</key>
 			<real>365</real>
+			<key>ypos</key>
+			<real>25</real>
 		</dict>
 		<key>4818B3ED-E0D3-4F66-88AF-FD15AF8A9AF4</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>405</real>
+			<real>455</real>
 			<key>ypos</key>
-			<real>115</real>
+			<real>245</real>
 		</dict>
 		<key>5C596F48-0F0D-4709-8097-75C0875E686B</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>615</real>
+			<real>690</real>
 			<key>ypos</key>
-			<real>365</real>
+			<real>530</real>
 		</dict>
 		<key>6C6C9760-3FA9-453E-AD2E-E9074AB3E64A</key>
 		<dict>
@@ -718,7 +814,7 @@ and the Mac App Store.
 			<key>xpos</key>
 			<real>340</real>
 			<key>ypos</key>
-			<real>690</real>
+			<real>840</real>
 		</dict>
 		<key>709C3FA7-A332-4B07-A934-6BC8C7E9DB32</key>
 		<dict>
@@ -727,18 +823,18 @@ and the Mac App Store.
 			<key>note</key>
 			<string>add `brew uninstall`</string>
 			<key>xpos</key>
-			<real>340</real>
+			<real>415</real>
 			<key>ypos</key>
-			<real>620</real>
+			<real>785</real>
 		</dict>
 		<key>72B78E7D-69B1-4E83-AB9B-26507DE2C33E</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>1</integer>
 			<key>xpos</key>
-			<real>245</real>
+			<real>320</real>
 			<key>ypos</key>
-			<real>535</real>
+			<real>700</real>
 		</dict>
 		<key>72D18DBC-72FF-40AA-B367-D4C148AEC3A6</key>
 		<dict>
@@ -749,34 +845,34 @@ and the Mac App Store.
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>15</real>
+			<real>165</real>
 		</dict>
 		<key>802369B2-358A-46C9-9516-940B8E3E7940</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>1</integer>
 			<key>xpos</key>
-			<real>470</real>
+			<real>545</real>
 			<key>ypos</key>
-			<real>500</real>
+			<real>665</real>
 		</dict>
 		<key>EDA21286-4E28-4304-A9DB-0BA74AB2C370</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>475</real>
+			<real>535</real>
 			<key>ypos</key>
-			<real>15</real>
+			<real>145</real>
 		</dict>
 		<key>F01BF271-72C7-44BA-9382-E133D8529E6D</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>620</real>
+			<real>695</real>
 			<key>ypos</key>
-			<real>130</real>
+			<real>295</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
