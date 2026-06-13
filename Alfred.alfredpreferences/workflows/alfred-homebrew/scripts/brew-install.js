@@ -128,7 +128,7 @@ function run() {
 	const formulaDownloads = JSON.parse(formulaDlRaw || readFile(formula90d)).formulae; // SIC not `.casks`
 
 	// 4. CREATE ALFRED ITEMS (will be cached for an hour by Alfred)
-	/** @type{AlfredItem&{downloads:number}[]} */
+	/** @type{(AlfredItem&{downloads:number})[]} */
 	const casks = Object.entries((brewData.casks)).map(([caskname, cask]) => {
 		const name = caskname;
 		let icons = "";
@@ -161,7 +161,7 @@ function run() {
 		};
 	});
 
-	/** @type{AlfredItem&{downloads:number}[]} */
+	/** @type{(AlfredItem&{downloads:number})[]} */
 	const formulas = Object.entries((brewData.formulae)).map(([formulaname, formula]) => {
 		const name = formulaname;
 		let icons = "";
