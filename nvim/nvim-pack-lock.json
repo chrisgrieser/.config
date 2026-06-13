@@ -1,7 +1,7 @@
 {
   "plugins": {
     "async.nvim": {
-      "rev": "7a1d7d49933fbe902b84b55f352a3b10fd587331",
+      "rev": "e2a813be9cd143ab1181de6d8a0720e0230cd86e",
       "src": "https://github.com/lewis6991/async.nvim"
     },
     "blink-cmp-git": {
@@ -26,11 +26,11 @@
       "src": "https://github.com/nvim-lualine/lualine.nvim"
     },
     "mason.nvim": {
-      "rev": "16ba83bfc8a25f52bb545134f5bee082b195c460",
+      "rev": "2a6940af80375532e5e9e7c1f2fc6319a1b7a69d",
       "src": "https://github.com/mason-org/mason.nvim"
     },
     "mini.icons": {
-      "rev": "520995f1d75da0e4cc901ee95080b1ff2bc46b94",
+      "rev": "284509648db084c5e40a31afa9abb9887c49e04a",
       "src": "https://github.com/nvim-mini/mini.icons"
     },
     "mini.operators": {
@@ -38,7 +38,7 @@
       "src": "https://github.com/nvim-mini/mini.operators"
     },
     "neocodeium": {
-      "rev": "b2fd9f02bf292b1ecc3a29406417601b0e46ad7d",
+      "rev": "d6dd1fe6938e89460e27f5215516f5e9468d8a10",
       "src": "https://github.com/monkoose/neocodeium"
     },
     "nightfox.nvim": {
@@ -62,7 +62,7 @@
       "src": "https://github.com/chrisgrieser/nvim-lsp-endhints"
     },
     "nvim-lspconfig": {
-      "rev": "229b79051b380377664edc4cbd534930154921a1",
+      "rev": "a683e0ddf0cf64c6cd689e18ffb480ade3c162b7",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-origami": {
@@ -86,7 +86,7 @@
       "src": "https://github.com/chrisgrieser/nvim-spider"
     },
     "nvim-surround": {
-      "rev": "2e93e154de9ff326def6480a4358bfc149d5da2c",
+      "rev": "8b47db616ef658b8fc27e61db2896aa2f40134de",
       "src": "https://github.com/kylechui/nvim-surround"
     },
     "nvim-tinygit": {
@@ -106,7 +106,7 @@
       "src": "https://github.com/chrisgrieser/nvim-various-textobjs"
     },
     "refactoring.nvim": {
-      "rev": "624c01e8175901484eac74512baf35e9dfe269b8",
+      "rev": "7eaa150061ea18fdbe18fbb924d236e3ddccc57d",
       "src": "https://github.com/theprimeagen/refactoring.nvim"
     },
     "render-markdown.nvim": {
