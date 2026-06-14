@@ -68,7 +68,7 @@ function httpRequest(url) {
  * @property {string} homepage
  * @property {boolean} deprecated
  * @property {object} installed WARN do not use this field, since the data there is empty, despite the homebrew docs suggesting otherwise
- * @property {Record<string, string>} depends_on_args
+ * @property {Record<string, string|string[]>} depends_on_args
  */
 
 /**
@@ -173,8 +173,16 @@ function run() {
 
 		const downloads = caskDownloads[name] ? `${caskDownloads[name][0].count}↓` : "";
 		const desc = cask.desc || "";
-		const depsInfo = (cask.depends_on_args?.[":macos"] || "").replace(/^:/, "").replace(/_\w/, " ")
-		const deps = depsInfo !== ":any" ? ` (needs ${depsInfo})` : "";
+
+		let deps = "";
+		const depsInfo = cask.depends_on_args?.[":macos"];
+		if (depsInfo !== ":any" && typeof depsInfo === "string") {
+			const info = depsInfo.replace(
+				/([_:])([a-z])/g,
+				(_, sep, char) => (sep === "_" ? " " : "") + char.toUpperCase(),
+			);
+			deps = ` [requires ${info}]`;
+		}
 
 		return {
 			title: name + icons,
@@ -232,7 +240,7 @@ function run() {
 	});
 
 	// 5. MERGE & SORT BOTH LISTS
-	// a. move shorter package names top, since short names like `sd` are 
+	// a. move shorter package names top, since short names like `sd` are
 	// otherwise ranked further down, making them often hard to find
 	// b. sort by download count as secondary criteria
 	const allPackages = [...casks, ...formulas].sort((/** @type{any} */ a, /** @type{any} */ b) => {
