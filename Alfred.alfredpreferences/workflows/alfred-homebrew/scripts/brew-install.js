@@ -173,8 +173,8 @@ function run() {
 
 		const downloads = caskDownloads[name] ? `${caskDownloads[name][0].count}↓` : "";
 		const desc = cask.desc || "";
-		const depsInfo = cask.depends_on_args?.[":macos"];
-		const deps = depsInfo !== ":any" ? `(needs ${depsInfo})` : "";
+		const depsInfo = (cask.depends_on_args?.[":macos"] || "").replace(/^:/, "").replace(/_\w/, " ")
+		const deps = depsInfo !== ":any" ? ` (needs ${depsInfo})` : "";
 
 		return {
 			title: name + icons,
