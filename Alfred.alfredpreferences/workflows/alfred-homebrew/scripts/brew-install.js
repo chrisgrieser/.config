@@ -88,16 +88,18 @@ function alfredErrorItem(title, subtitle, arg) {
 	});
 }
 
+const ICONS = {
+	cask: "🛢️",
+	formula: "🍺",
+	installed: "✅",
+	deprecated: "⚠️",
+};
+
 //──────────────────────────────────────────────────────────────────────────────
 
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
-	const caskIcon = "🛢️";
-	const formulaIcon = "🍺";
-	const installedIcon = "✅";
-	const deprecatedIcon = "⚠️";
-
 	// 0. Version check since Homebrew API changed with 6.0
 	const brewVersionStr =
 		app.doShellScript("brew --version").match(/Homebrew (\d+\.\d)/)?.[1] || "0";
@@ -110,7 +112,7 @@ function run() {
 	}
 
 	// 1. MAIN DATA (already cached by homebrew)
-	// DOCS https://formulae.brew.sh/docs/api/ & https://docs.brew.sh/Querying-Brew
+	// https://formulae.brew.sh/docs/api/
 	// This file contains the API response of casks and formulas as payload; they
 	// are updated on each `brew update`. Since they are effectively caches,
 	// there is no need create caches of our own.
@@ -120,7 +122,10 @@ function run() {
 	 * @param {any=} refresh
 	 */
 	function findCache(refresh) {
-		if (refresh) app.doShellScript("brew update");
+		if (refresh) {
+			console.log("Refreshing Homebrew cache via `brew update`");
+			app.doShellScript("brew update");
+		}
 		// fallback to `true` (returns empty string), as non-zero exit makes `doShellScript` fail
 		return app.doShellScript(
 			'ls -1 "$HOME/Library/Caches/Homebrew/api/internal/packages."*".json" || true',
@@ -146,7 +151,7 @@ function run() {
 	const installedCasks = app.doShellScript('ls -1 "$(brew --prefix)/Caskroom"').split("\r");
 
 	// 3. DOWNLOAD COUNTS (cached by this workflow)
-	// DOCS https://formulae.brew.sh/analytics/
+	// https://formulae.brew.sh/analytics/
 	// separate since download counts do not require as frequent updates
 	const cask90d = $.getenv("alfred_workflow_cache") + "/caskDownloads90d.json";
 	const formula90d = $.getenv("alfred_workflow_cache") + "/formulaDownloads90d.json";
@@ -167,8 +172,8 @@ function run() {
 	/** @type{(AlfredItem&{downloads:number})[]} */
 	const casks = Object.entries(brewData.casks).map(([name, cask]) => {
 		let icons = "";
-		if (installedCasks.includes(name)) icons += " " + installedIcon;
-		if (cask.deprecated) icons += `   [${deprecatedIcon} deprecated]`;
+		if (installedCasks.includes(name)) icons += " " + ICONS.installed;
+		if (cask.deprecated) icons += `   [${ICONS.deprecated} deprecated]`;
 
 		const downloads = caskDownloads[name] ? `${caskDownloads[name][0].count}↓` : "";
 		const desc = cask.desc || "";
@@ -186,7 +191,7 @@ function run() {
 		return {
 			title: name + icons,
 			match: alfredMatcher(name) + desc,
-			subtitle: [caskIcon, downloads, deps, " ", desc].join(" "),
+			subtitle: [ICONS.cask, downloads, deps, " ", desc].join(" "),
 			arg: `--cask ${name}`,
 			variables: { brewfileLine: `cask "${name}"` },
 			quicklookurl: cask.homepage,
@@ -203,8 +208,8 @@ function run() {
 	/** @type{(AlfredItem&{downloads:number})[]} */
 	const formulas = Object.entries(brewData.formulae).map(([name, formula]) => {
 		let icons = "";
-		if (installedFormulas.includes(name)) icons += " " + installedIcon;
-		if (formula.deprecated) icons += `   [${deprecatedIcon} deprecated]`;
+		if (installedFormulas.includes(name)) icons += " " + ICONS.installed;
+		if (formula.deprecated) icons += `   [${ICONS.deprecated} deprecated]`;
 
 		const downloads = formulaDownloads[name] ? `${formulaDownloads[name][0].count}↓` : "";
 		const desc = formula.desc || "";
@@ -212,7 +217,7 @@ function run() {
 		return {
 			title: name + icons,
 			match: alfredMatcher(name) + desc,
-			subtitle: [formulaIcon, downloads, " ", desc].join(" "),
+			subtitle: [ICONS.formula, downloads, " ", desc].join(" "),
 			arg: `--formula ${name}`,
 			variables: { brewfileLine: `brew "${name}"` },
 			quicklookurl: formula.homepage,
@@ -228,9 +233,9 @@ function run() {
 
 	// 5. MERGE & SORT BOTH LISTS
 	// a. move shorter package names top, since short names like `sd` are
-	// otherwise ranked further down, making them often hard to find
+	// otherwise ranked further down, making them often hard to find via Alfred
 	// b. sort by download count as secondary criteria
-	const allPackages = [...casks, ...formulas].sort((/** @type{any} */ a, /** @type{any} */ b) => {
+	const allPackages = [...casks, ...formulas].sort((a, b) => {
 		const titleLengthDiff = a.title.length - b.title.length;
 		if (titleLengthDiff !== 0) return titleLengthDiff;
 		const downloadCountDiff = (b.downloads || 0) - (a.downloads || 0);
