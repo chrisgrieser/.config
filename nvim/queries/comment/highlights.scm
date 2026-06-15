@@ -7,9 +7,9 @@
 ("text" @comment.todo
   (#any-of? @comment.todo "PENDING" "GUARD" "REQUIRED" "TEMP" "VALIDATE"))
 
-; CONFIG SOURCE DATA EXAMPLE IMPORTANT
+; CONFIG SOURCE EXAMPLE IMPORTANT
 ("text" @comment.note
-  (#any-of? @comment.note "CONFIG" "SOURCE" "DATA" "EXAMPLE" "IMPORTANT"))
+  (#any-of? @comment.note "CONFIG" "SOURCE" "EXAMPLE" "IMPORTANT"))
 
 ; SIC CAVEAT DEPRECATION DEBUG
 ("text" @comment.warning
