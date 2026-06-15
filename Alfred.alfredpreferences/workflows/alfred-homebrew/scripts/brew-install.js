@@ -117,22 +117,25 @@ function run() {
 	// This file contains the API response of casks and formulas as payload; they
 	// are updated on each `brew update`. Since they are effectively caches,
 	// there is no need create caches of our own.
-	const apiCacheFolder = app.pathTo("home folder") + "/Library/Caches/Homebrew/api/internal";
-	const brewCache = apiCacheFolder + "/packages.arm64_tahoe.jws.json";
 
-	if (!fileExists(brewCache)) {
-		app.doShellScript("brew update"); // re-creates the cache
-
-		// in case homebrew uses a different cache location, e.g. for other architectures
-		const apiCache = app.doShellScript('ls -1 "$HOME/Library/Caches/Homebrew/api/internal"');
-		console.log("Files in API cache folder:", apiCache);
-		if (!fileExists(brewCache)) {
-			return alfredErrorItem(
-				"Unable to find Homebrew cache file.",
-				"↩: Report the issue on GitHub: https://github.com/chrisgrieser/alfred-homebrew/issues/21",
-				"https://github.com/chrisgrieser/alfred-homebrew/issues/21",
+	let apiCaches;
+		do {
+			apiCaches = app.doShellScript(
+				// fallback to `echo "none"`, since exiting non-zero makes doShellScript fail
+				'ls -1 "$HOME/Library/Caches/Homebrew/api/internal/packages."*".json" || echo "none"',
 			);
-		}
+		} while (condition);
+	if (apiCaches === "none") app.doShellScript("brew update"); // re-creates the cache
+	console.log("Cache files:\n", apiCaches);
+	const brewCache = apiCaches.split("\n")[0]; // in case caches of previous OS versions exist
+
+	// if (!fileExists(brewCache)) app.doShellScript("brew update"); // re-creates the cache
+	if (!fileExists(brewCache)) {
+		return alfredErrorItem(
+			"Unable to find Homebrew cache file.",
+			"↩: Report the issue on GitHub: https://github.com/chrisgrieser/alfred-homebrew/issues/21",
+			"https://github.com/chrisgrieser/alfred-homebrew/issues/21",
+		);
 	}
 
 	// SIC data must be parsed twice, since that is how the cache is saved by homebrew
