@@ -30,7 +30,7 @@
       "src": "https://github.com/mason-org/mason.nvim"
     },
     "mini.icons": {
-      "rev": "d48ad47359218d2b019034f95f601b3861180885",
+      "rev": "ac38c983aed0a2bd32a65ca3e2348e12e58ca292",
       "src": "https://github.com/nvim-mini/mini.icons"
     },
     "mini.operators": {
