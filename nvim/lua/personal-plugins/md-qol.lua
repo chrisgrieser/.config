@@ -352,7 +352,7 @@ local function getTitleForUrl(url)
 		url,
 		{},
 		vim.schedule_wrap(function(err, out)
-			if err then vim.notify(err, vim.log.levels.ERROR) end
+			if err then return vim.notify(err, vim.log.levels.ERROR) end
 			local title = vim.trim(out.body:match("<title.->(.-)</title>") or "")
 			title = title -- cleanup
 				:gsub("[\n\r]+", " ")
