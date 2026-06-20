@@ -26,33 +26,6 @@ local opts = {
 						and not charsBefore:find("%s%-%-?")
 					return luadocButNotComment
 				end,
-
-				-- CHANGES FOR `MARKDOWN_OXIDE`
-				transform_items = function(_ctx, items)
-					return vim
-						.iter(items)
-						-- filter aliases, PENDING https://github.com/Feel-ix-343/markdown-oxide/issues/330
-						:filter(
-							function(item)
-								if item.client_name ~= "markdown_oxide" then return true end
-								if item.textEdit.newText:find(">") then return false end
-								return true
-							end
-						)
-						-- FIX spacing for Aliases, see https://github.com/Feel-ix-343/markdown-oxide/issues/332
-						:map(
-							function(item) -- FIX spacing between label and details
-								if item.client_name ~= "markdown_oxide" then return item end
-								if item.labelDetails and item.labelDetails.detail then
-									item.labelDetails.description =
-										item.labelDetails.detail:gsub("%.md$", "")
-									item.labelDetails.detail = nil
-								end
-								return item
-							end
-						)
-						:totable()
-				end,
 			},
 			snippets = {
 				-- don't show when triggered manually (= length 0), useful

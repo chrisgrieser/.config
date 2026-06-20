@@ -3,17 +3,17 @@
 
 ---@type vim.lsp.Config
 return {
-	-- leave out `.git` to not attach to non-note repos due to https://github.com/Feel-ix-343/markdown-oxide/issues/323
-	root_markers = { ".moxide.toml", ".obsidian" },
-	workspace_required = true,
-
 	on_attach = function(_client, bufnr)
+		-- CODELENS shows backlinks count on top of file
+		-- (where it's also not in the way, so it can be enabled by default)
+		vim.lsp.codelens.enable(true, { bufnr = bufnr })
+
+		-- PENDING https://github.com/Feel-ix-343/markdown-oxide/issues/288
 		-- rename file via `vim.lsp.buf.rename` to also update references
 		-- Caveat: breaks URIs in mdlinks https://github.com/Feel-ix-343/markdown-oxide/issues/331
 		Keymap {
 			"<leader>fr",
 			function()
-				-- PENDING https://github.com/Feel-ix-343/markdown-oxide/issues/288
 				local node = vim.treesitter.get_node()
 				local parent = node and node:parent()
 				if parent and vim.endswith(parent:type(), "heading") then
@@ -34,9 +34,5 @@ return {
 			desc = "󰑕 Rename & update refs",
 			buf = bufnr,
 		}
-
-		-- codelens shows backlinks count on top of file
-		-- (where it's also not in the way, so it can be enabled by default)
-		vim.lsp.codelens.enable(true, { bufnr = bufnr })
 	end,
 }
