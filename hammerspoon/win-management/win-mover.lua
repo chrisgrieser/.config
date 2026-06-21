@@ -86,7 +86,7 @@ local function toNextDisplay()
 end
 
 hs.hotkey.bind({ "ctrl" }, "space", toggleMaximized)
-hs.hotkey.bind(u.hyper, "N", toNextDisplay)
+hs.hotkey.bind(u.hyper, "M", toNextDisplay)
 
 --------------------------------------------------------------------------------
 return M
