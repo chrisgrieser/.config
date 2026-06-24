@@ -38,7 +38,7 @@
       "src": "https://github.com/nvim-mini/mini.operators"
     },
     "neocodeium": {
-      "rev": "d6dd1fe6938e89460e27f5215516f5e9468d8a10",
+      "rev": "ab8a3da3a66d299ad5422b76ce5ee21b68719296",
       "src": "https://github.com/monkoose/neocodeium"
     },
     "nightfox.nvim": {
@@ -46,19 +46,19 @@
       "src": "https://github.com/EdenEast/nightfox.nvim"
     },
     "nvim-chainsaw": {
-      "rev": "7a19a42ec97ca4ee2c280d6d2c8ae51c482953b7",
+      "rev": "823104b77da830d1a5de6d6aa8586c37537f7302",
       "src": "https://github.com/chrisgrieser/nvim-chainsaw"
     },
     "nvim-genghis": {
-      "rev": "e6fd1f42736b15e63c0c703457c5ca162228a2f3",
+      "rev": "12100e3fe7fa863f60b5b81a3587c8c9d5a5b2ff",
       "src": "https://github.com/chrisgrieser/nvim-genghis"
     },
     "nvim-justice": {
-      "rev": "a3e0d2d73d1748d1bed45e6b1797fbc73961e53f",
+      "rev": "11e4deec4c00d07b48d5b5008ab53bba267e71f5",
       "src": "https://github.com/chrisgrieser/nvim-justice"
     },
     "nvim-lsp-endhints": {
-      "rev": "a86e7ca7a92ef003008d7eb5d153c63bcc89f79c",
+      "rev": "cc11482c988ba0e394b3426ae13d0b97e81a508d",
       "src": "https://github.com/chrisgrieser/nvim-lsp-endhints"
     },
     "nvim-lspconfig": {
@@ -66,23 +66,23 @@
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-origami": {
-      "rev": "47be2209d09755c0202da1e22a8d67af8f5ae178",
+      "rev": "f15aad8c58ef24b98ffe241ff52f9dfd74cff591",
       "src": "https://github.com/chrisgrieser/nvim-origami"
     },
     "nvim-rip-substitute": {
-      "rev": "c65592d88f0fa00396e260da99d9e419f4891e3b",
+      "rev": "5aafa8e31971d2fb1dbb207f1ecd3b12b1ba0f88",
       "src": "https://github.com/chrisgrieser/nvim-rip-substitute"
     },
     "nvim-rulebook": {
-      "rev": "083dd66b498bc142386a7c96dddab73acbf4ec20",
+      "rev": "a55b17d0d66ce174c77821564e1c3e744d67d6df",
       "src": "https://github.com/chrisgrieser/nvim-rulebook"
     },
     "nvim-scissors": {
-      "rev": "9cc1ba06afa8b23b0d30cadc02c40940df1d701e",
+      "rev": "4abd0dc9510599d90d871d112f01924ef7171705",
       "src": "https://github.com/chrisgrieser/nvim-scissors"
     },
     "nvim-spider": {
-      "rev": "4fdd56a4f45bca13a607632e15a6f9f8d1b1f99e",
+      "rev": "7f021426d4a615ea8f11cabed434b1f20376abae",
       "src": "https://github.com/chrisgrieser/nvim-spider"
     },
     "nvim-surround": {
@@ -90,7 +90,7 @@
       "src": "https://github.com/kylechui/nvim-surround"
     },
     "nvim-tinygit": {
-      "rev": "f12990601dfa63c623049b470dc306ca905064c8",
+      "rev": "7cc03bfd73863fc24e1a07e9465d3dba32336b74",
       "src": "https://github.com/chrisgrieser/nvim-tinygit"
     },
     "nvim-treesitter": {
@@ -102,7 +102,7 @@
       "src": "https://github.com/nvim-treesitter/nvim-treesitter-textobjects"
     },
     "nvim-various-textobjs": {
-      "rev": "ad78e9d925c95d675b32dd7ba6d253f96ce063fe",
+      "rev": "fed132a88454e52c9691f4751090031944af4a7e",
       "src": "https://github.com/chrisgrieser/nvim-various-textobjs"
     },
     "refactoring.nvim": {
