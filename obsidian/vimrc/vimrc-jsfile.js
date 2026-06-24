@@ -144,7 +144,7 @@ function incrementHeading(dir) {
 	const { line: lnum, ch: col } = editor.getCursor();
 	const curLine = editor.getLine(lnum);
 
-	let updatedLine = curLine.replace(/^#* /, (match) => {
+	let updatedLine = curLine.replace(/^#+ /, (match) => {
 		if (dir === -1 && match !== "# ") return match.slice(1);
 		if (dir === 1 && match !== "###### ") return "#" + match;
 		return "";
