@@ -1280,7 +1280,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>note</key>
-			<string>!= one file</string>
+			<string>!= 1 file</string>
 			<key>xpos</key>
 			<real>350</real>
 			<key>ypos</key>
@@ -1399,7 +1399,7 @@ to modify the respective hotkey</string>
 			<key>note</key>
 			<string>open if just one file</string>
 			<key>xpos</key>
-			<real>185</real>
+			<real>190</real>
 			<key>ypos</key>
 			<real>580</real>
 		</dict>
@@ -1725,7 +1725,7 @@ to modify the respective hotkey</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.4.1</string>
+	<string>1.4.2</string>
 	<key>webaddress</key>
 	<string>chris-grieser.de</string>
 </dict>

@@ -109,7 +109,7 @@
 				<key>fixedorder</key>
 				<false/>
 				<key>items</key>
-				<string>[{"imagefile":"efb8cca57e4d67981a976010a2d2953e2aec83c5.png","title":"AltTab","arg":"AltTab","subtitle":""},{"imagefile":"31e8e84684405b35c7896380a515cd49fc250b5e.png","title":"Hammerspoon","arg":"hammerspoon_reload","subtitle":"🔁 reload"},{"imagefile":"31e8e84684405b35c7896380a515cd49fc250b5e.png","title":"Hammerspoon","arg":"Hammerspoon","subtitle":""},{"imagefile":"91a15ef6185b87dc073439ce4b7f2b120c5bfdca.png","title":"sketchybar","arg":"sketchybar","subtitle":"🔁 reload"},{"imagefile":"80cebc78d376b7946a2ab63288812da45a1764b3.png","title":"espanso","arg":"espanso","subtitle":""},{"imagefile":"bb0a22eadac27739c09f9cd127cf77b6b39ee153.png","title":"Stats","arg":"Stats"}]</string>
+				<string>[{"imagefile":"efb8cca57e4d67981a976010a2d2953e2aec83c5.png","title":"AltTab","arg":"AltTab","subtitle":""},{"imagefile":"31e8e84684405b35c7896380a515cd49fc250b5e.png","title":"Hammerspoon","arg":"hammerspoon_reload","subtitle":"🔁 reload"},{"imagefile":"31e8e84684405b35c7896380a515cd49fc250b5e.png","title":"Hammerspoon","arg":"Hammerspoon","subtitle":""},{"imagefile":"80cebc78d376b7946a2ab63288812da45a1764b3.png","title":"espanso","arg":"espanso","subtitle":""},{"imagefile":"bb0a22eadac27739c09f9cd127cf77b6b39ee153.png","title":"Stats","arg":"Stats"}]</string>
 				<key>keyword</key>
 				<string>restart</string>
 				<key>matchmode</key>

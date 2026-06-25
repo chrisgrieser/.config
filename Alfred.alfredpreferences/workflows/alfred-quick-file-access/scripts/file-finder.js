@@ -161,7 +161,12 @@ function run() {
 	console.log("SHELL COMMAND\n" + shellCmd);
 	const stdout = app.doShellScript(shellCmd).trim();
 	console.log("\nSTDOUT (shortened)\n" + stdout.slice(0, 300));
-	if (stdout === "") return errorItem("No files found.");
+	if (stdout === "") {
+		if (keyword !== $.getenv("tag_keyword")) return errorItem("No files found.");
+		const prefix = $.getenv("tag_prefix");
+		const tag = $.getenv("tag_to_search");
+		return errorItem(`No files found with ${prefix} ${tag}`);
+	}
 
 	// CREATE ALFRED ITEMS
 	const results = stdout
