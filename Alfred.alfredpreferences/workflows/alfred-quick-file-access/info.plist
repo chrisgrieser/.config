@@ -817,6 +817,29 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/copy-file.js</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>89AAC152-1A79-4CBF-9BDD-DBBAF712F72C</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>alfredfiltersresults</key>
 				<true/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -862,29 +885,6 @@
 			<string>F51A014F-1ABC-49D4-ADA8-0B83A691533F</string>
 			<key>version</key>
 			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/copy-file.js</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>89AAC152-1A79-4CBF-9BDD-DBBAF712F72C</string>
-			<key>version</key>
-			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -936,6 +936,36 @@
 			<string>7B044726-677B-4792-A3E3-29ACE7900F6F</string>
 			<key>version</key>
 			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string># Open if folder, reveal if file. 
+# Needed as files in the trash cannot be opened.
+
+if [[ -f "$1" ]] ; then
+	open -R "$1"
+elif [[ -d "$1" ]] ; then
+	open "$1"
+fi</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>11</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>D2B2FCCA-99A2-437E-94C0-AA67800FAAE0</string>
+			<key>version</key>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1048,36 +1078,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string># Open if folder, reveal if file. 
-# Needed as files in the trash cannot be opened.
-
-if [[ -f "$1" ]] ; then
-	open -R "$1"
-elif [[ -d "$1" ]] ; then
-	open "$1"
-fi</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>11</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>D2B2FCCA-99A2-437E-94C0-AA67800FAAE0</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>conditions</key>
 				<array>
 					<dict>
@@ -1086,7 +1086,7 @@ fi</string>
 						<key>matchcasesensitive</key>
 						<false/>
 						<key>matchmode</key>
-						<integer>2</integer>
+						<integer>1</integer>
 						<key>matchstring</key>
 						<string>1</string>
 						<key>outputlabel</key>
@@ -1222,9 +1222,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>tagged</string>
 			<key>xpos</key>
-			<real>470</real>
+			<real>495</real>
 			<key>ypos</key>
-			<real>560</real>
+			<real>580</real>
 		</dict>
 		<key>046A7EDC-4CFB-42C9-B7FD-7ECB4FD32442</key>
 		<dict>
@@ -1280,11 +1280,11 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>note</key>
-			<string>&gt; 1 file</string>
+			<string>!= one file</string>
 			<key>xpos</key>
-			<real>335</real>
+			<real>350</real>
 			<key>ypos</key>
-			<real>590</real>
+			<real>610</real>
 		</dict>
 		<key>2F78B362-3AF3-4AD0-BEBF-22FECBEEBB77</key>
 		<dict>
@@ -1300,9 +1300,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>410</real>
+			<real>430</real>
 			<key>ypos</key>
-			<real>590</real>
+			<real>610</real>
 		</dict>
 		<key>510F2976-FA05-4025-B2F1-BE4C2CA9783C</key>
 		<dict>
@@ -1320,7 +1320,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>560</real>
+			<real>580</real>
 		</dict>
 		<key>6DCEA464-F1BD-49D5-9251-E455ADD73073</key>
 		<dict>
@@ -1347,7 +1347,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>185</real>
 			<key>ypos</key>
-			<real>460</real>
+			<real>470</real>
 		</dict>
 		<key>85BA17FF-F81C-4558-A3DD-A06ED76BB023</key>
 		<dict>
@@ -1399,9 +1399,9 @@ to modify the respective hotkey</string>
 			<key>note</key>
 			<string>open if just one file</string>
 			<key>xpos</key>
-			<real>175</real>
+			<real>185</real>
 			<key>ypos</key>
-			<real>560</real>
+			<real>580</real>
 		</dict>
 		<key>BAE121DB-A4DB-45C3-9C13-DBB7886D8933</key>
 		<dict>
@@ -1430,7 +1430,7 @@ to modify the respective hotkey</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>430</real>
+			<real>440</real>
 		</dict>
 		<key>D2B2FCCA-99A2-437E-94C0-AA67800FAAE0</key>
 		<dict>
@@ -1461,7 +1461,7 @@ to modify the respective hotkey</string>
 			<key>xpos</key>
 			<real>265</real>
 			<key>ypos</key>
-			<real>430</real>
+			<real>440</real>
 		</dict>
 		<key>FBA872DF-C511-43B9-8018-C366115A078C</key>
 		<dict>
