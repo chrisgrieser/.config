@@ -6,12 +6,6 @@ plugin_name := "time-tracking-helper"
 #───────────────────────────────────────────────────────────────────────────────
 
 [macos]
-zip:
-    #!/usr/bin/env zsh
-    zip --recurse-paths "../{{ plugin_name }}.zip" ./
-    open -R "../{{ plugin_name }}.zip"
-
-[macos]
 build-and-reload:
     #!/usr/bin/env zsh
     if [[ ! -d "{{ test_vault }}/.obsidian" ]]; then
@@ -28,3 +22,9 @@ build-and-reload:
 
     # reload (REQUIRES: registering the URI manually in a helper plugin)
     open "obsidian://reload-plugin?id=$plugin_id&vault=$vault_name"
+
+[macos]
+zip:
+    #!/usr/bin/env zsh
+    zip --recurse-paths "../{{ plugin_name }}.zip" ./
+    open -R "../{{ plugin_name }}.zip"
