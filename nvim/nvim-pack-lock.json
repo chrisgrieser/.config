@@ -62,7 +62,7 @@
       "src": "https://github.com/chrisgrieser/nvim-lsp-endhints"
     },
     "nvim-lspconfig": {
-      "rev": "3371bf298c1f56efc26771ee961f461176958fb5",
+      "rev": "dd1c9b802c943278179a5d819369cda085b79d45",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-origami": {
@@ -78,7 +78,7 @@
       "src": "https://github.com/chrisgrieser/nvim-rulebook"
     },
     "nvim-scissors": {
-      "rev": "4abd0dc9510599d90d871d112f01924ef7171705",
+      "rev": "77dfcafd53088c7941f2d383541aa8fdda7fd7b7",
       "src": "https://github.com/chrisgrieser/nvim-scissors"
     },
     "nvim-spider": {
