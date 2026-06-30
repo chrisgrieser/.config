@@ -436,6 +436,7 @@ nnoremap ss VP
 nnoremap S vg$P
 nnoremap sj VjP
 nnoremap sJ VjjP
+nnoremap sl vP
 nnoremap sim viWP
 nnoremap sam vaWP
 nnoremap siw viwP "typos: ignore-line
