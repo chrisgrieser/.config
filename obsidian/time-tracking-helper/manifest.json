@@ -3,7 +3,7 @@
 	"name": "Time Tracking Helper",
 	"version": "0.1",
 	"minAppVersion": "1.17.0",
-	"description": "Simple conversion of manual time tracking information into strucutred reports.",
+	"description": "Simple conversion of manual time tracking information into structured reports.",
 	"author": "Chris Grieser",
 	"authorUrl": "https://github.com/chrisgrieser",
 	"isDesktopOnly": false

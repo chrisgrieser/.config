@@ -1,7 +1,7 @@
 set quiet
 
 test_vault := "$HOME/writing-vault/"
-plugin_name := "time-tracking-helper"
+plugin_name := "drink-reminder"
 
 #───────────────────────────────────────────────────────────────────────────────
 

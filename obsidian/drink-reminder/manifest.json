@@ -1,0 +1,10 @@
+{
+	"id": "drink-reminder",
+	"name": "Drink Reminder",
+	"version": "0.1",
+	"minAppVersion": "1.17.0",
+	"description": "Reminder to drink water",
+	"author": "Chris Grieser",
+	"authorUrl": "https://github.com/chrisgrieser",
+	"isDesktopOnly": false
+}
