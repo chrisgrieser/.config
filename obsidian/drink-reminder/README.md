@@ -6,7 +6,7 @@
 3. Press the folder button, the folder `{obsdian-vault-path}/.obsidian/plugins`
    will open. Move unzipped folder `drink-reminder` into this folder.
 4. Restart Obsidian.
-5. *(only when installing)* enable the plugin `Drink Reminder`.
+5. Enable the plugin `Drink Reminder` in the list of community plugins.
 
 ## Update
 1. In Obsidian, go to Settings → Community Plugins.

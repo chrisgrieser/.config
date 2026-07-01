@@ -1,12 +1,12 @@
 # Time tracking helper
 
-## [Installation]()
+## Installation
 1. Unzip the file `time-tracking-helper.zip`.
 2. In Obsidian, go to `Settings` → `Community Plugins`.
 3. Press the folder button, the folder `{obsdian-vault-path}/.obsidian/plugins`
    will open. Move unzipped folder `time-tracking-helper` into this folder.
 4. Restart Obsidian.
-5. *(only when installing)* enable the plugin `Time Tracking Helper`.
+5. Enable the plugin `Time Tracking Helper` in the list of community plugins.
 
 ## Update
 1. In Obsidian, go to Settings → Community Plugins.
