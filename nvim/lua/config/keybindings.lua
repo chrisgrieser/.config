@@ -9,7 +9,7 @@ Keymap {
 	mode = { "n", "x", "i" },
 }
 
-Keymap {
+ {
 	"<D-,>",
 	function()
 		local pathOfThisLuaFile = debug.getinfo(1, "S").source:gsub("^@", "")
