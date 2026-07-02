@@ -23,6 +23,8 @@ return {
 			language = "auto", -- also per-file via yaml header: `lang: de-DE` https://ltex-plus.github.io/ltex-plus/advanced-usage.html#set-language-in-markdown-with-yaml-front-matter
 			diagnosticSeverity = { default = "warning" },
 			disabledRules = {
+				["en-US"] = { "MORFOLOGIK_RULE_EN_US" }, -- spellcheck done via Harper instead
+				["en-GB"] = { "MORFOLOGIK_RULE_EN_US" }, -- spellcheck done via Harper instead
 				["en"] = {
 					"MORFOLOGIK_RULE_EN_US", -- spellcheck done via Harper instead
 					"EN_QUOTES", -- don't expect smart quotes
