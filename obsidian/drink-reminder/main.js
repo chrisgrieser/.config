@@ -47,7 +47,8 @@ class DrinkReminderPlugin extends obsidian.Plugin {
 
 		setInterval(() => {
 			const msgId = Math.floor(Math.random() * SETTINGS.messages.length);
-			new Notice(SETTINGS.messages[msgId], 15_000);
+			new Notice(SETTINGS.messages[msgId], 0); // 0 = indefinitely until clicked awayx
+			console.log(msgId);
 		}, SETTINGS.intervalMins * 1000 * 60);
 	}
 }
