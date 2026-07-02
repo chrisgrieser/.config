@@ -47,7 +47,7 @@ class DrinkReminderPlugin extends obsidian.Plugin {
 
 		setInterval(() => {
 			const msgId = Math.floor(Math.random() * SETTINGS.messages.length);
-			new Notice(SETTINGS.messages[msgId], 6000);
+			new Notice(SETTINGS.messages[msgId], 15_000);
 		}, SETTINGS.intervalMins * 1000 * 60);
 	}
 }
