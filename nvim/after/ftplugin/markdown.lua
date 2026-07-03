@@ -65,6 +65,24 @@ Bufmap {
 Bufmap { "<leader>ep", qol.previewViaPandoc, desc = "󰍔 Preview" }
 Bufmap { "gx", qol.followMdlinkOrWikilink, desc = "󰍔 Follow URL/Wikilink" }
 
+Bufmap {
+	"<leader>em",
+	function()
+		local hasMarp = vim.fn.executable("marp") == 1
+		assert(hasMarp, "`marp` not found, install via `brew install marp-cli google-chrome`")
+
+		local inputMd = vim.api.nvim_buf_get_name(0)
+		local outputDir = vim.env.HOME .. "/Desktop/"
+		local pdf = outputDir .. vim.fs.basename(inputMd):gsub("%.md$", ".pdf")
+		vim.notify("Converting…")
+		vim.system({ "marp", inputMd, "--pdf", "--output=" .. pdf }, function(out)
+			assert(out.code == 0, out.stderr)
+			vim.system { "open", "-R", pdf }
+		end)
+	end,
+	desc = "󰍔 Marp (PDF Presentation)",
+}
+
 -- `hyper` gets registered by neovide as `cmd+ctrl` (`<D-C-`)
 Bufmap { "<D-C-e>", qol.codeBlockFromClipboard, mode = { "n", "i" }, desc = "󰍔 Codeblock" }
 
