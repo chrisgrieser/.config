@@ -1,4 +1,4 @@
-# DOCS https://github.com/rvben/rumdl/blob/main/docs/global-settings.md
+# DOCS https://rumdl.dev/global-settings
 
 [global]
 line-length = 80
@@ -40,8 +40,16 @@ enabled = true  # opt-in rule
 
 [heading-capitalization]
 enabled = true  # opt-in rule
-style = "sentence_case"
-ignore-words = ["nvim", "Obsidian", "Alfred"]
+style = "title-case"  # sentence case problematic with German
+ignore-words = [
+	# names
+	"nvim",
+	"Obsidian",
+	"Alfred",
+	# German
+	"von",
+	"und",
+]
 
 [frontmatter-key-sort]
 enabled = true  # opt-in rule
