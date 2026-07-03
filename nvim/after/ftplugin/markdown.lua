@@ -71,6 +71,7 @@ Bufmap {
 		local hasMarp = vim.fn.executable("marp") == 1
 		assert(hasMarp, "`marp` not found, install via `brew install marp-cli google-chrome`")
 
+		vim.cmd("silent! update")
 		local inputMd = vim.api.nvim_buf_get_name(0)
 		local outputDir = vim.env.HOME .. "/Desktop/"
 		local pdf = outputDir .. vim.fs.basename(inputMd):gsub("%.md$", ".pdf")
