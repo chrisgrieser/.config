@@ -62,7 +62,7 @@ Bufmap {
 }
 
 ---MISC-------------------------------------------------------------------------
-Bufmap { "<leader>ep", qol.previewViaPandoc, desc = "󰍔 Preview" }
+Bufmap { "<leader>ep", qol.previewViaPandoc, desc = "󰈈 Preview" }
 Bufmap { "gx", qol.followMdlinkOrWikilink, desc = "󰍔 Follow URL/Wikilink" }
 
 Bufmap {
@@ -81,7 +81,7 @@ Bufmap {
 			vim.system { "open", "-R", pdf }
 		end)
 	end,
-	desc = "󰍔 Marp (PDF Presentation)",
+	desc = "󰐩 Presentation (via Marp)",
 }
 
 -- `hyper` gets registered by neovide as `cmd+ctrl` (`<D-C-`)
