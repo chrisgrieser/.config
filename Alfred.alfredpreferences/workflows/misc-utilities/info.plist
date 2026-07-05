@@ -244,7 +244,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>A4C34123-C5CC-49B9-8F56-02BB12B50D26</string>
+				<string>A322D19D-0E7D-41BC-AB1A-905AD1B79DD3</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -773,7 +773,9 @@
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>script</key>
-				<string>/usr/bin/xattr -d com.apple.quarantine "${@}"</string>
+				<string>/usr/bin/xattr -d com.apple.quarantine "${@}"
+
+echo -n " 🌡️ Unquarantined"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -802,6 +804,27 @@
 			<string>alfred.workflow.trigger.action</string>
 			<key>uid</key>
 			<string>61B6049A-0E52-4E28-A813-05177E38D595</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>{query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>A322D19D-0E7D-41BC-AB1A-905AD1B79DD3</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -981,27 +1004,6 @@
 			<string>alfred.workflow.trigger.action</string>
 			<key>uid</key>
 			<string>D29A152C-35C4-4892-831E-76C22D401194</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string></string>
-				<key>title</key>
-				<string>{query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>A322D19D-0E7D-41BC-AB1A-905AD1B79DD3</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1837,18 +1839,18 @@
 			<key>colorindex</key>
 			<integer>1</integer>
 			<key>xpos</key>
-			<real>330</real>
+			<real>340</real>
 			<key>ypos</key>
-			<real>365</real>
+			<real>310</real>
 		</dict>
 		<key>A4C34123-C5CC-49B9-8F56-02BB12B50D26</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>1</integer>
 			<key>xpos</key>
-			<real>475</real>
+			<real>485</real>
 			<key>ypos</key>
-			<real>285</real>
+			<real>340</real>
 		</dict>
 		<key>A51066A2-90E9-43BC-A689-373B76D3219F</key>
 		<dict>
