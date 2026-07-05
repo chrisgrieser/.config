@@ -75,7 +75,7 @@ Bufmap {
 		local inputMd = vim.api.nvim_buf_get_name(0)
 		local outputDir = vim.env.HOME .. "/Desktop/"
 		local pdf = outputDir .. vim.fs.basename(inputMd):gsub("%.md$", ".pdf")
-		vim.notify("Converting…")
+		vim.notify("Converting to PDF presentation…")
 		vim.system({ "marp", inputMd, "--pdf", "--output=" .. pdf }, function(out)
 			assert(out.code == 0, out.stderr)
 			vim.system { "open", "-R", pdf }
