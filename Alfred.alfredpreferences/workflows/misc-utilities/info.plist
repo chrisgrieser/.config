@@ -775,7 +775,7 @@
 				<key>script</key>
 				<string>/usr/bin/xattr -d com.apple.quarantine "${@}"
 
-echo -n " 🌡️ Unquarantined"</string>
+echo -n "🌡️ Removed quarantine"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
