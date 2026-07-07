@@ -33,7 +33,15 @@ local function updateReminderCount()
 					.reminderCount
 					:returnToMenuBar()
 					:setTitle(config.reminderIcon .. count) ---@diagnostic disable-line: undefined-field
-					:setClickCallback(function() hs.application.open("Reminders") end)
+					:setClickCallback(function()
+						hs.application.open("Reminders")
+						-- open "Today" in Reminders
+						hs.osascript.applescript([[
+							tell application "System Events" to tell process "Reminders"
+								click menu item "Today" of menu of menu item "Go To" of menu "View" of menu bar 1
+							end tell
+						]])
+					end)
 			end
 		end)
 		:start()
