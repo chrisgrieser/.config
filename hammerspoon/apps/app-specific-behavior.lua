@@ -31,9 +31,6 @@ M.aw_finder = aw.new(function(appName, event, finder)
 end):start()
 
 ---PDF READERS------------------------------------------------------------------
--- 1. Sync Dark/Light Mode
--- 2. Start with Highlight Tool enabled
--- 3. Delete useless iCloud PDF folder that's always created
 M.aw_pdfreaders = aw.new(function(appName, event, app)
 	if event == aw.launched and appName == "Highlights" then
 		app:selectMenuItem { "Tools", "Highlight" }
