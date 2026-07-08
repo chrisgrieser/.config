@@ -144,5 +144,15 @@ M.displayCountWatcher = hs.screen.watcher
 	end)
 	:start()
 
+-- 5. wake
+M.wakeWatcher = hs.caffeinate.watcher
+	.new(function()
+		if hs.caffeinate.watcher.systemDidWake then
+			updateReminderCount()
+			updateGithubNotifCount()
+		end
+	end)
+	:start()
+
 --------------------------------------------------------------------------------
 return M
