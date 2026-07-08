@@ -11,8 +11,18 @@ return {
 			vim.g.notesDir,
 		}
 		local filepath = vim.api.nvim_buf_get_name(bufnr)
-		local ignore = vim.iter(pathsToIgnore):any(function(p) return vim.startswith(filepath, p) end)
-		if ignore then return end
+		local ignoredPath = vim.iter(pathsToIgnore)
+			:any(function(p) return vim.startswith(filepath, p) end)
+		if ignoredPath then return end
+
+		-- do not load on large files due to lags
+		local maxKb = 20
+		local largeFile = vim.uv.fs_stat(filepath).size > maxKb * 1024
+		if largeFile then
+			local msg = ("Disabled since file larger than %d kb."):format(maxKb)
+			vim.notify(msg, nil, { title = "ltex_plus" })
+			return
+		end
 
 		local rootMarkers = { ".git" }
 		on_dir(vim.fs.root(bufnr, rootMarkers))

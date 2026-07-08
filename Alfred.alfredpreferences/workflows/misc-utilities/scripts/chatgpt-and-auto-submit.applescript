@@ -3,7 +3,7 @@
 on run argv
 	set query to argv as string
 	tell application "Brave Browser"
-		open location "https://chatgpt.com/?prompt=" & query
+		open location "https://chatgpt.com/?q=" & query
 		repeat until (loading of active tab of front window is false)
 			delay 0.1
 		end repeat
