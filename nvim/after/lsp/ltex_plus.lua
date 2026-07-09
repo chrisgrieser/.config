@@ -24,6 +24,7 @@ return {
 			return
 		end
 
+		-- set root markers
 		local rootMarkers = { ".git" }
 		on_dir(vim.fs.root(bufnr, rootMarkers))
 	end,
