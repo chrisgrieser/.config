@@ -146,8 +146,7 @@ function _magic_enter {
 	# GUARD only when in terminal with sufficient height
 	[[ $LINES -gt $disabled_below_height ]] || return 0
 
-	# shellcheck disable=2012
-	[[ "$(eza --git-ignore "$PWD" | wc -l)" -gt 0 ]] && echo
+	[[ "$(eza --git-ignore --long "$PWD" | wc -l)" -gt 0 ]] && echo
 	_magic_dashboard
 }
 
