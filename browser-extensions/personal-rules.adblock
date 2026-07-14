@@ -32,7 +32,6 @@ help.obsidian.md##.site-body-left-column
 chatgpt.com##[href="/apps"]
 chatgpt.com##[href="/codex"]
 chatgpt.com###page-header > .absolute
-chatgpt.com###thread-bottom-container > div:last-child
 chatgpt.com##div:has( > button[aria-label="Claim offer"])
 
 ! search
