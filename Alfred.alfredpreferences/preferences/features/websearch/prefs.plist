@@ -48,6 +48,17 @@
 			<key>url</key>
 			<string>https://thepiratebay.org/search.php?q={query}</string>
 		</dict>
+		<key>1897FCEA-69E3-4E52-BD54-80F0FEBD6C25</key>
+		<dict>
+			<key>enabled</key>
+			<true/>
+			<key>keyword</key>
+			<string>ai</string>
+			<key>text</key>
+			<string>ChatGPT: {query}</string>
+			<key>url</key>
+			<string>https://chatgpt.com/?q={query}</string>
+		</dict>
 		<key>1CDB8700-6FF8-462F-A8A6-B6A3A4B1AECA</key>
 		<dict>
 			<key>enabled</key>

@@ -214,19 +214,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>642F1D70-B635-49FC-894B-02013EB50A41</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>C397D532-F175-4A35-A95F-4E44FC857E15</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>6DD1B7E7-F945-479C-9FA5-3AA4C34FB352</key>
 		<array>
 			<dict>
@@ -1512,50 +1499,6 @@ echo -n "🌡️ Removed quarantine"</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>ai</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>ChatGPT: {query}</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>642F1D70-B635-49FC-894B-02013EB50A41</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>scripts/chatgpt-and-auto-submit.applescript</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>C397D532-F175-4A35-A95F-4E44FC857E15</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
 	</array>
 	<key>readme</key>
 	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
@@ -1749,17 +1692,6 @@ echo -n "🌡️ Removed quarantine"</string>
 			<key>ypos</key>
 			<real>360</real>
 		</dict>
-		<key>642F1D70-B635-49FC-894B-02013EB50A41</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>note</key>
-			<string>prompt ChatGPT (without needing to press `enter`)</string>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>1165</real>
-		</dict>
 		<key>6DD1B7E7-F945-479C-9FA5-3AA4C34FB352</key>
 		<dict>
 			<key>colorindex</key>
@@ -1951,15 +1883,6 @@ echo -n "🌡️ Removed quarantine"</string>
 			<real>190</real>
 			<key>ypos</key>
 			<real>485</real>
-		</dict>
-		<key>C397D532-F175-4A35-A95F-4E44FC857E15</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>xpos</key>
-			<real>195</real>
-			<key>ypos</key>
-			<real>1165</real>
 		</dict>
 		<key>D29A152C-35C4-4892-831E-76C22D401194</key>
 		<dict>
