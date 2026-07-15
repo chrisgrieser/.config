@@ -54,6 +54,9 @@ noremap ,yp :copyParentPath<CR>
 noremap ,yn :copyFilename<CR>
 noremap ,yo :copyObsidianUriMdLink<CR>
 
+exmap copyBlockQuoteFromDatafile jsfile Meta/vimrc-jsfile.js { copyBlockQuoteFromDatafile() }
+noremap ,yb :copyBlockQuoteFromDatafile<CR>
+
 "───────────────────────────────────────────────────────────────────────────────
 " NAVIGATION
 

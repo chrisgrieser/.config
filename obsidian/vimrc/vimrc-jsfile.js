@@ -462,8 +462,8 @@ function toggleComment() {
 
 //------------------------------------------------------------------------------
 
-// for the data vault
-function copyQuoteWithId() {
+// for the phd-data vault using Quadro
+function copyBlockQuoteFromDatafile() {
 	const app = view.app;
 	const activeFile = app.workspace.getActiveFile();
 	if (!activeFile) return;
@@ -475,9 +475,12 @@ function copyQuoteWithId() {
 		new Notice("File has no ID.");
 		return;
 	}
-	const cleanParagraph = paragraph.replace(/f/, "");
+	// remove trailing wikilinks and block-id, e.g. ` [[influence 155]] ^id-2026-03-10--16-14-31`
+	const cleanParagraph = paragraph
+		.replace(/ \^[\w-]+ *$/, "") // remove block-id
+		.replace(/ *\[\[.*\]\] *$/, ""); // remove wikilinks (greedy inside [[]], to catch multiple ones)
 
 	const output = "> " + cleanParagraph + ` *(${id}, emphasis added)*`;
 	navigator.clipboard.writeText(output);
-	new Notice("Copied quote with id:\n" + output);
+	new Notice("Copied.");
 }
