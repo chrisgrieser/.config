@@ -59,7 +59,7 @@ _escape_on_empty_buffer() {
 	# no need for `--sortr=modified`, since using `eza --sort=oldest` afterwards
 	local rg_cmd="rg --no-config --follow --files --ignore-file='$HOME/.config/ripgrep/ignore'"
 	# sed to remove `->` symlink indicator
-	local eza_cmd="eza --color=always --icons=always --sort=oldest --no-quotes | sed 's/ [^ ]*->.*//'"
+	local eza_cmd="eza --long --color=always --icons=always --sort=oldest --no-quotes --no-permissions --no-filesize --no-user --no-time | sed 's/ [^ ]*->.*//'"
 
 	selected=$(
 		zsh -c "$rg_cmd" | zsh -c "$eza_cmd" | fzf \

@@ -459,3 +459,25 @@ function toggleComment() {
 	cursor.ch += columnShift;
 	editor.setCursor(cursor);
 }
+
+//------------------------------------------------------------------------------
+
+// for the data vault
+function copyQuoteWithId() {
+	const app = view.app;
+	const activeFile = app.workspace.getActiveFile();
+	if (!activeFile) return;
+
+	const lnum = editor.getCursor().line;
+	const paragraph = editor.getLine(lnum);
+	const id = app.metadataCache.getFileCache(activeFile)?.frontmatter?.id;
+	if (!id) {
+		new Notice("File has no ID.");
+		return;
+	}
+	const cleanParagraph = paragraph.replace(/f/, "");
+
+	const output = "> " + cleanParagraph + ` *(${id}, emphasis added)*`;
+	navigator.clipboard.writeText(output);
+	new Notice("Copied quote with id:\n" + output);
+}
