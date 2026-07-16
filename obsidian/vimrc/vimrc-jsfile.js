@@ -84,7 +84,7 @@ function openDynamicHighlightsSettings() {
 function _setCursorAndAddToJumplist(editor, oldCursor, newCursor) {
 	editor.setCursor(newCursor);
 
-	// HACK set vim-mode-jumplist https://github.com/replit/codemirror-vim/blob/master/src/vim.js#L532
+	// set vim-mode-jumplist https://github.com/replit/codemirror-vim/blob/master/src/vim.js#L532
 	activeWindow.CodeMirrorAdapter.Vim.getVimGlobalState_().jumpList.add(
 		editor.cm.cm, // SIC two levels deep
 		oldCursor,
@@ -470,22 +470,21 @@ function copyBlockQuoteFromDatafile() {
 
 	const lnum = editor.getCursor().line;
 	const paragraph = editor.getLine(lnum);
-	let id = app.metadataCache.getFileCache(activeFile)?.frontmatter?.id;
+	const filename = activeFile.basename;
+
+	const id = filename.startsWith("AppDev_")
+		? filename.toLowerCase() // interviews with id in filename
+		: app.metadataCache.getFileCache(activeFile)?.frontmatter?.id;
 	if (!id) {
-		const filename = activeFile.basename;
-		if (filename.startsWith("AppDev")) { // interviews with id in filename
-			id = filename.toLowerCase();
-		} else {
-			new Notice("File has no ID.");
-			return;
-		}
+		new Notice("File has no ID.");
+		return;
 	}
 	// remove trailing wikilinks and block-id, e.g. ` [[influence 155]] ^id-2026-03-10--16-14-31`
 	const cleanParagraph = paragraph
 		.replace(/ \^[\w-]+ *$/, "") // remove block-id
 		.replace(/ *\[\[.*\]\] *$/, ""); // remove wikilinks (greedy inside [[]], to catch multiple ones)
 
-	const output = "> " + cleanParagraph + ` *(${id}, emphasis added)*`;
+	const output = "> " + cleanParagraph + ` *(${id})*`;
 	navigator.clipboard.writeText(output);
 	new Notice("Copied blockqute with ID.");
 }
