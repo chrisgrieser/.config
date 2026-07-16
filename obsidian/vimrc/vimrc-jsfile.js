@@ -470,10 +470,15 @@ function copyBlockQuoteFromDatafile() {
 
 	const lnum = editor.getCursor().line;
 	const paragraph = editor.getLine(lnum);
-	const id = app.metadataCache.getFileCache(activeFile)?.frontmatter?.id;
+	let id = app.metadataCache.getFileCache(activeFile)?.frontmatter?.id;
 	if (!id) {
-		new Notice("File has no ID.");
-		return;
+		const filename = activeFile.basename;
+		if (filename.startsWith("AppDev")) { // interviews with id in filename
+			id = filename.toLowerCase();
+		} else {
+			new Notice("File has no ID.");
+			return;
+		}
 	}
 	// remove trailing wikilinks and block-id, e.g. ` [[influence 155]] ^id-2026-03-10--16-14-31`
 	const cleanParagraph = paragraph
@@ -482,5 +487,5 @@ function copyBlockQuoteFromDatafile() {
 
 	const output = "> " + cleanParagraph + ` *(${id}, emphasis added)*`;
 	navigator.clipboard.writeText(output);
-	new Notice("Copied.");
+	new Notice("Copied blockqute with ID.");
 }
