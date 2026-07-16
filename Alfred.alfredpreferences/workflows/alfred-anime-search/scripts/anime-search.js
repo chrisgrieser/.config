@@ -6,9 +6,11 @@ app.includeStandardAdditions = true;
 
 /** @param {string} url @return {string} */
 function httpRequest(url) {
-	const queryURL = $.NSURL.URLWithString(url);
-	const data = $.NSData.dataWithContentsOfURL(queryURL);
-	return $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding).js;
+	const queryUrl = $.NSURL.URLWithString(url);
+	const data = $.NSData.dataWithContentsOfURL(queryUrl);
+	const response = $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding).js;
+	if (response) return response;
+	return app.doShellScript(`curl -s '${url}'`); // fallback on certain errors
 }
 
 /**
@@ -48,7 +50,6 @@ function errorItem(title, subtitle) {
 
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
-// biome-ignore lint/complexity/noExcessiveCognitiveComplexity: okay here
 function run(argv) {
 	// GUARD
 	const query = argv[0];
@@ -71,23 +72,29 @@ function run(argv) {
 	// API REQUEST
 	// INFO rate limit: 60 requests/minute https://docs.api.jikan.moe/#section/Information/Rate-Limiting
 	// DOCS https://docs.api.jikan.moe/#tag/anime/operation/getAnimeSearch
-	const apiURL = "https://api.jikan.moe/v4/anime?" + params.join("&");
-	/** @type {{data: MalEntry[]}} */
-	const response = JSON.parse(httpRequest(apiURL));
-	if (!response.data) {
-		console.log(JSON.stringify(response));
-		return errorItem("Unknown error.", "See debugging log.");
+	const apiUrl = "https://api.jikan.moe/v4/anime?" + params.join("&");
+	const response = httpRequest(apiUrl);
+	/** @type {{data: MalEntry[]?, message: string?}} */ let json;
+	try {
+		json = JSON.parse(response);
+	} catch (error) {
+		console.log("error:", error);
+		console.log("Response: ", response);
+		return errorItem("JSON not parsable.", "For details, see the debugging log.");
 	}
-	if (response.data.length === 0) return errorItem("No results.", "");
+	if (!json.data) {
+		console.log("JSON response: ", JSON.stringify(response));
+		const message = json.message || "JSON contains no usable data.";
+		return errorItem(message, "For details, see the debugging log.");
+	}
+	if (json.data.length === 0) return errorItem("No results.", "");
 
 	//───────────────────────────────────────────────────────────────────────────
 
-	/** @type AlfredItem[] */
-	const animes = [];
-	/** @type AlfredItem[] */
-	const airingAnimes = [];
+	/** @type AlfredItem[] */ const animes = [];
+	/** @type AlfredItem[] */ const airingAnimes = [];
 
-	for (const anime of response.data) {
+	for (const anime of json.data) {
 		// biome-ignore format: annoyingly long list
 		const { titles, mal_id, year, status, episodes, score, genres, themes, demographics, images, url } = anime;
 
@@ -116,7 +123,7 @@ function run(argv) {
 		// ALT SEARCH
 		const altSearchTitle = altSearchJap ? titleJap : titleEng;
 		const altSearchSubtitle = `⇧: Search for "${altSearchTitle}" at ${altSearchHostname}`;
-		const altSearchURL = $.getenv("alt_search_url") + encodeURIComponent(altSearchTitle);
+		const altSearchUrl = $.getenv("alt_search_url") + encodeURIComponent(altSearchTitle);
 
 		// QUICKLOOK
 		const image = images.webp.large_image_url || images.jpg.large_image_url;
@@ -140,7 +147,7 @@ function run(argv) {
 					variables: { action: "copy" },
 				},
 				shift: {
-					arg: altSearchURL,
+					arg: altSearchUrl,
 					subtitle: altSearchSubtitle,
 					variables: { action: "open" },
 				},
