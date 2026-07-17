@@ -141,3 +141,4 @@ matches:
   - { trigger: logn, replace: long, propagate_case: true, word: true }
   - { trigger: alst, replace: last, propagate_case: true, word: true }
   - { trigger: midn, replace: mind, propagate_case: true, word: true }
+  - { trigger: sotre, replace: store, propagate_case: true, word: true }
