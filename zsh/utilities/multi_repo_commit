@@ -103,4 +103,4 @@ if [[ $not_updated -gt 0 ]]; then
 	echo "────────────────────────"
 	print "\e[1;33m$not_updated repo(s) not updated.\e[0m"
 fi
-"$ZDOTDIR/notificator" --title "🌐Multi-repo commit" --message "Update finished." --sound "Blow"
+osascript -e 'display notification "Update finished." with title "🌐Multi-repo commit" sound name "Blow"'

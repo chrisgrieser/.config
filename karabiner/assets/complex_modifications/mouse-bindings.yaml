@@ -48,8 +48,7 @@ rules:
           - { key_code: n, modifiers: [command, control] }
           - { key_code: "3", modifiers: [command, control] }
           - shell_command: |
-              "$HOME/.config/karabiner/assets/notificators/highlights-notificator" \
-                  --title "Highlights" --message "✏️ Comment"
+              osascript -e 'display notification "✏️ Comment" with title "Highlights"'
         conditions:
           - type: frontmost_application_if
             bundle_identifiers: [net.highlightsapp.universal]
@@ -88,14 +87,12 @@ rules:
           - { key_code: h, modifiers: [command, control] }
           - { key_code: "3", modifiers: [command, control] }
           - shell_command: |
-              "$HOME/.config/karabiner/assets/notificators/highlights-notificator" \
-                  --title "Highlights" --message "🟨 Highlight"
+              osascript -e 'display notification "🟨 Highlight" with title "Highlights"'
         to_if_held_down:
           - { key_code: "u", modifiers: [control, command] }
           - { key_code: "1", modifiers: [control, command] }
           - shell_command: |
-              "$HOME/.config/karabiner/assets/notificators/highlights-notificator" \
-                  --title "Highlights" --message "🖍️ Underline"
+              osascript -e 'display notification "🖍️ Underline" with title "Highlights"'
         conditions:
           - { type: frontmost_application_if, bundle_identifiers: [net.highlightsapp.universal] }
       # Gmail: Delete

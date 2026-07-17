@@ -75,5 +75,5 @@ function update() {
 		brew doctor
 	fi
 
-	"$ZDOTDIR/notificator" --title "🍺 Homebrew" --message "Update finished." --sound "Blow"
+	osascript -e 'display notification "Update finished." with title "🍺 Homebrew" sound name "Blow"'
 }

@@ -238,7 +238,7 @@ function watch_website {
 		sleep 1
 	done
 	echo "🌐 $url is online again"
-	"$ZDOTDIR/notificator" --title "🌐 $url" --message "is online again" --sound "Blow"
+	osascript -e "display notification \"is online again\" with title \"🌐 $url\" sound name \"Blow\""
 }
 
 #-------------------------------------------------------------------------------

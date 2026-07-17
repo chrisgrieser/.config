@@ -51,5 +51,4 @@ ls -t | tail -n +$((max_number_of_bkps + 1)) | tr '\n' '\0' | xargs -0 rm
 
 # NOTIFY
 print "\e[1;32mArchived $repos_count repos.\e[0m"
-"$ZDOTDIR/notificator" --title "⬇️ Repo Backup" \
-	--message "$repos_count repos archived." --sound "Blow"
+osascript -e "display notification \"$repos_count repos archived.\" with title \"⬇️ Repo Backup\" sound name \"Blow\""

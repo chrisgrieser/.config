@@ -149,13 +149,13 @@ echo
 _pretty_header "Report" "special"
 if [[ -z "$errors" ]]; then
 	print "✅ Backup completed: $volume"
-	"$ZDOTDIR/notificator" --title "Backup" --message "✅ completed" --sound "Blow"
+	osascript -e 'display notification "✅ completed" with title "Backup" sound name "Blow"'
 
 	echo "completed: $(date '+%H:%M')" >> "$logpath_on_mac"
 	echo "Backup: $(date '+%Y-%m-%d %H:%M')" >> "$backup_dest/last_backup.log"
 else
 	print "\e[1;31m$errors\e[0m"
-	"$ZDOTDIR/notificator" --title "Backup" --message "⚠️ Errors occurred." --sound "Basso"
+	osascript -e 'display notification "⚠️ Errors occurred." with title "Backup" sound name "Basso"'
 
 	echo "had errors: $(date '+%H:%M')" >> "$logpath_on_mac"
 fi

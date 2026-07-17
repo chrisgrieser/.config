@@ -60,4 +60,4 @@ done <<< "$repos_to_update"
 
 #───────────────────────────────────────────────────────────────────────────────
 
-"$ZDOTDIR/notificator" --title "🌐Multi-repo download" --message "Download finished." --sound "Blow"
+osascript -e 'display notification "Download finished." with title "🌐Multi-repo download" sound name "Blow"'

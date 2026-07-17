@@ -1,8 +1,7 @@
 #!/bin/zsh
-#───────────────────────────────────────────────────────────────────────────────
 
 function notify {
-	./notificator --title "🕑 Watch Later" --message "$1"
+	osascript -e "display notification \"$1\" with title \"🕑 Watch Later\""
 }
 #───────────────────────────────────────────────────────────────────────────────
 

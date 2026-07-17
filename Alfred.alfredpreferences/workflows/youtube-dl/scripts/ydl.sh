@@ -5,7 +5,7 @@
 
 
 function notify {
-	./notificator --title "YT-DLP" --subtitle "$1" --message "$2"
+	osascript -e "display notification \"$1\" with title \"YT-DLP\" subtitle \"$2\""
 }
 
 function error_sound {

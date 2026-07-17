@@ -9,5 +9,6 @@ if [[ -z "$update" ]]; then
 	echo "No update for command line tools available."
 else
 	softwareupdate --install "$update"
-	"$ZDOTDIR/notificator" --title "🖥️ Command Line Tools" --message "Update finished." --sound "Blow"
+	
+	osascript -e 'display notification "Update finished." with title "🖥️ Command Line Tools" sound name "Blow"'
 fi

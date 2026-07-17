@@ -103,8 +103,7 @@ rules:
           - { key_code: i, modifiers: [command, control] }
           - { key_code: "7", modifiers: [command, control] } # purple borders
           - shell_command: |
-              "$HOME/.config/karabiner/assets/notificators/highlights-notificator" \
-                  --title "Highlights" --message "Image 🖼️"
+              osascript -e 'display notification "Image 🖼️" with title "Highlights"'
         conditions:
           - type: frontmost_application_if
             bundle_identifiers: [net.highlightsapp.universal]

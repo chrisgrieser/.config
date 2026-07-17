@@ -56,8 +56,7 @@ rules:
                 return out
               ')
               if [[ -z "$selectedFiles" ]] ; then
-                "$HOME/.config/karabiner/assets/finder-vim-mode/notificator" \
-                  --title "Finder Vim Mode" --message "⚠️ No selection."
+                osascript -e 'display notification "⚠️ No selection." with title "Finder Vim Mode"'
                 exit 1
               fi
 
