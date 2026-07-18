@@ -30,10 +30,9 @@ local ensureInstalled = {
 	"biome", -- ts/js/json/css linter/formatter
 	"eslint-lsp", -- ts/js linter (only Obsidian plugins, otherwise using `biome`)
 	"typescript-language-server",
-	-- "tsgo", -- experimental typescript lsp
 
 	"css-lsp",
-	-- "csskit", -- modern css LSP https://csskit.rs/
+	-- "csskit", -- modern css LSP, still in development https://csskit.rs/docs/lsp/#features
 	"css-variables-language-server", -- support css variables across multiple files
 	"emmet-language-server", -- css/html snippets
 
@@ -41,6 +40,7 @@ local ensureInstalled = {
 	"lua-language-server", -- lua LSP
 	-- "emmylua_ls", -- modern lua LSP, still buggy
 
+	"shuck", -- modern zsh/bash server
 	"bash-language-server", -- also used for zsh
 	"efm", -- integration of external linters
 	"shellcheck", -- shell linter (via efm) PENDING https://github.com/bash-lsp/bash-language-server/issues/663
