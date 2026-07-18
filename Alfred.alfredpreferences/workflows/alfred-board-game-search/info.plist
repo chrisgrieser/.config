@@ -168,7 +168,6 @@
 	</array>
 	<key>readme</key>
 	<string>## Setup
-
 1. [Download the latest data at.](https://boardgamegeek.com/data_dumps/bg_ranks)
 2. Unzip the file. Store the csv at a location of your choice.
 3. Copy the path of the csv file, and enter it to the left.
@@ -182,7 +181,7 @@ Search board games with the `bg` keyword.
 
 #### Workflow created by [Chris Grieser](https://chris-grieser.de/)
 
-#### Database Data by boardgamegeeks.com</string>
+#### Data by [Board Game Geeks](https://boardgamegeek.com/using_the_xml_api)</string>
 	<key>uidata</key>
 	<dict>
 		<key>6BF2B984-1F3B-42A6-AAF6-C08713625399</key>
@@ -257,6 +256,31 @@ Search board games with the `bg` keyword.
 			<string>filepicker</string>
 			<key>variable</key>
 			<string>bgg_csv_path</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>defaultvalue</key>
+				<integer>4</integer>
+				<key>markercount</key>
+				<integer>20</integer>
+				<key>maxvalue</key>
+				<integer>20</integer>
+				<key>minvalue</key>
+				<integer>1</integer>
+				<key>onlystoponmarkers</key>
+				<true/>
+				<key>showmarkers</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>Due to performance reasons, will only display the top n games, with n being the number tothe left multiplied with 10 000. If the workflow lags, lower the value.</string>
+			<key>label</key>
+			<string>Database cutoff</string>
+			<key>type</key>
+			<string>slider</string>
+			<key>variable</key>
+			<string>max_games</string>
 		</dict>
 	</array>
 	<key>version</key>

@@ -3,6 +3,8 @@
 <plist version="1.0">
 <dict>
 	<key>bgg_csv_path</key>
-	<string>/Users/chrisgrieser/.cache/boardgames_ranks.csv</string>
+	<string>~/.cache/boardgames_ranks.csv</string>
+	<key>keyword</key>
+	<string>bgg</string>
 </dict>
 </plist>
