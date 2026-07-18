@@ -41,10 +41,10 @@ local ensureInstalled = {
 	-- "emmylua_ls", -- modern lua LSP, still buggy
 
 	"shuck", -- modern zsh/bash server
-	"bash-language-server", -- also used for zsh
-	"efm", -- integration of external linters
-	"shellcheck", -- shell linter (via efm) PENDING https://github.com/bash-lsp/bash-language-server/issues/663
-	"shfmt", -- shell formatter (via bashls)
+	-- "bash-language-server", -- also used for zsh
+	-- "efm", -- integration of external linters
+	-- "shellcheck", -- shell linter (via efm) PENDING https://github.com/bash-lsp/bash-language-server/issues/663
+	-- "shfmt", -- shell formatter (via bashls)
 
 	-- OTHER
 	"tree-sitter-cli", -- used by nvim-treesitter to install parsers

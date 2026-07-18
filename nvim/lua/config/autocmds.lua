@@ -118,10 +118,6 @@ do
 		if not vim.api.nvim_buf_is_valid(bufnr) then return end
 		if filename == "COMMIT_EDITMSG" or filename == "git-rebase-todo" then return end
 		if vim.startswith(filepath, "/private/var/") then return end -- `pass` cli buffers
-		if not vim.uv.cwd() then -- cwd is unset if dir was deleted
-			vim.notify("No cwd set.", vim.log.levels.WARN, { timeout = false })
-			return
-		end
 
 		local root = vim.fs.root(bufnr, function(name, path)
 			local parentName = vim.fs.basename(vim.fs.dirname(path))
@@ -246,7 +242,7 @@ local templateConfig = {
 		"/tmp/",
 	},
 	globToTemplateMap = {
-		[vim.fn.stdpath("config") .. "/lsp/*.lua"] = "lsp-server-config.lua",
+		[vim.fn.stdpath("config") .. "/after/lsp/*.lua"] = "lsp-server-config.lua",
 		[vim.fn.stdpath("config") .. "/lua/plugin-specs/*.lua"] = "vim-pack-plugin.lua",
 		["**/*.lua"] = "module.lua",
 

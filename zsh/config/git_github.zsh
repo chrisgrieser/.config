@@ -225,7 +225,7 @@ function gsa {
 			[[ -n "$first" ]] && echo || first=false
 			print "\e[1;34m$repo\e[0m $icon\n$git_status"
 		fi
-	done < "$HOME/.config/perma-repos.csv"
+	done <"$HOME/.config/perma-repos.csv"
 
 	if [[ -z "$first" ]]; then echo "All repos are clean."; fi
 }
@@ -256,18 +256,18 @@ function reflog {
 # (uses `_gitlog` from `magic-dashboard.zsh`)
 function gli {
 	if ! [[ "$OSTYPE" =~ "darwin" ]]; then echo "requires macOS for \`pbcopy\` and \`open\`" && return 1; fi
-	if ! typeset -f _gitlog > /dev/null; then echo "requires \`_gitlog\` function from zsh magic-dashboard" && return 1; fi
+	if ! typeset -f _gitlog >/dev/null; then echo "requires \`_gitlog\` function from zsh magic-dashboard" && return 1; fi
 
 	local preview_format="%C(yellow)%h %C(red)%D %n%C(blue)%an %C(green)(%ch)%C(reset) %n%n%C(bold)%C(magenta)%s%C(reset) %n%b"
 	local preview_cmd="git show {1} --stat=\$FZF_PREVIEW_COLUMNS --color=always --format='$preview_format' \
-		| sed -e '\$d' -e $'s/ \\|/ \e[1;30m│\e[0m/' ; \
-		print '\e[1;30m' ; printf '―%.0s' \$(seq 1 \$FZF_PREVIEW_COLUMNS) ; print '\e[0m' ; \
-		git show --format='' {1}"
+							| sed -e '\$d' -e $'s/ \\|/ \e[1;30m│\e[0m/' ; \
+							print '\e[1;30m' ; printf '―%.0s' \$(seq 1 \$FZF_PREVIEW_COLUMNS) ; print '\e[0m' ; \
+							git show --format='' {1}"
 
 	if [[ -x "$(command -v delta)" ]]; then
 		# 1. theme, since cannot auto-detect mode in subshell
 		# 2. `--no-gitconfig` since `--hyperlink` break emojis
-		theme="$(defaults read -g AppleInterfaceStyle &> /dev/null && echo "dark" || echo "light")"
+		theme="$(defaults read -g AppleInterfaceStyle &>/dev/null && echo "dark" || echo "light")"
 		preview_cmd="$preview_cmd | delta --$theme --no-gitconfig"
 	fi
 
@@ -302,11 +302,11 @@ function pickaxe {
 
 # search for [g]it [d]eleted [f]ile
 function gdf {
-	git rev-parse --is-inside-work-tree &> /dev/null || return
+	git rev-parse --is-inside-work-tree &>/dev/null || return
 
 	local search="$1"
 	[[ -z $search ]] && print "\e[1;33mNo search query provided.\e[0m" && return 1
-	if ! command -v fzf &> /dev/null; then echo "fzf not installed." && return 1; fi
+	if ! command -v fzf &>/dev/null; then echo "fzf not installed." && return 1; fi
 
 	builtin cd -q "$(git rev-parse --show-toplevel)" || return 1
 	if [[ $(git rev-parse --is-shallow-repository) == "true" ]]; then

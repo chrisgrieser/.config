@@ -78,7 +78,7 @@
       "src": "https://github.com/chrisgrieser/nvim-rip-substitute"
     },
     "nvim-rulebook": {
-      "rev": "a55b17d0d66ce174c77821564e1c3e744d67d6df",
+      "rev": "b1b74264e4db3f1d45c4751bc9f5f645bec670f0",
       "src": "https://github.com/chrisgrieser/nvim-rulebook"
     },
     "nvim-scissors": {
