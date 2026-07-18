@@ -83,7 +83,8 @@ function run(argv) {
 		return errorItem("JSON not parsable.", "For details, see the debugging log.");
 	}
 	if (!json.data) {
-		console.log("JSON response: ", JSON.stringify(response));
+		console.log("JSON response:", JSON.stringify(response));
+		console.log("API URL:", apiUrl);
 		const message = json.message || "JSON contains no usable data.";
 		return errorItem(message, "For details, see the debugging log.");
 	}

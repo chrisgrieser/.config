@@ -241,7 +241,7 @@
 	<key>description</key>
 	<string>Search animes listed in the myanimelist database. Open at myanimelist or AniList.</string>
 	<key>disabled</key>
-	<false/>
+	<true/>
 	<key>name</key>
 	<string>Anime Search</string>
 	<key>objects</key>
