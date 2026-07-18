@@ -260,9 +260,9 @@ function gli {
 
 	local preview_format="%C(yellow)%h %C(red)%D %n%C(blue)%an %C(green)(%ch)%C(reset) %n%n%C(bold)%C(magenta)%s%C(reset) %n%b"
 	local preview_cmd="git show {1} --stat=\$FZF_PREVIEW_COLUMNS --color=always --format='$preview_format' \
-							| sed -e '\$d' -e $'s/ \\|/ \e[1;30m│\e[0m/' ; \
-							print '\e[1;30m' ; printf '―%.0s' \$(seq 1 \$FZF_PREVIEW_COLUMNS) ; print '\e[0m' ; \
-							git show --format='' {1}"
+									| sed -e '\$d' -e $'s/ \\|/ \e[1;30m│\e[0m/' ; \
+									print '\e[1;30m' ; printf '―%.0s' \$(seq 1 \$FZF_PREVIEW_COLUMNS) ; print '\e[0m' ; \
+									git show --format='' {1}"
 
 	if [[ -x "$(command -v delta)" ]]; then
 		# 1. theme, since cannot auto-detect mode in subshell

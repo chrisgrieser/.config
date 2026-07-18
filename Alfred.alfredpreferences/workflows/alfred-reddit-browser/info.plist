@@ -193,7 +193,7 @@
 	<key>description</key>
 	<string>Browse your favorite subreddits via Alfred</string>
 	<key>disabled</key>
-	<true/>
+	<false/>
 	<key>name</key>
 	<string>Reddit Browser</string>
 	<key>objects</key>

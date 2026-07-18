@@ -126,6 +126,10 @@ do
 			return dirHasChildMarker or dirHasParentMarker
 		end)
 		if root and root ~= "" then vim.uv.chdir(root) end
+
+		if not vim.uv.cwd() then -- cwd is unset if dir was deleted
+			vim.notify("No cwd set.", vim.log.levels.WARN, { timeout = false })
+		end
 	end
 
 	vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained" }, {
