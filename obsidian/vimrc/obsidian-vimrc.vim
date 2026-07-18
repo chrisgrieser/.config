@@ -344,10 +344,6 @@ nnoremap ,pa :openAppearanceSettings<CR>
 exmap openCommunityPlugins jscommand {	view.app.setting.open(); view.app.setting.openTabById("community-plugins") }
 nnoremap ,pl :openCommunityPlugins<CR>
 
-" [i] install [p]lugins
-exmap installPlugins jscommand { view.app.workspace.protocolHandlers.get("show-plugin")({ id: ' ' }); }
-nnoremap ,pi :installPlugins<CR>
-
 " dynamic [h]ighlights settings
 exmap openDynamicHighlightsSettings jsfile Meta/vimrc-jsfile.js { openDynamicHighlightsSettings() }
 nnoremap ,ph :openDynamicHighlightsSettings<CR>
