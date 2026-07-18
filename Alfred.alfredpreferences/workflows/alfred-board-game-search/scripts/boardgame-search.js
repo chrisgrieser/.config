@@ -64,7 +64,6 @@ function run() {
 				arg: "https://boardgamegeek.com/boardgame/" + bggId,
 			};
 		});
-	console.log("# games:", games.length);
 
 	return JSON.stringify({
 		items: games,
