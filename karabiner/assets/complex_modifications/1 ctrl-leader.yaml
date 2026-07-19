@@ -307,7 +307,8 @@ rules:
         conditions: [*leader-active]
         to:
           - shell_command: |
-              osascript -e 'tell application id "com.runningwithcrayons.Alfred" to run trigger "browse" in workflow "de.chris-grieser.reddit-browser"'
+              # osascript -e 'tell application id "com.runningwithcrayons.Alfred" to run trigger "browse" in workflow "de.chris-grieser.reddit-browser"'
+              open "https://www.reddit.com/"
           - *deactivate-leader
           - *remove-notice
 
