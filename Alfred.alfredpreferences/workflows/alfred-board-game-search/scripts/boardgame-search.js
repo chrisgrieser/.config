@@ -55,11 +55,11 @@ function run() {
 			const displayName =
 				(name || "?").replace(/^"|"$/g, "") + (isExpansion === "1" ? " 🧩" : "");
 			const displayRank = rank === "0" ? "" : " #" + rank;
-			const displayScore = Number.parseFloat(score).toFixed(1);
-			const subtitle = `${year}     ${displayScore}`;
+			const displayScore = "⟨" + Number.parseFloat(score).toFixed(1) + "⟩";
+			const subtitle = [year, displayRank, displayScore].filter(Boolean).join("    ");
 
 			return {
-				title: displayName + displayRank,
+				title: displayName,
 				subtitle: subtitle,
 				arg: "https://boardgamegeek.com/boardgame/" + bggId,
 			};
