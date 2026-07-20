@@ -3,7 +3,7 @@ set -e
 md_file="$*"
 #───────────────────────────────────────────────────────────────────────────────
 
-# CONFIG
+#
 output_location="$HOME/Desktop/"
 word_file="$output_location/$(basename "$md_file" ".md")_$(date +%Y-%m-%d)_CG.docx"
 
