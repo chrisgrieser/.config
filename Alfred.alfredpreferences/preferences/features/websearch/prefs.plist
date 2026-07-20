@@ -191,6 +191,17 @@
 			<key>url</key>
 			<string>https://chromewebstore.google.com/search/{query}</string>
 		</dict>
+		<key>B248CA4A-B45B-47FD-8648-14C290FE2609</key>
+		<dict>
+			<key>enabled</key>
+			<true/>
+			<key>keyword</key>
+			<string>bgg</string>
+			<key>text</key>
+			<string>BoardGameGeek: "{query}"</string>
+			<key>url</key>
+			<string>https://boardgamegeek.com/geeksearch.php?action=search&amp;objecttype=boardgame&amp;q={query}</string>
+		</dict>
 		<key>CB53E08B-32B8-4062-98CC-5A36E97438A4</key>
 		<dict>
 			<key>enabled</key>
