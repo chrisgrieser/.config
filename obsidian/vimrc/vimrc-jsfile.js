@@ -482,7 +482,8 @@ function copyBlockQuoteFromDatafile() {
 	// remove trailing wikilinks and block-id, e.g. ` [[influence 155]] ^id-2026-03-10--16-14-31`
 	const cleanParagraph = paragraph
 		.replace(/ \^[\w-]+ *$/, "") // remove block-id
-		.replace(/ *\[\[.*\]\] *$/, ""); // remove wikilinks (greedy inside [[]], to catch multiple ones)
+		.replace(/ *\[\[.*\]\] *$/, "") // remove wikilinks (greedy inside [[]], to catch multiple ones)
+		.replace(/ ?#[\d:]#$/, ""); // remove timespams in interview transcripts
 
 	const output = "> " + cleanParagraph + ` *(${id})*`;
 	navigator.clipboard.writeText(output);
