@@ -28,7 +28,7 @@ end
 local pluginSpecDir = "plugin-specs"
 local pluginSpecPath = vim.fn.stdpath("config") .. "/lua/" .. pluginSpecDir
 vim.iter(vim.fs.dir(pluginSpecPath)):each(function(fileName, type)
-	assert(not fileName:find("%..*%.lua"), "Filename must not contain dots due `require`: " .. fileName)
+	assert(not fileName:find("%..*%.lua"), "Filename must not contain dots due to `require`: " .. fileName)
 	if type ~= "file" or not vim.endswith(fileName, ".lua") then return end
 	local pluginName = fileName:gsub("%.lua$", "")
 	local localName = localPlugins[pluginName]
@@ -119,7 +119,7 @@ Keymap { "gi", openCommitOrIssue, ft = "nvim-pack", desc = "󰐱 Open commit or 
 
 ---CONCEAL NOISE IN NVIM-PACK WINDOW--------------------------------------------
 vim.api.nvim_create_autocmd("FileType", {
-	desc = "User: Conceal noise in nvim-pack window",
+	desc = "User: Fold away noise in nvim-pack window",
 	pattern = "nvim-pack",
 	callback = function(ctx)
 		vim.opt_local.wrap = true
