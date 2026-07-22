@@ -273,6 +273,7 @@ opts.picker = {
 			},
 		},
 		git_diff = {
+			-- alternative plugin: https://github.com/undont/differ.nvim
 			layout = "sidebar_no_input",
 			win = {
 				-- <CR> opens the file as usual

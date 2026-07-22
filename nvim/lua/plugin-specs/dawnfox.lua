@@ -1,3 +1,7 @@
+-- alternative colorschemes to check out at some point:
+-- https://github.com/ntk148v/lauds
+--------------------------------------------------------------------------------
+
 vim.pack.add { "https://github.com/EdenEast/nightfox.nvim" }
 -- palette: https://github.com/EdenEast/nightfox.nvim/blob/main/usage.md#palette
 --------------------------------------------------------------------------------
@@ -8,7 +12,6 @@ require("nightfox").setup {
 	},
 	specs = {
 		dawnfox = {
-			-- add more contrast, especially for `lualine`
 			git = { changed = "#bc7d0b", add = "#4a7e65" },
 		},
 	},
