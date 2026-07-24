@@ -113,8 +113,6 @@ end
 
 Keymap { "q", vim.cmd.bdelete, ft = "nvim-pack", nowait = true, desc = "󰐱 Quit" }
 Keymap { "<CR>", vim.cmd.write, ft = "nvim-pack", desc = "󰐱 Confirm update" }
-Keymap { "<C-j>", "]]", remap = true, ft = "nvim-pack", desc = "󰐱 Next plugin" }
-Keymap { "<C-k>", "[[", remap = true, ft = "nvim-pack", desc = "󰐱 Previous plugin" }
 Keymap { "gi", openCommitOrIssue, ft = "nvim-pack", desc = "󰐱 Open commit or issue" }
 
 ---CONCEAL NOISE IN NVIM-PACK WINDOW--------------------------------------------
