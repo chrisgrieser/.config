@@ -1,15 +1,19 @@
 {
 	"name": "Vimium C",
-	"@time": "5/3/2026, 9:11:10 PM",
-	"time": 1777835470246,
+	"@time": "7/25/2026, 11:03:16 AM",
+	"time": 1784970196326,
 	"environment": {
 		"extension": "2.12.2",
 		"platform": "mac",
-		"chromium": 147
+		"chromium": 150
 	},
 	"allBrowserUrls": true,
 	"exclusionListenHash": false,
 	"exclusionRules": [
+		{
+			"passKeys": "/ j k l ",
+			"pattern": "^https:\\/\\/duckduckgo\\.com\\/.*ia=web"
+		},
 		{
 			"passKeys": "/ ",
 			"pattern": "^https:\\/\\/www\\.google(.(?!udm=2))*$"
@@ -17,10 +21,6 @@
 		{
 			"passKeys": "0 N f s ",
 			"pattern": "^https://.*.crunchyroll.com"
-		},
-		{
-			"passKeys": "/ j k l ",
-			"pattern": "^https:\\/\\/duckduckgo\\.com\\/.*ia=web"
 		},
 		{
 			"passKeys": "",
@@ -43,16 +43,16 @@
 			"pattern": ":https://www.netflix.com/"
 		},
 		{
+			"passKeys": "? j k ",
+			"pattern": "^https://www.reddit.com/(?!.*/comments/)"
+		},
+		{
 			"passKeys": "0 1 2 3 4 5 6 7 8 9 ? N f j k l n ",
 			"pattern": ":https://www.youtube.com/"
 		},
 		{
 			"passKeys": "? ",
 			"pattern": ":https://devdocs.io/"
-		},
-		{
-			"passKeys": "? ",
-			"pattern": ":https://www.reddit.com/"
 		}
 	],
 	"extAllowList": [
