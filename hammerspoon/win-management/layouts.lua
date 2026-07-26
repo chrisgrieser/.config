@@ -24,11 +24,23 @@ end
 ---@param status boolean
 local function connectProjector(status)
 	if not env.isAtHome then return end
-	if env.isProjector() == status then return end
-	local to = status and "on" or "off"
+
 	local projectorName = "P62_Pro"
-	local shellScript = ('betterdisplaycli set --name="%s" --connected=%s'):format(projectorName, to)
-	hs.execute(shellScript)
+
+	-- display
+	if env.isProjector() ~= status then
+		local displayTo = status and "on" or "off"
+		local shellScript1 = ('betterdisplaycli set --name="%s" --connected="%s"'):format(
+			projectorName,
+			displayTo
+		)
+		hs.execute(u.exportPath .. shellScript1)
+	end
+
+	-- audio
+	local audioTo = status and projectorName or "iMac Speakers"
+	local shellScript2 = ('SwitchAudioSource -s "%s"'):format(audioTo)
+	hs.execute(u.exportPath .. shellScript2)
 end
 
 ---LAYOUTS---------------------------------------------------------------------
@@ -76,7 +88,6 @@ local function movieLayout()
 		"Highlights",
 		"Obsidian",
 		"Gmail",
-		"Neovide",
 		"Ivory",
 		"Reminders",
 		"Calendar",
@@ -104,6 +115,24 @@ local function autoSetLayout(reason)
 	u.defer(4, function() isLayouting = false end)
 end
 
+local function fixProjectorLayout()
+	if not env.isProjector() then return end
+
+	-- move all windows to projector
+	local projectorScreen = hs.screen.primaryScreen()
+	for _, win in pairs(hs.window:orderedWindows()) do
+		win:moveToScreen(projectorScreen, true)
+	end
+
+	-- darken display
+	darkmode.darkenDisplay()
+
+	-- fix layout
+	movieLayout()
+end
+
+--------------------------------------------------------------------------------
+
 -- 1. Change of screen numbers
 local prevScreenCount
 M.displayCountWatcher = hs.screen.watcher
@@ -115,9 +144,15 @@ M.displayCountWatcher = hs.screen.watcher
 	end)
 	:start()
 
--- 2. Hotkey
-hs.hotkey.bind(u.hyper, "home", workLayout)
-hs.hotkey.bind(u.hyper, "end", movieLayout)
+-- 2a. Hotkey
+hs.hotkey.bind({}, "home", workLayout)
+hs.hotkey.bind({}, "end", movieLayout)
+
+-- 2a. URI (for Touchpad via BetterTouchTool)
+hs.urlevent.bind("fix-projector-layout", fixProjectorLayout)
+
+-- 3. Systemstart
+if u.isSystemStart() then autoSetLayout() end
 
 -- 4. Waking
 M.caff_unlock = hs.caffeinate.watcher

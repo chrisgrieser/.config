@@ -65,15 +65,17 @@ if device.include?("Home")
 	cask "ausweisapp" # pairing with phone app only works in private wifi
 	cask "bettertouchtool"
 	cask "catch"
-	cask "betterdisplay"
 end
 if device.include?("Home") or device.include?("Office")
 	cask "granola"
 	cask "monodraw"
 end
 if device.include?("Home") or device.include?("Mother")
-	# cask "qlvideo" # thumbnails not working: https://github.com/Marginal/QuickLookVideo/issues/173
+	cask "qlvideo" # thumbnails not working: https://github.com/Marginal/QuickLookVideo/issues/173
 	cask "iina"
 	cask "steam"
 	cask "transmission"
+
+	cask "betterdisplay" # control 2nd display
+	brew "switchaudio-osx" # control 2nd audio-device (in my case the display)
 end

@@ -1165,16 +1165,6 @@ rules:
                 afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/end_record.caf" &
               osascript -e 'display notification "➡️ Sort by kind" with title "Finder Vim Mode"'
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
-      - type: basic # by tags
-        from: { key_code: "end" }
-        to:
-          - { key_code: "7", modifiers: [control, option, command] }
-          - { key_code: "up_arrow", modifiers: [option] } # go to top
-          - shell_command: |
-              [[ -z "$FINDER_VIM_MODE_NO_SOUND" ]] &&
-                afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/end_record.caf" &
-              osascript -e 'display notification "🔚 Sort by tags" with title "Finder Vim Mode"'
-        conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
       #─────────────────────────────────────────────────────────────────────────
       #─────────────────────────────────────────────────────────────────────────
       # NUMBER KEYS: TOGGLE TAGS

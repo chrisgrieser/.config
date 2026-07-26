@@ -7,7 +7,6 @@ local aw = hs.application.watcher
 local config = {
 	reminderIcon = "✔ ",
 	githubNotifIcon = "● ", -- ⦿◉●○Ⓖ
-	winToProjectorIcon = "Ⱅ ",
 }
 
 ---REMINDER COUNT---------------------------------------------------------------
@@ -83,37 +82,12 @@ local function updateGithubNotifCount()
 		:start()
 end
 
---------------------------------------------------------------------------------
-
-M.winsToProjectorButton = hs.menubar.new(false, "winsToProjectorButton") --[[@as hs.menubar]]
-
-local function updateWinsToProjectorButton()
-	if #hs.screen.allScreens() == 2 then
-		M
-			.winsToProjectorButton
-			:returnToMenuBar()
-			:setTitle(config.winToProjectorIcon) ---@diagnostic disable-line: undefined-field
-			:setClickCallback(function()
-				-- move all windows to projector
-				local projectorScreen = hs.screen.primaryScreen()
-				for _, win in pairs(hs.window:orderedWindows()) do
-					win:moveToScreen(projectorScreen, true)
-				end
-				-- darken display
-				require("appearance.dark-mode").darkenDisplay()
-			end)
-	else
-		M.winsToProjectorButton:removeFromMenuBar()
-	end
-end
-
 ---TRIGGERS---------------------------------------------------------------------
 
 -- 0. initialize
 updateReminderCount()
 if u.isSystemStart() then u.defer({ 3, 10 }, updateReminderCount) end -- wait for sync
 updateGithubNotifCount()
-updateWinsToProjectorButton()
 
 -- 1. timer
 M.timer = hs.timer
@@ -140,7 +114,6 @@ M.displayCountWatcher = hs.screen.watcher
 	.new(function()
 		updateReminderCount()
 		updateGithubNotifCount()
-		updateWinsToProjectorButton()
 	end)
 	:start()
 
