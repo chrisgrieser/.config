@@ -21,10 +21,21 @@ local function isWorkWeek()
 	return weekday ~= "Sat" and weekday ~= "Sun"
 end
 
+---@param status boolean
+local function connectProjector(status)
+	if not env.isAtHome then return end
+	if env.isProjector() == status then return end
+	local to = status and "on" or "off"
+	local projectorName = "P62_Pro"
+	local shellScript = ('betterdisplaycli set --name="%s" --connected=%s'):format(projectorName, to)
+	hs.execute(shellScript)
+end
+
 ---LAYOUTS---------------------------------------------------------------------
 
 ---@param shouldDarkenDisplay boolean
 local function workLayout(shouldDarkenDisplay)
+	connectProjector(false)
 	u.defer(0.2, darkmode.autoSwitch) -- defer so ambient sensor is ready
 	if not shouldDarkenDisplay then u.defer(1, darkmode.autoSetBrightness) end -- defer to adjust to mode switch
 	u.defer(1, holeCover.update) -- defer so external display is detected
@@ -46,6 +57,7 @@ local function workLayout(shouldDarkenDisplay)
 end
 
 local function movieLayout()
+	connectProjector(true)
 	darkmode.setDarkMode("dark")
 	darkmode.darkenDisplay()
 	holeCover.update()
@@ -104,10 +116,8 @@ M.displayCountWatcher = hs.screen.watcher
 	:start()
 
 -- 2. Hotkey
-hs.hotkey.bind(u.hyper, "home", autoSetLayout)
-
--- 3. Systemstart
-if u.isSystemStart() then autoSetLayout() end
+hs.hotkey.bind(u.hyper, "home", workLayout)
+hs.hotkey.bind(u.hyper, "end", movieLayout)
 
 -- 4. Waking
 M.caff_unlock = hs.caffeinate.watcher
