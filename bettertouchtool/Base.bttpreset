@@ -188,7 +188,7 @@
     },
     "BSTSnapAreaDefaultPictoDistanceFromBottom" : 0.10000000149011612
   },
-  "BTTPresetUUID" : "436E9D7D-AF66-41D1-B1AF-801A26E74A27",
+  "BTTPresetUUID" : "FDFF971E-F88B-4C38-9CF5-9D885BA8C558",
   "BTTPresetContent" : [
     {
       "BTTAppBundleIdentifier" : "BT.G",
@@ -261,7 +261,7 @@
           }
         },
         {
-          "BTTLastUpdatedAt" : 1785059816.4763589,
+          "BTTLastUpdatedAt" : 1785064069.2686992,
           "BTTTriggerType" : 116,
           "BTTTriggerTypeDescriptionReadOnly" : "Pinch Out",
           "BTTTriggerTypeDescription" : "🎥 Fix Projector Layout",
@@ -270,15 +270,15 @@
           "BTTOrder" : 11,
           "BTTActionsToExecute" : [
             {
-              "BTTLastUpdatedAt" : 1785059753.999208,
+              "BTTLastUpdatedAt" : 1785064064.456605,
               "BTTTriggerParentUUID" : "329AC451-4B62-4DC5-8D42-FE5CFF79F046",
               "BTTIsPureAction" : true,
-              "BTTUUID" : "8D5F45AA-F200-4B34-AC9A-D35C001F080B",
-              "BTTPredefinedActionType" : 59,
-              "BTTPredefinedActionName" : "Open URL  or  Open URL With Selection",
-              "BTTOpenURL" : "fix-projector-layout",
-              "BTTOpenURLBrowser" : "Default",
-              "BTTOrder" : 53
+              "BTTUUID" : "BA040883-ACBE-4647-8B3E-DE2E4777D6F0",
+              "BTTPredefinedActionType" : 206,
+              "BTTPredefinedActionName" : "Execute Shell Script  or  Task",
+              "BTTShellTaskActionScript" : "open \"hammerspoon://fix-projector-layout\"",
+              "BTTShellTaskActionConfig" : "/bin/bash:::-c:::-:::",
+              "BTTOrder" : 54
             }
           ],
           "BTTGestureNotes" : "🎥 Fix Projector Layout",
