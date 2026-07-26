@@ -26,8 +26,6 @@ local function connectProjector(status)
 	if not env.isAtHome then return end
 
 	local projectorName = "P62_Pro"
-
-	-- display
 	if env.isProjector() ~= status then
 		local displayTo = status and "on" or "off"
 		local shellScript1 = ('betterdisplaycli set --name="%s" --connected="%s"'):format(
@@ -36,11 +34,6 @@ local function connectProjector(status)
 		)
 		hs.execute(u.exportPath .. shellScript1)
 	end
-
-	-- audio
-	local audioTo = status and projectorName or "iMac Speakers"
-	local shellScript2 = ('SwitchAudioSource -s "%s"'):format(audioTo)
-	hs.execute(u.exportPath .. shellScript2)
 end
 
 ---LAYOUTS---------------------------------------------------------------------

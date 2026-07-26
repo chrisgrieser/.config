@@ -75,7 +75,5 @@ if device.include?("Home") or device.include?("Mother")
 	cask "iina"
 	cask "steam"
 	cask "transmission"
-
 	cask "betterdisplay" # control 2nd display
-	brew "switchaudio-osx" # control 2nd audio-device (in my case the display)
 end
