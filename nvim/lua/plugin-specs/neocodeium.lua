@@ -51,7 +51,8 @@ require("neocodeium").setup {
 
 --------------------------------------------------------------------------------
 
-Keymap { "<leader>oa", function() vim.cmd.NeoCodeium("toggle") end, desc = "󰚩 NeoCodeium" }
+Keymap { "<leader>oa", function() vim.cmd.NeoCodeium("toggle") end, desc = "󰚩 Toggle NeoCodeium" }
+Keymap { "<leader>oA", function() vim.cmd.NeoCodeium("restart") end, desc = "󰚩 Restart NeoCodeium" }
 -- stylua: ignore start
 Keymap { "<D-s>", function() require("neocodeium").accept() end, mode = "i", desc = "󰚩 Accept full suggestion" }
 Keymap { "<D-S>", function() require("neocodeium").accept_word() end, mode = "i", desc = "󰚩 Accept word" }
