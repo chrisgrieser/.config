@@ -49,10 +49,6 @@
       "rev": "4dacd3f0185a2227bdf3b6c0975a8f0bf87cac9a",
       "src": "https://github.com/EdenEast/nightfox.nvim"
     },
-    "nvim-chainsaw": {
-      "rev": "823104b77da830d1a5de6d6aa8586c37537f7302",
-      "src": "https://github.com/chrisgrieser/nvim-chainsaw"
-    },
     "nvim-genghis": {
       "rev": "12100e3fe7fa863f60b5b81a3587c8c9d5a5b2ff",
       "src": "https://github.com/chrisgrieser/nvim-genghis"
@@ -92,10 +88,6 @@
     "nvim-surround": {
       "rev": "8b47db616ef658b8fc27e61db2896aa2f40134de",
       "src": "https://github.com/kylechui/nvim-surround"
-    },
-    "nvim-tinygit": {
-      "rev": "7cc03bfd73863fc24e1a07e9465d3dba32336b74",
-      "src": "https://github.com/chrisgrieser/nvim-tinygit"
     },
     "nvim-treesitter": {
       "rev": "8b3a191c015dd66a92d51a112ed96af0aac13b63",
