@@ -24,26 +24,35 @@ end
 ---@param status boolean
 local function connectProjector(status)
 	if not env.isAtHome then return end
+	if env.isProjector() == status then return end
 
-	local projectorName = "P62_Pro"
-	if env.isProjector() ~= status then
-		local displayTo = status and "on" or "off"
-		local shellScript1 = ('betterdisplaycli set --name="%s" --connected="%s"'):format(
-			projectorName,
-			displayTo
-		)
-		hs.execute(u.exportPath .. shellScript1)
+	local name = "P62_Pro"
+	local setTo = status and "on" or "off"
+	local delay = 0
+	if not (u.appRunning("BetterDisplay")) then
+		local app = hs.application.open("BetterDisplay")
+		if not app then
+			hs.alert("Could not find BetterDisplay.")
+			return
+		end
+		delay = 2
 	end
+	u.defer(delay, function()
+		local shellScript = ('betterdisplaycli set --name="%s" --connected="%s"'):format(name, setTo)
+		hs.execute(u.exportPath .. shellScript)
+	end)
 end
 
 ---LAYOUTS---------------------------------------------------------------------
 
----@param shouldDarkenDisplay boolean
-local function workLayout(shouldDarkenDisplay)
+local function workLayout()
 	if M.isLayouting then return end
+	M.isLayouting = true
+	u.defer(2.5, function() M.isLayouting = false end)
+
 	connectProjector(false)
 	u.defer(0.2, darkmode.autoSwitch) -- defer so ambient sensor is ready
-	if not shouldDarkenDisplay then u.defer(1, darkmode.autoSetBrightness) end -- defer to adjust to mode switch
+	u.defer(1, darkmode.autoSetBrightness) -- defer to adjust to mode switch
 	u.defer(1, holeCover.update) -- defer so external display is detected
 	dockSwitcher("work")
 
@@ -63,6 +72,10 @@ local function workLayout(shouldDarkenDisplay)
 end
 
 local function movieLayout()
+	if M.isLayouting then return end
+	M.isLayouting = true
+	u.defer(2.5, function() M.isLayouting = false end)
+
 	connectProjector(true)
 	darkmode.setDarkMode("dark")
 	darkmode.darkenDisplay()
@@ -90,20 +103,6 @@ local function movieLayout()
 end
 
 ---WHEN TO SET LAYOUT-----------------------------------------------------------
----Select layout depending on number of screens, and prevent concurrent runs
----@param reason string?
-local function autoSetLayout(reason)
-	if env.isProjector() then
-		movieLayout()
-	else
-		-- when turning projector off at night, then the display should be dark so
-		-- not to get up to just turn down brightness
-		local shouldDarkenDisplay = u.betweenTime(22, 6) and reason == "display-count-change"
-		if shouldDarkenDisplay then darkmode.darkenDisplay() end
-
-		workLayout(shouldDarkenDisplay)
-	end
-end
 
 local function fixProjectorLayout()
 	if not env.isProjector() then return end
@@ -123,26 +122,15 @@ end
 
 --------------------------------------------------------------------------------
 
--- 1. Change of screen numbers
-local prevScreenCount
-M.displayCountWatcher = hs.screen.watcher
-	.new(function()
-		local currentScreenCount = #hs.screen.allScreens()
-		if prevScreenCount == currentScreenCount then return end -- Dock changes also trigger the screenwatcher
-		prevScreenCount = currentScreenCount
-		autoSetLayout("display-count-change")
-	end)
-	:start()
-
--- 2a. Hotkey
+-- 1. Hotkeys
 hs.hotkey.bind({}, "home", workLayout)
 hs.hotkey.bind({}, "end", movieLayout)
 
--- 2a. URI (for Touchpad via BetterTouchTool)
+-- 2. URI (for Touchpad via BetterTouchTool)
 hs.urlevent.bind("fix-projector-layout", fixProjectorLayout)
 
 -- 3. Systemstart
-if u.isSystemStart() then autoSetLayout() end
+if u.isSystemStart() then workLayout() end
 
 -- 4. Waking
 M.caff_unlock = hs.caffeinate.watcher
@@ -150,7 +138,10 @@ M.caff_unlock = hs.caffeinate.watcher
 		local wokeUp = event == hs.caffeinate.watcher.screensDidUnlock
 			or event == hs.caffeinate.watcher.systemDidWake
 		if wokeUp and not env.isAtOffice and not env.isProjector() then
-			u.defer(0.5, autoSetLayout)
+			u.defer(0.5, function()
+				local layout = env.isProjector() and movieLayout or workLayout
+				layout()
+			end)
 		end
 	end)
 	:start()
