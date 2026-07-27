@@ -1,7 +1,7 @@
 -- INFO
--- This snippet redirects cmdline messages to `vim.notify`, silencing `Press
--- Enter to continue` prompts, even with `cmdheight=0`.
--- Alternative with `require('vim._core.ui2')`: https://www.reddit.com/r/neovim/comments/1sa95g4/no_more_press_enter_with_ui2_with_example/
+-- This snippet redirects cmdline messages to `vim.notify`, silencing 
+-- `Press Enter to continue` prompts, even with `cmdheight=0`.
+-- An alternative to `require('vim._core.ui2')` https://www.reddit.com/r/neovim/comments/1sa95g4/no_more_press_enter_with_ui2_with_example/
 --------------------------------------------------------------------------------
 local hasNotificationPlugin = package.loaded["nvim-notify"]
 	or package.loaded["snacks"]
@@ -63,7 +63,7 @@ local function detach() vim.ui_detach(ns) end
 
 --------------------------------------------------------------------------------
 
-local group = vim.api.nvim_create_augroup("ui-hack", { clear = true })
+local group = vim.api.nvim_create_augroup("messages-to-notify", { clear = true })
 vim.api.nvim_create_autocmd("CmdlineLeave", { group = group, callback = attach })
 vim.api.nvim_create_autocmd("CmdlineEnter", { group = group, callback = detach })
 vim.schedule(attach) -- initialize
