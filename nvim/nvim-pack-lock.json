@@ -106,7 +106,7 @@
       "src": "https://github.com/nvim-treesitter/nvim-treesitter-textobjects"
     },
     "nvim-various-textobjs": {
-      "rev": "fed132a88454e52c9691f4751090031944af4a7e",
+      "rev": "604d4c57a5a702c5b25698502713a5f4da6c439e",
       "src": "https://github.com/chrisgrieser/nvim-various-textobjs"
     },
     "refactoring.nvim": {
