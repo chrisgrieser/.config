@@ -21,6 +21,7 @@ function M.update()
 	local coverHeight = 20
 	local menubarHeight = 30
 
+	-----------------------------------------------------------------------------
 	-- initialize/reset covers
 	for i = 1, #M.cover_top do
 		if M.cover_top[i] then
@@ -66,6 +67,7 @@ function M.update()
 		end
 	end
 end
+
 M.update() -- initialize
 
 --------------------------------------------------------------------------------

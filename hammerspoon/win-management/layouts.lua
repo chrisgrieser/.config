@@ -40,6 +40,7 @@ end
 
 ---@param shouldDarkenDisplay boolean
 local function workLayout(shouldDarkenDisplay)
+	if M.isLayouting then return end
 	connectProjector(false)
 	u.defer(0.2, darkmode.autoSwitch) -- defer so ambient sensor is ready
 	if not shouldDarkenDisplay then u.defer(1, darkmode.autoSetBrightness) end -- defer to adjust to mode switch
@@ -89,12 +90,9 @@ local function movieLayout()
 end
 
 ---WHEN TO SET LAYOUT-----------------------------------------------------------
-local isLayouting = false
 ---Select layout depending on number of screens, and prevent concurrent runs
 ---@param reason string?
 local function autoSetLayout(reason)
-	if isLayouting then return end
-	isLayouting = true
 	if env.isProjector() then
 		movieLayout()
 	else
@@ -105,7 +103,6 @@ local function autoSetLayout(reason)
 
 		workLayout(shouldDarkenDisplay)
 	end
-	u.defer(4, function() isLayouting = false end)
 end
 
 local function fixProjectorLayout()
