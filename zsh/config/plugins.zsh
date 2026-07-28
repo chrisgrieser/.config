@@ -8,7 +8,7 @@ export FPATH="$ZDOTDIR/completions:$HOMEBREW_PREFIX/share/zsh/site-functions:$FP
 
 # ZSH-AUTOCOMPLETE
 # also loads compinit stuff, therefore has to be loaded *before* most plugins
-source "$HOMEBREW_PREFIX/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh"
+# source "$HOMEBREW_PREFIX/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh"
 
 # INFO not needed when using zsh-autocomplete
 # autoload compinit -Uz +X && compinit
@@ -27,12 +27,12 @@ typeset -A ZSH_HIGHLIGHT_REGEXP # just declaration, my custom highlights are def
 
 # ZSH-AUTOSUGGESTIONS
 # https://github.com/zsh-users/zsh-autosuggestions#configuration
-source "$HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
-export ZSH_AUTOSUGGEST_HISTORY_IGNORE="?(#c50,)" # ignores long history items
-export ZSH_AUTOSUGGEST_STRATEGY=(history)
-export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=35
-# do not accept autosuggestion when using vim's `A`
-export ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=("${ZSH_AUTOSUGGEST_ACCEPT_WIDGETS[@]/vi-add-eol/}")
+# source "$HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+# export ZSH_AUTOSUGGEST_HISTORY_IGNORE="?(#c50,)" # ignores long history items
+# export ZSH_AUTOSUGGEST_STRATEGY=(history)
+# export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=35
+# # do not accept autosuggestion when using vim's `A`
+# export ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=("${ZSH_AUTOSUGGEST_ACCEPT_WIDGETS[@]/vi-add-eol/}")
 
 # ZSH-HISTORY-SUBSTRING-SEARCH
 # (must be loaded *after* zsh-syntax-highlighting)
@@ -48,8 +48,3 @@ bindkey '^[[B' history-substring-search-down # arrow down
 # STARSHIP
 export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
 eval "$(starship init zsh)"
-
-#-------------------------------------------------------------------------------
-
-# OBSIDIAN https://help.obsidian.md/cli#macOS
-export PATH="$PATH:/Applications/Obsidian.app/Contents/MacOS"
