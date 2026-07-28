@@ -8,7 +8,7 @@ local aw = hs.application.watcher
 -- auto-pause/resume music on launch/quit of apps with sound or on Steam games
 M.aw_music = aw.new(function(appName, event, app)
 	-- GUARD
-	if not env.isAtHome or env.isProjector() then return end
+	if not env.isAtHome or env.hasProjector() then return end
 	if not u.screenIsUnlocked() then return end
 	if not (event == aw.launched or event == aw.terminated) then return end
 

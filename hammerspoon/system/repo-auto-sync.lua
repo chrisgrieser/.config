@@ -115,7 +115,7 @@ end)
 -- 4. when going to sleep or when unlocking
 local c = hs.caffeinate.watcher
 M.caff_SleepWatcherForRepoSync = c.new(function(event)
-	if env.isProjector() then return end
+	if env.hasProjector() then return end
 
 	if event == c.screensDidLock or event == c.screensDidUnlock then
 		syncAllGitRepos()

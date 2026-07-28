@@ -43,7 +43,7 @@ end
 ---@param appName string name of the app
 local function quit(appName)
 	if appName == "Finder" then
-		if env.isProjector() then return end
+		if env.hasProjector() then return end
 		local finderWins = u.app("Finder"):allWindows()
 		if #finderWins == 0 then return end
 		for _, win in pairs(finderWins) do

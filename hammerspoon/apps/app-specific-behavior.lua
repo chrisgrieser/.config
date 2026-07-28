@@ -26,7 +26,7 @@ end)
 M.aw_finder = aw.new(function(appName, event, finder)
 	if event == aw.activated and appName == "Finder" then
 		finder:selectMenuItem { "View", "Hide Sidebar" }
-		if not env.isProjector() then finder:selectMenuItem { "View", "As List" } end
+		if not env.hasProjector() then finder:selectMenuItem { "View", "As List" } end
 	end
 end):start()
 

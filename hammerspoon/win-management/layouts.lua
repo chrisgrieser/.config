@@ -24,9 +24,8 @@ end
 ---@param status boolean
 local function connectProjector(status)
 	if not env.isAtHome then return end
-	if env.isProjector() == status then return end
+	if env.hasProjector() == status then return end
 
-	local name = "P62_Pro"
 	local setTo = status and "on" or "off"
 	local delay = 0
 	if not (u.appRunning("BetterDisplay")) then
@@ -38,6 +37,7 @@ local function connectProjector(status)
 		delay = 2
 	end
 	u.defer(delay, function()
+		local name = env.projectorName
 		local shellScript = ('betterdisplaycli set --name="%s" --connected="%s"'):format(name, setTo)
 		hs.execute(u.exportPath .. shellScript)
 	end)
@@ -78,7 +78,7 @@ local function movieLayout()
 
 	connectProjector(true)
 	darkmode.setDarkMode("dark")
-	darkmode.darkenDisplay()
+	darkmode.darkenImacDisplay()
 	holeCover.update()
 	dockSwitcher("movie")
 
@@ -105,19 +105,20 @@ end
 ---WHEN TO SET LAYOUT-----------------------------------------------------------
 
 local function fixProjectorLayout()
-	if not env.isProjector() then return end
+	-- fix layout
+	movieLayout()
 
 	-- move all windows to projector
-	local projectorScreen = hs.screen.primaryScreen()
+	local projectorScreen = hs.screen.find(env.projectorName)
 	for _, win in pairs(hs.window:orderedWindows()) do
 		win:moveToScreen(projectorScreen, true)
 	end
 
-	-- darken display
-	darkmode.darkenDisplay()
-
-	-- fix layout
-	movieLayout()
+	-- move mouse to center of projector
+	local projector = hs.screen.find(env.projectorName)
+	local frame = projector:fullFrame()
+	local centerPos = { x = frame.w / 2, y = frame.h / 2 }
+	hs.mouse.setRelativePosition(centerPos, projector)
 end
 
 --------------------------------------------------------------------------------
@@ -137,9 +138,9 @@ M.caff_unlock = hs.caffeinate.watcher
 	.new(function(event)
 		local wokeUp = event == hs.caffeinate.watcher.screensDidUnlock
 			or event == hs.caffeinate.watcher.systemDidWake
-		if wokeUp and not env.isAtOffice and not env.isProjector() then
+		if wokeUp and not env.isAtOffice and not env.hasProjector() then
 			u.defer(0.5, function()
-				local layout = env.isProjector() and movieLayout or workLayout
+				local layout = env.hasProjector() and movieLayout or workLayout
 				layout()
 			end)
 		end

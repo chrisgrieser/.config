@@ -39,7 +39,7 @@ M.wf_pseudoMax = wf.new(pseudoMaxApps)
 	:setOverrideFilter({ fullscreen = false, rejectTitles = { "^Save$", "^Open$" } })
 	:subscribe(wf.windowCreated, function(win)
 		if require("win-management.auto-tile").winIsOfAutotileApp(win) then return end
-		local size = env.isProjector() and hs.layout.maximized or wu.pseudoMax
+		local size = env.hasProjector() and hs.layout.maximized or wu.pseudoMax
 		wu.moveResize(win, size)
 	end)
 

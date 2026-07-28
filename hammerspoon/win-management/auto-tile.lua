@@ -15,7 +15,7 @@ local config = {
 	},
 	---@type fun(appName: string): hs.geometry
 	oneWindowSize = function(appName)
-		if env.isProjector() then return hs.layout.maximized end
+		if env.hasProjector() then return hs.layout.maximized end
 		return appName == "Finder" and wu.middleHalf or wu.pseudoMax
 	end,
 }
@@ -45,7 +45,7 @@ local function autoTile(appName)
 	M["winCount_" .. appName] = #wins
 
 	-- GUARD
-	if #wins > 1 and env.isProjector() then return end
+	if #wins > 1 and env.hasProjector() then return end
 
 	local pos = {} ---@cast pos hs.geometry[]
 	if #wins == 1 then

@@ -19,7 +19,7 @@ M.caff_projectorScreensaver = c.new(function(event)
 	if env.isAtOffice then return end
 
 	-- 1. screensaver starts at night
-	if event == c.screensaverDidStart and u.betweenTime(22, 7) and not env.isProjector() then
+	if event == c.screensaverDidStart and u.betweenTime(22, 7) and not env.hasProjector() then
 		wu.iMacDisplay:setBrightness(0)
 	end
 
@@ -32,7 +32,7 @@ M.caff_projectorScreensaver = c.new(function(event)
 		or event == c.screensDidSleep
 	then
 		u.defer({ 0, 2 }, function()
-			if env.isProjector() then wu.iMacDisplay:setBrightness(0) end
+			if env.hasProjector() then wu.iMacDisplay:setBrightness(0) end
 		end)
 	end
 end):start()
@@ -41,7 +41,7 @@ end):start()
 -- Show clock every full hour
 M.timer_clock = timerEverySecs(60, function()
 	local isFullHour = os.date("%M") == "00"
-	if isFullHour and u.screenIsUnlocked() and not env.isProjector() then
+	if isFullHour and u.screenIsUnlocked() and not env.hasProjector() then
 		local hour = tostring(os.date("%H:%M"))
 		hs.alert(hour, 3)
 	end
@@ -116,7 +116,7 @@ local config = {
 
 M.timer_sleepAutoVideoOff = timerEverySecs(config.checkIntervalMins * 60, function()
 	local isIdle = (hs.host.idleTime() / 60) > config.idleMins
-	if not env.isProjector() or not isIdle or not u.screenIsUnlocked() then return end
+	if not env.hasProjector() or not isIdle or not u.screenIsUnlocked() then return end
 
 	local alertMsg = ("💤 Will sleep in %ds if idle."):format(config.timeToReactSecs)
 	local alertId = hs.alert(alertMsg, config.timeToReactSecs)
