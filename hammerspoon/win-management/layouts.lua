@@ -52,7 +52,7 @@ local function workLayout()
 
 	connectProjector(false)
 	u.defer(0.2, darkmode.autoSwitch) -- defer so ambient sensor is ready
-	u.defer(1, darkmode.autoSetBrightness) -- defer to adjust to mode switch
+	u.defer(0.5, darkmode.autoSetBrightness) -- defer to adjust to mode switch
 	u.defer(1, holeCover.update) -- defer so external display is detected
 	dockSwitcher("work")
 
