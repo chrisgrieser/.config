@@ -5,6 +5,7 @@ local env = require("meta.environment")
 local holeCover = require("appearance.hole-cover")
 local u = require("meta.utils")
 local wu = require("win-management.window-utils")
+local music = require("apps.music")
 
 ---HELPERS----------------------------------------------------------------------
 
@@ -80,6 +81,8 @@ local function movieLayout()
 	darkmode.setDarkMode("dark")
 	darkmode.darkenImacDisplay()
 	u.defer(1, holeCover.update) -- defer so external display is detected
+	dockSwitcher("movie")
+	music.music_trigger("pause")
 
 	-- turn off showing hidden files
 	hs.execute("defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder")
