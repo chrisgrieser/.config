@@ -86,6 +86,14 @@ local function movieLayout()
 	hs.execute("defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder")
 
 	u.openApps { "YouTube", env.isAtHome and "BetterTouchTool" or nil }
+	u.defer(1, function()
+		local youtubeWin = u.app("YouTube"):mainWindow()
+		local projectorScreen = hs.screen.find(env.projectorName)
+		if youtubeWin:screen():id() ~= projectorScreen:id() then
+			youtubeWin:moveToScreen(projectorScreen)
+		end
+	end)
+
 	u.quitApps {
 		"Stats",
 		"Signal",
