@@ -17,9 +17,7 @@ M.cover_top = {}
 M.cover_bottom = {}
 
 function M.update()
-	-- CONFIG
-	local coverHeight = 20
-	local menubarHeight = 30
+	local coverHeight = 20 -- CONFIG
 
 	-----------------------------------------------------------------------------
 	-- initialize/reset covers
@@ -37,10 +35,12 @@ function M.update()
 	end
 
 	-----------------------------------------------------------------------------
+
 	-- add covers on each screen (but bottom cover only on the main screen)
 	local allScreens = hs.screen.allScreens() --[[@as hs.screen[]]
 	for i, screen in ipairs(allScreens) do
-		local frame = screen:fullFrame()
+		local frame = screen:fullFrame() -- fullframe includes the menu bar
+		local menubarHeight = screen:fullFrame().h - screen:frame().h
 		local bgColor = require("meta.utils").isDarkMode()
 				and { red = 0.1, green = 0.1, blue = 0.1, alpha = 1 }
 			or { red = 0.88, green = 0.88, blue = 0.88, alpha = 1 }
