@@ -79,14 +79,13 @@ local function movieLayout()
 	connectProjector(true)
 	darkmode.setDarkMode("dark")
 	darkmode.darkenImacDisplay()
-	holeCover.update()
-	dockSwitcher("movie")
+	u.defer(1, holeCover.update) -- defer so external display is detected
 
 	-- turn off showing hidden files
 	hs.execute("defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder")
 
 	u.openApps { "YouTube", env.isAtHome and "BetterTouchTool" or nil }
-	u.defer(1, function()
+	u.defer(1, function() -- defer so external display is detected
 		local youtubeWin = u.app("YouTube"):mainWindow()
 		local projectorScreen = hs.screen.find(env.projectorName)
 		if youtubeWin:screen():id() ~= projectorScreen:id() then
