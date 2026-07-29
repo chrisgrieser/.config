@@ -50,6 +50,7 @@ M.wf_middle_half = wf.new(smallWinApps)
 
 -- If two screens, always move new windows to Mouse Screen
 M.wf_appsOnMouseScreen = wf.new(true)
+	:setOverrideFilter({ allowRoles = "AXStandardWindow", fullscreen = false })
 	:subscribe(wf.windowCreated, function(newWin)
 		if #hs.screen.allScreens() < 2 then return end
 		local mouseScreen = hs.mouse.getCurrentScreen()
@@ -67,7 +68,6 @@ local function toggleMaximized()
 	local screen = frontWin:screen():frame()
 	local isMaximized = frontWin:frame().w == screen.w and frontWin:frame().h == screen.h
 	local newSize = isMaximized and baseSize or hs.layout.maximized
-		:setOverrideFilter({ allowRoles = "AXStandardWindow", fullscreen = false })
 	wu.moveResize(frontWin, newSize)
 end
 

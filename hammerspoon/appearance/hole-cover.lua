@@ -40,7 +40,7 @@ function M.update()
 	local allScreens = hs.screen.allScreens() --[[@as hs.screen[]]
 	for i, screen in ipairs(allScreens) do
 		local frame = screen:fullFrame() -- fullframe includes the menu bar
-		local menubarHeight = screen:fullFrame().h - screen:frame().h
+		local menubarHeight = screen:fullFrame().h - screen:frame().h - 2
 		local bgColor = require("meta.utils").isDarkMode()
 				and { red = 0.1, green = 0.1, blue = 0.1, alpha = 1 }
 			or { red = 0.88, green = 0.88, blue = 0.88, alpha = 1 }
