@@ -148,7 +148,7 @@ M.caff = c.new(function(event)
 	if env.isAtOffice then return end
 	if event == c.screensDidUnlock then
 		workLayout()
-	elseif event == c.systemWillSleep then
+	elseif event == c.screensDidLock then
 		connectProjector(false) -- so unlocking happens on right screen
 	end
 end):start()
