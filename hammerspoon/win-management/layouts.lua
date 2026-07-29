@@ -3,9 +3,9 @@ local M = {} -- persist from garbage collector
 local darkmode = require("appearance.dark-mode")
 local env = require("meta.environment")
 local holeCover = require("appearance.hole-cover")
+local music = require("apps.music")
 local u = require("meta.utils")
 local wu = require("win-management.window-utils")
-local music = require("apps.music")
 
 ---HELPERS----------------------------------------------------------------------
 
@@ -115,7 +115,6 @@ end
 ---WHEN TO SET LAYOUT-----------------------------------------------------------
 
 local function fixProjectorLayout()
-	-- fix layout
 	movieLayout()
 
 	-- move all windows to projector
@@ -143,19 +142,16 @@ hs.urlevent.bind("fix-projector-layout", fixProjectorLayout)
 -- 3. Systemstart
 if u.isSystemStart() then workLayout() end
 
--- 4. Waking
-M.caff_unlock = hs.caffeinate.watcher
-	.new(function(event)
-		local wokeUp = event == hs.caffeinate.watcher.screensDidUnlock
-			or event == hs.caffeinate.watcher.systemDidWake
-		if wokeUp and not env.isAtOffice and not env.hasProjector() then
-			u.defer(0.5, function()
-				local layout = env.hasProjector() and movieLayout or workLayout
-				layout()
-			end)
-		end
-	end)
-	:start()
+-- 4. Unlocking/SLeep
+local c = hs.caffeinate.watcher
+M.caff = c.new(function(event)
+	if env.isAtOffice then return end
+	if event == c.screensDidUnlock then
+		workLayout()
+	elseif event == c.systemWillSleep then
+		connectProjector(false) -- so unlocking happens on right screen
+	end
+end):start()
 
 --------------------------------------------------------------------------------
 return M
