@@ -147,8 +147,10 @@ local c = hs.caffeinate.watcher
 M.caff = c.new(function(event)
 	if env.isAtOffice then return end
 	if event == c.screensDidUnlock then
+		print("screen did unlock, using work layout")
 		workLayout()
 	elseif event == c.screensDidLock then
+		print("screen did lock, disconnecting projector")
 		connectProjector(false) -- so unlocking happens on right screen
 	end
 end):start()
