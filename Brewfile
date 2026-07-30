@@ -24,9 +24,7 @@ brew "zsh-autocomplete"
 brew "zsh-autopair"
 brew "zsh-history-substring-search"
 brew "zsh-syntax-highlighting"
-
-brew "Giammarco-Ferranti/deja/deja", trusted: true
-# brew "zsh-autosuggestions"
+brew "zsh-autosuggestions"
 
 #-APPS--------------------------------------------------------------------------
 cask "alfred"
@@ -52,6 +50,7 @@ mas "iPreview", id: 1519213509 # quicklook
 mas "WISO Steuer 2026", id: 6748903399 # TEMP
 
 #-DEPENDENCIES------------------------------------------------------------------
+# for Terminal & Neovide
 cask "font-jetbrains-mono-nerd-font"
 
 # for languagetool browser extension; see https://dev.languagetool.org/http-server
@@ -74,9 +73,9 @@ if device.include?("Home") or device.include?("Office")
 	cask "monodraw"
 end
 if device.include?("Home") or device.include?("Mother")
-	cask "qlvideo" # thumbnails not working: https://github.com/Marginal/QuickLookVideo/issues/173
+	# cask "qlvideo" # thumbnails not working: https://github.com/Marginal/QuickLookVideo/issues/173
 	cask "iina"
 	cask "steam"
 	cask "transmission"
-	cask "betterdisplay" # control 2nd display
+	cask "betterdisplay"
 end

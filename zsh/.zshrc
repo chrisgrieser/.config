@@ -10,7 +10,7 @@ CONFIG_FILES=(
 
 	options
 	navigation
-	# completion
+	completion
 	terminal_utils
 	aliases
 	docs_man
