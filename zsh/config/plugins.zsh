@@ -16,14 +16,19 @@ source "$HOMEBREW_PREFIX/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh"
 # autoload compinit -Uz +X && compinit
 # [[ $(uname -p) == "i386" ]] && compaudit | xargs chmod g-w # FIX for Intel Mac, https://github.com/zsh-users/zsh-completions/issues/433#issuecomment-629539004
 
-# ZSH-AUTOSUGGESTIONS
-# https://github.com/zsh-users/zsh-autosuggestions#configuration
-source "$HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
-export ZSH_AUTOSUGGEST_HISTORY_IGNORE="?(#c50,)" # ignores long history items
-export ZSH_AUTOSUGGEST_STRATEGY=(history)
-export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=35
-# do not accept autosuggestion when using vim's `A`
-export ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=("${ZSH_AUTOSUGGEST_ACCEPT_WIDGETS[@]/vi-add-eol/}")
+# # ZSH-AUTOSUGGESTIONS
+# # https://github.com/zsh-users/zsh-autosuggestions#configuration
+# source "$HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+# export ZSH_AUTOSUGGEST_HISTORY_IGNORE="?(#c50,)" # ignores long history items
+# export ZSH_AUTOSUGGEST_STRATEGY=(history)
+# export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=35
+# # do not accept autosuggestion when using vim's `A`
+# export ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=("${ZSH_AUTOSUGGEST_ACCEPT_WIDGETS[@]/vi-add-eol/}")
+
+# DEJA (zsh-autosuggestions alternative) https://github.com/Giammarco-Ferranti/deja#key-bindings
+export DEJA_CYCLE_KEY=
+eval "$(deja init zsh)"
+
 
 #-------------------------------------------------------------------------------
 

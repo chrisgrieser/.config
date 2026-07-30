@@ -22,9 +22,11 @@ brew "python" # most recent python version, since macOS system python is only 3.
 brew "starship"
 brew "zsh-autocomplete"
 brew "zsh-autopair"
-brew "zsh-autosuggestions"
 brew "zsh-history-substring-search"
 brew "zsh-syntax-highlighting"
+
+brew "Giammarco-Ferranti/deja/deja"
+# brew "zsh-autosuggestions"
 
 #-APPS--------------------------------------------------------------------------
 cask "alfred"
@@ -47,6 +49,7 @@ cask "zoom"
 mas "Highlights", id: 1498912833
 mas "Ivory", id: 6444602274
 mas "iPreview", id: 1519213509 # quicklook
+mas "WISO Steuer 2026", id: 6748903399 # TEMP
 
 #-DEPENDENCIES------------------------------------------------------------------
 cask "font-jetbrains-mono-nerd-font"
