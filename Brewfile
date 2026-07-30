@@ -25,7 +25,7 @@ brew "zsh-autopair"
 brew "zsh-history-substring-search"
 brew "zsh-syntax-highlighting"
 
-brew "Giammarco-Ferranti/deja/deja"
+brew "Giammarco-Ferranti/deja/deja", trusted: true
 # brew "zsh-autosuggestions"
 
 #-APPS--------------------------------------------------------------------------
