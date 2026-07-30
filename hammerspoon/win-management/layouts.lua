@@ -112,8 +112,6 @@ local function movieLayout()
 	print("🔲 Layout: movie")
 end
 
----WHEN TO SET LAYOUT-----------------------------------------------------------
-
 local function fixProjectorLayout()
 	movieLayout()
 
@@ -130,7 +128,7 @@ local function fixProjectorLayout()
 	hs.mouse.setRelativePosition(centerPos, projector)
 end
 
---------------------------------------------------------------------------------
+---WHEN TO SET LAYOUT-----------------------------------------------------------
 
 -- 1. Hotkeys
 hs.hotkey.bind({}, "home", workLayout)
@@ -142,20 +140,53 @@ hs.urlevent.bind("fix-projector-layout", fixProjectorLayout)
 -- 3. Systemstart
 if u.isSystemStart() then workLayout() end
 
--- 4. Unlocking/SLeep
+-- 4. Unlocking
 local c = hs.caffeinate.watcher
 M.caff = c.new(function(event)
 	if env.isAtOffice then return end
 	if event == c.screensDidUnlock then
 		workLayout()
 		print("🔒 Screen did unlock, using work layout")
-	elseif event == c.screensDidLock then
-		u.quitFullscreenAndVideoApps()
-		u.closeBrowserTabsWith("all")
-		connectProjector(false) -- so unlocking happens on right screen
-		print("🔒 Screen did lock, disconnecting projector")
 	end
 end):start()
 
+---SLEEP TIMER------------------------------------------------------------------
+-- When projector is connected, check every x min if device has been idle for y
+-- minutes. If so, alert and wait for z secs. If still idle then, quit
+-- all video apps.
+local config = {
+	checkIntervalMins = 10,
+	idleMins = 50,
+	timeToReactSecs = 20,
+}
+
+local doEvery = hs.timer.doEvery
+M.sleeptimer = doEvery(config.checkIntervalMins * 60, function()
+	local isIdle = (hs.host.idleTime() / 60) > config.idleMins
+	if not env.hasProjector() or not isIdle or not u.screenIsUnlocked() then return end
+
+	-- inform user about upcoming sleep
+	local alertMsg = ("💤 Will sleep in %ds if idle."):format(config.timeToReactSecs)
+	local alertId = hs.alert(alertMsg, config.timeToReactSecs)
+	hs.sound.getByName("Submarine"):volume(0.3):play() ---@diagnostic disable-line: undefined-field
+
+	-- remove alert earlier if user did something
+	local halfTime = math.ceil(config.timeToReactSecs / 2)
+	u.defer(halfTime, function()
+		local userDidSth = hs.host.idleTime() < (config.timeToReactSecs / 2)
+		if userDidSth then hs.alert.closeSpecific(alertId) end
+	end)
+
+	-- abort if user did something
+	u.defer(config.timeToReactSecs, function()
+		local userDidSth = hs.host.idleTime() < config.timeToReactSecs
+		if userDidSth then return end
+
+		-- close if user idle
+		u.notify("💤 SleepTimer triggered")
+		u.closeBrowserTabsWith("all")
+		workLayout()
+	end)
+end):start()
 --------------------------------------------------------------------------------
 return M
