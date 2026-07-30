@@ -45,9 +45,10 @@ function M.update()
 				and { red = 0.1, green = 0.1, blue = 0.1, alpha = 1 }
 			or { red = 0.88, green = 0.88, blue = 0.88, alpha = 1 }
 
+		local pos = { x = 0, y = menubarHeight, w = frame.w, h = coverHeight }
 		M.cover_top[i] = hs
-			.canvas
-			.new({ x = 0, y = menubarHeight, w = frame.w, h = coverHeight }) --[[@as hs.canvas]]
+			.canvas -- 󰁅 transform to screen-relative positions
+			.new(screen:localToAbsolute(pos)) --[[@as hs.canvas]]
 			:appendElements({
 				{ type = "rectangle", action = "fill", fillColor = bgColor },
 			}) --[[@as hs.canvas]]
@@ -56,9 +57,10 @@ function M.update()
 
 		local isMainScreen = hs.screen.mainScreen():id() == screen:id()
 		if isMainScreen then
+			pos = { x = 0, y = frame.h - coverHeight, w = frame.w, h = coverHeight }
 			M.cover_bottom[i] = hs
 				.canvas
-				.new({ x = 0, y = frame.h - coverHeight, w = frame.w, h = coverHeight }) --[[@as hs.canvas]]
+				.new(screen:localToAbsolute(pos)) --[[@as hs.canvas]]
 				:appendElements({
 					{ type = "rectangle", action = "fill", fillColor = bgColor },
 				}) --[[@as hs.canvas]]
