@@ -24,7 +24,7 @@ end
 
 ---@param status boolean
 local function connectProjector(status)
-	if not env.isAtHome then return end
+	if not (env.isAtHome or env.isAtMother) then return end
 	if env.hasProjector() == status then return end
 
 	local setTo = status and "on" or "off"
@@ -51,6 +51,7 @@ local function workLayout()
 	M.isLayouting = true
 	u.defer(2.5, function() M.isLayouting = false end)
 
+	-- screen
 	connectProjector(false)
 	u.defer(0.2, darkmode.autoSwitch) -- defer so ambient sensor is ready
 	u.defer(0.5, darkmode.autoSetBrightness) -- defer to adjust to mode switch
@@ -73,10 +74,12 @@ local function workLayout()
 end
 
 local function movieLayout()
+	if env.isAtOffice then return end
 	if M.isLayouting then return end
 	M.isLayouting = true
 	u.defer(2.5, function() M.isLayouting = false end)
 
+	-- screen
 	connectProjector(true)
 	darkmode.setDarkMode("dark")
 	darkmode.darkenImacDisplay()
@@ -84,9 +87,16 @@ local function movieLayout()
 	dockSwitcher("movie")
 	music.music_trigger("pause")
 
+	-- move mouse to center of projector
+	local projector = hs.screen.find(env.projectorName)
+	local frame = projector:fullFrame()
+	local centerPos = { x = frame.w / 2, y = frame.h / 2 }
+	hs.mouse.setRelativePosition(centerPos, projector)
+
 	-- turn off showing hidden files
 	hs.execute("defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder")
 
+	-- open / quit apps
 	u.openApps { "YouTube", env.isAtHome and "BetterTouchTool" or nil }
 	u.defer(1, function() -- defer so external display is detected
 		local youtubeWin = u.app("YouTube"):mainWindow()
@@ -112,22 +122,6 @@ local function movieLayout()
 	print("🔲 Layout: movie")
 end
 
-local function fixProjectorLayout()
-	movieLayout()
-
-	-- move all windows to projector
-	local projectorScreen = hs.screen.find(env.projectorName)
-	for _, win in pairs(hs.window:orderedWindows()) do
-		win:moveToScreen(projectorScreen, true)
-	end
-
-	-- move mouse to center of projector
-	local projector = hs.screen.find(env.projectorName)
-	local frame = projector:fullFrame()
-	local centerPos = { x = frame.w / 2, y = frame.h / 2 }
-	hs.mouse.setRelativePosition(centerPos, projector)
-end
-
 ---WHEN TO SET LAYOUT-----------------------------------------------------------
 
 -- 1. Hotkeys
@@ -135,16 +129,16 @@ hs.hotkey.bind({}, "home", workLayout)
 hs.hotkey.bind({}, "end", movieLayout)
 
 -- 2. URI (for Touchpad via BetterTouchTool)
-hs.urlevent.bind("fix-projector-layout", fixProjectorLayout)
+hs.urlevent.bind("movie-layout", movieLayout)
 
 -- 3. Systemstart
 if u.isSystemStart() then workLayout() end
 
--- 4. Unlocking
+-- 4. Wake
 local c = hs.caffeinate.watcher
 M.caff = c.new(function(event)
 	if env.isAtOffice then return end
-	if event == c.screensDidUnlock then
+	if event == c.systemDidWake then -- not unlock, since it triggers on display sleep already
 		workLayout()
 		print("🔒 Screen did unlock, using work layout")
 	end
@@ -188,5 +182,6 @@ M.sleeptimer = doEvery(config.checkIntervalMins * 60, function()
 		workLayout()
 	end)
 end):start()
+
 --------------------------------------------------------------------------------
 return M
