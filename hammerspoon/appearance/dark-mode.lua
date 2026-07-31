@@ -1,5 +1,6 @@
 local M = {}
 
+local env = require("meta.environment")
 local u = require("meta.utils")
 
 ---METHODS----------------------------------------------------------------------
@@ -53,14 +54,6 @@ function M.setDarkMode(toMode)
 	require("appearance.hole-cover").update()
 end
 
----MANUALLY TOGGLE DARK MODE----------------------------------------------------
--- forward-delete = light-bulb-key on my Keychron keyboard
-hs.hotkey.bind({}, "forwarddelete", function()
-	local toMode = u.isDarkMode() and "light" or "dark"
-	M.setDarkMode(toMode)
-	logBrightness(("Manually toggled %s mode"):format(toMode))
-end)
-
 ---AUTO-SWITCH DARK MODE--------------------------------------------------------
 
 -- autoswitch dark mode and light mode
@@ -84,6 +77,37 @@ function M.autoSwitch()
 		logBrightness("No auto-switch", lightThreshold)
 	end
 end
+
+---MANUALLY TOGGLE DARK MODE----------------------------------------------------
+-- forward-delete = light-bulb-key on my Keychron keyboard
+hs.hotkey.bind({}, "forwarddelete", function()
+	local toMode = u.isDarkMode() and "light" or "dark"
+	M.setDarkMode(toMode)
+	logBrightness(("Manually toggled %s mode"):format(toMode))
+end)
+
+---AUTO-SET LIGHT/DARK MODE-----------------------------------------------------
+
+local c = hs.caffeinate.watcher
+M.caff_unlock = c.new(function(event)
+	local wokeUp = event == c.screensDidUnlock or event == c.systemDidWake
+	if wokeUp and not env.isAtOffice then
+
+		M.autoSwitch()
+		M.auotoSetBrightness()
+	end
+end):start()
+
+
+M.caff_unlock = hs.caffeinate.watcher
+	.new(function(event)
+		local wokeUp = event == hs.caffeinate.watcher.screensDidUnlock
+			or event == hs.caffeinate.watcher.systemDidWake
+		if wokeUp and not env.isAtOffice and not env.isProjector() then
+			u.defer(0.5, autoSetLayout)
+		end
+	end)
+	:start()
 
 --------------------------------------------------------------------------------
 return M

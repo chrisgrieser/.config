@@ -134,16 +134,6 @@ hs.urlevent.bind("movie-layout", movieLayout)
 -- 3. Systemstart
 if u.isSystemStart() then workLayout() end
 
--- 4. Wake
-local c = hs.caffeinate.watcher
-M.caff = c.new(function(event)
-	if env.isAtOffice then return end
-	if event == c.systemDidWake then -- not unlock, since it triggers on display sleep already
-		workLayout()
-		print("🔒 Screen did unlock, using work layout")
-	end
-end):start()
-
 ---SLEEP TIMER------------------------------------------------------------------
 -- When projector is connected, check every x min if device has been idle for y
 -- minutes. If so, alert and wait for z secs. If still idle then, quit
