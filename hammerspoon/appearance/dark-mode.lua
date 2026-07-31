@@ -92,22 +92,11 @@ local c = hs.caffeinate.watcher
 M.caff_unlock = c.new(function(event)
 	local wokeUp = event == c.screensDidUnlock or event == c.systemDidWake
 	if wokeUp and not env.isAtOffice then
-
-		M.autoSwitch()
-		M.auotoSetBrightness()
+		u.defer(0.5, M.autoSwitch)
+		u.defer(1, M.autoSetBrightness)
 	end
 end):start()
 
-
-M.caff_unlock = hs.caffeinate.watcher
-	.new(function(event)
-		local wokeUp = event == hs.caffeinate.watcher.screensDidUnlock
-			or event == hs.caffeinate.watcher.systemDidWake
-		if wokeUp and not env.isAtOffice and not env.isProjector() then
-			u.defer(0.5, autoSetLayout)
-		end
-	end)
-	:start()
 
 --------------------------------------------------------------------------------
 return M
