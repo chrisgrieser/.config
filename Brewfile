@@ -47,7 +47,6 @@ cask "zoom"
 mas "Highlights", id: 1498912833
 mas "Ivory", id: 6444602274
 mas "iPreview", id: 1519213509 # quicklook
-mas "WISO Steuer 2026", id: 6748903399 # TEMP
 
 #-DEPENDENCIES------------------------------------------------------------------
 # for Terminal & Neovide
@@ -67,6 +66,7 @@ if device.include?("Home")
 	cask "ausweisapp" # pairing with phone app only works in private wifi
 	cask "bettertouchtool"
 	cask "catch"
+	mas "WISO Steuer 2026", id: 6748903399 # keep until Steuerbescheid comes
 end
 if device.include?("Home") or device.include?("Office")
 	cask "granola"
