@@ -7,7 +7,7 @@ local M = {}
 -- DOCS https://www.hammerspoon.org/Spoons/RoundedCorners.html
 local roundedCorner = hs.loadSpoon("RoundedCorners")
 if roundedCorner then
-	roundedCorner.allScreens = true
+	roundedCorner.allScreens = false -- do not round corners on projector
 	roundedCorner.radius = 15 -- higher for macOS Tahoe
 	roundedCorner:start()
 end
