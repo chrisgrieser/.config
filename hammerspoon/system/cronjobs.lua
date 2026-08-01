@@ -2,8 +2,6 @@ local M = {} -- persist from garbage collector
 
 local env = require("meta.environment")
 local u = require("meta.utils")
-local wu = require("win-management.window-utils")
-local c = hs.caffeinate.watcher
 local timerAt = hs.timer.doAt
 local timerEverySecs = hs.timer.doEvery
 
@@ -14,29 +12,6 @@ if u.isSystemStart() then
 	u.defer({ 5, 15 }, function() u.quitApps("Reminders") end)
 end
 
----TURN OFF DISPLAY IF----------------------------------------------------------
-M.caff_projectorScreensaver = c.new(function(event)
-	if env.isAtOffice then return end
-
-	-- 1. screensaver starts at night
-	if event == c.screensaverDidStart and u.betweenTime(22, 7) and not env.hasProjector() then
-		wu.iMacDisplay:setBrightness(0)
-	end
-
-	-- 2. screen activity while projector connected
-	if
-		event == c.screensaverDidStop
-		or event == c.screensaverDidStart
-		or event == c.screensDidWake
-		or event == c.systemDidWake
-		or event == c.screensDidSleep
-	then
-		u.defer({ 0, 2 }, function()
-			if env.hasProjector() then wu.iMacDisplay:setBrightness(0) end
-		end)
-	end
-end):start()
-
 ---CLOCK------------------------------------------------------------------------
 -- Show clock every full hour
 M.timer_clock = timerEverySecs(60, function()
@@ -44,17 +19,6 @@ M.timer_clock = timerEverySecs(60, function()
 	if isFullHour and u.screenIsUnlocked() and not env.hasProjector() then
 		local hour = tostring(os.date("%H:%M"))
 		hs.alert(hour, 3)
-	end
-end):start()
-
--- Reminder to go to Finesse Bistro
-M.timer_finesseBistro = timerAt("12:00", "01d", function()
-	local dayOfWeek = tostring(os.date("%a"))
-	local isWeekday = hs.fnutils.contains({ "Mon", "Tue", "Wed", "Thu" }, dayOfWeek)
-	if isWeekday and env.isAtHome and u.screenIsUnlocked() then
-		local msg = "🍴 Go to Finesse Bistro"
-		hs.alert(msg, 4)
-		print(msg)
 	end
 end):start()
 

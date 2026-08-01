@@ -2,6 +2,7 @@ local M = {}
 
 local env = require("meta.environment")
 local u = require("meta.utils")
+local wu = require("win-management.window-utils")
 
 ---METHODS----------------------------------------------------------------------
 
@@ -54,9 +55,9 @@ function M.setDarkMode(toMode)
 	require("appearance.hole-cover").update()
 end
 
----AUTO-SWITCH DARK MODE--------------------------------------------------------
+---CHANGING DARK MODE--------------------------------------------------------
 
--- autoswitch dark mode and light mode
+-- AUTOMATIC
 -- If device has brightness sensor, uses a threshold to determine whether to
 -- change. Otherwise, changes based on the time of day.
 function M.autoSwitch()
@@ -78,25 +79,37 @@ function M.autoSwitch()
 	end
 end
 
----MANUALLY TOGGLE DARK MODE----------------------------------------------------
--- forward-delete = light-bulb-key on my Keychron keyboard
+-- MANUAL
+-- `forward-delete` key = light-bulb-key on my Keychron keyboard
 hs.hotkey.bind({}, "forwarddelete", function()
 	local toMode = u.isDarkMode() and "light" or "dark"
 	M.setDarkMode(toMode)
 	logBrightness(("Manually toggled %s mode"):format(toMode))
 end)
 
----AUTO-SET LIGHT/DARK MODE-----------------------------------------------------
+---WATCHERS FOR DARK MODE AND BRIGHTNESS----------------------------------------
 
 local c = hs.caffeinate.watcher
-M.caff_unlock = c.new(function(event)
+M.caff = c.new(function(event)
+	if env.isAtOffice then return end
+
+	local screensaverStartedAtNight = event == c.screensaverDidStart and u.betweenTime(22, 7)
 	local wokeUp = event == c.screensDidUnlock or event == c.systemDidWake
-	if wokeUp and not env.isAtOffice then
-		u.defer(0.5, M.autoSwitch)
-		u.defer(1, M.autoSetBrightness)
+	local anyScreenActivity = event == c.screensaverDidStop
+		or event == c.screensaverDidStart
+		or event == c.screensDidWake
+		or event == c.systemDidWake
+		or event == c.screensDidSleep
+
+	if screensaverStartedAtNight then
+		wu.iMacDisplay:setBrightness(0)
+	elseif anyScreenActivity and env.hasProjector() then
+		wu.iMacDisplay:setBrightness(0)
+	elseif wokeUp and not env.hasProjector() then
+		u.defer(0.5, M.autoSwitch) -- wait for display turning on
+		u.defer(1, M.autoSetBrightness) -- wait for auto-switch
 	end
 end):start()
-
 
 --------------------------------------------------------------------------------
 return M

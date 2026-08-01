@@ -1,6 +1,6 @@
 local M = {} -- persist from garbage collector
 
-local darkmode = require("appearance.dark-mode")
+local display = require("appearance.darkmode-and-brightness")
 local env = require("meta.environment")
 local holeCover = require("appearance.hole-cover")
 local music = require("apps.music")
@@ -53,8 +53,8 @@ local function workLayout()
 
 	-- screen
 	connectProjector(false)
-	u.defer(0.2, darkmode.autoSwitch) -- defer so ambient sensor is ready
-	u.defer(1, darkmode.autoSetBrightness) -- defer to adjust to mode switch
+	u.defer(0.2, display.autoSwitch) -- defer so ambient sensor is ready
+	u.defer(1, display.autoSetBrightness) -- defer to adjust to mode switch
 	u.defer(1, holeCover.update) -- defer removal of external display is detected
 	dockSwitcher("work")
 
@@ -81,8 +81,8 @@ local function movieLayout()
 
 	-- screen
 	connectProjector(true)
-	darkmode.setDarkMode("dark")
-	darkmode.darkenImacDisplay()
+	display.setDarkMode("dark")
+	display.darkenImacDisplay()
 	u.defer(1, holeCover.update) -- defer so external display is detected
 	dockSwitcher("movie")
 	music.music_trigger("pause")

@@ -21,7 +21,7 @@ end
 
 safeRequire("appearance.console")
 safeRequire("appearance.hole-cover")
-safeRequire("appearance.dark-mode")
+safeRequire("appearance.darkmode-and-brightness")
 
 safeRequire("win-management.win-mover")
 safeRequire("win-management.layouts")
