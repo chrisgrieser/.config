@@ -54,11 +54,11 @@
       "src": "https://github.com/chrisgrieser/nvim-chainsaw"
     },
     "nvim-genghis": {
-      "rev": "12100e3fe7fa863f60b5b81a3587c8c9d5a5b2ff",
+      "rev": "401522898169644a5e9e3a20d06382cd56318a3b",
       "src": "https://github.com/chrisgrieser/nvim-genghis"
     },
     "nvim-justice": {
-      "rev": "11e4deec4c00d07b48d5b5008ab53bba267e71f5",
+      "rev": "bef68499322702741aae499e2a110466f01a6f13",
       "src": "https://github.com/chrisgrieser/nvim-justice"
     },
     "nvim-lsp-endhints": {
@@ -74,7 +74,7 @@
       "src": "https://github.com/chrisgrieser/nvim-origami"
     },
     "nvim-rip-substitute": {
-      "rev": "5aafa8e31971d2fb1dbb207f1ecd3b12b1ba0f88",
+      "rev": "6a398eebc581ff2df2fcef93216ca08b1870a397",
       "src": "https://github.com/chrisgrieser/nvim-rip-substitute"
     },
     "nvim-rulebook": {
@@ -94,7 +94,7 @@
       "src": "https://github.com/kylechui/nvim-surround"
     },
     "nvim-tinygit": {
-      "rev": "19da9f0fdb0683fe92cecf1927d2d3efd3d4f8a1",
+      "rev": "ededec9fb84484b20d34b635fdc20e42a35463c7",
       "src": "https://github.com/chrisgrieser/nvim-tinygit"
     },
     "nvim-treesitter": {
