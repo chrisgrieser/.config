@@ -49,12 +49,11 @@ mas "Ivory", id: 6444602274
 
 
 #-QUICKLOOK---------------------------------------------------------------------
-cask "qlmarkdown"
-cask "syntax-highlight"
-
-# mas "iPreview", id: 1519213509 # has issues with markdown, not customizable
-cask "flewgg/tap/unfold", trusted: true # some bugs last I tried
-# untested: looq
+cask "qlmarkdown" # used since iPreview is buggy for Markdown
+cask "syntax-highlight" # dark mode buggy
+# mas "iPreview", id: 1519213509 # buggy with markdown
+# cask "flewgg/tap/unfold", trusted: true # license migration issues
+# mas "Looq", id: 6760281430 # no homebrew cask, no lua support, no window resizing
 # alternatives: https://appaddict.app/post/quick-look-showdown-peek-looq-and-unfold
 
 #-DEPENDENCIES------------------------------------------------------------------
