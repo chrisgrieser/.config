@@ -46,7 +46,16 @@ cask "wezterm"
 cask "zoom"
 mas "Highlights", id: 1498912833
 mas "Ivory", id: 6444602274
-mas "iPreview", id: 1519213509 # quicklook
+
+
+#-QUICKLOOK---------------------------------------------------------------------
+cask "qlmarkdown"
+cask "syntax-highlight"
+
+# mas "iPreview", id: 1519213509 # has issues with markdown, not customizable
+cask "flewgg/tap/unfold", trusted: true # some bugs last I tried
+# untested: looq
+# alternatives: https://appaddict.app/post/quick-look-showdown-peek-looq-and-unfold
 
 #-DEPENDENCIES------------------------------------------------------------------
 # for Terminal & Neovide
