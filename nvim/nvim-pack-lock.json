@@ -50,7 +50,7 @@
       "src": "https://github.com/EdenEast/nightfox.nvim"
     },
     "nvim-chainsaw": {
-      "rev": "823104b77da830d1a5de6d6aa8586c37537f7302",
+      "rev": "78a0e68c59f4e7760f33dacde0ff21b2498c015e",
       "src": "https://github.com/chrisgrieser/nvim-chainsaw"
     },
     "nvim-genghis": {
@@ -62,7 +62,7 @@
       "src": "https://github.com/chrisgrieser/nvim-justice"
     },
     "nvim-lsp-endhints": {
-      "rev": "cc11482c988ba0e394b3426ae13d0b97e81a508d",
+      "rev": "3224a1c1b2fe1b067049764a154d4d727425fa6d",
       "src": "https://github.com/chrisgrieser/nvim-lsp-endhints"
     },
     "nvim-lspconfig": {
@@ -70,7 +70,7 @@
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-origami": {
-      "rev": "02312301df125908031b27dc556adb4cd81893d6",
+      "rev": "a137d35eaabb7cd7be89228229c1aa5b057f5ed7",
       "src": "https://github.com/chrisgrieser/nvim-origami"
     },
     "nvim-rip-substitute": {
@@ -78,15 +78,15 @@
       "src": "https://github.com/chrisgrieser/nvim-rip-substitute"
     },
     "nvim-rulebook": {
-      "rev": "b1b74264e4db3f1d45c4751bc9f5f645bec670f0",
+      "rev": "0572382adde2eb03bde68da23c2aaac3577f503a",
       "src": "https://github.com/chrisgrieser/nvim-rulebook"
     },
     "nvim-scissors": {
-      "rev": "77dfcafd53088c7941f2d383541aa8fdda7fd7b7",
+      "rev": "52de279bc53e849a413c675238abd3ed4a55cc64",
       "src": "https://github.com/chrisgrieser/nvim-scissors"
     },
     "nvim-spider": {
-      "rev": "7f021426d4a615ea8f11cabed434b1f20376abae",
+      "rev": "38f74f733734566bec3b23a9dcf968a5a5559cd6",
       "src": "https://github.com/chrisgrieser/nvim-spider"
     },
     "nvim-surround": {
@@ -106,7 +106,7 @@
       "src": "https://github.com/nvim-treesitter/nvim-treesitter-textobjects"
     },
     "nvim-various-textobjs": {
-      "rev": "604d4c57a5a702c5b25698502713a5f4da6c439e",
+      "rev": "dfbf0e9ccab4bad3c87961e1de3c8dc09d8f337a",
       "src": "https://github.com/chrisgrieser/nvim-various-textobjs"
     },
     "refactoring.nvim": {
