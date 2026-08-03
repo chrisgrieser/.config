@@ -49,9 +49,9 @@ mas "Ivory", id: 6444602274
 
 
 #-QUICKLOOK---------------------------------------------------------------------
-cask "qlmarkdown" # used since iPreview is buggy for Markdown
-cask "syntax-highlight" # dark mode buggy
-# mas "iPreview", id: 1519213509 # buggy with markdown
+cask "qlmarkdown" # markdown only
+cask "syntax-highlight" # dark mode buggy, remove footer via https://github.com/sbarex/SourceCodeSyntaxHighlight/issues/297#issuecomment-2560808425
+# mas "iPreview", id: 1519213509 # buggy with markdown frontmatter, no window resizing
 # cask "flewgg/tap/unfold", trusted: true # license migration issues
 # mas "Looq", id: 6760281430 # no homebrew cask, no lua support, no window resizing
 # alternatives: https://appaddict.app/post/quick-look-showdown-peek-looq-and-unfold
