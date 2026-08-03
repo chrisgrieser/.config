@@ -211,9 +211,27 @@ function M.closeAllFinderWins()
 end
 
 function M.quitFullscreenAndVideoApps()
-	-- close fullscreen wins
-	for _, win in pairs(hs.window.allWindows()) do
-		if win:isFullScreen() then win:setFullScreen(false) end
+	-- close fullscreen spaces
+	local spacesPerScreen = hs.spaces.allSpaces() --[[@as hs.canvas]]
+	for _screen, spaceIdsOfScreen in pairs(spacesPerScreen) do
+		local unfocussedSpace = hs.fnutils.find(spaceIdsOfScreen, function(id)
+			local isNormalSpace = hs.spaces.spaceType(id) == "user"
+			local notFocused = hs.spaces.focusedSpace() ~= id
+			return isNormalSpace and notFocused
+		end)
+		if unfocussedSpace then
+			for _, id in ipairs(spaceIdsOfScreen) do
+				local isFullScreen = hs.spaces.spaceType(id) ~= "user" -- "fullscreen" or nil
+				if isFullScreen then
+					local isFocused = hs.spaces.focusedSpace() == id
+					if isFocused then hs.spaces.gotoSpace(unfocussedSpace) end -- focussed spaces cannot be closed
+					local success, errmsg = hs.spaces.removeSpace(id)
+					local msg = success and "🧹 Closed fullscreen space"
+						or "⚠️Could not close fullscreen space: " .. errmsg
+					print(msg)
+				end
+			end
+		end
 	end
 
 	-- extra video apps
@@ -228,6 +246,12 @@ function M.quitFullscreenAndVideoApps()
 	require("apps.music").aw_music:stop()
 	M.quitApps(M.videoAndAudioApps)
 	M.defer(1, function() require("apps.music").aw_music:start() end)
+end
+
+---@param name string
+---@param volume number
+function M.sound(name, volume)
+	hs.sound.getByName(name):volume(volume):play() ---@diagnostic disable-line: undefined-field
 end
 
 ---@param title string

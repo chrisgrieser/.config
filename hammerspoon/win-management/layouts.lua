@@ -42,6 +42,13 @@ local function connectProjector(status)
 		local shellScript = ('betterdisplaycli set --name="%s" --connected="%s"'):format(name, setTo)
 		hs.execute(u.exportPath .. shellScript)
 	end)
+	u.defer(delay + 1, function()
+		local success = env.hasProjector() == status
+		if not success then
+			u.sound("Bass", 0.4)
+			hs.alert("Could not set projector to " .. setTo)
+		end
+	end)
 end
 
 ---LAYOUTS---------------------------------------------------------------------
@@ -89,9 +96,11 @@ local function movieLayout()
 
 	-- move mouse to center of projector
 	local projector = hs.screen.find(env.projectorName)
-	local frame = projector:fullFrame()
-	local centerPos = { x = frame.w / 2, y = frame.h / 2 }
-	hs.mouse.setRelativePosition(centerPos, projector)
+	if projector then
+		local frame = projector:fullFrame()
+		local centerPos = { x = frame.w / 2, y = frame.h / 2 }
+		hs.mouse.setRelativePosition(centerPos, projector)
+	end
 
 	-- turn off showing hidden files
 	hs.execute("defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder")
@@ -99,11 +108,9 @@ local function movieLayout()
 	-- open / quit apps
 	u.openApps { "YouTube", env.isAtHome and "BetterTouchTool" or nil }
 	u.defer(1, function() -- defer so external display is detected
-		local youtubeWin = u.app("YouTube"):mainWindow()
-		local projectorScreen = hs.screen.find(env.projectorName)
-		if youtubeWin:screen():id() ~= projectorScreen:id() then
-			youtubeWin:moveToScreen(projectorScreen)
-		end
+		local youtubeWin = u.app("YouTube") and u.app("YouTube"):mainWindow()
+		if not youtubeWin or not projector then return end
+		if youtubeWin:screen():id() ~= projector:id() then youtubeWin:moveToScreen(projector) end
 	end)
 
 	u.quitApps {
@@ -129,7 +136,10 @@ hs.hotkey.bind({}, "home", workLayout)
 hs.hotkey.bind({}, "end", movieLayout)
 
 -- 2. URI (for Touchpad via BetterTouchTool)
-hs.urlevent.bind("movie-layout", movieLayout)
+hs.urlevent.bind("movie-layout", function()
+	u.sound("Hero", 0.8) -- indicate that Touchpad has triggered
+	movieLayout()
+end)
 
 -- 3. Systemstart
 if u.isSystemStart() then workLayout() end
@@ -152,7 +162,7 @@ M.sleeptimer = doEvery(config.checkIntervalMins * 60, function()
 	-- inform user about upcoming sleep
 	local alertMsg = ("💤 Will sleep in %ds if idle."):format(config.timeToReactSecs)
 	local alertId = hs.alert(alertMsg, config.timeToReactSecs)
-	hs.sound.getByName("Submarine"):volume(0.3):play() ---@diagnostic disable-line: undefined-field
+	u.sound("Submarine", 0.3)
 
 	-- remove alert earlier if user did something
 	local halfTime = math.ceil(config.timeToReactSecs / 2)

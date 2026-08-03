@@ -27,7 +27,7 @@ local function soundNotify(msg)
 	msg = "🌡" .. msg
 	hs.alert(msg)
 	print(msg)
-	hs.sound.getByName("Funk"):volume(0.5):play() ---@diagnostic disable-line: undefined-field
+	u.sound("Funk", 0.5)
 end
 
 -- DOCS https://brightsky.dev/docs/#get-/current_weather
