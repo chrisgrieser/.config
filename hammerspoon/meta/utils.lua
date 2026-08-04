@@ -128,18 +128,6 @@ end
 ---@nodiscard
 function M.app(appName) return hs.application.find(appName, true, true) end
 
----@param appNames string|string[] app or apps that should be checked
----@return boolean true when *one* of the apps is frontmost
----@nodiscard
-function M.isFront(appNames)
-	if appNames == nil then return false end
-	if type(appNames) == "string" then appNames = { appNames } end
-	for _, name in pairs(appNames) do
-		if M.app(name) and M.app(name):isFrontmost() then return true end
-	end
-	return false
-end
-
 ---@param appNames string|string[] app or apps that should be running
 ---@return boolean true when all apps are running
 ---@nodiscard
@@ -150,16 +138,6 @@ function M.appRunning(appNames)
 		if not M.app(name) then allAreRunning = false end
 	end
 	return allAreRunning
-end
-
----@param appName string
----@param callbackFn function function to execute when a window of the app is available
-function M.whenAppWinAvailable(appName, callbackFn)
-	M[appName .. "WinAvailable"] = hs.timer.waitUntil(function()
-		local app = M.app(appName)
-		local windowAvailable = app and app:mainWindow()
-		return windowAvailable
-	end, callbackFn, 0.1)
 end
 
 ---@param appNames string|string[]
@@ -244,6 +222,11 @@ function M.quitFullscreenAndVideoApps()
 		print(msg)
 	end
 
+	-- prevent the automatic quitting of audio-apps from triggering a music start
+	require("apps.music").aw_music:stop()
+	M.quitApps(M.videoAndAudioApps)
+	M.defer(1, function() require("apps.music").aw_music:start() end)
+
 	-- extra video apps
 	local extraVideoAppDir = os.getenv("HOME")
 		.. "/Library/Mobile Documents/com~apple~CloudDocs/Apps/Love/"
@@ -251,11 +234,6 @@ function M.quitFullscreenAndVideoApps()
 		local app = file:match("([^/]+)%.app$")
 		if app then M.quitApps(app) end
 	end
-
-	-- prevent the automatic quitting of audio-apps from triggering a music start
-	require("apps.music").aw_music:stop()
-	M.quitApps(M.videoAndAudioApps)
-	M.defer(1, function() require("apps.music").aw_music:start() end)
 end
 
 ---@param name string
