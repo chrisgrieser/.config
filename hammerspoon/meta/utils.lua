@@ -212,26 +212,36 @@ end
 
 function M.quitFullscreenAndVideoApps()
 	-- close fullscreen spaces
-	local spacesPerScreen = hs.spaces.allSpaces() --[[@as hs.canvas]]
-	for _screen, spaceIdsOfScreen in pairs(spacesPerScreen) do
-		local unfocussedSpace = hs.fnutils.find(spaceIdsOfScreen, function(id)
-			local isNormalSpace = hs.spaces.spaceType(id) == "user"
-			local notFocused = hs.spaces.focusedSpace() ~= id
-			return isNormalSpace and notFocused
-		end)
-		if unfocussedSpace then
-			for _, id in ipairs(spaceIdsOfScreen) do
-				local isFullScreen = hs.spaces.spaceType(id) ~= "user" -- "fullscreen" or nil
-				if isFullScreen then
-					local isFocused = hs.spaces.focusedSpace() == id
-					if isFocused then hs.spaces.gotoSpace(unfocussedSpace) end -- focussed spaces cannot be closed
-					local success, errmsg = hs.spaces.removeSpace(id)
-					local msg = success and "🧹 Closed fullscreen space"
-						or "⚠️Could not close fullscreen space: " .. errmsg
-					print(msg)
+	local success, err = pcall(function()
+		local spacesPerScreen = hs.spaces.allSpaces() --[[@as hs.canvas]]
+		for _screen, spaceIdsOfScreen in pairs(spacesPerScreen) do
+			local unfocussedSpace = hs.fnutils.find(spaceIdsOfScreen, function(id)
+				local isNormalSpace = hs.spaces.spaceType(id) == "user"
+				local notFocused = hs.spaces.focusedSpace() ~= id
+				return isNormalSpace and notFocused
+			end)
+			if unfocussedSpace then
+				for _, id in ipairs(spaceIdsOfScreen) do
+					local isFullScreen = hs.spaces.spaceType(id) ~= "user" -- "fullscreen" or nil
+					if isFullScreen then
+						if hs.spaces.focusedSpace() == id then -- focussed spaces cannot be closed
+							local success, err = hs.spaces.gotoSpace(unfocussedSpace)
+							if not success then print("⚠️Could goto next space: " .. err) end
+						end
+						local success, err = hs.spaces.removeSpace(id)
+						print(
+							success and "🧹 Closed fullscreen"
+								or "⚠️Could not close fullscreen: " .. err
+						)
+					end
 				end
 			end
 		end
+	end)
+	if not success then
+		local msg = "⚠️Exiting fullscreen spaces failed:" .. err
+		hs.alert(msg, 5)
+		print(msg)
 	end
 
 	-- extra video apps
