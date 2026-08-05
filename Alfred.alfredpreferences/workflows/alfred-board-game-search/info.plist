@@ -8,8 +8,31 @@
 	<string>⭐️</string>
 	<key>connections</key>
 	<dict>
+		<key>03E9CCDB-971A-49A3-B728-5F0AE6134630</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>88C6BA00-B205-48A3-B162-853AF147661C</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>1E9D47A4-3A41-453E-9734-4F58E6654D5A</key>
 		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>88186304-0500-4297-9AD2-CCC0B9440663</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
 			<dict>
 				<key>destinationuid</key>
 				<string>56A2325A-30D3-4B4C-ABFB-BCD0FA84E0CB</string>
@@ -22,7 +45,7 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>03E9CCDB-971A-49A3-B728-5F0AE6134630</string>
+				<string>BECC2813-AE04-424B-B190-B2D46344AF3C</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -30,9 +53,12 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
+		</array>
+		<key>88C6BA00-B205-48A3-B162-853AF147661C</key>
+		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>88186304-0500-4297-9AD2-CCC0B9440663</string>
+				<string>F807DD65-2A43-4650-A156-DA7EE224C6F5</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -64,11 +90,50 @@
 				<false/>
 			</dict>
 		</array>
+		<key>BECC2813-AE04-424B-B190-B2D46344AF3C</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>03E9CCDB-971A-49A3-B728-5F0AE6134630</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>CA45DB63-305A-4FB2-BD65-A162EB4C2697</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>B74954A3-8720-4CED-8A17-A59B39CEA1FA</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>E087D983-8D7A-4EA5-A682-02234530D0BA</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
 				<string>6BF2B984-1F3B-42A6-AAF6-C08713625399</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>F807DD65-2A43-4650-A156-DA7EE224C6F5</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>CA45DB63-305A-4FB2-BD65-A162EB4C2697</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -208,14 +273,14 @@
 				<key>skipvarencode</key>
 				<false/>
 				<key>spaces</key>
-				<string></string>
+				<string>+</string>
 				<key>url</key>
-				<string>https://boardgameprices.com/item/search?search={query}</string>
+				<string>https://www.amazon.de/s?k={query}+board+game</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
-			<string>56A2325A-30D3-4B4C-ABFB-BCD0FA84E0CB</string>
+			<string>88186304-0500-4297-9AD2-CCC0B9440663</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -250,14 +315,14 @@
 				<key>skipvarencode</key>
 				<false/>
 				<key>spaces</key>
-				<string>+</string>
+				<string></string>
 				<key>url</key>
-				<string>https://www.brettspiel-angebote.de/suche/{query}/</string>
+				<string>https://boardgameprices.com/item/search?search={query}</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
-			<string>03E9CCDB-971A-49A3-B728-5F0AE6134630</string>
+			<string>56A2325A-30D3-4B4C-ABFB-BCD0FA84E0CB</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -271,14 +336,100 @@
 				<key>skipvarencode</key>
 				<false/>
 				<key>spaces</key>
-				<string>+</string>
+				<string></string>
 				<key>url</key>
-				<string>https://www.amazon.de/s?k={query}+board+game</string>
+				<string>https://www.brettspiel-angebote.de/suche/</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
-			<string>88186304-0500-4297-9AD2-CCC0B9440663</string>
+			<string>03E9CCDB-971A-49A3-B728-5F0AE6134630</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>count</key>
+				<integer>1</integer>
+				<key>keychar</key>
+				<string>↩</string>
+				<key>keycode</key>
+				<integer>36</integer>
+				<key>keymod</key>
+				<integer>0</integer>
+				<key>overridewithargument</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.dispatchkeycombo</string>
+			<key>uid</key>
+			<string>B74954A3-8720-4CED-8A17-A59B39CEA1FA</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<true/>
+				<key>clipboardtext</key>
+				<string>{var:the_query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>F807DD65-2A43-4650-A156-DA7EE224C6F5</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string>{query}</string>
+				<key>passthroughargument</key>
+				<true/>
+				<key>variables</key>
+				<dict>
+					<key>the_query</key>
+					<string>{query}</string>
+				</dict>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>BECC2813-AE04-424B-B190-B2D46344AF3C</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>seconds</key>
+				<string>0.5</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.delay</string>
+			<key>uid</key>
+			<string>CA45DB63-305A-4FB2-BD65-A162EB4C2697</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>seconds</key>
+				<string>0.5</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.delay</string>
+			<key>uid</key>
+			<string>88C6BA00-B205-48A3-B162-853AF147661C</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -290,7 +441,7 @@
 3. Copy the path of the csv file, and enter it to the left.
 
 ## Usage
-Search board games with the `bg` keyword.
+Search board games with the `bgg` keyword.
 - &lt;kbd&gt;⏎&lt;/kbd&gt; open the page at BGG.
 - &lt;kbd&gt;⌥&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt; copy the page URL.
 
@@ -308,7 +459,7 @@ Search board games with the `bg` keyword.
 			<key>xpos</key>
 			<real>265</real>
 			<key>ypos</key>
-			<real>380</real>
+			<real>510</real>
 		</dict>
 		<key>1E9D47A4-3A41-453E-9734-4F58E6654D5A</key>
 		<dict>
@@ -317,7 +468,7 @@ Search board games with the `bg` keyword.
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>380</real>
+			<real>390</real>
 		</dict>
 		<key>56A2325A-30D3-4B4C-ABFB-BCD0FA84E0CB</key>
 		<dict>
@@ -326,7 +477,7 @@ Search board games with the `bg` keyword.
 			<key>xpos</key>
 			<real>265</real>
 			<key>ypos</key>
-			<real>260</real>
+			<real>390</real>
 		</dict>
 		<key>6BF2B984-1F3B-42A6-AAF6-C08713625399</key>
 		<dict>
@@ -353,7 +504,16 @@ Search board games with the `bg` keyword.
 			<key>xpos</key>
 			<real>265</real>
 			<key>ypos</key>
-			<real>515</real>
+			<real>275</real>
+		</dict>
+		<key>88C6BA00-B205-48A3-B162-853AF147661C</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>10</integer>
+			<key>xpos</key>
+			<real>420</real>
+			<key>ypos</key>
+			<real>540</real>
 		</dict>
 		<key>934AA610-FE5D-437B-BFA5-B1BD6ED3AF17</key>
 		<dict>
@@ -364,6 +524,35 @@ Search board games with the `bg` keyword.
 			<key>ypos</key>
 			<real>75</real>
 		</dict>
+		<key>B74954A3-8720-4CED-8A17-A59B39CEA1FA</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>10</integer>
+			<key>xpos</key>
+			<real>730</real>
+			<key>ypos</key>
+			<real>510</real>
+		</dict>
+		<key>BECC2813-AE04-424B-B190-B2D46344AF3C</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>10</integer>
+			<key>note</key>
+			<string>save query</string>
+			<key>xpos</key>
+			<real>195</real>
+			<key>ypos</key>
+			<real>540</real>
+		</dict>
+		<key>CA45DB63-305A-4FB2-BD65-A162EB4C2697</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>10</integer>
+			<key>xpos</key>
+			<real>650</real>
+			<key>ypos</key>
+			<real>540</real>
+		</dict>
 		<key>E087D983-8D7A-4EA5-A682-02234530D0BA</key>
 		<dict>
 			<key>colorindex</key>
@@ -372,6 +561,17 @@ Search board games with the `bg` keyword.
 			<real>265</real>
 			<key>ypos</key>
 			<real>130</real>
+		</dict>
+		<key>F807DD65-2A43-4650-A156-DA7EE224C6F5</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>10</integer>
+			<key>note</key>
+			<string>paste query</string>
+			<key>xpos</key>
+			<real>500</real>
+			<key>ypos</key>
+			<real>510</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
@@ -462,7 +662,7 @@ Search board games with the `bg` keyword.
 			<key>type</key>
 			<string>textfield</string>
 			<key>variable</key>
-			<string>varkeyword_2</string>
+			<string>keyword_2</string>
 		</dict>
 	</array>
 	<key>version</key>
