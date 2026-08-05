@@ -20,6 +20,26 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>03E9CCDB-971A-49A3-B728-5F0AE6134630</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>88186304-0500-4297-9AD2-CCC0B9440663</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
 		</array>
 		<key>934AA610-FE5D-437B-BFA5-B1BD6ED3AF17</key>
 		<array>
@@ -181,6 +201,27 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>https://boardgameprices.com/item/search?search={query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>56A2325A-30D3-4B4C-ABFB-BCD0FA84E0CB</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>argumenttype</key>
 				<integer>0</integer>
 				<key>keyword</key>
@@ -209,14 +250,35 @@
 				<key>skipvarencode</key>
 				<false/>
 				<key>spaces</key>
-				<string></string>
+				<string>+</string>
 				<key>url</key>
-				<string>https://boardgameprices.com/item/search?search={query}</string>
+				<string>https://www.brettspiel-angebote.de/suche/{query}/</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
-			<string>56A2325A-30D3-4B4C-ABFB-BCD0FA84E0CB</string>
+			<string>03E9CCDB-971A-49A3-B728-5F0AE6134630</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string>+</string>
+				<key>url</key>
+				<string>https://www.amazon.de/s?k={query}+board+game</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>88186304-0500-4297-9AD2-CCC0B9440663</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -239,47 +301,77 @@ Search board games with the `bg` keyword.
 #### Data by [Board Game Geeks](https://boardgamegeek.com/using_the_xml_api)</string>
 	<key>uidata</key>
 	<dict>
+		<key>03E9CCDB-971A-49A3-B728-5F0AE6134630</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>10</integer>
+			<key>xpos</key>
+			<real>265</real>
+			<key>ypos</key>
+			<real>380</real>
+		</dict>
 		<key>1E9D47A4-3A41-453E-9734-4F58E6654D5A</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>10</integer>
 			<key>xpos</key>
-			<real>85</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>470</real>
+			<real>380</real>
 		</dict>
 		<key>56A2325A-30D3-4B4C-ABFB-BCD0FA84E0CB</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>10</integer>
 			<key>xpos</key>
-			<real>305</real>
+			<real>265</real>
 			<key>ypos</key>
-			<real>470</real>
+			<real>260</real>
 		</dict>
 		<key>6BF2B984-1F3B-42A6-AAF6-C08713625399</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
 			<key>xpos</key>
-			<real>470</real>
+			<real>415</real>
 			<key>ypos</key>
-			<real>205</real>
+			<real>130</real>
 		</dict>
 		<key>85894161-CE99-4C9D-B3E1-18C564EE94E8</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
 			<key>xpos</key>
-			<real>320</real>
+			<real>265</real>
 			<key>ypos</key>
-			<real>90</real>
+			<real>15</real>
+		</dict>
+		<key>88186304-0500-4297-9AD2-CCC0B9440663</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>10</integer>
+			<key>xpos</key>
+			<real>265</real>
+			<key>ypos</key>
+			<real>515</real>
 		</dict>
 		<key>934AA610-FE5D-437B-BFA5-B1BD6ED3AF17</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
 			<key>xpos</key>
-			<real>85</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>150</real>
+			<real>75</real>
 		</dict>
 		<key>E087D983-8D7A-4EA5-A682-02234530D0BA</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
 			<key>xpos</key>
-			<real>320</real>
+			<real>265</real>
 			<key>ypos</key>
-			<real>205</real>
+			<real>130</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
