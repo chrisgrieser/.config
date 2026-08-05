@@ -8,6 +8,19 @@
 	<string>⭐️</string>
 	<key>connections</key>
 	<dict>
+		<key>1E9D47A4-3A41-453E-9734-4F58E6654D5A</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>56A2325A-30D3-4B4C-ABFB-BCD0FA84E0CB</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>934AA610-FE5D-437B-BFA5-B1BD6ED3AF17</key>
 		<array>
 			<dict>
@@ -92,7 +105,7 @@
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>keyword</key>
-				<string>{var:keyword}</string>
+				<string>{var:keyword_1}</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -165,6 +178,48 @@
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>{var:keyword_2}</string>
+				<key>subtext</key>
+				<string>"{query}"</string>
+				<key>text</key>
+				<string>Buy Board Game</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>1E9D47A4-3A41-453E-9734-4F58E6654D5A</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>https://boardgameprices.com/item/search?search={query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>56A2325A-30D3-4B4C-ABFB-BCD0FA84E0CB</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>## Setup
@@ -184,6 +239,20 @@ Search board games with the `bg` keyword.
 #### Data by [Board Game Geeks](https://boardgamegeek.com/using_the_xml_api)</string>
 	<key>uidata</key>
 	<dict>
+		<key>1E9D47A4-3A41-453E-9734-4F58E6654D5A</key>
+		<dict>
+			<key>xpos</key>
+			<real>85</real>
+			<key>ypos</key>
+			<real>470</real>
+		</dict>
+		<key>56A2325A-30D3-4B4C-ABFB-BCD0FA84E0CB</key>
+		<dict>
+			<key>xpos</key>
+			<real>305</real>
+			<key>ypos</key>
+			<real>470</real>
+		</dict>
 		<key>6BF2B984-1F3B-42A6-AAF6-C08713625399</key>
 		<dict>
 			<key>xpos</key>
@@ -219,7 +288,7 @@ Search board games with the `bg` keyword.
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<string>bg</string>
+				<string>bgg</string>
 				<key>placeholder</key>
 				<string></string>
 				<key>required</key>
@@ -228,13 +297,13 @@ Search board games with the `bg` keyword.
 				<true/>
 			</dict>
 			<key>description</key>
-			<string></string>
-			<key>label</key>
 			<string>Keyword</string>
+			<key>label</key>
+			<string>Board Game Search</string>
 			<key>type</key>
 			<string>textfield</string>
 			<key>variable</key>
-			<string>keyword</string>
+			<string>keyword_1</string>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -249,9 +318,9 @@ Search board games with the `bg` keyword.
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>CSV file. Download at: https://boardgamegeek.com/data_dumps/bg_ranks</string>
+			<string>Location of BGG Database (CSV file). Download at: https://boardgamegeek.com/data_dumps/bg_ranks</string>
 			<key>label</key>
-			<string>Location of BGG Database</string>
+			<string></string>
 			<key>type</key>
 			<string>filepicker</string>
 			<key>variable</key>
@@ -274,13 +343,34 @@ Search board games with the `bg` keyword.
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>Due to performance reasons, will only display the top n games, with n being the number tothe left multiplied with 10 000. If the workflow lags, lower the value.</string>
+			<string>Database cutoff. Due to performance reasons, will only display the top n games, with n being the number to the left multiplied with 10 000. If the workflow lags, lower the value.</string>
 			<key>label</key>
-			<string>Database cutoff</string>
+			<string></string>
 			<key>type</key>
 			<string>slider</string>
 			<key>variable</key>
 			<string>max_games</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>bgp</string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>Search multiple sites for offers to buy a board game.</string>
+			<key>label</key>
+			<string>Board Game Prices</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>varkeyword_2</string>
 		</dict>
 	</array>
 	<key>version</key>
