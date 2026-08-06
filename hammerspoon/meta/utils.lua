@@ -198,20 +198,18 @@ function M.quitFullscreenAndVideoApps()
 				local notFocused = hs.spaces.focusedSpace() ~= id
 				return isNormalSpace and notFocused
 			end)
-			if unfocussedSpace then
-				for _, id in ipairs(spaceIdsOfScreen) do
-					local isFullScreen = hs.spaces.spaceType(id) ~= "user" -- "fullscreen" or nil
-					if isFullScreen then
-						if hs.spaces.focusedSpace() == id then -- focussed spaces cannot be closed
-							local success, err = hs.spaces.gotoSpace(unfocussedSpace)
-							if not success then print("⚠️Could goto next space: " .. err) end
-						end
-						local success, err = hs.spaces.removeSpace(id)
-						print(
-							success and "🧹 Closed fullscreen"
-								or "⚠️Could not close fullscreen: " .. err
-						)
+			for _, id in ipairs(spaceIdsOfScreen) do
+				local isFullScreen = hs.spaces.spaceType(id) ~= "user" -- "fullscreen" or nil
+				if isFullScreen then
+					if hs.spaces.focusedSpace() == id then -- focussed spaces cannot be closed
+						local success, err = hs.spaces.gotoSpace(unfocussedSpace)
+						if not success then print("⚠️Could goto next space: " .. err) end
 					end
+					local success, err = hs.spaces.removeSpace(id)
+					print(
+						success and "🧹 Closed fullscreen"
+							or "⚠️Could not close fullscreen: " .. err
+					)
 				end
 			end
 		end
