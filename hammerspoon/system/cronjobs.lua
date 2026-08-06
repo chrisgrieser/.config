@@ -1,22 +1,21 @@
 local M = {} -- persist from garbage collector
 
 local env = require("meta.environment")
-local u = require("meta.utils")
 local timerAt = hs.timer.doAt
 local timerEverySecs = hs.timer.doEvery
 
 ---FORCE REMINDERS SYNC ON STARTUP----------------------------------------------
-if u.isSystemStart() then
+if U.isSystemStart() then
 	print("📅 Syncing Reminders")
 	hs.execute("open -g -a Reminders") -- `-g` to open in background
-	u.defer({ 5, 15 }, function() u.quitApps("Reminders") end)
+	U.defer({ 5, 15 }, function() U.quitApps("Reminders") end)
 end
 
 ---CLOCK------------------------------------------------------------------------
 -- Show clock every full hour
 M.timer_clock = timerEverySecs(60, function()
 	local isFullHour = os.date("%M") == "00"
-	if isFullHour and u.screenIsUnlocked() and not env.hasProjector() then
+	if isFullHour and U.screenIsUnlocked() and not env.hasProjector() then
 		local hour = tostring(os.date("%H:%M"))
 		hs.alert(hour, 3)
 	end
@@ -32,7 +31,7 @@ do
 			local ext = file:match("%.%w+$")
 			if ext ~= ".sh" and ext ~= ".applescript" then goto continue end
 			local jobfile = dir .. "/" .. file
-			if not u.isExecutableFile(jobfile) then
+			if not U.isExecutableFile(jobfile) then
 				print("⚠️ " .. jobfile .. " is not executable.")
 				goto continue
 			end
@@ -41,7 +40,7 @@ do
 				local output = (stdout .. "\n" .. stderr):gsub("%s+$", "")
 				local fileShort = file:gsub("%.%w+$", "")
 				local msg = "🕑 " .. fileShort .. (output ~= "" and ": " .. output or "")
-				if code ~= 0 then return u.notify("❌ " .. msg) end
+				if code ~= 0 then return U.notify("❌ " .. msg) end
 				print(msg)
 			end):start()
 			::continue::
@@ -64,7 +63,7 @@ M.timer_uptime = timerAt("01:30", "01d", function()
 	local stdout = hs.execute("uptime") or ""
 	local uptimeDays = tonumber(stdout:match("up (%d+) days,") or 0)
 	if uptimeDays > maxUptimeDays then
-		u.createReminderToday("🖥️ Uptime is over " .. maxUptimeDays .. " days")
+		U.createReminderToday("🖥️ Uptime is over " .. maxUptimeDays .. " days")
 	end
 end):start()
 

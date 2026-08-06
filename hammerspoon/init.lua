@@ -5,19 +5,21 @@ hs.automaticallyCheckForUpdates(true)
 hs.window.animationDuration = 0
 
 ---LOAD MODULES-----------------------------------------------------------------
-G = {} ---@diagnostic disable-line: global-element -- persist from garbage collector
+_G.Persist = {}
 
 ---Try to require the module, and do not error when one of them cannot be
 ---loaded, but do notify if there was an error.
 ---@param module string module to load
 local function safeRequire(module)
 	local success, M = pcall(require, module)
-	G[module:sub(5)] = M
+	Persist[module:sub(5)] = M
 	if not success then
 		hs.alert(M, 4)
 		print(M)
 	end
 end
+
+safeRequire("meta.utils") -- loads global `U`
 
 safeRequire("appearance.console")
 safeRequire("appearance.hole-cover")

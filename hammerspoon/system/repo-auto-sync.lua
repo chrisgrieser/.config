@@ -1,7 +1,6 @@
 local M = {} -- persist from garbage collector
 
 local env = require("meta.environment")
-local u = require("meta.utils")
 --------------------------------------------------------------------------------
 
 local config = {
@@ -22,7 +21,7 @@ local function syncAllGitRepos(silent)
 	-- idempotent
 	if M.isSyncing then return end
 	M.isSyncing = true
-	u.defer(3, function() M.isSyncing = false end)
+	U.defer(3, function() M.isSyncing = false end)
 
 	-- reset
 	M.reposToSync = {} ---@type Repo[]
@@ -50,12 +49,12 @@ local function syncAllGitRepos(silent)
 	-- GUARD
 	local hasInternetAccess = hs.network.reachability.internet():statusString():find("R") ---@diagnostic disable-line: undefined-field
 	if not hasInternetAccess then
-		u.notify("⛔🛜 Repo sync: No internet connection.")
+		U.notify("⛔🛜 Repo sync: No internet connection.")
 		return
 	end
 	local stillInProgress = repoSyncsInProgress()
 	if stillInProgress ~= "" then
-		u.notify("🔁 Sync still in progress: " .. stillInProgress)
+		U.notify("🔁 Sync still in progress: " .. stillInProgress)
 		return
 	end
 
@@ -64,7 +63,7 @@ local function syncAllGitRepos(silent)
 		local syncScriptPath = repo.location:gsub("^~", os.getenv("HOME") or "")
 			.. "/"
 			.. config.syncScriptAtLocation
-		assert(u.isExecutableFile(syncScriptPath), "no sync script found at " .. syncScriptPath)
+		assert(U.isExecutableFile(syncScriptPath), "no sync script found at " .. syncScriptPath)
 
 		M.task_sync[repo.location] = hs.task
 			.new(syncScriptPath, function(exitCode, stdout, stderr)
@@ -73,8 +72,7 @@ local function syncAllGitRepos(silent)
 				else
 					local output = (stdout .. "\n" .. stderr):gsub("^%s+", ""):gsub("%s+$", "")
 					local msg = ("⚠️️ %s %s Sync: %s"):format(repo.icon, repo.location, output)
-					print(msg)
-					hs.alert(msg, 5)
+					U.alertAndLog(msg, 5)
 				end
 			end)
 			:start()
@@ -96,7 +94,7 @@ end
 -- SYNC TRIGGERS
 
 -- 1. systemstart
-if u.isSystemStart() then syncAllGitRepos() end
+if U.isSystemStart() then syncAllGitRepos() end
 
 -- 2. every x minutes
 M.timer_repoSync = hs.timer
@@ -108,7 +106,7 @@ M.timer_repoSync = hs.timer
 
 -- 3. manually via Alfred: `hammerspoon://sync-repos`
 hs.urlevent.bind("sync-repos", function()
-	u.notify("🔁 Starting sync…")
+	U.notify("🔁 Starting sync…")
 	syncAllGitRepos()
 end)
 
@@ -120,7 +118,7 @@ M.caff_SleepWatcherForRepoSync = c.new(function(event)
 	if event == c.screensDidLock or event == c.screensDidUnlock then
 		syncAllGitRepos()
 	elseif event == c.screensDidWake or event == c.systemDidWake then
-		u.defer(2, syncAllGitRepos)
+		U.defer(2, syncAllGitRepos)
 	end
 end):start()
 

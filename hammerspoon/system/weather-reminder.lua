@@ -2,7 +2,6 @@
 -- temperature or vice versa.
 --------------------------------------------------------------------------------
 local M = {} -- persist from garbage collector
-local u = require("meta.utils")
 --------------------------------------------------------------------------------
 
 local config = {
@@ -22,13 +21,6 @@ local enabledForThisMonth = hs.fnutils.contains(config.activeInMonths, curMonth)
 local isAtHome = require("meta.environment").isAtHome
 if not enabledForThisMonth or not isAtHome then return end
 --------------------------------------------------------------------------------
-
-local function soundNotify(msg)
-	msg = "🌡" .. msg
-	hs.alert(msg)
-	print(msg)
-	u.sound("Funk", 0.5)
-end
 
 -- DOCS https://brightsky.dev/docs/#get-/current_weather
 local callUrl = ("https://api.brightsky.dev/current_weather?lat=%d&lon=%d"):format(
@@ -60,16 +52,18 @@ local function getOutsideTemp()
 		M.prevOutTemp = outTemp
 
 		if outsideNowCoolerThanInside then
-			soundNotify("🔵 Outside now cooler than inside.")
+			U.alertAndLog("🔵 Outside now cooler than inside.")
+			U.sound("Funk", 0.5)
 		elseif outsideNowHotterThanInside then
-			soundNotify("🔴 Outside now hotter than inside.")
+			U.alertAndLog("🔵 Outside now cooler than inside.")
+			U.sound("Funk", 0.5)
 		end
 	end)
 end
 
 ---TRIGGERS---------------------------------------------------------------------
 -- 1. systemstart
-if u.isSystemStart() then getOutsideTemp() end
+if U.isSystemStart() then getOutsideTemp() end
 
 -- 2. every x minutes
 M.timer_weatherReminder = hs.timer.doEvery(60 * config.checkIntervalMins, getOutsideTemp):start()

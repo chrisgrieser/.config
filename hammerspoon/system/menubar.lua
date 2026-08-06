@@ -1,6 +1,5 @@
 local M = {}
 
-local u = require("meta.utils")
 local aw = hs.application.watcher
 
 ---CONFIG-----------------------------------------------------------------------
@@ -21,7 +20,7 @@ local function updateReminderCount()
 	M.updateReminders = hs.task
 		.new("./system/menubar/count-reminders.sh", function(code, stdout, stderr)
 			if code ~= 0 then
-				u.notify("❌ Could not update reminders count: " .. stderr)
+				U.notify("❌ Could not update reminders count: " .. stderr)
 				return
 			end
 			local count = tonumber(stdout) or "?"
@@ -63,7 +62,7 @@ local function updateGithubNotifCount()
 	M.updateGithubNotifCount = hs.task
 		.new("./system/menubar/github-notif-count.sh", function(code, stdout, stderr)
 			if code ~= 0 then
-				u.notify("❌ Could not update github notifications count: " .. stderr)
+				U.notify("❌ Could not update github notifications count: " .. stderr)
 				return
 			end
 			local count = tonumber(stdout) or "?"
@@ -86,7 +85,7 @@ end
 
 -- 0. initialize
 updateReminderCount()
-if u.isSystemStart() then u.defer({ 3, 10 }, updateReminderCount) end -- wait for sync
+if U.isSystemStart() then U.defer({ 3, 10 }, updateReminderCount) end -- wait for sync
 updateGithubNotifCount()
 
 -- 1. timer

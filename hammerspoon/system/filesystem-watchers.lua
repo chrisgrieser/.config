@@ -8,7 +8,6 @@ local backupFolder = home .. "/Library/Mobile Documents/com~apple~CloudDocs/Tech
 
 --------------------------------------------------------------------------------
 
-local u = require("meta.utils")
 local pathw = hs.pathwatcher.new
 hs.fs.mkdir(browserConfigs)
 hs.fs.mkdir(backupFolder)
@@ -16,7 +15,7 @@ hs.fs.mkdir(backupFolder)
 ---AUTO-FILE FROM DESKTOP-------------------------------------------------------
 M.pathw_desktop = pathw(home .. "/Desktop/", function(paths, _)
 	-- prevent duplicate triggering due to iCloud sync in standby
-	if not u.screenIsUnlocked() then return end
+	if not U.screenIsUnlocked() then return end
 
 	for _, path in pairs(paths) do
 		local parent, name = path:match("(.+)/(.+)")
@@ -32,15 +31,15 @@ M.pathw_desktop = pathw(home .. "/Desktop/", function(paths, _)
 		---REMOVE ALFREDWORKFLOWS & ICAL------------------------------------------
 		if (ext == "alfredworkflow" or ext == "ics") and isDownloaded then
 			-- delay, since Apple Calendar/Alfred need the file to exist while adding it
-			u.defer(60, function() os.remove(path) end)
+			U.defer(60, function() os.remove(path) end)
 
 		---ADD BIBTEX ENTRIES TO LIBRARY------------------------------------------
 		elseif ext == "bib" and isDownloaded then
-			local bibEntry = u.readFile(path)
+			local bibEntry = U.readFile(path)
 			if bibEntry and #bibEntry < 10000 then -- prevent large libraries from being automatically merged
 				bibEntry = bibEntry:gsub("\n?$", "\n")
 				local libraryPath = home .. "/.config/pandoc/main-bibliography.bib"
-				u.writeToFile(libraryPath, bibEntry, true)
+				U.writeToFile(libraryPath, bibEntry, true)
 				hs.open(libraryPath)
 				os.remove(path)
 			end
@@ -48,35 +47,35 @@ M.pathw_desktop = pathw(home .. "/Desktop/", function(paths, _)
 		---BROWSER EXTENSION SETTING BACKUPS--------------------------------------
 		elseif name == "Redirector.json" then
 			success, errmsg = os.rename(path, browserConfigs .. name)
-			if success then u.notify("✅ Redirector settings backed up.") end
+			if success then U.notify("✅ Redirector settings backed up.") end
 		elseif name == "[RedirectWeb] Redirects.redirectweb" then
 			success, errmsg = os.rename(path, backupFolder .. name)
-			if success then u.notify("✅ Redirector settings backed up.") end
+			if success then U.notify("✅ Redirector settings backed up.") end
 		elseif name == "obsidian-web-clipper-settings.json" then
 			success, errmsg = os.rename(path, browserConfigs .. name)
-			if success then u.notify("✅ Obsidian web clipper settings backed up.") end
+			if success then U.notify("✅ Obsidian web clipper settings backed up.") end
 		elseif name:find("vimium_c.*%.json") then
 			success, errmsg = os.rename(path, browserConfigs .. "vimium-c-settings.json")
-			if success then u.notify("✅ Vimium-c settings backed up.") end
+			if success then U.notify("✅ Vimium-c settings backed up.") end
 		elseif name:find("Inoreader Feeds.*%.xml") then
 			success, errmsg = os.rename(path, browserConfigs .. "Inoreader Feeds.opml")
-			if success then u.notify("✅ Inoreader feeds backed up.") end
+			if success then U.notify("✅ Inoreader feeds backed up.") end
 
 		---APP AND SERVICE BACKUPS------------------------------------------------
 		elseif name == "following_accounts.csv" then
 			success, errmsg = os.rename(path, backupFolder .. "Mastodon/" .. name)
-			if success then u.notify("✅ Mastodon followings backed up.") end
+			if success then U.notify("✅ Mastodon followings backed up.") end
 			success, errmsg = os.rename(path, backupFolder .. "Inoreader Feeds.opml")
-			if success then u.notify("✅ Inoreader feeds backed up.") end
+			if success then U.notify("✅ Inoreader feeds backed up.") end
 		elseif name == "Catch.xml" then
 			success, errmsg = os.rename(path, backupFolder .. "Catch Feeds.xml")
-			if success then u.notify("✅ Catch feeds backed up.") end
+			if success then U.notify("✅ Catch feeds backed up.") end
 		elseif name == "mailFilters.xml" then
 			success, errmsg = os.rename(path, backupFolder .. "Gmail Filters.xml")
-			if success then u.notify("✅ Gmail filters backed up.") end
+			if success then U.notify("✅ Gmail filters backed up.") end
 		elseif ext == "icbu" then
 			success, errmsg = os.rename(path, backupFolder .. "/Calendar/" .. name)
-			if success then u.notify("✅ Calendar data backed up.") end
+			if success then U.notify("✅ Calendar data backed up.") end
 
 		---RECEIPTS---------------------------------------------------------------
 		elseif name:find("Rechnung_" .. ("%d"):rep(16) .. "_" .. ("%d"):rep(10)) then
@@ -85,7 +84,7 @@ M.pathw_desktop = pathw(home .. "/Desktop/", function(paths, _)
 			-- stylua: ignore
 			local receiptPath = ("%s/Documents/Wohnung/laufende Kosten/Vodafone/%s/"):format(home, year)
 			success, errmsg = hs.fs.mkdir(receiptPath)
-			u.defer(1, function() os.rename(path, receiptPath .. "/" .. name) end) -- delay ensures folder is created
+			U.defer(1, function() os.rename(path, receiptPath .. "/" .. name) end) -- delay ensures folder is created
 			hs.open(receiptPath)
 
 		---BANKING----------------------------------------------------------------
@@ -96,7 +95,7 @@ M.pathw_desktop = pathw(home .. "/Desktop/", function(paths, _)
 				-- stylua: ignore
 				local bankPath = ("%s/Documents/Finanzen/Vermögen/%s/%s"):format(home, folder, year)
 				success, errmsg = hs.fs.mkdir(bankPath) -- create directory in case of new year
-				u.defer(1, function() os.rename(path, bankPath .. "/" .. name) end) -- delay ensures folder is created
+				U.defer(1, function() os.rename(path, bankPath .. "/" .. name) end) -- delay ensures folder is created
 				hs.open(bankPath)
 			end
 		elseif name:find("^Umsatzanzeige_.*%.csv$") then
@@ -121,17 +120,17 @@ M.pathw_desktop = pathw(home .. "/Desktop/", function(paths, _)
 				local destination = home .. ("/Notes/👤 Personal/Games/%s Deck.md"):format(basename)
 				success, errmsg = os.rename(path, destination)
 			elseif name == "wants.txt" or name == "wants.txt-bkp" then
-				local content = u.readFile(path)
+				local content = U.readFile(path)
 				hs.pasteboard.setContents(content)
 				hs.urlevent.openURL("https://www.cardmarket.com/en/Magic/Wants/23642383/AddDeckList")
-				u.notify("✅ Wantlist copied.")
+				U.notify("✅ Wantlist copied.")
 				success, errmsg = os.rename(path, path .. "-imported")
 			end
 		end
 
 		---NOTIFY-----------------------------------------------------------------
 		if success == false then
-			u.notify(("⚠️ Failed to move %q: %s"):format(name, errmsg or ""))
+			U.notify(("⚠️ Failed to move %q: %s"):format(name, errmsg or ""))
 		end
 
 		::continue::

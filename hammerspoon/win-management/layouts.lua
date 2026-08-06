@@ -4,7 +4,6 @@ local display = require("appearance.darkmode-and-brightness")
 local env = require("meta.environment")
 local holeCover = require("appearance.hole-cover")
 local music = require("apps.music")
-local u = require("meta.utils")
 local wu = require("win-management.window-utils")
 
 ---HELPERS----------------------------------------------------------------------
@@ -14,7 +13,7 @@ local function dockSwitcher(dockToUse)
 	if env.isAtMother then dockToUse = "mother-" .. dockToUse end
 	local alfredUri = "alfred://runtrigger/de.chris-grieser.dock-switcher/load-dock-layout/?argument="
 		.. dockToUse
-	u.openUrlInBg(alfredUri)
+	U.openUrlInBg(alfredUri)
 end
 
 local function isWorkWeek()
@@ -29,24 +28,25 @@ local function connectProjector(status)
 
 	local setTo = status and "on" or "off"
 	local delay = 0
-	if not (u.appRunning("BetterDisplay")) then
+	if not (U.appRunning("BetterDisplay")) then
 		local app = hs.application.open("BetterDisplay")
 		if not app then
-			hs.alert("Could not find BetterDisplay.")
+			U.alertAndLog("Could not find BetterDisplay.")
 			return
 		end
 		delay = 2
 	end
-	u.defer(delay, function()
+	U.defer(delay, function()
 		local name = env.projectorName
 		local shellScript = ('betterdisplaycli set --name="%s" --connected="%s"'):format(name, setTo)
-		hs.execute(u.exportPath .. shellScript)
+		hs.execute(U.exportPath .. shellScript)
 	end)
-	u.defer(delay + 1, function()
+	U.defer(delay + 1, function()
 		local success = env.hasProjector() == status
 		if not success then
-			u.sound("Basso", 0.4)
-			hs.alert("Could not set projector to " .. setTo)
+			local msg = "Could not set projector to " .. setTo
+			U.sound("Basso", 0.4)
+			U.alertAndLog(msg, 4)
 		end
 	end)
 end
@@ -57,28 +57,28 @@ end
 local function workLayout(brightness)
 	if M.isLayouting then return end
 	M.isLayouting = true
-	u.defer(2.5, function() M.isLayouting = false end)
+	U.defer(2.5, function() M.isLayouting = false end)
 
 	-- screen
 	connectProjector(false)
-	u.defer(0.2, display.autoSwitch) -- defer so ambient sensor is ready
-	u.defer(1, holeCover.update) -- defer removal of external display is detected
+	U.defer(0.2, display.autoSwitch) -- defer so ambient sensor is ready
+	U.defer(1, holeCover.update) -- defer removal of external display is detected
 	dockSwitcher("work")
 	if brightness == "auto" then
-		u.defer(1, display.autoSetBrightness) -- defer to adjust to mode switch
+		U.defer(1, display.autoSetBrightness) -- defer to adjust to mode switch
 	elseif brightness == "auto" then
 		display.darkenImacDisplay()
 	end
 
 	-- close things
-	u.closeAllFinderWins()
-	u.quitFullscreenAndVideoApps()
+	U.closeAllFinderWins()
+	U.quitFullscreenAndVideoApps()
 
 	-- open things
-	u.openApps { "Ivory", isWorkWeek() and "Slack" or nil, "Gmail", "AlfredExtraPane", "Stats" }
-	u.defer(1, function()
-		wu.moveResize(u.app("Ivory"):mainWindow(), wu.toTheSide)
-		local gmail = u.app("Gmail")
+	U.openApps { "Ivory", isWorkWeek() and "Slack" or nil, "Gmail", "AlfredExtraPane", "Stats" }
+	U.defer(1, function()
+		wu.moveResize(U.app("Ivory"):mainWindow(), wu.toTheSide)
+		local gmail = U.app("Gmail")
 		if gmail then gmail:activate() end -- activate Gmail last
 	end)
 
@@ -89,13 +89,13 @@ local function movieLayout()
 	if env.isAtOffice then return end
 	if M.isLayouting then return end
 	M.isLayouting = true
-	u.defer(2.5, function() M.isLayouting = false end)
+	U.defer(2.5, function() M.isLayouting = false end)
 
 	-- screen
 	connectProjector(true)
 	display.setDarkMode("dark")
 	display.darkenImacDisplay()
-	u.defer({ 1, 3 }, holeCover.update) -- defer so external display is detected
+	U.defer({ 1, 3 }, holeCover.update) -- defer so external display is detected
 	dockSwitcher("movie")
 	music.music_trigger("pause")
 
@@ -111,14 +111,14 @@ local function movieLayout()
 	hs.execute("defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder")
 
 	-- open / quit apps
-	u.openApps { "YouTube", env.isAtHome and "BetterTouchTool" or nil }
-	u.defer(1, function() -- defer so external display is detected
-		local youtubeWin = u.app("YouTube") and u.app("YouTube"):mainWindow()
+	U.openApps { "YouTube", env.isAtHome and "BetterTouchTool" or nil }
+	U.defer(1, function() -- defer so external display is detected
+		local youtubeWin = U.app("YouTube") and U.app("YouTube"):mainWindow()
 		if not youtubeWin or not projector then return end
 		if youtubeWin:screen():id() ~= projector:id() then youtubeWin:moveToScreen(projector) end
 	end)
 
-	u.quitApps {
+	U.quitApps {
 		"Stats",
 		"Signal",
 		"Granola",
@@ -142,12 +142,12 @@ hs.hotkey.bind({}, "end", movieLayout)
 
 -- 2. URI (for Touchpad via BetterTouchTool)
 hs.urlevent.bind("movie-layout", function()
-	u.sound("Hero", 0.8) -- indicate that Touchpad has triggered
+	U.sound("Hero", 0.8) -- indicate that Touchpad has triggered
 	movieLayout()
 end)
 
 -- 3. Systemstart
-if u.isSystemStart() then workLayout("auto") end
+if U.isSystemStart() then workLayout("auto") end
 
 ---SLEEP TIMER------------------------------------------------------------------
 -- When projector is connected, check every x min if device has been idle for y
@@ -166,24 +166,24 @@ M.sleeptimer = doEvery(config.checkIntervalMins * 60, function()
 
 	-- inform user about upcoming sleep
 	local alertMsg = ("💤 Will sleep in %ds if idle."):format(config.timeToReactSecs)
-	local alertId = hs.alert(alertMsg, config.timeToReactSecs)
-	u.sound("Submarine", 0.3)
+	local alertId = U.alertAndLog(alertMsg, config.timeToReactSecs)
+	U.sound("Submarine", 0.3)
 
 	-- remove alert earlier if user did something
 	local halfTime = math.ceil(config.timeToReactSecs / 2)
-	u.defer(halfTime, function()
+	U.defer(halfTime, function()
 		local userDidSth = hs.host.idleTime() < (config.timeToReactSecs / 2)
 		if userDidSth then hs.alert.closeSpecific(alertId) end
 	end)
 
 	-- abort if user did something
-	u.defer(config.timeToReactSecs, function()
+	U.defer(config.timeToReactSecs, function()
 		local userDidSth = hs.host.idleTime() < config.timeToReactSecs
 		if userDidSth then return end
 
 		-- close if user idle
-		u.notify("💤 SleepTimer triggered")
-		u.closeBrowserTabsWith("all")
+		U.notify("💤 SleepTimer triggered")
+		U.closeBrowserTabsWith("all")
 		workLayout("dark") -- workLayout for login next day & darken display for sleeping
 	end)
 end):start()

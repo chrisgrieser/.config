@@ -1,7 +1,6 @@
 local M = {}
 
 local env = require("meta.environment")
-local u = require("meta.utils")
 local wu = require("win-management.window-utils")
 local wf = hs.window.filter
 --------------------------------------------------------------------------------
@@ -82,7 +81,7 @@ local function toNextDisplay()
 end
 
 hs.hotkey.bind({ "ctrl" }, "space", toggleMaximized)
-hs.hotkey.bind(u.hyper, "M", toNextDisplay)
+hs.hotkey.bind(U.hyper, "M", toNextDisplay)
 
 --------------------------------------------------------------------------------
 return M

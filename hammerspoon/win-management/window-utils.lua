@@ -1,6 +1,4 @@
 local M = {} -- persist from garbage collector
-
-local u = require("meta.utils")
 --------------------------------------------------------------------------------
 
 M.iMacDisplay = hs.screen("Built%-in")
@@ -21,7 +19,7 @@ M.toTheSide = hs.geometry {
 ---@param win hs.window|string if string, search for main window of app with that name
 ---@param pos hs.geometry
 function M.moveResize(win, pos)
-	if type(win) == "string" then win = u.app(win):mainWindow() end
+	if type(win) == "string" then win = U.app(win):mainWindow() end
 	if not (win and win:isMaximizable() and win:isStandard()) then return end
 
 	-- handle negative positions (= win partially not on screen) by converting
@@ -38,7 +36,7 @@ function M.moveResize(win, pos)
 	end
 
 	-- resize with redundancy, since macOS sometimes doesn't resize properly
-	u.defer({ 0, 0.5 }, function() win:moveToUnit(pos) end)
+	U.defer({ 0, 0.5 }, function() win:moveToUnit(pos) end)
 end
 
 --------------------------------------------------------------------------------

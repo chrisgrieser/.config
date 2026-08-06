@@ -1,6 +1,5 @@
 local M = {}
 
-local u = require("meta.utils")
 local cons = hs.console
 local wf = hs.window.filter
 local aw = hs.application.watcher
@@ -45,7 +44,7 @@ function M.setConsoleColors(toMode)
 end
 
 -- initialize
-M.setConsoleColors(u.isDarkMode() and "dark" or "light")
+M.setConsoleColors(U.isDarkMode() and "dark" or "light")
 
 ---CONSOLE SETTINGS-------------------------------------------------------------
 cons.titleVisibility("hidden")
@@ -68,7 +67,7 @@ function M.cleanupConsole()
 	local lines = hs.fnutils.split(consoleOutput, "\n+")
 	if not lines then return end
 
-	local isDark = u.isDarkMode()
+	local isDark = U.isDarkMode()
 
 	for _, line in ipairs(lines) do
 		-- remove some lines
@@ -113,10 +112,10 @@ end
 
 -- clean up console as soon as it is opened
 M.wf_hsConsole = wf.new("Hammerspoon")
-	:subscribe(wf.windowFocused, function() u.defer(0.1, M.cleanupConsole) end)
+	:subscribe(wf.windowFocused, function() U.defer(0.1, M.cleanupConsole) end)
 
 M.aw_hsConsole = aw.new(function(appName, eventType)
-	if eventType == aw.activated and appName == "Hammerspoon" then u.defer(0.1, M.cleanupConsole) end
+	if eventType == aw.activated and appName == "Hammerspoon" then U.defer(0.1, M.cleanupConsole) end
 end):start()
 
 -- Insert a separator in the console log every day at midnight

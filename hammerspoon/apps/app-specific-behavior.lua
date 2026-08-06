@@ -1,7 +1,6 @@
 local M = {} -- persist from garbage collector
 
 local env = require("meta.environment")
-local u = require("meta.utils")
 local wu = require("win-management.window-utils")
 local aw = hs.application.watcher
 local wf = hs.window.filter
@@ -10,14 +9,14 @@ local wf = hs.window.filter
 M.wf_zoom = wf.new("zoom.us"):subscribe(wf.windowCreated, function(newWin)
 	if newWin:title() ~= "Zoom Meeting" then return end
 
-	u.defer(2, function()
+	U.defer(2, function()
 		local zoom = newWin:application()
 		if not zoom or zoom:findWindow("Update") then return end
 		local mainWin = zoom:findWindow("Login") or zoom:findWindow("Zoom Workspace")
 		if mainWin then mainWin:close() end
 	end)
 
-	u.defer(4, function() u.closeBrowserTabsWith("zoom.us") end)
+	U.defer(4, function() U.closeBrowserTabsWith("zoom.us") end)
 end)
 
 ---FINDER-----------------------------------------------------------------------
@@ -85,7 +84,7 @@ M.aw_masto = aw.new(function(appName, event, masto)
 			end
 		end
 
-		u.defer(1, function()
+		U.defer(1, function()
 			hs.eventtap.keyStroke({}, "left", 1, masto) -- go back
 			hs.eventtap.keyStroke({ "cmd" }, "1", 1, masto) -- go to home tab
 			hs.eventtap.keyStroke({ "cmd" }, "up", 1, masto) -- scroll up
@@ -116,7 +115,7 @@ do
 	local function touchSymlink() hs.execute(("touch -h %q"):format(chromeBookmarks)) end
 
 	-- sync on system start & when bookmarks are changed
-	if u.isSystemStart() then touchSymlink() end
+	if U.isSystemStart() then touchSymlink() end
 	M.pathw_bookmarks = hs.pathwatcher.new(chromeBookmarks, touchSymlink):start()
 end
 

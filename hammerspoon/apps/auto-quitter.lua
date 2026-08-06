@@ -1,7 +1,6 @@
 local M = {} -- persist from garbage collector
 
 local env = require("meta.environment")
-local u = require("meta.utils")
 local aw = hs.application.watcher
 local now = os.time
 --------------------------------------------------------------------------------
@@ -35,7 +34,7 @@ M.idleApps = {}
 
 -- fill `idleApps` with all running apps and the current time
 for app, _ in pairs(config.thresholdMins) do
-	if u.appRunning(app) then M.idleApps[app] = now() end
+	if U.appRunning(app) then M.idleApps[app] = now() end
 end
 
 ---TRIGGER----------------------------------------------------------------------
@@ -44,7 +43,7 @@ end
 local function quit(appName)
 	if appName == "Finder" then
 		if env.hasProjector() then return end
-		local finderWins = u.app("Finder"):allWindows()
+		local finderWins = U.app("Finder"):allWindows()
 		if #finderWins == 0 then return end
 		for _, win in pairs(finderWins) do
 			win:close()
@@ -52,7 +51,7 @@ local function quit(appName)
 	elseif appName == "Hammerspoon" then
 		hs.closeConsole()
 	else
-		u.quitApps(appName)
+		U.quitApps(appName)
 	end
 
 	print("📴 AutoQuitting: " .. appName)
@@ -79,7 +78,7 @@ M.timer_autoQuitter = hs.timer
 		for app, lastActivation in pairs(M.idleApps) do
 			-- can't do this with guard clause, since lua has no `continue`
 			local appHasThreshold = config.thresholdMins[app] ~= nil
-			local appIsRunning = u.appRunning(app)
+			local appIsRunning = U.appRunning(app)
 
 			if appHasThreshold and appIsRunning then
 				local idleTimeSecs = now() - lastActivation

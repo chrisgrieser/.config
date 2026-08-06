@@ -1,7 +1,6 @@
 local M = {}
 
 local env = require("meta.environment")
-local u = require("meta.utils")
 local wu = require("win-management.window-utils")
 
 ---METHODS----------------------------------------------------------------------
@@ -48,7 +47,7 @@ function M.setDarkMode(toMode)
 	-- Neovim
 	local nvimLuaCmd = ("<cmd>lua vim.g.setColorscheme(%q)<CR>"):format(toMode)
 	local shellCmd = ("nvim --server '/tmp/nvim_server.pipe' --remote-send %q"):format(nvimLuaCmd)
-	hs.execute(u.exportPath .. shellCmd)
+	hs.execute(U.exportPath .. shellCmd)
 
 	-- Hammerspoon itself
 	require("appearance.console").setConsoleColors(toMode)
@@ -66,12 +65,12 @@ function M.autoSwitch()
 	local hasBrightnessSensor = ambient > -1
 
 	local targetMode = hasBrightnessSensor and (ambient > lightThreshold and "light" or "dark")
-		or (u.betweenTime(7, 18) and "light" or "dark")
+		or (U.betweenTime(7, 18) and "light" or "dark")
 
-	if targetMode == "light" and u.isDarkMode() then
+	if targetMode == "light" and U.isDarkMode() then
 		logBrightness("Auto-switch to light", lightThreshold)
 		M.setDarkMode("light")
-	elseif targetMode == "dark" and not (u.isDarkMode()) then
+	elseif targetMode == "dark" and not (U.isDarkMode()) then
 		logBrightness("Auto-switch to dark", lightThreshold)
 		M.setDarkMode("dark")
 	else
@@ -82,7 +81,7 @@ end
 -- MANUAL
 -- `forward-delete` key = light-bulb-key on my Keychron keyboard
 hs.hotkey.bind({}, "forwarddelete", function()
-	local toMode = u.isDarkMode() and "light" or "dark"
+	local toMode = U.isDarkMode() and "light" or "dark"
 	M.setDarkMode(toMode)
 	logBrightness(("Manually toggled %s mode"):format(toMode))
 end)
@@ -93,22 +92,22 @@ local c = hs.caffeinate.watcher
 M.caff = c.new(function(event)
 	if env.isAtOffice then return end
 
-	local screensaverStartedAtNight = event == c.screensaverDidStart and u.betweenTime(22, 7)
+	local screensaverStartedAtNight = event == c.screensaverDidStart and U.betweenTime(22, 7)
 	local wokeUp = event == c.screensDidUnlock or event == c.systemDidWake
 	local anyScreenActivity = event == c.screensaverDidStop
 		or event == c.screensaverDidStart
 		or event == c.screensDidWake
 		or event == c.systemDidWake
 		or event == c.screensDidSleep
-	local atNight = u.betweenTime(22, 6)
+	local atNight = U.betweenTime(22, 6)
 
 	if screensaverStartedAtNight then
 		wu.iMacDisplay:setBrightness(0)
 	elseif anyScreenActivity and env.hasProjector() then
 		wu.iMacDisplay:setBrightness(0)
 	elseif wokeUp and not env.hasProjector() and not atNight then
-		u.defer(0.5, M.autoSwitch) -- wait for display turning on
-		u.defer(1, M.autoSetBrightness) -- wait for auto-switch
+		U.defer(0.5, M.autoSwitch) -- wait for display turning on
+		U.defer(1, M.autoSetBrightness) -- wait for auto-switch
 	end
 end):start()
 

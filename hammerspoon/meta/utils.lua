@@ -1,15 +1,15 @@
-local M = {}
+_G.U = {} -- globally accessible for convenience
 
 ---SETTINGS---------------------------------------------------------------------
 
 -- bound to capslock via Karabiner elements
-M.hyper = { "cmd", "alt", "ctrl" }
+U.hyper = { "cmd", "alt", "ctrl" }
 
 -- Add path for `hs.execute()`.
 -- (On system start, hammerspoon sometimes does not correctly inherit PATH.)
-M.exportPath = "export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; "
+U.exportPath = "export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; "
 
-M.videoAndAudioApps = {
+U.videoAndAudioApps = {
 	"zoom.us",
 	"IINA",
 	"FaceTime",
@@ -25,7 +25,7 @@ M.videoAndAudioApps = {
 ---REQUIRED dependent on the setup in `reload.lua`.
 ---@return boolean
 ---@nodiscard
-function M.isSystemStart()
+function U.isSystemStart()
 	local _, isReloading = hs.execute("test -f /tmp/hs-is-reloading")
 	return not isReloading
 end
@@ -36,7 +36,7 @@ end
 ---@param endHour integer time between 0 and 24
 ---@return boolean isInBetween
 ---@nodiscard
-function M.betweenTime(startHour, endHour)
+function U.betweenTime(startHour, endHour)
 	if startHour >= 24 or endHour >= 24 or startHour < 0 or endHour < 0 then
 		error("⚠️ BetweenTime: Invalid time range")
 	end
@@ -53,12 +53,12 @@ end
 
 -- CAVEAT: won't work with Chromium browsers due to bug, but works for URI schemes
 ---@param url string
-function M.openUrlInBg(url) hs.execute(("open -g %q"):format(url)) end
+function U.openUrlInBg(url) hs.execute(("open -g %q"):format(url)) end
 
 ---@param filePath string
 ---@param str string
 ---@param append boolean append or overwrite
-function M.writeToFile(filePath, str, append)
+function U.writeToFile(filePath, str, append)
 	local mode = append and "a" or "w"
 	local file, err = io.open(filePath, mode)
 	if file then
@@ -72,7 +72,7 @@ end
 ---@param filePath string
 ---@return string|nil file content or nil when reading not successful
 ---@nodiscard
-function M.readFile(filePath)
+function U.readFile(filePath)
 	local file, err = io.open(filePath, "r")
 	if not file then return "ERROR: " .. err end
 	local content = file:read("*a")
@@ -82,41 +82,42 @@ end
 
 ---@return boolean
 ---@nodiscard
-function M.isDarkMode() return hs.execute("defaults read -g AppleInterfaceStyle") == "Dark\n" end
+function U.isDarkMode() return hs.execute("defaults read -g AppleInterfaceStyle") == "Dark\n" end
 
 ---Repeat a function multiple times, catching timers in table to avoid garbage
 ---collection. To avoid accumulating too many, only a certain number are kept.
 ---@param delaySecs number|number[]
 ---@param callbackFn function
-function M.defer(delaySecs, callbackFn)
+function U.defer(delaySecs, callbackFn)
 	if type(delaySecs) == "number" then delaySecs = { delaySecs } end
 	for _, delay in pairs(delaySecs) do
-		M.defer_timer_idx = (M.defer_timer_idx or 0) + 1
-		M[M.defer_timer_idx] = hs.timer.doAfter(delay, callbackFn):start()
-		if M.defer_timer_idx > 30 then M.defer_timer_idx = 0 end
+		U.defer_timer_idx = (U.defer_timer_idx or 0) + 1
+		U[U.defer_timer_idx] = hs.timer.doAfter(delay, callbackFn):start()
+		if U.defer_timer_idx > 30 then U.defer_timer_idx = 0 end
 	end
 end
 
 ---@return boolean
 ---@nodiscard
-function M.screenIsUnlocked()
+function U.screenIsUnlocked()
 	local _, success = hs.execute(
 		'[[ "$(/usr/libexec/PlistBuddy -c "print :IOConsoleUsers:0:CGSSessionScreenIsLocked" /dev/stdin 2>/dev/null <<< "$(ioreg -n Root -d1 -a)")" != "true" ]]'
 	)
 	return success == true -- convert to Boolean
 end
 
----Send system Notification, accepting any number of arguments of any type.
----Converts everything into strings, concatenates them, and then sends it.
-function M.notify(...)
-	local args = hs.fnutils.map({ ... }, function(arg)
-		local safeArg = (type(arg) == "table") and hs.inspect(arg) or tostring(arg)
-		return safeArg
-	end)
-	if not args then return end
-	local out = table.concat(args, " ")
-	hs.notify.show("Hammerspoon", "", out)
-	print("💬 " .. out)
+---@param msg string
+function U.notify(msg)
+	hs.notify.show("Hammerspoon", "", msg)
+	print("💬 " .. msg)
+end
+
+---@param durationSecs? number
+---@param msg string
+---@return string alertUuid
+function U.alertAndLog(msg, durationSecs)
+	print("🔔 " .. msg)
+	return hs.alert(msg, durationSecs)
 end
 
 --------------------------------------------------------------------------------
@@ -126,34 +127,34 @@ end
 ---@param appName string literal match
 ---@return hs.application|nil
 ---@nodiscard
-function M.app(appName) return hs.application.find(appName, true, true) end
+function U.app(appName) return hs.application.find(appName, true, true) end
 
 ---@param appNames string|string[] app or apps that should be running
 ---@return boolean true when all apps are running
 ---@nodiscard
-function M.appRunning(appNames)
+function U.appRunning(appNames)
 	if type(appNames) == "string" then appNames = { appNames } end
 	local allAreRunning = true
 	for _, name in pairs(appNames) do
-		if not M.app(name) then allAreRunning = false end
+		if not U.app(name) then allAreRunning = false end
 	end
 	return allAreRunning
 end
 
 ---@param appNames string|string[]
-function M.openApps(appNames)
+function U.openApps(appNames)
 	if type(appNames) == "string" then appNames = { appNames } end
 	for _, name in pairs(appNames) do
-		local runs = M.app(name) ~= nil
+		local runs = U.app(name) ~= nil
 		if not runs then hs.application.open(name) end
 	end
 end
 
 ---@param appNames string|string[]
-function M.quitApps(appNames)
+function U.quitApps(appNames)
 	if type(appNames) == "string" then appNames = { appNames } end
 	for _, name in pairs(appNames) do
-		local appObj = M.app(name)
+		local appObj = U.app(name)
 		if appObj then appObj:kill() end
 	end
 end
@@ -161,7 +162,7 @@ end
 ---close all tabs instead of closing all windows to avoid confirmation prompt
 ---"do you really want to x tabs?"
 ---@param urlPart string|"all"
-function M.closeBrowserTabsWith(urlPart)
+function U.closeBrowserTabsWith(urlPart)
 	if urlPart == "all" then urlPart = "." end
 	local browser = "Brave Browser"
 	hs.osascript.applescript(([[
@@ -177,9 +178,9 @@ function M.closeBrowserTabsWith(urlPart)
 	require("win-management.auto-tile").resetWinCount(browser)
 end
 
-function M.closeAllFinderWins()
-	M.defer({ 0, 3 }, function()
-		local finder = M.app("Finder")
+function U.closeAllFinderWins()
+	U.defer({ 0, 3 }, function()
+		local finder = U.app("Finder")
 		if not finder then return end
 		for _, win in ipairs(finder:allWindows()) do
 			win:close()
@@ -188,7 +189,7 @@ function M.closeAllFinderWins()
 	require("win-management.auto-tile").resetWinCount("Finder")
 end
 
-function M.quitFullscreenAndVideoApps()
+function U.quitFullscreenAndVideoApps()
 	-- close fullscreen spaces
 	local success, err = pcall(function()
 		local spacesPerScreen = hs.spaces.allSpaces() --[[@as hs.canvas]]
@@ -214,34 +215,30 @@ function M.quitFullscreenAndVideoApps()
 			end
 		end
 	end)
-	if not success then
-		local msg = "⚠️Exiting fullscreen spaces failed:" .. err
-		hs.alert(msg, 5)
-		print(msg)
-	end
+	if not success then U.alertAndLog("⚠️Exiting fullscreen spaces failed:" .. err, 5) end
 
 	-- prevent the automatic quitting of audio-apps from triggering a music start
 	require("apps.music").aw_music:stop()
-	M.quitApps(M.videoAndAudioApps)
-	M.defer(1, function() require("apps.music").aw_music:start() end)
+	U.quitApps(U.videoAndAudioApps)
+	U.defer(1, function() require("apps.music").aw_music:start() end)
 
 	-- extra video apps
 	local extraVideoAppDir = os.getenv("HOME")
 		.. "/Library/Mobile Documents/com~apple~CloudDocs/Apps/Love/"
 	for file in hs.fs.dir(extraVideoAppDir) do
 		local app = file:match("([^/]+)%.app$")
-		if app then M.quitApps(app) end
+		if app then U.quitApps(app) end
 	end
 end
 
 ---@param name string
 ---@param volume number
-function M.sound(name, volume)
+function U.sound(name, volume)
 	hs.sound.getByName(name):volume(volume):play() ---@diagnostic disable-line: undefined-field
 end
 
 ---@param title string
-function M.createReminderToday(title)
+function U.createReminderToday(title)
 	hs.osascript.javascript(([[
 		const rem = Application("Reminders");
 		const today = new Date();
@@ -256,14 +253,11 @@ end
 ---@param path string
 ---@return boolean
 ---@nodiscard
-function M.isExecutableFile(path)
+function U.isExecutableFile(path)
 	local isFile = hs.fs.attributes(path, "mode") == "file"
 	if not isFile then return false end
 	local permissions = hs.fs.attributes(path, "permissions") or ""
 	local executable = permissions:find("x") ~= nil
-	if not executable then M.notify(("❌ %q is not executable"):format(path)) end
+	if not executable then U.notify(("❌ %q is not executable"):format(path)) end
 	return executable
 end
-
---------------------------------------------------------------------------------
-return M

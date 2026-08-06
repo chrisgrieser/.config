@@ -1,6 +1,5 @@
 local M = {}
 
-local u = require("meta.utils")
 local wf = hs.window.filter
 local aw = hs.application.watcher
 --------------------------------------------------------------------------------
@@ -15,7 +14,7 @@ local config = {
 --------------------------------------------------------------------------------
 
 local function fallthrough()
-	u.defer(0.2, function() -- deferring to ensure windows are already switched/created
+	U.defer(0.2, function() -- deferring to ensure windows are already switched/created
 		local frontApp = hs.application.frontmostApplication()
 		local name = frontApp:name()
 		local noWin = #(frontApp:allWindows()) == 0

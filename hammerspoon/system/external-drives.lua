@@ -1,6 +1,5 @@
 local M = {} -- persist from garbage collector
 
-local u = require("meta.utils")
 local usb = hs.usb.watcher
 
 -- backup device: open terminal
@@ -17,7 +16,7 @@ M.usb_externalDrives = usb.new(function(device)
 	}
 	if hs.fnutils.contains(ignore, name) or device.eventType ~= "added" then return end
 	-----------------------------------------------------------------------------
-	u.notify("Mounted: " .. name)
+	U.notify("Mounted: " .. name)
 
 	local harddriveNames = {
 		"ZY603 USB3.0 Device", -- Externe A
@@ -31,7 +30,7 @@ M.usb_externalDrives = usb.new(function(device)
 		-- search for mounted volumes, since the usb-watcher does not report it to us
 		local cmd = [[df | grep ' /Volumes/' | grep -v '/Volumes/Recovery' | 
 			grep --only-matching '/Volumes/.*' | head -n1 | xargs -I{} open '{}']]
-		u.defer({ 1, 3, 5 }, function() hs.execute(cmd) end)
+		U.defer({ 1, 3, 5 }, function() hs.execute(cmd) end)
 	end
 end):start()
 
