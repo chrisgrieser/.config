@@ -30,7 +30,6 @@ export ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=("${ZSH_AUTOSUGGEST_ACCEPT_WIDGETS[@]/vi-a
 # export DEJA_CYCLE_KEY=
 # eval "$(deja init zsh)"
 
-
 #-------------------------------------------------------------------------------
 
 # ZSH-AUTOPAIR

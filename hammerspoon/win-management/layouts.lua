@@ -45,7 +45,7 @@ local function connectProjector(status)
 	u.defer(delay + 1, function()
 		local success = env.hasProjector() == status
 		if not success then
-			u.sound("Bass", 0.4)
+			u.sound("Basso", 0.4)
 			hs.alert("Could not set projector to " .. setTo)
 		end
 	end)
@@ -53,7 +53,8 @@ end
 
 ---LAYOUTS---------------------------------------------------------------------
 
-local function workLayout()
+---@param brightness "dark"|"auto"
+local function workLayout(brightness)
 	if M.isLayouting then return end
 	M.isLayouting = true
 	u.defer(2.5, function() M.isLayouting = false end)
@@ -61,9 +62,13 @@ local function workLayout()
 	-- screen
 	connectProjector(false)
 	u.defer(0.2, display.autoSwitch) -- defer so ambient sensor is ready
-	u.defer(1, display.autoSetBrightness) -- defer to adjust to mode switch
 	u.defer(1, holeCover.update) -- defer removal of external display is detected
 	dockSwitcher("work")
+	if brightness == "auto" then
+		u.defer(1, display.autoSetBrightness) -- defer to adjust to mode switch
+	elseif brightness == "auto" then
+		display.darkenImacDisplay()
+	end
 
 	-- close things
 	u.closeAllFinderWins()
@@ -90,7 +95,7 @@ local function movieLayout()
 	connectProjector(true)
 	display.setDarkMode("dark")
 	display.darkenImacDisplay()
-	u.defer(1, holeCover.update) -- defer so external display is detected
+	u.defer({ 1, 3 }, holeCover.update) -- defer so external display is detected
 	dockSwitcher("movie")
 	music.music_trigger("pause")
 
@@ -142,7 +147,7 @@ hs.urlevent.bind("movie-layout", function()
 end)
 
 -- 3. Systemstart
-if u.isSystemStart() then workLayout() end
+if u.isSystemStart() then workLayout("auto") end
 
 ---SLEEP TIMER------------------------------------------------------------------
 -- When projector is connected, check every x min if device has been idle for y
@@ -179,7 +184,7 @@ M.sleeptimer = doEvery(config.checkIntervalMins * 60, function()
 		-- close if user idle
 		u.notify("💤 SleepTimer triggered")
 		u.closeBrowserTabsWith("all")
-		workLayout()
+		workLayout("dark") -- workLayout for login next day & darken display for sleeping
 	end)
 end):start()
 

@@ -100,12 +100,13 @@ M.caff = c.new(function(event)
 		or event == c.screensDidWake
 		or event == c.systemDidWake
 		or event == c.screensDidSleep
+	local atNight = u.betweenTime(22, 6)
 
 	if screensaverStartedAtNight then
 		wu.iMacDisplay:setBrightness(0)
 	elseif anyScreenActivity and env.hasProjector() then
 		wu.iMacDisplay:setBrightness(0)
-	elseif wokeUp and not env.hasProjector() then
+	elseif wokeUp and not env.hasProjector() and not atNight then
 		u.defer(0.5, M.autoSwitch) -- wait for display turning on
 		u.defer(1, M.autoSetBrightness) -- wait for auto-switch
 	end
