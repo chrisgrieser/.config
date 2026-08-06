@@ -57,6 +57,9 @@ do
 	end, true):start()
 end
 
+-- URI for Justfile
+hs.urlevent.bind("update-emmylua-types", function() hs.loadSpoon("EmmyLua") end)
+
 ---UPTIME CHECK-----------------------------------------------------------------
 local maxUptimeDays = 30 -- CONFIG
 M.timer_uptime = timerAt("01:30", "01d", function()

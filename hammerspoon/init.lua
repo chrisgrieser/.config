@@ -44,4 +44,3 @@ safeRequire("apps.app-specific-behavior")
 safeRequire("apps.music")
 
 safeRequire("meta.reload")
-safeRequire("meta.update-typings")
