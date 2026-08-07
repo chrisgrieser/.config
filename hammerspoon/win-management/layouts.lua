@@ -112,7 +112,7 @@ local function movieLayout()
 
 	-- open / quit apps
 	U.openApps { "YouTube", env.isAtHome and "BetterTouchTool" or nil }
-	U.defer(1, function() -- defer so external display is detected
+	U.defer({ 0, 1 }, function() -- defer so external display is detected
 		local youtubeWin = U.app("YouTube") and U.app("YouTube"):mainWindow()
 		if not youtubeWin or not projector then return end
 		if youtubeWin:screen():id() ~= projector:id() then youtubeWin:moveToScreen(projector) end
@@ -142,7 +142,7 @@ hs.hotkey.bind({}, "end", movieLayout)
 
 -- 2. URI (for Touchpad via BetterTouchTool)
 hs.urlevent.bind("movie-layout", function()
-	U.sound("Hero", 0.8) -- indicate that Touchpad has triggered
+	U.sound("Hero", 0.9) -- indicate that Touchpad has triggered
 	movieLayout()
 end)
 
