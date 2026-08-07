@@ -57,6 +57,8 @@ do
 	end, true):start()
 end
 
+---LUA TYPINGS FOR HAMMERSPOON--------------------------------------------------
+
 -- URI for Justfile
 hs.urlevent.bind("update-emmylua-types", function() hs.loadSpoon("EmmyLua") end)
 
