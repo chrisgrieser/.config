@@ -25,10 +25,6 @@ export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=35
 # do not accept autosuggestion when using vim's `A`
 export ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=("${ZSH_AUTOSUGGEST_ACCEPT_WIDGETS[@]/vi-add-eol/}")
 
-# # DEJA (zsh-autosuggestions alternative) https://github.com/Giammarco-Ferranti/deja#key-bindings
-# export DEJA_CYCLE_KEY=
-# eval "$(deja init zsh)"
-
 #-------------------------------------------------------------------------------
 
 # ZSH-AUTOPAIR

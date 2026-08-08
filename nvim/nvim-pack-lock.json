@@ -98,7 +98,7 @@
       "src": "https://github.com/chrisgrieser/nvim-tinygit"
     },
     "nvim-treesitter": {
-      "rev": "3d3321b560a63ff92a8692401f303a5123336b86",
+      "rev": "c9f9ed6c1892f629ea399f4ee7905f2686fa13f2",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter"
     },
     "nvim-treesitter-textobjects": {
