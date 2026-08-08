@@ -77,9 +77,12 @@ local function workLayout(brightness)
 	-- open things
 	U.openApps { "Ivory", isWorkWeek() and "Slack" or nil, "Gmail", "AlfredExtraPane", "Stats" }
 	U.defer(1, function()
-		wu.moveResize(U.app("Ivory"):mainWindow(), wu.toTheSide)
-		local gmail = U.app("Gmail")
-		if gmail then gmail:activate() end -- activate Gmail last
+		local gmail, ivory = U.app("Gmail"), U.app("Ivory")
+		if ivory then wu.moveResize(ivory:mainWindow(), wu.toTheSide) end
+		if gmail then
+			wu.moveResize(gmail:mainWindow(), wu.pseudoMax)
+			gmail:activate() -- activate Gmail last to make it frontmost
+		end
 	end)
 
 	print("🔲 Layout: work")
@@ -109,6 +112,12 @@ local function movieLayout()
 
 	-- turn off showing hidden files
 	hs.execute("defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder")
+
+	do -- when resetting movie layout
+		U.closeBrowserTabsWith("all")
+		U.quitApps("IINA")
+		U.closeAllFinderWins()
+	end
 
 	-- open / quit apps
 	U.openApps { "YouTube", env.isAtHome and "BetterTouchTool" or nil }

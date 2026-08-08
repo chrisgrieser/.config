@@ -188,7 +188,7 @@
     },
     "BSTSnapAreaDefaultPictoDistanceFromBottom" : 0.10000000149011612
   },
-  "BTTPresetUUID" : "89950875-1726-4780-9366-3D4B2390670B",
+  "BTTPresetUUID" : "377B8717-DF90-41BE-BC35-C36ED04A0EC0",
   "BTTPresetContent" : [
     {
       "BTTAppBundleIdentifier" : "com.colliderli.iina",
@@ -703,9 +703,9 @@
           "BTTGestureNotes" : "accessibility keyboard (set in Keyboard Shortcuts → Accessibility)"
         },
         {
-          "BTTLastUpdatedAt" : 1785868155.88065,
-          "BTTTriggerType" : 116,
-          "BTTTriggerTypeDescriptionReadOnly" : "Pinch Out",
+          "BTTLastUpdatedAt" : 1786204075.1606178,
+          "BTTTriggerType" : 115,
+          "BTTTriggerTypeDescriptionReadOnly" : "Pinch In",
           "BTTTriggerTypeDescription" : "🎥 Movie layout",
           "BTTTriggerClass" : "BTTTriggerTypeTouchpadAll",
           "BTTUUID" : "329AC451-4B62-4DC5-8D42-FE5CFF79F046",
@@ -731,39 +731,6 @@
           "BTTTriggerCheatSheetConfig" : {
             "BTTCheatSheetActionLabel" : "🎥 Movie layout",
             "BTTCheatSheetTriggerLabel" : ""
-          }
-        },
-        {
-          "BTTLastUpdatedAt" : 1785868151.783565,
-          "BTTTriggerType" : 115,
-          "BTTTriggerTypeDescriptionReadOnly" : "Pinch In",
-          "BTTTriggerTypeDescription" : "❎ Quit video apps",
-          "BTTTriggerClass" : "BTTTriggerTypeTouchpadAll",
-          "BTTUUID" : "E2B01E9F-8603-43A3-AB8F-9D584FA8C489",
-          "BTTOrder" : 10,
-          "BTTActionsToExecute" : [
-            {
-              "BTTLastUpdatedAt" : 1727515895.404985,
-              "BTTTriggerParentUUID" : "E2B01E9F-8603-43A3-AB8F-9D584FA8C489",
-              "BTTIsPureAction" : true,
-              "BTTUUID" : "4E7E9E6D-37C6-4D37-88A5-1D9DDABF3418",
-              "BTTPredefinedActionType" : 172,
-              "BTTPredefinedActionName" : "Run Apple Script (blocking)",
-              "BTTAdditionalActionData" : {
-                "BTTScriptType" : 0,
-                "BTTScriptLocation" : 0,
-                "BTTAppleScriptRunInBackground" : false,
-                "SelectedAction" : 172,
-                "BTTTouchBarAppleScriptString" : "-- this also closes all PWAs\ntell application \"Brave Browser\" to close (every tab in every window)\n\ntell application \"Finder\" to close every window\ntell application \"IINA\" to quit",
-                "BTTTouchBarAppleScriptUsePath" : false
-              },
-              "BTTInlineAppleScript" : "-- this also closes all PWAs\ntell application \"Brave Browser\" to close (every tab in every window)\n\ntell application \"Finder\" to close every window\ntell application \"IINA\" to quit",
-              "BTTOrder" : 0
-            }
-          ],
-          "BTTGestureNotes" : "❎ Quit video apps",
-          "BTTTriggerCheatSheetConfig" : {
-            "BTTCheatSheetActionLabel" : "❎ Quit video apps"
           }
         },
         {
