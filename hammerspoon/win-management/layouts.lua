@@ -114,7 +114,7 @@ local function movieLayout()
 	hs.execute("defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder")
 
 	do -- when resetting movie layout
-		U.closeBrowserTabsWith("all")
+		U.closeBrowserTabsWith("all", "youtube")
 		U.quitApps("IINA")
 		U.closeAllFinderWins()
 	end
