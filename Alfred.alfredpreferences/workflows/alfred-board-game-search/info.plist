@@ -25,6 +25,16 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
+				<string>18514B2F-FBE3-4DD3-8BBA-E46D3E829E7B</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
 				<string>88186304-0500-4297-9AD2-CCC0B9440663</string>
 				<key>modifiers</key>
 				<integer>0</integer>
@@ -275,6 +285,27 @@
 				<key>spaces</key>
 				<string>+</string>
 				<key>url</key>
+				<string>https://www.fantasywelt.de/#f820/embedded/m=and&amp;q={query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>18514B2F-FBE3-4DD3-8BBA-E46D3E829E7B</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string>+</string>
+				<key>url</key>
 				<string>https://www.amazon.de/s?k={query}+board+game</string>
 			</dict>
 			<key>type</key>
@@ -459,7 +490,16 @@ Search board games with the `bgg` keyword.
 			<key>xpos</key>
 			<real>265</real>
 			<key>ypos</key>
-			<real>510</real>
+			<real>620</real>
+		</dict>
+		<key>18514B2F-FBE3-4DD3-8BBA-E46D3E829E7B</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>10</integer>
+			<key>xpos</key>
+			<real>265</real>
+			<key>ypos</key>
+			<real>270</real>
 		</dict>
 		<key>1E9D47A4-3A41-453E-9734-4F58E6654D5A</key>
 		<dict>
@@ -468,7 +508,7 @@ Search board games with the `bgg` keyword.
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>390</real>
+			<real>500</real>
 		</dict>
 		<key>56A2325A-30D3-4B4C-ABFB-BCD0FA84E0CB</key>
 		<dict>
@@ -477,7 +517,7 @@ Search board games with the `bgg` keyword.
 			<key>xpos</key>
 			<real>265</real>
 			<key>ypos</key>
-			<real>390</real>
+			<real>500</real>
 		</dict>
 		<key>6BF2B984-1F3B-42A6-AAF6-C08713625399</key>
 		<dict>
@@ -504,7 +544,7 @@ Search board games with the `bgg` keyword.
 			<key>xpos</key>
 			<real>265</real>
 			<key>ypos</key>
-			<real>275</real>
+			<real>385</real>
 		</dict>
 		<key>88C6BA00-B205-48A3-B162-853AF147661C</key>
 		<dict>
@@ -513,7 +553,7 @@ Search board games with the `bgg` keyword.
 			<key>xpos</key>
 			<real>420</real>
 			<key>ypos</key>
-			<real>540</real>
+			<real>650</real>
 		</dict>
 		<key>934AA610-FE5D-437B-BFA5-B1BD6ED3AF17</key>
 		<dict>
@@ -531,7 +571,7 @@ Search board games with the `bgg` keyword.
 			<key>xpos</key>
 			<real>730</real>
 			<key>ypos</key>
-			<real>510</real>
+			<real>620</real>
 		</dict>
 		<key>BECC2813-AE04-424B-B190-B2D46344AF3C</key>
 		<dict>
@@ -542,7 +582,7 @@ Search board games with the `bgg` keyword.
 			<key>xpos</key>
 			<real>195</real>
 			<key>ypos</key>
-			<real>540</real>
+			<real>650</real>
 		</dict>
 		<key>CA45DB63-305A-4FB2-BD65-A162EB4C2697</key>
 		<dict>
@@ -551,7 +591,7 @@ Search board games with the `bgg` keyword.
 			<key>xpos</key>
 			<real>650</real>
 			<key>ypos</key>
-			<real>540</real>
+			<real>650</real>
 		</dict>
 		<key>E087D983-8D7A-4EA5-A682-02234530D0BA</key>
 		<dict>
@@ -571,7 +611,7 @@ Search board games with the `bgg` keyword.
 			<key>xpos</key>
 			<real>500</real>
 			<key>ypos</key>
-			<real>510</real>
+			<real>620</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
