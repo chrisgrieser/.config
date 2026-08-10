@@ -164,16 +164,23 @@ end
 ---@param urlPart string|"all"
 ---@param except? string
 function U.closeBrowserTabsWith(urlPart, except)
-	except = except or "__NEVER__"
+	if not except then except = "__NEVER__" end
 	if urlPart == "all" then urlPart = "." end
-	local browser = "Brave Browser"
+	local browser = "Brave Browser" -- config
+
 	local script = ([[
 		tell application %q
 			repeat with win in (every window)
-				repeat with theTab in (every tab in win)
-					if tabURL contains %q and tabURL does not contain %q then
-						close theTab
+				set tabsToClose to {}
+
+				repeat with theTab in every tab in win
+					if (URL of theTab contains %q) and (URL of theTab does not contain %q) then
+						set end of tabsToClose to theTab
 					end if
+				end repeat
+
+				repeat with theTab in tabsToClose
+					close theTab
 				end repeat
 			end repeat
 		end tell
