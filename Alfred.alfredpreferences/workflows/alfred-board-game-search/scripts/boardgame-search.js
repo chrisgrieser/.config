@@ -34,8 +34,8 @@ function run() {
 					arg: "alfredpreferences://navigateto/workflows>workflow>alfred-board-game-search>userconfig>bgg_csv_path",
 				},
 				{
-					title: "",
-					subtitle: "⏎: Download the CSV database from BGG",
+					title: "Download the CSV database from BGG",
+					subtitle: "⏎: Open the respective BGG website (requires being logged in to BGG).",
 					arg: "https://boardgamegeek.com/data_dumps/bg_ranks",
 				},
 			],

@@ -62,16 +62,16 @@ _escape_on_empty_buffer() {
 	local eza_cmd="eza --long --color=always --icons=always --sort=oldest --no-quotes --no-permissions --no-filesize --no-user --no-time | sed 's/ [^ ]*->.*//'"
 
 	selected=$(
-		zsh -c "$rg_cmd" | zsh -c "$eza_cmd" | fzf \
-			--ansi --multi --scheme=path --tiebreak=length,end \
-			--info=inline --height="50%" \
-			--header="^H: include hidden, ⌘L: reveal in Finder" \
-			--bind="ctrl-h:change-header(including hidden files)+reload($rg_cmd \
-				--hidden --no-ignore --no-ignore-files --glob='!/.git/' \
-				--glob='!node_modules' --glob='!__pycache__' --glob='!.DS_Store' |
-				$eza_cmd)" \
-			--expect="ctrl-l"
-	)
+	zsh -c "$rg_cmd" | zsh -c "$eza_cmd" | fzf \
+		--ansi --multi --scheme=path --tiebreak=length,end \
+		--info=inline --height="50%" \
+		--header="^H: include hidden, ⌘L: reveal in Finder" \
+		--bind="ctrl-h:change-header(including hidden files)+reload($rg_cmd \
+		--hidden --no-ignore --no-ignore-files --glob='!/.git/' \
+		--glob='!node_modules' --glob='!__pycache__' --glob='!.DS_Store' |
+					$eza_cmd)" \
+		--expect="ctrl-l"
+)
 	zle reset-prompt
 	[[ -z "$selected" ]] && return 0
 	key_pressed=$(echo "$selected" | head -n1)
@@ -117,7 +117,7 @@ function sr {
 
 	echo "$files" | while read -r file; do
 		rg --no-config "$search" --case-sensitive --replace="$replace" --passthrough \
-			--no-line-number "$file" > /tmp/rgpipe &&
+			--no-line-number "$file" >/tmp/rgpipe &&
 			mv /tmp/rgpipe "$file"
 	done
 }
@@ -168,17 +168,19 @@ function lc() {
 }
 
 # completions for it
-_lc() {
-	local -a last_cmds=()
-	while IFS='' read -r value; do # turn lines into array
-		last_cmds+=("$value")
-	done < <(history -rn -10)
+if [[ "$USE_IRIS" == "false" ]]; then
+	_lc() {
+		local -a last_cmds=()
+		while IFS='' read -r value; do # turn lines into array
+			last_cmds+=("$value")
+		done < <(history -rn -10)
 
-	local _values=({1..10})
-	local expl && _description -V last-commands expl 'Last Commands'
-	compadd "${expl[@]}" -Q -l -d last_cmds -a _values
-}
-compdef _lc lc
+		local _values=({1..10})
+		local expl && _description -V last-commands expl 'Last Commands'
+		compadd "${expl[@]}" -Q -l -d last_cmds -a _values
+	}
+	compdef _lc lc
+fi
 
 # copy result of last command
 function lr() {
@@ -249,7 +251,7 @@ function ij {
 	if ! [[ -t 0 ]]; then
 		file="$(mktemp)"
 		trap 'rm -f "$file"' EXIT
-		cat > "$file"
+		cat >"$file"
 	else
 		file="$1"
 	fi

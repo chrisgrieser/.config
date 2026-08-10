@@ -1,0 +1,33 @@
+# https://github.com/versenilvis/IRIS#configuration-guide
+# ------------------------------------------------------------------------------
+
+[core]
+version = 1
+expand-alias = false # automatically expand aliases on space
+auto-execute = false # automatically execute command after accepting suggestion
+
+[ui]
+style = "modern" # visual style: "modern" (icons, category pills, shortcut footer) or "classic" (minimalist, centered number, no icons)
+nerd-fonts = true # enable Nerd Fonts icons in overlay menu
+hidden-files = false # show hidden files with dot prefix
+ghost-text = true # enable inline ghost text
+max-suggestions = 40 # maximum suggestions to display
+max-height = 15 # maximum height of the overlay
+max-width = 0 # maximum width of the overlay (0 = responsive to terminal)
+
+[git]
+filter-active-branch = true # hide current branch in checkout/switch list
+deduplicate-branches = true # merge remote and local branches with same name
+
+[updater]
+check-on-startup = true # check for updates on startup
+check-interval = "168h" # (168h = 7d); interval between update checks, e.g. "24h", "6h", "30m"
+auto-update = 0 # 0 = off (default, notify only), 1 = auto-install, 2 = always confirm first
+
+[keybindings]
+select = "enter"  # buggy, prevents execution of buffer & incompatible with magic enter/magic dashboard
+navigate-up = "shift+tab"
+navigate-down = "tab"
+navigate-right = "right"
+toggle-mode = "ctrl+r"
+toggle-menu = "false"  # empty string does not disable it, therefore using dummy "false"
