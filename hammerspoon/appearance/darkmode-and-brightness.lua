@@ -1,7 +1,6 @@
 local M = {}
 
 local env = require("meta.environment")
-local wu = require("win-management.window-utils")
 
 ---METHODS----------------------------------------------------------------------
 
@@ -92,20 +91,12 @@ local c = hs.caffeinate.watcher
 M.caff = c.new(function(event)
 	if env.isAtOffice then return end
 
-	local screensaverStartedAtNight = event == c.screensaverDidStart and U.betweenTime(22, 7)
-	local wokeUp = event == c.screensDidUnlock or event == c.systemDidWake
-	local anyScreenActivity = event == c.screensaverDidStop
-		or event == c.screensaverDidStart
-		or event == c.screensDidWake
-		or event == c.systemDidWake
-		or event == c.screensDidSleep
-	local atNight = U.betweenTime(22, 6)
-
-	if screensaverStartedAtNight then
-		wu.iMacDisplay:setBrightness(0)
-	elseif anyScreenActivity and env.hasProjector() then
-		wu.iMacDisplay:setBrightness(0)
-	elseif wokeUp and not env.hasProjector() and not atNight then
+	if event == c.screensDidWake and env.hasProjector() then
+		print("🪚 ⭐")
+		M.darkenImacDisplay()
+		-- U.defer(0, M.darkenImacDisplay) -- wait for macOS turning brightness up
+	elseif event == c.screensDidWake and not env.hasProjector() then
+		print("🪚 💜")
 		U.defer(0.5, M.autoSwitch) -- wait for display turning on
 		U.defer(1, M.autoSetBrightness) -- wait for auto-switch
 	end
