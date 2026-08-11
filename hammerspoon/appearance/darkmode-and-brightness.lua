@@ -92,11 +92,11 @@ M.caff = c.new(function(event)
 	if env.isAtOffice then return end
 
 	if event == c.screensDidWake and env.hasProjector() then
-		print("🪚 ⭐")
-		M.darkenImacDisplay()
-		-- U.defer(0, M.darkenImacDisplay) -- wait for macOS turning brightness up
+		print("🖥️ Darkened screen after waking up with projector")
+		U.defer(1, M.darkenImacDisplay) -- wait for macOS turning brightness up
+		U.defer(4, M.darkenImacDisplay) -- redundancy to ensure BetterDisplay is active for full darkness
 	elseif event == c.screensDidWake and not env.hasProjector() then
-		print("🪚 💜")
+		print("🖥️ Brightened screen after waking up")
 		U.defer(0.5, M.autoSwitch) -- wait for display turning on
 		U.defer(1, M.autoSetBrightness) -- wait for auto-switch
 	end
