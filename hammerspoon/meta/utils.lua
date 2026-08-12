@@ -227,7 +227,7 @@ function U.quitFullscreenAndVideoApps()
 			end
 		end
 	end)
-	if not success then U.alertAndLog("⚠️Exiting fullscreen spaces failed:" .. err, 5) end
+	if not success then U.alertAndLog("⚠️ Exiting fullscreen spaces failed:" .. err, 5) end
 
 	-- prevent the automatic quitting of audio-apps from triggering a music start
 	require("apps.music").aw_music:stop()

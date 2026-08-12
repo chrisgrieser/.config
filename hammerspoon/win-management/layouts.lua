@@ -72,7 +72,7 @@ local function workLayout(brightness)
 
 	-- close things
 	U.closeAllFinderWins()
-	U.quitFullscreenAndVideoApps()
+	U.defer(1, U.quitFullscreenAndVideoApps) -- defer needed to prevent error, likely to due display count change
 
 	-- open things
 	U.openApps { "Ivory", isWorkWeek() and "Slack" or nil, "Gmail", "AlfredExtraPane", "Stats" }
