@@ -82,18 +82,19 @@ function generateCitekey(authors, year, origyear) {
 function inputToEntryJson(input) {
 	const entry = {};
 
-	const doiRegex = /\b10.\d{4,9}\/[-._;()/:A-Z0-9]+(?=$|[?/ ])/i; // https://www.crossref.org/blog/dois-and-matching-regular-expressions/
-	const isbnRegex = /^[\d-]{9,40}$/;
-	const isDoi = doiRegex.test(input);
-	const isIsbn = isbnRegex.test(input);
+	// https://www.crossref.org/blog/dois-and-matching-regular-expressions/
+	// added `#` in lookahead to match cases where header-link is at the end of URL
+	const doiRegex = /\b10.\d{4,9}\/[-._;()/:A-Z0-9]+(?=$|[?/# ])/i;
 
-	if (!isDoi && !isIsbn) return "input invalid";
+	const isbnRegex = /^[\d-]{9,40}$/;
+	const doi = input.match(doiRegex);
+	const isbn = input.match(isbnRegex);
+
+	if (!doi && !isbn) return "Input seems to be neither DOI nor ISBN";
 
 	// DOI
 	// https://citation.crosscite.org/docs.html
-	if (isDoi) {
-		const doi = input.match(doiRegex);
-		if (!doi) return "DOI invalid";
+	if (doi) {
 		const doiUrl = "https://doi.org/" + doi[0];
 
 		const response = app.doShellScript(
@@ -129,12 +130,9 @@ function inputToEntryJson(input) {
 		}
 	}
 
-	// ISBN: Google Books & OpenLibrary
+	// ISBN – first tries OpenLibrary API, then Google Books API
 	// https://www.vinzius.com/post/free-and-paid-api-isbn/
-	else if (isIsbn) {
-		const isbn = input;
-		// first tries OpenLibrary API, then Google Books API
-
+	else if (isbn) {
 		// OPENLIBRARY -- https://openlibrary.org/developers/api
 		const response = app.doShellScript(
 			`curl -sL "https://openlibrary.org/api/books?bibkeys=isbn:${isbn}&jscmd=details&format=json"`,
@@ -160,7 +158,7 @@ function inputToEntryJson(input) {
 			if (bookAccessible) entry.url = data.preview_url;
 		}
 
-		// GOOGLE BOOKS -- https://developers.google.com/books/docs/v1/using
+		// GOOGLE BOOKS – https://developers.google.com/books/docs/v1/using
 		else {
 			const resp = app.doShellScript(
 				`curl -sL "https://www.googleapis.com/books/v1/volumes?q=isbn:${isbn}"`,

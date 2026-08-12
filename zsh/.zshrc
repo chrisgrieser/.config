@@ -5,7 +5,9 @@ if [[ "$TERM_PROGRAM" != "WezTerm" ]]; then printf '\33c\e[3J'; fi
 
 # https://github.com/versenilvis/IRIS#configuration-guide
 # still a bit buggy (use of enter for accepting, etc.)
-export USE_IRIS="false"
+
+# currently not using IRIS, just disabling using zsh-autocomplete due to prompt-shifting bug…
+export USE_IRIS="true"
 
 #-------------------------------------------------------------------------------
 

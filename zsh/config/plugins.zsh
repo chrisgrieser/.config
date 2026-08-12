@@ -9,7 +9,7 @@ export FPATH="$ZDOTDIR/completions:$HOMEBREW_PREFIX/share/zsh/site-functions:$FP
 #-------------------------------------------------------------------------------
 
 if [[ "$USE_IRIS" == "true" ]]; then
-	eval "$(iris init zsh)" # https://github.com/versenilvis/IRIS#shell-setup
+	# eval "$(iris init zsh)" # https://github.com/versenilvis/IRIS#shell-setup
 else
 	# ZSH-AUTOCOMPLETE
 	# also loads compinit stuff, therefore has to be loaded *before* most plugins
