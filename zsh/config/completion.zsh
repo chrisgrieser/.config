@@ -40,16 +40,23 @@ _tab-on-empty-buffer() {
 		export CURSOR=3
 		zle list-choices # open completion
 	else
-		zle menu-select # select completion (w/o zsh-autocomplete use `zle expand-or-complete`)
+		# select completion
+		if [[ "$USE_ZSH_AUTOCOMPLETE" == "true" ]]; then
+			zle menu-select
+		else
+			zle expand-or-complete
+		fi
 	fi
 }
 zle -N _tab-on-empty-buffer
 bindkey '^I' _tab-on-empty-buffer
 
 # `menuselect` = when in completion menu
-bindkey -M menuselect '^I' menu-complete           # <Tab> next item
-bindkey -M menuselect '^[[Z' reverse-menu-complete # <S-Tab> prev suggestion
-bindkey -M menuselect '\r' .accept-line            # <CR> select & execute
+if [[ "$USE_ZSH_AUTOCOMPLETE" == "true" ]]; then
+	bindkey -M menuselect '^I' menu-complete           # <Tab> next item
+	bindkey -M menuselect '^[[Z' reverse-menu-complete # <S-Tab> prev suggestion
+	bindkey -M menuselect '\r' .accept-line            # <CR> select & execute
+fi
 
 #───────────────────────────────────────────────────────────────────────────────
 # SORT
