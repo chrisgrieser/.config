@@ -73,7 +73,6 @@ if device.include?("Home")
 	cask "ausweisapp" # pairing with phone app only works in private wifi
 	cask "bettertouchtool"
 	cask "catch"
-	mas "WISO Steuer 2026", id: 6748903399 # keep until Steuerbescheid comes
 end
 if device.include?("Home") or device.include?("Office")
 	cask "granola"
