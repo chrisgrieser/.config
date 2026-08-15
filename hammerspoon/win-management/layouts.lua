@@ -169,7 +169,7 @@ local config = {
 }
 
 local doEvery = hs.timer.doEvery
-M.sleeptimer = doEvery(config.checkIntervalMins * 60, function()
+M.sleepTimer = doEvery(config.checkIntervalMins * 60, function()
 	local isIdle = (hs.host.idleTime() / 60) > config.idleMins
 	if not env.hasProjector() or not isIdle then return end
 
