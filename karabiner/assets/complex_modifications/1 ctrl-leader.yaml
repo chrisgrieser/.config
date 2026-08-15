@@ -121,7 +121,7 @@ rules:
         from: { key_code: d }
         conditions: [*leader-active]
         to:
-          - shell_command: open "https://discord.com/channels/1461906002084495362/1461920120959144172"
+          - shell_command: open "https://discord.com/channels/634157794920235018/634182097006886933"
           - *deactivate-leader
           - *remove-notice
 

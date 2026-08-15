@@ -91,7 +91,7 @@ local c = hs.caffeinate.watcher
 M.caff = c.new(function(event)
 	if env.isAtOffice then return end
 	local screensaverAtNight = event == c.screensaverDidStart
-		and U.betweenTime(22, 6)
+		and U.betweenTime(1, 8)
 		and not env.hasProjector()
 	local wokeWithProjector = event == c.screensDidWake and env.hasProjector()
 
