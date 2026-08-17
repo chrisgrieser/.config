@@ -61,11 +61,9 @@ local function updateGithubNotifCount()
 	-- no way of updating them?
 	M.updateGithubNotifCount = hs.task
 		.new("./system/menubar/github-notif-count.sh", function(code, stdout, stderr)
-			if code ~= 0 then
-				U.notify("❌ Could not update github notifications count: " .. stderr)
-				return
-			end
-			local count = tonumber(stdout) or "?"
+			local msg = stderr ~= "" and stderr or stdout
+			if code ~= 0 then print("❌ [Menubar: GitHub notifications] " .. msg) end
+			local count = tonumber(stdout) or "?" -- script returns non-number on error
 			if count == 0 then
 				M.githubNotifCount:removeFromMenuBar()
 			else

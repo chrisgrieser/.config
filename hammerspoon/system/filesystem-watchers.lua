@@ -102,8 +102,7 @@ M.pathw_desktop = pathw(home .. "/Desktop/", function(paths, _)
 			local bankPath = home .. "/Documents/Finanzen/Vermögen/csv-analysis/Umsatz/"
 			os.rename(path, bankPath .. "/" .. name)
 		elseif name:find("Depotuebersicht8038.*%.csv") then -- digits to prevent matching depot of others
-			local bankPath = home
-				.. "/Documents/Finanzen/Vermögen/csv-analysis/Depotübersicht/"
+			local bankPath = home .. "/Documents/Finanzen/Vermögen/csv-analysis/Depotübersicht/"
 			os.rename(path, bankPath .. "/" .. name)
 
 		---STEAM GAME SHORTCUTS---------------------------------------------------
@@ -117,7 +116,8 @@ M.pathw_desktop = pathw(home .. "/Desktop/", function(paths, _)
 			local firstLine = io.lines(path)()
 			if firstLine == "// COMMANDER" then -- manabox deck exports always have this 1st line
 				local basename = name:gsub("%..+$", "")
-				local destination = home .. ("/Notes/👤 Personal/Games/%s Deck.md"):format(basename)
+				local destination = home
+					.. ("/Notes/👤 Personal/Games/Magic the Gathering/%s Deck.md"):format(basename)
 				success, errmsg = os.rename(path, destination)
 			elseif name == "wants.txt" or name == "wants.txt-bkp" then
 				local content = U.readFile(path)

@@ -1,7 +1,7 @@
 {
   "plugins": {
     "async.nvim": {
-      "rev": "46adf61a022d5c923f981d527443f406e7d0f63e",
+      "rev": "99aed904ae1253c27fac60b862b6d73ef1380e54",
       "src": "https://github.com/lewis6991/async.nvim"
     },
     "blink-cmp-git": {
@@ -66,7 +66,7 @@
       "src": "https://github.com/chrisgrieser/nvim-lsp-endhints"
     },
     "nvim-lspconfig": {
-      "rev": "51dbf5359da86721662c87ca10eb73add973737b",
+      "rev": "fbaef6156f9ad65790931ab543ab1dfec57bbec7",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-origami": {
