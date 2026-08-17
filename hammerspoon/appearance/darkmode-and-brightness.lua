@@ -101,9 +101,14 @@ M.caff = c.new(function(event)
 		U.defer(1, M.darkenImacDisplay) -- wait for macOS turning brightness up
 		U.defer(4, M.darkenImacDisplay) -- redundancy to ensure BetterDisplay is active for full darkness
 	elseif event == c.screensDidWake and not env.hasProjector() then
+		if M.wokeRecently then return end
+		M.wokeRecently = true
 		print("🖥️ Brightened screen after waking up")
 		U.defer(0.5, M.autoSwitch) -- wait for display turning on
 		U.defer(1, M.autoSetBrightness) -- wait for auto-switch
+
+		-- prevent loop where an error notification wakes the screen, which
+		U.defer(5, function() M.wokeRecently = false end)
 	end
 end):start()
 
