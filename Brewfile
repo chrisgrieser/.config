@@ -50,7 +50,7 @@ mas "Ivory", id: 6444602274
 
 #-QUICKLOOK---------------------------------------------------------------------
 cask "qlmarkdown" # markdown only
-cask "syntax-highlight" # dark mode buggy, remove footer via https://github.com/sbarex/SourceCodeSyntaxHighlight/issues/297#issuecomment-2560808425
+cask "syntax-highlight" # dark mode buggy; remove footer via https://github.com/sbarex/SourceCodeSyntaxHighlight/issues/297#issuecomment-2560808425
 # mas "iPreview", id: 1519213509 # buggy with markdown frontmatter, no window resizing
 # cask "flewgg/tap/unfold", trusted: true # dark mode buggy for lua, no window resizing
 # mas "Looq", id: 6760281430 # no homebrew cask, no lua support, no window resizing
