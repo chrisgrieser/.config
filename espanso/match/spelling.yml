@@ -113,7 +113,7 @@ matches:
   - { trigger: thruogh, replace: through, propagate_case: true, word: true }
   - { trigger: thsi, replace: this, propagate_case: true, word: true }
   - { trigger: thsoe, replace: those, propagate_case: true, word: true }
-  - { trigger: ti, replace: it, propagate_case: true, word: true }
+  - { trigger: ti, replace: it, word: true } # no propagate case, to not replace "TI" (from TI4)
   - { trigger: tiem, replace: item, propagate_case: true, word: true }
   - { trigger: tis, replace: its, propagate_case: true, word: true }
   - { trigger: torwards, replace: towards, propagate_case: true }
