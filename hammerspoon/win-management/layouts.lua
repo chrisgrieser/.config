@@ -39,15 +39,13 @@ local function connectProjector(status)
 	U.defer(delay, function()
 		local name = env.projectorName
 		local shellScript = ('betterdisplaycli set --name="%s" --connected="%s"'):format(name, setTo)
-		hs.execute(U.exportPath .. shellScript)
-	end)
-	U.defer(delay + 1, function()
-		local success = env.hasProjector() == status
-		if not success then
-			local msg = "Could not set projector to " .. setTo
-			U.sound("Basso", 0.4)
-			U.alertAndLog(msg, 4)
-		end
+		local output, code = hs.execute(U.exportPath .. shellScript)
+		if code == 0 then return end
+
+		-- error
+		local msg = "[Projector] Could not set projector to " .. setTo .. ": " .. output
+		U.sound("Basso", 0.4)
+		U.alertAndLog(msg, 4)
 	end)
 end
 
@@ -76,7 +74,7 @@ local function workLayout(brightness)
 
 	-- open things
 	U.openApps { "Ivory", isWorkWeek() and "Slack" or nil, "Gmail", "AlfredExtraPane", "Stats" }
-	U.defer(1, function()
+	U.defer(2, function()
 		local gmail, ivory = U.app("Gmail"), U.app("Ivory")
 		if ivory then wu.moveResize(ivory:mainWindow(), wu.toTheSide) end
 		if gmail then
@@ -113,7 +111,7 @@ local function movieLayout()
 	-- turn off showing hidden files
 	hs.execute("defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder")
 
-	do -- when resetting movie layout
+	do -- for when resetting movie layout
 		U.closeBrowserTabsWith("all", "youtube")
 		U.quitApps("IINA")
 		U.closeAllFinderWins()
