@@ -35,6 +35,16 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
+				<string>7404B621-8E07-41C5-9579-608C7580B064</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
 				<string>18514B2F-FBE3-4DD3-8BBA-E46D3E829E7B</string>
 				<key>modifiers</key>
 				<integer>0</integer>
@@ -371,6 +381,27 @@
 				<key>spaces</key>
 				<string>+</string>
 				<key>url</key>
+				<string>https://www.magierspiele.de/Wunschliste?onf={query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>7404B621-8E07-41C5-9579-608C7580B064</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string>+</string>
+				<key>url</key>
 				<string>https://www.fantasywelt.de/#f820/embedded/m=and&amp;q={query}</string>
 			</dict>
 			<key>type</key>
@@ -622,6 +653,15 @@ Search board games with the `bgg` keyword.
 			<real>415</real>
 			<key>ypos</key>
 			<real>130</real>
+		</dict>
+		<key>7404B621-8E07-41C5-9579-608C7580B064</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>10</integer>
+			<key>xpos</key>
+			<real>415</real>
+			<key>ypos</key>
+			<real>450</real>
 		</dict>
 		<key>85894161-CE99-4C9D-B3E1-18C564EE94E8</key>
 		<dict>
