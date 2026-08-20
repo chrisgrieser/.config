@@ -205,6 +205,10 @@ function U.quitFullscreenAndVideoApps()
 	-- close fullscreen spaces
 	local success, err = pcall(function()
 		local spacesPerScreen = hs.spaces.allSpaces() --[[@as hs.canvas]]
+		if not spacesPerScreen then 
+			print("⚠️Could not close fullscreens: No spaces found.")
+			return
+		end
 		for _screen, spaceIdsOfScreen in pairs(spacesPerScreen) do
 			local unfocussedSpace = hs.fnutils.find(spaceIdsOfScreen, function(id)
 				local isNormalSpace = hs.spaces.spaceType(id) == "user"

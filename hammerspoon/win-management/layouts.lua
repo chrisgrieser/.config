@@ -34,18 +34,21 @@ local function connectProjector(status)
 			U.alertAndLog("Could not find BetterDisplay.")
 			return
 		end
-		delay = 2
+		delay = 3
 	end
 	U.defer(delay, function()
+		-- DOCS https://github.com/waydabber/BetterDisplay/wiki/Integration-features,-CLI#cli-access-by-installing-betterdisplaycli
+		-- alternative URI Scheme: BetterDisplay://set?name=P62_Pro&connected=on
 		local name = env.projectorName
 		local shellScript = ('betterdisplaycli set --name="%s" --connected="%s"'):format(name, setTo)
-		local output, code = hs.execute(U.exportPath .. shellScript)
-		if code == 0 then return end
+		local _, code = hs.execute(U.exportPath .. shellScript)
 
-		-- error
-		local msg = "[Projector] Could not set projector to " .. setTo .. ": " .. output
-		U.sound("Basso", 0.4)
-		U.alertAndLog(msg, 4)
+		if code == 0 then
+			print("📽️ Set projector to [" .. setTo .. "]")
+		else
+			U.alertAndLog("📽️ Could not set projector to [" .. setTo .. "]", 4)
+			U.sound("Basso", 0.4)
+		end
 	end)
 end
 
@@ -75,8 +78,9 @@ local function workLayout(brightness)
 	-- open things
 	U.openApps { "Ivory", isWorkWeek() and "Slack" or nil, "Gmail", "AlfredExtraPane", "Stats" }
 	U.defer(2, function()
-		local gmail, ivory = U.app("Gmail"), U.app("Ivory")
+		local gmail, ivory, slack = U.app("Gmail"), U.app("Ivory"), U.app("Slack")
 		if ivory then wu.moveResize(ivory:mainWindow(), wu.toTheSide) end
+		if slack then wu.moveResize(slack:mainWindow(), wu.pseudoMax) end
 		if gmail then
 			wu.moveResize(gmail:mainWindow(), wu.pseudoMax)
 			gmail:activate() -- activate Gmail last to make it frontmost
