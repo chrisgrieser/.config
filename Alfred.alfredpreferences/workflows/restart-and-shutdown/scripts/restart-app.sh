@@ -42,7 +42,7 @@ while pgrep -xq "$app"; do
 done
 sleep 0.1
 
-[[ "$app" == "BetterDisplay" ]] && sleep 2 # needs sleep to detect display
+[[ "$app" == "BetterDisplay" ]] && sleep 4 # needs sleep to detect display
 
 # restart
 [[ "$app" == "wezterm-gui" ]] && app="WezTerm" # process name differs from app name
