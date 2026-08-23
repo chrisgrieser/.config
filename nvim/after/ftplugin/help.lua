@@ -5,7 +5,7 @@ vim.opt_local.wrap = true
 --------------------------------------------------------------------------------
 
 -- `:bwipeout` so it isn't saved in oldfiles
-Bufmap { "q", vim.cmd.bwipeout, desc = "Quit" }
+Bufmap { "q", vim.cmd.bwipeout, desc = "Quit", nowait = true }
 Bufmap { "<D-w>", vim.cmd.bwipeout, desc = "Quit" }
 
 -- `gO` opens the heading-selection in vim help files.

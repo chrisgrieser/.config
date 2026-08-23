@@ -2,7 +2,7 @@
 --------------------------------------------------------------------------------
 
 vim.keymap.set("n", "<CR>", "ZZ", { desc = "Save and exit" })
-vim.keymap.set("n", "q", vim.cmd.cquit, { desc = "Abort" }) -- quit with error = aborting
+vim.keymap.set("n", "q", vim.cmd.cquit, { desc = "Abort", nowait = true }) -- quit with error = aborting
 
 vim.keymap.set("n", "L", "$")
 vim.keymap.set("n", "H", "0^")

@@ -34,7 +34,7 @@ Bufmap {
 local tinygitBuffer = vim.bo.buftype == "nofile"
 if not tinygitBuffer then -- already has its own mappings
 	Bufmap { "<CR>", "ZZ", desc = " Confirm" } -- quit with saving = confirm
-	Bufmap { "q", vim.cmd.cquit, desc = " Abort" } -- quit with error = aborting
+	Bufmap { "q", vim.cmd.cquit, desc = " Abort", quit = true } -- quit with error = aborting
 end
 
 --------------------------------------------------------------------------------
