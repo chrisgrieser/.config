@@ -206,7 +206,7 @@ function U.quitFullscreenAndVideoApps()
 	local success, err = pcall(function()
 		local spacesPerScreen = hs.spaces.allSpaces() --[[@as hs.canvas]]
 		if not spacesPerScreen then 
-			print("⚠️Could not close fullscreens: No spaces found.")
+			print("⚠️ Could not close fullscreens: No spaces found.")
 			return
 		end
 		for _screen, spaceIdsOfScreen in pairs(spacesPerScreen) do
@@ -224,14 +224,14 @@ function U.quitFullscreenAndVideoApps()
 					end
 					local success, err = hs.spaces.removeSpace(id)
 					print(
-						success and "🧹 Closed fullscreen"
+						success and "🧹 Closed fullscreen spaces"
 							or "⚠️Could not close fullscreen: " .. err
 					)
 				end
 			end
 		end
 	end)
-	if not success then U.alertAndLog("⚠️ Exiting fullscreen spaces failed:" .. err, 5) end
+	if not success then print("⚠️ Exiting fullscreen spaces failed:" .. err, 5) end
 
 	-- prevent the automatic quitting of audio-apps from triggering a music start
 	require("apps.music").aw_music:stop()

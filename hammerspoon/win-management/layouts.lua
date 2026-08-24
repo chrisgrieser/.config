@@ -22,7 +22,8 @@ local function isWorkWeek()
 end
 
 ---@param status boolean
-local function connectProjector(status)
+---@param callback function
+local function connectProjector(status, callback)
 	if not (env.isAtHome or env.isAtMother) then return end
 	if env.hasProjector() == status then return end
 
@@ -40,15 +41,18 @@ local function connectProjector(status)
 		-- DOCS https://github.com/waydabber/BetterDisplay/wiki/Integration-features,-CLI#cli-access-by-installing-betterdisplaycli
 		-- alternative URI Scheme: BetterDisplay://set?name=P62_Pro&connected=on
 		local name = env.projectorName
-		local shellScript = ('betterdisplaycli set --name="%s" --connected="%s"'):format(name, setTo)
-		local _, code = hs.execute(U.exportPath .. shellScript)
+		local shellScript = ("betterdisplaycli set --name=%q --connected=%q"):format(name, setTo)
+		hs.execute(U.exportPath .. shellScript)
 
 		if code == 0 then
 			print("📽️ Set projector to [" .. setTo .. "]")
 		else
-			U.alertAndLog("📽️ Could not set projector to [" .. setTo .. "]", 4)
-			U.sound("Basso", 0.4)
+			print("📽️ Could not set projector to [" .. setTo .. "]", 4)
+			U.sound("Basso", 0.7)
 		end
+	end)
+	U.defer(delay + 2, function ()
+		call
 	end)
 end
 
@@ -73,7 +77,7 @@ local function workLayout(brightness)
 
 	-- close things
 	U.closeAllFinderWins()
-	U.defer(1, U.quitFullscreenAndVideoApps) -- defer needed to prevent error, likely to due display count change
+	U.defer(2, U.quitFullscreenAndVideoApps) -- defer needed to prevent error, likely to due display count change
 
 	-- open things
 	U.openApps { "Ivory", isWorkWeek() and "Slack" or nil, "Gmail", "AlfredExtraPane", "Stats" }
