@@ -35,7 +35,7 @@ M.idleApps = {}
 
 -- fill `idleApps` with all running apps and the current time
 for app, _ in pairs(config.thresholdMins) do
-	if U.appRunning(app) then M.idleApps[app] = now() end
+	if U.app(app) then M.idleApps[app] = now() end
 end
 
 ---TRIGGER----------------------------------------------------------------------
@@ -77,9 +77,8 @@ end):start()
 M.timer_autoQuitter = hs.timer
 	.doEvery(config.checkIntervalSecs, function()
 		for app, lastActivation in pairs(M.idleApps) do
-			-- can't do this with guard clause, since lua has no `continue`
 			local appHasThreshold = config.thresholdMins[app] ~= nil
-			local appIsRunning = U.appRunning(app)
+			local appIsRunning = U.app(app)
 
 			if appHasThreshold and appIsRunning then
 				local idleTimeSecs = now() - lastActivation

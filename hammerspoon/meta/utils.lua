@@ -129,18 +129,6 @@ end
 ---@nodiscard
 function U.app(appName) return hs.application.find(appName, true, true) end
 
----@param appNames string|string[] app or apps that should be running
----@return boolean true when all apps are running
----@nodiscard
-function U.appRunning(appNames)
-	if type(appNames) == "string" then appNames = { appNames } end
-	local allAreRunning = true
-	for _, name in pairs(appNames) do
-		if not U.app(name) then allAreRunning = false end
-	end
-	return allAreRunning
-end
-
 ---@param appNames string|string[]
 function U.openApps(appNames)
 	if type(appNames) == "string" then appNames = { appNames } end
@@ -164,9 +152,11 @@ end
 ---@param urlPart string|"all"
 ---@param except? string
 function U.closeBrowserTabsWith(urlPart, except)
+	local browser = "Brave Browser" -- config
+	if not U.app(browser) then return end
+
 	if not except then except = "__NEVER__" end
 	if urlPart == "all" then urlPart = "." end
-	local browser = "Brave Browser" -- config
 
 	local script = ([[
 		tell application %q
@@ -201,11 +191,10 @@ function U.closeAllFinderWins()
 	require("win-management.auto-tile").resetWinCount("Finder")
 end
 
-function U.quitFullscreenAndVideoApps()
-	-- close fullscreen spaces
+function U.quitFullscreenSpaces()
 	local success, err = pcall(function()
 		local spacesPerScreen = hs.spaces.allSpaces() --[[@as hs.canvas]]
-		if not spacesPerScreen then 
+		if not spacesPerScreen then
 			print("⚠️ Could not close fullscreens: No spaces found.")
 			return
 		end
@@ -232,7 +221,9 @@ function U.quitFullscreenAndVideoApps()
 		end
 	end)
 	if not success then print("⚠️ Exiting fullscreen spaces failed:" .. err, 5) end
+end
 
+function U.closeVideoApps()
 	-- prevent the automatic quitting of audio-apps from triggering a music start
 	require("apps.music").aw_music:stop()
 	U.quitApps(U.videoAndAudioApps)
@@ -244,6 +235,10 @@ function U.quitFullscreenAndVideoApps()
 	for file in hs.fs.dir(extraVideoAppDir) do
 		local app = file:match("([^/]+)%.app$")
 		if app then U.quitApps(app) end
+	end
+	local apps = hs.application.runningApplications()
+	for _, app in pairs(apps) do
+		app:kill()
 	end
 end
 

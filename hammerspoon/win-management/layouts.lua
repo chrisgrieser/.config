@@ -29,7 +29,7 @@ local function connectProjector(status, callback)
 
 	local setTo = status and "on" or "off"
 	local delay = 0
-	if not (U.appRunning("BetterDisplay")) then
+	if not (U.app("BetterDisplay")) then
 		local app = hs.application.open("BetterDisplay")
 		if not app then
 			U.alertAndLog("Could not find BetterDisplay.")
@@ -43,16 +43,16 @@ local function connectProjector(status, callback)
 		local name = env.projectorName
 		local shellScript = ("betterdisplaycli set --name=%q --connected=%q"):format(name, setTo)
 		hs.execute(U.exportPath .. shellScript)
-
-		if code == 0 then
-			print("📽️ Set projector to [" .. setTo .. "]")
-		else
-			print("📽️ Could not set projector to [" .. setTo .. "]", 4)
-			U.sound("Basso", 0.7)
-		end
 	end)
-	U.defer(delay + 2, function ()
-		call
+	U.defer(delay + 2, function()
+		local success = env.hasProjector() == status -- exit code of `betterdisplaycli` is not reliable
+		if success then
+			callback()
+			print("📽️ Projector set to [" .. setTo .. "]")
+		else
+			U.sound("Basso", 0.7)
+			print("⚠️📽️ Could not set projector to [" .. setTo .. "].")
+		end
 	end)
 end
 
@@ -64,22 +64,25 @@ local function workLayout(brightness)
 	M.isLayouting = true
 	U.defer(2.5, function() M.isLayouting = false end)
 
-	-- screen
-	connectProjector(false)
-	U.defer(0.5, display.autoSwitch) -- defer so ambient sensor is ready
-	U.defer(2, holeCover.update) -- defer removal of external display is detected
+	-- dock
 	dockSwitcher("work")
+
+	-- screen
+	connectProjector(false, function() -- display changes as callback to await display change
+		holeCover.update()
+		U.defer(1, U.quitFullscreenSpaces) -- needs delay for some reason
+	end)
+	display.autoSwitch()
 	if brightness == "auto" then
-		U.defer(1, display.autoSetBrightness) -- defer to adjust to mode switch
-	elseif brightness == "auto" then
-		display.darkenImacDisplay()
+		U.defer(1, function() display.autoSetBrightness() end) -- await auto-switch
 	end
+	if brightness == "dark" then display.darkenImacDisplay() end
 
-	-- close things
+	-- close & open things
 	U.closeAllFinderWins()
-	U.defer(2, U.quitFullscreenAndVideoApps) -- defer needed to prevent error, likely to due display count change
+	U.closeBrowserTabsWith("all")
+	U.closeVideoApps()
 
-	-- open things
 	U.openApps { "Ivory", isWorkWeek() and "Slack" or nil, "Gmail", "AlfredExtraPane", "Stats" }
 	U.defer(2, function()
 		local gmail, ivory, slack = U.app("Gmail"), U.app("Ivory"), U.app("Slack")
@@ -100,13 +103,16 @@ local function movieLayout()
 	M.isLayouting = true
 	U.defer(2.5, function() M.isLayouting = false end)
 
-	-- screen
-	connectProjector(true)
-	display.setDarkMode("dark")
-	display.darkenImacDisplay()
-	U.defer({ 1, 3 }, holeCover.update) -- defer so external display is detected
+	-- basic
 	dockSwitcher("movie")
 	music.music_trigger("pause")
+	-- turn off showing hidden files
+	hs.execute("defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder")
+
+	-- screen
+	connectProjector(true, holeCover.update)
+	display.setDarkMode("dark")
+	display.darkenImacDisplay()
 
 	-- move mouse to center of projector
 	local projector = hs.screen.find(env.projectorName)
@@ -115,9 +121,6 @@ local function movieLayout()
 		local centerPos = { x = frame.w / 2, y = frame.h / 2 }
 		hs.mouse.setRelativePosition(centerPos, projector)
 	end
-
-	-- turn off showing hidden files
-	hs.execute("defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder")
 
 	do -- for when resetting movie layout
 		U.closeBrowserTabsWith("all", "youtube")
@@ -157,7 +160,7 @@ hs.hotkey.bind({}, "end", movieLayout)
 
 -- 2. URI (for Touchpad via BetterTouchTool)
 hs.urlevent.bind("movie-layout", function()
-	U.sound("Hero", 0.7) -- indicate that Touchpad was triggered
+	U.sound("Hero", 0.9) -- indicate that Touchpad was triggered
 	movieLayout()
 end)
 
