@@ -47,7 +47,10 @@ ignore-words = [
 	"Obsidian",
 	"Alfred",
 	# German
+	"der",
+	"des",
 	"von",
+	"vom",
 	"und",
 ]
 
