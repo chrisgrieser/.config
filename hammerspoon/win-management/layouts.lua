@@ -68,10 +68,10 @@ local function workLayout(brightness)
 	dockSwitcher("work")
 
 	-- screen
-	-- connectProjector(false, function() -- display changes as callback to await display change
-	-- 	holeCover.update()
-	-- 	U.defer(1, U.quitFullscreenSpaces) -- needs delay for some reason
-	-- end)
+	connectProjector(false, function() -- display changes as callback to await display change
+		holeCover.update()
+		U.defer(1, U.quitFullscreenSpaces) -- needs delay for some reason
+	end)
 	display.autoSwitch()
 	if brightness == "auto" then
 		U.defer(1, function() display.autoSetBrightness() end) -- await auto-switch
@@ -80,7 +80,7 @@ local function workLayout(brightness)
 
 	-- close & open things
 	U.closeAllFinderWins()
-	U.closeBrowserTabsWith("all")
+	-- U.closeBrowserTabsWith("all")
 	U.closeVideoApps()
 
 	U.openApps { "Ivory", isWorkWeek() and "Slack" or nil, "Gmail", "AlfredExtraPane", "Stats" }
