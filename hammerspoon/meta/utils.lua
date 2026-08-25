@@ -191,7 +191,8 @@ function U.closeAllFinderWins()
 	require("win-management.auto-tile").resetWinCount("Finder")
 end
 
-function U.quitFullscreenSpaces()
+function U.quitFullscreenAndVideoApps()
+	-- close fullscreen spaces
 	local success, err = pcall(function()
 		local spacesPerScreen = hs.spaces.allSpaces() --[[@as hs.canvas]]
 		if not spacesPerScreen then
@@ -235,10 +236,6 @@ function U.closeVideoApps()
 	for file in hs.fs.dir(extraVideoAppDir) do
 		local app = file:match("([^/]+)%.app$")
 		if app then U.quitApps(app) end
-	end
-	local apps = hs.application.runningApplications()
-	for _, app in pairs(apps) do
-		app:kill()
 	end
 end
 

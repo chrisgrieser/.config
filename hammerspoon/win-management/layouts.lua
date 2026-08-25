@@ -81,7 +81,7 @@ local function workLayout(brightness)
 	-- close & open things
 	U.closeAllFinderWins()
 	U.closeBrowserTabsWith("all")
-	-- U.closeVideoApps()
+	U.closeVideoApps()
 
 	U.openApps { "Ivory", isWorkWeek() and "Slack" or nil, "Gmail", "AlfredExtraPane", "Stats" }
 	U.defer(2, function()
