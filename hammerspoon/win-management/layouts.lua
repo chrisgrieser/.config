@@ -68,18 +68,18 @@ local function workLayout(brightness)
 	dockSwitcher("work")
 
 	-- screen
-	-- connectProjector(false, function() -- display changes as callback to await display change
-	-- 	holeCover.update()
-	-- 	U.defer(1, U.quitFullscreenSpaces) -- needs delay for some reason
-	-- end)
-	-- display.autoSwitch()
-	-- if brightness == "auto" then
-	-- 	U.defer(1, function() display.autoSetBrightness() end) -- await auto-switch
-	-- end
-	-- if brightness == "dark" then display.darkenImacDisplay() end
+	connectProjector(false, function() -- display changes as callback to await display change
+		holeCover.update()
+		U.defer(1, U.quitFullscreenSpaces) -- needs delay for some reason
+	end)
+	display.autoSwitch()
+	if brightness == "auto" then
+		U.defer(1, function() display.autoSetBrightness() end) -- await auto-switch
+	end
+	if brightness == "dark" then display.darkenImacDisplay() end
 
 	-- close & open things
-	-- U.closeAllFinderWins()
+	U.closeAllFinderWins()
 	-- U.closeBrowserTabsWith("all")
 	-- U.closeVideoApps()
 
