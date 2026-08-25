@@ -165,7 +165,7 @@ hs.urlevent.bind("movie-layout", function()
 end)
 
 -- 3. Systemstart
-if U.isSystemStart() then workLayout("auto") end
+-- if U.isSystemStart() then workLayout("auto") end
 
 ---SLEEP TIMER------------------------------------------------------------------
 -- When projector is connected, check every x min if device has been idle for y
