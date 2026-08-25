@@ -80,7 +80,7 @@ local function workLayout(brightness)
 
 	-- close & open things
 	U.closeAllFinderWins()
-	-- U.closeBrowserTabsWith("all")
+	U.closeBrowserTabsWith("all")
 	-- U.closeVideoApps()
 
 	U.openApps { "Ivory", isWorkWeek() and "Slack" or nil, "Gmail", "AlfredExtraPane", "Stats" }
@@ -165,7 +165,7 @@ hs.urlevent.bind("movie-layout", function()
 end)
 
 -- 3. Systemstart
--- if U.isSystemStart() then workLayout("auto") end
+if U.isSystemStart() then workLayout("auto") end
 
 ---SLEEP TIMER------------------------------------------------------------------
 -- When projector is connected, check every x min if device has been idle for y
