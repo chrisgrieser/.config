@@ -1,3 +1,5 @@
+" CHECK OUT https://github.com/saberzero1/motions
+"───────────────────────────────────────────────────────────────────────────────
 " REQUIRED `Support JS commands` enabled in the vimrc plugin settings
 "───────────────────────────────────────────────────────────────────────────────
 " LEADER
