@@ -46,6 +46,7 @@ local spellfixes = {
 	mcuh = "much",
 	mroe = "more",
 	msot = "most",
+	nciht = "nicht",
 	nromal = "normal",
 	nto = "not",
 	ntoe = "note",
