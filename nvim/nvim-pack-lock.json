@@ -1,7 +1,7 @@
 {
   "plugins": {
     "async.nvim": {
-      "rev": "99aed904ae1253c27fac60b862b6d73ef1380e54",
+      "rev": "10a16178cdace61d3416a5652121ba70a2e4103c",
       "src": "https://github.com/lewis6991/async.nvim"
     },
     "blink-cmp-git": {
@@ -66,7 +66,7 @@
       "src": "https://github.com/chrisgrieser/nvim-lsp-endhints"
     },
     "nvim-lspconfig": {
-      "rev": "bff1bd61cb1455040533201ca1edf1e84efa578f",
+      "rev": "3928e638fdedf195b23ae5a18f024afa487982bc",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-origami": {
@@ -98,7 +98,7 @@
       "src": "https://github.com/chrisgrieser/nvim-tinygit"
     },
     "nvim-treesitter": {
-      "rev": "074aa4422bf029908338e855d0c0f71470a971bb",
+      "rev": "8b98b4470eb326f1c7b50dae79f8c963568e5720",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter"
     },
     "nvim-treesitter-textobjects": {
