@@ -191,7 +191,7 @@ function U.closeAllFinderWins()
 	require("win-management.auto-tile").resetWinCount("Finder")
 end
 
-function U.quitFullscreenAndVideoApps()
+function U.quitFullscreenSpaces()
 	-- close fullscreen spaces
 	local success, err = pcall(function()
 		local spacesPerScreen = hs.spaces.allSpaces() --[[@as hs.canvas]]
