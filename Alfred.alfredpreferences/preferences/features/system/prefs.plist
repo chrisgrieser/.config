@@ -7,10 +7,13 @@
 		<string>*local*</string>
 		<string>*Samsung SSD*</string>
 		<string>BOOTCAMP</string>
-		<string>GoogleDrive</string>
 		<string>MobileBackups</string>
 		<string>Recovery</string>
 	</array>
+	<key>ejectKeywordEnabled</key>
+	<true/>
+	<key>ejectType</key>
+	<integer>0</integer>
 	<key>emptytrashConfirm</key>
 	<true/>
 	<key>emptytrashKeyword</key>
