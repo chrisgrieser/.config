@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>keyword_01</key>
+	<string>js</string>
+	<key>keyword_02</key>
+	<string>css</string>
+	<key>keyword_03</key>
+	<string>electron</string>
+	<key>keyword_04</key>
+	<string>cani</string>
+	<key>keyword_05</key>
+	<string>jsdoc</string>
+	<key>keyword_08</key>
+	<string>hs</string>
+	<key>keyword_09</key>
+	<string>git</string>
+	<key>keyword_10</key>
+	<string>py</string>
+	<key>keyword_11</key>
+	<string>lua</string>
+	<key>keyword_12</key>
+	<string>jq</string>
+	<key>use_source_page_if_available</key>
+	<true/>
+</dict>
+</plist>

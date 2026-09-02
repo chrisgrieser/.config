@@ -1,0 +1,373 @@
+{
+	"items": [
+		{
+			"title": "⎋ / Escape",
+			"match": "escape 53",
+			"arg": "53",
+			"subtitle": "53",
+			"mods": {
+				"alt": { "arg": "key code" }
+			}
+		},
+		{
+			"title": "⌘ / Command",
+			"match": "command 55",
+			"arg": "55",
+			"subtitle": "55",
+			"mods": {
+				"alt": { "arg": "key code" }
+			}
+		},
+		{
+			"title": "⌥ / Option / Alt",
+			"match": "option alt 58",
+			"arg": "58",
+			"subtitle": "58 (left) / 61 (right)",
+			"mods": {
+				"alt": { "arg": "key code" }
+			}
+		},
+		{
+			"title": "⌃ / Control",
+			"match": "control 59 62",
+			"arg": "59",
+			"subtitle": "59 (left) / 62 (right)",
+			"mods": {
+				"alt": { "arg": "key code 59 -- control" }
+			}
+		},
+		{
+			"title": "⇧ / Shift",
+			"match": "shift 56 60",
+			"arg": "56",
+			"subtitle": "56 (left) / 60 (right)",
+			"mods": {
+				"alt": { "arg": "key code 56 -- shift" }
+			}
+		},
+		{
+			"title": "⇪ / Caps Lock",
+			"match": "capslock 57",
+			"arg": "57",
+			"subtitle": "57",
+			"mods": {
+				"alt": { "arg": "key code 57 -- lock" }
+			}
+		},
+		{
+			"title": "⏎ / Return",
+			"match": "return 36",
+			"arg": "36",
+			"subtitle": "36",
+			"mods": {
+				"alt": { "arg": "key code 36 -- return" }
+			}
+		},
+		{
+			"title": "⌤ / Enter",
+			"match": "enter 76",
+			"arg": "76",
+			"subtitle": "76",
+			"mods": {
+				"alt": { "arg": "key code 76 -- enter" }
+			}
+		},
+		{
+			"title": "⇥ / Tab",
+			"match": "tab 48",
+			"arg": "48",
+			"subtitle": "48",
+			"mods": {
+				"alt": { "arg": "key code 48 -- tab" }
+			}
+		},
+		{
+			"title": "␣ / Space",
+			"match": "space 49",
+			"arg": "49",
+			"subtitle": "49",
+			"mods": {
+				"alt": { "arg": "key code 49 -- space" }
+			}
+		},
+		{
+			"title": "⌫ / Delete / Backspace",
+			"match": "delete backspace 51",
+			"arg": "51",
+			"subtitle": "51",
+			"mods": {
+				"alt": { "arg": "key code 51 -- backspace" }
+			}
+		},
+		{
+			"title": "⌦ / Forward Delete",
+			"match": "forward delete 117",
+			"arg": "117",
+			"subtitle": "117",
+			"mods": {
+				"alt": { "arg": "key code 117 -- delete" }
+			}
+		},
+		{
+			"title": "← / Left Arrow",
+			"match": "left arrow 123",
+			"arg": "123",
+			"subtitle": "123",
+			"mods": {
+				"alt": { "arg": "key code 123 -- arrow" }
+			}
+		},
+		{
+			"title": "→ / Right Arrow",
+			"match": "right arrow 124",
+			"arg": "124",
+			"subtitle": "124",
+			"mods": {
+				"alt": { "arg": "key code 124 -- arrow" }
+			}
+		},
+		{
+			"title": "↓ / Down Arrow",
+			"match": "down arrow 125",
+			"arg": "125",
+			"subtitle": "125",
+			"mods": {
+				"alt": { "arg": "key code 125 -- arrow" }
+			}
+		},
+		{
+			"title": "↑ / Up Arrow",
+			"match": "up arrow 126",
+			"arg": "126",
+			"subtitle": "126",
+			"mods": {
+				"alt": { "arg": "key code 126 -- arrow" }
+			}
+		},
+		{
+			"title": "⇞ / Page Up",
+			"match": "pageup up 116",
+			"arg": "116",
+			"subtitle": "116",
+			"mods": {
+				"alt": { "arg": "key code 116 -- up" }
+			}
+		},
+		{
+			"title": "⇟ / Page Down",
+			"match": "pageup down 121",
+			"arg": "121",
+			"subtitle": "121",
+			"mods": {
+				"alt": { "arg": "key code 121 -- down" }
+			}
+		},
+		{
+			"title": "⇱ / Home",
+			"match": "home 115",
+			"arg": "115",
+			"subtitle": "115",
+			"mods": {
+				"alt": { "arg": "key code 115 -- home" }
+			}
+		},
+		{
+			"title": "⇲ / End",
+			"match": "end 119",
+			"arg": "119",
+			"subtitle": "119",
+			"mods": {
+				"alt": { "arg": "key code 119 -- end" }
+			}
+		},
+		{
+			"title": "fn",
+			"match": "fn 63",
+			"arg": "63",
+			"subtitle": "63",
+			"mods": {
+				"alt": { "arg": "key code 63 -- Fn" }
+			}
+		},
+		{
+			"title": "F1",
+			"match": "f1 122",
+			"arg": "122",
+			"subtitle": "122",
+			"mods": {
+				"alt": { "arg": "key code 122 +- F1" }
+			}
+		},
+		{
+			"title": "F2",
+			"match": "f2 120",
+			"arg": "120",
+			"subtitle": "120",
+			"mods": {
+				"alt": { "arg": "key code 120 +- F2" }
+			}
+		},
+		{
+			"title": "F3",
+			"match": "f3 99",
+			"arg": "99",
+			"subtitle": "99",
+			"mods": {
+				"alt": { "arg": "key code 99 +- F3" }
+			}
+		},
+		{
+			"title": "F4",
+			"match": "f4 118",
+			"arg": "118",
+			"subtitle": "118",
+			"mods": {
+				"alt": { "arg": "key code 118 +- F4" }
+			}
+		},
+		{
+			"title": "F5",
+			"match": "f5 96",
+			"arg": "96",
+			"subtitle": "96",
+			"mods": {
+				"alt": { "arg": "key code 96 +- F5" }
+			}
+		},
+		{
+			"title": "F6",
+			"match": "f6 97",
+			"arg": "97",
+			"subtitle": "97",
+			"mods": {
+				"alt": { "arg": "key code 97 +- F6" }
+			}
+		},
+		{
+			"title": "F7",
+			"match": "f7 98",
+			"arg": "98",
+			"subtitle": "98",
+			"mods": {
+				"alt": { "arg": "key code 98 +- F7" }
+			}
+		},
+		{
+			"title": "F8",
+			"match": "f8 100",
+			"arg": "100",
+			"subtitle": "100",
+			"mods": {
+				"alt": { "arg": "key code 100 +- F8" }
+			}
+		},
+		{
+			"title": "F9",
+			"match": "f9 101",
+			"arg": "101",
+			"subtitle": "101",
+			"mods": {
+				"alt": { "arg": "key code 101 +- F9" }
+			}
+		},
+		{
+			"title": "F10",
+			"match": "f10 109",
+			"arg": "109",
+			"subtitle": "109",
+			"mods": {
+				"alt": { "arg": "key code 109 -- F10" }
+			}
+		},
+		{
+			"title": "F11",
+			"match": "f11 103",
+			"arg": "103",
+			"subtitle": "103",
+			"mods": {
+				"alt": { "arg": "key code 103 -- F11" }
+			}
+		},
+		{
+			"title": "F12",
+			"match": "f12 111",
+			"arg": "111",
+			"subtitle": "111",
+			"mods": {
+				"alt": { "arg": "key code 111 -- F12" }
+			}
+		},
+		{
+			"title": "F13",
+			"match": "f13 105",
+			"arg": "105",
+			"subtitle": "105",
+			"mods": {
+				"alt": { "arg": "key code 105 -- F13" }
+			}
+		},
+		{
+			"title": "F14",
+			"match": "f14 107",
+			"arg": "107",
+			"subtitle": "107",
+			"mods": {
+				"alt": { "arg": "key code 107 -- F14" }
+			}
+		},
+		{
+			"title": "F15",
+			"match": "f15 113",
+			"arg": "113",
+			"subtitle": "113",
+			"mods": {
+				"alt": { "arg": "key code 113 -- F15" }
+			}
+		},
+		{
+			"title": "F16",
+			"match": "f16 106",
+			"arg": "106",
+			"subtitle": "106",
+			"mods": {
+				"alt": { "arg": "key code 106 -- F16" }
+			}
+		},
+		{
+			"title": "F17",
+			"match": "f17 64",
+			"arg": "64",
+			"subtitle": "64",
+			"mods": {
+				"alt": { "arg": "key code 64 -- F17" }
+			}
+		},
+		{
+			"title": "F18",
+			"match": "f18 79",
+			"arg": "79",
+			"subtitle": "79",
+			"mods": {
+				"alt": { "arg": "key code 79 -- F18" }
+			}
+		},
+		{
+			"title": "F19",
+			"match": "f19 80",
+			"arg": "80",
+			"subtitle": "80",
+			"mods": {
+				"alt": { "arg": "key code 80 -- F19" }
+			}
+		},
+		{
+			"title": "F20",
+			"match": "f20 90",
+			"arg": "90",
+			"subtitle": "90",
+			"mods": {
+				"alt": { "arg": "key code 90 -- F20" }
+			}
+		}
+	]
+}
