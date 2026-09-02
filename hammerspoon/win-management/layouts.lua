@@ -179,13 +179,14 @@ local config = {
 
 local doEvery = hs.timer.doEvery
 M.sleepTimer = doEvery(config.checkIntervalMins * 60, function()
+	if not env.hasProjector() then return end
 	local isIdle = (hs.host.idleTime() / 60) > config.idleMins
-	if not env.hasProjector() or not isIdle then return end
+	if isIdle then return end
 
 	-- inform user about upcoming sleep
 	local alertMsg = ("💤 Will sleep in %ds if idle."):format(config.timeToReactSecs)
 	local alertId = U.alertAndLog(alertMsg, config.timeToReactSecs)
-	U.sound("Submarine", 0.3)
+	U.sound("Submarine", 0.6)
 
 	-- remove alert earlier if user did something
 	local halfTime = math.ceil(config.timeToReactSecs / 2)
