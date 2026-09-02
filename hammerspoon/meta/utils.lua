@@ -112,6 +112,41 @@ function U.notify(msg)
 	print("💬 " .. msg)
 end
 
+---@param title string
+---@param msg? string -- if empty, will use title
+function U.notifyOnPhone(title, msg)
+	if not msg then
+		msg = title
+		title = "Hammerspoon"
+	end
+
+	-- get ntfy.sh id
+	local ntfy_id
+	local ntfy_id_file = os.getenv("HOME")
+		.. "/Library/Mobile Documents/com~apple~CloudDocs/Tech/api-keys/ntfy-sh-id.txt"
+	local file = io.open(ntfy_id_file, "r")
+	if not file then
+		print("❌ [phone-ntfy] Could not find file for ntfy.sh id.")
+		return
+	end
+	ntfy_id = file:read("*l") -- read first line
+	file:close()
+
+	-- send
+	hs.http.asyncPost(
+		"https://ntfy.sh/" .. ntfy_id,
+		msg,
+		{ Title = title },
+		function(httpCode, errmsg)
+			if httpCode ~= 200 then
+				print("❌ [phone-ntfy]" .. errmsg)
+				return
+			end
+			print(("📱 [%s]: %s"):format(title, msg))
+		end
+	)
+end
+
 ---@param durationSecs? number
 ---@param msg string
 ---@return string alertUuid

@@ -200,11 +200,10 @@ M.sleepTimer = doEvery(config.checkIntervalMins * 60, function()
 		if userDidSth then return end
 
 		-- close if user idle
-		U.notify("💤 SleepTimer triggered")
+		U.notify("💤 Sleep timer triggered")
+		U.notifyOnPhone("💤 Sleep timer", "triggered at " .. os.date("%H:%M"))
 		U.closeBrowserTabsWith("all")
 		workLayout("dark") -- workLayout for login next day & darken display for sleeping
-		hs.task.new("/usr/bin/sleep", nil, function()
-		notify_on_phone "Sleep timer" "triggered at 11:00" "zzz"
 	end)
 end):start()
 

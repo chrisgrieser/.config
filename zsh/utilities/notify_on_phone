@@ -8,9 +8,8 @@
 uuid=$(cat "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Tech/api-keys/ntfy-sh-id.txt")
 title="$1"
 message="$2"
-emoji="$3"
 
-if [[ -z "$message" ]] ; then
+if [[ -z "$message" ]]; then
 	message="$title"
 	title="Notification from Desktop"
 fi
@@ -21,6 +20,5 @@ fi
 curl \
 	--header "Title: $title" \
 	--data "$message" \
-	--header "Tags: $emoji" \
 	"ntfy.sh/$uuid" \
 	&>/dev/null
