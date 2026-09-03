@@ -4,8 +4,8 @@
 
 #-------------------------------------------------------------------------------
 
-# stored outside dotfiles for security
-uuid=$(cat "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Tech/api-keys/ntfy-sh-id.txt")
+# stored externally, since dotfiles are public
+ntfy_id=$(cat "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Tech/api-keys/ntfy-sh-id.txt")
 title="$1"
 message="$2"
 
@@ -20,5 +20,5 @@ fi
 curl \
 	--header "Title: $title" \
 	--data "$message" \
-	"ntfy.sh/$uuid" \
+	"ntfy.sh/$ntfy_id" \
 	&>/dev/null

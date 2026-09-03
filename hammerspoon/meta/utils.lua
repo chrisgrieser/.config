@@ -120,7 +120,7 @@ function U.notifyOnPhone(title, msg)
 		title = "Hammerspoon"
 	end
 
-	-- get ntfy.sh id
+	-- get ntfy.sh id (stored externally, since dotfiles are public)
 	local ntfy_id
 	local ntfy_id_file = os.getenv("HOME")
 		.. "/Library/Mobile Documents/com~apple~CloudDocs/Tech/api-keys/ntfy-sh-id.txt"
@@ -138,11 +138,8 @@ function U.notifyOnPhone(title, msg)
 		msg,
 		{ Title = title },
 		function(httpCode, errmsg)
-			if httpCode ~= 200 then
-				print("❌ [phone-ntfy]" .. errmsg)
-				return
-			end
-			print(("📱 [%s]: %s"):format(title, msg))
+			local logmsg = httpCode == 200 and title .. ": " .. msg or "❌ phone-ntfy: " .. errmsg
+			print("📱 " .. logmsg)
 		end
 	)
 end
