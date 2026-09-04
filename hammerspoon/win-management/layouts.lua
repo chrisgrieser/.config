@@ -201,10 +201,17 @@ M.sleepTimer = doEvery(config.checkIntervalMins * 60, function()
 		if userDidSth then return end
 
 		-- close if user idle
-		U.notify("💤 Sleep timer triggered")
-		U.notifyOnPhone("💤 Sleep timer", "triggered at " .. os.date("%H:%M"))
 		U.closeBrowserTabsWith("all")
-		workLayout("dark") -- workLayout for login next day & darken display for sleeping
+		workLayout("auto") -- workLayout for login next day & darken display for sleeping
+
+		U.notify("💤 Sleep timer triggered")
+
+		-- since these notifications are only for sleep-tracking, phone
+		-- notification only when going to sleep, not when leaving the
+		-- house during the day
+		if U.betweenTime(21, 6) then
+			U.notifyOnPhone("💤 Sleep timer", "triggered at " .. os.date("%H:%M"))
+		end
 	end)
 end):start()
 
