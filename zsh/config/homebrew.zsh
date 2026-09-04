@@ -1,8 +1,8 @@
 # DOCS https://docs.brew.sh/Manpage#environment
-#───────────────────────────────────────────────────────────────────────────────
+
+#-------------------------------------------------------------------------------
 export HOMEBREW_BUNDLE_FILE="$HOME/.config/Brewfile"
 export HOMEBREW_EDITOR="open"           # open things in default macOS text editor
-export HOMEBREW_DISPLAY_INSTALL_TIMES=1 # also serves as summary what was installed
 export HOMEBREW_NO_ANALYTICS=1
 export HOMEBREW_NO_ENV_HINTS=1
 
