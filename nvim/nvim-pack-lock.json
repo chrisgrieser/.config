@@ -49,10 +49,6 @@
       "rev": "4dacd3f0185a2227bdf3b6c0975a8f0bf87cac9a",
       "src": "https://github.com/EdenEast/nightfox.nvim"
     },
-    "nvim-chainsaw": {
-      "rev": "78a0e68c59f4e7760f33dacde0ff21b2498c015e",
-      "src": "https://github.com/chrisgrieser/nvim-chainsaw"
-    },
     "nvim-genghis": {
       "rev": "401522898169644a5e9e3a20d06382cd56318a3b",
       "src": "https://github.com/chrisgrieser/nvim-genghis"
