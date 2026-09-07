@@ -92,6 +92,17 @@
 			<key>url</key>
 			<string>https://annas-archive.org/search?q={query}</string>
 		</dict>
+		<key>2F62388C-51A4-4298-AE38-FE602971E9A7</key>
+		<dict>
+			<key>enabled</key>
+			<true/>
+			<key>keyword</key>
+			<string>fw</string>
+			<key>text</key>
+			<string>FantasyWelt: "{query}"</string>
+			<key>url</key>
+			<string>https://www.fantasywelt.de/#f820/embedded/m=and&amp;q={query}</string>
+		</dict>
 		<key>2F9523F0-81B2-425B-A6DE-2E3CA2582212</key>
 		<dict>
 			<key>enabled</key>
