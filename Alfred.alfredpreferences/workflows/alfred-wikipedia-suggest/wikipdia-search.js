@@ -35,12 +35,21 @@ function run(argv) {
 	// DOCS Wikipedia Open Search API: https://www.mediawiki.org/wiki/API:Opensearch#JavaScript
 	// TEST API Sandbox: https://en.wikipedia.org/wiki/Special:ApiSandbox#action=opensearch&format=json&search=Hampi&namespace=0&limit=10&formatversion=2
 
-	/** @type AlfredItem[] */
-	const wikiEntries = [];
+	/** @type AlfredItem[] */ const wikiEntries = [];
+	/** @type AlfredItem[] */ const errorEntries = [];
 
 	for (const lang of langCodes) {
 		const apiCall = `https://${lang}.wikipedia.org/w/api.php?action=opensearch&format=json&search=${encodedQuery}&namespace=0&limit=${maxResults}&profile=fuzzy`;
-		const wikiItems = JSON.parse(httpRequest(apiCall));
+		const response = httpRequest(apiCall);
+
+		let wikiItems = [];
+		try {
+			wikiItems = JSON.parse(response);
+		} catch (_error) {
+			console.log("error parsing response:", response);
+			errorEntries.push({ title: "Error", subtitle: response });
+			continue;
+		}
 
 		for (let i = 0; i < wikiItems[1].length; i++) {
 			const suggestion = wikiItems[1][i];
@@ -65,5 +74,5 @@ function run(argv) {
 	// of the 2nd being displayed at the bottom
 	if (langCodes.length > 1) wikiEntries.sort((a, b) => a.title.length - b.title.length);
 
-	return JSON.stringify({ items: wikiEntries });
+	return JSON.stringify({ items: [...errorEntries, ...wikiEntries] });
 }
