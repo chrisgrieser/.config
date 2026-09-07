@@ -144,12 +144,15 @@ function U.notifyOnPhone(title, msg)
 	)
 end
 
----@param durationSecs? number
+---Alerts shown on all screens, and with logging to console
 ---@param msg string
----@return string alertUuid
+---@param durationSecs? number
 function U.alertAndLog(msg, durationSecs)
 	print("🔔 " .. msg)
-	return hs.alert(msg, durationSecs)
+	local allScreens = hs.screen.allScreens() ---@cast allScreens hs.screen
+	for _, screen in pairs(allScreens) do
+		hs.alert.show(msg, durationSecs, screen)
+	end
 end
 
 --------------------------------------------------------------------------------

@@ -185,14 +185,14 @@ M.sleepTimer = doEvery(config.checkIntervalMins * 60, function()
 
 	-- inform user about upcoming sleep
 	local alertMsg = ("💤 Will sleep in %ds if idle."):format(config.timeToReactSecs)
-	local alertId = U.alertAndLog(alertMsg, config.timeToReactSecs)
+	U.alertAndLog(alertMsg, config.timeToReactSecs)
 	U.sound("Submarine", 0.6)
 
 	-- remove alert earlier if user did something
 	local halfTime = math.ceil(config.timeToReactSecs / 2)
 	U.defer(halfTime, function()
 		local userDidSth = hs.host.idleTime() < (config.timeToReactSecs / 2)
-		if userDidSth then hs.alert.closeSpecific(alertId) end
+		if userDidSth then hs.alert.closeAll() end
 	end)
 
 	-- abort if user did something
