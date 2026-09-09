@@ -7,4 +7,5 @@ matches:
   - { trigger: "yyy", replace: "+:+1:\n" } # 👍
   # emojis
   - { trigger: "????", replace: "❓" }
+  - { trigger: "???", replace: "❓" }
   - { trigger: "ttt", replace: "😅" }
