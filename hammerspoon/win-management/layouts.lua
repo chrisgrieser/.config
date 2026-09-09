@@ -182,6 +182,7 @@ M.sleepTimer = doEvery(config.checkIntervalMins * 60, function()
 	if not env.hasProjector() then return end
 	local userIsActive = (hs.host.idleTime() / 60) < config.idleMins
 	if userIsActive then return end
+	if not U.screenIsUnlocked() then return end
 
 	-- inform user about upcoming sleep
 	local alertMsg = ("💤 Will sleep in %ds if idle."):format(config.timeToReactSecs)
