@@ -7,6 +7,11 @@ anchors:
     file_paths:
       - "/Users/.*/Library/Application Support/Steam/steamapps/common/"
       - "/Applications/StarCraft II/"
+  - &audio-or-video-app
+    type: frontmost_application_if
+    bundle_identifiers:
+      - ^com.brave.Browser # no ending `$` in the regex to ensure PWAs are matched
+      - com.colliderli.iina
 #───────────────────────────────────────────────────────────────────────────────
 rules:
   - description: Media keys
@@ -51,3 +56,15 @@ rules:
               "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Tech/alexa/virtual-trigger" \
                 "music-next"
         conditions: [*not-game]
+
+      - type: basic
+        from: { key_code: f11 }
+        to:
+          - key_code: arrow_down
+        conditions: [*audio-or-video-app]
+
+      - type: basic
+        from: { key_code: f12 }
+        to:
+          - key_code: arrow_up
+        conditions: [*audio-or-video-app]

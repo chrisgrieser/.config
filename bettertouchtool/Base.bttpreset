@@ -45,7 +45,7 @@
     "BTTSavedMousePosition" : "{-827.37890625, 543.6171875}",
     "BSTDontShowSnapAreasWhileModMoving" : 0,
     "BTTDrawingAreaHeight" : 626,
-    "BTTNumberOfStarts" : 1682,
+    "BTTNumberOfStarts" : 1686,
     "BTTTouchBarHapticFeedback" : 0,
     "BTTStageManagerLeftSnappingAreaIncreasePercentage" : 0.125,
     "showKeyboardTab" : true,
@@ -160,7 +160,7 @@
     "BTTDrawingsRestoreMousePosition" : true,
     "singleFingerTapRight" : 0.060430882295276392,
     "singleFingerTapLeft" : 0.44758972434497818,
-    "BTTDidRegisterForUpdateStats" : "6.748",
+    "BTTDidRegisterForUpdateStats" : "6.771",
     "BTTHandleThumbsRestingOnTopEdgeAndCorners" : true,
     "BTTLastScreenshotOptions" : "-m;;-c;;-t;;png;;-u;;BTTAdditionallyCopyToClipboard;;/Users/chrisgrieser/Pictures/0_Screenshot_{datetime}.png;;/Users/chrisgrieser/Pictures/1_Screenshot_{datetime}.png;;",
     "BSTBrokenAPICheckEnabled" : false,
@@ -189,7 +189,7 @@
     },
     "BSTSnapAreaDefaultPictoDistanceFromBottom" : 0.10000000149011612
   },
-  "BTTPresetUUID" : "600C49AC-C8C4-4525-A11C-957AE0D5B0CC",
+  "BTTPresetUUID" : "14801958-0FB3-49DA-939F-B1CF1BF5D707",
   "BTTPresetContent" : [
     {
       "BTTAppBundleIdentifier" : "BT.G",
@@ -225,7 +225,7 @@
           }
         },
         {
-          "BTTLastUpdatedAt" : 1785867717.5407228,
+          "BTTLastUpdatedAt" : 1789043988.941447,
           "BTTTriggerType" : 102,
           "BTTTriggerTypeDescriptionReadOnly" : "3 Finger Swipe Up",
           "BTTTriggerTypeDescription" : "🔊 Volume up",
@@ -234,13 +234,15 @@
           "BTTOrder" : 2,
           "BTTActionsToExecute" : [
             {
-              "BTTLastUpdatedAt" : 1785190680.7033329,
+              "BTTLastUpdatedAt" : 1789043985.172909,
               "BTTTriggerParentUUID" : "D89439C2-DBAB-4105-BA5E-9ED0EB434D8D",
               "BTTIsPureAction" : true,
-              "BTTUUID" : "3C9D4FE6-6EAB-4661-A9EC-1CCC7918E1A0",
-              "BTTPredefinedActionType" : 24,
-              "BTTPredefinedActionName" : "Volume Up",
-              "BTTOrder" : 56
+              "BTTUUID" : "E178BF44-5D37-4E72-B2F6-96678BF23A16",
+              "BTTPredefinedActionType" : 264,
+              "BTTPredefinedActionName" : "",
+              "BTTLayoutIndependentActionChar" : "UP",
+              "BTTShortcutToSend" : "126",
+              "BTTOrder" : 60
             }
           ],
           "BTTGestureNotes" : "🔊 Volume up",
@@ -249,7 +251,7 @@
           }
         },
         {
-          "BTTLastUpdatedAt" : 1785867723.4306998,
+          "BTTLastUpdatedAt" : 1789044003.85902,
           "BTTTriggerType" : 103,
           "BTTTriggerTypeDescriptionReadOnly" : "3 Finger Swipe Down",
           "BTTTriggerTypeDescription" : "🔉 Volume down",
@@ -258,13 +260,15 @@
           "BTTOrder" : 3,
           "BTTActionsToExecute" : [
             {
-              "BTTLastUpdatedAt" : 1785190731.6238739,
+              "BTTLastUpdatedAt" : 1789043998.1106119,
               "BTTTriggerParentUUID" : "5CC835B2-2672-4294-8222-49A6F25C36D5",
               "BTTIsPureAction" : true,
-              "BTTUUID" : "C1F9D595-A23A-4C6B-89C4-961EE4FA6E3C",
-              "BTTPredefinedActionType" : 25,
-              "BTTPredefinedActionName" : "Volume Down",
-              "BTTOrder" : 59
+              "BTTUUID" : "8F801697-3F9F-4701-A04C-0636C8DF87EE",
+              "BTTPredefinedActionType" : 264,
+              "BTTPredefinedActionName" : "",
+              "BTTLayoutIndependentActionChar" : "DOWN",
+              "BTTShortcutToSend" : "125",
+              "BTTOrder" : 61
             }
           ],
           "BTTGestureNotes" : "🔉 Volume down",
@@ -562,9 +566,6 @@
             }
           ],
           "BTTGestureNotes" : "Trackpad Gestures Cheatsheet, apparently not working.",
-          "BTTTriggerConfig" : {
-            "BTTShowHUD" : 1
-          },
           "BTTTriggerLauncherConfig" : {
             "BTTLauncherShowInLauncher" : 0
           }
@@ -1001,7 +1002,7 @@
           "BTTGestureNotes" : "prevent accidental quitting"
         },
         {
-          "BTTLastUpdatedAt" : 1787751123.2321339,
+          "BTTLastUpdatedAt" : 1788484035.4800439,
           "BTTTriggerType" : 0,
           "BTTTriggerClass" : "BTTTriggerTypeKeyboardShortcut",
           "BTTUUID" : "E7CDD1CF-95B5-4737-A5CC-D3812B4DD97E",
@@ -1029,7 +1030,7 @@
           ]
         },
         {
-          "BTTLastUpdatedAt" : 1787751123.232167,
+          "BTTLastUpdatedAt" : 1788484035.4800811,
           "BTTTriggerType" : 0,
           "BTTTriggerClass" : "BTTTriggerTypeKeyboardShortcut",
           "BTTUUID" : "D768181A-3FCB-43C4-BE1A-3D2694E6E903",

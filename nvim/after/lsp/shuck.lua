@@ -4,7 +4,7 @@
 ---@type vim.lsp.Config
 return {
 	filetypes = {
-		'yaml', -- add for Github Actions
+		-- 'yaml', -- for Github Actions, currently buggy though
 		'bash',
 		'sh',
 		'zsh',
