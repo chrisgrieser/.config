@@ -44,7 +44,6 @@ rules:
         from: { key_code: caps_lock }
         conditions: [*leader-active]
         to_if_alone: [*deactivate-leader, *remove-notice]
-
   #─────────────────────────────────────────────────────────────────────────────
   - description: "🔺 App Switcher Actions"
     manipulators:

@@ -19,10 +19,9 @@ function writeToFile(filepath, text) {
 
 //──────────────────────────────────────────────────────────────────────────────
 
-/** @param {string[]} argv */
 // biome-ignore lint/correctness/noUnusedVariables: JXA
-function run(argv) {
-	const profileToUse = argv[0] || "Default";
+function run() {
+	const profileToUse = "Default profile"; // CONFIG
 	const home = app.pathTo("home folder");
 	const karabinerJson = home + "/.config/karabiner/karabiner.json";
 	const customRulesDir = home + "/.config/karabiner/assets/complex_modifications/";
@@ -60,13 +59,17 @@ function run(argv) {
 	const profileIdx = complexRules.profiles.findIndex(
 		(/** @type {{ name: string; }} */ profile) => profile.name === profileToUse,
 	);
+	if (profileIdx === -1) return "󱎘 Profile not found.";
+	if (!complexRules.profiles[profileIdx].complex_modifications) {
+		complexRules.profiles[profileIdx].complex_modifications = {};
+	}
 	complexRules.profiles[profileIdx].complex_modifications.rules = customRules;
-	writeToFile(karabinerJson, JSON.stringify(complexRules));
+	// writeToFile(karabinerJson, JSON.stringify(complexRules, null, "  "));
 
 	// VALIDATE
 	const lintStatus = app.doShellScript(
 		`"/Library/Application Support/org.pqrs/Karabiner-Elements/bin/karabiner_cli" --lint-complex-modifications "${karabinerJson}"`,
 	);
 	const msg = lintStatus.includes("ok") ? " Karabiner reloaded" : "󱎘 Karabiner config invalid";
-	return msg; // notify via justfile on success/failure
+	return msg; // notify via Justfile on success/failure
 }
