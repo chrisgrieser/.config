@@ -19,12 +19,14 @@ function writeToFile(filepath, text) {
 
 //──────────────────────────────────────────────────────────────────────────────
 
+/** @param {string[]} argv */
 // biome-ignore lint/correctness/noUnusedVariables: JXA
-function run() {
-	const profileToUse = "Default profile"; // CONFIG
+function run(argv) {
+	const profileToUse = argv[0] || "Default profile";
 	const home = app.pathTo("home folder");
 	const karabinerJson = home + "/.config/karabiner/karabiner.json";
 	const customRulesDir = home + "/.config/karabiner/assets/complex_modifications/";
+	const cliPath = "/Library/Application Support/org.pqrs/Karabiner-Elements/bin/karabiner_cli";
 
 	// GUARD `yq` not installed
 	const yqNotInstalled = app.doShellScript("command -v yq || echo 'false'") === "false";
@@ -41,6 +43,8 @@ function run() {
 			yq --output-format=json 'explode(.)' "$f.yaml" > "${tempDir}/$f.json"
 		done
 	`);
+	// VALIDATE in case of issues, will error, and abort execution of the remaining script
+	app.doShellScript(`cd "${tempDir}" && "${cliPath}" --lint-complex-modifications *.json`);
 
 	// 2. merge jsons
 	const customRules = [];
@@ -59,17 +63,15 @@ function run() {
 	const profileIdx = complexRules.profiles.findIndex(
 		(/** @type {{ name: string; }} */ profile) => profile.name === profileToUse,
 	);
-	if (profileIdx === -1) return "󱎘 Profile not found.";
+	if (profileIdx === -1) return "󱎘 Profile not found: " + profileToUse;
 	if (!complexRules.profiles[profileIdx].complex_modifications) {
 		complexRules.profiles[profileIdx].complex_modifications = {};
 	}
 	complexRules.profiles[profileIdx].complex_modifications.rules = customRules;
-	// writeToFile(karabinerJson, JSON.stringify(complexRules, null, "  "));
+	writeToFile(karabinerJson, JSON.stringify(complexRules));
 
-	// VALIDATE
-	const lintStatus = app.doShellScript(
-		`"/Library/Application Support/org.pqrs/Karabiner-Elements/bin/karabiner_cli" --lint-complex-modifications "${karabinerJson}"`,
-	);
-	const msg = lintStatus.includes("ok") ? " Karabiner reloaded" : "󱎘 Karabiner config invalid";
-	return msg; // notify via Justfile on success/failure
+	// VALIDATE in case of issues, will error, and abort execution of the remaining script
+	app.doShellScript(`"${cliPath}" --format-json "${karabinerJson}"`);
+
+	return " Karabiner reloaded";
 }

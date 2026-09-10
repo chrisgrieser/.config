@@ -60,11 +60,11 @@ rules:
       - type: basic
         from: { key_code: f11 }
         to:
-          - key_code: arrow_down
+          - key_code: down_arrow
         conditions: [*audio-or-video-app]
 
       - type: basic
         from: { key_code: f12 }
         to:
-          - key_code: arrow_up
+          - key_code: up_arrow
         conditions: [*audio-or-video-app]

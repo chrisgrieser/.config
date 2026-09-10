@@ -1,6 +1,6 @@
 set quiet
 
-karabiner_profile := "Default"
+karabiner_profile := "Default profile"
 
 #───────────────────────────────────────────────────────────────────────────────
 
