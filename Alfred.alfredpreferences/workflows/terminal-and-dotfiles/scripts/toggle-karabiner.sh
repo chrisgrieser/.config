@@ -1,6 +1,5 @@
 #!/usr/bin/env zsh
-# CONFIG the two profiles to toggle between
-profile_1="Default"
+profile_1="Default profile"
 profile_2="Disabled"
 #───────────────────────────────────────────────────────────────────────────────
 
@@ -10,7 +9,8 @@ change_to=$([[ "$current_profile" == "$profile_1" ]] && echo "$profile_2" || ech
 
 emoji=$([[ "$change_to" == "$profile_1" ]] && echo "✅" || echo "📴")
 msg=$("$karabiner_cli" --select-profile="$change_to")
-if [[ -z "$msg" ]]; then # INFO on non-existing profile, still exits 0
+
+if [[ -z "$msg" ]]; then # INFO on non-existing profile, still exits 0, thus check for empty
 	echo "$emoji $change_to profile"
 else
 	echo "❌ $msg"
