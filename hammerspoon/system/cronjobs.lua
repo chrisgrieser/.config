@@ -84,15 +84,10 @@ local config = {
 
 local doEvery = hs.timer.doEvery
 M.sleepTimer = doEvery(config.checkIntervalMins * 60, function()
-	-- triggering conditions
-	if not env.hasProjector() then return end
+	-- GUARD
 	local userIsActive = (hs.host.idleTime() / 60) < config.idleMins
-	if userIsActive then return end
-
-	-- only quit if any video app is running
-	for _, app in pairs(U.videoAndAudioApps) do
-		if U.app(app) then return end
-	end
+	local noVideoAppRunning = not hs.fnutils.some(U.videoAndAudioApps, U.app)
+	if userIsActive or noVideoAppRunning or not env.hasProjector() then return end
 	-----------------------------------------------------------------------------
 
 	-- inform user about upcoming sleep
@@ -107,7 +102,7 @@ M.sleepTimer = doEvery(config.checkIntervalMins * 60, function()
 		if userDidSth then hs.alert.closeAll() end
 	end)
 
-	-- abort if user did something
+	-- GUARD abort if user did something
 	U.defer(config.timeToReactSecs, function()
 		local userDidSth = hs.host.idleTime() < config.timeToReactSecs
 		if userDidSth then return end
