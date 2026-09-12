@@ -72,5 +72,55 @@ M.timer_uptime = timerAt("01:30", "01d", function()
 	end
 end):start()
 
+---SLEEP TIMER------------------------------------------------------------------
+-- When projector is connected, check every x min if device has been idle for y
+-- minutes. If so, alert and wait for z secs. If still idle then, quit
+-- all video apps.
+local config = {
+	checkIntervalMins = 15,
+	idleMins = 50,
+	timeToReactSecs = 20,
+}
+
+local doEvery = hs.timer.doEvery
+M.sleepTimer = doEvery(config.checkIntervalMins * 60, function()
+	-- triggering conditions
+	if not env.hasProjector() then return end
+	local userIsActive = (hs.host.idleTime() / 60) < config.idleMins
+	if userIsActive then return end
+
+	-- only quit if any video app is running
+	for _, app in pairs(U.videoAndAudioApps) do
+		if U.app(app) then return end
+	end
+	-----------------------------------------------------------------------------
+
+	-- inform user about upcoming sleep
+	local alertMsg = ("💤 Will sleep in %ds if idle."):format(config.timeToReactSecs)
+	U.alertAndLog(alertMsg, config.timeToReactSecs)
+	U.sound("Submarine", 0.6)
+
+	-- remove alert earlier if user did something
+	local halfTime = math.ceil(config.timeToReactSecs / 2)
+	U.defer(halfTime, function()
+		local userDidSth = hs.host.idleTime() < (config.timeToReactSecs / 2)
+		if userDidSth then hs.alert.closeAll() end
+	end)
+
+	-- abort if user did something
+	U.defer(config.timeToReactSecs, function()
+		local userDidSth = hs.host.idleTime() < config.timeToReactSecs
+		if userDidSth then return end
+
+		-- close if user idle
+		U.closeBrowserTabsWith("all")
+		U.closeVideoApps()
+		U.quitFullscreenSpaces()
+
+		U.notify("💤 Sleep timer triggered")
+		U.notifyOnPhone("💤 Sleep timer", "triggered at " .. os.date("%H:%M"))
+	end)
+end):start()
+
 --------------------------------------------------------------------------------
 return M

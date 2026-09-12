@@ -130,8 +130,12 @@ local function movieLayout()
 
 	-- open / quit apps
 	U.openApps { "YouTube", env.isAtHome and "BetterTouchTool" or nil }
-	U.defer({ 0, 1 }, function() -- defer so external display is detected
-		local youtubeWin = U.app("YouTube") and U.app("YouTube"):mainWindow()
+	U.defer(1, function() -- defer so external display is detected
+		local youtube = U.app("YouTube")
+		if not youtube then return end
+		youtube:activate()
+
+		local youtubeWin = youtube:mainWindow()
 		if not youtubeWin or not projector then return end
 		if youtubeWin:screen():id() ~= projector:id() then youtubeWin:moveToScreen(projector) end
 	end)
@@ -167,54 +171,10 @@ end)
 -- 3. Systemstart
 if U.isSystemStart() then workLayout("auto") end
 
----SLEEP TIMER------------------------------------------------------------------
--- When projector is connected, check every x min if device has been idle for y
--- minutes. If so, alert and wait for z secs. If still idle then, quit
--- all video apps.
-local config = {
-	checkIntervalMins = 10,
-	idleMins = 50,
-	timeToReactSecs = 20,
-}
-
-local doEvery = hs.timer.doEvery
-M.sleepTimer = doEvery(config.checkIntervalMins * 60, function()
-	if not env.hasProjector() then return end
-	local userIsActive = (hs.host.idleTime() / 60) < config.idleMins
-	if userIsActive then return end
-	if not U.screenIsUnlocked() then return end
-
-	-- inform user about upcoming sleep
-	local alertMsg = ("💤 Will sleep in %ds if idle."):format(config.timeToReactSecs)
-	U.alertAndLog(alertMsg, config.timeToReactSecs)
-	U.sound("Submarine", 0.6)
-
-	-- remove alert earlier if user did something
-	local halfTime = math.ceil(config.timeToReactSecs / 2)
-	U.defer(halfTime, function()
-		local userDidSth = hs.host.idleTime() < (config.timeToReactSecs / 2)
-		if userDidSth then hs.alert.closeAll() end
-	end)
-
-	-- abort if user did something
-	U.defer(config.timeToReactSecs, function()
-		local userDidSth = hs.host.idleTime() < config.timeToReactSecs
-		if userDidSth then return end
-
-		-- close if user idle
-		U.closeBrowserTabsWith("all")
-		workLayout("auto") -- workLayout for login next day & darken display for sleeping
-
-		U.notify("💤 Sleep timer triggered")
-
-		-- since these notifications are only for sleep-tracking, phone
-		-- notification only when going to sleep, not when leaving the
-		-- house during the day
-		if U.betweenTime(21, 6) then
-			U.notifyOnPhone("💤 Sleep timer", "triggered at " .. os.date("%H:%M"))
-		end
-	end)
-end):start()
+-- 4. Mornings (reset to worklayout for logins)
+M.timer_morningWorkLayout = hs.timer
+	.doAt("06:00", "01d", function() workLayout("auto") end, true)
+	:start()
 
 --------------------------------------------------------------------------------
 return M
