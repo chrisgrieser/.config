@@ -10,6 +10,16 @@ anchors:
           - "/Applications/StarCraft II/"
 #───────────────────────────────────────────────────────────────────────────────
 rules:
+  - description: "(Mouse) 1 Clicks"
+    manipulators:
+      - type: basic
+        from:
+          simultaneous: [{ pointing_button: button1 }, { pointing_button: button2 }]
+        conditions:
+          - *not-game
+        to:
+          - { key_code: tab, modifiers: [control] }
+  #───────────────────────────────────────────────────────────────────────────────
   # Emulates the "Right-Click Open Link in new Background tab" Chrome extension
   - description: "(Mouse) 2 (briefly): Open link in new background tab"
     manipulators:
