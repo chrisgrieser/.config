@@ -230,7 +230,6 @@
   "various-complements:reload-custom-dictionaries": [],
   "various-complements:show-suggestions": [],
   "various-complements:add-word-custom-dictionary": [],
-  "editor:save-file": [],
   "obsidian-style-settings:style-settings-class-toggle-hide-properties-hide-some-properties": [
     {
       "modifiers": [
@@ -330,14 +329,6 @@
         "Mod"
       ],
       "key": "["
-    }
-  ],
-  "obsidian-linter:lint-file-unless-ignored": [
-    {
-      "modifiers": [
-        "Mod"
-      ],
-      "key": "S"
     }
   ]
 }
