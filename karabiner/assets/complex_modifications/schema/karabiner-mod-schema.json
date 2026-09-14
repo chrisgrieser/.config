@@ -274,6 +274,9 @@
 				"lazy": {
 					"type": "boolean"
 				},
+				"repeat": {
+					"type": "boolean"
+				},
 				"software_function": {
 					"$ref": "#/definitions/SoftwareFunction"
 				},

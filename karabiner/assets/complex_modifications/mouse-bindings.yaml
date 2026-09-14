@@ -8,20 +8,13 @@ anchors:
         file_paths:
           - "/Users/.*/Library/Application Support/Steam/steamapps/common/"
           - "/Applications/StarCraft II/"
+      - &browser
+        type: frontmost_application_if
+        bundle_identifiers: [com.brave.Browser, com.apple.Safari]
 #───────────────────────────────────────────────────────────────────────────────
 rules:
-  - description: "(Mouse) 1 Clicks"
-    manipulators:
-      - type: basic
-        from:
-          simultaneous: [{ pointing_button: button1 }, { pointing_button: button2 }]
-        conditions:
-          - *not-game
-        to:
-          - { key_code: tab, modifiers: [control] }
-  #───────────────────────────────────────────────────────────────────────────────
-  # Emulates the "Right-Click Open Link in new Background tab" Chrome extension
   - description: "(Mouse) 2 (briefly): Open link in new background tab"
+    # Emulates the "Right-Click Open Link in new Background tab" Chrome extension
     manipulators:
       - type: basic
         from: { pointing_button: button2 }
@@ -29,9 +22,7 @@ rules:
           - { pointing_button: button1, modifiers: [command] }
         to_if_held_down:
           - pointing_button: button2
-        conditions:
-          - type: frontmost_application_if
-            bundle_identifiers: [com.brave.Browser, com.apple.Safari]
+        conditions: [*browser]
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Mouse) 3: Quit app"
     manipulators:
@@ -87,6 +78,14 @@ rules:
           - { key_code: "3", modifiers: [command] }
         conditions:
           - { type: frontmost_application_if, bundle_identifiers: [com.apple.iCal] }
+      # Browser: brief -> back, held -> prev tab
+      - type: basic
+        from: { pointing_button: button4 }
+        to_if_alone:
+          - { key_code: left_arrow, modifiers: [command] }
+        to_if_held_down:
+          - { key_code: left_arrow, modifiers: [command, option], repeat: false }
+        conditions: [*browser]
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Mouse) 5 (top)"
     manipulators:
@@ -113,6 +112,14 @@ rules:
         conditions:
           - type: frontmost_application_if
             file_paths: ["/Gmail.app/Contents/MacOS/app_mode_loader"] # no bundle-id, since PWA
+      # Browser: brief -> close tab, held -> next tab
+      - type: basic
+        from: { pointing_button: button5 }
+        to_if_alone:
+          - { key_code: w, modifiers: [command] }
+        to_if_held_down:
+          - { key_code: right_arrow, modifiers: [command, option], repeat: false  }
+        conditions: [*browser]
       # Fallback behavior: Close window
       - type: basic
         from: { pointing_button: button5 }

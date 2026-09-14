@@ -33,7 +33,7 @@ function run(argv) {
 	if (yqNotInstalled) return "󱎘 yq is not installed.";
 
 	// 1. convert yaml to json
-	// using `explode` to expand anchors & aliases: https://mikefarah.gitbook.io/yq/operators/anchor-and-alias-operators#explode-alias-and-anchor
+	// -> using `explode` to expand anchors & aliases: https://mikefarah.gitbook.io/yq/operators/anchor-and-alias-operators#explode-alias-and-anchor
 	const tempDir = app.doShellScript("mktemp -d");
 	app.doShellScript(`
 		export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
