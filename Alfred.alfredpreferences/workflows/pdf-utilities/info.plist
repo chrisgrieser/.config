@@ -21,11 +21,37 @@
 				<false/>
 			</dict>
 		</array>
+		<key>00D807BA-7EC9-4A9E-AFCE-974731EDCBA0</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>D22390A7-2B71-46B2-AC58-98F41B16AD31</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>15EF574D-5CAC-4FDA-8600-57B3AED146F4</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
 				<string>F2EB8A46-3418-41B2-A3B1-1949503476C7</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>1627A9A2-E841-4864-95BB-9B57A4A6C6B6</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>6A86F168-9DE3-49F8-9816-27CDFC39162B</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -153,6 +179,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>D22390A7-2B71-46B2-AC58-98F41B16AD31</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>1627A9A2-E841-4864-95BB-9B57A4A6C6B6</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>E5453C5A-74EB-4057-82E5-1DFA868353C0</key>
 		<array>
 			<dict>
@@ -187,7 +226,7 @@
 					<string>net.daringfireball.markdown</string>
 				</array>
 				<key>name</key>
-				<string>Export as docx (Pandoc)</string>
+				<string>Export as academic docx (Pandoc) 🎓</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.trigger.action</string>
@@ -229,7 +268,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>./scripts/pandoc-md2docx.sh</string>
+				<string>./scripts/pandoc_md-to-academic-docx.sh</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
@@ -258,6 +297,27 @@
 			<string>33F1E2F9-4ACC-4B5C-9014-9C201CBAEBE4</string>
 			<key>version</key>
 			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>⏳ Running pandoc…</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>D22390A7-2B71-46B2-AC58-98F41B16AD31</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -291,6 +351,48 @@
 			<string>DADA8D4D-08C5-4660-AFEE-881C98BA1842</string>
 			<key>version</key>
 			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>acceptsmulti</key>
+				<integer>0</integer>
+				<key>filetypes</key>
+				<array>
+					<string>net.daringfireball.markdown</string>
+				</array>
+				<key>name</key>
+				<string>Export as simple docx (Pandoc) 📄</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.action</string>
+			<key>uid</key>
+			<string>00D807BA-7EC9-4A9E-AFCE-974731EDCBA0</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/pandoc_md-to-docx.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>1627A9A2-E841-4864-95BB-9B57A4A6C6B6</string>
+			<key>version</key>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -377,7 +479,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>./scripts/headless-md2pdf.sh</string>
+				<string>./scripts/headless_md-to-pdf.sh</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
@@ -578,7 +680,16 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>135</real>
+			<real>240</real>
+		</dict>
+		<key>00D807BA-7EC9-4A9E-AFCE-974731EDCBA0</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>9</integer>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>125</real>
 		</dict>
 		<key>15EF574D-5CAC-4FDA-8600-57B3AED146F4</key>
 		<dict>
@@ -587,7 +698,16 @@
 			<key>xpos</key>
 			<real>185</real>
 			<key>ypos</key>
-			<real>535</real>
+			<real>640</real>
+		</dict>
+		<key>1627A9A2-E841-4864-95BB-9B57A4A6C6B6</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>9</integer>
+			<key>xpos</key>
+			<real>330</real>
+			<key>ypos</key>
+			<real>125</real>
 		</dict>
 		<key>2605B70A-5697-48AD-8ED2-38A1847BBCAD</key>
 		<dict>
@@ -596,7 +716,7 @@
 			<key>xpos</key>
 			<real>330</real>
 			<key>ypos</key>
-			<real>135</real>
+			<real>240</real>
 		</dict>
 		<key>2CE7E929-AD14-4BAD-B638-152B098BE9D6</key>
 		<dict>
@@ -605,7 +725,7 @@
 			<key>xpos</key>
 			<real>185</real>
 			<key>ypos</key>
-			<real>135</real>
+			<real>240</real>
 		</dict>
 		<key>2D2FDAAD-9FAB-40CF-80BD-CECE6BC224E5</key>
 		<dict>
@@ -614,7 +734,7 @@
 			<key>xpos</key>
 			<real>185</real>
 			<key>ypos</key>
-			<real>395</real>
+			<real>500</real>
 		</dict>
 		<key>33F1E2F9-4ACC-4B5C-9014-9C201CBAEBE4</key>
 		<dict>
@@ -623,9 +743,9 @@
 			<key>note</key>
 			<string>copy error</string>
 			<key>xpos</key>
-			<real>585</real>
+			<real>620</real>
 			<key>ypos</key>
-			<real>70</real>
+			<real>125</real>
 		</dict>
 		<key>5BD72B8A-1B8A-4C43-81CF-79EBC4BE4517</key>
 		<dict>
@@ -643,9 +763,9 @@
 			<key>note</key>
 			<string>not empty = error</string>
 			<key>xpos</key>
-			<real>505</real>
+			<real>540</real>
 			<key>ypos</key>
-			<real>100</real>
+			<real>155</real>
 		</dict>
 		<key>6F602257-6038-4A72-A19A-02734217B0ED</key>
 		<dict>
@@ -656,7 +776,7 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>535</real>
+			<real>640</real>
 		</dict>
 		<key>7A3622A0-DE0C-4DCE-92F3-C4ADD2279EBB</key>
 		<dict>
@@ -665,7 +785,7 @@
 			<key>xpos</key>
 			<real>185</real>
 			<key>ypos</key>
-			<real>270</real>
+			<real>375</real>
 		</dict>
 		<key>84C07023-C7E9-4DAD-8EF8-0700B1CB05E3</key>
 		<dict>
@@ -676,7 +796,7 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>395</real>
+			<real>500</real>
 		</dict>
 		<key>A98DF2BF-2CAF-4762-B44B-041654707863</key>
 		<dict>
@@ -694,7 +814,16 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>270</real>
+			<real>375</real>
+		</dict>
+		<key>D22390A7-2B71-46B2-AC58-98F41B16AD31</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>9</integer>
+			<key>xpos</key>
+			<real>185</real>
+			<key>ypos</key>
+			<real>125</real>
 		</dict>
 		<key>DADA8D4D-08C5-4660-AFEE-881C98BA1842</key>
 		<dict>
@@ -703,9 +832,9 @@
 			<key>note</key>
 			<string>display as electable text</string>
 			<key>xpos</key>
-			<real>740</real>
+			<real>775</real>
 			<key>ypos</key>
-			<real>70</real>
+			<real>125</real>
 		</dict>
 		<key>E5453C5A-74EB-4057-82E5-1DFA868353C0</key>
 		<dict>
@@ -723,7 +852,7 @@
 			<key>xpos</key>
 			<real>330</real>
 			<key>ypos</key>
-			<real>535</real>
+			<real>640</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

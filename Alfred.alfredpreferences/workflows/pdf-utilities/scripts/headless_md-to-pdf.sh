@@ -1,20 +1,12 @@
 #!/usr/bin/env zsh
 set -e
 md_file="$*"
+cd "$(dirname "$md_file")" # so `--resource-path` is set
 #───────────────────────────────────────────────────────────────────────────────
 
 # CONFIG
 pdf_file="${md_file%\.md}_$(date +%Y-%m-%d)_CG.pdf"
 headless_browser="/Applications/Brave Browser.app/Contents/MacOS/Brave Browser"
-#───────────────────────────────────────────────────────────────────────────────
-
-if [[ ! "$md_file" =~ .*\.md ]]; then
-	echo "⚠️ Not a markdown file"
-	return 1
-fi
-
-cd "$(dirname "$md_file")" # so `--resource-path` is set
-
 #───────────────────────────────────────────────────────────────────────────────
 
 # 1. pandoc's --data-dir for the `defaults` file defined in .zshenv

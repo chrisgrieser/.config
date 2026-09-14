@@ -9,7 +9,7 @@ function alfredMatcher(str) {
 	const clean = str.replace(/[-()_.:;,]/g, " ");
 	const camelCaseNumberSeparated = str.replace(/([A-Z])/g, " $1").replace(/(\d+)/g, " $1");
 	const withoutUmlaute = str
-		.replace(/[Üü]/g, "ue")
+		.replace(/[Üü]/g, "ue") // typos: ignore-line
 		.replace(/[äÄ]/g, "ae")
 		.replace(/[öÖ]/g, "oe")
 		.replaceAll("ß", "ss");
