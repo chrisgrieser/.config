@@ -69,7 +69,7 @@ _escape_on_empty_buffer() {
 		--bind="ctrl-h:change-header(including hidden files)+reload($rg_cmd \
 		--hidden --no-ignore --no-ignore-files --glob='!/.git/' \
 		--glob='!node_modules' --glob='!__pycache__' --glob='!.DS_Store' |
-					$eza_cmd)" \
+						$eza_cmd)" \
 		--expect="ctrl-l"
 )
 	zle reset-prompt
@@ -168,19 +168,17 @@ function lc() {
 }
 
 # completions for it
-if [[ "$USE_IRIS" == "false" ]]; then
-	_lc() {
-		local -a last_cmds=()
-		while IFS='' read -r value; do # turn lines into array
-			last_cmds+=("$value")
-		done < <(history -rn -10)
+_lc() {
+	local -a last_cmds=()
+	while IFS='' read -r value; do # turn lines into array
+		last_cmds+=("$value")
+	done < <(history -rn -10)
 
-		local _values=({1..10})
-		local expl && _description -V last-commands expl 'Last Commands'
-		compadd "${expl[@]}" -Q -l -d last_cmds -a _values
-	}
-	compdef _lc lc
-fi
+	local _values=({1..10})
+	local expl && _description -V last-commands expl 'Last Commands'
+	compadd "${expl[@]}" -Q -l -d last_cmds -a _values
+}
+compdef _lc lc
 
 # copy result of last command
 function lr() {

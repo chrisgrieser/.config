@@ -57,19 +57,17 @@ function ga { git add "$@"; }
 function restore { git restore "$@"; }
 
 # custom completions: suggest changed files, not just directory parts.
-if [[ "$USE_IRIS" == "false" ]]; then
-	_changed_git_files() {
-		local -a changed_files=()
-		while IFS='' read -r file; do # turn lines into array
-			changed_files+=("$file")
-		done < <(git status --porcelain --untracked-files | cut -c4-)
+_changed_git_files() {
+	local -a changed_files=()
+	while IFS='' read -r file; do # turn lines into array
+		changed_files+=("$file")
+	done < <(git status --porcelain --untracked-files | cut -c4-)
 
-		local expl && _description -V git-changed-files expl 'Changed & Untracked Files'
-		compadd "${expl[@]}" -Q -- "${changed_files[@]}"
-	}
-	compdef _changed_git_files ga
-	compdef _changed_git_files restore
-fi
+	local expl && _description -V git-changed-files expl 'Changed & Untracked Files'
+	compadd "${expl[@]}" -Q -- "${changed_files[@]}"
+}
+compdef _changed_git_files ga
+compdef _changed_git_files restore
 
 #-COMMIT------------------------------------------------------------------------
 function _stageAllIfNoStagedChanges {

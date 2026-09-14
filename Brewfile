@@ -24,7 +24,6 @@ brew "zsh-autopair"
 brew "zsh-history-substring-search"
 brew "zsh-syntax-highlighting"
 brew "zsh-autosuggestions"
-brew "versenilvis/iris/iris"
 
 #-APPS--------------------------------------------------------------------------
 cask "alfred"

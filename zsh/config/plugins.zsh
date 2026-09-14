@@ -1,29 +1,13 @@
 # shellcheck disable=SC1091
 
-#-COMPLETION--------------------------------------------------------------------
-if [[ "$USE_IRIS" == "true" ]]; then
-	eval "$(iris init zsh)" # https://github.com/versenilvis/IRIS#shell-setup
-else
-	# ZSH-AUTOSUGGESTIONS
-	# https://github.com/zsh-users/zsh-autosuggestions#configuration
-	source "$HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
-	export ZSH_AUTOSUGGEST_HISTORY_IGNORE="?(#c50,)" # ignores long history items
-	export ZSH_AUTOSUGGEST_STRATEGY=(history)
-	export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=35
-	# do not accept autosuggestion when using vim's `A`
-	export ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=("${ZSH_AUTOSUGGEST_ACCEPT_WIDGETS[@]/vi-add-eol/}")
-
-	# NATIVE COMPLETION
-	autoload compinit -Uz +X && compinit
-	[[ $(uname -p) == "i386" ]] && compaudit | xargs chmod g-w # FIX for Intel Mac, https://github.com/zsh-users/zsh-completions/issues/433#issuecomment-629539004
-fi
-
-# LOAD HOMEBREW COMPLETIONS
-# load various completions of clis installed via homebrew
-# needs to be run *before* compinit/zsh-autocomplete
-export FPATH="$ZDOTDIR/completions:$HOMEBREW_PREFIX/share/zsh/site-functions:$FPATH"
-
-#-------------------------------------------------------------------------------
+# ZSH-AUTOSUGGESTIONS
+# https://github.com/zsh-users/zsh-autosuggestions#configuration
+source "$HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+export ZSH_AUTOSUGGEST_HISTORY_IGNORE="?(#c50,)" # ignores long history items
+export ZSH_AUTOSUGGEST_STRATEGY=(history)
+export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=35
+# do not accept autosuggestion when using vim's `A`
+export ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=("${ZSH_AUTOSUGGEST_ACCEPT_WIDGETS[@]/vi-add-eol/}")
 
 # ZSH-AUTOPAIR
 source "$HOMEBREW_PREFIX/share/zsh-autopair/autopair.zsh"

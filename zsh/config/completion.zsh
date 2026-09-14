@@ -5,19 +5,44 @@
 #-------------------------------------------------------------------------------
 
 #-GENERAL-----------------------------------------------------------------------
+
+# enable zsh completions
+autoload compinit -Uz +X && compinit
+[[ $(uname -p) == "i386" ]] && compaudit | xargs chmod g-w # FIX for Intel Mac, https://github.com/zsh-users/zsh-completions/issues/433#issuecomment-629539004
+
 # do not save in public dotfile repo
 export ZSH_COMPDUMP="$HOME/.local/share/zsh/zcompdump"
 
 # use visual menu for selections
 zstyle ':completion:*' menu select
 
+# LOAD HOMEBREW COMPLETIONS
+# load various completions of clis installed via homebrew
+# needs to be run *before* compinit/zsh-autocomplete
+export FPATH="$ZDOTDIR/completions:$HOMEBREW_PREFIX/share/zsh/site-functions:$FPATH"
+
+#-SORT--------------------------------------------------------------------------
+
 # sort by modification date and follow symlinks
 zstyle ':completion:*' file-sort modification follow
 
+# group results
+zstyle ':completion:*' group-name ''
+
+# show cd-path ("path-directories") first
+zstyle ':completion:*:cd:*' group-order path-directories directories
+
+# show aliases & functions before commands
+zstyle ':completion:*:*:-command-:*:*' group-order alias functions builtins commands
+
+# order row-wise, not column-wise
+zstyle ':completion:*' list-rows-first true
+
 #-FORMAT & COLOR------------------------------------------------------------------
 
+# warnings and messages
 zstyle ':completion:*:messages' format '%F{purple} -- %d --%f'
-zstyle ':completion:*:warnings' format '%K{yellow} %F{black} no matches found%k'
+zstyle ':completion:*:warnings' format '%K{yellow}%F{black}No matches found.%f%k'
 
 # color completion groups with purple-gray background
 zstyle ':completion:*:descriptions' format $'\e[7;38;5;103m %d \e[0;38;5;103m\e[0m'
@@ -34,9 +59,10 @@ zstyle ':completion:*:default' list-colors \
 	"ma=7;38;5;68"
 
 #-BINDINGS----------------------------------------------------------------------
+
 # On empty buffer, `tab` opens `cd` completion menu, otherwise, select completion.
 # (This is better than `AUTO_CD`, since `zstyle ':completion:*' group-order` does
-# not affect `AUTO_CD`, but is normal `cd`, which we emulate here. )
+# not affect `AUTO_CD`, but affects normal `cd`, which we emulate here. )
 _tab-on-empty-buffer() {
 	# source: https://stackoverflow.com/a/29103676/22114136
 	if [[ -z "$BUFFER" && "$CONTEXT" == "start" ]]; then
@@ -54,3 +80,5 @@ _tab-on-empty-buffer() {
 }
 zle -N _tab-on-empty-buffer
 bindkey '^I' _tab-on-empty-buffer
+
+bindkey '^[[Z' reverse-menu-complete # shift+tab

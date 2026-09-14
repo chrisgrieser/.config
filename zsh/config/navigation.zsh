@@ -35,16 +35,14 @@ function gr {
 	cd "$goto" || return 1
 }
 
-if [[ "$USE_IRIS" == "false" ]]; then
-	_gr() {
-		local -a folders=() # turn lines from `dirs -p` into array for `compadd`
-		while IFS='' read -r dir; do
-			local abspath="${dir/#\~/$HOME}"
-			[[ -d "$abspath" && "$abspath" != "$PWD" && "$abspath" != "$HOME" ]] && folders+=("$dir")
-		done < <(dirs -p) # remove current directory
+_gr() {
+	local -a folders=() # turn lines from `dirs -p` into array for `compadd`
+	while IFS='' read -r dir; do
+		local abspath="${dir/#\~/$HOME}"
+		[[ -d "$abspath" && "$abspath" != "$PWD" && "$abspath" != "$HOME" ]] && folders+=("$dir")
+	done < <(dirs -p) # remove current directory
 
-		local expl && _description -V recent-folders expl 'Recent folders'
-		compadd "${expl[@]}" -Q -- "${folders[@]}"
-	}
-	compdef _gr gr
-fi
+	local expl && _description -V recent-folders expl 'Recent folders'
+	compadd "${expl[@]}" -Q -- "${folders[@]}"
+}
+compdef _gr gr
