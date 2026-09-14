@@ -53,6 +53,42 @@ function M.setDarkMode(toMode)
 	require("appearance.hole-cover").update()
 end
 
+---@param status boolean
+---@param callback? function
+function M.connectProjector(status, callback)
+	if not (env.isAtHome or env.isAtMother) then return end
+	if env.hasProjector() == status then return end
+
+	local setTo = status and "on" or "off"
+	local delay = 0
+	if not (U.app("BetterDisplay")) then
+		local app = hs.application.open("BetterDisplay")
+		if not app then
+			U.alertAndLog("Could not find BetterDisplay.")
+			return
+		end
+		delay = 3
+	end
+	U.defer(delay, function()
+		-- DOCS https://github.com/waydabber/BetterDisplay/wiki/Integration-features,-CLI#cli-access-by-installing-betterdisplaycli
+		-- alternative URI Scheme: BetterDisplay://set?name=P62_Pro&connected=on
+		local name = env.projectorName
+		local shellScript = ("betterdisplaycli set --name=%q --connected=%q"):format(name, setTo)
+		hs.execute(U.exportPath .. shellScript)
+	end)
+	U.defer(delay + 2, function()
+		local success = env.hasProjector() == status -- exit code of `betterdisplaycli` is not reliable
+		if success then
+			require("appearance.hole-cover").update()
+			if callback then callback() end
+			print("📽️✅ Projector set to [" .. setTo .. "]")
+		else
+			U.sound("Basso", 0.7)
+			print("📽️❌ Could not set projector to [" .. setTo .. "].")
+		end
+	end)
+end
+
 ---CHANGING DARK MODE--------------------------------------------------------
 
 -- AUTOMATIC
@@ -100,6 +136,9 @@ M.caff = c.new(function(event)
 		print(("🖥️ Darkened screen (%s)"):format(reason))
 		U.defer(1, M.darkenImacDisplay) -- wait for macOS turning brightness up
 		U.defer(4, M.darkenImacDisplay) -- redundancy to ensure BetterDisplay is active for full darkness
+	elseif wokeWithProjector and U.betweenTime(7, 22) then
+		print("🖥️ Woke during the day")
+		M.connectProjector(false)
 	elseif event == c.screensDidWake and not env.hasProjector() then
 		if M.wokeRecently then return end
 		M.wokeRecently = true

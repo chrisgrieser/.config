@@ -1,8 +1,7 @@
 local M = {} -- persist from garbage collector
 
-local display = require("appearance.darkmode-and-brightness")
+local display = require("appearance.screen-brightness-darkmode")
 local env = require("meta.environment")
-local holeCover = require("appearance.hole-cover")
 local music = require("apps.music")
 local wu = require("win-management.window-utils")
 
@@ -21,41 +20,6 @@ local function isWorkWeek()
 	return weekday ~= "Sat" and weekday ~= "Sun"
 end
 
----@param status boolean
----@param callback function
-local function connectProjector(status, callback)
-	if not (env.isAtHome or env.isAtMother) then return end
-	if env.hasProjector() == status then return end
-
-	local setTo = status and "on" or "off"
-	local delay = 0
-	if not (U.app("BetterDisplay")) then
-		local app = hs.application.open("BetterDisplay")
-		if not app then
-			U.alertAndLog("Could not find BetterDisplay.")
-			return
-		end
-		delay = 3
-	end
-	U.defer(delay, function()
-		-- DOCS https://github.com/waydabber/BetterDisplay/wiki/Integration-features,-CLI#cli-access-by-installing-betterdisplaycli
-		-- alternative URI Scheme: BetterDisplay://set?name=P62_Pro&connected=on
-		local name = env.projectorName
-		local shellScript = ("betterdisplaycli set --name=%q --connected=%q"):format(name, setTo)
-		hs.execute(U.exportPath .. shellScript)
-	end)
-	U.defer(delay + 2, function()
-		local success = env.hasProjector() == status -- exit code of `betterdisplaycli` is not reliable
-		if success then
-			callback()
-			print("📽️ Projector set to [" .. setTo .. "]")
-		else
-			U.sound("Basso", 0.7)
-			print("⚠️📽️ Could not set projector to [" .. setTo .. "].")
-		end
-	end)
-end
-
 ---LAYOUTS---------------------------------------------------------------------
 
 ---@param brightness "dark"|"auto"
@@ -63,15 +27,13 @@ local function workLayout(brightness)
 	if M.isLayouting then return end
 	M.isLayouting = true
 	U.defer(2.5, function() M.isLayouting = false end)
+	print("🔲 Layout: work")
 
 	-- dock
 	dockSwitcher("work")
 
 	-- screen
-	connectProjector(false, function() -- display changes as callback to await display change
-		holeCover.update()
-		U.defer(1, U.quitFullscreenSpaces) -- needs delay for some reason
-	end)
+	display.connectProjector(false, U.quitFullscreenSpaces)
 	display.autoSwitch()
 	if brightness == "auto" then
 		U.defer(1, function() display.autoSetBrightness() end) -- await auto-switch
@@ -93,8 +55,6 @@ local function workLayout(brightness)
 			gmail:activate() -- activate Gmail last to make it frontmost
 		end
 	end)
-
-	print("🔲 Layout: work")
 end
 
 local function movieLayout()
@@ -102,6 +62,7 @@ local function movieLayout()
 	if M.isLayouting then return end
 	M.isLayouting = true
 	U.defer(2.5, function() M.isLayouting = false end)
+	print("🔲 Layout: movie")
 
 	-- basic
 	dockSwitcher("movie")
@@ -110,7 +71,7 @@ local function movieLayout()
 	hs.execute("defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder")
 
 	-- screen
-	connectProjector(true, holeCover.update)
+	display.connectProjector(true)
 	display.setDarkMode("dark")
 	display.darkenImacDisplay()
 
@@ -153,7 +114,6 @@ local function movieLayout()
 		"Reminders",
 		"Calendar",
 	}
-	print("🔲 Layout: movie")
 end
 
 ---WHEN TO SET LAYOUT-----------------------------------------------------------
