@@ -23,7 +23,7 @@ safeRequire("meta.utils") -- loads global `U`
 
 safeRequire("appearance.console")
 safeRequire("appearance.hole-cover")
-safeRequire("appearance.screen-brightness-darkmode")
+safeRequire("appearance.darkmode-and-brightness")
 
 safeRequire("win-management.win-mover")
 safeRequire("win-management.layouts")
