@@ -7,8 +7,6 @@ if [[ "$TERM_PROGRAM" != "WezTerm" ]]; then printf '\33c\e[3J'; fi
 # still a bit buggy (use of enter for accepting, etc.)
 export USE_IRIS="false"
 
-export USE_ZSH_AUTOCOMPLETE="false" # disable due to prompt-shifting bug…
-
 #-------------------------------------------------------------------------------
 
 CONFIG_FILES=(

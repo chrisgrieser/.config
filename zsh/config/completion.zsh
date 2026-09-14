@@ -2,13 +2,25 @@
 # zsh docs                  https://zsh.sourceforge.io/Guide/zshguide06.html
 # zstyle                    https://zsh.sourceforge.io/Doc/Release/Completion-System.html#Standard-Styles
 # good guide                https://thevaluable.dev/zsh-completion-guide-examples/
-# zsh-autocomplete config   https://github.com/marlonrichert/zsh-autocomplete#configuration
-# zsh-autocomplete presets  https://github.com/marlonrichert/zsh-autocomplete/blob/main/Functions/Init/.autocomplete__config
-#───────────────────────────────────────────────────────────────────────────────
+#-------------------------------------------------------------------------------
 
-# FORMAT / COLOR
-# color completion groups with purple-gray background (ccc.nvim highlight is wrong)
-zstyle ':completion:*:descriptions' format $'\e[7;38;5;103m %d \e[0;38;5;103m \e[0m'
+#-GENERAL-----------------------------------------------------------------------
+# do not save in public dotfile repo
+export ZSH_COMPDUMP="$HOME/.local/share/zsh/zcompdump"
+
+# use visual menu for selections
+zstyle ':completion:*' menu select
+
+# sort by modification date and follow symlinks
+zstyle ':completion:*' file-sort modification follow
+
+#-FORMAT & COLOR------------------------------------------------------------------
+
+zstyle ':completion:*:messages' format '%F{purple} -- %d --%f'
+zstyle ':completion:*:warnings' format '%K{yellow} %F{black} no matches found%k'
+
+# color completion groups with purple-gray background
+zstyle ':completion:*:descriptions' format $'\e[7;38;5;103m %d \e[0;38;5;103m\e[0m'
 
 # color items in specific groups (here: aliases in magenta)
 zstyle ':completion:*:aliases' list-colors '=*=35'
@@ -21,15 +33,7 @@ zstyle ':completion:*:default' list-colors \
 	"$LS_COLORS" \
 	"ma=7;38;5;68"
 
-# silent warning if there are no completions https://github.com/marlonrichert/zsh-autocomplete/discussions/513
-zstyle ':completion:*:warnings' format ""
-
-# print help messages in blue instead of red (e.g., `just` recipe-descriptions)
-zstyle ':completion:*:messages' format $'\e[3;34m%d\e[0m'
-
-#───────────────────────────────────────────────────────────────────────────────
-# BINDINGS
-
+#-BINDINGS----------------------------------------------------------------------
 # On empty buffer, `tab` opens `cd` completion menu, otherwise, select completion.
 # (This is better than `AUTO_CD`, since `zstyle ':completion:*' group-order` does
 # not affect `AUTO_CD`, but is normal `cd`, which we emulate here. )
@@ -50,38 +54,3 @@ _tab-on-empty-buffer() {
 }
 zle -N _tab-on-empty-buffer
 bindkey '^I' _tab-on-empty-buffer
-
-# `menuselect` = when in completion menu
-if [[ "$USE_ZSH_AUTOCOMPLETE" == "true" ]]; then
-	bindkey -M menuselect '^I' menu-complete           # <Tab> next item
-	bindkey -M menuselect '^[[Z' reverse-menu-complete # <S-Tab> prev suggestion
-	bindkey -M menuselect '\r' .accept-line            # <CR> select & execute
-fi
-
-#───────────────────────────────────────────────────────────────────────────────
-# SORT
-# sort by modification date and follow symlinks
-zstyle ':completion:*' file-sort modification follow
-
-# INFO inserting "path-directories" to add "directories in cdpath" to the top
-# (does not work with `AUTO_CD` though; thus this requires a leading `cd`)
-zstyle ':completion:*' group-order \
-	path-directories local-directories directories \
-	all-expansions expansions options \
-	aliases suffix-aliases functions reserved-words builtins commands executables \
-	remotes hosts recent-branches commits
-
-#────────────────────────────────────────────────────────────────────────────
-
-# IGNORE
-zstyle ':completion:*' ignored-patterns \
-	".git" ".DS_Store" ".localized" "node_modules" "__pycache__"
-
-# do not trigger completions for zsh-autocomplete
-zstyle ':autocomplete:*' ignored-input '..d'
-
-#───────────────────────────────────────────────────────────────────────────────
-# OTHER
-
-# do not save in public dotfile repo
-export ZSH_COMPDUMP="$HOME/.local/share/zsh/zcompdump"

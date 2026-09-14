@@ -566,16 +566,8 @@ nnoremap ,it :showTasks<CR>
 exmap gotoFootnote obcommand obsidian-footnotes:insert-autonumbered-footnote
 nnoremap gf :gotoFootnote<CR>
 
-" [o]ption: [d]iagnostics
-exmap toggleHarper obcommand harper:harper-toggle-auto-lint
-nnoremap ,od :toggleHarper<CR>
-
 "───────────────────────────────────────────────────────────────────────────────
 " PHD VAULT
-
-" set "[r]ead: true" property
-exmap markAsRead obcommand quadro:mark-datafile-as-read
-nnoremap ,rr :markAsRead<CR>
 
 " goto last link in file
 exmap gotoLastLinkOrTodoInFile jsfile Meta/vimrc-jsfile.js { gotoLastLinkOrTodoInFile() }

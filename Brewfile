@@ -20,11 +20,11 @@ brew "python" # most recent python version, since macOS system python is only 3.
 
 #-ZSH---------------------------------------------------------------------------
 brew "starship"
-brew "zsh-autocomplete"
 brew "zsh-autopair"
 brew "zsh-history-substring-search"
 brew "zsh-syntax-highlighting"
 brew "zsh-autosuggestions"
+brew "versenilvis/iris/iris"
 
 #-APPS--------------------------------------------------------------------------
 cask "alfred"
@@ -76,7 +76,6 @@ if device.include?("Home")
 	mas "NIIMBOT", id: 6755411172
 end
 if device.include?("Home") or device.include?("Office")
-	cask "granola"
 	cask "monodraw"
 end
 if device.include?("Home") or device.include?("Mother")
