@@ -175,7 +175,7 @@ hs.hotkey.bind({}, "end", movieLayout)
 
 -- 2. URI (for Touchpad via BetterTouchTool)
 hs.urlevent.bind("movie-layout", function()
-	U.sound("Hero") -- indicate that Touchpad was triggered
+	U.sound("Hero", 0.6) -- indicate that Touchpad was triggered
 	movieLayout()
 end)
 
