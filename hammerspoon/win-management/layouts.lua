@@ -174,7 +174,7 @@ M.caff = c.new(function(event)
 		print("🖥️ Woke during the day with projector on")
 		workLayout("auto")
 	end
-end)
+end):start()
 
 --------------------------------------------------------------------------------
 return M

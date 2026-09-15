@@ -103,12 +103,10 @@ M.caff = c.new(function(event)
 	elseif event == c.screensDidWake and not env.hasProjector() then
 		if M.wokeRecently then return end
 		M.wokeRecently = true
+		U.defer(5, function() M.wokeRecently = false end) -- prevent loop w/ error notification waking screen
 		print("🖥️ Brightened screen after waking up")
 		U.defer(0.5, M.autoSwitch) -- wait for display turning on
 		U.defer(1, M.autoSetBrightness) -- wait for auto-switch
-
-		-- prevent loop where an error notification wakes the screen, which
-		U.defer(5, function() M.wokeRecently = false end)
 	end
 end):start()
 
