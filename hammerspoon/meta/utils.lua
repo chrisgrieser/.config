@@ -250,20 +250,21 @@ function U.quitFullscreenSpaces()
 					local success, err = hs.spaces.removeSpace(id)
 					print(
 						success and "🧹 Closed fullscreen spaces"
-							or "⚠️Could not close fullscreen: " .. err
+							or "❌ Could not close fullscreen: " .. err
 					)
 				end
 			end
 		end
 	end)
-	if not success then print("⚠️ Exiting fullscreen spaces failed:" .. err, 5) end
+	if not success then print("❌ Exiting fullscreen spaces failed:" .. err, 5) end
 end
 
 function U.closeVideoApps()
 	-- prevent the automatic quitting of audio-apps from triggering a music start
-	require("apps.music").aw_music:stop()
+	local appWatcherForMusic = require("apps.music").aw_music
+	appWatcherForMusic:stop()
 	U.quitApps(U.videoAndAudioApps)
-	U.defer(1, function() require("apps.music").aw_music:start() end)
+	U.defer(1, function() appWatcherForMusic:start() end)
 
 	-- extra video apps
 	local extraVideoAppDir = os.getenv("HOME")
@@ -275,8 +276,8 @@ function U.closeVideoApps()
 end
 
 ---@param name string
----@param volume number
-function U.sound(name, volume)
+function U.sound(name)
+	local volume = 0.75
 	hs.sound.getByName(name):volume(volume):play() ---@diagnostic disable-line: undefined-field
 end
 

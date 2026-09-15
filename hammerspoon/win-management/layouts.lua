@@ -27,39 +27,53 @@ local function connectProjector(status, callback)
 	if env.hasProjector() == status then return end
 
 	local setTo = status and "on" or "off"
-	local delay = 0
+	local delayForBetterDisplayStart = 0
 	if not (U.app("BetterDisplay")) then
 		local app = hs.application.open("BetterDisplay")
 		if not app then
 			U.alertAndLog("Could not find BetterDisplay.")
 			return
 		end
-		delay = 3
+		delayForBetterDisplayStart = 3
 	end
-	U.defer(delay, function()
+
+	-----------------------------------------------------------------------------
+	local maxAttempts = 3
+	local attempts = 0
+	local function switch()
+		attempts = attempts + 1
+
 		-- DOCS https://github.com/waydabber/BetterDisplay/wiki/Integration-features,-CLI#cli-access-by-installing-betterdisplaycli
 		-- alternative URI Scheme: BetterDisplay://set?name=P62_Pro&connected=on
 		local name = env.projectorName
 		local shellScript = ("betterdisplaycli set --name=%q --connected=%q"):format(name, setTo)
 		hs.execute(U.exportPath .. shellScript)
-	end)
-	U.defer(delay + 2, function()
-		local success = env.hasProjector() == status -- exit code of `betterdisplaycli` is not reliable
-		if success then
-			require("appearance.hole-cover").update()
-			if callback then callback() end
-			print("📽️✅ Projector set to [" .. setTo .. "]")
-		else
-			U.sound("Basso", 0.7)
-			print("📽️❌ Could not set projector to [" .. setTo .. "].")
-		end
-	end)
+
+		U.defer(2, function()
+			local success = env.hasProjector() == status -- exit code of `betterdisplaycli` is not reliable
+			if not success and (attempts < maxAttempts) then
+				U.defer(1, switch)
+				return
+			end
+
+			if success then
+				require("appearance.hole-cover").update()
+				if callback then callback() end
+				print("📽️✅ Projector set to [" .. setTo .. "]")
+			else
+				U.sound("Basso")
+				print("📽️❌ Could not set projector to [" .. setTo .. "].")
+			end
+		end)
+	end
+
+	U.defer(delayForBetterDisplayStart, function() switch() end)
 end
 
 ---LAYOUTS---------------------------------------------------------------------
 
----@param brightness "dark"|"auto"
-local function workLayout(brightness)
+---@param setDisplay? "dark"
+local function workLayout(setDisplay)
 	if M.isLayouting then return end
 	M.isLayouting = true
 	U.defer(2.5, function() M.isLayouting = false end)
@@ -71,10 +85,11 @@ local function workLayout(brightness)
 	-- screen
 	connectProjector(false, U.quitFullscreenSpaces)
 	display.autoSwitch()
-	if brightness == "auto" then
+	if setDisplay == "dark" then
+		display.darkenImacDisplay()
+	else
 		U.defer(1, function() display.autoSetBrightness() end) -- await auto-switch
 	end
-	if brightness == "dark" then display.darkenImacDisplay() end
 
 	-- close & open things
 	U.closeAllFinderWins()
@@ -160,21 +175,23 @@ hs.hotkey.bind({}, "end", movieLayout)
 
 -- 2. URI (for Touchpad via BetterTouchTool)
 hs.urlevent.bind("movie-layout", function()
-	U.sound("Hero", 0.7) -- indicate that Touchpad was triggered
+	U.sound("Hero") -- indicate that Touchpad was triggered
 	movieLayout()
 end)
 
 -- 3. Systemstart
-if U.isSystemStart() then workLayout("auto") end
+if U.isSystemStart() then workLayout() end
 
--- 4. Mornings (reset to worklayout for logins)
+-- 4. Waking & mornings: reset work layout
 local c = hs.caffeinate.watcher
 M.caff = c.new(function(event)
 	if event == c.screensDidWake and env.hasProjector() and U.betweenTime(7, 22) then
 		print("🖥️ Woke during the day with projector on")
-		workLayout("auto")
+		workLayout()
 	end
 end):start()
+
+M.timer_morningWorkLayout = hs.timer.doAt("06:00", "01d", workLayout, true):start()
 
 --------------------------------------------------------------------------------
 return M

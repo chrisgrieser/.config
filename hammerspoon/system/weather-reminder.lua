@@ -53,10 +53,10 @@ local function getOutsideTemp()
 
 		if outsideNowCoolerThanInside then
 			U.alertAndLog("🔵 Outside now cooler than inside.")
-			U.sound("Funk", 0.5)
+			U.sound("Funk")
 		elseif outsideNowHotterThanInside then
 			U.alertAndLog("🔵 Outside now cooler than inside.")
-			U.sound("Funk", 0.5)
+			U.sound("Funk")
 		end
 	end)
 end
