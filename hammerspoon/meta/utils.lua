@@ -276,8 +276,9 @@ function U.closeVideoApps()
 end
 
 ---@param name string
-function U.sound(name)
-	local volume = 0.75
+---@param volume? number
+function U.sound(name, volume)
+	volume = volume or 0.75
 	hs.sound.getByName(name):volume(volume):play() ---@diagnostic disable-line: undefined-field
 end
 
