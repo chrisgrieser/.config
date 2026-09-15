@@ -151,7 +151,7 @@ function U.alertAndLog(msg, durationSecs)
 	print("🔔 " .. msg)
 	local allScreens = hs.screen.allScreens() ---@cast allScreens hs.screen
 	for _, screen in pairs(allScreens) do
-		hs.alert.show(msg, durationSecs, screen)
+		hs.alert.show(msg, screen, durationSecs)
 	end
 end
 

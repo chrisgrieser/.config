@@ -8,13 +8,13 @@ hs.window.animationDuration = 0
 _G.Persist = {}
 
 ---Try to require the module, and do not error when one of them cannot be
----loaded, but do notify if there was an error.
+---loaded, but do notify if there was an error
 ---@param module string module to load
 local function safeRequire(module)
 	local success, M = pcall(require, module)
 	Persist[module:sub(5)] = M
 	if not success then
-		hs.alert(M, 4)
+		hs.alert(M, 5)
 		print(M)
 	end
 end
@@ -36,7 +36,6 @@ safeRequire("system.filesystem-watchers")
 safeRequire("system.repo-auto-sync")
 safeRequire("system.menubar")
 safeRequire("system.external-drives")
-safeRequire("system.japanese")
 safeRequire("system.weather-reminder")
 
 safeRequire("apps.auto-quitter")
