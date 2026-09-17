@@ -31,6 +31,7 @@ function M.autoSetBrightness()
 end
 
 function M.darkenImacDisplay()
+	if #hs.screen.allScreens() == 1 then return end
 	local iMacDisplay = require("win-management.window-utils").iMacDisplay
 	if iMacDisplay then iMacDisplay:setBrightness(0) end
 end
@@ -98,8 +99,7 @@ M.caff = c.new(function(event)
 	if wokeWithProjector or screensaverAtNight then
 		local reason = wokeWithProjector and "woke with projector" or "screensaver at night"
 		print(("🖥️ Darkened screen (%s)"):format(reason))
-		U.defer(1, M.darkenImacDisplay) -- wait for macOS turning brightness up
-		U.defer(4, M.darkenImacDisplay) -- redundancy to ensure BetterDisplay is active for full darkness
+		U.defer(2, M.darkenImacDisplay) -- wait for macOS turning brightness up
 	elseif event == c.screensDidWake and not env.hasProjector() then
 		if M.wokeRecently then return end
 		M.wokeRecently = true
