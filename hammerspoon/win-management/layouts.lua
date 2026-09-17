@@ -185,7 +185,7 @@ if U.isSystemStart() then workLayout() end
 -- 4. Waking & mornings: reset work layout
 local c = hs.caffeinate.watcher
 M.caff = c.new(function(event)
-	if event == c.screensDidWake and env.hasProjector() and U.betweenTime(7, 22) then
+	if event == c.systemDidWake and env.hasProjector() and U.betweenTime(7, 22) then
 		print("🖥️ Woke during the day with projector on")
 		workLayout()
 	end
