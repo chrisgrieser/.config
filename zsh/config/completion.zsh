@@ -6,13 +6,13 @@
 
 #-GENERAL-----------------------------------------------------------------------
 
-# use visual menu for selections
-zmodload -i zsh/complist
-zstyle ':completion:*' menu select
-
 # enable zsh completions (needs to be after zstyle activating menu-select)
 autoload compinit -Uz && compinit
 [[ $(uname -p) == "i386" ]] && compaudit | xargs chmod g-w # FIX for Intel Mac, https://github.com/zsh-users/zsh-completions/issues/433#issuecomment-629539004
+
+# use visual menu for selections
+zstyle ':completion:*' menu select
+zmodload -i zsh/complist # enables `-M menuselect` (bindings only active when selection is visible)
 
 # HOMEBREW: load completions
 # load various completions of clis installed via homebrew
@@ -76,12 +76,18 @@ zle -N _tab-on-empty-buffer
 bindkey '^I' _tab-on-empty-buffer
 
 # SHIFT+TAB: prev item
-bindkey '^[[Z' reverse-menu-complete
+bindkey -M menuselect '^[[Z' reverse-menu-complete
 
-# SHIFT+RETURN: accept and execute
+# RETURN: accept line and execute
 _accept-and-execute() {
-	zle .accept-line
-	[[ -z "$BUFFER" ]] || zle .accept-line
+	zle accept-line
+	[[ -z "$BUFFER" ]] || zle accept-line
 }
 zle -N _accept-and-execute
-bindkey '^J' _accept-and-execute
+bindkey -M menuselect '^M' _accept-and-execute
+
+# RIGHT-ARROW: accept & next directory
+bindkey -M menuselect '^[[C' accept-and-infer-next-history
+
+# ESCAPE: cancel
+bindkey -M menuselect '^[' send-break
