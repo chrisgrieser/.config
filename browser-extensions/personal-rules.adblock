@@ -28,10 +28,6 @@ www.crunchyroll.com##.avatar-badge
 stackoverflow.com###announcement-banner
 help.obsidian.md##.site-body-left-column
 
-! ai
-chatgpt.com###page-header > .absolute
-chatgpt.com##div:has( > button[aria-label="Claim offer"])
-
 ! search
 duckduckgo.com##[data-testid="feedback-prompt"]
 duckduckgo.com##.footer > div
