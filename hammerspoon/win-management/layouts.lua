@@ -182,16 +182,56 @@ end)
 -- 3. Systemstart
 if U.isSystemStart() then workLayout() end
 
--- 4. Waking & mornings: reset work layout
-local c = hs.caffeinate.watcher
-M.caff = c.new(function(event)
-	if event == c.systemDidWake and env.hasProjector() and U.betweenTime(7, 22) then
-		print("🖥️ Woke during the day with projector on")
-		workLayout()
+---SLEEP TIMER------------------------------------------------------------------
+-- When projector is connected, check every x min if device has been idle for y mins
+local config = {
+	checkIntervalMins = 15,
+	timeToReactSecs = 20,
+	triggerAfterMins = {
+		quitVideoapps = 50,
+		disconnectProjector = 360,
+	},
+}
+
+local doEvery = hs.timer.doEvery
+M.sleepTimer = doEvery(config.checkIntervalMins * 60, function()
+	if not env.hasProjector() then return end
+
+	-- QUIT PROJECTOR
+	local userInActiveFor = {
+		projector = (hs.host.idleTime() / 60) > config.triggerAfterMins.disconnectProjector,
+		videoapps = (hs.host.idleTime() / 60) > config.triggerAfterMins.quitVideoapps,
+	}
+	local noVideoAppRunning = not hs.fnutils.some(U.videoAndAudioApps, U.app)
+
+	if userInActiveFor.projector then
+		connectProjector(false)
+	elseif userInActiveFor.videoapps and noVideoAppRunning then
+		-- inform user about upcoming sleep
+		local alertMsg = ("💤 Will sleep in %ds if idle."):format(config.timeToReactSecs)
+		U.alertAndLog(alertMsg, config.timeToReactSecs)
+		U.sound("Submarine")
+
+		-- remove alert earlier if user reacted
+		local halfTime = math.ceil(config.timeToReactSecs / 2)
+		U.defer(halfTime, function()
+			U.sound("Submarine") -- second alert
+			local userDidSth = hs.host.idleTime() < (config.timeToReactSecs / 2)
+			if userDidSth then hs.alert.closeAll() end
+		end)
+
+		-- close if *still* idle, abort otherwise
+		U.defer(config.timeToReactSecs, function()
+			local userDidSth = hs.host.idleTime() < config.timeToReactSecs
+			if userDidSth then return end
+
+			U.closeBrowserTabsWith("all")
+			U.closeVideoApps()
+			U.defer(1, U.quitFullscreenSpaces)
+			U.notifyOnPhone("💤 Sleep timer", "triggered at " .. os.date("%H:%M"))
+		end)
 	end
 end):start()
-
-M.timer_morningWorkLayout = hs.timer.doAt("06:00", "01d", workLayout, true):start()
 
 --------------------------------------------------------------------------------
 return M

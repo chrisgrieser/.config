@@ -76,6 +76,7 @@ if device.include?("Home")
 end
 if device.include?("Home") or device.include?("Office")
 	cask "monodraw"
+	# mas "PDF Owl", id: 6450437117 # ToC generation for PDFs
 end
 if device.include?("Home") or device.include?("Mother")
 	# cask "qlvideo" # thumbnails not working: https://github.com/Marginal/QuickLookVideo/issues/173
