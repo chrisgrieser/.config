@@ -186,10 +186,12 @@ if U.isSystemStart() then workLayout() end
 -- When projector is connected, check every x min if device has been idle for y mins
 local config = {
 	checkIntervalMins = 15,
-	timeToReactSecs = 20,
-	triggerAfterMins = {
-		quitVideoapps = 50,
-		disconnectProjector = 360,
+	quitVideoapps = {
+		timeToReactSecs = 20,
+		triggerAfterMins = 50,
+	},
+	disconnectProjector = {
+		triggerAfterMins = 50, -- should be lower than "Lock screen -> require password after"
 	},
 }
 
@@ -197,32 +199,37 @@ local doEvery = hs.timer.doEvery
 M.sleepTimer = doEvery(config.checkIntervalMins * 60, function()
 	if not env.hasProjector() then return end
 
-	-- QUIT PROJECTOR
 	local userInActiveFor = {
-		projector = (hs.host.idleTime() / 60) > config.triggerAfterMins.disconnectProjector,
-		videoapps = (hs.host.idleTime() / 60) > config.triggerAfterMins.quitVideoapps,
+		projector = (hs.host.idleTime() / 60) > config.disconnectProjector.triggerAfterMins,
+		videoapps = (hs.host.idleTime() / 60) > config.quitVideoapps.triggerAfterMins,
 	}
-	local noVideoAppRunning = not hs.fnutils.some(U.videoAndAudioApps, U.app)
 
 	if userInActiveFor.projector then
 		connectProjector(false)
-	elseif userInActiveFor.videoapps and noVideoAppRunning then
+		workLayout()
+		local mins = config.triggerAfterMins.disconnectProjector
+		print("💤💤 Reset to work layout after idle for " .. mins .. " mins.")
+	elseif userInActiveFor.videoapps then
+		local noVideoAppRunning = not hs.fnutils.some(U.videoAndAudioApps, U.app)
+		if noVideoAppRunning then return end
+
 		-- inform user about upcoming sleep
-		local alertMsg = ("💤 Will sleep in %ds if idle."):format(config.timeToReactSecs)
+		local timeToReactSecs = config.quitVideoapps.timeToReactSecs
+		local alertMsg = ("💤 Will sleep in %ds if idle."):format(timeToReactSecs)
 		U.alertAndLog(alertMsg, config.timeToReactSecs)
 		U.sound("Submarine")
 
 		-- remove alert earlier if user reacted
-		local halfTime = math.ceil(config.timeToReactSecs / 2)
+		local halfTime = math.ceil(timeToReactSecs / 2)
 		U.defer(halfTime, function()
 			U.sound("Submarine") -- second alert
-			local userDidSth = hs.host.idleTime() < (config.timeToReactSecs / 2)
+			local userDidSth = hs.host.idleTime() < (timeToReactSecs / 2)
 			if userDidSth then hs.alert.closeAll() end
 		end)
 
 		-- close if *still* idle, abort otherwise
 		U.defer(config.timeToReactSecs, function()
-			local userDidSth = hs.host.idleTime() < config.timeToReactSecs
+			local userDidSth = hs.host.idleTime() < timeToReactSecs
 			if userDidSth then return end
 
 			U.closeBrowserTabsWith("all")
