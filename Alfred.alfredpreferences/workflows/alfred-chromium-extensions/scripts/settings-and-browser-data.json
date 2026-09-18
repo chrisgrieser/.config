@@ -29,16 +29,17 @@
 	],
 	"browserSpecificSettings": {
 		"Google Chrome": [],
+		"INFO": "For brave, using `brave://` does not work for some reason, but links will be redirected correctly.",
 		"Brave Browser": [
-			{ "title": "⌨️ Brave Shortcuts", "arg": "brave://settings/system/shortcuts" },
-			{ "title": "🔰 Brave Shields", "arg": "brave://settings/shields" },
-			{ "title": "🔰 Brave Shields Filters", "arg": "brave://settings/shields/filters" },
-			{ "title": "🤖 Brave Leo Assistant (AI)", "arg": "brave://settings/leo-assistant" },
-			{ "title": "📖 Brave Help & Tips", "arg": "brave://settings/braveHelpTips" },
-			{ "title": "📝 Brave Content", "arg": "brave://settings/braveContent" },
-			{ "title": "🔁 Brave Sync", "arg": "brave://settings/braveSync/setup" },
-			{ "title": "🛠️ Brave Sync Internals", "arg": "brave://sync-internals" },
-			{ "title": "ℹ️ Brave Version", "arg": "brave://version" }
+			{ "title": "⌨️ Brave Shortcuts", "arg": "chrome://settings/system/shortcuts" },
+			{ "title": "🔰 Brave Shields", "arg": "chrome://settings/shields" },
+			{ "title": "🔰 Brave Shields Filters", "arg": "chrome://settings/shields/filters" },
+			{ "title": "🤖 Brave Leo Assistant (AI)", "arg": "chrome://settings/leo-assistant" },
+			{ "title": "📖 Brave Help & Tips", "arg": "chrome://settings/braveHelpTips" },
+			{ "title": "📝 Brave Content", "arg": "chrome://settings/braveContent" },
+			{ "title": "🔁 Brave Sync", "arg": "chrome://settings/braveSync/setup" },
+			{ "title": "🛠️ Brave Sync Internals", "arg": "chrome://sync-internals" },
+			{ "title": "ℹ️ Brave Version", "arg": "chrome://version" }
 		],
 		"Arc": [],
 		"Thorium": []

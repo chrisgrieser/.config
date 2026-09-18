@@ -1,11 +1,14 @@
 set quiet := true
 
+# For brave, using `brave://` does not work for some reason, but links will be redirected correctly.
+
 reload-adblock-rules:
     #!/usr/bin/env zsh
     git add "personal-rules.adblock" &&
         git commit --no-verify --message "chore: update adblock rules" &&
         git push
-    open "brave://settings/shields/filters" # filters need to be updated manually
+    open "chrome://settings/shields/filters" # filters need to be updated manually
+    open "https://raw.githubusercontent.com/chrisgrieser/.config/refs/heads/main/browser-extensions/personal-rules.adblock"
 
 open-shields-filters:
-    open "brave://settings/shields/filters"
+    open "chrome://settings/shields/filters"
