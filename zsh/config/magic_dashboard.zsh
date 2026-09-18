@@ -156,7 +156,6 @@ type _magic_enter_accept_line &> /dev/null && return
 
 widget_name="accept-line" # need to put into variable so `shfmt` does not break it
 
-# shellcheck disable=2154
 case "${widgets[$widget_name]}" in
 # Override the current accept-line widget, calling the old one
 user:*)

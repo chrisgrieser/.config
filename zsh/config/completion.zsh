@@ -6,20 +6,21 @@
 
 #-GENERAL-----------------------------------------------------------------------
 
-# enable zsh completions
-autoload compinit -Uz +X && compinit
-[[ $(uname -p) == "i386" ]] && compaudit | xargs chmod g-w # FIX for Intel Mac, https://github.com/zsh-users/zsh-completions/issues/433#issuecomment-629539004
-
-# do not save in public dotfile repo
-export ZSH_COMPDUMP="$HOME/.local/share/zsh/zcompdump"
-
 # use visual menu for selections
+zmodload -i zsh/complist
 zstyle ':completion:*' menu select
 
-# LOAD HOMEBREW COMPLETIONS
+# enable zsh completions (needs to be after zstyle activating menu-select)
+autoload compinit -Uz && compinit
+[[ $(uname -p) == "i386" ]] && compaudit | xargs chmod g-w # FIX for Intel Mac, https://github.com/zsh-users/zsh-completions/issues/433#issuecomment-629539004
+
+# HOMEBREW: load completions
 # load various completions of clis installed via homebrew
 # needs to be run *before* compinit/zsh-autocomplete
 export FPATH="$ZDOTDIR/completions:$HOMEBREW_PREFIX/share/zsh/site-functions:$FPATH"
+
+# do not save in public dotfile repo
+export ZSH_COMPDUMP="$HOME/.local/share/zsh/zcompdump"
 
 #-SORT--------------------------------------------------------------------------
 
@@ -60,7 +61,7 @@ zstyle ':completion:*:default' list-colors \
 
 #-BINDINGS----------------------------------------------------------------------
 
-# On empty buffer, `tab` opens `cd` completion menu, otherwise, select completion.
+# TAB: On empty buffer opens `cd` completion, otherwise next item
 # (This is better than `AUTO_CD`, since `zstyle ':completion:*' group-order` does
 # not affect `AUTO_CD`, but affects normal `cd`, which we emulate here. )
 _tab-on-empty-buffer() {
@@ -68,17 +69,19 @@ _tab-on-empty-buffer() {
 	if [[ -z "$BUFFER" && "$CONTEXT" == "start" ]]; then
 		BUFFER="cd "
 		export CURSOR=3
-		zle list-choices # open completion
-	else
-		# select completion
-		if [[ "$USE_ZSH_AUTOCOMPLETE" == "true" ]]; then
-			zle menu-select
-		else
-			zle expand-or-complete
-		fi
 	fi
+	zle menu-complete # open completion and pre-select 1st item
 }
 zle -N _tab-on-empty-buffer
 bindkey '^I' _tab-on-empty-buffer
 
-bindkey '^[[Z' reverse-menu-complete # shift+tab
+# SHIFT+TAB: prev item
+bindkey '^[[Z' reverse-menu-complete
+
+# SHIFT+RETURN: accept and execute
+_accept-and-execute() {
+	zle .accept-line
+	[[ -z "$BUFFER" ]] || zle .accept-line
+}
+zle -N _accept-and-execute
+bindkey '^J' _accept-and-execute
