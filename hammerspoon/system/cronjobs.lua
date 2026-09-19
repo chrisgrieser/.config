@@ -41,7 +41,7 @@ do
 				local fileShort = file:gsub("%.%w+$", "")
 				local msg = "🕑 " .. fileShort .. (output ~= "" and ": " .. output or "")
 				if code ~= 0 then return U.notify("❌ " .. msg) end
-				print(msg)
+				if dir ~= cronjobDir .. "/hourly" then print(msg) end
 			end):start()
 			::continue::
 		end

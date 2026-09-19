@@ -207,7 +207,7 @@ M.sleepTimer = doEvery(config.checkIntervalMins * 60, function()
 	if userInActiveFor.projector then
 		connectProjector(false)
 		workLayout()
-		local mins = config.triggerAfterMins.disconnectProjector
+		local mins = config.disconnectProjector.triggerAfterMins
 		print("💤💤 Reset to work layout after idle for " .. mins .. " mins.")
 	elseif userInActiveFor.videoapps then
 		local noVideoAppRunning = not hs.fnutils.some(U.videoAndAudioApps, U.app)
@@ -227,7 +227,7 @@ M.sleepTimer = doEvery(config.checkIntervalMins * 60, function()
 			if userDidSth then hs.alert.closeAll() end
 		end)
 
-		-- close if *still* idle, abort otherwise
+		-- close if still idle; abort otherwise
 		U.defer(config.timeToReactSecs, function()
 			local userDidSth = hs.host.idleTime() < timeToReactSecs
 			if userDidSth then return end
