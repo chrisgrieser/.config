@@ -191,7 +191,7 @@ local config = {
 		triggerAfterMins = 50,
 	},
 	disconnectProjector = {
-		triggerAfterMins = 50, -- should be lower than "Lock screen -> require password after"
+		triggerAfterMins = 180, -- should be lower than "Lock screen -> require password after"
 	},
 }
 
@@ -209,7 +209,9 @@ M.sleepTimer = doEvery(config.checkIntervalMins * 60, function()
 		workLayout()
 		local mins = config.disconnectProjector.triggerAfterMins
 		print("💤💤 Reset to work layout after idle for " .. mins .. " mins.")
-	elseif userInActiveFor.videoapps then
+	end
+
+	if userInActiveFor.videoapps then
 		local noVideoAppRunning = not hs.fnutils.some(U.videoAndAudioApps, U.app)
 		if noVideoAppRunning then return end
 
