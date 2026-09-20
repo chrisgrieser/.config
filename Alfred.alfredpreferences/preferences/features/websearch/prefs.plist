@@ -169,6 +169,17 @@
 			<key>url</key>
 			<string>https://www.linguee.com/english-german/search?query={query}</string>
 		</dict>
+		<key>7D6EC6A8-5D2E-44B2-9BCB-092694CB41FA</key>
+		<dict>
+			<key>enabled</key>
+			<true/>
+			<key>keyword</key>
+			<string>ka</string>
+			<key>text</key>
+			<string>Kleinanzeigen: "{query}"</string>
+			<key>url</key>
+			<string>https://www.kleinanzeigen.de/s-spielzeug/{query}/k0c23</string>
+		</dict>
 		<key>8AE994F1-7B56-4F81-A873-9C43F730F91D</key>
 		<dict>
 			<key>enabled</key>
