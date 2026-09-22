@@ -192,12 +192,11 @@ local config = {
 
 local doEvery = hs.timer.doEvery
 M.sleepTimer = doEvery(config.checkIntervalMins * 60, function()
-	if not env.hasProjector() then return end
 	local userActive = (hs.host.idleTime() / 60) > config.triggerAfterMins
-	if not env.hasProjector() or userActive or not U.screenIsUnlocked() then return end
+	if userActive or not env.hasProjector() then return end
 
 	-- inform user about upcoming sleep
-	local timeToReactSecs = config.quitVideoapps.timeToReactSecs
+	local timeToReactSecs = config.timeToReactSecs
 	local alertMsg = ("💤 Will sleep in %ds if idle."):format(timeToReactSecs)
 	U.alertAndLog(alertMsg, config.timeToReactSecs)
 	U.sound("Submarine")
@@ -211,7 +210,7 @@ M.sleepTimer = doEvery(config.checkIntervalMins * 60, function()
 	end)
 
 	-- close if still idle; abort otherwise
-	U.defer(config.quitVideoapps.timeToReactSecs, function()
+	U.defer(config.timeToReactSecs, function()
 		local userStillInactive = hs.host.idleTime() < timeToReactSecs
 		if userStillInactive then
 			workLayout()
