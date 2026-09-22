@@ -91,19 +91,23 @@ function U.isDarkMode() return hs.execute("defaults read -g AppleInterfaceStyle"
 function U.defer(delaySecs, callbackFn)
 	if type(delaySecs) == "number" then delaySecs = { delaySecs } end
 	for _, delay in pairs(delaySecs) do
-		U.defer_timer_idx = (U.defer_timer_idx or 0) + 1
-		U[U.defer_timer_idx] = hs.timer.doAfter(delay, callbackFn):start()
-		if U.defer_timer_idx > 30 then U.defer_timer_idx = 0 end
+		U.deferTimerIdx = (U.deferTimerIdx or 0) + 1
+		U[U.deferTimerIdx] = hs.timer.doAfter(delay, callbackFn):start()
+		if U.deferTimerIdx > 30 then U.deferTimerIdx = 0 end
 	end
 end
 
----@return boolean
----@nodiscard
-function U.screenIsUnlocked()
-	local _, success = hs.execute(
-		'[[ "$(/usr/libexec/PlistBuddy -c "print :IOConsoleUsers:0:CGSSessionScreenIsLocked" /dev/stdin 2>/dev/null <<< "$(ioreg -n Root -d1 -a)")" != "true" ]]'
-	)
-	return success == true -- convert to Boolean
+do
+	U.systemStatus = "unlocked"
+	local c = hs.caffeinate.watcher
+	U.caffWatcher = c.new(function(event)
+		if event == c.screensDidLock then U.systemStatus = "locked" end
+		if event == c.screensDidUnlock then U.systemStatus = "unlocked" end
+	end):start()
+
+	---@return boolean
+	---@nodiscard
+	function U.screenIsUnlocked() return U.systemStatus == "unlocked" end
 end
 
 ---@param msg string

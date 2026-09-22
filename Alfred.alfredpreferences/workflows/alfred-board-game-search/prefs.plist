@@ -4,7 +4,7 @@
 <dict>
 	<key>bgg_csv_path</key>
 	<string>~/.cache/boardgames_ranks.csv</string>
-	<key>keyword</key>
-	<string>bgg</string>
+	<key>keyword_2</key>
+	<string>buy||bgp</string>
 </dict>
 </plist>
