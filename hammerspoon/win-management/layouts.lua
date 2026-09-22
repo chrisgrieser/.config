@@ -191,7 +191,7 @@ local config = {
 
 local doEvery = hs.timer.doEvery
 M.sleepTimer = doEvery(config.checkIntervalMins * 60, function()
-	local userActive = (hs.host.idleTime() / 60) > config.triggerAfterMins
+	local userActive = (hs.host.idleTime() / 60) < config.triggerAfterMins
 	if userActive or not env.hasProjector() then return end
 
 	-- inform user about upcoming sleep
@@ -203,9 +203,12 @@ M.sleepTimer = doEvery(config.checkIntervalMins * 60, function()
 	-- remove alert earlier if user reacted
 	local halfTime = math.ceil(timeToReactSecs / 2)
 	U.defer(halfTime, function()
-		U.sound("Submarine") -- second alert
-		local userDidSth = hs.host.idleTime() < (timeToReactSecs / 2)
-		if userDidSth then hs.alert.closeAll() end
+		local userDidSth = hs.host.idleTime() < halfTime
+		if userDidSth then
+			hs.alert.closeAll()
+		else
+			U.sound("Submarine") -- second alert
+		end
 	end)
 
 	-- close if still idle; abort otherwise
