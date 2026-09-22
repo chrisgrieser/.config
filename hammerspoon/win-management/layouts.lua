@@ -191,10 +191,10 @@ local config = {
 }
 
 local doEvery = hs.timer.doEvery
-M.sleepTimer = doEvery(config.checkIntervalMins * 60, function(),
+M.sleepTimer = doEvery(config.checkIntervalMins * 60, function()
 	if not env.hasProjector() then return end
-	local userInactive = (hs.host.idleTime() / 60) > config.triggerAfterMins
-	if not userInactive then return end
+	local userActive = (hs.host.idleTime() / 60) > config.triggerAfterMins
+	if not env.hasProjector() or userActive or not U.screenIsUnlocked() then return end
 
 	-- inform user about upcoming sleep
 	local timeToReactSecs = config.quitVideoapps.timeToReactSecs
