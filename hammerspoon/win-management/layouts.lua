@@ -77,9 +77,8 @@ local function workLayout(setDisplay)
 	if M.isLayouting then return end
 	M.isLayouting = true
 	U.defer(2.5, function() M.isLayouting = false end)
-	print("🔲 Layout: work")
 
-	-- dock
+	print("🔲 Layout: work")
 	dockSwitcher("work")
 
 	-- screen
@@ -113,10 +112,10 @@ local function movieLayout()
 	if M.isLayouting then return end
 	M.isLayouting = true
 	U.defer(2.5, function() M.isLayouting = false end)
-	print("🔲 Layout: movie")
 
-	-- basic
+	print("🔲 Layout: movie")
 	dockSwitcher("movie")
+
 	music.music_trigger("pause")
 	-- turn off showing hidden files
 	hs.execute("defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder")
@@ -211,11 +210,10 @@ M.sleepTimer = doEvery(config.checkIntervalMins * 60, function()
 
 	-- close if still idle; abort otherwise
 	U.defer(config.timeToReactSecs, function()
-		local userStillInactive = hs.host.idleTime() < timeToReactSecs
-		if userStillInactive then
-			workLayout()
-			U.notifyOnPhone("💤 Sleep timer", "triggered at " .. os.date("%H:%M"))
-		end
+		local userDidSth = hs.host.idleTime() < timeToReactSecs
+		if userDidSth then return end
+		workLayout("dark") -- darken screen as well
+		U.notifyOnPhone("💤 Sleep timer", "triggered at " .. os.date("%H:%M"))
 	end)
 end):start()
 
