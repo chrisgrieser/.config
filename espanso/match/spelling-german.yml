@@ -3,6 +3,7 @@
 matches:
   - { regex: "\\Bsich ", replace: "isch " }
 
+  - { trigger: Breif, replace: Brief }
   - { trigger: Cafe, replace: Café, propagate_case: false }
   - { trigger: mahcen, replace: machen, propagate_case: false }
   - { trigger: Diesntag, replace: Dienstag, propagate_case: true, word: true }
