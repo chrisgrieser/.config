@@ -1445,7 +1445,7 @@ echo -n "🌡️ Removed quarantine"</string>
 				<key>tasksettings</key>
 				<dict>
 					<key>popup_browser</key>
-					<string>Brave Browser</string>
+					<string>Brave</string>
 				</dict>
 				<key>taskuid</key>
 				<string>com.alfredapp.automation.extras/web-browsers/chromium-browsers/chromium.tabs.current</string>
