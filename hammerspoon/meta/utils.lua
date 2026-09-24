@@ -101,13 +101,22 @@ do
 	U.systemStatus = "unlocked"
 	local c = hs.caffeinate.watcher
 	U.caffWatcher = c.new(function(event)
-		if event == c.screensDidLock then U.systemStatus = "locked" end
-		if event == c.screensDidUnlock then U.systemStatus = "unlocked" end
+		local statusByEvent = {
+			[c.screensDidLock] = "locked",
+			[c.screensDidUnlock] = "unlocked",
+			[c.systemDidWake] = "awake",
+			[c.systemWillSleep] = "sleep",
+		}
+		local status = statusByEvent[event]
+		if not status then return end
+
+		U.systemStatus = status
+		print("🔒 System: " .. U.systemStatus)
 	end):start()
 
 	---@return boolean
 	---@nodiscard
-	function U.screenIsUnlocked() return U.systemStatus == "unlocked" end
+	function U.systemIsUnlocked() return U.systemStatus == "unlocked" or U.systemStatus == "awake" end
 end
 
 ---@param msg string

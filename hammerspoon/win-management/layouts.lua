@@ -192,7 +192,7 @@ local config = {
 local doEvery = hs.timer.doEvery
 M.sleepTimer = doEvery(config.checkIntervalMins * 60, function()
 	local userInactive = (hs.host.idleTime() / 60) > config.triggerAfterMins
-	if not (userInactive and env.hasProjector() and U.screenIsUnlocked()) then return end
+	if not (userInactive and env.hasProjector() and U.systemIsUnlocked()) then return end
 
 	-- inform user about upcoming sleep
 	local timeToReactSecs = config.timeToReactSecs
