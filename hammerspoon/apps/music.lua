@@ -17,7 +17,6 @@ end
 
 -- auto-pause/resume music on launch/quit of apps with sound or on Steam games
 M.aw_music = aw.new(function(appName, event, app)
-	-- GUARD
 	if env.hasProjector() or not env.isAtHome then return end
 	if not U.systemIsAwake then return end
 	if not (event == aw.launched or event == aw.terminated) then return end

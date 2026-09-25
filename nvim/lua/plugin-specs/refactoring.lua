@@ -1,5 +1,5 @@
 vim.pack.add {
-	"https://github.com/lewis6991/async.nvim",
+	"https://github.com/lewis6991/async.nvim", -- TODO remove on nvim 0.13
 	"https://github.com/theprimeagen/refactoring.nvim",
 }
 --------------------------------------------------------------------------------

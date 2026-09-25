@@ -21,3 +21,11 @@ sRequire("config.keybindings")
 
 sRequire("personal-plugins.git-conflict")
 sRequire("config.spellfixes")
+--------------------------------------------------------------------------------
+
+if vim.fn.has("nvim-0.13") == 1 then
+	vim.schedule(function()
+		-- https://github.com/ThePrimeagen/refactoring.nvim#installation
+		vim.notify("refactoring.nvim no longer requires async.nvim")
+	end)
+end
