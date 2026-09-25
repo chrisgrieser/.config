@@ -97,26 +97,18 @@ function U.defer(delaySecs, callbackFn)
 	end
 end
 
-do
-	U.systemStatus = "wake"
+do -- allows checking `U.systemIsAwake`
+	U.systemIsAwake = true
 	local c = hs.caffeinate.watcher
 	U.caffWatcher = c.new(function(event)
 		if event == c.systemWillSleep then
-			U.systemStatus = "sleep"
-			print("🔑 System status: " .. U.systemStatus)
-		elseif event == c.systemDidWake then
-			U.systemStatus = " wake"
-			print("🔑 System status: " .. U.systemStatus)
-		elseif event == c.screensDidLock then
-			print("🔑 System status: screen locked")
+			U.systemIsAwake = false
+			print("🔑 System: sleep")
 		elseif event == c.screensDidUnlock then
-			print("🔑 System status: screen unlocked")
+			U.systemIsAwake = true
+			print("🔑 System: wake")
 		end
 	end):start()
-
-	---@return boolean
-	---@nodiscard
-	function U.systemIsAwake() return U.systemStatus == "wake" end
 end
 
 ---@param msg string

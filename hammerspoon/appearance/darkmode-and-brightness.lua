@@ -91,16 +91,12 @@ end)
 local c = hs.caffeinate.watcher
 M.caff = c.new(function(event)
 	if env.isAtOffice then return end
-	local screensaverAtNight = event == c.screensaverDidStart
-		and U.betweenTime(1, 8)
-		and not env.hasProjector()
-	local wokeWithProjector = event == c.screensDidWake and env.hasProjector()
+	if not (event == c.screensDidWake) then return end
 
-	if wokeWithProjector or screensaverAtNight then
-		local reason = wokeWithProjector and "woke with projector" or "screensaver at night"
-		print(("🖥️ Darkened screen (%s)"):format(reason))
+	if env.hasProjector() or U.betweenTime(1, 8) then
+		print("🖥️ Darkened screen (wake up with projector or at night)")
 		U.defer(2, M.darkenImacDisplay) -- wait for macOS turning brightness up
-	elseif event == c.screensDidWake and not env.hasProjector() then
+	else
 		if M.wokeRecently then return end
 		M.wokeRecently = true
 		U.defer(5, function() M.wokeRecently = false end) -- prevent loop w/ error notification waking screen

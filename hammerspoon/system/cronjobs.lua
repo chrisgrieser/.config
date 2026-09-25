@@ -15,7 +15,7 @@ end
 -- Show clock every full hour
 M.timer_clock = timerEverySecs(60, function()
 	local isFullHour = os.date("%M") == "00"
-	if isFullHour and U.systemIsAwake() and not env.hasProjector() then
+	if isFullHour and U.systemIsAwake and not env.hasProjector() then
 		local hour = tostring(os.date("%H:%M"))
 		hs.alert(hour, 3)
 	end
