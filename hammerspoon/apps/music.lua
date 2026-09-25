@@ -19,7 +19,7 @@ end
 M.aw_music = aw.new(function(appName, event, app)
 	-- GUARD
 	if env.hasProjector() or not env.isAtHome then return end
-	if not U.systemIsAwake() then return end
+	if not U.systemIsAwake then return end
 	if not (event == aw.launched or event == aw.terminated) then return end
 
 	local audioApp = hs.fnutils.contains(U.videoAndAudioApps, appName)
