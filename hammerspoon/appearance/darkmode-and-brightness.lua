@@ -91,7 +91,7 @@ end)
 local c = hs.caffeinate.watcher
 M.caff = c.new(function(event)
 	if env.isAtOffice then return end
-	if not (event == c.screensDidWake) then return end
+	if event ~= c.screensDidWake then return end
 
 	if env.hasProjector() or U.betweenTime(1, 8) then
 		print("🖥️ Darkened screen (wake up with projector or at night)")
