@@ -59,10 +59,10 @@ local function connectProjector(status, callback)
 			if success then
 				require("appearance.hole-cover").update()
 				if callback then callback() end
-				print("📽️✅ Projector set to [" .. setTo .. "]")
+				print("📽️ ✅ Projector set to [" .. setTo .. "]")
 			else
 				U.sound("Basso")
-				print("📽️❌ Could not set projector to [" .. setTo .. "].")
+				print("📽️ ❌ Could not set projector to [" .. setTo .. "].")
 			end
 		end)
 	end
@@ -191,8 +191,9 @@ local config = {
 
 local doEvery = hs.timer.doEvery
 M.sleepTimer = doEvery(config.checkIntervalMins * 60, function()
-	local userInactive = (hs.host.idleTime() / 60) > config.triggerAfterMins
-	if not (userInactive and env.hasProjector() and U.systemIsAwake) then return end
+	local noVideoAppRunning = not hs.fnutils.some(U.videoAndAudioApps, U.app)
+	local userInactive = U.userIsInactive(config.triggerAfterMins)
+	if not (userInactive and noVideoAppRunning) then return end
 
 	-- inform user about upcoming sleep
 	local timeToReactSecs = config.timeToReactSecs

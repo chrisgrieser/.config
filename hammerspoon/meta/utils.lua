@@ -97,19 +97,10 @@ function U.defer(delaySecs, callbackFn)
 	end
 end
 
-do -- allows checking `U.systemIsAwake`
-	U.systemIsAwake = true
-	local c = hs.caffeinate.watcher
-	U.caffWatcher = c.new(function(event)
-		if event == c.systemWillSleep then
-			U.systemIsAwake = false
-			print("🔑 System: sleep")
-		elseif event == c.screensDidUnlock then
-			U.systemIsAwake = true
-			print("🔑 System: wake")
-		end
-	end):start()
-end
+---@param mins number
+---@return boolean
+---@nodiscard
+function U.userInactiveForMins(mins) return (hs.host.idleTime() / 60) > mins end
 
 ---@param msg string
 function U.notify(msg)
