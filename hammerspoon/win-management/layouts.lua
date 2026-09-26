@@ -27,18 +27,16 @@ local function connectProjector(status, callback)
 	if env.hasProjector() == status then return end
 
 	local setTo = status and "on" or "off"
-	local delayForBetterDisplayStart = 0
 	if not (U.app("BetterDisplay")) then
 		local app = hs.application.open("BetterDisplay")
 		if not app then
 			U.alertAndLog("Could not find BetterDisplay.")
 			return
 		end
-		delayForBetterDisplayStart = 3
 	end
 
 	-----------------------------------------------------------------------------
-	U.defer(delayForBetterDisplayStart, function()
+	U.defer({ 0, 3 }, function()
 		-- DOCS https://github.com/waydabber/BetterDisplay/wiki/Integration-features,-CLI#cli-access-by-installing-betterdisplaycli
 		-- https://github.com/waydabber/BetterDisplay/wiki/Integration-features,-CLI#syntax-for-custom-url-scheme-integration
 		local name = env.projectorName
@@ -49,18 +47,17 @@ local function connectProjector(status, callback)
 		-- triggering via shell script not reliable when display asleep?
 		-- local shellScript = ("betterdisplaycli set --name=%q --connected=%q"):format(name, setTo)
 		-- hs.execute(U.exportPath .. shellScript)
+	end)
 
-		U.defer(2, function()
-			local success = env.hasProjector() == status -- exit code of `betterdisplaycli` is not reliable
-
-			if success then
-				require("appearance.hole-cover").update()
-				if callback then callback() end
-				print("📽️ ✅ Projector set to [" .. setTo .. "]")
-			else
-				print("📽️ ❌ Could not set projector to [" .. setTo .. "]")
-			end
-		end)
+	U.defer(5, function()
+		local success = env.hasProjector() == status
+		if success then
+			require("appearance.hole-cover").update()
+			if callback then callback() end
+			print("📽️ ✅ Projector set to [" .. setTo .. "]")
+		else
+			print("📽️ ❌ Could not set projector to [" .. setTo .. "]")
+		end
 	end)
 end
 
@@ -118,6 +115,7 @@ local function movieLayout()
 	connectProjector(true)
 	display.setDarkMode("dark")
 	display.darkenImacDisplay()
+	U.defer({ 0, 2 }, display.darkenImacDisplay)
 
 	-- move mouse to center of projector
 	local projector = hs.screen.find(env.projectorName)

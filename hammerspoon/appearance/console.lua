@@ -83,6 +83,7 @@ function M.cleanupConsole()
 		if not ignore then
 			local timestamp, msg = line:match("(%d%d%d%d%-%d%d%-%d%d %d%d:%d%d:%d%d:)(.*)")
 			if not msg then msg = line end -- msg without timestamp
+			msg = U.trim(msg)
 			msg = msg:gsub("^%s-%d%d:%d%d:%d%d:? ", "") -- remove duplicate timestamp
 
 			local color
