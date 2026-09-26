@@ -15,7 +15,7 @@ hs.fs.mkdir(backupFolder)
 ---AUTO-FILE FROM DESKTOP-------------------------------------------------------
 M.pathw_desktop = pathw(home .. "/Desktop/", function(paths, _)
 	-- prevent duplicate triggering due to iCloud sync in standby
-	if U.userInactiveForMins(10) then return end
+	if not U.userActiveInLastMins(10) then return end
 
 	for _, path in pairs(paths) do
 		local parent, name = path:match("(.+)/(.+)")
@@ -37,9 +37,8 @@ M.pathw_desktop = pathw(home .. "/Desktop/", function(paths, _)
 		elseif ext == "bib" and isDownloaded then
 			local bibEntry = U.readFile(path)
 			if bibEntry and #bibEntry < 10000 then -- prevent large libraries from being automatically merged
-				bibEntry = bibEntry:gsub("\n?$", "\n")
 				local libraryPath = home .. "/.config/pandoc/main-bibliography.bib"
-				U.writeToFile(libraryPath, bibEntry, true)
+				U.writeToFile(libraryPath, U.trim(bibEntry), true)
 				hs.open(libraryPath)
 				os.remove(path)
 			end

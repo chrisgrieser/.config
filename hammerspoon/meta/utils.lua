@@ -51,6 +51,11 @@ function U.betweenTime(startHour, endHour)
 	return isInBetween
 end
 
+---@param str string
+---@return string trimmedStr
+---@nodiscard
+function U.trim(str) return (str:gsub("^%s+(.*)%s+$", "%1")) end
+
 -- CAVEAT: won't work with Chromium browsers due to bug, but works for URI schemes
 ---@param url string
 function U.openUrlInBg(url) hs.execute(("open -g %q"):format(url)) end
@@ -100,7 +105,7 @@ end
 ---@param mins number
 ---@return boolean
 ---@nodiscard
-function U.userInactiveForMins(mins) return (hs.host.idleTime() / 60) > mins end
+function U.userActiveInLastMins(mins) return (hs.host.idleTime() / 60) < mins end
 
 ---@param msg string
 function U.notify(msg)

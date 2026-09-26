@@ -70,7 +70,7 @@ local function syncAllGitRepos(silent)
 				if exitCode == 0 then
 					table.insert(M.finishedSyncing, repo)
 				else
-					local output = (stdout .. "\n" .. stderr):gsub("^%s+", ""):gsub("%s+$", "")
+					local output = U.trim(stdout .. "\n" .. stderr)
 					local msg = ("⚠️️ %s %s Sync: %s"):format(repo.icon, repo.location, output)
 					U.alertAndLog(msg, 5)
 				end

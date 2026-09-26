@@ -38,36 +38,30 @@ local function connectProjector(status, callback)
 	end
 
 	-----------------------------------------------------------------------------
-	local maxAttempts = 3
-	local attempts = 0
-	local function switch()
-		attempts = attempts + 1
-
+	U.defer(delayForBetterDisplayStart, function()
 		-- DOCS https://github.com/waydabber/BetterDisplay/wiki/Integration-features,-CLI#cli-access-by-installing-betterdisplaycli
-		-- alternative URI Scheme: BetterDisplay://set?name=P62_Pro&connected=on
+		-- https://github.com/waydabber/BetterDisplay/wiki/Integration-features,-CLI#syntax-for-custom-url-scheme-integration
 		local name = env.projectorName
-		local shellScript = ("betterdisplaycli set --name=%q --connected=%q"):format(name, setTo)
-		hs.execute(U.exportPath .. shellScript)
+
+		local uri = ("BetterDisplay://set?name=%s&connected=%s"):format(name, setTo)
+		U.openUrlInBg(uri)
+
+		-- triggering via shell script not reliable when display asleep?
+		-- local shellScript = ("betterdisplaycli set --name=%q --connected=%q"):format(name, setTo)
+		-- hs.execute(U.exportPath .. shellScript)
 
 		U.defer(2, function()
 			local success = env.hasProjector() == status -- exit code of `betterdisplaycli` is not reliable
-			if not success and (attempts < maxAttempts) then
-				U.defer(1, switch)
-				return
-			end
 
 			if success then
 				require("appearance.hole-cover").update()
 				if callback then callback() end
 				print("📽️ ✅ Projector set to [" .. setTo .. "]")
 			else
-				U.sound("Basso")
-				print("📽️ ❌ Could not set projector to [" .. setTo .. "].")
+				print("📽️ ❌ Could not set projector to [" .. setTo .. "]")
 			end
 		end)
-	end
-
-	U.defer(delayForBetterDisplayStart, function() switch() end)
+	end)
 end
 
 ---LAYOUTS---------------------------------------------------------------------
@@ -181,19 +175,27 @@ end)
 -- 3. Systemstart
 if U.isSystemStart() then workLayout() end
 
+-- 4. Mornings (reset to worklayout for logins)
+M.timer_morningWorkLayout = hs.timer
+	.doAt("06:00", "01d", function()
+		if not U.userActiveInLastMins(30) then return end
+		workLayout("dark")
+	end, true)
+	:start()
+
 ---SLEEP TIMER------------------------------------------------------------------
 -- When projector is connected, check every x min if device has been idle for y mins
 local config = {
 	checkIntervalMins = 15,
 	timeToReactSecs = 20,
-	triggerAfterMins = 50,
+	triggerAfterMinsInactive = 50,
 }
 
 local doEvery = hs.timer.doEvery
 M.sleepTimer = doEvery(config.checkIntervalMins * 60, function()
 	local noVideoAppRunning = not hs.fnutils.some(U.videoAndAudioApps, U.app)
-	local userInactive = U.userIsInactive(config.triggerAfterMins)
-	if not (userInactive and noVideoAppRunning) then return end
+	local userActive = U.userActiveInLastMins(config.triggerAfterMinsInactive)
+	if noVideoAppRunning or userActive then return end
 
 	-- inform user about upcoming sleep
 	local timeToReactSecs = config.timeToReactSecs
@@ -216,8 +218,9 @@ M.sleepTimer = doEvery(config.checkIntervalMins * 60, function()
 	U.defer(config.timeToReactSecs, function()
 		local userDidSth = hs.host.idleTime() < timeToReactSecs
 		if userDidSth then return end
-		workLayout("dark") -- darken screen as well
+
 		U.notifyOnPhone("💤 Sleep timer", "triggered at " .. os.date("%H:%M"))
+		workLayout()
 	end)
 end):start()
 
