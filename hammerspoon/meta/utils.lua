@@ -54,7 +54,7 @@ end
 ---@param str string
 ---@return string trimmedStr
 ---@nodiscard
-function U.trim(str) return (str:gsub("^%s+(.*)%s+$", "%1")) end
+function U.trim(str) return (str:gsub("^%s+(.-)%s+$", "%1")) end
 
 -- CAVEAT: won't work with Chromium browsers due to bug, but works for URI schemes
 ---@param url string
