@@ -69,44 +69,40 @@ function M.cleanupConsole()
 
 	local isDark = U.isDarkMode()
 
-	for _, line in ipairs(lines) do
-		-- remove some lines
-		local ignore = line:find("Loading extensions?: ")
+	local filteredLines = hs.fnutils.filter(lines, function(line)
+		return not (
+			line:find("Loading extensions?: ")
 			or line:find("Lazy extension loading enabled$")
 			or line:find("Loading Spoon: RoundedCorners$")
 			or line:find("Loading .*/init.lua$")
-			or line:find("hs%.canvas:delete")
 			or line:find("%-%- Done%.$")
 			or line:find("wfilter: .* is STILL not registered") -- FIX https://github.com/Hammerspoon/hammerspoon/issues/3462
+		)
+	end) --[[@as string[] ]]
 
-		-- colorize timestamp & error levels
-		if not ignore then
-			local timestamp, msg = line:match("(%d%d%d%d%-%d%d%-%d%d %d%d:%d%d:%d%d:)(.*)")
-			if timestamp then timestamp = timestamp:sub(3) end -- drop leading year
+	for _, line in ipairs(filteredLines) do
+		local timestamp, msg = line:match("%d?%d?(%d%d%-%d%d%-%d%d %d%d:%d%d:%d%d):?(.*)")
+		if not msg then msg = line end -- for messages without timestamp
+		msg = U.trim(msg:gsub("  +", " "))
 
-			if not msg then msg = line end -- for messages without timestamp
-			msg = U.trim(msg:gsub("  +", " "))
-			msg = msg:gsub("^%s-%d%d:%d%d:%d%d:? ", "") -- remove duplicate timestamp
+		local color
+		local lmsg = msg:lower()
+		if msg:find("^> ") then -- user input
+			color = blue(isDark)
+		elseif lmsg:find("error") or lmsg:find("fatal") then
+			color = red(isDark)
+		elseif lmsg:find("warning") or msg:find("stack traceback") or lmsg:find("abort") then
+			color = yellow(isDark)
+		else
+			color = base(isDark)
+		end
 
-			local color
-			local lmsg = msg:lower()
-			if msg:find("^> ") then -- user input
-				color = blue(isDark)
-			elseif lmsg:find("error") or lmsg:find("fatal") then
-				color = red(isDark)
-			elseif lmsg:find("warning") or msg:find("stack traceback") or lmsg:find("abort") then
-				color = yellow(isDark)
-			else
-				color = base(isDark)
-			end
-
-			local coloredLine = hs.styledtext.new(msg, { color = color, font = baseFont })
-			if timestamp then
-				local time = hs.styledtext.new(timestamp, { color = grey(isDark), font = baseFont })
-				cons.printStyledtext(time, coloredLine)
-			else
-				cons.printStyledtext(coloredLine)
-			end
+		local coloredLine = hs.styledtext.new(msg, { color = color, font = baseFont })
+		if timestamp then
+			local time = hs.styledtext.new(timestamp, { color = grey(isDark), font = baseFont })
+			cons.printStyledtext(time, coloredLine)
+		else
+			cons.printStyledtext(coloredLine)
 		end
 	end
 end
