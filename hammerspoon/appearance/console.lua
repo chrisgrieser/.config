@@ -82,8 +82,10 @@ function M.cleanupConsole()
 		-- colorize timestamp & error levels
 		if not ignore then
 			local timestamp, msg = line:match("(%d%d%d%d%-%d%d%-%d%d %d%d:%d%d:%d%d:)(.*)")
-			if not msg then msg = line end -- msg without timestamp
-			msg = U.trim(msg)
+			if timestamp then timestamp = timestamp:sub(3) end -- drop leading year
+
+			if not msg then msg = line end -- for messages without timestamp
+			msg = U.trim(msg:gsub("  +", " "))
 			msg = msg:gsub("^%s-%d%d:%d%d:%d%d:? ", "") -- remove duplicate timestamp
 
 			local color
