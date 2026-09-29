@@ -181,6 +181,18 @@ M.timer_morningWorkLayout = hs.timer
 	end, true)
 	:start()
 
+-- 5. Wake
+local c = hs.caffeinate.watcher
+M.caff = c.new(function(event)
+	if event == c.systemDidWake then
+		print("🔑 System did wake")
+		workLayout()
+	elseif c.systemWillSleep then
+		print("🔑 System will sleep")
+		workLayout()
+	end
+end):start()
+
 ---SLEEP TIMER------------------------------------------------------------------
 -- When projector is connected, check every x min if device has been idle for y mins
 local config = {

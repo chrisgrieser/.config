@@ -17,23 +17,6 @@ rules:
   - description: Media keys
     manipulators:
       - type: basic
-        from: { key_code: f3 }
-        to:
-          - shell_command: |
-              "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Tech/alexa/virtual-trigger" \
-                "light-toggle"
-        conditions: [*not-game]
-
-      - type: basic
-        from: { key_code: f4 }
-        to:
-          - shell_command: |
-              afplay "/System/Library/Sounds/Pop.aiff" &
-              "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Tech/alexa/virtual-trigger" \
-                "music-like"
-        conditions: [*not-game]
-
-      - type: basic
         from: { key_code: f7 }
         to:
           - shell_command: |
@@ -50,21 +33,13 @@ rules:
         conditions: [*not-game]
 
       - type: basic
-        from: { key_code: f9 }
-        to:
-          - shell_command: |
-              "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Tech/alexa/virtual-trigger" \
-                "music-next"
-        conditions: [*not-game]
-
-      - type: basic
         from: { key_code: f11 }
         to:
-          - key_code: down_arrow
+          - key_code: down_arrow # affect video players, since using optical cable
         conditions: [*audio-or-video-app]
 
       - type: basic
         from: { key_code: f12 }
         to:
-          - key_code: up_arrow
+          - key_code: up_arrow # affect video players, since using optical cable
         conditions: [*audio-or-video-app]
