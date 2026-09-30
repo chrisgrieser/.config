@@ -29,8 +29,10 @@ elif [[ ! -x "$(command -v yt-dlp)" ]]; then
 	return 1
 fi
 
-#───────────────────────────────────────────────────────────────────────────────
-# DOWNLOAD
+# make browser frontmost, since using this workflow via URI defocusses the browser
+osascript -e "tell application \"$browser_app\" to activate"
+
+#-DOWNLOAD----------------------------------------------------------------------
 notify "⏳ Downloading…" "$title"
 
 uid=$(uuidgen)
