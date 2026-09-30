@@ -187,9 +187,6 @@ M.caff = c.new(function(event)
 	if event == c.systemDidWake then
 		print("🔑 System did wake")
 		workLayout()
-	elseif c.systemWillSleep then
-		print("🔑 System will sleep")
-		workLayout()
 	end
 end):start()
 

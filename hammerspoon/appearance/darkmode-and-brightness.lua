@@ -94,7 +94,7 @@ M.caff = c.new(function(event)
 	if event ~= c.screensDidWake then return end
 
 	if env.hasProjector() or U.betweenTime(1, 8) then
-		print("🖥️ Darkened screen (wake up with projector or at night)")
+		print("🖥️ Darkened screen (woke up with projector or at night)")
 		U.defer(2, M.darkenImacDisplay) -- wait for macOS turning brightness up
 	else
 		if M.wokeRecently then return end
