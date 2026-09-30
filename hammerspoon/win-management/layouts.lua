@@ -195,14 +195,20 @@ end):start()
 local config = {
 	checkIntervalMins = 15,
 	timeToReactSecs = 20,
-	triggerAfterMinsInactive = 50,
+	triggerAfterMins = {
+		withVideo = 50,
+		noVideo = 150,
+	},
 }
 
 local doEvery = hs.timer.doEvery
 M.sleepTimer = doEvery(config.checkIntervalMins * 60, function()
-	local noVideoAppRunning = not hs.fnutils.some(U.videoAndAudioApps, U.app)
-	local userActive = U.userActiveInLastMins(config.triggerAfterMinsInactive)
-	if noVideoAppRunning or userActive then return end
+	local videoAppRunning = hs.fnutils.some(U.videoAndAudioApps, U.app)
+	local idleWithVideo = (not U.userActiveInLastMins(config.triggerAfterMins.withVideo))
+		and videoAppRunning
+	local idleNoVideo = (not U.userActiveInLastMins(config.triggerAfterMins.noVideo))
+		and not videoAppRunning
+	if not (idleWithVideo or idleNoVideo) then return end
 
 	-- inform user about upcoming sleep
 	local timeToReactSecs = config.timeToReactSecs
@@ -226,7 +232,9 @@ M.sleepTimer = doEvery(config.checkIntervalMins * 60, function()
 		local userDidSth = hs.host.idleTime() < timeToReactSecs
 		if userDidSth then return end
 
-		U.notifyOnPhone("💤 Sleep timer", "triggered at " .. os.date("%H:%M"))
+		local reason = idleWithVideo and "idle with video" or "idle without video"
+		local msg = ("%s at %s"):format(reason, os.date("%H:%M"))
+		U.notifyOnPhone("💤 Sleep timer", msg)
 		workLayout()
 	end)
 end):start()
