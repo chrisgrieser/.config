@@ -235,6 +235,17 @@
 			<key>url</key>
 			<string>tel://{query}</string>
 		</dict>
+		<key>D1F62DD9-5F88-4860-A063-CC85430BEAD3</key>
+		<dict>
+			<key>enabled</key>
+			<true/>
+			<key>keyword</key>
+			<string>ah</string>
+			<key>text</key>
+			<string>ArkhamDB: '{query}'</string>
+			<key>url</key>
+			<string>https://arkhamdb.com/find?q={query}&amp;sort=faction&amp;view=scan&amp;decks=player&amp;spoilers=hide</string>
+		</dict>
 		<key>D8DB23B9-72BD-42F2-A4EF-1ACF3AF99650</key>
 		<dict>
 			<key>enabled</key>

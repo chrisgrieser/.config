@@ -570,7 +570,7 @@
 				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>keyword</key>
-				<string>pw new</string>
+				<string>{var:keyword} new</string>
 				<key>subtext</key>
 				<string>Store as new entry</string>
 				<key>text</key>
@@ -711,7 +711,7 @@
 				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>keyword</key>
-				<string>pw gen</string>
+				<string>{var:keyword} gen</string>
 				<key>subtext</key>
 				<string>Generate &amp; copy it WITHOUT creating new entry</string>
 				<key>text</key>
@@ -945,7 +945,7 @@
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>keyword</key>
-				<string>pw</string>
+				<string>{var:keyword}</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -1418,7 +1418,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>search passwords</string>
 			<key>xpos</key>
-			<real>35</real>
+			<real>30</real>
 			<key>ypos</key>
 			<real>350</real>
 		</dict>
@@ -1703,6 +1703,27 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	</dict>
 	<key>userconfigurationconfig</key>
 	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>pw</string>
+				<key>placeholder</key>
+				<string>pw</string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>Keyword</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>keyword</string>
+		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
