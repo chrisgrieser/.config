@@ -4,6 +4,7 @@ local display = require("appearance.darkmode-and-brightness")
 local env = require("meta.environment")
 local music = require("apps.music")
 local wu = require("win-management.window-utils")
+local doEvery = hs.timer.doEvery
 
 ---HELPERS----------------------------------------------------------------------
 
@@ -70,6 +71,7 @@ local function workLayout(setDisplay)
 	U.defer(2.5, function() M.isLayouting = false end)
 
 	print("🔲 Layout: work")
+	M.currentLayout = "work"
 	dockSwitcher("work")
 
 	-- screen
@@ -105,6 +107,7 @@ local function movieLayout()
 	U.defer(2.5, function() M.isLayouting = false end)
 
 	print("🔲 Layout: movie")
+	M.currentLayout = "movie"
 	dockSwitcher("movie")
 
 	music.music_trigger("pause")
@@ -173,42 +176,21 @@ end)
 -- 3. Systemstart
 if U.isSystemStart() then workLayout() end
 
--- 4. Mornings (reset to worklayout for logins)
-M.timer_morningWorkLayout = hs.timer
-	.doAt("06:00", "01d", function()
-		if not U.userActiveInLastMins(30) then return end
-		workLayout("dark")
-	end, true)
-	:start()
+-- 4. Long idle
 
--- 5. Wake
-local c = hs.caffeinate.watcher
-M.caff = c.new(function(event)
-	if event == c.systemDidWake then
-		print("🔑 System did wake")
-		workLayout()
-	end
-end):start()
-
----SLEEP TIMER------------------------------------------------------------------
--- When projector is connected, check every x min if device has been idle for y mins
+-- 5. SLEEP TIMER
+-- When video app is running, check every x min if device has been idle for y
+-- mins and reset to work layout
 local config = {
 	checkIntervalMins = 15,
 	timeToReactSecs = 20,
-	triggerAfterMins = {
-		withVideo = 50,
-		noVideo = 150,
-	},
+	triggerAfterMins = 50,
 }
 
-local doEvery = hs.timer.doEvery
 M.sleepTimer = doEvery(config.checkIntervalMins * 60, function()
 	local videoAppRunning = hs.fnutils.some(U.videoAndAudioApps, U.app)
-	local idleWithVideo = (not U.userActiveInLastMins(config.triggerAfterMins.withVideo))
-		and videoAppRunning
-	local idleNoVideo = (not U.userActiveInLastMins(config.triggerAfterMins.noVideo))
-		and not videoAppRunning
-	if not (idleWithVideo or idleNoVideo) then return end
+	local idleWithVideo = not U.userActiveInLastMins(config.triggerAfterMins)
+	if not (idleWithVideo and videoAppRunning) then return end
 
 	-- inform user about upcoming sleep
 	local timeToReactSecs = config.timeToReactSecs
