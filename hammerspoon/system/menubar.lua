@@ -5,6 +5,7 @@ local aw = hs.application.watcher
 ---CONFIG-----------------------------------------------------------------------
 local config = {
 	reminderIcon = "✔ ",
+	reminderListToOpenOnClick = "Scheduled",
 	githubNotifIcon = "● ", -- ⦿◉●○Ⓖ
 }
 
@@ -34,11 +35,11 @@ local function updateReminderCount()
 					:setClickCallback(function()
 						hs.application.open("Reminders")
 						-- open "Today" in Reminders
-						hs.osascript.applescript([[
+						hs.osascript.applescript(([[
 							tell application "System Events" to tell process "Reminders"
-								click menu item "Today" of menu of menu item "Go To" of menu "View" of menu bar 1
+								click menu item %q of menu of menu item "Go To" of menu "View" of menu bar 1
 							end tell
-						]])
+						]]):format(config.reminderListToOpenOnClick))
 					end)
 			end
 		end)
