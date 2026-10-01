@@ -1,3 +1,6 @@
+# THIS IS THE GLOBAL GITIGNORE FILE
+#-------------------------------------------------------------------------------
+
 # macOS
 .DS_Store
 *.icloud
@@ -48,3 +51,6 @@ config.local
 *.mkv
 *.tiff
 *.heic
+
+# git patches unintentionally saved in repo
+*.patch
