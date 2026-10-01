@@ -13,6 +13,7 @@ struct EventOutput: Codable {
 	let isAllDay: Bool
 	let calendar: String
 	let calendarColor: String
+	let id: String
 	let location: String?
 	let hasRecurrenceRules: Bool
 }
@@ -97,6 +98,7 @@ eventStore.requestFullAccessToEvents { granted, error in
 				isAllDay: event.isAllDay,
 				calendar: event.calendar.title,
 				calendarColor: mapCGColorToEmoji(event.calendar.cgColor),
+				id: event.eventIdentifier,  // there is also the calendarItem ID, but event ID is enough here
 				location: event.location ?? event.url?.absoluteString,  // fallback to URL
 				hasRecurrenceRules: event.hasRecurrenceRules
 			)

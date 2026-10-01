@@ -19,6 +19,7 @@ app.includeStandardAdditions = true;
  */
 
 /** @typedef {Object} EventObj
+ * @property {string} id
  * @property {string} title
  * @property {string} calendar
  * @property {string} calendarColor
