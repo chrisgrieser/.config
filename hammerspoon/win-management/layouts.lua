@@ -117,7 +117,6 @@ local function movieLayout()
 	-- screen
 	connectProjector(true)
 	display.setDarkMode("dark")
-	display.darkenImacDisplay()
 	U.defer({ 0, 2 }, display.darkenImacDisplay)
 
 	-- move mouse to center of projector
@@ -149,7 +148,6 @@ local function movieLayout()
 	U.quitApps {
 		"Stats",
 		"Signal",
-		"Granola",
 		"Slack",
 		"Alfred Preferences",
 		"Highlights",
@@ -169,28 +167,39 @@ hs.hotkey.bind({}, "end", movieLayout)
 
 -- 2. URI (for Touchpad via BetterTouchTool)
 hs.urlevent.bind("movie-layout", function()
-	U.sound("Hero", 0.6) -- indicate that Touchpad was triggered
+	U.sound("Bottle") -- indicate that Touchpad was triggered
 	movieLayout()
 end)
 
 -- 3. Systemstart
 if U.isSystemStart() then workLayout() end
 
--- 4. Long idle
+--------------------------------------------------------------------------------
 
--- 5. SLEEP TIMER
--- When video app is running, check every x min if device has been idle for y
--- mins and reset to work layout
 local config = {
 	checkIntervalMins = 15,
 	timeToReactSecs = 20,
-	triggerAfterMins = 50,
+	sleeptimerAfterMins = 50,
+	longIdleAfterMins = 150,
 }
+
+-- 4. Long idle
+M.longIdleTimer = doEvery(config.checkIntervalMins * 60, function()
+	local userIsLongIdle = not U.userActiveInLastMins(config.longIdleAfterMins)
+	if userIsLongIdle and M.currentLayout ~= "work" then
+		print("⌛ Long idle")
+		workLayout("dark")
+	end
+end):start()
+
+-- 5. Sleep timer
+-- When video app is running, check every x min if device has been idle for y
+-- mins and reset to work layout
 
 M.sleepTimer = doEvery(config.checkIntervalMins * 60, function()
 	local videoAppRunning = hs.fnutils.some(U.videoAndAudioApps, U.app)
-	local idleWithVideo = not U.userActiveInLastMins(config.triggerAfterMins)
-	if not (idleWithVideo and videoAppRunning) then return end
+	local userIsIdle = not U.userActiveInLastMins(config.sleeptimerAfterMins)
+	if not (userIsIdle and videoAppRunning) then return end
 
 	-- inform user about upcoming sleep
 	local timeToReactSecs = config.timeToReactSecs
@@ -213,11 +222,8 @@ M.sleepTimer = doEvery(config.checkIntervalMins * 60, function()
 	U.defer(config.timeToReactSecs, function()
 		local userDidSth = hs.host.idleTime() < timeToReactSecs
 		if userDidSth then return end
-
-		local reason = idleWithVideo and "idle with video" or "idle without video"
-		local msg = ("%s at %s"):format(reason, os.date("%H:%M"))
-		U.notifyOnPhone("💤 Sleep timer", msg)
-		workLayout()
+		U.notifyOnPhone("💤 Sleep timer", "triggered at " .. os.date("%H:%M"))
+		workLayout("dark")
 	end)
 end):start()
 

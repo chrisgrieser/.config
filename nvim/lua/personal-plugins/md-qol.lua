@@ -357,11 +357,12 @@ local function getTitleForUrl(url)
 			title = title -- cleanup
 				:gsub("[\n\r]+", " ")
 				:gsub("  +", " ")
-				:gsub("^GitHub %- ", "")
-				:gsub(" · GitHub$", "")
+				:gsub("&middot;", "·")
 				:gsub("&amp;", "&")
 				:gsub("&#x27;", "'")
 				:gsub("&#039;t", "'")
+				:gsub("^GitHub %- ", "")
+				:gsub(" · GitHub$", "")
 				:gsub("%[", "\\[") -- escape for mdlink `[]()`
 				:gsub("%]", "\\]")
 			if title == "" then vim.notify("No title found.") end
