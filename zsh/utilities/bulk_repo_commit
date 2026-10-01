@@ -1,11 +1,10 @@
 #!/usr/bin/env zsh
+#-------------------------------------------------------------------------------
 
 # CONFIG
-github_username="chrisgrieser"
-# set -e
 
-# repo_names="alfred|shimmering-obsidian|gitfred"
-repo_names="nvim"
+repo_names="alfred|shimmering-obsidian|gitfred"
+# repo_names="nvim"
 # repo_names="obsidian-quadro|pseudometa-obsidian-plugin-template|grappling-hook|obsidian-proofreader"
 # ALL
 # repo_names="shimmering-focus|finder-vim-mode|zsh-magic-dashboard|nvim|alfred|shimmering-obsidian|gitfred|obsidian-quadro|pseudometa-obsidian-plugin-template|grappling-hook|obsidian-proofreader"
@@ -14,12 +13,11 @@ function actions_in_repo {
 	git apply ~/Desktop/diff.patch
 }
 
-commit_msg="chore: update emmyrc/luarc for nvim 0.12 (uv now included in VIMRUNTIME)"
-
+github_username="chrisgrieser"
+commit_msg="chore: request screenshot of workflow canvas changes in PR template"
 amend="false" # no-edit|only-message|false
 
-#───────────────────────────────────────────────────────────────────────────────
-#───────────────────────────────────────────────────────────────────────────────
+#-------------------------------------------------------------------------------
 _export_github_token # defined in .zshenv
 
 # GUARD
@@ -49,7 +47,7 @@ fi
 if [[ "$amend" != "only-message" ]]; then
 	echo
 	print "\e[1;34mActions:\e[0m"
-	declare -f actions_in_repo | sed '1d;$d;s/^\t//' | bat --language=sh --no-pager
+	declare -f actions_in_repo | sed '1d;$d;s/^\t//' | bat --language=zsh --no-pager
 fi
 
 echo
@@ -60,7 +58,7 @@ echo
 echo "────────────────────────"
 echo
 
-#───────────────────────────────────────────────────────────────────────────────
+#-------------------------------------------------------------------------------
 
 cd /tmp || return 1
 
@@ -96,7 +94,7 @@ while read -r repo; do
 	((i++))
 done <<< "$repos_to_update"
 
-#───────────────────────────────────────────────────────────────────────────────
+#-------------------------------------------------------------------------------
 
 if [[ $not_updated -gt 0 ]]; then
 	echo "────────────────────────"
