@@ -34,7 +34,7 @@ local function updateReminderCount()
 					:setTitle(config.reminderIcon .. count) ---@diagnostic disable-line: undefined-field
 					:setClickCallback(function()
 						hs.application.open("Reminders")
-						-- open "Today" in Reminders
+						-- open list in Reminders
 						hs.osascript.applescript(([[
 							tell application "System Events" to tell process "Reminders"
 								click menu item %q of menu of menu item "Go To" of menu "View" of menu bar 1
@@ -89,7 +89,7 @@ updateGithubNotifCount()
 
 -- 1. timer
 M.timer = hs.timer
-	.doEvery(180, function()
+	.doEvery(120, function()
 		updateReminderCount()
 		updateGithubNotifCount()
 	end)
