@@ -17,6 +17,12 @@ function readFile(path) {
 
 const fileExists = (/** @type {string} */ filePath) => Application("Finder").exists(Path(filePath));
 
+/** @param {string} str */
+function alfredMatcher(str) {
+	const clean = str.replace(/[-'"_#/.:;,()[\]]/g, " ");
+	return [clean, str].join(" ") + " ";
+}
+
 //------------------------------------------------------------------------------
 
 /** @type {AlfredRun} */
@@ -61,6 +67,7 @@ function run() {
 			return {
 				title: displayName,
 				subtitle: subtitle,
+				match: alfredMatcher(name),
 				arg: "https://boardgamegeek.com/boardgame/" + bggId,
 			};
 		});

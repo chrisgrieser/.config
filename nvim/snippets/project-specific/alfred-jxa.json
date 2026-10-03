@@ -138,17 +138,17 @@
       "\treturn [subwords, camelCaseSeparated, fullword, str].join(\" \") + \" \";",
       "}"
     ],
-    "prefix": "matcher (camelCase)"
+    "prefix": "Alfred Matcher (camelCase)"
   },
   "matcher (simple)": {
     "body": [
       "/** @param {string} str */",
       "function alfredMatcher(str) {",
-      "\tconst clean = str.replace(/[-_#/.:;,()[\\]]/g, \" \");",
+      "\tconst clean = str.replace(/[-'\"_#/.:;,()[\\]]/g, \" \");",
       "\treturn [clean, str].join(\" \") + \" \";",
       "}"
     ],
-    "prefix": "matcher (simple)"
+    "prefix": "Alfred Matcher (punctuation)"
   },
   "reload Alfred workflow": {
     "body": "Application(\"com.runningwithcrayons.Alfred\").reloadWorkflow(\\$.getenv(\"alfred_workflow_bundleid\"))",
