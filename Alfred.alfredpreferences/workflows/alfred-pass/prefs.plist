@@ -4,7 +4,5 @@
 <dict>
 	<key>auto_push</key>
 	<true/>
-	<key>keyword</key>
-	<string>pw||pass</string>
 </dict>
 </plist>
