@@ -16,7 +16,7 @@ brew "yq"
 #-PACKAGES----------------------------------------------------------------------
 brew "mas"
 brew "node"
-brew "python" # most recent python version, since macOS system python is only 3.9
+brew "python" # installs most recent python, since macOS system python is only 3.9
 
 #-ZSH---------------------------------------------------------------------------
 brew "starship"
