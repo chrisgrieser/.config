@@ -36,8 +36,9 @@ local function connectProjector(status, callback)
 		end
 	end
 
+	local errmsg
 	-----------------------------------------------------------------------------
-	U.defer({ 0, 3 }, function()
+	U.defer({ 0, 3, 6, 9 }, function()
 		-- DOCS https://github.com/waydabber/BetterDisplay/wiki/Integration-features,-CLI#cli-access-by-installing-betterdisplaycli
 		-- https://github.com/waydabber/BetterDisplay/wiki/Integration-features,-CLI#syntax-for-custom-url-scheme-integration
 		local name = env.projectorName
@@ -45,19 +46,22 @@ local function connectProjector(status, callback)
 		local uri = ("BetterDisplay://set?name=%s&connected=%s"):format(name, setTo)
 		U.openUrlInBg(uri)
 
-		-- triggering via shell script not reliable when display asleep?
-		-- local shellScript = ("betterdisplaycli set --name=%q --connected=%q"):format(name, setTo)
-		-- hs.execute(U.exportPath .. shellScript)
+		-- triggering via shell script for redundancy
+		local shellScript = ("betterdisplaycli set --name=%q --connected=%q"):format(name, setTo)
+		local stdout, _success = hs.execute(U.exportPath .. shellScript) -- exit code not reliable
+		errmsg = stdout
 	end)
 
-	U.defer(5, function()
+	U.defer(11, function()
 		local success = env.hasProjector() == status
 		if success then
 			require("appearance.hole-cover").update()
 			if callback then callback() end
 			print("📽️ ✅ Projector set to [" .. setTo .. "]")
 		else
-			print("📽️ ❌ Could not set projector to [" .. setTo .. "]")
+			local msg = "📽️ ❌ Could not set projector to [" .. setTo .. "]"
+			if errmsg then msg = msg .. ": " .. errmsg end
+			print(msg)
 		end
 	end)
 end
