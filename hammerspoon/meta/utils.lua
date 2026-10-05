@@ -10,7 +10,8 @@ U.hyper = { "cmd", "alt", "ctrl" }
 U.exportPath = "export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; "
 
 U.videoAndAudioApps = {
-	"zoom.us",
+	"Zoom",
+	"zoom.us", -- alternate app name for some zoom versions
 	"IINA",
 	"FaceTime",
 	"Netflix",
