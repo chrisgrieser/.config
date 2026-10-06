@@ -36,9 +36,11 @@ local function connectProjector(status, callback)
 		end
 	end
 
-	local errmsg
 	-----------------------------------------------------------------------------
-	U.defer({ 0, 3, 6, 9 }, function()
+	hs.caffeinate.declareUserActivity() -- ensure mac is awake for BetterDisplay
+	local errmsg
+
+	U.defer({ 1, 4, 8 }, function()
 		-- DOCS https://github.com/waydabber/BetterDisplay/wiki/Integration-features,-CLI#cli-access-by-installing-betterdisplaycli
 		-- https://github.com/waydabber/BetterDisplay/wiki/Integration-features,-CLI#syntax-for-custom-url-scheme-integration
 		local name = env.projectorName
@@ -49,10 +51,10 @@ local function connectProjector(status, callback)
 		-- triggering via shell script for redundancy
 		local shellScript = ("betterdisplaycli set --name=%q --connected=%q"):format(name, setTo)
 		local stdout, _success = hs.execute(U.exportPath .. shellScript) -- exit code not reliable
-		errmsg = stdout
+		errmsg = stdout or ""
 	end)
 
-	U.defer(11, function()
+	U.defer(10, function()
 		local success = env.hasProjector() == status
 		if success then
 			require("appearance.hole-cover").update()
@@ -60,7 +62,7 @@ local function connectProjector(status, callback)
 			print("📽️ ✅ Projector set to [" .. setTo .. "]")
 		else
 			local msg = "📽️ ❌ Could not set projector to [" .. setTo .. "]"
-			if errmsg then msg = msg .. ": " .. errmsg end
+			if errmsg ~= "" then msg = msg .. ": " .. errmsg end
 			print(msg)
 		end
 	end)
