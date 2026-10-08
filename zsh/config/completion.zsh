@@ -6,7 +6,7 @@
 
 #-GENERAL-----------------------------------------------------------------------
 
-# enable zsh completions (needs to be after zstyle activating menu-select)
+# enable zsh completions
 autoload compinit -Uz && compinit
 [[ $(uname -p) == "i386" ]] && compaudit | xargs chmod g-w # FIX for Intel Mac, https://github.com/zsh-users/zsh-completions/issues/433#issuecomment-629539004
 
