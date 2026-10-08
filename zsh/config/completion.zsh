@@ -16,11 +16,14 @@ zmodload -i zsh/complist # enables `-M menuselect` (bindings only active when se
 
 # HOMEBREW: load completions
 # load various completions of clis installed via homebrew
-# needs to be run *before* compinit/zsh-autocomplete
+# needs to be run BEFORE compinit/zsh-autocomplete
 export FPATH="$ZDOTDIR/completions:$HOMEBREW_PREFIX/share/zsh/site-functions:$FPATH"
 
 # do not save in public dotfile repo
 export ZSH_COMPDUMP="$HOME/.local/share/zsh/zcompdump"
+
+# match substrings (e.g., `cd ext` -> `cd browser-ext`), and case-insensitively
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z} l:|=* r:|=*'
 
 #-SORT--------------------------------------------------------------------------
 
