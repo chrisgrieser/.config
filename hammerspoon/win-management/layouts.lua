@@ -195,6 +195,7 @@ M.longIdleTimer = doEvery(config.checkIntervalMins * 60, function()
 	if userIsLongIdle and M.currentLayout ~= "work" then
 		print("⌛ Long idle")
 		workLayout("dark")
+		U.defer(4, hs.caffeinate.lockScreen)
 	end
 end):start()
 
