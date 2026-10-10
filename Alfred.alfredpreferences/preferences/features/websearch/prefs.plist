@@ -323,6 +323,17 @@
 			<key>url</key>
 			<string>https://sci-hub.st/{query}</string>
 		</dict>
+		<key>EA14AFE3-9724-43EC-B225-2A3088F5D7D6</key>
+		<dict>
+			<key>enabled</key>
+			<true/>
+			<key>keyword</key>
+			<string>vi</string>
+			<key>text</key>
+			<string>Vinted: "{query}"</string>
+			<key>url</key>
+			<string>https://www.vinted.de/catalog?search_text={query}</string>
+		</dict>
 		<key>EC5F4CCF-649C-4315-A860-F35489FA94F1</key>
 		<dict>
 			<key>enabled</key>
