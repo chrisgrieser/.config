@@ -4,13 +4,13 @@ local env = require("meta.environment")
 
 ---METHODS----------------------------------------------------------------------
 
----@param msg string
+---@param reason string
 ---@param threshold? number
-local function logBrightness(msg, threshold)
+local function logBrightness(reason, threshold)
 	local ambientText = ("ambient: %.1f"):format(hs.brightness.ambient()) -- `%.1f` = round to 1 decimal
 	local info = threshold and ("(threshold: %d, %s)"):format(threshold, ambientText)
 		or ("(%s)"):format(ambientText)
-	print(("🌗 %s %s"):format(msg, info))
+	print(("🌗 %s %s"):format(reason, info))
 end
 
 function M.autoSetBrightness()
@@ -83,7 +83,8 @@ end
 hs.hotkey.bind({}, "forwarddelete", function()
 	local toMode = U.isDarkMode() and "light" or "dark"
 	M.setDarkMode(toMode)
-	logBrightness(("Manually toggled %s mode"):format(toMode))
+	local msg = ("Manually toggled %s mode"):format(toMode)
+	logBrightness(msg)
 end)
 
 ---WATCHERS FOR DARK MODE AND BRIGHTNESS----------------------------------------

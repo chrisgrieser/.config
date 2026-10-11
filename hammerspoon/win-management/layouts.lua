@@ -113,7 +113,7 @@ local function movieLayout()
 	-- screen
 	connectProjector(true)
 	display.setDarkMode("dark")
-	U.defer({ 0, 2 }, display.darkenImacDisplay)
+	U.defer({ 1, 3 }, display.darkenImacDisplay)
 
 	-- move mouse to center of projector
 	local projector = hs.screen.find(env.projectorName)

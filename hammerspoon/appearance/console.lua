@@ -33,6 +33,10 @@ local function blue(isDark)
 	if isDark then return { red = 0, green = 0.7, blue = 1 } end
 	return { red = 0, green = 0.1, blue = 0.5 }
 end
+local function green(isDark)
+	if isDark then return { red = 0, green = 0.7, blue = 0.1 } end
+	return { red = 0, green = 0.5, blue = 0.1 }
+end
 
 ---@param toMode "dark"|"light"
 function M.setConsoleColors(toMode)
@@ -93,6 +97,8 @@ function M.cleanupConsole()
 			color = red(isDark)
 		elseif lmsg:find("warning") or msg:find("stack traceback") or lmsg:find("abort") then
 			color = yellow(isDark)
+		elseif msg:find("HAMMERSPOON RELOAD") then -- see `reload.lua`
+			color = green(isDark)
 		else
 			color = base(isDark)
 		end
