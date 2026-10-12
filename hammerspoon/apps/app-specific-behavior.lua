@@ -16,7 +16,7 @@ M.wf_zoom = wf.new({ "Zoom", "zoom.us" }):subscribe(wf.windowCreated, function(n
 		if mainWin then mainWin:close() end
 	end)
 
-	U.defer(4, function() U.closeBrowserTabsWith("zoom.us") end)
+	U.defer({ 2, 4 }, function() U.closeBrowserTabsWith("zoom.us") end)
 end)
 
 ---FINDER-----------------------------------------------------------------------
