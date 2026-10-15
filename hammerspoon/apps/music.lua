@@ -12,7 +12,7 @@ M.music_trigger = function(action)
 	print("🎵 Music: " .. action)
 
 	if M.music_task and M.music_task:isRunning() then M.music_task:terminate() end
-	M.music_task = hs.task.new(alexaTrigger, nil, { "music-" .. action }):start()
+	M.music_task = hs.task.new(alexaTrigger, nil, { "music-" .. action, "silent" }):start()
 end
 
 -- auto-pause/resume music on launch/quit of apps with sound or on Steam games
