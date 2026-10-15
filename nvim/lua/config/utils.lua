@@ -25,21 +25,21 @@ _G.Keymap = function(map)
 
 	if not map.ft then
 		-- GLOBAL keymap
+
 		-- 1. allow to disable with `unique=false` to overwrite nvim defaults
 		-- 2. do not set `unique` for buffer-specific maps, since they are supposed
 		--    to overwrite global ones
 		if opts.unique == nil and opts.buf == nil then opts.unique = true end
 
-		-- violating `unique=true` throws an error; using `pcall` to still load other mappings
+		-- violating `unique=true` throws error; using `pcall` to still load remaining maps
 		local success, _ = pcall(vim.keymap.set, mode, lhs, rhs, opts)
-		if success then return end
-
-		local modes = type(mode) == "table" and table.concat(mode, ", ") or mode
-		local msg = ("`(%s)`  %s  **%s**"):format(modes, lhs, source)
-
-		vim.defer_fn(function() -- defer for notification plugin
-			vim.notify(msg, vim.log.levels.WARN, { title = "Duplicate keymap", timeout = false })
-		end, 1000)
+		if not success then
+			local modes = type(mode) == "table" and table.concat(mode, ", ") or mode
+			local msg = ("`(%s)`  %s  **%s**"):format(modes, lhs, source)
+			vim.defer_fn(function() -- defer for notification plugin
+				vim.notify(msg, vim.log.levels.WARN, { title = "Duplicate keymap", timeout = false })
+			end, 1000)
+		end
 	else
 		-- FILETYPE keymap
 		vim.api.nvim_create_autocmd("FileType", {

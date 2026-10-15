@@ -19,7 +19,7 @@ zmodload -i zsh/complist # enables `-M menuselect` (bindings only active when se
 # needs to be run BEFORE compinit/zsh-autocomplete
 export FPATH="$ZDOTDIR/completions:$HOMEBREW_PREFIX/share/zsh/site-functions:$FPATH"
 
-# do not save in public dotfile repo
+# do not clutter public dotfile repo
 export ZSH_COMPDUMP="$HOME/.local/share/zsh/zcompdump"
 
 # match substrings (e.g., `cd ext` -> `cd browser-ext`), and case-insensitively
@@ -77,6 +77,8 @@ _tab-on-empty-buffer() {
 }
 zle -N _tab-on-empty-buffer
 bindkey '^I' _tab-on-empty-buffer
+
+# INFO `-M menuselect` bindings only active when selection is visible
 
 # SHIFT+TAB: prev item
 bindkey -M menuselect '^[[Z' reverse-menu-complete
