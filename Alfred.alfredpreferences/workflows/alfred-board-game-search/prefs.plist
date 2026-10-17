@@ -5,6 +5,6 @@
 	<key>bgg_csv_path</key>
 	<string>~/.cache/boardgames_ranks.csv</string>
 	<key>keyword_2</key>
-	<string>buy||bgp</string>
+	<string>buy</string>
 </dict>
 </plist>

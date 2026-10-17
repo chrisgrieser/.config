@@ -8,7 +8,20 @@
 	<string>⭐️</string>
 	<key>connections</key>
 	<dict>
-		<key>1E9D47A4-3A41-453E-9734-4F58E6654D5A</key>
+		<key>20B10AB5-B510-4D01-B57C-2FE913666B7F</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>535E8B64-6BC6-4338-8C33-B08013EA8071</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>2FB30929-2AE9-432E-925C-110B0A3BF84E</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
@@ -22,17 +35,44 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>375D0931-85FB-4992-B85A-E8638C5CE84B</string>
+				<string>EC5A44BE-42DE-4A85-8A8D-72A0F7380B4C</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
 				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>535E8B64-6BC6-4338-8C33-B08013EA8071</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>2FB30929-2AE9-432E-925C-110B0A3BF84E</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>3DB5E141-CAB4-4307-A67A-718B60981119</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>F366B9F0-F152-4885-8639-D69B97BC802E</string>
+				<string>7F499364-1957-4CB6-814E-9B8B04CA6CF8</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>989E50C1-AFFD-4AEC-8EFF-4F330738ED40</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>DEE8A1D2-4E29-4A74-B270-9AF92B587BE8</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -40,9 +80,22 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
+		</array>
+		<key>7F499364-1957-4CB6-814E-9B8B04CA6CF8</key>
+		<array>
 			<dict>
 				<key>destinationuid</key>
 				<string>56A2325A-30D3-4B4C-ABFB-BCD0FA84E0CB</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>11FF7FEE-D375-4B1F-AC30-80F60A9E80DD</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -79,6 +132,49 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>A986BB17-B40A-456B-86BC-2C9DB867563D</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>DEE8A1D2-4E29-4A74-B270-9AF92B587BE8</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>2FB30929-2AE9-432E-925C-110B0A3BF84E</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>7F499364-1957-4CB6-814E-9B8B04CA6CF8</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>375D0931-85FB-4992-B85A-E8638C5CE84B</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>F366B9F0-F152-4885-8639-D69B97BC802E</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -129,6 +225,48 @@
 			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
 			<string>85894161-CE99-4C9D-B3E1-18C564EE94E8</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string>+</string>
+				<key>url</key>
+				<string>https://boardgamegeek.com/data_dumps/bg_ranks</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>A986BB17-B40A-456B-86BC-2C9DB867563D</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>:bgg</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>Update BGG data</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>D9099601-000C-413E-8F04-7909EC5D4E03</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -231,35 +369,22 @@
 				<key>skipvarencode</key>
 				<false/>
 				<key>spaces</key>
-				<string>+</string>
+				<string></string>
 				<key>url</key>
-				<string>https://boardgamegeek.com/data_dumps/bg_ranks</string>
+				<string>https://www.kleinanzeigen.de/s-spielzeug/{query}/k0c23</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
-			<string>A986BB17-B40A-456B-86BC-2C9DB867563D</string>
+			<string>2BCC379B-ACFB-4C82-B995-8581FFE08FC4</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
 		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>:bgg</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>Update BGG data</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
 			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
+			<string>alfred.workflow.utility.junction</string>
 			<key>uid</key>
-			<string>D9099601-000C-413E-8F04-7909EC5D4E03</string>
+			<string>2FB30929-2AE9-432E-925C-110B0A3BF84E</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -275,33 +400,147 @@
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
-				<string>https://www.kleinanzeigen.de/s-spielzeug/{query}/k0c23</string>
+				<string>https://www.vinted.de/catalog?search_text={query}</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
-			<string>2BCC379B-ACFB-4C82-B995-8581FFE08FC4</string>
+			<string>EC5A44BE-42DE-4A85-8A8D-72A0F7380B4C</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
+				<key>argumenttrimmode</key>
 				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>fixedorder</key>
+				<false/>
+				<key>items</key>
+				<string>[{"title":"Gebraucht","arg":"used","subtitle":"Kleinanzeigen + Vinted"},{"title":"Aggregatoren","arg":"aggregators","subtitle":"boardgameprices + tabletopfinder"},{"title":"Überall","arg":"all","subtitle":"Amazon + Fantasywelt + gebraucht + Aggregatoren"}]</string>
 				<key>keyword</key>
 				<string>{var:keyword_2}</string>
+				<key>matchmode</key>
+				<integer>0</integer>
+				<key>runningsubtext</key>
+				<string></string>
 				<key>subtext</key>
-				<string>searches multiple sites</string>
-				<key>text</key>
-				<string>Buy Board Game: "{query}"</string>
+				<string></string>
+				<key>title</key>
+				<string>Buy boardgame</string>
 				<key>withspace</key>
 				<true/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
+			<string>alfred.workflow.input.listfilter</string>
 			<key>uid</key>
-			<string>1E9D47A4-3A41-453E-9734-4F58E6654D5A</string>
+			<string>20B10AB5-B510-4D01-B57C-2FE913666B7F</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string></string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string>used</string>
+						<key>outputlabel</key>
+						<string>Gebraucht</string>
+						<key>uid</key>
+						<string>3DB5E141-CAB4-4307-A67A-718B60981119</string>
+					</dict>
+					<dict>
+						<key>inputstring</key>
+						<string></string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string>aggregators</string>
+						<key>outputlabel</key>
+						<string>Aggregatoren</string>
+						<key>uid</key>
+						<string>989E50C1-AFFD-4AEC-8EFF-4F330738ED40</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>all</string>
+				<key>hideelse</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.conditional</string>
+			<key>uid</key>
+			<string>535E8B64-6BC6-4338-8C33-B08013EA8071</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.junction</string>
+			<key>uid</key>
+			<string>7F499364-1957-4CB6-814E-9B8B04CA6CF8</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>https://boardgameprices.com/item/search?search={query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>56A2325A-30D3-4B4C-ABFB-BCD0FA84E0CB</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.junction</string>
+			<key>uid</key>
+			<string>DEE8A1D2-4E29-4A74-B270-9AF92B587BE8</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>https://www.tabletopfinder.eu/en/boardgame/search?query={query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>11FF7FEE-D375-4B1F-AC30-80F60A9E80DD</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -347,27 +586,6 @@
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>https://boardgameprices.com/item/search?search={query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>56A2325A-30D3-4B4C-ABFB-BCD0FA84E0CB</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
 	</array>
 	<key>readme</key>
 	<string>## Setup
@@ -387,57 +605,89 @@ Search board games with the `bgg` keyword.
 #### Data by [Board Game Geeks](https://boardgamegeek.com/using_the_xml_api)</string>
 	<key>uidata</key>
 	<dict>
-		<key>1E9D47A4-3A41-453E-9734-4F58E6654D5A</key>
+		<key>11FF7FEE-D375-4B1F-AC30-80F60A9E80DD</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>10</integer>
+			<integer>3</integer>
+			<key>xpos</key>
+			<real>540</real>
+			<key>ypos</key>
+			<real>540</real>
+		</dict>
+		<key>20B10AB5-B510-4D01-B57C-2FE913666B7F</key>
+		<dict>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>530</real>
+			<real>345</real>
 		</dict>
 		<key>2BCC379B-ACFB-4C82-B995-8581FFE08FC4</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>10</integer>
+			<integer>5</integer>
 			<key>xpos</key>
-			<real>270</real>
+			<real>540</real>
 			<key>ypos</key>
-			<real>410</real>
+			<real>175</real>
+		</dict>
+		<key>2FB30929-2AE9-432E-925C-110B0A3BF84E</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
+			<key>xpos</key>
+			<real>455</real>
+			<key>ypos</key>
+			<real>265</real>
 		</dict>
 		<key>375D0931-85FB-4992-B85A-E8638C5CE84B</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>10</integer>
+			<integer>8</integer>
 			<key>xpos</key>
-			<real>270</real>
+			<real>540</real>
 			<key>ypos</key>
-			<real>530</real>
+			<real>695</real>
+		</dict>
+		<key>535E8B64-6BC6-4338-8C33-B08013EA8071</key>
+		<dict>
+			<key>xpos</key>
+			<real>200</real>
+			<key>ypos</key>
+			<real>350</real>
 		</dict>
 		<key>56A2325A-30D3-4B4C-ABFB-BCD0FA84E0CB</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>10</integer>
+			<integer>3</integer>
 			<key>xpos</key>
-			<real>270</real>
+			<real>540</real>
 			<key>ypos</key>
-			<real>770</real>
+			<real>420</real>
 		</dict>
 		<key>6BF2B984-1F3B-42A6-AAF6-C08713625399</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>415</real>
+			<real>375</real>
 			<key>ypos</key>
 			<real>130</real>
+		</dict>
+		<key>7F499364-1957-4CB6-814E-9B8B04CA6CF8</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>xpos</key>
+			<real>455</real>
+			<key>ypos</key>
+			<real>375</real>
 		</dict>
 		<key>85894161-CE99-4C9D-B3E1-18C564EE94E8</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>265</real>
+			<real>225</real>
 			<key>ypos</key>
 			<real>15</real>
 		</dict>
@@ -455,36 +705,54 @@ Search board games with the `bgg` keyword.
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>265</real>
+			<real>865</real>
 			<key>ypos</key>
-			<real>290</real>
+			<real>15</real>
 		</dict>
 		<key>D9099601-000C-413E-8F04-7909EC5D4E03</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>35</real>
+			<real>635</real>
 			<key>ypos</key>
-			<real>290</real>
+			<real>15</real>
+		</dict>
+		<key>DEE8A1D2-4E29-4A74-B270-9AF92B587BE8</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>8</integer>
+			<key>xpos</key>
+			<real>355</real>
+			<key>ypos</key>
+			<real>510</real>
 		</dict>
 		<key>E087D983-8D7A-4EA5-A682-02234530D0BA</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>265</real>
+			<real>225</real>
 			<key>ypos</key>
 			<real>130</real>
+		</dict>
+		<key>EC5A44BE-42DE-4A85-8A8D-72A0F7380B4C</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
+			<key>xpos</key>
+			<real>540</real>
+			<key>ypos</key>
+			<real>290</real>
 		</dict>
 		<key>F366B9F0-F152-4885-8639-D69B97BC802E</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>10</integer>
+			<integer>8</integer>
 			<key>xpos</key>
-			<real>270</real>
+			<real>540</real>
 			<key>ypos</key>
-			<real>650</real>
+			<real>815</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
