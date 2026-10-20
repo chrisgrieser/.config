@@ -31,7 +31,6 @@ function M.autoSetBrightness()
 end
 
 function M.darkenImacDisplay()
-	if #hs.screen.allScreens() == 1 then return end
 	local iMacDisplay = require("win-management.window-utils").iMacDisplay
 	if iMacDisplay then iMacDisplay:setBrightness(0) end
 end
