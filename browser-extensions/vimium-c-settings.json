@@ -1,11 +1,11 @@
 {
 	"name": "Vimium C",
-	"@time": "7/25/2026, 11:03:16 AM",
-	"time": 1784970196326,
+	"@time": "10/21/2026, 4:26:31 PM",
+	"time": 1792592791289,
 	"environment": {
 		"extension": "2.12.2",
 		"platform": "mac",
-		"chromium": 150
+		"chromium": 155
 	},
 	"allBrowserUrls": true,
 	"exclusionListenHash": false,
@@ -43,7 +43,7 @@
 			"pattern": ":https://www.netflix.com/"
 		},
 		{
-			"passKeys": "? j k ",
+			"passKeys": "? j k o ",
 			"pattern": "^https://www.reddit.com/(?!.*/comments/)"
 		},
 		{
