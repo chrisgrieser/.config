@@ -18,6 +18,23 @@ function camelCaseMatch(str) {
 	return [clean, camelCaseSeparated, str].join(" ") + " ";
 }
 
+/** @returns {string[]} names of the `.app` bundles in /Applications */
+function listInstalledApps() {
+	// PERF using the file manager instead of `ls` saves spawning a shell + process
+	try {
+		const entries = ObjC.deepUnwrap(
+			$.NSFileManager.defaultManager.contentsOfDirectoryAtPathError("/Applications", $()),
+		);
+		if (Array.isArray(entries)) return entries.filter((name) => name.endsWith(".app"));
+	} catch (_error) {
+		// fall through to shell fallback
+	}
+	return app
+		.doShellScript("ls /Applications/")
+		.split("\r")
+		.filter((line) => line.endsWith(".app"));
+}
+
 //──────────────────────────────────────────────────────────────────────────────
 
 /** @type {AlfredRun} */
@@ -38,10 +55,7 @@ function run() {
 	/** @type {Record<string, Record<string, string>>} */
 	const { processAppName, appFilePaths } = JSON.parse(readFile("./scripts/app-process-info.json"));
 
-	const installedApps = app
-		.doShellScript("ls /Applications/")
-		.split("\r")
-		.filter((line) => line.endsWith(".app"));
+	const installedApps = listInstalledApps();
 
 	const sortByMemory = (sortBy === "Memory" && !invertSort) || (sortBy === "CPU" && invertSort);
 	const sortArg = sortByMemory ? "m" : "r";
@@ -49,10 +63,18 @@ function run() {
 	// identifiable by space delimitation even with spaces in the process name
 	const shellCmd = `ps -${sortArg}cAo 'pid=,ppid=,%cpu=,rss=,ruser=,command='`;
 
+	// PERF the `ps` output already contains every parent, so build a pid -> name
+	// lookup from it instead of spawning one `ps -p` shell per distinct parent
+	const psLines = app.doShellScript(shellCmd).split("\r");
+	/** @type {Record<string, string>} */
+	const nameByPid = {};
+	for (const line of psLines) {
+		const [pid, , , , , ...rest] = line.trim().split(/ +/);
+		nameByPid[pid] = rest.join(" ");
+	}
+
 	/** @type {AlfredItem[]} */
-	const processes = app
-		.doShellScript(shellCmd)
-		.split("\r")
+	const processes = psLines
 		.reduce((/** @type {AlfredItem[]} */ acc, processInfo) => {
 			// PID & name
 			const [pid, ppid, cpuStr, memoryStr, isRoot, ...rest] = processInfo.trim().split(/ +/);
@@ -66,7 +88,7 @@ function run() {
 				parentName = parentInfo.name;
 				parentProcs[ppid].childrenCount++;
 			} else {
-				parentName = app.doShellScript(`ps -p ${ppid} -co 'command=' || true`);
+				parentName = nameByPid[ppid] || "";
 				parentProcs[ppid] = { name: parentName, childrenCount: 1 };
 			}
 			// don't display parent if the name is obvious
