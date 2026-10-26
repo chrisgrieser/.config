@@ -9,14 +9,14 @@ local wf = hs.window.filter
 M.wf_zoom = wf.new({ "Zoom", "zoom.us" }):subscribe(wf.windowCreated, function(newWin)
 	if newWin:title() ~= "Zoom Meeting" then return end
 
-	U.defer(2, function()
+	U.defer({ 0, 2 }, function()
+		U.closeBrowserTabsWith("zoom.us")
 		local zoom = newWin:application()
-		if not zoom or zoom:findWindow("Update") then return end
-		local mainWin = zoom:findWindow("Login") or zoom:findWindow("Zoom Workspace")
-		if mainWin then mainWin:close() end
+		if zoom and not zoom:findWindow("Update") then
+			local mainWin = zoom:findWindow("Login") or zoom:findWindow("Zoom Workspace")
+			if mainWin then mainWin:close() end
+		end
 	end)
-
-	U.defer({ 2, 4 }, function() U.closeBrowserTabsWith("zoom.us") end)
 end)
 
 ---FINDER-----------------------------------------------------------------------
