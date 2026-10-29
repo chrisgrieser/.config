@@ -4,8 +4,10 @@
 function revealIfExistent() { [[ -d "$1" ]] && open -R "$1"; }
 
 revealIfExistent "/Applications/Utilities"
+revealIfExistent "$HOME/RomComs/"
 revealIfExistent "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Tech/nvim-data"
 revealIfExistent "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Academia/PDFs"
+revealIfExistent "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Apps/Love/"
 
 # open spotlight settings
 open "x-apple.systempreferences:com.apple.preference.speech"
