@@ -1,7 +1,7 @@
 {
   "plugins": {
     "async.nvim": {
-      "rev": "4182ab361c09ff251ac159c4a4110ec8e7723215",
+      "rev": "734e3386dbdf8b60492c16d488bc4e372fdd658c",
       "src": "https://github.com/lewis6991/async.nvim"
     },
     "blink-cmp-git": {
@@ -22,7 +22,7 @@
       "src": "https://github.com/jinh0/eyeliner.nvim"
     },
     "gitsigns.nvim": {
-      "rev": "d4854fa9a94b5c8b37dd209fb4a19e98e764186f",
+      "rev": "1e9d0fbfe7ff848bc402d2c2e2854fb4eff2dce7",
       "src": "https://github.com/lewis6991/gitsigns.nvim"
     },
     "lualine.nvim": {
@@ -38,7 +38,7 @@
       "src": "https://github.com/nvim-mini/mini.icons"
     },
     "mini.operators": {
-      "rev": "0e25aac29dd6cdbcfdbd8a6505a8e3be5064ef1a",
+      "rev": "9e844663fe217bae78e857b7dc59468d8ee6d425",
       "src": "https://github.com/nvim-mini/mini.operators"
     },
     "neocodeium": {
@@ -66,7 +66,7 @@
       "src": "https://github.com/chrisgrieser/nvim-lsp-endhints"
     },
     "nvim-lspconfig": {
-      "rev": "77b7432d4770d23b277d37923e5a08a442d8bb07",
+      "rev": "d8d2fda7aae57030452ce8cd6e770b1eb704514e",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-origami": {
@@ -98,7 +98,7 @@
       "src": "https://github.com/chrisgrieser/nvim-tinygit"
     },
     "nvim-treesitter": {
-      "rev": "a2f694478be07f89c2d03cc17858a8745a400c4b",
+      "rev": "a9c4e1457e2e59f1b82c8f78dcdb3b2517555200",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter"
     },
     "nvim-treesitter-textobjects": {
@@ -110,7 +110,7 @@
       "src": "https://github.com/chrisgrieser/nvim-various-textobjs"
     },
     "refactoring.nvim": {
-      "rev": "684b3484796ea44595bebbfddee4fa4dbfc90939",
+      "rev": "ea18f97c58276e213736c9f0193f7aa4c690693e",
       "src": "https://github.com/theprimeagen/refactoring.nvim"
     },
     "render-markdown.nvim": {
