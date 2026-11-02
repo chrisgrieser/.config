@@ -9,7 +9,7 @@ local wf = hs.window.filter
 M.wf_zoom = wf.new({ "Zoom", "zoom.us" }):subscribe(wf.windowCreated, function(newWin)
 	if newWin:title() ~= "Zoom Meeting" then return end
 
-	U.defer({ 0, 2 }, function()
+	U.defer({ 0, 3 }, function()
 		U.closeBrowserTabsWith("zoom.us")
 		local zoom = newWin:application()
 		if zoom and not zoom:findWindow("Update") then

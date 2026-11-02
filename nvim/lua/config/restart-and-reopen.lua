@@ -28,7 +28,7 @@ vim.api.nvim_create_autocmd("VimEnter", {
 				local exists = vim.uv.fs_stat(file) ~= nil
 				return exists and notGitCommitMsg
 			end)
-			if lastFile then vim.cmd.edit(lastFile) end
+			if lastFile then vim.defer_fn(function() vim.cmd.edit(lastFile) end, 100) end
 		end
 	end),
 })
