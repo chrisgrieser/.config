@@ -174,14 +174,14 @@ if U.isSystemStart() then workLayout() end
 
 local config = {
 	checkIntervalMins = 15,
-	timeToReactSecs = 20,
+	timeToReactSecs = 12,
 	sleeptimerAfterMins = 50,
 	longIdleAfterMins = 150,
 }
 
 -- 4. Long idle
 M.longIdleTimer = doEvery(config.checkIntervalMins * 60, function()
-	local userIsLongIdle = not U.userActiveInLastMins(config.longIdleAfterMins)
+	local userIsLongIdle = U.userIdleForMins(config.longIdleAfterMins)
 	if userIsLongIdle and M.currentLayout ~= "work" then
 		print("⌛ Long idle")
 		workLayout("dark")
@@ -191,34 +191,28 @@ end):start()
 
 -- 5. Sleep timer
 -- When video app is running, check every x min if device has been idle for y
--- mins and reset to work layout
-
+-- mins and reset to work layout.
 M.sleepTimer = doEvery(config.checkIntervalMins * 60, function()
-	local videoAppRunning = hs.fnutils.some(U.videoAndAudioApps, U.app)
-	local userIsIdle = not U.userActiveInLastMins(config.sleeptimerAfterMins)
-	if not (userIsIdle and videoAppRunning) then return end
+	local userIsActive = function() return not U.userIdleForMins(config.sleeptimerAfterMins) end
+	local noVideoAppRunning = not (hs.fnutils.some(U.videoAndAudioApps, U.app))
+
+	if userIsActive() or noVideoAppRunning then return end
 
 	-- inform user about upcoming sleep
 	local timeToReactSecs = config.timeToReactSecs
 	local alertMsg = ("💤 Will sleep in %ds if idle."):format(timeToReactSecs)
-	U.alertAndLog(alertMsg, config.timeToReactSecs)
+	U.alertAndLog(alertMsg, timeToReactSecs)
 	U.sound("Submarine")
 
 	-- remove alert earlier if user reacted
 	local halfTime = math.ceil(timeToReactSecs / 2)
 	U.defer(halfTime, function()
-		local userDidSth = hs.host.idleTime() < halfTime
-		if userDidSth then
-			hs.alert.closeAll()
-		else
-			U.sound("Submarine") -- second alert
-		end
+		if userIsActive() then hs.alert.closeAll() end
 	end)
 
-	-- close if still idle; abort otherwise
+	-- close if still idle, abort otherwise
 	U.defer(config.timeToReactSecs, function()
-		local userDidSth = hs.host.idleTime() < timeToReactSecs
-		if userDidSth then return end
+		if userIsActive() then return end
 		U.notifyOnPhone("💤 Sleep timer", "triggered at " .. os.date("%H:%M"))
 		workLayout("dark")
 	end)

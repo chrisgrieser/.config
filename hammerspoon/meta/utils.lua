@@ -95,18 +95,19 @@ function U.isDarkMode() return hs.execute("defaults read -g AppleInterfaceStyle"
 ---@param delaySecs number|number[]
 ---@param callbackFn function
 function U.defer(delaySecs, callbackFn)
+	local maxTimers = 30
 	if type(delaySecs) == "number" then delaySecs = { delaySecs } end
 	for _, delay in pairs(delaySecs) do
 		U.deferTimerIdx = (U.deferTimerIdx or 0) + 1
 		U[U.deferTimerIdx] = hs.timer.doAfter(delay, callbackFn):start()
-		if U.deferTimerIdx > 30 then U.deferTimerIdx = 0 end
+		if U.deferTimerIdx > maxTimers then U.deferTimerIdx = 0 end
 	end
 end
 
 ---@param mins number
 ---@return boolean
 ---@nodiscard
-function U.userActiveInLastMins(mins) return (hs.host.idleTime() / 60) < mins end
+function U.userIdleForMins(mins) return (hs.host.idleTime() / 60) > mins end
 
 ---@param msg string
 function U.notify(msg)

@@ -30,7 +30,7 @@ vim.api.nvim_create_autocmd("VimEnter", {
 			end)
 			if lastFile then
 				vim.cmd.edit(lastFile)
-				vim.defer_fn(function() vim.cmd.edit(lastFile) end, 100)
+				vim.defer_fn(function() vim.cmd.edit(lastFile) end, 500)
 			end
 		end
 	end),

@@ -2840,6 +2840,8 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 <array> <string>svg</string> <string>svg</string> </array>
 <array> <string>symfony</string> <string>symfony</string> </array>
 <array> <string>tailwindcss</string> <string>tailwindcss</string> </array>
+<array> <string>tanstack_query</string> <string>tanstack_query</string> </array>
+<array> <string>tanstack_router</string> <string>tanstack_router</string> </array>
 <array> <string>tcl_tk</string> <string>tcl_tk</string> </array>
 <array> <string>tcllib</string> <string>tcllib</string> </array>
 <array> <string>tensorflow (keyword: tf)</string> <string>tf</string> </array>
@@ -2850,6 +2852,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 <array> <string>trio</string> <string>trio</string> </array>
 <array> <string>twig</string> <string>twig</string> </array>
 <array> <string>typescript (keyword: ts)</string> <string>ts</string> </array>
+<array> <string>typst</string> <string>typst</string> </array>
 <array> <string>underscore</string> <string>underscore</string> </array>
 <array> <string>vagrant</string> <string>vagrant</string> </array>
 <array> <string>valibot</string> <string>valibot</string> </array>
@@ -3086,6 +3089,8 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 <array> <string>svg</string> <string>svg</string> </array>
 <array> <string>symfony</string> <string>symfony</string> </array>
 <array> <string>tailwindcss</string> <string>tailwindcss</string> </array>
+<array> <string>tanstack_query</string> <string>tanstack_query</string> </array>
+<array> <string>tanstack_router</string> <string>tanstack_router</string> </array>
 <array> <string>tcl_tk</string> <string>tcl_tk</string> </array>
 <array> <string>tcllib</string> <string>tcllib</string> </array>
 <array> <string>tensorflow (keyword: tf)</string> <string>tf</string> </array>
@@ -3096,6 +3101,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 <array> <string>trio</string> <string>trio</string> </array>
 <array> <string>twig</string> <string>twig</string> </array>
 <array> <string>typescript (keyword: ts)</string> <string>ts</string> </array>
+<array> <string>typst</string> <string>typst</string> </array>
 <array> <string>underscore</string> <string>underscore</string> </array>
 <array> <string>vagrant</string> <string>vagrant</string> </array>
 <array> <string>valibot</string> <string>valibot</string> </array>
@@ -3332,6 +3338,8 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 <array> <string>svg</string> <string>svg</string> </array>
 <array> <string>symfony</string> <string>symfony</string> </array>
 <array> <string>tailwindcss</string> <string>tailwindcss</string> </array>
+<array> <string>tanstack_query</string> <string>tanstack_query</string> </array>
+<array> <string>tanstack_router</string> <string>tanstack_router</string> </array>
 <array> <string>tcl_tk</string> <string>tcl_tk</string> </array>
 <array> <string>tcllib</string> <string>tcllib</string> </array>
 <array> <string>tensorflow (keyword: tf)</string> <string>tf</string> </array>
@@ -3342,6 +3350,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 <array> <string>trio</string> <string>trio</string> </array>
 <array> <string>twig</string> <string>twig</string> </array>
 <array> <string>typescript (keyword: ts)</string> <string>ts</string> </array>
+<array> <string>typst</string> <string>typst</string> </array>
 <array> <string>underscore</string> <string>underscore</string> </array>
 <array> <string>vagrant</string> <string>vagrant</string> </array>
 <array> <string>valibot</string> <string>valibot</string> </array>
@@ -3578,6 +3587,8 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 <array> <string>svg</string> <string>svg</string> </array>
 <array> <string>symfony</string> <string>symfony</string> </array>
 <array> <string>tailwindcss</string> <string>tailwindcss</string> </array>
+<array> <string>tanstack_query</string> <string>tanstack_query</string> </array>
+<array> <string>tanstack_router</string> <string>tanstack_router</string> </array>
 <array> <string>tcl_tk</string> <string>tcl_tk</string> </array>
 <array> <string>tcllib</string> <string>tcllib</string> </array>
 <array> <string>tensorflow (keyword: tf)</string> <string>tf</string> </array>
@@ -3588,6 +3599,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 <array> <string>trio</string> <string>trio</string> </array>
 <array> <string>twig</string> <string>twig</string> </array>
 <array> <string>typescript (keyword: ts)</string> <string>ts</string> </array>
+<array> <string>typst</string> <string>typst</string> </array>
 <array> <string>underscore</string> <string>underscore</string> </array>
 <array> <string>vagrant</string> <string>vagrant</string> </array>
 <array> <string>valibot</string> <string>valibot</string> </array>
@@ -3824,6 +3836,8 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 <array> <string>svg</string> <string>svg</string> </array>
 <array> <string>symfony</string> <string>symfony</string> </array>
 <array> <string>tailwindcss</string> <string>tailwindcss</string> </array>
+<array> <string>tanstack_query</string> <string>tanstack_query</string> </array>
+<array> <string>tanstack_router</string> <string>tanstack_router</string> </array>
 <array> <string>tcl_tk</string> <string>tcl_tk</string> </array>
 <array> <string>tcllib</string> <string>tcllib</string> </array>
 <array> <string>tensorflow (keyword: tf)</string> <string>tf</string> </array>
@@ -3834,6 +3848,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 <array> <string>trio</string> <string>trio</string> </array>
 <array> <string>twig</string> <string>twig</string> </array>
 <array> <string>typescript (keyword: ts)</string> <string>ts</string> </array>
+<array> <string>typst</string> <string>typst</string> </array>
 <array> <string>underscore</string> <string>underscore</string> </array>
 <array> <string>vagrant</string> <string>vagrant</string> </array>
 <array> <string>valibot</string> <string>valibot</string> </array>
@@ -4070,6 +4085,8 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 <array> <string>svg</string> <string>svg</string> </array>
 <array> <string>symfony</string> <string>symfony</string> </array>
 <array> <string>tailwindcss</string> <string>tailwindcss</string> </array>
+<array> <string>tanstack_query</string> <string>tanstack_query</string> </array>
+<array> <string>tanstack_router</string> <string>tanstack_router</string> </array>
 <array> <string>tcl_tk</string> <string>tcl_tk</string> </array>
 <array> <string>tcllib</string> <string>tcllib</string> </array>
 <array> <string>tensorflow (keyword: tf)</string> <string>tf</string> </array>
@@ -4080,6 +4097,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 <array> <string>trio</string> <string>trio</string> </array>
 <array> <string>twig</string> <string>twig</string> </array>
 <array> <string>typescript (keyword: ts)</string> <string>ts</string> </array>
+<array> <string>typst</string> <string>typst</string> </array>
 <array> <string>underscore</string> <string>underscore</string> </array>
 <array> <string>vagrant</string> <string>vagrant</string> </array>
 <array> <string>valibot</string> <string>valibot</string> </array>
@@ -4316,6 +4334,8 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 <array> <string>svg</string> <string>svg</string> </array>
 <array> <string>symfony</string> <string>symfony</string> </array>
 <array> <string>tailwindcss</string> <string>tailwindcss</string> </array>
+<array> <string>tanstack_query</string> <string>tanstack_query</string> </array>
+<array> <string>tanstack_router</string> <string>tanstack_router</string> </array>
 <array> <string>tcl_tk</string> <string>tcl_tk</string> </array>
 <array> <string>tcllib</string> <string>tcllib</string> </array>
 <array> <string>tensorflow (keyword: tf)</string> <string>tf</string> </array>
@@ -4326,6 +4346,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 <array> <string>trio</string> <string>trio</string> </array>
 <array> <string>twig</string> <string>twig</string> </array>
 <array> <string>typescript (keyword: ts)</string> <string>ts</string> </array>
+<array> <string>typst</string> <string>typst</string> </array>
 <array> <string>underscore</string> <string>underscore</string> </array>
 <array> <string>vagrant</string> <string>vagrant</string> </array>
 <array> <string>valibot</string> <string>valibot</string> </array>
@@ -4562,6 +4583,8 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 <array> <string>svg</string> <string>svg</string> </array>
 <array> <string>symfony</string> <string>symfony</string> </array>
 <array> <string>tailwindcss</string> <string>tailwindcss</string> </array>
+<array> <string>tanstack_query</string> <string>tanstack_query</string> </array>
+<array> <string>tanstack_router</string> <string>tanstack_router</string> </array>
 <array> <string>tcl_tk</string> <string>tcl_tk</string> </array>
 <array> <string>tcllib</string> <string>tcllib</string> </array>
 <array> <string>tensorflow (keyword: tf)</string> <string>tf</string> </array>
@@ -4572,6 +4595,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 <array> <string>trio</string> <string>trio</string> </array>
 <array> <string>twig</string> <string>twig</string> </array>
 <array> <string>typescript (keyword: ts)</string> <string>ts</string> </array>
+<array> <string>typst</string> <string>typst</string> </array>
 <array> <string>underscore</string> <string>underscore</string> </array>
 <array> <string>vagrant</string> <string>vagrant</string> </array>
 <array> <string>valibot</string> <string>valibot</string> </array>
@@ -4808,6 +4832,8 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 <array> <string>svg</string> <string>svg</string> </array>
 <array> <string>symfony</string> <string>symfony</string> </array>
 <array> <string>tailwindcss</string> <string>tailwindcss</string> </array>
+<array> <string>tanstack_query</string> <string>tanstack_query</string> </array>
+<array> <string>tanstack_router</string> <string>tanstack_router</string> </array>
 <array> <string>tcl_tk</string> <string>tcl_tk</string> </array>
 <array> <string>tcllib</string> <string>tcllib</string> </array>
 <array> <string>tensorflow (keyword: tf)</string> <string>tf</string> </array>
@@ -4818,6 +4844,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 <array> <string>trio</string> <string>trio</string> </array>
 <array> <string>twig</string> <string>twig</string> </array>
 <array> <string>typescript (keyword: ts)</string> <string>ts</string> </array>
+<array> <string>typst</string> <string>typst</string> </array>
 <array> <string>underscore</string> <string>underscore</string> </array>
 <array> <string>vagrant</string> <string>vagrant</string> </array>
 <array> <string>valibot</string> <string>valibot</string> </array>
@@ -5054,6 +5081,8 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 <array> <string>svg</string> <string>svg</string> </array>
 <array> <string>symfony</string> <string>symfony</string> </array>
 <array> <string>tailwindcss</string> <string>tailwindcss</string> </array>
+<array> <string>tanstack_query</string> <string>tanstack_query</string> </array>
+<array> <string>tanstack_router</string> <string>tanstack_router</string> </array>
 <array> <string>tcl_tk</string> <string>tcl_tk</string> </array>
 <array> <string>tcllib</string> <string>tcllib</string> </array>
 <array> <string>tensorflow (keyword: tf)</string> <string>tf</string> </array>
@@ -5064,6 +5093,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 <array> <string>trio</string> <string>trio</string> </array>
 <array> <string>twig</string> <string>twig</string> </array>
 <array> <string>typescript (keyword: ts)</string> <string>ts</string> </array>
+<array> <string>typst</string> <string>typst</string> </array>
 <array> <string>underscore</string> <string>underscore</string> </array>
 <array> <string>vagrant</string> <string>vagrant</string> </array>
 <array> <string>valibot</string> <string>valibot</string> </array>
@@ -5300,6 +5330,8 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 <array> <string>svg</string> <string>svg</string> </array>
 <array> <string>symfony</string> <string>symfony</string> </array>
 <array> <string>tailwindcss</string> <string>tailwindcss</string> </array>
+<array> <string>tanstack_query</string> <string>tanstack_query</string> </array>
+<array> <string>tanstack_router</string> <string>tanstack_router</string> </array>
 <array> <string>tcl_tk</string> <string>tcl_tk</string> </array>
 <array> <string>tcllib</string> <string>tcllib</string> </array>
 <array> <string>tensorflow (keyword: tf)</string> <string>tf</string> </array>
@@ -5310,6 +5342,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 <array> <string>trio</string> <string>trio</string> </array>
 <array> <string>twig</string> <string>twig</string> </array>
 <array> <string>typescript (keyword: ts)</string> <string>ts</string> </array>
+<array> <string>typst</string> <string>typst</string> </array>
 <array> <string>underscore</string> <string>underscore</string> </array>
 <array> <string>vagrant</string> <string>vagrant</string> </array>
 <array> <string>valibot</string> <string>valibot</string> </array>
@@ -5546,6 +5579,8 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 <array> <string>svg</string> <string>svg</string> </array>
 <array> <string>symfony</string> <string>symfony</string> </array>
 <array> <string>tailwindcss</string> <string>tailwindcss</string> </array>
+<array> <string>tanstack_query</string> <string>tanstack_query</string> </array>
+<array> <string>tanstack_router</string> <string>tanstack_router</string> </array>
 <array> <string>tcl_tk</string> <string>tcl_tk</string> </array>
 <array> <string>tcllib</string> <string>tcllib</string> </array>
 <array> <string>tensorflow (keyword: tf)</string> <string>tf</string> </array>
@@ -5556,6 +5591,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 <array> <string>trio</string> <string>trio</string> </array>
 <array> <string>twig</string> <string>twig</string> </array>
 <array> <string>typescript (keyword: ts)</string> <string>ts</string> </array>
+<array> <string>typst</string> <string>typst</string> </array>
 <array> <string>underscore</string> <string>underscore</string> </array>
 <array> <string>vagrant</string> <string>vagrant</string> </array>
 <array> <string>valibot</string> <string>valibot</string> </array>
@@ -5792,6 +5828,8 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 <array> <string>svg</string> <string>svg</string> </array>
 <array> <string>symfony</string> <string>symfony</string> </array>
 <array> <string>tailwindcss</string> <string>tailwindcss</string> </array>
+<array> <string>tanstack_query</string> <string>tanstack_query</string> </array>
+<array> <string>tanstack_router</string> <string>tanstack_router</string> </array>
 <array> <string>tcl_tk</string> <string>tcl_tk</string> </array>
 <array> <string>tcllib</string> <string>tcllib</string> </array>
 <array> <string>tensorflow (keyword: tf)</string> <string>tf</string> </array>
@@ -5802,6 +5840,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 <array> <string>trio</string> <string>trio</string> </array>
 <array> <string>twig</string> <string>twig</string> </array>
 <array> <string>typescript (keyword: ts)</string> <string>ts</string> </array>
+<array> <string>typst</string> <string>typst</string> </array>
 <array> <string>underscore</string> <string>underscore</string> </array>
 <array> <string>vagrant</string> <string>vagrant</string> </array>
 <array> <string>valibot</string> <string>valibot</string> </array>
@@ -6038,6 +6077,8 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 <array> <string>svg</string> <string>svg</string> </array>
 <array> <string>symfony</string> <string>symfony</string> </array>
 <array> <string>tailwindcss</string> <string>tailwindcss</string> </array>
+<array> <string>tanstack_query</string> <string>tanstack_query</string> </array>
+<array> <string>tanstack_router</string> <string>tanstack_router</string> </array>
 <array> <string>tcl_tk</string> <string>tcl_tk</string> </array>
 <array> <string>tcllib</string> <string>tcllib</string> </array>
 <array> <string>tensorflow (keyword: tf)</string> <string>tf</string> </array>
@@ -6048,6 +6089,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 <array> <string>trio</string> <string>trio</string> </array>
 <array> <string>twig</string> <string>twig</string> </array>
 <array> <string>typescript (keyword: ts)</string> <string>ts</string> </array>
+<array> <string>typst</string> <string>typst</string> </array>
 <array> <string>underscore</string> <string>underscore</string> </array>
 <array> <string>vagrant</string> <string>vagrant</string> </array>
 <array> <string>valibot</string> <string>valibot</string> </array>
@@ -6284,6 +6326,8 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 <array> <string>svg</string> <string>svg</string> </array>
 <array> <string>symfony</string> <string>symfony</string> </array>
 <array> <string>tailwindcss</string> <string>tailwindcss</string> </array>
+<array> <string>tanstack_query</string> <string>tanstack_query</string> </array>
+<array> <string>tanstack_router</string> <string>tanstack_router</string> </array>
 <array> <string>tcl_tk</string> <string>tcl_tk</string> </array>
 <array> <string>tcllib</string> <string>tcllib</string> </array>
 <array> <string>tensorflow (keyword: tf)</string> <string>tf</string> </array>
@@ -6294,6 +6338,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 <array> <string>trio</string> <string>trio</string> </array>
 <array> <string>twig</string> <string>twig</string> </array>
 <array> <string>typescript (keyword: ts)</string> <string>ts</string> </array>
+<array> <string>typst</string> <string>typst</string> </array>
 <array> <string>underscore</string> <string>underscore</string> </array>
 <array> <string>vagrant</string> <string>vagrant</string> </array>
 <array> <string>valibot</string> <string>valibot</string> </array>
@@ -6530,6 +6575,8 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 <array> <string>svg</string> <string>svg</string> </array>
 <array> <string>symfony</string> <string>symfony</string> </array>
 <array> <string>tailwindcss</string> <string>tailwindcss</string> </array>
+<array> <string>tanstack_query</string> <string>tanstack_query</string> </array>
+<array> <string>tanstack_router</string> <string>tanstack_router</string> </array>
 <array> <string>tcl_tk</string> <string>tcl_tk</string> </array>
 <array> <string>tcllib</string> <string>tcllib</string> </array>
 <array> <string>tensorflow (keyword: tf)</string> <string>tf</string> </array>
@@ -6540,6 +6587,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 <array> <string>trio</string> <string>trio</string> </array>
 <array> <string>twig</string> <string>twig</string> </array>
 <array> <string>typescript (keyword: ts)</string> <string>ts</string> </array>
+<array> <string>typst</string> <string>typst</string> </array>
 <array> <string>underscore</string> <string>underscore</string> </array>
 <array> <string>vagrant</string> <string>vagrant</string> </array>
 <array> <string>valibot</string> <string>valibot</string> </array>
@@ -6776,6 +6824,8 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 <array> <string>svg</string> <string>svg</string> </array>
 <array> <string>symfony</string> <string>symfony</string> </array>
 <array> <string>tailwindcss</string> <string>tailwindcss</string> </array>
+<array> <string>tanstack_query</string> <string>tanstack_query</string> </array>
+<array> <string>tanstack_router</string> <string>tanstack_router</string> </array>
 <array> <string>tcl_tk</string> <string>tcl_tk</string> </array>
 <array> <string>tcllib</string> <string>tcllib</string> </array>
 <array> <string>tensorflow (keyword: tf)</string> <string>tf</string> </array>
@@ -6786,6 +6836,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 <array> <string>trio</string> <string>trio</string> </array>
 <array> <string>twig</string> <string>twig</string> </array>
 <array> <string>typescript (keyword: ts)</string> <string>ts</string> </array>
+<array> <string>typst</string> <string>typst</string> </array>
 <array> <string>underscore</string> <string>underscore</string> </array>
 <array> <string>vagrant</string> <string>vagrant</string> </array>
 <array> <string>valibot</string> <string>valibot</string> </array>
@@ -7022,6 +7073,8 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 <array> <string>svg</string> <string>svg</string> </array>
 <array> <string>symfony</string> <string>symfony</string> </array>
 <array> <string>tailwindcss</string> <string>tailwindcss</string> </array>
+<array> <string>tanstack_query</string> <string>tanstack_query</string> </array>
+<array> <string>tanstack_router</string> <string>tanstack_router</string> </array>
 <array> <string>tcl_tk</string> <string>tcl_tk</string> </array>
 <array> <string>tcllib</string> <string>tcllib</string> </array>
 <array> <string>tensorflow (keyword: tf)</string> <string>tf</string> </array>
@@ -7032,6 +7085,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 <array> <string>trio</string> <string>trio</string> </array>
 <array> <string>twig</string> <string>twig</string> </array>
 <array> <string>typescript (keyword: ts)</string> <string>ts</string> </array>
+<array> <string>typst</string> <string>typst</string> </array>
 <array> <string>underscore</string> <string>underscore</string> </array>
 <array> <string>vagrant</string> <string>vagrant</string> </array>
 <array> <string>valibot</string> <string>valibot</string> </array>
@@ -7268,6 +7322,8 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 <array> <string>svg</string> <string>svg</string> </array>
 <array> <string>symfony</string> <string>symfony</string> </array>
 <array> <string>tailwindcss</string> <string>tailwindcss</string> </array>
+<array> <string>tanstack_query</string> <string>tanstack_query</string> </array>
+<array> <string>tanstack_router</string> <string>tanstack_router</string> </array>
 <array> <string>tcl_tk</string> <string>tcl_tk</string> </array>
 <array> <string>tcllib</string> <string>tcllib</string> </array>
 <array> <string>tensorflow (keyword: tf)</string> <string>tf</string> </array>
@@ -7278,6 +7334,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 <array> <string>trio</string> <string>trio</string> </array>
 <array> <string>twig</string> <string>twig</string> </array>
 <array> <string>typescript (keyword: ts)</string> <string>ts</string> </array>
+<array> <string>typst</string> <string>typst</string> </array>
 <array> <string>underscore</string> <string>underscore</string> </array>
 <array> <string>vagrant</string> <string>vagrant</string> </array>
 <array> <string>valibot</string> <string>valibot</string> </array>
@@ -7514,6 +7571,8 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 <array> <string>svg</string> <string>svg</string> </array>
 <array> <string>symfony</string> <string>symfony</string> </array>
 <array> <string>tailwindcss</string> <string>tailwindcss</string> </array>
+<array> <string>tanstack_query</string> <string>tanstack_query</string> </array>
+<array> <string>tanstack_router</string> <string>tanstack_router</string> </array>
 <array> <string>tcl_tk</string> <string>tcl_tk</string> </array>
 <array> <string>tcllib</string> <string>tcllib</string> </array>
 <array> <string>tensorflow (keyword: tf)</string> <string>tf</string> </array>
@@ -7524,6 +7583,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 <array> <string>trio</string> <string>trio</string> </array>
 <array> <string>twig</string> <string>twig</string> </array>
 <array> <string>typescript (keyword: ts)</string> <string>ts</string> </array>
+<array> <string>typst</string> <string>typst</string> </array>
 <array> <string>underscore</string> <string>underscore</string> </array>
 <array> <string>vagrant</string> <string>vagrant</string> </array>
 <array> <string>valibot</string> <string>valibot</string> </array>
@@ -7760,6 +7820,8 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 <array> <string>svg</string> <string>svg</string> </array>
 <array> <string>symfony</string> <string>symfony</string> </array>
 <array> <string>tailwindcss</string> <string>tailwindcss</string> </array>
+<array> <string>tanstack_query</string> <string>tanstack_query</string> </array>
+<array> <string>tanstack_router</string> <string>tanstack_router</string> </array>
 <array> <string>tcl_tk</string> <string>tcl_tk</string> </array>
 <array> <string>tcllib</string> <string>tcllib</string> </array>
 <array> <string>tensorflow (keyword: tf)</string> <string>tf</string> </array>
@@ -7770,6 +7832,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 <array> <string>trio</string> <string>trio</string> </array>
 <array> <string>twig</string> <string>twig</string> </array>
 <array> <string>typescript (keyword: ts)</string> <string>ts</string> </array>
+<array> <string>typst</string> <string>typst</string> </array>
 <array> <string>underscore</string> <string>underscore</string> </array>
 <array> <string>vagrant</string> <string>vagrant</string> </array>
 <array> <string>valibot</string> <string>valibot</string> </array>
@@ -8006,6 +8069,8 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 <array> <string>svg</string> <string>svg</string> </array>
 <array> <string>symfony</string> <string>symfony</string> </array>
 <array> <string>tailwindcss</string> <string>tailwindcss</string> </array>
+<array> <string>tanstack_query</string> <string>tanstack_query</string> </array>
+<array> <string>tanstack_router</string> <string>tanstack_router</string> </array>
 <array> <string>tcl_tk</string> <string>tcl_tk</string> </array>
 <array> <string>tcllib</string> <string>tcllib</string> </array>
 <array> <string>tensorflow (keyword: tf)</string> <string>tf</string> </array>
@@ -8016,6 +8081,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 <array> <string>trio</string> <string>trio</string> </array>
 <array> <string>twig</string> <string>twig</string> </array>
 <array> <string>typescript (keyword: ts)</string> <string>ts</string> </array>
+<array> <string>typst</string> <string>typst</string> </array>
 <array> <string>underscore</string> <string>underscore</string> </array>
 <array> <string>vagrant</string> <string>vagrant</string> </array>
 <array> <string>valibot</string> <string>valibot</string> </array>
@@ -8252,6 +8318,8 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 <array> <string>svg</string> <string>svg</string> </array>
 <array> <string>symfony</string> <string>symfony</string> </array>
 <array> <string>tailwindcss</string> <string>tailwindcss</string> </array>
+<array> <string>tanstack_query</string> <string>tanstack_query</string> </array>
+<array> <string>tanstack_router</string> <string>tanstack_router</string> </array>
 <array> <string>tcl_tk</string> <string>tcl_tk</string> </array>
 <array> <string>tcllib</string> <string>tcllib</string> </array>
 <array> <string>tensorflow (keyword: tf)</string> <string>tf</string> </array>
@@ -8262,6 +8330,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 <array> <string>trio</string> <string>trio</string> </array>
 <array> <string>twig</string> <string>twig</string> </array>
 <array> <string>typescript (keyword: ts)</string> <string>ts</string> </array>
+<array> <string>typst</string> <string>typst</string> </array>
 <array> <string>underscore</string> <string>underscore</string> </array>
 <array> <string>vagrant</string> <string>vagrant</string> </array>
 <array> <string>valibot</string> <string>valibot</string> </array>
@@ -8498,6 +8567,8 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 <array> <string>svg</string> <string>svg</string> </array>
 <array> <string>symfony</string> <string>symfony</string> </array>
 <array> <string>tailwindcss</string> <string>tailwindcss</string> </array>
+<array> <string>tanstack_query</string> <string>tanstack_query</string> </array>
+<array> <string>tanstack_router</string> <string>tanstack_router</string> </array>
 <array> <string>tcl_tk</string> <string>tcl_tk</string> </array>
 <array> <string>tcllib</string> <string>tcllib</string> </array>
 <array> <string>tensorflow (keyword: tf)</string> <string>tf</string> </array>
@@ -8508,6 +8579,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 <array> <string>trio</string> <string>trio</string> </array>
 <array> <string>twig</string> <string>twig</string> </array>
 <array> <string>typescript (keyword: ts)</string> <string>ts</string> </array>
+<array> <string>typst</string> <string>typst</string> </array>
 <array> <string>underscore</string> <string>underscore</string> </array>
 <array> <string>vagrant</string> <string>vagrant</string> </array>
 <array> <string>valibot</string> <string>valibot</string> </array>
@@ -8744,6 +8816,8 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 <array> <string>svg</string> <string>svg</string> </array>
 <array> <string>symfony</string> <string>symfony</string> </array>
 <array> <string>tailwindcss</string> <string>tailwindcss</string> </array>
+<array> <string>tanstack_query</string> <string>tanstack_query</string> </array>
+<array> <string>tanstack_router</string> <string>tanstack_router</string> </array>
 <array> <string>tcl_tk</string> <string>tcl_tk</string> </array>
 <array> <string>tcllib</string> <string>tcllib</string> </array>
 <array> <string>tensorflow (keyword: tf)</string> <string>tf</string> </array>
@@ -8754,6 +8828,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 <array> <string>trio</string> <string>trio</string> </array>
 <array> <string>twig</string> <string>twig</string> </array>
 <array> <string>typescript (keyword: ts)</string> <string>ts</string> </array>
+<array> <string>typst</string> <string>typst</string> </array>
 <array> <string>underscore</string> <string>underscore</string> </array>
 <array> <string>vagrant</string> <string>vagrant</string> </array>
 <array> <string>valibot</string> <string>valibot</string> </array>
@@ -8990,6 +9065,8 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 <array> <string>svg</string> <string>svg</string> </array>
 <array> <string>symfony</string> <string>symfony</string> </array>
 <array> <string>tailwindcss</string> <string>tailwindcss</string> </array>
+<array> <string>tanstack_query</string> <string>tanstack_query</string> </array>
+<array> <string>tanstack_router</string> <string>tanstack_router</string> </array>
 <array> <string>tcl_tk</string> <string>tcl_tk</string> </array>
 <array> <string>tcllib</string> <string>tcllib</string> </array>
 <array> <string>tensorflow (keyword: tf)</string> <string>tf</string> </array>
@@ -9000,6 +9077,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 <array> <string>trio</string> <string>trio</string> </array>
 <array> <string>twig</string> <string>twig</string> </array>
 <array> <string>typescript (keyword: ts)</string> <string>ts</string> </array>
+<array> <string>typst</string> <string>typst</string> </array>
 <array> <string>underscore</string> <string>underscore</string> </array>
 <array> <string>vagrant</string> <string>vagrant</string> </array>
 <array> <string>valibot</string> <string>valibot</string> </array>
@@ -9236,6 +9314,8 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 <array> <string>svg</string> <string>svg</string> </array>
 <array> <string>symfony</string> <string>symfony</string> </array>
 <array> <string>tailwindcss</string> <string>tailwindcss</string> </array>
+<array> <string>tanstack_query</string> <string>tanstack_query</string> </array>
+<array> <string>tanstack_router</string> <string>tanstack_router</string> </array>
 <array> <string>tcl_tk</string> <string>tcl_tk</string> </array>
 <array> <string>tcllib</string> <string>tcllib</string> </array>
 <array> <string>tensorflow (keyword: tf)</string> <string>tf</string> </array>
@@ -9246,6 +9326,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 <array> <string>trio</string> <string>trio</string> </array>
 <array> <string>twig</string> <string>twig</string> </array>
 <array> <string>typescript (keyword: ts)</string> <string>ts</string> </array>
+<array> <string>typst</string> <string>typst</string> </array>
 <array> <string>underscore</string> <string>underscore</string> </array>
 <array> <string>vagrant</string> <string>vagrant</string> </array>
 <array> <string>valibot</string> <string>valibot</string> </array>
@@ -9482,6 +9563,8 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 <array> <string>svg</string> <string>svg</string> </array>
 <array> <string>symfony</string> <string>symfony</string> </array>
 <array> <string>tailwindcss</string> <string>tailwindcss</string> </array>
+<array> <string>tanstack_query</string> <string>tanstack_query</string> </array>
+<array> <string>tanstack_router</string> <string>tanstack_router</string> </array>
 <array> <string>tcl_tk</string> <string>tcl_tk</string> </array>
 <array> <string>tcllib</string> <string>tcllib</string> </array>
 <array> <string>tensorflow (keyword: tf)</string> <string>tf</string> </array>
@@ -9492,6 +9575,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 <array> <string>trio</string> <string>trio</string> </array>
 <array> <string>twig</string> <string>twig</string> </array>
 <array> <string>typescript (keyword: ts)</string> <string>ts</string> </array>
+<array> <string>typst</string> <string>typst</string> </array>
 <array> <string>underscore</string> <string>underscore</string> </array>
 <array> <string>vagrant</string> <string>vagrant</string> </array>
 <array> <string>valibot</string> <string>valibot</string> </array>
@@ -9728,6 +9812,8 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 <array> <string>svg</string> <string>svg</string> </array>
 <array> <string>symfony</string> <string>symfony</string> </array>
 <array> <string>tailwindcss</string> <string>tailwindcss</string> </array>
+<array> <string>tanstack_query</string> <string>tanstack_query</string> </array>
+<array> <string>tanstack_router</string> <string>tanstack_router</string> </array>
 <array> <string>tcl_tk</string> <string>tcl_tk</string> </array>
 <array> <string>tcllib</string> <string>tcllib</string> </array>
 <array> <string>tensorflow (keyword: tf)</string> <string>tf</string> </array>
@@ -9738,6 +9824,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 <array> <string>trio</string> <string>trio</string> </array>
 <array> <string>twig</string> <string>twig</string> </array>
 <array> <string>typescript (keyword: ts)</string> <string>ts</string> </array>
+<array> <string>typst</string> <string>typst</string> </array>
 <array> <string>underscore</string> <string>underscore</string> </array>
 <array> <string>vagrant</string> <string>vagrant</string> </array>
 <array> <string>valibot</string> <string>valibot</string> </array>
@@ -9974,6 +10061,8 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 <array> <string>svg</string> <string>svg</string> </array>
 <array> <string>symfony</string> <string>symfony</string> </array>
 <array> <string>tailwindcss</string> <string>tailwindcss</string> </array>
+<array> <string>tanstack_query</string> <string>tanstack_query</string> </array>
+<array> <string>tanstack_router</string> <string>tanstack_router</string> </array>
 <array> <string>tcl_tk</string> <string>tcl_tk</string> </array>
 <array> <string>tcllib</string> <string>tcllib</string> </array>
 <array> <string>tensorflow (keyword: tf)</string> <string>tf</string> </array>
@@ -9984,6 +10073,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 <array> <string>trio</string> <string>trio</string> </array>
 <array> <string>twig</string> <string>twig</string> </array>
 <array> <string>typescript (keyword: ts)</string> <string>ts</string> </array>
+<array> <string>typst</string> <string>typst</string> </array>
 <array> <string>underscore</string> <string>underscore</string> </array>
 <array> <string>vagrant</string> <string>vagrant</string> </array>
 <array> <string>valibot</string> <string>valibot</string> </array>
@@ -10220,6 +10310,8 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 <array> <string>svg</string> <string>svg</string> </array>
 <array> <string>symfony</string> <string>symfony</string> </array>
 <array> <string>tailwindcss</string> <string>tailwindcss</string> </array>
+<array> <string>tanstack_query</string> <string>tanstack_query</string> </array>
+<array> <string>tanstack_router</string> <string>tanstack_router</string> </array>
 <array> <string>tcl_tk</string> <string>tcl_tk</string> </array>
 <array> <string>tcllib</string> <string>tcllib</string> </array>
 <array> <string>tensorflow (keyword: tf)</string> <string>tf</string> </array>
@@ -10230,6 +10322,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 <array> <string>trio</string> <string>trio</string> </array>
 <array> <string>twig</string> <string>twig</string> </array>
 <array> <string>typescript (keyword: ts)</string> <string>ts</string> </array>
+<array> <string>typst</string> <string>typst</string> </array>
 <array> <string>underscore</string> <string>underscore</string> </array>
 <array> <string>vagrant</string> <string>vagrant</string> </array>
 <array> <string>valibot</string> <string>valibot</string> </array>
@@ -10466,6 +10559,8 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 <array> <string>svg</string> <string>svg</string> </array>
 <array> <string>symfony</string> <string>symfony</string> </array>
 <array> <string>tailwindcss</string> <string>tailwindcss</string> </array>
+<array> <string>tanstack_query</string> <string>tanstack_query</string> </array>
+<array> <string>tanstack_router</string> <string>tanstack_router</string> </array>
 <array> <string>tcl_tk</string> <string>tcl_tk</string> </array>
 <array> <string>tcllib</string> <string>tcllib</string> </array>
 <array> <string>tensorflow (keyword: tf)</string> <string>tf</string> </array>
@@ -10476,6 +10571,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 <array> <string>trio</string> <string>trio</string> </array>
 <array> <string>twig</string> <string>twig</string> </array>
 <array> <string>typescript (keyword: ts)</string> <string>ts</string> </array>
+<array> <string>typst</string> <string>typst</string> </array>
 <array> <string>underscore</string> <string>underscore</string> </array>
 <array> <string>vagrant</string> <string>vagrant</string> </array>
 <array> <string>valibot</string> <string>valibot</string> </array>
@@ -10712,6 +10808,8 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 <array> <string>svg</string> <string>svg</string> </array>
 <array> <string>symfony</string> <string>symfony</string> </array>
 <array> <string>tailwindcss</string> <string>tailwindcss</string> </array>
+<array> <string>tanstack_query</string> <string>tanstack_query</string> </array>
+<array> <string>tanstack_router</string> <string>tanstack_router</string> </array>
 <array> <string>tcl_tk</string> <string>tcl_tk</string> </array>
 <array> <string>tcllib</string> <string>tcllib</string> </array>
 <array> <string>tensorflow (keyword: tf)</string> <string>tf</string> </array>
@@ -10722,6 +10820,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 <array> <string>trio</string> <string>trio</string> </array>
 <array> <string>twig</string> <string>twig</string> </array>
 <array> <string>typescript (keyword: ts)</string> <string>ts</string> </array>
+<array> <string>typst</string> <string>typst</string> </array>
 <array> <string>underscore</string> <string>underscore</string> </array>
 <array> <string>vagrant</string> <string>vagrant</string> </array>
 <array> <string>valibot</string> <string>valibot</string> </array>
@@ -10958,6 +11057,8 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 <array> <string>svg</string> <string>svg</string> </array>
 <array> <string>symfony</string> <string>symfony</string> </array>
 <array> <string>tailwindcss</string> <string>tailwindcss</string> </array>
+<array> <string>tanstack_query</string> <string>tanstack_query</string> </array>
+<array> <string>tanstack_router</string> <string>tanstack_router</string> </array>
 <array> <string>tcl_tk</string> <string>tcl_tk</string> </array>
 <array> <string>tcllib</string> <string>tcllib</string> </array>
 <array> <string>tensorflow (keyword: tf)</string> <string>tf</string> </array>
@@ -10968,6 +11069,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 <array> <string>trio</string> <string>trio</string> </array>
 <array> <string>twig</string> <string>twig</string> </array>
 <array> <string>typescript (keyword: ts)</string> <string>ts</string> </array>
+<array> <string>typst</string> <string>typst</string> </array>
 <array> <string>underscore</string> <string>underscore</string> </array>
 <array> <string>vagrant</string> <string>vagrant</string> </array>
 <array> <string>valibot</string> <string>valibot</string> </array>
@@ -11204,6 +11306,8 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 <array> <string>svg</string> <string>svg</string> </array>
 <array> <string>symfony</string> <string>symfony</string> </array>
 <array> <string>tailwindcss</string> <string>tailwindcss</string> </array>
+<array> <string>tanstack_query</string> <string>tanstack_query</string> </array>
+<array> <string>tanstack_router</string> <string>tanstack_router</string> </array>
 <array> <string>tcl_tk</string> <string>tcl_tk</string> </array>
 <array> <string>tcllib</string> <string>tcllib</string> </array>
 <array> <string>tensorflow (keyword: tf)</string> <string>tf</string> </array>
@@ -11214,6 +11318,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 <array> <string>trio</string> <string>trio</string> </array>
 <array> <string>twig</string> <string>twig</string> </array>
 <array> <string>typescript (keyword: ts)</string> <string>ts</string> </array>
+<array> <string>typst</string> <string>typst</string> </array>
 <array> <string>underscore</string> <string>underscore</string> </array>
 <array> <string>vagrant</string> <string>vagrant</string> </array>
 <array> <string>valibot</string> <string>valibot</string> </array>
@@ -11450,6 +11555,8 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 <array> <string>svg</string> <string>svg</string> </array>
 <array> <string>symfony</string> <string>symfony</string> </array>
 <array> <string>tailwindcss</string> <string>tailwindcss</string> </array>
+<array> <string>tanstack_query</string> <string>tanstack_query</string> </array>
+<array> <string>tanstack_router</string> <string>tanstack_router</string> </array>
 <array> <string>tcl_tk</string> <string>tcl_tk</string> </array>
 <array> <string>tcllib</string> <string>tcllib</string> </array>
 <array> <string>tensorflow (keyword: tf)</string> <string>tf</string> </array>
@@ -11460,6 +11567,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 <array> <string>trio</string> <string>trio</string> </array>
 <array> <string>twig</string> <string>twig</string> </array>
 <array> <string>typescript (keyword: ts)</string> <string>ts</string> </array>
+<array> <string>typst</string> <string>typst</string> </array>
 <array> <string>underscore</string> <string>underscore</string> </array>
 <array> <string>vagrant</string> <string>vagrant</string> </array>
 <array> <string>valibot</string> <string>valibot</string> </array>
@@ -11696,6 +11804,8 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 <array> <string>svg</string> <string>svg</string> </array>
 <array> <string>symfony</string> <string>symfony</string> </array>
 <array> <string>tailwindcss</string> <string>tailwindcss</string> </array>
+<array> <string>tanstack_query</string> <string>tanstack_query</string> </array>
+<array> <string>tanstack_router</string> <string>tanstack_router</string> </array>
 <array> <string>tcl_tk</string> <string>tcl_tk</string> </array>
 <array> <string>tcllib</string> <string>tcllib</string> </array>
 <array> <string>tensorflow (keyword: tf)</string> <string>tf</string> </array>
@@ -11706,6 +11816,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 <array> <string>trio</string> <string>trio</string> </array>
 <array> <string>twig</string> <string>twig</string> </array>
 <array> <string>typescript (keyword: ts)</string> <string>ts</string> </array>
+<array> <string>typst</string> <string>typst</string> </array>
 <array> <string>underscore</string> <string>underscore</string> </array>
 <array> <string>vagrant</string> <string>vagrant</string> </array>
 <array> <string>valibot</string> <string>valibot</string> </array>
@@ -11942,6 +12053,8 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 <array> <string>svg</string> <string>svg</string> </array>
 <array> <string>symfony</string> <string>symfony</string> </array>
 <array> <string>tailwindcss</string> <string>tailwindcss</string> </array>
+<array> <string>tanstack_query</string> <string>tanstack_query</string> </array>
+<array> <string>tanstack_router</string> <string>tanstack_router</string> </array>
 <array> <string>tcl_tk</string> <string>tcl_tk</string> </array>
 <array> <string>tcllib</string> <string>tcllib</string> </array>
 <array> <string>tensorflow (keyword: tf)</string> <string>tf</string> </array>
@@ -11952,6 +12065,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 <array> <string>trio</string> <string>trio</string> </array>
 <array> <string>twig</string> <string>twig</string> </array>
 <array> <string>typescript (keyword: ts)</string> <string>ts</string> </array>
+<array> <string>typst</string> <string>typst</string> </array>
 <array> <string>underscore</string> <string>underscore</string> </array>
 <array> <string>vagrant</string> <string>vagrant</string> </array>
 <array> <string>valibot</string> <string>valibot</string> </array>
@@ -12188,6 +12302,8 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 <array> <string>svg</string> <string>svg</string> </array>
 <array> <string>symfony</string> <string>symfony</string> </array>
 <array> <string>tailwindcss</string> <string>tailwindcss</string> </array>
+<array> <string>tanstack_query</string> <string>tanstack_query</string> </array>
+<array> <string>tanstack_router</string> <string>tanstack_router</string> </array>
 <array> <string>tcl_tk</string> <string>tcl_tk</string> </array>
 <array> <string>tcllib</string> <string>tcllib</string> </array>
 <array> <string>tensorflow (keyword: tf)</string> <string>tf</string> </array>
@@ -12198,6 +12314,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 <array> <string>trio</string> <string>trio</string> </array>
 <array> <string>twig</string> <string>twig</string> </array>
 <array> <string>typescript (keyword: ts)</string> <string>ts</string> </array>
+<array> <string>typst</string> <string>typst</string> </array>
 <array> <string>underscore</string> <string>underscore</string> </array>
 <array> <string>vagrant</string> <string>vagrant</string> </array>
 <array> <string>valibot</string> <string>valibot</string> </array>
@@ -12434,6 +12551,8 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 <array> <string>svg</string> <string>svg</string> </array>
 <array> <string>symfony</string> <string>symfony</string> </array>
 <array> <string>tailwindcss</string> <string>tailwindcss</string> </array>
+<array> <string>tanstack_query</string> <string>tanstack_query</string> </array>
+<array> <string>tanstack_router</string> <string>tanstack_router</string> </array>
 <array> <string>tcl_tk</string> <string>tcl_tk</string> </array>
 <array> <string>tcllib</string> <string>tcllib</string> </array>
 <array> <string>tensorflow (keyword: tf)</string> <string>tf</string> </array>
@@ -12444,6 +12563,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 <array> <string>trio</string> <string>trio</string> </array>
 <array> <string>twig</string> <string>twig</string> </array>
 <array> <string>typescript (keyword: ts)</string> <string>ts</string> </array>
+<array> <string>typst</string> <string>typst</string> </array>
 <array> <string>underscore</string> <string>underscore</string> </array>
 <array> <string>vagrant</string> <string>vagrant</string> </array>
 <array> <string>valibot</string> <string>valibot</string> </array>
