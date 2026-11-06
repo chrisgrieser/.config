@@ -106,7 +106,7 @@ local function movieLayout()
 	M.currentLayout = "movie"
 	dockSwitcher("movie")
 
-	music.music_trigger("pause")
+	music.music_trigger("stop-music-and-lights-off")
 	-- turn off showing hidden files
 	hs.execute("defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder")
 
@@ -123,7 +123,8 @@ local function movieLayout()
 		hs.mouse.setRelativePosition(centerPos, projector)
 	end
 
-	do -- for when resetting movie layout
+	-- for when resetting movie layout
+	if M.currentLayout == "movie" then
 		U.closeBrowserTabsWith("all", "youtube")
 		U.quitApps("IINA")
 		U.closeAllFinderWins()

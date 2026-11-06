@@ -266,16 +266,10 @@ function U.closeVideoApps()
 	-- prevent the automatic quitting of audio-apps from triggering a music start
 	local appWatcherForMusic = require("apps.music").aw_music
 	appWatcherForMusic:stop()
-	U.quitApps(U.videoAndAudioApps)
-	U.defer(1, function() appWatcherForMusic:start() end)
 
-	-- extra video apps
-	local extraVideoAppDir = os.getenv("HOME")
-		.. "/Library/Mobile Documents/com~apple~CloudDocs/Apps/Love/"
-	for file in hs.fs.dir(extraVideoAppDir) do
-		local app = file:match("([^/]+)%.app$")
-		if app then U.quitApps(app) end
-	end
+	U.quitApps(U.videoAndAudioApps)
+
+	U.defer(1, function() appWatcherForMusic:start() end)
 end
 
 ---@param name string

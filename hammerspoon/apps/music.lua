@@ -4,7 +4,7 @@ local env = require("meta.environment")
 local aw = hs.application.watcher
 --------------------------------------------------------------------------------
 
----@param action "pause"|"play"
+---@param action "pause"|"play"|"stop-music-and-lights-off"
 M.music_trigger = function(action)
 	local alexaTrigger = os.getenv("HOME")
 		.. "/Library/Mobile Documents/com~apple~CloudDocs/Tech/alexa/virtual-trigger"
@@ -12,7 +12,7 @@ M.music_trigger = function(action)
 	print("🎵 Music: " .. action)
 
 	if M.music_task and M.music_task:isRunning() then M.music_task:terminate() end
-	M.music_task = hs.task.new(alexaTrigger, nil, { "music-" .. action, "silent" }):start()
+	M.music_task = hs.task.new(alexaTrigger, nil, { action }):start()
 end
 
 -- auto-pause/resume music on launch/quit of apps with sound or on Steam games
@@ -26,7 +26,7 @@ M.aw_music = aw.new(function(appName, event, app)
 	if not (audioApp or steamGames or otherGames) then return end
 
 	local action = event == aw.launched and "pause" or "play"
-	M.music_trigger(action)
+	M.music_trigger("music-" .. action)
 end)
 
 M.aw_music:start()
