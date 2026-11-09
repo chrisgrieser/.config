@@ -63,11 +63,11 @@ vim.g.neovide_cursor_animate_command_line = false
 
 do -- only active when `multigrid` is enabled in `neovide/config.toml`
 	vim.g.neovide_scroll_animation_length = 0 -- scroll instantly
-	vim.g.neovide_floating_corner_radius = 0 -- looks weird with some plugin windows
+	vim.g.neovide_floating_corner_radius = 5 -- looks weird with some plugin windows
 	vim.g.neovide_floating_shadow = false -- looks weird with some plugin windows
 	vim.g.neovide_position_animation_length = 0 -- windows movement speed
-	vim.g.neovide_floating_blur_amount_x = 3.0
-	vim.g.neovide_floating_blur_amount_y = 3.0
+	vim.g.neovide_floating_blur_amount_x = 0
+	vim.g.neovide_floating_blur_amount_y = 0
 end
 
 --------------------------------------------------------------------------------

@@ -18,6 +18,7 @@ vim.opt.spellfile = vim.fn.stdpath("config") .. "/spellfile.add" -- needs `.add`
 vim.opt.spelllang = "en_us" -- even with spellcheck disabled, still relevant for `z=`
 vim.opt.spelloptions = "camel"
 
+
 vim.opt.splitright = true -- split right instead of left
 vim.opt.splitbelow = true -- split down instead of up
 

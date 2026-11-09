@@ -2,12 +2,15 @@ vim.pack.add { "https://github.com/lewis6991/satellite.nvim" }
 --------------------------------------------------------------------------------
 
 require("satellite").setup {
-	current_only = false,
-	winblend = 25, -- only little transparency, since otherwise hard to see in some themes
+	current_only = true,
 	handlers = {
 		cursor = { enable = false },
 		marks = { enable = false }, -- buggy
 	},
+
+	-- effectively hide scrollbar, since using neovide's scrollbar
+	-- PENDING -- effectively hide scrollbar, since using neovide's scrollbar
+	winblend = 100,
 }
 
 vim.api.nvim_create_autocmd({ "ColorScheme", "VimEnter" }, {
