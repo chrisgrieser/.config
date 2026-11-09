@@ -7,6 +7,10 @@ tabs = false
 mouse-cursor-icon = "i-beam"
 icon = "~/.config/neovide/macOS icon.icns"  # only in the Dock, elsewhere determined by `replacicon`
 
+# macOS only – BUG not working yet (0.17.2)
+system-hide-hotkey = ""  # override for markdown files
+system-quit-hotkey = ""  # using custom override
+
 [font]
 normal = ["JetBrainsMonoNL NF", "Menlo"]
 size = 24.5

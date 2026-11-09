@@ -72,6 +72,7 @@ if device.include?("Home")
 	cask "ausweisapp" # pairing with phone app only works in private wifi
 	cask "bettertouchtool"
 	cask "catch"
+	cask "drawpen"
 	mas "NIIMBOT", id: 6755411172
 end
 if device.include?("Home") or device.include?("Office")

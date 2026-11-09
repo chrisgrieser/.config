@@ -96,6 +96,9 @@ defaults write -g KeyRepeat -int 2            # normal minimum: 2 (30ms)
 # Disable press-and-hold in favor of key repeat
 defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
 
+# Disable smart quotes as they're annoying when typing code.
+defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
+
 defaults write -g NSInitialToolTipDelay -int 500 # default: 2000
 defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false
 defaults write NSGlobalDomain AppleShowScrollBars -string "Automatic" # when to show scrollbars

@@ -6,19 +6,14 @@ local aw = hs.application.watcher
 local wf = hs.window.filter
 
 ---ZOOM------------------------------------------------------------------
-M.wf_zoom = wf.new({ "Zoom", "zoom.us" }):subscribe(wf.windowCreated, function(newWin)
+M.wf_zoom = wf.new({ "Zoom", "zoom.us" }):subscribe(wf.windowCreated, function(_newWin)
 	U.defer({ 0, 3 }, function()
-		local zoom = U.app("Zoom") or U.app("zoom.us")
-		if zoom:findWindow("Update") then return end
-
-		if not zoom:findWindow("Zoom Meeting") then return end
+		local zoom = assert(U.app("Zoom") or U.app("zoom.us"))
+		if zoom:findWindow("Update") or not zoom:findWindow("Zoom Meeting") then return end
 
 		U.closeBrowserTabsWith("zoom.us")
-		local zoom = newWin:application()
-		if zoom and not zoom:findWindow("Update") then
-			local mainWin = zoom:findWindow("Login") or zoom:findWindow("Zoom Workspace")
-			if mainWin then mainWin:close() end
-		end
+		local mainWin = zoom:findWindow("Login") or zoom:findWindow("Zoom Workspace")
+		if mainWin then mainWin:close() end
 	end)
 end)
 

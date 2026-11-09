@@ -79,11 +79,13 @@ local function workLayout(setDisplay)
 		U.defer(1, function() display.autoSetBrightness() end) -- await auto-switch
 	end
 
-	-- close & open things
+	-- close things
 	U.closeAllFinderWins()
 	U.closeBrowserTabsWith("all")
-	U.closeVideoApps()
+	U.quitVideoApps()
+	U.quitApps { "BetterTouchTool", "DrawPen" }
 
+	-- open things
 	U.openApps { "Ivory", isWorkWeek() and "Slack" or nil, "Gmail", "AlfredExtraPane", "Stats" }
 	U.defer(2, function()
 		local gmail, ivory, slack = U.app("Gmail"), U.app("Ivory"), U.app("Slack")
@@ -105,8 +107,8 @@ local function movieLayout()
 	print("🔲 Layout: movie")
 	M.currentLayout = "movie"
 	dockSwitcher("movie")
-
 	music.music_trigger("stop-music-and-lights-off")
+
 	-- turn off showing hidden files
 	hs.execute("defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder")
 
@@ -131,7 +133,8 @@ local function movieLayout()
 	end
 
 	-- open / quit apps
-	U.openApps { "YouTube", env.isAtHome and "BetterTouchTool" or nil }
+	U.openApps("YouTube")
+	if env.isAtHome then U.openApps { "BetterTouchTool" and "DrawPen" } end
 	U.defer(1, function() -- defer so external display is detected
 		local youtube = U.app("YouTube")
 		if not youtube then return end
