@@ -83,6 +83,7 @@ local function workLayout(setDisplay)
 	U.closeAllFinderWins()
 	U.closeBrowserTabsWith("all")
 	U.quitVideoApps()
+	U.quitApps("DrawPen")
 
 	-- open things
 	U.openApps { "Ivory", isWorkWeek() and "Slack" or nil, "Gmail", "AlfredExtraPane", "Stats" }
@@ -133,7 +134,7 @@ local function movieLayout()
 
 	-- open / quit apps
 	U.openApps("YouTube")
-	if env.isAtHome then U.openApps("BetterTouchTool") end
+	if env.isAtHome then U.openApps { "BetterTouchTool", "DrawPen" } end
 	U.defer(1, function() -- defer so external display is detected
 		local youtube = U.app("YouTube")
 		if not youtube then return end
