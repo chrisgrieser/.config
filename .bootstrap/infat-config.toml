@@ -23,6 +23,7 @@ mailto = "Brave Browser"
 [extensions]
 txt = "TextEdit"  # do not open in editor for increased security
 env = "TextEdit"
+md = "neovide"
 svg = "neovide"
 jsonc = "neovide"
 adblock = "neovide"

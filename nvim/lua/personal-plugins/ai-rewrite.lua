@@ -4,13 +4,11 @@ local M = {}
 local config = {
 	provider = {
 		endpoint = "https://api.openai.com/v1/responses", -- only supports OpenAI-compatible
-		model = "gpt-5.4-mini", -- https://developers.openai.com/api/docs/models/gpt-5.4-mini
+		model = "gpt-6.1-terra", -- https://developers.openai.com/api/docs/models/gpt-5.4-mini
 		reasoningEffort = "low",
-		costPerMilTokens = { input = 0.75, output = 4 }, -- just for cost notification
+		costPerMilTokens = { input = 1, output = 5 }, -- just for cost notification
 		apiKey = vim.env.OPENAI_API_KEY,
-		-- stylua: ignore
-		-- fallback, if `apiKey` is not set
-		apiKeyCmd = { "cat", vim.env.HOME .. "/Library/Mobile Documents/com~apple~CloudDocs/Tech/api-keys/openai-api-key.txt" },
+		apiKeyCmd = { "cat", vim.g.openaiApiKeyFile }, -- fallback, if `apiKey` is not set
 		timeoutSecs = 30,
 	},
 	appearance = {

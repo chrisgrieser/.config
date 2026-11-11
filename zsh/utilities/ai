@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 
 # CONFIG
-model='gpt-5.4-mini'
+model='gpt-6.1-terra'
 reasoning='low'
 
 # https://platform.openai.com/api-keys

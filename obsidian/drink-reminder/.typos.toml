@@ -1,4 +1,0 @@
-# ignore these files
-[files]
-extend-exclude = ["main.js"]  # messages in German
-

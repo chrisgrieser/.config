@@ -48,7 +48,6 @@ mas "Ivory", id: 6444602274
 
 
 #-QUICKLOOK---------------------------------------------------------------------
-cask "qlmarkdown" # markdown only
 cask "syntax-highlight" # dark mode buggy; remove footer via https://github.com/sbarex/SourceCodeSyntaxHighlight/issues/297#issuecomment-2560808425
 # mas "iPreview", id: 1519213509 # buggy with markdown frontmatter, no window resizing
 # cask "flewgg/tap/unfold", trusted: true # dark mode buggy for lua, no window resizing
@@ -72,7 +71,6 @@ if device.include?("Home")
 	cask "ausweisapp" # pairing with phone app only works in private wifi
 	cask "bettertouchtool"
 	cask "catch"
-	cask "drawpen"
 	mas "NIIMBOT", id: 6755411172
 end
 if device.include?("Home") or device.include?("Office")

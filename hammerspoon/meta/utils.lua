@@ -75,6 +75,24 @@ function U.writeToFile(filePath, str, append)
 	end
 end
 
+function U.isExecutableFile(path)
+	local isFile = hs.fs.attributes(path, "mode") == "file"
+	if not isFile then return false end
+	local permissions = hs.fs.attributes(path, "permissions") or ""
+	local executable = permissions:find("x") ~= nil
+	if not executable then U.notify(("❌ %q is not executable"):format(path)) end
+	return executable
+end
+
+---@return boolean
+---@nodiscard
+function U.screenIsUnlocked()
+	local _, success = hs.execute(
+		'[[ "$(/usr/libexec/PlistBuddy -c "print :IOConsoleUsers:0:CGSSessionScreenIsLocked" /dev/stdin 2>/dev/null <<< "$(ioreg -n Root -d1 -a)")" != "true" ]]'
+	)
+	return success == true -- convert to Boolean
+end
+
 ---@param filePath string
 ---@return string|nil file content or nil when reading not successful
 ---@nodiscard
@@ -260,46 +278,4 @@ function U.quitFullscreenSpaces()
 		end
 	end)
 	if not success then print("❌ Exiting fullscreen spaces failed:" .. err, 5) end
-end
-
-function U.quitVideoApps()
-	-- prevent the automatic quitting of audio-apps from triggering a music start
-	local appWatcherForMusic = require("apps.music").aw_music
-	appWatcherForMusic:stop()
-
-	U.quitApps(U.videoAndAudioApps)
-
-	U.defer(1, function() appWatcherForMusic:start() end)
-end
-
----@param name string
----@param volume? number
-function U.sound(name, volume)
-	volume = volume or 0.75
-	hs.sound.getByName(name):volume(volume):play() ---@diagnostic disable-line: undefined-field
-end
-
----@param title string
-function U.createReminderToday(title)
-	hs.osascript.javascript(([[
-		const rem = Application("Reminders");
-		const today = new Date();
-		const newReminder = rem.Reminder({ name: %q, alldayDueDate: today });
-		rem.defaultList().reminders.push(newReminder);
-		rem.quit();
-	]]):format(title))
-end
-
----Also notifies if the path is not executable
----(needed as `hs.task.new` fails if the path is not executable)
----@param path string
----@return boolean
----@nodiscard
-function U.isExecutableFile(path)
-	local isFile = hs.fs.attributes(path, "mode") == "file"
-	if not isFile then return false end
-	local permissions = hs.fs.attributes(path, "permissions") or ""
-	local executable = permissions:find("x") ~= nil
-	if not executable then U.notify(("❌ %q is not executable"):format(path)) end
-	return executable
 end

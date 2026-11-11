@@ -41,9 +41,9 @@
       "rev": "9e844663fe217bae78e857b7dc59468d8ee6d425",
       "src": "https://github.com/nvim-mini/mini.operators"
     },
-    "neocodeium": {
-      "rev": "ab8a3da3a66d299ad5422b76ce5ee21b68719296",
-      "src": "https://github.com/monkoose/neocodeium"
+    "minuet-ai.nvim": {
+      "rev": "50bf63b031c0391e926fdf0b3d044d37846e6e34",
+      "src": "https://github.com/milanglacier/minuet-ai.nvim"
     },
     "nightfox.nvim": {
       "rev": "4dacd3f0185a2227bdf3b6c0975a8f0bf87cac9a",
@@ -66,7 +66,7 @@
       "src": "https://github.com/chrisgrieser/nvim-lsp-endhints"
     },
     "nvim-lspconfig": {
-      "rev": "993d048db0d83d8e8ba3f9cb376456321acdcce3",
+      "rev": "443d92c6bea761ab54cdde46fb197a2b4d614bdd",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-origami": {
@@ -98,7 +98,7 @@
       "src": "https://github.com/chrisgrieser/nvim-tinygit"
     },
     "nvim-treesitter": {
-      "rev": "915f2bd3d4e2a33704bfc476b5137e9befa82f3d",
+      "rev": "19bdfc04f40ed2ccb3340591d125f759b0406875",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter"
     },
     "nvim-treesitter-textobjects": {
@@ -114,11 +114,11 @@
       "src": "https://github.com/theprimeagen/refactoring.nvim"
     },
     "render-markdown.nvim": {
-      "rev": "8e8795368391036643b622875a6da6a51bcd33f4",
+      "rev": "9c235bedc4f96145e63fcad5b78cd78bce8822c4",
       "src": "https://github.com/MeanderingProgrammer/render-markdown.nvim"
     },
     "satellite.nvim": {
-      "rev": "87843c9c8f28b54332497302de380a6d94c9e82b",
+      "rev": "fc48d8b7644a9636922690287568ef998eacad93",
       "src": "https://github.com/lewis6991/satellite.nvim"
     },
     "snacks.nvim": {

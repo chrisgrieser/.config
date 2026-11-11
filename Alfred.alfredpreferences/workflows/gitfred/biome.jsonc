@@ -59,6 +59,9 @@
 	"javascript": {
 		"globals": ["$", "Application", "ObjC", "Path", "delay"] // JXA globals
 	},
+	"markdown": {
+		"formatter": { "enabled": false } // using rumdl instead
+	},
 	"formatter": {
 		"useEditorconfig": true,
 		"lineWidth": 100, // needs to be set despite editorconfig https://github.com/biomejs/biome/issues/6475#issuecomment-2994126794

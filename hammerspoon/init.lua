@@ -38,6 +38,7 @@ safeRequire("system.menubar")
 safeRequire("system.external-drives")
 safeRequire("system.weather-reminder")
 
+safeRequire("apps.auto-quitter")
 safeRequire("apps.app-specific-behavior")
 safeRequire("apps.music")
 
