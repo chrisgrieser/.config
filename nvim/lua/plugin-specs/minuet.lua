@@ -8,21 +8,21 @@ vim.pack.add { "https://github.com/milanglacier/minuet-ai.nvim" }
 
 Keymap { "<leader>oa", "<cmd>Minuet virtualtext toggle<CR>", desc = "󰚩 Toggle Minuet AI" }
 
+vim.api.nvim_create_autocmd({ "ColorScheme", "VimEnter" }, {
+	desc = "User: Highlights for minuet-ai.nvim",
+	callback = function() vim.api.nvim_set_hl(0, "MinuetVirtualText", { link = "NonText" }) end,
+})
+
 --------------------------------------------------------------------------------
 
 -- DOCS https://github.com/milanglacier/minuet-ai.nvim#configuration
 require("minuet").setup {
 	-- the maximum total characters of the context before and after the cursor
 	-- 16000 characters typically equate to approximately 4,000 tokens for LLMs.
-	context_window = 16000,
-	-- when the total characters exceed the context window, the ratio of
-	-- context before cursor and after cursor, the larger the ratio the more
-	-- context before cursor will be used. This option should be between 0 and
-	-- 1, context_ratio = 0.75 means the ratio will be 3:1.
-	context_ratio = 0.75,
-	throttle = 1000, -- only send the request every x milliseconds, use 0 to disable throttle.
-	debounce = 400, -- debounce the request in x milliseconds, set to 0 to disable debounce
-	notify = "warn", -- notifications shown, not the level used by minuet
+	context_window = 4000,
+	throttle = 500, -- only send the request every x milliseconds, use 0 to disable
+	debounce = 200, -- inactivity before request is sent x milliseconds, set to 0 to disable
+	notify = "verbose", -- notifications shown, not the level used by minuet
 
 	-----------------------------------------------------------------------------
 
@@ -31,6 +31,8 @@ require("minuet").setup {
 	provider_options = {
 		openai = {
 			model = "gpt-6-luna", -- https://developers.openai.com/api/docs/models/gpt-6-luna
+			stream = true,
+			optional = { reasoning_effort = "none" }, -- quicker
 			api_key = function()
 				local file = io.open(vim.g.openaiApiKeyFile, "r")
 				assert(file, "Could not find file for `OPENAI_API_KEY`.")
@@ -109,3 +111,13 @@ require("minuet").setup {
 		end,
 	},
 }
+
+--------------------------------------------------------------------------------
+
+-- add -- Accept a Minuet suggestion, 
+vim.g.lualineAdd("sections", "lualine_x", {
+	require("minuet.lualine"),
+	format = function ()
+		if 
+	end
+}, "before")

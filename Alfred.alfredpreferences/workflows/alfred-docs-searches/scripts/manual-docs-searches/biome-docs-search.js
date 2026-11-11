@@ -39,8 +39,21 @@ function run() {
 		if (path.endsWith("404.md")) return [];
 
 		const parts = subsite.split("/");
+
 		let title = parts.pop() || "??";
-		let category = parts.join("/");
+		const allLangs = ["javascript", "typescript", "html", "json", "css", "markdown", "graphql"];
+		let lang = "";
+		if (allLangs.includes(title)) {
+			lang = title
+				.replaceAll("javascript", "JavaScript")
+				.replaceAll("typescript", "TypeScript")
+				.replaceAll("json", "JSON")
+				.replaceAll("css", "CSS")
+				.replaceAll("html", "HTML")
+			title = parts.pop() || "??";
+		}
+
+		let category = parts.join("/") + (lang ? ` (${lang})` : "");
 		let url = `${baseUrl}/${subsite}`;
 
 		if (subsite.endsWith("index")) {
@@ -51,9 +64,7 @@ function run() {
 
 		title = title
 			.replace(/-\w/g, (match) => match.slice(-1).toUpperCase()) // camelCase to conform to rule-casing the user expects
-			.replaceAll("-", " ")
-			.replaceAll("Javascript", "JavaScript")
-			.replaceAll("Javascript", "JavaScript")
+			.replaceAll("-", " ");
 		title = title.charAt(0).toUpperCase() + title.slice(1); // capitalize
 
 		return {

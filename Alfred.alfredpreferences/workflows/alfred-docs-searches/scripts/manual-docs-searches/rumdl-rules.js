@@ -23,11 +23,13 @@ function run() {
 			/** @type {{ code: string; name: string; summary: string; category: string; url: string; }} */ rule,
 		) => {
 			const { code, name, summary, category, url } = rule;
+			const codeShort1 = code.replace(/^MD/, "");
+			const codeShort2 = code.replace(/^MD0/, ""); // 031 -> 31
 
 			return {
 				title: `${code} – ${name}`,
 				subtitle: `[${category}] ${summary}`,
-				match: [code, name, category, summary].join(" "),
+				match: [code, name, category, summary, codeShort1, codeShort2].join(" "),
 				mods: {
 					cmd: { arg: code }, // copy entry
 				},
