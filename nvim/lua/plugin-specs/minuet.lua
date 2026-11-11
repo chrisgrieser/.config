@@ -13,6 +13,13 @@ vim.api.nvim_create_autocmd({ "ColorScheme", "VimEnter" }, {
 	callback = function() vim.api.nvim_set_hl(0, "MinuetVirtualText", { link = "NonText" }) end,
 })
 
+vim.g.lualineAdd("sections", "lualine_x", {
+	require("minuet.lualine"),
+	fmt = function(str)
+		if str ~= "" then return "󰚩 Minuet" end
+	end,
+}, "before")
+
 --------------------------------------------------------------------------------
 
 -- DOCS https://github.com/milanglacier/minuet-ai.nvim#configuration
@@ -22,7 +29,14 @@ require("minuet").setup {
 	context_window = 4000,
 	throttle = 500, -- only send the request every x milliseconds, use 0 to disable
 	debounce = 200, -- inactivity before request is sent x milliseconds, set to 0 to disable
-	notify = "verbose", -- notifications shown, not the level used by minuet
+	notify = "warn", -- notifications shown: "verbose"|"warn"|"error"
+	-- The request timeout, measured in seconds. When streaming is enabled
+    -- (stream = true), setting a shorter request_timeout allows for faster
+    -- retrieval of completion items, albeit potentially incomplete.
+    -- Conversely, with streaming disabled (stream = false), a timeout
+    -- occurring before the LLM returns results will yield no completion items.
+    request_timeout = 2.5,
+    n_completions = 2,
 
 	-----------------------------------------------------------------------------
 
@@ -56,12 +70,10 @@ require("minuet").setup {
 			accept = "<D-s>",
 			accept_line = "<D-S>",
 			next = "<D-a>",
-			prev = "<D-A>",
-			dismiss = nil,
 		},
 		-- Whether show virtual text suggestion when the completion menu
 		-- (nvim-cmp or blink-cmp) is visible.
-		show_on_completion_menu = false,
+		show_on_completion_menu = true,
 	},
 
 	blink = {
@@ -104,7 +116,7 @@ require("minuet").setup {
 			)
 			if ignorePath then
 				vim.notify_once("Disabled AI on this buffer.")
-				return false --> return `false` to disable
+				return false
 			end
 
 			return true
@@ -113,11 +125,3 @@ require("minuet").setup {
 }
 
 --------------------------------------------------------------------------------
-
--- add -- Accept a Minuet suggestion, 
-vim.g.lualineAdd("sections", "lualine_x", {
-	require("minuet.lualine"),
-	format = function ()
-		if 
-	end
-}, "before")
