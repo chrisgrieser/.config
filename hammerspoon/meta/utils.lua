@@ -75,6 +75,39 @@ function U.writeToFile(filePath, str, append)
 	end
 end
 
+function U.quitVideoApps()
+	-- prevent the automatic quitting of audio-apps from triggering a music start
+	local appWatcherForMusic = require("apps.music").aw_music
+	appWatcherForMusic:stop()
+
+	U.quitApps(U.videoAndAudioApps)
+
+	U.defer(1, function() appWatcherForMusic:start() end)
+end
+
+---@param name string
+---@param volume? number
+function U.sound(name, volume)
+	volume = volume or 0.75
+	hs.sound.getByName(name):volume(volume):play() ---@diagnostic disable-line: undefined-field
+end
+
+---@param title string
+function U.createReminderToday(title)
+	hs.osascript.javascript(([[
+		const rem = Application("Reminders");
+		const today = new Date();
+		const newReminder = rem.Reminder({ name: %q, alldayDueDate: today });
+		rem.defaultList().reminders.push(newReminder);
+		rem.quit();
+	]]):format(title))
+end
+
+---Also notifies if the path is not executable
+---(needed as `hs.task.new` fails if the path is not executable)
+---@param path string
+---@return boolean
+---@nodiscard
 function U.isExecutableFile(path)
 	local isFile = hs.fs.attributes(path, "mode") == "file"
 	if not isFile then return false end

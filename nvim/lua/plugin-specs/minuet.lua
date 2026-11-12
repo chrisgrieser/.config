@@ -65,6 +65,7 @@ require("minuet").setup {
 			bib = false,
 			text = false, -- filetype when editing in `pass` (extra safeguard)
 			csv = false,
+			gitcommit = false,
 		},
 		keymap = {
 			accept = "<D-s>",
