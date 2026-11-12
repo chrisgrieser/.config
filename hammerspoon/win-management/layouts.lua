@@ -176,16 +176,16 @@ if U.isSystemStart() then workLayout() end
 --------------------------------------------------------------------------------
 
 local config = {
-	checkIntervalMins = 15,
+	checkIntervalMins = 5,
 	timeToReactSecs = 20,
-	sleeptimerAfterMins = 50,
-	longIdleAfterMins = 150,
+	sleeptimerAfterMins = 60,
+	longIdleAfterMins = 180,
 }
 
 -- 4. Long idle
 M.longIdleTimer = doEvery(config.checkIntervalMins * 60, function()
 	local userIsLongIdle = U.userIdleForMins(config.longIdleAfterMins)
-	if userIsLongIdle and M.currentLayout ~= "work" then
+	if userIsLongIdle and M.currentLayout == "movie" then
 		print("⌛ Long idle")
 		workLayout("dark")
 		U.defer(4, hs.caffeinate.lockScreen)
