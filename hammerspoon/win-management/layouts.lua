@@ -46,15 +46,9 @@ local function connectProjector(status, callback)
 		U.openUrlInBg(uri)
 	end)
 
-	U.defer(5, function()
-		local success = env.hasProjector() == status
-		if success then
-			require("appearance.hole-cover").update()
-			if callback then callback() end
-			print("📽️ ✅ Projector set to " .. setTo:upper())
-		else
-			print("📽️ ❌ Could not set projector to " .. setTo:upper())
-		end
+	U.defer(4, function()
+		require("appearance.hole-cover").update()
+		if callback then callback() end
 	end)
 end
 
@@ -178,7 +172,7 @@ if U.isSystemStart() then workLayout() end
 local config = {
 	checkIntervalMins = 5,
 	timeToReactSecs = 20,
-	sleeptimerAfterMins = 45,
+	sleeptimerAfterMins = 50,
 	longIdleAfterMins = 180,
 }
 
@@ -198,7 +192,6 @@ end):start()
 M.sleepTimer = doEvery(config.checkIntervalMins * 60, function()
 	local userIsActive = function() return not U.userIdleForMins(config.sleeptimerAfterMins) end
 	local noVideoAppRunning = not (hs.fnutils.some(U.videoAndAudioApps, U.app))
-
 	if userIsActive() or noVideoAppRunning then return end
 
 	-- inform user about upcoming sleep
