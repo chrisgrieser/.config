@@ -178,7 +178,7 @@ if U.isSystemStart() then workLayout() end
 local config = {
 	checkIntervalMins = 5,
 	timeToReactSecs = 20,
-	sleeptimerAfterMins = 60,
+	sleeptimerAfterMins = 45,
 	longIdleAfterMins = 180,
 }
 
