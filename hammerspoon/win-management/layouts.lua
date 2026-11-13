@@ -133,7 +133,7 @@ local function movieLayout()
 
 	-- open / quit apps
 	U.openApps("YouTube")
-	if env.isAtHome then U.openApps { "BetterTouchTool", "DrawPen" } end
+	if env.isAtHome then U.openApps("BetterTouchTool") end
 	U.defer(1, function() -- defer so external display is detected
 		local youtube = U.app("YouTube")
 		if not youtube then return end
