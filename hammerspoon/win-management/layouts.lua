@@ -173,7 +173,7 @@ local config = {
 	checkIntervalMins = 10,
 	timeToReactSecs = 20,
 	sleeptimerAfterMins = 60,
-	longIdleAfterMins = 2.5 * 60,
+	longIdleAfterMins = 120,
 }
 
 -- 4. Long idle
@@ -182,7 +182,7 @@ M.longIdleTimer = doEvery(config.checkIntervalMins * 60, function()
 	if userIsLongIdle and M.currentLayout == "movie" then
 		print("⌛ Long idle")
 		workLayout("dark")
-		U.defer(4, hs.caffeinate.lockScreen)
+		U.defer(10, hs.caffeinate.lockScreen)
 	end
 end):start()
 
