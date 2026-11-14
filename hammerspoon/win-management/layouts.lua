@@ -170,10 +170,10 @@ if U.isSystemStart() then workLayout() end
 --------------------------------------------------------------------------------
 
 local config = {
-	checkIntervalMins = 5,
+	checkIntervalMins = 10,
 	timeToReactSecs = 20,
-	sleeptimerAfterMins = 50,
-	longIdleAfterMins = 180,
+	sleeptimerAfterMins = 60,
+	longIdleAfterMins = 2.5 * 60,
 }
 
 -- 4. Long idle
