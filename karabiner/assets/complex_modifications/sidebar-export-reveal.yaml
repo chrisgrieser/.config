@@ -73,6 +73,14 @@ rules:
         to:
           - { key_code: "2", modifiers: [command, option] }
         conditions:
+          - { type: variable_unless, name: PREVIEW_SIDEBAR, value: true }
+          - { type: frontmost_application_if, bundle_identifiers: [com.apple.Preview] }
+      - type: basic
+        from: *rightSidebar
+        to:
+          - { key_code: "1", modifiers: [command, option] }
+        conditions:
+          - { type: variable_unless, name: PREVIEW_SIDEBAR, value: false }
           - { type: frontmost_application_if, bundle_identifiers: [com.apple.Preview] }
       # Highlights
       - type: basic

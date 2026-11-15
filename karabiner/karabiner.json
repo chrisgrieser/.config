@@ -10153,6 +10153,37 @@
                                 ],
                                 "conditions": [
                                     {
+                                        "type": "variable_unless",
+                                        "name": "PREVIEW_SIDEBAR",
+                                        "value": true
+                                    },
+                                    {
+                                        "type": "frontmost_application_if",
+                                        "bundle_identifiers": [
+                                            "com.apple.Preview"
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "basic",
+                                "from": {
+                                    "key_code": "0",
+                                    "modifiers": { "mandatory": ["command"] }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "1",
+                                        "modifiers": ["command", "option"]
+                                    }
+                                ],
+                                "conditions": [
+                                    {
+                                        "type": "variable_unless",
+                                        "name": "PREVIEW_SIDEBAR",
+                                        "value": false
+                                    },
+                                    {
                                         "type": "frontmost_application_if",
                                         "bundle_identifiers": [
                                             "com.apple.Preview"
