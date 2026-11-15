@@ -1,4 +1,3 @@
--- vim: foldlevel=2
 vim.pack.add {
 	"https://github.com/nvim-mini/mini.icons",
 	"https://github.com/folke/snacks.nvim",

@@ -1,4 +1,3 @@
--- vim: foldlevel=3
 -- DOCS https://cmp.saghen.dev/configuration/reference
 
 vim.pack.add {

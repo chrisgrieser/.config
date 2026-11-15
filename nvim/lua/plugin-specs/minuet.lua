@@ -26,7 +26,7 @@ vim.g.lualineAdd("sections", "lualine_x", {
 require("minuet").setup {
 	-- the maximum total characters of the context before and after the cursor
 	-- 16000 characters typically equate to approximately 4,000 tokens for LLMs.
-	context_window = 4000,
+	context_window = 2000,
 	throttle = 500, -- only send the request every x milliseconds, use 0 to disable
 	debounce = 200, -- inactivity before request is sent x milliseconds, set to 0 to disable
 	notify = "warn", -- notifications shown: "verbose"|"warn"|"error"
@@ -35,8 +35,8 @@ require("minuet").setup {
 	-- retrieval of completion items, albeit potentially incomplete.
 	-- Conversely, with streaming disabled (stream = false), a timeout
 	-- occurring before the LLM returns results will yield no completion items.
-	request_timeout = 4,
-	n_completions = 2,
+	request_timeout = 3,
+	n_completions = 3,
 
 	-----------------------------------------------------------------------------
 
@@ -44,9 +44,13 @@ require("minuet").setup {
 	provider = "openai",
 	provider_options = {
 		openai = {
-			model = "gpt-6-luna", -- https://developers.openai.com/api/docs/models/gpt-6-luna
-			stream = false,
-			optional = { reasoning_effort = "none" }, -- quicker
+			-- https://developers.openai.com/api/docs/models/gpt-6-luna
+			model = "gpt-5.6-luna", -- TODO gpt-6-luna sometimes adds `<|endCompletion|>`??
+			stream = true,
+			optional = {
+				reasoning_effort = "none", -- quicker
+            max_completion_tokens = 128,
+			},
 			api_key = function()
 				local file = io.open(vim.g.openaiApiKeyFile, "r")
 				assert(file, "Could not find file for `OPENAI_API_KEY`.")

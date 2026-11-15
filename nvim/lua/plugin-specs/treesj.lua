@@ -1,4 +1,3 @@
--- vim: foldlevel=3
 -- DOCS https://github.com/Wansmer/treesj#basic-node
 vim.pack.add { "https://github.com/Wansmer/treesj" }
 --------------------------------------------------------------------------------
