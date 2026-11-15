@@ -9650,28 +9650,6 @@
                         "manipulators": [
                             {
                                 "type": "basic",
-                                "from": { "key_code": "f3" },
-                                "to": [{ "shell_command": "\"$HOME/Library/Mobile Documents/com~apple~CloudDocs/Tech/alexa/virtual-trigger\" \\\n  \"light-toggle\"\n" }],
-                                "conditions": [
-                                    {
-                                        "type": "frontmost_application_unless",
-                                        "file_paths": ["/Users/.*/Library/Application Support/Steam/steamapps/common/", "/Applications/StarCraft II/"]
-                                    }
-                                ]
-                            },
-                            {
-                                "type": "basic",
-                                "from": { "key_code": "f4" },
-                                "to": [{ "shell_command": "afplay \"/System/Library/Sounds/Pop.aiff\" &\n\"$HOME/Library/Mobile Documents/com~apple~CloudDocs/Tech/alexa/virtual-trigger\" \\\n  \"music-like\"\n" }],
-                                "conditions": [
-                                    {
-                                        "type": "frontmost_application_unless",
-                                        "file_paths": ["/Users/.*/Library/Application Support/Steam/steamapps/common/", "/Applications/StarCraft II/"]
-                                    }
-                                ]
-                            },
-                            {
-                                "type": "basic",
                                 "from": { "key_code": "f7" },
                                 "to": [{ "shell_command": "\"$HOME/Library/Mobile Documents/com~apple~CloudDocs/Tech/alexa/virtual-trigger\" \\\n  \"music-pause\"\n" }],
                                 "conditions": [
@@ -9685,17 +9663,6 @@
                                 "type": "basic",
                                 "from": { "key_code": "f8" },
                                 "to": [{ "shell_command": "\"$HOME/Library/Mobile Documents/com~apple~CloudDocs/Tech/alexa/virtual-trigger\" \\\n  \"music-play\"\n" }],
-                                "conditions": [
-                                    {
-                                        "type": "frontmost_application_unless",
-                                        "file_paths": ["/Users/.*/Library/Application Support/Steam/steamapps/common/", "/Applications/StarCraft II/"]
-                                    }
-                                ]
-                            },
-                            {
-                                "type": "basic",
-                                "from": { "key_code": "f9" },
-                                "to": [{ "shell_command": "\"$HOME/Library/Mobile Documents/com~apple~CloudDocs/Tech/alexa/virtual-trigger\" \\\n  \"music-next\"\n" }],
                                 "conditions": [
                                     {
                                         "type": "frontmost_application_unless",
@@ -10172,6 +10139,27 @@
                     {
                         "description": "Toggle RIGHT sidebar",
                         "manipulators": [
+                            {
+                                "type": "basic",
+                                "from": {
+                                    "key_code": "0",
+                                    "modifiers": { "mandatory": ["command"] }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "2",
+                                        "modifiers": ["command", "option"]
+                                    }
+                                ],
+                                "conditions": [
+                                    {
+                                        "type": "frontmost_application_if",
+                                        "bundle_identifiers": [
+                                            "com.apple.Preview"
+                                        ]
+                                    }
+                                ]
+                            },
                             {
                                 "type": "basic",
                                 "from": {
