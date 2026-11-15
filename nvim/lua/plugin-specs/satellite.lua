@@ -8,9 +8,8 @@ require("satellite").setup {
 		marks = { enable = false }, -- buggy
 	},
 
-	-- effectively hide scrollbar, since using neovide's scrollbar
-	-- PENDING -- effectively hide scrollbar, since using neovide's scrollbar
-	winblend = 100,
+	-- hide scrollbar when using neovide's
+	winblend = vim.g.neovide_system_scrollbar and 100 or 25,
 }
 
 vim.api.nvim_create_autocmd({ "ColorScheme", "VimEnter" }, {

@@ -220,7 +220,7 @@ function M.inspectBuffer()
 	local longestName = vim.iter(clients)
 		:fold(0, function(acc, client) return math.max(acc, #client.name) end)
 	local lsps = vim.tbl_map(function(client)
-		local pad = (" "):rep(math.min(longestName - #client.name) --[[@as integer]]) .. " "
+		local pad = (" "):rep(math.min(longestName - #client.name)) .. " "
 		local root = client.root_dir and client.root_dir:gsub(vim.env.HOME, pseudoTilde)
 			or "*Single file mode*"
 		return ("[%s]%s%s"):format(client.name, pad, root)

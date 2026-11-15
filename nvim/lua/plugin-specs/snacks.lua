@@ -306,7 +306,7 @@ opts.picker = {
 						text = vim.inspect(client),
 						width = 0.9,
 						height = 0.9,
-						border = vim.o.winborder --[[@as "rounded"|"single"|"double"]],
+						border = vim.o.winborder,
 						bo = { ft = "lua" }, -- `.bo.ft` instead of `.ft` needed for treesitter folding
 						wo = {
 							statuscolumn = " ", -- adds padding
@@ -349,7 +349,7 @@ opts.picker = {
 				border = "none",
 				{
 					box = "vertical",
-					border = vim.o.winborder --[[@as "rounded"|"single"|"double"|"solid"]],
+					border = vim.o.winborder,
 					title = "{title} {live} {flags}",
 					{ win = "input", height = 1, border = "bottom" },
 					{ win = "list", border = "none" },
@@ -363,7 +363,7 @@ opts.picker = {
 				[2] = {
 					win = "preview",
 					title = "{preview}",
-					border = vim.o.winborder --[[@as "rounded"|"single"|"double"|"solid"]],
+					border = vim.o.winborder,
 					width = 0.5,
 				},
 			},
@@ -375,19 +375,19 @@ opts.picker = {
 				[2] = { width = 0.6 }, -- second win is the preview
 			},
 		},
-		-- sidebar = {
-		-- 	preview = "main",
-		-- 	cycle = true, -- `list_up/down` action wraps
-		-- 	layout = {
-		-- 		box = "vertical",
-		-- 		position = "left", -- = split window
-		-- 		width = 0.3,
-		-- 		min_width = 25,
-		-- 		{ win = "input", height = 1, border = "bottom" },
-		-- 		{ win = "list" },
-		-- 		{ win = "preview" },
-		-- 	},
-		-- },
+		sidebar = {
+			preview = "main",
+			cycle = true, -- `list_up/down` action wraps
+			layout = {
+				box = "vertical",
+				position = "left", -- = split window
+				width = 0.3,
+				min_width = 25,
+				{ win = "input", height = 1, border = "bottom" },
+				{ win = "list" },
+				{ win = "preview" },
+			},
+		},
 		sidebar_no_input = {
 			preview = "main",
 			cycle = true, -- `list_up/down` action wraps
@@ -660,7 +660,7 @@ Keymap { "gD", function() Snacks.picker.lsp_type_definitions() end, desc = "󰜁
 Keymap { "gw", function() Snacks.picker.lsp_workspace_symbols() end, desc = " Workspace symbols" }
 
 -- `lsp_symbols` tends to too much clutter like anonymous function
-Keymap { ",zz", function() Snacks.picker.treesitter() end, desc = "󰐅 Treesitter symbols" }
+Keymap { "gs", function() Snacks.picker.treesitter() end, desc = "󰐅 Treesitter symbols" }
 
 -- git
 Keymap { "<leader>ga", function() Snacks.picker.git_diff() end, desc = "󰐖 Hunks" }

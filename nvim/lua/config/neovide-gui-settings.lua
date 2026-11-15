@@ -52,7 +52,7 @@ vim.g.neovide_input_macos_option_key_is_meta = "none" -- disable, so `{@~` etc. 
 vim.g.neovide_opacity = 1
 vim.g.neovide_underline_stroke_scale = 2.5 -- fix underline thickness
 vim.g.neovide_fill_bottom_background = true
-vim.g.neovide_system_scrollbar = true
+vim.g.neovide_system_scrollbar = true -- BUG breaks split views of snacks (i.e., symbol view with left split on `gs`)
 -- vim.g.neovide_highlight_matching_pair = true -- PENDING https://github.com/neovide/neovide/issues/3458
 
 -- behavior
