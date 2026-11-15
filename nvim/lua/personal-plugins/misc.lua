@@ -13,6 +13,8 @@ function M.toggleOrIncrement()
 		["on"] = "off",
 		["enable"] = "disable",
 		["enabled"] = "disabled",
+		["increase"] = "decrease",
+		["increased"] = "decreased",
 
 		["up"] = "down",
 		["top"] = "bottom",

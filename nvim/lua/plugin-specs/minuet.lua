@@ -31,12 +31,12 @@ require("minuet").setup {
 	debounce = 200, -- inactivity before request is sent x milliseconds, set to 0 to disable
 	notify = "warn", -- notifications shown: "verbose"|"warn"|"error"
 	-- The request timeout, measured in seconds. When streaming is enabled
-    -- (stream = true), setting a shorter request_timeout allows for faster
-    -- retrieval of completion items, albeit potentially incomplete.
-    -- Conversely, with streaming disabled (stream = false), a timeout
-    -- occurring before the LLM returns results will yield no completion items.
-    request_timeout = 2.5,
-    n_completions = 2,
+	-- (stream = true), setting a shorter request_timeout allows for faster
+	-- retrieval of completion items, albeit potentially incomplete.
+	-- Conversely, with streaming disabled (stream = false), a timeout
+	-- occurring before the LLM returns results will yield no completion items.
+	request_timeout = 4,
+	n_completions = 2,
 
 	-----------------------------------------------------------------------------
 
@@ -45,7 +45,7 @@ require("minuet").setup {
 	provider_options = {
 		openai = {
 			model = "gpt-6-luna", -- https://developers.openai.com/api/docs/models/gpt-6-luna
-			stream = true,
+			stream = false,
 			optional = { reasoning_effort = "none" }, -- quicker
 			api_key = function()
 				local file = io.open(vim.g.openaiApiKeyFile, "r")

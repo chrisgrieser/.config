@@ -1,5 +1,4 @@
 # yaml-language-server: $schema=./schema/karabiner-mod-schema.json
-# vim: foldlevel=3
 title: App-specific bindings
 anchors:
   - &leftSidebar { key_code: "1", modifiers: { mandatory: [command] } }
@@ -64,24 +63,26 @@ rules:
           - { key_code: "0", modifiers: [command, option] }
         conditions:
           - { type: frontmost_application_if, bundle_identifiers: [com.readdle.PDFExpert-Mac] }
-  #─────────────────────────────────────────────────────────────────────────────
-  - description: "Toggle RIGHT sidebar"
-    manipulators:
       # Preview
       - type: basic
-        from: *rightSidebar
+        from: *leftSidebar
         to:
-          - { key_code: "2", modifiers: [command, option] }
+          - { key_code: "2", modifiers: [command, option] } # show thumbnails
+          - { set_variable: { name: PREVIEW_SIDEBAR, value: true } }
         conditions:
           - { type: variable_unless, name: PREVIEW_SIDEBAR, value: true }
           - { type: frontmost_application_if, bundle_identifiers: [com.apple.Preview] }
       - type: basic
-        from: *rightSidebar
+        from: *leftSidebar
         to:
-          - { key_code: "1", modifiers: [command, option] }
+          - { key_code: "1", modifiers: [command, option] } # hide sidebar
+          - { set_variable: { name: PREVIEW_SIDEBAR, value: false } }
         conditions:
           - { type: variable_unless, name: PREVIEW_SIDEBAR, value: false }
           - { type: frontmost_application_if, bundle_identifiers: [com.apple.Preview] }
+  #─────────────────────────────────────────────────────────────────────────────
+  - description: "Toggle RIGHT sidebar"
+    manipulators:
       # Highlights
       - type: basic
         from: *rightSidebar

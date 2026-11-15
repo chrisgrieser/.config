@@ -235,12 +235,14 @@ Keymap {
 Keymap { "zz", "<cmd>%foldclose<CR>", desc = " Close toplevel folds" }
 Keymap { "zm", "zM", desc = " Close all folds" }
 Keymap { "zv", "zv", desc = "󰘖 Open until cursor visible" } -- just for which-key
-Keymap { "zr", "zR", desc = "󰘖 Open all folds" }
-Keymap {
-	"zf",
-	function() vim.opt.foldlevel = vim.v.count1 end,
-	desc = " Set fold level to {count}",
-}
+Keymap { "zr", "zR<cmd>:set foldlevel=99<CR>", desc = "󰘖 Open all folds" }
+for _, digit in pairs { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 } do
+	Keymap {
+		"z" .. digit,
+		"<cmd>set foldlevel=" .. digit .. "<CR>",
+		desc = " Set fold level " .. digit,
+	}
+end
 
 ---YANKING----------------------------------------------------------------------
 

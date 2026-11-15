@@ -84,6 +84,11 @@ require("lualine").setup {
 				icon = "󰃽",
 				cond = function() return vim.fn.reg_recording() ~= "" end,
 			},
+			{
+				function() return vim.o.foldlevel end,
+				icon = "",
+				cond = function() return vim.o.foldlevel < 99 end,
+			},
 		},
 		lualine_x = {
 			-- HACK dummy, so tabline is never empty (in which case vim adds its ugly tabline)
