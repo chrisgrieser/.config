@@ -5,16 +5,16 @@
 
 on run argv
 	set itemPath to item 1 of argv
-
 	tell application "Finder"
-		activate
+    activate
+    if (count Finder windows) = 0 then return "No Finder window open."
 
-		if ((count Finder windows) = 0) then return "No window open"
-		set targetFolder to (target of Finder window 1 as alias)
+    set targetFolder to target of Finder window 1 as alias
+    set sourceItem to POSIX file itemPath as alias -- "as alias" ensures iCloud download
 
-		set sourceItem to (itemPath as POSIX file)
-		move sourceItem to targetFolder with replacing
-		return -- return nothing, so Alfred notification is not triggered
+    if not (exists sourceItem) then return "File not available (iCloud)"
 
-	end tell
+    move sourceItem to targetFolder with replacing
+	 return -- return nothing, so Alfred notification is not triggered
+end tell
 end run

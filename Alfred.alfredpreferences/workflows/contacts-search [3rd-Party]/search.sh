@@ -1,18 +1,19 @@
 #!/bin/zsh --no-rcs
 
-readonly sqlQuery="SELECT r.ZFIRSTNAME, r.ZMIDDLENAME, r.ZLASTNAME, r.ZMAIDENNAME, r.ZNICKNAME, r.ZJOBTITLE, r.ZORGANIZATION, r.ZSORTINGLASTNAME, r.ZUNIQUEID, JSON_GROUP_ARRAY(p.ZFULLNUMBER) AS ZPHONENUMBER, JSON_GROUP_ARRAY(e.ZADDRESSNORMALIZED) AS ZEMAILADDRESS, a.ZSTREET, n.ZTEXT
+readonly sqlQuery="SELECT r.ZFIRSTNAME, r.ZMIDDLENAME, r.ZLASTNAME, r.ZMAIDENNAME, r.ZNICKNAME, r.ZJOBTITLE, r.ZORGANIZATION, r.ZSORTINGLASTNAME, r.ZUNIQUEID,
+(SELECT JSON_GROUP_ARRAY(p.ZFULLNUMBER) FROM ZABCDPHONENUMBER p WHERE p.ZOWNER = r.Z_PK) AS ZPHONENUMBER,
+(SELECT GROUP_CONCAT(e.ZADDRESSNORMALIZED, ' ') FROM ZABCDEMAILADDRESS e WHERE e.ZOWNER = r.Z_PK) AS ZEMAILADDRESS,
+(SELECT GROUP_CONCAT(a.ZSTREET, ' ') FROM ZABCDPOSTALADDRESS a WHERE a.ZOWNER = r.Z_PK) AS ZSTREET,
+(SELECT GROUP_CONCAT(n.ZTEXT, ' ') FROM ZABCDNOTE n WHERE n.ZCONTACT = r.Z_PK) AS ZTEXT
 FROM ZABCDRECORD r
-LEFT JOIN ZABCDPHONENUMBER p ON p.ZOWNER = r.Z_PK
-LEFT JOIN ZABCDEMAILADDRESS e ON e.ZOWNER = r.Z_PK
-LEFT JOIN ZABCDPOSTALADDRESS a ON a.ZOWNER = r.Z_PK
-LEFT JOIN ZABCDNOTE n ON n.ZCONTACT = r.Z_PK
-GROUP BY r.ZUNIQUEID;"
+WHERE r.ZUNIQUEID LIKE '%ABPerson';"
 
 # Load Contacts
-find "${contacts_dir}" -name "AddressBook-v22.abcddb" \
--exec echo '[{"ABpath": "{}", "data":' \; \
--exec sqlite3 -json {} "${sqlQuery}" \; \
--exec echo "}]" \; |
+dbs=("${contacts_dir}"/**/"AddressBook-v22.abcddb"(N))
+for db in "${dbs[@]}"; do
+    dir="${db:h}"
+    sqlite3 -json "${db}" "SELECT '${dir//\'/\'\'}' as ABpath, ${sqlQuery#SELECT}"
+done |
 jq -cs \
    --argjson useJobTitle "${useJobTitle}" \
    --argjson useOrganization "${useOrganization}" \
@@ -22,10 +23,8 @@ jq -cs \
    --argjson useNotes "${useNotes}" \
    --argjson sortBy "${sortBy}" \
 '{
-    "items": (if (length > 0) then walk(if . == "" then null end) |
-    map((.[].ABpath[:-23]) as $ABpath | .[].data[] | select(.ZUNIQUEID | endswith("ABPerson")) |
-        (.ZPHONENUMBER | fromjson | join(" ") | gsub("(\\(|\\))"; "")) as $PHONES |
-        (.ZEMAILADDRESS | fromjson | join(" ")) as $EMAILS |
+    "items": (if (length > 0) then
+    map(.[] |
         (if (.ZORGANIZATION != null and .ZFIRSTNAME == null and .ZLASTNAME == null) then false else true end) as $isNotORG |
         (if (.ZORGANIZATION == null and .ZFIRSTNAME == null and .ZLASTNAME == null) then "No Name" elif $isNotORG then ([.ZFIRSTNAME, .ZLASTNAME] | map(select(.)) | join(" ")) else .ZORGANIZATION end) as $title |
     	{
@@ -37,12 +36,15 @@ jq -cs \
                 $title, .ZMIDDLENAME, .ZMAIDENNAME, .ZNICKNAME,
                 (if $useJobTitle == 1 then .ZJOBTITLE else empty end),
                 (if $useOrganization == 1 then .ZORGANIZATION else empty end),
-                (if $usePhone == 1 then ($PHONES | .+" "+gsub("[^0-9]"; "")) else empty end),
-                (if $useEmail == 1 then $EMAILS else empty end),
+                (if $usePhone == 1 then (
+                    .ZPHONENUMBER | fromjson[] // empty |
+                    gsub("[()]"; "")+" "+gsub("[^0-9]"; "")+" "+gsub("\\+[0-9]+ |[^0-9]"; "")
+                ) else empty end),
+                (if $useEmail == 1 then .ZEMAILADDRESS else empty end),
                 (if $useStreet == 1 then .ZSTREET else empty end),
                 (if $useNotes == 1 then .ZTEXT else empty end)
             ] | map(select(.)) | join(" "),
-            "variables": {"ABpath": $ABpath},
+            "variables": {"ABpath": .ABpath},
             "sortindex": (if $title != "No Name" then (if $sortBy == 0 then $title else .ZSORTINGLASTNAME end) else "~" end)
     	}
     ) | sort_by(.sortindex) else
