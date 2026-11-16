@@ -7,6 +7,7 @@ local wf = hs.window.filter
 
 ---ZOOM------------------------------------------------------------------
 M.wf_zoom = wf.new({ "Zoom", "zoom.us" }):subscribe(wf.windowCreated, function(_newWin)
+	print("🪚 🟩")
 	U.defer({ 0, 3 }, function()
 		local zoom = assert(U.app("Zoom") or U.app("zoom.us"))
 		if zoom:findWindow("Update") or not zoom:findWindow("Zoom Meeting") then return end
