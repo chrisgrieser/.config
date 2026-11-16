@@ -7,13 +7,13 @@ local wf = hs.window.filter
 
 ---ZOOM------------------------------------------------------------------
 M.wf_zoom = wf.new({ "Zoom", "zoom.us" }):subscribe(wf.windowCreated, function(_newWin)
-	print("🪚 🟩")
-	U.defer({ 0, 3 }, function()
-		local zoom = assert(U.app("Zoom") or U.app("zoom.us"))
+	local zoom = assert(U.app("Zoom") or U.app("zoom.us"))
+
+	U.defer({ 5, 10 }, function() -- window is only renamed "Zoom Meeting" after a bit
 		if zoom:findWindow("Update") or not zoom:findWindow("Zoom Meeting") then return end
 
 		U.closeBrowserTabsWith("zoom.us")
-		local mainWin = zoom:findWindow("Login") or zoom:findWindow("Zoom Workspace")
+		local mainWin = zoom:findWindow("Login") or zoom:findWindow("Zoom Workplace")
 		if mainWin then mainWin:close() end
 	end)
 end)
@@ -76,10 +76,13 @@ M.aw_masto = aw.new(function(appName, event, masto)
 		local frontApp = hs.application.frontmostApplication()
 		for _, win in pairs(masto:allWindows()) do
 			local isMediaWin = win:title():find("^Image") or win:title():find("^Ivory$")
-			local frontNotAlfred = frontApp and frontApp:name() ~= "Alfred" or true
+			local frontNotAlfred = frontApp and frontApp:name() ~= "Alfred"
 			if #masto:allWindows() > 1 and isMediaWin and frontNotAlfred then
 				pcall(function() win:close() end)
-				hs.eventtap.keyStroke({}, "escape", 1, masto) -- `win:close()` sometimes does not work
+
+				-- `win:close()` sometimes does not work
+				win:focus()
+				hs.eventtap.keyStroke({}, "escape", 1, masto)
 			end
 		end
 
