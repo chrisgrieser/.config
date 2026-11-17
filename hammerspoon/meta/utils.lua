@@ -239,12 +239,16 @@ end
 ---close all tabs instead of closing all windows to avoid confirmation prompt
 ---"do you really want to x tabs?"
 ---@param urlPart string|"all"
----@param except? string
-function U.closeBrowserTabsWith(urlPart, except)
+---@param except1? string
+---@param except2? string
+---@param except3? string
+function U.closeBrowserTabsWith(urlPart, except1, except2, except3)
 	local browser = "Brave Browser" -- config
 	if not U.app(browser) then return end
 
-	if not except then except = "__NEVER__" end
+	if not except1 then except1 = "__NEVER__" end
+	if not except2 then except2 = "__NEVER__" end
+	if not except3 then except3 = "__NEVER__" end
 	if urlPart == "all" then urlPart = "." end
 
 	local script = ([[
@@ -253,7 +257,7 @@ function U.closeBrowserTabsWith(urlPart, except)
 				set tabsToClose to {}
 
 				repeat with theTab in every tab in win
-					if (URL of theTab contains %q) and (URL of theTab does not contain %q) then
+					if (URL of theTab contains %q) and (URL of theTab does not contain %q) and (URL of theTab does not contain %q) and (URL of theTab does not contain %q) then
 						set end of tabsToClose to theTab
 					end if
 				end repeat
@@ -263,7 +267,7 @@ function U.closeBrowserTabsWith(urlPart, except)
 				end repeat
 			end repeat
 		end tell
-	]]):format(browser, urlPart, except)
+	]]):format(browser, urlPart, except1, except2, except3)
 	hs.osascript.applescript(script)
 
 	require("win-management.auto-tile").resetWinCount(browser)

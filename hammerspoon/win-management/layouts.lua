@@ -120,7 +120,7 @@ local function movieLayout()
 
 	-- for when resetting movie layout
 	if M.currentLayout == "movie" then
-		U.closeBrowserTabsWith("all", "youtube")
+		U.closeBrowserTabsWith("all", "youtube", "netflix", "crunchyroll")
 		U.quitApps("IINA")
 		U.closeAllFinderWins()
 	end
