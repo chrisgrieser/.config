@@ -100,7 +100,7 @@ local function movieLayout()
 	print("🔲 Layout: movie")
 	M.currentLayout = "movie"
 	dockSwitcher("movie")
-	music.music_trigger("stop-music-and-lights-off")
+	music.music_trigger("stop-music-and-lights-off", "no-notification")
 
 	-- turn off showing hidden files
 	hs.execute("defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder")

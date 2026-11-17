@@ -36,27 +36,25 @@ end
 local function setSignForMark(mark)
 	local row, _, bufnr, path = unpack(vim.api.nvim_get_mark(mark, {}))
 	if path == nil or path == "" then return end -- mark not set
+	local m = { row = row, bufnr = bufnr, path = vim.fs.normalize(path) }
 
 	local function setExtmark(buf, line, ma)
-		Chainsaw(line) -- 🪚
-		Chainsaw(buf) -- 🪚
 		vim.api.nvim_buf_set_extmark(buf, ns, line - 1, 0, {
 			sign_text = config.signIcons[ma] or ma,
 			sign_hl_group = config.signHlGroup,
 		})
 	end
 
-	local fileAlreadyOpened = bufnr ~= 0
+	local fileAlreadyOpened = (bufnr ~= 0) and vim.api.nvim_buf_is_loaded(m.bufnr)
 	if fileAlreadyOpened then
-		setExtmark(bufnr, row, mark)
+		setExtmark(m.bufnr, m.row, mark)
 	else
-		vim.api.nvim_create_autocmd("BufReadPost", {
+		vim.api.nvim_create_autocmd({ "BufReadPost", "BufEnter" }, {
 			desc = "User(once): Add signs for mark " .. mark,
 			callback = function(ctx)
-				if ctx.file == path then
-					vim.schedule(function()
-						setExtmark(ctx.buf, row, mark)
-					end)
+				local triggeredPath = vim.fs.normalize(ctx.file)
+				if triggeredPath == m.path then
+					setExtmark(ctx.buf, row, mark)
 					return true -- delete this autocmd
 				end
 			end,

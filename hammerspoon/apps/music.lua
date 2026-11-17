@@ -5,14 +5,17 @@ local aw = hs.application.watcher
 --------------------------------------------------------------------------------
 
 ---@param action "pause"|"play"|"stop-music-and-lights-off"
-M.music_trigger = function(action)
+---@param noNotification? "no-notification"
+M.music_trigger = function(action, noNotification)
 	local alexaTrigger = os.getenv("HOME")
 		.. "/Library/Mobile Documents/com~apple~CloudDocs/Tech/alexa/virtual-trigger"
 	if not U.isExecutableFile(alexaTrigger) then return end
 	print("🎵 Music: " .. action)
 
 	if M.music_task and M.music_task:isRunning() then M.music_task:terminate() end
-	M.music_task = hs.task.new(alexaTrigger, nil, { action, "silent" }):start()
+	local args = { action, "silent" }
+	if noNotification then args[2] = "no-notification" end
+	M.music_task = hs.task.new(alexaTrigger, nil, args):start()
 end
 
 -- auto-pause/resume music on launch/quit of apps with sound or on Steam games
