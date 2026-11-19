@@ -8,6 +8,32 @@
 	<string>⬇️</string>
 	<key>connections</key>
 	<dict>
+		<key>10013B8D-A867-4702-BCA8-E8268F019CCB</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>1F6B544A-64C9-40FD-B1E1-7133360D546F</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>1094B22B-61C2-4979-83D0-47D0D7B313BC</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>A05B9991-1BE1-4677-B68E-BFDB1DBB6055</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>110BF933-5ADA-415B-BF50-6678C63E7516</key>
 		<array>
 			<dict>
@@ -72,6 +98,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>1F6B544A-64C9-40FD-B1E1-7133360D546F</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>B483F323-89B9-47BC-96D9-6F8B27D65299</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>26C19E9C-7171-4CBF-A199-3FB8EFA276EB</key>
 		<array>
 			<dict>
@@ -81,6 +120,33 @@
 				<integer>0</integer>
 				<key>modifiersubtext</key>
 				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>370FB1B6-8C04-4525-B7C3-6DAE9830C26E</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>1094B22B-61C2-4979-83D0-47D0D7B313BC</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>764B2C6F-E0DF-43B2-8C6F-12DFD719AEBB</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>10013B8D-A867-4702-BCA8-E8268F019CCB</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>8EE3E835-F7A9-4296-9CAB-08CE38BD243C</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -137,6 +203,46 @@
 				<false/>
 			</dict>
 		</array>
+		<key>A0394D21-9C2D-4445-B2F6-5F6AC2D66566</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>A05B9991-1BE1-4677-B68E-BFDB1DBB6055</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>B483F323-89B9-47BC-96D9-6F8B27D65299</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>A0394D21-9C2D-4445-B2F6-5F6AC2D66566</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>AC1A49A2-F7E4-4E48-AB56-1244222E9313</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>1B98260D-6459-4AB1-AA8F-3198EE279196</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>75F7FFBB-43E3-441C-AA83-F4A0A5E0D934</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>C1132036-7887-4A07-931C-9B346E04D969</key>
 		<array>
 			<dict>
@@ -151,13 +257,13 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>A05B9991-1BE1-4677-B68E-BFDB1DBB6055</string>
+				<string>370FB1B6-8C04-4525-B7C3-6DAE9830C26E</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
 				<string></string>
 				<key>vitoclose</key>
-				<false/>
+				<true/>
 			</dict>
 			<dict>
 				<key>destinationuid</key>
@@ -194,6 +300,27 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<true/>
+				<key>skipvarencode</key>
+				<true/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>A05B9991-1BE1-4677-B68E-BFDB1DBB6055</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>matchmode</key>
 				<integer>1</integer>
 				<key>matchstring</key>
@@ -205,12 +332,30 @@
 				<key>replacestring</key>
 				<string>alfred://gallery/workflow/$1/$2/</string>
 			</dict>
+			<key>inboundconfig</key>
+			<dict>
+				<key>externalid</key>
+				<string>install</string>
+			</dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.replace</string>
 			<key>uid</key>
 			<string>7094BDA6-222F-4626-AC67-26A7B201F91C</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>unstackview</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.hidealfred</string>
+			<key>uid</key>
+			<string>1094B22B-61C2-4979-83D0-47D0D7B313BC</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -298,21 +443,166 @@ show_data</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<true/>
-				<key>skipvarencode</key>
-				<true/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string></string>
+				<key>matchmode</key>
+				<integer>1</integer>
+				<key>matchstring</key>
+				<string>(https:\/\/alfred\.app\/workflows\/.+)/bare/$</string>
+				<key>regexcaseinsensitive</key>
+				<false/>
+				<key>regexmultiline</key>
+				<false/>
+				<key>replacestring</key>
+				<string>$1</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
+			<string>alfred.workflow.utility.replace</string>
 			<key>uid</key>
-			<string>A05B9991-1BE1-4677-B68E-BFDB1DBB6055</string>
+			<string>A0394D21-9C2D-4445-B2F6-5F6AC2D66566</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string>{var:open_in}</string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string>browser</string>
+						<key>outputlabel</key>
+						<string>Web Browser</string>
+						<key>uid</key>
+						<string>764B2C6F-E0DF-43B2-8C6F-12DFD719AEBB</string>
+					</dict>
+					<dict>
+						<key>inputstring</key>
+						<string>{var:open_in}</string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string>alfred</string>
+						<key>outputlabel</key>
+						<string>Alfred</string>
+						<key>uid</key>
+						<string>8EE3E835-F7A9-4296-9CAB-08CE38BD243C</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string></string>
+				<key>hideelse</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.conditional</string>
+			<key>uid</key>
+			<string>370FB1B6-8C04-4525-B7C3-6DAE9830C26E</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>launchmode</key>
+				<integer>0</integer>
+				<key>path</key>
+				<string>browser.alfredui</string>
+				<key>stackview</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.userinterface.alfredui</string>
+			<key>uid</key>
+			<string>1F6B544A-64C9-40FD-B1E1-7133360D546F</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>externaltriggerid</key>
+				<string>install</string>
+				<key>passinputasargument</key>
+				<true/>
+				<key>passvariables</key>
+				<false/>
+				<key>workflowbundleid</key>
+				<string>self</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.callexternaltrigger</string>
+			<key>uid</key>
+			<string>1B98260D-6459-4AB1-AA8F-3198EE279196</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string>{var:navigate}</string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>5</integer>
+						<key>matchstring</key>
+						<string></string>
+						<key>outputlabel</key>
+						<string>Navigate</string>
+						<key>uid</key>
+						<string>AC1A49A2-F7E4-4E48-AB56-1244222E9313</string>
+					</dict>
+					<dict>
+						<key>inputstring</key>
+						<string>{var:install}</string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>5</integer>
+						<key>matchstring</key>
+						<string></string>
+						<key>outputlabel</key>
+						<string>Install</string>
+						<key>uid</key>
+						<string>75F7FFBB-43E3-441C-AA83-F4A0A5E0D934</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string></string>
+				<key>hideelse</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.conditional</string>
+			<key>uid</key>
+			<string>B483F323-89B9-47BC-96D9-6F8B27D65299</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string>{query}bare/</string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>10013B8D-A867-4702-BCA8-E8268F019CCB</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -503,27 +793,6 @@ show_data</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>count</key>
-				<integer>1</integer>
-				<key>keychar</key>
-				<string>v</string>
-				<key>keycode</key>
-				<integer>-1</integer>
-				<key>keymod</key>
-				<integer>1048576</integer>
-				<key>overridewithargument</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.dispatchkeycombo</string>
-			<key>uid</key>
-			<string>7DB13E9D-A3F7-4C81-A531-65213697473C</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -562,6 +831,27 @@ function run(argv) {
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>count</key>
+				<integer>1</integer>
+				<key>keychar</key>
+				<string>v</string>
+				<key>keycode</key>
+				<integer>-1</integer>
+				<key>keymod</key>
+				<integer>1048576</integer>
+				<key>overridewithargument</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.dispatchkeycombo</string>
+			<key>uid</key>
+			<string>7DB13E9D-A3F7-4C81-A531-65213697473C</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>## Usage
@@ -570,99 +860,155 @@ Search workflows in the [Alfred Gallery](https://alfred.app/) via the `gallery` 
 
 ![Searching for alfredapp workflows](images/about/gallery.png)
 
-* &lt;kbd&gt;↩&lt;/kbd&gt; Open workflow’s Gallery page in default browser.
+* &lt;kbd&gt;↩&lt;/kbd&gt; Open workflow’s Gallery page.
 * &lt;kbd&gt;⌃&lt;/kbd&gt; Show tags.
 * &lt;kbd&gt;⌘&lt;/kbd&gt;&lt;kbd&gt;↩&lt;/kbd&gt; Install workflow.
 * &lt;kbd&gt;⌥&lt;/kbd&gt;&lt;kbd&gt;↩&lt;/kbd&gt; Narrow search to creator’s name.
 * &lt;kbd&gt;⇧&lt;/kbd&gt;&lt;kbd&gt;↩&lt;/kbd&gt; Paste link to workflow’s Gallery page.
-* &lt;kbd&gt;⌘&lt;/kbd&gt;&lt;kbd&gt;Y&lt;/kbd&gt; [Quick Look](https://www.alfredapp.com/help/features/previews/) workflow’s Gallery page.</string>
+* &lt;kbd&gt;⌘&lt;/kbd&gt;&lt;kbd&gt;Y&lt;/kbd&gt; [Quick Look](https://www.alfredapp.com/help/features/previews/) workflow’s Gallery page.
+
+By default, workflow Gallery pages open in a webview. You can change this in the [Workflow’s Configuration](https://www.alfredapp.com/help/workflows/user-configuration/)
+
+![Viewing gallery page in web view](images/about/webview.png)
+
+* &lt;kbd&gt;↩&lt;/kbd&gt; Install workflow.
+* &lt;kbd&gt;⌘&lt;/kbd&gt;&lt;kbd&gt;O&lt;/kbd&gt; Open in web browser.</string>
 	<key>uidata</key>
 	<dict>
+		<key>10013B8D-A867-4702-BCA8-E8268F019CCB</key>
+		<dict>
+			<key>xpos</key>
+			<real>575</real>
+			<key>ypos</key>
+			<real>235</real>
+		</dict>
+		<key>1094B22B-61C2-4979-83D0-47D0D7B313BC</key>
+		<dict>
+			<key>xpos</key>
+			<real>680</real>
+			<key>ypos</key>
+			<real>120</real>
+		</dict>
 		<key>110BF933-5ADA-415B-BF50-6678C63E7516</key>
 		<dict>
 			<key>xpos</key>
-			<real>120</real>
+			<real>145</real>
 			<key>ypos</key>
-			<real>380</real>
+			<real>430</real>
 		</dict>
 		<key>1944B7E1-9267-43A6-BEC7-761A44CF1A9D</key>
 		<dict>
 			<key>xpos</key>
-			<real>260</real>
+			<real>315</real>
 			<key>ypos</key>
-			<real>270</real>
+			<real>320</real>
+		</dict>
+		<key>1B98260D-6459-4AB1-AA8F-3198EE279196</key>
+		<dict>
+			<key>xpos</key>
+			<real>995</real>
+			<key>ypos</key>
+			<real>205</real>
+		</dict>
+		<key>1F6B544A-64C9-40FD-B1E1-7133360D546F</key>
+		<dict>
+			<key>xpos</key>
+			<real>640</real>
+			<key>ypos</key>
+			<real>205</real>
 		</dict>
 		<key>26C19E9C-7171-4CBF-A199-3FB8EFA276EB</key>
 		<dict>
 			<key>xpos</key>
-			<real>260</real>
+			<real>315</real>
 			<key>ypos</key>
-			<real>345</real>
+			<real>395</real>
+		</dict>
+		<key>370FB1B6-8C04-4525-B7C3-6DAE9830C26E</key>
+		<dict>
+			<key>xpos</key>
+			<real>450</real>
+			<key>ypos</key>
+			<real>175</real>
 		</dict>
 		<key>40B2D9B9-88EC-4625-A13E-6B7FE9D93544</key>
 		<dict>
 			<key>xpos</key>
-			<real>260</real>
+			<real>315</real>
 			<key>ypos</key>
-			<real>405</real>
+			<real>455</real>
 		</dict>
 		<key>4BE96382-7EA0-462F-AC7C-5C7B6FB665F7</key>
 		<dict>
 			<key>xpos</key>
-			<real>220</real>
+			<real>275</real>
 			<key>ypos</key>
-			<real>535</real>
+			<real>585</real>
 		</dict>
 		<key>5561BC08-DCC3-4D17-A02B-DEF205CFC0D7</key>
 		<dict>
 			<key>xpos</key>
-			<real>260</real>
+			<real>315</real>
 			<key>ypos</key>
-			<real>465</real>
+			<real>515</real>
 		</dict>
 		<key>7094BDA6-222F-4626-AC67-26A7B201F91C</key>
 		<dict>
 			<key>xpos</key>
-			<real>260</real>
+			<real>315</real>
 			<key>ypos</key>
-			<real>40</real>
+			<real>90</real>
 		</dict>
 		<key>7DB13E9D-A3F7-4C81-A531-65213697473C</key>
 		<dict>
 			<key>note</key>
 			<string>Fake the key combo to maintain the pasteboard type.</string>
 			<key>xpos</key>
-			<real>380</real>
+			<real>435</real>
 			<key>ypos</key>
-			<real>535</real>
+			<real>585</real>
+		</dict>
+		<key>A0394D21-9C2D-4445-B2F6-5F6AC2D66566</key>
+		<dict>
+			<key>xpos</key>
+			<real>905</real>
+			<key>ypos</key>
+			<real>165</real>
 		</dict>
 		<key>A05B9991-1BE1-4677-B68E-BFDB1DBB6055</key>
 		<dict>
 			<key>xpos</key>
-			<real>380</real>
+			<real>995</real>
 			<key>ypos</key>
-			<real>105</real>
+			<real>60</real>
+		</dict>
+		<key>B483F323-89B9-47BC-96D9-6F8B27D65299</key>
+		<dict>
+			<key>xpos</key>
+			<real>805</real>
+			<key>ypos</key>
+			<real>225</real>
 		</dict>
 		<key>B86A2A59-EC47-4F6C-A5E9-53568182A305</key>
 		<dict>
 			<key>xpos</key>
-			<real>380</real>
+			<real>435</real>
 			<key>ypos</key>
-			<real>375</real>
+			<real>425</real>
 		</dict>
 		<key>C1132036-7887-4A07-931C-9B346E04D969</key>
 		<dict>
 			<key>xpos</key>
-			<real>55</real>
+			<real>80</real>
 			<key>ypos</key>
-			<real>105</real>
+			<real>155</real>
 		</dict>
 		<key>CE0326DC-6B4D-4366-867C-CC3A09F9B44D</key>
 		<dict>
 			<key>xpos</key>
-			<real>380</real>
+			<real>435</real>
 			<key>ypos</key>
-			<real>240</real>
+			<real>290</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
@@ -722,9 +1068,35 @@ Search workflows in the [Alfred Gallery](https://alfred.app/) via the `gallery` 
 			<key>variable</key>
 			<string>link_format</string>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>alfred</string>
+				<key>pairs</key>
+				<array>
+					<array>
+						<string>Alfred</string>
+						<string>alfred</string>
+					</array>
+					<array>
+						<string>Default Web Browser</string>
+						<string>browser</string>
+					</array>
+				</array>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>Open Pages In</string>
+			<key>type</key>
+			<string>popupbutton</string>
+			<key>variable</key>
+			<string>open_in</string>
+		</dict>
 	</array>
 	<key>version</key>
-	<string>25.2</string>
+	<string>26.1</string>
 	<key>webaddress</key>
 	<string>https://github.com/alfredapp/alfred-gallery-workflow/</string>
 </dict>

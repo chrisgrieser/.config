@@ -1,0 +1,5 @@
+#!/usr/bin/osascript -l JavaScript
+
+function run(argv) {
+  if (argv[0] === "0") return JSON.stringify({ update: { ids: { installbutton: { enabled: false }}}})
+}

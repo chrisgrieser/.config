@@ -1,0 +1,65 @@
+{
+  "log": { "level": "info", "internal": true },
+  "variablesconfig": {
+    "url": { "src": "args[0]" },
+    "direct_install": { "src": "variable" }
+  },
+  "window": {
+    "size": { "width": 820, "height": 800 },
+    "root": {
+      "events": [{
+        "triggers": "preload",
+        "action": { "type": "script", "src": "installable", "args": "{var:direct_install}" }
+      }],
+      "type": "view",
+      "layout": "border",
+      "components": [
+        {
+          "constraints": { "region": "centre" },
+          "id": "webview",
+          "type": "webkitview",
+          "src": "{var:url}",
+          "openlinksexternally": "^(?!.*/install/?$).*",
+          "focus": true
+        },
+        {
+          "constraints": { "region": "bottom", "position": "right" },
+          "type": "view",
+          "layout": "inline",
+          "direction": "horizontal",
+          "spacing": 8,
+          "padding": 8,
+          "components": [
+            {
+              "type": "button",
+              "text": "Open in web browser",
+              "shortcut": "⌘O",
+              "tooltip": "⌘O",
+              "events": [{
+                "action": {
+                  "type": "json",
+                  "variables": { "url": "{value:webview.src}" },
+                  "src": { "finish": { "args": "{var:url}", "variables": { "navigate": true } } }
+                }
+              }]
+            },
+            {
+              "id": "installbutton",
+              "type": "button",
+              "text": "Install workflow",
+              "shortcut": "↩",
+              "tooltip": "↩",
+              "events": [{
+                "action": {
+                  "type": "json",
+                  "variables": { "url": "{value:webview.src}" },
+                  "src": { "finish": { "args": "{var:url}", "variables": { "install": true } } }
+                }
+              }]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
