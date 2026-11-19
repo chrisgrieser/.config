@@ -1,0 +1,288 @@
+#!/usr/bin/osascript -l JavaScript
+
+class Transformer {
+  constructor(text) {
+    this.text = text
+  }
+
+  runCommand(...args) {
+    const task = $.NSTask.alloc.init
+    const stdin = $.NSPipe.pipe
+    const stdout = $.NSPipe.pipe
+    const stderr = $.NSPipe.pipe
+
+    task.executableURL = $.NSURL.fileURLWithPath("/usr/bin/env")
+    task.arguments = args
+    task.standardInput = stdin
+    task.standardOutput = stdout
+    task.standardError = stderr
+    task.launchAndReturnError(false)
+
+    const dataIn = $(this.text).dataUsingEncoding($.NSUTF8StringEncoding)
+    stdin.fileHandleForWriting.writeDataError(dataIn, false)
+    stdin.fileHandleForWriting.closeAndReturnError(false)
+
+    const dataOut = stdout.fileHandleForReading.readDataToEndOfFileAndReturnError(false)
+    const stringOut = $.NSString.alloc.initWithDataEncoding(dataOut, $.NSUTF8StringEncoding).js
+
+    task.waitUntilExit
+
+    if (task.terminationStatus !== 0) {
+      const dataErr = stderr.fileHandleForReading.readDataToEndOfFileAndReturnError(false)
+      const stringErr = $.NSString.alloc.initWithDataEncoding(dataErr, $.NSUTF8StringEncoding).js
+
+      throw Error(stringErr)
+    }
+
+    return stringOut
+  }
+
+  nsStringTransform(transformation, reverse = false) {
+    return $(this.text).stringByApplyingTransformReverse(transformation, reverse).js
+  }
+
+  tokenise() {
+    return this.text
+      .replace(/([a-z])([A-Z])/g, '$1 $2')       // Split camel case and pascalCase
+      .replace(/([A-Z]+)([A-Z][a-z])/g, '$1 $2') // split acronyms
+      .replace(/[\s_\-]+/g, ' ')                 // Normalise separators
+      .trim()
+      .toLowerCase()
+      .split(' ')
+  }
+
+  get uppercase() {
+    return this.text.toUpperCase()
+  }
+
+  get lowercase() {
+    return this.text.toLowerCase()
+  }
+
+  get sort() {
+    return this.runCommand("/usr/bin/sort")
+  }
+
+  get sortReverse() {
+    return this.runCommand("/usr/bin/sort", "--reverse")
+  }
+
+  get randomiseLines() {
+    return this.runCommand("/usr/bin/sort", "--random-sort")
+  }
+
+  get camelCase() {
+    return this.tokenise()
+      .map((word, index) => index === 0 ? word : word.charAt(0).toUpperCase() + word.slice(1))
+      .join('');
+  }
+
+  get pascalCase() {
+    return this.tokenise()
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join('')
+  }
+
+  get snakeCase() {
+    return this.tokenise().join('_')
+  }
+
+  get kebabCase() {
+    return this.tokenise().join('-')
+  }
+
+  get base64Encode() {
+	  return this.runCommand("/usr/bin/base64")
+  }
+
+	get base64Decode() {
+	  return this.runCommand("/usr/bin/base64", "--decode")
+  }
+
+  get sha256Encode() {
+    return this.runCommand("/usr/bin/shasum", "--algorithm", "256").split(' ')[0]
+  }
+
+  get sha512Encode() {
+    return this.runCommand("/usr/bin/shasum", "--algorithm", "512").split(' ')[0]
+  }
+
+  get md5Encode() {
+    return this.runCommand("/sbin/md5")
+  }
+
+  get rot13Encode() {
+    return this.runCommand("/usr/bin/tr", "A-Za-z", "N-ZA-Mn-za-m")
+  }
+
+  get jsonBeautify() {
+    return JSON.stringify(JSON.parse(this.text), null, 2)
+  }
+
+  get jsonMinify() {
+    return JSON.stringify(JSON.parse(this.text))
+  }
+
+  get urlEncode() {
+    return encodeURIComponent(this.text.normalize()).replace(/[!'()*]/g, (c) => `%${c.charCodeAt(0).toString(16).toUpperCase()}`)
+  }
+
+  get urlDecode() {
+    return decodeURIComponent(this.text)
+  }
+
+  get xmlEncode() {
+    const ref = $.CFXMLCreateStringByEscapingEntities($.kCFAllocatorDefault, $(this.text), null)
+    return ObjC.castRefToObject(ref).js
+  }
+
+  get xmlDecode() {
+    const ref = $.CFXMLCreateStringByUnescapingEntities($.kCFAllocatorDefault, $(this.text), null)
+    return ObjC.castRefToObject(ref).js
+  }
+
+  get htmlEncode() {
+	  return this.runCommand("/usr/bin/perl", "-MHTML::Entities", "-pe", "encode_entities($_)")
+  }
+
+  get htmlDecode() {
+	  return this.runCommand("/usr/bin/perl", "-MHTML::Entities", "-pe", "decode_entities($_)")
+  }
+
+  get xmlHexEscape() {
+    return this.nsStringTransform($.NSStringTransformToXMLHex)
+  }
+
+  get xmlHexUnescape() {
+    return this.nsStringTransform($.NSStringTransformToXMLHex, true)
+  }
+
+  get unicodeCharToName() {
+    return this.nsStringTransform($.NSStringTransformToUnicodeName)
+  }
+
+  get unicodeNameToChar() {
+    return this.nsStringTransform($.NSStringTransformToUnicodeName, true)
+  }
+
+  get stripDiacritics() {
+    return this.nsStringTransform($.NSStringTransformStripDiacritics)
+  }
+
+  get stripCombiningMarks() {
+    return this.nsStringTransform($.NSStringTransformStripCombiningMarks)
+  }
+
+  get transliterateToLatin() {
+    return this.nsStringTransform($.NSStringTransformToLatin)
+  }
+
+  get latinToArabic() {
+    return this.nsStringTransform($.NSStringTransformLatinToArabic)
+  }
+
+  get arabicToLatin() {
+    return this.nsStringTransform($.NSStringTransformLatinToArabic, true)
+  }
+
+  get latinToCyrillic() {
+    return this.nsStringTransform($.NSStringTransformLatinToCyrillic)
+  }
+
+  get cyrillicToLatin() {
+    return this.nsStringTransform($.NSStringTransformLatinToCyrillic, true)
+  }
+
+  get latinToGreek() {
+    return this.nsStringTransform($.NSStringTransformLatinToGreek)
+  }
+
+  get greekToLatin() {
+    return this.nsStringTransform($.NSStringTransformLatinToGreek, true)
+  }
+
+  get latinToHangul() {
+    return this.nsStringTransform($.NSStringTransformLatinToHangul)
+  }
+
+  get hangulToLatin() {
+    return this.nsStringTransform($.NSStringTransformLatinToHangul, true)
+  }
+
+  get latinToHebrew() {
+    return this.nsStringTransform($.NSStringTransformLatinToHebrew)
+  }
+
+  get hebrewToLatin() {
+    return this.nsStringTransform($.NSStringTransformLatinToHebrew, true)
+  }
+
+  get latinToHiragana() {
+    return this.nsStringTransform($.NSStringTransformLatinToHiragana)
+  }
+
+  get hiraganaToLatin() {
+    return this.nsStringTransform($.NSStringTransformLatinToHiragana, true)
+  }
+
+  get latinToKatakana() {
+    return this.nsStringTransform($.NSStringTransformLatinToKatakana)
+  }
+
+  get katakanaToLatin() {
+    return this.nsStringTransform($.NSStringTransformLatinToKatakana, true)
+  }
+
+  get latinToThai() {
+    return this.nsStringTransform($.NSStringTransformLatinToThai)
+  }
+
+  get thaiToLatin() {
+    return this.nsStringTransform($.NSStringTransformLatinToThai, true)
+  }
+
+  get hiraganaToKatakana() {
+    return this.nsStringTransform($.NSStringTransformHiraganaToKatakana)
+  }
+
+  get katakanaToHiragana() {
+    return this.nsStringTransform($.NSStringTransformHiraganaToKatakana, true)
+  }
+
+  get mandarinToLatin() {
+    return this.nsStringTransform($.NSStringTransformMandarinToLatin)
+  }
+
+  get cjkFullToHalf() {
+    return this.nsStringTransform($.NSStringTransformFullwidthToHalfwidth)
+  }
+
+  get cjkHalfToFull() {
+    return this.nsStringTransform($.NSStringTransformFullwidthToHalfwidth, true)
+  }
+}
+
+function run(argv) {
+  const transformationName = argv[0]
+  const textInput = argv[1]
+  const rewriteInput = argv[2] === "1"
+
+  try {
+    if (transformationName.length === 0) throw Error("No transformation selected")
+
+    const transformer = new Transformer(textInput)
+    const textOutput = transformer[transformationName]
+
+    if (typeof textOutput !== "string") throw Error("Failed to generate textual output")
+
+    return JSON.stringify({ update: { ids: {
+      ...(rewriteInput && { textInput: { text: textInput } }),
+      textOutput: { text: textOutput.trimEnd(), colour: "textColor" }
+    } } })
+  } catch(error) {
+    return JSON.stringify({ update: { ids: {
+      ...(rewriteInput && { textInput: { text: textInput } }),
+      textOutput: { text: error.message, colour: "systemRedColor" }
+    } } })
+  }
+}

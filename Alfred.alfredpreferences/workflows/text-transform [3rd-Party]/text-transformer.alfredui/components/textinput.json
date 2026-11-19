@@ -1,0 +1,20 @@
+{
+  "constraints": { "grid": { "row": 0, "col": 0, "colweight": 0.5 } },
+  "id": "textInput",
+  "type": "textarea",
+  "text": "{var:input_query}",
+  "textinsets": { "vertical": 10, "horizontal": 10 },
+  "font": { "monospaced": true },
+  "background": "#00000033",
+  "events": [{
+    "triggers": "changed",
+    "action": {
+      "type": "script",
+      "src": "transform",
+      "args": [
+        "{value:transformations.selected.function}",
+        "{value:self.text}"
+      ]
+    }
+  }]
+}

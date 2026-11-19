@@ -1,1 +1,0 @@
-/Users/chrisgrieser/.config/jxa-globals.d.ts

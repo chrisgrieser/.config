@@ -1,0 +1,10 @@
+{
+  "constraints": { "grid": { "row": 0, "col": 2, "colweight": 0.5 } },
+  "id": "textOutput",
+  "type": "textarea",
+  "text": "",
+  "textinsets": { "vertical": 10, "horizontal": 10 },
+  "font": { "monospaced": true },
+  "background": "#00000033",
+  "editable": false
+}

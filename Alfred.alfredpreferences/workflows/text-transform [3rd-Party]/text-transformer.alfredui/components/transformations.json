@@ -1,0 +1,256 @@
+{
+  "constraints": { "region": "centre" },
+  "id": "transformations",
+  "type": "dataview",
+  "events": [{
+    "triggers": "changed",
+    "action": {
+      "type": "script",
+      "src": "transform",
+      "args": [
+        "{value:self.selected.function}",
+        "{value:textInput.text}"
+      ]
+    }
+  }],
+  "behaviour":  { "selection": { "wrap": "vertical" } },
+  "cell": {
+    "height": 32,
+    "init": {
+      "transformationcell.background": null,
+      "title.colour": "secondaryLabelColor"
+    },
+    "selected": {
+      "transformationcell.background": "alfredSelectedResultBackgroundColor",
+      "title.colour": "alfredSelectedResultTextColor"
+    },
+    "root": {
+      "id": "transformationcell",
+      "type": "view",
+      "layout": "stack",
+      "cornerradius": 8,
+      "components": [
+        {
+          "constraints": { "position": "centre", "stretch": "horizontal", "insets": { "left": 8 } },
+          "id": "title",
+          "type": "label",
+          "font": { "size": 16 }
+        }
+      ]
+    }
+  },
+  "data": {
+    "filter": {
+      "type": "basic",
+      "args": "title.text",
+      "match": "{value:searchField.text}",
+      "matchmode": "wordmatchanyorder"
+    },
+    "src": [
+      {
+        "title.text": "Uppercase",
+        "function": "uppercase"
+      },
+      {
+        "title.text": "Lowercase",
+        "function": "lowercase"
+      },
+      {
+        "title.text": "Sort Lines",
+        "function": "sort"
+      },
+      {
+        "title.text": "Sort Lines Reversed",
+        "function": "sortReverse"
+      },
+      {
+        "title.text": "Randomise Lines",
+        "function": "randomiseLines"
+      },
+      {
+        "title.text": "Camel Case",
+        "function": "camelCase"
+      },
+      {
+        "title.text": "Pascal Case",
+        "function": "pascalCase"
+      },
+      {
+        "title.text": "Snake Case",
+        "function": "snakeCase"
+      },
+      {
+        "title.text": "Kebab Case",
+        "function": "kebabCase"
+      },
+      {
+        "title.text": "Base64 Encode",
+        "function": "base64Encode"
+      },
+      {
+        "title.text": "Base64 Decode",
+        "function": "base64Decode"
+      },
+      {
+        "title.text": "SHA-256 Encode",
+        "function": "sha256Encode"
+      },
+      {
+        "title.text": "SHA-512 Encode",
+        "function": "sha512Encode"
+      },
+      {
+        "title.text": "MD5 Encode",
+        "function": "md5Encode"
+      },
+      {
+        "title.text": "ROT13 Encode",
+        "function": "rot13Encode"
+      },
+      {
+        "title.text": "JSON Beautify",
+        "function": "jsonBeautify"
+      },
+      {
+        "title.text": "JSON Minify",
+        "function": "jsonMinify"
+      },
+      {
+        "title.text": "URL Encode",
+        "function": "urlEncode"
+      },
+      {
+        "title.text": "URL Decode",
+        "function": "urlDecode"
+      },
+      {
+        "title.text": "XML Encode",
+        "function": "xmlEncode"
+      },
+      {
+        "title.text": "XML Decode",
+        "function": "xmlDecode"
+      },
+      {
+        "title.text": "HTML Encode",
+        "function": "htmlEncode"
+      },
+      {
+        "title.text": "HTML Decode",
+        "function": "htmlDecode"
+      },
+      {
+        "title.text": "XML to Hex Escape Codes",
+        "function": "xmlHexEscape"
+      },
+      {
+        "title.text": "Hex Escape Codes to XML",
+        "function": "xmlHexUnescape"
+      },
+      {
+        "title.text": "Unicode Character to Name",
+        "function": "unicodeCharToName"
+      },
+      {
+        "title.text": "Unicode Name to Character",
+        "function": "unicodeNameToChar"
+      },
+      {
+        "title.text": "Strip Diacritics",
+        "function": "stripDiacritics"
+      },
+      {
+        "title.text": "Strip Combining Marks",
+        "function": "stripCombiningMarks"
+      },
+      {
+        "title.text": "Transliterate to Latin",
+        "function": "transliterateToLatin"
+      },
+      {
+        "title.text": "Latin to Arabic",
+        "function": "latinToArabic"
+      },
+      {
+        "title.text": "Arabic to Latin",
+        "function": "arabicToLatin"
+      },
+      {
+        "title.text": "Latin to Cyrillic",
+        "function": "latinToCyrillic"
+      },
+      {
+        "title.text": "Cyrillic to Latin",
+        "function": "cyrillicToLatin"
+      },
+      {
+        "title.text": "Latin to Greek",
+        "function": "latinToGreek"
+      },
+      {
+        "title.text": "Greek to Latin",
+        "function": "greekToLatin"
+      },
+      {
+        "title.text": "Latin to Hangul",
+        "function": "latinToHangul"
+      },
+      {
+        "title.text": "Hangul to Latin",
+        "function": "hangulToLatin"
+      },
+      {
+        "title.text": "Latin to Hebrew",
+        "function": "latinToHebrew"
+      },
+      {
+        "title.text": "Hebrew to Latin",
+        "function": "hebrewToLatin"
+      },
+      {
+        "title.text": "Latin to Hiragana",
+        "function": "latinToHiragana"
+      },
+      {
+        "title.text": "Hiragana to Latin",
+        "function": "hiraganaToLatin"
+      },
+      {
+        "title.text": "Latin to Katakana",
+        "function": "latinToKatakana"
+      },
+      {
+        "title.text": "Katakana to Latin",
+        "function": "katakanaToLatin"
+      },
+      {
+        "title.text": "Latin to Thai",
+        "function": "latinToThai"
+      },
+      {
+        "title.text": "Thai to Latin",
+        "function": "thaiToLatin"
+      },
+      {
+        "title.text": "Hiragana to Katakana",
+        "function": "hiraganaToKatakana"
+      },
+      {
+        "title.text": "Katakana to Hiragana",
+        "function": "katakanaToHiragana"
+      },
+      {
+        "title.text": "Mandarin to Latin",
+        "function": "mandarinToLatin"
+      },
+      {
+        "title.text": "CJK Full-Width to Half-Width",
+        "function": "cjkFullToHalf"
+      },
+      {
+        "title.text": "CJK Half-Width to Full-Width",
+        "function": "cjkHalfToFull"
+      }
+    ]
+  }
+}

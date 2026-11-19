@@ -1,0 +1,47 @@
+{
+  "constraints": { "region": "top" },
+  "type": "view",
+  "layout": "border",
+  "padding": 8,
+  "spacing": 8,
+  "background": "#00000033",
+  "cornerradius": 8,
+  "components": [
+    {
+      "constraints": { "region": "centre" },
+      "id": "searchField",
+      "type": "textfield",
+      "placeholder": "Search",
+      "placeholdercolour": { "light": "rgb(0, 0, 0, 0.2)", "dark": "rgb(255, 255, 255, 0.2)" },
+      "bordered": false,
+      "background": null,
+      "focus": true,
+      "focusring": false,
+      "textinsets": { "horizontal": 0, "vertical": 0 },
+      "font": { "size": 16 },
+      "events": [
+        {
+          "triggers": "changed",
+          "action": { "type": "function", "src": "transformations", "args": "filterdata" }
+        },
+        {
+          "triggers": "actioned",
+          "action": { "type": "json", "src": { "finish": { "args": "{value:textOutput.text}" } } }
+        }
+      ]
+    },
+    {
+      "constraints": { "region": "right" },
+      "type": "button",
+      "shortcut": "⌘?",
+      "bordered": false,
+      "opacity": 0.2,
+      "font": { "size": 16 },
+      "image": { "type": "symbol", "src": "questionmark.circle.fill" },
+      "events": [{
+        "triggers": "actioned",
+        "action": { "type": "json", "src": "components/cheatsheet.json" }
+      }]
+    }
+  ]
+}

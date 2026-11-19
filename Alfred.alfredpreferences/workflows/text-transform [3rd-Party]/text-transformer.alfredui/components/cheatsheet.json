@@ -1,0 +1,20 @@
+{
+  "sheet": {
+    "root": {
+      "type": "view",
+      "layout": "form",
+      "padding": 32,
+      "spacing": 4,
+      "components": [
+        { "type": "label", "text": "↩" }, { "type": "label", "text": "Copy output" },
+        { "type": "label", "text": "⎋" }, { "type": "label", "text": "Close cheat sheet" },
+        { "constraints": { "size": { "width": 60, "height": 16 } } }, {},
+        { "type": "label", "text": "⌘F" }, { "type": "label", "text": "Focus search field" },
+        { "type": "label", "text": "⌘E" }, { "type": "label", "text": "Focus editor" },
+        { "constraints": { "size": { "height": 16 } } }, {},
+        { "type": "label", "text": "⌘↩" }, { "type": "label", "text": "Set output to input and rerun transformation" },
+        { "type": "label", "text": "⌘⇧↩" }, { "type": "label", "text": "Send output to Universal Actions" }
+      ]
+    }
+  }
+}

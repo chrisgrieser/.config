@@ -1,0 +1,73 @@
+{
+  "bundleid": "com.alfredapp.ui.vitor.texttransformer",
+  "log": { "level": "info", "internal": true },
+  "variablesconfig": { "input_query": { "src": "args[0]" } },
+  "window": {
+    "movablebybackground": true,
+    "size": { "width": 1000, "height": 606 },
+    "padding": 8,
+    "root": {
+      "shortcuts": [
+        {
+          "shortcut": "⌘E",
+          "action": {
+            "type": "json",
+            "src": {
+              "update": { "ids": { "textInput": { "focus": true } } },
+              "functions": { "ids": { "textInput": "caretstart" } }
+            }
+          }
+        },
+        {
+          "shortcut": "⌘F",
+          "action": { "type": "json", "src": { "update": { "ids": { "searchField": { "focus": true } } } } }
+        },
+        {
+          "shortcut": "⌘↩",
+          "action": {
+            "type": "script",
+            "src": "transform",
+            "args": [
+              "{value:transformations.selected.function}",
+              "{value:textOutput.text}",
+              "1"
+            ]
+          }
+        },
+        {
+          "shortcut": "⌘⇧↩",
+          "action": {
+            "type": "json",
+            "src": { "finish": {
+              "variables": { "universal_action": true },
+              "args": "{value:textOutput.text}"
+            } }
+          }
+        }
+      ],
+      "type": "view",
+      "layout": "flex",
+      "rows": 1,
+      "cols": 3,
+      "spacing": 8,
+      "components": [
+        "{file:components/textinput.json}",
+        "{file:components/textoutput.json}",
+        {
+          "constraints": { "size": { "width": 250 }, "grid": { "row": 0, "col": 1 } },
+          "type": "view",
+          "layout": "border",
+          "spacing": 8,
+          "shortcuts": [
+            { "shortcut": "↑", "action": { "type": "function", "src": "transformations", "args": "selectprevious" } },
+            { "shortcut": "↓", "action": { "type": "function", "src": "transformations", "args": "selectnext" } }
+          ],
+          "components": [
+            "{file:components/searchfield.json}",
+            "{file:components/transformations.json}"
+          ]
+        }
+      ]
+    }
+  }
+}
