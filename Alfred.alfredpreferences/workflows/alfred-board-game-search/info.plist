@@ -8,6 +8,19 @@
 	<string>⭐️</string>
 	<key>connections</key>
 	<dict>
+		<key>0A0DE1C3-FD3A-4F47-A6CF-C6638356B3E4</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>DEE8A1D2-4E29-4A74-B270-9AF92B587BE8</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>2FB30929-2AE9-432E-925C-110B0A3BF84E</key>
 		<array>
 			<dict>
@@ -103,20 +116,7 @@
 				<false/>
 			</dict>
 		</array>
-		<key>D9099601-000C-413E-8F04-7909EC5D4E03</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>A986BB17-B40A-456B-86BC-2C9DB867563D</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>DEE8A1D2-4E29-4A74-B270-9AF92B587BE8</key>
+		<key>D4988520-6CFD-4BB2-951A-AE28DFB3FE50</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
@@ -140,6 +140,32 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
+				<string>DEE8A1D2-4E29-4A74-B270-9AF92B587BE8</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>D9099601-000C-413E-8F04-7909EC5D4E03</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>A986BB17-B40A-456B-86BC-2C9DB867563D</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>DEE8A1D2-4E29-4A74-B270-9AF92B587BE8</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
 				<string>375D0931-85FB-4992-B85A-E8638C5CE84B</string>
 				<key>modifiers</key>
 				<integer>0</integer>
@@ -151,6 +177,36 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>F366B9F0-F152-4885-8639-D69B97BC802E</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>3919ABAC-24E8-49F5-A267-B5231949FE22</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>56D507E0-0D0E-438A-B200-6241B56C63B0</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>FE3DDD3C-9AC4-430B-828F-F9B45467E1C6</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -176,7 +232,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>DEE8A1D2-4E29-4A74-B270-9AF92B587BE8</string>
+				<string>D4988520-6CFD-4BB2-951A-AE28DFB3FE50</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -208,12 +264,33 @@
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
-				<string></string>
+				<string>https://www.kleinanzeigen.de/s-spielzeug/{query}/k0c23</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
-			<string>85894161-CE99-4C9D-B3E1-18C564EE94E8</string>
+			<string>2BCC379B-ACFB-4C82-B995-8581FFE08FC4</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>{var:keyword_2}</string>
+				<key>subtext</key>
+				<string>buy boardgame</string>
+				<key>text</key>
+				<string>used: Kleinanzeigen + Vinted</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>306BAF37-3B3C-4B6A-AF60-9F61861DD23F</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -256,137 +333,6 @@
 			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
 			<string>D9099601-000C-413E-8F04-7909EC5D4E03</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alfredfiltersresults</key>
-				<true/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>2</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<true/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>{var:keyword_1}</string>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<true/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>1</integer>
-				<key>runningsubtext</key>
-				<string>loading…</string>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/boardgame-search.js</string>
-				<key>subtext</key>
-				<string></string>
-				<key>title</key>
-				<string>{const:alfred_workflow_name}</string>
-				<key>type</key>
-				<integer>8</integer>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>934AA610-FE5D-437B-BFA5-B1BD6ED3AF17</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>autopaste</key>
-				<false/>
-				<key>clipboardtext</key>
-				<string>{query}</string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>transient</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.clipboard</string>
-			<key>uid</key>
-			<string>E087D983-8D7A-4EA5-A682-02234530D0BA</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>📋 Copied</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>6BF2B984-1F3B-42A6-AAF6-C08713625399</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>https://www.kleinanzeigen.de/s-spielzeug/{query}/k0c23</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>2BCC379B-ACFB-4C82-B995-8581FFE08FC4</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>{var:keyword_2}</string>
-				<key>subtext</key>
-				<string>buy boardgame</string>
-				<key>text</key>
-				<string>used: Kleinanzeigen + Vinted</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>306BAF37-3B3C-4B6A-AF60-9F61861DD23F</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -452,6 +398,27 @@
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>85894161-CE99-4C9D-B3E1-18C564EE94E8</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
 				<string>https://boardgameprices.com/item/search?search={query}</string>
 			</dict>
 			<key>type</key>
@@ -460,6 +427,55 @@
 			<string>56A2325A-30D3-4B4C-ABFB-BCD0FA84E0CB</string>
 			<key>version</key>
 			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>2</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>{var:keyword_1}</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>loading…</string>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/boardgame-search.js</string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>{const:alfred_workflow_name}</string>
+				<key>type</key>
+				<integer>8</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>934AA610-FE5D-437B-BFA5-B1BD6ED3AF17</string>
+			<key>version</key>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>type</key>
@@ -479,24 +495,56 @@
 				<key>subtext</key>
 				<string></string>
 				<key>text</key>
-				<string>all: used, aggregators &amp; more</string>
+				<string>online stores</string>
 				<key>withspace</key>
 				<true/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
-			<string>FB6C72F6-A9A6-41F9-91B7-D891384B937E</string>
+			<string>0A0DE1C3-FD3A-4F47-A6CF-C6638356B3E4</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
 		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>📋 Copied</string>
+			</dict>
 			<key>type</key>
-			<string>alfred.workflow.utility.junction</string>
+			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
-			<string>DEE8A1D2-4E29-4A74-B270-9AF92B587BE8</string>
+			<string>6BF2B984-1F3B-42A6-AAF6-C08713625399</string>
 			<key>version</key>
 			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>E087D983-8D7A-4EA5-A682-02234530D0BA</string>
+			<key>version</key>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -522,6 +570,27 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>{var:keyword_2}</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>all</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>FB6C72F6-A9A6-41F9-91B7-D891384B937E</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>browser</key>
 				<string></string>
 				<key>skipqueryencode</key>
@@ -537,6 +606,22 @@
 			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
 			<string>375D0931-85FB-4992-B85A-E8638C5CE84B</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.junction</string>
+			<key>uid</key>
+			<string>DEE8A1D2-4E29-4A74-B270-9AF92B587BE8</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.junction</string>
+			<key>uid</key>
+			<string>D4988520-6CFD-4BB2-951A-AE28DFB3FE50</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -561,6 +646,69 @@
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>https://gamers-hq.de/en/search?sSearch={query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>3919ABAC-24E8-49F5-A267-B5231949FE22</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>https://zatu.com/search?options%5Bprefix%5D=last&amp;q={query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>56D507E0-0D0E-438A-B200-6241B56C63B0</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>https://www.crowdfinder.de/en/store?q={query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>FE3DDD3C-9AC4-430B-828F-F9B45467E1C6</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>## Setup
@@ -580,6 +728,17 @@ Search board games with the `bgg` keyword.
 #### Data by [Board Game Geeks](https://boardgamegeek.com/using_the_xml_api)</string>
 	<key>uidata</key>
 	<dict>
+		<key>0A0DE1C3-FD3A-4F47-A6CF-C6638356B3E4</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>1</integer>
+			<key>note</key>
+			<string>online stores</string>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>275</real>
+		</dict>
 		<key>11FF7FEE-D375-4B1F-AC30-80F60A9E80DD</key>
 		<dict>
 			<key>colorindex</key>
@@ -587,7 +746,7 @@ Search board games with the `bgg` keyword.
 			<key>xpos</key>
 			<real>395</real>
 			<key>ypos</key>
-			<real>595</real>
+			<real>335</real>
 		</dict>
 		<key>2BCC379B-ACFB-4C82-B995-8581FFE08FC4</key>
 		<dict>
@@ -596,16 +755,16 @@ Search board games with the `bgg` keyword.
 			<key>xpos</key>
 			<real>395</real>
 			<key>ypos</key>
-			<real>275</real>
+			<real>15</real>
 		</dict>
 		<key>2FB30929-2AE9-432E-925C-110B0A3BF84E</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>300</real>
+			<real>310</real>
 			<key>ypos</key>
-			<real>305</real>
+			<real>45</real>
 		</dict>
 		<key>306BAF37-3B3C-4B6A-AF60-9F61861DD23F</key>
 		<dict>
@@ -616,16 +775,25 @@ Search board games with the `bgg` keyword.
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>275</real>
+			<real>15</real>
 		</dict>
 		<key>375D0931-85FB-4992-B85A-E8638C5CE84B</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>7</integer>
+			<integer>1</integer>
 			<key>xpos</key>
 			<real>395</real>
 			<key>ypos</key>
-			<real>705</real>
+			<real>450</real>
+		</dict>
+		<key>3919ABAC-24E8-49F5-A267-B5231949FE22</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>1</integer>
+			<key>xpos</key>
+			<real>395</real>
+			<key>ypos</key>
+			<real>675</real>
 		</dict>
 		<key>4657FFF3-CE14-4B39-8AB7-E0D2BC2D7FF0</key>
 		<dict>
@@ -636,7 +804,7 @@ Search board games with the `bgg` keyword.
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>405</real>
+			<real>145</real>
 		</dict>
 		<key>56A2325A-30D3-4B4C-ABFB-BCD0FA84E0CB</key>
 		<dict>
@@ -645,16 +813,25 @@ Search board games with the `bgg` keyword.
 			<key>xpos</key>
 			<real>395</real>
 			<key>ypos</key>
-			<real>490</real>
+			<real>230</real>
+		</dict>
+		<key>56D507E0-0D0E-438A-B200-6241B56C63B0</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>1</integer>
+			<key>xpos</key>
+			<real>395</real>
+			<key>ypos</key>
+			<real>785</real>
 		</dict>
 		<key>6BF2B984-1F3B-42A6-AAF6-C08713625399</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>375</real>
+			<real>890</real>
 			<key>ypos</key>
-			<real>130</real>
+			<real>290</real>
 		</dict>
 		<key>7F499364-1957-4CB6-814E-9B8B04CA6CF8</key>
 		<dict>
@@ -663,61 +840,70 @@ Search board games with the `bgg` keyword.
 			<key>xpos</key>
 			<real>310</real>
 			<key>ypos</key>
-			<real>520</real>
+			<real>260</real>
 		</dict>
 		<key>85894161-CE99-4C9D-B3E1-18C564EE94E8</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>225</real>
+			<real>740</real>
 			<key>ypos</key>
-			<real>15</real>
+			<real>175</real>
 		</dict>
 		<key>934AA610-FE5D-437B-BFA5-B1BD6ED3AF17</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>30</real>
+			<real>545</real>
 			<key>ypos</key>
-			<real>75</real>
+			<real>235</real>
 		</dict>
 		<key>A986BB17-B40A-456B-86BC-2C9DB867563D</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>865</real>
+			<real>740</real>
 			<key>ypos</key>
-			<real>15</real>
+			<real>20</real>
+		</dict>
+		<key>D4988520-6CFD-4BB2-951A-AE28DFB3FE50</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>xpos</key>
+			<real>185</real>
+			<key>ypos</key>
+			<real>480</real>
 		</dict>
 		<key>D9099601-000C-413E-8F04-7909EC5D4E03</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>635</real>
+			<real>545</real>
 			<key>ypos</key>
-			<real>15</real>
+			<real>20</real>
 		</dict>
 		<key>DEE8A1D2-4E29-4A74-B270-9AF92B587BE8</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>7</integer>
+			<integer>1</integer>
 			<key>xpos</key>
-			<real>195</real>
+			<real>310</real>
 			<key>ypos</key>
-			<real>570</real>
+			<real>480</real>
 		</dict>
 		<key>E087D983-8D7A-4EA5-A682-02234530D0BA</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>225</real>
+			<real>740</real>
 			<key>ypos</key>
-			<real>130</real>
+			<real>290</real>
 		</dict>
 		<key>EC5A44BE-42DE-4A85-8A8D-72A0F7380B4C</key>
 		<dict>
@@ -726,16 +912,16 @@ Search board games with the `bgg` keyword.
 			<key>xpos</key>
 			<real>395</real>
 			<key>ypos</key>
-			<real>380</real>
+			<real>120</real>
 		</dict>
 		<key>F366B9F0-F152-4885-8639-D69B97BC802E</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>7</integer>
+			<integer>1</integer>
 			<key>xpos</key>
 			<real>395</real>
 			<key>ypos</key>
-			<real>815</real>
+			<real>560</real>
 		</dict>
 		<key>FB6C72F6-A9A6-41F9-91B7-D891384B937E</key>
 		<dict>
@@ -746,7 +932,16 @@ Search board games with the `bgg` keyword.
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>540</real>
+			<real>450</real>
+		</dict>
+		<key>FE3DDD3C-9AC4-430B-828F-F9B45467E1C6</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>1</integer>
+			<key>xpos</key>
+			<real>395</real>
+			<key>ypos</key>
+			<real>895</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
