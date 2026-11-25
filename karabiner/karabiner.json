@@ -10719,13 +10719,13 @@
                             {
                                 "type": "basic",
                                 "from": {
-                                    "key_code": "9",
+                                    "key_code": "q",
                                     "modifiers": { "mandatory": ["command", "control", "option"] }
                                 },
                                 "to": [
                                     {
-                                        "key_code": "f3",
-                                        "modifiers": ["command"]
+                                        "key_code": "q",
+                                        "modifiers": ["command", "control"]
                                     }
                                 ]
                             },

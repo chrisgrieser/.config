@@ -15,11 +15,11 @@ rules:
         to:
           - { key_code: n, modifiers: [fn] }
 
+      # lock mac
       - type: basic
-        from: { key_code: "9", modifiers: *hyper }
+        from: { key_code: q, modifiers: *hyper }
         to:
-          # show desktop
-          - { key_code: f3, modifiers: [command] }
+          - { key_code: q, modifiers: [command, control] }
 
       # alt-j/k: page up/down
       - type: basic
