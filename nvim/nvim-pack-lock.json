@@ -5,7 +5,7 @@
       "src": "https://github.com/lewis6991/async.nvim"
     },
     "blink-cmp-git": {
-      "rev": "52fae6028287b5c2663f26e60a9db00ff647c4d3",
+      "rev": "4f1f129262d6e54f1ededce056b59b54c096f81c",
       "src": "https://github.com/Kaiser-Yang/blink-cmp-git"
     },
     "blink.cmp": {
@@ -22,7 +22,7 @@
       "src": "https://github.com/jinh0/eyeliner.nvim"
     },
     "gitsigns.nvim": {
-      "rev": "dc7698f932792a764d3db95fedee26c38e728355",
+      "rev": "ea38d317af34f8ffcfbaf0f0dcc1471736661a4c",
       "src": "https://github.com/lewis6991/gitsigns.nvim"
     },
     "lualine.nvim": {
@@ -34,15 +34,15 @@
       "src": "https://github.com/mason-org/mason.nvim"
     },
     "mini.icons": {
-      "rev": "fc90b3925a2a68282be06e28cfe0cbb366c75dad",
+      "rev": "5d58117d176c133f4cb5585ec8cb3450881c89a0",
       "src": "https://github.com/nvim-mini/mini.icons"
     },
     "mini.operators": {
-      "rev": "6b117275fb07fe5cf810b0e18ee50c7ce8a12be4",
+      "rev": "4d4f06fa2147dcbf04dd37b8dd205c61165b8cfd",
       "src": "https://github.com/nvim-mini/mini.operators"
     },
     "minuet-ai.nvim": {
-      "rev": "50bf63b031c0391e926fdf0b3d044d37846e6e34",
+      "rev": "fcda648efd20f7495403de5f572165502a861731",
       "src": "https://github.com/milanglacier/minuet-ai.nvim"
     },
     "nightfox.nvim": {
@@ -66,7 +66,7 @@
       "src": "https://github.com/chrisgrieser/nvim-lsp-endhints"
     },
     "nvim-lspconfig": {
-      "rev": "e1c6a5a45d95ad22cf55c874db2ff8ab969556f0",
+      "rev": "7d22e678970d95d8d18494ec389c52b07111c53a",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-origami": {
@@ -98,7 +98,7 @@
       "src": "https://github.com/chrisgrieser/nvim-tinygit"
     },
     "nvim-treesitter": {
-      "rev": "b706d642dd20d0922e7e92365dc73617f0fdb4ea",
+      "rev": "52773f0d13a0c11d0c3ef33c14ab6ecc1c17148b",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter"
     },
     "nvim-treesitter-textobjects": {
@@ -110,7 +110,7 @@
       "src": "https://github.com/chrisgrieser/nvim-various-textobjs"
     },
     "refactoring.nvim": {
-      "rev": "ea18f97c58276e213736c9f0193f7aa4c690693e",
+      "rev": "642f608edad8776d65a0d5a402cb153c1e19a0b6",
       "src": "https://github.com/theprimeagen/refactoring.nvim"
     },
     "render-markdown.nvim": {
