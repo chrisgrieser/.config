@@ -1,9 +1,7 @@
 vim.pack.add { "https://github.com/milanglacier/minuet-ai.nvim" }
 --------------------------------------------------------------------------------
 -- ALTERNATIVES
--- Copilot LSP (subscription), requires nvim 0.12 https://github.com/github/copilot-language-server-release
--- Cerebras: https://github.com/4tyone/snek-nvim
--- Cerebras: https://github.com/jim-at-jibba/nvim-stride
+-- Copilot LSP (requires subscription) https://github.com/github/copilot-language-server-release
 --------------------------------------------------------------------------------
 
 Keymap { "<leader>oa", "<cmd>Minuet virtualtext toggle<CR>", desc = "󰚩 Toggle Minuet AI" }
@@ -36,7 +34,7 @@ require("minuet").setup {
 	-- Conversely, with streaming disabled (stream = false), a timeout
 	-- occurring before the LLM returns results will yield no completion items.
 	request_timeout = 3,
-	n_completions = 3,
+	n_completions = 1, -- only suggest 1 item (= removes `(1/2)`)
 
 	-----------------------------------------------------------------------------
 
@@ -49,7 +47,7 @@ require("minuet").setup {
 			stream = true,
 			optional = {
 				reasoning_effort = "none", -- quicker
-            max_completion_tokens = 128,
+				max_completion_tokens = 128,
 			},
 			api_key = function()
 				local file = io.open(vim.g.openaiApiKeyFile, "r")
@@ -76,17 +74,13 @@ require("minuet").setup {
 			accept_line = "<D-S>",
 			next = "<D-a>",
 		},
-		-- Whether show virtual text suggestion when the completion menu
+		-- Whether to show virtual text suggestion when the completion menu
 		-- (nvim-cmp or blink-cmp) is visible.
 		show_on_completion_menu = true,
 	},
 
-	blink = {
-		enable_auto_complete = false,
-	},
-	lsp = {
-		completion = { enable = true },
-	},
+	blink = { enable_auto_complete = false },
+	lsp = { completion = { enable = true } },
 
 	-----------------------------------------------------------------------------
 

@@ -56,9 +56,6 @@ M.pathw_desktop = pathw(home .. "/Desktop/", function(paths, _)
 		elseif name:find("vimium_c.*%.json") then
 			success, errmsg = os.rename(path, browserConfigs .. "vimium-c-settings.json")
 			if success then U.notify("✅ Vimium-c settings backed up.") end
-		elseif name:find("Inoreader Feeds.*%.xml") then
-			success, errmsg = os.rename(path, browserConfigs .. "Inoreader Feeds.opml")
-			if success then U.notify("✅ Inoreader feeds backed up.") end
 
 		---APP AND SERVICE BACKUPS------------------------------------------------
 		elseif name == "following_accounts.csv" then
@@ -75,6 +72,14 @@ M.pathw_desktop = pathw(home .. "/Desktop/", function(paths, _)
 		elseif ext == "icbu" then
 			success, errmsg = os.rename(path, backupFolder .. "/Calendar/" .. name)
 			if success then U.notify("✅ Calendar data backed up.") end
+		elseif name:find("Inoreader Feeds.*%.xml") then
+			success, errmsg = os.rename(path, browserConfigs .. "Inoreader Feeds.opml")
+			if success then U.notify("✅ Inoreader feeds backed up.") end
+		elseif name == "BGStatsExport.json" then
+			local target = backupFolder
+				.. ("/Board Game Stats/BGStatsExport %s.json"):format(os.date("%Y-%m-%d"))
+			success, errmsg = os.rename(path, target)
+			if success then U.notify("✅ BGStats data backed up.") end
 
 		---RECEIPTS---------------------------------------------------------------
 		elseif name:find("Rechnung_" .. ("%d"):rep(16) .. "_" .. ("%d"):rep(10)) then
@@ -82,9 +87,11 @@ M.pathw_desktop = pathw(home .. "/Desktop/", function(paths, _)
 			local year = os.date("%Y")
 			-- stylua: ignore
 			local receiptPath = ("%s/Documents/Wohnung/laufende Kosten/Vodafone/%s/"):format(home, year)
-			success, errmsg = hs.fs.mkdir(receiptPath)
-			U.defer(1, function() os.rename(path, receiptPath .. "/" .. name) end) -- delay ensures folder is created
-			hs.open(receiptPath)
+			_, errmsg = hs.fs.mkdir(receiptPath)
+			U.defer(1, function() -- delay ensures folder is created
+				success, _ = os.rename(path, receiptPath .. "/" .. name)
+				if success then hs.open(receiptPath) end
+			end)
 
 		---BANKING----------------------------------------------------------------
 		elseif name:find("[%d-]_Kontoauszug_.*%.pdf$") or name:find("^Direkt_Depot_.*%.pdf$") then
@@ -93,43 +100,29 @@ M.pathw_desktop = pathw(home .. "/Desktop/", function(paths, _)
 				local folder = name:find("Depot") and "Depot" or "Geldkonten"
 				-- stylua: ignore
 				local bankPath = ("%s/Documents/Finanzen/Vermögen/%s/%s"):format(home, folder, year)
-				success, errmsg = hs.fs.mkdir(bankPath) -- create directory in case of new year
-				U.defer(1, function() os.rename(path, bankPath .. "/" .. name) end) -- delay ensures folder is created
-				hs.open(bankPath)
+				_, errmsg = hs.fs.mkdir(bankPath) -- create directory in case of new year
+				U.defer(1, function() -- delay ensures folder is created
+					success, _ = os.rename(path, bankPath .. "/" .. name)
+					if success then hs.open(bankPath) end
+				end)
 			end
 		elseif name:find("^Umsatzanzeige_.*%.csv$") then
 			local bankPath = home .. "/Documents/Finanzen/Vermögen/csv-analysis/Umsatz/"
-			os.rename(path, bankPath .. "/" .. name)
+			_, errmsg = os.rename(path, bankPath .. "/" .. name)
 		elseif name:find("Depotuebersicht8038.*%.csv") then -- digits to prevent matching depot of others
 			local bankPath = home .. "/Documents/Finanzen/Vermögen/csv-analysis/Depotübersicht/"
-			os.rename(path, bankPath .. "/" .. name)
+			_, errmsg = os.rename(path, bankPath .. "/" .. name)
 
 		---STEAM GAME SHORTCUTS---------------------------------------------------
 		elseif name:find("%.app$") and not isDownloaded and parent == "" then
 			-- `parent == ""` prevents downloads of apps in nested folders to be moved
 			local gameFolder = home .. "/Library/Mobile Documents/com~apple~CloudDocs/Apps/Games/"
-			success, errmsg = os.rename(path, gameFolder .. name)
-
-		---MTG DECKLISTS---------------------------------------------------
-		elseif name:find("%.txt$") or name:find("%.txt%-bkp$") then
-			local firstLine = io.lines(path)()
-			if firstLine == "// COMMANDER" then -- manabox deck exports always have this 1st line
-				local basename = name:gsub("%..+$", "")
-				local destination = home
-					.. ("/Notes/👤 Personal/Games/Magic the Gathering/%s Deck.md"):format(basename)
-				success, errmsg = os.rename(path, destination)
-			elseif name == "wants.txt" or name == "wants.txt-bkp" then
-				local content = U.readFile(path)
-				hs.pasteboard.setContents(content)
-				hs.urlevent.openURL("https://www.cardmarket.com/en/Magic/Wants/23642383/AddDeckList")
-				U.notify("✅ Wantlist copied.")
-				success, errmsg = os.rename(path, path .. "-imported")
-			end
+			_, errmsg = os.rename(path, gameFolder .. name)
 		end
 
 		---NOTIFY-----------------------------------------------------------------
-		if success == false then
-			U.notify(("⚠️ Failed to move %q: %s"):format(name, errmsg or ""))
+		if errmsg ~= nil then
+			U.notify(("⚠️ Failed to move %s: %q"):format(name, errmsg or ""))
 		end
 
 		::continue::
