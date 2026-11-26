@@ -22,8 +22,23 @@ export FPATH="$ZDOTDIR/completions:$HOMEBREW_PREFIX/share/zsh/site-functions:$FP
 # do not clutter public dotfile repo
 export ZSH_COMPDUMP="$HOME/.local/share/zsh/zcompdump"
 
-# match substrings (e.g., `cd ext` -> `cd browser-ext`), and case-insensitively
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z} l:|=* r:|=*'
+# match substrings (e.g., `cd ext` -> `cd browser-ext`), considering only
+# subwords (like snake_case or kebab-case). Also match case-insensitively.
+
+#-MATCHER-----------------------------------------------------------------------
+
+# 1. case-insensitive matches
+# 2. As fallback allow matches anywhere within a word
+zstyle ':completion:*' matcher-list \
+  'm:{a-z}={A-Z}' \
+  'm:{a-z}={A-Z} r:|=* l:|=*' \
+
+# FIX allow any substring match for `pass`, since the above does not work here
+zstyle ':completion:*:*:pass:*' matcher 'm:{a-z}={A-Z} l:|=* r:|=*'
+
+# ignored
+zstyle ':completion:*:files' ignored-patterns '.DS_Store'
+zstyle ':completion:*:*:-command-:*:*' ignored-patterns '_*'
 
 #-SORT--------------------------------------------------------------------------
 
