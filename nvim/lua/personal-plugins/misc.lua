@@ -112,7 +112,7 @@ end
 --------------------------------------------------------------------------------
 
 function M.openCwdInTerminal()
-	assert(jit.os == "OSX", "This command requires macOS' `open` cli")
+	assert(jit.os == "OSX", "This command requires the macOS cli `open`.")
 	local cdCommand = (" cd -q %q && clear"):format(vim.uv.cwd() or "")
 	local script = ([=[
 		open -a "WezTerm" # focus/launch
@@ -130,7 +130,7 @@ end
 ---@param toggleKey string key used to trigger this function
 ---@param reg string vim register (single letter)
 function M.startOrStopRecording(toggleKey, reg)
-	assert(#toggleKey == 1, "toggleKey must be a single character")
+	assert(#toggleKey == 1, "`toggleKey` must be a single character.")
 	local notRecording = vim.fn.reg_recording() == ""
 	if notRecording then
 		vim.cmd.normal { "q" .. reg, bang = true } -- start recording to register
@@ -205,7 +205,7 @@ end
 function M.openWorkflowInAlfredPrefs()
 	local workflowUid =
 		vim.api.nvim_buf_get_name(0):match("Alfred%.alfredpreferences/workflows/(.-)/")
-	if not workflowUid then return vim.notify("Not in an Alfred directory.", vim.log.levels.WARN) end
+	assert(workflowUid, "Not in an Alfred directory.")
 
 	-- https://www.alfredforum.com/topic/18390-get-currently-edited-workflow-uri/
 	local jxa = "Application('com.runningwithcrayons.Alfred')"
