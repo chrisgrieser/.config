@@ -26,7 +26,8 @@ function run(argv) {
 	const home = app.pathTo("home folder");
 	const karabinerJson = home + "/.config/karabiner/karabiner.json";
 	const customRulesDir = home + "/.config/karabiner/assets/complex_modifications/";
-	const cliPath = "/Library/Application Support/org.pqrs/Karabiner-Elements/bin/karabiner_cli";
+
+	const cliPath = "/Applications/Karabiner-Elements.app/Contents/Helpers/karabiner_cli";
 
 	// GUARD `yq` not installed
 	const yqNotInstalled = app.doShellScript("command -v yq || echo 'false'") === "false";

@@ -3,7 +3,7 @@ profile_1="Default profile"
 profile_2="Disabled"
 #───────────────────────────────────────────────────────────────────────────────
 
-karabiner_cli="/Library/Application Support/org.pqrs/Karabiner-Elements/bin/karabiner_cli"
+karabiner_cli="/Applications/Karabiner-Elements.app/Contents/Helpers/karabiner_cli"
 current_profile=$("$karabiner_cli" --show-current-profile-name)
 change_to=$([[ "$current_profile" == "$profile_1" ]] && echo "$profile_2" || echo "$profile_1")
 
