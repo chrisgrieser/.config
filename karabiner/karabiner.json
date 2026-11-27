@@ -10719,6 +10719,19 @@
                             {
                                 "type": "basic",
                                 "from": {
+                                    "key_code": "9",
+                                    "modifiers": { "mandatory": ["command", "control", "option"] }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "f3",
+                                        "modifiers": ["command"]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "basic",
+                                "from": {
                                     "key_code": "q",
                                     "modifiers": { "mandatory": ["command", "control", "option"] }
                                 },

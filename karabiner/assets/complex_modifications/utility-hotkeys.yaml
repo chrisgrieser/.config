@@ -15,6 +15,12 @@ rules:
         to:
           - { key_code: n, modifiers: [fn] }
 
+      # show desktop
+      - type: basic
+        from: { key_code: "9", modifiers: *hyper }
+        to:
+          - { key_code: f3, modifiers: [command] }
+
       # lock mac
       - type: basic
         from: { key_code: q, modifiers: *hyper }
